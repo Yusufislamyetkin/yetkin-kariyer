@@ -28,6 +28,15 @@ type BugFixCardData = {
   createdAt: Date;
 };
 
+type ParsedBugFixTask = {
+  id: string;
+  title: string;
+  description: string | null;
+  languages: LiveCodingLanguage[];
+  hints: number;
+  acceptance: string[];
+};
+
 type BugFixStats = {
   totalScenarios: number;
   displayedScenarios: number;
@@ -101,7 +110,7 @@ const normalizeStringArray = (input: unknown, limit = 3): string[] => {
   return [];
 };
 
-const parseBugFixTasks = (raw: unknown) => {
+const parseBugFixTasks = (raw: unknown): ParsedBugFixTask[] => {
   if (!raw) return [];
   const payload = Array.isArray(raw)
     ? raw
@@ -111,7 +120,7 @@ const parseBugFixTasks = (raw: unknown) => {
     ? [raw]
     : [];
 
-  return payload
+    return payload
     .map((item, index) => {
       if (!item || typeof item !== "object") {
         return null;
@@ -143,8 +152,8 @@ const parseBugFixTasks = (raw: unknown) => {
           4
         ),
       };
-    })
-    .filter((task): task is NonNullable<typeof task> => Boolean(task));
+      })
+      .filter((task): task is ParsedBugFixTask => Boolean(task));
 };
 
 async function getBugFixOverview() {
@@ -175,7 +184,7 @@ async function getBugFixOverview() {
     ]);
 
     const cards: BugFixCardData[] = recentBugFixes.map((record) => {
-      let tasks = [];
+      let tasks: ParsedBugFixTask[] = [];
       try {
         tasks = parseBugFixTasks(record.questions as unknown);
       } catch (error) {
