@@ -226,6 +226,99 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: Lesso
             }
           }
         }
+
+        // Automatically request a follow-up assistant message to reach ~200 words total (split in 2 messages)
+        try {
+          const followUpResponse = await fetch("/api/ai/lesson-chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              lessonSlug,
+              messages: [
+                {
+                  role: "assistant",
+                  content: message.content,
+                },
+                {
+                  role: "user",
+                  content: "devam et",
+                },
+              ],
+              lessonPlan: data.lessonPlan || lessonPlan,
+            }),
+          });
+
+          if (followUpResponse.ok) {
+            const followUpData = await followUpResponse.json();
+            const followUpMessage: Message = {
+              id: `msg-${Date.now() + 2}`,
+              role: "assistant",
+              content: followUpData.content || "",
+              images: followUpData.images,
+              actions: followUpData.actions,
+              timestamp: new Date().toISOString(),
+            };
+            setMessages((prev) => [...prev, followUpMessage]);
+
+            // Update lesson plan if provided
+            if (followUpData.lessonPlan) {
+              setLessonPlan(followUpData.lessonPlan);
+            }
+
+            // Handle follow-up actions
+            if (followUpData.actions && Array.isArray(followUpData.actions)) {
+              for (const action of followUpData.actions) {
+                if (action.type === "choices" && action.data?.choices) {
+                  setCurrentChoices(action.data.choices);
+                } else if (action.type === "code_block") {
+                  // Code blocks are rendered separately
+                } else if (action.type === "test_question" && action.data?.question) {
+                  const question = action.data.question;
+                  setPendingTestQuestions((prev) => {
+                    const updated = [...prev, question];
+                    if (updated.length > 0 && (!currentTestQuestion || prev.length === 0)) {
+                      setCurrentTestQuestion(updated[0]);
+                    }
+                    return updated;
+                  });
+                } else if (action.type === "coding_challenge" && action.data?.task) {
+                  setCodingChallenge({ task: action.data.task });
+                } else if (action.type === "create_livecoding" && action.data?.task) {
+                  setCodingChallenge({ task: action.data.task });
+                } else if (action.type === "create_bugfix" && action.data?.task) {
+                  setBugfixChallenge({ task: action.data.task });
+                } else if (action.type === "question" && action.data?.question) {
+                  setCurrentQuestion(action.data.question);
+                } else if (action.type === "create_test" && action.data?.question) {
+                  setCurrentTestQuestion(action.data.question);
+                } else if (action.type === "create_quiz" && action.data?.question) {
+                  const question = action.data.question;
+                  setAccumulatedQuizQuestions((prev) => [
+                    ...prev,
+                    {
+                      text: question.text,
+                      options: question.options || [],
+                      correctIndex: question.correctIndex ?? 0,
+                      id: `q-${Date.now()}-${prev.length}`,
+                    },
+                  ]);
+                  setCurrentTestQuestion(question);
+                } else if (action.type === "quiz_redirect") {
+                  setQuizRedirectMessage(action.data?.message || "Ders sonunda mini teste geçelim!");
+                  setShowQuiz(true);
+                } else if (action.type === "test_redirect" && action.data?.url) {
+                  router.push(action.data.url);
+                } else if (action.type === "bugfix_redirect" && action.data?.url) {
+                  router.push(action.data.url);
+                } else if (action.type === "livecoding_redirect" && action.data?.url) {
+                  router.push(action.data.url);
+                }
+              }
+            }
+          }
+        } catch (err) {
+          console.error("Error loading follow-up message:", err);
+        }
       } catch (err) {
         console.error("Error loading initial message:", err);
         setError(err instanceof Error ? err.message : "Bir hata oluştu");
@@ -1505,13 +1598,13 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: Lesso
                   Devam et
                 </Button>
                 <Button
-                  onClick={() => handleContextButton("Başka örnekle açıkla", "başka bir örnekle açıkla")}
+                  onClick={() => handleContextButton("Örnekle Açıkla", "örnekle açıkla")}
                   variant="outline"
                   size="sm"
                   className="hover:bg-purple-100 dark:hover:bg-purple-900/40 border-purple-300 dark:border-purple-700"
                   disabled={sending}
                 >
-                  Başka örnekle açıkla
+                  Örnekle Açıkla
                 </Button>
                 <Button
                   onClick={() => handleContextButton("Bir sonraki aşamaya geç", "bir sonraki aşamaya geç")}
