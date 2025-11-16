@@ -1,7 +1,24 @@
 import { PrismaClient } from "@prisma/client";
 
-const globalForPrisma = globalThis as unknown as {
+type GlobalPrisma = {
   prisma: PrismaClient | undefined;
+};
+
+const globalForPrisma = globalThis as unknown as GlobalPrisma;
+
+const resolveDatabaseUrl = () => {
+  const url =
+    process.env.POSTGRES_PRISMA_URL ||
+    process.env.DATABASE_URL ||
+    process.env.POSTGRES_URL_NON_POOLING;
+
+  if (!url) {
+    throw new Error(
+      "Database connection string is missing. Please set POSTGRES_PRISMA_URL (or DATABASE_URL/POSTGRES_URL_NON_POOLING)."
+    );
+  }
+
+  return url;
 };
 
 // Connection pool configuration for serverless environments
@@ -11,33 +28,36 @@ const createPrismaClient = () => {
     errorFormat: "pretty",
     datasources: {
       db: {
-        url: process.env.POSTGRES_PRISMA_URL,
+        url: resolveDatabaseUrl(),
       },
     },
   });
 };
 
-// Singleton pattern for serverless - reuse connection across requests
-export const db =
-  globalForPrisma.prisma ?? createPrismaClient();
-
-// In production (Vercel serverless), we need to reuse the connection
-// In development, we can use the global instance
-if (process.env.NODE_ENV !== "production") {
-  globalForPrisma.prisma = db;
-} else {
-  // In production, store in global to reuse across serverless invocations
+const getPrismaClient = () => {
   if (!globalForPrisma.prisma) {
-    globalForPrisma.prisma = db;
+    globalForPrisma.prisma = createPrismaClient();
   }
-}
 
-// Handle connection errors gracefully and ensure proper cleanup
-if (typeof process !== "undefined") {
-  // Graceful shutdown
+  return globalForPrisma.prisma;
+};
+
+// Proxy ensures PrismaClient is only instantiated when a method/property is accessed,
+// so builds won't fail if the database URL is missing in the environment.
+export const db = new Proxy({} as PrismaClient, {
+  get(_target, prop, receiver) {
+    const client = getPrismaClient();
+    return Reflect.get(client as unknown as object, prop, receiver);
+  },
+});
+
+const shouldRegisterProcessHandlers =
+  typeof process !== "undefined" && !!process?.on && process.env.NEXT_RUNTIME !== "edge";
+
+if (shouldRegisterProcessHandlers) {
   const gracefulShutdown = async () => {
     try {
-      await db.$disconnect();
+      await getPrismaClient().$disconnect();
     } catch (error) {
       console.error("[DB] Error during disconnect:", error);
     }
@@ -46,8 +66,7 @@ if (typeof process !== "undefined") {
   process.on("beforeExit", gracefulShutdown);
   process.on("SIGINT", gracefulShutdown);
   process.on("SIGTERM", gracefulShutdown);
-  
-  // Handle uncaught errors
+
   process.on("uncaughtException", async (error) => {
     console.error("[DB] Uncaught exception:", error);
     await gracefulShutdown();
