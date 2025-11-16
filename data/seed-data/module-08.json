@@ -1,0 +1,70 @@
+{
+  "module": {
+    "id": "module-08-logging",
+    "title": "Logging ve Exception Handling",
+    "summary": "Tutarlı log formatları oluştur ve hataları kullanıcı dostu, güvenli şekilde ele al.",
+    "durationMinutes": 45,
+    "objectives": [
+      "Bu modülü tamamladığında yapılandırılmış loglama kurup merkezi hata yönetimi stratejileri uygulayabileceksin."
+    ],
+    "activities": [],
+    "learnLink": {
+      "label": "Konuyu Öğren",
+      "href": "/education/courses?search=Logging",
+      "description": "Yapılandırılmış logging ve global exception yönetimini standartlaştır."
+    },
+    "relatedTopics": [
+      {
+        "label": "Serilog ile Yapılandırılmış Logging",
+        "href": "/education/lessons/logging/serilog/structured-logging",
+        "description": "Serilog sink leri ve enrichment stratejilerini uygula."
+      },
+      {
+        "label": "Global Exception Orta Katmanı",
+        "href": "/education/lessons/logging/exception-handling/global-handler",
+        "description": "ProblemDetails yanıtlarıyla kullanıcı dostu hatalar üret."
+      },
+      {
+        "label": "Log Scope Kullanımı",
+        "href": "/education/lessons/logging/log-scope",
+        "description": "Korelasyon kimlikleriyle ilişkili log zincirleri oluştur."
+      },
+      {
+        "label": "ILogger Interface ve Logging Levels",
+        "href": "/education/lessons/logging/ilogger/ilogger-interface-levels",
+        "description": "ILogger interface kullanımı ve log seviyelerini öğren."
+      },
+      {
+        "label": "Log Filtering ve Configuration",
+        "href": "/education/lessons/logging/filtering/log-filtering-configuration",
+        "description": "Log filtreleme ve yapılandırma stratejilerini uygula."
+      },
+      {
+        "label": "Exception Logging Best Practices",
+        "href": "/education/lessons/logging/exception/exception-logging-best-practices",
+        "description": "Exception logging için en iyi pratikleri öğren."
+      },
+      {
+        "label": "Structured Logging Patterns",
+        "href": "/education/lessons/logging/patterns/structured-logging-patterns",
+        "description": "Yapılandırılmış logging desenlerini ve kullanım senaryolarını kavra."
+      },
+      {
+        "label": "Log Aggregation ve Centralized Logging",
+        "href": "/education/lessons/logging/aggregation/centralized-logging",
+        "description": "Log toplama ve merkezi logging sistemlerini yapılandır."
+      },
+      {
+        "label": "Error Tracking ve Monitoring",
+        "href": "/education/lessons/logging/monitoring/error-tracking-monitoring",
+        "description": "Hata takibi ve izleme araçlarını entegre et."
+      },
+      {
+        "label": "Log Retention ve Archiving",
+        "href": "/education/lessons/logging/retention/log-retention-archiving",
+        "description": "Log saklama ve arşivleme stratejilerini uygula."
+      }
+    ]
+  },
+  "quizzes": []
+}

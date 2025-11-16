@@ -1,0 +1,1181 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+enum UserRole {
+  candidate
+  employer
+  admin
+}
+
+enum JobStatus {
+  draft
+  published
+  closed
+}
+
+enum ApplicationStatus {
+  pending
+  reviewing
+  accepted
+  rejected
+}
+
+enum WrongQuestionStatus {
+  not_reviewed
+  reviewed
+  understood
+}
+
+enum BadgeCategory {
+  test_count
+  score
+  topic
+  streak
+  special
+}
+
+enum BadgeRarity {
+  common
+  rare
+  epic
+  legendary
+}
+
+enum GoalType {
+  test_count
+  topic_complete
+  score_target
+  streak_maintain
+}
+
+enum GoalFrequency {
+  daily
+  weekly
+  monthly
+}
+
+enum LeaderboardPeriod {
+  daily
+  monthly
+}
+
+enum EducationType {
+  TEST
+  LIVE_CODING
+  BUG_FIX
+  HACKATON
+  MINI_TEST
+}
+
+enum FriendshipStatus {
+  pending
+  accepted
+  declined
+  blocked
+}
+
+enum HackathonVisibility {
+  public
+  invite_only
+  private
+}
+
+enum HackathonPhase {
+  draft
+  upcoming
+  applications
+  submission
+  judging
+  completed
+  archived
+}
+
+enum HackathonApplicationStatus {
+  pending_review
+  auto_accepted
+  approved
+  waitlisted
+  rejected
+  withdrawn
+}
+
+enum HackathonTeamRole {
+  leader
+  co_leader
+  member
+}
+
+enum HackathonTeamMemberStatus {
+  invited
+  active
+  left
+  removed
+}
+
+enum HackathonSubmissionStatus {
+  pending
+  valid
+  late
+  disqualified
+  under_review
+  finalist
+  winner
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  password     String
+  name         String?
+  role         UserRole @default(candidate)
+  profileImage String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relations
+  quizAttempts                  QuizAttempt[]
+  testAttempts                  TestAttempt[]
+  liveCodingAttempts            LiveCodingAttempt[]
+  bugFixAttempts                BugFixAttempt[]
+  hackatonAttempts              HackatonAttempt[]
+  interviewAttempts             InterviewAttempt[]
+  cvs                           CV[]
+  jobApplications               JobApplication[]
+  careerPlans                   CareerPlan[]
+  learningPaths                 LearningPath[]
+  organizedHackathons           Hackathon[]                  @relation("OrganizedHackathons")
+  jobs                          Job[]                        @relation("EmployerJobs")
+  wrongQuestions                WrongQuestion[]
+  badges                        UserBadge[]
+  dailyGoals                    DailyGoal[]
+  dashboardGoalPlans            DashboardGoalPlan[]
+  leaderboardEntries            LeaderboardEntry[]
+  testLeaderboardEntries        TestLeaderboardEntry[]
+  liveCodingLeaderboardEntries  LiveCodingLeaderboardEntry[]
+  bugFixLeaderboardEntries      BugFixLeaderboardEntry[]
+  hackatonLeaderboardEntries    HackatonLeaderboardEntry[]
+  employerCommentsReceived      EmployerComment[]            @relation("CandidateComments")
+  employerCommentsGiven         EmployerComment[]            @relation("EmployerComments")
+  streak                        UserStreak?
+  ChatGroupMembership           ChatGroupMembership[]
+  ChatGroupsCreated             ChatGroup[]                  @relation("ChatGroupsCreated")
+  ChatMessage                   ChatMessage[]
+  ChatMessageReceipt            ChatMessageReceipt[]
+  assistantThread               AssistantThread?
+  friendshipsRequested          Friendship[]                 @relation("FriendshipRequester")
+  friendshipsReceived           Friendship[]                 @relation("FriendshipAddressee")
+  friendshipsBlocked            Friendship[]                 @relation("FriendshipBlocker")
+  hackathonApplications         HackathonApplication[]
+  hackathonApplicationsReviewed HackathonApplication[]       @relation("HackathonApplicationReviewer")
+  hackathonTeamsCreated         HackathonTeam[]              @relation("HackathonTeamCreator")
+  hackathonTeamMemberships      HackathonTeamMember[]        @relation("HackathonTeamMembershipUser")
+  hackathonTeamInvitesSent      HackathonTeamMember[]        @relation("HackathonTeamMemberInviter")
+  hackathonSubmissions          HackathonSubmission[]
+  lessonMiniTestAttempts        LessonMiniTestAttempt[]
+  freelancerProjectsCreated     FreelancerProject[]          @relation("FreelancerProjectCreator")
+  freelancerBids                FreelancerBid[]              @relation("FreelancerBidUser")
+  lessonCompletions             LessonCompletion[]
+  posts                         Post[]
+  postLikes                     PostLike[]
+  postComments                  PostComment[]
+  postSaves                     PostSave[]
+
+  @@map("app_users")
+}
+
+model Course {
+  id                String   @id @default(cuid())
+  title             String
+  description       String?
+  category          String?
+  field             String?
+  subCategory       String?
+  expertise         String? // Uzmanlık: BACKEND, FRONTEND, etc. (eski field)
+  topic             String? // Konu: .NET CORE, React, etc. (eski subCategory)
+  topicContent      String? // Konu İçeriği: OOP, C# Syntax, etc. (eski Quiz.topic)
+  difficulty        String
+  content           Json
+  estimatedDuration Int?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  // Relations
+  quizzes           Quiz[]
+  lessonCompletions LessonCompletion[]
+
+  @@map("courses")
+}
+
+model Quiz {
+  id           String        @id @default(cuid())
+  courseId     String
+  title        String
+  description  String?
+  topic        String?
+  type         EducationType @default(TEST) // TEST, LIVE_CODING, BUG_FIX, HACKATON
+  level        String? // beginner, intermediate, advanced
+  questions    Json
+  passingScore Int           @default(60)
+  lessonSlug   String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  // Relations
+  course                 Course                  @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  quizAttempts           QuizAttempt[]
+  testAttempts           TestAttempt[]
+  liveCodingAttempts     LiveCodingAttempt[]
+  bugFixAttempts         BugFixAttempt[]
+  hackatonAttempts       HackatonAttempt[]
+  hackathon              Hackathon?              @relation("HackathonQuiz")
+  lessonMiniTestAttempts LessonMiniTestAttempt[]
+
+  @@map("quizzes")
+}
+
+model LessonMiniTestAttempt {
+  id             String   @id @default(cuid())
+  userId         String
+  quizId         String
+  lessonSlug     String
+  score          Int
+  totalQuestions Int
+  correctCount   Int
+  answers        Json
+  createdAt      DateTime @default(now())
+
+  user       User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quiz       Quiz              @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  completion LessonCompletion? @relation("MiniTestAttemptCompletion")
+
+  @@index([lessonSlug])
+  @@index([userId, lessonSlug])
+  @@map("lesson_mini_test_attempts")
+}
+
+model LessonCompletion {
+  id                String    @id @default(cuid())
+  userId            String
+  courseId          String?
+  lessonSlug        String
+  completedAt       DateTime?
+  miniTestAttemptId String?   @unique
+  miniTestScore     Int?
+  miniTestPassed    Boolean   @default(false)
+
+  user            User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course          Course?                @relation(fields: [courseId], references: [id], onDelete: SetNull)
+  miniTestAttempt LessonMiniTestAttempt? @relation("MiniTestAttemptCompletion", fields: [miniTestAttemptId], references: [id], onDelete: SetNull)
+
+  @@unique([userId, lessonSlug])
+  @@index([lessonSlug])
+  @@map("lesson_completions")
+}
+
+model Hackathon {
+  id                  String              @id @default(cuid())
+  quizId              String?             @unique
+  organizerId         String
+  slug                String              @unique
+  title               String
+  description         String?
+  bannerUrl           String?
+  visibility          HackathonVisibility @default(public)
+  phase               HackathonPhase      @default(draft)
+  applicationOpensAt  DateTime
+  applicationClosesAt DateTime
+  submissionOpensAt   DateTime
+  submissionClosesAt  DateTime
+  judgingOpensAt      DateTime?
+  judgingClosesAt     DateTime?
+  timezone            String              @default("UTC")
+  maxParticipants     Int?
+  minTeamSize         Int?                @default(1)
+  maxTeamSize         Int?                @default(1)
+  tags                String[]            @default([])
+  requirements        Json?
+  prizesSummary       String?
+  createdAt           DateTime            @default(now())
+  updatedAt           DateTime            @updatedAt
+  archivedAt          DateTime?
+
+  organizer    User                   @relation("OrganizedHackathons", fields: [organizerId], references: [id], onDelete: Cascade)
+  quiz         Quiz?                  @relation("HackathonQuiz", fields: [quizId], references: [id], onDelete: SetNull)
+  applications HackathonApplication[]
+  teams        HackathonTeam[]
+  submissions  HackathonSubmission[]
+  attempts     HackatonAttempt[]
+
+  @@index([organizerId])
+  @@map("hackathons")
+}
+
+model HackathonApplication {
+  id            String                     @id @default(cuid())
+  hackathonId   String
+  userId        String
+  teamId        String?
+  status        HackathonApplicationStatus @default(pending_review)
+  appliedAt     DateTime                   @default(now())
+  reviewedAt    DateTime?
+  reviewerId    String?
+  motivation    String?
+  skills        String[]                   @default([])
+  githubProfile String?
+  portfolioUrl  String?
+  waitlistRank  Int?
+  responses     Json?
+
+  hackathon Hackathon      @relation(fields: [hackathonId], references: [id], onDelete: Cascade)
+  user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  team      HackathonTeam? @relation(fields: [teamId], references: [id], onDelete: SetNull)
+  reviewer  User?          @relation("HackathonApplicationReviewer", fields: [reviewerId], references: [id], onDelete: SetNull)
+
+  @@unique([hackathonId, userId])
+  @@index([hackathonId, status])
+  @@index([teamId])
+  @@map("hackathon_applications")
+}
+
+model HackathonTeam {
+  id          String    @id @default(cuid())
+  hackathonId String
+  name        String
+  slug        String    @unique
+  creatorId   String
+  inviteCode  String    @unique
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  lockedAt    DateTime?
+
+  hackathon    Hackathon              @relation(fields: [hackathonId], references: [id], onDelete: Cascade)
+  creator      User                   @relation("HackathonTeamCreator", fields: [creatorId], references: [id], onDelete: Cascade)
+  members      HackathonTeamMember[]
+  applications HackathonApplication[]
+  submission   HackathonSubmission?   @relation("TeamSubmission")
+
+  @@index([hackathonId])
+  @@map("hackathon_teams")
+}
+
+model HackathonTeamMember {
+  id          String                    @id @default(cuid())
+  teamId      String
+  userId      String
+  role        HackathonTeamRole         @default(member)
+  status      HackathonTeamMemberStatus @default(invited)
+  joinedAt    DateTime                  @default(now())
+  invitedById String?
+
+  team      HackathonTeam @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  user      User          @relation("HackathonTeamMembershipUser", fields: [userId], references: [id], onDelete: Cascade)
+  invitedBy User?         @relation("HackathonTeamMemberInviter", fields: [invitedById], references: [id], onDelete: SetNull)
+
+  @@unique([teamId, userId])
+  @@index([userId])
+  @@map("hackathon_team_members")
+}
+
+model HackathonSubmission {
+  id              String                    @id @default(cuid())
+  hackathonId     String
+  teamId          String?                   @unique
+  userId          String?
+  attemptId       String?
+  repoUrl         String
+  branch          String                    @default("main")
+  commitSha       String?
+  title           String?
+  summary         String?
+  presentationUrl String?
+  demoUrl         String?
+  status          HackathonSubmissionStatus @default(pending)
+  metadata        Json?
+  submittedAt     DateTime                  @default(now())
+  lockedAt        DateTime?
+  createdAt       DateTime                  @default(now())
+  updatedAt       DateTime                  @updatedAt
+
+  hackathon Hackathon        @relation(fields: [hackathonId], references: [id], onDelete: Cascade)
+  team      HackathonTeam?   @relation("TeamSubmission", fields: [teamId], references: [id], onDelete: SetNull)
+  user      User?            @relation(fields: [userId], references: [id], onDelete: SetNull)
+  attempt   HackatonAttempt? @relation("HackathonSubmissionAttempt", fields: [attemptId], references: [id], onDelete: SetNull)
+
+  @@unique([hackathonId, teamId])
+  @@unique([hackathonId, userId])
+  @@unique([attemptId])
+  @@index([hackathonId, status])
+  @@map("hackathon_submissions")
+}
+
+model QuizAttempt {
+  id          String   @id @default(cuid())
+  userId      String
+  quizId      String
+  score       Int
+  answers     Json
+  aiAnalysis  Json?
+  duration    Int? // Test süresi (saniye)
+  topic       String? // Konu bilgisi (OOP, C# Syntax vb.)
+  level       String? // Seviye (beginner, intermediate, advanced)
+  completedAt DateTime @default(now())
+
+  // Relations
+  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quiz           Quiz            @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  wrongQuestions WrongQuestion[]
+
+  @@map("quiz_attempts")
+}
+
+model Interview {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  questions   Json
+  duration    Int? // in minutes
+  type        String?
+  difficulty  String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  interviewAttempts InterviewAttempt[]
+
+  @@map("interviews")
+}
+
+model InterviewAttempt {
+  id                  String   @id @default(cuid())
+  userId              String
+  interviewId         String
+  videoUrl            String?
+  transcript          String?
+  aiScore             Int?
+  aiFeedback          Json?
+  questionScores      Json? // { questionId: score (0-100) }
+  questionFeedback    Json? // { questionId: { feedback: string, correctness: boolean, details: string } }
+  questionCorrectness Json? // { questionId: { correct: boolean, score: number, details: string } }
+  completedAt         DateTime @default(now())
+
+  // Relations
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  interview Interview @relation(fields: [interviewId], references: [id], onDelete: Cascade)
+
+  @@map("interview_attempts")
+}
+
+model CVTemplate {
+  id        String   @id @default(cuid())
+  name      String
+  preview   String?
+  structure Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  cvs CV[]
+
+  @@map("cv_templates")
+}
+
+model CV {
+  id           String   @id @default(cuid())
+  userId       String
+  templateId   String
+  data         Json
+  atsOptimized Boolean  @default(false)
+  aiMetadata   Json?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relations
+  user            User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  template        CVTemplate       @relation(fields: [templateId], references: [id])
+  jobApplications JobApplication[]
+
+  @@map("cvs")
+}
+
+model Job {
+  id           String    @id @default(cuid())
+  employerId   String
+  title        String
+  description  String
+  requirements Json
+  location     String?
+  salary       String?
+  status       JobStatus @default(draft)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  // Relations
+  employer     User             @relation("EmployerJobs", fields: [employerId], references: [id], onDelete: Cascade)
+  applications JobApplication[]
+
+  @@map("jobs")
+}
+
+model JobApplication {
+  id        String            @id @default(cuid())
+  jobId     String
+  userId    String
+  cvId      String
+  status    ApplicationStatus @default(pending)
+  score     Int?
+  notes     String?
+  appliedAt DateTime          @default(now())
+
+  // Relations
+  job  Job  @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cv   CV   @relation(fields: [cvId], references: [id])
+
+  @@map("job_applications")
+}
+
+model FreelancerProject {
+  id          String    @id @default(cuid())
+  title       String
+  description String
+  budget      Float?
+  deadline    DateTime?
+  status      String    @default("open") // open, in_progress, completed, cancelled
+  createdBy   String // userId or companyId (can be user or employer)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // Relations
+  creator User            @relation("FreelancerProjectCreator", fields: [createdBy], references: [id], onDelete: Cascade)
+  bids    FreelancerBid[]
+
+  @@index([createdBy])
+  @@index([status])
+  @@map("freelancer_projects")
+}
+
+model FreelancerBid {
+  id        String   @id @default(cuid())
+  projectId String
+  userId    String
+  amount    Float
+  message   String
+  status    String   @default("pending") // pending, accepted, rejected
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  project FreelancerProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user    User              @relation("FreelancerBidUser", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+  @@index([userId])
+  @@index([status])
+  @@map("freelancer_bids")
+}
+
+model CareerPlan {
+  id                 String   @id @default(cuid())
+  userId             String
+  goals              Json
+  roadmap            Json
+  recommendedCourses Json?
+  skillsToDevelop    Json?
+  timeline           String?
+  summary            String?
+  aiGenerated        Boolean  @default(false)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("career_plans")
+}
+
+model LearningPath {
+  id            String   @id @default(cuid())
+  userId        String
+  courses       Json
+  aiRecommended Boolean  @default(false)
+  progress      Json
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("learning_paths")
+}
+
+model AssistantThread {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  threadId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("assistant_threads")
+}
+
+model WrongQuestion {
+  id            String              @id @default(cuid())
+  userId        String
+  quizAttemptId String
+  questionId    String
+  questionText  String
+  correctAnswer String
+  userAnswer    String
+  status        WrongQuestionStatus @default(not_reviewed)
+  notes         String?
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+
+  // Relations
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quizAttempt QuizAttempt @relation(fields: [quizAttemptId], references: [id], onDelete: Cascade)
+
+  @@map("wrong_questions")
+}
+
+model Badge {
+  id          String        @id @default(cuid())
+  name        String
+  description String
+  icon        String // emoji or icon name
+  color       String // hex color
+  category    BadgeCategory
+  criteria    Json // {type, value, condition}
+  rarity      BadgeRarity   @default(common)
+  points      Int           @default(10) // points for leaderboard
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  // Relations
+  userBadges UserBadge[]
+  comments   EmployerComment[]
+
+  @@map("badges")
+}
+
+model UserBadge {
+  id          String   @id @default(cuid())
+  userId      String
+  badgeId     String
+  earnedAt    DateTime @default(now())
+  isDisplayed Boolean  @default(false) // max 3 can be displayed on profile
+
+  // Relations
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  badge Badge @relation(fields: [badgeId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, badgeId])
+  @@map("user_badges")
+}
+
+model DailyGoal {
+  id            String    @id @default(cuid())
+  userId        String
+  date          DateTime  @db.Date // date only, no time
+  goalType      GoalType
+  targetValue   Int
+  currentValue  Int       @default(0)
+  completed     Boolean   @default(false)
+  completedAt   DateTime?
+  autoGenerated Boolean   @default(true) // system generated or user created
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, date, goalType])
+  @@index([userId, date])
+  @@map("daily_goals")
+}
+
+model DashboardGoalPlan {
+  id           String        @id @default(cuid())
+  userId       String
+  frequency    GoalFrequency
+  periodStart  DateTime      @db.Date
+  periodEnd    DateTime?     @db.Date
+  goals        Json
+  source       String?
+  generatedAt  DateTime      @default(now())
+  nextUpdateAt DateTime
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, frequency, periodStart])
+  @@index([userId, frequency])
+  @@index([userId, frequency, nextUpdateAt])
+  @@map("dashboard_goal_plans")
+}
+
+model LeaderboardEntry {
+  id           String            @id @default(cuid())
+  userId       String
+  period       LeaderboardPeriod
+  periodDate   String // YYYY-MM-DD for daily, YYYY-MM for monthly
+  quizCount    Int               @default(0)
+  averageScore Float             @default(0)
+  totalScore   Int               @default(0)
+  highestScore Int               @default(0)
+  rank         Int?
+  points       Int               @default(0) // total badge points
+  updatedAt    DateTime          @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, period, periodDate])
+  @@index([period, periodDate])
+  @@index([userId, period])
+  @@map("leaderboard_entries")
+}
+
+model EmployerComment {
+  id          String   @id @default(cuid())
+  employerId  String
+  candidateId String
+  badgeId     String? // optional - comment about specific badge
+  comment     String
+  rating      Int // 1-5
+  isPublic    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  employer  User   @relation("EmployerComments", fields: [employerId], references: [id], onDelete: Cascade)
+  candidate User   @relation("CandidateComments", fields: [candidateId], references: [id], onDelete: Cascade)
+  badge     Badge? @relation(fields: [badgeId], references: [id], onDelete: SetNull)
+
+  @@index([candidateId])
+  @@index([employerId])
+  @@map("employer_comments")
+}
+
+model UserStreak {
+  id               String    @id @default(cuid())
+  userId           String    @unique
+  currentStreak    Int       @default(0)
+  longestStreak    Int       @default(0)
+  lastActivityDate DateTime? // last quiz attempt date
+  totalDaysActive  Int       @default(0)
+  updatedAt        DateTime  @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_streaks")
+}
+
+// Test Attempt Model
+model TestAttempt {
+  id          String   @id @default(cuid())
+  userId      String
+  quizId      String
+  metrics     Json // {score, duration, answers, etc.}
+  aiAnalysis  Json?
+  completedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quiz Quiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+
+  @@index([userId, completedAt])
+  @@index([quizId])
+  @@map("test_attempts")
+}
+
+// Live Coding Attempt Model
+model LiveCodingAttempt {
+  id          String   @id @default(cuid())
+  userId      String
+  quizId      String
+  metrics     Json // {codeQuality, completionTime, testResults, etc.}
+  code        String? // Submitted code
+  aiAnalysis  Json?
+  completedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quiz Quiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+
+  @@index([userId, completedAt])
+  @@index([quizId])
+  @@map("live_coding_attempts")
+}
+
+// Bug Fix Attempt Model
+model BugFixAttempt {
+  id          String   @id @default(cuid())
+  userId      String
+  quizId      String
+  metrics     Json // {bugsFixed, timeTaken, codeQuality, etc.}
+  fixedCode   String? // Fixed code
+  aiAnalysis  Json?
+  completedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quiz Quiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+
+  @@index([userId, completedAt])
+  @@index([quizId])
+  @@map("bug_fix_attempts")
+}
+
+// Hackaton Attempt Model
+model HackatonAttempt {
+  id          String   @id @default(cuid())
+  userId      String
+  quizId      String
+  hackathonId String?
+  metrics     Json // {projectScore, featuresCompleted, codeQuality, etc.}
+  projectUrl  String? // Project repository URL
+  aiAnalysis  Json?
+  completedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  user       User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quiz       Quiz                 @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  hackathon  Hackathon?           @relation(fields: [hackathonId], references: [id], onDelete: SetNull)
+  submission HackathonSubmission? @relation("HackathonSubmissionAttempt")
+
+  @@index([userId, completedAt])
+  @@index([quizId])
+  @@index([hackathonId])
+  @@map("hackaton_attempts")
+}
+
+model Friendship {
+  id          String           @id @default(cuid())
+  requesterId String
+  addresseeId String
+  status      FriendshipStatus @default(pending)
+  requestedAt DateTime         @default(now())
+  respondedAt DateTime?
+  cancelledAt DateTime?
+  blockedById String?
+
+  requester User  @relation("FriendshipRequester", fields: [requesterId], references: [id], onDelete: Cascade)
+  addressee User  @relation("FriendshipAddressee", fields: [addresseeId], references: [id], onDelete: Cascade)
+  blockedBy User? @relation("FriendshipBlocker", fields: [blockedById], references: [id], onDelete: SetNull)
+
+  @@unique([requesterId, addresseeId])
+  @@index([addresseeId, status])
+  @@index([requesterId, status])
+  @@map("friendships")
+}
+
+// Test Leaderboard Entry
+model TestLeaderboardEntry {
+  id           String            @id @default(cuid())
+  userId       String
+  period       LeaderboardPeriod
+  periodDate   String // YYYY-MM-DD for daily, YYYY-MM for monthly
+  attemptCount Int               @default(0)
+  averageScore Float             @default(0)
+  totalScore   Int               @default(0)
+  highestScore Int               @default(0)
+  rank         Int?
+  points       Int               @default(0)
+  updatedAt    DateTime          @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, period, periodDate])
+  @@index([period, periodDate])
+  @@index([userId, period])
+  @@map("test_leaderboard_entries")
+}
+
+// Live Coding Leaderboard Entry
+model LiveCodingLeaderboardEntry {
+  id           String            @id @default(cuid())
+  userId       String
+  period       LeaderboardPeriod
+  periodDate   String // YYYY-MM-DD for daily, YYYY-MM for monthly
+  attemptCount Int               @default(0)
+  averageScore Float             @default(0)
+  totalScore   Int               @default(0)
+  highestScore Int               @default(0)
+  rank         Int?
+  points       Int               @default(0)
+  updatedAt    DateTime          @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, period, periodDate])
+  @@index([period, periodDate])
+  @@index([userId, period])
+  @@map("live_coding_leaderboard_entries")
+}
+
+// Bug Fix Leaderboard Entry
+model BugFixLeaderboardEntry {
+  id           String            @id @default(cuid())
+  userId       String
+  period       LeaderboardPeriod
+  periodDate   String // YYYY-MM-DD for daily, YYYY-MM for monthly
+  attemptCount Int               @default(0)
+  averageScore Float             @default(0)
+  totalScore   Int               @default(0)
+  highestScore Int               @default(0)
+  rank         Int?
+  points       Int               @default(0)
+  updatedAt    DateTime          @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, period, periodDate])
+  @@index([period, periodDate])
+  @@index([userId, period])
+  @@map("bug_fix_leaderboard_entries")
+}
+
+// Hackaton Leaderboard Entry
+model HackatonLeaderboardEntry {
+  id           String            @id @default(cuid())
+  userId       String
+  period       LeaderboardPeriod
+  periodDate   String // YYYY-MM-DD for daily, YYYY-MM for monthly
+  attemptCount Int               @default(0)
+  averageScore Float             @default(0)
+  totalScore   Int               @default(0)
+  highestScore Int               @default(0)
+  rank         Int?
+  points       Int               @default(0)
+  updatedAt    DateTime          @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, period, periodDate])
+  @@index([period, periodDate])
+  @@index([userId, period])
+  @@map("hackaton_leaderboard_entries")
+}
+
+enum ChatGroupRole {
+  member
+  moderator
+  admin
+}
+
+enum ChatGroupVisibility {
+  public
+  private
+}
+
+enum ChatMessageType {
+  text
+  image
+  audio
+  video
+  file
+  gif
+  system
+}
+
+enum ChatAttachmentType {
+  image
+  audio
+  video
+  file
+  gif
+}
+
+model ChatGroup {
+  id            String              @id @default(cuid())
+  name          String
+  slug          String              @unique
+  visibility    ChatGroupVisibility @default(public)
+  allowLinkJoin Boolean             @default(false)
+  inviteCode    String?             @unique
+  createdById   String?
+  expertise     String?
+  description   String?
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+
+  // Relations
+  createdBy   User?                 @relation("ChatGroupsCreated", fields: [createdById], references: [id], onDelete: SetNull)
+  memberships ChatGroupMembership[]
+  messages    ChatMessage[]
+
+  @@index([slug])
+  @@index([createdById])
+  @@map("chat_groups")
+}
+
+model ChatGroupMembership {
+  id         String        @id @default(cuid())
+  groupId    String
+  userId     String
+  role       ChatGroupRole @default(member)
+  joinedAt   DateTime      @default(now())
+  lastSeenAt DateTime?
+  isMuted    Boolean       @default(false)
+
+  // Relations
+  group ChatGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  user  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([groupId, userId])
+  @@index([userId])
+  @@map("chat_group_memberships")
+}
+
+model ChatMessage {
+  id         String          @id @default(cuid())
+  groupId    String
+  userId     String
+  type       ChatMessageType @default(text)
+  content    String?
+  mentionIds String[]        @default([])
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @updatedAt
+  deletedAt  DateTime?
+
+  // Relations
+  group       ChatGroup            @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  user        User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  attachments ChatAttachment[]
+  receipts    ChatMessageReceipt[]
+
+  @@index([groupId, createdAt])
+  @@index([userId])
+  @@map("chat_messages")
+}
+
+model ChatAttachment {
+  id        String             @id @default(cuid())
+  messageId String
+  url       String
+  type      ChatAttachmentType
+  metadata  Json?
+  size      Int?
+  width     Int?
+  height    Int?
+  duration  Int?
+  createdAt DateTime           @default(now())
+
+  // Relations
+  message ChatMessage @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  @@index([messageId])
+  @@map("chat_attachments")
+}
+
+model ChatMessageReceipt {
+  id        String   @id @default(cuid())
+  messageId String
+  userId    String
+  readAt    DateTime @default(now())
+
+  // Relations
+  message ChatMessage @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  user    User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([messageId, userId])
+  @@index([userId])
+  @@map("chat_message_receipts")
+}
+
+// Social Media Posts
+model Post {
+  id        String   @id @default(cuid())
+  userId    String
+  content   String?
+  imageUrl  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  user     User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  likes    PostLike[]
+  comments PostComment[]
+  saves    PostSave[]
+
+  @@index([userId])
+  @@index([createdAt])
+  @@map("posts")
+}
+
+model PostLike {
+  id        String   @id @default(cuid())
+  postId    String
+  userId    String
+  createdAt DateTime @default(now())
+
+  // Relations
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, userId])
+  @@index([postId])
+  @@index([userId])
+  @@map("post_likes")
+}
+
+model PostComment {
+  id        String   @id @default(cuid())
+  postId    String
+  userId    String
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([postId])
+  @@index([postId, createdAt])
+  @@index([userId])
+  @@map("post_comments")
+}
+
+model PostSave {
+  id        String   @id @default(cuid())
+  postId    String
+  userId    String
+  createdAt DateTime @default(now())
+
+  // Relations
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, userId])
+  @@index([postId])
+  @@index([userId])
+  @@map("post_saves")
+}

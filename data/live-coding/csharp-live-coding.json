@@ -1,0 +1,137 @@
+{
+  "items": [
+    {
+      "title": "C# Array İşlemleri",
+      "level": "beginner",
+      "description": "Diziler üzerinde temel işlemler yapın.",
+      "taskDescription": "Bir integer dizisi verildiğinde, dizideki en büyük ve en küçük elemanları bulun ve toplamlarını döndürün.",
+      "acceptanceCriteria": [
+        "Kod derlenmeli ve hatasız çalışmalı",
+        "Beklenen çıktıyı üretmeli",
+        "Kod okunabilir ve temiz olmalı",
+        "Dizi boş olamaz",
+        "Sonuç doğru hesaplanmalı"
+      ],
+      "timeLimitMinutes": 30
+    },
+    {
+      "title": "C# LINQ Sorguları",
+      "level": "intermediate",
+      "description": "LINQ ile veri sorgulama ve filtreleme.",
+      "taskDescription": "Bir koleksiyondan belirli kriterlere uyan elemanları LINQ kullanarak filtreleyin ve sıralayın.",
+      "acceptanceCriteria": [
+        "Kod derlenmeli ve hatasız çalışmalı",
+        "Beklenen çıktıyı üretmeli",
+        "Kod okunabilir ve temiz olmalı",
+        "LINQ metodları kullanılmalı",
+        "Performans optimize edilmeli"
+      ],
+      "timeLimitMinutes": 45
+    },
+    {
+      "title": "C# Async/Await",
+      "level": "intermediate",
+      "description": "Asenkron programlama ile performans optimizasyonu.",
+      "taskDescription": "Asenkron bir metod oluşturun ve birden fazla async işlemi paralel olarak çalıştırın.",
+      "acceptanceCriteria": [
+        "Kod derlenmeli ve hatasız çalışmalı",
+        "Beklenen çıktıyı üretmeli",
+        "Kod okunabilir ve temiz olmalı",
+        "Async/await kullanılmalı",
+        "Task.WhenAll veya benzeri kullanılmalı"
+      ],
+      "timeLimitMinutes": 45
+    },
+    {
+      "title": "C# Collections",
+      "level": "beginner",
+      "description": "List, Dictionary ve diğer koleksiyon türleri.",
+      "taskDescription": "Farklı koleksiyon türlerini kullanarak veri yapıları oluşturun ve işlemler yapın.",
+      "acceptanceCriteria": [
+        "Kod derlenmeli ve hatasız çalışmalı",
+        "Beklenen çıktıyı üretmeli",
+        "Kod okunabilir ve temiz olmalı",
+        "En az 2 farklı koleksiyon türü kullanılmalı"
+      ],
+      "timeLimitMinutes": 30
+    },
+    {
+      "title": "C# String Manipülasyonu",
+      "level": "beginner",
+      "description": "String işlemleri ve metin dönüşümleri.",
+      "taskDescription": "String manipülasyonu yaparak metinleri dönüştürün, birleştirin veya parse edin.",
+      "acceptanceCriteria": [
+        "Kod derlenmeli ve hatasız çalışmalı",
+        "Beklenen çıktıyı üretmeli",
+        "Kod okunabilir ve temiz olmalı",
+        "StringBuilder veya string interpolation kullanılmalı"
+      ],
+      "timeLimitMinutes": 30
+    },
+    {
+      "title": "C# OOP Prensipleri",
+      "level": "intermediate",
+      "description": "Nesne yönelimli programlama temelleri.",
+      "taskDescription": "OOP prensipleri kullanarak bir sınıf hiyerarşisi oluşturun (inheritance, polymorphism).",
+      "acceptanceCriteria": [
+        "Kod derlenmeli ve hatasız çalışmalı",
+        "Beklenen çıktıyı üretmeli",
+        "Kod okunabilir ve temiz olmalı",
+        "En az 2 sınıf arasında inheritance olmalı",
+        "Polymorphism kullanılmalı"
+      ],
+      "timeLimitMinutes": 45
+    },
+    {
+      "title": "C# Exception Handling",
+      "level": "beginner",
+      "description": "Hata yönetimi ve exception handling.",
+      "taskDescription": "Try-catch blokları kullanarak hata yönetimi yapın ve özel exception'lar oluşturun.",
+      "acceptanceCriteria": [
+        "Kod derlenmeli ve hatasız çalışmalı",
+        "Beklenen çıktıyı üretmeli",
+        "Kod okunabilir ve temiz olmalı",
+        "Try-catch-finally kullanılmalı",
+        "Özel exception sınıfı oluşturulmalı"
+      ],
+      "timeLimitMinutes": 30
+    },
+    {
+      "title": "C# Delegates ve Events",
+      "level": "advanced",
+      "description": "Delegates ve event mekanizmaları.",
+      "taskDescription": "Delegates ve events kullanarak event-driven bir sistem oluşturun.",
+      "acceptanceCriteria": [
+        "Kod derlenmeli ve hatasız çalışmalı",
+        "Beklenen çıktıyı üretmeli",
+        "Kod okunabilir ve temiz olmalı"
+      ],
+      "timeLimitMinutes": 60
+    },
+    {
+      "title": "C# Generics",
+      "level": "intermediate",
+      "description": "Generic tipler ve type-safe kodlama.",
+      "taskDescription": "Generic sınıf ve metodlar oluşturarak type-safe bir koleksiyon implementasyonu yapın.",
+      "acceptanceCriteria": [
+        "Kod derlenmeli ve hatasız çalışmalı",
+        "Beklenen çıktıyı üretmeli",
+        "Kod okunabilir ve temiz olmalı"
+      ],
+      "timeLimitMinutes": 45
+    },
+    {
+      "title": "C# Extension Methods",
+      "level": "intermediate",
+      "description": "Extension method'lar ile kod genişletme.",
+      "taskDescription": "Extension method'lar kullanarak mevcut tiplere yeni fonksiyonellik ekleyin.",
+      "acceptanceCriteria": [
+        "Kod derlenmeli ve hatasız çalışmalı",
+        "Beklenen çıktıyı üretmeli",
+        "Kod okunabilir ve temiz olmalı"
+      ],
+      "timeLimitMinutes": 45
+    }
+  ]
+}
+

@@ -1,0 +1,1810 @@
+{
+  "moduleId": "module-07-auth",
+  "moduleTitle": "Authentication & Authorization",
+  "lessons": [
+    {
+      "label": "Authentication Nedir? Temel Kavramlar",
+      "href": "/education/lessons/authentication/basics/introduction",
+      "description": "Authentication (kimlik doğrulama) kavramını, neden önemli olduğunu ve web uygulamalarında nasıl kullanıldığını öğren. Bu ders, Authentication & Authorization modülünün Faz 1'inin ilk dersidir ve güvenli web uygulamaları geliştirmenin temel taşıdır.",
+      "estimatedDurationMinutes": 50,
+      "level": "Başlangıç",
+      "keyTakeaways": [
+        "Authentication'ın ne olduğunu ve neden kritik olduğunu öğreneceksin.",
+        "Authentication ve Authorization arasındaki farkı anlayacaksın.",
+        "Farklı authentication yöntemlerini (JWT, Cookie, Basic Auth) keşfedeceksin.",
+        "ASP.NET Core'da authentication'ın nasıl çalıştığını kavrayacaksın.",
+        "Güvenli authentication implementasyonu için best practice'leri öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "authentication-introduction",
+          "title": "Authentication Nedir?",
+          "summary": "Authentication kavramının temel tanımı ve önemi.",
+          "content": [
+            {
+              "type": "text",
+              "body": "Authentication (kimlik doğrulama), bir kullanıcının kimliğini doğrulama sürecidir. Kullanıcının 'kim olduğunu' belirlemek için kullanılır. Web uygulamalarında, kullanıcıların kimlik bilgilerini (kullanıcı adı, şifre, token vb.) doğrulayarak sistem erişimini kontrol eder."
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "Authentication: Kullanıcının kimliğini doğrulama (Kim olduğunu belirleme)",
+                "Authorization: Kullanıcının yetkilerini kontrol etme (Ne yapabileceğini belirleme)",
+                "Identity: Kullanıcının kimlik bilgileri (kullanıcı adı, email, ID vb.)",
+                "Credentials: Kimlik doğrulama için kullanılan bilgiler (şifre, token vb.)",
+                "Session: Kullanıcının oturum bilgileri (login durumu)"
+              ]
+            },
+            {
+              "type": "callout",
+              "variant": "tip",
+              "title": "Önemli Not",
+              "body": "Authentication ve Authorization farklı kavramlardır. Authentication 'kim olduğunu' belirler, Authorization ise 'ne yapabileceğini' belirler. Önce authentication yapılır, sonra authorization kontrol edilir."
+            }
+          ]
+        },
+        {
+          "id": "authentication-vs-authorization",
+          "title": "Authentication vs Authorization",
+          "summary": "Authentication ve Authorization arasındaki farklar.",
+          "content": [
+            {
+              "type": "text",
+              "body": "Authentication ve Authorization sıkça karıştırılan iki kavramdır. Aralarındaki farkı anlamak, güvenli uygulamalar geliştirmek için kritiktir."
+            },
+            {
+              "type": "list",
+              "ordered": true,
+              "items": [
+                "Authentication (Kimlik Doğrulama): Kullanıcının kimliğini doğrular. 'Bu kullanıcı gerçekten Ahmet mi?' sorusuna cevap verir.",
+                "Authorization (Yetkilendirme): Kullanıcının yetkilerini kontrol eder. 'Ahmet bu dosyayı okuyabilir mi?' sorusuna cevap verir.",
+                "Sıralama: Önce authentication yapılır, sonra authorization kontrol edilir.",
+                "Örnek: Bir kullanıcı sisteme giriş yaparken (login) authentication yapılır. Dosya silme işlemi yaparken authorization kontrol edilir."
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Authentication: Kullanıcı kimliğini doğrula\npublic async Task<IActionResult> Login(LoginModel model)\n{\n    // Kullanıcı kimliğini doğrula (Authentication)\n    var user = await _userService.ValidateUser(model.Username, model.Password);\n    \n    if (user == null)\n    {\n        return Unauthorized(); // Authentication başarısız\n    }\n    \n    // Token oluştur ve döndür\n    var token = GenerateToken(user);\n    return Ok(new { token });\n}\n\n// Authorization: Kullanıcı yetkilerini kontrol et\n[Authorize(Roles = \"Admin\")]\npublic IActionResult DeleteUser(int id)\n{\n    // Bu endpoint sadece Admin rolüne sahip kullanıcılar için\n    // Önce authentication yapılmış olmalı, sonra authorization kontrol edilir\n    _userService.DeleteUser(id);\n    return Ok();\n}",
+              "explanation": "Authentication ve Authorization arasındaki farkı gösterir. Login metodu authentication yapar, DeleteUser metodu authorization kontrol eder."
+            }
+          ]
+        },
+        {
+          "id": "authentication-methods",
+          "title": "Authentication Yöntemleri",
+          "summary": "Farklı authentication yöntemleri ve kullanım senaryoları.",
+          "content": [
+            {
+              "type": "text",
+              "body": "Web uygulamalarında farklı authentication yöntemleri kullanılabilir. Her yöntemin kendine özgü avantajları ve kullanım senaryoları vardır."
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "JWT (JSON Web Token): Stateless token tabanlı authentication. API'ler için ideal.",
+                "Cookie-based Authentication: Session cookie'leri kullanır. Web uygulamaları için uygun.",
+                "Basic Authentication: Kullanıcı adı ve şifre HTTP header'ında gönderilir. Basit ama güvenli değil.",
+                "OAuth 2.0: Üçüncü parti sağlayıcılarla authentication (Google, Facebook vb.).",
+                "OpenID Connect: OAuth 2.0 üzerine kurulu kimlik doğrulama protokolü.",
+                "API Keys: API'ler için basit authentication yöntemi."
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// JWT Authentication\nservices.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)\n    .AddJwtBearer(options =>\n    {\n        options.TokenValidationParameters = new TokenValidationParameters\n        {\n            ValidateIssuer = true,\n            ValidateAudience = true,\n            ValidateLifetime = true,\n            ValidateIssuerSigningKey = true,\n            ValidIssuer = \"your-issuer\",\n            ValidAudience = \"your-audience\",\n            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(\"your-secret-key\"))\n        };\n    });\n\n// Cookie Authentication\nservices.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)\n    .AddCookie(options =>\n    {\n        options.LoginPath = \"/Account/Login\";\n        options.LogoutPath = \"/Account/Logout\";\n        options.ExpireTimeSpan = TimeSpan.FromMinutes(30);\n    });",
+              "explanation": "JWT ve Cookie authentication'ın ASP.NET Core'da nasıl yapılandırıldığını gösterir."
+            }
+          ]
+        },
+        {
+          "id": "aspnet-core-authentication",
+          "title": "ASP.NET Core'da Authentication",
+          "summary": "ASP.NET Core authentication middleware ve yapılandırması.",
+          "content": [
+            {
+              "type": "text",
+              "body": "ASP.NET Core, güçlü bir authentication sistemi sunar. Middleware tabanlı yapısı sayesinde authentication'ı kolayca yapılandırabilirsin."
+            },
+            {
+              "type": "list",
+              "ordered": true,
+              "items": [
+                "Authentication Middleware: Request pipeline'da authentication'ı yönetir.",
+                "Authentication Schemes: Farklı authentication yöntemleri (JWT, Cookie, OAuth vb.).",
+                "Claims: Kullanıcı hakkında bilgi içeren key-value çiftleri.",
+                "ClaimsPrincipal: Authenticated kullanıcıyı temsil eden nesne.",
+                "Authentication Attributes: [Authorize] attribute ile endpoint'leri koruma."
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Program.cs veya Startup.cs'de authentication yapılandırması\nvar builder = WebApplication.CreateBuilder(args);\n\n// Authentication servislerini ekle\nbuilder.Services.AddAuthentication(options =>\n{\n    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;\n    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;\n})\n.AddJwtBearer(options =>\n{\n    // JWT yapılandırması\n});\n\n// Authentication middleware'i ekle\nvar app = builder.Build();\napp.UseAuthentication(); // Authentication middleware\napp.UseAuthorization(); // Authorization middleware\napp.MapControllers();",
+              "explanation": "ASP.NET Core'da authentication'ın nasıl yapılandırıldığını ve middleware'in nasıl eklendiğini gösterir."
+            },
+            {
+              "type": "callout",
+              "variant": "info",
+              "title": "Bilgi",
+              "body": "Authentication middleware'i, Authorization middleware'inden önce eklenmelidir. Çünkü önce kullanıcının kimliği doğrulanmalı, sonra yetkileri kontrol edilmelidir."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-auth-intro-1",
+          "question": "Authentication ne yapar?",
+          "options": [
+            "Kullanıcının yetkilerini kontrol eder",
+            "Kullanıcının kimliğini doğrular",
+            "Kullanıcıya rol atar",
+            "Kullanıcıyı veritabanına kaydeder"
+          ],
+          "answer": "Kullanıcının kimliğini doğrular",
+          "rationale": "Authentication, kullanıcının kimliğini doğrulama sürecidir. 'Kim olduğunu' belirler, 'ne yapabileceğini' belirlemez (bu authorization'dır)."
+        },
+        {
+          "id": "checkpoint-auth-intro-2",
+          "question": "Authentication ve Authorization arasındaki fark nedir?",
+          "options": [
+            "Aynı şeydir",
+            "Authentication kimliği doğrular, Authorization yetkileri kontrol eder",
+            "Authorization kimliği doğrular, Authentication yetkileri kontrol eder",
+            "Hiçbir fark yoktur"
+          ],
+          "answer": "Authentication kimliği doğrular, Authorization yetkileri kontrol eder",
+          "rationale": "Authentication kullanıcının kimliğini doğrular (kim olduğunu belirler), Authorization ise kullanıcının yetkilerini kontrol eder (ne yapabileceğini belirler)."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-auth-intro-docs",
+          "label": "Authentication - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/security/authentication/",
+          "type": "reading",
+          "estimatedMinutes": 30,
+          "description": "ASP.NET Core authentication hakkında Microsoft dokümantasyonu."
+        },
+        {
+          "id": "resource-auth-intro-video",
+          "label": "Authentication Temelleri - Video Eğitim",
+          "href": "https://www.youtube.com/watch?v=example",
+          "type": "video",
+          "estimatedMinutes": 35,
+          "description": "Authentication kavramını görsel olarak öğrenmek için video eğitim."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-auth-intro-1",
+          "title": "Authentication Kavramını Anla",
+          "description": "Authentication ve Authorization arasındaki farkı anlamak için pratik yap.",
+          "type": "research",
+          "estimatedMinutes": 25,
+          "difficulty": "Kolay",
+          "instructions": [
+            "Authentication ve Authorization arasındaki farkı araştır.",
+            "Farklı authentication yöntemlerini (JWT, Cookie, Basic Auth) karşılaştır.",
+            "Her yöntemin avantaj ve dezavantajlarını liste.",
+            "Hangi senaryoda hangi yöntemin kullanılacağını belirle."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "JWT (JSON Web Token) Authentication",
+      "href": "/education/lessons/authentication/jwt/jwt-authentication",
+      "description": "JWT (JSON Web Token) authentication'ın ne olduğunu, nasıl çalıştığını ve ASP.NET Core'da nasıl implement edildiğini öğren. JWT, modern web uygulamalarında ve API'lerde yaygın olarak kullanılan stateless authentication yöntemidir.",
+      "estimatedDurationMinutes": 60,
+      "level": "Orta",
+      "keyTakeaways": [
+        "JWT'nin ne olduğunu ve nasıl çalıştığını öğreneceksin.",
+        "JWT token yapısını (Header, Payload, Signature) anlayacaksın.",
+        "JWT token oluşturma ve doğrulama sürecini keşfedeceksin.",
+        "ASP.NET Core'da JWT authentication'ı nasıl implement edeceğini kavrayacaksın.",
+        "JWT token güvenliği ve best practice'lerini öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "jwt-introduction",
+          "title": "JWT Nedir?",
+          "summary": "JWT kavramının temel tanımı ve yapısı.",
+          "content": [
+            {
+              "type": "text",
+              "body": "JWT (JSON Web Token), iki taraf arasında güvenli bilgi aktarımı için kullanılan açık bir standarttır. JWT, stateless (durumsuz) authentication sağlar, yani sunucu kullanıcı oturum bilgilerini saklamaz. Token içinde kullanıcı bilgileri (claims) bulunur."
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "Stateless: Sunucu tarafında session saklanmaz, tüm bilgi token içindedir.",
+                "Self-contained: Token içinde kullanıcı bilgileri (claims) bulunur.",
+                "Compact: URL-safe string formatında, küçük boyutludur.",
+                "Signed: İmzalıdır, değiştirilemez (tamper-proof).",
+                "Standard: RFC 7519 standardına uygundur."
+              ]
+            },
+            {
+              "type": "code",
+              "language": "text",
+              "code": "JWT Token Yapısı:\n\nHeader.Payload.Signature\n\nÖrnek:\neyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c\n\n- Header: Token tipi ve imzalama algoritması\n- Payload: Kullanıcı bilgileri (claims)\n- Signature: İmza (header ve payload'ın imzalanmış hali)",
+              "explanation": "JWT token'ın yapısını gösterir. Üç bölümden oluşur: Header, Payload ve Signature."
+            }
+          ]
+        },
+        {
+          "id": "jwt-structure",
+          "title": "JWT Token Yapısı",
+          "summary": "JWT token'ın detaylı yapısı ve bileşenleri.",
+          "content": [
+            {
+              "type": "text",
+              "body": "JWT token üç bölümden oluşur: Header, Payload ve Signature. Her bölüm Base64URL ile encode edilir ve nokta (.) ile ayrılır."
+            },
+            {
+              "type": "list",
+              "ordered": true,
+              "items": [
+                "Header: Token tipi (JWT) ve imzalama algoritması (HS256, RS256 vb.) bilgilerini içerir.",
+                "Payload: Claims (kullanıcı bilgileri) içerir. Registered claims (iss, sub, exp vb.) ve custom claims bulunabilir.",
+                "Signature: Header ve Payload'ın imzalanmış halidir. Secret key veya public/private key ile oluşturulur.",
+                "Encoding: Her bölüm Base64URL ile encode edilir.",
+                "Separator: Bölümler nokta (.) ile ayrılır."
+              ]
+            },
+            {
+              "type": "code",
+              "language": "json",
+              "code": "// Header (Decoded)\n{\n  \"alg\": \"HS256\",\n  \"typ\": \"JWT\"\n}\n\n// Payload (Decoded)\n{\n  \"sub\": \"1234567890\",\n  \"name\": \"John Doe\",\n  \"iat\": 1516239022,\n  \"exp\": 1516242622,\n  \"role\": \"Admin\"\n}\n\n// Signature\nHMACSHA256(\n  base64UrlEncode(header) + \".\" +\n  base64UrlEncode(payload),\n  secret\n)",
+              "explanation": "JWT token'ın decode edilmiş yapısını gösterir. Header algoritma bilgisini, Payload kullanıcı bilgilerini, Signature ise imzayı içerir."
+            }
+          ]
+        },
+        {
+          "id": "jwt-implementation",
+          "title": "ASP.NET Core'da JWT Implementation",
+          "summary": "JWT authentication'ın ASP.NET Core'da nasıl implement edildiği.",
+          "content": [
+            {
+              "type": "text",
+              "body": "ASP.NET Core'da JWT authentication'ı implement etmek için Microsoft.AspNetCore.Authentication.JwtBearer paketini kullanırız. Token oluşturma, doğrulama ve kullanım süreçlerini yapılandırabiliriz."
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// 1. Paket ekle: Microsoft.AspNetCore.Authentication.JwtBearer\n\n// 2. Program.cs'de JWT yapılandırması\nvar builder = WebApplication.CreateBuilder(args);\n\n// JWT ayarlarını appsettings.json'dan oku\nvar jwtSettings = builder.Configuration.GetSection(\"JwtSettings\");\nvar secretKey = jwtSettings[\"SecretKey\"];\n\n// Authentication servislerini ekle\nbuilder.Services.AddAuthentication(options =>\n{\n    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;\n    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;\n})\n.AddJwtBearer(options =>\n{\n    options.TokenValidationParameters = new TokenValidationParameters\n    {\n        ValidateIssuer = true,\n        ValidateAudience = true,\n        ValidateLifetime = true,\n        ValidateIssuerSigningKey = true,\n        ValidIssuer = jwtSettings[\"Issuer\"],\n        ValidAudience = jwtSettings[\"Audience\"],\n        IssuerSigningKey = new SymmetricSecurityKey(\n            Encoding.UTF8.GetBytes(secretKey)\n        ),\n        ClockSkew = TimeSpan.Zero // Token expiration kontrolü için\n    };\n});\n\n// 3. Token oluşturma servisi\npublic class TokenService\n{\n    private readonly IConfiguration _configuration;\n    \n    public TokenService(IConfiguration configuration)\n    {\n        _configuration = configuration;\n    }\n    \n    public string GenerateToken(User user)\n    {\n        var claims = new List<Claim>\n        {\n            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),\n            new Claim(ClaimTypes.Name, user.Username),\n            new Claim(ClaimTypes.Email, user.Email),\n            new Claim(ClaimTypes.Role, user.Role)\n        };\n        \n        var secretKey = _configuration[\"JwtSettings:SecretKey\"];\n        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));\n        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);\n        \n        var token = new JwtSecurityToken(\n            issuer: _configuration[\"JwtSettings:Issuer\"],\n            audience: _configuration[\"JwtSettings:Audience\"],\n            claims: claims,\n            expires: DateTime.UtcNow.AddHours(1),\n            signingCredentials: creds\n        );\n        \n        return new JwtSecurityTokenHandler().WriteToken(token);\n    }\n}",
+              "explanation": "ASP.NET Core'da JWT authentication'ın nasıl yapılandırıldığını ve token'ın nasıl oluşturulduğunu gösterir."
+            }
+          ]
+        },
+        {
+          "id": "jwt-usage",
+          "title": "JWT Token Kullanımı",
+          "summary": "JWT token'ın nasıl kullanıldığı ve korumalı endpoint'lere nasıl erişildiği.",
+          "content": [
+            {
+              "type": "text",
+              "body": "JWT token, HTTP Authorization header'ında Bearer token olarak gönderilir. ASP.NET Core, [Authorize] attribute'u ile endpoint'leri korur ve token'ı otomatik olarak doğrular."
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Login endpoint - Token oluştur ve döndür\n[HttpPost(\"login\")]\n[AllowAnonymous]\npublic async Task<IActionResult> Login([FromBody] LoginModel model)\n{\n    var user = await _userService.ValidateUser(model.Username, model.Password);\n    \n    if (user == null)\n    {\n        return Unauthorized(new { message = \"Invalid credentials\" });\n    }\n    \n    var token = _tokenService.GenerateToken(user);\n    \n    return Ok(new\n    {\n        token = token,\n        expiresIn = 3600,\n        user = new { id = user.Id, username = user.Username }\n    });\n}\n\n// Korumalı endpoint - Token gerektirir\n[HttpGet(\"profile\")]\n[Authorize] // Token gerektirir\npublic IActionResult GetProfile()\n{\n    var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;\n    var username = User.FindFirst(ClaimTypes.Name)?.Value;\n    \n    return Ok(new { userId, username });\n}\n\n// Rol bazlı koruma\n[HttpDelete(\"users/{id}\")]\n[Authorize(Roles = \"Admin\")] // Sadece Admin rolü\npublic IActionResult DeleteUser(int id)\n{\n    _userService.DeleteUser(id);\n    return Ok();\n}",
+              "explanation": "JWT token'ın nasıl oluşturulduğunu, login endpoint'inde nasıl döndürüldüğünü ve korumalı endpoint'lerde nasıl kullanıldığını gösterir."
+            },
+            {
+              "type": "code",
+              "language": "http",
+              "code": "// Client tarafında token kullanımı\n\n// 1. Login isteği\nPOST /api/auth/login\nContent-Type: application/json\n\n{\n  \"username\": \"john\",\n  \"password\": \"password123\"\n}\n\n// Response\n{\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\",\n  \"expiresIn\": 3600,\n  \"user\": { \"id\": 1, \"username\": \"john\" }\n}\n\n// 2. Korumalı endpoint'e istek\nGET /api/users/profile\nAuthorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+              "explanation": "Client tarafında JWT token'ın nasıl kullanıldığını gösterir. Login sonrası alınan token, Authorization header'ında Bearer token olarak gönderilir."
+            }
+          ]
+        },
+        {
+          "id": "jwt-security",
+          "title": "JWT Güvenliği ve Best Practices",
+          "summary": "JWT token güvenliği için best practice'ler.",
+          "content": [
+            {
+              "type": "text",
+              "body": "JWT token güvenliği kritik öneme sahiptir. Token'ların güvenli bir şekilde oluşturulması, saklanması ve kullanılması gereklidir."
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "Secret Key: Güçlü ve uzun bir secret key kullan (en az 256 bit).",
+                "Token Expiration: Token'lara expiration time ekle (genellikle 15-60 dakika).",
+                "HTTPS: Token'ları sadece HTTPS üzerinden gönder.",
+                "Token Storage: Client tarafında token'ları güvenli sakla (httpOnly cookie veya secure storage).",
+                "Refresh Token: Uzun süreli erişim için refresh token kullan.",
+                "Token Revocation: Token iptal etme mekanizması ekle (blacklist veya database kontrolü).",
+                "Claims: Token'a sadece gerekli bilgileri ekle, hassas bilgi ekleme."
+              ]
+            },
+            {
+              "type": "callout",
+              "variant": "warning",
+              "title": "Güvenlik Uyarısı",
+              "body": "JWT token'lar stateless olduğu için iptal edilemez. Token'ı iptal etmek için blacklist mekanizması veya database kontrolü kullanmalısın. Alternatif olarak, kısa expiration time ve refresh token kullanabilirsin."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-jwt-1",
+          "question": "JWT token'ın yapısı nasıldır?",
+          "options": [
+            "Tek bir string",
+            "Header.Payload.Signature formatında",
+            "Sadece payload",
+            "Sadece header"
+          ],
+          "answer": "Header.Payload.Signature formatında",
+          "rationale": "JWT token üç bölümden oluşur: Header, Payload ve Signature. Bu bölümler Base64URL ile encode edilir ve nokta (.) ile ayrılır."
+        },
+        {
+          "id": "checkpoint-jwt-2",
+          "question": "JWT token neden stateless'tir?",
+          "options": [
+            "Çünkü sunucu tarafında session saklanmaz",
+            "Çünkü token'lar çok küçüktür",
+            "Çünkü token'lar hızlıdır",
+            "Çünkü token'lar güvenlidir"
+          ],
+          "answer": "Çünkü sunucu tarafında session saklanmaz",
+          "rationale": "JWT token stateless'tir çünkü sunucu tarafında kullanıcı oturum bilgileri saklanmaz. Tüm bilgi token içindedir, bu sayede sunucu token'ı doğrulayarak kullanıcıyı tanıyabilir."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-jwt-docs",
+          "label": "JWT Authentication - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/security/authentication/jwt-authn",
+          "type": "reading",
+          "estimatedMinutes": 40,
+          "description": "ASP.NET Core JWT authentication hakkında Microsoft dokümantasyonu."
+        },
+        {
+          "id": "resource-jwt-rfc",
+          "label": "JWT RFC 7519",
+          "href": "https://tools.ietf.org/html/rfc7519",
+          "type": "reading",
+          "estimatedMinutes": 30,
+          "description": "JWT standardının resmi dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-jwt-1",
+          "title": "JWT Authentication Implementasyonu",
+          "description": "ASP.NET Core'da JWT authentication implementasyonu yap.",
+          "type": "coding",
+          "estimatedMinutes": 60,
+          "difficulty": "Orta",
+          "instructions": [
+            "Microsoft.AspNetCore.Authentication.JwtBearer paketini ekle.",
+            "JWT yapılandırmasını Program.cs'de yap.",
+            "Token oluşturma servisi oluştur.",
+            "Login endpoint'i oluştur ve token döndür.",
+            "Korumalı endpoint oluştur ve [Authorize] attribute kullan.",
+            "Postman veya Swagger ile test et."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Cookie-Based Authentication",
+      "href": "/education/lessons/authentication/cookie/cookie-authentication",
+      "description": "Cookie-based authentication'ın ne olduğunu, nasıl çalıştığını ve ASP.NET Core'da nasıl implement edildiğini öğren. Cookie authentication, web uygulamalarında yaygın olarak kullanılan stateful authentication yöntemidir.",
+      "estimatedDurationMinutes": 55,
+      "level": "Orta",
+      "keyTakeaways": [
+        "Cookie-based authentication'ın ne olduğunu ve nasıl çalıştığını öğreneceksin.",
+        "Session ve cookie kavramlarını anlayacaksın.",
+        "Cookie authentication'ın JWT'den farklarını keşfedeceksin.",
+        "ASP.NET Core'da cookie authentication'ı nasıl implement edeceğini kavrayacaksın.",
+        "Cookie güvenliği ve best practice'lerini öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "cookie-introduction",
+          "title": "Cookie Authentication Nedir?",
+          "summary": "Cookie-based authentication kavramının temel tanımı.",
+          "content": [
+            {
+              "type": "text",
+              "body": "Cookie-based authentication, kullanıcı kimlik bilgilerini HTTP cookie'lerinde saklayan authentication yöntemidir. Stateful (durumlu) bir yöntemdir, yani sunucu tarafında session bilgileri saklanır. Web uygulamaları için ideal bir yöntemdir."
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "Stateful: Sunucu tarafında session bilgileri saklanır.",
+                "HTTP Cookie: Kimlik bilgileri cookie'de saklanır.",
+                "Session Management: Sunucu session'ı yönetir ve kontrol eder.",
+                "Web Uygulamaları: Browser tabanlı uygulamalar için idealdir.",
+                "Automatic: Browser otomatik olarak cookie'leri gönderir."
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Cookie Authentication yapılandırması\nservices.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)\n    .AddCookie(options =>\n    {\n        options.LoginPath = \"/Account/Login\";\n        options.LogoutPath = \"/Account/Logout\";\n        options.AccessDeniedPath = \"/Account/AccessDenied\";\n        options.ExpireTimeSpan = TimeSpan.FromMinutes(30);\n        options.SlidingExpiration = true; // Her istekte expiration süresini uzat\n        options.Cookie.HttpOnly = true; // XSS saldırılarına karşı koruma\n        options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest; // HTTPS kullan\n        options.Cookie.SameSite = SameSiteMode.Lax; // CSRF koruması\n    });",
+              "explanation": "Cookie authentication'ın ASP.NET Core'da nasıl yapılandırıldığını gösterir."
+            }
+          ]
+        },
+        {
+          "id": "cookie-vs-jwt",
+          "title": "Cookie vs JWT Authentication",
+          "summary": "Cookie ve JWT authentication arasındaki farklar.",
+          "content": [
+            {
+              "type": "text",
+              "body": "Cookie ve JWT authentication farklı senaryolar için uygundur. Aralarındaki farkları anlamak, doğru yöntemi seçmek için önemlidir."
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "Cookie: Stateful, session sunucuda saklanır. Web uygulamaları için ideal.",
+                "JWT: Stateless, session bilgisi token içindedir. API'ler için ideal.",
+                "Cookie: Browser otomatik yönetir, XSS ve CSRF riski var.",
+                "JWT: Manuel yönetim gerekir, stateless avantajı var.",
+                "Cookie: Session iptal edilebilir, güvenlik daha kolay.",
+                "JWT: Token iptal edilemez (blacklist gerekir), ölçeklenebilirlik daha iyi."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "cookie-implementation",
+          "title": "Cookie Authentication Implementation",
+          "summary": "Cookie authentication'ın ASP.NET Core'da implementasyonu.",
+          "content": [
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Login endpoint - Cookie oluştur\n[HttpPost(\"login\")]\n[AllowAnonymous]\npublic async Task<IActionResult> Login([FromBody] LoginModel model)\n{\n    var user = await _userService.ValidateUser(model.Username, model.Password);\n    \n    if (user == null)\n    {\n        return Unauthorized(new { message = \"Invalid credentials\" });\n    }\n    \n    // Claims oluştur\n    var claims = new List<Claim>\n    {\n        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),\n        new Claim(ClaimTypes.Name, user.Username),\n        new Claim(ClaimTypes.Email, user.Email),\n        new Claim(ClaimTypes.Role, user.Role)\n    };\n    \n    // ClaimsIdentity ve ClaimsPrincipal oluştur\n    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);\n    var authProperties = new AuthenticationProperties\n    {\n        IsPersistent = model.RememberMe, // \"Beni hatırla\" özelliği\n        ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(30)\n    };\n    \n    // Cookie'yi oluştur ve yanıtla\n    await HttpContext.SignInAsync(\n        CookieAuthenticationDefaults.AuthenticationScheme,\n        new ClaimsPrincipal(claimsIdentity),\n        authProperties\n    );\n    \n    return Ok(new { message = \"Login successful\" });\n}\n\n// Logout endpoint\n[HttpPost(\"logout\")]\n[Authorize]\npublic async Task<IActionResult> Logout()\n{\n    await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);\n    return Ok(new { message = \"Logout successful\" });\n}\n\n// Korumalı endpoint\n[HttpGet(\"profile\")]\n[Authorize]\npublic IActionResult GetProfile()\n{\n    var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;\n    var username = User.FindFirst(ClaimTypes.Name)?.Value;\n    \n    return Ok(new { userId, username });\n}",
+              "explanation": "Cookie authentication'ın login, logout ve korumalı endpoint'lerde nasıl kullanıldığını gösterir."
+            }
+          ]
+        },
+        {
+          "id": "cookie-security",
+          "title": "Cookie Güvenliği",
+          "summary": "Cookie authentication güvenliği için best practice'ler.",
+          "content": [
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "HttpOnly: Cookie'yi JavaScript'ten erişilemez yap (XSS koruması).",
+                "Secure: Cookie'yi sadece HTTPS üzerinden gönder.",
+                "SameSite: CSRF saldırılarına karşı koruma sağla.",
+                "Expiration: Cookie'lere expiration time ekle.",
+                "Sliding Expiration: Her istekte expiration süresini uzat.",
+                "Session Management: Session'ları düzenli olarak temizle."
+              ]
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-cookie-1",
+          "question": "Cookie authentication neden stateful'tir?",
+          "options": [
+            "Çünkü cookie'ler stateful'tir",
+            "Çünkü sunucu tarafında session saklanır",
+            "Çünkü browser cookie'leri yönetir",
+            "Çünkü cookie'ler güvenlidir"
+          ],
+          "answer": "Çünkü sunucu tarafında session saklanır",
+          "rationale": "Cookie authentication stateful'tir çünkü sunucu tarafında kullanıcı session bilgileri saklanır. JWT'den farklı olarak, sunucu session'ı yönetir ve kontrol eder."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-cookie-docs",
+          "label": "Cookie Authentication - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/security/authentication/cookie",
+          "type": "reading",
+          "estimatedMinutes": 35,
+          "description": "ASP.NET Core cookie authentication hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-cookie-1",
+          "title": "Cookie Authentication Implementasyonu",
+          "description": "ASP.NET Core'da cookie authentication implementasyonu yap.",
+          "type": "coding",
+          "estimatedMinutes": 50,
+          "difficulty": "Orta",
+          "instructions": [
+            "Cookie authentication'ı yapılandır.",
+            "Login endpoint'i oluştur ve cookie oluştur.",
+            "Logout endpoint'i oluştur.",
+            "Korumalı endpoint oluştur.",
+            "Cookie güvenlik ayarlarını yapılandır."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Basic Authentication ve API Keys",
+      "href": "/education/lessons/authentication/basic/basic-authentication",
+      "description": "Basic Authentication ve API Keys'in ne olduğunu, nasıl çalıştığını ve ne zaman kullanılacağını öğren. Basit API'ler ve internal servisler için uygun authentication yöntemleridir.",
+      "estimatedDurationMinutes": 45,
+      "level": "Orta",
+      "keyTakeaways": [
+        "Basic Authentication'ın ne olduğunu ve nasıl çalıştığını öğreneceksin.",
+        "API Keys'in kullanım senaryolarını anlayacaksın.",
+        "Basic Authentication'ın avantaj ve dezavantajlarını keşfedeceksin.",
+        "ASP.NET Core'da Basic Authentication'ı nasıl implement edeceğini kavrayacaksın.",
+        "Güvenli API key yönetimi için best practice'leri öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "basic-auth-introduction",
+          "title": "Basic Authentication Nedir?",
+          "summary": "Basic Authentication kavramının temel tanımı.",
+          "content": [
+            {
+              "type": "text",
+              "body": "Basic Authentication, kullanıcı adı ve şifrenin Base64 ile encode edilerek HTTP Authorization header'ında gönderildiği basit bir authentication yöntemidir. HTTP standardının bir parçasıdır ve çoğu web sunucusu tarafından desteklenir."
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "Simple: Çok basit bir yöntem, kolay implement edilir.",
+                "Standard: HTTP standardının bir parçasıdır.",
+                "Base64 Encoding: Kullanıcı adı ve şifre Base64 ile encode edilir.",
+                "Not Secure: Şifreler encode edilir ama şifrelenmez (encryption yok).",
+                "HTTPS Required: Sadece HTTPS üzerinden kullanılmalıdır."
+              ]
+            },
+            {
+              "type": "code",
+              "language": "http",
+              "code": "// Basic Authentication örneği\n\n// Request\nGET /api/users HTTP/1.1\nHost: example.com\nAuthorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=\n\n// Authorization header formatı:\n// Basic <base64(username:password)>\n\n// Örnek: username:password -> dXNlcm5hbWU6cGFzc3dvcmQ=",
+              "explanation": "Basic Authentication'ın HTTP header'ında nasıl gönderildiğini gösterir."
+            }
+          ]
+        },
+        {
+          "id": "api-keys",
+          "title": "API Keys",
+          "summary": "API Keys'in kullanımı ve yönetimi.",
+          "content": [
+            {
+              "type": "text",
+              "body": "API Keys, API'lere erişim için kullanılan basit authentication yöntemidir. Genellikle header veya query parameter olarak gönderilir."
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// API Key authentication middleware\npublic class ApiKeyAuthenticationMiddleware\n{\n    private readonly RequestDelegate _next;\n    private const string API_KEY_HEADER = \"X-API-Key\";\n    \n    public ApiKeyAuthenticationMiddleware(RequestDelegate next)\n    {\n        _next = next;\n    }\n    \n    public async Task InvokeAsync(HttpContext context)\n    {\n        if (!context.Request.Headers.TryGetValue(API_KEY_HEADER, out var extractedApiKey))\n        {\n            context.Response.StatusCode = 401;\n            await context.Response.WriteAsync(\"API Key was not provided\");\n            return;\n        }\n        \n        var validApiKey = context.RequestServices\n            .GetRequiredService<IConfiguration>()[\"ApiSettings:ApiKey\"];\n        \n        if (!validApiKey.Equals(extractedApiKey))\n        {\n            context.Response.StatusCode = 401;\n            await context.Response.WriteAsync(\"Invalid API Key\");\n            return;\n        }\n        \n        await _next(context);\n    }\n}",
+              "explanation": "API Key authentication için custom middleware örneği."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-basic-1",
+          "question": "Basic Authentication neden güvenli değildir?",
+          "options": [
+            "Çünkü Base64 encoding kullanır",
+            "Çünkü şifreler şifrelenmez, sadece encode edilir",
+            "Çünkü HTTP kullanır",
+            "Çünkü kullanıcı adı gönderilir"
+          ],
+          "answer": "Çünkü şifreler şifrelenmez, sadece encode edilir",
+          "rationale": "Basic Authentication'da şifreler Base64 ile encode edilir ama şifrelenmez (encryption yok). Base64 decode edilerek kolayca okunabilir. Bu yüzden mutlaka HTTPS üzerinden kullanılmalıdır."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-basic-docs",
+          "label": "Basic Authentication - MDN",
+          "href": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication",
+          "type": "reading",
+          "estimatedMinutes": 25,
+          "description": "Basic Authentication hakkında MDN dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-basic-1",
+          "title": "Basic Authentication Implementasyonu",
+          "description": "ASP.NET Core'da Basic Authentication implementasyonu yap.",
+          "type": "coding",
+          "estimatedMinutes": 40,
+          "difficulty": "Orta",
+          "instructions": [
+            "Basic Authentication middleware oluştur.",
+            "API Key authentication ekle.",
+            "HTTPS zorunluluğunu kontrol et.",
+            "Test endpoint'leri oluştur."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Authorization Nedir? Temel Kavramlar",
+      "href": "/education/lessons/authorization/basics/introduction",
+      "description": "Authorization (yetkilendirme) kavramını, neden önemli olduğunu ve web uygulamalarında nasıl kullanıldığını öğren. Bu ders, Authentication & Authorization modülünün Faz 2'sinin ilk dersidir ve güvenli web uygulamaları geliştirmenin kritik bir parçasıdır.",
+      "estimatedDurationMinutes": 50,
+      "level": "Başlangıç",
+      "keyTakeaways": [
+        "Authorization'ın ne olduğunu ve neden kritik olduğunu öğreneceksin.",
+        "Authentication ve Authorization arasındaki farkı anlayacaksın.",
+        "Farklı authorization yöntemlerini (Role-based, Claims-based, Policy-based) keşfedeceksin.",
+        "ASP.NET Core'da authorization'ın nasıl çalıştığını kavrayacaksın.",
+        "Güvenli authorization implementasyonu için best practice'leri öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "authorization-introduction",
+          "title": "Authorization Nedir?",
+          "summary": "Authorization kavramının temel tanımı ve önemi.",
+          "content": [
+            {
+              "type": "text",
+              "body": "Authorization (yetkilendirme), authenticated (kimliği doğrulanmış) bir kullanıcının hangi kaynaklara erişebileceğini ve hangi işlemleri yapabileceğini belirleme sürecidir. Kullanıcının 'ne yapabileceğini' kontrol eder."
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "Authorization: Kullanıcının yetkilerini kontrol etme (Ne yapabileceğini belirleme)",
+                "Authentication: Kullanıcının kimliğini doğrulama (Kim olduğunu belirleme)",
+                "Roles: Kullanıcı rolleri (Admin, User, Moderator vb.)",
+                "Claims: Kullanıcı hakkında bilgi içeren key-value çiftleri",
+                "Policies: Yetkilendirme kuralları ve gereksinimleri"
+              ]
+            },
+            {
+              "type": "callout",
+              "variant": "tip",
+              "title": "Önemli Not",
+              "body": "Authorization, authentication'dan sonra gelir. Önce kullanıcının kimliği doğrulanmalı (authentication), sonra yetkileri kontrol edilmelidir (authorization)."
+            }
+          ]
+        },
+        {
+          "id": "authorization-methods",
+          "title": "Authorization Yöntemleri",
+          "summary": "Farklı authorization yöntemleri ve kullanım senaryoları.",
+          "content": [
+            {
+              "type": "text",
+              "body": "ASP.NET Core'da farklı authorization yöntemleri kullanılabilir. Her yöntemin kendine özgü avantajları ve kullanım senaryoları vardır."
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "Role-Based Authorization: Roller üzerinden yetkilendirme ([Authorize(Roles = \"Admin\")])",
+                "Claims-Based Authorization: Claims üzerinden yetkilendirme",
+                "Policy-Based Authorization: Policy'ler üzerinden yetkilendirme (daha esnek)",
+                "Resource-Based Authorization: Kaynak bazlı yetkilendirme",
+                "Custom Authorization: Özel yetkilendirme gereksinimleri"
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Role-Based Authorization\n[Authorize(Roles = \"Admin\")]\npublic IActionResult DeleteUser(int id) { }\n\n// Claims-Based Authorization\n[Authorize(Policy = \"RequireEmail\")]\npublic IActionResult ViewProfile() { }\n\n// Policy-Based Authorization\n[Authorize(Policy = \"CanEditPost\")]\npublic IActionResult EditPost(int id) { }",
+              "explanation": "Farklı authorization yöntemlerinin kullanımını gösterir."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-authz-intro-1",
+          "question": "Authorization ne yapar?",
+          "options": [
+            "Kullanıcının kimliğini doğrular",
+            "Kullanıcının yetkilerini kontrol eder",
+            "Kullanıcıyı veritabanına kaydeder",
+            "Kullanıcıya token verir"
+          ],
+          "answer": "Kullanıcının yetkilerini kontrol eder",
+          "rationale": "Authorization, authenticated kullanıcının hangi kaynaklara erişebileceğini ve hangi işlemleri yapabileceğini kontrol eder. 'Ne yapabileceğini' belirler."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-authz-intro-docs",
+          "label": "Authorization - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/security/authorization/",
+          "type": "reading",
+          "estimatedMinutes": 30,
+          "description": "ASP.NET Core authorization hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-authz-intro-1",
+          "title": "Authorization Kavramını Anla",
+          "description": "Authorization ve Authentication arasındaki farkı anlamak için pratik yap.",
+          "type": "research",
+          "estimatedMinutes": 25,
+          "difficulty": "Kolay",
+          "instructions": [
+            "Authorization ve Authentication arasındaki farkı araştır.",
+            "Farklı authorization yöntemlerini karşılaştır.",
+            "Her yöntemin avantaj ve dezavantajlarını liste."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Role-Based Authorization",
+      "href": "/education/lessons/authorization/role-based/role-authorization",
+      "description": "Role-based authorization'ın ne olduğunu, nasıl çalıştığını ve ASP.NET Core'da nasıl implement edildiğini öğren. Role-based authorization, kullanıcıları rollere göre yetkilendirmenin en yaygın yöntemidir.",
+      "estimatedDurationMinutes": 55,
+      "level": "Orta",
+      "keyTakeaways": [
+        "Role-based authorization'ın ne olduğunu ve nasıl çalıştığını öğreneceksin.",
+        "Rollerin nasıl tanımlandığını ve kullanıcılara nasıl atandığını anlayacaksın.",
+        "ASP.NET Core'da role-based authorization'ı nasıl implement edeceğini keşfedeceksin.",
+        "Çoklu rol kontrolü ve rol yönetimini kavrayacaksın.",
+        "Role-based authorization best practice'lerini öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "role-based-introduction",
+          "title": "Role-Based Authorization Nedir?",
+          "summary": "Role-based authorization kavramının temel tanımı.",
+          "content": [
+            {
+              "type": "text",
+              "body": "Role-based authorization, kullanıcıları rollere göre yetkilendirme yöntemidir. Kullanıcılar belirli rollere (Admin, User, Moderator vb.) atanır ve bu rollere göre erişim kontrolü yapılır."
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "Roles: Kullanıcı rolleri (Admin, User, Moderator, Editor vb.)",
+                "Role Assignment: Kullanıcılara rol atama",
+                "Role Check: Kullanıcının rolünü kontrol etme",
+                "Simple: Basit ve anlaşılır bir yöntem",
+                "Common: En yaygın kullanılan authorization yöntemi"
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Role-based authorization örnekleri\n\n// Tek rol kontrolü\n[Authorize(Roles = \"Admin\")]\npublic IActionResult DeleteUser(int id) { }\n\n// Çoklu rol kontrolü (OR - herhangi biri)\n[Authorize(Roles = \"Admin,Moderator\")]\npublic IActionResult EditPost(int id) { }\n\n// Tüm roller gerekli (AND)\n[Authorize(Roles = \"Admin\")]\n[Authorize(Roles = \"SuperAdmin\")]\npublic IActionResult SystemSettings() { }",
+              "explanation": "Role-based authorization'ın farklı kullanım senaryolarını gösterir."
+            }
+          ]
+        },
+        {
+          "id": "role-implementation",
+          "title": "Role-Based Authorization Implementation",
+          "summary": "Role-based authorization'ın ASP.NET Core'da implementasyonu.",
+          "content": [
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// 1. Rolleri tanımla (Identity kullanıyorsan)\npublic async Task CreateRoles(IServiceProvider serviceProvider)\n{\n    var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();\n    \n    string[] roles = { \"Admin\", \"User\", \"Moderator\" };\n    \n    foreach (var role in roles)\n    {\n        var roleExists = await roleManager.RoleExistsAsync(role);\n        if (!roleExists)\n        {\n            await roleManager.CreateAsync(new IdentityRole(role));\n        }\n    }\n}\n\n// 2. Kullanıcıya rol ata\nvar user = await _userManager.FindByNameAsync(\"john\");\nawait _userManager.AddToRoleAsync(user, \"Admin\");\n\n// 3. Controller'da kullan\n[Authorize(Roles = \"Admin\")]\npublic class AdminController : Controller\n{\n    [HttpGet(\"users\")]\n    public IActionResult GetUsers() { }\n    \n    [HttpDelete(\"users/{id}\")]\n    public IActionResult DeleteUser(int id) { }\n}",
+              "explanation": "Role-based authorization'ın nasıl implement edildiğini gösterir."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-role-1",
+          "question": "Role-based authorization'da [Authorize(Roles = \"Admin,User\")] ne anlama gelir?",
+          "options": [
+            "Hem Admin hem User rolü gerekli",
+            "Admin veya User rolünden biri yeterli",
+            "Sadece Admin rolü gerekli",
+            "Sadece User rolü gerekli"
+          ],
+          "answer": "Admin veya User rolünden biri yeterli",
+          "rationale": "[Authorize(Roles = \"Admin,User\")] virgülle ayrılmış roller OR (veya) mantığıyla çalışır. Kullanıcının Admin veya User rolünden birine sahip olması yeterlidir."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-role-docs",
+          "label": "Role-Based Authorization - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/security/authorization/roles",
+          "type": "reading",
+          "estimatedMinutes": 35,
+          "description": "ASP.NET Core role-based authorization hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-role-1",
+          "title": "Role-Based Authorization Implementasyonu",
+          "description": "ASP.NET Core'da role-based authorization implementasyonu yap.",
+          "type": "coding",
+          "estimatedMinutes": 50,
+          "difficulty": "Orta",
+          "instructions": [
+            "Rolleri tanımla ve oluştur.",
+            "Kullanıcılara rol ata.",
+            "Controller'larda [Authorize(Roles = \"...\")] kullan.",
+            "Farklı rol kombinasyonlarını test et."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Claims-Based Authorization",
+      "href": "/education/lessons/authorization/claims/claims-authorization",
+      "description": "Claims-based authorization'ın ne olduğunu, nasıl çalıştığını ve ASP.NET Core'da nasıl implement edildiğini öğren. Claims-based authorization, rollere göre daha esnek bir yetkilendirme yöntemidir.",
+      "estimatedDurationMinutes": 60,
+      "level": "Orta",
+      "keyTakeaways": [
+        "Claims-based authorization'ın ne olduğunu ve nasıl çalıştığını öğreneceksin.",
+        "Claims ve ClaimsPrincipal kavramlarını anlayacaksın.",
+        "Claims oluşturma ve kullanma süreçlerini keşfedeceksin.",
+        "ASP.NET Core'da claims-based authorization'ı nasıl implement edeceğini kavrayacaksın.",
+        "Claims-based authorization best practice'lerini öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "claims-introduction",
+          "title": "Claims-Based Authorization Nedir?",
+          "summary": "Claims-based authorization kavramının temel tanımı.",
+          "content": [
+            {
+              "type": "text",
+              "body": "Claims-based authorization, kullanıcı hakkındaki bilgileri (claims) kullanarak yetkilendirme yapma yöntemidir. Claims, kullanıcı hakkında key-value çiftleri içeren bilgilerdir (örneğin: email, age, department vb.)."
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "Claims: Kullanıcı hakkında bilgi içeren key-value çiftleri",
+                "ClaimsPrincipal: Authenticated kullanıcıyı temsil eden nesne",
+                "ClaimsIdentity: Claims koleksiyonunu içeren kimlik",
+                "Flexible: Rollere göre daha esnek bir yöntem",
+                "Granular: Daha detaylı yetkilendirme kontrolü sağlar"
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Claims oluşturma\nvar claims = new List<Claim>\n{\n    new Claim(ClaimTypes.Name, \"John Doe\"),\n    new Claim(ClaimTypes.Email, \"john@example.com\"),\n    new Claim(\"Age\", \"30\"),\n    new Claim(\"Department\", \"IT\")\n};\n\n// ClaimsIdentity ve ClaimsPrincipal oluşturma\nvar identity = new ClaimsIdentity(claims, \"Custom\");\nvar principal = new ClaimsPrincipal(identity);\n\n// Claims kontrolü\nif (User.HasClaim(\"Department\", \"IT\"))\n{\n    // IT departmanı kullanıcısı\n}\n\n// Claim değerini alma\nvar email = User.FindFirst(ClaimTypes.Email)?.Value;",
+              "explanation": "Claims oluşturma, kullanma ve kontrol etme örneklerini gösterir."
+            }
+          ]
+        },
+        {
+          "id": "claims-implementation",
+          "title": "Claims-Based Authorization Implementation",
+          "summary": "Claims-based authorization'ın ASP.NET Core'da implementasyonu.",
+          "content": [
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Policy-based claims authorization\nservices.AddAuthorization(options =>\n{\n    options.AddPolicy(\"RequireEmail\", policy =>\n        policy.RequireClaim(ClaimTypes.Email));\n    \n    options.AddPolicy(\"RequireITDepartment\", policy =>\n        policy.RequireClaim(\"Department\", \"IT\"));\n    \n    options.AddPolicy(\"RequireAge18\", policy =>\n        policy.RequireClaim(\"Age\", \"18\", \"19\", \"20\"));\n});\n\n// Controller'da kullanım\n[Authorize(Policy = \"RequireEmail\")]\npublic IActionResult ViewProfile() { }\n\n[Authorize(Policy = \"RequireITDepartment\")]\npublic IActionResult ITResources() { }\n\n// Manuel claims kontrolü\npublic IActionResult CheckAge()\n{\n    var ageClaim = User.FindFirst(\"Age\");\n    if (ageClaim != null && int.Parse(ageClaim.Value) >= 18)\n    {\n        return Ok(\"Access granted\");\n    }\n    return Forbid();\n}",
+              "explanation": "Claims-based authorization'ın policy ve manuel kontrol yöntemlerini gösterir."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-claims-1",
+          "question": "Claims nedir?",
+          "options": [
+            "Kullanıcı rolleri",
+            "Kullanıcı hakkında bilgi içeren key-value çiftleri",
+            "Kullanıcı şifreleri",
+            "Kullanıcı token'ları"
+          ],
+          "answer": "Kullanıcı hakkında bilgi içeren key-value çiftleri",
+          "rationale": "Claims, kullanıcı hakkında bilgi içeren key-value çiftleridir. Örneğin: email, age, department gibi bilgiler claims olarak saklanabilir."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-claims-docs",
+          "label": "Claims-Based Authorization - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/security/authorization/claims",
+          "type": "reading",
+          "estimatedMinutes": 35,
+          "description": "ASP.NET Core claims-based authorization hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-claims-1",
+          "title": "Claims-Based Authorization Implementasyonu",
+          "description": "ASP.NET Core'da claims-based authorization implementasyonu yap.",
+          "type": "coding",
+          "estimatedMinutes": 55,
+          "difficulty": "Orta",
+          "instructions": [
+            "Claims oluştur ve kullanıcıya ata.",
+            "Policy-based claims authorization oluştur.",
+            "Controller'larda claims kontrolü yap.",
+            "Manuel claims kontrolü implement et."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Policy-Based Authorization",
+      "href": "/education/lessons/authorization/policy/policy-authorization",
+      "description": "Policy-based authorization'ın ne olduğunu, nasıl çalıştığını ve ASP.NET Core'da nasıl implement edildiğini öğren. Policy-based authorization, en esnek ve güçlü yetkilendirme yöntemidir.",
+      "estimatedDurationMinutes": 65,
+      "level": "İleri",
+      "keyTakeaways": [
+        "Policy-based authorization'ın ne olduğunu ve nasıl çalıştığını öğreneceksin.",
+        "Policy, Requirement ve Handler kavramlarını anlayacaksın.",
+        "Custom policy oluşturma süreçlerini keşfedeceksin.",
+        "ASP.NET Core'da policy-based authorization'ı nasıl implement edeceğini kavrayacaksın.",
+        "Policy-based authorization best practice'lerini öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "policy-introduction",
+          "title": "Policy-Based Authorization Nedir?",
+          "summary": "Policy-based authorization kavramının temel tanımı.",
+          "content": [
+            {
+              "type": "text",
+              "body": "Policy-based authorization, yetkilendirme kurallarını policy'ler olarak tanımlama yöntemidir. Policy'ler, Requirement ve Handler'lardan oluşur. Bu yöntem, rollere ve claims'lere göre daha esnek ve güçlü bir yetkilendirme sağlar."
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "Policy: Yetkilendirme kuralı (örneğin: \"CanEditPost\", \"RequireEmail\")",
+                "Requirement: Policy'nin gereksinimleri (örneğin: \"MinimumAgeRequirement\")",
+                "Handler: Requirement'ları kontrol eden sınıf (örneğin: \"MinimumAgeHandler\")",
+                "Flexible: Çok esnek ve özelleştirilebilir",
+                "Reusable: Policy'ler tekrar kullanılabilir"
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Basit policy tanımlama\nservices.AddAuthorization(options =>\n{\n    options.AddPolicy(\"RequireEmail\", policy =>\n        policy.RequireClaim(ClaimTypes.Email));\n    \n    options.AddPolicy(\"RequireAdminRole\", policy =>\n        policy.RequireRole(\"Admin\"));\n    \n    options.AddPolicy(\"RequireEmailAndAdmin\", policy =>\n    {\n        policy.RequireClaim(ClaimTypes.Email);\n        policy.RequireRole(\"Admin\");\n    });\n});\n\n// Controller'da kullanım\n[Authorize(Policy = \"RequireEmail\")]\npublic IActionResult ViewProfile() { }",
+              "explanation": "Basit policy tanımlama ve kullanım örneklerini gösterir."
+            }
+          ]
+        },
+        {
+          "id": "custom-policy",
+          "title": "Custom Policy Oluşturma",
+          "summary": "Custom policy, requirement ve handler oluşturma.",
+          "content": [
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// 1. Requirement oluştur\npublic class MinimumAgeRequirement : IAuthorizationRequirement\n{\n    public int MinimumAge { get; }\n    \n    public MinimumAgeRequirement(int minimumAge)\n    {\n        MinimumAge = minimumAge;\n    }\n}\n\n// 2. Handler oluştur\npublic class MinimumAgeHandler : AuthorizationHandler<MinimumAgeRequirement>\n{\n    protected override Task HandleRequirementAsync(\n        AuthorizationHandlerContext context,\n        MinimumAgeRequirement requirement)\n    {\n        var ageClaim = context.User.FindFirst(\"Age\");\n        \n        if (ageClaim != null && int.Parse(ageClaim.Value) >= requirement.MinimumAge)\n        {\n            context.Succeed(requirement);\n        }\n        \n        return Task.CompletedTask;\n    }\n}\n\n// 3. Policy'yi kaydet\nservices.AddAuthorization(options =>\n{\n    options.AddPolicy(\"RequireAge18\", policy =>\n        policy.Requirements.Add(new MinimumAgeRequirement(18)));\n});\n\nservices.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();\n\n// 4. Kullanım\n[Authorize(Policy = \"RequireAge18\")]\npublic IActionResult AdultContent() { }",
+              "explanation": "Custom policy, requirement ve handler oluşturma sürecini gösterir."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-policy-1",
+          "question": "Policy-based authorization'ın avantajı nedir?",
+          "options": [
+            "Daha basit",
+            "Daha esnek ve özelleştirilebilir",
+            "Daha hızlı",
+            "Daha güvenli"
+          ],
+          "answer": "Daha esnek ve özelleştirilebilir",
+          "rationale": "Policy-based authorization, rollere ve claims'lere göre daha esnek ve özelleştirilebilir bir yöntemdir. Custom requirement ve handler'lar oluşturarak karmaşık yetkilendirme kuralları tanımlayabilirsin."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-policy-docs",
+          "label": "Policy-Based Authorization - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/security/authorization/policies",
+          "type": "reading",
+          "estimatedMinutes": 40,
+          "description": "ASP.NET Core policy-based authorization hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-policy-1",
+          "title": "Policy-Based Authorization Implementasyonu",
+          "description": "ASP.NET Core'da custom policy-based authorization implementasyonu yap.",
+          "type": "coding",
+          "estimatedMinutes": 60,
+          "difficulty": "İleri",
+          "instructions": [
+            "Custom requirement oluştur.",
+            "Custom handler oluştur.",
+            "Policy'yi kaydet ve yapılandır.",
+            "Controller'larda policy kullan.",
+            "Test et ve doğrula."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "ASP.NET Core Identity Framework Nedir?",
+      "href": "/education/lessons/authentication/identity/identity-framework",
+      "description": "ASP.NET Core Identity framework'ünün ne olduğunu, nasıl çalıştığını ve neden önemli olduğunu öğren. Identity framework, kullanıcı yönetimi, authentication ve authorization için kapsamlı bir çözümdür. Bu ders, Authentication & Authorization modülünün Faz 3'ünün ilk dersidir.",
+      "estimatedDurationMinutes": 60,
+      "level": "Orta",
+      "keyTakeaways": [
+        "ASP.NET Core Identity framework'ünün ne olduğunu ve nasıl çalıştığını öğreneceksin.",
+        "Identity framework'ün sağladığı özellikleri anlayacaksın.",
+        "Identity framework'ün avantajlarını keşfedeceksin.",
+        "ASP.NET Core'da Identity framework'ü nasıl yapılandıracağını kavrayacaksın.",
+        "Identity framework best practice'lerini öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "identity-introduction",
+          "title": "ASP.NET Core Identity Nedir?",
+          "summary": "Identity framework'ün temel tanımı ve özellikleri.",
+          "content": [
+            {
+              "type": "text",
+              "body": "ASP.NET Core Identity, kullanıcı yönetimi, authentication ve authorization için Microsoft tarafından sağlanan kapsamlı bir framework'tür. Kullanıcı kaydı, login, password hashing, email confirmation, password reset, role management ve claims management gibi özellikler sağlar."
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "User Management: Kullanıcı oluşturma, güncelleme, silme işlemleri",
+                "Password Hashing: Şifreleri güvenli bir şekilde hash'leme (PBKDF2)",
+                "Email Confirmation: Email doğrulama sistemi",
+                "Password Reset: Şifre sıfırlama mekanizması",
+                "Role Management: Rol yönetimi (Admin, User vb.)",
+                "Claims Management: Claims yönetimi",
+                "Two-Factor Authentication: İki faktörlü kimlik doğrulama desteği",
+                "External Login: OAuth sağlayıcıları ile giriş (Google, Facebook vb.)"
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Identity framework yapılandırması\nservices.AddIdentity<IdentityUser, IdentityRole>(options =>\n{\n    // Password ayarları\n    options.Password.RequireDigit = true;\n    options.Password.RequiredLength = 8;\n    options.Password.RequireNonAlphanumeric = true;\n    options.Password.RequireUppercase = true;\n    options.Password.RequireLowercase = true;\n    \n    // User ayarları\n    options.User.RequireUniqueEmail = true;\n    options.SignIn.RequireConfirmedEmail = true;\n    \n    // Lockout ayarları\n    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);\n    options.Lockout.MaxFailedAccessAttempts = 5;\n})\n.AddEntityFrameworkStores<ApplicationDbContext>()\n.AddDefaultTokenProviders();",
+              "explanation": "ASP.NET Core Identity framework'ünün nasıl yapılandırıldığını gösterir."
+            }
+          ]
+        },
+        {
+          "id": "identity-features",
+          "title": "Identity Framework Özellikleri",
+          "summary": "Identity framework'ün sağladığı özellikler.",
+          "content": [
+            {
+              "type": "text",
+              "body": "Identity framework, kullanıcı yönetimi için gerekli tüm özellikleri sağlar. Bu özellikler, güvenli ve ölçeklenebilir kullanıcı yönetimi sistemleri oluşturmanı sağlar."
+            },
+            {
+              "type": "list",
+              "ordered": true,
+              "items": [
+                "User Store: Kullanıcı bilgilerini veritabanında saklama",
+                "Password Hashing: PBKDF2 algoritması ile güvenli şifre hash'leme",
+                "Token Providers: Email confirmation ve password reset için token üretme",
+                "Role Store: Rol bilgilerini veritabanında saklama",
+                "Claims Store: Claims bilgilerini veritabanında saklama",
+                "SignIn Manager: Login, logout işlemleri",
+                "User Manager: Kullanıcı CRUD işlemleri",
+                "Role Manager: Rol CRUD işlemleri"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "identity-implementation",
+          "title": "Identity Framework Implementation",
+          "summary": "Identity framework'ün ASP.NET Core'da implementasyonu.",
+          "content": [
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// 1. DbContext oluştur\npublic class ApplicationDbContext : IdentityDbContext<IdentityUser>\n{\n    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)\n        : base(options)\n    {\n    }\n}\n\n// 2. Migration oluştur\ndotnet ef migrations add InitialIdentity\n\n// 3. Database'i güncelle\ndotnet ef database update\n\n// 4. User Manager kullanımı\npublic class AccountController : Controller\n{\n    private readonly UserManager<IdentityUser> _userManager;\n    private readonly SignInManager<IdentityUser> _signInManager;\n    \n    public AccountController(\n        UserManager<IdentityUser> userManager,\n        SignInManager<IdentityUser> signInManager)\n    {\n        _userManager = userManager;\n        _signInManager = signInManager;\n    }\n    \n    [HttpPost(\"register\")]\n    public async Task<IActionResult> Register(RegisterModel model)\n    {\n        var user = new IdentityUser { UserName = model.Email, Email = model.Email };\n        var result = await _userManager.CreateAsync(user, model.Password);\n        \n        if (result.Succeeded)\n        {\n            await _signInManager.SignInAsync(user, isPersistent: false);\n            return Ok(new { message = \"Registration successful\" });\n        }\n        \n        return BadRequest(result.Errors);\n    }\n    \n    [HttpPost(\"login\")]\n    public async Task<IActionResult> Login(LoginModel model)\n    {\n        var result = await _signInManager.PasswordSignInAsync(\n            model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);\n        \n        if (result.Succeeded)\n        {\n            return Ok(new { message = \"Login successful\" });\n        }\n        \n        return Unauthorized(new { message = \"Invalid credentials\" });\n    }\n}",
+              "explanation": "Identity framework'ün nasıl implement edildiğini ve UserManager, SignInManager kullanımını gösterir."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-identity-1",
+          "question": "ASP.NET Core Identity framework ne sağlar?",
+          "options": [
+            "Sadece authentication",
+            "Kullanıcı yönetimi, authentication ve authorization",
+            "Sadece authorization",
+            "Sadece password hashing"
+          ],
+          "answer": "Kullanıcı yönetimi, authentication ve authorization",
+          "rationale": "ASP.NET Core Identity framework, kullanıcı yönetimi, authentication ve authorization için kapsamlı bir çözümdür. User management, password hashing, role management, claims management gibi özellikler sağlar."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-identity-docs",
+          "label": "ASP.NET Core Identity - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/security/authentication/identity",
+          "type": "reading",
+          "estimatedMinutes": 40,
+          "description": "ASP.NET Core Identity framework hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-identity-1",
+          "title": "Identity Framework Implementasyonu",
+          "description": "ASP.NET Core'da Identity framework implementasyonu yap.",
+          "type": "coding",
+          "estimatedMinutes": 60,
+          "difficulty": "Orta",
+          "instructions": [
+            "Identity framework'ü yapılandır.",
+            "DbContext oluştur ve migration yap.",
+            "User registration endpoint'i oluştur.",
+            "Login endpoint'i oluştur.",
+            "UserManager ve SignInManager kullan."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "User Management ve Password Hashing",
+      "href": "/education/lessons/authentication/identity/user-management",
+      "description": "Identity framework ile kullanıcı yönetimi, password hashing, email confirmation ve password reset işlemlerini öğren. Bu ders, Identity framework'ün temel kullanıcı yönetimi özelliklerini kapsar.",
+      "estimatedDurationMinutes": 65,
+      "level": "Orta",
+      "keyTakeaways": [
+        "UserManager ile kullanıcı yönetimi işlemlerini öğreneceksin.",
+        "Password hashing ve güvenliği anlayacaksın.",
+        "Email confirmation sürecini keşfedeceksin.",
+        "Password reset mekanizmasını kavrayacaksın.",
+        "User management best practice'lerini öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "user-management",
+          "title": "User Management",
+          "summary": "UserManager ile kullanıcı yönetimi işlemleri.",
+          "content": [
+            {
+              "type": "text",
+              "body": "UserManager, Identity framework'ün kullanıcı yönetimi için sağladığı servistir. Kullanıcı oluşturma, güncelleme, silme, password yönetimi, email confirmation gibi işlemleri yapmanı sağlar."
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// UserManager kullanımı\npublic class UserService\n{\n    private readonly UserManager<IdentityUser> _userManager;\n    \n    public UserService(UserManager<IdentityUser> userManager)\n    {\n        _userManager = userManager;\n    }\n    \n    // Kullanıcı oluştur\n    public async Task<IdentityResult> CreateUserAsync(string email, string password)\n    {\n        var user = new IdentityUser { UserName = email, Email = email };\n        return await _userManager.CreateAsync(user, password);\n    }\n    \n    // Kullanıcı bul\n    public async Task<IdentityUser> FindByEmailAsync(string email)\n    {\n        return await _userManager.FindByEmailAsync(email);\n    }\n    \n    // Şifre değiştir\n    public async Task<IdentityResult> ChangePasswordAsync(\n        IdentityUser user, string currentPassword, string newPassword)\n    {\n        return await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);\n    }\n    \n    // Email confirmation token oluştur\n    public async Task<string> GenerateEmailConfirmationTokenAsync(IdentityUser user)\n    {\n        return await _userManager.GenerateEmailConfirmationTokenAsync(user);\n    }\n    \n    // Email confirmation\n    public async Task<IdentityResult> ConfirmEmailAsync(IdentityUser user, string token)\n    {\n        return await _userManager.ConfirmEmailAsync(user, token);\n    }\n}",
+              "explanation": "UserManager ile kullanıcı yönetimi işlemlerini gösterir."
+            }
+          ]
+        },
+        {
+          "id": "password-hashing",
+          "title": "Password Hashing",
+          "summary": "Password hashing ve güvenliği.",
+          "content": [
+            {
+              "type": "text",
+              "body": "Identity framework, şifreleri PBKDF2 algoritması ile hash'ler. Bu algoritma, şifreleri güvenli bir şekilde saklamanı sağlar. Şifreler asla plain text olarak saklanmaz."
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "PBKDF2: Password-Based Key Derivation Function 2 algoritması",
+                "Salt: Her şifre için unique salt kullanılır",
+                "Iterations: Hash işlemi binlerce kez tekrarlanır (default: 100,000)",
+                "One-Way: Hash'ler geri dönüştürülemez",
+                "Secure: Rainbow table saldırılarına karşı koruma sağlar"
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Password hashing otomatik olarak yapılır\nvar user = new IdentityUser { UserName = \"john\", Email = \"john@example.com\" };\nvar result = await _userManager.CreateAsync(user, \"MySecurePassword123!\");\n\n// Identity framework otomatik olarak:\n// 1. Salt oluşturur\n// 2. PBKDF2 ile hash'ler\n// 3. Veritabanına kaydeder\n\n// Password doğrulama\nvar user = await _userManager.FindByEmailAsync(\"john@example.com\");\nvar isValid = await _userManager.CheckPasswordAsync(user, \"MySecurePassword123!\");",
+              "explanation": "Password hashing'in otomatik olarak nasıl yapıldığını ve password doğrulama sürecini gösterir."
+            }
+          ]
+        },
+        {
+          "id": "email-confirmation",
+          "title": "Email Confirmation",
+          "summary": "Email confirmation süreci.",
+          "content": [
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Email confirmation token oluştur ve gönder\n[HttpPost(\"register\")]\npublic async Task<IActionResult> Register(RegisterModel model)\n{\n    var user = new IdentityUser { UserName = model.Email, Email = model.Email };\n    var result = await _userManager.CreateAsync(user, model.Password);\n    \n    if (result.Succeeded)\n    {\n        // Email confirmation token oluştur\n        var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);\n        var confirmationLink = Url.Action(\"ConfirmEmail\", \"Account\", \n            new { userId = user.Id, token = token }, Request.Scheme);\n        \n        // Email gönder (Email servisi kullan)\n        await _emailService.SendConfirmationEmailAsync(user.Email, confirmationLink);\n        \n        return Ok(new { message = \"Registration successful. Please confirm your email.\" });\n    }\n    \n    return BadRequest(result.Errors);\n}\n\n// Email confirmation endpoint\n[HttpGet(\"confirm-email\")]\npublic async Task<IActionResult> ConfirmEmail(string userId, string token)\n{\n    var user = await _userManager.FindByIdAsync(userId);\n    if (user == null)\n    {\n        return NotFound();\n    }\n    \n    var result = await _userManager.ConfirmEmailAsync(user, token);\n    \n    if (result.Succeeded)\n    {\n        return Ok(new { message = \"Email confirmed successfully\" });\n    }\n    \n    return BadRequest(result.Errors);\n}",
+              "explanation": "Email confirmation sürecini gösterir."
+            }
+          ]
+        },
+        {
+          "id": "password-reset",
+          "title": "Password Reset",
+          "summary": "Password reset mekanizması.",
+          "content": [
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Password reset token oluştur ve gönder\n[HttpPost(\"forgot-password\")]\npublic async Task<IActionResult> ForgotPassword(string email)\n{\n    var user = await _userManager.FindByEmailAsync(email);\n    if (user == null || !await _userManager.IsEmailConfirmedAsync(user))\n    {\n        // Güvenlik için: Kullanıcı bulunamadı mesajı göster\n        return Ok(new { message = \"If the email exists, a reset link has been sent.\" });\n    }\n    \n    var token = await _userManager.GeneratePasswordResetTokenAsync(user);\n    var resetLink = Url.Action(\"ResetPassword\", \"Account\", \n        new { userId = user.Id, token = token }, Request.Scheme);\n    \n    await _emailService.SendPasswordResetEmailAsync(user.Email, resetLink);\n    \n    return Ok(new { message = \"Password reset link has been sent.\" });\n}\n\n// Password reset endpoint\n[HttpPost(\"reset-password\")]\npublic async Task<IActionResult> ResetPassword(ResetPasswordModel model)\n{\n    var user = await _userManager.FindByIdAsync(model.UserId);\n    if (user == null)\n    {\n        return NotFound();\n    }\n    \n    var result = await _userManager.ResetPasswordAsync(user, model.Token, model.NewPassword);\n    \n    if (result.Succeeded)\n    {\n        return Ok(new { message = \"Password reset successfully\" });\n    }\n    \n    return BadRequest(result.Errors);\n}",
+              "explanation": "Password reset sürecini gösterir."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-user-mgmt-1",
+          "question": "Identity framework hangi algoritma ile password hash'ler?",
+          "options": [
+            "MD5",
+            "SHA256",
+            "PBKDF2",
+            "BCrypt"
+          ],
+          "answer": "PBKDF2",
+          "rationale": "Identity framework, şifreleri PBKDF2 (Password-Based Key Derivation Function 2) algoritması ile hash'ler. Bu algoritma, güvenli ve modern bir password hashing yöntemidir."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-user-mgmt-docs",
+          "label": "User Management - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/security/authentication/identity",
+          "type": "reading",
+          "estimatedMinutes": 35,
+          "description": "Identity framework user management hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-user-mgmt-1",
+          "title": "User Management Implementasyonu",
+          "description": "Identity framework ile user management implementasyonu yap.",
+          "type": "coding",
+          "estimatedMinutes": 65,
+          "difficulty": "Orta",
+          "instructions": [
+            "User registration endpoint'i oluştur.",
+            "Email confirmation mekanizması ekle.",
+            "Password reset mekanizması ekle.",
+            "UserManager kullanarak kullanıcı yönetimi yap."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Role ve Claims Management",
+      "href": "/education/lessons/authentication/identity/role-claims-management",
+      "description": "Identity framework ile rol yönetimi ve claims yönetimi işlemlerini öğren. Rolleri oluşturma, kullanıcılara atama ve claims ekleme işlemlerini kapsar.",
+      "estimatedDurationMinutes": 60,
+      "level": "Orta",
+      "keyTakeaways": [
+        "RoleManager ile rol yönetimi işlemlerini öğreneceksin.",
+        "Kullanıcılara rol atama sürecini anlayacaksın.",
+        "Claims ekleme ve yönetimi süreçlerini keşfedeceksin.",
+        "Role ve claims tabanlı authorization'ı kavrayacaksın.",
+        "Role ve claims management best practice'lerini öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "role-management",
+          "title": "Role Management",
+          "summary": "RoleManager ile rol yönetimi işlemleri.",
+          "content": [
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// RoleManager kullanımı\npublic class RoleService\n{\n    private readonly RoleManager<IdentityRole> _roleManager;\n    private readonly UserManager<IdentityUser> _userManager;\n    \n    public RoleService(\n        RoleManager<IdentityRole> roleManager,\n        UserManager<IdentityUser> userManager)\n    {\n        _roleManager = roleManager;\n        _userManager = userManager;\n    }\n    \n    // Rol oluştur\n    public async Task<IdentityResult> CreateRoleAsync(string roleName)\n    {\n        var role = new IdentityRole(roleName);\n        return await _roleManager.CreateAsync(role);\n    }\n    \n    // Kullanıcıya rol ata\n    public async Task<IdentityResult> AddUserToRoleAsync(\n        IdentityUser user, string roleName)\n    {\n        return await _userManager.AddToRoleAsync(user, roleName);\n    }\n    \n    // Kullanıcının rollerini kontrol et\n    public async Task<bool> IsInRoleAsync(IdentityUser user, string roleName)\n    {\n        return await _userManager.IsInRoleAsync(user, roleName);\n    }\n    \n    // Kullanıcının tüm rollerini al\n    public async Task<IList<string>> GetUserRolesAsync(IdentityUser user)\n    {\n        return await _userManager.GetRolesAsync(user);\n    }\n}",
+              "explanation": "RoleManager ile rol yönetimi işlemlerini gösterir."
+            }
+          ]
+        },
+        {
+          "id": "claims-management",
+          "title": "Claims Management",
+          "summary": "Claims ekleme ve yönetimi.",
+          "content": [
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Claims ekleme\npublic async Task AddClaimToUserAsync(IdentityUser user, string claimType, string claimValue)\n{\n    var claim = new Claim(claimType, claimValue);\n    await _userManager.AddClaimAsync(user, claim);\n}\n\n// Kullanıcının claims'lerini al\npublic async Task<IList<Claim>> GetUserClaimsAsync(IdentityUser user)\n{\n    return await _userManager.GetClaimsAsync(user);\n}\n\n// Claim silme\npublic async Task RemoveClaimFromUserAsync(IdentityUser user, Claim claim)\n{\n    await _userManager.RemoveClaimAsync(user, claim);\n}\n\n// Rol claims'leri (rol atandığında otomatik claims eklenir)\npublic async Task AddUserToRoleWithClaimsAsync(IdentityUser user, string roleName)\n{\n    await _userManager.AddToRoleAsync(user, roleName);\n    // Rol atandığında, role-based claims otomatik eklenir\n}",
+              "explanation": "Claims yönetimi işlemlerini gösterir."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-role-claims-1",
+          "question": "Kullanıcıya rol atandığında ne olur?",
+          "options": [
+            "Sadece rol atanır",
+            "Rol atanır ve role-based claims otomatik eklenir",
+            "Sadece claims eklenir",
+            "Hiçbir şey olmaz"
+          ],
+          "answer": "Rol atanır ve role-based claims otomatik eklenir",
+          "rationale": "Kullanıcıya rol atandığında, Identity framework otomatik olarak role-based claims ekler. Bu sayede [Authorize(Roles = \"Admin\")] gibi kontroller çalışır."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-role-claims-docs",
+          "label": "Role and Claims Management - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/security/authentication/identity",
+          "type": "reading",
+          "estimatedMinutes": 30,
+          "description": "Identity framework role ve claims management hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-role-claims-1",
+          "title": "Role ve Claims Management Implementasyonu",
+          "description": "Identity framework ile role ve claims management implementasyonu yap.",
+          "type": "coding",
+          "estimatedMinutes": 55,
+          "difficulty": "Orta",
+          "instructions": [
+            "Rolleri oluştur.",
+            "Kullanıcılara rol ata.",
+            "Claims ekle ve yönet.",
+            "Role ve claims tabanlı authorization test et."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Custom User Model ve Identity Özelleştirme",
+      "href": "/education/lessons/authentication/identity/custom-user-model",
+      "description": "Identity framework'ü özelleştirme, custom user model oluşturma ve Identity tablolarını genişletme işlemlerini öğren. Bu ders, Identity framework'ü kendi ihtiyaçlarına göre özelleştirmeyi kapsar.",
+      "estimatedDurationMinutes": 70,
+      "level": "İleri",
+      "keyTakeaways": [
+        "Custom user model oluşturmayı öğreneceksin.",
+        "Identity tablolarını genişletmeyi anlayacaksın.",
+        "Identity özelleştirme tekniklerini keşfedeceksin.",
+        "Custom user properties eklemeyi kavrayacaksın.",
+        "Identity özelleştirme best practice'lerini öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "custom-user-model",
+          "title": "Custom User Model",
+          "summary": "Custom user model oluşturma.",
+          "content": [
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Custom user model\npublic class ApplicationUser : IdentityUser\n{\n    public string FirstName { get; set; }\n    public string LastName { get; set; }\n    public DateTime DateOfBirth { get; set; }\n    public string ProfilePictureUrl { get; set; }\n    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;\n    public DateTime? LastLoginAt { get; set; }\n}\n\n// Custom DbContext\npublic class ApplicationDbContext : IdentityDbContext<ApplicationUser>\n{\n    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)\n        : base(options)\n    {\n    }\n    \n    protected override void OnModelCreating(ModelBuilder builder)\n    {\n        base.OnModelCreating(builder);\n        // Custom configurations\n    }\n}\n\n// Identity yapılandırması\nservices.AddIdentity<ApplicationUser, IdentityRole>(options =>\n{\n    // Options\n})\n.AddEntityFrameworkStores<ApplicationDbContext>()\n.AddDefaultTokenProviders();",
+              "explanation": "Custom user model oluşturma ve Identity yapılandırmasını gösterir."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-custom-1",
+          "question": "Custom user model oluştururken hangi sınıftan türetilir?",
+          "options": [
+            "IdentityUser",
+            "User",
+            "ApplicationUser",
+            "BaseUser"
+          ],
+          "answer": "IdentityUser",
+          "rationale": "Custom user model, IdentityUser sınıfından türetilmelidir. Bu sayede Identity framework'ün tüm özelliklerini kullanabilirsin."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-custom-docs",
+          "label": "Custom User Model - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/security/authentication/identity",
+          "type": "reading",
+          "estimatedMinutes": 35,
+          "description": "Identity framework custom user model hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-custom-1",
+          "title": "Custom User Model Implementasyonu",
+          "description": "Identity framework ile custom user model implementasyonu yap.",
+          "type": "coding",
+          "estimatedMinutes": 60,
+          "difficulty": "İleri",
+          "instructions": [
+            "Custom user model oluştur.",
+            "Custom properties ekle.",
+            "DbContext'i güncelle.",
+            "Migration oluştur ve uygula."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "OAuth 2.0 ve External Authentication",
+      "href": "/education/lessons/authentication/oauth/oauth2-external-auth",
+      "description": "OAuth 2.0 protokolünün ne olduğunu, nasıl çalıştığını ve ASP.NET Core'da external authentication (Google, Facebook, Microsoft vb.) implementasyonunu öğren. Bu ders, Authentication & Authorization modülünün Faz 4'ünün ilk dersidir.",
+      "estimatedDurationMinutes": 70,
+      "level": "İleri",
+      "keyTakeaways": [
+        "OAuth 2.0 protokolünün ne olduğunu ve nasıl çalıştığını öğreneceksin.",
+        "OAuth 2.0 flow'larını (Authorization Code, Client Credentials vb.) anlayacaksın.",
+        "External authentication sağlayıcılarını (Google, Facebook, Microsoft) keşfedeceksin.",
+        "ASP.NET Core'da OAuth 2.0 implementasyonunu kavrayacaksın.",
+        "OAuth 2.0 güvenliği ve best practice'lerini öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "oauth-introduction",
+          "title": "OAuth 2.0 Nedir?",
+          "summary": "OAuth 2.0 protokolünün temel tanımı.",
+          "content": [
+            {
+              "type": "text",
+              "body": "OAuth 2.0, üçüncü parti uygulamalara kullanıcı kaynaklarına sınırlı erişim sağlayan bir yetkilendirme protokolüdür. Kullanıcılar, şifrelerini paylaşmadan uygulamalara erişim izni verebilir."
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "Authorization Protocol: Yetkilendirme protokolü (authentication değil)",
+                "Third-Party Access: Üçüncü parti uygulamalara erişim sağlar",
+                "Token-Based: Access token kullanır",
+                "Scopes: Erişim kapsamlarını (scopes) tanımlar",
+                "Standard: RFC 6749 standardına uygundur"
+              ]
+            },
+            {
+              "type": "code",
+              "language": "text",
+              "code": "OAuth 2.0 Flow:\n\n1. Client (uygulama) kullanıcıyı Authorization Server'a yönlendirir\n2. Kullanıcı Authorization Server'da login yapar ve izin verir\n3. Authorization Server, Client'a authorization code döner\n4. Client, authorization code'u access token ile değiştirir\n5. Client, access token ile Resource Server'dan kaynaklara erişir",
+              "explanation": "OAuth 2.0 flow'unun temel adımlarını gösterir."
+            }
+          ]
+        },
+        {
+          "id": "external-authentication",
+          "title": "External Authentication",
+          "summary": "Google, Facebook, Microsoft gibi external sağlayıcılarla authentication.",
+          "content": [
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Google Authentication yapılandırması\nservices.AddAuthentication()\n    .AddGoogle(options =>\n    {\n        options.ClientId = configuration[\"Google:ClientId\"];\n        options.ClientSecret = configuration[\"Google:ClientSecret\"];\n    });\n\n// Facebook Authentication\nservices.AddAuthentication()\n    .AddFacebook(options =>\n    {\n        options.AppId = configuration[\"Facebook:AppId\"];\n        options.AppSecret = configuration[\"Facebook:AppSecret\"];\n    });\n\n// Microsoft Authentication\nservices.AddAuthentication()\n    .AddMicrosoftAccount(options =>\n    {\n        options.ClientId = configuration[\"Microsoft:ClientId\"];\n        options.ClientSecret = configuration[\"Microsoft:ClientSecret\"];\n    });\n\n// Challenge endpoint\n[HttpGet(\"login-google\")]\npublic IActionResult LoginGoogle()\n{\n    var redirectUrl = Url.Action(\"ExternalLoginCallback\", \"Account\");\n    var properties = _signInManager.ConfigureExternalAuthenticationProperties(\"Google\", redirectUrl);\n    return Challenge(properties, \"Google\");\n}\n\n// Callback endpoint\n[HttpGet(\"external-login-callback\")]\npublic async Task<IActionResult> ExternalLoginCallback()\n{\n    var info = await _signInManager.GetExternalLoginInfoAsync();\n    if (info == null)\n    {\n        return RedirectToAction(\"Login\");\n    }\n    \n    // Kullanıcıyı bul veya oluştur\n    var user = await _userManager.FindByEmailAsync(info.Principal.FindFirstValue(ClaimTypes.Email));\n    if (user == null)\n    {\n        user = new IdentityUser { UserName = info.Principal.FindFirstValue(ClaimTypes.Email) };\n        await _userManager.CreateAsync(user);\n    }\n    \n    await _signInManager.SignInAsync(user, isPersistent: false);\n    return RedirectToAction(\"Index\", \"Home\");\n}",
+              "explanation": "External authentication sağlayıcılarının yapılandırılmasını ve kullanımını gösterir."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-oauth-1",
+          "question": "OAuth 2.0 ne sağlar?",
+          "options": [
+            "Authentication",
+            "Authorization",
+            "Hem authentication hem authorization",
+            "Sadece token"
+          ],
+          "answer": "Authorization",
+          "rationale": "OAuth 2.0 bir yetkilendirme (authorization) protokolüdür, authentication protokolü değildir. Ancak OpenID Connect ile birlikte kullanıldığında authentication da sağlar."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-oauth-docs",
+          "label": "OAuth 2.0 - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/security/authentication/social/",
+          "type": "reading",
+          "estimatedMinutes": 40,
+          "description": "ASP.NET Core OAuth 2.0 ve external authentication hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-oauth-1",
+          "title": "OAuth 2.0 Implementasyonu",
+          "description": "ASP.NET Core'da OAuth 2.0 ve external authentication implementasyonu yap.",
+          "type": "coding",
+          "estimatedMinutes": 70,
+          "difficulty": "İleri",
+          "instructions": [
+            "Google OAuth yapılandırması yap.",
+            "Facebook OAuth yapılandırması yap.",
+            "External login endpoint'leri oluştur.",
+            "Callback endpoint'i oluştur.",
+            "Test et ve doğrula."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "OpenID Connect",
+      "href": "/education/lessons/authentication/openid/openid-connect",
+      "description": "OpenID Connect'in ne olduğunu, OAuth 2.0 ile ilişkisini ve ASP.NET Core'da nasıl implement edildiğini öğren. OpenID Connect, OAuth 2.0 üzerine kurulu bir kimlik doğrulama protokolüdür.",
+      "estimatedDurationMinutes": 65,
+      "level": "İleri",
+      "keyTakeaways": [
+        "OpenID Connect'in ne olduğunu ve nasıl çalıştığını öğreneceksin.",
+        "OAuth 2.0 ile OpenID Connect arasındaki farkı anlayacaksın.",
+        "ID Token ve Access Token kavramlarını keşfedeceksin.",
+        "ASP.NET Core'da OpenID Connect implementasyonunu kavrayacaksın.",
+        "OpenID Connect güvenliği ve best practice'lerini öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "openid-introduction",
+          "title": "OpenID Connect Nedir?",
+          "summary": "OpenID Connect kavramının temel tanımı.",
+          "content": [
+            {
+              "type": "text",
+              "body": "OpenID Connect (OIDC), OAuth 2.0 üzerine kurulu bir kimlik doğrulama (authentication) protokolüdür. OAuth 2.0 sadece yetkilendirme (authorization) sağlarken, OpenID Connect hem authentication hem de authorization sağlar."
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "Authentication Protocol: Kimlik doğrulama protokolü",
+                "Built on OAuth 2.0: OAuth 2.0 üzerine kurulu",
+                "ID Token: Kullanıcı kimlik bilgilerini içeren JWT token",
+                "Access Token: Kaynaklara erişim için kullanılan token",
+                "UserInfo Endpoint: Kullanıcı bilgilerini almak için endpoint"
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// OpenID Connect yapılandırması\nservices.AddAuthentication(options =>\n{\n    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;\n    options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;\n})\n.AddCookie()\n.AddOpenIdConnect(options =>\n{\n    options.Authority = \"https://your-identity-provider.com\";\n    options.ClientId = \"your-client-id\";\n    options.ClientSecret = \"your-client-secret\";\n    options.ResponseType = \"code\";\n    options.SaveTokens = true;\n    options.Scope.Add(\"openid\");\n    options.Scope.Add(\"profile\");\n    options.Scope.Add(\"email\");\n});",
+              "explanation": "OpenID Connect yapılandırmasını gösterir."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-openid-1",
+          "question": "OpenID Connect ve OAuth 2.0 arasındaki fark nedir?",
+          "options": [
+            "Aynı şeydir",
+            "OpenID Connect authentication sağlar, OAuth 2.0 sadece authorization",
+            "OAuth 2.0 authentication sağlar, OpenID Connect sadece authorization",
+            "Hiçbir fark yoktur"
+          ],
+          "answer": "OpenID Connect authentication sağlar, OAuth 2.0 sadece authorization",
+          "rationale": "OAuth 2.0 sadece yetkilendirme (authorization) sağlar. OpenID Connect ise OAuth 2.0 üzerine kurulu olup hem authentication hem de authorization sağlar."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-openid-docs",
+          "label": "OpenID Connect - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/security/authentication/openid-connect",
+          "type": "reading",
+          "estimatedMinutes": 35,
+          "description": "ASP.NET Core OpenID Connect hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-openid-1",
+          "title": "OpenID Connect Implementasyonu",
+          "description": "ASP.NET Core'da OpenID Connect implementasyonu yap.",
+          "type": "coding",
+          "estimatedMinutes": 65,
+          "difficulty": "İleri",
+          "instructions": [
+            "OpenID Connect yapılandırması yap.",
+            "Identity provider ayarlarını yapılandır.",
+            "ID Token ve Access Token kullanımını test et.",
+            "UserInfo endpoint'ini kullan."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Custom Authentication Handler",
+      "href": "/education/lessons/authentication/custom/custom-authentication",
+      "description": "Custom authentication handler oluşturma, özel authentication şemaları geliştirme ve authentication middleware'i özelleştirme işlemlerini öğren. Bu ders, özel authentication gereksinimleri için custom handler geliştirmeyi kapsar.",
+      "estimatedDurationMinutes": 75,
+      "level": "İleri",
+      "keyTakeaways": [
+        "Custom authentication handler oluşturmayı öğreneceksin.",
+        "Authentication scheme kavramını anlayacaksın.",
+        "Custom authentication middleware geliştirmeyi keşfedeceksin.",
+        "Özel authentication gereksinimlerini karşılamayı kavrayacaksın.",
+        "Custom authentication best practice'lerini öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "custom-handler",
+          "title": "Custom Authentication Handler",
+          "summary": "Custom authentication handler oluşturma.",
+          "content": [
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Custom authentication handler\npublic class ApiKeyAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>\n{\n    private const string API_KEY_HEADER = \"X-API-Key\";\n    \n    public ApiKeyAuthenticationHandler(\n        IOptionsMonitor<AuthenticationSchemeOptions> options,\n        ILoggerFactory logger,\n        UrlEncoder encoder,\n        ISystemClock clock)\n        : base(options, logger, encoder, clock)\n    {\n    }\n    \n    protected override async Task<AuthenticateResult> HandleAuthenticateAsync()\n    {\n        if (!Request.Headers.TryGetValue(API_KEY_HEADER, out var apiKeyHeaderValues))\n        {\n            return AuthenticateResult.Fail(\"API Key was not provided\");\n        }\n        \n        var providedApiKey = apiKeyHeaderValues.FirstOrDefault();\n        if (string.IsNullOrWhiteSpace(providedApiKey))\n        {\n            return AuthenticateResult.Fail(\"API Key was not provided\");\n        }\n        \n        // API Key doğrulama\n        var validApiKey = Configuration[\"ApiSettings:ApiKey\"];\n        if (providedApiKey != validApiKey)\n        {\n            return AuthenticateResult.Fail(\"Invalid API Key\");\n        }\n        \n        // Claims oluştur\n        var claims = new[]\n        {\n            new Claim(ClaimTypes.Name, \"ApiUser\"),\n            new Claim(ClaimTypes.NameIdentifier, \"api-user-id\")\n        };\n        \n        var identity = new ClaimsIdentity(claims, Scheme.Name);\n        var principal = new ClaimsPrincipal(identity);\n        var ticket = new AuthenticationTicket(principal, Scheme.Name);\n        \n        return AuthenticateResult.Success(ticket);\n    }\n}\n\n// Authentication scheme kaydı\nservices.AddAuthentication(\"ApiKey\")\n    .AddScheme<AuthenticationSchemeOptions, ApiKeyAuthenticationHandler>(\n        \"ApiKey\", options => { });",
+              "explanation": "Custom authentication handler oluşturma ve kaydetme sürecini gösterir."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-custom-auth-1",
+          "question": "Custom authentication handler ne zaman kullanılır?",
+          "options": [
+            "Her zaman",
+            "Standart authentication yöntemleri yeterli olmadığında",
+            "Sadece API'ler için",
+            "Hiçbir zaman"
+          ],
+          "answer": "Standart authentication yöntemleri yeterli olmadığında",
+          "rationale": "Custom authentication handler, standart authentication yöntemleri (JWT, Cookie, OAuth vb.) yeterli olmadığında veya özel gereksinimler olduğunda kullanılır."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-custom-auth-docs",
+          "label": "Custom Authentication - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/security/authentication/custom",
+          "type": "reading",
+          "estimatedMinutes": 40,
+          "description": "ASP.NET Core custom authentication hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-custom-auth-1",
+          "title": "Custom Authentication Handler Implementasyonu",
+          "description": "ASP.NET Core'da custom authentication handler implementasyonu yap.",
+          "type": "coding",
+          "estimatedMinutes": 70,
+          "difficulty": "İleri",
+          "instructions": [
+            "Custom authentication handler oluştur.",
+            "Authentication scheme kaydet.",
+            "Handler'ı test et.",
+            "Controller'larda kullan."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Security Best Practices ve Güvenlik Önlemleri",
+      "href": "/education/lessons/authentication/security/security-best-practices",
+      "description": "Authentication ve authorization için güvenlik best practice'leri, yaygın güvenlik açıkları ve korunma yöntemlerini öğren. Bu ders, güvenli authentication ve authorization sistemleri geliştirmek için kritik öneme sahiptir.",
+      "estimatedDurationMinutes": 80,
+      "level": "İleri",
+      "keyTakeaways": [
+        "Authentication ve authorization güvenlik best practice'lerini öğreneceksin.",
+        "Yaygın güvenlik açıklarını (XSS, CSRF, SQL Injection vb.) anlayacaksın.",
+        "Güvenlik önlemlerini ve korunma yöntemlerini keşfedeceksin.",
+        "Güvenli password policy'lerini kavrayacaksın.",
+        "Security audit ve monitoring tekniklerini öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "security-best-practices",
+          "title": "Security Best Practices",
+          "summary": "Authentication ve authorization için güvenlik best practice'leri.",
+          "content": [
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "HTTPS: Tüm authentication trafiğini HTTPS üzerinden gönder",
+                "Password Policy: Güçlü password policy'leri uygula (min 8 karakter, büyük/küçük harf, rakam, özel karakter)",
+                "Password Hashing: Şifreleri asla plain text saklama, güvenli hash algoritmaları kullan (PBKDF2, bcrypt)",
+                "Token Expiration: Token'lara expiration time ekle",
+                "Rate Limiting: Brute force saldırılarına karşı rate limiting uygula",
+                "Account Lockout: Başarısız login denemelerinde hesabı kilitle",
+                "Session Management: Güvenli session yönetimi yap",
+                "CSRF Protection: CSRF token'ları kullan",
+                "XSS Protection: XSS saldırılarına karşı koruma sağla",
+                "Input Validation: Tüm kullanıcı girdilerini validate et"
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Güvenli password policy\nservices.AddIdentity<IdentityUser, IdentityRole>(options =>\n{\n    options.Password.RequireDigit = true;\n    options.Password.RequiredLength = 12; // En az 12 karakter\n    options.Password.RequireNonAlphanumeric = true;\n    options.Password.RequireUppercase = true;\n    options.Password.RequireLowercase = true;\n    options.Password.RequiredUniqueChars = 3;\n    \n    // Account lockout\n    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);\n    options.Lockout.MaxFailedAccessAttempts = 5;\n    options.Lockout.AllowedForNewUsers = true;\n    \n    // User settings\n    options.User.RequireUniqueEmail = true;\n    options.SignIn.RequireConfirmedEmail = true;\n})\n.AddEntityFrameworkStores<ApplicationDbContext>()\n.AddDefaultTokenProviders();",
+              "explanation": "Güvenli password policy ve account lockout yapılandırmasını gösterir."
+            }
+          ]
+        },
+        {
+          "id": "common-vulnerabilities",
+          "title": "Yaygın Güvenlik Açıkları",
+          "summary": "Yaygın güvenlik açıkları ve korunma yöntemleri.",
+          "content": [
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "SQL Injection: Parameterized queries kullan, Entity Framework kullan",
+                "XSS (Cross-Site Scripting): Input sanitization, output encoding",
+                "CSRF (Cross-Site Request Forgery): Anti-forgery token'ları kullan",
+                "Session Hijacking: Secure cookies, HttpOnly, SameSite",
+                "Password Attacks: Strong passwords, account lockout, rate limiting",
+                "Token Theft: HTTPS, secure storage, short expiration",
+                "Man-in-the-Middle: HTTPS, certificate pinning"
+              ]
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-security-1",
+          "question": "Güvenli bir password policy'de minimum şifre uzunluğu ne olmalıdır?",
+          "options": [
+            "6 karakter",
+            "8 karakter",
+            "12 karakter",
+            "16 karakter"
+          ],
+          "answer": "12 karakter",
+          "rationale": "Güvenli bir password policy'de minimum şifre uzunluğu en az 12 karakter olmalıdır. Daha uzun şifreler daha güvenlidir."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-security-docs",
+          "label": "Security Best Practices - OWASP",
+          "href": "https://owasp.org/www-project-top-ten/",
+          "type": "reading",
+          "estimatedMinutes": 45,
+          "description": "OWASP Top 10 güvenlik açıkları ve best practice'ler."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-security-1",
+          "title": "Security Best Practices Uygulaması",
+          "description": "Authentication ve authorization için güvenlik best practice'lerini uygula.",
+          "type": "coding",
+          "estimatedMinutes": 75,
+          "difficulty": "İleri",
+          "instructions": [
+            "Güvenli password policy uygula.",
+            "Account lockout mekanizması ekle.",
+            "Rate limiting uygula.",
+            "CSRF protection ekle.",
+            "Security audit yap."
+          ]
+        }
+      ]
+    }
+  ]
+}
+

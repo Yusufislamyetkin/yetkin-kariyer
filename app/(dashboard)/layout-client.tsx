@@ -1,0 +1,468 @@
+"use client";
+
+import Link from "next/link";
+import { signOutAction } from "@/app/actions/auth";
+import { ThemeToggle } from "@/app/components/ThemeToggle";
+import { useTheme } from "@/app/contexts/ThemeContext";
+import {
+  LayoutDashboard,
+  BookOpen,
+  Video,
+  FileText,
+  Briefcase,
+  Building2,
+  User,
+  Menu,
+  X,
+  LogOut,
+  BarChart3,
+  GraduationCap,
+  Trophy,
+  Target,
+  Code,
+  Bug,
+  MessageCircle,
+  PenSquare,
+  Users,
+  LifeBuoy,
+  Handshake,
+  Medal,
+  TrendingUp,
+  History,
+  UserPlus,
+  DollarSign,
+  Home,
+  Compass,
+  Plus,
+} from "lucide-react";
+import { useState, useEffect, useMemo, type ComponentType, type SVGProps } from "react";
+import { usePathname } from "next/navigation";
+import { CelebrationProvider } from "@/app/contexts/CelebrationContext";
+import { ChatSummaryProvider, useChatSummary } from "@/app/contexts/ChatSummaryContext";
+import { FriendRequestProvider, useFriendRequest } from "@/app/contexts/FriendRequestContext";
+import { NotificationProvider, useNotification } from "@/app/contexts/NotificationContext";
+import { NotificationContainer } from "@/app/components/notifications/NotificationToast";
+import { useGlobalNotifications } from "@/hooks/useGlobalNotifications";
+
+export function DashboardLayoutClient({
+  children,
+  session,
+}: {
+  children: React.ReactNode;
+  session: any;
+}) {
+  return (
+    <NotificationProvider>
+      <ChatSummaryProvider>
+        <FriendRequestProvider>
+          <DashboardLayoutContent session={session}>{children}</DashboardLayoutContent>
+        </FriendRequestProvider>
+      </ChatSummaryProvider>
+    </NotificationProvider>
+  );
+}
+
+function DashboardLayoutContent({
+  children,
+  session,
+}: {
+  children: React.ReactNode;
+  session: any;
+}) {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const pathname = usePathname();
+  const { toggleTheme } = useTheme();
+  const { directUnread, groupsUnread, communityUnread } = useChatSummary();
+  const { friendRequestCount } = useFriendRequest();
+  const { notifications, dismissNotification } = useNotification();
+  
+  // Setup global notifications listener
+  useGlobalNotifications();
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+      if (window.innerWidth >= 1024) {
+        setSidebarOpen(false);
+      }
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
+
+  type NavigationItem = {
+    name: string;
+    href: string;
+    icon: IconComponent;
+  };
+
+  type NavigationGroup = {
+    title: string;
+    items: NavigationItem[];
+  };
+
+  const unreadByHref = useMemo<Record<string, number>>(
+    () => ({
+      "/chat/direct": directUnread,
+      "/chat/groups": groupsUnread,
+      "/chat": communityUnread,
+      "/dashboard/friends": friendRequestCount,
+    }),
+    [communityUnread, directUnread, groupsUnread, friendRequestCount]
+  );
+
+  const navigationGroups: NavigationGroup[] = [
+    {
+      title: "Anasayfa",
+      items: [
+        {
+          name: "Anasayfa",
+          href: "/dashboard",
+          icon: LayoutDashboard,
+        },
+      ],
+    },
+    {
+      title: "İlerişim",
+      items: [
+        {
+          name: "Sohbetler",
+          href: "/chat/direct",
+          icon: MessageCircle,
+        },
+        {
+          name: "Gruplar",
+          href: "/chat/groups",
+          icon: Users,
+        },
+        {
+          name: "Yardımlaşma Toplulukları",
+          href: "/chat",
+          icon: LifeBuoy,
+        },
+      ],
+    },
+    {
+      title: "Sosyal",
+      items: [
+        {
+          name: "Haber Akışı",
+          href: "/social/feed",
+          icon: Home,
+        },
+        {
+          name: "Keşfet",
+          href: "/social/explore",
+          icon: Compass,
+        },
+        {
+          name: "Oluştur",
+          href: "/social/create",
+          icon: Plus,
+        },
+        {
+          name: "Bağlantılarım",
+          href: "/dashboard/friends",
+          icon: UserPlus,
+        },
+      ],
+    },
+    {
+      title: "Eğitim",
+      items: [
+        {
+          name: "Kurslar",
+          href: "/education/courses",
+          icon: BookOpen,
+        },
+        {
+          name: "Testler",
+          href: "/education/test",
+          icon: PenSquare,
+        },
+        {
+          name: "Canlı Kodlama",
+          href: "/education/live-coding",
+          icon: Code,
+        },
+        {
+          name: "Bugfix",
+          href: "/education/bug-fix",
+          icon: Bug,
+        },
+        {
+          name: "Hedefler",
+          href: "/goals",
+          icon: Target,
+        },
+        {
+          name: "Gelişim ve Analiz",
+          href: "/education/analytics",
+          icon: BarChart3,
+        },
+      ],
+    },
+    {
+      title: "Kazanç",
+      items: [
+        {
+          name: "Hackaton",
+          href: "/education/hackaton",
+          icon: Trophy,
+        },
+        {
+          name: "Freelancer Partner",
+          href: "/freelancer/projects",
+          icon: Handshake,
+        },
+        {
+          name: "Derece Kazancı",
+          href: "/competition",
+          icon: Medal,
+        },
+        {
+          name: "Kazanç Analizi",
+          href: "/earnings",
+          icon: TrendingUp,
+        },
+        {
+          name: "En Çok Kazananlar",
+          href: "/earnings/leaderboard",
+          icon: DollarSign,
+        },
+      ],
+    },
+    {
+      title: "Kariyer",
+      items: [
+        {
+          name: "CV",
+          href: "/cv/my-cvs",
+          icon: FileText,
+        },
+        {
+          name: "Mülakat",
+          href: "/interview/practice",
+          icon: Video,
+        },
+        {
+          name: "İş İlanları",
+          href: "/jobs/browse",
+          icon: Briefcase,
+        },
+      ],
+    },
+  ];
+
+  if ((session.user as any)?.role === "employer") {
+    navigationGroups.push({
+      title: "İşveren",
+      items: [
+        {
+          name: "İşveren Paneli",
+          href: "/employer/jobs",
+          icon: Building2,
+        },
+      ],
+    });
+  }
+
+  if ((session.user as any)?.role === "admin") {
+    navigationGroups.push({
+      title: "Yönetim",
+      items: [
+        {
+          name: "Admin Paneli",
+          href: "/admin",
+          icon: LifeBuoy,
+        },
+      ],
+    });
+  }
+
+  const isActiveLink = (href: string) => {
+    if (!pathname) {
+      return false;
+    }
+
+    if (pathname === href) {
+      return true;
+    }
+
+    if (href === "/dashboard" || href === "/") {
+      return false;
+    }
+
+    const hasExactMatch = navigationGroups.some((group) =>
+      group.items.some((item) => item.href !== href && pathname === item.href),
+    );
+
+    if (hasExactMatch) {
+      return false;
+    }
+
+    return pathname.startsWith(`${href}/`);
+  };
+
+  return (
+    <CelebrationProvider>
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-purple-50/30 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-200">
+      {/* Mobile sidebar overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden backdrop-blur-sm"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <aside
+        className={`fixed top-0 left-0 z-50 h-screen w-64 glass border-r border-gray-200/50 dark:border-gray-700/50 transition-transform duration-300 ease-in-out ${
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } lg:translate-x-0`}
+      >
+        <div className="flex flex-col h-full">
+          {/* Logo */}
+          <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200/50 dark:border-gray-700/50 min-w-0">
+            <Link
+              href="/dashboard"
+              className="text-2xl font-display font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent md:bg-gradient-to-r md:from-blue-600 md:via-purple-600 md:to-pink-600 md:bg-[length:200%_auto] md:animate-text-shimmer flex-shrink-0 min-w-0"
+            >
+              AI Recruit
+            </Link>
+            <button
+              onClick={() => setSidebarOpen(false)}
+              className="lg:hidden text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors flex-shrink-0 min-w-[24px]"
+            >
+              <X className="h-6 w-6" />
+            </button>
+          </div>
+
+          {/* Navigation */}
+          <nav className="flex-1 px-4 py-6 space-y-6 overflow-y-auto">
+            {navigationGroups.map((group) => (
+              <div key={group.title} className="space-y-2">
+                <p className="px-4 text-xs font-semibold uppercase tracking-wider text-gray-400/80 dark:text-gray-500">
+                  {group.title}
+                </p>
+                <div className="space-y-2">
+                  {group.items.map((item) => {
+                    const Icon = item.icon;
+                    const isActive = isActiveLink(item.href);
+                    const badgeCount = unreadByHref[item.href] ?? 0;
+                    return (
+                      <Link
+                        key={item.name}
+                        href={item.href}
+                        className={`relative flex items-center gap-3 rounded-xl px-4 py-3 text-gray-700 transition-all duration-200 dark:text-gray-300 group min-w-0 ${
+                          isActive
+                            ? "bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-blue-600 dark:from-blue-500/20 dark:to-purple-500/20 dark:text-blue-400 font-semibold md:shadow-md md:shadow-blue-500/20"
+                            : "hover:bg-gray-100/50 dark:hover:bg-gray-700/50"
+                        }`}
+                        onClick={() => isMobile && setSidebarOpen(false)}
+                      >
+                        {isActive && (
+                          <span className="absolute left-0 top-1/2 h-8 w-1 -translate-y-1/2 rounded-r-full bg-gradient-to-b from-blue-500 to-purple-500 md:shadow-glow md:shadow-blue-500/50" />
+                        )}
+                        <Icon
+                          className={`h-5 w-5 flex-shrink-0 min-w-[20px] transition-all duration-200 ${
+                            isActive
+                              ? "text-blue-600 dark:text-blue-400 md:scale-110"
+                              : "group-hover:text-blue-600 dark:group-hover:text-blue-400 md:group-hover:scale-110"
+                          }`}
+                        />
+                        <span className="flex-1 font-medium truncate min-w-0">{item.name}</span>
+                        {badgeCount > 0 ? (
+                          <span className="ml-2 inline-flex min-w-[1.5rem] justify-center rounded-full bg-red-500 px-2 py-0.5 text-[10px] font-semibold text-white md:text-xs">
+                            {badgeCount > 99 ? "99+" : badgeCount}
+                          </span>
+                        ) : null}
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </nav>
+
+          {/* User section */}
+          <div className="border-t border-gray-200/50 dark:border-gray-700/50 p-4">
+            <Link
+              href="/profile"
+              className="flex items-center gap-3 mb-3 px-2 py-2 rounded-xl hover:bg-gray-100/50 dark:hover:bg-gray-700/50 transition-all duration-200 group cursor-pointer"
+              onClick={() => isMobile && setSidebarOpen(false)}
+            >
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center shadow-lg md:shadow-neon-blue/50">
+                <User className="h-5 w-5 text-white" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                  {session.user?.name}
+                </p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                  {session.user?.email}
+                </p>
+              </div>
+            </Link>
+            <div className="mb-2">
+              <button
+                onClick={toggleTheme}
+                className="w-full flex items-center gap-3 px-4 py-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-100/50 dark:hover:bg-gray-700/50 transition-all duration-200 group"
+              >
+                <ThemeToggle />
+                <span className="text-sm font-medium">Tema</span>
+              </button>
+            </div>
+            <form action={signOutAction}>
+              <button
+                type="submit"
+                className="w-full flex items-center gap-3 px-4 py-2 rounded-xl text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-200 group"
+              >
+                <LogOut className="h-5 w-5 group-hover:scale-110 transition-transform" />
+                <span className="text-sm font-medium">Çıkış Yap</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </aside>
+
+      {/* Main content */}
+      <div className="lg:pl-64">
+        {/* Mobile menu button - only visible on mobile */}
+        <div className="lg:hidden sticky top-0 z-30 bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg border-b border-gray-200/50 dark:border-gray-700/50 min-w-0">
+          <div className="flex items-center justify-between h-14 px-4 min-w-0">
+            <button
+              onClick={() => setSidebarOpen(true)}
+              className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors flex-shrink-0 min-w-[24px]"
+            >
+              <Menu className="h-6 w-6" />
+            </button>
+            <Link
+              href="/dashboard"
+              className="text-xl font-display font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 bg-clip-text text-transparent flex-shrink-0 min-w-0 truncate"
+            >
+              AI Recruit
+            </Link>
+            <div className="w-6 flex-shrink-0" />
+          </div>
+        </div>
+
+        {/* Page content */}
+        <main className="p-4 lg:p-6">{children}</main>
+      </div>
+      
+      {/* Notification Container */}
+      <NotificationContainer
+        notifications={notifications}
+        onDismiss={dismissNotification}
+      />
+      </div>
+    </CelebrationProvider>
+  );
+}
+

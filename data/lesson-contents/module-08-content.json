@@ -1,0 +1,296 @@
+{
+  "moduleId": "module-08-api",
+  "moduleTitle": "API Geliştirme (RESTful API – Minimal API / Controller Based)",
+  "lessons": [
+    {
+      "label": "API Kavramına Giriş",
+      "href": "/education/lessons/api-development/api-intro",
+      "description": "API (Application Programming Interface) kavramını, ne olduğunu, neden önemli olduğunu ve web uygulamalarında nasıl kullanıldığını öğren. Bu ders, API Geliştirme modülünün Faz 1'inin ilk dersidir.",
+      "estimatedDurationMinutes": 45,
+      "level": "Başlangıç",
+      "keyTakeaways": [
+        "API'nin ne olduğunu ve neden kritik olduğunu öğreneceksin.",
+        "API türlerini (REST, SOAP, GraphQL) anlayacaksın.",
+        "API'nin web uygulamalarındaki rolünü keşfedeceksin.",
+        "API geliştirmenin temel prensiplerini kavrayacaksın.",
+        "API geliştirme için best practice'leri öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "api-introduction",
+          "title": "API Nedir?",
+          "summary": "API kavramının temel tanımı ve önemi.",
+          "content": [
+            {
+              "type": "text",
+              "body": "API (Application Programming Interface), farklı yazılım uygulamalarının birbirleriyle iletişim kurmasını sağlayan bir arayüzdür. API'ler, uygulamaların veri alışverişi yapmasını, işlevsellik paylaşmasını ve entegrasyon sağlamasını mümkün kılar."
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "API: Uygulamalar arası iletişim arayüzü",
+                "REST API: Representational State Transfer protokolü kullanan API",
+                "SOAP API: Simple Object Access Protocol kullanan API",
+                "GraphQL: Query language kullanan API",
+                "Web API: Web üzerinden erişilebilen API"
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// API örneği - Basit bir endpoint\n[ApiController]\n[Route(\"api/[controller]\")]\npublic class UsersController : ControllerBase\n{\n    [HttpGet]\n    public IActionResult GetUsers()\n    {\n        var users = new[]\n        {\n            new { Id = 1, Name = \"John\", Email = \"john@example.com\" },\n            new { Id = 2, Name = \"Jane\", Email = \"jane@example.com\" }\n        };\n        \n        return Ok(users);\n    }\n}",
+              "explanation": "Basit bir API endpoint örneği. Bu endpoint, kullanıcı listesini döndürür."
+            }
+          ]
+        },
+        {
+          "id": "api-types",
+          "title": "API Türleri",
+          "summary": "Farklı API türleri ve kullanım senaryoları.",
+          "content": [
+            {
+              "type": "text",
+              "body": "Farklı API türleri vardır ve her biri kendine özgü kullanım senaryolarına sahiptir."
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "REST API: En yaygın kullanılan API türü. HTTP metodları (GET, POST, PUT, DELETE) kullanır.",
+                "SOAP API: XML tabanlı, daha katı protokol. Enterprise uygulamalarda kullanılır.",
+                "GraphQL: Tek endpoint üzerinden esnek sorgulama. Facebook tarafından geliştirilmiştir.",
+                "gRPC: Yüksek performanslı, binary protokol. Microservice mimarilerinde kullanılır.",
+                "WebSocket API: Gerçek zamanlı, iki yönlü iletişim. Chat uygulamalarında kullanılır."
+              ]
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-api-intro-1",
+          "question": "API ne işe yarar?",
+          "options": [
+            "Sadece veri saklar",
+            "Uygulamalar arası iletişim sağlar",
+            "Sadece web sayfaları oluşturur",
+            "Sadece veritabanı yönetir"
+          ],
+          "answer": "Uygulamalar arası iletişim sağlar",
+          "rationale": "API, farklı yazılım uygulamalarının birbirleriyle iletişim kurmasını sağlayan bir arayüzdür. Veri alışverişi, işlevsellik paylaşımı ve entegrasyon sağlar."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-api-intro-docs",
+          "label": "Web API - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/web-api/",
+          "type": "reading",
+          "estimatedMinutes": 30,
+          "description": "ASP.NET Core Web API hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-api-intro-1",
+          "title": "API Kavramını Anla",
+          "description": "API kavramını anlamak için pratik yap.",
+          "type": "research",
+          "estimatedMinutes": 25,
+          "difficulty": "Kolay",
+          "instructions": [
+            "API kavramını araştır.",
+            "Farklı API türlerini karşılaştır.",
+            "REST API'nin avantajlarını liste.",
+            "API kullanım senaryolarını belirle."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "RESTful Servislerin Temel İlkeleri",
+      "href": "/education/lessons/api-development/restful-principles",
+      "description": "REST (Representational State Transfer) mimarisinin temel ilkelerini, RESTful API tasarım kurallarını ve best practice'lerini öğren. RESTful API'ler, modern web uygulamalarının temelidir.",
+      "estimatedDurationMinutes": 55,
+      "level": "Orta",
+      "keyTakeaways": [
+        "REST mimarisinin temel ilkelerini öğreneceksin.",
+        "RESTful API tasarım kurallarını anlayacaksın.",
+        "HTTP metodlarının REST'te nasıl kullanıldığını keşfedeceksin.",
+        "RESTful API best practice'lerini kavrayacaksın.",
+        "RESTful API tasarımı için önemli kuralları öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "rest-principles",
+          "title": "REST İlkeleri",
+          "summary": "REST mimarisinin temel ilkeleri.",
+          "content": [
+            {
+              "type": "text",
+              "body": "REST (Representational State Transfer), web servisleri için bir mimari stildir. RESTful API'ler, HTTP protokolünü kullanarak kaynaklara erişim sağlar."
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "Stateless: Her istek bağımsızdır, sunucu durum bilgisi saklamaz.",
+                "Resource-Based: URL'ler kaynakları temsil eder (örn: /api/users/1).",
+                "HTTP Methods: GET, POST, PUT, DELETE gibi HTTP metodları kullanılır.",
+                "Representation: JSON, XML gibi formatlarda veri gönderilir.",
+                "Uniform Interface: Tutarlı ve standart bir arayüz sağlar."
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// RESTful API örneği\n[ApiController]\n[Route(\"api/[controller]\")]\npublic class ProductsController : ControllerBase\n{\n    // GET /api/products - Tüm ürünleri getir\n    [HttpGet]\n    public IActionResult GetProducts() { }\n    \n    // GET /api/products/1 - Belirli bir ürünü getir\n    [HttpGet(\"{id}\")]\n    public IActionResult GetProduct(int id) { }\n    \n    // POST /api/products - Yeni ürün oluştur\n    [HttpPost]\n    public IActionResult CreateProduct(Product product) { }\n    \n    // PUT /api/products/1 - Ürünü güncelle\n    [HttpPut(\"{id}\")]\n    public IActionResult UpdateProduct(int id, Product product) { }\n    \n    // DELETE /api/products/1 - Ürünü sil\n    [HttpDelete(\"{id}\")]\n    public IActionResult DeleteProduct(int id) { }\n}",
+              "explanation": "RESTful API endpoint'lerinin HTTP metodları ile nasıl kullanıldığını gösterir."
+            }
+          ]
+        },
+        {
+          "id": "rest-design-rules",
+          "title": "RESTful API Tasarım Kuralları",
+          "summary": "RESTful API tasarımı için önemli kurallar.",
+          "content": [
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "URL'ler kaynakları temsil etmeli (isimler, fiiller değil): /api/users, /api/products",
+                "HTTP metodları işlemleri temsil etmeli: GET (okuma), POST (oluşturma), PUT (güncelleme), DELETE (silme)",
+                "Plural isimler kullanılmalı: /api/users (doğru), /api/user (yanlış)",
+                "Hiyerarşik yapı kullanılmalı: /api/users/1/posts",
+                "HTTP status kodları doğru kullanılmalı: 200 (OK), 201 (Created), 404 (Not Found), 500 (Internal Server Error)",
+                "JSON formatı tercih edilmeli",
+                "Versioning kullanılmalı: /api/v1/users"
+              ]
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-rest-1",
+          "question": "RESTful API'de hangi HTTP metodu kaynak oluşturmak için kullanılır?",
+          "options": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+          ],
+          "answer": "POST",
+          "rationale": "RESTful API'de POST metodu yeni kaynak oluşturmak için kullanılır. GET okuma, PUT güncelleme, DELETE silme için kullanılır."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-rest-docs",
+          "label": "REST API Design - Microsoft Docs",
+          "href": "https://learn.microsoft.com/azure/architecture/best-practices/api-design",
+          "type": "reading",
+          "estimatedMinutes": 35,
+          "description": "RESTful API tasarım best practice'leri hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-rest-1",
+          "title": "RESTful API Tasarımı",
+          "description": "RESTful API tasarım kurallarını uygula.",
+          "type": "coding",
+          "estimatedMinutes": 50,
+          "difficulty": "Orta",
+          "instructions": [
+            "RESTful API endpoint'leri tasarla.",
+            "HTTP metodlarını doğru kullan.",
+            "URL yapısını REST kurallarına uygun oluştur.",
+            "HTTP status kodlarını doğru kullan."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Web API Projesi Oluşturma",
+      "href": "/education/lessons/api-development/project-setup",
+      "description": "ASP.NET Core Web API projesi oluşturma, yapılandırma ve temel ayarları öğren. Visual Studio ve dotnet CLI kullanarak Web API projesi kurulumunu yap.",
+      "estimatedDurationMinutes": 50,
+      "level": "Başlangıç",
+      "keyTakeaways": [
+        "Web API projesi oluşturmayı öğreneceksin.",
+        "Proje yapısını ve dosya organizasyonunu anlayacaksın.",
+        "Web API yapılandırmasını keşfedeceksin.",
+        "dotnet CLI ve Visual Studio kullanımını kavrayacaksın.",
+        "Web API projesi kurulumu için best practice'leri öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "project-creation",
+          "title": "Web API Projesi Oluşturma",
+          "summary": "ASP.NET Core Web API projesi oluşturma yöntemleri.",
+          "content": [
+            {
+              "type": "text",
+              "body": "ASP.NET Core Web API projesi oluşturmak için Visual Studio veya dotnet CLI kullanabilirsin. Her iki yöntem de aynı sonucu verir."
+            },
+            {
+              "type": "code",
+              "language": "bash",
+              "code": "# dotnet CLI ile Web API projesi oluşturma\ndotnet new webapi -n MyWebApi\ncd MyWebApi\n\n# Projeyi çalıştır\ndotnet run",
+              "explanation": "dotnet CLI kullanarak Web API projesi oluşturma komutları."
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Program.cs - Web API yapılandırması\nvar builder = WebApplication.CreateBuilder(args);\n\n// Add services to the container\nbuilder.Services.AddControllers();\n// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle\nbuilder.Services.AddEndpointsApiExplorer();\nbuilder.Services.AddSwaggerGen();\n\nvar app = builder.Build();\n\n// Configure the HTTP request pipeline\nif (app.Environment.IsDevelopment())\n{\n    app.UseSwagger();\n    app.UseSwaggerUI();\n}\n\napp.UseHttpsRedirection();\napp.UseAuthorization();\napp.MapControllers();\n\napp.Run();",
+              "explanation": "Web API projesinin temel yapılandırması. Controllers, Swagger ve middleware yapılandırması."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-project-setup-1",
+          "question": "Web API projesi oluşturmak için hangi dotnet CLI komutu kullanılır?",
+          "options": [
+            "dotnet new mvc",
+            "dotnet new webapi",
+            "dotnet new console",
+            "dotnet new web"
+          ],
+          "answer": "dotnet new webapi",
+          "rationale": "Web API projesi oluşturmak için 'dotnet new webapi' komutu kullanılır. MVC için 'dotnet new mvc', console için 'dotnet new console' kullanılır."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-project-setup-docs",
+          "label": "Create Web API - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/tutorials/first-web-api",
+          "type": "reading",
+          "estimatedMinutes": 30,
+          "description": "ASP.NET Core Web API oluşturma hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-project-setup-1",
+          "title": "Web API Projesi Oluşturma",
+          "description": "ASP.NET Core Web API projesi oluştur ve yapılandır.",
+          "type": "coding",
+          "estimatedMinutes": 45,
+          "difficulty": "Kolay",
+          "instructions": [
+            "dotnet CLI ile Web API projesi oluştur.",
+            "Proje yapısını incele.",
+            "Program.cs dosyasını yapılandır.",
+            "Projeyi çalıştır ve test et."
+          ]
+        }
+      ]
+    }
+  ]
+}
+

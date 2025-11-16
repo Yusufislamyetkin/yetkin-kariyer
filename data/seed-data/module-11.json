@@ -1,0 +1,70 @@
+{
+  "module": {
+    "id": "module-11-performance",
+    "title": "Performans ve Caching Teknikleri",
+    "summary": "Profiling, caching ve asenkron işleme taktikleriyle uygulamanı hızlandır.",
+    "durationMinutes": 60,
+    "objectives": [
+      "Bu modülü tamamladığında darboğazları profilleyip memory veya distributed cache stratejileri uygulayabileceksin."
+    ],
+    "activities": [],
+    "learnLink": {
+      "label": "Konuyu Öğren",
+      "href": "/education/courses?search=.NET%20Performance",
+      "description": "Profiling araçları ve cache stratejilerini pratiğe dök."
+    },
+    "relatedTopics": [
+      {
+        "label": "dotnet-counters ile Profiling",
+        "href": "/education/lessons/performance/profiling/dotnet-counters",
+        "description": "Runtime metriklerini gerçek zamanlı takip et."
+      },
+      {
+        "label": "MemoryCache vs Distributed Cache",
+        "href": "/education/lessons/performance/caching/memory-vs-distributed",
+        "description": "Farklı caching yaklaşımlarını senaryolara göre kıyasla."
+      },
+      {
+        "label": "Performans İçin Sağlık Kontrolleri",
+        "href": "/education/lessons/performance/health-checks/performance-endpoints",
+        "description": "Health check uç noktalarıyla servis durumunu izle."
+      },
+      {
+        "label": "Performance Profiling Araçları",
+        "href": "/education/lessons/performance/profiling/performance-profiling-tools",
+        "description": "PerfView, dotTrace, Application Insights gibi profiling araçlarını kullan."
+      },
+      {
+        "label": "Memory Leak Detection ve Analysis",
+        "href": "/education/lessons/performance/memory/memory-leak-detection-analysis",
+        "description": "Memory leak tespiti ve analiz tekniklerini öğren."
+      },
+      {
+        "label": "Response Caching ve Output Caching",
+        "href": "/education/lessons/performance/caching/response-output-caching",
+        "description": "Response caching ve output caching stratejilerini uygula."
+      },
+      {
+        "label": "Redis Cache Entegrasyonu",
+        "href": "/education/lessons/performance/caching/redis-cache-integration",
+        "description": "Redis ile distributed caching entegrasyonunu yapılandır."
+      },
+      {
+        "label": "Cache Invalidation Stratejileri",
+        "href": "/education/lessons/performance/caching/cache-invalidation-strategies",
+        "description": "Cache invalidation stratejilerini ve patternlerini öğren."
+      },
+      {
+        "label": "Performance Best Practices",
+        "href": "/education/lessons/performance/best-practices/performance-best-practices",
+        "description": "Performance optimization için en iyi pratikleri uygula."
+      },
+      {
+        "label": "Async/Await Performance Optimization",
+        "href": "/education/lessons/performance/async/async-await-performance-optimization",
+        "description": "Async/await kullanımında performance optimization tekniklerini öğren."
+      }
+    ]
+  },
+  "quizzes": []
+}

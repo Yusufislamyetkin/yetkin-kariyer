@@ -1,0 +1,70 @@
+{
+  "module": {
+    "id": "module-09-configuration",
+    "title": "Configuration Management",
+    "summary": "Environment bazlı konfigürasyon kaynaklarını yönet ve gizli bilgileri güvenli sakla.",
+    "durationMinutes": 45,
+    "objectives": [
+      "Bu modülü tamamladığında environment bazlı kaynakları birleştirerek sağlam konfigürasyon yönetimi kurabileceksin."
+    ],
+    "activities": [],
+    "learnLink": {
+      "label": "Konuyu Öğren",
+      "href": "/education/courses?search=Configuration%20Management",
+      "description": "Konfigürasyon provider zincirini ve gizli anahtar yönetimini kavra."
+    },
+    "relatedTopics": [
+      {
+        "label": "Konfigürasyon Sağlayıcıları",
+        "href": "/education/lessons/configuration/providers/overview",
+        "description": "Json, environment ve user secrets kaynaklarını birlikte kullan."
+      },
+      {
+        "label": "Options Pattern ile Çalışma",
+        "href": "/education/lessons/configuration/options-pattern/validation",
+        "description": "Strongly typed options sınıflarını doğrulama ile beraber uygula."
+      },
+      {
+        "label": "Secret Manager Entegrasyonu",
+        "href": "/education/lessons/configuration/secret-manager",
+        "description": "Gizli anahtarları yerel geliştirici ortamında güvenle sakla."
+      },
+      {
+        "label": "IConfiguration Interface Kullanımı",
+        "href": "/education/lessons/configuration/iconfiguration/iconfiguration-interface",
+        "description": "IConfiguration interface kullanımını ve configuration okuma yöntemlerini öğren."
+      },
+      {
+        "label": "Environment Variables Yönetimi",
+        "href": "/education/lessons/configuration/environment/environment-variables",
+        "description": "Environment variables kullanımı ve yönetim stratejilerini uygula."
+      },
+      {
+        "label": "Configuration Binding ve Validation",
+        "href": "/education/lessons/configuration/binding/configuration-binding-validation",
+        "description": "Configuration binding ve validation tekniklerini öğren."
+      },
+      {
+        "label": "Configuration Reload ve Hot Reload",
+        "href": "/education/lessons/configuration/reload/configuration-reload-hot-reload",
+        "description": "Configuration reload ve hot reload mekanizmalarını kavra."
+      },
+      {
+        "label": "Azure Key Vault Entegrasyonu",
+        "href": "/education/lessons/configuration/azure/azure-key-vault-integration",
+        "description": "Azure Key Vault ile güvenli configuration yönetimini uygula."
+      },
+      {
+        "label": "Configuration Best Practices",
+        "href": "/education/lessons/configuration/best-practices/configuration-best-practices",
+        "description": "Configuration yönetimi için en iyi pratikleri öğren."
+      },
+      {
+        "label": "Multi-Environment Configuration Stratejileri",
+        "href": "/education/lessons/configuration/multi-environment/multi-environment-strategies",
+        "description": "Çoklu ortam (dev, staging, production) configuration stratejilerini uygula."
+      }
+    ]
+  },
+  "quizzes": []
+}

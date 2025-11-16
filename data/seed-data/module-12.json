@@ -1,0 +1,70 @@
+{
+  "module": {
+    "id": "module-12-async",
+    "title": "Asenkron Programlama (Async/Await)",
+    "summary": "Async/await modelini doğru uygula, deadlock ve kaynak kullanım problemlerini önle.",
+    "durationMinutes": 45,
+    "objectives": [
+      "Bu modülü tamamladığında async/await modelini doğru bağlamda kullanıp deadlock risklerini ortadan kaldırabileceksin."
+    ],
+    "activities": [],
+    "learnLink": {
+      "label": "Konuyu Öğren",
+      "href": "/education/courses?search=Async%20Await",
+      "description": "Task tabanlı modelde concurrency ve kaynak kullanımını yönet."
+    },
+    "relatedTopics": [
+      {
+        "label": "Task Tabanlı Programlamaya Giriş",
+        "href": "/education/lessons/async/task-based-programming",
+        "description": "Task ve await anahtar kelimelerinin çalışma mantığını kavra."
+      },
+      {
+        "label": "Async Streams Kullanımı",
+        "href": "/education/lessons/async/async-streams",
+        "description": "IAsyncEnumerable ile veri akışlarını asenkron işle."
+      },
+      {
+        "label": "CancellationToken Yönetimi",
+        "href": "/education/lessons/async/cancellation-token",
+        "description": "Operasyonları kontrollü şekilde iptal etmenin yöntemlerini uygula."
+      },
+      {
+        "label": "Async/Await Best Practices",
+        "href": "/education/lessons/async/best-practices/async-await-best-practices",
+        "description": "Async/await kullanımında en iyi pratikleri öğren."
+      },
+      {
+        "label": "Task.Run() ve Task.Factory.StartNew() Kullanımı",
+        "href": "/education/lessons/async/task-run/task-run-factory-startnew",
+        "description": "Task.Run() ve Task.Factory.StartNew() kullanım senaryolarını kavra."
+      },
+      {
+        "label": "ConfigureAwait ve SynchronizationContext",
+        "href": "/education/lessons/async/configureawait/configureawait-synchronization-context",
+        "description": "ConfigureAwait kullanımı ve SynchronizationContext kavramını öğren."
+      },
+      {
+        "label": "Deadlock Önleme Stratejileri",
+        "href": "/education/lessons/async/deadlock/deadlock-prevention-strategies",
+        "description": "Async/await kullanımında deadlock önleme tekniklerini uygula."
+      },
+      {
+        "label": "Task.WhenAll ve Task.WhenAny Kullanımı",
+        "href": "/education/lessons/async/task-whenall/task-whenall-whenany",
+        "description": "Paralel async operasyonları yönetmek için Task.WhenAll ve Task.WhenAny kullan."
+      },
+      {
+        "label": "ValueTask ve Task Performans",
+        "href": "/education/lessons/async/valuetask/valuetask-task-performance",
+        "description": "ValueTask kullanımı ve Task ile performans karşılaştırması."
+      },
+      {
+        "label": "Async Exception Handling",
+        "href": "/education/lessons/async/exception-handling/async-exception-handling",
+        "description": "Async metodlarda exception handling tekniklerini öğren."
+      }
+    ]
+  },
+  "quizzes": []
+}

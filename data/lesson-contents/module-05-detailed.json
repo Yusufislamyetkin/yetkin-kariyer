@@ -1,0 +1,1331 @@
+{
+  "moduleId": "module-05-web-api",
+  "moduleTitle": "Web API Geliştirme",
+  "lessons": [
+    {
+      "label": "RESTful API Tasarımı",
+      "href": "/education/lessons/aspnet-core/web-api/restful-design",
+      "description": "RESTful API tasarım prensipleri, resource naming, HTTP methods ve REST best practice'lerini öğren. Bu ders, Web API Geliştirme modülünün kapsamlı bir parçasıdır ve gerçek dünya uygulamalarında pratik kullanım senaryolarını içerir.",
+      "estimatedDurationMinutes": 60,
+      "level": "Orta",
+      "keyTakeaways": [
+        "RESTful API Tasarımı konusunun ne olduğunu ve neden önemli olduğunu öğreneceksin.",
+        "RESTful API Tasarımı konusunun nasıl kullanıldığını pratik örneklerle göreceksin.",
+        "RESTful API Tasarımı için best practice'leri ve ileri seviye teknikleri öğreneceksin.",
+        "Gerçek dünya senaryolarında RESTful API Tasarımı konusunun nasıl uygulandığını göreceksin.",
+        "Troubleshooting ve debugging tekniklerini öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "aspnet-core-web-api-restful-design-faz-1-tanim",
+          "title": "Faz 1: Tanım ve Temel Kavramlar",
+          "summary": "RESTful API Tasarımı konusunun tanımı, ne olduğu, neden kullanıldığı ve temel kavramları.",
+          "content": [
+            {
+              "type": "text",
+              "body": "RESTful API tasarım prensipleri, resource naming, HTTP methods ve REST best practice'lerini öğren. RESTful API Tasarımı, modern web uygulamalarında veri alışverişi için kritik bir rol oynar. Bu fazda, RESTful API Tasarımı konusunun temel tanımını, ne olduğunu ve neden önemli olduğunu öğreneceksin."
+            },
+            {
+              "type": "text",
+              "body": "RESTful API Tasarımı nedir? Bu kavram, web API'lerinin nasıl çalıştığını ve nasıl tasarlandığını anlamak için temel bir yapı taşıdır. RESTful API Tasarımı konusunu derinlemesine anlamak, profesyonel seviyede API geliştirme yapabilmek için gereklidir."
+            },
+            {
+              "type": "list",
+              "ordered": true,
+              "items": [
+                "RESTful API Tasarımı kavramının tanımı ve temel özellikleri",
+                "RESTful API Tasarımı neden kullanılır ve hangi problemleri çözer",
+                "RESTful API Tasarımı konusunun web API geliştirmedeki yeri ve önemi",
+                "Temel terminoloji ve kavramlar",
+                "Diğer yaklaşımlarla karşılaştırma ve farklar"
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// RESTful API Tasarımı - Temel Kavram Örneği\n// Bu örnek, RESTful API Tasarımı konusunun temel kullanımını gösterir\n\nusing Microsoft.AspNetCore.Mvc;\n\nnamespace WebAPI.Examples\n{\n    // RESTful API Tasarımı konusunun temel uygulaması\n    public class BasicExample\n    {\n        // Temel kavramlar burada açıklanacak\n    }\n}",
+              "explanation": "Bu kod örneği, RESTful API Tasarımı konusunun temel kullanımını gösterir. Kodun her satırı, konunun temel kavramlarını anlamanıza yardımcı olacak şekilde açıklanmıştır."
+            },
+            {
+              "type": "callout",
+              "variant": "info",
+              "title": "Önemli Kavram",
+              "body": "RESTful API Tasarımı konusunu öğrenirken dikkat etmeniz gereken en önemli nokta, bu konunun web API geliştirmedeki kritik rolüdür. Bu kavramı iyi anlamak, daha iyi API'ler tasarlamanızı sağlar."
+            }
+          ]
+        },
+        {
+          "id": "aspnet-core-web-api-restful-design-faz-2-kullanim",
+          "title": "Faz 2: Nasıl Kullanılır",
+          "summary": "RESTful API Tasarımı konusunun pratikte nasıl kullanıldığı, adım adım implementasyon ve kod örnekleri.",
+          "content": [
+            {
+              "type": "text",
+              "body": "Bu fazda, RESTful API Tasarımı konusunun pratikte nasıl kullanıldığını adım adım öğreneceksin. RESTful API Tasarımı kullanarak gerçek bir uygulama geliştirmenin tüm adımlarını göreceksin."
+            },
+            {
+              "type": "text",
+              "body": "RESTful API Tasarımı nasıl kullanılır? Bu sorunun cevabı, Web API Geliştirme modülünün en önemli kısmıdır. Pratik örnekler ve kod snippet'leri ile konuyu uygulamalı olarak öğreneceksin."
+            },
+            {
+              "type": "list",
+              "ordered": true,
+              "items": [
+                "RESTful API Tasarımı kullanımının adım adım açıklaması",
+                "ASP.NET Core'da RESTful API Tasarımı implementasyonu",
+                "Gerekli paketlerin kurulumu ve yapılandırma",
+                "Temel kullanım örnekleri ve kod yazımı",
+                "Yaygın kullanım senaryoları ve pattern'ler"
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// RESTful API Tasarımı - Pratik Kullanım Örneği\n// Bu örnek, RESTful API Tasarımı konusunun gerçek bir projede nasıl kullanıldığını gösterir\n\nusing Microsoft.AspNetCore.Mvc;\nusing Microsoft.AspNetCore.Builder;\nusing Microsoft.Extensions.DependencyInjection;\n\nnamespace WebAPI.Examples\n{\n    public class Startup\n    {\n        public void ConfigureServices(IServiceCollection services)\n        {\n            // RESTful API Tasarımı için servis kayıtları\n            services.AddControllers();\n            \n            // RESTful API Tasarımı yapılandırması\n            // Gerekli ayarlar burada yapılır\n        }\n        \n        public void Configure(IApplicationBuilder app)\n        {\n            // RESTful API Tasarımı middleware'leri\n            app.UseRouting();\n            app.UseEndpoints(endpoints =>\n            {\n                endpoints.MapControllers();\n            });\n        }\n    }\n    \n    [ApiController]\n    [Route(\"api/[controller]\")]\n    public class ExampleController : ControllerBase\n    {\n        // RESTful API Tasarımı kullanım örnekleri\n        [HttpGet]\n        public IActionResult Get()\n        {\n            // RESTful API Tasarımı implementasyonu\n            return Ok(new { message = \"RESTful API Tasarımı örneği\" });\n        }\n    }\n}",
+              "explanation": "Bu kod örneği, RESTful API Tasarımı konusunun ASP.NET Core uygulamasında nasıl kullanıldığını gösterir. Startup.cs'de gerekli yapılandırmaları ve Controller'da kullanımını görebilirsiniz."
+            },
+            {
+              "type": "callout",
+              "variant": "tip",
+              "title": "Pratik İpucu",
+              "body": "RESTful API Tasarımı konusunu öğrenirken, kodları kendiniz yazarak denemek çok önemlidir. Sadece okumak yerine, her örneği çalıştırıp sonuçları gözlemleyin."
+            }
+          ]
+        },
+        {
+          "id": "aspnet-core-web-api-restful-design-faz-3-ileri-seviye",
+          "title": "Faz 3: İleri Seviye ve Best Practices",
+          "summary": "RESTful API Tasarımı konusunun ileri seviye kullanımları, best practice'ler, optimizasyon teknikleri ve yaygın hatalar.",
+          "content": [
+            {
+              "type": "text",
+              "body": "Bu fazda, RESTful API Tasarımı konusunun ileri seviye kullanımlarını ve best practice'lerini öğreneceksin. Profesyonel seviyede API geliştirme yapmak için gerekli olan gelişmiş teknikleri ve optimizasyon stratejilerini göreceksin."
+            },
+            {
+              "type": "text",
+              "body": "RESTful API Tasarımı konusunda ileri seviye teknikler, daha performanslı, güvenli ve maintainable kod yazmanızı sağlar. Bu fazda, industry-standard yaklaşımları ve Microsoft'un önerdiği best practice'leri öğreneceksin."
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "RESTful API Tasarımı için best practice'ler ve önerilen yaklaşımlar",
+                "Performans optimizasyon teknikleri ve ipuçları",
+                "Güvenlik konuları ve dikkat edilmesi gerekenler",
+                "Yaygın hatalar ve bunlardan kaçınma yöntemleri",
+                "İleri seviye pattern'ler ve design pattern'ler",
+                "Testing stratejileri ve unit test yazımı",
+                "Error handling ve exception management",
+                "Logging ve monitoring yaklaşımları"
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// RESTful API Tasarımı - İleri Seviye Kullanım Örneği\n// Bu örnek, RESTful API Tasarımı konusunun ileri seviye tekniklerini gösterir\n\nusing Microsoft.AspNetCore.Mvc;\nusing Microsoft.Extensions.Logging;\nusing System;\nusing System.Threading.Tasks;\n\nnamespace WebAPI.Advanced\n{\n    [ApiController]\n    [Route(\"api/v1/[controller]\")]\n    public class AdvancedController : ControllerBase\n    {\n        private readonly ILogger<AdvancedController> _logger;\n        \n        public AdvancedController(ILogger<AdvancedController> logger)\n        {\n            _logger = logger;\n        }\n        \n        // İleri seviye RESTful API Tasarımı implementasyonu\n        [HttpGet(\"{id}\")]\n        [ProducesResponseType(200)]\n        [ProducesResponseType(404)]\n        [ProducesResponseType(500)]\n        public async Task<IActionResult> GetAdvanced(int id)\n        {\n            try\n            {\n                _logger.LogInformation(\"RESTful API Tasarımı - Advanced operation started for ID: {Id}\", id);\n                \n                // İleri seviye RESTful API Tasarımı işlemleri\n                // - Async/await pattern kullanımı\n                // - Proper error handling\n                // - Logging ve monitoring\n                // - Response caching\n                // - Rate limiting\n                \n                return Ok(new { id, message = \"Advanced RESTful API Tasarımı implementation\" });\n            }\n            catch (Exception ex)\n            {\n                _logger.LogError(ex, \"Error in RESTful API Tasarımı operation\");\n                return StatusCode(500, new { error = \"Internal server error\" });\n            }\n        }\n    }\n}",
+              "explanation": "Bu kod örneği, RESTful API Tasarımı konusunun ileri seviye kullanımını gösterir. Async/await pattern, proper error handling, logging, ve response attributes gibi best practice'leri içerir."
+            },
+            {
+              "type": "callout",
+              "variant": "warning",
+              "title": "Dikkat Edilmesi Gerekenler",
+              "body": "RESTful API Tasarımı konusunda ileri seviye teknikler kullanırken, kodun okunabilirliğini ve maintainability'sini korumak çok önemlidir. Aşırı karmaşık çözümlerden kaçının."
+            }
+          ]
+        },
+        {
+          "id": "aspnet-core-web-api-restful-design-faz-4-gercek-dunya",
+          "title": "Faz 4: Gerçek Dünya Uygulamaları",
+          "summary": "RESTful API Tasarımı konusunun gerçek dünya senaryolarında kullanımı, case study'ler, troubleshooting ve production considerations.",
+          "content": [
+            {
+              "type": "text",
+              "body": "Bu fazda, RESTful API Tasarımı konusunun gerçek dünya senaryolarında nasıl kullanıldığını göreceksin. Endüstri standardı uygulamalarda RESTful API Tasarımı konusunun nasıl implement edildiğini, gerçek problemlerin nasıl çözüldüğünü ve troubleshooting tekniklerini öğreneceksin."
+            },
+            {
+              "type": "text",
+              "body": "RESTful API Tasarımı konusunu gerçek bir projede kullanırken karşılaşabileceğiniz senaryolar, çözüm yöntemleri ve best practice'ler bu fazda detaylı olarak açıklanmaktadır. Case study'ler ve gerçek dünya örnekleri ile konuyu pekiştireceksin."
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "Gerçek dünya projelerinde RESTful API Tasarımı kullanım senaryoları",
+                "Enterprise seviyesinde RESTful API Tasarımı implementasyonu",
+                "Scalability ve performance konuları",
+                "Troubleshooting ve debugging teknikleri",
+                "Common issues ve çözümleri",
+                "Integration patterns ve microservices mimarisi",
+                "Deployment ve production considerations",
+                "Monitoring ve analytics yaklaşımları"
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// RESTful API Tasarımı - Gerçek Dünya Senaryosu\n// Bu örnek, RESTful API Tasarımı konusunun production ortamında nasıl kullanıldığını gösterir\n\nusing Microsoft.AspNetCore.Mvc;\nusing Microsoft.Extensions.Logging;\nusing Microsoft.Extensions.Caching.Memory;\nusing System;\nusing System.Threading.Tasks;\n\nnamespace WebAPI.Production\n{\n    [ApiController]\n    [Route(\"api/[controller]\")]\n    public class ProductionController : ControllerBase\n    {\n        private readonly ILogger<ProductionController> _logger;\n        private readonly IMemoryCache _cache;\n        \n        public ProductionController(\n            ILogger<ProductionController> logger,\n            IMemoryCache cache)\n        {\n            _logger = logger;\n            _cache = cache;\n        }\n        \n        // Production-ready RESTful API Tasarımı implementasyonu\n        [HttpGet(\"data/{key}\")]\n        [ResponseCache(Duration = 300)]\n        public async Task<IActionResult> GetProductionData(string key)\n        {\n            // Cache kontrolü\n            if (_cache.TryGetValue(key, out var cachedData))\n            {\n                _logger.LogInformation(\"Cache hit for key: {Key}\", key);\n                return Ok(cachedData);\n            }\n            \n            try\n            {\n                // Gerçek dünya senaryosu: Database'den veri çekme\n                // RESTful API Tasarımı konusunun production'da kullanımı\n                \n                var data = await FetchDataFromDatabase(key);\n                \n                // Cache'e kaydet\n                _cache.Set(key, data, TimeSpan.FromMinutes(5));\n                \n                _logger.LogInformation(\"Data fetched and cached for key: {Key}\", key);\n                \n                return Ok(data);\n            }\n            catch (Exception ex)\n            {\n                _logger.LogError(ex, \"Error fetching data for key: {Key}\", key);\n                return StatusCode(500, new { \n                    error = \"An error occurred\",\n                    message = \"Please try again later\" \n                });\n            }\n        }\n        \n        private async Task<object> FetchDataFromDatabase(string key)\n        {\n            // Simulated database operation\n            await Task.Delay(100);\n            return new { key, value = \"Production data\" };\n        }\n    }\n}",
+              "explanation": "Bu kod örneği, RESTful API Tasarımı konusunun production ortamında nasıl kullanıldığını gösterir. Caching, error handling, logging, ve async operations gibi gerçek dünya senaryolarında gerekli olan tüm özellikleri içerir."
+            },
+            {
+              "type": "callout",
+              "variant": "info",
+              "title": "Gerçek Dünya Senaryosu",
+              "body": "Bu örnek, RESTful API Tasarımı konusunun gerçek bir production uygulamasında nasıl kullanıldığını gösterir. Bu tür senaryolar, konuyu daha iyi anlamanızı ve profesyonel seviyede uygulama geliştirmenizi sağlar."
+            },
+            {
+              "type": "text",
+              "body": "Troubleshooting: RESTful API Tasarımı konusunda karşılaşabileceğiniz yaygın problemler ve çözümleri:\n\n1. **Performans Problemleri**: Caching stratejileri, async operations kullanımı\n2. **Güvenlik Sorunları**: Authentication ve authorization kontrolü\n3. **Hata Yönetimi**: Proper exception handling ve error responses\n4. **Scalability**: Load balancing ve distributed systems yaklaşımları\n\nBu problemleri çözmek için yukarıdaki kod örneğinde gösterilen pattern'leri kullanabilirsiniz."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-aspnet-core-web-api-restful-design-1",
+          "question": "RESTful API Tasarımı nedir ve neden kullanılır?",
+          "options": [
+            "RESTful API Tasarımı, web API'lerinde veri alışverişi için kullanılan bir standarttır.",
+            "RESTful API Tasarımı, sadece Microsoft teknolojilerinde kullanılan bir kavramdır.",
+            "RESTful API Tasarımı, sadece büyük projelerde gerekli olan bir özelliktir.",
+            "RESTful API Tasarımı, modern web geliştirmede kullanılmayan eski bir teknolojidir."
+          ],
+          "answer": "RESTful API Tasarımı, web API'lerinde veri alışverişi için kullanılan bir standarttır.",
+          "rationale": "RESTful API Tasarımı konusu, modern web API geliştirmede kritik öneme sahiptir ve tüm büyüklükteki projelerde kullanılır."
+        },
+        {
+          "id": "checkpoint-aspnet-core-web-api-restful-design-2",
+          "question": "RESTful API Tasarımı konusunda en yaygın hata nedir?",
+          "options": [
+            "Proper error handling yapmamak ve exception'ları doğru yönetmemek",
+            "Kod yazmamak",
+            "Documentation okumamak",
+            "API kullanmamak"
+          ],
+          "answer": "Proper error handling yapmamak ve exception'ları doğru yönetmemek",
+          "rationale": "RESTful API Tasarımı konusunda en yaygın hata, proper error handling yapmamaktır. Bu, production ortamında ciddi problemlere yol açabilir."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-aspnet-core-web-api-restful-design-docs",
+          "label": "RESTful API Tasarımı - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/web-api",
+          "type": "reading",
+          "estimatedMinutes": 30,
+          "description": "RESTful API Tasarımı konusu hakkında detaylı Microsoft dokümantasyonu ve resmi kaynaklar."
+        },
+        {
+          "id": "resource-aspnet-core-web-api-restful-design-video",
+          "label": "RESTful API Tasarımı - Video Eğitim",
+          "href": "https://learn.microsoft.com/aspnet/core/web-api",
+          "type": "video",
+          "estimatedMinutes": 45,
+          "description": "RESTful API Tasarımı konusunu görsel olarak öğrenmek için video eğitim ve tutorial'lar."
+        },
+        {
+          "id": "resource-aspnet-core-web-api-restful-design-sample",
+          "label": "RESTful API Tasarımı - Örnek Projeler",
+          "href": "https://github.com/dotnet/aspnetcore/tree/main/src/WebApi",
+          "type": "reading",
+          "estimatedMinutes": 60,
+          "description": "RESTful API Tasarımı konusunun gerçek dünya örnekleri ve sample projeler."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-aspnet-core-web-api-restful-design-1",
+          "title": "RESTful API Tasarımı - Temel Uygulama",
+          "description": "RESTful API Tasarımı konusunun temel kullanımını içeren pratik bir uygulama geliştirin.",
+          "type": "coding",
+          "estimatedMinutes": 45,
+          "difficulty": "Orta",
+          "instructions": [
+            "Yeni bir ASP.NET Core Web API projesi oluşturun",
+            "RESTful API Tasarımı konusunu implement edin",
+            "Temel CRUD operasyonları ekleyin",
+            "Error handling mekanizması ekleyin",
+            "Projeyi test edin ve çalıştığını doğrulayın",
+            "Best practice'leri uyguladığınızdan emin olun"
+          ]
+        },
+        {
+          "id": "practice-aspnet-core-web-api-restful-design-2",
+          "title": "RESTful API Tasarımı - İleri Seviye Uygulama",
+          "description": "RESTful API Tasarımı konusunun ileri seviye kullanımını içeren karmaşık bir uygulama geliştirin.",
+          "type": "coding",
+          "estimatedMinutes": 90,
+          "difficulty": "İleri",
+          "instructions": [
+            "RESTful API Tasarımı konusunu ileri seviye tekniklerle implement edin",
+            "Caching, logging, ve monitoring ekleyin",
+            "Authentication ve authorization ekleyin",
+            "Unit testler yazın",
+            "Performance optimizasyonu yapın",
+            "Production-ready hale getirin",
+            "Documentation ekleyin"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "HTTP Status Codes",
+      "href": "/education/lessons/aspnet-core/web-api/status-codes",
+      "description": "HTTP status code'ları, doğru status code seçimi ve API response standartlarını öğren. Bu ders, Web API Geliştirme modülünün kapsamlı bir parçasıdır ve gerçek dünya uygulamalarında pratik kullanım senaryolarını içerir.",
+      "estimatedDurationMinutes": 60,
+      "level": "Orta",
+      "keyTakeaways": [
+        "HTTP Status Codes konusunun ne olduğunu ve neden önemli olduğunu öğreneceksin.",
+        "HTTP Status Codes konusunun nasıl kullanıldığını pratik örneklerle göreceksin.",
+        "HTTP Status Codes için best practice'leri ve ileri seviye teknikleri öğreneceksin.",
+        "Gerçek dünya senaryolarında HTTP Status Codes konusunun nasıl uygulandığını göreceksin.",
+        "Troubleshooting ve debugging tekniklerini öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "aspnet-core-web-api-status-codes-faz-1-tanim",
+          "title": "Faz 1: Tanım ve Temel Kavramlar",
+          "summary": "HTTP Status Codes konusunun tanımı, ne olduğu, neden kullanıldığı ve temel kavramları.",
+          "content": [
+            {
+              "type": "text",
+              "body": "HTTP status code'ları, doğru status code seçimi ve API response standartlarını öğren. HTTP Status Codes, modern web uygulamalarında veri alışverişi için kritik bir rol oynar. Bu fazda, HTTP Status Codes konusunun temel tanımını, ne olduğunu ve neden önemli olduğunu öğreneceksin."
+            },
+            {
+              "type": "text",
+              "body": "HTTP Status Codes nedir? Bu kavram, web API'lerinin nasıl çalıştığını ve nasıl tasarlandığını anlamak için temel bir yapı taşıdır. HTTP Status Codes konusunu derinlemesine anlamak, profesyonel seviyede API geliştirme yapabilmek için gereklidir."
+            },
+            {
+              "type": "list",
+              "ordered": true,
+              "items": [
+                "HTTP Status Codes kavramının tanımı ve temel özellikleri",
+                "HTTP Status Codes neden kullanılır ve hangi problemleri çözer",
+                "HTTP Status Codes konusunun web API geliştirmedeki yeri ve önemi",
+                "Temel terminoloji ve kavramlar",
+                "Diğer yaklaşımlarla karşılaştırma ve farklar"
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// HTTP Status Codes - Temel Kavram Örneği\n// Bu örnek, HTTP Status Codes konusunun temel kullanımını gösterir\n\nusing Microsoft.AspNetCore.Mvc;\n\nnamespace WebAPI.Examples\n{\n    // HTTP Status Codes konusunun temel uygulaması\n    public class BasicExample\n    {\n        // Temel kavramlar burada açıklanacak\n    }\n}",
+              "explanation": "Bu kod örneği, HTTP Status Codes konusunun temel kullanımını gösterir. Kodun her satırı, konunun temel kavramlarını anlamanıza yardımcı olacak şekilde açıklanmıştır."
+            },
+            {
+              "type": "callout",
+              "variant": "info",
+              "title": "Önemli Kavram",
+              "body": "HTTP Status Codes konusunu öğrenirken dikkat etmeniz gereken en önemli nokta, bu konunun web API geliştirmedeki kritik rolüdür. Bu kavramı iyi anlamak, daha iyi API'ler tasarlamanızı sağlar."
+            }
+          ]
+        },
+        {
+          "id": "aspnet-core-web-api-status-codes-faz-2-kullanim",
+          "title": "Faz 2: Nasıl Kullanılır",
+          "summary": "HTTP Status Codes konusunun pratikte nasıl kullanıldığı, adım adım implementasyon ve kod örnekleri.",
+          "content": [
+            {
+              "type": "text",
+              "body": "Bu fazda, HTTP Status Codes konusunun pratikte nasıl kullanıldığını adım adım öğreneceksin. HTTP Status Codes kullanarak gerçek bir uygulama geliştirmenin tüm adımlarını göreceksin."
+            },
+            {
+              "type": "text",
+              "body": "HTTP Status Codes nasıl kullanılır? Bu sorunun cevabı, Web API Geliştirme modülünün en önemli kısmıdır. Pratik örnekler ve kod snippet'leri ile konuyu uygulamalı olarak öğreneceksin."
+            },
+            {
+              "type": "list",
+              "ordered": true,
+              "items": [
+                "HTTP Status Codes kullanımının adım adım açıklaması",
+                "ASP.NET Core'da HTTP Status Codes implementasyonu",
+                "Gerekli paketlerin kurulumu ve yapılandırma",
+                "Temel kullanım örnekleri ve kod yazımı",
+                "Yaygın kullanım senaryoları ve pattern'ler"
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// HTTP Status Codes - Pratik Kullanım Örneği\n// Bu örnek, HTTP Status Codes konusunun gerçek bir projede nasıl kullanıldığını gösterir\n\nusing Microsoft.AspNetCore.Mvc;\nusing Microsoft.AspNetCore.Builder;\nusing Microsoft.Extensions.DependencyInjection;\n\nnamespace WebAPI.Examples\n{\n    public class Startup\n    {\n        public void ConfigureServices(IServiceCollection services)\n        {\n            // HTTP Status Codes için servis kayıtları\n            services.AddControllers();\n            \n            // HTTP Status Codes yapılandırması\n            // Gerekli ayarlar burada yapılır\n        }\n        \n        public void Configure(IApplicationBuilder app)\n        {\n            // HTTP Status Codes middleware'leri\n            app.UseRouting();\n            app.UseEndpoints(endpoints =>\n            {\n                endpoints.MapControllers();\n            });\n        }\n    }\n    \n    [ApiController]\n    [Route(\"api/[controller]\")]\n    public class ExampleController : ControllerBase\n    {\n        // HTTP Status Codes kullanım örnekleri\n        [HttpGet]\n        public IActionResult Get()\n        {\n            // HTTP Status Codes implementasyonu\n            return Ok(new { message = \"HTTP Status Codes örneği\" });\n        }\n    }\n}",
+              "explanation": "Bu kod örneği, HTTP Status Codes konusunun ASP.NET Core uygulamasında nasıl kullanıldığını gösterir. Startup.cs'de gerekli yapılandırmaları ve Controller'da kullanımını görebilirsiniz."
+            },
+            {
+              "type": "callout",
+              "variant": "tip",
+              "title": "Pratik İpucu",
+              "body": "HTTP Status Codes konusunu öğrenirken, kodları kendiniz yazarak denemek çok önemlidir. Sadece okumak yerine, her örneği çalıştırıp sonuçları gözlemleyin."
+            }
+          ]
+        },
+        {
+          "id": "aspnet-core-web-api-status-codes-faz-3-ileri-seviye",
+          "title": "Faz 3: İleri Seviye ve Best Practices",
+          "summary": "HTTP Status Codes konusunun ileri seviye kullanımları, best practice'ler, optimizasyon teknikleri ve yaygın hatalar.",
+          "content": [
+            {
+              "type": "text",
+              "body": "Bu fazda, HTTP Status Codes konusunun ileri seviye kullanımlarını ve best practice'lerini öğreneceksin. Profesyonel seviyede API geliştirme yapmak için gerekli olan gelişmiş teknikleri ve optimizasyon stratejilerini göreceksin."
+            },
+            {
+              "type": "text",
+              "body": "HTTP Status Codes konusunda ileri seviye teknikler, daha performanslı, güvenli ve maintainable kod yazmanızı sağlar. Bu fazda, industry-standard yaklaşımları ve Microsoft'un önerdiği best practice'leri öğreneceksin."
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "HTTP Status Codes için best practice'ler ve önerilen yaklaşımlar",
+                "Performans optimizasyon teknikleri ve ipuçları",
+                "Güvenlik konuları ve dikkat edilmesi gerekenler",
+                "Yaygın hatalar ve bunlardan kaçınma yöntemleri",
+                "İleri seviye pattern'ler ve design pattern'ler",
+                "Testing stratejileri ve unit test yazımı",
+                "Error handling ve exception management",
+                "Logging ve monitoring yaklaşımları"
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// HTTP Status Codes - İleri Seviye Kullanım Örneği\n// Bu örnek, HTTP Status Codes konusunun ileri seviye tekniklerini gösterir\n\nusing Microsoft.AspNetCore.Mvc;\nusing Microsoft.Extensions.Logging;\nusing System;\nusing System.Threading.Tasks;\n\nnamespace WebAPI.Advanced\n{\n    [ApiController]\n    [Route(\"api/v1/[controller]\")]\n    public class AdvancedController : ControllerBase\n    {\n        private readonly ILogger<AdvancedController> _logger;\n        \n        public AdvancedController(ILogger<AdvancedController> logger)\n        {\n            _logger = logger;\n        }\n        \n        // İleri seviye HTTP Status Codes implementasyonu\n        [HttpGet(\"{id}\")]\n        [ProducesResponseType(200)]\n        [ProducesResponseType(404)]\n        [ProducesResponseType(500)]\n        public async Task<IActionResult> GetAdvanced(int id)\n        {\n            try\n            {\n                _logger.LogInformation(\"HTTP Status Codes - Advanced operation started for ID: {Id}\", id);\n                \n                // İleri seviye HTTP Status Codes işlemleri\n                // - Async/await pattern kullanımı\n                // - Proper error handling\n                // - Logging ve monitoring\n                // - Response caching\n                // - Rate limiting\n                \n                return Ok(new { id, message = \"Advanced HTTP Status Codes implementation\" });\n            }\n            catch (Exception ex)\n            {\n                _logger.LogError(ex, \"Error in HTTP Status Codes operation\");\n                return StatusCode(500, new { error = \"Internal server error\" });\n            }\n        }\n    }\n}",
+              "explanation": "Bu kod örneği, HTTP Status Codes konusunun ileri seviye kullanımını gösterir. Async/await pattern, proper error handling, logging, ve response attributes gibi best practice'leri içerir."
+            },
+            {
+              "type": "callout",
+              "variant": "warning",
+              "title": "Dikkat Edilmesi Gerekenler",
+              "body": "HTTP Status Codes konusunda ileri seviye teknikler kullanırken, kodun okunabilirliğini ve maintainability'sini korumak çok önemlidir. Aşırı karmaşık çözümlerden kaçının."
+            }
+          ]
+        },
+        {
+          "id": "aspnet-core-web-api-status-codes-faz-4-gercek-dunya",
+          "title": "Faz 4: Gerçek Dünya Uygulamaları",
+          "summary": "HTTP Status Codes konusunun gerçek dünya senaryolarında kullanımı, case study'ler, troubleshooting ve production considerations.",
+          "content": [
+            {
+              "type": "text",
+              "body": "Bu fazda, HTTP Status Codes konusunun gerçek dünya senaryolarında nasıl kullanıldığını göreceksin. Endüstri standardı uygulamalarda HTTP Status Codes konusunun nasıl implement edildiğini, gerçek problemlerin nasıl çözüldüğünü ve troubleshooting tekniklerini öğreneceksin."
+            },
+            {
+              "type": "text",
+              "body": "HTTP Status Codes konusunu gerçek bir projede kullanırken karşılaşabileceğiniz senaryolar, çözüm yöntemleri ve best practice'ler bu fazda detaylı olarak açıklanmaktadır. Case study'ler ve gerçek dünya örnekleri ile konuyu pekiştireceksin."
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "Gerçek dünya projelerinde HTTP Status Codes kullanım senaryoları",
+                "Enterprise seviyesinde HTTP Status Codes implementasyonu",
+                "Scalability ve performance konuları",
+                "Troubleshooting ve debugging teknikleri",
+                "Common issues ve çözümleri",
+                "Integration patterns ve microservices mimarisi",
+                "Deployment ve production considerations",
+                "Monitoring ve analytics yaklaşımları"
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// HTTP Status Codes - Gerçek Dünya Senaryosu\n// Bu örnek, HTTP Status Codes konusunun production ortamında nasıl kullanıldığını gösterir\n\nusing Microsoft.AspNetCore.Mvc;\nusing Microsoft.Extensions.Logging;\nusing Microsoft.Extensions.Caching.Memory;\nusing System;\nusing System.Threading.Tasks;\n\nnamespace WebAPI.Production\n{\n    [ApiController]\n    [Route(\"api/[controller]\")]\n    public class ProductionController : ControllerBase\n    {\n        private readonly ILogger<ProductionController> _logger;\n        private readonly IMemoryCache _cache;\n        \n        public ProductionController(\n            ILogger<ProductionController> logger,\n            IMemoryCache cache)\n        {\n            _logger = logger;\n            _cache = cache;\n        }\n        \n        // Production-ready HTTP Status Codes implementasyonu\n        [HttpGet(\"data/{key}\")]\n        [ResponseCache(Duration = 300)]\n        public async Task<IActionResult> GetProductionData(string key)\n        {\n            // Cache kontrolü\n            if (_cache.TryGetValue(key, out var cachedData))\n            {\n                _logger.LogInformation(\"Cache hit for key: {Key}\", key);\n                return Ok(cachedData);\n            }\n            \n            try\n            {\n                // Gerçek dünya senaryosu: Database'den veri çekme\n                // HTTP Status Codes konusunun production'da kullanımı\n                \n                var data = await FetchDataFromDatabase(key);\n                \n                // Cache'e kaydet\n                _cache.Set(key, data, TimeSpan.FromMinutes(5));\n                \n                _logger.LogInformation(\"Data fetched and cached for key: {Key}\", key);\n                \n                return Ok(data);\n            }\n            catch (Exception ex)\n            {\n                _logger.LogError(ex, \"Error fetching data for key: {Key}\", key);\n                return StatusCode(500, new { \n                    error = \"An error occurred\",\n                    message = \"Please try again later\" \n                });\n            }\n        }\n        \n        private async Task<object> FetchDataFromDatabase(string key)\n        {\n            // Simulated database operation\n            await Task.Delay(100);\n            return new { key, value = \"Production data\" };\n        }\n    }\n}",
+              "explanation": "Bu kod örneği, HTTP Status Codes konusunun production ortamında nasıl kullanıldığını gösterir. Caching, error handling, logging, ve async operations gibi gerçek dünya senaryolarında gerekli olan tüm özellikleri içerir."
+            },
+            {
+              "type": "callout",
+              "variant": "info",
+              "title": "Gerçek Dünya Senaryosu",
+              "body": "Bu örnek, HTTP Status Codes konusunun gerçek bir production uygulamasında nasıl kullanıldığını gösterir. Bu tür senaryolar, konuyu daha iyi anlamanızı ve profesyonel seviyede uygulama geliştirmenizi sağlar."
+            },
+            {
+              "type": "text",
+              "body": "Troubleshooting: HTTP Status Codes konusunda karşılaşabileceğiniz yaygın problemler ve çözümleri:\n\n1. **Performans Problemleri**: Caching stratejileri, async operations kullanımı\n2. **Güvenlik Sorunları**: Authentication ve authorization kontrolü\n3. **Hata Yönetimi**: Proper exception handling ve error responses\n4. **Scalability**: Load balancing ve distributed systems yaklaşımları\n\nBu problemleri çözmek için yukarıdaki kod örneğinde gösterilen pattern'leri kullanabilirsiniz."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-aspnet-core-web-api-status-codes-1",
+          "question": "HTTP Status Codes nedir ve neden kullanılır?",
+          "options": [
+            "HTTP Status Codes, web API'lerinde veri alışverişi için kullanılan bir standarttır.",
+            "HTTP Status Codes, sadece Microsoft teknolojilerinde kullanılan bir kavramdır.",
+            "HTTP Status Codes, sadece büyük projelerde gerekli olan bir özelliktir.",
+            "HTTP Status Codes, modern web geliştirmede kullanılmayan eski bir teknolojidir."
+          ],
+          "answer": "HTTP Status Codes, web API'lerinde veri alışverişi için kullanılan bir standarttır.",
+          "rationale": "HTTP Status Codes konusu, modern web API geliştirmede kritik öneme sahiptir ve tüm büyüklükteki projelerde kullanılır."
+        },
+        {
+          "id": "checkpoint-aspnet-core-web-api-status-codes-2",
+          "question": "HTTP Status Codes konusunda en yaygın hata nedir?",
+          "options": [
+            "Proper error handling yapmamak ve exception'ları doğru yönetmemek",
+            "Kod yazmamak",
+            "Documentation okumamak",
+            "API kullanmamak"
+          ],
+          "answer": "Proper error handling yapmamak ve exception'ları doğru yönetmemek",
+          "rationale": "HTTP Status Codes konusunda en yaygın hata, proper error handling yapmamaktır. Bu, production ortamında ciddi problemlere yol açabilir."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-aspnet-core-web-api-status-codes-docs",
+          "label": "HTTP Status Codes - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/web-api",
+          "type": "reading",
+          "estimatedMinutes": 30,
+          "description": "HTTP Status Codes konusu hakkında detaylı Microsoft dokümantasyonu ve resmi kaynaklar."
+        },
+        {
+          "id": "resource-aspnet-core-web-api-status-codes-video",
+          "label": "HTTP Status Codes - Video Eğitim",
+          "href": "https://learn.microsoft.com/aspnet/core/web-api",
+          "type": "video",
+          "estimatedMinutes": 45,
+          "description": "HTTP Status Codes konusunu görsel olarak öğrenmek için video eğitim ve tutorial'lar."
+        },
+        {
+          "id": "resource-aspnet-core-web-api-status-codes-sample",
+          "label": "HTTP Status Codes - Örnek Projeler",
+          "href": "https://github.com/dotnet/aspnetcore/tree/main/src/WebApi",
+          "type": "reading",
+          "estimatedMinutes": 60,
+          "description": "HTTP Status Codes konusunun gerçek dünya örnekleri ve sample projeler."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-aspnet-core-web-api-status-codes-1",
+          "title": "HTTP Status Codes - Temel Uygulama",
+          "description": "HTTP Status Codes konusunun temel kullanımını içeren pratik bir uygulama geliştirin.",
+          "type": "coding",
+          "estimatedMinutes": 45,
+          "difficulty": "Orta",
+          "instructions": [
+            "Yeni bir ASP.NET Core Web API projesi oluşturun",
+            "HTTP Status Codes konusunu implement edin",
+            "Temel CRUD operasyonları ekleyin",
+            "Error handling mekanizması ekleyin",
+            "Projeyi test edin ve çalıştığını doğrulayın",
+            "Best practice'leri uyguladığınızdan emin olun"
+          ]
+        },
+        {
+          "id": "practice-aspnet-core-web-api-status-codes-2",
+          "title": "HTTP Status Codes - İleri Seviye Uygulama",
+          "description": "HTTP Status Codes konusunun ileri seviye kullanımını içeren karmaşık bir uygulama geliştirin.",
+          "type": "coding",
+          "estimatedMinutes": 90,
+          "difficulty": "İleri",
+          "instructions": [
+            "HTTP Status Codes konusunu ileri seviye tekniklerle implement edin",
+            "Caching, logging, ve monitoring ekleyin",
+            "Authentication ve authorization ekleyin",
+            "Unit testler yazın",
+            "Performance optimizasyonu yapın",
+            "Production-ready hale getirin",
+            "Documentation ekleyin"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "API Versioning",
+      "href": "/education/lessons/aspnet-core/web-api/versioning",
+      "description": "API versioning stratejileri, URL-based, header-based ve query-based versioning'i öğren. Bu ders, Web API Geliştirme modülünün kapsamlı bir parçasıdır ve gerçek dünya uygulamalarında pratik kullanım senaryolarını içerir.",
+      "estimatedDurationMinutes": 60,
+      "level": "Orta",
+      "keyTakeaways": [
+        "API Versioning konusunun ne olduğunu ve neden önemli olduğunu öğreneceksin.",
+        "API Versioning konusunun nasıl kullanıldığını pratik örneklerle göreceksin.",
+        "API Versioning için best practice'leri ve ileri seviye teknikleri öğreneceksin.",
+        "Gerçek dünya senaryolarında API Versioning konusunun nasıl uygulandığını göreceksin.",
+        "Troubleshooting ve debugging tekniklerini öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "aspnet-core-web-api-versioning-faz-1-tanim",
+          "title": "Faz 1: Tanım ve Temel Kavramlar",
+          "summary": "API Versioning konusunun tanımı, ne olduğu, neden kullanıldığı ve temel kavramları.",
+          "content": [
+            {
+              "type": "text",
+              "body": "API versioning stratejileri, URL-based, header-based ve query-based versioning'i öğren. API Versioning, modern web uygulamalarında veri alışverişi için kritik bir rol oynar. Bu fazda, API Versioning konusunun temel tanımını, ne olduğunu ve neden önemli olduğunu öğreneceksin."
+            },
+            {
+              "type": "text",
+              "body": "API Versioning nedir? Bu kavram, web API'lerinin nasıl çalıştığını ve nasıl tasarlandığını anlamak için temel bir yapı taşıdır. API Versioning konusunu derinlemesine anlamak, profesyonel seviyede API geliştirme yapabilmek için gereklidir."
+            },
+            {
+              "type": "list",
+              "ordered": true,
+              "items": [
+                "API Versioning kavramının tanımı ve temel özellikleri",
+                "API Versioning neden kullanılır ve hangi problemleri çözer",
+                "API Versioning konusunun web API geliştirmedeki yeri ve önemi",
+                "Temel terminoloji ve kavramlar",
+                "Diğer yaklaşımlarla karşılaştırma ve farklar"
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// API Versioning - Temel Kavram Örneği\n// Bu örnek, API Versioning konusunun temel kullanımını gösterir\n\nusing Microsoft.AspNetCore.Mvc;\n\nnamespace WebAPI.Examples\n{\n    // API Versioning konusunun temel uygulaması\n    public class BasicExample\n    {\n        // Temel kavramlar burada açıklanacak\n    }\n}",
+              "explanation": "Bu kod örneği, API Versioning konusunun temel kullanımını gösterir. Kodun her satırı, konunun temel kavramlarını anlamanıza yardımcı olacak şekilde açıklanmıştır."
+            },
+            {
+              "type": "callout",
+              "variant": "info",
+              "title": "Önemli Kavram",
+              "body": "API Versioning konusunu öğrenirken dikkat etmeniz gereken en önemli nokta, bu konunun web API geliştirmedeki kritik rolüdür. Bu kavramı iyi anlamak, daha iyi API'ler tasarlamanızı sağlar."
+            }
+          ]
+        },
+        {
+          "id": "aspnet-core-web-api-versioning-faz-2-kullanim",
+          "title": "Faz 2: Nasıl Kullanılır",
+          "summary": "API Versioning konusunun pratikte nasıl kullanıldığı, adım adım implementasyon ve kod örnekleri.",
+          "content": [
+            {
+              "type": "text",
+              "body": "Bu fazda, API Versioning konusunun pratikte nasıl kullanıldığını adım adım öğreneceksin. API Versioning kullanarak gerçek bir uygulama geliştirmenin tüm adımlarını göreceksin."
+            },
+            {
+              "type": "text",
+              "body": "API Versioning nasıl kullanılır? Bu sorunun cevabı, Web API Geliştirme modülünün en önemli kısmıdır. Pratik örnekler ve kod snippet'leri ile konuyu uygulamalı olarak öğreneceksin."
+            },
+            {
+              "type": "list",
+              "ordered": true,
+              "items": [
+                "API Versioning kullanımının adım adım açıklaması",
+                "ASP.NET Core'da API Versioning implementasyonu",
+                "Gerekli paketlerin kurulumu ve yapılandırma",
+                "Temel kullanım örnekleri ve kod yazımı",
+                "Yaygın kullanım senaryoları ve pattern'ler"
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// API Versioning - Pratik Kullanım Örneği\n// Bu örnek, API Versioning konusunun gerçek bir projede nasıl kullanıldığını gösterir\n\nusing Microsoft.AspNetCore.Mvc;\nusing Microsoft.AspNetCore.Builder;\nusing Microsoft.Extensions.DependencyInjection;\n\nnamespace WebAPI.Examples\n{\n    public class Startup\n    {\n        public void ConfigureServices(IServiceCollection services)\n        {\n            // API Versioning için servis kayıtları\n            services.AddControllers();\n            \n            // API Versioning yapılandırması\n            // Gerekli ayarlar burada yapılır\n        }\n        \n        public void Configure(IApplicationBuilder app)\n        {\n            // API Versioning middleware'leri\n            app.UseRouting();\n            app.UseEndpoints(endpoints =>\n            {\n                endpoints.MapControllers();\n            });\n        }\n    }\n    \n    [ApiController]\n    [Route(\"api/[controller]\")]\n    public class ExampleController : ControllerBase\n    {\n        // API Versioning kullanım örnekleri\n        [HttpGet]\n        public IActionResult Get()\n        {\n            // API Versioning implementasyonu\n            return Ok(new { message = \"API Versioning örneği\" });\n        }\n    }\n}",
+              "explanation": "Bu kod örneği, API Versioning konusunun ASP.NET Core uygulamasında nasıl kullanıldığını gösterir. Startup.cs'de gerekli yapılandırmaları ve Controller'da kullanımını görebilirsiniz."
+            },
+            {
+              "type": "callout",
+              "variant": "tip",
+              "title": "Pratik İpucu",
+              "body": "API Versioning konusunu öğrenirken, kodları kendiniz yazarak denemek çok önemlidir. Sadece okumak yerine, her örneği çalıştırıp sonuçları gözlemleyin."
+            }
+          ]
+        },
+        {
+          "id": "aspnet-core-web-api-versioning-faz-3-ileri-seviye",
+          "title": "Faz 3: İleri Seviye ve Best Practices",
+          "summary": "API Versioning konusunun ileri seviye kullanımları, best practice'ler, optimizasyon teknikleri ve yaygın hatalar.",
+          "content": [
+            {
+              "type": "text",
+              "body": "Bu fazda, API Versioning konusunun ileri seviye kullanımlarını ve best practice'lerini öğreneceksin. Profesyonel seviyede API geliştirme yapmak için gerekli olan gelişmiş teknikleri ve optimizasyon stratejilerini göreceksin."
+            },
+            {
+              "type": "text",
+              "body": "API Versioning konusunda ileri seviye teknikler, daha performanslı, güvenli ve maintainable kod yazmanızı sağlar. Bu fazda, industry-standard yaklaşımları ve Microsoft'un önerdiği best practice'leri öğreneceksin."
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "API Versioning için best practice'ler ve önerilen yaklaşımlar",
+                "Performans optimizasyon teknikleri ve ipuçları",
+                "Güvenlik konuları ve dikkat edilmesi gerekenler",
+                "Yaygın hatalar ve bunlardan kaçınma yöntemleri",
+                "İleri seviye pattern'ler ve design pattern'ler",
+                "Testing stratejileri ve unit test yazımı",
+                "Error handling ve exception management",
+                "Logging ve monitoring yaklaşımları"
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// API Versioning - İleri Seviye Kullanım Örneği\n// Bu örnek, API Versioning konusunun ileri seviye tekniklerini gösterir\n\nusing Microsoft.AspNetCore.Mvc;\nusing Microsoft.Extensions.Logging;\nusing System;\nusing System.Threading.Tasks;\n\nnamespace WebAPI.Advanced\n{\n    [ApiController]\n    [Route(\"api/v1/[controller]\")]\n    public class AdvancedController : ControllerBase\n    {\n        private readonly ILogger<AdvancedController> _logger;\n        \n        public AdvancedController(ILogger<AdvancedController> logger)\n        {\n            _logger = logger;\n        }\n        \n        // İleri seviye API Versioning implementasyonu\n        [HttpGet(\"{id}\")]\n        [ProducesResponseType(200)]\n        [ProducesResponseType(404)]\n        [ProducesResponseType(500)]\n        public async Task<IActionResult> GetAdvanced(int id)\n        {\n            try\n            {\n                _logger.LogInformation(\"API Versioning - Advanced operation started for ID: {Id}\", id);\n                \n                // İleri seviye API Versioning işlemleri\n                // - Async/await pattern kullanımı\n                // - Proper error handling\n                // - Logging ve monitoring\n                // - Response caching\n                // - Rate limiting\n                \n                return Ok(new { id, message = \"Advanced API Versioning implementation\" });\n            }\n            catch (Exception ex)\n            {\n                _logger.LogError(ex, \"Error in API Versioning operation\");\n                return StatusCode(500, new { error = \"Internal server error\" });\n            }\n        }\n    }\n}",
+              "explanation": "Bu kod örneği, API Versioning konusunun ileri seviye kullanımını gösterir. Async/await pattern, proper error handling, logging, ve response attributes gibi best practice'leri içerir."
+            },
+            {
+              "type": "callout",
+              "variant": "warning",
+              "title": "Dikkat Edilmesi Gerekenler",
+              "body": "API Versioning konusunda ileri seviye teknikler kullanırken, kodun okunabilirliğini ve maintainability'sini korumak çok önemlidir. Aşırı karmaşık çözümlerden kaçının."
+            }
+          ]
+        },
+        {
+          "id": "aspnet-core-web-api-versioning-faz-4-gercek-dunya",
+          "title": "Faz 4: Gerçek Dünya Uygulamaları",
+          "summary": "API Versioning konusunun gerçek dünya senaryolarında kullanımı, case study'ler, troubleshooting ve production considerations.",
+          "content": [
+            {
+              "type": "text",
+              "body": "Bu fazda, API Versioning konusunun gerçek dünya senaryolarında nasıl kullanıldığını göreceksin. Endüstri standardı uygulamalarda API Versioning konusunun nasıl implement edildiğini, gerçek problemlerin nasıl çözüldüğünü ve troubleshooting tekniklerini öğreneceksin."
+            },
+            {
+              "type": "text",
+              "body": "API Versioning konusunu gerçek bir projede kullanırken karşılaşabileceğiniz senaryolar, çözüm yöntemleri ve best practice'ler bu fazda detaylı olarak açıklanmaktadır. Case study'ler ve gerçek dünya örnekleri ile konuyu pekiştireceksin."
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "Gerçek dünya projelerinde API Versioning kullanım senaryoları",
+                "Enterprise seviyesinde API Versioning implementasyonu",
+                "Scalability ve performance konuları",
+                "Troubleshooting ve debugging teknikleri",
+                "Common issues ve çözümleri",
+                "Integration patterns ve microservices mimarisi",
+                "Deployment ve production considerations",
+                "Monitoring ve analytics yaklaşımları"
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// API Versioning - Gerçek Dünya Senaryosu\n// Bu örnek, API Versioning konusunun production ortamında nasıl kullanıldığını gösterir\n\nusing Microsoft.AspNetCore.Mvc;\nusing Microsoft.Extensions.Logging;\nusing Microsoft.Extensions.Caching.Memory;\nusing System;\nusing System.Threading.Tasks;\n\nnamespace WebAPI.Production\n{\n    [ApiController]\n    [Route(\"api/[controller]\")]\n    public class ProductionController : ControllerBase\n    {\n        private readonly ILogger<ProductionController> _logger;\n        private readonly IMemoryCache _cache;\n        \n        public ProductionController(\n            ILogger<ProductionController> logger,\n            IMemoryCache cache)\n        {\n            _logger = logger;\n            _cache = cache;\n        }\n        \n        // Production-ready API Versioning implementasyonu\n        [HttpGet(\"data/{key}\")]\n        [ResponseCache(Duration = 300)]\n        public async Task<IActionResult> GetProductionData(string key)\n        {\n            // Cache kontrolü\n            if (_cache.TryGetValue(key, out var cachedData))\n            {\n                _logger.LogInformation(\"Cache hit for key: {Key}\", key);\n                return Ok(cachedData);\n            }\n            \n            try\n            {\n                // Gerçek dünya senaryosu: Database'den veri çekme\n                // API Versioning konusunun production'da kullanımı\n                \n                var data = await FetchDataFromDatabase(key);\n                \n                // Cache'e kaydet\n                _cache.Set(key, data, TimeSpan.FromMinutes(5));\n                \n                _logger.LogInformation(\"Data fetched and cached for key: {Key}\", key);\n                \n                return Ok(data);\n            }\n            catch (Exception ex)\n            {\n                _logger.LogError(ex, \"Error fetching data for key: {Key}\", key);\n                return StatusCode(500, new { \n                    error = \"An error occurred\",\n                    message = \"Please try again later\" \n                });\n            }\n        }\n        \n        private async Task<object> FetchDataFromDatabase(string key)\n        {\n            // Simulated database operation\n            await Task.Delay(100);\n            return new { key, value = \"Production data\" };\n        }\n    }\n}",
+              "explanation": "Bu kod örneği, API Versioning konusunun production ortamında nasıl kullanıldığını gösterir. Caching, error handling, logging, ve async operations gibi gerçek dünya senaryolarında gerekli olan tüm özellikleri içerir."
+            },
+            {
+              "type": "callout",
+              "variant": "info",
+              "title": "Gerçek Dünya Senaryosu",
+              "body": "Bu örnek, API Versioning konusunun gerçek bir production uygulamasında nasıl kullanıldığını gösterir. Bu tür senaryolar, konuyu daha iyi anlamanızı ve profesyonel seviyede uygulama geliştirmenizi sağlar."
+            },
+            {
+              "type": "text",
+              "body": "Troubleshooting: API Versioning konusunda karşılaşabileceğiniz yaygın problemler ve çözümleri:\n\n1. **Performans Problemleri**: Caching stratejileri, async operations kullanımı\n2. **Güvenlik Sorunları**: Authentication ve authorization kontrolü\n3. **Hata Yönetimi**: Proper exception handling ve error responses\n4. **Scalability**: Load balancing ve distributed systems yaklaşımları\n\nBu problemleri çözmek için yukarıdaki kod örneğinde gösterilen pattern'leri kullanabilirsiniz."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-aspnet-core-web-api-versioning-1",
+          "question": "API Versioning nedir ve neden kullanılır?",
+          "options": [
+            "API Versioning, web API'lerinde veri alışverişi için kullanılan bir standarttır.",
+            "API Versioning, sadece Microsoft teknolojilerinde kullanılan bir kavramdır.",
+            "API Versioning, sadece büyük projelerde gerekli olan bir özelliktir.",
+            "API Versioning, modern web geliştirmede kullanılmayan eski bir teknolojidir."
+          ],
+          "answer": "API Versioning, web API'lerinde veri alışverişi için kullanılan bir standarttır.",
+          "rationale": "API Versioning konusu, modern web API geliştirmede kritik öneme sahiptir ve tüm büyüklükteki projelerde kullanılır."
+        },
+        {
+          "id": "checkpoint-aspnet-core-web-api-versioning-2",
+          "question": "API Versioning konusunda en yaygın hata nedir?",
+          "options": [
+            "Proper error handling yapmamak ve exception'ları doğru yönetmemek",
+            "Kod yazmamak",
+            "Documentation okumamak",
+            "API kullanmamak"
+          ],
+          "answer": "Proper error handling yapmamak ve exception'ları doğru yönetmemek",
+          "rationale": "API Versioning konusunda en yaygın hata, proper error handling yapmamaktır. Bu, production ortamında ciddi problemlere yol açabilir."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-aspnet-core-web-api-versioning-docs",
+          "label": "API Versioning - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/web-api",
+          "type": "reading",
+          "estimatedMinutes": 30,
+          "description": "API Versioning konusu hakkında detaylı Microsoft dokümantasyonu ve resmi kaynaklar."
+        },
+        {
+          "id": "resource-aspnet-core-web-api-versioning-video",
+          "label": "API Versioning - Video Eğitim",
+          "href": "https://learn.microsoft.com/aspnet/core/web-api",
+          "type": "video",
+          "estimatedMinutes": 45,
+          "description": "API Versioning konusunu görsel olarak öğrenmek için video eğitim ve tutorial'lar."
+        },
+        {
+          "id": "resource-aspnet-core-web-api-versioning-sample",
+          "label": "API Versioning - Örnek Projeler",
+          "href": "https://github.com/dotnet/aspnetcore/tree/main/src/WebApi",
+          "type": "reading",
+          "estimatedMinutes": 60,
+          "description": "API Versioning konusunun gerçek dünya örnekleri ve sample projeler."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-aspnet-core-web-api-versioning-1",
+          "title": "API Versioning - Temel Uygulama",
+          "description": "API Versioning konusunun temel kullanımını içeren pratik bir uygulama geliştirin.",
+          "type": "coding",
+          "estimatedMinutes": 45,
+          "difficulty": "Orta",
+          "instructions": [
+            "Yeni bir ASP.NET Core Web API projesi oluşturun",
+            "API Versioning konusunu implement edin",
+            "Temel CRUD operasyonları ekleyin",
+            "Error handling mekanizması ekleyin",
+            "Projeyi test edin ve çalıştığını doğrulayın",
+            "Best practice'leri uyguladığınızdan emin olun"
+          ]
+        },
+        {
+          "id": "practice-aspnet-core-web-api-versioning-2",
+          "title": "API Versioning - İleri Seviye Uygulama",
+          "description": "API Versioning konusunun ileri seviye kullanımını içeren karmaşık bir uygulama geliştirin.",
+          "type": "coding",
+          "estimatedMinutes": 90,
+          "difficulty": "İleri",
+          "instructions": [
+            "API Versioning konusunu ileri seviye tekniklerle implement edin",
+            "Caching, logging, ve monitoring ekleyin",
+            "Authentication ve authorization ekleyin",
+            "Unit testler yazın",
+            "Performance optimizasyonu yapın",
+            "Production-ready hale getirin",
+            "Documentation ekleyin"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Swagger/OpenAPI",
+      "href": "/education/lessons/aspnet-core/web-api/swagger-openapi",
+      "description": "Swagger/OpenAPI entegrasyonu, API dokümantasyonu ve Swagger UI kullanımını öğren. Bu ders, Web API Geliştirme modülünün kapsamlı bir parçasıdır ve gerçek dünya uygulamalarında pratik kullanım senaryolarını içerir.",
+      "estimatedDurationMinutes": 60,
+      "level": "Orta",
+      "keyTakeaways": [
+        "Swagger/OpenAPI konusunun ne olduğunu ve neden önemli olduğunu öğreneceksin.",
+        "Swagger/OpenAPI konusunun nasıl kullanıldığını pratik örneklerle göreceksin.",
+        "Swagger/OpenAPI için best practice'leri ve ileri seviye teknikleri öğreneceksin.",
+        "Gerçek dünya senaryolarında Swagger/OpenAPI konusunun nasıl uygulandığını göreceksin.",
+        "Troubleshooting ve debugging tekniklerini öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "aspnet-core-web-api-swagger-openapi-faz-1-tanim",
+          "title": "Faz 1: Tanım ve Temel Kavramlar",
+          "summary": "Swagger/OpenAPI konusunun tanımı, ne olduğu, neden kullanıldığı ve temel kavramları.",
+          "content": [
+            {
+              "type": "text",
+              "body": "Swagger/OpenAPI entegrasyonu, API dokümantasyonu ve Swagger UI kullanımını öğren. Swagger/OpenAPI, modern web uygulamalarında veri alışverişi için kritik bir rol oynar. Bu fazda, Swagger/OpenAPI konusunun temel tanımını, ne olduğunu ve neden önemli olduğunu öğreneceksin."
+            },
+            {
+              "type": "text",
+              "body": "Swagger/OpenAPI nedir? Bu kavram, web API'lerinin nasıl çalıştığını ve nasıl tasarlandığını anlamak için temel bir yapı taşıdır. Swagger/OpenAPI konusunu derinlemesine anlamak, profesyonel seviyede API geliştirme yapabilmek için gereklidir."
+            },
+            {
+              "type": "list",
+              "ordered": true,
+              "items": [
+                "Swagger/OpenAPI kavramının tanımı ve temel özellikleri",
+                "Swagger/OpenAPI neden kullanılır ve hangi problemleri çözer",
+                "Swagger/OpenAPI konusunun web API geliştirmedeki yeri ve önemi",
+                "Temel terminoloji ve kavramlar",
+                "Diğer yaklaşımlarla karşılaştırma ve farklar"
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Swagger/OpenAPI - Temel Kavram Örneği\n// Bu örnek, Swagger/OpenAPI konusunun temel kullanımını gösterir\n\nusing Microsoft.AspNetCore.Mvc;\n\nnamespace WebAPI.Examples\n{\n    // Swagger/OpenAPI konusunun temel uygulaması\n    public class BasicExample\n    {\n        // Temel kavramlar burada açıklanacak\n    }\n}",
+              "explanation": "Bu kod örneği, Swagger/OpenAPI konusunun temel kullanımını gösterir. Kodun her satırı, konunun temel kavramlarını anlamanıza yardımcı olacak şekilde açıklanmıştır."
+            },
+            {
+              "type": "callout",
+              "variant": "info",
+              "title": "Önemli Kavram",
+              "body": "Swagger/OpenAPI konusunu öğrenirken dikkat etmeniz gereken en önemli nokta, bu konunun web API geliştirmedeki kritik rolüdür. Bu kavramı iyi anlamak, daha iyi API'ler tasarlamanızı sağlar."
+            }
+          ]
+        },
+        {
+          "id": "aspnet-core-web-api-swagger-openapi-faz-2-kullanim",
+          "title": "Faz 2: Nasıl Kullanılır",
+          "summary": "Swagger/OpenAPI konusunun pratikte nasıl kullanıldığı, adım adım implementasyon ve kod örnekleri.",
+          "content": [
+            {
+              "type": "text",
+              "body": "Bu fazda, Swagger/OpenAPI konusunun pratikte nasıl kullanıldığını adım adım öğreneceksin. Swagger/OpenAPI kullanarak gerçek bir uygulama geliştirmenin tüm adımlarını göreceksin."
+            },
+            {
+              "type": "text",
+              "body": "Swagger/OpenAPI nasıl kullanılır? Bu sorunun cevabı, Web API Geliştirme modülünün en önemli kısmıdır. Pratik örnekler ve kod snippet'leri ile konuyu uygulamalı olarak öğreneceksin."
+            },
+            {
+              "type": "list",
+              "ordered": true,
+              "items": [
+                "Swagger/OpenAPI kullanımının adım adım açıklaması",
+                "ASP.NET Core'da Swagger/OpenAPI implementasyonu",
+                "Gerekli paketlerin kurulumu ve yapılandırma",
+                "Temel kullanım örnekleri ve kod yazımı",
+                "Yaygın kullanım senaryoları ve pattern'ler"
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Swagger/OpenAPI - Pratik Kullanım Örneği\n// Bu örnek, Swagger/OpenAPI konusunun gerçek bir projede nasıl kullanıldığını gösterir\n\nusing Microsoft.AspNetCore.Mvc;\nusing Microsoft.AspNetCore.Builder;\nusing Microsoft.Extensions.DependencyInjection;\n\nnamespace WebAPI.Examples\n{\n    public class Startup\n    {\n        public void ConfigureServices(IServiceCollection services)\n        {\n            // Swagger/OpenAPI için servis kayıtları\n            services.AddControllers();\n            \n            // Swagger/OpenAPI yapılandırması\n            // Gerekli ayarlar burada yapılır\n        }\n        \n        public void Configure(IApplicationBuilder app)\n        {\n            // Swagger/OpenAPI middleware'leri\n            app.UseRouting();\n            app.UseEndpoints(endpoints =>\n            {\n                endpoints.MapControllers();\n            });\n        }\n    }\n    \n    [ApiController]\n    [Route(\"api/[controller]\")]\n    public class ExampleController : ControllerBase\n    {\n        // Swagger/OpenAPI kullanım örnekleri\n        [HttpGet]\n        public IActionResult Get()\n        {\n            // Swagger/OpenAPI implementasyonu\n            return Ok(new { message = \"Swagger/OpenAPI örneği\" });\n        }\n    }\n}",
+              "explanation": "Bu kod örneği, Swagger/OpenAPI konusunun ASP.NET Core uygulamasında nasıl kullanıldığını gösterir. Startup.cs'de gerekli yapılandırmaları ve Controller'da kullanımını görebilirsiniz."
+            },
+            {
+              "type": "callout",
+              "variant": "tip",
+              "title": "Pratik İpucu",
+              "body": "Swagger/OpenAPI konusunu öğrenirken, kodları kendiniz yazarak denemek çok önemlidir. Sadece okumak yerine, her örneği çalıştırıp sonuçları gözlemleyin."
+            }
+          ]
+        },
+        {
+          "id": "aspnet-core-web-api-swagger-openapi-faz-3-ileri-seviye",
+          "title": "Faz 3: İleri Seviye ve Best Practices",
+          "summary": "Swagger/OpenAPI konusunun ileri seviye kullanımları, best practice'ler, optimizasyon teknikleri ve yaygın hatalar.",
+          "content": [
+            {
+              "type": "text",
+              "body": "Bu fazda, Swagger/OpenAPI konusunun ileri seviye kullanımlarını ve best practice'lerini öğreneceksin. Profesyonel seviyede API geliştirme yapmak için gerekli olan gelişmiş teknikleri ve optimizasyon stratejilerini göreceksin."
+            },
+            {
+              "type": "text",
+              "body": "Swagger/OpenAPI konusunda ileri seviye teknikler, daha performanslı, güvenli ve maintainable kod yazmanızı sağlar. Bu fazda, industry-standard yaklaşımları ve Microsoft'un önerdiği best practice'leri öğreneceksin."
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "Swagger/OpenAPI için best practice'ler ve önerilen yaklaşımlar",
+                "Performans optimizasyon teknikleri ve ipuçları",
+                "Güvenlik konuları ve dikkat edilmesi gerekenler",
+                "Yaygın hatalar ve bunlardan kaçınma yöntemleri",
+                "İleri seviye pattern'ler ve design pattern'ler",
+                "Testing stratejileri ve unit test yazımı",
+                "Error handling ve exception management",
+                "Logging ve monitoring yaklaşımları"
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Swagger/OpenAPI - İleri Seviye Kullanım Örneği\n// Bu örnek, Swagger/OpenAPI konusunun ileri seviye tekniklerini gösterir\n\nusing Microsoft.AspNetCore.Mvc;\nusing Microsoft.Extensions.Logging;\nusing System;\nusing System.Threading.Tasks;\n\nnamespace WebAPI.Advanced\n{\n    [ApiController]\n    [Route(\"api/v1/[controller]\")]\n    public class AdvancedController : ControllerBase\n    {\n        private readonly ILogger<AdvancedController> _logger;\n        \n        public AdvancedController(ILogger<AdvancedController> logger)\n        {\n            _logger = logger;\n        }\n        \n        // İleri seviye Swagger/OpenAPI implementasyonu\n        [HttpGet(\"{id}\")]\n        [ProducesResponseType(200)]\n        [ProducesResponseType(404)]\n        [ProducesResponseType(500)]\n        public async Task<IActionResult> GetAdvanced(int id)\n        {\n            try\n            {\n                _logger.LogInformation(\"Swagger/OpenAPI - Advanced operation started for ID: {Id}\", id);\n                \n                // İleri seviye Swagger/OpenAPI işlemleri\n                // - Async/await pattern kullanımı\n                // - Proper error handling\n                // - Logging ve monitoring\n                // - Response caching\n                // - Rate limiting\n                \n                return Ok(new { id, message = \"Advanced Swagger/OpenAPI implementation\" });\n            }\n            catch (Exception ex)\n            {\n                _logger.LogError(ex, \"Error in Swagger/OpenAPI operation\");\n                return StatusCode(500, new { error = \"Internal server error\" });\n            }\n        }\n    }\n}",
+              "explanation": "Bu kod örneği, Swagger/OpenAPI konusunun ileri seviye kullanımını gösterir. Async/await pattern, proper error handling, logging, ve response attributes gibi best practice'leri içerir."
+            },
+            {
+              "type": "callout",
+              "variant": "warning",
+              "title": "Dikkat Edilmesi Gerekenler",
+              "body": "Swagger/OpenAPI konusunda ileri seviye teknikler kullanırken, kodun okunabilirliğini ve maintainability'sini korumak çok önemlidir. Aşırı karmaşık çözümlerden kaçının."
+            }
+          ]
+        },
+        {
+          "id": "aspnet-core-web-api-swagger-openapi-faz-4-gercek-dunya",
+          "title": "Faz 4: Gerçek Dünya Uygulamaları",
+          "summary": "Swagger/OpenAPI konusunun gerçek dünya senaryolarında kullanımı, case study'ler, troubleshooting ve production considerations.",
+          "content": [
+            {
+              "type": "text",
+              "body": "Bu fazda, Swagger/OpenAPI konusunun gerçek dünya senaryolarında nasıl kullanıldığını göreceksin. Endüstri standardı uygulamalarda Swagger/OpenAPI konusunun nasıl implement edildiğini, gerçek problemlerin nasıl çözüldüğünü ve troubleshooting tekniklerini öğreneceksin."
+            },
+            {
+              "type": "text",
+              "body": "Swagger/OpenAPI konusunu gerçek bir projede kullanırken karşılaşabileceğiniz senaryolar, çözüm yöntemleri ve best practice'ler bu fazda detaylı olarak açıklanmaktadır. Case study'ler ve gerçek dünya örnekleri ile konuyu pekiştireceksin."
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "Gerçek dünya projelerinde Swagger/OpenAPI kullanım senaryoları",
+                "Enterprise seviyesinde Swagger/OpenAPI implementasyonu",
+                "Scalability ve performance konuları",
+                "Troubleshooting ve debugging teknikleri",
+                "Common issues ve çözümleri",
+                "Integration patterns ve microservices mimarisi",
+                "Deployment ve production considerations",
+                "Monitoring ve analytics yaklaşımları"
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Swagger/OpenAPI - Gerçek Dünya Senaryosu\n// Bu örnek, Swagger/OpenAPI konusunun production ortamında nasıl kullanıldığını gösterir\n\nusing Microsoft.AspNetCore.Mvc;\nusing Microsoft.Extensions.Logging;\nusing Microsoft.Extensions.Caching.Memory;\nusing System;\nusing System.Threading.Tasks;\n\nnamespace WebAPI.Production\n{\n    [ApiController]\n    [Route(\"api/[controller]\")]\n    public class ProductionController : ControllerBase\n    {\n        private readonly ILogger<ProductionController> _logger;\n        private readonly IMemoryCache _cache;\n        \n        public ProductionController(\n            ILogger<ProductionController> logger,\n            IMemoryCache cache)\n        {\n            _logger = logger;\n            _cache = cache;\n        }\n        \n        // Production-ready Swagger/OpenAPI implementasyonu\n        [HttpGet(\"data/{key}\")]\n        [ResponseCache(Duration = 300)]\n        public async Task<IActionResult> GetProductionData(string key)\n        {\n            // Cache kontrolü\n            if (_cache.TryGetValue(key, out var cachedData))\n            {\n                _logger.LogInformation(\"Cache hit for key: {Key}\", key);\n                return Ok(cachedData);\n            }\n            \n            try\n            {\n                // Gerçek dünya senaryosu: Database'den veri çekme\n                // Swagger/OpenAPI konusunun production'da kullanımı\n                \n                var data = await FetchDataFromDatabase(key);\n                \n                // Cache'e kaydet\n                _cache.Set(key, data, TimeSpan.FromMinutes(5));\n                \n                _logger.LogInformation(\"Data fetched and cached for key: {Key}\", key);\n                \n                return Ok(data);\n            }\n            catch (Exception ex)\n            {\n                _logger.LogError(ex, \"Error fetching data for key: {Key}\", key);\n                return StatusCode(500, new { \n                    error = \"An error occurred\",\n                    message = \"Please try again later\" \n                });\n            }\n        }\n        \n        private async Task<object> FetchDataFromDatabase(string key)\n        {\n            // Simulated database operation\n            await Task.Delay(100);\n            return new { key, value = \"Production data\" };\n        }\n    }\n}",
+              "explanation": "Bu kod örneği, Swagger/OpenAPI konusunun production ortamında nasıl kullanıldığını gösterir. Caching, error handling, logging, ve async operations gibi gerçek dünya senaryolarında gerekli olan tüm özellikleri içerir."
+            },
+            {
+              "type": "callout",
+              "variant": "info",
+              "title": "Gerçek Dünya Senaryosu",
+              "body": "Bu örnek, Swagger/OpenAPI konusunun gerçek bir production uygulamasında nasıl kullanıldığını gösterir. Bu tür senaryolar, konuyu daha iyi anlamanızı ve profesyonel seviyede uygulama geliştirmenizi sağlar."
+            },
+            {
+              "type": "text",
+              "body": "Troubleshooting: Swagger/OpenAPI konusunda karşılaşabileceğiniz yaygın problemler ve çözümleri:\n\n1. **Performans Problemleri**: Caching stratejileri, async operations kullanımı\n2. **Güvenlik Sorunları**: Authentication ve authorization kontrolü\n3. **Hata Yönetimi**: Proper exception handling ve error responses\n4. **Scalability**: Load balancing ve distributed systems yaklaşımları\n\nBu problemleri çözmek için yukarıdaki kod örneğinde gösterilen pattern'leri kullanabilirsiniz."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-aspnet-core-web-api-swagger-openapi-1",
+          "question": "Swagger/OpenAPI nedir ve neden kullanılır?",
+          "options": [
+            "Swagger/OpenAPI, web API'lerinde veri alışverişi için kullanılan bir standarttır.",
+            "Swagger/OpenAPI, sadece Microsoft teknolojilerinde kullanılan bir kavramdır.",
+            "Swagger/OpenAPI, sadece büyük projelerde gerekli olan bir özelliktir.",
+            "Swagger/OpenAPI, modern web geliştirmede kullanılmayan eski bir teknolojidir."
+          ],
+          "answer": "Swagger/OpenAPI, web API'lerinde veri alışverişi için kullanılan bir standarttır.",
+          "rationale": "Swagger/OpenAPI konusu, modern web API geliştirmede kritik öneme sahiptir ve tüm büyüklükteki projelerde kullanılır."
+        },
+        {
+          "id": "checkpoint-aspnet-core-web-api-swagger-openapi-2",
+          "question": "Swagger/OpenAPI konusunda en yaygın hata nedir?",
+          "options": [
+            "Proper error handling yapmamak ve exception'ları doğru yönetmemek",
+            "Kod yazmamak",
+            "Documentation okumamak",
+            "API kullanmamak"
+          ],
+          "answer": "Proper error handling yapmamak ve exception'ları doğru yönetmemek",
+          "rationale": "Swagger/OpenAPI konusunda en yaygın hata, proper error handling yapmamaktır. Bu, production ortamında ciddi problemlere yol açabilir."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-aspnet-core-web-api-swagger-openapi-docs",
+          "label": "Swagger/OpenAPI - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/web-api",
+          "type": "reading",
+          "estimatedMinutes": 30,
+          "description": "Swagger/OpenAPI konusu hakkında detaylı Microsoft dokümantasyonu ve resmi kaynaklar."
+        },
+        {
+          "id": "resource-aspnet-core-web-api-swagger-openapi-video",
+          "label": "Swagger/OpenAPI - Video Eğitim",
+          "href": "https://learn.microsoft.com/aspnet/core/web-api",
+          "type": "video",
+          "estimatedMinutes": 45,
+          "description": "Swagger/OpenAPI konusunu görsel olarak öğrenmek için video eğitim ve tutorial'lar."
+        },
+        {
+          "id": "resource-aspnet-core-web-api-swagger-openapi-sample",
+          "label": "Swagger/OpenAPI - Örnek Projeler",
+          "href": "https://github.com/dotnet/aspnetcore/tree/main/src/WebApi",
+          "type": "reading",
+          "estimatedMinutes": 60,
+          "description": "Swagger/OpenAPI konusunun gerçek dünya örnekleri ve sample projeler."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-aspnet-core-web-api-swagger-openapi-1",
+          "title": "Swagger/OpenAPI - Temel Uygulama",
+          "description": "Swagger/OpenAPI konusunun temel kullanımını içeren pratik bir uygulama geliştirin.",
+          "type": "coding",
+          "estimatedMinutes": 45,
+          "difficulty": "Orta",
+          "instructions": [
+            "Yeni bir ASP.NET Core Web API projesi oluşturun",
+            "Swagger/OpenAPI konusunu implement edin",
+            "Temel CRUD operasyonları ekleyin",
+            "Error handling mekanizması ekleyin",
+            "Projeyi test edin ve çalıştığını doğrulayın",
+            "Best practice'leri uyguladığınızdan emin olun"
+          ]
+        },
+        {
+          "id": "practice-aspnet-core-web-api-swagger-openapi-2",
+          "title": "Swagger/OpenAPI - İleri Seviye Uygulama",
+          "description": "Swagger/OpenAPI konusunun ileri seviye kullanımını içeren karmaşık bir uygulama geliştirin.",
+          "type": "coding",
+          "estimatedMinutes": 90,
+          "difficulty": "İleri",
+          "instructions": [
+            "Swagger/OpenAPI konusunu ileri seviye tekniklerle implement edin",
+            "Caching, logging, ve monitoring ekleyin",
+            "Authentication ve authorization ekleyin",
+            "Unit testler yazın",
+            "Performance optimizasyonu yapın",
+            "Production-ready hale getirin",
+            "Documentation ekleyin"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "API Security",
+      "href": "/education/lessons/aspnet-core/web-api/security",
+      "description": "API güvenliği, authentication, authorization, rate limiting ve API key yönetimini öğren. Bu ders, Web API Geliştirme modülünün kapsamlı bir parçasıdır ve gerçek dünya uygulamalarında pratik kullanım senaryolarını içerir.",
+      "estimatedDurationMinutes": 60,
+      "level": "Orta",
+      "keyTakeaways": [
+        "API Security konusunun ne olduğunu ve neden önemli olduğunu öğreneceksin.",
+        "API Security konusunun nasıl kullanıldığını pratik örneklerle göreceksin.",
+        "API Security için best practice'leri ve ileri seviye teknikleri öğreneceksin.",
+        "Gerçek dünya senaryolarında API Security konusunun nasıl uygulandığını göreceksin.",
+        "Troubleshooting ve debugging tekniklerini öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "aspnet-core-web-api-security-faz-1-tanim",
+          "title": "Faz 1: Tanım ve Temel Kavramlar",
+          "summary": "API Security konusunun tanımı, ne olduğu, neden kullanıldığı ve temel kavramları.",
+          "content": [
+            {
+              "type": "text",
+              "body": "API güvenliği, authentication, authorization, rate limiting ve API key yönetimini öğren. API Security, modern web uygulamalarında veri alışverişi için kritik bir rol oynar. Bu fazda, API Security konusunun temel tanımını, ne olduğunu ve neden önemli olduğunu öğreneceksin."
+            },
+            {
+              "type": "text",
+              "body": "API Security nedir? Bu kavram, web API'lerinin nasıl çalıştığını ve nasıl tasarlandığını anlamak için temel bir yapı taşıdır. API Security konusunu derinlemesine anlamak, profesyonel seviyede API geliştirme yapabilmek için gereklidir."
+            },
+            {
+              "type": "list",
+              "ordered": true,
+              "items": [
+                "API Security kavramının tanımı ve temel özellikleri",
+                "API Security neden kullanılır ve hangi problemleri çözer",
+                "API Security konusunun web API geliştirmedeki yeri ve önemi",
+                "Temel terminoloji ve kavramlar",
+                "Diğer yaklaşımlarla karşılaştırma ve farklar"
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// API Security - Temel Kavram Örneği\n// Bu örnek, API Security konusunun temel kullanımını gösterir\n\nusing Microsoft.AspNetCore.Mvc;\n\nnamespace WebAPI.Examples\n{\n    // API Security konusunun temel uygulaması\n    public class BasicExample\n    {\n        // Temel kavramlar burada açıklanacak\n    }\n}",
+              "explanation": "Bu kod örneği, API Security konusunun temel kullanımını gösterir. Kodun her satırı, konunun temel kavramlarını anlamanıza yardımcı olacak şekilde açıklanmıştır."
+            },
+            {
+              "type": "callout",
+              "variant": "info",
+              "title": "Önemli Kavram",
+              "body": "API Security konusunu öğrenirken dikkat etmeniz gereken en önemli nokta, bu konunun web API geliştirmedeki kritik rolüdür. Bu kavramı iyi anlamak, daha iyi API'ler tasarlamanızı sağlar."
+            }
+          ]
+        },
+        {
+          "id": "aspnet-core-web-api-security-faz-2-kullanim",
+          "title": "Faz 2: Nasıl Kullanılır",
+          "summary": "API Security konusunun pratikte nasıl kullanıldığı, adım adım implementasyon ve kod örnekleri.",
+          "content": [
+            {
+              "type": "text",
+              "body": "Bu fazda, API Security konusunun pratikte nasıl kullanıldığını adım adım öğreneceksin. API Security kullanarak gerçek bir uygulama geliştirmenin tüm adımlarını göreceksin."
+            },
+            {
+              "type": "text",
+              "body": "API Security nasıl kullanılır? Bu sorunun cevabı, Web API Geliştirme modülünün en önemli kısmıdır. Pratik örnekler ve kod snippet'leri ile konuyu uygulamalı olarak öğreneceksin."
+            },
+            {
+              "type": "list",
+              "ordered": true,
+              "items": [
+                "API Security kullanımının adım adım açıklaması",
+                "ASP.NET Core'da API Security implementasyonu",
+                "Gerekli paketlerin kurulumu ve yapılandırma",
+                "Temel kullanım örnekleri ve kod yazımı",
+                "Yaygın kullanım senaryoları ve pattern'ler"
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// API Security - Pratik Kullanım Örneği\n// Bu örnek, API Security konusunun gerçek bir projede nasıl kullanıldığını gösterir\n\nusing Microsoft.AspNetCore.Mvc;\nusing Microsoft.AspNetCore.Builder;\nusing Microsoft.Extensions.DependencyInjection;\n\nnamespace WebAPI.Examples\n{\n    public class Startup\n    {\n        public void ConfigureServices(IServiceCollection services)\n        {\n            // API Security için servis kayıtları\n            services.AddControllers();\n            \n            // API Security yapılandırması\n            // Gerekli ayarlar burada yapılır\n        }\n        \n        public void Configure(IApplicationBuilder app)\n        {\n            // API Security middleware'leri\n            app.UseRouting();\n            app.UseEndpoints(endpoints =>\n            {\n                endpoints.MapControllers();\n            });\n        }\n    }\n    \n    [ApiController]\n    [Route(\"api/[controller]\")]\n    public class ExampleController : ControllerBase\n    {\n        // API Security kullanım örnekleri\n        [HttpGet]\n        public IActionResult Get()\n        {\n            // API Security implementasyonu\n            return Ok(new { message = \"API Security örneği\" });\n        }\n    }\n}",
+              "explanation": "Bu kod örneği, API Security konusunun ASP.NET Core uygulamasında nasıl kullanıldığını gösterir. Startup.cs'de gerekli yapılandırmaları ve Controller'da kullanımını görebilirsiniz."
+            },
+            {
+              "type": "callout",
+              "variant": "tip",
+              "title": "Pratik İpucu",
+              "body": "API Security konusunu öğrenirken, kodları kendiniz yazarak denemek çok önemlidir. Sadece okumak yerine, her örneği çalıştırıp sonuçları gözlemleyin."
+            }
+          ]
+        },
+        {
+          "id": "aspnet-core-web-api-security-faz-3-ileri-seviye",
+          "title": "Faz 3: İleri Seviye ve Best Practices",
+          "summary": "API Security konusunun ileri seviye kullanımları, best practice'ler, optimizasyon teknikleri ve yaygın hatalar.",
+          "content": [
+            {
+              "type": "text",
+              "body": "Bu fazda, API Security konusunun ileri seviye kullanımlarını ve best practice'lerini öğreneceksin. Profesyonel seviyede API geliştirme yapmak için gerekli olan gelişmiş teknikleri ve optimizasyon stratejilerini göreceksin."
+            },
+            {
+              "type": "text",
+              "body": "API Security konusunda ileri seviye teknikler, daha performanslı, güvenli ve maintainable kod yazmanızı sağlar. Bu fazda, industry-standard yaklaşımları ve Microsoft'un önerdiği best practice'leri öğreneceksin."
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "API Security için best practice'ler ve önerilen yaklaşımlar",
+                "Performans optimizasyon teknikleri ve ipuçları",
+                "Güvenlik konuları ve dikkat edilmesi gerekenler",
+                "Yaygın hatalar ve bunlardan kaçınma yöntemleri",
+                "İleri seviye pattern'ler ve design pattern'ler",
+                "Testing stratejileri ve unit test yazımı",
+                "Error handling ve exception management",
+                "Logging ve monitoring yaklaşımları"
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// API Security - İleri Seviye Kullanım Örneği\n// Bu örnek, API Security konusunun ileri seviye tekniklerini gösterir\n\nusing Microsoft.AspNetCore.Mvc;\nusing Microsoft.Extensions.Logging;\nusing System;\nusing System.Threading.Tasks;\n\nnamespace WebAPI.Advanced\n{\n    [ApiController]\n    [Route(\"api/v1/[controller]\")]\n    public class AdvancedController : ControllerBase\n    {\n        private readonly ILogger<AdvancedController> _logger;\n        \n        public AdvancedController(ILogger<AdvancedController> logger)\n        {\n            _logger = logger;\n        }\n        \n        // İleri seviye API Security implementasyonu\n        [HttpGet(\"{id}\")]\n        [ProducesResponseType(200)]\n        [ProducesResponseType(404)]\n        [ProducesResponseType(500)]\n        public async Task<IActionResult> GetAdvanced(int id)\n        {\n            try\n            {\n                _logger.LogInformation(\"API Security - Advanced operation started for ID: {Id}\", id);\n                \n                // İleri seviye API Security işlemleri\n                // - Async/await pattern kullanımı\n                // - Proper error handling\n                // - Logging ve monitoring\n                // - Response caching\n                // - Rate limiting\n                \n                return Ok(new { id, message = \"Advanced API Security implementation\" });\n            }\n            catch (Exception ex)\n            {\n                _logger.LogError(ex, \"Error in API Security operation\");\n                return StatusCode(500, new { error = \"Internal server error\" });\n            }\n        }\n    }\n}",
+              "explanation": "Bu kod örneği, API Security konusunun ileri seviye kullanımını gösterir. Async/await pattern, proper error handling, logging, ve response attributes gibi best practice'leri içerir."
+            },
+            {
+              "type": "callout",
+              "variant": "warning",
+              "title": "Dikkat Edilmesi Gerekenler",
+              "body": "API Security konusunda ileri seviye teknikler kullanırken, kodun okunabilirliğini ve maintainability'sini korumak çok önemlidir. Aşırı karmaşık çözümlerden kaçının."
+            }
+          ]
+        },
+        {
+          "id": "aspnet-core-web-api-security-faz-4-gercek-dunya",
+          "title": "Faz 4: Gerçek Dünya Uygulamaları",
+          "summary": "API Security konusunun gerçek dünya senaryolarında kullanımı, case study'ler, troubleshooting ve production considerations.",
+          "content": [
+            {
+              "type": "text",
+              "body": "Bu fazda, API Security konusunun gerçek dünya senaryolarında nasıl kullanıldığını göreceksin. Endüstri standardı uygulamalarda API Security konusunun nasıl implement edildiğini, gerçek problemlerin nasıl çözüldüğünü ve troubleshooting tekniklerini öğreneceksin."
+            },
+            {
+              "type": "text",
+              "body": "API Security konusunu gerçek bir projede kullanırken karşılaşabileceğiniz senaryolar, çözüm yöntemleri ve best practice'ler bu fazda detaylı olarak açıklanmaktadır. Case study'ler ve gerçek dünya örnekleri ile konuyu pekiştireceksin."
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "Gerçek dünya projelerinde API Security kullanım senaryoları",
+                "Enterprise seviyesinde API Security implementasyonu",
+                "Scalability ve performance konuları",
+                "Troubleshooting ve debugging teknikleri",
+                "Common issues ve çözümleri",
+                "Integration patterns ve microservices mimarisi",
+                "Deployment ve production considerations",
+                "Monitoring ve analytics yaklaşımları"
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// API Security - Gerçek Dünya Senaryosu\n// Bu örnek, API Security konusunun production ortamında nasıl kullanıldığını gösterir\n\nusing Microsoft.AspNetCore.Mvc;\nusing Microsoft.Extensions.Logging;\nusing Microsoft.Extensions.Caching.Memory;\nusing System;\nusing System.Threading.Tasks;\n\nnamespace WebAPI.Production\n{\n    [ApiController]\n    [Route(\"api/[controller]\")]\n    public class ProductionController : ControllerBase\n    {\n        private readonly ILogger<ProductionController> _logger;\n        private readonly IMemoryCache _cache;\n        \n        public ProductionController(\n            ILogger<ProductionController> logger,\n            IMemoryCache cache)\n        {\n            _logger = logger;\n            _cache = cache;\n        }\n        \n        // Production-ready API Security implementasyonu\n        [HttpGet(\"data/{key}\")]\n        [ResponseCache(Duration = 300)]\n        public async Task<IActionResult> GetProductionData(string key)\n        {\n            // Cache kontrolü\n            if (_cache.TryGetValue(key, out var cachedData))\n            {\n                _logger.LogInformation(\"Cache hit for key: {Key}\", key);\n                return Ok(cachedData);\n            }\n            \n            try\n            {\n                // Gerçek dünya senaryosu: Database'den veri çekme\n                // API Security konusunun production'da kullanımı\n                \n                var data = await FetchDataFromDatabase(key);\n                \n                // Cache'e kaydet\n                _cache.Set(key, data, TimeSpan.FromMinutes(5));\n                \n                _logger.LogInformation(\"Data fetched and cached for key: {Key}\", key);\n                \n                return Ok(data);\n            }\n            catch (Exception ex)\n            {\n                _logger.LogError(ex, \"Error fetching data for key: {Key}\", key);\n                return StatusCode(500, new { \n                    error = \"An error occurred\",\n                    message = \"Please try again later\" \n                });\n            }\n        }\n        \n        private async Task<object> FetchDataFromDatabase(string key)\n        {\n            // Simulated database operation\n            await Task.Delay(100);\n            return new { key, value = \"Production data\" };\n        }\n    }\n}",
+              "explanation": "Bu kod örneği, API Security konusunun production ortamında nasıl kullanıldığını gösterir. Caching, error handling, logging, ve async operations gibi gerçek dünya senaryolarında gerekli olan tüm özellikleri içerir."
+            },
+            {
+              "type": "callout",
+              "variant": "info",
+              "title": "Gerçek Dünya Senaryosu",
+              "body": "Bu örnek, API Security konusunun gerçek bir production uygulamasında nasıl kullanıldığını gösterir. Bu tür senaryolar, konuyu daha iyi anlamanızı ve profesyonel seviyede uygulama geliştirmenizi sağlar."
+            },
+            {
+              "type": "text",
+              "body": "Troubleshooting: API Security konusunda karşılaşabileceğiniz yaygın problemler ve çözümleri:\n\n1. **Performans Problemleri**: Caching stratejileri, async operations kullanımı\n2. **Güvenlik Sorunları**: Authentication ve authorization kontrolü\n3. **Hata Yönetimi**: Proper exception handling ve error responses\n4. **Scalability**: Load balancing ve distributed systems yaklaşımları\n\nBu problemleri çözmek için yukarıdaki kod örneğinde gösterilen pattern'leri kullanabilirsiniz."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-aspnet-core-web-api-security-1",
+          "question": "API Security nedir ve neden kullanılır?",
+          "options": [
+            "API Security, web API'lerinde veri alışverişi için kullanılan bir standarttır.",
+            "API Security, sadece Microsoft teknolojilerinde kullanılan bir kavramdır.",
+            "API Security, sadece büyük projelerde gerekli olan bir özelliktir.",
+            "API Security, modern web geliştirmede kullanılmayan eski bir teknolojidir."
+          ],
+          "answer": "API Security, web API'lerinde veri alışverişi için kullanılan bir standarttır.",
+          "rationale": "API Security konusu, modern web API geliştirmede kritik öneme sahiptir ve tüm büyüklükteki projelerde kullanılır."
+        },
+        {
+          "id": "checkpoint-aspnet-core-web-api-security-2",
+          "question": "API Security konusunda en yaygın hata nedir?",
+          "options": [
+            "Proper error handling yapmamak ve exception'ları doğru yönetmemek",
+            "Kod yazmamak",
+            "Documentation okumamak",
+            "API kullanmamak"
+          ],
+          "answer": "Proper error handling yapmamak ve exception'ları doğru yönetmemek",
+          "rationale": "API Security konusunda en yaygın hata, proper error handling yapmamaktır. Bu, production ortamında ciddi problemlere yol açabilir."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-aspnet-core-web-api-security-docs",
+          "label": "API Security - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/web-api",
+          "type": "reading",
+          "estimatedMinutes": 30,
+          "description": "API Security konusu hakkında detaylı Microsoft dokümantasyonu ve resmi kaynaklar."
+        },
+        {
+          "id": "resource-aspnet-core-web-api-security-video",
+          "label": "API Security - Video Eğitim",
+          "href": "https://learn.microsoft.com/aspnet/core/web-api",
+          "type": "video",
+          "estimatedMinutes": 45,
+          "description": "API Security konusunu görsel olarak öğrenmek için video eğitim ve tutorial'lar."
+        },
+        {
+          "id": "resource-aspnet-core-web-api-security-sample",
+          "label": "API Security - Örnek Projeler",
+          "href": "https://github.com/dotnet/aspnetcore/tree/main/src/WebApi",
+          "type": "reading",
+          "estimatedMinutes": 60,
+          "description": "API Security konusunun gerçek dünya örnekleri ve sample projeler."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-aspnet-core-web-api-security-1",
+          "title": "API Security - Temel Uygulama",
+          "description": "API Security konusunun temel kullanımını içeren pratik bir uygulama geliştirin.",
+          "type": "coding",
+          "estimatedMinutes": 45,
+          "difficulty": "Orta",
+          "instructions": [
+            "Yeni bir ASP.NET Core Web API projesi oluşturun",
+            "API Security konusunu implement edin",
+            "Temel CRUD operasyonları ekleyin",
+            "Error handling mekanizması ekleyin",
+            "Projeyi test edin ve çalıştığını doğrulayın",
+            "Best practice'leri uyguladığınızdan emin olun"
+          ]
+        },
+        {
+          "id": "practice-aspnet-core-web-api-security-2",
+          "title": "API Security - İleri Seviye Uygulama",
+          "description": "API Security konusunun ileri seviye kullanımını içeren karmaşık bir uygulama geliştirin.",
+          "type": "coding",
+          "estimatedMinutes": 90,
+          "difficulty": "İleri",
+          "instructions": [
+            "API Security konusunu ileri seviye tekniklerle implement edin",
+            "Caching, logging, ve monitoring ekleyin",
+            "Authentication ve authorization ekleyin",
+            "Unit testler yazın",
+            "Performance optimizasyonu yapın",
+            "Production-ready hale getirin",
+            "Documentation ekleyin"
+          ]
+        }
+      ]
+    }
+  ]
+}

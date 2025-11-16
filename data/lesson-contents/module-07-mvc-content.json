@@ -1,0 +1,1471 @@
+{
+  "moduleId": "module-07-mvc",
+  "moduleTitle": "MVC ve Razor Pages Yapısı",
+  "lessons": [
+    {
+      "label": "MVC Tasarım Deseninin Mantığı",
+      "href": "/education/lessons/mvc-razor/mvc-pattern",
+      "description": "MVC (Model-View-Controller) tasarım deseninin ne olduğunu, nasıl çalıştığını ve neden önemli olduğunu öğren. MVC deseni, web uygulamalarında kod organizasyonu ve bakım kolaylığı sağlar. Bu ders, MVC ve Razor Pages modülünün Faz 1'inin ilk dersidir.",
+      "estimatedDurationMinutes": 55,
+      "level": "Başlangıç",
+      "keyTakeaways": [
+        "MVC tasarım deseninin ne olduğunu ve nasıl çalıştığını öğreneceksin.",
+        "Model, View ve Controller'ın rollerini anlayacaksın.",
+        "MVC deseninin avantajlarını keşfedeceksin.",
+        "ASP.NET Core MVC'de MVC deseninin nasıl uygulandığını kavrayacaksın.",
+        "MVC deseni için best practice'leri öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "mvc-pattern-introduction",
+          "title": "MVC Tasarım Deseni Nedir?",
+          "summary": "MVC tasarım deseninin temel tanımı ve bileşenleri.",
+          "content": [
+            {
+              "type": "text",
+              "body": "MVC (Model-View-Controller), yazılım geliştirmede kullanılan bir mimari desendir. Uygulama mantığını üç ana bileşene ayırır: Model (veri ve iş mantığı), View (kullanıcı arayüzü) ve Controller (kullanıcı girdilerini işleyen ve Model ile View arasında köprü kuran)."
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "Model: Veri ve iş mantığını temsil eder. Veritabanı işlemleri, veri doğrulama ve iş kuralları burada bulunur.",
+                "View: Kullanıcı arayüzünü temsil eder. Kullanıcıya gösterilecek HTML, CSS ve JavaScript içerir.",
+                "Controller: Kullanıcı girdilerini işler, Model ile etkileşime girer ve uygun View'ı seçer."
+              ]
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// MVC Pattern Örneği\n\n// Model\npublic class Product\n{\n    public int Id { get; set; }\n    public string Name { get; set; }\n    public decimal Price { get; set; }\n}\n\n// Controller\npublic class ProductController : Controller\n{\n    public IActionResult Index()\n    {\n        // Model'den veri al\n        var products = GetProducts();\n        \n        // View'a gönder\n        return View(products);\n    }\n}\n\n// View (Razor)\n@model List<Product>\n@foreach(var product in Model)\n{\n    <div>@product.Name - @product.Price</div>\n}",
+              "explanation": "MVC deseninin temel yapısını gösterir. Model veriyi, Controller iş mantığını, View ise görünümü temsil eder."
+            }
+          ]
+        },
+        {
+          "id": "mvc-advantages",
+          "title": "MVC Deseninin Avantajları",
+          "summary": "MVC deseninin sağladığı avantajlar.",
+          "content": [
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "Separation of Concerns: Her bileşen kendi sorumluluğuna odaklanır.",
+                "Maintainability: Kod bakımı ve güncelleme kolaydır.",
+                "Testability: Her bileşen bağımsız test edilebilir.",
+                "Reusability: Model ve View bileşenleri tekrar kullanılabilir.",
+                "Scalability: Büyük uygulamalarda organizasyon kolaydır."
+              ]
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-mvc-pattern-1",
+          "question": "MVC deseninde Controller'ın görevi nedir?",
+          "options": [
+            "Sadece veri saklamak",
+            "Kullanıcı girdilerini işlemek ve Model ile View arasında köprü kurmak",
+            "Sadece HTML oluşturmak",
+            "Sadece veritabanı işlemleri yapmak"
+          ],
+          "answer": "Kullanıcı girdilerini işlemek ve Model ile View arasında köprü kurmak",
+          "rationale": "Controller, kullanıcı girdilerini işler, Model ile etkileşime girer ve uygun View'ı seçer. MVC deseninde Controller, Model ve View arasında köprü görevi görür."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-mvc-pattern-docs",
+          "label": "MVC Pattern - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/mvc/overview",
+          "type": "reading",
+          "estimatedMinutes": 35,
+          "description": "ASP.NET Core MVC hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-mvc-pattern-1",
+          "title": "MVC Desenini Anla",
+          "description": "MVC desenini anlamak için pratik yap.",
+          "type": "research",
+          "estimatedMinutes": 30,
+          "difficulty": "Kolay",
+          "instructions": [
+            "MVC desenini araştır.",
+            "Model, View ve Controller'ın rollerini anla.",
+            "MVC deseninin avantajlarını liste.",
+            "Basit bir MVC örneği oluştur."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Controller, Model ve View İlişkisi",
+      "href": "/education/lessons/mvc-razor/controller-model-view",
+      "description": "Controller, Model ve View arasındaki ilişkiyi, veri akışını ve etkileşim şeklini öğren. MVC deseninde bu üç bileşenin nasıl birlikte çalıştığını kavra.",
+      "estimatedDurationMinutes": 60,
+      "level": "Orta",
+      "keyTakeaways": [
+        "Controller, Model ve View arasındaki ilişkiyi öğreneceksin.",
+        "MVC'de veri akışını anlayacaksın.",
+        "Controller'ın Model ve View ile nasıl etkileşime girdiğini keşfedeceksin.",
+        "MVC request-response döngüsünü kavrayacaksın.",
+        "MVC bileşenleri arasındaki ilişki için best practice'leri öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "mvc-relationship",
+          "title": "Controller, Model ve View İlişkisi",
+          "summary": "MVC bileşenleri arasındaki ilişki ve veri akışı.",
+          "content": [
+            {
+              "type": "text",
+              "body": "MVC deseninde Controller, Model ve View arasında köprü görevi görür. Kullanıcı isteği Controller'a gelir, Controller Model'den veri alır ve View'a gönderir."
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// MVC Request-Response Döngüsü\n\n// 1. Kullanıcı isteği Controller'a gelir\n[HttpGet]\npublic IActionResult GetProduct(int id)\n{\n    // 2. Controller, Model'den veri alır\n    var product = _productService.GetProductById(id);\n    \n    // 3. Controller, View'a veri gönderir\n    return View(product);\n}\n\n// Model\npublic class Product\n{\n    public int Id { get; set; }\n    public string Name { get; set; }\n    public decimal Price { get; set; }\n}\n\n// View (Razor)\n@model Product\n<h1>@Model.Name</h1>\n<p>Fiyat: @Model.Price</p>",
+              "explanation": "MVC'de veri akışını gösterir. Controller, Model'den veri alır ve View'a gönderir."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-mvc-relationship-1",
+          "question": "MVC'de veri akışı nasıldır?",
+          "options": [
+            "View -> Controller -> Model",
+            "Controller -> Model -> View",
+            "Model -> Controller -> View",
+            "View -> Model -> Controller"
+          ],
+          "answer": "Controller -> Model -> View",
+          "rationale": "MVC'de veri akışı şu şekildedir: Kullanıcı isteği Controller'a gelir, Controller Model'den veri alır ve View'a gönderir."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-mvc-relationship-docs",
+          "label": "MVC Overview - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/mvc/overview",
+          "type": "reading",
+          "estimatedMinutes": 30,
+          "description": "ASP.NET Core MVC bileşenleri hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-mvc-relationship-1",
+          "title": "MVC Bileşenleri Arasındaki İlişki",
+          "description": "Controller, Model ve View arasındaki ilişkiyi uygula.",
+          "type": "coding",
+          "estimatedMinutes": 55,
+          "difficulty": "Orta",
+          "instructions": [
+            "Basit bir Controller oluştur.",
+            "Model sınıfı oluştur.",
+            "View oluştur ve Model'i kullan.",
+            "Veri akışını test et."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Model Binding ve Validation",
+      "href": "/education/lessons/mvc-razor/model-binding",
+      "description": "Model binding mekanizmasını, HTTP isteklerinden veri alma ve doğrulama (validation) işlemlerini öğren. Model binding, form verilerini otomatik olarak C# nesnelerine dönüştürür.",
+      "estimatedDurationMinutes": 65,
+      "level": "Orta",
+      "keyTakeaways": [
+        "Model binding'in ne olduğunu ve nasıl çalıştığını öğreneceksin.",
+        "Farklı model binding yöntemlerini anlayacaksın.",
+        "Validation işlemlerini keşfedeceksin.",
+        "ModelState kullanımını kavrayacaksın.",
+        "Model binding ve validation için best practice'leri öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "model-binding-introduction",
+          "title": "Model Binding Nedir?",
+          "summary": "Model binding kavramının temel tanımı.",
+          "content": [
+            {
+              "type": "text",
+              "body": "Model binding, HTTP isteklerinden gelen verileri (form data, query string, route data) otomatik olarak C# nesnelerine dönüştürme işlemidir. ASP.NET Core MVC, model binding'i otomatik olarak yapar."
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Model Binding Örnekleri\n\n// 1. Query String Binding\n[HttpGet]\npublic IActionResult GetUser(string name, int age)\n{\n    // URL: /user?name=John&age=30\n    // name = \"John\", age = 30\n    return Ok(new { name, age });\n}\n\n// 2. Route Data Binding\n[HttpGet(\"users/{id}\")]\npublic IActionResult GetUser(int id)\n{\n    // URL: /users/123\n    // id = 123\n    return Ok(new { id });\n}\n\n// 3. Form Data Binding\n[HttpPost]\npublic IActionResult CreateUser(User user)\n{\n    // Form verileri otomatik olarak User nesnesine dönüştürülür\n    if (ModelState.IsValid)\n    {\n        // Validation başarılı\n        return Ok(user);\n    }\n    return BadRequest(ModelState);\n}",
+              "explanation": "Farklı model binding yöntemlerini gösterir: query string, route data ve form data binding."
+            }
+          ]
+        },
+        {
+          "id": "validation",
+          "title": "Validation (Doğrulama)",
+          "summary": "Model validation işlemleri.",
+          "content": [
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Validation Örneği\n\npublic class User\n{\n    [Required(ErrorMessage = \"İsim gereklidir\")]\n    [StringLength(50, MinimumLength = 3)]\n    public string Name { get; set; }\n    \n    [Required]\n    [EmailAddress(ErrorMessage = \"Geçerli bir email adresi giriniz\")]\n    public string Email { get; set; }\n    \n    [Range(18, 100, ErrorMessage = \"Yaş 18-100 arasında olmalıdır\")]\n    public int Age { get; set; }\n}\n\n[HttpPost]\npublic IActionResult CreateUser(User user)\n{\n    if (!ModelState.IsValid)\n    {\n        // Validation hataları var\n        return View(user);\n    }\n    \n    // Validation başarılı, kullanıcıyı kaydet\n    _userService.CreateUser(user);\n    return RedirectToAction(\"Index\");\n}",
+              "explanation": "Data annotations kullanarak validation yapma örneği."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-model-binding-1",
+          "question": "Model binding ne yapar?",
+          "options": [
+            "Sadece veri saklar",
+            "HTTP isteklerinden gelen verileri C# nesnelerine dönüştürür",
+            "Sadece HTML oluşturur",
+            "Sadece veritabanı işlemleri yapar"
+          ],
+          "answer": "HTTP isteklerinden gelen verileri C# nesnelerine dönüştürür",
+          "rationale": "Model binding, HTTP isteklerinden gelen verileri (form data, query string, route data) otomatik olarak C# nesnelerine dönüştürme işlemidir."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-model-binding-docs",
+          "label": "Model Binding - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/mvc/models/model-binding",
+          "type": "reading",
+          "estimatedMinutes": 40,
+          "description": "ASP.NET Core MVC model binding hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-model-binding-1",
+          "title": "Model Binding ve Validation",
+          "description": "Model binding ve validation işlemlerini uygula.",
+          "type": "coding",
+          "estimatedMinutes": 60,
+          "difficulty": "Orta",
+          "instructions": [
+            "Model sınıfı oluştur ve validation attribute'ları ekle.",
+            "Controller'da model binding kullan.",
+            "ModelState.IsValid kontrolü yap.",
+            "Validation hatalarını göster."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "ViewModel ve DTO Kullanımı",
+      "href": "/education/lessons/mvc-razor/viewmodel-dto",
+      "description": "ViewModel ve DTO (Data Transfer Object) kavramlarını, ne zaman kullanılacağını ve nasıl oluşturulacağını öğren. ViewModel ve DTO, veri transferi ve görünüm optimizasyonu için kritik öneme sahiptir.",
+      "estimatedDurationMinutes": 60,
+      "level": "Orta",
+      "keyTakeaways": [
+        "ViewModel ve DTO kavramlarını öğreneceksin.",
+        "ViewModel ve DTO arasındaki farkı anlayacaksın.",
+        "Ne zaman ViewModel veya DTO kullanılacağını keşfedeceksin.",
+        "ViewModel ve DTO oluşturmayı kavrayacaksın.",
+        "ViewModel ve DTO için best practice'leri öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "viewmodel-dto-introduction",
+          "title": "ViewModel ve DTO Nedir?",
+          "summary": "ViewModel ve DTO kavramlarının temel tanımları.",
+          "content": [
+            {
+              "type": "text",
+              "body": "ViewModel, View'a özel veri yapısıdır. View'ın ihtiyaç duyduğu verileri içerir ve genellikle birden fazla Model'den veri birleştirir. DTO (Data Transfer Object), katmanlar arası veri transferi için kullanılan basit veri nesneleridir."
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// ViewModel Örneği\npublic class ProductViewModel\n{\n    public int Id { get; set; }\n    public string Name { get; set; }\n    public decimal Price { get; set; }\n    public string CategoryName { get; set; } // Farklı bir tablodan\n    public List<string> Tags { get; set; } // View için özel\n}\n\n// DTO Örneği\npublic class CreateProductDto\n{\n    public string Name { get; set; }\n    public decimal Price { get; set; }\n    public int CategoryId { get; set; }\n}\n\n// Controller'da Kullanım\n[HttpGet]\npublic IActionResult Create()\n{\n    var viewModel = new ProductViewModel\n    {\n        Categories = _categoryService.GetAll(),\n        Tags = new List<string>()\n    };\n    return View(viewModel);\n}\n\n[HttpPost]\npublic IActionResult Create(CreateProductDto dto)\n{\n    // DTO'dan Entity'ye dönüştür\n    var product = new Product\n    {\n        Name = dto.Name,\n        Price = dto.Price,\n        CategoryId = dto.CategoryId\n    };\n    \n    _productService.Create(product);\n    return RedirectToAction(\"Index\");\n}",
+              "explanation": "ViewModel ve DTO kullanım örnekleri. ViewModel View'a özel, DTO ise veri transferi için kullanılır."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-viewmodel-dto-1",
+          "question": "ViewModel ne için kullanılır?",
+          "options": [
+            "Sadece veritabanı işlemleri için",
+            "View'a özel veri yapısı oluşturmak için",
+            "Sadece API'ler için",
+            "Sadece validation için"
+          ],
+          "answer": "View'a özel veri yapısı oluşturmak için",
+          "rationale": "ViewModel, View'a özel veri yapısıdır. View'ın ihtiyaç duyduğu verileri içerir ve genellikle birden fazla Model'den veri birleştirir."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-viewmodel-dto-docs",
+          "label": "ViewModel Pattern - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/mvc/views/overview",
+          "type": "reading",
+          "estimatedMinutes": 35,
+          "description": "ASP.NET Core MVC ViewModel pattern hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-viewmodel-dto-1",
+          "title": "ViewModel ve DTO Kullanımı",
+          "description": "ViewModel ve DTO oluştur ve kullan.",
+          "type": "coding",
+          "estimatedMinutes": 55,
+          "difficulty": "Orta",
+          "instructions": [
+            "ViewModel sınıfı oluştur.",
+            "DTO sınıfı oluştur.",
+            "Controller'da ViewModel ve DTO kullan.",
+            "View'da ViewModel'i kullan."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Form İşlemleri (GET/POST)",
+      "href": "/education/lessons/mvc-razor/forms",
+      "description": "HTML form oluşturma, GET ve POST metodları ile form gönderme, form verilerini alma ve işleme işlemlerini öğren. Form işlemleri, web uygulamalarının temelidir.",
+      "estimatedDurationMinutes": 65,
+      "level": "Orta",
+      "keyTakeaways": [
+        "HTML form oluşturmayı öğreneceksin.",
+        "GET ve POST metodlarının farkını anlayacaksın.",
+        "Form verilerini Controller'da alma işlemlerini keşfedeceksin.",
+        "Form validation işlemlerini kavrayacaksın.",
+        "Form işlemleri için best practice'leri öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "form-operations",
+          "title": "Form İşlemleri",
+          "summary": "GET ve POST metodları ile form işlemleri.",
+          "content": [
+            {
+              "type": "code",
+              "language": "html",
+              "code": "<!-- GET Form (Veri Görüntüleme) -->\n<form method=\"get\" action=\"/products/search\">\n    <input type=\"text\" name=\"query\" placeholder=\"Ara...\" />\n    <button type=\"submit\">Ara</button>\n</form>\n\n<!-- POST Form (Veri Gönderme) -->\n<form method=\"post\" action=\"/products/create\">\n    @Html.AntiForgeryToken()\n    <input type=\"text\" name=\"name\" placeholder=\"Ürün Adı\" />\n    <input type=\"number\" name=\"price\" placeholder=\"Fiyat\" />\n    <button type=\"submit\">Oluştur</button>\n</form>",
+              "explanation": "GET ve POST metodları ile form örnekleri. GET veri görüntüleme, POST veri gönderme için kullanılır."
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Controller - Form İşlemleri\n\n// GET - Form göster\n[HttpGet]\npublic IActionResult Create()\n{\n    return View();\n}\n\n// POST - Form verilerini al ve işle\n[HttpPost]\n[ValidateAntiForgeryToken]\npublic IActionResult Create(Product product)\n{\n    if (ModelState.IsValid)\n    {\n        _productService.Create(product);\n        return RedirectToAction(\"Index\");\n    }\n    \n    // Validation hataları varsa formu tekrar göster\n    return View(product);\n}\n\n// GET - Arama formu\n[HttpGet]\npublic IActionResult Search(string query)\n{\n    var products = _productService.Search(query);\n    return View(products);\n}",
+              "explanation": "Controller'da GET ve POST metodları ile form işlemleri. GET form gösterir, POST form verilerini işler."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-forms-1",
+          "question": "Form verilerini göndermek için hangi HTTP metodu kullanılır?",
+          "options": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+          ],
+          "answer": "POST",
+          "rationale": "Form verilerini göndermek için POST metodu kullanılır. GET metodu veri görüntüleme için kullanılır."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-forms-docs",
+          "label": "Forms in ASP.NET Core - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/mvc/views/working-with-forms",
+          "type": "reading",
+          "estimatedMinutes": 35,
+          "description": "ASP.NET Core MVC form işlemleri hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-forms-1",
+          "title": "Form İşlemleri",
+          "description": "GET ve POST metodları ile form işlemleri yap.",
+          "type": "coding",
+          "estimatedMinutes": 60,
+          "difficulty": "Orta",
+          "instructions": [
+            "GET formu oluştur (arama formu).",
+            "POST formu oluştur (kayıt formu).",
+            "Controller'da form verilerini al ve işle.",
+            "Validation ekle ve test et."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Partial View, Layout, Section Kullanımı",
+      "href": "/education/lessons/mvc-razor/partial-layout",
+      "description": "Partial View, Layout ve Section kavramlarını, ne zaman kullanılacağını ve nasıl oluşturulacağını öğren. Bu yapılar, Razor view'larında kod tekrarını önler ve bakımı kolaylaştırır. Bu ders, MVC ve Razor Pages modülünün Faz 2'sinin ilk dersidir.",
+      "estimatedDurationMinutes": 60,
+      "level": "Orta",
+      "keyTakeaways": [
+        "Partial View, Layout ve Section kavramlarını öğreneceksin.",
+        "Ne zaman Partial View kullanılacağını anlayacaksın.",
+        "Layout yapısını keşfedeceksin.",
+        "Section kullanımını kavrayacaksın.",
+        "Partial View, Layout ve Section için best practice'leri öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "partial-view-layout-section",
+          "title": "Partial View, Layout ve Section",
+          "summary": "Partial View, Layout ve Section kavramları ve kullanımları.",
+          "content": [
+            {
+              "type": "text",
+              "body": "Partial View, Layout ve Section, Razor view'larında kod organizasyonu ve tekrarını önlemek için kullanılan yapılardır. Partial View tekrar kullanılabilir view parçaları, Layout sayfa şablonu, Section ise Layout içinde özelleştirilebilir alanlardır."
+            },
+            {
+              "type": "code",
+              "language": "html",
+              "code": "<!-- _Layout.cshtml -->\n<!DOCTYPE html>\n<html>\n<head>\n    <title>@ViewData[\"Title\"]</title>\n</head>\n<body>\n    <header>\n        @await Html.PartialAsync(\"_Header\")\n    </header>\n    <main>\n        @RenderBody()\n    </main>\n    <footer>\n        @await Html.PartialAsync(\"_Footer\")\n    </footer>\n    @RenderSection(\"Scripts\", required: false)\n</body>\n</html>\n\n<!-- Index.cshtml -->\n@{\n    Layout = \"_Layout\";\n    ViewData[\"Title\"] = \"Ana Sayfa\";\n}\n\n<h1>Hoş Geldiniz</h1>\n\n@section Scripts {\n    <script src=\"~/js/custom.js\"></script>\n}",
+              "explanation": "Layout, Partial View ve Section kullanım örneği. Layout sayfa şablonu, Partial View tekrar kullanılabilir parçalar, Section özelleştirilebilir alanlar sağlar."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-partial-layout-1",
+          "question": "Partial View ne için kullanılır?",
+          "options": [
+            "Sadece sayfa şablonu için",
+            "Tekrar kullanılabilir view parçaları için",
+            "Sadece JavaScript için",
+            "Sadece CSS için"
+          ],
+          "answer": "Tekrar kullanılabilir view parçaları için",
+          "rationale": "Partial View, tekrar kullanılabilir view parçaları oluşturmak için kullanılır. Header, footer, sidebar gibi bileşenler için idealdir."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-partial-layout-docs",
+          "label": "Layouts and Partial Views - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/mvc/views/layout",
+          "type": "reading",
+          "estimatedMinutes": 35,
+          "description": "ASP.NET Core MVC Layout ve Partial View hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-partial-layout-1",
+          "title": "Partial View, Layout ve Section",
+          "description": "Partial View, Layout ve Section kullanımını uygula.",
+          "type": "coding",
+          "estimatedMinutes": 55,
+          "difficulty": "Orta",
+          "instructions": [
+            "Layout dosyası oluştur.",
+            "Partial View oluştur (header, footer).",
+            "Section kullan.",
+            "View'larda Layout ve Partial View kullan."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Razor Syntax Derinlemesine",
+      "href": "/education/lessons/mvc-razor/razor-syntax",
+      "description": "Razor syntax'ının detaylarını, C# kodunu HTML içinde kullanma, döngüler, koşullar ve Razor expression'larını öğren. Razor, ASP.NET Core MVC'de view oluşturmanın temelidir.",
+      "estimatedDurationMinutes": 70,
+      "level": "Orta",
+      "keyTakeaways": [
+        "Razor syntax'ının detaylarını öğreneceksin.",
+        "C# kodunu HTML içinde kullanmayı anlayacaksın.",
+        "Razor döngüleri ve koşulları keşfedeceksin.",
+        "Razor expression'larını kavrayacaksın.",
+        "Razor syntax için best practice'leri öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "razor-syntax-deep",
+          "title": "Razor Syntax Derinlemesine",
+          "summary": "Razor syntax'ının detaylı kullanımı.",
+          "content": [
+            {
+              "type": "code",
+              "language": "html",
+              "code": "@* Razor Syntax Örnekleri *@\n\n@* 1. C# Expression *@\n<p>Merhaba @Model.Name</p>\n<p>Toplam: @(Model.Price * Model.Quantity)</p>\n\n@* 2. Code Block *@\n@{\n    var message = \"Hoş geldiniz\";\n    var count = 10;\n}\n<p>@message - @count ürün</p>\n\n@* 3. Koşullar *@\n@if (Model.IsActive)\n{\n    <p>Aktif</p>\n}\nelse\n{\n    <p>Pasif</p>\n}\n\n@* 4. Döngüler *@\n@foreach (var product in Model.Products)\n{\n    <div>@product.Name - @product.Price</div>\n}\n\n@* 5. Switch *@\n@switch (Model.Status)\n{\n    case \"Active\":\n        <span class=\"badge badge-success\">Aktif</span>\n        break;\n    case \"Inactive\":\n        <span class=\"badge badge-danger\">Pasif</span>\n        break;\n}",
+              "explanation": "Razor syntax'ının temel özellikleri: expression, code block, koşullar, döngüler ve switch."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-razor-syntax-1",
+          "question": "Razor'da C# kodu yazmak için hangi sembol kullanılır?",
+          "options": [
+            "#",
+            "@",
+            "$",
+            "%"
+          ],
+          "answer": "@",
+          "rationale": "Razor'da C# kodu yazmak için '@' sembolü kullanılır. @Model.Name, @if, @foreach gibi."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-razor-syntax-docs",
+          "label": "Razor Syntax - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/mvc/views/razor",
+          "type": "reading",
+          "estimatedMinutes": 40,
+          "description": "ASP.NET Core Razor syntax hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-razor-syntax-1",
+          "title": "Razor Syntax",
+          "description": "Razor syntax'ını kullanarak view oluştur.",
+          "type": "coding",
+          "estimatedMinutes": 65,
+          "difficulty": "Orta",
+          "instructions": [
+            "Razor expression'ları kullan.",
+            "Code block oluştur.",
+            "Koşullar ve döngüler kullan.",
+            "View oluştur ve test et."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "TagHelper Özelleştirmeleri",
+      "href": "/education/lessons/mvc-razor/tag-helpers",
+      "description": "TagHelper kavramını, built-in TagHelper'ları ve custom TagHelper oluşturmayı öğren. TagHelper'lar, Razor view'larında HTML benzeri syntax ile server-side kod yazmanı sağlar.",
+      "estimatedDurationMinutes": 65,
+      "level": "Orta",
+      "keyTakeaways": [
+        "TagHelper kavramını öğreneceksin.",
+        "Built-in TagHelper'ları anlayacaksın.",
+        "Custom TagHelper oluşturmayı keşfedeceksin.",
+        "TagHelper kullanımını kavrayacaksın.",
+        "TagHelper için best practice'leri öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "tag-helpers",
+          "title": "TagHelper Kullanımı",
+          "summary": "TagHelper kavramı ve kullanımı.",
+          "content": [
+            {
+              "type": "code",
+              "language": "html",
+              "code": "@* Built-in TagHelper Örnekleri *@\n\n@* Form TagHelper *@\n<form asp-action=\"Create\" asp-controller=\"Products\" method=\"post\">\n    <div asp-validation-summary=\"All\"></div>\n    \n    <label asp-for=\"Name\"></label>\n    <input asp-for=\"Name\" />\n    <span asp-validation-for=\"Name\"></span>\n    \n    <button type=\"submit\">Kaydet</button>\n</form>\n\n@* Anchor TagHelper *@\n<a asp-action=\"Index\" asp-controller=\"Home\" asp-route-id=\"123\">Ana Sayfa</a>\n\n@* Image TagHelper *@\n<img asp-append-version=\"true\" src=\"~/images/logo.png\" alt=\"Logo\" />",
+              "explanation": "Built-in TagHelper örnekleri: form, anchor, image TagHelper'ları."
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Custom TagHelper\n[HtmlTargetElement(\"custom-button\")]\npublic class CustomButtonTagHelper : TagHelper\n{\n    public string Text { get; set; }\n    public string CssClass { get; set; } = \"btn btn-primary\";\n    \n    public override void Process(TagHelperContext context, TagHelperOutput output)\n    {\n        output.TagName = \"button\";\n        output.Attributes.SetAttribute(\"class\", CssClass);\n        output.Content.SetContent(Text);\n    }\n}\n\n// View'da Kullanım\n<custom-button text=\"Kaydet\" css-class=\"btn btn-success\"></custom-button>",
+              "explanation": "Custom TagHelper oluşturma ve kullanım örneği."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-tag-helpers-1",
+          "question": "TagHelper ne için kullanılır?",
+          "options": [
+            "Sadece CSS için",
+            "HTML benzeri syntax ile server-side kod yazmak için",
+            "Sadece JavaScript için",
+            "Sadece veritabanı için"
+          ],
+          "answer": "HTML benzeri syntax ile server-side kod yazmak için",
+          "rationale": "TagHelper'lar, Razor view'larında HTML benzeri syntax ile server-side kod yazmanı sağlar. asp-for, asp-action gibi attribute'lar kullanılır."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-tag-helpers-docs",
+          "label": "Tag Helpers - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/mvc/views/tag-helpers/intro",
+          "type": "reading",
+          "estimatedMinutes": 35,
+          "description": "ASP.NET Core TagHelper hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-tag-helpers-1",
+          "title": "TagHelper Kullanımı",
+          "description": "Built-in ve custom TagHelper kullan.",
+          "type": "coding",
+          "estimatedMinutes": 60,
+          "difficulty": "Orta",
+          "instructions": [
+            "Built-in TagHelper'ları kullan (form, anchor).",
+            "Custom TagHelper oluştur.",
+            "View'da TagHelper kullan.",
+            "Test et ve doğrula."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "ViewComponent Kavramı",
+      "href": "/education/lessons/mvc-razor/view-components",
+      "description": "ViewComponent kavramını, ne zaman kullanılacağını ve nasıl oluşturulacağını öğren. ViewComponent'ler, Partial View'lara göre daha güçlü ve yeniden kullanılabilir bileşenlerdir.",
+      "estimatedDurationMinutes": 70,
+      "level": "İleri",
+      "keyTakeaways": [
+        "ViewComponent kavramını öğreneceksin.",
+        "ViewComponent ve Partial View arasındaki farkı anlayacaksın.",
+        "ViewComponent oluşturmayı keşfedeceksin.",
+        "ViewComponent kullanımını kavrayacaksın.",
+        "ViewComponent için best practice'leri öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "view-components",
+          "title": "ViewComponent Kullanımı",
+          "summary": "ViewComponent kavramı ve kullanımı.",
+          "content": [
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// ViewComponent Oluşturma\npublic class ShoppingCartViewComponent : ViewComponent\n{\n    private readonly ICartService _cartService;\n    \n    public ShoppingCartViewComponent(ICartService cartService)\n    {\n        _cartService = cartService;\n    }\n    \n    public async Task<IViewComponentResult> InvokeAsync(int userId)\n    {\n        var cart = await _cartService.GetCartAsync(userId);\n        return View(cart);\n    }\n}\n\n// ViewComponent View (_ShoppingCart.cshtml)\n@model CartViewModel\n<div class=\"cart\">\n    <h3>Sepetim</h3>\n    <p>@Model.ItemCount ürün</p>\n    <p>Toplam: @Model.TotalPrice</p>\n</div>\n\n// View'da Kullanım\n@await Component.InvokeAsync(\"ShoppingCart\", new { userId = 123 })\n\n// Veya TagHelper ile\n<vc:shopping-cart user-id=\"123\"></vc:shopping-cart>",
+              "explanation": "ViewComponent oluşturma ve kullanım örneği. ViewComponent, Partial View'lara göre daha güçlü ve yeniden kullanılabilir bileşenlerdir."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-view-components-1",
+          "question": "ViewComponent ne zaman kullanılır?",
+          "options": [
+            "Sadece basit HTML için",
+            "Karmaşık logic içeren, yeniden kullanılabilir bileşenler için",
+            "Sadece CSS için",
+            "Sadece JavaScript için"
+          ],
+          "answer": "Karmaşık logic içeren, yeniden kullanılabilir bileşenler için",
+          "rationale": "ViewComponent'ler, karmaşık logic içeren, yeniden kullanılabilir bileşenler oluşturmak için kullanılır. Partial View'lara göre daha güçlüdür."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-view-components-docs",
+          "label": "View Components - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/mvc/views/view-components",
+          "type": "reading",
+          "estimatedMinutes": 35,
+          "description": "ASP.NET Core ViewComponent hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-view-components-1",
+          "title": "ViewComponent Oluşturma",
+          "description": "ViewComponent oluştur ve kullan.",
+          "type": "coding",
+          "estimatedMinutes": 65,
+          "difficulty": "İleri",
+          "instructions": [
+            "ViewComponent sınıfı oluştur.",
+            "ViewComponent view oluştur.",
+            "View'da ViewComponent kullan.",
+            "Test et ve doğrula."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "ActionResult Türleri (Json, File, Redirect, View)",
+      "href": "/education/lessons/mvc-razor/action-results",
+      "description": "ActionResult türlerini, ne zaman kullanılacağını ve nasıl döndürüleceğini öğren. View, Json, File, Redirect gibi farklı ActionResult türleri, farklı response tipleri için kullanılır.",
+      "estimatedDurationMinutes": 60,
+      "level": "Orta",
+      "keyTakeaways": [
+        "ActionResult türlerini öğreneceksin.",
+        "Ne zaman hangi ActionResult kullanılacağını anlayacaksın.",
+        "View, Json, File, Redirect ActionResult'larını keşfedeceksin.",
+        "ActionResult kullanımını kavrayacaksın.",
+        "ActionResult için best practice'leri öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "action-results",
+          "title": "ActionResult Türleri",
+          "summary": "Farklı ActionResult türleri ve kullanımları.",
+          "content": [
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// ActionResult Türleri\n\n// 1. View Result - HTML sayfası döndür\npublic IActionResult Index()\n{\n    var model = GetProducts();\n    return View(model);\n}\n\n// 2. Json Result - JSON veri döndür\n[HttpGet]\npublic IActionResult GetProducts()\n{\n    var products = GetProducts();\n    return Json(products);\n}\n\n// 3. File Result - Dosya döndür\n[HttpGet]\npublic IActionResult DownloadFile(string fileName)\n{\n    var filePath = Path.Combine(_webHostEnvironment.WebRootPath, \"files\", fileName);\n    var fileBytes = System.IO.File.ReadAllBytes(filePath);\n    return File(fileBytes, \"application/pdf\", fileName);\n}\n\n// 4. Redirect Result - Yönlendirme yap\n[HttpPost]\npublic IActionResult Create(Product product)\n{\n    _productService.Create(product);\n    return RedirectToAction(\"Index\");\n}\n\n// 5. Partial View Result\npublic IActionResult GetProductPartial(int id)\n{\n    var product = _productService.GetById(id);\n    return PartialView(\"_ProductPartial\", product);\n}",
+              "explanation": "Farklı ActionResult türleri: View, Json, File, Redirect ve PartialView."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-action-results-1",
+          "question": "JSON veri döndürmek için hangi ActionResult kullanılır?",
+          "options": [
+            "View",
+            "Json",
+            "File",
+            "Redirect"
+          ],
+          "answer": "Json",
+          "rationale": "JSON veri döndürmek için Json ActionResult kullanılır. API endpoint'lerinde yaygın olarak kullanılır."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-action-results-docs",
+          "label": "Action Results - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/mvc/controllers/actions",
+          "type": "reading",
+          "estimatedMinutes": 30,
+          "description": "ASP.NET Core MVC ActionResult hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-action-results-1",
+          "title": "ActionResult Türleri",
+          "description": "Farklı ActionResult türlerini kullan.",
+          "type": "coding",
+          "estimatedMinutes": 55,
+          "difficulty": "Orta",
+          "instructions": [
+            "View Result kullan.",
+            "Json Result kullan.",
+            "File Result kullan.",
+            "Redirect Result kullan."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "TempData, ViewData ve ViewBag Farkları",
+      "href": "/education/lessons/mvc-razor/tempdata-viewdata",
+      "description": "TempData, ViewData ve ViewBag kavramlarını, aralarındaki farkları ve ne zaman kullanılacağını öğren. Bu üç yapı, Controller'dan View'a veri aktarımı için kullanılır. Bu ders, MVC ve Razor Pages modülünün Faz 3'ünün ilk dersidir.",
+      "estimatedDurationMinutes": 55,
+      "level": "Orta",
+      "keyTakeaways": [
+        "TempData, ViewData ve ViewBag kavramlarını öğreneceksin.",
+        "Aralarındaki farkları anlayacaksın.",
+        "Ne zaman hangisinin kullanılacağını keşfedeceksin.",
+        "TempData, ViewData ve ViewBag kullanımını kavrayacaksın.",
+        "TempData, ViewData ve ViewBag için best practice'leri öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "tempdata-viewdata-viewbag",
+          "title": "TempData, ViewData ve ViewBag",
+          "summary": "TempData, ViewData ve ViewBag kavramları ve farkları.",
+          "content": [
+            {
+              "type": "text",
+              "body": "TempData, ViewData ve ViewBag, Controller'dan View'a veri aktarımı için kullanılan yapılardır. Her birinin kendine özgü özellikleri ve kullanım senaryoları vardır."
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// TempData, ViewData ve ViewBag Kullanımı\n\n// 1. ViewData - Dictionary benzeri, tip güvenli değil\n[HttpGet]\npublic IActionResult Index()\n{\n    ViewData[\"Message\"] = \"Hoş geldiniz\";\n    ViewData[\"Count\"] = 10;\n    return View();\n}\n\n// View'da kullanım\n<p>@ViewData[\"Message\"]</p>\n<p>@((int)ViewData[\"Count\"])</p>\n\n// 2. ViewBag - Dynamic property, tip güvenli değil\n[HttpGet]\npublic IActionResult Index()\n{\n    ViewBag.Message = \"Hoş geldiniz\";\n    ViewBag.Count = 10;\n    return View();\n}\n\n// View'da kullanım\n<p>@ViewBag.Message</p>\n<p>@ViewBag.Count</p>\n\n// 3. TempData - Redirect sonrası da kullanılabilir, bir kez okunur\n[HttpPost]\npublic IActionResult Create(Product product)\n{\n    _productService.Create(product);\n    TempData[\"Success\"] = \"Ürün başarıyla oluşturuldu\";\n    return RedirectToAction(\"Index\");\n}\n\n// View'da kullanım\n@if (TempData[\"Success\"] != null)\n{\n    <div class=\"alert alert-success\">@TempData[\"Success\"]</div>\n}",
+              "explanation": "TempData, ViewData ve ViewBag kullanım örnekleri. TempData redirect sonrası da kullanılabilir, ViewData ve ViewBag sadece aynı request içinde."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-tempdata-viewdata-1",
+          "question": "Redirect sonrası veri aktarmak için hangisi kullanılır?",
+          "options": [
+            "ViewData",
+            "ViewBag",
+            "TempData",
+            "Model"
+          ],
+          "answer": "TempData",
+          "rationale": "TempData, redirect sonrası da kullanılabilir. ViewData ve ViewBag sadece aynı request içinde kullanılabilir."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-tempdata-viewdata-docs",
+          "label": "ViewData, ViewBag, TempData - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/mvc/views/overview",
+          "type": "reading",
+          "estimatedMinutes": 30,
+          "description": "ASP.NET Core MVC ViewData, ViewBag, TempData hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-tempdata-viewdata-1",
+          "title": "TempData, ViewData ve ViewBag",
+          "description": "TempData, ViewData ve ViewBag kullanımını uygula.",
+          "type": "coding",
+          "estimatedMinutes": 50,
+          "difficulty": "Orta",
+          "instructions": [
+            "ViewData kullan.",
+            "ViewBag kullan.",
+            "TempData kullan (redirect ile).",
+            "Farkları test et."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Custom Validation Attributes",
+      "href": "/education/lessons/mvc-razor/custom-validation",
+      "description": "Custom validation attribute oluşturma, özel doğrulama kuralları geliştirme ve validation attribute'larını kullanma işlemlerini öğren. Custom validation, standart validation attribute'larının yeterli olmadığı durumlarda kullanılır.",
+      "estimatedDurationMinutes": 70,
+      "level": "İleri",
+      "keyTakeaways": [
+        "Custom validation attribute oluşturmayı öğreneceksin.",
+        "ValidationAttribute sınıfını anlayacaksın.",
+        "Custom validation logic geliştirmeyi keşfedeceksin.",
+        "Custom validation kullanımını kavrayacaksın.",
+        "Custom validation için best practice'leri öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "custom-validation",
+          "title": "Custom Validation Attributes",
+          "summary": "Custom validation attribute oluşturma.",
+          "content": [
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Custom Validation Attribute\npublic class MinimumAgeAttribute : ValidationAttribute\n{\n    private readonly int _minimumAge;\n    \n    public MinimumAgeAttribute(int minimumAge)\n    {\n        _minimumAge = minimumAge;\n    }\n    \n    protected override ValidationResult IsValid(object value, ValidationContext validationContext)\n    {\n        if (value is DateTime birthDate)\n        {\n            var age = DateTime.Now.Year - birthDate.Year;\n            if (DateTime.Now.DayOfYear < birthDate.DayOfYear)\n                age--;\n            \n            if (age < _minimumAge)\n            {\n                return new ValidationResult($\"Yaş en az {_minimumAge} olmalıdır\");\n            }\n        }\n        \n        return ValidationResult.Success;\n    }\n}\n\n// Kullanım\npublic class User\n{\n    [Required]\n    public string Name { get; set; }\n    \n    [MinimumAge(18, ErrorMessage = \"Yaş en az 18 olmalıdır\")]\n    public DateTime BirthDate { get; set; }\n}",
+              "explanation": "Custom validation attribute oluşturma örneği. MinimumAge attribute'u, kullanıcının yaşını kontrol eder."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-custom-validation-1",
+          "question": "Custom validation attribute hangi sınıftan türetilir?",
+          "options": [
+            "Attribute",
+            "ValidationAttribute",
+            "ValidationResult",
+            "ModelState"
+          ],
+          "answer": "ValidationAttribute",
+          "rationale": "Custom validation attribute, ValidationAttribute sınıfından türetilmelidir."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-custom-validation-docs",
+          "label": "Custom Validation - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/mvc/models/validation",
+          "type": "reading",
+          "estimatedMinutes": 35,
+          "description": "ASP.NET Core MVC custom validation hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-custom-validation-1",
+          "title": "Custom Validation Attribute",
+          "description": "Custom validation attribute oluştur ve kullan.",
+          "type": "coding",
+          "estimatedMinutes": 65,
+          "difficulty": "İleri",
+          "instructions": [
+            "Custom validation attribute oluştur.",
+            "Validation logic yaz.",
+            "Model'de kullan.",
+            "Test et ve doğrula."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Data Annotation Kullanımı",
+      "href": "/education/lessons/mvc-razor/data-annotations",
+      "description": "Data Annotation attribute'larını, model validation için kullanımını ve yaygın data annotation'ları öğren. Data Annotation'lar, model doğrulama için en yaygın kullanılan yöntemdir.",
+      "estimatedDurationMinutes": 60,
+      "level": "Orta",
+      "keyTakeaways": [
+        "Data Annotation attribute'larını öğreneceksin.",
+        "Yaygın data annotation'ları anlayacaksın.",
+        "Data annotation kullanımını keşfedeceksin.",
+        "Model validation için data annotation kullanımını kavrayacaksın.",
+        "Data annotation için best practice'leri öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "data-annotations",
+          "title": "Data Annotation Kullanımı",
+          "summary": "Yaygın data annotation attribute'ları.",
+          "content": [
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Data Annotation Örnekleri\nusing System.ComponentModel.DataAnnotations;\n\npublic class Product\n{\n    [Required(ErrorMessage = \"Ürün adı gereklidir\")]\n    [StringLength(100, MinimumLength = 3, ErrorMessage = \"Ürün adı 3-100 karakter arasında olmalıdır\")]\n    public string Name { get; set; }\n    \n    [Required]\n    [Range(0.01, 10000, ErrorMessage = \"Fiyat 0.01 ile 10000 arasında olmalıdır\")]\n    public decimal Price { get; set; }\n    \n    [EmailAddress(ErrorMessage = \"Geçerli bir email adresi giriniz\")]\n    public string Email { get; set; }\n    \n    [Url(ErrorMessage = \"Geçerli bir URL giriniz\")]\n    public string Website { get; set; }\n    \n    [RegularExpression(@\"^[0-9]{10}$\", ErrorMessage = \"Telefon numarası 10 haneli olmalıdır\")]\n    public string Phone { get; set; }\n    \n    [Compare(\"Password\", ErrorMessage = \"Şifreler eşleşmiyor\")]\n    public string ConfirmPassword { get; set; }\n    \n    [DataType(DataType.Date)]\n    public DateTime CreatedDate { get; set; }\n}",
+              "explanation": "Yaygın data annotation attribute'ları: Required, StringLength, Range, EmailAddress, Url, RegularExpression, Compare, DataType."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-data-annotations-1",
+          "question": "Zorunlu alan işaretlemek için hangi data annotation kullanılır?",
+          "options": [
+            "StringLength",
+            "Required",
+            "Range",
+            "EmailAddress"
+          ],
+          "answer": "Required",
+          "rationale": "Zorunlu alan işaretlemek için Required attribute'u kullanılır."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-data-annotations-docs",
+          "label": "Data Annotations - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/mvc/models/validation",
+          "type": "reading",
+          "estimatedMinutes": 30,
+          "description": "ASP.NET Core MVC data annotations hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-data-annotations-1",
+          "title": "Data Annotation Kullanımı",
+          "description": "Data annotation attribute'larını kullan.",
+          "type": "coding",
+          "estimatedMinutes": 55,
+          "difficulty": "Orta",
+          "instructions": [
+            "Model sınıfı oluştur.",
+            "Data annotation attribute'ları ekle.",
+            "Validation test et.",
+            "Hata mesajlarını özelleştir."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "ModelState ve Error Handling",
+      "href": "/education/lessons/mvc-razor/modelstate",
+      "description": "ModelState kavramını, validation hatalarını yönetme ve error handling işlemlerini öğren. ModelState, model validation sonuçlarını ve hatalarını içerir.",
+      "estimatedDurationMinutes": 65,
+      "level": "Orta",
+      "keyTakeaways": [
+        "ModelState kavramını öğreneceksin.",
+        "ModelState.IsValid kontrolünü anlayacaksın.",
+        "Validation hatalarını yönetmeyi keşfedeceksin.",
+        "Error handling işlemlerini kavrayacaksın.",
+        "ModelState ve error handling için best practice'leri öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "modelstate-error-handling",
+          "title": "ModelState ve Error Handling",
+          "summary": "ModelState kullanımı ve error handling.",
+          "content": [
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// ModelState Kullanımı\n[HttpPost]\npublic IActionResult Create(Product product)\n{\n    // ModelState.IsValid kontrolü\n    if (!ModelState.IsValid)\n    {\n        // Validation hataları var\n        return View(product);\n    }\n    \n    // Validation başarılı\n    _productService.Create(product);\n    return RedirectToAction(\"Index\");\n}\n\n// ModelState hatalarını kontrol etme\nif (ModelState[\"Name\"].Errors.Count > 0)\n{\n    var nameError = ModelState[\"Name\"].Errors[0].ErrorMessage;\n}\n\n// ModelState'e manuel hata ekleme\nModelState.AddModelError(\"Name\", \"Bu isim zaten kullanılıyor\");\n\n// Tüm hataları al\nvar allErrors = ModelState.Values.SelectMany(v => v.Errors);\n\n// View'da hataları gösterme\n<div asp-validation-summary=\"All\" class=\"text-danger\"></div>\n<div asp-validation-summary=\"ModelOnly\" class=\"text-danger\"></div>\n<span asp-validation-for=\"Name\" class=\"text-danger\"></span>",
+              "explanation": "ModelState kullanımı ve validation hatalarını yönetme örnekleri."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-modelstate-1",
+          "question": "ModelState.IsValid ne kontrol eder?",
+          "options": [
+            "Sadece model null mu",
+            "Model validation başarılı mı",
+            "Sadece model tipi doğru mu",
+            "Sadece model property'leri var mı"
+          ],
+          "answer": "Model validation başarılı mı",
+          "rationale": "ModelState.IsValid, model validation'ın başarılı olup olmadığını kontrol eder. Tüm validation attribute'ları başarılıysa true döner."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-modelstate-docs",
+          "label": "ModelState - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/mvc/models/validation",
+          "type": "reading",
+          "estimatedMinutes": 30,
+          "description": "ASP.NET Core MVC ModelState hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-modelstate-1",
+          "title": "ModelState ve Error Handling",
+          "description": "ModelState kullanımını ve error handling'i uygula.",
+          "type": "coding",
+          "estimatedMinutes": 60,
+          "difficulty": "Orta",
+          "instructions": [
+            "ModelState.IsValid kontrolü yap.",
+            "Validation hatalarını göster.",
+            "Manuel hata ekle.",
+            "Error handling implement et."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "File Upload / Download İşlemleri",
+      "href": "/education/lessons/mvc-razor/file-operations",
+      "description": "Dosya yükleme (upload) ve indirme (download) işlemlerini, IFormFile kullanımını ve dosya güvenliği konularını öğren. File upload/download, web uygulamalarında yaygın bir ihtiyaçtır.",
+      "estimatedDurationMinutes": 70,
+      "level": "İleri",
+      "keyTakeaways": [
+        "File upload işlemlerini öğreneceksin.",
+        "File download işlemlerini anlayacaksın.",
+        "IFormFile kullanımını keşfedeceksin.",
+        "Dosya güvenliği konularını kavrayacaksın.",
+        "File upload/download için best practice'leri öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "file-operations",
+          "title": "File Upload / Download",
+          "summary": "Dosya yükleme ve indirme işlemleri.",
+          "content": [
+            {
+              "type": "code",
+              "language": "html",
+              "code": "<!-- File Upload Form -->\n<form method=\"post\" enctype=\"multipart/form-data\" asp-action=\"Upload\">\n    <div class=\"form-group\">\n        <label>Dosya Seç</label>\n        <input type=\"file\" name=\"file\" class=\"form-control\" />\n    </div>\n    <button type=\"submit\" class=\"btn btn-primary\">Yükle</button>\n</form>",
+              "explanation": "File upload form örneği. enctype=\"multipart/form-data\" zorunludur."
+            },
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// File Upload\n[HttpPost]\npublic async Task<IActionResult> Upload(IFormFile file)\n{\n    if (file == null || file.Length == 0)\n    {\n        return BadRequest(\"Dosya seçilmedi\");\n    }\n    \n    // Dosya uzantısı kontrolü\n    var allowedExtensions = new[] { \".jpg\", \".jpeg\", \".png\", \".pdf\" };\n    var extension = Path.GetExtension(file.FileName).ToLowerInvariant();\n    if (!allowedExtensions.Contains(extension))\n    {\n        return BadRequest(\"Geçersiz dosya tipi\");\n    }\n    \n    // Dosya boyutu kontrolü (max 5MB)\n    if (file.Length > 5 * 1024 * 1024)\n    {\n        return BadRequest(\"Dosya boyutu 5MB'dan büyük olamaz\");\n    }\n    \n    // Dosyayı kaydet\n    var fileName = Guid.NewGuid().ToString() + extension;\n    var filePath = Path.Combine(_webHostEnvironment.WebRootPath, \"uploads\", fileName);\n    \n    using (var stream = new FileStream(filePath, FileMode.Create))\n    {\n        await file.CopyToAsync(stream);\n    }\n    \n    return Ok(new { fileName, filePath });\n}\n\n// File Download\n[HttpGet]\npublic IActionResult Download(string fileName)\n{\n    var filePath = Path.Combine(_webHostEnvironment.WebRootPath, \"uploads\", fileName);\n    \n    if (!System.IO.File.Exists(filePath))\n    {\n        return NotFound();\n    }\n    \n    var fileBytes = System.IO.File.ReadAllBytes(filePath);\n    var contentType = \"application/octet-stream\";\n    \n    return File(fileBytes, contentType, fileName);\n}",
+              "explanation": "File upload ve download işlemleri. Güvenlik kontrolleri (uzantı, boyut) ve dosya kaydetme/indirme örnekleri."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-file-operations-1",
+          "question": "File upload için form'da hangi enctype kullanılır?",
+          "options": [
+            "application/x-www-form-urlencoded",
+            "multipart/form-data",
+            "text/plain",
+            "application/json"
+          ],
+          "answer": "multipart/form-data",
+          "rationale": "File upload için form'da enctype=\"multipart/form-data\" kullanılmalıdır."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-file-operations-docs",
+          "label": "File Uploads - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/mvc/models/file-uploads",
+          "type": "reading",
+          "estimatedMinutes": 35,
+          "description": "ASP.NET Core MVC file upload hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-file-operations-1",
+          "title": "File Upload / Download",
+          "description": "File upload ve download işlemlerini uygula.",
+          "type": "coding",
+          "estimatedMinutes": 65,
+          "difficulty": "İleri",
+          "instructions": [
+            "File upload formu oluştur.",
+            "File upload endpoint'i oluştur.",
+            "Güvenlik kontrolleri ekle.",
+            "File download endpoint'i oluştur."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Session, Cookie ve State Yönetimi",
+      "href": "/education/lessons/mvc-razor/session-cookie",
+      "description": "Session, Cookie ve state yönetimi kavramlarını, ne zaman kullanılacağını ve nasıl yönetileceğini öğren. Session ve Cookie, web uygulamalarında kullanıcı durumunu saklamak için kullanılır. Bu ders, MVC ve Razor Pages modülünün Faz 4'ünün ilk dersidir.",
+      "estimatedDurationMinutes": 65,
+      "level": "Orta",
+      "keyTakeaways": [
+        "Session ve Cookie kavramlarını öğreneceksin.",
+        "Session ve Cookie arasındaki farkı anlayacaksın.",
+        "Session ve Cookie kullanımını keşfedeceksin.",
+        "State yönetimi konularını kavrayacaksın.",
+        "Session ve Cookie için best practice'leri öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "session-cookie-state",
+          "title": "Session, Cookie ve State Yönetimi",
+          "summary": "Session ve Cookie kullanımı.",
+          "content": [
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Session Kullanımı\n\n// Session yapılandırması (Program.cs)\nbuilder.Services.AddSession(options =>\n{\n    options.IdleTimeout = TimeSpan.FromMinutes(30);\n    options.Cookie.HttpOnly = true;\n    options.Cookie.IsEssential = true;\n});\n\napp.UseSession();\n\n// Controller'da Session kullanımı\n[HttpPost]\npublic IActionResult Login(string username)\n{\n    HttpContext.Session.SetString(\"Username\", username);\n    HttpContext.Session.SetInt32(\"UserId\", 123);\n    return RedirectToAction(\"Index\");\n}\n\n[HttpGet]\npublic IActionResult Index()\n{\n    var username = HttpContext.Session.GetString(\"Username\");\n    var userId = HttpContext.Session.GetInt32(\"UserId\");\n    return View();\n}\n\n// Cookie Kullanımı\n[HttpPost]\npublic IActionResult SetCookie(string value)\n{\n    Response.Cookies.Append(\"MyCookie\", value, new CookieOptions\n    {\n        Expires = DateTimeOffset.UtcNow.AddDays(7),\n        HttpOnly = true,\n        Secure = true,\n        SameSite = SameSiteMode.Strict\n    });\n    return Ok();\n}\n\n[HttpGet]\npublic IActionResult GetCookie()\n{\n    var value = Request.Cookies[\"MyCookie\"];\n    return Ok(value);\n}",
+              "explanation": "Session ve Cookie kullanım örnekleri. Session sunucu tarafında, Cookie client tarafında saklanır."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-session-cookie-1",
+          "question": "Session nerede saklanır?",
+          "options": [
+            "Client tarafında",
+            "Server tarafında",
+            "Veritabanında",
+            "Cache'de"
+          ],
+          "answer": "Server tarafında",
+          "rationale": "Session, sunucu tarafında saklanır. Cookie ise client tarafında saklanır."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-session-cookie-docs",
+          "label": "Session and State - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/fundamentals/app-state",
+          "type": "reading",
+          "estimatedMinutes": 35,
+          "description": "ASP.NET Core Session ve Cookie hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-session-cookie-1",
+          "title": "Session ve Cookie",
+          "description": "Session ve Cookie kullanımını uygula.",
+          "type": "coding",
+          "estimatedMinutes": 60,
+          "difficulty": "Orta",
+          "instructions": [
+            "Session yapılandırması yap.",
+            "Session kullan (set/get).",
+            "Cookie kullan (set/get).",
+            "State yönetimi test et."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Route Attributes ile Custom Routing",
+      "href": "/education/lessons/mvc-razor/route-attributes",
+      "description": "Route attribute'larını, custom routing oluşturma ve route constraint'leri kullanma işlemlerini öğren. Custom routing, URL yapısını özelleştirmek için kullanılır.",
+      "estimatedDurationMinutes": 60,
+      "level": "Orta",
+      "keyTakeaways": [
+        "Route attribute'larını öğreneceksin.",
+        "Custom routing oluşturmayı anlayacaksın.",
+        "Route constraint'lerini keşfedeceksin.",
+        "Route attribute kullanımını kavrayacaksın.",
+        "Custom routing için best practice'leri öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "route-attributes",
+          "title": "Route Attributes ile Custom Routing",
+          "summary": "Route attribute kullanımı ve custom routing.",
+          "content": [
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Route Attributes\n\n// 1. Route Attribute\n[Route(\"api/products\")]\npublic class ProductsController : Controller\n{\n    [HttpGet(\"{id}\")]\n    public IActionResult GetProduct(int id) { }\n}\n\n// 2. HttpGet, HttpPost Attribute'ları\n[HttpGet(\"products/{id:int}\")]\npublic IActionResult GetProduct(int id) { }\n\n[HttpPost(\"products\")]\npublic IActionResult CreateProduct(Product product) { }\n\n// 3. Route Constraint'leri\n[HttpGet(\"products/{id:int:min(1)}\")]\npublic IActionResult GetProduct(int id) { }\n\n[HttpGet(\"products/{name:alpha}\")]\npublic IActionResult GetProductByName(string name) { }\n\n// 4. Route Prefix\n[Route(\"api/[controller]\")]\npublic class ProductsController : Controller\n{\n    [HttpGet(\"{id}\")]\n    public IActionResult Get(int id) { }\n}\n\n// 5. Custom Route\n[Route(\"urunler/{id:int}/{slug?}\")]\npublic IActionResult ProductDetail(int id, string slug) { }",
+              "explanation": "Route attribute kullanımı ve custom routing örnekleri. Route constraint'leri ile parametre doğrulama yapılabilir."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-route-attributes-1",
+          "question": "Route constraint'i ne için kullanılır?",
+          "options": [
+            "Sadece URL formatı için",
+            "Route parametrelerini doğrulamak için",
+            "Sadece HTTP metodu için",
+            "Sadece controller adı için"
+          ],
+          "answer": "Route parametrelerini doğrulamak için",
+          "rationale": "Route constraint'leri, route parametrelerini doğrulamak için kullanılır. Örneğin :int sadece integer değerleri kabul eder."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-route-attributes-docs",
+          "label": "Routing - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/mvc/controllers/routing",
+          "type": "reading",
+          "estimatedMinutes": 30,
+          "description": "ASP.NET Core MVC routing hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-route-attributes-1",
+          "title": "Route Attributes",
+          "description": "Route attribute'larını kullan ve custom routing oluştur.",
+          "type": "coding",
+          "estimatedMinutes": 55,
+          "difficulty": "Orta",
+          "instructions": [
+            "Route attribute kullan.",
+            "Route constraint'leri ekle.",
+            "Custom route oluştur.",
+            "Routing test et."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "HTML Helpers Kullanımı",
+      "href": "/education/lessons/mvc-razor/html-helpers",
+      "description": "HTML Helper'ları, built-in HTML Helper'ları ve custom HTML Helper oluşturma işlemlerini öğren. HTML Helper'lar, Razor view'larında HTML oluşturmayı kolaylaştırır.",
+      "estimatedDurationMinutes": 55,
+      "level": "Orta",
+      "keyTakeaways": [
+        "HTML Helper kavramını öğreneceksin.",
+        "Built-in HTML Helper'ları anlayacaksın.",
+        "Custom HTML Helper oluşturmayı keşfedeceksin.",
+        "HTML Helper kullanımını kavrayacaksın.",
+        "HTML Helper için best practice'leri öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "html-helpers",
+          "title": "HTML Helpers",
+          "summary": "HTML Helper kullanımı.",
+          "content": [
+            {
+              "type": "code",
+              "language": "html",
+              "code": "@* HTML Helper Örnekleri *@\n\n@* 1. Form Helper'ları *@\n@using (Html.BeginForm(\"Create\", \"Products\", FormMethod.Post))\n{\n    @Html.LabelFor(m => m.Name)\n    @Html.TextBoxFor(m => m.Name)\n    @Html.ValidationMessageFor(m => m.Name)\n    \n    @Html.LabelFor(m => m.Price)\n    @Html.EditorFor(m => m.Price)\n    \n    <button type=\"submit\">Kaydet</button>\n}\n\n@* 2. Link Helper'ları *@\n@Html.ActionLink(\"Ana Sayfa\", \"Index\", \"Home\")\n@Html.ActionLink(\"Ürün Detayı\", \"Details\", \"Products\", new { id = 1 })\n\n@* 3. Display Helper'ları *@\n@Html.DisplayFor(m => m.Name)\n@Html.DisplayNameFor(m => m.Name)\n\n@* 4. Custom HTML Helper *@\n@helper FormatPrice(decimal price)\n{\n    <span class=\"price\">@price.ToString(\"C\")</span>\n}\n\n@FormatPrice(Model.Price)",
+              "explanation": "HTML Helper örnekleri: form, link, display helper'ları ve custom helper."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-html-helpers-1",
+          "question": "HTML Helper ne için kullanılır?",
+          "options": [
+            "Sadece CSS için",
+            "Razor view'larında HTML oluşturmayı kolaylaştırmak için",
+            "Sadece JavaScript için",
+            "Sadece veritabanı için"
+          ],
+          "answer": "Razor view'larında HTML oluşturmayı kolaylaştırmak için",
+          "rationale": "HTML Helper'lar, Razor view'larında HTML oluşturmayı kolaylaştırır. TagHelper'lar daha modern bir alternatiftir."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-html-helpers-docs",
+          "label": "HTML Helpers - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/mvc/views/overview",
+          "type": "reading",
+          "estimatedMinutes": 30,
+          "description": "ASP.NET Core MVC HTML Helper hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-html-helpers-1",
+          "title": "HTML Helpers",
+          "description": "HTML Helper'ları kullan.",
+          "type": "coding",
+          "estimatedMinutes": 50,
+          "difficulty": "Orta",
+          "instructions": [
+            "Built-in HTML Helper'ları kullan.",
+            "Form Helper'ları kullan.",
+            "Link Helper'ları kullan.",
+            "Custom HTML Helper oluştur."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Localization (Çoklu Dil Desteği)",
+      "href": "/education/lessons/mvc-razor/localization",
+      "description": "Localization (i18n) kavramını, çoklu dil desteği ekleme ve resource file kullanımını öğren. Localization, uygulamayı farklı dillere uyarlamak için kullanılır.",
+      "estimatedDurationMinutes": 70,
+      "level": "İleri",
+      "keyTakeaways": [
+        "Localization kavramını öğreneceksin.",
+        "Resource file kullanımını anlayacaksın.",
+        "Çoklu dil desteği eklemeyi keşfedeceksin.",
+        "Localization yapılandırmasını kavrayacaksın.",
+        "Localization için best practice'leri öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "localization",
+          "title": "Localization (Çoklu Dil Desteği)",
+          "summary": "Localization yapılandırması ve kullanımı.",
+          "content": [
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Localization Yapılandırması (Program.cs)\nbuilder.Services.AddLocalization(options => options.ResourcesPath = \"Resources\");\nbuilder.Services.AddMvc()\n    .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)\n    .AddDataAnnotationsLocalization();\n\nvar supportedCultures = new[] { \"en-US\", \"tr-TR\", \"de-DE\" };\nvar supportedUICultures = new[] { \"en-US\", \"tr-TR\", \"de-DE\" };\n\nbuilder.Services.Configure<RequestLocalizationOptions>(options =>\n{\n    options.DefaultRequestCulture = new RequestCulture(\"tr-TR\");\n    options.SupportedCultures = supportedCultures.Select(c => new CultureInfo(c)).ToList();\n    options.SupportedUICultures = supportedUICultures.Select(c => new CultureInfo(c)).ToList();\n});\n\napp.UseRequestLocalization();\n\n// Resource File (Resources/Views.Home.Index.tr.resx)\n// Name: WelcomeMessage, Value: Hoş Geldiniz\n\n// View'da Kullanım\n@using Microsoft.AspNetCore.Mvc.Localization\n@inject IViewLocalizer Localizer\n\n<h1>@Localizer[\"WelcomeMessage\"]</h1>\n\n// Controller'da Kullanım\npublic class HomeController : Controller\n{\n    private readonly IStringLocalizer<HomeController> _localizer;\n    \n    public HomeController(IStringLocalizer<HomeController> localizer)\n    {\n        _localizer = localizer;\n    }\n    \n    public IActionResult Index()\n    {\n        ViewData[\"Message\"] = _localizer[\"WelcomeMessage\"];\n        return View();\n    }\n}",
+              "explanation": "Localization yapılandırması ve kullanımı. Resource file'lar ile çoklu dil desteği sağlanır."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-localization-1",
+          "question": "Localization için hangi dosya tipi kullanılır?",
+          "options": [
+            ".txt",
+            ".resx",
+            ".json",
+            ".xml"
+          ],
+          "answer": ".resx",
+          "rationale": "Localization için .resx (resource) dosyaları kullanılır. Her dil için ayrı resource file oluşturulur."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-localization-docs",
+          "label": "Localization - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/fundamentals/localization",
+          "type": "reading",
+          "estimatedMinutes": 35,
+          "description": "ASP.NET Core Localization hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-localization-1",
+          "title": "Localization",
+          "description": "Localization yapılandırması yap ve çoklu dil desteği ekle.",
+          "type": "coding",
+          "estimatedMinutes": 65,
+          "difficulty": "İleri",
+          "instructions": [
+            "Localization yapılandırması yap.",
+            "Resource file'lar oluştur.",
+            "View'da localization kullan.",
+            "Controller'da localization kullan."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "MVC Üzerinde CRUD Uygulaması",
+      "href": "/education/lessons/mvc-razor/crud-app",
+      "description": "MVC pattern kullanarak tam bir CRUD (Create, Read, Update, Delete) uygulaması geliştirmeyi öğren. Bu ders, MVC ve Razor Pages modülünün son dersidir ve öğrenilen tüm konuları bir araya getirir.",
+      "estimatedDurationMinutes": 90,
+      "level": "İleri",
+      "keyTakeaways": [
+        "Tam bir CRUD uygulaması geliştirmeyi öğreneceksin.",
+        "MVC pattern'i pratikte uygulamayı anlayacaksın.",
+        "Tüm öğrenilen konuları bir araya getirmeyi keşfedeceksin.",
+        "Gerçek dünya senaryosu geliştirmeyi kavrayacaksın.",
+        "CRUD uygulaması için best practice'leri öğreneceksin."
+      ],
+      "sections": [
+        {
+          "id": "crud-application",
+          "title": "MVC Üzerinde CRUD Uygulaması",
+          "summary": "Tam bir CRUD uygulaması geliştirme.",
+          "content": [
+            {
+              "type": "code",
+              "language": "csharp",
+              "code": "// Model\npublic class Product\n{\n    public int Id { get; set; }\n    \n    [Required]\n    [StringLength(100)]\n    public string Name { get; set; }\n    \n    [Required]\n    [Range(0.01, 10000)]\n    public decimal Price { get; set; }\n    \n    public string Description { get; set; }\n}\n\n// Controller\npublic class ProductsController : Controller\n{\n    private readonly IProductService _productService;\n    \n    public ProductsController(IProductService productService)\n    {\n        _productService = productService;\n    }\n    \n    // READ - List\n    [HttpGet]\n    public IActionResult Index()\n    {\n        var products = _productService.GetAll();\n        return View(products);\n    }\n    \n    // READ - Details\n    [HttpGet(\"{id}\")]\n    public IActionResult Details(int id)\n    {\n        var product = _productService.GetById(id);\n        if (product == null)\n            return NotFound();\n        \n        return View(product);\n    }\n    \n    // CREATE - GET\n    [HttpGet(\"create\")]\n    public IActionResult Create()\n    {\n        return View();\n    }\n    \n    // CREATE - POST\n    [HttpPost(\"create\")]\n    [ValidateAntiForgeryToken]\n    public IActionResult Create(Product product)\n    {\n        if (ModelState.IsValid)\n        {\n            _productService.Create(product);\n            TempData[\"Success\"] = \"Ürün başarıyla oluşturuldu\";\n            return RedirectToAction(nameof(Index));\n        }\n        \n        return View(product);\n    }\n    \n    // UPDATE - GET\n    [HttpGet(\"edit/{id}\")]\n    public IActionResult Edit(int id)\n    {\n        var product = _productService.GetById(id);\n        if (product == null)\n            return NotFound();\n        \n        return View(product);\n    }\n    \n    // UPDATE - POST\n    [HttpPost(\"edit/{id}\")]\n    [ValidateAntiForgeryToken]\n    public IActionResult Edit(int id, Product product)\n    {\n        if (id != product.Id)\n            return NotFound();\n        \n        if (ModelState.IsValid)\n        {\n            _productService.Update(product);\n            TempData[\"Success\"] = \"Ürün başarıyla güncellendi\";\n            return RedirectToAction(nameof(Index));\n        }\n        \n        return View(product);\n    }\n    \n    // DELETE - GET\n    [HttpGet(\"delete/{id}\")]\n    public IActionResult Delete(int id)\n    {\n        var product = _productService.GetById(id);\n        if (product == null)\n            return NotFound();\n        \n        return View(product);\n    }\n    \n    // DELETE - POST\n    [HttpPost(\"delete/{id}\"), ActionName(\"Delete\")]\n    [ValidateAntiForgeryToken]\n    public IActionResult DeleteConfirmed(int id)\n    {\n        _productService.Delete(id);\n        TempData[\"Success\"] = \"Ürün başarıyla silindi\";\n        return RedirectToAction(nameof(Index));\n    }\n}",
+              "explanation": "Tam bir CRUD uygulaması örneği. Create, Read, Update, Delete işlemlerini içerir."
+            }
+          ]
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "checkpoint-crud-app-1",
+          "question": "CRUD ne anlama gelir?",
+          "options": [
+            "Create, Read, Update, Delete",
+            "Create, Remove, Update, Delete",
+            "Create, Read, Upload, Download",
+            "Create, Read, Update, Download"
+          ],
+          "answer": "Create, Read, Update, Delete",
+          "rationale": "CRUD, Create (Oluştur), Read (Oku), Update (Güncelle), Delete (Sil) işlemlerini temsil eder."
+        }
+      ],
+      "resources": [
+        {
+          "id": "resource-crud-app-docs",
+          "label": "CRUD Operations - Microsoft Docs",
+          "href": "https://learn.microsoft.com/aspnet/core/tutorials/first-mvc-app",
+          "type": "reading",
+          "estimatedMinutes": 40,
+          "description": "ASP.NET Core MVC CRUD uygulaması hakkında Microsoft dokümantasyonu."
+        }
+      ],
+      "practice": [
+        {
+          "id": "practice-crud-app-1",
+          "title": "MVC CRUD Uygulaması",
+          "description": "Tam bir MVC CRUD uygulaması geliştir.",
+          "type": "coding",
+          "estimatedMinutes": 85,
+          "difficulty": "İleri",
+          "instructions": [
+            "Model oluştur ve validation ekle.",
+            "Controller oluştur (CRUD işlemleri).",
+            "View'lar oluştur (Index, Details, Create, Edit, Delete).",
+            "Tüm özellikleri test et."
+          ]
+        }
+      ]
+    }
+  ]
+}
+
+
+

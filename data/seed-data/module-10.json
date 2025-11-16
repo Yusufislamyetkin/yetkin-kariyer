@@ -1,0 +1,70 @@
+{
+  "module": {
+    "id": "module-10-testing",
+    "title": "Unit Test ve Integration Test",
+    "summary": "Test piramidini uygula, bağımlılıkları izole et ve pipeline a otomatik testler ekle.",
+    "durationMinutes": 60,
+    "objectives": [
+      "Bu modülü tamamladığında xUnit tabanlı birim testler yazıp WebApplicationFactory ile entegrasyon testleri oluşturabileceksin."
+    ],
+    "activities": [],
+    "learnLink": {
+      "label": "Konuyu Öğren",
+      "href": "/education/courses?search=.NET%20Testing",
+      "description": "Test piramidi, fixture yönetimi ve mock stratejilerini bir arada gör."
+    },
+    "relatedTopics": [
+      {
+        "label": "xUnit ile Birim Testler",
+        "href": "/education/lessons/testing/xunit/unit-testing-basics",
+        "description": "Arrange-Act-Assert kalıbını gerçek kod örnekleriyle uygula."
+      },
+      {
+        "label": "WebApplicationFactory Kullanımı",
+        "href": "/education/lessons/testing/integration/webapplicationfactory",
+        "description": "API entegrasyon testlerinde in-memory server ayağa kaldır."
+      },
+      {
+        "label": "Test Verisi ve Fixture Yönetimi",
+        "href": "/education/lessons/testing/test-data/fixtures",
+        "description": "Ortak test verilerini fixture ve builder desenleriyle yönet."
+      },
+      {
+        "label": "Mock ve Stub Kullanımı",
+        "href": "/education/lessons/testing/mocking/mock-stub-usage",
+        "description": "Moq ve NSubstitute ile mock ve stub kullanımını öğren."
+      },
+      {
+        "label": "Test Coverage ve Code Coverage",
+        "href": "/education/lessons/testing/coverage/test-coverage-code-coverage",
+        "description": "Test coverage ölçümü ve code coverage analizini uygula."
+      },
+      {
+        "label": "Test Driven Development (TDD)",
+        "href": "/education/lessons/testing/tdd/test-driven-development",
+        "description": "TDD yaklaşımını ve red-green-refactor cycleını öğren."
+      },
+      {
+        "label": "Integration Test Best Practices",
+        "href": "/education/lessons/testing/integration/integration-test-best-practices",
+        "description": "Integration test yazma ve yönetim için en iyi pratikleri uygula."
+      },
+      {
+        "label": "Test Isolation ve Test Independence",
+        "href": "/education/lessons/testing/isolation/test-isolation-independence",
+        "description": "Test izolasyonu ve bağımsızlığı prensiplerini kavra."
+      },
+      {
+        "label": "Test Data Builders ve Factories",
+        "href": "/education/lessons/testing/test-data/test-data-builders-factories",
+        "description": "Test data builder ve factory patternlerini uygula."
+      },
+      {
+        "label": "Test Performance ve Optimization",
+        "href": "/education/lessons/testing/performance/test-performance-optimization",
+        "description": "Test performansını optimize etme tekniklerini öğren."
+      }
+    ]
+  },
+  "quizzes": []
+}

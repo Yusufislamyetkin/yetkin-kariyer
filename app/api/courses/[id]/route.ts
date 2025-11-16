@@ -1,0 +1,107 @@
+import { NextResponse } from "next/server";
+import { db } from "@/lib/db";
+import { normalizeCourseContent } from "@/lib/education/courseContent";
+
+export async function GET(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
+  try {
+    // If id is a number, it's likely a moduleIndex, return 404 to let Next.js try moduleIndex route
+    if (!isNaN(Number(params.id)) && Number(params.id) > 0) {
+      return NextResponse.json({ error: "Kurs bulunamadı" }, { status: 404 });
+    }
+
+    const course = await db.course.findUnique({
+      where: { id: params.id },
+      include: {
+        quizzes: {
+          where: {
+            type: {
+              not: "MINI_TEST",
+            },
+          },
+          select: {
+            id: true,
+            title: true,
+            description: true,
+          },
+        },
+      },
+    });
+
+    if (!course) {
+      return NextResponse.json({ error: "Kurs bulunamadı" }, { status: 404 });
+    }
+
+    const normalizedContent = normalizeCourseContent(
+      course.content,
+      course.estimatedDuration,
+      course.description
+    );
+
+    // Get all lesson records to merge content into modules
+    const allLessons = await db.course.findMany({
+      where: {
+        OR: [
+          { id: { startsWith: "lesson-" } },
+          { id: { startsWith: "topic-" } },
+        ],
+      },
+      select: {
+        id: true,
+        content: true,
+      },
+    });
+
+    // Create a map of lesson content by href
+    const lessonContentMap = new Map<string, any>();
+    for (const lessonRecord of allLessons) {
+      const lessonContent = lessonRecord.content as any;
+      if (lessonContent?.href) {
+        lessonContentMap.set(lessonContent.href, lessonContent);
+      }
+    }
+
+    // Merge lesson content into modules
+    if (normalizedContent.modules && Array.isArray(normalizedContent.modules)) {
+      for (const courseModule of normalizedContent.modules) {
+        if (courseModule.relatedTopics && Array.isArray(courseModule.relatedTopics)) {
+          for (let i = 0; i < courseModule.relatedTopics.length; i++) {
+            const topic = courseModule.relatedTopics[i];
+            if (topic?.href) {
+              const lessonContent = lessonContentMap.get(topic.href);
+              if (lessonContent) {
+                // Merge content from lesson record
+                courseModule.relatedTopics[i] = {
+                  ...topic,
+                  sections: lessonContent.sections || topic.sections || [],
+                  keyTakeaways: lessonContent.keyTakeaways || topic.keyTakeaways || [],
+                  checkpoints: lessonContent.checkpoints || topic.checkpoints || [],
+                  resources: lessonContent.resources || topic.resources || [],
+                  practice: lessonContent.practice || topic.practice || [],
+                  description: lessonContent.description || topic.description,
+                  estimatedDurationMinutes: lessonContent.estimatedDurationMinutes || topic.estimatedDurationMinutes,
+                  level: lessonContent.level || topic.level,
+                };
+              }
+            }
+          }
+        }
+      }
+    }
+
+    return NextResponse.json({
+      course: {
+        ...course,
+        content: normalizedContent,
+      },
+    });
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Kurs yüklenirken bir hata oluştu" },
+      { status: 500 }
+    );
+  }
+}
+
