@@ -775,43 +775,47 @@ export default function AdminPage() {
           </div>
         )}
 
-        <div className="flex gap-4 mb-6 flex-wrap">
-          <Button
-            onClick={handleSetupRoadmap}
-            disabled={settingUpRoadmap}
-            size="lg"
-            className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold"
-          >
-            {settingUpRoadmap ? (
-              <>
-                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                Kuruluyor...
-              </>
-            ) : (
-              <>
-                <Rocket className="mr-2 h-5 w-5" />
-                .NET Core Altyapı Kur
-              </>
-            )}
-          </Button>
-          <Button
-            onClick={handleCreateContentBatch}
-            disabled={creatingContentBatch}
-            size="lg"
-            className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white"
-          >
-            {creatingContentBatch ? (
-              <>
-                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                Oluşturuluyor...
-              </>
-            ) : (
-              <>
-                <Code className="mr-2 h-5 w-5" />
-                10 Canlı Kodlama + 10 Bugfix İçeriği Oluştur
-              </>
-            )}
-          </Button>
+          <div className="flex gap-4 mb-6 flex-wrap">
+            <Button
+              onClick={handleSetupRoadmap}
+              disabled={settingUpRoadmap}
+              size="lg"
+              className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold"
+            >
+              {settingUpRoadmap ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  Kuruluyor...
+                </>
+              ) : (
+                <>
+                  <Rocket className="mr-2 h-5 w-5" />
+                  .NET Core Altyapı Kur
+                </>
+              )}
+            </Button>
+            <Button
+              onClick={handleCreateContentBatch}
+              disabled={creatingContentBatch}
+              size="lg"
+              id="BTNSeedCodingAndBugfix"
+              data-testid="BTNSeedCodingAndBugfix"
+              aria-label="10 adet canlı kodlama ve 10 adet bugfix içeriği oluştur"
+              title="10 adet canlı kodlama ve 10 adet bugfix içeriği oluştur"
+              className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white"
+            >
+              {creatingContentBatch ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  Oluşturuluyor...
+                </>
+              ) : (
+                <>
+                  <Code className="mr-2 h-5 w-5" />
+                  BTNSeedCodingAndBugfix
+                </>
+              )}
+            </Button>
           <Button
             onClick={handleCreateHackathons}
             disabled={creatingHackathons}
