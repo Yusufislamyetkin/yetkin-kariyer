@@ -76,7 +76,10 @@ async function getLiveCodingOverview() {
     ]);
 
     const cards: LiveCodingCardData[] = recentQuizzes.map((quiz) => {
-      let normalized = { tasks: [], instructions: "" };
+      let normalized: ReturnType<typeof normalizeLiveCodingPayload> = {
+        tasks: [],
+        instructions: undefined,
+      };
       try {
         normalized = normalizeLiveCodingPayload(quiz.questions as unknown);
       } catch (error) {
