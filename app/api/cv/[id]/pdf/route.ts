@@ -4,25 +4,32 @@ import { auth } from "@/lib/auth";
 
 export const runtime = "nodejs";
 
-type PuppeteerModule = typeof import("puppeteer");
+type PuppeteerModule = typeof import("puppeteer-core");
 type ChromiumModule = typeof import("@sparticuz/chromium");
 
 let cachedPuppeteer: PuppeteerModule | null | undefined;
 let cachedChromium: ChromiumModule | null | undefined;
 
-async function loadPuppeteer() {
+async function loadPuppeteer(preferCore: boolean) {
   if (cachedPuppeteer !== undefined) {
     return cachedPuppeteer;
   }
 
-  try {
-    const mod = await import("puppeteer");
-    cachedPuppeteer = (mod as any).default ?? mod;
-  } catch (error) {
-    console.warn("Puppeteer import failed:", error);
-    cachedPuppeteer = null;
+  const moduleOrder = preferCore
+    ? ["puppeteer-core", "puppeteer"]
+    : ["puppeteer", "puppeteer-core"];
+
+  for (const moduleName of moduleOrder) {
+    try {
+      const mod = await import(moduleName);
+      cachedPuppeteer = (mod as any).default ?? mod;
+      return cachedPuppeteer;
+    } catch (error) {
+      console.warn(`Puppeteer import failed for ${moduleName}:`, error);
+    }
   }
 
+  cachedPuppeteer = null;
   return cachedPuppeteer;
 }
 
@@ -132,7 +139,8 @@ export async function GET(
     const baseUrl = `${requestUrl.protocol}//${requestUrl.host}`;
     const renderUrl = `${baseUrl}/cv/render/${cv.id}`;
 
-    const puppeteer = await loadPuppeteer();
+      const isVercel = process.env.VERCEL === "1";
+      const puppeteer = await loadPuppeteer(isVercel);
 
     if (!puppeteer) {
       return NextResponse.json(
@@ -143,7 +151,6 @@ export async function GET(
 
     const cookies = request.headers.get("cookie") || "";
 
-    const isVercel = process.env.VERCEL === "1";
     const chromium = await loadChromium();
 
     const launchOptions: Record<string, unknown> = {
