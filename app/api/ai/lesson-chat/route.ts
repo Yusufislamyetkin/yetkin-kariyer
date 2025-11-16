@@ -1,3 +1,4 @@
+export const runtime = 'nodejs';
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { auth } from "@/lib/auth";
@@ -300,7 +301,7 @@ function buildLessonSystemPrompt(
   if (lessonPlan) {
     planSection = `\n\nMEVCUT DERS PLANI:\n${lessonPlan}\n\nBu plana göre ilerle. Planı takip et ve her adımı tamamladığında işaretle.`;
   } else {
-    planSection = `\n\nPLANLAMA GÖREVİ:\n- Eğer bu ilk mesajsa, ders için detaylı bir plan oluştur ve [LESSON_PLAN: plan içeriği] formatında sakla.\n- Plan şu adımları içermelidir: 1. Konuya giriş 2. Temel kavramlar 3. Örnekler 4. Pratik uygulamalar 5. Mini test 6. Canlı kodlama 7. Bugfix görevi`;
+    planSection = `\n\nPLANLAMA GÖREVİ:\n- Eğer bu ilk mesajsa, ders için detaylı bir plan oluştur ve [LESSON_PLAN: plan içeriği] formatında sakla.\n- Plan şu adımları içermelidir: 1. Konuya giriş 2. Temel kavramlar 3. Örnekler 4. Pratik uygulamalar 5. Mini test 6. Canlı kodlama 7. Bugfix görevi\n- Açılış anlatımını iki kısa mesaja böl; toplamda ~200 kelimeyi geçme.`;
   }
 
   return `Sen Yetkin Hub platformunda interaktif bir eğitim asistanısın. Kullanıcıya ders anlatıyorsun ve öğrenme sürecini yönlendiriyorsun.
@@ -366,7 +367,7 @@ TEMEL İLKELER:
 - Mevcut içerik yoksa: CREATE_TEST, CREATE_QUIZ, CREATE_BUGFIX, CREATE_LIVECODING kullan
 ${hasMiniTest 
   ? "- Mini test MEVCUT. QUIZ_REDIRECT kullan."
-  : "- Mini test YOK. Mutlaka CREATE_QUIZ ile 3-5 soruluk mini test oluştur!"
+  : "- Mini test YOK. Mutlaka CREATE_QUIZ ile TAM 5 soruluk mini test oluştur!"
 }
 
 ÖZEL YETENEKLERİN:
@@ -416,7 +417,7 @@ DİĞER:
 - Test sorularını TEK TEK ver, hepsini birden değil
 - **KESİNLİKLE**: "Test yapacağım, hazır mısınız?" demek yerine direkt test sorularını sor
 - **KESİNLİKLE**: "Mini test başlatıyorum" demek yerine direkt [TEST_QUESTION] veya [QUIZ_REDIRECT] kullan
-- Her soru için: [TEST_QUESTION: soru metni, A seçenek, B seçenek, C seçenek, D seçenek, doğru_index]
+- Her soru için: [TEST_QUESTION: soru metni, A seçenek, B seçenek, C seçenek, D seçenek, doğru_index] ve toplamda 5 soru hedefle
 - Kullanıcı A/B/C/D butonlarına tıklayarak cevap verecek
 - Bir soru tamamlandıktan sonra bir sonraki soruyu ver
 - Test sorularını text olarak verme, mutlaka TEST_QUESTION tag'i kullan
@@ -956,7 +957,7 @@ export async function POST(request: Request) {
       // Add instruction for first message to be short and friendly
       conversation.push({
         role: "system",
-        content: "Bu ilk mesajın. Kısa, samimi ve emoji içeren bir karşılama yap (maksimum 3-4 cümle). Ders hakkında çok kısa özet ver ve hemen anlatıma geç.",
+        content: "Bu ilk mesajın. Kısa, samimi ve emoji içeren bir karşılama yap (maksimum 2-3 cümle). Açılışı iki mesaja böl: 1) selamlama ve çok kısa özet, 2) konuya giriş ve ilk örnek/kavram. Toplam ~200 kelimeyi geçme. Markdown kullanma; kod için [CODE_BLOCK], test için [TEST_QUESTION] tag'lerini kullan.",
       });
     }
 
