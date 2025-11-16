@@ -130,8 +130,11 @@ export default function Home() {
     },
   ];
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-cyan-50 dark:from-gray-900 dark:via-slate-900 dark:to-gray-800 transition-colors duration-200">
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-cyan-50 dark:from-gray-900 dark:via-slate-900 dark:to-gray-800 transition-colors duration-200">
+        <div className="bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 text-white text-center text-sm md:text-base font-semibold py-2">
+          Bu proje YTKN ekibi tarafından geliştirilmiştir.
+        </div>
       {/* Navigation */}
       <nav className="sticky top-0 z-50 glass border-b border-gray-200/50 dark:border-gray-700/50">
         <div className="container mx-auto px-4 py-4">
