@@ -271,21 +271,13 @@ export default async function LiveCodingPage() {
         </Card>
       ) : hasData ? (
         <section className="space-y-4">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <h2 className="text-2xl font-display font-bold text-gray-900 dark:text-gray-100">
-                Son eklenen görev paketleri
-              </h2>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                En güncel 12 canlı kodlama içeriği gösterilir.
-              </p>
-            </div>
-            <Link href="/education/live-coding/language/csharp">
-              <Button variant="gradient" size="sm">
-                Tüm filtreleri aç
-                <ArrowUpRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
+          <div>
+            <h2 className="text-2xl font-display font-bold text-gray-900 dark:text-gray-100">
+              Son eklenen görev paketleri
+            </h2>
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              En güncel 12 canlı kodlama içeriği gösterilir.
+            </p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
