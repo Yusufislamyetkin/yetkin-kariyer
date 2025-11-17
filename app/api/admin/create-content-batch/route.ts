@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { Prisma } from "@prisma/client";
-import { upsertQuiz, Quiz } from "@/lib/admin/seed-data";
 
 // İlk 10 C# konusu (canlı kodlama için)
 const C_SHARP_TOPICS_10 = [
@@ -306,6 +304,11 @@ export async function POST() {
       );
     }
 
+    return NextResponse.json(
+      { error: "Seed data functionality has been removed" },
+      { status: 410 }
+    );
+
     // course-dotnet-roadmap'i bul
     const course = await db.course.findUnique({
       where: { id: "course-dotnet-roadmap" },
@@ -330,7 +333,7 @@ export async function POST() {
       
       const quizId = `quiz-csharp-live-coding-batch-${i + 1}`;
       
-      const questions: Prisma.InputJsonValue = {
+      const questions = {
         tasks: [task],
         instructions: `${topic.title} konusunda pratik yapın. Görevi tamamlamak için verilen kriterleri karşılamalısınız.`,
       };
@@ -381,7 +384,7 @@ export async function POST() {
         const quizId = `bugfix-csharp-batch-${template.id}`;
         
         // Bugfix için questions field'ını tasks array formatında oluştur
-        const questions: Prisma.InputJsonValue = {
+        const questions: any = {
           tasks: [
             {
               id: template.id,
@@ -397,33 +400,38 @@ export async function POST() {
           ]
         };
         
-        const quiz: Quiz = {
-          id: quizId,
-          courseId: course.id,
-          title: `C# Bugfix: ${template.title}`,
-          description: template.description,
-          topic: "C#",
-          type: "BUG_FIX",
-          level: template.level,
-          questions,
-          passingScore: 60,
-          lessonSlug: null
-        };
-
-        const result = await upsertQuiz(quiz);
-        
-        if (result.success) {
-          bugfixCreated.push({
+        const quiz = await db.quiz.upsert({
+          where: { id: quizId },
+          create: {
             id: quizId,
-            title: quiz.title,
-            level: quiz.level,
-          });
-        } else {
-          bugfixErrors.push({
-            template: template.id,
-            error: result.error || 'Unknown error'
-          });
-        }
+            courseId: course.id,
+            title: `C# Bugfix: ${template.title}`,
+            description: template.description,
+            topic: "C#",
+            type: "BUG_FIX",
+            level: template.level,
+            questions: questions as any,
+            passingScore: 60,
+            lessonSlug: null,
+          },
+          update: {
+            title: `C# Bugfix: ${template.title}`,
+            description: template.description,
+            topic: "C#",
+            type: "BUG_FIX",
+            level: template.level,
+            questions: questions as any,
+            passingScore: 60,
+            lessonSlug: null,
+            updatedAt: new Date(),
+          },
+        });
+        
+        bugfixCreated.push({
+          id: quiz.id,
+          title: quiz.title,
+          level: quiz.level || template.level,
+        });
       } catch (error: any) {
         bugfixErrors.push({
           template: template.id,
