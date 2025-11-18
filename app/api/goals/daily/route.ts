@@ -165,15 +165,15 @@ async function createAutoGoals(userId: string, date: Date) {
   const avgQuizCount = recentAttempts.length / 7; // per day
   const avgScore =
     recentAttempts.length > 0
-      ? recentAttempts.reduce((sum, a) => sum + a.score, 0) /
+      ? recentAttempts.reduce((sum: number, a: { score: number }) => sum + a.score, 0) /
         recentAttempts.length
       : 0;
 
   // Get unique topics from recent attempts
   const uniqueTopics = new Set(
     recentAttempts
-      .map((a) => a.topic)
-      .filter((topic): topic is string => topic !== null && topic !== undefined)
+      .map((a: { topic: string | null | undefined }) => a.topic)
+      .filter((topic: string | null | undefined): topic is string => topic !== null && topic !== undefined)
   );
   const avgTopicCount = uniqueTopics.size / 7; // unique topics per day
 

@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
+import { recordEvent } from "@/lib/services/gamification/antiAbuse";
+import { applyRules } from "@/lib/services/gamification/rules";
 
 export async function GET(
   request: Request,
@@ -79,6 +81,18 @@ export async function POST(
         },
       },
     });
+
+    // Emit gamification event
+    try {
+      const event = await recordEvent({
+        userId,
+        type: "hackathon_submission",
+        payload: { quizId: params.id },
+      });
+      await applyRules({ userId, type: "hackathon_submission", payload: { sourceEventId: event.id } });
+    } catch (e) {
+      console.warn("Gamification hackathon_submission failed:", e);
+    }
 
     // AI analysis'i background'da yap
     if (process.env.OPENAI_API_KEY && process.env.NEXTAUTH_URL) {

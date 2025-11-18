@@ -417,18 +417,18 @@ export async function GET() {
       }),
     ]);
 
-    const scores = quizAttempts.map((attempt) => attempt.score);
+    const scores = quizAttempts.map((attempt: { score: number }) => attempt.score);
     const quizDurations = quizAttempts
-      .map((attempt) => toNumber(attempt.duration))
-      .filter((duration) => duration > 0);
+      .map((attempt: { duration?: number | string | null }) => toNumber(attempt.duration))
+      .filter((duration: number) => duration > 0);
 
     const totalAttempts = quizAttempts.length;
-    const totalScore = scores.reduce((sum, score) => sum + score, 0);
+    const totalScore = scores.reduce((sum: number, score: number) => sum + score, 0);
     const averageScore = Math.round(totalScore / totalAttempts);
     const bestScore = Math.max(...scores);
 
     const totalDurationSeconds = quizDurations.reduce(
-      (sum, duration) => sum + duration,
+      (sum: number, duration: number) => sum + duration,
       0
     );
     const averageDurationSeconds =
@@ -545,27 +545,27 @@ export async function GET() {
       });
 
     const quizCourseIds = quizAttempts
-      .map((attempt) => attempt.quiz?.courseId)
-      .filter((id): id is string => Boolean(id));
+      .map((attempt: { quiz?: { courseId?: string | null } | null }) => attempt.quiz?.courseId)
+      .filter((id: string | undefined | null): id is string => Boolean(id));
     const courseEngagementCount = new Set(quizCourseIds).size;
 
-    const liveDurations = liveCodingAttempts.map((attempt) =>
-      extractDuration(asRecord(attempt.metrics), [
+    const liveDurations = liveCodingAttempts.map((attempt: { metrics?: unknown }) =>
+      extractDuration(asRecord(attempt.metrics as unknown), [
         "totalDurationSeconds",
         "durationSeconds",
         "duration",
         "timeTaken",
       ])
     );
-    const bugFixDurations = bugFixAttempts.map((attempt) =>
-      extractDuration(asRecord(attempt.metrics), [
+    const bugFixDurations = bugFixAttempts.map((attempt: { metrics?: unknown }) =>
+      extractDuration(asRecord(attempt.metrics as unknown), [
         "timeTaken",
         "durationSeconds",
         "totalDurationSeconds",
       ])
     );
-    const hackatonDurations = hackatonAttempts.map((attempt) =>
-      extractDuration(asRecord(attempt.metrics), [
+    const hackatonDurations = hackatonAttempts.map((attempt: { metrics?: unknown }) =>
+      extractDuration(asRecord(attempt.metrics as unknown), [
         "timeTaken",
         "totalDurationSeconds",
         "durationSeconds",
@@ -575,9 +575,9 @@ export async function GET() {
 
     const totalLearningSeconds =
       totalDurationSeconds +
-      liveDurations.reduce((sum, value) => sum + value, 0) +
-      bugFixDurations.reduce((sum, value) => sum + value, 0) +
-      hackatonDurations.reduce((sum, value) => sum + value, 0);
+      liveDurations.reduce((sum: number, value: number) => sum + value, 0) +
+      bugFixDurations.reduce((sum: number, value: number) => sum + value, 0) +
+      hackatonDurations.reduce((sum: number, value: number) => sum + value, 0);
 
     const activityTimeline = initializeActivityTimeline();
 
@@ -590,7 +590,7 @@ export async function GET() {
       return dateKey >= windowStart && dateKey <= windowEnd;
     };
 
-    quizAttempts.forEach((attempt) => {
+    quizAttempts.forEach((attempt: { completedAt: Date | string }) => {
       const key = getDateKey(attempt.completedAt);
       if (key && activityTimeline[key]) {
         activityTimeline[key].tests += 1;
@@ -598,7 +598,7 @@ export async function GET() {
       }
     });
 
-    liveCodingAttempts.forEach((attempt) => {
+    liveCodingAttempts.forEach((attempt: { completedAt: Date | string }) => {
       const key = getDateKey(attempt.completedAt);
       if (key && activityTimeline[key]) {
         activityTimeline[key].liveCoding += 1;
@@ -606,7 +606,7 @@ export async function GET() {
       }
     });
 
-    bugFixAttempts.forEach((attempt) => {
+    bugFixAttempts.forEach((attempt: { completedAt: Date | string }) => {
       const key = getDateKey(attempt.completedAt);
       if (key && activityTimeline[key]) {
         activityTimeline[key].bugFix += 1;
@@ -614,7 +614,7 @@ export async function GET() {
       }
     });
 
-    hackatonAttempts.forEach((attempt) => {
+    hackatonAttempts.forEach((attempt: { completedAt: Date | string }) => {
       const key = getDateKey(attempt.completedAt);
       if (key && activityTimeline[key]) {
         activityTimeline[key].hackaton += 1;
@@ -642,17 +642,17 @@ export async function GET() {
     );
 
     const extractLeaderboardSeries = (
-      entries: typeof testLeaderboardEntries,
+      entries: Array<{ periodDate: string; rank: number | null; points: number; attemptCount: number }>,
       type: "test" | "liveCoding" | "bugFix" | "hackaton"
     ) => {
-      const trend = entries.map((entry) => ({
+      const trend = entries.map((entry: { periodDate: string; rank: number | null; points: number; attemptCount: number }) => ({
         date: entry.periodDate,
         rank: entry.rank ?? null,
         points: entry.points,
         attemptCount: entry.attemptCount,
       }));
 
-      const correlation = entries.map((entry) => ({
+      const correlation = entries.map((entry: { periodDate: string; rank: number | null; points: number; attemptCount: number }) => ({
         type,
         periodDate: entry.periodDate,
         points: entry.points,
@@ -669,43 +669,43 @@ export async function GET() {
     const leaderboardHack = extractLeaderboardSeries(hackatonLeaderboardEntries, "hackaton");
 
     const quizAiScores = quizAttempts
-      .map((attempt) => {
+      .map((attempt: { aiAnalysis?: unknown }) => {
         const analysis = attempt.aiAnalysis as Record<string, unknown> | null;
         if (!analysis) return null;
         const aiScore = toNumber(analysis.score);
         return aiScore > 0 ? aiScore : null;
       })
-      .filter((value): value is number => value !== null);
+      .filter((value: number | null): value is number => value !== null);
 
     const interviewAiScores = interviewAttempts
-      .map((attempt) => (typeof attempt.aiScore === "number" ? attempt.aiScore : null))
-      .filter((value): value is number => value !== null);
+      .map((attempt: { aiScore: number | null }) => (typeof attempt.aiScore === "number" ? attempt.aiScore : null))
+      .filter((value: number | null): value is number => value !== null);
 
     const averageQuizAiScore =
       quizAiScores.length > 0
         ? Math.round(
-            quizAiScores.reduce((sum, score) => sum + score, 0) / quizAiScores.length
+            quizAiScores.reduce((sum: number, score: number) => sum + score, 0) / quizAiScores.length
           )
         : null;
     const averageInterviewAiScore =
       interviewAiScores.length > 0
         ? Math.round(
-            interviewAiScores.reduce((sum, score) => sum + score, 0) / interviewAiScores.length
+            interviewAiScores.reduce((sum: number, score: number) => sum + score, 0) / interviewAiScores.length
           )
         : null;
 
     const testsDurationData = quizAttempts
-      .map((attempt) => ({
+      .map((attempt: { id: string; quiz?: { title?: string | null } | null; duration?: number | string | null; score: number; completedAt: Date }) => ({
         id: attempt.id,
         quizTitle: attempt.quiz?.title ?? "Quiz",
         durationSeconds: toNumber(attempt.duration),
         score: attempt.score,
         completedAt: attempt.completedAt,
       }))
-      .filter((item) => item.durationSeconds > 0);
+      .filter((item: { durationSeconds: number }) => item.durationSeconds > 0);
 
     const liveCodingDurationData = liveCodingAttempts
-      .map((attempt, index) => {
+      .map((attempt: { id: string; quiz?: { title?: string | null } | null; metrics?: unknown; completedAt: Date }, index: number) => {
         const metrics = asRecord(attempt.metrics);
         const durationSeconds = liveDurations[index] ?? 0;
         const completed = toNumber(metrics?.completedTaskCount);
@@ -720,10 +720,10 @@ export async function GET() {
           completedAt: attempt.completedAt,
         };
       })
-      .filter((item) => item.durationSeconds > 0);
+      .filter((item: { durationSeconds: number }) => item.durationSeconds > 0);
 
     const bugFixDurationData = bugFixAttempts
-      .map((attempt, index) => {
+      .map((attempt: { id: string; quiz?: { title?: string | null } | null; metrics?: unknown; completedAt: Date }, index: number) => {
         const metrics = asRecord(attempt.metrics);
         return {
           id: attempt.id,
@@ -740,10 +740,10 @@ export async function GET() {
           completedAt: attempt.completedAt,
         };
       })
-      .filter((item) => item.durationSeconds > 0);
+      .filter((item: { durationSeconds: number }) => item.durationSeconds > 0);
 
     const hackatonDurationData = hackatonAttempts
-      .map((attempt, index) => {
+      .map((attempt: { id: string; quiz?: { title?: string | null } | null; metrics?: unknown; completedAt: Date }, index: number) => {
         const metrics = asRecord(attempt.metrics);
         const projectScore =
           metrics && typeof metrics.projectScore === "number"
@@ -762,7 +762,7 @@ export async function GET() {
           completedAt: attempt.completedAt,
         };
       })
-      .filter((item) => item.durationSeconds > 0);
+      .filter((item: { durationSeconds: number }) => item.durationSeconds > 0);
 
     const averageDuration = (data: Array<{ durationSeconds: number }>) =>
       data.length > 0
@@ -776,20 +776,26 @@ export async function GET() {
         ? Math.round(data.reduce((sum, value) => sum + value, 0) / data.length)
         : 0;
 
-    const badgeDistribution = userBadges.reduce<Record<string, number>>((acc, item) => {
+    const badgeDistribution = userBadges.reduce(
+      (acc: Record<string, number>, item: { badge?: { rarity?: string | null } | null }) => {
       const rarity = item.badge?.rarity ?? "common";
       acc[rarity] = (acc[rarity] ?? 0) + 1;
       return acc;
-    }, {});
+      },
+      {} as Record<string, number>
+    );
 
     const totalBadges = userBadges.length;
-    const allBadgesByRarity = allBadges.reduce<Record<string, number>>((acc, item) => {
+    const allBadgesByRarity = allBadges.reduce(
+      (acc: Record<string, number>, item: { rarity?: string | null }) => {
       const rarity = item.rarity ?? "common";
       acc[rarity] = (acc[rarity] ?? 0) + 1;
       return acc;
-    }, {});
+      },
+      {} as Record<string, number>
+    );
 
-    const rarityProgress = Object.entries(allBadgesByRarity).map(([rarity, total]) => {
+    const rarityProgress = (Object.entries(allBadgesByRarity) as Array<[string, number]>).map(([rarity, total]) => {
       const owned = badgeDistribution[rarity] ?? 0;
       const completionRate =
         total > 0 ? Math.round((owned / total) * 100) : owned > 0 ? 100 : 0;
@@ -880,13 +886,13 @@ export async function GET() {
       durationInsights: {
         tests: {
           averageDurationSeconds: averageDuration(testsDurationData),
-          averageScore: averageOf(testsDurationData.map((item) => item.score)),
+          averageScore: averageOf(testsDurationData.map((item: { score: number }) => item.score)),
           data: testsDurationData,
         },
         liveCoding: {
           averageDurationSeconds: averageDuration(liveCodingDurationData),
           averageCompletionRate: averageOf(
-            liveCodingDurationData.map((item) => item.completionRate)
+            liveCodingDurationData.map((item: { completionRate: number }) => item.completionRate)
           ),
           data: liveCodingDurationData,
         },
@@ -894,8 +900,8 @@ export async function GET() {
           averageDurationSeconds: averageDuration(bugFixDurationData),
           averageCodeQuality: averageOf(
             bugFixDurationData
-              .map((item) => (item.codeQuality ?? null))
-              .filter((value): value is number => value !== null)
+              .map((item: { codeQuality: number | null }) => (item.codeQuality ?? null))
+              .filter((value: number | null): value is number => value !== null)
           ),
           data: bugFixDurationData,
         },
@@ -903,8 +909,8 @@ export async function GET() {
           averageDurationSeconds: averageDuration(hackatonDurationData),
           averageProjectScore: averageOf(
             hackatonDurationData
-              .map((item) => (item.projectScore ?? null))
-              .filter((value): value is number => value !== null)
+              .map((item: { projectScore: number | null }) => (item.projectScore ?? null))
+              .filter((value: number | null): value is number => value !== null)
           ),
           data: hackatonDurationData,
         },
@@ -916,11 +922,14 @@ export async function GET() {
           count,
         })),
         rarityProgress,
-        recentBadges: userBadges.slice(0, 5).map((item) => ({
+        recentBadges: userBadges.slice(0, 5).map((item: { id: string; earnedAt: Date | string; badge?: { name?: string | null; rarity?: string | null; icon?: string | null; color?: string | null } | null }) => ({
           id: item.id,
           name: item.badge?.name ?? "Rozet",
           rarity: item.badge?.rarity ?? "common",
-          earnedAt: item.earnedAt?.toISOString?.() ?? new Date(item.earnedAt).toISOString(),
+          earnedAt:
+            item.earnedAt instanceof Date
+              ? item.earnedAt.toISOString()
+              : new Date(item.earnedAt).toISOString(),
           icon: item.badge?.icon ?? null,
           color: item.badge?.color ?? null,
         })),

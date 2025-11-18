@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { Prisma } from "@prisma/client";
 
 export async function POST() {
   try {
@@ -18,7 +17,7 @@ export async function POST() {
     let deletedModulesCount = 0;
     let roadmapCleared = false;
 
-    await db.$transaction(async (tx) => {
+    await db.$transaction(async (tx: any) => {
       // 1. Delete all lesson and topic records (those starting with "lesson-" or "topic-")
       const lessonResult = await tx.course.deleteMany({
         where: {
@@ -30,16 +29,12 @@ export async function POST() {
       });
       deletedLessonsCount = lessonResult.count;
 
-      // 2. Completely clear or reset course-dotnet-roadmap
+      // 2. Count modules in course-dotnet-roadmap before deletion (will be deleted by clear-courses)
       const roadmapCourse = await tx.course.findUnique({
         where: { id: 'course-dotnet-roadmap' },
       });
 
       if (roadmapCourse) {
-        // Delete the entire course-dotnet-roadmap record to start fresh
-        await tx.course.delete({
-          where: { id: 'course-dotnet-roadmap' },
-        });
         roadmapCleared = true;
         deletedModulesCount = Array.isArray((roadmapCourse.content as any)?.modules) 
           ? (roadmapCourse.content as any).modules.length 

@@ -45,7 +45,7 @@ export async function generatePersonalizedLessons(userId: string): Promise<any> 
 
     // Analyze weak areas
     const weakTopics: string[] = [];
-    quizAttempts.forEach((attempt) => {
+    quizAttempts.forEach((attempt: { score: number; aiAnalysis?: unknown }) => {
       if (attempt.score < 70 && attempt.aiAnalysis) {
         const analysis = attempt.aiAnalysis as any;
         if (analysis.weaknesses) {

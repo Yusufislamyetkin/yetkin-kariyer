@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
 import { z } from "zod";
+import { sanitizePlainText } from "@/lib/security/sanitize";
+import { checkRateLimit, rateLimitKey, Limits, isDuplicateWithin } from "@/lib/security/rateLimit";
 
 const createPostSchema = z.object({
   content: z.string().max(2200).trim().transform((val) => val === "" ? null : val).nullable().optional(),
@@ -50,7 +52,7 @@ export async function GET(request: Request) {
         },
       });
 
-      const followingIds = following.map((f) => f.addresseeId);
+      const followingIds = following.map((f: { addresseeId: string }) => f.addresseeId);
       // Include current user's posts in feed
       followingIds.push(userId);
 
@@ -192,7 +194,7 @@ export async function GET(request: Request) {
       });
 
       // Sort by likes count (descending) and then by creation date (descending)
-      posts = allPosts.sort((a, b) => {
+      posts = allPosts.sort((a: { _count: { likes: number }; createdAt: Date | string }, b: { _count: { likes: number }; createdAt: Date | string }) => {
         const likesDiff = b._count.likes - a._count.likes;
         if (likesDiff !== 0) return likesDiff;
         return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
@@ -309,7 +311,7 @@ export async function GET(request: Request) {
 
       hasMore = savedPosts.length > limit;
       const savedPostsList = savedPosts.slice(0, hasMore ? limit : savedPosts.length);
-      posts = savedPostsList.map((sp) => ({
+      posts = savedPostsList.map((sp: { post: any }) => ({
         ...sp.post,
         isSaved: true, // All saved posts are saved by definition
       }));
@@ -330,7 +332,7 @@ export async function GET(request: Request) {
                 postId: true,
               },
             })
-          ).map((s) => s.postId)
+          ).map((s: { postId: string }) => s.postId)
         : []
     );
 
@@ -376,13 +378,38 @@ export async function POST(request: Request) {
     }
 
     const userId = session.user.id as string;
+    // Rate limit: 20 posts / 10 min per user
+    {
+      const key = rateLimitKey(["post:create", userId]);
+      const verdict = checkRateLimit(key, Limits.postCreate);
+      if (!verdict.ok) {
+        return NextResponse.json(
+          { error: "Çok sık paylaşım denemesi. Lütfen daha sonra tekrar deneyin." },
+          { status: 429, headers: { "Retry-After": Math.ceil(verdict.retryAfterMs / 1000).toString() } }
+        );
+      }
+    }
     const body = await request.json();
     const data = createPostSchema.parse(body);
+
+    // Sanitize plain text content conservatively
+    const safeContent = data.content ? sanitizePlainText(data.content, 2200) : null;
+
+    // Prevent duplicate content spam within 5 minutes
+    if (safeContent) {
+      const dupKey = rateLimitKey(["post:content", userId]);
+      if (isDuplicateWithin(dupKey, safeContent, 5 * 60 * 1000)) {
+        return NextResponse.json(
+          { error: "Benzer içerik kısa süre içinde tekrar gönderilemez." },
+          { status: 429 }
+        );
+      }
+    }
 
     const post = await db.post.create({
       data: {
         userId,
-        content: data.content || null,
+        content: safeContent || null,
         imageUrl: data.imageUrl || null,
       },
       include: {

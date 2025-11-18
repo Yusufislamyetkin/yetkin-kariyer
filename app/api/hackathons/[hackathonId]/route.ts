@@ -158,10 +158,15 @@ export async function GET(request: Request, ctx: RouteContext) {
     const submissionWindowClosed =
       !!hackathon.submissionClosesAt && new Date(hackathon.submissionClosesAt) <= new Date();
 
-    const teams = hackathon.teams.map((team) => {
+    const teams = hackathon.teams.map((team: {
+      id: string; name: string; slug: string; inviteCode: string | null;
+      lockedAt: Date | null; createdAt: Date; updatedAt: Date;
+      members: Array<{ id: string; userId: string; role: string; status: HackathonTeamMemberStatus; joinedAt: Date; invitedById: string | null; user: { id: string; name: string | null; profileImage: string | null } }>;
+      submission: { id: string; status: string; repoUrl: string | null; branch: string | null; commitSha: string | null; submittedAt: Date | null; attempt: { id: string; metrics: any; completedAt: Date | null } | null } | null;
+    }) => {
       const isViewerTeamMember = userId
         ? team.members.some(
-            (member) =>
+            (member: { userId: string; status: HackathonTeamMemberStatus }) =>
               member.userId === userId && member.status === HackathonTeamMemberStatus.active
           )
         : false;
@@ -174,7 +179,7 @@ export async function GET(request: Request, ctx: RouteContext) {
         lockedAt: team.lockedAt,
         createdAt: team.createdAt,
         updatedAt: team.updatedAt,
-        members: team.members.map((member) => ({
+        members: team.members.map((member: { id: string; userId: string; role: string; status: HackathonTeamMemberStatus; joinedAt: Date; invitedById: string | null; user: { id: string; name: string | null; profileImage: string | null } }) => ({
           id: member.id,
           userId: member.userId,
           role: member.role,
@@ -199,8 +204,8 @@ export async function GET(request: Request, ctx: RouteContext) {
     });
 
     const soloSubmissions = hackathon.submissions
-      .filter((submission) => submission.teamId === null)
-      .map((submission) => ({
+      .filter((submission: { teamId: string | null }) => submission.teamId === null)
+      .map((submission: { id: string; status: string; repoUrl: string | null; branch: string | null; commitSha: string | null; submittedAt: Date | null; userId: string | null; user: any; attempt: any }) => ({
         id: submission.id,
         status: submission.status,
         repoUrl:
@@ -214,20 +219,20 @@ export async function GET(request: Request, ctx: RouteContext) {
 
     const activeMembership = userId
       ? hackathon.teams
-          .flatMap((team) =>
-            team.members.map((member) => ({
+          .flatMap((team: { id: string; name: string; members: Array<{ id: string; status: HackathonTeamMemberStatus; userId: string; invitedById: string | null }> }) =>
+            team.members.map((member: { id: string; status: HackathonTeamMemberStatus; userId: string; invitedById: string | null }) => ({
               team,
               member,
             }))
           )
           .find(
-            ({ member }) =>
+            ({ member }: { member: { userId: string; status: HackathonTeamMemberStatus } }) =>
               member.userId === userId && member.status === HackathonTeamMemberStatus.active
           )
       : null;
 
     const userApplication = userId
-      ? hackathon.applications.find((application) => application.userId === userId) ?? null
+      ? hackathon.applications.find((application: { userId: string }) => application.userId === userId) ?? null
       : null;
 
     const approvedApplicationStatuses = new Set(["approved", "auto_accepted", "pending_review"]);
@@ -236,14 +241,14 @@ export async function GET(request: Request, ctx: RouteContext) {
 
     const pendingInvitations = userId
       ? hackathon.teams
-          .flatMap((team) =>
+          .flatMap((team: { id: string; name: string; members: Array<{ id: string; status: HackathonTeamMemberStatus; userId: string; invitedById: string | null }> }) =>
             team.members
               .filter(
-                (member) =>
+                (member: { status: HackathonTeamMemberStatus; userId: string }) =>
                   member.status === HackathonTeamMemberStatus.invited &&
                   member.userId === userId
               )
-              .map((member) => ({
+              .map((member: { id: string; invitedById: string | null }) => ({
                 id: member.id,
                 teamId: team.id,
                 teamName: team.name,
@@ -254,7 +259,7 @@ export async function GET(request: Request, ctx: RouteContext) {
 
     const userSubmission = userId
       ? hackathon.submissions.find(
-          (submission) =>
+          (submission: { userId: string | null; teamId: string | null }) =>
             submission.userId === userId ||
             (activeMembership && submission.teamId === activeMembership.team.id)
         ) ?? null

@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { clsx } from "clsx";
-import { BookOpen, ChevronLeft, Clock, Compass, GraduationCap, ListChecks } from "lucide-react";
+import { BookOpen, ChevronLeft, Clock, Compass, ArrowRight, Code2, Zap } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 
 type ModuleLesson = {
@@ -175,9 +175,9 @@ export default function CourseDetailPage() {
 
   if (loading) {
     return (
-      <div className="container mx-auto px-4 py-12">
-        <Card className="mx-auto max-w-xl border-blue-100 bg-blue-50/70 text-blue-700">
-          <CardContent className="flex items-center gap-3 text-sm font-medium">
+      <div className="container mx-auto px-4 py-8 md:py-12">
+        <Card className="mx-auto max-w-xl border-blue-200/50 dark:border-blue-800/50 bg-blue-50/70 dark:bg-blue-950/30 backdrop-blur-sm">
+          <CardContent className="flex items-center gap-3 text-sm font-medium text-blue-700 dark:text-blue-300 py-8">
             <Clock className="h-5 w-5 animate-spin" />
             Kurs içeriği yükleniyor...
           </CardContent>
@@ -188,9 +188,11 @@ export default function CourseDetailPage() {
 
   if (!course) {
     return (
-      <div className="container mx-auto px-4 py-12">
-        <Card className="mx-auto max-w-xl border-red-200 bg-red-50 text-red-700">
-          <CardContent>Kurs bulunamadı ya da içerik henüz hazırlanmadı.</CardContent>
+      <div className="container mx-auto px-4 py-8 md:py-12">
+        <Card className="mx-auto max-w-xl border-red-200/50 dark:border-red-800/50 bg-red-50/70 dark:bg-red-950/30 backdrop-blur-sm">
+          <CardContent className="text-red-700 dark:text-red-300 py-8">
+            Kurs bulunamadı ya da içerik henüz hazırlanmadı.
+          </CardContent>
         </Card>
       </div>
     );
@@ -199,111 +201,148 @@ export default function CourseDetailPage() {
   const tagItems = [
     course.category && {
       label: course.category,
-      style: "bg-blue-100 text-blue-700 border border-blue-200",
+      style: "bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-950/40 dark:to-blue-900/40 text-blue-700 dark:text-blue-300 border border-blue-200/50 dark:border-blue-800/50",
     },
     course.field && {
       label: course.field,
-      style: "bg-green-100 text-green-700 border border-green-200",
+      style: "bg-gradient-to-r from-green-50 to-green-100 dark:from-green-950/40 dark:to-green-900/40 text-green-700 dark:text-green-300 border border-green-200/50 dark:border-green-800/50",
     },
     course.subCategory && {
       label: course.subCategory,
-      style: "bg-purple-100 text-purple-700 border border-purple-200",
+      style: "bg-gradient-to-r from-purple-50 to-purple-100 dark:from-purple-950/40 dark:to-purple-900/40 text-purple-700 dark:text-purple-300 border border-purple-200/50 dark:border-purple-800/50",
     },
     course.topic && {
       label: course.topic,
-      style: "bg-orange-100 text-orange-700 border border-orange-200",
+      style: "bg-gradient-to-r from-orange-50 to-orange-100 dark:from-orange-950/40 dark:to-orange-900/40 text-orange-700 dark:text-orange-300 border border-orange-200/50 dark:border-orange-800/50",
     },
     course.expertise && {
       label: `Uzmanlık: ${course.expertise}`,
-      style: "bg-pink-100 text-pink-700 border border-pink-200",
+      style: "bg-gradient-to-r from-pink-50 to-pink-100 dark:from-pink-950/40 dark:to-pink-900/40 text-pink-700 dark:text-pink-300 border border-pink-200/50 dark:border-pink-800/50",
     },
     course.topicContent && {
       label: course.topicContent,
-      style: "bg-indigo-100 text-indigo-700 border border-indigo-200",
+      style: "bg-gradient-to-r from-indigo-50 to-indigo-100 dark:from-indigo-950/40 dark:to-indigo-900/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200/50 dark:border-indigo-800/50",
     },
     course.difficulty && {
       label: `Seviye: ${course.difficulty}`,
-      style: "bg-gray-100 text-gray-700 border border-gray-200",
+      style: "bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 text-gray-700 dark:text-gray-300 border border-gray-200/50 dark:border-gray-700/50",
     },
   ]
     .filter(Boolean)
     .map((tag) => tag as { label: string; style: string });
 
   return (
-    <div className="container mx-auto px-4 py-8 space-y-10">
+    <div className="container mx-auto px-4 py-6 md:py-8 lg:py-10 space-y-8 md:space-y-10">
+      {/* Breadcrumb */}
       <Link
         href="/education/courses"
-        className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 transition hover:text-blue-700"
+        className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 dark:text-blue-400 transition-colors hover:text-blue-700 dark:hover:text-blue-300"
       >
         <ChevronLeft className="h-4 w-4" />
         Kurslara dön
       </Link>
 
-      <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
-        <div className="space-y-4">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100">{course.title}</h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300">
-            {course.description ??
-              "Uzmanlık modülleri ile .NET Core ekosistemini uçtan uca öğrenin."}
-          </p>
-          {tagItems.length > 0 && (
-            <div className="flex flex-wrap gap-2">
-              {tagItems.map((tag) => (
-                <span
-                  key={tag.label}
-                  className={clsx(
-                    "inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wide",
-                    tag.style
-                  )}
-                >
-                  {tag.label}
-                </span>
-              ))}
-            </div>
-          )}
+      {/* Hero Header Section */}
+      <div className="relative overflow-hidden rounded-3xl border border-blue-200/50 dark:border-blue-800/50 gradient-mesh-tech shadow-xl shadow-blue-500/5 dark:shadow-blue-500/10">
+        {/* Particle background */}
+        <div className="absolute inset-0 particle-bg-tech" />
+        
+        {/* Animated floating orbs */}
+        <div className="absolute inset-0">
+          <div className="absolute -top-20 -right-20 h-64 w-64 rounded-full bg-blue-500/20 dark:bg-blue-500/15 blur-3xl animate-pulse" />
+          <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-purple-500/20 dark:bg-purple-500/15 blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
+          <div className="absolute top-1/2 left-1/2 h-48 w-48 rounded-full bg-pink-500/15 dark:bg-pink-500/10 blur-3xl animate-pulse" style={{ animationDelay: "2s" }} />
         </div>
-        <Card variant="outlined" className="md:w-72 border-dashed border-blue-200 bg-blue-50/50 dark:border-blue-800 dark:bg-blue-950/30">
-          <CardContent className="flex items-start gap-4 px-5 py-4 pt-6">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 text-blue-600 dark:bg-blue-900/50 dark:text-blue-400">
-              <Clock className="h-6 w-6" />
+        
+        {/* Enhanced glassmorphism overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-white/60 via-white/40 to-transparent dark:from-white/10 dark:via-white/5 dark:to-transparent backdrop-blur-md" />
+
+        <div className="relative z-10 p-6 md:p-8 lg:p-10">
+          <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
+            <div className="space-y-4 flex-1">
+              {/* Tech icon */}
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 shadow-lg shadow-blue-500/50 mb-4">
+                <Code2 className="h-7 w-7 text-white" />
+              </div>
+              
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
+                <span className="bg-gradient-to-r from-gray-900 via-blue-600 to-purple-600 dark:from-white dark:via-blue-400 dark:to-purple-400 bg-clip-text text-transparent animate-text-shimmer">
+                  {course.title}
+                </span>
+              </h1>
+              <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+                {course.description ??
+                  "Uzmanlık modülleri ile .NET Core ekosistemini uçtan uca öğrenin."}
+              </p>
+              {tagItems.length > 0 && (
+                <div className="flex flex-wrap gap-2 sm:gap-3">
+                  {tagItems.map((tag) => (
+                    <span
+                      key={tag.label}
+                      className={clsx(
+                        "tech-badge inline-flex items-center rounded-full px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-semibold uppercase tracking-wide shadow-sm",
+                        tag.style
+                      )}
+                    >
+                      {tag.label}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-400">
-                Tahmini süre
-              </p>
-              <p className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
-                {formatMinutes(overviewDuration) ?? "Süre bilgisi yakında"}
-              </p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">
-                {formatMinutes(overviewDuration)
-                  ? "Modülleri tamamlamak için planlanan toplam süre."
-                  : "Program süresi henüz belirlenmedi."}
-              </p>
+            
+            {/* Enhanced Duration Card */}
+            <div className="md:w-80 tech-card glass-tech rounded-2xl shadow-xl border border-blue-200/50 dark:border-blue-800/50 hover:scale-105 transition-transform duration-300">
+              <div className="relative z-10 p-5">
+                <div className="flex items-start gap-4">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <Clock className="h-6 w-6" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-400 mb-1">
+                      Tahmini süre
+                    </p>
+                    <p className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-1">
+                      {formatMinutes(overviewDuration) ?? "Süre bilgisi yakında"}
+                    </p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      {formatMinutes(overviewDuration)
+                        ? "Modülleri tamamlamak için planlanan toplam süre."
+                        : "Program süresi henüz belirlenmedi."}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
 
-      <Card
-        variant="elevated"
-        className="overflow-hidden border border-blue-100 shadow-lg shadow-blue-100/40"
-      >
-        <CardHeader className="space-y-3 border-b border-blue-100/80 bg-gradient-to-r from-blue-50/60 to-indigo-50/60 px-8 py-6 backdrop-blur-sm">
-          <CardTitle className="flex items-center gap-3 text-2xl font-bold text-gray-900 dark:text-gray-100">
-            <Compass className="h-6 w-6 text-blue-600" />
-            Modül Listesi
-          </CardTitle>
-          <p className="text-base text-gray-600 dark:text-gray-300">
+      {/* Modules Section */}
+      <div className="relative tech-card glass-tech overflow-hidden border border-blue-200/50 dark:border-blue-800/50 shadow-xl shadow-blue-500/5 dark:shadow-blue-500/10 rounded-3xl">
+        {/* Particle background */}
+        <div className="absolute inset-0 particle-bg-tech" />
+        
+        <div className="relative z-10 border-b border-blue-100/80 dark:border-blue-800/50 bg-gradient-to-r from-blue-50/60 via-indigo-50/60 to-purple-50/60 dark:from-blue-950/30 dark:via-indigo-950/30 dark:to-purple-950/30 px-6 md:px-8 py-6 backdrop-blur-sm">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg">
+              <Compass className="h-5 w-5 md:h-6 md:w-6 text-white" />
+            </div>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100">
+              Modül Listesi
+            </h2>
+          </div>
+          <p className="text-sm md:text-base text-gray-600 dark:text-gray-300">
             Başlamak istediğin modülü seç ve detay sayfasında dersleri incele.
           </p>
-        </CardHeader>
-        <CardContent className="p-8 pt-12">
+        </div>
+        <div className="relative z-10 p-6 md:p-8 pt-8 md:pt-12">
           {modules.length === 0 ? (
-            <div className="rounded-xl border border-dashed border-gray-200 bg-gray-50 px-6 py-8 text-center text-sm text-gray-500 dark:border-gray-700 dark:bg-gray-900/50">
+            <div className="rounded-xl border border-dashed border-gray-200 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-900/50 px-6 py-8 text-center text-sm text-gray-500 dark:text-gray-400">
               Bu kurs için yayınlanmış modül bulunmuyor.
             </div>
           ) : (
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {modules.map((module, index) => {
                 const lessonCount = module.relatedTopics?.length ?? 0;
 
@@ -311,50 +350,50 @@ export default function CourseDetailPage() {
                   <Link
                     key={module.id}
                     href={`/education/courses/${course.id}/modules/${module.id}`}
-                    className={clsx(
-                      "group flex flex-col rounded-2xl border-2 border-transparent bg-white p-6 shadow-md transition-all duration-300",
-                      "hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-100/50",
-                      "focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-600 focus-visible:outline-offset-2"
-                    )}
+                    className="group relative tech-card tech-card-glow card-shimmer hover-3d glass-tech rounded-2xl overflow-hidden p-5 sm:p-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-600 dark:focus-visible:outline-blue-400 focus-visible:outline-offset-2"
                   >
-                    <div className="mb-4 flex items-start justify-between gap-3">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-sm font-bold text-white shadow-md">
+                    {/* Particle background for module card */}
+                    <div className="absolute inset-0 particle-bg-tech rounded-2xl" />
+                    
+                    {/* Subtle gradient overlay on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-400/0 via-indigo-400/0 to-purple-400/0 dark:from-blue-400/0 dark:via-indigo-400/0 dark:to-purple-400/0 group-hover:from-blue-400/5 group-hover:via-indigo-400/5 group-hover:to-purple-400/5 dark:group-hover:from-blue-400/8 dark:group-hover:via-indigo-400/8 dark:group-hover:to-purple-400/8 transition-all duration-500 pointer-events-none" />
+                    
+                    <div className="relative z-10 mb-4 flex items-start justify-between gap-3">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-lg font-bold text-white shadow-lg shadow-blue-500/50 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
                         {index + 1}
                       </div>
                       <div className="flex flex-col items-end gap-2 text-xs">
                         {formatMinutes(module.durationMinutes) && (
-                          <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-100 px-3 py-1.5 font-semibold text-blue-700 shadow-sm">
+                          <span className="tech-badge text-blue-700 dark:text-blue-300 border-blue-300 dark:border-blue-600 px-3 py-1.5">
                             <Clock className="h-3.5 w-3.5" />
                             {formatMinutes(module.durationMinutes)}
                           </span>
                         )}
-                        <span className="inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-3 py-1.5 font-semibold text-gray-700">
+                        <span className="tech-badge text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 px-3 py-1.5" style={{ background: 'linear-gradient(135deg, rgba(107, 114, 128, 0.1), rgba(156, 163, 175, 0.1))', borderColor: 'rgba(107, 114, 128, 0.3)' }}>
                           <BookOpen className="h-3.5 w-3.5" />
                           {lessonCount} ders
                         </span>
                       </div>
                     </div>
-                    <div className="flex-1 space-y-2">
-                      <h3 className="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                    <div className="relative z-10 flex-1 space-y-2">
+                      <h3 className="text-lg md:text-xl font-bold text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                         {module.title}
                       </h3>
-                      <p className="text-sm leading-relaxed text-gray-600 line-clamp-3">
+                      <p className="text-sm md:text-base leading-relaxed text-gray-600 dark:text-gray-400 line-clamp-3">
                         {module.summary ?? "Bu modülün açıklaması yakında eklenecek."}
                       </p>
                     </div>
-                    <div className="mt-4 flex items-center gap-2 text-sm font-semibold text-blue-600 opacity-0 transition-opacity group-hover:opacity-100">
+                    <div className="relative z-10 mt-4 flex items-center gap-2 text-sm font-semibold text-blue-600 dark:text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity">
                       Modüle git
-                      <ChevronLeft className="h-4 w-4 rotate-180" />
+                      <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </Link>
                 );
               })}
             </div>
           )}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }
-
-

@@ -29,7 +29,7 @@ export async function GET() {
     });
 
     // Filter out attempts with null interview (orphaned records)
-    const validAttempts = attempts.filter(attempt => attempt.interview !== null);
+    const validAttempts = attempts.filter((attempt: { interview: { id: string; title: string } | null }) => attempt.interview !== null);
 
     return NextResponse.json({ attempts: validAttempts });
   } catch (error) {

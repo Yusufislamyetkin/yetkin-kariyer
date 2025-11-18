@@ -79,7 +79,7 @@ export async function GET(request: Request) {
         user: attempt.user,
         attemptCount: 0,
         totalScore: 0,
-        scores: [],
+        scores: [] as number[],
         highestScore: 0,
       };
 

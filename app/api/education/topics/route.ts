@@ -29,8 +29,8 @@ export async function GET(request: Request) {
     });
 
     const topics = courses
-      .map((c) => c.topic)
-      .filter((t): t is string => t !== null)
+      .map((c: { topic: string | null }) => c.topic)
+      .filter((t: string | null): t is string => t !== null)
       .sort();
 
     return NextResponse.json({ topics });

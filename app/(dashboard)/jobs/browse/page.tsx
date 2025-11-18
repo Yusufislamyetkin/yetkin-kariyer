@@ -342,33 +342,97 @@ export default function BrowseJobsPage() {
             href={`/jobs/${job.id}`}
             className="block"
           >
-            <Card variant="elevated" hover className="transition-all duration-200">
+            <Card variant="elevated" hover className="transition-all duration-200 relative overflow-hidden">
+              <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-cyan-500" />
               <CardContent className="p-6 pt-6">
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-5">
                   <div className="flex-1 space-y-3">
+                    {/* Header: Employer + New badge + Posted time */}
+                    <div className="flex items-center gap-3">
+                      <div className="h-10 w-10 rounded-full bg-gradient-to-br from-indigo-500 to-blue-600 text-white flex items-center justify-center font-semibold">
+                        {(job.employer.name || "İşveren").charAt(0).toUpperCase()}
+                      </div>
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                          {job.employer.name || "İşveren"}
+                        </span>
+                        {/* Badges */}
+                        {(() => {
+                          const created = new Date(job.createdAt);
+                          const now = new Date();
+                          const diffDays = Math.floor((now.getTime() - created.getTime()) / (1000 * 60 * 60 * 24));
+                          const isNew = diffDays <= 7;
+                          return (
+                            <>
+                              {isNew && (
+                                <span className="px-2 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300">
+                                  Yeni
+                                </span>
+                              )}
+                              <span className="px-2 py-0.5 rounded-full text-xs bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300">
+                                {diffDays === 0 ? "Bugün" : `${diffDays} gün önce`}
+                              </span>
+                            </>
+                          );
+                        })()}
+                      </div>
+                    </div>
+
+                    {/* Title */}
                     <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors leading-tight">
                       {job.title}
                     </h2>
+
+                    {/* Description */}
                     <p className="text-gray-600 dark:text-gray-400 line-clamp-2 leading-relaxed">
                       {job.description}
                     </p>
-                    <div className="flex flex-wrap gap-4 text-sm text-gray-500 dark:text-gray-400 pt-1">
+
+                    {/* Meta */}
+                    <div className="flex flex-wrap gap-3 text-sm text-gray-500 dark:text-gray-400 pt-1">
                       {job.location && (
-                        <span className="flex items-center gap-1.5">
+                        <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300">
                           <MapPin className="h-4 w-4 flex-shrink-0" />
                           <span>{job.location}</span>
                         </span>
                       )}
                       {job.salary && (
-                        <span className="flex items-center gap-1.5">
+                        <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300">
                           <DollarSign className="h-4 w-4 flex-shrink-0" />
                           <span>{job.salary}</span>
                         </span>
                       )}
-                      <span className="flex items-center gap-1.5">
+                      <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300">
                         <Briefcase className="h-4 w-4 flex-shrink-0" />
                         <span>{job.employer.name || "İşveren"}</span>
                       </span>
+                    </div>
+                  </div>
+
+                  {/* Right column: CTA */}
+                  <div className="flex md:flex-col items-center md:items-end justify-between md:justify-start gap-3 md:min-w-[180px]">
+                    <div className="hidden md:flex flex-col items-end text-right">
+                      <span className="text-xs text-gray-500 dark:text-gray-400">
+                        İlan tarihi
+                      </span>
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                        {new Date(job.createdAt).toLocaleDateString("tr-TR")}
+                      </span>
+                    </div>
+                    <div className="text-blue-600 dark:text-blue-400 text-sm font-semibold inline-flex items-center gap-1">
+                      Detayları Gör
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        className="w-4 h-4"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M4.5 12a.75.75 0 0 1 .75-.75h12.19l-3.72-3.72a.75.75 0 1 1 1.06-1.06l5 5a.75.75 0 0 1 0 1.06l-5 5a.75.75 0 0 1-1.06-1.06l3.72-3.72H5.25A.75.75 0 0 1 4.5 12Z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
                     </div>
                   </div>
                 </div>

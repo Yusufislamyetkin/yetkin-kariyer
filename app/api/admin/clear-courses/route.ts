@@ -13,12 +13,22 @@ export async function POST() {
       );
     }
 
-    // Delete all courses except the roadmap course
+    // Delete ALL courses (including course-dotnet-roadmap)
+    // But exclude lesson- and topic- records as those are handled by clear-topics
     const result = await db.course.deleteMany({
       where: {
-        id: {
-          not: 'course-dotnet-roadmap',
-        },
+        AND: [
+          {
+            id: {
+              not: { startsWith: 'lesson-' },
+            },
+          },
+          {
+            id: {
+              not: { startsWith: 'topic-' },
+            },
+          },
+        ],
       },
     });
 

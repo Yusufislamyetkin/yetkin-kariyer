@@ -1,0 +1,2046 @@
+{
+  "course": {
+    "id": "course-python-apis",
+    "title": "Python Backend Roadmap",
+    "description": "Python ile modern backend geliştirme için kapsamlı öğrenme yolu.",
+    "category": "software-development",
+    "field": "backend",
+    "subCategory": "python",
+    "expertise": "backend",
+    "topic": "Python",
+    "topicContent": "Python Roadmap",
+    "difficulty": "intermediate",
+    "content": {
+      "overview": {
+        "description": "Python ile temel kavramlardan ileri seviye uygulamalara uzanan kapsamlı öğrenme yolu.",
+        "targetAudience": [
+          "Backend geliştiricileri",
+          "Full-stack geliştiriciler"
+        ],
+        "skills": [
+          "Python",
+          "FastAPI",
+          "Django",
+          "Database",
+          "Testing",
+          "Performance"
+        ],
+        "estimatedDurationMinutes": 4500,
+        "outcomes": [
+          "Python programlama dilini sağlam temellerle kurabilmek",
+          "FastAPI ve Django ile üretim seviyesinde uygulamalar geliştirmek",
+          "Test, performans ve deployment ekseninde kaliteyi artırmak"
+        ]
+      },
+      "prerequisites": [
+        "Temel programlama",
+        "OOP"
+      ],
+      "modules": [
+        {
+          "id": "python-module-01",
+          "title": "Python'u Tanıyalım",
+          "summary": "Python ekosistemine giriş yaparak programlama temellerini öğrenin.",
+          "durationMinutes": 300,
+          "objectives": [
+            "Python nedir",
+            "Neden Python",
+            "Ekosistem tanıtımı"
+          ],
+          "lessons": [
+            {
+              "id": "python-lesson-01-01",
+              "title": "Python Nedir ve Neden Kullanılır?",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "python-intro",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-01-02",
+              "title": "Python'ın Tarihçesi ve Gelişimi",
+              "type": "reading",
+              "durationMinutes": 20,
+              "slug": "python-history",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-01-03",
+              "title": "Python vs Diğer Diller",
+              "type": "video",
+              "durationMinutes": 30,
+              "slug": "python-vs-others",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-01-04",
+              "title": "Python Ekosistemi",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "python-ecosystem",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-01-05",
+              "title": "Python Kurulumu",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "python-installation",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-01-06",
+              "title": "Virtual Environments",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "virtual-environments",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-01-07",
+              "title": "pip ve Package Management",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "pip-packages",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-01-08",
+              "title": "İlk Python Programı",
+              "type": "coding",
+              "durationMinutes": 25,
+              "slug": "first-python-program",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-01-09",
+              "title": "Python IDE'leri",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "python-ides",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-01-10",
+              "title": "Python Versiyonları",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "python-versions",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-01-11",
+              "title": "Python Best Practices",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "python-best-practices",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-01-12",
+              "title": "PEP 8 Style Guide",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "pep8",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-01-13",
+              "title": "Python Architecture Overview",
+              "type": "video",
+              "durationMinutes": 35,
+              "slug": "architecture-overview",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-01-14",
+              "title": "Python Community",
+              "type": "reading",
+              "durationMinutes": 20,
+              "slug": "python-community",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-01-15",
+              "title": "Hello World ve İlk Adımlar",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "hello-world",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "python-module-02",
+          "title": "Python Temelleri",
+          "summary": "Python syntax, değişkenler, operatörler ve temel programlama kavramları.",
+          "durationMinutes": 360,
+          "objectives": [
+            "Python syntax",
+            "Variables",
+            "Operators",
+            "Control flow"
+          ],
+          "lessons": [
+            {
+              "id": "python-lesson-02-01",
+              "title": "Python Syntax Temelleri",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "python-syntax",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-02-02",
+              "title": "Variables ve Data Types",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "variables-types",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-02-03",
+              "title": "Numbers (int, float, complex)",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "numbers",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-02-04",
+              "title": "Strings ve String Methods",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "strings",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-02-05",
+              "title": "Operators (Aritmetik, Mantıksal, Karşılaştırma)",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "operators",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-02-06",
+              "title": "Conditional Statements (if, elif, else)",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "conditionals",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-02-07",
+              "title": "Loops (for, while)",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "loops",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-02-08",
+              "title": "Break, Continue ve Pass",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "break-continue-pass",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-02-09",
+              "title": "List Comprehensions",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "list-comprehensions",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-02-10",
+              "title": "Type Conversion",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "type-conversion",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-02-11",
+              "title": "Input ve Output",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "input-output",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-02-12",
+              "title": "Comments ve Docstrings",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "comments-docstrings",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-02-13",
+              "title": "Python Best Practices",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "python-best-practices-detailed",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-02-14",
+              "title": "Code Style ve Formatting",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "code-style",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-02-15",
+              "title": "Python Temelleri Uygulama Örnekleri",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "python-basics-examples",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "python-module-03",
+          "title": "Veri Yapıları",
+          "summary": "Python veri yapıları: list, tuple, dict, set ve kullanımları.",
+          "durationMinutes": 380,
+          "objectives": [
+            "Lists",
+            "Tuples",
+            "Dictionaries",
+            "Sets"
+          ],
+          "lessons": [
+            {
+              "id": "python-lesson-03-01",
+              "title": "Veri Yapıları Nedir?",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "data-structures-intro",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-03-02",
+              "title": "Lists",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "lists",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-03-03",
+              "title": "List Methods",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "list-methods",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-03-04",
+              "title": "Tuples",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "tuples",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-03-05",
+              "title": "Dictionaries",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "dictionaries",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-03-06",
+              "title": "Dictionary Methods",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "dict-methods",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-03-07",
+              "title": "Sets",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "sets",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-03-08",
+              "title": "Set Operations",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "set-operations",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-03-09",
+              "title": "Nested Data Structures",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "nested-structures",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-03-10",
+              "title": "Data Structure Methods",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "data-methods",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-03-11",
+              "title": "Data Structure Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "data-best-practices",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-03-12",
+              "title": "Performance Considerations",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "data-performance",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-03-13",
+              "title": "Data Structure Patterns",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "data-patterns",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-03-14",
+              "title": "Data Structure Uygulama Örnekleri",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "data-examples",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-03-15",
+              "title": "Advanced Data Structures",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "advanced-data-structures",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "python-module-04",
+          "title": "Fonksiyonlar ve Modüller",
+          "summary": "Python functions, modules, packages ve code organization.",
+          "durationMinutes": 360,
+          "objectives": [
+            "Functions",
+            "Modules",
+            "Packages",
+            "Code organization"
+          ],
+          "lessons": [
+            {
+              "id": "python-lesson-04-01",
+              "title": "Functions Nedir?",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "functions-intro",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-04-02",
+              "title": "Function Definition ve Call",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "function-definition",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-04-03",
+              "title": "Function Parameters",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "function-params",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-04-04",
+              "title": "Default Arguments",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "default-args",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-04-05",
+              "title": "*args ve **kwargs",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "args-kwargs",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-04-06",
+              "title": "Return Values",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "return-values",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-04-07",
+              "title": "Lambda Functions",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "lambda-functions",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-04-08",
+              "title": "Decorators",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "decorators",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-04-09",
+              "title": "Modules",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "modules",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-04-10",
+              "title": "Packages",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "packages",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-04-11",
+              "title": "Import Statements",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "import-statements",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-04-12",
+              "title": "Standard Library",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "standard-library",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-04-13",
+              "title": "Third-party Packages",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "third-party-packages",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-04-14",
+              "title": "Code Organization",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "code-organization",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-04-15",
+              "title": "Functions ve Modüller Uygulama Örnekleri",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "functions-modules-examples",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "python-module-05",
+          "title": "OOP",
+          "summary": "Python object-oriented programming, classes, inheritance ve polymorphism.",
+          "durationMinutes": 400,
+          "objectives": [
+            "Classes",
+            "Inheritance",
+            "Polymorphism",
+            "Encapsulation"
+          ],
+          "lessons": [
+            {
+              "id": "python-lesson-05-01",
+              "title": "OOP Nedir?",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "oop-intro",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-05-02",
+              "title": "Classes ve Objects",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "classes-objects",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-05-03",
+              "title": "__init__ Method",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "init-method",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-05-04",
+              "title": "Instance Variables",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "instance-variables",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-05-05",
+              "title": "Class Variables",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "class-variables",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-05-06",
+              "title": "Methods (Instance, Class, Static)",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "methods",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-05-07",
+              "title": "Inheritance",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "inheritance",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-05-08",
+              "title": "Method Overriding",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "method-overriding",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-05-09",
+              "title": "Multiple Inheritance",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "multiple-inheritance",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-05-10",
+              "title": "Encapsulation",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "encapsulation",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-05-11",
+              "title": "Polymorphism",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "polymorphism",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-05-12",
+              "title": "Special Methods (__str__, __repr__)",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "special-methods",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-05-13",
+              "title": "Properties ve Descriptors",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "properties-descriptors",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-05-14",
+              "title": "OOP Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "oop-best-practices",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-05-15",
+              "title": "OOP Uygulama Örnekleri",
+              "type": "coding",
+              "durationMinutes": 45,
+              "slug": "oop-examples",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "python-module-06",
+          "title": "File I/O",
+          "summary": "File operations, reading, writing ve file handling.",
+          "durationMinutes": 340,
+          "objectives": [
+            "File operations",
+            "Reading",
+            "Writing",
+            "File handling"
+          ],
+          "lessons": [
+            {
+              "id": "python-lesson-06-01",
+              "title": "File I/O Nedir?",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "file-io-intro",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-06-02",
+              "title": "Opening Files",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "opening-files",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-06-03",
+              "title": "Reading Files",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "reading-files",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-06-04",
+              "title": "Writing Files",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "writing-files",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-06-05",
+              "title": "File Modes",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "file-modes",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-06-06",
+              "title": "Context Managers (with statement)",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "context-managers",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-06-07",
+              "title": "CSV Files",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "csv-files",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-06-08",
+              "title": "JSON Files",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "json-files",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-06-09",
+              "title": "XML Files",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "xml-files",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-06-10",
+              "title": "File Path Operations",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "file-paths",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-06-11",
+              "title": "Directory Operations",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "directory-operations",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-06-12",
+              "title": "File Best Practices",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "file-best-practices",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-06-13",
+              "title": "Error Handling in File I/O",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "file-error-handling",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-06-14",
+              "title": "File I/O Patterns",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "file-patterns",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-06-15",
+              "title": "File I/O Uygulama Örnekleri",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "file-io-examples",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "python-module-07",
+          "title": "Exception Handling",
+          "summary": "Python exception handling, try-except ve error management.",
+          "durationMinutes": 320,
+          "objectives": [
+            "Exception handling",
+            "Try-except",
+            "Error management"
+          ],
+          "lessons": [
+            {
+              "id": "python-lesson-07-01",
+              "title": "Exception Handling Nedir?",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "exception-intro",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-07-02",
+              "title": "Try-Except Block",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "try-except",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-07-03",
+              "title": "Multiple Exceptions",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "multiple-exceptions",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-07-04",
+              "title": "Finally Block",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "finally-block",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-07-05",
+              "title": "Else Clause",
+              "type": "coding",
+              "durationMinutes": 25,
+              "slug": "else-clause",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-07-06",
+              "title": "Raising Exceptions",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "raising-exceptions",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-07-07",
+              "title": "Custom Exceptions",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "custom-exceptions",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-07-08",
+              "title": "Exception Hierarchy",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "exception-hierarchy",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-07-09",
+              "title": "Exception Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "exception-best-practices",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-07-10",
+              "title": "Error Logging",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "error-logging",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-07-11",
+              "title": "Assertions",
+              "type": "coding",
+              "durationMinutes": 25,
+              "slug": "assertions",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-07-12",
+              "title": "Exception Patterns",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "exception-patterns",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-07-13",
+              "title": "Exception Testing",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "exception-testing",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-07-14",
+              "title": "Exception Handling in Production",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "exception-production",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-07-15",
+              "title": "Exception Handling Uygulama Örnekleri",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "exception-examples",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "python-module-08",
+          "title": "FastAPI/Django",
+          "summary": "FastAPI ve Django framework'leri ile web geliştirme.",
+          "durationMinutes": 420,
+          "objectives": [
+            "FastAPI",
+            "Django",
+            "Web frameworks"
+          ],
+          "lessons": [
+            {
+              "id": "python-lesson-08-01",
+              "title": "Web Frameworks Nedir?",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "web-frameworks-intro",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-08-02",
+              "title": "FastAPI Nedir?",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "fastapi-intro",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-08-03",
+              "title": "FastAPI Kurulumu",
+              "type": "coding",
+              "durationMinutes": 25,
+              "slug": "fastapi-setup",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-08-04",
+              "title": "FastAPI Routes",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "fastapi-routes",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-08-05",
+              "title": "Pydantic Models",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "pydantic-models",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-08-06",
+              "title": "Request Validation",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "request-validation",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-08-07",
+              "title": "Dependency Injection",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "dependency-injection",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-08-08",
+              "title": "Django Nedir?",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "django-intro",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-08-09",
+              "title": "Django Kurulumu",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "django-setup",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-08-10",
+              "title": "Django Models",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "django-models",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-08-11",
+              "title": "Django Views",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "django-views",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-08-12",
+              "title": "Django Templates",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "django-templates",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-08-13",
+              "title": "FastAPI vs Django",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "fastapi-vs-django",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-08-14",
+              "title": "Framework Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "framework-best-practices",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-08-15",
+              "title": "FastAPI/Django Uygulama Örnekleri",
+              "type": "coding",
+              "durationMinutes": 45,
+              "slug": "framework-examples",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "python-module-09",
+          "title": "Database Integration",
+          "summary": "Database connections, ORM (SQLAlchemy, Django ORM) ve database operations.",
+          "durationMinutes": 400,
+          "objectives": [
+            "Database connections",
+            "ORM",
+            "SQLAlchemy",
+            "Django ORM"
+          ],
+          "lessons": [
+            {
+              "id": "python-lesson-09-01",
+              "title": "Database Integration Nedir?",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "db-intro",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-09-02",
+              "title": "SQLite",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "sqlite",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-09-03",
+              "title": "PostgreSQL",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "postgresql",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-09-04",
+              "title": "MySQL",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "mysql",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-09-05",
+              "title": "ORM Nedir?",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "orm-intro",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-09-06",
+              "title": "SQLAlchemy",
+              "type": "coding",
+              "durationMinutes": 45,
+              "slug": "sqlalchemy",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-09-07",
+              "title": "SQLAlchemy Models",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "sqlalchemy-models",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-09-08",
+              "title": "Django ORM",
+              "type": "coding",
+              "durationMinutes": 45,
+              "slug": "django-orm",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-09-09",
+              "title": "Database Migrations",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "migrations",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-09-10",
+              "title": "Query Optimization",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "query-optimization",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-09-11",
+              "title": "Database Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "db-best-practices",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-09-12",
+              "title": "Connection Pooling",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "connection-pooling",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-09-13",
+              "title": "Database Testing",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "db-testing",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-09-14",
+              "title": "NoSQL Databases",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "nosql",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-09-15",
+              "title": "Database Integration Uygulama Örnekleri",
+              "type": "coding",
+              "durationMinutes": 45,
+              "slug": "db-examples",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "python-module-10",
+          "title": "API Development",
+          "summary": "RESTful API development, API design ve API best practices.",
+          "durationMinutes": 400,
+          "objectives": [
+            "RESTful API",
+            "API design",
+            "API best practices"
+          ],
+          "lessons": [
+            {
+              "id": "python-lesson-10-01",
+              "title": "API Development Nedir?",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "api-dev-intro",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-10-02",
+              "title": "RESTful API Principles",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "restful-principles",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-10-03",
+              "title": "HTTP Methods",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "http-methods",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-10-04",
+              "title": "API Endpoints",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "api-endpoints",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-10-05",
+              "title": "Request/Response Models",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "request-response",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-10-06",
+              "title": "API Authentication",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "api-auth",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-10-07",
+              "title": "API Documentation (Swagger/OpenAPI)",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "api-docs",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-10-08",
+              "title": "API Versioning",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "api-versioning",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-10-09",
+              "title": "Error Handling in APIs",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "api-error-handling",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-10-10",
+              "title": "Rate Limiting",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "rate-limiting",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-10-11",
+              "title": "CORS Configuration",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "cors",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-10-12",
+              "title": "API Testing",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "api-testing",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-10-13",
+              "title": "API Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "api-best-practices",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-10-14",
+              "title": "API Security",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "api-security",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-10-15",
+              "title": "API Development Uygulama Örnekleri",
+              "type": "coding",
+              "durationMinutes": 45,
+              "slug": "api-examples",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "python-module-11",
+          "title": "Testing",
+          "summary": "Python testing, unittest, pytest ve testing strategies.",
+          "durationMinutes": 380,
+          "objectives": [
+            "unittest",
+            "pytest",
+            "Testing strategies"
+          ],
+          "lessons": [
+            {
+              "id": "python-lesson-11-01",
+              "title": "Testing Nedir?",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "testing-intro",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-11-02",
+              "title": "unittest Framework",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "unittest",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-11-03",
+              "title": "pytest Framework",
+              "type": "coding",
+              "durationMinutes": 45,
+              "slug": "pytest",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-11-04",
+              "title": "Test Fixtures",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "test-fixtures",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-11-05",
+              "title": "Mocking ve Patching",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "mocking-patching",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-11-06",
+              "title": "Test Coverage",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "test-coverage",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-11-07",
+              "title": "Integration Testing",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "integration-testing",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-11-08",
+              "title": "API Testing",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "api-testing-detailed",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-11-09",
+              "title": "Database Testing",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "database-testing",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-11-10",
+              "title": "Testing Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "testing-best-practices",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-11-11",
+              "title": "TDD (Test-Driven Development)",
+              "type": "video",
+              "durationMinutes": 35,
+              "slug": "tdd",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-11-12",
+              "title": "CI/CD Testing",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "cicd-testing",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-11-13",
+              "title": "Testing Patterns",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "testing-patterns",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-11-14",
+              "title": "Performance Testing",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "performance-testing",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-11-15",
+              "title": "Testing Uygulama Örnekleri",
+              "type": "coding",
+              "durationMinutes": 45,
+              "slug": "testing-examples",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "python-module-12",
+          "title": "Async Programming",
+          "summary": "Python async/await, asyncio ve asynchronous programming.",
+          "durationMinutes": 380,
+          "objectives": [
+            "async/await",
+            "asyncio",
+            "Async programming"
+          ],
+          "lessons": [
+            {
+              "id": "python-lesson-12-01",
+              "title": "Async Programming Nedir?",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "async-intro",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-12-02",
+              "title": "asyncio Module",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "asyncio",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-12-03",
+              "title": "async/await Keywords",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "async-await",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-12-04",
+              "title": "Coroutines",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "coroutines",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-12-05",
+              "title": "Event Loop",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "event-loop",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-12-06",
+              "title": "Tasks ve Futures",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "tasks-futures",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-12-07",
+              "title": "asyncio.gather",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "asyncio-gather",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-12-08",
+              "title": "Async Context Managers",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "async-context-managers",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-12-09",
+              "title": "Async Generators",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "async-generators",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-12-10",
+              "title": "Async HTTP Requests",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "async-http",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-12-11",
+              "title": "Async Database Operations",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "async-db",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-12-12",
+              "title": "Async Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "async-best-practices",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-12-13",
+              "title": "Async Testing",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "async-testing",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-12-14",
+              "title": "Async Patterns",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "async-patterns",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-12-15",
+              "title": "Async Programming Uygulama Örnekleri",
+              "type": "coding",
+              "durationMinutes": 45,
+              "slug": "async-examples",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "python-module-13",
+          "title": "Performance",
+          "summary": "Python performans optimizasyonu teknikleri.",
+          "durationMinutes": 360,
+          "objectives": [
+            "Performance optimization",
+            "Profiling",
+            "Optimization techniques"
+          ],
+          "lessons": [
+            {
+              "id": "python-lesson-13-01",
+              "title": "Performance Nedir?",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "performance-intro",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-13-02",
+              "title": "Performance Profiling",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "performance-profiling",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-13-03",
+              "title": "cProfile",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "cprofile",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-13-04",
+              "title": "Memory Profiling",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "memory-profiling",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-13-05",
+              "title": "Code Optimization",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "code-optimization",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-13-06",
+              "title": "Caching Strategies",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "caching-strategies",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-13-07",
+              "title": "Database Query Optimization",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "query-optimization-detailed",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-13-08",
+              "title": "Concurrency ve Parallelism",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "concurrency-parallelism",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-13-09",
+              "title": "Performance Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "performance-best-practices",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-13-10",
+              "title": "Performance Metrics",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "performance-metrics",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-13-11",
+              "title": "Performance Monitoring",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "performance-monitoring",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-13-12",
+              "title": "Bottleneck Identification",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "bottleneck-identification",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-13-13",
+              "title": "Performance Tools",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "performance-tools",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-13-14",
+              "title": "Performance Patterns",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "performance-patterns",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-13-15",
+              "title": "Performance Uygulama Örnekleri",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "performance-examples",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "python-module-14",
+          "title": "Deployment",
+          "summary": "Python uygulamalarının build, containerization ve deployment süreçleri.",
+          "durationMinutes": 360,
+          "objectives": [
+            "Build",
+            "Deployment",
+            "CI/CD",
+            "Containerization"
+          ],
+          "lessons": [
+            {
+              "id": "python-lesson-14-01",
+              "title": "Deployment Nedir?",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "deployment-intro",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-14-02",
+              "title": "Production Environment Setup",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "production-setup",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-14-03",
+              "title": "WSGI ve ASGI",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "wsgi-asgi",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-14-04",
+              "title": "Gunicorn ve Uvicorn",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "gunicorn-uvicorn",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-14-05",
+              "title": "Docker Containerization",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "docker-python",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-14-06",
+              "title": "Dockerfile Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "dockerfile-best-practices",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-14-07",
+              "title": "Environment Variables",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "env-variables",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-14-08",
+              "title": "CI/CD Pipeline",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "cicd-pipeline",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-14-09",
+              "title": "GitHub Actions",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "github-actions",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-14-10",
+              "title": "Cloud Deployment (AWS, GCP, Azure)",
+              "type": "coding",
+              "durationMinutes": 45,
+              "slug": "cloud-deployment",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-14-11",
+              "title": "Serverless Deployment",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "serverless",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-14-12",
+              "title": "Monitoring ve Logging",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "monitoring-logging",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-14-13",
+              "title": "Deployment Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "deployment-best-practices",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-14-14",
+              "title": "Security in Deployment",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "deployment-security",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-14-15",
+              "title": "Deployment Uygulama Örnekleri",
+              "type": "coding",
+              "durationMinutes": 45,
+              "slug": "deployment-examples",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "python-module-15",
+          "title": "Advanced Topics",
+          "summary": "İleri seviye Python konuları ve teknikleri.",
+          "durationMinutes": 360,
+          "objectives": [
+            "Advanced topics",
+            "Python patterns",
+            "Best practices"
+          ],
+          "lessons": [
+            {
+              "id": "python-lesson-15-01",
+              "title": "Generators",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "generators",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-15-02",
+              "title": "Iterators",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "iterators",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-15-03",
+              "title": "Context Managers",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "context-managers-detailed",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-15-04",
+              "title": "Metaclasses",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "metaclasses",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-15-05",
+              "title": "Descriptors",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "descriptors",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-15-06",
+              "title": "Decorators Advanced",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "decorators-advanced",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-15-07",
+              "title": "Type Hints",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "type-hints",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-15-08",
+              "title": "Multithreading ve Multiprocessing",
+              "type": "coding",
+              "durationMinutes": 45,
+              "slug": "multithreading-multiprocessing",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-15-09",
+              "title": "Design Patterns",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "design-patterns",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-15-10",
+              "title": "Python Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "python-best-practices-advanced",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-15-11",
+              "title": "Code Organization",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "code-organization-detailed",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-15-12",
+              "title": "Package Development",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "package-development",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-15-13",
+              "title": "Python Internals",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "python-internals",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-15-14",
+              "title": "Advanced Patterns",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "advanced-patterns",
+              "resources": []
+            },
+            {
+              "id": "python-lesson-15-15",
+              "title": "Advanced Topics Uygulama Örnekleri",
+              "type": "coding",
+              "durationMinutes": 45,
+              "slug": "advanced-examples",
+              "resources": []
+            }
+          ]
+        }
+      ]
+    },
+    "estimatedDuration": 4500
+  }
+}

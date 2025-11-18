@@ -1,0 +1,4804 @@
+{
+  "quizzes": [
+    {
+      "id": "quiz-dotnet-mod01-test-01",
+      "courseId": "course-dotnet-roadmap",
+      "title": "1. .NET Core Tanıyalım Testleri - Test 1",
+      "description": ".NET Core ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod01-01",
+          "question": ".NET Core nedir ve ne için kullanılır?",
+          "options": [
+            "Açık kaynaklı, cross-platform framework",
+            "Sadece Windows için framework",
+            "Sadece web geliştirme aracı",
+            "Veritabanı yönetim sistemi"
+          ],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "Temel .NET Core kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "dotnet-basics"
+    },
+    {
+      "id": "quiz-dotnet-mod01-test-02",
+      "courseId": "course-dotnet-roadmap",
+      "title": "1. .NET Core Tanıyalım Testleri - Test 2",
+      "description": ".NET Core ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod01-02",
+          "question": ".NET Framework ve .NET Core arasındaki temel fark nedir?",
+          "options": [
+            ".NET Core cross-platform, Framework sadece Windows",
+            "Hiçbir fark yok",
+            "Framework daha hızlı",
+            "Core sadece web için"
+          ],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "Temel .NET Core kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "dotnet-basics"
+    },
+    {
+      "id": "quiz-dotnet-mod01-test-03",
+      "courseId": "course-dotnet-roadmap",
+      "title": "1. .NET Core Tanıyalım Testleri - Test 3",
+      "description": ".NET Core ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod01-03",
+          "question": "CLR (Common Language Runtime) ne işe yarar?",
+          "options": [
+            "Kodun çalışma zamanında yönetilmesi",
+            "Veritabanı bağlantısı",
+            "UI render etme",
+            "Network işlemleri"
+          ],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "Temel .NET Core kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "dotnet-basics"
+    },
+    {
+      "id": "quiz-dotnet-mod01-test-04",
+      "courseId": "course-dotnet-roadmap",
+      "title": "1. .NET Core Tanıyalım Testleri - Test 4",
+      "description": ".NET Core ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod01-04",
+          "question": "SDK ve Runtime arasındaki fark nedir?",
+          "options": [
+            "Seçenek A",
+            "Seçenek B",
+            "Seçenek C",
+            "Seçenek D"
+          ],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "Temel .NET Core kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "dotnet-basics"
+    },
+    {
+      "id": "quiz-dotnet-mod01-test-05",
+      "courseId": "course-dotnet-roadmap",
+      "title": "1. .NET Core Tanıyalım Testleri - Test 5",
+      "description": ".NET Core ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod01-05",
+          "question": "Cross-platform geliştirme ne demektir?",
+          "options": [
+            "Seçenek A",
+            "Seçenek B",
+            "Seçenek C",
+            "Seçenek D"
+          ],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "Temel .NET Core kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "dotnet-basics"
+    },
+    {
+      "id": "quiz-dotnet-mod01-test-06",
+      "courseId": "course-dotnet-roadmap",
+      "title": "1. .NET Core Tanıyalım Testleri - Test 6",
+      "description": ".NET Core ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod01-06",
+          "question": "dotnet CLI komutu ne işe yarar?",
+          "options": [
+            "Seçenek A",
+            "Seçenek B",
+            "Seçenek C",
+            "Seçenek D"
+          ],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "Temel .NET Core kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "dotnet-basics"
+    },
+    {
+      "id": "quiz-dotnet-mod01-test-07",
+      "courseId": "course-dotnet-roadmap",
+      "title": "1. .NET Core Tanıyalım Testleri - Test 7",
+      "description": ".NET Core ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod01-07",
+          "question": "NuGet paket sistemi nedir?",
+          "options": [
+            "Seçenek A",
+            "Seçenek B",
+            "Seçenek C",
+            "Seçenek D"
+          ],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "Temel .NET Core kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "dotnet-basics"
+    },
+    {
+      "id": "quiz-dotnet-mod01-test-08",
+      "courseId": "course-dotnet-roadmap",
+      "title": "1. .NET Core Tanıyalım Testleri - Test 8",
+      "description": ".NET Core ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod01-08",
+          "question": ".NET Core proje yapısında Program.cs ne işe yarar?",
+          "options": [
+            "Seçenek A",
+            "Seçenek B",
+            "Seçenek C",
+            "Seçenek D"
+          ],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "Temel .NET Core kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "dotnet-basics"
+    },
+    {
+      "id": "quiz-dotnet-mod01-test-09",
+      "courseId": "course-dotnet-roadmap",
+      "title": "1. .NET Core Tanıyalım Testleri - Test 9",
+      "description": ".NET Core ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod01-09",
+          "question": "BCL (Base Class Library) nedir?",
+          "options": [
+            "Seçenek A",
+            "Seçenek B",
+            "Seçenek C",
+            "Seçenek D"
+          ],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "Temel .NET Core kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "dotnet-basics"
+    },
+    {
+      "id": "quiz-dotnet-mod01-test-10",
+      "courseId": "course-dotnet-roadmap",
+      "title": "1. .NET Core Tanıyalım Testleri - Test 10",
+      "description": ".NET Core ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod01-10",
+          "question": "Visual Studio Code ile .NET Core geliştirme mümkün müdür?",
+          "options": [
+            "Seçenek A",
+            "Seçenek B",
+            "Seçenek C",
+            "Seçenek D"
+          ],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "Temel .NET Core kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "dotnet-basics"
+    },
+    {
+      "id": "quiz-dotnet-mod01-test-11",
+      "courseId": "course-dotnet-roadmap",
+      "title": "1. .NET Core Tanıyalım Testleri - Test 11",
+      "description": ".NET Core ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod01-11",
+          "question": ".NET Core temel kavramları hakkında soru 11",
+          "options": [
+            "Seçenek A",
+            "Seçenek B",
+            "Seçenek C",
+            "Seçenek D"
+          ],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "Temel .NET Core kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "dotnet-basics"
+    },
+    {
+      "id": "quiz-dotnet-mod01-test-12",
+      "courseId": "course-dotnet-roadmap",
+      "title": "1. .NET Core Tanıyalım Testleri - Test 12",
+      "description": ".NET Core ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod01-12",
+          "question": ".NET Core temel kavramları hakkında soru 12",
+          "options": [
+            "Seçenek A",
+            "Seçenek B",
+            "Seçenek C",
+            "Seçenek D"
+          ],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "Temel .NET Core kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "dotnet-basics"
+    },
+    {
+      "id": "quiz-dotnet-mod01-test-13",
+      "courseId": "course-dotnet-roadmap",
+      "title": "1. .NET Core Tanıyalım Testleri - Test 13",
+      "description": ".NET Core ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod01-13",
+          "question": ".NET Core temel kavramları hakkında soru 13",
+          "options": [
+            "Seçenek A",
+            "Seçenek B",
+            "Seçenek C",
+            "Seçenek D"
+          ],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "Temel .NET Core kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "dotnet-basics"
+    },
+    {
+      "id": "quiz-dotnet-mod01-test-14",
+      "courseId": "course-dotnet-roadmap",
+      "title": "1. .NET Core Tanıyalım Testleri - Test 14",
+      "description": ".NET Core ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod01-14",
+          "question": ".NET Core temel kavramları hakkında soru 14",
+          "options": [
+            "Seçenek A",
+            "Seçenek B",
+            "Seçenek C",
+            "Seçenek D"
+          ],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "Temel .NET Core kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "dotnet-basics"
+    },
+    {
+      "id": "quiz-dotnet-mod01-test-15",
+      "courseId": "course-dotnet-roadmap",
+      "title": "1. .NET Core Tanıyalım Testleri - Test 15",
+      "description": ".NET Core ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod01-15",
+          "question": ".NET Core temel kavramları hakkında soru 15",
+          "options": [
+            "Seçenek A",
+            "Seçenek B",
+            "Seçenek C",
+            "Seçenek D"
+          ],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "Temel .NET Core kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "dotnet-basics"
+    },
+    {
+      "id": "quiz-dotnet-mod02-test-01",
+      "courseId": "course-dotnet-roadmap",
+      "title": "2. C# Temelleri Testleri - Test 1",
+      "description": "C# programlama dili temel kavramları hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod02-01",
+          "question": "C# hangi programlama paradigmasını destekler?",
+          "options": [],
+          "answer": 0,
+          "category": "csharp-basics",
+          "explanation": "C# programlama dili temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "csharp-basics"
+    },
+    {
+      "id": "quiz-dotnet-mod02-test-02",
+      "courseId": "course-dotnet-roadmap",
+      "title": "2. C# Temelleri Testleri - Test 2",
+      "description": "C# programlama dili temel kavramları hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod02-02",
+          "question": "Değer tipi (value type) ve referans tipi (reference type) farkı nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "csharp-basics",
+          "explanation": "C# programlama dili temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "csharp-basics"
+    },
+    {
+      "id": "quiz-dotnet-mod02-test-03",
+      "courseId": "course-dotnet-roadmap",
+      "title": "2. C# Temelleri Testleri - Test 3",
+      "description": "C# programlama dili temel kavramları hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod02-03",
+          "question": "var keyword ne zaman kullanılır?",
+          "options": [],
+          "answer": 0,
+          "category": "csharp-basics",
+          "explanation": "C# programlama dili temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "csharp-basics"
+    },
+    {
+      "id": "quiz-dotnet-mod02-test-04",
+      "courseId": "course-dotnet-roadmap",
+      "title": "2. C# Temelleri Testleri - Test 4",
+      "description": "C# programlama dili temel kavramları hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod02-04",
+          "question": "foreach döngüsü hangi durumlarda kullanılır?",
+          "options": [],
+          "answer": 0,
+          "category": "csharp-basics",
+          "explanation": "C# programlama dili temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "csharp-basics"
+    },
+    {
+      "id": "quiz-dotnet-mod02-test-05",
+      "courseId": "course-dotnet-roadmap",
+      "title": "2. C# Temelleri Testleri - Test 5",
+      "description": "C# programlama dili temel kavramları hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod02-05",
+          "question": "Exception handling için hangi bloklar kullanılır?",
+          "options": [],
+          "answer": 0,
+          "category": "csharp-basics",
+          "explanation": "C# programlama dili temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "csharp-basics"
+    },
+    {
+      "id": "quiz-dotnet-mod02-test-06",
+      "courseId": "course-dotnet-roadmap",
+      "title": "2. C# Temelleri Testleri - Test 6",
+      "description": "C# programlama dili temel kavramları hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod02-06",
+          "question": "String ve StringBuilder arasındaki fark nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "csharp-basics",
+          "explanation": "C# programlama dili temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "csharp-basics"
+    },
+    {
+      "id": "quiz-dotnet-mod02-test-07",
+      "courseId": "course-dotnet-roadmap",
+      "title": "2. C# Temelleri Testleri - Test 7",
+      "description": "C# programlama dili temel kavramları hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod02-07",
+          "question": "Nullable type nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "csharp-basics",
+          "explanation": "C# programlama dili temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "csharp-basics"
+    },
+    {
+      "id": "quiz-dotnet-mod02-test-08",
+      "courseId": "course-dotnet-roadmap",
+      "title": "2. C# Temelleri Testleri - Test 8",
+      "description": "C# programlama dili temel kavramları hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod02-08",
+          "question": "Array ve List arasındaki fark nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "csharp-basics",
+          "explanation": "C# programlama dili temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "csharp-basics"
+    },
+    {
+      "id": "quiz-dotnet-mod02-test-09",
+      "courseId": "course-dotnet-roadmap",
+      "title": "2. C# Temelleri Testleri - Test 9",
+      "description": "C# programlama dili temel kavramları hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod02-09",
+          "question": "Method overloading nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "csharp-basics",
+          "explanation": "C# programlama dili temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "csharp-basics"
+    },
+    {
+      "id": "quiz-dotnet-mod02-test-10",
+      "courseId": "course-dotnet-roadmap",
+      "title": "2. C# Temelleri Testleri - Test 10",
+      "description": "C# programlama dili temel kavramları hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod02-10",
+          "question": "Namespace ne işe yarar?",
+          "options": [],
+          "answer": 0,
+          "category": "csharp-basics",
+          "explanation": "C# programlama dili temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "csharp-basics"
+    },
+    {
+      "id": "quiz-dotnet-mod02-test-11",
+      "courseId": "course-dotnet-roadmap",
+      "title": "2. C# Temelleri Testleri - Test 11",
+      "description": "C# programlama dili temel kavramları hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod02-11",
+          "question": "C# temel kavramları hakkında soru 11",
+          "options": [],
+          "answer": 0,
+          "category": "csharp-basics",
+          "explanation": "C# programlama dili temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "csharp-basics"
+    },
+    {
+      "id": "quiz-dotnet-mod02-test-12",
+      "courseId": "course-dotnet-roadmap",
+      "title": "2. C# Temelleri Testleri - Test 12",
+      "description": "C# programlama dili temel kavramları hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod02-12",
+          "question": "C# temel kavramları hakkında soru 12",
+          "options": [],
+          "answer": 0,
+          "category": "csharp-basics",
+          "explanation": "C# programlama dili temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "csharp-basics"
+    },
+    {
+      "id": "quiz-dotnet-mod02-test-13",
+      "courseId": "course-dotnet-roadmap",
+      "title": "2. C# Temelleri Testleri - Test 13",
+      "description": "C# programlama dili temel kavramları hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod02-13",
+          "question": "C# temel kavramları hakkında soru 13",
+          "options": [],
+          "answer": 0,
+          "category": "csharp-basics",
+          "explanation": "C# programlama dili temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "csharp-basics"
+    },
+    {
+      "id": "quiz-dotnet-mod02-test-14",
+      "courseId": "course-dotnet-roadmap",
+      "title": "2. C# Temelleri Testleri - Test 14",
+      "description": "C# programlama dili temel kavramları hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod02-14",
+          "question": "C# temel kavramları hakkında soru 14",
+          "options": [],
+          "answer": 0,
+          "category": "csharp-basics",
+          "explanation": "C# programlama dili temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "csharp-basics"
+    },
+    {
+      "id": "quiz-dotnet-mod02-test-15",
+      "courseId": "course-dotnet-roadmap",
+      "title": "2. C# Temelleri Testleri - Test 15",
+      "description": "C# programlama dili temel kavramları hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod02-15",
+          "question": "C# temel kavramları hakkında soru 15",
+          "options": [],
+          "answer": 0,
+          "category": "csharp-basics",
+          "explanation": "C# programlama dili temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "csharp-basics"
+    },
+    {
+      "id": "quiz-dotnet-mod03-test-01",
+      "courseId": "course-dotnet-roadmap",
+      "title": "3. Proje Yapısı ve Dependency Injection Testleri - Test 1",
+      "description": "Proje yapısı, DI ve configuration yönetimi hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod03-01",
+          "question": "Dependency Injection nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "architecture",
+          "explanation": "Proje yapısı ve Dependency Injection hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "project-structure"
+    },
+    {
+      "id": "quiz-dotnet-mod03-test-02",
+      "courseId": "course-dotnet-roadmap",
+      "title": "3. Proje Yapısı ve Dependency Injection Testleri - Test 2",
+      "description": "Proje yapısı, DI ve configuration yönetimi hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod03-02",
+          "question": "Service lifetime türleri nelerdir?",
+          "options": [],
+          "answer": 0,
+          "category": "architecture",
+          "explanation": "Proje yapısı ve Dependency Injection hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "project-structure"
+    },
+    {
+      "id": "quiz-dotnet-mod03-test-03",
+      "courseId": "course-dotnet-roadmap",
+      "title": "3. Proje Yapısı ve Dependency Injection Testleri - Test 3",
+      "description": "Proje yapısı, DI ve configuration yönetimi hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod03-03",
+          "question": "Singleton, Scoped ve Transient arasındaki fark nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "architecture",
+          "explanation": "Proje yapısı ve Dependency Injection hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "project-structure"
+    },
+    {
+      "id": "quiz-dotnet-mod03-test-04",
+      "courseId": "course-dotnet-roadmap",
+      "title": "3. Proje Yapısı ve Dependency Injection Testleri - Test 4",
+      "description": "Proje yapısı, DI ve configuration yönetimi hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod03-04",
+          "question": "IServiceCollection ne işe yarar?",
+          "options": [],
+          "answer": 0,
+          "category": "architecture",
+          "explanation": "Proje yapısı ve Dependency Injection hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "project-structure"
+    },
+    {
+      "id": "quiz-dotnet-mod03-test-05",
+      "courseId": "course-dotnet-roadmap",
+      "title": "3. Proje Yapısı ve Dependency Injection Testleri - Test 5",
+      "description": "Proje yapısı, DI ve configuration yönetimi hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod03-05",
+          "question": "appsettings.json dosyası ne için kullanılır?",
+          "options": [],
+          "answer": 0,
+          "category": "architecture",
+          "explanation": "Proje yapısı ve Dependency Injection hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "project-structure"
+    },
+    {
+      "id": "quiz-dotnet-mod03-test-06",
+      "courseId": "course-dotnet-roadmap",
+      "title": "3. Proje Yapısı ve Dependency Injection Testleri - Test 6",
+      "description": "Proje yapısı, DI ve configuration yönetimi hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod03-06",
+          "question": "Startup.cs ve Program.cs farkı nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "architecture",
+          "explanation": "Proje yapısı ve Dependency Injection hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "project-structure"
+    },
+    {
+      "id": "quiz-dotnet-mod03-test-07",
+      "courseId": "course-dotnet-roadmap",
+      "title": "3. Proje Yapısı ve Dependency Injection Testleri - Test 7",
+      "description": "Proje yapısı, DI ve configuration yönetimi hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod03-07",
+          "question": "Middleware pipeline nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "architecture",
+          "explanation": "Proje yapısı ve Dependency Injection hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "project-structure"
+    },
+    {
+      "id": "quiz-dotnet-mod03-test-08",
+      "courseId": "course-dotnet-roadmap",
+      "title": "3. Proje Yapısı ve Dependency Injection Testleri - Test 8",
+      "description": "Proje yapısı, DI ve configuration yönetimi hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod03-08",
+          "question": "Options Pattern nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "architecture",
+          "explanation": "Proje yapısı ve Dependency Injection hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "project-structure"
+    },
+    {
+      "id": "quiz-dotnet-mod03-test-09",
+      "courseId": "course-dotnet-roadmap",
+      "title": "3. Proje Yapısı ve Dependency Injection Testleri - Test 9",
+      "description": "Proje yapısı, DI ve configuration yönetimi hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod03-09",
+          "question": "Katmanlı mimari nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "architecture",
+          "explanation": "Proje yapısı ve Dependency Injection hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "project-structure"
+    },
+    {
+      "id": "quiz-dotnet-mod03-test-10",
+      "courseId": "course-dotnet-roadmap",
+      "title": "3. Proje Yapısı ve Dependency Injection Testleri - Test 10",
+      "description": "Proje yapısı, DI ve configuration yönetimi hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod03-10",
+          "question": "Repository Pattern ne işe yarar?",
+          "options": [],
+          "answer": 0,
+          "category": "architecture",
+          "explanation": "Proje yapısı ve Dependency Injection hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "project-structure"
+    },
+    {
+      "id": "quiz-dotnet-mod03-test-11",
+      "courseId": "course-dotnet-roadmap",
+      "title": "3. Proje Yapısı ve Dependency Injection Testleri - Test 11",
+      "description": "Proje yapısı, DI ve configuration yönetimi hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod03-11",
+          "question": "Proje yapısı ve DI hakkında soru 11",
+          "options": [],
+          "answer": 0,
+          "category": "architecture",
+          "explanation": "Proje yapısı ve Dependency Injection hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "project-structure"
+    },
+    {
+      "id": "quiz-dotnet-mod03-test-12",
+      "courseId": "course-dotnet-roadmap",
+      "title": "3. Proje Yapısı ve Dependency Injection Testleri - Test 12",
+      "description": "Proje yapısı, DI ve configuration yönetimi hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod03-12",
+          "question": "Proje yapısı ve DI hakkında soru 12",
+          "options": [],
+          "answer": 0,
+          "category": "architecture",
+          "explanation": "Proje yapısı ve Dependency Injection hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "project-structure"
+    },
+    {
+      "id": "quiz-dotnet-mod03-test-13",
+      "courseId": "course-dotnet-roadmap",
+      "title": "3. Proje Yapısı ve Dependency Injection Testleri - Test 13",
+      "description": "Proje yapısı, DI ve configuration yönetimi hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod03-13",
+          "question": "Proje yapısı ve DI hakkında soru 13",
+          "options": [],
+          "answer": 0,
+          "category": "architecture",
+          "explanation": "Proje yapısı ve Dependency Injection hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "project-structure"
+    },
+    {
+      "id": "quiz-dotnet-mod03-test-14",
+      "courseId": "course-dotnet-roadmap",
+      "title": "3. Proje Yapısı ve Dependency Injection Testleri - Test 14",
+      "description": "Proje yapısı, DI ve configuration yönetimi hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod03-14",
+          "question": "Proje yapısı ve DI hakkında soru 14",
+          "options": [],
+          "answer": 0,
+          "category": "architecture",
+          "explanation": "Proje yapısı ve Dependency Injection hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "project-structure"
+    },
+    {
+      "id": "quiz-dotnet-mod03-test-15",
+      "courseId": "course-dotnet-roadmap",
+      "title": "3. Proje Yapısı ve Dependency Injection Testleri - Test 15",
+      "description": "Proje yapısı, DI ve configuration yönetimi hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod03-15",
+          "question": "Proje yapısı ve DI hakkında soru 15",
+          "options": [],
+          "answer": 0,
+          "category": "architecture",
+          "explanation": "Proje yapısı ve Dependency Injection hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "project-structure"
+    },
+    {
+      "id": "quiz-dotnet-mod04-test-01",
+      "courseId": "course-dotnet-roadmap",
+      "title": "4. ASP.NET Core MVC Testleri - Test 1",
+      "description": "MVC pattern, Razor ve model binding hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod04-01",
+          "question": "MVC pattern nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "mvc",
+          "explanation": "ASP.NET Core MVC hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "aspnet-mvc"
+    },
+    {
+      "id": "quiz-dotnet-mod04-test-02",
+      "courseId": "course-dotnet-roadmap",
+      "title": "4. ASP.NET Core MVC Testleri - Test 2",
+      "description": "MVC pattern, Razor ve model binding hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod04-02",
+          "question": "Controller ne işe yarar?",
+          "options": [],
+          "answer": 0,
+          "category": "mvc",
+          "explanation": "ASP.NET Core MVC hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "aspnet-mvc"
+    },
+    {
+      "id": "quiz-dotnet-mod04-test-03",
+      "courseId": "course-dotnet-roadmap",
+      "title": "4. ASP.NET Core MVC Testleri - Test 3",
+      "description": "MVC pattern, Razor ve model binding hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod04-03",
+          "question": "Model Binding nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "mvc",
+          "explanation": "ASP.NET Core MVC hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "aspnet-mvc"
+    },
+    {
+      "id": "quiz-dotnet-mod04-test-04",
+      "courseId": "course-dotnet-roadmap",
+      "title": "4. ASP.NET Core MVC Testleri - Test 4",
+      "description": "MVC pattern, Razor ve model binding hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod04-04",
+          "question": "Razor syntax nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "mvc",
+          "explanation": "ASP.NET Core MVC hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "aspnet-mvc"
+    },
+    {
+      "id": "quiz-dotnet-mod04-test-05",
+      "courseId": "course-dotnet-roadmap",
+      "title": "4. ASP.NET Core MVC Testleri - Test 5",
+      "description": "MVC pattern, Razor ve model binding hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod04-05",
+          "question": "ViewBag, ViewData ve TempData farkı nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "mvc",
+          "explanation": "ASP.NET Core MVC hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "aspnet-mvc"
+    },
+    {
+      "id": "quiz-dotnet-mod04-test-06",
+      "courseId": "course-dotnet-roadmap",
+      "title": "4. ASP.NET Core MVC Testleri - Test 6",
+      "description": "MVC pattern, Razor ve model binding hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod04-06",
+          "question": "Partial View ne için kullanılır?",
+          "options": [],
+          "answer": 0,
+          "category": "mvc",
+          "explanation": "ASP.NET Core MVC hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "aspnet-mvc"
+    },
+    {
+      "id": "quiz-dotnet-mod04-test-07",
+      "courseId": "course-dotnet-roadmap",
+      "title": "4. ASP.NET Core MVC Testleri - Test 7",
+      "description": "MVC pattern, Razor ve model binding hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod04-07",
+          "question": "TagHelper nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "mvc",
+          "explanation": "ASP.NET Core MVC hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "aspnet-mvc"
+    },
+    {
+      "id": "quiz-dotnet-mod04-test-08",
+      "courseId": "course-dotnet-roadmap",
+      "title": "4. ASP.NET Core MVC Testleri - Test 8",
+      "description": "MVC pattern, Razor ve model binding hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod04-08",
+          "question": "ViewComponent nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "mvc",
+          "explanation": "ASP.NET Core MVC hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "aspnet-mvc"
+    },
+    {
+      "id": "quiz-dotnet-mod04-test-09",
+      "courseId": "course-dotnet-roadmap",
+      "title": "4. ASP.NET Core MVC Testleri - Test 9",
+      "description": "MVC pattern, Razor ve model binding hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod04-09",
+          "question": "Data Annotations ne işe yarar?",
+          "options": [],
+          "answer": 0,
+          "category": "mvc",
+          "explanation": "ASP.NET Core MVC hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "aspnet-mvc"
+    },
+    {
+      "id": "quiz-dotnet-mod04-test-10",
+      "courseId": "course-dotnet-roadmap",
+      "title": "4. ASP.NET Core MVC Testleri - Test 10",
+      "description": "MVC pattern, Razor ve model binding hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod04-10",
+          "question": "ModelState nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "mvc",
+          "explanation": "ASP.NET Core MVC hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "aspnet-mvc"
+    },
+    {
+      "id": "quiz-dotnet-mod04-test-11",
+      "courseId": "course-dotnet-roadmap",
+      "title": "4. ASP.NET Core MVC Testleri - Test 11",
+      "description": "MVC pattern, Razor ve model binding hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod04-11",
+          "question": "MVC hakkında soru 11",
+          "options": [],
+          "answer": 0,
+          "category": "mvc",
+          "explanation": "ASP.NET Core MVC hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "aspnet-mvc"
+    },
+    {
+      "id": "quiz-dotnet-mod04-test-12",
+      "courseId": "course-dotnet-roadmap",
+      "title": "4. ASP.NET Core MVC Testleri - Test 12",
+      "description": "MVC pattern, Razor ve model binding hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod04-12",
+          "question": "MVC hakkında soru 12",
+          "options": [],
+          "answer": 0,
+          "category": "mvc",
+          "explanation": "ASP.NET Core MVC hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "aspnet-mvc"
+    },
+    {
+      "id": "quiz-dotnet-mod04-test-13",
+      "courseId": "course-dotnet-roadmap",
+      "title": "4. ASP.NET Core MVC Testleri - Test 13",
+      "description": "MVC pattern, Razor ve model binding hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod04-13",
+          "question": "MVC hakkında soru 13",
+          "options": [],
+          "answer": 0,
+          "category": "mvc",
+          "explanation": "ASP.NET Core MVC hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "aspnet-mvc"
+    },
+    {
+      "id": "quiz-dotnet-mod04-test-14",
+      "courseId": "course-dotnet-roadmap",
+      "title": "4. ASP.NET Core MVC Testleri - Test 14",
+      "description": "MVC pattern, Razor ve model binding hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod04-14",
+          "question": "MVC hakkında soru 14",
+          "options": [],
+          "answer": 0,
+          "category": "mvc",
+          "explanation": "ASP.NET Core MVC hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "aspnet-mvc"
+    },
+    {
+      "id": "quiz-dotnet-mod04-test-15",
+      "courseId": "course-dotnet-roadmap",
+      "title": "4. ASP.NET Core MVC Testleri - Test 15",
+      "description": "MVC pattern, Razor ve model binding hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod04-15",
+          "question": "MVC hakkında soru 15",
+          "options": [],
+          "answer": 0,
+          "category": "mvc",
+          "explanation": "ASP.NET Core MVC hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "aspnet-mvc"
+    },
+    {
+      "id": "quiz-dotnet-mod05-test-01",
+      "courseId": "course-dotnet-roadmap",
+      "title": "5. Web API Geliştirme Testleri - Test 1",
+      "description": "RESTful API, Swagger ve API geliştirme hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod05-01",
+          "question": "RESTful API nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "api",
+          "explanation": "Web API geliştirme hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "web-api"
+    },
+    {
+      "id": "quiz-dotnet-mod05-test-02",
+      "courseId": "course-dotnet-roadmap",
+      "title": "5. Web API Geliştirme Testleri - Test 2",
+      "description": "RESTful API, Swagger ve API geliştirme hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod05-02",
+          "question": "HTTP metotları nelerdir?",
+          "options": [],
+          "answer": 0,
+          "category": "api",
+          "explanation": "Web API geliştirme hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "web-api"
+    },
+    {
+      "id": "quiz-dotnet-mod05-test-03",
+      "courseId": "course-dotnet-roadmap",
+      "title": "5. Web API Geliştirme Testleri - Test 3",
+      "description": "RESTful API, Swagger ve API geliştirme hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod05-03",
+          "question": "Minimal API nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "api",
+          "explanation": "Web API geliştirme hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "web-api"
+    },
+    {
+      "id": "quiz-dotnet-mod05-test-04",
+      "courseId": "course-dotnet-roadmap",
+      "title": "5. Web API Geliştirme Testleri - Test 4",
+      "description": "RESTful API, Swagger ve API geliştirme hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod05-04",
+          "question": "Swagger ne işe yarar?",
+          "options": [],
+          "answer": 0,
+          "category": "api",
+          "explanation": "Web API geliştirme hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "web-api"
+    },
+    {
+      "id": "quiz-dotnet-mod05-test-05",
+      "courseId": "course-dotnet-roadmap",
+      "title": "5. Web API Geliştirme Testleri - Test 5",
+      "description": "RESTful API, Swagger ve API geliştirme hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod05-05",
+          "question": "API versioning nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "api",
+          "explanation": "Web API geliştirme hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "web-api"
+    },
+    {
+      "id": "quiz-dotnet-mod05-test-06",
+      "courseId": "course-dotnet-roadmap",
+      "title": "5. Web API Geliştirme Testleri - Test 6",
+      "description": "RESTful API, Swagger ve API geliştirme hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod05-06",
+          "question": "DTO (Data Transfer Object) nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "api",
+          "explanation": "Web API geliştirme hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "web-api"
+    },
+    {
+      "id": "quiz-dotnet-mod05-test-07",
+      "courseId": "course-dotnet-roadmap",
+      "title": "5. Web API Geliştirme Testleri - Test 7",
+      "description": "RESTful API, Swagger ve API geliştirme hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod05-07",
+          "question": "CORS nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "api",
+          "explanation": "Web API geliştirme hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "web-api"
+    },
+    {
+      "id": "quiz-dotnet-mod05-test-08",
+      "courseId": "course-dotnet-roadmap",
+      "title": "5. Web API Geliştirme Testleri - Test 8",
+      "description": "RESTful API, Swagger ve API geliştirme hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod05-08",
+          "question": "Rate limiting nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "api",
+          "explanation": "Web API geliştirme hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "web-api"
+    },
+    {
+      "id": "quiz-dotnet-mod05-test-09",
+      "courseId": "course-dotnet-roadmap",
+      "title": "5. Web API Geliştirme Testleri - Test 9",
+      "description": "RESTful API, Swagger ve API geliştirme hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod05-09",
+          "question": "Response wrapper nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "api",
+          "explanation": "Web API geliştirme hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "web-api"
+    },
+    {
+      "id": "quiz-dotnet-mod05-test-10",
+      "courseId": "course-dotnet-roadmap",
+      "title": "5. Web API Geliştirme Testleri - Test 10",
+      "description": "RESTful API, Swagger ve API geliştirme hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod05-10",
+          "question": "API authentication yöntemleri nelerdir?",
+          "options": [],
+          "answer": 0,
+          "category": "api",
+          "explanation": "Web API geliştirme hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "web-api"
+    },
+    {
+      "id": "quiz-dotnet-mod05-test-11",
+      "courseId": "course-dotnet-roadmap",
+      "title": "5. Web API Geliştirme Testleri - Test 11",
+      "description": "RESTful API, Swagger ve API geliştirme hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod05-11",
+          "question": "Web API hakkında soru 11",
+          "options": [],
+          "answer": 0,
+          "category": "api",
+          "explanation": "Web API geliştirme hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "web-api"
+    },
+    {
+      "id": "quiz-dotnet-mod05-test-12",
+      "courseId": "course-dotnet-roadmap",
+      "title": "5. Web API Geliştirme Testleri - Test 12",
+      "description": "RESTful API, Swagger ve API geliştirme hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod05-12",
+          "question": "Web API hakkında soru 12",
+          "options": [],
+          "answer": 0,
+          "category": "api",
+          "explanation": "Web API geliştirme hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "web-api"
+    },
+    {
+      "id": "quiz-dotnet-mod05-test-13",
+      "courseId": "course-dotnet-roadmap",
+      "title": "5. Web API Geliştirme Testleri - Test 13",
+      "description": "RESTful API, Swagger ve API geliştirme hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod05-13",
+          "question": "Web API hakkında soru 13",
+          "options": [],
+          "answer": 0,
+          "category": "api",
+          "explanation": "Web API geliştirme hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "web-api"
+    },
+    {
+      "id": "quiz-dotnet-mod05-test-14",
+      "courseId": "course-dotnet-roadmap",
+      "title": "5. Web API Geliştirme Testleri - Test 14",
+      "description": "RESTful API, Swagger ve API geliştirme hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod05-14",
+          "question": "Web API hakkında soru 14",
+          "options": [],
+          "answer": 0,
+          "category": "api",
+          "explanation": "Web API geliştirme hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "web-api"
+    },
+    {
+      "id": "quiz-dotnet-mod05-test-15",
+      "courseId": "course-dotnet-roadmap",
+      "title": "5. Web API Geliştirme Testleri - Test 15",
+      "description": "RESTful API, Swagger ve API geliştirme hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod05-15",
+          "question": "Web API hakkında soru 15",
+          "options": [],
+          "answer": 0,
+          "category": "api",
+          "explanation": "Web API geliştirme hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "web-api"
+    },
+    {
+      "id": "quiz-dotnet-mod06-test-01",
+      "courseId": "course-dotnet-roadmap",
+      "title": "6. Middleware ve Pipeline Yönetimi Testleri - Test 1",
+      "description": "Middleware pipeline ve request/response handling hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod06-01",
+          "question": "Middleware nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "middleware",
+          "explanation": "Middleware ve Pipeline yönetimi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "middleware"
+    },
+    {
+      "id": "quiz-dotnet-mod06-test-02",
+      "courseId": "course-dotnet-roadmap",
+      "title": "6. Middleware ve Pipeline Yönetimi Testleri - Test 2",
+      "description": "Middleware pipeline ve request/response handling hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod06-02",
+          "question": "Request pipeline nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "middleware",
+          "explanation": "Middleware ve Pipeline yönetimi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "middleware"
+    },
+    {
+      "id": "quiz-dotnet-mod06-test-03",
+      "courseId": "course-dotnet-roadmap",
+      "title": "6. Middleware ve Pipeline Yönetimi Testleri - Test 3",
+      "description": "Middleware pipeline ve request/response handling hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod06-03",
+          "question": "Middleware sırası neden önemlidir?",
+          "options": [],
+          "answer": 0,
+          "category": "middleware",
+          "explanation": "Middleware ve Pipeline yönetimi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "middleware"
+    },
+    {
+      "id": "quiz-dotnet-mod06-test-04",
+      "courseId": "course-dotnet-roadmap",
+      "title": "6. Middleware ve Pipeline Yönetimi Testleri - Test 4",
+      "description": "Middleware pipeline ve request/response handling hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod06-04",
+          "question": "Use, Run ve Map middleware farkı nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "middleware",
+          "explanation": "Middleware ve Pipeline yönetimi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "middleware"
+    },
+    {
+      "id": "quiz-dotnet-mod06-test-05",
+      "courseId": "course-dotnet-roadmap",
+      "title": "6. Middleware ve Pipeline Yönetimi Testleri - Test 5",
+      "description": "Middleware pipeline ve request/response handling hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod06-05",
+          "question": "Custom middleware nasıl oluşturulur?",
+          "options": [],
+          "answer": 0,
+          "category": "middleware",
+          "explanation": "Middleware ve Pipeline yönetimi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "middleware"
+    },
+    {
+      "id": "quiz-dotnet-mod06-test-06",
+      "courseId": "course-dotnet-roadmap",
+      "title": "6. Middleware ve Pipeline Yönetimi Testleri - Test 6",
+      "description": "Middleware pipeline ve request/response handling hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod06-06",
+          "question": "Terminal middleware nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "middleware",
+          "explanation": "Middleware ve Pipeline yönetimi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "middleware"
+    },
+    {
+      "id": "quiz-dotnet-mod06-test-07",
+      "courseId": "course-dotnet-roadmap",
+      "title": "6. Middleware ve Pipeline Yönetimi Testleri - Test 7",
+      "description": "Middleware pipeline ve request/response handling hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod06-07",
+          "question": "Middleware ile exception handling nasıl yapılır?",
+          "options": [],
+          "answer": 0,
+          "category": "middleware",
+          "explanation": "Middleware ve Pipeline yönetimi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "middleware"
+    },
+    {
+      "id": "quiz-dotnet-mod06-test-08",
+      "courseId": "course-dotnet-roadmap",
+      "title": "6. Middleware ve Pipeline Yönetimi Testleri - Test 8",
+      "description": "Middleware pipeline ve request/response handling hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod06-08",
+          "question": "Conditional middleware nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "middleware",
+          "explanation": "Middleware ve Pipeline yönetimi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "middleware"
+    },
+    {
+      "id": "quiz-dotnet-mod06-test-09",
+      "courseId": "course-dotnet-roadmap",
+      "title": "6. Middleware ve Pipeline Yönetimi Testleri - Test 9",
+      "description": "Middleware pipeline ve request/response handling hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod06-09",
+          "question": "Middleware dependency injection nasıl çalışır?",
+          "options": [],
+          "answer": 0,
+          "category": "middleware",
+          "explanation": "Middleware ve Pipeline yönetimi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "middleware"
+    },
+    {
+      "id": "quiz-dotnet-mod06-test-10",
+      "courseId": "course-dotnet-roadmap",
+      "title": "6. Middleware ve Pipeline Yönetimi Testleri - Test 10",
+      "description": "Middleware pipeline ve request/response handling hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod06-10",
+          "question": "Pipeline branching nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "middleware",
+          "explanation": "Middleware ve Pipeline yönetimi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "middleware"
+    },
+    {
+      "id": "quiz-dotnet-mod06-test-11",
+      "courseId": "course-dotnet-roadmap",
+      "title": "6. Middleware ve Pipeline Yönetimi Testleri - Test 11",
+      "description": "Middleware pipeline ve request/response handling hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod06-11",
+          "question": "Middleware hakkında soru 11",
+          "options": [],
+          "answer": 0,
+          "category": "middleware",
+          "explanation": "Middleware ve Pipeline yönetimi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "middleware"
+    },
+    {
+      "id": "quiz-dotnet-mod06-test-12",
+      "courseId": "course-dotnet-roadmap",
+      "title": "6. Middleware ve Pipeline Yönetimi Testleri - Test 12",
+      "description": "Middleware pipeline ve request/response handling hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod06-12",
+          "question": "Middleware hakkında soru 12",
+          "options": [],
+          "answer": 0,
+          "category": "middleware",
+          "explanation": "Middleware ve Pipeline yönetimi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "middleware"
+    },
+    {
+      "id": "quiz-dotnet-mod06-test-13",
+      "courseId": "course-dotnet-roadmap",
+      "title": "6. Middleware ve Pipeline Yönetimi Testleri - Test 13",
+      "description": "Middleware pipeline ve request/response handling hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod06-13",
+          "question": "Middleware hakkında soru 13",
+          "options": [],
+          "answer": 0,
+          "category": "middleware",
+          "explanation": "Middleware ve Pipeline yönetimi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "middleware"
+    },
+    {
+      "id": "quiz-dotnet-mod06-test-14",
+      "courseId": "course-dotnet-roadmap",
+      "title": "6. Middleware ve Pipeline Yönetimi Testleri - Test 14",
+      "description": "Middleware pipeline ve request/response handling hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod06-14",
+          "question": "Middleware hakkında soru 14",
+          "options": [],
+          "answer": 0,
+          "category": "middleware",
+          "explanation": "Middleware ve Pipeline yönetimi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "middleware"
+    },
+    {
+      "id": "quiz-dotnet-mod06-test-15",
+      "courseId": "course-dotnet-roadmap",
+      "title": "6. Middleware ve Pipeline Yönetimi Testleri - Test 15",
+      "description": "Middleware pipeline ve request/response handling hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod06-15",
+          "question": "Middleware hakkında soru 15",
+          "options": [],
+          "answer": 0,
+          "category": "middleware",
+          "explanation": "Middleware ve Pipeline yönetimi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "middleware"
+    },
+    {
+      "id": "quiz-dotnet-mod07-test-01",
+      "courseId": "course-dotnet-roadmap",
+      "title": "7. Authentication & Authorization Testleri - Test 1",
+      "description": "Authentication, authorization ve güvenlik hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod07-01",
+          "question": "Authentication ve Authorization farkı nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "auth",
+          "explanation": "Authentication & Authorization hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "authentication"
+    },
+    {
+      "id": "quiz-dotnet-mod07-test-02",
+      "courseId": "course-dotnet-roadmap",
+      "title": "7. Authentication & Authorization Testleri - Test 2",
+      "description": "Authentication, authorization ve güvenlik hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod07-02",
+          "question": "JWT token nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "auth",
+          "explanation": "Authentication & Authorization hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "authentication"
+    },
+    {
+      "id": "quiz-dotnet-mod07-test-03",
+      "courseId": "course-dotnet-roadmap",
+      "title": "7. Authentication & Authorization Testleri - Test 3",
+      "description": "Authentication, authorization ve güvenlik hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod07-03",
+          "question": "ASP.NET Core Identity nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "auth",
+          "explanation": "Authentication & Authorization hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "authentication"
+    },
+    {
+      "id": "quiz-dotnet-mod07-test-04",
+      "courseId": "course-dotnet-roadmap",
+      "title": "7. Authentication & Authorization Testleri - Test 4",
+      "description": "Authentication, authorization ve güvenlik hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod07-04",
+          "question": "Role-based authorization nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "auth",
+          "explanation": "Authentication & Authorization hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "authentication"
+    },
+    {
+      "id": "quiz-dotnet-mod07-test-05",
+      "courseId": "course-dotnet-roadmap",
+      "title": "7. Authentication & Authorization Testleri - Test 5",
+      "description": "Authentication, authorization ve güvenlik hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod07-05",
+          "question": "Policy-based authorization nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "auth",
+          "explanation": "Authentication & Authorization hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "authentication"
+    },
+    {
+      "id": "quiz-dotnet-mod07-test-06",
+      "courseId": "course-dotnet-roadmap",
+      "title": "7. Authentication & Authorization Testleri - Test 6",
+      "description": "Authentication, authorization ve güvenlik hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod07-06",
+          "question": "Claims nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "auth",
+          "explanation": "Authentication & Authorization hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "authentication"
+    },
+    {
+      "id": "quiz-dotnet-mod07-test-07",
+      "courseId": "course-dotnet-roadmap",
+      "title": "7. Authentication & Authorization Testleri - Test 7",
+      "description": "Authentication, authorization ve güvenlik hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod07-07",
+          "question": "OAuth2 nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "auth",
+          "explanation": "Authentication & Authorization hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "authentication"
+    },
+    {
+      "id": "quiz-dotnet-mod07-test-08",
+      "courseId": "course-dotnet-roadmap",
+      "title": "7. Authentication & Authorization Testleri - Test 8",
+      "description": "Authentication, authorization ve güvenlik hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod07-08",
+          "question": "Token refresh mekanizması nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "auth",
+          "explanation": "Authentication & Authorization hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "authentication"
+    },
+    {
+      "id": "quiz-dotnet-mod07-test-09",
+      "courseId": "course-dotnet-roadmap",
+      "title": "7. Authentication & Authorization Testleri - Test 9",
+      "description": "Authentication, authorization ve güvenlik hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod07-09",
+          "question": "Password hashing nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "auth",
+          "explanation": "Authentication & Authorization hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "authentication"
+    },
+    {
+      "id": "quiz-dotnet-mod07-test-10",
+      "courseId": "course-dotnet-roadmap",
+      "title": "7. Authentication & Authorization Testleri - Test 10",
+      "description": "Authentication, authorization ve güvenlik hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod07-10",
+          "question": "MFA (Multi-Factor Authentication) nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "auth",
+          "explanation": "Authentication & Authorization hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "authentication"
+    },
+    {
+      "id": "quiz-dotnet-mod07-test-11",
+      "courseId": "course-dotnet-roadmap",
+      "title": "7. Authentication & Authorization Testleri - Test 11",
+      "description": "Authentication, authorization ve güvenlik hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod07-11",
+          "question": "Authentication hakkında soru 11",
+          "options": [],
+          "answer": 0,
+          "category": "auth",
+          "explanation": "Authentication & Authorization hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "authentication"
+    },
+    {
+      "id": "quiz-dotnet-mod07-test-12",
+      "courseId": "course-dotnet-roadmap",
+      "title": "7. Authentication & Authorization Testleri - Test 12",
+      "description": "Authentication, authorization ve güvenlik hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod07-12",
+          "question": "Authentication hakkında soru 12",
+          "options": [],
+          "answer": 0,
+          "category": "auth",
+          "explanation": "Authentication & Authorization hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "authentication"
+    },
+    {
+      "id": "quiz-dotnet-mod07-test-13",
+      "courseId": "course-dotnet-roadmap",
+      "title": "7. Authentication & Authorization Testleri - Test 13",
+      "description": "Authentication, authorization ve güvenlik hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod07-13",
+          "question": "Authentication hakkında soru 13",
+          "options": [],
+          "answer": 0,
+          "category": "auth",
+          "explanation": "Authentication & Authorization hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "authentication"
+    },
+    {
+      "id": "quiz-dotnet-mod07-test-14",
+      "courseId": "course-dotnet-roadmap",
+      "title": "7. Authentication & Authorization Testleri - Test 14",
+      "description": "Authentication, authorization ve güvenlik hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod07-14",
+          "question": "Authentication hakkında soru 14",
+          "options": [],
+          "answer": 0,
+          "category": "auth",
+          "explanation": "Authentication & Authorization hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "authentication"
+    },
+    {
+      "id": "quiz-dotnet-mod07-test-15",
+      "courseId": "course-dotnet-roadmap",
+      "title": "7. Authentication & Authorization Testleri - Test 15",
+      "description": "Authentication, authorization ve güvenlik hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod07-15",
+          "question": "Authentication hakkında soru 15",
+          "options": [],
+          "answer": 0,
+          "category": "auth",
+          "explanation": "Authentication & Authorization hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "authentication"
+    },
+    {
+      "id": "quiz-dotnet-mod08-test-01",
+      "courseId": "course-dotnet-roadmap",
+      "title": "8. Logging ve Exception Handling Testleri - Test 1",
+      "description": "Logging frameworkleri ve exception handling hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod08-01",
+          "question": "ILogger interface nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "logging",
+          "explanation": "Logging ve Exception Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "logging"
+    },
+    {
+      "id": "quiz-dotnet-mod08-test-02",
+      "courseId": "course-dotnet-roadmap",
+      "title": "8. Logging ve Exception Handling Testleri - Test 2",
+      "description": "Logging frameworkleri ve exception handling hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod08-02",
+          "question": "Serilog nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "logging",
+          "explanation": "Logging ve Exception Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "logging"
+    },
+    {
+      "id": "quiz-dotnet-mod08-test-03",
+      "courseId": "course-dotnet-roadmap",
+      "title": "8. Logging ve Exception Handling Testleri - Test 3",
+      "description": "Logging frameworkleri ve exception handling hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod08-03",
+          "question": "Log levels nelerdir?",
+          "options": [],
+          "answer": 0,
+          "category": "logging",
+          "explanation": "Logging ve Exception Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "logging"
+    },
+    {
+      "id": "quiz-dotnet-mod08-test-04",
+      "courseId": "course-dotnet-roadmap",
+      "title": "8. Logging ve Exception Handling Testleri - Test 4",
+      "description": "Logging frameworkleri ve exception handling hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod08-04",
+          "question": "Structured logging nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "logging",
+          "explanation": "Logging ve Exception Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "logging"
+    },
+    {
+      "id": "quiz-dotnet-mod08-test-05",
+      "courseId": "course-dotnet-roadmap",
+      "title": "8. Logging ve Exception Handling Testleri - Test 5",
+      "description": "Logging frameworkleri ve exception handling hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod08-05",
+          "question": "Exception middleware nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "logging",
+          "explanation": "Logging ve Exception Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "logging"
+    },
+    {
+      "id": "quiz-dotnet-mod08-test-06",
+      "courseId": "course-dotnet-roadmap",
+      "title": "8. Logging ve Exception Handling Testleri - Test 6",
+      "description": "Logging frameworkleri ve exception handling hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod08-06",
+          "question": "Global exception handler nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "logging",
+          "explanation": "Logging ve Exception Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "logging"
+    },
+    {
+      "id": "quiz-dotnet-mod08-test-07",
+      "courseId": "course-dotnet-roadmap",
+      "title": "8. Logging ve Exception Handling Testleri - Test 7",
+      "description": "Logging frameworkleri ve exception handling hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod08-07",
+          "question": "Application Insights nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "logging",
+          "explanation": "Logging ve Exception Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "logging"
+    },
+    {
+      "id": "quiz-dotnet-mod08-test-08",
+      "courseId": "course-dotnet-roadmap",
+      "title": "8. Logging ve Exception Handling Testleri - Test 8",
+      "description": "Logging frameworkleri ve exception handling hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod08-08",
+          "question": "Log aggregation nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "logging",
+          "explanation": "Logging ve Exception Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "logging"
+    },
+    {
+      "id": "quiz-dotnet-mod08-test-09",
+      "courseId": "course-dotnet-roadmap",
+      "title": "8. Logging ve Exception Handling Testleri - Test 9",
+      "description": "Logging frameworkleri ve exception handling hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod08-09",
+          "question": "Error tracking nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "logging",
+          "explanation": "Logging ve Exception Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "logging"
+    },
+    {
+      "id": "quiz-dotnet-mod08-test-10",
+      "courseId": "course-dotnet-roadmap",
+      "title": "8. Logging ve Exception Handling Testleri - Test 10",
+      "description": "Logging frameworkleri ve exception handling hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod08-10",
+          "question": "Log retention nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "logging",
+          "explanation": "Logging ve Exception Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "logging"
+    },
+    {
+      "id": "quiz-dotnet-mod08-test-11",
+      "courseId": "course-dotnet-roadmap",
+      "title": "8. Logging ve Exception Handling Testleri - Test 11",
+      "description": "Logging frameworkleri ve exception handling hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod08-11",
+          "question": "Logging hakkında soru 11",
+          "options": [],
+          "answer": 0,
+          "category": "logging",
+          "explanation": "Logging ve Exception Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "logging"
+    },
+    {
+      "id": "quiz-dotnet-mod08-test-12",
+      "courseId": "course-dotnet-roadmap",
+      "title": "8. Logging ve Exception Handling Testleri - Test 12",
+      "description": "Logging frameworkleri ve exception handling hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod08-12",
+          "question": "Logging hakkında soru 12",
+          "options": [],
+          "answer": 0,
+          "category": "logging",
+          "explanation": "Logging ve Exception Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "logging"
+    },
+    {
+      "id": "quiz-dotnet-mod08-test-13",
+      "courseId": "course-dotnet-roadmap",
+      "title": "8. Logging ve Exception Handling Testleri - Test 13",
+      "description": "Logging frameworkleri ve exception handling hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod08-13",
+          "question": "Logging hakkında soru 13",
+          "options": [],
+          "answer": 0,
+          "category": "logging",
+          "explanation": "Logging ve Exception Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "logging"
+    },
+    {
+      "id": "quiz-dotnet-mod08-test-14",
+      "courseId": "course-dotnet-roadmap",
+      "title": "8. Logging ve Exception Handling Testleri - Test 14",
+      "description": "Logging frameworkleri ve exception handling hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod08-14",
+          "question": "Logging hakkında soru 14",
+          "options": [],
+          "answer": 0,
+          "category": "logging",
+          "explanation": "Logging ve Exception Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "logging"
+    },
+    {
+      "id": "quiz-dotnet-mod08-test-15",
+      "courseId": "course-dotnet-roadmap",
+      "title": "8. Logging ve Exception Handling Testleri - Test 15",
+      "description": "Logging frameworkleri ve exception handling hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod08-15",
+          "question": "Logging hakkında soru 15",
+          "options": [],
+          "answer": 0,
+          "category": "logging",
+          "explanation": "Logging ve Exception Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "logging"
+    },
+    {
+      "id": "quiz-dotnet-mod09-test-01",
+      "courseId": "course-dotnet-roadmap",
+      "title": "9. Configuration Management Testleri - Test 1",
+      "description": "Configuration yönetimi ve options pattern hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod09-01",
+          "question": "appsettings.json nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "configuration",
+          "explanation": "Configuration Management hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "configuration"
+    },
+    {
+      "id": "quiz-dotnet-mod09-test-02",
+      "courseId": "course-dotnet-roadmap",
+      "title": "9. Configuration Management Testleri - Test 2",
+      "description": "Configuration yönetimi ve options pattern hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod09-02",
+          "question": "Options Pattern nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "configuration",
+          "explanation": "Configuration Management hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "configuration"
+    },
+    {
+      "id": "quiz-dotnet-mod09-test-03",
+      "courseId": "course-dotnet-roadmap",
+      "title": "9. Configuration Management Testleri - Test 3",
+      "description": "Configuration yönetimi ve options pattern hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod09-03",
+          "question": "IOptions, IOptionsSnapshot, IOptionsMonitor farkı nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "configuration",
+          "explanation": "Configuration Management hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "configuration"
+    },
+    {
+      "id": "quiz-dotnet-mod09-test-04",
+      "courseId": "course-dotnet-roadmap",
+      "title": "9. Configuration Management Testleri - Test 4",
+      "description": "Configuration yönetimi ve options pattern hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod09-04",
+          "question": "Configuration binding nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "configuration",
+          "explanation": "Configuration Management hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "configuration"
+    },
+    {
+      "id": "quiz-dotnet-mod09-test-05",
+      "courseId": "course-dotnet-roadmap",
+      "title": "9. Configuration Management Testleri - Test 5",
+      "description": "Configuration yönetimi ve options pattern hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod09-05",
+          "question": "User Secrets nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "configuration",
+          "explanation": "Configuration Management hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "configuration"
+    },
+    {
+      "id": "quiz-dotnet-mod09-test-06",
+      "courseId": "course-dotnet-roadmap",
+      "title": "9. Configuration Management Testleri - Test 6",
+      "description": "Configuration yönetimi ve options pattern hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod09-06",
+          "question": "Azure Key Vault nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "configuration",
+          "explanation": "Configuration Management hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "configuration"
+    },
+    {
+      "id": "quiz-dotnet-mod09-test-07",
+      "courseId": "course-dotnet-roadmap",
+      "title": "9. Configuration Management Testleri - Test 7",
+      "description": "Configuration yönetimi ve options pattern hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod09-07",
+          "question": "Environment variables nasıl kullanılır?",
+          "options": [],
+          "answer": 0,
+          "category": "configuration",
+          "explanation": "Configuration Management hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "configuration"
+    },
+    {
+      "id": "quiz-dotnet-mod09-test-08",
+      "courseId": "course-dotnet-roadmap",
+      "title": "9. Configuration Management Testleri - Test 8",
+      "description": "Configuration yönetimi ve options pattern hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod09-08",
+          "question": "Configuration validation nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "configuration",
+          "explanation": "Configuration Management hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "configuration"
+    },
+    {
+      "id": "quiz-dotnet-mod09-test-09",
+      "courseId": "course-dotnet-roadmap",
+      "title": "9. Configuration Management Testleri - Test 9",
+      "description": "Configuration yönetimi ve options pattern hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod09-09",
+          "question": "Hot reload configuration nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "configuration",
+          "explanation": "Configuration Management hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "configuration"
+    },
+    {
+      "id": "quiz-dotnet-mod09-test-10",
+      "courseId": "course-dotnet-roadmap",
+      "title": "9. Configuration Management Testleri - Test 10",
+      "description": "Configuration yönetimi ve options pattern hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod09-10",
+          "question": "Multi-environment configuration nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "configuration",
+          "explanation": "Configuration Management hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "configuration"
+    },
+    {
+      "id": "quiz-dotnet-mod09-test-11",
+      "courseId": "course-dotnet-roadmap",
+      "title": "9. Configuration Management Testleri - Test 11",
+      "description": "Configuration yönetimi ve options pattern hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod09-11",
+          "question": "Configuration hakkında soru 11",
+          "options": [],
+          "answer": 0,
+          "category": "configuration",
+          "explanation": "Configuration Management hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "configuration"
+    },
+    {
+      "id": "quiz-dotnet-mod09-test-12",
+      "courseId": "course-dotnet-roadmap",
+      "title": "9. Configuration Management Testleri - Test 12",
+      "description": "Configuration yönetimi ve options pattern hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod09-12",
+          "question": "Configuration hakkında soru 12",
+          "options": [],
+          "answer": 0,
+          "category": "configuration",
+          "explanation": "Configuration Management hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "configuration"
+    },
+    {
+      "id": "quiz-dotnet-mod09-test-13",
+      "courseId": "course-dotnet-roadmap",
+      "title": "9. Configuration Management Testleri - Test 13",
+      "description": "Configuration yönetimi ve options pattern hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod09-13",
+          "question": "Configuration hakkında soru 13",
+          "options": [],
+          "answer": 0,
+          "category": "configuration",
+          "explanation": "Configuration Management hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "configuration"
+    },
+    {
+      "id": "quiz-dotnet-mod09-test-14",
+      "courseId": "course-dotnet-roadmap",
+      "title": "9. Configuration Management Testleri - Test 14",
+      "description": "Configuration yönetimi ve options pattern hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod09-14",
+          "question": "Configuration hakkında soru 14",
+          "options": [],
+          "answer": 0,
+          "category": "configuration",
+          "explanation": "Configuration Management hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "configuration"
+    },
+    {
+      "id": "quiz-dotnet-mod09-test-15",
+      "courseId": "course-dotnet-roadmap",
+      "title": "9. Configuration Management Testleri - Test 15",
+      "description": "Configuration yönetimi ve options pattern hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod09-15",
+          "question": "Configuration hakkında soru 15",
+          "options": [],
+          "answer": 0,
+          "category": "configuration",
+          "explanation": "Configuration Management hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "configuration"
+    },
+    {
+      "id": "quiz-dotnet-mod10-test-01",
+      "courseId": "course-dotnet-roadmap",
+      "title": "10. Unit Test ve Integration Test Testleri - Test 1",
+      "description": "Test türleri, TDD ve test frameworkleri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod10-01",
+          "question": "Unit test nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Unit Test ve Integration Test hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-dotnet-mod10-test-02",
+      "courseId": "course-dotnet-roadmap",
+      "title": "10. Unit Test ve Integration Test Testleri - Test 2",
+      "description": "Test türleri, TDD ve test frameworkleri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod10-02",
+          "question": "Integration test nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Unit Test ve Integration Test hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-dotnet-mod10-test-03",
+      "courseId": "course-dotnet-roadmap",
+      "title": "10. Unit Test ve Integration Test Testleri - Test 3",
+      "description": "Test türleri, TDD ve test frameworkleri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod10-03",
+          "question": "TDD (Test-Driven Development) nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Unit Test ve Integration Test hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-dotnet-mod10-test-04",
+      "courseId": "course-dotnet-roadmap",
+      "title": "10. Unit Test ve Integration Test Testleri - Test 4",
+      "description": "Test türleri, TDD ve test frameworkleri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod10-04",
+          "question": "xUnit nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Unit Test ve Integration Test hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-dotnet-mod10-test-05",
+      "courseId": "course-dotnet-roadmap",
+      "title": "10. Unit Test ve Integration Test Testleri - Test 5",
+      "description": "Test türleri, TDD ve test frameworkleri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod10-05",
+          "question": "Mocking nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Unit Test ve Integration Test hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-dotnet-mod10-test-06",
+      "courseId": "course-dotnet-roadmap",
+      "title": "10. Unit Test ve Integration Test Testleri - Test 6",
+      "description": "Test türleri, TDD ve test frameworkleri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod10-06",
+          "question": "Moq framework nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Unit Test ve Integration Test hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-dotnet-mod10-test-07",
+      "courseId": "course-dotnet-roadmap",
+      "title": "10. Unit Test ve Integration Test Testleri - Test 7",
+      "description": "Test türleri, TDD ve test frameworkleri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod10-07",
+          "question": "Test coverage nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Unit Test ve Integration Test hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-dotnet-mod10-test-08",
+      "courseId": "course-dotnet-roadmap",
+      "title": "10. Unit Test ve Integration Test Testleri - Test 8",
+      "description": "Test türleri, TDD ve test frameworkleri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod10-08",
+          "question": "InMemory database test nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Unit Test ve Integration Test hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-dotnet-mod10-test-09",
+      "courseId": "course-dotnet-roadmap",
+      "title": "10. Unit Test ve Integration Test Testleri - Test 9",
+      "description": "Test türleri, TDD ve test frameworkleri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod10-09",
+          "question": "Test fixtures nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Unit Test ve Integration Test hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-dotnet-mod10-test-10",
+      "courseId": "course-dotnet-roadmap",
+      "title": "10. Unit Test ve Integration Test Testleri - Test 10",
+      "description": "Test türleri, TDD ve test frameworkleri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod10-10",
+          "question": "Parameterized tests nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Unit Test ve Integration Test hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-dotnet-mod10-test-11",
+      "courseId": "course-dotnet-roadmap",
+      "title": "10. Unit Test ve Integration Test Testleri - Test 11",
+      "description": "Test türleri, TDD ve test frameworkleri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod10-11",
+          "question": "Testing hakkında soru 11",
+          "options": [],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Unit Test ve Integration Test hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-dotnet-mod10-test-12",
+      "courseId": "course-dotnet-roadmap",
+      "title": "10. Unit Test ve Integration Test Testleri - Test 12",
+      "description": "Test türleri, TDD ve test frameworkleri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod10-12",
+          "question": "Testing hakkında soru 12",
+          "options": [],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Unit Test ve Integration Test hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-dotnet-mod10-test-13",
+      "courseId": "course-dotnet-roadmap",
+      "title": "10. Unit Test ve Integration Test Testleri - Test 13",
+      "description": "Test türleri, TDD ve test frameworkleri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod10-13",
+          "question": "Testing hakkında soru 13",
+          "options": [],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Unit Test ve Integration Test hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-dotnet-mod10-test-14",
+      "courseId": "course-dotnet-roadmap",
+      "title": "10. Unit Test ve Integration Test Testleri - Test 14",
+      "description": "Test türleri, TDD ve test frameworkleri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod10-14",
+          "question": "Testing hakkında soru 14",
+          "options": [],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Unit Test ve Integration Test hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-dotnet-mod10-test-15",
+      "courseId": "course-dotnet-roadmap",
+      "title": "10. Unit Test ve Integration Test Testleri - Test 15",
+      "description": "Test türleri, TDD ve test frameworkleri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod10-15",
+          "question": "Testing hakkında soru 15",
+          "options": [],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Unit Test ve Integration Test hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-dotnet-mod11-test-01",
+      "courseId": "course-dotnet-roadmap",
+      "title": "11. Performans ve Caching Teknikleri Testleri - Test 1",
+      "description": "Performans optimizasyonu ve caching stratejileri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod11-01",
+          "question": "Caching nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performans ve Caching Teknikleri hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-dotnet-mod11-test-02",
+      "courseId": "course-dotnet-roadmap",
+      "title": "11. Performans ve Caching Teknikleri Testleri - Test 2",
+      "description": "Performans optimizasyonu ve caching stratejileri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod11-02",
+          "question": "Memory cache nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performans ve Caching Teknikleri hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-dotnet-mod11-test-03",
+      "courseId": "course-dotnet-roadmap",
+      "title": "11. Performans ve Caching Teknikleri Testleri - Test 3",
+      "description": "Performans optimizasyonu ve caching stratejileri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod11-03",
+          "question": "Distributed cache nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performans ve Caching Teknikleri hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-dotnet-mod11-test-04",
+      "courseId": "course-dotnet-roadmap",
+      "title": "11. Performans ve Caching Teknikleri Testleri - Test 4",
+      "description": "Performans optimizasyonu ve caching stratejileri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod11-04",
+          "question": "Redis nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performans ve Caching Teknikleri hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-dotnet-mod11-test-05",
+      "courseId": "course-dotnet-roadmap",
+      "title": "11. Performans ve Caching Teknikleri Testleri - Test 5",
+      "description": "Performans optimizasyonu ve caching stratejileri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod11-05",
+          "question": "Response caching nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performans ve Caching Teknikleri hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-dotnet-mod11-test-06",
+      "courseId": "course-dotnet-roadmap",
+      "title": "11. Performans ve Caching Teknikleri Testleri - Test 6",
+      "description": "Performans optimizasyonu ve caching stratejileri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod11-06",
+          "question": "Cache invalidation nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performans ve Caching Teknikleri hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-dotnet-mod11-test-07",
+      "courseId": "course-dotnet-roadmap",
+      "title": "11. Performans ve Caching Teknikleri Testleri - Test 7",
+      "description": "Performans optimizasyonu ve caching stratejileri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod11-07",
+          "question": "Performance profiling nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performans ve Caching Teknikleri hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-dotnet-mod11-test-08",
+      "courseId": "course-dotnet-roadmap",
+      "title": "11. Performans ve Caching Teknikleri Testleri - Test 8",
+      "description": "Performans optimizasyonu ve caching stratejileri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod11-08",
+          "question": "Query optimization nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performans ve Caching Teknikleri hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-dotnet-mod11-test-09",
+      "courseId": "course-dotnet-roadmap",
+      "title": "11. Performans ve Caching Teknikleri Testleri - Test 9",
+      "description": "Performans optimizasyonu ve caching stratejileri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod11-09",
+          "question": "Health checks nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performans ve Caching Teknikleri hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-dotnet-mod11-test-10",
+      "courseId": "course-dotnet-roadmap",
+      "title": "11. Performans ve Caching Teknikleri Testleri - Test 10",
+      "description": "Performans optimizasyonu ve caching stratejileri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod11-10",
+          "question": "Benchmarking nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performans ve Caching Teknikleri hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-dotnet-mod11-test-11",
+      "courseId": "course-dotnet-roadmap",
+      "title": "11. Performans ve Caching Teknikleri Testleri - Test 11",
+      "description": "Performans optimizasyonu ve caching stratejileri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod11-11",
+          "question": "Performance hakkında soru 11",
+          "options": [],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performans ve Caching Teknikleri hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-dotnet-mod11-test-12",
+      "courseId": "course-dotnet-roadmap",
+      "title": "11. Performans ve Caching Teknikleri Testleri - Test 12",
+      "description": "Performans optimizasyonu ve caching stratejileri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod11-12",
+          "question": "Performance hakkında soru 12",
+          "options": [],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performans ve Caching Teknikleri hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-dotnet-mod11-test-13",
+      "courseId": "course-dotnet-roadmap",
+      "title": "11. Performans ve Caching Teknikleri Testleri - Test 13",
+      "description": "Performans optimizasyonu ve caching stratejileri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod11-13",
+          "question": "Performance hakkında soru 13",
+          "options": [],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performans ve Caching Teknikleri hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-dotnet-mod11-test-14",
+      "courseId": "course-dotnet-roadmap",
+      "title": "11. Performans ve Caching Teknikleri Testleri - Test 14",
+      "description": "Performans optimizasyonu ve caching stratejileri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod11-14",
+          "question": "Performance hakkında soru 14",
+          "options": [],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performans ve Caching Teknikleri hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-dotnet-mod11-test-15",
+      "courseId": "course-dotnet-roadmap",
+      "title": "11. Performans ve Caching Teknikleri Testleri - Test 15",
+      "description": "Performans optimizasyonu ve caching stratejileri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod11-15",
+          "question": "Performance hakkında soru 15",
+          "options": [],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performans ve Caching Teknikleri hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-dotnet-mod12-test-01",
+      "courseId": "course-dotnet-roadmap",
+      "title": "12. Asenkron Programlama Testleri - Test 1",
+      "description": "Async/await, Task ve threading hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod12-01",
+          "question": "Async/await nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "async",
+          "explanation": "Asenkron Programlama hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "async-programming"
+    },
+    {
+      "id": "quiz-dotnet-mod12-test-02",
+      "courseId": "course-dotnet-roadmap",
+      "title": "12. Asenkron Programlama Testleri - Test 2",
+      "description": "Async/await, Task ve threading hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod12-02",
+          "question": "Task nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "async",
+          "explanation": "Asenkron Programlama hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "async-programming"
+    },
+    {
+      "id": "quiz-dotnet-mod12-test-03",
+      "courseId": "course-dotnet-roadmap",
+      "title": "12. Asenkron Programlama Testleri - Test 3",
+      "description": "Async/await, Task ve threading hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod12-03",
+          "question": "Task.Run nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "async",
+          "explanation": "Asenkron Programlama hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "async-programming"
+    },
+    {
+      "id": "quiz-dotnet-mod12-test-04",
+      "courseId": "course-dotnet-roadmap",
+      "title": "12. Asenkron Programlama Testleri - Test 4",
+      "description": "Async/await, Task ve threading hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod12-04",
+          "question": "ConfigureAwait nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "async",
+          "explanation": "Asenkron Programlama hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "async-programming"
+    },
+    {
+      "id": "quiz-dotnet-mod12-test-05",
+      "courseId": "course-dotnet-roadmap",
+      "title": "12. Asenkron Programlama Testleri - Test 5",
+      "description": "Async/await, Task ve threading hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod12-05",
+          "question": "CancellationToken nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "async",
+          "explanation": "Asenkron Programlama hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "async-programming"
+    },
+    {
+      "id": "quiz-dotnet-mod12-test-06",
+      "courseId": "course-dotnet-roadmap",
+      "title": "12. Asenkron Programlama Testleri - Test 6",
+      "description": "Async/await, Task ve threading hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod12-06",
+          "question": "IAsyncEnumerable nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "async",
+          "explanation": "Asenkron Programlama hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "async-programming"
+    },
+    {
+      "id": "quiz-dotnet-mod12-test-07",
+      "courseId": "course-dotnet-roadmap",
+      "title": "12. Asenkron Programlama Testleri - Test 7",
+      "description": "Async/await, Task ve threading hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod12-07",
+          "question": "Deadlock nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "async",
+          "explanation": "Asenkron Programlama hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "async-programming"
+    },
+    {
+      "id": "quiz-dotnet-mod12-test-08",
+      "courseId": "course-dotnet-roadmap",
+      "title": "12. Asenkron Programlama Testleri - Test 8",
+      "description": "Async/await, Task ve threading hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod12-08",
+          "question": "Task.WhenAll nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "async",
+          "explanation": "Asenkron Programlama hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "async-programming"
+    },
+    {
+      "id": "quiz-dotnet-mod12-test-09",
+      "courseId": "course-dotnet-roadmap",
+      "title": "12. Asenkron Programlama Testleri - Test 9",
+      "description": "Async/await, Task ve threading hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod12-09",
+          "question": "Parallel processing nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "async",
+          "explanation": "Asenkron Programlama hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "async-programming"
+    },
+    {
+      "id": "quiz-dotnet-mod12-test-10",
+      "courseId": "course-dotnet-roadmap",
+      "title": "12. Asenkron Programlama Testleri - Test 10",
+      "description": "Async/await, Task ve threading hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod12-10",
+          "question": "Thread safety nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "async",
+          "explanation": "Asenkron Programlama hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "async-programming"
+    },
+    {
+      "id": "quiz-dotnet-mod12-test-11",
+      "courseId": "course-dotnet-roadmap",
+      "title": "12. Asenkron Programlama Testleri - Test 11",
+      "description": "Async/await, Task ve threading hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod12-11",
+          "question": "Async programming hakkında soru 11",
+          "options": [],
+          "answer": 0,
+          "category": "async",
+          "explanation": "Asenkron Programlama hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "async-programming"
+    },
+    {
+      "id": "quiz-dotnet-mod12-test-12",
+      "courseId": "course-dotnet-roadmap",
+      "title": "12. Asenkron Programlama Testleri - Test 12",
+      "description": "Async/await, Task ve threading hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod12-12",
+          "question": "Async programming hakkında soru 12",
+          "options": [],
+          "answer": 0,
+          "category": "async",
+          "explanation": "Asenkron Programlama hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "async-programming"
+    },
+    {
+      "id": "quiz-dotnet-mod12-test-13",
+      "courseId": "course-dotnet-roadmap",
+      "title": "12. Asenkron Programlama Testleri - Test 13",
+      "description": "Async/await, Task ve threading hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod12-13",
+          "question": "Async programming hakkında soru 13",
+          "options": [],
+          "answer": 0,
+          "category": "async",
+          "explanation": "Asenkron Programlama hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "async-programming"
+    },
+    {
+      "id": "quiz-dotnet-mod12-test-14",
+      "courseId": "course-dotnet-roadmap",
+      "title": "12. Asenkron Programlama Testleri - Test 14",
+      "description": "Async/await, Task ve threading hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod12-14",
+          "question": "Async programming hakkında soru 14",
+          "options": [],
+          "answer": 0,
+          "category": "async",
+          "explanation": "Asenkron Programlama hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "async-programming"
+    },
+    {
+      "id": "quiz-dotnet-mod12-test-15",
+      "courseId": "course-dotnet-roadmap",
+      "title": "12. Asenkron Programlama Testleri - Test 15",
+      "description": "Async/await, Task ve threading hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod12-15",
+          "question": "Async programming hakkında soru 15",
+          "options": [],
+          "answer": 0,
+          "category": "async",
+          "explanation": "Asenkron Programlama hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "async-programming"
+    },
+    {
+      "id": "quiz-dotnet-mod13-test-01",
+      "courseId": "course-dotnet-roadmap",
+      "title": "13. Docker ile Containerization Testleri - Test 1",
+      "description": "Docker, containerization ve deployment hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod13-01",
+          "question": "Docker nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "docker",
+          "explanation": "Docker ile Containerization hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "docker"
+    },
+    {
+      "id": "quiz-dotnet-mod13-test-02",
+      "courseId": "course-dotnet-roadmap",
+      "title": "13. Docker ile Containerization Testleri - Test 2",
+      "description": "Docker, containerization ve deployment hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod13-02",
+          "question": "Container nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "docker",
+          "explanation": "Docker ile Containerization hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "docker"
+    },
+    {
+      "id": "quiz-dotnet-mod13-test-03",
+      "courseId": "course-dotnet-roadmap",
+      "title": "13. Docker ile Containerization Testleri - Test 3",
+      "description": "Docker, containerization ve deployment hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod13-03",
+          "question": "Dockerfile nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "docker",
+          "explanation": "Docker ile Containerization hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "docker"
+    },
+    {
+      "id": "quiz-dotnet-mod13-test-04",
+      "courseId": "course-dotnet-roadmap",
+      "title": "13. Docker ile Containerization Testleri - Test 4",
+      "description": "Docker, containerization ve deployment hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod13-04",
+          "question": "Docker Compose nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "docker",
+          "explanation": "Docker ile Containerization hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "docker"
+    },
+    {
+      "id": "quiz-dotnet-mod13-test-05",
+      "courseId": "course-dotnet-roadmap",
+      "title": "13. Docker ile Containerization Testleri - Test 5",
+      "description": "Docker, containerization ve deployment hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod13-05",
+          "question": "Multi-stage build nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "docker",
+          "explanation": "Docker ile Containerization hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "docker"
+    },
+    {
+      "id": "quiz-dotnet-mod13-test-06",
+      "courseId": "course-dotnet-roadmap",
+      "title": "13. Docker ile Containerization Testleri - Test 6",
+      "description": "Docker, containerization ve deployment hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod13-06",
+          "question": "Docker volume nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "docker",
+          "explanation": "Docker ile Containerization hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "docker"
+    },
+    {
+      "id": "quiz-dotnet-mod13-test-07",
+      "courseId": "course-dotnet-roadmap",
+      "title": "13. Docker ile Containerization Testleri - Test 7",
+      "description": "Docker, containerization ve deployment hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod13-07",
+          "question": "Docker Hub nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "docker",
+          "explanation": "Docker ile Containerization hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "docker"
+    },
+    {
+      "id": "quiz-dotnet-mod13-test-08",
+      "courseId": "course-dotnet-roadmap",
+      "title": "13. Docker ile Containerization Testleri - Test 8",
+      "description": "Docker, containerization ve deployment hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod13-08",
+          "question": "Container networking nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "docker",
+          "explanation": "Docker ile Containerization hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "docker"
+    },
+    {
+      "id": "quiz-dotnet-mod13-test-09",
+      "courseId": "course-dotnet-roadmap",
+      "title": "13. Docker ile Containerization Testleri - Test 9",
+      "description": "Docker, containerization ve deployment hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod13-09",
+          "question": "Docker Swarm nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "docker",
+          "explanation": "Docker ile Containerization hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "docker"
+    },
+    {
+      "id": "quiz-dotnet-mod13-test-10",
+      "courseId": "course-dotnet-roadmap",
+      "title": "13. Docker ile Containerization Testleri - Test 10",
+      "description": "Docker, containerization ve deployment hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod13-10",
+          "question": "Container security nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "docker",
+          "explanation": "Docker ile Containerization hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "docker"
+    },
+    {
+      "id": "quiz-dotnet-mod13-test-11",
+      "courseId": "course-dotnet-roadmap",
+      "title": "13. Docker ile Containerization Testleri - Test 11",
+      "description": "Docker, containerization ve deployment hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod13-11",
+          "question": "Docker hakkında soru 11",
+          "options": [],
+          "answer": 0,
+          "category": "docker",
+          "explanation": "Docker ile Containerization hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "docker"
+    },
+    {
+      "id": "quiz-dotnet-mod13-test-12",
+      "courseId": "course-dotnet-roadmap",
+      "title": "13. Docker ile Containerization Testleri - Test 12",
+      "description": "Docker, containerization ve deployment hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod13-12",
+          "question": "Docker hakkında soru 12",
+          "options": [],
+          "answer": 0,
+          "category": "docker",
+          "explanation": "Docker ile Containerization hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "docker"
+    },
+    {
+      "id": "quiz-dotnet-mod13-test-13",
+      "courseId": "course-dotnet-roadmap",
+      "title": "13. Docker ile Containerization Testleri - Test 13",
+      "description": "Docker, containerization ve deployment hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod13-13",
+          "question": "Docker hakkında soru 13",
+          "options": [],
+          "answer": 0,
+          "category": "docker",
+          "explanation": "Docker ile Containerization hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "docker"
+    },
+    {
+      "id": "quiz-dotnet-mod13-test-14",
+      "courseId": "course-dotnet-roadmap",
+      "title": "13. Docker ile Containerization Testleri - Test 14",
+      "description": "Docker, containerization ve deployment hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod13-14",
+          "question": "Docker hakkında soru 14",
+          "options": [],
+          "answer": 0,
+          "category": "docker",
+          "explanation": "Docker ile Containerization hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "docker"
+    },
+    {
+      "id": "quiz-dotnet-mod13-test-15",
+      "courseId": "course-dotnet-roadmap",
+      "title": "13. Docker ile Containerization Testleri - Test 15",
+      "description": "Docker, containerization ve deployment hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod13-15",
+          "question": "Docker hakkında soru 15",
+          "options": [],
+          "answer": 0,
+          "category": "docker",
+          "explanation": "Docker ile Containerization hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "docker"
+    },
+    {
+      "id": "quiz-dotnet-mod14-test-01",
+      "courseId": "course-dotnet-roadmap",
+      "title": "14. CI/CD ve Deployment Testleri - Test 1",
+      "description": "CI/CD pipeline ve deployment stratejileri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod14-01",
+          "question": "CI/CD nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "cicd",
+          "explanation": "CI/CD ve Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "cicd"
+    },
+    {
+      "id": "quiz-dotnet-mod14-test-02",
+      "courseId": "course-dotnet-roadmap",
+      "title": "14. CI/CD ve Deployment Testleri - Test 2",
+      "description": "CI/CD pipeline ve deployment stratejileri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod14-02",
+          "question": "GitHub Actions nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "cicd",
+          "explanation": "CI/CD ve Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "cicd"
+    },
+    {
+      "id": "quiz-dotnet-mod14-test-03",
+      "courseId": "course-dotnet-roadmap",
+      "title": "14. CI/CD ve Deployment Testleri - Test 3",
+      "description": "CI/CD pipeline ve deployment stratejileri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod14-03",
+          "question": "Azure DevOps nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "cicd",
+          "explanation": "CI/CD ve Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "cicd"
+    },
+    {
+      "id": "quiz-dotnet-mod14-test-04",
+      "courseId": "course-dotnet-roadmap",
+      "title": "14. CI/CD ve Deployment Testleri - Test 4",
+      "description": "CI/CD pipeline ve deployment stratejileri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod14-04",
+          "question": "Pipeline nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "cicd",
+          "explanation": "CI/CD ve Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "cicd"
+    },
+    {
+      "id": "quiz-dotnet-mod14-test-05",
+      "courseId": "course-dotnet-roadmap",
+      "title": "14. CI/CD ve Deployment Testleri - Test 5",
+      "description": "CI/CD pipeline ve deployment stratejileri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod14-05",
+          "question": "Blue-green deployment nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "cicd",
+          "explanation": "CI/CD ve Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "cicd"
+    },
+    {
+      "id": "quiz-dotnet-mod14-test-06",
+      "courseId": "course-dotnet-roadmap",
+      "title": "14. CI/CD ve Deployment Testleri - Test 6",
+      "description": "CI/CD pipeline ve deployment stratejileri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod14-06",
+          "question": "Rollback nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "cicd",
+          "explanation": "CI/CD ve Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "cicd"
+    },
+    {
+      "id": "quiz-dotnet-mod14-test-07",
+      "courseId": "course-dotnet-roadmap",
+      "title": "14. CI/CD ve Deployment Testleri - Test 7",
+      "description": "CI/CD pipeline ve deployment stratejileri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod14-07",
+          "question": "Azure App Service nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "cicd",
+          "explanation": "CI/CD ve Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "cicd"
+    },
+    {
+      "id": "quiz-dotnet-mod14-test-08",
+      "courseId": "course-dotnet-roadmap",
+      "title": "14. CI/CD ve Deployment Testleri - Test 8",
+      "description": "CI/CD pipeline ve deployment stratejileri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod14-08",
+          "question": "Database migration in CI/CD nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "cicd",
+          "explanation": "CI/CD ve Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "cicd"
+    },
+    {
+      "id": "quiz-dotnet-mod14-test-09",
+      "courseId": "course-dotnet-roadmap",
+      "title": "14. CI/CD ve Deployment Testleri - Test 9",
+      "description": "CI/CD pipeline ve deployment stratejileri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod14-09",
+          "question": "Environment-specific deployment nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "cicd",
+          "explanation": "CI/CD ve Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "cicd"
+    },
+    {
+      "id": "quiz-dotnet-mod14-test-10",
+      "courseId": "course-dotnet-roadmap",
+      "title": "14. CI/CD ve Deployment Testleri - Test 10",
+      "description": "CI/CD pipeline ve deployment stratejileri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod14-10",
+          "question": "Deployment automation nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "cicd",
+          "explanation": "CI/CD ve Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "cicd"
+    },
+    {
+      "id": "quiz-dotnet-mod14-test-11",
+      "courseId": "course-dotnet-roadmap",
+      "title": "14. CI/CD ve Deployment Testleri - Test 11",
+      "description": "CI/CD pipeline ve deployment stratejileri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod14-11",
+          "question": "CI/CD hakkında soru 11",
+          "options": [],
+          "answer": 0,
+          "category": "cicd",
+          "explanation": "CI/CD ve Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "cicd"
+    },
+    {
+      "id": "quiz-dotnet-mod14-test-12",
+      "courseId": "course-dotnet-roadmap",
+      "title": "14. CI/CD ve Deployment Testleri - Test 12",
+      "description": "CI/CD pipeline ve deployment stratejileri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod14-12",
+          "question": "CI/CD hakkında soru 12",
+          "options": [],
+          "answer": 0,
+          "category": "cicd",
+          "explanation": "CI/CD ve Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "cicd"
+    },
+    {
+      "id": "quiz-dotnet-mod14-test-13",
+      "courseId": "course-dotnet-roadmap",
+      "title": "14. CI/CD ve Deployment Testleri - Test 13",
+      "description": "CI/CD pipeline ve deployment stratejileri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod14-13",
+          "question": "CI/CD hakkında soru 13",
+          "options": [],
+          "answer": 0,
+          "category": "cicd",
+          "explanation": "CI/CD ve Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "cicd"
+    },
+    {
+      "id": "quiz-dotnet-mod14-test-14",
+      "courseId": "course-dotnet-roadmap",
+      "title": "14. CI/CD ve Deployment Testleri - Test 14",
+      "description": "CI/CD pipeline ve deployment stratejileri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod14-14",
+          "question": "CI/CD hakkında soru 14",
+          "options": [],
+          "answer": 0,
+          "category": "cicd",
+          "explanation": "CI/CD ve Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "cicd"
+    },
+    {
+      "id": "quiz-dotnet-mod14-test-15",
+      "courseId": "course-dotnet-roadmap",
+      "title": "14. CI/CD ve Deployment Testleri - Test 15",
+      "description": "CI/CD pipeline ve deployment stratejileri hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod14-15",
+          "question": "CI/CD hakkında soru 15",
+          "options": [],
+          "answer": 0,
+          "category": "cicd",
+          "explanation": "CI/CD ve Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "cicd"
+    },
+    {
+      "id": "quiz-dotnet-mod15-test-01",
+      "courseId": "course-dotnet-roadmap",
+      "title": "15. Microservices Mimarisi Testleri - Test 1",
+      "description": "Microservices, API Gateway ve distributed systems hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod15-01",
+          "question": "Microservices nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "microservices",
+          "explanation": "Microservices Mimarisi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "microservices"
+    },
+    {
+      "id": "quiz-dotnet-mod15-test-02",
+      "courseId": "course-dotnet-roadmap",
+      "title": "15. Microservices Mimarisi Testleri - Test 2",
+      "description": "Microservices, API Gateway ve distributed systems hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod15-02",
+          "question": "Monolith vs Microservice farkı nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "microservices",
+          "explanation": "Microservices Mimarisi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "microservices"
+    },
+    {
+      "id": "quiz-dotnet-mod15-test-03",
+      "courseId": "course-dotnet-roadmap",
+      "title": "15. Microservices Mimarisi Testleri - Test 3",
+      "description": "Microservices, API Gateway ve distributed systems hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod15-03",
+          "question": "API Gateway nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "microservices",
+          "explanation": "Microservices Mimarisi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "microservices"
+    },
+    {
+      "id": "quiz-dotnet-mod15-test-04",
+      "courseId": "course-dotnet-roadmap",
+      "title": "15. Microservices Mimarisi Testleri - Test 4",
+      "description": "Microservices, API Gateway ve distributed systems hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod15-04",
+          "question": "Service discovery nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "microservices",
+          "explanation": "Microservices Mimarisi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "microservices"
+    },
+    {
+      "id": "quiz-dotnet-mod15-test-05",
+      "courseId": "course-dotnet-roadmap",
+      "title": "15. Microservices Mimarisi Testleri - Test 5",
+      "description": "Microservices, API Gateway ve distributed systems hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod15-05",
+          "question": "Message broker nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "microservices",
+          "explanation": "Microservices Mimarisi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "microservices"
+    },
+    {
+      "id": "quiz-dotnet-mod15-test-06",
+      "courseId": "course-dotnet-roadmap",
+      "title": "15. Microservices Mimarisi Testleri - Test 6",
+      "description": "Microservices, API Gateway ve distributed systems hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod15-06",
+          "question": "Event-driven architecture nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "microservices",
+          "explanation": "Microservices Mimarisi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "microservices"
+    },
+    {
+      "id": "quiz-dotnet-mod15-test-07",
+      "courseId": "course-dotnet-roadmap",
+      "title": "15. Microservices Mimarisi Testleri - Test 7",
+      "description": "Microservices, API Gateway ve distributed systems hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod15-07",
+          "question": "Saga pattern nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "microservices",
+          "explanation": "Microservices Mimarisi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "microservices"
+    },
+    {
+      "id": "quiz-dotnet-mod15-test-08",
+      "courseId": "course-dotnet-roadmap",
+      "title": "15. Microservices Mimarisi Testleri - Test 8",
+      "description": "Microservices, API Gateway ve distributed systems hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod15-08",
+          "question": "Circuit breaker pattern nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "microservices",
+          "explanation": "Microservices Mimarisi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "microservices"
+    },
+    {
+      "id": "quiz-dotnet-mod15-test-09",
+      "courseId": "course-dotnet-roadmap",
+      "title": "15. Microservices Mimarisi Testleri - Test 9",
+      "description": "Microservices, API Gateway ve distributed systems hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod15-09",
+          "question": "gRPC nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "microservices",
+          "explanation": "Microservices Mimarisi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "microservices"
+    },
+    {
+      "id": "quiz-dotnet-mod15-test-10",
+      "courseId": "course-dotnet-roadmap",
+      "title": "15. Microservices Mimarisi Testleri - Test 10",
+      "description": "Microservices, API Gateway ve distributed systems hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod15-10",
+          "question": "Distributed cache nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "microservices",
+          "explanation": "Microservices Mimarisi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "microservices"
+    },
+    {
+      "id": "quiz-dotnet-mod15-test-11",
+      "courseId": "course-dotnet-roadmap",
+      "title": "15. Microservices Mimarisi Testleri - Test 11",
+      "description": "Microservices, API Gateway ve distributed systems hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod15-11",
+          "question": "Microservices hakkında soru 11",
+          "options": [],
+          "answer": 0,
+          "category": "microservices",
+          "explanation": "Microservices Mimarisi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "microservices"
+    },
+    {
+      "id": "quiz-dotnet-mod15-test-12",
+      "courseId": "course-dotnet-roadmap",
+      "title": "15. Microservices Mimarisi Testleri - Test 12",
+      "description": "Microservices, API Gateway ve distributed systems hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod15-12",
+          "question": "Microservices hakkında soru 12",
+          "options": [],
+          "answer": 0,
+          "category": "microservices",
+          "explanation": "Microservices Mimarisi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "microservices"
+    },
+    {
+      "id": "quiz-dotnet-mod15-test-13",
+      "courseId": "course-dotnet-roadmap",
+      "title": "15. Microservices Mimarisi Testleri - Test 13",
+      "description": "Microservices, API Gateway ve distributed systems hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod15-13",
+          "question": "Microservices hakkında soru 13",
+          "options": [],
+          "answer": 0,
+          "category": "microservices",
+          "explanation": "Microservices Mimarisi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "microservices"
+    },
+    {
+      "id": "quiz-dotnet-mod15-test-14",
+      "courseId": "course-dotnet-roadmap",
+      "title": "15. Microservices Mimarisi Testleri - Test 14",
+      "description": "Microservices, API Gateway ve distributed systems hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod15-14",
+          "question": "Microservices hakkında soru 14",
+          "options": [],
+          "answer": 0,
+          "category": "microservices",
+          "explanation": "Microservices Mimarisi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "microservices"
+    },
+    {
+      "id": "quiz-dotnet-mod15-test-15",
+      "courseId": "course-dotnet-roadmap",
+      "title": "15. Microservices Mimarisi Testleri - Test 15",
+      "description": "Microservices, API Gateway ve distributed systems hakkında bilgi testi.",
+      "topic": ".NET Core",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-dotnet-mod15-15",
+          "question": "Microservices hakkında soru 15",
+          "options": [],
+          "answer": 0,
+          "category": "microservices",
+          "explanation": "Microservices Mimarisi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "microservices"
+    }
+  ]
+}

@@ -18,8 +18,8 @@ export async function GET() {
     });
 
     const expertises = courses
-      .map((c) => c.expertise)
-      .filter((e): e is string => e !== null)
+      .map((c: { expertise: string | null }) => c.expertise)
+      .filter((e: string | null): e is string => e !== null)
       .sort();
 
     return NextResponse.json({ expertises });

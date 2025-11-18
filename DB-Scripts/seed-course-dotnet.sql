@@ -1,0 +1,420 @@
+-- .NET Core Course Structure Seed
+-- 15 modül, her modülde 10+ ders içeriği
+BEGIN;
+
+INSERT INTO "courses" (
+	"id",
+	"title",
+	"description",
+	"category",
+	"field",
+	"subCategory",
+	"expertise",
+	"topic",
+	"topicContent",
+	"difficulty",
+	"content",
+	"estimatedDuration",
+	"createdAt",
+	"updatedAt"
+)
+VALUES (
+	'course-dotnet-roadmap',
+	'.NET Core Backend Roadmap',
+	'.NET Core ile modern backend geliştirme için kapsamlı öğrenme yolu.',
+	'software-development',
+	'backend',
+	'dotnet',
+	'backend',
+	'.NET Core',
+	'.NET Core Roadmap',
+	'intermediate',
+	$$
+	{
+	  "overview": {
+	    "description": ".NET Core ile temel kavramlardan ileri seviye uygulamalara uzanan kapsamlı öğrenme yolu.",
+	    "targetAudience": ["Backend geliştiricileri", "Full-stack geliştiriciler"],
+	    "skills": ["C#", "ASP.NET Core", "Entity Framework", "Dependency Injection", "Testing"],
+	    "estimatedDurationMinutes": 4500,
+	    "outcomes": [
+	      ".NET Core mimarisini sağlam temellerle kurabilmek",
+	      "REST API ve middleware ile üretim seviyesinde uygulamalar geliştirmek",
+	      "Test, güvenlik ve performans ekseninde kaliteyi artırmak"
+	    ]
+	  },
+	  "prerequisites": ["Temel programlama", "OOP"],
+	  "modules": [
+	    {
+	      "id": "dotnet-module-01",
+	      "title": ".NET Core'u Tanıyalım",
+	      "summary": ".NET Core ekosistemine giriş yaparak yazılım geliştirme temellerini öğrenin. SDK kurulumundan ilk uygulamanıza kadar tüm adımları kapsayan kapsamlı bir başlangıç modülü.",
+	      "durationMinutes": 300,
+	      "objectives": [".NET ekosistemini anlamak", "SDK kurulumu", "İlk uygulama geliştirme"],
+	      "lessons": [
+	        {"id":"dotnet-lesson-01-01","title":"Yazılım Nedir ve Neden Önemlidir?","type":"reading","durationMinutes":20,"slug":"software-introduction","resources":[]},
+	        {"id":"dotnet-lesson-01-02","title":"Uygulama Türleri (Web, Mobil, Masaüstü, API)","type":"reading","durationMinutes":25,"slug":"application-types","resources":[]},
+	        {"id":"dotnet-lesson-01-03","title":".NET Ekosistemine Genel Bakış","type":"video","durationMinutes":30,"slug":"dotnet-ecosystem","resources":[]},
+	        {"id":"dotnet-lesson-01-04","title":".NET Framework, .NET Core ve .NET (Unified) Farkları","type":"reading","durationMinutes":25,"slug":"dotnet-versions","resources":[]},
+	        {"id":"dotnet-lesson-01-05","title":"CLR, BCL, CLI Kavramları","type":"reading","durationMinutes":20,"slug":"clr-bcl-cli","resources":[]},
+	        {"id":"dotnet-lesson-01-06","title":"SDK ve Runtime Kavramları","type":"video","durationMinutes":25,"slug":"sdk-runtime","resources":[]},
+	        {"id":"dotnet-lesson-01-07","title":"Cross-Platform Geliştirme Mantığı","type":"reading","durationMinutes":20,"slug":"cross-platform","resources":[]},
+	        {"id":"dotnet-lesson-01-08","title":".NET Core'un Mimari Yapısı","type":"video","durationMinutes":30,"slug":"architecture","resources":[]},
+	        {"id":"dotnet-lesson-01-09","title":"Visual Studio ve VS Code Tanıtımı","type":"reading","durationMinutes":25,"slug":"ide-introduction","resources":[]},
+	        {"id":"dotnet-lesson-01-10","title":"dotnet CLI (Komut Satırı Aracı) Kullanımı","type":"coding","durationMinutes":30,"slug":"dotnet-cli","resources":[]},
+	        {"id":"dotnet-lesson-01-11","title":"İlk Uygulama: Hello World","type":"coding","durationMinutes":25,"slug":"hello-world","resources":[]},
+	        {"id":"dotnet-lesson-01-12","title":"Proje Klasör Yapısının İncelenmesi","type":"reading","durationMinutes":20,"slug":"project-structure","resources":[]},
+	        {"id":"dotnet-lesson-01-13","title":"Derleme ve Çalıştırma Süreci","type":"coding","durationMinutes":25,"slug":"build-run","resources":[]},
+	        {"id":"dotnet-lesson-01-14","title":"NuGet Paket Sistemi Nedir?","type":"reading","durationMinutes":20,"slug":"nuget-intro","resources":[]},
+	        {"id":"dotnet-lesson-01-15","title":"Paket Ekleme, Güncelleme, Kaldırma İşlemleri","type":"coding","durationMinutes":30,"slug":"nuget-operations","resources":[]}
+	      ]
+	    },
+	    {
+	      "id": "dotnet-module-02",
+	      "title": "C# Temelleri",
+	      "summary": "C# programlama dilinin temel yapılarını, sözdizimini ve temel programlama kavramlarını öğrenin. Değişkenlerden döngülere, exception handling'den koleksiyonlara kadar geniş bir yelpazede C# temellerini kavrayın.",
+	      "durationMinutes": 350,
+	      "objectives": ["C# syntax", "Veri tipleri", "Kontrol yapıları", "Koleksiyonlar"],
+	      "lessons": [
+	        {"id":"dotnet-lesson-02-01","title":"C# Tarihçesi ve .NET ile İlişkisi","type":"reading","durationMinutes":20,"slug":"csharp-history","resources":[]},
+	        {"id":"dotnet-lesson-02-02","title":"C# Söz Dizimi (Syntax) Temelleri","type":"reading","durationMinutes":25,"slug":"syntax","resources":[]},
+	        {"id":"dotnet-lesson-02-03","title":"Değişkenler ve Veri Tipleri","type":"coding","durationMinutes":30,"slug":"variables-types","resources":[]},
+	        {"id":"dotnet-lesson-02-04","title":"Sabitler ve Tür Dönüşümleri","type":"coding","durationMinutes":25,"slug":"constants-conversions","resources":[]},
+	        {"id":"dotnet-lesson-02-05","title":"Operatörler (Aritmetik, Mantıksal, Karşılaştırma)","type":"coding","durationMinutes":30,"slug":"operators","resources":[]},
+	        {"id":"dotnet-lesson-02-06","title":"Koşul Yapıları (if, else, switch)","type":"coding","durationMinutes":35,"slug":"conditionals","resources":[]},
+	        {"id":"dotnet-lesson-02-07","title":"Döngüler (for, while, foreach, do-while)","type":"coding","durationMinutes":40,"slug":"loops","resources":[]},
+	        {"id":"dotnet-lesson-02-08","title":"Diziler ve Koleksiyonlar","type":"coding","durationMinutes":35,"slug":"arrays-collections","resources":[]},
+	        {"id":"dotnet-lesson-02-09","title":"Metotlar ve Parametreler","type":"coding","durationMinutes":30,"slug":"methods","resources":[]},
+	        {"id":"dotnet-lesson-02-10","title":"Değer ve Referans Tipleri","type":"reading","durationMinutes":25,"slug":"value-reference-types","resources":[]},
+	        {"id":"dotnet-lesson-02-11","title":"Scope Kavramı","type":"reading","durationMinutes":20,"slug":"scope","resources":[]},
+	        {"id":"dotnet-lesson-02-12","title":"String İşlemleri ve Manipülasyonlar","type":"coding","durationMinutes":30,"slug":"strings","resources":[]},
+	        {"id":"dotnet-lesson-02-13","title":"Random, Math, DateTime Sınıfları","type":"coding","durationMinutes":25,"slug":"utility-classes","resources":[]},
+	        {"id":"dotnet-lesson-02-14","title":"Exception Handling Temelleri","type":"reading","durationMinutes":25,"slug":"exceptions","resources":[]},
+	        {"id":"dotnet-lesson-02-15","title":"Try, Catch, Finally Kullanımı","type":"coding","durationMinutes":30,"slug":"try-catch","resources":[]}
+	      ]
+	    },
+	    {
+	      "id": "dotnet-module-03",
+	      "title": "Proje Yapısı ve Dependency Injection",
+	      "summary": ".NET Core uygulamalarının mimari yapısını ve best practice'leri öğrenin. Dependency Injection, middleware, configuration yönetimi ve katmanlı mimari gibi profesyonel geliştirme tekniklerini uygulayın.",
+	      "durationMinutes": 380,
+	      "objectives": ["Katmanlı mimari", "Dependency Injection", "Configuration", "Middleware"],
+	      "lessons": [
+	        {"id":"dotnet-lesson-03-01","title":"Katmanlı Mimari Nedir?","type":"reading","durationMinutes":25,"slug":"layered-architecture","resources":[]},
+	        {"id":"dotnet-lesson-03-02","title":"Solution ve Project Organizasyonu","type":"coding","durationMinutes":30,"slug":"solution-structure","resources":[]},
+	        {"id":"dotnet-lesson-03-03","title":"Clean Architecture Temelleri","type":"reading","durationMinutes":30,"slug":"clean-architecture","resources":[]},
+	        {"id":"dotnet-lesson-03-04","title":"Dependency Injection (DI) Prensipleri","type":"video","durationMinutes":35,"slug":"dependency-injection","resources":[]},
+	        {"id":"dotnet-lesson-03-05","title":"Service ve Repository Pattern","type":"coding","durationMinutes":40,"slug":"patterns","resources":[]},
+	        {"id":"dotnet-lesson-03-06","title":"Configuration Yönetimi (appsettings.json)","type":"coding","durationMinutes":30,"slug":"configuration","resources":[]},
+	        {"id":"dotnet-lesson-03-07","title":"Logging Mekanizmasına Giriş","type":"reading","durationMinutes":25,"slug":"logging","resources":[]},
+	        {"id":"dotnet-lesson-03-08","title":"Startup.cs / Program.cs Yapısı","type":"coding","durationMinutes":35,"slug":"startup","resources":[]},
+	        {"id":"dotnet-lesson-03-09","title":"IHost ve IWebHost Kavramı","type":"reading","durationMinutes":25,"slug":"host","resources":[]},
+	        {"id":"dotnet-lesson-03-10","title":"Environment Bazlı Yapılandırma","type":"coding","durationMinutes":30,"slug":"environments","resources":[]},
+	        {"id":"dotnet-lesson-03-11","title":"Middleware Nedir, Ne İşe Yarar?","type":"video","durationMinutes":30,"slug":"middleware-intro","resources":[]},
+	        {"id":"dotnet-lesson-03-12","title":"Pipeline (Request/Response) Yapısı","type":"reading","durationMinutes":25,"slug":"pipeline","resources":[]},
+	        {"id":"dotnet-lesson-03-13","title":"Dependency Lifetimes (Transient, Scoped, Singleton)","type":"video","durationMinutes":35,"slug":"lifetimes","resources":[]},
+	        {"id":"dotnet-lesson-03-14","title":"Interface'lerle Bağımlılık Yönetimi","type":"coding","durationMinutes":35,"slug":"interface-dependency","resources":[]},
+	        {"id":"dotnet-lesson-03-15","title":"Exception Middleware Geliştirme","type":"coding","durationMinutes":40,"slug":"exception-middleware","resources":[]}
+	      ]
+	    },
+	    {
+	      "id": "dotnet-module-04",
+	      "title": "ASP.NET Core MVC",
+	      "summary": "MVC tasarım desenini ve Razor Pages yapısını öğrenin. Model binding, view components, validation ve form işlemleri gibi web geliştirmenin kritik konularını uygulayın.",
+	      "durationMinutes": 400,
+	      "objectives": ["MVC pattern", "Razor syntax", "Model binding", "Validation"],
+	      "lessons": [
+	        {"id":"dotnet-lesson-04-01","title":"MVC Tasarım Deseninin Mantığı","type":"reading","durationMinutes":25,"slug":"mvc-pattern","resources":[]},
+	        {"id":"dotnet-lesson-04-02","title":"Controller, Model ve View İlişkisi","type":"video","durationMinutes":30,"slug":"controller-model-view","resources":[]},
+	        {"id":"dotnet-lesson-04-03","title":"Model Binding ve Validation","type":"coding","durationMinutes":35,"slug":"model-binding","resources":[]},
+	        {"id":"dotnet-lesson-04-04","title":"ViewModel ve DTO Kullanımı","type":"coding","durationMinutes":30,"slug":"viewmodel-dto","resources":[]},
+	        {"id":"dotnet-lesson-04-05","title":"Form İşlemleri (GET/POST)","type":"coding","durationMinutes":35,"slug":"forms","resources":[]},
+	        {"id":"dotnet-lesson-04-06","title":"Partial View, Layout, Section Kullanımı","type":"coding","durationMinutes":30,"slug":"partial-layout","resources":[]},
+	        {"id":"dotnet-lesson-04-07","title":"Razor Syntax Derinlemesine","type":"video","durationMinutes":35,"slug":"razor-syntax","resources":[]},
+	        {"id":"dotnet-lesson-04-08","title":"TagHelper Özelleştirmeleri","type":"coding","durationMinutes":30,"slug":"tag-helpers","resources":[]},
+	        {"id":"dotnet-lesson-04-09","title":"ViewComponent Kavramı","type":"coding","durationMinutes":35,"slug":"view-components","resources":[]},
+	        {"id":"dotnet-lesson-04-10","title":"ActionResult Türleri (Json, File, Redirect, View)","type":"coding","durationMinutes":30,"slug":"action-results","resources":[]},
+	        {"id":"dotnet-lesson-04-11","title":"TempData, ViewData ve ViewBag Farkları","type":"reading","durationMinutes":25,"slug":"tempdata-viewdata","resources":[]},
+	        {"id":"dotnet-lesson-04-12","title":"Custom Validation Attributes","type":"coding","durationMinutes":35,"slug":"custom-validation","resources":[]},
+	        {"id":"dotnet-lesson-04-13","title":"Data Annotation Kullanımı","type":"coding","durationMinutes":30,"slug":"data-annotations","resources":[]},
+	        {"id":"dotnet-lesson-04-14","title":"ModelState ve Error Handling","type":"coding","durationMinutes":30,"slug":"modelstate","resources":[]},
+	        {"id":"dotnet-lesson-04-15","title":"File Upload / Download İşlemleri","type":"coding","durationMinutes":35,"slug":"file-operations","resources":[]}
+	      ]
+	    },
+	    {
+	      "id": "dotnet-module-05",
+	      "title": "Web API Geliştirme",
+	      "summary": "RESTful API geliştirme tekniklerini öğrenin. Controller-based ve Minimal API yaklaşımlarını kullanarak modern web servisleri oluşturun. Swagger, versioning ve authentication gibi profesyonel API geliştirme pratiklerini uygulayın.",
+	      "durationMinutes": 420,
+	      "objectives": ["RESTful API", "Minimal API", "Swagger", "Versioning"],
+	      "lessons": [
+	        {"id":"dotnet-lesson-05-01","title":"API Kavramına Giriş","type":"reading","durationMinutes":25,"slug":"api-intro","resources":[]},
+	        {"id":"dotnet-lesson-05-02","title":"RESTful Servislerin Temel İlkeleri","type":"reading","durationMinutes":30,"slug":"restful-principles","resources":[]},
+	        {"id":"dotnet-lesson-05-03","title":"Web API Projesi Oluşturma","type":"coding","durationMinutes":30,"slug":"project-setup","resources":[]},
+	        {"id":"dotnet-lesson-05-04","title":"Controller Based API Yapısı","type":"coding","durationMinutes":35,"slug":"controller-based","resources":[]},
+	        {"id":"dotnet-lesson-05-05","title":"Minimal API Yapısına Giriş","type":"video","durationMinutes":35,"slug":"minimal-api","resources":[]},
+	        {"id":"dotnet-lesson-05-06","title":"Routing, Attributes ve Action Tanımlama","type":"coding","durationMinutes":35,"slug":"routing-attributes","resources":[]},
+	        {"id":"dotnet-lesson-05-07","title":"HTTP Metotları (GET, POST, PUT, DELETE)","type":"coding","durationMinutes":40,"slug":"http-methods","resources":[]},
+	        {"id":"dotnet-lesson-05-08","title":"Model Validation ve Error Handling","type":"coding","durationMinutes":35,"slug":"validation-error","resources":[]},
+	        {"id":"dotnet-lesson-05-09","title":"Request-Response Formatları (JSON, XML)","type":"coding","durationMinutes":30,"slug":"formats","resources":[]},
+	        {"id":"dotnet-lesson-05-10","title":"Swagger ve OpenAPI Dokümantasyonu","type":"coding","durationMinutes":35,"slug":"swagger","resources":[]},
+	        {"id":"dotnet-lesson-05-11","title":"Versioning Uygulamaları","type":"coding","durationMinutes":35,"slug":"versioning","resources":[]},
+	        {"id":"dotnet-lesson-05-12","title":"DTO ve Mapping (AutoMapper Kullanımı)","type":"coding","durationMinutes":40,"slug":"dto-mapping","resources":[]},
+	        {"id":"dotnet-lesson-05-13","title":"Response Wrapper ve Global Response Model","type":"coding","durationMinutes":30,"slug":"response-wrapper","resources":[]},
+	        {"id":"dotnet-lesson-05-14","title":"Exception Middleware ile API Hata Yönetimi","type":"coding","durationMinutes":35,"slug":"exception-middleware-api","resources":[]},
+	        {"id":"dotnet-lesson-05-15","title":"Rate Limiting ve CORS Yapılandırması","type":"coding","durationMinutes":35,"slug":"rate-limiting-cors","resources":[]}
+	      ]
+	    },
+	    {
+	      "id": "dotnet-module-06",
+	      "title": "Middleware ve Pipeline Yönetimi",
+	      "summary": "ASP.NET Core middleware pipeline'ını derinlemesine öğrenin. Custom middleware geliştirme, request/response manipülasyonu ve pipeline optimizasyonu tekniklerini uygulayın.",
+	      "durationMinutes": 360,
+	      "objectives": ["Middleware pipeline", "Custom middleware", "Request/Response handling"],
+	      "lessons": [
+	        {"id":"dotnet-lesson-06-01","title":"HTTP Protokolü ve Web Mantığı","type":"reading","durationMinutes":25,"slug":"http-protocol","resources":[]},
+	        {"id":"dotnet-lesson-06-02","title":"ASP.NET Core Web Projesi Kurulumu","type":"coding","durationMinutes":30,"slug":"project-setup-web","resources":[]},
+	        {"id":"dotnet-lesson-06-03","title":"Middleware Kavramı","type":"video","durationMinutes":30,"slug":"middleware","resources":[]},
+	        {"id":"dotnet-lesson-06-04","title":"Routing ve Endpoint Yönetimi","type":"coding","durationMinutes":35,"slug":"routing","resources":[]},
+	        {"id":"dotnet-lesson-06-05","title":"Controller ve Action Yapısı","type":"coding","durationMinutes":30,"slug":"controllers","resources":[]},
+	        {"id":"dotnet-lesson-06-06","title":"Request & Response Yaşam Döngüsü","type":"reading","durationMinutes":25,"slug":"request-response","resources":[]},
+	        {"id":"dotnet-lesson-06-07","title":"Dependency Injection Kullanımı","type":"coding","durationMinutes":35,"slug":"dependency-injection-web","resources":[]},
+	        {"id":"dotnet-lesson-06-08","title":"Model Binding Temelleri","type":"coding","durationMinutes":30,"slug":"model-binding-web","resources":[]},
+	        {"id":"dotnet-lesson-06-09","title":"View Yapısı ve Razor Syntax","type":"video","durationMinutes":35,"slug":"views-razor","resources":[]},
+	        {"id":"dotnet-lesson-06-10","title":"Layout, Partial View, Section Kavramları","type":"coding","durationMinutes":30,"slug":"layout-partial","resources":[]},
+	        {"id":"dotnet-lesson-06-11","title":"Static Files ve Content Servisi","type":"coding","durationMinutes":25,"slug":"static-files","resources":[]},
+	        {"id":"dotnet-lesson-06-12","title":"ViewData, ViewBag, TempData Kullanımı","type":"coding","durationMinutes":30,"slug":"viewdata-viewbag","resources":[]},
+	        {"id":"dotnet-lesson-06-13","title":"Validation (DataAnnotations)","type":"coding","durationMinutes":35,"slug":"validation","resources":[]},
+	        {"id":"dotnet-lesson-06-14","title":"Form İşlemleri (GET/POST)","type":"coding","durationMinutes":35,"slug":"forms-web","resources":[]},
+	        {"id":"dotnet-lesson-06-15","title":"Custom Middleware Geliştirme","type":"coding","durationMinutes":40,"slug":"custom-middleware","resources":[]}
+	      ]
+	    },
+	    {
+	      "id": "dotnet-module-07",
+	      "title": "Authentication & Authorization",
+	      "summary": "ASP.NET Core Identity, JWT authentication ve authorization mekanizmalarını öğrenin. Role-based ve policy-based authorization tekniklerini uygulayın.",
+	      "durationMinutes": 380,
+	      "objectives": ["ASP.NET Core Identity", "JWT", "Role-based auth", "Policy-based auth"],
+	      "lessons": [
+	        {"id":"dotnet-lesson-07-01","title":"Güvenlik Katmanları ve Riskler","type":"reading","durationMinutes":25,"slug":"security-layers","resources":[]},
+	        {"id":"dotnet-lesson-07-02","title":"Kimlik Doğrulama (Authentication)","type":"video","durationMinutes":30,"slug":"authentication","resources":[]},
+	        {"id":"dotnet-lesson-07-03","title":"Yetkilendirme (Authorization)","type":"video","durationMinutes":30,"slug":"authorization","resources":[]},
+	        {"id":"dotnet-lesson-07-04","title":"Claims ve Roles Kavramı","type":"reading","durationMinutes":25,"slug":"claims-roles","resources":[]},
+	        {"id":"dotnet-lesson-07-05","title":"API Key Yönetimi","type":"coding","durationMinutes":30,"slug":"api-keys","resources":[]},
+	        {"id":"dotnet-lesson-07-06","title":"OAuth2 ve OpenID Connect","type":"video","durationMinutes":35,"slug":"oauth2","resources":[]},
+	        {"id":"dotnet-lesson-07-07","title":"JWT Token Yönetimi","type":"coding","durationMinutes":40,"slug":"jwt-management","resources":[]},
+	        {"id":"dotnet-lesson-07-08","title":"ASP.NET Core Identity Temelleri","type":"coding","durationMinutes":35,"slug":"identity-basics","resources":[]},
+	        {"id":"dotnet-lesson-07-09","title":"Kullanıcı Kaydı, Login ve Logout İşlemleri","type":"coding","durationMinutes":40,"slug":"user-management","resources":[]},
+	        {"id":"dotnet-lesson-07-10","title":"Role-Based Authorization","type":"coding","durationMinutes":35,"slug":"role-authorization","resources":[]},
+	        {"id":"dotnet-lesson-07-11","title":"Policy-Based Authorization","type":"coding","durationMinutes":35,"slug":"policy-authorization","resources":[]},
+	        {"id":"dotnet-lesson-07-12","title":"JWT Authentication ile Güvenli API","type":"coding","durationMinutes":40,"slug":"jwt-auth","resources":[]},
+	        {"id":"dotnet-lesson-07-13","title":"Token Refresh Mekanizması","type":"coding","durationMinutes":35,"slug":"token-refresh","resources":[]},
+	        {"id":"dotnet-lesson-07-14","title":"Password Hashing ve Salt","type":"coding","durationMinutes":30,"slug":"password-hashing","resources":[]},
+	        {"id":"dotnet-lesson-07-15","title":"Multi-Factor Authentication (MFA)","type":"video","durationMinutes":35,"slug":"mfa","resources":[]}
+	      ]
+	    },
+	    {
+	      "id": "dotnet-module-08",
+	      "title": "Logging ve Exception Handling",
+	      "summary": "Profesyonel logging tekniklerini ve exception handling stratejilerini öğrenin. Serilog, NLog ve ILogger kullanımını, exception middleware ve error tracking tekniklerini uygulayın.",
+	      "durationMinutes": 350,
+	      "objectives": ["Logging frameworks", "Exception handling", "Error tracking", "Monitoring"],
+	      "lessons": [
+	        {"id":"dotnet-lesson-08-01","title":"Loglama Framework'leri (Serilog, NLog, ILogger)","type":"reading","durationMinutes":25,"slug":"logging-frameworks","resources":[]},
+	        {"id":"dotnet-lesson-08-02","title":"Exception Yönetimi ve İzleme","type":"video","durationMinutes":30,"slug":"exception-tracking","resources":[]},
+	        {"id":"dotnet-lesson-08-03","title":"ILogger Interface Kullanımı","type":"coding","durationMinutes":30,"slug":"ilogger-usage","resources":[]},
+	        {"id":"dotnet-lesson-08-04","title":"Serilog Konfigürasyonu","type":"coding","durationMinutes":35,"slug":"serilog-config","resources":[]},
+	        {"id":"dotnet-lesson-08-05","title":"Log Levels ve Filtering","type":"reading","durationMinutes":25,"slug":"log-levels","resources":[]},
+	        {"id":"dotnet-lesson-08-06","title":"Structured Logging","type":"coding","durationMinutes":30,"slug":"structured-logging","resources":[]},
+	        {"id":"dotnet-lesson-08-07","title":"Exception Middleware Geliştirme","type":"coding","durationMinutes":35,"slug":"exception-middleware-log","resources":[]},
+	        {"id":"dotnet-lesson-08-08","title":"Global Exception Handler","type":"coding","durationMinutes":35,"slug":"global-exception-handler","resources":[]},
+	        {"id":"dotnet-lesson-08-09","title":"Error Response Standardizasyonu","type":"coding","durationMinutes":30,"slug":"error-response","resources":[]},
+	        {"id":"dotnet-lesson-08-10","title":"Log Aggregation ve Centralized Logging","type":"reading","durationMinutes":30,"slug":"log-aggregation","resources":[]},
+	        {"id":"dotnet-lesson-08-11","title":"Error Tracking ve Monitoring","type":"video","durationMinutes":30,"slug":"error-tracking-monitoring","resources":[]},
+	        {"id":"dotnet-lesson-08-12","title":"Application Insights Entegrasyonu","type":"coding","durationMinutes":35,"slug":"application-insights","resources":[]},
+	        {"id":"dotnet-lesson-08-13","title":"Log Retention ve Archiving","type":"reading","durationMinutes":25,"slug":"log-retention","resources":[]},
+	        {"id":"dotnet-lesson-08-14","title":"Performance Logging","type":"coding","durationMinutes":30,"slug":"performance-logging","resources":[]},
+	        {"id":"dotnet-lesson-08-15","title":"Best Practices: Logging Stratejileri","type":"reading","durationMinutes":25,"slug":"logging-best-practices","resources":[]}
+	      ]
+	    },
+	    {
+	      "id": "dotnet-module-09",
+	      "title": "Configuration Management",
+	      "summary": "Configuration yönetimi tekniklerini öğrenin. appsettings.json, environment variables, Azure Key Vault ve options pattern kullanımını uygulayın.",
+	      "durationMinutes": 320,
+	      "objectives": ["Configuration sources", "Options pattern", "Environment variables", "Secrets management"],
+	      "lessons": [
+	        {"id":"dotnet-lesson-09-01","title":"Configuration Yönetimi (appsettings.json)","type":"reading","durationMinutes":25,"slug":"configuration-mgmt","resources":[]},
+	        {"id":"dotnet-lesson-09-02","title":"Environment Bazlı Yapılandırma","type":"coding","durationMinutes":30,"slug":"environment-config","resources":[]},
+	        {"id":"dotnet-lesson-09-03","title":"Configuration Providers","type":"reading","durationMinutes":25,"slug":"config-providers","resources":[]},
+	        {"id":"dotnet-lesson-09-04","title":"Options Pattern Kullanımı","type":"coding","durationMinutes":35,"slug":"options-pattern","resources":[]},
+	        {"id":"dotnet-lesson-09-05","title":"IOptions, IOptionsSnapshot, IOptionsMonitor","type":"coding","durationMinutes":30,"slug":"options-interfaces","resources":[]},
+	        {"id":"dotnet-lesson-09-06","title":"Configuration Binding","type":"coding","durationMinutes":30,"slug":"config-binding","resources":[]},
+	        {"id":"dotnet-lesson-09-07","title":"Environment Variables Kullanımı","type":"coding","durationMinutes":25,"slug":"env-variables","resources":[]},
+	        {"id":"dotnet-lesson-09-08","title":"User Secrets (Development)","type":"coding","durationMinutes":30,"slug":"user-secrets","resources":[]},
+	        {"id":"dotnet-lesson-09-09","title":"Azure Key Vault Entegrasyonu","type":"coding","durationMinutes":35,"slug":"azure-key-vault","resources":[]},
+	        {"id":"dotnet-lesson-09-10","title":"Configuration Validation","type":"coding","durationMinutes":30,"slug":"config-validation","resources":[]},
+	        {"id":"dotnet-lesson-09-11","title":"Hot Reload Configuration","type":"coding","durationMinutes":25,"slug":"hot-reload-config","resources":[]},
+	        {"id":"dotnet-lesson-09-12","title":"Configuration Best Practices","type":"reading","durationMinutes":25,"slug":"config-best-practices","resources":[]},
+	        {"id":"dotnet-lesson-09-13","title":"Multi-Environment Configuration Stratejileri","type":"reading","durationMinutes":30,"slug":"multi-environment","resources":[]},
+	        {"id":"dotnet-lesson-09-14","title":"Configuration Encryption","type":"coding","durationMinutes":30,"slug":"config-encryption","resources":[]},
+	        {"id":"dotnet-lesson-09-15","title":"Configuration Monitoring ve Auditing","type":"reading","durationMinutes":25,"slug":"config-monitoring","resources":[]}
+	      ]
+	    },
+	    {
+	      "id": "dotnet-module-10",
+	      "title": "Unit Test ve Integration Test",
+	      "summary": "Test odaklı geliştirme (TDD), unit ve integration testleri, mocking ve test coverage tekniklerini öğrenin. xUnit, Moq ve test automation pratiklerini uygulayın.",
+	      "durationMinutes": 400,
+	      "objectives": ["TDD", "Unit testing", "Integration testing", "Mocking"],
+	      "lessons": [
+	        {"id":"dotnet-lesson-10-01","title":"Test Türleri (Unit, Integration, System, UI)","type":"reading","durationMinutes":25,"slug":"test-types","resources":[]},
+	        {"id":"dotnet-lesson-10-02","title":"Test Odaklı Geliştirme (TDD)","type":"video","durationMinutes":30,"slug":"tdd","resources":[]},
+	        {"id":"dotnet-lesson-10-03","title":"xUnit, NUnit ve MSTest Karşılaştırması","type":"reading","durationMinutes":25,"slug":"test-frameworks","resources":[]},
+	        {"id":"dotnet-lesson-10-04","title":"Unit Test Projesi Kurulumu","type":"coding","durationMinutes":30,"slug":"unit-test-setup","resources":[]},
+	        {"id":"dotnet-lesson-10-05","title":"Mocking Frameworkleri (Moq, NSubstitute)","type":"coding","durationMinutes":35,"slug":"mocking","resources":[]},
+	        {"id":"dotnet-lesson-10-06","title":"Dependency Injection ile Test Edilebilirlik","type":"coding","durationMinutes":35,"slug":"di-testing","resources":[]},
+	        {"id":"dotnet-lesson-10-07","title":"Integration Test Senaryoları","type":"coding","durationMinutes":40,"slug":"integration-tests","resources":[]},
+	        {"id":"dotnet-lesson-10-08","title":"Test Data Hazırlama (InMemory DB)","type":"coding","durationMinutes":35,"slug":"test-data","resources":[]},
+	        {"id":"dotnet-lesson-10-09","title":"Test Coverage Ölçümü","type":"coding","durationMinutes":30,"slug":"test-coverage","resources":[]},
+	        {"id":"dotnet-lesson-10-10","title":"Kod Kalitesi Analizi (SonarQube, Coverlet)","type":"reading","durationMinutes":30,"slug":"code-quality","resources":[]},
+	        {"id":"dotnet-lesson-10-11","title":"API Testing (Integration Tests)","type":"coding","durationMinutes":40,"slug":"api-testing","resources":[]},
+	        {"id":"dotnet-lesson-10-12","title":"Test Fixtures ve Setup/Teardown","type":"coding","durationMinutes":30,"slug":"test-fixtures","resources":[]},
+	        {"id":"dotnet-lesson-10-13","title":"Parameterized Tests","type":"coding","durationMinutes":30,"slug":"parameterized-tests","resources":[]},
+	        {"id":"dotnet-lesson-10-14","title":"Test Best Practices","type":"reading","durationMinutes":25,"slug":"test-best-practices","resources":[]},
+	        {"id":"dotnet-lesson-10-15","title":"CI/CD ile Test Automation","type":"coding","durationMinutes":35,"slug":"test-automation","resources":[]}
+	      ]
+	    },
+	    {
+	      "id": "dotnet-module-11",
+	      "title": "Performans ve Caching Teknikleri",
+	      "summary": "Uygulama performansını ölçmeyi, optimize etmeyi ve caching stratejilerini öğrenin. Memory cache, distributed cache, response caching ve performance profiling tekniklerini uygulayın.",
+	      "durationMinutes": 380,
+	      "objectives": ["Performance optimization", "Caching strategies", "Memory management", "Profiling"],
+	      "lessons": [
+	        {"id":"dotnet-lesson-11-01","title":"Performans Ölçüm Kavramı","type":"reading","durationMinutes":25,"slug":"perf-measurement","resources":[]},
+	        {"id":"dotnet-lesson-11-02","title":"Benchmarking Teknikleri","type":"coding","durationMinutes":35,"slug":"benchmarking","resources":[]},
+	        {"id":"dotnet-lesson-11-03","title":"Memory Yönetimi","type":"reading","durationMinutes":30,"slug":"memory-management","resources":[]},
+	        {"id":"dotnet-lesson-11-04","title":"Garbage Collector ve Optimizasyon","type":"reading","durationMinutes":30,"slug":"gc-optimization","resources":[]},
+	        {"id":"dotnet-lesson-11-05","title":"Caching Stratejileri","type":"video","durationMinutes":30,"slug":"caching-strategies","resources":[]},
+	        {"id":"dotnet-lesson-11-06","title":"OutputCache, ResponseCache Kullanımı","type":"coding","durationMinutes":35,"slug":"output-cache","resources":[]},
+	        {"id":"dotnet-lesson-11-07","title":"Memory Cache Kullanımı","type":"coding","durationMinutes":30,"slug":"memory-cache","resources":[]},
+	        {"id":"dotnet-lesson-11-08","title":"Distributed Cache (Redis)","type":"coding","durationMinutes":40,"slug":"distributed-cache","resources":[]},
+	        {"id":"dotnet-lesson-11-09","title":"Cache Invalidation Stratejileri","type":"reading","durationMinutes":25,"slug":"cache-invalidation","resources":[]},
+	        {"id":"dotnet-lesson-11-10","title":"Diagnostic Tools Kullanımı","type":"video","durationMinutes":30,"slug":"diagnostic-tools","resources":[]},
+	        {"id":"dotnet-lesson-11-11","title":"Performance Counter Kavramı","type":"reading","durationMinutes":25,"slug":"performance-counters","resources":[]},
+	        {"id":"dotnet-lesson-11-12","title":"API Performans Testleri","type":"coding","durationMinutes":35,"slug":"api-tests","resources":[]},
+	        {"id":"dotnet-lesson-11-13","title":"DB Performans İyileştirmeleri","type":"coding","durationMinutes":35,"slug":"db-optimization","resources":[]},
+	        {"id":"dotnet-lesson-11-14","title":"Query Optimization","type":"coding","durationMinutes":35,"slug":"query-optimization","resources":[]},
+	        {"id":"dotnet-lesson-11-15","title":"Health Check Entegrasyonu","type":"coding","durationMinutes":30,"slug":"health-checks","resources":[]}
+	      ]
+	    },
+	    {
+	      "id": "dotnet-module-12",
+	      "title": "Asenkron Programlama",
+	      "summary": "Async/await pattern, Task Parallel Library ve asenkron programlama tekniklerini öğrenin. Threading, parallel processing ve async best practices'i uygulayın.",
+	      "durationMinutes": 360,
+	      "objectives": ["Async/await", "TPL", "Threading", "Parallel processing"],
+	      "lessons": [
+	        {"id":"dotnet-lesson-12-01","title":"Asenkron Programlama (Async / Await)","type":"video","durationMinutes":35,"slug":"async-await","resources":[]},
+	        {"id":"dotnet-lesson-12-02","title":"Threading ve Paralel Çalışma","type":"reading","durationMinutes":30,"slug":"threading-parallel","resources":[]},
+	        {"id":"dotnet-lesson-12-03","title":"Task ve Task<T> Kullanımı","type":"coding","durationMinutes":35,"slug":"task-usage","resources":[]},
+	        {"id":"dotnet-lesson-12-04","title":"Async Method Patterns","type":"coding","durationMinutes":35,"slug":"async-patterns","resources":[]},
+	        {"id":"dotnet-lesson-12-05","title":"ConfigureAwait ve SynchronizationContext","type":"reading","durationMinutes":30,"slug":"configureawait","resources":[]},
+	        {"id":"dotnet-lesson-12-06","title":"Task.Run vs Async/Await","type":"video","durationMinutes":30,"slug":"taskrun-vs-async","resources":[]},
+	        {"id":"dotnet-lesson-12-07","title":"Parallel Processing (Parallel.ForEach)","type":"coding","durationMinutes":35,"slug":"parallel-processing","resources":[]},
+	        {"id":"dotnet-lesson-12-08","title":"CancellationToken Kullanımı","type":"coding","durationMinutes":30,"slug":"cancellation-token","resources":[]},
+	        {"id":"dotnet-lesson-12-09","title":"Async Streams (IAsyncEnumerable)","type":"coding","durationMinutes":35,"slug":"async-streams","resources":[]},
+	        {"id":"dotnet-lesson-12-10","title":"Deadlock Önleme Teknikleri","type":"reading","durationMinutes":30,"slug":"deadlock-prevention","resources":[]},
+	        {"id":"dotnet-lesson-12-11","title":"Async Best Practices","type":"reading","durationMinutes":25,"slug":"async-best-practices","resources":[]},
+	        {"id":"dotnet-lesson-12-12","title":"Async Exception Handling","type":"coding","durationMinutes":30,"slug":"async-exceptions","resources":[]},
+	        {"id":"dotnet-lesson-12-13","title":"Task.WhenAll ve Task.WhenAny","type":"coding","durationMinutes":30,"slug":"task-whenall","resources":[]},
+	        {"id":"dotnet-lesson-12-14","title":"Async Database Operations","type":"coding","durationMinutes":35,"slug":"async-db","resources":[]},
+	        {"id":"dotnet-lesson-12-15","title":"Performance Considerations","type":"reading","durationMinutes":25,"slug":"async-performance","resources":[]}
+	      ]
+	    },
+	    {
+	      "id": "dotnet-module-13",
+	      "title": "Docker ile Containerization",
+	      "summary": "Docker containerization tekniklerini öğrenin. Dockerfile oluşturma, Docker Compose kullanımı ve container deployment stratejilerini uygulayın.",
+	      "durationMinutes": 340,
+	      "objectives": ["Docker", "Containerization", "Docker Compose", "Deployment"],
+	      "lessons": [
+	        {"id":"dotnet-lesson-13-01","title":"Docker ile Containerization","type":"video","durationMinutes":30,"slug":"docker","resources":[]},
+	        {"id":"dotnet-lesson-13-02","title":"Docker Temelleri ve Kavramlar","type":"reading","durationMinutes":25,"slug":"docker-basics","resources":[]},
+	        {"id":"dotnet-lesson-13-03","title":"Dockerfile Oluşturma","type":"coding","durationMinutes":35,"slug":"dockerfile","resources":[]},
+	        {"id":"dotnet-lesson-13-04","title":"Multi-Stage Builds","type":"coding","durationMinutes":30,"slug":"multi-stage-builds","resources":[]},
+	        {"id":"dotnet-lesson-13-05","title":"Docker Compose Kullanımı","type":"coding","durationMinutes":35,"slug":"docker-compose","resources":[]},
+	        {"id":"dotnet-lesson-13-06","title":".NET Core Docker Image'ları","type":"coding","durationMinutes":30,"slug":"dotnet-docker-images","resources":[]},
+	        {"id":"dotnet-lesson-13-07","title":"Container Networking","type":"reading","durationMinutes":25,"slug":"container-networking","resources":[]},
+	        {"id":"dotnet-lesson-13-08","title":"Volume ve Data Persistence","type":"coding","durationMinutes":30,"slug":"volumes","resources":[]},
+	        {"id":"dotnet-lesson-13-09","title":"Docker Hub ve Registry","type":"reading","durationMinutes":25,"slug":"docker-hub","resources":[]},
+	        {"id":"dotnet-lesson-13-10","title":"Container Security Best Practices","type":"reading","durationMinutes":30,"slug":"container-security","resources":[]},
+	        {"id":"dotnet-lesson-13-11","title":"Docker ile Development Workflow","type":"coding","durationMinutes":35,"slug":"docker-dev-workflow","resources":[]},
+	        {"id":"dotnet-lesson-13-12","title":"Production Deployment","type":"coding","durationMinutes":35,"slug":"production-deployment","resources":[]},
+	        {"id":"dotnet-lesson-13-13","title":"Container Monitoring","type":"reading","durationMinutes":25,"slug":"container-monitoring","resources":[]},
+	        {"id":"dotnet-lesson-13-14","title":"Docker Swarm ve Orchestration","type":"video","durationMinutes":30,"slug":"docker-swarm","resources":[]},
+	        {"id":"dotnet-lesson-13-15","title":"Best Practices: Docker Optimization","type":"reading","durationMinutes":25,"slug":"docker-optimization","resources":[]}
+	      ]
+	    },
+	    {
+	      "id": "dotnet-module-14",
+	      "title": "CI/CD ve Deployment",
+	      "summary": "CI/CD pipeline'larını öğrenin. GitHub Actions, Azure DevOps ve deployment automation tekniklerini uygulayın.",
+	      "durationMinutes": 360,
+	      "objectives": ["CI/CD", "GitHub Actions", "Azure DevOps", "Deployment automation"],
+	      "lessons": [
+	        {"id":"dotnet-lesson-14-01","title":"CI/CD Kavramına Giriş","type":"reading","durationMinutes":25,"slug":"cicd-intro","resources":[]},
+	        {"id":"dotnet-lesson-14-02","title":"Git Versiyon Kontrol Temelleri","type":"reading","durationMinutes":25,"slug":"git-basics","resources":[]},
+	        {"id":"dotnet-lesson-14-03","title":"Branching Stratejileri","type":"reading","durationMinutes":30,"slug":"branching","resources":[]},
+	        {"id":"dotnet-lesson-14-04","title":"GitHub Actions Pipeline Kurulumu","type":"coding","durationMinutes":40,"slug":"github-actions","resources":[]},
+	        {"id":"dotnet-lesson-14-05","title":"Azure DevOps Pipeline Örneği","type":"coding","durationMinutes":40,"slug":"azure-devops","resources":[]},
+	        {"id":"dotnet-lesson-14-06","title":"Build, Test ve Deploy Otomasyonu","type":"coding","durationMinutes":40,"slug":"automation","resources":[]},
+	        {"id":"dotnet-lesson-14-07","title":"Environment-Specific Deployments","type":"coding","durationMinutes":35,"slug":"env-deployments","resources":[]},
+	        {"id":"dotnet-lesson-14-08","title":"Azure App Service Deployment","type":"coding","durationMinutes":35,"slug":"azure-app-service","resources":[]},
+	        {"id":"dotnet-lesson-14-09","title":"Docker Container Deployment","type":"coding","durationMinutes":35,"slug":"docker-deployment","resources":[]},
+	        {"id":"dotnet-lesson-14-10","title":"Database Migration in CI/CD","type":"coding","durationMinutes":35,"slug":"db-migration-cicd","resources":[]},
+	        {"id":"dotnet-lesson-14-11","title":"Rollback Stratejileri","type":"reading","durationMinutes":25,"slug":"rollback","resources":[]},
+	        {"id":"dotnet-lesson-14-12","title":"Blue-Green Deployment","type":"reading","durationMinutes":30,"slug":"blue-green","resources":[]},
+	        {"id":"dotnet-lesson-14-13","title":"Monitoring ve Alerting","type":"reading","durationMinutes":25,"slug":"monitoring-alerting","resources":[]},
+	        {"id":"dotnet-lesson-14-14","title":"CI/CD Best Practices","type":"reading","durationMinutes":30,"slug":"cicd-best-practices","resources":[]},
+	        {"id":"dotnet-lesson-14-15","title":"Security in CI/CD Pipeline","type":"reading","durationMinutes":30,"slug":"security-cicd","resources":[]}
+	      ]
+	    },
+	    {
+	      "id": "dotnet-module-15",
+	      "title": "Microservices Mimarisi",
+	      "summary": "Microservice mimarisini ve dağıtık sistem tasarımını öğrenin. API Gateway, message broker, service discovery ve circuit breaker pattern gibi modern mimari desenleri uygulayın.",
+	      "durationMinutes": 400,
+	      "objectives": ["Microservices", "API Gateway", "Message broker", "Service discovery"],
+	      "lessons": [
+	        {"id":"dotnet-lesson-15-01","title":"Monolith vs Microservice Kavramı","type":"reading","durationMinutes":30,"slug":"monolith-vs-microservice","resources":[]},
+	        {"id":"dotnet-lesson-15-02","title":"Microservice Avantajları ve Zorlukları","type":"reading","durationMinutes":30,"slug":"advantages-challenges","resources":[]},
+	        {"id":"dotnet-lesson-15-03","title":"Domain-Driven Design (DDD) Temelleri","type":"reading","durationMinutes":35,"slug":"ddd","resources":[]},
+	        {"id":"dotnet-lesson-15-04","title":"Service Discovery (Consul, Eureka)","type":"coding","durationMinutes":35,"slug":"service-discovery","resources":[]},
+	        {"id":"dotnet-lesson-15-05","title":"API Gateway (Ocelot) Kullanımı","type":"coding","durationMinutes":40,"slug":"api-gateway","resources":[]},
+	        {"id":"dotnet-lesson-15-06","title":"Event-Driven Architecture","type":"video","durationMinutes":35,"slug":"event-driven","resources":[]},
+	        {"id":"dotnet-lesson-15-07","title":"Message Broker (RabbitMQ, Kafka)","type":"coding","durationMinutes":40,"slug":"message-broker","resources":[]},
+	        {"id":"dotnet-lesson-15-08","title":"gRPC ile Servisler Arası İletişim","type":"coding","durationMinutes":35,"slug":"grpc","resources":[]},
+	        {"id":"dotnet-lesson-15-09","title":"Saga Pattern ve Transaction Yönetimi","type":"video","durationMinutes":35,"slug":"saga-pattern","resources":[]},
+	        {"id":"dotnet-lesson-15-10","title":"Configuration Management","type":"coding","durationMinutes":30,"slug":"config-mgmt-micro","resources":[]},
+	        {"id":"dotnet-lesson-15-11","title":"Distributed Cache Yönetimi","type":"coding","durationMinutes":35,"slug":"distributed-cache-micro","resources":[]},
+	        {"id":"dotnet-lesson-15-12","title":"Circuit Breaker Pattern (Polly)","type":"coding","durationMinutes":35,"slug":"circuit-breaker","resources":[]},
+	        {"id":"dotnet-lesson-15-13","title":"Observability: Logging, Metrics, Tracing","type":"reading","durationMinutes":30,"slug":"observability","resources":[]},
+	        {"id":"dotnet-lesson-15-14","title":"Health Checks ve Self-Healing Sistemler","type":"coding","durationMinutes":30,"slug":"health-checks-micro","resources":[]},
+	        {"id":"dotnet-lesson-15-15","title":"Örnek Microservice Mimari Proje","type":"coding","durationMinutes":45,"slug":"example-project","resources":[]}
+	      ]
+	    }
+	  ]
+	}
+	$$::jsonb,
+	4500,
+	CURRENT_TIMESTAMP,
+	CURRENT_TIMESTAMP
+)
+ON CONFLICT ("id") DO UPDATE SET
+	"title" = EXCLUDED."title",
+	"description" = EXCLUDED."description",
+	"content" = EXCLUDED."content",
+	"updatedAt" = CURRENT_TIMESTAMP;
+
+COMMIT;

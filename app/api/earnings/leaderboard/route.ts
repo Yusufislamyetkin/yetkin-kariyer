@@ -55,7 +55,7 @@ export async function GET(request: Request) {
     }>();
 
     // Initialize all users with zero earnings
-    users.forEach((user) => {
+    users.forEach((user: { id: string }) => {
       earningsMap.set(user.id, {
         hackathon: 0,
         leaderboard: 0,
@@ -96,7 +96,7 @@ export async function GET(request: Request) {
         },
       });
 
-      hackathonSubmissions.forEach((sub) => {
+      hackathonSubmissions.forEach((sub: { userId: string | null; team: { members: Array<{ userId: string }> } | null }) => {
         const earningsPerWin = 1000; // 1000 TL per win
         if (sub.userId) {
           const current = earningsMap.get(sub.userId);
@@ -106,7 +106,7 @@ export async function GET(request: Request) {
           }
         }
         if (sub.team) {
-          sub.team.members.forEach((member) => {
+          sub.team.members.forEach((member: { userId: string }) => {
             const current = earningsMap.get(member.userId);
             if (current) {
               current.hackathon += earningsPerWin;
@@ -131,7 +131,7 @@ export async function GET(request: Request) {
         },
       });
 
-      leaderboardFirstPlaces.forEach((entry) => {
+      leaderboardFirstPlaces.forEach((entry: { userId: string }) => {
         const earningsPerFirst = 500; // 500 TL per #1
         const current = earningsMap.get(entry.userId);
         if (current) {
@@ -162,7 +162,7 @@ export async function GET(request: Request) {
         },
       });
 
-      freelancerEarnings.forEach((bid) => {
+      freelancerEarnings.forEach((bid: { userId: string; amount: number | null }) => {
         const current = earningsMap.get(bid.userId);
         if (current) {
           current.freelancer += bid.amount || 0;
@@ -175,7 +175,7 @@ export async function GET(request: Request) {
 
     // Build leaderboard entries
     const leaderboard: EarningsLeaderboardEntry[] = users
-      .map((user) => {
+      .map((user: { id: string; name: string | null; email: string; profileImage: string | null }) => {
         const earnings = earningsMap.get(user.id);
         if (!earnings) {
           return null;
@@ -206,9 +206,9 @@ export async function GET(request: Request) {
           },
         };
       })
-      .filter((entry): entry is EarningsLeaderboardEntry => entry !== null)
-      .sort((a, b) => b.totalEarnings - a.totalEarnings)
-      .map((entry, index) => ({
+      .filter((entry: EarningsLeaderboardEntry | null): entry is EarningsLeaderboardEntry => entry !== null)
+      .sort((a: EarningsLeaderboardEntry, b: EarningsLeaderboardEntry) => b.totalEarnings - a.totalEarnings)
+      .map((entry: EarningsLeaderboardEntry, index: number) => ({
         ...entry,
         rank: index + 1,
       }));

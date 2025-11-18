@@ -33,6 +33,16 @@ export default async function CVRenderPage({
   return (
     <div className="bg-gray-100 min-h-screen p-2 sm:p-4">
       <div className="w-full max-w-[210mm] mx-auto">
+        {/* Font and print CSS for Turkish characters and A4 layout */}
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap"
+        />
+        <style>{`
+          @page { size: A4; margin: 0; }
+          #cv-content { font-family: 'Noto Sans', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+          html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        `}</style>
         <CVRenderer data={cvData} templateId={cv.templateId} id="cv-content" />
       </div>
     </div>

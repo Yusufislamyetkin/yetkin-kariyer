@@ -61,7 +61,7 @@ export async function checkGoalsForToday({
       case "score_target":
         if (dateAttempts.length > 0) {
           const avgScore =
-            dateAttempts.reduce((sum, a) => sum + a.score, 0) /
+            dateAttempts.reduce((sum: number, a: { score: number }) => sum + a.score, 0) /
             dateAttempts.length;
           newCurrentValue = Math.round(avgScore);
           if (newCurrentValue >= goal.targetValue && !completed) {
@@ -72,9 +72,9 @@ export async function checkGoalsForToday({
       case "topic_complete":
         const dateTopics = new Set(
           dateAttempts
-            .map((a) => a.topic)
+            .map((a: { topic: string | null | undefined }) => a.topic)
             .filter(
-              (topic): topic is string =>
+              (topic: string | null | undefined): topic is string =>
                 topic !== null && topic !== undefined
             )
         );

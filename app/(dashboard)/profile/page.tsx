@@ -56,6 +56,7 @@ export default function ProfilePage() {
   const [uploadingImage, setUploadingImage] = useState(false);
   const [recentActivities, setRecentActivities] = useState<any[]>([]);
   const [performanceStats, setPerformanceStats] = useState<any>(null);
+  const [gamiSummary, setGamiSummary] = useState<any>(null);
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -210,6 +211,17 @@ export default function ProfilePage() {
         }
       } catch (error) {
         console.error("Error fetching stats:", error);
+      }
+
+      // Fetch gamification summary
+      try {
+        const gamiResp = await fetch("/api/gamification/me/summary");
+        if (gamiResp.ok) {
+          const gami = await gamiResp.json();
+          setGamiSummary(gami);
+        }
+      } catch (e) {
+        // ignore
       }
     } catch (error) {
       console.error("Error fetching profile data:", error);
@@ -407,34 +419,32 @@ export default function ProfilePage() {
 
   const profileStats = [
     {
-      label: "Test Skoru",
-      value: userRank && typeof userRank.averageScore === 'number' 
-        ? `${Math.round(userRank.averageScore)}%` 
-        : "0%",
+      label: "Seviye",
+      value: gamiSummary?.level ?? 1,
       icon: Target,
-      color: "from-blue-500 to-cyan-500",
-      bgColor: "bg-blue-50 dark:bg-blue-950/30",
-      borderColor: "border-blue-200 dark:border-blue-800/50",
+      color: "from-indigo-500 to-purple-500",
+      bgColor: "bg-indigo-50 dark:bg-indigo-950/30",
+      borderColor: "border-indigo-200 dark:border-indigo-800/50",
     },
     {
-      label: "Toplam Rozet",
-      value: badges.length.toString(),
-      icon: Award,
-      color: "from-purple-500 to-pink-500",
-      bgColor: "bg-purple-50 dark:bg-purple-950/30",
-      borderColor: "border-purple-200 dark:border-purple-800/50",
-    },
-    {
-      label: "Rozet Puanı",
-      value: totalPoints.toString(),
+      label: "Puan",
+      value: (gamiSummary?.points ?? 0).toString(),
       icon: Trophy,
       color: "from-yellow-500 to-orange-500",
       bgColor: "bg-yellow-50 dark:bg-yellow-950/30",
       borderColor: "border-yellow-200 dark:border-yellow-800/50",
     },
     {
+      label: "XP",
+      value: (gamiSummary?.xp ?? 0).toString(),
+      icon: TrendingUp,
+      color: "from-blue-500 to-cyan-500",
+      bgColor: "bg-blue-50 dark:bg-blue-950/30",
+      borderColor: "border-blue-200 dark:border-blue-800/50",
+    },
+    {
       label: "Günlük Streak",
-      value: "0",
+      value: (gamiSummary?.streak?.current ?? 0).toString(),
       icon: Flame,
       color: "from-orange-500 to-red-500",
       bgColor: "bg-orange-50 dark:bg-orange-950/30",

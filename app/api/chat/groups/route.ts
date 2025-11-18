@@ -161,7 +161,7 @@ export async function GET(request: Request) {
     });
 
     const payload = await Promise.all(
-      groups.map(async (group) => {
+      groups.map(async (group: { id: string; memberships: Array<{ role: string; lastSeenAt: Date | null; isMuted: boolean }>; createdById: string; name: string; slug: string; visibility: string; allowLinkJoin: boolean; inviteCode: string | null; expertise: string | null; description: string | null; createdAt: Date; updatedAt: Date }) => {
         const membership = group.memberships[0] ?? null;
 
         const [lastMessage, memberCount, unreadCount] = await Promise.all([
@@ -235,7 +235,7 @@ export async function GET(request: Request) {
                   name: lastMessage.user.name,
                   profileImage: lastMessage.user.profileImage,
                 },
-                attachments: lastMessage.attachments.map((attachment) => ({
+                attachments: lastMessage.attachments.map((attachment: any) => ({
                   id: attachment.id,
                   url: attachment.url,
                   type: attachment.type,
@@ -315,7 +315,7 @@ export async function POST(request: Request) {
       });
 
       const acceptedFriendIds = new Set<string>();
-      friendships.forEach((friendship) => {
+      friendships.forEach((friendship: { requesterId: string; addresseeId: string }) => {
         const counterpart = friendship.requesterId === userId ? friendship.addresseeId : friendship.requesterId;
         acceptedFriendIds.add(counterpart);
       });
@@ -325,7 +325,7 @@ export async function POST(request: Request) {
 
     const slug = await resolveUniqueSlug(name);
 
-    const result = await db.$transaction(async (tx) => {
+    const result = await db.$transaction(async (tx: any) => {
       const inviteCode = allowLinkJoin ? await generateUniqueGroupInviteCode(tx) : null;
 
       const group = await tx.chatGroup.create({

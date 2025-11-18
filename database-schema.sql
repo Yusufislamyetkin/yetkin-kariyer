@@ -12,6 +12,19 @@ DROP TABLE IF EXISTS "post_saves" CASCADE;
 DROP TABLE IF EXISTS "post_comments" CASCADE;
 DROP TABLE IF EXISTS "post_likes" CASCADE;
 DROP TABLE IF EXISTS "posts" CASCADE;
+DROP TABLE IF EXISTS "admin_audit_logs" CASCADE;
+DROP TABLE IF EXISTS "user_inventory" CASCADE;
+DROP TABLE IF EXISTS "reward_redemptions" CASCADE;
+DROP TABLE IF EXISTS "rewards" CASCADE;
+DROP TABLE IF EXISTS "leaderboard_snapshots" CASCADE;
+DROP TABLE IF EXISTS "quest_progress" CASCADE;
+DROP TABLE IF EXISTS "quests" CASCADE;
+DROP TABLE IF EXISTS "user_balances" CASCADE;
+DROP TABLE IF EXISTS "point_transactions" CASCADE;
+DROP TABLE IF EXISTS "gamification_events" CASCADE;
+DROP TABLE IF EXISTS "cv_uploads" CASCADE;
+DROP TABLE IF EXISTS "live_coding_challenges" CASCADE;
+DROP TABLE IF EXISTS "bug_fix_challenges" CASCADE;
 DROP TABLE IF EXISTS "chat_message_receipts" CASCADE;
 DROP TABLE IF EXISTS "chat_attachments" CASCADE;
 DROP TABLE IF EXISTS "chat_messages" CASCADE;
@@ -78,6 +91,8 @@ DROP TYPE IF EXISTS "HackathonApplicationStatus" CASCADE;
 DROP TYPE IF EXISTS "HackathonTeamRole" CASCADE;
 DROP TYPE IF EXISTS "HackathonTeamMemberStatus" CASCADE;
 DROP TYPE IF EXISTS "HackathonSubmissionStatus" CASCADE;
+DROP TYPE IF EXISTS "RewardType" CASCADE;
+DROP TYPE IF EXISTS "BadgeTier" CASCADE;
 
 -- ============================================
 -- 2. ENUM'LARI OLUŞTUR
@@ -104,6 +119,8 @@ CREATE TYPE "HackathonTeamRole" AS ENUM ('leader', 'co_leader', 'member');
 CREATE TYPE "HackathonTeamMemberStatus" AS ENUM ('invited', 'active', 'left', 'removed');
 CREATE TYPE "HackathonSubmissionStatus" AS ENUM ('pending', 'valid', 'late', 'disqualified', 'under_review', 'finalist', 'winner');
 CREATE TYPE "GoalFrequency" AS ENUM ('daily', 'weekly', 'monthly');
+CREATE TYPE "BadgeTier" AS ENUM ('bronze', 'silver', 'gold', 'platinum');
+CREATE TYPE "RewardType" AS ENUM ('VIRTUAL', 'VOUCHER', 'PHYSICAL');
 
 -- ============================================
 -- 3. TABLOLARI OLUŞTUR
@@ -268,6 +285,9 @@ CREATE TABLE "interview_attempts" (
     "transcript" TEXT,
     "aiScore" INTEGER,
     "aiFeedback" JSONB,
+    "questionScores" JSONB,
+    "questionFeedback" JSONB,
+    "questionCorrectness" JSONB,
     "completedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT "interview_attempts_userId_fkey" FOREIGN KEY ("userId") REFERENCES "app_users"("id") ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT "interview_attempts_interviewId_fkey" FOREIGN KEY ("interviewId") REFERENCES "interviews"("id") ON DELETE CASCADE ON UPDATE CASCADE,
@@ -294,6 +314,19 @@ CREATE TABLE "cvs" (
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT "cvs_userId_fkey" FOREIGN KEY ("userId") REFERENCES "app_users"("id") ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT "cvs_templateId_fkey" FOREIGN KEY ("templateId") REFERENCES "cv_templates"("id") ON UPDATE CASCADE
+);
+
+CREATE TABLE "cv_uploads" (
+    "id" TEXT PRIMARY KEY,
+    "cvId" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "url" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "mimeType" TEXT NOT NULL,
+    "size" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT "cv_uploads_cvId_fkey" FOREIGN KEY ("cvId") REFERENCES "cvs"("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "cv_uploads_userId_fkey" FOREIGN KEY ("userId") REFERENCES "app_users"("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE "jobs" (
@@ -407,17 +440,22 @@ CREATE TABLE "wrong_questions" (
 
 CREATE TABLE "badges" (
     "id" TEXT PRIMARY KEY,
+    "key" TEXT,
     "name" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "icon" TEXT NOT NULL,
+    "iconUrl" TEXT,
     "color" TEXT NOT NULL,
     "category" "BadgeCategory" NOT NULL,
     "criteria" JSONB NOT NULL,
     "rarity" "BadgeRarity" NOT NULL DEFAULT 'common',
+    "tier" "BadgeTier",
     "points" INTEGER NOT NULL DEFAULT 10,
+    "ruleJson" JSONB,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT "badges_points_check" CHECK ("points" >= 0)
+    CONSTRAINT "badges_points_check" CHECK ("points" >= 0),
+    CONSTRAINT "badges_key_unique" UNIQUE ("key")
 );
 
 CREATE TABLE "user_badges" (
@@ -426,6 +464,8 @@ CREATE TABLE "user_badges" (
     "badgeId" TEXT NOT NULL,
     "earnedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "isDisplayed" BOOLEAN NOT NULL DEFAULT FALSE,
+    "featuredOrder" INTEGER,
+    "evidenceJson" JSONB,
     CONSTRAINT "user_badges_userId_fkey" FOREIGN KEY ("userId") REFERENCES "app_users"("id") ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT "user_badges_badgeId_fkey" FOREIGN KEY ("badgeId") REFERENCES "badges"("id") ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT "user_badges_userId_badgeId_key" UNIQUE ("userId", "badgeId")
@@ -568,6 +608,146 @@ CREATE TABLE "hackaton_attempts" (
     CONSTRAINT "hackaton_attempts_userId_fkey" FOREIGN KEY ("userId") REFERENCES "app_users"("id") ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT "hackaton_attempts_quizId_fkey" FOREIGN KEY ("quizId") REFERENCES "quizzes"("id") ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT "hackaton_attempts_hackathonId_fkey" FOREIGN KEY ("hackathonId") REFERENCES "hackathons"("id") ON DELETE SET NULL ON UPDATE CASCADE
+);
+
+-- Gamification core tables
+CREATE TABLE "gamification_events" (
+    "id" TEXT PRIMARY KEY,
+    "userId" TEXT NOT NULL,
+    "type" TEXT NOT NULL,
+    "payload" JSONB,
+    "occurredAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "dedupKey" TEXT UNIQUE,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT "gamification_events_userId_fkey" FOREIGN KEY ("userId") REFERENCES "app_users"("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE "point_transactions" (
+    "id" TEXT PRIMARY KEY,
+    "userId" TEXT NOT NULL,
+    "delta" INTEGER NOT NULL,
+    "reason" TEXT NOT NULL,
+    "sourceEventId" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT "point_transactions_userId_fkey" FOREIGN KEY ("userId") REFERENCES "app_users"("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "point_transactions_sourceEventId_fkey" FOREIGN KEY ("sourceEventId") REFERENCES "gamification_events"("id") ON DELETE SET NULL ON UPDATE CASCADE
+);
+
+CREATE TABLE "user_balances" (
+    "userId" TEXT PRIMARY KEY,
+    "points" INTEGER NOT NULL DEFAULT 0,
+    "lifetimeXp" INTEGER NOT NULL DEFAULT 0,
+    "level" INTEGER NOT NULL DEFAULT 1,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT "user_balances_userId_fkey" FOREIGN KEY ("userId") REFERENCES "app_users"("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE "quests" (
+    "id" TEXT PRIMARY KEY,
+    "key" TEXT NOT NULL UNIQUE,
+    "title" TEXT NOT NULL,
+    "period" TEXT NOT NULL,
+    "ruleJson" JSONB NOT NULL,
+    "rewardJson" JSONB NOT NULL,
+    "activeFrom" TIMESTAMP(3),
+    "activeTo" TIMESTAMP(3),
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE "quest_progress" (
+    "id" TEXT PRIMARY KEY,
+    "userId" TEXT NOT NULL,
+    "questId" TEXT NOT NULL,
+    "progress" INTEGER NOT NULL DEFAULT 0,
+    "completedAt" TIMESTAMP(3),
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT "quest_progress_userId_fkey" FOREIGN KEY ("userId") REFERENCES "app_users"("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "quest_progress_questId_fkey" FOREIGN KEY ("questId") REFERENCES "quests"("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "quest_progress_user_quest_unique" UNIQUE ("userId", "questId")
+);
+
+CREATE TABLE "leaderboard_snapshots" (
+    "id" TEXT PRIMARY KEY,
+    "period" TEXT NOT NULL,
+    "scope" TEXT NOT NULL,
+    "rankJson" JSONB NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE "rewards" (
+    "id" TEXT PRIMARY KEY,
+    "sku" TEXT NOT NULL UNIQUE,
+    "title" TEXT NOT NULL,
+    "type" "RewardType" NOT NULL,
+    "cost" INTEGER NOT NULL,
+    "stock" INTEGER,
+    "metaJson" JSONB,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE "reward_redemptions" (
+    "id" TEXT PRIMARY KEY,
+    "userId" TEXT NOT NULL,
+    "rewardId" TEXT NOT NULL,
+    "cost" INTEGER NOT NULL,
+    "status" TEXT NOT NULL DEFAULT 'REQUESTED',
+    "shippingJson" JSONB,
+    "code" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT "reward_redemptions_userId_fkey" FOREIGN KEY ("userId") REFERENCES "app_users"("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "reward_redemptions_rewardId_fkey" FOREIGN KEY ("rewardId") REFERENCES "rewards"("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE "user_inventory" (
+    "id" TEXT PRIMARY KEY,
+    "userId" TEXT NOT NULL,
+    "itemKey" TEXT NOT NULL,
+    "metaJson" JSONB,
+    "grantedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT "user_inventory_userId_fkey" FOREIGN KEY ("userId") REFERENCES "app_users"("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "user_inventory_user_item_unique" UNIQUE ("userId", "itemKey")
+);
+
+CREATE TABLE "admin_audit_logs" (
+    "id" TEXT PRIMARY KEY,
+    "adminId" TEXT NOT NULL,
+    "action" TEXT NOT NULL,
+    "target" TEXT,
+    "beforeJson" JSONB,
+    "afterJson" JSONB,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Challenge content tables
+CREATE TABLE "live_coding_challenges" (
+    "id" TEXT PRIMARY KEY,
+    "title" TEXT NOT NULL,
+    "description" TEXT,
+    "difficulty" TEXT,
+    "languages" TEXT[] NOT NULL DEFAULT ARRAY[]::TEXT[],
+    "starterCode" JSONB,
+    "tests" JSONB,
+    "tags" TEXT[] NOT NULL DEFAULT ARRAY[]::TEXT[],
+    "isPublished" BOOLEAN NOT NULL DEFAULT FALSE,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE "bug_fix_challenges" (
+    "id" TEXT PRIMARY KEY,
+    "title" TEXT NOT NULL,
+    "buggyCode" TEXT NOT NULL,
+    "fixDescription" TEXT,
+    "language" TEXT NOT NULL,
+    "tests" JSONB,
+    "tags" TEXT[] NOT NULL DEFAULT ARRAY[]::TEXT[],
+    "isPublished" BOOLEAN NOT NULL DEFAULT FALSE,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE "hackathon_teams" (
@@ -898,6 +1078,13 @@ CREATE INDEX IF NOT EXISTS "learning_paths_userId_idx" ON "learning_paths"("user
 CREATE INDEX IF NOT EXISTS "assistant_threads_createdAt_idx" ON "assistant_threads"("createdAt");
 CREATE INDEX IF NOT EXISTS "wrong_questions_userId_idx" ON "wrong_questions"("userId");
 CREATE INDEX IF NOT EXISTS "wrong_questions_quizAttemptId_idx" ON "wrong_questions"("quizAttemptId");
+CREATE INDEX IF NOT EXISTS "gamification_events_userId_occurredAt_idx" ON "gamification_events"("userId", "occurredAt");
+CREATE INDEX IF NOT EXISTS "gamification_events_type_occurredAt_idx" ON "gamification_events"("type", "occurredAt");
+CREATE INDEX IF NOT EXISTS "point_transactions_userId_createdAt_idx" ON "point_transactions"("userId", "createdAt");
+CREATE INDEX IF NOT EXISTS "leaderboard_snapshots_period_createdAt_idx" ON "leaderboard_snapshots"("period", "createdAt");
+CREATE INDEX IF NOT EXISTS "quest_progress_questId_idx" ON "quest_progress"("questId");
+CREATE INDEX IF NOT EXISTS "reward_redemptions_userId_createdAt_idx" ON "reward_redemptions"("userId", "createdAt");
+CREATE INDEX IF NOT EXISTS "reward_redemptions_rewardId_idx" ON "reward_redemptions"("rewardId");
 CREATE INDEX IF NOT EXISTS "daily_goals_userId_idx" ON "daily_goals"("userId", "date");
 CREATE INDEX IF NOT EXISTS "leaderboard_entries_period_idx" ON "leaderboard_entries"("period", "periodDate");
 CREATE INDEX IF NOT EXISTS "leaderboard_entries_userId_idx" ON "leaderboard_entries"("userId", "period");
@@ -945,6 +1132,11 @@ CREATE INDEX IF NOT EXISTS "courses_topic_idx" ON "courses"("topic");
 CREATE INDEX IF NOT EXISTS "courses_category_idx" ON "courses"("category");
 CREATE INDEX IF NOT EXISTS "courses_field_idx" ON "courses"("field");
 CREATE INDEX IF NOT EXISTS "courses_difficulty_idx" ON "courses"("difficulty");
+-- Challenge content indexes
+CREATE INDEX IF NOT EXISTS "live_coding_challenges_isPublished_createdAt_idx" ON "live_coding_challenges"("isPublished", "createdAt");
+CREATE INDEX IF NOT EXISTS "bug_fix_challenges_language_published_createdAt_idx" ON "bug_fix_challenges"("language", "isPublished", "createdAt");
+CREATE INDEX IF NOT EXISTS "live_coding_challenges_tags_idx" ON "live_coding_challenges" USING GIN ("tags");
+CREATE INDEX IF NOT EXISTS "bug_fix_challenges_tags_idx" ON "bug_fix_challenges" USING GIN ("tags");
 
 -- ============================================
 -- 7. BİLGİLENDİRME
@@ -953,8 +1145,8 @@ CREATE INDEX IF NOT EXISTS "courses_difficulty_idx" ON "courses"("difficulty");
 DO $$
 BEGIN
     RAISE NOTICE 'Database schema created successfully.';
-    RAISE NOTICE 'Enums: UserRole, JobStatus, ApplicationStatus, WrongQuestionStatus, BadgeCategory, BadgeRarity, GoalType, GoalFrequency, LeaderboardPeriod, EducationType, ChatGroupRole, ChatGroupVisibility, ChatMessageType, ChatAttachmentType, FriendshipStatus, HackathonVisibility, HackathonPhase, HackathonApplicationStatus, HackathonTeamRole, HackathonTeamMemberStatus, HackathonSubmissionStatus';
-    RAISE NOTICE 'Tables: app_users, courses, quizzes, hackathons, quiz_attempts, interviews, interview_attempts, cv_templates, cvs, jobs, job_applications, freelancer_projects, freelancer_bids, career_plans, learning_paths, assistant_threads, wrong_questions, badges, user_badges, daily_goals, dashboard_goal_plans, leaderboard_entries, employer_comments, user_streaks, test_attempts, live_coding_attempts, bug_fix_attempts, hackaton_attempts, hackathon_applications, hackathon_teams, hackathon_team_members, hackathon_submissions, friendships, test_leaderboard_entries, live_coding_leaderboard_entries, bug_fix_leaderboard_entries, hackaton_leaderboard_entries, chat_groups, chat_group_memberships, chat_messages, chat_attachments, chat_message_receipts, posts, post_likes, post_comments, post_saves';
+    RAISE NOTICE 'Enums: UserRole, JobStatus, ApplicationStatus, WrongQuestionStatus, BadgeCategory, BadgeRarity, GoalType, GoalFrequency, LeaderboardPeriod, EducationType, ChatGroupRole, ChatGroupVisibility, ChatMessageType, ChatAttachmentType, FriendshipStatus, HackathonVisibility, HackathonPhase, HackathonApplicationStatus, HackathonTeamRole, HackathonTeamMemberStatus, HackathonSubmissionStatus, BadgeTier, RewardType';
+    RAISE NOTICE 'Tables: app_users, courses, quizzes, hackathons, quiz_attempts, interviews, interview_attempts, cv_templates, cvs, cv_uploads, jobs, job_applications, freelancer_projects, freelancer_bids, career_plans, learning_paths, assistant_threads, wrong_questions, badges, user_badges, daily_goals, dashboard_goal_plans, leaderboard_entries, employer_comments, user_streaks, test_attempts, live_coding_attempts, bug_fix_attempts, hackaton_attempts, gamification_events, point_transactions, user_balances, quests, quest_progress, leaderboard_snapshots, rewards, reward_redemptions, user_inventory, admin_audit_logs, hackathon_applications, hackathon_teams, hackathon_team_members, hackathon_submissions, friendships, test_leaderboard_entries, live_coding_leaderboard_entries, bug_fix_leaderboard_entries, hackaton_leaderboard_entries, chat_groups, chat_group_memberships, chat_messages, chat_attachments, chat_message_receipts, posts, post_likes, post_comments, post_saves, live_coding_challenges, bug_fix_challenges';
 END $$;
 
 COMMIT;

@@ -66,7 +66,8 @@ export function CascadingFilter({ onFilterChange }: CascadingFilterProps) {
       topic: selectedTopic || null,
       content: selectedContent || null,
     });
-  }, [selectedExpertise, selectedTopic, selectedContent, onFilterChange]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedExpertise, selectedTopic, selectedContent]);
 
   const fetchExpertises = async () => {
     try {

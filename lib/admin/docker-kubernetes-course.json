@@ -1,0 +1,1362 @@
+{
+  "overview": {
+    "description": "Docker ve Kubernetes, modern yazılım geliştirme ve deployment süreçlerinin temel taşlarıdır. Bu kapsamlı kurs ile containerization'dan orchestration'a kadar tüm konuları öğreneceksiniz. Production-ready uygulamaları containerize etme, Kubernetes cluster'ları yönetme ve modern DevOps pratiklerini uygulama becerileri kazanacaksınız.",
+    "estimatedDurationMinutes": 6750
+  },
+  "learningObjectives": [
+    "Docker containerization teknolojisini anlamak ve uygulamak",
+    "Dockerfile ve Docker Compose ile multi-container uygulamalar oluşturmak",
+    "Kubernetes mimarisini ve temel kavramlarını öğrenmek",
+    "Pod'lar, Service'ler ve Deployment'ları yönetmek",
+    "ConfigMap ve Secret'ları kullanarak uygulama yapılandırması yapmak",
+    "Ingress ile external trafik yönetimi yapmak",
+    "Helm ile package management ve deployment otomasyonu sağlamak",
+    "Monitoring, logging ve observability araçlarını kullanmak",
+    "Kubernetes güvenlik best practices uygulamak",
+    "CI/CD pipeline'larında container ve Kubernetes kullanmak"
+  ],
+  "prerequisites": [
+    "Temel Linux komut satırı bilgisi",
+    "Yazılım geliştirme temelleri",
+    "Network ve sistem mimarisi hakkında temel bilgi",
+    "Cloud computing kavramlarına aşinalık"
+  ],
+  "modules": [
+    {
+      "id": "module-01",
+      "title": "Module 1: Docker Temelleri",
+      "summary": "Docker'ın ne olduğu, containerization kavramı, Docker mimarisi ve temel komutlar hakkında kapsamlı bilgiler.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Docker ve containerization kavramlarını anlamak",
+        "Docker mimarisini öğrenmek",
+        "Docker temel komutlarını kullanmak",
+        "Image ve container kavramlarını anlamak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Docker Nedir?",
+          "href": "/education/lessons/docker-kubernetes/module-01/lesson-01",
+          "description": "Docker'ın tanımı, tarihçesi ve containerization kavramı"
+        },
+        {
+          "label": "Ders 2: Container vs Virtual Machine",
+          "href": "/education/lessons/docker-kubernetes/module-01/lesson-02",
+          "description": "Container ve VM arasındaki farklar ve avantajları"
+        },
+        {
+          "label": "Ders 3: Docker Mimarisi",
+          "href": "/education/lessons/docker-kubernetes/module-01/lesson-03",
+          "description": "Docker Engine, daemon, client ve registry yapısı"
+        },
+        {
+          "label": "Ders 4: Docker Kurulumu",
+          "href": "/education/lessons/docker-kubernetes/module-01/lesson-04",
+          "description": "Windows, Linux ve macOS'ta Docker kurulumu"
+        },
+        {
+          "label": "Ders 5: Docker Hub ve Registry",
+          "href": "/education/lessons/docker-kubernetes/module-01/lesson-05",
+          "description": "Docker Hub kullanımı ve private registry kurulumu"
+        },
+        {
+          "label": "Ders 6: İlk Container'ı Çalıştırma",
+          "href": "/education/lessons/docker-kubernetes/module-01/lesson-06",
+          "description": "docker run komutu ve temel container işlemleri"
+        },
+        {
+          "label": "Ders 7: Docker Image Yönetimi",
+          "href": "/education/lessons/docker-kubernetes/module-01/lesson-07",
+          "description": "Image pull, push, tag ve remove işlemleri"
+        },
+        {
+          "label": "Ders 8: Container Lifecycle",
+          "href": "/education/lessons/docker-kubernetes/module-01/lesson-08",
+          "description": "Container oluşturma, başlatma, durdurma ve silme"
+        },
+        {
+          "label": "Ders 9: Docker Temel Komutları",
+          "href": "/education/lessons/docker-kubernetes/module-01/lesson-09",
+          "description": "docker ps, logs, exec, inspect gibi temel komutlar"
+        },
+        {
+          "label": "Ders 10: Container İçinde Çalışma",
+          "href": "/education/lessons/docker-kubernetes/module-01/lesson-10",
+          "description": "docker exec ile container içine giriş ve komut çalıştırma"
+        },
+        {
+          "label": "Ders 11: Docker Network Temelleri",
+          "href": "/education/lessons/docker-kubernetes/module-01/lesson-11",
+          "description": "Docker network tipleri ve temel network yapılandırması"
+        },
+        {
+          "label": "Ders 12: Docker Volume Temelleri",
+          "href": "/education/lessons/docker-kubernetes/module-01/lesson-12",
+          "description": "Volume oluşturma ve container'lara bağlama"
+        },
+        {
+          "label": "Ders 13: Docker Desktop Kullanımı",
+          "href": "/education/lessons/docker-kubernetes/module-01/lesson-13",
+          "description": "Docker Desktop GUI ve temel özellikleri"
+        },
+        {
+          "label": "Ders 14: Docker Troubleshooting",
+          "href": "/education/lessons/docker-kubernetes/module-01/lesson-14",
+          "description": "Yaygın Docker sorunları ve çözüm yöntemleri"
+        },
+        {
+          "label": "Ders 15: Modül Özeti ve Değerlendirme",
+          "href": "/education/lessons/docker-kubernetes/module-01/lesson-15",
+          "description": "Modül kapsamında öğrenilenlerin özeti ve pratik uygulama"
+        }
+      ]
+    },
+    {
+      "id": "module-02",
+      "title": "Module 2: Dockerfile ve Image Oluşturma",
+      "summary": "Dockerfile yazma, image build etme, layer caching, multi-stage builds ve image optimizasyonu teknikleri.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Dockerfile syntax'ını öğrenmek",
+        "Kendi image'larınızı oluşturmak",
+        "Image optimizasyonu yapmak",
+        "Multi-stage builds kullanmak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Dockerfile Nedir?",
+          "href": "/education/lessons/docker-kubernetes/module-02/lesson-01",
+          "description": "Dockerfile kavramı ve temel yapısı"
+        },
+        {
+          "label": "Ders 2: Dockerfile Temel Komutları",
+          "href": "/education/lessons/docker-kubernetes/module-02/lesson-02",
+          "description": "FROM, RUN, COPY, ADD, WORKDIR komutları"
+        },
+        {
+          "label": "Ders 3: İlk Dockerfile'ı Yazma",
+          "href": "/education/lessons/docker-kubernetes/module-02/lesson-03",
+          "description": "Basit bir web uygulaması için Dockerfile oluşturma"
+        },
+        {
+          "label": "Ders 4: Image Build Etme",
+          "href": "/education/lessons/docker-kubernetes/module-02/lesson-04",
+          "description": "docker build komutu ve build süreci"
+        },
+        {
+          "label": "Ders 5: Layer Caching",
+          "href": "/education/lessons/docker-kubernetes/module-02/lesson-05",
+          "description": "Layer caching mekanizması ve optimizasyonu"
+        },
+        {
+          "label": "Ders 6: ENV ve ARG Kullanımı",
+          "href": "/education/lessons/docker-kubernetes/module-02/lesson-06",
+          "description": "Environment variable ve build argument'ları"
+        },
+        {
+          "label": "Ders 7: EXPOSE ve Port Yönetimi",
+          "href": "/education/lessons/docker-kubernetes/module-02/lesson-07",
+          "description": "Port mapping ve network yapılandırması"
+        },
+        {
+          "label": "Ders 8: CMD vs ENTRYPOINT",
+          "href": "/education/lessons/docker-kubernetes/module-02/lesson-08",
+          "description": "Container başlatma komutları arasındaki farklar"
+        },
+        {
+          "label": "Ders 9: Multi-stage Builds",
+          "href": "/education/lessons/docker-kubernetes/module-02/lesson-09",
+          "description": "Build ve runtime stage'lerini ayırma"
+        },
+        {
+          "label": "Ders 10: Image Size Optimizasyonu",
+          "href": "/education/lessons/docker-kubernetes/module-02/lesson-10",
+          "description": "Image boyutunu küçültme teknikleri"
+        },
+        {
+          "label": "Ders 11: .dockerignore Kullanımı",
+          "href": "/education/lessons/docker-kubernetes/module-02/lesson-11",
+          "description": "Build context'inden dosya hariç tutma"
+        },
+        {
+          "label": "Ders 12: Healthcheck Ekleme",
+          "href": "/education/lessons/docker-kubernetes/module-02/lesson-12",
+          "description": "Container sağlık kontrolü yapılandırması"
+        },
+        {
+          "label": "Ders 13: BuildKit ve Gelişmiş Özellikler",
+          "href": "/education/lessons/docker-kubernetes/module-02/lesson-13",
+          "description": "BuildKit ile gelişmiş build özellikleri"
+        },
+        {
+          "label": "Ders 14: Dockerfile Best Practices",
+          "href": "/education/lessons/docker-kubernetes/module-02/lesson-14",
+          "description": "Güvenlik, performans ve maintainability best practices"
+        },
+        {
+          "label": "Ders 15: Pratik Uygulama",
+          "href": "/education/lessons/docker-kubernetes/module-02/lesson-15",
+          "description": "Gerçek bir uygulama için optimize edilmiş Dockerfile oluşturma"
+        }
+      ]
+    },
+    {
+      "id": "module-03",
+      "title": "Module 3: Docker Compose",
+      "summary": "Multi-container uygulamaları yönetme, docker-compose.yml dosyası, service orchestration ve network yönetimi.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Docker Compose kavramını anlamak",
+        "docker-compose.yml dosyası yazmak",
+        "Multi-container uygulamaları yönetmek",
+        "Service'leri orchestrate etmek"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Docker Compose Nedir?",
+          "href": "/education/lessons/docker-kubernetes/module-03/lesson-01",
+          "description": "Docker Compose'un amacı ve kullanım alanları"
+        },
+        {
+          "label": "Ders 2: docker-compose.yml Yapısı",
+          "href": "/education/lessons/docker-kubernetes/module-03/lesson-02",
+          "description": "YAML formatı ve temel yapılandırma"
+        },
+        {
+          "label": "Ders 3: Service Tanımlama",
+          "href": "/education/lessons/docker-kubernetes/module-03/lesson-03",
+          "description": "Service'leri tanımlama ve yapılandırma"
+        },
+        {
+          "label": "Ders 4: Network Yönetimi",
+          "href": "/education/lessons/docker-kubernetes/module-03/lesson-04",
+          "description": "Custom network'ler ve service iletişimi"
+        },
+        {
+          "label": "Ders 5: Volume Yönetimi",
+          "href": "/education/lessons/docker-kubernetes/module-03/lesson-05",
+          "description": "Named volume'ler ve bind mount'lar"
+        },
+        {
+          "label": "Ders 6: Environment Variables",
+          "href": "/education/lessons/docker-kubernetes/module-03/lesson-06",
+          "description": ".env dosyası ve environment variable yönetimi"
+        },
+        {
+          "label": "Ders 7: Dependency ve Health Checks",
+          "href": "/education/lessons/docker-kubernetes/module-03/lesson-07",
+          "description": "Service bağımlılıkları ve başlatma sırası"
+        },
+        {
+          "label": "Ders 8: Scaling Services",
+          "href": "/education/lessons/docker-kubernetes/module-03/lesson-08",
+          "description": "docker-compose scale komutu ile servis ölçeklendirme"
+        },
+        {
+          "label": "Ders 9: Docker Compose Komutları",
+          "href": "/education/lessons/docker-kubernetes/module-03/lesson-09",
+          "description": "up, down, ps, logs, exec gibi komutlar"
+        },
+        {
+          "label": "Ders 10: Override Files",
+          "href": "/education/lessons/docker-kubernetes/module-03/lesson-10",
+          "description": "docker-compose.override.yml ile yapılandırma override"
+        },
+        {
+          "label": "Ders 11: Production Yapılandırması",
+          "href": "/education/lessons/docker-kubernetes/module-03/lesson-11",
+          "description": "Production ortamı için best practices"
+        },
+        {
+          "label": "Ders 12: Multi-Environment Setup",
+          "href": "/education/lessons/docker-kubernetes/module-03/lesson-12",
+          "description": "Development, staging ve production ortamları"
+        },
+        {
+          "label": "Ders 13: Docker Compose v2",
+          "href": "/education/lessons/docker-kubernetes/module-03/lesson-13",
+          "description": "Yeni Compose V2 özellikleri ve değişiklikleri"
+        },
+        {
+          "label": "Ders 14: Troubleshooting",
+          "href": "/education/lessons/docker-kubernetes/module-03/lesson-14",
+          "description": "Yaygın sorunlar ve çözüm yöntemleri"
+        },
+        {
+          "label": "Ders 15: Pratik Proje",
+          "href": "/education/lessons/docker-kubernetes/module-03/lesson-15",
+          "description": "Full-stack uygulama için docker-compose yapılandırması"
+        }
+      ]
+    },
+    {
+      "id": "module-04",
+      "title": "Module 4: Docker Network ve Storage",
+      "summary": "Docker network tipleri, custom network'ler, volume yönetimi, bind mounts ve storage driver'lar.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Docker network mimarisini anlamak",
+        "Farklı network tiplerini kullanmak",
+        "Volume ve storage yönetimi yapmak",
+        "Data persistence stratejileri uygulamak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Docker Network Mimarisi",
+          "href": "/education/lessons/docker-kubernetes/module-04/lesson-01",
+          "description": "Network driver'lar ve network yapısı"
+        },
+        {
+          "label": "Ders 2: Bridge Network",
+          "href": "/education/lessons/docker-kubernetes/module-04/lesson-02",
+          "description": "Default bridge network ve kullanımı"
+        },
+        {
+          "label": "Ders 3: Custom Network Oluşturma",
+          "href": "/education/lessons/docker-kubernetes/module-04/lesson-03",
+          "description": "User-defined network'ler ve avantajları"
+        },
+        {
+          "label": "Ders 4: Host ve None Network",
+          "href": "/education/lessons/docker-kubernetes/module-04/lesson-04",
+          "description": "Host ve none network driver'ları"
+        },
+        {
+          "label": "Ders 5: Overlay Network",
+          "href": "/education/lessons/docker-kubernetes/module-04/lesson-05",
+          "description": "Swarm mode'da overlay network kullanımı"
+        },
+        {
+          "label": "Ders 6: Macvlan Network",
+          "href": "/education/lessons/docker-kubernetes/module-04/lesson-06",
+          "description": "Macvlan ile container'lara direkt IP atama"
+        },
+        {
+          "label": "Ders 7: Docker Volume Tipleri",
+          "href": "/education/lessons/docker-kubernetes/module-04/lesson-07",
+          "description": "Named volume, anonymous volume ve bind mount"
+        },
+        {
+          "label": "Ders 8: Volume Oluşturma ve Yönetimi",
+          "href": "/education/lessons/docker-kubernetes/module-04/lesson-08",
+          "description": "Volume CRUD işlemleri ve yönetimi"
+        },
+        {
+          "label": "Ders 9: Bind Mount Kullanımı",
+          "href": "/education/lessons/docker-kubernetes/module-04/lesson-09",
+          "description": "Host dosya sistemini container'a bağlama"
+        },
+        {
+          "label": "Ders 10: Volume Driver'lar",
+          "href": "/education/lessons/docker-kubernetes/module-04/lesson-10",
+          "description": "Third-party volume driver'lar ve kullanımı"
+        },
+        {
+          "label": "Ders 11: Storage Driver'lar",
+          "href": "/education/lessons/docker-kubernetes/module-04/lesson-11",
+          "description": "overlay2, aufs, devicemapper gibi storage driver'lar"
+        },
+        {
+          "label": "Ders 12: Data Backup ve Restore",
+          "href": "/education/lessons/docker-kubernetes/module-04/lesson-12",
+          "description": "Volume backup stratejileri ve restore işlemleri"
+        },
+        {
+          "label": "Ders 13: Network Troubleshooting",
+          "href": "/education/lessons/docker-kubernetes/module-04/lesson-13",
+          "description": "Network sorunlarını teşhis etme ve çözme"
+        },
+        {
+          "label": "Ders 14: Storage Best Practices",
+          "href": "/education/lessons/docker-kubernetes/module-04/lesson-14",
+          "description": "Volume yönetimi için best practices"
+        },
+        {
+          "label": "Ders 15: Pratik Uygulama",
+          "href": "/education/lessons/docker-kubernetes/module-04/lesson-15",
+          "description": "Multi-container uygulama için network ve storage yapılandırması"
+        }
+      ]
+    },
+    {
+      "id": "module-05",
+      "title": "Module 5: Kubernetes Temelleri",
+      "summary": "Kubernetes mimarisi, cluster yapısı, master ve worker node'lar, kubectl komutları ve temel kavramlar.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Kubernetes mimarisini anlamak",
+        "Cluster yapısını öğrenmek",
+        "kubectl ile temel işlemler yapmak",
+        "Kubernetes nesnelerini tanımak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Kubernetes Nedir?",
+          "href": "/education/lessons/docker-kubernetes/module-05/lesson-01",
+          "description": "Kubernetes'in tanımı, tarihçesi ve kullanım alanları"
+        },
+        {
+          "label": "Ders 2: Container Orchestration",
+          "href": "/education/lessons/docker-kubernetes/module-05/lesson-02",
+          "description": "Orchestration kavramı ve Kubernetes'in rolü"
+        },
+        {
+          "label": "Ders 3: Kubernetes Mimarisi",
+          "href": "/education/lessons/docker-kubernetes/module-05/lesson-03",
+          "description": "Control plane, worker node'lar ve component'ler"
+        },
+        {
+          "label": "Ders 4: Cluster Yapısı",
+          "href": "/education/lessons/docker-kubernetes/module-05/lesson-04",
+          "description": "Master ve worker node'ların görevleri"
+        },
+        {
+          "label": "Ders 5: Kubernetes Kurulumu",
+          "href": "/education/lessons/docker-kubernetes/module-05/lesson-05",
+          "description": "Minikube, kind ve kubeadm ile kurulum"
+        },
+        {
+          "label": "Ders 6: kubectl Kurulumu ve Yapılandırması",
+          "href": "/education/lessons/docker-kubernetes/module-05/lesson-06",
+          "description": "kubectl CLI aracının kurulumu ve kubeconfig"
+        },
+        {
+          "label": "Ders 7: kubectl Temel Komutları",
+          "href": "/education/lessons/docker-kubernetes/module-05/lesson-07",
+          "description": "get, create, delete, describe, logs komutları"
+        },
+        {
+          "label": "Ders 8: Kubernetes Namespace",
+          "href": "/education/lessons/docker-kubernetes/module-05/lesson-08",
+          "description": "Namespace kavramı ve kullanımı"
+        },
+        {
+          "label": "Ders 9: Context ve Config Yönetimi",
+          "href": "/education/lessons/docker-kubernetes/module-05/lesson-09",
+          "description": "Multi-cluster yönetimi ve context switching"
+        },
+        {
+          "label": "Ders 10: Kubernetes API",
+          "href": "/education/lessons/docker-kubernetes/module-05/lesson-10",
+          "description": "RESTful API ve Kubernetes API server"
+        },
+        {
+          "label": "Ders 11: YAML ve JSON Formatları",
+          "href": "/education/lessons/docker-kubernetes/module-05/lesson-11",
+          "description": "Kubernetes manifest dosyaları ve formatları"
+        },
+        {
+          "label": "Ders 12: Kubernetes Object Model",
+          "href": "/education/lessons/docker-kubernetes/module-05/lesson-12",
+          "description": "Resource, object ve API version kavramları"
+        },
+        {
+          "label": "Ders 13: Label ve Selector",
+          "href": "/education/lessons/docker-kubernetes/module-05/lesson-13",
+          "description": "Label'lar ile resource organizasyonu"
+        },
+        {
+          "label": "Ders 14: Kubernetes Dashboard",
+          "href": "/education/lessons/docker-kubernetes/module-05/lesson-14",
+          "description": "Web UI ile cluster yönetimi"
+        },
+        {
+          "label": "Ders 15: Modül Özeti",
+          "href": "/education/lessons/docker-kubernetes/module-05/lesson-15",
+          "description": "Temel kavramların özeti ve pratik uygulama"
+        }
+      ]
+    },
+    {
+      "id": "module-06",
+      "title": "Module 6: Pod'lar",
+      "summary": "Pod kavramı, pod lifecycle, container'lar, init container'lar, resource limits ve pod yönetimi.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Pod kavramını anlamak",
+        "Pod oluşturma ve yönetme",
+        "Multi-container pod'ları kullanmak",
+        "Resource management yapmak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Pod Nedir?",
+          "href": "/education/lessons/docker-kubernetes/module-06/lesson-01",
+          "description": "Pod kavramı ve Kubernetes'teki rolü"
+        },
+        {
+          "label": "Ders 2: Pod Lifecycle",
+          "href": "/education/lessons/docker-kubernetes/module-06/lesson-02",
+          "description": "Pod state'leri ve lifecycle event'leri"
+        },
+        {
+          "label": "Ders 3: Pod Manifest Oluşturma",
+          "href": "/education/lessons/docker-kubernetes/module-06/lesson-03",
+          "description": "YAML ile pod tanımlama"
+        },
+        {
+          "label": "Ders 4: Container Image ve Pull Policy",
+          "href": "/education/lessons/docker-kubernetes/module-06/lesson-04",
+          "description": "Image pull stratejileri ve policy'ler"
+        },
+        {
+          "label": "Ders 5: Environment Variables",
+          "href": "/education/lessons/docker-kubernetes/module-06/lesson-05",
+          "description": "Pod içinde environment variable kullanımı"
+        },
+        {
+          "label": "Ders 6: Resource Requests ve Limits",
+          "href": "/education/lessons/docker-kubernetes/module-06/lesson-06",
+          "description": "CPU ve memory resource yönetimi"
+        },
+        {
+          "label": "Ders 7: Multi-Container Pods",
+          "href": "/education/lessons/docker-kubernetes/module-06/lesson-07",
+          "description": "Sidecar pattern ve multi-container pod'lar"
+        },
+        {
+          "label": "Ders 8: Init Containers",
+          "href": "/education/lessons/docker-kubernetes/module-06/lesson-08",
+          "description": "Init container'lar ile initialization logic"
+        },
+        {
+          "label": "Ders 9: Pod Health Checks",
+          "href": "/education/lessons/docker-kubernetes/module-06/lesson-09",
+          "description": "Liveness, readiness ve startup probe'lar"
+        },
+        {
+          "label": "Ders 10: Volume Mounts in Pods",
+          "href": "/education/lessons/docker-kubernetes/module-06/lesson-10",
+          "description": "Pod içinde volume kullanımı"
+        },
+        {
+          "label": "Ders 11: Security Context",
+          "href": "/education/lessons/docker-kubernetes/module-06/lesson-11",
+          "description": "Pod ve container security context yapılandırması"
+        },
+        {
+          "label": "Ders 12: Pod Disruption Budget",
+          "href": "/education/lessons/docker-kubernetes/module-06/lesson-12",
+          "description": "Voluntary disruption'ları yönetme"
+        },
+        {
+          "label": "Ders 13: Pod Debugging",
+          "href": "/education/lessons/docker-kubernetes/module-06/lesson-13",
+          "description": "Pod sorunlarını teşhis etme ve çözme"
+        },
+        {
+          "label": "Ders 14: Pod Best Practices",
+          "href": "/education/lessons/docker-kubernetes/module-06/lesson-14",
+          "description": "Pod tasarımı için best practices"
+        },
+        {
+          "label": "Ders 15: Pratik Uygulama",
+          "href": "/education/lessons/docker-kubernetes/module-06/lesson-15",
+          "description": "Production-ready pod yapılandırması oluşturma"
+        }
+      ]
+    },
+    {
+      "id": "module-07",
+      "title": "Module 7: Deployment'lar",
+      "summary": "Deployment controller, replica management, rolling updates, rollback, scaling ve deployment stratejileri.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Deployment kavramını anlamak",
+        "Replica management yapmak",
+        "Rolling update stratejileri uygulamak",
+        "Scaling işlemleri yapmak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Deployment Nedir?",
+          "href": "/education/lessons/docker-kubernetes/module-07/lesson-01",
+          "description": "Deployment controller ve kullanım alanları"
+        },
+        {
+          "label": "Ders 2: Deployment Oluşturma",
+          "href": "/education/lessons/docker-kubernetes/module-07/lesson-02",
+          "description": "YAML ile deployment manifest oluşturma"
+        },
+        {
+          "label": "Ders 3: ReplicaSet ve Replicas",
+          "href": "/education/lessons/docker-kubernetes/module-07/lesson-03",
+          "description": "Replica management ve desired state"
+        },
+        {
+          "label": "Ders 4: Deployment Scaling",
+          "href": "/education/lessons/docker-kubernetes/module-07/lesson-04",
+          "description": "kubectl scale ve horizontal scaling"
+        },
+        {
+          "label": "Ders 5: Rolling Update",
+          "href": "/education/lessons/docker-kubernetes/module-07/lesson-05",
+          "description": "Zero-downtime deployment stratejisi"
+        },
+        {
+          "label": "Ders 6: Update Strategy",
+          "href": "/education/lessons/docker-kubernetes/module-07/lesson-06",
+          "description": "RollingUpdate vs Recreate stratejileri"
+        },
+        {
+          "label": "Ders 7: Rollback İşlemleri",
+          "href": "/education/lessons/docker-kubernetes/module-07/lesson-07",
+          "description": "kubectl rollout undo ile geri alma"
+        },
+        {
+          "label": "Ders 8: Deployment History",
+          "href": "/education/lessons/docker-kubernetes/module-07/lesson-08",
+          "description": "Rollout history ve revision yönetimi"
+        },
+        {
+          "label": "Ders 9: Pause ve Resume",
+          "href": "/education/lessons/docker-kubernetes/module-07/lesson-09",
+          "description": "Deployment'ı geçici olarak durdurma"
+        },
+        {
+          "label": "Ders 10: Max Surge ve Max Unavailable",
+          "href": "/education/lessons/docker-kubernetes/module-07/lesson-10",
+          "description": "Rolling update parametreleri"
+        },
+        {
+          "label": "Ders 11: Deployment Status",
+          "href": "/education/lessons/docker-kubernetes/module-07/lesson-11",
+          "description": "Deployment durumunu izleme ve kontrol etme"
+        },
+        {
+          "label": "Ders 12: Blue-Green Deployment",
+          "href": "/education/lessons/docker-kubernetes/module-07/lesson-12",
+          "description": "Blue-green deployment pattern'i"
+        },
+        {
+          "label": "Ders 13: Canary Deployment",
+          "href": "/education/lessons/docker-kubernetes/module-07/lesson-13",
+          "description": "Canary deployment stratejisi"
+        },
+        {
+          "label": "Ders 14: Deployment Best Practices",
+          "href": "/education/lessons/docker-kubernetes/module-07/lesson-14",
+          "description": "Production deployment'lar için best practices"
+        },
+        {
+          "label": "Ders 15: Pratik Uygulama",
+          "href": "/education/lessons/docker-kubernetes/module-07/lesson-15",
+          "description": "Gerçek bir uygulama için deployment yapılandırması"
+        }
+      ]
+    },
+    {
+      "id": "module-08",
+      "title": "Module 8: Service'ler",
+      "summary": "Service kavramı, service tipleri (ClusterIP, NodePort, LoadBalancer), service discovery ve load balancing.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Service kavramını anlamak",
+        "Farklı service tiplerini kullanmak",
+        "Service discovery yapmak",
+        "Load balancing yapılandırması yapmak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Service Nedir?",
+          "href": "/education/lessons/docker-kubernetes/module-08/lesson-01",
+          "description": "Service kavramı ve pod iletişimi"
+        },
+        {
+          "label": "Ders 2: Service Discovery",
+          "href": "/education/lessons/docker-kubernetes/module-08/lesson-02",
+          "description": "DNS-based service discovery mekanizması"
+        },
+        {
+          "label": "Ders 3: ClusterIP Service",
+          "href": "/education/lessons/docker-kubernetes/module-08/lesson-03",
+          "description": "Internal service ve cluster içi erişim"
+        },
+        {
+          "label": "Ders 4: NodePort Service",
+          "href": "/education/lessons/docker-kubernetes/module-08/lesson-04",
+          "description": "Node port ile external erişim"
+        },
+        {
+          "label": "Ders 5: LoadBalancer Service",
+          "href": "/education/lessons/docker-kubernetes/module-08/lesson-05",
+          "description": "Cloud provider load balancer entegrasyonu"
+        },
+        {
+          "label": "Ders 6: Service Selector ve Endpoints",
+          "href": "/education/lessons/docker-kubernetes/module-08/lesson-06",
+          "description": "Label selector ile pod eşleştirme"
+        },
+        {
+          "label": "Ders 7: Headless Service",
+          "href": "/education/lessons/docker-kubernetes/module-08/lesson-07",
+          "description": "StatefulSet'ler için headless service"
+        },
+        {
+          "label": "Ders 8: ExternalName Service",
+          "href": "/education/lessons/docker-kubernetes/module-08/lesson-08",
+          "description": "External service'leri Kubernetes'e bağlama"
+        },
+        {
+          "label": "Ders 9: Session Affinity",
+          "href": "/education/lessons/docker-kubernetes/module-08/lesson-09",
+          "description": "ClientIP-based session affinity"
+        },
+        {
+          "label": "Ders 10: Service Port Yapılandırması",
+          "href": "/education/lessons/docker-kubernetes/module-08/lesson-10",
+          "description": "Port, targetPort ve nodePort yapılandırması"
+        },
+        {
+          "label": "Ders 11: kube-proxy ve iptables",
+          "href": "/education/lessons/docker-kubernetes/module-08/lesson-11",
+          "description": "Service proxy mekanizması"
+        },
+        {
+          "label": "Ders 12: Service Troubleshooting",
+          "href": "/education/lessons/docker-kubernetes/module-08/lesson-12",
+          "description": "Service bağlantı sorunlarını çözme"
+        },
+        {
+          "label": "Ders 13: Multi-Port Services",
+          "href": "/education/lessons/docker-kubernetes/module-08/lesson-13",
+          "description": "Birden fazla port expose etme"
+        },
+        {
+          "label": "Ders 14: Service Best Practices",
+          "href": "/education/lessons/docker-kubernetes/module-08/lesson-14",
+          "description": "Service tasarımı için best practices"
+        },
+        {
+          "label": "Ders 15: Pratik Uygulama",
+          "href": "/education/lessons/docker-kubernetes/module-08/lesson-15",
+          "description": "Microservice mimarisi için service yapılandırması"
+        }
+      ]
+    },
+    {
+      "id": "module-09",
+      "title": "Module 9: ConfigMap ve Secret",
+      "summary": "Yapılandırma yönetimi, ConfigMap oluşturma ve kullanma, Secret yönetimi ve güvenli bilgi saklama.",
+      "durationMinutes": 450,
+      "objectives": [
+        "ConfigMap kavramını anlamak",
+        "Secret yönetimi yapmak",
+        "Yapılandırma dosyalarını yönetmek",
+        "Güvenli bilgi saklama stratejileri uygulamak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: ConfigMap Nedir?",
+          "href": "/education/lessons/docker-kubernetes/module-09/lesson-01",
+          "description": "ConfigMap kavramı ve kullanım alanları"
+        },
+        {
+          "label": "Ders 2: ConfigMap Oluşturma",
+          "href": "/education/lessons/docker-kubernetes/module-09/lesson-02",
+          "description": "YAML ve kubectl ile ConfigMap oluşturma"
+        },
+        {
+          "label": "Ders 3: ConfigMap'i Pod'a Bağlama",
+          "href": "/education/lessons/docker-kubernetes/module-09/lesson-03",
+          "description": "Volume ve environment variable olarak kullanım"
+        },
+        {
+          "label": "Ders 4: ConfigMap Data Yönetimi",
+          "href": "/education/lessons/docker-kubernetes/module-09/lesson-04",
+          "description": "Key-value pair'ler ve dosya içeriği"
+        },
+        {
+          "label": "Ders 5: ConfigMap Hot Reload",
+          "href": "/education/lessons/docker-kubernetes/module-09/lesson-05",
+          "description": "ConfigMap değişikliklerini pod'a yansıtma"
+        },
+        {
+          "label": "Ders 6: Secret Nedir?",
+          "href": "/education/lessons/docker-kubernetes/module-09/lesson-06",
+          "description": "Secret kavramı ve güvenlik"
+        },
+        {
+          "label": "Ders 7: Secret Oluşturma",
+          "href": "/education/lessons/docker-kubernetes/module-09/lesson-07",
+          "description": "Opaque, docker-registry ve tls secret'lar"
+        },
+        {
+          "label": "Ders 8: Secret'i Pod'a Bağlama",
+          "href": "/education/lessons/docker-kubernetes/module-09/lesson-08",
+          "description": "Secret'ları volume ve env var olarak kullanma"
+        },
+        {
+          "label": "Ders 9: Base64 Encoding",
+          "href": "/education/lessons/docker-kubernetes/module-09/lesson-09",
+          "description": "Secret encoding ve decoding işlemleri"
+        },
+        {
+          "label": "Ders 10: External Secret Management",
+          "href": "/education/lessons/docker-kubernetes/module-09/lesson-10",
+          "description": "External secret operator ve Vault entegrasyonu"
+        },
+        {
+          "label": "Ders 11: ConfigMap ve Secret Best Practices",
+          "href": "/education/lessons/docker-kubernetes/module-09/lesson-11",
+          "description": "Güvenlik ve yönetim best practices"
+        },
+        {
+          "label": "Ders 12: Immutable ConfigMap ve Secret",
+          "href": "/education/lessons/docker-kubernetes/module-09/lesson-12",
+          "description": "Immutable resource'lar ve kullanım alanları"
+        },
+        {
+          "label": "Ders 13: ConfigMap ve Secret Troubleshooting",
+          "href": "/education/lessons/docker-kubernetes/module-09/lesson-13",
+          "description": "Yaygın sorunlar ve çözüm yöntemleri"
+        },
+        {
+          "label": "Ders 14: Multi-Environment Config",
+          "href": "/education/lessons/docker-kubernetes/module-09/lesson-14",
+          "description": "Farklı ortamlar için yapılandırma yönetimi"
+        },
+        {
+          "label": "Ders 15: Pratik Uygulama",
+          "href": "/education/lessons/docker-kubernetes/module-09/lesson-15",
+          "description": "Production uygulama için config ve secret yönetimi"
+        }
+      ]
+    },
+    {
+      "id": "module-10",
+      "title": "Module 10: Ingress",
+      "summary": "Ingress controller, ingress resource, path-based routing, TLS termination ve external trafik yönetimi.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Ingress kavramını anlamak",
+        "Ingress controller kurulumu yapmak",
+        "Path-based routing yapılandırması yapmak",
+        "TLS/SSL sertifikaları yönetmek"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Ingress Nedir?",
+          "href": "/education/lessons/docker-kubernetes/module-10/lesson-01",
+          "description": "Ingress kavramı ve service'lerden farkı"
+        },
+        {
+          "label": "Ders 2: Ingress Controller",
+          "href": "/education/lessons/docker-kubernetes/module-10/lesson-02",
+          "description": "NGINX, Traefik gibi ingress controller'lar"
+        },
+        {
+          "label": "Ders 3: NGINX Ingress Controller Kurulumu",
+          "href": "/education/lessons/docker-kubernetes/module-10/lesson-03",
+          "description": "NGINX ingress controller kurulumu"
+        },
+        {
+          "label": "Ders 4: Ingress Resource Oluşturma",
+          "href": "/education/lessons/docker-kubernetes/module-10/lesson-04",
+          "description": "YAML ile ingress manifest oluşturma"
+        },
+        {
+          "label": "Ders 5: Path-based Routing",
+          "href": "/education/lessons/docker-kubernetes/module-10/lesson-05",
+          "description": "URL path'lerine göre routing"
+        },
+        {
+          "label": "Ders 6: Host-based Routing",
+          "href": "/education/lessons/docker-kubernetes/module-10/lesson-06",
+          "description": "Hostname'lere göre routing"
+        },
+        {
+          "label": "Ders 7: TLS Termination",
+          "href": "/education/lessons/docker-kubernetes/module-10/lesson-07",
+          "description": "HTTPS yapılandırması ve sertifika yönetimi"
+        },
+        {
+          "label": "Ders 8: Ingress Annotations",
+          "href": "/education/lessons/docker-kubernetes/module-10/lesson-08",
+          "description": "Controller-specific annotations kullanımı"
+        },
+        {
+          "label": "Ders 9: Rewrite Rules",
+          "href": "/education/lessons/docker-kubernetes/module-10/lesson-09",
+          "description": "URL rewrite ve redirect kuralları"
+        },
+        {
+          "label": "Ders 10: Rate Limiting",
+          "href": "/education/lessons/docker-kubernetes/module-10/lesson-10",
+          "description": "Ingress seviyesinde rate limiting"
+        },
+        {
+          "label": "Ders 11: SSL Passthrough",
+          "href": "/education/lessons/docker-kubernetes/module-10/lesson-11",
+          "description": "End-to-end SSL encryption"
+        },
+        {
+          "label": "Ders 12: Ingress Class",
+          "href": "/education/lessons/docker-kubernetes/module-10/lesson-12",
+          "description": "Multiple ingress controller yönetimi"
+        },
+        {
+          "label": "Ders 13: Cert-Manager ile Otomatik Sertifika",
+          "href": "/education/lessons/docker-kubernetes/module-10/lesson-13",
+          "description": "Let's Encrypt ile otomatik TLS sertifikaları"
+        },
+        {
+          "label": "Ders 14: Ingress Best Practices",
+          "href": "/education/lessons/docker-kubernetes/module-10/lesson-14",
+          "description": "Production ingress yapılandırması için best practices"
+        },
+        {
+          "label": "Ders 15: Pratik Uygulama",
+          "href": "/education/lessons/docker-kubernetes/module-10/lesson-15",
+          "description": "Multi-service uygulama için ingress yapılandırması"
+        }
+      ]
+    },
+    {
+      "id": "module-11",
+      "title": "Module 11: StatefulSet ve DaemonSet",
+      "summary": "Stateful uygulamalar için StatefulSet, cluster-wide daemon'lar için DaemonSet ve kullanım senaryoları.",
+      "durationMinutes": 450,
+      "objectives": [
+        "StatefulSet kavramını anlamak",
+        "DaemonSet kullanımını öğrenmek",
+        "Stateful uygulamaları yönetmek",
+        "Cluster-wide daemon'ları yönetmek"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: StatefulSet Nedir?",
+          "href": "/education/lessons/docker-kubernetes/module-11/lesson-01",
+          "description": "StatefulSet kavramı ve Deployment'tan farkları"
+        },
+        {
+          "label": "Ders 2: StatefulSet Oluşturma",
+          "href": "/education/lessons/docker-kubernetes/module-11/lesson-02",
+          "description": "YAML ile StatefulSet manifest oluşturma"
+        },
+        {
+          "label": "Ders 3: Ordered Pod Management",
+          "href": "/education/lessons/docker-kubernetes/module-11/lesson-03",
+          "description": "Pod'ların sıralı oluşturulması ve silinmesi"
+        },
+        {
+          "label": "Ders 4: Persistent Volume Claims",
+          "href": "/education/lessons/docker-kubernetes/module-11/lesson-04",
+          "description": "StatefulSet için persistent storage"
+        },
+        {
+          "label": "Ders 5: Stable Network Identity",
+          "href": "/education/lessons/docker-kubernetes/module-11/lesson-05",
+          "description": "Stable hostname ve DNS yapısı"
+        },
+        {
+          "label": "Ders 6: StatefulSet Scaling",
+          "href": "/education/lessons/docker-kubernetes/module-11/lesson-06",
+          "description": "StatefulSet ölçeklendirme stratejileri"
+        },
+        {
+          "label": "Ders 7: StatefulSet Update Strategy",
+          "href": "/education/lessons/docker-kubernetes/module-11/lesson-07",
+          "description": "Rolling update ve on-delete stratejileri"
+        },
+        {
+          "label": "Ders 8: DaemonSet Nedir?",
+          "href": "/education/lessons/docker-kubernetes/module-11/lesson-08",
+          "description": "DaemonSet kavramı ve kullanım alanları"
+        },
+        {
+          "label": "Ders 9: DaemonSet Oluşturma",
+          "href": "/education/lessons/docker-kubernetes/module-11/lesson-09",
+          "description": "YAML ile DaemonSet manifest oluşturma"
+        },
+        {
+          "label": "Ders 10: Node Selector ve Taints",
+          "href": "/education/lessons/docker-kubernetes/module-11/lesson-10",
+          "description": "DaemonSet'in belirli node'larda çalışması"
+        },
+        {
+          "label": "Ders 11: DaemonSet Update Strategy",
+          "href": "/education/lessons/docker-kubernetes/module-11/lesson-11",
+          "description": "Rolling update ve on-delete stratejileri"
+        },
+        {
+          "label": "Ders 12: StatefulSet Kullanım Senaryoları",
+          "href": "/education/lessons/docker-kubernetes/module-11/lesson-12",
+          "description": "Database, message queue gibi stateful uygulamalar"
+        },
+        {
+          "label": "Ders 13: DaemonSet Kullanım Senaryoları",
+          "href": "/education/lessons/docker-kubernetes/module-11/lesson-13",
+          "description": "Logging, monitoring, network plugin'ler"
+        },
+        {
+          "label": "Ders 14: Best Practices",
+          "href": "/education/lessons/docker-kubernetes/module-11/lesson-14",
+          "description": "StatefulSet ve DaemonSet için best practices"
+        },
+        {
+          "label": "Ders 15: Pratik Uygulama",
+          "href": "/education/lessons/docker-kubernetes/module-11/lesson-15",
+          "description": "Database ve logging agent için yapılandırma"
+        }
+      ]
+    },
+    {
+      "id": "module-12",
+      "title": "Module 12: Helm",
+      "summary": "Helm package manager, chart oluşturma, values yönetimi, Helm repository ve deployment otomasyonu.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Helm kavramını anlamak",
+        "Helm chart'ları kullanmak",
+        "Kendi chart'larınızı oluşturmak",
+        "Helm ile deployment otomasyonu yapmak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Helm Nedir?",
+          "href": "/education/lessons/docker-kubernetes/module-12/lesson-01",
+          "description": "Helm package manager ve Kubernetes'teki rolü"
+        },
+        {
+          "label": "Ders 2: Helm Kurulumu",
+          "href": "/education/lessons/docker-kubernetes/module-12/lesson-02",
+          "description": "Helm CLI kurulumu ve yapılandırması"
+        },
+        {
+          "label": "Ders 3: Helm Chart Yapısı",
+          "href": "/education/lessons/docker-kubernetes/module-12/lesson-03",
+          "description": "Chart dizin yapısı ve dosyalar"
+        },
+        {
+          "label": "Ders 4: Helm Chart Kullanımı",
+          "href": "/education/lessons/docker-kubernetes/module-12/lesson-04",
+          "description": "helm install, upgrade, uninstall komutları"
+        },
+        {
+          "label": "Ders 5: Values Dosyası",
+          "href": "/education/lessons/docker-kubernetes/module-12/lesson-05",
+          "description": "values.yaml ile yapılandırma yönetimi"
+        },
+        {
+          "label": "Ders 6: Template Engine",
+          "href": "/education/lessons/docker-kubernetes/module-12/lesson-06",
+          "description": "Go template syntax ve kullanımı"
+        },
+        {
+          "label": "Ders 7: Chart Dependencies",
+          "href": "/education/lessons/docker-kubernetes/module-12/lesson-07",
+          "description": "Sub-chart'lar ve dependency yönetimi"
+        },
+        {
+          "label": "Ders 8: Helm Repository",
+          "href": "/education/lessons/docker-kubernetes/module-12/lesson-08",
+          "description": "Chart repository oluşturma ve yönetimi"
+        },
+        {
+          "label": "Ders 9: Helm Hooks",
+          "href": "/education/lessons/docker-kubernetes/module-12/lesson-09",
+          "description": "Pre-install, post-install gibi hook'lar"
+        },
+        {
+          "label": "Ders 10: Chart Testing",
+          "href": "/education/lessons/docker-kubernetes/module-12/lesson-10",
+          "description": "helm test ve chart validation"
+        },
+        {
+          "label": "Ders 11: Helm Secrets",
+          "href": "/education/lessons/docker-kubernetes/module-12/lesson-11",
+          "description": "Sealed Secrets ve secret yönetimi"
+        },
+        {
+          "label": "Ders 12: Helm 3 vs Helm 2",
+          "href": "/education/lessons/docker-kubernetes/module-12/lesson-12",
+          "description": "Helm versiyonları arasındaki farklar"
+        },
+        {
+          "label": "Ders 13: Chart Best Practices",
+          "href": "/education/lessons/docker-kubernetes/module-12/lesson-13",
+          "description": "Chart tasarımı için best practices"
+        },
+        {
+          "label": "Ders 14: Helm Operator",
+          "href": "/education/lessons/docker-kubernetes/module-12/lesson-14",
+          "description": "Operator pattern ile Helm kullanımı"
+        },
+        {
+          "label": "Ders 15: Pratik Uygulama",
+          "href": "/education/lessons/docker-kubernetes/module-12/lesson-15",
+          "description": "Production-ready Helm chart oluşturma"
+        }
+      ]
+    },
+    {
+      "id": "module-13",
+      "title": "Module 13: Monitoring ve Observability",
+      "summary": "Kubernetes monitoring, Prometheus, Grafana, logging, metrics collection ve observability araçları.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Kubernetes monitoring kavramını anlamak",
+        "Prometheus ve Grafana kurulumu yapmak",
+        "Logging stratejileri uygulamak",
+        "Metrics collection ve alerting yapılandırması yapmak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Monitoring Temelleri",
+          "href": "/education/lessons/docker-kubernetes/module-13/lesson-01",
+          "description": "Monitoring, metrics, logging ve tracing kavramları"
+        },
+        {
+          "label": "Ders 2: Prometheus Nedir?",
+          "href": "/education/lessons/docker-kubernetes/module-13/lesson-02",
+          "description": "Prometheus monitoring sistemi ve mimarisi"
+        },
+        {
+          "label": "Ders 3: Prometheus Kurulumu",
+          "href": "/education/lessons/docker-kubernetes/module-13/lesson-03",
+          "description": "Kubernetes'te Prometheus deployment'ı"
+        },
+        {
+          "label": "Ders 4: ServiceMonitor ve PodMonitor",
+          "href": "/education/lessons/docker-kubernetes/module-13/lesson-04",
+          "description": "Prometheus Operator ile metric scraping"
+        },
+        {
+          "label": "Ders 5: Grafana Kurulumu",
+          "href": "/education/lessons/docker-kubernetes/module-13/lesson-05",
+          "description": "Grafana dashboard ve visualization"
+        },
+        {
+          "label": "Ders 6: Kubernetes Metrics",
+          "href": "/education/lessons/docker-kubernetes/module-13/lesson-06",
+          "description": "cAdvisor, kube-state-metrics ve node exporter"
+        },
+        {
+          "label": "Ders 7: Custom Metrics",
+          "href": "/education/lessons/docker-kubernetes/module-13/lesson-07",
+          "description": "Application-level custom metrics oluşturma"
+        },
+        {
+          "label": "Ders 8: Alerting Rules",
+          "href": "/education/lessons/docker-kubernetes/module-13/lesson-08",
+          "description": "Prometheus alerting rules ve Alertmanager"
+        },
+        {
+          "label": "Ders 9: Logging Stratejileri",
+          "href": "/education/lessons/docker-kubernetes/module-13/lesson-09",
+          "description": "Centralized logging ve log aggregation"
+        },
+        {
+          "label": "Ders 10: EFK Stack",
+          "href": "/education/lessons/docker-kubernetes/module-13/lesson-10",
+          "description": "Elasticsearch, Fluentd, Kibana kurulumu"
+        },
+        {
+          "label": "Ders 11: Loki ve Promtail",
+          "href": "/education/lessons/docker-kubernetes/module-13/lesson-11",
+          "description": "Grafana Loki ile log aggregation"
+        },
+        {
+          "label": "Ders 12: Distributed Tracing",
+          "href": "/education/lessons/docker-kubernetes/module-13/lesson-12",
+          "description": "Jaeger ve OpenTelemetry ile tracing"
+        },
+        {
+          "label": "Ders 13: APM Tools",
+          "href": "/education/lessons/docker-kubernetes/module-13/lesson-13",
+          "description": "Application Performance Monitoring araçları"
+        },
+        {
+          "label": "Ders 14: Monitoring Best Practices",
+          "href": "/education/lessons/docker-kubernetes/module-13/lesson-14",
+          "description": "Production monitoring için best practices"
+        },
+        {
+          "label": "Ders 15: Pratik Uygulama",
+          "href": "/education/lessons/docker-kubernetes/module-13/lesson-15",
+          "description": "Full observability stack kurulumu"
+        }
+      ]
+    },
+    {
+      "id": "module-14",
+      "title": "Module 14: Security",
+      "summary": "Kubernetes güvenlik, RBAC, network policies, pod security policies, image scanning ve security best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Kubernetes güvenlik modelini anlamak",
+        "RBAC yapılandırması yapmak",
+        "Network policies uygulamak",
+        "Security best practices uygulamak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Kubernetes Security Model",
+          "href": "/education/lessons/docker-kubernetes/module-14/lesson-01",
+          "description": "Güvenlik katmanları ve defense in depth"
+        },
+        {
+          "label": "Ders 2: RBAC Nedir?",
+          "href": "/education/lessons/docker-kubernetes/module-14/lesson-02",
+          "description": "Role-Based Access Control kavramı"
+        },
+        {
+          "label": "Ders 3: Role ve RoleBinding",
+          "href": "/education/lessons/docker-kubernetes/module-14/lesson-03",
+          "description": "Namespace-level RBAC yapılandırması"
+        },
+        {
+          "label": "Ders 4: ClusterRole ve ClusterRoleBinding",
+          "href": "/education/lessons/docker-kubernetes/module-14/lesson-04",
+          "description": "Cluster-level RBAC yapılandırması"
+        },
+        {
+          "label": "Ders 5: Service Account",
+          "href": "/education/lessons/docker-kubernetes/module-14/lesson-05",
+          "description": "Service account'lar ve pod authentication"
+        },
+        {
+          "label": "Ders 6: Network Policies",
+          "href": "/education/lessons/docker-kubernetes/module-14/lesson-06",
+          "description": "Network isolation ve traffic control"
+        },
+        {
+          "label": "Ders 7: Pod Security Policies",
+          "href": "/education/lessons/docker-kubernetes/module-14/lesson-07",
+          "description": "Pod security context ve policy enforcement"
+        },
+        {
+          "label": "Ders 8: Pod Security Standards",
+          "href": "/education/lessons/docker-kubernetes/module-14/lesson-08",
+          "description": "Pod Security Admission ve standards"
+        },
+        {
+          "label": "Ders 9: Image Security",
+          "href": "/education/lessons/docker-kubernetes/module-14/lesson-09",
+          "description": "Image scanning ve vulnerability management"
+        },
+        {
+          "label": "Ders 10: Secrets Management",
+          "href": "/education/lessons/docker-kubernetes/module-14/lesson-10",
+          "description": "Secret encryption ve external secret management"
+        },
+        {
+          "label": "Ders 11: Admission Controllers",
+          "href": "/education/lessons/docker-kubernetes/module-14/lesson-11",
+          "description": "Validating ve mutating admission webhooks"
+        },
+        {
+          "label": "Ders 12: TLS ve mTLS",
+          "href": "/education/lessons/docker-kubernetes/module-14/lesson-12",
+          "description": "Service mesh ve mutual TLS"
+        },
+        {
+          "label": "Ders 13: Security Scanning Tools",
+          "href": "/education/lessons/docker-kubernetes/module-14/lesson-13",
+          "description": "Falco, Trivy, kube-bench gibi araçlar"
+        },
+        {
+          "label": "Ders 14: Security Best Practices",
+          "href": "/education/lessons/docker-kubernetes/module-14/lesson-14",
+          "description": "Production cluster güvenliği için best practices"
+        },
+        {
+          "label": "Ders 15: Pratik Uygulama",
+          "href": "/education/lessons/docker-kubernetes/module-14/lesson-15",
+          "description": "Güvenli bir cluster yapılandırması oluşturma"
+        }
+      ]
+    },
+    {
+      "id": "module-15",
+      "title": "Module 15: CI/CD ve Production Best Practices",
+      "summary": "Kubernetes'te CI/CD pipeline'ları, GitOps, ArgoCD, production deployment stratejileri ve best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "CI/CD pipeline'larını Kubernetes'te kurmak",
+        "GitOps metodolojisini uygulamak",
+        "Production deployment stratejileri öğrenmek",
+        "Best practices uygulamak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: CI/CD Temelleri",
+          "href": "/education/lessons/docker-kubernetes/module-15/lesson-01",
+          "description": "Continuous Integration ve Continuous Deployment"
+        },
+        {
+          "label": "Ders 2: Kubernetes'te CI/CD",
+          "href": "/education/lessons/docker-kubernetes/module-15/lesson-02",
+          "description": "Kubernetes-native CI/CD yaklaşımları"
+        },
+        {
+          "label": "Ders 3: Jenkins ve Kubernetes",
+          "href": "/education/lessons/docker-kubernetes/module-15/lesson-03",
+          "description": "Jenkins pipeline'ları ile Kubernetes deployment"
+        },
+        {
+          "label": "Ders 4: GitLab CI/CD",
+          "href": "/education/lessons/docker-kubernetes/module-15/lesson-04",
+          "description": "GitLab Runner ve Kubernetes executor"
+        },
+        {
+          "label": "Ders 5: GitHub Actions",
+          "href": "/education/lessons/docker-kubernetes/module-15/lesson-05",
+          "description": "GitHub Actions ile Kubernetes deployment"
+        },
+        {
+          "label": "Ders 6: GitOps Nedir?",
+          "href": "/education/lessons/docker-kubernetes/module-15/lesson-06",
+          "description": "GitOps metodolojisi ve prensipleri"
+        },
+        {
+          "label": "Ders 7: ArgoCD Kurulumu",
+          "href": "/education/lessons/docker-kubernetes/module-15/lesson-07",
+          "description": "ArgoCD GitOps tool kurulumu"
+        },
+        {
+          "label": "Ders 8: ArgoCD Application",
+          "href": "/education/lessons/docker-kubernetes/module-15/lesson-08",
+          "description": "Application manifest ve sync stratejileri"
+        },
+        {
+          "label": "Ders 9: Flux CD",
+          "href": "/education/lessons/docker-kubernetes/module-15/lesson-09",
+          "description": "Flux CD ile GitOps implementation"
+        },
+        {
+          "label": "Ders 10: Blue-Green Deployment",
+          "href": "/education/lessons/docker-kubernetes/module-15/lesson-10",
+          "description": "Production'da blue-green deployment stratejisi"
+        },
+        {
+          "label": "Ders 11: Canary Deployment",
+          "href": "/education/lessons/docker-kubernetes/module-15/lesson-11",
+          "description": "Canary deployment ve traffic splitting"
+        },
+        {
+          "label": "Ders 12: Rollback Stratejileri",
+          "href": "/education/lessons/docker-kubernetes/module-15/lesson-12",
+          "description": "Hızlı rollback mekanizmaları"
+        },
+        {
+          "label": "Ders 13: Production Readiness",
+          "href": "/education/lessons/docker-kubernetes/module-15/lesson-13",
+          "description": "Production ortamı için hazırlık checklist'i"
+        },
+        {
+          "label": "Ders 14: Disaster Recovery",
+          "href": "/education/lessons/docker-kubernetes/module-15/lesson-14",
+          "description": "Backup, restore ve disaster recovery planları"
+        },
+        {
+          "label": "Ders 15: Capstone Project",
+          "href": "/education/lessons/docker-kubernetes/module-15/lesson-15",
+          "description": "End-to-end production-ready uygulama deployment'ı"
+        }
+      ]
+    }
+  ]
+}
+

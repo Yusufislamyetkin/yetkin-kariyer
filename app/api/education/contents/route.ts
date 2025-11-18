@@ -31,8 +31,8 @@ export async function GET(request: Request) {
     });
 
     const contents = courses
-      .map((c) => c.topicContent)
-      .filter((c): c is string => c !== null)
+      .map((c: { topicContent: string | null }) => c.topicContent)
+      .filter((c: string | null): c is string => c !== null)
       .sort();
 
     return NextResponse.json({ contents });

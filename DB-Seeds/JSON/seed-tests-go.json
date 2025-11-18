@@ -1,0 +1,2004 @@
+{
+  "quizzes": [
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #1",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 1",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #2",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 2",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #3",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 3",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #4",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 4",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #5",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 5",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #6",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 6",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #7",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 7",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #8",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 8",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #9",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 9",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #10",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 10",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #11",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 11",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #12",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 12",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #13",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 13",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #14",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 14",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #15",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 15",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #16",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 16",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #17",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 17",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #18",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 18",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #19",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 19",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #20",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 20",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #21",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 21",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #22",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 22",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #23",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 23",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #24",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 24",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #25",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 25",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #26",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 26",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #27",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 27",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #28",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 28",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #29",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 29",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #30",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 30",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #31",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 31",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #32",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 32",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #33",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 33",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #34",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 34",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #35",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 35",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #36",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 36",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #37",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 37",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #38",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 38",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #39",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 39",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #40",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 40",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #41",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 41",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #42",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 42",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #43",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 43",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #44",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 44",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #45",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 45",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #46",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 46",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #47",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 47",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #48",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 48",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #49",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 49",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #50",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 50",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #51",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 51",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #52",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 52",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #53",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 53",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #54",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 54",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #55",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 55",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #56",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 56",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #57",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 57",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #58",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 58",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #59",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 59",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #60",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 60",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #61",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 61",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #62",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 62",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #63",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 63",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #64",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 64",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #65",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 65",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #66",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 66",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #67",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 67",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #68",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 68",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #69",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 69",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #70",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 70",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #71",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 71",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #72",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 72",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #73",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 73",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #74",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 74",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #75",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 75",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #76",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 76",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #77",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 77",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #78",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 78",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #79",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 79",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #80",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 80",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #81",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 81",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #82",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 82",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #83",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 83",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #84",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 84",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #85",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 85",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #86",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 86",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #87",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 87",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #88",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 88",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #89",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 89",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #90",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 90",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #91",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 91",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #92",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 92",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #93",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 93",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #94",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 94",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #95",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 95",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #96",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 96",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #97",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 97",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #98",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 98",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #99",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 99",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-go-test-%03s",
+      "courseId": "course-go-backend",
+      "title": "Go Test #100",
+      "description": "Go kavramları bilgi testi.",
+      "topic": "Go",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-go-%03s",
+          "question": "Question 100",
+          "options": [],
+          "answer": 0,
+          "category": "concurrency",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    }
+  ]
+}

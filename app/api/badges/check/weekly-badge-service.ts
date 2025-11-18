@@ -59,13 +59,13 @@ export async function checkWeeklyBadgeEligibility({
   // Get unique days with activity (login + test or topic)
   const activeDays = new Set<string>();
   
-  weekQuizAttempts.forEach((attempt) => {
+  weekQuizAttempts.forEach((attempt: { completedAt: Date }) => {
     const date = new Date(attempt.completedAt);
     date.setHours(0, 0, 0, 0);
     activeDays.add(date.toISOString().split('T')[0]);
   });
   
-  weekTopicCompletions.forEach((completion) => {
+  weekTopicCompletions.forEach((completion: { completedAt: Date | null }) => {
     if (completion.completedAt) {
       const date = new Date(completion.completedAt);
       date.setHours(0, 0, 0, 0);

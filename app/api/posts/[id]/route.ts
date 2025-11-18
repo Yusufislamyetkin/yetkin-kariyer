@@ -64,8 +64,8 @@ export async function GET(
       return NextResponse.json({ error: "Gönderi bulunamadı" }, { status: 404 });
     }
 
-    const isLiked = post.likes.some((like) => like.userId === userId);
-    const isSaved = post.saves.some((save) => save.userId === userId);
+    const isLiked = post.likes.some((like: { userId: string }) => like.userId === userId);
+    const isSaved = post.saves.some((save: { userId: string }) => save.userId === userId);
 
     return NextResponse.json({
       id: post.id,

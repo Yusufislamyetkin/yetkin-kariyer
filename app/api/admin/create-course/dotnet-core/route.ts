@@ -35,9 +35,9 @@ export async function POST() {
     // Save course to database
     try {
       const course = await db.course.upsert({
-        where: { id: "course-dotnet-core" },
+        where: { id: "course-dotnet-roadmap" },
         create: {
-          id: "course-dotnet-core",
+          id: "course-dotnet-roadmap",
           title: ".NET Core Kursu",
           description: courseContent.overview.description,
           category: "Backend",

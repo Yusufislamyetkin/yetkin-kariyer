@@ -3,6 +3,8 @@ import { z } from "zod";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { broadcastChatMessage } from "@/lib/realtime/signalr-triggers";
+import { sanitizePlainText } from "@/lib/security/sanitize";
+import { checkRateLimit, rateLimitKey, Limits } from "@/lib/security/rateLimit";
 
 const paginationSchema = z.object({
   cursor: z.string().cuid().optional(),
@@ -92,7 +94,7 @@ export async function GET(request: Request, { params }: { params: { groupId: str
       nextCursor = nextItem?.id ?? null;
     }
 
-    const payload = messages.map((message) => ({
+    const payload = messages.map((message: any) => ({
       id: message.id,
       groupId: message.groupId,
       userId: message.userId,
@@ -107,7 +109,7 @@ export async function GET(request: Request, { params }: { params: { groupId: str
         name: message.user.name,
         profileImage: message.user.profileImage,
       },
-      attachments: message.attachments.map((attachment) => ({
+      attachments: message.attachments.map((attachment: any) => ({
         id: attachment.id,
         messageId: attachment.messageId,
         url: attachment.url,
@@ -119,7 +121,7 @@ export async function GET(request: Request, { params }: { params: { groupId: str
         duration: attachment.duration,
         createdAt: attachment.createdAt.toISOString(),
       })),
-      readByUserIds: message.receipts.map((receipt) => receipt.userId),
+      readByUserIds: message.receipts.map((receipt: { userId: string }) => receipt.userId),
     }));
 
     return NextResponse.json({
@@ -138,6 +140,18 @@ export async function POST(request: Request, { params }: { params: { groupId: st
 
     if (!session?.user?.id) {
       return NextResponse.json({ error: "Yetkisiz erişim" }, { status: 401 });
+    }
+
+    // Rate limit: messages per group+user
+    {
+      const key = rateLimitKey(["chat:group:message", params.groupId, session.user.id]);
+      const verdict = checkRateLimit(key, Limits.messageCreate);
+      if (!verdict.ok) {
+        return NextResponse.json(
+          { error: "Çok sık mesaj gönderimi. Lütfen daha sonra tekrar deneyin." },
+          { status: 429, headers: { "Retry-After": Math.ceil(verdict.retryAfterMs / 1000).toString() } }
+        );
+      }
     }
 
     const membership = await db.chatGroupMembership.findUnique({
@@ -164,13 +178,14 @@ export async function POST(request: Request, { params }: { params: { groupId: st
     }
 
     const data = parsed.data;
+    const safeContent = data.content ? sanitizePlainText(data.content, 4000) : null;
 
     const message = await db.chatMessage.create({
       data: {
         groupId: params.groupId,
         userId: session.user.id,
         type: data.type,
-        content: data.content,
+        content: safeContent ?? undefined,
         mentionIds: data.mentionIds ?? [],
         attachments:
           data.attachments && data.attachments.length > 0
@@ -253,7 +268,7 @@ export async function POST(request: Request, { params }: { params: { groupId: st
         createdAt: fullMessage.createdAt.toISOString(),
         updatedAt: fullMessage.updatedAt.toISOString(),
         deletedAt: fullMessage.deletedAt?.toISOString() ?? null,
-        attachments: fullMessage.attachments.map((attachment) => ({
+        attachments: fullMessage.attachments.map((attachment: any) => ({
           id: attachment.id,
           messageId: attachment.messageId,
           url: attachment.url,
@@ -267,7 +282,7 @@ export async function POST(request: Request, { params }: { params: { groupId: st
           duration: attachment.duration,
           createdAt: attachment.createdAt.toISOString(),
         })),
-        readByUserIds: fullMessage.receipts.map((receipt) => receipt.userId),
+        readByUserIds: fullMessage.receipts.map((receipt: { userId: string }) => receipt.userId),
       },
       sender: {
         id: fullMessage.user.id,

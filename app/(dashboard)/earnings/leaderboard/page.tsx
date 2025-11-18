@@ -265,131 +265,203 @@ export default function EarningsLeaderboardPage() {
                       const podiumHeight = "min-h-[450px]";
 
                       return (
-                        <Link
-                          key={entry.userId}
-                          href={`/profile/${entry.userId}`}
-                          className="focus:outline-none block group"
-                        >
-                          <div
-                            className={cn(
-                              "h-full w-full transition-all duration-300 hover:scale-105 rounded-2xl border border-gray-200/80 bg-white/85 p-6 hover:shadow-2xl dark:border-gray-800/60 dark:bg-gray-900/70",
-                              podiumHeight,
-                              isCurrentUser &&
-                                "ring-2 ring-blue-500/60 ring-offset-2 ring-offset-white dark:ring-blue-400/60 dark:ring-offset-gray-900"
-                            )}
+                        <>
+                          {/* Mobile - Minimal compact card */}
+                          <Link
+                            key={`${entry.userId}-mobile`}
+                            href={`/profile/${entry.userId}`}
+                            className="block md:hidden focus:outline-none group"
                           >
-                            <div className="flex h-full flex-col relative z-10">
-                              {/* Crown/Rank Badge at Top */}
-                              <div className="mb-4 flex items-center justify-center">
-                                <div className={cn(
-                                  "flex h-20 w-20 items-center justify-center rounded-2xl border-2 border-gray-200/50 dark:border-gray-700/50 shadow-xl",
-                                  index === 0 && "bg-gradient-to-br from-yellow-400 to-amber-500 dark:from-blue-500 dark:to-blue-600",
-                                  index === 1 && "bg-gradient-to-br from-gray-300 to-gray-400 dark:from-gray-600 dark:to-gray-700",
-                                  index === 2 && "bg-gradient-to-br from-orange-400 to-orange-600 dark:from-orange-500 dark:to-orange-700"
-                                )}>
-                                  <Icon className={cn(
-                                    "h-10 w-10 drop-shadow-lg",
-                                    index === 0 && "text-white dark:text-blue-100",
-                                    index !== 0 && "text-white"
-                                  )} />
+                            <div
+                              className={cn(
+                                "p-4 rounded-xl bg-gradient-to-br from-gray-50 to-gray-100/60 dark:from-gray-800/60 dark:to-gray-700/60 border border-gray-200/60 dark:border-gray-700/60",
+                                isCurrentUser &&
+                                  "ring-2 ring-blue-500/60 ring-offset-2 ring-offset-white dark:ring-blue-400/60 dark:ring-offset-gray-900"
+                              )}
+                            >
+                              <div className="flex items-center gap-3">
+                                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+                                  <span className="text-sm font-bold text-gray-700 dark:text-gray-200">
+                                    #{entry.rank}
+                                  </span>
                                 </div>
-                              </div>
-
-                              {/* Rank Label */}
-                              <div className="mb-4 text-center">
-                                <p className={cn(
-                                  "font-bold text-gray-900 dark:text-gray-100",
-                                  index === 0 && "text-5xl",
-                                  index === 1 && "text-4xl",
-                                  index === 2 && "text-4xl"
-                                )}>
-                                  {label}
-                                </p>
-                                <p className="text-sm font-semibold text-gray-600 dark:text-gray-400 mt-1">
-                                  {index === 0 && "🏆 Şampiyon"}
-                                  {index === 1 && "🥈 İkinci"}
-                                  {index === 2 && "🥉 Üçüncü"}
-                                </p>
-                              </div>
-
-                              {/* Profile Picture */}
-                              <div className="mb-4 flex justify-center">
-                                <div className={cn(
-                                  "relative flex items-center justify-center rounded-full border-4 border-gray-200/50 dark:border-gray-700/50 shadow-2xl",
-                                  index === 0 && "h-28 w-28",
-                                  index === 1 && "h-24 w-24",
-                                  index === 2 && "h-24 w-24"
-                                )}>
+                                <div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 overflow-hidden border border-gray-200 dark:border-gray-700">
                                   {entry.user.profileImage ? (
-                                    // eslint-disable-next-line @next/next/no-img-element
-                                    <img
-                                      src={entry.user.profileImage}
-                                      alt={entry.user.name || entry.user.email}
-                                      className="h-full w-full rounded-full object-cover"
-                                    />
+                                    <img src={entry.user.profileImage} alt={entry.user.name || entry.user.email} className="h-full w-full object-cover" />
                                   ) : initials ? (
-                                    <span className="text-2xl font-bold text-gray-700 dark:text-gray-200">
-                                      {initials}
-                                    </span>
+                                    <span className="text-xs font-bold text-gray-700 dark:text-gray-200">{initials}</span>
                                   ) : (
-                                    <UserCircle2 className="h-12 w-12 text-gray-400 dark:text-gray-500" />
-                                  )}
-                                  {index === 0 && (
-                                    <div className="absolute -top-2 -right-2 bg-yellow-400 rounded-full p-1.5 shadow-lg">
-                                      <Trophy className="h-4 w-4 text-white" />
-                                    </div>
+                                    <UserCircle2 className="h-6 w-6 text-gray-400 dark:text-gray-500" />
                                   )}
                                 </div>
+                                <div className="min-w-0 flex-1">
+                                  <div className="flex items-center gap-2">
+                                    <h3 className="truncate text-sm font-semibold text-gray-900 dark:text-gray-100">
+                                      {entry.user.name || entry.user.email}
+                                    </h3>
+                                    {isCurrentUser && (
+                                      <span className="inline-flex items-center gap-1 rounded-full bg-blue-100/80 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-blue-700 dark:bg-blue-900/50 dark:text-blue-200 border border-blue-200/50 dark:border-blue-800/50">
+                                        <ShieldCheck className="h-3 w-3" />
+                                        Sen
+                                      </span>
+                                    )}
+                                  </div>
+                                  <div className="mt-1 flex items-baseline gap-1.5">
+                                    <span className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                                      {entry.totalEarnings.toLocaleString("tr-TR")}
+                                    </span>
+                                    <span className="text-xs font-medium text-gray-600 dark:text-gray-400">₺</span>
+                                  </div>
+                                </div>
+                                <div className={cn(
+                                  "ml-auto h-8 w-8 flex items-center justify-center rounded-lg border text-white",
+                                  index === 0 && "bg-gradient-to-br from-yellow-500 to-amber-600 border-yellow-300/60",
+                                  index === 1 && "bg-gradient-to-br from-gray-400 to-gray-500 border-gray-300/60",
+                                  index === 2 && "bg-gradient-to-br from-orange-500 to-orange-600 border-orange-300/60"
+                                )}>
+                                  <Icon className="h-4 w-4" />
+                                </div>
                               </div>
-
-                              {/* Name */}
-                              <div className="mb-4 text-center">
-                                <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
-                                  {entry.user.name || entry.user.email.split("@")[0]}
-                                </h3>
-                                {isCurrentUser && (
-                                  <span className="inline-flex items-center gap-1 rounded-full bg-blue-100/80 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-blue-700 dark:bg-blue-900/50 dark:text-blue-200 border border-blue-200/50 dark:border-blue-800/50">
-                                    <ShieldCheck className="h-3 w-3" />
-                                    Sen
+                              <div className="mt-3 flex flex-wrap gap-1.5">
+                                {entry.breakdown.hackathon > 0 && (
+                                  <span className="inline-flex items-center gap-1 rounded-full bg-purple-100/80 px-2 py-0.5 text-[10px] font-medium text-purple-700 dark:bg-purple-900/40 dark:text-purple-200 border border-purple-200/50 dark:border-purple-800/40">
+                                    🏆 {entry.breakdown.hackathon.toLocaleString("tr-TR")}
+                                  </span>
+                                )}
+                                {entry.breakdown.leaderboard > 0 && (
+                                  <span className="inline-flex items-center gap-1 rounded-full bg-yellow-100/80 px-2 py-0.5 text-[10px] font-medium text-yellow-700 dark:bg-yellow-900/40 dark:text-yellow-200 border border-yellow-200/50 dark:border-yellow-800/40">
+                                    🥇 {entry.breakdown.leaderboard.toLocaleString("tr-TR")}
+                                  </span>
+                                )}
+                                {entry.breakdown.freelancer > 0 && (
+                                  <span className="inline-flex items-center gap-1 rounded-full bg-blue-100/80 px-2 py-0.5 text-[10px] font-medium text-blue-700 dark:bg-blue-900/40 dark:text-blue-200 border border-blue-200/50 dark:border-blue-800/40">
+                                    💼 {entry.breakdown.freelancer.toLocaleString("tr-TR")}
                                   </span>
                                 )}
                               </div>
+                            </div>
+                          </Link>
 
-                              {/* Earnings Card */}
-                              <div className="mt-auto rounded-xl bg-gray-50/80 dark:bg-gray-800/80 p-4 border border-gray-200/60 dark:border-gray-700/60">
-                                <p className="mb-2 text-center text-xs font-semibold uppercase tracking-wide text-gray-600 dark:text-gray-400">
-                                  Toplam Kazanç
-                                </p>
-                                <div className="flex items-baseline justify-center gap-2">
-                                  <span className="text-3xl font-bold text-gray-900 dark:text-gray-100">
-                                    {entry.totalEarnings.toLocaleString("tr-TR")}
-                                  </span>
-                                  <span className="text-lg font-medium text-gray-600 dark:text-gray-400">
-                                    ₺
-                                  </span>
+                          {/* Desktop - existing detailed podium card */}
+                          <Link
+                            key={entry.userId}
+                            href={`/profile/${entry.userId}`}
+                            className="hidden md:block focus:outline-none group"
+                          >
+                            <div
+                              className={cn(
+                                "h-full w-full transition-all duration-300 hover:scale-105 rounded-2xl border border-gray-200/80 bg-white/85 p-6 hover:shadow-2xl dark:border-gray-800/60 dark:bg-gray-900/70",
+                                podiumHeight,
+                                isCurrentUser &&
+                                  "ring-2 ring-blue-500/60 ring-offset-2 ring-offset-white dark:ring-blue-400/60 dark:ring-offset-gray-900"
+                              )}
+                            >
+                              <div className="flex h-full flex-col relative z-10">
+                                <div className="mb-4 flex items-center justify-center">
+                                  <div className={cn(
+                                    "flex h-20 w-20 items-center justify-center rounded-2xl border-2 border-gray-200/50 dark:border-gray-700/50 shadow-xl",
+                                    index === 0 && "bg-gradient-to-br from-yellow-400 to-amber-500 dark:from-blue-500 dark:to-blue-600",
+                                    index === 1 && "bg-gradient-to-br from-gray-300 to-gray-400 dark:from-gray-600 dark:to-gray-700",
+                                    index === 2 && "bg-gradient-to-br from-orange-400 to-orange-600 dark:from-orange-500 dark:to-orange-700"
+                                  )}>
+                                    <Icon className={cn(
+                                      "h-10 w-10 drop-shadow-lg",
+                                      index === 0 && "text-white dark:text-blue-100",
+                                      index !== 0 && "text-white"
+                                    )} />
+                                  </div>
                                 </div>
-                                {/* Breakdown */}
-                                <div className="mt-3 flex flex-wrap justify-center gap-1.5">
-                                  {entry.breakdown.hackathon > 0 && (
-                                    <span className="inline-flex items-center gap-1 rounded-full bg-purple-100/80 px-2 py-1 text-[10px] font-medium text-purple-700 dark:bg-purple-900/50 dark:text-purple-200 border border-purple-200/50 dark:border-purple-800/50">
-                                      🏆 {entry.breakdown.hackathon.toLocaleString("tr-TR")}
+
+                                <div className="mb-4 text-center">
+                                  <p className={cn(
+                                    "font-bold text-gray-900 dark:text-gray-100",
+                                    index === 0 && "text-5xl",
+                                    index === 1 && "text-4xl",
+                                    index === 2 && "text-4xl"
+                                  )}>
+                                    {label}
+                                  </p>
+                                  <p className="text-sm font-semibold text-gray-600 dark:text-gray-400 mt-1">
+                                    {index === 0 && "🏆 Şampiyon"}
+                                    {index === 1 && "🥈 İkinci"}
+                                    {index === 2 && "🥉 Üçüncü"}
+                                  </p>
+                                </div>
+
+                                <div className="mb-4 flex justify-center">
+                                  <div className={cn(
+                                    "relative flex items-center justify-center rounded-full border-4 border-gray-200/50 dark:border-gray-700/50 shadow-2xl",
+                                    index === 0 && "h-28 w-28",
+                                    index === 1 && "h-24 w-24",
+                                    index === 2 && "h-24 w-24"
+                                  )}>
+                                    {entry.user.profileImage ? (
+                                      <img
+                                        src={entry.user.profileImage}
+                                        alt={entry.user.name || entry.user.email}
+                                        className="h-full w-full rounded-full object-cover"
+                                      />
+                                    ) : initials ? (
+                                      <span className="text-2xl font-bold text-gray-700 dark:text-gray-200">
+                                        {initials}
+                                      </span>
+                                    ) : (
+                                      <UserCircle2 className="h-12 w-12 text-gray-400 dark:text-gray-500" />
+                                    )}
+                                    {index === 0 && (
+                                      <div className="absolute -top-2 -right-2 bg-yellow-400 rounded-full p-1.5 shadow-lg">
+                                        <Trophy className="h-4 w-4 text-white" />
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+
+                                <div className="mb-4 text-center">
+                                  <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+                                    {entry.user.name || entry.user.email.split("@")[0]}
+                                  </h3>
+                                  {isCurrentUser && (
+                                    <span className="inline-flex items-center gap-1 rounded-full bg-blue-100/80 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-blue-700 dark:bg-blue-900/50 dark:text-blue-200 border border-blue-200/50 dark:border-blue-800/50">
+                                      <ShieldCheck className="h-3 w-3" />
+                                      Sen
                                     </span>
                                   )}
-                                  {entry.breakdown.leaderboard > 0 && (
-                                    <span className="inline-flex items-center gap-1 rounded-full bg-yellow-100/80 px-2 py-1 text-[10px] font-medium text-yellow-700 dark:bg-yellow-900/50 dark:text-yellow-200 border border-yellow-200/50 dark:border-yellow-800/50">
-                                      🥇 {entry.breakdown.leaderboard.toLocaleString("tr-TR")}
+                                </div>
+
+                                <div className="mt-auto rounded-xl bg-gray-50/80 dark:bg-gray-800/80 p-4 border border-gray-200/60 dark:border-gray-700/60">
+                                  <p className="mb-2 text-center text-xs font-semibold uppercase tracking-wide text-gray-600 dark:text-gray-400">
+                                    Toplam Kazanç
+                                  </p>
+                                  <div className="flex items-baseline justify-center gap-2">
+                                    <span className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+                                      {entry.totalEarnings.toLocaleString("tr-TR")}
                                     </span>
-                                  )}
-                                  {entry.breakdown.freelancer > 0 && (
-                                    <span className="inline-flex items-center gap-1 rounded-full bg-blue-100/80 px-2 py-1 text-[10px] font-medium text-blue-700 dark:bg-blue-900/50 dark:text-blue-200 border border-blue-200/50 dark:border-blue-800/50">
-                                      💼 {entry.breakdown.freelancer.toLocaleString("tr-TR")}
+                                    <span className="text-lg font-medium text-gray-600 dark:text-gray-400">
+                                      ₺
                                     </span>
-                                  )}
+                                  </div>
+                                  <div className="mt-3 flex flex-wrap justify-center gap-1.5">
+                                    {entry.breakdown.hackathon > 0 && (
+                                      <span className="inline-flex items-center gap-1 rounded-full bg-purple-100/80 px-2 py-1 text-[10px] font-medium text-purple-700 dark:bg-purple-900/50 dark:text-purple-200 border border-purple-200/50 dark:border-purple-800/50">
+                                        🏆 {entry.breakdown.hackathon.toLocaleString("tr-TR")}
+                                      </span>
+                                    )}
+                                    {entry.breakdown.leaderboard > 0 && (
+                                      <span className="inline-flex items-center gap-1 rounded-full bg-yellow-100/80 px-2 py-1 text-[10px] font-medium text-yellow-700 dark:bg-yellow-900/50 dark:text-yellow-200 border border-yellow-200/50 dark:border-yellow-800/50">
+                                        🥇 {entry.breakdown.leaderboard.toLocaleString("tr-TR")}
+                                      </span>
+                                    )}
+                                    {entry.breakdown.freelancer > 0 && (
+                                      <span className="inline-flex items-center gap-1 rounded-full bg-blue-100/80 px-2 py-1 text-[10px] font-medium text-blue-700 dark:bg-blue-900/50 dark:text-blue-200 border border-blue-200/50 dark:border-blue-800/50">
+                                        💼 {entry.breakdown.freelancer.toLocaleString("tr-TR")}
+                                      </span>
+                                    )}
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        </Link>
+                          </Link>
+                        </>
                       );
                     })}
                   </div>

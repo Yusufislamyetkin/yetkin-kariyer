@@ -1,0 +1,11 @@
+-- .NET Core Live Coding Seed
+BEGIN;
+
+INSERT INTO "quizzes" ("id","courseId","title","description","topic","type","level","questions","passingScore","lessonSlug","createdAt","updatedAt")
+SELECT FORMAT('quiz-dotnet-live-%03s', gs),'course-dotnet-roadmap',FORMAT('.NET Live Coding #%s', gs),'ASP.NET Core odaklı canlı kodlama.','.NET Core','LIVE_CODING','intermediate',
+	jsonb_build_array(jsonb_build_object('id',FORMAT('lc-dotnet-%03s',gs),'challenge',FORMAT('Minimal API ile CRUD: #%s',gs),'difficulty',CASE WHEN gs<=33 THEN 'easy' WHEN gs<=66 THEN 'medium' ELSE 'hard' END,'tags',jsonb_build_array('dotnet','minimal-api'),'weight',50)),
+	70,NULL::text,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP FROM generate_series(1,100) gs
+ON CONFLICT ("id") DO NOTHING;
+
+COMMIT;
+

@@ -15,7 +15,7 @@ async function ensureDirectAccess(threadId: string, userId: string) {
   if (!thread || !isDirectThreadSlug(thread.slug)) {
     return false;
   }
-  return thread.memberships.some((member) => member.userId === userId);
+  return thread.memberships.some((member: { userId: string }) => member.userId === userId);
 }
 
 export async function POST(request: Request, { params }: { params: { threadId: string } }) {

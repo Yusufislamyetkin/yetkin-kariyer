@@ -1,0 +1,32 @@
+-- Go Course Structure Seed
+BEGIN;
+
+INSERT INTO "courses" ("id","title","description","category","field","subCategory","expertise","topic","topicContent","difficulty","content","estimatedDuration","createdAt","updatedAt")
+VALUES (
+	'course-go-backend','Go Backend APIs','Go ile hızlı ve verimli API geliştirme.',
+	'software-development','backend','go','backend','Go','Go Roadmap','intermediate',
+	$$ {"overview":{"description":"Goroutines, HTTP, testing","estimatedDurationMinutes":3000},"modules":[
+		{"id":"go-http","title":"HTTP ve Router","summary":"net/http ve router","durationMinutes":200,"objectives":["net/http","mux"],"lessons":[
+			{"id":"go-lesson-01","title":"net/http","type":"reading","durationMinutes":20,"slug":"go-http","resources":[]},
+			{"id":"go-lesson-02","title":"Middleware","type":"coding","durationMinutes":40,"slug":"go-middleware","resources":[]},
+			{"id":"go-lesson-03","title":"HTTP Handlers","type":"video","durationMinutes":35,"slug":"http-handlers","resources":[]},
+			{"id":"go-lesson-04","title":"Request Parsing","type":"coding","durationMinutes":30,"slug":"request-parsing","resources":[]},
+			{"id":"go-lesson-05","title":"Response Writing","type":"reading","durationMinutes":25,"slug":"response-writing","resources":[]},
+			{"id":"go-lesson-06","title":"Router Libraries","type":"video","durationMinutes":30,"slug":"router-libs","resources":[]},
+			{"id":"go-lesson-07","title":"URL Parameters","type":"coding","durationMinutes":35,"slug":"url-params","resources":[]},
+			{"id":"go-lesson-08","title":"Query Parameters","type":"reading","durationMinutes":25,"slug":"query-params","resources":[]},
+			{"id":"go-lesson-09","title":"JSON Handling","type":"coding","durationMinutes":40,"slug":"json-handling","resources":[]},
+			{"id":"go-lesson-10","title":"Error Handling","type":"video","durationMinutes":30,"slug":"error-handling","resources":[]},
+			{"id":"go-lesson-11","title":"HTTP Testing","type":"coding","durationMinutes":45,"slug":"http-testing","resources":[]},
+			{"id":"go-lesson-12","title":"HTTP Best Practices","type":"reading","durationMinutes":30,"slug":"http-best-practices","resources":[]}
+		]}]} $$::jsonb,
+	3000,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP
+)
+ON CONFLICT ("id") DO UPDATE SET
+	"title" = EXCLUDED."title",
+	"description" = EXCLUDED."description",
+	"content" = EXCLUDED."content",
+	"updatedAt" = CURRENT_TIMESTAMP;
+
+COMMIT;
+

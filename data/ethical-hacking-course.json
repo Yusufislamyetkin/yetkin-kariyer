@@ -1,0 +1,1360 @@
+{
+  "overview": {
+    "description": "Ethical Hacking, bilgisayar sistemlerinin güvenlik açıklarını tespit etmek ve düzeltmek için yasal ve etik yöntemler kullanma sanatıdır. Bu kapsamlı kurs ile siber güvenlik dünyasına adım atacak, penetration testing, network security, web application security ve daha birçok konuda uzmanlaşacaksınız. Sertifikalı Ethical Hacker (CEH) seviyesine ulaşmak için gereken tüm bilgi ve becerileri kazanacaksınız.",
+    "estimatedDurationMinutes": 6750
+  },
+  "learningObjectives": [
+    "Ethical hacking metodolojisini ve penetration testing süreçlerini anlamak",
+    "Network güvenliği ve zafiyet tespiti tekniklerini öğrenmek",
+    "Web uygulama güvenlik açıklarını tespit etmek ve düzeltmek",
+    "Kriptografi ve şifreleme tekniklerini uygulamak",
+    "Sosyal mühendislik saldırılarını anlamak ve savunma stratejileri geliştirmek",
+    "Malware analizi ve tersine mühendislik tekniklerini öğrenmek",
+    "Olay müdahale ve güvenlik raporlama süreçlerini yönetmek"
+  ],
+  "prerequisites": [
+    "Temel bilgisayar ve işletim sistemi bilgisi",
+    "Ağ (network) temelleri hakkında bilgi",
+    "Linux komut satırı kullanımına aşinalık",
+    "Programlama temelleri (Python tercih edilir)",
+    "Güvenlik ve etik konularına ilgi"
+  ],
+  "modules": [
+    {
+      "id": "module-01",
+      "title": "Module 1: Ethical Hacking'e Giriş",
+      "summary": "Ethical hacking kavramı, yasal çerçeve, etik kurallar ve penetration testing metodolojisine giriş.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Ethical hacking ve penetration testing kavramlarını anlamak",
+        "Yasal ve etik çerçeveyi öğrenmek",
+        "Penetration testing metodolojisini tanımak",
+        "Hacking türlerini ve saldırı vektörlerini öğrenmek"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Ethical Hacking Nedir?",
+          "href": "/education/lessons/ethical-hacking/module-01/lesson-01",
+          "description": "Ethical hacking kavramı ve temel tanımlar"
+        },
+        {
+          "label": "Ders 2: Hacker Türleri ve Motivasyonları",
+          "href": "/education/lessons/ethical-hacking/module-01/lesson-02",
+          "description": "White hat, black hat, gray hat hacker kavramları"
+        },
+        {
+          "label": "Ders 3: Yasal Çerçeve ve Etik Kurallar",
+          "href": "/education/lessons/ethical-hacking/module-01/lesson-03",
+          "description": "Yasal izinler, sözleşmeler ve etik standartlar"
+        },
+        {
+          "label": "Ders 4: Penetration Testing Metodolojisi",
+          "href": "/education/lessons/ethical-hacking/module-01/lesson-04",
+          "description": "PTES, OWASP, NIST metodolojileri"
+        },
+        {
+          "label": "Ders 5: Güvenlik Testi Türleri",
+          "href": "/education/lessons/ethical-hacking/module-01/lesson-05",
+          "description": "Black box, white box, gray box testler"
+        },
+        {
+          "label": "Ders 6: Saldırı Yüzeyi Analizi",
+          "href": "/education/lessons/ethical-hacking/module-01/lesson-06",
+          "description": "Attack surface mapping ve değerlendirme"
+        },
+        {
+          "label": "Ders 7: Bilgi Toplama (Reconnaissance)",
+          "href": "/education/lessons/ethical-hacking/module-01/lesson-07",
+          "description": "Pasif ve aktif bilgi toplama teknikleri"
+        },
+        {
+          "label": "Ders 8: Vulnerability Assessment",
+          "href": "/education/lessons/ethical-hacking/module-01/lesson-08",
+          "description": "Zafiyet değerlendirme süreçleri"
+        },
+        {
+          "label": "Ders 9: Exploitation Temelleri",
+          "href": "/education/lessons/ethical-hacking/module-01/lesson-09",
+          "description": "Exploit kavramı ve türleri"
+        },
+        {
+          "label": "Ders 10: Post-Exploitation",
+          "href": "/education/lessons/ethical-hacking/module-01/lesson-10",
+          "description": "Saldırı sonrası aktiviteler"
+        },
+        {
+          "label": "Ders 11: Raporlama ve Dokümantasyon",
+          "href": "/education/lessons/ethical-hacking/module-01/lesson-11",
+          "description": "Test sonuçlarının raporlanması"
+        },
+        {
+          "label": "Ders 12: Sertifikasyon Programları",
+          "href": "/education/lessons/ethical-hacking/module-01/lesson-12",
+          "description": "CEH, OSCP, GPEN gibi sertifikalar"
+        },
+        {
+          "label": "Ders 13: Ethical Hacking Araçlarına Genel Bakış",
+          "href": "/education/lessons/ethical-hacking/module-01/lesson-13",
+          "description": "Popüler güvenlik test araçları"
+        },
+        {
+          "label": "Ders 14: Lab Ortamı Kurulumu",
+          "href": "/education/lessons/ethical-hacking/module-01/lesson-14",
+          "description": "Güvenli test ortamı oluşturma"
+        },
+        {
+          "label": "Ders 15: Modül Özeti ve Değerlendirme",
+          "href": "/education/lessons/ethical-hacking/module-01/lesson-15",
+          "description": "Öğrenilenlerin özeti ve değerlendirme"
+        }
+      ]
+    },
+    {
+      "id": "module-02",
+      "title": "Module 2: Linux Temelleri ve Komut Satırı",
+      "summary": "Linux işletim sistemi, komut satırı kullanımı, dosya sistemi ve temel sistem yönetimi.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Linux işletim sistemini anlamak",
+        "Komut satırı kullanımını öğrenmek",
+        "Dosya sistemi ve izinleri yönetmek",
+        "Sistem yönetimi ve ağ konfigürasyonu yapmak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Linux İşletim Sistemine Giriş",
+          "href": "/education/lessons/ethical-hacking/module-02/lesson-01",
+          "description": "Linux tarihçesi ve dağıtımları"
+        },
+        {
+          "label": "Ders 2: Terminal ve Shell Kullanımı",
+          "href": "/education/lessons/ethical-hacking/module-02/lesson-02",
+          "description": "Bash, Zsh ve terminal temelleri"
+        },
+        {
+          "label": "Ders 3: Dosya Sistemi Yapısı",
+          "href": "/education/lessons/ethical-hacking/module-02/lesson-03",
+          "description": "Linux dizin yapısı ve dosya sistemi"
+        },
+        {
+          "label": "Ders 4: Temel Komutlar (ls, cd, pwd, mkdir)",
+          "href": "/education/lessons/ethical-hacking/module-02/lesson-04",
+          "description": "Dosya ve dizin yönetimi komutları"
+        },
+        {
+          "label": "Ders 5: Dosya İşlemleri (cp, mv, rm, cat)",
+          "href": "/education/lessons/ethical-hacking/module-02/lesson-05",
+          "description": "Dosya kopyalama, taşıma ve görüntüleme"
+        },
+        {
+          "label": "Ders 6: Dosya İzinleri ve chmod",
+          "href": "/education/lessons/ethical-hacking/module-02/lesson-06",
+          "description": "Dosya izinleri ve erişim kontrolü"
+        },
+        {
+          "label": "Ders 7: Kullanıcı ve Grup Yönetimi",
+          "href": "/education/lessons/ethical-hacking/module-02/lesson-07",
+          "description": "useradd, usermod, groupadd komutları"
+        },
+        {
+          "label": "Ders 8: Process Yönetimi",
+          "href": "/education/lessons/ethical-hacking/module-02/lesson-08",
+          "description": "ps, top, kill, jobs komutları"
+        },
+        {
+          "label": "Ders 9: Ağ Komutları (ifconfig, netstat, ss)",
+          "href": "/education/lessons/ethical-hacking/module-02/lesson-09",
+          "description": "Ağ konfigürasyonu ve bağlantı kontrolü"
+        },
+        {
+          "label": "Ders 10: Text İşleme (grep, sed, awk)",
+          "href": "/education/lessons/ethical-hacking/module-02/lesson-10",
+          "description": "Metin arama ve manipülasyon araçları"
+        },
+        {
+          "label": "Ders 11: Paket Yönetimi (apt, yum, pacman)",
+          "href": "/education/lessons/ethical-hacking/module-02/lesson-11",
+          "description": "Yazılım kurulumu ve güncelleme"
+        },
+        {
+          "label": "Ders 12: Sistem Servisleri (systemd)",
+          "href": "/education/lessons/ethical-hacking/module-02/lesson-12",
+          "description": "Servis yönetimi ve systemd"
+        },
+        {
+          "label": "Ders 13: Log Dosyaları ve İnceleme",
+          "href": "/education/lessons/ethical-hacking/module-02/lesson-13",
+          "description": "Syslog, journalctl ve log analizi"
+        },
+        {
+          "label": "Ders 14: Cron Jobs ve Zamanlanmış Görevler",
+          "href": "/education/lessons/ethical-hacking/module-02/lesson-14",
+          "description": "Zamanlanmış görev yönetimi"
+        },
+        {
+          "label": "Ders 15: Linux Güvenlik Temelleri",
+          "href": "/education/lessons/ethical-hacking/module-02/lesson-15",
+          "description": "Temel güvenlik yapılandırmaları"
+        }
+      ]
+    },
+    {
+      "id": "module-03",
+      "title": "Module 3: Network Security ve Protokoller",
+      "summary": "Ağ protokolleri, TCP/IP modeli, port tarama, servis tespiti ve ağ güvenlik açıkları.",
+      "durationMinutes": 450,
+      "objectives": [
+        "TCP/IP protokol yığınını anlamak",
+        "Port tarama ve servis tespiti yapmak",
+        "Ağ güvenlik açıklarını tespit etmek",
+        "Ağ trafiği analizi yapmak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: TCP/IP Modeli ve OSI Katmanları",
+          "href": "/education/lessons/ethical-hacking/module-03/lesson-01",
+          "description": "Ağ protokol mimarisi"
+        },
+        {
+          "label": "Ders 2: IP Adresleme ve Subnetting",
+          "href": "/education/lessons/ethical-hacking/module-03/lesson-02",
+          "description": "IPv4, IPv6 ve subnet hesaplamaları"
+        },
+        {
+          "label": "Ders 3: TCP ve UDP Protokolleri",
+          "href": "/education/lessons/ethical-hacking/module-03/lesson-03",
+          "description": "Transport layer protokolleri"
+        },
+        {
+          "label": "Ders 4: Port Tarama Teknikleri",
+          "href": "/education/lessons/ethical-hacking/module-03/lesson-04",
+          "description": "TCP SYN, UDP, stealth scanning"
+        },
+        {
+          "label": "Ders 5: Nmap Kullanımı",
+          "href": "/education/lessons/ethical-hacking/module-03/lesson-05",
+          "description": "Nmap ile port tarama ve servis tespiti"
+        },
+        {
+          "label": "Ders 6: Servis Versiyon Tespiti",
+          "href": "/education/lessons/ethical-hacking/module-03/lesson-06",
+          "description": "Banner grabbing ve versiyon tespiti"
+        },
+        {
+          "label": "Ders 7: OS Fingerprinting",
+          "href": "/education/lessons/ethical-hacking/module-03/lesson-07",
+          "description": "İşletim sistemi tespiti"
+        },
+        {
+          "label": "Ders 8: Ağ Trafiği Analizi (Wireshark)",
+          "href": "/education/lessons/ethical-hacking/module-03/lesson-08",
+          "description": "Paket yakalama ve analiz"
+        },
+        {
+          "label": "Ders 9: ARP Spoofing ve MitM Saldırıları",
+          "href": "/education/lessons/ethical-hacking/module-03/lesson-09",
+          "description": "Man-in-the-middle saldırı teknikleri"
+        },
+        {
+          "label": "Ders 10: DNS Güvenliği ve Saldırıları",
+          "href": "/education/lessons/ethical-hacking/module-03/lesson-10",
+          "description": "DNS hijacking, poisoning"
+        },
+        {
+          "label": "Ders 11: DHCP Güvenlik Açıkları",
+          "href": "/education/lessons/ethical-hacking/module-03/lesson-11",
+          "description": "DHCP spoofing ve saldırıları"
+        },
+        {
+          "label": "Ders 12: Firewall ve IDS/IPS Bypass",
+          "href": "/education/lessons/ethical-hacking/module-03/lesson-12",
+          "description": "Güvenlik duvarlarını aşma teknikleri"
+        },
+        {
+          "label": "Ders 13: VPN ve Tunneling",
+          "href": "/education/lessons/ethical-hacking/module-03/lesson-13",
+          "description": "VPN protokolleri ve güvenlik"
+        },
+        {
+          "label": "Ders 14: Network Segmentation ve Zoning",
+          "href": "/education/lessons/ethical-hacking/module-03/lesson-14",
+          "description": "Ağ segmentasyonu stratejileri"
+        },
+        {
+          "label": "Ders 15: Ağ Güvenlik Testi Pratikleri",
+          "href": "/education/lessons/ethical-hacking/module-03/lesson-15",
+          "description": "Pratik ağ güvenlik test senaryoları"
+        }
+      ]
+    },
+    {
+      "id": "module-04",
+      "title": "Module 4: Web Application Security",
+      "summary": "Web uygulama güvenlik açıkları, OWASP Top 10, SQL injection, XSS, CSRF ve diğer web saldırıları.",
+      "durationMinutes": 450,
+      "objectives": [
+        "OWASP Top 10 güvenlik açıklarını anlamak",
+        "SQL injection saldırılarını tespit etmek",
+        "XSS ve CSRF saldırılarını öğrenmek",
+        "Web uygulama güvenlik testi yapmak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Web Uygulama Güvenliğine Giriş",
+          "href": "/education/lessons/ethical-hacking/module-04/lesson-01",
+          "description": "Web uygulama mimarisi ve güvenlik"
+        },
+        {
+          "label": "Ders 2: OWASP Top 10 Genel Bakış",
+          "href": "/education/lessons/ethical-hacking/module-04/lesson-02",
+          "description": "En kritik web güvenlik açıkları"
+        },
+        {
+          "label": "Ders 3: SQL Injection Temelleri",
+          "href": "/education/lessons/ethical-hacking/module-04/lesson-03",
+          "description": "SQL injection kavramı ve türleri"
+        },
+        {
+          "label": "Ders 4: SQL Injection Saldırı Teknikleri",
+          "href": "/education/lessons/ethical-hacking/module-04/lesson-04",
+          "description": "Union-based, error-based, blind SQL injection"
+        },
+        {
+          "label": "Ders 5: SQL Injection Koruması ve Önleme",
+          "href": "/education/lessons/ethical-hacking/module-04/lesson-05",
+          "description": "Prepared statements ve parametreli sorgular"
+        },
+        {
+          "label": "Ders 6: Cross-Site Scripting (XSS)",
+          "href": "/education/lessons/ethical-hacking/module-04/lesson-06",
+          "description": "XSS türleri ve saldırı vektörleri"
+        },
+        {
+          "label": "Ders 7: Reflected, Stored ve DOM-based XSS",
+          "href": "/education/lessons/ethical-hacking/module-04/lesson-07",
+          "description": "XSS türlerinin detaylı analizi"
+        },
+        {
+          "label": "Ders 8: Cross-Site Request Forgery (CSRF)",
+          "href": "/education/lessons/ethical-hacking/module-04/lesson-08",
+          "description": "CSRF saldırıları ve korunma"
+        },
+        {
+          "label": "Ders 9: Authentication ve Session Yönetimi",
+          "href": "/education/lessons/ethical-hacking/module-04/lesson-09",
+          "description": "Oturum yönetimi güvenlik açıkları"
+        },
+        {
+          "label": "Ders 10: Authorization Bypass",
+          "href": "/education/lessons/ethical-hacking/module-04/lesson-10",
+          "description": "Yetkilendirme atlatma teknikleri"
+        },
+        {
+          "label": "Ders 11: File Upload Güvenlik Açıkları",
+          "href": "/education/lessons/ethical-hacking/module-04/lesson-11",
+          "description": "Dosya yükleme saldırıları"
+        },
+        {
+          "label": "Ders 12: XML External Entity (XXE)",
+          "href": "/education/lessons/ethical-hacking/module-04/lesson-12",
+          "description": "XXE saldırıları ve korunma"
+        },
+        {
+          "label": "Ders 13: Server-Side Request Forgery (SSRF)",
+          "href": "/education/lessons/ethical-hacking/module-04/lesson-13",
+          "description": "SSRF saldırıları ve tespiti"
+        },
+        {
+          "label": "Ders 14: Web Uygulama Güvenlik Test Araçları",
+          "href": "/education/lessons/ethical-hacking/module-04/lesson-14",
+          "description": "Burp Suite, OWASP ZAP kullanımı"
+        },
+        {
+          "label": "Ders 15: Web Güvenlik Test Raporlama",
+          "href": "/education/lessons/ethical-hacking/module-04/lesson-15",
+          "description": "Web güvenlik test sonuçlarının raporlanması"
+        }
+      ]
+    },
+    {
+      "id": "module-05",
+      "title": "Module 5: Penetration Testing Araçları",
+      "summary": "Kali Linux, Metasploit, Burp Suite, Nmap ve diğer penetration testing araçlarının kullanımı.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Kali Linux ortamını kullanmak",
+        "Metasploit framework'ünü öğrenmek",
+        "Burp Suite ile web güvenlik testi yapmak",
+        "Penetration testing araçlarını etkili kullanmak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Kali Linux'a Giriş",
+          "href": "/education/lessons/ethical-hacking/module-05/lesson-01",
+          "description": "Kali Linux kurulumu ve yapılandırma"
+        },
+        {
+          "label": "Ders 2: Kali Linux Araç Kategorileri",
+          "href": "/education/lessons/ethical-hacking/module-05/lesson-02",
+          "description": "Information gathering, vulnerability analysis araçları"
+        },
+        {
+          "label": "Ders 3: Metasploit Framework Temelleri",
+          "href": "/education/lessons/ethical-hacking/module-05/lesson-03",
+          "description": "Metasploit mimarisi ve kullanımı"
+        },
+        {
+          "label": "Ders 4: Metasploit Exploit Kullanımı",
+          "href": "/education/lessons/ethical-hacking/module-05/lesson-04",
+          "description": "Exploit seçimi ve çalıştırma"
+        },
+        {
+          "label": "Ders 5: Metasploit Payload ve Encoder",
+          "href": "/education/lessons/ethical-hacking/module-05/lesson-05",
+          "description": "Payload oluşturma ve encoding"
+        },
+        {
+          "label": "Ders 6: Meterpreter Kullanımı",
+          "href": "/education/lessons/ethical-hacking/module-05/lesson-06",
+          "description": "Meterpreter shell ve komutları"
+        },
+        {
+          "label": "Ders 7: Burp Suite Kurulumu ve Yapılandırma",
+          "href": "/education/lessons/ethical-hacking/module-05/lesson-07",
+          "description": "Burp Suite proxy ayarları"
+        },
+        {
+          "label": "Ders 8: Burp Suite ile Web Proxy",
+          "href": "/education/lessons/ethical-hacking/module-05/lesson-08",
+          "description": "HTTP trafiği yakalama ve manipülasyon"
+        },
+        {
+          "label": "Ders 9: Burp Suite Scanner Kullanımı",
+          "href": "/education/lessons/ethical-hacking/module-05/lesson-09",
+          "description": "Otomatik güvenlik açığı taraması"
+        },
+        {
+          "label": "Ders 10: Burp Suite Intruder ve Repeater",
+          "href": "/education/lessons/ethical-hacking/module-05/lesson-10",
+          "description": "Saldırı otomasyonu ve test tekrarı"
+        },
+        {
+          "label": "Ders 11: Nmap Gelişmiş Kullanım",
+          "href": "/education/lessons/ethical-hacking/module-05/lesson-11",
+          "description": "Nmap script engine ve özel taramalar"
+        },
+        {
+          "label": "Ders 12: Wireshark ile Paket Analizi",
+          "href": "/education/lessons/ethical-hacking/module-05/lesson-12",
+          "description": "Ağ trafiği yakalama ve filtreleme"
+        },
+        {
+          "label": "Ders 13: John the Ripper ve Hashcat",
+          "href": "/education/lessons/ethical-hacking/module-05/lesson-13",
+          "description": "Şifre kırma araçları"
+        },
+        {
+          "label": "Ders 14: Aircrack-ng ile Wireless Test",
+          "href": "/education/lessons/ethical-hacking/module-05/lesson-14",
+          "description": "Kablosuz ağ güvenlik testi"
+        },
+        {
+          "label": "Ders 15: Araç Entegrasyonu ve Workflow",
+          "href": "/education/lessons/ethical-hacking/module-05/lesson-15",
+          "description": "Araçların birlikte kullanımı ve iş akışı"
+        }
+      ]
+    },
+    {
+      "id": "module-06",
+      "title": "Module 6: Kriptografi ve Şifreleme",
+      "summary": "Kriptografi temelleri, simetrik/asimetrik şifreleme, hash fonksiyonları, dijital imzalar ve PKI.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Kriptografi temel kavramlarını anlamak",
+        "Simetrik ve asimetrik şifreleme tekniklerini öğrenmek",
+        "Hash fonksiyonları ve dijital imzaları kullanmak",
+        "PKI ve sertifika yönetimini anlamak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Kriptografi Temelleri",
+          "href": "/education/lessons/ethical-hacking/module-06/lesson-01",
+          "description": "Kriptografi tarihçesi ve temel kavramlar"
+        },
+        {
+          "label": "Ders 2: Simetrik Şifreleme",
+          "href": "/education/lessons/ethical-hacking/module-06/lesson-02",
+          "description": "AES, DES, 3DES algoritmaları"
+        },
+        {
+          "label": "Ders 3: Asimetrik Şifreleme",
+          "href": "/education/lessons/ethical-hacking/module-06/lesson-03",
+          "description": "RSA, ECC, Diffie-Hellman"
+        },
+        {
+          "label": "Ders 4: Hash Fonksiyonları",
+          "href": "/education/lessons/ethical-hacking/module-06/lesson-04",
+          "description": "MD5, SHA-1, SHA-256, SHA-512"
+        },
+        {
+          "label": "Ders 5: Dijital İmzalar",
+          "href": "/education/lessons/ethical-hacking/module-06/lesson-05",
+          "description": "Dijital imza oluşturma ve doğrulama"
+        },
+        {
+          "label": "Ders 6: Public Key Infrastructure (PKI)",
+          "href": "/education/lessons/ethical-hacking/module-06/lesson-06",
+          "description": "PKI mimarisi ve sertifika yönetimi"
+        },
+        {
+          "label": "Ders 7: SSL/TLS Protokolleri",
+          "href": "/education/lessons/ethical-hacking/module-06/lesson-07",
+          "description": "SSL/TLS handshake ve güvenlik"
+        },
+        {
+          "label": "Ders 8: Certificate Authority (CA)",
+          "href": "/education/lessons/ethical-hacking/module-06/lesson-08",
+          "description": "Sertifika otoriteleri ve yönetimi"
+        },
+        {
+          "label": "Ders 9: Şifreleme Zayıflıkları",
+          "href": "/education/lessons/ethical-hacking/module-06/lesson-09",
+          "description": "Zayıf algoritmalar ve implementasyon hataları"
+        },
+        {
+          "label": "Ders 10: Key Management",
+          "href": "/education/lessons/ethical-hacking/module-06/lesson-10",
+          "description": "Anahtar yönetimi ve güvenli saklama"
+        },
+        {
+          "label": "Ders 11: Steganography",
+          "href": "/education/lessons/ethical-hacking/module-06/lesson-11",
+          "description": "Gizli mesaj saklama teknikleri"
+        },
+        {
+          "label": "Ders 12: Quantum Kriptografi",
+          "href": "/education/lessons/ethical-hacking/module-06/lesson-12",
+          "description": "Kuantum şifreleme ve gelecek"
+        },
+        {
+          "label": "Ders 13: Kriptografi Saldırıları",
+          "href": "/education/lessons/ethical-hacking/module-06/lesson-13",
+          "description": "Kriptanaliz teknikleri"
+        },
+        {
+          "label": "Ders 14: Kriptografi Test Araçları",
+          "href": "/education/lessons/ethical-hacking/module-06/lesson-14",
+          "description": "OpenSSL, GnuPG kullanımı"
+        },
+        {
+          "label": "Ders 15: Kriptografi Best Practices",
+          "href": "/education/lessons/ethical-hacking/module-06/lesson-15",
+          "description": "Güvenli şifreleme uygulamaları"
+        }
+      ]
+    },
+    {
+      "id": "module-07",
+      "title": "Module 7: Wireless Security",
+      "summary": "Kablosuz ağ güvenliği, WiFi protokolleri, WEP/WPA/WPA2/WPA3, kablosuz saldırılar ve korunma.",
+      "durationMinutes": 450,
+      "objectives": [
+        "WiFi protokollerini anlamak",
+        "Kablosuz ağ güvenlik açıklarını tespit etmek",
+        "Kablosuz saldırı tekniklerini öğrenmek",
+        "Kablosuz ağ güvenliği sağlamak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Kablosuz Ağ Temelleri",
+          "href": "/education/lessons/ethical-hacking/module-07/lesson-01",
+          "description": "WiFi standartları ve frekanslar"
+        },
+        {
+          "label": "Ders 2: WiFi Güvenlik Protokolleri",
+          "href": "/education/lessons/ethical-hacking/module-07/lesson-02",
+          "description": "WEP, WPA, WPA2, WPA3 karşılaştırması"
+        },
+        {
+          "label": "Ders 3: WEP Güvenlik Açıkları",
+          "href": "/education/lessons/ethical-hacking/module-07/lesson-03",
+          "description": "WEP zafiyetleri ve saldırı yöntemleri"
+        },
+        {
+          "label": "Ders 4: WPA/WPA2 PSK Saldırıları",
+          "href": "/education/lessons/ethical-hacking/module-07/lesson-04",
+          "description": "Pre-shared key saldırıları"
+        },
+        {
+          "label": "Ders 5: WPA3 ve Güvenlik İyileştirmeleri",
+          "href": "/education/lessons/ethical-hacking/module-07/lesson-05",
+          "description": "WPA3 özellikleri ve güvenlik"
+        },
+        {
+          "label": "Ders 6: WiFi Reconnaissance",
+          "href": "/education/lessons/ethical-hacking/module-07/lesson-06",
+          "description": "Kablosuz ağ keşfi ve bilgi toplama"
+        },
+        {
+          "label": "Ders 7: Aircrack-ng Kullanımı",
+          "href": "/education/lessons/ethical-hacking/module-07/lesson-07",
+          "description": "WiFi saldırı araçları"
+        },
+        {
+          "label": "Ders 8: Evil Twin Saldırıları",
+          "href": "/education/lessons/ethical-hacking/module-07/lesson-08",
+          "description": "Sahte erişim noktası oluşturma"
+        },
+        {
+          "label": "Ders 9: Deauthentication Saldırıları",
+          "href": "/education/lessons/ethical-hacking/module-07/lesson-09",
+          "description": "Bağlantı kesme saldırıları"
+        },
+        {
+          "label": "Ders 10: WiFi Protected Setup (WPS) Saldırıları",
+          "href": "/education/lessons/ethical-hacking/module-07/lesson-10",
+          "description": "WPS PIN brute force"
+        },
+        {
+          "label": "Ders 11: Enterprise WiFi Güvenliği",
+          "href": "/education/lessons/ethical-hacking/module-07/lesson-11",
+          "description": "802.1X ve RADIUS kullanımı"
+        },
+        {
+          "label": "Ders 12: Bluetooth Güvenliği",
+          "href": "/education/lessons/ethical-hacking/module-07/lesson-12",
+          "description": "Bluetooth protokolleri ve saldırıları"
+        },
+        {
+          "label": "Ders 13: RFID ve NFC Güvenliği",
+          "href": "/education/lessons/ethical-hacking/module-07/lesson-13",
+          "description": "RFID/NFC teknolojileri ve güvenlik"
+        },
+        {
+          "label": "Ders 14: Kablosuz Ağ Güvenlik Testi",
+          "href": "/education/lessons/ethical-hacking/module-07/lesson-14",
+          "description": "WiFi penetration testing metodolojisi"
+        },
+        {
+          "label": "Ders 15: Wireless Security Best Practices",
+          "href": "/education/lessons/ethical-hacking/module-07/lesson-15",
+          "description": "Kablosuz ağ güvenliği önerileri"
+        }
+      ]
+    },
+    {
+      "id": "module-08",
+      "title": "Module 8: Social Engineering",
+      "summary": "Sosyal mühendislik saldırıları, phishing, pretexting, baiting ve sosyal mühendislik savunma stratejileri.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Sosyal mühendislik tekniklerini anlamak",
+        "Phishing saldırılarını tespit etmek",
+        "Sosyal mühendislik testleri yapmak",
+        "Sosyal mühendislik savunma stratejileri geliştirmek"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Social Engineering Temelleri",
+          "href": "/education/lessons/ethical-hacking/module-08/lesson-01",
+          "description": "Sosyal mühendislik kavramı ve psikoloji"
+        },
+        {
+          "label": "Ders 2: Phishing Saldırıları",
+          "href": "/education/lessons/ethical-hacking/module-08/lesson-02",
+          "description": "E-posta tabanlı phishing teknikleri"
+        },
+        {
+          "label": "Ders 3: Spear Phishing ve Whaling",
+          "href": "/education/lessons/ethical-hacking/module-08/lesson-03",
+          "description": "Hedefli phishing saldırıları"
+        },
+        {
+          "label": "Ders 4: Vishing (Voice Phishing)",
+          "href": "/education/lessons/ethical-hacking/module-08/lesson-04",
+          "description": "Telefon tabanlı sosyal mühendislik"
+        },
+        {
+          "label": "Ders 5: Smishing (SMS Phishing)",
+          "href": "/education/lessons/ethical-hacking/module-08/lesson-05",
+          "description": "SMS tabanlı saldırılar"
+        },
+        {
+          "label": "Ders 6: Pretexting",
+          "href": "/education/lessons/ethical-hacking/module-08/lesson-06",
+          "description": "Sahte kimlik ve senaryo oluşturma"
+        },
+        {
+          "label": "Ders 7: Baiting ve USB Drops",
+          "href": "/education/lessons/ethical-hacking/module-08/lesson-07",
+          "description": "Fiziksel cihaz bırakma saldırıları"
+        },
+        {
+          "label": "Ders 8: Tailgating ve Shoulder Surfing",
+          "href": "/education/lessons/ethical-hacking/module-08/lesson-08",
+          "description": "Fiziksel erişim teknikleri"
+        },
+        {
+          "label": "Ders 9: OSINT (Open Source Intelligence)",
+          "href": "/education/lessons/ethical-hacking/module-08/lesson-09",
+          "description": "Açık kaynak bilgi toplama"
+        },
+        {
+          "label": "Ders 10: Social Media Reconnaissance",
+          "href": "/education/lessons/ethical-hacking/module-08/lesson-10",
+          "description": "Sosyal medya üzerinden bilgi toplama"
+        },
+        {
+          "label": "Ders 11: Phishing Framework Kullanımı",
+          "href": "/education/lessons/ethical-hacking/module-08/lesson-11",
+          "description": "Gophish, SET gibi araçlar"
+        },
+        {
+          "label": "Ders 12: Social Engineering Test Senaryoları",
+          "href": "/education/lessons/ethical-hacking/module-08/lesson-12",
+          "description": "Pratik sosyal mühendislik testleri"
+        },
+        {
+          "label": "Ders 13: Awareness ve Eğitim",
+          "href": "/education/lessons/ethical-hacking/module-08/lesson-13",
+          "description": "Kullanıcı farkındalığı programları"
+        },
+        {
+          "label": "Ders 14: Social Engineering Savunma",
+          "href": "/education/lessons/ethical-hacking/module-08/lesson-14",
+          "description": "Sosyal mühendislik korunma stratejileri"
+        },
+        {
+          "label": "Ders 15: Social Engineering Raporlama",
+          "href": "/education/lessons/ethical-hacking/module-08/lesson-15",
+          "description": "Test sonuçlarının raporlanması"
+        }
+      ]
+    },
+    {
+      "id": "module-09",
+      "title": "Module 9: Malware Analysis",
+      "summary": "Malware türleri, statik ve dinamik analiz, reverse engineering, sandboxing ve malware tespiti.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Malware türlerini anlamak",
+        "Statik ve dinamik analiz yapmak",
+        "Reverse engineering tekniklerini öğrenmek",
+        "Malware tespit ve analiz araçlarını kullanmak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Malware Türleri ve Sınıflandırma",
+          "href": "/education/lessons/ethical-hacking/module-09/lesson-01",
+          "description": "Virus, worm, trojan, ransomware"
+        },
+        {
+          "label": "Ders 2: Malware Yaşam Döngüsü",
+          "href": "/education/lessons/ethical-hacking/module-09/lesson-02",
+          "description": "Malware geliştirme ve dağıtım süreçleri"
+        },
+        {
+          "label": "Ders 3: Statik Analiz Temelleri",
+          "href": "/education/lessons/ethical-hacking/module-09/lesson-03",
+          "description": "Kod analizi ve dosya inceleme"
+        },
+        {
+          "label": "Ders 4: Dinamik Analiz Temelleri",
+          "href": "/education/lessons/ethical-hacking/module-09/lesson-04",
+          "description": "Çalışma zamanı davranış analizi"
+        },
+        {
+          "label": "Ders 5: Sandbox Ortamları",
+          "href": "/education/lessons/ethical-hacking/module-09/lesson-05",
+          "description": "İzole test ortamları oluşturma"
+        },
+        {
+          "label": "Ders 6: Reverse Engineering Araçları",
+          "href": "/education/lessons/ethical-hacking/module-09/lesson-06",
+          "description": "IDA Pro, Ghidra, Radare2"
+        },
+        {
+          "label": "Ders 7: Assembly Dili Temelleri",
+          "href": "/education/lessons/ethical-hacking/module-09/lesson-07",
+          "description": "x86/x64 assembly okuma"
+        },
+        {
+          "label": "Ders 8: Packing ve Obfuscation",
+          "href": "/education/lessons/ethical-hacking/module-09/lesson-08",
+          "description": "Kod gizleme teknikleri"
+        },
+        {
+          "label": "Ders 9: API Hooking ve Monitoring",
+          "href": "/education/lessons/ethical-hacking/module-09/lesson-09",
+          "description": "Sistem çağrılarını izleme"
+        },
+        {
+          "label": "Ders 10: Network Traffic Analizi",
+          "href": "/education/lessons/ethical-hacking/module-09/lesson-10",
+          "description": "Malware ağ aktivitesi analizi"
+        },
+        {
+          "label": "Ders 11: YARA Kuralları",
+          "href": "/education/lessons/ethical-hacking/module-09/lesson-11",
+          "description": "Malware imza oluşturma"
+        },
+        {
+          "label": "Ders 12: Memory Dump Analizi",
+          "href": "/education/lessons/ethical-hacking/module-09/lesson-12",
+          "description": "Bellek analizi teknikleri"
+        },
+        {
+          "label": "Ders 13: Ransomware Analizi",
+          "href": "/education/lessons/ethical-hacking/module-09/lesson-13",
+          "description": "Ransomware türleri ve analiz"
+        },
+        {
+          "label": "Ders 14: Malware Tespit Sistemleri",
+          "href": "/education/lessons/ethical-hacking/module-09/lesson-14",
+          "description": "AV, EDR, sandbox entegrasyonu"
+        },
+        {
+          "label": "Ders 15: Malware Analiz Raporlama",
+          "href": "/education/lessons/ethical-hacking/module-09/lesson-15",
+          "description": "Analiz sonuçlarının dokümante edilmesi"
+        }
+      ]
+    },
+    {
+      "id": "module-10",
+      "title": "Module 10: Incident Response",
+      "summary": "Olay müdahale süreçleri, forensics, log analizi, olay tespiti ve olay müdahale planlaması.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Olay müdahale süreçlerini anlamak",
+        "Dijital forensics tekniklerini öğrenmek",
+        "Log analizi yapmak",
+        "Olay müdahale planı oluşturmak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Incident Response Temelleri",
+          "href": "/education/lessons/ethical-hacking/module-10/lesson-01",
+          "description": "Olay müdahale kavramı ve süreçler"
+        },
+        {
+          "label": "Ders 2: Incident Response Yaşam Döngüsü",
+          "href": "/education/lessons/ethical-hacking/module-10/lesson-02",
+          "description": "NIST IR yaşam döngüsü"
+        },
+        {
+          "label": "Ders 3: Olay Tespiti ve Sınıflandırma",
+          "href": "/education/lessons/ethical-hacking/module-10/lesson-03",
+          "description": "Olay türleri ve önceliklendirme"
+        },
+        {
+          "label": "Ders 4: Dijital Forensics Temelleri",
+          "href": "/education/lessons/ethical-hacking/module-10/lesson-04",
+          "description": "Forensics metodolojisi"
+        },
+        {
+          "label": "Ders 5: Disk Imaging ve Acquisition",
+          "href": "/education/lessons/ethical-hacking/module-10/lesson-05",
+          "description": "Disk görüntüleme teknikleri"
+        },
+        {
+          "label": "Ders 6: File System Forensics",
+          "href": "/education/lessons/ethical-hacking/module-10/lesson-06",
+          "description": "Dosya sistemi analizi"
+        },
+        {
+          "label": "Ders 7: Memory Forensics",
+          "href": "/education/lessons/ethical-hacking/module-10/lesson-07",
+          "description": "Bellek analizi ve Volatility"
+        },
+        {
+          "label": "Ders 8: Network Forensics",
+          "href": "/education/lessons/ethical-hacking/module-10/lesson-08",
+          "description": "Ağ trafiği analizi ve olay tespiti"
+        },
+        {
+          "label": "Ders 9: Log Analizi",
+          "href": "/education/lessons/ethical-hacking/module-10/lesson-09",
+          "description": "Sistem ve uygulama log analizi"
+        },
+        {
+          "label": "Ders 10: Timeline Analizi",
+          "href": "/education/lessons/ethical-hacking/module-10/lesson-10",
+          "description": "Olay zaman çizelgesi oluşturma"
+        },
+        {
+          "label": "Ders 11: Malware İzolasyonu ve Analizi",
+          "href": "/education/lessons/ethical-hacking/module-10/lesson-11",
+          "description": "Olay sırasında malware analizi"
+        },
+        {
+          "label": "Ders 12: Containment ve Eradication",
+          "href": "/education/lessons/ethical-hacking/module-10/lesson-12",
+          "description": "Olay sınırlandırma ve temizleme"
+        },
+        {
+          "label": "Ders 13: Recovery ve Restoration",
+          "href": "/education/lessons/ethical-hacking/module-10/lesson-13",
+          "description": "Sistem kurtarma süreçleri"
+        },
+        {
+          "label": "Ders 14: Post-Incident Activities",
+          "href": "/education/lessons/ethical-hacking/module-10/lesson-14",
+          "description": "Olay sonrası aktiviteler ve dersler"
+        },
+        {
+          "label": "Ders 15: Incident Response Raporlama",
+          "href": "/education/lessons/ethical-hacking/module-10/lesson-15",
+          "description": "Olay müdahale raporu hazırlama"
+        }
+      ]
+    },
+    {
+      "id": "module-11",
+      "title": "Module 11: Vulnerability Assessment",
+      "summary": "Zafiyet değerlendirme metodolojisi, otomatik tarama araçları, zafiyet veritabanları ve risk değerlendirme.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Zafiyet değerlendirme süreçlerini anlamak",
+        "Otomatik tarama araçlarını kullanmak",
+        "Zafiyet veritabanlarını kullanmak",
+        "Risk değerlendirme yapmak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Vulnerability Assessment Temelleri",
+          "href": "/education/lessons/ethical-hacking/module-11/lesson-01",
+          "description": "Zafiyet değerlendirme kavramı"
+        },
+        {
+          "label": "Ders 2: Vulnerability Scanning Metodolojisi",
+          "href": "/education/lessons/ethical-hacking/module-11/lesson-02",
+          "description": "Tarama süreçleri ve planlama"
+        },
+        {
+          "label": "Ders 3: Nessus Kullanımı",
+          "href": "/education/lessons/ethical-hacking/module-11/lesson-03",
+          "description": "Nessus ile zafiyet taraması"
+        },
+        {
+          "label": "Ders 4: OpenVAS Kullanımı",
+          "href": "/education/lessons/ethical-hacking/module-11/lesson-04",
+          "description": "Açık kaynak zafiyet tarayıcı"
+        },
+        {
+          "label": "Ders 5: Qualys ve Cloud-based Scanning",
+          "href": "/education/lessons/ethical-hacking/module-11/lesson-05",
+          "description": "Bulut tabanlı tarama çözümleri"
+        },
+        {
+          "label": "Ders 6: CVE ve Zafiyet Veritabanları",
+          "href": "/education/lessons/ethical-hacking/module-11/lesson-06",
+          "description": "CVE, CWE, NVD kullanımı"
+        },
+        {
+          "label": "Ders 7: CVSS Skorlama",
+          "href": "/education/lessons/ethical-hacking/module-11/lesson-07",
+          "description": "Zafiyet önceliklendirme"
+        },
+        {
+          "label": "Ders 8: False Positive Analizi",
+          "href": "/education/lessons/ethical-hacking/module-11/lesson-08",
+          "description": "Yanlış pozitif sonuçları filtreleme"
+        },
+        {
+          "label": "Ders 9: Configuration Assessment",
+          "href": "/education/lessons/ethical-hacking/module-11/lesson-09",
+          "description": "Yapılandırma zafiyetleri"
+        },
+        {
+          "label": "Ders 10: Patch Management",
+          "href": "/education/lessons/ethical-hacking/module-11/lesson-10",
+          "description": "Yama yönetimi süreçleri"
+        },
+        {
+          "label": "Ders 11: Compliance Scanning",
+          "href": "/education/lessons/ethical-hacking/module-11/lesson-11",
+          "description": "Uyumluluk taramaları"
+        },
+        {
+          "label": "Ders 12: Container ve Cloud Security Scanning",
+          "href": "/education/lessons/ethical-hacking/module-11/lesson-12",
+          "description": "Konteyner ve bulut güvenlik taraması"
+        },
+        {
+          "label": "Ders 13: Risk Değerlendirme",
+          "href": "/education/lessons/ethical-hacking/module-11/lesson-13",
+          "description": "Risk skorlama ve önceliklendirme"
+        },
+        {
+          "label": "Ders 14: Vulnerability Remediation",
+          "href": "/education/lessons/ethical-hacking/module-11/lesson-14",
+          "description": "Zafiyet düzeltme süreçleri"
+        },
+        {
+          "label": "Ders 15: Vulnerability Assessment Raporlama",
+          "href": "/education/lessons/ethical-hacking/module-11/lesson-15",
+          "description": "Tarama sonuçlarının raporlanması"
+        }
+      ]
+    },
+    {
+      "id": "module-12",
+      "title": "Module 12: Exploitation Techniques",
+      "summary": "Exploit geliştirme, buffer overflow, format string, race condition ve diğer exploitation teknikleri.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Exploit geliştirme süreçlerini anlamak",
+        "Buffer overflow saldırılarını öğrenmek",
+        "Format string zafiyetlerini anlamak",
+        "Exploit yazma tekniklerini uygulamak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Exploitation Temelleri",
+          "href": "/education/lessons/ethical-hacking/module-12/lesson-01",
+          "description": "Exploit kavramı ve türleri"
+        },
+        {
+          "label": "Ders 2: Buffer Overflow Temelleri",
+          "href": "/education/lessons/ethical-hacking/module-12/lesson-02",
+          "description": "Stack overflow kavramı"
+        },
+        {
+          "label": "Ders 3: Stack-based Buffer Overflow",
+          "href": "/education/lessons/ethical-hacking/module-12/lesson-03",
+          "description": "Stack overflow exploit geliştirme"
+        },
+        {
+          "label": "Ders 4: Heap-based Buffer Overflow",
+          "href": "/education/lessons/ethical-hacking/module-12/lesson-04",
+          "description": "Heap overflow teknikleri"
+        },
+        {
+          "label": "Ders 5: Format String Vulnerabilities",
+          "href": "/education/lessons/ethical-hacking/module-12/lesson-05",
+          "description": "Format string zafiyetleri"
+        },
+        {
+          "label": "Ders 6: Integer Overflow",
+          "href": "/education/lessons/ethical-hacking/module-12/lesson-06",
+          "description": "Tamsayı taşması zafiyetleri"
+        },
+        {
+          "label": "Ders 7: Race Conditions",
+          "href": "/education/lessons/ethical-hacking/module-12/lesson-07",
+          "description": "Yarış durumu zafiyetleri"
+        },
+        {
+          "label": "Ders 8: Return-oriented Programming (ROP)",
+          "href": "/education/lessons/ethical-hacking/module-12/lesson-08",
+          "description": "ROP chain oluşturma"
+        },
+        {
+          "label": "Ders 9: Shellcode Geliştirme",
+          "href": "/education/lessons/ethical-hacking/module-12/lesson-09",
+          "description": "Shellcode yazma teknikleri"
+        },
+        {
+          "label": "Ders 10: Exploit Development Framework",
+          "href": "/education/lessons/ethical-hacking/module-12/lesson-10",
+          "description": "Exploit geliştirme araçları"
+        },
+        {
+          "label": "Ders 11: Web Application Exploitation",
+          "href": "/education/lessons/ethical-hacking/module-12/lesson-11",
+          "description": "Web uygulama exploit teknikleri"
+        },
+        {
+          "label": "Ders 12: Database Exploitation",
+          "href": "/education/lessons/ethical-hacking/module-12/lesson-12",
+          "description": "Veritabanı exploit teknikleri"
+        },
+        {
+          "label": "Ders 13: Privilege Escalation",
+          "href": "/education/lessons/ethical-hacking/module-12/lesson-13",
+          "description": "Yetki yükseltme teknikleri"
+        },
+        {
+          "label": "Ders 14: Exploit Mitigation Techniques",
+          "href": "/education/lessons/ethical-hacking/module-12/lesson-14",
+          "description": "ASLR, DEP, Stack canaries"
+        },
+        {
+          "label": "Ders 15: Exploit Testing ve Doğrulama",
+          "href": "/education/lessons/ethical-hacking/module-12/lesson-15",
+          "description": "Exploit test metodolojisi"
+        }
+      ]
+    },
+    {
+      "id": "module-13",
+      "title": "Module 13: Post-Exploitation",
+      "summary": "Saldırı sonrası aktiviteler, persistence, lateral movement, privilege escalation ve data exfiltration.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Post-exploitation tekniklerini anlamak",
+        "Persistence mekanizmalarını öğrenmek",
+        "Lateral movement yapmak",
+        "Data exfiltration tekniklerini uygulamak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Post-Exploitation Temelleri",
+          "href": "/education/lessons/ethical-hacking/module-13/lesson-01",
+          "description": "Saldırı sonrası aktiviteler"
+        },
+        {
+          "label": "Ders 2: Persistence Mekanizmaları",
+          "href": "/education/lessons/ethical-hacking/module-13/lesson-02",
+          "description": "Kalıcılık sağlama teknikleri"
+        },
+        {
+          "label": "Ders 3: Backdoor Oluşturma",
+          "href": "/education/lessons/ethical-hacking/module-13/lesson-03",
+          "description": "Arka kapı yerleştirme"
+        },
+        {
+          "label": "Ders 4: Scheduled Tasks ve Services",
+          "href": "/education/lessons/ethical-hacking/module-13/lesson-04",
+          "description": "Zamanlanmış görevler ve servisler"
+        },
+        {
+          "label": "Ders 5: Registry Manipulation",
+          "href": "/education/lessons/ethical-hacking/module-13/lesson-05",
+          "description": "Windows kayıt defteri manipülasyonu"
+        },
+        {
+          "label": "Ders 6: Privilege Escalation Windows",
+          "href": "/education/lessons/ethical-hacking/module-13/lesson-06",
+          "description": "Windows yetki yükseltme"
+        },
+        {
+          "label": "Ders 7: Privilege Escalation Linux",
+          "href": "/education/lessons/ethical-hacking/module-13/lesson-07",
+          "description": "Linux yetki yükseltme"
+        },
+        {
+          "label": "Ders 8: Lateral Movement",
+          "href": "/education/lessons/ethical-hacking/module-13/lesson-08",
+          "description": "Yatay hareket teknikleri"
+        },
+        {
+          "label": "Ders 9: Credential Harvesting",
+          "href": "/education/lessons/ethical-hacking/module-13/lesson-09",
+          "description": "Kimlik bilgisi toplama"
+        },
+        {
+          "label": "Ders 10: Pass the Hash ve Pass the Ticket",
+          "href": "/education/lessons/ethical-hacking/module-13/lesson-10",
+          "description": "Kimlik doğrulama atlatma"
+        },
+        {
+          "label": "Ders 11: Data Exfiltration",
+          "href": "/education/lessons/ethical-hacking/module-13/lesson-11",
+          "description": "Veri çıkarma teknikleri"
+        },
+        {
+          "label": "Ders 12: Command and Control (C2)",
+          "href": "/education/lessons/ethical-hacking/module-13/lesson-12",
+          "description": "C2 kanalları oluşturma"
+        },
+        {
+          "label": "Ders 13: Log Manipulation ve Anti-Forensics",
+          "href": "/education/lessons/ethical-hacking/module-13/lesson-13",
+          "description": "Log temizleme ve iz silme"
+        },
+        {
+          "label": "Ders 14: Post-Exploitation Framework",
+          "href": "/education/lessons/ethical-hacking/module-13/lesson-14",
+          "description": "Empire, Cobalt Strike kullanımı"
+        },
+        {
+          "label": "Ders 15: Post-Exploitation Raporlama",
+          "href": "/education/lessons/ethical-hacking/module-13/lesson-15",
+          "description": "Saldırı sonrası aktivite raporlama"
+        }
+      ]
+    },
+    {
+      "id": "module-14",
+      "title": "Module 14: Reporting ve Dokümantasyon",
+      "summary": "Penetration test raporlama, zafiyet dokümantasyonu, öneriler ve müşteri sunumu.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Etkili penetration test raporu yazmak",
+        "Zafiyetleri dokümante etmek",
+        "Öneriler ve iyileştirmeler sunmak",
+        "Müşteriye rapor sunmak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Raporlama Temelleri",
+          "href": "/education/lessons/ethical-hacking/module-14/lesson-01",
+          "description": "Rapor yapısı ve içerik"
+        },
+        {
+          "label": "Ders 2: Executive Summary Yazımı",
+          "href": "/education/lessons/ethical-hacking/module-14/lesson-02",
+          "description": "Yönetici özeti hazırlama"
+        },
+        {
+          "label": "Ders 3: Zafiyet Dokümantasyonu",
+          "href": "/education/lessons/ethical-hacking/module-14/lesson-03",
+          "description": "Zafiyet açıklama formatı"
+        },
+        {
+          "label": "Ders 4: Proof of Concept (PoC) Oluşturma",
+          "href": "/education/lessons/ethical-hacking/module-14/lesson-04",
+          "description": "Zafiyet kanıtı hazırlama"
+        },
+        {
+          "label": "Ders 5: Risk Değerlendirme ve Skorlama",
+          "href": "/education/lessons/ethical-hacking/module-14/lesson-05",
+          "description": "CVSS ve risk skorlama"
+        },
+        {
+          "label": "Ders 6: Remediation Önerileri",
+          "href": "/education/lessons/ethical-hacking/module-14/lesson-06",
+          "description": "Düzeltme önerileri yazma"
+        },
+        {
+          "label": "Ders 7: Görselleştirme ve Grafikler",
+          "href": "/education/lessons/ethical-hacking/module-14/lesson-07",
+          "description": "Rapor görselleştirme"
+        },
+        {
+          "label": "Ders 8: Teknik Detay Raporu",
+          "href": "/education/lessons/ethical-hacking/module-14/lesson-08",
+          "description": "Teknik ekip için detaylı rapor"
+        },
+        {
+          "label": "Ders 9: Rapor Şablonları",
+          "href": "/education/lessons/ethical-hacking/module-14/lesson-09",
+          "description": "Standart rapor formatları"
+        },
+        {
+          "label": "Ders 10: Rapor Araçları",
+          "href": "/education/lessons/ethical-hacking/module-14/lesson-10",
+          "description": "Rapor oluşturma araçları"
+        },
+        {
+          "label": "Ders 11: Müşteri Sunumu Hazırlama",
+          "href": "/education/lessons/ethical-hacking/module-14/lesson-11",
+          "description": "Sunum hazırlama teknikleri"
+        },
+        {
+          "label": "Ders 12: Follow-up ve Retest Raporlama",
+          "href": "/education/lessons/ethical-hacking/module-14/lesson-12",
+          "description": "Takip test raporları"
+        },
+        {
+          "label": "Ders 13: Compliance Raporlama",
+          "href": "/education/lessons/ethical-hacking/module-14/lesson-13",
+          "description": "Uyumluluk raporları"
+        },
+        {
+          "label": "Ders 14: Rapor Kalite Kontrolü",
+          "href": "/education/lessons/ethical-hacking/module-14/lesson-14",
+          "description": "Rapor gözden geçirme süreçleri"
+        },
+        {
+          "label": "Ders 15: Rapor Sunumu ve Müşteri Yönetimi",
+          "href": "/education/lessons/ethical-hacking/module-14/lesson-15",
+          "description": "Müşteri iletişimi ve sunum"
+        }
+      ]
+    },
+    {
+      "id": "module-15",
+      "title": "Module 15: Legal ve Etik Konular",
+      "summary": "Yasal çerçeve, etik kurallar, sözleşmeler, yasal sorumluluklar ve profesyonel standartlar.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Yasal çerçeveyi anlamak",
+        "Etik kuralları öğrenmek",
+        "Sözleşme hazırlama süreçlerini bilmek",
+        "Profesyonel standartları uygulamak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Yasal Çerçeve ve Mevzuat",
+          "href": "/education/lessons/ethical-hacking/module-15/lesson-01",
+          "description": "Bilgisayar suçları yasaları"
+        },
+        {
+          "label": "Ders 2: İzin ve Sözleşmeler",
+          "href": "/education/lessons/ethical-hacking/module-15/lesson-02",
+          "description": "Yazılı izin ve sözleşme gereklilikleri"
+        },
+        {
+          "label": "Ders 3: Scope ve Sınırlar",
+          "href": "/education/lessons/ethical-hacking/module-15/lesson-03",
+          "description": "Test kapsamı belirleme"
+        },
+        {
+          "label": "Ders 4: Etik Hacking Prensipleri",
+          "href": "/education/lessons/ethical-hacking/module-15/lesson-04",
+          "description": "Etik kurallar ve standartlar"
+        },
+        {
+          "label": "Ders 5: Sorumluluk ve Garantiler",
+          "href": "/education/lessons/ethical-hacking/module-15/lesson-05",
+          "description": "Yasal sorumluluklar"
+        },
+        {
+          "label": "Ders 6: Veri Koruma ve Gizlilik",
+          "href": "/education/lessons/ethical-hacking/module-15/lesson-06",
+          "description": "KVKK, GDPR uyumluluğu"
+        },
+        {
+          "label": "Ders 7: Sertifikasyon ve Standartlar",
+          "href": "/education/lessons/ethical-hacking/module-15/lesson-07",
+          "description": "ISO 27001, PCI DSS"
+        },
+        {
+          "label": "Ders 8: Profesyonel Sorumluluk Sigortası",
+          "href": "/education/lessons/ethical-hacking/module-15/lesson-08",
+          "description": "Mesleki sigorta ve koruma"
+        },
+        {
+          "label": "Ders 9: Disclosur ve Responsible Disclosure",
+          "href": "/education/lessons/ethical-hacking/module-15/lesson-09",
+          "description": "Zafiyet açıklama etiği"
+        },
+        {
+          "label": "Ders 10: Uluslararası Yasal Farklılıklar",
+          "href": "/education/lessons/ethical-hacking/module-15/lesson-10",
+          "description": "Farklı ülkelerdeki yasal durumlar"
+        },
+        {
+          "label": "Ders 11: Bug Bounty Programları",
+          "href": "/education/lessons/ethical-hacking/module-15/lesson-11",
+          "description": "Yasal bug bounty katılımı"
+        },
+        {
+          "label": "Ders 12: Eğitim ve Farkındalık",
+          "href": "/education/lessons/ethical-hacking/module-15/lesson-12",
+          "description": "Güvenlik farkındalığı programları"
+        },
+        {
+          "label": "Ders 13: Mesleki Gelişim",
+          "href": "/education/lessons/ethical-hacking/module-15/lesson-13",
+          "description": "Kariyer gelişimi ve sertifikasyon"
+        },
+        {
+          "label": "Ders 14: Etik İkilemler ve Çözümler",
+          "href": "/education/lessons/ethical-hacking/module-15/lesson-14",
+          "description": "Etik karar verme süreçleri"
+        },
+        {
+          "label": "Ders 15: Kurs Özeti ve Sertifika",
+          "href": "/education/lessons/ethical-hacking/module-15/lesson-15",
+          "description": "Kurs değerlendirmesi ve sertifikasyon"
+        }
+      ]
+    }
+  ]
+}
+

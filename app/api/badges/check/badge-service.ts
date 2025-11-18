@@ -29,7 +29,7 @@ export async function checkBadgesForAttempt({
     select: { badgeId: true },
   });
 
-  const earnedBadgeIds = new Set(userBadges.map((ub) => ub.badgeId));
+  const earnedBadgeIds = new Set(userBadges.map((ub: { badgeId: string }) => ub.badgeId));
   const newlyEarnedBadges: any[] = [];
 
   const userQuizAttempts = await db.quizAttempt.findMany({
@@ -39,7 +39,7 @@ export async function checkBadgesForAttempt({
   const totalQuizCount = userQuizAttempts.length;
   const averageScore =
     totalQuizCount > 0
-      ? userQuizAttempts.reduce((sum, qa) => sum + qa.score, 0) / totalQuizCount
+      ? userQuizAttempts.reduce((sum: number, qa: { score: number }) => sum + qa.score, 0) / totalQuizCount
       : 0;
 
   let userStreak = await db.userStreak.findUnique({
@@ -146,13 +146,13 @@ export async function checkBadgesForAttempt({
           const topicAttempts = await db.quizAttempt.findMany({
             where: {
               userId,
-              quizId: { in: topicQuizzes.map((q) => q.id) },
+              quizId: { in: topicQuizzes.map((q: { id: string }) => q.id) },
             },
           });
 
-          const allPerfect = topicQuizzes.every((tq) =>
+          const allPerfect = topicQuizzes.every((tq: { id: string }) =>
             topicAttempts.some(
-              (ta) => ta.quizId === tq.id && ta.score === 100
+              (ta: { quizId: string; score: number }) => ta.quizId === tq.id && ta.score === 100
             )
           );
 

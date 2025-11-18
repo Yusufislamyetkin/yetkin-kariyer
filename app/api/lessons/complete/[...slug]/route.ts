@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { recordEvent } from "@/lib/services/gamification/antiAbuse";
+import { applyRules } from "@/lib/services/gamification/rules";
 
 function resolveLessonSlug(params: { slug: string[] }): string | null {
   if (!params.slug || params.slug.length === 0) {
@@ -93,6 +95,18 @@ export async function POST(
         miniTestPassed: true,
       },
     });
+
+    // Emit gamification event
+    try {
+      const event = await recordEvent({
+        userId,
+        type: "lesson_complete",
+        payload: { lessonSlug },
+      });
+      await applyRules({ userId, type: "lesson_complete", payload: { sourceEventId: event.id } });
+    } catch (e) {
+      console.warn("Gamification lesson_complete failed:", e);
+    }
 
     return NextResponse.json({
       success: true,

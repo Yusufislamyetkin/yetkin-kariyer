@@ -45,7 +45,7 @@ export async function GET(request: Request, ctx: RouteContext) {
       },
     });
 
-    const teamIds = activeMemberships.map((membership) => membership.teamId);
+    const teamIds = activeMemberships.map((membership: { teamId: string }) => membership.teamId);
 
     const submission = await db.hackathonSubmission.findFirst({
       where: {
@@ -196,7 +196,7 @@ export async function POST(request: Request, ctx: RouteContext) {
     const teamId = membership?.teamId ?? null;
 
     const activeMemberIds = membership
-      ? membership.team.members.map((member) => member.userId)
+      ? membership.team.members.map((member: { userId: string }) => member.userId)
       : [userId];
 
     const existingSubmission = await db.hackathonSubmission.findFirst({
@@ -215,7 +215,7 @@ export async function POST(request: Request, ctx: RouteContext) {
       },
     });
 
-    const result = await db.$transaction(async (tx) => {
+    const result = await db.$transaction(async (tx: any) => {
       let submission;
 
       if (existingSubmission) {

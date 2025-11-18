@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import { createNetCoreRoadmapStructure } from "@/lib/admin/seed-data";
 
 export async function POST() {
   try {
@@ -13,24 +12,10 @@ export async function POST() {
       );
     }
 
-    // Create the new roadmap structure
-    const result = await createNetCoreRoadmapStructure();
-
-    if (!result.success) {
-      return NextResponse.json(
-        { 
-          error: "Roadmap yapısı oluşturulurken bir hata oluştu",
-          errors: result.errors,
-        },
-        { status: 500 }
-      );
-    }
-
-    return NextResponse.json({
-      success: true,
-      modulesCreated: result.modulesCreated,
-      message: `${result.modulesCreated} modül başarıyla oluşturuldu.`,
-    });
+    return NextResponse.json(
+      { error: "Seed data functionality has been removed" },
+      { status: 410 }
+    );
   } catch (error: any) {
     console.error("Error creating roadmap:", error);
     return NextResponse.json(

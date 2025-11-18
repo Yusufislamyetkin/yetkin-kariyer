@@ -100,22 +100,22 @@ export async function generateCareerPlan(userId: string): Promise<any> {
     // Build context
     const cvData = (cv?.data as any) || {};
 
-    const quizScores = quizAttempts.map((attempt) => ({
+    const quizScores = quizAttempts.map((attempt: { quiz: { course: { title: string } }; score: number }) => ({
       course: attempt.quiz.course.title,
       score: attempt.score,
     }));
 
     const interviewScores = interviewAttempts
-      .filter((attempt) => attempt.aiScore !== null)
-      .map((attempt) => attempt.aiScore as number);
+      .filter((attempt: { aiScore: number | null }) => attempt.aiScore !== null)
+      .map((attempt: { aiScore: number | null }) => attempt.aiScore as number);
 
     const avgQuizScore =
       quizScores.length > 0
-        ? quizScores.reduce((sum, q) => sum + q.score, 0) / quizScores.length
+        ? quizScores.reduce((sum: number, q: { score: number }) => sum + q.score, 0) / quizScores.length
         : 0;
     const avgInterviewScore =
       interviewScores.length > 0
-        ? interviewScores.reduce((sum, s) => sum + s, 0) / interviewScores.length
+        ? interviewScores.reduce((sum: number, s: number) => sum + s, 0) / interviewScores.length
         : 0;
 
     if (!isAIEnabled()) {

@@ -1,0 +1,131 @@
+{
+  "course": {
+    "id": "course-react-native",
+    "title": "React Native Mobile Roadmap",
+    "description": "React Native ile mobil geliştirme.",
+    "category": "software-development",
+    "field": "mobile",
+    "subCategory": "react-native",
+    "expertise": "mobile",
+    "topic": "React Native",
+    "topicContent": "React Native Roadmap",
+    "difficulty": "intermediate",
+    "content": {
+      "overview": {
+        "description": "RN components, navigation, native modules",
+        "estimatedDurationMinutes": 3000
+      },
+      "modules": [
+        {
+          "id": "rn-basics",
+          "title": "RN Temelleri",
+          "summary": "Components ve styling",
+          "durationMinutes": 230,
+          "objectives": [
+            "Components",
+            "StyleSheet"
+          ],
+          "lessons": [
+            {
+              "id": "rn-lesson-01",
+              "title": "RN Components",
+              "type": "reading",
+              "durationMinutes": 20,
+              "slug": "rn-components",
+              "resources": []
+            },
+            {
+              "id": "rn-lesson-02",
+              "title": "Navigation",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "rn-navigation",
+              "resources": []
+            },
+            {
+              "id": "rn-lesson-03",
+              "title": "StyleSheet",
+              "type": "video",
+              "durationMinutes": 30,
+              "slug": "stylesheet",
+              "resources": []
+            },
+            {
+              "id": "rn-lesson-04",
+              "title": "Flexbox Layout",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "flexbox",
+              "resources": []
+            },
+            {
+              "id": "rn-lesson-05",
+              "title": "Touchable Components",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "touchable",
+              "resources": []
+            },
+            {
+              "id": "rn-lesson-06",
+              "title": "ScrollView ve FlatList",
+              "type": "video",
+              "durationMinutes": 40,
+              "slug": "scrollview-flatlist",
+              "resources": []
+            },
+            {
+              "id": "rn-lesson-07",
+              "title": "Images",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "images",
+              "resources": []
+            },
+            {
+              "id": "rn-lesson-08",
+              "title": "Text Input",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "text-input",
+              "resources": []
+            },
+            {
+              "id": "rn-lesson-09",
+              "title": "Platform Specific",
+              "type": "video",
+              "durationMinutes": 30,
+              "slug": "platform-specific",
+              "resources": []
+            },
+            {
+              "id": "rn-lesson-10",
+              "title": "AsyncStorage",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "asyncstorage",
+              "resources": []
+            },
+            {
+              "id": "rn-lesson-11",
+              "title": "Networking",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "networking",
+              "resources": []
+            },
+            {
+              "id": "rn-lesson-12",
+              "title": "Debugging",
+              "type": "video",
+              "durationMinutes": 25,
+              "slug": "debugging",
+              "resources": []
+            }
+          ]
+        }
+      ]
+    },
+    "estimatedDuration": 3000
+  }
+}

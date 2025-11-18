@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import { importLessonContents } from "@/lib/admin/seed-data";
 
 export async function POST() {
   try {
@@ -13,20 +12,10 @@ export async function POST() {
       );
     }
 
-    const result = await importLessonContents();
-
-    if (!result.success) {
-      return NextResponse.json(
-        { error: result.errors.join(", ") || "Ders içerikleri import edilirken bir hata oluştu" },
-        { status: 500 }
-      );
-    }
-
-    return NextResponse.json({
-      success: true,
-      lessonsProcessed: result.lessonsProcessed,
-      message: `${result.lessonsProcessed} ders içeriği başarıyla import edildi.`,
-    });
+    return NextResponse.json(
+      { error: "Seed data functionality has been removed" },
+      { status: 410 }
+    );
   } catch (error: any) {
     console.error("Error importing lesson contents:", error);
     return NextResponse.json(

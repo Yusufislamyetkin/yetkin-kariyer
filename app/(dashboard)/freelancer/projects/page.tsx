@@ -24,6 +24,7 @@ interface FreelancerProject {
   };
   bids: Array<{
     id: string;
+    status: string;
     user: {
       id: string;
       name: string | null;
@@ -151,7 +152,6 @@ export default function FreelancerProjectsPage() {
                 <option value="open">Açık</option>
                 <option value="in_progress">Devam Ediyor</option>
                 <option value="completed">Tamamlandı</option>
-                <option value="cancelled">İptal Edildi</option>
               </select>
             </div>
           </div>
@@ -210,6 +210,19 @@ export default function FreelancerProjectsPage() {
                     <p className="text-xs text-gray-500 dark:text-gray-400">
                       Oluşturan: {project.creator.name || project.creator.email}
                     </p>
+                    {(project.status === "in_progress" || project.status === "completed") && (
+                      (() => {
+                        const acceptedUsers = project.bids
+                          .filter((b) => b.status === "accepted")
+                          .map((b) => b.user.name || "İsimsiz Kullanıcı");
+                        if (acceptedUsers.length === 0) return null;
+                        return (
+                          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                            Görev Alanlar: {acceptedUsers.join(", ")}
+                          </p>
+                        );
+                      })()
+                    )}
                   </div>
                 </CardContent>
               </Card>
