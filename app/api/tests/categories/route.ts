@@ -8,13 +8,17 @@ export async function GET(request: Request) {
   try {
     console.log("[API_TEST_CATEGORIES] Fetching test categories from database...");
     
-    // Get all tests grouped by course.expertise
+    // Get all tests (TEST type only, exclude MINI_TEST) - bağımsız testler
+    // Testler artık courseId'ye bağlı değil, kendi expertise bilgilerini kullanabilir
     const quizzes = await db.quiz.findMany({
       where: {
-        type: "TEST",
+        type: "TEST", // Sadece TEST tipi, MINI_TEST hariç
       },
       select: {
         id: true,
+        title: true,
+        description: true,
+        topic: true, // Test'in kendi topic bilgisi
         course: {
           select: {
             expertise: true,
@@ -28,7 +32,7 @@ export async function GET(request: Request) {
 
     console.log(`[API_TEST_CATEGORIES] Found ${quizzes.length} tests in database`);
 
-    // Group by expertise
+    // Group by expertise - test'in kendi topic'ini veya course'un expertise'sini kullan
     const categoriesMap = new Map<string, {
       expertise: string;
       testCount: number;
@@ -39,6 +43,9 @@ export async function GET(request: Request) {
 
     quizzes.forEach((quiz: {
       id: string;
+      title: string;
+      description: string | null;
+      topic: string | null;
       course: {
         expertise: string | null;
         topic: string | null;
@@ -46,15 +53,17 @@ export async function GET(request: Request) {
         title: string | null;
       } | null;
     }) => {
-      const expertise = quiz.course?.expertise;
+      // Test'in kendi topic'ini kullan, yoksa course'un expertise'sini kullan
+      // Gelecekte testler tamamen bağımsız olacak, şimdilik course'dan fallback alıyoruz
+      const expertise = quiz.topic || quiz.course?.expertise || quiz.course?.topic;
       if (!expertise) return;
 
       if (!categoriesMap.has(expertise)) {
         categoriesMap.set(expertise, {
           expertise,
           testCount: 0,
-          description: quiz.course?.title || null,
-          topic: quiz.course?.topic || null,
+          description: quiz.description || quiz.course?.title || null,
+          topic: quiz.topic || quiz.course?.topic || null,
           topicContent: quiz.course?.topicContent || null,
         });
       }

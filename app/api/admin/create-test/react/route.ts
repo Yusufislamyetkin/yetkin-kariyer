@@ -17,47 +17,31 @@ export async function POST() {
 
     const expertise = "React";
     
-    // Find the related course to get modules
+    // Find the related course to get modules (for reference, testler artık bağımsız)
     const relatedCourse = await db.course.findFirst({
       where: { expertise },
       select: { content: true },
     });
 
-    // Extract modules from related course
+    // Extract modules from related course for test content
     let modules: any[] = [];
     if (relatedCourse?.content) {
       const content = relatedCourse.content as any;
       if (Array.isArray(content?.modules)) {
-        modules = content.modules;
-      }
-    }
-    
-    let course = await db.course.findFirst({
-      where: { expertise },
-    });
-
-    if (!course) {
-      course = await db.course.create({
-        data: {
-          title: "React Test Kategorisi",
-          description: "React teknolojisi için test kategorisi",
-          expertise,
-          difficulty: "intermediate",
-          content: { modules },
-        },
-      });
-    } else {
-      const currentContent = (course.content as any) || {};
-      if (!Array.isArray(currentContent.modules) || currentContent.modules.length === 0) {
-        course = await db.course.update({
-          where: { id: course.id },
-          data: {
-            content: { ...currentContent, modules },
-          },
-        });
+        // Modül yapısını test için uyarla - relatedTopics yerine relatedTests olacak
+        modules = content.modules.map((module: any) => ({
+          ...module,
+          relatedTests: module.relatedTopics ? module.relatedTopics.map((topic: any) => ({
+            id: topic.href?.split('/').pop() || `test-${Date.now()}`,
+            title: topic.label || topic.title || "Test",
+            description: topic.description,
+            href: topic.href,
+          })) : [],
+        }));
       }
     }
 
+    // Test artık bağımsız - courseId opsiyonel, content field'ında modül yapısı var
     const quizId = `test-react-${Date.now()}`;
     await db.quiz.upsert({
       where: { id: quizId },
@@ -66,18 +50,34 @@ export async function POST() {
         description: "React teknolojisi için test",
         type: "TEST",
         level: "intermediate",
+        topic: expertise,
         questions: [],
+        content: {
+          modules: modules,
+          overview: {
+            description: "React teknolojisi için kapsamlı test paketi",
+            estimatedDurationMinutes: null,
+          },
+        },
         passingScore: 60,
-        courseId: course.id,
+        courseId: null,
       },
       create: {
         id: quizId,
-        courseId: course.id,
+        courseId: null,
         title: "React Test",
         description: "React teknolojisi için test",
         type: "TEST",
         level: "intermediate",
+        topic: expertise,
         questions: [],
+        content: {
+          modules: modules,
+          overview: {
+            description: "React teknolojisi için kapsamlı test paketi",
+            estimatedDurationMinutes: null,
+          },
+        },
         passingScore: 60,
       },
     });

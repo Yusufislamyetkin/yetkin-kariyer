@@ -240,20 +240,21 @@ model Course {
 
 model Quiz {
   id           String        @id @default(cuid())
-  courseId     String
+  courseId     String? // Nullable: TEST tipi quiz'ler bağımsız olabilir, MINI_TEST tipi quiz'ler courseId'ye bağlı
   title        String
   description  String?
   topic        String?
-  type         EducationType @default(TEST) // TEST, LIVE_CODING, BUG_FIX, HACKATON
+  type         EducationType @default(TEST) // TEST, LIVE_CODING, BUG_FIX, HACKATON, MINI_TEST
   level        String? // beginner, intermediate, advanced
   questions    Json
+  content      Json? // Testler için modül yapısını saklamak için (TEST tipi quiz'ler için)
   passingScore Int           @default(60)
   lessonSlug   String?
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
 
   // Relations
-  course                 Course                  @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  course                 Course?                 @relation(fields: [courseId], references: [id], onDelete: Cascade)
   quizAttempts           QuizAttempt[]
   testAttempts           TestAttempt[]
   liveCodingAttempts     LiveCodingAttempt[]

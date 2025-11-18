@@ -23,7 +23,16 @@ export async function GET(
         id: params.id,
         type: "TEST",
       },
-      include: {
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        topic: true,
+        level: true,
+        questions: true,
+        passingScore: true,
+        content: true, // Test'in kendi modül yapısı
+        courseId: true,
         course: {
           select: {
             id: true,
@@ -41,7 +50,25 @@ export async function GET(
       return NextResponse.json({ error: "Test bulunamadı" }, { status: 404 });
     }
 
-    return NextResponse.json({ quiz });
+    // Test'in kendi content'ini kullan, yoksa course'un content'ini fallback olarak kullanabiliriz
+    // Ama plana göre testler bağımsız olmalı, bu yüzden sadece test'in kendi content'ini döndürüyoruz
+    const testContent = quiz.content as any;
+    
+    // Content'i normalize et (kurs API'sindeki gibi)
+    const normalizedContent = testContent || {
+      modules: [],
+      overview: {
+        description: quiz.description,
+        estimatedDurationMinutes: null,
+      },
+    };
+
+    return NextResponse.json({ 
+      quiz: {
+        ...quiz,
+        content: normalizedContent,
+      }
+    });
   } catch (error) {
     console.error("Error fetching test:", error);
 

@@ -163,13 +163,18 @@ CREATE TABLE "quizzes" (
     "type" "EducationType" NOT NULL DEFAULT 'TEST',
     "level" TEXT,
     "questions" JSONB NOT NULL,
+    "content" JSONB,
     "passingScore" INTEGER NOT NULL DEFAULT 60,
     "lessonSlug" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT "quizzes_courseId_fkey" FOREIGN KEY ("courseId") REFERENCES "courses"("id") ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT "quizzes_passing_score_check" CHECK ("passingScore" >= 0 AND "passingScore" <= 100),
-    CONSTRAINT "quizzes_course_or_lesson_check" CHECK (("courseId" IS NOT NULL) OR ("lessonSlug" IS NOT NULL))
+    CONSTRAINT "quizzes_course_or_lesson_check" CHECK (
+        ("courseId" IS NOT NULL) OR 
+        ("lessonSlug" IS NOT NULL) OR 
+        ("type" = 'TEST' AND "content" IS NOT NULL)
+    )
 );
 
 CREATE TABLE "hackathons" (

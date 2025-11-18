@@ -17,9 +17,7 @@ export async function GET(
       include: {
         quizzes: {
           where: {
-            type: {
-              not: "MINI_TEST",
-            },
+            type: "MINI_TEST", // Sadece MINI_TEST tipi quiz'ler kurslarla ilişkili
           },
           select: {
             id: true,
