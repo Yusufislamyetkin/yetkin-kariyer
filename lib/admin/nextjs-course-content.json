@@ -1,0 +1,1360 @@
+{
+  "overview": {
+    "description": "Next.js, React tabanlı modern web uygulamaları geliştirmek için güçlü bir framework'tür. Bu kapsamlı kurs ile Next.js'in temellerinden ileri seviye konularına kadar her şeyi öğreneceksiniz. Server-Side Rendering, Static Site Generation, API Routes ve daha fazlasını kullanarak production-ready uygulamalar geliştirme becerileri kazanacaksınız.",
+    "estimatedDurationMinutes": 6750
+  },
+  "learningObjectives": [
+    "Next.js framework'ünün temel kavramlarını ve mimarisini anlamak",
+    "React ile Next.js'i etkili bir şekilde kullanmak",
+    "Server-Side Rendering (SSR) ve Static Site Generation (SSG) tekniklerini öğrenmek",
+    "Next.js API Routes ile backend işlevselliği geliştirmek",
+    "Routing, data fetching ve optimizasyon tekniklerini uygulamak",
+    "Authentication ve state management mekanizmalarını implement etmek",
+    "Production-ready Next.js uygulamaları deploy etmek"
+  ],
+  "prerequisites": [
+    "Temel JavaScript bilgisi",
+    "React temellerine aşinalık",
+    "HTML ve CSS bilgisi",
+    "HTTP ve web teknolojileri hakkında temel bilgi",
+    "Node.js ve npm kullanımı"
+  ],
+  "modules": [
+    {
+      "id": "module-01",
+      "title": "Module 1: Next.js Tanımı ve Temelleri",
+      "summary": "Next.js'in ne olduğu, tarihçesi, avantajları ve diğer React framework'lerinden farkları hakkında temel bilgiler.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Next.js'in ne olduğunu ve neden kullanıldığını anlamak",
+        "React ile Next.js arasındaki ilişkiyi öğrenmek",
+        "Next.js'in avantajlarını ve kullanım alanlarını keşfetmek",
+        "Modern web geliştirme kavramlarını anlamak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Next.js Nedir?",
+          "href": "/education/lessons/nextjs/module-01/lesson-01",
+          "description": "Next.js'in temel tanımı ve genel bakış"
+        },
+        {
+          "label": "Ders 2: Next.js vs React vs Diğer Framework'ler",
+          "href": "/education/lessons/nextjs/module-01/lesson-02",
+          "description": "Next.js'in React, Vue, Angular gibi framework'lerden farkları"
+        },
+        {
+          "label": "Ders 3: Next.js'in Tarihçesi ve Gelişimi",
+          "href": "/education/lessons/nextjs/module-01/lesson-03",
+          "description": "Next.js'in ortaya çıkışı ve versiyon geçmişi"
+        },
+        {
+          "label": "Ders 4: Next.js'in Temel Özellikleri",
+          "href": "/education/lessons/nextjs/module-01/lesson-04",
+          "description": "SSR, SSG, API Routes gibi temel özellikler"
+        },
+        {
+          "label": "Ders 5: Next.js'in Avantajları",
+          "href": "/education/lessons/nextjs/module-01/lesson-05",
+          "description": "Performans, SEO, developer experience gibi avantajlar"
+        },
+        {
+          "label": "Ders 6: Next.js Kullanım Alanları",
+          "href": "/education/lessons/nextjs/module-01/lesson-06",
+          "description": "E-ticaret, blog, dashboard, SaaS uygulamaları gibi kullanım senaryoları"
+        },
+        {
+          "label": "Ders 7: Next.js Ekosistemi",
+          "href": "/education/lessons/nextjs/module-01/lesson-07",
+          "description": "Vercel, npm paketleri, topluluk desteği ve ekosistem"
+        },
+        {
+          "label": "Ders 8: Next.js Lisanslama",
+          "href": "/education/lessons/nextjs/module-01/lesson-08",
+          "description": "MIT lisansı ve ticari kullanım hakları"
+        },
+        {
+          "label": "Ders 9: Next.js Topluluk Desteği",
+          "href": "/education/lessons/nextjs/module-01/lesson-09",
+          "description": "Açık kaynak topluluğu ve katkı süreçleri"
+        },
+        {
+          "label": "Ders 10: Next.js'in Geleceği",
+          "href": "/education/lessons/nextjs/module-01/lesson-10",
+          "description": "App Router, React Server Components ve gelecek planları"
+        },
+        {
+          "label": "Ders 11: Next.js Kurulum Gereksinimleri",
+          "href": "/education/lessons/nextjs/module-01/lesson-11",
+          "description": "Node.js versiyonları ve sistem gereksinimleri"
+        },
+        {
+          "label": "Ders 12: Next.js ile Neler Yapılabilir?",
+          "href": "/education/lessons/nextjs/module-01/lesson-12",
+          "description": "Web uygulamaları, API'ler, statik siteler ve hibrit uygulamalar"
+        },
+        {
+          "label": "Ders 13: Next.js Performans Özellikleri",
+          "href": "/education/lessons/nextjs/module-01/lesson-13",
+          "description": "Otomatik kod bölme, image optimization, font optimization"
+        },
+        {
+          "label": "Ders 14: Next.js Developer Experience",
+          "href": "/education/lessons/nextjs/module-01/lesson-14",
+          "description": "Hot reload, TypeScript desteği, debugging araçları"
+        },
+        {
+          "label": "Ders 15: Modül Özeti ve Değerlendirme",
+          "href": "/education/lessons/nextjs/module-01/lesson-15",
+          "description": "Modül kapsamında öğrenilenlerin özeti ve değerlendirme"
+        }
+      ]
+    },
+    {
+      "id": "module-02",
+      "title": "Module 2: React Temelleri",
+      "summary": "Next.js'in temelini oluşturan React'in temel kavramları, component'ler, props, state ve hooks.",
+      "durationMinutes": 450,
+      "objectives": [
+        "React component yapısını öğrenmek",
+        "Props ve state kavramlarını anlamak",
+        "React Hooks kullanmayı öğrenmek",
+        "Event handling ve conditional rendering yapmak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: React'e Giriş",
+          "href": "/education/lessons/nextjs/module-02/lesson-01",
+          "description": "React'in temel kavramları ve component yapısı"
+        },
+        {
+          "label": "Ders 2: JSX Syntax",
+          "href": "/education/lessons/nextjs/module-02/lesson-02",
+          "description": "JSX kullanımı ve syntax kuralları"
+        },
+        {
+          "label": "Ders 3: Functional Components",
+          "href": "/education/lessons/nextjs/module-02/lesson-03",
+          "description": "Fonksiyonel component'ler ve kullanımı"
+        },
+        {
+          "label": "Ders 4: Props Kullanımı",
+          "href": "/education/lessons/nextjs/module-02/lesson-04",
+          "description": "Props tanımlama ve kullanımı"
+        },
+        {
+          "label": "Ders 5: State ve useState Hook",
+          "href": "/education/lessons/nextjs/module-02/lesson-05",
+          "description": "State yönetimi ve useState hook'u"
+        },
+        {
+          "label": "Ders 6: useEffect Hook",
+          "href": "/education/lessons/nextjs/module-02/lesson-06",
+          "description": "Side effect'ler ve useEffect hook'u"
+        },
+        {
+          "label": "Ders 7: Event Handling",
+          "href": "/education/lessons/nextjs/module-02/lesson-07",
+          "description": "Event handler'lar ve event handling"
+        },
+        {
+          "label": "Ders 8: Conditional Rendering",
+          "href": "/education/lessons/nextjs/module-02/lesson-08",
+          "description": "Koşullu render işlemleri"
+        },
+        {
+          "label": "Ders 9: Lists ve Keys",
+          "href": "/education/lessons/nextjs/module-02/lesson-09",
+          "description": "Liste render etme ve key kullanımı"
+        },
+        {
+          "label": "Ders 10: Forms ve Controlled Components",
+          "href": "/education/lessons/nextjs/module-02/lesson-10",
+          "description": "Form yönetimi ve controlled components"
+        },
+        {
+          "label": "Ders 11: Component Composition",
+          "href": "/education/lessons/nextjs/module-02/lesson-11",
+          "description": "Component'leri birleştirme ve composition"
+        },
+        {
+          "label": "Ders 12: Custom Hooks",
+          "href": "/education/lessons/nextjs/module-02/lesson-12",
+          "description": "Özel hook'lar oluşturma"
+        },
+        {
+          "label": "Ders 13: Context API",
+          "href": "/education/lessons/nextjs/module-02/lesson-13",
+          "description": "Context API ile state yönetimi"
+        },
+        {
+          "label": "Ders 14: Performance Optimization",
+          "href": "/education/lessons/nextjs/module-02/lesson-14",
+          "description": "React.memo, useMemo, useCallback kullanımı"
+        },
+        {
+          "label": "Ders 15: Modül Özeti ve Uygulama",
+          "href": "/education/lessons/nextjs/module-02/lesson-15",
+          "description": "Öğrenilenlerin pratik uygulaması"
+        }
+      ]
+    },
+    {
+      "id": "module-03",
+      "title": "Module 3: Next.js Routing",
+      "summary": "Next.js'in file-based routing sistemi, dynamic routes, nested routes ve routing best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Next.js routing sistemini anlamak",
+        "File-based routing kullanmayı öğrenmek",
+        "Dynamic routes ve catch-all routes oluşturmak",
+        "Navigation ve routing best practices uygulamak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: File-Based Routing",
+          "href": "/education/lessons/nextjs/module-03/lesson-01",
+          "description": "Next.js'in dosya tabanlı routing sistemi"
+        },
+        {
+          "label": "Ders 2: Pages ve Routes",
+          "href": "/education/lessons/nextjs/module-03/lesson-02",
+          "description": "Pages klasörü ve route oluşturma"
+        },
+        {
+          "label": "Ders 3: Dynamic Routes",
+          "href": "/education/lessons/nextjs/module-03/lesson-03",
+          "description": "[id] gibi dinamik route'lar"
+        },
+        {
+          "label": "Ders 4: Catch-All Routes",
+          "href": "/education/lessons/nextjs/module-03/lesson-04",
+          "description": "[...slug] catch-all route'ları"
+        },
+        {
+          "label": "Ders 5: Optional Catch-All Routes",
+          "href": "/education/lessons/nextjs/module-03/lesson-05",
+          "description": "[[...slug]] optional catch-all route'ları"
+        },
+        {
+          "label": "Ders 6: Link Component",
+          "href": "/education/lessons/nextjs/module-03/lesson-06",
+          "description": "Next.js Link component'i ve kullanımı"
+        },
+        {
+          "label": "Ders 7: Programmatic Navigation",
+          "href": "/education/lessons/nextjs/module-03/lesson-07",
+          "description": "useRouter hook ile programatik navigasyon"
+        },
+        {
+          "label": "Ders 8: Shallow Routing",
+          "href": "/education/lessons/nextjs/module-03/lesson-08",
+          "description": "Shallow routing kavramı ve kullanımı"
+        },
+        {
+          "label": "Ders 9: Route Parameters",
+          "href": "/education/lessons/nextjs/module-03/lesson-09",
+          "description": "Route parametrelerini okuma ve kullanma"
+        },
+        {
+          "label": "Ders 10: Query Parameters",
+          "href": "/education/lessons/nextjs/module-03/lesson-10",
+          "description": "Query string parametrelerini yönetme"
+        },
+        {
+          "label": "Ders 11: Nested Routes",
+          "href": "/education/lessons/nextjs/module-03/lesson-11",
+          "description": "İç içe route yapıları"
+        },
+        {
+          "label": "Ders 12: Route Groups",
+          "href": "/education/lessons/nextjs/module-03/lesson-12",
+          "description": "Route grupları ve organizasyon"
+        },
+        {
+          "label": "Ders 13: Middleware ve Routing",
+          "href": "/education/lessons/nextjs/module-03/lesson-13",
+          "description": "Middleware ile route koruma"
+        },
+        {
+          "label": "Ders 14: Route Transitions",
+          "href": "/education/lessons/nextjs/module-03/lesson-14",
+          "description": "Route geçiş animasyonları"
+        },
+        {
+          "label": "Ders 15: Routing Best Practices",
+          "href": "/education/lessons/nextjs/module-03/lesson-15",
+          "description": "Routing en iyi uygulamaları"
+        }
+      ]
+    },
+    {
+      "id": "module-04",
+      "title": "Module 4: Server-Side Rendering (SSR)",
+      "summary": "Server-Side Rendering kavramı, getServerSideProps, SSR avantajları ve kullanım senaryoları.",
+      "durationMinutes": 450,
+      "objectives": [
+        "SSR kavramını anlamak",
+        "getServerSideProps kullanmayı öğrenmek",
+        "SSR'in avantajlarını ve dezavantajlarını öğrenmek",
+        "SSR kullanım senaryolarını belirlemek"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: SSR Nedir?",
+          "href": "/education/lessons/nextjs/module-04/lesson-01",
+          "description": "Server-Side Rendering kavramına giriş"
+        },
+        {
+          "label": "Ders 2: SSR vs CSR vs SSG",
+          "href": "/education/lessons/nextjs/module-04/lesson-02",
+          "description": "Farklı rendering stratejilerinin karşılaştırması"
+        },
+        {
+          "label": "Ders 3: getServerSideProps",
+          "href": "/education/lessons/nextjs/module-04/lesson-03",
+          "description": "getServerSideProps fonksiyonu ve kullanımı"
+        },
+        {
+          "label": "Ders 4: SSR ile Data Fetching",
+          "href": "/education/lessons/nextjs/module-04/lesson-04",
+          "description": "SSR'de veri çekme işlemleri"
+        },
+        {
+          "label": "Ders 5: SSR Context ve Request",
+          "href": "/education/lessons/nextjs/module-04/lesson-05",
+          "description": "Request context'e erişim"
+        },
+        {
+          "label": "Ders 6: SSR Error Handling",
+          "href": "/education/lessons/nextjs/module-04/lesson-06",
+          "description": "SSR'de hata yönetimi"
+        },
+        {
+          "label": "Ders 7: SSR Redirects",
+          "href": "/education/lessons/nextjs/module-04/lesson-07",
+          "description": "SSR'de yönlendirme işlemleri"
+        },
+        {
+          "label": "Ders 8: SSR Not Found",
+          "href": "/education/lessons/nextjs/module-04/lesson-08",
+          "description": "404 sayfaları ve not found handling"
+        },
+        {
+          "label": "Ders 9: SSR Caching",
+          "href": "/education/lessons/nextjs/module-04/lesson-09",
+          "description": "SSR cache stratejileri"
+        },
+        {
+          "label": "Ders 10: SSR Performance",
+          "href": "/education/lessons/nextjs/module-04/lesson-10",
+          "description": "SSR performans optimizasyonu"
+        },
+        {
+          "label": "Ders 11: SSR Authentication",
+          "href": "/education/lessons/nextjs/module-04/lesson-11",
+          "description": "SSR'de kimlik doğrulama"
+        },
+        {
+          "label": "Ders 12: SSR SEO",
+          "href": "/education/lessons/nextjs/module-04/lesson-12",
+          "description": "SSR'in SEO avantajları"
+        },
+        {
+          "label": "Ders 13: SSR vs API Routes",
+          "href": "/education/lessons/nextjs/module-04/lesson-13",
+          "description": "SSR ve API Routes karşılaştırması"
+        },
+        {
+          "label": "Ders 14: SSR Best Practices",
+          "href": "/education/lessons/nextjs/module-04/lesson-14",
+          "description": "SSR en iyi uygulamaları"
+        },
+        {
+          "label": "Ders 15: SSR Kullanım Senaryoları",
+          "href": "/education/lessons/nextjs/module-04/lesson-15",
+          "description": "Ne zaman SSR kullanılmalı?"
+        }
+      ]
+    },
+    {
+      "id": "module-05",
+      "title": "Module 5: Static Site Generation (SSG)",
+      "summary": "Static Site Generation, getStaticProps, getStaticPaths, ISR (Incremental Static Regeneration) ve static export.",
+      "durationMinutes": 450,
+      "objectives": [
+        "SSG kavramını anlamak",
+        "getStaticProps ve getStaticPaths kullanmayı öğrenmek",
+        "ISR (Incremental Static Regeneration) öğrenmek",
+        "Static export yapmayı öğrenmek"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: SSG Nedir?",
+          "href": "/education/lessons/nextjs/module-05/lesson-01",
+          "description": "Static Site Generation kavramına giriş"
+        },
+        {
+          "label": "Ders 2: SSG Avantajları",
+          "href": "/education/lessons/nextjs/module-05/lesson-02",
+          "description": "SSG'in performans ve maliyet avantajları"
+        },
+        {
+          "label": "Ders 3: getStaticProps",
+          "href": "/education/lessons/nextjs/module-05/lesson-03",
+          "description": "getStaticProps fonksiyonu ve kullanımı"
+        },
+        {
+          "label": "Ders 4: getStaticPaths",
+          "href": "/education/lessons/nextjs/module-05/lesson-04",
+          "description": "getStaticPaths ile dinamik sayfalar"
+        },
+        {
+          "label": "Ders 5: SSG ile Data Fetching",
+          "href": "/education/lessons/nextjs/module-05/lesson-05",
+          "description": "SSG'de veri çekme işlemleri"
+        },
+        {
+          "label": "Ders 6: ISR (Incremental Static Regeneration)",
+          "href": "/education/lessons/nextjs/module-05/lesson-06",
+          "description": "ISR kavramı ve kullanımı"
+        },
+        {
+          "label": "Ders 7: ISR revalidate",
+          "href": "/education/lessons/nextjs/module-05/lesson-07",
+          "description": "revalidate ile sayfa yenileme"
+        },
+        {
+          "label": "Ders 8: On-Demand ISR",
+          "href": "/education/lessons/nextjs/module-05/lesson-08",
+          "description": "On-demand revalidation"
+        },
+        {
+          "label": "Ders 9: Static Export",
+          "href": "/education/lessons/nextjs/module-05/lesson-09",
+          "description": "Static HTML export işlemi"
+        },
+        {
+          "label": "Ders 10: SSG Fallback",
+          "href": "/education/lessons/nextjs/module-05/lesson-10",
+          "description": "fallback: true, false, blocking"
+        },
+        {
+          "label": "Ders 11: SSG Image Optimization",
+          "href": "/education/lessons/nextjs/module-05/lesson-11",
+          "description": "SSG'de görsel optimizasyonu"
+        },
+        {
+          "label": "Ders 12: SSG SEO",
+          "href": "/education/lessons/nextjs/module-05/lesson-12",
+          "description": "SSG'in SEO avantajları"
+        },
+        {
+          "label": "Ders 13: SSG vs SSR",
+          "href": "/education/lessons/nextjs/module-05/lesson-13",
+          "description": "SSG ve SSR karşılaştırması"
+        },
+        {
+          "label": "Ders 14: SSG Best Practices",
+          "href": "/education/lessons/nextjs/module-05/lesson-14",
+          "description": "SSG en iyi uygulamaları"
+        },
+        {
+          "label": "Ders 15: SSG Kullanım Senaryoları",
+          "href": "/education/lessons/nextjs/module-05/lesson-15",
+          "description": "Ne zaman SSG kullanılmalı?"
+        }
+      ]
+    },
+    {
+      "id": "module-06",
+      "title": "Module 6: API Routes",
+      "summary": "Next.js API Routes, request/response handling, middleware, authentication ve API best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "API Routes kavramını anlamak",
+        "API endpoint'leri oluşturmayı öğrenmek",
+        "Request ve response handling yapmak",
+        "API authentication ve security uygulamak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: API Routes Nedir?",
+          "href": "/education/lessons/nextjs/module-06/lesson-01",
+          "description": "Next.js API Routes kavramına giriş"
+        },
+        {
+          "label": "Ders 2: API Route Oluşturma",
+          "href": "/education/lessons/nextjs/module-06/lesson-02",
+          "description": "İlk API route'unu oluşturma"
+        },
+        {
+          "label": "Ders 3: HTTP Methods",
+          "href": "/education/lessons/nextjs/module-06/lesson-03",
+          "description": "GET, POST, PUT, DELETE metodları"
+        },
+        {
+          "label": "Ders 4: Request Handling",
+          "href": "/education/lessons/nextjs/module-06/lesson-04",
+          "description": "Request objesi ve kullanımı"
+        },
+        {
+          "label": "Ders 5: Response Handling",
+          "href": "/education/lessons/nextjs/module-06/lesson-05",
+          "description": "Response objesi ve status kodları"
+        },
+        {
+          "label": "Ders 6: Dynamic API Routes",
+          "href": "/education/lessons/nextjs/module-06/lesson-06",
+          "description": "Dinamik API route'ları"
+        },
+        {
+          "label": "Ders 7: API Route Middleware",
+          "href": "/education/lessons/nextjs/module-06/lesson-07",
+          "description": "Middleware kullanımı"
+        },
+        {
+          "label": "Ders 8: API Authentication",
+          "href": "/education/lessons/nextjs/module-06/lesson-08",
+          "description": "API route'larında kimlik doğrulama"
+        },
+        {
+          "label": "Ders 9: API Error Handling",
+          "href": "/education/lessons/nextjs/module-06/lesson-09",
+          "description": "Hata yönetimi ve error responses"
+        },
+        {
+          "label": "Ders 10: API Validation",
+          "href": "/education/lessons/nextjs/module-06/lesson-10",
+          "description": "Request validation"
+        },
+        {
+          "label": "Ders 11: API CORS",
+          "href": "/education/lessons/nextjs/module-06/lesson-11",
+          "description": "CORS yapılandırması"
+        },
+        {
+          "label": "Ders 12: API Rate Limiting",
+          "href": "/education/lessons/nextjs/module-06/lesson-12",
+          "description": "Rate limiting implementasyonu"
+        },
+        {
+          "label": "Ders 13: API Testing",
+          "href": "/education/lessons/nextjs/module-06/lesson-13",
+          "description": "API route test stratejileri"
+        },
+        {
+          "label": "Ders 14: API Best Practices",
+          "href": "/education/lessons/nextjs/module-06/lesson-14",
+          "description": "API route en iyi uygulamaları"
+        },
+        {
+          "label": "Ders 15: API Routes vs External API",
+          "href": "/education/lessons/nextjs/module-06/lesson-15",
+          "description": "Ne zaman API Routes kullanılmalı?"
+        }
+      ]
+    },
+    {
+      "id": "module-07",
+      "title": "Module 7: Data Fetching",
+      "summary": "Next.js'te veri çekme stratejileri, SWR, React Query, fetch API ve data fetching best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Farklı data fetching stratejilerini öğrenmek",
+        "SWR ve React Query kullanmayı öğrenmek",
+        "Client-side data fetching yapmak",
+        "Data fetching optimizasyonu yapmak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Data Fetching Stratejileri",
+          "href": "/education/lessons/nextjs/module-07/lesson-01",
+          "description": "SSR, SSG, CSR data fetching karşılaştırması"
+        },
+        {
+          "label": "Ders 2: Fetch API",
+          "href": "/education/lessons/nextjs/module-07/lesson-02",
+          "description": "Native fetch API kullanımı"
+        },
+        {
+          "label": "Ders 3: SWR Kütüphanesi",
+          "href": "/education/lessons/nextjs/module-07/lesson-03",
+          "description": "SWR kurulumu ve temel kullanım"
+        },
+        {
+          "label": "Ders 4: SWR Hooks",
+          "href": "/education/lessons/nextjs/module-07/lesson-04",
+          "description": "useSWR hook ve konfigürasyonu"
+        },
+        {
+          "label": "Ders 5: SWR Revalidation",
+          "href": "/education/lessons/nextjs/module-07/lesson-05",
+          "description": "SWR ile otomatik revalidation"
+        },
+        {
+          "label": "Ders 6: React Query (TanStack Query)",
+          "href": "/education/lessons/nextjs/module-07/lesson-06",
+          "description": "React Query kurulumu ve kullanımı"
+        },
+        {
+          "label": "Ders 7: React Query Hooks",
+          "href": "/education/lessons/nextjs/module-07/lesson-07",
+          "description": "useQuery, useMutation hooks"
+        },
+        {
+          "label": "Ders 8: React Query Caching",
+          "href": "/education/lessons/nextjs/module-07/lesson-08",
+          "description": "Query cache yönetimi"
+        },
+        {
+          "label": "Ders 9: Client-Side Data Fetching",
+          "href": "/education/lessons/nextjs/module-07/lesson-09",
+          "description": "useEffect ile client-side fetching"
+        },
+        {
+          "label": "Ders 10: Data Fetching Patterns",
+          "href": "/education/lessons/nextjs/module-07/lesson-10",
+          "description": "Yaygın data fetching pattern'leri"
+        },
+        {
+          "label": "Ders 11: Error Handling",
+          "href": "/education/lessons/nextjs/module-07/lesson-11",
+          "description": "Data fetching hata yönetimi"
+        },
+        {
+          "label": "Ders 12: Loading States",
+          "href": "/education/lessons/nextjs/module-07/lesson-12",
+          "description": "Loading state yönetimi"
+        },
+        {
+          "label": "Ders 13: Data Fetching Optimization",
+          "href": "/education/lessons/nextjs/module-07/lesson-13",
+          "description": "Data fetching performans optimizasyonu"
+        },
+        {
+          "label": "Ders 14: Data Fetching Best Practices",
+          "href": "/education/lessons/nextjs/module-07/lesson-14",
+          "description": "Data fetching en iyi uygulamaları"
+        },
+        {
+          "label": "Ders 15: Data Fetching Kullanım Senaryoları",
+          "href": "/education/lessons/nextjs/module-07/lesson-15",
+          "description": "Hangi strateji ne zaman kullanılmalı?"
+        }
+      ]
+    },
+    {
+      "id": "module-08",
+      "title": "Module 8: Styling ve CSS",
+      "summary": "Next.js'te CSS modülleri, styled-components, Tailwind CSS, CSS-in-JS ve styling best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Farklı styling yaklaşımlarını öğrenmek",
+        "CSS Modules kullanmayı öğrenmek",
+        "Tailwind CSS entegrasyonu yapmak",
+        "Styled-components ve CSS-in-JS kullanmak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Next.js Styling Seçenekleri",
+          "href": "/education/lessons/nextjs/module-08/lesson-01",
+          "description": "Next.js'te mevcut styling seçenekleri"
+        },
+        {
+          "label": "Ders 2: Global CSS",
+          "href": "/education/lessons/nextjs/module-08/lesson-02",
+          "description": "Global CSS dosyaları ve kullanımı"
+        },
+        {
+          "label": "Ders 3: CSS Modules",
+          "href": "/education/lessons/nextjs/module-08/lesson-03",
+          "description": "CSS Modules kurulumu ve kullanımı"
+        },
+        {
+          "label": "Ders 4: CSS Modules Best Practices",
+          "href": "/education/lessons/nextjs/module-08/lesson-04",
+          "description": "CSS Modules en iyi uygulamaları"
+        },
+        {
+          "label": "Ders 5: Tailwind CSS",
+          "href": "/education/lessons/nextjs/module-08/lesson-05",
+          "description": "Tailwind CSS kurulumu ve yapılandırması"
+        },
+        {
+          "label": "Ders 6: Tailwind CSS Kullanımı",
+          "href": "/education/lessons/nextjs/module-08/lesson-06",
+          "description": "Tailwind utility class'ları"
+        },
+        {
+          "label": "Ders 7: Tailwind Customization",
+          "href": "/education/lessons/nextjs/module-08/lesson-07",
+          "description": "Tailwind özelleştirme ve theme"
+        },
+        {
+          "label": "Ders 8: Styled-components",
+          "href": "/education/lessons/nextjs/module-08/lesson-08",
+          "description": "Styled-components kurulumu ve kullanımı"
+        },
+        {
+          "label": "Ders 9: Styled-components SSR",
+          "href": "/education/lessons/nextjs/module-08/lesson-09",
+          "description": "Styled-components SSR desteği"
+        },
+        {
+          "label": "Ders 10: Emotion",
+          "href": "/education/lessons/nextjs/module-08/lesson-10",
+          "description": "Emotion CSS-in-JS kütüphanesi"
+        },
+        {
+          "label": "Ders 11: Sass/SCSS",
+          "href": "/education/lessons/nextjs/module-08/lesson-11",
+          "description": "Sass/SCSS desteği"
+        },
+        {
+          "label": "Ders 12: CSS-in-JS vs CSS Modules",
+          "href": "/education/lessons/nextjs/module-08/lesson-12",
+          "description": "Farklı yaklaşımların karşılaştırması"
+        },
+        {
+          "label": "Ders 13: Styling Performance",
+          "href": "/education/lessons/nextjs/module-08/lesson-13",
+          "description": "Styling performans optimizasyonu"
+        },
+        {
+          "label": "Ders 14: Styling Best Practices",
+          "href": "/education/lessons/nextjs/module-08/lesson-14",
+          "description": "Styling en iyi uygulamaları"
+        },
+        {
+          "label": "Ders 15: Styling Kullanım Senaryoları",
+          "href": "/education/lessons/nextjs/module-08/lesson-15",
+          "description": "Hangi yaklaşım ne zaman kullanılmalı?"
+        }
+      ]
+    },
+    {
+      "id": "module-09",
+      "title": "Module 9: Authentication",
+      "summary": "Next.js'te authentication, NextAuth.js, JWT tokens, session management ve security best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Authentication kavramlarını anlamak",
+        "NextAuth.js kullanmayı öğrenmek",
+        "JWT ve session yönetimi yapmak",
+        "Authentication security uygulamak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Authentication Temelleri",
+          "href": "/education/lessons/nextjs/module-09/lesson-01",
+          "description": "Authentication ve authorization kavramları"
+        },
+        {
+          "label": "Ders 2: NextAuth.js Giriş",
+          "href": "/education/lessons/nextjs/module-09/lesson-02",
+          "description": "NextAuth.js kütüphanesine giriş"
+        },
+        {
+          "label": "Ders 3: NextAuth.js Kurulumu",
+          "href": "/education/lessons/nextjs/module-09/lesson-03",
+          "description": "NextAuth.js kurulumu ve yapılandırması"
+        },
+        {
+          "label": "Ders 4: Credentials Provider",
+          "href": "/education/lessons/nextjs/module-09/lesson-04",
+          "description": "Email/password authentication"
+        },
+        {
+          "label": "Ders 5: OAuth Providers",
+          "href": "/education/lessons/nextjs/module-09/lesson-05",
+          "description": "Google, GitHub gibi OAuth provider'lar"
+        },
+        {
+          "label": "Ders 6: Session Management",
+          "href": "/education/lessons/nextjs/module-09/lesson-06",
+          "description": "Session yönetimi ve storage"
+        },
+        {
+          "label": "Ders 7: JWT Tokens",
+          "href": "/education/lessons/nextjs/module-09/lesson-07",
+          "description": "JWT token oluşturma ve doğrulama"
+        },
+        {
+          "label": "Ders 8: Protected Routes",
+          "href": "/education/lessons/nextjs/module-09/lesson-08",
+          "description": "Route koruma ve middleware"
+        },
+        {
+          "label": "Ders 9: Server-Side Auth",
+          "href": "/education/lessons/nextjs/module-09/lesson-09",
+          "description": "getServerSession ile server-side auth"
+        },
+        {
+          "label": "Ders 10: Client-Side Auth",
+          "href": "/education/lessons/nextjs/module-09/lesson-10",
+          "description": "useSession hook ile client-side auth"
+        },
+        {
+          "label": "Ders 11: Role-Based Access",
+          "href": "/education/lessons/nextjs/module-09/lesson-11",
+          "description": "Rol tabanlı erişim kontrolü"
+        },
+        {
+          "label": "Ders 12: Password Hashing",
+          "href": "/education/lessons/nextjs/module-09/lesson-12",
+          "description": "bcrypt ile şifre hashleme"
+        },
+        {
+          "label": "Ders 13: Auth Security",
+          "href": "/education/lessons/nextjs/module-09/lesson-13",
+          "description": "Authentication güvenlik best practices"
+        },
+        {
+          "label": "Ders 14: Auth Testing",
+          "href": "/education/lessons/nextjs/module-09/lesson-14",
+          "description": "Authentication test stratejileri"
+        },
+        {
+          "label": "Ders 15: Auth Best Practices",
+          "href": "/education/lessons/nextjs/module-09/lesson-15",
+          "description": "Authentication en iyi uygulamaları"
+        }
+      ]
+    },
+    {
+      "id": "module-10",
+      "title": "Module 10: State Management",
+      "summary": "Next.js'te state management, Context API, Zustand, Redux, Jotai ve state management best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "State management kavramlarını anlamak",
+        "Context API kullanmayı öğrenmek",
+        "Zustand ve Redux gibi kütüphaneleri öğrenmek",
+        "State management best practices uygulamak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: State Management Temelleri",
+          "href": "/education/lessons/nextjs/module-10/lesson-01",
+          "description": "State management kavramına giriş"
+        },
+        {
+          "label": "Ders 2: Local State vs Global State",
+          "href": "/education/lessons/nextjs/module-10/lesson-02",
+          "description": "Local ve global state farkları"
+        },
+        {
+          "label": "Ders 3: Context API",
+          "href": "/education/lessons/nextjs/module-10/lesson-03",
+          "description": "React Context API kullanımı"
+        },
+        {
+          "label": "Ders 4: Context API Patterns",
+          "href": "/education/lessons/nextjs/module-10/lesson-04",
+          "description": "Context API pattern'leri"
+        },
+        {
+          "label": "Ders 5: Zustand",
+          "href": "/education/lessons/nextjs/module-10/lesson-05",
+          "description": "Zustand kurulumu ve kullanımı"
+        },
+        {
+          "label": "Ders 6: Zustand Stores",
+          "href": "/education/lessons/nextjs/module-10/lesson-06",
+          "description": "Zustand store oluşturma"
+        },
+        {
+          "label": "Ders 7: Redux Toolkit",
+          "href": "/education/lessons/nextjs/module-10/lesson-07",
+          "description": "Redux Toolkit kurulumu"
+        },
+        {
+          "label": "Ders 8: Redux Slices",
+          "href": "/education/lessons/nextjs/module-10/lesson-08",
+          "description": "Redux slice oluşturma"
+        },
+        {
+          "label": "Ders 9: Jotai",
+          "href": "/education/lessons/nextjs/module-10/lesson-09",
+          "description": "Jotai atom-based state management"
+        },
+        {
+          "label": "Ders 10: Recoil",
+          "href": "/education/lessons/nextjs/module-10/lesson-10",
+          "description": "Recoil state management"
+        },
+        {
+          "label": "Ders 11: State Management Patterns",
+          "href": "/education/lessons/nextjs/module-10/lesson-11",
+          "description": "Yaygın state management pattern'leri"
+        },
+        {
+          "label": "Ders 12: Server State vs Client State",
+          "href": "/education/lessons/nextjs/module-10/lesson-12",
+          "description": "Server ve client state ayrımı"
+        },
+        {
+          "label": "Ders 13: State Management Performance",
+          "href": "/education/lessons/nextjs/module-10/lesson-13",
+          "description": "State management performans optimizasyonu"
+        },
+        {
+          "label": "Ders 14: State Management Best Practices",
+          "href": "/education/lessons/nextjs/module-10/lesson-14",
+          "description": "State management en iyi uygulamaları"
+        },
+        {
+          "label": "Ders 15: State Management Seçimi",
+          "href": "/education/lessons/nextjs/module-10/lesson-15",
+          "description": "Hangi çözüm ne zaman kullanılmalı?"
+        }
+      ]
+    },
+    {
+      "id": "module-11",
+      "title": "Module 11: Performance Optimization",
+      "summary": "Next.js performans optimizasyonu, image optimization, code splitting, lazy loading ve performance best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Performance optimizasyon tekniklerini öğrenmek",
+        "Image optimization yapmayı öğrenmek",
+        "Code splitting ve lazy loading uygulamak",
+        "Performance monitoring yapmak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Performance Temelleri",
+          "href": "/education/lessons/nextjs/module-11/lesson-01",
+          "description": "Web performans metrikleri"
+        },
+        {
+          "label": "Ders 2: Next.js Image Component",
+          "href": "/education/lessons/nextjs/module-11/lesson-02",
+          "description": "next/image component ve optimizasyon"
+        },
+        {
+          "label": "Ders 3: Image Optimization",
+          "href": "/education/lessons/nextjs/module-11/lesson-03",
+          "description": "Görsel optimizasyon teknikleri"
+        },
+        {
+          "label": "Ders 4: Code Splitting",
+          "href": "/education/lessons/nextjs/module-11/lesson-04",
+          "description": "Otomatik code splitting"
+        },
+        {
+          "label": "Ders 5: Dynamic Imports",
+          "href": "/education/lessons/nextjs/module-11/lesson-05",
+          "description": "Dynamic import ile lazy loading"
+        },
+        {
+          "label": "Ders 6: Component Lazy Loading",
+          "href": "/education/lessons/nextjs/module-11/lesson-06",
+          "description": "React.lazy ile component lazy loading"
+        },
+        {
+          "label": "Ders 7: Font Optimization",
+          "href": "/education/lessons/nextjs/module-11/lesson-07",
+          "description": "next/font ile font optimizasyonu"
+        },
+        {
+          "label": "Ders 8: Bundle Analysis",
+          "href": "/education/lessons/nextjs/module-11/lesson-08",
+          "description": "Bundle size analizi"
+        },
+        {
+          "label": "Ders 9: Caching Strategies",
+          "href": "/education/lessons/nextjs/module-11/lesson-09",
+          "description": "Cache stratejileri"
+        },
+        {
+          "label": "Ders 10: CDN ve Edge Functions",
+          "href": "/education/lessons/nextjs/module-11/lesson-10",
+          "description": "CDN kullanımı ve edge functions"
+        },
+        {
+          "label": "Ders 11: Performance Monitoring",
+          "href": "/education/lessons/nextjs/module-11/lesson-11",
+          "description": "Web Vitals ve performance monitoring"
+        },
+        {
+          "label": "Ders 12: Lighthouse Audits",
+          "href": "/education/lessons/nextjs/module-11/lesson-12",
+          "description": "Lighthouse ile performans analizi"
+        },
+        {
+          "label": "Ders 13: Memory Optimization",
+          "href": "/education/lessons/nextjs/module-11/lesson-13",
+          "description": "Bellek optimizasyonu"
+        },
+        {
+          "label": "Ders 14: Performance Best Practices",
+          "href": "/education/lessons/nextjs/module-11/lesson-14",
+          "description": "Performance en iyi uygulamaları"
+        },
+        {
+          "label": "Ders 15: Performance Optimization Checklist",
+          "href": "/education/lessons/nextjs/module-11/lesson-15",
+          "description": "Performance optimizasyon checklist'i"
+        }
+      ]
+    },
+    {
+      "id": "module-12",
+      "title": "Module 12: Testing",
+      "summary": "Next.js'te testing, Jest, React Testing Library, Cypress, E2E testing ve testing best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Testing prensiplerini öğrenmek",
+        "Jest ve React Testing Library kullanmayı öğrenmek",
+        "E2E testing yapmayı öğrenmek",
+        "Testing best practices uygulamak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Testing Temelleri",
+          "href": "/education/lessons/nextjs/module-12/lesson-01",
+          "description": "Test türleri ve test pyramid"
+        },
+        {
+          "label": "Ders 2: Jest Kurulumu",
+          "href": "/education/lessons/nextjs/module-12/lesson-02",
+          "description": "Jest test framework kurulumu"
+        },
+        {
+          "label": "Ders 3: React Testing Library",
+          "href": "/education/lessons/nextjs/module-12/lesson-03",
+          "description": "React Testing Library kullanımı"
+        },
+        {
+          "label": "Ders 4: Component Testing",
+          "href": "/education/lessons/nextjs/module-12/lesson-04",
+          "description": "Component testleri yazma"
+        },
+        {
+          "label": "Ders 5: Snapshot Testing",
+          "href": "/education/lessons/nextjs/module-12/lesson-05",
+          "description": "Snapshot testleri"
+        },
+        {
+          "label": "Ders 6: API Route Testing",
+          "href": "/education/lessons/nextjs/module-12/lesson-06",
+          "description": "API route testleri"
+        },
+        {
+          "label": "Ders 7: Integration Testing",
+          "href": "/education/lessons/nextjs/module-12/lesson-07",
+          "description": "Entegrasyon testleri"
+        },
+        {
+          "label": "Ders 8: Cypress E2E Testing",
+          "href": "/education/lessons/nextjs/module-12/lesson-08",
+          "description": "Cypress ile E2E testleri"
+        },
+        {
+          "label": "Ders 9: Playwright",
+          "href": "/education/lessons/nextjs/module-12/lesson-09",
+          "description": "Playwright E2E testing"
+        },
+        {
+          "label": "Ders 10: Mocking",
+          "href": "/education/lessons/nextjs/module-12/lesson-10",
+          "description": "Mock ve stub kullanımı"
+        },
+        {
+          "label": "Ders 11: Test Coverage",
+          "href": "/education/lessons/nextjs/module-12/lesson-11",
+          "description": "Test coverage analizi"
+        },
+        {
+          "label": "Ders 12: Testing Best Practices",
+          "href": "/education/lessons/nextjs/module-12/lesson-12",
+          "description": "Testing en iyi uygulamaları"
+        },
+        {
+          "label": "Ders 13: TDD (Test-Driven Development)",
+          "href": "/education/lessons/nextjs/module-12/lesson-13",
+          "description": "TDD yaklaşımı"
+        },
+        {
+          "label": "Ders 14: CI/CD Testing",
+          "href": "/education/lessons/nextjs/module-12/lesson-14",
+          "description": "CI/CD pipeline'da testler"
+        },
+        {
+          "label": "Ders 15: Testing Strategy",
+          "href": "/education/lessons/nextjs/module-12/lesson-15",
+          "description": "Kapsamlı test stratejisi"
+        }
+      ]
+    },
+    {
+      "id": "module-13",
+      "title": "Module 13: Deployment",
+      "summary": "Next.js uygulamalarını deploy etme, Vercel, Docker, AWS, CI/CD ve deployment best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Deployment stratejilerini öğrenmek",
+        "Vercel'e deploy yapmayı öğrenmek",
+        "Docker containerization yapmak",
+        "CI/CD pipeline'ları kurmak"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Deployment Stratejileri",
+          "href": "/education/lessons/nextjs/module-13/lesson-01",
+          "description": "Deployment modelleri ve seçenekleri"
+        },
+        {
+          "label": "Ders 2: Vercel Deployment",
+          "href": "/education/lessons/nextjs/module-13/lesson-02",
+          "description": "Vercel'e deploy işlemi"
+        },
+        {
+          "label": "Ders 3: Vercel Configuration",
+          "href": "/education/lessons/nextjs/module-13/lesson-03",
+          "description": "Vercel yapılandırması"
+        },
+        {
+          "label": "Ders 4: Environment Variables",
+          "href": "/education/lessons/nextjs/module-13/lesson-04",
+          "description": "Ortam değişkenleri yönetimi"
+        },
+        {
+          "label": "Ders 5: Docker Containerization",
+          "href": "/education/lessons/nextjs/module-13/lesson-05",
+          "description": "Next.js için Dockerfile"
+        },
+        {
+          "label": "Ders 6: Docker Compose",
+          "href": "/education/lessons/nextjs/module-13/lesson-06",
+          "description": "Multi-container uygulamalar"
+        },
+        {
+          "label": "Ders 7: AWS Deployment",
+          "href": "/education/lessons/nextjs/module-13/lesson-07",
+          "description": "AWS Amplify ve EC2"
+        },
+        {
+          "label": "Ders 8: Netlify Deployment",
+          "href": "/education/lessons/nextjs/module-13/lesson-08",
+          "description": "Netlify'a deploy"
+        },
+        {
+          "label": "Ders 9: GitHub Actions CI/CD",
+          "href": "/education/lessons/nextjs/module-13/lesson-09",
+          "description": "GitHub Actions ile CI/CD"
+        },
+        {
+          "label": "Ders 10: Production Build",
+          "href": "/education/lessons/nextjs/module-13/lesson-10",
+          "description": "Production build oluşturma"
+        },
+        {
+          "label": "Ders 11: Monitoring ve Logging",
+          "href": "/education/lessons/nextjs/module-13/lesson-11",
+          "description": "Production monitoring"
+        },
+        {
+          "label": "Ders 12: Error Tracking",
+          "href": "/education/lessons/nextjs/module-13/lesson-12",
+          "description": "Sentry gibi error tracking araçları"
+        },
+        {
+          "label": "Ders 13: Scaling Strategies",
+          "href": "/education/lessons/nextjs/module-13/lesson-13",
+          "description": "Ölçeklendirme stratejileri"
+        },
+        {
+          "label": "Ders 14: Deployment Best Practices",
+          "href": "/education/lessons/nextjs/module-13/lesson-14",
+          "description": "Deployment en iyi uygulamaları"
+        },
+        {
+          "label": "Ders 15: Production Checklist",
+          "href": "/education/lessons/nextjs/module-13/lesson-15",
+          "description": "Production deployment checklist'i"
+        }
+      ]
+    },
+    {
+      "id": "module-14",
+      "title": "Module 14: Advanced Patterns",
+      "summary": "Next.js'te ileri seviye pattern'ler, middleware, edge functions, App Router, React Server Components.",
+      "durationMinutes": 450,
+      "objectives": [
+        "İleri seviye Next.js pattern'lerini öğrenmek",
+        "Middleware kullanmayı öğrenmek",
+        "Edge Functions öğrenmek",
+        "App Router ve React Server Components öğrenmek"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Next.js Middleware",
+          "href": "/education/lessons/nextjs/module-14/lesson-01",
+          "description": "Middleware kavramı ve kullanımı"
+        },
+        {
+          "label": "Ders 2: Edge Functions",
+          "href": "/education/lessons/nextjs/module-14/lesson-02",
+          "description": "Edge runtime ve edge functions"
+        },
+        {
+          "label": "Ders 3: App Router (Next.js 13+)",
+          "href": "/education/lessons/nextjs/module-14/lesson-03",
+          "description": "Yeni App Router yapısı"
+        },
+        {
+          "label": "Ders 4: React Server Components",
+          "href": "/education/lessons/nextjs/module-14/lesson-04",
+          "description": "Server Components kavramı"
+        },
+        {
+          "label": "Ders 5: Streaming SSR",
+          "href": "/education/lessons/nextjs/module-14/lesson-05",
+          "description": "Streaming server-side rendering"
+        },
+        {
+          "label": "Ders 6: Parallel Routes",
+          "href": "/education/lessons/nextjs/module-14/lesson-06",
+          "description": "Parallel routes pattern"
+        },
+        {
+          "label": "Ders 7: Intercepting Routes",
+          "href": "/education/lessons/nextjs/module-14/lesson-07",
+          "description": "Intercepting routes pattern"
+        },
+        {
+          "label": "Ders 8: Route Handlers",
+          "href": "/education/lessons/nextjs/module-14/lesson-08",
+          "description": "App Router route handlers"
+        },
+        {
+          "label": "Ders 9: Server Actions",
+          "href": "/education/lessons/nextjs/module-14/lesson-09",
+          "description": "Server Actions kullanımı"
+        },
+        {
+          "label": "Ders 10: Layouts ve Templates",
+          "href": "/education/lessons/nextjs/module-14/lesson-10",
+          "description": "Layout ve template pattern'leri"
+        },
+        {
+          "label": "Ders 11: Loading ve Error Boundaries",
+          "href": "/education/lessons/nextjs/module-14/lesson-11",
+          "description": "Loading ve error UI"
+        },
+        {
+          "label": "Ders 12: Metadata API",
+          "href": "/education/lessons/nextjs/module-14/lesson-12",
+          "description": "Metadata yönetimi"
+        },
+        {
+          "label": "Ders 13: Advanced Patterns",
+          "href": "/education/lessons/nextjs/module-14/lesson-13",
+          "description": "İleri seviye pattern'ler"
+        },
+        {
+          "label": "Ders 14: Migration Strategies",
+          "href": "/education/lessons/nextjs/module-14/lesson-14",
+          "description": "Pages Router'dan App Router'a geçiş"
+        },
+        {
+          "label": "Ders 15: Advanced Best Practices",
+          "href": "/education/lessons/nextjs/module-14/lesson-15",
+          "description": "İleri seviye en iyi uygulamalar"
+        }
+      ]
+    },
+    {
+      "id": "module-15",
+      "title": "Module 15: Capstone Project",
+      "summary": "Kapsamlı bir Next.js projesi geliştirerek tüm öğrenilenleri uygulama, gerçek dünya senaryosu ve portfolio projesi.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Tüm öğrenilenleri bir projede uygulamak",
+        "Gerçek dünya senaryosu geliştirmek",
+        "Portfolio projesi oluşturmak",
+        "End-to-end uygulama geliştirmek"
+      ],
+      "relatedTopics": [
+        {
+          "label": "Ders 1: Proje Planlama",
+          "href": "/education/lessons/nextjs/module-15/lesson-01",
+          "description": "Proje gereksinimleri ve planlama"
+        },
+        {
+          "label": "Ders 2: Mimari Tasarım",
+          "href": "/education/lessons/nextjs/module-15/lesson-02",
+          "description": "Sistem mimarisi tasarımı"
+        },
+        {
+          "label": "Ders 3: Database Design",
+          "href": "/education/lessons/nextjs/module-15/lesson-03",
+          "description": "Veritabanı tasarımı ve şema"
+        },
+        {
+          "label": "Ders 4: Frontend Development",
+          "href": "/education/lessons/nextjs/module-15/lesson-04",
+          "description": "UI/UX geliştirme"
+        },
+        {
+          "label": "Ders 5: Authentication Implementation",
+          "href": "/education/lessons/nextjs/module-15/lesson-05",
+          "description": "Kimlik doğrulama implementasyonu"
+        },
+        {
+          "label": "Ders 6: API Development",
+          "href": "/education/lessons/nextjs/module-15/lesson-06",
+          "description": "API route'ları geliştirme"
+        },
+        {
+          "label": "Ders 7: State Management",
+          "href": "/education/lessons/nextjs/module-15/lesson-07",
+          "description": "State management implementasyonu"
+        },
+        {
+          "label": "Ders 8: Testing Strategy",
+          "href": "/education/lessons/nextjs/module-15/lesson-08",
+          "description": "Test stratejisi ve implementasyonu"
+        },
+        {
+          "label": "Ders 9: Performance Optimization",
+          "href": "/education/lessons/nextjs/module-15/lesson-09",
+          "description": "Performans optimizasyonu"
+        },
+        {
+          "label": "Ders 10: Security Hardening",
+          "href": "/education/lessons/nextjs/module-15/lesson-10",
+          "description": "Güvenlik sertleştirme"
+        },
+        {
+          "label": "Ders 11: Documentation",
+          "href": "/education/lessons/nextjs/module-15/lesson-11",
+          "description": "Proje dokümantasyonu"
+        },
+        {
+          "label": "Ders 12: Deployment Preparation",
+          "href": "/education/lessons/nextjs/module-15/lesson-12",
+          "description": "Deploy hazırlığı ve yapılandırma"
+        },
+        {
+          "label": "Ders 13: CI/CD Setup",
+          "href": "/education/lessons/nextjs/module-15/lesson-13",
+          "description": "Sürekli entegrasyon ve dağıtım kurulumu"
+        },
+        {
+          "label": "Ders 14: Monitoring and Logging",
+          "href": "/education/lessons/nextjs/module-15/lesson-14",
+          "description": "İzleme ve loglama implementasyonu"
+        },
+        {
+          "label": "Ders 15: Project Review and Presentation",
+          "href": "/education/lessons/nextjs/module-15/lesson-15",
+          "description": "Proje incelemesi ve sunumu"
+        }
+      ]
+    }
+  ]
+}
+

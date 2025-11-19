@@ -35,10 +35,20 @@ export async function POST() {
 
     let updatedCount = 0;
     await Promise.all(
-      hackathons.map(async (hackathon) => {
-        const lifecycle = computeHackathonPhase(hackathon);
+      hackathons.map(async (hackathon: {
+        id: string;
+        phase: string;
+        applicationOpensAt: Date | null;
+        applicationClosesAt: Date | null;
+        submissionOpensAt: Date | null;
+        submissionClosesAt: Date | null;
+        judgingOpensAt: Date | null;
+        judgingClosesAt: Date | null;
+        archivedAt: Date | null;
+      }) => {
+        const lifecycle = computeHackathonPhase(hackathon as any);
         if (hackathon.phase !== lifecycle.derivedPhase) {
-          await synchronizeHackathonPhase(hackathon.id, hackathon.phase, lifecycle.derivedPhase);
+          await synchronizeHackathonPhase(hackathon.id, hackathon.phase as any, lifecycle.derivedPhase as any);
           updatedCount += 1;
         }
       })

@@ -121,19 +121,19 @@ export async function GET(
       }
     };
 
-    quizAttempts.forEach((attempt) =>
+    quizAttempts.forEach((attempt: { quiz?: { course?: { expertise?: string | null } | null } | null }) =>
       safeAddExpertise(attempt.quiz?.course?.expertise ?? null)
     );
-    testAttempts.forEach((attempt) =>
+    testAttempts.forEach((attempt: { quiz?: { course?: { expertise?: string | null } | null } | null }) =>
       safeAddExpertise(attempt.quiz?.course?.expertise ?? null)
     );
-    liveCodingAttempts.forEach((attempt) =>
+    liveCodingAttempts.forEach((attempt: { quiz?: { course?: { expertise?: string | null } | null } | null }) =>
       safeAddExpertise(attempt.quiz?.course?.expertise ?? null)
     );
-    bugFixAttempts.forEach((attempt) =>
+    bugFixAttempts.forEach((attempt: { quiz?: { course?: { expertise?: string | null } | null } | null }) =>
       safeAddExpertise(attempt.quiz?.course?.expertise ?? null)
     );
-    hackatonAttempts.forEach((attempt) =>
+    hackatonAttempts.forEach((attempt: { quiz?: { course?: { expertise?: string | null } | null } | null }) =>
       safeAddExpertise(attempt.quiz?.course?.expertise ?? null)
     );
 
@@ -153,23 +153,23 @@ export async function GET(
       return 0;
     };
 
-    const quizScores = quizAttempts.map((attempt) => attempt.score);
-    const testScores = testAttempts.map((attempt) =>
+    const quizScores = quizAttempts.map((attempt: { score: number }) => attempt.score);
+    const testScores = testAttempts.map((attempt: { metrics?: unknown }) =>
       parseMetricScore(attempt.metrics as any, "score")
     );
-    const liveCodingScores = liveCodingAttempts.map((attempt) =>
+    const liveCodingScores = liveCodingAttempts.map((attempt: { metrics?: unknown }) =>
       parseMetricScore(attempt.metrics as any, "codeQuality")
     );
-    const bugFixScores = bugFixAttempts.map((attempt) =>
+    const bugFixScores = bugFixAttempts.map((attempt: { metrics?: unknown }) =>
       parseMetricScore(attempt.metrics as any, "codeQuality")
     );
-    const hackatonScores = hackatonAttempts.map((attempt) =>
+    const hackatonScores = hackatonAttempts.map((attempt: { metrics?: unknown }) =>
       parseMetricScore(attempt.metrics as any, "projectScore")
     );
 
     const recentAchievements = recentBadges
-      .filter((badge) => badge.badge)
-      .map((badge) => ({
+      .filter((badge: { badge: any }) => badge.badge)
+      .map((badge: { badge: { id: string; name: string; icon: string; color: string; rarity: string }; earnedAt: Date }) => ({
         id: badge.badge.id,
         name: badge.badge.name,
         icon: badge.badge.icon,

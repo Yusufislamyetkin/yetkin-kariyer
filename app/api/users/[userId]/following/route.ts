@@ -41,7 +41,7 @@ export async function GET(
     });
 
     const hasMore = friendships.length > limit;
-    const users = friendships.slice(0, limit).map((friendship) => friendship.addressee);
+    const users = friendships.slice(0, limit).map((friendship: { addressee: { id: string; name: string | null; email: string; profileImage: string | null } }) => friendship.addressee);
 
     // Get total count
     const totalCount = await db.friendship.count({

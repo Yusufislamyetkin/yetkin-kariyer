@@ -44,8 +44,8 @@ export async function GET(request: Request) {
     const friendships = await db.friendship.findMany({
       where: {
         OR: [
-          { requesterId: currentUserId, addresseeId: { in: users.map((u) => u.id) } },
-          { addresseeId: currentUserId, requesterId: { in: users.map((u) => u.id) } },
+          { requesterId: currentUserId, addresseeId: { in: users.map((u: { id: string }) => u.id) } },
+          { addresseeId: currentUserId, requesterId: { in: users.map((u: { id: string }) => u.id) } },
         ],
       },
       select: {
@@ -56,7 +56,7 @@ export async function GET(request: Request) {
     });
 
     const friendshipMap = new Map<string, { status: string; isRequester: boolean }>();
-    friendships.forEach((friendship) => {
+    friendships.forEach((friendship: { requesterId: string; addresseeId: string; status: string }) => {
       const counterpartId = friendship.requesterId === currentUserId ? friendship.addresseeId : friendship.requesterId;
       friendshipMap.set(counterpartId, {
         status: friendship.status,
@@ -65,12 +65,12 @@ export async function GET(request: Request) {
     });
 
     const usersWithStatus = users
-      .filter((user) => {
+      .filter((user: { id: string; name: string | null; email: string; profileImage: string | null }) => {
         const friendship = friendshipMap.get(user.id);
         // Exclude blocked users
         return !friendship || friendship.status !== "blocked";
       })
-      .map((user) => {
+      .map((user: { id: string; name: string | null; email: string; profileImage: string | null }) => {
         const friendship = friendshipMap.get(user.id);
         return {
           id: user.id,

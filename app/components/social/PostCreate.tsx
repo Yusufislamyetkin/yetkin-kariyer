@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Textarea } from "@/app/components/ui/Textarea";
 import { Button } from "@/app/components/ui/Button";
 import { X, Loader2, ImageIcon } from "lucide-react";
+import { z } from "zod";
 
 interface PostCreateProps {
   onClose?: () => void;
@@ -79,12 +80,22 @@ export function PostCreate({ onClose, onSuccess }: PostCreateProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Validate: at least content or image must be provided
-    if (!content.trim() && !imageUrl) {
-      setError("Lütfen bir mesaj yazın veya görsel ekleyin");
-      return;
-    }
+    // Client-side schema validation (Türkçe mesajlarla)
+    const createPostSchema = z
+      .object({
+        content: z
+          .string()
+          .max(2200, "Mesaj en fazla 2200 karakter olabilir")
+          .transform((v) => v.trim())
+          .nullable()
+          .optional(),
+        imageUrl: z
+          .union([z.string().url("Geçersiz görsel URL formatı").transform((v) => v.trim()), z.null()])
+          .optional()
+      })
+      .refine((data) => (data.content && data.content.length > 0) || data.imageUrl, {
+        message: "Lütfen bir mesaj yazın veya görsel ekleyin"
+      });
 
     // Wait for image upload to complete
     if (imageFile && !imageUrl && isUploading) {
@@ -98,6 +109,17 @@ export function PostCreate({ onClose, onSuccess }: PostCreateProps) {
     setError(null);
 
     try {
+      const payload = {
+        content: content ? content.trim() : "",
+        imageUrl: imageUrl ?? null
+      };
+      const parsed = createPostSchema.safeParse(payload);
+      if (!parsed.success) {
+        const msg = parsed.error.errors[0]?.message ?? "Geçersiz veri";
+        setError(msg);
+        setIsSubmitting(false);
+        return;
+      }
       // Validate imageUrl if it exists
       let finalImageUrl: string | null = null;
       if (imageUrl) {
@@ -120,7 +142,7 @@ export function PostCreate({ onClose, onSuccess }: PostCreateProps) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          content: content.trim() || null,
+          content: payload.content || null,
           imageUrl: finalImageUrl,
         }),
       });

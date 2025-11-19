@@ -46,8 +46,8 @@ function serializeDirectThread(
     return null;
   }
 
-  const membership = thread.memberships.find((member) => member.userId === currentUserId);
-  const participant = thread.memberships.find((member) => member.userId !== currentUserId);
+  const membership = thread.memberships.find((member: { userId: string }) => member.userId === currentUserId);
+  const participant = thread.memberships.find((member: { userId: string }) => member.userId !== currentUserId);
 
   return {
     id: thread.id,
@@ -82,7 +82,7 @@ async function buildThreadPayload(threadId: string, currentUserId: string) {
     return null;
   }
 
-  const membership = thread.memberships.find((member) => member.userId === currentUserId);
+  const membership = thread.memberships.find((member: { userId: string }) => member.userId === currentUserId);
 
   const [lastMessage, unreadCount] = await Promise.all([
     db.chatMessage.findFirst({
@@ -126,7 +126,7 @@ async function buildThreadPayload(threadId: string, currentUserId: string) {
           name: lastMessage.user.name,
           profileImage: lastMessage.user.profileImage,
         },
-        attachments: lastMessage.attachments.map((attachment) => ({
+        attachments: lastMessage.attachments.map((attachment: any) => ({
           id: attachment.id,
           messageId: attachment.messageId,
           url: attachment.url,
@@ -186,7 +186,7 @@ export async function GET() {
 
     const payload = (
       await Promise.all(
-        threads.map(async (thread) => {
+        threads.map(async (thread: { id: string }) => {
           try {
             const serialized = await buildThreadPayload(thread.id, userId);
             return serialized;

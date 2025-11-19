@@ -94,7 +94,7 @@ export async function GET() {
     const userGroups: Array<{ groupId: string; lastSeenAt: Date | null }> = [];
     const communityGroups: Array<{ groupId: string; lastSeenAt: Date | null }> = [];
 
-    groupMemberships.forEach((membership) => {
+    groupMemberships.forEach((membership: { groupId: string; lastSeenAt: Date | null }) => {
       if (communityGroupIds.has(membership.groupId)) {
         communityGroups.push({
           groupId: membership.groupId,
@@ -117,15 +117,15 @@ export async function GET() {
     const payload: SummaryPayload = {
       direct: {
         unreadCount: directUnreadCount,
-        channelIds: directMemberships.map((membership) => membership.groupId),
+        channelIds: directMemberships.map((membership: { groupId: string }) => membership.groupId),
       },
       groups: {
         unreadCount: userGroupUnreadCount,
-        channelIds: userGroups.map((membership) => membership.groupId),
+        channelIds: userGroups.map((membership: { groupId: string }) => membership.groupId),
       },
       community: {
         unreadCount: communityUnreadCount,
-        channelIds: communityGroups.map((membership) => membership.groupId),
+        channelIds: communityGroups.map((membership: { groupId: string }) => membership.groupId),
       },
     };
 

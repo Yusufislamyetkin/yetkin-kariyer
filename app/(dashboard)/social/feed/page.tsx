@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState, useCallback, useMemo } from "react";
+import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { PostCard } from "@/app/components/social/PostCard";
 import { PostCreate } from "@/app/components/social/PostCreate";
-import { Plus, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { Button } from "@/app/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 
@@ -50,12 +50,10 @@ export default function FeedPage() {
   const [error, setError] = useState<string | null>(null);
 
   const fetchPosts = useCallback(async (pageNum: number, append: boolean = false) => {
-    if (status !== "authenticated" || !session?.user?.id) return;
+    if (!session?.user?.id) return;
 
     try {
-      if (pageNum === 1) {
-        setIsLoading(true);
-      } else {
+      if (pageNum !== 1) {
         setIsLoadingMore(true);
       }
       setError(null);
@@ -81,18 +79,27 @@ export default function FeedPage() {
       setError(error.message || "Gönderiler yüklenirken bir hata oluştu");
       console.error("Error fetching posts:", error);
     } finally {
-      setIsLoading(false);
-      setIsLoadingMore(false);
+      if (pageNum !== 1) {
+        setIsLoadingMore(false);
+      } else {
+        setIsLoading(false);
+      }
     }
-  }, [session, status]);
+  }, [session?.user?.id]);
 
+  // İlk yüklemeyi sadece bir kez tetikleyin
+  const didInitialLoadRef = useRef(false);
   useEffect(() => {
     if (status === "authenticated" && session?.user?.id) {
-      fetchPosts(1);
+      if (!didInitialLoadRef.current) {
+        didInitialLoadRef.current = true;
+        setIsLoading(true);
+        fetchPosts(1);
+      }
     } else if (status === "unauthenticated") {
       router.push("/login");
     }
-  }, [status, session, fetchPosts, router]);
+  }, [status, session?.user?.id, fetchPosts, router]);
 
   const loadMore = useCallback(() => {
     if (!isLoadingMore && hasMore) {
@@ -169,14 +176,12 @@ export default function FeedPage() {
 
   const handlePostCreated = useCallback(() => {
     setShowCreateModal(false);
-    // Refresh posts from the beginning
+    // Tam sayfa spinner yerine arka planda yenile
     setPage(1);
-    setPosts([]);
-    setIsLoading(true);
     fetchPosts(1, false);
   }, [fetchPosts]);
 
-  if (status === "loading" || isLoading) {
+  if (status === "loading" || (isLoading && posts.length === 0)) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
@@ -190,28 +195,6 @@ export default function FeedPage() {
 
   return (
     <div className="animate-fade-in space-y-4 sm:space-y-6">
-      {/* Header */}
-      <Card variant="elevated">
-        <CardHeader>
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <div className="flex flex-col gap-2">
-              <CardTitle className="text-2xl sm:text-3xl">Haber Akışı</CardTitle>
-              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
-                Bağlantılarınızın en son gönderilerini keşfedin
-              </p>
-            </div>
-            <Button
-              onClick={() => setShowCreateModal(true)}
-              variant="gradient"
-              size="sm"
-            >
-              <Plus className="w-4 h-4 mr-2" />
-              Gönderi Oluştur
-            </Button>
-          </div>
-        </CardHeader>
-      </Card>
-
       {/* Error */}
       {error && (
         <Card variant="elevated">

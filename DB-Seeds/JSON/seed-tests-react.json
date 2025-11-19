@@ -1,0 +1,5804 @@
+{
+  "quizzes": [
+    {
+      "id": "quiz-react-mod01-test-01",
+      "courseId": "course-react-roadmap",
+      "title": "1. React Tanıyalım Testleri - Test 1",
+      "description": "React ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod01-01",
+          "question": "React nedir?",
+          "options": [
+            "JavaScript kütüphanesi, kullanıcı arayüzü oluşturmak için",
+            "Veritabanı yönetim sistemi",
+            "Sunucu tarafı framework",
+            "Mobil uygulama geliştirme aracı"
+          ],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "React temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "react-basics"
+    },
+    {
+      "id": "quiz-react-mod01-test-02",
+      "courseId": "course-react-roadmap",
+      "title": "1. React Tanıyalım Testleri - Test 2",
+      "description": "React ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod01-02",
+          "question": "React'in temel avantajları nelerdir?",
+          "options": [
+            "Component-based yapı, Virtual DOM, tek yönlü veri akışı",
+            "Sadece hızlı olması",
+            "Sadece küçük projeler için",
+            "Sadece web için"
+          ],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "React temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "react-basics"
+    },
+    {
+      "id": "quiz-react-mod01-test-03",
+      "courseId": "course-react-roadmap",
+      "title": "1. React Tanıyalım Testleri - Test 3",
+      "description": "React ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod01-03",
+          "question": "Virtual DOM nedir?",
+          "options": [
+            "DOM'un hafıza içinde JavaScript temsili, performans optimizasyonu için",
+            "Gerçek DOM'un kendisi",
+            "Sadece bir kütüphane",
+            "CSS framework"
+          ],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "React temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "react-basics"
+    },
+    {
+      "id": "quiz-react-mod01-test-04",
+      "courseId": "course-react-roadmap",
+      "title": "1. React Tanıyalım Testleri - Test 4",
+      "description": "React ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod01-04",
+          "question": "JSX nedir?",
+          "options": [
+            "JavaScript'e XML benzeri syntax ekleyen syntax extension",
+            "Sadece bir template dili",
+            "HTML'in kendisi",
+            "CSS preprocessor"
+          ],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "React temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "react-basics"
+    },
+    {
+      "id": "quiz-react-mod01-test-05",
+      "courseId": "course-react-roadmap",
+      "title": "1. React Tanıyalım Testleri - Test 5",
+      "description": "React ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod01-05",
+          "question": "React vs Angular farkı nedir?",
+          "options": [
+            "React kütüphane, Angular tam framework; React daha esnek, Angular daha opinionated",
+            "Hiçbir fark yok",
+            "React sadece mobil için",
+            "Angular sadece web için"
+          ],
+          "answer": 1,
+          "category": "basics",
+          "explanation": "React temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "react-basics"
+    },
+    {
+      "id": "quiz-react-mod01-test-06",
+      "courseId": "course-react-roadmap",
+      "title": "1. React Tanıyalım Testleri - Test 6",
+      "description": "React ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod01-06",
+          "question": "Create React App nedir?",
+          "options": [
+            "React uygulamaları oluşturmak için resmi CLI aracı",
+            "Sadece bir text editor",
+            "Veritabanı aracı",
+            "Deployment platformu"
+          ],
+          "answer": 1,
+          "category": "basics",
+          "explanation": "React temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "react-basics"
+    },
+    {
+      "id": "quiz-react-mod01-test-07",
+      "courseId": "course-react-roadmap",
+      "title": "1. React Tanıyalım Testleri - Test 7",
+      "description": "React ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod01-07",
+          "question": "Vite nedir?",
+          "options": [
+            "Hızlı build tool ve development server",
+            "Sadece bir package manager",
+            "Sadece bir test framework",
+            "Sadece bir CSS framework"
+          ],
+          "answer": 1,
+          "category": "basics",
+          "explanation": "React temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "react-basics"
+    },
+    {
+      "id": "quiz-react-mod01-test-08",
+      "courseId": "course-react-roadmap",
+      "title": "1. React Tanıyalım Testleri - Test 8",
+      "description": "React ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod01-08",
+          "question": "Next.js nedir?",
+          "options": [
+            "React tabanlı full-stack framework, SSR ve routing sağlar",
+            "Sadece bir state management kütüphanesi",
+            "Sadece bir build tool",
+            "Sadece bir CSS framework"
+          ],
+          "answer": 1,
+          "category": "basics",
+          "explanation": "React temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "react-basics"
+    },
+    {
+      "id": "quiz-react-mod01-test-09",
+      "courseId": "course-react-roadmap",
+      "title": "1. React Tanıyalım Testleri - Test 9",
+      "description": "React ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod01-09",
+          "question": "React Developer Tools ne işe yarar?",
+          "options": [
+            "React component'lerini debug etmek ve incelemek için browser extension",
+            "Sadece bir text editor",
+            "Sadece bir package manager",
+            "Sadece bir test tool"
+          ],
+          "answer": 2,
+          "category": "basics",
+          "explanation": "React temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "react-basics"
+    },
+    {
+      "id": "quiz-react-mod01-test-10",
+      "courseId": "course-react-roadmap",
+      "title": "1. React Tanıyalım Testleri - Test 10",
+      "description": "React ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod01-10",
+          "question": "React component nedir?",
+          "options": [
+            "UI'ın yeniden kullanılabilir, bağımsız parçaları",
+            "Sadece bir fonksiyon",
+            "Sadece bir class",
+            "Sadece bir değişken"
+          ],
+          "answer": 2,
+          "category": "basics",
+          "explanation": "React temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "react-basics"
+    },
+    {
+      "id": "quiz-react-mod01-test-11",
+      "courseId": "course-react-roadmap",
+      "title": "1. React Tanıyalım Testleri - Test 11",
+      "description": "React ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod01-11",
+          "question": "React temel kavramları hakkında soru 11",
+          "options": [
+            "React ekosisteminde popüler bir state management kütüphanesi",
+            "Sadece bir build tool",
+            "Sadece bir test framework",
+            "Sadece bir CSS framework"
+          ],
+          "answer": 2,
+          "category": "basics",
+          "explanation": "React temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "react-basics"
+    },
+    {
+      "id": "quiz-react-mod01-test-12",
+      "courseId": "course-react-roadmap",
+      "title": "1. React Tanıyalım Testleri - Test 12",
+      "description": "React ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod01-12",
+          "question": "React temel kavramları hakkında soru 12",
+          "options": [
+            "React'te component lifecycle metodları",
+            "Sadece bir event handler",
+            "Sadece bir state değişkeni",
+            "Sadece bir prop"
+          ],
+          "answer": 2,
+          "category": "basics",
+          "explanation": "React temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "react-basics"
+    },
+    {
+      "id": "quiz-react-mod01-test-13",
+      "courseId": "course-react-roadmap",
+      "title": "1. React Tanıyalım Testleri - Test 13",
+      "description": "React ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod01-13",
+          "question": "React temel kavramları hakkında soru 13",
+          "options": [
+            "React'te props'ları parent'tan child'a geçirme",
+            "Sadece bir state yönetimi",
+            "Sadece bir event handling",
+            "Sadece bir styling yöntemi"
+          ],
+          "answer": 3,
+          "category": "basics",
+          "explanation": "React temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "react-basics"
+    },
+    {
+      "id": "quiz-react-mod01-test-14",
+      "courseId": "course-react-roadmap",
+      "title": "1. React Tanıyalım Testleri - Test 14",
+      "description": "React ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod01-14",
+          "question": "React temel kavramları hakkında soru 14",
+          "options": [
+            "React'te performans optimizasyonu için kullanılan teknik",
+            "Sadece bir routing yöntemi",
+            "Sadece bir state management",
+            "Sadece bir styling yöntemi"
+          ],
+          "answer": 3,
+          "category": "basics",
+          "explanation": "React temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "react-basics"
+    },
+    {
+      "id": "quiz-react-mod01-test-15",
+      "courseId": "course-react-roadmap",
+      "title": "1. React Tanıyalım Testleri - Test 15",
+      "description": "React ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod01-15",
+          "question": "React temel kavramları hakkında soru 15",
+          "options": [
+            "React temel kavramları ile ilgili doğru cevap",
+            "Yanlış seçenek 1",
+            "Yanlış seçenek 2",
+            "Yanlış seçenek 3"
+          ],
+          "answer": 3,
+          "category": "basics",
+          "explanation": "React temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "react-basics"
+    },
+    {
+      "id": "quiz-react-mod02-test-01",
+      "courseId": "course-react-roadmap",
+      "title": "2. JSX ve Rendering Testleri - Test 1",
+      "description": "JSX syntax ve rendering mekanizması hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod02-01",
+          "question": "JSX nedir?",
+          "options": [
+            "JavaScript'e XML benzeri syntax ekleyen syntax extension",
+            "Sadece bir template dili",
+            "HTML'in kendisi",
+            "CSS preprocessor"
+          ],
+          "answer": 0,
+          "category": "jsx",
+          "explanation": "JSX ve Rendering hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "jsx-rendering"
+    },
+    {
+      "id": "quiz-react-mod02-test-02",
+      "courseId": "course-react-roadmap",
+      "title": "2. JSX ve Rendering Testleri - Test 2",
+      "description": "JSX syntax ve rendering mekanizması hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod02-02",
+          "question": "JSX expressions nasıl kullanılır?",
+          "options": [
+            "Süslü parantez {} içinde JavaScript ifadeleri kullanarak",
+            "Sadece string olarak",
+            "Sadece number olarak",
+            "Sadece boolean olarak"
+          ],
+          "answer": 0,
+          "category": "jsx",
+          "explanation": "JSX ve Rendering hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "jsx-rendering"
+    },
+    {
+      "id": "quiz-react-mod02-test-03",
+      "courseId": "course-react-roadmap",
+      "title": "2. JSX ve Rendering Testleri - Test 3",
+      "description": "JSX syntax ve rendering mekanizması hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod02-03",
+          "question": "Virtual DOM nedir?",
+          "options": [
+            "DOM'un hafıza içinde JavaScript temsili, performans için",
+            "Gerçek DOM'un kendisi",
+            "Sadece bir kütüphane",
+            "CSS framework"
+          ],
+          "answer": 0,
+          "category": "jsx",
+          "explanation": "JSX ve Rendering hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "jsx-rendering"
+    },
+    {
+      "id": "quiz-react-mod02-test-04",
+      "courseId": "course-react-roadmap",
+      "title": "2. JSX ve Rendering Testleri - Test 4",
+      "description": "JSX syntax ve rendering mekanizması hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod02-04",
+          "question": "Reconciliation nedir?",
+          "options": [
+            "Virtual DOM değişikliklerini gerçek DOM ile senkronize etme süreci",
+            "Sadece bir render yöntemi",
+            "Sadece bir state yönetimi",
+            "Sadece bir event handling"
+          ],
+          "answer": 0,
+          "category": "jsx",
+          "explanation": "JSX ve Rendering hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "jsx-rendering"
+    },
+    {
+      "id": "quiz-react-mod02-test-05",
+      "courseId": "course-react-roadmap",
+      "title": "2. JSX ve Rendering Testleri - Test 5",
+      "description": "JSX syntax ve rendering mekanizması hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod02-05",
+          "question": "Fragment nedir?",
+          "options": [
+            "Birden fazla element'i wrapper olmadan gruplamak için kullanılan React component",
+            "Sadece bir div",
+            "Sadece bir span",
+            "Sadece bir section"
+          ],
+          "answer": 1,
+          "category": "jsx",
+          "explanation": "JSX ve Rendering hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "jsx-rendering"
+    },
+    {
+      "id": "quiz-react-mod02-test-06",
+      "courseId": "course-react-roadmap",
+      "title": "2. JSX ve Rendering Testleri - Test 6",
+      "description": "JSX syntax ve rendering mekanizması hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod02-06",
+          "question": "Keys nedir ve neden önemlidir?",
+          "options": [
+            "List item'ları tanımlamak için kullanılan unique identifier, React'in değişiklikleri takip etmesi için",
+            "Sadece bir styling özelliği",
+            "Sadece bir class name",
+            "Sadece bir id attribute"
+          ],
+          "answer": 1,
+          "category": "jsx",
+          "explanation": "JSX ve Rendering hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "jsx-rendering"
+    },
+    {
+      "id": "quiz-react-mod02-test-07",
+      "courseId": "course-react-roadmap",
+      "title": "2. JSX ve Rendering Testleri - Test 7",
+      "description": "JSX syntax ve rendering mekanizması hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod02-07",
+          "question": "Conditional rendering nasıl yapılır?",
+          "options": [
+            "Ternary operator (? :) veya && operator kullanarak",
+            "Sadece if statement ile",
+            "Sadece switch case ile",
+            "Sadece for loop ile"
+          ],
+          "answer": 1,
+          "category": "jsx",
+          "explanation": "JSX ve Rendering hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "jsx-rendering"
+    },
+    {
+      "id": "quiz-react-mod02-test-08",
+      "courseId": "course-react-roadmap",
+      "title": "2. JSX ve Rendering Testleri - Test 8",
+      "description": "JSX syntax ve rendering mekanizması hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod02-08",
+          "question": "React.createElement vs JSX farkı nedir?",
+          "options": [
+            "JSX, React.createElement için syntactic sugar; JSX daha okunabilir",
+            "Hiçbir fark yok",
+            "JSX daha yavaş",
+            "createElement daha okunabilir"
+          ],
+          "answer": 1,
+          "category": "jsx",
+          "explanation": "JSX ve Rendering hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "jsx-rendering"
+    },
+    {
+      "id": "quiz-react-mod02-test-09",
+      "courseId": "course-react-roadmap",
+      "title": "2. JSX ve Rendering Testleri - Test 9",
+      "description": "JSX syntax ve rendering mekanizması hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod02-09",
+          "question": "Rendering optimizasyonu nedir?",
+          "options": [
+            "Gereksiz render'ları önlemek, memoization kullanmak, code splitting",
+            "Sadece daha fazla component kullanmak",
+            "Sadece daha fazla state kullanmak",
+            "Sadece daha fazla prop kullanmak"
+          ],
+          "answer": 2,
+          "category": "jsx",
+          "explanation": "JSX ve Rendering hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "jsx-rendering"
+    },
+    {
+      "id": "quiz-react-mod02-test-10",
+      "courseId": "course-react-roadmap",
+      "title": "2. JSX ve Rendering Testleri - Test 10",
+      "description": "JSX syntax ve rendering mekanizması hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod02-10",
+          "question": "JSX best practices nelerdir?",
+          "options": [
+            "Tek bir root element kullanmak, keys kullanmak, conditional rendering",
+            "Sadece class component kullanmak",
+            "Sadece function component kullanmak",
+            "Sadece hooks kullanmak"
+          ],
+          "answer": 2,
+          "category": "jsx",
+          "explanation": "JSX ve Rendering hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "jsx-rendering"
+    },
+    {
+      "id": "quiz-react-mod02-test-11",
+      "courseId": "course-react-roadmap",
+      "title": "2. JSX ve Rendering Testleri - Test 11",
+      "description": "JSX syntax ve rendering mekanizması hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod02-11",
+          "question": "JSX ve Rendering hakkında soru 11",
+          "options": [
+            "JSX'te className kullanmak, camelCase attribute isimleri",
+            "Sadece HTML attribute isimleri kullanmak",
+            "Sadece kebab-case kullanmak",
+            "Sadece snake_case kullanmak"
+          ],
+          "answer": 2,
+          "category": "jsx",
+          "explanation": "JSX ve Rendering hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "jsx-rendering"
+    },
+    {
+      "id": "quiz-react-mod02-test-12",
+      "courseId": "course-react-roadmap",
+      "title": "2. JSX ve Rendering Testleri - Test 12",
+      "description": "JSX syntax ve rendering mekanizması hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod02-12",
+          "question": "JSX ve Rendering hakkında soru 12",
+          "options": [
+            "JSX'te JavaScript expressions kullanmak için {} kullanılır",
+            "Sadece string interpolation",
+            "Sadece template literals",
+            "Sadece concatenation"
+          ],
+          "answer": 2,
+          "category": "jsx",
+          "explanation": "JSX ve Rendering hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "jsx-rendering"
+    },
+    {
+      "id": "quiz-react-mod02-test-13",
+      "courseId": "course-react-roadmap",
+      "title": "2. JSX ve Rendering Testleri - Test 13",
+      "description": "JSX syntax ve rendering mekanizması hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod02-13",
+          "question": "JSX ve Rendering hakkında soru 13",
+          "options": [
+            "JSX'te self-closing tags kullanmak, /> ile kapatmak",
+            "Sadece açık tag kullanmak",
+            "Sadece kapatılmış tag kullanmak",
+            "Sadece comment kullanmak"
+          ],
+          "answer": 3,
+          "category": "jsx",
+          "explanation": "JSX ve Rendering hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "jsx-rendering"
+    },
+    {
+      "id": "quiz-react-mod02-test-14",
+      "courseId": "course-react-roadmap",
+      "title": "2. JSX ve Rendering Testleri - Test 14",
+      "description": "JSX syntax ve rendering mekanizması hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod02-14",
+          "question": "JSX ve Rendering hakkında soru 14",
+          "options": [
+            "JSX'te array map kullanarak list render etmek",
+            "Sadece for loop kullanmak",
+            "Sadece while loop kullanmak",
+            "Sadece forEach kullanmak"
+          ],
+          "answer": 3,
+          "category": "jsx",
+          "explanation": "JSX ve Rendering hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "jsx-rendering"
+    },
+    {
+      "id": "quiz-react-mod02-test-15",
+      "courseId": "course-react-roadmap",
+      "title": "2. JSX ve Rendering Testleri - Test 15",
+      "description": "JSX syntax ve rendering mekanizması hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod02-15",
+          "question": "JSX ve Rendering hakkında soru 15",
+          "options": [
+            "JSX ve Rendering ile ilgili doğru cevap",
+            "Yanlış seçenek 1",
+            "Yanlış seçenek 2",
+            "Yanlış seçenek 3"
+          ],
+          "answer": 3,
+          "category": "jsx",
+          "explanation": "JSX ve Rendering hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "jsx-rendering"
+    },
+    {
+      "id": "quiz-react-mod03-test-01",
+      "courseId": "course-react-roadmap",
+      "title": "3. Components ve Props Testleri - Test 1",
+      "description": "React components ve props kullanımı hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod03-01",
+          "question": "Function component nedir?",
+          "options": [
+            "JavaScript fonksiyonu olarak tanımlanan React component",
+            "Sadece bir class",
+            "Sadece bir object",
+            "Sadece bir array"
+          ],
+          "answer": 0,
+          "category": "components",
+          "explanation": "Components ve Props hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "components-props"
+    },
+    {
+      "id": "quiz-react-mod03-test-02",
+      "courseId": "course-react-roadmap",
+      "title": "3. Components ve Props Testleri - Test 2",
+      "description": "React components ve props kullanımı hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod03-02",
+          "question": "Props nedir?",
+          "options": [
+            "Parent component'ten child component'e geçirilen veriler",
+            "Sadece bir state",
+            "Sadece bir method",
+            "Sadece bir variable"
+          ],
+          "answer": 0,
+          "category": "components",
+          "explanation": "Components ve Props hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "components-props"
+    },
+    {
+      "id": "quiz-react-mod03-test-03",
+      "courseId": "course-react-roadmap",
+      "title": "3. Components ve Props Testleri - Test 3",
+      "description": "React components ve props kullanımı hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod03-03",
+          "question": "Children prop nedir?",
+          "options": [
+            "Component içeriğini temsil eden özel prop",
+            "Sadece bir attribute",
+            "Sadece bir class",
+            "Sadece bir id"
+          ],
+          "answer": 0,
+          "category": "components",
+          "explanation": "Components ve Props hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "components-props"
+    },
+    {
+      "id": "quiz-react-mod03-test-04",
+      "courseId": "course-react-roadmap",
+      "title": "3. Components ve Props Testleri - Test 4",
+      "description": "React components ve props kullanımı hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod03-04",
+          "question": "Component composition nedir?",
+          "options": [
+            "Küçük component'leri birleştirerek daha büyük component'ler oluşturma",
+            "Sadece bir inheritance",
+            "Sadece bir polymorphism",
+            "Sadece bir encapsulation"
+          ],
+          "answer": 0,
+          "category": "components",
+          "explanation": "Components ve Props hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "components-props"
+    },
+    {
+      "id": "quiz-react-mod03-test-05",
+      "courseId": "course-react-roadmap",
+      "title": "3. Components ve Props Testleri - Test 5",
+      "description": "React components ve props kullanımı hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod03-05",
+          "question": "HOC (Higher-Order Component) nedir?",
+          "options": [
+            "Component alıp yeni component döndüren fonksiyon, logic paylaşımı için",
+            "Sadece bir component",
+            "Sadece bir hook",
+            "Sadece bir utility function"
+          ],
+          "answer": 1,
+          "category": "components",
+          "explanation": "Components ve Props hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "components-props"
+    },
+    {
+      "id": "quiz-react-mod03-test-06",
+      "courseId": "course-react-roadmap",
+      "title": "3. Components ve Props Testleri - Test 6",
+      "description": "React components ve props kullanımı hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod03-06",
+          "question": "Render props pattern nedir?",
+          "options": [
+            "Render prop olarak fonksiyon geçirerek logic paylaşımı",
+            "Sadece bir prop geçirme",
+            "Sadece bir state geçirme",
+            "Sadece bir method geçirme"
+          ],
+          "answer": 1,
+          "category": "components",
+          "explanation": "Components ve Props hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "components-props"
+    },
+    {
+      "id": "quiz-react-mod03-test-07",
+      "courseId": "course-react-roadmap",
+      "title": "3. Components ve Props Testleri - Test 7",
+      "description": "React components ve props kullanımı hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod03-07",
+          "question": "Compound components nedir?",
+          "options": [
+            "Birlikte çalışan, state paylaşan component grupları",
+            "Sadece bir component",
+            "Sadece bir hook",
+            "Sadece bir utility"
+          ],
+          "answer": 1,
+          "category": "components",
+          "explanation": "Components ve Props hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "components-props"
+    },
+    {
+      "id": "quiz-react-mod03-test-08",
+      "courseId": "course-react-roadmap",
+      "title": "3. Components ve Props Testleri - Test 8",
+      "description": "React components ve props kullanımı hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod03-08",
+          "question": "Prop drilling nedir?",
+          "options": [
+            "Props'ları gereksiz yere birçok component seviyesinden geçirme problemi",
+            "Sadece bir prop kullanımı",
+            "Sadece bir state kullanımı",
+            "Sadece bir method kullanımı"
+          ],
+          "answer": 1,
+          "category": "components",
+          "explanation": "Components ve Props hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "components-props"
+    },
+    {
+      "id": "quiz-react-mod03-test-09",
+      "courseId": "course-react-roadmap",
+      "title": "3. Components ve Props Testleri - Test 9",
+      "description": "React components ve props kullanımı hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod03-09",
+          "question": "Component reusability nedir?",
+          "options": [
+            "Component'leri farklı yerlerde tekrar kullanabilme yeteneği",
+            "Sadece bir kopyalama",
+            "Sadece bir import",
+            "Sadece bir export"
+          ],
+          "answer": 2,
+          "category": "components",
+          "explanation": "Components ve Props hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "components-props"
+    },
+    {
+      "id": "quiz-react-mod03-test-10",
+      "courseId": "course-react-roadmap",
+      "title": "3. Components ve Props Testleri - Test 10",
+      "description": "React components ve props kullanımı hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod03-10",
+          "question": "Component best practices nelerdir?",
+          "options": [
+            "Küçük, tek sorumluluklu component'ler, prop validation",
+            "Sadece büyük component'ler",
+            "Sadece class component'ler",
+            "Sadece function component'ler"
+          ],
+          "answer": 2,
+          "category": "components",
+          "explanation": "Components ve Props hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "components-props"
+    },
+    {
+      "id": "quiz-react-mod03-test-11",
+      "courseId": "course-react-roadmap",
+      "title": "3. Components ve Props Testleri - Test 11",
+      "description": "React components ve props kullanımı hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod03-11",
+          "question": "Components ve Props hakkında soru 11",
+          "options": [
+            "Component'leri props ile configure etmek, default props kullanmak",
+            "Sadece hard-coded değerler",
+            "Sadece global state",
+            "Sadece local state"
+          ],
+          "answer": 2,
+          "category": "components",
+          "explanation": "Components ve Props hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "components-props"
+    },
+    {
+      "id": "quiz-react-mod03-test-12",
+      "courseId": "course-react-roadmap",
+      "title": "3. Components ve Props Testleri - Test 12",
+      "description": "React components ve props kullanımı hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod03-12",
+          "question": "Components ve Props hakkında soru 12",
+          "options": [
+            "Component'leri propTypes veya TypeScript ile type check etmek",
+            "Sadece runtime check",
+            "Sadece manual check",
+            "Sadece no check"
+          ],
+          "answer": 2,
+          "category": "components",
+          "explanation": "Components ve Props hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "components-props"
+    },
+    {
+      "id": "quiz-react-mod03-test-13",
+      "courseId": "course-react-roadmap",
+      "title": "3. Components ve Props Testleri - Test 13",
+      "description": "React components ve props kullanımı hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod03-13",
+          "question": "Components ve Props hakkında soru 13",
+          "options": [
+            "Component'leri memoization ile optimize etmek, gereksiz render önlemek",
+            "Sadece her zaman render etmek",
+            "Sadece hiç render etmemek",
+            "Sadece conditional render"
+          ],
+          "answer": 3,
+          "category": "components",
+          "explanation": "Components ve Props hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "components-props"
+    },
+    {
+      "id": "quiz-react-mod03-test-14",
+      "courseId": "course-react-roadmap",
+      "title": "3. Components ve Props Testleri - Test 14",
+      "description": "React components ve props kullanımı hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod03-14",
+          "question": "Components ve Props hakkında soru 14",
+          "options": [
+            "Component'leri context veya state management ile prop drilling önlemek",
+            "Sadece daha fazla prop geçirmek",
+            "Sadece global variable kullanmak",
+            "Sadece local storage kullanmak"
+          ],
+          "answer": 3,
+          "category": "components",
+          "explanation": "Components ve Props hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "components-props"
+    },
+    {
+      "id": "quiz-react-mod03-test-15",
+      "courseId": "course-react-roadmap",
+      "title": "3. Components ve Props Testleri - Test 15",
+      "description": "React components ve props kullanımı hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod03-15",
+          "question": "Components ve Props hakkında soru 15",
+          "options": [
+            "Components ve Props ile ilgili doğru cevap",
+            "Yanlış seçenek 1",
+            "Yanlış seçenek 2",
+            "Yanlış seçenek 3"
+          ],
+          "answer": 3,
+          "category": "components",
+          "explanation": "Components ve Props hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "components-props"
+    },
+    {
+      "id": "quiz-react-mod04-test-01",
+      "courseId": "course-react-roadmap",
+      "title": "4. State Yönetimi Testleri - Test 1",
+      "description": "State yönetimi ve useState/useReducer hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod04-01",
+          "question": "State nedir?",
+          "options": [
+            "Component'in zaman içinde değişebilen verisi",
+            "Sadece bir prop",
+            "Sadece bir method",
+            "Sadece bir constant"
+          ],
+          "answer": 0,
+          "category": "state",
+          "explanation": "State Yönetimi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "state-management"
+    },
+    {
+      "id": "quiz-react-mod04-test-02",
+      "courseId": "course-react-roadmap",
+      "title": "4. State Yönetimi Testleri - Test 2",
+      "description": "State yönetimi ve useState/useReducer hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod04-02",
+          "question": "useState hook nedir?",
+          "options": [
+            "State eklemek ve güncellemek için React hook",
+            "Sadece bir prop",
+            "Sadece bir method",
+            "Sadece bir variable"
+          ],
+          "answer": 0,
+          "category": "state",
+          "explanation": "State Yönetimi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "state-management"
+    },
+    {
+      "id": "quiz-react-mod04-test-03",
+      "courseId": "course-react-roadmap",
+      "title": "4. State Yönetimi Testleri - Test 3",
+      "description": "State yönetimi ve useState/useReducer hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod04-03",
+          "question": "State vs Props farkı nedir?",
+          "options": [
+            "State component içinde, props dışarıdan gelir; state değişebilir, props read-only",
+            "Hiçbir fark yok",
+            "State sadece class component'te",
+            "Props sadece function component'te"
+          ],
+          "answer": 0,
+          "category": "state",
+          "explanation": "State Yönetimi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "state-management"
+    },
+    {
+      "id": "quiz-react-mod04-test-04",
+      "courseId": "course-react-roadmap",
+      "title": "4. State Yönetimi Testleri - Test 4",
+      "description": "State yönetimi ve useState/useReducer hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod04-04",
+          "question": "Lifting state up nedir?",
+          "options": [
+            "State'i ortak parent component'e taşıma, birden fazla child paylaşmak için",
+            "Sadece state'i child'a taşımak",
+            "Sadece state'i silmek",
+            "Sadece state'i kopyalamak"
+          ],
+          "answer": 0,
+          "category": "state",
+          "explanation": "State Yönetimi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "state-management"
+    },
+    {
+      "id": "quiz-react-mod04-test-05",
+      "courseId": "course-react-roadmap",
+      "title": "4. State Yönetimi Testleri - Test 5",
+      "description": "State yönetimi ve useState/useReducer hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod04-05",
+          "question": "useReducer hook nedir?",
+          "options": [
+            "Karmaşık state logic için reducer pattern kullanan hook",
+            "Sadece bir useState alternatifi",
+            "Sadece bir prop",
+            "Sadece bir method"
+          ],
+          "answer": 1,
+          "category": "state",
+          "explanation": "State Yönetimi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "state-management"
+    },
+    {
+      "id": "quiz-react-mod04-test-06",
+      "courseId": "course-react-roadmap",
+      "title": "4. State Yönetimi Testleri - Test 6",
+      "description": "State yönetimi ve useState/useReducer hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod04-06",
+          "question": "Local state vs Global state nedir?",
+          "options": [
+            "Local state tek component'te, global state birçok component paylaşır",
+            "Hiçbir fark yok",
+            "Local state her zaman daha iyi",
+            "Global state her zaman daha iyi"
+          ],
+          "answer": 1,
+          "category": "state",
+          "explanation": "State Yönetimi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "state-management"
+    },
+    {
+      "id": "quiz-react-mod04-test-07",
+      "courseId": "course-react-roadmap",
+      "title": "4. State Yönetimi Testleri - Test 7",
+      "description": "State yönetimi ve useState/useReducer hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod04-07",
+          "question": "State initialization patterns nelerdir?",
+          "options": [
+            "useState initial value, lazy initialization, function initializer",
+            "Sadece hard-coded değerler",
+            "Sadece null",
+            "Sadece undefined"
+          ],
+          "answer": 1,
+          "category": "state",
+          "explanation": "State Yönetimi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "state-management"
+    },
+    {
+      "id": "quiz-react-mod04-test-08",
+      "courseId": "course-react-roadmap",
+      "title": "4. State Yönetimi Testleri - Test 8",
+      "description": "State yönetimi ve useState/useReducer hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod04-08",
+          "question": "State derivation nedir?",
+          "options": [
+            "Mevcut state'ten yeni değer hesaplama, derived state",
+            "Sadece state'i kopyalamak",
+            "Sadece state'i silmek",
+            "Sadece state'i değiştirmek"
+          ],
+          "answer": 1,
+          "category": "state",
+          "explanation": "State Yönetimi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "state-management"
+    },
+    {
+      "id": "quiz-react-mod04-test-09",
+      "courseId": "course-react-roadmap",
+      "title": "4. State Yönetimi Testleri - Test 9",
+      "description": "State yönetimi ve useState/useReducer hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod04-09",
+          "question": "State antipatterns nelerdir?",
+          "options": [
+            "State'i gereksiz yere global yapmak, mutating state directly",
+            "Sadece state kullanmak",
+            "Sadece props kullanmak",
+            "Sadece methods kullanmak"
+          ],
+          "answer": 2,
+          "category": "state",
+          "explanation": "State Yönetimi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "state-management"
+    },
+    {
+      "id": "quiz-react-mod04-test-10",
+      "courseId": "course-react-roadmap",
+      "title": "4. State Yönetimi Testleri - Test 10",
+      "description": "State yönetimi ve useState/useReducer hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod04-10",
+          "question": "State management best practices nelerdir?",
+          "options": [
+            "State'i mümkün olduğunca local tutmak, gereksiz state önlemek",
+            "Sadece global state kullanmak",
+            "Sadece class component kullanmak",
+            "Sadece function component kullanmak"
+          ],
+          "answer": 2,
+          "category": "state",
+          "explanation": "State Yönetimi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "state-management"
+    },
+    {
+      "id": "quiz-react-mod04-test-11",
+      "courseId": "course-react-roadmap",
+      "title": "4. State Yönetimi Testleri - Test 11",
+      "description": "State yönetimi ve useState/useReducer hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod04-11",
+          "question": "State Yönetimi hakkında soru 11",
+          "options": [
+            "State updates'i functional form kullanmak, önceki state'e bağlıysa",
+            "Sadece direct assignment",
+            "Sadece mutation",
+            "Sadece copy"
+          ],
+          "answer": 2,
+          "category": "state",
+          "explanation": "State Yönetimi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "state-management"
+    },
+    {
+      "id": "quiz-react-mod04-test-12",
+      "courseId": "course-react-roadmap",
+      "title": "4. State Yönetimi Testleri - Test 12",
+      "description": "State yönetimi ve useState/useReducer hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod04-12",
+          "question": "State Yönetimi hakkında soru 12",
+          "options": [
+            "State'i normalize etmek, nested object yerine flat structure",
+            "Sadece nested object kullanmak",
+            "Sadece array kullanmak",
+            "Sadece primitive kullanmak"
+          ],
+          "answer": 2,
+          "category": "state",
+          "explanation": "State Yönetimi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "state-management"
+    },
+    {
+      "id": "quiz-react-mod04-test-13",
+      "courseId": "course-react-roadmap",
+      "title": "4. State Yönetimi Testleri - Test 13",
+      "description": "State yönetimi ve useState/useReducer hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod04-13",
+          "question": "State Yönetimi hakkında soru 13",
+          "options": [
+            "State'i bölmek, ilgili state'leri birlikte tutmak",
+            "Sadece tek bir state object",
+            "Sadece global state",
+            "Sadece local state"
+          ],
+          "answer": 3,
+          "category": "state",
+          "explanation": "State Yönetimi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "state-management"
+    },
+    {
+      "id": "quiz-react-mod04-test-14",
+      "courseId": "course-react-roadmap",
+      "title": "4. State Yönetimi Testleri - Test 14",
+      "description": "State yönetimi ve useState/useReducer hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod04-14",
+          "question": "State Yönetimi hakkında soru 14",
+          "options": [
+            "State updates'i batch etmek, multiple setState calls optimize etmek",
+            "Sadece her seferinde bir update",
+            "Sadece manual batching",
+            "Sadece no batching"
+          ],
+          "answer": 3,
+          "category": "state",
+          "explanation": "State Yönetimi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "state-management"
+    },
+    {
+      "id": "quiz-react-mod04-test-15",
+      "courseId": "course-react-roadmap",
+      "title": "4. State Yönetimi Testleri - Test 15",
+      "description": "State yönetimi ve useState/useReducer hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod04-15",
+          "question": "State Yönetimi hakkında soru 15",
+          "options": [
+            "State Yönetimi ile ilgili doğru cevap",
+            "Yanlış seçenek 1",
+            "Yanlış seçenek 2",
+            "Yanlış seçenek 3"
+          ],
+          "answer": 3,
+          "category": "state",
+          "explanation": "State Yönetimi hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "state-management"
+    },
+    {
+      "id": "quiz-react-mod05-test-01",
+      "courseId": "course-react-roadmap",
+      "title": "5. Hooks Testleri - Test 1",
+      "description": "React Hooks API hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod05-01",
+          "question": "Hooks nedir?",
+          "options": [
+            "Function component'lere state ve lifecycle özellikleri ekleyen fonksiyonlar",
+            "Sadece bir class feature",
+            "Sadece bir prop",
+            "Sadece bir method"
+          ],
+          "answer": 0,
+          "category": "hooks",
+          "explanation": "Hooks hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "hooks"
+    },
+    {
+      "id": "quiz-react-mod05-test-02",
+      "courseId": "course-react-roadmap",
+      "title": "5. Hooks Testleri - Test 2",
+      "description": "React Hooks API hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod05-02",
+          "question": "useEffect hook nedir?",
+          "options": [
+            "Side effect'leri yönetmek için kullanılan hook, component lifecycle'a bağlanır",
+            "Sadece bir state hook",
+            "Sadece bir context hook",
+            "Sadece bir ref hook"
+          ],
+          "answer": 0,
+          "category": "hooks",
+          "explanation": "Hooks hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "hooks"
+    },
+    {
+      "id": "quiz-react-mod05-test-03",
+      "courseId": "course-react-roadmap",
+      "title": "5. Hooks Testleri - Test 3",
+      "description": "React Hooks API hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod05-03",
+          "question": "useContext hook nedir?",
+          "options": [
+            "Context değerini okumak için kullanılan hook",
+            "Sadece bir state hook",
+            "Sadece bir effect hook",
+            "Sadece bir ref hook"
+          ],
+          "answer": 0,
+          "category": "hooks",
+          "explanation": "Hooks hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "hooks"
+    },
+    {
+      "id": "quiz-react-mod05-test-04",
+      "courseId": "course-react-roadmap",
+      "title": "5. Hooks Testleri - Test 4",
+      "description": "React Hooks API hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod05-04",
+          "question": "useRef hook nedir?",
+          "options": [
+            "Mutable reference tutmak için kullanılan hook, DOM element'e erişim için",
+            "Sadece bir state hook",
+            "Sadece bir effect hook",
+            "Sadece bir context hook"
+          ],
+          "answer": 0,
+          "category": "hooks",
+          "explanation": "Hooks hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "hooks"
+    },
+    {
+      "id": "quiz-react-mod05-test-05",
+      "courseId": "course-react-roadmap",
+      "title": "5. Hooks Testleri - Test 5",
+      "description": "React Hooks API hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod05-05",
+          "question": "useMemo ve useCallback nedir?",
+          "options": [
+            "Memoization için kullanılan hook'lar, performans optimizasyonu",
+            "Sadece bir state hook",
+            "Sadece bir effect hook",
+            "Sadece bir context hook"
+          ],
+          "answer": 1,
+          "category": "hooks",
+          "explanation": "Hooks hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "hooks"
+    },
+    {
+      "id": "quiz-react-mod05-test-06",
+      "courseId": "course-react-roadmap",
+      "title": "5. Hooks Testleri - Test 6",
+      "description": "React Hooks API hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod05-06",
+          "question": "Custom hooks nedir?",
+          "options": [
+            "Kendi hook'larınızı oluşturma, logic paylaşımı için",
+            "Sadece built-in hook kullanmak",
+            "Sadece class component kullanmak",
+            "Sadece function component kullanmak"
+          ],
+          "answer": 1,
+          "category": "hooks",
+          "explanation": "Hooks hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "hooks"
+    },
+    {
+      "id": "quiz-react-mod05-test-07",
+      "courseId": "course-react-roadmap",
+      "title": "5. Hooks Testleri - Test 7",
+      "description": "React Hooks API hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod05-07",
+          "question": "Hooks rules nelerdir?",
+          "options": [
+            "Sadece function component'lerde kullan, conditional olarak çağırma",
+            "Sadece class component'lerde kullan",
+            "Sadece global scope'ta kullan",
+            "Sadece loop içinde kullan"
+          ],
+          "answer": 1,
+          "category": "hooks",
+          "explanation": "Hooks hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "hooks"
+    },
+    {
+      "id": "quiz-react-mod05-test-08",
+      "courseId": "course-react-roadmap",
+      "title": "5. Hooks Testleri - Test 8",
+      "description": "React Hooks API hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod05-08",
+          "question": "useLayoutEffect nedir?",
+          "options": [
+            "useEffect'e benzer ama DOM değişikliklerinden önce senkron çalışır",
+            "Sadece bir useEffect alternatifi",
+            "Sadece bir useState alternatifi",
+            "Sadece bir useContext alternatifi"
+          ],
+          "answer": 1,
+          "category": "hooks",
+          "explanation": "Hooks hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "hooks"
+    },
+    {
+      "id": "quiz-react-mod05-test-09",
+      "courseId": "course-react-roadmap",
+      "title": "5. Hooks Testleri - Test 9",
+      "description": "React Hooks API hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod05-09",
+          "question": "Hooks composition nedir?",
+          "options": [
+            "Birden fazla hook'u birleştirerek karmaşık logic oluşturma",
+            "Sadece tek bir hook kullanmak",
+            "Sadece class component kullanmak",
+            "Sadece function component kullanmak"
+          ],
+          "answer": 2,
+          "category": "hooks",
+          "explanation": "Hooks hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "hooks"
+    },
+    {
+      "id": "quiz-react-mod05-test-10",
+      "courseId": "course-react-roadmap",
+      "title": "5. Hooks Testleri - Test 10",
+      "description": "React Hooks API hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod05-10",
+          "question": "Hooks performance optimizasyonu nedir?",
+          "options": [
+            "useMemo, useCallback kullanmak, gereksiz re-render önlemek",
+            "Sadece her zaman render etmek",
+            "Sadece hiç render etmemek",
+            "Sadece conditional render"
+          ],
+          "answer": 2,
+          "category": "hooks",
+          "explanation": "Hooks hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "hooks"
+    },
+    {
+      "id": "quiz-react-mod05-test-11",
+      "courseId": "course-react-roadmap",
+      "title": "5. Hooks Testleri - Test 11",
+      "description": "React Hooks API hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod05-11",
+          "question": "Hooks hakkında soru 11",
+          "options": [
+            "useEffect dependency array doğru kullanmak, infinite loop önlemek",
+            "Sadece boş array kullanmak",
+            "Sadece hiç array kullanmamak",
+            "Sadece tüm değişkenleri eklemek"
+          ],
+          "answer": 2,
+          "category": "hooks",
+          "explanation": "Hooks hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "hooks"
+    },
+    {
+      "id": "quiz-react-mod05-test-12",
+      "courseId": "course-react-roadmap",
+      "title": "5. Hooks Testleri - Test 12",
+      "description": "React Hooks API hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod05-12",
+          "question": "Hooks hakkında soru 12",
+          "options": [
+            "useCallback ile function memoization, child component'lere prop geçirirken",
+            "Sadece her seferinde yeni function oluşturmak",
+            "Sadece global function kullanmak",
+            "Sadece arrow function kullanmak"
+          ],
+          "answer": 2,
+          "category": "hooks",
+          "explanation": "Hooks hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "hooks"
+    },
+    {
+      "id": "quiz-react-mod05-test-13",
+      "courseId": "course-react-roadmap",
+      "title": "5. Hooks Testleri - Test 13",
+      "description": "React Hooks API hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod05-13",
+          "question": "Hooks hakkında soru 13",
+          "options": [
+            "useMemo ile expensive computation memoization, sadece dependency değiştiğinde hesapla",
+            "Sadece her render'da hesaplamak",
+            "Sadece hiç hesaplamamak",
+            "Sadece manual memoization"
+          ],
+          "answer": 3,
+          "category": "hooks",
+          "explanation": "Hooks hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "hooks"
+    },
+    {
+      "id": "quiz-react-mod05-test-14",
+      "courseId": "course-react-roadmap",
+      "title": "5. Hooks Testleri - Test 14",
+      "description": "React Hooks API hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod05-14",
+          "question": "Hooks hakkında soru 14",
+          "options": [
+            "useRef ile DOM reference, re-render tetiklemeden değer saklama",
+            "Sadece state kullanmak",
+            "Sadece props kullanmak",
+            "Sadece global variable kullanmak"
+          ],
+          "answer": 3,
+          "category": "hooks",
+          "explanation": "Hooks hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "hooks"
+    },
+    {
+      "id": "quiz-react-mod05-test-15",
+      "courseId": "course-react-roadmap",
+      "title": "5. Hooks Testleri - Test 15",
+      "description": "React Hooks API hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod05-15",
+          "question": "Hooks hakkında soru 15",
+          "options": [
+            "Hooks ile ilgili doğru cevap",
+            "Yanlış seçenek 1",
+            "Yanlış seçenek 2",
+            "Yanlış seçenek 3"
+          ],
+          "answer": 3,
+          "category": "hooks",
+          "explanation": "Hooks hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "hooks"
+    },
+    {
+      "id": "quiz-react-mod06-test-01",
+      "courseId": "course-react-roadmap",
+      "title": "6. Routing Testleri - Test 1",
+      "description": "React Router ve navigation hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod06-01",
+          "question": "React Router nedir?",
+          "options": [
+            "React için client-side routing kütüphanesi",
+            "Sadece bir state management",
+            "Sadece bir HTTP client",
+            "Sadece bir UI library"
+          ],
+          "answer": 0,
+          "category": "routing",
+          "explanation": "Routing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "routing"
+    },
+    {
+      "id": "quiz-react-mod06-test-02",
+      "courseId": "course-react-roadmap",
+      "title": "6. Routing Testleri - Test 2",
+      "description": "React Router ve navigation hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod06-02",
+          "question": "BrowserRouter vs HashRouter farkı nedir?",
+          "options": [
+            "BrowserRouter clean URL, HashRouter hash (#) kullanır",
+            "Hiçbir fark yok",
+            "BrowserRouter sadece server-side",
+            "HashRouter sadece client-side"
+          ],
+          "answer": 0,
+          "category": "routing",
+          "explanation": "Routing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "routing"
+    },
+    {
+      "id": "quiz-react-mod06-test-03",
+      "courseId": "course-react-roadmap",
+      "title": "6. Routing Testleri - Test 3",
+      "description": "React Router ve navigation hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod06-03",
+          "question": "Route parameters nedir?",
+          "options": [
+            "URL path'teki dinamik değerler, :id gibi",
+            "Sadece query string",
+            "Sadece hash",
+            "Sadece anchor"
+          ],
+          "answer": 0,
+          "category": "routing",
+          "explanation": "Routing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "routing"
+    },
+    {
+      "id": "quiz-react-mod06-test-04",
+      "courseId": "course-react-roadmap",
+      "title": "6. Routing Testleri - Test 4",
+      "description": "React Router ve navigation hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod06-04",
+          "question": "Query parameters nedir?",
+          "options": [
+            "URL'de ? ile başlayan parametreler, search params",
+            "Sadece path params",
+            "Sadece hash",
+            "Sadece anchor"
+          ],
+          "answer": 0,
+          "category": "routing",
+          "explanation": "Routing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "routing"
+    },
+    {
+      "id": "quiz-react-mod06-test-05",
+      "courseId": "course-react-roadmap",
+      "title": "6. Routing Testleri - Test 5",
+      "description": "React Router ve navigation hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod06-05",
+          "question": "Nested routes nedir?",
+          "options": [
+            "Route içinde route, parent-child route yapısı",
+            "Sadece tek seviye route",
+            "Sadece flat route",
+            "Sadece nested component"
+          ],
+          "answer": 1,
+          "category": "routing",
+          "explanation": "Routing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "routing"
+    },
+    {
+      "id": "quiz-react-mod06-test-06",
+      "courseId": "course-react-roadmap",
+      "title": "6. Routing Testleri - Test 6",
+      "description": "React Router ve navigation hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod06-06",
+          "question": "Protected routes nedir?",
+          "options": [
+            "Authentication gerektiren route'lar, yetkisiz erişimi önler",
+            "Sadece public route",
+            "Sadece private route",
+            "Sadece admin route"
+          ],
+          "answer": 1,
+          "category": "routing",
+          "explanation": "Routing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "routing"
+    },
+    {
+      "id": "quiz-react-mod06-test-07",
+      "courseId": "course-react-roadmap",
+      "title": "6. Routing Testleri - Test 7",
+      "description": "React Router ve navigation hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod06-07",
+          "question": "Route guards nedir?",
+          "options": [
+            "Route erişimini kontrol eden fonksiyonlar, canActivate gibi",
+            "Sadece bir route component",
+            "Sadece bir route path",
+            "Sadece bir route name"
+          ],
+          "answer": 1,
+          "category": "routing",
+          "explanation": "Routing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "routing"
+    },
+    {
+      "id": "quiz-react-mod06-test-08",
+      "courseId": "course-react-roadmap",
+      "title": "6. Routing Testleri - Test 8",
+      "description": "React Router ve navigation hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod06-08",
+          "question": "Programmatic navigation nedir?",
+          "options": [
+            "Kod içinden navigate() ile programatik yönlendirme",
+            "Sadece link click ile",
+            "Sadece form submit ile",
+            "Sadece button click ile"
+          ],
+          "answer": 1,
+          "category": "routing",
+          "explanation": "Routing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "routing"
+    },
+    {
+      "id": "quiz-react-mod06-test-09",
+      "courseId": "course-react-roadmap",
+      "title": "6. Routing Testleri - Test 9",
+      "description": "React Router ve navigation hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod06-09",
+          "question": "Lazy loading routes nedir?",
+          "options": [
+            "Route component'lerini ihtiyaç duyulduğunda yükleme, code splitting",
+            "Sadece her zaman yüklemek",
+            "Sadece hiç yüklememek",
+            "Sadece manual loading"
+          ],
+          "answer": 2,
+          "category": "routing",
+          "explanation": "Routing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "routing"
+    },
+    {
+      "id": "quiz-react-mod06-test-10",
+      "courseId": "course-react-roadmap",
+      "title": "6. Routing Testleri - Test 10",
+      "description": "React Router ve navigation hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod06-10",
+          "question": "Routing best practices nelerdir?",
+          "options": [
+            "Route'ları organize etmek, lazy loading kullanmak, protected route'lar",
+            "Sadece tüm route'ları bir yerde",
+            "Sadece nested route kullanmamak",
+            "Sadece flat route kullanmak"
+          ],
+          "answer": 2,
+          "category": "routing",
+          "explanation": "Routing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "routing"
+    },
+    {
+      "id": "quiz-react-mod06-test-11",
+      "courseId": "course-react-roadmap",
+      "title": "6. Routing Testleri - Test 11",
+      "description": "React Router ve navigation hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod06-11",
+          "question": "Routing hakkında soru 11",
+          "options": [
+            "Route path'lerini semantic yapmak, RESTful convention",
+            "Sadece random path kullanmak",
+            "Sadece numeric path",
+            "Sadece short path"
+          ],
+          "answer": 2,
+          "category": "routing",
+          "explanation": "Routing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "routing"
+    },
+    {
+      "id": "quiz-react-mod06-test-12",
+      "courseId": "course-react-roadmap",
+      "title": "6. Routing Testleri - Test 12",
+      "description": "React Router ve navigation hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod06-12",
+          "question": "Routing hakkında soru 12",
+          "options": [
+            "Route component'lerini memoization ile optimize etmek",
+            "Sadece her zaman render etmek",
+            "Sadece hiç render etmemek",
+            "Sadece conditional render"
+          ],
+          "answer": 2,
+          "category": "routing",
+          "explanation": "Routing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "routing"
+    },
+    {
+      "id": "quiz-react-mod06-test-13",
+      "courseId": "course-react-roadmap",
+      "title": "6. Routing Testleri - Test 13",
+      "description": "React Router ve navigation hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod06-13",
+          "question": "Routing hakkında soru 13",
+          "options": [
+            "Route error handling, 404 page, error boundary",
+            "Sadece try-catch",
+            "Sadece console.log",
+            "Sadece alert"
+          ],
+          "answer": 3,
+          "category": "routing",
+          "explanation": "Routing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "routing"
+    },
+    {
+      "id": "quiz-react-mod06-test-14",
+      "courseId": "course-react-roadmap",
+      "title": "6. Routing Testleri - Test 14",
+      "description": "React Router ve navigation hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod06-14",
+          "question": "Routing hakkında soru 14",
+          "options": [
+            "Route transition animation, smooth navigation",
+            "Sadece instant navigation",
+            "Sadece no navigation",
+            "Sadece manual animation"
+          ],
+          "answer": 3,
+          "category": "routing",
+          "explanation": "Routing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "routing"
+    },
+    {
+      "id": "quiz-react-mod06-test-15",
+      "courseId": "course-react-roadmap",
+      "title": "6. Routing Testleri - Test 15",
+      "description": "React Router ve navigation hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod06-15",
+          "question": "Routing hakkında soru 15",
+          "options": [
+            "Routing ile ilgili doğru cevap",
+            "Yanlış seçenek 1",
+            "Yanlış seçenek 2",
+            "Yanlış seçenek 3"
+          ],
+          "answer": 3,
+          "category": "routing",
+          "explanation": "Routing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "routing"
+    },
+    {
+      "id": "quiz-react-mod07-test-01",
+      "courseId": "course-react-roadmap",
+      "title": "7. Context API Testleri - Test 1",
+      "description": "Context API ve global state yönetimi hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod07-01",
+          "question": "Context API nedir?",
+          "options": [
+            "Prop drilling önlemek için global state yönetimi sağlayan React API",
+            "Sadece bir state management library",
+            "Sadece bir routing library",
+            "Sadece bir UI library"
+          ],
+          "answer": 0,
+          "category": "context",
+          "explanation": "Context API hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "context-api"
+    },
+    {
+      "id": "quiz-react-mod07-test-02",
+      "courseId": "course-react-roadmap",
+      "title": "7. Context API Testleri - Test 2",
+      "description": "Context API ve global state yönetimi hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod07-02",
+          "question": "Context Provider nedir?",
+          "options": [
+            "Context değerini sağlayan component, value prop ile",
+            "Sadece bir consumer",
+            "Sadece bir provider function",
+            "Sadece bir context creator"
+          ],
+          "answer": 0,
+          "category": "context",
+          "explanation": "Context API hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "context-api"
+    },
+    {
+      "id": "quiz-react-mod07-test-03",
+      "courseId": "course-react-roadmap",
+      "title": "7. Context API Testleri - Test 3",
+      "description": "Context API ve global state yönetimi hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod07-03",
+          "question": "useContext hook nedir?",
+          "options": [
+            "Context değerini okumak için kullanılan hook",
+            "Sadece bir state hook",
+            "Sadece bir effect hook",
+            "Sadece bir ref hook"
+          ],
+          "answer": 0,
+          "category": "context",
+          "explanation": "Context API hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "context-api"
+    },
+    {
+      "id": "quiz-react-mod07-test-04",
+      "courseId": "course-react-roadmap",
+      "title": "7. Context API Testleri - Test 4",
+      "description": "Context API ve global state yönetimi hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod07-04",
+          "question": "Multiple contexts nasıl kullanılır?",
+          "options": [
+            "Birden fazla Provider ile nested yapı, her context ayrı",
+            "Sadece tek bir context",
+            "Sadece global context",
+            "Sadece local context"
+          ],
+          "answer": 0,
+          "category": "context",
+          "explanation": "Context API hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "context-api"
+    },
+    {
+      "id": "quiz-react-mod07-test-05",
+      "courseId": "course-react-roadmap",
+      "title": "7. Context API Testleri - Test 5",
+      "description": "Context API ve global state yönetimi hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod07-05",
+          "question": "Context ve useReducer kombinasyonu nedir?",
+          "options": [
+            "useReducer ile complex state logic, Context ile global erişim",
+            "Sadece useState ile",
+            "Sadece useRef ile",
+            "Sadece useMemo ile"
+          ],
+          "answer": 1,
+          "category": "context",
+          "explanation": "Context API hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "context-api"
+    },
+    {
+      "id": "quiz-react-mod07-test-06",
+      "courseId": "course-react-roadmap",
+      "title": "7. Context API Testleri - Test 6",
+      "description": "Context API ve global state yönetimi hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod07-06",
+          "question": "Context optimization nedir?",
+          "options": [
+            "Context'i bölmek, sadece gerekli değerleri sağlamak, memoization",
+            "Sadece tüm değerleri bir context'te",
+            "Sadece hiç context kullanmamak",
+            "Sadece props kullanmak"
+          ],
+          "answer": 1,
+          "category": "context",
+          "explanation": "Context API hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "context-api"
+    },
+    {
+      "id": "quiz-react-mod07-test-07",
+      "courseId": "course-react-roadmap",
+      "title": "7. Context API Testleri - Test 7",
+      "description": "Context API ve global state yönetimi hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod07-07",
+          "question": "Context vs Props farkı nedir?",
+          "options": [
+            "Context global erişim, props local geçiş; Context deep tree için",
+            "Hiçbir fark yok",
+            "Context sadece class component",
+            "Props sadece function component"
+          ],
+          "answer": 1,
+          "category": "context",
+          "explanation": "Context API hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "context-api"
+    },
+    {
+      "id": "quiz-react-mod07-test-08",
+      "courseId": "course-react-roadmap",
+      "title": "7. Context API Testleri - Test 8",
+      "description": "Context API ve global state yönetimi hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod07-08",
+          "question": "Context best practices nelerdir?",
+          "options": [
+            "Context'i bölmek, sadece değişen değerleri sağlamak, custom hook kullanmak",
+            "Sadece tek bir context kullanmak",
+            "Sadece tüm değerleri bir context'te",
+            "Sadece props kullanmak"
+          ],
+          "answer": 1,
+          "category": "context",
+          "explanation": "Context API hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "context-api"
+    },
+    {
+      "id": "quiz-react-mod07-test-09",
+      "courseId": "course-react-roadmap",
+      "title": "7. Context API Testleri - Test 9",
+      "description": "Context API ve global state yönetimi hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod07-09",
+          "question": "Context antipatterns nelerdir?",
+          "options": [
+            "Tüm state'i bir context'te tutmak, sık değişen değerler",
+            "Sadece küçük context kullanmak",
+            "Sadece static context",
+            "Sadece read-only context"
+          ],
+          "answer": 2,
+          "category": "context",
+          "explanation": "Context API hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "context-api"
+    },
+    {
+      "id": "quiz-react-mod07-test-10",
+      "courseId": "course-react-roadmap",
+      "title": "7. Context API Testleri - Test 10",
+      "description": "Context API ve global state yönetimi hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod07-10",
+          "question": "Context vs Redux farkı nedir?",
+          "options": [
+            "Context basit use case, Redux complex state management; Context built-in",
+            "Hiçbir fark yok",
+            "Context her zaman daha iyi",
+            "Redux her zaman daha iyi"
+          ],
+          "answer": 2,
+          "category": "context",
+          "explanation": "Context API hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "context-api"
+    },
+    {
+      "id": "quiz-react-mod07-test-11",
+      "courseId": "course-react-roadmap",
+      "title": "7. Context API Testleri - Test 11",
+      "description": "Context API ve global state yönetimi hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod07-11",
+          "question": "Context API hakkında soru 11",
+          "options": [
+            "Context default value kullanmak, undefined check yapmak",
+            "Sadece null kullanmak",
+            "Sadece empty object",
+            "Sadece no default"
+          ],
+          "answer": 2,
+          "category": "context",
+          "explanation": "Context API hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "context-api"
+    },
+    {
+      "id": "quiz-react-mod07-test-12",
+      "courseId": "course-react-roadmap",
+      "title": "7. Context API Testleri - Test 12",
+      "description": "Context API ve global state yönetimi hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod07-12",
+          "question": "Context API hakkında soru 12",
+          "options": [
+            "Context'i custom hook ile wrap etmek, API abstraction",
+            "Sadece direkt useContext kullanmak",
+            "Sadece props kullanmak",
+            "Sadece global variable"
+          ],
+          "answer": 2,
+          "category": "context",
+          "explanation": "Context API hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "context-api"
+    },
+    {
+      "id": "quiz-react-mod07-test-13",
+      "courseId": "course-react-roadmap",
+      "title": "7. Context API Testleri - Test 13",
+      "description": "Context API ve global state yönetimi hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod07-13",
+          "question": "Context API hakkında soru 13",
+          "options": [
+            "Context'i production'da test etmek, performance monitoring",
+            "Sadece development'ta test",
+            "Sadece hiç test etmemek",
+            "Sadece manual test"
+          ],
+          "answer": 3,
+          "category": "context",
+          "explanation": "Context API hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "context-api"
+    },
+    {
+      "id": "quiz-react-mod07-test-14",
+      "courseId": "course-react-roadmap",
+      "title": "7. Context API Testleri - Test 14",
+      "description": "Context API ve global state yönetimi hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod07-14",
+          "question": "Context API hakkında soru 14",
+          "options": [
+            "Context'i TypeScript ile type etmek, type safety",
+            "Sadece JavaScript kullanmak",
+            "Sadece any type",
+            "Sadece no type"
+          ],
+          "answer": 3,
+          "category": "context",
+          "explanation": "Context API hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "context-api"
+    },
+    {
+      "id": "quiz-react-mod07-test-15",
+      "courseId": "course-react-roadmap",
+      "title": "7. Context API Testleri - Test 15",
+      "description": "Context API ve global state yönetimi hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod07-15",
+          "question": "Context API hakkında soru 15",
+          "options": [
+            "Context API ile ilgili doğru cevap",
+            "Yanlış seçenek 1",
+            "Yanlış seçenek 2",
+            "Yanlış seçenek 3"
+          ],
+          "answer": 3,
+          "category": "context",
+          "explanation": "Context API hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "context-api"
+    },
+    {
+      "id": "quiz-react-mod08-test-01",
+      "courseId": "course-react-roadmap",
+      "title": "8. Performance Optimizasyonu Testleri - Test 1",
+      "description": "React performans optimizasyonu teknikleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod08-01",
+          "question": "React.memo nedir?",
+          "options": [
+            "Component'i memoize eden HOC, props değişmediğinde re-render önler",
+            "Sadece bir component wrapper",
+            "Sadece bir state hook",
+            "Sadece bir effect hook"
+          ],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performance Optimizasyonu hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-react-mod08-test-02",
+      "courseId": "course-react-roadmap",
+      "title": "8. Performance Optimizasyonu Testleri - Test 2",
+      "description": "React performans optimizasyonu teknikleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod08-02",
+          "question": "Code splitting nedir?",
+          "options": [
+            "Kodu küçük parçalara bölmek, ihtiyaç duyulduğunda yüklemek",
+            "Sadece tüm kodu bir dosyada tutmak",
+            "Sadece hiç kod yazmamak",
+            "Sadece inline kod"
+          ],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performance Optimizasyonu hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-react-mod08-test-03",
+      "courseId": "course-react-roadmap",
+      "title": "8. Performance Optimizasyonu Testleri - Test 3",
+      "description": "React performans optimizasyonu teknikleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod08-03",
+          "question": "Lazy loading nedir?",
+          "options": [
+            "Component'leri ihtiyaç duyulduğunda yükleme, React.lazy ile",
+            "Sadece her zaman yüklemek",
+            "Sadece hiç yüklememek",
+            "Sadece manual loading"
+          ],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performance Optimizasyonu hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-react-mod08-test-04",
+      "courseId": "course-react-roadmap",
+      "title": "8. Performance Optimizasyonu Testleri - Test 4",
+      "description": "React performans optimizasyonu teknikleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod08-04",
+          "question": "Virtual scrolling nedir?",
+          "options": [
+            "Sadece görünür item'ları render etme, büyük listeler için",
+            "Sadece tüm item'ları render etmek",
+            "Sadece hiç item render etmemek",
+            "Sadece first item"
+          ],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performance Optimizasyonu hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-react-mod08-test-05",
+      "courseId": "course-react-roadmap",
+      "title": "8. Performance Optimizasyonu Testleri - Test 5",
+      "description": "React performans optimizasyonu teknikleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod08-05",
+          "question": "React Profiler nedir?",
+          "options": [
+            "React component performansını ölçmek için tool",
+            "Sadece bir debug tool",
+            "Sadece bir build tool",
+            "Sadece bir test tool"
+          ],
+          "answer": 1,
+          "category": "performance",
+          "explanation": "Performance Optimizasyonu hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-react-mod08-test-06",
+      "courseId": "course-react-roadmap",
+      "title": "8. Performance Optimizasyonu Testleri - Test 6",
+      "description": "React performans optimizasyonu teknikleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod08-06",
+          "question": "Bundle size optimization nedir?",
+          "options": [
+            "Bundle boyutunu küçültmek, tree shaking, minification",
+            "Sadece daha fazla kod eklemek",
+            "Sadece hiç kod yazmamak",
+            "Sadece inline kod"
+          ],
+          "answer": 1,
+          "category": "performance",
+          "explanation": "Performance Optimizasyonu hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-react-mod08-test-07",
+      "courseId": "course-react-roadmap",
+      "title": "8. Performance Optimizasyonu Testleri - Test 7",
+      "description": "React performans optimizasyonu teknikleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod08-07",
+          "question": "Debouncing ve throttling nedir?",
+          "options": [
+            "Event handler'ları optimize etme teknikleri, rate limiting",
+            "Sadece her event'te çalıştırmak",
+            "Sadece hiç event handler kullanmamak",
+            "Sadece manual handling"
+          ],
+          "answer": 1,
+          "category": "performance",
+          "explanation": "Performance Optimizasyonu hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-react-mod08-test-08",
+      "courseId": "course-react-roadmap",
+      "title": "8. Performance Optimizasyonu Testleri - Test 8",
+      "description": "React performans optimizasyonu teknikleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod08-08",
+          "question": "Concurrent features nedir?",
+          "options": [
+            "React 18 concurrent rendering, interruptible rendering",
+            "Sadece synchronous rendering",
+            "Sadece blocking rendering",
+            "Sadece manual rendering"
+          ],
+          "answer": 1,
+          "category": "performance",
+          "explanation": "Performance Optimizasyonu hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-react-mod08-test-09",
+      "courseId": "course-react-roadmap",
+      "title": "8. Performance Optimizasyonu Testleri - Test 9",
+      "description": "React performans optimizasyonu teknikleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod08-09",
+          "question": "Suspense nedir?",
+          "options": [
+            "Async işlemler için loading state yönetimi, fallback UI",
+            "Sadece bir loading component",
+            "Sadece bir error component",
+            "Sadece bir success component"
+          ],
+          "answer": 2,
+          "category": "performance",
+          "explanation": "Performance Optimizasyonu hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-react-mod08-test-10",
+      "courseId": "course-react-roadmap",
+      "title": "8. Performance Optimizasyonu Testleri - Test 10",
+      "description": "React performans optimizasyonu teknikleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod08-10",
+          "question": "Performance best practices nelerdir?",
+          "options": [
+            "Memoization kullanmak, code splitting, lazy loading, profiling",
+            "Sadece her zaman render etmek",
+            "Sadece hiç render etmemek",
+            "Sadece manual optimization"
+          ],
+          "answer": 2,
+          "category": "performance",
+          "explanation": "Performance Optimizasyonu hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-react-mod08-test-11",
+      "courseId": "course-react-roadmap",
+      "title": "8. Performance Optimizasyonu Testleri - Test 11",
+      "description": "React performans optimizasyonu teknikleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod08-11",
+          "question": "Performance hakkında soru 11",
+          "options": [
+            "useMemo ve useCallback ile expensive computation memoization",
+            "Sadece her render'da hesaplamak",
+            "Sadece hiç hesaplamamak",
+            "Sadece manual memoization"
+          ],
+          "answer": 2,
+          "category": "performance",
+          "explanation": "Performance Optimizasyonu hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-react-mod08-test-12",
+      "courseId": "course-react-roadmap",
+      "title": "8. Performance Optimizasyonu Testleri - Test 12",
+      "description": "React performans optimizasyonu teknikleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod08-12",
+          "question": "Performance hakkında soru 12",
+          "options": [
+            "Image optimization, lazy loading images, WebP format",
+            "Sadece büyük image kullanmak",
+            "Sadece hiç image kullanmamak",
+            "Sadece PNG format"
+          ],
+          "answer": 2,
+          "category": "performance",
+          "explanation": "Performance Optimizasyonu hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-react-mod08-test-13",
+      "courseId": "course-react-roadmap",
+      "title": "8. Performance Optimizasyonu Testleri - Test 13",
+      "description": "React performans optimizasyonu teknikleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod08-13",
+          "question": "Performance hakkında soru 13",
+          "options": [
+            "Web Workers ile heavy computation, main thread'i bloklamamak",
+            "Sadece main thread'te çalıştırmak",
+            "Sadece hiç computation yapmamak",
+            "Sadece manual computation"
+          ],
+          "answer": 3,
+          "category": "performance",
+          "explanation": "Performance Optimizasyonu hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-react-mod08-test-14",
+      "courseId": "course-react-roadmap",
+      "title": "8. Performance Optimizasyonu Testleri - Test 14",
+      "description": "React performans optimizasyonu teknikleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod08-14",
+          "question": "Performance hakkında soru 14",
+          "options": [
+            "Performance monitoring, Lighthouse, Web Vitals",
+            "Sadece manual testing",
+            "Sadece hiç test etmemek",
+            "Sadece console.log"
+          ],
+          "answer": 3,
+          "category": "performance",
+          "explanation": "Performance Optimizasyonu hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-react-mod08-test-15",
+      "courseId": "course-react-roadmap",
+      "title": "8. Performance Optimizasyonu Testleri - Test 15",
+      "description": "React performans optimizasyonu teknikleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod08-15",
+          "question": "Performance hakkında soru 15",
+          "options": [
+            "Performance ile ilgili doğru cevap",
+            "Yanlış seçenek 1",
+            "Yanlış seçenek 2",
+            "Yanlış seçenek 3"
+          ],
+          "answer": 3,
+          "category": "performance",
+          "explanation": "Performance Optimizasyonu hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-react-mod09-test-01",
+      "courseId": "course-react-roadmap",
+      "title": "9. Testing Testleri - Test 1",
+      "description": "React testing teknikleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod09-01",
+          "question": "Jest nedir?",
+          "options": [
+            "JavaScript test framework, unit ve integration test için",
+            "Sadece bir build tool",
+            "Sadece bir package manager",
+            "Sadece bir linter"
+          ],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Testing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-react-mod09-test-02",
+      "courseId": "course-react-roadmap",
+      "title": "9. Testing Testleri - Test 2",
+      "description": "React testing teknikleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod09-02",
+          "question": "React Testing Library nedir?",
+          "options": [
+            "React component'lerini user-centric şekilde test etmek için library",
+            "Sadece bir test runner",
+            "Sadece bir assertion library",
+            "Sadece bir mock library"
+          ],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Testing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-react-mod09-test-03",
+      "courseId": "course-react-roadmap",
+      "title": "9. Testing Testleri - Test 3",
+      "description": "React testing teknikleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod09-03",
+          "question": "Component testing nasıl yapılır?",
+          "options": [
+            "render, screen, userEvent ile component render ve interaction test",
+            "Sadece console.log",
+            "Sadece manual testing",
+            "Sadece visual inspection"
+          ],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Testing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-react-mod09-test-04",
+      "courseId": "course-react-roadmap",
+      "title": "9. Testing Testleri - Test 4",
+      "description": "React testing teknikleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod09-04",
+          "question": "Hooks testing nasıl yapılır?",
+          "options": [
+            "renderHook ile custom hook test, @testing-library/react-hooks",
+            "Sadece component içinde test",
+            "Sadece manual test",
+            "Sadece no test"
+          ],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Testing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-react-mod09-test-05",
+      "courseId": "course-react-roadmap",
+      "title": "9. Testing Testleri - Test 5",
+      "description": "React testing teknikleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod09-05",
+          "question": "Async code testing nasıl yapılır?",
+          "options": [
+            "waitFor, findBy ile async operation test, act() kullanımı",
+            "Sadece synchronous test",
+            "Sadece hiç async test",
+            "Sadece manual wait"
+          ],
+          "answer": 1,
+          "category": "testing",
+          "explanation": "Testing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-react-mod09-test-06",
+      "courseId": "course-react-roadmap",
+      "title": "9. Testing Testleri - Test 6",
+      "description": "React testing teknikleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod09-06",
+          "question": "Mocking nedir?",
+          "options": [
+            "Dependency'leri fake implementation ile değiştirme, jest.fn()",
+            "Sadece real dependency kullanmak",
+            "Sadece hiç dependency kullanmamak",
+            "Sadece manual mock"
+          ],
+          "answer": 1,
+          "category": "testing",
+          "explanation": "Testing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-react-mod09-test-07",
+      "courseId": "course-react-roadmap",
+      "title": "9. Testing Testleri - Test 7",
+      "description": "React testing teknikleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod09-07",
+          "question": "Snapshot testing nedir?",
+          "options": [
+            "Component output'unu snapshot olarak kaydetme, değişiklikleri tespit",
+            "Sadece manual comparison",
+            "Sadece hiç snapshot",
+            "Sadece visual test"
+          ],
+          "answer": 1,
+          "category": "testing",
+          "explanation": "Testing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-react-mod09-test-08",
+      "courseId": "course-react-roadmap",
+      "title": "9. Testing Testleri - Test 8",
+      "description": "React testing teknikleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod09-08",
+          "question": "E2E testing nedir?",
+          "options": [
+            "End-to-end test, tüm uygulama flow'unu test, Cypress gibi",
+            "Sadece unit test",
+            "Sadece integration test",
+            "Sadece manual test"
+          ],
+          "answer": 1,
+          "category": "testing",
+          "explanation": "Testing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-react-mod09-test-09",
+      "courseId": "course-react-roadmap",
+      "title": "9. Testing Testleri - Test 9",
+      "description": "React testing teknikleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod09-09",
+          "question": "Test coverage nedir?",
+          "options": [
+            "Test edilen kod yüzdesi, coverage raporu, Istanbul",
+            "Sadece test sayısı",
+            "Sadece test süresi",
+            "Sadece test başarı oranı"
+          ],
+          "answer": 2,
+          "category": "testing",
+          "explanation": "Testing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-react-mod09-test-10",
+      "courseId": "course-react-roadmap",
+      "title": "9. Testing Testleri - Test 10",
+      "description": "React testing teknikleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod09-10",
+          "question": "Testing best practices nelerdir?",
+          "options": [
+            "User-centric test, accessibility test, maintainable test",
+            "Sadece implementation detail test",
+            "Sadece internal test",
+            "Sadece brittle test"
+          ],
+          "answer": 2,
+          "category": "testing",
+          "explanation": "Testing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-react-mod09-test-11",
+      "courseId": "course-react-roadmap",
+      "title": "9. Testing Testleri - Test 11",
+      "description": "React testing teknikleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod09-11",
+          "question": "Testing hakkında soru 11",
+          "options": [
+            "Test'leri organize etmek, describe/it blocks, test structure",
+            "Sadece tek bir test file",
+            "Sadece no organization",
+            "Sadece random test"
+          ],
+          "answer": 2,
+          "category": "testing",
+          "explanation": "Testing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-react-mod09-test-12",
+      "courseId": "course-react-roadmap",
+      "title": "9. Testing Testleri - Test 12",
+      "description": "React testing teknikleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod09-12",
+          "question": "Testing hakkında soru 12",
+          "options": [
+            "Test data setup, beforeEach/afterEach, test fixtures",
+            "Sadece hard-coded data",
+            "Sadece no setup",
+            "Sadece manual setup"
+          ],
+          "answer": 2,
+          "category": "testing",
+          "explanation": "Testing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-react-mod09-test-13",
+      "courseId": "course-react-roadmap",
+      "title": "9. Testing Testleri - Test 13",
+      "description": "React testing teknikleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod09-13",
+          "question": "Testing hakkında soru 13",
+          "options": [
+            "Test isolation, her test bağımsız, cleanup",
+            "Sadece shared state",
+            "Sadece global state",
+            "Sadece no cleanup"
+          ],
+          "answer": 3,
+          "category": "testing",
+          "explanation": "Testing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-react-mod09-test-14",
+      "courseId": "course-react-roadmap",
+      "title": "9. Testing Testleri - Test 14",
+      "description": "React testing teknikleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod09-14",
+          "question": "Testing hakkında soru 14",
+          "options": [
+            "CI/CD integration, automated testing, test pipeline",
+            "Sadece manual testing",
+            "Sadece local testing",
+            "Sadece no automation"
+          ],
+          "answer": 3,
+          "category": "testing",
+          "explanation": "Testing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-react-mod09-test-15",
+      "courseId": "course-react-roadmap",
+      "title": "9. Testing Testleri - Test 15",
+      "description": "React testing teknikleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod09-15",
+          "question": "Testing hakkında soru 15",
+          "options": [
+            "Testing ile ilgili doğru cevap",
+            "Yanlış seçenek 1",
+            "Yanlış seçenek 2",
+            "Yanlış seçenek 3"
+          ],
+          "answer": 3,
+          "category": "testing",
+          "explanation": "Testing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-react-mod10-test-01",
+      "courseId": "course-react-roadmap",
+      "title": "10. Styling ve CSS Testleri - Test 1",
+      "description": "React styling yaklaşımları hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod10-01",
+          "question": "CSS Modules nedir?",
+          "options": [
+            "CSS class'larını local scope'ta tutan modül sistemi",
+            "Sadece global CSS",
+            "Sadece inline styles",
+            "Sadece JavaScript styles"
+          ],
+          "answer": 0,
+          "category": "styling",
+          "explanation": "Styling ve CSS hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "styling"
+    },
+    {
+      "id": "quiz-react-mod10-test-02",
+      "courseId": "course-react-roadmap",
+      "title": "10. Styling ve CSS Testleri - Test 2",
+      "description": "React styling yaklaşımları hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod10-02",
+          "question": "Styled Components nedir?",
+          "options": [
+            "CSS-in-JS library, tagged template literals ile styled component",
+            "Sadece bir CSS framework",
+            "Sadece bir build tool",
+            "Sadece bir linter"
+          ],
+          "answer": 0,
+          "category": "styling",
+          "explanation": "Styling ve CSS hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "styling"
+    },
+    {
+      "id": "quiz-react-mod10-test-03",
+      "courseId": "course-react-roadmap",
+      "title": "10. Styling ve CSS Testleri - Test 3",
+      "description": "React styling yaklaşımları hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod10-03",
+          "question": "CSS-in-JS nedir?",
+          "options": [
+            "CSS'i JavaScript içinde yazma yaklaşımı, runtime generation",
+            "Sadece external CSS",
+            "Sadece inline styles",
+            "Sadece CSS files"
+          ],
+          "answer": 0,
+          "category": "styling",
+          "explanation": "Styling ve CSS hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "styling"
+    },
+    {
+      "id": "quiz-react-mod10-test-04",
+      "courseId": "course-react-roadmap",
+      "title": "10. Styling ve CSS Testleri - Test 4",
+      "description": "React styling yaklaşımları hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod10-04",
+          "question": "Tailwind CSS nedir?",
+          "options": [
+            "Utility-first CSS framework, pre-built class'lar",
+            "Sadece bir component library",
+            "Sadece bir state management",
+            "Sadece bir routing library"
+          ],
+          "answer": 0,
+          "category": "styling",
+          "explanation": "Styling ve CSS hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "styling"
+    },
+    {
+      "id": "quiz-react-mod10-test-05",
+      "courseId": "course-react-roadmap",
+      "title": "10. Styling ve CSS Testleri - Test 5",
+      "description": "React styling yaklaşımları hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod10-05",
+          "question": "Sass/SCSS nedir?",
+          "options": [
+            "CSS preprocessor, variables, nesting, mixins",
+            "Sadece bir CSS framework",
+            "Sadece bir build tool",
+            "Sadece bir linter"
+          ],
+          "answer": 1,
+          "category": "styling",
+          "explanation": "Styling ve CSS hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "styling"
+    },
+    {
+      "id": "quiz-react-mod10-test-06",
+      "courseId": "course-react-roadmap",
+      "title": "10. Styling ve CSS Testleri - Test 6",
+      "description": "React styling yaklaşımları hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod10-06",
+          "question": "CSS Variables nedir?",
+          "options": [
+            "CSS custom properties, --variable-name syntax, dynamic values",
+            "Sadece bir CSS framework",
+            "Sadece bir preprocessor",
+            "Sadece bir linter"
+          ],
+          "answer": 1,
+          "category": "styling",
+          "explanation": "Styling ve CSS hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "styling"
+    },
+    {
+      "id": "quiz-react-mod10-test-07",
+      "courseId": "course-react-roadmap",
+      "title": "10. Styling ve CSS Testleri - Test 7",
+      "description": "React styling yaklaşımları hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod10-07",
+          "question": "Theme management nedir?",
+          "options": [
+            "Tema değerlerini yönetme, dark/light mode, context ile",
+            "Sadece hard-coded colors",
+            "Sadece inline styles",
+            "Sadece CSS files"
+          ],
+          "answer": 1,
+          "category": "styling",
+          "explanation": "Styling ve CSS hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "styling"
+    },
+    {
+      "id": "quiz-react-mod10-test-08",
+      "courseId": "course-react-roadmap",
+      "title": "10. Styling ve CSS Testleri - Test 8",
+      "description": "React styling yaklaşımları hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod10-08",
+          "question": "Responsive design nedir?",
+          "options": [
+            "Farklı ekran boyutlarına uyum, media queries, flexible layout",
+            "Sadece fixed width",
+            "Sadece desktop only",
+            "Sadece mobile only"
+          ],
+          "answer": 1,
+          "category": "styling",
+          "explanation": "Styling ve CSS hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "styling"
+    },
+    {
+      "id": "quiz-react-mod10-test-09",
+      "courseId": "course-react-roadmap",
+      "title": "10. Styling ve CSS Testleri - Test 9",
+      "description": "React styling yaklaşımları hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod10-09",
+          "question": "CSS best practices nelerdir?",
+          "options": [
+            "BEM naming, component-based CSS, maintainable styles",
+            "Sadece random class names",
+            "Sadece inline styles",
+            "Sadece global CSS"
+          ],
+          "answer": 2,
+          "category": "styling",
+          "explanation": "Styling ve CSS hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "styling"
+    },
+    {
+      "id": "quiz-react-mod10-test-10",
+      "courseId": "course-react-roadmap",
+      "title": "10. Styling ve CSS Testleri - Test 10",
+      "description": "React styling yaklaşımları hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod10-10",
+          "question": "Styling performance nedir?",
+          "options": [
+            "CSS-in-JS runtime cost, critical CSS, code splitting",
+            "Sadece her zaman tüm CSS yüklemek",
+            "Sadece hiç CSS kullanmamak",
+            "Sadece inline styles"
+          ],
+          "answer": 2,
+          "category": "styling",
+          "explanation": "Styling ve CSS hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "styling"
+    },
+    {
+      "id": "quiz-react-mod10-test-11",
+      "courseId": "course-react-roadmap",
+      "title": "10. Styling ve CSS Testleri - Test 11",
+      "description": "React styling yaklaşımları hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod10-11",
+          "question": "Styling hakkında soru 11",
+          "options": [
+            "CSS purging, unused styles kaldırma, production optimization",
+            "Sadece tüm CSS'i tutmak",
+            "Sadece hiç CSS yazmamak",
+            "Sadece manual cleanup"
+          ],
+          "answer": 2,
+          "category": "styling",
+          "explanation": "Styling ve CSS hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "styling"
+    },
+    {
+      "id": "quiz-react-mod10-test-12",
+      "courseId": "course-react-roadmap",
+      "title": "10. Styling ve CSS Testleri - Test 12",
+      "description": "React styling yaklaşımları hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod10-12",
+          "question": "Styling hakkında soru 12",
+          "options": [
+            "CSS specificity yönetimi, !important kullanmamak",
+            "Sadece !important her yerde",
+            "Sadece inline styles",
+            "Sadece no specificity"
+          ],
+          "answer": 2,
+          "category": "styling",
+          "explanation": "Styling ve CSS hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "styling"
+    },
+    {
+      "id": "quiz-react-mod10-test-13",
+      "courseId": "course-react-roadmap",
+      "title": "10. Styling ve CSS Testleri - Test 13",
+      "description": "React styling yaklaşımları hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod10-13",
+          "question": "Styling hakkında soru 13",
+          "options": [
+            "CSS organization, file structure, maintainable code",
+            "Sadece tek bir CSS file",
+            "Sadece no organization",
+            "Sadece random files"
+          ],
+          "answer": 3,
+          "category": "styling",
+          "explanation": "Styling ve CSS hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "styling"
+    },
+    {
+      "id": "quiz-react-mod10-test-14",
+      "courseId": "course-react-roadmap",
+      "title": "10. Styling ve CSS Testleri - Test 14",
+      "description": "React styling yaklaşımları hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod10-14",
+          "question": "Styling hakkında soru 14",
+          "options": [
+            "CSS performance, selector optimization, efficient queries",
+            "Sadece complex selectors",
+            "Sadece no optimization",
+            "Sadece manual optimization"
+          ],
+          "answer": 3,
+          "category": "styling",
+          "explanation": "Styling ve CSS hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "styling"
+    },
+    {
+      "id": "quiz-react-mod10-test-15",
+      "courseId": "course-react-roadmap",
+      "title": "10. Styling ve CSS Testleri - Test 15",
+      "description": "React styling yaklaşımları hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod10-15",
+          "question": "Styling hakkında soru 15",
+          "options": [
+            "Styling ile ilgili doğru cevap",
+            "Yanlış seçenek 1",
+            "Yanlış seçenek 2",
+            "Yanlış seçenek 3"
+          ],
+          "answer": 3,
+          "category": "styling",
+          "explanation": "Styling ve CSS hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "styling"
+    },
+    {
+      "id": "quiz-react-mod11-test-01",
+      "courseId": "course-react-roadmap",
+      "title": "11. Form Handling Testleri - Test 1",
+      "description": "Form yönetimi ve validation hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod11-01",
+          "question": "Controlled components nedir?",
+          "options": [
+            "Form input'u React state ile kontrol edilen component",
+            "Sadece bir input element",
+            "Sadece bir form element",
+            "Sadece bir button element"
+          ],
+          "answer": 0,
+          "category": "forms",
+          "explanation": "Form Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "form-handling"
+    },
+    {
+      "id": "quiz-react-mod11-test-02",
+      "courseId": "course-react-roadmap",
+      "title": "11. Form Handling Testleri - Test 2",
+      "description": "Form yönetimi ve validation hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod11-02",
+          "question": "Uncontrolled components nedir?",
+          "options": [
+            "Form input'u DOM tarafından kontrol edilen component, useRef ile",
+            "Sadece bir controlled component",
+            "Sadece bir state component",
+            "Sadece bir prop component"
+          ],
+          "answer": 0,
+          "category": "forms",
+          "explanation": "Form Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "form-handling"
+    },
+    {
+      "id": "quiz-react-mod11-test-03",
+      "courseId": "course-react-roadmap",
+      "title": "11. Form Handling Testleri - Test 3",
+      "description": "Form yönetimi ve validation hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod11-03",
+          "question": "Form validation nedir?",
+          "options": [
+            "Form verilerinin doğruluğunu kontrol etme, client-side validation",
+            "Sadece server-side validation",
+            "Sadece no validation",
+            "Sadece manual check"
+          ],
+          "answer": 0,
+          "category": "forms",
+          "explanation": "Form Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "form-handling"
+    },
+    {
+      "id": "quiz-react-mod11-test-04",
+      "courseId": "course-react-roadmap",
+      "title": "11. Form Handling Testleri - Test 4",
+      "description": "Form yönetimi ve validation hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod11-04",
+          "question": "React Hook Form nedir?",
+          "options": [
+            "Performanslı form library, uncontrolled components, minimal re-render",
+            "Sadece bir validation library",
+            "Sadece bir state management",
+            "Sadece bir UI library"
+          ],
+          "answer": 0,
+          "category": "forms",
+          "explanation": "Form Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "form-handling"
+    },
+    {
+      "id": "quiz-react-mod11-test-05",
+      "courseId": "course-react-roadmap",
+      "title": "11. Form Handling Testleri - Test 5",
+      "description": "Form yönetimi ve validation hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod11-05",
+          "question": "Formik nedir?",
+          "options": [
+            "Form state management library, controlled components, validation",
+            "Sadece bir validation library",
+            "Sadece bir state management",
+            "Sadece bir UI library"
+          ],
+          "answer": 1,
+          "category": "forms",
+          "explanation": "Form Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "form-handling"
+    },
+    {
+      "id": "quiz-react-mod11-test-06",
+      "courseId": "course-react-roadmap",
+      "title": "11. Form Handling Testleri - Test 6",
+      "description": "Form yönetimi ve validation hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod11-06",
+          "question": "Yup validation nedir?",
+          "options": [
+            "Schema-based validation library, Yup schema ile",
+            "Sadece bir form library",
+            "Sadece bir state management",
+            "Sadece bir UI library"
+          ],
+          "answer": 1,
+          "category": "forms",
+          "explanation": "Form Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "form-handling"
+    },
+    {
+      "id": "quiz-react-mod11-test-07",
+      "courseId": "course-react-roadmap",
+      "title": "11. Form Handling Testleri - Test 7",
+      "description": "Form yönetimi ve validation hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod11-07",
+          "question": "Form state management nedir?",
+          "options": [
+            "Form state'ini yönetme, useState veya form library ile",
+            "Sadece bir prop management",
+            "Sadece bir method management",
+            "Sadece bir variable management"
+          ],
+          "answer": 1,
+          "category": "forms",
+          "explanation": "Form Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "form-handling"
+    },
+    {
+      "id": "quiz-react-mod11-test-08",
+      "courseId": "course-react-roadmap",
+      "title": "11. Form Handling Testleri - Test 8",
+      "description": "Form yönetimi ve validation hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod11-08",
+          "question": "File upload handling nedir?",
+          "options": [
+            "Dosya yükleme işlemi, File API, FormData kullanımı",
+            "Sadece text input",
+            "Sadece number input",
+            "Sadece email input"
+          ],
+          "answer": 1,
+          "category": "forms",
+          "explanation": "Form Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "form-handling"
+    },
+    {
+      "id": "quiz-react-mod11-test-09",
+      "courseId": "course-react-roadmap",
+      "title": "11. Form Handling Testleri - Test 9",
+      "description": "Form yönetimi ve validation hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod11-09",
+          "question": "Form error handling nedir?",
+          "options": [
+            "Form hatalarını yönetme, error state, user feedback",
+            "Sadece success state",
+            "Sadece loading state",
+            "Sadece no state"
+          ],
+          "answer": 2,
+          "category": "forms",
+          "explanation": "Form Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "form-handling"
+    },
+    {
+      "id": "quiz-react-mod11-test-10",
+      "courseId": "course-react-roadmap",
+      "title": "11. Form Handling Testleri - Test 10",
+      "description": "Form yönetimi ve validation hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod11-10",
+          "question": "Form best practices nelerdir?",
+          "options": [
+            "Accessible forms, proper labels, error messages, validation",
+            "Sadece basic forms",
+            "Sadece no validation",
+            "Sadece manual handling"
+          ],
+          "answer": 2,
+          "category": "forms",
+          "explanation": "Form Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "form-handling"
+    },
+    {
+      "id": "quiz-react-mod11-test-11",
+      "courseId": "course-react-roadmap",
+      "title": "11. Form Handling Testleri - Test 11",
+      "description": "Form yönetimi ve validation hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod11-11",
+          "question": "Form Handling hakkında soru 11",
+          "options": [
+            "Form submission handling, preventDefault, async submit",
+            "Sadece default submit",
+            "Sadece no submit",
+            "Sadece manual submit"
+          ],
+          "answer": 2,
+          "category": "forms",
+          "explanation": "Form Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "form-handling"
+    },
+    {
+      "id": "quiz-react-mod11-test-12",
+      "courseId": "course-react-roadmap",
+      "title": "11. Form Handling Testleri - Test 12",
+      "description": "Form yönetimi ve validation hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod11-12",
+          "question": "Form Handling hakkında soru 12",
+          "options": [
+            "Form reset, clear form, initial values",
+            "Sadece keep values",
+            "Sadece no reset",
+            "Sadece manual clear"
+          ],
+          "answer": 2,
+          "category": "forms",
+          "explanation": "Form Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "form-handling"
+    },
+    {
+      "id": "quiz-react-mod11-test-13",
+      "courseId": "course-react-roadmap",
+      "title": "11. Form Handling Testleri - Test 13",
+      "description": "Form yönetimi ve validation hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod11-13",
+          "question": "Form Handling hakkında soru 13",
+          "options": [
+            "Form field dependencies, conditional validation, dynamic forms",
+            "Sadece static forms",
+            "Sadece no dependencies",
+            "Sadece manual handling"
+          ],
+          "answer": 3,
+          "category": "forms",
+          "explanation": "Form Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "form-handling"
+    },
+    {
+      "id": "quiz-react-mod11-test-14",
+      "courseId": "course-react-roadmap",
+      "title": "11. Form Handling Testleri - Test 14",
+      "description": "Form yönetimi ve validation hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod11-14",
+          "question": "Form Handling hakkında soru 14",
+          "options": [
+            "Form testing, user interaction test, validation test",
+            "Sadece manual testing",
+            "Sadece no testing",
+            "Sadece visual testing"
+          ],
+          "answer": 3,
+          "category": "forms",
+          "explanation": "Form Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "form-handling"
+    },
+    {
+      "id": "quiz-react-mod11-test-15",
+      "courseId": "course-react-roadmap",
+      "title": "11. Form Handling Testleri - Test 15",
+      "description": "Form yönetimi ve validation hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod11-15",
+          "question": "Form Handling hakkında soru 15",
+          "options": [
+            "Form Handling ile ilgili doğru cevap",
+            "Yanlış seçenek 1",
+            "Yanlış seçenek 2",
+            "Yanlış seçenek 3"
+          ],
+          "answer": 3,
+          "category": "forms",
+          "explanation": "Form Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "form-handling"
+    },
+    {
+      "id": "quiz-react-mod12-test-01",
+      "courseId": "course-react-roadmap",
+      "title": "12. API Integration Testleri - Test 1",
+      "description": "API çağrıları ve data fetching hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod12-01",
+          "question": "Fetch API nedir?",
+          "options": [
+            "Browser native HTTP client API, Promise-based",
+            "Sadece bir library",
+            "Sadece bir framework",
+            "Sadece bir tool"
+          ],
+          "answer": 0,
+          "category": "api",
+          "explanation": "API Integration hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "api-integration"
+    },
+    {
+      "id": "quiz-react-mod12-test-02",
+      "courseId": "course-react-roadmap",
+      "title": "12. API Integration Testleri - Test 2",
+      "description": "API çağrıları ve data fetching hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod12-02",
+          "question": "Axios nedir?",
+          "options": [
+            "HTTP client library, interceptors, automatic JSON parsing",
+            "Sadece bir native API",
+            "Sadece bir framework",
+            "Sadece bir tool"
+          ],
+          "answer": 0,
+          "category": "api",
+          "explanation": "API Integration hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "api-integration"
+    },
+    {
+      "id": "quiz-react-mod12-test-03",
+      "courseId": "course-react-roadmap",
+      "title": "12. API Integration Testleri - Test 3",
+      "description": "API çağrıları ve data fetching hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod12-03",
+          "question": "React Query nedir?",
+          "options": [
+            "Server state management library, caching, synchronization",
+            "Sadece bir HTTP client",
+            "Sadece bir state management",
+            "Sadece bir UI library"
+          ],
+          "answer": 0,
+          "category": "api",
+          "explanation": "API Integration hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "api-integration"
+    },
+    {
+      "id": "quiz-react-mod12-test-04",
+      "courseId": "course-react-roadmap",
+      "title": "12. API Integration Testleri - Test 4",
+      "description": "API çağrıları ve data fetching hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod12-04",
+          "question": "Server state nedir?",
+          "options": [
+            "Server'dan gelen state, cache edilebilir, sync gerektirir",
+            "Sadece local state",
+            "Sadece component state",
+            "Sadece global state"
+          ],
+          "answer": 0,
+          "category": "api",
+          "explanation": "API Integration hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "api-integration"
+    },
+    {
+      "id": "quiz-react-mod12-test-05",
+      "courseId": "course-react-roadmap",
+      "title": "12. API Integration Testleri - Test 5",
+      "description": "API çağrıları ve data fetching hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod12-05",
+          "question": "Caching ve refetching nedir?",
+          "options": [
+            "API response'larını cache etme, otomatik refetch, stale-while-revalidate",
+            "Sadece her zaman fetch",
+            "Sadece hiç cache yok",
+            "Sadece manual cache"
+          ],
+          "answer": 1,
+          "category": "api",
+          "explanation": "API Integration hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "api-integration"
+    },
+    {
+      "id": "quiz-react-mod12-test-06",
+      "courseId": "course-react-roadmap",
+      "title": "12. API Integration Testleri - Test 6",
+      "description": "API çağrıları ve data fetching hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod12-06",
+          "question": "Mutations nedir?",
+          "options": [
+            "Server'a veri gönderme işlemleri, POST/PUT/DELETE",
+            "Sadece GET request",
+            "Sadece read operations",
+            "Sadece no operations"
+          ],
+          "answer": 1,
+          "category": "api",
+          "explanation": "API Integration hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "api-integration"
+    },
+    {
+      "id": "quiz-react-mod12-test-07",
+      "courseId": "course-react-roadmap",
+      "title": "12. API Integration Testleri - Test 7",
+      "description": "API çağrıları ve data fetching hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod12-07",
+          "question": "Infinite queries nedir?",
+          "options": [
+            "Sayfalama için infinite scroll, cursor-based pagination",
+            "Sadece single page",
+            "Sadece no pagination",
+            "Sadece manual pagination"
+          ],
+          "answer": 1,
+          "category": "api",
+          "explanation": "API Integration hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "api-integration"
+    },
+    {
+      "id": "quiz-react-mod12-test-08",
+      "courseId": "course-react-roadmap",
+      "title": "12. API Integration Testleri - Test 8",
+      "description": "API çağrıları ve data fetching hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod12-08",
+          "question": "API error handling nedir?",
+          "options": [
+            "API hatalarını yönetme, try-catch, error boundaries",
+            "Sadece success handling",
+            "Sadece no handling",
+            "Sadece manual handling"
+          ],
+          "answer": 1,
+          "category": "api",
+          "explanation": "API Integration hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "api-integration"
+    },
+    {
+      "id": "quiz-react-mod12-test-09",
+      "courseId": "course-react-roadmap",
+      "title": "12. API Integration Testleri - Test 9",
+      "description": "API çağrıları ve data fetching hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod12-09",
+          "question": "GraphQL nedir?",
+          "options": [],
+          "answer": 2,
+          "category": "api",
+          "explanation": "API Integration hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "api-integration"
+    },
+    {
+      "id": "quiz-react-mod12-test-10",
+      "courseId": "course-react-roadmap",
+      "title": "12. API Integration Testleri - Test 10",
+      "description": "API çağrıları ve data fetching hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod12-10",
+          "question": "API best practices nelerdir?",
+          "options": [],
+          "answer": 2,
+          "category": "api",
+          "explanation": "API Integration hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "api-integration"
+    },
+    {
+      "id": "quiz-react-mod12-test-11",
+      "courseId": "course-react-roadmap",
+      "title": "12. API Integration Testleri - Test 11",
+      "description": "API çağrıları ve data fetching hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod12-11",
+          "question": "API Integration hakkında soru 11",
+          "options": [],
+          "answer": 2,
+          "category": "api",
+          "explanation": "API Integration hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "api-integration"
+    },
+    {
+      "id": "quiz-react-mod12-test-12",
+      "courseId": "course-react-roadmap",
+      "title": "12. API Integration Testleri - Test 12",
+      "description": "API çağrıları ve data fetching hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod12-12",
+          "question": "API Integration hakkında soru 12",
+          "options": [],
+          "answer": 2,
+          "category": "api",
+          "explanation": "API Integration hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "api-integration"
+    },
+    {
+      "id": "quiz-react-mod12-test-13",
+      "courseId": "course-react-roadmap",
+      "title": "12. API Integration Testleri - Test 13",
+      "description": "API çağrıları ve data fetching hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod12-13",
+          "question": "API Integration hakkında soru 13",
+          "options": [],
+          "answer": 3,
+          "category": "api",
+          "explanation": "API Integration hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "api-integration"
+    },
+    {
+      "id": "quiz-react-mod12-test-14",
+      "courseId": "course-react-roadmap",
+      "title": "12. API Integration Testleri - Test 14",
+      "description": "API çağrıları ve data fetching hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod12-14",
+          "question": "API Integration hakkında soru 14",
+          "options": [],
+          "answer": 3,
+          "category": "api",
+          "explanation": "API Integration hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "api-integration"
+    },
+    {
+      "id": "quiz-react-mod12-test-15",
+      "courseId": "course-react-roadmap",
+      "title": "12. API Integration Testleri - Test 15",
+      "description": "API çağrıları ve data fetching hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod12-15",
+          "question": "API Integration hakkında soru 15",
+          "options": [],
+          "answer": 3,
+          "category": "api",
+          "explanation": "API Integration hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "api-integration"
+    },
+    {
+      "id": "quiz-react-mod13-test-01",
+      "courseId": "course-react-roadmap",
+      "title": "13. State Management Libraries Testleri - Test 1",
+      "description": "Redux, Zustand gibi state management kütüphaneleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod13-01",
+          "question": "Redux nedir?",
+          "options": [
+            "Predictable state container, single source of truth, immutable updates",
+            "Sadece bir component library",
+            "Sadece bir routing library",
+            "Sadece bir HTTP client"
+          ],
+          "answer": 0,
+          "category": "state-mgmt",
+          "explanation": "State Management Libraries hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "state-management-libs"
+    },
+    {
+      "id": "quiz-react-mod13-test-02",
+      "courseId": "course-react-roadmap",
+      "title": "13. State Management Libraries Testleri - Test 2",
+      "description": "Redux, Zustand gibi state management kütüphaneleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod13-02",
+          "question": "Redux Toolkit nedir?",
+          "options": [
+            "Redux için official toolkit, boilerplate azaltır, best practices",
+            "Sadece bir Redux alternatifi",
+            "Sadece bir component library",
+            "Sadece bir routing library"
+          ],
+          "answer": 0,
+          "category": "state-mgmt",
+          "explanation": "State Management Libraries hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "state-management-libs"
+    },
+    {
+      "id": "quiz-react-mod13-test-03",
+      "courseId": "course-react-roadmap",
+      "title": "13. State Management Libraries Testleri - Test 3",
+      "description": "Redux, Zustand gibi state management kütüphaneleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod13-03",
+          "question": "Zustand nedir?",
+          "options": [
+            "Minimal state management, hooks-based, no boilerplate",
+            "Sadece bir Redux alternatifi",
+            "Sadece bir component library",
+            "Sadece bir routing library"
+          ],
+          "answer": 0,
+          "category": "state-mgmt",
+          "explanation": "State Management Libraries hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "state-management-libs"
+    },
+    {
+      "id": "quiz-react-mod13-test-04",
+      "courseId": "course-react-roadmap",
+      "title": "13. State Management Libraries Testleri - Test 4",
+      "description": "Redux, Zustand gibi state management kütüphaneleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod13-04",
+          "question": "Jotai nedir?",
+          "options": [
+            "Atomic state management, fine-grained reactivity",
+            "Sadece bir Redux alternatifi",
+            "Sadece bir component library",
+            "Sadece bir routing library"
+          ],
+          "answer": 0,
+          "category": "state-mgmt",
+          "explanation": "State Management Libraries hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "state-management-libs"
+    },
+    {
+      "id": "quiz-react-mod13-test-05",
+      "courseId": "course-react-roadmap",
+      "title": "13. State Management Libraries Testleri - Test 5",
+      "description": "Redux, Zustand gibi state management kütüphaneleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod13-05",
+          "question": "Recoil nedir?",
+          "options": [
+            "Facebook'un state management library, atoms ve selectors",
+            "Sadece bir Redux alternatifi",
+            "Sadece bir component library",
+            "Sadece bir routing library"
+          ],
+          "answer": 1,
+          "category": "state-mgmt",
+          "explanation": "State Management Libraries hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "state-management-libs"
+    },
+    {
+      "id": "quiz-react-mod13-test-06",
+      "courseId": "course-react-roadmap",
+      "title": "13. State Management Libraries Testleri - Test 6",
+      "description": "Redux, Zustand gibi state management kütüphaneleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod13-06",
+          "question": "State management karşılaştırması nedir?",
+          "options": [
+            "Redux complex ama powerful, Zustand simple, Context built-in",
+            "Hiçbir fark yok",
+            "Hepsi aynı",
+            "Hepsi farklı ama aynı"
+          ],
+          "answer": 1,
+          "category": "state-mgmt",
+          "explanation": "State Management Libraries hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "state-management-libs"
+    },
+    {
+      "id": "quiz-react-mod13-test-07",
+      "courseId": "course-react-roadmap",
+      "title": "13. State Management Libraries Testleri - Test 7",
+      "description": "Redux, Zustand gibi state management kütüphaneleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod13-07",
+          "question": "When to use state management?",
+          "options": [
+            "Global state gerektiğinde, prop drilling çok olduğunda, complex state",
+            "Sadece her zaman",
+            "Sadece hiçbir zaman",
+            "Sadece small apps"
+          ],
+          "answer": 1,
+          "category": "state-mgmt",
+          "explanation": "State Management Libraries hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "state-management-libs"
+    },
+    {
+      "id": "quiz-react-mod13-test-08",
+      "courseId": "course-react-roadmap",
+      "title": "13. State Management Libraries Testleri - Test 8",
+      "description": "Redux, Zustand gibi state management kütüphaneleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod13-08",
+          "question": "State persistence nedir?",
+          "options": [
+            "State'i localStorage veya sessionStorage'a kaydetme, hydration",
+            "Sadece memory'de tutmak",
+            "Sadece hiç kaydetmemek",
+            "Sadece manual save"
+          ],
+          "answer": 1,
+          "category": "state-mgmt",
+          "explanation": "State Management Libraries hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "state-management-libs"
+    },
+    {
+      "id": "quiz-react-mod13-test-09",
+      "courseId": "course-react-roadmap",
+      "title": "13. State Management Libraries Testleri - Test 9",
+      "description": "Redux, Zustand gibi state management kütüphaneleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod13-09",
+          "question": "State management patterns nelerdir?",
+          "options": [
+            "Flux pattern, unidirectional data flow, action-reducer-store",
+            "Sadece bidirectional flow",
+            "Sadece no pattern",
+            "Sadece manual pattern"
+          ],
+          "answer": 2,
+          "category": "state-mgmt",
+          "explanation": "State Management Libraries hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "state-management-libs"
+    },
+    {
+      "id": "quiz-react-mod13-test-10",
+      "courseId": "course-react-roadmap",
+      "title": "13. State Management Libraries Testleri - Test 10",
+      "description": "Redux, Zustand gibi state management kütüphaneleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod13-10",
+          "question": "State management best practices nelerdir?",
+          "options": [
+            "State'i normalize etmek, selectors kullanmak, middleware",
+            "Sadece denormalize state",
+            "Sadece no selectors",
+            "Sadece no middleware"
+          ],
+          "answer": 2,
+          "category": "state-mgmt",
+          "explanation": "State Management Libraries hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "state-management-libs"
+    },
+    {
+      "id": "quiz-react-mod13-test-11",
+      "courseId": "course-react-roadmap",
+      "title": "13. State Management Libraries Testleri - Test 11",
+      "description": "Redux, Zustand gibi state management kütüphaneleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod13-11",
+          "question": "State Management Libraries hakkında soru 11",
+          "options": [
+            "Redux DevTools kullanmak, time-travel debugging",
+            "Sadece console.log",
+            "Sadece no debugging",
+            "Sadece manual debugging"
+          ],
+          "answer": 2,
+          "category": "state-mgmt",
+          "explanation": "State Management Libraries hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "state-management-libs"
+    },
+    {
+      "id": "quiz-react-mod13-test-12",
+      "courseId": "course-react-roadmap",
+      "title": "13. State Management Libraries Testleri - Test 12",
+      "description": "Redux, Zustand gibi state management kütüphaneleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod13-12",
+          "question": "State Management Libraries hakkında soru 12",
+          "options": [
+            "State structure design, flat vs nested, normalization",
+            "Sadece nested structure",
+            "Sadece no structure",
+            "Sadece random structure"
+          ],
+          "answer": 2,
+          "category": "state-mgmt",
+          "explanation": "State Management Libraries hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "state-management-libs"
+    },
+    {
+      "id": "quiz-react-mod13-test-13",
+      "courseId": "course-react-roadmap",
+      "title": "13. State Management Libraries Testleri - Test 13",
+      "description": "Redux, Zustand gibi state management kütüphaneleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod13-13",
+          "question": "State Management Libraries hakkında soru 13",
+          "options": [
+            "Async actions, thunks, sagas, RTK Query",
+            "Sadece sync actions",
+            "Sadece no async",
+            "Sadece manual async"
+          ],
+          "answer": 3,
+          "category": "state-mgmt",
+          "explanation": "State Management Libraries hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "state-management-libs"
+    },
+    {
+      "id": "quiz-react-mod13-test-14",
+      "courseId": "course-react-roadmap",
+      "title": "13. State Management Libraries Testleri - Test 14",
+      "description": "Redux, Zustand gibi state management kütüphaneleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod13-14",
+          "question": "State Management Libraries hakkında soru 14",
+          "options": [
+            "State management testing, action testing, reducer testing",
+            "Sadece manual testing",
+            "Sadece no testing",
+            "Sadece visual testing"
+          ],
+          "answer": 3,
+          "category": "state-mgmt",
+          "explanation": "State Management Libraries hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "state-management-libs"
+    },
+    {
+      "id": "quiz-react-mod13-test-15",
+      "courseId": "course-react-roadmap",
+      "title": "13. State Management Libraries Testleri - Test 15",
+      "description": "Redux, Zustand gibi state management kütüphaneleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod13-15",
+          "question": "State Management Libraries hakkında soru 15",
+          "options": [
+            "State Management Libraries ile ilgili doğru cevap",
+            "Yanlış seçenek 1",
+            "Yanlış seçenek 2",
+            "Yanlış seçenek 3"
+          ],
+          "answer": 3,
+          "category": "state-mgmt",
+          "explanation": "State Management Libraries hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "state-management-libs"
+    },
+    {
+      "id": "quiz-react-mod14-test-01",
+      "courseId": "course-react-roadmap",
+      "title": "14. Advanced Patterns Testleri - Test 1",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod14-01",
+          "question": "Render props pattern nedir?",
+          "options": [
+            "Render prop olarak fonksiyon geçirerek logic paylaşımı",
+            "Sadece bir prop geçirme",
+            "Sadece bir state geçirme",
+            "Sadece bir method geçirme"
+          ],
+          "answer": 0,
+          "category": "advanced-patterns",
+          "explanation": "Advanced Patterns hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "advanced-patterns"
+    },
+    {
+      "id": "quiz-react-mod14-test-02",
+      "courseId": "course-react-roadmap",
+      "title": "14. Advanced Patterns Testleri - Test 2",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod14-02",
+          "question": "HOC (Higher-Order Component) nedir?",
+          "options": [
+            "Component alıp yeni component döndüren fonksiyon, logic paylaşımı",
+            "Sadece bir component",
+            "Sadece bir hook",
+            "Sadece bir utility function"
+          ],
+          "answer": 0,
+          "category": "advanced-patterns",
+          "explanation": "Advanced Patterns hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "advanced-patterns"
+    },
+    {
+      "id": "quiz-react-mod14-test-03",
+      "courseId": "course-react-roadmap",
+      "title": "14. Advanced Patterns Testleri - Test 3",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod14-03",
+          "question": "Compound components nedir?",
+          "options": [
+            "Birlikte çalışan, state paylaşan component grupları",
+            "Sadece bir component",
+            "Sadece bir hook",
+            "Sadece bir utility"
+          ],
+          "answer": 0,
+          "category": "advanced-patterns",
+          "explanation": "Advanced Patterns hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "advanced-patterns"
+    },
+    {
+      "id": "quiz-react-mod14-test-04",
+      "courseId": "course-react-roadmap",
+      "title": "14. Advanced Patterns Testleri - Test 4",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod14-04",
+          "question": "Error boundaries nedir?",
+          "options": [
+            "Component tree'deki hataları yakalayan component, class component gerekli",
+            "Sadece bir error handler",
+            "Sadece bir try-catch",
+            "Sadece bir console.error"
+          ],
+          "answer": 0,
+          "category": "advanced-patterns",
+          "explanation": "Advanced Patterns hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "advanced-patterns"
+    },
+    {
+      "id": "quiz-react-mod14-test-05",
+      "courseId": "course-react-roadmap",
+      "title": "14. Advanced Patterns Testleri - Test 5",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod14-05",
+          "question": "Portal pattern nedir?",
+          "options": [
+            "Component'i DOM tree'nin farklı yerine render etme, createPortal",
+            "Sadece normal render",
+            "Sadece conditional render",
+            "Sadece no render"
+          ],
+          "answer": 1,
+          "category": "advanced-patterns",
+          "explanation": "Advanced Patterns hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "advanced-patterns"
+    },
+    {
+      "id": "quiz-react-mod14-test-06",
+      "courseId": "course-react-roadmap",
+      "title": "14. Advanced Patterns Testleri - Test 6",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod14-06",
+          "question": "Ref forwarding nedir?",
+          "options": [
+            "Ref'i child component'ten parent'a geçirme, forwardRef",
+            "Sadece bir prop geçirme",
+            "Sadece bir state geçirme",
+            "Sadece bir method geçirme"
+          ],
+          "answer": 1,
+          "category": "advanced-patterns",
+          "explanation": "Advanced Patterns hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "advanced-patterns"
+    },
+    {
+      "id": "quiz-react-mod14-test-07",
+      "courseId": "course-react-roadmap",
+      "title": "14. Advanced Patterns Testleri - Test 7",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod14-07",
+          "question": "Suspense nedir?",
+          "options": [
+            "Async işlemler için loading state yönetimi, fallback UI",
+            "Sadece bir loading component",
+            "Sadece bir error component",
+            "Sadece bir success component"
+          ],
+          "answer": 1,
+          "category": "advanced-patterns",
+          "explanation": "Advanced Patterns hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "advanced-patterns"
+    },
+    {
+      "id": "quiz-react-mod14-test-08",
+      "courseId": "course-react-roadmap",
+      "title": "14. Advanced Patterns Testleri - Test 8",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod14-08",
+          "question": "Concurrent mode nedir?",
+          "options": [
+            "React 18 concurrent rendering, interruptible, priority-based",
+            "Sadece synchronous rendering",
+            "Sadece blocking rendering",
+            "Sadece manual rendering"
+          ],
+          "answer": 1,
+          "category": "advanced-patterns",
+          "explanation": "Advanced Patterns hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "advanced-patterns"
+    },
+    {
+      "id": "quiz-react-mod14-test-09",
+      "courseId": "course-react-roadmap",
+      "title": "14. Advanced Patterns Testleri - Test 9",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod14-09",
+          "question": "Server components nedir?",
+          "options": [
+            "Next.js 13+ server-side component, zero client bundle",
+            "Sadece client component",
+            "Sadece hybrid component",
+            "Sadece static component"
+          ],
+          "answer": 2,
+          "category": "advanced-patterns",
+          "explanation": "Advanced Patterns hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "advanced-patterns"
+    },
+    {
+      "id": "quiz-react-mod14-test-10",
+      "courseId": "course-react-roadmap",
+      "title": "14. Advanced Patterns Testleri - Test 10",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod14-10",
+          "question": "Advanced patterns best practices nelerdir?",
+          "options": [
+            "Pattern'leri doğru kullanmak, over-engineering önlemek, maintainability",
+            "Sadece her zaman complex pattern",
+            "Sadece hiç pattern kullanmamak",
+            "Sadece random pattern"
+          ],
+          "answer": 2,
+          "category": "advanced-patterns",
+          "explanation": "Advanced Patterns hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "advanced-patterns"
+    },
+    {
+      "id": "quiz-react-mod14-test-11",
+      "courseId": "course-react-roadmap",
+      "title": "14. Advanced Patterns Testleri - Test 11",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod14-11",
+          "question": "Advanced Patterns hakkında soru 11",
+          "options": [
+            "Custom hooks ile logic extraction, reusable logic",
+            "Sadece component içinde logic",
+            "Sadece global function",
+            "Sadece no logic"
+          ],
+          "answer": 2,
+          "category": "advanced-patterns",
+          "explanation": "Advanced Patterns hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "advanced-patterns"
+    },
+    {
+      "id": "quiz-react-mod14-test-12",
+      "courseId": "course-react-roadmap",
+      "title": "14. Advanced Patterns Testleri - Test 12",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod14-12",
+          "question": "Advanced Patterns hakkında soru 12",
+          "options": [
+            "Provider pattern, context ile global state",
+            "Sadece props drilling",
+            "Sadece global variable",
+            "Sadece local state"
+          ],
+          "answer": 2,
+          "category": "advanced-patterns",
+          "explanation": "Advanced Patterns hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "advanced-patterns"
+    },
+    {
+      "id": "quiz-react-mod14-test-13",
+      "courseId": "course-react-roadmap",
+      "title": "14. Advanced Patterns Testleri - Test 13",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod14-13",
+          "question": "Advanced Patterns hakkında soru 13",
+          "options": [
+            "Compound component pattern, flexible API design",
+            "Sadece single component",
+            "Sadece no composition",
+            "Sadece hard-coded structure"
+          ],
+          "answer": 3,
+          "category": "advanced-patterns",
+          "explanation": "Advanced Patterns hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "advanced-patterns"
+    },
+    {
+      "id": "quiz-react-mod14-test-14",
+      "courseId": "course-react-roadmap",
+      "title": "14. Advanced Patterns Testleri - Test 14",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod14-14",
+          "question": "Advanced Patterns hakkında soru 14",
+          "options": [
+            "Advanced pattern testing, pattern-specific test strategies",
+            "Sadece basic testing",
+            "Sadece no testing",
+            "Sadece visual testing"
+          ],
+          "answer": 3,
+          "category": "advanced-patterns",
+          "explanation": "Advanced Patterns hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "advanced-patterns"
+    },
+    {
+      "id": "quiz-react-mod14-test-15",
+      "courseId": "course-react-roadmap",
+      "title": "14. Advanced Patterns Testleri - Test 15",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod14-15",
+          "question": "Advanced Patterns hakkında soru 15",
+          "options": [
+            "Advanced Patterns ile ilgili doğru cevap",
+            "Yanlış seçenek 1",
+            "Yanlış seçenek 2",
+            "Yanlış seçenek 3"
+          ],
+          "answer": 3,
+          "category": "advanced-patterns",
+          "explanation": "Advanced Patterns hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "advanced-patterns"
+    },
+    {
+      "id": "quiz-react-mod15-test-01",
+      "courseId": "course-react-roadmap",
+      "title": "15. Deployment Testleri - Test 1",
+      "description": "React uygulamalarının deployment süreçleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod15-01",
+          "question": "Production build nedir?",
+          "options": [
+            "Optimize edilmiş, minified production bundle, npm run build",
+            "Sadece development build",
+            "Sadece source code",
+            "Sadece test build"
+          ],
+          "answer": 0,
+          "category": "deployment",
+          "explanation": "Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "deployment"
+    },
+    {
+      "id": "quiz-react-mod15-test-02",
+      "courseId": "course-react-roadmap",
+      "title": "15. Deployment Testleri - Test 2",
+      "description": "React uygulamalarının deployment süreçleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod15-02",
+          "question": "Environment variables nedir?",
+          "options": [
+            "Uygulama konfigürasyonu için değişkenler, .env files, process.env",
+            "Sadece hard-coded values",
+            "Sadece config files",
+            "Sadece constants"
+          ],
+          "answer": 0,
+          "category": "deployment",
+          "explanation": "Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "deployment"
+    },
+    {
+      "id": "quiz-react-mod15-test-03",
+      "courseId": "course-react-roadmap",
+      "title": "15. Deployment Testleri - Test 3",
+      "description": "React uygulamalarının deployment süreçleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod15-03",
+          "question": "Vercel deployment nedir?",
+          "options": [
+            "Serverless platform, automatic deployments, edge functions",
+            "Sadece bir hosting service",
+            "Sadece bir build tool",
+            "Sadece bir CI/CD tool"
+          ],
+          "answer": 0,
+          "category": "deployment",
+          "explanation": "Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "deployment"
+    },
+    {
+      "id": "quiz-react-mod15-test-04",
+      "courseId": "course-react-roadmap",
+      "title": "15. Deployment Testleri - Test 4",
+      "description": "React uygulamalarının deployment süreçleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod15-04",
+          "question": "Netlify deployment nedir?",
+          "options": [
+            "Static site hosting, serverless functions, form handling",
+            "Sadece bir hosting service",
+            "Sadece bir build tool",
+            "Sadece bir CI/CD tool"
+          ],
+          "answer": 0,
+          "category": "deployment",
+          "explanation": "Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "deployment"
+    },
+    {
+      "id": "quiz-react-mod15-test-05",
+      "courseId": "course-react-roadmap",
+      "title": "15. Deployment Testleri - Test 5",
+      "description": "React uygulamalarının deployment süreçleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod15-05",
+          "question": "AWS S3 + CloudFront nedir?",
+          "options": [
+            "AWS static hosting, S3 storage, CloudFront CDN",
+            "Sadece bir hosting service",
+            "Sadece bir build tool",
+            "Sadece bir CI/CD tool"
+          ],
+          "answer": 1,
+          "category": "deployment",
+          "explanation": "Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "deployment"
+    },
+    {
+      "id": "quiz-react-mod15-test-06",
+      "courseId": "course-react-roadmap",
+      "title": "15. Deployment Testleri - Test 6",
+      "description": "React uygulamalarının deployment süreçleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod15-06",
+          "question": "Docker containerization nedir?",
+          "options": [
+            "Containerization, portable application, Docker image",
+            "Sadece bir virtualization",
+            "Sadece bir build tool",
+            "Sadece bir deployment tool"
+          ],
+          "answer": 1,
+          "category": "deployment",
+          "explanation": "Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "deployment"
+    },
+    {
+      "id": "quiz-react-mod15-test-07",
+      "courseId": "course-react-roadmap",
+      "title": "15. Deployment Testleri - Test 7",
+      "description": "React uygulamalarının deployment süreçleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod15-07",
+          "question": "CI/CD pipeline nedir?",
+          "options": [
+            "Continuous Integration/Deployment, automated testing ve deployment",
+            "Sadece manual deployment",
+            "Sadece no automation",
+            "Sadece manual testing"
+          ],
+          "answer": 1,
+          "category": "deployment",
+          "explanation": "Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "deployment"
+    },
+    {
+      "id": "quiz-react-mod15-test-08",
+      "courseId": "course-react-roadmap",
+      "title": "15. Deployment Testleri - Test 8",
+      "description": "React uygulamalarının deployment süreçleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod15-08",
+          "question": "GitHub Actions nedir?",
+          "options": [
+            "GitHub'ın CI/CD platformu, workflow automation",
+            "Sadece bir version control",
+            "Sadece bir issue tracker",
+            "Sadece bir code review"
+          ],
+          "answer": 1,
+          "category": "deployment",
+          "explanation": "Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "deployment"
+    },
+    {
+      "id": "quiz-react-mod15-test-09",
+      "courseId": "course-react-roadmap",
+      "title": "15. Deployment Testleri - Test 9",
+      "description": "React uygulamalarının deployment süreçleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod15-09",
+          "question": "Performance monitoring nedir?",
+          "options": [
+            "Production performance tracking, error monitoring, analytics",
+            "Sadece development monitoring",
+            "Sadece no monitoring",
+            "Sadece manual check"
+          ],
+          "answer": 2,
+          "category": "deployment",
+          "explanation": "Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "deployment"
+    },
+    {
+      "id": "quiz-react-mod15-test-10",
+      "courseId": "course-react-roadmap",
+      "title": "15. Deployment Testleri - Test 10",
+      "description": "React uygulamalarının deployment süreçleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod15-10",
+          "question": "Deployment best practices nelerdir?",
+          "options": [
+            "Environment separation, rollback strategy, health checks",
+            "Sadece direct production",
+            "Sadece no strategy",
+            "Sadece manual deployment"
+          ],
+          "answer": 2,
+          "category": "deployment",
+          "explanation": "Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "deployment"
+    },
+    {
+      "id": "quiz-react-mod15-test-11",
+      "courseId": "course-react-roadmap",
+      "title": "15. Deployment Testleri - Test 11",
+      "description": "React uygulamalarının deployment süreçleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod15-11",
+          "question": "Deployment hakkında soru 11",
+          "options": [
+            "Build optimization, code splitting, asset optimization",
+            "Sadece no optimization",
+            "Sadece single bundle",
+            "Sadece manual optimization"
+          ],
+          "answer": 2,
+          "category": "deployment",
+          "explanation": "Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "deployment"
+    },
+    {
+      "id": "quiz-react-mod15-test-12",
+      "courseId": "course-react-roadmap",
+      "title": "15. Deployment Testleri - Test 12",
+      "description": "React uygulamalarının deployment süreçleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod15-12",
+          "question": "Deployment hakkında soru 12",
+          "options": [
+            "Security best practices, environment variables, secrets management",
+            "Sadece hard-coded secrets",
+            "Sadece no security",
+            "Sadece manual security"
+          ],
+          "answer": 2,
+          "category": "deployment",
+          "explanation": "Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "deployment"
+    },
+    {
+      "id": "quiz-react-mod15-test-13",
+      "courseId": "course-react-roadmap",
+      "title": "15. Deployment Testleri - Test 13",
+      "description": "React uygulamalarının deployment süreçleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod15-13",
+          "question": "Deployment hakkında soru 13",
+          "options": [
+            "Deployment testing, staging environment, smoke tests",
+            "Sadece no testing",
+            "Sadece production only",
+            "Sadece manual testing"
+          ],
+          "answer": 3,
+          "category": "deployment",
+          "explanation": "Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "deployment"
+    },
+    {
+      "id": "quiz-react-mod15-test-14",
+      "courseId": "course-react-roadmap",
+      "title": "15. Deployment Testleri - Test 14",
+      "description": "React uygulamalarının deployment süreçleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod15-14",
+          "question": "Deployment hakkında soru 14",
+          "options": [
+            "Deployment documentation, runbooks, incident response",
+            "Sadece no documentation",
+            "Sadece no runbooks",
+            "Sadece manual response"
+          ],
+          "answer": 3,
+          "category": "deployment",
+          "explanation": "Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "deployment"
+    },
+    {
+      "id": "quiz-react-mod15-test-15",
+      "courseId": "course-react-roadmap",
+      "title": "15. Deployment Testleri - Test 15",
+      "description": "React uygulamalarının deployment süreçleri hakkında bilgi testi.",
+      "topic": "React.js",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-react-mod15-15",
+          "question": "Deployment hakkında soru 15",
+          "options": [
+            "Deployment ile ilgili doğru cevap",
+            "Yanlış seçenek 1",
+            "Yanlış seçenek 2",
+            "Yanlış seçenek 3"
+          ],
+          "answer": 3,
+          "category": "deployment",
+          "explanation": "Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "deployment"
+    }
+  ]
+}

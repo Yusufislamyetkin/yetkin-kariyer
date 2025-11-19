@@ -321,7 +321,7 @@ export async function POST(
       breakdown,
     };
 
-    const [attempt, completion] = await db.$transaction(async (tx) => {
+    const [attempt, completion] = await db.$transaction(async (tx: any) => {
       const newAttempt = await tx.lessonMiniTestAttempt.create({
         data: {
           userId,

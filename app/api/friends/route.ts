@@ -40,7 +40,16 @@ export async function GET() {
       },
     });
 
-    const data = friendships.map((friendship) => {
+    const data = friendships.map((friendship: {
+      id: string;
+      status: string;
+      requesterId: string;
+      requestedAt: Date;
+      respondedAt: Date | null;
+      cancelledAt: Date | null;
+      requester: { id: string; name: string | null; profileImage: string | null };
+      addressee: { id: string; name: string | null; profileImage: string | null };
+    }) => {
       const isRequester = friendship.requesterId === userId;
       const counterpart = isRequester ? friendship.addressee : friendship.requester;
       return {

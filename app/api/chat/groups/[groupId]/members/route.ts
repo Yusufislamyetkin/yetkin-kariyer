@@ -54,7 +54,7 @@ export async function GET(_request: Request, { params }: { params: { groupId: st
       },
     });
 
-    const payload = members.map((member) => ({
+    const payload = members.map((member: any) => ({
       id: member.id,
       role: member.role,
       isMuted: member.isMuted,
@@ -155,7 +155,7 @@ export async function POST(request: Request, { params }: { params: { groupId: st
     });
 
     const acceptedFriendIds = new Set<string>();
-    friendships.forEach((friendship) => {
+    friendships.forEach((friendship: { requesterId: string; addresseeId: string }) => {
       const counterpart = friendship.requesterId === userId ? friendship.addresseeId : friendship.requesterId;
       acceptedFriendIds.add(counterpart);
     });
@@ -176,7 +176,7 @@ export async function POST(request: Request, { params }: { params: { groupId: st
       },
     });
 
-    const alreadyMemberIds = new Set(existingMemberships.map((entry) => entry.userId));
+    const alreadyMemberIds = new Set(existingMemberships.map((entry: { userId: string }) => entry.userId));
     const createUserIds = allowedUserIds.filter((candidate) => !alreadyMemberIds.has(candidate));
 
     if (createUserIds.length > 0) {
@@ -214,7 +214,7 @@ export async function POST(request: Request, { params }: { params: { groupId: st
       },
     });
 
-    const payload = members.map((member) => ({
+    const payload = members.map((member: any) => ({
       id: member.id,
       role: member.role,
       isMuted: member.isMuted,

@@ -26,6 +26,41 @@ export default function ViewCVPage() {
   const [error, setError] = useState<string | null>(null);
   const [cv, setCv] = useState<CV | null>(null);
   const [downloading, setDownloading] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [lastUploadUrl, setLastUploadUrl] = useState<string | null>(null);
+  const [lastUploadName, setLastUploadName] = useState<string | null>(null);
+
+  const handleCvUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    setError(null);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const res = await fetch("/api/cv/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "CV yüklenemedi");
+      }
+
+      setLastUploadUrl(data.upload?.url || null);
+      setLastUploadName(data.upload?.name || null);
+    } catch (err: any) {
+      console.error("Error uploading CV:", err);
+      setError(err.message || "CV yüklenirken bir hata oluştu");
+    } finally {
+      setUploading(false);
+      // reset input value to allow re-selecting the same file
+      (e.target as HTMLInputElement).value = "";
+    }
+  };
 
   useEffect(() => {
     if (params.id) {
@@ -64,7 +99,7 @@ export default function ViewCVPage() {
         throw new Error("CV ID bulunamadı");
       }
       
-      const response = await fetch(`/api/cv/${params.id}/pdf`, {
+      const response = await fetch(`/api/cv/${params.id}/pdf?download=1`, {
         method: "GET",
         headers: {
           "Accept": "application/pdf",
@@ -212,6 +247,17 @@ export default function ViewCVPage() {
             <span className="hidden sm:inline">{downloading ? "PDF Oluşturuluyor..." : "PDF İndir"}</span>
             <span className="sm:hidden">{downloading ? "Oluşturuluyor..." : "PDF"}</span>
           </Button>
+          <label className="flex-1 sm:flex-initial">
+            <input
+              type="file"
+              accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+              onChange={handleCvUpload}
+              className="hidden"
+            />
+            <Button variant="outline" disabled={uploading} className="w-full">
+              {uploading ? "Yükleniyor..." : "CV Yükle (PDF/DOC)"}
+            </Button>
+          </label>
         </div>
       </div>
 
@@ -223,6 +269,13 @@ export default function ViewCVPage() {
               <FileText className="h-5 w-5" />
               CV Önizleme
             </div>
+            {lastUploadUrl && (
+              <span className="text-sm font-normal text-blue-600 sm:ml-2">
+                <a href={lastUploadUrl} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                  Yüklenen Dosya: {lastUploadName || "CV"}
+                </a>
+              </span>
+            )}
             {cv && (
               <span className="text-sm font-normal text-gray-500 sm:ml-2">
                 ({cv.template.name} Şablonu)

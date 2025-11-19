@@ -1,0 +1,1904 @@
+{
+  "quizzes": [
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #1",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 1",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #2",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 2",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #3",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 3",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #4",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 4",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #5",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 5",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #6",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 6",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #7",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 7",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #8",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 8",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #9",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 9",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #10",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 10",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #11",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 11",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #12",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 12",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #13",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 13",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #14",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 14",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #15",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 15",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #16",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 16",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #17",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 17",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #18",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 18",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #19",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 19",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #20",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 20",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #21",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 21",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #22",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 22",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #23",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 23",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #24",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 24",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #25",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 25",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #26",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 26",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #27",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 27",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #28",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 28",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #29",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 29",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #30",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 30",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #31",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 31",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #32",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 32",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #33",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 33",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #34",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 34",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #35",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 35",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #36",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 36",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #37",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 37",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #38",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 38",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #39",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 39",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #40",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 40",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #41",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 41",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #42",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 42",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #43",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 43",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #44",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 44",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #45",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 45",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #46",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 46",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #47",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 47",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #48",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 48",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #49",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 49",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #50",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 50",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #51",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 51",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #52",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 52",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #53",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 53",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #54",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 54",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #55",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 55",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #56",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 56",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #57",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 57",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #58",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 58",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #59",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 59",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #60",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 60",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #61",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 61",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #62",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 62",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #63",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 63",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #64",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 64",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #65",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 65",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #66",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 66",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #67",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 67",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #68",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 68",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #69",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 69",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #70",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 70",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #71",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 71",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #72",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 72",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #73",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 73",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #74",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 74",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #75",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 75",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #76",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 76",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #77",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 77",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #78",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 78",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #79",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 79",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #80",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 80",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #81",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 81",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #82",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 82",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #83",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 83",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #84",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 84",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #85",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 85",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #86",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 86",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #87",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 87",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #88",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 88",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #89",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 89",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #90",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 90",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #91",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 91",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #92",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 92",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #93",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 93",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #94",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 94",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #95",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 95",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #96",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 96",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #97",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 97",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #98",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 98",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #99",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 99",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-java-live-%03s",
+      "courseId": "course-java-spring",
+      "title": "Java Spring Live Coding #100",
+      "description": "Controller/service/repository odaklı canlı kodlama.",
+      "type": "LIVE_CODING",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "lc-java-%03s",
+          "question": "Question 100",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    }
+  ]
+}

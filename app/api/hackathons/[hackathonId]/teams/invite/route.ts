@@ -102,7 +102,7 @@ export async function POST(request: Request, ctx: RouteContext) {
       );
     }
 
-    const updated = await db.$transaction(async (tx) => {
+    const updated = await db.$transaction(async (tx: any) => {
       const activeMember = await tx.hackathonTeamMember.update({
         where: { id: invitation.id },
         data: {

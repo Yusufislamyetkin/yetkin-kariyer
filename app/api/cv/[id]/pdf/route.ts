@@ -4,25 +4,32 @@ import { auth } from "@/lib/auth";
 
 export const runtime = "nodejs";
 
-type PuppeteerModule = typeof import("puppeteer");
+type PuppeteerModule = typeof import("puppeteer-core");
 type ChromiumModule = typeof import("@sparticuz/chromium");
 
 let cachedPuppeteer: PuppeteerModule | null | undefined;
 let cachedChromium: ChromiumModule | null | undefined;
 
-async function loadPuppeteer() {
+async function loadPuppeteer(preferCore: boolean) {
   if (cachedPuppeteer !== undefined) {
     return cachedPuppeteer;
   }
 
-  try {
-    const mod = await import("puppeteer");
-    cachedPuppeteer = (mod as any).default ?? mod;
-  } catch (error) {
-    console.warn("Puppeteer import failed:", error);
-    cachedPuppeteer = null;
+  const moduleOrder = preferCore
+    ? ["puppeteer-core", "puppeteer"]
+    : ["puppeteer", "puppeteer-core"];
+
+  for (const moduleName of moduleOrder) {
+    try {
+      const mod = await import(moduleName);
+      cachedPuppeteer = (mod as any).default ?? mod;
+      return cachedPuppeteer;
+    } catch (error) {
+      console.warn(`Puppeteer import failed for ${moduleName}:`, error);
+    }
   }
 
+  cachedPuppeteer = null;
   return cachedPuppeteer;
 }
 
@@ -132,7 +139,8 @@ export async function GET(
     const baseUrl = `${requestUrl.protocol}//${requestUrl.host}`;
     const renderUrl = `${baseUrl}/cv/render/${cv.id}`;
 
-    const puppeteer = await loadPuppeteer();
+      const isVercel = process.env.VERCEL === "1";
+      const puppeteer = await loadPuppeteer(isVercel);
 
     if (!puppeteer) {
       return NextResponse.json(
@@ -143,7 +151,6 @@ export async function GET(
 
     const cookies = request.headers.get("cookie") || "";
 
-    const isVercel = process.env.VERCEL === "1";
     const chromium = await loadChromium();
 
     const launchOptions: Record<string, unknown> = {
@@ -197,6 +204,11 @@ export async function GET(
         height: 1123,
       });
 
+      // Ensure screen media CSS is applied and page size from CSS is respected
+      try {
+        await page.emulateMediaType("screen");
+      } catch {}
+
       await page.goto(renderUrl, {
         waitUntil: "networkidle0",
         timeout: 30000,
@@ -217,6 +229,7 @@ export async function GET(
       const pdfBuffer = await page.pdf({
         format: "A4",
         printBackground: true,
+        preferCSSPageSize: true,
         margin: {
           top: "0",
           right: "0",
@@ -225,10 +238,15 @@ export async function GET(
         },
       });
 
+      const requestUrlObj = new URL(request.url);
+      const forceDownload = requestUrlObj.searchParams.get("download") === "1";
+      const contentLength = (pdfBuffer as unknown as Buffer).length;
+
       return new NextResponse(pdfBuffer as unknown as BodyInit, {
         headers: {
           "Content-Type": "application/pdf",
-          "Content-Disposition": `inline; filename="cv-${cv.id}.pdf"`,
+          "Content-Disposition": `${forceDownload ? "attachment" : "inline"}; filename="cv-${cv.id}.pdf"`,
+          "Content-Length": contentLength.toString(),
         },
       });
     } catch (error) {

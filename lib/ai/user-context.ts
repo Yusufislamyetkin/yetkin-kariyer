@@ -51,12 +51,12 @@ async function analyzeTestPerformance(userId: string) {
   });
 
   const allAttempts = [
-    ...quizAttempts.map((a) => ({
+    ...quizAttempts.map((a: { score: number; topic: string | null; quiz: { course?: { topicContent?: string | null } | null }; completedAt: Date }) => ({
       score: a.score,
       topic: a.topic || a.quiz.course?.topicContent || "Genel",
       completedAt: a.completedAt,
     })),
-    ...testAttempts.map((a) => {
+    ...testAttempts.map((a: { metrics?: unknown; completedAt: Date }) => {
       const metrics = a.metrics as any;
       return {
         score: metrics?.score || 0,
@@ -72,7 +72,7 @@ async function analyzeTestPerformance(userId: string) {
     { total: number; count: number; scores: number[] }
   >();
 
-  allAttempts.forEach((attempt) => {
+  allAttempts.forEach((attempt: { score: number; topic: string }) => {
     const existing = topicScores.get(attempt.topic) || {
       total: 0,
       count: 0,
@@ -96,13 +96,13 @@ async function analyzeTestPerformance(userId: string) {
 
   const recentScores = allAttempts
     .slice(0, 10)
-    .map((a) => a.score)
+    .map((a: { score: number }) => a.score)
     .reverse();
 
   const averageScore =
     allAttempts.length > 0
       ? Math.round(
-          allAttempts.reduce((sum, a) => sum + a.score, 0) / allAttempts.length
+          allAttempts.reduce((sum: number, a: { score: number }) => sum + a.score, 0) / allAttempts.length
         )
       : 0;
 
@@ -134,7 +134,7 @@ async function analyzeWrongQuestions(userId: string) {
     take: 20,
   });
 
-  return wrongQuestions.map((wq) => ({
+  return wrongQuestions.map((wq: { questionText: string; correctAnswer: string; userAnswer: string; createdAt: Date; quizAttempt?: { topic?: string | null } | null }) => ({
     questionText: wq.questionText,
     correctAnswer: wq.correctAnswer,
     userAnswer: wq.userAnswer,
@@ -168,11 +168,11 @@ async function analyzeLearningHistory(userId: string) {
 
   return {
     completedLessons: completions.length,
-    recentLessons: completions.slice(0, 5).map((c) => ({
+    recentLessons: completions.slice(0, 5).map((c: { course?: { title?: string | null } | null; completedAt: Date | null }) => ({
       title: c.course?.title || "Ders",
       completedAt: c.completedAt,
     })),
-    miniTestScores: miniTestAttempts.map((a) => a.score),
+    miniTestScores: miniTestAttempts.map((a: { score: number }) => a.score),
   };
 }
 

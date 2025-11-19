@@ -544,7 +544,10 @@ export async function GET(request: Request) {
         : [];
 
     const displayedBadgeMap = displayedBadgesRaw.reduce(
-      (acc, current) => {
+      (
+        acc: Map<string, Array<{ id: string; name: string; icon: string; color: string; rarity: string }>>,
+        current: { userId: string; badge: { id: string; name: string; icon: string; color: string; rarity: string } | null }
+      ) => {
         const list = acc.get(current.userId) ?? [];
         if (list.length < 3 && current.badge) {
           list.push(current.badge);

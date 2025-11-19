@@ -32,12 +32,12 @@ export async function GET(
 
     // Get displayed badges (max 3)
     const displayedBadges = userBadges
-      .filter((ub) => ub.isDisplayed)
+      .filter((ub: { isDisplayed: boolean }) => ub.isDisplayed)
       .slice(0, 3)
-      .map((ub) => ub.badge);
+      .map((ub: { badge: any }) => ub.badge);
 
     return NextResponse.json({
-      badges: userBadges.map((ub) => ({
+      badges: userBadges.map((ub: { badge: any; earnedAt: Date; isDisplayed: boolean }) => ({
         ...ub.badge,
         earnedAt: ub.earnedAt,
         isDisplayed: ub.isDisplayed,

@@ -184,7 +184,7 @@ export async function POST(request: Request, ctx: RouteContext) {
       );
     }
 
-    const result = await db.$transaction(async (tx) => {
+    const result = await db.$transaction(async (tx: any) => {
       let teamId: string | null = null;
 
       if (teamMode === "create") {

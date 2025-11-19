@@ -3,6 +3,8 @@ import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
 import { z } from "zod";
 import { broadcastSocialNotification } from "@/lib/realtime/signalr-triggers";
+import { sanitizePlainText } from "@/lib/security/sanitize";
+import { checkRateLimit, rateLimitKey, Limits } from "@/lib/security/rateLimit";
 
 const createCommentSchema = z.object({
   content: z.string().min(1).max(1000),
@@ -21,8 +23,21 @@ export async function POST(
     const userId = session.user.id as string;
     const postId = params.id;
 
+    // Rate limit: comments
+    {
+      const key = rateLimitKey(["post:comment", userId]);
+      const verdict = checkRateLimit(key, { windowMs: 10 * 60 * 1000, max: 60 });
+      if (!verdict.ok) {
+        return NextResponse.json(
+          { error: "Çok sık yorum denemesi. Lütfen daha sonra tekrar deneyin." },
+          { status: 429, headers: { "Retry-After": Math.ceil(verdict.retryAfterMs / 1000).toString() } }
+        );
+      }
+    }
+
     const body = await request.json();
     const data = createCommentSchema.parse(body);
+    const safeContent = sanitizePlainText(data.content, 1000);
 
     // Check if post exists
     const post = await db.post.findUnique({
@@ -40,7 +55,7 @@ export async function POST(
       data: {
         postId,
         userId,
-        content: data.content,
+        content: safeContent,
       },
       include: {
         user: {

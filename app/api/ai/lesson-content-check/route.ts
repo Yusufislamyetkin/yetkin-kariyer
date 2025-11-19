@@ -205,8 +205,8 @@ export async function GET(request: Request) {
 
     // Group by type
     const tests = quizzes
-      .filter((q) => q.type === "TEST")
-      .map((q) => ({
+      .filter((q: { type?: string | null }) => q.type === "TEST")
+      .map((q: { id: string; title: string; description: string | null; level: string | null }) => ({
         id: q.id,
         title: q.title,
         description: q.description,
@@ -215,8 +215,8 @@ export async function GET(request: Request) {
       }));
 
     const quizItems = quizzes
-      .filter((q) => q.type === "TEST" || !q.type) // General quizzes
-      .map((q) => ({
+      .filter((q: { type?: string | null }) => q.type === "TEST" || !q.type) // General quizzes
+      .map((q: { id: string; title: string; description: string | null; level: string | null }) => ({
         id: q.id,
         title: q.title,
         description: q.description,
@@ -225,8 +225,8 @@ export async function GET(request: Request) {
       }));
 
     const bugfixes = quizzes
-      .filter((q) => q.type === "BUG_FIX")
-      .map((q) => ({
+      .filter((q: { type?: string | null }) => q.type === "BUG_FIX")
+      .map((q: { id: string; title: string; description: string | null; level: string | null }) => ({
         id: q.id,
         title: q.title,
         description: q.description,
@@ -235,8 +235,8 @@ export async function GET(request: Request) {
       }));
 
     const livecodings = quizzes
-      .filter((q) => q.type === "LIVE_CODING")
-      .map((q) => ({
+      .filter((q: { type?: string | null }) => q.type === "LIVE_CODING")
+      .map((q: { id: string; title: string; description: string | null; level: string | null }) => ({
         id: q.id,
         title: q.title,
         description: q.description,

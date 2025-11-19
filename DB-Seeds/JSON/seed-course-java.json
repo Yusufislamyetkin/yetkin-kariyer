@@ -1,0 +1,2053 @@
+{
+  "course": {
+    "id": "course-java-roadmap",
+    "title": "Java Backend Roadmap",
+    "description": "Java ile modern backend geliştirme için kapsamlı öğrenme yolu.",
+    "category": "software-development",
+    "field": "backend",
+    "subCategory": "java",
+    "expertise": "backend",
+    "topic": "Java",
+    "topicContent": "Java Roadmap",
+    "difficulty": "intermediate",
+    "content": {
+      "overview": {
+        "description": "Java ile temel kavramlardan ileri seviye uygulamalara uzanan kapsamlı öğrenme yolu. Spring Framework, Spring Boot ve modern Java geliştirme tekniklerini öğrenin.",
+        "targetAudience": [
+          "Backend geliştiricileri",
+          "Full-stack geliştiriciler"
+        ],
+        "skills": [
+          "Java",
+          "Spring Framework",
+          "Spring Boot",
+          "Spring Data JPA",
+          "RESTful API",
+          "Testing"
+        ],
+        "estimatedDurationMinutes": 6750,
+        "outcomes": [
+          "Java programlama dilini sağlam temellerle öğrenmek",
+          "Spring Framework ve Spring Boot ile üretim seviyesinde uygulamalar geliştirmek",
+          "RESTful API, güvenlik ve test ekseninde kaliteyi artırmak"
+        ]
+      },
+      "prerequisites": [
+        "Temel programlama",
+        "OOP kavramları"
+      ],
+      "modules": [
+        {
+          "id": "java-module-01",
+          "title": "Java'ya Giriş",
+          "summary": "Java programlama diline giriş yaparak yazılım geliştirme temellerini öğrenin. JDK kurulumundan ilk uygulamanıza kadar tüm adımları kapsayan kapsamlı bir başlangıç modülü.",
+          "durationMinutes": 450,
+          "objectives": [
+            "Java ekosistemini anlamak",
+            "JDK kurulumu",
+            "İlk uygulama geliştirme"
+          ],
+          "lessons": [
+            {
+              "id": "java-lesson-01-01",
+              "title": "Java Nedir ve Neden Önemlidir?",
+              "type": "reading",
+              "durationMinutes": 20,
+              "slug": "java-introduction",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-01-02",
+              "title": "Java'nın Tarihçesi ve Gelişimi",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "java-history",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-01-03",
+              "title": "Java Ekosistemine Genel Bakış",
+              "type": "video",
+              "durationMinutes": 30,
+              "slug": "java-ecosystem",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-01-04",
+              "title": "JVM, JRE ve JDK Farkları",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "jvm-jre-jdk",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-01-05",
+              "title": "Java Platform Bağımsızlığı",
+              "type": "reading",
+              "durationMinutes": 20,
+              "slug": "platform-independence",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-01-06",
+              "title": "JDK Kurulumu ve Yapılandırma",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "jdk-installation",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-01-07",
+              "title": "IDE Seçimi: IntelliJ IDEA, Eclipse, VS Code",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "ide-selection",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-01-08",
+              "title": "Java Proje Yapısı ve Paketler",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "project-structure",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-01-09",
+              "title": "İlk Java Programı: Hello World",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "hello-world",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-01-10",
+              "title": "Java Derleme ve Çalıştırma Süreci",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "compile-run",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-01-11",
+              "title": "Maven ve Gradle Build Araçları",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "build-tools",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-01-12",
+              "title": "Java Versiyonları ve Özellikleri",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "java-versions",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-01-13",
+              "title": "Java Community Process (JCP)",
+              "type": "reading",
+              "durationMinutes": 20,
+              "slug": "jcp",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-01-14",
+              "title": "Java Kullanım Alanları",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "java-use-cases",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-01-15",
+              "title": "Modül Özeti ve Değerlendirme",
+              "type": "reading",
+              "durationMinutes": 20,
+              "slug": "module-summary",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "java-module-02",
+          "title": "Java Syntax ve Temelleri",
+          "summary": "Java programlama dilinin temel yapılarını, sözdizimini ve temel programlama kavramlarını öğrenin. Değişkenlerden döngülere, operatörlerden metodlara kadar geniş bir yelpazede Java temellerini kavrayın.",
+          "durationMinutes": 450,
+          "objectives": [
+            "Java syntax",
+            "Veri tipleri",
+            "Kontrol yapıları",
+            "Metodlar"
+          ],
+          "lessons": [
+            {
+              "id": "java-lesson-02-01",
+              "title": "Java Söz Dizimi (Syntax) Temelleri",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "syntax-basics",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-02-02",
+              "title": "Değişkenler ve Veri Tipleri",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "variables-types",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-02-03",
+              "title": "Primitive ve Reference Tipleri",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "primitive-reference",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-02-04",
+              "title": "Operatörler (Aritmetik, Mantıksal, Karşılaştırma)",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "operators",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-02-05",
+              "title": "Koşul Yapıları (if, else, switch)",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "conditionals",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-02-06",
+              "title": "Döngüler (for, while, do-while, enhanced for)",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "loops",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-02-07",
+              "title": "Diziler (Arrays)",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "arrays",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-02-08",
+              "title": "String İşlemleri ve Manipülasyonlar",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "strings",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-02-09",
+              "title": "Metodlar ve Parametreler",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "methods",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-02-10",
+              "title": "Method Overloading",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "method-overloading",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-02-11",
+              "title": "Varargs (Variable Arguments)",
+              "type": "coding",
+              "durationMinutes": 25,
+              "slug": "varargs",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-02-12",
+              "title": "Wrapper Classes",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "wrapper-classes",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-02-13",
+              "title": "Autoboxing ve Unboxing",
+              "type": "reading",
+              "durationMinutes": 20,
+              "slug": "autoboxing-unboxing",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-02-14",
+              "title": "Scope ve Lifetime",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "scope-lifetime",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-02-15",
+              "title": "Modül Özeti ve Uygulama",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "module-practice",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "java-module-03",
+          "title": "Nesne Yönelimli Programlama (OOP)",
+          "summary": "Sınıflar, nesneler, kalıtım, polimorfizm, encapsulation ve abstraction gibi OOP prensiplerini öğrenin. Java'da OOP kavramlarını uygulayarak profesyonel kod yazma becerileri kazanın.",
+          "durationMinutes": 450,
+          "objectives": [
+            "OOP prensiplerini anlamak",
+            "Sınıf ve nesne kavramlarını öğrenmek",
+            "Kalıtım ve polimorfizm kullanmak",
+            "Encapsulation ve abstraction uygulamak"
+          ],
+          "lessons": [
+            {
+              "id": "java-lesson-03-01",
+              "title": "OOP Prensiplerine Giriş",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "oop-intro",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-03-02",
+              "title": "Class ve Object Kavramları",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "class-object",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-03-03",
+              "title": "Constructor ve Constructor Overloading",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "constructors",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-03-04",
+              "title": "Access Modifiers (public, private, protected)",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "access-modifiers",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-03-05",
+              "title": "Encapsulation (Kapsülleme)",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "encapsulation",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-03-06",
+              "title": "Inheritance (Kalıtım)",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "inheritance",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-03-07",
+              "title": "Method Overriding",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "method-overriding",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-03-08",
+              "title": "Polymorphism (Çok Biçimlilik)",
+              "type": "video",
+              "durationMinutes": 35,
+              "slug": "polymorphism",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-03-09",
+              "title": "Abstract Class ve Abstract Methods",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "abstract-class",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-03-10",
+              "title": "Interface Kullanımı",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "interfaces",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-03-11",
+              "title": "Static Keyword ve Static Members",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "static-keyword",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-03-12",
+              "title": "Final Keyword",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "final-keyword",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-03-13",
+              "title": "Inner Classes ve Nested Classes",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "inner-classes",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-03-14",
+              "title": "Object Class ve toString, equals, hashCode",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "object-class",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-03-15",
+              "title": "OOP Best Practices",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "oop-best-practices",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "java-module-04",
+          "title": "Java Collections Framework",
+          "summary": "Java Collections Framework'ünü öğrenin. List, Set, Map gibi koleksiyon türlerini, iterator pattern'ini ve koleksiyon performans optimizasyonunu uygulayın.",
+          "durationMinutes": 450,
+          "objectives": [
+            "Collections Framework'ü anlamak",
+            "List, Set, Map kullanmak",
+            "Iterator pattern'i öğrenmek",
+            "Koleksiyon performansını optimize etmek"
+          ],
+          "lessons": [
+            {
+              "id": "java-lesson-04-01",
+              "title": "Collections Framework'e Giriş",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "collections-intro",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-04-02",
+              "title": "List Interface ve Implementasyonları",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "list-interface",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-04-03",
+              "title": "ArrayList ve LinkedList",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "arraylist-linkedlist",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-04-04",
+              "title": "Set Interface ve Implementasyonları",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "set-interface",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-04-05",
+              "title": "HashSet, LinkedHashSet, TreeSet",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "set-implementations",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-04-06",
+              "title": "Map Interface ve Implementasyonları",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "map-interface",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-04-07",
+              "title": "HashMap, LinkedHashMap, TreeMap",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "map-implementations",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-04-08",
+              "title": "Iterator ve ListIterator",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "iterator",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-04-09",
+              "title": "Enhanced For Loop (for-each)",
+              "type": "coding",
+              "durationMinutes": 25,
+              "slug": "enhanced-for",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-04-10",
+              "title": "Comparable ve Comparator",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "comparable-comparator",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-04-11",
+              "title": "Collections Utility Class",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "collections-utility",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-04-12",
+              "title": "Generics ile Type Safety",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "generics",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-04-13",
+              "title": "Wildcards (?, ? extends, ? super)",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "wildcards",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-04-14",
+              "title": "Collections Performans Analizi",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "collections-performance",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-04-15",
+              "title": "Collections Best Practices",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "collections-best-practices",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "java-module-05",
+              "title": "Exception Handling",
+          "summary": "Java'da exception handling mekanizmasını öğrenin. Try-catch blokları, checked ve unchecked exceptions, custom exception oluşturma ve exception best practices'i uygulayın.",
+          "durationMinutes": 450,
+          "objectives": [
+            "Exception handling kavramını anlamak",
+            "Try-catch-finally kullanmak",
+            "Checked ve unchecked exceptions öğrenmek",
+            "Custom exception oluşturmak"
+          ],
+          "lessons": [
+            {
+              "id": "java-lesson-05-01",
+              "title": "Exception Handling Temelleri",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "exception-basics",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-05-02",
+              "title": "Error vs Exception",
+              "type": "reading",
+              "durationMinutes": 20,
+              "slug": "error-vs-exception",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-05-03",
+              "title": "Try-Catch-Finally Blokları",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "try-catch-finally",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-05-04",
+              "title": "Checked ve Unchecked Exceptions",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "checked-unchecked",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-05-05",
+              "title": "Throws Keyword",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "throws-keyword",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-05-06",
+              "title": "Throw Keyword ve Exception Fırlatma",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "throw-keyword",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-05-07",
+              "title": "Multiple Catch Blocks",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "multiple-catch",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-05-08",
+              "title": "Exception Hierarchy",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "exception-hierarchy",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-05-09",
+              "title": "Custom Exception Oluşturma",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "custom-exceptions",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-05-10",
+              "title": "Try-with-Resources",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "try-with-resources",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-05-11",
+              "title": "AutoCloseable Interface",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "autocloseable",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-05-12",
+              "title": "Exception Chaining",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "exception-chaining",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-05-13",
+              "title": "Exception Logging",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "exception-logging",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-05-14",
+              "title": "Exception Handling Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "exception-best-practices",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-05-15",
+              "title": "Modül Özeti ve Uygulama",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "exception-practice",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "java-module-06",
+          "title": "Java I/O",
+          "summary": "Java I/O API'sini öğrenin. File işlemleri, streams, readers/writers, NIO ve I/O best practices'i uygulayın.",
+          "durationMinutes": 450,
+          "objectives": [
+            "File işlemlerini öğrenmek",
+            "Streams kullanmak",
+            "Readers ve Writers kullanmak",
+            "NIO API'sini anlamak"
+          ],
+          "lessons": [
+            {
+              "id": "java-lesson-06-01",
+              "title": "Java I/O Temelleri",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "io-basics",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-06-02",
+              "title": "File Class ve File İşlemleri",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "file-class",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-06-03",
+              "title": "Byte Streams (InputStream, OutputStream)",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "byte-streams",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-06-04",
+              "title": "Character Streams (Reader, Writer)",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "character-streams",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-06-05",
+              "title": "Buffered Streams",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "buffered-streams",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-06-06",
+              "title": "FileReader ve FileWriter",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "filereader-filewriter",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-06-07",
+              "title": "FileInputStream ve FileOutputStream",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "fileinputstream-fileoutputstream",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-06-08",
+              "title": "Scanner Class",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "scanner-class",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-06-09",
+              "title": "PrintWriter ve PrintStream",
+              "type": "coding",
+              "durationMinutes": 25,
+              "slug": "printwriter-printstream",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-06-10",
+              "title": "Object Serialization",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "serialization",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-06-11",
+              "title": "NIO (New I/O) API",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "nio-api",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-06-12",
+              "title": "Path, Paths ve Files",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "path-paths-files",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-06-13",
+              "title": "Directory İşlemleri",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "directory-operations",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-06-14",
+              "title": "I/O Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "io-best-practices",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-06-15",
+              "title": "Modül Özeti ve Uygulama",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "io-practice",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "java-module-07",
+          "title": "Multithreading",
+          "summary": "Java'da multithreading ve concurrent programming'i öğrenin. Thread oluşturma, synchronization, thread pools ve concurrent collections kullanımını uygulayın.",
+          "durationMinutes": 450,
+          "objectives": [
+            "Threading kavramını anlamak",
+            "Thread oluşturma ve yönetimi",
+            "Synchronization öğrenmek",
+            "Concurrent programming uygulamak"
+          ],
+          "lessons": [
+            {
+              "id": "java-lesson-07-01",
+              "title": "Multithreading Temelleri",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "multithreading-basics",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-07-02",
+              "title": "Thread Class ile Thread Oluşturma",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "thread-class",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-07-03",
+              "title": "Runnable Interface",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "runnable-interface",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-07-04",
+              "title": "Thread Lifecycle",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "thread-lifecycle",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-07-05",
+              "title": "Thread Synchronization",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "thread-synchronization",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-07-06",
+              "title": "Synchronized Keyword",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "synchronized-keyword",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-07-07",
+              "title": "Wait, Notify ve NotifyAll",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "wait-notify",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-07-08",
+              "title": "Deadlock ve Önleme",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "deadlock",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-07-09",
+              "title": "Thread Pools (ExecutorService)",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "thread-pools",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-07-10",
+              "title": "Callable ve Future",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "callable-future",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-07-11",
+              "title": "Concurrent Collections",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "concurrent-collections",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-07-12",
+              "title": "Atomic Classes",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "atomic-classes",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-07-13",
+              "title": "Lock Interface ve ReentrantLock",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "lock-interface",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-07-14",
+              "title": "Thread Safety Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "thread-safety-practices",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-07-15",
+              "title": "Modül Özeti ve Uygulama",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "multithreading-practice",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "java-module-08",
+          "title": "Java Streams API",
+          "summary": "Java 8 Streams API'sini öğrenin. Functional programming, lambda expressions, method references ve stream operations ile modern Java programlama tekniklerini uygulayın.",
+          "durationMinutes": 450,
+          "objectives": [
+            "Streams API'yi anlamak",
+            "Lambda expressions kullanmak",
+            "Functional programming öğrenmek",
+            "Stream operations uygulamak"
+          ],
+          "lessons": [
+            {
+              "id": "java-lesson-08-01",
+              "title": "Java 8 Streams API'ye Giriş",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "streams-intro",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-08-02",
+              "title": "Lambda Expressions",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "lambda-expressions",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-08-03",
+              "title": "Functional Interfaces",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "functional-interfaces",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-08-04",
+              "title": "Method References",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "method-references",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-08-05",
+              "title": "Stream Oluşturma",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "stream-creation",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-08-06",
+              "title": "Intermediate Operations (filter, map, sorted)",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "intermediate-operations",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-08-07",
+              "title": "Terminal Operations (collect, forEach, reduce)",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "terminal-operations",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-08-08",
+              "title": "Optional Class",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "optional-class",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-08-09",
+              "title": "Stream Collectors",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "stream-collectors",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-08-10",
+              "title": "Parallel Streams",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "parallel-streams",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-08-11",
+              "title": "Stream API ile Collections",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "streams-collections",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-08-12",
+              "title": "Date and Time API (java.time)",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "datetime-api",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-08-13",
+              "title": "Stream Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "streams-best-practices",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-08-14",
+              "title": "Functional Programming Patterns",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "functional-patterns",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-08-15",
+              "title": "Modül Özeti ve Uygulama",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "streams-practice",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "java-module-09",
+          "title": "Spring Framework",
+          "summary": "Spring Framework'ün temellerini öğrenin. Dependency Injection, IoC Container, Spring MVC ve Spring Core kavramlarını uygulayın.",
+          "durationMinutes": 450,
+          "objectives": [
+            "Spring Framework'ü anlamak",
+            "Dependency Injection öğrenmek",
+            "IoC Container kullanmak",
+            "Spring MVC ile web uygulamaları geliştirmek"
+          ],
+          "lessons": [
+            {
+              "id": "java-lesson-09-01",
+              "title": "Spring Framework'e Giriş",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "spring-intro",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-09-02",
+              "title": "Spring Framework Tarihçesi ve Ekosistem",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "spring-history",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-09-03",
+              "title": "Inversion of Control (IoC)",
+              "type": "video",
+              "durationMinutes": 30,
+              "slug": "ioc",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-09-04",
+              "title": "Dependency Injection (DI)",
+              "type": "video",
+              "durationMinutes": 35,
+              "slug": "dependency-injection",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-09-05",
+              "title": "Spring IoC Container",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "ioc-container",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-09-06",
+              "title": "Bean Definition ve Configuration",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "bean-definition",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-09-07",
+              "title": "XML Configuration",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "xml-config",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-09-08",
+              "title": "Annotation-based Configuration",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "annotation-config",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-09-09",
+              "title": "Java-based Configuration",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "java-config",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-09-10",
+              "title": "Bean Scopes (Singleton, Prototype, etc.)",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "bean-scopes",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-09-11",
+              "title": "Spring MVC Temelleri",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "spring-mvc",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-09-12",
+              "title": "Controller ve Request Mapping",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "controller-mapping",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-09-13",
+              "title": "View Resolver ve Template Engines",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "view-resolver",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-09-14",
+              "title": "Spring AOP (Aspect-Oriented Programming)",
+              "type": "video",
+              "durationMinutes": 35,
+              "slug": "spring-aop",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-09-15",
+              "title": "Spring Framework Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "spring-best-practices",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "java-module-10",
+          "title": "Spring Boot",
+          "summary": "Spring Boot ile hızlı ve kolay uygulama geliştirmeyi öğrenin. Auto-configuration, starter dependencies, embedded servers ve Spring Boot best practices'i uygulayın.",
+          "durationMinutes": 450,
+          "objectives": [
+            "Spring Boot'u anlamak",
+            "Auto-configuration öğrenmek",
+            "Starter dependencies kullanmak",
+            "Production-ready uygulamalar geliştirmek"
+          ],
+          "lessons": [
+            {
+              "id": "java-lesson-10-01",
+              "title": "Spring Boot'a Giriş",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "spring-boot-intro",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-10-02",
+              "title": "Spring Boot Avantajları",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "spring-boot-advantages",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-10-03",
+              "title": "Spring Boot Projesi Oluşturma",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "spring-boot-project",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-10-04",
+              "title": "Spring Initializr Kullanımı",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "spring-initializr",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-10-05",
+              "title": "Auto-configuration",
+              "type": "video",
+              "durationMinutes": 35,
+              "slug": "auto-configuration",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-10-06",
+              "title": "Starter Dependencies",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "starter-dependencies",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-10-07",
+              "title": "Application Properties Yapılandırması",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "application-properties",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-10-08",
+              "title": "Profile Yönetimi",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "profile-management",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-10-09",
+              "title": "Embedded Servers (Tomcat, Jetty)",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "embedded-servers",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-10-10",
+              "title": "Spring Boot Actuator",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "spring-boot-actuator",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-10-11",
+              "title": "Health Checks ve Metrics",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "health-checks",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-10-12",
+              "title": "Logging Yapılandırması",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "logging-config",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-10-13",
+              "title": "Externalized Configuration",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "externalized-config",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-10-14",
+              "title": "Spring Boot DevTools",
+              "type": "coding",
+              "durationMinutes": 25,
+              "slug": "devtools",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-10-15",
+              "title": "Spring Boot Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "spring-boot-best-practices",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "java-module-11",
+          "title": "Spring Data JPA",
+          "summary": "Spring Data JPA ile veritabanı işlemlerini öğrenin. Entity relationships, repositories, query methods ve transaction management'i uygulayın.",
+          "durationMinutes": 450,
+          "objectives": [
+            "Spring Data JPA'yı anlamak",
+            "Entity relationships öğrenmek",
+            "Repository pattern kullanmak",
+            "Transaction management uygulamak"
+          ],
+          "lessons": [
+            {
+              "id": "java-lesson-11-01",
+              "title": "Spring Data JPA'ya Giriş",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "spring-data-jpa-intro",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-11-02",
+              "title": "JPA ve Hibernate Temelleri",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "jpa-hibernate",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-11-03",
+              "title": "Entity Class Oluşturma",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "entity-class",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-11-04",
+              "title": "JPA Annotations (@Entity, @Table, @Id)",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "jpa-annotations",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-11-05",
+              "title": "Repository Interface",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "repository-interface",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-11-06",
+              "title": "CRUD Operations",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "crud-operations",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-11-07",
+              "title": "Query Methods",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "query-methods",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-11-08",
+              "title": "@Query Annotation",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "query-annotation",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-11-09",
+              "title": "Entity Relationships (One-to-One, One-to-Many, Many-to-Many)",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "entity-relationships",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-11-10",
+              "title": "Cascade Types ve Fetch Types",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "cascade-fetch",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-11-11",
+              "title": "Pagination ve Sorting",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "pagination-sorting",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-11-12",
+              "title": "Transaction Management",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "transaction-management",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-11-13",
+              "title": "Database Migrations (Flyway, Liquibase)",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "database-migrations",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-11-14",
+              "title": "Spring Data JPA Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "jpa-best-practices",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-11-15",
+              "title": "Modül Özeti ve Uygulama",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "jpa-practice",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "java-module-12",
+          "title": "RESTful API Development",
+          "summary": "Spring Boot ile RESTful API geliştirmeyi öğrenin. REST principles, controller design, request/response handling, API documentation ve versioning'i uygulayın.",
+          "durationMinutes": 450,
+          "objectives": [
+            "RESTful API tasarım prensiplerini öğrenmek",
+            "Spring Boot ile API geliştirmek",
+            "API documentation oluşturmak",
+            "API versioning uygulamak"
+          ],
+          "lessons": [
+            {
+              "id": "java-lesson-12-01",
+              "title": "RESTful API Nedir?",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "restful-intro",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-12-02",
+              "title": "REST Principles ve Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "rest-principles",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-12-03",
+              "title": "Spring Boot REST Controller",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "rest-controller",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-12-04",
+              "title": "HTTP Methods (GET, POST, PUT, DELETE, PATCH)",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "http-methods",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-12-05",
+              "title": "Request Mapping ve Path Variables",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "request-mapping",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-12-06",
+              "title": "Request Body ve Response Body",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "request-response-body",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-12-07",
+              "title": "DTO (Data Transfer Object) Pattern",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "dto-pattern",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-12-08",
+              "title": "Response Entity ve Status Codes",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "response-entity",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-12-09",
+              "title": "Exception Handling in REST APIs",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "rest-exception-handling",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-12-10",
+              "title": "Validation (@Valid, @NotNull, etc.)",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "validation",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-12-11",
+              "title": "API Documentation (Swagger/OpenAPI)",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "api-documentation",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-12-12",
+              "title": "API Versioning",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "api-versioning",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-12-13",
+              "title": "CORS Configuration",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "cors-config",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-12-14",
+              "title": "RESTful API Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "rest-best-practices",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-12-15",
+              "title": "Modül Özeti ve Uygulama",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "rest-practice",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "java-module-13",
+          "title": "Security & Authentication",
+          "summary": "Spring Security ile güvenlik ve authentication mekanizmalarını öğrenin. JWT tokens, OAuth2, role-based authorization ve security best practices'i uygulayın.",
+          "durationMinutes": 450,
+          "objectives": [
+            "Spring Security'yi anlamak",
+            "JWT authentication öğrenmek",
+            "OAuth2 kullanmak",
+            "Role-based authorization uygulamak"
+          ],
+          "lessons": [
+            {
+              "id": "java-lesson-13-01",
+              "title": "Spring Security'ye Giriş",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "spring-security-intro",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-13-02",
+              "title": "Authentication vs Authorization",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "auth-vs-authorization",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-13-03",
+              "title": "Spring Security Configuration",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "security-config",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-13-04",
+              "title": "User Authentication",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "user-authentication",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-13-05",
+              "title": "Password Encoding",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "password-encoding",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-13-06",
+              "title": "JWT (JSON Web Tokens)",
+              "type": "video",
+              "durationMinutes": 35,
+              "slug": "jwt",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-13-07",
+              "title": "JWT Implementation",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "jwt-implementation",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-13-08",
+              "title": "Role-based Authorization",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "role-based-auth",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-13-09",
+              "title": "Method-level Security",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "method-security",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-13-10",
+              "title": "OAuth2 Temelleri",
+              "type": "video",
+              "durationMinutes": 35,
+              "slug": "oauth2-basics",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-13-11",
+              "title": "OAuth2 Implementation",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "oauth2-implementation",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-13-12",
+              "title": "Token Refresh Mechanism",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "token-refresh",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-13-13",
+              "title": "Security Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "security-best-practices",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-13-14",
+              "title": "Common Security Vulnerabilities",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "security-vulnerabilities",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-13-15",
+              "title": "Modül Özeti ve Uygulama",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "security-practice",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "java-module-14",
+          "title": "Testing",
+          "summary": "Java ve Spring Boot uygulamalarında test yazmayı öğrenin. Unit testing, integration testing, mocking, test containers ve test best practices'i uygulayın.",
+          "durationMinutes": 450,
+          "objectives": [
+            "Test yazma prensiplerini öğrenmek",
+            "Unit test yazmak",
+            "Integration test yazmak",
+            "Mocking ve test araçlarını kullanmak"
+          ],
+          "lessons": [
+            {
+              "id": "java-lesson-14-01",
+              "title": "Testing Temelleri",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "testing-basics",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-14-02",
+              "title": "JUnit Framework",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "junit-framework",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-14-03",
+              "title": "Test Annotations (@Test, @Before, @After)",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "test-annotations",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-14-04",
+              "title": "Assertions ve Test Assertions",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "assertions",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-14-05",
+              "title": "Mockito Framework",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "mockito-framework",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-14-06",
+              "title": "Mocking ve Stubbing",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "mocking-stubbing",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-14-07",
+              "title": "Spring Boot Test",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "spring-boot-test",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-14-08",
+              "title": "Integration Testing",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "integration-testing",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-14-09",
+              "title": "Test Containers",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "test-containers",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-14-10",
+              "title": "REST API Testing",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "rest-api-testing",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-14-11",
+              "title": "Database Testing",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "database-testing",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-14-12",
+              "title": "Test Coverage",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "test-coverage",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-14-13",
+              "title": "Test-Driven Development (TDD)",
+              "type": "video",
+              "durationMinutes": 35,
+              "slug": "tdd",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-14-14",
+              "title": "Testing Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "testing-best-practices",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-14-15",
+              "title": "Modül Özeti ve Uygulama",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "testing-practice",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "java-module-15",
+          "title": "Deployment & Best Practices",
+          "summary": "Java uygulamalarını production'a deploy etmeyi öğrenin. Docker containerization, CI/CD pipelines, cloud deployment ve production best practices'i uygulayın.",
+          "durationMinutes": 450,
+          "objectives": [
+            "Uygulama dağıtım stratejilerini öğrenmek",
+            "Docker containerization yapmak",
+            "CI/CD pipeline'ları kurmak",
+            "Cloud deployment yapmak"
+          ],
+          "lessons": [
+            {
+              "id": "java-lesson-15-01",
+              "title": "Deployment Stratejileri",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "deployment-strategies",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-15-02",
+              "title": "JAR ve WAR Dosyaları",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "jar-war",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-15-03",
+              "title": "Docker Temelleri",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "docker-basics",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-15-04",
+              "title": "Dockerfile Oluşturma",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "dockerfile",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-15-05",
+              "title": "Docker Compose",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "docker-compose",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-15-06",
+              "title": "CI/CD Concepts",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "cicd-concepts",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-15-07",
+              "title": "GitHub Actions",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "github-actions",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-15-08",
+              "title": "Jenkins Pipeline",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "jenkins-pipeline",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-15-09",
+              "title": "Cloud Deployment (AWS, Azure, GCP)",
+              "type": "video",
+              "durationMinutes": 35,
+              "slug": "cloud-deployment",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-15-10",
+              "title": "Kubernetes Temelleri",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "kubernetes-basics",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-15-11",
+              "title": "Monitoring ve Logging",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "monitoring-logging",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-15-12",
+              "title": "Performance Tuning",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "performance-tuning",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-15-13",
+              "title": "Security in Production",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "production-security",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-15-14",
+              "title": "Production Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "production-best-practices",
+              "resources": []
+            },
+            {
+              "id": "java-lesson-15-15",
+              "title": "Capstone Project",
+              "type": "coding",
+              "durationMinutes": 45,
+              "slug": "capstone-project",
+              "resources": []
+            }
+          ]
+        }
+      ]
+    },
+    "estimatedDuration": 6750
+  }
+}

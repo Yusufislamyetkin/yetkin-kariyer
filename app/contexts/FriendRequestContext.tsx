@@ -98,11 +98,17 @@ export function FriendRequestProvider({ children }: { children: React.ReactNode 
         }
       }
       
+      // Count'u güncelle ve sadece anlamlı bir değişiklik olduğunda lastUpdatedAt'i güncelle
+      const hasCountChanged = incomingPendingCount !== previousCountRef.current;
+
       setFriendRequestCount(incomingPendingCount);
       previousCountRef.current = incomingPendingCount;
-      const timestamp = Date.now();
-      lastUpdatedAtRef.current = timestamp;
-      setLastUpdatedAt(timestamp);
+
+      if (hasCountChanged) {
+        const timestamp = Date.now();
+        lastUpdatedAtRef.current = timestamp;
+        setLastUpdatedAt(timestamp);
+      }
     } catch (error) {
       console.error("[FRIEND_REQUEST_FETCH]", error);
       // Error durumunda mevcut count'u koru, sıfırlama

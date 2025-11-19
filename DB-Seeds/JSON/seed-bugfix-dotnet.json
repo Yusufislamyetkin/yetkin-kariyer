@@ -1,0 +1,1904 @@
+{
+  "quizzes": [
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #1",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 1",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #2",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 2",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #3",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 3",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #4",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 4",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #5",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 5",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #6",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 6",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #7",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 7",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #8",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 8",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #9",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 9",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #10",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 10",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #11",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 11",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #12",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 12",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #13",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 13",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #14",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 14",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #15",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 15",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #16",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 16",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #17",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 17",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #18",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 18",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #19",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 19",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #20",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 20",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #21",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 21",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #22",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 22",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #23",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 23",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #24",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 24",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #25",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 25",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #26",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 26",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #27",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 27",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #28",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 28",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #29",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 29",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #30",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 30",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #31",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 31",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #32",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 32",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #33",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 33",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #34",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 34",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #35",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 35",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #36",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 36",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #37",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 37",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #38",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 38",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #39",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 39",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #40",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 40",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #41",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 41",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #42",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 42",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #43",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 43",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #44",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 44",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #45",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 45",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #46",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 46",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #47",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 47",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #48",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 48",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #49",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 49",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #50",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 50",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #51",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 51",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #52",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 52",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #53",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 53",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #54",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 54",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #55",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 55",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #56",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 56",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #57",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 57",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #58",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 58",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #59",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 59",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #60",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 60",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #61",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 61",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #62",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 62",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #63",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 63",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #64",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 64",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #65",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 65",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #66",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 66",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #67",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 67",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #68",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 68",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #69",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 69",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #70",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 70",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #71",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 71",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #72",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 72",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #73",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 73",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #74",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 74",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #75",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 75",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #76",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 76",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #77",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 77",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #78",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 78",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #79",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 79",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #80",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 80",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #81",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 81",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #82",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 82",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #83",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 83",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #84",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 84",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #85",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 85",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #86",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 86",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #87",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 87",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #88",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 88",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #89",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 89",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #90",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 90",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #91",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 91",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #92",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 92",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #93",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 93",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #94",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 94",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #95",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 95",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #96",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 96",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #97",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 97",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #98",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 98",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #99",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 99",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    },
+    {
+      "id": "quiz-dotnet-bug-%03s",
+      "courseId": "course-dotnet-roadmap",
+      "title": ".NET Bug Fix #100",
+      "description": "DI ve middleware hatalarını düzelt.",
+      "type": "BUG_FIX",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "bf-dotnet-%03s",
+          "question": "Question 100",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": ""
+        }
+      ],
+      "passingScore": 70
+    }
+  ]
+}

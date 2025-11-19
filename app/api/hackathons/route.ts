@@ -128,12 +128,12 @@ export async function GET(request: Request) {
     const phaseSyncPromises: Promise<void>[] = [];
 
     const items = hackathons
-      .map((hackathon) => {
-        const lifecycle = computeHackathonPhase(hackathon);
+      .map((hackathon: any) => {
+        const lifecycle = computeHackathonPhase(hackathon as any);
 
         if (hackathon.phase !== lifecycle.derivedPhase) {
           phaseSyncPromises.push(
-            synchronizeHackathonPhase(hackathon.id, hackathon.phase, lifecycle.derivedPhase)
+            synchronizeHackathonPhase(hackathon.id, hackathon.phase as any, lifecycle.derivedPhase as any)
           );
         }
 
@@ -142,7 +142,7 @@ export async function GET(request: Request) {
           lifecycle,
         };
       })
-      .filter((item) =>
+      .filter((item: { lifecycle: { derivedPhase: string } }) =>
         isValidPhase(phaseFilter) ? item.lifecycle.derivedPhase === phaseFilter : true
       );
 

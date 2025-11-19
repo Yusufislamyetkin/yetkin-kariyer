@@ -342,6 +342,15 @@ body {
   }
 }
 
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
 @keyframes typing {
   from {
     width: 0;
@@ -373,6 +382,10 @@ body {
   
   .animate-slide-up {
     animation: slideUp 0.3s ease-out;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s ease-in-out infinite;
   }
 
   /* Desktop-only animations */
@@ -782,5 +795,292 @@ body {
     rgba(0, 0, 0, 0.4) 0%,
     rgba(0, 0, 0, 0.2) 100%
   );
+}
+
+/* Tech-Style Card Base */
+.tech-card {
+  position: relative;
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark .tech-card {
+  background: rgba(0, 0, 0, 0.3);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+/* Animated Neon Border */
+.neon-border-animated {
+  position: relative;
+  border-radius: 1.5rem;
+  padding: 2px;
+  background: linear-gradient(
+    90deg,
+    #3b82f6,
+    #8b5cf6,
+    #ec4899,
+    #8b5cf6,
+    #3b82f6
+  );
+  background-size: 200% 100%;
+  animation: neon-border-flow 3s linear infinite;
+}
+
+@keyframes neon-border-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.neon-border-animated::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  z-index: -1;
+}
+
+.dark .neon-border-animated::before {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* Enhanced Glassmorphism for Tech */
+.glass-tech {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.dark .glass-tech {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* Tech-Style Particle Background */
+.particle-bg-tech {
+  position: relative;
+  overflow: hidden;
+}
+
+.particle-bg-tech::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 60% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dark .particle-bg-tech::before {
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.25) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.25) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(236, 72, 153, 0.25) 0%, transparent 50%),
+    radial-gradient(circle at 60% 20%, rgba(59, 130, 246, 0.2) 0%, transparent 50%);
+  opacity: 0.8;
+}
+
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  .particle-bg-tech::before {
+    animation: particle-float 20s ease-in-out infinite;
+  }
+}
+
+/* Neon Text Glow Effect */
+.text-neon {
+  text-shadow: 
+    0 0 5px currentColor,
+    0 0 10px currentColor,
+    0 0 15px currentColor,
+    0 0 20px currentColor;
+}
+
+.text-neon-blue {
+  color: #3b82f6;
+  text-shadow: 
+    0 0 5px #3b82f6,
+    0 0 10px #3b82f6,
+    0 0 15px #3b82f6,
+    0 0 20px #3b82f6;
+}
+
+.text-neon-purple {
+  color: #a855f7;
+  text-shadow: 
+    0 0 5px #a855f7,
+    0 0 10px #a855f7,
+    0 0 15px #a855f7,
+    0 0 20px #a855f7;
+}
+
+.text-neon-pink {
+  color: #ec4899;
+  text-shadow: 
+    0 0 5px #ec4899,
+    0 0 10px #ec4899,
+    0 0 15px #ec4899,
+    0 0 20px #ec4899;
+}
+
+/* 3D Transform on Hover */
+.hover-3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  .hover-3d:hover {
+    transform: translateY(-8px) rotateX(2deg) rotateY(-2deg) scale(1.02);
+  }
+}
+
+/* Tech Card Glow Effect */
+.tech-card-glow {
+  position: relative;
+}
+
+.tech-card-glow::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 1.5rem;
+  background: linear-gradient(
+    135deg,
+    rgba(96, 165, 250, 0.2),
+    rgba(129, 140, 248, 0.2),
+    rgba(167, 139, 250, 0.2)
+  );
+  filter: blur(12px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  .tech-card-glow:hover::before {
+    opacity: 0.15;
+  }
+}
+
+.dark .tech-card-glow::before {
+  opacity: 0.1;
+}
+
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  .dark .tech-card-glow:hover::before {
+    opacity: 0.2;
+  }
+}
+
+/* Shimmer Effect for Card Edges */
+.card-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  .card-shimmer:hover::after {
+    left: 100%;
+  }
+}
+
+/* Tech Badge Style */
+.tech-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.1),
+    rgba(139, 92, 246, 0.1)
+  );
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  backdrop-filter: blur(10px);
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.dark .tech-badge {
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.2),
+    rgba(139, 92, 246, 0.2)
+  );
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+/* Animated Gradient Mesh Background */
+.gradient-mesh-tech {
+  position: relative;
+  background: 
+    radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.15) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(59, 130, 246, 0.15) 0px, transparent 50%);
+}
+
+.dark .gradient-mesh-tech {
+  background: 
+    radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.25) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.25) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.25) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(59, 130, 246, 0.25) 0px, transparent 50%);
+}
+
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  .gradient-mesh-tech {
+    animation: gradient-shift 15s ease infinite;
+  }
 }
 

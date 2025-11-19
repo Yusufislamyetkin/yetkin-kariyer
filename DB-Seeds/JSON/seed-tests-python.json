@@ -1,0 +1,4729 @@
+{
+  "quizzes": [
+    {
+      "id": "quiz-python-mod01-test-01",
+      "courseId": "course-python-apis",
+      "title": "1. Python Tanıyalım Testleri - Test 1",
+      "description": "Python ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod01-01",
+          "question": "Python nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "Python temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "python-basics"
+    },
+    {
+      "id": "quiz-python-mod01-test-02",
+      "courseId": "course-python-apis",
+      "title": "1. Python Tanıyalım Testleri - Test 2",
+      "description": "Python ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod01-02",
+          "question": "Python'ın temel avantajları nelerdir?",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "Python temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "python-basics"
+    },
+    {
+      "id": "quiz-python-mod01-test-03",
+      "courseId": "course-python-apis",
+      "title": "1. Python Tanıyalım Testleri - Test 3",
+      "description": "Python ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod01-03",
+          "question": "Virtual environments nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "Python temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "python-basics"
+    },
+    {
+      "id": "quiz-python-mod01-test-04",
+      "courseId": "course-python-apis",
+      "title": "1. Python Tanıyalım Testleri - Test 4",
+      "description": "Python ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod01-04",
+          "question": "pip nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "Python temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "python-basics"
+    },
+    {
+      "id": "quiz-python-mod01-test-05",
+      "courseId": "course-python-apis",
+      "title": "1. Python Tanıyalım Testleri - Test 5",
+      "description": "Python ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod01-05",
+          "question": "Python vs diğer diller farkı nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "Python temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "python-basics"
+    },
+    {
+      "id": "quiz-python-mod01-test-06",
+      "courseId": "course-python-apis",
+      "title": "1. Python Tanıyalım Testleri - Test 6",
+      "description": "Python ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod01-06",
+          "question": "Python versiyonları nelerdir?",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "Python temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "python-basics"
+    },
+    {
+      "id": "quiz-python-mod01-test-07",
+      "courseId": "course-python-apis",
+      "title": "1. Python Tanıyalım Testleri - Test 7",
+      "description": "Python ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod01-07",
+          "question": "PEP 8 nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "Python temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "python-basics"
+    },
+    {
+      "id": "quiz-python-mod01-test-08",
+      "courseId": "course-python-apis",
+      "title": "1. Python Tanıyalım Testleri - Test 8",
+      "description": "Python ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod01-08",
+          "question": "Python IDE'leri nelerdir?",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "Python temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "python-basics"
+    },
+    {
+      "id": "quiz-python-mod01-test-09",
+      "courseId": "course-python-apis",
+      "title": "1. Python Tanıyalım Testleri - Test 9",
+      "description": "Python ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod01-09",
+          "question": "Python community nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "Python temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "python-basics"
+    },
+    {
+      "id": "quiz-python-mod01-test-10",
+      "courseId": "course-python-apis",
+      "title": "1. Python Tanıyalım Testleri - Test 10",
+      "description": "Python ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod01-10",
+          "question": "Python architecture nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "Python temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "python-basics"
+    },
+    {
+      "id": "quiz-python-mod01-test-11",
+      "courseId": "course-python-apis",
+      "title": "1. Python Tanıyalım Testleri - Test 11",
+      "description": "Python ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod01-11",
+          "question": "Python temel kavramları hakkında soru 11",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "Python temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "python-basics"
+    },
+    {
+      "id": "quiz-python-mod01-test-12",
+      "courseId": "course-python-apis",
+      "title": "1. Python Tanıyalım Testleri - Test 12",
+      "description": "Python ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod01-12",
+          "question": "Python temel kavramları hakkında soru 12",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "Python temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "python-basics"
+    },
+    {
+      "id": "quiz-python-mod01-test-13",
+      "courseId": "course-python-apis",
+      "title": "1. Python Tanıyalım Testleri - Test 13",
+      "description": "Python ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod01-13",
+          "question": "Python temel kavramları hakkında soru 13",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "Python temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "python-basics"
+    },
+    {
+      "id": "quiz-python-mod01-test-14",
+      "courseId": "course-python-apis",
+      "title": "1. Python Tanıyalım Testleri - Test 14",
+      "description": "Python ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod01-14",
+          "question": "Python temel kavramları hakkında soru 14",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "Python temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "python-basics"
+    },
+    {
+      "id": "quiz-python-mod01-test-15",
+      "courseId": "course-python-apis",
+      "title": "1. Python Tanıyalım Testleri - Test 15",
+      "description": "Python ekosistemi ve temel kavramlar hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod01-15",
+          "question": "Python temel kavramları hakkında soru 15",
+          "options": [],
+          "answer": 0,
+          "category": "basics",
+          "explanation": "Python temel kavramları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "python-basics"
+    },
+    {
+      "id": "quiz-python-mod02-test-01",
+      "courseId": "course-python-apis",
+      "title": "2. Python Temelleri Testleri - Test 1",
+      "description": "Python syntax ve temel programlama hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod02-01",
+          "question": "Python syntax nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "basics-detailed",
+          "explanation": "Python temelleri hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "python-fundamentals"
+    },
+    {
+      "id": "quiz-python-mod02-test-02",
+      "courseId": "course-python-apis",
+      "title": "2. Python Temelleri Testleri - Test 2",
+      "description": "Python syntax ve temel programlama hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod02-02",
+          "question": "Variables nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "basics-detailed",
+          "explanation": "Python temelleri hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "python-fundamentals"
+    },
+    {
+      "id": "quiz-python-mod02-test-03",
+      "courseId": "course-python-apis",
+      "title": "2. Python Temelleri Testleri - Test 3",
+      "description": "Python syntax ve temel programlama hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod02-03",
+          "question": "Data types nelerdir?",
+          "options": [],
+          "answer": 0,
+          "category": "basics-detailed",
+          "explanation": "Python temelleri hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "python-fundamentals"
+    },
+    {
+      "id": "quiz-python-mod02-test-04",
+      "courseId": "course-python-apis",
+      "title": "2. Python Temelleri Testleri - Test 4",
+      "description": "Python syntax ve temel programlama hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod02-04",
+          "question": "Operators nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "basics-detailed",
+          "explanation": "Python temelleri hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "python-fundamentals"
+    },
+    {
+      "id": "quiz-python-mod02-test-05",
+      "courseId": "course-python-apis",
+      "title": "2. Python Temelleri Testleri - Test 5",
+      "description": "Python syntax ve temel programlama hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod02-05",
+          "question": "Conditional statements nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "basics-detailed",
+          "explanation": "Python temelleri hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "python-fundamentals"
+    },
+    {
+      "id": "quiz-python-mod02-test-06",
+      "courseId": "course-python-apis",
+      "title": "2. Python Temelleri Testleri - Test 6",
+      "description": "Python syntax ve temel programlama hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod02-06",
+          "question": "Loops nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "basics-detailed",
+          "explanation": "Python temelleri hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "python-fundamentals"
+    },
+    {
+      "id": "quiz-python-mod02-test-07",
+      "courseId": "course-python-apis",
+      "title": "2. Python Temelleri Testleri - Test 7",
+      "description": "Python syntax ve temel programlama hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod02-07",
+          "question": "List comprehensions nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "basics-detailed",
+          "explanation": "Python temelleri hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "python-fundamentals"
+    },
+    {
+      "id": "quiz-python-mod02-test-08",
+      "courseId": "course-python-apis",
+      "title": "2. Python Temelleri Testleri - Test 8",
+      "description": "Python syntax ve temel programlama hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod02-08",
+          "question": "Type conversion nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "basics-detailed",
+          "explanation": "Python temelleri hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "python-fundamentals"
+    },
+    {
+      "id": "quiz-python-mod02-test-09",
+      "courseId": "course-python-apis",
+      "title": "2. Python Temelleri Testleri - Test 9",
+      "description": "Python syntax ve temel programlama hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod02-09",
+          "question": "Input/output nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "basics-detailed",
+          "explanation": "Python temelleri hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "python-fundamentals"
+    },
+    {
+      "id": "quiz-python-mod02-test-10",
+      "courseId": "course-python-apis",
+      "title": "2. Python Temelleri Testleri - Test 10",
+      "description": "Python syntax ve temel programlama hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod02-10",
+          "question": "Python temelleri best practices nelerdir?",
+          "options": [],
+          "answer": 0,
+          "category": "basics-detailed",
+          "explanation": "Python temelleri hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "python-fundamentals"
+    },
+    {
+      "id": "quiz-python-mod02-test-11",
+      "courseId": "course-python-apis",
+      "title": "2. Python Temelleri Testleri - Test 11",
+      "description": "Python syntax ve temel programlama hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod02-11",
+          "question": "Python temelleri hakkında soru 11",
+          "options": [],
+          "answer": 0,
+          "category": "basics-detailed",
+          "explanation": "Python temelleri hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "python-fundamentals"
+    },
+    {
+      "id": "quiz-python-mod02-test-12",
+      "courseId": "course-python-apis",
+      "title": "2. Python Temelleri Testleri - Test 12",
+      "description": "Python syntax ve temel programlama hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod02-12",
+          "question": "Python temelleri hakkında soru 12",
+          "options": [],
+          "answer": 0,
+          "category": "basics-detailed",
+          "explanation": "Python temelleri hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "python-fundamentals"
+    },
+    {
+      "id": "quiz-python-mod02-test-13",
+      "courseId": "course-python-apis",
+      "title": "2. Python Temelleri Testleri - Test 13",
+      "description": "Python syntax ve temel programlama hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod02-13",
+          "question": "Python temelleri hakkında soru 13",
+          "options": [],
+          "answer": 0,
+          "category": "basics-detailed",
+          "explanation": "Python temelleri hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "python-fundamentals"
+    },
+    {
+      "id": "quiz-python-mod02-test-14",
+      "courseId": "course-python-apis",
+      "title": "2. Python Temelleri Testleri - Test 14",
+      "description": "Python syntax ve temel programlama hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod02-14",
+          "question": "Python temelleri hakkında soru 14",
+          "options": [],
+          "answer": 0,
+          "category": "basics-detailed",
+          "explanation": "Python temelleri hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "python-fundamentals"
+    },
+    {
+      "id": "quiz-python-mod02-test-15",
+      "courseId": "course-python-apis",
+      "title": "2. Python Temelleri Testleri - Test 15",
+      "description": "Python syntax ve temel programlama hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod02-15",
+          "question": "Python temelleri hakkında soru 15",
+          "options": [],
+          "answer": 0,
+          "category": "basics-detailed",
+          "explanation": "Python temelleri hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "python-fundamentals"
+    },
+    {
+      "id": "quiz-python-mod03-test-01",
+      "courseId": "course-python-apis",
+      "title": "3. Veri Yapıları Testleri - Test 1",
+      "description": "Python veri yapıları hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod03-01",
+          "question": "Lists nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "data-structures",
+          "explanation": "Veri Yapıları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "data-structures"
+    },
+    {
+      "id": "quiz-python-mod03-test-02",
+      "courseId": "course-python-apis",
+      "title": "3. Veri Yapıları Testleri - Test 2",
+      "description": "Python veri yapıları hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod03-02",
+          "question": "Tuples nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "data-structures",
+          "explanation": "Veri Yapıları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "data-structures"
+    },
+    {
+      "id": "quiz-python-mod03-test-03",
+      "courseId": "course-python-apis",
+      "title": "3. Veri Yapıları Testleri - Test 3",
+      "description": "Python veri yapıları hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod03-03",
+          "question": "Dictionaries nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "data-structures",
+          "explanation": "Veri Yapıları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "data-structures"
+    },
+    {
+      "id": "quiz-python-mod03-test-04",
+      "courseId": "course-python-apis",
+      "title": "3. Veri Yapıları Testleri - Test 4",
+      "description": "Python veri yapıları hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod03-04",
+          "question": "Sets nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "data-structures",
+          "explanation": "Veri Yapıları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "data-structures"
+    },
+    {
+      "id": "quiz-python-mod03-test-05",
+      "courseId": "course-python-apis",
+      "title": "3. Veri Yapıları Testleri - Test 5",
+      "description": "Python veri yapıları hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod03-05",
+          "question": "List methods nelerdir?",
+          "options": [],
+          "answer": 0,
+          "category": "data-structures",
+          "explanation": "Veri Yapıları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "data-structures"
+    },
+    {
+      "id": "quiz-python-mod03-test-06",
+      "courseId": "course-python-apis",
+      "title": "3. Veri Yapıları Testleri - Test 6",
+      "description": "Python veri yapıları hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod03-06",
+          "question": "Dictionary methods nelerdir?",
+          "options": [],
+          "answer": 0,
+          "category": "data-structures",
+          "explanation": "Veri Yapıları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "data-structures"
+    },
+    {
+      "id": "quiz-python-mod03-test-07",
+      "courseId": "course-python-apis",
+      "title": "3. Veri Yapıları Testleri - Test 7",
+      "description": "Python veri yapıları hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod03-07",
+          "question": "Set operations nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "data-structures",
+          "explanation": "Veri Yapıları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "data-structures"
+    },
+    {
+      "id": "quiz-python-mod03-test-08",
+      "courseId": "course-python-apis",
+      "title": "3. Veri Yapıları Testleri - Test 8",
+      "description": "Python veri yapıları hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod03-08",
+          "question": "Nested data structures nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "data-structures",
+          "explanation": "Veri Yapıları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "data-structures"
+    },
+    {
+      "id": "quiz-python-mod03-test-09",
+      "courseId": "course-python-apis",
+      "title": "3. Veri Yapıları Testleri - Test 9",
+      "description": "Python veri yapıları hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod03-09",
+          "question": "Data structure performance nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "data-structures",
+          "explanation": "Veri Yapıları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "data-structures"
+    },
+    {
+      "id": "quiz-python-mod03-test-10",
+      "courseId": "course-python-apis",
+      "title": "3. Veri Yapıları Testleri - Test 10",
+      "description": "Python veri yapıları hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod03-10",
+          "question": "Data structure best practices nelerdir?",
+          "options": [],
+          "answer": 0,
+          "category": "data-structures",
+          "explanation": "Veri Yapıları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "data-structures"
+    },
+    {
+      "id": "quiz-python-mod03-test-11",
+      "courseId": "course-python-apis",
+      "title": "3. Veri Yapıları Testleri - Test 11",
+      "description": "Python veri yapıları hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod03-11",
+          "question": "Veri Yapıları hakkında soru 11",
+          "options": [],
+          "answer": 0,
+          "category": "data-structures",
+          "explanation": "Veri Yapıları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "data-structures"
+    },
+    {
+      "id": "quiz-python-mod03-test-12",
+      "courseId": "course-python-apis",
+      "title": "3. Veri Yapıları Testleri - Test 12",
+      "description": "Python veri yapıları hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod03-12",
+          "question": "Veri Yapıları hakkında soru 12",
+          "options": [],
+          "answer": 0,
+          "category": "data-structures",
+          "explanation": "Veri Yapıları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "data-structures"
+    },
+    {
+      "id": "quiz-python-mod03-test-13",
+      "courseId": "course-python-apis",
+      "title": "3. Veri Yapıları Testleri - Test 13",
+      "description": "Python veri yapıları hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod03-13",
+          "question": "Veri Yapıları hakkında soru 13",
+          "options": [],
+          "answer": 0,
+          "category": "data-structures",
+          "explanation": "Veri Yapıları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "data-structures"
+    },
+    {
+      "id": "quiz-python-mod03-test-14",
+      "courseId": "course-python-apis",
+      "title": "3. Veri Yapıları Testleri - Test 14",
+      "description": "Python veri yapıları hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod03-14",
+          "question": "Veri Yapıları hakkında soru 14",
+          "options": [],
+          "answer": 0,
+          "category": "data-structures",
+          "explanation": "Veri Yapıları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "data-structures"
+    },
+    {
+      "id": "quiz-python-mod03-test-15",
+      "courseId": "course-python-apis",
+      "title": "3. Veri Yapıları Testleri - Test 15",
+      "description": "Python veri yapıları hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod03-15",
+          "question": "Veri Yapıları hakkında soru 15",
+          "options": [],
+          "answer": 0,
+          "category": "data-structures",
+          "explanation": "Veri Yapıları hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "data-structures"
+    },
+    {
+      "id": "quiz-python-mod04-test-01",
+      "courseId": "course-python-apis",
+      "title": "4. Fonksiyonlar ve Modüller Testleri - Test 1",
+      "description": "Python functions ve modules hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod04-01",
+          "question": "Functions nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "functions-modules",
+          "explanation": "Fonksiyonlar ve Modüller hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "functions-modules"
+    },
+    {
+      "id": "quiz-python-mod04-test-02",
+      "courseId": "course-python-apis",
+      "title": "4. Fonksiyonlar ve Modüller Testleri - Test 2",
+      "description": "Python functions ve modules hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod04-02",
+          "question": "Function parameters nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "functions-modules",
+          "explanation": "Fonksiyonlar ve Modüller hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "functions-modules"
+    },
+    {
+      "id": "quiz-python-mod04-test-03",
+      "courseId": "course-python-apis",
+      "title": "4. Fonksiyonlar ve Modüller Testleri - Test 3",
+      "description": "Python functions ve modules hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod04-03",
+          "question": "*args nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "functions-modules",
+          "explanation": "Fonksiyonlar ve Modüller hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "functions-modules"
+    },
+    {
+      "id": "quiz-python-mod04-test-04",
+      "courseId": "course-python-apis",
+      "title": "4. Fonksiyonlar ve Modüller Testleri - Test 4",
+      "description": "Python functions ve modules hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod04-04",
+          "question": "**kwargs nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "functions-modules",
+          "explanation": "Fonksiyonlar ve Modüller hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "functions-modules"
+    },
+    {
+      "id": "quiz-python-mod04-test-05",
+      "courseId": "course-python-apis",
+      "title": "4. Fonksiyonlar ve Modüller Testleri - Test 5",
+      "description": "Python functions ve modules hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod04-05",
+          "question": "Lambda functions nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "functions-modules",
+          "explanation": "Fonksiyonlar ve Modüller hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "functions-modules"
+    },
+    {
+      "id": "quiz-python-mod04-test-06",
+      "courseId": "course-python-apis",
+      "title": "4. Fonksiyonlar ve Modüller Testleri - Test 6",
+      "description": "Python functions ve modules hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod04-06",
+          "question": "Decorators nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "functions-modules",
+          "explanation": "Fonksiyonlar ve Modüller hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "functions-modules"
+    },
+    {
+      "id": "quiz-python-mod04-test-07",
+      "courseId": "course-python-apis",
+      "title": "4. Fonksiyonlar ve Modüller Testleri - Test 7",
+      "description": "Python functions ve modules hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod04-07",
+          "question": "Modules nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "functions-modules",
+          "explanation": "Fonksiyonlar ve Modüller hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "functions-modules"
+    },
+    {
+      "id": "quiz-python-mod04-test-08",
+      "courseId": "course-python-apis",
+      "title": "4. Fonksiyonlar ve Modüller Testleri - Test 8",
+      "description": "Python functions ve modules hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod04-08",
+          "question": "Packages nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "functions-modules",
+          "explanation": "Fonksiyonlar ve Modüller hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "functions-modules"
+    },
+    {
+      "id": "quiz-python-mod04-test-09",
+      "courseId": "course-python-apis",
+      "title": "4. Fonksiyonlar ve Modüller Testleri - Test 9",
+      "description": "Python functions ve modules hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod04-09",
+          "question": "Import statements nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "functions-modules",
+          "explanation": "Fonksiyonlar ve Modüller hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "functions-modules"
+    },
+    {
+      "id": "quiz-python-mod04-test-10",
+      "courseId": "course-python-apis",
+      "title": "4. Fonksiyonlar ve Modüller Testleri - Test 10",
+      "description": "Python functions ve modules hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod04-10",
+          "question": "Functions ve modules best practices nelerdir?",
+          "options": [],
+          "answer": 0,
+          "category": "functions-modules",
+          "explanation": "Fonksiyonlar ve Modüller hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "functions-modules"
+    },
+    {
+      "id": "quiz-python-mod04-test-11",
+      "courseId": "course-python-apis",
+      "title": "4. Fonksiyonlar ve Modüller Testleri - Test 11",
+      "description": "Python functions ve modules hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod04-11",
+          "question": "Fonksiyonlar ve Modüller hakkında soru 11",
+          "options": [],
+          "answer": 0,
+          "category": "functions-modules",
+          "explanation": "Fonksiyonlar ve Modüller hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "functions-modules"
+    },
+    {
+      "id": "quiz-python-mod04-test-12",
+      "courseId": "course-python-apis",
+      "title": "4. Fonksiyonlar ve Modüller Testleri - Test 12",
+      "description": "Python functions ve modules hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod04-12",
+          "question": "Fonksiyonlar ve Modüller hakkında soru 12",
+          "options": [],
+          "answer": 0,
+          "category": "functions-modules",
+          "explanation": "Fonksiyonlar ve Modüller hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "functions-modules"
+    },
+    {
+      "id": "quiz-python-mod04-test-13",
+      "courseId": "course-python-apis",
+      "title": "4. Fonksiyonlar ve Modüller Testleri - Test 13",
+      "description": "Python functions ve modules hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod04-13",
+          "question": "Fonksiyonlar ve Modüller hakkında soru 13",
+          "options": [],
+          "answer": 0,
+          "category": "functions-modules",
+          "explanation": "Fonksiyonlar ve Modüller hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "functions-modules"
+    },
+    {
+      "id": "quiz-python-mod04-test-14",
+      "courseId": "course-python-apis",
+      "title": "4. Fonksiyonlar ve Modüller Testleri - Test 14",
+      "description": "Python functions ve modules hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod04-14",
+          "question": "Fonksiyonlar ve Modüller hakkında soru 14",
+          "options": [],
+          "answer": 0,
+          "category": "functions-modules",
+          "explanation": "Fonksiyonlar ve Modüller hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "functions-modules"
+    },
+    {
+      "id": "quiz-python-mod04-test-15",
+      "courseId": "course-python-apis",
+      "title": "4. Fonksiyonlar ve Modüller Testleri - Test 15",
+      "description": "Python functions ve modules hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod04-15",
+          "question": "Fonksiyonlar ve Modüller hakkında soru 15",
+          "options": [],
+          "answer": 0,
+          "category": "functions-modules",
+          "explanation": "Fonksiyonlar ve Modüller hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "functions-modules"
+    },
+    {
+      "id": "quiz-python-mod05-test-01",
+      "courseId": "course-python-apis",
+      "title": "5. OOP Testleri - Test 1",
+      "description": "Python OOP hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod05-01",
+          "question": "OOP nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "oop",
+          "explanation": "OOP hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "oop"
+    },
+    {
+      "id": "quiz-python-mod05-test-02",
+      "courseId": "course-python-apis",
+      "title": "5. OOP Testleri - Test 2",
+      "description": "Python OOP hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod05-02",
+          "question": "Classes nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "oop",
+          "explanation": "OOP hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "oop"
+    },
+    {
+      "id": "quiz-python-mod05-test-03",
+      "courseId": "course-python-apis",
+      "title": "5. OOP Testleri - Test 3",
+      "description": "Python OOP hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod05-03",
+          "question": "Objects nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "oop",
+          "explanation": "OOP hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "oop"
+    },
+    {
+      "id": "quiz-python-mod05-test-04",
+      "courseId": "course-python-apis",
+      "title": "5. OOP Testleri - Test 4",
+      "description": "Python OOP hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod05-04",
+          "question": "__init__ nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "oop",
+          "explanation": "OOP hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "oop"
+    },
+    {
+      "id": "quiz-python-mod05-test-05",
+      "courseId": "course-python-apis",
+      "title": "5. OOP Testleri - Test 5",
+      "description": "Python OOP hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod05-05",
+          "question": "Inheritance nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "oop",
+          "explanation": "OOP hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "oop"
+    },
+    {
+      "id": "quiz-python-mod05-test-06",
+      "courseId": "course-python-apis",
+      "title": "5. OOP Testleri - Test 6",
+      "description": "Python OOP hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod05-06",
+          "question": "Polymorphism nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "oop",
+          "explanation": "OOP hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "oop"
+    },
+    {
+      "id": "quiz-python-mod05-test-07",
+      "courseId": "course-python-apis",
+      "title": "5. OOP Testleri - Test 7",
+      "description": "Python OOP hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod05-07",
+          "question": "Encapsulation nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "oop",
+          "explanation": "OOP hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "oop"
+    },
+    {
+      "id": "quiz-python-mod05-test-08",
+      "courseId": "course-python-apis",
+      "title": "5. OOP Testleri - Test 8",
+      "description": "Python OOP hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod05-08",
+          "question": "Special methods nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "oop",
+          "explanation": "OOP hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "oop"
+    },
+    {
+      "id": "quiz-python-mod05-test-09",
+      "courseId": "course-python-apis",
+      "title": "5. OOP Testleri - Test 9",
+      "description": "Python OOP hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod05-09",
+          "question": "Properties nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "oop",
+          "explanation": "OOP hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "oop"
+    },
+    {
+      "id": "quiz-python-mod05-test-10",
+      "courseId": "course-python-apis",
+      "title": "5. OOP Testleri - Test 10",
+      "description": "Python OOP hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod05-10",
+          "question": "OOP best practices nelerdir?",
+          "options": [],
+          "answer": 0,
+          "category": "oop",
+          "explanation": "OOP hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "oop"
+    },
+    {
+      "id": "quiz-python-mod05-test-11",
+      "courseId": "course-python-apis",
+      "title": "5. OOP Testleri - Test 11",
+      "description": "Python OOP hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod05-11",
+          "question": "OOP hakkında soru 11",
+          "options": [],
+          "answer": 0,
+          "category": "oop",
+          "explanation": "OOP hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "oop"
+    },
+    {
+      "id": "quiz-python-mod05-test-12",
+      "courseId": "course-python-apis",
+      "title": "5. OOP Testleri - Test 12",
+      "description": "Python OOP hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod05-12",
+          "question": "OOP hakkında soru 12",
+          "options": [],
+          "answer": 0,
+          "category": "oop",
+          "explanation": "OOP hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "oop"
+    },
+    {
+      "id": "quiz-python-mod05-test-13",
+      "courseId": "course-python-apis",
+      "title": "5. OOP Testleri - Test 13",
+      "description": "Python OOP hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod05-13",
+          "question": "OOP hakkında soru 13",
+          "options": [],
+          "answer": 0,
+          "category": "oop",
+          "explanation": "OOP hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "oop"
+    },
+    {
+      "id": "quiz-python-mod05-test-14",
+      "courseId": "course-python-apis",
+      "title": "5. OOP Testleri - Test 14",
+      "description": "Python OOP hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod05-14",
+          "question": "OOP hakkında soru 14",
+          "options": [],
+          "answer": 0,
+          "category": "oop",
+          "explanation": "OOP hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "oop"
+    },
+    {
+      "id": "quiz-python-mod05-test-15",
+      "courseId": "course-python-apis",
+      "title": "5. OOP Testleri - Test 15",
+      "description": "Python OOP hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod05-15",
+          "question": "OOP hakkında soru 15",
+          "options": [],
+          "answer": 0,
+          "category": "oop",
+          "explanation": "OOP hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "oop"
+    },
+    {
+      "id": "quiz-python-mod06-test-01",
+      "courseId": "course-python-apis",
+      "title": "6. File I/O Testleri - Test 1",
+      "description": "Python file I/O hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod06-01",
+          "question": "File I/O nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "file-io",
+          "explanation": "File I/O hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "file-io"
+    },
+    {
+      "id": "quiz-python-mod06-test-02",
+      "courseId": "course-python-apis",
+      "title": "6. File I/O Testleri - Test 2",
+      "description": "Python file I/O hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod06-02",
+          "question": "Opening files nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "file-io",
+          "explanation": "File I/O hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "file-io"
+    },
+    {
+      "id": "quiz-python-mod06-test-03",
+      "courseId": "course-python-apis",
+      "title": "6. File I/O Testleri - Test 3",
+      "description": "Python file I/O hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod06-03",
+          "question": "Reading files nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "file-io",
+          "explanation": "File I/O hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "file-io"
+    },
+    {
+      "id": "quiz-python-mod06-test-04",
+      "courseId": "course-python-apis",
+      "title": "6. File I/O Testleri - Test 4",
+      "description": "Python file I/O hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod06-04",
+          "question": "Writing files nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "file-io",
+          "explanation": "File I/O hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "file-io"
+    },
+    {
+      "id": "quiz-python-mod06-test-05",
+      "courseId": "course-python-apis",
+      "title": "6. File I/O Testleri - Test 5",
+      "description": "Python file I/O hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod06-05",
+          "question": "Context managers nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "file-io",
+          "explanation": "File I/O hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "file-io"
+    },
+    {
+      "id": "quiz-python-mod06-test-06",
+      "courseId": "course-python-apis",
+      "title": "6. File I/O Testleri - Test 6",
+      "description": "Python file I/O hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod06-06",
+          "question": "CSV files nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "file-io",
+          "explanation": "File I/O hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "file-io"
+    },
+    {
+      "id": "quiz-python-mod06-test-07",
+      "courseId": "course-python-apis",
+      "title": "6. File I/O Testleri - Test 7",
+      "description": "Python file I/O hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod06-07",
+          "question": "JSON files nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "file-io",
+          "explanation": "File I/O hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "file-io"
+    },
+    {
+      "id": "quiz-python-mod06-test-08",
+      "courseId": "course-python-apis",
+      "title": "6. File I/O Testleri - Test 8",
+      "description": "Python file I/O hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod06-08",
+          "question": "File paths nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "file-io",
+          "explanation": "File I/O hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "file-io"
+    },
+    {
+      "id": "quiz-python-mod06-test-09",
+      "courseId": "course-python-apis",
+      "title": "6. File I/O Testleri - Test 9",
+      "description": "Python file I/O hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod06-09",
+          "question": "Directory operations nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "file-io",
+          "explanation": "File I/O hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "file-io"
+    },
+    {
+      "id": "quiz-python-mod06-test-10",
+      "courseId": "course-python-apis",
+      "title": "6. File I/O Testleri - Test 10",
+      "description": "Python file I/O hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod06-10",
+          "question": "File I/O best practices nelerdir?",
+          "options": [],
+          "answer": 0,
+          "category": "file-io",
+          "explanation": "File I/O hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "file-io"
+    },
+    {
+      "id": "quiz-python-mod06-test-11",
+      "courseId": "course-python-apis",
+      "title": "6. File I/O Testleri - Test 11",
+      "description": "Python file I/O hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod06-11",
+          "question": "File I/O hakkında soru 11",
+          "options": [],
+          "answer": 0,
+          "category": "file-io",
+          "explanation": "File I/O hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "file-io"
+    },
+    {
+      "id": "quiz-python-mod06-test-12",
+      "courseId": "course-python-apis",
+      "title": "6. File I/O Testleri - Test 12",
+      "description": "Python file I/O hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod06-12",
+          "question": "File I/O hakkında soru 12",
+          "options": [],
+          "answer": 0,
+          "category": "file-io",
+          "explanation": "File I/O hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "file-io"
+    },
+    {
+      "id": "quiz-python-mod06-test-13",
+      "courseId": "course-python-apis",
+      "title": "6. File I/O Testleri - Test 13",
+      "description": "Python file I/O hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod06-13",
+          "question": "File I/O hakkında soru 13",
+          "options": [],
+          "answer": 0,
+          "category": "file-io",
+          "explanation": "File I/O hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "file-io"
+    },
+    {
+      "id": "quiz-python-mod06-test-14",
+      "courseId": "course-python-apis",
+      "title": "6. File I/O Testleri - Test 14",
+      "description": "Python file I/O hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod06-14",
+          "question": "File I/O hakkında soru 14",
+          "options": [],
+          "answer": 0,
+          "category": "file-io",
+          "explanation": "File I/O hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "file-io"
+    },
+    {
+      "id": "quiz-python-mod06-test-15",
+      "courseId": "course-python-apis",
+      "title": "6. File I/O Testleri - Test 15",
+      "description": "Python file I/O hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod06-15",
+          "question": "File I/O hakkında soru 15",
+          "options": [],
+          "answer": 0,
+          "category": "file-io",
+          "explanation": "File I/O hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "file-io"
+    },
+    {
+      "id": "quiz-python-mod07-test-01",
+      "courseId": "course-python-apis",
+      "title": "7. Exception Handling Testleri - Test 1",
+      "description": "Python exception handling hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod07-01",
+          "question": "Exception handling nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "exceptions",
+          "explanation": "Exception Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "exception-handling"
+    },
+    {
+      "id": "quiz-python-mod07-test-02",
+      "courseId": "course-python-apis",
+      "title": "7. Exception Handling Testleri - Test 2",
+      "description": "Python exception handling hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod07-02",
+          "question": "Try-except nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "exceptions",
+          "explanation": "Exception Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "exception-handling"
+    },
+    {
+      "id": "quiz-python-mod07-test-03",
+      "courseId": "course-python-apis",
+      "title": "7. Exception Handling Testleri - Test 3",
+      "description": "Python exception handling hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod07-03",
+          "question": "Finally block nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "exceptions",
+          "explanation": "Exception Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "exception-handling"
+    },
+    {
+      "id": "quiz-python-mod07-test-04",
+      "courseId": "course-python-apis",
+      "title": "7. Exception Handling Testleri - Test 4",
+      "description": "Python exception handling hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod07-04",
+          "question": "Raising exceptions nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "exceptions",
+          "explanation": "Exception Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "exception-handling"
+    },
+    {
+      "id": "quiz-python-mod07-test-05",
+      "courseId": "course-python-apis",
+      "title": "7. Exception Handling Testleri - Test 5",
+      "description": "Python exception handling hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod07-05",
+          "question": "Custom exceptions nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "exceptions",
+          "explanation": "Exception Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "exception-handling"
+    },
+    {
+      "id": "quiz-python-mod07-test-06",
+      "courseId": "course-python-apis",
+      "title": "7. Exception Handling Testleri - Test 6",
+      "description": "Python exception handling hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod07-06",
+          "question": "Exception hierarchy nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "exceptions",
+          "explanation": "Exception Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "exception-handling"
+    },
+    {
+      "id": "quiz-python-mod07-test-07",
+      "courseId": "course-python-apis",
+      "title": "7. Exception Handling Testleri - Test 7",
+      "description": "Python exception handling hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod07-07",
+          "question": "Error logging nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "exceptions",
+          "explanation": "Exception Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "exception-handling"
+    },
+    {
+      "id": "quiz-python-mod07-test-08",
+      "courseId": "course-python-apis",
+      "title": "7. Exception Handling Testleri - Test 8",
+      "description": "Python exception handling hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod07-08",
+          "question": "Assertions nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "exceptions",
+          "explanation": "Exception Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "exception-handling"
+    },
+    {
+      "id": "quiz-python-mod07-test-09",
+      "courseId": "course-python-apis",
+      "title": "7. Exception Handling Testleri - Test 9",
+      "description": "Python exception handling hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod07-09",
+          "question": "Exception patterns nelerdir?",
+          "options": [],
+          "answer": 0,
+          "category": "exceptions",
+          "explanation": "Exception Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "exception-handling"
+    },
+    {
+      "id": "quiz-python-mod07-test-10",
+      "courseId": "course-python-apis",
+      "title": "7. Exception Handling Testleri - Test 10",
+      "description": "Python exception handling hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod07-10",
+          "question": "Exception handling best practices nelerdir?",
+          "options": [],
+          "answer": 0,
+          "category": "exceptions",
+          "explanation": "Exception Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "exception-handling"
+    },
+    {
+      "id": "quiz-python-mod07-test-11",
+      "courseId": "course-python-apis",
+      "title": "7. Exception Handling Testleri - Test 11",
+      "description": "Python exception handling hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod07-11",
+          "question": "Exception Handling hakkında soru 11",
+          "options": [],
+          "answer": 0,
+          "category": "exceptions",
+          "explanation": "Exception Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "exception-handling"
+    },
+    {
+      "id": "quiz-python-mod07-test-12",
+      "courseId": "course-python-apis",
+      "title": "7. Exception Handling Testleri - Test 12",
+      "description": "Python exception handling hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod07-12",
+          "question": "Exception Handling hakkında soru 12",
+          "options": [],
+          "answer": 0,
+          "category": "exceptions",
+          "explanation": "Exception Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "exception-handling"
+    },
+    {
+      "id": "quiz-python-mod07-test-13",
+      "courseId": "course-python-apis",
+      "title": "7. Exception Handling Testleri - Test 13",
+      "description": "Python exception handling hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod07-13",
+          "question": "Exception Handling hakkında soru 13",
+          "options": [],
+          "answer": 0,
+          "category": "exceptions",
+          "explanation": "Exception Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "exception-handling"
+    },
+    {
+      "id": "quiz-python-mod07-test-14",
+      "courseId": "course-python-apis",
+      "title": "7. Exception Handling Testleri - Test 14",
+      "description": "Python exception handling hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod07-14",
+          "question": "Exception Handling hakkında soru 14",
+          "options": [],
+          "answer": 0,
+          "category": "exceptions",
+          "explanation": "Exception Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "exception-handling"
+    },
+    {
+      "id": "quiz-python-mod07-test-15",
+      "courseId": "course-python-apis",
+      "title": "7. Exception Handling Testleri - Test 15",
+      "description": "Python exception handling hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod07-15",
+          "question": "Exception Handling hakkında soru 15",
+          "options": [],
+          "answer": 0,
+          "category": "exceptions",
+          "explanation": "Exception Handling hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "exception-handling"
+    },
+    {
+      "id": "quiz-python-mod08-test-01",
+      "courseId": "course-python-apis",
+      "title": "8. FastAPI/Django Testleri - Test 1",
+      "description": "FastAPI ve Django hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod08-01",
+          "question": "FastAPI nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "frameworks",
+          "explanation": "FastAPI/Django hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "frameworks"
+    },
+    {
+      "id": "quiz-python-mod08-test-02",
+      "courseId": "course-python-apis",
+      "title": "8. FastAPI/Django Testleri - Test 2",
+      "description": "FastAPI ve Django hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod08-02",
+          "question": "Django nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "frameworks",
+          "explanation": "FastAPI/Django hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "frameworks"
+    },
+    {
+      "id": "quiz-python-mod08-test-03",
+      "courseId": "course-python-apis",
+      "title": "8. FastAPI/Django Testleri - Test 3",
+      "description": "FastAPI ve Django hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod08-03",
+          "question": "FastAPI routes nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "frameworks",
+          "explanation": "FastAPI/Django hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "frameworks"
+    },
+    {
+      "id": "quiz-python-mod08-test-04",
+      "courseId": "course-python-apis",
+      "title": "8. FastAPI/Django Testleri - Test 4",
+      "description": "FastAPI ve Django hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod08-04",
+          "question": "Pydantic models nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "frameworks",
+          "explanation": "FastAPI/Django hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "frameworks"
+    },
+    {
+      "id": "quiz-python-mod08-test-05",
+      "courseId": "course-python-apis",
+      "title": "8. FastAPI/Django Testleri - Test 5",
+      "description": "FastAPI ve Django hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod08-05",
+          "question": "Django models nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "frameworks",
+          "explanation": "FastAPI/Django hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "frameworks"
+    },
+    {
+      "id": "quiz-python-mod08-test-06",
+      "courseId": "course-python-apis",
+      "title": "8. FastAPI/Django Testleri - Test 6",
+      "description": "FastAPI ve Django hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod08-06",
+          "question": "Django views nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "frameworks",
+          "explanation": "FastAPI/Django hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "frameworks"
+    },
+    {
+      "id": "quiz-python-mod08-test-07",
+      "courseId": "course-python-apis",
+      "title": "8. FastAPI/Django Testleri - Test 7",
+      "description": "FastAPI ve Django hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod08-07",
+          "question": "Dependency injection nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "frameworks",
+          "explanation": "FastAPI/Django hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "frameworks"
+    },
+    {
+      "id": "quiz-python-mod08-test-08",
+      "courseId": "course-python-apis",
+      "title": "8. FastAPI/Django Testleri - Test 8",
+      "description": "FastAPI ve Django hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod08-08",
+          "question": "FastAPI vs Django farkı nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "frameworks",
+          "explanation": "FastAPI/Django hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "frameworks"
+    },
+    {
+      "id": "quiz-python-mod08-test-09",
+      "courseId": "course-python-apis",
+      "title": "8. FastAPI/Django Testleri - Test 9",
+      "description": "FastAPI ve Django hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod08-09",
+          "question": "Framework patterns nelerdir?",
+          "options": [],
+          "answer": 0,
+          "category": "frameworks",
+          "explanation": "FastAPI/Django hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "frameworks"
+    },
+    {
+      "id": "quiz-python-mod08-test-10",
+      "courseId": "course-python-apis",
+      "title": "8. FastAPI/Django Testleri - Test 10",
+      "description": "FastAPI ve Django hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod08-10",
+          "question": "Framework best practices nelerdir?",
+          "options": [],
+          "answer": 0,
+          "category": "frameworks",
+          "explanation": "FastAPI/Django hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "frameworks"
+    },
+    {
+      "id": "quiz-python-mod08-test-11",
+      "courseId": "course-python-apis",
+      "title": "8. FastAPI/Django Testleri - Test 11",
+      "description": "FastAPI ve Django hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod08-11",
+          "question": "FastAPI/Django hakkında soru 11",
+          "options": [],
+          "answer": 0,
+          "category": "frameworks",
+          "explanation": "FastAPI/Django hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "frameworks"
+    },
+    {
+      "id": "quiz-python-mod08-test-12",
+      "courseId": "course-python-apis",
+      "title": "8. FastAPI/Django Testleri - Test 12",
+      "description": "FastAPI ve Django hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod08-12",
+          "question": "FastAPI/Django hakkında soru 12",
+          "options": [],
+          "answer": 0,
+          "category": "frameworks",
+          "explanation": "FastAPI/Django hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "frameworks"
+    },
+    {
+      "id": "quiz-python-mod08-test-13",
+      "courseId": "course-python-apis",
+      "title": "8. FastAPI/Django Testleri - Test 13",
+      "description": "FastAPI ve Django hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod08-13",
+          "question": "FastAPI/Django hakkında soru 13",
+          "options": [],
+          "answer": 0,
+          "category": "frameworks",
+          "explanation": "FastAPI/Django hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "frameworks"
+    },
+    {
+      "id": "quiz-python-mod08-test-14",
+      "courseId": "course-python-apis",
+      "title": "8. FastAPI/Django Testleri - Test 14",
+      "description": "FastAPI ve Django hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod08-14",
+          "question": "FastAPI/Django hakkında soru 14",
+          "options": [],
+          "answer": 0,
+          "category": "frameworks",
+          "explanation": "FastAPI/Django hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "frameworks"
+    },
+    {
+      "id": "quiz-python-mod08-test-15",
+      "courseId": "course-python-apis",
+      "title": "8. FastAPI/Django Testleri - Test 15",
+      "description": "FastAPI ve Django hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod08-15",
+          "question": "FastAPI/Django hakkında soru 15",
+          "options": [],
+          "answer": 0,
+          "category": "frameworks",
+          "explanation": "FastAPI/Django hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "frameworks"
+    },
+    {
+      "id": "quiz-python-mod09-test-01",
+      "courseId": "course-python-apis",
+      "title": "9. Database Integration Testleri - Test 1",
+      "description": "Python database integration hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod09-01",
+          "question": "Database integration nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "database",
+          "explanation": "Database Integration hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "database"
+    },
+    {
+      "id": "quiz-python-mod09-test-02",
+      "courseId": "course-python-apis",
+      "title": "9. Database Integration Testleri - Test 2",
+      "description": "Python database integration hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod09-02",
+          "question": "ORM nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "database",
+          "explanation": "Database Integration hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "database"
+    },
+    {
+      "id": "quiz-python-mod09-test-03",
+      "courseId": "course-python-apis",
+      "title": "9. Database Integration Testleri - Test 3",
+      "description": "Python database integration hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod09-03",
+          "question": "SQLAlchemy nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "database",
+          "explanation": "Database Integration hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "database"
+    },
+    {
+      "id": "quiz-python-mod09-test-04",
+      "courseId": "course-python-apis",
+      "title": "9. Database Integration Testleri - Test 4",
+      "description": "Python database integration hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod09-04",
+          "question": "Django ORM nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "database",
+          "explanation": "Database Integration hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "database"
+    },
+    {
+      "id": "quiz-python-mod09-test-05",
+      "courseId": "course-python-apis",
+      "title": "9. Database Integration Testleri - Test 5",
+      "description": "Python database integration hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod09-05",
+          "question": "Database migrations nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "database",
+          "explanation": "Database Integration hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "database"
+    },
+    {
+      "id": "quiz-python-mod09-test-06",
+      "courseId": "course-python-apis",
+      "title": "9. Database Integration Testleri - Test 6",
+      "description": "Python database integration hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod09-06",
+          "question": "Query optimization nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "database",
+          "explanation": "Database Integration hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "database"
+    },
+    {
+      "id": "quiz-python-mod09-test-07",
+      "courseId": "course-python-apis",
+      "title": "9. Database Integration Testleri - Test 7",
+      "description": "Python database integration hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod09-07",
+          "question": "Connection pooling nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "database",
+          "explanation": "Database Integration hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "database"
+    },
+    {
+      "id": "quiz-python-mod09-test-08",
+      "courseId": "course-python-apis",
+      "title": "9. Database Integration Testleri - Test 8",
+      "description": "Python database integration hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod09-08",
+          "question": "Database testing nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "database",
+          "explanation": "Database Integration hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "database"
+    },
+    {
+      "id": "quiz-python-mod09-test-09",
+      "courseId": "course-python-apis",
+      "title": "9. Database Integration Testleri - Test 9",
+      "description": "Python database integration hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod09-09",
+          "question": "NoSQL databases nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "database",
+          "explanation": "Database Integration hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "database"
+    },
+    {
+      "id": "quiz-python-mod09-test-10",
+      "courseId": "course-python-apis",
+      "title": "9. Database Integration Testleri - Test 10",
+      "description": "Python database integration hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod09-10",
+          "question": "Database best practices nelerdir?",
+          "options": [],
+          "answer": 0,
+          "category": "database",
+          "explanation": "Database Integration hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "database"
+    },
+    {
+      "id": "quiz-python-mod09-test-11",
+      "courseId": "course-python-apis",
+      "title": "9. Database Integration Testleri - Test 11",
+      "description": "Python database integration hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod09-11",
+          "question": "Database Integration hakkında soru 11",
+          "options": [],
+          "answer": 0,
+          "category": "database",
+          "explanation": "Database Integration hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "database"
+    },
+    {
+      "id": "quiz-python-mod09-test-12",
+      "courseId": "course-python-apis",
+      "title": "9. Database Integration Testleri - Test 12",
+      "description": "Python database integration hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod09-12",
+          "question": "Database Integration hakkında soru 12",
+          "options": [],
+          "answer": 0,
+          "category": "database",
+          "explanation": "Database Integration hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "database"
+    },
+    {
+      "id": "quiz-python-mod09-test-13",
+      "courseId": "course-python-apis",
+      "title": "9. Database Integration Testleri - Test 13",
+      "description": "Python database integration hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod09-13",
+          "question": "Database Integration hakkında soru 13",
+          "options": [],
+          "answer": 0,
+          "category": "database",
+          "explanation": "Database Integration hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "database"
+    },
+    {
+      "id": "quiz-python-mod09-test-14",
+      "courseId": "course-python-apis",
+      "title": "9. Database Integration Testleri - Test 14",
+      "description": "Python database integration hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod09-14",
+          "question": "Database Integration hakkında soru 14",
+          "options": [],
+          "answer": 0,
+          "category": "database",
+          "explanation": "Database Integration hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "database"
+    },
+    {
+      "id": "quiz-python-mod09-test-15",
+      "courseId": "course-python-apis",
+      "title": "9. Database Integration Testleri - Test 15",
+      "description": "Python database integration hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod09-15",
+          "question": "Database Integration hakkında soru 15",
+          "options": [],
+          "answer": 0,
+          "category": "database",
+          "explanation": "Database Integration hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "database"
+    },
+    {
+      "id": "quiz-python-mod10-test-01",
+      "courseId": "course-python-apis",
+      "title": "10. API Development Testleri - Test 1",
+      "description": "Python API development hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod10-01",
+          "question": "RESTful API nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "api",
+          "explanation": "API Development hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "api-development"
+    },
+    {
+      "id": "quiz-python-mod10-test-02",
+      "courseId": "course-python-apis",
+      "title": "10. API Development Testleri - Test 2",
+      "description": "Python API development hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod10-02",
+          "question": "HTTP methods nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "api",
+          "explanation": "API Development hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "api-development"
+    },
+    {
+      "id": "quiz-python-mod10-test-03",
+      "courseId": "course-python-apis",
+      "title": "10. API Development Testleri - Test 3",
+      "description": "Python API development hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod10-03",
+          "question": "Question 3",
+          "options": [],
+          "answer": 0,
+          "category": "api",
+          "explanation": "API Development hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "api-development"
+    },
+    {
+      "id": "quiz-python-mod10-test-04",
+      "courseId": "course-python-apis",
+      "title": "10. API Development Testleri - Test 4",
+      "description": "Python API development hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod10-04",
+          "question": "Question 4",
+          "options": [],
+          "answer": 0,
+          "category": "api",
+          "explanation": "API Development hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "api-development"
+    },
+    {
+      "id": "quiz-python-mod10-test-05",
+      "courseId": "course-python-apis",
+      "title": "10. API Development Testleri - Test 5",
+      "description": "Python API development hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod10-05",
+          "question": "Question 5",
+          "options": [],
+          "answer": 0,
+          "category": "api",
+          "explanation": "API Development hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "api-development"
+    },
+    {
+      "id": "quiz-python-mod10-test-06",
+      "courseId": "course-python-apis",
+      "title": "10. API Development Testleri - Test 6",
+      "description": "Python API development hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod10-06",
+          "question": "Question 6",
+          "options": [],
+          "answer": 0,
+          "category": "api",
+          "explanation": "API Development hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "api-development"
+    },
+    {
+      "id": "quiz-python-mod10-test-07",
+      "courseId": "course-python-apis",
+      "title": "10. API Development Testleri - Test 7",
+      "description": "Python API development hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod10-07",
+          "question": "Question 7",
+          "options": [],
+          "answer": 0,
+          "category": "api",
+          "explanation": "API Development hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "api-development"
+    },
+    {
+      "id": "quiz-python-mod10-test-08",
+      "courseId": "course-python-apis",
+      "title": "10. API Development Testleri - Test 8",
+      "description": "Python API development hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod10-08",
+          "question": "Question 8",
+          "options": [],
+          "answer": 0,
+          "category": "api",
+          "explanation": "API Development hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "api-development"
+    },
+    {
+      "id": "quiz-python-mod10-test-09",
+      "courseId": "course-python-apis",
+      "title": "10. API Development Testleri - Test 9",
+      "description": "Python API development hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod10-09",
+          "question": "Question 9",
+          "options": [],
+          "answer": 0,
+          "category": "api",
+          "explanation": "API Development hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "api-development"
+    },
+    {
+      "id": "quiz-python-mod10-test-10",
+      "courseId": "course-python-apis",
+      "title": "10. API Development Testleri - Test 10",
+      "description": "Python API development hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod10-10",
+          "question": "Question 10",
+          "options": [],
+          "answer": 0,
+          "category": "api",
+          "explanation": "API Development hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "api-development"
+    },
+    {
+      "id": "quiz-python-mod10-test-11",
+      "courseId": "course-python-apis",
+      "title": "10. API Development Testleri - Test 11",
+      "description": "Python API development hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod10-11",
+          "question": "Question 11",
+          "options": [],
+          "answer": 0,
+          "category": "api",
+          "explanation": "API Development hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "api-development"
+    },
+    {
+      "id": "quiz-python-mod10-test-12",
+      "courseId": "course-python-apis",
+      "title": "10. API Development Testleri - Test 12",
+      "description": "Python API development hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod10-12",
+          "question": "Question 12",
+          "options": [],
+          "answer": 0,
+          "category": "api",
+          "explanation": "API Development hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "api-development"
+    },
+    {
+      "id": "quiz-python-mod10-test-13",
+      "courseId": "course-python-apis",
+      "title": "10. API Development Testleri - Test 13",
+      "description": "Python API development hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod10-13",
+          "question": "Question 13",
+          "options": [],
+          "answer": 0,
+          "category": "api",
+          "explanation": "API Development hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "api-development"
+    },
+    {
+      "id": "quiz-python-mod10-test-14",
+      "courseId": "course-python-apis",
+      "title": "10. API Development Testleri - Test 14",
+      "description": "Python API development hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod10-14",
+          "question": "Question 14",
+          "options": [],
+          "answer": 0,
+          "category": "api",
+          "explanation": "API Development hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "api-development"
+    },
+    {
+      "id": "quiz-python-mod10-test-15",
+      "courseId": "course-python-apis",
+      "title": "10. API Development Testleri - Test 15",
+      "description": "Python API development hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod10-15",
+          "question": "Question 15",
+          "options": [],
+          "answer": 0,
+          "category": "api",
+          "explanation": "API Development hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "api-development"
+    },
+    {
+      "id": "quiz-python-mod11-test-01",
+      "courseId": "course-python-apis",
+      "title": "11. Testing Testleri - Test 1",
+      "description": "Python testing hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod11-01",
+          "question": "Testing nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Testing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-python-mod11-test-02",
+      "courseId": "course-python-apis",
+      "title": "11. Testing Testleri - Test 2",
+      "description": "Python testing hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod11-02",
+          "question": "unittest nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Testing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-python-mod11-test-03",
+      "courseId": "course-python-apis",
+      "title": "11. Testing Testleri - Test 3",
+      "description": "Python testing hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod11-03",
+          "question": "pytest nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Testing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-python-mod11-test-04",
+      "courseId": "course-python-apis",
+      "title": "11. Testing Testleri - Test 4",
+      "description": "Python testing hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod11-04",
+          "question": "Test fixtures nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Testing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-python-mod11-test-05",
+      "courseId": "course-python-apis",
+      "title": "11. Testing Testleri - Test 5",
+      "description": "Python testing hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod11-05",
+          "question": "Mocking nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Testing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-python-mod11-test-06",
+      "courseId": "course-python-apis",
+      "title": "11. Testing Testleri - Test 6",
+      "description": "Python testing hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod11-06",
+          "question": "Test coverage nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Testing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-python-mod11-test-07",
+      "courseId": "course-python-apis",
+      "title": "11. Testing Testleri - Test 7",
+      "description": "Python testing hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod11-07",
+          "question": "Integration testing nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Testing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-python-mod11-test-08",
+      "courseId": "course-python-apis",
+      "title": "11. Testing Testleri - Test 8",
+      "description": "Python testing hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod11-08",
+          "question": "TDD nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Testing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-python-mod11-test-09",
+      "courseId": "course-python-apis",
+      "title": "11. Testing Testleri - Test 9",
+      "description": "Python testing hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod11-09",
+          "question": "Testing patterns nelerdir?",
+          "options": [],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Testing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-python-mod11-test-10",
+      "courseId": "course-python-apis",
+      "title": "11. Testing Testleri - Test 10",
+      "description": "Python testing hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod11-10",
+          "question": "Testing best practices nelerdir?",
+          "options": [],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Testing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-python-mod11-test-11",
+      "courseId": "course-python-apis",
+      "title": "11. Testing Testleri - Test 11",
+      "description": "Python testing hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod11-11",
+          "question": "Testing hakkında soru 11",
+          "options": [],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Testing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-python-mod11-test-12",
+      "courseId": "course-python-apis",
+      "title": "11. Testing Testleri - Test 12",
+      "description": "Python testing hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod11-12",
+          "question": "Testing hakkında soru 12",
+          "options": [],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Testing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-python-mod11-test-13",
+      "courseId": "course-python-apis",
+      "title": "11. Testing Testleri - Test 13",
+      "description": "Python testing hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod11-13",
+          "question": "Testing hakkında soru 13",
+          "options": [],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Testing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-python-mod11-test-14",
+      "courseId": "course-python-apis",
+      "title": "11. Testing Testleri - Test 14",
+      "description": "Python testing hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod11-14",
+          "question": "Testing hakkında soru 14",
+          "options": [],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Testing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-python-mod11-test-15",
+      "courseId": "course-python-apis",
+      "title": "11. Testing Testleri - Test 15",
+      "description": "Python testing hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod11-15",
+          "question": "Testing hakkında soru 15",
+          "options": [],
+          "answer": 0,
+          "category": "testing",
+          "explanation": "Testing hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "testing"
+    },
+    {
+      "id": "quiz-python-mod12-test-01",
+      "courseId": "course-python-apis",
+      "title": "12. Async Programming Testleri - Test 1",
+      "description": "Python async programming hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod12-01",
+          "question": "Async programming nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "async",
+          "explanation": "Async Programming hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "async-programming"
+    },
+    {
+      "id": "quiz-python-mod12-test-02",
+      "courseId": "course-python-apis",
+      "title": "12. Async Programming Testleri - Test 2",
+      "description": "Python async programming hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod12-02",
+          "question": "asyncio nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "async",
+          "explanation": "Async Programming hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "async-programming"
+    },
+    {
+      "id": "quiz-python-mod12-test-03",
+      "courseId": "course-python-apis",
+      "title": "12. Async Programming Testleri - Test 3",
+      "description": "Python async programming hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod12-03",
+          "question": "async/await nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "async",
+          "explanation": "Async Programming hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "async-programming"
+    },
+    {
+      "id": "quiz-python-mod12-test-04",
+      "courseId": "course-python-apis",
+      "title": "12. Async Programming Testleri - Test 4",
+      "description": "Python async programming hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod12-04",
+          "question": "Coroutines nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "async",
+          "explanation": "Async Programming hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "async-programming"
+    },
+    {
+      "id": "quiz-python-mod12-test-05",
+      "courseId": "course-python-apis",
+      "title": "12. Async Programming Testleri - Test 5",
+      "description": "Python async programming hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod12-05",
+          "question": "Event loop nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "async",
+          "explanation": "Async Programming hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "async-programming"
+    },
+    {
+      "id": "quiz-python-mod12-test-06",
+      "courseId": "course-python-apis",
+      "title": "12. Async Programming Testleri - Test 6",
+      "description": "Python async programming hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod12-06",
+          "question": "Tasks nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "async",
+          "explanation": "Async Programming hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "async-programming"
+    },
+    {
+      "id": "quiz-python-mod12-test-07",
+      "courseId": "course-python-apis",
+      "title": "12. Async Programming Testleri - Test 7",
+      "description": "Python async programming hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod12-07",
+          "question": "Futures nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "async",
+          "explanation": "Async Programming hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "async-programming"
+    },
+    {
+      "id": "quiz-python-mod12-test-08",
+      "courseId": "course-python-apis",
+      "title": "12. Async Programming Testleri - Test 8",
+      "description": "Python async programming hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod12-08",
+          "question": "Async context managers nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "async",
+          "explanation": "Async Programming hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "async-programming"
+    },
+    {
+      "id": "quiz-python-mod12-test-09",
+      "courseId": "course-python-apis",
+      "title": "12. Async Programming Testleri - Test 9",
+      "description": "Python async programming hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod12-09",
+          "question": "Async patterns nelerdir?",
+          "options": [],
+          "answer": 0,
+          "category": "async",
+          "explanation": "Async Programming hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "async-programming"
+    },
+    {
+      "id": "quiz-python-mod12-test-10",
+      "courseId": "course-python-apis",
+      "title": "12. Async Programming Testleri - Test 10",
+      "description": "Python async programming hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod12-10",
+          "question": "Async best practices nelerdir?",
+          "options": [],
+          "answer": 0,
+          "category": "async",
+          "explanation": "Async Programming hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "async-programming"
+    },
+    {
+      "id": "quiz-python-mod12-test-11",
+      "courseId": "course-python-apis",
+      "title": "12. Async Programming Testleri - Test 11",
+      "description": "Python async programming hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod12-11",
+          "question": "Async Programming hakkında soru 11",
+          "options": [],
+          "answer": 0,
+          "category": "async",
+          "explanation": "Async Programming hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "async-programming"
+    },
+    {
+      "id": "quiz-python-mod12-test-12",
+      "courseId": "course-python-apis",
+      "title": "12. Async Programming Testleri - Test 12",
+      "description": "Python async programming hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod12-12",
+          "question": "Async Programming hakkında soru 12",
+          "options": [],
+          "answer": 0,
+          "category": "async",
+          "explanation": "Async Programming hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "async-programming"
+    },
+    {
+      "id": "quiz-python-mod12-test-13",
+      "courseId": "course-python-apis",
+      "title": "12. Async Programming Testleri - Test 13",
+      "description": "Python async programming hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod12-13",
+          "question": "Async Programming hakkında soru 13",
+          "options": [],
+          "answer": 0,
+          "category": "async",
+          "explanation": "Async Programming hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "async-programming"
+    },
+    {
+      "id": "quiz-python-mod12-test-14",
+      "courseId": "course-python-apis",
+      "title": "12. Async Programming Testleri - Test 14",
+      "description": "Python async programming hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod12-14",
+          "question": "Async Programming hakkında soru 14",
+          "options": [],
+          "answer": 0,
+          "category": "async",
+          "explanation": "Async Programming hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "async-programming"
+    },
+    {
+      "id": "quiz-python-mod12-test-15",
+      "courseId": "course-python-apis",
+      "title": "12. Async Programming Testleri - Test 15",
+      "description": "Python async programming hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod12-15",
+          "question": "Async Programming hakkında soru 15",
+          "options": [],
+          "answer": 0,
+          "category": "async",
+          "explanation": "Async Programming hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "async-programming"
+    },
+    {
+      "id": "quiz-python-mod13-test-01",
+      "courseId": "course-python-apis",
+      "title": "13. Performance Testleri - Test 1",
+      "description": "Python performans optimizasyonu hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod13-01",
+          "question": "Performance nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performance hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-python-mod13-test-02",
+      "courseId": "course-python-apis",
+      "title": "13. Performance Testleri - Test 2",
+      "description": "Python performans optimizasyonu hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod13-02",
+          "question": "Performance profiling nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performance hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-python-mod13-test-03",
+      "courseId": "course-python-apis",
+      "title": "13. Performance Testleri - Test 3",
+      "description": "Python performans optimizasyonu hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod13-03",
+          "question": "cProfile nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performance hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-python-mod13-test-04",
+      "courseId": "course-python-apis",
+      "title": "13. Performance Testleri - Test 4",
+      "description": "Python performans optimizasyonu hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod13-04",
+          "question": "Memory profiling nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performance hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-python-mod13-test-05",
+      "courseId": "course-python-apis",
+      "title": "13. Performance Testleri - Test 5",
+      "description": "Python performans optimizasyonu hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod13-05",
+          "question": "Code optimization nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performance hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-python-mod13-test-06",
+      "courseId": "course-python-apis",
+      "title": "13. Performance Testleri - Test 6",
+      "description": "Python performans optimizasyonu hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod13-06",
+          "question": "Caching strategies nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performance hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-python-mod13-test-07",
+      "courseId": "course-python-apis",
+      "title": "13. Performance Testleri - Test 7",
+      "description": "Python performans optimizasyonu hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod13-07",
+          "question": "Query optimization nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performance hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-python-mod13-test-08",
+      "courseId": "course-python-apis",
+      "title": "13. Performance Testleri - Test 8",
+      "description": "Python performans optimizasyonu hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod13-08",
+          "question": "Concurrency nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performance hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-python-mod13-test-09",
+      "courseId": "course-python-apis",
+      "title": "13. Performance Testleri - Test 9",
+      "description": "Python performans optimizasyonu hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod13-09",
+          "question": "Performance metrics nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performance hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-python-mod13-test-10",
+      "courseId": "course-python-apis",
+      "title": "13. Performance Testleri - Test 10",
+      "description": "Python performans optimizasyonu hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod13-10",
+          "question": "Performance best practices nelerdir?",
+          "options": [],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performance hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-python-mod13-test-11",
+      "courseId": "course-python-apis",
+      "title": "13. Performance Testleri - Test 11",
+      "description": "Python performans optimizasyonu hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod13-11",
+          "question": "Performance hakkında soru 11",
+          "options": [],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performance hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-python-mod13-test-12",
+      "courseId": "course-python-apis",
+      "title": "13. Performance Testleri - Test 12",
+      "description": "Python performans optimizasyonu hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod13-12",
+          "question": "Performance hakkında soru 12",
+          "options": [],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performance hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-python-mod13-test-13",
+      "courseId": "course-python-apis",
+      "title": "13. Performance Testleri - Test 13",
+      "description": "Python performans optimizasyonu hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod13-13",
+          "question": "Performance hakkında soru 13",
+          "options": [],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performance hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-python-mod13-test-14",
+      "courseId": "course-python-apis",
+      "title": "13. Performance Testleri - Test 14",
+      "description": "Python performans optimizasyonu hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod13-14",
+          "question": "Performance hakkında soru 14",
+          "options": [],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performance hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-python-mod13-test-15",
+      "courseId": "course-python-apis",
+      "title": "13. Performance Testleri - Test 15",
+      "description": "Python performans optimizasyonu hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod13-15",
+          "question": "Performance hakkında soru 15",
+          "options": [],
+          "answer": 0,
+          "category": "performance",
+          "explanation": "Performance hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "performance"
+    },
+    {
+      "id": "quiz-python-mod14-test-01",
+      "courseId": "course-python-apis",
+      "title": "14. Deployment Testleri - Test 1",
+      "description": "Python uygulamalarının deployment süreçleri hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod14-01",
+          "question": "Deployment nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "deployment",
+          "explanation": "Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "deployment"
+    },
+    {
+      "id": "quiz-python-mod14-test-02",
+      "courseId": "course-python-apis",
+      "title": "14. Deployment Testleri - Test 2",
+      "description": "Python uygulamalarının deployment süreçleri hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod14-02",
+          "question": "WSGI nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "deployment",
+          "explanation": "Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "deployment"
+    },
+    {
+      "id": "quiz-python-mod14-test-03",
+      "courseId": "course-python-apis",
+      "title": "14. Deployment Testleri - Test 3",
+      "description": "Python uygulamalarının deployment süreçleri hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod14-03",
+          "question": "ASGI nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "deployment",
+          "explanation": "Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "deployment"
+    },
+    {
+      "id": "quiz-python-mod14-test-04",
+      "courseId": "course-python-apis",
+      "title": "14. Deployment Testleri - Test 4",
+      "description": "Python uygulamalarının deployment süreçleri hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod14-04",
+          "question": "Gunicorn nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "deployment",
+          "explanation": "Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "deployment"
+    },
+    {
+      "id": "quiz-python-mod14-test-05",
+      "courseId": "course-python-apis",
+      "title": "14. Deployment Testleri - Test 5",
+      "description": "Python uygulamalarının deployment süreçleri hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod14-05",
+          "question": "Docker nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "deployment",
+          "explanation": "Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "deployment"
+    },
+    {
+      "id": "quiz-python-mod14-test-06",
+      "courseId": "course-python-apis",
+      "title": "14. Deployment Testleri - Test 6",
+      "description": "Python uygulamalarının deployment süreçleri hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod14-06",
+          "question": "CI/CD nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "deployment",
+          "explanation": "Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "deployment"
+    },
+    {
+      "id": "quiz-python-mod14-test-07",
+      "courseId": "course-python-apis",
+      "title": "14. Deployment Testleri - Test 7",
+      "description": "Python uygulamalarının deployment süreçleri hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod14-07",
+          "question": "Cloud deployment nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "deployment",
+          "explanation": "Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "deployment"
+    },
+    {
+      "id": "quiz-python-mod14-test-08",
+      "courseId": "course-python-apis",
+      "title": "14. Deployment Testleri - Test 8",
+      "description": "Python uygulamalarının deployment süreçleri hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod14-08",
+          "question": "Serverless nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "deployment",
+          "explanation": "Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "deployment"
+    },
+    {
+      "id": "quiz-python-mod14-test-09",
+      "courseId": "course-python-apis",
+      "title": "14. Deployment Testleri - Test 9",
+      "description": "Python uygulamalarının deployment süreçleri hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod14-09",
+          "question": "Monitoring nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "deployment",
+          "explanation": "Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "deployment"
+    },
+    {
+      "id": "quiz-python-mod14-test-10",
+      "courseId": "course-python-apis",
+      "title": "14. Deployment Testleri - Test 10",
+      "description": "Python uygulamalarının deployment süreçleri hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod14-10",
+          "question": "Deployment best practices nelerdir?",
+          "options": [],
+          "answer": 0,
+          "category": "deployment",
+          "explanation": "Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "deployment"
+    },
+    {
+      "id": "quiz-python-mod14-test-11",
+      "courseId": "course-python-apis",
+      "title": "14. Deployment Testleri - Test 11",
+      "description": "Python uygulamalarının deployment süreçleri hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod14-11",
+          "question": "Deployment hakkında soru 11",
+          "options": [],
+          "answer": 0,
+          "category": "deployment",
+          "explanation": "Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "deployment"
+    },
+    {
+      "id": "quiz-python-mod14-test-12",
+      "courseId": "course-python-apis",
+      "title": "14. Deployment Testleri - Test 12",
+      "description": "Python uygulamalarının deployment süreçleri hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod14-12",
+          "question": "Deployment hakkında soru 12",
+          "options": [],
+          "answer": 0,
+          "category": "deployment",
+          "explanation": "Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "deployment"
+    },
+    {
+      "id": "quiz-python-mod14-test-13",
+      "courseId": "course-python-apis",
+      "title": "14. Deployment Testleri - Test 13",
+      "description": "Python uygulamalarının deployment süreçleri hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod14-13",
+          "question": "Deployment hakkında soru 13",
+          "options": [],
+          "answer": 0,
+          "category": "deployment",
+          "explanation": "Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "deployment"
+    },
+    {
+      "id": "quiz-python-mod14-test-14",
+      "courseId": "course-python-apis",
+      "title": "14. Deployment Testleri - Test 14",
+      "description": "Python uygulamalarının deployment süreçleri hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod14-14",
+          "question": "Deployment hakkında soru 14",
+          "options": [],
+          "answer": 0,
+          "category": "deployment",
+          "explanation": "Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "deployment"
+    },
+    {
+      "id": "quiz-python-mod14-test-15",
+      "courseId": "course-python-apis",
+      "title": "14. Deployment Testleri - Test 15",
+      "description": "Python uygulamalarının deployment süreçleri hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod14-15",
+          "question": "Deployment hakkında soru 15",
+          "options": [],
+          "answer": 0,
+          "category": "deployment",
+          "explanation": "Deployment hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "deployment"
+    },
+    {
+      "id": "quiz-python-mod15-test-01",
+      "courseId": "course-python-apis",
+      "title": "15. Advanced Topics Testleri - Test 1",
+      "description": "İleri seviye Python konuları hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod15-01",
+          "question": "Generators nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "advanced",
+          "explanation": "Advanced Topics hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "advanced-topics"
+    },
+    {
+      "id": "quiz-python-mod15-test-02",
+      "courseId": "course-python-apis",
+      "title": "15. Advanced Topics Testleri - Test 2",
+      "description": "İleri seviye Python konuları hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod15-02",
+          "question": "Iterators nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "advanced",
+          "explanation": "Advanced Topics hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "advanced-topics"
+    },
+    {
+      "id": "quiz-python-mod15-test-03",
+      "courseId": "course-python-apis",
+      "title": "15. Advanced Topics Testleri - Test 3",
+      "description": "İleri seviye Python konuları hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod15-03",
+          "question": "Metaclasses nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "advanced",
+          "explanation": "Advanced Topics hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "advanced-topics"
+    },
+    {
+      "id": "quiz-python-mod15-test-04",
+      "courseId": "course-python-apis",
+      "title": "15. Advanced Topics Testleri - Test 4",
+      "description": "İleri seviye Python konuları hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod15-04",
+          "question": "Descriptors nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "advanced",
+          "explanation": "Advanced Topics hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "advanced-topics"
+    },
+    {
+      "id": "quiz-python-mod15-test-05",
+      "courseId": "course-python-apis",
+      "title": "15. Advanced Topics Testleri - Test 5",
+      "description": "İleri seviye Python konuları hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod15-05",
+          "question": "Type hints nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "advanced",
+          "explanation": "Advanced Topics hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "advanced-topics"
+    },
+    {
+      "id": "quiz-python-mod15-test-06",
+      "courseId": "course-python-apis",
+      "title": "15. Advanced Topics Testleri - Test 6",
+      "description": "İleri seviye Python konuları hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod15-06",
+          "question": "Multithreading nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "advanced",
+          "explanation": "Advanced Topics hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "advanced-topics"
+    },
+    {
+      "id": "quiz-python-mod15-test-07",
+      "courseId": "course-python-apis",
+      "title": "15. Advanced Topics Testleri - Test 7",
+      "description": "İleri seviye Python konuları hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod15-07",
+          "question": "Multiprocessing nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "advanced",
+          "explanation": "Advanced Topics hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "advanced-topics"
+    },
+    {
+      "id": "quiz-python-mod15-test-08",
+      "courseId": "course-python-apis",
+      "title": "15. Advanced Topics Testleri - Test 8",
+      "description": "İleri seviye Python konuları hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod15-08",
+          "question": "Design patterns nelerdir?",
+          "options": [],
+          "answer": 0,
+          "category": "advanced",
+          "explanation": "Advanced Topics hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "advanced-topics"
+    },
+    {
+      "id": "quiz-python-mod15-test-09",
+      "courseId": "course-python-apis",
+      "title": "15. Advanced Topics Testleri - Test 9",
+      "description": "İleri seviye Python konuları hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod15-09",
+          "question": "Package development nedir?",
+          "options": [],
+          "answer": 0,
+          "category": "advanced",
+          "explanation": "Advanced Topics hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "advanced-topics"
+    },
+    {
+      "id": "quiz-python-mod15-test-10",
+      "courseId": "course-python-apis",
+      "title": "15. Advanced Topics Testleri - Test 10",
+      "description": "İleri seviye Python konuları hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod15-10",
+          "question": "Advanced topics best practices nelerdir?",
+          "options": [],
+          "answer": 0,
+          "category": "advanced",
+          "explanation": "Advanced Topics hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "advanced-topics"
+    },
+    {
+      "id": "quiz-python-mod15-test-11",
+      "courseId": "course-python-apis",
+      "title": "15. Advanced Topics Testleri - Test 11",
+      "description": "İleri seviye Python konuları hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod15-11",
+          "question": "Advanced Topics hakkında soru 11",
+          "options": [],
+          "answer": 0,
+          "category": "advanced",
+          "explanation": "Advanced Topics hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "advanced-topics"
+    },
+    {
+      "id": "quiz-python-mod15-test-12",
+      "courseId": "course-python-apis",
+      "title": "15. Advanced Topics Testleri - Test 12",
+      "description": "İleri seviye Python konuları hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod15-12",
+          "question": "Advanced Topics hakkında soru 12",
+          "options": [],
+          "answer": 0,
+          "category": "advanced",
+          "explanation": "Advanced Topics hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "advanced-topics"
+    },
+    {
+      "id": "quiz-python-mod15-test-13",
+      "courseId": "course-python-apis",
+      "title": "15. Advanced Topics Testleri - Test 13",
+      "description": "İleri seviye Python konuları hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod15-13",
+          "question": "Advanced Topics hakkında soru 13",
+          "options": [],
+          "answer": 0,
+          "category": "advanced",
+          "explanation": "Advanced Topics hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "advanced-topics"
+    },
+    {
+      "id": "quiz-python-mod15-test-14",
+      "courseId": "course-python-apis",
+      "title": "15. Advanced Topics Testleri - Test 14",
+      "description": "İleri seviye Python konuları hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod15-14",
+          "question": "Advanced Topics hakkında soru 14",
+          "options": [],
+          "answer": 0,
+          "category": "advanced",
+          "explanation": "Advanced Topics hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "advanced-topics"
+    },
+    {
+      "id": "quiz-python-mod15-test-15",
+      "courseId": "course-python-apis",
+      "title": "15. Advanced Topics Testleri - Test 15",
+      "description": "İleri seviye Python konuları hakkında bilgi testi.",
+      "topic": "Python",
+      "type": "TEST",
+      "level": "intermediate",
+      "questions": [
+        {
+          "id": "q-python-mod15-15",
+          "question": "Advanced Topics hakkında soru 15",
+          "options": [],
+          "answer": 0,
+          "category": "advanced",
+          "explanation": "Advanced Topics hakkında bilgi testi"
+        }
+      ],
+      "passingScore": 70,
+      "lessonSlug": "advanced-topics"
+    }
+  ]
+}

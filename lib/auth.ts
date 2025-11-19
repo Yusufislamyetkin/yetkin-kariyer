@@ -1,6 +1,5 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { db } from "@/lib/db";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
 import type { UserRole } from "@/types";
@@ -38,7 +37,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         try {
           const { email, password } = loginSchema.parse(credentials);
 
-          // Check database connection
+          // Lazy-load db to avoid importing Prisma in Edge middleware build
+          const { db } = await import("@/lib/db");
           let user;
           try {
             user = await db.user.findUnique({

@@ -5,6 +5,7 @@ import { db } from "@/lib/db";
 import { normalizeCourseContent } from "@/lib/education/courseContent";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { LessonExperience } from "../_components/LessonExperience";
+import { RewardHUD } from "../_components/RewardHUD";
 
 type LessonCalloutVariant = "tip" | "info" | "warning" | "success";
 
@@ -510,6 +511,7 @@ export default async function LessonPage({
 
   return (
     <div className="container mx-auto px-4 py-8 space-y-10">
+      <RewardHUD />
       <Link
         href={backHref}
         className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 transition hover:text-blue-700"

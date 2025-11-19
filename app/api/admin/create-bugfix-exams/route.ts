@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import { upsertQuiz, Quiz } from "@/lib/admin/seed-data";
+import { db } from "@/lib/db";
 
 // 50 farklı C# bugfix senaryosu template'leri
 function generateBugfixTemplates(): Array<{
@@ -1027,76 +1027,10 @@ export async function POST() {
       );
     }
 
-    const templates = generateBugfixTemplates();
-    const courseId = "course-dotnet-roadmap";
-    const created: string[] = [];
-    const errors: string[] = [];
-
-    // Batch işleme için concurrent limit (aynı anda max 5 işlem)
-    const BATCH_SIZE = 5;
-    
-    // Her template için quiz oluştur - batch processing ile
-    for (let i = 0; i < templates.length; i += BATCH_SIZE) {
-      const batch = templates.slice(i, i + BATCH_SIZE);
-      
-      const batchPromises = batch.map(async (template) => {
-        try {
-          const quizId = `bugfix-csharp-${template.id}`;
-          
-          const quiz: Quiz = {
-            id: quizId,
-            courseId: courseId,
-            title: `C# Bugfix: ${template.title}`,
-            description: template.description,
-            topic: "C#",
-            type: "BUG_FIX",
-            level: template.level,
-            questions: [
-              {
-                id: template.id,
-                title: template.title,
-                description: template.description,
-                languages: ["csharp"],
-                buggyCode: {
-                  csharp: template.buggyCode
-                },
-                hints: template.hints || [],
-                acceptanceCriteria: template.acceptanceCriteria || []
-              }
-            ],
-            passingScore: 60,
-            lessonSlug: null
-          };
-
-          const result = await upsertQuiz(quiz);
-          
-          if (result.success) {
-            return { success: true, quizId, error: null };
-          } else {
-            return { success: false, quizId: null, error: `${template.id}: ${result.error || 'Unknown error'}` };
-          }
-        } catch (error: any) {
-          return { success: false, quizId: null, error: `${template.id}: ${error.message || 'Unknown error'}` };
-        }
-      });
-
-      const batchResults = await Promise.all(batchPromises);
-      
-      batchResults.forEach((result) => {
-        if (result.success && result.quizId) {
-          created.push(result.quizId);
-        } else if (result.error) {
-          errors.push(result.error);
-        }
-      });
-    }
-
-    return NextResponse.json({
-      success: errors.length === 0,
-      created: created.length,
-      message: `${created.length} adet bugfix sınavı başarıyla oluşturuldu${errors.length > 0 ? `, ${errors.length} hata oluştu` : ''}`,
-      errors: errors.length > 0 ? errors : undefined
-    });
+    return NextResponse.json(
+      { error: "Seed data functionality has been removed" },
+      { status: 410 }
+    );
   } catch (error: any) {
     console.error("Error creating bugfix exams:", error);
     return NextResponse.json(

@@ -1,0 +1,2043 @@
+{
+  "course": {
+    "id": "course-flutter-roadmap",
+    "title": "Flutter Mobile Roadmap",
+    "description": "Flutter ile çapraz platform mobil uygulamalar için kapsamlı modüller ve dersler.",
+    "category": "software-development",
+    "field": "mobile",
+    "subCategory": "flutter",
+    "expertise": "mobile",
+    "topic": "Flutter",
+    "topicContent": "Flutter Roadmap",
+    "difficulty": "intermediate",
+    "content": {
+      "overview": {
+        "description": "Flutter ile temel kavramlardan ileri seviye uygulamalara uzanan kapsamlı öğrenme yolu.",
+        "targetAudience": [
+          "Mobil geliştiriciler",
+          "Cross-platform geliştiriciler"
+        ],
+        "skills": [
+          "Dart",
+          "Flutter",
+          "Widget Tree",
+          "State Management",
+          "Navigation",
+          "Platform Channels"
+        ],
+        "estimatedDurationMinutes": 4500,
+        "outcomes": [
+          "Flutter widget mimarisini sağlam temellerle kurabilmek",
+          "State yönetimi ve navigation ile üretim seviyesinde uygulamalar geliştirmek",
+          "Platform channels ve native entegrasyon ekseninde kaliteyi artırmak"
+        ]
+      },
+      "prerequisites": [
+        "Temel programlama",
+        "OOP"
+      ],
+      "modules": [
+        {
+          "id": "flutter-module-01",
+          "title": "Flutter'ı Tanıyalım",
+          "summary": "Flutter ekosistemine giriş yaparak cross-platform mobil geliştirme temellerini öğrenin.",
+          "durationMinutes": 300,
+          "objectives": [
+            "Flutter nedir",
+            "Neden Flutter",
+            "Ekosistem tanıtımı"
+          ],
+          "lessons": [
+            {
+              "id": "flutter-lesson-01-01",
+              "title": "Flutter Nedir ve Neden Kullanılır?",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "flutter-intro",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-01-02",
+              "title": "Flutter'ın Tarihçesi ve Gelişimi",
+              "type": "reading",
+              "durationMinutes": 20,
+              "slug": "flutter-history",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-01-03",
+              "title": "Flutter vs React Native vs Native",
+              "type": "video",
+              "durationMinutes": 30,
+              "slug": "flutter-vs-others",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-01-04",
+              "title": "Flutter Ekosistemi",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "flutter-ecosystem",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-01-05",
+              "title": "Flutter SDK Kurulumu",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "flutter-sdk-setup",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-01-06",
+              "title": "Android Studio ve VS Code Kurulumu",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "ide-setup",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-01-07",
+              "title": "İlk Flutter Projesi Oluşturma",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "first-flutter-project",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-01-08",
+              "title": "Proje Yapısını Anlama",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "project-structure",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-01-09",
+              "title": "Flutter DevTools",
+              "type": "coding",
+              "durationMinutes": 25,
+              "slug": "flutter-devtools",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-01-10",
+              "title": "Flutter CLI Komutları",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "flutter-cli",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-01-11",
+              "title": "Hot Reload ve Hot Restart",
+              "type": "coding",
+              "durationMinutes": 25,
+              "slug": "hot-reload",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-01-12",
+              "title": "Flutter Versiyonları",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "flutter-versions",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-01-13",
+              "title": "Flutter Architecture Overview",
+              "type": "video",
+              "durationMinutes": 35,
+              "slug": "architecture-overview",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-01-14",
+              "title": "Flutter Best Practices",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "flutter-best-practices",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-01-15",
+              "title": "İlk Widget: Hello World",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "hello-world",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "flutter-module-02",
+          "title": "Dart Temelleri",
+          "summary": "Dart programlama dili temelleri ve Flutter ile kullanımı.",
+          "durationMinutes": 340,
+          "objectives": [
+            "Dart syntax",
+            "Types",
+            "Classes",
+            "Async programming"
+          ],
+          "lessons": [
+            {
+              "id": "flutter-lesson-02-01",
+              "title": "Dart Nedir?",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "dart-intro",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-02-02",
+              "title": "Dart Syntax Temelleri",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "dart-syntax",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-02-03",
+              "title": "Variables ve Types",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "variables-types",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-02-04",
+              "title": "Functions",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "functions",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-02-05",
+              "title": "Classes ve Objects",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "classes-objects",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-02-06",
+              "title": "Inheritance ve Polymorphism",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "inheritance-polymorphism",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-02-07",
+              "title": "Mixins",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "mixins",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-02-08",
+              "title": "Generics",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "generics",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-02-09",
+              "title": "Async/Await",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "async-await",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-02-10",
+              "title": "Futures ve Streams",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "futures-streams",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-02-11",
+              "title": "Collections (List, Map, Set)",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "collections",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-02-12",
+              "title": "Null Safety",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "null-safety",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-02-13",
+              "title": "Dart Best Practices",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "dart-best-practices",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-02-14",
+              "title": "Dart ve Flutter",
+              "type": "video",
+              "durationMinutes": 30,
+              "slug": "dart-flutter",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-02-15",
+              "title": "Dart Uygulama Örnekleri",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "dart-examples",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "flutter-module-03",
+          "title": "Widget Temelleri",
+          "summary": "Flutter widget yapısı, stateless ve stateful widgets.",
+          "durationMinutes": 360,
+          "objectives": [
+            "Widget yapısı",
+            "Stateless widgets",
+            "Stateful widgets"
+          ],
+          "lessons": [
+            {
+              "id": "flutter-lesson-03-01",
+              "title": "Widget Nedir?",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "widget-intro",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-03-02",
+              "title": "Widget Tree",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "widget-tree",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-03-03",
+              "title": "Stateless Widget",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "stateless-widget",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-03-04",
+              "title": "Stateful Widget",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "stateful-widget",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-03-05",
+              "title": "Widget Lifecycle",
+              "type": "video",
+              "durationMinutes": 35,
+              "slug": "widget-lifecycle",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-03-06",
+              "title": "setState Kullanımı",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "setstate",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-03-07",
+              "title": "Widget Composition",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "widget-composition",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-03-08",
+              "title": "Custom Widgets",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "custom-widgets",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-03-09",
+              "title": "Widget Keys",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "widget-keys",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-03-10",
+              "title": "Widget Performance",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "widget-performance",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-03-11",
+              "title": "Widget Best Practices",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "widget-best-practices",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-03-12",
+              "title": "Widget Testing",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "widget-testing",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-03-13",
+              "title": "Widget Patterns",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "widget-patterns",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-03-14",
+              "title": "Widget Reusability",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "widget-reusability",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-03-15",
+              "title": "Widget Uygulama Örnekleri",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "widget-examples",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "flutter-module-04",
+          "title": "Layout ve Styling",
+          "summary": "Flutter layout sistemi, styling ve theming.",
+          "durationMinutes": 360,
+          "objectives": [
+            "Layout widgets",
+            "Styling",
+            "Theming"
+          ],
+          "lessons": [
+            {
+              "id": "flutter-lesson-04-01",
+              "title": "Layout Nedir?",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "layout-intro",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-04-02",
+              "title": "Container ve Padding",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "container-padding",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-04-03",
+              "title": "Row ve Column",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "row-column",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-04-04",
+              "title": "Flex ve Expanded",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "flex-expanded",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-04-05",
+              "title": "Stack ve Positioned",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "stack-positioned",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-04-06",
+              "title": "ListView ve GridView",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "listview-gridview",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-04-07",
+              "title": "Wrap ve Flow",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "wrap-flow",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-04-08",
+              "title": "Constraints ve Sizing",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "constraints-sizing",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-04-09",
+              "title": "Material Design",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "material-design",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-04-10",
+              "title": "Cupertino Design",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "cupertino-design",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-04-11",
+              "title": "Theming",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "theming",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-04-12",
+              "title": "Colors ve Text Styles",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "colors-text-styles",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-04-13",
+              "title": "Responsive Design",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "responsive-design",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-04-14",
+              "title": "Layout Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "layout-best-practices",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-04-15",
+              "title": "Layout Uygulama Örnekleri",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "layout-examples",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "flutter-module-05",
+          "title": "State Management",
+          "summary": "Flutter state management, Provider, Bloc ve Riverpod.",
+          "durationMinutes": 400,
+          "objectives": [
+            "State management",
+            "Provider",
+            "Bloc",
+            "Riverpod"
+          ],
+          "lessons": [
+            {
+              "id": "flutter-lesson-05-01",
+              "title": "State Management Nedir?",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "state-mgmt-intro",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-05-02",
+              "title": "setState Kullanımı",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "setstate-detailed",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-05-03",
+              "title": "Provider Package",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "provider",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-05-04",
+              "title": "Bloc Pattern",
+              "type": "coding",
+              "durationMinutes": 45,
+              "slug": "bloc-pattern",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-05-05",
+              "title": "Riverpod",
+              "type": "coding",
+              "durationMinutes": 45,
+              "slug": "riverpod",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-05-06",
+              "title": "GetX State Management",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "getx",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-05-07",
+              "title": "State Management Patterns",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "state-patterns",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-05-08",
+              "title": "Global State",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "global-state",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-05-09",
+              "title": "State Persistence",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "state-persistence",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-05-10",
+              "title": "State Management Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "state-best-practices",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-05-11",
+              "title": "State Management Testing",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "state-testing",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-05-12",
+              "title": "State Management Karşılaştırması",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "state-comparison",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-05-13",
+              "title": "When to Use State Management",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "when-to-use",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-05-14",
+              "title": "State Management Patterns",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "state-mgmt-patterns",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-05-15",
+              "title": "State Management Uygulama Örnekleri",
+              "type": "coding",
+              "durationMinutes": 45,
+              "slug": "state-examples",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "flutter-module-06",
+          "title": "Navigation",
+          "summary": "Flutter navigation, routing ve deep linking.",
+          "durationMinutes": 360,
+          "objectives": [
+            "Navigation",
+            "Routing",
+            "Deep linking"
+          ],
+          "lessons": [
+            {
+              "id": "flutter-lesson-06-01",
+              "title": "Navigation Nedir?",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "navigation-intro",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-06-02",
+              "title": "Navigator Widget",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "navigator-widget",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-06-03",
+              "title": "Named Routes",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "named-routes",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-06-04",
+              "title": "Route Parameters",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "route-params",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-06-05",
+              "title": "Navigator 2.0",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "navigator-2",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-06-06",
+              "title": "go_router Package",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "go-router",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-06-07",
+              "title": "Deep Linking",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "deep-linking",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-06-08",
+              "title": "Route Guards",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "route-guards",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-06-09",
+              "title": "Nested Navigation",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "nested-navigation",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-06-10",
+              "title": "Bottom Navigation Bar",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "bottom-nav",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-06-11",
+              "title": "Tab Navigation",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "tab-navigation",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-06-12",
+              "title": "Drawer Navigation",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "drawer-navigation",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-06-13",
+              "title": "Navigation Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "navigation-best-practices",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-06-14",
+              "title": "Navigation Testing",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "navigation-testing",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-06-15",
+              "title": "Navigation Uygulama Örnekleri",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "navigation-examples",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "flutter-module-07",
+          "title": "Forms ve Input",
+          "summary": "Flutter form handling, validation ve input widgets.",
+          "durationMinutes": 340,
+          "objectives": [
+            "Form handling",
+            "Validation",
+            "Input widgets"
+          ],
+          "lessons": [
+            {
+              "id": "flutter-lesson-07-01",
+              "title": "Form Handling Nedir?",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "form-intro",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-07-02",
+              "title": "TextFormField",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "textformfield",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-07-03",
+              "title": "Form Validation",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "form-validation",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-07-04",
+              "title": "FormField ve FormState",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "formfield-formstate",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-07-05",
+              "title": "Custom Validators",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "custom-validators",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-07-06",
+              "title": "Input Decorators",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "input-decorators",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-07-07",
+              "title": "Checkbox ve Radio Buttons",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "checkbox-radio",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-07-08",
+              "title": "Dropdown ve Selection",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "dropdown-selection",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-07-09",
+              "title": "Date Picker",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "date-picker",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-07-10",
+              "title": "File Picker",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "file-picker",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-07-11",
+              "title": "Form Best Practices",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "form-best-practices",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-07-12",
+              "title": "Form State Management",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "form-state-mgmt",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-07-13",
+              "title": "Form Testing",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "form-testing",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-07-14",
+              "title": "Accessibility in Forms",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "form-accessibility",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-07-15",
+              "title": "Form Uygulama Örnekleri",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "form-examples",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "flutter-module-08",
+          "title": "Networking",
+          "summary": "HTTP requests, API integration ve data fetching.",
+          "durationMinutes": 360,
+          "objectives": [
+            "HTTP requests",
+            "API integration",
+            "Error handling"
+          ],
+          "lessons": [
+            {
+              "id": "flutter-lesson-08-01",
+              "title": "Networking Nedir?",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "networking-intro",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-08-02",
+              "title": "http Package",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "http-package",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-08-03",
+              "title": "GET Request",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "get-request",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-08-04",
+              "title": "POST Request",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "post-request",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-08-05",
+              "title": "Dio Package",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "dio-package",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-08-06",
+              "title": "Request Headers",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "request-headers",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-08-07",
+              "title": "Response Handling",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "response-handling",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-08-08",
+              "title": "Error Handling",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "error-handling",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-08-09",
+              "title": "Loading States",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "loading-states",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-08-10",
+              "title": "JSON Serialization",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "json-serialization",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-08-11",
+              "title": "API Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "api-best-practices",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-08-12",
+              "title": "Caching Strategies",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "caching-strategies",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-08-13",
+              "title": "Network Testing",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "network-testing",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-08-14",
+              "title": "Offline Support",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "offline-support",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-08-15",
+              "title": "Networking Uygulama Örnekleri",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "networking-examples",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "flutter-module-09",
+          "title": "Local Storage",
+          "summary": "Local data storage, SharedPreferences, SQLite ve Hive.",
+          "durationMinutes": 360,
+          "objectives": [
+            "Local storage",
+            "SharedPreferences",
+            "SQLite",
+            "Hive"
+          ],
+          "lessons": [
+            {
+              "id": "flutter-lesson-09-01",
+              "title": "Local Storage Nedir?",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "local-storage-intro",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-09-02",
+              "title": "SharedPreferences",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "sharedpreferences",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-09-03",
+              "title": "SQLite Database",
+              "type": "coding",
+              "durationMinutes": 45,
+              "slug": "sqlite",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-09-04",
+              "title": "sqflite Package",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "sqflite",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-09-05",
+              "title": "Hive Database",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "hive",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-09-06",
+              "title": "File Storage",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "file-storage",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-09-07",
+              "title": "path_provider Package",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "path-provider",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-09-08",
+              "title": "Data Encryption",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "data-encryption",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-09-09",
+              "title": "Data Migration",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "data-migration",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-09-10",
+              "title": "Local Storage Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "storage-best-practices",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-09-11",
+              "title": "Storage Testing",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "storage-testing",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-09-12",
+              "title": "Storage Patterns",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "storage-patterns",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-09-13",
+              "title": "Performance Considerations",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "storage-performance",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-09-14",
+              "title": "Storage Security",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "storage-security",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-09-15",
+              "title": "Local Storage Uygulama Örnekleri",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "storage-examples",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "flutter-module-10",
+          "title": "Animations",
+          "summary": "Flutter animations, implicit ve explicit animations.",
+          "durationMinutes": 360,
+          "objectives": [
+            "Animations",
+            "Implicit animations",
+            "Explicit animations"
+          ],
+          "lessons": [
+            {
+              "id": "flutter-lesson-10-01",
+              "title": "Animations Nedir?",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "animations-intro",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-10-02",
+              "title": "Implicit Animations",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "implicit-animations",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-10-03",
+              "title": "AnimatedContainer",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "animated-container",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-10-04",
+              "title": "AnimatedOpacity",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "animated-opacity",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-10-05",
+              "title": "Explicit Animations",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "explicit-animations",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-10-06",
+              "title": "AnimationController",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "animation-controller",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-10-07",
+              "title": "Tween ve Curves",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "tween-curves",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-10-08",
+              "title": "Hero Animations",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "hero-animations",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-10-09",
+              "title": "Page Transitions",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "page-transitions",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-10-10",
+              "title": "Animation Packages",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "animation-packages",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-10-11",
+              "title": "Performance Optimizations",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "animation-performance",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-10-12",
+              "title": "Animation Best Practices",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "animation-best-practices",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-10-13",
+              "title": "Custom Animations",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "custom-animations",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-10-14",
+              "title": "Animation Testing",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "animation-testing",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-10-15",
+              "title": "Animations Uygulama Örnekleri",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "animation-examples",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "flutter-module-11",
+          "title": "Platform Channels",
+          "summary": "Platform channels, native code integration ve plugins.",
+          "durationMinutes": 360,
+          "objectives": [
+            "Platform channels",
+            "Native integration",
+            "Plugins"
+          ],
+          "lessons": [
+            {
+              "id": "flutter-lesson-11-01",
+              "title": "Platform Channels Nedir?",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "platform-channels-intro",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-11-02",
+              "title": "Method Channels",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "method-channels",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-11-03",
+              "title": "Event Channels",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "event-channels",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-11-04",
+              "title": "Android Native Code",
+              "type": "coding",
+              "durationMinutes": 45,
+              "slug": "android-native",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-11-05",
+              "title": "iOS Native Code",
+              "type": "coding",
+              "durationMinutes": 45,
+              "slug": "ios-native",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-11-06",
+              "title": "Plugin Development",
+              "type": "coding",
+              "durationMinutes": 45,
+              "slug": "plugin-development",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-11-07",
+              "title": "Platform-Specific Code",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "platform-specific",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-11-08",
+              "title": "Native APIs Kullanımı",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "native-apis",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-11-09",
+              "title": "Platform Channels Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "channels-best-practices",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-11-10",
+              "title": "Error Handling",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "channels-error-handling",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-11-11",
+              "title": "Performance Considerations",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "channels-performance",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-11-12",
+              "title": "Testing Platform Channels",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "channels-testing",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-11-13",
+              "title": "Common Plugins",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "common-plugins",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-11-14",
+              "title": "Plugin Architecture",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "plugin-architecture",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-11-15",
+              "title": "Platform Channels Uygulama Örnekleri",
+              "type": "coding",
+              "durationMinutes": 45,
+              "slug": "channels-examples",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "flutter-module-12",
+          "title": "Testing",
+          "summary": "Flutter testing, unit tests, widget tests ve integration tests.",
+          "durationMinutes": 360,
+          "objectives": [
+            "Unit testing",
+            "Widget testing",
+            "Integration testing"
+          ],
+          "lessons": [
+            {
+              "id": "flutter-lesson-12-01",
+              "title": "Testing Nedir?",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "testing-intro",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-12-02",
+              "title": "Unit Testing",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "unit-testing",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-12-03",
+              "title": "Widget Testing",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "widget-testing",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-12-04",
+              "title": "Integration Testing",
+              "type": "coding",
+              "durationMinutes": 45,
+              "slug": "integration-testing",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-12-05",
+              "title": "Test Widgets",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "test-widgets",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-12-06",
+              "title": "Mocking ve Stubs",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "mocking-stubs",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-12-07",
+              "title": "Golden Tests",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "golden-tests",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-12-08",
+              "title": "Test Coverage",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "test-coverage",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-12-09",
+              "title": "CI/CD Testing",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "cicd-testing",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-12-10",
+              "title": "Testing Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "testing-best-practices",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-12-11",
+              "title": "Testing Patterns",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "testing-patterns",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-12-12",
+              "title": "Performance Testing",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "performance-testing",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-12-13",
+              "title": "E2E Testing",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "e2e-testing",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-12-14",
+              "title": "Testing Tools",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "testing-tools",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-12-15",
+              "title": "Testing Uygulama Örnekleri",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "testing-examples",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "flutter-module-13",
+          "title": "Performance",
+          "summary": "Flutter performans optimizasyonu teknikleri.",
+          "durationMinutes": 340,
+          "objectives": [
+            "Performance optimization",
+            "Build optimization",
+            "Runtime optimization"
+          ],
+          "lessons": [
+            {
+              "id": "flutter-lesson-13-01",
+              "title": "Performance Nedir?",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "performance-intro",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-13-02",
+              "title": "Performance Profiling",
+              "type": "video",
+              "durationMinutes": 35,
+              "slug": "performance-profiling",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-13-03",
+              "title": "Build Optimization",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "build-optimization",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-13-04",
+              "title": "App Size Optimization",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "app-size-optimization",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-13-05",
+              "title": "Image Optimization",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "image-optimization",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-13-06",
+              "title": "Lazy Loading",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "lazy-loading",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-13-07",
+              "title": "Memory Management",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "memory-management",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-13-08",
+              "title": "Widget Rebuild Optimization",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "widget-rebuild",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-13-09",
+              "title": "Performance Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "performance-best-practices",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-13-10",
+              "title": "Performance Metrics",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "performance-metrics",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-13-11",
+              "title": "Performance Monitoring",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "performance-monitoring",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-13-12",
+              "title": "Battery Optimization",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "battery-optimization",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-13-13",
+              "title": "Network Optimization",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "network-optimization",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-13-14",
+              "title": "Performance Tools",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "performance-tools",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-13-15",
+              "title": "Performance Uygulama Örnekleri",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "performance-examples",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "flutter-module-14",
+          "title": "Publishing",
+          "summary": "Flutter uygulamalarının build, signing ve store'a yükleme süreçleri.",
+          "durationMinutes": 360,
+          "objectives": [
+            "Build",
+            "Signing",
+            "App Store",
+            "Play Store"
+          ],
+          "lessons": [
+            {
+              "id": "flutter-lesson-14-01",
+              "title": "Publishing Nedir?",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "publishing-intro",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-14-02",
+              "title": "Android Build",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "android-build",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-14-03",
+              "title": "iOS Build",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "ios-build",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-14-04",
+              "title": "App Signing (Android)",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "android-signing",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-14-05",
+              "title": "App Signing (iOS)",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "ios-signing",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-14-06",
+              "title": "App Bundle (AAB)",
+              "type": "coding",
+              "durationMinutes": 35,
+              "slug": "app-bundle",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-14-07",
+              "title": "APK Generation",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "apk-generation",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-14-08",
+              "title": "Google Play Store",
+              "type": "reading",
+              "durationMinutes": 35,
+              "slug": "play-store",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-14-09",
+              "title": "Apple App Store",
+              "type": "reading",
+              "durationMinutes": 35,
+              "slug": "app-store",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-14-10",
+              "title": "Version Management",
+              "type": "coding",
+              "durationMinutes": 30,
+              "slug": "version-management",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-14-11",
+              "title": "Release Notes",
+              "type": "reading",
+              "durationMinutes": 25,
+              "slug": "release-notes",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-14-12",
+              "title": "Store Listing",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "store-listing",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-14-13",
+              "title": "Publishing Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "publishing-best-practices",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-14-14",
+              "title": "CI/CD for Publishing",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "cicd-publishing",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-14-15",
+              "title": "Publishing Uygulama Örnekleri",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "publishing-examples",
+              "resources": []
+            }
+          ]
+        },
+        {
+          "id": "flutter-module-15",
+          "title": "Advanced Topics",
+          "summary": "İleri seviye Flutter konuları ve teknikleri.",
+          "durationMinutes": 360,
+          "objectives": [
+            "Advanced topics",
+            "Flutter patterns",
+            "Best practices"
+          ],
+          "lessons": [
+            {
+              "id": "flutter-lesson-15-01",
+              "title": "Isolates ve Concurrency",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "isolates",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-15-02",
+              "title": "Custom Paint",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "custom-paint",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-15-03",
+              "title": "Custom Render Objects",
+              "type": "coding",
+              "durationMinutes": 45,
+              "slug": "custom-render",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-15-04",
+              "title": "Flutter Web",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "flutter-web",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-15-05",
+              "title": "Flutter Desktop",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "flutter-desktop",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-15-06",
+              "title": "Firebase Integration",
+              "type": "coding",
+              "durationMinutes": 45,
+              "slug": "firebase-integration",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-15-07",
+              "title": "Architecture Patterns",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "architecture-patterns",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-15-08",
+              "title": "Code Organization",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "code-organization",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-15-09",
+              "title": "Flutter Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "flutter-best-practices-detailed",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-15-10",
+              "title": "Internationalization (i18n)",
+              "type": "coding",
+              "durationMinutes": 40,
+              "slug": "i18n",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-15-11",
+              "title": "Accessibility",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "accessibility",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-15-12",
+              "title": "Security Best Practices",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "security-best-practices",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-15-13",
+              "title": "Micro-frontends",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "micro-frontends",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-15-14",
+              "title": "Advanced Patterns",
+              "type": "reading",
+              "durationMinutes": 30,
+              "slug": "advanced-patterns",
+              "resources": []
+            },
+            {
+              "id": "flutter-lesson-15-15",
+              "title": "Advanced Topics Uygulama Örnekleri",
+              "type": "coding",
+              "durationMinutes": 45,
+              "slug": "advanced-examples",
+              "resources": []
+            }
+          ]
+        }
+      ]
+    },
+    "estimatedDuration": 4500
+  }
+}

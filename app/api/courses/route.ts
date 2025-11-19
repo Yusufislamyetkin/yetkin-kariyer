@@ -1,13 +1,15 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function GET(request: Request) {
   try {
-    // Get only course-dotnet-roadmap
+    console.log("[API_COURSES] Fetching all courses from database...");
+    
+    // Get all courses
     const courses = await db.course.findMany({
-      where: {
-        id: 'course-dotnet-roadmap',
-      },
       select: {
         id: true,
         title: true,
@@ -23,8 +25,31 @@ export async function GET(request: Request) {
       },
     });
 
+    console.log(`[API_COURSES] Found ${courses.length} courses in database`);
+    courses.forEach((course: {
+      id: string;
+      title: string;
+      description: string | null;
+      category: string | null;
+      field: string | null;
+      difficulty: string;
+      estimatedDuration: number | null;
+      content: unknown;
+    }) => {
+      console.log(`[API_COURSES] Course: ${course.id} - ${course.title}`);
+    });
+
     // Map courses to include module count and total lessons
-    const coursesWithStats = courses.map((course) => {
+    const coursesWithStats = courses.map((course: {
+      id: string;
+      title: string;
+      description: string | null;
+      category: string | null;
+      field: string | null;
+      difficulty: string;
+      estimatedDuration: number | null;
+      content: unknown;
+    }) => {
       const content = course.content as any;
       
       // Safely get modules array
@@ -52,6 +77,7 @@ export async function GET(request: Request) {
       };
     });
 
+    console.log(`[API_COURSES] Returning ${coursesWithStats.length} courses with stats`);
     return NextResponse.json({ courses: coursesWithStats });
   } catch (error) {
     console.error("Error fetching courses:", error);

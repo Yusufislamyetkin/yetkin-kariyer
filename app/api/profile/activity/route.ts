@@ -75,7 +75,7 @@ export async function GET(request: Request) {
     // Combine and sort all activities
     const activities: any[] = [];
 
-    quizAttempts.forEach((attempt) => {
+    quizAttempts.forEach((attempt: { id: string; score: number; completedAt: Date; quiz?: { title: string } | null }) => {
       if (attempt.quiz) {
         activities.push({
           id: attempt.id,
@@ -88,7 +88,7 @@ export async function GET(request: Request) {
       }
     });
 
-    interviewAttempts.forEach((attempt) => {
+    interviewAttempts.forEach((attempt: { id: string; aiScore: number | null; completedAt: Date; interview?: { title: string } | null }) => {
       if (attempt.interview) {
         activities.push({
           id: attempt.id,
@@ -101,7 +101,7 @@ export async function GET(request: Request) {
       }
     });
 
-    cvs.forEach((cv) => {
+    cvs.forEach((cv: { id: string; createdAt: Date }) => {
       activities.push({
         id: cv.id,
         type: "cv",
@@ -111,7 +111,7 @@ export async function GET(request: Request) {
       });
     });
 
-    applications.forEach((app) => {
+    applications.forEach((app: { id: string; appliedAt: Date; job?: { title: string } | null }) => {
       if (app.job) {
         activities.push({
           id: app.id,

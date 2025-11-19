@@ -14,7 +14,7 @@ async function ensureDirectAccess(threadId: string, userId: string) {
   if (!thread || !isDirectThreadSlug(thread.slug)) {
     return false;
   }
-  return thread.memberships.some((member) => member.userId === userId);
+  return thread.memberships.some((member: { userId: string }) => member.userId === userId);
 }
 
 export async function POST(request: Request, { params }: { params: { threadId: string } }) {
@@ -43,10 +43,10 @@ export async function POST(request: Request, { params }: { params: { threadId: s
     const { messageIds, lastSeenAt } = parsed.data;
     const now = new Date();
 
-    await db.$transaction(async (tx) => {
+    await db.$transaction(async (tx: any) => {
       if (messageIds && messageIds.length > 0) {
         await tx.chatMessageReceipt.createMany({
-          data: messageIds.map((messageId) => ({
+          data: messageIds.map((messageId: string) => ({
             messageId,
             userId,
             readAt: now,

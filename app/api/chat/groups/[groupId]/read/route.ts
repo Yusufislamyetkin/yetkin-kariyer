@@ -41,10 +41,10 @@ export async function POST(request: Request, { params }: { params: { groupId: st
     const { messageIds, lastSeenAt } = parsed.data;
     const now = new Date();
 
-    await db.$transaction(async (tx) => {
+    await db.$transaction(async (tx: any) => {
       if (messageIds && messageIds.length > 0) {
         await tx.chatMessageReceipt.createMany({
-          data: messageIds.map((messageId) => ({
+          data: messageIds.map((messageId: string) => ({
             messageId,
             userId,
             readAt: now,

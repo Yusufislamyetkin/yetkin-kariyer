@@ -5,8 +5,7 @@ import { useRouter } from "next/navigation";
 import { MessageSquare, Loader2, CheckCircle2, Code, Bug, PlayCircle, HelpCircle, BookOpen } from "lucide-react";
 import { Composer } from "@/app/(dashboard)/chat/_components/Composer";
 import { MessageViewport } from "@/app/(dashboard)/chat/_components/MessageViewport";
-import { CodingChallengeModal } from "./CodingChallengeModal";
-import { BugFixChallengeModal } from "./BugFixChallengeModal";
+// Modals removed; navigate to new practice pages instead
 import { QuestionInteraction } from "./QuestionInteraction";
 import { LessonMiniTest } from "./LessonMiniTest";
 import { CodeBlock } from "./CodeBlock";
@@ -40,6 +39,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: Lesso
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(true);
   const [sending, setSending] = useState(false);
+  const [assistantTyping, setAssistantTyping] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [messageInput, setMessageInput] = useState("");
   const [attachments, setAttachments] = useState<LocalAttachment[]>([]);
@@ -89,6 +89,16 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: Lesso
     options: string[];
     correctIndex: number;
   }>>([]);
+
+  // Normalize option labels to avoid duplicates like "A. A) şık"
+  const sanitizeOptionText = useCallback((option: string): string => {
+    if (!option) return option;
+    return option
+      .replace(/^\s*[A-Da-d][\)\.]\s+/, "") // A) , A. , a) , a.
+      .replace(/^\s*\(?[A-Da-d]\)\s+/, "")  // (A)
+      .replace(/^\s*\d+[\)\.]\s+/, "")      // 1) , 1.
+      .trim();
+  }, []);
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -192,21 +202,19 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: Lesso
               const question = action.data.question;
               console.log("Initial load - Received test_question:", question); // Debug log
               setPendingTestQuestions((prev) => {
+                if (prev.some((q) => q.text === question.text)) {
+                  return prev;
+                }
                 const updated = [...prev, question];
                 if (updated.length > 0 && (!currentTestQuestion || prev.length === 0)) {
                   setCurrentTestQuestion(updated[0]);
                 }
                 return updated;
               });
-            } else if (action.type === "coding_challenge" && action.data?.task) {
-              console.log("Setting coding challenge:", action.data.task); // Debug log
-              setCodingChallenge({ task: action.data.task });
-            } else if (action.type === "create_livecoding" && action.data?.task) {
-              console.log("Setting live coding challenge:", action.data.task); // Debug log
-              setCodingChallenge({ task: action.data.task });
-            } else if (action.type === "create_bugfix" && action.data?.task) {
-              console.log("Setting bugfix challenge:", action.data.task); // Debug log
-              setBugfixChallenge({ task: action.data.task });
+            } else if (action.type === "coding_challenge" || action.type === "create_livecoding") {
+              router.push("/practice/live-coding");
+            } else if (action.type === "create_bugfix") {
+              router.push("/practice/bugfix");
             } else if (action.type === "question" && action.data?.question) {
               setCurrentQuestion(action.data.question);
             } else if (action.type === "create_test" && action.data?.question) {
@@ -281,10 +289,8 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: Lesso
                     }
                     return updated;
                   });
-                } else if (action.type === "coding_challenge" && action.data?.task) {
-                  setCodingChallenge({ task: action.data.task });
-                } else if (action.type === "create_livecoding" && action.data?.task) {
-                  setCodingChallenge({ task: action.data.task });
+                } else if (action.type === "coding_challenge" || action.type === "create_livecoding") {
+                  router.push("/practice/live-coding");
                 } else if (action.type === "create_bugfix" && action.data?.task) {
                   setBugfixChallenge({ task: action.data.task });
                 } else if (action.type === "question" && action.data?.question) {
@@ -383,6 +389,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: Lesso
       setMessageInput("");
       setCurrentChoices(null); // Clear choices when sending a message
       setSending(true);
+      setAssistantTyping(true);
       setError(null);
 
       try {
@@ -444,6 +451,9 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: Lesso
               const question = action.data.question;
               console.log("handleSendMessage - Received test_question:", question); // Debug log
               setPendingTestQuestions((prev) => {
+                if (prev.some((q) => q.text === question.text)) {
+                  return prev;
+                }
                 const updated = [...prev, question];
                 // Always show the first question from the updated queue
                 if (updated.length > 0 && (!currentTestQuestion || prev.length === 0)) {
@@ -523,6 +533,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: Lesso
         setError(err instanceof Error ? err.message : "Mesaj gönderilemedi");
       } finally {
         setSending(false);
+        setAssistantTyping(false);
       }
     },
     [messageInput, messages, lessonSlug, sending, lessonPlan, checkAndMarkLessonCompleted]
@@ -600,6 +611,9 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: Lesso
               const question = action.data.question;
               console.log("handleQuestionAnswer - Received test_question:", question); // Debug log
               setPendingTestQuestions((prev) => {
+                if (prev.some((q) => q.text === question.text)) {
+                  return prev;
+                }
                 const updated = [...prev, question];
                 if (updated.length > 0 && (!currentTestQuestion || prev.length === 0)) {
                   setCurrentTestQuestion(updated[0]);
@@ -645,6 +659,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: Lesso
         setError(err instanceof Error ? err.message : "Mesaj gönderilemedi");
       } finally {
         setSending(false);
+        setAssistantTyping(false);
       }
     },
     [messages, lessonSlug, lessonPlan, sending, checkAndMarkLessonCompleted, router, currentTestQuestion]
@@ -723,6 +738,9 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: Lesso
                 const question = action.data.question;
                 console.log("handleChoiceSelect - Received test_question:", question); // Debug log
                 setPendingTestQuestions((prev) => {
+                  if (prev.some((q) => q.text === question.text)) {
+                    return prev;
+                  }
                   const updated = [...prev, question];
                   if (updated.length > 0 && (!currentTestQuestion || prev.length === 0)) {
                     setCurrentTestQuestion(updated[0]);
@@ -961,6 +979,9 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: Lesso
                 const question = action.data.question;
                 console.log("handleBugfixComplete - Received test_question:", question); // Debug log
                 setPendingTestQuestions((prev) => {
+                  if (prev.some((q) => q.text === question.text)) {
+                    return prev;
+                  }
                   const updated = [...prev, question];
                   if (updated.length > 0 && (!currentTestQuestion || prev.length === 0)) {
                     setCurrentTestQuestion(updated[0]);
@@ -1017,10 +1038,12 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: Lesso
       if (!currentTestQuestion) return;
 
       const isCorrect = selectedIndex === currentTestQuestion.correctIndex;
+      const selectedText = sanitizeOptionText(currentTestQuestion.options[selectedIndex]);
+      const correctText = sanitizeOptionText(currentTestQuestion.options[currentTestQuestion.correctIndex]);
       const answerMessage: Message = {
         id: `msg-${Date.now()}`,
         role: "user",
-        content: `Test sorusu: ${currentTestQuestion.text}\nCevabım: ${currentTestQuestion.options[selectedIndex]}\n${isCorrect ? "Doğru!" : "Yanlış"}`,
+        content: `Test sorusu: ${currentTestQuestion.text}\nCevabım: ${selectedText}\n${isCorrect ? "Doğru!" : "Yanlış"}`,
         timestamp: new Date().toISOString(),
       };
 
@@ -1032,7 +1055,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: Lesso
         role: "assistant",
         content: isCorrect
           ? "Harika! Doğru cevap. 🎉"
-          : `Maalesef yanlış. Doğru cevap: ${currentTestQuestion.options[currentTestQuestion.correctIndex]}`,
+          : `Maalesef yanlış. Doğru cevap: ${correctText}`,
         timestamp: new Date().toISOString(),
       };
 
@@ -1228,6 +1251,9 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: Lesso
                 const question = action.data.question;
                 console.log("handleCodingComplete - Received test_question:", question); // Debug log
                 setPendingTestQuestions((prev) => {
+                  if (prev.some((q) => q.text === question.text)) {
+                    return prev;
+                  }
                   const updated = [...prev, question];
                   if (updated.length > 0 && (!currentTestQuestion || prev.length === 0)) {
                     setCurrentTestQuestion(updated[0]);
@@ -1304,6 +1330,12 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: Lesso
     // Remove CODE_BLOCK tags - they are rendered separately as code blocks
     cleaned = cleaned.replace(/\[CODE_BLOCK:[\s\S]*?\]/gi, '');
     
+    // Remove repetitive filler phrases from assistant like "Devam ediyorum", "Devam edelim", leading "Şimdi,"
+    cleaned = cleaned.replace(/\bdevam ediyorum\b/gi, '');
+    cleaned = cleaned.replace(/\bdevam edelim\b/gi, '');
+    cleaned = cleaned.replace(/\bdaha fazlasına geçiyorum\b/gi, '');
+    cleaned = cleaned.replace(/(?:^|\n)\s*şimdi[,:\s]+/gi, '\n'); // start-of-line "Şimdi," noise
+
     // Clean up multiple newlines
     cleaned = cleaned.replace(/\n{3,}/g, '\n\n');
     
@@ -1455,18 +1487,32 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: Lesso
               const codeBlocks = messageCodeBlocksMap.get(msg.id)!;
               return (
                 <div key={`code-blocks-${msg.id}`} className="px-6 pb-3 -mt-1">
-                  <div className="space-y-3" style={{ maxWidth: "65%", marginLeft: "calc(3rem + 0.375rem)" }}>
+                  <div className="space-y-3 max-w-[65%] ml-16">
                     {codeBlocks.map((codeBlock, index) => (
-                      <CodeBlock
+                      <div
                         key={`code-block-${msg.id}-${index}`}
-                        code={codeBlock.code}
-                        language={codeBlock.language}
-                      />
+                        className="rounded-2xl bg-blue-50/60 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/40 overflow-hidden"
+                      >
+                        <CodeBlock
+                          code={codeBlock.code}
+                          language={codeBlock.language}
+                        />
+                      </div>
                     ))}
                   </div>
                 </div>
               );
             })}
+          
+          {/* Typing indicator */}
+          {assistantTyping && (
+            <div className="px-6 pb-4">
+              <div className="ml-16 inline-flex items-center gap-2 px-3 py-2 rounded-2xl bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
+                <Loader2 className="h-4 w-4 animate-spin" />
+                <span>Yazıyor...</span>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -1495,7 +1541,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: Lesso
                           setCurrentTestQuestion({
                             text: question.text,
                             type: "multiple_choice",
-                            options: question.options || [],
+                            options: (question.options || []).map(sanitizeOptionText),
                             correctIndex: question.correctIndex ?? 0,
                           });
                           // Trigger answer
@@ -1507,7 +1553,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: Lesso
                         className="w-full justify-start text-left hover:bg-blue-100 dark:hover:bg-blue-900/40 border-blue-300 dark:border-blue-700"
                         disabled={sending}
                       >
-                        {String.fromCharCode(65 + optionIndex)}. {option}
+                        {String.fromCharCode(65 + optionIndex)}. {sanitizeOptionText(option)}
                       </Button>
                     ))}
                   </div>
@@ -1549,7 +1595,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: Lesso
                     className="w-full justify-start text-left"
                     disabled={sending}
                   >
-                    {String.fromCharCode(65 + index)}. {option}
+                    {String.fromCharCode(65 + index)}. {sanitizeOptionText(option)}
                   </Button>
                 ))}
               </div>
@@ -1585,14 +1631,14 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: Lesso
       {!currentChoices && !currentTestQuestion && !currentQuestion && !codingChallenge && !bugfixChallenge && !showQuiz && 
        messages.length > 0 && messages[messages.length - 1]?.role === "assistant" && !sending && (
         <div className="px-6 pb-4">
-          <Card className="border-purple-200 bg-purple-50/50 dark:border-purple-900/40 dark:bg-purple-950/30">
-            <CardContent className="p-4">
+          <Card className="border-gray-200 bg-gray-50/60 dark:border-gray-800/60 dark:bg-gray-800/40">
+            <CardContent className="p-3">
               <div className="flex flex-wrap gap-2">
                 <Button
                   onClick={() => handleContextButton("Devam et", "devam et")}
                   variant="outline"
                   size="sm"
-                  className="hover:bg-purple-100 dark:hover:bg-purple-900/40 border-purple-300 dark:border-purple-700"
+                  className="hover:bg-gray-100 dark:hover:bg-gray-700/60 border-gray-300 dark:border-gray-600"
                   disabled={sending}
                 >
                   Devam et
@@ -1601,7 +1647,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: Lesso
                   onClick={() => handleContextButton("Örnekle Açıkla", "örnekle açıkla")}
                   variant="outline"
                   size="sm"
-                  className="hover:bg-purple-100 dark:hover:bg-purple-900/40 border-purple-300 dark:border-purple-700"
+                  className="hover:bg-gray-100 dark:hover:bg-gray-700/60 border-gray-300 dark:border-gray-600"
                   disabled={sending}
                 >
                   Örnekle Açıkla
@@ -1610,7 +1656,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: Lesso
                   onClick={() => handleContextButton("Bir sonraki aşamaya geç", "bir sonraki aşamaya geç")}
                   variant="outline"
                   size="sm"
-                  className="hover:bg-purple-100 dark:hover:bg-purple-900/40 border-purple-300 dark:border-purple-700"
+                  className="hover:bg-gray-100 dark:hover:bg-gray-700/60 border-gray-300 dark:border-gray-600"
                   disabled={sending}
                 >
                   Bir sonraki aşamaya geç
@@ -1638,25 +1684,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: Lesso
         placeholder={currentQuestion || currentTestQuestion || currentChoices ? "Lütfen yukarıdaki seçenekleri kullanın..." : "Sorunu yaz veya ders hakkında bilgi iste..."}
       />
 
-      {/* Coding Challenge Modal */}
-      {codingChallenge && (
-        <CodingChallengeModal
-          isOpen={!!codingChallenge}
-          onClose={() => setCodingChallenge(null)}
-          task={codingChallenge.task}
-          onComplete={handleCodingComplete}
-        />
-      )}
-
-      {/* Bugfix Challenge Modal */}
-      {bugfixChallenge && (
-        <BugFixChallengeModal
-          isOpen={!!bugfixChallenge}
-          onClose={() => setBugfixChallenge(null)}
-          task={bugfixChallenge.task}
-          onComplete={handleBugfixComplete}
-        />
-      )}
+      {/* Coding & Bugfix modals removed in favor of dedicated pages */}
 
       {/* Error Overlay */}
       {error && (

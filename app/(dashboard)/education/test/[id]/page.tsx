@@ -1,369 +1,362 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
-import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { clsx } from "clsx";
+import { BookOpen, ChevronLeft, Clock, Compass, ArrowRight, FileText, Zap } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
-import { Button } from "@/app/components/ui/Button";
-import { Clock, CheckCircle, ChevronLeft, ChevronRight, AlertCircle, ArrowLeft } from "lucide-react";
 
-interface Question {
-  id: string;
-  question: string;
-  options: string[];
-  correctAnswer: number;
-}
-
-interface Quiz {
+type ModuleTest = {
   id: string;
   title: string;
-  questions: Question[];
+  description?: string;
+  href?: string;
+};
+
+type ModuleSummary = {
+  id: string;
+  title: string;
+  summary?: string | null;
+  durationMinutes?: number | null;
+  objectives?: string[];
+  relatedTests?: ModuleTest[]; // Modül içinde testler (dersler değil)
+};
+
+interface TestContentPayload {
+  overview?: {
+    description?: string | null;
+    estimatedDurationMinutes?: number | null;
+  };
+  learningObjectives?: string[];
+  prerequisites?: string[];
+  modules?: ModuleSummary[];
+}
+
+interface Test {
+  id: string;
+  title: string;
+  description: string | null;
+  topic: string | null;
+  level: string | null;
   passingScore: number;
+  content: TestContentPayload | null;
   course: {
+    id: string;
+    title: string;
     expertise: string | null;
     topic: string | null;
     topicContent: string | null;
-  };
+    difficulty: string;
+  } | null;
 }
 
-export default function TestPage() {
+function formatMinutes(minutes?: number | null) {
+  if (!minutes || minutes <= 0) {
+    return null;
+  }
+
+  if (minutes < 60) {
+    return `${minutes} dk`;
+  }
+
+  const hours = Math.floor(minutes / 60);
+  const remainder = minutes % 60;
+
+  if (remainder === 0) {
+    return `${hours} saat`;
+  }
+
+  return `${hours} saat ${remainder} dk`;
+}
+
+export default function TestDetailPage() {
   const params = useParams();
+  const testIdParam = params?.id;
+  const testId = Array.isArray(testIdParam) ? testIdParam[0] : testIdParam;
   const router = useRouter();
-  const [quiz, setQuiz] = useState<Quiz | null>(null);
+  const searchParams = useSearchParams();
+
+  const [test, setTest] = useState<Test | null>(null);
   const [loading, setLoading] = useState(true);
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answers, setAnswers] = useState<number[]>([]);
-  const [timeLeft, setTimeLeft] = useState(600); // 10 minutes default
-  const [startTime, setStartTime] = useState<number | null>(null);
-  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    if (params.id) {
-      fetchQuiz();
+    if (!testId) {
+      return;
     }
-  }, [params.id]);
 
-  useEffect(() => {
-    if (!loading && quiz && !startTime) {
-      setStartTime(Date.now());
-    }
-  }, [loading, quiz, startTime]);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) {
-          handleSubmit();
-          return 0;
+    const fetchTest = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(`/api/education/test/${testId}`);
+        if (!response.ok) {
+          throw new Error("Test bilgileri alınamadı");
         }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  const fetchQuiz = async () => {
-    try {
-      const response = await fetch(`/api/education/test/${params.id}`);
-      const data = await response.json();
-      const quizData = data.quiz;
-      const questions = quizData.questions as Question[];
-      setQuiz(quizData);
-      setAnswers(new Array(questions.length).fill(-1));
-    } catch (error) {
-      console.error("Error fetching test:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleAnswer = (answerIndex: number) => {
-    const newAnswers = [...answers];
-    newAnswers[currentQuestion] = answerIndex;
-    setAnswers(newAnswers);
-  };
-
-  const handleNext = () => {
-    if (currentQuestion < (quiz?.questions.length || 0) - 1) {
-      setCurrentQuestion(currentQuestion + 1);
-    }
-  };
-
-  const handlePrevious = () => {
-    if (currentQuestion > 0) {
-      setCurrentQuestion(currentQuestion - 1);
-    }
-  };
-
-  const handleSubmit = async () => {
-    if (submitting) return;
-    setSubmitting(true);
-
-    try {
-      const duration = startTime ? Math.floor((Date.now() - startTime) / 1000) : null;
-
-      const response = await fetch(`/api/education/test/${params.id}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ answers, duration }),
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        if (typeof window !== "undefined") {
-          sessionStorage.setItem(
-            "latest-achievement",
-            JSON.stringify({
-              attemptId: data.quizAttempt.id,
-              source: "test",
-              badgeResults: data.badgeResults,
-              goalResults: data.goalResults,
-              score: data.score,
-              quizTitle: quiz?.title ?? "",
-              timestamp: Date.now(),
-            })
-          );
-        }
-        router.push(`/education/results/${data.quizAttempt.id}`);
+        const data = await response.json();
+        setTest(data.quiz ?? null);
+      } catch (error) {
+        console.error(error);
+        setTest(null);
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      console.error("Error submitting test:", error);
-    }
-  };
+    };
 
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, "0")}`;
-  };
+    void fetchTest();
+  }, [testId]);
+
+  const modules = useMemo<ModuleSummary[]>(() => {
+    if (!test?.content?.modules) {
+      return [];
+    }
+    const allModules = test.content.modules.map((module) => ({
+      ...module,
+      objectives: Array.isArray(module.objectives) ? module.objectives : [],
+      relatedTests: Array.isArray(module.relatedTests) ? module.relatedTests : [],
+    }));
+    
+    // Sort by id (module-01, module-02, etc.) and limit to 15
+    const sortedModules = allModules.sort((a, b) => {
+      const aNum = parseInt(a.id.replace('module-', '')) || 0;
+      const bNum = parseInt(b.id.replace('module-', '')) || 0;
+      return aNum - bNum;
+    });
+    
+    return sortedModules.slice(0, 15);
+  }, [test]);
+
+  useEffect(() => {
+    if (!test?.id || modules.length === 0) {
+      return;
+    }
+
+    const requestedModule = searchParams?.get("module");
+    if (
+      requestedModule &&
+      modules.some((module) => module.id === requestedModule)
+    ) {
+      router.replace(`/education/test/${test.id}/modules/${requestedModule}`);
+    }
+  }, [test?.id, modules, router, searchParams]);
+
+  const testOverview = test?.content?.overview;
+  const overviewDescription =
+    (testOverview?.description ?? test?.description ?? "") ||
+    "Bu test boyunca modüller adım adım işlenir.";
+  const overviewDuration =
+    testOverview?.estimatedDurationMinutes ?? 0;
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-          <p className="text-gray-600 dark:text-gray-400 font-medium">Test yükleniyor...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!quiz) {
-    return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <Card variant="elevated" className="p-8 text-center max-w-md">
-          <AlertCircle className="h-12 w-12 text-red-500 mx-auto mb-4" />
-          <h2 className="text-xl font-display font-bold text-gray-900 dark:text-gray-100 mb-2">
-            Test Bulunamadı
-          </h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-4">
-            Aradığınız test mevcut değil veya erişim yetkiniz bulunmuyor.
-          </p>
-          <Link href="/education/test">
-            <Button variant="gradient">Testlere Dön</Button>
-          </Link>
+      <div className="container mx-auto px-4 py-8 md:py-12">
+        <Card className="mx-auto max-w-xl border-blue-200/50 dark:border-blue-800/50 bg-blue-50/70 dark:bg-blue-950/30 backdrop-blur-sm">
+          <CardContent className="flex items-center gap-3 text-sm font-medium text-blue-700 dark:text-blue-300 py-8">
+            <Clock className="h-5 w-5 animate-spin" />
+            Test içeriği yükleniyor...
+          </CardContent>
         </Card>
       </div>
     );
   }
 
-  const progress = ((currentQuestion + 1) / quiz.questions.length) * 100;
-  const question = quiz.questions[currentQuestion];
-  const answeredCount = answers.filter(a => a !== -1).length;
+  if (!test) {
+    return (
+      <div className="container mx-auto px-4 py-8 md:py-12">
+        <Card className="mx-auto max-w-xl border-red-200/50 dark:border-red-800/50 bg-red-50/70 dark:bg-red-950/30 backdrop-blur-sm">
+          <CardContent className="text-red-700 dark:text-red-300 py-8">
+            Test bulunamadı ya da içerik henüz hazırlanmadı.
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  const tagItems = [
+    test.topic && {
+      label: test.topic,
+      style: "bg-gradient-to-r from-purple-50 to-purple-100 dark:from-purple-950/40 dark:to-purple-900/40 text-purple-700 dark:text-purple-300 border border-purple-200/50 dark:border-purple-800/50",
+    },
+    test.level && {
+      label: `Seviye: ${test.level}`,
+      style: "bg-gradient-to-r from-orange-50 to-orange-100 dark:from-orange-950/40 dark:to-orange-900/40 text-orange-700 dark:text-orange-300 border border-orange-200/50 dark:border-orange-800/50",
+    },
+    test.course?.expertise && {
+      label: `Uzmanlık: ${test.course.expertise}`,
+      style: "bg-gradient-to-r from-pink-50 to-pink-100 dark:from-pink-950/40 dark:to-pink-900/40 text-pink-700 dark:text-pink-300 border border-pink-200/50 dark:border-pink-800/50",
+    },
+    test.passingScore && {
+      label: `Geçme Notu: %${test.passingScore}`,
+      style: "bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 text-gray-700 dark:text-gray-300 border border-gray-200/50 dark:border-gray-700/50",
+    },
+  ]
+    .filter(Boolean)
+    .map((tag) => tag as { label: string; style: string });
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6 animate-fade-in">
-      {/* Back Button */}
-      <Link href="/education/test">
-        <Button variant="outline" size="sm">
-          <ArrowLeft className="h-4 w-4 mr-2" />
-          Testlere Dön
-        </Button>
+    <div className="container mx-auto px-4 py-6 md:py-8 lg:py-10 space-y-8 md:space-y-10">
+      {/* Breadcrumb */}
+      <Link
+        href="/education/test"
+        className="inline-flex items-center gap-2 text-sm font-semibold text-purple-600 dark:text-purple-400 transition-colors hover:text-purple-700 dark:hover:text-purple-300"
+      >
+        <ChevronLeft className="h-4 w-4" />
+        Testlere dön
       </Link>
 
-      {/* Header Card */}
-      <Card variant="elevated" className="overflow-hidden">
-        <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 p-6 text-white">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <div>
-              <h1 className="text-2xl md:text-3xl font-display font-bold mb-2">{quiz.title}</h1>
-              <div className="flex flex-wrap gap-2 text-sm">
-                {quiz.course.expertise && (
-                  <span className="px-2 py-1 bg-white/20 rounded">{quiz.course.expertise}</span>
-                )}
-                {quiz.course.topic && (
-                  <span className="px-2 py-1 bg-white/20 rounded">{quiz.course.topic}</span>
-                )}
-                {quiz.course.topicContent && (
-                  <span className="px-2 py-1 bg-white/20 rounded">{quiz.course.topicContent}</span>
-                )}
-              </div>
-              <p className="text-blue-100 text-sm mt-2">
-                {quiz.questions.length} soru • Geçme notu: %{quiz.passingScore}
-              </p>
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-xl">
-                <Clock className="h-5 w-5" />
-                <span className="font-display font-bold text-lg">{formatTime(timeLeft)}</span>
-              </div>
-            </div>
-          </div>
+      {/* Hero Header Section */}
+      <div className="relative overflow-hidden rounded-3xl border border-purple-200/50 dark:border-purple-800/50 gradient-mesh-tech shadow-xl shadow-purple-500/5 dark:shadow-purple-500/10">
+        {/* Particle background */}
+        <div className="absolute inset-0 particle-bg-tech" />
+        
+        {/* Animated floating orbs */}
+        <div className="absolute inset-0">
+          <div className="absolute -top-20 -right-20 h-64 w-64 rounded-full bg-purple-500/20 dark:bg-purple-500/15 blur-3xl animate-pulse" />
+          <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-pink-500/20 dark:bg-pink-500/15 blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
+          <div className="absolute top-1/2 left-1/2 h-48 w-48 rounded-full bg-rose-500/15 dark:bg-rose-500/10 blur-3xl animate-pulse" style={{ animationDelay: "2s" }} />
         </div>
         
-        {/* Progress Bar */}
-        <div className="p-6 bg-white dark:bg-gray-800">
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-                İlerleme
-              </span>
-              <span className="text-sm font-bold text-blue-600 dark:text-blue-400">
-                {currentQuestion + 1} / {quiz.questions.length}
-              </span>
-            </div>
-            <div className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-              Cevaplanan: {answeredCount} / {quiz.questions.length}
-            </div>
-          </div>
-          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
-            <div
-              className="bg-gradient-to-r from-blue-500 to-cyan-500 h-3 rounded-full transition-all duration-300 shadow-lg"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-        </div>
-      </Card>
+        {/* Enhanced glassmorphism overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-white/60 via-white/40 to-transparent dark:from-white/10 dark:via-white/5 dark:to-transparent backdrop-blur-md" />
 
-      {/* Question Card */}
-      <Card variant="elevated" className="overflow-hidden">
-        <CardHeader className="bg-gradient-to-r from-gray-50 to-gray-100/50 dark:from-gray-800/50 dark:to-gray-700/50 border-b border-gray-200/50 dark:border-gray-700/50">
-          <CardTitle className="flex items-center gap-2 text-lg">
-            <span className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white font-bold text-sm">
-              {currentQuestion + 1}
-            </span>
-            <span className="text-gray-900 dark:text-gray-100">Soru</span>
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="p-6">
-          <h2 className="text-xl md:text-2xl font-display font-bold text-gray-900 dark:text-gray-100 mb-6 leading-relaxed">
-            {question.question}
-          </h2>
-          <div className="space-y-3">
-            {question.options.map((option, index) => {
-              const isSelected = answers[currentQuestion] === index;
-              return (
-                <button
-                  key={index}
-                  onClick={() => handleAnswer(index)}
-                  className={`w-full text-left p-4 rounded-xl border-2 transition-all duration-200 group ${
-                    isSelected
-                      ? "border-blue-600 bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 shadow-md md:shadow-lg"
-                      : "border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-600 hover:bg-gray-50 dark:hover:bg-gray-800/50"
-                  }`}
-                >
-                  <div className="flex items-center gap-4">
-                    <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm transition-all ${
-                      isSelected
-                        ? "bg-blue-600 text-white shadow-lg scale-110"
-                        : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400 group-hover:bg-blue-100 dark:group-hover:bg-blue-900/30"
-                    }`}>
-                      {String.fromCharCode(65 + index)}
-                    </div>
-                    <span className={`flex-1 font-medium ${
-                      isSelected
-                        ? "text-blue-900 dark:text-blue-100"
-                        : "text-gray-700 dark:text-gray-300"
-                    }`}>
-                      {option}
-                    </span>
-                    {isSelected && (
-                      <CheckCircle className="h-5 w-5 text-blue-600 dark:text-blue-400 flex-shrink-0" />
-                    )}
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Navigation */}
-      <Card variant="elevated">
-        <CardContent className="p-4 sm:p-6">
-          <div className="flex flex-col gap-4">
-            {/* Page Numbers - Scrollable on mobile */}
-            <div className="w-full overflow-x-auto -mx-2 px-2">
-              <div className="flex items-center gap-1.5 sm:gap-2 text-sm text-gray-600 dark:text-gray-400 min-w-max">
-                {answers.map((answer, index) => (
-                  <div
-                    key={index}
-                    className={`flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center font-semibold text-xs transition-all cursor-pointer ${
-                      index === currentQuestion
-                        ? "bg-blue-600 text-white shadow-lg scale-110"
-                        : answer !== -1
-                        ? "bg-green-500 text-white"
-                        : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
-                    }`}
-                    onClick={() => setCurrentQuestion(index)}
-                  >
-                    {index + 1}
-                  </div>
-                ))}
+        <div className="relative z-10 p-6 md:p-8 lg:p-10">
+          <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
+            <div className="space-y-4 flex-1">
+              {/* Tech icon */}
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-600 shadow-lg shadow-purple-500/50 mb-4">
+                <FileText className="h-7 w-7 text-white" />
               </div>
-            </div>
-
-            {/* Navigation Buttons */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-              <Button
-                onClick={handlePrevious}
-                disabled={currentQuestion === 0}
-                variant="outline"
-                size="lg"
-                className="w-full sm:w-auto flex-shrink-0"
-              >
-                <ChevronLeft className="h-5 w-5 mr-2" />
-                Önceki Soru
-              </Button>
-
-              {currentQuestion === quiz.questions.length - 1 ? (
-                <Button
-                  onClick={handleSubmit}
-                  disabled={submitting || answeredCount < quiz.questions.length}
-                  variant="gradient"
-                  size="lg"
-                  className="w-full sm:w-auto flex-shrink-0"
-                >
-                  {submitting ? (
-                    <>
-                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
-                      Gönderiliyor...
-                    </>
-                  ) : (
-                    <>
-                      <CheckCircle className="h-5 w-5 mr-2" />
-                      Testi Bitir
-                    </>
-                  )}
-                </Button>
-              ) : (
-                <Button
-                  onClick={handleNext}
-                  variant="gradient"
-                  size="lg"
-                  className="w-full sm:w-auto flex-shrink-0"
-                >
-                  Sonraki Soru
-                  <ChevronRight className="h-5 w-5 ml-2" />
-                </Button>
+              
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
+                <span className="bg-gradient-to-r from-gray-900 via-purple-600 to-pink-600 dark:from-white dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent animate-text-shimmer">
+                  {test.title}
+                </span>
+              </h1>
+              <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+                {test.description ??
+                  "Test modülleri ile bilginizi test edin ve kendinizi değerlendirin."}
+              </p>
+              {tagItems.length > 0 && (
+                <div className="flex flex-wrap gap-2 sm:gap-3">
+                  {tagItems.map((tag) => (
+                    <span
+                      key={tag.label}
+                      className={clsx(
+                        "tech-badge inline-flex items-center rounded-full px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-semibold uppercase tracking-wide shadow-sm",
+                        tag.style
+                      )}
+                    >
+                      {tag.label}
+                    </span>
+                  ))}
+                </div>
               )}
             </div>
+            
+            {/* Enhanced Duration Card */}
+            {overviewDuration > 0 && (
+              <div className="md:w-80 tech-card glass-tech rounded-2xl shadow-xl border border-purple-200/50 dark:border-purple-800/50 hover:scale-105 transition-transform duration-300">
+                <div className="relative z-10 p-5">
+                  <div className="flex items-start gap-4">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      <Clock className="h-6 w-6" />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-xs font-semibold uppercase tracking-wide text-purple-600 dark:text-purple-400 mb-1">
+                        Tahmini süre
+                      </p>
+                      <p className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-1">
+                        {formatMinutes(overviewDuration) ?? "Süre bilgisi yakında"}
+                      </p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">
+                        {formatMinutes(overviewDuration)
+                          ? "Modülleri tamamlamak için planlanan toplam süre."
+                          : "Program süresi henüz belirlenmedi."}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
+
+      {/* Modules Section */}
+      <div className="relative tech-card glass-tech overflow-hidden border border-purple-200/50 dark:border-purple-800/50 shadow-xl shadow-purple-500/5 dark:shadow-purple-500/10 rounded-3xl">
+        {/* Particle background */}
+        <div className="absolute inset-0 particle-bg-tech" />
+        
+        <div className="relative z-10 border-b border-purple-100/80 dark:border-purple-800/50 bg-gradient-to-r from-purple-50/60 via-pink-50/60 to-rose-50/60 dark:from-purple-950/30 dark:via-pink-950/30 dark:to-rose-950/30 px-6 md:px-8 py-6 backdrop-blur-sm">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 shadow-lg">
+              <Compass className="h-5 w-5 md:h-6 md:w-6 text-white" />
+            </div>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100">
+              Modül Listesi
+            </h2>
+          </div>
+          <p className="text-sm md:text-base text-gray-600 dark:text-gray-300">
+            Başlamak istediğin modülü seç ve detay sayfasında testleri incele.
+          </p>
+        </div>
+        <div className="relative z-10 p-6 md:p-8 pt-8 md:pt-12">
+          {modules.length === 0 ? (
+            <div className="rounded-xl border border-dashed border-gray-200 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-900/50 px-6 py-8 text-center text-sm text-gray-500 dark:text-gray-400">
+              Bu test için yayınlanmış modül bulunmuyor.
+            </div>
+          ) : (
+            <div className="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {modules.map((module, index) => {
+                const testCount = module.relatedTests?.length ?? 0;
+
+                return (
+                  <Link
+                    key={module.id}
+                    href={`/education/test/${test.id}/modules/${module.id}`}
+                    className="group relative tech-card tech-card-glow card-shimmer hover-3d glass-tech rounded-2xl overflow-hidden p-5 sm:p-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-purple-600 dark:focus-visible:outline-purple-400 focus-visible:outline-offset-2"
+                  >
+                    {/* Particle background for module card */}
+                    <div className="absolute inset-0 particle-bg-tech rounded-2xl" />
+                    
+                    {/* Subtle gradient overlay on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-purple-400/0 via-pink-400/0 to-rose-400/0 dark:from-purple-400/0 dark:via-pink-400/0 dark:to-rose-400/0 group-hover:from-purple-400/5 group-hover:via-pink-400/5 group-hover:to-rose-400/5 dark:group-hover:from-purple-400/8 dark:group-hover:via-pink-400/8 dark:group-hover:to-rose-400/8 transition-all duration-500 pointer-events-none" />
+                    
+                    <div className="relative z-10 mb-4 flex items-start justify-between gap-3">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 text-lg font-bold text-white shadow-lg shadow-purple-500/50 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+                        {index + 1}
+                      </div>
+                      <div className="flex flex-col items-end gap-2 text-xs">
+                        {formatMinutes(module.durationMinutes) && (
+                          <span className="tech-badge text-purple-700 dark:text-purple-300 border-purple-300 dark:border-purple-600 px-3 py-1.5">
+                            <Clock className="h-3.5 w-3.5" />
+                            {formatMinutes(module.durationMinutes)}
+                          </span>
+                        )}
+                        <span className="tech-badge text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 px-3 py-1.5" style={{ background: 'linear-gradient(135deg, rgba(107, 114, 128, 0.1), rgba(156, 163, 175, 0.1))', borderColor: 'rgba(107, 114, 128, 0.3)' }}>
+                          <FileText className="h-3.5 w-3.5" />
+                          {testCount} test
+                        </span>
+                      </div>
+                    </div>
+                    <div className="relative z-10 flex-1 space-y-2">
+                      <h3 className="text-lg md:text-xl font-bold text-gray-900 dark:text-gray-100 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                        {module.title}
+                      </h3>
+                      <p className="text-sm md:text-base leading-relaxed text-gray-600 dark:text-gray-400 line-clamp-3">
+                        {module.summary ?? "Bu modülün açıklaması yakında eklenecek."}
+                      </p>
+                    </div>
+                    <div className="relative z-10 mt-4 flex items-center gap-2 text-sm font-semibold text-purple-600 dark:text-purple-400 opacity-0 group-hover:opacity-100 transition-opacity">
+                      Modüle git
+                      <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
-

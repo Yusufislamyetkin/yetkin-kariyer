@@ -10,6 +10,8 @@ import {
   type GoalCheckResult,
 } from "@/app/api/goals/check/goal-service";
 import { getMockEducationItemById } from "@/lib/mock/education";
+import { recordEvent } from "@/lib/services/gamification/antiAbuse";
+import { applyRules } from "@/lib/services/gamification/rules";
 
 export async function GET(
   request: Request,
@@ -21,7 +23,16 @@ export async function GET(
         id: params.id,
         type: "TEST",
       },
-      include: {
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        topic: true,
+        level: true,
+        questions: true,
+        passingScore: true,
+        content: true, // Test'in kendi modül yapısı
+        courseId: true,
         course: {
           select: {
             id: true,
@@ -39,7 +50,25 @@ export async function GET(
       return NextResponse.json({ error: "Test bulunamadı" }, { status: 404 });
     }
 
-    return NextResponse.json({ quiz });
+    // Test'in kendi content'ini kullan, yoksa course'un content'ini fallback olarak kullanabiliriz
+    // Ama plana göre testler bağımsız olmalı, bu yüzden sadece test'in kendi content'ini döndürüyoruz
+    const testContent = quiz.content as any;
+    
+    // Content'i normalize et (kurs API'sindeki gibi)
+    const normalizedContent = testContent || {
+      modules: [],
+      overview: {
+        description: quiz.description,
+        estimatedDurationMinutes: null,
+      },
+    };
+
+    return NextResponse.json({ 
+      quiz: {
+        ...quiz,
+        content: normalizedContent,
+      }
+    });
   } catch (error) {
     console.error("Error fetching test:", error);
 
@@ -144,6 +173,23 @@ export async function POST(
         },
       },
     });
+
+    // Emit gamification event
+    try {
+      const priorCount = await db.testAttempt.count({ where: { userId, quizId: params.id } });
+      const event = await recordEvent({
+        userId,
+        type: "test_solved",
+        payload: { quizId: params.id, firstAttempt: priorCount <= 1 },
+      });
+      await applyRules({
+        userId,
+        type: "test_solved",
+        payload: { sourceEventId: event.id, firstAttempt: priorCount <= 1 },
+      });
+    } catch (e) {
+      console.warn("Gamification test_solved failed:", e);
+    }
 
     // Yanlış soruları WrongQuestion tablosuna kaydet (mevcut yapıyla uyumlu)
     if (wrongQuestions.length > 0) {

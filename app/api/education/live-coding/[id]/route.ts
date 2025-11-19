@@ -7,6 +7,8 @@ import {
   normalizeLiveCodingPayload,
 } from "@/lib/education/liveCoding";
 import type { LiveCodingLanguage } from "@/types/live-coding";
+import { recordEvent } from "@/lib/services/gamification/antiAbuse";
+import { applyRules } from "@/lib/services/gamification/rules";
 
 export async function GET(
   request: Request,
@@ -207,6 +209,18 @@ export async function POST(
         metrics: storedMetrics,
       },
     });
+
+    // Emit gamification event
+    try {
+      const event = await recordEvent({
+        userId,
+        type: "live_coding_completed",
+        payload: { quizId: params.id },
+      });
+      await applyRules({ userId, type: "live_coding_completed", payload: { sourceEventId: event.id } });
+    } catch (e) {
+      console.warn("Gamification live_coding_completed failed:", e);
+    }
 
     // AI analysis'i background'da yap
     if (process.env.OPENAI_API_KEY && process.env.NEXTAUTH_URL) {

@@ -69,6 +69,20 @@ enum LeaderboardPeriod {
   monthly
 }
 
+// Gamification specific enums
+enum BadgeTier {
+  bronze
+  silver
+  gold
+  platinum
+}
+
+enum RewardType {
+  VIRTUAL
+  VOUCHER
+  PHYSICAL
+}
+
 enum EducationType {
   TEST
   LIVE_CODING
@@ -150,6 +164,7 @@ model User {
   hackatonAttempts              HackatonAttempt[]
   interviewAttempts             InterviewAttempt[]
   cvs                           CV[]
+  cvUploads                     CVUpload[]
   jobApplications               JobApplication[]
   careerPlans                   CareerPlan[]
   learningPaths                 LearningPath[]
@@ -189,6 +204,13 @@ model User {
   postLikes                     PostLike[]
   postComments                  PostComment[]
   postSaves                     PostSave[]
+  // Gamification and rewards
+  gamificationEvents            GamificationEvent[]
+  pointTransactions             PointTransaction[]
+  balance                       UserBalance?
+  questProgresses               QuestProgress[]
+  rewardRedemptions             RewardRedemption[]
+  inventoryItems                UserInventory[]
 
   @@map("app_users")
 }
@@ -218,20 +240,21 @@ model Course {
 
 model Quiz {
   id           String        @id @default(cuid())
-  courseId     String
+  courseId     String? // Nullable: TEST tipi quiz'ler bağımsız olabilir, MINI_TEST tipi quiz'ler courseId'ye bağlı
   title        String
   description  String?
   topic        String?
-  type         EducationType @default(TEST) // TEST, LIVE_CODING, BUG_FIX, HACKATON
+  type         EducationType @default(TEST) // TEST, LIVE_CODING, BUG_FIX, HACKATON, MINI_TEST
   level        String? // beginner, intermediate, advanced
   questions    Json
+  content      Json? // Testler için modül yapısını saklamak için (TEST tipi quiz'ler için)
   passingScore Int           @default(60)
   lessonSlug   String?
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
 
   // Relations
-  course                 Course                  @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  course                 Course?                 @relation(fields: [courseId], references: [id], onDelete: Cascade)
   quizAttempts           QuizAttempt[]
   testAttempts           TestAttempt[]
   liveCodingAttempts     LiveCodingAttempt[]
@@ -503,8 +526,26 @@ model CV {
   user            User             @relation(fields: [userId], references: [id], onDelete: Cascade)
   template        CVTemplate       @relation(fields: [templateId], references: [id])
   jobApplications JobApplication[]
+  uploads         CVUpload[]
 
   @@map("cvs")
+}
+
+model CVUpload {
+  id        String   @id @default(cuid())
+  cvId      String
+  userId    String
+  url       String
+  name      String
+  mimeType  String
+  size      Int
+  createdAt DateTime @default(now())
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cv   CV   @relation(fields: [cvId], references: [id], onDelete: Cascade)
+
+  @@map("cv_uploads")
 }
 
 model Job {
@@ -652,14 +693,18 @@ model WrongQuestion {
 
 model Badge {
   id          String        @id @default(cuid())
+  key         String?       @unique
   name        String
   description String
   icon        String // emoji or icon name
+  iconUrl     String?
   color       String // hex color
   category    BadgeCategory
   criteria    Json // {type, value, condition}
   rarity      BadgeRarity   @default(common)
+  tier        BadgeTier?
   points      Int           @default(10) // points for leaderboard
+  ruleJson    Json?
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
 
@@ -676,6 +721,8 @@ model UserBadge {
   badgeId     String
   earnedAt    DateTime @default(now())
   isDisplayed Boolean  @default(false) // max 3 can be displayed on profile
+  featuredOrder Int?
+  evidenceJson  Json?
 
   // Relations
   user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -683,6 +730,157 @@ model UserBadge {
 
   @@unique([userId, badgeId])
   @@map("user_badges")
+}
+
+// New Gamification Models
+model GamificationEvent {
+  id         String   @id @default(cuid())
+  userId     String
+  type       String
+  payload    Json?
+  occurredAt DateTime @default(now())
+  dedupKey   String?  @unique
+  createdAt  DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  pointTransactions PointTransaction[]
+
+  @@index([userId, occurredAt])
+  @@index([type, occurredAt])
+  @@map("gamification_events")
+}
+
+model PointTransaction {
+  id            String   @id @default(cuid())
+  userId        String
+  delta         Int
+  reason        String
+  sourceEventId String?
+  createdAt     DateTime @default(now())
+
+  user  User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event GamificationEvent? @relation(fields: [sourceEventId], references: [id], onDelete: SetNull)
+
+  @@index([userId, createdAt])
+  @@map("point_transactions")
+}
+
+model UserBalance {
+  userId     String   @id
+  points     Int      @default(0)
+  lifetimeXp Int      @default(0)
+  level      Int      @default(1)
+  updatedAt  DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_balances")
+}
+
+model Quest {
+  id         String   @id @default(cuid())
+  key        String   @unique
+  title      String
+  period     String   // daily|weekly|monthly|seasonal
+  ruleJson   Json
+  rewardJson Json
+  activeFrom DateTime?
+  activeTo   DateTime?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  progresses QuestProgress[]
+
+  @@map("quests")
+}
+
+model QuestProgress {
+  id          String   @id @default(cuid())
+  userId      String
+  questId     String
+  progress    Int      @default(0)
+  completedAt DateTime?
+  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quest Quest @relation(fields: [questId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, questId])
+  @@index([questId])
+  @@map("quest_progress")
+}
+
+model LeaderboardSnapshot {
+  id        String   @id @default(cuid())
+  period    String   // daily|weekly|monthly|season
+  scope     String   // global|topic:<slug>|hackathon:<id>
+  rankJson  Json
+  createdAt DateTime @default(now())
+
+  @@index([period, createdAt])
+  @@map("leaderboard_snapshots")
+}
+
+model Reward {
+  id       String     @id @default(cuid())
+  sku      String     @unique
+  title    String
+  type     RewardType
+  cost     Int
+  stock    Int?
+  metaJson Json?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  redemptions RewardRedemption[]
+
+  @@map("rewards")
+}
+
+model RewardRedemption {
+  id         String    @id @default(cuid())
+  userId     String
+  rewardId   String
+  cost       Int
+  status     String    @default("REQUESTED") // REQUESTED|APPROVED|FULFILLED|DELIVERED|CANCELLED
+  shippingJson Json?
+  code       String?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reward Reward @relation(fields: [rewardId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@index([rewardId])
+  @@map("reward_redemptions")
+}
+
+model UserInventory {
+  id        String   @id @default(cuid())
+  userId    String
+  itemKey   String
+  metaJson  Json?
+  grantedAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, itemKey])
+  @@map("user_inventory")
+}
+
+model AdminAuditLog {
+  id        String   @id @default(cuid())
+  adminId   String
+  action    String
+  target    String?
+  beforeJson Json?
+  afterJson  Json?
+  createdAt DateTime @default(now())
+
+  @@index([adminId, createdAt])
+  @@map("admin_audit_logs")
 }
 
 model DailyGoal {
@@ -1178,4 +1376,38 @@ model PostSave {
   @@index([postId])
   @@index([userId])
   @@map("post_saves")
+}
+
+// Live Coding & Bugfix Challenge Models
+model LiveCodingChallenge {
+  id           String   @id @default(cuid())
+  title        String
+  description  String?
+  difficulty   String?                 // beginner | intermediate | advanced
+  languages    String[] @default([])   // ["javascript","csharp","python","java"]
+  starterCode  Json?                   // { javascript: "...", csharp: "...", ... }
+  tests        Json?                   // lightweight test cases or IO expectations
+  tags         String[] @default([])
+  isPublished  Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([isPublished, createdAt])
+  @@map("live_coding_challenges")
+}
+
+model BugFixChallenge {
+  id              String   @id @default(cuid())
+  title           String
+  buggyCode       String
+  fixDescription  String?
+  language        String                  // "javascript" | "csharp" | "python" | "java"
+  tests           Json?
+  tags            String[] @default([])
+  isPublished     Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([language, isPublished, createdAt])
+  @@map("bug_fix_challenges")
 }

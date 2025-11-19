@@ -612,7 +612,7 @@ export async function GET() {
     ]);
 
     const activeGoals = mapGoalsToPrompt(
-      activeGoalsRaw.map((goal) => ({
+      activeGoalsRaw.map((goal: { id: string; goalType: string; targetValue: number; date: Date }) => ({
         id: goal.id,
         goalType: goal.goalType,
         targetValue: goal.targetValue,
@@ -620,7 +620,7 @@ export async function GET() {
       }))
     );
 
-    const lowScoreAttempts = lowScoreAttemptsRaw.map((attempt) => ({
+    const lowScoreAttempts = lowScoreAttemptsRaw.map((attempt: { quizId: string; score: number; topic?: string | null; quiz?: { title?: string | null; type?: string | null } | null }) => ({
       quizId: attempt.quizId,
       quizTitle: attempt.quiz?.title ?? "Test",
       score: attempt.score,
@@ -655,9 +655,9 @@ export async function GET() {
     });
 
     lowScoreAttempts
-      .map((attempt) => attempt.topic)
-      .filter((topic): topic is string => !!topic)
-      .forEach((topic) => weakTopicsSet.add(topic));
+      .map((attempt: { topic?: string | null }) => attempt.topic)
+      .filter((topic: string | null | undefined): topic is string => !!topic)
+      .forEach((topic: string) => weakTopicsSet.add(topic));
 
     const weakTopics = Array.from(weakTopicsSet).slice(0, 6);
 

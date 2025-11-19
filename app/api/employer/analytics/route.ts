@@ -75,33 +75,33 @@ export async function GET() {
 
     // Temel istatistikler
     const totalJobs = jobs.length;
-    const publishedJobs = jobs.filter((j) => j.status === "published").length;
-    const draftJobs = jobs.filter((j) => j.status === "draft").length;
-    const closedJobs = jobs.filter((j) => j.status === "closed").length;
+    const publishedJobs = jobs.filter((j: { status: string }) => j.status === "published").length;
+    const draftJobs = jobs.filter((j: { status: string }) => j.status === "draft").length;
+    const closedJobs = jobs.filter((j: { status: string }) => j.status === "closed").length;
 
     // Başvuru istatistikleri
-    const allApplications = jobs.flatMap((job) => job.applications);
+    const allApplications = jobs.flatMap((job: { applications: Array<{ status: string; score: number | null; appliedAt: string | Date }> }) => job.applications);
     const totalApplications = allApplications.length;
     const pendingApplications = allApplications.filter(
-      (a) => a.status === "pending"
+      (a: { status: string }) => a.status === "pending"
     ).length;
     const acceptedApplications = allApplications.filter(
-      (a) => a.status === "accepted"
+      (a: { status: string }) => a.status === "accepted"
     ).length;
     const rejectedApplications = allApplications.filter(
-      (a) => a.status === "rejected"
+      (a: { status: string }) => a.status === "rejected"
     ).length;
     const reviewingApplications = allApplications.filter(
-      (a) => a.status === "reviewing"
+      (a: { status: string }) => a.status === "reviewing"
     ).length;
 
     // Skor istatistikleri
     const scores = allApplications
-      .map((a) => a.score)
-      .filter((s): s is number => s !== null && s !== undefined);
+      .map((a: { score: number | null | undefined }) => a.score)
+      .filter((s: number | null | undefined): s is number => s !== null && s !== undefined);
     const averageScore =
       scores.length > 0
-        ? Math.round(scores.reduce((sum, s) => sum + s, 0) / scores.length)
+        ? Math.round(scores.reduce((sum: number, s: number) => sum + s, 0) / scores.length)
         : 0;
 
     // Zaman serisi verileri (başvuru trendleri)
@@ -118,7 +118,7 @@ export async function GET() {
       { month: string; count: number; accepted: number; rejected: number }
     > = {};
 
-    allApplications.forEach((application) => {
+    allApplications.forEach((application: { appliedAt: string | Date; status: string }) => {
       const date = new Date(application.appliedAt);
       const dateStr = date.toISOString().split("T")[0];
       const weekStart = new Date(date);
@@ -159,15 +159,15 @@ export async function GET() {
       .sort((a, b) => a.month.localeCompare(b.month));
 
     // İlan performans metrikleri
-    const jobPerformance = jobs.map((job) => {
+    const jobPerformance = jobs.map((job: { id: string; title: string; status: string; createdAt: Date; applications: Array<{ status: string; score: number | null }> }) => {
       const applications = job.applications;
       const applicationScores = applications
-        .map((a) => a.score)
-        .filter((s): s is number => s !== null && s !== undefined);
+        .map((a: { score: number | null }) => a.score)
+        .filter((s: number | null | undefined): s is number => s !== null && s !== undefined);
       const avgScore =
         applicationScores.length > 0
           ? Math.round(
-              applicationScores.reduce((sum, s) => sum + s, 0) /
+              applicationScores.reduce((sum: number, s: number) => sum + s, 0) /
                 applicationScores.length
             )
           : 0;
@@ -176,11 +176,11 @@ export async function GET() {
         jobId: job.id,
         jobTitle: job.title,
         totalApplications: applications.length,
-        acceptedCount: applications.filter((a) => a.status === "accepted")
+        acceptedCount: applications.filter((a: { status: string }) => a.status === "accepted")
           .length,
-        rejectedCount: applications.filter((a) => a.status === "rejected")
+        rejectedCount: applications.filter((a: { status: string }) => a.status === "rejected")
           .length,
-        pendingCount: applications.filter((a) => a.status === "pending").length,
+        pendingCount: applications.filter((a: { status: string }) => a.status === "pending").length,
         averageScore: avgScore,
         status: job.status,
         createdAt: job.createdAt.toISOString(),

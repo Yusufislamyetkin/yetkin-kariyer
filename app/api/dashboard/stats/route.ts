@@ -35,15 +35,15 @@ export async function GET() {
 
     const averageQuizScore =
       quizAttempts.length > 0
-        ? quizAttempts.reduce((sum, a) => sum + a.score, 0) / quizAttempts.length
+        ? quizAttempts.reduce((sum: number, a: { score: number }) => sum + a.score, 0) / quizAttempts.length
         : 0;
 
     const interviewScores = interviewAttempts
-      .filter((a) => a.aiScore !== null)
-      .map((a) => a.aiScore!);
+      .filter((a: { aiScore: number | null }) => a.aiScore !== null)
+      .map((a: { aiScore: number | null }) => a.aiScore as number);
     const averageInterviewScore =
       interviewScores.length > 0
-        ? interviewScores.reduce((sum, s) => sum + s, 0) / interviewScores.length
+        ? interviewScores.reduce((sum: number, s: number) => sum + s, 0) / interviewScores.length
         : 0;
 
     return NextResponse.json({

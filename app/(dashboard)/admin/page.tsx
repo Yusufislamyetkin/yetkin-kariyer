@@ -1,719 +1,977 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { Button } from "@/app/components/ui/Button";
-import { Input } from "@/app/components/ui/Input";
-import { Database, Loader2, CheckCircle2, XCircle, AlertCircle, Trash2, Rocket, Code, X, Plus, Briefcase } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Loader2, CheckCircle2, AlertCircle, BookOpen, Trash2, Code2, Database, Globe, Zap, Shield, Container, Lock, FileText } from "lucide-react";
 
-interface ModuleStatus {
-  moduleId: string;
-  title: string;
-  status: "pending" | "loading" | "success" | "error";
-  error?: string;
+interface CourseStatus {
+  loading: boolean;
+  success: string | null;
+  error: string | null;
+  stats: {
+    modulesCreated?: number;
+    lessonsCreated?: number;
+    totalDuration?: number;
+  } | null;
+}
+
+interface ClearStatus {
+  loading: boolean;
+  success: string | null;
+  error: string | null;
+}
+
+interface TestStatus {
+  loading: boolean;
+  success: string | null;
+  error: string | null;
+  stats: {
+    testsCreated?: number;
+  } | null;
 }
 
 export default function AdminPage() {
-  const router = useRouter();
-  const [loading, setLoading] = useState(false);
-  const [modules, setModules] = useState<ModuleStatus[]>([]);
-  const [overallStatus, setOverallStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [error, setError] = useState<string | null>(null);
-  const [topicsProcessed, setTopicsProcessed] = useState<number | null>(null);
-  const [lessonsProcessed, setLessonsProcessed] = useState<number | null>(null);
-  const [lessonsFilled, setLessonsFilled] = useState<number | null>(null);
-  const [lessonsLimited, setLessonsLimited] = useState<number | null>(null);
-  const [clearing, setClearing] = useState(false);
-  const [clearSuccess, setClearSuccess] = useState<string | null>(null);
-  const [clearError, setClearError] = useState<string | null>(null);
-  const [clearingTopics, setClearingTopics] = useState(false);
-  const [clearTopicsSuccess, setClearTopicsSuccess] = useState<string | null>(null);
-  const [clearTopicsError, setClearTopicsError] = useState<string | null>(null);
-  const [creatingRoadmap, setCreatingRoadmap] = useState(false);
-  const [roadmapSuccess, setRoadmapSuccess] = useState<string | null>(null);
-  const [roadmapError, setRoadmapError] = useState<string | null>(null);
-  const [importingLessons, setImportingLessons] = useState(false);
-  const [importLessonsSuccess, setImportLessonsSuccess] = useState<string | null>(null);
-  const [importLessonsError, setImportLessonsError] = useState<string | null>(null);
-  const [settingUpRoadmap, setSettingUpRoadmap] = useState(false);
-  const [setupRoadmapSuccess, setSetupRoadmapSuccess] = useState<string | null>(null);
-  const [setupRoadmapError, setSetupRoadmapError] = useState<string | null>(null);
-  const [creatingContentBatch, setCreatingContentBatch] = useState(false);
-  const [contentBatchSuccess, setContentBatchSuccess] = useState<string | null>(null);
-  const [contentBatchError, setContentBatchError] = useState<string | null>(null);
-  const [contentBatchCreated, setContentBatchCreated] = useState<{ liveCoding: number; bugfix: number } | null>(null);
-  const [creatingHackathons, setCreatingHackathons] = useState(false);
-  const [hackathonsSuccess, setHackathonsSuccess] = useState<string | null>(null);
-  const [hackathonsError, setHackathonsError] = useState<string | null>(null);
-  const [hackathonsCreated, setHackathonsCreated] = useState<number | null>(null);
-  const [creatingFreelancerRequests, setCreatingFreelancerRequests] = useState(false);
-  const [freelancerRequestsSuccess, setFreelancerRequestsSuccess] = useState<string | null>(null);
-  const [freelancerRequestsError, setFreelancerRequestsError] = useState<string | null>(null);
-  const [freelancerRequestsCreated, setFreelancerRequestsCreated] = useState<number | null>(null);
-  const [showLiveCodingForm, setShowLiveCodingForm] = useState(false);
-  const [creatingSingleLiveCoding, setCreatingSingleLiveCoding] = useState(false);
-  const [singleLiveCodingSuccess, setSingleLiveCodingSuccess] = useState<string | null>(null);
-  const [singleLiveCodingError, setSingleLiveCodingError] = useState<string | null>(null);
-  const [importingLiveCoding, setImportingLiveCoding] = useState(false);
-  const [importLiveCodingSuccess, setImportLiveCodingSuccess] = useState<string | null>(null);
-  const [importLiveCodingError, setImportLiveCodingError] = useState<string | null>(null);
-  const [importLiveCodingCount, setImportLiveCodingCount] = useState<number | null>(null);
-  const [creatingJobs, setCreatingJobs] = useState(false);
-  const [jobsSuccess, setJobsSuccess] = useState<string | null>(null);
-  const [jobsError, setJobsError] = useState<string | null>(null);
-  const [jobsCreated, setJobsCreated] = useState<number | null>(null);
-  const [creatingLeaderboardEntries, setCreatingLeaderboardEntries] = useState(false);
-  const [leaderboardEntriesSuccess, setLeaderboardEntriesSuccess] = useState<string | null>(null);
-  const [leaderboardEntriesError, setLeaderboardEntriesError] = useState<string | null>(null);
-  const [leaderboardEntriesCreated, setLeaderboardEntriesCreated] = useState<{ daily: number; monthly: number } | null>(null);
-  const [creatingTests, setCreatingTests] = useState(false);
-  const [testsSuccess, setTestsSuccess] = useState<string | null>(null);
-  const [testsError, setTestsError] = useState<string | null>(null);
-  const [testsCreated, setTestsCreated] = useState<number | null>(null);
-  const [liveCodingFormData, setLiveCodingFormData] = useState({
-    title: "",
-    description: "",
-    level: "beginner" as "beginner" | "intermediate" | "advanced",
-    taskDescription: "",
-    languages: [] as string[],
-    timeLimitMinutes: 30,
-    acceptanceCriteria: [] as string[],
-    initialCode: {} as Record<string, string>,
-    expertise: "",
-    topic: "",
-    topicContent: "",
+  const [courseState, setCourseState] = useState<CourseStatus>({
+    loading: false,
+    success: null,
+    error: null,
+    stats: null,
   });
 
-  // Load available modules
-  useEffect(() => {
-    async function loadModules() {
-      try {
-        const response = await fetch("/api/admin/seed/modules");
-        if (response.ok) {
-          const data = await response.json();
-          setModules(
-            data.modules.map((m: any) => ({
-              moduleId: m.id,
-              title: m.title || m.id,
-              status: "pending" as const,
-            }))
-          );
-        }
-      } catch (err) {
-        console.error("Error loading modules:", err);
-      }
-    }
-    loadModules();
-  }, []);
+  const [clearState, setClearState] = useState<ClearStatus>({
+    loading: false,
+    success: null,
+    error: null,
+  });
 
-  const handleSeedData = async () => {
-    setLoading(true);
-    setError(null);
-    setOverallStatus("loading");
-    
-    // Reset all modules to loading
-    setModules((prev) =>
-      prev.map((m) => ({ ...m, status: "loading" as const, error: undefined }))
-    );
+  const [testState, setTestState] = useState<TestStatus>({
+    loading: false,
+    success: null,
+    error: null,
+    stats: null,
+  });
+
+  const handleCreateDotNetCourse = async () => {
+    setCourseState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
 
     try {
-      const response = await fetch("/api/admin/seed", {
+      const response = await fetch("/api/admin/create-course/dotnet-core", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Seed data yükleme başarısız oldu");
+        throw new Error(data.error || "Kurs oluşturulurken bir hata oluştu");
       }
 
-      // Update module statuses
-      if (data.results) {
-        setModules((prev) =>
-          prev.map((m) => {
-            const result = data.results.find((r: any) => r.moduleId === m.moduleId);
-            if (result) {
-              return {
-                ...m,
-                status: result.success ? "success" : "error",
-                error: result.error,
-              };
-            }
-            return m;
-          })
-        );
-      }
-
-      // Update topics processed count
-      if (data.topicsProcessed !== undefined) {
-        setTopicsProcessed(data.topicsProcessed);
-      }
-
-      // Update lessons processed count
-      if (data.lessonsProcessed !== undefined) {
-        setLessonsProcessed(data.lessonsProcessed);
-      }
-
-      // Update lessons filled count
-      if (data.lessonsFilled !== undefined) {
-        setLessonsFilled(data.lessonsFilled);
-      }
-
-      // Update lessons limited count
-      if (data.lessonsLimited !== undefined) {
-        setLessonsLimited(data.lessonsLimited);
-      }
-
-      // Show topic errors if any
-      if (data.topicErrors && data.topicErrors.length > 0) {
-        console.warn("Topic import errors:", data.topicErrors);
-      }
-
-      // Show lesson errors if any
-      if (data.lessonErrors && data.lessonErrors.length > 0) {
-        console.warn("Lesson import errors:", data.lessonErrors);
-      }
-
-      // Show fill errors if any
-      if (data.fillErrors && data.fillErrors.length > 0) {
-        console.warn("Fill errors:", data.fillErrors);
-      }
-
-      setOverallStatus("success");
+      setCourseState({
+        loading: false,
+        success: data.message || "Kurs başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
     } catch (err: any) {
-      setError(err.message || "Bir hata oluştu");
-      setOverallStatus("error");
-      setModules((prev) =>
-        prev.map((m) => ({ ...m, status: "error" as const, error: err.message }))
-      );
-    } finally {
-      setLoading(false);
+      setCourseState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
     }
   };
 
-  const handleClearCourses = async () => {
-    if (!confirm("Tüm kursları silmek istediğinizden emin misiniz? Bu işlem geri alınamaz!")) {
-      return;
-    }
-
-    setClearing(true);
-    setClearError(null);
-    setClearSuccess(null);
+  const handleCreateJavaCourse = async () => {
+    setCourseState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
 
     try {
-      const response = await fetch("/api/admin/clear-courses", {
+      const response = await fetch("/api/admin/create-course/java", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Kurslar temizlenirken bir hata oluştu");
+        throw new Error(data.error || "Kurs oluşturulurken bir hata oluştu");
       }
 
-      setClearSuccess(data.message || `${data.deletedCount} kurs başarıyla silindi.`);
+      setCourseState({
+        loading: false,
+        success: data.message || "Kurs başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
     } catch (err: any) {
-      setClearError(err.message || "Bir hata oluştu");
-    } finally {
-      setClearing(false);
+      setCourseState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
     }
   };
 
-  const handleClearTopics = async () => {
-    if (!confirm("Tüm konu verilerini silmek istediğinizden emin misiniz? Bu işlem course-dotnet-roadmap dahil tüm konuları temizleyecek ve geri alınamaz!")) {
-      return;
-    }
-
-    setClearingTopics(true);
-    setClearTopicsError(null);
-    setClearTopicsSuccess(null);
+  const handleCreateMssqlCourse = async () => {
+    setCourseState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
 
     try {
-      const response = await fetch("/api/admin/clear-topics", {
+      const response = await fetch("/api/admin/create-course/mssql", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Konular temizlenirken bir hata oluştu");
+        throw new Error(data.error || "Kurs oluşturulurken bir hata oluştu");
       }
 
-      setClearTopicsSuccess(data.message || `${data.deletedLessonsCount} ders kaydı silindi ve ${data.deletedModulesCount} modül silindi.`);
+      setCourseState({
+        loading: false,
+        success: data.message || "Kurs başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
     } catch (err: any) {
-      setClearTopicsError(err.message || "Bir hata oluştu");
-    } finally {
-      setClearingTopics(false);
+      setCourseState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
     }
   };
 
-  const handleCreateRoadmap = async () => {
-    if (!confirm("Net Core Roadmap yapısını oluşturmak istediğinizden emin misiniz? Bu işlem önce tüm mevcut verileri temizleyecek, sonra yeni yapıyı oluşturacak. Geri alınamaz!")) {
-      return;
-    }
-
-    setCreatingRoadmap(true);
-    setRoadmapError(null);
-    setRoadmapSuccess(null);
-
-    try {
-      // First, clear all topics
-      const clearResponse = await fetch("/api/admin/clear-topics", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      const clearData = await clearResponse.json();
-
-      if (!clearResponse.ok) {
-        throw new Error(clearData.error || "Veriler temizlenirken bir hata oluştu");
-      }
-
-      // Then, create the new roadmap structure
-      const createResponse = await fetch("/api/admin/create-roadmap", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      const createData = await createResponse.json();
-
-      if (!createResponse.ok) {
-        throw new Error(createData.error || "Roadmap yapısı oluşturulurken bir hata oluştu");
-      }
-
-      setRoadmapSuccess(createData.message || `${createData.modulesCreated} modül başarıyla oluşturuldu.`);
-    } catch (err: any) {
-      setRoadmapError(err.message || "Bir hata oluştu");
-    } finally {
-      setCreatingRoadmap(false);
-    }
-  };
-
-  const handleImportLessonContents = async () => {
-    if (!confirm("Ders içeriklerini import etmek istediğinizden emin misiniz? Bu işlem mevcut ders içeriklerini güncelleyebilir.")) {
-      return;
-    }
-
-    setImportingLessons(true);
-    setImportLessonsError(null);
-    setImportLessonsSuccess(null);
+  const handleCreateNodeJSCourse = async () => {
+    setCourseState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
 
     try {
-      const response = await fetch("/api/admin/import-lesson-contents", {
+      const response = await fetch("/api/admin/create-course/nodejs", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Ders içerikleri import edilirken bir hata oluştu");
+        throw new Error(data.error || "Kurs oluşturulurken bir hata oluştu");
       }
 
-      setImportLessonsSuccess(data.message || `${data.lessonsProcessed} ders içeriği başarıyla import edildi.`);
-      setLessonsProcessed(data.lessonsProcessed || 0);
+      setCourseState({
+        loading: false,
+        success: data.message || "Kurs başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
     } catch (err: any) {
-      setImportLessonsError(err.message || "Bir hata oluştu");
-    } finally {
-      setImportingLessons(false);
+      setCourseState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
     }
   };
 
-  const handleSetupRoadmap = async () => {
-    if (!confirm("Net Core Roadmap'i kurmak istediğinizden emin misiniz? Bu işlem:\n1. Tüm mevcut konuları temizleyecek\n2. Roadmap yapısını oluşturacak (15 modül)\n3. Ders içeriklerini import edecek\n\nBu işlem geri alınamaz!")) {
-      return;
-    }
-
-    setSettingUpRoadmap(true);
-    setSetupRoadmapError(null);
-    setSetupRoadmapSuccess(null);
+  const handleCreateReactCourse = async () => {
+    setCourseState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
 
     try {
-      const response = await fetch("/api/admin/setup-roadmap", {
+      const response = await fetch("/api/admin/create-course/react", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Roadmap kurulumu sırasında bir hata oluştu");
+        throw new Error(data.error || "Kurs oluşturulurken bir hata oluştu");
       }
 
-      if (data.success) {
-        setSetupRoadmapSuccess(data.message || "Net Core Roadmap başarıyla kuruldu!");
-      } else {
-        // Partial success
-        const errorDetails = [];
-        if (data.results?.clearTopics?.error) {
-          errorDetails.push(`Temizleme: ${data.results.clearTopics.error}`);
-        }
-        if (data.results?.createRoadmap?.error) {
-          errorDetails.push(`Roadmap: ${data.results.createRoadmap.error}`);
-        }
-        if (data.results?.importLessons?.error) {
-          errorDetails.push(`Import: ${data.results.importLessons.error}`);
-        }
-        setSetupRoadmapSuccess(data.message || "Kurulum tamamlandı ancak bazı hatalar oluştu.");
-        if (errorDetails.length > 0) {
-          setSetupRoadmapError(errorDetails.join(" | "));
-        }
-      }
+      setCourseState({
+        loading: false,
+        success: data.message || "Kurs başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
     } catch (err: any) {
-      setSetupRoadmapError(err.message || "Bir hata oluştu");
-    } finally {
-      setSettingUpRoadmap(false);
+      setCourseState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
     }
   };
 
-
-  const handleCreateSingleLiveCoding = async () => {
-    if (!liveCodingFormData.title || !liveCodingFormData.description || !liveCodingFormData.taskDescription) {
-      setSingleLiveCodingError("Başlık, açıklama ve görev açıklaması zorunludur");
-      return;
-    }
-
-    if (liveCodingFormData.languages.length === 0) {
-      setSingleLiveCodingError("En az bir dil seçilmelidir");
-      return;
-    }
-
-    setCreatingSingleLiveCoding(true);
-    setSingleLiveCodingError(null);
-    setSingleLiveCodingSuccess(null);
+  const handleCreateAngularCourse = async () => {
+    setCourseState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
 
     try {
-      const response = await fetch("/api/admin/create-live-coding", {
+      const response = await fetch("/api/admin/create-course/angular", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(liveCodingFormData),
+        headers: { "Content-Type": "application/json" },
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Canlı kodlama içeriği oluşturulurken bir hata oluştu");
+        throw new Error(data.error || "Kurs oluşturulurken bir hata oluştu");
       }
 
-      setSingleLiveCodingSuccess(data.message || "Canlı kodlama içeriği başarıyla oluşturuldu.");
-      
-      // Reset form
-      setLiveCodingFormData({
-        title: "",
-        description: "",
-        level: "beginner",
-        taskDescription: "",
-        languages: [],
-        timeLimitMinutes: 30,
-        acceptanceCriteria: [],
-        initialCode: {},
-        expertise: "",
-        topic: "",
-        topicContent: "",
+      setCourseState({
+        loading: false,
+        success: data.message || "Kurs başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
       });
-
-      setTimeout(() => {
-        setShowLiveCodingForm(false);
-        setSingleLiveCodingSuccess(null);
-      }, 2000);
     } catch (err: any) {
-      setSingleLiveCodingError(err.message || "Bir hata oluştu");
-    } finally {
-      setCreatingSingleLiveCoding(false);
+      setCourseState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
     }
   };
 
-  const toggleLanguage = (language: string) => {
-    setLiveCodingFormData((prev) => ({
-      ...prev,
-      languages: prev.languages.includes(language)
-        ? prev.languages.filter((l) => l !== language)
-        : [...prev.languages, language],
-    }));
-  };
-
-  const addAcceptanceCriteria = () => {
-    setLiveCodingFormData((prev) => ({
-      ...prev,
-      acceptanceCriteria: [...prev.acceptanceCriteria, ""],
-    }));
-  };
-
-  const updateAcceptanceCriteria = (index: number, value: string) => {
-    setLiveCodingFormData((prev) => ({
-      ...prev,
-      acceptanceCriteria: prev.acceptanceCriteria.map((item, i) => (i === index ? value : item)),
-    }));
-  };
-
-  const removeAcceptanceCriteria = (index: number) => {
-    setLiveCodingFormData((prev) => ({
-      ...prev,
-      acceptanceCriteria: prev.acceptanceCriteria.filter((_, i) => i !== index),
-    }));
-  };
-
-  const handleImportLiveCoding = async () => {
-    if (!confirm("JSON dosyasından C# canlı kodlama içeriklerini import etmek istediğinizden emin misiniz?")) {
-      return;
-    }
-
-    setImportingLiveCoding(true);
-    setImportLiveCodingError(null);
-    setImportLiveCodingSuccess(null);
-    setImportLiveCodingCount(null);
+  const handleCreateAICourse = async () => {
+    setCourseState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
 
     try {
-      const response = await fetch("/api/admin/import-live-coding", {
+      const response = await fetch("/api/admin/create-course/ai-for-developers", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Canlı kodlama içerikleri import edilirken bir hata oluştu");
+        throw new Error(data.error || "Kurs oluşturulurken bir hata oluştu");
       }
 
-      setImportLiveCodingSuccess(data.message || `${data.imported} adet canlı kodlama içeriği başarıyla import edildi.`);
-      setImportLiveCodingCount(data.imported || 0);
+      setCourseState({
+        loading: false,
+        success: data.message || "Kurs başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
     } catch (err: any) {
-      setImportLiveCodingError(err.message || "Bir hata oluştu");
-    } finally {
-      setImportingLiveCoding(false);
+      setCourseState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
     }
   };
 
-  const handleCreateContentBatch = async () => {
-    if (creatingContentBatch) {
-      return;
-    }
-
-    if (!confirm("10 adet canlı kodlama ve 10 adet bugfix içeriği oluşturmak istediğinizden emin misiniz? Bu işlem mevcut içerikleri güncelleyebilir veya yeni içerikler ekleyebilir.")) {
-      return;
-    }
-
-    setCreatingContentBatch(true);
-    setContentBatchError(null);
-    setContentBatchSuccess(null);
-    setContentBatchCreated(null);
+  const handleCreateFlutterCourse = async () => {
+    setCourseState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
 
     try {
-      const response = await fetch("/api/admin/create-content-batch", {
+      const response = await fetch("/api/admin/create-course/flutter", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "İçerik oluşturulurken bir hata oluştu");
+        throw new Error(data.error || "Kurs oluşturulurken bir hata oluştu");
       }
 
-      setContentBatchSuccess(data.message || `${data.liveCodingCreated} adet canlı kodlama ve ${data.bugfixCreated} adet bugfix içeriği başarıyla oluşturuldu.`);
-      setContentBatchCreated({
-        liveCoding: data.liveCodingCreated || 0,
-        bugfix: data.bugfixCreated || 0,
+      setCourseState({
+        loading: false,
+        success: data.message || "Kurs başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
       });
     } catch (err: any) {
-      setContentBatchError(err.message || "Bir hata oluştu");
-    } finally {
-      setCreatingContentBatch(false);
+      setCourseState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
     }
   };
 
-  const handleCreateHackathons = async () => {
-    if (!confirm("Yakın tarihte geçmiş, gelecek ve devam eden hackathonlar oluşturmak istediğinizden emin misiniz? Bu işlem 9 adet hackathon oluşturacak.")) {
-      return;
-    }
-
-    setCreatingHackathons(true);
-    setHackathonsError(null);
-    setHackathonsSuccess(null);
-    setHackathonsCreated(null);
+  const handleCreateEthicalHackingCourse = async () => {
+    setCourseState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
 
     try {
-      const response = await fetch("/api/admin/seed-hackathons", {
+      const response = await fetch("/api/admin/create-course/ethical-hacking", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Hackathonlar oluşturulurken bir hata oluştu");
+        throw new Error(data.error || "Kurs oluşturulurken bir hata oluştu");
       }
 
-      setHackathonsSuccess(data.message || `${data.created} adet hackathon başarıyla oluşturuldu.`);
-      setHackathonsCreated(data.created || 0);
+      setCourseState({
+        loading: false,
+        success: data.message || "Kurs başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
     } catch (err: any) {
-      setHackathonsError(err.message || "Bir hata oluştu");
-    } finally {
-      setCreatingHackathons(false);
+      setCourseState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
     }
   };
 
-  const handleCreateFreelancerRequests = async () => {
-    if (!confirm("Freelancer projeleri oluşturmak istediğinizden emin misiniz? Bu işlem farklı durumlarda (açık, devam eden, tamamlanmış, iptal edilmiş) projeler oluşturacak.")) {
-      return;
-    }
-
-    setCreatingFreelancerRequests(true);
-    setFreelancerRequestsError(null);
-    setFreelancerRequestsSuccess(null);
-    setFreelancerRequestsCreated(null);
+  const handleCreateNextJSCourse = async () => {
+    setCourseState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
 
     try {
-      const response = await fetch("/api/admin/seed-freelancer-requests", {
+      const response = await fetch("/api/admin/create-course/nextjs", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Freelancer projeleri oluşturulurken bir hata oluştu");
+        throw new Error(data.error || "Kurs oluşturulurken bir hata oluştu");
       }
 
-      setFreelancerRequestsSuccess(data.message || `${data.created} adet freelancer projesi başarıyla oluşturuldu.`);
-      setFreelancerRequestsCreated(data.created || 0);
+      setCourseState({
+        loading: false,
+        success: data.message || "Kurs başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
     } catch (err: any) {
-      setFreelancerRequestsError(err.message || "Bir hata oluştu");
-    } finally {
-      setCreatingFreelancerRequests(false);
+      setCourseState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
     }
   };
 
-  const handleCreateJobs = async () => {
-    if (!confirm("Yakın tarihte paylaşılmış 10 detaylı iş ilanı oluşturmak istediğinizden emin misiniz? Bu işlem son 1-7 gün içinde paylaşılmış iş ilanları oluşturacak.")) {
-      return;
-    }
-
-    setCreatingJobs(true);
-    setJobsError(null);
-    setJobsSuccess(null);
-    setJobsCreated(null);
+  const handleCreateDockerKubernetesCourse = async () => {
+    setCourseState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
 
     try {
-      const response = await fetch("/api/admin/seed-jobs", {
+      const response = await fetch("/api/admin/create-course/docker-kubernetes", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "İş ilanları oluşturulurken bir hata oluştu");
+        throw new Error(data.error || "Kurs oluşturulurken bir hata oluştu");
       }
 
-      setJobsSuccess(data.message || `${data.created} adet iş ilanı başarıyla oluşturuldu.`);
-      setJobsCreated(data.created || 0);
+      setCourseState({
+        loading: false,
+        success: data.message || "Kurs başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
     } catch (err: any) {
-      setJobsError(err.message || "Bir hata oluştu");
-    } finally {
-      setCreatingJobs(false);
+      setCourseState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
     }
   };
 
-  const handleCreateLeaderboardEntries = async () => {
-    if (!confirm("10 günlük ve 10 aylık derece kazancı verisi oluşturmak istediğinizden emin misiniz? Bu işlem mevcut verileri güncelleyebilir veya yeni veriler ekleyebilir.")) {
-      return;
-    }
-
-    setCreatingLeaderboardEntries(true);
-    setLeaderboardEntriesError(null);
-    setLeaderboardEntriesSuccess(null);
-    setLeaderboardEntriesCreated(null);
+  const handleCreateOwaspCourse = async () => {
+    setCourseState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
 
     try {
-      const response = await fetch("/api/admin/seed-leaderboard-entries", {
+      const response = await fetch("/api/admin/create-course/owasp-security", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Derece kazancı verileri oluşturulurken bir hata oluştu");
+        throw new Error(data.error || "Kurs oluşturulurken bir hata oluştu");
       }
 
-      setLeaderboardEntriesSuccess(data.message || `${data.dailyCreated} günlük ve ${data.monthlyCreated} aylık derece kazancı verisi başarıyla oluşturuldu.`);
-      setLeaderboardEntriesCreated({ daily: data.dailyCreated || 0, monthly: data.monthlyCreated || 0 });
+      setCourseState({
+        loading: false,
+        success: data.message || "Kurs başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
     } catch (err: any) {
-      setLeaderboardEntriesError(err.message || "Bir hata oluştu");
-    } finally {
-      setCreatingLeaderboardEntries(false);
+      setCourseState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
     }
   };
 
-  const handleCreateTests = async () => {
-    if (!confirm("10 adet C# testi oluşturmak istediğinizden emin misiniz? Bu işlem mevcut testleri güncelleyebilir veya yeni testler ekleyebilir.")) {
-      return;
-    }
-
-    setCreatingTests(true);
-    setTestsError(null);
-    setTestsSuccess(null);
-    setTestsCreated(null);
+  const handleCreateDotNetTest = async () => {
+    setTestState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
 
     try {
-      const response = await fetch("/api/admin/create-csharp-tests", {
+      const response = await fetch("/api/admin/create-test/dotnet-core", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Testler oluşturulurken bir hata oluştu");
+        throw new Error(data.error || "Test oluşturulurken bir hata oluştu");
       }
 
-      setTestsSuccess(data.message || `${data.created} adet C# testi başarıyla oluşturuldu.`);
-      setTestsCreated(data.created || 0);
+      setTestState({
+        loading: false,
+        success: data.message || "Test başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
     } catch (err: any) {
-      setTestsError(err.message || "Bir hata oluştu");
-    } finally {
-      setCreatingTests(false);
+      setTestState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
     }
   };
 
-  const successCount = modules.filter((m) => m.status === "success").length;
-  const errorCount = modules.filter((m) => m.status === "error").length;
-  const pendingCount = modules.filter((m) => m.status === "pending").length;
+  const handleCreateJavaTest = async () => {
+    setTestState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/create-test/java", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Test oluşturulurken bir hata oluştu");
+      }
+
+      setTestState({
+        loading: false,
+        success: data.message || "Test başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
+    } catch (err: any) {
+      setTestState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
+    }
+  };
+
+  const handleCreateMssqlTest = async () => {
+    setTestState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/create-test/mssql", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Test oluşturulurken bir hata oluştu");
+      }
+
+      setTestState({
+        loading: false,
+        success: data.message || "Test başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
+    } catch (err: any) {
+      setTestState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
+    }
+  };
+
+  const handleCreateReactTest = async () => {
+    setTestState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/create-test/react", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Test oluşturulurken bir hata oluştu");
+      }
+
+      setTestState({
+        loading: false,
+        success: data.message || "Test başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
+    } catch (err: any) {
+      setTestState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
+    }
+  };
+
+  const handleCreateAngularTest = async () => {
+    setTestState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/create-test/angular", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Test oluşturulurken bir hata oluştu");
+      }
+
+      setTestState({
+        loading: false,
+        success: data.message || "Test başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
+    } catch (err: any) {
+      setTestState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
+    }
+  };
+
+  const handleCreateNodeJSTest = async () => {
+    setTestState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/create-test/nodejs", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Test oluşturulurken bir hata oluştu");
+      }
+
+      setTestState({
+        loading: false,
+        success: data.message || "Test başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
+    } catch (err: any) {
+      setTestState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
+    }
+  };
+
+  const handleCreateAITest = async () => {
+    setTestState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/create-test/ai-for-developers", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Test oluşturulurken bir hata oluştu");
+      }
+
+      setTestState({
+        loading: false,
+        success: data.message || "Test başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
+    } catch (err: any) {
+      setTestState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
+    }
+  };
+
+  const handleCreateFlutterTest = async () => {
+    setTestState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/create-test/flutter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Test oluşturulurken bir hata oluştu");
+      }
+
+      setTestState({
+        loading: false,
+        success: data.message || "Test başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
+    } catch (err: any) {
+      setTestState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
+    }
+  };
+
+  const handleCreateEthicalHackingTest = async () => {
+    setTestState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/create-test/ethical-hacking", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Test oluşturulurken bir hata oluştu");
+      }
+
+      setTestState({
+        loading: false,
+        success: data.message || "Test başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
+    } catch (err: any) {
+      setTestState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
+    }
+  };
+
+  const handleCreateNextJSTest = async () => {
+    setTestState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/create-test/nextjs", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Test oluşturulurken bir hata oluştu");
+      }
+
+      setTestState({
+        loading: false,
+        success: data.message || "Test başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
+    } catch (err: any) {
+      setTestState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
+    }
+  };
+
+  const handleCreateDockerKubernetesTest = async () => {
+    setTestState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/create-test/docker-kubernetes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Test oluşturulurken bir hata oluştu");
+      }
+
+      setTestState({
+        loading: false,
+        success: data.message || "Test başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
+    } catch (err: any) {
+      setTestState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
+    }
+  };
+
+  const handleCreateOwaspTest = async () => {
+    setTestState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/create-test/owasp-security", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Test oluşturulurken bir hata oluştu");
+      }
+
+      setTestState({
+        loading: false,
+        success: data.message || "Test başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
+    } catch (err: any) {
+      setTestState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
+    }
+  };
+
+  const handleClearAllCourseData = async () => {
+    if (
+      !confirm(
+        "TÜM kurs, modül ve ders içeriklerini silmek istediğinizden emin misiniz? Bu işlem geri alınamaz!"
+      )
+    ) {
+      return;
+    }
+
+    if (clearState.loading) {
+      return; // Prevent multiple simultaneous requests
+    }
+
+    setClearState({
+      loading: true,
+      success: null,
+      error: null,
+    });
+
+    try {
+      // Önce tüm ders kayıtlarını temizle (lesson- ve topic- ile başlayanlar)
+      const clearTopicsResponse = await fetch("/api/admin/clear-topics", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const topicsData = await clearTopicsResponse.json();
+
+      if (!clearTopicsResponse.ok) {
+        throw new Error(topicsData.error || "Ders ve modül verileri temizlenirken bir hata oluştu");
+      }
+
+      // Sonra tüm kursları temizle (course-dotnet-roadmap dahil)
+      const clearCoursesResponse = await fetch("/api/admin/clear-courses", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const coursesData = await clearCoursesResponse.json();
+
+      if (!clearCoursesResponse.ok) {
+        throw new Error(coursesData.error || "Kurslar temizlenirken bir hata oluştu");
+      }
+
+      setClearState({
+        loading: false,
+        success: `Tüm kurs, modül ve ders verileri başarıyla temizlendi. ${topicsData.deletedLessonsCount || 0} ders kaydı, ${topicsData.deletedModulesCount || 0} modül ve ${coursesData.deletedCount || 0} kurs silindi.`,
+        error: null,
+      });
+    } catch (err: any) {
+      setClearState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+      });
+    }
+  };
 
   return (
     <div className="space-y-8 animate-fade-in">
@@ -724,758 +982,450 @@ export default function AdminPage() {
             Admin Paneli
           </h1>
           <p className="text-gray-600 dark:text-gray-400 text-lg font-medium">
-            Seed data yönetimi ve sistem ayarları
+            Sistem ayarları ve yönetim
           </p>
         </div>
       </div>
 
-      {/* Seed Data Section */}
-      <div className="rounded-3xl border border-gray-200 bg-white shadow-lg dark:border-gray-800 dark:bg-gray-950 p-6 md:p-8">
-        <div className="flex items-center gap-3 mb-6">
-          <Database className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-            Seed Data Yönetimi
-          </h2>
+      {/* Courses Section */}
+      <div className="relative rounded-3xl border border-blue-200/50 bg-gradient-to-br from-white via-blue-50/30 to-indigo-50/30 shadow-2xl dark:border-blue-800/50 dark:from-gray-950 dark:via-blue-950/20 dark:to-indigo-950/20 backdrop-blur-sm p-6 md:p-8 overflow-hidden">
+        {/* Animated background pattern */}
+        <div className="absolute inset-0 opacity-5 dark:opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundSize: '60px 60px'
+          }}></div>
         </div>
-
-        <p className="text-gray-600 dark:text-gray-400 mb-6">
-          Tüm modül içeriklerini, quizleri, konu anlatımlarını ve ders içeriklerini veritabanına yüklemek için aşağıdaki butona tıklayın.
-          Bu işlem mevcut verileri güncelleyebilir veya yeni veriler ekleyebilir. Konu anlatımları ve ders içerikleri otomatik olarak ilgili modüllere eklenir.
-        </p>
-
-        {error && (
-          <div className="mb-6 p-4 rounded-lg border border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/60">
-            <div className="flex items-center gap-2 text-red-600 dark:text-red-300">
-              <AlertCircle className="h-5 w-5" />
-              <span className="font-medium">{error}</span>
+        
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-2 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg">
+              <BookOpen className="h-6 w-6 text-white" />
+            </div>
+            <div>
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 bg-clip-text text-transparent">
+                📚 Kurs Oluşturma Merkezi
+              </h2>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                Teknoloji stack&apos;inizi genişletin
+              </p>
             </div>
           </div>
-        )}
-
-        {overallStatus === "success" && (
-          <div className="mb-6 p-4 rounded-lg border border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-950/60">
-            <div className="flex items-center gap-2 text-green-600 dark:text-green-300">
-              <CheckCircle2 className="h-5 w-5" />
-              <span className="font-medium">
-                Seed data başarıyla yüklendi! {successCount} modül işlendi.
-                {topicsProcessed !== null && topicsProcessed > 0 && (
-                  <span className="ml-2"> {topicsProcessed} konu anlatımı eklendi.</span>
-                )}
-                {lessonsProcessed !== null && lessonsProcessed > 0 && (
-                  <span className="ml-2"> {lessonsProcessed} ders içeriği eklendi.</span>
-                )}
-                {lessonsFilled !== null && lessonsFilled > 0 && (
-                  <span className="ml-2"> {lessonsFilled} ders içeriği dolduruldu.</span>
-                )}
-                {lessonsLimited !== null && lessonsLimited > 0 && (
-                  <span className="ml-2"> {lessonsLimited} modülde ders sayısı 10&apos;a indirildi.</span>
-                )}
-              </span>
-            </div>
-          </div>
-        )}
-
-        <div className="flex gap-4 mb-6 flex-wrap">
-          <Button
-            onClick={handleSetupRoadmap}
-            disabled={settingUpRoadmap}
-            size="lg"
-            className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold"
-          >
-            {settingUpRoadmap ? (
-              <>
-                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                Kuruluyor...
-              </>
-            ) : (
-              <>
-                <Rocket className="mr-2 h-5 w-5" />
-                .NET Core Altyapı Kur
-              </>
-            )}
-          </Button>
-          <Button
-            onClick={handleCreateContentBatch}
-            disabled={creatingContentBatch}
-            size="lg"
-            className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white"
-          >
-            {creatingContentBatch ? (
-              <>
-                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                Oluşturuluyor...
-              </>
-            ) : (
-              <>
-                <Code className="mr-2 h-5 w-5" />
-                10 Canlı Kodlama + 10 Bugfix İçeriği Oluştur
-              </>
-            )}
-          </Button>
-          <Button
-            onClick={handleCreateHackathons}
-            disabled={creatingHackathons}
-            size="lg"
-            className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
-          >
-            {creatingHackathons ? (
-              <>
-                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                Oluşturuluyor...
-              </>
-            ) : (
-              <>
-                <Rocket className="mr-2 h-5 w-5" />
-                Hackathon Seed Data Oluştur
-              </>
-            )}
-          </Button>
-          <Button
-            onClick={handleCreateFreelancerRequests}
-            disabled={creatingFreelancerRequests}
-            size="lg"
-            className="bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-700 hover:to-cyan-700 text-white"
-          >
-            {creatingFreelancerRequests ? (
-              <>
-                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                Oluşturuluyor...
-              </>
-            ) : (
-              <>
-                <Database className="mr-2 h-5 w-5" />
-                Freelancer Projeleri Oluştur
-              </>
-            )}
-          </Button>
-          <Button
-            onClick={handleCreateJobs}
-            disabled={creatingJobs}
-            size="lg"
-            className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white"
-          >
-            {creatingJobs ? (
-              <>
-                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                Oluşturuluyor...
-              </>
-            ) : (
-              <>
-                <Briefcase className="mr-2 h-5 w-5" />
-                İş İlanları Ekle (10 Adet)
-              </>
-            )}
-          </Button>
-          <Button
-            onClick={handleImportLiveCoding}
-            disabled={importingLiveCoding}
-            size="lg"
-            className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white"
-          >
-            {importingLiveCoding ? (
-              <>
-                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                Import Ediliyor...
-              </>
-            ) : (
-              <>
-                <Plus className="mr-2 h-5 w-5" />
-                JSON&apos;dan Canlı Kodlama İçeriği İmport Et
-              </>
-            )}
-          </Button>
-          <Button
-            onClick={() => setShowLiveCodingForm(true)}
-            disabled={showLiveCodingForm}
-            size="lg"
-            className="bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white"
-          >
-            <Plus className="mr-2 h-5 w-5" />
-            Manuel Canlı Kodlama Ekle
-          </Button>
-          <Button
-            onClick={handleCreateLeaderboardEntries}
-            disabled={creatingLeaderboardEntries}
-            size="lg"
-            className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white"
-          >
-            {creatingLeaderboardEntries ? (
-              <>
-                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                Oluşturuluyor...
-              </>
-            ) : (
-              <>
-                <Database className="mr-2 h-5 w-5" />
-                Derece Kazancı Verileri Ekle (10 Günlük + 10 Aylık)
-              </>
-            )}
-          </Button>
-          <Button
-            onClick={handleCreateTests}
-            disabled={creatingTests}
-            size="lg"
-            className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white"
-          >
-            {creatingTests ? (
-              <>
-                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                Oluşturuluyor...
-              </>
-            ) : (
-              <>
-                <Code className="mr-2 h-5 w-5" />
-                10 Test Oluştur
-              </>
-            )}
-          </Button>
-        </div>
-
-        {clearSuccess && (
-          <div className="mb-6 p-4 rounded-lg border border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-950/60">
-            <div className="flex items-center gap-2 text-green-600 dark:text-green-300">
-              <CheckCircle2 className="h-5 w-5" />
-              <span className="font-medium">{clearSuccess}</span>
-            </div>
-          </div>
-        )}
-
-        {clearError && (
-          <div className="mb-6 p-4 rounded-lg border border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/60">
-            <div className="flex items-center gap-2 text-red-600 dark:text-red-300">
-              <AlertCircle className="h-5 w-5" />
-              <span className="font-medium">{clearError}</span>
-            </div>
-          </div>
-        )}
-
-        {clearTopicsSuccess && (
-          <div className="mb-6 p-4 rounded-lg border border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-950/60">
-            <div className="flex items-center gap-2 text-green-600 dark:text-green-300">
-              <CheckCircle2 className="h-5 w-5" />
-              <span className="font-medium">{clearTopicsSuccess}</span>
-            </div>
-          </div>
-        )}
-
-        {clearTopicsError && (
-          <div className="mb-6 p-4 rounded-lg border border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/60">
-            <div className="flex items-center gap-2 text-red-600 dark:text-red-300">
-              <AlertCircle className="h-5 w-5" />
-              <span className="font-medium">{clearTopicsError}</span>
-            </div>
-          </div>
-        )}
-
-        {roadmapSuccess && (
-          <div className="mb-6 p-4 rounded-lg border border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-950/60">
-            <div className="flex items-center gap-2 text-green-600 dark:text-green-300">
-              <CheckCircle2 className="h-5 w-5" />
-              <span className="font-medium">{roadmapSuccess}</span>
-            </div>
-          </div>
-        )}
-
-        {roadmapError && (
-          <div className="mb-6 p-4 rounded-lg border border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/60">
-            <div className="flex items-center gap-2 text-red-600 dark:text-red-300">
-              <AlertCircle className="h-5 w-5" />
-              <span className="font-medium">{roadmapError}</span>
-            </div>
-          </div>
-        )}
-
-        {importLessonsSuccess && (
-          <div className="mb-6 p-4 rounded-lg border border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-950/60">
-            <div className="flex items-center gap-2 text-green-600 dark:text-green-300">
-              <CheckCircle2 className="h-5 w-5" />
-              <span className="font-medium">{importLessonsSuccess}</span>
-            </div>
-          </div>
-        )}
-
-        {importLessonsError && (
-          <div className="mb-6 p-4 rounded-lg border border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/60">
-            <div className="flex items-center gap-2 text-red-600 dark:text-red-300">
-              <AlertCircle className="h-5 w-5" />
-              <span className="font-medium">{importLessonsError}</span>
-            </div>
-          </div>
-        )}
-
-        {setupRoadmapSuccess && (
-          <div className="mb-6 p-4 rounded-lg border border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-950/60">
-            <div className="flex items-center gap-2 text-green-600 dark:text-green-300">
-              <CheckCircle2 className="h-5 w-5" />
-              <span className="font-medium">{setupRoadmapSuccess}</span>
-            </div>
-          </div>
-        )}
-
-        {setupRoadmapError && (
-          <div className="mb-6 p-4 rounded-lg border border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/60">
-            <div className="flex items-center gap-2 text-red-600 dark:text-red-300">
-              <AlertCircle className="h-5 w-5" />
-              <span className="font-medium">{setupRoadmapError}</span>
-            </div>
-          </div>
-        )}
-
-        {contentBatchSuccess && (
-          <div className="mb-6 p-4 rounded-lg border border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-950/60">
-            <div className="flex items-center gap-2 text-green-600 dark:text-green-300">
-              <CheckCircle2 className="h-5 w-5" />
-              <span className="font-medium">
-                {contentBatchSuccess}
-                {contentBatchCreated && (
-                  <span className="ml-2">
-                    ({contentBatchCreated.liveCoding} canlı kodlama, {contentBatchCreated.bugfix} bugfix)
-                  </span>
-                )}
-              </span>
-            </div>
-          </div>
-        )}
-
-        {contentBatchError && (
-          <div className="mb-6 p-4 rounded-lg border border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/60">
-            <div className="flex items-center gap-2 text-red-600 dark:text-red-300">
-              <AlertCircle className="h-5 w-5" />
-              <span className="font-medium">{contentBatchError}</span>
-            </div>
-          </div>
-        )}
-
-        {hackathonsSuccess && (
-          <div className="mb-6 p-4 rounded-lg border border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-950/60">
-            <div className="flex items-center gap-2 text-green-600 dark:text-green-300">
-              <CheckCircle2 className="h-5 w-5" />
-              <span className="font-medium">
-                {hackathonsSuccess}
-                {hackathonsCreated !== null && hackathonsCreated > 0 && (
-                  <span className="ml-2"> {hackathonsCreated} adet hackathon oluşturuldu.</span>
-                )}
-              </span>
-            </div>
-          </div>
-        )}
-
-        {hackathonsError && (
-          <div className="mb-6 p-4 rounded-lg border border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/60">
-            <div className="flex items-center gap-2 text-red-600 dark:text-red-300">
-              <AlertCircle className="h-5 w-5" />
-              <span className="font-medium">{hackathonsError}</span>
-            </div>
-          </div>
-        )}
-
-        {freelancerRequestsSuccess && (
-          <div className="mb-6 p-4 rounded-lg border border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-950/60">
-            <div className="flex items-center gap-2 text-green-600 dark:text-green-300">
-              <CheckCircle2 className="h-5 w-5" />
-              <span className="font-medium">
-                {freelancerRequestsSuccess}
-                {freelancerRequestsCreated !== null && freelancerRequestsCreated > 0 && (
-                  <span className="ml-2"> {freelancerRequestsCreated} adet proje oluşturuldu.</span>
-                )}
-              </span>
-            </div>
-          </div>
-        )}
-
-        {freelancerRequestsError && (
-          <div className="mb-6 p-4 rounded-lg border border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/60">
-            <div className="flex items-center gap-2 text-red-600 dark:text-red-300">
-              <AlertCircle className="h-5 w-5" />
-              <span className="font-medium">{freelancerRequestsError}</span>
-            </div>
-          </div>
-        )}
-
-        {jobsSuccess && (
-          <div className="mb-6 p-4 rounded-lg border border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-950/60">
-            <div className="flex items-center gap-2 text-green-600 dark:text-green-300">
-              <CheckCircle2 className="h-5 w-5" />
-              <span className="font-medium">
-                {jobsSuccess}
-                {jobsCreated !== null && jobsCreated > 0 && (
-                  <span className="ml-2"> {jobsCreated} adet iş ilanı oluşturuldu.</span>
-                )}
-              </span>
-            </div>
-          </div>
-        )}
-
-        {jobsError && (
-          <div className="mb-6 p-4 rounded-lg border border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/60">
-            <div className="flex items-center gap-2 text-red-600 dark:text-red-300">
-              <AlertCircle className="h-5 w-5" />
-              <span className="font-medium">{jobsError}</span>
-            </div>
-          </div>
-        )}
-
-        {leaderboardEntriesSuccess && (
-          <div className="mb-6 p-4 rounded-lg border border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-950/60">
-            <div className="flex items-center gap-2 text-green-600 dark:text-green-300">
-              <CheckCircle2 className="h-5 w-5" />
-              <span className="font-medium">
-                {leaderboardEntriesSuccess}
-                {leaderboardEntriesCreated !== null && (
-                  <span className="ml-2"> ({leaderboardEntriesCreated.daily} günlük, {leaderboardEntriesCreated.monthly} aylık veri oluşturuldu)</span>
-                )}
-              </span>
-            </div>
-          </div>
-        )}
-
-        {leaderboardEntriesError && (
-          <div className="mb-6 p-4 rounded-lg border border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/60">
-            <div className="flex items-center gap-2 text-red-600 dark:text-red-300">
-              <AlertCircle className="h-5 w-5" />
-              <span className="font-medium">{leaderboardEntriesError}</span>
-            </div>
-          </div>
-        )}
-
-        {testsSuccess && (
-          <div className="mb-6 p-4 rounded-lg border border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-950/60">
-            <div className="flex items-center gap-2 text-green-600 dark:text-green-300">
-              <CheckCircle2 className="h-5 w-5" />
-              <span className="font-medium">
-                {testsSuccess}
-                {testsCreated !== null && testsCreated > 0 && (
-                  <span className="ml-2"> {testsCreated} adet test oluşturuldu.</span>
-                )}
-              </span>
-            </div>
-          </div>
-        )}
-
-        {testsError && (
-          <div className="mb-6 p-4 rounded-lg border border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/60">
-            <div className="flex items-center gap-2 text-red-600 dark:text-red-300">
-              <AlertCircle className="h-5 w-5" />
-              <span className="font-medium">{testsError}</span>
-            </div>
-          </div>
-        )}
-
-        {/* Statistics */}
-        {(successCount > 0 || errorCount > 0 || pendingCount > 0) && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <div className="p-4 rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-800 dark:bg-gray-900">
-              <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">Toplam Modül</div>
-              <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                {modules.length}
-              </div>
-            </div>
-            <div className="p-4 rounded-lg border border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-950/60">
-              <div className="text-sm text-green-600 dark:text-green-400 mb-1">Başarılı</div>
-              <div className="text-2xl font-bold text-green-600 dark:text-green-400">
-                {successCount}
-              </div>
-            </div>
-            <div className="p-4 rounded-lg border border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/60">
-              <div className="text-sm text-red-600 dark:text-red-400 mb-1">Hatalı</div>
-              <div className="text-2xl font-bold text-red-600 dark:text-red-400">
-                {errorCount}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Module List */}
-        {modules.length > 0 && (
-          <div className="space-y-2">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
-              Modül Durumları
-            </h3>
-            <div className="space-y-2 max-h-96 overflow-y-auto">
-              {modules.map((module) => (
-                <div
-                  key={module.moduleId}
-                  className="flex items-center justify-between p-3 rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900"
+          <p className="text-gray-600 dark:text-gray-400 mb-8 text-sm">
+            Her kurs 15 modül ve 225 ders içerir. Profesyonel eğitim içerikleri ile yazılım geliştirme yolculuğunuza başlayın.
+          </p>
+          
+          {/* Modern Grid Layout */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {/* Course Card Component */}
+            {[
+              { 
+                title: ".NET Core", 
+                handler: handleCreateDotNetCourse, 
+                gradient: "from-blue-600 via-indigo-600 to-purple-600",
+                icon: Code2,
+                description: "Backend Framework"
+              },
+              { 
+                title: "Java", 
+                handler: handleCreateJavaCourse, 
+                gradient: "from-orange-500 via-red-500 to-pink-500",
+                icon: Code2,
+                description: "Enterprise Language"
+              },
+              { 
+                title: "MSSQL", 
+                handler: handleCreateMssqlCourse, 
+                gradient: "from-orange-600 via-red-600 to-orange-700",
+                icon: Database,
+                description: "Database Management"
+              },
+              { 
+                title: "React", 
+                handler: handleCreateReactCourse, 
+                gradient: "from-cyan-500 via-blue-500 to-indigo-600",
+                icon: Globe,
+                description: "Frontend Library"
+              },
+              { 
+                title: "Angular", 
+                handler: handleCreateAngularCourse, 
+                gradient: "from-red-600 via-pink-600 to-rose-600",
+                icon: Globe,
+                description: "Frontend Framework"
+              },
+              { 
+                title: "Node.js", 
+                handler: handleCreateNodeJSCourse, 
+                gradient: "from-green-500 via-emerald-500 to-teal-600",
+                icon: Zap,
+                description: "Runtime Environment"
+              },
+              { 
+                title: "Yapay Zeka", 
+                handler: handleCreateAICourse, 
+                gradient: "from-purple-600 via-pink-600 to-rose-500",
+                icon: Zap,
+                description: "AI for Developers"
+              },
+              { 
+                title: "Flutter", 
+                handler: handleCreateFlutterCourse, 
+                gradient: "from-blue-400 via-cyan-500 to-blue-600",
+                icon: Globe,
+                description: "Mobile Development"
+              },
+              { 
+                title: "Ethical Hacking", 
+                handler: handleCreateEthicalHackingCourse, 
+                gradient: "from-red-600 via-orange-600 to-red-700",
+                icon: Shield,
+                description: "Cybersecurity"
+              },
+              { 
+                title: "Next.js", 
+                handler: handleCreateNextJSCourse, 
+                gradient: "from-gray-800 via-gray-900 to-black",
+                icon: Code2,
+                description: "React Framework"
+              },
+              { 
+                title: "Docker & K8s", 
+                handler: handleCreateDockerKubernetesCourse, 
+                gradient: "from-blue-500 via-cyan-500 to-blue-600",
+                icon: Container,
+                description: "Containerization"
+              },
+              { 
+                title: "OWASP Security", 
+                handler: handleCreateOwaspCourse, 
+                gradient: "from-yellow-500 via-orange-600 to-red-600",
+                icon: Lock,
+                description: "Web Security"
+              },
+            ].map((course, idx) => {
+              const Icon = course.icon;
+              return (
+                <button
+                  key={idx}
+                  onClick={course.handler}
+                  disabled={courseState.loading}
+                  className={`group relative overflow-hidden rounded-2xl border border-white/20 bg-gradient-to-br ${course.gradient} backdrop-blur-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100`}
                 >
-                  <div className="flex items-center gap-3">
-                    {module.status === "loading" && (
-                      <Loader2 className="h-4 w-4 animate-spin text-blue-600" />
-                    )}
-                    {module.status === "success" && (
-                      <CheckCircle2 className="h-4 w-4 text-green-600" />
-                    )}
-                    {module.status === "error" && (
-                      <XCircle className="h-4 w-4 text-red-600" />
-                    )}
-                    {module.status === "pending" && (
-                      <div className="h-4 w-4 rounded-full border-2 border-gray-300 dark:border-gray-600" />
-                    )}
-                    <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                      {module.title}
-                    </span>
+                  {/* Animated background glow */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${course.gradient} opacity-0 group-hover:opacity-30 transition-opacity duration-300 blur-xl`}></div>
+                  
+                  {/* Content */}
+                  <div className="relative z-10 p-6 text-left">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="p-3 rounded-xl bg-white/10 backdrop-blur-sm group-hover:bg-white/20 transition-colors">
+                        <Icon className="h-6 w-6 text-white" />
+                      </div>
+                      {courseState.loading && (
+                        <Loader2 className="h-5 w-5 text-white/80 animate-spin" />
+                      )}
+                    </div>
+                    <h3 className="text-xl font-bold text-white mb-1 group-hover:translate-x-1 transition-transform">
+                      {course.title}
+                    </h3>
+                    <p className="text-sm text-white/70 mb-4">{course.description}</p>
+                    <div className="flex items-center text-xs text-white/60">
+                      <BookOpen className="h-3 w-3 mr-1" />
+                      <span>15 Modül • 225 Ders</span>
+                    </div>
                   </div>
-                  {module.error && (
-                    <span className="text-xs text-red-600 dark:text-red-400">
-                      {module.error}
-                    </span>
+                  
+                  {/* Shine effect on hover */}
+                  <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+                </button>
+              );
+            })}
+          </div>
+          
+          {/* Success/Error Messages */}
+          {courseState.success && (
+            <div className="mt-6 p-4 rounded-2xl border border-green-300/50 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/40 dark:to-emerald-950/40 dark:border-green-800/50 backdrop-blur-sm shadow-lg">
+              <div className="flex items-start gap-3 text-green-700 dark:text-green-300">
+                <div className="p-2 rounded-lg bg-green-500/20">
+                  <CheckCircle2 className="h-5 w-5 flex-shrink-0" />
+                </div>
+                <div className="flex-1">
+                  <div className="font-semibold text-base mb-2">{courseState.success}</div>
+                  {courseState.stats && (
+                    <div className="flex flex-wrap gap-4 text-sm opacity-90">
+                      <div className="flex items-center gap-1">
+                        <BookOpen className="h-3 w-3" />
+                        <span>Modüller: <strong>{courseState.stats.modulesCreated}</strong></span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <BookOpen className="h-3 w-3" />
+                        <span>Dersler: <strong>{courseState.stats.lessonsCreated}</strong></span>
+                      </div>
+                      {courseState.stats.totalDuration && (
+                        <div className="flex items-center gap-1">
+                          <Zap className="h-3 w-3" />
+                          <span>
+                            Süre: <strong>{Math.floor(courseState.stats.totalDuration / 60)}</strong> saat{" "}
+                            <strong>{courseState.stats.totalDuration % 60}</strong> dakika
+                          </span>
+                        </div>
+                      )}
+                    </div>
                   )}
                 </div>
-              ))}
+              </div>
             </div>
-          </div>
-        )}
-
-        {singleLiveCodingSuccess && (
-          <div className="mb-6 p-4 rounded-lg border border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-950/60">
-            <div className="flex items-center gap-2 text-green-600 dark:text-green-300">
-              <CheckCircle2 className="h-5 w-5" />
-              <span className="font-medium">{singleLiveCodingSuccess}</span>
+          )}
+          {courseState.error && (
+            <div className="mt-6 p-4 rounded-2xl border border-red-300/50 bg-gradient-to-br from-red-50 to-rose-50 dark:from-red-950/40 dark:to-rose-950/40 dark:border-red-800/50 backdrop-blur-sm shadow-lg">
+              <div className="flex items-start gap-3 text-red-700 dark:text-red-300">
+                <div className="p-2 rounded-lg bg-red-500/20">
+                  <AlertCircle className="h-5 w-5 flex-shrink-0" />
+                </div>
+                <div className="text-sm font-semibold">{courseState.error}</div>
+              </div>
             </div>
-          </div>
-        )}
-
-        {singleLiveCodingError && (
-          <div className="mb-6 p-4 rounded-lg border border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/60">
-            <div className="flex items-center gap-2 text-red-600 dark:text-red-300">
-              <AlertCircle className="h-5 w-5" />
-              <span className="font-medium">{singleLiveCodingError}</span>
-            </div>
-          </div>
-        )}
-
-        {importLiveCodingSuccess && (
-          <div className="mb-6 p-4 rounded-lg border border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-950/60">
-            <div className="flex items-center gap-2 text-green-600 dark:text-green-300">
-              <CheckCircle2 className="h-5 w-5" />
-              <span className="font-medium">
-                {importLiveCodingSuccess}
-                {importLiveCodingCount !== null && importLiveCodingCount > 0 && (
-                  <span className="ml-2"> {importLiveCodingCount} adet içerik import edildi.</span>
-                )}
-              </span>
-            </div>
-          </div>
-        )}
-
-        {importLiveCodingError && (
-          <div className="mb-6 p-4 rounded-lg border border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/60">
-            <div className="flex items-center gap-2 text-red-600 dark:text-red-300">
-              <AlertCircle className="h-5 w-5" />
-              <span className="font-medium">{importLiveCodingError}</span>
-            </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
 
-      {/* Live Coding Form Modal */}
-      {showLiveCodingForm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-          <div className="w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl bg-white dark:bg-gray-950 border border-gray-200 dark:border-gray-800 shadow-2xl">
-            <div className="sticky top-0 bg-white dark:bg-gray-950 border-b border-gray-200 dark:border-gray-800 px-6 py-4 flex items-center justify-between">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                Yeni Canlı Kodlama İçeriği Ekle
-              </h2>
-              <button
-                onClick={() => {
-                  setShowLiveCodingForm(false);
-                  setSingleLiveCodingError(null);
-                  setSingleLiveCodingSuccess(null);
-                }}
-                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
-              >
-                <X className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-              </button>
+      {/* Tests Section */}
+      <div className="relative rounded-3xl border border-purple-200/50 bg-gradient-to-br from-white via-purple-50/30 to-pink-50/30 shadow-2xl dark:border-purple-800/50 dark:from-gray-950 dark:via-purple-950/20 dark:to-pink-950/20 backdrop-blur-sm p-6 md:p-8 overflow-hidden">
+        {/* Animated background pattern */}
+        <div className="absolute inset-0 opacity-5 dark:opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundSize: '60px 60px'
+          }}></div>
+        </div>
+        
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-2 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 shadow-lg">
+              <FileText className="h-6 w-6 text-white" />
             </div>
-
-            <div className="p-6 space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <Input
-                  label="Başlık *"
-                  placeholder="Örn: C# Array İşlemleri"
-                  value={liveCodingFormData.title}
-                  onChange={(e) => setLiveCodingFormData((prev) => ({ ...prev, title: e.target.value }))}
-                  disabled={creatingSingleLiveCoding}
-                />
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Seviye *
-                  </label>
-                  <select
-                    value={liveCodingFormData.level}
-                    onChange={(e) => setLiveCodingFormData((prev) => ({ ...prev, level: e.target.value as any }))}
-                    disabled={creatingSingleLiveCoding}
-                    className="w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-4 py-2 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  >
-                    <option value="beginner">Başlangıç</option>
-                    <option value="intermediate">Orta</option>
-                    <option value="advanced">İleri</option>
-                  </select>
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Açıklama *
-                </label>
-                <textarea
-                  value={liveCodingFormData.description}
-                  onChange={(e) => setLiveCodingFormData((prev) => ({ ...prev, description: e.target.value }))}
-                  disabled={creatingSingleLiveCoding}
-                  rows={3}
-                  className="w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-4 py-2 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Canlı kodlama içeriğinin genel açıklaması"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Görev Açıklaması *
-                </label>
-                <textarea
-                  value={liveCodingFormData.taskDescription}
-                  onChange={(e) => setLiveCodingFormData((prev) => ({ ...prev, taskDescription: e.target.value }))}
-                  disabled={creatingSingleLiveCoding}
-                  rows={4}
-                  className="w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-4 py-2 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Öğrencinin yapması gereken görevin detaylı açıklaması"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Desteklenen Diller *
-                </label>
-                <div className="flex flex-wrap gap-2">
-                  {["csharp", "python", "javascript", "java"].map((lang) => (
-                    <button
-                      key={lang}
-                      type="button"
-                      onClick={() => toggleLanguage(lang)}
-                      disabled={creatingSingleLiveCoding}
-                      className={cn(
-                        "px-4 py-2 rounded-lg text-sm font-medium transition-colors",
-                        liveCodingFormData.languages.includes(lang)
-                          ? "bg-blue-600 text-white"
-                          : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+            <div>
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 bg-clip-text text-transparent">
+                📝 Test Oluşturma Merkezi
+              </h2>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                Bilginizi test edin ve değerlendirin
+              </p>
+            </div>
+          </div>
+          <p className="text-gray-600 dark:text-gray-400 mb-8 text-sm">
+            Her teknoloji için kapsamlı test paketleri oluşturun. Test içeriği daha sonra eklenecektir.
+          </p>
+          
+          {/* Modern Grid Layout */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {[
+              { 
+                title: ".NET Core", 
+                handler: handleCreateDotNetTest, 
+                gradient: "from-blue-600 via-indigo-600 to-purple-600",
+                icon: Code2,
+                description: "Backend Framework"
+              },
+              { 
+                title: "Java", 
+                handler: handleCreateJavaTest, 
+                gradient: "from-orange-500 via-red-500 to-pink-500",
+                icon: Code2,
+                description: "Enterprise Language"
+              },
+              { 
+                title: "MSSQL", 
+                handler: handleCreateMssqlTest, 
+                gradient: "from-orange-600 via-red-600 to-orange-700",
+                icon: Database,
+                description: "Database Management"
+              },
+              { 
+                title: "React", 
+                handler: handleCreateReactTest, 
+                gradient: "from-cyan-500 via-blue-500 to-indigo-600",
+                icon: Globe,
+                description: "Frontend Library"
+              },
+              { 
+                title: "Angular", 
+                handler: handleCreateAngularTest, 
+                gradient: "from-red-600 via-pink-600 to-rose-600",
+                icon: Globe,
+                description: "Frontend Framework"
+              },
+              { 
+                title: "Node.js", 
+                handler: handleCreateNodeJSTest, 
+                gradient: "from-green-500 via-emerald-500 to-teal-600",
+                icon: Zap,
+                description: "Runtime Environment"
+              },
+              { 
+                title: "Yapay Zeka", 
+                handler: handleCreateAITest, 
+                gradient: "from-purple-600 via-pink-600 to-rose-500",
+                icon: Zap,
+                description: "AI for Developers"
+              },
+              { 
+                title: "Flutter", 
+                handler: handleCreateFlutterTest, 
+                gradient: "from-blue-400 via-cyan-500 to-blue-600",
+                icon: Globe,
+                description: "Mobile Development"
+              },
+              { 
+                title: "Ethical Hacking", 
+                handler: handleCreateEthicalHackingTest, 
+                gradient: "from-red-600 via-orange-600 to-red-700",
+                icon: Shield,
+                description: "Cybersecurity"
+              },
+              { 
+                title: "Next.js", 
+                handler: handleCreateNextJSTest, 
+                gradient: "from-gray-800 via-gray-900 to-black",
+                icon: Code2,
+                description: "React Framework"
+              },
+              { 
+                title: "Docker & K8s", 
+                handler: handleCreateDockerKubernetesTest, 
+                gradient: "from-blue-500 via-cyan-500 to-blue-600",
+                icon: Container,
+                description: "Containerization"
+              },
+              { 
+                title: "OWASP Security", 
+                handler: handleCreateOwaspTest, 
+                gradient: "from-yellow-500 via-orange-600 to-red-600",
+                icon: Lock,
+                description: "Web Security"
+              },
+            ].map((test, idx) => {
+              const Icon = test.icon;
+              return (
+                <button
+                  key={idx}
+                  onClick={test.handler}
+                  disabled={testState.loading}
+                  className={`group relative overflow-hidden rounded-2xl border border-white/20 bg-gradient-to-br ${test.gradient} backdrop-blur-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100`}
+                >
+                  {/* Animated background glow */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${test.gradient} opacity-0 group-hover:opacity-30 transition-opacity duration-300 blur-xl`}></div>
+                  
+                  {/* Content */}
+                  <div className="relative z-10 p-6 text-left">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="p-3 rounded-xl bg-white/10 backdrop-blur-sm group-hover:bg-white/20 transition-colors">
+                        <Icon className="h-6 w-6 text-white" />
+                      </div>
+                      {testState.loading && (
+                        <Loader2 className="h-5 w-5 text-white/80 animate-spin" />
                       )}
-                    >
-                      {lang === "csharp" ? "C#" : lang.charAt(0).toUpperCase() + lang.slice(1)}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <Input
-                  label="Zaman Limiti (dakika)"
-                  type="number"
-                  value={liveCodingFormData.timeLimitMinutes}
-                  onChange={(e) => setLiveCodingFormData((prev) => ({ ...prev, timeLimitMinutes: parseInt(e.target.value) || 30 }))}
-                  disabled={creatingSingleLiveCoding}
-                />
-                <Input
-                  label="Uzmanlık"
-                  placeholder="Örn: Backend"
-                  value={liveCodingFormData.expertise}
-                  onChange={(e) => setLiveCodingFormData((prev) => ({ ...prev, expertise: e.target.value }))}
-                  disabled={creatingSingleLiveCoding}
-                />
-                <Input
-                  label="Konu"
-                  placeholder="Örn: .NET Core"
-                  value={liveCodingFormData.topic}
-                  onChange={(e) => setLiveCodingFormData((prev) => ({ ...prev, topic: e.target.value }))}
-                  disabled={creatingSingleLiveCoding}
-                />
-              </div>
-
-              <Input
-                label="Konu İçeriği"
-                placeholder="Örn: Collections"
-                value={liveCodingFormData.topicContent}
-                onChange={(e) => setLiveCodingFormData((prev) => ({ ...prev, topicContent: e.target.value }))}
-                disabled={creatingSingleLiveCoding}
-              />
-
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Kabul Kriterleri
-                  </label>
-                  <Button
-                    type="button"
-                    onClick={addAcceptanceCriteria}
-                    disabled={creatingSingleLiveCoding}
-                    size="sm"
-                    variant="outline"
-                  >
-                    <Plus className="w-4 h-4 mr-1" />
-                    Ekle
-                  </Button>
-                </div>
-                <div className="space-y-2">
-                  {liveCodingFormData.acceptanceCriteria.map((criteria, index) => (
-                    <div key={index} className="flex gap-2">
-                      <Input
-                        value={criteria}
-                        onChange={(e) => updateAcceptanceCriteria(index, e.target.value)}
-                        disabled={creatingSingleLiveCoding}
-                        placeholder="Kabul kriteri"
-                      />
-                      <Button
-                        type="button"
-                        onClick={() => removeAcceptanceCriteria(index)}
-                        disabled={creatingSingleLiveCoding}
-                        variant="danger"
-                        size="sm"
-                      >
-                        <X className="w-4 h-4" />
-                      </Button>
                     </div>
-                  ))}
-                  {liveCodingFormData.acceptanceCriteria.length === 0 && (
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      Varsayılan kriterler kullanılacak. Özel kriter eklemek için yukarıdaki butona tıklayın.
-                    </p>
+                    <h3 className="text-xl font-bold text-white mb-1 group-hover:translate-x-1 transition-transform">
+                      {test.title}
+                    </h3>
+                    <p className="text-sm text-white/70 mb-4">{test.description}</p>
+                    <div className="flex items-center text-xs text-white/60">
+                      <FileText className="h-3 w-3 mr-1" />
+                      <span>Test Paketi</span>
+                    </div>
+                  </div>
+                  
+                  {/* Shine effect on hover */}
+                  <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+                </button>
+              );
+            })}
+          </div>
+          
+          {/* Success/Error Messages */}
+          {testState.success && (
+            <div className="mt-6 p-4 rounded-2xl border border-green-300/50 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/40 dark:to-emerald-950/40 dark:border-green-800/50 backdrop-blur-sm shadow-lg">
+              <div className="flex items-start gap-3 text-green-700 dark:text-green-300">
+                <div className="p-2 rounded-lg bg-green-500/20">
+                  <CheckCircle2 className="h-5 w-5 flex-shrink-0" />
+                </div>
+                <div className="flex-1">
+                  <div className="font-semibold text-base mb-2">{testState.success}</div>
+                  {testState.stats && (
+                    <div className="flex flex-wrap gap-4 text-sm opacity-90">
+                      <div className="flex items-center gap-1">
+                        <FileText className="h-3 w-3" />
+                        <span>Testler: <strong>{testState.stats.testsCreated || 0}</strong></span>
+                      </div>
+                    </div>
                   )}
                 </div>
               </div>
             </div>
-
-            <div className="sticky bottom-0 bg-white dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800 px-6 py-4 flex gap-3">
-              <Button
-                onClick={handleCreateSingleLiveCoding}
-                disabled={creatingSingleLiveCoding}
-                className="flex-1 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white"
-              >
-                {creatingSingleLiveCoding ? (
-                  <>
-                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                    Oluşturuluyor...
-                  </>
-                ) : (
-                  <>
-                    <CheckCircle2 className="mr-2 h-5 w-5" />
-                    Oluştur
-                  </>
-                )}
-              </Button>
-              <Button
-                onClick={() => {
-                  setShowLiveCodingForm(false);
-                  setSingleLiveCodingError(null);
-                  setSingleLiveCodingSuccess(null);
-                }}
-                disabled={creatingSingleLiveCoding}
-                variant="outline"
-              >
-                İptal
-              </Button>
+          )}
+          {testState.error && (
+            <div className="mt-6 p-4 rounded-2xl border border-red-300/50 bg-gradient-to-br from-red-50 to-rose-50 dark:from-red-950/40 dark:to-rose-950/40 dark:border-red-800/50 backdrop-blur-sm shadow-lg">
+              <div className="flex items-start gap-3 text-red-700 dark:text-red-300">
+                <div className="p-2 rounded-lg bg-red-500/20">
+                  <AlertCircle className="h-5 w-5 flex-shrink-0" />
+                </div>
+                <div className="text-sm font-semibold">{testState.error}</div>
+              </div>
             </div>
-          </div>
+          )}
         </div>
-      )}
+      </div>
+
+      {/* Clear All Course Data Section */}
+      <div className="rounded-3xl border border-red-200 bg-white shadow-lg dark:border-red-800 dark:bg-gray-950 p-6 md:p-8">
+        <div className="flex items-center gap-3 mb-6">
+          <Trash2 className="h-6 w-6 text-red-600 dark:text-red-400" />
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+            🗑️ Veri Temizleme
+          </h2>
+        </div>
+        <p className="text-gray-600 dark:text-gray-400 mb-6">
+          Tüm kurs, modül ve ders içeriklerini veritabanından siler. Bu işlem geri alınamaz!
+        </p>
+        <div className="max-w-md">
+          <Button
+            onClick={handleClearAllCourseData}
+            disabled={clearState.loading}
+            size="lg"
+            variant="danger"
+            className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-medium"
+          >
+            {clearState.loading ? (
+              <>
+                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                Temizleniyor...
+              </>
+            ) : (
+              <>
+                <Trash2 className="mr-2 h-5 w-5" />
+                Tüm Kurs Verilerini Temizle
+              </>
+            )}
+          </Button>
+          {clearState.success && (
+            <div className="mt-2 p-3 rounded-lg border border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-950/60">
+              <div className="flex items-start gap-2 text-green-600 dark:text-green-300">
+                <CheckCircle2 className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                <div className="text-sm font-medium">{clearState.success}</div>
+              </div>
+            </div>
+          )}
+          {clearState.error && (
+            <div className="mt-2 p-3 rounded-lg border border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/60">
+              <div className="flex items-start gap-2 text-red-600 dark:text-red-300">
+                <AlertCircle className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                <div className="text-sm font-medium">{clearState.error}</div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
-

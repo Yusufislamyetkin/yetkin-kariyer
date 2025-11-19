@@ -1,0 +1,4 @@
+-- New Seed Data Scripts
+-- This file has been replaced with modular seed scripts in DB-Scripts/ folder
+-- Each course and category now has its own dedicated SQL script file
+-- See: seed-course-{course}.sql, seed-tests-{course}.sql, seed-live-coding-{course}.sql, seed-bugfix-{course}.sql

@@ -44,6 +44,7 @@ export async function GET(request: Request) {
     }
 
     if (Object.keys(courseWhere).length > 0) {
+      // If course filters are provided, filter by course relation
       where.course = {
         is: courseWhere,
       };
@@ -105,6 +106,9 @@ export async function GET(request: Request) {
       selectFields.questions = true;
     }
 
+    // Log query for debugging
+    console.log("[EDUCATION_ITEMS_GET] Query where clause:", JSON.stringify(where, null, 2));
+    
     const queryPromise = db.quiz.findMany({
       where,
       select: selectFields,
@@ -122,19 +126,26 @@ export async function GET(request: Request) {
     const quizzes = await Promise.race([queryPromise, timeoutPromise]) as Awaited<typeof queryPromise>;
 
     // Log for debugging
-    if (typeParam === "LIVE_CODING") {
-      console.log(`[LIVE_CODING] Found ${quizzes.length} quizzes with filters:`, {
-        expertise: expertise || null,
-        topic: topic || null,
-        content: content || null,
-        level: level || null,
-        search: search || null,
+    console.log(`[EDUCATION_ITEMS_GET] Found ${quizzes.length} quizzes with type: ${typeParam}`, {
+      expertise: expertise || null,
+      topic: topic || null,
+      content: content || null,
+      level: level || null,
+      search: search || null,
+    });
+    
+    if (quizzes.length > 0) {
+      console.log(`[EDUCATION_ITEMS_GET] First quiz sample:`, {
+        id: quizzes[0].id,
+        title: quizzes[0].title,
+        courseId: quizzes[0].course?.id || 'NO COURSE',
+        courseTitle: quizzes[0].course?.title || 'NO COURSE TITLE',
       });
     }
 
     // Optimize: Normalize LIVE_CODING payloads on server-side to reduce client-side processing
     const processedItems = typeParam === "LIVE_CODING" 
-      ? quizzes.map((quiz) => {
+      ? quizzes.map((quiz: any) => {
           if (!quiz.questions) {
             // Remove questions field to reduce payload size
             const { questions: _, ...rest } = quiz as any;

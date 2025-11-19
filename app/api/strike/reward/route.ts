@@ -159,14 +159,14 @@ export async function POST() {
       }
 
       // Check test solved
-      const dayQuizAttempts = weekQuizAttempts.filter((attempt) => {
+      const dayQuizAttempts = weekQuizAttempts.filter((attempt: { completedAt: Date | string }) => {
         const attemptDate = new Date(attempt.completedAt);
         return attemptDate >= dayStart && attemptDate <= dateEnd;
       });
       const hasTestSolved = dayQuizAttempts.length > 0;
 
       // Check topic completed
-      const dayTopicCompletions = weekTopicCompletions.filter((completion) => {
+      const dayTopicCompletions = weekTopicCompletions.filter((completion: { completedAt: Date | string | null }) => {
         if (!completion.completedAt) return false;
         const completionDate = new Date(completion.completedAt);
         return completionDate >= dayStart && completionDate <= dateEnd;
@@ -174,14 +174,14 @@ export async function POST() {
       const hasTopicCompleted = dayTopicCompletions.length > 0;
 
       // Check live coding completed
-      const dayLiveCodingAttempts = weekLiveCodingAttempts.filter((attempt) => {
+      const dayLiveCodingAttempts = weekLiveCodingAttempts.filter((attempt: { completedAt: Date | string }) => {
         const attemptDate = new Date(attempt.completedAt);
         return attemptDate >= dayStart && attemptDate <= dateEnd;
       });
       const hasLiveCodingCompleted = dayLiveCodingAttempts.length > 0;
 
       // Check bug fix completed
-      const dayBugFixAttempts = weekBugFixAttempts.filter((attempt) => {
+      const dayBugFixAttempts = weekBugFixAttempts.filter((attempt: { completedAt: Date | string }) => {
         const attemptDate = new Date(attempt.completedAt);
         return attemptDate >= dayStart && attemptDate <= dateEnd;
       });

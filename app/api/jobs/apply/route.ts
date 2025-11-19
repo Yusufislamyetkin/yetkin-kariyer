@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
+import { recordEvent } from "@/lib/services/gamification/antiAbuse";
+import { applyRules } from "@/lib/services/gamification/rules";
 
 export async function POST(request: Request) {
   try {
@@ -47,6 +49,18 @@ export async function POST(request: Request) {
         },
       },
     });
+
+    // Emit gamification event
+    try {
+      const event = await recordEvent({
+        userId: session.user.id as string,
+        type: "job_application",
+        payload: { jobId },
+      });
+      await applyRules({ userId: session.user.id as string, type: "job_application", payload: { sourceEventId: event.id } });
+    } catch (e) {
+      console.warn("Gamification job_application failed:", e);
+    }
 
     return NextResponse.json({ application }, { status: 201 });
   } catch (error) {
