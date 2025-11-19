@@ -43,7 +43,7 @@ export async function POST() {
           category: "Frontend",
           field: "Software Development",
           subCategory: "react",
-          expertise: "frontend",
+          expertise: "React", // Test oluşturma API'si için gerekli
           topic: "React",
           topicContent: "Frontend Development",
           difficulty: "intermediate",
@@ -56,7 +56,7 @@ export async function POST() {
           category: "Frontend",
           field: "Software Development",
           subCategory: "react",
-          expertise: "frontend",
+          expertise: "React", // Test oluşturma API'si için gerekli
           topic: "React",
           topicContent: "Frontend Development",
           difficulty: "intermediate",

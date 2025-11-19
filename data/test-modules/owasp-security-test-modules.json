@@ -1,0 +1,1524 @@
+{
+  "overview": {
+    "description": "OWASP Top 10, web gÃ¼venliÄŸi temelleri, gÃ¼venlik aÃ§Ä±klarÄ± ve savunma tekniklerini kapsayan kapsamlÄ± kurs.",
+    "estimatedDurationMinutes": 6750
+  },
+  "learningObjectives": [],
+  "modules": [
+    {
+      "id": "owasp-module-01",
+      "title": "Module 1: OWASP & Web Security ModÃ¼l 1 Testi",
+      "summary": "OWASP & Web Security konularÄ±na odaklÄ± modÃ¼l 1 iÃ§eriÄŸi.",
+      "durationMinutes": 450,
+      "objectives": [
+        "ModÃ¼l 1 hedefleri"
+      ],
+      "relatedTests": [
+        {
+          "id": "owasp-module-01-lesson-01",
+          "title": "Ders 1: OWASP ModÃ¼l 1 - Ders 1",
+          "description": "Ders 1: OWASP ModÃ¼l 1 - Ders 1",
+          "href": "/education/lessons/owasp-security/owasp-module-01/owasp-module-01-lesson-01"
+        },
+        {
+          "id": "owasp-module-01-lesson-02",
+          "title": "Ders 2: OWASP ModÃ¼l 1 - Ders 2",
+          "description": "Ders 2: OWASP ModÃ¼l 1 - Ders 2",
+          "href": "/education/lessons/owasp-security/owasp-module-01/owasp-module-01-lesson-02"
+        },
+        {
+          "id": "owasp-module-01-lesson-03",
+          "title": "Ders 3: OWASP ModÃ¼l 1 - Ders 3",
+          "description": "Ders 3: OWASP ModÃ¼l 1 - Ders 3",
+          "href": "/education/lessons/owasp-security/owasp-module-01/owasp-module-01-lesson-03"
+        },
+        {
+          "id": "owasp-module-01-lesson-04",
+          "title": "Ders 4: OWASP ModÃ¼l 1 - Ders 4",
+          "description": "Ders 4: OWASP ModÃ¼l 1 - Ders 4",
+          "href": "/education/lessons/owasp-security/owasp-module-01/owasp-module-01-lesson-04"
+        },
+        {
+          "id": "owasp-module-01-lesson-05",
+          "title": "Ders 5: OWASP ModÃ¼l 1 - Ders 5",
+          "description": "Ders 5: OWASP ModÃ¼l 1 - Ders 5",
+          "href": "/education/lessons/owasp-security/owasp-module-01/owasp-module-01-lesson-05"
+        },
+        {
+          "id": "owasp-module-01-lesson-06",
+          "title": "Ders 6: OWASP ModÃ¼l 1 - Ders 6",
+          "description": "Ders 6: OWASP ModÃ¼l 1 - Ders 6",
+          "href": "/education/lessons/owasp-security/owasp-module-01/owasp-module-01-lesson-06"
+        },
+        {
+          "id": "owasp-module-01-lesson-07",
+          "title": "Ders 7: OWASP ModÃ¼l 1 - Ders 7",
+          "description": "Ders 7: OWASP ModÃ¼l 1 - Ders 7",
+          "href": "/education/lessons/owasp-security/owasp-module-01/owasp-module-01-lesson-07"
+        },
+        {
+          "id": "owasp-module-01-lesson-08",
+          "title": "Ders 8: OWASP ModÃ¼l 1 - Ders 8",
+          "description": "Ders 8: OWASP ModÃ¼l 1 - Ders 8",
+          "href": "/education/lessons/owasp-security/owasp-module-01/owasp-module-01-lesson-08"
+        },
+        {
+          "id": "owasp-module-01-lesson-09",
+          "title": "Ders 9: OWASP ModÃ¼l 1 - Ders 9",
+          "description": "Ders 9: OWASP ModÃ¼l 1 - Ders 9",
+          "href": "/education/lessons/owasp-security/owasp-module-01/owasp-module-01-lesson-09"
+        },
+        {
+          "id": "owasp-module-01-lesson-10",
+          "title": "Ders 10: OWASP ModÃ¼l 1 - Ders 10",
+          "description": "Ders 10: OWASP ModÃ¼l 1 - Ders 10",
+          "href": "/education/lessons/owasp-security/owasp-module-01/owasp-module-01-lesson-10"
+        },
+        {
+          "id": "owasp-module-01-lesson-11",
+          "title": "Ders 11: OWASP ModÃ¼l 1 - Ders 11",
+          "description": "Ders 11: OWASP ModÃ¼l 1 - Ders 11",
+          "href": "/education/lessons/owasp-security/owasp-module-01/owasp-module-01-lesson-11"
+        },
+        {
+          "id": "owasp-module-01-lesson-12",
+          "title": "Ders 12: OWASP ModÃ¼l 1 - Ders 12",
+          "description": "Ders 12: OWASP ModÃ¼l 1 - Ders 12",
+          "href": "/education/lessons/owasp-security/owasp-module-01/owasp-module-01-lesson-12"
+        },
+        {
+          "id": "owasp-module-01-lesson-13",
+          "title": "Ders 13: OWASP ModÃ¼l 1 - Ders 13",
+          "description": "Ders 13: OWASP ModÃ¼l 1 - Ders 13",
+          "href": "/education/lessons/owasp-security/owasp-module-01/owasp-module-01-lesson-13"
+        },
+        {
+          "id": "owasp-module-01-lesson-14",
+          "title": "Ders 14: OWASP ModÃ¼l 1 - Ders 14",
+          "description": "Ders 14: OWASP ModÃ¼l 1 - Ders 14",
+          "href": "/education/lessons/owasp-security/owasp-module-01/owasp-module-01-lesson-14"
+        },
+        {
+          "id": "owasp-module-01-lesson-15",
+          "title": "Ders 15: OWASP ModÃ¼l 1 - Ders 15",
+          "description": "Ders 15: OWASP ModÃ¼l 1 - Ders 15",
+          "href": "/education/lessons/owasp-security/owasp-module-01/owasp-module-01-lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "owasp-module-02",
+      "title": "Module 2: OWASP & Web Security ModÃ¼l 2 Testi",
+      "summary": "OWASP & Web Security konularÄ±na odaklÄ± modÃ¼l 2 iÃ§eriÄŸi.",
+      "durationMinutes": 450,
+      "objectives": [
+        "ModÃ¼l 2 hedefleri"
+      ],
+      "relatedTests": [
+        {
+          "id": "owasp-module-02-lesson-01",
+          "title": "Ders 1: OWASP ModÃ¼l 2 - Ders 1",
+          "description": "Ders 1: OWASP ModÃ¼l 2 - Ders 1",
+          "href": "/education/lessons/owasp-security/owasp-module-02/owasp-module-02-lesson-01"
+        },
+        {
+          "id": "owasp-module-02-lesson-02",
+          "title": "Ders 2: OWASP ModÃ¼l 2 - Ders 2",
+          "description": "Ders 2: OWASP ModÃ¼l 2 - Ders 2",
+          "href": "/education/lessons/owasp-security/owasp-module-02/owasp-module-02-lesson-02"
+        },
+        {
+          "id": "owasp-module-02-lesson-03",
+          "title": "Ders 3: OWASP ModÃ¼l 2 - Ders 3",
+          "description": "Ders 3: OWASP ModÃ¼l 2 - Ders 3",
+          "href": "/education/lessons/owasp-security/owasp-module-02/owasp-module-02-lesson-03"
+        },
+        {
+          "id": "owasp-module-02-lesson-04",
+          "title": "Ders 4: OWASP ModÃ¼l 2 - Ders 4",
+          "description": "Ders 4: OWASP ModÃ¼l 2 - Ders 4",
+          "href": "/education/lessons/owasp-security/owasp-module-02/owasp-module-02-lesson-04"
+        },
+        {
+          "id": "owasp-module-02-lesson-05",
+          "title": "Ders 5: OWASP ModÃ¼l 2 - Ders 5",
+          "description": "Ders 5: OWASP ModÃ¼l 2 - Ders 5",
+          "href": "/education/lessons/owasp-security/owasp-module-02/owasp-module-02-lesson-05"
+        },
+        {
+          "id": "owasp-module-02-lesson-06",
+          "title": "Ders 6: OWASP ModÃ¼l 2 - Ders 6",
+          "description": "Ders 6: OWASP ModÃ¼l 2 - Ders 6",
+          "href": "/education/lessons/owasp-security/owasp-module-02/owasp-module-02-lesson-06"
+        },
+        {
+          "id": "owasp-module-02-lesson-07",
+          "title": "Ders 7: OWASP ModÃ¼l 2 - Ders 7",
+          "description": "Ders 7: OWASP ModÃ¼l 2 - Ders 7",
+          "href": "/education/lessons/owasp-security/owasp-module-02/owasp-module-02-lesson-07"
+        },
+        {
+          "id": "owasp-module-02-lesson-08",
+          "title": "Ders 8: OWASP ModÃ¼l 2 - Ders 8",
+          "description": "Ders 8: OWASP ModÃ¼l 2 - Ders 8",
+          "href": "/education/lessons/owasp-security/owasp-module-02/owasp-module-02-lesson-08"
+        },
+        {
+          "id": "owasp-module-02-lesson-09",
+          "title": "Ders 9: OWASP ModÃ¼l 2 - Ders 9",
+          "description": "Ders 9: OWASP ModÃ¼l 2 - Ders 9",
+          "href": "/education/lessons/owasp-security/owasp-module-02/owasp-module-02-lesson-09"
+        },
+        {
+          "id": "owasp-module-02-lesson-10",
+          "title": "Ders 10: OWASP ModÃ¼l 2 - Ders 10",
+          "description": "Ders 10: OWASP ModÃ¼l 2 - Ders 10",
+          "href": "/education/lessons/owasp-security/owasp-module-02/owasp-module-02-lesson-10"
+        },
+        {
+          "id": "owasp-module-02-lesson-11",
+          "title": "Ders 11: OWASP ModÃ¼l 2 - Ders 11",
+          "description": "Ders 11: OWASP ModÃ¼l 2 - Ders 11",
+          "href": "/education/lessons/owasp-security/owasp-module-02/owasp-module-02-lesson-11"
+        },
+        {
+          "id": "owasp-module-02-lesson-12",
+          "title": "Ders 12: OWASP ModÃ¼l 2 - Ders 12",
+          "description": "Ders 12: OWASP ModÃ¼l 2 - Ders 12",
+          "href": "/education/lessons/owasp-security/owasp-module-02/owasp-module-02-lesson-12"
+        },
+        {
+          "id": "owasp-module-02-lesson-13",
+          "title": "Ders 13: OWASP ModÃ¼l 2 - Ders 13",
+          "description": "Ders 13: OWASP ModÃ¼l 2 - Ders 13",
+          "href": "/education/lessons/owasp-security/owasp-module-02/owasp-module-02-lesson-13"
+        },
+        {
+          "id": "owasp-module-02-lesson-14",
+          "title": "Ders 14: OWASP ModÃ¼l 2 - Ders 14",
+          "description": "Ders 14: OWASP ModÃ¼l 2 - Ders 14",
+          "href": "/education/lessons/owasp-security/owasp-module-02/owasp-module-02-lesson-14"
+        },
+        {
+          "id": "owasp-module-02-lesson-15",
+          "title": "Ders 15: OWASP ModÃ¼l 2 - Ders 15",
+          "description": "Ders 15: OWASP ModÃ¼l 2 - Ders 15",
+          "href": "/education/lessons/owasp-security/owasp-module-02/owasp-module-02-lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "owasp-module-03",
+      "title": "Module 3: OWASP & Web Security ModÃ¼l 3 Testi",
+      "summary": "OWASP & Web Security konularÄ±na odaklÄ± modÃ¼l 3 iÃ§eriÄŸi.",
+      "durationMinutes": 450,
+      "objectives": [
+        "ModÃ¼l 3 hedefleri"
+      ],
+      "relatedTests": [
+        {
+          "id": "owasp-module-03-lesson-01",
+          "title": "Ders 1: OWASP ModÃ¼l 3 - Ders 1",
+          "description": "Ders 1: OWASP ModÃ¼l 3 - Ders 1",
+          "href": "/education/lessons/owasp-security/owasp-module-03/owasp-module-03-lesson-01"
+        },
+        {
+          "id": "owasp-module-03-lesson-02",
+          "title": "Ders 2: OWASP ModÃ¼l 3 - Ders 2",
+          "description": "Ders 2: OWASP ModÃ¼l 3 - Ders 2",
+          "href": "/education/lessons/owasp-security/owasp-module-03/owasp-module-03-lesson-02"
+        },
+        {
+          "id": "owasp-module-03-lesson-03",
+          "title": "Ders 3: OWASP ModÃ¼l 3 - Ders 3",
+          "description": "Ders 3: OWASP ModÃ¼l 3 - Ders 3",
+          "href": "/education/lessons/owasp-security/owasp-module-03/owasp-module-03-lesson-03"
+        },
+        {
+          "id": "owasp-module-03-lesson-04",
+          "title": "Ders 4: OWASP ModÃ¼l 3 - Ders 4",
+          "description": "Ders 4: OWASP ModÃ¼l 3 - Ders 4",
+          "href": "/education/lessons/owasp-security/owasp-module-03/owasp-module-03-lesson-04"
+        },
+        {
+          "id": "owasp-module-03-lesson-05",
+          "title": "Ders 5: OWASP ModÃ¼l 3 - Ders 5",
+          "description": "Ders 5: OWASP ModÃ¼l 3 - Ders 5",
+          "href": "/education/lessons/owasp-security/owasp-module-03/owasp-module-03-lesson-05"
+        },
+        {
+          "id": "owasp-module-03-lesson-06",
+          "title": "Ders 6: OWASP ModÃ¼l 3 - Ders 6",
+          "description": "Ders 6: OWASP ModÃ¼l 3 - Ders 6",
+          "href": "/education/lessons/owasp-security/owasp-module-03/owasp-module-03-lesson-06"
+        },
+        {
+          "id": "owasp-module-03-lesson-07",
+          "title": "Ders 7: OWASP ModÃ¼l 3 - Ders 7",
+          "description": "Ders 7: OWASP ModÃ¼l 3 - Ders 7",
+          "href": "/education/lessons/owasp-security/owasp-module-03/owasp-module-03-lesson-07"
+        },
+        {
+          "id": "owasp-module-03-lesson-08",
+          "title": "Ders 8: OWASP ModÃ¼l 3 - Ders 8",
+          "description": "Ders 8: OWASP ModÃ¼l 3 - Ders 8",
+          "href": "/education/lessons/owasp-security/owasp-module-03/owasp-module-03-lesson-08"
+        },
+        {
+          "id": "owasp-module-03-lesson-09",
+          "title": "Ders 9: OWASP ModÃ¼l 3 - Ders 9",
+          "description": "Ders 9: OWASP ModÃ¼l 3 - Ders 9",
+          "href": "/education/lessons/owasp-security/owasp-module-03/owasp-module-03-lesson-09"
+        },
+        {
+          "id": "owasp-module-03-lesson-10",
+          "title": "Ders 10: OWASP ModÃ¼l 3 - Ders 10",
+          "description": "Ders 10: OWASP ModÃ¼l 3 - Ders 10",
+          "href": "/education/lessons/owasp-security/owasp-module-03/owasp-module-03-lesson-10"
+        },
+        {
+          "id": "owasp-module-03-lesson-11",
+          "title": "Ders 11: OWASP ModÃ¼l 3 - Ders 11",
+          "description": "Ders 11: OWASP ModÃ¼l 3 - Ders 11",
+          "href": "/education/lessons/owasp-security/owasp-module-03/owasp-module-03-lesson-11"
+        },
+        {
+          "id": "owasp-module-03-lesson-12",
+          "title": "Ders 12: OWASP ModÃ¼l 3 - Ders 12",
+          "description": "Ders 12: OWASP ModÃ¼l 3 - Ders 12",
+          "href": "/education/lessons/owasp-security/owasp-module-03/owasp-module-03-lesson-12"
+        },
+        {
+          "id": "owasp-module-03-lesson-13",
+          "title": "Ders 13: OWASP ModÃ¼l 3 - Ders 13",
+          "description": "Ders 13: OWASP ModÃ¼l 3 - Ders 13",
+          "href": "/education/lessons/owasp-security/owasp-module-03/owasp-module-03-lesson-13"
+        },
+        {
+          "id": "owasp-module-03-lesson-14",
+          "title": "Ders 14: OWASP ModÃ¼l 3 - Ders 14",
+          "description": "Ders 14: OWASP ModÃ¼l 3 - Ders 14",
+          "href": "/education/lessons/owasp-security/owasp-module-03/owasp-module-03-lesson-14"
+        },
+        {
+          "id": "owasp-module-03-lesson-15",
+          "title": "Ders 15: OWASP ModÃ¼l 3 - Ders 15",
+          "description": "Ders 15: OWASP ModÃ¼l 3 - Ders 15",
+          "href": "/education/lessons/owasp-security/owasp-module-03/owasp-module-03-lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "owasp-module-04",
+      "title": "Module 4: OWASP & Web Security ModÃ¼l 4 Testi",
+      "summary": "OWASP & Web Security konularÄ±na odaklÄ± modÃ¼l 4 iÃ§eriÄŸi.",
+      "durationMinutes": 450,
+      "objectives": [
+        "ModÃ¼l 4 hedefleri"
+      ],
+      "relatedTests": [
+        {
+          "id": "owasp-module-04-lesson-01",
+          "title": "Ders 1: OWASP ModÃ¼l 4 - Ders 1",
+          "description": "Ders 1: OWASP ModÃ¼l 4 - Ders 1",
+          "href": "/education/lessons/owasp-security/owasp-module-04/owasp-module-04-lesson-01"
+        },
+        {
+          "id": "owasp-module-04-lesson-02",
+          "title": "Ders 2: OWASP ModÃ¼l 4 - Ders 2",
+          "description": "Ders 2: OWASP ModÃ¼l 4 - Ders 2",
+          "href": "/education/lessons/owasp-security/owasp-module-04/owasp-module-04-lesson-02"
+        },
+        {
+          "id": "owasp-module-04-lesson-03",
+          "title": "Ders 3: OWASP ModÃ¼l 4 - Ders 3",
+          "description": "Ders 3: OWASP ModÃ¼l 4 - Ders 3",
+          "href": "/education/lessons/owasp-security/owasp-module-04/owasp-module-04-lesson-03"
+        },
+        {
+          "id": "owasp-module-04-lesson-04",
+          "title": "Ders 4: OWASP ModÃ¼l 4 - Ders 4",
+          "description": "Ders 4: OWASP ModÃ¼l 4 - Ders 4",
+          "href": "/education/lessons/owasp-security/owasp-module-04/owasp-module-04-lesson-04"
+        },
+        {
+          "id": "owasp-module-04-lesson-05",
+          "title": "Ders 5: OWASP ModÃ¼l 4 - Ders 5",
+          "description": "Ders 5: OWASP ModÃ¼l 4 - Ders 5",
+          "href": "/education/lessons/owasp-security/owasp-module-04/owasp-module-04-lesson-05"
+        },
+        {
+          "id": "owasp-module-04-lesson-06",
+          "title": "Ders 6: OWASP ModÃ¼l 4 - Ders 6",
+          "description": "Ders 6: OWASP ModÃ¼l 4 - Ders 6",
+          "href": "/education/lessons/owasp-security/owasp-module-04/owasp-module-04-lesson-06"
+        },
+        {
+          "id": "owasp-module-04-lesson-07",
+          "title": "Ders 7: OWASP ModÃ¼l 4 - Ders 7",
+          "description": "Ders 7: OWASP ModÃ¼l 4 - Ders 7",
+          "href": "/education/lessons/owasp-security/owasp-module-04/owasp-module-04-lesson-07"
+        },
+        {
+          "id": "owasp-module-04-lesson-08",
+          "title": "Ders 8: OWASP ModÃ¼l 4 - Ders 8",
+          "description": "Ders 8: OWASP ModÃ¼l 4 - Ders 8",
+          "href": "/education/lessons/owasp-security/owasp-module-04/owasp-module-04-lesson-08"
+        },
+        {
+          "id": "owasp-module-04-lesson-09",
+          "title": "Ders 9: OWASP ModÃ¼l 4 - Ders 9",
+          "description": "Ders 9: OWASP ModÃ¼l 4 - Ders 9",
+          "href": "/education/lessons/owasp-security/owasp-module-04/owasp-module-04-lesson-09"
+        },
+        {
+          "id": "owasp-module-04-lesson-10",
+          "title": "Ders 10: OWASP ModÃ¼l 4 - Ders 10",
+          "description": "Ders 10: OWASP ModÃ¼l 4 - Ders 10",
+          "href": "/education/lessons/owasp-security/owasp-module-04/owasp-module-04-lesson-10"
+        },
+        {
+          "id": "owasp-module-04-lesson-11",
+          "title": "Ders 11: OWASP ModÃ¼l 4 - Ders 11",
+          "description": "Ders 11: OWASP ModÃ¼l 4 - Ders 11",
+          "href": "/education/lessons/owasp-security/owasp-module-04/owasp-module-04-lesson-11"
+        },
+        {
+          "id": "owasp-module-04-lesson-12",
+          "title": "Ders 12: OWASP ModÃ¼l 4 - Ders 12",
+          "description": "Ders 12: OWASP ModÃ¼l 4 - Ders 12",
+          "href": "/education/lessons/owasp-security/owasp-module-04/owasp-module-04-lesson-12"
+        },
+        {
+          "id": "owasp-module-04-lesson-13",
+          "title": "Ders 13: OWASP ModÃ¼l 4 - Ders 13",
+          "description": "Ders 13: OWASP ModÃ¼l 4 - Ders 13",
+          "href": "/education/lessons/owasp-security/owasp-module-04/owasp-module-04-lesson-13"
+        },
+        {
+          "id": "owasp-module-04-lesson-14",
+          "title": "Ders 14: OWASP ModÃ¼l 4 - Ders 14",
+          "description": "Ders 14: OWASP ModÃ¼l 4 - Ders 14",
+          "href": "/education/lessons/owasp-security/owasp-module-04/owasp-module-04-lesson-14"
+        },
+        {
+          "id": "owasp-module-04-lesson-15",
+          "title": "Ders 15: OWASP ModÃ¼l 4 - Ders 15",
+          "description": "Ders 15: OWASP ModÃ¼l 4 - Ders 15",
+          "href": "/education/lessons/owasp-security/owasp-module-04/owasp-module-04-lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "owasp-module-05",
+      "title": "Module 5: OWASP & Web Security ModÃ¼l 5 Testi",
+      "summary": "OWASP & Web Security konularÄ±na odaklÄ± modÃ¼l 5 iÃ§eriÄŸi.",
+      "durationMinutes": 450,
+      "objectives": [
+        "ModÃ¼l 5 hedefleri"
+      ],
+      "relatedTests": [
+        {
+          "id": "owasp-module-05-lesson-01",
+          "title": "Ders 1: OWASP ModÃ¼l 5 - Ders 1",
+          "description": "Ders 1: OWASP ModÃ¼l 5 - Ders 1",
+          "href": "/education/lessons/owasp-security/owasp-module-05/owasp-module-05-lesson-01"
+        },
+        {
+          "id": "owasp-module-05-lesson-02",
+          "title": "Ders 2: OWASP ModÃ¼l 5 - Ders 2",
+          "description": "Ders 2: OWASP ModÃ¼l 5 - Ders 2",
+          "href": "/education/lessons/owasp-security/owasp-module-05/owasp-module-05-lesson-02"
+        },
+        {
+          "id": "owasp-module-05-lesson-03",
+          "title": "Ders 3: OWASP ModÃ¼l 5 - Ders 3",
+          "description": "Ders 3: OWASP ModÃ¼l 5 - Ders 3",
+          "href": "/education/lessons/owasp-security/owasp-module-05/owasp-module-05-lesson-03"
+        },
+        {
+          "id": "owasp-module-05-lesson-04",
+          "title": "Ders 4: OWASP ModÃ¼l 5 - Ders 4",
+          "description": "Ders 4: OWASP ModÃ¼l 5 - Ders 4",
+          "href": "/education/lessons/owasp-security/owasp-module-05/owasp-module-05-lesson-04"
+        },
+        {
+          "id": "owasp-module-05-lesson-05",
+          "title": "Ders 5: OWASP ModÃ¼l 5 - Ders 5",
+          "description": "Ders 5: OWASP ModÃ¼l 5 - Ders 5",
+          "href": "/education/lessons/owasp-security/owasp-module-05/owasp-module-05-lesson-05"
+        },
+        {
+          "id": "owasp-module-05-lesson-06",
+          "title": "Ders 6: OWASP ModÃ¼l 5 - Ders 6",
+          "description": "Ders 6: OWASP ModÃ¼l 5 - Ders 6",
+          "href": "/education/lessons/owasp-security/owasp-module-05/owasp-module-05-lesson-06"
+        },
+        {
+          "id": "owasp-module-05-lesson-07",
+          "title": "Ders 7: OWASP ModÃ¼l 5 - Ders 7",
+          "description": "Ders 7: OWASP ModÃ¼l 5 - Ders 7",
+          "href": "/education/lessons/owasp-security/owasp-module-05/owasp-module-05-lesson-07"
+        },
+        {
+          "id": "owasp-module-05-lesson-08",
+          "title": "Ders 8: OWASP ModÃ¼l 5 - Ders 8",
+          "description": "Ders 8: OWASP ModÃ¼l 5 - Ders 8",
+          "href": "/education/lessons/owasp-security/owasp-module-05/owasp-module-05-lesson-08"
+        },
+        {
+          "id": "owasp-module-05-lesson-09",
+          "title": "Ders 9: OWASP ModÃ¼l 5 - Ders 9",
+          "description": "Ders 9: OWASP ModÃ¼l 5 - Ders 9",
+          "href": "/education/lessons/owasp-security/owasp-module-05/owasp-module-05-lesson-09"
+        },
+        {
+          "id": "owasp-module-05-lesson-10",
+          "title": "Ders 10: OWASP ModÃ¼l 5 - Ders 10",
+          "description": "Ders 10: OWASP ModÃ¼l 5 - Ders 10",
+          "href": "/education/lessons/owasp-security/owasp-module-05/owasp-module-05-lesson-10"
+        },
+        {
+          "id": "owasp-module-05-lesson-11",
+          "title": "Ders 11: OWASP ModÃ¼l 5 - Ders 11",
+          "description": "Ders 11: OWASP ModÃ¼l 5 - Ders 11",
+          "href": "/education/lessons/owasp-security/owasp-module-05/owasp-module-05-lesson-11"
+        },
+        {
+          "id": "owasp-module-05-lesson-12",
+          "title": "Ders 12: OWASP ModÃ¼l 5 - Ders 12",
+          "description": "Ders 12: OWASP ModÃ¼l 5 - Ders 12",
+          "href": "/education/lessons/owasp-security/owasp-module-05/owasp-module-05-lesson-12"
+        },
+        {
+          "id": "owasp-module-05-lesson-13",
+          "title": "Ders 13: OWASP ModÃ¼l 5 - Ders 13",
+          "description": "Ders 13: OWASP ModÃ¼l 5 - Ders 13",
+          "href": "/education/lessons/owasp-security/owasp-module-05/owasp-module-05-lesson-13"
+        },
+        {
+          "id": "owasp-module-05-lesson-14",
+          "title": "Ders 14: OWASP ModÃ¼l 5 - Ders 14",
+          "description": "Ders 14: OWASP ModÃ¼l 5 - Ders 14",
+          "href": "/education/lessons/owasp-security/owasp-module-05/owasp-module-05-lesson-14"
+        },
+        {
+          "id": "owasp-module-05-lesson-15",
+          "title": "Ders 15: OWASP ModÃ¼l 5 - Ders 15",
+          "description": "Ders 15: OWASP ModÃ¼l 5 - Ders 15",
+          "href": "/education/lessons/owasp-security/owasp-module-05/owasp-module-05-lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "owasp-module-06",
+      "title": "Module 6: OWASP & Web Security ModÃ¼l 6 Testi",
+      "summary": "OWASP & Web Security konularÄ±na odaklÄ± modÃ¼l 6 iÃ§eriÄŸi.",
+      "durationMinutes": 450,
+      "objectives": [
+        "ModÃ¼l 6 hedefleri"
+      ],
+      "relatedTests": [
+        {
+          "id": "owasp-module-06-lesson-01",
+          "title": "Ders 1: OWASP ModÃ¼l 6 - Ders 1",
+          "description": "Ders 1: OWASP ModÃ¼l 6 - Ders 1",
+          "href": "/education/lessons/owasp-security/owasp-module-06/owasp-module-06-lesson-01"
+        },
+        {
+          "id": "owasp-module-06-lesson-02",
+          "title": "Ders 2: OWASP ModÃ¼l 6 - Ders 2",
+          "description": "Ders 2: OWASP ModÃ¼l 6 - Ders 2",
+          "href": "/education/lessons/owasp-security/owasp-module-06/owasp-module-06-lesson-02"
+        },
+        {
+          "id": "owasp-module-06-lesson-03",
+          "title": "Ders 3: OWASP ModÃ¼l 6 - Ders 3",
+          "description": "Ders 3: OWASP ModÃ¼l 6 - Ders 3",
+          "href": "/education/lessons/owasp-security/owasp-module-06/owasp-module-06-lesson-03"
+        },
+        {
+          "id": "owasp-module-06-lesson-04",
+          "title": "Ders 4: OWASP ModÃ¼l 6 - Ders 4",
+          "description": "Ders 4: OWASP ModÃ¼l 6 - Ders 4",
+          "href": "/education/lessons/owasp-security/owasp-module-06/owasp-module-06-lesson-04"
+        },
+        {
+          "id": "owasp-module-06-lesson-05",
+          "title": "Ders 5: OWASP ModÃ¼l 6 - Ders 5",
+          "description": "Ders 5: OWASP ModÃ¼l 6 - Ders 5",
+          "href": "/education/lessons/owasp-security/owasp-module-06/owasp-module-06-lesson-05"
+        },
+        {
+          "id": "owasp-module-06-lesson-06",
+          "title": "Ders 6: OWASP ModÃ¼l 6 - Ders 6",
+          "description": "Ders 6: OWASP ModÃ¼l 6 - Ders 6",
+          "href": "/education/lessons/owasp-security/owasp-module-06/owasp-module-06-lesson-06"
+        },
+        {
+          "id": "owasp-module-06-lesson-07",
+          "title": "Ders 7: OWASP ModÃ¼l 6 - Ders 7",
+          "description": "Ders 7: OWASP ModÃ¼l 6 - Ders 7",
+          "href": "/education/lessons/owasp-security/owasp-module-06/owasp-module-06-lesson-07"
+        },
+        {
+          "id": "owasp-module-06-lesson-08",
+          "title": "Ders 8: OWASP ModÃ¼l 6 - Ders 8",
+          "description": "Ders 8: OWASP ModÃ¼l 6 - Ders 8",
+          "href": "/education/lessons/owasp-security/owasp-module-06/owasp-module-06-lesson-08"
+        },
+        {
+          "id": "owasp-module-06-lesson-09",
+          "title": "Ders 9: OWASP ModÃ¼l 6 - Ders 9",
+          "description": "Ders 9: OWASP ModÃ¼l 6 - Ders 9",
+          "href": "/education/lessons/owasp-security/owasp-module-06/owasp-module-06-lesson-09"
+        },
+        {
+          "id": "owasp-module-06-lesson-10",
+          "title": "Ders 10: OWASP ModÃ¼l 6 - Ders 10",
+          "description": "Ders 10: OWASP ModÃ¼l 6 - Ders 10",
+          "href": "/education/lessons/owasp-security/owasp-module-06/owasp-module-06-lesson-10"
+        },
+        {
+          "id": "owasp-module-06-lesson-11",
+          "title": "Ders 11: OWASP ModÃ¼l 6 - Ders 11",
+          "description": "Ders 11: OWASP ModÃ¼l 6 - Ders 11",
+          "href": "/education/lessons/owasp-security/owasp-module-06/owasp-module-06-lesson-11"
+        },
+        {
+          "id": "owasp-module-06-lesson-12",
+          "title": "Ders 12: OWASP ModÃ¼l 6 - Ders 12",
+          "description": "Ders 12: OWASP ModÃ¼l 6 - Ders 12",
+          "href": "/education/lessons/owasp-security/owasp-module-06/owasp-module-06-lesson-12"
+        },
+        {
+          "id": "owasp-module-06-lesson-13",
+          "title": "Ders 13: OWASP ModÃ¼l 6 - Ders 13",
+          "description": "Ders 13: OWASP ModÃ¼l 6 - Ders 13",
+          "href": "/education/lessons/owasp-security/owasp-module-06/owasp-module-06-lesson-13"
+        },
+        {
+          "id": "owasp-module-06-lesson-14",
+          "title": "Ders 14: OWASP ModÃ¼l 6 - Ders 14",
+          "description": "Ders 14: OWASP ModÃ¼l 6 - Ders 14",
+          "href": "/education/lessons/owasp-security/owasp-module-06/owasp-module-06-lesson-14"
+        },
+        {
+          "id": "owasp-module-06-lesson-15",
+          "title": "Ders 15: OWASP ModÃ¼l 6 - Ders 15",
+          "description": "Ders 15: OWASP ModÃ¼l 6 - Ders 15",
+          "href": "/education/lessons/owasp-security/owasp-module-06/owasp-module-06-lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "owasp-module-07",
+      "title": "Module 7: OWASP & Web Security ModÃ¼l 7 Testi",
+      "summary": "OWASP & Web Security konularÄ±na odaklÄ± modÃ¼l 7 iÃ§eriÄŸi.",
+      "durationMinutes": 450,
+      "objectives": [
+        "ModÃ¼l 7 hedefleri"
+      ],
+      "relatedTests": [
+        {
+          "id": "owasp-module-07-lesson-01",
+          "title": "Ders 1: OWASP ModÃ¼l 7 - Ders 1",
+          "description": "Ders 1: OWASP ModÃ¼l 7 - Ders 1",
+          "href": "/education/lessons/owasp-security/owasp-module-07/owasp-module-07-lesson-01"
+        },
+        {
+          "id": "owasp-module-07-lesson-02",
+          "title": "Ders 2: OWASP ModÃ¼l 7 - Ders 2",
+          "description": "Ders 2: OWASP ModÃ¼l 7 - Ders 2",
+          "href": "/education/lessons/owasp-security/owasp-module-07/owasp-module-07-lesson-02"
+        },
+        {
+          "id": "owasp-module-07-lesson-03",
+          "title": "Ders 3: OWASP ModÃ¼l 7 - Ders 3",
+          "description": "Ders 3: OWASP ModÃ¼l 7 - Ders 3",
+          "href": "/education/lessons/owasp-security/owasp-module-07/owasp-module-07-lesson-03"
+        },
+        {
+          "id": "owasp-module-07-lesson-04",
+          "title": "Ders 4: OWASP ModÃ¼l 7 - Ders 4",
+          "description": "Ders 4: OWASP ModÃ¼l 7 - Ders 4",
+          "href": "/education/lessons/owasp-security/owasp-module-07/owasp-module-07-lesson-04"
+        },
+        {
+          "id": "owasp-module-07-lesson-05",
+          "title": "Ders 5: OWASP ModÃ¼l 7 - Ders 5",
+          "description": "Ders 5: OWASP ModÃ¼l 7 - Ders 5",
+          "href": "/education/lessons/owasp-security/owasp-module-07/owasp-module-07-lesson-05"
+        },
+        {
+          "id": "owasp-module-07-lesson-06",
+          "title": "Ders 6: OWASP ModÃ¼l 7 - Ders 6",
+          "description": "Ders 6: OWASP ModÃ¼l 7 - Ders 6",
+          "href": "/education/lessons/owasp-security/owasp-module-07/owasp-module-07-lesson-06"
+        },
+        {
+          "id": "owasp-module-07-lesson-07",
+          "title": "Ders 7: OWASP ModÃ¼l 7 - Ders 7",
+          "description": "Ders 7: OWASP ModÃ¼l 7 - Ders 7",
+          "href": "/education/lessons/owasp-security/owasp-module-07/owasp-module-07-lesson-07"
+        },
+        {
+          "id": "owasp-module-07-lesson-08",
+          "title": "Ders 8: OWASP ModÃ¼l 7 - Ders 8",
+          "description": "Ders 8: OWASP ModÃ¼l 7 - Ders 8",
+          "href": "/education/lessons/owasp-security/owasp-module-07/owasp-module-07-lesson-08"
+        },
+        {
+          "id": "owasp-module-07-lesson-09",
+          "title": "Ders 9: OWASP ModÃ¼l 7 - Ders 9",
+          "description": "Ders 9: OWASP ModÃ¼l 7 - Ders 9",
+          "href": "/education/lessons/owasp-security/owasp-module-07/owasp-module-07-lesson-09"
+        },
+        {
+          "id": "owasp-module-07-lesson-10",
+          "title": "Ders 10: OWASP ModÃ¼l 7 - Ders 10",
+          "description": "Ders 10: OWASP ModÃ¼l 7 - Ders 10",
+          "href": "/education/lessons/owasp-security/owasp-module-07/owasp-module-07-lesson-10"
+        },
+        {
+          "id": "owasp-module-07-lesson-11",
+          "title": "Ders 11: OWASP ModÃ¼l 7 - Ders 11",
+          "description": "Ders 11: OWASP ModÃ¼l 7 - Ders 11",
+          "href": "/education/lessons/owasp-security/owasp-module-07/owasp-module-07-lesson-11"
+        },
+        {
+          "id": "owasp-module-07-lesson-12",
+          "title": "Ders 12: OWASP ModÃ¼l 7 - Ders 12",
+          "description": "Ders 12: OWASP ModÃ¼l 7 - Ders 12",
+          "href": "/education/lessons/owasp-security/owasp-module-07/owasp-module-07-lesson-12"
+        },
+        {
+          "id": "owasp-module-07-lesson-13",
+          "title": "Ders 13: OWASP ModÃ¼l 7 - Ders 13",
+          "description": "Ders 13: OWASP ModÃ¼l 7 - Ders 13",
+          "href": "/education/lessons/owasp-security/owasp-module-07/owasp-module-07-lesson-13"
+        },
+        {
+          "id": "owasp-module-07-lesson-14",
+          "title": "Ders 14: OWASP ModÃ¼l 7 - Ders 14",
+          "description": "Ders 14: OWASP ModÃ¼l 7 - Ders 14",
+          "href": "/education/lessons/owasp-security/owasp-module-07/owasp-module-07-lesson-14"
+        },
+        {
+          "id": "owasp-module-07-lesson-15",
+          "title": "Ders 15: OWASP ModÃ¼l 7 - Ders 15",
+          "description": "Ders 15: OWASP ModÃ¼l 7 - Ders 15",
+          "href": "/education/lessons/owasp-security/owasp-module-07/owasp-module-07-lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "owasp-module-08",
+      "title": "Module 8: OWASP & Web Security ModÃ¼l 8 Testi",
+      "summary": "OWASP & Web Security konularÄ±na odaklÄ± modÃ¼l 8 iÃ§eriÄŸi.",
+      "durationMinutes": 450,
+      "objectives": [
+        "ModÃ¼l 8 hedefleri"
+      ],
+      "relatedTests": [
+        {
+          "id": "owasp-module-08-lesson-01",
+          "title": "Ders 1: OWASP ModÃ¼l 8 - Ders 1",
+          "description": "Ders 1: OWASP ModÃ¼l 8 - Ders 1",
+          "href": "/education/lessons/owasp-security/owasp-module-08/owasp-module-08-lesson-01"
+        },
+        {
+          "id": "owasp-module-08-lesson-02",
+          "title": "Ders 2: OWASP ModÃ¼l 8 - Ders 2",
+          "description": "Ders 2: OWASP ModÃ¼l 8 - Ders 2",
+          "href": "/education/lessons/owasp-security/owasp-module-08/owasp-module-08-lesson-02"
+        },
+        {
+          "id": "owasp-module-08-lesson-03",
+          "title": "Ders 3: OWASP ModÃ¼l 8 - Ders 3",
+          "description": "Ders 3: OWASP ModÃ¼l 8 - Ders 3",
+          "href": "/education/lessons/owasp-security/owasp-module-08/owasp-module-08-lesson-03"
+        },
+        {
+          "id": "owasp-module-08-lesson-04",
+          "title": "Ders 4: OWASP ModÃ¼l 8 - Ders 4",
+          "description": "Ders 4: OWASP ModÃ¼l 8 - Ders 4",
+          "href": "/education/lessons/owasp-security/owasp-module-08/owasp-module-08-lesson-04"
+        },
+        {
+          "id": "owasp-module-08-lesson-05",
+          "title": "Ders 5: OWASP ModÃ¼l 8 - Ders 5",
+          "description": "Ders 5: OWASP ModÃ¼l 8 - Ders 5",
+          "href": "/education/lessons/owasp-security/owasp-module-08/owasp-module-08-lesson-05"
+        },
+        {
+          "id": "owasp-module-08-lesson-06",
+          "title": "Ders 6: OWASP ModÃ¼l 8 - Ders 6",
+          "description": "Ders 6: OWASP ModÃ¼l 8 - Ders 6",
+          "href": "/education/lessons/owasp-security/owasp-module-08/owasp-module-08-lesson-06"
+        },
+        {
+          "id": "owasp-module-08-lesson-07",
+          "title": "Ders 7: OWASP ModÃ¼l 8 - Ders 7",
+          "description": "Ders 7: OWASP ModÃ¼l 8 - Ders 7",
+          "href": "/education/lessons/owasp-security/owasp-module-08/owasp-module-08-lesson-07"
+        },
+        {
+          "id": "owasp-module-08-lesson-08",
+          "title": "Ders 8: OWASP ModÃ¼l 8 - Ders 8",
+          "description": "Ders 8: OWASP ModÃ¼l 8 - Ders 8",
+          "href": "/education/lessons/owasp-security/owasp-module-08/owasp-module-08-lesson-08"
+        },
+        {
+          "id": "owasp-module-08-lesson-09",
+          "title": "Ders 9: OWASP ModÃ¼l 8 - Ders 9",
+          "description": "Ders 9: OWASP ModÃ¼l 8 - Ders 9",
+          "href": "/education/lessons/owasp-security/owasp-module-08/owasp-module-08-lesson-09"
+        },
+        {
+          "id": "owasp-module-08-lesson-10",
+          "title": "Ders 10: OWASP ModÃ¼l 8 - Ders 10",
+          "description": "Ders 10: OWASP ModÃ¼l 8 - Ders 10",
+          "href": "/education/lessons/owasp-security/owasp-module-08/owasp-module-08-lesson-10"
+        },
+        {
+          "id": "owasp-module-08-lesson-11",
+          "title": "Ders 11: OWASP ModÃ¼l 8 - Ders 11",
+          "description": "Ders 11: OWASP ModÃ¼l 8 - Ders 11",
+          "href": "/education/lessons/owasp-security/owasp-module-08/owasp-module-08-lesson-11"
+        },
+        {
+          "id": "owasp-module-08-lesson-12",
+          "title": "Ders 12: OWASP ModÃ¼l 8 - Ders 12",
+          "description": "Ders 12: OWASP ModÃ¼l 8 - Ders 12",
+          "href": "/education/lessons/owasp-security/owasp-module-08/owasp-module-08-lesson-12"
+        },
+        {
+          "id": "owasp-module-08-lesson-13",
+          "title": "Ders 13: OWASP ModÃ¼l 8 - Ders 13",
+          "description": "Ders 13: OWASP ModÃ¼l 8 - Ders 13",
+          "href": "/education/lessons/owasp-security/owasp-module-08/owasp-module-08-lesson-13"
+        },
+        {
+          "id": "owasp-module-08-lesson-14",
+          "title": "Ders 14: OWASP ModÃ¼l 8 - Ders 14",
+          "description": "Ders 14: OWASP ModÃ¼l 8 - Ders 14",
+          "href": "/education/lessons/owasp-security/owasp-module-08/owasp-module-08-lesson-14"
+        },
+        {
+          "id": "owasp-module-08-lesson-15",
+          "title": "Ders 15: OWASP ModÃ¼l 8 - Ders 15",
+          "description": "Ders 15: OWASP ModÃ¼l 8 - Ders 15",
+          "href": "/education/lessons/owasp-security/owasp-module-08/owasp-module-08-lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "owasp-module-09",
+      "title": "Module 9: OWASP & Web Security ModÃ¼l 9 Testi",
+      "summary": "OWASP & Web Security konularÄ±na odaklÄ± modÃ¼l 9 iÃ§eriÄŸi.",
+      "durationMinutes": 450,
+      "objectives": [
+        "ModÃ¼l 9 hedefleri"
+      ],
+      "relatedTests": [
+        {
+          "id": "owasp-module-09-lesson-01",
+          "title": "Ders 1: OWASP ModÃ¼l 9 - Ders 1",
+          "description": "Ders 1: OWASP ModÃ¼l 9 - Ders 1",
+          "href": "/education/lessons/owasp-security/owasp-module-09/owasp-module-09-lesson-01"
+        },
+        {
+          "id": "owasp-module-09-lesson-02",
+          "title": "Ders 2: OWASP ModÃ¼l 9 - Ders 2",
+          "description": "Ders 2: OWASP ModÃ¼l 9 - Ders 2",
+          "href": "/education/lessons/owasp-security/owasp-module-09/owasp-module-09-lesson-02"
+        },
+        {
+          "id": "owasp-module-09-lesson-03",
+          "title": "Ders 3: OWASP ModÃ¼l 9 - Ders 3",
+          "description": "Ders 3: OWASP ModÃ¼l 9 - Ders 3",
+          "href": "/education/lessons/owasp-security/owasp-module-09/owasp-module-09-lesson-03"
+        },
+        {
+          "id": "owasp-module-09-lesson-04",
+          "title": "Ders 4: OWASP ModÃ¼l 9 - Ders 4",
+          "description": "Ders 4: OWASP ModÃ¼l 9 - Ders 4",
+          "href": "/education/lessons/owasp-security/owasp-module-09/owasp-module-09-lesson-04"
+        },
+        {
+          "id": "owasp-module-09-lesson-05",
+          "title": "Ders 5: OWASP ModÃ¼l 9 - Ders 5",
+          "description": "Ders 5: OWASP ModÃ¼l 9 - Ders 5",
+          "href": "/education/lessons/owasp-security/owasp-module-09/owasp-module-09-lesson-05"
+        },
+        {
+          "id": "owasp-module-09-lesson-06",
+          "title": "Ders 6: OWASP ModÃ¼l 9 - Ders 6",
+          "description": "Ders 6: OWASP ModÃ¼l 9 - Ders 6",
+          "href": "/education/lessons/owasp-security/owasp-module-09/owasp-module-09-lesson-06"
+        },
+        {
+          "id": "owasp-module-09-lesson-07",
+          "title": "Ders 7: OWASP ModÃ¼l 9 - Ders 7",
+          "description": "Ders 7: OWASP ModÃ¼l 9 - Ders 7",
+          "href": "/education/lessons/owasp-security/owasp-module-09/owasp-module-09-lesson-07"
+        },
+        {
+          "id": "owasp-module-09-lesson-08",
+          "title": "Ders 8: OWASP ModÃ¼l 9 - Ders 8",
+          "description": "Ders 8: OWASP ModÃ¼l 9 - Ders 8",
+          "href": "/education/lessons/owasp-security/owasp-module-09/owasp-module-09-lesson-08"
+        },
+        {
+          "id": "owasp-module-09-lesson-09",
+          "title": "Ders 9: OWASP ModÃ¼l 9 - Ders 9",
+          "description": "Ders 9: OWASP ModÃ¼l 9 - Ders 9",
+          "href": "/education/lessons/owasp-security/owasp-module-09/owasp-module-09-lesson-09"
+        },
+        {
+          "id": "owasp-module-09-lesson-10",
+          "title": "Ders 10: OWASP ModÃ¼l 9 - Ders 10",
+          "description": "Ders 10: OWASP ModÃ¼l 9 - Ders 10",
+          "href": "/education/lessons/owasp-security/owasp-module-09/owasp-module-09-lesson-10"
+        },
+        {
+          "id": "owasp-module-09-lesson-11",
+          "title": "Ders 11: OWASP ModÃ¼l 9 - Ders 11",
+          "description": "Ders 11: OWASP ModÃ¼l 9 - Ders 11",
+          "href": "/education/lessons/owasp-security/owasp-module-09/owasp-module-09-lesson-11"
+        },
+        {
+          "id": "owasp-module-09-lesson-12",
+          "title": "Ders 12: OWASP ModÃ¼l 9 - Ders 12",
+          "description": "Ders 12: OWASP ModÃ¼l 9 - Ders 12",
+          "href": "/education/lessons/owasp-security/owasp-module-09/owasp-module-09-lesson-12"
+        },
+        {
+          "id": "owasp-module-09-lesson-13",
+          "title": "Ders 13: OWASP ModÃ¼l 9 - Ders 13",
+          "description": "Ders 13: OWASP ModÃ¼l 9 - Ders 13",
+          "href": "/education/lessons/owasp-security/owasp-module-09/owasp-module-09-lesson-13"
+        },
+        {
+          "id": "owasp-module-09-lesson-14",
+          "title": "Ders 14: OWASP ModÃ¼l 9 - Ders 14",
+          "description": "Ders 14: OWASP ModÃ¼l 9 - Ders 14",
+          "href": "/education/lessons/owasp-security/owasp-module-09/owasp-module-09-lesson-14"
+        },
+        {
+          "id": "owasp-module-09-lesson-15",
+          "title": "Ders 15: OWASP ModÃ¼l 9 - Ders 15",
+          "description": "Ders 15: OWASP ModÃ¼l 9 - Ders 15",
+          "href": "/education/lessons/owasp-security/owasp-module-09/owasp-module-09-lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "owasp-module-10",
+      "title": "Module 10: OWASP & Web Security ModÃ¼l 10 Testi",
+      "summary": "OWASP & Web Security konularÄ±na odaklÄ± modÃ¼l 10 iÃ§eriÄŸi.",
+      "durationMinutes": 450,
+      "objectives": [
+        "ModÃ¼l 10 hedefleri"
+      ],
+      "relatedTests": [
+        {
+          "id": "owasp-module-10-lesson-01",
+          "title": "Ders 1: OWASP ModÃ¼l 10 - Ders 1",
+          "description": "Ders 1: OWASP ModÃ¼l 10 - Ders 1",
+          "href": "/education/lessons/owasp-security/owasp-module-10/owasp-module-10-lesson-01"
+        },
+        {
+          "id": "owasp-module-10-lesson-02",
+          "title": "Ders 2: OWASP ModÃ¼l 10 - Ders 2",
+          "description": "Ders 2: OWASP ModÃ¼l 10 - Ders 2",
+          "href": "/education/lessons/owasp-security/owasp-module-10/owasp-module-10-lesson-02"
+        },
+        {
+          "id": "owasp-module-10-lesson-03",
+          "title": "Ders 3: OWASP ModÃ¼l 10 - Ders 3",
+          "description": "Ders 3: OWASP ModÃ¼l 10 - Ders 3",
+          "href": "/education/lessons/owasp-security/owasp-module-10/owasp-module-10-lesson-03"
+        },
+        {
+          "id": "owasp-module-10-lesson-04",
+          "title": "Ders 4: OWASP ModÃ¼l 10 - Ders 4",
+          "description": "Ders 4: OWASP ModÃ¼l 10 - Ders 4",
+          "href": "/education/lessons/owasp-security/owasp-module-10/owasp-module-10-lesson-04"
+        },
+        {
+          "id": "owasp-module-10-lesson-05",
+          "title": "Ders 5: OWASP ModÃ¼l 10 - Ders 5",
+          "description": "Ders 5: OWASP ModÃ¼l 10 - Ders 5",
+          "href": "/education/lessons/owasp-security/owasp-module-10/owasp-module-10-lesson-05"
+        },
+        {
+          "id": "owasp-module-10-lesson-06",
+          "title": "Ders 6: OWASP ModÃ¼l 10 - Ders 6",
+          "description": "Ders 6: OWASP ModÃ¼l 10 - Ders 6",
+          "href": "/education/lessons/owasp-security/owasp-module-10/owasp-module-10-lesson-06"
+        },
+        {
+          "id": "owasp-module-10-lesson-07",
+          "title": "Ders 7: OWASP ModÃ¼l 10 - Ders 7",
+          "description": "Ders 7: OWASP ModÃ¼l 10 - Ders 7",
+          "href": "/education/lessons/owasp-security/owasp-module-10/owasp-module-10-lesson-07"
+        },
+        {
+          "id": "owasp-module-10-lesson-08",
+          "title": "Ders 8: OWASP ModÃ¼l 10 - Ders 8",
+          "description": "Ders 8: OWASP ModÃ¼l 10 - Ders 8",
+          "href": "/education/lessons/owasp-security/owasp-module-10/owasp-module-10-lesson-08"
+        },
+        {
+          "id": "owasp-module-10-lesson-09",
+          "title": "Ders 9: OWASP ModÃ¼l 10 - Ders 9",
+          "description": "Ders 9: OWASP ModÃ¼l 10 - Ders 9",
+          "href": "/education/lessons/owasp-security/owasp-module-10/owasp-module-10-lesson-09"
+        },
+        {
+          "id": "owasp-module-10-lesson-10",
+          "title": "Ders 10: OWASP ModÃ¼l 10 - Ders 10",
+          "description": "Ders 10: OWASP ModÃ¼l 10 - Ders 10",
+          "href": "/education/lessons/owasp-security/owasp-module-10/owasp-module-10-lesson-10"
+        },
+        {
+          "id": "owasp-module-10-lesson-11",
+          "title": "Ders 11: OWASP ModÃ¼l 10 - Ders 11",
+          "description": "Ders 11: OWASP ModÃ¼l 10 - Ders 11",
+          "href": "/education/lessons/owasp-security/owasp-module-10/owasp-module-10-lesson-11"
+        },
+        {
+          "id": "owasp-module-10-lesson-12",
+          "title": "Ders 12: OWASP ModÃ¼l 10 - Ders 12",
+          "description": "Ders 12: OWASP ModÃ¼l 10 - Ders 12",
+          "href": "/education/lessons/owasp-security/owasp-module-10/owasp-module-10-lesson-12"
+        },
+        {
+          "id": "owasp-module-10-lesson-13",
+          "title": "Ders 13: OWASP ModÃ¼l 10 - Ders 13",
+          "description": "Ders 13: OWASP ModÃ¼l 10 - Ders 13",
+          "href": "/education/lessons/owasp-security/owasp-module-10/owasp-module-10-lesson-13"
+        },
+        {
+          "id": "owasp-module-10-lesson-14",
+          "title": "Ders 14: OWASP ModÃ¼l 10 - Ders 14",
+          "description": "Ders 14: OWASP ModÃ¼l 10 - Ders 14",
+          "href": "/education/lessons/owasp-security/owasp-module-10/owasp-module-10-lesson-14"
+        },
+        {
+          "id": "owasp-module-10-lesson-15",
+          "title": "Ders 15: OWASP ModÃ¼l 10 - Ders 15",
+          "description": "Ders 15: OWASP ModÃ¼l 10 - Ders 15",
+          "href": "/education/lessons/owasp-security/owasp-module-10/owasp-module-10-lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "owasp-module-11",
+      "title": "Module 11: OWASP & Web Security ModÃ¼l 11 Testi",
+      "summary": "OWASP & Web Security konularÄ±na odaklÄ± modÃ¼l 11 iÃ§eriÄŸi.",
+      "durationMinutes": 450,
+      "objectives": [
+        "ModÃ¼l 11 hedefleri"
+      ],
+      "relatedTests": [
+        {
+          "id": "owasp-module-11-lesson-01",
+          "title": "Ders 1: OWASP ModÃ¼l 11 - Ders 1",
+          "description": "Ders 1: OWASP ModÃ¼l 11 - Ders 1",
+          "href": "/education/lessons/owasp-security/owasp-module-11/owasp-module-11-lesson-01"
+        },
+        {
+          "id": "owasp-module-11-lesson-02",
+          "title": "Ders 2: OWASP ModÃ¼l 11 - Ders 2",
+          "description": "Ders 2: OWASP ModÃ¼l 11 - Ders 2",
+          "href": "/education/lessons/owasp-security/owasp-module-11/owasp-module-11-lesson-02"
+        },
+        {
+          "id": "owasp-module-11-lesson-03",
+          "title": "Ders 3: OWASP ModÃ¼l 11 - Ders 3",
+          "description": "Ders 3: OWASP ModÃ¼l 11 - Ders 3",
+          "href": "/education/lessons/owasp-security/owasp-module-11/owasp-module-11-lesson-03"
+        },
+        {
+          "id": "owasp-module-11-lesson-04",
+          "title": "Ders 4: OWASP ModÃ¼l 11 - Ders 4",
+          "description": "Ders 4: OWASP ModÃ¼l 11 - Ders 4",
+          "href": "/education/lessons/owasp-security/owasp-module-11/owasp-module-11-lesson-04"
+        },
+        {
+          "id": "owasp-module-11-lesson-05",
+          "title": "Ders 5: OWASP ModÃ¼l 11 - Ders 5",
+          "description": "Ders 5: OWASP ModÃ¼l 11 - Ders 5",
+          "href": "/education/lessons/owasp-security/owasp-module-11/owasp-module-11-lesson-05"
+        },
+        {
+          "id": "owasp-module-11-lesson-06",
+          "title": "Ders 6: OWASP ModÃ¼l 11 - Ders 6",
+          "description": "Ders 6: OWASP ModÃ¼l 11 - Ders 6",
+          "href": "/education/lessons/owasp-security/owasp-module-11/owasp-module-11-lesson-06"
+        },
+        {
+          "id": "owasp-module-11-lesson-07",
+          "title": "Ders 7: OWASP ModÃ¼l 11 - Ders 7",
+          "description": "Ders 7: OWASP ModÃ¼l 11 - Ders 7",
+          "href": "/education/lessons/owasp-security/owasp-module-11/owasp-module-11-lesson-07"
+        },
+        {
+          "id": "owasp-module-11-lesson-08",
+          "title": "Ders 8: OWASP ModÃ¼l 11 - Ders 8",
+          "description": "Ders 8: OWASP ModÃ¼l 11 - Ders 8",
+          "href": "/education/lessons/owasp-security/owasp-module-11/owasp-module-11-lesson-08"
+        },
+        {
+          "id": "owasp-module-11-lesson-09",
+          "title": "Ders 9: OWASP ModÃ¼l 11 - Ders 9",
+          "description": "Ders 9: OWASP ModÃ¼l 11 - Ders 9",
+          "href": "/education/lessons/owasp-security/owasp-module-11/owasp-module-11-lesson-09"
+        },
+        {
+          "id": "owasp-module-11-lesson-10",
+          "title": "Ders 10: OWASP ModÃ¼l 11 - Ders 10",
+          "description": "Ders 10: OWASP ModÃ¼l 11 - Ders 10",
+          "href": "/education/lessons/owasp-security/owasp-module-11/owasp-module-11-lesson-10"
+        },
+        {
+          "id": "owasp-module-11-lesson-11",
+          "title": "Ders 11: OWASP ModÃ¼l 11 - Ders 11",
+          "description": "Ders 11: OWASP ModÃ¼l 11 - Ders 11",
+          "href": "/education/lessons/owasp-security/owasp-module-11/owasp-module-11-lesson-11"
+        },
+        {
+          "id": "owasp-module-11-lesson-12",
+          "title": "Ders 12: OWASP ModÃ¼l 11 - Ders 12",
+          "description": "Ders 12: OWASP ModÃ¼l 11 - Ders 12",
+          "href": "/education/lessons/owasp-security/owasp-module-11/owasp-module-11-lesson-12"
+        },
+        {
+          "id": "owasp-module-11-lesson-13",
+          "title": "Ders 13: OWASP ModÃ¼l 11 - Ders 13",
+          "description": "Ders 13: OWASP ModÃ¼l 11 - Ders 13",
+          "href": "/education/lessons/owasp-security/owasp-module-11/owasp-module-11-lesson-13"
+        },
+        {
+          "id": "owasp-module-11-lesson-14",
+          "title": "Ders 14: OWASP ModÃ¼l 11 - Ders 14",
+          "description": "Ders 14: OWASP ModÃ¼l 11 - Ders 14",
+          "href": "/education/lessons/owasp-security/owasp-module-11/owasp-module-11-lesson-14"
+        },
+        {
+          "id": "owasp-module-11-lesson-15",
+          "title": "Ders 15: OWASP ModÃ¼l 11 - Ders 15",
+          "description": "Ders 15: OWASP ModÃ¼l 11 - Ders 15",
+          "href": "/education/lessons/owasp-security/owasp-module-11/owasp-module-11-lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "owasp-module-12",
+      "title": "Module 12: OWASP & Web Security ModÃ¼l 12 Testi",
+      "summary": "OWASP & Web Security konularÄ±na odaklÄ± modÃ¼l 12 iÃ§eriÄŸi.",
+      "durationMinutes": 450,
+      "objectives": [
+        "ModÃ¼l 12 hedefleri"
+      ],
+      "relatedTests": [
+        {
+          "id": "owasp-module-12-lesson-01",
+          "title": "Ders 1: OWASP ModÃ¼l 12 - Ders 1",
+          "description": "Ders 1: OWASP ModÃ¼l 12 - Ders 1",
+          "href": "/education/lessons/owasp-security/owasp-module-12/owasp-module-12-lesson-01"
+        },
+        {
+          "id": "owasp-module-12-lesson-02",
+          "title": "Ders 2: OWASP ModÃ¼l 12 - Ders 2",
+          "description": "Ders 2: OWASP ModÃ¼l 12 - Ders 2",
+          "href": "/education/lessons/owasp-security/owasp-module-12/owasp-module-12-lesson-02"
+        },
+        {
+          "id": "owasp-module-12-lesson-03",
+          "title": "Ders 3: OWASP ModÃ¼l 12 - Ders 3",
+          "description": "Ders 3: OWASP ModÃ¼l 12 - Ders 3",
+          "href": "/education/lessons/owasp-security/owasp-module-12/owasp-module-12-lesson-03"
+        },
+        {
+          "id": "owasp-module-12-lesson-04",
+          "title": "Ders 4: OWASP ModÃ¼l 12 - Ders 4",
+          "description": "Ders 4: OWASP ModÃ¼l 12 - Ders 4",
+          "href": "/education/lessons/owasp-security/owasp-module-12/owasp-module-12-lesson-04"
+        },
+        {
+          "id": "owasp-module-12-lesson-05",
+          "title": "Ders 5: OWASP ModÃ¼l 12 - Ders 5",
+          "description": "Ders 5: OWASP ModÃ¼l 12 - Ders 5",
+          "href": "/education/lessons/owasp-security/owasp-module-12/owasp-module-12-lesson-05"
+        },
+        {
+          "id": "owasp-module-12-lesson-06",
+          "title": "Ders 6: OWASP ModÃ¼l 12 - Ders 6",
+          "description": "Ders 6: OWASP ModÃ¼l 12 - Ders 6",
+          "href": "/education/lessons/owasp-security/owasp-module-12/owasp-module-12-lesson-06"
+        },
+        {
+          "id": "owasp-module-12-lesson-07",
+          "title": "Ders 7: OWASP ModÃ¼l 12 - Ders 7",
+          "description": "Ders 7: OWASP ModÃ¼l 12 - Ders 7",
+          "href": "/education/lessons/owasp-security/owasp-module-12/owasp-module-12-lesson-07"
+        },
+        {
+          "id": "owasp-module-12-lesson-08",
+          "title": "Ders 8: OWASP ModÃ¼l 12 - Ders 8",
+          "description": "Ders 8: OWASP ModÃ¼l 12 - Ders 8",
+          "href": "/education/lessons/owasp-security/owasp-module-12/owasp-module-12-lesson-08"
+        },
+        {
+          "id": "owasp-module-12-lesson-09",
+          "title": "Ders 9: OWASP ModÃ¼l 12 - Ders 9",
+          "description": "Ders 9: OWASP ModÃ¼l 12 - Ders 9",
+          "href": "/education/lessons/owasp-security/owasp-module-12/owasp-module-12-lesson-09"
+        },
+        {
+          "id": "owasp-module-12-lesson-10",
+          "title": "Ders 10: OWASP ModÃ¼l 12 - Ders 10",
+          "description": "Ders 10: OWASP ModÃ¼l 12 - Ders 10",
+          "href": "/education/lessons/owasp-security/owasp-module-12/owasp-module-12-lesson-10"
+        },
+        {
+          "id": "owasp-module-12-lesson-11",
+          "title": "Ders 11: OWASP ModÃ¼l 12 - Ders 11",
+          "description": "Ders 11: OWASP ModÃ¼l 12 - Ders 11",
+          "href": "/education/lessons/owasp-security/owasp-module-12/owasp-module-12-lesson-11"
+        },
+        {
+          "id": "owasp-module-12-lesson-12",
+          "title": "Ders 12: OWASP ModÃ¼l 12 - Ders 12",
+          "description": "Ders 12: OWASP ModÃ¼l 12 - Ders 12",
+          "href": "/education/lessons/owasp-security/owasp-module-12/owasp-module-12-lesson-12"
+        },
+        {
+          "id": "owasp-module-12-lesson-13",
+          "title": "Ders 13: OWASP ModÃ¼l 12 - Ders 13",
+          "description": "Ders 13: OWASP ModÃ¼l 12 - Ders 13",
+          "href": "/education/lessons/owasp-security/owasp-module-12/owasp-module-12-lesson-13"
+        },
+        {
+          "id": "owasp-module-12-lesson-14",
+          "title": "Ders 14: OWASP ModÃ¼l 12 - Ders 14",
+          "description": "Ders 14: OWASP ModÃ¼l 12 - Ders 14",
+          "href": "/education/lessons/owasp-security/owasp-module-12/owasp-module-12-lesson-14"
+        },
+        {
+          "id": "owasp-module-12-lesson-15",
+          "title": "Ders 15: OWASP ModÃ¼l 12 - Ders 15",
+          "description": "Ders 15: OWASP ModÃ¼l 12 - Ders 15",
+          "href": "/education/lessons/owasp-security/owasp-module-12/owasp-module-12-lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "owasp-module-13",
+      "title": "Module 13: OWASP & Web Security ModÃ¼l 13 Testi",
+      "summary": "OWASP & Web Security konularÄ±na odaklÄ± modÃ¼l 13 iÃ§eriÄŸi.",
+      "durationMinutes": 450,
+      "objectives": [
+        "ModÃ¼l 13 hedefleri"
+      ],
+      "relatedTests": [
+        {
+          "id": "owasp-module-13-lesson-01",
+          "title": "Ders 1: OWASP ModÃ¼l 13 - Ders 1",
+          "description": "Ders 1: OWASP ModÃ¼l 13 - Ders 1",
+          "href": "/education/lessons/owasp-security/owasp-module-13/owasp-module-13-lesson-01"
+        },
+        {
+          "id": "owasp-module-13-lesson-02",
+          "title": "Ders 2: OWASP ModÃ¼l 13 - Ders 2",
+          "description": "Ders 2: OWASP ModÃ¼l 13 - Ders 2",
+          "href": "/education/lessons/owasp-security/owasp-module-13/owasp-module-13-lesson-02"
+        },
+        {
+          "id": "owasp-module-13-lesson-03",
+          "title": "Ders 3: OWASP ModÃ¼l 13 - Ders 3",
+          "description": "Ders 3: OWASP ModÃ¼l 13 - Ders 3",
+          "href": "/education/lessons/owasp-security/owasp-module-13/owasp-module-13-lesson-03"
+        },
+        {
+          "id": "owasp-module-13-lesson-04",
+          "title": "Ders 4: OWASP ModÃ¼l 13 - Ders 4",
+          "description": "Ders 4: OWASP ModÃ¼l 13 - Ders 4",
+          "href": "/education/lessons/owasp-security/owasp-module-13/owasp-module-13-lesson-04"
+        },
+        {
+          "id": "owasp-module-13-lesson-05",
+          "title": "Ders 5: OWASP ModÃ¼l 13 - Ders 5",
+          "description": "Ders 5: OWASP ModÃ¼l 13 - Ders 5",
+          "href": "/education/lessons/owasp-security/owasp-module-13/owasp-module-13-lesson-05"
+        },
+        {
+          "id": "owasp-module-13-lesson-06",
+          "title": "Ders 6: OWASP ModÃ¼l 13 - Ders 6",
+          "description": "Ders 6: OWASP ModÃ¼l 13 - Ders 6",
+          "href": "/education/lessons/owasp-security/owasp-module-13/owasp-module-13-lesson-06"
+        },
+        {
+          "id": "owasp-module-13-lesson-07",
+          "title": "Ders 7: OWASP ModÃ¼l 13 - Ders 7",
+          "description": "Ders 7: OWASP ModÃ¼l 13 - Ders 7",
+          "href": "/education/lessons/owasp-security/owasp-module-13/owasp-module-13-lesson-07"
+        },
+        {
+          "id": "owasp-module-13-lesson-08",
+          "title": "Ders 8: OWASP ModÃ¼l 13 - Ders 8",
+          "description": "Ders 8: OWASP ModÃ¼l 13 - Ders 8",
+          "href": "/education/lessons/owasp-security/owasp-module-13/owasp-module-13-lesson-08"
+        },
+        {
+          "id": "owasp-module-13-lesson-09",
+          "title": "Ders 9: OWASP ModÃ¼l 13 - Ders 9",
+          "description": "Ders 9: OWASP ModÃ¼l 13 - Ders 9",
+          "href": "/education/lessons/owasp-security/owasp-module-13/owasp-module-13-lesson-09"
+        },
+        {
+          "id": "owasp-module-13-lesson-10",
+          "title": "Ders 10: OWASP ModÃ¼l 13 - Ders 10",
+          "description": "Ders 10: OWASP ModÃ¼l 13 - Ders 10",
+          "href": "/education/lessons/owasp-security/owasp-module-13/owasp-module-13-lesson-10"
+        },
+        {
+          "id": "owasp-module-13-lesson-11",
+          "title": "Ders 11: OWASP ModÃ¼l 13 - Ders 11",
+          "description": "Ders 11: OWASP ModÃ¼l 13 - Ders 11",
+          "href": "/education/lessons/owasp-security/owasp-module-13/owasp-module-13-lesson-11"
+        },
+        {
+          "id": "owasp-module-13-lesson-12",
+          "title": "Ders 12: OWASP ModÃ¼l 13 - Ders 12",
+          "description": "Ders 12: OWASP ModÃ¼l 13 - Ders 12",
+          "href": "/education/lessons/owasp-security/owasp-module-13/owasp-module-13-lesson-12"
+        },
+        {
+          "id": "owasp-module-13-lesson-13",
+          "title": "Ders 13: OWASP ModÃ¼l 13 - Ders 13",
+          "description": "Ders 13: OWASP ModÃ¼l 13 - Ders 13",
+          "href": "/education/lessons/owasp-security/owasp-module-13/owasp-module-13-lesson-13"
+        },
+        {
+          "id": "owasp-module-13-lesson-14",
+          "title": "Ders 14: OWASP ModÃ¼l 13 - Ders 14",
+          "description": "Ders 14: OWASP ModÃ¼l 13 - Ders 14",
+          "href": "/education/lessons/owasp-security/owasp-module-13/owasp-module-13-lesson-14"
+        },
+        {
+          "id": "owasp-module-13-lesson-15",
+          "title": "Ders 15: OWASP ModÃ¼l 13 - Ders 15",
+          "description": "Ders 15: OWASP ModÃ¼l 13 - Ders 15",
+          "href": "/education/lessons/owasp-security/owasp-module-13/owasp-module-13-lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "owasp-module-14",
+      "title": "Module 14: OWASP & Web Security ModÃ¼l 14 Testi",
+      "summary": "OWASP & Web Security konularÄ±na odaklÄ± modÃ¼l 14 iÃ§eriÄŸi.",
+      "durationMinutes": 450,
+      "objectives": [
+        "ModÃ¼l 14 hedefleri"
+      ],
+      "relatedTests": [
+        {
+          "id": "owasp-module-14-lesson-01",
+          "title": "Ders 1: OWASP ModÃ¼l 14 - Ders 1",
+          "description": "Ders 1: OWASP ModÃ¼l 14 - Ders 1",
+          "href": "/education/lessons/owasp-security/owasp-module-14/owasp-module-14-lesson-01"
+        },
+        {
+          "id": "owasp-module-14-lesson-02",
+          "title": "Ders 2: OWASP ModÃ¼l 14 - Ders 2",
+          "description": "Ders 2: OWASP ModÃ¼l 14 - Ders 2",
+          "href": "/education/lessons/owasp-security/owasp-module-14/owasp-module-14-lesson-02"
+        },
+        {
+          "id": "owasp-module-14-lesson-03",
+          "title": "Ders 3: OWASP ModÃ¼l 14 - Ders 3",
+          "description": "Ders 3: OWASP ModÃ¼l 14 - Ders 3",
+          "href": "/education/lessons/owasp-security/owasp-module-14/owasp-module-14-lesson-03"
+        },
+        {
+          "id": "owasp-module-14-lesson-04",
+          "title": "Ders 4: OWASP ModÃ¼l 14 - Ders 4",
+          "description": "Ders 4: OWASP ModÃ¼l 14 - Ders 4",
+          "href": "/education/lessons/owasp-security/owasp-module-14/owasp-module-14-lesson-04"
+        },
+        {
+          "id": "owasp-module-14-lesson-05",
+          "title": "Ders 5: OWASP ModÃ¼l 14 - Ders 5",
+          "description": "Ders 5: OWASP ModÃ¼l 14 - Ders 5",
+          "href": "/education/lessons/owasp-security/owasp-module-14/owasp-module-14-lesson-05"
+        },
+        {
+          "id": "owasp-module-14-lesson-06",
+          "title": "Ders 6: OWASP ModÃ¼l 14 - Ders 6",
+          "description": "Ders 6: OWASP ModÃ¼l 14 - Ders 6",
+          "href": "/education/lessons/owasp-security/owasp-module-14/owasp-module-14-lesson-06"
+        },
+        {
+          "id": "owasp-module-14-lesson-07",
+          "title": "Ders 7: OWASP ModÃ¼l 14 - Ders 7",
+          "description": "Ders 7: OWASP ModÃ¼l 14 - Ders 7",
+          "href": "/education/lessons/owasp-security/owasp-module-14/owasp-module-14-lesson-07"
+        },
+        {
+          "id": "owasp-module-14-lesson-08",
+          "title": "Ders 8: OWASP ModÃ¼l 14 - Ders 8",
+          "description": "Ders 8: OWASP ModÃ¼l 14 - Ders 8",
+          "href": "/education/lessons/owasp-security/owasp-module-14/owasp-module-14-lesson-08"
+        },
+        {
+          "id": "owasp-module-14-lesson-09",
+          "title": "Ders 9: OWASP ModÃ¼l 14 - Ders 9",
+          "description": "Ders 9: OWASP ModÃ¼l 14 - Ders 9",
+          "href": "/education/lessons/owasp-security/owasp-module-14/owasp-module-14-lesson-09"
+        },
+        {
+          "id": "owasp-module-14-lesson-10",
+          "title": "Ders 10: OWASP ModÃ¼l 14 - Ders 10",
+          "description": "Ders 10: OWASP ModÃ¼l 14 - Ders 10",
+          "href": "/education/lessons/owasp-security/owasp-module-14/owasp-module-14-lesson-10"
+        },
+        {
+          "id": "owasp-module-14-lesson-11",
+          "title": "Ders 11: OWASP ModÃ¼l 14 - Ders 11",
+          "description": "Ders 11: OWASP ModÃ¼l 14 - Ders 11",
+          "href": "/education/lessons/owasp-security/owasp-module-14/owasp-module-14-lesson-11"
+        },
+        {
+          "id": "owasp-module-14-lesson-12",
+          "title": "Ders 12: OWASP ModÃ¼l 14 - Ders 12",
+          "description": "Ders 12: OWASP ModÃ¼l 14 - Ders 12",
+          "href": "/education/lessons/owasp-security/owasp-module-14/owasp-module-14-lesson-12"
+        },
+        {
+          "id": "owasp-module-14-lesson-13",
+          "title": "Ders 13: OWASP ModÃ¼l 14 - Ders 13",
+          "description": "Ders 13: OWASP ModÃ¼l 14 - Ders 13",
+          "href": "/education/lessons/owasp-security/owasp-module-14/owasp-module-14-lesson-13"
+        },
+        {
+          "id": "owasp-module-14-lesson-14",
+          "title": "Ders 14: OWASP ModÃ¼l 14 - Ders 14",
+          "description": "Ders 14: OWASP ModÃ¼l 14 - Ders 14",
+          "href": "/education/lessons/owasp-security/owasp-module-14/owasp-module-14-lesson-14"
+        },
+        {
+          "id": "owasp-module-14-lesson-15",
+          "title": "Ders 15: OWASP ModÃ¼l 14 - Ders 15",
+          "description": "Ders 15: OWASP ModÃ¼l 14 - Ders 15",
+          "href": "/education/lessons/owasp-security/owasp-module-14/owasp-module-14-lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "owasp-module-15",
+      "title": "Module 15: OWASP & Web Security ModÃ¼l 15 Testi",
+      "summary": "OWASP & Web Security konularÄ±na odaklÄ± modÃ¼l 15 iÃ§eriÄŸi.",
+      "durationMinutes": 450,
+      "objectives": [
+        "ModÃ¼l 15 hedefleri"
+      ],
+      "relatedTests": [
+        {
+          "id": "owasp-module-15-lesson-01",
+          "title": "Ders 1: OWASP ModÃ¼l 15 - Ders 1",
+          "description": "Ders 1: OWASP ModÃ¼l 15 - Ders 1",
+          "href": "/education/lessons/owasp-security/owasp-module-15/owasp-module-15-lesson-01"
+        },
+        {
+          "id": "owasp-module-15-lesson-02",
+          "title": "Ders 2: OWASP ModÃ¼l 15 - Ders 2",
+          "description": "Ders 2: OWASP ModÃ¼l 15 - Ders 2",
+          "href": "/education/lessons/owasp-security/owasp-module-15/owasp-module-15-lesson-02"
+        },
+        {
+          "id": "owasp-module-15-lesson-03",
+          "title": "Ders 3: OWASP ModÃ¼l 15 - Ders 3",
+          "description": "Ders 3: OWASP ModÃ¼l 15 - Ders 3",
+          "href": "/education/lessons/owasp-security/owasp-module-15/owasp-module-15-lesson-03"
+        },
+        {
+          "id": "owasp-module-15-lesson-04",
+          "title": "Ders 4: OWASP ModÃ¼l 15 - Ders 4",
+          "description": "Ders 4: OWASP ModÃ¼l 15 - Ders 4",
+          "href": "/education/lessons/owasp-security/owasp-module-15/owasp-module-15-lesson-04"
+        },
+        {
+          "id": "owasp-module-15-lesson-05",
+          "title": "Ders 5: OWASP ModÃ¼l 15 - Ders 5",
+          "description": "Ders 5: OWASP ModÃ¼l 15 - Ders 5",
+          "href": "/education/lessons/owasp-security/owasp-module-15/owasp-module-15-lesson-05"
+        },
+        {
+          "id": "owasp-module-15-lesson-06",
+          "title": "Ders 6: OWASP ModÃ¼l 15 - Ders 6",
+          "description": "Ders 6: OWASP ModÃ¼l 15 - Ders 6",
+          "href": "/education/lessons/owasp-security/owasp-module-15/owasp-module-15-lesson-06"
+        },
+        {
+          "id": "owasp-module-15-lesson-07",
+          "title": "Ders 7: OWASP ModÃ¼l 15 - Ders 7",
+          "description": "Ders 7: OWASP ModÃ¼l 15 - Ders 7",
+          "href": "/education/lessons/owasp-security/owasp-module-15/owasp-module-15-lesson-07"
+        },
+        {
+          "id": "owasp-module-15-lesson-08",
+          "title": "Ders 8: OWASP ModÃ¼l 15 - Ders 8",
+          "description": "Ders 8: OWASP ModÃ¼l 15 - Ders 8",
+          "href": "/education/lessons/owasp-security/owasp-module-15/owasp-module-15-lesson-08"
+        },
+        {
+          "id": "owasp-module-15-lesson-09",
+          "title": "Ders 9: OWASP ModÃ¼l 15 - Ders 9",
+          "description": "Ders 9: OWASP ModÃ¼l 15 - Ders 9",
+          "href": "/education/lessons/owasp-security/owasp-module-15/owasp-module-15-lesson-09"
+        },
+        {
+          "id": "owasp-module-15-lesson-10",
+          "title": "Ders 10: OWASP ModÃ¼l 15 - Ders 10",
+          "description": "Ders 10: OWASP ModÃ¼l 15 - Ders 10",
+          "href": "/education/lessons/owasp-security/owasp-module-15/owasp-module-15-lesson-10"
+        },
+        {
+          "id": "owasp-module-15-lesson-11",
+          "title": "Ders 11: OWASP ModÃ¼l 15 - Ders 11",
+          "description": "Ders 11: OWASP ModÃ¼l 15 - Ders 11",
+          "href": "/education/lessons/owasp-security/owasp-module-15/owasp-module-15-lesson-11"
+        },
+        {
+          "id": "owasp-module-15-lesson-12",
+          "title": "Ders 12: OWASP ModÃ¼l 15 - Ders 12",
+          "description": "Ders 12: OWASP ModÃ¼l 15 - Ders 12",
+          "href": "/education/lessons/owasp-security/owasp-module-15/owasp-module-15-lesson-12"
+        },
+        {
+          "id": "owasp-module-15-lesson-13",
+          "title": "Ders 13: OWASP ModÃ¼l 15 - Ders 13",
+          "description": "Ders 13: OWASP ModÃ¼l 15 - Ders 13",
+          "href": "/education/lessons/owasp-security/owasp-module-15/owasp-module-15-lesson-13"
+        },
+        {
+          "id": "owasp-module-15-lesson-14",
+          "title": "Ders 14: OWASP ModÃ¼l 15 - Ders 14",
+          "description": "Ders 14: OWASP ModÃ¼l 15 - Ders 14",
+          "href": "/education/lessons/owasp-security/owasp-module-15/owasp-module-15-lesson-14"
+        },
+        {
+          "id": "owasp-module-15-lesson-15",
+          "title": "Ders 15: OWASP ModÃ¼l 15 - Ders 15",
+          "description": "Ders 15: OWASP ModÃ¼l 15 - Ders 15",
+          "href": "/education/lessons/owasp-security/owasp-module-15/owasp-module-15-lesson-15"
+        }
+      ]
+    }
+  ]
+}

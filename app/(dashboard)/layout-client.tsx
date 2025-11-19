@@ -34,6 +34,8 @@ import {
   Home,
   Compass,
   Plus,
+  ChevronDown,
+  ChevronRight,
 } from "lucide-react";
 import { useState, useEffect, useMemo, type ComponentType, type SVGProps } from "react";
 import { usePathname } from "next/navigation";
@@ -71,6 +73,7 @@ function DashboardLayoutContent({
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set());
   const pathname = usePathname();
   const { toggleTheme } = useTheme();
   const { directUnread, groupsUnread, communityUnread } = useChatSummary();
@@ -116,174 +119,178 @@ function DashboardLayoutContent({
     [communityUnread, directUnread, groupsUnread, friendRequestCount]
   );
 
-  const navigationGroups: NavigationGroup[] = [
-    {
-      title: "Anasayfa",
-      items: [
-        {
-          name: "Anasayfa",
-          href: "/dashboard",
-          icon: LayoutDashboard,
-        },
-      ],
-    },
-    {
-      title: "İlerişim",
-      items: [
-        {
-          name: "Sohbetler",
-          href: "/chat/direct",
-          icon: MessageCircle,
-        },
-        {
-          name: "Gruplar",
-          href: "/chat/groups",
-          icon: Users,
-        },
-        {
-          name: "Yardımlaşma Toplulukları",
-          href: "/chat",
-          icon: LifeBuoy,
-        },
-      ],
-    },
-    {
-      title: "Sosyal",
-      items: [
-        {
-          name: "Haber Akışı",
-          href: "/social/feed",
-          icon: Home,
-        },
-        {
-          name: "Keşfet",
-          href: "/social/explore",
-          icon: Compass,
-        },
-        {
-          name: "Oluştur",
-          href: "/social/create",
-          icon: Plus,
-        },
-        {
-          name: "Bağlantılarım",
-          href: "/dashboard/friends",
-          icon: UserPlus,
-        },
-      ],
-    },
-    {
-      title: "Eğitim",
-      items: [
-        {
-          name: "Kurslar",
-          href: "/education/courses",
-          icon: BookOpen,
-        },
-        {
-          name: "Testler",
-          href: "/education/test",
-          icon: PenSquare,
-        },
-        {
-          name: "Canlı Kodlama",
-          href: "/education/live-coding",
-          icon: Code,
-        },
-        {
-          name: "Bugfix",
-          href: "/education/bug-fix",
-          icon: Bug,
-        },
-        {
-          name: "Hedefler",
-          href: "/goals",
-          icon: Target,
-        },
-        {
-          name: "Gelişim ve Analiz",
-          href: "/education/analytics",
-          icon: BarChart3,
-        },
-      ],
-    },
-    {
-      title: "Kazanç",
-      items: [
-        {
-          name: "Hackaton",
-          href: "/education/hackaton",
-          icon: Trophy,
-        },
-        {
-          name: "Freelancer Partner",
-          href: "/freelancer/projects",
-          icon: Handshake,
-        },
-        {
-          name: "Derece Kazancı",
-          href: "/competition",
-          icon: Medal,
-        },
-        {
-          name: "Kazanç Analizi",
-          href: "/earnings",
-          icon: TrendingUp,
-        },
-        {
-          name: "En Çok Kazananlar",
-          href: "/earnings/leaderboard",
-          icon: DollarSign,
-        },
-      ],
-    },
-    {
-      title: "Kariyer",
-      items: [
-        {
-          name: "CV",
-          href: "/cv/my-cvs",
-          icon: FileText,
-        },
-        {
-          name: "Mülakat",
-          href: "/interview/practice",
-          icon: Video,
-        },
-        {
-          name: "İş İlanları",
-          href: "/jobs/browse",
-          icon: Briefcase,
-        },
-      ],
-    },
-  ];
+  const navigationGroups: NavigationGroup[] = useMemo(() => {
+    const groups: NavigationGroup[] = [
+      {
+        title: "Anasayfa",
+        items: [
+          {
+            name: "Anasayfa",
+            href: "/dashboard",
+            icon: LayoutDashboard,
+          },
+        ],
+      },
+      {
+        title: "İlerişim",
+        items: [
+          {
+            name: "Sohbetler",
+            href: "/chat/direct",
+            icon: MessageCircle,
+          },
+          {
+            name: "Gruplar",
+            href: "/chat/groups",
+            icon: Users,
+          },
+          {
+            name: "Yardımlaşma Toplulukları",
+            href: "/chat",
+            icon: LifeBuoy,
+          },
+        ],
+      },
+      {
+        title: "Sosyal",
+        items: [
+          {
+            name: "Haber Akışı",
+            href: "/social/feed",
+            icon: Home,
+          },
+          {
+            name: "Keşfet",
+            href: "/social/explore",
+            icon: Compass,
+          },
+          {
+            name: "Oluştur",
+            href: "/social/create",
+            icon: Plus,
+          },
+          {
+            name: "Bağlantılarım",
+            href: "/dashboard/friends",
+            icon: UserPlus,
+          },
+        ],
+      },
+      {
+        title: "Eğitim",
+        items: [
+          {
+            name: "Kurslar",
+            href: "/education/courses",
+            icon: BookOpen,
+          },
+          {
+            name: "Testler",
+            href: "/education/test",
+            icon: PenSquare,
+          },
+          {
+            name: "Canlı Kodlama",
+            href: "/education/live-coding",
+            icon: Code,
+          },
+          {
+            name: "Bugfix",
+            href: "/education/bug-fix",
+            icon: Bug,
+          },
+          {
+            name: "Hedefler",
+            href: "/goals",
+            icon: Target,
+          },
+          {
+            name: "Gelişim ve Analiz",
+            href: "/education/analytics",
+            icon: BarChart3,
+          },
+        ],
+      },
+      {
+        title: "Kazanç",
+        items: [
+          {
+            name: "Hackaton",
+            href: "/education/hackaton",
+            icon: Trophy,
+          },
+          {
+            name: "Freelancer Partner",
+            href: "/freelancer/projects",
+            icon: Handshake,
+          },
+          {
+            name: "Derece Kazancı",
+            href: "/competition",
+            icon: Medal,
+          },
+          {
+            name: "Kazanç Analizi",
+            href: "/earnings",
+            icon: TrendingUp,
+          },
+          {
+            name: "En Çok Kazananlar",
+            href: "/earnings/leaderboard",
+            icon: DollarSign,
+          },
+        ],
+      },
+      {
+        title: "Kariyer",
+        items: [
+          {
+            name: "CV",
+            href: "/cv/my-cvs",
+            icon: FileText,
+          },
+          {
+            name: "Mülakat",
+            href: "/interview/practice",
+            icon: Video,
+          },
+          {
+            name: "İş İlanları",
+            href: "/jobs/browse",
+            icon: Briefcase,
+          },
+        ],
+      },
+    ];
 
-  if ((session.user as any)?.role === "employer") {
-    navigationGroups.push({
-      title: "İşveren",
-      items: [
-        {
-          name: "İşveren Paneli",
-          href: "/employer/jobs",
-          icon: Building2,
-        },
-      ],
-    });
-  }
+    if ((session.user as any)?.role === "employer") {
+      groups.push({
+        title: "İşveren",
+        items: [
+          {
+            name: "İşveren Paneli",
+            href: "/employer/jobs",
+            icon: Building2,
+          },
+        ],
+      });
+    }
 
-  if ((session.user as any)?.role === "admin") {
-    navigationGroups.push({
-      title: "Yönetim",
-      items: [
-        {
-          name: "Admin Paneli",
-          href: "/admin",
-          icon: LifeBuoy,
-        },
-      ],
-    });
-  }
+    if ((session.user as any)?.role === "admin") {
+      groups.push({
+        title: "Yönetim",
+        items: [
+          {
+            name: "Admin Paneli",
+            href: "/admin",
+            icon: LifeBuoy,
+          },
+        ],
+      });
+    }
+
+    return groups;
+  }, [session.user]);
 
   const isActiveLink = (href: string) => {
     if (!pathname) {
@@ -307,6 +314,42 @@ function DashboardLayoutContent({
     }
 
     return pathname.startsWith(`${href}/`);
+  };
+
+  // Find which group contains the active link
+  const activeGroup = useMemo(() => {
+    if (!pathname) return null;
+    
+    for (const group of navigationGroups) {
+      const hasActiveItem = group.items.some((item) => isActiveLink(item.href));
+      if (hasActiveItem) {
+        return group.title;
+      }
+    }
+    return null;
+  }, [pathname, navigationGroups]);
+
+  // Initialize expanded groups based on active pathname
+  useEffect(() => {
+    if (activeGroup) {
+      setExpandedGroups((prev) => {
+        const newSet = new Set(prev);
+        newSet.add(activeGroup);
+        return newSet;
+      });
+    }
+  }, [activeGroup]);
+
+  const toggleGroup = (groupTitle: string) => {
+    setExpandedGroups((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(groupTitle)) {
+        newSet.delete(groupTitle);
+      } else {
+        newSet.add(groupTitle);
+      }
+      return newSet;
+    });
   };
 
   return (
@@ -344,50 +387,69 @@ function DashboardLayoutContent({
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 px-4 py-6 space-y-6 overflow-y-auto">
-            {navigationGroups.map((group) => (
-              <div key={group.title} className="space-y-2">
-                <p className="px-4 text-xs font-semibold uppercase tracking-wider text-gray-400/80 dark:text-gray-500">
-                  {group.title}
-                </p>
-                <div className="space-y-2">
-                  {group.items.map((item) => {
-                    const Icon = item.icon;
-                    const isActive = isActiveLink(item.href);
-                    const badgeCount = unreadByHref[item.href] ?? 0;
-                    return (
-                      <Link
-                        key={item.name}
-                        href={item.href}
-                        className={`relative flex items-center gap-3 rounded-xl px-4 py-3 text-gray-700 transition-all duration-200 dark:text-gray-300 group min-w-0 ${
-                          isActive
-                            ? "bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-blue-600 dark:from-blue-500/20 dark:to-purple-500/20 dark:text-blue-400 font-semibold md:shadow-md md:shadow-blue-500/20"
-                            : "hover:bg-gray-100/50 dark:hover:bg-gray-700/50"
-                        }`}
-                        onClick={() => isMobile && setSidebarOpen(false)}
-                      >
-                        {isActive && (
-                          <span className="absolute left-0 top-1/2 h-8 w-1 -translate-y-1/2 rounded-r-full bg-gradient-to-b from-blue-500 to-purple-500 md:shadow-glow md:shadow-blue-500/50" />
-                        )}
-                        <Icon
-                          className={`h-5 w-5 flex-shrink-0 min-w-[20px] transition-all duration-200 ${
-                            isActive
-                              ? "text-blue-600 dark:text-blue-400 md:scale-110"
-                              : "group-hover:text-blue-600 dark:group-hover:text-blue-400 md:group-hover:scale-110"
-                          }`}
-                        />
-                        <span className="flex-1 font-medium truncate min-w-0">{item.name}</span>
-                        {badgeCount > 0 ? (
-                          <span className="ml-2 inline-flex min-w-[1.5rem] justify-center rounded-full bg-red-500 px-2 py-0.5 text-[10px] font-semibold text-white md:text-xs">
-                            {badgeCount > 99 ? "99+" : badgeCount}
-                          </span>
-                        ) : null}
-                      </Link>
-                    );
-                  })}
+          <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+            {navigationGroups.map((group) => {
+              const isExpanded = expandedGroups.has(group.title);
+              const hasActiveItem = group.items.some((item) => isActiveLink(item.href));
+              
+              return (
+                <div key={group.title} className="space-y-1">
+                  <button
+                    onClick={() => toggleGroup(group.title)}
+                    className={`w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all duration-200 ${
+                      hasActiveItem
+                        ? "text-blue-600 dark:text-blue-400 bg-blue-50/50 dark:bg-blue-900/20"
+                        : "text-gray-400/80 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-400 hover:bg-gray-100/50 dark:hover:bg-gray-700/50"
+                    }`}
+                  >
+                    <span>{group.title}</span>
+                    {isExpanded ? (
+                      <ChevronDown className="h-4 w-4 transition-transform duration-200" />
+                    ) : (
+                      <ChevronRight className="h-4 w-4 transition-transform duration-200" />
+                    )}
+                  </button>
+                  {isExpanded && (
+                    <div className="space-y-1 pl-2">
+                      {group.items.map((item) => {
+                        const Icon = item.icon;
+                        const isActive = isActiveLink(item.href);
+                        const badgeCount = unreadByHref[item.href] ?? 0;
+                        return (
+                          <Link
+                            key={item.name}
+                            href={item.href}
+                            className={`relative flex items-center gap-3 rounded-xl px-4 py-3 text-gray-700 transition-all duration-200 dark:text-gray-300 group min-w-0 ${
+                              isActive
+                                ? "bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-blue-600 dark:from-blue-500/20 dark:to-purple-500/20 dark:text-blue-400 font-semibold md:shadow-md md:shadow-blue-500/20"
+                                : "hover:bg-gray-100/50 dark:hover:bg-gray-700/50"
+                            }`}
+                            onClick={() => isMobile && setSidebarOpen(false)}
+                          >
+                            {isActive && (
+                              <span className="absolute left-0 top-1/2 h-8 w-1 -translate-y-1/2 rounded-r-full bg-gradient-to-b from-blue-500 to-purple-500 md:shadow-glow md:shadow-blue-500/50" />
+                            )}
+                            <Icon
+                              className={`h-5 w-5 flex-shrink-0 min-w-[20px] transition-all duration-200 ${
+                                isActive
+                                  ? "text-blue-600 dark:text-blue-400 md:scale-110"
+                                  : "group-hover:text-blue-600 dark:group-hover:text-blue-400 md:group-hover:scale-110"
+                              }`}
+                            />
+                            <span className="flex-1 font-medium truncate min-w-0">{item.name}</span>
+                            {badgeCount > 0 ? (
+                              <span className="ml-2 inline-flex min-w-[1.5rem] justify-center rounded-full bg-red-500 px-2 py-0.5 text-[10px] font-semibold text-white md:text-xs">
+                                {badgeCount > 99 ? "99+" : badgeCount}
+                              </span>
+                            ) : null}
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </nav>
 
           {/* User section */}

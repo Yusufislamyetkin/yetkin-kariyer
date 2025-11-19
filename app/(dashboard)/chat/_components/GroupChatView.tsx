@@ -8,7 +8,7 @@ import { formatDistance } from "date-fns";
 import { tr } from "date-fns/locale";
 
 import { Button } from "@/app/components/ui/Button";
-import { Users, Dot, FileText, Plus, Lock, Unlock, Copy, RefreshCw, Link2, UserPlus } from "lucide-react";
+import { Users, Dot, FileText, Plus, Lock, Unlock, Copy, RefreshCw, Link2, UserPlus, Search, X, Loader2 } from "lucide-react";
 import { useSignalRChat } from "@/hooks/useSignalRChat";
 import {
   cleanupPresenceState,
@@ -210,6 +210,14 @@ export function GroupChatView({ category }: GroupChatViewProps) {
   const [inviteLinkError, setInviteLinkError] = useState<string | null>(null);
   const [updatingInviteLink, setUpdatingInviteLink] = useState(false);
   const [inviteCodeCopied, setInviteCodeCopied] = useState(false);
+
+  // Search state
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState<ChatMessage[]>([]);
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchError, setSearchError] = useState<string | null>(null);
+  const [showSearchResults, setShowSearchResults] = useState(false);
+  const [searchNextCursor, setSearchNextCursor] = useState<string | null>(null);
 
   const canCreateGroup = category === "user";
 
@@ -524,6 +532,91 @@ export function GroupChatView({ category }: GroupChatViewProps) {
     },
     [currentUserId, markMessagesAsRead, scrollToBottom, updateGroupMeta]
   );
+
+  const searchMessages = useCallback(
+    async (groupId: string, query: string, cursor?: string | null) => {
+      if (!groupId || !query.trim()) {
+        setSearchResults([]);
+        setShowSearchResults(false);
+        return;
+      }
+
+      try {
+        setIsSearching(true);
+        setSearchError(null);
+
+        const searchParams = new URLSearchParams();
+        searchParams.set("q", query.trim());
+        if (cursor) searchParams.set("cursor", cursor);
+
+        const response = await fetch(
+          `/api/chat/groups/${groupId}/messages/search?${searchParams.toString()}`,
+          {
+            cache: "no-store",
+          }
+        );
+
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({}));
+          throw new Error(errorData.error || "Arama yapılamadı");
+        }
+
+        const data = await response.json();
+        const incoming: ChatMessage[] = Array.isArray(data.messages) ? data.messages : [];
+        const nextCursor = data.nextCursor ?? null;
+
+        setSearchResults((prev) => {
+          if (cursor) {
+            // Load more results
+            const combined = [...prev, ...incoming];
+            const unique = new Map<string, ChatMessage>();
+            combined.forEach((message) => {
+              unique.set(message.id, message);
+            });
+            return Array.from(unique.values()).sort(
+              (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+            );
+          } else {
+            // New search
+            return incoming.sort(
+              (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+            );
+          }
+        });
+
+        setSearchNextCursor(nextCursor);
+        setShowSearchResults(true);
+      } catch (err: any) {
+        console.error(err);
+        setSearchError(err.message ?? "Arama yapılırken hata oluştu");
+      } finally {
+        setIsSearching(false);
+      }
+    },
+    []
+  );
+
+  const handleSearch = useCallback(
+    (query: string) => {
+      if (!selectedGroupId || !isJoinedToSelectedGroup) return;
+      setSearchQuery(query);
+      if (query.trim()) {
+        searchMessages(selectedGroupId, query);
+      } else {
+        setSearchResults([]);
+        setShowSearchResults(false);
+      }
+    },
+    [selectedGroupId, isJoinedToSelectedGroup, searchMessages]
+  );
+
+  const clearSearch = useCallback(() => {
+    setSearchQuery("");
+    setSearchResults([]);
+    setShowSearchResults(false);
+    setSearchError(null);
+    setSearchNextCursor(null);
+  }, []);
 
   const handleSelectGroup = useCallback(
     (groupId: string) => {
@@ -1550,17 +1643,72 @@ export function GroupChatView({ category }: GroupChatViewProps) {
         presenceIndicator: "none" as const,
       };
     });
-  }, [sortedGroups]);
+  }, [sortedGroups, timeNow]);
 
   const conversationHeader = selectedGroup ? (
     <header
       className={cn(
-        "pl-14 md:pl-6 pr-6 py-4 border-b border-gray-200/70 dark:border-gray-800/60 flex flex-col gap-4 md:flex-row md:items-center md:justify-between",
+        "pl-14 md:pl-6 pr-6 py-4 border-b border-gray-200/70 dark:border-gray-800/60 flex flex-col gap-4",
         isJoinedToSelectedGroup ? "cursor-pointer" : "cursor-default"
       )}
-      onClick={() => (isJoinedToSelectedGroup ? setShowMemberPanel(true) : undefined)}
+      onClick={(e) => {
+        // Arama input'una tıklama header'ın onClick'ini tetiklemesin
+        if ((e.target as HTMLElement).closest('.search-container')) {
+          return;
+        }
+        if (isJoinedToSelectedGroup) {
+          setShowMemberPanel(true);
+        }
+      }}
     >
-      <div className="space-y-2">
+      {/* Search Bar - Mobil uyumlu */}
+      {isJoinedToSelectedGroup && (
+        <div className="search-container w-full">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400 dark:text-gray-500" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => handleSearch(e.target.value)}
+              placeholder="Mesajlarda ara..."
+              className="w-full pl-10 pr-10 py-2 rounded-xl border border-gray-200/70 dark:border-gray-700/60 bg-white/80 dark:bg-gray-900/60 text-sm text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all"
+              onClick={(e) => e.stopPropagation()}
+            />
+            {searchQuery && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  clearSearch();
+                }}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            )}
+          </div>
+          {isSearching && (
+            <div className="mt-2 text-xs text-gray-500 dark:text-gray-400 flex items-center gap-2">
+              <Loader2 className="h-3 w-3 animate-spin" />
+              <span>Aranıyor...</span>
+            </div>
+          )}
+          {searchError && (
+            <div className="mt-2 text-xs text-red-500 dark:text-red-400">{searchError}</div>
+          )}
+          {showSearchResults && searchResults.length > 0 && (
+            <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+              {searchResults.length} sonuç bulundu
+            </div>
+          )}
+          {showSearchResults && searchResults.length === 0 && !isSearching && searchQuery.trim() && (
+            <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+              Sonuç bulunamadı
+            </div>
+          )}
+        </div>
+      )}
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div className="space-y-2">
         <div className="flex items-center gap-3">
           <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-semibold shadow-sm">
             {selectedGroup.name
@@ -1616,6 +1764,7 @@ export function GroupChatView({ category }: GroupChatViewProps) {
             <span className="text-xs text-gray-400 dark:text-gray-500">Üyelere tıklayarak detaylara bakabilirsiniz.</span>
           ) : null}
         </div>
+      </div>
       </div>
       <div className="flex flex-col items-end gap-3 min-w-0">
         {isJoinedToSelectedGroup && activeMembers.length > 0 ? (
@@ -1791,6 +1940,46 @@ export function GroupChatView({ category }: GroupChatViewProps) {
           )}
         </div>
       </div>
+    </div>
+  ) : showSearchResults ? (
+    <div className="flex flex-col flex-1 overflow-hidden">
+      <div className="px-4 md:px-6 py-3 border-b border-gray-200/70 dark:border-gray-800/60 bg-white/50 dark:bg-gray-900/50">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Search className="h-4 w-4 text-gray-500 dark:text-gray-400" />
+            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              &quot;{searchQuery}&quot; için {searchResults.length} sonuç
+            </span>
+          </div>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={clearSearch}
+            className="text-xs"
+          >
+            Aramayı Kapat
+          </Button>
+        </div>
+      </div>
+      <MessageViewport
+        ref={messagesContainerRef}
+        messages={searchResults}
+        currentUserId={currentUserId}
+        hasMore={Boolean(searchNextCursor)}
+        loading={isSearching}
+        loadingMore={false}
+        onLoadMore={() => {
+          if (searchNextCursor && selectedGroupId) {
+            searchMessages(selectedGroupId, searchQuery, searchNextCursor);
+          }
+        }}
+        emptyState={{
+          icon: <Search className="h-10 w-10 text-blue-500" />,
+          title: "Sonuç bulunamadı",
+          description: `"${searchQuery}" için mesaj bulunamadı.`,
+        }}
+        endRef={messagesEndRef}
+      />
     </div>
   ) : (
     <MessageViewport

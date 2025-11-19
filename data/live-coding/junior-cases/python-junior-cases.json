@@ -1,0 +1,99 @@
+{
+  "language": "python",
+  "languageName": "Python",
+  "cases": [
+    {
+      "id": "python-junior-1",
+      "title": "Sayısal Çıktı Döngüsü",
+      "description": "1'den 50'ye kadar sayıları ekrana yazdırın.",
+      "taskDescription": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dünya 1', 'Selam Sana Dünya 2', ... 'Selam Sana Dünya 50'",
+      "level": "beginner",
+      "timeLimitMinutes": 30,
+      "acceptanceCriteria": [
+        "Kod derlenmeli ve hatasız çalışmalı",
+        "1'den 50'ye kadar tüm sayılar yazdırılmalı",
+        "Her satır 'Selam Sana Dünya X' formatında olmalı",
+        "Döngü kullanılmalı",
+        "Kod okunabilir ve temiz olmalı"
+      ]
+    },
+    {
+      "id": "python-junior-2",
+      "title": "Temel Matematik İşlemleri",
+      "description": "İki sayı üzerinde temel matematik işlemleri yapın.",
+      "taskDescription": "Kullanıcıdan iki sayı alın (a ve b) ve bu sayılar üzerinde toplama, çıkarma, çarpma ve bölme işlemlerini yaparak sonuçları ekrana yazdırın. Örnek: a=10, b=5 için '10 + 5 = 15', '10 - 5 = 5', '10 * 5 = 50', '10 / 5 = 2'",
+      "level": "beginner",
+      "timeLimitMinutes": 30,
+      "acceptanceCriteria": [
+        "Kod derlenmeli ve hatasız çalışmalı",
+        "Dört işlem (toplama, çıkarma, çarpma, bölme) yapılmalı",
+        "Sonuçlar ekrana yazdırılmalı",
+        "Bölme işleminde sıfıra bölme hatası kontrol edilmeli",
+        "Kod okunabilir ve temiz olmalı"
+      ]
+    },
+    {
+      "id": "python-junior-3",
+      "title": "String İşlemleri",
+      "description": "Metin üzerinde temel string işlemleri yapın.",
+      "taskDescription": "Bir string alın ve şu işlemleri yapın: 1) String'in uzunluğunu bulun, 2) String'i büyük harfe çevirin, 3) String'i küçük harfe çevirin, 4) String'in tersini alın, 5) String içinde belirli bir karakteri sayın. Tüm sonuçları ekrana yazdırın.",
+      "level": "beginner",
+      "timeLimitMinutes": 30,
+      "acceptanceCriteria": [
+        "Kod derlenmeli ve hatasız çalışmalı",
+        "String uzunluğu hesaplanmalı",
+        "Büyük/küçük harf dönüşümleri yapılmalı",
+        "String tersi alınmalı",
+        "Karakter sayımı yapılmalı",
+        "Tüm sonuçlar ekrana yazdırılmalı"
+      ]
+    },
+    {
+      "id": "python-junior-4",
+      "title": "Dizi İşlemleri",
+      "description": "Bir dizi oluşturun ve üzerinde temel işlemler yapın.",
+      "taskDescription": "5 elemanlı bir integer dizisi oluşturun ve şu işlemleri yapın: 1) Diziye değerler atayın, 2) Dizideki en büyük elemanı bulun, 3) Dizideki en küçük elemanı bulun, 4) Dizideki tüm elemanların toplamını hesaplayın, 5) Dizideki tüm elemanları ekrana yazdırın.",
+      "level": "beginner",
+      "timeLimitMinutes": 30,
+      "acceptanceCriteria": [
+        "Kod derlenmeli ve hatasız çalışmalı",
+        "5 elemanlı bir dizi oluşturulmalı",
+        "En büyük ve en küçük eleman bulunmalı",
+        "Elemanların toplamı hesaplanmalı",
+        "Tüm elemanlar ekrana yazdırılmalı",
+        "Dizi kullanılmalı"
+      ]
+    },
+    {
+      "id": "python-junior-5",
+      "title": "Koşullu İfadeler",
+      "description": "If-else yapıları ile basit kontrol akışı oluşturun.",
+      "taskDescription": "Kullanıcıdan bir sayı alın ve şu kontrolleri yapın: 1) Sayı 0'dan küçükse 'Negatif' yazdırın, 2) Sayı 0 ise 'Sıfır' yazdırın, 3) Sayı 0'dan büyükse 'Pozitif' yazdırın. Ayrıca sayı çift ise 'Çift', tek ise 'Tek' bilgisini de yazdırın.",
+      "level": "beginner",
+      "timeLimitMinutes": 30,
+      "acceptanceCriteria": [
+        "Kod derlenmeli ve hatasız çalışmalı",
+        "Sayının pozitif/negatif/sıfır kontrolü yapılmalı",
+        "Sayının çift/tek kontrolü yapılmalı",
+        "If-else yapıları kullanılmalı",
+        "Sonuçlar ekrana yazdırılmalı"
+      ]
+    },
+    {
+      "id": "python-junior-6",
+      "title": "Fonksiyon Oluşturma",
+      "description": "Basit bir fonksiyon yazın ve çağırın.",
+      "taskDescription": "İki sayıyı parametre olarak alan ve bu sayıların toplamını döndüren bir fonksiyon yazın. Fonksiyonun adı 'Topla' olsun. Main metodunda bu fonksiyonu 3 kez farklı sayılarla çağırın ve sonuçları ekrana yazdırın. Örnek: Topla(5, 3) = 8, Topla(10, 20) = 30, Topla(100, 200) = 300",
+      "level": "beginner",
+      "timeLimitMinutes": 30,
+      "acceptanceCriteria": [
+        "Kod derlenmeli ve hatasız çalışmalı",
+        "İki parametre alan bir fonksiyon oluşturulmalı",
+        "Fonksiyon toplamı döndürmeli",
+        "Fonksiyon en az 3 kez çağrılmalı",
+        "Sonuçlar ekrana yazdırılmalı",
+        "Fonksiyon yapısı doğru kullanılmalı"
+      ]
+    }
+  ]
+}

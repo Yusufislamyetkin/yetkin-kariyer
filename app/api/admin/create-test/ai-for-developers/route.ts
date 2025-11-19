@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { readFileSync } from "fs";
+import { join } from "path";
+import { TEST_MODULE_FILE_MAP } from "@/lib/admin/test-module-files";
 
 export async function POST() {
   try {
@@ -17,31 +20,38 @@ export async function POST() {
 
     const expertise = "Yapay Zeka";
     
-    // Find the related course to get modules (for reference, testler artık bağımsız)
-    const relatedCourse = await db.course.findFirst({
-      where: { expertise },
-      select: { content: true },
-    });
-
-    // Extract modules from related course for test content
-    let modules: any[] = [];
-    if (relatedCourse?.content) {
-      const content = relatedCourse.content as any;
-      if (Array.isArray(content?.modules)) {
-        modules = content.modules.map((module: any) => ({
-          ...module,
-          relatedTests: module.relatedTopics ? module.relatedTopics.map((topic: any) => ({
-            id: topic.href?.split('/').pop() || `test-${Date.now()}`,
-            title: topic.label || topic.title || "Test",
-            description: topic.description,
-            href: topic.href,
-          })) : [],
-        }));
-      }
-    }
-
     // Test artık bağımsız - courseId opsiyonel, content field'ında modül yapısı var
     const quizId = `test-ai-${Date.now()}`;
+    
+    // Read test modules from JSON file
+    let testContent: any = null;
+    try {
+      const fileName = TEST_MODULE_FILE_MAP[expertise] || TEST_MODULE_FILE_MAP["AI for Developers"] || "ai-for-developers-test-modules.json";
+      const jsonPath = join(process.cwd(), "data", "test-modules", fileName);
+      const jsonContent = readFileSync(jsonPath, "utf-8");
+      testContent = JSON.parse(jsonContent);
+    } catch (error: any) {
+      console.error("[CREATE_TEST_API] Error reading test modules JSON:", error);
+      return NextResponse.json(
+        {
+          success: false,
+          error: `Test modül JSON dosyası okunamadı: ${error.message}`,
+        },
+        { status: 500 }
+      );
+    }
+
+    if (!testContent || !Array.isArray(testContent.modules)) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Test modül JSON dosyası geçersiz veya modül bulunamadı",
+        },
+        { status: 500 }
+      );
+    }
+
+    const modules = testContent.modules;
     await db.quiz.upsert({
       where: { id: quizId },
       update: {
@@ -53,10 +63,11 @@ export async function POST() {
         questions: [],
         content: {
           modules: modules,
-          overview: {
+          overview: testContent.overview || {
             description: "Yapay Zeka teknolojisi için kapsamlı test paketi",
             estimatedDurationMinutes: null,
           },
+          learningObjectives: testContent.learningObjectives || [],
         },
         passingScore: 60,
         courseId: null,
@@ -72,10 +83,11 @@ export async function POST() {
         questions: [],
         content: {
           modules: modules,
-          overview: {
+          overview: testContent.overview || {
             description: "Yapay Zeka teknolojisi için kapsamlı test paketi",
             estimatedDurationMinutes: null,
           },
+          learningObjectives: testContent.learningObjectives || [],
         },
         passingScore: 60,
       },
@@ -83,9 +95,10 @@ export async function POST() {
 
     return NextResponse.json({
       success: true,
-      message: `Yapay Zeka test kategorisi başarıyla oluşturuldu. Test içeriği daha sonra eklenecek.`,
+      message: `Yapay Zeka test kategorisi başarıyla oluşturuldu. ${modules.length} modül eklendi.`,
       stats: {
         testsCreated: 1,
+        modulesCreated: modules.length,
       },
     });
   } catch (error: any) {

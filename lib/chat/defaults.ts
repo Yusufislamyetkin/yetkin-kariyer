@@ -12,35 +12,8 @@ type DefaultChatGroup = {
   inviteCode?: string | null;
 };
 
-const DEFAULT_CHAT_GROUPS: DefaultChatGroup[] = [
-  {
-    id: "chat_backend_dotnet",
-    name: "Backend .NET Core Yardımlaşma Grubu",
-    slug: "backend-dotnet",
-    expertise: ".NET Core",
-    description: "ASP.NET Core, Entity Framework ve modern backend pratikleri üzerine yardımlaşma alanı.",
-    visibility: "public",
-    allowLinkJoin: false,
-  },
-  {
-    id: "chat_frontend_react",
-    name: "Frontend React Yardımlaşma Grubu",
-    slug: "frontend-react",
-    expertise: "React",
-    description: "React, Next.js ve UI/UX geliştirme üzerine topluluk sohbeti.",
-    visibility: "public",
-    allowLinkJoin: false,
-  },
-  {
-    id: "chat_devops_cloud",
-    name: "DevOps & Cloud Topluluğu",
-    slug: "devops-cloud",
-    expertise: "DevOps",
-    description: "CI/CD, konteyner, Kubernetes ve bulut mimarileri için bilgi paylaşım grubu.",
-    visibility: "public",
-    allowLinkJoin: false,
-  },
-];
+// Eski yardımlaşma toplulukları kaldırıldı - artık kurs bazlı topluluklar kullanılıyor
+const DEFAULT_CHAT_GROUPS: DefaultChatGroup[] = [];
 
 const groupSelect: Prisma.ChatGroupSelect = {
   id: true,

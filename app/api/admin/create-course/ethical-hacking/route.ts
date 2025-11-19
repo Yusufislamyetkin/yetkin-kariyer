@@ -82,6 +82,7 @@ export async function POST() {
           description: courseContent.overview.description,
           category: "Security",
           field: "Cybersecurity",
+          expertise: "Ethical Hacking", // Test oluşturma API'si için gerekli
           difficulty: "intermediate",
           estimatedDuration: courseContent.overview.estimatedDurationMinutes,
           content: courseContent as any,
@@ -91,6 +92,7 @@ export async function POST() {
           description: courseContent.overview.description,
           category: "Security",
           field: "Cybersecurity",
+          expertise: "Ethical Hacking", // Test oluşturma API'si için gerekli
           difficulty: "intermediate",
           estimatedDuration: courseContent.overview.estimatedDurationMinutes,
           content: courseContent as any,

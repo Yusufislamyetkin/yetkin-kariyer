@@ -11,8 +11,8 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
 import { db } from "@/lib/db";
-import { normalizeLiveCodingPayload } from "@/lib/education/liveCoding";
-import type { LiveCodingLanguage } from "@/types/live-coding";
+import { normalizeLiveCodingPayload, getProgrammingLanguages, getLanguageQuizCounts } from "@/lib/education/liveCoding";
+import type { LiveCodingLanguage, ProgrammingLanguage } from "@/types/live-coding";
 
 export const dynamic = "force-dynamic";
 
@@ -48,7 +48,7 @@ const LANGUAGE_ORDER: LiveCodingLanguage[] = ["csharp", "javascript", "python", 
 
 async function getLiveCodingOverview() {
   try {
-    const [recentQuizzes, totalQuizzes] = await Promise.all([
+    const [recentQuizzes, totalQuizzes, allQuizzes] = await Promise.all([
       db.quiz.findMany({
         where: { type: "LIVE_CODING" },
         select: {
@@ -73,7 +73,17 @@ async function getLiveCodingOverview() {
       db.quiz.count({
         where: { type: "LIVE_CODING" },
       }),
+      db.quiz.findMany({
+        where: { type: "LIVE_CODING" },
+        select: {
+          questions: true,
+        },
+      }),
     ]);
+
+    // Programlama dillerini ve quiz sayılarını al
+    const programmingLanguages = getProgrammingLanguages();
+    const languageQuizCounts = getLanguageQuizCounts(allQuizzes);
 
     const cards: LiveCodingCardData[] = recentQuizzes.map((quiz: {
       id: string;
@@ -141,9 +151,22 @@ async function getLiveCodingOverview() {
       lastUpdated: cards[0]?.createdAt ?? null,
     };
 
-    return { cards, stats };
+    // Programlama dillerini quiz sayıları ile birleştir
+    const languagesWithCounts = programmingLanguages.map((lang) => ({
+      ...lang,
+      quizCount: languageQuizCounts.get(lang.id) || 0,
+    }));
+
+    return { cards, stats, programmingLanguages: languagesWithCounts };
   } catch (error) {
     console.error("[LIVE_CODING_PAGE] overview error", error);
+    // Error durumunda bile programlama dillerini göster
+    const programmingLanguages = getProgrammingLanguages();
+    const languagesWithCounts = programmingLanguages.map((lang) => ({
+      ...lang,
+      quizCount: 0,
+    }));
+    
     return {
       cards: [],
       stats: {
@@ -153,6 +176,7 @@ async function getLiveCodingOverview() {
         lastUpdated: null,
       },
       error: "Canlı kodlama verileri yüklenemedi. Lütfen daha sonra tekrar deneyin.",
+      programmingLanguages: languagesWithCounts,
     };
   }
 }
@@ -166,7 +190,7 @@ function formatDate(value: Date | null) {
 }
 
 export default async function LiveCodingPage() {
-  const { cards, stats, error } = await getLiveCodingOverview();
+  const { cards, stats, error, programmingLanguages } = await getLiveCodingOverview();
   const hasData = cards.length > 0;
 
   return (
@@ -266,6 +290,66 @@ export default async function LiveCodingPage() {
             </p>
           </CardContent>
         </Card>
+      </section>
+
+      <section className="space-y-4">
+        <div>
+          <h2 className="text-2xl font-display font-bold text-gray-900 dark:text-gray-100">
+            Programlama Dilleri
+          </h2>
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            Desteklenen programlama dillerini keşfedin ve ilgili kodlama odalarına katılın.
+          </p>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+          {programmingLanguages.map((language) => (
+            <Link
+              key={language.id}
+              href={`/education/live-coding/language/${language.id}`}
+              className="group"
+            >
+              <Card
+                variant="elevated"
+                className="relative h-full cursor-pointer border-2 border-transparent bg-white transition-all duration-300 hover:border-emerald-500/50 hover:shadow-lg dark:bg-gray-950 dark:hover:border-emerald-500/30"
+              >
+                <CardHeader className="pb-3">
+                  <div className="flex items-center justify-between">
+                    <div
+                      className="flex h-12 w-12 items-center justify-center rounded-xl text-2xl"
+                      style={{
+                        backgroundColor: `${language.color}15`,
+                        border: `2px solid ${language.color}30`,
+                      }}
+                    >
+                      {language.icon}
+                    </div>
+                    <ArrowUpRight className="h-5 w-5 text-gray-400 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-emerald-600 dark:text-gray-500 dark:group-hover:text-emerald-400" />
+                  </div>
+                  <CardTitle className="mt-3 text-lg text-gray-900 dark:text-gray-100">
+                    {language.name}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3 pt-0">
+                  <p className="line-clamp-2 text-sm text-gray-600 dark:text-gray-400">
+                    {language.description}
+                  </p>
+                  <div className="flex items-center justify-between rounded-lg bg-gray-50 px-3 py-2 dark:bg-gray-900/50">
+                    <span className="text-xs font-medium text-gray-700 dark:text-gray-300">
+                      Kodlama Odaları
+                    </span>
+                    <span
+                      className="text-sm font-bold"
+                      style={{ color: language.color }}
+                    >
+                      {language.quizCount}
+                    </span>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
+        </div>
       </section>
 
       {error && !hasData ? (

@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/app/components/ui/Button";
-import { Loader2, CheckCircle2, AlertCircle, BookOpen, Trash2, Code2, Database, Globe, Zap, Shield, Container, Lock, FileText } from "lucide-react";
+import { Loader2, CheckCircle2, AlertCircle, BookOpen, Trash2, Code2, Database, Globe, Zap, Shield, Container, Lock, FileText, Users, Trophy, Briefcase, MessageCircle, Building2 } from "lucide-react";
 
 interface CourseStatus {
   loading: boolean;
@@ -30,6 +30,17 @@ interface TestStatus {
   } | null;
 }
 
+interface ProfileStatus {
+  loading: boolean;
+  success: string | null;
+  error: string | null;
+  stats: {
+    totalCreated?: number;
+    maleCount?: number;
+    femaleCount?: number;
+  } | null;
+}
+
 export default function AdminPage() {
   const [courseState, setCourseState] = useState<CourseStatus>({
     loading: false,
@@ -44,7 +55,72 @@ export default function AdminPage() {
     error: null,
   });
 
+  const [clearTestsState, setClearTestsState] = useState<ClearStatus>({
+    loading: false,
+    success: null,
+    error: null,
+  });
+
   const [testState, setTestState] = useState<TestStatus>({
+    loading: false,
+    success: null,
+    error: null,
+    stats: null,
+  });
+
+  const [profileState, setProfileState] = useState<ProfileStatus>({
+    loading: false,
+    success: null,
+    error: null,
+    stats: null,
+  });
+
+  const [deleteProfileState, setDeleteProfileState] = useState<ClearStatus>({
+    loading: false,
+    success: null,
+    error: null,
+  });
+
+  const [assignProfilesState, setAssignProfilesState] = useState<CourseStatus>({
+    loading: false,
+    success: null,
+    error: null,
+    stats: null,
+  });
+
+  const [communityState, setCommunityState] = useState<CourseStatus>({
+    loading: false,
+    success: null,
+    error: null,
+    stats: null,
+  });
+
+  const [communityCount, setCommunityCount] = useState<number | null>(null);
+
+  const [hackathonSeedState, setHackathonSeedState] = useState<ClearStatus>({
+    loading: false,
+    success: null,
+    error: null,
+  });
+
+  const [freelancerSeedState, setFreelancerSeedState] = useState<ClearStatus>({
+    loading: false,
+    success: null,
+    error: null,
+  });
+
+  const [jobSeedState, setJobSeedState] = useState<ClearStatus>({
+    loading: false,
+    success: null,
+    error: null,
+  });
+
+  const [juniorCasesState, setJuniorCasesState] = useState<{
+    loading: boolean;
+    success: string | null;
+    error: string | null;
+    stats: { imported?: number; errors?: number } | null;
+  }>({
     loading: false,
     success: null,
     error: null,
@@ -483,6 +559,102 @@ export default function AdminPage() {
     }
   };
 
+  // Topluluk sayısını yükle
+  useEffect(() => {
+    const fetchCommunityCount = async () => {
+      try {
+        const response = await fetch("/api/admin/community-count");
+        if (response.ok) {
+          const data = await response.json();
+          setCommunityCount(data.count || 0);
+        }
+      } catch (error) {
+        console.error("Topluluk sayısı alınırken hata:", error);
+      }
+    };
+
+    fetchCommunityCount();
+  }, []);
+
+  const handleCreateCourseCommunities = async () => {
+    setCommunityState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/create-course-communities", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Yardımlaşma toplulukları oluşturulurken bir hata oluştu");
+      }
+
+      setCommunityState({
+        loading: false,
+        success: data.message || "Yardımlaşma toplulukları başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
+
+      // Topluluk sayısını güncelle
+      const countResponse = await fetch("/api/admin/community-count");
+      if (countResponse.ok) {
+        const countData = await countResponse.json();
+        setCommunityCount(countData.count || 0);
+      }
+    } catch (err: any) {
+      setCommunityState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
+    }
+  };
+
+  const handleAssignProfilesToCommunities = async () => {
+    setAssignProfilesState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/assign-profiles-to-communities", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Profiller topluluklara atanırken bir hata oluştu");
+      }
+
+      setAssignProfilesState({
+        loading: false,
+        success: data.message || "Profiller başarıyla topluluklara atandı",
+        error: null,
+        stats: data.stats || null,
+      });
+    } catch (err: any) {
+      setAssignProfilesState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
+    }
+  };
+
   const handleCreateDotNetTest = async () => {
     setTestState({
       loading: true,
@@ -735,6 +907,45 @@ export default function AdminPage() {
     }
   };
 
+  const handleImportJuniorCases = async () => {
+    setJuniorCasesState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/import-junior-cases", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Junior case'ler import edilirken bir hata oluştu");
+      }
+
+      setJuniorCasesState({
+        loading: false,
+        success: data.message || "Junior case'ler başarıyla import edildi",
+        error: null,
+        stats: {
+          imported: data.imported || 0,
+          errors: data.errors?.length || 0,
+        },
+      });
+    } catch (err: any) {
+      setJuniorCasesState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
+    }
+  };
+
   const handleCreateFlutterTest = async () => {
     setTestState({
       loading: true,
@@ -966,6 +1177,255 @@ export default function AdminPage() {
       });
     } catch (err: any) {
       setClearState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+      });
+    }
+  };
+
+  const handleClearAllTests = async () => {
+    if (
+      !confirm(
+        "TÜM test verilerini silmek istediğinizden emin misiniz? Bu işlem geri alınamaz!"
+      )
+    ) {
+      return;
+    }
+
+    if (clearTestsState.loading) {
+      return; // Prevent multiple simultaneous requests
+    }
+
+    setClearTestsState({
+      loading: true,
+      success: null,
+      error: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/clear-tests", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Testler temizlenirken bir hata oluştu");
+      }
+
+      setClearTestsState({
+        loading: false,
+        success: `${data.deletedCount || 0} test başarıyla silindi.`,
+        error: null,
+      });
+    } catch (err: any) {
+      setClearTestsState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+      });
+    }
+  };
+
+  const handleCreateProfiles = async () => {
+    if (
+      !confirm(
+        "Photos klasöründeki tüm fotoğraflar için profil hesapları oluşturulacak. Devam etmek istiyor musunuz?"
+      )
+    ) {
+      return;
+    }
+
+    if (profileState.loading) {
+      return;
+    }
+
+    setProfileState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/create-profiles", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Profil hesapları oluşturulurken bir hata oluştu");
+      }
+
+      setProfileState({
+        loading: false,
+        success: data.message || "Profil hesapları başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
+    } catch (err: any) {
+      setProfileState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
+    }
+  };
+
+  const handleDeleteProfiles = async () => {
+    if (
+      !confirm(
+        "TÜM oluşturulan profil hesaplarını silmek istediğinizden emin misiniz? Bu işlem geri alınamaz!"
+      )
+    ) {
+      return;
+    }
+
+    if (deleteProfileState.loading) {
+      return;
+    }
+
+    setDeleteProfileState({
+      loading: true,
+      success: null,
+      error: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/delete-profiles", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Profil hesapları silinirken bir hata oluştu");
+      }
+
+      setDeleteProfileState({
+        loading: false,
+        success: data.message || `${data.stats?.deletedCount || 0} profil hesabı başarıyla silindi.`,
+        error: null,
+      });
+    } catch (err: any) {
+      setDeleteProfileState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+      });
+    }
+  };
+
+  const handleSeedHackathons = async () => {
+    if (hackathonSeedState.loading) {
+      return; // Prevent multiple simultaneous requests
+    }
+
+    setHackathonSeedState({
+      loading: true,
+      success: null,
+      error: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/seed-hackathons", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Hackathonlar oluşturulurken bir hata oluştu");
+      }
+
+      setHackathonSeedState({
+        loading: false,
+        success: data.message || `${data.created || 0} adet hackathon başarıyla oluşturuldu`,
+        error: null,
+      });
+    } catch (err: any) {
+      setHackathonSeedState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+      });
+    }
+  };
+
+  const handleSeedFreelancerProjects = async () => {
+    if (freelancerSeedState.loading) {
+      return; // Prevent multiple simultaneous requests
+    }
+
+    setFreelancerSeedState({
+      loading: true,
+      success: null,
+      error: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/seed-freelancer-requests", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Freelancer projeleri oluşturulurken bir hata oluştu");
+      }
+
+      setFreelancerSeedState({
+        loading: false,
+        success: data.message || `${data.created || 0} adet freelancer projesi başarıyla oluşturuldu`,
+        error: null,
+      });
+    } catch (err: any) {
+      setFreelancerSeedState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+      });
+    }
+  };
+
+  const handleSeedJobs = async () => {
+    if (jobSeedState.loading) {
+      return; // Prevent multiple simultaneous requests
+    }
+
+    setJobSeedState({
+      loading: true,
+      success: null,
+      error: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/seed-jobs", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "İş ilanları oluşturulurken bir hata oluştu");
+      }
+
+      setJobSeedState({
+        loading: false,
+        success: data.message || `${data.created || 0} adet iş ilanı başarıyla oluşturuldu`,
+        error: null,
+      });
+    } catch (err: any) {
+      setJobSeedState({
         loading: false,
         success: null,
         error: err.message || "Bir hata oluştu",
@@ -1377,6 +1837,572 @@ export default function AdminPage() {
         </div>
       </div>
 
+      {/* Hackathon Seed Section */}
+      <div className="relative rounded-3xl border border-amber-200/50 bg-gradient-to-br from-white via-amber-50/30 to-orange-50/30 shadow-2xl dark:border-amber-800/50 dark:from-gray-950 dark:via-amber-950/20 dark:to-orange-950/20 backdrop-blur-sm p-6 md:p-8 overflow-hidden">
+        {/* Animated background pattern */}
+        <div className="absolute inset-0 opacity-5 dark:opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundSize: '60px 60px'
+          }}></div>
+        </div>
+        
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-2 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 shadow-lg">
+              <Trophy className="h-6 w-6 text-white" />
+            </div>
+            <div>
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 bg-clip-text text-transparent">
+                🏆 Hackathon Seed Oluşturma
+              </h2>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                Örnek hackathon verileri oluşturun
+              </p>
+            </div>
+          </div>
+          <p className="text-gray-600 dark:text-gray-400 mb-6 text-sm">
+            Geçmiş, devam eden ve gelecek hackathonlar için örnek veriler oluşturur. Toplam 9 hackathon oluşturulur (3 geçmiş, 3 devam eden, 3 gelecek).
+          </p>
+          
+          <div className="max-w-md">
+            <Button
+              onClick={handleSeedHackathons}
+              disabled={hackathonSeedState.loading}
+              size="lg"
+              className="w-full bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 hover:from-amber-700 hover:via-orange-700 hover:to-red-700 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              {hackathonSeedState.loading ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  Hackathonlar Oluşturuluyor...
+                </>
+              ) : (
+                <>
+                  <Trophy className="mr-2 h-5 w-5" />
+                  Seed Hackathon Oluştur
+                </>
+              )}
+            </Button>
+          </div>
+
+          {/* Success/Error Messages */}
+          {hackathonSeedState.success && (
+            <div className="mt-6 p-4 rounded-2xl border border-green-300/50 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/40 dark:to-emerald-950/40 dark:border-green-800/50 backdrop-blur-sm shadow-lg">
+              <div className="flex items-start gap-3 text-green-700 dark:text-green-300">
+                <div className="p-2 rounded-lg bg-green-500/20">
+                  <CheckCircle2 className="h-5 w-5 flex-shrink-0" />
+                </div>
+                <div className="text-sm font-semibold">{hackathonSeedState.success}</div>
+              </div>
+            </div>
+          )}
+          {hackathonSeedState.error && (
+            <div className="mt-6 p-4 rounded-2xl border border-red-300/50 bg-gradient-to-br from-red-50 to-rose-50 dark:from-red-950/40 dark:to-rose-950/40 dark:border-red-800/50 backdrop-blur-sm shadow-lg">
+              <div className="flex items-start gap-3 text-red-700 dark:text-red-300">
+                <div className="p-2 rounded-lg bg-red-500/20">
+                  <AlertCircle className="h-5 w-5 flex-shrink-0" />
+                </div>
+                <div className="text-sm font-semibold">{hackathonSeedState.error}</div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Jobs Seed Section */}
+      <div className="relative rounded-3xl border border-blue-200/50 bg-gradient-to-br from-white via-blue-50/30 to-cyan-50/30 shadow-2xl dark:border-blue-800/50 dark:from-gray-950 dark:via-blue-950/20 dark:to-cyan-950/20 backdrop-blur-sm p-6 md:p-8 overflow-hidden">
+        {/* Animated background pattern */}
+        <div className="absolute inset-0 opacity-5 dark:opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundSize: '60px 60px'
+          }}></div>
+        </div>
+        
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-2 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-600 shadow-lg">
+              <Building2 className="h-6 w-6 text-white" />
+            </div>
+            <div>
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 via-cyan-600 to-teal-600 bg-clip-text text-transparent">
+                🏢 İş İlanları Seed Oluşturma
+              </h2>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                Örnek iş ilanı verileri oluşturun
+              </p>
+            </div>
+          </div>
+          <p className="text-gray-600 dark:text-gray-400 mb-6 text-sm">
+            Farklı teknoloji stack&apos;leri ve pozisyonlar için detaylı iş ilanları oluşturur. Toplam 10 iş ilanı oluşturulur (son 1-7 gün içinde paylaşılmış, published durumunda).
+          </p>
+          
+          <div className="max-w-md">
+            <Button
+              onClick={handleSeedJobs}
+              disabled={jobSeedState.loading}
+              size="lg"
+              className="w-full bg-gradient-to-r from-blue-600 via-cyan-600 to-teal-600 hover:from-blue-700 hover:via-cyan-700 hover:to-teal-700 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              {jobSeedState.loading ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  İş İlanları Oluşturuluyor...
+                </>
+              ) : (
+                <>
+                  <Building2 className="mr-2 h-5 w-5" />
+                  Seed İş İlanları Oluştur
+                </>
+              )}
+            </Button>
+          </div>
+
+          {/* Success/Error Messages */}
+          {jobSeedState.success && (
+            <div className="mt-6 p-4 rounded-2xl border border-green-300/50 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/40 dark:to-emerald-950/40 dark:border-green-800/50 backdrop-blur-sm shadow-lg">
+              <div className="flex items-start gap-3 text-green-700 dark:text-green-300">
+                <div className="p-2 rounded-lg bg-green-500/20">
+                  <CheckCircle2 className="h-5 w-5 flex-shrink-0" />
+                </div>
+                <div className="text-sm font-semibold">{jobSeedState.success}</div>
+              </div>
+            </div>
+          )}
+          {jobSeedState.error && (
+            <div className="mt-6 p-4 rounded-2xl border border-red-300/50 bg-gradient-to-br from-red-50 to-rose-50 dark:from-red-950/40 dark:to-rose-950/40 dark:border-red-800/50 backdrop-blur-sm shadow-lg">
+              <div className="flex items-start gap-3 text-red-700 dark:text-red-300">
+                <div className="p-2 rounded-lg bg-red-500/20">
+                  <AlertCircle className="h-5 w-5 flex-shrink-0" />
+                </div>
+                <div className="text-sm font-semibold">{jobSeedState.error}</div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Freelancer Projects Seed Section */}
+      <div className="relative rounded-3xl border border-indigo-200/50 bg-gradient-to-br from-white via-indigo-50/30 to-purple-50/30 shadow-2xl dark:border-indigo-800/50 dark:from-gray-950 dark:via-indigo-950/20 dark:to-purple-950/20 backdrop-blur-sm p-6 md:p-8 overflow-hidden">
+        {/* Animated background pattern */}
+        <div className="absolute inset-0 opacity-5 dark:opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundSize: '60px 60px'
+          }}></div>
+        </div>
+        
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-2 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 shadow-lg">
+              <Briefcase className="h-6 w-6 text-white" />
+            </div>
+            <div>
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                💼 Freelancer Projeler Seed Oluşturma
+              </h2>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                Örnek freelancer proje verileri oluşturun
+              </p>
+            </div>
+          </div>
+          <p className="text-gray-600 dark:text-gray-400 mb-6 text-sm">
+            Farklı durumlarda (açık, devam eden, tamamlanmış, iptal edilmiş) freelancer projeleri ve teklifler için örnek veriler oluşturur. Toplam 13 proje oluşturulur (5 açık, 3 devam eden, 3 tamamlanmış, 2 iptal edilmiş).
+          </p>
+          
+          <div className="max-w-md">
+            <Button
+              onClick={handleSeedFreelancerProjects}
+              disabled={freelancerSeedState.loading}
+              size="lg"
+              className="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              {freelancerSeedState.loading ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  Projeler Oluşturuluyor...
+                </>
+              ) : (
+                <>
+                  <Briefcase className="mr-2 h-5 w-5" />
+                  Seed Freelancer Projeler Oluştur
+                </>
+              )}
+            </Button>
+          </div>
+
+          {/* Success/Error Messages */}
+          {freelancerSeedState.success && (
+            <div className="mt-6 p-4 rounded-2xl border border-green-300/50 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/40 dark:to-emerald-950/40 dark:border-green-800/50 backdrop-blur-sm shadow-lg">
+              <div className="flex items-start gap-3 text-green-700 dark:text-green-300">
+                <div className="p-2 rounded-lg bg-green-500/20">
+                  <CheckCircle2 className="h-5 w-5 flex-shrink-0" />
+                </div>
+                <div className="text-sm font-semibold">{freelancerSeedState.success}</div>
+              </div>
+            </div>
+          )}
+          {freelancerSeedState.error && (
+            <div className="mt-6 p-4 rounded-2xl border border-red-300/50 bg-gradient-to-br from-red-50 to-rose-50 dark:from-red-950/40 dark:to-rose-950/40 dark:border-red-800/50 backdrop-blur-sm shadow-lg">
+              <div className="flex items-start gap-3 text-red-700 dark:text-red-300">
+                <div className="p-2 rounded-lg bg-red-500/20">
+                  <AlertCircle className="h-5 w-5 flex-shrink-0" />
+                </div>
+                <div className="text-sm font-semibold">{freelancerSeedState.error}</div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Community Seed Section */}
+      <div className="relative rounded-3xl border border-blue-200/50 bg-gradient-to-br from-white via-blue-50/30 to-indigo-50/30 shadow-2xl dark:border-blue-800/50 dark:from-gray-950 dark:via-blue-950/20 dark:to-indigo-950/20 backdrop-blur-sm p-6 md:p-8 overflow-hidden">
+        {/* Animated background pattern */}
+        <div className="absolute inset-0 opacity-5 dark:opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundSize: '60px 60px'
+          }}></div>
+        </div>
+        
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-2 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg">
+              <MessageCircle className="h-6 w-6 text-white" />
+            </div>
+            <div>
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                💬 Yardımlaşma Toplulukları
+              </h2>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                {communityCount !== null ? (
+                  <>
+                    <span className="font-semibold text-blue-600 dark:text-blue-400">{communityCount}</span> / 12 topluluk mevcut
+                  </>
+                ) : (
+                  "12 adet kurs bazlı yardımlaşma topluluğu oluşturun"
+                )}
+              </p>
+            </div>
+          </div>
+          <p className="text-gray-600 dark:text-gray-400 mb-8 text-sm">
+            Her teknoloji için yardımlaşma toplulukları oluşturur. Toplam 12 topluluk oluşturulur (.NET Core, Java, MSSQL, React, Angular, Node.js, Yapay Zeka, Flutter, Ethical Hacking, Next.js, Docker & K8s, OWASP Security).
+          </p>
+          
+          <div className="max-w-md">
+            <Button
+              onClick={handleCreateCourseCommunities}
+              disabled={communityState.loading}
+              size="lg"
+              className="w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-medium"
+            >
+              {communityState.loading ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  Topluluklar Oluşturuluyor...
+                </>
+              ) : (
+                <>
+                  <MessageCircle className="mr-2 h-5 w-5" />
+                  12 Yardımlaşma Topluluğu Oluştur
+                </>
+              )}
+            </Button>
+          </div>
+
+          {/* Success/Error Messages */}
+          {communityState.success && (
+            <div className="mt-6 p-4 rounded-2xl border border-green-300/50 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/40 dark:to-emerald-950/40 dark:border-green-800/50 backdrop-blur-sm shadow-lg">
+              <div className="flex items-start gap-3 text-green-700 dark:text-green-300">
+                <div className="p-2 rounded-lg bg-green-500/20">
+                  <CheckCircle2 className="h-5 w-5 flex-shrink-0" />
+                </div>
+                <div className="flex-1">
+                  <div className="font-semibold text-base mb-2">{communityState.success}</div>
+                  {communityState.stats && (
+                    <div className="flex flex-wrap gap-4 text-sm opacity-90">
+                      <div className="flex items-center gap-1">
+                        <MessageCircle className="h-3 w-3" />
+                        <span>Oluşturulan: <strong>{(communityState.stats as any).created || 0}</strong></span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <MessageCircle className="h-3 w-3" />
+                        <span>Güncellenen: <strong>{(communityState.stats as any).updated || 0}</strong></span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <MessageCircle className="h-3 w-3" />
+                        <span>Toplam: <strong>{(communityState.stats as any).total || 0}</strong></span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+          {communityState.error && (
+            <div className="mt-6 p-4 rounded-2xl border border-red-300/50 bg-gradient-to-br from-red-50 to-rose-50 dark:from-red-950/40 dark:to-rose-950/40 dark:border-red-800/50 backdrop-blur-sm shadow-lg">
+              <div className="flex items-start gap-3 text-red-700 dark:text-red-300">
+                <div className="p-2 rounded-lg bg-red-500/20">
+                  <AlertCircle className="h-5 w-5 flex-shrink-0" />
+                </div>
+                <div className="text-sm font-semibold">{communityState.error}</div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Profile Accounts Management Section */}
+      <div className="relative rounded-3xl border border-green-200/50 bg-gradient-to-br from-white via-green-50/30 to-emerald-50/30 shadow-2xl dark:border-green-800/50 dark:from-gray-950 dark:via-green-950/20 dark:to-emerald-950/20 backdrop-blur-sm p-6 md:p-8 overflow-hidden">
+        {/* Animated background pattern */}
+        <div className="absolute inset-0 opacity-5 dark:opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundSize: '60px 60px'
+          }}></div>
+        </div>
+        
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-2 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 shadow-lg">
+              <Users className="h-6 w-6 text-white" />
+            </div>
+            <div>
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                👥 Profil Hesapları Yönetimi
+              </h2>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                Fotoğraflardan otomatik profil hesapları oluşturun
+              </p>
+            </div>
+          </div>
+          <p className="text-gray-600 dark:text-gray-400 mb-8 text-sm">
+            Photos klasöründeki kadın ve erkek fotoğrafları için Türk isimleriyle profil hesapları oluşturun. Her hesap için rastgele şifre ve email oluşturulur.
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl">
+            <div>
+              <Button
+                onClick={handleCreateProfiles}
+                disabled={profileState.loading}
+                size="lg"
+                className="w-full bg-gradient-to-r from-green-600 to-emerald-700 hover:from-green-700 hover:to-emerald-800 text-white font-medium"
+              >
+                {profileState.loading ? (
+                  <>
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    Oluşturuluyor...
+                  </>
+                ) : (
+                  <>
+                    <Users className="mr-2 h-5 w-5" />
+                    Profil Hesapları Oluştur
+                  </>
+                )}
+              </Button>
+              {profileState.success && (
+                <div className="mt-2 p-3 rounded-lg border border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-950/60">
+                  <div className="flex items-start gap-2 text-green-600 dark:text-green-300">
+                    <CheckCircle2 className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                    <div className="flex-1">
+                      <div className="text-sm font-medium mb-1">{profileState.success}</div>
+                      {profileState.stats && (
+                        <div className="flex flex-wrap gap-3 text-xs opacity-90">
+                          <span>Toplam: <strong>{profileState.stats.totalCreated}</strong></span>
+                          <span>Erkek: <strong>{profileState.stats.maleCount}</strong></span>
+                          <span>Kadın: <strong>{profileState.stats.femaleCount}</strong></span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
+              {profileState.error && (
+                <div className="mt-2 p-3 rounded-lg border border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/60">
+                  <div className="flex items-start gap-2 text-red-600 dark:text-red-300">
+                    <AlertCircle className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                    <div className="text-sm font-medium">{profileState.error}</div>
+                  </div>
+                </div>
+              )}
+            </div>
+            <div>
+              <Button
+                onClick={handleAssignProfilesToCommunities}
+                disabled={assignProfilesState.loading}
+                size="lg"
+                className="w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-medium"
+              >
+                {assignProfilesState.loading ? (
+                  <>
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    Atanıyor...
+                  </>
+                ) : (
+                  <>
+                    <MessageCircle className="mr-2 h-5 w-5" />
+                    Profilleri Topluluklara Üye Et
+                  </>
+                )}
+              </Button>
+              {assignProfilesState.success && (
+                <div className="mt-2 p-3 rounded-lg border border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-950/60">
+                  <div className="flex items-start gap-2 text-green-600 dark:text-green-300">
+                    <CheckCircle2 className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                    <div className="flex-1">
+                      <div className="text-sm font-medium mb-1">{assignProfilesState.success}</div>
+                      {assignProfilesState.stats && (
+                        <div className="flex flex-col gap-1 text-xs opacity-90">
+                          <span>Toplam Profil: <strong>{(assignProfilesState.stats as any).totalProfiles || 0}</strong></span>
+                          <span>Topluluk Sayısı: <strong>{(assignProfilesState.stats as any).totalCommunities || 0}</strong></span>
+                          <span>Eklenen Üye: <strong>{(assignProfilesState.stats as any).totalAdded || 0}</strong></span>
+                          <span>Topluluk Başına Min: <strong>{(assignProfilesState.stats as any).minPerCommunity || 0}</strong></span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
+              {assignProfilesState.error && (
+                <div className="mt-2 p-3 rounded-lg border border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/60">
+                  <div className="flex items-start gap-2 text-red-600 dark:text-red-300">
+                    <AlertCircle className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                    <div className="text-sm font-medium">{assignProfilesState.error}</div>
+                  </div>
+                </div>
+              )}
+            </div>
+            <div>
+              <Button
+                onClick={handleDeleteProfiles}
+                disabled={deleteProfileState.loading}
+                size="lg"
+                variant="danger"
+                className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-medium"
+              >
+                {deleteProfileState.loading ? (
+                  <>
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    Siliniyor...
+                  </>
+                ) : (
+                  <>
+                    <Trash2 className="mr-2 h-5 w-5" />
+                    Profil Hesaplarını Temizle
+                  </>
+                )}
+              </Button>
+              {deleteProfileState.success && (
+                <div className="mt-2 p-3 rounded-lg border border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-950/60">
+                  <div className="flex items-start gap-2 text-green-600 dark:text-green-300">
+                    <CheckCircle2 className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                    <div className="text-sm font-medium">{deleteProfileState.success}</div>
+                  </div>
+                </div>
+              )}
+              {deleteProfileState.error && (
+                <div className="mt-2 p-3 rounded-lg border border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/60">
+                  <div className="flex items-start gap-2 text-red-600 dark:text-red-300">
+                    <AlertCircle className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                    <div className="text-sm font-medium">{deleteProfileState.error}</div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Junior Cases Import Section */}
+      <div className="relative rounded-3xl border border-cyan-200/50 bg-gradient-to-br from-white via-cyan-50/30 to-blue-50/30 shadow-2xl dark:border-cyan-800/50 dark:from-gray-950 dark:via-cyan-950/20 dark:to-blue-950/20 backdrop-blur-sm p-6 md:p-8 overflow-hidden">
+        {/* Animated background pattern */}
+        <div className="absolute inset-0 opacity-5 dark:opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundSize: '60px 60px'
+          }}></div>
+        </div>
+        
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-2 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 shadow-lg">
+              <Code2 className="h-6 w-6 text-white" />
+            </div>
+            <div>
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                 🎯 Junior Seviye Canlı Kodlama Case&apos;leri
+               </h2>
+               <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                 15 programlama dili için 90 junior seviye case import edin
+               </p>
+             </div>
+           </div>
+           <p className="text-gray-600 dark:text-gray-400 mb-8 text-sm">
+             15 farklı programlama dili (C#, Java, Python, JavaScript, TypeScript, Go, Rust, C++, Kotlin, Swift, PHP, Ruby, Scala, Dart, R) için her birinde 6&apos;şar junior seviye canlı kodlama case&apos;i veritabanına ekler. Toplam 90 case oluşturulur.
+          </p>
+          
+          <div className="max-w-md">
+            <Button
+              onClick={handleImportJuniorCases}
+              disabled={juniorCasesState.loading}
+              size="lg"
+              className="w-full bg-gradient-to-r from-cyan-600 to-blue-700 hover:from-cyan-700 hover:to-blue-800 text-white font-medium"
+            >
+              {juniorCasesState.loading ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                   Case&apos;ler Import Ediliyor...
+                 </>
+               ) : (
+                 <>
+                   <Code2 className="mr-2 h-5 w-5" />
+                   90 Junior Case Import Et
+                 </>
+               )}
+             </Button>
+           </div>
+
+           {/* Success/Error Messages */}
+           {juniorCasesState.success && (
+             <div className="mt-6 p-4 rounded-2xl border border-green-300/50 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/40 dark:to-emerald-950/40 dark:border-green-800/50 backdrop-blur-sm shadow-lg">
+               <div className="flex items-start gap-3 text-green-700 dark:text-green-300">
+                 <div className="p-2 rounded-lg bg-green-500/20">
+                   <CheckCircle2 className="h-5 w-5 flex-shrink-0" />
+                 </div>
+                 <div className="flex-1">
+                   <div className="font-semibold text-base mb-2">{juniorCasesState.success}</div>
+                   {juniorCasesState.stats && (
+                     <div className="flex flex-wrap gap-4 text-sm opacity-90">
+                       <div className="flex items-center gap-1">
+                         <Code2 className="h-3 w-3" />
+                         <span>Import Edilen: <strong>{juniorCasesState.stats.imported}</strong></span>
+                       </div>
+                       {juniorCasesState.stats.errors && juniorCasesState.stats.errors > 0 && (
+                         <div className="flex items-center gap-1">
+                           <AlertCircle className="h-3 w-3" />
+                           <span>Hata: <strong>{juniorCasesState.stats.errors}</strong></span>
+                         </div>
+                       )}
+                     </div>
+                   )}
+                 </div>
+               </div>
+             </div>
+           )}
+           {juniorCasesState.error && (
+             <div className="mt-6 p-4 rounded-2xl border border-red-300/50 bg-gradient-to-br from-red-50 to-rose-50 dark:from-red-950/40 dark:to-rose-950/40 dark:border-red-800/50 backdrop-blur-sm shadow-lg">
+               <div className="flex items-start gap-3 text-red-700 dark:text-red-300">
+                 <div className="p-2 rounded-lg bg-red-500/20">
+                   <AlertCircle className="h-5 w-5 flex-shrink-0" />
+                 </div>
+                 <div className="text-sm font-semibold">{juniorCasesState.error}</div>
+               </div>
+             </div>
+           )}
+         </div>
+       </div>
+
       {/* Clear All Course Data Section */}
       <div className="rounded-3xl border border-red-200 bg-white shadow-lg dark:border-red-800 dark:bg-gray-950 p-6 md:p-8">
         <div className="flex items-center gap-3 mb-6">
@@ -1388,42 +2414,81 @@ export default function AdminPage() {
         <p className="text-gray-600 dark:text-gray-400 mb-6">
           Tüm kurs, modül ve ders içeriklerini veritabanından siler. Bu işlem geri alınamaz!
         </p>
-        <div className="max-w-md">
-          <Button
-            onClick={handleClearAllCourseData}
-            disabled={clearState.loading}
-            size="lg"
-            variant="danger"
-            className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-medium"
-          >
-            {clearState.loading ? (
-              <>
-                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                Temizleniyor...
-              </>
-            ) : (
-              <>
-                <Trash2 className="mr-2 h-5 w-5" />
-                Tüm Kurs Verilerini Temizle
-              </>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl">
+          <div>
+            <Button
+              onClick={handleClearAllCourseData}
+              disabled={clearState.loading}
+              size="lg"
+              variant="danger"
+              className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-medium"
+            >
+              {clearState.loading ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  Temizleniyor...
+                </>
+              ) : (
+                <>
+                  <Trash2 className="mr-2 h-5 w-5" />
+                  Tüm Kurs Verilerini Temizle
+                </>
+              )}
+            </Button>
+            {clearState.success && (
+              <div className="mt-2 p-3 rounded-lg border border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-950/60">
+                <div className="flex items-start gap-2 text-green-600 dark:text-green-300">
+                  <CheckCircle2 className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                  <div className="text-sm font-medium">{clearState.success}</div>
+                </div>
+              </div>
             )}
-          </Button>
-          {clearState.success && (
-            <div className="mt-2 p-3 rounded-lg border border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-950/60">
-              <div className="flex items-start gap-2 text-green-600 dark:text-green-300">
-                <CheckCircle2 className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                <div className="text-sm font-medium">{clearState.success}</div>
+            {clearState.error && (
+              <div className="mt-2 p-3 rounded-lg border border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/60">
+                <div className="flex items-start gap-2 text-red-600 dark:text-red-300">
+                  <AlertCircle className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                  <div className="text-sm font-medium">{clearState.error}</div>
+                </div>
               </div>
-            </div>
-          )}
-          {clearState.error && (
-            <div className="mt-2 p-3 rounded-lg border border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/60">
-              <div className="flex items-start gap-2 text-red-600 dark:text-red-300">
-                <AlertCircle className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                <div className="text-sm font-medium">{clearState.error}</div>
+            )}
+          </div>
+          <div>
+            <Button
+              onClick={handleClearAllTests}
+              disabled={clearTestsState.loading}
+              size="lg"
+              variant="danger"
+              className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-medium"
+            >
+              {clearTestsState.loading ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  Temizleniyor...
+                </>
+              ) : (
+                <>
+                  <Trash2 className="mr-2 h-5 w-5" />
+                  Tüm Test Verilerini Temizle
+                </>
+              )}
+            </Button>
+            {clearTestsState.success && (
+              <div className="mt-2 p-3 rounded-lg border border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-950/60">
+                <div className="flex items-start gap-2 text-green-600 dark:text-green-300">
+                  <CheckCircle2 className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                  <div className="text-sm font-medium">{clearTestsState.success}</div>
+                </div>
               </div>
-            </div>
-          )}
+            )}
+            {clearTestsState.error && (
+              <div className="mt-2 p-3 rounded-lg border border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/60">
+                <div className="flex items-start gap-2 text-red-600 dark:text-red-300">
+                  <AlertCircle className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                  <div className="text-sm font-medium">{clearTestsState.error}</div>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
