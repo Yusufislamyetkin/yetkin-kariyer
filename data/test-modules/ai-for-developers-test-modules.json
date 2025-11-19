@@ -1,0 +1,1578 @@
+{
+  "overview": {
+    "description": "Yazılımcılar için kapsamlı bir yapay zeka kursu. Makine öğrenmesi temellerinden derin öğrenmeye, NLP'den görüntü işlemeye kadar modern AI teknolojilerini öğreneceksiniz. Python, TensorFlow, PyTorch gibi araçlarla pratik projeler geliştirerek gerçek dünya uygulamaları oluşturacaksınız.",
+    "estimatedDurationMinutes": 6750
+  },
+  "learningObjectives": [
+    "Yapay zeka ve makine öğrenmesi temel kavramlarını anlamak",
+    "Python ile veri işleme ve analiz yapabilmek",
+    "Makine öğrenmesi algoritmalarını uygulayabilmek",
+    "Derin öğrenme ve neural network'leri anlamak",
+    "Doğal dil işleme (NLP) tekniklerini kullanabilmek",
+    "Görüntü işleme ve computer vision uygulamaları geliştirmek",
+    "TensorFlow ve PyTorch ile model geliştirmek",
+    "Production ortamında ML modelleri deploy edebilmek"
+  ],
+  "modules": [
+    {
+      "id": "module-01",
+      "title": "Module 1: Yapay Zeka ve Makine Öğrenmesi Temelleri Testi",
+      "summary": "Yapay zeka, makine öğrenmesi ve derin öğrenme kavramlarına giriş. AI'ın tarihçesi, kullanım alanları ve temel terminoloji.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Yapay zeka, makine öğrenmesi ve derin öğrenme arasındaki farkları anlamak",
+        "AI'ın tarihsel gelişimini öğrenmek",
+        "Makine öğrenmesi türlerini (supervised, unsupervised, reinforcement) kavramak",
+        "AI uygulama alanlarını keşfetmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Yapay Zeka Nedir?",
+          "description": "Yapay zeka kavramı, tanımı ve genel bakış",
+          "href": "/education/lessons/ai-for-developers/module-01/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Makine Öğrenmesi vs Derin Öğrenme",
+          "description": "ML ve DL arasındaki farklar ve ilişkiler",
+          "href": "/education/lessons/ai-for-developers/module-01/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: AI'ın Tarihçesi ve Gelişimi",
+          "description": "Yapay zekanın geçmişi ve geleceği",
+          "href": "/education/lessons/ai-for-developers/module-01/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Supervised Learning (Denetimli Öğrenme)",
+          "description": "Etiketli verilerle öğrenme yöntemleri",
+          "href": "/education/lessons/ai-for-developers/module-01/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Unsupervised Learning (Denetimsiz Öğrenme)",
+          "description": "Etiketsiz verilerden öğrenme teknikleri",
+          "href": "/education/lessons/ai-for-developers/module-01/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Reinforcement Learning (Pekiştirmeli Öğrenme)",
+          "description": "Ödül-ceza sistemi ile öğrenme",
+          "href": "/education/lessons/ai-for-developers/module-01/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: AI Uygulama Alanları",
+          "description": "Sağlık, finans, otonom araçlar gibi kullanım alanları",
+          "href": "/education/lessons/ai-for-developers/module-01/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: AI Ekosistemi ve Araçlar",
+          "description": "Python, TensorFlow, PyTorch gibi popüler araçlar",
+          "href": "/education/lessons/ai-for-developers/module-01/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Veri Bilimi ve AI İlişkisi",
+          "description": "Data science ve AI arasındaki bağlantı",
+          "href": "/education/lessons/ai-for-developers/module-01/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: AI Ethics ve Sorumlu AI",
+          "description": "Etik sorunlar ve sorumlu AI geliştirme",
+          "href": "/education/lessons/ai-for-developers/module-01/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: AI'ın Geleceği ve Trendler",
+          "description": "Yeni teknolojiler ve gelecek beklentileri",
+          "href": "/education/lessons/ai-for-developers/module-01/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: AI vs İnsan Zekası",
+          "description": "AI'ın sınırları ve insan zekası karşılaştırması",
+          "href": "/education/lessons/ai-for-developers/module-01/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: AI Projeleri için Gereksinimler",
+          "description": "AI projesi başlatmak için gerekli bilgiler",
+          "href": "/education/lessons/ai-for-developers/module-01/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: AI Topluluğu ve Kaynaklar",
+          "description": "Öğrenme kaynakları ve topluluk desteği",
+          "href": "/education/lessons/ai-for-developers/module-01/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Değerlendirme",
+          "description": "Öğrenilenlerin özeti ve değerlendirme",
+          "href": "/education/lessons/ai-for-developers/module-01/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-02",
+      "title": "Module 2: Python ile Veri İşleme Testi",
+      "summary": "Python programlama dili ile veri manipülasyonu, NumPy, Pandas kütüphaneleri ve veri görselleştirme teknikleri.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Python ile veri işleme temellerini öğrenmek",
+        "NumPy ile sayısal hesaplamalar yapmak",
+        "Pandas ile veri analizi yapmak",
+        "Matplotlib ve Seaborn ile veri görselleştirme"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Python Temelleri ve Veri Tipleri",
+          "description": "Python syntax ve veri yapıları",
+          "href": "/education/lessons/ai-for-developers/module-02/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: NumPy Giriş",
+          "description": "NumPy array'leri ve temel işlemler",
+          "href": "/education/lessons/ai-for-developers/module-02/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: NumPy İleri Seviye",
+          "description": "Broadcasting, slicing, advanced operations",
+          "href": "/education/lessons/ai-for-developers/module-02/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Pandas DataFrame",
+          "description": "DataFrame oluşturma ve temel işlemler",
+          "href": "/education/lessons/ai-for-developers/module-02/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Pandas Veri Manipülasyonu",
+          "description": "Filtreleme, gruplama, birleştirme işlemleri",
+          "href": "/education/lessons/ai-for-developers/module-02/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Veri Temizleme",
+          "description": "Eksik veri, outlier, duplicate handling",
+          "href": "/education/lessons/ai-for-developers/module-02/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Matplotlib ile Görselleştirme",
+          "description": "Grafik çizme ve görselleştirme",
+          "href": "/education/lessons/ai-for-developers/module-02/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Seaborn ile İstatistiksel Görselleştirme",
+          "description": "İstatistiksel grafikler ve heatmap'ler",
+          "href": "/education/lessons/ai-for-developers/module-02/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Veri İçe/Dışa Aktarma",
+          "description": "CSV, JSON, Excel dosya işlemleri",
+          "href": "/education/lessons/ai-for-developers/module-02/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Zaman Serisi Verileri",
+          "description": "Tarih/saat verileri ile çalışma",
+          "href": "/education/lessons/ai-for-developers/module-02/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Veri Dönüştürme",
+          "description": "Encoding, scaling, normalization",
+          "href": "/education/lessons/ai-for-developers/module-02/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Veri Agregasyonu",
+          "description": "Groupby, pivot, crosstab işlemleri",
+          "href": "/education/lessons/ai-for-developers/module-02/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Büyük Veri Setleri ile Çalışma",
+          "description": "Memory optimization ve chunk processing",
+          "href": "/education/lessons/ai-for-developers/module-02/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Veri Profilleme",
+          "description": "Veri kalitesi analizi ve profiling",
+          "href": "/education/lessons/ai-for-developers/module-02/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Pratik Veri Analizi Projesi",
+          "description": "Gerçek veri seti ile uygulama",
+          "href": "/education/lessons/ai-for-developers/module-02/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-03",
+      "title": "Module 3: Makine Öğrenmesi Algoritmaları Testi",
+      "summary": "Temel ML algoritmaları: linear regression, logistic regression, decision trees, random forest, SVM ve clustering algoritmaları.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Supervised learning algoritmalarını öğrenmek",
+        "Classification ve regression problemlerini çözmek",
+        "Model eğitimi ve değerlendirme yapmak",
+        "Unsupervised learning tekniklerini uygulamak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Linear Regression",
+          "description": "Doğrusal regresyon modeli ve uygulaması",
+          "href": "/education/lessons/ai-for-developers/module-03/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Multiple Linear Regression",
+          "description": "Çoklu değişkenli regresyon",
+          "href": "/education/lessons/ai-for-developers/module-03/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Logistic Regression",
+          "description": "Sınıflandırma için lojistik regresyon",
+          "href": "/education/lessons/ai-for-developers/module-03/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Decision Trees",
+          "description": "Karar ağaçları algoritması",
+          "href": "/education/lessons/ai-for-developers/module-03/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Random Forest",
+          "description": "Ensemble learning ve random forest",
+          "href": "/education/lessons/ai-for-developers/module-03/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Support Vector Machines (SVM)",
+          "description": "SVM algoritması ve kernel trick",
+          "href": "/education/lessons/ai-for-developers/module-03/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: K-Nearest Neighbors (KNN)",
+          "description": "KNN algoritması ve kullanımı",
+          "href": "/education/lessons/ai-for-developers/module-03/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Naive Bayes",
+          "description": "Naive Bayes sınıflandırıcısı",
+          "href": "/education/lessons/ai-for-developers/module-03/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: K-Means Clustering",
+          "description": "K-means kümeleme algoritması",
+          "href": "/education/lessons/ai-for-developers/module-03/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Hierarchical Clustering",
+          "description": "Hiyerarşik kümeleme yöntemleri",
+          "href": "/education/lessons/ai-for-developers/module-03/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: DBSCAN Clustering",
+          "description": "Yoğunluk tabanlı kümeleme",
+          "href": "/education/lessons/ai-for-developers/module-03/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Model Değerlendirme Metrikleri",
+          "description": "Accuracy, precision, recall, F1-score",
+          "href": "/education/lessons/ai-for-developers/module-03/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Cross-Validation",
+          "description": "K-fold cross validation teknikleri",
+          "href": "/education/lessons/ai-for-developers/module-03/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Hyperparameter Tuning",
+          "description": "Grid search ve random search",
+          "href": "/education/lessons/ai-for-developers/module-03/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Scikit-learn ile Pratik Uygulama",
+          "description": "Gerçek veri seti ile model eğitimi",
+          "href": "/education/lessons/ai-for-developers/module-03/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-04",
+      "title": "Module 4: Derin Öğrenme ve Neural Networks Testi",
+      "summary": "Neural network'lerin temelleri, perceptron, backpropagation, activation functions ve derin öğrenme mimarileri.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Neural network'lerin nasıl çalıştığını anlamak",
+        "Perceptron ve multi-layer perceptron yapısını öğrenmek",
+        "Backpropagation algoritmasını kavramak",
+        "Derin öğrenme mimarilerini tanımak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Neural Network Temelleri",
+          "description": "Yapay sinir ağlarına giriş",
+          "href": "/education/lessons/ai-for-developers/module-04/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Perceptron Modeli",
+          "description": "İlk yapay nöron modeli",
+          "href": "/education/lessons/ai-for-developers/module-04/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Multi-Layer Perceptron (MLP)",
+          "description": "Çok katmanlı sinir ağları",
+          "href": "/education/lessons/ai-for-developers/module-04/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Activation Functions",
+          "description": "ReLU, sigmoid, tanh aktivasyon fonksiyonları",
+          "href": "/education/lessons/ai-for-developers/module-04/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Forward Propagation",
+          "description": "İleri yayılım algoritması",
+          "href": "/education/lessons/ai-for-developers/module-04/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Backpropagation Algoritması",
+          "description": "Geri yayılım ile öğrenme",
+          "href": "/education/lessons/ai-for-developers/module-04/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Loss Functions",
+          "description": "MSE, cross-entropy gibi loss fonksiyonları",
+          "href": "/education/lessons/ai-for-developers/module-04/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Gradient Descent",
+          "description": "Gradyan iniş optimizasyonu",
+          "href": "/education/lessons/ai-for-developers/module-04/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Optimizers (Adam, RMSprop)",
+          "description": "Gelişmiş optimizasyon algoritmaları",
+          "href": "/education/lessons/ai-for-developers/module-04/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Overfitting ve Regularization",
+          "description": "Aşırı öğrenme ve önleme teknikleri",
+          "href": "/education/lessons/ai-for-developers/module-04/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Dropout ve Batch Normalization",
+          "description": "Regularization teknikleri",
+          "href": "/education/lessons/ai-for-developers/module-04/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Convolutional Neural Networks (CNN) Giriş",
+          "description": "CNN mimarisine giriş",
+          "href": "/education/lessons/ai-for-developers/module-04/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Recurrent Neural Networks (RNN) Giriş",
+          "description": "RNN ve sequence modeling",
+          "href": "/education/lessons/ai-for-developers/module-04/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Neural Network Tasarım Prensipleri",
+          "description": "Mimari tasarım best practices",
+          "href": "/education/lessons/ai-for-developers/module-04/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: İlk Neural Network Projesi",
+          "description": "Pratik uygulama ve proje",
+          "href": "/education/lessons/ai-for-developers/module-04/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-05",
+      "title": "Module 5: Doğal Dil İşleme (NLP) Testi",
+      "summary": "NLP temelleri, metin ön işleme, tokenization, word embeddings, sentiment analysis ve metin sınıflandırma.",
+      "durationMinutes": 450,
+      "objectives": [
+        "NLP temel kavramlarını öğrenmek",
+        "Metin ön işleme tekniklerini uygulamak",
+        "Word embeddings ve vector representations kullanmak",
+        "NLP uygulamaları geliştirmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: NLP Nedir?",
+          "description": "Doğal dil işlemeye giriş",
+          "href": "/education/lessons/ai-for-developers/module-05/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Metin Ön İşleme",
+          "description": "Tokenization, stemming, lemmatization",
+          "href": "/education/lessons/ai-for-developers/module-05/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Stop Words ve Text Cleaning",
+          "description": "Metin temizleme teknikleri",
+          "href": "/education/lessons/ai-for-developers/module-05/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Bag of Words",
+          "description": "BoW modeli ve TF-IDF",
+          "href": "/education/lessons/ai-for-developers/module-05/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Word Embeddings (Word2Vec)",
+          "description": "Word2Vec ve word embeddings",
+          "href": "/education/lessons/ai-for-developers/module-05/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: GloVe Embeddings",
+          "description": "Global Vectors for Word Representation",
+          "href": "/education/lessons/ai-for-developers/module-05/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Sentiment Analysis",
+          "description": "Duygu analizi uygulamaları",
+          "href": "/education/lessons/ai-for-developers/module-05/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Text Classification",
+          "description": "Metin sınıflandırma teknikleri",
+          "href": "/education/lessons/ai-for-developers/module-05/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Named Entity Recognition (NER)",
+          "description": "Varlık isimlendirme tanıma",
+          "href": "/education/lessons/ai-for-developers/module-05/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Part-of-Speech Tagging",
+          "description": "Kelime türü etiketleme",
+          "href": "/education/lessons/ai-for-developers/module-05/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Language Models",
+          "description": "Dil modelleri ve n-gram'lar",
+          "href": "/education/lessons/ai-for-developers/module-05/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Sequence-to-Sequence Models",
+          "description": "Seq2seq mimarileri",
+          "href": "/education/lessons/ai-for-developers/module-05/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Attention Mechanism",
+          "description": "Attention mekanizması",
+          "href": "/education/lessons/ai-for-developers/module-05/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Transformers Giriş",
+          "description": "Transformer mimarisi",
+          "href": "/education/lessons/ai-for-developers/module-05/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: NLP Projesi: Chatbot",
+          "description": "Pratik chatbot uygulaması",
+          "href": "/education/lessons/ai-for-developers/module-05/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-06",
+      "title": "Module 6: Görüntü İşleme ve Computer Vision Testi",
+      "summary": "Computer vision temelleri, görüntü ön işleme, CNN'ler, object detection, image segmentation ve OpenCV kullanımı.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Computer vision temel kavramlarını öğrenmek",
+        "Görüntü ön işleme tekniklerini uygulamak",
+        "CNN ile görüntü sınıflandırma yapmak",
+        "Object detection ve segmentation uygulamak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Computer Vision Giriş",
+          "description": "Görüntü işlemeye giriş",
+          "href": "/education/lessons/ai-for-developers/module-06/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Görüntü Temelleri",
+          "description": "Piksel, renk uzayları, görüntü formatları",
+          "href": "/education/lessons/ai-for-developers/module-06/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: OpenCV ile Görüntü İşleme",
+          "description": "OpenCV kütüphanesi kullanımı",
+          "href": "/education/lessons/ai-for-developers/module-06/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Görüntü Ön İşleme",
+          "description": "Resize, crop, rotate, flip işlemleri",
+          "href": "/education/lessons/ai-for-developers/module-06/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Filtreleme ve Smoothing",
+          "description": "Blur, sharpening, edge detection",
+          "href": "/education/lessons/ai-for-developers/module-06/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Convolutional Neural Networks (CNN)",
+          "description": "CNN mimarisi ve çalışma prensibi",
+          "href": "/education/lessons/ai-for-developers/module-06/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: CNN Katmanları",
+          "description": "Convolution, pooling, fully connected layers",
+          "href": "/education/lessons/ai-for-developers/module-06/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Pre-trained Models (Transfer Learning)",
+          "description": "VGG, ResNet, Inception kullanımı",
+          "href": "/education/lessons/ai-for-developers/module-06/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Image Classification",
+          "description": "Görüntü sınıflandırma uygulamaları",
+          "href": "/education/lessons/ai-for-developers/module-06/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Object Detection",
+          "description": "YOLO, R-CNN, SSD algoritmaları",
+          "href": "/education/lessons/ai-for-developers/module-06/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Image Segmentation",
+          "description": "Semantic ve instance segmentation",
+          "href": "/education/lessons/ai-for-developers/module-06/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Face Detection ve Recognition",
+          "description": "Yüz tanıma sistemleri",
+          "href": "/education/lessons/ai-for-developers/module-06/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Data Augmentation",
+          "description": "Görüntü zenginleştirme teknikleri",
+          "href": "/education/lessons/ai-for-developers/module-06/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Video Processing",
+          "description": "Video analizi ve işleme",
+          "href": "/education/lessons/ai-for-developers/module-06/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Computer Vision Projesi",
+          "description": "Pratik görüntü işleme projesi",
+          "href": "/education/lessons/ai-for-developers/module-06/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-07",
+      "title": "Module 7: TensorFlow ve Keras Testi",
+      "summary": "TensorFlow framework'ü, Keras API, model oluşturma, eğitim ve deployment. TensorFlow 2.x ile modern deep learning.",
+      "durationMinutes": 450,
+      "objectives": [
+        "TensorFlow ve Keras framework'lerini öğrenmek",
+        "Model oluşturma ve eğitim yapmak",
+        "TensorFlow ile CNN ve RNN modelleri geliştirmek",
+        "Model kaydetme ve yükleme işlemleri"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: TensorFlow Giriş",
+          "description": "TensorFlow framework'üne giriş",
+          "href": "/education/lessons/ai-for-developers/module-07/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: TensorFlow 2.x Temelleri",
+          "description": "Eager execution ve tf.function",
+          "href": "/education/lessons/ai-for-developers/module-07/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Keras API",
+          "description": "Keras ile model oluşturma",
+          "href": "/education/lessons/ai-for-developers/module-07/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Sequential Model",
+          "description": "Sequential API kullanımı",
+          "href": "/education/lessons/ai-for-developers/module-07/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Functional API",
+          "description": "Functional API ile kompleks modeller",
+          "href": "/education/lessons/ai-for-developers/module-07/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Model Subclassing",
+          "description": "Custom model sınıfları",
+          "href": "/education/lessons/ai-for-developers/module-07/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Layers ve Custom Layers",
+          "description": "Built-in ve custom layer'lar",
+          "href": "/education/lessons/ai-for-developers/module-07/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Callbacks",
+          "description": "Early stopping, model checkpoint",
+          "href": "/education/lessons/ai-for-developers/module-07/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Model Compilation ve Training",
+          "description": "Model eğitimi ve optimizasyon",
+          "href": "/education/lessons/ai-for-developers/module-07/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Model Evaluation",
+          "description": "Model değerlendirme metrikleri",
+          "href": "/education/lessons/ai-for-developers/module-07/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Model Saving ve Loading",
+          "description": "Model kaydetme ve yükleme",
+          "href": "/education/lessons/ai-for-developers/module-07/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Transfer Learning with TensorFlow",
+          "description": "Pre-trained model kullanımı",
+          "href": "/education/lessons/ai-for-developers/module-07/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: TensorFlow Datasets",
+          "description": "tf.data ile veri pipeline'ı",
+          "href": "/education/lessons/ai-for-developers/module-07/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: TensorBoard ile Görselleştirme",
+          "description": "Model monitoring ve debugging",
+          "href": "/education/lessons/ai-for-developers/module-07/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: TensorFlow Projesi",
+          "description": "End-to-end TensorFlow projesi",
+          "href": "/education/lessons/ai-for-developers/module-07/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-08",
+      "title": "Module 8: PyTorch ile Derin Öğrenme Testi",
+      "summary": "PyTorch framework'ü, tensors, autograd, neural network modelleri, training loops ve PyTorch best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "PyTorch framework'ünü öğrenmek",
+        "Tensors ve autograd sistemini kavramak",
+        "PyTorch ile neural network modelleri oluşturmak",
+        "Training loop'ları yazmak ve model eğitmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: PyTorch Giriş",
+          "description": "PyTorch framework'üne giriş",
+          "href": "/education/lessons/ai-for-developers/module-08/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Tensors",
+          "description": "Tensor oluşturma ve işlemler",
+          "href": "/education/lessons/ai-for-developers/module-08/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Autograd Sistemi",
+          "description": "Otomatik türev alma",
+          "href": "/education/lessons/ai-for-developers/module-08/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Neural Network Module (nn.Module)",
+          "description": "nn.Module ile model tanımlama",
+          "href": "/education/lessons/ai-for-developers/module-08/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Loss Functions ve Optimizers",
+          "description": "Loss ve optimizer seçimi",
+          "href": "/education/lessons/ai-for-developers/module-08/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Training Loop",
+          "description": "Manuel training loop yazma",
+          "href": "/education/lessons/ai-for-developers/module-08/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: DataLoader ve Dataset",
+          "description": "Veri yükleme ve batch işleme",
+          "href": "/education/lessons/ai-for-developers/module-08/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Custom Dataset Sınıfları",
+          "description": "Özel dataset implementasyonu",
+          "href": "/education/lessons/ai-for-developers/module-08/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: CNN with PyTorch",
+          "description": "PyTorch ile CNN modeli",
+          "href": "/education/lessons/ai-for-developers/module-08/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: RNN ve LSTM with PyTorch",
+          "description": "Sequence modelleme",
+          "href": "/education/lessons/ai-for-developers/module-08/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Transfer Learning with PyTorch",
+          "description": "Pre-trained model kullanımı",
+          "href": "/education/lessons/ai-for-developers/module-08/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Model Checkpointing",
+          "description": "Model kaydetme ve yükleme",
+          "href": "/education/lessons/ai-for-developers/module-08/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: GPU Kullanımı",
+          "description": "CUDA ve GPU acceleration",
+          "href": "/education/lessons/ai-for-developers/module-08/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: PyTorch Lightning",
+          "description": "High-level PyTorch wrapper",
+          "href": "/education/lessons/ai-for-developers/module-08/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: PyTorch Projesi",
+          "description": "End-to-end PyTorch projesi",
+          "href": "/education/lessons/ai-for-developers/module-08/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-09",
+      "title": "Module 9: Veri Ön İşleme ve Feature Engineering Testi",
+      "summary": "Feature engineering teknikleri, feature selection, encoding, scaling, handling missing data ve feature importance analizi.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Feature engineering tekniklerini öğrenmek",
+        "Kategorik ve sayısal verileri işlemek",
+        "Feature selection yapmak",
+        "Veri kalitesini artırmak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Feature Engineering Nedir?",
+          "description": "Feature engineering kavramı",
+          "href": "/education/lessons/ai-for-developers/module-09/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Missing Data Handling",
+          "description": "Eksik veri işleme stratejileri",
+          "href": "/education/lessons/ai-for-developers/module-09/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Categorical Encoding",
+          "description": "One-hot, label, target encoding",
+          "href": "/education/lessons/ai-for-developers/module-09/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Numerical Scaling",
+          "description": "Standardization, normalization, min-max",
+          "href": "/education/lessons/ai-for-developers/module-09/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Feature Transformation",
+          "description": "Log, square root, polynomial features",
+          "href": "/education/lessons/ai-for-developers/module-09/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Feature Creation",
+          "description": "Yeni feature'lar oluşturma",
+          "href": "/education/lessons/ai-for-developers/module-09/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Feature Selection",
+          "description": "Univariate, recursive feature elimination",
+          "href": "/education/lessons/ai-for-developers/module-09/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Dimensionality Reduction",
+          "description": "PCA, t-SNE, UMAP",
+          "href": "/education/lessons/ai-for-developers/module-09/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Outlier Detection ve Handling",
+          "description": "Aykırı değer tespiti ve işleme",
+          "href": "/education/lessons/ai-for-developers/module-09/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Feature Interaction",
+          "description": "Feature'lar arası etkileşim",
+          "href": "/education/lessons/ai-for-developers/module-09/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Time Series Feature Engineering",
+          "description": "Zaman serisi feature'ları",
+          "href": "/education/lessons/ai-for-developers/module-09/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Text Feature Engineering",
+          "description": "Metin verilerinden feature çıkarma",
+          "href": "/education/lessons/ai-for-developers/module-09/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Feature Importance",
+          "description": "Feature önem analizi",
+          "href": "/education/lessons/ai-for-developers/module-09/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Automated Feature Engineering",
+          "description": "Otomatik feature engineering araçları",
+          "href": "/education/lessons/ai-for-developers/module-09/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Feature Engineering Pipeline",
+          "description": "End-to-end feature engineering projesi",
+          "href": "/education/lessons/ai-for-developers/module-09/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-10",
+      "title": "Module 10: Model Değerlendirme ve Optimizasyon Testi",
+      "summary": "Model performans metrikleri, cross-validation, hyperparameter tuning, model interpretability ve A/B testing.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Model değerlendirme metriklerini anlamak",
+        "Hyperparameter tuning tekniklerini uygulamak",
+        "Model interpretability sağlamak",
+        "Model performansını optimize etmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Model Evaluation Metrikleri",
+          "description": "Classification ve regression metrikleri",
+          "href": "/education/lessons/ai-for-developers/module-10/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Confusion Matrix",
+          "description": "Confusion matrix analizi",
+          "href": "/education/lessons/ai-for-developers/module-10/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: ROC Curve ve AUC",
+          "description": "ROC eğrisi ve alan altı eğri",
+          "href": "/education/lessons/ai-for-developers/module-10/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Precision-Recall Curve",
+          "description": "Precision-recall analizi",
+          "href": "/education/lessons/ai-for-developers/module-10/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Cross-Validation Teknikleri",
+          "description": "K-fold, stratified, time series CV",
+          "href": "/education/lessons/ai-for-developers/module-10/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Hyperparameter Tuning",
+          "description": "Grid search, random search",
+          "href": "/education/lessons/ai-for-developers/module-10/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Bayesian Optimization",
+          "description": "Bayesian hyperparameter optimization",
+          "href": "/education/lessons/ai-for-developers/module-10/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Model Interpretability",
+          "description": "SHAP, LIME, feature importance",
+          "href": "/education/lessons/ai-for-developers/module-10/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Bias-Variance Tradeoff",
+          "description": "Bias-variance dengesi",
+          "href": "/education/lessons/ai-for-developers/module-10/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Learning Curves",
+          "description": "Öğrenme eğrileri analizi",
+          "href": "/education/lessons/ai-for-developers/module-10/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Model Comparison",
+          "description": "Farklı modelleri karşılaştırma",
+          "href": "/education/lessons/ai-for-developers/module-10/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Ensemble Methods",
+          "description": "Voting, bagging, boosting",
+          "href": "/education/lessons/ai-for-developers/module-10/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Model Selection",
+          "description": "En iyi model seçimi stratejileri",
+          "href": "/education/lessons/ai-for-developers/module-10/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: A/B Testing for ML",
+          "description": "Model A/B testi",
+          "href": "/education/lessons/ai-for-developers/module-10/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Model Optimization Projesi",
+          "description": "End-to-end optimizasyon projesi",
+          "href": "/education/lessons/ai-for-developers/module-10/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-11",
+      "title": "Module 11: Production'da ML Modelleri Testi",
+      "summary": "ML model deployment, MLOps, model serving, containerization, API development, monitoring ve model versioning.",
+      "durationMinutes": 450,
+      "objectives": [
+        "ML modellerini production'a deploy etmek",
+        "MLOps pipeline'ları kurmak",
+        "Model serving ve API geliştirmek",
+        "Model monitoring ve maintenance yapmak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: ML Deployment Stratejileri",
+          "description": "Deployment modelleri ve yaklaşımları",
+          "href": "/education/lessons/ai-for-developers/module-11/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Model Serialization",
+          "description": "Pickle, joblib, ONNX formatları",
+          "href": "/education/lessons/ai-for-developers/module-11/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Model Serving",
+          "description": "REST API, gRPC, batch serving",
+          "href": "/education/lessons/ai-for-developers/module-11/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Flask/FastAPI ile ML API",
+          "description": "Python web framework'leri ile API",
+          "href": "/education/lessons/ai-for-developers/module-11/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Docker ile Containerization",
+          "description": "ML modellerini containerize etme",
+          "href": "/education/lessons/ai-for-developers/module-11/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Kubernetes ile Scaling",
+          "description": "Kubernetes ile model deployment",
+          "href": "/education/lessons/ai-for-developers/module-11/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: MLOps Pipeline",
+          "description": "CI/CD for ML, MLflow, Kubeflow",
+          "href": "/education/lessons/ai-for-developers/module-11/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Model Versioning",
+          "description": "Model versiyonlama stratejileri",
+          "href": "/education/lessons/ai-for-developers/module-11/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Model Monitoring",
+          "description": "Model performans izleme",
+          "href": "/education/lessons/ai-for-developers/module-11/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Data Drift Detection",
+          "description": "Veri kayması tespiti",
+          "href": "/education/lessons/ai-for-developers/module-11/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Model Retraining",
+          "description": "Otomatik model yeniden eğitimi",
+          "href": "/education/lessons/ai-for-developers/module-11/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Cloud ML Services",
+          "description": "AWS SageMaker, GCP AI Platform, Azure ML",
+          "href": "/education/lessons/ai-for-developers/module-11/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Edge Deployment",
+          "description": "Edge cihazlara model deployment",
+          "href": "/education/lessons/ai-for-developers/module-11/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Model Performance Optimization",
+          "description": "Inference hızı optimizasyonu",
+          "href": "/education/lessons/ai-for-developers/module-11/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Production ML Projesi",
+          "description": "End-to-end production deployment",
+          "href": "/education/lessons/ai-for-developers/module-11/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-12",
+      "title": "Module 12: AI Ethics ve Responsible AI Testi",
+      "summary": "AI etiği, bias ve fairness, privacy, explainability, AI güvenliği ve sorumlu AI geliştirme prensipleri.",
+      "durationMinutes": 450,
+      "objectives": [
+        "AI etik sorunlarını anlamak",
+        "Bias ve fairness problemlerini çözmek",
+        "Privacy ve güvenlik konularını ele almak",
+        "Sorumlu AI geliştirme yapmak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: AI Ethics Giriş",
+          "description": "Yapay zeka etiği temelleri",
+          "href": "/education/lessons/ai-for-developers/module-12/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Bias in AI",
+          "description": "AI sistemlerindeki önyargılar",
+          "href": "/education/lessons/ai-for-developers/module-12/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Fairness ve Equity",
+          "description": "Adalet ve eşitlik kavramları",
+          "href": "/education/lessons/ai-for-developers/module-12/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Algorithmic Fairness",
+          "description": "Algoritmik adalet teknikleri",
+          "href": "/education/lessons/ai-for-developers/module-12/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Privacy in AI",
+          "description": "Gizlilik ve veri koruma",
+          "href": "/education/lessons/ai-for-developers/module-12/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Differential Privacy",
+          "description": "Diferansiyel gizlilik teknikleri",
+          "href": "/education/lessons/ai-for-developers/module-12/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Explainable AI (XAI)",
+          "description": "Açıklanabilir yapay zeka",
+          "href": "/education/lessons/ai-for-developers/module-12/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Model Interpretability Tools",
+          "description": "SHAP, LIME, ELI5 gibi araçlar",
+          "href": "/education/lessons/ai-for-developers/module-12/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: AI Security",
+          "description": "AI sistemlerinde güvenlik",
+          "href": "/education/lessons/ai-for-developers/module-12/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Adversarial Attacks",
+          "description": "Düşmanca saldırılar ve savunma",
+          "href": "/education/lessons/ai-for-developers/module-12/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: AI Governance",
+          "description": "AI yönetişimi ve düzenlemeler",
+          "href": "/education/lessons/ai-for-developers/module-12/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Responsible AI Framework",
+          "description": "Sorumlu AI çerçevesi",
+          "href": "/education/lessons/ai-for-developers/module-12/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: AI ve İş Dünyası",
+          "description": "AI'ın sosyal ve ekonomik etkileri",
+          "href": "/education/lessons/ai-for-developers/module-12/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: AI Best Practices",
+          "description": "Etik AI geliştirme best practices",
+          "href": "/education/lessons/ai-for-developers/module-12/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Ethics Case Studies",
+          "description": "Gerçek dünya etik vaka çalışmaları",
+          "href": "/education/lessons/ai-for-developers/module-12/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-13",
+      "title": "Module 13: Generative AI ve LLM'ler Testi",
+      "summary": "Generative AI, Large Language Models (LLM), GPT modelleri, fine-tuning, prompt engineering ve generative applications.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Generative AI kavramlarını öğrenmek",
+        "LLM'leri anlamak ve kullanmak",
+        "Prompt engineering tekniklerini uygulamak",
+        "Generative AI uygulamaları geliştirmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Generative AI Giriş",
+          "description": "Generative AI kavramı ve uygulamaları",
+          "href": "/education/lessons/ai-for-developers/module-13/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Large Language Models (LLM)",
+          "description": "LLM'lerin yapısı ve çalışma prensibi",
+          "href": "/education/lessons/ai-for-developers/module-13/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Transformer Architecture",
+          "description": "Transformer mimarisi detayları",
+          "href": "/education/lessons/ai-for-developers/module-13/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: GPT Modelleri",
+          "description": "GPT-3, GPT-4 ve türevleri",
+          "href": "/education/lessons/ai-for-developers/module-13/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: BERT ve Encoder Models",
+          "description": "BERT ve encoder tabanlı modeller",
+          "href": "/education/lessons/ai-for-developers/module-13/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Prompt Engineering",
+          "description": "Etkili prompt yazma teknikleri",
+          "href": "/education/lessons/ai-for-developers/module-13/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Fine-tuning LLMs",
+          "description": "LLM'leri fine-tune etme",
+          "href": "/education/lessons/ai-for-developers/module-13/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Retrieval-Augmented Generation (RAG)",
+          "description": "RAG mimarisi ve uygulaması",
+          "href": "/education/lessons/ai-for-developers/module-13/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: LangChain Framework",
+          "description": "LangChain ile LLM uygulamaları",
+          "href": "/education/lessons/ai-for-developers/module-13/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: OpenAI API",
+          "description": "OpenAI API kullanımı",
+          "href": "/education/lessons/ai-for-developers/module-13/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Hugging Face Transformers",
+          "description": "Hugging Face kütüphanesi",
+          "href": "/education/lessons/ai-for-developers/module-13/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Text Generation",
+          "description": "Metin üretme teknikleri",
+          "href": "/education/lessons/ai-for-developers/module-13/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Image Generation (DALL-E, Stable Diffusion)",
+          "description": "Görüntü üretme modelleri",
+          "href": "/education/lessons/ai-for-developers/module-13/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Code Generation",
+          "description": "Kod üretme AI'ları (GitHub Copilot)",
+          "href": "/education/lessons/ai-for-developers/module-13/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Generative AI Projesi",
+          "description": "End-to-end generative AI uygulaması",
+          "href": "/education/lessons/ai-for-developers/module-13/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-14",
+      "title": "Module 14: AI Entegrasyonu ve API'ler Testi",
+      "summary": "AI servislerini uygulamalara entegre etme, API kullanımı, cloud AI services, real-time AI ve AI pipeline'ları.",
+      "durationMinutes": 450,
+      "objectives": [
+        "AI servislerini uygulamalara entegre etmek",
+        "Cloud AI API'lerini kullanmak",
+        "Real-time AI uygulamaları geliştirmek",
+        "AI pipeline'ları oluşturmak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: AI Entegrasyon Stratejileri",
+          "description": "AI'ı mevcut sistemlere entegre etme",
+          "href": "/education/lessons/ai-for-developers/module-14/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: RESTful AI APIs",
+          "description": "REST API ile AI servisleri",
+          "href": "/education/lessons/ai-for-developers/module-14/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: GraphQL ve AI",
+          "description": "GraphQL ile AI entegrasyonu",
+          "href": "/education/lessons/ai-for-developers/module-14/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: AWS AI Services",
+          "description": "Amazon Rekognition, Comprehend, Polly",
+          "href": "/education/lessons/ai-for-developers/module-14/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Google Cloud AI",
+          "description": "Google Cloud AI Platform servisleri",
+          "href": "/education/lessons/ai-for-developers/module-14/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Azure AI Services",
+          "description": "Azure Cognitive Services",
+          "href": "/education/lessons/ai-for-developers/module-14/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Real-time AI Processing",
+          "description": "Gerçek zamanlı AI işleme",
+          "href": "/education/lessons/ai-for-developers/module-14/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Streaming Data ve AI",
+          "description": "Streaming verilerle AI uygulamaları",
+          "href": "/education/lessons/ai-for-developers/module-14/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: AI Microservices",
+          "description": "Mikroservis mimarisi ile AI",
+          "href": "/education/lessons/ai-for-developers/module-14/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Message Queues ve AI",
+          "description": "RabbitMQ, Kafka ile AI pipeline'ları",
+          "href": "/education/lessons/ai-for-developers/module-14/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: WebSocket ile Real-time AI",
+          "description": "WebSocket ile gerçek zamanlı AI",
+          "href": "/education/lessons/ai-for-developers/module-14/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: AI Caching Strategies",
+          "description": "AI sonuçlarını cache'leme",
+          "href": "/education/lessons/ai-for-developers/module-14/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: AI Rate Limiting",
+          "description": "AI API rate limiting stratejileri",
+          "href": "/education/lessons/ai-for-developers/module-14/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: AI Error Handling",
+          "description": "AI servislerinde hata yönetimi",
+          "href": "/education/lessons/ai-for-developers/module-14/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: AI Entegrasyon Projesi",
+          "description": "End-to-end AI entegrasyon projesi",
+          "href": "/education/lessons/ai-for-developers/module-14/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-15",
+      "title": "Module 15: Capstone Project Testi",
+      "summary": "Kapsamlı bir AI projesi geliştirerek tüm öğrenilenleri uygulama. Gerçek dünya problemi çözme ve portfolio projesi.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Tüm öğrenilenleri bir projede uygulamak",
+        "Gerçek dünya AI problemi çözmek",
+        "End-to-end AI pipeline geliştirmek",
+        "Portfolio projesi oluşturmak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Proje Planlama ve Gereksinimler",
+          "description": "Proje kapsamı ve planlama",
+          "href": "/education/lessons/ai-for-developers/module-15/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Veri Toplama ve Hazırlama",
+          "description": "Veri toplama ve ön işleme",
+          "href": "/education/lessons/ai-for-developers/module-15/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Model Seçimi ve Tasarım",
+          "description": "Uygun model seçimi ve mimari",
+          "href": "/education/lessons/ai-for-developers/module-15/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Model Eğitimi",
+          "description": "Model eğitimi ve optimizasyon",
+          "href": "/education/lessons/ai-for-developers/module-15/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Model Değerlendirme",
+          "description": "Kapsamlı model değerlendirme",
+          "href": "/education/lessons/ai-for-developers/module-15/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Feature Engineering",
+          "description": "Gelişmiş feature engineering",
+          "href": "/education/lessons/ai-for-developers/module-15/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Model Optimizasyonu",
+          "description": "Hyperparameter tuning ve optimizasyon",
+          "href": "/education/lessons/ai-for-developers/module-15/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: API Geliştirme",
+          "description": "Model için REST API geliştirme",
+          "href": "/education/lessons/ai-for-developers/module-15/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Frontend Entegrasyonu",
+          "description": "Web arayüzü geliştirme",
+          "href": "/education/lessons/ai-for-developers/module-15/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Deployment",
+          "description": "Production'a deployment",
+          "href": "/education/lessons/ai-for-developers/module-15/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Monitoring ve Logging",
+          "description": "Model monitoring sistemi",
+          "href": "/education/lessons/ai-for-developers/module-15/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Testing",
+          "description": "Unit, integration ve end-to-end testler",
+          "href": "/education/lessons/ai-for-developers/module-15/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Dokümantasyon",
+          "description": "Proje dokümantasyonu",
+          "href": "/education/lessons/ai-for-developers/module-15/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Performance Optimization",
+          "description": "Performans optimizasyonu",
+          "href": "/education/lessons/ai-for-developers/module-15/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Proje Sunumu ve Değerlendirme",
+          "description": "Proje sunumu ve final değerlendirme",
+          "href": "/education/lessons/ai-for-developers/module-15/lesson-15"
+        }
+      ]
+    }
+  ]
+}

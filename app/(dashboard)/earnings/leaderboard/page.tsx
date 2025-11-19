@@ -3,6 +3,7 @@
 import { useEffect, useState, useMemo } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import {
   Loader2,
   Trophy,
@@ -287,7 +288,33 @@ export default function EarningsLeaderboardPage() {
                                 </div>
                                 <div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 overflow-hidden border border-gray-200 dark:border-gray-700">
                                   {entry.user.profileImage ? (
-                                    <img src={entry.user.profileImage} alt={entry.user.name || entry.user.email} className="h-full w-full object-cover" />
+                                    <Image
+                                      src={entry.user.profileImage}
+                                      alt={entry.user.name || entry.user.email}
+                                      width={40}
+                                      height={40}
+                                      className="h-full w-full object-cover rounded-full"
+                                      unoptimized
+                                      priority={index < 3}
+                                      loading={index < 3 ? "eager" : "lazy"}
+                                      onError={(e) => {
+                                        const target = e.target as HTMLImageElement;
+                                        target.style.display = 'none';
+                                        const parent = target.parentElement;
+                                        if (parent && !parent.querySelector('.fallback-initials')) {
+                                          if (initials) {
+                                            const span = document.createElement('span');
+                                            span.className = 'fallback-initials text-xs font-bold text-gray-700 dark:text-gray-200';
+                                            span.textContent = initials;
+                                            parent.appendChild(span);
+                                          } else {
+                                            const icon = document.createElement('div');
+                                            icon.innerHTML = '<svg class="h-6 w-6 text-gray-400 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>';
+                                            parent.appendChild(icon);
+                                          }
+                                        }
+                                      }}
+                                    />
                                   ) : initials ? (
                                     <span className="text-xs font-bold text-gray-700 dark:text-gray-200">{initials}</span>
                                   ) : (
@@ -396,10 +423,15 @@ export default function EarningsLeaderboardPage() {
                                     index === 2 && "h-24 w-24"
                                   )}>
                                     {entry.user.profileImage ? (
-                                      <img
+                                      <Image
                                         src={entry.user.profileImage}
                                         alt={entry.user.name || entry.user.email}
+                                        width={index === 0 ? 112 : 96}
+                                        height={index === 0 ? 112 : 96}
                                         className="h-full w-full rounded-full object-cover"
+                                        unoptimized
+                                        priority={index < 3}
+                                        loading={index < 3 ? "eager" : "lazy"}
                                       />
                                     ) : initials ? (
                                       <span className="text-2xl font-bold text-gray-700 dark:text-gray-200">
@@ -502,14 +534,17 @@ export default function EarningsLeaderboardPage() {
                                   <div className="relative flex items-center gap-3">
                                     <div className="relative flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-gray-100 to-gray-200 text-lg font-bold text-gray-700 shadow-inner dark:from-gray-800 dark:to-gray-700 dark:text-gray-100">
                                       {entry.user.profileImage ? (
-                                        // eslint-disable-next-line @next/next/no-img-element
-                                        <img
+                                        <Image
                                           src={entry.user.profileImage}
                                           alt={entry.user.name || entry.user.email}
+                                          width={56}
+                                          height={56}
                                           className="h-full w-full rounded-full object-cover"
+                                          unoptimized
+                                          loading="lazy"
                                         />
                                       ) : initials ? (
-                                        initials
+                                        <span className="text-lg font-bold text-gray-700 dark:text-gray-200">{initials}</span>
                                       ) : (
                                         <UserCircle2 className="h-8 w-8 opacity-70" />
                                       )}

@@ -113,6 +113,22 @@ export async function GET(request: Request) {
       },
     };
 
+    // Topluluk slug'ları (create-course-communities API'sinden)
+    const COMMUNITY_SLUGS = [
+      "dotnet-core-community",
+      "java-community",
+      "mssql-community",
+      "react-community",
+      "angular-community",
+      "nodejs-community",
+      "ai-community",
+      "flutter-community",
+      "ethical-hacking-community",
+      "nextjs-community",
+      "docker-kubernetes-community",
+      "owasp-community",
+    ];
+
     const communityIds = DEFAULT_CHAT_GROUP_IDS;
 
     const visibilityClause: Prisma.ChatGroupWhereInput = {
@@ -132,12 +148,21 @@ export async function GET(request: Request) {
     const filters: Prisma.ChatGroupWhereInput[] = [baseWhere, visibilityClause];
 
     if (category === "community") {
+      // Community kategorisinde: Sadece sistemde tanımlı 12 adet topluluk (slug'lara göre)
+      // Bu topluluklar createdById: null ve visibility: "public" olmalı
       filters.push({
-        id: { in: communityIds.length > 0 ? communityIds : ["__none__"] },
+        slug: { in: COMMUNITY_SLUGS },
+        createdById: null,
+        visibility: "public",
       });
-    } else if (communityIds.length > 0) {
+    } else if (category === "user") {
+      // "user" kategorisinde: Sadece kullanıcının oluşturduğu gruplar
       filters.push({
-        id: { notIn: communityIds },
+        createdById: userId,
+      });
+      // Sistem topluluklarını (COMMUNITY_SLUGS) hariç tut
+      filters.push({
+        slug: { notIn: COMMUNITY_SLUGS },
       });
     }
 

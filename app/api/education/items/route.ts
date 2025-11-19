@@ -25,29 +25,43 @@ export async function GET(request: Request) {
         not: "MINI_TEST",
       },
     };
-    const courseWhere: any = {};
+
+    // Build OR conditions for expertise, topic, and content filters
+    // This allows filtering by both course.expertise and quiz.topic (for independent tests)
+    const orConditions: any[] = [];
 
     if (expertise) {
-      courseWhere.expertise = expertise;
+      orConditions.push(
+        { course: { expertise } },
+        { topic: expertise }
+      );
     }
 
     if (topic) {
-      courseWhere.topic = topic;
+      orConditions.push(
+        { course: { topic } },
+        { topic }
+      );
     }
 
     if (content) {
-      courseWhere.topicContent = content;
+      orConditions.push(
+        { course: { topicContent: content } }
+      );
+    }
+
+    if (orConditions.length > 0) {
+      // Combine OR conditions with AND
+      where.AND = [
+        ...(where.AND || []),
+        {
+          OR: orConditions,
+        },
+      ];
     }
 
     if (level) {
       where.level = level;
-    }
-
-    if (Object.keys(courseWhere).length > 0) {
-      // If course filters are provided, filter by course relation
-      where.course = {
-        is: courseWhere,
-      };
     }
 
     if (typeParam) {

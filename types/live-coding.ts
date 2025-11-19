@@ -1,5 +1,14 @@
 export type LiveCodingLanguage = "csharp" | "python" | "javascript" | "java";
 
+export interface ProgrammingLanguage {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  color: string;
+  popularity: number;
+}
+
 export interface LiveCodingTask {
   id: string;
   title: string;

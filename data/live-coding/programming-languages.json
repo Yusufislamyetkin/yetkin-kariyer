@@ -1,0 +1,123 @@
+[
+  {
+    "id": "csharp",
+    "name": "C#",
+    "description": "Microsoft tarafından geliştirilen modern, nesne yönelimli programlama dili. .NET ekosistemi ile güçlü uygulamalar geliştirin.",
+    "icon": "💻",
+    "color": "#239120",
+    "popularity": 1
+  },
+  {
+    "id": "java",
+    "name": "Java",
+    "description": "Platform bağımsız, güçlü ve yaygın kullanılan nesne yönelimli programlama dili. Enterprise uygulamalar için ideal.",
+    "icon": "☕",
+    "color": "#ED8B00",
+    "popularity": 2
+  },
+  {
+    "id": "python",
+    "name": "Python",
+    "description": "Okunabilirliği yüksek, çok amaçlı programlama dili. Veri bilimi, yapay zeka ve web geliştirme için popüler.",
+    "icon": "🐍",
+    "color": "#3776AB",
+    "popularity": 3
+  },
+  {
+    "id": "javascript",
+    "name": "JavaScript",
+    "description": "Web geliştirmenin temel taşı. Dinamik, etkileşimli web uygulamaları ve modern frontend framework'leri için vazgeçilmez.",
+    "icon": "📜",
+    "color": "#F7DF1E",
+    "popularity": 4
+  },
+  {
+    "id": "typescript",
+    "name": "TypeScript",
+    "description": "JavaScript'in üzerine tip güvenliği ekleyen modern dil. Büyük ölçekli uygulamalar için idealdir.",
+    "icon": "📘",
+    "color": "#3178C6",
+    "popularity": 5
+  },
+  {
+    "id": "go",
+    "name": "Go",
+    "description": "Google tarafından geliştirilen, basit ve hızlı sistem programlama dili. Modern web servisleri ve bulut uygulamaları için mükemmel.",
+    "icon": "🐹",
+    "color": "#00ADD8",
+    "popularity": 6
+  },
+  {
+    "id": "rust",
+    "name": "Rust",
+    "description": "Bellek güvenliği ve yüksek performansı bir araya getiren sistem programlama dili. Modern sistemler için güçlü bir seçenek.",
+    "icon": "🦀",
+    "color": "#000000",
+    "popularity": 7
+  },
+  {
+    "id": "cpp",
+    "name": "C++",
+    "description": "Güçlü ve esnek sistem programlama dili. Oyun geliştirme, performans kritik uygulamalar ve embedded sistemler için yaygın.",
+    "icon": "⚡",
+    "color": "#00599C",
+    "popularity": 8
+  },
+  {
+    "id": "kotlin",
+    "name": "Kotlin",
+    "description": "JVM üzerinde çalışan modern, kısa ve güvenli programlama dili. Android geliştirme için resmi dil.",
+    "icon": "🔷",
+    "color": "#7F52FF",
+    "popularity": 9
+  },
+  {
+    "id": "swift",
+    "name": "Swift",
+    "description": "Apple'ın modern, güçlü ve sezgisel programlama dili. iOS, macOS ve diğer Apple platformları için ideal.",
+    "icon": "🦉",
+    "color": "#FA7343",
+    "popularity": 10
+  },
+  {
+    "id": "php",
+    "name": "PHP",
+    "description": "Web geliştirme için optimize edilmiş, yaygın kullanılan sunucu tarafı programlama dili. Dinamik web siteleri için güçlü.",
+    "icon": "🐘",
+    "color": "#777BB4",
+    "popularity": 11
+  },
+  {
+    "id": "ruby",
+    "name": "Ruby",
+    "description": "Okunabilirliği yüksek, geliştirici dostu programlama dili. Ruby on Rails framework'ü ile web geliştirme için popüler.",
+    "icon": "💎",
+    "color": "#CC342D",
+    "popularity": 12
+  },
+  {
+    "id": "scala",
+    "name": "Scala",
+    "description": "Fonksiyonel ve nesne yönelimli programlamayı birleştiren JVM dili. Büyük veri işleme ve distributed sistemler için kullanılır.",
+    "icon": "🔺",
+    "color": "#DC322F",
+    "popularity": 13
+  },
+  {
+    "id": "dart",
+    "name": "Dart",
+    "description": "Google tarafından geliştirilen, modern mobil ve web uygulamaları için optimize edilmiş dil. Flutter ile güçlü.",
+    "icon": "🎯",
+    "color": "#0175C2",
+    "popularity": 14
+  },
+  {
+    "id": "r",
+    "name": "R",
+    "description": "İstatistiksel hesaplama ve veri analizi için özel olarak tasarlanmış programlama dili. Veri bilimciler için güçlü bir araç.",
+    "icon": "📊",
+    "color": "#276DC3",
+    "popularity": 15
+  }
+]
+

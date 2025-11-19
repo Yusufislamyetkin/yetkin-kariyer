@@ -1,4 +1,4 @@
-import { LiveCodingLanguage, LiveCodingTask } from "@/types/live-coding";
+import { LiveCodingLanguage, LiveCodingTask, ProgrammingLanguage } from "@/types/live-coding";
 
 export const SUPPORTED_LANGUAGES: LiveCodingLanguage[] = ["csharp", "python", "javascript", "java"];
 const DEFAULT_TIME_LIMIT = 45;
@@ -173,5 +173,154 @@ export const resolveLiveCodingLanguage = (
     ? (normalized as LiveCodingLanguage)
     : null;
 };
+
+/**
+ * Programlama dilleri JSON dosyasını okuyarak dilleri döndürür
+ * Not: fs modülü sadece server-side'da kullanılabilir, bu yüzden fallback kullanıyoruz
+ */
+export function getProgrammingLanguages(): ProgrammingLanguage[] {
+  // fs modülü client-side'da kullanılamaz, bu yüzden fallback dilleri döndürüyoruz
+  // Production'da bu veriler API route'dan veya database'den gelmelidir
+  try {
+    // Server-side'da fs kullanılabilir, ama build sırasında sorun çıkmaması için
+    // conditional import kullanıyoruz
+    if (typeof window === "undefined") {
+      // Server-side
+      const fs = require("fs");
+      const path = require("path");
+      const filePath = path.join(process.cwd(), "data", "live-coding", "programming-languages.json");
+      const fileContents = fs.readFileSync(filePath, "utf8");
+      const languages = JSON.parse(fileContents) as ProgrammingLanguage[];
+      return languages.sort((a, b) => a.popularity - b.popularity);
+    }
+  } catch (error) {
+    console.error("[getProgrammingLanguages] Error reading programming languages:", error);
+  }
+  
+  // Fallback: temel dilleri döndür
+  return [
+    {
+      id: "csharp",
+      name: "C#",
+      description: "Microsoft tarafından geliştirilen modern programlama dili",
+      icon: "💻",
+      color: "#239120",
+      popularity: 1,
+    },
+    {
+      id: "java",
+      name: "Java",
+      description: "Platform bağımsız programlama dili",
+      icon: "☕",
+      color: "#ED8B00",
+      popularity: 2,
+    },
+    {
+      id: "python",
+      name: "Python",
+      description: "Yüksek seviyeli programlama dili",
+      icon: "🐍",
+      color: "#3776AB",
+      popularity: 3,
+    },
+    {
+      id: "javascript",
+      name: "JavaScript",
+      description: "Web geliştirme için popüler programlama dili",
+      icon: "📜",
+      color: "#F7DF1E",
+      popularity: 4,
+    },
+  ];
+}
+
+/**
+ * Veritabanından her dil için mevcut quiz sayısını hesaplar
+ * @param quizzes Veritabanından gelen quiz listesi
+ * @returns Dil ID'sine göre quiz sayısı mapping'i
+ */
+export function getLanguageQuizCounts(
+  quizzes: Array<{ questions: unknown }>
+): Map<string, number> {
+  const languageCountMap = new Map<string, number>();
+
+  quizzes.forEach((quiz) => {
+    try {
+      const normalized = normalizeLiveCodingPayload(quiz.questions);
+      const languagesInQuiz = new Set<LiveCodingLanguage>();
+
+      normalized.tasks.forEach((task) => {
+        (task.languages || []).forEach((language) => {
+          languagesInQuiz.add(language);
+        });
+      });
+
+      languagesInQuiz.forEach((language) => {
+        languageCountMap.set(language, (languageCountMap.get(language) || 0) + 1);
+      });
+    } catch (error) {
+      console.error("[getLanguageQuizCounts] Error processing quiz:", error);
+    }
+  });
+
+  return languageCountMap;
+}
+
+/**
+ * Bug fix quizlerinden her dil için mevcut quiz sayısını hesaplar
+ * @param quizzes Bug fix quiz listesi
+ * @returns Dil ID'sine göre quiz sayısı mapping'i
+ */
+export function getBugFixLanguageCounts(
+  quizzes: Array<{ questions: unknown }>
+): Map<string, number> {
+  const languageCountMap = new Map<string, number>();
+
+  quizzes.forEach((quiz) => {
+    try {
+      const raw = quiz.questions;
+      const payload = Array.isArray(raw)
+        ? raw
+        : typeof raw === "object" && raw !== null && Array.isArray((raw as { tasks?: unknown }).tasks)
+        ? (raw as { tasks: unknown[] }).tasks
+        : typeof raw === "object" && raw !== null
+        ? [raw]
+        : [];
+
+      const languagesInQuiz = new Set<string>();
+
+      payload.forEach((item) => {
+        if (!item || typeof item !== "object") return;
+        const record = item as Record<string, unknown>;
+        
+        // Dil bilgisini çıkar
+        const langInput = record.languages ?? record.language ?? record.languageOptions ?? record.allowedLanguages;
+        if (Array.isArray(langInput)) {
+          langInput.forEach((lang) => {
+            if (typeof lang === "string") {
+              const normalized = lang.toLowerCase().trim();
+              if (SUPPORTED_LANGUAGES.includes(normalized as LiveCodingLanguage)) {
+                languagesInQuiz.add(normalized);
+              }
+            }
+          });
+        } else if (typeof langInput === "string") {
+          const normalized = langInput.toLowerCase().trim();
+          if (SUPPORTED_LANGUAGES.includes(normalized as LiveCodingLanguage)) {
+            languagesInQuiz.add(normalized);
+          }
+        }
+      });
+
+      languagesInQuiz.forEach((language) => {
+        languageCountMap.set(language, (languageCountMap.get(language) || 0) + 1);
+      });
+    } catch (error) {
+      console.error("[getBugFixLanguageCounts] Error processing quiz:", error);
+    }
+  });
+
+  return languageCountMap;
+}
 
 

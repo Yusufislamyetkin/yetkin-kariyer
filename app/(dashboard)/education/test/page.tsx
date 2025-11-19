@@ -133,7 +133,7 @@ export default function TestPage() {
               return (
                 <Link
                   key={category.expertise}
-                  href={`/education/test/category/${encodeURIComponent(category.expertise)}`}
+                  href={`/education/test/by-expertise/${encodeURIComponent(category.expertise)}`}
                   className={`group relative overflow-hidden rounded-2xl border border-white/20 bg-gradient-to-br ${gradient} backdrop-blur-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-4 focus-visible:ring-purple-500 dark:focus-visible:ring-purple-400`}
                   style={{ animationDelay: `${index * 0.08}s` }}
                 >

@@ -54,10 +54,25 @@ export function normalizeCourseContent(
         : estimatedDuration ?? 0,
   };
 
+  // Normalize modules and ensure relatedTopics is properly set
+  const rawModules = ensureArray<Record<string, unknown>>(parsed.modules);
+  const normalizedModules = rawModules.map((module: any) => {
+    // Convert Java format (lessons) to relatedTopics format if needed
+    // This conversion will be done in API route with course context
+    // Here we just ensure relatedTopics exists as an array
+    
+    // Ensure relatedTopics is always an array
+    return {
+      ...module,
+      relatedTopics: Array.isArray(module.relatedTopics) ? module.relatedTopics : [],
+      objectives: Array.isArray(module.objectives) ? module.objectives : [],
+    };
+  });
+
   return {
     ...parsed,
     overview: safeOverview,
-    modules: ensureArray<Record<string, unknown>>(parsed.modules),
+    modules: normalizedModules,
     learningObjectives: ensureArray<string>(parsed.learningObjectives),
     prerequisites: ensureArray<string>(parsed.prerequisites),
     resources: ensureArray<Record<string, unknown>>(parsed.resources),

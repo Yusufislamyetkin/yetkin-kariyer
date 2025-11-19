@@ -42,6 +42,7 @@ export async function POST() {
           description: courseContent.overview.description,
           category: "Backend",
           field: "Software Development",
+          expertise: "Node.js", // Test oluşturma API'si için gerekli
           difficulty: "intermediate",
           estimatedDuration: courseContent.overview.estimatedDurationMinutes,
           content: courseContent as any,
@@ -51,6 +52,7 @@ export async function POST() {
           description: courseContent.overview.description,
           category: "Backend",
           field: "Software Development",
+          expertise: "Node.js", // Test oluşturma API'si için gerekli
           difficulty: "intermediate",
           estimatedDuration: courseContent.overview.estimatedDurationMinutes,
           content: courseContent as any,

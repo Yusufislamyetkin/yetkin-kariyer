@@ -63,7 +63,31 @@ export async function GET(
 
     // Merge lesson content into modules
     if (normalizedContent.modules && Array.isArray(normalizedContent.modules)) {
+      // Determine course expertise for building lesson hrefs
+      const courseExpertise = course.expertise?.toLowerCase().replace(/\s+/g, '-') || 
+                             course.topic?.toLowerCase().replace(/\s+/g, '-') || 
+                             (course.id.includes('java') ? 'java' : 
+                              course.id.includes('dotnet') ? 'dotnet-core' : 
+                              course.id.includes('nodejs') ? 'nodejs' : 'java');
+      
       for (const courseModule of normalizedContent.modules) {
+        // Convert Java format (lessons) to relatedTopics format if needed
+        if (courseModule.lessons && Array.isArray(courseModule.lessons) && (!courseModule.relatedTopics || courseModule.relatedTopics.length === 0)) {
+          courseModule.relatedTopics = courseModule.lessons.map((lesson: any) => {
+            // Build href from module and lesson slug
+            const moduleId = courseModule.id || '';
+            const lessonSlug = lesson.slug || lesson.id || '';
+            const href = `/education/lessons/${courseExpertise}/${moduleId}/${lessonSlug}`;
+            
+            return {
+              label: lesson.title || lesson.label || 'Ders',
+              href: href,
+              description: lesson.description || lesson.title || '',
+            };
+          });
+        }
+        
+        // Ensure relatedTopics exists and is an array
         if (courseModule.relatedTopics && Array.isArray(courseModule.relatedTopics)) {
           for (let i = 0; i < courseModule.relatedTopics.length; i++) {
             const topic = courseModule.relatedTopics[i];
