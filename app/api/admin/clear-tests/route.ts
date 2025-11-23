@@ -13,10 +13,33 @@ export async function POST() {
       );
     }
 
-    // Delete ALL tests (type = "TEST", exclude MINI_TEST)
+    // Delete tests that were added via admin panel (type = "TEST" AND courseId = null)
+    // Prisma enum kontrolü için önce tüm quiz'leri al, sonra JavaScript'te filtrele
+    const allQuizzes = await db.quiz.findMany({
+      select: {
+        id: true,
+        type: true,
+        courseId: true,
+      },
+    });
+
+    // JavaScript'te type TEST olan ve courseId null olan quiz'leri filtrele
+    // Bu, admin panelinden eklenen test teknolojilerini kaldırır
+    const testQuizIds = allQuizzes
+      .filter((quiz: { type: string | null; courseId: string | null }) => {
+        const typeStr = String(quiz.type || "").toUpperCase();
+        const isTestType = typeStr === "TEST";
+        const hasNoCourse = quiz.courseId === null || quiz.courseId === undefined;
+        return isTestType && hasNoCourse;
+      })
+      .map((quiz: { id: string }) => quiz.id);
+
+    // Filtrelenmiş test quiz'lerini sil
     const result = await db.quiz.deleteMany({
       where: {
-        type: "TEST",
+        id: {
+          in: testQuizIds,
+        },
       },
     });
 

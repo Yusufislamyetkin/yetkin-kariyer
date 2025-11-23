@@ -26,94 +26,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-01",
+          "id": "test-01",
           "title": "Ders 1: Flutter Nedir",
           "description": "Flutter'ın temel tanımı ve genel bakış",
-          "href": "/education/lessons/flutter/module-01/lesson-01"
+          "href": "/education/tests/quiz/tests-flutter/module-01/test-01"
         },
         {
-          "id": "lesson-02",
+          "id": "test-02",
           "title": "Ders 2: Flutter diğer mobil geliştirme teknolojilerinden farkı nedir?",
           "description": "React Native, Xamarin, Native gibi teknolojilerden farkları",
-          "href": "/education/lessons/flutter/module-01/lesson-02"
+          "href": "/education/tests/quiz/tests-flutter/module-01/test-02"
         },
         {
-          "id": "lesson-03",
+          "id": "test-03",
           "title": "Ders 3: Flutter'ın Tarihçesi ve Gelişimi",
           "description": "Flutter'ın ortaya çıkışı ve versiyon geçmişi",
-          "href": "/education/lessons/flutter/module-01/lesson-03"
+          "href": "/education/tests/quiz/tests-flutter/module-01/test-03"
         },
         {
-          "id": "lesson-04",
+          "id": "test-04",
           "title": "Ders 4: Flutter vs React Native",
           "description": "İki framework arasındaki temel farklar ve karşılaştırma",
-          "href": "/education/lessons/flutter/module-01/lesson-04"
+          "href": "/education/tests/quiz/tests-flutter/module-01/test-04"
         },
         {
-          "id": "lesson-05",
+          "id": "test-05",
           "title": "Ders 5: Flutter'ın Avantajları",
           "description": "Performans, hot reload, tek kod tabanı gibi avantajlar",
-          "href": "/education/lessons/flutter/module-01/lesson-05"
+          "href": "/education/tests/quiz/tests-flutter/module-01/test-05"
         },
         {
-          "id": "lesson-06",
+          "id": "test-06",
           "title": "Ders 6: Flutter Kullanım Alanları",
           "description": "Mobil, web, desktop uygulamaları gibi kullanım senaryoları",
-          "href": "/education/lessons/flutter/module-01/lesson-06"
+          "href": "/education/tests/quiz/tests-flutter/module-01/test-06"
         },
         {
-          "id": "lesson-07",
+          "id": "test-07",
           "title": "Ders 7: Flutter Ekosistemi",
           "description": "Pub.dev paketleri, topluluk desteği ve ekosistem",
-          "href": "/education/lessons/flutter/module-01/lesson-07"
+          "href": "/education/tests/quiz/tests-flutter/module-01/test-07"
         },
         {
-          "id": "lesson-08",
+          "id": "test-08",
           "title": "Ders 8: Flutter Lisanslama",
           "description": "BSD lisansı ve ticari kullanım hakları",
-          "href": "/education/lessons/flutter/module-01/lesson-08"
+          "href": "/education/tests/quiz/tests-flutter/module-01/test-08"
         },
         {
-          "id": "lesson-09",
+          "id": "test-09",
           "title": "Ders 9: Flutter Topluluk Desteği",
           "description": "Açık kaynak topluluğu ve katkı süreçleri",
-          "href": "/education/lessons/flutter/module-01/lesson-09"
+          "href": "/education/tests/quiz/tests-flutter/module-01/test-09"
         },
         {
-          "id": "lesson-10",
+          "id": "test-10",
           "title": "Ders 10: Flutter'ın Geleceği",
           "description": "Flutter 3.0+ ve gelecek planları",
-          "href": "/education/lessons/flutter/module-01/lesson-10"
+          "href": "/education/tests/quiz/tests-flutter/module-01/test-10"
         },
         {
-          "id": "lesson-11",
+          "id": "test-11",
           "title": "Ders 11: Flutter Kurulum Gereksinimleri",
           "description": "Sistem gereksinimleri ve desteklenen platformlar",
-          "href": "/education/lessons/flutter/module-01/lesson-11"
+          "href": "/education/tests/quiz/tests-flutter/module-01/test-11"
         },
         {
-          "id": "lesson-12",
+          "id": "test-12",
           "title": "Ders 12: Flutter ile Neler Yapılabilir?",
           "description": "Mobil, web, desktop ve embedded uygulamaları",
-          "href": "/education/lessons/flutter/module-01/lesson-12"
+          "href": "/education/tests/quiz/tests-flutter/module-01/test-12"
         },
         {
-          "id": "lesson-13",
+          "id": "test-13",
           "title": "Ders 13: Flutter Performans Özellikleri",
           "description": "Yüksek performans ve 60fps rendering",
-          "href": "/education/lessons/flutter/module-01/lesson-13"
+          "href": "/education/tests/quiz/tests-flutter/module-01/test-13"
         },
         {
-          "id": "lesson-14",
+          "id": "test-14",
           "title": "Ders 14: Flutter UI Özellikleri",
           "description": "Material Design ve Cupertino widget'ları",
-          "href": "/education/lessons/flutter/module-01/lesson-14"
+          "href": "/education/tests/quiz/tests-flutter/module-01/test-14"
         },
         {
-          "id": "lesson-15",
+          "id": "test-15",
           "title": "Ders 15: Modül Özeti ve Değerlendirme",
           "description": "Modül kapsamında öğrenilenlerin özeti ve değerlendirme",
-          "href": "/education/lessons/flutter/module-01/lesson-15"
+          "href": "/education/tests/quiz/tests-flutter/module-01/test-15"
         }
       ]
     },
@@ -130,94 +130,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-01",
+          "id": "test-01",
           "title": "Ders 1: Dart Diline Giriş",
           "description": "Dart programlama dilinin temel özellikleri",
-          "href": "/education/lessons/flutter/module-02/lesson-01"
+          "href": "/education/tests/quiz/tests-flutter/module-02/test-01"
         },
         {
-          "id": "lesson-02",
+          "id": "test-02",
           "title": "Ders 2: Veri Tipleri ve Değişkenler",
           "description": "int, String, bool gibi temel veri tipleri",
-          "href": "/education/lessons/flutter/module-02/lesson-02"
+          "href": "/education/tests/quiz/tests-flutter/module-02/test-02"
         },
         {
-          "id": "lesson-03",
+          "id": "test-03",
           "title": "Ders 3: Operatörler",
           "description": "Aritmetik, karşılaştırma ve mantıksal operatörler",
-          "href": "/education/lessons/flutter/module-02/lesson-03"
+          "href": "/education/tests/quiz/tests-flutter/module-02/test-03"
         },
         {
-          "id": "lesson-04",
+          "id": "test-04",
           "title": "Ders 4: Koşul İfadeleri (if-else)",
           "description": "Koşullu programlama ve if-else yapıları",
-          "href": "/education/lessons/flutter/module-02/lesson-04"
+          "href": "/education/tests/quiz/tests-flutter/module-02/test-04"
         },
         {
-          "id": "lesson-05",
+          "id": "test-05",
           "title": "Ders 5: Switch-Case Yapısı",
           "description": "Çoklu koşul kontrolü için switch-case",
-          "href": "/education/lessons/flutter/module-02/lesson-05"
+          "href": "/education/tests/quiz/tests-flutter/module-02/test-05"
         },
         {
-          "id": "lesson-06",
+          "id": "test-06",
           "title": "Ders 6: Döngüler (for, while, foreach)",
           "description": "Tekrarlayan işlemler için döngü yapıları",
-          "href": "/education/lessons/flutter/module-02/lesson-06"
+          "href": "/education/tests/quiz/tests-flutter/module-02/test-06"
         },
         {
-          "id": "lesson-07",
+          "id": "test-07",
           "title": "Ders 7: Listeler ve Collections",
           "description": "List, Set, Map kullanımı",
-          "href": "/education/lessons/flutter/module-02/lesson-07"
+          "href": "/education/tests/quiz/tests-flutter/module-02/test-07"
         },
         {
-          "id": "lesson-08",
+          "id": "test-08",
           "title": "Ders 8: String İşlemleri",
           "description": "String manipülasyonu ve metodları",
-          "href": "/education/lessons/flutter/module-02/lesson-08"
+          "href": "/education/tests/quiz/tests-flutter/module-02/test-08"
         },
         {
-          "id": "lesson-09",
+          "id": "test-09",
           "title": "Ders 9: Fonksiyonlar (Functions)",
           "description": "Fonksiyon tanımlama ve çağırma",
-          "href": "/education/lessons/flutter/module-02/lesson-09"
+          "href": "/education/tests/quiz/tests-flutter/module-02/test-09"
         },
         {
-          "id": "lesson-10",
+          "id": "test-10",
           "title": "Ders 10: Parametreler ve Return Değerleri",
           "description": "Fonksiyon parametreleri ve dönüş değerleri",
-          "href": "/education/lessons/flutter/module-02/lesson-10"
+          "href": "/education/tests/quiz/tests-flutter/module-02/test-10"
         },
         {
-          "id": "lesson-11",
+          "id": "test-11",
           "title": "Ders 11: Null Safety",
           "description": "Null güvenliği ve nullable tipler",
-          "href": "/education/lessons/flutter/module-02/lesson-11"
+          "href": "/education/tests/quiz/tests-flutter/module-02/test-11"
         },
         {
-          "id": "lesson-12",
+          "id": "test-12",
           "title": "Ders 12: Enum Kullanımı",
           "description": "Sabit değer listeleri için enum",
-          "href": "/education/lessons/flutter/module-02/lesson-12"
+          "href": "/education/tests/quiz/tests-flutter/module-02/test-12"
         },
         {
-          "id": "lesson-13",
+          "id": "test-13",
           "title": "Ders 13: Generics",
           "description": "Generic tipler ve kullanımı",
-          "href": "/education/lessons/flutter/module-02/lesson-13"
+          "href": "/education/tests/quiz/tests-flutter/module-02/test-13"
         },
         {
-          "id": "lesson-14",
+          "id": "test-14",
           "title": "Ders 14: Exception Handling (try-catch)",
           "description": "Hata yönetimi ve exception handling",
-          "href": "/education/lessons/flutter/module-02/lesson-14"
+          "href": "/education/tests/quiz/tests-flutter/module-02/test-14"
         },
         {
-          "id": "lesson-15",
+          "id": "test-15",
           "title": "Ders 15: Modül Özeti ve Uygulama",
           "description": "Öğrenilenlerin pratik uygulaması",
-          "href": "/education/lessons/flutter/module-02/lesson-15"
+          "href": "/education/tests/quiz/tests-flutter/module-02/test-15"
         }
       ]
     },
@@ -234,94 +234,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-01",
+          "id": "test-01",
           "title": "Ders 1: Widget Sistemi Giriş",
           "description": "Widget kavramı ve Flutter'da her şeyin widget olması",
-          "href": "/education/lessons/flutter/module-03/lesson-01"
+          "href": "/education/tests/quiz/tests-flutter/module-03/test-01"
         },
         {
-          "id": "lesson-02",
+          "id": "test-02",
           "title": "Ders 2: StatelessWidget",
           "description": "Değişmeyen widget'lar oluşturma",
-          "href": "/education/lessons/flutter/module-03/lesson-02"
+          "href": "/education/tests/quiz/tests-flutter/module-03/test-02"
         },
         {
-          "id": "lesson-03",
+          "id": "test-03",
           "title": "Ders 3: StatefulWidget",
           "description": "Durum yönetimi olan widget'lar oluşturma",
-          "href": "/education/lessons/flutter/module-03/lesson-03"
+          "href": "/education/tests/quiz/tests-flutter/module-03/test-03"
         },
         {
-          "id": "lesson-04",
+          "id": "test-04",
           "title": "Ders 4: Widget Ağacı (Widget Tree)",
           "description": "Widget hiyerarşisi ve ağaç yapısı",
-          "href": "/education/lessons/flutter/module-03/lesson-04"
+          "href": "/education/tests/quiz/tests-flutter/module-03/test-04"
         },
         {
-          "id": "lesson-05",
+          "id": "test-05",
           "title": "Ders 5: BuildContext",
           "description": "Build context kavramı ve kullanımı",
-          "href": "/education/lessons/flutter/module-03/lesson-05"
+          "href": "/education/tests/quiz/tests-flutter/module-03/test-05"
         },
         {
-          "id": "lesson-06",
+          "id": "test-06",
           "title": "Ders 6: Hot Reload",
           "description": "Hot reload ve hot restart özellikleri",
-          "href": "/education/lessons/flutter/module-03/lesson-06"
+          "href": "/education/tests/quiz/tests-flutter/module-03/test-06"
         },
         {
-          "id": "lesson-07",
+          "id": "test-07",
           "title": "Ders 7: Material Design Widget'ları",
           "description": "Material Design bileşenleri",
-          "href": "/education/lessons/flutter/module-03/lesson-07"
+          "href": "/education/tests/quiz/tests-flutter/module-03/test-07"
         },
         {
-          "id": "lesson-08",
+          "id": "test-08",
           "title": "Ders 8: Cupertino Widget'ları",
           "description": "iOS stili Cupertino bileşenleri",
-          "href": "/education/lessons/flutter/module-03/lesson-08"
+          "href": "/education/tests/quiz/tests-flutter/module-03/test-08"
         },
         {
-          "id": "lesson-09",
+          "id": "test-09",
           "title": "Ders 9: Container ve Padding",
           "description": "Layout widget'ları kullanımı",
-          "href": "/education/lessons/flutter/module-03/lesson-09"
+          "href": "/education/tests/quiz/tests-flutter/module-03/test-09"
         },
         {
-          "id": "lesson-10",
+          "id": "test-10",
           "title": "Ders 10: Row ve Column",
           "description": "Yatay ve dikey yerleşim widget'ları",
-          "href": "/education/lessons/flutter/module-03/lesson-10"
+          "href": "/education/tests/quiz/tests-flutter/module-03/test-10"
         },
         {
-          "id": "lesson-11",
+          "id": "test-11",
           "title": "Ders 11: Expanded ve Flexible",
           "description": "Esnek layout widget'ları",
-          "href": "/education/lessons/flutter/module-03/lesson-11"
+          "href": "/education/tests/quiz/tests-flutter/module-03/test-11"
         },
         {
-          "id": "lesson-12",
+          "id": "test-12",
           "title": "Ders 12: Stack ve Positioned",
           "description": "Üst üste yerleşim widget'ları",
-          "href": "/education/lessons/flutter/module-03/lesson-12"
+          "href": "/education/tests/quiz/tests-flutter/module-03/test-12"
         },
         {
-          "id": "lesson-13",
+          "id": "test-13",
           "title": "Ders 13: Custom Widget Oluşturma",
           "description": "Özel widget'lar yazma",
-          "href": "/education/lessons/flutter/module-03/lesson-13"
+          "href": "/education/tests/quiz/tests-flutter/module-03/test-13"
         },
         {
-          "id": "lesson-14",
+          "id": "test-14",
           "title": "Ders 14: Widget Performansı",
           "description": "Widget optimizasyonu ve best practices",
-          "href": "/education/lessons/flutter/module-03/lesson-14"
+          "href": "/education/tests/quiz/tests-flutter/module-03/test-14"
         },
         {
-          "id": "lesson-15",
+          "id": "test-15",
           "title": "Ders 15: Modül Özeti ve Uygulama",
           "description": "Widget sistemi ile uygulama örneği",
-          "href": "/education/lessons/flutter/module-03/lesson-15"
+          "href": "/education/tests/quiz/tests-flutter/module-03/test-15"
         }
       ]
     },
@@ -338,94 +338,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-01",
+          "id": "test-01",
           "title": "Ders 1: Layout Sistemleri",
           "description": "Flutter'da layout yapısı ve prensipleri",
-          "href": "/education/lessons/flutter/module-04/lesson-01"
+          "href": "/education/tests/quiz/tests-flutter/module-04/test-01"
         },
         {
-          "id": "lesson-02",
+          "id": "test-02",
           "title": "Ders 2: Single Child Layout Widget'ları",
           "description": "Container, Center, Align, Padding",
-          "href": "/education/lessons/flutter/module-04/lesson-02"
+          "href": "/education/tests/quiz/tests-flutter/module-04/test-02"
         },
         {
-          "id": "lesson-03",
+          "id": "test-03",
           "title": "Ders 3: Multi Child Layout Widget'ları",
           "description": "Row, Column, Wrap, Flow",
-          "href": "/education/lessons/flutter/module-04/lesson-03"
+          "href": "/education/tests/quiz/tests-flutter/module-04/test-03"
         },
         {
-          "id": "lesson-04",
+          "id": "test-04",
           "title": "Ders 4: GridView ve ListView",
           "description": "Liste ve grid görünümleri",
-          "href": "/education/lessons/flutter/module-04/lesson-04"
+          "href": "/education/tests/quiz/tests-flutter/module-04/test-04"
         },
         {
-          "id": "lesson-05",
+          "id": "test-05",
           "title": "Ders 5: Responsive Tasarım",
           "description": "Farklı ekran boyutlarına uyum sağlama",
-          "href": "/education/lessons/flutter/module-04/lesson-05"
+          "href": "/education/tests/quiz/tests-flutter/module-04/test-05"
         },
         {
-          "id": "lesson-06",
+          "id": "test-06",
           "title": "Ders 6: MediaQuery",
           "description": "Ekran bilgilerine erişim",
-          "href": "/education/lessons/flutter/module-04/lesson-06"
+          "href": "/education/tests/quiz/tests-flutter/module-04/test-06"
         },
         {
-          "id": "lesson-07",
+          "id": "test-07",
           "title": "Ders 7: Theming",
           "description": "Tema oluşturma ve kullanma",
-          "href": "/education/lessons/flutter/module-04/lesson-07"
+          "href": "/education/tests/quiz/tests-flutter/module-04/test-07"
         },
         {
-          "id": "lesson-08",
+          "id": "test-08",
           "title": "Ders 8: Dark Mode",
           "description": "Karanlık tema implementasyonu",
-          "href": "/education/lessons/flutter/module-04/lesson-08"
+          "href": "/education/tests/quiz/tests-flutter/module-04/test-08"
         },
         {
-          "id": "lesson-09",
+          "id": "test-09",
           "title": "Ders 9: Colors ve Text Styles",
           "description": "Renk ve yazı stili yönetimi",
-          "href": "/education/lessons/flutter/module-04/lesson-09"
+          "href": "/education/tests/quiz/tests-flutter/module-04/test-09"
         },
         {
-          "id": "lesson-10",
+          "id": "test-10",
           "title": "Ders 10: Custom Paint",
           "description": "Özel çizimler ve canvas kullanımı",
-          "href": "/education/lessons/flutter/module-04/lesson-10"
+          "href": "/education/tests/quiz/tests-flutter/module-04/test-10"
         },
         {
-          "id": "lesson-11",
+          "id": "test-11",
           "title": "Ders 11: ClipPath ve CustomClipper",
           "description": "Widget şekillendirme",
-          "href": "/education/lessons/flutter/module-04/lesson-11"
+          "href": "/education/tests/quiz/tests-flutter/module-04/test-11"
         },
         {
-          "id": "lesson-12",
+          "id": "test-12",
           "title": "Ders 12: Animations (Basit)",
           "description": "Temel animasyonlar",
-          "href": "/education/lessons/flutter/module-04/lesson-12"
+          "href": "/education/tests/quiz/tests-flutter/module-04/test-12"
         },
         {
-          "id": "lesson-13",
+          "id": "test-13",
           "title": "Ders 13: Transform ve Decorations",
           "description": "Dönüşümler ve dekorasyonlar",
-          "href": "/education/lessons/flutter/module-04/lesson-13"
+          "href": "/education/tests/quiz/tests-flutter/module-04/test-13"
         },
         {
-          "id": "lesson-14",
+          "id": "test-14",
           "title": "Ders 14: Layout Best Practices",
           "description": "Layout tasarım en iyi uygulamaları",
-          "href": "/education/lessons/flutter/module-04/lesson-14"
+          "href": "/education/tests/quiz/tests-flutter/module-04/test-14"
         },
         {
-          "id": "lesson-15",
+          "id": "test-15",
           "title": "Ders 15: Modül Özeti ve Uygulama",
           "description": "Layout ve styling ile uygulama örneği",
-          "href": "/education/lessons/flutter/module-04/lesson-15"
+          "href": "/education/tests/quiz/tests-flutter/module-04/test-15"
         }
       ]
     },
@@ -442,94 +442,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-01",
+          "id": "test-01",
           "title": "Ders 1: State Management Nedir?",
           "description": "State yönetimi kavramına giriş",
-          "href": "/education/lessons/flutter/module-05/lesson-01"
+          "href": "/education/tests/quiz/tests-flutter/module-05/test-01"
         },
         {
-          "id": "lesson-02",
+          "id": "test-02",
           "title": "Ders 2: setState Kullanımı",
           "description": "Temel state güncelleme yöntemi",
-          "href": "/education/lessons/flutter/module-05/lesson-02"
+          "href": "/education/tests/quiz/tests-flutter/module-05/test-02"
         },
         {
-          "id": "lesson-03",
+          "id": "test-03",
           "title": "Ders 3: StatefulWidget ile State",
           "description": "Widget içinde state yönetimi",
-          "href": "/education/lessons/flutter/module-05/lesson-03"
+          "href": "/education/tests/quiz/tests-flutter/module-05/test-03"
         },
         {
-          "id": "lesson-04",
+          "id": "test-04",
           "title": "Ders 4: Provider Pattern Giriş",
           "description": "Provider paketine giriş",
-          "href": "/education/lessons/flutter/module-05/lesson-04"
+          "href": "/education/tests/quiz/tests-flutter/module-05/test-04"
         },
         {
-          "id": "lesson-05",
+          "id": "test-05",
           "title": "Ders 5: ChangeNotifier ve Provider",
           "description": "Provider ile state yönetimi",
-          "href": "/education/lessons/flutter/module-05/lesson-05"
+          "href": "/education/tests/quiz/tests-flutter/module-05/test-05"
         },
         {
-          "id": "lesson-06",
+          "id": "test-06",
           "title": "Ders 6: Consumer ve Selector",
           "description": "Widget'ları state değişikliklerine bağlama",
-          "href": "/education/lessons/flutter/module-05/lesson-06"
+          "href": "/education/tests/quiz/tests-flutter/module-05/test-06"
         },
         {
-          "id": "lesson-07",
+          "id": "test-07",
           "title": "Ders 7: Riverpod Giriş",
           "description": "Riverpod paketine giriş",
-          "href": "/education/lessons/flutter/module-05/lesson-07"
+          "href": "/education/tests/quiz/tests-flutter/module-05/test-07"
         },
         {
-          "id": "lesson-08",
+          "id": "test-08",
           "title": "Ders 8: Riverpod Providers",
           "description": "Riverpod ile state yönetimi",
-          "href": "/education/lessons/flutter/module-05/lesson-08"
+          "href": "/education/tests/quiz/tests-flutter/module-05/test-08"
         },
         {
-          "id": "lesson-09",
+          "id": "test-09",
           "title": "Ders 9: Bloc Pattern Giriş",
           "description": "Bloc paketine giriş",
-          "href": "/education/lessons/flutter/module-05/lesson-09"
+          "href": "/education/tests/quiz/tests-flutter/module-05/test-09"
         },
         {
-          "id": "lesson-10",
+          "id": "test-10",
           "title": "Ders 10: BlocBuilder ve BlocListener",
           "description": "Bloc ile UI bağlama",
-          "href": "/education/lessons/flutter/module-05/lesson-10"
+          "href": "/education/tests/quiz/tests-flutter/module-05/test-10"
         },
         {
-          "id": "lesson-11",
+          "id": "test-11",
           "title": "Ders 11: GetX Giriş",
           "description": "GetX paketine giriş",
-          "href": "/education/lessons/flutter/module-05/lesson-11"
+          "href": "/education/tests/quiz/tests-flutter/module-05/test-11"
         },
         {
-          "id": "lesson-12",
+          "id": "test-12",
           "title": "Ders 12: Redux Pattern",
           "description": "Redux pattern ve flutter_redux",
-          "href": "/education/lessons/flutter/module-05/lesson-12"
+          "href": "/education/tests/quiz/tests-flutter/module-05/test-12"
         },
         {
-          "id": "lesson-13",
+          "id": "test-13",
           "title": "Ders 13: State Management Karşılaştırması",
           "description": "Farklı çözümlerin karşılaştırması",
-          "href": "/education/lessons/flutter/module-05/lesson-13"
+          "href": "/education/tests/quiz/tests-flutter/module-05/test-13"
         },
         {
-          "id": "lesson-14",
+          "id": "test-14",
           "title": "Ders 14: State Management Best Practices",
           "description": "State yönetimi en iyi uygulamaları",
-          "href": "/education/lessons/flutter/module-05/lesson-14"
+          "href": "/education/tests/quiz/tests-flutter/module-05/test-14"
         },
         {
-          "id": "lesson-15",
+          "id": "test-15",
           "title": "Ders 15: Modül Özeti ve Uygulama",
           "description": "State management ile uygulama örneği",
-          "href": "/education/lessons/flutter/module-05/lesson-15"
+          "href": "/education/tests/quiz/tests-flutter/module-05/test-15"
         }
       ]
     },
@@ -546,94 +546,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-01",
+          "id": "test-01",
           "title": "Ders 1: Navigasyon Temelleri",
           "description": "Flutter'da navigasyon kavramı",
-          "href": "/education/lessons/flutter/module-06/lesson-01"
+          "href": "/education/tests/quiz/tests-flutter/module-06/test-01"
         },
         {
-          "id": "lesson-02",
+          "id": "test-02",
           "title": "Ders 2: Navigator.push ve pop",
           "description": "Temel sayfa geçişleri",
-          "href": "/education/lessons/flutter/module-06/lesson-02"
+          "href": "/education/tests/quiz/tests-flutter/module-06/test-02"
         },
         {
-          "id": "lesson-03",
+          "id": "test-03",
           "title": "Ders 3: MaterialPageRoute",
           "description": "Sayfa route'ları oluşturma",
-          "href": "/education/lessons/flutter/module-06/lesson-03"
+          "href": "/education/tests/quiz/tests-flutter/module-06/test-03"
         },
         {
-          "id": "lesson-04",
+          "id": "test-04",
           "title": "Ders 4: Named Routes",
           "description": "İsimlendirilmiş route'lar",
-          "href": "/education/lessons/flutter/module-06/lesson-04"
+          "href": "/education/tests/quiz/tests-flutter/module-06/test-04"
         },
         {
-          "id": "lesson-05",
+          "id": "test-05",
           "title": "Ders 5: Route Arguments",
           "description": "Route'lara parametre gönderme",
-          "href": "/education/lessons/flutter/module-06/lesson-05"
+          "href": "/education/tests/quiz/tests-flutter/module-06/test-05"
         },
         {
-          "id": "lesson-06",
+          "id": "test-06",
           "title": "Ders 6: Navigator 2.0",
           "description": "Yeni navigasyon API'si",
-          "href": "/education/lessons/flutter/module-06/lesson-06"
+          "href": "/education/tests/quiz/tests-flutter/module-06/test-06"
         },
         {
-          "id": "lesson-07",
+          "id": "test-07",
           "title": "Ders 7: Deep Linking",
           "description": "URL bazlı navigasyon",
-          "href": "/education/lessons/flutter/module-06/lesson-07"
+          "href": "/education/tests/quiz/tests-flutter/module-06/test-07"
         },
         {
-          "id": "lesson-08",
+          "id": "test-08",
           "title": "Ders 8: go_router Paketi",
           "description": "Declarative routing çözümü",
-          "href": "/education/lessons/flutter/module-06/lesson-08"
+          "href": "/education/tests/quiz/tests-flutter/module-06/test-08"
         },
         {
-          "id": "lesson-09",
+          "id": "test-09",
           "title": "Ders 9: Bottom Navigation Bar",
           "description": "Alt navigasyon çubuğu",
-          "href": "/education/lessons/flutter/module-06/lesson-09"
+          "href": "/education/tests/quiz/tests-flutter/module-06/test-09"
         },
         {
-          "id": "lesson-10",
+          "id": "test-10",
           "title": "Ders 10: Tab Navigation",
           "description": "Tab bazlı navigasyon",
-          "href": "/education/lessons/flutter/module-06/lesson-10"
+          "href": "/education/tests/quiz/tests-flutter/module-06/test-10"
         },
         {
-          "id": "lesson-11",
+          "id": "test-11",
           "title": "Ders 11: Drawer Navigation",
           "description": "Yan menü navigasyonu",
-          "href": "/education/lessons/flutter/module-06/lesson-11"
+          "href": "/education/tests/quiz/tests-flutter/module-06/test-11"
         },
         {
-          "id": "lesson-12",
+          "id": "test-12",
           "title": "Ders 12: Custom Route Transitions",
           "description": "Özel geçiş animasyonları",
-          "href": "/education/lessons/flutter/module-06/lesson-12"
+          "href": "/education/tests/quiz/tests-flutter/module-06/test-12"
         },
         {
-          "id": "lesson-13",
+          "id": "test-13",
           "title": "Ders 13: Route Guards",
           "description": "Route koruma ve yetkilendirme",
-          "href": "/education/lessons/flutter/module-06/lesson-13"
+          "href": "/education/tests/quiz/tests-flutter/module-06/test-13"
         },
         {
-          "id": "lesson-14",
+          "id": "test-14",
           "title": "Ders 14: Navigation Best Practices",
           "description": "Navigasyon en iyi uygulamaları",
-          "href": "/education/lessons/flutter/module-06/lesson-14"
+          "href": "/education/tests/quiz/tests-flutter/module-06/test-14"
         },
         {
-          "id": "lesson-15",
+          "id": "test-15",
           "title": "Ders 15: Modül Özeti ve Uygulama",
           "description": "Navigasyon ile uygulama örneği",
-          "href": "/education/lessons/flutter/module-06/lesson-15"
+          "href": "/education/tests/quiz/tests-flutter/module-06/test-15"
         }
       ]
     },
@@ -650,94 +650,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-01",
+          "id": "test-01",
           "title": "Ders 1: Form Widget'ı",
           "description": "Form widget'ına giriş",
-          "href": "/education/lessons/flutter/module-07/lesson-01"
+          "href": "/education/tests/quiz/tests-flutter/module-07/test-01"
         },
         {
-          "id": "lesson-02",
+          "id": "test-02",
           "title": "Ders 2: TextField ve TextFormField",
           "description": "Metin girişi widget'ları",
-          "href": "/education/lessons/flutter/module-07/lesson-02"
+          "href": "/education/tests/quiz/tests-flutter/module-07/test-02"
         },
         {
-          "id": "lesson-03",
+          "id": "test-03",
           "title": "Ders 3: FormField ve GlobalKey",
           "description": "Form state yönetimi",
-          "href": "/education/lessons/flutter/module-07/lesson-03"
+          "href": "/education/tests/quiz/tests-flutter/module-07/test-03"
         },
         {
-          "id": "lesson-04",
+          "id": "test-04",
           "title": "Ders 4: Input Validation",
           "description": "Giriş doğrulama kuralları",
-          "href": "/education/lessons/flutter/module-07/lesson-04"
+          "href": "/education/tests/quiz/tests-flutter/module-07/test-04"
         },
         {
-          "id": "lesson-05",
+          "id": "test-05",
           "title": "Ders 5: Custom Validators",
           "description": "Özel doğrulama fonksiyonları",
-          "href": "/education/lessons/flutter/module-07/lesson-05"
+          "href": "/education/tests/quiz/tests-flutter/module-07/test-05"
         },
         {
-          "id": "lesson-06",
+          "id": "test-06",
           "title": "Ders 6: Checkbox ve Radio",
           "description": "Seçim widget'ları",
-          "href": "/education/lessons/flutter/module-07/lesson-06"
+          "href": "/education/tests/quiz/tests-flutter/module-07/test-06"
         },
         {
-          "id": "lesson-07",
+          "id": "test-07",
           "title": "Ders 7: Dropdown ve DropdownButton",
           "description": "Açılır menü widget'ları",
-          "href": "/education/lessons/flutter/module-07/lesson-07"
+          "href": "/education/tests/quiz/tests-flutter/module-07/test-07"
         },
         {
-          "id": "lesson-08",
+          "id": "test-08",
           "title": "Ders 8: DatePicker ve TimePicker",
           "description": "Tarih ve saat seçici widget'ları",
-          "href": "/education/lessons/flutter/module-07/lesson-08"
+          "href": "/education/tests/quiz/tests-flutter/module-07/test-08"
         },
         {
-          "id": "lesson-09",
+          "id": "test-09",
           "title": "Ders 9: File Picker",
           "description": "Dosya seçimi widget'ları",
-          "href": "/education/lessons/flutter/module-07/lesson-09"
+          "href": "/education/tests/quiz/tests-flutter/module-07/test-09"
         },
         {
-          "id": "lesson-10",
+          "id": "test-10",
           "title": "Ders 10: FormState ile Çalışma",
           "description": "Form durumu yönetimi",
-          "href": "/education/lessons/flutter/module-07/lesson-10"
+          "href": "/education/tests/quiz/tests-flutter/module-07/test-10"
         },
         {
-          "id": "lesson-11",
+          "id": "test-11",
           "title": "Ders 11: Reactive Forms",
           "description": "reactive_forms paketi",
-          "href": "/education/lessons/flutter/module-07/lesson-11"
+          "href": "/education/tests/quiz/tests-flutter/module-07/test-11"
         },
         {
-          "id": "lesson-12",
+          "id": "test-12",
           "title": "Ders 12: FormBuilder",
           "description": "flutter_form_builder paketi",
-          "href": "/education/lessons/flutter/module-07/lesson-12"
+          "href": "/education/tests/quiz/tests-flutter/module-07/test-12"
         },
         {
-          "id": "lesson-13",
+          "id": "test-13",
           "title": "Ders 13: Form Best Practices",
           "description": "Form tasarım en iyi uygulamaları",
-          "href": "/education/lessons/flutter/module-07/lesson-13"
+          "href": "/education/tests/quiz/tests-flutter/module-07/test-13"
         },
         {
-          "id": "lesson-14",
+          "id": "test-14",
           "title": "Ders 14: Form Testing",
           "description": "Form test stratejileri",
-          "href": "/education/lessons/flutter/module-07/lesson-14"
+          "href": "/education/tests/quiz/tests-flutter/module-07/test-14"
         },
         {
-          "id": "lesson-15",
+          "id": "test-15",
           "title": "Ders 15: Modül Özeti ve Uygulama",
           "description": "Form handling ile uygulama örneği",
-          "href": "/education/lessons/flutter/module-07/lesson-15"
+          "href": "/education/tests/quiz/tests-flutter/module-07/test-15"
         }
       ]
     },
@@ -754,94 +754,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-01",
+          "id": "test-01",
           "title": "Ders 1: HTTP Temelleri",
           "description": "HTTP protokolü ve Flutter'da kullanımı",
-          "href": "/education/lessons/flutter/module-08/lesson-01"
+          "href": "/education/tests/quiz/tests-flutter/module-08/test-01"
         },
         {
-          "id": "lesson-02",
+          "id": "test-02",
           "title": "Ders 2: http Paketi",
           "description": "http paketine giriş",
-          "href": "/education/lessons/flutter/module-08/lesson-02"
+          "href": "/education/tests/quiz/tests-flutter/module-08/test-02"
         },
         {
-          "id": "lesson-03",
+          "id": "test-03",
           "title": "Ders 3: GET Request",
           "description": "Veri çekme istekleri",
-          "href": "/education/lessons/flutter/module-08/lesson-03"
+          "href": "/education/tests/quiz/tests-flutter/module-08/test-03"
         },
         {
-          "id": "lesson-04",
+          "id": "test-04",
           "title": "Ders 4: POST, PUT, DELETE Request",
           "description": "Veri gönderme ve güncelleme istekleri",
-          "href": "/education/lessons/flutter/module-08/lesson-04"
+          "href": "/education/tests/quiz/tests-flutter/module-08/test-04"
         },
         {
-          "id": "lesson-05",
+          "id": "test-05",
           "title": "Ders 5: Headers ve Authentication",
           "description": "İstek başlıkları ve kimlik doğrulama",
-          "href": "/education/lessons/flutter/module-08/lesson-05"
+          "href": "/education/tests/quiz/tests-flutter/module-08/test-05"
         },
         {
-          "id": "lesson-06",
+          "id": "test-06",
           "title": "Ders 6: JSON Serialization",
           "description": "JSON verilerini parse etme",
-          "href": "/education/lessons/flutter/module-08/lesson-06"
+          "href": "/education/tests/quiz/tests-flutter/module-08/test-06"
         },
         {
-          "id": "lesson-07",
+          "id": "test-07",
           "title": "Ders 7: json_serializable",
           "description": "Otomatik JSON serialization",
-          "href": "/education/lessons/flutter/module-08/lesson-07"
+          "href": "/education/tests/quiz/tests-flutter/module-08/test-07"
         },
         {
-          "id": "lesson-08",
+          "id": "test-08",
           "title": "Ders 8: dio Paketi",
           "description": "Gelişmiş HTTP istemcisi",
-          "href": "/education/lessons/flutter/module-08/lesson-08"
+          "href": "/education/tests/quiz/tests-flutter/module-08/test-08"
         },
         {
-          "id": "lesson-09",
+          "id": "test-09",
           "title": "Ders 9: Error Handling",
           "description": "HTTP hata yönetimi",
-          "href": "/education/lessons/flutter/module-08/lesson-09"
+          "href": "/education/tests/quiz/tests-flutter/module-08/test-09"
         },
         {
-          "id": "lesson-10",
+          "id": "test-10",
           "title": "Ders 10: Timeout ve Retry",
           "description": "Zaman aşımı ve yeniden deneme",
-          "href": "/education/lessons/flutter/module-08/lesson-10"
+          "href": "/education/tests/quiz/tests-flutter/module-08/test-10"
         },
         {
-          "id": "lesson-11",
+          "id": "test-11",
           "title": "Ders 11: Interceptors",
           "description": "İstek/yanıt aracıları",
-          "href": "/education/lessons/flutter/module-08/lesson-11"
+          "href": "/education/tests/quiz/tests-flutter/module-08/test-11"
         },
         {
-          "id": "lesson-12",
+          "id": "test-12",
           "title": "Ders 12: Caching",
           "description": "HTTP önbellekleme stratejileri",
-          "href": "/education/lessons/flutter/module-08/lesson-12"
+          "href": "/education/tests/quiz/tests-flutter/module-08/test-12"
         },
         {
-          "id": "lesson-13",
+          "id": "test-13",
           "title": "Ders 13: API Service Pattern",
           "description": "API servis katmanı tasarımı",
-          "href": "/education/lessons/flutter/module-08/lesson-13"
+          "href": "/education/tests/quiz/tests-flutter/module-08/test-13"
         },
         {
-          "id": "lesson-14",
+          "id": "test-14",
           "title": "Ders 14: API Testing",
           "description": "API entegrasyon testleri",
-          "href": "/education/lessons/flutter/module-08/lesson-14"
+          "href": "/education/tests/quiz/tests-flutter/module-08/test-14"
         },
         {
-          "id": "lesson-15",
+          "id": "test-15",
           "title": "Ders 15: Modül Özeti ve Uygulama",
           "description": "HTTP ve API entegrasyonu ile uygulama örneği",
-          "href": "/education/lessons/flutter/module-08/lesson-15"
+          "href": "/education/tests/quiz/tests-flutter/module-08/test-15"
         }
       ]
     },
@@ -858,94 +858,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-01",
+          "id": "test-01",
           "title": "Ders 1: Local Storage Temelleri",
           "description": "Yerel veri saklama kavramı",
-          "href": "/education/lessons/flutter/module-09/lesson-01"
+          "href": "/education/tests/quiz/tests-flutter/module-09/test-01"
         },
         {
-          "id": "lesson-02",
+          "id": "test-02",
           "title": "Ders 2: SharedPreferences",
           "description": "Basit key-value saklama",
-          "href": "/education/lessons/flutter/module-09/lesson-02"
+          "href": "/education/tests/quiz/tests-flutter/module-09/test-02"
         },
         {
-          "id": "lesson-03",
+          "id": "test-03",
           "title": "Ders 3: SQLite Giriş",
           "description": "SQLite veritabanı kavramı",
-          "href": "/education/lessons/flutter/module-09/lesson-03"
+          "href": "/education/tests/quiz/tests-flutter/module-09/test-03"
         },
         {
-          "id": "lesson-04",
+          "id": "test-04",
           "title": "Ders 4: sqflite Paketi",
           "description": "SQLite Flutter entegrasyonu",
-          "href": "/education/lessons/flutter/module-09/lesson-04"
+          "href": "/education/tests/quiz/tests-flutter/module-09/test-04"
         },
         {
-          "id": "lesson-05",
+          "id": "test-05",
           "title": "Ders 5: Database Schema",
           "description": "Veritabanı şeması tasarımı",
-          "href": "/education/lessons/flutter/module-09/lesson-05"
+          "href": "/education/tests/quiz/tests-flutter/module-09/test-05"
         },
         {
-          "id": "lesson-06",
+          "id": "test-06",
           "title": "Ders 6: CRUD İşlemleri",
           "description": "Create, Read, Update, Delete işlemleri",
-          "href": "/education/lessons/flutter/module-09/lesson-06"
+          "href": "/education/tests/quiz/tests-flutter/module-09/test-06"
         },
         {
-          "id": "lesson-07",
+          "id": "test-07",
           "title": "Ders 7: Database Migrations",
           "description": "Veritabanı migrasyonları",
-          "href": "/education/lessons/flutter/module-09/lesson-07"
+          "href": "/education/tests/quiz/tests-flutter/module-09/test-07"
         },
         {
-          "id": "lesson-08",
+          "id": "test-08",
           "title": "Ders 8: Hive Giriş",
           "description": "Hive NoSQL veritabanı",
-          "href": "/education/lessons/flutter/module-09/lesson-08"
+          "href": "/education/tests/quiz/tests-flutter/module-09/test-08"
         },
         {
-          "id": "lesson-09",
+          "id": "test-09",
           "title": "Ders 9: Hive Boxes",
           "description": "Hive ile veri saklama",
-          "href": "/education/lessons/flutter/module-09/lesson-09"
+          "href": "/education/tests/quiz/tests-flutter/module-09/test-09"
         },
         {
-          "id": "lesson-10",
+          "id": "test-10",
           "title": "Ders 10: Sembox",
           "description": "Sembox veritabanı çözümü",
-          "href": "/education/lessons/flutter/module-09/lesson-10"
+          "href": "/education/tests/quiz/tests-flutter/module-09/test-10"
         },
         {
-          "id": "lesson-11",
+          "id": "test-11",
           "title": "Ders 11: Drift (Moor)",
           "description": "Drift reactive database",
-          "href": "/education/lessons/flutter/module-09/lesson-11"
+          "href": "/education/tests/quiz/tests-flutter/module-09/test-11"
         },
         {
-          "id": "lesson-12",
+          "id": "test-12",
           "title": "Ders 12: ObjectBox",
           "description": "ObjectBox performans veritabanı",
-          "href": "/education/lessons/flutter/module-09/lesson-12"
+          "href": "/education/tests/quiz/tests-flutter/module-09/test-12"
         },
         {
-          "id": "lesson-13",
+          "id": "test-13",
           "title": "Ders 13: Database Best Practices",
           "description": "Veritabanı kullanım en iyi uygulamaları",
-          "href": "/education/lessons/flutter/module-09/lesson-13"
+          "href": "/education/tests/quiz/tests-flutter/module-09/test-13"
         },
         {
-          "id": "lesson-14",
+          "id": "test-14",
           "title": "Ders 14: Data Synchronization",
           "description": "Veri senkronizasyon stratejileri",
-          "href": "/education/lessons/flutter/module-09/lesson-14"
+          "href": "/education/tests/quiz/tests-flutter/module-09/test-14"
         },
         {
-          "id": "lesson-15",
+          "id": "test-15",
           "title": "Ders 15: Modül Özeti ve Uygulama",
           "description": "Local storage ile uygulama örneği",
-          "href": "/education/lessons/flutter/module-09/lesson-15"
+          "href": "/education/tests/quiz/tests-flutter/module-09/test-15"
         }
       ]
     },
@@ -962,94 +962,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-01",
+          "id": "test-01",
           "title": "Ders 1: Firebase Giriş",
           "description": "Firebase platformuna giriş",
-          "href": "/education/lessons/flutter/module-10/lesson-01"
+          "href": "/education/tests/quiz/tests-flutter/module-10/test-01"
         },
         {
-          "id": "lesson-02",
+          "id": "test-02",
           "title": "Ders 2: Firebase Proje Kurulumu",
           "description": "Flutter'da Firebase yapılandırması",
-          "href": "/education/lessons/flutter/module-10/lesson-02"
+          "href": "/education/tests/quiz/tests-flutter/module-10/test-02"
         },
         {
-          "id": "lesson-03",
+          "id": "test-03",
           "title": "Ders 3: Firebase Authentication",
           "description": "Kimlik doğrulama servisi",
-          "href": "/education/lessons/flutter/module-10/lesson-03"
+          "href": "/education/tests/quiz/tests-flutter/module-10/test-03"
         },
         {
-          "id": "lesson-04",
+          "id": "test-04",
           "title": "Ders 4: Email/Password Authentication",
           "description": "E-posta ve şifre ile giriş",
-          "href": "/education/lessons/flutter/module-10/lesson-04"
+          "href": "/education/tests/quiz/tests-flutter/module-10/test-04"
         },
         {
-          "id": "lesson-05",
+          "id": "test-05",
           "title": "Ders 5: Social Authentication",
           "description": "Google, Facebook ile giriş",
-          "href": "/education/lessons/flutter/module-10/lesson-05"
+          "href": "/education/tests/quiz/tests-flutter/module-10/test-05"
         },
         {
-          "id": "lesson-06",
+          "id": "test-06",
           "title": "Ders 6: Cloud Firestore",
           "description": "NoSQL veritabanı servisi",
-          "href": "/education/lessons/flutter/module-10/lesson-06"
+          "href": "/education/tests/quiz/tests-flutter/module-10/test-06"
         },
         {
-          "id": "lesson-07",
+          "id": "test-07",
           "title": "Ders 7: Firestore CRUD",
           "description": "Firestore veri işlemleri",
-          "href": "/education/lessons/flutter/module-10/lesson-07"
+          "href": "/education/tests/quiz/tests-flutter/module-10/test-07"
         },
         {
-          "id": "lesson-08",
+          "id": "test-08",
           "title": "Ders 8: Firestore Queries",
           "description": "Firestore sorgulama",
-          "href": "/education/lessons/flutter/module-10/lesson-08"
+          "href": "/education/tests/quiz/tests-flutter/module-10/test-08"
         },
         {
-          "id": "lesson-09",
+          "id": "test-09",
           "title": "Ders 9: Realtime Updates",
           "description": "Gerçek zamanlı veri güncellemeleri",
-          "href": "/education/lessons/flutter/module-10/lesson-09"
+          "href": "/education/tests/quiz/tests-flutter/module-10/test-09"
         },
         {
-          "id": "lesson-10",
+          "id": "test-10",
           "title": "Ders 10: Cloud Storage",
           "description": "Dosya saklama servisi",
-          "href": "/education/lessons/flutter/module-10/lesson-10"
+          "href": "/education/tests/quiz/tests-flutter/module-10/test-10"
         },
         {
-          "id": "lesson-11",
+          "id": "test-11",
           "title": "Ders 11: Cloud Messaging",
           "description": "Push notification servisi",
-          "href": "/education/lessons/flutter/module-10/lesson-11"
+          "href": "/education/tests/quiz/tests-flutter/module-10/test-11"
         },
         {
-          "id": "lesson-12",
+          "id": "test-12",
           "title": "Ders 12: Firebase Analytics",
           "description": "Kullanım analizi servisi",
-          "href": "/education/lessons/flutter/module-10/lesson-12"
+          "href": "/education/tests/quiz/tests-flutter/module-10/test-12"
         },
         {
-          "id": "lesson-13",
+          "id": "test-13",
           "title": "Ders 13: Firebase Remote Config",
           "description": "Uzaktan yapılandırma servisi",
-          "href": "/education/lessons/flutter/module-10/lesson-13"
+          "href": "/education/tests/quiz/tests-flutter/module-10/test-13"
         },
         {
-          "id": "lesson-14",
+          "id": "test-14",
           "title": "Ders 14: Firebase Crashlytics",
           "description": "Hata takibi servisi",
-          "href": "/education/lessons/flutter/module-10/lesson-14"
+          "href": "/education/tests/quiz/tests-flutter/module-10/test-14"
         },
         {
-          "id": "lesson-15",
+          "id": "test-15",
           "title": "Ders 15: Modül Özeti ve Uygulama",
           "description": "Firebase entegrasyonu ile uygulama örneği",
-          "href": "/education/lessons/flutter/module-10/lesson-15"
+          "href": "/education/tests/quiz/tests-flutter/module-10/test-15"
         }
       ]
     },
@@ -1066,94 +1066,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-01",
+          "id": "test-01",
           "title": "Ders 1: Animasyon Temelleri",
           "description": "Flutter'da animasyon kavramı",
-          "href": "/education/lessons/flutter/module-11/lesson-01"
+          "href": "/education/tests/quiz/tests-flutter/module-11/test-01"
         },
         {
-          "id": "lesson-02",
+          "id": "test-02",
           "title": "Ders 2: AnimationController",
           "description": "Animasyon kontrolcüsü",
-          "href": "/education/lessons/flutter/module-11/lesson-02"
+          "href": "/education/tests/quiz/tests-flutter/module-11/test-02"
         },
         {
-          "id": "lesson-03",
+          "id": "test-03",
           "title": "Ders 3: Tween",
           "description": "Değer aralığı animasyonları",
-          "href": "/education/lessons/flutter/module-11/lesson-03"
+          "href": "/education/tests/quiz/tests-flutter/module-11/test-03"
         },
         {
-          "id": "lesson-04",
+          "id": "test-04",
           "title": "Ders 4: Animation ve AnimatedBuilder",
           "description": "Animasyon widget'ları",
-          "href": "/education/lessons/flutter/module-11/lesson-04"
+          "href": "/education/tests/quiz/tests-flutter/module-11/test-04"
         },
         {
-          "id": "lesson-05",
+          "id": "test-05",
           "title": "Ders 5: CurvedAnimation",
           "description": "Eğri animasyonları",
-          "href": "/education/lessons/flutter/module-11/lesson-05"
+          "href": "/education/tests/quiz/tests-flutter/module-11/test-05"
         },
         {
-          "id": "lesson-06",
+          "id": "test-06",
           "title": "Ders 6: Hero Animations",
           "description": "Sayfa geçiş animasyonları",
-          "href": "/education/lessons/flutter/module-11/lesson-06"
+          "href": "/education/tests/quiz/tests-flutter/module-11/test-06"
         },
         {
-          "id": "lesson-07",
+          "id": "test-07",
           "title": "Ders 7: Page Transitions",
           "description": "Sayfa geçiş animasyonları",
-          "href": "/education/lessons/flutter/module-11/lesson-07"
+          "href": "/education/tests/quiz/tests-flutter/module-11/test-07"
         },
         {
-          "id": "lesson-08",
+          "id": "test-08",
           "title": "Ders 8: Implicit Animations",
           "description": "AnimatedContainer, AnimatedOpacity",
-          "href": "/education/lessons/flutter/module-11/lesson-08"
+          "href": "/education/tests/quiz/tests-flutter/module-11/test-08"
         },
         {
-          "id": "lesson-09",
+          "id": "test-09",
           "title": "Ders 9: Staggered Animations",
           "description": "Sıralı animasyonlar",
-          "href": "/education/lessons/flutter/module-11/lesson-09"
+          "href": "/education/tests/quiz/tests-flutter/module-11/test-09"
         },
         {
-          "id": "lesson-10",
+          "id": "test-10",
           "title": "Ders 10: Physics-based Animations",
           "description": "Fizik tabanlı animasyonlar",
-          "href": "/education/lessons/flutter/module-11/lesson-10"
+          "href": "/education/tests/quiz/tests-flutter/module-11/test-10"
         },
         {
-          "id": "lesson-11",
+          "id": "test-11",
           "title": "Ders 11: Custom Paint Animations",
           "description": "Özel çizim animasyonları",
-          "href": "/education/lessons/flutter/module-11/lesson-11"
+          "href": "/education/tests/quiz/tests-flutter/module-11/test-11"
         },
         {
-          "id": "lesson-12",
+          "id": "test-12",
           "title": "Ders 12: Lottie Animations",
           "description": "Lottie dosyaları kullanımı",
-          "href": "/education/lessons/flutter/module-11/lesson-12"
+          "href": "/education/tests/quiz/tests-flutter/module-11/test-12"
         },
         {
-          "id": "lesson-13",
+          "id": "test-13",
           "title": "Ders 13: Rive Animations",
           "description": "Rive animasyonları",
-          "href": "/education/lessons/flutter/module-11/lesson-13"
+          "href": "/education/tests/quiz/tests-flutter/module-11/test-13"
         },
         {
-          "id": "lesson-14",
+          "id": "test-14",
           "title": "Ders 14: Animation Best Practices",
           "description": "Animasyon tasarım en iyi uygulamaları",
-          "href": "/education/lessons/flutter/module-11/lesson-14"
+          "href": "/education/tests/quiz/tests-flutter/module-11/test-14"
         },
         {
-          "id": "lesson-15",
+          "id": "test-15",
           "title": "Ders 15: Modül Özeti ve Uygulama",
           "description": "Animasyonlar ile uygulama örneği",
-          "href": "/education/lessons/flutter/module-11/lesson-15"
+          "href": "/education/tests/quiz/tests-flutter/module-11/test-15"
         }
       ]
     },
@@ -1170,94 +1170,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-01",
+          "id": "test-01",
           "title": "Ders 1: Platform Channels Giriş",
           "description": "Platform kanalları kavramı",
-          "href": "/education/lessons/flutter/module-12/lesson-01"
+          "href": "/education/tests/quiz/tests-flutter/module-12/test-01"
         },
         {
-          "id": "lesson-02",
+          "id": "test-02",
           "title": "Ders 2: Method Channels",
           "description": "Metod kanalları ile iletişim",
-          "href": "/education/lessons/flutter/module-12/lesson-02"
+          "href": "/education/tests/quiz/tests-flutter/module-12/test-02"
         },
         {
-          "id": "lesson-03",
+          "id": "test-03",
           "title": "Ders 3: Event Channels",
           "description": "Olay kanalları ile iletişim",
-          "href": "/education/lessons/flutter/module-12/lesson-03"
+          "href": "/education/tests/quiz/tests-flutter/module-12/test-03"
         },
         {
-          "id": "lesson-04",
+          "id": "test-04",
           "title": "Ders 4: Android Native Kod",
           "description": "Kotlin/Java ile Android kod",
-          "href": "/education/lessons/flutter/module-12/lesson-04"
+          "href": "/education/tests/quiz/tests-flutter/module-12/test-04"
         },
         {
-          "id": "lesson-05",
+          "id": "test-05",
           "title": "Ders 5: iOS Native Kod",
           "description": "Swift/Objective-C ile iOS kod",
-          "href": "/education/lessons/flutter/module-12/lesson-05"
+          "href": "/education/tests/quiz/tests-flutter/module-12/test-05"
         },
         {
-          "id": "lesson-06",
+          "id": "test-06",
           "title": "Ders 6: Platform-Specific Widgets",
           "description": "Platform bazlı widget kullanımı",
-          "href": "/education/lessons/flutter/module-12/lesson-06"
+          "href": "/education/tests/quiz/tests-flutter/module-12/test-06"
         },
         {
-          "id": "lesson-07",
+          "id": "test-07",
           "title": "Ders 7: Camera Integration",
           "description": "Kamera erişimi",
-          "href": "/education/lessons/flutter/module-12/lesson-07"
+          "href": "/education/tests/quiz/tests-flutter/module-12/test-07"
         },
         {
-          "id": "lesson-08",
+          "id": "test-08",
           "title": "Ders 8: Location Services",
           "description": "Konum servisleri",
-          "href": "/education/lessons/flutter/module-12/lesson-08"
+          "href": "/education/tests/quiz/tests-flutter/module-12/test-08"
         },
         {
-          "id": "lesson-09",
+          "id": "test-09",
           "title": "Ders 9: Device Sensors",
           "description": "Cihaz sensörleri",
-          "href": "/education/lessons/flutter/module-12/lesson-09"
+          "href": "/education/tests/quiz/tests-flutter/module-12/test-09"
         },
         {
-          "id": "lesson-10",
+          "id": "test-10",
           "title": "Ders 10: File System Access",
           "description": "Dosya sistemi erişimi",
-          "href": "/education/lessons/flutter/module-12/lesson-10"
+          "href": "/education/tests/quiz/tests-flutter/module-12/test-10"
         },
         {
-          "id": "lesson-11",
+          "id": "test-11",
           "title": "Ders 11: Biometric Authentication",
           "description": "Biyometrik kimlik doğrulama",
-          "href": "/education/lessons/flutter/module-12/lesson-11"
+          "href": "/education/tests/quiz/tests-flutter/module-12/test-11"
         },
         {
-          "id": "lesson-12",
+          "id": "test-12",
           "title": "Ders 12: Background Tasks",
           "description": "Arka plan görevleri",
-          "href": "/education/lessons/flutter/module-12/lesson-12"
+          "href": "/education/tests/quiz/tests-flutter/module-12/test-12"
         },
         {
-          "id": "lesson-13",
+          "id": "test-13",
           "title": "Ders 13: Plugin Development",
           "description": "Özel plugin geliştirme",
-          "href": "/education/lessons/flutter/module-12/lesson-13"
+          "href": "/education/tests/quiz/tests-flutter/module-12/test-13"
         },
         {
-          "id": "lesson-14",
+          "id": "test-14",
           "title": "Ders 14: Platform Channels Best Practices",
           "description": "Platform kanalları en iyi uygulamaları",
-          "href": "/education/lessons/flutter/module-12/lesson-14"
+          "href": "/education/tests/quiz/tests-flutter/module-12/test-14"
         },
         {
-          "id": "lesson-15",
+          "id": "test-15",
           "title": "Ders 15: Modül Özeti ve Uygulama",
           "description": "Platform channels ile uygulama örneği",
-          "href": "/education/lessons/flutter/module-12/lesson-15"
+          "href": "/education/tests/quiz/tests-flutter/module-12/test-15"
         }
       ]
     },
@@ -1274,94 +1274,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-01",
+          "id": "test-01",
           "title": "Ders 1: Testing Temelleri",
           "description": "Flutter'da test kavramı ve türleri",
-          "href": "/education/lessons/flutter/module-13/lesson-01"
+          "href": "/education/tests/quiz/tests-flutter/module-13/test-01"
         },
         {
-          "id": "lesson-02",
+          "id": "test-02",
           "title": "Ders 2: Unit Tests",
           "description": "Fonksiyon ve sınıf testleri",
-          "href": "/education/lessons/flutter/module-13/lesson-02"
+          "href": "/education/tests/quiz/tests-flutter/module-13/test-02"
         },
         {
-          "id": "lesson-03",
+          "id": "test-03",
           "title": "Ders 3: Widget Tests",
           "description": "Widget test yazma",
-          "href": "/education/lessons/flutter/module-13/lesson-03"
+          "href": "/education/tests/quiz/tests-flutter/module-13/test-03"
         },
         {
-          "id": "lesson-04",
+          "id": "test-04",
           "title": "Ders 4: Test Assertions",
           "description": "Test doğrulamaları",
-          "href": "/education/lessons/flutter/module-13/lesson-04"
+          "href": "/education/tests/quiz/tests-flutter/module-13/test-04"
         },
         {
-          "id": "lesson-05",
+          "id": "test-05",
           "title": "Ders 5: Mocking",
           "description": "Mock objeler oluşturma",
-          "href": "/education/lessons/flutter/module-13/lesson-05"
+          "href": "/education/tests/quiz/tests-flutter/module-13/test-05"
         },
         {
-          "id": "lesson-06",
+          "id": "test-06",
           "title": "Ders 6: Golden Tests",
           "description": "Görsel snapshot testleri",
-          "href": "/education/lessons/flutter/module-13/lesson-06"
+          "href": "/education/tests/quiz/tests-flutter/module-13/test-06"
         },
         {
-          "id": "lesson-07",
+          "id": "test-07",
           "title": "Ders 7: Integration Tests",
           "description": "Uçtan uca testler",
-          "href": "/education/lessons/flutter/module-13/lesson-07"
+          "href": "/education/tests/quiz/tests-flutter/module-13/test-07"
         },
         {
-          "id": "lesson-08",
+          "id": "test-08",
           "title": "Ders 8: Test Coverage",
           "description": "Test kapsamı analizi",
-          "href": "/education/lessons/flutter/module-13/lesson-08"
+          "href": "/education/tests/quiz/tests-flutter/module-13/test-08"
         },
         {
-          "id": "lesson-09",
+          "id": "test-09",
           "title": "Ders 9: Test-Driven Development",
           "description": "TDD yaklaşımı",
-          "href": "/education/lessons/flutter/module-13/lesson-09"
+          "href": "/education/tests/quiz/tests-flutter/module-13/test-09"
         },
         {
-          "id": "lesson-10",
+          "id": "test-10",
           "title": "Ders 10: CI/CD Testing",
           "description": "Sürekli entegrasyonda testler",
-          "href": "/education/lessons/flutter/module-13/lesson-10"
+          "href": "/education/tests/quiz/tests-flutter/module-13/test-10"
         },
         {
-          "id": "lesson-11",
+          "id": "test-11",
           "title": "Ders 11: Performance Testing",
           "description": "Performans testleri",
-          "href": "/education/lessons/flutter/module-13/lesson-11"
+          "href": "/education/tests/quiz/tests-flutter/module-13/test-11"
         },
         {
-          "id": "lesson-12",
+          "id": "test-12",
           "title": "Ders 12: UI Testing",
           "description": "Kullanıcı arayüzü testleri",
-          "href": "/education/lessons/flutter/module-13/lesson-12"
+          "href": "/education/tests/quiz/tests-flutter/module-13/test-12"
         },
         {
-          "id": "lesson-13",
+          "id": "test-13",
           "title": "Ders 13: Test Utilities",
           "description": "Test yardımcı araçları",
-          "href": "/education/lessons/flutter/module-13/lesson-13"
+          "href": "/education/tests/quiz/tests-flutter/module-13/test-13"
         },
         {
-          "id": "lesson-14",
+          "id": "test-14",
           "title": "Ders 14: Testing Best Practices",
           "description": "Test yazma en iyi uygulamaları",
-          "href": "/education/lessons/flutter/module-13/lesson-14"
+          "href": "/education/tests/quiz/tests-flutter/module-13/test-14"
         },
         {
-          "id": "lesson-15",
+          "id": "test-15",
           "title": "Ders 15: Modül Özeti ve Uygulama",
           "description": "Testing ile uygulama örneği",
-          "href": "/education/lessons/flutter/module-13/lesson-15"
+          "href": "/education/tests/quiz/tests-flutter/module-13/test-15"
         }
       ]
     },
@@ -1378,94 +1378,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-01",
+          "id": "test-01",
           "title": "Ders 1: Build Temelleri",
           "description": "Flutter build süreçleri",
-          "href": "/education/lessons/flutter/module-14/lesson-01"
+          "href": "/education/tests/quiz/tests-flutter/module-14/test-01"
         },
         {
-          "id": "lesson-02",
+          "id": "test-02",
           "title": "Ders 2: Debug ve Release Builds",
           "description": "Debug ve release modları",
-          "href": "/education/lessons/flutter/module-14/lesson-02"
+          "href": "/education/tests/quiz/tests-flutter/module-14/test-02"
         },
         {
-          "id": "lesson-03",
+          "id": "test-03",
           "title": "Ders 3: Android Build Configuration",
           "description": "Android build yapılandırması",
-          "href": "/education/lessons/flutter/module-14/lesson-03"
+          "href": "/education/tests/quiz/tests-flutter/module-14/test-03"
         },
         {
-          "id": "lesson-04",
+          "id": "test-04",
           "title": "Ders 4: Android APK Build",
           "description": "APK dosyası oluşturma",
-          "href": "/education/lessons/flutter/module-14/lesson-04"
+          "href": "/education/tests/quiz/tests-flutter/module-14/test-04"
         },
         {
-          "id": "lesson-05",
+          "id": "test-05",
           "title": "Ders 5: Android App Bundle (AAB)",
           "description": "AAB dosyası oluşturma",
-          "href": "/education/lessons/flutter/module-14/lesson-05"
+          "href": "/education/tests/quiz/tests-flutter/module-14/test-05"
         },
         {
-          "id": "lesson-06",
+          "id": "test-06",
           "title": "Ders 6: Android App Signing",
           "description": "Uygulama imzalama",
-          "href": "/education/lessons/flutter/module-14/lesson-06"
+          "href": "/education/tests/quiz/tests-flutter/module-14/test-06"
         },
         {
-          "id": "lesson-07",
+          "id": "test-07",
           "title": "Ders 7: iOS Build Configuration",
           "description": "iOS build yapılandırması",
-          "href": "/education/lessons/flutter/module-14/lesson-07"
+          "href": "/education/tests/quiz/tests-flutter/module-14/test-07"
         },
         {
-          "id": "lesson-08",
+          "id": "test-08",
           "title": "Ders 8: iOS IPA Build",
           "description": "IPA dosyası oluşturma",
-          "href": "/education/lessons/flutter/module-14/lesson-08"
+          "href": "/education/tests/quiz/tests-flutter/module-14/test-08"
         },
         {
-          "id": "lesson-09",
+          "id": "test-09",
           "title": "Ders 9: iOS Code Signing",
           "description": "iOS uygulama imzalama",
-          "href": "/education/lessons/flutter/module-14/lesson-09"
+          "href": "/education/tests/quiz/tests-flutter/module-14/test-09"
         },
         {
-          "id": "lesson-10",
+          "id": "test-10",
           "title": "Ders 10: Google Play Store",
           "description": "Play Store'a yükleme",
-          "href": "/education/lessons/flutter/module-14/lesson-10"
+          "href": "/education/tests/quiz/tests-flutter/module-14/test-10"
         },
         {
-          "id": "lesson-11",
+          "id": "test-11",
           "title": "Ders 11: Apple App Store",
           "description": "App Store'a yükleme",
-          "href": "/education/lessons/flutter/module-14/lesson-11"
+          "href": "/education/tests/quiz/tests-flutter/module-14/test-11"
         },
         {
-          "id": "lesson-12",
+          "id": "test-12",
           "title": "Ders 12: Version Management",
           "description": "Versiyon yönetimi",
-          "href": "/education/lessons/flutter/module-14/lesson-12"
+          "href": "/education/tests/quiz/tests-flutter/module-14/test-12"
         },
         {
-          "id": "lesson-13",
+          "id": "test-13",
           "title": "Ders 13: CI/CD Pipeline",
           "description": "Sürekli entegrasyon ve dağıtım",
-          "href": "/education/lessons/flutter/module-14/lesson-13"
+          "href": "/education/tests/quiz/tests-flutter/module-14/test-13"
         },
         {
-          "id": "lesson-14",
+          "id": "test-14",
           "title": "Ders 14: Build Best Practices",
           "description": "Build ve deployment en iyi uygulamaları",
-          "href": "/education/lessons/flutter/module-14/lesson-14"
+          "href": "/education/tests/quiz/tests-flutter/module-14/test-14"
         },
         {
-          "id": "lesson-15",
+          "id": "test-15",
           "title": "Ders 15: Modül Özeti ve Uygulama",
           "description": "Build ve deployment ile uygulama örneği",
-          "href": "/education/lessons/flutter/module-14/lesson-15"
+          "href": "/education/tests/quiz/tests-flutter/module-14/test-15"
         }
       ]
     },
@@ -1482,94 +1482,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-01",
+          "id": "test-01",
           "title": "Ders 1: Proje Planlama",
           "description": "Proje gereksinimleri ve planlama",
-          "href": "/education/lessons/flutter/module-15/lesson-01"
+          "href": "/education/tests/quiz/tests-flutter/module-15/test-01"
         },
         {
-          "id": "lesson-02",
+          "id": "test-02",
           "title": "Ders 2: Mimari Tasarım",
           "description": "Uygulama mimarisi tasarımı",
-          "href": "/education/lessons/flutter/module-15/lesson-02"
+          "href": "/education/tests/quiz/tests-flutter/module-15/test-02"
         },
         {
-          "id": "lesson-03",
+          "id": "test-03",
           "title": "Ders 3: UI/UX Tasarım",
           "description": "Kullanıcı arayüzü tasarımı",
-          "href": "/education/lessons/flutter/module-15/lesson-03"
+          "href": "/education/tests/quiz/tests-flutter/module-15/test-03"
         },
         {
-          "id": "lesson-04",
+          "id": "test-04",
           "title": "Ders 4: State Management Implementasyonu",
           "description": "State yönetimi kurulumu",
-          "href": "/education/lessons/flutter/module-15/lesson-04"
+          "href": "/education/tests/quiz/tests-flutter/module-15/test-04"
         },
         {
-          "id": "lesson-05",
+          "id": "test-05",
           "title": "Ders 5: API Entegrasyonu",
           "description": "Backend API entegrasyonu",
-          "href": "/education/lessons/flutter/module-15/lesson-05"
+          "href": "/education/tests/quiz/tests-flutter/module-15/test-05"
         },
         {
-          "id": "lesson-06",
+          "id": "test-06",
           "title": "Ders 6: Authentication",
           "description": "Kimlik doğrulama implementasyonu",
-          "href": "/education/lessons/flutter/module-15/lesson-06"
+          "href": "/education/tests/quiz/tests-flutter/module-15/test-06"
         },
         {
-          "id": "lesson-07",
+          "id": "test-07",
           "title": "Ders 7: Database Integration",
           "description": "Veritabanı entegrasyonu",
-          "href": "/education/lessons/flutter/module-15/lesson-07"
+          "href": "/education/tests/quiz/tests-flutter/module-15/test-07"
         },
         {
-          "id": "lesson-08",
+          "id": "test-08",
           "title": "Ders 8: Testing Strategy",
           "description": "Test stratejisi ve implementasyonu",
-          "href": "/education/lessons/flutter/module-15/lesson-08"
+          "href": "/education/tests/quiz/tests-flutter/module-15/test-08"
         },
         {
-          "id": "lesson-09",
+          "id": "test-09",
           "title": "Ders 9: Performance Optimization",
           "description": "Performans optimizasyonu",
-          "href": "/education/lessons/flutter/module-15/lesson-09"
+          "href": "/education/tests/quiz/tests-flutter/module-15/test-09"
         },
         {
-          "id": "lesson-10",
+          "id": "test-10",
           "title": "Ders 10: Error Handling",
           "description": "Kapsamlı hata yönetimi",
-          "href": "/education/lessons/flutter/module-15/lesson-10"
+          "href": "/education/tests/quiz/tests-flutter/module-15/test-10"
         },
         {
-          "id": "lesson-11",
+          "id": "test-11",
           "title": "Ders 11: Localization",
           "description": "Çoklu dil desteği",
-          "href": "/education/lessons/flutter/module-15/lesson-11"
+          "href": "/education/tests/quiz/tests-flutter/module-15/test-11"
         },
         {
-          "id": "lesson-12",
+          "id": "test-12",
           "title": "Ders 12: Push Notifications",
           "description": "Bildirim servisleri",
-          "href": "/education/lessons/flutter/module-15/lesson-12"
+          "href": "/education/tests/quiz/tests-flutter/module-15/test-12"
         },
         {
-          "id": "lesson-13",
+          "id": "test-13",
           "title": "Ders 13: App Store Submission",
           "description": "Uygulama mağazalarına yükleme",
-          "href": "/education/lessons/flutter/module-15/lesson-13"
+          "href": "/education/tests/quiz/tests-flutter/module-15/test-13"
         },
         {
-          "id": "lesson-14",
+          "id": "test-14",
           "title": "Ders 14: Monitoring ve Analytics",
           "description": "İzleme ve analitik implementasyonu",
-          "href": "/education/lessons/flutter/module-15/lesson-14"
+          "href": "/education/tests/quiz/tests-flutter/module-15/test-14"
         },
         {
-          "id": "lesson-15",
+          "id": "test-15",
           "title": "Ders 15: Proje Sunumu ve Değerlendirme",
           "description": "Proje sunumu ve kod incelemesi",
-          "href": "/education/lessons/flutter/module-15/lesson-15"
+          "href": "/education/tests/quiz/tests-flutter/module-15/test-15"
         }
       ]
     }

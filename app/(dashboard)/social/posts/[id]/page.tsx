@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter, useParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { X, Loader2, Heart, Bookmark, MoreHorizontal } from "lucide-react";
+import { X, Loader2, Heart, Bookmark, MoreHorizontal, Trash2, Flag } from "lucide-react";
 import { CommentSection } from "@/app/components/social/CommentSection";
 import { Button } from "@/app/components/ui/Button";
 
@@ -55,6 +55,64 @@ export default function PostDetailPage() {
   const [isLiking, setIsLiking] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [isCommenting, setIsCommenting] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  const isOwner = post ? post.userId === session?.user?.id : false;
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        menuRef.current &&
+        buttonRef.current &&
+        !menuRef.current.contains(event.target as Node) &&
+        !buttonRef.current.contains(event.target as Node)
+      ) {
+        setShowMenu(false);
+      }
+    };
+
+    if (showMenu) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showMenu]);
+
+  const handleDelete = async () => {
+    if (!post || !confirm("Bu gönderiyi silmek istediğinize emin misiniz?")) {
+      return;
+    }
+
+    setIsDeleting(true);
+    try {
+      const response = await fetch(`/api/posts/${post.id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("Gönderi silinirken bir hata oluştu");
+      }
+
+      router.back();
+    } catch (error) {
+      console.error("Error deleting post:", error);
+      alert("Gönderi silinirken bir hata oluştu");
+    } finally {
+      setIsDeleting(false);
+      setShowMenu(false);
+    }
+  };
+
+  const handleReport = () => {
+    alert("Şikayet özelliği yakında eklenecek.");
+    setShowMenu(false);
+  };
 
   const fetchPost = useCallback(async () => {
     if (status !== "authenticated" || !session?.user?.id) return;
@@ -306,23 +364,48 @@ export default function PostDetailPage() {
                   {post.user.name || post.user.email.split("@")[0]}
                 </Link>
               </div>
-              <button className="p-1 hover:opacity-70 transition-opacity">
-                <MoreHorizontal className="w-5 h-5 text-[#262626] dark:text-[#fafafa]" />
-              </button>
+              <div className="relative">
+                <button
+                  ref={buttonRef}
+                  onClick={() => setShowMenu(!showMenu)}
+                  className="p-1 hover:opacity-70 transition-opacity"
+                  disabled={isDeleting}
+                >
+                  <MoreHorizontal className="w-5 h-5 text-[#262626] dark:text-[#fafafa]" />
+                </button>
+
+                {/* Dropdown Menu */}
+                {showMenu && (
+                  <div
+                    ref={menuRef}
+                    className="absolute right-0 top-full mt-2 w-48 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl shadow-xl z-50 overflow-hidden"
+                  >
+                    {isOwner ? (
+                      <button
+                        onClick={handleDelete}
+                        disabled={isDeleting}
+                        className="w-full px-4 py-3 text-left text-sm font-semibold text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors flex items-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                        {isDeleting ? "Siliniyor..." : "Sil"}
+                      </button>
+                    ) : (
+                      <button
+                        onClick={handleReport}
+                        className="w-full px-4 py-3 text-left text-sm font-semibold text-[#262626] dark:text-[#fafafa] hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors flex items-center gap-3"
+                      >
+                        <Flag className="w-4 h-4" />
+                        Şikayet Et
+                      </button>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Comments section - Scrollable */}
             <div className="flex-1 overflow-y-auto min-h-0">
               <div className="px-3 sm:px-4 py-3 sm:py-4 space-y-3 sm:space-y-4">
-                {/* Likes count and caption */}
-                {likesCount > 0 && (
-                  <div className="mb-2">
-                    <span className="text-sm font-semibold text-[#262626] dark:text-[#fafafa]">
-                      {likesCount.toLocaleString()} beğenme
-                    </span>
-                  </div>
-                )}
-
                 {/* Caption */}
                 {post.content && (
                   <div className="mb-4">
@@ -341,17 +424,24 @@ export default function PostDetailPage() {
                 {/* Actions - Like and Save buttons */}
                 <div className="mb-3 pb-3 border-b border-[#dbdbdb] dark:border-[#383838]">
                   <div className="flex items-center gap-3 sm:gap-4">
-                    <button
-                      onClick={handleLike}
-                      disabled={isLiking}
-                      className="p-0 hover:opacity-70 transition-opacity disabled:opacity-50"
-                    >
-                      {isLiked ? (
-                        <Heart className="w-6 h-6 text-[#ed4956] fill-[#ed4956]" />
-                      ) : (
-                        <Heart className="w-6 h-6 text-[#262626] dark:text-[#fafafa]" />
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={handleLike}
+                        disabled={isLiking}
+                        className="p-0 hover:opacity-70 transition-opacity disabled:opacity-50"
+                      >
+                        {isLiked ? (
+                          <Heart className="w-6 h-6 text-[#ed4956] fill-[#ed4956]" />
+                        ) : (
+                          <Heart className="w-6 h-6 text-[#262626] dark:text-[#fafafa]" />
+                        )}
+                      </button>
+                      {likesCount > 0 && (
+                        <span className="text-sm font-semibold text-[#262626] dark:text-[#fafafa]">
+                          {likesCount.toLocaleString()}
+                        </span>
                       )}
-                    </button>
+                    </div>
                     <div className="flex-1" />
                     <button
                       onClick={handleSave}

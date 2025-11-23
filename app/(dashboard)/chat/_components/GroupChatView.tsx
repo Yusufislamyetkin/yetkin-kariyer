@@ -194,6 +194,7 @@ export function GroupChatView({ category }: GroupChatViewProps) {
   const presenceStateRef = useRef<PresenceState>({});
   const postPresenceRef = useRef<((status: "online" | "offline", options?: { useBeacon?: boolean }) => Promise<void>) | null>(null);
   const [presenceState, setPresenceState] = useState<PresenceState>({});
+  const messagesRef = useRef<ChatMessage[]>([]);
 
   const [showSidebar, setShowSidebar] = useState(false);
   const [showMemberPanel, setShowMemberPanel] = useState(false);
@@ -249,6 +250,11 @@ export function GroupChatView({ category }: GroupChatViewProps) {
       refreshTimeoutRef.current = null;
     }, 300);
   }, [refreshChatSummary]);
+
+  // Keep messagesRef in sync with messages state for SignalR handler
+  useEffect(() => {
+    messagesRef.current = messages;
+  }, [messages]);
 
   useEffect(() => {
     return () => {
@@ -1379,16 +1385,26 @@ export function GroupChatView({ category }: GroupChatViewProps) {
       };
 
       if (incoming.groupId === selectedGroupId) {
-        // Mesajı ekle ve scroll yap (kendi mesajımız veya başkasının mesajı fark etmez, hep scroll yap)
-        upsertMessage(incoming, { scroll: true });
+        // Kendi gönderdiğimiz mesajları kontrol et - eğer zaten varsa tekrar ekleme
+        // Bu, optimistic update ve API response'dan sonra SignalR'ın aynı mesajı tekrar eklemesini önler
+        const isOwnMessage = incoming.userId === currentUserId;
+        const messageAlreadyExists = messagesRef.current.some((msg) => msg.id === incoming.id);
+        
+        if (isOwnMessage && messageAlreadyExists) {
+          // Kendi mesajımız zaten mevcut, SignalR'dan gelen duplicate'i atla
+          console.log("[GroupChat] Skipping duplicate own message from SignalR:", incoming.id);
+        } else {
+          // Mesajı ekle ve scroll yap (kendi mesajımız veya başkasının mesajı fark etmez, hep scroll yap)
+          upsertMessage(incoming, { scroll: true });
 
-        if (incoming.userId !== currentUserId) {
-          await markMessagesAsRead(selectedGroupId, [incoming.id]);
-        }
+          if (incoming.userId !== currentUserId) {
+            await markMessagesAsRead(selectedGroupId, [incoming.id]);
+          }
 
-        // Mesaj geldiğinde presence güncelle
-        if (postPresenceRef.current) {
-          postPresenceRef.current("online");
+          // Mesaj geldiğinde presence güncelle
+          if (postPresenceRef.current) {
+            postPresenceRef.current("online");
+          }
         }
       }
 

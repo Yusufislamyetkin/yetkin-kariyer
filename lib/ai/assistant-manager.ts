@@ -33,9 +33,10 @@ export async function getOrCreateAssistant(systemPrompt: string): Promise<string
     try {
       const existing = await client.beta.assistants.retrieve(AI_ASSISTANT_ID);
       // Assistant'ı güncelle (system prompt değişmiş olabilir)
+      const modelToUse = getAssistantModel();
       await client.beta.assistants.update(AI_ASSISTANT_ID, {
         instructions: systemPrompt,
-        model: AI_ASSISTANT_MODEL,
+        model: modelToUse,
       });
       cachedAssistantId = AI_ASSISTANT_ID;
       return AI_ASSISTANT_ID;
@@ -49,9 +50,10 @@ export async function getOrCreateAssistant(systemPrompt: string): Promise<string
     try {
       const existing = await client.beta.assistants.retrieve(cachedAssistantId);
       // System prompt güncelle
+      const modelToUse = getAssistantModel();
       await client.beta.assistants.update(cachedAssistantId, {
         instructions: systemPrompt,
-        model: AI_ASSISTANT_MODEL,
+        model: modelToUse,
       });
       return cachedAssistantId;
     } catch (error) {
@@ -60,40 +62,73 @@ export async function getOrCreateAssistant(systemPrompt: string): Promise<string
     }
   }
 
-  // Yeni assistant oluştur
+  // Yeni assistant oluştur - model fallback ile
+  const modelToUse = getAssistantModel();
   try {
     const assistant = await client.beta.assistants.create({
       name: "Yetkin Hub Öğretmen AI",
       instructions: systemPrompt,
-      model: AI_ASSISTANT_MODEL,
+      model: modelToUse,
       temperature: 0.7,
     });
 
     cachedAssistantId = assistant.id;
-    console.log("Yeni assistant oluşturuldu:", assistant.id);
+    console.log("Yeni assistant oluşturuldu:", assistant.id, "Model:", modelToUse);
     return assistant.id;
-  } catch (error) {
+  } catch (error: any) {
     console.error("Assistant oluşturma hatası:", error);
-    throw new Error("Assistant oluşturulamadı");
+    
+    // Model hatası ise fallback dene
+    if (error?.code === "model_not_found" || error?.error?.code === "model_not_found") {
+      console.warn("Model bulunamadı, fallback model deneniyor:", modelToUse);
+      
+      // Fallback modelleri dene
+      const fallbackModels = ["gpt-4o-mini", "gpt-4o", "gpt-4-turbo"];
+      
+      for (const fallbackModel of fallbackModels) {
+        try {
+          console.log("Fallback model deneniyor:", fallbackModel);
+          const assistant = await client.beta.assistants.create({
+            name: "Yetkin Hub Öğretmen AI",
+            instructions: systemPrompt,
+            model: fallbackModel,
+            temperature: 0.7,
+          });
+          
+          cachedAssistantId = assistant.id;
+          console.log("Assistant fallback model ile oluşturuldu:", assistant.id, "Model:", fallbackModel);
+          return assistant.id;
+        } catch (fallbackError) {
+          console.warn("Fallback model başarısız:", fallbackModel, fallbackError);
+          continue;
+        }
+      }
+    }
+    
+    throw new Error(`Assistant oluşturulamadı: ${error?.message || String(error)}`);
   }
 }
 
 /**
  * Model seçimi için fallback mekanizması
- * GPT-5 → GPT-4.1 → GPT-4o
+ * Assistant API için geçerli modelleri dener
  */
 export function getAssistantModel(): string {
   const requestedModel = AI_ASSISTANT_MODEL;
 
-  // Model listesi (öncelik sırasına göre)
-  const availableModels = ["gpt-5", "gpt-4.1", "gpt-4o", "gpt-4-turbo", "gpt-4o-mini"];
+  // Assistant API için geçerli modeller (öncelik sırasına göre)
+  const availableModels = [
+    "gpt-4o-mini",        // GPT-4o Mini (en güvenilir ve hızlı)
+    "gpt-4o",             // GPT-4o (en güncel)
+    "gpt-4-turbo",        // GPT-4 Turbo
+  ];
 
   // İstenen model listede varsa kullan
   if (availableModels.includes(requestedModel)) {
     return requestedModel;
   }
 
-  // Fallback: GPT-4o
-  return "gpt-4o";
+  // Fallback: GPT-4o Mini (Assistant API için geçerli ve güvenilir)
+  return "gpt-4o-mini";
 }
 

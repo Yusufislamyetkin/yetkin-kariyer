@@ -1,20 +1,10 @@
 "use client";
 
 import { useEffect, useMemo, useRef } from "react";
-import dynamic from "next/dynamic";
-import type * as MonacoEditorType from "@monaco-editor/react";
-import type { editor as MonacoEditor, IDisposable } from "monaco-editor";
+import Editor from "@monaco-editor/react";
+import type { editor } from "monaco-editor";
 import { LiveCodingLanguage } from "@/types/live-coding";
 import { cn } from "@/lib/utils";
-
-const Monaco = dynamic<MonacoEditorType.EditorProps>(() => import("@monaco-editor/react"), {
-  ssr: false,
-  loading: () => (
-    <div className="flex items-center justify-center h-64 bg-gray-900/70 text-gray-200 text-sm rounded-md border border-gray-800">
-      Kod editörü yükleniyor...
-    </div>
-  ),
-});
 
 const LANGUAGE_LABELS: Record<LiveCodingLanguage, string> = {
   csharp: "C#",
@@ -23,7 +13,7 @@ const LANGUAGE_LABELS: Record<LiveCodingLanguage, string> = {
   java: "Java",
 };
 
-const MONACO_LANGUAGE_IDS: Record<LiveCodingLanguage, string> = {
+const MONACO_LANGUAGE_MAP: Record<LiveCodingLanguage, string> = {
   csharp: "csharp",
   python: "python",
   javascript: "javascript",
@@ -69,88 +59,62 @@ export function LiveCodingEditor({
   timeRemainingSeconds,
   className,
 }: LiveCodingEditorProps) {
-  const editorRef = useRef<MonacoEditor.IStandaloneCodeEditor | null>(null);
-  const disposablesRef = useRef<IDisposable[]>([]);
+  const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
 
   const displayLanguages = useMemo<LiveCodingLanguage[]>(() => {
     if (languages.length === 0) {
       return ["csharp", "python", "javascript", "java"];
     }
-
     return languages;
   }, [languages]);
 
+  const monacoLanguage = MONACO_LANGUAGE_MAP[activeLanguage] || "javascript";
+  const heightValue = typeof height === "number" ? `${height}px` : height;
+
+  // Disable paste, copy, cut, and context menu
   useEffect(() => {
-    return () => {
-      disposablesRef.current.forEach((disposable) => {
-        try {
-          disposable.dispose();
-        } catch {
-          // no-op
+    const editor = editorRef.current;
+    if (!editor) return;
+
+    const disposable = editor.onKeyDown((e) => {
+      // Disable Ctrl+V / Cmd+V (paste)
+      if ((e.ctrlKey || e.metaKey) && e.keyCode === 86) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      // Disable Ctrl+C / Cmd+C (copy)
+      if ((e.ctrlKey || e.metaKey) && e.keyCode === 67) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      // Disable Ctrl+X / Cmd+X (cut)
+      if ((e.ctrlKey || e.metaKey) && e.keyCode === 88) {
+        if (readOnly) {
+          e.preventDefault();
+          e.stopPropagation();
         }
-      });
-      disposablesRef.current = [];
-    };
-  }, []);
-
-  const handleMount: MonacoEditorType.EditorProps["onMount"] = (editor, monaco) => {
-    editorRef.current = editor;
-
-    editor.updateOptions({
-      readOnly,
-      minimap: { enabled: false },
-      fontSize: 14,
-      lineNumbers: "on",
-      scrollBeyondLastLine: false,
-      automaticLayout: true,
-      renderLineHighlight: "line",
-      contextmenu: false,
-      quickSuggestions: false,
+      }
     });
 
-    disposablesRef.current.push(
-      editor.onKeyDown((event) => {
-        if ((event.ctrlKey || event.metaKey) && ["KeyC", "KeyV", "KeyX", "KeyA"].includes(event.code)) {
-          event.preventDefault();
-        }
+    // Disable context menu
+    const contextMenuDisposable = editor.onContextMenu((e) => {
+      e.event.preventDefault();
+    });
 
-        if (event.shiftKey && event.code === "Insert") {
-          event.preventDefault();
-        }
-      })
-    );
-
-    const domNode = editor.getDomNode();
-    if (domNode) {
-      const preventClipboardEvent = (event: ClipboardEvent) => {
-        event.preventDefault();
-      };
-
-      const preventContextMenu = (event: MouseEvent) => {
-        event.preventDefault();
-      };
-
-      domNode.addEventListener("copy", preventClipboardEvent, true);
-      domNode.addEventListener("cut", preventClipboardEvent, true);
-      domNode.addEventListener("paste", preventClipboardEvent, true);
-      domNode.addEventListener("contextmenu", preventContextMenu, true);
-
-      disposablesRef.current.push({
-        dispose: () => {
-          domNode.removeEventListener("copy", preventClipboardEvent, true);
-          domNode.removeEventListener("cut", preventClipboardEvent, true);
-          domNode.removeEventListener("paste", preventClipboardEvent, true);
-          domNode.removeEventListener("contextmenu", preventContextMenu, true);
-        },
-      });
-    }
-  };
-
-  useEffect(() => {
-    if (editorRef.current) {
-      editorRef.current.updateOptions({ readOnly });
-    }
+    return () => {
+      disposable.dispose();
+      contextMenuDisposable.dispose();
+    };
   }, [readOnly]);
+
+  const handleEditorDidMount = (editor: editor.IStandaloneCodeEditor) => {
+    editorRef.current = editor;
+
+    // Disable paste via right-click menu
+    editor.onContextMenu(() => {
+      // Context menu is already disabled above
+    });
+  };
 
   return (
     <div className={cn("bg-gray-950/80 border border-gray-800 rounded-lg shadow-inner", className)}>
@@ -190,27 +154,38 @@ export function LiveCodingEditor({
           </span>
         </div>
       </div>
-      <Monaco
-        key={`${taskId}-${activeLanguage}`}
-        theme="vs-dark"
-        language={MONACO_LANGUAGE_IDS[activeLanguage]}
+      <Editor
+        height={heightValue}
+        language={monacoLanguage}
         value={value}
-        onChange={(val) => onChange(val ?? "")}
-        onMount={handleMount}
+        onChange={(val) => onChange(val || "")}
+        onMount={handleEditorDidMount}
+        theme="vs-dark"
         options={{
           readOnly,
           minimap: { enabled: false },
           fontSize: 14,
+          fontFamily: "Consolas, 'Courier New', monospace",
           lineNumbers: "on",
+          roundedSelection: false,
           scrollBeyondLastLine: false,
-          renderLineHighlight: "line",
-          occurrencesHighlight: "off",
-          selectionHighlight: false,
+          automaticLayout: true,
+          tabSize: 2,
+          wordWrap: "on",
+          formatOnPaste: false,
+          formatOnType: false,
+          suggestOnTriggerCharacters: false,
+          acceptSuggestionOnEnter: "off",
+          quickSuggestions: false,
+          contextmenu: false,
+          copyWithSyntaxHighlighting: false,
+          domReadOnly: true,
+          unicodeHighlight: {
+            ambiguousCharacters: false,
+            invisibleCharacters: false,
+          },
         }}
-        height={height}
       />
     </div>
   );
 }
-
-

@@ -63,7 +63,38 @@ export async function GET() {
       };
     });
 
-    return NextResponse.json({ friendships: data });
+    // Remove duplicates by counterpart.id for accepted friendships
+    // Keep the most recent friendship if duplicates exist
+    const seenCounterparts = new Map<string, (typeof data)[0]>();
+    const uniqueData: (typeof data) = [];
+    
+    for (const friendship of data) {
+      if (friendship.status === "accepted") {
+        const counterpartId = friendship.counterpart.id;
+        const existing = seenCounterparts.get(counterpartId);
+        if (existing) {
+          // Keep the most recent one
+          if (new Date(friendship.requestedAt) > new Date(existing.requestedAt)) {
+            // Remove old one and add new one
+            const index = uniqueData.findIndex((f: (typeof data)[0]) => f.id === existing.id);
+            if (index !== -1) {
+              uniqueData.splice(index, 1);
+            }
+            seenCounterparts.set(counterpartId, friendship);
+            uniqueData.push(friendship);
+          }
+          // Otherwise skip this duplicate
+        } else {
+          seenCounterparts.set(counterpartId, friendship);
+          uniqueData.push(friendship);
+        }
+      } else {
+        // Keep all non-accepted friendships
+        uniqueData.push(friendship);
+      }
+    }
+
+    return NextResponse.json({ friendships: uniqueData });
   } catch (error) {
     console.error("[FRIENDS_GET] Error:", error);
     

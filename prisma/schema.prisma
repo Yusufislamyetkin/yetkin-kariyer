@@ -200,10 +200,13 @@ model User {
   freelancerProjectsCreated     FreelancerProject[]          @relation("FreelancerProjectCreator")
   freelancerBids                FreelancerBid[]              @relation("FreelancerBidUser")
   lessonCompletions             LessonCompletion[]
+  lessonThreads                 LessonThread[]
   posts                         Post[]
   postLikes                     PostLike[]
   postComments                  PostComment[]
   postSaves                     PostSave[]
+  stories                       Story[]
+  storyViews                    StoryView[]
   // Gamification and rewards
   gamificationEvents            GamificationEvent[]
   pointTransactions             PointTransaction[]
@@ -669,6 +672,25 @@ model AssistantThread {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("assistant_threads")
+}
+
+model LessonThread {
+  id              String   @id @default(cuid())
+  userId          String
+  lessonSlug      String
+  threadId        String
+  roadmap         String?
+  progress        Json?
+  difficultyLevel String?
+  performanceData Json?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, lessonSlug])
+  @@index([lessonSlug])
+  @@map("lesson_threads")
 }
 
 model WrongQuestion {
@@ -1376,6 +1398,41 @@ model PostSave {
   @@index([postId])
   @@index([userId])
   @@map("post_saves")
+}
+
+// Stories
+model Story {
+  id        String   @id @default(cuid())
+  userId    String
+  imageUrl  String
+  videoUrl  String?
+  expiresAt DateTime // 24 hours after creation
+  createdAt DateTime @default(now())
+
+  // Relations
+  user  User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  views StoryView[]
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@index([createdAt])
+  @@map("stories")
+}
+
+model StoryView {
+  id        String   @id @default(cuid())
+  storyId   String
+  userId    String
+  viewedAt  DateTime @default(now())
+
+  // Relations
+  story Story @relation(fields: [storyId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([storyId, userId])
+  @@index([storyId])
+  @@index([userId])
+  @@map("story_views")
 }
 
 // Live Coding & Bugfix Challenge Models

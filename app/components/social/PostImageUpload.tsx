@@ -21,7 +21,66 @@ export function PostImageUpload({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [dragActive, setDragActive] = useState(false);
 
-  const handleFile = (file: File) => {
+  const compressImage = (file: File): Promise<File> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (event) => {
+        const img = new window.Image();
+        img.src = event.target?.result as string;
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+
+          if (!ctx) {
+            reject(new Error("Canvas context not available"));
+            return;
+          }
+
+          // Calculate new dimensions (max 1920x1080)
+          const MAX_WIDTH = 1920;
+          const MAX_HEIGHT = 1080;
+          let width = img.width;
+          let height = img.height;
+
+          if (width > MAX_WIDTH || height > MAX_HEIGHT) {
+            if (width > height) {
+              height = (height * MAX_WIDTH) / width;
+              width = MAX_WIDTH;
+            } else {
+              width = (width * MAX_HEIGHT) / height;
+              height = MAX_HEIGHT;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+
+          // Draw and compress
+          ctx.drawImage(img, 0, 0, width, height);
+          canvas.toBlob(
+            (blob) => {
+              if (!blob) {
+                reject(new Error("Image compression failed"));
+                return;
+              }
+              const compressedFile = new File([blob], file.name, {
+                type: "image/jpeg",
+                lastModified: Date.now(),
+              });
+              resolve(compressedFile);
+            },
+            "image/jpeg",
+            0.85 // 85% quality
+          );
+        };
+        img.onerror = reject;
+      };
+      reader.onerror = reject;
+    });
+  };
+
+  const handleFile = async (file: File) => {
     // Validate file type
     if (!file.type.startsWith("image/")) {
       alert("Lütfen bir görsel dosyası seçin");
@@ -34,7 +93,19 @@ export function PostImageUpload({
       return;
     }
 
-    onImageSelect(file);
+    // Compress image if it's large
+    try {
+      let processedFile = file;
+      if (file.size > 2 * 1024 * 1024) {
+        // Compress if larger than 2MB
+        processedFile = await compressImage(file);
+      }
+      onImageSelect(processedFile);
+    } catch (error) {
+      console.error("Image compression error:", error);
+      // Fallback to original file
+      onImageSelect(file);
+    }
   };
 
   const handleDrag = (e: React.DragEvent) => {

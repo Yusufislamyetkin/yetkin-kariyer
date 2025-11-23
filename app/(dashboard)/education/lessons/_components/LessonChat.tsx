@@ -1,19 +1,21 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { useRouter } from "next/navigation";
-import { MessageSquare, Loader2, CheckCircle2, Code, Bug, PlayCircle, HelpCircle, BookOpen } from "lucide-react";
+import { MessageSquare, Loader2, X, ArrowRight, CheckCircle, Send } from "lucide-react";
+import Image from "next/image";
 import { Composer } from "@/app/(dashboard)/chat/_components/Composer";
-import { MessageViewport } from "@/app/(dashboard)/chat/_components/MessageViewport";
-// Modals removed; navigate to new practice pages instead
-import { QuestionInteraction } from "./QuestionInteraction";
-import { LessonMiniTest } from "./LessonMiniTest";
 import { CodeBlock } from "./CodeBlock";
+import { LessonCodeEditor } from "./LessonCodeEditor";
+import { RoadmapDisplay } from "./RoadmapDisplay";
+import { TimedBugfix } from "./TimedBugfix";
+import { QuestionInteraction } from "./QuestionInteraction";
+import { MessageContent } from "./MessageContent";
+import { TestQuestionChatbox } from "./TestQuestionChatbox";
 import { Button } from "@/app/components/ui/Button";
 import { Card, CardContent } from "@/app/components/ui/Card";
 import { useCelebration } from "@/app/contexts/CelebrationContext";
-import type { LocalAttachment } from "@/app/(dashboard)/chat/_components/types";
-import type { LiveCodingLanguage } from "@/types/live-coding";
+import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 type Message = {
   id: string;
@@ -21,7 +23,7 @@ type Message = {
   content: string;
   images?: string[];
   actions?: Array<{
-    type: "coding_challenge" | "question" | "quiz_redirect" | "test_redirect" | "bugfix_redirect" | "livecoding_redirect" | "create_test" | "create_quiz" | "create_bugfix" | "create_livecoding" | "choices" | "code_block" | "test_question";
+    type: string;
     data: any;
   }>;
   timestamp: string;
@@ -31,146 +33,143 @@ type LessonChatProps = {
   lessonSlug: string;
   lessonTitle: string;
   lessonDescription?: string | null;
+  onRoadmapChange?: (roadmap: string | null, progress: { step: number; status: "pending" | "in_progress" | "completed" } | null) => void;
 };
 
-export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: LessonChatProps) {
-  const router = useRouter();
+type CurrentActivity = {
+  type: "test_question" | "timed_bugfix" | "choices" | "mini_test";
+  data: any;
+} | null;
+
+export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadmapChange }: LessonChatProps) {
   const { celebrate } = useCelebration();
+  const router = useRouter();
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(true);
   const [sending, setSending] = useState(false);
   const [assistantTyping, setAssistantTyping] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [messageInput, setMessageInput] = useState("");
-  const [attachments, setAttachments] = useState<LocalAttachment[]>([]);
   const [isCompleted, setIsCompleted] = useState(false);
-  
-  // Modal states
-  const [codingChallenge, setCodingChallenge] = useState<{
-    task: {
-      title: string;
-      description: string;
-      languages: LiveCodingLanguage[];
-      acceptanceCriteria?: string[];
-    };
-  } | null>(null);
-  const [bugfixChallenge, setBugfixChallenge] = useState<{
-    task: {
-      title: string;
-      buggyCode: string;
-      fixDescription: string;
-      language: LiveCodingLanguage;
-    };
-  } | null>(null);
-  const [currentQuestion, setCurrentQuestion] = useState<{
-    text: string;
-    type: "multiple_choice" | "open_ended";
-    options?: string[];
-  } | null>(null);
-  const [currentTestQuestion, setCurrentTestQuestion] = useState<{
-    text: string;
-    type: "multiple_choice";
-    options: string[];
-    correctIndex: number;
-  } | null>(null);
-  const [showQuiz, setShowQuiz] = useState(false);
-  const [quizRedirectMessage, setQuizRedirectMessage] = useState<string | null>(null);
-  const [accumulatedQuizQuestions, setAccumulatedQuizQuestions] = useState<Array<{
-    text: string;
-    options: string[];
-    correctIndex: number;
-    id: string;
-  }>>([]);
-  const [currentChoices, setCurrentChoices] = useState<string[] | null>(null);
-  const [lessonPlan, setLessonPlan] = useState<string | null>(null);
-  const [pendingTestQuestions, setPendingTestQuestions] = useState<Array<{
-    text: string;
-    type: "multiple_choice";
-    options: string[];
-    correctIndex: number;
-  }>>([]);
-
-  // Normalize option labels to avoid duplicates like "A. A) şık"
-  const sanitizeOptionText = useCallback((option: string): string => {
-    if (!option) return option;
-    return option
-      .replace(/^\s*[A-Da-d][\)\.]\s+/, "") // A) , A. , a) , a.
-      .replace(/^\s*\(?[A-Da-d]\)\s+/, "")  // (A)
-      .replace(/^\s*\d+[\)\.]\s+/, "")      // 1) , 1.
-      .trim();
-  }, []);
+  const [roadmap, setRoadmap] = useState<string | null>(null);
+  const [progress, setProgress] = useState<{ step: number; status: "pending" | "in_progress" | "completed" } | null>(null);
+  const [currentActivity, setCurrentActivity] = useState<CurrentActivity>(null);
+  const [showContinueButton, setShowContinueButton] = useState(false);
+  const [showCompletionModal, setShowCompletionModal] = useState(false);
+  const [nextLesson, setNextLesson] = useState<{ href: string; label: string } | null>(null);
+  const [loadingMessage, setLoadingMessage] = useState(0);
+  const [pendingTestQuestions, setPendingTestQuestions] = useState<any[]>([]);
+  const [currentTestQuestionIndex, setCurrentTestQuestionIndex] = useState(0);
+  const [answeredTestQuestionIndex, setAnsweredTestQuestionIndex] = useState<number | null>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const hasCelebratedRef = useRef(false);
+  const modalDismissedRef = useRef(false);
 
-  // Helper function to check and mark lesson as completed
-  const checkAndMarkLessonCompleted = useCallback(async (messageContent: string) => {
-    if (isCompleted) return;
+  // Loading messages rotation
+  const loadingMessages = [
+    "AI Öğretmen sizin için ders aşamalarını oluşturuyor...",
+    "Ders içeriği planlanıyor...",
+    "Öğrenme yol haritası hazırlanıyor...",
+    "İnteraktif aktiviteler hazırlanıyor...",
+  ];
 
-    const completionKeywords = [
-      "ders bitti", "ders bitti!", "dersi bitirdin", "dersi tamamladın",
-      "tamamlandı", "tamamlandı!", "başarıyla tamamladın", "tebrikler",
-      "ders tamamlandı", "dersi tamamladın", "dersi bitirdin!",
-      "harika! bu dersi", "dersi öğrenmişsin", "dersi tamamlamış bulunuyorsun",
-      "dersimizi bitirdik", "dersimiz tamamlandı", "dersi tamamladık",
-      "bu dersi tamamladın", "dersi başarıyla tamamladın", "ders bitti",
-      "tebrikler, ders", "dersi bitirdik", "ders tamam", "ders bitti!",
-      "dersi öğrendin", "dersi tamamlamışsın", "ders tamamlanmış durumda",
-      "dersi bitirmiş bulunuyorsun", "dersi tamamladın artık", "ders sona erdi",
-      "ders bittiği için", "dersin sonuna geldin", "dersin sonu"
-    ];
-    const messageLower = messageContent.toLowerCase();
-    const isLessonComplete = completionKeywords.some(keyword => 
-      messageLower.includes(keyword)
-    );
+  // Loading message rotation effect
+  useEffect(() => {
+    if (!loading) return;
+    
+    const interval = setInterval(() => {
+      setLoadingMessage((prev) => (prev + 1) % loadingMessages.length);
+    }, 2500);
 
-    if (isLessonComplete) {
-      setIsCompleted(true);
-      
-      // Trigger confetti
+    return () => clearInterval(interval);
+  }, [loading, loadingMessages.length]);
+
+  // Auto-scroll to bottom when messages change or assistant is typing
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages, assistantTyping]);
+
+  // Celebrate when lesson is completed (only once)
+  useEffect(() => {
+    if (isCompleted && !hasCelebratedRef.current && messages.length > 0) {
+      hasCelebratedRef.current = true;
       celebrate({
         title: "🎉 Ders Tamamlandı!",
         message: `${lessonTitle} dersini başarıyla tamamladın!`,
         variant: "success",
         durationMs: 5000,
       });
-
-      // Mark lesson as completed in API
-      try {
-        const completionResponse = await fetch(`/api/lessons/complete${lessonSlug.replace(/^\/education\/lessons/, "")}`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-        });
-        
-        if (!completionResponse.ok) {
-          console.error("Failed to mark lesson as completed");
-        }
-      } catch (err) {
-        console.error("Error marking lesson as completed:", err);
-      }
     }
-  }, [isCompleted, celebrate, lessonTitle, lessonSlug]);
+  }, [isCompleted, messages.length, lessonTitle, celebrate]);
 
-  // Load initial message
+  // Find next lesson when lesson is completed
   useEffect(() => {
-    const loadInitialMessage = async () => {
+    if (isCompleted && !nextLesson) {
+      const findNextLesson = async () => {
+        try {
+          // Extract course and module info from lessonSlug
+          const response = await fetch(`/api/lessons/next?lessonSlug=${encodeURIComponent(lessonSlug)}`);
+          if (response.ok) {
+            const data = await response.json();
+            if (data.nextLesson) {
+              setNextLesson(data.nextLesson);
+            }
+          }
+        } catch (err) {
+          console.error("Error finding next lesson:", err);
+        }
+      };
+      findNextLesson();
+    }
+  }, [isCompleted, lessonSlug, nextLesson]);
+
+  // Show completion modal when lesson is completed (only once)
+  // Wait 10 seconds after the last message
+  useEffect(() => {
+    if (isCompleted && !showCompletionModal && !modalDismissedRef.current && messages.length > 0) {
+      // Wait 10 seconds after the last message
+      const timer = setTimeout(() => {
+        if (!modalDismissedRef.current) {
+          setShowCompletionModal(true);
+        }
+      }, 10000);
+      return () => clearTimeout(timer);
+    }
+  }, [isCompleted, showCompletionModal, messages.length]);
+
+  // Load initial message and thread state
+  useEffect(() => {
+    const loadInitialState = async () => {
       setLoading(true);
       setError(null);
+      setLoadingMessage(0);
 
       try {
-        const response = await fetch("/api/ai/lesson-chat", {
+        // Send initial message to start the lesson
+        const response = await fetch("/api/ai/lesson-assistant", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             lessonSlug,
-            messages: [],
+            message: "Merhaba! Bu dersi öğrenmeye hazırım. Bana dersi anlatabilir misin?",
           }),
         });
 
         if (!response.ok) {
           const data = await response.json();
-          throw new Error(data.error || "AI yanıtı alınamadı");
+          // API key eksikse daha açıklayıcı hata mesajı göster
+          if (response.status === 503 && data.details?.includes("OPENAI_API_KEY")) {
+            const errorMsg = data.isLocal 
+              ? `AI servisi yapılandırılmamış.\n\nLütfen .env dosyanıza OPENAI_API_KEY ekleyin ve sunucuyu yeniden başlatın.\n\nDetaylar: ${data.hint || data.details}`
+              : data.error || data.details || "AI servisi şu anda mevcut değil";
+            throw new Error(errorMsg);
+          }
+          throw new Error(data.error || data.details || "AI yanıtı alınamadı");
         }
 
         const data = await response.json();
@@ -185,145 +184,50 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: Lesso
 
         setMessages([message]);
         
-        // Update lesson plan if provided
-        if (data.lessonPlan) {
-          setLessonPlan(data.lessonPlan);
+        if (data.roadmap) {
+          setRoadmap(data.roadmap);
+          onRoadmapChange?.(data.roadmap, data.progress || null);
         }
+        // Don't call onRoadmapChange(null, null) if roadmap is missing - preserve existing state
 
-        // Handle actions
-        if (data.actions && Array.isArray(data.actions)) {
-          console.log("Received actions:", data.actions); // Debug log
-          for (const action of data.actions) {
-            if (action.type === "choices" && action.data?.choices) {
-              setCurrentChoices(action.data.choices);
-            } else if (action.type === "code_block") {
-              // Code blocks are rendered separately, no action needed
-            } else if (action.type === "test_question" && action.data?.question) {
-              const question = action.data.question;
-              console.log("Initial load - Received test_question:", question); // Debug log
-              setPendingTestQuestions((prev) => {
-                if (prev.some((q) => q.text === question.text)) {
-                  return prev;
-                }
-                const updated = [...prev, question];
-                if (updated.length > 0 && (!currentTestQuestion || prev.length === 0)) {
-                  setCurrentTestQuestion(updated[0]);
-                }
-                return updated;
-              });
-            } else if (action.type === "coding_challenge" || action.type === "create_livecoding") {
-              router.push("/practice/live-coding");
-            } else if (action.type === "create_bugfix") {
-              router.push("/practice/bugfix");
-            } else if (action.type === "question" && action.data?.question) {
-              setCurrentQuestion(action.data.question);
-            } else if (action.type === "create_test" && action.data?.question) {
-              setCurrentTestQuestion(action.data.question);
-            } else if (action.type === "create_quiz" && action.data?.question) {
-              const question = action.data.question;
-              setAccumulatedQuizQuestions((prev) => [
-                ...prev,
-                {
-                  text: question.text,
-                  options: question.options || [],
-                  correctIndex: question.correctIndex ?? 0,
-                  id: `q-${Date.now()}-${prev.length}`,
-                },
-              ]);
-              setCurrentTestQuestion(question);
-            }
+        if (data.progress) {
+          setProgress(data.progress);
+          // Always update roadmap with new progress
+          const currentRoadmap = data.roadmap || roadmap;
+          if (currentRoadmap) {
+            onRoadmapChange?.(currentRoadmap, data.progress);
           }
         }
 
-        // Automatically request a follow-up assistant message to reach ~200 words total (split in 2 messages)
-        try {
-          const followUpResponse = await fetch("/api/ai/lesson-chat", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              lessonSlug,
-              messages: [
-                {
-                  role: "assistant",
-                  content: message.content,
-                },
-                {
-                  role: "user",
-                  content: "devam et",
-                },
-              ],
-              lessonPlan: data.lessonPlan || lessonPlan,
-            }),
-          });
-
-          if (followUpResponse.ok) {
-            const followUpData = await followUpResponse.json();
-            const followUpMessage: Message = {
-              id: `msg-${Date.now() + 2}`,
-              role: "assistant",
-              content: followUpData.content || "",
-              images: followUpData.images,
-              actions: followUpData.actions,
-              timestamp: new Date().toISOString(),
-            };
-            setMessages((prev) => [...prev, followUpMessage]);
-
-            // Update lesson plan if provided
-            if (followUpData.lessonPlan) {
-              setLessonPlan(followUpData.lessonPlan);
-            }
-
-            // Handle follow-up actions
-            if (followUpData.actions && Array.isArray(followUpData.actions)) {
-              for (const action of followUpData.actions) {
-                if (action.type === "choices" && action.data?.choices) {
-                  setCurrentChoices(action.data.choices);
-                } else if (action.type === "code_block") {
-                  // Code blocks are rendered separately
-                } else if (action.type === "test_question" && action.data?.question) {
-                  const question = action.data.question;
-                  setPendingTestQuestions((prev) => {
-                    const updated = [...prev, question];
-                    if (updated.length > 0 && (!currentTestQuestion || prev.length === 0)) {
-                      setCurrentTestQuestion(updated[0]);
-                    }
-                    return updated;
-                  });
-                } else if (action.type === "coding_challenge" || action.type === "create_livecoding") {
-                  router.push("/practice/live-coding");
-                } else if (action.type === "create_bugfix" && action.data?.task) {
-                  setBugfixChallenge({ task: action.data.task });
-                } else if (action.type === "question" && action.data?.question) {
-                  setCurrentQuestion(action.data.question);
-                } else if (action.type === "create_test" && action.data?.question) {
-                  setCurrentTestQuestion(action.data.question);
-                } else if (action.type === "create_quiz" && action.data?.question) {
-                  const question = action.data.question;
-                  setAccumulatedQuizQuestions((prev) => [
-                    ...prev,
-                    {
-                      text: question.text,
-                      options: question.options || [],
-                      correctIndex: question.correctIndex ?? 0,
-                      id: `q-${Date.now()}-${prev.length}`,
-                    },
-                  ]);
-                  setCurrentTestQuestion(question);
-                } else if (action.type === "quiz_redirect") {
-                  setQuizRedirectMessage(action.data?.message || "Ders sonunda mini teste geçelim!");
-                  setShowQuiz(true);
-                } else if (action.type === "test_redirect" && action.data?.url) {
-                  router.push(action.data.url);
-                } else if (action.type === "bugfix_redirect" && action.data?.url) {
-                  router.push(action.data.url);
-                } else if (action.type === "livecoding_redirect" && action.data?.url) {
-                  router.push(action.data.url);
-                }
+        // Smart completion detection (same logic as in handleSendMessage)
+        let shouldComplete = false;
+        
+        if (data.isCompleted) {
+          shouldComplete = true;
+        } else if (data.roadmap && data.progress) {
+          const roadmapText = data.roadmap || roadmap;
+          if (roadmapText) {
+            const stepMatches = roadmapText.match(/\d+[\.\)]/g);
+            if (stepMatches) {
+              const lastStepNumber = Math.max(...stepMatches.map((m: string) => parseInt(m.replace(/[\.\)]/g, ''))));
+              if (data.progress.step >= lastStepNumber && data.progress.status === "completed") {
+                shouldComplete = true;
               }
             }
           }
-        } catch (err) {
-          console.error("Error loading follow-up message:", err);
+        }
+        
+        if (shouldComplete) {
+          setIsCompleted(true);
+        }
+
+        // Handle initial actions
+        handleActions(data.actions || []);
+        
+        // Show continue button after first assistant message if no activity is set
+        if (!data.actions || data.actions.length === 0 || 
+            !data.actions.some((a: any) => ["timed_bugfix", "choices"].includes(a.type))) {
+          setShowContinueButton(true);
         }
       } catch (err) {
         console.error("Error loading initial message:", err);
@@ -333,43 +237,48 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: Lesso
       }
     };
 
-    void loadInitialMessage();
+    void loadInitialState();
   }, [lessonSlug]);
 
-  // Create mini test from accumulated questions
-  const createMiniTestFromAccumulatedQuestions = useCallback(async () => {
-    if (accumulatedQuizQuestions.length < 3) return;
+  // Handle actions from AI response
+  // Note: Test questions are now rendered inline with messages, not as separate activities
+  const handleActions = useCallback((actions: Array<{ type: string; data: any }>) => {
+    if (!actions || actions.length === 0) return;
 
-    try {
-      const apiPath = `/api/lessons${lessonSlug.replace(/^\/education\/lessons/, "")}/mini-test`;
-      const response = await fetch(apiPath, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          questions: accumulatedQuizQuestions,
-          lessonTitle,
-        }),
-      });
-
-      if (response.ok) {
-        console.log("Mini test başarıyla oluşturuldu");
-        // Clear accumulated questions after successful creation
-        setAccumulatedQuizQuestions([]);
-      } else {
-        console.error("Mini test oluşturulurken hata:", await response.text());
+    // Collect all test questions
+    const testQuestions: any[] = [];
+    
+    for (const action of actions) {
+      // Test questions and mini tests are now rendered inline with messages
+      // Only interactive activities that require user input are set as currentActivity
+      // fill_blank activity removed - user already has input field
+      if (action.type === "timed_bugfix" && action.data) {
+        setCurrentActivity({
+          type: "timed_bugfix",
+          data: action.data,
+        });
+      } else if (action.type === "choices" && action.data?.choices) {
+        setCurrentActivity({
+          type: "choices",
+          data: { choices: action.data.choices },
+        });
+      } else if (action.type === "mini_test" && action.data) {
+        // Collect test questions to show sequentially
+        // Debug: Log the data structure
+        console.log("[LessonChat] Mini test action data:", action.data);
+        testQuestions.push(action.data);
       }
-    } catch (error) {
-      console.error("Error creating mini test:", error);
     }
-  }, [accumulatedQuizQuestions, lessonSlug, lessonTitle]);
-
-  // Auto-create mini test when we have enough questions
-  useEffect(() => {
-    if (accumulatedQuizQuestions.length >= 5) {
-      // Auto-create when we have 5 or more questions
-      createMiniTestFromAccumulatedQuestions();
+    
+    // If we have test questions, replace existing ones (new set of questions)
+    // This ensures that when "devam et" is clicked, new questions replace old ones
+    if (testQuestions.length > 0) {
+      console.log("[LessonChat] Setting new test questions:", testQuestions.length);
+      setPendingTestQuestions(testQuestions);
+      setCurrentTestQuestionIndex(0);
+      setAnsweredTestQuestionIndex(null);
     }
-  }, [accumulatedQuizQuestions.length, createMiniTestFromAccumulatedQuestions]);
+  }, []);
 
   // Handle sending message
   const handleSendMessage = useCallback(
@@ -387,34 +296,43 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: Lesso
 
       setMessages((prev) => [...prev, userMessage]);
       setMessageInput("");
-      setCurrentChoices(null); // Clear choices when sending a message
+      setCurrentActivity(null);
+      setShowContinueButton(false);
       setSending(true);
       setAssistantTyping(true);
       setError(null);
 
       try {
-        const response = await fetch("/api/ai/lesson-chat", {
+        const response = await fetch("/api/ai/lesson-assistant", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             lessonSlug,
-            messages: [
-              ...messages.map((msg) => ({
-                role: msg.role,
-                content: msg.content,
-              })),
-              {
-                role: "user",
-                content: userMessage.content,
-              },
-            ],
-            lessonPlan: lessonPlan,
+            message: userMessage.content,
           }),
         });
 
         if (!response.ok) {
-          const data = await response.json();
-          throw new Error(data.error || "AI yanıtı alınamadı");
+          const data = await response.json().catch(() => ({ error: "Yanıt parse edilemedi" }));
+          // API key eksikse daha açıklayıcı hata mesajı göster
+          if (response.status === 503 && data.details?.includes("OPENAI_API_KEY")) {
+            const errorMsg = data.isLocal 
+              ? `AI servisi yapılandırılmamış.\n\nLütfen .env dosyanıza OPENAI_API_KEY ekleyin ve sunucuyu yeniden başlatın.\n\nDetaylar: ${data.hint || data.details}`
+              : data.error || data.details || "AI servisi şu anda mevcut değil";
+            throw new Error(errorMsg);
+          }
+          const errorMessage = data.error || "AI yanıtı alınamadı";
+          const errorDetails = data.details ? `\n\nDetay: ${data.details}` : "";
+          const debugInfo = data.debug ? `\n\nDebug Bilgisi:\n${JSON.stringify(data.debug, null, 2)}` : "";
+          console.error("[LessonChat] API Error (Send Message):", {
+            status: response.status,
+            statusText: response.statusText,
+            error: errorMessage,
+            details: data.details,
+            debug: data.debug,
+            fullResponse: data,
+          });
+          throw new Error(`${errorMessage}${errorDetails}${debugInfo}`);
         }
 
         const data = await response.json();
@@ -429,104 +347,58 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: Lesso
 
         setMessages((prev) => [...prev, assistantMessage]);
 
-        // Update lesson plan if provided
-        if (data.lessonPlan) {
-          setLessonPlan(data.lessonPlan);
+        if (data.roadmap) {
+          setRoadmap(data.roadmap);
+          onRoadmapChange?.(data.roadmap, data.progress || null);
+        }
+        // Don't call onRoadmapChange(null, null) if roadmap is missing - preserve existing state
+
+        if (data.progress) {
+          setProgress(data.progress);
+          // Always update roadmap with new progress
+          const currentRoadmap = data.roadmap || roadmap;
+          if (currentRoadmap) {
+            onRoadmapChange?.(currentRoadmap, data.progress);
+          }
         }
 
-        // Check if lesson is completed
-        await checkAndMarkLessonCompleted(assistantMessage.content);
-
-        // Handle actions
-        if (data.actions && Array.isArray(data.actions)) {
-          console.log("handleSendMessage - Received actions:", data.actions); // Debug log
-          for (const action of data.actions) {
-            if (action.type === "choices" && action.data?.choices) {
-              setCurrentChoices(action.data.choices);
-            } else if (action.type === "code_block") {
-              // Code blocks are rendered separately, no action needed
-            } else if (action.type === "test_question" && action.data?.question) {
-              // Test questions are rendered separately (tek tek)
-              // Add to pending questions queue
-              const question = action.data.question;
-              console.log("handleSendMessage - Received test_question:", question); // Debug log
-              setPendingTestQuestions((prev) => {
-                if (prev.some((q) => q.text === question.text)) {
-                  return prev;
-                }
-                const updated = [...prev, question];
-                // Always show the first question from the updated queue
-                if (updated.length > 0 && (!currentTestQuestion || prev.length === 0)) {
-                  setCurrentTestQuestion(updated[0]);
-                }
-                return updated;
-              });
-            } else if (action.type === "coding_challenge" && action.data?.task) {
-              console.log("handleSendMessage - Setting coding challenge:", action.data.task); // Debug log
-              setCodingChallenge({ task: action.data.task });
-            } else if (action.type === "create_livecoding" && action.data?.task) {
-              // CREATE_LIVECODING is converted to coding_challenge
-              console.log("handleSendMessage - Setting live coding challenge:", action.data.task); // Debug log
-              setCodingChallenge({ task: action.data.task });
-            } else if (action.type === "create_bugfix" && action.data?.task) {
-              console.log("handleSendMessage - Setting bugfix challenge:", action.data.task); // Debug log
-              setBugfixChallenge({ task: action.data.task });
-            } else if (action.type === "question" && action.data?.question) {
-              setCurrentQuestion(action.data.question);
-            } else if (action.type === "create_test" && action.data?.question) {
-              setCurrentTestQuestion(action.data.question);
-            } else if (action.type === "create_quiz" && action.data?.question) {
-              const question = action.data.question;
-              // Add to accumulated questions
-              setAccumulatedQuizQuestions((prev) => [
-                ...prev,
-                {
-                  text: question.text,
-                  options: question.options || [],
-                  correctIndex: question.correctIndex ?? 0,
-                  id: `q-${Date.now()}-${prev.length}`,
-                },
-              ]);
-              // Also show current question for immediate interaction
-              setCurrentTestQuestion(question);
-            } else if (action.type === "quiz_redirect") {
-              setQuizRedirectMessage(action.data?.message || "Ders sonunda mini teste geçelim!");
-              setShowQuiz(true);
-              // If we have accumulated questions, create mini test
-              setAccumulatedQuizQuestions((prev) => {
-                if (prev.length >= 3) {
-                  // Create mini test asynchronously
-                  setTimeout(() => {
-                    const apiPath = `/api/lessons${lessonSlug.replace(/^\/education\/lessons/, "")}/mini-test`;
-                    fetch(apiPath, {
-                      method: "PUT",
-                      headers: { "Content-Type": "application/json" },
-                      body: JSON.stringify({
-                        questions: prev,
-                        lessonTitle,
-                      }),
-                    })
-                      .then((res) => {
-                        if (res.ok) {
-                          console.log("Mini test başarıyla oluşturuldu");
-                        }
-                      })
-                      .catch((err) => console.error("Error creating mini test:", err));
-                  }, 100);
-                }
-                return prev;
-              });
-            } else if (action.type === "test_redirect" && action.data?.url) {
-              // Redirect to test page
-              router.push(action.data.url);
-            } else if (action.type === "bugfix_redirect" && action.data?.url) {
-              // Redirect to bugfix page
-              router.push(action.data.url);
-            } else if (action.type === "livecoding_redirect" && action.data?.url) {
-              // Redirect to live coding page
-              router.push(action.data.url);
+        // Smart completion detection:
+        // 1. API explicitly says completed (via [LESSON_COMPLETE] tag - now more strict)
+        // 2. OR roadmap exists and all steps are completed
+        let shouldComplete = false;
+        
+        if (data.isCompleted) {
+          // API explicitly marked as completed (strict detection)
+          shouldComplete = true;
+        } else if (data.roadmap && data.progress) {
+          // Check if all roadmap steps are completed
+          // Parse roadmap to count total steps
+          const roadmapText = data.roadmap || roadmap;
+          if (roadmapText) {
+            // Simple parsing to count steps - we just need the count
+            const stepMatches = roadmapText.match(/\d+[\.\)]/g);
+            if (stepMatches) {
+              const totalSteps = stepMatches.length;
+              const lastStepNumber = Math.max(...stepMatches.map((m: string) => parseInt(m.replace(/[\.\)]/g, ''))));
+              
+              // If progress step is >= last step and status is completed, all steps are done
+              if (data.progress.step >= lastStepNumber && data.progress.status === "completed") {
+                shouldComplete = true;
+              }
             }
           }
+        }
+        
+        if (shouldComplete) {
+          setIsCompleted(true);
+        }
+
+        handleActions(data.actions || []);
+        
+        // Show continue button if no new activity is set
+        if (!data.actions || data.actions.length === 0 || 
+            !data.actions.some((a: any) => ["timed_bugfix", "choices"].includes(a.type))) {
+          setShowContinueButton(true);
         }
       } catch (err) {
         console.error("Error sending message:", err);
@@ -536,805 +408,254 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: Lesso
         setAssistantTyping(false);
       }
     },
-    [messageInput, messages, lessonSlug, sending, lessonPlan, checkAndMarkLessonCompleted]
+    [messageInput, sending, lessonSlug, lessonTitle, celebrate, handleActions, currentTestQuestionIndex, pendingTestQuestions]
   );
 
-  // Handle context button click (Devam et, Başka örnekle açıkla, Bir sonraki aşamaya geç)
-  const handleContextButton = useCallback(
-    async (buttonText: string, messageContent: string) => {
-      if (sending) return;
+  // Handle activity completion
+  const handleActivityComplete = useCallback(
+    async (result: any) => {
+      setCurrentActivity(null);
+      // Send result to AI
+      const resultMessage = `Aktivite tamamlandı: ${JSON.stringify(result)}`;
+      setMessageInput(resultMessage);
+      // Automatically continue after a short delay
+      setTimeout(() => {
+        setShowContinueButton(true);
+      }, 500);
+    },
+    []
+  );
 
-      const buttonMessage: Message = {
-        id: `msg-${Date.now()}`,
-        role: "user",
-        content: messageContent,
+  // Handle continue button click
+  const handleContinue = useCallback(async () => {
+    setShowContinueButton(false);
+    const continueMessage: Message = {
+      id: `msg-${Date.now()}`,
+      role: "user",
+      content: "Devam et",
+      timestamp: new Date().toISOString(),
+    };
+    
+    setMessages((prev) => [...prev, continueMessage]);
+    setSending(true);
+    setAssistantTyping(true);
+    setError(null);
+    
+    try {
+      const response = await fetch("/api/ai/lesson-assistant", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          lessonSlug,
+          message: "Devam et",
+        }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({ error: "Yanıt parse edilemedi" }));
+        // API key eksikse daha açıklayıcı hata mesajı göster
+        if (response.status === 503 && data.details?.includes("OPENAI_API_KEY")) {
+          const errorMsg = data.isLocal 
+            ? `AI servisi yapılandırılmamış.\n\nLütfen .env dosyanıza OPENAI_API_KEY ekleyin ve sunucuyu yeniden başlatın.\n\nDetaylar: ${data.hint || data.details}`
+            : data.error || data.details || "AI servisi şu anda mevcut değil";
+          throw new Error(errorMsg);
+        }
+        const errorMessage = data.error || "AI yanıtı alınamadı";
+        throw new Error(errorMessage);
+      }
+
+      const data = await response.json();
+      const assistantMessage: Message = {
+        id: `msg-${Date.now() + 1}`,
+        role: "assistant",
+        content: data.content || "",
+        images: data.images,
+        actions: data.actions,
         timestamp: new Date().toISOString(),
       };
 
-      setMessages((prev) => [...prev, buttonMessage]);
-      setSending(true);
-      setError(null);
+      setMessages((prev) => [...prev, assistantMessage]);
 
+      if (data.roadmap) {
+        setRoadmap(data.roadmap);
+        onRoadmapChange?.(data.roadmap, data.progress || null);
+      }
+
+      if (data.progress) {
+        setProgress(data.progress);
+        // Update roadmap with new progress
+        const currentRoadmap = data.roadmap || roadmap;
+        if (currentRoadmap) {
+          onRoadmapChange?.(currentRoadmap, data.progress);
+        }
+      }
+
+      if (data.isCompleted) {
+        setIsCompleted(true);
+        // Don't show alert, only pop-up will be shown
+      }
+
+      handleActions(data.actions || []);
+      
+      // Show continue button if no new interactive activity (mini_test questions don't block continue button)
+      // mini_test questions are handled separately and don't prevent continue button from showing
+      const hasInteractiveActivity = data.actions?.some((a: any) => ["fill_blank", "timed_bugfix", "choices"].includes(a.type));
+      if (!hasInteractiveActivity) {
+        setShowContinueButton(true);
+      }
+    } catch (err) {
+      console.error("Error continuing:", err);
+      setError(err instanceof Error ? err.message : "Devam edilemedi");
+    } finally {
+      setSending(false);
+      setAssistantTyping(false);
+    }
+  }, [lessonSlug, lessonTitle, celebrate, handleActions, currentTestQuestionIndex, pendingTestQuestions]);
+
+  // Handle test question answer
+  const handleTestQuestionAnswer = useCallback(
+    async (answer: string) => {
+      // Mark current question as answered (keep test box visible but disabled)
+      setAnsweredTestQuestionIndex(currentTestQuestionIndex);
+      
+      const answerMessage: Message = {
+        id: `msg-${Date.now()}`,
+        role: "user",
+        content: `Cevabım: ${answer}`,
+        timestamp: new Date().toISOString(),
+      };
+
+      setMessages((prev) => [...prev, answerMessage]);
+
+      // Check if there are more test questions to show
+      const nextIndex = currentTestQuestionIndex + 1;
+      if (nextIndex < pendingTestQuestions.length) {
+        // Show next test question
+        setCurrentTestQuestionIndex(nextIndex);
+        setAnsweredTestQuestionIndex(null); // Reset for next question
+        return;
+      }
+
+      // All test questions answered, continue conversation
+      // Keep test questions visible until AI response is received
+      setSending(true);
+      setAssistantTyping(true);
       try {
-        const response = await fetch("/api/ai/lesson-chat", {
+        const response = await fetch("/api/ai/lesson-assistant", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             lessonSlug,
-            messages: [
-              ...messages.map((msg) => ({
-                role: msg.role,
-                content: msg.content,
-              })),
-              {
-                role: "user",
-                content: messageContent,
-              },
-            ],
-            lessonPlan: lessonPlan,
+            message: answerMessage.content,
           }),
         });
 
-        if (!response.ok) {
+        if (response.ok) {
           const data = await response.json();
-          throw new Error(data.error || "AI yanıtı alınamadı");
-        }
+          const assistantMessage: Message = {
+            id: `msg-${Date.now() + 1}`,
+            role: "assistant",
+            content: data.content || "",
+            images: data.images,
+            actions: data.actions,
+            timestamp: new Date().toISOString(),
+          };
 
-        const data = await response.json();
-        const assistantMessage: Message = {
-          id: `msg-${Date.now() + 1}`,
-          role: "assistant",
-          content: data.content || "",
-          images: data.images,
-          actions: data.actions,
-          timestamp: new Date().toISOString(),
-        };
+          setMessages((prev) => [...prev, assistantMessage]);
 
-        setMessages((prev) => [...prev, assistantMessage]);
+          if (data.roadmap) {
+            setRoadmap(data.roadmap);
+            onRoadmapChange?.(data.roadmap, data.progress || null);
+          }
 
-        // Update lesson plan if provided
-        if (data.lessonPlan) {
-          setLessonPlan(data.lessonPlan);
-        }
-
-        // Check if lesson is completed
-        await checkAndMarkLessonCompleted(assistantMessage.content);
-
-        // Handle actions (same as handleSendMessage)
-        if (data.actions && Array.isArray(data.actions)) {
-          for (const action of data.actions) {
-            if (action.type === "choices" && action.data?.choices) {
-              setCurrentChoices(action.data.choices);
-            } else if (action.type === "code_block") {
-              // Code blocks are rendered separately
-            } else if (action.type === "test_question" && action.data?.question) {
-              const question = action.data.question;
-              console.log("handleQuestionAnswer - Received test_question:", question); // Debug log
-              setPendingTestQuestions((prev) => {
-                if (prev.some((q) => q.text === question.text)) {
-                  return prev;
-                }
-                const updated = [...prev, question];
-                if (updated.length > 0 && (!currentTestQuestion || prev.length === 0)) {
-                  setCurrentTestQuestion(updated[0]);
-                }
-                return updated;
-              });
-            } else if (action.type === "coding_challenge" && action.data?.task) {
-              setCodingChallenge({ task: action.data.task });
-            } else if (action.type === "create_livecoding" && action.data?.task) {
-              setCodingChallenge({ task: action.data.task });
-            } else if (action.type === "create_bugfix" && action.data?.task) {
-              setBugfixChallenge({ task: action.data.task });
-            } else if (action.type === "question" && action.data?.question) {
-              setCurrentQuestion(action.data.question);
-            } else if (action.type === "create_test" && action.data?.question) {
-              setCurrentTestQuestion(action.data.question);
-            } else if (action.type === "create_quiz" && action.data?.question) {
-              const question = action.data.question;
-              setAccumulatedQuizQuestions((prev) => [
-                ...prev,
-                {
-                  text: question.text,
-                  options: question.options || [],
-                  correctIndex: question.correctIndex ?? 0,
-                  id: `q-${Date.now()}-${prev.length}`,
-                },
-              ]);
-              setCurrentTestQuestion(question);
-            } else if (action.type === "quiz_redirect") {
-              setQuizRedirectMessage(action.data?.message || "Ders sonunda mini teste geçelim!");
-              setShowQuiz(true);
-            } else if (action.type === "test_redirect" && action.data?.url) {
-              router.push(action.data.url);
-            } else if (action.type === "bugfix_redirect" && action.data?.url) {
-              router.push(action.data.url);
-            } else if (action.type === "livecoding_redirect" && action.data?.url) {
-              router.push(action.data.url);
+          if (data.progress) {
+            setProgress(data.progress);
+            // Update roadmap with new progress
+            const currentRoadmap = data.roadmap || roadmap;
+            if (currentRoadmap) {
+              onRoadmapChange?.(currentRoadmap, data.progress);
             }
           }
+
+          if (data.isCompleted) {
+            setIsCompleted(true);
+          }
+
+          handleActions(data.actions || []);
+          
+          // Keep test questions visible - do not clear them
+          // Quiz marking should never disappear under any condition
+          // Only reset answered index to allow interaction if new questions arrive
+          setAnsweredTestQuestionIndex(null);
+          
+          // Show continue button if no new interactive activity (mini_test questions don't block continue button)
+          const hasInteractiveActivity = data.actions?.some((a: any) => ["fill_blank", "timed_bugfix", "choices"].includes(a.type));
+          if (!hasInteractiveActivity) {
+            setShowContinueButton(true);
+          }
+        } else {
+          const data = await response.json().catch(() => ({ error: "Yanıt parse edilemedi" }));
+          // API key eksikse daha açıklayıcı hata mesajı göster
+          let errorMessage: string;
+          if (response.status === 503 && data.details?.includes("OPENAI_API_KEY")) {
+            errorMessage = data.isLocal 
+              ? `AI servisi yapılandırılmamış.\n\nLütfen .env dosyanıza OPENAI_API_KEY ekleyin ve sunucuyu yeniden başlatın.\n\nDetaylar: ${data.hint || data.details}`
+              : data.error || data.details || "AI servisi şu anda mevcut değil";
+          } else {
+            errorMessage = data.error || "AI yanıtı alınamadı";
+          }
+          const errorDetails = data.details ? `\n\nDetay: ${data.details}` : "";
+          const debugInfo = data.debug ? `\n\nDebug Bilgisi:\n${JSON.stringify(data.debug, null, 2)}` : "";
+          console.error("[LessonChat] API Error (Test Answer):", {
+            status: response.status,
+            statusText: response.statusText,
+            error: errorMessage,
+            details: data.details,
+            debug: data.debug,
+            fullResponse: data,
+          });
+          setError(`${errorMessage}${errorDetails}${debugInfo}`);
+          // On error, keep test questions visible - do not clear them
+          // Quiz marking should never disappear under any condition
+          setAnsweredTestQuestionIndex(null);
         }
       } catch (err) {
-        console.error("Error processing context button:", err);
-        setError(err instanceof Error ? err.message : "Mesaj gönderilemedi");
+        console.error("Error processing answer:", err);
+        setError(err instanceof Error ? err.message : "Bir hata oluştu");
+        // On error, keep test questions visible - do not clear them
+        // Quiz marking should never disappear under any condition
+        setAnsweredTestQuestionIndex(null);
       } finally {
         setSending(false);
         setAssistantTyping(false);
       }
     },
-    [messages, lessonSlug, lessonPlan, sending, checkAndMarkLessonCompleted, router, currentTestQuestion]
+    [lessonSlug, handleActions, currentTestQuestionIndex, pendingTestQuestions.length, roadmap]
   );
 
   // Handle choice selection
   const handleChoiceSelect = useCallback(
     async (choice: string) => {
-      if (!currentChoices || sending) return;
-
-      const choiceMessage: Message = {
-        id: `msg-${Date.now()}`,
-        role: "user",
-        content: choice,
-        timestamp: new Date().toISOString(),
-      };
-
-      setMessages((prev) => [...prev, choiceMessage]);
-      setCurrentChoices(null);
-      setSending(true);
-      setError(null);
-
-      try {
-        const response = await fetch("/api/ai/lesson-chat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            lessonSlug,
-            messages: [
-              ...messages.map((msg) => ({
-                role: msg.role,
-                content: msg.content,
-              })),
-              {
-                role: "user",
-                content: choiceMessage.content,
-              },
-            ],
-            lessonPlan: lessonPlan,
-          }),
-        });
-
-        if (!response.ok) {
-          const data = await response.json();
-          throw new Error(data.error || "AI yanıtı alınamadı");
-        }
-
-        const data = await response.json();
-        const assistantMessage: Message = {
-          id: `msg-${Date.now() + 1}`,
-          role: "assistant",
-          content: data.content || "",
-          images: data.images,
-          actions: data.actions,
-          timestamp: new Date().toISOString(),
-        };
-
-        setMessages((prev) => [...prev, assistantMessage]);
-
-        // Update lesson plan if provided
-        if (data.lessonPlan) {
-          setLessonPlan(data.lessonPlan);
-        }
-
-        // Check if lesson is completed
-        await checkAndMarkLessonCompleted(assistantMessage.content);
-
-          // Handle actions
-          if (data.actions && Array.isArray(data.actions)) {
-            for (const action of data.actions) {
-              if (action.type === "choices" && action.data?.choices) {
-                setCurrentChoices(action.data.choices);
-              } else if (action.type === "code_block") {
-                // Code blocks are rendered separately, no action needed
-              } else if (action.type === "test_question" && action.data?.question) {
-                const question = action.data.question;
-                console.log("handleChoiceSelect - Received test_question:", question); // Debug log
-                setPendingTestQuestions((prev) => {
-                  if (prev.some((q) => q.text === question.text)) {
-                    return prev;
-                  }
-                  const updated = [...prev, question];
-                  if (updated.length > 0 && (!currentTestQuestion || prev.length === 0)) {
-                    setCurrentTestQuestion(updated[0]);
-                  }
-                  return updated;
-                });
-              } else if (action.type === "coding_challenge" && action.data?.task) {
-                setCodingChallenge({ task: action.data.task });
-              } else if (action.type === "create_livecoding" && action.data?.task) {
-                setCodingChallenge({ task: action.data.task });
-              } else if (action.type === "create_bugfix" && action.data?.task) {
-                setBugfixChallenge({ task: action.data.task });
-              } else if (action.type === "question" && action.data?.question) {
-                setCurrentQuestion(action.data.question);
-              } else if (action.type === "create_test" && action.data?.question) {
-                setCurrentTestQuestion(action.data.question);
-              } else if (action.type === "create_quiz" && action.data?.question) {
-              const question = action.data.question;
-              setAccumulatedQuizQuestions((prev) => [
-                ...prev,
-                {
-                  text: question.text,
-                  options: question.options || [],
-                  correctIndex: question.correctIndex ?? 0,
-                  id: `q-${Date.now()}-${prev.length}`,
-                },
-              ]);
-              setCurrentTestQuestion(question);
-            } else if (action.type === "quiz_redirect") {
-              setQuizRedirectMessage(action.data?.message || "Ders sonunda mini teste geçelim!");
-              setShowQuiz(true);
-            } else if (action.type === "test_redirect" && action.data?.url) {
-              router.push(action.data.url);
-            } else if (action.type === "bugfix_redirect" && action.data?.url) {
-              router.push(action.data.url);
-            } else if (action.type === "livecoding_redirect" && action.data?.url) {
-              router.push(action.data.url);
-            }
-          }
-        }
-      } catch (err) {
-        console.error("Error processing choice:", err);
-        setError(err instanceof Error ? err.message : "Seçenek işlenemedi");
-      } finally {
-        setSending(false);
-      }
+      setCurrentActivity(null);
+      setShowContinueButton(true);
     },
-    [currentChoices, messages, lessonSlug, lessonPlan, sending, checkAndMarkLessonCompleted]
+    []
   );
 
-  // Handle question answer
-  const handleQuestionAnswer = useCallback(
-    async (answer: string) => {
-      if (!currentQuestion) return;
-
-      // Send answer as a message
-      const answerMessage: Message = {
-        id: `msg-${Date.now()}`,
-        role: "user",
-        content: `Soru: ${currentQuestion.text}\nCevabım: ${answer}`,
-        timestamp: new Date().toISOString(),
-      };
-
-      setMessages((prev) => [...prev, answerMessage]);
-      setCurrentQuestion(null);
-
-      // Continue conversation
-      setSending(true);
-      try {
-        const response = await fetch("/api/ai/lesson-chat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            lessonSlug,
-            messages: [
-              ...messages.map((msg) => ({
-                role: msg.role,
-                content: msg.content,
-              })),
-              {
-                role: "user",
-                content: answerMessage.content,
-              },
-            ],
-            lessonPlan: lessonPlan,
-          }),
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          const assistantMessage: Message = {
-            id: `msg-${Date.now() + 1}`,
-            role: "assistant",
-            content: data.content || "",
-            images: data.images,
-            actions: data.actions,
-            timestamp: new Date().toISOString(),
-          };
-
-          setMessages((prev) => [...prev, assistantMessage]);
-
-          // Update lesson plan if provided
-          if (data.lessonPlan) {
-            setLessonPlan(data.lessonPlan);
-          }
-
-          // Check if lesson is completed
-          await checkAndMarkLessonCompleted(assistantMessage.content);
-
-          // Handle new actions
-          if (data.actions && Array.isArray(data.actions)) {
-            for (const action of data.actions) {
-              if (action.type === "choices" && action.data?.choices) {
-                setCurrentChoices(action.data.choices);
-              } else if (action.type === "code_block") {
-                // Code blocks are rendered separately
-              } else if (action.type === "test_question" && action.data?.question) {
-                const question = action.data.question;
-                console.log("handleContextButton - Received test_question:", question); // Debug log
-                setPendingTestQuestions((prev) => {
-                  const updated = [...prev, question];
-                  if (updated.length > 0 && (!currentTestQuestion || prev.length === 0)) {
-                    setCurrentTestQuestion(updated[0]);
-                  }
-                  return updated;
-                });
-              } else if (action.type === "coding_challenge" && action.data?.task) {
-                setCodingChallenge({ task: action.data.task });
-              } else if (action.type === "create_livecoding" && action.data?.task) {
-                setCodingChallenge({ task: action.data.task });
-              } else if (action.type === "create_bugfix" && action.data?.task) {
-                setBugfixChallenge({ task: action.data.task });
-              } else if (action.type === "question" && action.data?.question) {
-                setCurrentQuestion(action.data.question);
-              } else if (action.type === "create_test" && action.data?.question) {
-                setCurrentTestQuestion(action.data.question);
-              } else if (action.type === "create_quiz" && action.data?.question) {
-                const question = action.data.question;
-                setAccumulatedQuizQuestions((prev) => [
-                  ...prev,
-                  {
-                    text: question.text,
-                    options: question.options || [],
-                    correctIndex: question.correctIndex ?? 0,
-                    id: `q-${Date.now()}-${prev.length}`,
-                  },
-                ]);
-                setCurrentTestQuestion(question);
-              } else if (action.type === "quiz_redirect") {
-                setQuizRedirectMessage(action.data?.message || "Ders sonunda mini teste geçelim!");
-                setShowQuiz(true);
-              } else if (action.type === "test_redirect" && action.data?.url) {
-                router.push(action.data.url);
-              } else if (action.type === "bugfix_redirect" && action.data?.url) {
-                router.push(action.data.url);
-              } else if (action.type === "livecoding_redirect" && action.data?.url) {
-                router.push(action.data.url);
-              }
-            }
-          }
-        }
-      } catch (err) {
-        console.error("Error processing answer:", err);
-      } finally {
-        setSending(false);
-      }
-    },
-    [currentQuestion, messages, lessonSlug, lessonPlan]
-  );
-
-  // Handle bugfix complete
-  const handleBugfixComplete = useCallback(
-    async (code: string, language: LiveCodingLanguage, output?: any) => {
-      setBugfixChallenge(null);
-
-      const completeMessage: Message = {
-        id: `msg-${Date.now()}`,
-        role: "user",
-        content: `Bugfix görevini tamamladım. Düzelttiğim kod:\n\`\`\`${language}\n${code}\n\`\`\`\n${output ? `Çıktı: ${JSON.stringify(output)}` : ""}`,
-        timestamp: new Date().toISOString(),
-      };
-
-      setMessages((prev) => [...prev, completeMessage]);
-
-      // Continue conversation
-      setSending(true);
-      try {
-        const response = await fetch("/api/ai/lesson-chat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            lessonSlug,
-            messages: [
-              ...messages.map((msg) => ({
-                role: msg.role,
-                content: msg.content,
-              })),
-              {
-                role: "user",
-                content: completeMessage.content,
-              },
-            ],
-            lessonPlan: lessonPlan,
-          }),
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          const assistantMessage: Message = {
-            id: `msg-${Date.now() + 1}`,
-            role: "assistant",
-            content: data.content || "",
-            images: data.images,
-            actions: data.actions,
-            timestamp: new Date().toISOString(),
-          };
-
-          setMessages((prev) => [...prev, assistantMessage]);
-
-          // Update lesson plan if provided
-          if (data.lessonPlan) {
-            setLessonPlan(data.lessonPlan);
-          }
-
-          // Check if lesson is completed
-          await checkAndMarkLessonCompleted(assistantMessage.content);
-
-          // Handle new actions
-          if (data.actions && Array.isArray(data.actions)) {
-            for (const action of data.actions) {
-              if (action.type === "choices" && action.data?.choices) {
-                setCurrentChoices(action.data.choices);
-              } else if (action.type === "code_block") {
-                // Code blocks are rendered separately
-              } else if (action.type === "test_question" && action.data?.question) {
-                const question = action.data.question;
-                console.log("handleBugfixComplete - Received test_question:", question); // Debug log
-                setPendingTestQuestions((prev) => {
-                  if (prev.some((q) => q.text === question.text)) {
-                    return prev;
-                  }
-                  const updated = [...prev, question];
-                  if (updated.length > 0 && (!currentTestQuestion || prev.length === 0)) {
-                    setCurrentTestQuestion(updated[0]);
-                  }
-                  return updated;
-                });
-              } else if (action.type === "coding_challenge" && action.data?.task) {
-                setCodingChallenge({ task: action.data.task });
-              } else if (action.type === "create_livecoding" && action.data?.task) {
-                setCodingChallenge({ task: action.data.task });
-              } else if (action.type === "create_bugfix" && action.data?.task) {
-                setBugfixChallenge({ task: action.data.task });
-              } else if (action.type === "question" && action.data?.question) {
-                setCurrentQuestion(action.data.question);
-              } else if (action.type === "create_test" && action.data?.question) {
-                setCurrentTestQuestion(action.data.question);
-              } else if (action.type === "create_quiz" && action.data?.question) {
-                const question = action.data.question;
-                setAccumulatedQuizQuestions((prev) => [
-                  ...prev,
-                  {
-                    text: question.text,
-                    options: question.options || [],
-                    correctIndex: question.correctIndex ?? 0,
-                    id: `q-${Date.now()}-${prev.length}`,
-                  },
-                ]);
-                setCurrentTestQuestion(question);
-              } else if (action.type === "quiz_redirect") {
-                setQuizRedirectMessage(action.data?.message || "Ders sonunda mini teste geçelim!");
-                setShowQuiz(true);
-              } else if (action.type === "test_redirect" && action.data?.url) {
-                router.push(action.data.url);
-              } else if (action.type === "bugfix_redirect" && action.data?.url) {
-                router.push(action.data.url);
-              } else if (action.type === "livecoding_redirect" && action.data?.url) {
-                router.push(action.data.url);
-              }
-            }
-          }
-        }
-      } catch (err) {
-        console.error("Error processing bugfix complete:", err);
-      } finally {
-        setSending(false);
-      }
-    },
-    [messages, lessonSlug, lessonPlan, router]
-  );
-
-  // Handle test question answer
-  const handleTestQuestionAnswer = useCallback(
-    async (selectedIndex: number) => {
-      if (!currentTestQuestion) return;
-
-      const isCorrect = selectedIndex === currentTestQuestion.correctIndex;
-      const selectedText = sanitizeOptionText(currentTestQuestion.options[selectedIndex]);
-      const correctText = sanitizeOptionText(currentTestQuestion.options[currentTestQuestion.correctIndex]);
-      const answerMessage: Message = {
-        id: `msg-${Date.now()}`,
-        role: "user",
-        content: `Test sorusu: ${currentTestQuestion.text}\nCevabım: ${selectedText}\n${isCorrect ? "Doğru!" : "Yanlış"}`,
-        timestamp: new Date().toISOString(),
-      };
-
-      setMessages((prev) => [...prev, answerMessage]);
-      
-      // Show feedback message
-      const feedbackMessage: Message = {
-        id: `msg-${Date.now() + 1}`,
-        role: "assistant",
-        content: isCorrect
-          ? "Harika! Doğru cevap. 🎉"
-          : `Maalesef yanlış. Doğru cevap: ${correctText}`,
-        timestamp: new Date().toISOString(),
-      };
-
-      setMessages((prev) => [...prev, feedbackMessage]);
-      
-      // Clear current question first
-      setCurrentTestQuestion(null);
-      
-      // Show next question after feedback delay, or continue conversation
-      setTimeout(() => {
-        setPendingTestQuestions((prev) => {
-          if (prev.length > 0) {
-            // Show next question
-            const nextQuestion = prev[0];
-            setCurrentTestQuestion(nextQuestion);
-            return prev.slice(1);
-          } else {
-            // No more questions, continue conversation
-            setCurrentTestQuestion(null);
-            
-            // Continue conversation
-            setSending(true);
-            (async () => {
-              try {
-                const response = await fetch("/api/ai/lesson-chat", {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({
-                    lessonSlug,
-                    messages: [
-                      ...messages.map((msg) => ({
-                        role: msg.role,
-                        content: msg.content,
-                      })),
-                      {
-                        role: "user",
-                        content: answerMessage.content,
-                      },
-                    ],
-                    lessonPlan: lessonPlan,
-                  }),
-                });
-
-                if (response.ok) {
-                  const data = await response.json();
-                  const assistantMessage: Message = {
-                    id: `msg-${Date.now() + 2}`,
-                    role: "assistant",
-                    content: data.content || "",
-                    images: data.images,
-                    actions: data.actions,
-                    timestamp: new Date().toISOString(),
-                  };
-
-                  setMessages((prev) => [...prev, assistantMessage]);
-
-                  // Update lesson plan if provided
-                  if (data.lessonPlan) {
-                    setLessonPlan(data.lessonPlan);
-                  }
-
-                  // Handle new actions
-                  if (data.actions && Array.isArray(data.actions)) {
-                    for (const action of data.actions) {
-                      if (action.type === "choices" && action.data?.choices) {
-                        setCurrentChoices(action.data.choices);
-                      } else if (action.type === "code_block") {
-                        // Code blocks are rendered separately
-                      } else if (action.type === "test_question" && action.data?.question) {
-                        const question = action.data.question;
-                        console.log("handleTestQuestionAnswer - Received test_question:", question); // Debug log
-                        setPendingTestQuestions((prev) => {
-                          const updated = [...prev, question];
-                          if (updated.length > 0 && (!currentTestQuestion || prev.length === 0)) {
-                            setCurrentTestQuestion(updated[0]);
-                          }
-                          return updated;
-                        });
-                      } else if (action.type === "coding_challenge" && action.data?.task) {
-                        setCodingChallenge({ task: action.data.task });
-                      } else if (action.type === "create_livecoding" && action.data?.task) {
-                        setCodingChallenge({ task: action.data.task });
-                      } else if (action.type === "create_bugfix" && action.data?.task) {
-                        setBugfixChallenge({ task: action.data.task });
-                      } else if (action.type === "question" && action.data?.question) {
-                        setCurrentQuestion(action.data.question);
-                      } else if (action.type === "create_test" && action.data?.question) {
-                        setCurrentTestQuestion(action.data.question);
-                      } else if (action.type === "create_quiz" && action.data?.question) {
-                        const question = action.data.question;
-                        setAccumulatedQuizQuestions((prev) => [
-                          ...prev,
-                          {
-                            text: question.text,
-                            options: question.options || [],
-                            correctIndex: question.correctIndex ?? 0,
-                            id: `q-${Date.now()}-${prev.length}`,
-                          },
-                        ]);
-                        setCurrentTestQuestion(question);
-                      } else if (action.type === "quiz_redirect") {
-                        setQuizRedirectMessage(action.data?.message || "Ders sonunda mini teste geçelim!");
-                        setShowQuiz(true);
-                      } else if (action.type === "test_redirect" && action.data?.url) {
-                        router.push(action.data.url);
-                      } else if (action.type === "bugfix_redirect" && action.data?.url) {
-                        router.push(action.data.url);
-                      } else if (action.type === "livecoding_redirect" && action.data?.url) {
-                        router.push(action.data.url);
-                      }
-                    }
-                  }
-                }
-              } catch (err) {
-                console.error("Error processing test answer:", err);
-              } finally {
-                setSending(false);
-              }
-            })();
-            return [];
-          }
-        });
-      }, 1500); // Delay to show feedback
-    },
-    [currentTestQuestion, messages, lessonSlug, lessonPlan, pendingTestQuestions, router]
-  );
-
-  // Handle coding challenge complete
-  const handleCodingComplete = useCallback(
-    async (code: string, language: LiveCodingLanguage, output?: any) => {
-      setCodingChallenge(null);
-
-      const completeMessage: Message = {
-        id: `msg-${Date.now()}`,
-        role: "user",
-        content: `Kod görevini tamamladım. Kodum:\n\`\`\`${language}\n${code}\n\`\`\`\n${output ? `Çıktı: ${JSON.stringify(output)}` : ""}`,
-        timestamp: new Date().toISOString(),
-      };
-
-      setMessages((prev) => [...prev, completeMessage]);
-
-      // Continue conversation
-      setSending(true);
-      try {
-        const response = await fetch("/api/ai/lesson-chat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            lessonSlug,
-            messages: [
-              ...messages.map((msg) => ({
-                role: msg.role,
-                content: msg.content,
-              })),
-              {
-                role: "user",
-                content: completeMessage.content,
-              },
-            ],
-            lessonPlan: lessonPlan,
-          }),
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          const assistantMessage: Message = {
-            id: `msg-${Date.now() + 1}`,
-            role: "assistant",
-            content: data.content || "",
-            images: data.images,
-            actions: data.actions,
-            timestamp: new Date().toISOString(),
-          };
-
-          setMessages((prev) => [...prev, assistantMessage]);
-
-          // Update lesson plan if provided
-          if (data.lessonPlan) {
-            setLessonPlan(data.lessonPlan);
-          }
-
-          // Check if lesson is completed
-          await checkAndMarkLessonCompleted(assistantMessage.content);
-
-          // Handle new actions
-          if (data.actions && Array.isArray(data.actions)) {
-            for (const action of data.actions) {
-              if (action.type === "choices" && action.data?.choices) {
-                setCurrentChoices(action.data.choices);
-              } else if (action.type === "code_block") {
-                // Code blocks are rendered separately
-              } else if (action.type === "test_question" && action.data?.question) {
-                const question = action.data.question;
-                console.log("handleCodingComplete - Received test_question:", question); // Debug log
-                setPendingTestQuestions((prev) => {
-                  if (prev.some((q) => q.text === question.text)) {
-                    return prev;
-                  }
-                  const updated = [...prev, question];
-                  if (updated.length > 0 && (!currentTestQuestion || prev.length === 0)) {
-                    setCurrentTestQuestion(updated[0]);
-                  }
-                  return updated;
-                });
-              } else if (action.type === "coding_challenge" && action.data?.task) {
-                setCodingChallenge({ task: action.data.task });
-              } else if (action.type === "create_livecoding" && action.data?.task) {
-                setCodingChallenge({ task: action.data.task });
-              } else if (action.type === "create_bugfix" && action.data?.task) {
-                setBugfixChallenge({ task: action.data.task });
-              } else if (action.type === "question" && action.data?.question) {
-                setCurrentQuestion(action.data.question);
-              } else if (action.type === "create_test" && action.data?.question) {
-                setCurrentTestQuestion(action.data.question);
-              } else if (action.type === "create_quiz" && action.data?.question) {
-                const question = action.data.question;
-                setAccumulatedQuizQuestions((prev) => [
-                  ...prev,
-                  {
-                    text: question.text,
-                    options: question.options || [],
-                    correctIndex: question.correctIndex ?? 0,
-                    id: `q-${Date.now()}-${prev.length}`,
-                  },
-                ]);
-                setCurrentTestQuestion(question);
-              } else if (action.type === "quiz_redirect") {
-                setQuizRedirectMessage(action.data?.message || "Ders sonunda mini teste geçelim!");
-                setShowQuiz(true);
-              } else if (action.type === "test_redirect" && action.data?.url) {
-                router.push(action.data.url);
-              } else if (action.type === "bugfix_redirect" && action.data?.url) {
-                router.push(action.data.url);
-              } else if (action.type === "livecoding_redirect" && action.data?.url) {
-                router.push(action.data.url);
-              }
-            }
-          }
-        }
-      } catch (err) {
-        console.error("Error processing coding complete:", err);
-      } finally {
-        setSending(false);
-      }
-    },
-    [messages, lessonSlug, lessonPlan]
-  );
-
-  // Helper function to clean message content: remove markdown, remove choices (A), B), C), D))
+  // Clean message content
   const cleanMessageContent = useCallback((content: string): string => {
     if (!content) return content;
     
     let cleaned = content;
     
-    // Remove markdown formatting
-    cleaned = cleaned.replace(/\*\*(.*?)\*\*/g, '$1'); // Remove bold **text**
-    cleaned = cleaned.replace(/\*(.*?)\*/g, '$1'); // Remove italic *text*
-    cleaned = cleaned.replace(/###\s+(.*?)(\n|$)/g, '$1\n'); // Remove ### headers
-    cleaned = cleaned.replace(/##\s+(.*?)(\n|$)/g, '$1\n'); // Remove ## headers
-    cleaned = cleaned.replace(/#\s+(.*?)(\n|$)/g, '$1\n'); // Remove # headers
-    cleaned = cleaned.replace(/^-\s+/gm, ''); // Remove list markers -
-    cleaned = cleaned.replace(/^\*\s+/gm, ''); // Remove list markers *
-    cleaned = cleaned.replace(/^\d+\.\s+/gm, ''); // Remove numbered list markers 1. 2. 3.
-    
-    // Remove test question choices from message content (A), B), C), D) format)
-    cleaned = cleaned.replace(/^\s*[A-D]\)\s+.*$/gm, ''); // Remove lines starting with A), B), C), D)
-    cleaned = cleaned.replace(/\([A-D]\)\s+/g, ''); // Remove inline (A), (B), etc.
-    
-    // Remove TEST_QUESTION tags - they are rendered separately as interactive components
+    // Remove action tags
+    cleaned = cleaned.replace(/\[ROADMAP:[^\]]+\]/gi, '');
+    cleaned = cleaned.replace(/\[STEP_COMPLETE:[^\]]+\]/gi, '');
+    cleaned = cleaned.replace(/\[LESSON_COMPLETE\]/gi, '');
     cleaned = cleaned.replace(/\[TEST_QUESTION:[^\]]+\]/gi, '');
-    
-    // Remove CODE_BLOCK tags - they are rendered separately as code blocks
-    cleaned = cleaned.replace(/\[CODE_BLOCK:[\s\S]*?\]/gi, '');
-    
-    // Remove repetitive filler phrases from assistant like "Devam ediyorum", "Devam edelim", leading "Şimdi,"
-    cleaned = cleaned.replace(/\bdevam ediyorum\b/gi, '');
-    cleaned = cleaned.replace(/\bdevam edelim\b/gi, '');
-    cleaned = cleaned.replace(/\bdaha fazlasına geçiyorum\b/gi, '');
-    cleaned = cleaned.replace(/(?:^|\n)\s*şimdi[,:\s]+/gi, '\n'); // start-of-line "Şimdi," noise
+    cleaned = cleaned.replace(/\[FILL_BLANK:[^\]]+\]/gi, '');
+    cleaned = cleaned.replace(/\[TIMED_BUGFIX:[^\]]+\]/gi, '');
+    cleaned = cleaned.replace(/\[CODE_BLOCK:[^\]]+\]/gi, '');
 
     // Clean up multiple newlines
     cleaned = cleaned.replace(/\n{3,}/g, '\n\n');
@@ -1342,360 +663,652 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription }: Lesso
     return cleaned.trim();
   }, []);
 
-  // Convert messages to ChatMessage format for MessageViewport
-  const chatMessages = messages.map((msg) => ({
-    id: msg.id,
-    groupId: "lesson-chat",
-    userId: msg.role === "user" ? "current-user" : "assistant",
-    type: msg.role === "assistant" ? ("system" as const) : ("text" as const),
-    content: msg.role === "assistant" ? cleanMessageContent(msg.content) : msg.content,
-    mentionIds: [],
-    createdAt: msg.timestamp,
-    updatedAt: msg.timestamp,
-    deletedAt: null,
-    sender: {
-      id: msg.role === "user" ? "current-user" : "assistant",
-      name: msg.role === "user" ? "Siz" : "AI Asistan",
-      profileImage: null,
-    },
-    attachments: msg.images
-      ? msg.images.map((img, idx) => ({
-          id: `img-${msg.id}-${idx}`,
-          messageId: msg.id,
-          url: img,
-          type: "image" as const,
-          metadata: {},
-          size: null,
-          createdAt: msg.timestamp,
-        }))
-      : [],
-    readByUserIds: [],
-  }));
+  // Convert messages to ChatMessage format with code blocks and test questions
+  // Also include pending test questions in the message flow
+  const chatMessages = messages.map((msg) => {
+    // Extract code blocks and test questions from actions
+    const codeBlocks = msg.actions?.filter((action) => action.type === "code_block").map((action) => action.data) || [];
+    const testQuestions = msg.actions?.filter((action) => action.type === "test_question" || action.type === "mini_test").map((action) => action.data) || [];
+    
+    return {
+      id: msg.id,
+      groupId: "lesson-chat",
+      userId: msg.role === "user" ? "current-user" : "assistant",
+      type: msg.role === "assistant" ? ("system" as const) : ("text" as const),
+      content: msg.role === "assistant" ? cleanMessageContent(msg.content) : msg.content,
+      mentionIds: [],
+      createdAt: msg.timestamp,
+      updatedAt: msg.timestamp,
+      deletedAt: null,
+      sender: {
+        id: msg.role === "user" ? "current-user" : "assistant",
+        name: msg.role === "user" ? "Siz" : "AI Öğretmen",
+        profileImage: msg.role === "assistant" ? "/Photos/AiTeacher/teacher.jpg" : null, // Teacher image as avatar
+      },
+      attachments: msg.images
+        ? msg.images.map((img, idx) => ({
+            id: `img-${msg.id}-${idx}`,
+            messageId: msg.id,
+            url: img,
+            type: "image" as const,
+            metadata: {},
+            size: null,
+            createdAt: msg.timestamp,
+          }))
+        : [],
+      readByUserIds: [],
+      // Custom metadata for lesson-specific content
+      metadata: {
+        codeBlocks,
+        testQuestions,
+      },
+    };
+  });
 
-  // Handle attachments
-  const handleAttachmentsSelect = useCallback((files: FileList) => {
-    const newAttachments: LocalAttachment[] = Array.from(files).map((file) => ({
-      id: `${Date.now()}-${Math.random()}`,
-      file,
-      type: file.type.startsWith("image/") ? "image" : "file",
-      preview: file.type.startsWith("image/") ? URL.createObjectURL(file) : undefined,
-    }));
-    setAttachments((prev) => [...prev, ...newAttachments]);
-  }, []);
-
-  const handleAttachmentRemove = useCallback((id: string) => {
-    setAttachments((prev) => {
-      const removed = prev.find((a) => a.id === id);
-      if (removed?.preview) {
-        URL.revokeObjectURL(removed.preview);
-      }
-      return prev.filter((a) => a.id !== id);
-    });
-  }, []);
+  // Use chatMessages directly - don't modify the message flow
+  // Mini test questions will be rendered separately at the end of the message flow
+  const messagesWithTestQuestions = chatMessages;
 
 
-  if (showQuiz) {
-    return (
-      <div className="flex flex-col h-full">
-        <div className="flex-1 overflow-y-auto p-6">
-          {quizRedirectMessage && (
-            <div className="mb-6 p-4 rounded-xl bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/40">
-              <p className="text-blue-900 dark:text-blue-100">{quizRedirectMessage}</p>
-            </div>
-          )}
-          <LessonMiniTest
-            lessonSlug={lessonSlug}
-            lessonTitle={lessonTitle}
-            onStatusChange={({ passed }) => {
-              if (passed) {
-                // Quiz passed, show success message
-                const successMessage: Message = {
-                  id: `msg-${Date.now()}`,
-                  role: "assistant",
-                  content: "Harika! Mini testi başarıyla tamamladın. Bu dersi öğrenmişsin! 🎉",
-                  timestamp: new Date().toISOString(),
-                };
-                setMessages((prev) => [...prev, successMessage]);
-              }
-            }}
-          />
-          <div className="mt-6">
-            <Button
-              onClick={() => {
-                setShowQuiz(false);
-                setQuizRedirectMessage(null);
-              }}
-              variant="outline"
-            >
-              Sohbete Dön
-            </Button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  const lastAssistantMessage = messages && Array.isArray(messages) 
-    ? messages.filter((msg) => msg.role === "assistant").pop() 
-    : null;
-  const testQuestions = lastAssistantMessage?.actions?.filter((action) => action.type === "test_question") || [];
-
-  // Create a map of message IDs to their code blocks for quick lookup
-  const messageCodeBlocksMap = new Map<string, Array<{ language: string; code: string }>>();
-  if (messages && Array.isArray(messages)) {
-    messages.forEach((msg) => {
-      if (msg.role === "assistant" && msg.actions) {
-        const codeBlocks = msg.actions
-          .filter((action) => action.type === "code_block")
-          .map((action) => ({
-            language: action.data?.language || "text",
-            code: action.data?.code || "",
-          }));
-        if (codeBlocks.length > 0) {
-          messageCodeBlocksMap.set(msg.id, codeBlocks);
-        }
-      }
-    });
-  }
 
   return (
     <div className="flex flex-col h-full">
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto relative">
-        <div className="relative">
-          <MessageViewport
-            messages={chatMessages}
-            currentUserId="current-user"
-            hasMore={false}
-            loading={loading}
-            loadingMore={false}
-            onLoadMore={() => {}}
-            emptyState={{
-              icon: <MessageSquare className="h-10 w-10" />,
-              title: "Ders sohbeti başlatılıyor...",
-              description: "AI asistan hazırlanıyor",
-            }}
-            endRef={messagesEndRef}
-            className="flex-1"
-          />
-          
-          {/* Code Blocks for each assistant message - positioned right after their message bubble */}
-          {/* Render code blocks in message order, right after each assistant message */}
-          {messages
-            .filter((msg) => msg.role === "assistant" && messageCodeBlocksMap.has(msg.id))
-            .map((msg) => {
-              const codeBlocks = messageCodeBlocksMap.get(msg.id)!;
-              return (
-                <div key={`code-blocks-${msg.id}`} className="px-6 pb-3 -mt-1">
-                  <div className="space-y-3 max-w-[65%] ml-16">
-                    {codeBlocks.map((codeBlock, index) => (
-                      <div
-                        key={`code-block-${msg.id}-${index}`}
-                        className="rounded-2xl bg-blue-50/60 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/40 overflow-hidden"
-                      >
-                        <CodeBlock
-                          code={codeBlock.code}
-                          language={codeBlock.language}
-                        />
-                      </div>
-                    ))}
-                  </div>
+      <div className="flex-1 overflow-y-auto relative" ref={messagesContainerRef}>
+        <div className="relative h-full">
+          {loading ? (
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-6">
+              <div className="relative">
+                <Loader2 className="h-12 w-12 animate-spin text-blue-500" />
+                <div className="absolute inset-0 h-12 w-12 border-4 border-blue-200 dark:border-blue-800 border-t-blue-500 rounded-full animate-spin" style={{ animationDuration: '1s' }} />
+              </div>
+              <div className="text-center space-y-3">
+                <p className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                  {loadingMessages[loadingMessage]}
+                </p>
+                <div className="w-64 h-2 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full animate-pulse"
+                    style={{ 
+                      width: '60%',
+                      animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+                    }}
+                  />
                 </div>
-              );
-            })}
-          
-          {/* Typing indicator */}
-          {assistantTyping && (
-            <div className="px-6 pb-4">
-              <div className="ml-16 inline-flex items-center gap-2 px-3 py-2 rounded-2xl bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
-                <Loader2 className="h-4 w-4 animate-spin" />
-                <span>Yazıyor...</span>
               </div>
             </div>
+          ) : (
+          <div className="flex-1 overflow-y-auto overflow-x-hidden h-full max-h-full min-h-0 px-4 md:px-8 py-6 space-y-5">
+            {chatMessages.length === 0 ? (
+              <div className="flex flex-col items-center justify-center text-center py-20 gap-3 text-gray-500 dark:text-gray-400">
+                <MessageSquare className="h-10 w-10 text-blue-500" />
+                <p className="font-medium">Ders sohbeti başlatılıyor...</p>
+                <p className="text-sm">AI öğretmen hazırlanıyor</p>
+              </div>
+            ) : (
+              <>
+                {messagesWithTestQuestions.map((chatMsg) => {
+                  const originalMsg = messages.find((m) => m.id === chatMsg.id);
+                  const isOwn = chatMsg.userId === "current-user";
+                  const isAI = chatMsg.sender.id === "assistant";
+                  const codeBlocks = (chatMsg.metadata as any)?.codeBlocks || [];
+                  const testQuestions = (chatMsg.metadata as any)?.testQuestions || [];
+                  
+                  // Only render message bubble if there's actual content or code blocks
+                  // Test questions are rendered separately inline, so don't count them here
+                  const hasContent = chatMsg.content && chatMsg.content.trim().length > 0;
+                  const hasCodeBlocks = codeBlocks.length > 0;
+                  const hasTestQuestions = testQuestions.length > 0;
+                  // Exclude test questions from shouldRenderMessage to prevent empty chatbox
+                  const shouldRenderMessage = hasContent || hasCodeBlocks;
+                  
+                  // Don't render anything if there's no content to show (prevent empty chatbox)
+                  // But still render the container if there are test questions to show inline
+                  if (!shouldRenderMessage && !hasTestQuestions) {
+                    return null;
+                  }
+                  
+                  
+                  return (
+                    <div key={chatMsg.id} className="space-y-3">
+                      {/* Message Bubble - Only render if there's content */}
+                      {shouldRenderMessage && (
+                        <div
+                          className={cn(
+                            "flex w-full items-end gap-1.5 relative",
+                            isOwn ? "justify-end" : "justify-start"
+                          )}
+                        >
+                          {isAI && (
+                            <div className="absolute -bottom-0.5 -left-1 z-10">
+                              <div className="relative w-14 h-14 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/70 bg-gradient-to-br from-blue-500 to-purple-500 text-white shadow-sm">
+                                <Image
+                                  src="/Photos/AiTeacher/teacher.jpg"
+                                  alt="AI Öğretmen"
+                                  fill
+                                  className="object-cover"
+                                  sizes="56px"
+                                  priority={false}
+                                  unoptimized={true}
+                                  onError={(e) => {
+                                    console.error("Failed to load AI teacher image:", e);
+                                  }}
+                                />
+                              </div>
+                            </div>
+                          )}
+                          <div
+                            className={cn(
+                              "max-w-full sm:max-w-[70%] md:max-w-[65%] rounded-3xl px-5 py-3 shadow-md backdrop-blur-md border",
+                              isOwn
+                                ? "bg-gradient-to-br from-blue-600 to-purple-600 text-white border-blue-500/30"
+                                : isAI
+                                ? "bg-blue-50/90 dark:bg-blue-950/50 border-blue-200/70 dark:border-blue-800/60 text-gray-900 dark:text-gray-100 ml-14"
+                                : "bg-white/85 dark:bg-gray-900/75 border-gray-200/70 dark:border-gray-700/60 text-gray-900 dark:text-gray-100"
+                            )}
+                          >
+                            {hasContent && (
+                              isAI ? (
+                                <MessageContent 
+                                  content={chatMsg.content} 
+                                  isAI={true}
+                                  className="text-gray-800 dark:text-gray-200"
+                                />
+                              ) : (
+                                <p className={cn(
+                                  "whitespace-pre-wrap break-words leading-relaxed",
+                                  isOwn ? "text-white/90 text-base" : "text-gray-800 dark:text-gray-200 text-base"
+                                )}>
+                                  {chatMsg.content}
+                                </p>
+                              )
+                            )}
+                          </div>
+                        </div>
+                      )}
+                      
+                      {/* Code Blocks - Rendered as part of message flow, not separate chatbox */}
+                      {codeBlocks.length > 0 && (
+                        <div className={cn("space-y-3", isAI ? "ml-20" : "ml-0", isOwn ? "mr-0" : "")}>
+                          {codeBlocks.map((codeBlock: any, index: number) => {
+                            const isEditable = codeBlock.editable && !codeBlock.readonly;
+                            const isRunnable = codeBlock.runnable;
+                            
+                            if (isEditable || isRunnable) {
+                              return (
+                                <div
+                                  key={`code-editor-${chatMsg.id}-${index}`}
+                                  className="flex w-full items-end gap-1.5 relative justify-start"
+                                >
+                                  {isAI && (
+                                    <div className="absolute -bottom-0.5 -left-1 z-10">
+                                      <div className="relative w-12 h-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/70 bg-gradient-to-br from-blue-500 to-purple-500 text-white shadow-sm">
+                                        <Image
+                                          src="/Photos/AiTeacher/teacher.jpg"
+                                          alt="AI Öğretmen"
+                                          fill
+                                          className="object-cover"
+                                          sizes="48px"
+                                          priority={false}
+                                          unoptimized={true}
+                                          onError={(e) => {
+                                            console.error("Failed to load AI teacher image:", e);
+                                          }}
+                                        />
+                                      </div>
+                                    </div>
+                                  )}
+                                  <div
+                                    className={cn(
+                                      "rounded-2xl bg-gray-950/90 border border-gray-800 overflow-hidden max-w-full sm:max-w-[70%] md:max-w-[65%]",
+                                      isAI ? "ml-14" : ""
+                                    )}
+                                    style={{ minWidth: 0 }}
+                                  >
+                                    <LessonCodeEditor
+                                      id={`${chatMsg.id}-${index}`}
+                                      language={codeBlock.language}
+                                      code={codeBlock.code}
+                                      editable={isEditable}
+                                      runnable={isRunnable}
+                                      readonly={codeBlock.readonly}
+                                      lessonSlug={lessonSlug}
+                                      onCodeChange={(newCode) => {
+                                        console.log("Code changed:", newCode);
+                                      }}
+                                      onRun={async (code) => {
+                                        console.log("Running code:", code);
+                                        alert("Kod çalıştırma özelliği yakında eklenecek!");
+                                      }}
+                                    />
+                                  </div>
+                                </div>
+                              );
+                            }
+                            
+                            return (
+                              <div
+                                key={`code-block-${chatMsg.id}-${index}`}
+                                className="flex w-full items-end gap-1.5 relative justify-start"
+                              >
+                                {isAI && (
+                                  <div className="absolute -bottom-0.5 -left-1 z-10">
+                                    <div className="relative w-12 h-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/70 bg-gradient-to-br from-blue-500 to-purple-500 text-white shadow-sm">
+                                      <Image
+                                        src="/Photos/AiTeacher/teacher.jpg"
+                                        alt="AI Öğretmen"
+                                        fill
+                                        className="object-cover"
+                                        sizes="48px"
+                                        priority={false}
+                                        unoptimized={true}
+                                        onError={(e) => {
+                                          console.error("Failed to load AI teacher image:", e);
+                                        }}
+                                      />
+                                    </div>
+                                  </div>
+                                )}
+                                <div
+                                  className={cn(
+                                    "rounded-2xl bg-blue-50/60 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/40 overflow-hidden max-w-[65%]",
+                                    isAI ? "ml-14" : ""
+                                  )}
+                                >
+                                  <CodeBlock
+                                    code={codeBlock.code}
+                                    language={codeBlock.language}
+                                  />
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                      
+                      {/* Test Questions - Rendered inline with the message that contains them */}
+                      {hasTestQuestions && testQuestions.length > 0 && (
+                        <div className={cn("space-y-3", isAI ? "ml-20" : "ml-0", isOwn ? "mr-0" : "")}>
+                          {testQuestions.map((testQuestion: any, questionIndex: number) => {
+                            // Check if this question is in pendingTestQuestions and is the current one
+                            // Use both reference equality and deep comparison for robustness
+                            const questionIndexInPending = pendingTestQuestions.findIndex((q: any) => 
+                              q === testQuestion || JSON.stringify(q) === JSON.stringify(testQuestion)
+                            );
+                            const isCurrentQuestion = questionIndexInPending >= 0 && questionIndexInPending === currentTestQuestionIndex;
+                            const isAnswered = questionIndexInPending >= 0 && answeredTestQuestionIndex === questionIndexInPending;
+                            
+                            // Only show if it's the current question from pendingTestQuestions, or if pendingTestQuestions is empty
+                            const shouldShow = pendingTestQuestions.length === 0 || isCurrentQuestion;
+                            
+                            if (!shouldShow) return null;
+                            
+                            return (
+                              <div key={`test-question-${chatMsg.id}-${questionIndex}`} className="flex w-full items-end gap-1.5 relative justify-start">
+                                {isAI && (
+                                  <div className="absolute -bottom-0.5 -left-1 z-10">
+                                    <div className="relative w-12 h-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/70 bg-gradient-to-br from-blue-500 to-purple-500 text-white shadow-sm">
+                                      <Image
+                                        src="/Photos/AiTeacher/teacher.jpg"
+                                        alt="AI Öğretmen"
+                                        fill
+                                        className="object-cover"
+                                        sizes="48px"
+                                        priority={false}
+                                        unoptimized={true}
+                                        onError={(e) => {
+                                          console.error("Failed to load AI teacher image:", e);
+                                        }}
+                                      />
+                                    </div>
+                                  </div>
+                                )}
+                                <div className={cn("max-w-full sm:max-w-[70%] md:max-w-[65%]", isAI ? "ml-14" : "")}>
+                                  <TestQuestionChatbox
+                                    question={testQuestion}
+                                    onAnswer={(answer) => handleTestQuestionAnswer(answer)}
+                                    disabled={sending || isAnswered}
+                                  />
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                      
+                    </div>
+                  );
+                })}
+              </>
+            )}
+            
+            {/* Test Questions from pendingTestQuestions - Show current question at the end if not already rendered inline */}
+            {pendingTestQuestions.length > 0 && currentTestQuestionIndex < pendingTestQuestions.length && (
+              (() => {
+                // Check if current question was already rendered inline with a message
+                const currentQuestion = pendingTestQuestions[currentTestQuestionIndex];
+                const wasRenderedInline = messagesWithTestQuestions.some((msg) => {
+                  const msgTestQuestions = (msg.metadata as any)?.testQuestions || [];
+                  // Check if any test question in this message matches the current question
+                  return msgTestQuestions.some((q: any) => {
+                    // Deep comparison might be needed, but for now use reference equality
+                    // If questions are the same object reference, they're the same
+                    return q === currentQuestion || JSON.stringify(q) === JSON.stringify(currentQuestion);
+                  });
+                });
+                
+                // Only render here if it wasn't already rendered inline
+                if (wasRenderedInline) return null;
+                
+                return (
+                  <div className="space-y-3">
+                    <div className="flex w-full items-end gap-1.5 relative justify-start">
+                      <div className="absolute -bottom-0.5 -left-1 z-10">
+                        <div className="relative w-12 h-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/70 bg-gradient-to-br from-blue-500 to-purple-500 text-white shadow-sm">
+                          <Image
+                            src="/Photos/AiTeacher/teacher.jpg"
+                            alt="AI Öğretmen"
+                            fill
+                            className="object-cover"
+                            sizes="48px"
+                            priority={false}
+                            unoptimized={true}
+                            onError={(e) => {
+                              console.error("Failed to load AI teacher image:", e);
+                            }}
+                          />
+                        </div>
+                      </div>
+                      <div className="ml-14 max-w-full sm:max-w-[70%] md:max-w-[65%]">
+                        {(() => {
+                          const isAnswered = answeredTestQuestionIndex === currentTestQuestionIndex;
+                          return (
+                            <TestQuestionChatbox
+                              question={currentQuestion}
+                              onAnswer={(answer) => handleTestQuestionAnswer(answer)}
+                              disabled={sending || isAnswered}
+                            />
+                          );
+                        })()}
+                      </div>
+                    </div>
+                    
+                    {/* AI Öğretmen Düşünüyor - Mini Quiz Kartının Altında */}
+                    {assistantTyping && (
+                      <div className="flex w-full items-end gap-1.5 relative justify-start mt-3">
+                        <div className="absolute -bottom-0.5 -left-1 z-10">
+                          <div className="relative w-12 h-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/70 bg-gradient-to-br from-blue-500 to-purple-500 text-white shadow-sm">
+                            <Image
+                              src="/Photos/AiTeacher/teacher.jpg"
+                              alt="AI Öğretmen"
+                              fill
+                              className="object-cover"
+                              sizes="48px"
+                              priority={false}
+                              unoptimized={true}
+                              onError={(e) => {
+                                console.error("Failed to load AI teacher image:", e);
+                              }}
+                            />
+                          </div>
+                        </div>
+                        <div className="ml-16 pr-6 inline-flex items-center gap-3 px-4 py-3 rounded-2xl bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300 border-2 border-blue-200 dark:border-blue-800 shadow-sm">
+                          <div className="flex items-center gap-2">
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="font-semibold text-sm">AI Öğretmen</span>
+                            <span className="text-xs opacity-80">Düşünüyor...</span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })()
+            )}
+            
+            {/* Typing indicator - Enhanced for teacher (only show if no mini quiz is active) */}
+            {assistantTyping && !(pendingTestQuestions.length > 0 && currentTestQuestionIndex < pendingTestQuestions.length) && (
+              <div className="flex w-full items-end gap-1.5 relative justify-start">
+                <div className="absolute -bottom-0.5 -left-1 z-10">
+                  <div className="relative w-12 h-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/70 bg-gradient-to-br from-blue-500 to-purple-500 text-white shadow-sm">
+                    <Image
+                      src="/Photos/AiTeacher/teacher.jpg"
+                      alt="AI Öğretmen"
+                      fill
+                      className="object-cover"
+                      sizes="48px"
+                      priority={false}
+                      unoptimized={true}
+                      onError={(e) => {
+                        console.error("Failed to load AI teacher image:", e);
+                      }}
+                    />
+                  </div>
+                </div>
+                <div className="ml-16 pr-6 inline-flex items-center gap-3 px-4 py-3 rounded-2xl bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300 border-2 border-blue-200 dark:border-blue-800 shadow-sm">
+                  <div className="flex items-center gap-2">
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-semibold text-sm">AI Öğretmen</span>
+                    <span className="text-xs opacity-80">Düşünüyor...</span>
+                  </div>
+                </div>
+              </div>
+            )}
+            
+            
+            <div ref={messagesEndRef} />
+          </div>
           )}
         </div>
       </div>
 
-      {/* Test Questions from last message (tek tek göster) */}
-      {testQuestions.length > 0 && !currentTestQuestion && (
+      {/* Current Activity - Only for interactive activities (not test questions) */}
+      {currentActivity && (
         <div className="px-6 pb-4">
-          {testQuestions.slice(0, 1).map((action, index) => {
-            const question = action.data?.question;
-            if (!question) return null;
+          {currentActivity.type === "timed_bugfix" && (
+            <TimedBugfix
+              code={currentActivity.data.code}
+              timeSeconds={currentActivity.data.timeSeconds}
+              onComplete={(success, timeSpent) => handleActivityComplete({ type: "timed_bugfix", success, timeSpent })}
+            />
+          )}
 
-            return (
-              <Card key={`test-question-${lastAssistantMessage?.id}-${index}`} className="border-blue-200 bg-blue-50/50 dark:border-blue-900/40 dark:bg-blue-950/30 mb-4">
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">
-                    Test Sorusu
-                  </h3>
-                  <p className="mb-4 text-gray-800 dark:text-gray-200">
-                    {question.text}
-                  </p>
-                  <div className="space-y-2">
-                    {question.options?.map((option: string, optionIndex: number) => (
-                      <Button
-                        key={optionIndex}
-                        onClick={() => {
-                          // Set as current test question to use existing handler
-                          setCurrentTestQuestion({
-                            text: question.text,
-                            type: "multiple_choice",
-                            options: (question.options || []).map(sanitizeOptionText),
-                            correctIndex: question.correctIndex ?? 0,
-                          });
-                          // Trigger answer
-                          setTimeout(() => {
-                            handleTestQuestionAnswer(optionIndex);
-                          }, 0);
-                        }}
-                        variant="outline"
-                        className="w-full justify-start text-left hover:bg-blue-100 dark:hover:bg-blue-900/40 border-blue-300 dark:border-blue-700"
-                        disabled={sending}
-                      >
-                        {String.fromCharCode(65 + optionIndex)}. {sanitizeOptionText(option)}
-                      </Button>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            );
-          })}
+          {currentActivity.type === "choices" && (
+            <Card className="border-gray-200 bg-gray-50/60 dark:border-gray-800/60 dark:bg-gray-800/40">
+              <CardContent className="p-4">
+                <div className="space-y-2">
+                  {currentActivity.data.choices?.map((choice: string, index: number) => (
+                    <Button
+                      key={index}
+                      onClick={() => handleChoiceSelect(choice)}
+                      variant="outline"
+                      className="w-full justify-start text-left"
+                      disabled={sending}
+                    >
+                      {choice}
+                    </Button>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          )}
         </div>
       )}
 
-      {/* Current Question */}
-      {currentQuestion && (
-        <div className="px-6 pb-4">
-          <QuestionInteraction
-            question={currentQuestion}
-            onAnswer={handleQuestionAnswer}
-            disabled={sending}
-          />
+      {/* Composer with Continue Button */}
+      <div className="border-t border-gray-200/70 dark:border-gray-800/60 px-4 md:px-6 py-4 bg-white/90 dark:bg-gray-950/80 backdrop-blur-md">
+        <div className="rounded-3xl border border-gray-200/70 dark:border-gray-700/60 bg-white/90 dark:bg-gray-900/70 shadow-sm px-3 py-2 sm:px-4 sm:py-3">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="flex-1 min-w-0">
+              <textarea
+                ref={textareaRef}
+                value={messageInput}
+                onChange={(event) => setMessageInput(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" && !event.shiftKey) {
+                    event.preventDefault();
+                    handleSendMessage();
+                  }
+                }}
+                placeholder={currentActivity ? "Lütfen yukarıdaki aktiviteyi tamamlayın..." : isCompleted ? "Ders tamamlandı!" : "Sorunu yaz veya ders hakkında bilgi iste..."}
+                rows={1}
+                className={cn(
+                  "w-full resize-none bg-transparent px-2 sm:px-3 py-2 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-0 overflow-hidden",
+                  "placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                )}
+                disabled={sending || !!currentActivity || isCompleted}
+              />
+            </div>
+            {/* Continue Button - Next to Send button */}
+            {showContinueButton && !currentActivity && !sending && !assistantTyping && !isCompleted && (
+              <Button
+                type="button"
+                onClick={handleContinue}
+                variant="gradient"
+                size="lg"
+                className={cn(
+                  "min-w-[140px] h-11 text-base font-semibold rounded-full shrink-0",
+                  "bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600",
+                  "hover:from-purple-700 hover:via-pink-700 hover:to-rose-700",
+                  "text-white shadow-lg",
+                  "animate-pulse hover:animate-none",
+                  "relative overflow-hidden",
+                  "before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent",
+                  "before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-1000"
+                )}
+                disabled={sending || assistantTyping}
+              >
+                <ArrowRight className="h-5 w-5 mr-2" />
+                Devam Et
+              </Button>
+            )}
+            <Button
+              type="submit"
+              variant="gradient"
+              size="md"
+              disabled={!messageInput.trim() || sending || !!currentActivity || isCompleted}
+              isLoading={sending}
+              onClick={(e) => {
+                e.preventDefault();
+                handleSendMessage();
+              }}
+              className="min-w-[44px] h-11 rounded-full p-0 flex items-center justify-center shrink-0"
+              aria-label="Mesaj gönder"
+            >
+              <Send className="h-5 w-5" />
+            </Button>
+          </div>
         </div>
-      )}
-
-      {/* Test Question */}
-      {currentTestQuestion && (
-        <div className="px-6 pb-4">
-          <Card className="border-blue-200 bg-blue-50/50 dark:border-blue-900/40 dark:bg-blue-950/30">
-            <CardContent className="p-6">
-              <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">
-                Test Sorusu
-              </h3>
-              <p className="mb-4 text-gray-800 dark:text-gray-200">
-                {currentTestQuestion.text}
-              </p>
-              <div className="space-y-2">
-                {currentTestQuestion.options.map((option, index) => (
-                  <Button
-                    key={index}
-                    onClick={() => handleTestQuestionAnswer(index)}
-                    variant="outline"
-                    className="w-full justify-start text-left"
-                    disabled={sending}
-                  >
-                    {String.fromCharCode(65 + index)}. {sanitizeOptionText(option)}
-                  </Button>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      )}
-
-      {/* Choice Buttons */}
-      {currentChoices && currentChoices.length > 0 && (
-        <div className="px-6 pb-4">
-          <Card className="border-blue-200 bg-blue-50/50 dark:border-blue-900/40 dark:bg-blue-950/30">
-            <CardContent className="p-6">
-              <div className="space-y-2">
-                {currentChoices.map((choice, index) => (
-                  <Button
-                    key={index}
-                    onClick={() => handleChoiceSelect(choice)}
-                    variant="outline"
-                    className="w-full justify-start text-left hover:bg-blue-100 dark:hover:bg-blue-900/40 border-blue-300 dark:border-blue-700"
-                    disabled={sending}
-                  >
-                    {choice}
-                  </Button>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      )}
-
-      {/* Context Buttons - Show when no choices, test questions, modals, or regular questions */}
-      {!currentChoices && !currentTestQuestion && !currentQuestion && !codingChallenge && !bugfixChallenge && !showQuiz && 
-       messages.length > 0 && messages[messages.length - 1]?.role === "assistant" && !sending && (
-        <div className="px-6 pb-4">
-          <Card className="border-gray-200 bg-gray-50/60 dark:border-gray-800/60 dark:bg-gray-800/40">
-            <CardContent className="p-3">
-              <div className="flex flex-wrap gap-2">
-                <Button
-                  onClick={() => handleContextButton("Devam et", "devam et")}
-                  variant="outline"
-                  size="sm"
-                  className="hover:bg-gray-100 dark:hover:bg-gray-700/60 border-gray-300 dark:border-gray-600"
-                  disabled={sending}
-                >
-                  Devam et
-                </Button>
-                <Button
-                  onClick={() => handleContextButton("Örnekle Açıkla", "örnekle açıkla")}
-                  variant="outline"
-                  size="sm"
-                  className="hover:bg-gray-100 dark:hover:bg-gray-700/60 border-gray-300 dark:border-gray-600"
-                  disabled={sending}
-                >
-                  Örnekle Açıkla
-                </Button>
-                <Button
-                  onClick={() => handleContextButton("Bir sonraki aşamaya geç", "bir sonraki aşamaya geç")}
-                  variant="outline"
-                  size="sm"
-                  className="hover:bg-gray-100 dark:hover:bg-gray-700/60 border-gray-300 dark:border-gray-600"
-                  disabled={sending}
-                >
-                  Bir sonraki aşamaya geç
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      )}
-
-      {/* Composer */}
-      <Composer
-        message={messageInput}
-        onMessageChange={setMessageInput}
-        onSubmit={handleSendMessage}
-        onSendShortcut={handleSendMessage}
-        attachments={attachments}
-        onAttachmentsSelect={handleAttachmentsSelect}
-        onAttachmentRemove={handleAttachmentRemove}
-        disabled={!messageInput.trim() || sending || !!currentQuestion || !!currentTestQuestion || !!currentChoices}
-        sending={sending}
-        uploading={false}
-        textareaRef={textareaRef}
-        fileInputRef={fileInputRef}
-        placeholder={currentQuestion || currentTestQuestion || currentChoices ? "Lütfen yukarıdaki seçenekleri kullanın..." : "Sorunu yaz veya ders hakkında bilgi iste..."}
-      />
-
-      {/* Coding & Bugfix modals removed in favor of dedicated pages */}
+      </div>
 
       {/* Error Overlay */}
       {error && (
-        <div className="fixed top-6 right-6 z-50 bg-red-500/10 text-red-600 dark:text-red-300 border border-red-500/40 px-4 py-2 rounded-xl backdrop-blur max-w-md">
-          {error}
+        <div className="fixed top-6 right-6 z-50 bg-red-500/10 text-red-600 dark:text-red-300 border border-red-500/40 px-4 py-3 rounded-xl backdrop-blur max-w-2xl shadow-lg">
+          <div className="font-semibold mb-2">Hata Oluştu</div>
+          <div className="text-sm whitespace-pre-wrap break-words">{error}</div>
           <button
             onClick={() => setError(null)}
-            className="ml-2 text-red-700 dark:text-red-400 hover:underline"
+            className="mt-3 text-sm text-red-700 dark:text-red-400 hover:underline font-medium"
           >
             Kapat
           </button>
+        </div>
+      )}
+
+      {/* Completion Modal */}
+      {showCompletionModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+          <div className="w-full max-w-md bg-white dark:bg-gray-900 rounded-2xl shadow-2xl overflow-hidden">
+            <div className="bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 p-6 text-white text-center">
+              <div className="text-6xl mb-4">🎉</div>
+              <h2 className="text-2xl font-bold mb-2">Ders Tamamlandı!</h2>
+              <p className="text-purple-100">
+                {lessonTitle} dersini başarıyla tamamladın!
+              </p>
+            </div>
+            <div className="p-6 space-y-4">
+              {nextLesson ? (
+                <>
+                  <p className="text-gray-700 dark:text-gray-300 text-center">
+                    Bir sonraki derse geçmek ister misin?
+                  </p>
+                  <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/30 dark:to-purple-950/30 rounded-xl p-4 border border-blue-200 dark:border-blue-800">
+                    <div className="flex items-center gap-3">
+                      <CheckCircle className="h-6 w-6 text-blue-600 dark:text-blue-400 flex-shrink-0" />
+                      <div className="flex-1 min-w-0">
+                        <p className="font-semibold text-gray-900 dark:text-gray-100 truncate">
+                          {nextLesson.label}
+                        </p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                          Bir sonraki ders
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex gap-3">
+                    <Button
+                      onClick={() => {
+                        // Close modal first to prevent re-opening
+                        modalDismissedRef.current = true;
+                        setShowCompletionModal(false);
+                        
+                        // nextLesson.href format: "/education/lessons/..." 
+                        // We need to convert it to chat route: "/education/lessons/chat/..."
+                        let nextPath = nextLesson.href;
+                        if (nextPath.startsWith('/education/lessons/')) {
+                          // Extract the lesson path after /education/lessons/
+                          const lessonPath = nextPath.replace('/education/lessons/', '');
+                          // Convert to chat route: /education/lessons/chat/...
+                          nextPath = `/education/lessons/chat/${lessonPath}`;
+                        } else {
+                          // Fallback: assume it's a relative path
+                          nextPath = `/education/lessons/chat/${nextPath.replace(/^\//, '')}`;
+                        }
+                        
+                        // Navigate immediately
+                        router.push(nextPath);
+                      }}
+                      variant="gradient"
+                      className="flex-1"
+                    >
+                      <ArrowRight className="h-4 w-4 mr-2" />
+                      Bir Sonraki Derse Geç
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        modalDismissedRef.current = true;
+                        setShowCompletionModal(false);
+                      }}
+                      variant="outline"
+                      className="flex-1"
+                    >
+                      Şimdi Değil
+                    </Button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <p className="text-gray-700 dark:text-gray-300 text-center">
+                    Harika bir iş çıkardın! Dersini başarıyla tamamladın.
+                  </p>
+                  <Button
+                    onClick={() => {
+                      modalDismissedRef.current = true;
+                      setShowCompletionModal(false);
+                    }}
+                    variant="gradient"
+                    className="w-full"
+                  >
+                    Tamam
+                  </Button>
+                </>
+              )}
+            </div>
+          </div>
         </div>
       )}
     </div>

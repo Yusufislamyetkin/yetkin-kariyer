@@ -20,6 +20,16 @@ const COMMUNITY_SLUGS = [
   "owasp-community",
 ];
 
+// Fisher-Yates shuffle algoritması ile rastgele karıştırma
+function shuffleArray<T>(array: T[]): T[] {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
 export async function POST() {
   try {
     const session = await auth();
@@ -28,44 +38,15 @@ export async function POST() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Tüm profilleri al (profileImage içeren kullanıcılar)
-    const profileUsers = await db.user.findMany({
-      where: {
-        profileImage: {
-          not: null,
-        },
-      },
-      select: {
-        id: true,
-      },
-    });
-
-    if (profileUsers.length === 0) {
-      return NextResponse.json(
-        { error: "Profil kullanıcısı bulunamadı." },
-        { status: 400 }
-      );
-    }
-
-    // Tüm topluluk gruplarını al (slug'lara göre veya createdById null olan public gruplar)
+    // Tüm topluluk gruplarını al (COMMUNITY_SLUGS'e göre)
     const communities = await db.chatGroup.findMany({
       where: {
-        OR: [
-          { slug: { in: COMMUNITY_SLUGS } },
-          {
-            createdById: null,
-            visibility: "public",
-            slug: {
-              not: {
-                startsWith: "dm-",
-              },
-            },
-          },
-        ],
+        slug: { in: COMMUNITY_SLUGS },
       },
       select: {
         id: true,
         name: true,
+        slug: true,
       },
     });
 
@@ -76,94 +57,88 @@ export async function POST() {
       );
     }
 
-    // Her topluluğun mevcut üyelerini al
-    const existingMemberships = await db.chatGroupMembership.findMany({
+    // ADIM 1: Tüm topluluklardaki mevcut üyeleri kaldır
+    const communityIds = communities.map((c: { id: string }) => c.id);
+    const deleteResult = await db.chatGroupMembership.deleteMany({
       where: {
-        groupId: { in: communities.map((c: { id: string; name: string }) => c.id) },
-        userId: { in: profileUsers.map((u: { id: string }) => u.id) },
-      },
-      select: {
-        groupId: true,
-        userId: true,
+        groupId: { in: communityIds },
       },
     });
 
-    // Mevcut üyelikleri Set olarak sakla (hızlı lookup için)
-    const existingMembershipSet = new Set(
-      existingMemberships.map((m: { groupId: string; userId: string }) => `${m.groupId}:${m.userId}`)
-    );
+    console.log(`[ASSIGN_TO_COMMUNITIES] ${deleteResult.count} mevcut üyelik kaldırıldı.`);
 
-    // Her topluluk için hangi kullanıcıların eklenebileceğini belirle
+    // ADIM 2: app_users tablosundaki TÜM kullanıcıları al (profileImage filtresi yok)
+    const allUsers = await db.user.findMany({
+      select: {
+        id: true,
+      },
+    });
+
+    if (allUsers.length === 0) {
+      return NextResponse.json(
+        { error: "Kullanıcı bulunamadı." },
+        { status: 400 }
+      );
+    }
+
+    // ADIM 3: Kullanıcıları rastgele karıştır
+    const shuffledUsers = shuffleArray<{ id: string }>(allUsers);
+
+    // ADIM 4: Her topluluk için minimum 30 üye garantisi
     const assignments: Array<{ groupId: string; userIds: string[] }> = [];
     const usedUserIds = new Set<string>();
 
-    // Her topluluk için en az MIN_MEMBERS_PER_COMMUNITY üye ataması yap
+    // Önce her topluluğa minimum 30 üye ata
     for (const community of communities) {
-      const availableUsers = profileUsers.filter(
-        (user: { id: string }) =>
-          !usedUserIds.has(user.id) &&
-          !existingMembershipSet.has(`${community.id}:${user.id}`)
+      const needed = MIN_MEMBERS_PER_COMMUNITY;
+      const availableUsers = shuffledUsers.filter(
+        (user: { id: string }) => !usedUserIds.has(user.id)
       );
 
-      // Rastgele karıştır
-      const shuffled = [...availableUsers].sort(() => Math.random() - 0.5);
+      if (availableUsers.length < needed) {
+        // Yeterli kullanıcı yoksa, mevcut kullanıcıları eşit dağıt
+        break;
+      }
 
-      // En az MIN_MEMBERS_PER_COMMUNITY üye seç (mümkünse)
-      const neededCount = Math.min(
-        MIN_MEMBERS_PER_COMMUNITY,
-        shuffled.length
-      );
-      const selectedUsers = shuffled.slice(0, neededCount);
+      const selectedUsers = availableUsers.slice(0, needed);
+      assignments.push({
+        groupId: community.id,
+        userIds: selectedUsers.map((u) => u.id),
+      });
 
-      if (selectedUsers.length > 0) {
+      selectedUsers.forEach((u) => usedUserIds.add(u.id));
+    }
+
+    // ADIM 5: Kalan kullanıcıları eşit şekilde dağıt (round-robin)
+    const remainingUsers = shuffledUsers.filter(
+      (user) => !usedUserIds.has(user.id)
+    );
+
+    let communityIndex = 0;
+    for (const user of remainingUsers) {
+      const community = communities[communityIndex % communities.length];
+      const assignment = assignments.find((a) => a.groupId === community.id);
+      
+      if (assignment) {
+        assignment.userIds.push(user.id);
+      } else {
         assignments.push({
           groupId: community.id,
-          userIds: selectedUsers.map((u: { id: string }) => u.id),
+          userIds: [user.id],
         });
-
-        // Kullanılan kullanıcıları işaretle
-        selectedUsers.forEach((u) => usedUserIds.add(u.id));
       }
+      
+      communityIndex++;
     }
 
-    // Kalan kullanıcıları rastgele topluluklara dağıt
-    const remainingUsers = profileUsers.filter(
-      (user: { id: string }) => !usedUserIds.has(user.id)
-    );
-    const shuffledRemaining = [...remainingUsers].sort(
-      () => Math.random() - 0.5
-    );
-
-    for (const user of shuffledRemaining) {
-      // Rastgele bir topluluk seç
-      const randomCommunity =
-        communities[Math.floor(Math.random() * communities.length)];
-
-      // Bu kullanıcı zaten bu toplulukta değilse ekle
-      if (!existingMembershipSet.has(`${randomCommunity.id}:${user.id}`)) {
-        const assignment = assignments.find(
-          (a) => a.groupId === randomCommunity.id
-        );
-        if (assignment) {
-          assignment.userIds.push(user.id);
-        } else {
-          assignments.push({
-            groupId: randomCommunity.id,
-            userIds: [user.id],
-          });
-        }
-        usedUserIds.add(user.id);
-      }
-    }
-
-    // Veritabanına ekle
+    // ADIM 6: Veritabanına ekle
     let totalAdded = 0;
-    const communityStats: Array<{ name: string; added: number }> = [];
+    const communityStats: Array<{ name: string; added: number; currentTotal: number }> = [];
 
     for (const assignment of assignments) {
       if (assignment.userIds.length === 0) continue;
 
-      const community = communities.find((c: { id: string; name: string }) => c.id === assignment.groupId);
+      const community = communities.find((c: { id: string; name: string; slug: string }) => c.id === assignment.groupId);
       const communityName = community?.name || "Bilinmeyen";
 
       try {
@@ -180,30 +155,49 @@ export async function POST() {
         communityStats.push({
           name: communityName,
           added: assignment.userIds.length,
+          currentTotal: assignment.userIds.length,
         });
       } catch (error) {
         console.error(
-          `[ASSIGN_PROFILES] Error adding members to ${communityName}:`,
+          `[ASSIGN_TO_COMMUNITIES] Error adding members to ${communityName}:`,
           error
         );
       }
     }
 
+    // Tüm topluluklar için istatistikleri hazırla
+    const allCommunityStats = communities.map((community: { id: string; name: string; slug: string }) => {
+      const stat = communityStats.find((s) => s.name === community.name);
+      return {
+        name: community.name,
+        added: stat?.added || 0,
+        currentTotal: stat?.currentTotal || 0,
+      };
+    });
+
+    // Maksimum üye sayısını hesapla (gerçek dağıtımdan)
+    const maxPerCommunity = Math.max(
+      ...allCommunityStats.map((stat: { name: string; currentTotal: number; assigned: number }) => stat.currentTotal),
+      MIN_MEMBERS_PER_COMMUNITY
+    );
+
     return NextResponse.json({
       success: true,
-      message: `${totalAdded} profil ${communities.length} topluluğa üye edildi.`,
+      message: `${totalAdded} kullanıcı ${communities.length} topluluğa üye edildi.`,
       stats: {
-        totalProfiles: profileUsers.length,
+        totalProfiles: allUsers.length,
         totalCommunities: communities.length,
         totalAdded,
+        removedMembers: deleteResult.count,
         minPerCommunity: MIN_MEMBERS_PER_COMMUNITY,
-        communityStats,
+        maxPerCommunity,
+        communityStats: allCommunityStats,
       },
     });
   } catch (error: any) {
-    console.error("[ASSIGN_PROFILES_TO_COMMUNITIES]", error);
+    console.error("[ASSIGN_TO_COMMUNITIES]", error);
     return NextResponse.json(
-      { error: error.message || "Profiller topluluklara atanırken bir hata oluştu." },
+      { error: error.message || "Kullanıcılar topluluklara atanırken bir hata oluştu." },
       { status: 500 }
     );
   }

@@ -1,0 +1,797 @@
+{
+  "languages": [
+    {
+      "id": "csharp",
+      "name": "C#",
+      "cases": [
+        {
+          "id": "csharp-bugfix-1",
+          "title": "Null Reference Exception",
+          "description": "Null reference exception hatasını düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda null reference exception hatası var. Kullanıcı bulunamazsa null döndüğü için hata oluşuyor. Null kontrolü ekleyerek kodu düzeltin.",
+          "buggyCode": {
+            "csharp": "using System;\n\npublic class UserService\n{\n    public string GetUserName(string userId)\n    {\n        var user = GetUser(userId);\n        return user.Name; // Null reference hatası\n    }\n    \n    private User GetUser(string userId)\n    {\n        // Kullanıcı bulunamazsa null döner\n        return null;\n    }\n}\n\npublic class User\n{\n    public string Name { get; set; }\n}"
+          },
+          "hints": [
+            "Null kontrolü yapmayı unutmayın",
+            "Null-conditional operator (?) kullanabilirsiniz",
+            "Kullanıcı bulunamazsa uygun bir mesaj dönmelisiniz"
+          ],
+          "acceptanceCriteria": [
+            "Null reference exception oluşmamalı",
+            "Kullanıcı bulunamazsa uygun bir mesaj dönmeli",
+            "Kod derlenmeli ve hatasız çalışmalı"
+          ]
+        },
+        {
+          "id": "csharp-bugfix-2",
+          "title": "Array Index Out of Bounds",
+          "description": "Dizi sınırları dışına çıkma hatasını düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda dizi sınırları dışına çıkma hatası var. Son elemana erişmek için doğru indeksi kullanın.",
+          "buggyCode": {
+            "csharp": "using System;\n\npublic class ArrayProcessor\n{\n    public int GetLastElement(int[] numbers)\n    {\n        return numbers[numbers.Length]; // Index out of bounds\n    }\n}"
+          },
+          "hints": [
+            "Dizi indeksleri 0'dan başlar",
+            "Son eleman için Length - 1 kullanın",
+            "Dizi boş olabilir, kontrol edin"
+          ],
+          "acceptanceCriteria": [
+            "Index out of bounds hatası olmamalı",
+            "Son eleman doğru dönmeli",
+            "Boş dizi durumu kontrol edilmeli"
+          ]
+        },
+        {
+          "id": "csharp-bugfix-3",
+          "title": "Incorrect Loop Condition",
+          "description": "Yanlış döngü koşulunu düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda döngü koşulu yanlış. 1'den 10'a kadar sayıları yazdırmalı ama döngü çalışmıyor. Koşulu düzeltin.",
+          "buggyCode": {
+            "csharp": "using System;\n\npublic class LoopExample\n{\n    public void PrintNumbers()\n    {\n        for (int i = 1; i > 10; i++) // Koşul yanlış\n        {\n            Console.WriteLine(i);\n        }\n    }\n}"
+          },
+          "hints": [
+            "Döngü koşulunu kontrol edin",
+            "< veya <= kullanın",
+            "Başlangıç değerini ve koşulu gözden geçirin"
+          ],
+          "acceptanceCriteria": [
+            "1'den 10'a kadar sayılar yazdırılmalı",
+            "Döngü çalışmalı",
+            "Tüm sayılar ekrana yazdırılmalı"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "java",
+      "name": "Java",
+      "cases": [
+        {
+          "id": "java-bugfix-1",
+          "title": "Null Pointer Exception",
+          "description": "Null pointer exception hatasını düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda null pointer exception hatası var. Null kontrolü ekleyerek kodu düzeltin.",
+          "buggyCode": {
+            "java": "public class UserService {\n    public String getUserName(String userId) {\n        User user = getUser(userId);\n        return user.getName(); // Null pointer exception\n    }\n    \n    private User getUser(String userId) {\n        // Kullanıcı bulunamazsa null döner\n        return null;\n    }\n}\n\nclass User {\n    private String name;\n    public String getName() { return name; }\n}"
+          },
+          "hints": [
+            "Null kontrolü yapın",
+            "Optional kullanabilirsiniz",
+            "Kullanıcı bulunamazsa uygun bir mesaj dönmelisiniz"
+          ],
+          "acceptanceCriteria": [
+            "Null pointer exception oluşmamalı",
+            "Kullanıcı bulunamazsa uygun bir mesaj dönmeli",
+            "Kod derlenmeli ve hatasız çalışmalı"
+          ]
+        },
+        {
+          "id": "java-bugfix-2",
+          "title": "Array Index Out of Bounds",
+          "description": "Dizi sınırları dışına çıkma hatasını düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda dizi sınırları dışına çıkma hatası var. Son elemana erişmek için doğru indeksi kullanın.",
+          "buggyCode": {
+            "java": "public class ArrayProcessor {\n    public int getLastElement(int[] numbers) {\n        return numbers[numbers.length]; // Index out of bounds\n    }\n}"
+          },
+          "hints": [
+            "Dizi indeksleri 0'dan başlar",
+            "Son eleman için length - 1 kullanın",
+            "Dizi boş olabilir, kontrol edin"
+          ],
+          "acceptanceCriteria": [
+            "Index out of bounds hatası olmamalı",
+            "Son eleman doğru dönmeli",
+            "Boş dizi durumu kontrol edilmeli"
+          ]
+        },
+        {
+          "id": "java-bugfix-3",
+          "title": "Incorrect Loop Condition",
+          "description": "Yanlış döngü koşulunu düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda döngü koşulu yanlış. 1'den 10'a kadar sayıları yazdırmalı ama döngü çalışmıyor. Koşulu düzeltin.",
+          "buggyCode": {
+            "java": "public class LoopExample {\n    public void printNumbers() {\n        for (int i = 1; i > 10; i++) { // Koşul yanlış\n            System.out.println(i);\n        }\n    }\n}"
+          },
+          "hints": [
+            "Döngü koşulunu kontrol edin",
+            "< veya <= kullanın",
+            "Başlangıç değerini ve koşulu gözden geçirin"
+          ],
+          "acceptanceCriteria": [
+            "1'den 10'a kadar sayılar yazdırılmalı",
+            "Döngü çalışmalı",
+            "Tüm sayılar ekrana yazdırılmalı"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "python",
+      "name": "Python",
+      "cases": [
+        {
+          "id": "python-bugfix-1",
+          "title": "None Type Error",
+          "description": "None type hatasını düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda None type hatası var. Fonksiyon None döndüğünde hata oluşuyor. None kontrolü ekleyerek kodu düzeltin.",
+          "buggyCode": {
+            "python": "def get_user_name(user_id):\n    user = get_user(user_id)\n    return user['name']  # None type hatası\n\ndef get_user(user_id):\n    # Kullanıcı bulunamazsa None döner\n    return None"
+          },
+          "hints": [
+            "None kontrolü yapın",
+            "if user is not None kullanabilirsiniz",
+            "Kullanıcı bulunamazsa uygun bir mesaj dönmelisiniz"
+          ],
+          "acceptanceCriteria": [
+            "None type hatası oluşmamalı",
+            "Kullanıcı bulunamazsa uygun bir mesaj dönmeli",
+            "Kod hatasız çalışmalı"
+          ]
+        },
+        {
+          "id": "python-bugfix-2",
+          "title": "Index Error",
+          "description": "Liste indeks hatasını düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda liste indeks hatası var. Son elemana erişmek için doğru indeksi kullanın.",
+          "buggyCode": {
+            "python": "def get_last_element(numbers):\n    return numbers[len(numbers)]  # Index error"
+          },
+          "hints": [
+            "Liste indeksleri 0'dan başlar",
+            "Son eleman için len(numbers) - 1 kullanın",
+            "Liste boş olabilir, kontrol edin"
+          ],
+          "acceptanceCriteria": [
+            "Index error hatası olmamalı",
+            "Son eleman doğru dönmeli",
+            "Boş liste durumu kontrol edilmeli"
+          ]
+        },
+        {
+          "id": "python-bugfix-3",
+          "title": "Incorrect Loop Condition",
+          "description": "Yanlış döngü koşulunu düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda döngü koşulu yanlış. 1'den 10'a kadar sayıları yazdırmalı ama döngü çalışmıyor. Koşulu düzeltin.",
+          "buggyCode": {
+            "python": "def print_numbers():\n    for i in range(1, 10):  # 10 dahil değil\n        print(i)  # 1'den 9'a kadar yazdırır"
+          },
+          "hints": [
+            "range(1, 11) kullanın",
+            "range'in ikinci parametresi dahil değildir",
+            "10'u da yazdırmak için range'i ayarlayın"
+          ],
+          "acceptanceCriteria": [
+            "1'den 10'a kadar sayılar yazdırılmalı",
+            "Döngü çalışmalı",
+            "Tüm sayılar ekrana yazdırılmalı"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "php",
+      "name": "PHP",
+      "cases": [
+        {
+          "id": "php-bugfix-1",
+          "title": "Undefined Index Error",
+          "description": "Tanımsız indeks hatasını düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda undefined index hatası var. Dizi elemanına erişmeden önce kontrol edin.",
+          "buggyCode": {
+            "php": "<?php\nfunction getUserName($userId) {\n    $user = getUser($userId);\n    return $user['name']; // Undefined index\n}\n\nfunction getUser($userId) {\n    // Kullanıcı bulunamazsa null döner\n    return null;\n}\n?>"
+          },
+          "hints": [
+            "isset() veya array_key_exists() kullanın",
+            "Null kontrolü yapın",
+            "Kullanıcı bulunamazsa uygun bir mesaj dönmelisiniz"
+          ],
+          "acceptanceCriteria": [
+            "Undefined index hatası oluşmamalı",
+            "Kullanıcı bulunamazsa uygun bir mesaj dönmeli",
+            "Kod hatasız çalışmalı"
+          ]
+        },
+        {
+          "id": "php-bugfix-2",
+          "title": "Array Index Out of Bounds",
+          "description": "Dizi sınırları dışına çıkma hatasını düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda dizi sınırları dışına çıkma hatası var. Son elemana erişmek için doğru indeksi kullanın.",
+          "buggyCode": {
+            "php": "<?php\nfunction getLastElement($numbers) {\n    return $numbers[count($numbers)]; // Index out of bounds\n}\n?>"
+          },
+          "hints": [
+            "Dizi indeksleri 0'dan başlar",
+            "Son eleman için count($numbers) - 1 kullanın",
+            "Dizi boş olabilir, kontrol edin"
+          ],
+          "acceptanceCriteria": [
+            "Index out of bounds hatası olmamalı",
+            "Son eleman doğru dönmeli",
+            "Boş dizi durumu kontrol edilmeli"
+          ]
+        },
+        {
+          "id": "php-bugfix-3",
+          "title": "Incorrect Loop Condition",
+          "description": "Yanlış döngü koşulunu düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda döngü koşulu yanlış. 1'den 10'a kadar sayıları yazdırmalı ama döngü çalışmıyor. Koşulu düzeltin.",
+          "buggyCode": {
+            "php": "<?php\nfunction printNumbers() {\n    for ($i = 1; $i > 10; $i++) { // Koşul yanlış\n        echo $i . \"\\n\";\n    }\n}\n?>"
+          },
+          "hints": [
+            "Döngü koşulunu kontrol edin",
+            "< veya <= kullanın",
+            "Başlangıç değerini ve koşulu gözden geçirin"
+          ],
+          "acceptanceCriteria": [
+            "1'den 10'a kadar sayılar yazdırılmalı",
+            "Döngü çalışmalı",
+            "Tüm sayılar ekrana yazdırılmalı"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "javascript",
+      "name": "JavaScript",
+      "cases": [
+        {
+          "id": "javascript-bugfix-1",
+          "title": "Cannot Read Property Error",
+          "description": "Özellik okuma hatasını düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda 'Cannot read property' hatası var. Null veya undefined kontrolü ekleyerek kodu düzeltin.",
+          "buggyCode": {
+            "javascript": "function getUserName(userId) {\n    const user = getUser(userId);\n    return user.name; // Cannot read property 'name' of null\n}\n\nfunction getUser(userId) {\n    // Kullanıcı bulunamazsa null döner\n    return null;\n}"
+          },
+          "hints": [
+            "Null veya undefined kontrolü yapın",
+            "Optional chaining (?.) kullanabilirsiniz",
+            "Kullanıcı bulunamazsa uygun bir mesaj dönmelisiniz"
+          ],
+          "acceptanceCriteria": [
+            "Cannot read property hatası oluşmamalı",
+            "Kullanıcı bulunamazsa uygun bir mesaj dönmeli",
+            "Kod hatasız çalışmalı"
+          ]
+        },
+        {
+          "id": "javascript-bugfix-2",
+          "title": "Array Index Out of Bounds",
+          "description": "Dizi sınırları dışına çıkma hatasını düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda dizi sınırları dışına çıkma hatası var. Son elemana erişmek için doğru indeksi kullanın.",
+          "buggyCode": {
+            "javascript": "function getLastElement(numbers) {\n    return numbers[numbers.length]; // Index out of bounds\n}"
+          },
+          "hints": [
+            "Dizi indeksleri 0'dan başlar",
+            "Son eleman için numbers.length - 1 kullanın",
+            "Dizi boş olabilir, kontrol edin"
+          ],
+          "acceptanceCriteria": [
+            "Index out of bounds hatası olmamalı",
+            "Son eleman doğru dönmeli",
+            "Boş dizi durumu kontrol edilmeli"
+          ]
+        },
+        {
+          "id": "javascript-bugfix-3",
+          "title": "Incorrect Loop Condition",
+          "description": "Yanlış döngü koşulunu düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda döngü koşulu yanlış. 1'den 10'a kadar sayıları yazdırmalı ama döngü çalışmıyor. Koşulu düzeltin.",
+          "buggyCode": {
+            "javascript": "function printNumbers() {\n    for (let i = 1; i > 10; i++) { // Koşul yanlış\n        console.log(i);\n    }\n}"
+          },
+          "hints": [
+            "Döngü koşulunu kontrol edin",
+            "< veya <= kullanın",
+            "Başlangıç değerini ve koşulu gözden geçirin"
+          ],
+          "acceptanceCriteria": [
+            "1'den 10'a kadar sayılar yazdırılmalı",
+            "Döngü çalışmalı",
+            "Tüm sayılar ekrana yazdırılmalı"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "typescript",
+      "name": "TypeScript",
+      "cases": [
+        {
+          "id": "typescript-bugfix-1",
+          "title": "Object is Possibly Null",
+          "description": "Null olabilir hatasını düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda TypeScript 'Object is possibly null' hatası veriyor. Null kontrolü ekleyerek kodu düzeltin.",
+          "buggyCode": {
+            "typescript": "function getUserName(userId: string): string {\n    const user = getUser(userId);\n    return user.name; // Object is possibly null\n}\n\nfunction getUser(userId: string): { name: string } | null {\n    return null;\n}"
+          },
+          "hints": [
+            "Null kontrolü yapın",
+            "Optional chaining (?.) kullanabilirsiniz",
+            "Type guard kullanabilirsiniz"
+          ],
+          "acceptanceCriteria": [
+            "TypeScript hatası olmamalı",
+            "Null durumu kontrol edilmeli",
+            "Kod derlenmeli ve hatasız çalışmalı"
+          ]
+        },
+        {
+          "id": "typescript-bugfix-2",
+          "title": "Array Index Out of Bounds",
+          "description": "Dizi sınırları dışına çıkma hatasını düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda dizi sınırları dışına çıkma hatası var. Son elemana erişmek için doğru indeksi kullanın.",
+          "buggyCode": {
+            "typescript": "function getLastElement(numbers: number[]): number {\n    return numbers[numbers.length]; // Index out of bounds\n}"
+          },
+          "hints": [
+            "Dizi indeksleri 0'dan başlar",
+            "Son eleman için numbers.length - 1 kullanın",
+            "Dizi boş olabilir, kontrol edin"
+          ],
+          "acceptanceCriteria": [
+            "Index out of bounds hatası olmamalı",
+            "Son eleman doğru dönmeli",
+            "Boş dizi durumu kontrol edilmeli"
+          ]
+        },
+        {
+          "id": "typescript-bugfix-3",
+          "title": "Incorrect Loop Condition",
+          "description": "Yanlış döngü koşulunu düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda döngü koşulu yanlış. 1'den 10'a kadar sayıları yazdırmalı ama döngü çalışmıyor. Koşulu düzeltin.",
+          "buggyCode": {
+            "typescript": "function printNumbers(): void {\n    for (let i: number = 1; i > 10; i++) { // Koşul yanlış\n        console.log(i);\n    }\n}"
+          },
+          "hints": [
+            "Döngü koşulunu kontrol edin",
+            "< veya <= kullanın",
+            "Başlangıç değerini ve koşulu gözden geçirin"
+          ],
+          "acceptanceCriteria": [
+            "1'den 10'a kadar sayılar yazdırılmalı",
+            "Döngü çalışmalı",
+            "Tüm sayılar ekrana yazdırılmalı"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "go",
+      "name": "Go",
+      "cases": [
+        {
+          "id": "go-bugfix-1",
+          "title": "Nil Pointer Dereference",
+          "description": "Nil pointer hatasını düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda nil pointer dereference hatası var. Nil kontrolü ekleyerek kodu düzeltin.",
+          "buggyCode": {
+            "go": "package main\n\nimport \"fmt\"\n\ntype User struct {\n    Name string\n}\n\nfunc getUserName(userId string) string {\n    user := getUser(userId)\n    return user.Name // Nil pointer dereference\n}\n\nfunc getUser(userId string) *User {\n    return nil\n}"
+          },
+          "hints": [
+            "Nil kontrolü yapın",
+            "if user != nil kullanın",
+            "Kullanıcı bulunamazsa uygun bir mesaj dönmelisiniz"
+          ],
+          "acceptanceCriteria": [
+            "Nil pointer dereference hatası olmamalı",
+            "Kullanıcı bulunamazsa uygun bir mesaj dönmeli",
+            "Kod derlenmeli ve hatasız çalışmalı"
+          ]
+        },
+        {
+          "id": "go-bugfix-2",
+          "title": "Index Out of Range",
+          "description": "Dizi sınırları dışına çıkma hatasını düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda index out of range hatası var. Son elemana erişmek için doğru indeksi kullanın.",
+          "buggyCode": {
+            "go": "package main\n\nfunc getLastElement(numbers []int) int {\n    return numbers[len(numbers)] // Index out of range\n}"
+          },
+          "hints": [
+            "Dizi indeksleri 0'dan başlar",
+            "Son eleman için len(numbers) - 1 kullanın",
+            "Dizi boş olabilir, kontrol edin"
+          ],
+          "acceptanceCriteria": [
+            "Index out of range hatası olmamalı",
+            "Son eleman doğru dönmeli",
+            "Boş dizi durumu kontrol edilmeli"
+          ]
+        },
+        {
+          "id": "go-bugfix-3",
+          "title": "Incorrect Loop Condition",
+          "description": "Yanlış döngü koşulunu düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda döngü koşulu yanlış. 1'den 10'a kadar sayıları yazdırmalı ama döngü çalışmıyor. Koşulu düzeltin.",
+          "buggyCode": {
+            "go": "package main\n\nimport \"fmt\"\n\nfunc printNumbers() {\n    for i := 1; i > 10; i++ { // Koşul yanlış\n        fmt.Println(i)\n    }\n}"
+          },
+          "hints": [
+            "Döngü koşulunu kontrol edin",
+            "< veya <= kullanın",
+            "Başlangıç değerini ve koşulu gözden geçirin"
+          ],
+          "acceptanceCriteria": [
+            "1'den 10'a kadar sayılar yazdırılmalı",
+            "Döngü çalışmalı",
+            "Tüm sayılar ekrana yazdırılmalı"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rust",
+      "name": "Rust",
+      "cases": [
+        {
+          "id": "rust-bugfix-1",
+          "title": "Cannot Move Out of Borrowed Content",
+          "description": "Borrow checker hatasını düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda borrow checker hatası var. Ownership kurallarını dikkate alarak kodu düzeltin.",
+          "buggyCode": {
+            "rust": "fn get_user_name(user_id: &str) -> String {\n    let user = get_user(user_id);\n    user.name // Cannot move out of borrowed content\n}\n\nstruct User {\n    name: String,\n}\n\nfn get_user(user_id: &str) -> &User {\n    // Kullanıcı bulunamazsa None döner\n    todo!()\n}"
+          },
+          "hints": [
+            "Clone kullanabilirsiniz",
+            "Reference döndürebilirsiniz",
+            "Ownership kurallarını gözden geçirin"
+          ],
+          "acceptanceCriteria": [
+            "Borrow checker hatası olmamalı",
+            "Kod derlenmeli",
+            "Fonksiyon doğru çalışmalı"
+          ]
+        },
+        {
+          "id": "rust-bugfix-2",
+          "title": "Index Out of Bounds",
+          "description": "Dizi sınırları dışına çıkma hatasını düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda index out of bounds hatası var. Son elemana erişmek için doğru indeksi kullanın.",
+          "buggyCode": {
+            "rust": "fn get_last_element(numbers: &[i32]) -> i32 {\n    numbers[numbers.len()] // Index out of bounds\n}"
+          },
+          "hints": [
+            "Dizi indeksleri 0'dan başlar",
+            "Son eleman için numbers.len() - 1 kullanın",
+            "get() metodunu kullanabilirsiniz"
+          ],
+          "acceptanceCriteria": [
+            "Index out of bounds hatası olmamalı",
+            "Son eleman doğru dönmeli",
+            "Boş dizi durumu kontrol edilmeli"
+          ]
+        },
+        {
+          "id": "rust-bugfix-3",
+          "title": "Incorrect Loop Condition",
+          "description": "Yanlış döngü koşulunu düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda döngü koşulu yanlış. 1'den 10'a kadar sayıları yazdırmalı ama döngü çalışmıyor. Koşulu düzeltin.",
+          "buggyCode": {
+            "rust": "fn print_numbers() {\n    for i in 1..10 { // 10 dahil değil\n        println!(\"{}\", i);\n    }\n}"
+          },
+          "hints": [
+            "1..=10 kullanın",
+            "Range'in son değeri dahil değildir",
+            "10'u da yazdırmak için range'i ayarlayın"
+          ],
+          "acceptanceCriteria": [
+            "1'den 10'a kadar sayılar yazdırılmalı",
+            "Döngü çalışmalı",
+            "Tüm sayılar ekrana yazdırılmalı"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cpp",
+      "name": "C++",
+      "cases": [
+        {
+          "id": "cpp-bugfix-1",
+          "title": "Null Pointer Dereference",
+          "description": "Null pointer hatasını düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda null pointer dereference hatası var. Null kontrolü ekleyerek kodu düzeltin.",
+          "buggyCode": {
+            "cpp": "#include <iostream>\n#include <string>\n\nclass User {\npublic:\n    std::string name;\n};\n\nstd::string getUserName(std::string userId) {\n    User* user = getUser(userId);\n    return user->name; // Null pointer dereference\n}\n\nUser* getUser(std::string userId) {\n    return nullptr;\n}"
+          },
+          "hints": [
+            "Null kontrolü yapın",
+            "if (user != nullptr) kullanın",
+            "Kullanıcı bulunamazsa uygun bir mesaj dönmelisiniz"
+          ],
+          "acceptanceCriteria": [
+            "Null pointer dereference hatası olmamalı",
+            "Kullanıcı bulunamazsa uygun bir mesaj dönmeli",
+            "Kod derlenmeli ve hatasız çalışmalı"
+          ]
+        },
+        {
+          "id": "cpp-bugfix-2",
+          "title": "Array Index Out of Bounds",
+          "description": "Dizi sınırları dışına çıkma hatasını düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda dizi sınırları dışına çıkma hatası var. Son elemana erişmek için doğru indeksi kullanın.",
+          "buggyCode": {
+            "cpp": "#include <vector>\n\nint getLastElement(std::vector<int> numbers) {\n    return numbers[numbers.size()]; // Index out of bounds\n}"
+          },
+          "hints": [
+            "Dizi indeksleri 0'dan başlar",
+            "Son eleman için numbers.size() - 1 kullanın",
+            "Dizi boş olabilir, kontrol edin"
+          ],
+          "acceptanceCriteria": [
+            "Index out of bounds hatası olmamalı",
+            "Son eleman doğru dönmeli",
+            "Boş dizi durumu kontrol edilmeli"
+          ]
+        },
+        {
+          "id": "cpp-bugfix-3",
+          "title": "Incorrect Loop Condition",
+          "description": "Yanlış döngü koşulunu düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda döngü koşulu yanlış. 1'den 10'a kadar sayıları yazdırmalı ama döngü çalışmıyor. Koşulu düzeltin.",
+          "buggyCode": {
+            "cpp": "#include <iostream>\n\nvoid printNumbers() {\n    for (int i = 1; i > 10; i++) { // Koşul yanlış\n        std::cout << i << std::endl;\n    }\n}"
+          },
+          "hints": [
+            "Döngü koşulunu kontrol edin",
+            "< veya <= kullanın",
+            "Başlangıç değerini ve koşulu gözden geçirin"
+          ],
+          "acceptanceCriteria": [
+            "1'den 10'a kadar sayılar yazdırılmalı",
+            "Döngü çalışmalı",
+            "Tüm sayılar ekrana yazdırılmalı"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kotlin",
+      "name": "Kotlin",
+      "cases": [
+        {
+          "id": "kotlin-bugfix-1",
+          "title": "Null Pointer Exception",
+          "description": "Null pointer exception hatasını düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda null pointer exception hatası var. Null kontrolü ekleyerek kodu düzeltin.",
+          "buggyCode": {
+            "kotlin": "data class User(val name: String)\n\nfun getUserName(userId: String): String {\n    val user = getUser(userId)\n    return user.name // Null pointer exception\n}\n\nfun getUser(userId: String): User? {\n    return null\n}"
+          },
+          "hints": [
+            "Null kontrolü yapın",
+            "Safe call operator (?.) kullanabilirsiniz",
+            "Elvis operator (?:) kullanabilirsiniz"
+          ],
+          "acceptanceCriteria": [
+            "Null pointer exception oluşmamalı",
+            "Kullanıcı bulunamazsa uygun bir mesaj dönmeli",
+            "Kod derlenmeli ve hatasız çalışmalı"
+          ]
+        },
+        {
+          "id": "kotlin-bugfix-2",
+          "title": "Array Index Out of Bounds",
+          "description": "Dizi sınırları dışına çıkma hatasını düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda dizi sınırları dışına çıkma hatası var. Son elemana erişmek için doğru indeksi kullanın.",
+          "buggyCode": {
+            "kotlin": "fun getLastElement(numbers: IntArray): Int {\n    return numbers[numbers.size] // Index out of bounds\n}"
+          },
+          "hints": [
+            "Dizi indeksleri 0'dan başlar",
+            "Son eleman için numbers.size - 1 kullanın",
+            "Dizi boş olabilir, kontrol edin"
+          ],
+          "acceptanceCriteria": [
+            "Index out of bounds hatası olmamalı",
+            "Son eleman doğru dönmeli",
+            "Boş dizi durumu kontrol edilmeli"
+          ]
+        },
+        {
+          "id": "kotlin-bugfix-3",
+          "title": "Incorrect Loop Condition",
+          "description": "Yanlış döngü koşulunu düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda döngü koşulu yanlış. 1'den 10'a kadar sayıları yazdırmalı ama döngü çalışmıyor. Koşulu düzeltin.",
+          "buggyCode": {
+            "kotlin": "fun printNumbers() {\n    for (i in 1 until 10) { // 10 dahil değil\n        println(i)\n    }\n}"
+          },
+          "hints": [
+            "1..10 kullanın",
+            "until 10, 10'u dahil etmez",
+            "10'u da yazdırmak için range'i ayarlayın"
+          ],
+          "acceptanceCriteria": [
+            "1'den 10'a kadar sayılar yazdırılmalı",
+            "Döngü çalışmalı",
+            "Tüm sayılar ekrana yazdırılmalı"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "swift",
+      "name": "Swift",
+      "cases": [
+        {
+          "id": "swift-bugfix-1",
+          "title": "Force Unwrapping Nil Optional",
+          "description": "Nil optional force unwrap hatasını düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda force unwrapping nil optional hatası var. Optional binding kullanarak kodu düzeltin.",
+          "buggyCode": {
+            "swift": "struct User {\n    var name: String\n}\n\nfunc getUserName(userId: String) -> String {\n    let user = getUser(userId)\n    return user!.name // Force unwrapping nil\n}\n\nfunc getUser(userId: String) -> User? {\n    return nil\n}"
+          },
+          "hints": [
+            "Optional binding kullanın",
+            "if let veya guard let kullanabilirsiniz",
+            "Nil durumunda uygun bir mesaj dönmelisiniz"
+          ],
+          "acceptanceCriteria": [
+            "Force unwrapping nil hatası olmamalı",
+            "Kullanıcı bulunamazsa uygun bir mesaj dönmeli",
+            "Kod derlenmeli ve hatasız çalışmalı"
+          ]
+        },
+        {
+          "id": "swift-bugfix-2",
+          "title": "Index Out of Range",
+          "description": "Dizi sınırları dışına çıkma hatasını düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda index out of range hatası var. Son elemana erişmek için doğru indeksi kullanın.",
+          "buggyCode": {
+            "swift": "func getLastElement(_ numbers: [Int]) -> Int {\n    return numbers[numbers.count] // Index out of range\n}"
+          },
+          "hints": [
+            "Dizi indeksleri 0'dan başlar",
+            "Son eleman için numbers.count - 1 kullanın",
+            "Dizi boş olabilir, kontrol edin"
+          ],
+          "acceptanceCriteria": [
+            "Index out of range hatası olmamalı",
+            "Son eleman doğru dönmeli",
+            "Boş dizi durumu kontrol edilmeli"
+          ]
+        },
+        {
+          "id": "swift-bugfix-3",
+          "title": "Incorrect Loop Condition",
+          "description": "Yanlış döngü koşulunu düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda döngü koşulu yanlış. 1'den 10'a kadar sayıları yazdırmalı ama döngü çalışmıyor. Koşulu düzeltin.",
+          "buggyCode": {
+            "swift": "func printNumbers() {\n    for i in 1..<10 { // 10 dahil değil\n        print(i)\n    }\n}"
+          },
+          "hints": [
+            "1...10 kullanın",
+            "..<10, 10'u dahil etmez",
+            "10'u da yazdırmak için range'i ayarlayın"
+          ],
+          "acceptanceCriteria": [
+            "1'den 10'a kadar sayılar yazdırılmalı",
+            "Döngü çalışmalı",
+            "Tüm sayılar ekrana yazdırılmalı"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ruby",
+      "name": "Ruby",
+      "cases": [
+        {
+          "id": "ruby-bugfix-1",
+          "title": "NoMethodError on Nil",
+          "description": "Nil üzerinde metod çağırma hatasını düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda nil üzerinde metod çağırma hatası var. Nil kontrolü ekleyerek kodu düzeltin.",
+          "buggyCode": {
+            "ruby": "class User\n  attr_accessor :name\nend\n\ndef get_user_name(user_id)\n  user = get_user(user_id)\n  user.name # NoMethodError on nil\nend\n\ndef get_user(user_id)\n  nil\nend"
+          },
+          "hints": [
+            "Nil kontrolü yapın",
+            "Safe navigation operator (&.) kullanabilirsiniz",
+            "Kullanıcı bulunamazsa uygun bir mesaj dönmelisiniz"
+          ],
+          "acceptanceCriteria": [
+            "NoMethodError hatası oluşmamalı",
+            "Kullanıcı bulunamazsa uygun bir mesaj dönmeli",
+            "Kod hatasız çalışmalı"
+          ]
+        },
+        {
+          "id": "ruby-bugfix-2",
+          "title": "Index Out of Range",
+          "description": "Dizi sınırları dışına çıkma hatasını düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda index out of range hatası var. Son elemana erişmek için doğru indeksi kullanın.",
+          "buggyCode": {
+            "ruby": "def get_last_element(numbers)\n  numbers[numbers.length] # Index out of range\nend"
+          },
+          "hints": [
+            "Dizi indeksleri 0'dan başlar",
+            "Son eleman için numbers.length - 1 kullanın",
+            "Dizi boş olabilir, kontrol edin"
+          ],
+          "acceptanceCriteria": [
+            "Index out of range hatası olmamalı",
+            "Son eleman doğru dönmeli",
+            "Boş dizi durumu kontrol edilmeli"
+          ]
+        },
+        {
+          "id": "ruby-bugfix-3",
+          "title": "Incorrect Loop Condition",
+          "description": "Yanlış döngü koşulunu düzeltin.",
+          "difficulty": "beginner",
+          "instructions": "Aşağıdaki kodda döngü koşulu yanlış. 1'den 10'a kadar sayıları yazdırmalı ama döngü çalışmıyor. Koşulu düzeltin.",
+          "buggyCode": {
+            "ruby": "def print_numbers\n  (1...10).each do |i| # 10 dahil değil\n    puts i\n  end\nend"
+          },
+          "hints": [
+            "1..10 kullanın",
+            "...10, 10'u dahil etmez",
+            "10'u da yazdırmak için range'i ayarlayın"
+          ],
+          "acceptanceCriteria": [
+            "1'den 10'a kadar sayılar yazdırılmalı",
+            "Döngü çalışmalı",
+            "Tüm sayılar ekrana yazdırılmalı"
+          ]
+        }
+      ]
+    }
+  ]
+}
+

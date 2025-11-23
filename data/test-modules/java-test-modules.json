@@ -19,92 +19,92 @@
         {
           "id": "java-introduction",
           "title": "Java Nedir ve Neden Önemlidir?",
-          "description": "Java'ya Giriş Testi için test",
-          "href": "/education/lessons/java/java-module-01/java-introduction"
+          "description": "Java programlama diline giriş yaparak yazılım geliştirme temellerini öğrenin. JDK kurulumundan ilk uygulamanıza kadar tüm adımları kapsayan kapsamlı bir başlangıç dersi.",
+          "href": "/education/tests/quiz/tests-java/java-module-01/java-introduction"
         },
         {
           "id": "java-history",
           "title": "Java'nın Tarihçesi ve Gelişimi",
-          "description": "Java'ya Giriş Testi için test",
-          "href": "/education/lessons/java/java-module-01/java-history"
+          "description": "Java programlama diline giriş yaparak yazılım geliştirme temellerini öğrenin. JDK kurulumundan ilk uygulamanıza kadar tüm adımları kapsayan kapsamlı bir başlangıç dersi.",
+          "href": "/education/tests/quiz/tests-java/java-module-01/java-history"
         },
         {
           "id": "java-ecosystem",
           "title": "Java Ekosistemine Genel Bakış",
-          "description": "Java'ya Giriş Testi için test",
-          "href": "/education/lessons/java/java-module-01/java-ecosystem"
+          "description": "Java programlama diline giriş yaparak yazılım geliştirme temellerini öğrenin. JDK kurulumundan ilk uygulamanıza kadar tüm adımları kapsayan kapsamlı bir başlangıç dersi.",
+          "href": "/education/tests/quiz/tests-java/java-module-01/java-ecosystem"
         },
         {
           "id": "jvm-jre-jdk",
           "title": "JVM, JRE ve JDK Farkları",
-          "description": "Java'ya Giriş Testi için test",
-          "href": "/education/lessons/java/java-module-01/jvm-jre-jdk"
+          "description": "Java programlama diline giriş yaparak yazılım geliştirme temellerini öğrenin. JDK kurulumundan ilk uygulamanıza kadar tüm adımları kapsayan kapsamlı bir başlangıç dersi.",
+          "href": "/education/tests/quiz/tests-java/java-module-01/jvm-jre-jdk"
         },
         {
           "id": "platform-independence",
           "title": "Java Platform Bağımsızlığı",
-          "description": "Java'ya Giriş Testi için test",
-          "href": "/education/lessons/java/java-module-01/platform-independence"
+          "description": "Java programlama diline giriş yaparak yazılım geliştirme temellerini öğrenin. JDK kurulumundan ilk uygulamanıza kadar tüm adımları kapsayan kapsamlı bir başlangıç dersi.",
+          "href": "/education/tests/quiz/tests-java/java-module-01/platform-independence"
         },
         {
           "id": "jdk-installation",
           "title": "JDK Kurulumu ve Yapılandırma",
-          "description": "Java'ya Giriş Testi için test",
-          "href": "/education/lessons/java/java-module-01/jdk-installation"
+          "description": "Java programlama diline giriş yaparak yazılım geliştirme temellerini öğrenin. JDK kurulumundan ilk uygulamanıza kadar tüm adımları kapsayan kapsamlı bir başlangıç dersi.",
+          "href": "/education/tests/quiz/tests-java/java-module-01/jdk-installation"
         },
         {
           "id": "ide-selection",
           "title": "IDE Seçimi: IntelliJ IDEA, Eclipse, VS Code",
-          "description": "Java'ya Giriş Testi için test",
-          "href": "/education/lessons/java/java-module-01/ide-selection"
+          "description": "Java programlama diline giriş yaparak yazılım geliştirme temellerini öğrenin. JDK kurulumundan ilk uygulamanıza kadar tüm adımları kapsayan kapsamlı bir başlangıç dersi.",
+          "href": "/education/tests/quiz/tests-java/java-module-01/ide-selection"
         },
         {
           "id": "project-structure",
           "title": "Java Proje Yapısı ve Paketler",
-          "description": "Java'ya Giriş Testi için test",
-          "href": "/education/lessons/java/java-module-01/project-structure"
+          "description": "Java programlama diline giriş yaparak yazılım geliştirme temellerini öğrenin. JDK kurulumundan ilk uygulamanıza kadar tüm adımları kapsayan kapsamlı bir başlangıç dersi.",
+          "href": "/education/tests/quiz/tests-java/java-module-01/project-structure"
         },
         {
           "id": "hello-world",
           "title": "İlk Java Programı: Hello World",
-          "description": "Java'ya Giriş Testi için test",
-          "href": "/education/lessons/java/java-module-01/hello-world"
+          "description": "Java programlama diline giriş yaparak yazılım geliştirme temellerini öğrenin. JDK kurulumundan ilk uygulamanıza kadar tüm adımları kapsayan kapsamlı bir başlangıç dersi.",
+          "href": "/education/tests/quiz/tests-java/java-module-01/hello-world"
         },
         {
           "id": "compile-run",
           "title": "Java Derleme ve Çalıştırma Süreci",
-          "description": "Java'ya Giriş Testi için test",
-          "href": "/education/lessons/java/java-module-01/compile-run"
+          "description": "Java programlama diline giriş yaparak yazılım geliştirme temellerini öğrenin. JDK kurulumundan ilk uygulamanıza kadar tüm adımları kapsayan kapsamlı bir başlangıç dersi.",
+          "href": "/education/tests/quiz/tests-java/java-module-01/compile-run"
         },
         {
           "id": "build-tools",
           "title": "Maven ve Gradle Build Araçları",
-          "description": "Java'ya Giriş Testi için test",
-          "href": "/education/lessons/java/java-module-01/build-tools"
+          "description": "Java programlama diline giriş yaparak yazılım geliştirme temellerini öğrenin. JDK kurulumundan ilk uygulamanıza kadar tüm adımları kapsayan kapsamlı bir başlangıç dersi.",
+          "href": "/education/tests/quiz/tests-java/java-module-01/build-tools"
         },
         {
           "id": "java-versions",
           "title": "Java Versiyonları ve Özellikleri",
-          "description": "Java'ya Giriş Testi için test",
-          "href": "/education/lessons/java/java-module-01/java-versions"
+          "description": "Java programlama diline giriş yaparak yazılım geliştirme temellerini öğrenin. JDK kurulumundan ilk uygulamanıza kadar tüm adımları kapsayan kapsamlı bir başlangıç dersi.",
+          "href": "/education/tests/quiz/tests-java/java-module-01/java-versions"
         },
         {
           "id": "jcp",
           "title": "Java Community Process (JCP)",
-          "description": "Java'ya Giriş Testi için test",
-          "href": "/education/lessons/java/java-module-01/jcp"
+          "description": "Java programlama diline giriş yaparak yazılım geliştirme temellerini öğrenin. JDK kurulumundan ilk uygulamanıza kadar tüm adımları kapsayan kapsamlı bir başlangıç dersi.",
+          "href": "/education/tests/quiz/tests-java/java-module-01/jcp"
         },
         {
           "id": "java-use-cases",
           "title": "Java Kullanım Alanları",
-          "description": "Java'ya Giriş Testi için test",
-          "href": "/education/lessons/java/java-module-01/java-use-cases"
+          "description": "Java programlama diline giriş yaparak yazılım geliştirme temellerini öğrenin. JDK kurulumundan ilk uygulamanıza kadar tüm adımları kapsayan kapsamlı bir başlangıç dersi.",
+          "href": "/education/tests/quiz/tests-java/java-module-01/java-use-cases"
         },
         {
           "id": "module-summary",
           "title": "Modül Özeti ve Değerlendirme",
-          "description": "Java'ya Giriş Testi için test",
-          "href": "/education/lessons/java/java-module-01/module-summary"
+          "description": "Java programlama diline giriş yaparak yazılım geliştirme temellerini öğrenin. JDK kurulumundan ilk uygulamanıza kadar tüm adımları kapsayan kapsamlı bir başlangıç dersi.",
+          "href": "/education/tests/quiz/tests-java/java-module-01/module-summary"
         }
       ]
     },
@@ -124,91 +124,91 @@
           "id": "syntax-basics",
           "title": "Java Söz Dizimi (Syntax) Temelleri",
           "description": "Java Syntax ve Temelleri Testi için test",
-          "href": "/education/lessons/java/java-module-02/syntax-basics"
+          "href": "/education/tests/quiz/tests-java/java-module-02/syntax-basics"
         },
         {
           "id": "variables-types",
           "title": "Değişkenler ve Veri Tipleri",
           "description": "Java Syntax ve Temelleri Testi için test",
-          "href": "/education/lessons/java/java-module-02/variables-types"
+          "href": "/education/tests/quiz/tests-java/java-module-02/variables-types"
         },
         {
           "id": "primitive-reference",
           "title": "Primitive ve Reference Tipleri",
           "description": "Java Syntax ve Temelleri Testi için test",
-          "href": "/education/lessons/java/java-module-02/primitive-reference"
+          "href": "/education/tests/quiz/tests-java/java-module-02/primitive-reference"
         },
         {
           "id": "operators",
           "title": "Operatörler (Aritmetik, Mantıksal, Karşılaştırma)",
           "description": "Java Syntax ve Temelleri Testi için test",
-          "href": "/education/lessons/java/java-module-02/operators"
+          "href": "/education/tests/quiz/tests-java/java-module-02/operators"
         },
         {
           "id": "conditionals",
           "title": "Koşul Yapıları (if, else, switch)",
           "description": "Java Syntax ve Temelleri Testi için test",
-          "href": "/education/lessons/java/java-module-02/conditionals"
+          "href": "/education/tests/quiz/tests-java/java-module-02/conditionals"
         },
         {
           "id": "loops",
           "title": "Döngüler (for, while, do-while, enhanced for)",
           "description": "Java Syntax ve Temelleri Testi için test",
-          "href": "/education/lessons/java/java-module-02/loops"
+          "href": "/education/tests/quiz/tests-java/java-module-02/loops"
         },
         {
           "id": "arrays",
           "title": "Diziler (Arrays)",
           "description": "Java Syntax ve Temelleri Testi için test",
-          "href": "/education/lessons/java/java-module-02/arrays"
+          "href": "/education/tests/quiz/tests-java/java-module-02/arrays"
         },
         {
           "id": "strings",
           "title": "String İşlemleri ve Manipülasyonlar",
           "description": "Java Syntax ve Temelleri Testi için test",
-          "href": "/education/lessons/java/java-module-02/strings"
+          "href": "/education/tests/quiz/tests-java/java-module-02/strings"
         },
         {
           "id": "methods",
           "title": "Metodlar ve Parametreler",
           "description": "Java Syntax ve Temelleri Testi için test",
-          "href": "/education/lessons/java/java-module-02/methods"
+          "href": "/education/tests/quiz/tests-java/java-module-02/methods"
         },
         {
           "id": "method-overloading",
           "title": "Method Overloading",
           "description": "Java Syntax ve Temelleri Testi için test",
-          "href": "/education/lessons/java/java-module-02/method-overloading"
+          "href": "/education/tests/quiz/tests-java/java-module-02/method-overloading"
         },
         {
           "id": "varargs",
           "title": "Varargs (Variable Arguments)",
           "description": "Java Syntax ve Temelleri Testi için test",
-          "href": "/education/lessons/java/java-module-02/varargs"
+          "href": "/education/tests/quiz/tests-java/java-module-02/varargs"
         },
         {
           "id": "wrapper-classes",
           "title": "Wrapper Classes",
           "description": "Java Syntax ve Temelleri Testi için test",
-          "href": "/education/lessons/java/java-module-02/wrapper-classes"
+          "href": "/education/tests/quiz/tests-java/java-module-02/wrapper-classes"
         },
         {
           "id": "autoboxing-unboxing",
           "title": "Autoboxing ve Unboxing",
           "description": "Java Syntax ve Temelleri Testi için test",
-          "href": "/education/lessons/java/java-module-02/autoboxing-unboxing"
+          "href": "/education/tests/quiz/tests-java/java-module-02/autoboxing-unboxing"
         },
         {
           "id": "scope-lifetime",
           "title": "Scope ve Lifetime",
           "description": "Java Syntax ve Temelleri Testi için test",
-          "href": "/education/lessons/java/java-module-02/scope-lifetime"
+          "href": "/education/tests/quiz/tests-java/java-module-02/scope-lifetime"
         },
         {
           "id": "module-practice",
           "title": "Modül Özeti ve Uygulama",
           "description": "Java Syntax ve Temelleri Testi için test",
-          "href": "/education/lessons/java/java-module-02/module-practice"
+          "href": "/education/tests/quiz/tests-java/java-module-02/module-practice"
         }
       ]
     },
@@ -228,91 +228,91 @@
           "id": "oop-intro",
           "title": "OOP Prensiplerine Giriş",
           "description": "Nesne Yönelimli Programlama (OOP) Testi için test",
-          "href": "/education/lessons/java/java-module-03/oop-intro"
+          "href": "/education/tests/quiz/tests-java/java-module-03/oop-intro"
         },
         {
           "id": "class-object",
           "title": "Class ve Object Kavramları",
           "description": "Nesne Yönelimli Programlama (OOP) Testi için test",
-          "href": "/education/lessons/java/java-module-03/class-object"
+          "href": "/education/tests/quiz/tests-java/java-module-03/class-object"
         },
         {
           "id": "constructors",
           "title": "Constructor ve Constructor Overloading",
           "description": "Nesne Yönelimli Programlama (OOP) Testi için test",
-          "href": "/education/lessons/java/java-module-03/constructors"
+          "href": "/education/tests/quiz/tests-java/java-module-03/constructors"
         },
         {
           "id": "access-modifiers",
           "title": "Access Modifiers (public, private, protected)",
           "description": "Nesne Yönelimli Programlama (OOP) Testi için test",
-          "href": "/education/lessons/java/java-module-03/access-modifiers"
+          "href": "/education/tests/quiz/tests-java/java-module-03/access-modifiers"
         },
         {
           "id": "encapsulation",
           "title": "Encapsulation (Kapsülleme)",
           "description": "Nesne Yönelimli Programlama (OOP) Testi için test",
-          "href": "/education/lessons/java/java-module-03/encapsulation"
+          "href": "/education/tests/quiz/tests-java/java-module-03/encapsulation"
         },
         {
           "id": "inheritance",
           "title": "Inheritance (Kalıtım)",
           "description": "Nesne Yönelimli Programlama (OOP) Testi için test",
-          "href": "/education/lessons/java/java-module-03/inheritance"
+          "href": "/education/tests/quiz/tests-java/java-module-03/inheritance"
         },
         {
           "id": "method-overriding",
           "title": "Method Overriding",
           "description": "Nesne Yönelimli Programlama (OOP) Testi için test",
-          "href": "/education/lessons/java/java-module-03/method-overriding"
+          "href": "/education/tests/quiz/tests-java/java-module-03/method-overriding"
         },
         {
           "id": "polymorphism",
           "title": "Polymorphism (Çok Biçimlilik)",
           "description": "Nesne Yönelimli Programlama (OOP) Testi için test",
-          "href": "/education/lessons/java/java-module-03/polymorphism"
+          "href": "/education/tests/quiz/tests-java/java-module-03/polymorphism"
         },
         {
           "id": "abstract-class",
           "title": "Abstract Class ve Abstract Methods",
           "description": "Nesne Yönelimli Programlama (OOP) Testi için test",
-          "href": "/education/lessons/java/java-module-03/abstract-class"
+          "href": "/education/tests/quiz/tests-java/java-module-03/abstract-class"
         },
         {
           "id": "interfaces",
           "title": "Interface Kullanımı",
           "description": "Nesne Yönelimli Programlama (OOP) Testi için test",
-          "href": "/education/lessons/java/java-module-03/interfaces"
+          "href": "/education/tests/quiz/tests-java/java-module-03/interfaces"
         },
         {
           "id": "static-keyword",
           "title": "Static Keyword ve Static Members",
           "description": "Nesne Yönelimli Programlama (OOP) Testi için test",
-          "href": "/education/lessons/java/java-module-03/static-keyword"
+          "href": "/education/tests/quiz/tests-java/java-module-03/static-keyword"
         },
         {
           "id": "final-keyword",
           "title": "Final Keyword",
           "description": "Nesne Yönelimli Programlama (OOP) Testi için test",
-          "href": "/education/lessons/java/java-module-03/final-keyword"
+          "href": "/education/tests/quiz/tests-java/java-module-03/final-keyword"
         },
         {
           "id": "inner-classes",
           "title": "Inner Classes ve Nested Classes",
           "description": "Nesne Yönelimli Programlama (OOP) Testi için test",
-          "href": "/education/lessons/java/java-module-03/inner-classes"
+          "href": "/education/tests/quiz/tests-java/java-module-03/inner-classes"
         },
         {
           "id": "object-class",
           "title": "Object Class ve toString, equals, hashCode",
           "description": "Nesne Yönelimli Programlama (OOP) Testi için test",
-          "href": "/education/lessons/java/java-module-03/object-class"
+          "href": "/education/tests/quiz/tests-java/java-module-03/object-class"
         },
         {
           "id": "oop-best-practices",
           "title": "OOP Best Practices",
           "description": "Nesne Yönelimli Programlama (OOP) Testi için test",
-          "href": "/education/lessons/java/java-module-03/oop-best-practices"
+          "href": "/education/tests/quiz/tests-java/java-module-03/oop-best-practices"
         }
       ]
     },
@@ -332,91 +332,91 @@
           "id": "collections-intro",
           "title": "Collections Framework'e Giriş",
           "description": "Java Collections Framework Testi için test",
-          "href": "/education/lessons/java/java-module-04/collections-intro"
+          "href": "/education/tests/quiz/tests-java/java-module-04/collections-intro"
         },
         {
           "id": "list-interface",
           "title": "List Interface ve Implementasyonları",
           "description": "Java Collections Framework Testi için test",
-          "href": "/education/lessons/java/java-module-04/list-interface"
+          "href": "/education/tests/quiz/tests-java/java-module-04/list-interface"
         },
         {
           "id": "arraylist-linkedlist",
           "title": "ArrayList ve LinkedList",
           "description": "Java Collections Framework Testi için test",
-          "href": "/education/lessons/java/java-module-04/arraylist-linkedlist"
+          "href": "/education/tests/quiz/tests-java/java-module-04/arraylist-linkedlist"
         },
         {
           "id": "set-interface",
           "title": "Set Interface ve Implementasyonları",
           "description": "Java Collections Framework Testi için test",
-          "href": "/education/lessons/java/java-module-04/set-interface"
+          "href": "/education/tests/quiz/tests-java/java-module-04/set-interface"
         },
         {
           "id": "set-implementations",
           "title": "HashSet, LinkedHashSet, TreeSet",
           "description": "Java Collections Framework Testi için test",
-          "href": "/education/lessons/java/java-module-04/set-implementations"
+          "href": "/education/tests/quiz/tests-java/java-module-04/set-implementations"
         },
         {
           "id": "map-interface",
           "title": "Map Interface ve Implementasyonları",
           "description": "Java Collections Framework Testi için test",
-          "href": "/education/lessons/java/java-module-04/map-interface"
+          "href": "/education/tests/quiz/tests-java/java-module-04/map-interface"
         },
         {
           "id": "map-implementations",
           "title": "HashMap, LinkedHashMap, TreeMap",
           "description": "Java Collections Framework Testi için test",
-          "href": "/education/lessons/java/java-module-04/map-implementations"
+          "href": "/education/tests/quiz/tests-java/java-module-04/map-implementations"
         },
         {
           "id": "iterator",
           "title": "Iterator ve ListIterator",
           "description": "Java Collections Framework Testi için test",
-          "href": "/education/lessons/java/java-module-04/iterator"
+          "href": "/education/tests/quiz/tests-java/java-module-04/iterator"
         },
         {
           "id": "enhanced-for",
           "title": "Enhanced For Loop (for-each)",
           "description": "Java Collections Framework Testi için test",
-          "href": "/education/lessons/java/java-module-04/enhanced-for"
+          "href": "/education/tests/quiz/tests-java/java-module-04/enhanced-for"
         },
         {
           "id": "comparable-comparator",
           "title": "Comparable ve Comparator",
           "description": "Java Collections Framework Testi için test",
-          "href": "/education/lessons/java/java-module-04/comparable-comparator"
+          "href": "/education/tests/quiz/tests-java/java-module-04/comparable-comparator"
         },
         {
           "id": "collections-utility",
           "title": "Collections Utility Class",
           "description": "Java Collections Framework Testi için test",
-          "href": "/education/lessons/java/java-module-04/collections-utility"
+          "href": "/education/tests/quiz/tests-java/java-module-04/collections-utility"
         },
         {
           "id": "generics",
           "title": "Generics ile Type Safety",
           "description": "Java Collections Framework Testi için test",
-          "href": "/education/lessons/java/java-module-04/generics"
+          "href": "/education/tests/quiz/tests-java/java-module-04/generics"
         },
         {
           "id": "wildcards",
           "title": "Wildcards (?, ? extends, ? super)",
           "description": "Java Collections Framework Testi için test",
-          "href": "/education/lessons/java/java-module-04/wildcards"
+          "href": "/education/tests/quiz/tests-java/java-module-04/wildcards"
         },
         {
           "id": "collections-performance",
           "title": "Collections Performans Analizi",
           "description": "Java Collections Framework Testi için test",
-          "href": "/education/lessons/java/java-module-04/collections-performance"
+          "href": "/education/tests/quiz/tests-java/java-module-04/collections-performance"
         },
         {
           "id": "collections-best-practices",
           "title": "Collections Best Practices",
           "description": "Java Collections Framework Testi için test",
-          "href": "/education/lessons/java/java-module-04/collections-best-practices"
+          "href": "/education/tests/quiz/tests-java/java-module-04/collections-best-practices"
         }
       ]
     },
@@ -436,91 +436,91 @@
           "id": "exception-basics",
           "title": "Exception Handling Temelleri",
           "description": "Exception Handling Testi için test",
-          "href": "/education/lessons/java/java-module-05/exception-basics"
+          "href": "/education/tests/quiz/tests-java/java-module-05/exception-basics"
         },
         {
           "id": "error-vs-exception",
           "title": "Error vs Exception",
           "description": "Exception Handling Testi için test",
-          "href": "/education/lessons/java/java-module-05/error-vs-exception"
+          "href": "/education/tests/quiz/tests-java/java-module-05/error-vs-exception"
         },
         {
           "id": "try-catch-finally",
           "title": "Try-Catch-Finally Blokları",
           "description": "Exception Handling Testi için test",
-          "href": "/education/lessons/java/java-module-05/try-catch-finally"
+          "href": "/education/tests/quiz/tests-java/java-module-05/try-catch-finally"
         },
         {
           "id": "checked-unchecked",
           "title": "Checked ve Unchecked Exceptions",
           "description": "Exception Handling Testi için test",
-          "href": "/education/lessons/java/java-module-05/checked-unchecked"
+          "href": "/education/tests/quiz/tests-java/java-module-05/checked-unchecked"
         },
         {
           "id": "throws-keyword",
           "title": "Throws Keyword",
           "description": "Exception Handling Testi için test",
-          "href": "/education/lessons/java/java-module-05/throws-keyword"
+          "href": "/education/tests/quiz/tests-java/java-module-05/throws-keyword"
         },
         {
           "id": "throw-keyword",
           "title": "Throw Keyword ve Exception Fırlatma",
           "description": "Exception Handling Testi için test",
-          "href": "/education/lessons/java/java-module-05/throw-keyword"
+          "href": "/education/tests/quiz/tests-java/java-module-05/throw-keyword"
         },
         {
           "id": "multiple-catch",
           "title": "Multiple Catch Blocks",
           "description": "Exception Handling Testi için test",
-          "href": "/education/lessons/java/java-module-05/multiple-catch"
+          "href": "/education/tests/quiz/tests-java/java-module-05/multiple-catch"
         },
         {
           "id": "exception-hierarchy",
           "title": "Exception Hierarchy",
           "description": "Exception Handling Testi için test",
-          "href": "/education/lessons/java/java-module-05/exception-hierarchy"
+          "href": "/education/tests/quiz/tests-java/java-module-05/exception-hierarchy"
         },
         {
           "id": "custom-exceptions",
           "title": "Custom Exception Oluşturma",
           "description": "Exception Handling Testi için test",
-          "href": "/education/lessons/java/java-module-05/custom-exceptions"
+          "href": "/education/tests/quiz/tests-java/java-module-05/custom-exceptions"
         },
         {
           "id": "try-with-resources",
           "title": "Try-with-Resources",
           "description": "Exception Handling Testi için test",
-          "href": "/education/lessons/java/java-module-05/try-with-resources"
+          "href": "/education/tests/quiz/tests-java/java-module-05/try-with-resources"
         },
         {
           "id": "autocloseable",
           "title": "AutoCloseable Interface",
           "description": "Exception Handling Testi için test",
-          "href": "/education/lessons/java/java-module-05/autocloseable"
+          "href": "/education/tests/quiz/tests-java/java-module-05/autocloseable"
         },
         {
           "id": "exception-chaining",
           "title": "Exception Chaining",
           "description": "Exception Handling Testi için test",
-          "href": "/education/lessons/java/java-module-05/exception-chaining"
+          "href": "/education/tests/quiz/tests-java/java-module-05/exception-chaining"
         },
         {
           "id": "exception-logging",
           "title": "Exception Logging",
           "description": "Exception Handling Testi için test",
-          "href": "/education/lessons/java/java-module-05/exception-logging"
+          "href": "/education/tests/quiz/tests-java/java-module-05/exception-logging"
         },
         {
           "id": "exception-best-practices",
           "title": "Exception Handling Best Practices",
           "description": "Exception Handling Testi için test",
-          "href": "/education/lessons/java/java-module-05/exception-best-practices"
+          "href": "/education/tests/quiz/tests-java/java-module-05/exception-best-practices"
         },
         {
           "id": "exception-practice",
           "title": "Modül Özeti ve Uygulama",
           "description": "Exception Handling Testi için test",
-          "href": "/education/lessons/java/java-module-05/exception-practice"
+          "href": "/education/tests/quiz/tests-java/java-module-05/exception-practice"
         }
       ]
     },
@@ -540,91 +540,91 @@
           "id": "io-basics",
           "title": "Java I/O Temelleri",
           "description": "Java I/O Testi için test",
-          "href": "/education/lessons/java/java-module-06/io-basics"
+          "href": "/education/tests/quiz/tests-java/java-module-06/io-basics"
         },
         {
           "id": "file-class",
           "title": "File Class ve File İşlemleri",
           "description": "Java I/O Testi için test",
-          "href": "/education/lessons/java/java-module-06/file-class"
+          "href": "/education/tests/quiz/tests-java/java-module-06/file-class"
         },
         {
           "id": "byte-streams",
           "title": "Byte Streams (InputStream, OutputStream)",
           "description": "Java I/O Testi için test",
-          "href": "/education/lessons/java/java-module-06/byte-streams"
+          "href": "/education/tests/quiz/tests-java/java-module-06/byte-streams"
         },
         {
           "id": "character-streams",
           "title": "Character Streams (Reader, Writer)",
           "description": "Java I/O Testi için test",
-          "href": "/education/lessons/java/java-module-06/character-streams"
+          "href": "/education/tests/quiz/tests-java/java-module-06/character-streams"
         },
         {
           "id": "buffered-streams",
           "title": "Buffered Streams",
           "description": "Java I/O Testi için test",
-          "href": "/education/lessons/java/java-module-06/buffered-streams"
+          "href": "/education/tests/quiz/tests-java/java-module-06/buffered-streams"
         },
         {
           "id": "filereader-filewriter",
           "title": "FileReader ve FileWriter",
           "description": "Java I/O Testi için test",
-          "href": "/education/lessons/java/java-module-06/filereader-filewriter"
+          "href": "/education/tests/quiz/tests-java/java-module-06/filereader-filewriter"
         },
         {
           "id": "fileinputstream-fileoutputstream",
           "title": "FileInputStream ve FileOutputStream",
           "description": "Java I/O Testi için test",
-          "href": "/education/lessons/java/java-module-06/fileinputstream-fileoutputstream"
+          "href": "/education/tests/quiz/tests-java/java-module-06/fileinputstream-fileoutputstream"
         },
         {
           "id": "scanner-class",
           "title": "Scanner Class",
           "description": "Java I/O Testi için test",
-          "href": "/education/lessons/java/java-module-06/scanner-class"
+          "href": "/education/tests/quiz/tests-java/java-module-06/scanner-class"
         },
         {
           "id": "printwriter-printstream",
           "title": "PrintWriter ve PrintStream",
           "description": "Java I/O Testi için test",
-          "href": "/education/lessons/java/java-module-06/printwriter-printstream"
+          "href": "/education/tests/quiz/tests-java/java-module-06/printwriter-printstream"
         },
         {
           "id": "serialization",
           "title": "Object Serialization",
           "description": "Java I/O Testi için test",
-          "href": "/education/lessons/java/java-module-06/serialization"
+          "href": "/education/tests/quiz/tests-java/java-module-06/serialization"
         },
         {
           "id": "nio-api",
           "title": "NIO (New I/O) API",
           "description": "Java I/O Testi için test",
-          "href": "/education/lessons/java/java-module-06/nio-api"
+          "href": "/education/tests/quiz/tests-java/java-module-06/nio-api"
         },
         {
           "id": "path-paths-files",
           "title": "Path, Paths ve Files",
           "description": "Java I/O Testi için test",
-          "href": "/education/lessons/java/java-module-06/path-paths-files"
+          "href": "/education/tests/quiz/tests-java/java-module-06/path-paths-files"
         },
         {
           "id": "directory-operations",
           "title": "Directory İşlemleri",
           "description": "Java I/O Testi için test",
-          "href": "/education/lessons/java/java-module-06/directory-operations"
+          "href": "/education/tests/quiz/tests-java/java-module-06/directory-operations"
         },
         {
           "id": "io-best-practices",
           "title": "I/O Best Practices",
           "description": "Java I/O Testi için test",
-          "href": "/education/lessons/java/java-module-06/io-best-practices"
+          "href": "/education/tests/quiz/tests-java/java-module-06/io-best-practices"
         },
         {
           "id": "io-practice",
           "title": "Modül Özeti ve Uygulama",
           "description": "Java I/O Testi için test",
-          "href": "/education/lessons/java/java-module-06/io-practice"
+          "href": "/education/tests/quiz/tests-java/java-module-06/io-practice"
         }
       ]
     },
@@ -644,91 +644,91 @@
           "id": "multithreading-basics",
           "title": "Multithreading Temelleri",
           "description": "Multithreading Testi için test",
-          "href": "/education/lessons/java/java-module-07/multithreading-basics"
+          "href": "/education/tests/quiz/tests-java/java-module-07/multithreading-basics"
         },
         {
           "id": "thread-class",
           "title": "Thread Class ile Thread Oluşturma",
           "description": "Multithreading Testi için test",
-          "href": "/education/lessons/java/java-module-07/thread-class"
+          "href": "/education/tests/quiz/tests-java/java-module-07/thread-class"
         },
         {
           "id": "runnable-interface",
           "title": "Runnable Interface",
           "description": "Multithreading Testi için test",
-          "href": "/education/lessons/java/java-module-07/runnable-interface"
+          "href": "/education/tests/quiz/tests-java/java-module-07/runnable-interface"
         },
         {
           "id": "thread-lifecycle",
           "title": "Thread Lifecycle",
           "description": "Multithreading Testi için test",
-          "href": "/education/lessons/java/java-module-07/thread-lifecycle"
+          "href": "/education/tests/quiz/tests-java/java-module-07/thread-lifecycle"
         },
         {
           "id": "thread-synchronization",
           "title": "Thread Synchronization",
           "description": "Multithreading Testi için test",
-          "href": "/education/lessons/java/java-module-07/thread-synchronization"
+          "href": "/education/tests/quiz/tests-java/java-module-07/thread-synchronization"
         },
         {
           "id": "synchronized-keyword",
           "title": "Synchronized Keyword",
           "description": "Multithreading Testi için test",
-          "href": "/education/lessons/java/java-module-07/synchronized-keyword"
+          "href": "/education/tests/quiz/tests-java/java-module-07/synchronized-keyword"
         },
         {
           "id": "wait-notify",
           "title": "Wait, Notify ve NotifyAll",
           "description": "Multithreading Testi için test",
-          "href": "/education/lessons/java/java-module-07/wait-notify"
+          "href": "/education/tests/quiz/tests-java/java-module-07/wait-notify"
         },
         {
           "id": "deadlock",
           "title": "Deadlock ve Önleme",
           "description": "Multithreading Testi için test",
-          "href": "/education/lessons/java/java-module-07/deadlock"
+          "href": "/education/tests/quiz/tests-java/java-module-07/deadlock"
         },
         {
           "id": "thread-pools",
           "title": "Thread Pools (ExecutorService)",
           "description": "Multithreading Testi için test",
-          "href": "/education/lessons/java/java-module-07/thread-pools"
+          "href": "/education/tests/quiz/tests-java/java-module-07/thread-pools"
         },
         {
           "id": "callable-future",
           "title": "Callable ve Future",
           "description": "Multithreading Testi için test",
-          "href": "/education/lessons/java/java-module-07/callable-future"
+          "href": "/education/tests/quiz/tests-java/java-module-07/callable-future"
         },
         {
           "id": "concurrent-collections",
           "title": "Concurrent Collections",
           "description": "Multithreading Testi için test",
-          "href": "/education/lessons/java/java-module-07/concurrent-collections"
+          "href": "/education/tests/quiz/tests-java/java-module-07/concurrent-collections"
         },
         {
           "id": "atomic-classes",
           "title": "Atomic Classes",
           "description": "Multithreading Testi için test",
-          "href": "/education/lessons/java/java-module-07/atomic-classes"
+          "href": "/education/tests/quiz/tests-java/java-module-07/atomic-classes"
         },
         {
           "id": "lock-interface",
           "title": "Lock Interface ve ReentrantLock",
           "description": "Multithreading Testi için test",
-          "href": "/education/lessons/java/java-module-07/lock-interface"
+          "href": "/education/tests/quiz/tests-java/java-module-07/lock-interface"
         },
         {
           "id": "thread-safety-practices",
           "title": "Thread Safety Best Practices",
           "description": "Multithreading Testi için test",
-          "href": "/education/lessons/java/java-module-07/thread-safety-practices"
+          "href": "/education/tests/quiz/tests-java/java-module-07/thread-safety-practices"
         },
         {
           "id": "multithreading-practice",
           "title": "Modül Özeti ve Uygulama",
           "description": "Multithreading Testi için test",
-          "href": "/education/lessons/java/java-module-07/multithreading-practice"
+          "href": "/education/tests/quiz/tests-java/java-module-07/multithreading-practice"
         }
       ]
     },
@@ -748,91 +748,91 @@
           "id": "streams-intro",
           "title": "Java 8 Streams API'ye Giriş",
           "description": "Java Streams API Testi için test",
-          "href": "/education/lessons/java/java-module-08/streams-intro"
+          "href": "/education/tests/quiz/tests-java/java-module-08/streams-intro"
         },
         {
           "id": "lambda-expressions",
           "title": "Lambda Expressions",
           "description": "Java Streams API Testi için test",
-          "href": "/education/lessons/java/java-module-08/lambda-expressions"
+          "href": "/education/tests/quiz/tests-java/java-module-08/lambda-expressions"
         },
         {
           "id": "functional-interfaces",
           "title": "Functional Interfaces",
           "description": "Java Streams API Testi için test",
-          "href": "/education/lessons/java/java-module-08/functional-interfaces"
+          "href": "/education/tests/quiz/tests-java/java-module-08/functional-interfaces"
         },
         {
           "id": "method-references",
           "title": "Method References",
           "description": "Java Streams API Testi için test",
-          "href": "/education/lessons/java/java-module-08/method-references"
+          "href": "/education/tests/quiz/tests-java/java-module-08/method-references"
         },
         {
           "id": "stream-creation",
           "title": "Stream Oluşturma",
           "description": "Java Streams API Testi için test",
-          "href": "/education/lessons/java/java-module-08/stream-creation"
+          "href": "/education/tests/quiz/tests-java/java-module-08/stream-creation"
         },
         {
           "id": "intermediate-operations",
           "title": "Intermediate Operations (filter, map, sorted)",
           "description": "Java Streams API Testi için test",
-          "href": "/education/lessons/java/java-module-08/intermediate-operations"
+          "href": "/education/tests/quiz/tests-java/java-module-08/intermediate-operations"
         },
         {
           "id": "terminal-operations",
           "title": "Terminal Operations (collect, forEach, reduce)",
           "description": "Java Streams API Testi için test",
-          "href": "/education/lessons/java/java-module-08/terminal-operations"
+          "href": "/education/tests/quiz/tests-java/java-module-08/terminal-operations"
         },
         {
           "id": "optional-class",
           "title": "Optional Class",
           "description": "Java Streams API Testi için test",
-          "href": "/education/lessons/java/java-module-08/optional-class"
+          "href": "/education/tests/quiz/tests-java/java-module-08/optional-class"
         },
         {
           "id": "stream-collectors",
           "title": "Stream Collectors",
           "description": "Java Streams API Testi için test",
-          "href": "/education/lessons/java/java-module-08/stream-collectors"
+          "href": "/education/tests/quiz/tests-java/java-module-08/stream-collectors"
         },
         {
           "id": "parallel-streams",
           "title": "Parallel Streams",
           "description": "Java Streams API Testi için test",
-          "href": "/education/lessons/java/java-module-08/parallel-streams"
+          "href": "/education/tests/quiz/tests-java/java-module-08/parallel-streams"
         },
         {
           "id": "streams-collections",
           "title": "Stream API ile Collections",
           "description": "Java Streams API Testi için test",
-          "href": "/education/lessons/java/java-module-08/streams-collections"
+          "href": "/education/tests/quiz/tests-java/java-module-08/streams-collections"
         },
         {
           "id": "datetime-api",
           "title": "Date and Time API (java.time)",
           "description": "Java Streams API Testi için test",
-          "href": "/education/lessons/java/java-module-08/datetime-api"
+          "href": "/education/tests/quiz/tests-java/java-module-08/datetime-api"
         },
         {
           "id": "streams-best-practices",
           "title": "Stream Best Practices",
           "description": "Java Streams API Testi için test",
-          "href": "/education/lessons/java/java-module-08/streams-best-practices"
+          "href": "/education/tests/quiz/tests-java/java-module-08/streams-best-practices"
         },
         {
           "id": "functional-patterns",
           "title": "Functional Programming Patterns",
           "description": "Java Streams API Testi için test",
-          "href": "/education/lessons/java/java-module-08/functional-patterns"
+          "href": "/education/tests/quiz/tests-java/java-module-08/functional-patterns"
         },
         {
           "id": "streams-practice",
           "title": "Modül Özeti ve Uygulama",
           "description": "Java Streams API Testi için test",
-          "href": "/education/lessons/java/java-module-08/streams-practice"
+          "href": "/education/tests/quiz/tests-java/java-module-08/streams-practice"
         }
       ]
     },
@@ -852,91 +852,91 @@
           "id": "spring-intro",
           "title": "Spring Framework'e Giriş",
           "description": "Spring Framework Testi için test",
-          "href": "/education/lessons/java/java-module-09/spring-intro"
+          "href": "/education/tests/quiz/tests-java/java-module-09/spring-intro"
         },
         {
           "id": "spring-history",
           "title": "Spring Framework Tarihçesi ve Ekosistem",
           "description": "Spring Framework Testi için test",
-          "href": "/education/lessons/java/java-module-09/spring-history"
+          "href": "/education/tests/quiz/tests-java/java-module-09/spring-history"
         },
         {
           "id": "ioc",
           "title": "Inversion of Control (IoC)",
           "description": "Spring Framework Testi için test",
-          "href": "/education/lessons/java/java-module-09/ioc"
+          "href": "/education/tests/quiz/tests-java/java-module-09/ioc"
         },
         {
           "id": "dependency-injection",
           "title": "Dependency Injection (DI)",
           "description": "Spring Framework Testi için test",
-          "href": "/education/lessons/java/java-module-09/dependency-injection"
+          "href": "/education/tests/quiz/tests-java/java-module-09/dependency-injection"
         },
         {
           "id": "ioc-container",
           "title": "Spring IoC Container",
           "description": "Spring Framework Testi için test",
-          "href": "/education/lessons/java/java-module-09/ioc-container"
+          "href": "/education/tests/quiz/tests-java/java-module-09/ioc-container"
         },
         {
           "id": "bean-definition",
           "title": "Bean Definition ve Configuration",
           "description": "Spring Framework Testi için test",
-          "href": "/education/lessons/java/java-module-09/bean-definition"
+          "href": "/education/tests/quiz/tests-java/java-module-09/bean-definition"
         },
         {
           "id": "xml-config",
           "title": "XML Configuration",
           "description": "Spring Framework Testi için test",
-          "href": "/education/lessons/java/java-module-09/xml-config"
+          "href": "/education/tests/quiz/tests-java/java-module-09/xml-config"
         },
         {
           "id": "annotation-config",
           "title": "Annotation-based Configuration",
           "description": "Spring Framework Testi için test",
-          "href": "/education/lessons/java/java-module-09/annotation-config"
+          "href": "/education/tests/quiz/tests-java/java-module-09/annotation-config"
         },
         {
           "id": "java-config",
           "title": "Java-based Configuration",
           "description": "Spring Framework Testi için test",
-          "href": "/education/lessons/java/java-module-09/java-config"
+          "href": "/education/tests/quiz/tests-java/java-module-09/java-config"
         },
         {
           "id": "bean-scopes",
           "title": "Bean Scopes (Singleton, Prototype, etc.)",
           "description": "Spring Framework Testi için test",
-          "href": "/education/lessons/java/java-module-09/bean-scopes"
+          "href": "/education/tests/quiz/tests-java/java-module-09/bean-scopes"
         },
         {
           "id": "spring-mvc",
           "title": "Spring MVC Temelleri",
           "description": "Spring Framework Testi için test",
-          "href": "/education/lessons/java/java-module-09/spring-mvc"
+          "href": "/education/tests/quiz/tests-java/java-module-09/spring-mvc"
         },
         {
           "id": "controller-mapping",
           "title": "Controller ve Request Mapping",
           "description": "Spring Framework Testi için test",
-          "href": "/education/lessons/java/java-module-09/controller-mapping"
+          "href": "/education/tests/quiz/tests-java/java-module-09/controller-mapping"
         },
         {
           "id": "view-resolver",
           "title": "View Resolver ve Template Engines",
           "description": "Spring Framework Testi için test",
-          "href": "/education/lessons/java/java-module-09/view-resolver"
+          "href": "/education/tests/quiz/tests-java/java-module-09/view-resolver"
         },
         {
           "id": "spring-aop",
           "title": "Spring AOP (Aspect-Oriented Programming)",
           "description": "Spring Framework Testi için test",
-          "href": "/education/lessons/java/java-module-09/spring-aop"
+          "href": "/education/tests/quiz/tests-java/java-module-09/spring-aop"
         },
         {
           "id": "spring-best-practices",
           "title": "Spring Framework Best Practices",
           "description": "Spring Framework Testi için test",
-          "href": "/education/lessons/java/java-module-09/spring-best-practices"
+          "href": "/education/tests/quiz/tests-java/java-module-09/spring-best-practices"
         }
       ]
     },
@@ -956,91 +956,91 @@
           "id": "spring-boot-intro",
           "title": "Spring Boot'a Giriş",
           "description": "Spring Boot Testi için test",
-          "href": "/education/lessons/java/java-module-10/spring-boot-intro"
+          "href": "/education/tests/quiz/tests-java/java-module-10/spring-boot-intro"
         },
         {
           "id": "spring-boot-advantages",
           "title": "Spring Boot Avantajları",
           "description": "Spring Boot Testi için test",
-          "href": "/education/lessons/java/java-module-10/spring-boot-advantages"
+          "href": "/education/tests/quiz/tests-java/java-module-10/spring-boot-advantages"
         },
         {
           "id": "spring-boot-project",
           "title": "Spring Boot Projesi Oluşturma",
           "description": "Spring Boot Testi için test",
-          "href": "/education/lessons/java/java-module-10/spring-boot-project"
+          "href": "/education/tests/quiz/tests-java/java-module-10/spring-boot-project"
         },
         {
           "id": "spring-initializr",
           "title": "Spring Initializr Kullanımı",
           "description": "Spring Boot Testi için test",
-          "href": "/education/lessons/java/java-module-10/spring-initializr"
+          "href": "/education/tests/quiz/tests-java/java-module-10/spring-initializr"
         },
         {
           "id": "auto-configuration",
           "title": "Auto-configuration",
           "description": "Spring Boot Testi için test",
-          "href": "/education/lessons/java/java-module-10/auto-configuration"
+          "href": "/education/tests/quiz/tests-java/java-module-10/auto-configuration"
         },
         {
           "id": "starter-dependencies",
           "title": "Starter Dependencies",
           "description": "Spring Boot Testi için test",
-          "href": "/education/lessons/java/java-module-10/starter-dependencies"
+          "href": "/education/tests/quiz/tests-java/java-module-10/starter-dependencies"
         },
         {
           "id": "application-properties",
           "title": "Application Properties Yapılandırması",
           "description": "Spring Boot Testi için test",
-          "href": "/education/lessons/java/java-module-10/application-properties"
+          "href": "/education/tests/quiz/tests-java/java-module-10/application-properties"
         },
         {
           "id": "profile-management",
           "title": "Profile Yönetimi",
           "description": "Spring Boot Testi için test",
-          "href": "/education/lessons/java/java-module-10/profile-management"
+          "href": "/education/tests/quiz/tests-java/java-module-10/profile-management"
         },
         {
           "id": "embedded-servers",
           "title": "Embedded Servers (Tomcat, Jetty)",
           "description": "Spring Boot Testi için test",
-          "href": "/education/lessons/java/java-module-10/embedded-servers"
+          "href": "/education/tests/quiz/tests-java/java-module-10/embedded-servers"
         },
         {
           "id": "spring-boot-actuator",
           "title": "Spring Boot Actuator",
           "description": "Spring Boot Testi için test",
-          "href": "/education/lessons/java/java-module-10/spring-boot-actuator"
+          "href": "/education/tests/quiz/tests-java/java-module-10/spring-boot-actuator"
         },
         {
           "id": "health-checks",
           "title": "Health Checks ve Metrics",
           "description": "Spring Boot Testi için test",
-          "href": "/education/lessons/java/java-module-10/health-checks"
+          "href": "/education/tests/quiz/tests-java/java-module-10/health-checks"
         },
         {
           "id": "logging-config",
           "title": "Logging Yapılandırması",
           "description": "Spring Boot Testi için test",
-          "href": "/education/lessons/java/java-module-10/logging-config"
+          "href": "/education/tests/quiz/tests-java/java-module-10/logging-config"
         },
         {
           "id": "externalized-config",
           "title": "Externalized Configuration",
           "description": "Spring Boot Testi için test",
-          "href": "/education/lessons/java/java-module-10/externalized-config"
+          "href": "/education/tests/quiz/tests-java/java-module-10/externalized-config"
         },
         {
           "id": "devtools",
           "title": "Spring Boot DevTools",
           "description": "Spring Boot Testi için test",
-          "href": "/education/lessons/java/java-module-10/devtools"
+          "href": "/education/tests/quiz/tests-java/java-module-10/devtools"
         },
         {
           "id": "spring-boot-best-practices",
           "title": "Spring Boot Best Practices",
           "description": "Spring Boot Testi için test",
-          "href": "/education/lessons/java/java-module-10/spring-boot-best-practices"
+          "href": "/education/tests/quiz/tests-java/java-module-10/spring-boot-best-practices"
         }
       ]
     },
@@ -1060,91 +1060,91 @@
           "id": "spring-data-jpa-intro",
           "title": "Spring Data JPA'ya Giriş",
           "description": "Spring Data JPA Testi için test",
-          "href": "/education/lessons/java/java-module-11/spring-data-jpa-intro"
+          "href": "/education/tests/quiz/tests-java/java-module-11/spring-data-jpa-intro"
         },
         {
           "id": "jpa-hibernate",
           "title": "JPA ve Hibernate Temelleri",
           "description": "Spring Data JPA Testi için test",
-          "href": "/education/lessons/java/java-module-11/jpa-hibernate"
+          "href": "/education/tests/quiz/tests-java/java-module-11/jpa-hibernate"
         },
         {
           "id": "entity-class",
           "title": "Entity Class Oluşturma",
           "description": "Spring Data JPA Testi için test",
-          "href": "/education/lessons/java/java-module-11/entity-class"
+          "href": "/education/tests/quiz/tests-java/java-module-11/entity-class"
         },
         {
           "id": "jpa-annotations",
           "title": "JPA Annotations (@Entity, @Table, @Id)",
           "description": "Spring Data JPA Testi için test",
-          "href": "/education/lessons/java/java-module-11/jpa-annotations"
+          "href": "/education/tests/quiz/tests-java/java-module-11/jpa-annotations"
         },
         {
           "id": "repository-interface",
           "title": "Repository Interface",
           "description": "Spring Data JPA Testi için test",
-          "href": "/education/lessons/java/java-module-11/repository-interface"
+          "href": "/education/tests/quiz/tests-java/java-module-11/repository-interface"
         },
         {
           "id": "crud-operations",
           "title": "CRUD Operations",
           "description": "Spring Data JPA Testi için test",
-          "href": "/education/lessons/java/java-module-11/crud-operations"
+          "href": "/education/tests/quiz/tests-java/java-module-11/crud-operations"
         },
         {
           "id": "query-methods",
           "title": "Query Methods",
           "description": "Spring Data JPA Testi için test",
-          "href": "/education/lessons/java/java-module-11/query-methods"
+          "href": "/education/tests/quiz/tests-java/java-module-11/query-methods"
         },
         {
           "id": "query-annotation",
           "title": "@Query Annotation",
           "description": "Spring Data JPA Testi için test",
-          "href": "/education/lessons/java/java-module-11/query-annotation"
+          "href": "/education/tests/quiz/tests-java/java-module-11/query-annotation"
         },
         {
           "id": "entity-relationships",
           "title": "Entity Relationships (One-to-One, One-to-Many, Many-to-Many)",
           "description": "Spring Data JPA Testi için test",
-          "href": "/education/lessons/java/java-module-11/entity-relationships"
+          "href": "/education/tests/quiz/tests-java/java-module-11/entity-relationships"
         },
         {
           "id": "cascade-fetch",
           "title": "Cascade Types ve Fetch Types",
           "description": "Spring Data JPA Testi için test",
-          "href": "/education/lessons/java/java-module-11/cascade-fetch"
+          "href": "/education/tests/quiz/tests-java/java-module-11/cascade-fetch"
         },
         {
           "id": "pagination-sorting",
           "title": "Pagination ve Sorting",
           "description": "Spring Data JPA Testi için test",
-          "href": "/education/lessons/java/java-module-11/pagination-sorting"
+          "href": "/education/tests/quiz/tests-java/java-module-11/pagination-sorting"
         },
         {
           "id": "transaction-management",
           "title": "Transaction Management",
           "description": "Spring Data JPA Testi için test",
-          "href": "/education/lessons/java/java-module-11/transaction-management"
+          "href": "/education/tests/quiz/tests-java/java-module-11/transaction-management"
         },
         {
           "id": "database-migrations",
           "title": "Database Migrations (Flyway, Liquibase)",
           "description": "Spring Data JPA Testi için test",
-          "href": "/education/lessons/java/java-module-11/database-migrations"
+          "href": "/education/tests/quiz/tests-java/java-module-11/database-migrations"
         },
         {
           "id": "jpa-best-practices",
           "title": "Spring Data JPA Best Practices",
           "description": "Spring Data JPA Testi için test",
-          "href": "/education/lessons/java/java-module-11/jpa-best-practices"
+          "href": "/education/tests/quiz/tests-java/java-module-11/jpa-best-practices"
         },
         {
           "id": "jpa-practice",
           "title": "Modül Özeti ve Uygulama",
           "description": "Spring Data JPA Testi için test",
-          "href": "/education/lessons/java/java-module-11/jpa-practice"
+          "href": "/education/tests/quiz/tests-java/java-module-11/jpa-practice"
         }
       ]
     },
@@ -1164,91 +1164,91 @@
           "id": "restful-intro",
           "title": "RESTful API Nedir?",
           "description": "RESTful API Development Testi için test",
-          "href": "/education/lessons/java/java-module-12/restful-intro"
+          "href": "/education/tests/quiz/tests-java/java-module-12/restful-intro"
         },
         {
           "id": "rest-principles",
           "title": "REST Principles ve Best Practices",
           "description": "RESTful API Development Testi için test",
-          "href": "/education/lessons/java/java-module-12/rest-principles"
+          "href": "/education/tests/quiz/tests-java/java-module-12/rest-principles"
         },
         {
           "id": "rest-controller",
           "title": "Spring Boot REST Controller",
           "description": "RESTful API Development Testi için test",
-          "href": "/education/lessons/java/java-module-12/rest-controller"
+          "href": "/education/tests/quiz/tests-java/java-module-12/rest-controller"
         },
         {
           "id": "http-methods",
           "title": "HTTP Methods (GET, POST, PUT, DELETE, PATCH)",
           "description": "RESTful API Development Testi için test",
-          "href": "/education/lessons/java/java-module-12/http-methods"
+          "href": "/education/tests/quiz/tests-java/java-module-12/http-methods"
         },
         {
           "id": "request-mapping",
           "title": "Request Mapping ve Path Variables",
           "description": "RESTful API Development Testi için test",
-          "href": "/education/lessons/java/java-module-12/request-mapping"
+          "href": "/education/tests/quiz/tests-java/java-module-12/request-mapping"
         },
         {
           "id": "request-response-body",
           "title": "Request Body ve Response Body",
           "description": "RESTful API Development Testi için test",
-          "href": "/education/lessons/java/java-module-12/request-response-body"
+          "href": "/education/tests/quiz/tests-java/java-module-12/request-response-body"
         },
         {
           "id": "dto-pattern",
           "title": "DTO (Data Transfer Object) Pattern",
           "description": "RESTful API Development Testi için test",
-          "href": "/education/lessons/java/java-module-12/dto-pattern"
+          "href": "/education/tests/quiz/tests-java/java-module-12/dto-pattern"
         },
         {
           "id": "response-entity",
           "title": "Response Entity ve Status Codes",
           "description": "RESTful API Development Testi için test",
-          "href": "/education/lessons/java/java-module-12/response-entity"
+          "href": "/education/tests/quiz/tests-java/java-module-12/response-entity"
         },
         {
           "id": "rest-exception-handling",
           "title": "Exception Handling in REST APIs",
           "description": "RESTful API Development Testi için test",
-          "href": "/education/lessons/java/java-module-12/rest-exception-handling"
+          "href": "/education/tests/quiz/tests-java/java-module-12/rest-exception-handling"
         },
         {
           "id": "validation",
           "title": "Validation (@Valid, @NotNull, etc.)",
           "description": "RESTful API Development Testi için test",
-          "href": "/education/lessons/java/java-module-12/validation"
+          "href": "/education/tests/quiz/tests-java/java-module-12/validation"
         },
         {
           "id": "api-documentation",
           "title": "API Documentation (Swagger/OpenAPI)",
           "description": "RESTful API Development Testi için test",
-          "href": "/education/lessons/java/java-module-12/api-documentation"
+          "href": "/education/tests/quiz/tests-java/java-module-12/api-documentation"
         },
         {
           "id": "api-versioning",
           "title": "API Versioning",
           "description": "RESTful API Development Testi için test",
-          "href": "/education/lessons/java/java-module-12/api-versioning"
+          "href": "/education/tests/quiz/tests-java/java-module-12/api-versioning"
         },
         {
           "id": "cors-config",
           "title": "CORS Configuration",
           "description": "RESTful API Development Testi için test",
-          "href": "/education/lessons/java/java-module-12/cors-config"
+          "href": "/education/tests/quiz/tests-java/java-module-12/cors-config"
         },
         {
           "id": "rest-best-practices",
           "title": "RESTful API Best Practices",
           "description": "RESTful API Development Testi için test",
-          "href": "/education/lessons/java/java-module-12/rest-best-practices"
+          "href": "/education/tests/quiz/tests-java/java-module-12/rest-best-practices"
         },
         {
           "id": "rest-practice",
           "title": "Modül Özeti ve Uygulama",
           "description": "RESTful API Development Testi için test",
-          "href": "/education/lessons/java/java-module-12/rest-practice"
+          "href": "/education/tests/quiz/tests-java/java-module-12/rest-practice"
         }
       ]
     },
@@ -1268,91 +1268,91 @@
           "id": "spring-security-intro",
           "title": "Spring Security'ye Giriş",
           "description": "Security & Authentication Testi için test",
-          "href": "/education/lessons/java/java-module-13/spring-security-intro"
+          "href": "/education/tests/quiz/tests-java/java-module-13/spring-security-intro"
         },
         {
           "id": "auth-vs-authorization",
           "title": "Authentication vs Authorization",
           "description": "Security & Authentication Testi için test",
-          "href": "/education/lessons/java/java-module-13/auth-vs-authorization"
+          "href": "/education/tests/quiz/tests-java/java-module-13/auth-vs-authorization"
         },
         {
           "id": "security-config",
           "title": "Spring Security Configuration",
           "description": "Security & Authentication Testi için test",
-          "href": "/education/lessons/java/java-module-13/security-config"
+          "href": "/education/tests/quiz/tests-java/java-module-13/security-config"
         },
         {
           "id": "user-authentication",
           "title": "User Authentication",
           "description": "Security & Authentication Testi için test",
-          "href": "/education/lessons/java/java-module-13/user-authentication"
+          "href": "/education/tests/quiz/tests-java/java-module-13/user-authentication"
         },
         {
           "id": "password-encoding",
           "title": "Password Encoding",
           "description": "Security & Authentication Testi için test",
-          "href": "/education/lessons/java/java-module-13/password-encoding"
+          "href": "/education/tests/quiz/tests-java/java-module-13/password-encoding"
         },
         {
           "id": "jwt",
           "title": "JWT (JSON Web Tokens)",
           "description": "Security & Authentication Testi için test",
-          "href": "/education/lessons/java/java-module-13/jwt"
+          "href": "/education/tests/quiz/tests-java/java-module-13/jwt"
         },
         {
           "id": "jwt-implementation",
           "title": "JWT Implementation",
           "description": "Security & Authentication Testi için test",
-          "href": "/education/lessons/java/java-module-13/jwt-implementation"
+          "href": "/education/tests/quiz/tests-java/java-module-13/jwt-implementation"
         },
         {
           "id": "role-based-auth",
           "title": "Role-based Authorization",
           "description": "Security & Authentication Testi için test",
-          "href": "/education/lessons/java/java-module-13/role-based-auth"
+          "href": "/education/tests/quiz/tests-java/java-module-13/role-based-auth"
         },
         {
           "id": "method-security",
           "title": "Method-level Security",
           "description": "Security & Authentication Testi için test",
-          "href": "/education/lessons/java/java-module-13/method-security"
+          "href": "/education/tests/quiz/tests-java/java-module-13/method-security"
         },
         {
           "id": "oauth2-basics",
           "title": "OAuth2 Temelleri",
           "description": "Security & Authentication Testi için test",
-          "href": "/education/lessons/java/java-module-13/oauth2-basics"
+          "href": "/education/tests/quiz/tests-java/java-module-13/oauth2-basics"
         },
         {
           "id": "oauth2-implementation",
           "title": "OAuth2 Implementation",
           "description": "Security & Authentication Testi için test",
-          "href": "/education/lessons/java/java-module-13/oauth2-implementation"
+          "href": "/education/tests/quiz/tests-java/java-module-13/oauth2-implementation"
         },
         {
           "id": "token-refresh",
           "title": "Token Refresh Mechanism",
           "description": "Security & Authentication Testi için test",
-          "href": "/education/lessons/java/java-module-13/token-refresh"
+          "href": "/education/tests/quiz/tests-java/java-module-13/token-refresh"
         },
         {
           "id": "security-best-practices",
           "title": "Security Best Practices",
           "description": "Security & Authentication Testi için test",
-          "href": "/education/lessons/java/java-module-13/security-best-practices"
+          "href": "/education/tests/quiz/tests-java/java-module-13/security-best-practices"
         },
         {
           "id": "security-vulnerabilities",
           "title": "Common Security Vulnerabilities",
           "description": "Security & Authentication Testi için test",
-          "href": "/education/lessons/java/java-module-13/security-vulnerabilities"
+          "href": "/education/tests/quiz/tests-java/java-module-13/security-vulnerabilities"
         },
         {
           "id": "security-practice",
           "title": "Modül Özeti ve Uygulama",
           "description": "Security & Authentication Testi için test",
-          "href": "/education/lessons/java/java-module-13/security-practice"
+          "href": "/education/tests/quiz/tests-java/java-module-13/security-practice"
         }
       ]
     },
@@ -1372,91 +1372,91 @@
           "id": "testing-basics",
           "title": "Testing Temelleri",
           "description": "Testing Testi için test",
-          "href": "/education/lessons/java/java-module-14/testing-basics"
+          "href": "/education/tests/quiz/tests-java/java-module-14/testing-basics"
         },
         {
           "id": "junit-framework",
           "title": "JUnit Framework",
           "description": "Testing Testi için test",
-          "href": "/education/lessons/java/java-module-14/junit-framework"
+          "href": "/education/tests/quiz/tests-java/java-module-14/junit-framework"
         },
         {
           "id": "test-annotations",
           "title": "Test Annotations (@Test, @Before, @After)",
           "description": "Testing Testi için test",
-          "href": "/education/lessons/java/java-module-14/test-annotations"
+          "href": "/education/tests/quiz/tests-java/java-module-14/test-annotations"
         },
         {
           "id": "assertions",
           "title": "Assertions ve Test Assertions",
           "description": "Testing Testi için test",
-          "href": "/education/lessons/java/java-module-14/assertions"
+          "href": "/education/tests/quiz/tests-java/java-module-14/assertions"
         },
         {
           "id": "mockito-framework",
           "title": "Mockito Framework",
           "description": "Testing Testi için test",
-          "href": "/education/lessons/java/java-module-14/mockito-framework"
+          "href": "/education/tests/quiz/tests-java/java-module-14/mockito-framework"
         },
         {
           "id": "mocking-stubbing",
           "title": "Mocking ve Stubbing",
           "description": "Testing Testi için test",
-          "href": "/education/lessons/java/java-module-14/mocking-stubbing"
+          "href": "/education/tests/quiz/tests-java/java-module-14/mocking-stubbing"
         },
         {
           "id": "spring-boot-test",
           "title": "Spring Boot Test",
           "description": "Testing Testi için test",
-          "href": "/education/lessons/java/java-module-14/spring-boot-test"
+          "href": "/education/tests/quiz/tests-java/java-module-14/spring-boot-test"
         },
         {
           "id": "integration-testing",
           "title": "Integration Testing",
           "description": "Testing Testi için test",
-          "href": "/education/lessons/java/java-module-14/integration-testing"
+          "href": "/education/tests/quiz/tests-java/java-module-14/integration-testing"
         },
         {
           "id": "test-containers",
           "title": "Test Containers",
           "description": "Testing Testi için test",
-          "href": "/education/lessons/java/java-module-14/test-containers"
+          "href": "/education/tests/quiz/tests-java/java-module-14/test-containers"
         },
         {
           "id": "rest-api-testing",
           "title": "REST API Testing",
           "description": "Testing Testi için test",
-          "href": "/education/lessons/java/java-module-14/rest-api-testing"
+          "href": "/education/tests/quiz/tests-java/java-module-14/rest-api-testing"
         },
         {
           "id": "database-testing",
           "title": "Database Testing",
           "description": "Testing Testi için test",
-          "href": "/education/lessons/java/java-module-14/database-testing"
+          "href": "/education/tests/quiz/tests-java/java-module-14/database-testing"
         },
         {
           "id": "test-coverage",
           "title": "Test Coverage",
           "description": "Testing Testi için test",
-          "href": "/education/lessons/java/java-module-14/test-coverage"
+          "href": "/education/tests/quiz/tests-java/java-module-14/test-coverage"
         },
         {
           "id": "tdd",
           "title": "Test-Driven Development (TDD)",
           "description": "Testing Testi için test",
-          "href": "/education/lessons/java/java-module-14/tdd"
+          "href": "/education/tests/quiz/tests-java/java-module-14/tdd"
         },
         {
           "id": "testing-best-practices",
           "title": "Testing Best Practices",
           "description": "Testing Testi için test",
-          "href": "/education/lessons/java/java-module-14/testing-best-practices"
+          "href": "/education/tests/quiz/tests-java/java-module-14/testing-best-practices"
         },
         {
           "id": "testing-practice",
           "title": "Modül Özeti ve Uygulama",
           "description": "Testing Testi için test",
-          "href": "/education/lessons/java/java-module-14/testing-practice"
+          "href": "/education/tests/quiz/tests-java/java-module-14/testing-practice"
         }
       ]
     },
@@ -1476,91 +1476,91 @@
           "id": "deployment-strategies",
           "title": "Deployment Stratejileri",
           "description": "Deployment & Best Practices Testi için test",
-          "href": "/education/lessons/java/java-module-15/deployment-strategies"
+          "href": "/education/tests/quiz/tests-java/java-module-15/deployment-strategies"
         },
         {
           "id": "jar-war",
           "title": "JAR ve WAR Dosyaları",
           "description": "Deployment & Best Practices Testi için test",
-          "href": "/education/lessons/java/java-module-15/jar-war"
+          "href": "/education/tests/quiz/tests-java/java-module-15/jar-war"
         },
         {
           "id": "docker-basics",
           "title": "Docker Temelleri",
           "description": "Deployment & Best Practices Testi için test",
-          "href": "/education/lessons/java/java-module-15/docker-basics"
+          "href": "/education/tests/quiz/tests-java/java-module-15/docker-basics"
         },
         {
           "id": "dockerfile",
           "title": "Dockerfile Oluşturma",
           "description": "Deployment & Best Practices Testi için test",
-          "href": "/education/lessons/java/java-module-15/dockerfile"
+          "href": "/education/tests/quiz/tests-java/java-module-15/dockerfile"
         },
         {
           "id": "docker-compose",
           "title": "Docker Compose",
           "description": "Deployment & Best Practices Testi için test",
-          "href": "/education/lessons/java/java-module-15/docker-compose"
+          "href": "/education/tests/quiz/tests-java/java-module-15/docker-compose"
         },
         {
           "id": "cicd-concepts",
           "title": "CI/CD Concepts",
           "description": "Deployment & Best Practices Testi için test",
-          "href": "/education/lessons/java/java-module-15/cicd-concepts"
+          "href": "/education/tests/quiz/tests-java/java-module-15/cicd-concepts"
         },
         {
           "id": "github-actions",
           "title": "GitHub Actions",
           "description": "Deployment & Best Practices Testi için test",
-          "href": "/education/lessons/java/java-module-15/github-actions"
+          "href": "/education/tests/quiz/tests-java/java-module-15/github-actions"
         },
         {
           "id": "jenkins-pipeline",
           "title": "Jenkins Pipeline",
           "description": "Deployment & Best Practices Testi için test",
-          "href": "/education/lessons/java/java-module-15/jenkins-pipeline"
+          "href": "/education/tests/quiz/tests-java/java-module-15/jenkins-pipeline"
         },
         {
           "id": "cloud-deployment",
           "title": "Cloud Deployment (AWS, Azure, GCP)",
           "description": "Deployment & Best Practices Testi için test",
-          "href": "/education/lessons/java/java-module-15/cloud-deployment"
+          "href": "/education/tests/quiz/tests-java/java-module-15/cloud-deployment"
         },
         {
           "id": "kubernetes-basics",
           "title": "Kubernetes Temelleri",
           "description": "Deployment & Best Practices Testi için test",
-          "href": "/education/lessons/java/java-module-15/kubernetes-basics"
+          "href": "/education/tests/quiz/tests-java/java-module-15/kubernetes-basics"
         },
         {
           "id": "monitoring-logging",
           "title": "Monitoring ve Logging",
           "description": "Deployment & Best Practices Testi için test",
-          "href": "/education/lessons/java/java-module-15/monitoring-logging"
+          "href": "/education/tests/quiz/tests-java/java-module-15/monitoring-logging"
         },
         {
           "id": "performance-tuning",
           "title": "Performance Tuning",
           "description": "Deployment & Best Practices Testi için test",
-          "href": "/education/lessons/java/java-module-15/performance-tuning"
+          "href": "/education/tests/quiz/tests-java/java-module-15/performance-tuning"
         },
         {
           "id": "production-security",
           "title": "Security in Production",
           "description": "Deployment & Best Practices Testi için test",
-          "href": "/education/lessons/java/java-module-15/production-security"
+          "href": "/education/tests/quiz/tests-java/java-module-15/production-security"
         },
         {
           "id": "production-best-practices",
           "title": "Production Best Practices",
           "description": "Deployment & Best Practices Testi için test",
-          "href": "/education/lessons/java/java-module-15/production-best-practices"
+          "href": "/education/tests/quiz/tests-java/java-module-15/production-best-practices"
         },
         {
           "id": "capstone-project",
           "title": "Capstone Project",
           "description": "Deployment & Best Practices Testi için test",
-          "href": "/education/lessons/java/java-module-15/capstone-project"
+          "href": "/education/tests/quiz/tests-java/java-module-15/capstone-project"
         }
       ]
     }

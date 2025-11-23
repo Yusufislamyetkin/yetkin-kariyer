@@ -4,7 +4,8 @@ import {
   getMockEducationItems,
   type EducationType,
 } from "@/lib/mock/education";
-import { normalizeLiveCodingPayload } from "@/lib/education/liveCoding";
+import { normalizeLiveCodingPayload, resolveLiveCodingLanguage } from "@/lib/education/liveCoding";
+import type { LiveCodingLanguage } from "@/types/live-coding";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -19,6 +20,10 @@ export async function GET(request: Request) {
     const level = searchParams.get("level");
     const typeParam = rawType; // TEST, LIVE_CODING, BUG_FIX, HACKATON
     const search = searchParams.get("search");
+    const languageParam = searchParams.get("language");
+    const requestedLanguage = typeParam === "LIVE_CODING" && languageParam 
+      ? resolveLiveCodingLanguage(languageParam) 
+      : null;
 
     const where: any = {
       type: {
@@ -146,6 +151,7 @@ export async function GET(request: Request) {
       content: content || null,
       level: level || null,
       search: search || null,
+      language: requestedLanguage || null,
     });
     
     if (quizzes.length > 0) {
@@ -159,31 +165,83 @@ export async function GET(request: Request) {
 
     // Optimize: Normalize LIVE_CODING payloads on server-side to reduce client-side processing
     const processedItems = typeParam === "LIVE_CODING" 
-      ? quizzes.map((quiz: any) => {
-          if (!quiz.questions) {
-            // Remove questions field to reduce payload size
-            const { questions: _, ...rest } = quiz as any;
-            return rest;
-          }
-          
-          try {
-            const normalized = normalizeLiveCodingPayload(quiz.questions);
-            // Remove questions field and add normalized liveCoding data
-            const { questions: _, ...rest } = quiz as any;
-            return {
-              ...rest,
-              liveCoding: {
-                tasks: normalized.tasks,
-                instructions: normalized.instructions,
-              },
-            };
-          } catch (error) {
-            console.error(`[LIVE_CODING] Error normalizing quiz ${quiz.id}:`, error);
-            // Remove questions field even on error to reduce payload size
-            const { questions: _, ...rest } = quiz as any;
-            return rest;
-          }
-        })
+      ? quizzes
+          .map((quiz: any) => {
+            if (!quiz.questions) {
+              // Remove questions field to reduce payload size
+              const { questions: _, ...rest } = quiz as any;
+              return { quiz: rest, normalized: null };
+            }
+            
+            try {
+              const normalized = normalizeLiveCodingPayload(quiz.questions);
+              
+              // Log normalization result for debugging
+              if (requestedLanguage) {
+                console.log(`[EDUCATION_ITEMS_GET] Normalized quiz ${quiz.id}`, {
+                  quizId: quiz.id,
+                  quizTitle: quiz.title,
+                  taskCount: normalized.tasks.length,
+                  taskLanguages: normalized.tasks.map(t => ({
+                    taskId: t.id,
+                    languages: t.languages,
+                  })),
+                  requestedLanguage,
+                });
+              }
+              
+              // Remove questions field and add normalized liveCoding data
+              const { questions: _, ...rest } = quiz as any;
+              return {
+                quiz: {
+                  ...rest,
+                  liveCoding: {
+                    tasks: normalized.tasks,
+                    instructions: normalized.instructions,
+                  },
+                },
+                normalized,
+              };
+            } catch (error) {
+              console.error(`[LIVE_CODING] Error normalizing quiz ${quiz.id}:`, error);
+              // Remove questions field even on error to reduce payload size
+              const { questions: _, ...rest } = quiz as any;
+              return { quiz: rest, normalized: null };
+            }
+          })
+          .filter((item: { quiz: any; normalized: any }) => {
+            // If language filter is requested, check if any task supports it
+            if (requestedLanguage && item.normalized) {
+              const hasLanguage = item.normalized.tasks.some((task: any) => {
+                const taskLanguages = task.languages && Array.isArray(task.languages) && task.languages.length > 0 
+                  ? task.languages 
+                  : [];
+                const isSupported = taskLanguages.includes(requestedLanguage);
+                
+                if (!isSupported && taskLanguages.length > 0) {
+                  console.log(`[EDUCATION_ITEMS_GET] Task ${task.id} doesn't support ${requestedLanguage}, has: ${JSON.stringify(taskLanguages)}`);
+                }
+                
+                return isSupported;
+              });
+              
+              if (!hasLanguage) {
+                console.log(`[EDUCATION_ITEMS_GET] Filtered out quiz ${item.quiz.id} - no tasks support language ${requestedLanguage}`, {
+                  quizId: item.quiz.id,
+                  quizTitle: item.quiz.title,
+                  taskCount: item.normalized.tasks.length,
+                  allTaskLanguages: item.normalized.tasks.map((t: any) => ({
+                    taskId: t.id,
+                    languages: t.languages || [],
+                  })),
+                  requestedLanguage,
+                });
+                return false;
+              }
+            }
+            return true;
+          })
+          .map((item: { quiz: any; normalized: any }) => item.quiz)
       : quizzes;
 
     return NextResponse.json({ items: processedItems });

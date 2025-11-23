@@ -19,9 +19,6 @@ export async function POST() {
 
     const expertise = "Node.js";
     
-    // Test artık bağımsız - courseId opsiyonel, content field'ında modül yapısı var
-    const quizId = `test-nodejs-${Date.now()}`;
-    
     // Read test modules from JSON file
     let testContent: any = null;
     try {
@@ -50,52 +47,77 @@ export async function POST() {
     }
 
     const modules = testContent.modules;
-    await db.quiz.upsert({
-      where: { id: quizId },
-      update: {
-        title: "Node.js Test",
-        description: "Node.js teknolojisi için test",
-        type: "TEST",
-        level: "intermediate",
-        topic: expertise,
-        questions: [],
-        content: {
-          modules: modules,
-          overview: testContent.overview || {
-            description: "Node.js teknolojisi için kapsamlı test paketi",
-            estimatedDurationMinutes: null,
+    let totalTests = 0;
+    let isFirstTest = true; // İlk modülün ilk testi için teknoloji description'ını kullan
+
+    // Her modül için relatedTests array'indeki her item bir test olacak
+    for (const moduleItem of modules) {
+      if (!moduleItem.relatedTests || !Array.isArray(moduleItem.relatedTests)) {
+        console.warn(`[CREATE_TEST_API] Module ${moduleItem.id} has no relatedTests array, skipping...`);
+        continue;
+      }
+
+      // Her modül için relatedTests array'indeki her item bir test
+      for (const testItem of moduleItem.relatedTests) {
+        totalTests++;
+        
+        // Test ID oluştur
+        const testId = `test-${expertise.toLowerCase().replace(/\s+/g, '-')}-${moduleItem.id}-${testItem.id}`;
+        
+        // Content objesi oluştur (sadece ilgili modülü içeren array)
+        const content = {
+          modules: [
+            {
+              id: moduleItem.id,
+              title: moduleItem.title,
+              summary: moduleItem.summary,
+            },
+          ],
+          overview: {
+            estimatedDurationMinutes: moduleItem.durationMinutes || null,
           },
-          learningObjectives: testContent.learningObjectives || [],
-        },
-        passingScore: 60,
-        courseId: null,
-      },
-      create: {
-        id: quizId,
-        courseId: null,
-        title: "Node.js Test",
-        description: "Node.js teknolojisi için test",
-        type: "TEST",
-        level: "intermediate",
-        topic: expertise,
-        questions: [],
-        content: {
-          modules: modules,
-          overview: testContent.overview || {
-            description: "Node.js teknolojisi için kapsamlı test paketi",
-            estimatedDurationMinutes: null,
-          },
-          learningObjectives: testContent.learningObjectives || [],
-        },
-        passingScore: 60,
-      },
-    });
+        };
+
+        // İlk modülün ilk testi için teknoloji description'ını kullan
+        const testDescription = isFirstTest 
+          ? (testContent.overview?.description || `${expertise} teknolojisi için kapsamlı test paketi`)
+          : testItem.description;
+
+        // Quiz oluştur (courseId null, type TEST, topic teknoloji adı)
+        try {
+          await db.quiz.create({
+            data: {
+              id: testId,
+              type: "TEST",
+              title: testItem.title,
+              description: testDescription,
+              topic: expertise,
+              level: "intermediate", // Varsayılan seviye, modülden alınabilir
+              questions: [], // Boş array, soru içeriği sonra eklenecek
+              content: content as any,
+              passingScore: 70,
+              courseId: null,
+            },
+          });
+        } catch (quizError: any) {
+          // Eğer test zaten varsa (duplicate key), skip et
+          if (quizError.code === 'P2002') {
+            console.log(`[CREATE_TEST_API] Test ${testId} already exists, skipping...`);
+            continue;
+          }
+          console.error(`[CREATE_TEST_API] Error creating quiz for ${expertise} - ${testItem.title}:`, quizError);
+          throw quizError;
+        }
+
+        isFirstTest = false; // İlk testten sonra false yap
+      }
+    }
 
     return NextResponse.json({
       success: true,
-      message: `Node.js test kategorisi başarıyla oluşturuldu. ${modules.length} modül eklendi.`,
+      message: `Node.js testleri başarıyla oluşturuldu. ${modules.length} modül, ${totalTests} test eklendi.`,
       stats: {
-        testsCreated: 1,
+        testsCreated: totalTests,
         modulesCreated: modules.length,
       },
     });

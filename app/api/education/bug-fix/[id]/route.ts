@@ -3,6 +3,7 @@ import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
 import { recordEvent } from "@/lib/services/gamification/antiAbuse";
 import { applyRules } from "@/lib/services/gamification/rules";
+import { ensureAIEnabled, isAIEnabled } from "@/lib/ai/client";
 
 export async function GET(
   request: Request,
@@ -104,12 +105,19 @@ export async function POST(
     }
 
     const body = await request.json();
-    const { fixedCode, metrics, duration } = body;
+    const { fixedCode, metrics, duration, tasks } = body;
 
     const quiz = await db.quiz.findUnique({
       where: { 
         id: params.id,
         type: "BUG_FIX",
+      },
+      include: {
+        course: {
+          select: {
+            title: true,
+          },
+        },
       },
     });
 
@@ -118,6 +126,108 @@ export async function POST(
     }
 
     const userId = session.user.id as string;
+
+    // Parse tasks from quiz questions
+    const questionsData = quiz.questions as any;
+    const quizTasks = Array.isArray(questionsData)
+      ? questionsData
+      : questionsData?.tasks || [];
+
+    // Perform AI evaluation for each task if AI is enabled
+    let aiEvaluationResults: any = null;
+    let overallCorrect = false;
+
+    if (isAIEnabled() && tasks && Array.isArray(tasks) && tasks.length > 0) {
+      try {
+        const openai = await ensureAIEnabled();
+        const evaluations = await Promise.all(
+          tasks.map(async (task: any, index: number) => {
+            const quizTask = quizTasks[index];
+            if (!quizTask) return null;
+
+            const buggyCode = quizTask.buggyCode?.[task.language] || quizTask.buggyCode || "";
+            const expectedOutput = quizTask.expectedOutput || "";
+            const expectedFix = quizTask.expectedFix || "";
+            const acceptanceCriteria = quizTask.acceptanceCriteria || [];
+
+            const prompt = `Sen bir bug fix değerlendirme uzmanısın. Öğrencinin hatalı kodu düzeltip düzeltmediğini analiz et.
+
+GÖREV: ${quizTask.title || quizTask.description || "Bug Fix Görevi"}
+${quizTask.description ? `Açıklama: ${quizTask.description}` : ""}
+${expectedFix ? `Beklenen Düzeltme: ${expectedFix}` : ""}
+
+HATALI KOD:
+\`\`\`${task.language}
+${buggyCode}
+\`\`\`
+
+ÖĞRENCİNİN DÜZELTTİĞİ KOD:
+\`\`\`${task.language}
+${task.code}
+\`\`\`
+
+BEKLENEN ÇIKTI: ${expectedOutput}
+${acceptanceCriteria.length > 0 ? `Kabul Kriterleri:\n${acceptanceCriteria.map((c: string, i: number) => `${i + 1}. ${c}`).join("\n")}` : ""}
+
+Değerlendirme:
+1. Öğrenci hatayı doğru şekilde düzeltmiş mi? (isCorrect: true/false)
+2. Çıktı beklenen çıktı ile eşleşiyor mu?
+3. Acceptance criteria'lar karşılanmış mı?
+
+JSON formatında yanıt ver:
+{
+  "isCorrect": boolean,
+  "feedback": "string (Türkçe, kısa geri bildirim)",
+  "score": number (0-100)
+}`;
+
+            const completion = await openai.chat.completions.create({
+              model: "gpt-4o-mini",
+              messages: [
+                {
+                  role: "system",
+                  content: "Sen bir bug fix değerlendirme uzmanısın. Her zaman JSON formatında yanıt ver.",
+                },
+                {
+                  role: "user",
+                  content: prompt,
+                },
+              ],
+              temperature: 0.3,
+              max_tokens: 500,
+              response_format: { type: "json_object" },
+            });
+
+            const responseContent = completion.choices[0]?.message?.content;
+            if (responseContent) {
+              try {
+                return JSON.parse(responseContent);
+              } catch {
+                return { isCorrect: false, feedback: "Değerlendirme yapılamadı", score: 0 };
+              }
+            }
+            return { isCorrect: false, feedback: "AI yanıtı alınamadı", score: 0 };
+          })
+        );
+
+        const validEvaluations = evaluations.filter((e) => e !== null);
+        overallCorrect = validEvaluations.every((e: any) => e.isCorrect);
+        const averageScore = validEvaluations.length > 0
+          ? validEvaluations.reduce((sum: number, e: any) => sum + (e.score || 0), 0) / validEvaluations.length
+          : 0;
+
+        aiEvaluationResults = {
+          evaluations: validEvaluations,
+          overallCorrect,
+          averageScore: Math.round(averageScore),
+          totalTasks: validEvaluations.length,
+          correctTasks: validEvaluations.filter((e: any) => e.isCorrect).length,
+        };
+      } catch (aiError) {
+        console.error("[BUG_FIX] AI evaluation error:", aiError);
+        // Continue without AI evaluation
+      }
+    }
 
     // BugFixAttempt oluştur
     const bugFixAttempt = await db.bugFixAttempt.create({
@@ -128,8 +238,9 @@ export async function POST(
         metrics: metrics || {
           bugsFixed: 0,
           timeTaken: duration ? parseInt(duration) : null,
-          codeQuality: 0,
+          codeQuality: aiEvaluationResults?.averageScore || 0,
         },
+        aiEvaluation: aiEvaluationResults,
       },
     });
 
@@ -145,16 +256,11 @@ export async function POST(
       console.warn("Gamification bug_fix_completed failed:", e);
     }
 
-    // AI analysis'i background'da yap
-    if (process.env.OPENAI_API_KEY && process.env.NEXTAUTH_URL) {
-      fetch(`${process.env.NEXTAUTH_URL}/api/ai/analyze-quiz`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ bugFixAttemptId: bugFixAttempt.id }),
-      }).catch(() => {});
-    }
-
-    return NextResponse.json({ bugFixAttempt });
+    return NextResponse.json({
+      bugFixAttempt,
+      aiEvaluation: aiEvaluationResults,
+      isCorrect: overallCorrect,
+    });
   } catch (error) {
     console.error("[BUG_FIX] Error submitting bug fix:", error);
     const errorMessage = error instanceof Error ? error.message : "Bilinmeyen hata";

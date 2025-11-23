@@ -38,6 +38,11 @@ type LegacyLiveCodingTask =
         timeLimit?: number;
         languages?: LiveCodingLanguage[];
       };
+      testCases?: Array<{
+        input?: string;
+        expectedOutput: string;
+      }>;
+      hints?: string[];
     }
   | undefined;
 
@@ -94,6 +99,21 @@ const normalizeSingleTask = (rawTask: LegacyLiveCodingTask, index: number): Live
     }
   });
 
+  // Parse testCases
+  const testCases = Array.isArray(rawTask.testCases)
+    ? rawTask.testCases
+        .filter((tc) => tc && typeof tc === "object" && typeof tc.expectedOutput === "string")
+        .map((tc) => ({
+          input: typeof tc.input === "string" ? tc.input : undefined,
+          expectedOutput: tc.expectedOutput,
+        }))
+    : undefined;
+
+  // Parse hints
+  const hints = Array.isArray(rawTask.hints)
+    ? rawTask.hints.filter((h): h is string => typeof h === "string" && h.trim().length > 0)
+    : undefined;
+
   return {
     id,
     title,
@@ -104,6 +124,8 @@ const normalizeSingleTask = (rawTask: LegacyLiveCodingTask, index: number): Live
     acceptanceCriteria,
     initialCode: Object.keys(resolvedInitialCode).length > 0 ? resolvedInitialCode : rawTask.initialCode,
     starterFiles: rawTask.starterFiles,
+    testCases,
+    hints,
   };
 };
 

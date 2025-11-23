@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/app/components/ui/Button";
-import { Loader2, CheckCircle2, AlertCircle, BookOpen, Trash2, Code2, Database, Globe, Zap, Shield, Container, Lock, FileText, Users, Trophy, Briefcase, MessageCircle, Building2 } from "lucide-react";
+import { Loader2, CheckCircle2, AlertCircle, BookOpen, Trash2, Code2, Database, Globe, Zap, Shield, Container, Lock, FileText, Users, Trophy, Briefcase, MessageCircle, Building2, Bug } from "lucide-react";
 
 interface CourseStatus {
   loading: boolean;
@@ -115,12 +115,32 @@ export default function AdminPage() {
     error: null,
   });
 
-  const [juniorCasesState, setJuniorCasesState] = useState<{
-    loading: boolean;
-    success: string | null;
-    error: string | null;
-    stats: { imported?: number; errors?: number } | null;
-  }>({
+
+  const [liveCodingCasesState, setLiveCodingCasesState] = useState<ClearStatus>({
+    loading: false,
+    success: null,
+    error: null,
+  });
+
+  const [deleteLiveCodingCasesState, setDeleteLiveCodingCasesState] = useState<ClearStatus>({
+    loading: false,
+    success: null,
+    error: null,
+  });
+
+  const [bugfixCasesState, setBugfixCasesState] = useState<ClearStatus>({
+    loading: false,
+    success: null,
+    error: null,
+  });
+
+  const [deleteBugfixCasesState, setDeleteBugfixCasesState] = useState<ClearStatus>({
+    loading: false,
+    success: null,
+    error: null,
+  });
+
+  const [testTechnologiesState, setTestTechnologiesState] = useState<CourseStatus>({
     loading: false,
     success: null,
     error: null,
@@ -655,6 +675,42 @@ export default function AdminPage() {
     }
   };
 
+  const handleInsertTestTechnologies = async () => {
+    setTestTechnologiesState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/insert-test-technologies", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Test teknolojileri eklenirken bir hata oluştu");
+      }
+
+      setTestTechnologiesState({
+        loading: false,
+        success: data.message || "Test teknolojileri başarıyla eklendi",
+        error: null,
+        stats: data.stats || null,
+      });
+    } catch (err: any) {
+      setTestTechnologiesState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
+    }
+  };
+
   const handleCreateDotNetTest = async () => {
     setTestState({
       loading: true,
@@ -907,16 +963,15 @@ export default function AdminPage() {
     }
   };
 
-  const handleImportJuniorCases = async () => {
-    setJuniorCasesState({
+  const handleInsertLiveCodingCases = async () => {
+    setLiveCodingCasesState({
       loading: true,
       success: null,
       error: null,
-      stats: null,
     });
 
     try {
-      const response = await fetch("/api/admin/import-junior-cases", {
+      const response = await fetch("/api/admin/insert-live-coding-cases", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
       });
@@ -924,24 +979,140 @@ export default function AdminPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Junior case'ler import edilirken bir hata oluştu");
+        throw new Error(data.error || "Case'ler veritabanına eklenirken bir hata oluştu");
       }
 
-      setJuniorCasesState({
+      setLiveCodingCasesState({
         loading: false,
-        success: data.message || "Junior case'ler başarıyla import edildi",
+        success: data.message || "Case'ler başarıyla veritabanına eklendi",
         error: null,
-        stats: {
-          imported: data.imported || 0,
-          errors: data.errors?.length || 0,
-        },
       });
     } catch (err: any) {
-      setJuniorCasesState({
+      setLiveCodingCasesState({
         loading: false,
         success: null,
         error: err.message || "Bir hata oluştu",
-        stats: null,
+      });
+    }
+  };
+
+  const handleDeleteLiveCodingCases = async () => {
+    if (!window.confirm("Tüm canlı kodlama case'lerini silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.")) {
+      return;
+    }
+
+    setDeleteLiveCodingCasesState({
+      loading: true,
+      success: null,
+      error: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/delete-live-coding-cases", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Case'ler silinirken bir hata oluştu");
+      }
+
+      setDeleteLiveCodingCasesState({
+        loading: false,
+        success: data.message || "Case'ler başarıyla silindi",
+        error: null,
+      });
+
+      // Clear insert state as well
+      setLiveCodingCasesState({
+        loading: false,
+        success: null,
+        error: null,
+      });
+    } catch (err: any) {
+      setDeleteLiveCodingCasesState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+      });
+    }
+  };
+
+  const handleInsertBugfixCases = async () => {
+    setBugfixCasesState({
+      loading: true,
+      success: null,
+      error: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/insert-bugfix-cases", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Bugfix case'leri veritabanına eklenirken bir hata oluştu");
+      }
+
+      setBugfixCasesState({
+        loading: false,
+        success: data.message || "Bugfix case'leri başarıyla veritabanına eklendi",
+        error: null,
+      });
+    } catch (err: any) {
+      setBugfixCasesState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+      });
+    }
+  };
+
+  const handleDeleteBugfixCases = async () => {
+    if (!window.confirm("Tüm bugfix case'lerini silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.")) {
+      return;
+    }
+
+    setDeleteBugfixCasesState({
+      loading: true,
+      success: null,
+      error: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/delete-bugfix-cases", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Bugfix case'leri silinirken bir hata oluştu");
+      }
+
+      setDeleteBugfixCasesState({
+        loading: false,
+        success: data.message || "Bugfix case'leri başarıyla silindi",
+        error: null,
+      });
+
+      // Clear insert state as well
+      setBugfixCasesState({
+        loading: false,
+        success: null,
+        error: null,
+      });
+    } catch (err: any) {
+      setDeleteBugfixCasesState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
       });
     }
   };
@@ -1187,7 +1358,7 @@ export default function AdminPage() {
   const handleClearAllTests = async () => {
     if (
       !confirm(
-        "TÜM test verilerini silmek istediğinizden emin misiniz? Bu işlem geri alınamaz!"
+        "Admin panelinden eklenen tüm test verilerini silmek istediğinizden emin misiniz? Bu işlem geri alınamaz! (Course'a bağlı testler korunacak)"
       )
     ) {
       return;
@@ -1643,6 +1814,97 @@ export default function AdminPage() {
                   <AlertCircle className="h-5 w-5 flex-shrink-0" />
                 </div>
                 <div className="text-sm font-semibold">{courseState.error}</div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Test Technologies Seed Data Section */}
+      <div className="relative rounded-3xl border border-blue-200/50 bg-gradient-to-br from-white via-blue-50/30 to-indigo-50/30 shadow-2xl dark:border-blue-800/50 dark:from-gray-950 dark:via-blue-950/20 dark:to-indigo-950/20 backdrop-blur-sm p-6 md:p-8 overflow-hidden">
+        {/* Animated background pattern */}
+        <div className="absolute inset-0 opacity-5 dark:opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundSize: '60px 60px'
+          }}></div>
+        </div>
+        
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-2 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg">
+              <FileText className="h-6 w-6 text-white" />
+            </div>
+            <div>
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                📝 Test Teknolojileri Seed Data
+              </h2>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                Test teknolojileri, modüller ve testleri ekle
+              </p>
+            </div>
+          </div>
+          <p className="text-gray-600 dark:text-gray-400 mb-8 text-sm">
+            Test teknolojileri, her teknoloji için modüller ve her modül için testler içeren tam seed data yapısını oluşturur. Teknolojiler → Modüller → Testler hiyerarşisini doldurur.
+          </p>
+          
+          <div className="max-w-md">
+            <Button
+              onClick={handleInsertTestTechnologies}
+              disabled={testTechnologiesState.loading}
+              size="lg"
+              className="w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-medium"
+            >
+              {testTechnologiesState.loading ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  Test Teknolojileri Ekleniyor...
+                </>
+              ) : (
+                <>
+                  <FileText className="mr-2 h-5 w-5" />
+                  Test Teknolojileri Seed Data Ekle
+                </>
+              )}
+            </Button>
+          </div>
+
+          {/* Success/Error Messages */}
+          {testTechnologiesState.success && (
+            <div className="mt-6 p-4 rounded-2xl border border-green-300/50 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/40 dark:to-emerald-950/40 dark:border-green-800/50 backdrop-blur-sm shadow-lg">
+              <div className="flex items-start gap-3 text-green-700 dark:text-green-300">
+                <div className="p-2 rounded-lg bg-green-500/20">
+                  <CheckCircle2 className="h-5 w-5 flex-shrink-0" />
+                </div>
+                <div className="flex-1">
+                  <div className="font-semibold text-base mb-2">{testTechnologiesState.success}</div>
+                  {testTechnologiesState.stats && (
+                    <div className="flex flex-wrap gap-4 text-sm opacity-90">
+                      {testTechnologiesState.stats.modulesCreated && (
+                        <div className="flex items-center gap-1">
+                          <FileText className="h-3 w-3" />
+                          <span>Modüller: <strong>{testTechnologiesState.stats.modulesCreated}</strong></span>
+                        </div>
+                      )}
+                      {testTechnologiesState.stats.lessonsCreated && (
+                        <div className="flex items-center gap-1">
+                          <FileText className="h-3 w-3" />
+                          <span>Testler: <strong>{testTechnologiesState.stats.lessonsCreated}</strong></span>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+          {testTechnologiesState.error && (
+            <div className="mt-6 p-4 rounded-2xl border border-red-300/50 bg-gradient-to-br from-red-50 to-rose-50 dark:from-red-950/40 dark:to-rose-950/40 dark:border-red-800/50 backdrop-blur-sm shadow-lg">
+              <div className="flex items-start gap-3 text-red-700 dark:text-red-300">
+                <div className="p-2 rounded-lg bg-red-500/20">
+                  <AlertCircle className="h-5 w-5 flex-shrink-0" />
+                </div>
+                <div className="text-sm font-semibold">{testTechnologiesState.error}</div>
               </div>
             </div>
           )}
@@ -2228,6 +2490,9 @@ export default function AdminPage() {
               )}
             </div>
             <div>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+                Her topluluğa 30-60 arasında rastgele katılımcı ekler.
+              </p>
               <Button
                 onClick={handleAssignProfilesToCommunities}
                 disabled={assignProfilesState.loading}
@@ -2251,13 +2516,35 @@ export default function AdminPage() {
                   <div className="flex items-start gap-2 text-green-600 dark:text-green-300">
                     <CheckCircle2 className="h-4 w-4 mt-0.5 flex-shrink-0" />
                     <div className="flex-1">
-                      <div className="text-sm font-medium mb-1">{assignProfilesState.success}</div>
+                      <div className="text-sm font-medium mb-2">{assignProfilesState.success}</div>
                       {assignProfilesState.stats && (
-                        <div className="flex flex-col gap-1 text-xs opacity-90">
-                          <span>Toplam Profil: <strong>{(assignProfilesState.stats as any).totalProfiles || 0}</strong></span>
-                          <span>Topluluk Sayısı: <strong>{(assignProfilesState.stats as any).totalCommunities || 0}</strong></span>
-                          <span>Eklenen Üye: <strong>{(assignProfilesState.stats as any).totalAdded || 0}</strong></span>
-                          <span>Topluluk Başına Min: <strong>{(assignProfilesState.stats as any).minPerCommunity || 0}</strong></span>
+                        <div className="space-y-2">
+                          <div className="flex flex-col gap-1 text-xs opacity-90">
+                            <span>Toplam Profil: <strong>{(assignProfilesState.stats as any).totalProfiles || 0}</strong></span>
+                            <span>Topluluk Sayısı: <strong>{(assignProfilesState.stats as any).totalCommunities || 0}</strong></span>
+                            <span>Eklenen Üye: <strong>{(assignProfilesState.stats as any).totalAdded || 0}</strong></span>
+                            <span>Topluluk Başına: <strong>{(assignProfilesState.stats as any).minPerCommunity || 30}</strong> - <strong>{(assignProfilesState.stats as any).maxPerCommunity || 60}</strong> üye (rastgele)</span>
+                          </div>
+                          {(assignProfilesState.stats as any).communityStats && (
+                            <div className="mt-2 pt-2 border-t border-green-300 dark:border-green-800">
+                              <div className="text-xs font-semibold mb-1">Topluluk Detayları:</div>
+                              <div className="flex flex-col gap-1 text-xs opacity-90 max-h-48 overflow-y-auto">
+                                {((assignProfilesState.stats as any).communityStats as Array<{ name: string; added: number; currentTotal: number }>).map((stat, idx) => (
+                                  <div key={idx} className="flex justify-between items-center">
+                                    <span>{stat.name}:</span>
+                                    <span className="font-medium">
+                                      +{stat.added} üye (Toplam: {stat.currentTotal})
+                                      {stat.currentTotal >= ((assignProfilesState.stats as any).minPerCommunity || 30) && stat.currentTotal <= ((assignProfilesState.stats as any).maxPerCommunity || 60) ? (
+                                        <span className="ml-1 text-green-600 dark:text-green-400">✓</span>
+                                      ) : (
+                                        <span className="ml-1 text-orange-600 dark:text-orange-400">⚠</span>
+                                      )}
+                                    </span>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
                         </div>
                       )}
                     </div>
@@ -2314,7 +2601,7 @@ export default function AdminPage() {
         </div>
       </div>
 
-      {/* Junior Cases Import Section */}
+      {/* Live Coding Cases Management Section */}
       <div className="relative rounded-3xl border border-cyan-200/50 bg-gradient-to-br from-white via-cyan-50/30 to-blue-50/30 shadow-2xl dark:border-cyan-800/50 dark:from-gray-950 dark:via-cyan-950/20 dark:to-blue-950/20 backdrop-blur-sm p-6 md:p-8 overflow-hidden">
         {/* Animated background pattern */}
         <div className="absolute inset-0 opacity-5 dark:opacity-10">
@@ -2331,75 +2618,222 @@ export default function AdminPage() {
             </div>
             <div>
               <h2 className="text-3xl font-bold bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                 🎯 Junior Seviye Canlı Kodlama Case&apos;leri
+                💻 Canlı Kodlama Case Yönetimi
                </h2>
                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                 15 programlama dili için 90 junior seviye case import edin
+                12 programlama dili için 36 case yönetimi
                </p>
              </div>
            </div>
            <p className="text-gray-600 dark:text-gray-400 mb-8 text-sm">
-             15 farklı programlama dili (C#, Java, Python, JavaScript, TypeScript, Go, Rust, C++, Kotlin, Swift, PHP, Ruby, Scala, Dart, R) için her birinde 6&apos;şar junior seviye canlı kodlama case&apos;i veritabanına ekler. Toplam 90 case oluşturulur.
+            12 farklı programlama dili (C#, Java, Python, PHP, JavaScript, TypeScript, Go, Rust, C++, Kotlin, Swift, Ruby) için her birinde 3&apos;er canlı kodlama case&apos;i veritabanına ekler. Toplam 36 case oluşturulur.
           </p>
           
-          <div className="max-w-md">
+          <div className="max-w-md flex gap-4">
             <Button
-              onClick={handleImportJuniorCases}
-              disabled={juniorCasesState.loading}
+              onClick={handleInsertLiveCodingCases}
+              disabled={liveCodingCasesState.loading || deleteLiveCodingCasesState.loading}
               size="lg"
-              className="w-full bg-gradient-to-r from-cyan-600 to-blue-700 hover:from-cyan-700 hover:to-blue-800 text-white font-medium"
+              className="flex-1 bg-gradient-to-r from-cyan-600 to-blue-700 hover:from-cyan-700 hover:to-blue-800 text-white font-medium"
             >
-              {juniorCasesState.loading ? (
+              {liveCodingCasesState.loading ? (
                 <>
                   <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                   Case&apos;ler Import Ediliyor...
+                  Case&apos;ler Ekleniyor...
                  </>
                ) : (
                  <>
                    <Code2 className="mr-2 h-5 w-5" />
-                   90 Junior Case Import Et
+                  Case&apos;leri Veritabanına Ekle
                  </>
                )}
              </Button>
+             <Button
+              onClick={handleDeleteLiveCodingCases}
+              disabled={deleteLiveCodingCasesState.loading || liveCodingCasesState.loading}
+              size="lg"
+              variant="outline"
+              className="flex-1 border-red-300 dark:border-red-700 text-red-700 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30"
+            >
+              {deleteLiveCodingCasesState.loading ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  Siliniyor...
+                </>
+              ) : (
+                <>
+                  <Trash2 className="mr-2 h-5 w-5" />
+                  Case&apos;leri Kaldır
+                </>
+              )}
+            </Button>
            </div>
 
            {/* Success/Error Messages */}
-           {juniorCasesState.success && (
+          {liveCodingCasesState.success && (
              <div className="mt-6 p-4 rounded-2xl border border-green-300/50 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/40 dark:to-emerald-950/40 dark:border-green-800/50 backdrop-blur-sm shadow-lg">
                <div className="flex items-start gap-3 text-green-700 dark:text-green-300">
                  <div className="p-2 rounded-lg bg-green-500/20">
                    <CheckCircle2 className="h-5 w-5 flex-shrink-0" />
                  </div>
                  <div className="flex-1">
-                   <div className="font-semibold text-base mb-2">{juniorCasesState.success}</div>
-                   {juniorCasesState.stats && (
-                     <div className="flex flex-wrap gap-4 text-sm opacity-90">
-                       <div className="flex items-center gap-1">
-                         <Code2 className="h-3 w-3" />
-                         <span>Import Edilen: <strong>{juniorCasesState.stats.imported}</strong></span>
+                  <div className="font-semibold text-base">{liveCodingCasesState.success}</div>
                        </div>
-                       {juniorCasesState.stats.errors && juniorCasesState.stats.errors > 0 && (
-                         <div className="flex items-center gap-1">
-                           <AlertCircle className="h-3 w-3" />
-                           <span>Hata: <strong>{juniorCasesState.stats.errors}</strong></span>
+              </div>
                          </div>
                        )}
+          {liveCodingCasesState.error && (
+            <div className="mt-6 p-4 rounded-2xl border border-red-300/50 bg-gradient-to-br from-red-50 to-rose-50 dark:from-red-950/40 dark:to-rose-950/40 dark:border-red-800/50 backdrop-blur-sm shadow-lg">
+              <div className="flex items-start gap-3 text-red-700 dark:text-red-300">
+                <div className="p-2 rounded-lg bg-red-500/20">
+                  <AlertCircle className="h-5 w-5 flex-shrink-0" />
+                </div>
+                <div className="text-sm font-semibold">{liveCodingCasesState.error}</div>
+              </div>
                      </div>
                    )}
+
+          {/* Delete Success/Error Messages */}
+          {deleteLiveCodingCasesState.success && (
+            <div className="mt-6 p-4 rounded-2xl border border-green-300/50 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/40 dark:to-emerald-950/40 dark:border-green-800/50 backdrop-blur-sm shadow-lg">
+              <div className="flex items-start gap-3 text-green-700 dark:text-green-300">
+                <div className="p-2 rounded-lg bg-green-500/20">
+                  <CheckCircle2 className="h-5 w-5 flex-shrink-0" />
+                </div>
+                <div className="flex-1">
+                  <div className="font-semibold text-base">{deleteLiveCodingCasesState.success}</div>
                  </div>
                </div>
              </div>
            )}
-           {juniorCasesState.error && (
+          {deleteLiveCodingCasesState.error && (
              <div className="mt-6 p-4 rounded-2xl border border-red-300/50 bg-gradient-to-br from-red-50 to-rose-50 dark:from-red-950/40 dark:to-rose-950/40 dark:border-red-800/50 backdrop-blur-sm shadow-lg">
                <div className="flex items-start gap-3 text-red-700 dark:text-red-300">
                  <div className="p-2 rounded-lg bg-red-500/20">
                    <AlertCircle className="h-5 w-5 flex-shrink-0" />
                  </div>
-                 <div className="text-sm font-semibold">{juniorCasesState.error}</div>
+                <div className="text-sm font-semibold">{deleteLiveCodingCasesState.error}</div>
                </div>
              </div>
            )}
+        </div>
+      </div>
+
+      {/* Bugfix Cases Management Section */}
+      <div className="relative rounded-3xl border border-red-200/50 bg-gradient-to-br from-white via-red-50/30 to-rose-50/30 shadow-2xl dark:border-red-800/50 dark:from-gray-950 dark:via-red-950/20 dark:to-rose-950/20 backdrop-blur-sm p-6 md:p-8 overflow-hidden">
+        {/* Animated background pattern */}
+        <div className="absolute inset-0 opacity-5 dark:opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundSize: '60px 60px'
+          }}></div>
+        </div>
+        
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-2 rounded-xl bg-gradient-to-br from-red-500 to-rose-600 shadow-lg">
+              <Bug className="h-6 w-6 text-white" />
+            </div>
+            <div>
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-red-600 via-rose-600 to-pink-600 bg-clip-text text-transparent">
+                🐛 Bugfix Case Yönetimi
+              </h2>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                12 programlama dili için 36 bugfix case yönetimi
+              </p>
+            </div>
+          </div>
+          <p className="text-gray-600 dark:text-gray-400 mb-8 text-sm">
+            12 farklı programlama dili (C#, Java, Python, PHP, JavaScript, TypeScript, Go, Rust, C++, Kotlin, Swift, Ruby) için her birinde 3&apos;er bugfix case&apos;i veritabanına ekler. Toplam 36 bugfix case oluşturulur.
+          </p>
+          
+          <div className="max-w-md flex gap-4">
+            <Button
+              onClick={handleInsertBugfixCases}
+              disabled={bugfixCasesState.loading || deleteBugfixCasesState.loading}
+              size="lg"
+              className="flex-1 bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-700 hover:to-rose-800 text-white font-medium"
+            >
+              {bugfixCasesState.loading ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  Case&apos;ler Ekleniyor...
+                </>
+              ) : (
+                <>
+                  <Bug className="mr-2 h-5 w-5" />
+                  Case&apos;leri Veritabanına Ekle
+                </>
+              )}
+            </Button>
+            <Button
+              onClick={handleDeleteBugfixCases}
+              disabled={deleteBugfixCasesState.loading || bugfixCasesState.loading}
+              size="lg"
+              variant="outline"
+              className="flex-1 border-red-300 dark:border-red-700 text-red-700 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30"
+            >
+              {deleteBugfixCasesState.loading ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  Siliniyor...
+                </>
+              ) : (
+                <>
+                  <Trash2 className="mr-2 h-5 w-5" />
+                  Case&apos;leri Kaldır
+                </>
+              )}
+            </Button>
+          </div>
+
+          {/* Success/Error Messages */}
+          {bugfixCasesState.success && (
+             <div className="mt-6 p-4 rounded-2xl border border-green-300/50 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/40 dark:to-emerald-950/40 dark:border-green-800/50 backdrop-blur-sm shadow-lg">
+               <div className="flex items-start gap-3 text-green-700 dark:text-green-300">
+                 <div className="p-2 rounded-lg bg-green-500/20">
+                   <CheckCircle2 className="h-5 w-5 flex-shrink-0" />
+                 </div>
+                 <div className="flex-1">
+                  <div className="font-semibold text-base">{bugfixCasesState.success}</div>
+                 </div>
+               </div>
+             </div>
+           )}
+          {bugfixCasesState.error && (
+             <div className="mt-6 p-4 rounded-2xl border border-red-300/50 bg-gradient-to-br from-red-50 to-rose-50 dark:from-red-950/40 dark:to-rose-950/40 dark:border-red-800/50 backdrop-blur-sm shadow-lg">
+               <div className="flex items-start gap-3 text-red-700 dark:text-red-300">
+                 <div className="p-2 rounded-lg bg-red-500/20">
+                   <AlertCircle className="h-5 w-5 flex-shrink-0" />
+                 </div>
+                <div className="text-sm font-semibold">{bugfixCasesState.error}</div>
+               </div>
+             </div>
+           )}
+
+          {/* Delete Success/Error Messages */}
+          {deleteBugfixCasesState.success && (
+            <div className="mt-6 p-4 rounded-2xl border border-green-300/50 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/40 dark:to-emerald-950/40 dark:border-green-800/50 backdrop-blur-sm shadow-lg">
+              <div className="flex items-start gap-3 text-green-700 dark:text-green-300">
+                <div className="p-2 rounded-lg bg-green-500/20">
+                  <CheckCircle2 className="h-5 w-5 flex-shrink-0" />
+                </div>
+                <div className="flex-1">
+                  <div className="font-semibold text-base">{deleteBugfixCasesState.success}</div>
+                </div>
+              </div>
+            </div>
+          )}
+          {deleteBugfixCasesState.error && (
+            <div className="mt-6 p-4 rounded-2xl border border-red-300/50 bg-gradient-to-br from-red-50 to-rose-50 dark:from-red-950/40 dark:to-rose-950/40 dark:border-red-800/50 backdrop-blur-sm shadow-lg">
+              <div className="flex items-start gap-3 text-red-700 dark:text-red-300">
+                <div className="p-2 rounded-lg bg-red-500/20">
+                  <AlertCircle className="h-5 w-5 flex-shrink-0" />
+                </div>
+                <div className="text-sm font-semibold">{deleteBugfixCasesState.error}</div>
+              </div>
+            </div>
+          )}
          </div>
        </div>
 
@@ -2468,7 +2902,7 @@ export default function AdminPage() {
               ) : (
                 <>
                   <Trash2 className="mr-2 h-5 w-5" />
-                  Tüm Test Verilerini Temizle
+                  Admin Test Verilerini Temizle
                 </>
               )}
             </Button>

@@ -9,6 +9,11 @@ export interface ProgrammingLanguage {
   popularity: number;
 }
 
+export interface TestCase {
+  input?: string;
+  expectedOutput: string;
+}
+
 export interface LiveCodingTask {
   id: string;
   title: string;
@@ -22,6 +27,8 @@ export interface LiveCodingTask {
     content: string;
     language: LiveCodingLanguage;
   }>;
+  testCases?: TestCase[];
+  hints?: string[];
 }
 
 export interface LiveCodingConfig {

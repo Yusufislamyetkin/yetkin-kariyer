@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { put } from "@vercel/blob";
 import { auth } from "@/lib/auth";
+import { optimizeImage, createThumbnail } from "@/lib/image-optimization";
 
 const MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024; // 10MB
 const ALLOWED_MIME_TYPES = ["image/jpeg", "image/png", "image/webp", "image/jpg"];
@@ -44,19 +45,42 @@ export async function POST(request: Request) {
       );
     }
 
-    const timestamp = Date.now();
-    const fileExtension = file.name.split(".").pop() || "jpg";
-    const filePath = `posts/${session.user.id}/${timestamp}.${fileExtension}`;
+    // Convert file to buffer
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
 
-    const blob = await put(filePath, file, {
+    // Optimize image to max 1080p and convert to WebP
+    const optimized = await optimizeImage(buffer, "webp");
+    
+    // Create thumbnail
+    const thumbnail = await createThumbnail(buffer, "webp");
+
+    const timestamp = Date.now();
+    const filePath = `posts/${session.user.id}/${timestamp}.webp`;
+    const thumbnailPath = `posts/${session.user.id}/${timestamp}_thumb.webp`;
+
+    // Upload optimized image
+    const blob = await put(filePath, optimized.buffer, {
       access: "public",
       token: process.env.BLOB_READ_WRITE_TOKEN,
+      contentType: "image/webp",
+    });
+
+    // Upload thumbnail
+    const thumbnailBlob = await put(thumbnailPath, thumbnail.buffer, {
+      access: "public",
+      token: process.env.BLOB_READ_WRITE_TOKEN,
+      contentType: "image/webp",
     });
 
     return NextResponse.json({
       url: blob.url,
-      size: file.size,
-      mimeType: file.type,
+      thumbnailUrl: thumbnailBlob.url,
+      size: optimized.size,
+      originalSize: file.size,
+      width: optimized.width,
+      height: optimized.height,
+      mimeType: "image/webp",
     });
   } catch (error) {
     console.error("[POST_IMAGE_UPLOAD]", error);

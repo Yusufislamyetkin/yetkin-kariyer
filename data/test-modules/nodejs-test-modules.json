@@ -27,94 +27,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-01",
+          "id": "test-01",
           "title": "Ders 1: Node.js Nedir?",
           "description": "Node.js'in temel tanımı ve genel bakış",
-          "href": "/education/lessons/nodejs/module-01/lesson-01"
+          "href": "/education/tests/quiz/tests-nodejs/module-01/test-01"
         },
         {
-          "id": "lesson-02",
+          "id": "test-02",
           "title": "Ders 2: Node.js diğer backend teknolojilerinden farkı nedir?",
           "description": "Node.js'in .NET Core, Python, Java gibi teknolojilerden farkları",
-          "href": "/education/lessons/nodejs/module-01/lesson-02"
+          "href": "/education/tests/quiz/tests-nodejs/module-01/test-02"
         },
         {
-          "id": "lesson-03",
+          "id": "test-03",
           "title": "Ders 3: Node.js'in Tarihçesi ve Gelişimi",
           "description": "Node.js'in ortaya çıkışı ve versiyon geçmişi",
-          "href": "/education/lessons/nodejs/module-01/lesson-03"
+          "href": "/education/tests/quiz/tests-nodejs/module-01/test-03"
         },
         {
-          "id": "lesson-04",
+          "id": "test-04",
           "title": "Ders 4: V8 JavaScript Engine",
           "description": "V8 engine'in rolü ve çalışma prensipleri",
-          "href": "/education/lessons/nodejs/module-01/lesson-04"
+          "href": "/education/tests/quiz/tests-nodejs/module-01/test-04"
         },
         {
-          "id": "lesson-05",
+          "id": "test-05",
           "title": "Ders 5: Node.js'in Avantajları",
           "description": "Performans, ölçeklenebilirlik, JavaScript ekosistemi gibi avantajlar",
-          "href": "/education/lessons/nodejs/module-01/lesson-05"
+          "href": "/education/tests/quiz/tests-nodejs/module-01/test-05"
         },
         {
-          "id": "lesson-06",
+          "id": "test-06",
           "title": "Ders 6: Node.js Kullanım Alanları",
           "description": "Web API, mikroservisler, real-time uygulamalar, CLI araçları",
-          "href": "/education/lessons/nodejs/module-01/lesson-06"
+          "href": "/education/tests/quiz/tests-nodejs/module-01/test-06"
         },
         {
-          "id": "lesson-07",
+          "id": "test-07",
           "title": "Ders 7: Node.js Ekosistemi",
           "description": "npm paket yöneticisi, topluluk desteği ve ekosistem",
-          "href": "/education/lessons/nodejs/module-01/lesson-07"
+          "href": "/education/tests/quiz/tests-nodejs/module-01/test-07"
         },
         {
-          "id": "lesson-08",
+          "id": "test-08",
           "title": "Ders 8: Node.js Kurulumu",
           "description": "Node.js ve npm kurulumu, versiyon yönetimi",
-          "href": "/education/lessons/nodejs/module-01/lesson-08"
+          "href": "/education/tests/quiz/tests-nodejs/module-01/test-08"
         },
         {
-          "id": "lesson-09",
+          "id": "test-09",
           "title": "Ders 9: İlk Node.js Uygulaması",
           "description": "Hello World uygulaması ve temel yapı",
-          "href": "/education/lessons/nodejs/module-01/lesson-09"
+          "href": "/education/tests/quiz/tests-nodejs/module-01/test-09"
         },
         {
-          "id": "lesson-10",
+          "id": "test-10",
           "title": "Ders 10: Node.js Modül Sistemi",
           "description": "CommonJS modül sistemi, require ve module.exports",
-          "href": "/education/lessons/nodejs/module-01/lesson-10"
+          "href": "/education/tests/quiz/tests-nodejs/module-01/test-10"
         },
         {
-          "id": "lesson-11",
+          "id": "test-11",
           "title": "Ders 11: Node.js vs Browser JavaScript",
           "description": "Node.js ve tarayıcı JavaScript'i arasındaki farklar",
-          "href": "/education/lessons/nodejs/module-01/lesson-11"
+          "href": "/education/tests/quiz/tests-nodejs/module-01/test-11"
         },
         {
-          "id": "lesson-12",
+          "id": "test-12",
           "title": "Ders 12: Node.js Performans Özellikleri",
           "description": "Yüksek performans ve ölçeklenebilirlik özellikleri",
-          "href": "/education/lessons/nodejs/module-01/lesson-12"
+          "href": "/education/tests/quiz/tests-nodejs/module-01/test-12"
         },
         {
-          "id": "lesson-13",
+          "id": "test-13",
           "title": "Ders 13: Node.js Güvenlik Özellikleri",
           "description": "Güvenlik mekanizmaları ve en iyi uygulamalar",
-          "href": "/education/lessons/nodejs/module-01/lesson-13"
+          "href": "/education/tests/quiz/tests-nodejs/module-01/test-13"
         },
         {
-          "id": "lesson-14",
+          "id": "test-14",
           "title": "Ders 14: Node.js'in Geleceği",
           "description": "Node.js roadmap ve gelecek planları",
-          "href": "/education/lessons/nodejs/module-01/lesson-14"
+          "href": "/education/tests/quiz/tests-nodejs/module-01/test-14"
         },
         {
-          "id": "lesson-15",
+          "id": "test-15",
           "title": "Ders 15: Modül Özeti ve Değerlendirme",
           "description": "Modül kapsamında öğrenilenlerin özeti ve değerlendirme",
-          "href": "/education/lessons/nodejs/module-01/lesson-15"
+          "href": "/education/tests/quiz/tests-nodejs/module-01/test-15"
         }
       ]
     },
@@ -131,94 +131,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-01",
+          "id": "test-01",
           "title": "Ders 1: ES6+ Özelliklerine Giriş",
           "description": "Arrow functions, destructuring, spread operator",
-          "href": "/education/lessons/nodejs/module-02/lesson-01"
+          "href": "/education/tests/quiz/tests-nodejs/module-02/test-01"
         },
         {
-          "id": "lesson-02",
+          "id": "test-02",
           "title": "Ders 2: Let, Const ve Block Scope",
           "description": "Değişken tanımlama ve scope kavramları",
-          "href": "/education/lessons/nodejs/module-02/lesson-02"
+          "href": "/education/tests/quiz/tests-nodejs/module-02/test-02"
         },
         {
-          "id": "lesson-03",
+          "id": "test-03",
           "title": "Ders 3: Template Literals",
           "description": "String template'leri ve kullanımı",
-          "href": "/education/lessons/nodejs/module-02/lesson-03"
+          "href": "/education/tests/quiz/tests-nodejs/module-02/test-03"
         },
         {
-          "id": "lesson-04",
+          "id": "test-04",
           "title": "Ders 4: Destructuring",
           "description": "Array ve object destructuring",
-          "href": "/education/lessons/nodejs/module-02/lesson-04"
+          "href": "/education/tests/quiz/tests-nodejs/module-02/test-04"
         },
         {
-          "id": "lesson-05",
+          "id": "test-05",
           "title": "Ders 5: Arrow Functions",
           "description": "Arrow function syntax ve this binding",
-          "href": "/education/lessons/nodejs/module-02/lesson-05"
+          "href": "/education/tests/quiz/tests-nodejs/module-02/test-05"
         },
         {
-          "id": "lesson-06",
+          "id": "test-06",
           "title": "Ders 6: Callback Functions",
           "description": "Callback pattern ve kullanımı",
-          "href": "/education/lessons/nodejs/module-02/lesson-06"
+          "href": "/education/tests/quiz/tests-nodejs/module-02/test-06"
         },
         {
-          "id": "lesson-07",
+          "id": "test-07",
           "title": "Ders 7: Callback Hell Problemi",
           "description": "Callback hell ve çözüm yolları",
-          "href": "/education/lessons/nodejs/module-02/lesson-07"
+          "href": "/education/tests/quiz/tests-nodejs/module-02/test-07"
         },
         {
-          "id": "lesson-08",
+          "id": "test-08",
           "title": "Ders 8: Promises",
           "description": "Promise yapısı ve kullanımı",
-          "href": "/education/lessons/nodejs/module-02/lesson-08"
+          "href": "/education/tests/quiz/tests-nodejs/module-02/test-08"
         },
         {
-          "id": "lesson-09",
+          "id": "test-09",
           "title": "Ders 9: Promise Chaining",
           "description": "Promise zincirleme ve hata yönetimi",
-          "href": "/education/lessons/nodejs/module-02/lesson-09"
+          "href": "/education/tests/quiz/tests-nodejs/module-02/test-09"
         },
         {
-          "id": "lesson-10",
+          "id": "test-10",
           "title": "Ders 10: Async/Await",
           "description": "Async/await syntax ve kullanımı",
-          "href": "/education/lessons/nodejs/module-02/lesson-10"
+          "href": "/education/tests/quiz/tests-nodejs/module-02/test-10"
         },
         {
-          "id": "lesson-11",
+          "id": "test-11",
           "title": "Ders 11: Error Handling",
           "description": "Try-catch ve hata yönetimi",
-          "href": "/education/lessons/nodejs/module-02/lesson-11"
+          "href": "/education/tests/quiz/tests-nodejs/module-02/test-11"
         },
         {
-          "id": "lesson-12",
+          "id": "test-12",
           "title": "Ders 12: Modules (ES6)",
           "description": "ES6 modül sistemi, import/export",
-          "href": "/education/lessons/nodejs/module-02/lesson-12"
+          "href": "/education/tests/quiz/tests-nodejs/module-02/test-12"
         },
         {
-          "id": "lesson-13",
+          "id": "test-13",
           "title": "Ders 13: Classes ve Inheritance",
           "description": "ES6 class syntax ve kalıtım",
-          "href": "/education/lessons/nodejs/module-02/lesson-13"
+          "href": "/education/tests/quiz/tests-nodejs/module-02/test-13"
         },
         {
-          "id": "lesson-14",
+          "id": "test-14",
           "title": "Ders 14: Generators ve Iterators",
           "description": "Generator functions ve iterator pattern",
-          "href": "/education/lessons/nodejs/module-02/lesson-14"
+          "href": "/education/tests/quiz/tests-nodejs/module-02/test-14"
         },
         {
-          "id": "lesson-15",
+          "id": "test-15",
           "title": "Ders 15: JavaScript Best Practices",
           "description": "Node.js için JavaScript en iyi uygulamaları",
-          "href": "/education/lessons/nodejs/module-02/lesson-15"
+          "href": "/education/tests/quiz/tests-nodejs/module-02/test-15"
         }
       ]
     },
@@ -235,94 +235,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-01",
+          "id": "test-01",
           "title": "Ders 1: Core Modules Genel Bakış",
           "description": "Node.js built-in modülleri ve kullanımı",
-          "href": "/education/lessons/nodejs/module-03/lesson-01"
+          "href": "/education/tests/quiz/tests-nodejs/module-03/test-01"
         },
         {
-          "id": "lesson-02",
+          "id": "test-02",
           "title": "Ders 2: File System (fs) Modülü",
           "description": "Dosya okuma, yazma ve yönetimi",
-          "href": "/education/lessons/nodejs/module-03/lesson-02"
+          "href": "/education/tests/quiz/tests-nodejs/module-03/test-02"
         },
         {
-          "id": "lesson-03",
+          "id": "test-03",
           "title": "Ders 3: Path Modülü",
           "description": "Dosya yolu işlemleri ve path manipulation",
-          "href": "/education/lessons/nodejs/module-03/lesson-03"
+          "href": "/education/tests/quiz/tests-nodejs/module-03/test-03"
         },
         {
-          "id": "lesson-04",
+          "id": "test-04",
           "title": "Ders 4: HTTP Modülü",
           "description": "HTTP server ve client oluşturma",
-          "href": "/education/lessons/nodejs/module-03/lesson-04"
+          "href": "/education/tests/quiz/tests-nodejs/module-03/test-04"
         },
         {
-          "id": "lesson-05",
+          "id": "test-05",
           "title": "Ders 5: HTTPS Modülü",
           "description": "HTTPS server oluşturma ve SSL/TLS",
-          "href": "/education/lessons/nodejs/module-03/lesson-05"
+          "href": "/education/tests/quiz/tests-nodejs/module-03/test-05"
         },
         {
-          "id": "lesson-06",
+          "id": "test-06",
           "title": "Ders 6: URL Modülü",
           "description": "URL parsing ve manipulation",
-          "href": "/education/lessons/nodejs/module-03/lesson-06"
+          "href": "/education/tests/quiz/tests-nodejs/module-03/test-06"
         },
         {
-          "id": "lesson-07",
+          "id": "test-07",
           "title": "Ders 7: QueryString Modülü",
           "description": "Query string parsing ve encoding",
-          "href": "/education/lessons/nodejs/module-03/lesson-07"
+          "href": "/education/tests/quiz/tests-nodejs/module-03/test-07"
         },
         {
-          "id": "lesson-08",
+          "id": "test-08",
           "title": "Ders 8: Events Modülü",
           "description": "EventEmitter ve event-driven programlama",
-          "href": "/education/lessons/nodejs/module-03/lesson-08"
+          "href": "/education/tests/quiz/tests-nodejs/module-03/test-08"
         },
         {
-          "id": "lesson-09",
+          "id": "test-09",
           "title": "Ders 9: Stream Modülü",
           "description": "Readable, Writable, Transform streams",
-          "href": "/education/lessons/nodejs/module-03/lesson-09"
+          "href": "/education/tests/quiz/tests-nodejs/module-03/test-09"
         },
         {
-          "id": "lesson-10",
+          "id": "test-10",
           "title": "Ders 10: Crypto Modülü",
           "description": "Şifreleme, hash ve güvenlik işlemleri",
-          "href": "/education/lessons/nodejs/module-03/lesson-10"
+          "href": "/education/tests/quiz/tests-nodejs/module-03/test-10"
         },
         {
-          "id": "lesson-11",
+          "id": "test-11",
           "title": "Ders 11: Buffer Modülü",
           "description": "Binary data işleme ve buffer operations",
-          "href": "/education/lessons/nodejs/module-03/lesson-11"
+          "href": "/education/tests/quiz/tests-nodejs/module-03/test-11"
         },
         {
-          "id": "lesson-12",
+          "id": "test-12",
           "title": "Ders 12: Process Modülü",
           "description": "Process bilgileri ve environment variables",
-          "href": "/education/lessons/nodejs/module-03/lesson-12"
+          "href": "/education/tests/quiz/tests-nodejs/module-03/test-12"
         },
         {
-          "id": "lesson-13",
+          "id": "test-13",
           "title": "Ders 13: OS Modülü",
           "description": "İşletim sistemi bilgileri ve sistem çağrıları",
-          "href": "/education/lessons/nodejs/module-03/lesson-13"
+          "href": "/education/tests/quiz/tests-nodejs/module-03/test-13"
         },
         {
-          "id": "lesson-14",
+          "id": "test-14",
           "title": "Ders 14: Util Modülü",
           "description": "Yardımcı fonksiyonlar ve utility methods",
-          "href": "/education/lessons/nodejs/module-03/lesson-14"
+          "href": "/education/tests/quiz/tests-nodejs/module-03/test-14"
         },
         {
-          "id": "lesson-15",
+          "id": "test-15",
           "title": "Ders 15: Core Modules Best Practices",
           "description": "Core modül kullanımında en iyi uygulamalar",
-          "href": "/education/lessons/nodejs/module-03/lesson-15"
+          "href": "/education/tests/quiz/tests-nodejs/module-03/test-15"
         }
       ]
     },
@@ -339,94 +339,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-01",
+          "id": "test-01",
           "title": "Ders 1: Event Loop Nedir?",
           "description": "Event loop kavramına giriş",
-          "href": "/education/lessons/nodejs/module-04/lesson-01"
+          "href": "/education/tests/quiz/tests-nodejs/module-04/test-01"
         },
         {
-          "id": "lesson-02",
+          "id": "test-02",
           "title": "Ders 2: Call Stack",
           "description": "Call stack yapısı ve çalışma prensipleri",
-          "href": "/education/lessons/nodejs/module-04/lesson-02"
+          "href": "/education/tests/quiz/tests-nodejs/module-04/test-02"
         },
         {
-          "id": "lesson-03",
+          "id": "test-03",
           "title": "Ders 3: Callback Queue",
           "description": "Callback queue ve event queue",
-          "href": "/education/lessons/nodejs/module-04/lesson-03"
+          "href": "/education/tests/quiz/tests-nodejs/module-04/test-03"
         },
         {
-          "id": "lesson-04",
+          "id": "test-04",
           "title": "Ders 4: Microtasks Queue",
           "description": "Promise callbacks ve microtasks",
-          "href": "/education/lessons/nodejs/module-04/lesson-04"
+          "href": "/education/tests/quiz/tests-nodejs/module-04/test-04"
         },
         {
-          "id": "lesson-05",
+          "id": "test-05",
           "title": "Ders 5: Timers (setTimeout, setInterval)",
           "description": "Timer fonksiyonları ve kullanımı",
-          "href": "/education/lessons/nodejs/module-04/lesson-05"
+          "href": "/education/tests/quiz/tests-nodejs/module-04/test-05"
         },
         {
-          "id": "lesson-06",
+          "id": "test-06",
           "title": "Ders 6: setImmediate ve process.nextTick",
           "description": "Immediate callbacks ve nextTick",
-          "href": "/education/lessons/nodejs/module-04/lesson-06"
+          "href": "/education/tests/quiz/tests-nodejs/module-04/test-06"
         },
         {
-          "id": "lesson-07",
+          "id": "test-07",
           "title": "Ders 7: Event Loop Fazları",
           "description": "Event loop fazları ve sıralama",
-          "href": "/education/lessons/nodejs/module-04/lesson-07"
+          "href": "/education/tests/quiz/tests-nodejs/module-04/test-07"
         },
         {
-          "id": "lesson-08",
+          "id": "test-08",
           "title": "Ders 8: Blocking vs Non-blocking",
           "description": "Bloklayan ve bloklamayan işlemler",
-          "href": "/education/lessons/nodejs/module-04/lesson-08"
+          "href": "/education/tests/quiz/tests-nodejs/module-04/test-08"
         },
         {
-          "id": "lesson-09",
+          "id": "test-09",
           "title": "Ders 9: I/O Operations",
           "description": "Asenkron I/O işlemleri",
-          "href": "/education/lessons/nodejs/module-04/lesson-09"
+          "href": "/education/tests/quiz/tests-nodejs/module-04/test-09"
         },
         {
-          "id": "lesson-10",
+          "id": "test-10",
           "title": "Ders 10: Concurrency Model",
           "description": "Node.js eşzamanlılık modeli",
-          "href": "/education/lessons/nodejs/module-04/lesson-10"
+          "href": "/education/tests/quiz/tests-nodejs/module-04/test-10"
         },
         {
-          "id": "lesson-11",
+          "id": "test-11",
           "title": "Ders 11: Worker Threads",
           "description": "Worker threads ve CPU-intensive tasks",
-          "href": "/education/lessons/nodejs/module-04/lesson-11"
+          "href": "/education/tests/quiz/tests-nodejs/module-04/test-11"
         },
         {
-          "id": "lesson-12",
+          "id": "test-12",
           "title": "Ders 12: Cluster Module",
           "description": "Multi-processing ve cluster yapısı",
-          "href": "/education/lessons/nodejs/module-04/lesson-12"
+          "href": "/education/tests/quiz/tests-nodejs/module-04/test-12"
         },
         {
-          "id": "lesson-13",
+          "id": "test-13",
           "title": "Ders 13: Event Loop Debugging",
           "description": "Event loop performans analizi ve debugging",
-          "href": "/education/lessons/nodejs/module-04/lesson-13"
+          "href": "/education/tests/quiz/tests-nodejs/module-04/test-13"
         },
         {
-          "id": "lesson-14",
+          "id": "test-14",
           "title": "Ders 14: Performance Optimization",
           "description": "Event loop optimizasyonu",
-          "href": "/education/lessons/nodejs/module-04/lesson-14"
+          "href": "/education/tests/quiz/tests-nodejs/module-04/test-14"
         },
         {
-          "id": "lesson-15",
+          "id": "test-15",
           "title": "Ders 15: Asenkron Programlama Best Practices",
           "description": "Asenkron kod yazma en iyi uygulamaları",
-          "href": "/education/lessons/nodejs/module-04/lesson-15"
+          "href": "/education/tests/quiz/tests-nodejs/module-04/test-15"
         }
       ]
     },
@@ -443,94 +443,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-01",
+          "id": "test-01",
           "title": "Ders 1: npm Nedir?",
           "description": "npm kavramına giriş ve temel kullanım",
-          "href": "/education/lessons/nodejs/module-05/lesson-01"
+          "href": "/education/tests/quiz/tests-nodejs/module-05/test-01"
         },
         {
-          "id": "lesson-02",
+          "id": "test-02",
           "title": "Ders 2: Package.json Yapısı",
           "description": "package.json dosyası ve alanları",
-          "href": "/education/lessons/nodejs/module-05/lesson-02"
+          "href": "/education/tests/quiz/tests-nodejs/module-05/test-02"
         },
         {
-          "id": "lesson-03",
+          "id": "test-03",
           "title": "Ders 3: Paket Kurulumu",
           "description": "npm install ve paket kurulumu",
-          "href": "/education/lessons/nodejs/module-05/lesson-03"
+          "href": "/education/tests/quiz/tests-nodejs/module-05/test-03"
         },
         {
-          "id": "lesson-04",
+          "id": "test-04",
           "title": "Ders 4: Dependency Types",
           "description": "dependencies, devDependencies, peerDependencies",
-          "href": "/education/lessons/nodejs/module-05/lesson-04"
+          "href": "/education/tests/quiz/tests-nodejs/module-05/test-04"
         },
         {
-          "id": "lesson-05",
+          "id": "test-05",
           "title": "Ders 5: Semantic Versioning",
           "description": "SemVer ve versiyon yönetimi",
-          "href": "/education/lessons/nodejs/module-05/lesson-05"
+          "href": "/education/tests/quiz/tests-nodejs/module-05/test-05"
         },
         {
-          "id": "lesson-06",
+          "id": "test-06",
           "title": "Ders 6: npm Scripts",
           "description": "npm run scripts ve automation",
-          "href": "/education/lessons/nodejs/module-05/lesson-06"
+          "href": "/education/tests/quiz/tests-nodejs/module-05/test-06"
         },
         {
-          "id": "lesson-07",
+          "id": "test-07",
           "title": "Ders 7: Package Lock File",
           "description": "package-lock.json ve dependency locking",
-          "href": "/education/lessons/nodejs/module-05/lesson-07"
+          "href": "/education/tests/quiz/tests-nodejs/module-05/test-07"
         },
         {
-          "id": "lesson-08",
+          "id": "test-08",
           "title": "Ders 8: Global vs Local Packages",
           "description": "Global ve local paket kurulumu",
-          "href": "/education/lessons/nodejs/module-05/lesson-08"
+          "href": "/education/tests/quiz/tests-nodejs/module-05/test-08"
         },
         {
-          "id": "lesson-09",
+          "id": "test-09",
           "title": "Ders 9: Paket Güncelleme",
           "description": "npm update ve paket güncelleme stratejileri",
-          "href": "/education/lessons/nodejs/module-05/lesson-09"
+          "href": "/education/tests/quiz/tests-nodejs/module-05/test-09"
         },
         {
-          "id": "lesson-10",
+          "id": "test-10",
           "title": "Ders 10: Paket Kaldırma",
           "description": "npm uninstall ve temizlik",
-          "href": "/education/lessons/nodejs/module-05/lesson-10"
+          "href": "/education/tests/quiz/tests-nodejs/module-05/test-10"
         },
         {
-          "id": "lesson-11",
+          "id": "test-11",
           "title": "Ders 11: npm Registry",
           "description": "npm registry ve paket arama",
-          "href": "/education/lessons/nodejs/module-05/lesson-11"
+          "href": "/education/tests/quiz/tests-nodejs/module-05/test-11"
         },
         {
-          "id": "lesson-12",
+          "id": "test-12",
           "title": "Ders 12: Private Packages",
           "description": "Private paket yönetimi ve npm organizations",
-          "href": "/education/lessons/nodejs/module-05/lesson-12"
+          "href": "/education/tests/quiz/tests-nodejs/module-05/test-12"
         },
         {
-          "id": "lesson-13",
+          "id": "test-13",
           "title": "Ders 13: Paket Yayınlama",
           "description": "npm publish ve paket yayınlama süreci",
-          "href": "/education/lessons/nodejs/module-05/lesson-13"
+          "href": "/education/tests/quiz/tests-nodejs/module-05/test-13"
         },
         {
-          "id": "lesson-14",
+          "id": "test-14",
           "title": "Ders 14: Alternative Package Managers",
           "description": "Yarn, pnpm gibi alternatif paket yöneticileri",
-          "href": "/education/lessons/nodejs/module-05/lesson-14"
+          "href": "/education/tests/quiz/tests-nodejs/module-05/test-14"
         },
         {
-          "id": "lesson-15",
+          "id": "test-15",
           "title": "Ders 15: npm Best Practices",
           "description": "Paket yönetimi en iyi uygulamaları",
-          "href": "/education/lessons/nodejs/module-05/lesson-15"
+          "href": "/education/tests/quiz/tests-nodejs/module-05/test-15"
         }
       ]
     },
@@ -547,94 +547,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-01",
+          "id": "test-01",
           "title": "Ders 1: Express.js Giriş",
           "description": "Express.js nedir ve neden kullanılır?",
-          "href": "/education/lessons/nodejs/module-06/lesson-01"
+          "href": "/education/tests/quiz/tests-nodejs/module-06/test-01"
         },
         {
-          "id": "lesson-02",
+          "id": "test-02",
           "title": "Ders 2: Express.js Kurulumu",
           "description": "Express.js projesi oluşturma",
-          "href": "/education/lessons/nodejs/module-06/lesson-02"
+          "href": "/education/tests/quiz/tests-nodejs/module-06/test-02"
         },
         {
-          "id": "lesson-03",
+          "id": "test-03",
           "title": "Ders 3: İlk Express Uygulaması",
           "description": "Hello World uygulaması",
-          "href": "/education/lessons/nodejs/module-06/lesson-03"
+          "href": "/education/tests/quiz/tests-nodejs/module-06/test-03"
         },
         {
-          "id": "lesson-04",
+          "id": "test-04",
           "title": "Ders 4: Routing Temelleri",
           "description": "Route tanımlama ve HTTP metodları",
-          "href": "/education/lessons/nodejs/module-06/lesson-04"
+          "href": "/education/tests/quiz/tests-nodejs/module-06/test-04"
         },
         {
-          "id": "lesson-05",
+          "id": "test-05",
           "title": "Ders 5: Route Parameters",
           "description": "Dynamic routes ve parametreler",
-          "href": "/education/lessons/nodejs/module-06/lesson-05"
+          "href": "/education/tests/quiz/tests-nodejs/module-06/test-05"
         },
         {
-          "id": "lesson-06",
+          "id": "test-06",
           "title": "Ders 6: Query Parameters",
           "description": "Query string işleme",
-          "href": "/education/lessons/nodejs/module-06/lesson-06"
+          "href": "/education/tests/quiz/tests-nodejs/module-06/test-06"
         },
         {
-          "id": "lesson-07",
+          "id": "test-07",
           "title": "Ders 7: Request ve Response Objects",
           "description": "req ve res objeleri",
-          "href": "/education/lessons/nodejs/module-06/lesson-07"
+          "href": "/education/tests/quiz/tests-nodejs/module-06/test-07"
         },
         {
-          "id": "lesson-08",
+          "id": "test-08",
           "title": "Ders 8: Middleware Kavramı",
           "description": "Middleware nedir ve nasıl çalışır?",
-          "href": "/education/lessons/nodejs/module-06/lesson-08"
+          "href": "/education/tests/quiz/tests-nodejs/module-06/test-08"
         },
         {
-          "id": "lesson-09",
+          "id": "test-09",
           "title": "Ders 9: Custom Middleware",
           "description": "Özel middleware yazma",
-          "href": "/education/lessons/nodejs/module-06/lesson-09"
+          "href": "/education/tests/quiz/tests-nodejs/module-06/test-09"
         },
         {
-          "id": "lesson-10",
+          "id": "test-10",
           "title": "Ders 10: Built-in Middleware",
           "description": "express.json, express.urlencoded, express.static",
-          "href": "/education/lessons/nodejs/module-06/lesson-10"
+          "href": "/education/tests/quiz/tests-nodejs/module-06/test-10"
         },
         {
-          "id": "lesson-11",
+          "id": "test-11",
           "title": "Ders 11: Third-party Middleware",
           "description": "CORS, helmet, morgan gibi middleware'ler",
-          "href": "/education/lessons/nodejs/module-06/lesson-11"
+          "href": "/education/tests/quiz/tests-nodejs/module-06/test-11"
         },
         {
-          "id": "lesson-12",
+          "id": "test-12",
           "title": "Ders 12: Error Handling Middleware",
           "description": "Hata yönetimi middleware'i",
-          "href": "/education/lessons/nodejs/module-06/lesson-12"
+          "href": "/education/tests/quiz/tests-nodejs/module-06/test-12"
         },
         {
-          "id": "lesson-13",
+          "id": "test-13",
           "title": "Ders 13: Router ve Route Organization",
           "description": "Express Router ve modüler route yapısı",
-          "href": "/education/lessons/nodejs/module-06/lesson-13"
+          "href": "/education/tests/quiz/tests-nodejs/module-06/test-13"
         },
         {
-          "id": "lesson-14",
+          "id": "test-14",
           "title": "Ders 14: Template Engines",
           "description": "EJS, Pug, Handlebars template engine'leri",
-          "href": "/education/lessons/nodejs/module-06/lesson-14"
+          "href": "/education/tests/quiz/tests-nodejs/module-06/test-14"
         },
         {
-          "id": "lesson-15",
+          "id": "test-15",
           "title": "Ders 15: Express.js Best Practices",
           "description": "Express.js geliştirme en iyi uygulamaları",
-          "href": "/education/lessons/nodejs/module-06/lesson-15"
+          "href": "/education/tests/quiz/tests-nodejs/module-06/test-15"
         }
       ]
     },
@@ -651,94 +651,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-01",
+          "id": "test-01",
           "title": "Ders 1: RESTful API Nedir?",
           "description": "REST prensipleri ve API tasarımı",
-          "href": "/education/lessons/nodejs/module-07/lesson-01"
+          "href": "/education/tests/quiz/tests-nodejs/module-07/test-01"
         },
         {
-          "id": "lesson-02",
+          "id": "test-02",
           "title": "Ders 2: RESTful API Tasarım Prensipleri",
           "description": "RESTful API tasarım kuralları",
-          "href": "/education/lessons/nodejs/module-07/lesson-02"
+          "href": "/education/tests/quiz/tests-nodejs/module-07/test-02"
         },
         {
-          "id": "lesson-03",
+          "id": "test-03",
           "title": "Ders 3: HTTP Methods ve Status Codes",
           "description": "HTTP metodları ve durum kodları",
-          "href": "/education/lessons/nodejs/module-07/lesson-03"
+          "href": "/education/tests/quiz/tests-nodejs/module-07/test-03"
         },
         {
-          "id": "lesson-04",
+          "id": "test-04",
           "title": "Ders 4: API Endpoint Tasarımı",
           "description": "Endpoint naming ve yapılandırma",
-          "href": "/education/lessons/nodejs/module-07/lesson-04"
+          "href": "/education/tests/quiz/tests-nodejs/module-07/test-04"
         },
         {
-          "id": "lesson-05",
+          "id": "test-05",
           "title": "Ders 5: GET Endpoints",
           "description": "Veri okuma endpoint'leri",
-          "href": "/education/lessons/nodejs/module-07/lesson-05"
+          "href": "/education/tests/quiz/tests-nodejs/module-07/test-05"
         },
         {
-          "id": "lesson-06",
+          "id": "test-06",
           "title": "Ders 6: POST Endpoints",
           "description": "Veri oluşturma endpoint'leri",
-          "href": "/education/lessons/nodejs/module-07/lesson-06"
+          "href": "/education/tests/quiz/tests-nodejs/module-07/test-06"
         },
         {
-          "id": "lesson-07",
+          "id": "test-07",
           "title": "Ders 7: PUT ve PATCH Endpoints",
           "description": "Veri güncelleme endpoint'leri",
-          "href": "/education/lessons/nodejs/module-07/lesson-07"
+          "href": "/education/tests/quiz/tests-nodejs/module-07/test-07"
         },
         {
-          "id": "lesson-08",
+          "id": "test-08",
           "title": "Ders 8: DELETE Endpoints",
           "description": "Veri silme endpoint'leri",
-          "href": "/education/lessons/nodejs/module-07/lesson-08"
+          "href": "/education/tests/quiz/tests-nodejs/module-07/test-08"
         },
         {
-          "id": "lesson-09",
+          "id": "test-09",
           "title": "Ders 9: Request Validation",
           "description": "express-validator ile validation",
-          "href": "/education/lessons/nodejs/module-07/lesson-09"
+          "href": "/education/tests/quiz/tests-nodejs/module-07/test-09"
         },
         {
-          "id": "lesson-10",
+          "id": "test-10",
           "title": "Ders 10: Error Handling",
           "description": "API hata yönetimi ve error responses",
-          "href": "/education/lessons/nodejs/module-07/lesson-10"
+          "href": "/education/tests/quiz/tests-nodejs/module-07/test-10"
         },
         {
-          "id": "lesson-11",
+          "id": "test-11",
           "title": "Ders 11: API Versioning",
           "description": "API versiyonlama stratejileri",
-          "href": "/education/lessons/nodejs/module-07/lesson-11"
+          "href": "/education/tests/quiz/tests-nodejs/module-07/test-11"
         },
         {
-          "id": "lesson-12",
+          "id": "test-12",
           "title": "Ders 12: API Documentation",
           "description": "Swagger/OpenAPI ile dokümantasyon",
-          "href": "/education/lessons/nodejs/module-07/lesson-12"
+          "href": "/education/tests/quiz/tests-nodejs/module-07/test-12"
         },
         {
-          "id": "lesson-13",
+          "id": "test-13",
           "title": "Ders 13: API Security",
           "description": "API güvenlik best practices",
-          "href": "/education/lessons/nodejs/module-07/lesson-13"
+          "href": "/education/tests/quiz/tests-nodejs/module-07/test-13"
         },
         {
-          "id": "lesson-14",
+          "id": "test-14",
           "title": "Ders 14: API Testing",
           "description": "API test stratejileri ve araçları",
-          "href": "/education/lessons/nodejs/module-07/lesson-14"
+          "href": "/education/tests/quiz/tests-nodejs/module-07/test-14"
         },
         {
-          "id": "lesson-15",
+          "id": "test-15",
           "title": "Ders 15: RESTful API Best Practices",
           "description": "RESTful API tasarım en iyi uygulamaları",
-          "href": "/education/lessons/nodejs/module-07/lesson-15"
+          "href": "/education/tests/quiz/tests-nodejs/module-07/test-15"
         }
       ]
     },
@@ -755,94 +755,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-01",
+          "id": "test-01",
           "title": "Ders 1: Veritabanı Seçimi",
           "description": "NoSQL vs SQL, veritabanı seçim kriterleri",
-          "href": "/education/lessons/nodejs/module-08/lesson-01"
+          "href": "/education/tests/quiz/tests-nodejs/module-08/test-01"
         },
         {
-          "id": "lesson-02",
+          "id": "test-02",
           "title": "Ders 2: MongoDB Giriş",
           "description": "MongoDB nedir ve nasıl çalışır?",
-          "href": "/education/lessons/nodejs/module-08/lesson-02"
+          "href": "/education/tests/quiz/tests-nodejs/module-08/test-02"
         },
         {
-          "id": "lesson-03",
+          "id": "test-03",
           "title": "Ders 3: MongoDB Kurulumu",
           "description": "MongoDB kurulumu ve bağlantı",
-          "href": "/education/lessons/nodejs/module-08/lesson-03"
+          "href": "/education/tests/quiz/tests-nodejs/module-08/test-03"
         },
         {
-          "id": "lesson-04",
+          "id": "test-04",
           "title": "Ders 4: Mongoose ORM",
           "description": "Mongoose nedir ve nasıl kullanılır?",
-          "href": "/education/lessons/nodejs/module-08/lesson-04"
+          "href": "/education/tests/quiz/tests-nodejs/module-08/test-04"
         },
         {
-          "id": "lesson-05",
+          "id": "test-05",
           "title": "Ders 5: Mongoose Schema ve Model",
           "description": "Schema tanımlama ve model oluşturma",
-          "href": "/education/lessons/nodejs/module-08/lesson-05"
+          "href": "/education/tests/quiz/tests-nodejs/module-08/test-05"
         },
         {
-          "id": "lesson-06",
+          "id": "test-06",
           "title": "Ders 6: CRUD Operations (MongoDB)",
           "description": "Create, Read, Update, Delete işlemleri",
-          "href": "/education/lessons/nodejs/module-08/lesson-06"
+          "href": "/education/tests/quiz/tests-nodejs/module-08/test-06"
         },
         {
-          "id": "lesson-07",
+          "id": "test-07",
           "title": "Ders 7: Mongoose Queries",
           "description": "Sorgu yazma ve filtreleme",
-          "href": "/education/lessons/nodejs/module-08/lesson-07"
+          "href": "/education/tests/quiz/tests-nodejs/module-08/test-07"
         },
         {
-          "id": "lesson-08",
+          "id": "test-08",
           "title": "Ders 8: Relationships (MongoDB)",
           "description": "Referanslar ve ilişkiler",
-          "href": "/education/lessons/nodejs/module-08/lesson-08"
+          "href": "/education/tests/quiz/tests-nodejs/module-08/test-08"
         },
         {
-          "id": "lesson-09",
+          "id": "test-09",
           "title": "Ders 9: PostgreSQL ile Çalışma",
           "description": "pg kütüphanesi ile PostgreSQL",
-          "href": "/education/lessons/nodejs/module-08/lesson-09"
+          "href": "/education/tests/quiz/tests-nodejs/module-08/test-09"
         },
         {
-          "id": "lesson-10",
+          "id": "test-10",
           "title": "Ders 10: MySQL ile Çalışma",
           "description": "mysql2 kütüphanesi ile MySQL",
-          "href": "/education/lessons/nodejs/module-08/lesson-10"
+          "href": "/education/tests/quiz/tests-nodejs/module-08/test-10"
         },
         {
-          "id": "lesson-11",
+          "id": "test-11",
           "title": "Ders 11: Prisma ORM",
           "description": "Prisma ORM kullanımı",
-          "href": "/education/lessons/nodejs/module-08/lesson-11"
+          "href": "/education/tests/quiz/tests-nodejs/module-08/test-11"
         },
         {
-          "id": "lesson-12",
+          "id": "test-12",
           "title": "Ders 12: Sequelize ORM",
           "description": "Sequelize ORM kullanımı",
-          "href": "/education/lessons/nodejs/module-08/lesson-12"
+          "href": "/education/tests/quiz/tests-nodejs/module-08/test-12"
         },
         {
-          "id": "lesson-13",
+          "id": "test-13",
           "title": "Ders 13: Database Migrations",
           "description": "Veritabanı migration'ları",
-          "href": "/education/lessons/nodejs/module-08/lesson-13"
+          "href": "/education/tests/quiz/tests-nodejs/module-08/test-13"
         },
         {
-          "id": "lesson-14",
+          "id": "test-14",
           "title": "Ders 14: Connection Pooling",
           "description": "Bağlantı havuzlama ve optimizasyon",
-          "href": "/education/lessons/nodejs/module-08/lesson-14"
+          "href": "/education/tests/quiz/tests-nodejs/module-08/test-14"
         },
         {
-          "id": "lesson-15",
+          "id": "test-15",
           "title": "Ders 15: Veritabanı Best Practices",
           "description": "Veritabanı işlemleri en iyi uygulamaları",
-          "href": "/education/lessons/nodejs/module-08/lesson-15"
+          "href": "/education/tests/quiz/tests-nodejs/module-08/test-15"
         }
       ]
     },
@@ -859,94 +859,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-01",
+          "id": "test-01",
           "title": "Ders 1: Authentication vs Authorization",
           "description": "Kimlik doğrulama ve yetkilendirme farkları",
-          "href": "/education/lessons/nodejs/module-09/lesson-01"
+          "href": "/education/tests/quiz/tests-nodejs/module-09/test-01"
         },
         {
-          "id": "lesson-02",
+          "id": "test-02",
           "title": "Ders 2: JWT (JSON Web Tokens)",
           "description": "JWT token yapısı ve kullanımı",
-          "href": "/education/lessons/nodejs/module-09/lesson-02"
+          "href": "/education/tests/quiz/tests-nodejs/module-09/test-02"
         },
         {
-          "id": "lesson-03",
+          "id": "test-03",
           "title": "Ders 3: JWT Implementation",
           "description": "jsonwebtoken ile JWT oluşturma ve doğrulama",
-          "href": "/education/lessons/nodejs/module-09/lesson-03"
+          "href": "/education/tests/quiz/tests-nodejs/module-09/test-03"
         },
         {
-          "id": "lesson-04",
+          "id": "test-04",
           "title": "Ders 4: Password Hashing",
           "description": "bcrypt ile şifre hashleme",
-          "href": "/education/lessons/nodejs/module-09/lesson-04"
+          "href": "/education/tests/quiz/tests-nodejs/module-09/test-04"
         },
         {
-          "id": "lesson-05",
+          "id": "test-05",
           "title": "Ders 5: User Registration",
           "description": "Kullanıcı kayıt işlemleri",
-          "href": "/education/lessons/nodejs/module-09/lesson-05"
+          "href": "/education/tests/quiz/tests-nodejs/module-09/test-05"
         },
         {
-          "id": "lesson-06",
+          "id": "test-06",
           "title": "Ders 6: User Login",
           "description": "Giriş işlemleri ve token üretme",
-          "href": "/education/lessons/nodejs/module-09/lesson-06"
+          "href": "/education/tests/quiz/tests-nodejs/module-09/test-06"
         },
         {
-          "id": "lesson-07",
+          "id": "test-07",
           "title": "Ders 7: JWT Middleware",
           "description": "Token doğrulama middleware'i",
-          "href": "/education/lessons/nodejs/module-09/lesson-07"
+          "href": "/education/tests/quiz/tests-nodejs/module-09/test-07"
         },
         {
-          "id": "lesson-08",
+          "id": "test-08",
           "title": "Ders 8: Role-based Authorization",
           "description": "Rol tabanlı yetkilendirme",
-          "href": "/education/lessons/nodejs/module-09/lesson-08"
+          "href": "/education/tests/quiz/tests-nodejs/module-09/test-08"
         },
         {
-          "id": "lesson-09",
+          "id": "test-09",
           "title": "Ders 9: Permission-based Authorization",
           "description": "İzin tabanlı yetkilendirme",
-          "href": "/education/lessons/nodejs/module-09/lesson-09"
+          "href": "/education/tests/quiz/tests-nodejs/module-09/test-09"
         },
         {
-          "id": "lesson-10",
+          "id": "test-10",
           "title": "Ders 10: Session Management",
           "description": "express-session ile session yönetimi",
-          "href": "/education/lessons/nodejs/module-09/lesson-10"
+          "href": "/education/tests/quiz/tests-nodejs/module-09/test-10"
         },
         {
-          "id": "lesson-11",
+          "id": "test-11",
           "title": "Ders 11: Passport.js",
           "description": "Passport.js authentication middleware",
-          "href": "/education/lessons/nodejs/module-09/lesson-11"
+          "href": "/education/tests/quiz/tests-nodejs/module-09/test-11"
         },
         {
-          "id": "lesson-12",
+          "id": "test-12",
           "title": "Ders 12: OAuth 2.0",
           "description": "OAuth 2.0 protokolü ve kullanımı",
-          "href": "/education/lessons/nodejs/module-09/lesson-12"
+          "href": "/education/tests/quiz/tests-nodejs/module-09/test-12"
         },
         {
-          "id": "lesson-13",
+          "id": "test-13",
           "title": "Ders 13: Social Login",
           "description": "Google, Facebook gibi sosyal girişler",
-          "href": "/education/lessons/nodejs/module-09/lesson-13"
+          "href": "/education/tests/quiz/tests-nodejs/module-09/test-13"
         },
         {
-          "id": "lesson-14",
+          "id": "test-14",
           "title": "Ders 14: Refresh Tokens",
           "description": "Token yenileme mekanizması",
-          "href": "/education/lessons/nodejs/module-09/lesson-14"
+          "href": "/education/tests/quiz/tests-nodejs/module-09/test-14"
         },
         {
-          "id": "lesson-15",
+          "id": "test-15",
           "title": "Ders 15: Security Best Practices",
           "description": "Authentication ve güvenlik en iyi uygulamaları",
-          "href": "/education/lessons/nodejs/module-09/lesson-15"
+          "href": "/education/tests/quiz/tests-nodejs/module-09/test-15"
         }
       ]
     },
@@ -963,94 +963,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-01",
+          "id": "test-01",
           "title": "Ders 1: WebSocket Nedir?",
           "description": "WebSocket protokolü ve kullanım alanları",
-          "href": "/education/lessons/nodejs/module-10/lesson-01"
+          "href": "/education/tests/quiz/tests-nodejs/module-10/test-01"
         },
         {
-          "id": "lesson-02",
+          "id": "test-02",
           "title": "Ders 2: WebSocket vs HTTP",
           "description": "WebSocket ve HTTP karşılaştırması",
-          "href": "/education/lessons/nodejs/module-10/lesson-02"
+          "href": "/education/tests/quiz/tests-nodejs/module-10/test-02"
         },
         {
-          "id": "lesson-03",
+          "id": "test-03",
           "title": "Ders 3: Socket.io Giriş",
           "description": "Socket.io nedir ve nasıl çalışır?",
-          "href": "/education/lessons/nodejs/module-10/lesson-03"
+          "href": "/education/tests/quiz/tests-nodejs/module-10/test-03"
         },
         {
-          "id": "lesson-04",
+          "id": "test-04",
           "title": "Ders 4: Socket.io Kurulumu",
           "description": "Socket.io server ve client kurulumu",
-          "href": "/education/lessons/nodejs/module-10/lesson-04"
+          "href": "/education/tests/quiz/tests-nodejs/module-10/test-04"
         },
         {
-          "id": "lesson-05",
+          "id": "test-05",
           "title": "Ders 5: Socket Events",
           "description": "Event emit ve listen",
-          "href": "/education/lessons/nodejs/module-10/lesson-05"
+          "href": "/education/tests/quiz/tests-nodejs/module-10/test-05"
         },
         {
-          "id": "lesson-06",
+          "id": "test-06",
           "title": "Ders 6: Rooms ve Namespaces",
           "description": "Socket.io rooms ve namespaces",
-          "href": "/education/lessons/nodejs/module-10/lesson-06"
+          "href": "/education/tests/quiz/tests-nodejs/module-10/test-06"
         },
         {
-          "id": "lesson-07",
+          "id": "test-07",
           "title": "Ders 7: Broadcasting",
           "description": "Mesaj yayınlama ve broadcasting",
-          "href": "/education/lessons/nodejs/module-10/lesson-07"
+          "href": "/education/tests/quiz/tests-nodejs/module-10/test-07"
         },
         {
-          "id": "lesson-08",
+          "id": "test-08",
           "title": "Ders 8: Chat Uygulaması",
           "description": "Basit chat uygulaması geliştirme",
-          "href": "/education/lessons/nodejs/module-10/lesson-08"
+          "href": "/education/tests/quiz/tests-nodejs/module-10/test-08"
         },
         {
-          "id": "lesson-09",
+          "id": "test-09",
           "title": "Ders 9: Real-time Notifications",
           "description": "Gerçek zamanlı bildirimler",
-          "href": "/education/lessons/nodejs/module-10/lesson-09"
+          "href": "/education/tests/quiz/tests-nodejs/module-10/test-09"
         },
         {
-          "id": "lesson-10",
+          "id": "test-10",
           "title": "Ders 10: Socket Authentication",
           "description": "WebSocket authentication ve authorization",
-          "href": "/education/lessons/nodejs/module-10/lesson-10"
+          "href": "/education/tests/quiz/tests-nodejs/module-10/test-10"
         },
         {
-          "id": "lesson-11",
+          "id": "test-11",
           "title": "Ders 11: Socket Middleware",
           "description": "Socket.io middleware kullanımı",
-          "href": "/education/lessons/nodejs/module-10/lesson-11"
+          "href": "/education/tests/quiz/tests-nodejs/module-10/test-11"
         },
         {
-          "id": "lesson-12",
+          "id": "test-12",
           "title": "Ders 12: Error Handling",
           "description": "WebSocket hata yönetimi",
-          "href": "/education/lessons/nodejs/module-10/lesson-12"
+          "href": "/education/tests/quiz/tests-nodejs/module-10/test-12"
         },
         {
-          "id": "lesson-13",
+          "id": "test-13",
           "title": "Ders 13: Scaling Socket.io",
           "description": "Socket.io ölçeklendirme stratejileri",
-          "href": "/education/lessons/nodejs/module-10/lesson-13"
+          "href": "/education/tests/quiz/tests-nodejs/module-10/test-13"
         },
         {
-          "id": "lesson-14",
+          "id": "test-14",
           "title": "Ders 14: Alternative WebSocket Libraries",
           "description": "ws, uws gibi alternatif kütüphaneler",
-          "href": "/education/lessons/nodejs/module-10/lesson-14"
+          "href": "/education/tests/quiz/tests-nodejs/module-10/test-14"
         },
         {
-          "id": "lesson-15",
+          "id": "test-15",
           "title": "Ders 15: Real-time Applications Best Practices",
           "description": "Real-time uygulama geliştirme en iyi uygulamaları",
-          "href": "/education/lessons/nodejs/module-10/lesson-15"
+          "href": "/education/tests/quiz/tests-nodejs/module-10/test-15"
         }
       ]
     },
@@ -1067,94 +1067,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-01",
+          "id": "test-01",
           "title": "Ders 1: Testing Temelleri",
           "description": "Test türleri ve test pyramid",
-          "href": "/education/lessons/nodejs/module-11/lesson-01"
+          "href": "/education/tests/quiz/tests-nodejs/module-11/test-01"
         },
         {
-          "id": "lesson-02",
+          "id": "test-02",
           "title": "Ders 2: Jest Framework",
           "description": "Jest test framework'üne giriş",
-          "href": "/education/lessons/nodejs/module-11/lesson-02"
+          "href": "/education/tests/quiz/tests-nodejs/module-11/test-02"
         },
         {
-          "id": "lesson-03",
+          "id": "test-03",
           "title": "Ders 3: Mocha ve Chai",
           "description": "Mocha test framework ve Chai assertions",
-          "href": "/education/lessons/nodejs/module-11/lesson-03"
+          "href": "/education/tests/quiz/tests-nodejs/module-11/test-03"
         },
         {
-          "id": "lesson-04",
+          "id": "test-04",
           "title": "Ders 4: Unit Test Yazma",
           "description": "İlk unit test örnekleri",
-          "href": "/education/lessons/nodejs/module-11/lesson-04"
+          "href": "/education/tests/quiz/tests-nodejs/module-11/test-04"
         },
         {
-          "id": "lesson-05",
+          "id": "test-05",
           "title": "Ders 5: Test Assertions",
           "description": "Assert metodları ve kullanımı",
-          "href": "/education/lessons/nodejs/module-11/lesson-05"
+          "href": "/education/tests/quiz/tests-nodejs/module-11/test-05"
         },
         {
-          "id": "lesson-06",
+          "id": "test-06",
           "title": "Ders 6: Test Organization",
           "description": "Test organizasyonu ve yapısı",
-          "href": "/education/lessons/nodejs/module-11/lesson-06"
+          "href": "/education/tests/quiz/tests-nodejs/module-11/test-06"
         },
         {
-          "id": "lesson-07",
+          "id": "test-07",
           "title": "Ders 7: Mocking",
           "description": "Jest mock ve sinon ile mocking",
-          "href": "/education/lessons/nodejs/module-11/lesson-07"
+          "href": "/education/tests/quiz/tests-nodejs/module-11/test-07"
         },
         {
-          "id": "lesson-08",
+          "id": "test-08",
           "title": "Ders 8: Async Testing",
           "description": "Asenkron kod testleri",
-          "href": "/education/lessons/nodejs/module-11/lesson-08"
+          "href": "/education/tests/quiz/tests-nodejs/module-11/test-08"
         },
         {
-          "id": "lesson-09",
+          "id": "test-09",
           "title": "Ders 9: Integration Testing",
           "description": "Entegrasyon testleri yazma",
-          "href": "/education/lessons/nodejs/module-11/lesson-09"
+          "href": "/education/tests/quiz/tests-nodejs/module-11/test-09"
         },
         {
-          "id": "lesson-10",
+          "id": "test-10",
           "title": "Ders 10: API Testing",
           "description": "supertest ile API testleri",
-          "href": "/education/lessons/nodejs/module-11/lesson-10"
+          "href": "/education/tests/quiz/tests-nodejs/module-11/test-10"
         },
         {
-          "id": "lesson-11",
+          "id": "test-11",
           "title": "Ders 11: Database Testing",
           "description": "Veritabanı test stratejileri",
-          "href": "/education/lessons/nodejs/module-11/lesson-11"
+          "href": "/education/tests/quiz/tests-nodejs/module-11/test-11"
         },
         {
-          "id": "lesson-12",
+          "id": "test-12",
           "title": "Ders 12: Test Coverage",
           "description": "Test kapsamı analizi ve coverage",
-          "href": "/education/lessons/nodejs/module-11/lesson-12"
+          "href": "/education/tests/quiz/tests-nodejs/module-11/test-12"
         },
         {
-          "id": "lesson-13",
+          "id": "test-13",
           "title": "Ders 13: Test-Driven Development (TDD)",
           "description": "TDD yaklaşımı ve uygulaması",
-          "href": "/education/lessons/nodejs/module-11/lesson-13"
+          "href": "/education/tests/quiz/tests-nodejs/module-11/test-13"
         },
         {
-          "id": "lesson-14",
+          "id": "test-14",
           "title": "Ders 14: E2E Testing",
           "description": "End-to-end test stratejileri",
-          "href": "/education/lessons/nodejs/module-11/lesson-14"
+          "href": "/education/tests/quiz/tests-nodejs/module-11/test-14"
         },
         {
-          "id": "lesson-15",
+          "id": "test-15",
           "title": "Ders 15: Testing Best Practices",
           "description": "Test yazma en iyi uygulamaları",
-          "href": "/education/lessons/nodejs/module-11/lesson-15"
+          "href": "/education/tests/quiz/tests-nodejs/module-11/test-15"
         }
       ]
     },
@@ -1171,94 +1171,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-01",
+          "id": "test-01",
           "title": "Ders 1: Error Handling Temelleri",
           "description": "Try-catch, error objeleri",
-          "href": "/education/lessons/nodejs/module-12/lesson-01"
+          "href": "/education/tests/quiz/tests-nodejs/module-12/test-01"
         },
         {
-          "id": "lesson-02",
+          "id": "test-02",
           "title": "Ders 2: Error Types",
           "description": "Error türleri ve kullanımı",
-          "href": "/education/lessons/nodejs/module-12/lesson-02"
+          "href": "/education/tests/quiz/tests-nodejs/module-12/test-02"
         },
         {
-          "id": "lesson-03",
+          "id": "test-03",
           "title": "Ders 3: Custom Error Classes",
           "description": "Özel hata sınıfları oluşturma",
-          "href": "/education/lessons/nodejs/module-12/lesson-03"
+          "href": "/education/tests/quiz/tests-nodejs/module-12/test-03"
         },
         {
-          "id": "lesson-04",
+          "id": "test-04",
           "title": "Ders 4: Error Handling Middleware",
           "description": "Express error handling middleware",
-          "href": "/education/lessons/nodejs/module-12/lesson-04"
+          "href": "/education/tests/quiz/tests-nodejs/module-12/test-04"
         },
         {
-          "id": "lesson-05",
+          "id": "test-05",
           "title": "Ders 5: Async Error Handling",
           "description": "Asenkron hata yönetimi",
-          "href": "/education/lessons/nodejs/module-12/lesson-05"
+          "href": "/education/tests/quiz/tests-nodejs/module-12/test-05"
         },
         {
-          "id": "lesson-06",
+          "id": "test-06",
           "title": "Ders 6: Global Error Handler",
           "description": "Global hata yakalama mekanizması",
-          "href": "/education/lessons/nodejs/module-12/lesson-06"
+          "href": "/education/tests/quiz/tests-nodejs/module-12/test-06"
         },
         {
-          "id": "lesson-07",
+          "id": "test-07",
           "title": "Ders 7: Logging Temelleri",
           "description": "Logging kavramı ve önemi",
-          "href": "/education/lessons/nodejs/module-12/lesson-07"
+          "href": "/education/tests/quiz/tests-nodejs/module-12/test-07"
         },
         {
-          "id": "lesson-08",
+          "id": "test-08",
           "title": "Ders 8: Winston Logger",
           "description": "Winston logging kütüphanesi",
-          "href": "/education/lessons/nodejs/module-12/lesson-08"
+          "href": "/education/tests/quiz/tests-nodejs/module-12/test-08"
         },
         {
-          "id": "lesson-09",
+          "id": "test-09",
           "title": "Ders 9: Pino Logger",
           "description": "Pino logging kütüphanesi",
-          "href": "/education/lessons/nodejs/module-12/lesson-09"
+          "href": "/education/tests/quiz/tests-nodejs/module-12/test-09"
         },
         {
-          "id": "lesson-10",
+          "id": "test-10",
           "title": "Ders 10: Log Levels",
           "description": "Log seviyeleri ve kullanımı",
-          "href": "/education/lessons/nodejs/module-12/lesson-10"
+          "href": "/education/tests/quiz/tests-nodejs/module-12/test-10"
         },
         {
-          "id": "lesson-11",
+          "id": "test-11",
           "title": "Ders 11: Log Formatting",
           "description": "Log formatlama ve yapılandırma",
-          "href": "/education/lessons/nodejs/module-12/lesson-11"
+          "href": "/education/tests/quiz/tests-nodejs/module-12/test-11"
         },
         {
-          "id": "lesson-12",
+          "id": "test-12",
           "title": "Ders 12: Error Monitoring",
           "description": "Sentry, Rollbar gibi monitoring araçları",
-          "href": "/education/lessons/nodejs/module-12/lesson-12"
+          "href": "/education/tests/quiz/tests-nodejs/module-12/test-12"
         },
         {
-          "id": "lesson-13",
+          "id": "test-13",
           "title": "Ders 13: Debugging Techniques",
           "description": "Node.js debugging teknikleri",
-          "href": "/education/lessons/nodejs/module-12/lesson-13"
+          "href": "/education/tests/quiz/tests-nodejs/module-12/test-13"
         },
         {
-          "id": "lesson-14",
+          "id": "test-14",
           "title": "Ders 14: Production Error Handling",
           "description": "Production ortamı hata yönetimi",
-          "href": "/education/lessons/nodejs/module-12/lesson-14"
+          "href": "/education/tests/quiz/tests-nodejs/module-12/test-14"
         },
         {
-          "id": "lesson-15",
+          "id": "test-15",
           "title": "Ders 15: Error Handling Best Practices",
           "description": "Hata yönetimi ve logging en iyi uygulamaları",
-          "href": "/education/lessons/nodejs/module-12/lesson-15"
+          "href": "/education/tests/quiz/tests-nodejs/module-12/test-15"
         }
       ]
     },
@@ -1275,94 +1275,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-01",
+          "id": "test-01",
           "title": "Ders 1: Performance Temelleri",
           "description": "Performans ölçümü ve metrikler",
-          "href": "/education/lessons/nodejs/module-13/lesson-01"
+          "href": "/education/tests/quiz/tests-nodejs/module-13/test-01"
         },
         {
-          "id": "lesson-02",
+          "id": "test-02",
           "title": "Ders 2: Profiling Tools",
           "description": "Node.js profiling araçları",
-          "href": "/education/lessons/nodejs/module-13/lesson-02"
+          "href": "/education/tests/quiz/tests-nodejs/module-13/test-02"
         },
         {
-          "id": "lesson-03",
+          "id": "test-03",
           "title": "Ders 3: Memory Management",
           "description": "Bellek yönetimi ve optimizasyon",
-          "href": "/education/lessons/nodejs/module-13/lesson-03"
+          "href": "/education/tests/quiz/tests-nodejs/module-13/test-03"
         },
         {
-          "id": "lesson-04",
+          "id": "test-04",
           "title": "Ders 4: Caching Strategies",
           "description": "Önbellekleme stratejileri",
-          "href": "/education/lessons/nodejs/module-13/lesson-04"
+          "href": "/education/tests/quiz/tests-nodejs/module-13/test-04"
         },
         {
-          "id": "lesson-05",
+          "id": "test-05",
           "title": "Ders 5: In-Memory Caching",
           "description": "node-cache, memory-cache kullanımı",
-          "href": "/education/lessons/nodejs/module-13/lesson-05"
+          "href": "/education/tests/quiz/tests-nodejs/module-13/test-05"
         },
         {
-          "id": "lesson-06",
+          "id": "test-06",
           "title": "Ders 6: Redis Caching",
           "description": "Redis ile distributed caching",
-          "href": "/education/lessons/nodejs/module-13/lesson-06"
+          "href": "/education/tests/quiz/tests-nodejs/module-13/test-06"
         },
         {
-          "id": "lesson-07",
+          "id": "test-07",
           "title": "Ders 7: Database Query Optimization",
           "description": "Veritabanı sorgu optimizasyonu",
-          "href": "/education/lessons/nodejs/module-13/lesson-07"
+          "href": "/education/tests/quiz/tests-nodejs/module-13/test-07"
         },
         {
-          "id": "lesson-08",
+          "id": "test-08",
           "title": "Ders 8: Connection Pooling",
           "description": "Bağlantı havuzlama",
-          "href": "/education/lessons/nodejs/module-13/lesson-08"
+          "href": "/education/tests/quiz/tests-nodejs/module-13/test-08"
         },
         {
-          "id": "lesson-09",
+          "id": "test-09",
           "title": "Ders 9: Load Balancing",
           "description": "Yük dengeleme stratejileri",
-          "href": "/education/lessons/nodejs/module-13/lesson-09"
+          "href": "/education/tests/quiz/tests-nodejs/module-13/test-09"
         },
         {
-          "id": "lesson-10",
+          "id": "test-10",
           "title": "Ders 10: Clustering",
           "description": "Node.js cluster module",
-          "href": "/education/lessons/nodejs/module-13/lesson-10"
+          "href": "/education/tests/quiz/tests-nodejs/module-13/test-10"
         },
         {
-          "id": "lesson-11",
+          "id": "test-11",
           "title": "Ders 11: Compression",
           "description": "Response compression",
-          "href": "/education/lessons/nodejs/module-13/lesson-11"
+          "href": "/education/tests/quiz/tests-nodejs/module-13/test-11"
         },
         {
-          "id": "lesson-12",
+          "id": "test-12",
           "title": "Ders 12: CDN Kullanımı",
           "description": "Content Delivery Network",
-          "href": "/education/lessons/nodejs/module-13/lesson-12"
+          "href": "/education/tests/quiz/tests-nodejs/module-13/test-12"
         },
         {
-          "id": "lesson-13",
+          "id": "test-13",
           "title": "Ders 13: Rate Limiting",
           "description": "express-rate-limit ile rate limiting",
-          "href": "/education/lessons/nodejs/module-13/lesson-13"
+          "href": "/education/tests/quiz/tests-nodejs/module-13/test-13"
         },
         {
-          "id": "lesson-14",
+          "id": "test-14",
           "title": "Ders 14: Performance Monitoring",
           "description": "APM araçları ve monitoring",
-          "href": "/education/lessons/nodejs/module-13/lesson-14"
+          "href": "/education/tests/quiz/tests-nodejs/module-13/test-14"
         },
         {
-          "id": "lesson-15",
+          "id": "test-15",
           "title": "Ders 15: Performance Best Practices",
           "description": "Performans optimizasyon en iyi uygulamaları",
-          "href": "/education/lessons/nodejs/module-13/lesson-15"
+          "href": "/education/tests/quiz/tests-nodejs/module-13/test-15"
         }
       ]
     },
@@ -1379,94 +1379,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-01",
+          "id": "test-01",
           "title": "Ders 1: Deployment Stratejileri",
           "description": "Dağıtım modelleri ve seçenekleri",
-          "href": "/education/lessons/nodejs/module-14/lesson-01"
+          "href": "/education/tests/quiz/tests-nodejs/module-14/test-01"
         },
         {
-          "id": "lesson-02",
+          "id": "test-02",
           "title": "Ders 2: Environment Configuration",
           "description": "Ortam yapılandırması ve .env dosyaları",
-          "href": "/education/lessons/nodejs/module-14/lesson-02"
+          "href": "/education/tests/quiz/tests-nodejs/module-14/test-02"
         },
         {
-          "id": "lesson-03",
+          "id": "test-03",
           "title": "Ders 3: Docker Temelleri",
           "description": "Docker kavramları ve kullanımı",
-          "href": "/education/lessons/nodejs/module-14/lesson-03"
+          "href": "/education/tests/quiz/tests-nodejs/module-14/test-03"
         },
         {
-          "id": "lesson-04",
+          "id": "test-04",
           "title": "Ders 4: Dockerfile Oluşturma",
           "description": "Node.js için Dockerfile",
-          "href": "/education/lessons/nodejs/module-14/lesson-04"
+          "href": "/education/tests/quiz/tests-nodejs/module-14/test-04"
         },
         {
-          "id": "lesson-05",
+          "id": "test-05",
           "title": "Ders 5: Docker Compose",
           "description": "Multi-container uygulamalar",
-          "href": "/education/lessons/nodejs/module-14/lesson-05"
+          "href": "/education/tests/quiz/tests-nodejs/module-14/test-05"
         },
         {
-          "id": "lesson-06",
+          "id": "test-06",
           "title": "Ders 6: CI/CD Concepts",
           "description": "Sürekli entegrasyon ve dağıtım",
-          "href": "/education/lessons/nodejs/module-14/lesson-06"
+          "href": "/education/tests/quiz/tests-nodejs/module-14/test-06"
         },
         {
-          "id": "lesson-07",
+          "id": "test-07",
           "title": "Ders 7: GitHub Actions",
           "description": "GitHub Actions ile CI/CD",
-          "href": "/education/lessons/nodejs/module-14/lesson-07"
+          "href": "/education/tests/quiz/tests-nodejs/module-14/test-07"
         },
         {
-          "id": "lesson-08",
+          "id": "test-08",
           "title": "Ders 8: Heroku Deployment",
           "description": "Heroku'ya dağıtım",
-          "href": "/education/lessons/nodejs/module-14/lesson-08"
+          "href": "/education/tests/quiz/tests-nodejs/module-14/test-08"
         },
         {
-          "id": "lesson-09",
+          "id": "test-09",
           "title": "Ders 9: AWS Deployment",
           "description": "AWS Elastic Beanstalk ve EC2",
-          "href": "/education/lessons/nodejs/module-14/lesson-09"
+          "href": "/education/tests/quiz/tests-nodejs/module-14/test-09"
         },
         {
-          "id": "lesson-10",
+          "id": "test-10",
           "title": "Ders 10: Vercel Deployment",
           "description": "Vercel'e dağıtım",
-          "href": "/education/lessons/nodejs/module-14/lesson-10"
+          "href": "/education/tests/quiz/tests-nodejs/module-14/test-10"
         },
         {
-          "id": "lesson-11",
+          "id": "test-11",
           "title": "Ders 11: DigitalOcean Deployment",
           "description": "DigitalOcean'a dağıtım",
-          "href": "/education/lessons/nodejs/module-14/lesson-11"
+          "href": "/education/tests/quiz/tests-nodejs/module-14/test-11"
         },
         {
-          "id": "lesson-12",
+          "id": "test-12",
           "title": "Ders 12: Health Checks",
           "description": "Sağlık kontrolü ve monitoring",
-          "href": "/education/lessons/nodejs/module-14/lesson-12"
+          "href": "/education/tests/quiz/tests-nodejs/module-14/test-12"
         },
         {
-          "id": "lesson-13",
+          "id": "test-13",
           "title": "Ders 13: Logging ve Monitoring",
           "description": "Production loglama ve izleme",
-          "href": "/education/lessons/nodejs/module-14/lesson-13"
+          "href": "/education/tests/quiz/tests-nodejs/module-14/test-13"
         },
         {
-          "id": "lesson-14",
+          "id": "test-14",
           "title": "Ders 14: Scaling Strategies",
           "description": "Ölçeklendirme stratejileri",
-          "href": "/education/lessons/nodejs/module-14/lesson-14"
+          "href": "/education/tests/quiz/tests-nodejs/module-14/test-14"
         },
         {
-          "id": "lesson-15",
+          "id": "test-15",
           "title": "Ders 15: Production Best Practices",
           "description": "Production ortamı en iyi uygulamaları",
-          "href": "/education/lessons/nodejs/module-14/lesson-15"
+          "href": "/education/tests/quiz/tests-nodejs/module-14/test-15"
         }
       ]
     },
@@ -1483,94 +1483,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-01",
+          "id": "test-01",
           "title": "Ders 1: Proje Planlama",
           "description": "Proje gereksinimleri ve planlama",
-          "href": "/education/lessons/nodejs/module-15/lesson-01"
+          "href": "/education/tests/quiz/tests-nodejs/module-15/test-01"
         },
         {
-          "id": "lesson-02",
+          "id": "test-02",
           "title": "Ders 2: Mimari Tasarım",
           "description": "Sistem mimarisi tasarımı",
-          "href": "/education/lessons/nodejs/module-15/lesson-02"
+          "href": "/education/tests/quiz/tests-nodejs/module-15/test-02"
         },
         {
-          "id": "lesson-03",
+          "id": "test-03",
           "title": "Ders 3: Database Design",
           "description": "Veritabanı tasarımı ve şema",
-          "href": "/education/lessons/nodejs/module-15/lesson-03"
+          "href": "/education/tests/quiz/tests-nodejs/module-15/test-03"
         },
         {
-          "id": "lesson-04",
+          "id": "test-04",
           "title": "Ders 4: API Development",
           "description": "RESTful API geliştirme",
-          "href": "/education/lessons/nodejs/module-15/lesson-04"
+          "href": "/education/tests/quiz/tests-nodejs/module-15/test-04"
         },
         {
-          "id": "lesson-05",
+          "id": "test-05",
           "title": "Ders 5: Authentication Implementation",
           "description": "Kimlik doğrulama implementasyonu",
-          "href": "/education/lessons/nodejs/module-15/lesson-05"
+          "href": "/education/tests/quiz/tests-nodejs/module-15/test-05"
         },
         {
-          "id": "lesson-06",
+          "id": "test-06",
           "title": "Ders 6: Business Logic",
           "description": "İş mantığı geliştirme",
-          "href": "/education/lessons/nodejs/module-15/lesson-06"
+          "href": "/education/tests/quiz/tests-nodejs/module-15/test-06"
         },
         {
-          "id": "lesson-07",
+          "id": "test-07",
           "title": "Ders 7: Real-time Features",
           "description": "WebSocket ve real-time özellikler",
-          "href": "/education/lessons/nodejs/module-15/lesson-07"
+          "href": "/education/tests/quiz/tests-nodejs/module-15/test-07"
         },
         {
-          "id": "lesson-08",
+          "id": "test-08",
           "title": "Ders 8: Error Handling",
           "description": "Kapsamlı hata yönetimi",
-          "href": "/education/lessons/nodejs/module-15/lesson-08"
+          "href": "/education/tests/quiz/tests-nodejs/module-15/test-08"
         },
         {
-          "id": "lesson-09",
+          "id": "test-09",
           "title": "Ders 9: Testing Strategy",
           "description": "Test stratejisi ve implementasyonu",
-          "href": "/education/lessons/nodejs/module-15/lesson-09"
+          "href": "/education/tests/quiz/tests-nodejs/module-15/test-09"
         },
         {
-          "id": "lesson-10",
+          "id": "test-10",
           "title": "Ders 10: Performance Optimization",
           "description": "Performans optimizasyonu",
-          "href": "/education/lessons/nodejs/module-15/lesson-10"
+          "href": "/education/tests/quiz/tests-nodejs/module-15/test-10"
         },
         {
-          "id": "lesson-11",
+          "id": "test-11",
           "title": "Ders 11: Security Hardening",
           "description": "Güvenlik sertleştirme",
-          "href": "/education/lessons/nodejs/module-15/lesson-11"
+          "href": "/education/tests/quiz/tests-nodejs/module-15/test-11"
         },
         {
-          "id": "lesson-12",
+          "id": "test-12",
           "title": "Ders 12: Documentation",
           "description": "API dokümantasyonu ve kullanım kılavuzu",
-          "href": "/education/lessons/nodejs/module-15/lesson-12"
+          "href": "/education/tests/quiz/tests-nodejs/module-15/test-12"
         },
         {
-          "id": "lesson-13",
+          "id": "test-13",
           "title": "Ders 13: Deployment Preparation",
           "description": "Dağıtım hazırlığı ve yapılandırma",
-          "href": "/education/lessons/nodejs/module-15/lesson-13"
+          "href": "/education/tests/quiz/tests-nodejs/module-15/test-13"
         },
         {
-          "id": "lesson-14",
+          "id": "test-14",
           "title": "Ders 14: CI/CD Setup",
           "description": "Sürekli entegrasyon ve dağıtım kurulumu",
-          "href": "/education/lessons/nodejs/module-15/lesson-14"
+          "href": "/education/tests/quiz/tests-nodejs/module-15/test-14"
         },
         {
-          "id": "lesson-15",
+          "id": "test-15",
           "title": "Ders 15: Project Review and Presentation",
           "description": "Proje incelemesi ve sunumu",
-          "href": "/education/lessons/nodejs/module-15/lesson-15"
+          "href": "/education/tests/quiz/tests-nodejs/module-15/test-15"
         }
       ]
     }

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
-import { Clock, CheckCircle, ChevronLeft, ChevronRight, AlertCircle } from "lucide-react";
+import { Clock, CheckCircle, ChevronLeft, ChevronRight, AlertCircle, X } from "lucide-react";
 
 interface Question {
   id: string;
@@ -31,6 +31,7 @@ export default function QuizPage() {
   const [timeLeft, setTimeLeft] = useState(600); // 10 minutes default
   const [startTime, setStartTime] = useState<number | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   useEffect(() => {
     if (params.id) {
@@ -94,6 +95,7 @@ export default function QuizPage() {
   const handleSubmit = async () => {
     if (submitting) return;
     setSubmitting(true);
+    setSubmitError(null);
 
     try {
       // Süreyi hesapla
@@ -106,25 +108,43 @@ export default function QuizPage() {
       });
 
       const data = await response.json();
-      if (response.ok) {
-        if (typeof window !== "undefined") {
-          sessionStorage.setItem(
-            "latest-achievement",
-            JSON.stringify({
-              attemptId: data.quizAttempt.id,
-              source: "quiz",
-              badgeResults: data.badgeResults,
-              goalResults: data.goalResults,
-              score: data.score,
-              quizTitle: quiz?.title ?? "",
-              timestamp: Date.now(),
-            })
-          );
-        }
-        router.push(`/education/results/${data.quizAttempt.id}`);
+      
+      if (!response.ok) {
+        const errorMessage = data.error || data.message || "Test gönderilirken bir hata oluştu";
+        console.error("Error submitting quiz:", errorMessage, data);
+        setSubmitError(errorMessage);
+        return;
       }
+
+      if (!data.quizAttempt || !data.quizAttempt.id) {
+        const errorMessage = "Test sonucu alınamadı. Lütfen tekrar deneyin.";
+        console.error("Error: quizAttempt or quizAttempt.id is missing", data);
+        setSubmitError(errorMessage);
+        return;
+      }
+
+      if (typeof window !== "undefined") {
+        sessionStorage.setItem(
+          "latest-achievement",
+          JSON.stringify({
+            attemptId: data.quizAttempt.id,
+            source: "quiz",
+            badgeResults: data.badgeResults,
+            goalResults: data.goalResults,
+            score: data.score,
+            quizTitle: quiz?.title ?? "",
+            timestamp: Date.now(),
+          })
+        );
+      }
+      
+      router.push(`/education/results/${data.quizAttempt.id}`);
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : "Test gönderilirken beklenmeyen bir hata oluştu";
       console.error("Error submitting quiz:", error);
+      setSubmitError(errorMessage);
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -267,9 +287,25 @@ export default function QuizPage() {
       <Card variant="elevated">
         <CardContent className="p-4 sm:p-6">
           <div className="flex flex-col gap-4">
+            {/* Error Message */}
+            {submitError && (
+              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-3 flex items-start gap-3">
+                <AlertCircle className="h-5 w-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-red-800 dark:text-red-300">Hata</p>
+                  <p className="text-sm text-red-700 dark:text-red-400">{submitError}</p>
+                </div>
+                <button
+                  onClick={() => setSubmitError(null)}
+                  className="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+            )}
             {/* Page Numbers - Scrollable on mobile */}
             <div className="w-full overflow-x-auto -mx-2 px-2">
-              <div className="flex items-center gap-1.5 sm:gap-2 text-sm text-gray-600 dark:text-gray-400 min-w-max">
+              <div className="flex items-center justify-between gap-1.5 sm:gap-2 text-sm text-gray-600 dark:text-gray-400 w-full">
                 {answers.map((answer, index) => (
                   <div
                     key={index}
@@ -304,7 +340,7 @@ export default function QuizPage() {
               {currentQuestion === quiz.questions.length - 1 ? (
                 <Button
                   onClick={handleSubmit}
-                  disabled={submitting || answeredCount < quiz.questions.length}
+                  disabled={submitting}
                   variant="gradient"
                   size="lg"
                   className="w-full sm:w-auto flex-shrink-0"

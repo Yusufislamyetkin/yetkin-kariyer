@@ -20,6 +20,7 @@ type ComposerProps = {
   fileInputRef: React.RefObject<HTMLInputElement>;
   accept?: string;
   placeholder?: string;
+  renderExtraButtons?: () => React.ReactNode;
 };
 
 export function Composer({
@@ -37,6 +38,7 @@ export function Composer({
   fileInputRef,
   accept = "image/*,video/*,audio/*,.pdf,.zip,.doc,.docx",
   placeholder = "Mesajınızı yazın...",
+  renderExtraButtons,
 }: ComposerProps) {
   const handleFileInput = (event: ChangeEvent<HTMLInputElement>) => {
     const list = event.target.files;
@@ -125,6 +127,7 @@ export function Composer({
           >
             <Send className="h-5 w-5" />
           </Button>
+          {renderExtraButtons && renderExtraButtons()}
         </div>
       </div>
     </form>

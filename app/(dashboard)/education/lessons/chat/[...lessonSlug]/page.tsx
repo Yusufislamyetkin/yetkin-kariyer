@@ -1,10 +1,7 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ChevronLeft, BookOpen, Loader2 } from "lucide-react";
 import { db } from "@/lib/db";
 import { normalizeCourseContent } from "@/lib/education/courseContent";
-import { Card, CardContent } from "@/app/components/ui/Card";
-import { LessonChat } from "../../_components/LessonChat";
+import { LessonChatWrapper } from "./LessonChatWrapper";
 
 function ensureString(value: unknown): string | undefined {
   if (typeof value !== "string") {
@@ -170,42 +167,15 @@ export default async function LessonChatPage({
   const moduleTitle = typeof module.title === "string" ? (module.title as string) : "Modül";
 
   return (
-    <div className="flex flex-col h-screen">
-      {/* Header */}
-      <div className="border-b border-gray-200/50 dark:border-gray-800/50 bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 px-4 md:px-6 py-4 backdrop-blur-sm">
-        <div className="flex items-center gap-4">
-          <Link
-            href={backHref}
-            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg transition-all hover:from-blue-700 hover:to-purple-700 hover:shadow-lg hover:scale-105 active:scale-95"
-          >
-            <ChevronLeft className="h-4 w-4" />
-            Geri
-          </Link>
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-400 bg-white/60 dark:bg-gray-800/60 px-3 py-1 rounded-full inline-flex">
-              <BookOpen className="h-3 w-3" />
-              {course.title} / {moduleTitle}
-            </div>
-            <h1 className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent truncate mt-2">
-              {lesson.label}
-            </h1>
-            {lesson.description && (
-              <p className="text-sm text-gray-700 dark:text-gray-300 truncate mt-1">
-                {lesson.description}
-              </p>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* Chat Container */}
-      <div className="flex-1 overflow-hidden">
-        <LessonChat
-          lessonSlug={lessonHref}
-          lessonTitle={lesson.label}
-          lessonDescription={lesson.description}
-        />
-      </div>
+    <div className="-m-4 lg:-m-6 h-[calc(100vh-2rem)] lg:h-[calc(100vh-3rem)]">
+      <LessonChatWrapper
+        lessonSlug={lessonHref}
+        lessonTitle={lesson.label}
+        lessonDescription={lesson.description}
+        backHref={backHref}
+        courseTitle={course.title}
+        moduleTitle={moduleTitle}
+      />
     </div>
   );
 }

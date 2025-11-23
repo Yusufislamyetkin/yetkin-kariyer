@@ -64,13 +64,36 @@ export async function GET(request: Request) {
       });
     });
 
-    const usersWithStatus = users
-      .filter((user: { id: string; name: string | null; email: string; profileImage: string | null }) => {
+    // Remove duplicates by both id and email (more robust deduplication)
+    type UserType = { id: string; name: string | null; email: string; profileImage: string | null };
+    
+    // First pass: remove duplicates by ID
+    const idMap = new Map<string, UserType>();
+    users.forEach((user: UserType) => {
+      if (!idMap.has(user.id)) {
+        idMap.set(user.id, user);
+      }
+    });
+    
+    // Second pass: remove duplicates by email (safeguard - emails should be unique in DB)
+    const emailMap = new Map<string, UserType>();
+    const uniqueUsers: UserType[] = [];
+    idMap.forEach((user: UserType) => {
+      const normalizedEmail = user.email.toLowerCase().trim();
+      if (!emailMap.has(normalizedEmail)) {
+        emailMap.set(normalizedEmail, user);
+        uniqueUsers.push(user);
+      }
+      // If email already exists, skip this user (keep the first one encountered)
+    });
+
+    const usersWithStatus = uniqueUsers
+      .filter((user: UserType) => {
         const friendship = friendshipMap.get(user.id);
         // Exclude blocked users
         return !friendship || friendship.status !== "blocked";
       })
-      .map((user: { id: string; name: string | null; email: string; profileImage: string | null }) => {
+      .map((user: UserType) => {
         const friendship = friendshipMap.get(user.id);
         return {
           id: user.id,

@@ -236,11 +236,41 @@ export default function DirectChatPage() {
   const upsertMessage = useCallback(
     (incoming: ChatMessage, { scroll }: { scroll?: boolean } = {}) => {
       setMessages((prev) => {
-        const exists = prev.find((message) => message.id === incoming.id);
-        const updated = exists
-          ? prev.map((message) => (message.id === incoming.id ? { ...message, ...incoming } : message))
-          : [...prev, incoming];
+        // Daha güvenli duplicate kontrolü: ID'ye göre Map kullan
+        const messageMap = new Map<string, ChatMessage>();
+        
+        // Mevcut mesajları Map'e ekle
+        prev.forEach((msg) => {
+          messageMap.set(msg.id, msg);
+        });
+        
+        // Yeni mesajı ekle veya güncelle
+        const existing = messageMap.get(incoming.id);
+        if (existing) {
+          // Mevcut mesajı güncelle (yeni verilerle merge et)
+          console.log(`[DirectChat] [upsertMessage] Mesaj güncelleniyor (ID: ${incoming.id}):`, {
+            mevcut: existing.content?.substring(0, 50),
+            yeni: incoming.content?.substring(0, 50),
+            kaynak: incoming.userId === currentUserId ? "kendi mesajımız" : "başkasının mesajı"
+          });
+          messageMap.set(incoming.id, { ...existing, ...incoming });
+        } else {
+          // Yeni mesaj ekle
+          console.log(`[DirectChat] [upsertMessage] Yeni mesaj ekleniyor (ID: ${incoming.id}):`, {
+            içerik: incoming.content?.substring(0, 50),
+            gönderen: incoming.sender.name || incoming.userId,
+            mevcutMesajSayısı: prev.length,
+            kaynak: incoming.userId === currentUserId ? "kendi mesajımız" : "başkasının mesajı"
+          });
+          messageMap.set(incoming.id, incoming);
+        }
+        
+        // Map'ten array'e çevir ve sırala
+        const updated = Array.from(messageMap.values());
         updated.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+        
+        console.log(`[DirectChat] [upsertMessage] Mesaj listesi güncellendi: ${prev.length} -> ${updated.length} mesaj`);
+        
         return updated;
       });
 
@@ -518,12 +548,44 @@ export default function DirectChatPage() {
         const nextCursor = data.nextCursor ?? null;
 
         setMessages((prev) => {
-          const combined = prepend ? [...incoming, ...prev] : [...prev, ...incoming];
-          const unique = new Map<string, ChatMessage>();
-          combined.forEach((message) => {
-            unique.set(message.id, message);
+          // Map kullanarak duplicate kontrolü yap
+          const messageMap = new Map<string, ChatMessage>();
+          
+          // Önce mevcut mesajları ekle
+          prev.forEach((msg) => {
+            messageMap.set(msg.id, msg);
           });
-          return Array.from(unique.values()).sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+          
+          let duplicateCount = 0;
+          let newCount = 0;
+          
+          // Sonra yeni mesajları ekle (duplicate varsa güncelle)
+          incoming.forEach((msg) => {
+            const existing = messageMap.get(msg.id);
+            if (existing) {
+              // Mevcut mesajı yeni verilerle güncelle
+              duplicateCount++;
+              messageMap.set(msg.id, { ...existing, ...msg });
+            } else {
+              // Yeni mesaj ekle
+              newCount++;
+              messageMap.set(msg.id, msg);
+            }
+          });
+          
+          // Map'ten array'e çevir ve sırala
+          const result = Array.from(messageMap.values()).sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+          
+          console.log(`[DirectChat] [fetchMessages] Mesajlar yüklendi:`, {
+            mevcut: prev.length,
+            gelen: incoming.length,
+            yeni: newCount,
+            duplicate: duplicateCount,
+            toplam: result.length,
+            threadId
+          });
+          
+          return result;
         });
 
         setMessagesNextCursor(nextCursor);
@@ -704,6 +766,9 @@ export default function DirectChatPage() {
         // Mesajı hemen ekle
         upsertMessage(optimisticMessage, { scroll: true });
         
+        // Temp ID'yi de takip et (SignalR'dan gelebilir)
+        recentlySentMessageIdsRef.current.add(tempId);
+        
         // Input ve attachment'ları hemen temizle
         setMessageInput("");
         setAttachments([]);
@@ -739,29 +804,58 @@ export default function DirectChatPage() {
           readByUserIds: [currentUserId ?? ""].filter(Boolean),
         };
 
-        // Optimistic mesajı gerçek mesajla değiştir
         // Bu mesaj ID'sini takip et - SignalR'dan gelen aynı mesajı yok sayacağız
+        // ÖNCE ID'yi ekle, sonra mesajı güncelle (race condition'ı önlemek için)
         recentlySentMessageIdsRef.current.add(payload.id);
+        // Temp ID'yi kaldır
+        recentlySentMessageIdsRef.current.delete(tempId);
         // 5 saniye sonra listeden çıkar (SignalR gecikmeli gelebilir)
         setTimeout(() => {
           recentlySentMessageIdsRef.current.delete(payload.id);
         }, 5000);
 
         // Optimistic mesajı (tempId) kaldır ve gerçek mesajı ekle
-        // Duplicate kontrolü yap - eğer mesaj zaten varsa (SignalR'dan geldiyse), sadece güncelle
+        // upsertMessage kullanarak duplicate kontrolü yap
         setMessages((prev) => {
           // Önce tempId'li mesajı kaldır
           const filtered = prev.filter((msg) => msg.id !== tempId);
-          // Sonra gerçek mesajı kontrol et ve ekle
-          const exists = filtered.find((msg) => msg.id === payload.id);
-          if (!exists) {
-            // Mesaj yok, ekle
-            const updated = [...filtered, payload];
-            updated.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
-            return updated;
+          
+          console.log(`[DirectChat] [handleSendMessage] Optimistic mesaj kaldırılıyor:`, {
+            tempId,
+            optimisticMesajVar: prev.some(msg => msg.id === tempId),
+            kaldırılmışSonrası: filtered.length
+          });
+          
+          // Duplicate kontrolü: Map kullanarak daha güvenli
+          const messageMap = new Map<string, ChatMessage>();
+          filtered.forEach((msg) => {
+            messageMap.set(msg.id, msg);
+          });
+          
+          // Gerçek mesajı ekle veya güncelle
+          const existing = messageMap.get(payload.id);
+          if (existing) {
+            console.log(`[DirectChat] [handleSendMessage] Gerçek mesaj zaten var (duplicate), güncelleniyor:`, {
+              id: payload.id,
+              içerik: payload.content?.substring(0, 50)
+            });
+            messageMap.set(payload.id, { ...existing, ...payload });
+          } else {
+            console.log(`[DirectChat] [handleSendMessage] Gerçek mesaj eklendi:`, {
+              id: payload.id,
+              içerik: payload.content?.substring(0, 50),
+              öncekiSayı: filtered.length
+            });
+            messageMap.set(payload.id, payload);
           }
-          // Mesaj zaten varsa (SignalR'dan geldiyse), sadece güncelle
-          return filtered.map((msg) => (msg.id === payload.id ? { ...msg, ...payload } : msg));
+          
+          // Map'ten array'e çevir ve sırala
+          const updated = Array.from(messageMap.values());
+          updated.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+          
+          console.log(`[DirectChat] [handleSendMessage] Mesaj listesi güncellendi: ${prev.length} -> ${updated.length} mesaj`);
+          
+          return updated;
         });
 
         // Scroll yap
@@ -903,23 +997,42 @@ export default function DirectChatPage() {
       };
 
       if (incoming.groupId === selectedThreadId) {
+        console.log(`[DirectChat] [SignalR] Mesaj alındı:`, {
+          id: incoming.id,
+          içerik: incoming.content?.substring(0, 50),
+          gönderen: incoming.sender.name || incoming.userId,
+          kendiMesajımız: incoming.userId === currentUserId,
+          threadId: selectedThreadId,
+          recentlySent: recentlySentMessageIdsRef.current.has(incoming.id)
+        });
+        
         // Eğer bu bizim gönderdiğimiz bir mesajsa ve zaten server response'dan eklediysek, SignalR mesajını yok say
         if (incoming.userId === currentUserId && recentlySentMessageIdsRef.current.has(incoming.id)) {
-          // Bu mesajı zaten server response'dan ekledik, sadece güncelle (readByUserIds gibi alanlar güncellenmiş olabilir)
+          // Bu mesajı zaten server response'dan ekledik, duplicate eklemeyi önle
+          // Sadece güncelle (readByUserIds gibi alanlar güncellenmiş olabilir)
           setMessages((prev) => {
             const exists = prev.find((msg) => msg.id === incoming.id);
             if (exists) {
               // Sadece güncelle, yeni mesaj ekleme
               return prev.map((msg) => (msg.id === incoming.id ? { ...msg, ...incoming } : msg));
             }
-            // Eğer mesaj listede yoksa, ekleme (zaten server response'dan eklendi)
+            // Eğer mesaj listede yoksa, ekleme (zaten server response'dan eklendi veya eklenecek)
             return prev;
           });
-        } else {
-          // Başkasının mesajı veya henüz eklenmemiş bizim mesajımız
-          // upsertMessage kullan (içinde zaten duplicate kontrolü var)
-          upsertMessage(incoming, { scroll: true });
+          // SignalR mesajını yok say, çünkü zaten server response'dan eklendi
+          return;
         }
+        
+        // Temp ID kontrolü - eğer optimistic mesaj varsa, SignalR mesajını bekle
+        const isTempId = incoming.id.startsWith('temp-');
+        if (isTempId && recentlySentMessageIdsRef.current.has(incoming.id)) {
+          // Bu temp mesaj zaten optimistic olarak eklendi, SignalR mesajını yok say
+          return;
+        }
+        
+        // Başkasının mesajı veya henüz eklenmemiş bizim mesajımız
+        // upsertMessage kullan (içinde zaten duplicate kontrolü var)
+        upsertMessage(incoming, { scroll: true });
 
         if (incoming.userId !== currentUserId) {
           await markMessagesAsRead(selectedThreadId, [incoming.id]);

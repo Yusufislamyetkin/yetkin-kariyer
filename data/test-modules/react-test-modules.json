@@ -29,94 +29,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-01-01",
+          "id": "test-01-01",
           "title": "Ders 1: React Nedir?",
           "description": "React'in ne olduğunu, temel özelliklerini ve neden kullanıldığını keşfedin.",
-          "href": "/education/lessons/react/module-01/lesson-01-01"
+          "href": "/education/tests/quiz/tests-react/module-01/test-01-01"
         },
         {
-          "id": "lesson-01-02",
+          "id": "test-01-02",
           "title": "Ders 2: React ve Diğer Frontend Framework'leri",
           "description": "React'i Vue, Angular gibi diğer frontend framework'leriyle karşılaştırın ve avantajlarını anlayın.",
-          "href": "/education/lessons/react/module-01/lesson-01-02"
+          "href": "/education/tests/quiz/tests-react/module-01/test-01-02"
         },
         {
-          "id": "lesson-01-03",
-          "title": "Ders 3: Module 1: React Temelleri ve Kurulum Konusu 3",
-          "description": "Module 1: React Temelleri ve Kurulum modülünün bu dersinde, module 1: react temelleri ve kurulum ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-01/lesson-01-03"
+          "id": "test-01-03",
+          "title": "Create React App ve Vite ile Proje Oluşturma",
+          "description": "Create React App ve Vite gibi araçlarla React projesi oluşturmayı, npx komutunu ve proje yapılandırmasını öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-01/test-01-03"
         },
         {
-          "id": "lesson-01-04",
-          "title": "Ders 4: Module 1: React Temelleri ve Kurulum Konusu 4",
-          "description": "Module 1: React Temelleri ve Kurulum modülünün bu dersinde, module 1: react temelleri ve kurulum ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-01/lesson-01-04"
+          "id": "test-01-04",
+          "title": "Proje Yapısı ve Klasör Organizasyonu",
+          "description": "React projesinde src ve public klasörlerinin amacını, index.js ve App.js dosyalarının rollerini ve proje organizasyonunu öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-01/test-01-04"
         },
         {
-          "id": "lesson-01-05",
-          "title": "Ders 5: Module 1: React Temelleri ve Kurulum Konusu 5",
-          "description": "Module 1: React Temelleri ve Kurulum modülünün bu dersinde, module 1: react temelleri ve kurulum ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-01/lesson-01-05"
+          "id": "test-01-05",
+          "title": "Paket Yöneticileri: npm ve yarn",
+          "description": "npm ve yarn arasındaki farkları, dependencies ve devDependencies kavramlarını, package.json yapılandırmasını öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-01/test-01-05"
         },
         {
-          "id": "lesson-01-06",
-          "title": "Ders 6: Module 1: React Temelleri ve Kurulum Konusu 6",
-          "description": "Module 1: React Temelleri ve Kurulum modülünün bu dersinde, module 1: react temelleri ve kurulum ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-01/lesson-01-06"
+          "id": "test-01-06",
+          "title": "CSS ve Asset Yönetimi",
+          "description": "React projesinde CSS dosyalarını import etmeyi, asset'leri (resimler, fontlar) kullanmayı ve public klasörünün rolünü öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-01/test-01-06"
         },
         {
-          "id": "lesson-01-07",
-          "title": "Ders 7: Module 1: React Temelleri ve Kurulum Konusu 7",
-          "description": "Module 1: React Temelleri ve Kurulum modülünün bu dersinde, module 1: react temelleri ve kurulum ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-01/lesson-01-07"
+          "id": "test-01-07",
+          "title": "Git Repository Yönetimi",
+          "description": "React projesinde Git repository başlatmayı, .gitignore dosyasını yapılandırmayı ve versiyon kontrol süreçlerini öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-01/test-01-07"
         },
         {
-          "id": "lesson-01-08",
-          "title": "Ders 8: Module 1: React Temelleri ve Kurulum Konusu 8",
-          "description": "Module 1: React Temelleri ve Kurulum modülünün bu dersinde, module 1: react temelleri ve kurulum ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-01/lesson-01-08"
+          "id": "test-01-08",
+          "title": "Debugging Araçları ve Teknikleri",
+          "description": "React DevTools, browser DevTools, console.log ve debugger statement kullanarak React uygulamalarını debug etmeyi öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-01/test-01-08"
         },
         {
-          "id": "lesson-01-09",
-          "title": "Ders 9: Module 1: React Temelleri ve Kurulum Konusu 9",
-          "description": "Module 1: React Temelleri ve Kurulum modülünün bu dersinde, module 1: react temelleri ve kurulum ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-01/lesson-01-09"
+          "id": "test-01-09",
+          "title": "npm Scripts ve Otomasyon",
+          "description": "package.json'daki scripts bölümünü kullanmayı, npm run komutlarını ve development, build, test otomasyonlarını öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-01/test-01-09"
         },
         {
-          "id": "lesson-01-10",
-          "title": "Ders 10: Module 1: React Temelleri ve Kurulum Konusu 10",
-          "description": "Module 1: React Temelleri ve Kurulum modülünün bu dersinde, module 1: react temelleri ve kurulum ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-01/lesson-01-10"
+          "id": "test-01-10",
+          "title": "Paket Yönetimi ve Lock Dosyaları",
+          "description": "package-lock.json ve yarn.lock dosyalarının amacını, semantic versioning'i ve paket güncelleme stratejilerini öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-01/test-01-10"
         },
         {
-          "id": "lesson-01-11",
-          "title": "Ders 11: Module 1: React Temelleri ve Kurulum Konusu 11",
-          "description": "Module 1: React Temelleri ve Kurulum modülünün bu dersinde, module 1: react temelleri ve kurulum ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-01/lesson-01-11"
+          "id": "test-01-11",
+          "title": "Node.js Versiyon Yönetimi",
+          "description": ".nvmrc, .npmrc ve .editorconfig dosyalarının kullanımını ve proje yapılandırma dosyalarını öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-01/test-01-11"
         },
         {
-          "id": "lesson-01-12",
-          "title": "Ders 12: Module 1: React Temelleri ve Kurulum Konusu 12",
-          "description": "Module 1: React Temelleri ve Kurulum modülünün bu dersinde, module 1: react temelleri ve kurulum ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-01/lesson-01-12"
+          "id": "test-01-12",
+          "title": "TypeScript Yapılandırması",
+          "description": "tsconfig.json ve jsconfig.json dosyalarının amacını, TypeScript kullanımını ve path mapping'i öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-01/test-01-12"
         },
         {
-          "id": "lesson-01-13",
-          "title": "Ders 13: Module 1: React Temelleri ve Kurulum Konusu 13",
-          "description": "Module 1: React Temelleri ve Kurulum modülünün bu dersinde, module 1: react temelleri ve kurulum ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-01/lesson-01-13"
+          "id": "test-01-13",
+          "title": "Deployment ve Hosting Platformları",
+          "description": "Vercel, Netlify, GitHub Pages gibi platformlarda React uygulamalarını deploy etmeyi ve hosting seçeneklerini öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-01/test-01-13"
         },
         {
-          "id": "lesson-01-14",
-          "title": "Ders 14: Module 1: React Temelleri ve Kurulum Konusu 14",
-          "description": "Module 1: React Temelleri ve Kurulum modülünün bu dersinde, module 1: react temelleri ve kurulum ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-01/lesson-01-14"
+          "id": "test-01-14",
+          "title": "Deployment Stratejileri ve Rollback",
+          "description": "Rollback işlemlerini, health check'leri ve deployment süreçlerini yönetmeyi öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-01/test-01-14"
         },
         {
-          "id": "lesson-01-15",
-          "title": "Ders 15: Module 1: React Temelleri ve Kurulum Konusu 15",
-          "description": "Module 1: React Temelleri ve Kurulum modülünün bu dersinde, module 1: react temelleri ve kurulum ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-01/lesson-01-15"
+          "id": "test-01-15",
+          "title": "Modül Özeti ve Değerlendirme",
+          "description": "React temelleri ve kurulum modülünde öğrenilen kavramları pekiştirmek, eksikleri tespit etmek ve bir sonraki modüle hazırlanmak.",
+          "href": "/education/tests/quiz/tests-react/module-01/test-01-15"
         }
       ]
     },
@@ -132,94 +132,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-02-01",
+          "id": "test-02-01",
           "title": "Ders 1: JSX Syntax Temelleri",
           "description": "JSX'in ne olduğunu, nasıl kullanıldığını ve HTML'den farklarını öğrenin.",
-          "href": "/education/lessons/react/module-02/lesson-02-01"
+          "href": "/education/tests/quiz/tests-react/module-02/test-02-01"
         },
         {
-          "id": "lesson-02-02",
+          "id": "test-02-02",
           "title": "Ders 2: JSX Expressions ve Embedding",
           "description": "JSX içinde JavaScript expression'larını kullanmayı ve dinamik içerik oluşturmayı öğrenin.",
-          "href": "/education/lessons/react/module-02/lesson-02-02"
+          "href": "/education/tests/quiz/tests-react/module-02/test-02-02"
         },
         {
-          "id": "lesson-02-03",
-          "title": "Ders 3: Module 2: JSX ve Component Yapısı Konusu 3",
-          "description": "Module 2: JSX ve Component Yapısı modülünün bu dersinde, module 2: jsx ve component yapısı ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-02/lesson-02-03"
+          "id": "test-02-03",
+          "title": "React Component'leri ve Oluşturma",
+          "description": "React component kavramını, function component oluşturmayı, component adlandırma kurallarını ve component composition'ı öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-02/test-02-03"
         },
         {
-          "id": "lesson-02-04",
-          "title": "Ders 4: Module 2: JSX ve Component Yapısı Konusu 4",
-          "description": "Module 2: JSX ve Component Yapısı modülünün bu dersinde, module 2: jsx ve component yapısı ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-02/lesson-02-04"
+          "id": "test-02-04",
+          "title": "Component Yapısı ve Organizasyonu",
+          "description": "React component yapısını organize etmeyi, import sıralamasını, helper fonksiyonları ve constant değerleri tanımlamayı öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-02/test-02-04"
         },
         {
-          "id": "lesson-02-05",
-          "title": "Ders 5: Module 2: JSX ve Component Yapısı Konusu 5",
-          "description": "Module 2: JSX ve Component Yapısı modülünün bu dersinde, module 2: jsx ve component yapısı ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-02/lesson-02-05"
+          "id": "test-02-05",
+          "title": "JSX Attribute'ları ve Props",
+          "description": "JSX'te className, style, id, data-*, aria-* attribute'larını, boolean attribute'ları ve event handler prop'larını kullanmayı öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-02/test-02-05"
         },
         {
-          "id": "lesson-02-06",
-          "title": "Ders 6: Module 2: JSX ve Component Yapısı Konusu 6",
-          "description": "Module 2: JSX ve Component Yapısı modülünün bu dersinde, module 2: jsx ve component yapısı ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-02/lesson-02-06"
+          "id": "test-02-06",
+          "title": "Nested Component'ler ve Conditional Rendering",
+          "description": "Component içinde başka component'leri kullanmayı ve conditional rendering tekniklerini öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-02/test-02-06"
         },
         {
-          "id": "lesson-02-07",
-          "title": "Ders 7: Module 2: JSX ve Component Yapısı Konusu 7",
-          "description": "Module 2: JSX ve Component Yapısı modülünün bu dersinde, module 2: jsx ve component yapısı ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-02/lesson-02-07"
+          "id": "test-02-07",
+          "title": "Presentational ve Container Component Pattern'leri",
+          "description": "Presentational ve container component pattern'lerini, single responsibility principle'ı ve component organizasyonunu öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-02/test-02-07"
         },
         {
-          "id": "lesson-02-08",
-          "title": "Ders 8: Module 2: JSX ve Component Yapısı Konusu 8",
-          "description": "Module 2: JSX ve Component Yapısı modülünün bu dersinde, module 2: jsx ve component yapısı ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-02/lesson-02-08"
+          "id": "test-02-08",
+          "title": "Component Dosya Organizasyonu ve Naming Conventions",
+          "description": "Component dosyalarını organize etmeyi, PascalCase naming convention'ı ve index.js barrel export pattern'ini öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-02/test-02-08"
         },
         {
-          "id": "lesson-02-09",
-          "title": "Ders 9: Module 2: JSX ve Component Yapısı Konusu 9",
-          "description": "Module 2: JSX ve Component Yapısı modülünün bu dersinde, module 2: jsx ve component yapısı ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-02/lesson-02-09"
+          "id": "test-02-09",
+          "title": "Children Prop ve Component Composition",
+          "description": "children prop kavramını, component composition pattern'ini ve flexible component API'leri oluşturmayı öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-02/test-02-09"
         },
         {
-          "id": "lesson-02-10",
-          "title": "Ders 10: Module 2: JSX ve Component Yapısı Konusu 10",
-          "description": "Module 2: JSX ve Component Yapısı modülünün bu dersinde, module 2: jsx ve component yapısı ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-02/lesson-02-10"
+          "id": "test-02-10",
+          "title": "Component Export ve Import Stratejileri",
+          "description": "Default export vs named export farklarını, barrel export pattern'ini ve import stratejilerini öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-02/test-02-10"
         },
         {
-          "id": "lesson-02-11",
-          "title": "Ders 11: Module 2: JSX ve Component Yapısı Konusu 11",
-          "description": "Module 2: JSX ve Component Yapısı modülünün bu dersinde, module 2: jsx ve component yapısı ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-02/lesson-02-11"
+          "id": "test-02-11",
+          "title": "PropTypes ve TypeScript ile Tip Güvenliği",
+          "description": "PropTypes kütüphanesi ve TypeScript interface'leri ile prop tiplerini tanımlamayı ve default props kullanmayı öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-02/test-02-11"
         },
         {
-          "id": "lesson-02-12",
-          "title": "Ders 12: Module 2: JSX ve Component Yapısı Konusu 12",
-          "description": "Module 2: JSX ve Component Yapısı modülünün bu dersinde, module 2: jsx ve component yapısı ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-02/lesson-02-12"
+          "id": "test-02-12",
+          "title": "Component Lifecycle ve Render Süreçleri",
+          "description": "Component render sürecini, Virtual DOM ve diffing mekanizmasını, pure component kavramını öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-02/test-02-12"
         },
         {
-          "id": "lesson-02-13",
-          "title": "Ders 13: Module 2: JSX ve Component Yapısı Konusu 13",
-          "description": "Module 2: JSX ve Component Yapısı modülünün bu dersinde, module 2: jsx ve component yapısı ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-02/lesson-02-13"
+          "id": "test-02-13",
+          "title": "Component Reusability ve Best Practices",
+          "description": "Component reusability stratejilerini, prop drilling problemlerini ve çözümlerini öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-02/test-02-13"
         },
         {
-          "id": "lesson-02-14",
-          "title": "Ders 14: Module 2: JSX ve Component Yapısı Konusu 14",
-          "description": "Module 2: JSX ve Component Yapısı modülünün bu dersinde, module 2: jsx ve component yapısı ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-02/lesson-02-14"
+          "id": "test-02-14",
+          "title": "Render Props ve Higher-Order Components",
+          "description": "Render prop pattern'ini, higher-order component (HOC) pattern'ini ve compound component pattern'ini öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-02/test-02-14"
         },
         {
-          "id": "lesson-02-15",
-          "title": "Ders 15: Module 2: JSX ve Component Yapısı Konusu 15",
-          "description": "Module 2: JSX ve Component Yapısı modülünün bu dersinde, module 2: jsx ve component yapısı ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-02/lesson-02-15"
+          "id": "test-02-15",
+          "title": "Modül Özeti ve Değerlendirme",
+          "description": "JSX ve component yapısı modülünde öğrenilen kavramları pekiştirmek, eksikleri tespit etmek ve bir sonraki modüle hazırlanmak.",
+          "href": "/education/tests/quiz/tests-react/module-02/test-02-15"
         }
       ]
     },
@@ -235,94 +235,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-03-01",
+          "id": "test-03-01",
           "title": "Ders 1: Props Nedir?",
           "description": "Props kavramını, nasıl kullanıldığını ve component'ler arası veri aktarımını öğrenin.",
-          "href": "/education/lessons/react/module-03/lesson-03-01"
+          "href": "/education/tests/quiz/tests-react/module-03/test-03-01"
         },
         {
-          "id": "lesson-03-02",
+          "id": "test-03-02",
           "title": "Ders 2: Props Types ve Default Values",
           "description": "PropTypes kullanımını ve default prop değerlerini öğrenin.",
-          "href": "/education/lessons/react/module-03/lesson-03-02"
+          "href": "/education/tests/quiz/tests-react/module-03/test-03-02"
         },
         {
-          "id": "lesson-03-03",
-          "title": "Ders 3: Module 3: Props ve State Yönetimi Konusu 3",
-          "description": "Module 3: Props ve State Yönetimi modülünün bu dersinde, module 3: props ve state yönetimi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-03/lesson-03-03"
+          "id": "test-03-03",
+          "title": "State Nedir ve Nasıl Kullanılır?",
+          "description": "React state kavramını, useState hook'unu kullanmayı ve state'in component yaşam döngüsündeki rolünü öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-03/test-03-03"
         },
         {
-          "id": "lesson-03-04",
-          "title": "Ders 4: Module 3: Props ve State Yönetimi Konusu 4",
-          "description": "Module 3: Props ve State Yönetimi modülünün bu dersinde, module 3: props ve state yönetimi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-03/lesson-03-04"
+          "id": "test-03-04",
+          "title": "Props vs State: Farklar ve Kullanım Senaryoları",
+          "description": "Props ve state arasındaki farkları, ne zaman hangisini kullanacağınızı ve best practice'leri öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-03/test-03-04"
         },
         {
-          "id": "lesson-03-05",
-          "title": "Ders 5: Module 3: Props ve State Yönetimi Konusu 5",
-          "description": "Module 3: Props ve State Yönetimi modülünün bu dersinde, module 3: props ve state yönetimi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-03/lesson-03-05"
+          "id": "test-03-05",
+          "title": "State Güncellemeleri ve Immutability",
+          "description": "State'i doğru şekilde güncellemeyi, immutability kavramını ve setState'in asenkron yapısını öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-03/test-03-05"
         },
         {
-          "id": "lesson-03-06",
-          "title": "Ders 6: Module 3: Props ve State Yönetimi Konusu 6",
-          "description": "Module 3: Props ve State Yönetimi modülünün bu dersinde, module 3: props ve state yönetimi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-03/lesson-03-06"
+          "id": "test-03-06",
+          "title": "State Lifting: State'i Üst Component'e Taşıma",
+          "description": "State lifting kavramını, birden fazla component arasında state paylaşmayı ve component hiyerarşisinde state yönetimini öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-03/test-03-06"
         },
         {
-          "id": "lesson-03-07",
-          "title": "Ders 7: Module 3: Props ve State Yönetimi Konusu 7",
-          "description": "Module 3: Props ve State Yönetimi modülünün bu dersinde, module 3: props ve state yönetimi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-03/lesson-03-07"
+          "id": "test-03-07",
+          "title": "Controlled ve Uncontrolled Components",
+          "description": "Controlled ve uncontrolled component kavramlarını, ne zaman hangisini kullanacağınızı öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-03/test-03-07"
         },
         {
-          "id": "lesson-03-08",
-          "title": "Ders 8: Module 3: Props ve State Yönetimi Konusu 8",
-          "description": "Module 3: Props ve State Yönetimi modülünün bu dersinde, module 3: props ve state yönetimi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-03/lesson-03-08"
+          "id": "test-03-08",
+          "title": "Functional Updates ve Previous State",
+          "description": "Functional setState pattern'ini, previous state'e dayalı güncellemeleri ve callback form'unu öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-03/test-03-08"
         },
         {
-          "id": "lesson-03-09",
-          "title": "Ders 9: Module 3: Props ve State Yönetimi Konusu 9",
-          "description": "Module 3: Props ve State Yönetimi modülünün bu dersinde, module 3: props ve state yönetimi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-03/lesson-03-09"
+          "id": "test-03-09",
+          "title": "Object ve Array State Yönetimi",
+          "description": "Object ve array state'lerini güncellemeyi, spread operator kullanımını ve nested state yönetimini öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-03/test-03-09"
         },
         {
-          "id": "lesson-03-10",
-          "title": "Ders 10: Module 3: Props ve State Yönetimi Konusu 10",
-          "description": "Module 3: Props ve State Yönetimi modülünün bu dersinde, module 3: props ve state yönetimi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-03/lesson-03-10"
+          "id": "test-03-10",
+          "title": "Derived State ve Computed Values",
+          "description": "Derived state kavramını, computed values hesaplamayı ve state'ten türetilen değerleri yönetmeyi öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-03/test-03-10"
         },
         {
-          "id": "lesson-03-11",
-          "title": "Ders 11: Module 3: Props ve State Yönetimi Konusu 11",
-          "description": "Module 3: Props ve State Yönetimi modülünün bu dersinde, module 3: props ve state yönetimi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-03/lesson-03-11"
+          "id": "test-03-11",
+          "title": "Default Props ve Prop Validation",
+          "description": "Default props tanımlamayı, prop validation yapmayı ve TypeScript ile tip güvenliği sağlamayı öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-03/test-03-11"
         },
         {
-          "id": "lesson-03-12",
-          "title": "Ders 12: Module 3: Props ve State Yönetimi Konusu 12",
-          "description": "Module 3: Props ve State Yönetimi modülünün bu dersinde, module 3: props ve state yönetimi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-03/lesson-03-12"
+          "id": "test-03-12",
+          "title": "Callback Props: Parent-Child İletişimi",
+          "description": "Callback props kullanarak child component'lerden parent component'lere veri göndermeyi öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-03/test-03-12"
         },
         {
-          "id": "lesson-03-13",
-          "title": "Ders 13: Module 3: Props ve State Yönetimi Konusu 13",
-          "description": "Module 3: Props ve State Yönetimi modülünün bu dersinde, module 3: props ve state yönetimi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-03/lesson-03-13"
+          "id": "test-03-13",
+          "title": "Prop Drilling ve Çözümleri",
+          "description": "Prop drilling problemini tanımlamayı, Context API ve diğer çözümleri öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-03/test-03-13"
         },
         {
-          "id": "lesson-03-14",
-          "title": "Ders 14: Module 3: Props ve State Yönetimi Konusu 14",
-          "description": "Module 3: Props ve State Yönetimi modülünün bu dersinde, module 3: props ve state yönetimi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-03/lesson-03-14"
+          "id": "test-03-14",
+          "title": "State Management Best Practices",
+          "description": "State yönetiminde best practice'leri, state normalization'ı ve performans optimizasyonlarını öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-03/test-03-14"
         },
         {
-          "id": "lesson-03-15",
-          "title": "Ders 15: Module 3: Props ve State Yönetimi Konusu 15",
-          "description": "Module 3: Props ve State Yönetimi modülünün bu dersinde, module 3: props ve state yönetimi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-03/lesson-03-15"
+          "id": "test-03-15",
+          "title": "Modül Özeti ve Değerlendirme",
+          "description": "Props ve state yönetimi modülünde öğrenilen kavramları pekiştirmek, eksikleri tespit etmek ve bir sonraki modüle hazırlanmak.",
+          "href": "/education/tests/quiz/tests-react/module-03/test-03-15"
         }
       ]
     },
@@ -338,94 +338,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-04-01",
+          "id": "test-04-01",
           "title": "Ders 1: Event Handling Temelleri",
           "description": "React'te event handling'in nasıl yapıldığını ve DOM event'lerinden farklarını öğrenin.",
-          "href": "/education/lessons/react/module-04/lesson-04-01"
+          "href": "/education/tests/quiz/tests-react/module-04/test-04-01"
         },
         {
-          "id": "lesson-04-02",
-          "title": "Ders 2: Module 4: Event Handling ve Form Yönetimi Konusu 2",
-          "description": "Module 4: Event Handling ve Form Yönetimi modülünün bu dersinde, module 4: event handling ve form yönetimi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-04/lesson-04-02"
+          "id": "test-04-02",
+          "title": "Event Handler Fonksiyonları ve Binding",
+          "description": "Event handler fonksiyonlarını tanımlamayı, this binding problemini ve arrow function kullanımını öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-04/test-04-02"
         },
         {
-          "id": "lesson-04-03",
-          "title": "Ders 3: Module 4: Event Handling ve Form Yönetimi Konusu 3",
-          "description": "Module 4: Event Handling ve Form Yönetimi modülünün bu dersinde, module 4: event handling ve form yönetimi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-04/lesson-04-03"
+          "id": "test-04-03",
+          "title": "Synthetic Events ve Event Object",
+          "description": "React'in Synthetic Event sistemini, event object'inin özelliklerini ve event pooling'i öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-04/test-04-03"
         },
         {
-          "id": "lesson-04-04",
-          "title": "Ders 4: Module 4: Event Handling ve Form Yönetimi Konusu 4",
-          "description": "Module 4: Event Handling ve Form Yönetimi modülünün bu dersinde, module 4: event handling ve form yönetimi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-04/lesson-04-04"
+          "id": "test-04-04",
+          "title": "Form Yönetimi ve Controlled Components",
+          "description": "Form elemanlarını yönetmeyi, controlled component pattern'ini ve form state'ini yönetmeyi öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-04/test-04-04"
         },
         {
-          "id": "lesson-04-05",
-          "title": "Ders 5: Module 4: Event Handling ve Form Yönetimi Konusu 5",
-          "description": "Module 4: Event Handling ve Form Yönetimi modülünün bu dersinde, module 4: event handling ve form yönetimi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-04/lesson-04-05"
+          "id": "test-04-05",
+          "title": "Input, Textarea ve Select Yönetimi",
+          "description": "Text input, textarea ve select elementlerini controlled component olarak yönetmeyi öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-04/test-04-05"
         },
         {
-          "id": "lesson-04-06",
-          "title": "Ders 6: Module 4: Event Handling ve Form Yönetimi Konusu 6",
-          "description": "Module 4: Event Handling ve Form Yönetimi modülünün bu dersinde, module 4: event handling ve form yönetimi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-04/lesson-04-06"
+          "id": "test-04-06",
+          "title": "Checkbox ve Radio Button Yönetimi",
+          "description": "Checkbox ve radio button'ları yönetmeyi, multiple selection ve controlled component pattern'ini öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-04/test-04-06"
         },
         {
-          "id": "lesson-04-07",
-          "title": "Ders 7: Module 4: Event Handling ve Form Yönetimi Konusu 7",
-          "description": "Module 4: Event Handling ve Form Yönetimi modülünün bu dersinde, module 4: event handling ve form yönetimi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-04/lesson-04-07"
+          "id": "test-04-07",
+          "title": "Form Validation ve Error Handling",
+          "description": "Form validation yapmayı, error state yönetimini ve kullanıcıya geri bildirim vermeyi öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-04/test-04-07"
         },
         {
-          "id": "lesson-04-08",
-          "title": "Ders 8: Module 4: Event Handling ve Form Yönetimi Konusu 8",
-          "description": "Module 4: Event Handling ve Form Yönetimi modülünün bu dersinde, module 4: event handling ve form yönetimi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-04/lesson-04-08"
+          "id": "test-04-08",
+          "title": "Form Submit ve PreventDefault",
+          "description": "Form submit işlemlerini yönetmeyi, preventDefault kullanımını ve form data işlemeyi öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-04/test-04-08"
         },
         {
-          "id": "lesson-04-09",
-          "title": "Ders 9: Module 4: Event Handling ve Form Yönetimi Konusu 9",
-          "description": "Module 4: Event Handling ve Form Yönetimi modülünün bu dersinde, module 4: event handling ve form yönetimi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-04/lesson-04-09"
+          "id": "test-04-09",
+          "title": "Uncontrolled Components ve useRef",
+          "description": "Uncontrolled component pattern'ini, useRef hook'unu ve form data'ya erişmeyi öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-04/test-04-09"
         },
         {
-          "id": "lesson-04-10",
-          "title": "Ders 10: Module 4: Event Handling ve Form Yönetimi Konusu 10",
-          "description": "Module 4: Event Handling ve Form Yönetimi modülünün bu dersinde, module 4: event handling ve form yönetimi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-04/lesson-04-10"
+          "id": "test-04-10",
+          "title": "File Input ve File Upload",
+          "description": "File input elementlerini yönetmeyi, file upload işlemlerini ve FileReader API'sini öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-04/test-04-10"
         },
         {
-          "id": "lesson-04-11",
-          "title": "Ders 11: Module 4: Event Handling ve Form Yönetimi Konusu 11",
-          "description": "Module 4: Event Handling ve Form Yönetimi modülünün bu dersinde, module 4: event handling ve form yönetimi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-04/lesson-04-11"
+          "id": "test-04-11",
+          "title": "Custom Hooks ile Form Yönetimi",
+          "description": "Custom hook'lar oluşturarak form state'ini ve validation logic'ini yeniden kullanılabilir hale getirmeyi öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-04/test-04-11"
         },
         {
-          "id": "lesson-04-12",
-          "title": "Ders 12: Module 4: Event Handling ve Form Yönetimi Konusu 12",
-          "description": "Module 4: Event Handling ve Form Yönetimi modülünün bu dersinde, module 4: event handling ve form yönetimi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-04/lesson-04-12"
+          "id": "test-04-12",
+          "title": "Form Kütüphaneleri: React Hook Form ve Formik",
+          "description": "Form kütüphanelerini tanıyın, React Hook Form ve Formik gibi popüler kütüphanelerin kullanımını öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-04/test-04-12"
         },
         {
-          "id": "lesson-04-13",
-          "title": "Ders 13: Module 4: Event Handling ve Form Yönetimi Konusu 13",
-          "description": "Module 4: Event Handling ve Form Yönetimi modülünün bu dersinde, module 4: event handling ve form yönetimi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-04/lesson-04-13"
+          "id": "test-04-13",
+          "title": "Event Bubbling ve Capturing",
+          "description": "Event bubbling ve capturing kavramlarını, stopPropagation kullanımını ve event delegation'ı öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-04/test-04-13"
         },
         {
-          "id": "lesson-04-14",
-          "title": "Ders 14: Module 4: Event Handling ve Form Yönetimi Konusu 14",
-          "description": "Module 4: Event Handling ve Form Yönetimi modülünün bu dersinde, module 4: event handling ve form yönetimi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-04/lesson-04-14"
+          "id": "test-04-14",
+          "title": "Keyboard Events ve Accessibility",
+          "description": "Keyboard event'lerini yönetmeyi, accessibility (erişilebilirlik) best practice'lerini ve ARIA attribute'larını öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-04/test-04-14"
         },
         {
-          "id": "lesson-04-15",
-          "title": "Ders 15: Module 4: Event Handling ve Form Yönetimi Konusu 15",
-          "description": "Module 4: Event Handling ve Form Yönetimi modülünün bu dersinde, module 4: event handling ve form yönetimi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-04/lesson-04-15"
+          "id": "test-04-15",
+          "title": "Modül Özeti ve Değerlendirme",
+          "description": "Event handling ve form yönetimi modülünde öğrenilen kavramları pekiştirmek, eksikleri tespit etmek ve bir sonraki modüle hazırlanmak.",
+          "href": "/education/tests/quiz/tests-react/module-04/test-04-15"
         }
       ]
     },
@@ -441,94 +441,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-05-01",
+          "id": "test-05-01",
           "title": "Ders 1: useState Hook",
           "description": "useState hook'unu kullanarak component state'ini yönetmeyi öğrenin.",
-          "href": "/education/lessons/react/module-05/lesson-05-01"
+          "href": "/education/tests/quiz/tests-react/module-05/test-05-01"
         },
         {
-          "id": "lesson-05-02",
+          "id": "test-05-02",
           "title": "Ders 2: useEffect Hook",
           "description": "useEffect hook'unu kullanarak side effect'leri yönetmeyi öğrenin.",
-          "href": "/education/lessons/react/module-05/lesson-05-02"
+          "href": "/education/tests/quiz/tests-react/module-05/test-05-02"
         },
         {
-          "id": "lesson-05-03",
-          "title": "Ders 3: Module 5: React Hooks (useState, useEffect) Konusu 3",
-          "description": "Module 5: React Hooks (useState, useEffect) modülünün bu dersinde, module 5: react hooks (usestate, useeffect) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-05/lesson-05-03"
+          "id": "test-05-03",
+          "title": "useState Hook: Gelişmiş Kullanımlar",
+          "description": "useState hook'unu farklı senaryolarda kullanmayı, functional updates ve lazy initialization'ı öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-05/test-05-03"
         },
         {
-          "id": "lesson-05-04",
-          "title": "Ders 4: Module 5: React Hooks (useState, useEffect) Konusu 4",
-          "description": "Module 5: React Hooks (useState, useEffect) modülünün bu dersinde, module 5: react hooks (usestate, useeffect) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-05/lesson-05-04"
+          "id": "test-05-04",
+          "title": "useEffect Hook: Side Effects Yönetimi",
+          "description": "useEffect hook'u ile component lifecycle'ı yönetmeyi, side effect'leri handle etmeyi öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-05/test-05-04"
         },
         {
-          "id": "lesson-05-05",
-          "title": "Ders 5: Module 5: React Hooks (useState, useEffect) Konusu 5",
-          "description": "Module 5: React Hooks (useState, useEffect) modülünün bu dersinde, module 5: react hooks (usestate, useeffect) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-05/lesson-05-05"
+          "id": "test-05-05",
+          "title": "useEffect Dependency Array ve Cleanup",
+          "description": "useEffect dependency array'ini kullanmayı, cleanup function'larını ve memory leak'leri önlemeyi öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-05/test-05-05"
         },
         {
-          "id": "lesson-05-06",
-          "title": "Ders 6: Module 5: React Hooks (useState, useEffect) Konusu 6",
-          "description": "Module 5: React Hooks (useState, useEffect) modülünün bu dersinde, module 5: react hooks (usestate, useeffect) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-05/lesson-05-06"
+          "id": "test-05-06",
+          "title": "API Çağrıları ve Data Fetching",
+          "description": "useEffect ile API çağrıları yapmayı, data fetching pattern'lerini ve loading state yönetimini öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-05/test-05-06"
         },
         {
-          "id": "lesson-05-07",
-          "title": "Ders 7: Module 5: React Hooks (useState, useEffect) Konusu 7",
-          "description": "Module 5: React Hooks (useState, useEffect) modülünün bu dersinde, module 5: react hooks (usestate, useeffect) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-05/lesson-05-07"
+          "id": "test-05-07",
+          "title": "Conditional Effects ve Skip Effects",
+          "description": "Conditional effect execution'ı, dependency array kullanarak effect'leri skip etmeyi öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-05/test-05-07"
         },
         {
-          "id": "lesson-05-08",
-          "title": "Ders 8: Module 5: React Hooks (useState, useEffect) Konusu 8",
-          "description": "Module 5: React Hooks (useState, useEffect) modülünün bu dersinde, module 5: react hooks (usestate, useeffect) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-05/lesson-05-08"
+          "id": "test-05-08",
+          "title": "Multiple useEffect Hooks",
+          "description": "Birden fazla useEffect hook'unu kullanmayı, separation of concerns'ı ve effect organizasyonunu öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-05/test-05-08"
         },
         {
-          "id": "lesson-05-09",
-          "title": "Ders 9: Module 5: React Hooks (useState, useEffect) Konusu 9",
-          "description": "Module 5: React Hooks (useState, useEffect) modülünün bu dersinde, module 5: react hooks (usestate, useeffect) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-05/lesson-05-09"
+          "id": "test-05-09",
+          "title": "Hooks Rules ve Best Practices",
+          "description": "Hooks kurallarını, hooks'ları nerede ve nasıl kullanacağınızı ve best practice'leri öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-05/test-05-09"
         },
         {
-          "id": "lesson-05-10",
-          "title": "Ders 10: Module 5: React Hooks (useState, useEffect) Konusu 10",
-          "description": "Module 5: React Hooks (useState, useEffect) modülünün bu dersinde, module 5: react hooks (usestate, useeffect) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-05/lesson-05-10"
+          "id": "test-05-10",
+          "title": "useState vs useReducer",
+          "description": "useState ve useReducer arasındaki farkları, ne zaman hangisini kullanacağınızı öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-05/test-05-10"
         },
         {
-          "id": "lesson-05-11",
-          "title": "Ders 11: Module 5: React Hooks (useState, useEffect) Konusu 11",
-          "description": "Module 5: React Hooks (useState, useEffect) modülünün bu dersinde, module 5: react hooks (usestate, useeffect) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-05/lesson-05-11"
+          "id": "test-05-11",
+          "title": "Class Component Lifecycle vs Hooks",
+          "description": "Class component lifecycle method'ları ile hooks arasındaki karşılıklılığı ve migration stratejilerini öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-05/test-05-11"
         },
         {
-          "id": "lesson-05-12",
-          "title": "Ders 12: Module 5: React Hooks (useState, useEffect) Konusu 12",
-          "description": "Module 5: React Hooks (useState, useEffect) modülünün bu dersinde, module 5: react hooks (usestate, useeffect) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-05/lesson-05-12"
+          "id": "test-05-12",
+          "title": "Custom Hooks Oluşturma",
+          "description": "Custom hook'lar oluşturmayı, logic reuse'ı ve custom hook pattern'lerini öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-05/test-05-12"
         },
         {
-          "id": "lesson-05-13",
-          "title": "Ders 13: Module 5: React Hooks (useState, useEffect) Konusu 13",
-          "description": "Module 5: React Hooks (useState, useEffect) modülünün bu dersinde, module 5: react hooks (usestate, useeffect) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-05/lesson-05-13"
+          "id": "test-05-13",
+          "title": "Common Custom Hooks Patterns",
+          "description": "Yaygın custom hook pattern'lerini (useLocalStorage, useDebounce, useToggle) öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-05/test-05-13"
         },
         {
-          "id": "lesson-05-14",
-          "title": "Ders 14: Module 5: React Hooks (useState, useEffect) Konusu 14",
-          "description": "Module 5: React Hooks (useState, useEffect) modülünün bu dersinde, module 5: react hooks (usestate, useeffect) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-05/lesson-05-14"
+          "id": "test-05-14",
+          "title": "Hooks Testing ve Debugging",
+          "description": "Hooks'ları test etmeyi, debugging tekniklerini ve React DevTools kullanımını öğrenin.",
+          "href": "/education/tests/quiz/tests-react/module-05/test-05-14"
         },
         {
-          "id": "lesson-05-15",
-          "title": "Ders 15: Module 5: React Hooks (useState, useEffect) Konusu 15",
-          "description": "Module 5: React Hooks (useState, useEffect) modülünün bu dersinde, module 5: react hooks (usestate, useeffect) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-05/lesson-05-15"
+          "id": "test-05-15",
+          "title": "Modül Özeti ve Değerlendirme",
+          "description": "React Hooks modülünde öğrenilen kavramları pekiştirmek, eksikleri tespit etmek ve bir sonraki modüle hazırlanmak.",
+          "href": "/education/tests/quiz/tests-react/module-05/test-05-15"
         }
       ]
     },
@@ -544,94 +544,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-06-01",
+          "id": "test-06-01",
           "title": "Ders 1: Module 6: İleri Seviye Hooks Konusu 1",
           "description": "Module 6: İleri Seviye Hooks modülünün bu dersinde, module 6: i̇leri seviye hooks ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-06/lesson-06-01"
+          "href": "/education/tests/quiz/tests-react/module-06/test-06-01"
         },
         {
-          "id": "lesson-06-02",
+          "id": "test-06-02",
           "title": "Ders 2: Module 6: İleri Seviye Hooks Konusu 2",
           "description": "Module 6: İleri Seviye Hooks modülünün bu dersinde, module 6: i̇leri seviye hooks ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-06/lesson-06-02"
+          "href": "/education/tests/quiz/tests-react/module-06/test-06-02"
         },
         {
-          "id": "lesson-06-03",
+          "id": "test-06-03",
           "title": "Ders 3: Module 6: İleri Seviye Hooks Konusu 3",
           "description": "Module 6: İleri Seviye Hooks modülünün bu dersinde, module 6: i̇leri seviye hooks ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-06/lesson-06-03"
+          "href": "/education/tests/quiz/tests-react/module-06/test-06-03"
         },
         {
-          "id": "lesson-06-04",
+          "id": "test-06-04",
           "title": "Ders 4: Module 6: İleri Seviye Hooks Konusu 4",
           "description": "Module 6: İleri Seviye Hooks modülünün bu dersinde, module 6: i̇leri seviye hooks ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-06/lesson-06-04"
+          "href": "/education/tests/quiz/tests-react/module-06/test-06-04"
         },
         {
-          "id": "lesson-06-05",
+          "id": "test-06-05",
           "title": "Ders 5: Module 6: İleri Seviye Hooks Konusu 5",
           "description": "Module 6: İleri Seviye Hooks modülünün bu dersinde, module 6: i̇leri seviye hooks ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-06/lesson-06-05"
+          "href": "/education/tests/quiz/tests-react/module-06/test-06-05"
         },
         {
-          "id": "lesson-06-06",
+          "id": "test-06-06",
           "title": "Ders 6: Module 6: İleri Seviye Hooks Konusu 6",
           "description": "Module 6: İleri Seviye Hooks modülünün bu dersinde, module 6: i̇leri seviye hooks ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-06/lesson-06-06"
+          "href": "/education/tests/quiz/tests-react/module-06/test-06-06"
         },
         {
-          "id": "lesson-06-07",
+          "id": "test-06-07",
           "title": "Ders 7: Module 6: İleri Seviye Hooks Konusu 7",
           "description": "Module 6: İleri Seviye Hooks modülünün bu dersinde, module 6: i̇leri seviye hooks ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-06/lesson-06-07"
+          "href": "/education/tests/quiz/tests-react/module-06/test-06-07"
         },
         {
-          "id": "lesson-06-08",
+          "id": "test-06-08",
           "title": "Ders 8: Module 6: İleri Seviye Hooks Konusu 8",
           "description": "Module 6: İleri Seviye Hooks modülünün bu dersinde, module 6: i̇leri seviye hooks ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-06/lesson-06-08"
+          "href": "/education/tests/quiz/tests-react/module-06/test-06-08"
         },
         {
-          "id": "lesson-06-09",
+          "id": "test-06-09",
           "title": "Ders 9: Module 6: İleri Seviye Hooks Konusu 9",
           "description": "Module 6: İleri Seviye Hooks modülünün bu dersinde, module 6: i̇leri seviye hooks ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-06/lesson-06-09"
+          "href": "/education/tests/quiz/tests-react/module-06/test-06-09"
         },
         {
-          "id": "lesson-06-10",
+          "id": "test-06-10",
           "title": "Ders 10: Module 6: İleri Seviye Hooks Konusu 10",
           "description": "Module 6: İleri Seviye Hooks modülünün bu dersinde, module 6: i̇leri seviye hooks ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-06/lesson-06-10"
+          "href": "/education/tests/quiz/tests-react/module-06/test-06-10"
         },
         {
-          "id": "lesson-06-11",
+          "id": "test-06-11",
           "title": "Ders 11: Module 6: İleri Seviye Hooks Konusu 11",
           "description": "Module 6: İleri Seviye Hooks modülünün bu dersinde, module 6: i̇leri seviye hooks ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-06/lesson-06-11"
+          "href": "/education/tests/quiz/tests-react/module-06/test-06-11"
         },
         {
-          "id": "lesson-06-12",
+          "id": "test-06-12",
           "title": "Ders 12: Module 6: İleri Seviye Hooks Konusu 12",
           "description": "Module 6: İleri Seviye Hooks modülünün bu dersinde, module 6: i̇leri seviye hooks ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-06/lesson-06-12"
+          "href": "/education/tests/quiz/tests-react/module-06/test-06-12"
         },
         {
-          "id": "lesson-06-13",
+          "id": "test-06-13",
           "title": "Ders 13: Module 6: İleri Seviye Hooks Konusu 13",
           "description": "Module 6: İleri Seviye Hooks modülünün bu dersinde, module 6: i̇leri seviye hooks ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-06/lesson-06-13"
+          "href": "/education/tests/quiz/tests-react/module-06/test-06-13"
         },
         {
-          "id": "lesson-06-14",
+          "id": "test-06-14",
           "title": "Ders 14: Module 6: İleri Seviye Hooks Konusu 14",
           "description": "Module 6: İleri Seviye Hooks modülünün bu dersinde, module 6: i̇leri seviye hooks ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-06/lesson-06-14"
+          "href": "/education/tests/quiz/tests-react/module-06/test-06-14"
         },
         {
-          "id": "lesson-06-15",
+          "id": "test-06-15",
           "title": "Ders 15: Module 6: İleri Seviye Hooks Konusu 15",
           "description": "Module 6: İleri Seviye Hooks modülünün bu dersinde, module 6: i̇leri seviye hooks ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-06/lesson-06-15"
+          "href": "/education/tests/quiz/tests-react/module-06/test-06-15"
         }
       ]
     },
@@ -647,94 +647,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-07-01",
+          "id": "test-07-01",
           "title": "Ders 1: React Router Kurulumu",
           "description": "React Router'ı projenize nasıl ekleyeceğinizi ve temel routing yapısını öğrenin.",
-          "href": "/education/lessons/react/module-07/lesson-07-01"
+          "href": "/education/tests/quiz/tests-react/module-07/test-07-01"
         },
         {
-          "id": "lesson-07-02",
+          "id": "test-07-02",
           "title": "Ders 2: Module 7: React Router ve Navigation Konusu 2",
           "description": "Module 7: React Router ve Navigation modülünün bu dersinde, module 7: react router ve navigation ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-07/lesson-07-02"
+          "href": "/education/tests/quiz/tests-react/module-07/test-07-02"
         },
         {
-          "id": "lesson-07-03",
+          "id": "test-07-03",
           "title": "Ders 3: Module 7: React Router ve Navigation Konusu 3",
           "description": "Module 7: React Router ve Navigation modülünün bu dersinde, module 7: react router ve navigation ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-07/lesson-07-03"
+          "href": "/education/tests/quiz/tests-react/module-07/test-07-03"
         },
         {
-          "id": "lesson-07-04",
+          "id": "test-07-04",
           "title": "Ders 4: Module 7: React Router ve Navigation Konusu 4",
           "description": "Module 7: React Router ve Navigation modülünün bu dersinde, module 7: react router ve navigation ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-07/lesson-07-04"
+          "href": "/education/tests/quiz/tests-react/module-07/test-07-04"
         },
         {
-          "id": "lesson-07-05",
+          "id": "test-07-05",
           "title": "Ders 5: Module 7: React Router ve Navigation Konusu 5",
           "description": "Module 7: React Router ve Navigation modülünün bu dersinde, module 7: react router ve navigation ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-07/lesson-07-05"
+          "href": "/education/tests/quiz/tests-react/module-07/test-07-05"
         },
         {
-          "id": "lesson-07-06",
+          "id": "test-07-06",
           "title": "Ders 6: Module 7: React Router ve Navigation Konusu 6",
           "description": "Module 7: React Router ve Navigation modülünün bu dersinde, module 7: react router ve navigation ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-07/lesson-07-06"
+          "href": "/education/tests/quiz/tests-react/module-07/test-07-06"
         },
         {
-          "id": "lesson-07-07",
+          "id": "test-07-07",
           "title": "Ders 7: Module 7: React Router ve Navigation Konusu 7",
           "description": "Module 7: React Router ve Navigation modülünün bu dersinde, module 7: react router ve navigation ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-07/lesson-07-07"
+          "href": "/education/tests/quiz/tests-react/module-07/test-07-07"
         },
         {
-          "id": "lesson-07-08",
+          "id": "test-07-08",
           "title": "Ders 8: Module 7: React Router ve Navigation Konusu 8",
           "description": "Module 7: React Router ve Navigation modülünün bu dersinde, module 7: react router ve navigation ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-07/lesson-07-08"
+          "href": "/education/tests/quiz/tests-react/module-07/test-07-08"
         },
         {
-          "id": "lesson-07-09",
+          "id": "test-07-09",
           "title": "Ders 9: Module 7: React Router ve Navigation Konusu 9",
           "description": "Module 7: React Router ve Navigation modülünün bu dersinde, module 7: react router ve navigation ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-07/lesson-07-09"
+          "href": "/education/tests/quiz/tests-react/module-07/test-07-09"
         },
         {
-          "id": "lesson-07-10",
+          "id": "test-07-10",
           "title": "Ders 10: Module 7: React Router ve Navigation Konusu 10",
           "description": "Module 7: React Router ve Navigation modülünün bu dersinde, module 7: react router ve navigation ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-07/lesson-07-10"
+          "href": "/education/tests/quiz/tests-react/module-07/test-07-10"
         },
         {
-          "id": "lesson-07-11",
+          "id": "test-07-11",
           "title": "Ders 11: Module 7: React Router ve Navigation Konusu 11",
           "description": "Module 7: React Router ve Navigation modülünün bu dersinde, module 7: react router ve navigation ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-07/lesson-07-11"
+          "href": "/education/tests/quiz/tests-react/module-07/test-07-11"
         },
         {
-          "id": "lesson-07-12",
+          "id": "test-07-12",
           "title": "Ders 12: Module 7: React Router ve Navigation Konusu 12",
           "description": "Module 7: React Router ve Navigation modülünün bu dersinde, module 7: react router ve navigation ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-07/lesson-07-12"
+          "href": "/education/tests/quiz/tests-react/module-07/test-07-12"
         },
         {
-          "id": "lesson-07-13",
+          "id": "test-07-13",
           "title": "Ders 13: Module 7: React Router ve Navigation Konusu 13",
           "description": "Module 7: React Router ve Navigation modülünün bu dersinde, module 7: react router ve navigation ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-07/lesson-07-13"
+          "href": "/education/tests/quiz/tests-react/module-07/test-07-13"
         },
         {
-          "id": "lesson-07-14",
+          "id": "test-07-14",
           "title": "Ders 14: Module 7: React Router ve Navigation Konusu 14",
           "description": "Module 7: React Router ve Navigation modülünün bu dersinde, module 7: react router ve navigation ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-07/lesson-07-14"
+          "href": "/education/tests/quiz/tests-react/module-07/test-07-14"
         },
         {
-          "id": "lesson-07-15",
+          "id": "test-07-15",
           "title": "Ders 15: Module 7: React Router ve Navigation Konusu 15",
           "description": "Module 7: React Router ve Navigation modülünün bu dersinde, module 7: react router ve navigation ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-07/lesson-07-15"
+          "href": "/education/tests/quiz/tests-react/module-07/test-07-15"
         }
       ]
     },
@@ -750,94 +750,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-08-01",
+          "id": "test-08-01",
           "title": "Ders 1: Context API Nedir?",
           "description": "Context API'nin ne olduğunu, ne zaman kullanılacağını ve nasıl implement edileceğini öğrenin.",
-          "href": "/education/lessons/react/module-08/lesson-08-01"
+          "href": "/education/tests/quiz/tests-react/module-08/test-08-01"
         },
         {
-          "id": "lesson-08-02",
+          "id": "test-08-02",
           "title": "Ders 2: Module 8: Context API ve Global State Konusu 2",
           "description": "Module 8: Context API ve Global State modülünün bu dersinde, module 8: context api ve global state ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-08/lesson-08-02"
+          "href": "/education/tests/quiz/tests-react/module-08/test-08-02"
         },
         {
-          "id": "lesson-08-03",
+          "id": "test-08-03",
           "title": "Ders 3: Module 8: Context API ve Global State Konusu 3",
           "description": "Module 8: Context API ve Global State modülünün bu dersinde, module 8: context api ve global state ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-08/lesson-08-03"
+          "href": "/education/tests/quiz/tests-react/module-08/test-08-03"
         },
         {
-          "id": "lesson-08-04",
+          "id": "test-08-04",
           "title": "Ders 4: Module 8: Context API ve Global State Konusu 4",
           "description": "Module 8: Context API ve Global State modülünün bu dersinde, module 8: context api ve global state ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-08/lesson-08-04"
+          "href": "/education/tests/quiz/tests-react/module-08/test-08-04"
         },
         {
-          "id": "lesson-08-05",
+          "id": "test-08-05",
           "title": "Ders 5: Module 8: Context API ve Global State Konusu 5",
           "description": "Module 8: Context API ve Global State modülünün bu dersinde, module 8: context api ve global state ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-08/lesson-08-05"
+          "href": "/education/tests/quiz/tests-react/module-08/test-08-05"
         },
         {
-          "id": "lesson-08-06",
+          "id": "test-08-06",
           "title": "Ders 6: Module 8: Context API ve Global State Konusu 6",
           "description": "Module 8: Context API ve Global State modülünün bu dersinde, module 8: context api ve global state ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-08/lesson-08-06"
+          "href": "/education/tests/quiz/tests-react/module-08/test-08-06"
         },
         {
-          "id": "lesson-08-07",
+          "id": "test-08-07",
           "title": "Ders 7: Module 8: Context API ve Global State Konusu 7",
           "description": "Module 8: Context API ve Global State modülünün bu dersinde, module 8: context api ve global state ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-08/lesson-08-07"
+          "href": "/education/tests/quiz/tests-react/module-08/test-08-07"
         },
         {
-          "id": "lesson-08-08",
+          "id": "test-08-08",
           "title": "Ders 8: Module 8: Context API ve Global State Konusu 8",
           "description": "Module 8: Context API ve Global State modülünün bu dersinde, module 8: context api ve global state ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-08/lesson-08-08"
+          "href": "/education/tests/quiz/tests-react/module-08/test-08-08"
         },
         {
-          "id": "lesson-08-09",
+          "id": "test-08-09",
           "title": "Ders 9: Module 8: Context API ve Global State Konusu 9",
           "description": "Module 8: Context API ve Global State modülünün bu dersinde, module 8: context api ve global state ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-08/lesson-08-09"
+          "href": "/education/tests/quiz/tests-react/module-08/test-08-09"
         },
         {
-          "id": "lesson-08-10",
+          "id": "test-08-10",
           "title": "Ders 10: Module 8: Context API ve Global State Konusu 10",
           "description": "Module 8: Context API ve Global State modülünün bu dersinde, module 8: context api ve global state ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-08/lesson-08-10"
+          "href": "/education/tests/quiz/tests-react/module-08/test-08-10"
         },
         {
-          "id": "lesson-08-11",
+          "id": "test-08-11",
           "title": "Ders 11: Module 8: Context API ve Global State Konusu 11",
           "description": "Module 8: Context API ve Global State modülünün bu dersinde, module 8: context api ve global state ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-08/lesson-08-11"
+          "href": "/education/tests/quiz/tests-react/module-08/test-08-11"
         },
         {
-          "id": "lesson-08-12",
+          "id": "test-08-12",
           "title": "Ders 12: Module 8: Context API ve Global State Konusu 12",
           "description": "Module 8: Context API ve Global State modülünün bu dersinde, module 8: context api ve global state ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-08/lesson-08-12"
+          "href": "/education/tests/quiz/tests-react/module-08/test-08-12"
         },
         {
-          "id": "lesson-08-13",
+          "id": "test-08-13",
           "title": "Ders 13: Module 8: Context API ve Global State Konusu 13",
           "description": "Module 8: Context API ve Global State modülünün bu dersinde, module 8: context api ve global state ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-08/lesson-08-13"
+          "href": "/education/tests/quiz/tests-react/module-08/test-08-13"
         },
         {
-          "id": "lesson-08-14",
+          "id": "test-08-14",
           "title": "Ders 14: Module 8: Context API ve Global State Konusu 14",
           "description": "Module 8: Context API ve Global State modülünün bu dersinde, module 8: context api ve global state ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-08/lesson-08-14"
+          "href": "/education/tests/quiz/tests-react/module-08/test-08-14"
         },
         {
-          "id": "lesson-08-15",
+          "id": "test-08-15",
           "title": "Ders 15: Module 8: Context API ve Global State Konusu 15",
           "description": "Module 8: Context API ve Global State modülünün bu dersinde, module 8: context api ve global state ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-08/lesson-08-15"
+          "href": "/education/tests/quiz/tests-react/module-08/test-08-15"
         }
       ]
     },
@@ -853,94 +853,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-09-01",
+          "id": "test-09-01",
           "title": "Ders 1: React.memo ve useMemo",
           "description": "Component'leri ve hesaplamaları optimize etmek için memoization tekniklerini öğrenin.",
-          "href": "/education/lessons/react/module-09/lesson-09-01"
+          "href": "/education/tests/quiz/tests-react/module-09/test-09-01"
         },
         {
-          "id": "lesson-09-02",
+          "id": "test-09-02",
           "title": "Ders 2: Module 9: Performance Optimizasyonu Konusu 2",
           "description": "Module 9: Performance Optimizasyonu modülünün bu dersinde, module 9: performance optimizasyonu ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-09/lesson-09-02"
+          "href": "/education/tests/quiz/tests-react/module-09/test-09-02"
         },
         {
-          "id": "lesson-09-03",
+          "id": "test-09-03",
           "title": "Ders 3: Module 9: Performance Optimizasyonu Konusu 3",
           "description": "Module 9: Performance Optimizasyonu modülünün bu dersinde, module 9: performance optimizasyonu ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-09/lesson-09-03"
+          "href": "/education/tests/quiz/tests-react/module-09/test-09-03"
         },
         {
-          "id": "lesson-09-04",
+          "id": "test-09-04",
           "title": "Ders 4: Module 9: Performance Optimizasyonu Konusu 4",
           "description": "Module 9: Performance Optimizasyonu modülünün bu dersinde, module 9: performance optimizasyonu ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-09/lesson-09-04"
+          "href": "/education/tests/quiz/tests-react/module-09/test-09-04"
         },
         {
-          "id": "lesson-09-05",
+          "id": "test-09-05",
           "title": "Ders 5: Module 9: Performance Optimizasyonu Konusu 5",
           "description": "Module 9: Performance Optimizasyonu modülünün bu dersinde, module 9: performance optimizasyonu ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-09/lesson-09-05"
+          "href": "/education/tests/quiz/tests-react/module-09/test-09-05"
         },
         {
-          "id": "lesson-09-06",
+          "id": "test-09-06",
           "title": "Ders 6: Module 9: Performance Optimizasyonu Konusu 6",
           "description": "Module 9: Performance Optimizasyonu modülünün bu dersinde, module 9: performance optimizasyonu ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-09/lesson-09-06"
+          "href": "/education/tests/quiz/tests-react/module-09/test-09-06"
         },
         {
-          "id": "lesson-09-07",
+          "id": "test-09-07",
           "title": "Ders 7: Module 9: Performance Optimizasyonu Konusu 7",
           "description": "Module 9: Performance Optimizasyonu modülünün bu dersinde, module 9: performance optimizasyonu ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-09/lesson-09-07"
+          "href": "/education/tests/quiz/tests-react/module-09/test-09-07"
         },
         {
-          "id": "lesson-09-08",
+          "id": "test-09-08",
           "title": "Ders 8: Module 9: Performance Optimizasyonu Konusu 8",
           "description": "Module 9: Performance Optimizasyonu modülünün bu dersinde, module 9: performance optimizasyonu ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-09/lesson-09-08"
+          "href": "/education/tests/quiz/tests-react/module-09/test-09-08"
         },
         {
-          "id": "lesson-09-09",
+          "id": "test-09-09",
           "title": "Ders 9: Module 9: Performance Optimizasyonu Konusu 9",
           "description": "Module 9: Performance Optimizasyonu modülünün bu dersinde, module 9: performance optimizasyonu ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-09/lesson-09-09"
+          "href": "/education/tests/quiz/tests-react/module-09/test-09-09"
         },
         {
-          "id": "lesson-09-10",
+          "id": "test-09-10",
           "title": "Ders 10: Module 9: Performance Optimizasyonu Konusu 10",
           "description": "Module 9: Performance Optimizasyonu modülünün bu dersinde, module 9: performance optimizasyonu ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-09/lesson-09-10"
+          "href": "/education/tests/quiz/tests-react/module-09/test-09-10"
         },
         {
-          "id": "lesson-09-11",
+          "id": "test-09-11",
           "title": "Ders 11: Module 9: Performance Optimizasyonu Konusu 11",
           "description": "Module 9: Performance Optimizasyonu modülünün bu dersinde, module 9: performance optimizasyonu ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-09/lesson-09-11"
+          "href": "/education/tests/quiz/tests-react/module-09/test-09-11"
         },
         {
-          "id": "lesson-09-12",
+          "id": "test-09-12",
           "title": "Ders 12: Module 9: Performance Optimizasyonu Konusu 12",
           "description": "Module 9: Performance Optimizasyonu modülünün bu dersinde, module 9: performance optimizasyonu ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-09/lesson-09-12"
+          "href": "/education/tests/quiz/tests-react/module-09/test-09-12"
         },
         {
-          "id": "lesson-09-13",
+          "id": "test-09-13",
           "title": "Ders 13: Module 9: Performance Optimizasyonu Konusu 13",
           "description": "Module 9: Performance Optimizasyonu modülünün bu dersinde, module 9: performance optimizasyonu ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-09/lesson-09-13"
+          "href": "/education/tests/quiz/tests-react/module-09/test-09-13"
         },
         {
-          "id": "lesson-09-14",
+          "id": "test-09-14",
           "title": "Ders 14: Module 9: Performance Optimizasyonu Konusu 14",
           "description": "Module 9: Performance Optimizasyonu modülünün bu dersinde, module 9: performance optimizasyonu ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-09/lesson-09-14"
+          "href": "/education/tests/quiz/tests-react/module-09/test-09-14"
         },
         {
-          "id": "lesson-09-15",
+          "id": "test-09-15",
           "title": "Ders 15: Module 9: Performance Optimizasyonu Konusu 15",
           "description": "Module 9: Performance Optimizasyonu modülünün bu dersinde, module 9: performance optimizasyonu ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-09/lesson-09-15"
+          "href": "/education/tests/quiz/tests-react/module-09/test-09-15"
         }
       ]
     },
@@ -956,94 +956,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-10-01",
+          "id": "test-10-01",
           "title": "Ders 1: Jest ve React Testing Library Kurulumu",
           "description": "Test ortamını kurmayı ve ilk testlerinizi yazmayı öğrenin.",
-          "href": "/education/lessons/react/module-10/lesson-10-01"
+          "href": "/education/tests/quiz/tests-react/module-10/test-10-01"
         },
         {
-          "id": "lesson-10-02",
+          "id": "test-10-02",
           "title": "Ders 2: Module 10: Testing (Jest, React Testing Library) Konusu 2",
           "description": "Module 10: Testing (Jest, React Testing Library) modülünün bu dersinde, module 10: testing (jest, react testing library) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-10/lesson-10-02"
+          "href": "/education/tests/quiz/tests-react/module-10/test-10-02"
         },
         {
-          "id": "lesson-10-03",
+          "id": "test-10-03",
           "title": "Ders 3: Module 10: Testing (Jest, React Testing Library) Konusu 3",
           "description": "Module 10: Testing (Jest, React Testing Library) modülünün bu dersinde, module 10: testing (jest, react testing library) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-10/lesson-10-03"
+          "href": "/education/tests/quiz/tests-react/module-10/test-10-03"
         },
         {
-          "id": "lesson-10-04",
+          "id": "test-10-04",
           "title": "Ders 4: Module 10: Testing (Jest, React Testing Library) Konusu 4",
           "description": "Module 10: Testing (Jest, React Testing Library) modülünün bu dersinde, module 10: testing (jest, react testing library) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-10/lesson-10-04"
+          "href": "/education/tests/quiz/tests-react/module-10/test-10-04"
         },
         {
-          "id": "lesson-10-05",
+          "id": "test-10-05",
           "title": "Ders 5: Module 10: Testing (Jest, React Testing Library) Konusu 5",
           "description": "Module 10: Testing (Jest, React Testing Library) modülünün bu dersinde, module 10: testing (jest, react testing library) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-10/lesson-10-05"
+          "href": "/education/tests/quiz/tests-react/module-10/test-10-05"
         },
         {
-          "id": "lesson-10-06",
+          "id": "test-10-06",
           "title": "Ders 6: Module 10: Testing (Jest, React Testing Library) Konusu 6",
           "description": "Module 10: Testing (Jest, React Testing Library) modülünün bu dersinde, module 10: testing (jest, react testing library) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-10/lesson-10-06"
+          "href": "/education/tests/quiz/tests-react/module-10/test-10-06"
         },
         {
-          "id": "lesson-10-07",
+          "id": "test-10-07",
           "title": "Ders 7: Module 10: Testing (Jest, React Testing Library) Konusu 7",
           "description": "Module 10: Testing (Jest, React Testing Library) modülünün bu dersinde, module 10: testing (jest, react testing library) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-10/lesson-10-07"
+          "href": "/education/tests/quiz/tests-react/module-10/test-10-07"
         },
         {
-          "id": "lesson-10-08",
+          "id": "test-10-08",
           "title": "Ders 8: Module 10: Testing (Jest, React Testing Library) Konusu 8",
           "description": "Module 10: Testing (Jest, React Testing Library) modülünün bu dersinde, module 10: testing (jest, react testing library) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-10/lesson-10-08"
+          "href": "/education/tests/quiz/tests-react/module-10/test-10-08"
         },
         {
-          "id": "lesson-10-09",
+          "id": "test-10-09",
           "title": "Ders 9: Module 10: Testing (Jest, React Testing Library) Konusu 9",
           "description": "Module 10: Testing (Jest, React Testing Library) modülünün bu dersinde, module 10: testing (jest, react testing library) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-10/lesson-10-09"
+          "href": "/education/tests/quiz/tests-react/module-10/test-10-09"
         },
         {
-          "id": "lesson-10-10",
+          "id": "test-10-10",
           "title": "Ders 10: Module 10: Testing (Jest, React Testing Library) Konusu 10",
           "description": "Module 10: Testing (Jest, React Testing Library) modülünün bu dersinde, module 10: testing (jest, react testing library) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-10/lesson-10-10"
+          "href": "/education/tests/quiz/tests-react/module-10/test-10-10"
         },
         {
-          "id": "lesson-10-11",
+          "id": "test-10-11",
           "title": "Ders 11: Module 10: Testing (Jest, React Testing Library) Konusu 11",
           "description": "Module 10: Testing (Jest, React Testing Library) modülünün bu dersinde, module 10: testing (jest, react testing library) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-10/lesson-10-11"
+          "href": "/education/tests/quiz/tests-react/module-10/test-10-11"
         },
         {
-          "id": "lesson-10-12",
+          "id": "test-10-12",
           "title": "Ders 12: Module 10: Testing (Jest, React Testing Library) Konusu 12",
           "description": "Module 10: Testing (Jest, React Testing Library) modülünün bu dersinde, module 10: testing (jest, react testing library) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-10/lesson-10-12"
+          "href": "/education/tests/quiz/tests-react/module-10/test-10-12"
         },
         {
-          "id": "lesson-10-13",
+          "id": "test-10-13",
           "title": "Ders 13: Module 10: Testing (Jest, React Testing Library) Konusu 13",
           "description": "Module 10: Testing (Jest, React Testing Library) modülünün bu dersinde, module 10: testing (jest, react testing library) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-10/lesson-10-13"
+          "href": "/education/tests/quiz/tests-react/module-10/test-10-13"
         },
         {
-          "id": "lesson-10-14",
+          "id": "test-10-14",
           "title": "Ders 14: Module 10: Testing (Jest, React Testing Library) Konusu 14",
           "description": "Module 10: Testing (Jest, React Testing Library) modülünün bu dersinde, module 10: testing (jest, react testing library) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-10/lesson-10-14"
+          "href": "/education/tests/quiz/tests-react/module-10/test-10-14"
         },
         {
-          "id": "lesson-10-15",
+          "id": "test-10-15",
           "title": "Ders 15: Module 10: Testing (Jest, React Testing Library) Konusu 15",
           "description": "Module 10: Testing (Jest, React Testing Library) modülünün bu dersinde, module 10: testing (jest, react testing library) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-10/lesson-10-15"
+          "href": "/education/tests/quiz/tests-react/module-10/test-10-15"
         }
       ]
     },
@@ -1059,94 +1059,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-11-01",
+          "id": "test-11-01",
           "title": "Ders 1: CSS Modules Kullanımı",
           "description": "CSS Modules ile scoped styling yapmayı öğrenin.",
-          "href": "/education/lessons/react/module-11/lesson-11-01"
+          "href": "/education/tests/quiz/tests-react/module-11/test-11-01"
         },
         {
-          "id": "lesson-11-02",
+          "id": "test-11-02",
           "title": "Ders 2: Module 11: Styling (CSS Modules, Styled Components) Konusu 2",
           "description": "Module 11: Styling (CSS Modules, Styled Components) modülünün bu dersinde, module 11: styling (css modules, styled components) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-11/lesson-11-02"
+          "href": "/education/tests/quiz/tests-react/module-11/test-11-02"
         },
         {
-          "id": "lesson-11-03",
+          "id": "test-11-03",
           "title": "Ders 3: Module 11: Styling (CSS Modules, Styled Components) Konusu 3",
           "description": "Module 11: Styling (CSS Modules, Styled Components) modülünün bu dersinde, module 11: styling (css modules, styled components) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-11/lesson-11-03"
+          "href": "/education/tests/quiz/tests-react/module-11/test-11-03"
         },
         {
-          "id": "lesson-11-04",
+          "id": "test-11-04",
           "title": "Ders 4: Module 11: Styling (CSS Modules, Styled Components) Konusu 4",
           "description": "Module 11: Styling (CSS Modules, Styled Components) modülünün bu dersinde, module 11: styling (css modules, styled components) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-11/lesson-11-04"
+          "href": "/education/tests/quiz/tests-react/module-11/test-11-04"
         },
         {
-          "id": "lesson-11-05",
+          "id": "test-11-05",
           "title": "Ders 5: Module 11: Styling (CSS Modules, Styled Components) Konusu 5",
           "description": "Module 11: Styling (CSS Modules, Styled Components) modülünün bu dersinde, module 11: styling (css modules, styled components) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-11/lesson-11-05"
+          "href": "/education/tests/quiz/tests-react/module-11/test-11-05"
         },
         {
-          "id": "lesson-11-06",
+          "id": "test-11-06",
           "title": "Ders 6: Module 11: Styling (CSS Modules, Styled Components) Konusu 6",
           "description": "Module 11: Styling (CSS Modules, Styled Components) modülünün bu dersinde, module 11: styling (css modules, styled components) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-11/lesson-11-06"
+          "href": "/education/tests/quiz/tests-react/module-11/test-11-06"
         },
         {
-          "id": "lesson-11-07",
+          "id": "test-11-07",
           "title": "Ders 7: Module 11: Styling (CSS Modules, Styled Components) Konusu 7",
           "description": "Module 11: Styling (CSS Modules, Styled Components) modülünün bu dersinde, module 11: styling (css modules, styled components) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-11/lesson-11-07"
+          "href": "/education/tests/quiz/tests-react/module-11/test-11-07"
         },
         {
-          "id": "lesson-11-08",
+          "id": "test-11-08",
           "title": "Ders 8: Module 11: Styling (CSS Modules, Styled Components) Konusu 8",
           "description": "Module 11: Styling (CSS Modules, Styled Components) modülünün bu dersinde, module 11: styling (css modules, styled components) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-11/lesson-11-08"
+          "href": "/education/tests/quiz/tests-react/module-11/test-11-08"
         },
         {
-          "id": "lesson-11-09",
+          "id": "test-11-09",
           "title": "Ders 9: Module 11: Styling (CSS Modules, Styled Components) Konusu 9",
           "description": "Module 11: Styling (CSS Modules, Styled Components) modülünün bu dersinde, module 11: styling (css modules, styled components) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-11/lesson-11-09"
+          "href": "/education/tests/quiz/tests-react/module-11/test-11-09"
         },
         {
-          "id": "lesson-11-10",
+          "id": "test-11-10",
           "title": "Ders 10: Module 11: Styling (CSS Modules, Styled Components) Konusu 10",
           "description": "Module 11: Styling (CSS Modules, Styled Components) modülünün bu dersinde, module 11: styling (css modules, styled components) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-11/lesson-11-10"
+          "href": "/education/tests/quiz/tests-react/module-11/test-11-10"
         },
         {
-          "id": "lesson-11-11",
+          "id": "test-11-11",
           "title": "Ders 11: Module 11: Styling (CSS Modules, Styled Components) Konusu 11",
           "description": "Module 11: Styling (CSS Modules, Styled Components) modülünün bu dersinde, module 11: styling (css modules, styled components) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-11/lesson-11-11"
+          "href": "/education/tests/quiz/tests-react/module-11/test-11-11"
         },
         {
-          "id": "lesson-11-12",
+          "id": "test-11-12",
           "title": "Ders 12: Module 11: Styling (CSS Modules, Styled Components) Konusu 12",
           "description": "Module 11: Styling (CSS Modules, Styled Components) modülünün bu dersinde, module 11: styling (css modules, styled components) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-11/lesson-11-12"
+          "href": "/education/tests/quiz/tests-react/module-11/test-11-12"
         },
         {
-          "id": "lesson-11-13",
+          "id": "test-11-13",
           "title": "Ders 13: Module 11: Styling (CSS Modules, Styled Components) Konusu 13",
           "description": "Module 11: Styling (CSS Modules, Styled Components) modülünün bu dersinde, module 11: styling (css modules, styled components) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-11/lesson-11-13"
+          "href": "/education/tests/quiz/tests-react/module-11/test-11-13"
         },
         {
-          "id": "lesson-11-14",
+          "id": "test-11-14",
           "title": "Ders 14: Module 11: Styling (CSS Modules, Styled Components) Konusu 14",
           "description": "Module 11: Styling (CSS Modules, Styled Components) modülünün bu dersinde, module 11: styling (css modules, styled components) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-11/lesson-11-14"
+          "href": "/education/tests/quiz/tests-react/module-11/test-11-14"
         },
         {
-          "id": "lesson-11-15",
+          "id": "test-11-15",
           "title": "Ders 15: Module 11: Styling (CSS Modules, Styled Components) Konusu 15",
           "description": "Module 11: Styling (CSS Modules, Styled Components) modülünün bu dersinde, module 11: styling (css modules, styled components) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-11/lesson-11-15"
+          "href": "/education/tests/quiz/tests-react/module-11/test-11-15"
         }
       ]
     },
@@ -1162,94 +1162,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-12-01",
+          "id": "test-12-01",
           "title": "Ders 1: Redux Temelleri",
           "description": "Redux'un ne olduğunu, neden kullanıldığını ve temel kavramlarını öğrenin.",
-          "href": "/education/lessons/react/module-12/lesson-12-01"
+          "href": "/education/tests/quiz/tests-react/module-12/test-12-01"
         },
         {
-          "id": "lesson-12-02",
+          "id": "test-12-02",
           "title": "Ders 2: Module 12: State Management (Redux, Zustand) Konusu 2",
           "description": "Module 12: State Management (Redux, Zustand) modülünün bu dersinde, module 12: state management (redux, zustand) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-12/lesson-12-02"
+          "href": "/education/tests/quiz/tests-react/module-12/test-12-02"
         },
         {
-          "id": "lesson-12-03",
+          "id": "test-12-03",
           "title": "Ders 3: Module 12: State Management (Redux, Zustand) Konusu 3",
           "description": "Module 12: State Management (Redux, Zustand) modülünün bu dersinde, module 12: state management (redux, zustand) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-12/lesson-12-03"
+          "href": "/education/tests/quiz/tests-react/module-12/test-12-03"
         },
         {
-          "id": "lesson-12-04",
+          "id": "test-12-04",
           "title": "Ders 4: Module 12: State Management (Redux, Zustand) Konusu 4",
           "description": "Module 12: State Management (Redux, Zustand) modülünün bu dersinde, module 12: state management (redux, zustand) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-12/lesson-12-04"
+          "href": "/education/tests/quiz/tests-react/module-12/test-12-04"
         },
         {
-          "id": "lesson-12-05",
+          "id": "test-12-05",
           "title": "Ders 5: Module 12: State Management (Redux, Zustand) Konusu 5",
           "description": "Module 12: State Management (Redux, Zustand) modülünün bu dersinde, module 12: state management (redux, zustand) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-12/lesson-12-05"
+          "href": "/education/tests/quiz/tests-react/module-12/test-12-05"
         },
         {
-          "id": "lesson-12-06",
+          "id": "test-12-06",
           "title": "Ders 6: Module 12: State Management (Redux, Zustand) Konusu 6",
           "description": "Module 12: State Management (Redux, Zustand) modülünün bu dersinde, module 12: state management (redux, zustand) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-12/lesson-12-06"
+          "href": "/education/tests/quiz/tests-react/module-12/test-12-06"
         },
         {
-          "id": "lesson-12-07",
+          "id": "test-12-07",
           "title": "Ders 7: Module 12: State Management (Redux, Zustand) Konusu 7",
           "description": "Module 12: State Management (Redux, Zustand) modülünün bu dersinde, module 12: state management (redux, zustand) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-12/lesson-12-07"
+          "href": "/education/tests/quiz/tests-react/module-12/test-12-07"
         },
         {
-          "id": "lesson-12-08",
+          "id": "test-12-08",
           "title": "Ders 8: Module 12: State Management (Redux, Zustand) Konusu 8",
           "description": "Module 12: State Management (Redux, Zustand) modülünün bu dersinde, module 12: state management (redux, zustand) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-12/lesson-12-08"
+          "href": "/education/tests/quiz/tests-react/module-12/test-12-08"
         },
         {
-          "id": "lesson-12-09",
+          "id": "test-12-09",
           "title": "Ders 9: Module 12: State Management (Redux, Zustand) Konusu 9",
           "description": "Module 12: State Management (Redux, Zustand) modülünün bu dersinde, module 12: state management (redux, zustand) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-12/lesson-12-09"
+          "href": "/education/tests/quiz/tests-react/module-12/test-12-09"
         },
         {
-          "id": "lesson-12-10",
+          "id": "test-12-10",
           "title": "Ders 10: Module 12: State Management (Redux, Zustand) Konusu 10",
           "description": "Module 12: State Management (Redux, Zustand) modülünün bu dersinde, module 12: state management (redux, zustand) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-12/lesson-12-10"
+          "href": "/education/tests/quiz/tests-react/module-12/test-12-10"
         },
         {
-          "id": "lesson-12-11",
+          "id": "test-12-11",
           "title": "Ders 11: Module 12: State Management (Redux, Zustand) Konusu 11",
           "description": "Module 12: State Management (Redux, Zustand) modülünün bu dersinde, module 12: state management (redux, zustand) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-12/lesson-12-11"
+          "href": "/education/tests/quiz/tests-react/module-12/test-12-11"
         },
         {
-          "id": "lesson-12-12",
+          "id": "test-12-12",
           "title": "Ders 12: Module 12: State Management (Redux, Zustand) Konusu 12",
           "description": "Module 12: State Management (Redux, Zustand) modülünün bu dersinde, module 12: state management (redux, zustand) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-12/lesson-12-12"
+          "href": "/education/tests/quiz/tests-react/module-12/test-12-12"
         },
         {
-          "id": "lesson-12-13",
+          "id": "test-12-13",
           "title": "Ders 13: Module 12: State Management (Redux, Zustand) Konusu 13",
           "description": "Module 12: State Management (Redux, Zustand) modülünün bu dersinde, module 12: state management (redux, zustand) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-12/lesson-12-13"
+          "href": "/education/tests/quiz/tests-react/module-12/test-12-13"
         },
         {
-          "id": "lesson-12-14",
+          "id": "test-12-14",
           "title": "Ders 14: Module 12: State Management (Redux, Zustand) Konusu 14",
           "description": "Module 12: State Management (Redux, Zustand) modülünün bu dersinde, module 12: state management (redux, zustand) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-12/lesson-12-14"
+          "href": "/education/tests/quiz/tests-react/module-12/test-12-14"
         },
         {
-          "id": "lesson-12-15",
+          "id": "test-12-15",
           "title": "Ders 15: Module 12: State Management (Redux, Zustand) Konusu 15",
           "description": "Module 12: State Management (Redux, Zustand) modülünün bu dersinde, module 12: state management (redux, zustand) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-12/lesson-12-15"
+          "href": "/education/tests/quiz/tests-react/module-12/test-12-15"
         }
       ]
     },
@@ -1265,94 +1265,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-13-01",
+          "id": "test-13-01",
           "title": "Ders 1: Next.js Nedir?",
           "description": "Next.js'in ne olduğunu, React'ten farklarını ve avantajlarını öğrenin.",
-          "href": "/education/lessons/react/module-13/lesson-13-01"
+          "href": "/education/tests/quiz/tests-react/module-13/test-13-01"
         },
         {
-          "id": "lesson-13-02",
+          "id": "test-13-02",
           "title": "Ders 2: Module 13: Server-Side Rendering (Next.js) Konusu 2",
           "description": "Module 13: Server-Side Rendering (Next.js) modülünün bu dersinde, module 13: server-side rendering (next.js) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-13/lesson-13-02"
+          "href": "/education/tests/quiz/tests-react/module-13/test-13-02"
         },
         {
-          "id": "lesson-13-03",
+          "id": "test-13-03",
           "title": "Ders 3: Module 13: Server-Side Rendering (Next.js) Konusu 3",
           "description": "Module 13: Server-Side Rendering (Next.js) modülünün bu dersinde, module 13: server-side rendering (next.js) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-13/lesson-13-03"
+          "href": "/education/tests/quiz/tests-react/module-13/test-13-03"
         },
         {
-          "id": "lesson-13-04",
+          "id": "test-13-04",
           "title": "Ders 4: Module 13: Server-Side Rendering (Next.js) Konusu 4",
           "description": "Module 13: Server-Side Rendering (Next.js) modülünün bu dersinde, module 13: server-side rendering (next.js) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-13/lesson-13-04"
+          "href": "/education/tests/quiz/tests-react/module-13/test-13-04"
         },
         {
-          "id": "lesson-13-05",
+          "id": "test-13-05",
           "title": "Ders 5: Module 13: Server-Side Rendering (Next.js) Konusu 5",
           "description": "Module 13: Server-Side Rendering (Next.js) modülünün bu dersinde, module 13: server-side rendering (next.js) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-13/lesson-13-05"
+          "href": "/education/tests/quiz/tests-react/module-13/test-13-05"
         },
         {
-          "id": "lesson-13-06",
+          "id": "test-13-06",
           "title": "Ders 6: Module 13: Server-Side Rendering (Next.js) Konusu 6",
           "description": "Module 13: Server-Side Rendering (Next.js) modülünün bu dersinde, module 13: server-side rendering (next.js) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-13/lesson-13-06"
+          "href": "/education/tests/quiz/tests-react/module-13/test-13-06"
         },
         {
-          "id": "lesson-13-07",
+          "id": "test-13-07",
           "title": "Ders 7: Module 13: Server-Side Rendering (Next.js) Konusu 7",
           "description": "Module 13: Server-Side Rendering (Next.js) modülünün bu dersinde, module 13: server-side rendering (next.js) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-13/lesson-13-07"
+          "href": "/education/tests/quiz/tests-react/module-13/test-13-07"
         },
         {
-          "id": "lesson-13-08",
+          "id": "test-13-08",
           "title": "Ders 8: Module 13: Server-Side Rendering (Next.js) Konusu 8",
           "description": "Module 13: Server-Side Rendering (Next.js) modülünün bu dersinde, module 13: server-side rendering (next.js) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-13/lesson-13-08"
+          "href": "/education/tests/quiz/tests-react/module-13/test-13-08"
         },
         {
-          "id": "lesson-13-09",
+          "id": "test-13-09",
           "title": "Ders 9: Module 13: Server-Side Rendering (Next.js) Konusu 9",
           "description": "Module 13: Server-Side Rendering (Next.js) modülünün bu dersinde, module 13: server-side rendering (next.js) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-13/lesson-13-09"
+          "href": "/education/tests/quiz/tests-react/module-13/test-13-09"
         },
         {
-          "id": "lesson-13-10",
+          "id": "test-13-10",
           "title": "Ders 10: Module 13: Server-Side Rendering (Next.js) Konusu 10",
           "description": "Module 13: Server-Side Rendering (Next.js) modülünün bu dersinde, module 13: server-side rendering (next.js) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-13/lesson-13-10"
+          "href": "/education/tests/quiz/tests-react/module-13/test-13-10"
         },
         {
-          "id": "lesson-13-11",
+          "id": "test-13-11",
           "title": "Ders 11: Module 13: Server-Side Rendering (Next.js) Konusu 11",
           "description": "Module 13: Server-Side Rendering (Next.js) modülünün bu dersinde, module 13: server-side rendering (next.js) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-13/lesson-13-11"
+          "href": "/education/tests/quiz/tests-react/module-13/test-13-11"
         },
         {
-          "id": "lesson-13-12",
+          "id": "test-13-12",
           "title": "Ders 12: Module 13: Server-Side Rendering (Next.js) Konusu 12",
           "description": "Module 13: Server-Side Rendering (Next.js) modülünün bu dersinde, module 13: server-side rendering (next.js) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-13/lesson-13-12"
+          "href": "/education/tests/quiz/tests-react/module-13/test-13-12"
         },
         {
-          "id": "lesson-13-13",
+          "id": "test-13-13",
           "title": "Ders 13: Module 13: Server-Side Rendering (Next.js) Konusu 13",
           "description": "Module 13: Server-Side Rendering (Next.js) modülünün bu dersinde, module 13: server-side rendering (next.js) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-13/lesson-13-13"
+          "href": "/education/tests/quiz/tests-react/module-13/test-13-13"
         },
         {
-          "id": "lesson-13-14",
+          "id": "test-13-14",
           "title": "Ders 14: Module 13: Server-Side Rendering (Next.js) Konusu 14",
           "description": "Module 13: Server-Side Rendering (Next.js) modülünün bu dersinde, module 13: server-side rendering (next.js) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-13/lesson-13-14"
+          "href": "/education/tests/quiz/tests-react/module-13/test-13-14"
         },
         {
-          "id": "lesson-13-15",
+          "id": "test-13-15",
           "title": "Ders 15: Module 13: Server-Side Rendering (Next.js) Konusu 15",
           "description": "Module 13: Server-Side Rendering (Next.js) modülünün bu dersinde, module 13: server-side rendering (next.js) ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-13/lesson-13-15"
+          "href": "/education/tests/quiz/tests-react/module-13/test-13-15"
         }
       ]
     },
@@ -1368,94 +1368,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-14-01",
+          "id": "test-14-01",
           "title": "Ders 1: Component Design Patterns",
           "description": "Yeniden kullanılabilir ve sürdürülebilir component'ler için design pattern'leri öğrenin.",
-          "href": "/education/lessons/react/module-14/lesson-14-01"
+          "href": "/education/tests/quiz/tests-react/module-14/test-14-01"
         },
         {
-          "id": "lesson-14-02",
+          "id": "test-14-02",
           "title": "Ders 2: Module 14: React Best Practices ve Patterns Konusu 2",
           "description": "Module 14: React Best Practices ve Patterns modülünün bu dersinde, module 14: react best practices ve patterns ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-14/lesson-14-02"
+          "href": "/education/tests/quiz/tests-react/module-14/test-14-02"
         },
         {
-          "id": "lesson-14-03",
+          "id": "test-14-03",
           "title": "Ders 3: Module 14: React Best Practices ve Patterns Konusu 3",
           "description": "Module 14: React Best Practices ve Patterns modülünün bu dersinde, module 14: react best practices ve patterns ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-14/lesson-14-03"
+          "href": "/education/tests/quiz/tests-react/module-14/test-14-03"
         },
         {
-          "id": "lesson-14-04",
+          "id": "test-14-04",
           "title": "Ders 4: Module 14: React Best Practices ve Patterns Konusu 4",
           "description": "Module 14: React Best Practices ve Patterns modülünün bu dersinde, module 14: react best practices ve patterns ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-14/lesson-14-04"
+          "href": "/education/tests/quiz/tests-react/module-14/test-14-04"
         },
         {
-          "id": "lesson-14-05",
+          "id": "test-14-05",
           "title": "Ders 5: Module 14: React Best Practices ve Patterns Konusu 5",
           "description": "Module 14: React Best Practices ve Patterns modülünün bu dersinde, module 14: react best practices ve patterns ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-14/lesson-14-05"
+          "href": "/education/tests/quiz/tests-react/module-14/test-14-05"
         },
         {
-          "id": "lesson-14-06",
+          "id": "test-14-06",
           "title": "Ders 6: Module 14: React Best Practices ve Patterns Konusu 6",
           "description": "Module 14: React Best Practices ve Patterns modülünün bu dersinde, module 14: react best practices ve patterns ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-14/lesson-14-06"
+          "href": "/education/tests/quiz/tests-react/module-14/test-14-06"
         },
         {
-          "id": "lesson-14-07",
+          "id": "test-14-07",
           "title": "Ders 7: Module 14: React Best Practices ve Patterns Konusu 7",
           "description": "Module 14: React Best Practices ve Patterns modülünün bu dersinde, module 14: react best practices ve patterns ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-14/lesson-14-07"
+          "href": "/education/tests/quiz/tests-react/module-14/test-14-07"
         },
         {
-          "id": "lesson-14-08",
+          "id": "test-14-08",
           "title": "Ders 8: Module 14: React Best Practices ve Patterns Konusu 8",
           "description": "Module 14: React Best Practices ve Patterns modülünün bu dersinde, module 14: react best practices ve patterns ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-14/lesson-14-08"
+          "href": "/education/tests/quiz/tests-react/module-14/test-14-08"
         },
         {
-          "id": "lesson-14-09",
+          "id": "test-14-09",
           "title": "Ders 9: Module 14: React Best Practices ve Patterns Konusu 9",
           "description": "Module 14: React Best Practices ve Patterns modülünün bu dersinde, module 14: react best practices ve patterns ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-14/lesson-14-09"
+          "href": "/education/tests/quiz/tests-react/module-14/test-14-09"
         },
         {
-          "id": "lesson-14-10",
+          "id": "test-14-10",
           "title": "Ders 10: Module 14: React Best Practices ve Patterns Konusu 10",
           "description": "Module 14: React Best Practices ve Patterns modülünün bu dersinde, module 14: react best practices ve patterns ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-14/lesson-14-10"
+          "href": "/education/tests/quiz/tests-react/module-14/test-14-10"
         },
         {
-          "id": "lesson-14-11",
+          "id": "test-14-11",
           "title": "Ders 11: Module 14: React Best Practices ve Patterns Konusu 11",
           "description": "Module 14: React Best Practices ve Patterns modülünün bu dersinde, module 14: react best practices ve patterns ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-14/lesson-14-11"
+          "href": "/education/tests/quiz/tests-react/module-14/test-14-11"
         },
         {
-          "id": "lesson-14-12",
+          "id": "test-14-12",
           "title": "Ders 12: Module 14: React Best Practices ve Patterns Konusu 12",
           "description": "Module 14: React Best Practices ve Patterns modülünün bu dersinde, module 14: react best practices ve patterns ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-14/lesson-14-12"
+          "href": "/education/tests/quiz/tests-react/module-14/test-14-12"
         },
         {
-          "id": "lesson-14-13",
+          "id": "test-14-13",
           "title": "Ders 13: Module 14: React Best Practices ve Patterns Konusu 13",
           "description": "Module 14: React Best Practices ve Patterns modülünün bu dersinde, module 14: react best practices ve patterns ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-14/lesson-14-13"
+          "href": "/education/tests/quiz/tests-react/module-14/test-14-13"
         },
         {
-          "id": "lesson-14-14",
+          "id": "test-14-14",
           "title": "Ders 14: Module 14: React Best Practices ve Patterns Konusu 14",
           "description": "Module 14: React Best Practices ve Patterns modülünün bu dersinde, module 14: react best practices ve patterns ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-14/lesson-14-14"
+          "href": "/education/tests/quiz/tests-react/module-14/test-14-14"
         },
         {
-          "id": "lesson-14-15",
+          "id": "test-14-15",
           "title": "Ders 15: Module 14: React Best Practices ve Patterns Konusu 15",
           "description": "Module 14: React Best Practices ve Patterns modülünün bu dersinde, module 14: react best practices ve patterns ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-14/lesson-14-15"
+          "href": "/education/tests/quiz/tests-react/module-14/test-14-15"
         }
       ]
     },
@@ -1471,94 +1471,94 @@
       ],
       "relatedTests": [
         {
-          "id": "lesson-15-01",
+          "id": "test-15-01",
           "title": "Ders 1: Proje Planlama ve Mimari",
           "description": "Kapsamlı bir React projesi için planlama ve mimari tasarım yapmayı öğrenin.",
-          "href": "/education/lessons/react/module-15/lesson-15-01"
+          "href": "/education/tests/quiz/tests-react/module-15/test-15-01"
         },
         {
-          "id": "lesson-15-02",
+          "id": "test-15-02",
           "title": "Ders 2: Module 15: Bitirme Projesi Konusu 2",
           "description": "Module 15: Bitirme Projesi modülünün bu dersinde, module 15: bitirme projesi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-15/lesson-15-02"
+          "href": "/education/tests/quiz/tests-react/module-15/test-15-02"
         },
         {
-          "id": "lesson-15-03",
+          "id": "test-15-03",
           "title": "Ders 3: Module 15: Bitirme Projesi Konusu 3",
           "description": "Module 15: Bitirme Projesi modülünün bu dersinde, module 15: bitirme projesi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-15/lesson-15-03"
+          "href": "/education/tests/quiz/tests-react/module-15/test-15-03"
         },
         {
-          "id": "lesson-15-04",
+          "id": "test-15-04",
           "title": "Ders 4: Module 15: Bitirme Projesi Konusu 4",
           "description": "Module 15: Bitirme Projesi modülünün bu dersinde, module 15: bitirme projesi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-15/lesson-15-04"
+          "href": "/education/tests/quiz/tests-react/module-15/test-15-04"
         },
         {
-          "id": "lesson-15-05",
+          "id": "test-15-05",
           "title": "Ders 5: Module 15: Bitirme Projesi Konusu 5",
           "description": "Module 15: Bitirme Projesi modülünün bu dersinde, module 15: bitirme projesi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-15/lesson-15-05"
+          "href": "/education/tests/quiz/tests-react/module-15/test-15-05"
         },
         {
-          "id": "lesson-15-06",
+          "id": "test-15-06",
           "title": "Ders 6: Module 15: Bitirme Projesi Konusu 6",
           "description": "Module 15: Bitirme Projesi modülünün bu dersinde, module 15: bitirme projesi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-15/lesson-15-06"
+          "href": "/education/tests/quiz/tests-react/module-15/test-15-06"
         },
         {
-          "id": "lesson-15-07",
+          "id": "test-15-07",
           "title": "Ders 7: Module 15: Bitirme Projesi Konusu 7",
           "description": "Module 15: Bitirme Projesi modülünün bu dersinde, module 15: bitirme projesi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-15/lesson-15-07"
+          "href": "/education/tests/quiz/tests-react/module-15/test-15-07"
         },
         {
-          "id": "lesson-15-08",
+          "id": "test-15-08",
           "title": "Ders 8: Module 15: Bitirme Projesi Konusu 8",
           "description": "Module 15: Bitirme Projesi modülünün bu dersinde, module 15: bitirme projesi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-15/lesson-15-08"
+          "href": "/education/tests/quiz/tests-react/module-15/test-15-08"
         },
         {
-          "id": "lesson-15-09",
+          "id": "test-15-09",
           "title": "Ders 9: Module 15: Bitirme Projesi Konusu 9",
           "description": "Module 15: Bitirme Projesi modülünün bu dersinde, module 15: bitirme projesi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-15/lesson-15-09"
+          "href": "/education/tests/quiz/tests-react/module-15/test-15-09"
         },
         {
-          "id": "lesson-15-10",
+          "id": "test-15-10",
           "title": "Ders 10: Module 15: Bitirme Projesi Konusu 10",
           "description": "Module 15: Bitirme Projesi modülünün bu dersinde, module 15: bitirme projesi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-15/lesson-15-10"
+          "href": "/education/tests/quiz/tests-react/module-15/test-15-10"
         },
         {
-          "id": "lesson-15-11",
+          "id": "test-15-11",
           "title": "Ders 11: Module 15: Bitirme Projesi Konusu 11",
           "description": "Module 15: Bitirme Projesi modülünün bu dersinde, module 15: bitirme projesi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-15/lesson-15-11"
+          "href": "/education/tests/quiz/tests-react/module-15/test-15-11"
         },
         {
-          "id": "lesson-15-12",
+          "id": "test-15-12",
           "title": "Ders 12: Module 15: Bitirme Projesi Konusu 12",
           "description": "Module 15: Bitirme Projesi modülünün bu dersinde, module 15: bitirme projesi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-15/lesson-15-12"
+          "href": "/education/tests/quiz/tests-react/module-15/test-15-12"
         },
         {
-          "id": "lesson-15-13",
+          "id": "test-15-13",
           "title": "Ders 13: Module 15: Bitirme Projesi Konusu 13",
           "description": "Module 15: Bitirme Projesi modülünün bu dersinde, module 15: bitirme projesi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-15/lesson-15-13"
+          "href": "/education/tests/quiz/tests-react/module-15/test-15-13"
         },
         {
-          "id": "lesson-15-14",
+          "id": "test-15-14",
           "title": "Ders 14: Module 15: Bitirme Projesi Konusu 14",
           "description": "Module 15: Bitirme Projesi modülünün bu dersinde, module 15: bitirme projesi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-15/lesson-15-14"
+          "href": "/education/tests/quiz/tests-react/module-15/test-15-14"
         },
         {
-          "id": "lesson-15-15",
+          "id": "test-15-15",
           "title": "Ders 15: Module 15: Bitirme Projesi Konusu 15",
           "description": "Module 15: Bitirme Projesi modülünün bu dersinde, module 15: bitirme projesi ile ilgili temel kavramları ve uygulamaları öğreneceksiniz.",
-          "href": "/education/lessons/react/module-15/lesson-15-15"
+          "href": "/education/tests/quiz/tests-react/module-15/test-15-15"
         }
       ]
     }

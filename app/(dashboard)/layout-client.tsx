@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { signOutAction } from "@/app/actions/auth";
 import { ThemeToggle } from "@/app/components/ThemeToggle";
 import { useTheme } from "@/app/contexts/ThemeContext";
@@ -186,17 +187,17 @@ function DashboardLayoutContent({
           },
           {
             name: "Testler",
-            href: "/education/test",
+            href: "/education/tests",
             icon: PenSquare,
           },
           {
             name: "Canlı Kodlama",
-            href: "/education/live-coding",
+            href: "/education/cases",
             icon: Code,
           },
           {
             name: "Bugfix",
-            href: "/education/bug-fix",
+            href: "/education/bugfix-cases",
             icon: Bug,
           },
           {
@@ -459,8 +460,18 @@ function DashboardLayoutContent({
               className="flex items-center gap-3 mb-3 px-2 py-2 rounded-xl hover:bg-gray-100/50 dark:hover:bg-gray-700/50 transition-all duration-200 group cursor-pointer"
               onClick={() => isMobile && setSidebarOpen(false)}
             >
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center shadow-lg md:shadow-neon-blue/50">
-                <User className="h-5 w-5 text-white" />
+              <div className="relative w-10 h-10 rounded-full overflow-hidden bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center shadow-lg md:shadow-neon-blue/50">
+                {session.user?.profileImage ? (
+                  <Image
+                    src={session.user.profileImage}
+                    alt={session.user?.name || "Profil"}
+                    fill
+                    className="object-cover"
+                    sizes="40px"
+                  />
+                ) : (
+                  <User className="h-5 w-5 text-white" />
+                )}
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">

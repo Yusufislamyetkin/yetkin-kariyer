@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-
+import { ensureAIEnabled, isAIEnabled } from "@/lib/ai/client";
 import type { LiveCodingLanguage } from "@/types/live-coding";
 
 interface RunRequestBody {
@@ -41,6 +41,47 @@ const LANGUAGE_MAP: Record<
 
 const MAX_CODE_LENGTH = 100_000;
 const REQUEST_TIMEOUT_MS = 25_000;
+
+/**
+ * Translates error messages from Piston API to Turkish using OpenAI
+ */
+async function translateErrorToTurkish(errorText: string): Promise<string> {
+  if (!errorText || !errorText.trim()) {
+    return errorText;
+  }
+
+  // If AI is not enabled, return original error
+  if (!isAIEnabled()) {
+    return errorText;
+  }
+
+  try {
+    const openai = await ensureAIEnabled();
+    
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [
+        {
+          role: "system",
+          content: "Sen bir programlama hata mesajı çevirmenisin. Verilen hata mesajını Türkçe'ye çevir. Sadece çeviriyi döndür, başka açıklama yapma. Hata kodlarını (örn: CS1002, SyntaxError) koru ama açıklamaları Türkçe yap.",
+        },
+        {
+          role: "user",
+          content: `Aşağıdaki programlama hata mesajını Türkçe'ye çevir:\n\n${errorText}`,
+        },
+      ],
+      temperature: 0.3,
+      max_tokens: 500,
+    });
+
+    const translated = completion.choices[0]?.message?.content?.trim();
+    return translated || errorText;
+  } catch (error) {
+    console.error("Error translation failed:", error);
+    // Return original error if translation fails
+    return errorText;
+  }
+}
 
 export async function POST(request: Request) {
   try {
@@ -115,15 +156,42 @@ export async function POST(request: Request) {
 
     if (!pistonResponse.ok) {
       const message = payload?.message || payload?.run?.stderr || "Kod çalıştırma başarısız oldu.";
-      return NextResponse.json({ error: message }, { status: pistonResponse.status });
+      const translatedMessage = await translateErrorToTurkish(message);
+      return NextResponse.json(
+        { error: translatedMessage },
+        { 
+          status: pistonResponse.status,
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+          },
+        }
+      );
     }
 
-    return NextResponse.json({
-      language,
-      version: payload.version,
-      run: payload.run,
-      compile: payload.compile,
-    });
+    // Translate error messages in response
+    const translatedPayload = { ...payload };
+    
+    if (translatedPayload.compile?.stderr) {
+      translatedPayload.compile.stderr = await translateErrorToTurkish(translatedPayload.compile.stderr);
+    }
+    
+    if (translatedPayload.run?.stderr) {
+      translatedPayload.run.stderr = await translateErrorToTurkish(translatedPayload.run.stderr);
+    }
+
+    return NextResponse.json(
+      {
+        language,
+        version: translatedPayload.version,
+        run: translatedPayload.run,
+        compile: translatedPayload.compile,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+        },
+      }
+    );
   } catch (error) {
     console.error("Live coding run error:", error);
     return NextResponse.json(

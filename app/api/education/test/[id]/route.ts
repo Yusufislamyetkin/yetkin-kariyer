@@ -1,3 +1,5 @@
+export const runtime = 'nodejs';
+
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
@@ -21,7 +23,6 @@ export async function GET(
     const quiz = await db.quiz.findUnique({
       where: { 
         id: params.id,
-        type: "TEST",
       },
       select: {
         id: true,
@@ -29,7 +30,7 @@ export async function GET(
         description: true,
         topic: true,
         level: true,
-        questions: true,
+        type: true,
         passingScore: true,
         content: true, // Test'in kendi modül yapısı
         courseId: true,
@@ -46,22 +47,41 @@ export async function GET(
       },
     });
 
-    if (!quiz) {
+    // Test bulunamadıysa veya tip TEST değilse 404 döndür
+    if (!quiz || quiz.type !== "TEST") {
       return NextResponse.json({ error: "Test bulunamadı" }, { status: 404 });
     }
 
-    // Test'in kendi content'ini kullan, yoksa course'un content'ini fallback olarak kullanabiliriz
-    // Ama plana göre testler bağımsız olmalı, bu yüzden sadece test'in kendi content'ini döndürüyoruz
+    // Test'in kendi content'ini kullan
     const testContent = quiz.content as any;
     
-    // Content'i normalize et (kurs API'sindeki gibi)
-    const normalizedContent = testContent || {
-      modules: [],
-      overview: {
-        description: quiz.description,
-        estimatedDurationMinutes: null,
-      },
-    };
+    // Content'i normalize et - modules array'inin her zaman var olduğundan emin ol
+    let normalizedContent: any;
+    
+    if (testContent && typeof testContent === 'object') {
+      normalizedContent = {
+        ...testContent,
+        modules: Array.isArray(testContent.modules) ? testContent.modules : [],
+        overview: testContent.overview || {
+          description: quiz.description,
+          estimatedDurationMinutes: null,
+        },
+      };
+    } else {
+      // Hiçbir content yoksa varsayılan yapı oluştur
+      normalizedContent = {
+        modules: [],
+        overview: {
+          description: quiz.description,
+          estimatedDurationMinutes: null,
+        },
+      };
+    }
+
+    // Modules array'inin her zaman geçerli bir array olduğundan emin ol
+    if (!Array.isArray(normalizedContent.modules)) {
+      normalizedContent.modules = [];
+    }
 
     return NextResponse.json({ 
       quiz: {
@@ -102,7 +122,6 @@ export async function POST(
     const quiz = await db.quiz.findUnique({
       where: { 
         id: params.id,
-        type: "TEST",
       },
       include: {
         course: {
@@ -113,7 +132,7 @@ export async function POST(
       },
     });
 
-    if (!quiz) {
+    if (!quiz || quiz.type !== "TEST") {
       return NextResponse.json({ error: "Test bulunamadı" }, { status: 404 });
     }
 

@@ -8,6 +8,8 @@ BEGIN;
 -- 1. TABLOLARI VE ENUM'LARI TEMİZLE
 -- ============================================
 
+DROP TABLE IF EXISTS "story_views" CASCADE;
+DROP TABLE IF EXISTS "stories" CASCADE;
 DROP TABLE IF EXISTS "post_saves" CASCADE;
 DROP TABLE IF EXISTS "post_comments" CASCADE;
 DROP TABLE IF EXISTS "post_likes" CASCADE;
@@ -54,6 +56,7 @@ DROP TABLE IF EXISTS "badges" CASCADE;
 DROP TABLE IF EXISTS "lesson_completions" CASCADE;
 DROP TABLE IF EXISTS "lesson_mini_test_attempts" CASCADE;
 DROP TABLE IF EXISTS "wrong_questions" CASCADE;
+DROP TABLE IF EXISTS "lesson_threads" CASCADE;
 DROP TABLE IF EXISTS "assistant_threads" CASCADE;
 DROP TABLE IF EXISTS "learning_paths" CASCADE;
 DROP TABLE IF EXISTS "career_plans" CASCADE;
@@ -425,6 +428,21 @@ CREATE TABLE "assistant_threads" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT "assistant_threads_userId_fkey" FOREIGN KEY ("userId") REFERENCES "app_users"("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE "lesson_threads" (
+    "id" TEXT PRIMARY KEY,
+    "userId" TEXT NOT NULL,
+    "lessonSlug" TEXT NOT NULL,
+    "threadId" TEXT NOT NULL,
+    "roadmap" TEXT,
+    "progress" JSONB,
+    "difficultyLevel" TEXT,
+    "performanceData" JSONB,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT "lesson_threads_userId_fkey" FOREIGN KEY ("userId") REFERENCES "app_users"("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "lesson_threads_userId_lessonSlug_key" UNIQUE ("userId", "lessonSlug")
 );
 
 CREATE TABLE "wrong_questions" (
@@ -1029,6 +1047,30 @@ CREATE TABLE "post_saves" (
 );
 
 -- ============================================
+-- Stories Tables
+-- ============================================
+
+CREATE TABLE "stories" (
+    "id" TEXT PRIMARY KEY,
+    "userId" TEXT NOT NULL,
+    "imageUrl" TEXT NOT NULL,
+    "videoUrl" TEXT,
+    "expiresAt" TIMESTAMP(3) NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT "stories_userId_fkey" FOREIGN KEY ("userId") REFERENCES "app_users"("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE "story_views" (
+    "id" TEXT PRIMARY KEY,
+    "storyId" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "viewedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT "story_views_storyId_fkey" FOREIGN KEY ("storyId") REFERENCES "stories"("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "story_views_userId_fkey" FOREIGN KEY ("userId") REFERENCES "app_users"("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "story_views_storyId_userId_key" UNIQUE ("storyId", "userId")
+);
+
+-- ============================================
 -- 4. REALTIME PUBLICATION AYARLARI
 -- ============================================
 
@@ -1081,6 +1123,8 @@ CREATE INDEX IF NOT EXISTS "freelancer_bids_status_idx" ON "freelancer_bids"("st
 CREATE INDEX IF NOT EXISTS "career_plans_userId_idx" ON "career_plans"("userId");
 CREATE INDEX IF NOT EXISTS "learning_paths_userId_idx" ON "learning_paths"("userId");
 CREATE INDEX IF NOT EXISTS "assistant_threads_createdAt_idx" ON "assistant_threads"("createdAt");
+CREATE INDEX IF NOT EXISTS "lesson_threads_lessonSlug_idx" ON "lesson_threads"("lessonSlug");
+CREATE INDEX IF NOT EXISTS "lesson_threads_userId_lessonSlug_idx" ON "lesson_threads"("userId", "lessonSlug");
 CREATE INDEX IF NOT EXISTS "wrong_questions_userId_idx" ON "wrong_questions"("userId");
 CREATE INDEX IF NOT EXISTS "wrong_questions_quizAttemptId_idx" ON "wrong_questions"("quizAttemptId");
 CREATE INDEX IF NOT EXISTS "gamification_events_userId_occurredAt_idx" ON "gamification_events"("userId", "occurredAt");
@@ -1129,6 +1173,11 @@ CREATE INDEX IF NOT EXISTS "post_comments_postId_createdAt_idx" ON "post_comment
 CREATE INDEX IF NOT EXISTS "post_comments_userId_idx" ON "post_comments"("userId");
 CREATE INDEX IF NOT EXISTS "post_saves_postId_idx" ON "post_saves"("postId");
 CREATE INDEX IF NOT EXISTS "post_saves_userId_idx" ON "post_saves"("userId");
+CREATE INDEX IF NOT EXISTS "stories_userId_idx" ON "stories"("userId");
+CREATE INDEX IF NOT EXISTS "stories_expiresAt_idx" ON "stories"("expiresAt");
+CREATE INDEX IF NOT EXISTS "stories_createdAt_idx" ON "stories"("createdAt");
+CREATE INDEX IF NOT EXISTS "story_views_storyId_idx" ON "story_views"("storyId");
+CREATE INDEX IF NOT EXISTS "story_views_userId_idx" ON "story_views"("userId");
 CREATE INDEX IF NOT EXISTS "quizzes_courseId_idx" ON "quizzes"("courseId");
 CREATE INDEX IF NOT EXISTS "quizzes_lessonSlug_idx" ON "quizzes"("lessonSlug");
 CREATE INDEX IF NOT EXISTS "quizzes_type_idx" ON "quizzes"("type");
@@ -1151,7 +1200,7 @@ DO $$
 BEGIN
     RAISE NOTICE 'Database schema created successfully.';
     RAISE NOTICE 'Enums: UserRole, JobStatus, ApplicationStatus, WrongQuestionStatus, BadgeCategory, BadgeRarity, GoalType, GoalFrequency, LeaderboardPeriod, EducationType, ChatGroupRole, ChatGroupVisibility, ChatMessageType, ChatAttachmentType, FriendshipStatus, HackathonVisibility, HackathonPhase, HackathonApplicationStatus, HackathonTeamRole, HackathonTeamMemberStatus, HackathonSubmissionStatus, BadgeTier, RewardType';
-    RAISE NOTICE 'Tables: app_users, courses, quizzes, hackathons, quiz_attempts, interviews, interview_attempts, cv_templates, cvs, cv_uploads, jobs, job_applications, freelancer_projects, freelancer_bids, career_plans, learning_paths, assistant_threads, wrong_questions, badges, user_badges, daily_goals, dashboard_goal_plans, leaderboard_entries, employer_comments, user_streaks, test_attempts, live_coding_attempts, bug_fix_attempts, hackaton_attempts, gamification_events, point_transactions, user_balances, quests, quest_progress, leaderboard_snapshots, rewards, reward_redemptions, user_inventory, admin_audit_logs, hackathon_applications, hackathon_teams, hackathon_team_members, hackathon_submissions, friendships, test_leaderboard_entries, live_coding_leaderboard_entries, bug_fix_leaderboard_entries, hackaton_leaderboard_entries, chat_groups, chat_group_memberships, chat_messages, chat_attachments, chat_message_receipts, posts, post_likes, post_comments, post_saves, live_coding_challenges, bug_fix_challenges';
+    RAISE NOTICE 'Tables: app_users, courses, quizzes, hackathons, quiz_attempts, interviews, interview_attempts, cv_templates, cvs, cv_uploads, jobs, job_applications, freelancer_projects, freelancer_bids, career_plans, learning_paths, assistant_threads, lesson_threads, wrong_questions, badges, user_badges, daily_goals, dashboard_goal_plans, leaderboard_entries, employer_comments, user_streaks, test_attempts, live_coding_attempts, bug_fix_attempts, hackaton_attempts, gamification_events, point_transactions, user_balances, quests, quest_progress, leaderboard_snapshots, rewards, reward_redemptions, user_inventory, admin_audit_logs, hackathon_applications, hackathon_teams, hackathon_team_members, hackathon_submissions, friendships, test_leaderboard_entries, live_coding_leaderboard_entries, bug_fix_leaderboard_entries, hackaton_leaderboard_entries, chat_groups, chat_group_memberships, chat_messages, chat_attachments, chat_message_receipts, posts, post_likes, post_comments, post_saves, stories, story_views, live_coding_challenges, bug_fix_challenges';
 END $$;
 
 COMMIT;

@@ -1,0 +1,842 @@
+{
+  "languages": [
+    {
+      "id": "csharp",
+      "name": "C#",
+      "cases": [
+        {
+          "id": "csharp-case-1",
+          "title": "Sayısal Çıktı Döngüsü",
+          "description": "1'den 50'ye kadar sayıları ekrana yazdırın.",
+          "difficulty": "beginner",
+          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dünya 1', 'Selam Sana Dünya 2', ... 'Selam Sana Dünya 50'",
+          "starterCode": {
+            "csharp": "using System;\n\nclass Program\n{\n    static void Main(string[] args)\n    {\n        // Kodunu buraya yaz\n        \n    }\n}"
+          },
+          "testCases": [
+            {
+              "input": "",
+              "expectedOutput": "Selam Sana Dünya 1\nSelam Sana Dünya 2\n...\nSelam Sana Dünya 50"
+            }
+          ],
+          "hints": [
+            "for döngüsü kullanabilirsiniz",
+            "Console.WriteLine ile çıktı alabilirsiniz",
+            "String interpolation kullanabilirsiniz"
+          ]
+        },
+        {
+          "id": "csharp-case-2",
+          "title": "Temel Matematik İşlemleri",
+          "description": "İki sayı üzerinde temel matematik işlemleri yapın.",
+          "difficulty": "beginner",
+          "instructions": "Kullanıcıdan iki sayı alın (a ve b) ve bu sayılar üzerinde toplama, çıkarma, çarpma ve bölme işlemlerini yaparak sonuçları ekrana yazdırın. Örnek: a=10, b=5 için '10 + 5 = 15', '10 - 5 = 5', '10 * 5 = 50', '10 / 5 = 2'",
+          "starterCode": {
+            "csharp": "using System;\n\nclass Program\n{\n    static void Main(string[] args)\n    {\n        int a = 10;\n        int b = 5;\n        // Kodunu buraya yaz\n        \n    }\n}"
+          },
+          "testCases": [
+            {
+              "input": "a=10, b=5",
+              "expectedOutput": "10 + 5 = 15\n10 - 5 = 5\n10 * 5 = 50\n10 / 5 = 2"
+            }
+          ],
+          "hints": [
+            "Dört işlem operatörlerini kullanın: +, -, *, /",
+            "Bölme işleminde sıfıra bölme kontrolü yapın",
+            "Console.WriteLine ile sonuçları yazdırın"
+          ]
+        },
+        {
+          "id": "csharp-case-3",
+          "title": "String İşlemleri",
+          "description": "Metin üzerinde temel string işlemleri yapın.",
+          "difficulty": "beginner",
+          "instructions": "Bir string alın ve şu işlemleri yapın: 1) String'in uzunluğunu bulun, 2) String'i büyük harfe çevirin, 3) String'i küçük harfe çevirin, 4) String'in tersini alın, 5) String içinde belirli bir karakteri sayın. Tüm sonuçları ekrana yazdırın.",
+          "starterCode": {
+            "csharp": "using System;\n\nclass Program\n{\n    static void Main(string[] args)\n    {\n        string text = \"Hello World\";\n        // Kodunu buraya yaz\n        \n    }\n}"
+          },
+          "testCases": [
+            {
+              "input": "text=\"Hello World\"",
+              "expectedOutput": "Uzunluk: 11\nBüyük harf: HELLO WORLD\nKüçük harf: hello world\nTers: dlroW olleH\n'l' karakteri sayısı: 3"
+            }
+          ],
+          "hints": [
+            "text.Length ile uzunluk bulunur",
+            "text.ToUpper() ve text.ToLower() kullanın",
+            "String'i char array'e çevirip tersine çevirebilirsiniz"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "java",
+      "name": "Java",
+      "cases": [
+        {
+          "id": "java-case-1",
+          "title": "Sayısal Çıktı Döngüsü",
+          "description": "1'den 50'ye kadar sayıları ekrana yazdırın.",
+          "difficulty": "beginner",
+          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dünya 1', 'Selam Sana Dünya 2', ... 'Selam Sana Dünya 50'",
+          "starterCode": {
+            "java": "public class Main {\n    public static void main(String[] args) {\n        // Kodunu buraya yaz\n        \n    }\n}"
+          },
+          "testCases": [
+            {
+              "input": "",
+              "expectedOutput": "Selam Sana Dünya 1\nSelam Sana Dünya 2\n...\nSelam Sana Dünya 50"
+            }
+          ],
+          "hints": [
+            "for döngüsü kullanabilirsiniz",
+            "System.out.println ile çıktı alabilirsiniz",
+            "String concatenation veya String.format kullanabilirsiniz"
+          ]
+        },
+        {
+          "id": "java-case-2",
+          "title": "Temel Matematik İşlemleri",
+          "description": "İki sayı üzerinde temel matematik işlemleri yapın.",
+          "difficulty": "beginner",
+          "instructions": "İki sayı (a ve b) tanımlayın ve bu sayılar üzerinde toplama, çıkarma, çarpma ve bölme işlemlerini yaparak sonuçları ekrana yazdırın. Örnek: a=10, b=5 için '10 + 5 = 15', '10 - 5 = 5', '10 * 5 = 50', '10 / 5 = 2'",
+          "starterCode": {
+            "java": "public class Main {\n    public static void main(String[] args) {\n        int a = 10;\n        int b = 5;\n        // Kodunu buraya yaz\n        \n    }\n}"
+          },
+          "testCases": [
+            {
+              "input": "a=10, b=5",
+              "expectedOutput": "10 + 5 = 15\n10 - 5 = 5\n10 * 5 = 50\n10 / 5 = 2"
+            }
+          ],
+          "hints": [
+            "Dört işlem operatörlerini kullanın: +, -, *, /",
+            "Bölme işleminde sıfıra bölme kontrolü yapın",
+            "System.out.println ile sonuçları yazdırın"
+          ]
+        },
+        {
+          "id": "java-case-3",
+          "title": "String İşlemleri",
+          "description": "Metin üzerinde temel string işlemleri yapın.",
+          "difficulty": "beginner",
+          "instructions": "Bir string alın ve şu işlemleri yapın: 1) String'in uzunluğunu bulun, 2) String'i büyük harfe çevirin, 3) String'i küçük harfe çevirin, 4) String'in tersini alın, 5) String içinde belirli bir karakteri sayın. Tüm sonuçları ekrana yazdırın.",
+          "starterCode": {
+            "java": "public class Main {\n    public static void main(String[] args) {\n        String text = \"Hello World\";\n        // Kodunu buraya yaz\n        \n    }\n}"
+          },
+          "testCases": [
+            {
+              "input": "text=\"Hello World\"",
+              "expectedOutput": "Uzunluk: 11\nBüyük harf: HELLO WORLD\nKüçük harf: hello world\nTers: dlroW olleH\n'l' karakteri sayısı: 3"
+            }
+          ],
+          "hints": [
+            "text.length() ile uzunluk bulunur",
+            "text.toUpperCase() ve text.toLowerCase() kullanın",
+            "StringBuilder veya char array ile tersine çevirebilirsiniz"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "python",
+      "name": "Python",
+      "cases": [
+        {
+          "id": "python-case-1",
+          "title": "Sayısal Çıktı Döngüsü",
+          "description": "1'den 50'ye kadar sayıları ekrana yazdırın.",
+          "difficulty": "beginner",
+          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dünya 1', 'Selam Sana Dünya 2', ... 'Selam Sana Dünya 50'",
+          "starterCode": {
+            "python": "# Kodunu buraya yaz\n"
+          },
+          "testCases": [
+            {
+              "input": "",
+              "expectedOutput": "Selam Sana Dünya 1\nSelam Sana Dünya 2\n...\nSelam Sana Dünya 50"
+            }
+          ],
+          "hints": [
+            "for döngüsü ve range() kullanabilirsiniz",
+            "print() ile çıktı alabilirsiniz",
+            "f-string veya format() kullanabilirsiniz"
+          ]
+        },
+        {
+          "id": "python-case-2",
+          "title": "Temel Matematik İşlemleri",
+          "description": "İki sayı üzerinde temel matematik işlemleri yapın.",
+          "difficulty": "beginner",
+          "instructions": "İki sayı (a ve b) tanımlayın ve bu sayılar üzerinde toplama, çıkarma, çarpma ve bölme işlemlerini yaparak sonuçları ekrana yazdırın. Örnek: a=10, b=5 için '10 + 5 = 15', '10 - 5 = 5', '10 * 5 = 50', '10 / 5 = 2.0'",
+          "starterCode": {
+            "python": "a = 10\nb = 5\n# Kodunu buraya yaz\n"
+          },
+          "testCases": [
+            {
+              "input": "a=10, b=5",
+              "expectedOutput": "10 + 5 = 15\n10 - 5 = 5\n10 * 5 = 50\n10 / 5 = 2.0"
+            }
+          ],
+          "hints": [
+            "Dört işlem operatörlerini kullanın: +, -, *, /",
+            "Bölme işleminde sıfıra bölme kontrolü yapın",
+            "f-string ile formatlanmış çıktı alabilirsiniz"
+          ]
+        },
+        {
+          "id": "python-case-3",
+          "title": "String İşlemleri",
+          "description": "Metin üzerinde temel string işlemleri yapın.",
+          "difficulty": "beginner",
+          "instructions": "Bir string alın ve şu işlemleri yapın: 1) String'in uzunluğunu bulun, 2) String'i büyük harfe çevirin, 3) String'i küçük harfe çevirin, 4) String'in tersini alın, 5) String içinde belirli bir karakteri sayın. Tüm sonuçları ekrana yazdırın.",
+          "starterCode": {
+            "python": "text = \"Hello World\"\n# Kodunu buraya yaz\n"
+          },
+          "testCases": [
+            {
+              "input": "text=\"Hello World\"",
+              "expectedOutput": "Uzunluk: 11\nBüyük harf: HELLO WORLD\nKüçük harf: hello world\nTers: dlroW olleH\n'l' karakteri sayısı: 3"
+            }
+          ],
+          "hints": [
+            "len() ile uzunluk bulunur",
+            "text.upper() ve text.lower() kullanın",
+            "text[::-1] ile tersine çevirebilirsiniz",
+            "text.count() ile karakter sayısı bulunur"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "php",
+      "name": "PHP",
+      "cases": [
+        {
+          "id": "php-case-1",
+          "title": "Sayısal Çıktı Döngüsü",
+          "description": "1'den 50'ye kadar sayıları ekrana yazdırın.",
+          "difficulty": "beginner",
+          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dünya 1', 'Selam Sana Dünya 2', ... 'Selam Sana Dünya 50'",
+          "starterCode": {
+            "php": "<?php\n// Kodunu buraya yaz\n?>"
+          },
+          "testCases": [
+            {
+              "input": "",
+              "expectedOutput": "Selam Sana Dünya 1\nSelam Sana Dünya 2\n...\nSelam Sana Dünya 50"
+            }
+          ],
+          "hints": [
+            "for döngüsü kullanabilirsiniz",
+            "echo veya print ile çıktı alabilirsiniz",
+            "String concatenation (.) kullanabilirsiniz"
+          ]
+        },
+        {
+          "id": "php-case-2",
+          "title": "Temel Matematik İşlemleri",
+          "description": "İki sayı üzerinde temel matematik işlemleri yapın.",
+          "difficulty": "beginner",
+          "instructions": "İki sayı (a ve b) tanımlayın ve bu sayılar üzerinde toplama, çıkarma, çarpma ve bölme işlemlerini yaparak sonuçları ekrana yazdırın. Örnek: a=10, b=5 için '10 + 5 = 15', '10 - 5 = 5', '10 * 5 = 50', '10 / 5 = 2'",
+          "starterCode": {
+            "php": "<?php\n$a = 10;\n$b = 5;\n// Kodunu buraya yaz\n?>"
+          },
+          "testCases": [
+            {
+              "input": "a=10, b=5",
+              "expectedOutput": "10 + 5 = 15\n10 - 5 = 5\n10 * 5 = 50\n10 / 5 = 2"
+            }
+          ],
+          "hints": [
+            "Dört işlem operatörlerini kullanın: +, -, *, /",
+            "Bölme işleminde sıfıra bölme kontrolü yapın",
+            "echo ile sonuçları yazdırın"
+          ]
+        },
+        {
+          "id": "php-case-3",
+          "title": "String İşlemleri",
+          "description": "Metin üzerinde temel string işlemleri yapın.",
+          "difficulty": "beginner",
+          "instructions": "Bir string alın ve şu işlemleri yapın: 1) String'in uzunluğunu bulun, 2) String'i büyük harfe çevirin, 3) String'i küçük harfe çevirin, 4) String'in tersini alın, 5) String içinde belirli bir karakteri sayın. Tüm sonuçları ekrana yazdırın.",
+          "starterCode": {
+            "php": "<?php\n$text = \"Hello World\";\n// Kodunu buraya yaz\n?>"
+          },
+          "testCases": [
+            {
+              "input": "text=\"Hello World\"",
+              "expectedOutput": "Uzunluk: 11\nBüyük harf: HELLO WORLD\nKüçük harf: hello world\nTers: dlroW olleH\n'l' karakteri sayısı: 3"
+            }
+          ],
+          "hints": [
+            "strlen() ile uzunluk bulunur",
+            "strtoupper() ve strtolower() kullanın",
+            "strrev() ile tersine çevirebilirsiniz",
+            "substr_count() ile karakter sayısı bulunur"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "javascript",
+      "name": "JavaScript",
+      "cases": [
+        {
+          "id": "javascript-case-1",
+          "title": "Sayısal Çıktı Döngüsü",
+          "description": "1'den 50'ye kadar sayıları ekrana yazdırın.",
+          "difficulty": "beginner",
+          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dünya 1', 'Selam Sana Dünya 2', ... 'Selam Sana Dünya 50'",
+          "starterCode": {
+            "javascript": "// Kodunu buraya yaz\n"
+          },
+          "testCases": [
+            {
+              "input": "",
+              "expectedOutput": "Selam Sana Dünya 1\nSelam Sana Dünya 2\n...\nSelam Sana Dünya 50"
+            }
+          ],
+          "hints": [
+            "for döngüsü kullanabilirsiniz",
+            "console.log() ile çıktı alabilirsiniz",
+            "Template literals (backticks) kullanabilirsiniz"
+          ]
+        },
+        {
+          "id": "javascript-case-2",
+          "title": "Temel Matematik İşlemleri",
+          "description": "İki sayı üzerinde temel matematik işlemleri yapın.",
+          "difficulty": "beginner",
+          "instructions": "İki sayı (a ve b) tanımlayın ve bu sayılar üzerinde toplama, çıkarma, çarpma ve bölme işlemlerini yaparak sonuçları ekrana yazdırın. Örnek: a=10, b=5 için '10 + 5 = 15', '10 - 5 = 5', '10 * 5 = 50', '10 / 5 = 2'",
+          "starterCode": {
+            "javascript": "const a = 10;\nconst b = 5;\n// Kodunu buraya yaz\n"
+          },
+          "testCases": [
+            {
+              "input": "a=10, b=5",
+              "expectedOutput": "10 + 5 = 15\n10 - 5 = 5\n10 * 5 = 50\n10 / 5 = 2"
+            }
+          ],
+          "hints": [
+            "Dört işlem operatörlerini kullanın: +, -, *, /",
+            "Bölme işleminde sıfıra bölme kontrolü yapın",
+            "console.log() ile sonuçları yazdırın"
+          ]
+        },
+        {
+          "id": "javascript-case-3",
+          "title": "String İşlemleri",
+          "description": "Metin üzerinde temel string işlemleri yapın.",
+          "difficulty": "beginner",
+          "instructions": "Bir string alın ve şu işlemleri yapın: 1) String'in uzunluğunu bulun, 2) String'i büyük harfe çevirin, 3) String'i küçük harfe çevirin, 4) String'in tersini alın, 5) String içinde belirli bir karakteri sayın. Tüm sonuçları ekrana yazdırın.",
+          "starterCode": {
+            "javascript": "const text = \"Hello World\";\n// Kodunu buraya yaz\n"
+          },
+          "testCases": [
+            {
+              "input": "text=\"Hello World\"",
+              "expectedOutput": "Uzunluk: 11\nBüyük harf: HELLO WORLD\nKüçük harf: hello world\nTers: dlroW olleH\n'l' karakteri sayısı: 3"
+            }
+          ],
+          "hints": [
+            "text.length ile uzunluk bulunur",
+            "text.toUpperCase() ve text.toLowerCase() kullanın",
+            "text.split('').reverse().join('') ile tersine çevirebilirsiniz",
+            "text.split('l').length - 1 ile karakter sayısı bulunur"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "typescript",
+      "name": "TypeScript",
+      "cases": [
+        {
+          "id": "typescript-case-1",
+          "title": "Sayısal Çıktı Döngüsü",
+          "description": "1'den 50'ye kadar sayıları ekrana yazdırın.",
+          "difficulty": "beginner",
+          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dünya 1', 'Selam Sana Dünya 2', ... 'Selam Sana Dünya 50'",
+          "starterCode": {
+            "typescript": "// Kodunu buraya yaz\n"
+          },
+          "testCases": [
+            {
+              "input": "",
+              "expectedOutput": "Selam Sana Dünya 1\nSelam Sana Dünya 2\n...\nSelam Sana Dünya 50"
+            }
+          ],
+          "hints": [
+            "for döngüsü kullanabilirsiniz",
+            "console.log() ile çıktı alabilirsiniz",
+            "Template literals kullanabilirsiniz"
+          ]
+        },
+        {
+          "id": "typescript-case-2",
+          "title": "Temel Matematik İşlemleri",
+          "description": "İki sayı üzerinde temel matematik işlemleri yapın.",
+          "difficulty": "beginner",
+          "instructions": "İki sayı (a ve b) tanımlayın ve bu sayılar üzerinde toplama, çıkarma, çarpma ve bölme işlemlerini yaparak sonuçları ekrana yazdırın. Örnek: a=10, b=5 için '10 + 5 = 15', '10 - 5 = 5', '10 * 5 = 50', '10 / 5 = 2'",
+          "starterCode": {
+            "typescript": "const a: number = 10;\nconst b: number = 5;\n// Kodunu buraya yaz\n"
+          },
+          "testCases": [
+            {
+              "input": "a=10, b=5",
+              "expectedOutput": "10 + 5 = 15\n10 - 5 = 5\n10 * 5 = 50\n10 / 5 = 2"
+            }
+          ],
+          "hints": [
+            "Type annotations kullanın: number",
+            "Dört işlem operatörlerini kullanın: +, -, *, /",
+            "console.log() ile sonuçları yazdırın"
+          ]
+        },
+        {
+          "id": "typescript-case-3",
+          "title": "String İşlemleri",
+          "description": "Metin üzerinde temel string işlemleri yapın.",
+          "difficulty": "beginner",
+          "instructions": "Bir string alın ve şu işlemleri yapın: 1) String'in uzunluğunu bulun, 2) String'i büyük harfe çevirin, 3) String'i küçük harfe çevirin, 4) String'in tersini alın, 5) String içinde belirli bir karakteri sayın. Tüm sonuçları ekrana yazdırın.",
+          "starterCode": {
+            "typescript": "const text: string = \"Hello World\";\n// Kodunu buraya yaz\n"
+          },
+          "testCases": [
+            {
+              "input": "text=\"Hello World\"",
+              "expectedOutput": "Uzunluk: 11\nBüyük harf: HELLO WORLD\nKüçük harf: hello world\nTers: dlroW olleH\n'l' karakteri sayısı: 3"
+            }
+          ],
+          "hints": [
+            "Type annotations kullanın: string",
+            "text.length, text.toUpperCase(), text.toLowerCase() kullanın",
+            "Array metodları ile tersine çevirebilirsiniz"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "go",
+      "name": "Go",
+      "cases": [
+        {
+          "id": "go-case-1",
+          "title": "Sayısal Çıktı Döngüsü",
+          "description": "1'den 50'ye kadar sayıları ekrana yazdırın.",
+          "difficulty": "beginner",
+          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dünya 1', 'Selam Sana Dünya 2', ... 'Selam Sana Dünya 50'",
+          "starterCode": {
+            "go": "package main\n\nimport \"fmt\"\n\nfunc main() {\n    // Kodunu buraya yaz\n}"
+          },
+          "testCases": [
+            {
+              "input": "",
+              "expectedOutput": "Selam Sana Dünya 1\nSelam Sana Dünya 2\n...\nSelam Sana Dünya 50"
+            }
+          ],
+          "hints": [
+            "for döngüsü kullanabilirsiniz",
+            "fmt.Println() ile çıktı alabilirsiniz",
+            "fmt.Sprintf() ile formatlanmış string oluşturabilirsiniz"
+          ]
+        },
+        {
+          "id": "go-case-2",
+          "title": "Temel Matematik İşlemleri",
+          "description": "İki sayı üzerinde temel matematik işlemleri yapın.",
+          "difficulty": "beginner",
+          "instructions": "İki sayı (a ve b) tanımlayın ve bu sayılar üzerinde toplama, çıkarma, çarpma ve bölme işlemlerini yaparak sonuçları ekrana yazdırın. Örnek: a=10, b=5 için '10 + 5 = 15', '10 - 5 = 5', '10 * 5 = 50', '10 / 5 = 2'",
+          "starterCode": {
+            "go": "package main\n\nimport \"fmt\"\n\nfunc main() {\n    a := 10\n    b := 5\n    // Kodunu buraya yaz\n}"
+          },
+          "testCases": [
+            {
+              "input": "a=10, b=5",
+              "expectedOutput": "10 + 5 = 15\n10 - 5 = 5\n10 * 5 = 50\n10 / 5 = 2"
+            }
+          ],
+          "hints": [
+            "Dört işlem operatörlerini kullanın: +, -, *, /",
+            "Bölme işleminde sıfıra bölme kontrolü yapın",
+            "fmt.Printf() ile formatlanmış çıktı alabilirsiniz"
+          ]
+        },
+        {
+          "id": "go-case-3",
+          "title": "String İşlemleri",
+          "description": "Metin üzerinde temel string işlemleri yapın.",
+          "difficulty": "beginner",
+          "instructions": "Bir string alın ve şu işlemleri yapın: 1) String'in uzunluğunu bulun, 2) String'i büyük harfe çevirin, 3) String'i küçük harfe çevirin, 4) String'in tersini alın, 5) String içinde belirli bir karakteri sayın. Tüm sonuçları ekrana yazdırın.",
+          "starterCode": {
+            "go": "package main\n\nimport (\n    \"fmt\"\n    \"strings\"\n    \"unicode\"\n)\n\nfunc main() {\n    text := \"Hello World\"\n    // Kodunu buraya yaz\n}"
+          },
+          "testCases": [
+            {
+              "input": "text=\"Hello World\"",
+              "expectedOutput": "Uzunluk: 11\nBüyük harf: HELLO WORLD\nKüçük harf: hello world\nTers: dlroW olleH\n'l' karakteri sayısı: 3"
+            }
+          ],
+          "hints": [
+            "len() ile uzunluk bulunur",
+            "strings.ToUpper() ve strings.ToLower() kullanın",
+            "rune slice ile tersine çevirebilirsiniz",
+            "strings.Count() ile karakter sayısı bulunur"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rust",
+      "name": "Rust",
+      "cases": [
+        {
+          "id": "rust-case-1",
+          "title": "Sayısal Çıktı Döngüsü",
+          "description": "1'den 50'ye kadar sayıları ekrana yazdırın.",
+          "difficulty": "beginner",
+          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dünya 1', 'Selam Sana Dünya 2', ... 'Selam Sana Dünya 50'",
+          "starterCode": {
+            "rust": "fn main() {\n    // Kodunu buraya yaz\n}"
+          },
+          "testCases": [
+            {
+              "input": "",
+              "expectedOutput": "Selam Sana Dünya 1\nSelam Sana Dünya 2\n...\nSelam Sana Dünya 50"
+            }
+          ],
+          "hints": [
+            "for döngüsü ve range kullanabilirsiniz",
+            "println!() macro ile çıktı alabilirsiniz",
+            "format!() macro ile formatlanmış string oluşturabilirsiniz"
+          ]
+        },
+        {
+          "id": "rust-case-2",
+          "title": "Temel Matematik İşlemleri",
+          "description": "İki sayı üzerinde temel matematik işlemleri yapın.",
+          "difficulty": "beginner",
+          "instructions": "İki sayı (a ve b) tanımlayın ve bu sayılar üzerinde toplama, çıkarma, çarpma ve bölme işlemlerini yaparak sonuçları ekrana yazdırın. Örnek: a=10, b=5 için '10 + 5 = 15', '10 - 5 = 5', '10 * 5 = 50', '10 / 5 = 2'",
+          "starterCode": {
+            "rust": "fn main() {\n    let a = 10;\n    let b = 5;\n    // Kodunu buraya yaz\n}"
+          },
+          "testCases": [
+            {
+              "input": "a=10, b=5",
+              "expectedOutput": "10 + 5 = 15\n10 - 5 = 5\n10 * 5 = 50\n10 / 5 = 2"
+            }
+          ],
+          "hints": [
+            "Dört işlem operatörlerini kullanın: +, -, *, /",
+            "Bölme işleminde sıfıra bölme kontrolü yapın",
+            "println!() ile formatlanmış çıktı alabilirsiniz"
+          ]
+        },
+        {
+          "id": "rust-case-3",
+          "title": "String İşlemleri",
+          "description": "Metin üzerinde temel string işlemleri yapın.",
+          "difficulty": "beginner",
+          "instructions": "Bir string alın ve şu işlemleri yapın: 1) String'in uzunluğunu bulun, 2) String'i büyük harfe çevirin, 3) String'i küçük harfe çevirin, 4) String'in tersini alın, 5) String içinde belirli bir karakteri sayın. Tüm sonuçları ekrana yazdırın.",
+          "starterCode": {
+            "rust": "fn main() {\n    let text = \"Hello World\";\n    // Kodunu buraya yaz\n}"
+          },
+          "testCases": [
+            {
+              "input": "text=\"Hello World\"",
+              "expectedOutput": "Uzunluk: 11\nBüyük harf: HELLO WORLD\nKüçük harf: hello world\nTers: dlroW olleH\n'l' karakteri sayısı: 3"
+            }
+          ],
+          "hints": [
+            "text.len() ile uzunluk bulunur",
+            "text.to_uppercase() ve text.to_lowercase() kullanın",
+            "chars().rev().collect() ile tersine çevirebilirsiniz",
+            "matches() ile karakter sayısı bulunur"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cpp",
+      "name": "C++",
+      "cases": [
+        {
+          "id": "cpp-case-1",
+          "title": "Sayısal Çıktı Döngüsü",
+          "description": "1'den 50'ye kadar sayıları ekrana yazdırın.",
+          "difficulty": "beginner",
+          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dünya 1', 'Selam Sana Dünya 2', ... 'Selam Sana Dünya 50'",
+          "starterCode": {
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // Kodunu buraya yaz\n    return 0;\n}"
+          },
+          "testCases": [
+            {
+              "input": "",
+              "expectedOutput": "Selam Sana Dünya 1\nSelam Sana Dünya 2\n...\nSelam Sana Dünya 50"
+            }
+          ],
+          "hints": [
+            "for döngüsü kullanabilirsiniz",
+            "cout ile çıktı alabilirsiniz",
+            "string concatenation veya stream kullanabilirsiniz"
+          ]
+        },
+        {
+          "id": "cpp-case-2",
+          "title": "Temel Matematik İşlemleri",
+          "description": "İki sayı üzerinde temel matematik işlemleri yapın.",
+          "difficulty": "beginner",
+          "instructions": "İki sayı (a ve b) tanımlayın ve bu sayılar üzerinde toplama, çıkarma, çarpma ve bölme işlemlerini yaparak sonuçları ekrana yazdırın. Örnek: a=10, b=5 için '10 + 5 = 15', '10 - 5 = 5', '10 * 5 = 50', '10 / 5 = 2'",
+          "starterCode": {
+            "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int a = 10;\n    int b = 5;\n    // Kodunu buraya yaz\n    return 0;\n}"
+          },
+          "testCases": [
+            {
+              "input": "a=10, b=5",
+              "expectedOutput": "10 + 5 = 15\n10 - 5 = 5\n10 * 5 = 50\n10 / 5 = 2"
+            }
+          ],
+          "hints": [
+            "Dört işlem operatörlerini kullanın: +, -, *, /",
+            "Bölme işleminde sıfıra bölme kontrolü yapın",
+            "cout ile sonuçları yazdırın"
+          ]
+        },
+        {
+          "id": "cpp-case-3",
+          "title": "String İşlemleri",
+          "description": "Metin üzerinde temel string işlemleri yapın.",
+          "difficulty": "beginner",
+          "instructions": "Bir string alın ve şu işlemleri yapın: 1) String'in uzunluğunu bulun, 2) String'i büyük harfe çevirin, 3) String'i küçük harfe çevirin, 4) String'in tersini alın, 5) String içinde belirli bir karakteri sayın. Tüm sonuçları ekrana yazdırın.",
+          "starterCode": {
+            "cpp": "#include <iostream>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    string text = \"Hello World\";\n    // Kodunu buraya yaz\n    return 0;\n}"
+          },
+          "testCases": [
+            {
+              "input": "text=\"Hello World\"",
+              "expectedOutput": "Uzunluk: 11\nBüyük harf: HELLO WORLD\nKüçük harf: hello world\nTers: dlroW olleH\n'l' karakteri sayısı: 3"
+            }
+          ],
+          "hints": [
+            "text.length() ile uzunluk bulunur",
+            "transform() ile büyük/küçük harf dönüşümü yapılır",
+            "reverse() ile tersine çevirebilirsiniz",
+            "count() ile karakter sayısı bulunur"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kotlin",
+      "name": "Kotlin",
+      "cases": [
+        {
+          "id": "kotlin-case-1",
+          "title": "Sayısal Çıktı Döngüsü",
+          "description": "1'den 50'ye kadar sayıları ekrana yazdırın.",
+          "difficulty": "beginner",
+          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dünya 1', 'Selam Sana Dünya 2', ... 'Selam Sana Dünya 50'",
+          "starterCode": {
+            "kotlin": "fun main() {\n    // Kodunu buraya yaz\n}"
+          },
+          "testCases": [
+            {
+              "input": "",
+              "expectedOutput": "Selam Sana Dünya 1\nSelam Sana Dünya 2\n...\nSelam Sana Dünya 50"
+            }
+          ],
+          "hints": [
+            "for döngüsü ve range kullanabilirsiniz",
+            "println() ile çıktı alabilirsiniz",
+            "String template ($) kullanabilirsiniz"
+          ]
+        },
+        {
+          "id": "kotlin-case-2",
+          "title": "Temel Matematik İşlemleri",
+          "description": "İki sayı üzerinde temel matematik işlemleri yapın.",
+          "difficulty": "beginner",
+          "instructions": "İki sayı (a ve b) tanımlayın ve bu sayılar üzerinde toplama, çıkarma, çarpma ve bölme işlemlerini yaparak sonuçları ekrana yazdırın. Örnek: a=10, b=5 için '10 + 5 = 15', '10 - 5 = 5', '10 * 5 = 50', '10 / 5 = 2'",
+          "starterCode": {
+            "kotlin": "fun main() {\n    val a = 10\n    val b = 5\n    // Kodunu buraya yaz\n}"
+          },
+          "testCases": [
+            {
+              "input": "a=10, b=5",
+              "expectedOutput": "10 + 5 = 15\n10 - 5 = 5\n10 * 5 = 50\n10 / 5 = 2"
+            }
+          ],
+          "hints": [
+            "Dört işlem operatörlerini kullanın: +, -, *, /",
+            "Bölme işleminde sıfıra bölme kontrolü yapın",
+            "println() ile sonuçları yazdırın"
+          ]
+        },
+        {
+          "id": "kotlin-case-3",
+          "title": "String İşlemleri",
+          "description": "Metin üzerinde temel string işlemleri yapın.",
+          "difficulty": "beginner",
+          "instructions": "Bir string alın ve şu işlemleri yapın: 1) String'in uzunluğunu bulun, 2) String'i büyük harfe çevirin, 3) String'i küçük harfe çevirin, 4) String'in tersini alın, 5) String içinde belirli bir karakteri sayın. Tüm sonuçları ekrana yazdırın.",
+          "starterCode": {
+            "kotlin": "fun main() {\n    val text = \"Hello World\"\n    // Kodunu buraya yaz\n}"
+          },
+          "testCases": [
+            {
+              "input": "text=\"Hello World\"",
+              "expectedOutput": "Uzunluk: 11\nBüyük harf: HELLO WORLD\nKüçük harf: hello world\nTers: dlroW olleH\n'l' karakteri sayısı: 3"
+            }
+          ],
+          "hints": [
+            "text.length ile uzunluk bulunur",
+            "text.uppercase() ve text.lowercase() kullanın",
+            "text.reversed() ile tersine çevirebilirsiniz",
+            "text.count { it == 'l' } ile karakter sayısı bulunur"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "swift",
+      "name": "Swift",
+      "cases": [
+        {
+          "id": "swift-case-1",
+          "title": "Sayısal Çıktı Döngüsü",
+          "description": "1'den 50'ye kadar sayıları ekrana yazdırın.",
+          "difficulty": "beginner",
+          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dünya 1', 'Selam Sana Dünya 2', ... 'Selam Sana Dünya 50'",
+          "starterCode": {
+            "swift": "// Kodunu buraya yaz\n"
+          },
+          "testCases": [
+            {
+              "input": "",
+              "expectedOutput": "Selam Sana Dünya 1\nSelam Sana Dünya 2\n...\nSelam Sana Dünya 50"
+            }
+          ],
+          "hints": [
+            "for-in döngüsü ve range kullanabilirsiniz",
+            "print() ile çıktı alabilirsiniz",
+            "String interpolation kullanabilirsiniz"
+          ]
+        },
+        {
+          "id": "swift-case-2",
+          "title": "Temel Matematik İşlemleri",
+          "description": "İki sayı üzerinde temel matematik işlemleri yapın.",
+          "difficulty": "beginner",
+          "instructions": "İki sayı (a ve b) tanımlayın ve bu sayılar üzerinde toplama, çıkarma, çarpma ve bölme işlemlerini yaparak sonuçları ekrana yazdırın. Örnek: a=10, b=5 için '10 + 5 = 15', '10 - 5 = 5', '10 * 5 = 50', '10 / 5 = 2'",
+          "starterCode": {
+            "swift": "let a = 10\nlet b = 5\n// Kodunu buraya yaz\n"
+          },
+          "testCases": [
+            {
+              "input": "a=10, b=5",
+              "expectedOutput": "10 + 5 = 15\n10 - 5 = 5\n10 * 5 = 50\n10 / 5 = 2"
+            }
+          ],
+          "hints": [
+            "Dört işlem operatörlerini kullanın: +, -, *, /",
+            "Bölme işleminde sıfıra bölme kontrolü yapın",
+            "print() ile sonuçları yazdırın"
+          ]
+        },
+        {
+          "id": "swift-case-3",
+          "title": "String İşlemleri",
+          "description": "Metin üzerinde temel string işlemleri yapın.",
+          "difficulty": "beginner",
+          "instructions": "Bir string alın ve şu işlemleri yapın: 1) String'in uzunluğunu bulun, 2) String'i büyük harfe çevirin, 3) String'i küçük harfe çevirin, 4) String'in tersini alın, 5) String içinde belirli bir karakteri sayın. Tüm sonuçları ekrana yazdırın.",
+          "starterCode": {
+            "swift": "let text = \"Hello World\"\n// Kodunu buraya yaz\n"
+          },
+          "testCases": [
+            {
+              "input": "text=\"Hello World\"",
+              "expectedOutput": "Uzunluk: 11\nBüyük harf: HELLO WORLD\nKüçük harf: hello world\nTers: dlroW olleH\n'l' karakteri sayısı: 3"
+            }
+          ],
+          "hints": [
+            "text.count ile uzunluk bulunur",
+            "text.uppercased() ve text.lowercased() kullanın",
+            "String(text.reversed()) ile tersine çevirebilirsiniz",
+            "text.filter { $0 == 'l' }.count ile karakter sayısı bulunur"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ruby",
+      "name": "Ruby",
+      "cases": [
+        {
+          "id": "ruby-case-1",
+          "title": "Sayısal Çıktı Döngüsü",
+          "description": "1'den 50'ye kadar sayıları ekrana yazdırın.",
+          "difficulty": "beginner",
+          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dünya 1', 'Selam Sana Dünya 2', ... 'Selam Sana Dünya 50'",
+          "starterCode": {
+            "ruby": "# Kodunu buraya yaz\n"
+          },
+          "testCases": [
+            {
+              "input": "",
+              "expectedOutput": "Selam Sana Dünya 1\nSelam Sana Dünya 2\n...\nSelam Sana Dünya 50"
+            }
+          ],
+          "hints": [
+            "for döngüsü veya .times kullanabilirsiniz",
+            "puts ile çıktı alabilirsiniz",
+            "String interpolation (#{}) kullanabilirsiniz"
+          ]
+        },
+        {
+          "id": "ruby-case-2",
+          "title": "Temel Matematik İşlemleri",
+          "description": "İki sayı üzerinde temel matematik işlemleri yapın.",
+          "difficulty": "beginner",
+          "instructions": "İki sayı (a ve b) tanımlayın ve bu sayılar üzerinde toplama, çıkarma, çarpma ve bölme işlemlerini yaparak sonuçları ekrana yazdırın. Örnek: a=10, b=5 için '10 + 5 = 15', '10 - 5 = 5', '10 * 5 = 50', '10 / 5 = 2'",
+          "starterCode": {
+            "ruby": "a = 10\nb = 5\n# Kodunu buraya yaz\n"
+          },
+          "testCases": [
+            {
+              "input": "a=10, b=5",
+              "expectedOutput": "10 + 5 = 15\n10 - 5 = 5\n10 * 5 = 50\n10 / 5 = 2"
+            }
+          ],
+          "hints": [
+            "Dört işlem operatörlerini kullanın: +, -, *, /",
+            "Bölme işleminde sıfıra bölme kontrolü yapın",
+            "puts ile sonuçları yazdırın"
+          ]
+        },
+        {
+          "id": "ruby-case-3",
+          "title": "String İşlemleri",
+          "description": "Metin üzerinde temel string işlemleri yapın.",
+          "difficulty": "beginner",
+          "instructions": "Bir string alın ve şu işlemleri yapın: 1) String'in uzunluğunu bulun, 2) String'i büyük harfe çevirin, 3) String'i küçük harfe çevirin, 4) String'in tersini alın, 5) String içinde belirli bir karakteri sayın. Tüm sonuçları ekrana yazdırın.",
+          "starterCode": {
+            "ruby": "text = \"Hello World\"\n# Kodunu buraya yaz\n"
+          },
+          "testCases": [
+            {
+              "input": "text=\"Hello World\"",
+              "expectedOutput": "Uzunluk: 11\nBüyük harf: HELLO WORLD\nKüçük harf: hello world\nTers: dlroW olleH\n'l' karakteri sayısı: 3"
+            }
+          ],
+          "hints": [
+            "text.length ile uzunluk bulunur",
+            "text.upcase ve text.downcase kullanın",
+            "text.reverse ile tersine çevirebilirsiniz",
+            "text.count('l') ile karakter sayısı bulunur"
+          ]
+        }
+      ]
+    }
+  ]
+}
+

@@ -12,9 +12,10 @@ import { z } from "zod";
 interface PostCreateProps {
   onClose?: () => void;
   onSuccess?: () => void;
+  isModal?: boolean;
 }
 
-export function PostCreate({ onClose, onSuccess }: PostCreateProps) {
+export function PostCreate({ onClose, onSuccess, isModal = true }: PostCreateProps) {
   const router = useRouter();
   const { data: session } = useSession();
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -178,10 +179,10 @@ export function PostCreate({ onClose, onSuccess }: PostCreateProps) {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-      <div className="bg-white dark:bg-black rounded-lg w-full max-w-2xl max-h-[90vh] overflow-hidden flex flex-col shadow-xl">
-        {/* Header */}
+  const postContent = (
+    <div className={`${isModal ? 'bg-white dark:bg-black rounded-lg w-full max-w-2xl max-h-[90vh] overflow-hidden flex flex-col shadow-xl' : 'w-full'}`}>
+      {/* Header */}
+      {isModal && (
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-800">
           <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
             Gönderi Oluştur
@@ -195,23 +196,24 @@ export function PostCreate({ onClose, onSuccess }: PostCreateProps) {
             </button>
           )}
         </div>
+      )}
 
         {/* Content */}
-        <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto flex flex-col">
-          <div className="flex-1 p-6 space-y-4">
+        <form onSubmit={handleSubmit} className={`flex-1 overflow-y-auto flex flex-col ${isModal ? '' : 'min-h-[500px]'}`}>
+          <div className={`flex-1 ${isModal ? 'p-6' : 'p-0'} space-y-4`}>
             {/* User info */}
             <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-full overflow-hidden bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-semibold flex-shrink-0">
+              <div className={`${isModal ? 'w-10 h-10' : 'w-12 h-12'} rounded-full overflow-hidden bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-semibold flex-shrink-0`}>
                 {userProfileImage ? (
                   <Image
                     src={userProfileImage}
                     alt={userName}
-                    width={40}
-                    height={40}
+                    width={isModal ? 40 : 48}
+                    height={isModal ? 40 : 48}
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <span>{userInitial}</span>
+                  <span className={isModal ? '' : 'text-lg'}>{userInitial}</span>
                 )}
               </div>
               
@@ -221,7 +223,7 @@ export function PostCreate({ onClose, onSuccess }: PostCreateProps) {
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
                   placeholder="Bir şey paylaşın..."
-                  className="min-h-[120px] resize-none text-base border-0 focus:ring-0 p-0 placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                  className={`${isModal ? 'min-h-[120px]' : 'min-h-[180px]'} resize-none text-base border-0 focus:ring-0 p-0 placeholder:text-gray-400 dark:placeholder:text-gray-500`}
                   maxLength={2200}
                   disabled={isSubmitting}
                 />
@@ -278,7 +280,7 @@ export function PostCreate({ onClose, onSuccess }: PostCreateProps) {
           </div>
 
           {/* Footer - Action buttons */}
-          <div className="border-t border-gray-200 dark:border-gray-800 px-6 py-4">
+          <div className={`border-t border-gray-200 dark:border-gray-800 ${isModal ? 'px-6 py-4' : 'pt-6 mt-6'}`}>
             <div className="flex items-center justify-between gap-4">
               {/* Image upload button */}
               <div className="flex items-center gap-2">
@@ -316,14 +318,16 @@ export function PostCreate({ onClose, onSuccess }: PostCreateProps) {
 
               {/* Submit button */}
               <div className="flex items-center gap-3">
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={onClose}
-                  disabled={isSubmitting}
-                >
-                  İptal
-                </Button>
+                {onClose && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={onClose}
+                    disabled={isSubmitting}
+                  >
+                    İptal
+                  </Button>
+                )}
                 <Button
                   type="submit"
                   variant="primary"
@@ -344,6 +348,15 @@ export function PostCreate({ onClose, onSuccess }: PostCreateProps) {
           </div>
         </form>
       </div>
-    </div>
   );
+
+  if (isModal) {
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+        {content}
+      </div>
+    );
+  }
+
+  return postContent;
 }

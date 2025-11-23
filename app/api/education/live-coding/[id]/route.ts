@@ -42,8 +42,12 @@ export async function GET(
     });
 
     if (!quiz) {
+      console.error(`[LIVE_CODING] Quiz not found: ${params.id}`);
       return NextResponse.json(
-        { error: `Canlı kodlama bulunamadı (ID: ${params.id})` },
+        { 
+          error: "Canlı kodlama bulunamadı",
+          details: process.env.NODE_ENV === "development" ? `ID: ${params.id}` : undefined
+        },
         { status: 404 }
       );
     }
@@ -52,7 +56,10 @@ export async function GET(
     if (!quiz.questions) {
       console.error(`[LIVE_CODING] Quiz ${params.id} has no questions field`);
       return NextResponse.json(
-        { error: "Canlı kodlama içeriği eksik veya bozuk" },
+        { 
+          error: "Canlı kodlama içeriği eksik veya bozuk",
+          details: process.env.NODE_ENV === "development" ? "Questions field is missing" : undefined
+        },
         { status: 500 }
       );
     }
@@ -64,9 +71,15 @@ export async function GET(
       
       // Normalize edilmiş tasks'in boş olmadığını kontrol et
       if (!liveCodingConfig.tasks || liveCodingConfig.tasks.length === 0) {
-        console.error(`[LIVE_CODING] Quiz ${params.id} normalized to empty tasks`);
+        console.error(`[LIVE_CODING] Quiz ${params.id} normalized to empty tasks`, {
+          hasConfig: !!liveCodingConfig,
+          taskCount: liveCodingConfig.tasks?.length || 0,
+        });
         return NextResponse.json(
-          { error: "Canlı kodlama görevleri bulunamadı" },
+          { 
+            error: "Canlı kodlama görevleri bulunamadı",
+            details: process.env.NODE_ENV === "development" ? "Normalized tasks array is empty" : undefined
+          },
           { status: 500 }
         );
       }

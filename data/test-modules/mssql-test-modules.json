@@ -17,94 +17,94 @@
       "objectives": [],
       "relatedTests": [
         {
-          "id": "lesson-01",
-          "title": "Ders 1: MSSQL Nedir?",
-          "description": "MSSQL Nedir? konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-01/lesson-01"
+          "id": "test-01",
+          "title": "MSSQL Nedir?",
+          "description": "Microsoft SQL Server'ın ne olduğunu, özelliklerini, versiyonlarını ve kullanım alanlarını öğrenin.",
+          "href": "/education/tests/quiz/tests-mssql/module-01/test-01"
         },
         {
-          "id": "lesson-02",
-          "title": "Ders 2: MSSQL Kurulumu",
+          "id": "test-02",
+          "title": "MSSQL Kurulumu",
           "description": "MSSQL Kurulumu konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-01/lesson-02"
+          "href": "/education/tests/quiz/tests-mssql/module-01/test-02"
         },
         {
-          "id": "lesson-03",
-          "title": "Ders 3: SQL Server Management Studio (SSMS)",
+          "id": "test-03",
+          "title": "3: SQL Server Management Studio (SSMS)",
           "description": "SQL Server Management Studio (SSMS) konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-01/lesson-03"
+          "href": "/education/tests/quiz/tests-mssql/module-01/test-03"
         },
         {
-          "id": "lesson-04",
-          "title": "Ders 4: Veritabanı Oluşturma",
+          "id": "test-04",
+          "title": "4: Veritabanı Oluşturma",
           "description": "Veritabanı Oluşturma konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-01/lesson-04"
+          "href": "/education/tests/quiz/tests-mssql/module-01/test-04"
         },
         {
-          "id": "lesson-05",
-          "title": "Ders 5: SQL Sözdizimi Temelleri",
+          "id": "test-05",
+          "title": "5: SQL Sözdizimi Temelleri",
           "description": "SQL Sözdizimi Temelleri konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-01/lesson-05"
+          "href": "/education/tests/quiz/tests-mssql/module-01/test-05"
         },
         {
-          "id": "lesson-06",
-          "title": "Ders 6: Veritabanı Yapısını Anlama",
+          "id": "test-06",
+          "title": "6: Veritabanı Yapısını Anlama",
           "description": "Veritabanı Yapısını Anlama konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-01/lesson-06"
+          "href": "/education/tests/quiz/tests-mssql/module-01/test-06"
         },
         {
-          "id": "lesson-07",
-          "title": "Ders 7: T-SQL'e Giriş",
+          "id": "test-07",
+          "title": "7: T-SQL'e Giriş",
           "description": "T-SQL'e Giriş konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-01/lesson-07"
+          "href": "/education/tests/quiz/tests-mssql/module-01/test-07"
         },
         {
-          "id": "lesson-08",
-          "title": "Ders 8: Veritabanı Dosya Yapısı",
+          "id": "test-08",
+          "title": "8: Veritabanı Dosya Yapısı",
           "description": "Veritabanı Dosya Yapısı konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-01/lesson-08"
+          "href": "/education/tests/quiz/tests-mssql/module-01/test-08"
         },
         {
-          "id": "lesson-09",
-          "title": "Ders 9: Sistem Veritabanları",
+          "id": "test-09",
+          "title": "9: Sistem Veritabanları",
           "description": "Sistem Veritabanları konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-01/lesson-09"
+          "href": "/education/tests/quiz/tests-mssql/module-01/test-09"
         },
         {
-          "id": "lesson-10",
-          "title": "Ders 10: Veritabanı Yedekleme Temelleri",
+          "id": "test-10",
+          "title": "10: Veritabanı Yedekleme Temelleri",
           "description": "Veritabanı Yedekleme Temelleri konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-01/lesson-10"
+          "href": "/education/tests/quiz/tests-mssql/module-01/test-10"
         },
         {
-          "id": "lesson-11",
-          "title": "Ders 11: Güvenlik Temelleri",
+          "id": "test-11",
+          "title": "11: Güvenlik Temelleri",
           "description": "Güvenlik Temelleri konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-01/lesson-11"
+          "href": "/education/tests/quiz/tests-mssql/module-01/test-11"
         },
         {
-          "id": "lesson-12",
-          "title": "Ders 12: Veritabanı Özellikleri",
+          "id": "test-12",
+          "title": "12: Veritabanı Özellikleri",
           "description": "Veritabanı Özellikleri konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-01/lesson-12"
+          "href": "/education/tests/quiz/tests-mssql/module-01/test-12"
         },
         {
-          "id": "lesson-13",
-          "title": "Ders 13: Sorgu Penceresi Kullanımı",
+          "id": "test-13",
+          "title": "13: Sorgu Penceresi Kullanımı",
           "description": "Sorgu Penceresi Kullanımı konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-01/lesson-13"
+          "href": "/education/tests/quiz/tests-mssql/module-01/test-13"
         },
         {
-          "id": "lesson-14",
-          "title": "Ders 14: Hata Ayıklama Temelleri",
+          "id": "test-14",
+          "title": "14: Hata Ayıklama Temelleri",
           "description": "Hata Ayıklama Temelleri konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-01/lesson-14"
+          "href": "/education/tests/quiz/tests-mssql/module-01/test-14"
         },
         {
-          "id": "lesson-15",
-          "title": "Ders 15: Modül Özeti ve Değerlendirme",
+          "id": "test-15",
+          "title": "15: Modül Özeti ve Değerlendirme",
           "description": "Modül Özeti ve Değerlendirme konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-01/lesson-15"
+          "href": "/education/tests/quiz/tests-mssql/module-01/test-15"
         }
       ]
     },
@@ -116,94 +116,94 @@
       "objectives": [],
       "relatedTests": [
         {
-          "id": "lesson-01",
-          "title": "Ders 1: Veri Tipleri Nedir?",
+          "id": "test-01",
+          "title": "1: Veri Tipleri Nedir?",
           "description": "Veri Tipleri Nedir? konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-02/lesson-01"
+          "href": "/education/tests/quiz/tests-mssql/module-02/test-01"
         },
         {
-          "id": "lesson-02",
-          "title": "Ders 2: Sayısal Veri Tipleri",
+          "id": "test-02",
+          "title": "2: Sayısal Veri Tipleri",
           "description": "Sayısal Veri Tipleri konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-02/lesson-02"
+          "href": "/education/tests/quiz/tests-mssql/module-02/test-02"
         },
         {
-          "id": "lesson-03",
-          "title": "Ders 3: Karakter Veri Tipleri",
+          "id": "test-03",
+          "title": "3: Karakter Veri Tipleri",
           "description": "Karakter Veri Tipleri konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-02/lesson-03"
+          "href": "/education/tests/quiz/tests-mssql/module-02/test-03"
         },
         {
-          "id": "lesson-04",
-          "title": "Ders 4: Tarih ve Zaman Veri Tipleri",
+          "id": "test-04",
+          "title": "4: Tarih ve Zaman Veri Tipleri",
           "description": "Tarih ve Zaman Veri Tipleri konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-02/lesson-04"
+          "href": "/education/tests/quiz/tests-mssql/module-02/test-04"
         },
         {
-          "id": "lesson-05",
-          "title": "Ders 5: Binary ve Diğer Veri Tipleri",
+          "id": "test-05",
+          "title": "5: Binary ve Diğer Veri Tipleri",
           "description": "Binary ve Diğer Veri Tipleri konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-02/lesson-05"
+          "href": "/education/tests/quiz/tests-mssql/module-02/test-05"
         },
         {
-          "id": "lesson-06",
-          "title": "Ders 6: NULL Değerler",
+          "id": "test-06",
+          "title": "6: NULL Değerler",
           "description": "NULL Değerler konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-02/lesson-06"
+          "href": "/education/tests/quiz/tests-mssql/module-02/test-06"
         },
         {
-          "id": "lesson-07",
-          "title": "Ders 7: Tablo Oluşturma (CREATE TABLE)",
+          "id": "test-07",
+          "title": "7: Tablo Oluşturma (CREATE TABLE)",
           "description": "Tablo Oluşturma (CREATE TABLE) konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-02/lesson-07"
+          "href": "/education/tests/quiz/tests-mssql/module-02/test-07"
         },
         {
-          "id": "lesson-08",
-          "title": "Ders 8: Sütun Özellikleri",
+          "id": "test-08",
+          "title": "8: Sütun Özellikleri",
           "description": "Sütun Özellikleri konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-02/lesson-08"
+          "href": "/education/tests/quiz/tests-mssql/module-02/test-08"
         },
         {
-          "id": "lesson-09",
-          "title": "Ders 9: Primary Key Tanımlama",
+          "id": "test-09",
+          "title": "9: Primary Key Tanımlama",
           "description": "Primary Key Tanımlama konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-02/lesson-09"
+          "href": "/education/tests/quiz/tests-mssql/module-02/test-09"
         },
         {
-          "id": "lesson-10",
-          "title": "Ders 10: Foreign Key Tanımlama",
+          "id": "test-10",
+          "title": "10: Foreign Key Tanımlama",
           "description": "Foreign Key Tanımlama konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-02/lesson-10"
+          "href": "/education/tests/quiz/tests-mssql/module-02/test-10"
         },
         {
-          "id": "lesson-11",
-          "title": "Ders 11: CHECK Constraint",
+          "id": "test-11",
+          "title": "11: CHECK Constraint",
           "description": "CHECK Constraint konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-02/lesson-11"
+          "href": "/education/tests/quiz/tests-mssql/module-02/test-11"
         },
         {
-          "id": "lesson-12",
-          "title": "Ders 12: UNIQUE Constraint",
+          "id": "test-12",
+          "title": "12: UNIQUE Constraint",
           "description": "UNIQUE Constraint konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-02/lesson-12"
+          "href": "/education/tests/quiz/tests-mssql/module-02/test-12"
         },
         {
-          "id": "lesson-13",
-          "title": "Ders 13: DEFAULT Constraint",
+          "id": "test-13",
+          "title": "13: DEFAULT Constraint",
           "description": "DEFAULT Constraint konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-02/lesson-13"
+          "href": "/education/tests/quiz/tests-mssql/module-02/test-13"
         },
         {
-          "id": "lesson-14",
-          "title": "Ders 14: Tablo Değiştirme (ALTER TABLE)",
+          "id": "test-14",
+          "title": "14: Tablo Değiştirme (ALTER TABLE)",
           "description": "Tablo Değiştirme (ALTER TABLE) konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-02/lesson-14"
+          "href": "/education/tests/quiz/tests-mssql/module-02/test-14"
         },
         {
-          "id": "lesson-15",
-          "title": "Ders 15: Modül Özeti",
+          "id": "test-15",
+          "title": "15: Modül Özeti",
           "description": "Modül Özeti konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-02/lesson-15"
+          "href": "/education/tests/quiz/tests-mssql/module-02/test-15"
         }
       ]
     },
@@ -215,94 +215,94 @@
       "objectives": [],
       "relatedTests": [
         {
-          "id": "lesson-01",
-          "title": "Ders 1: INSERT Komutu",
+          "id": "test-01",
+          "title": "1: INSERT Komutu",
           "description": "INSERT Komutu konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-03/lesson-01"
+          "href": "/education/tests/quiz/tests-mssql/module-03/test-01"
         },
         {
-          "id": "lesson-02",
-          "title": "Ders 2: UPDATE Komutu",
+          "id": "test-02",
+          "title": "2: UPDATE Komutu",
           "description": "UPDATE Komutu konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-03/lesson-02"
+          "href": "/education/tests/quiz/tests-mssql/module-03/test-02"
         },
         {
-          "id": "lesson-03",
-          "title": "Ders 3: DELETE Komutu",
+          "id": "test-03",
+          "title": "3: DELETE Komutu",
           "description": "DELETE Komutu konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-03/lesson-03"
+          "href": "/education/tests/quiz/tests-mssql/module-03/test-03"
         },
         {
-          "id": "lesson-04",
-          "title": "Ders 4: SELECT Komutu Temelleri",
+          "id": "test-04",
+          "title": "4: SELECT Komutu Temelleri",
           "description": "SELECT Komutu Temelleri konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-03/lesson-04"
+          "href": "/education/tests/quiz/tests-mssql/module-03/test-04"
         },
         {
-          "id": "lesson-05",
-          "title": "Ders 5: WHERE Filtreleme",
+          "id": "test-05",
+          "title": "5: WHERE Filtreleme",
           "description": "WHERE Filtreleme konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-03/lesson-05"
+          "href": "/education/tests/quiz/tests-mssql/module-03/test-05"
         },
         {
-          "id": "lesson-06",
-          "title": "Ders 6: ORDER BY Sıralama",
+          "id": "test-06",
+          "title": "6: ORDER BY Sıralama",
           "description": "ORDER BY Sıralama konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-03/lesson-06"
+          "href": "/education/tests/quiz/tests-mssql/module-03/test-06"
         },
         {
-          "id": "lesson-07",
-          "title": "Ders 7: TOP ve OFFSET-FETCH",
+          "id": "test-07",
+          "title": "7: TOP ve OFFSET-FETCH",
           "description": "TOP ve OFFSET-FETCH konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-03/lesson-07"
+          "href": "/education/tests/quiz/tests-mssql/module-03/test-07"
         },
         {
-          "id": "lesson-08",
-          "title": "Ders 8: Bulk Insert",
+          "id": "test-08",
+          "title": "8: Bulk Insert",
           "description": "Bulk Insert konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-03/lesson-08"
+          "href": "/education/tests/quiz/tests-mssql/module-03/test-08"
         },
         {
-          "id": "lesson-09",
-          "title": "Ders 9: MERGE Komutu",
+          "id": "test-09",
+          "title": "9: MERGE Komutu",
           "description": "MERGE Komutu konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-03/lesson-09"
+          "href": "/education/tests/quiz/tests-mssql/module-03/test-09"
         },
         {
-          "id": "lesson-10",
-          "title": "Ders 10: TRUNCATE TABLE",
+          "id": "test-10",
+          "title": "10: TRUNCATE TABLE",
           "description": "TRUNCATE TABLE konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-03/lesson-10"
+          "href": "/education/tests/quiz/tests-mssql/module-03/test-10"
         },
         {
-          "id": "lesson-11",
-          "title": "Ders 11: CRUD İşlemleri Best Practices",
+          "id": "test-11",
+          "title": "11: CRUD İşlemleri Best Practices",
           "description": "CRUD İşlemleri Best Practices konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-03/lesson-11"
+          "href": "/education/tests/quiz/tests-mssql/module-03/test-11"
         },
         {
-          "id": "lesson-12",
-          "title": "Ders 12: Transaction ile CRUD",
+          "id": "test-12",
+          "title": "12: Transaction ile CRUD",
           "description": "Transaction ile CRUD konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-03/lesson-12"
+          "href": "/education/tests/quiz/tests-mssql/module-03/test-12"
         },
         {
-          "id": "lesson-13",
-          "title": "Ders 13: Hata Yönetimi",
+          "id": "test-13",
+          "title": "13: Hata Yönetimi",
           "description": "Hata Yönetimi konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-03/lesson-13"
+          "href": "/education/tests/quiz/tests-mssql/module-03/test-13"
         },
         {
-          "id": "lesson-14",
-          "title": "Ders 14: Performans Optimizasyonu",
+          "id": "test-14",
+          "title": "14: Performans Optimizasyonu",
           "description": "Performans Optimizasyonu konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-03/lesson-14"
+          "href": "/education/tests/quiz/tests-mssql/module-03/test-14"
         },
         {
-          "id": "lesson-15",
-          "title": "Ders 15: Modül Özeti",
+          "id": "test-15",
+          "title": "15: Modül Özeti",
           "description": "Modül Özeti konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-03/lesson-15"
+          "href": "/education/tests/quiz/tests-mssql/module-03/test-15"
         }
       ]
     },
@@ -314,94 +314,94 @@
       "objectives": [],
       "relatedTests": [
         {
-          "id": "lesson-01",
-          "title": "Ders 1: SELECT Temelleri",
+          "id": "test-01",
+          "title": "1: SELECT Temelleri",
           "description": "SELECT Temelleri konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-04/lesson-01"
+          "href": "/education/tests/quiz/tests-mssql/module-04/test-01"
         },
         {
-          "id": "lesson-02",
-          "title": "Ders 2: WHERE Koşulları",
+          "id": "test-02",
+          "title": "2: WHERE Koşulları",
           "description": "WHERE Koşulları konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-04/lesson-02"
+          "href": "/education/tests/quiz/tests-mssql/module-04/test-02"
         },
         {
-          "id": "lesson-03",
-          "title": "Ders 3: AND, OR, NOT Operatörleri",
+          "id": "test-03",
+          "title": "3: AND, OR, NOT Operatörleri",
           "description": "AND, OR, NOT Operatörleri konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-04/lesson-03"
+          "href": "/education/tests/quiz/tests-mssql/module-04/test-03"
         },
         {
-          "id": "lesson-04",
-          "title": "Ders 4: IN ve NOT IN",
+          "id": "test-04",
+          "title": "4: IN ve NOT IN",
           "description": "IN ve NOT IN konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-04/lesson-04"
+          "href": "/education/tests/quiz/tests-mssql/module-04/test-04"
         },
         {
-          "id": "lesson-05",
-          "title": "Ders 5: LIKE ve Wildcards",
+          "id": "test-05",
+          "title": "5: LIKE ve Wildcards",
           "description": "LIKE ve Wildcards konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-04/lesson-05"
+          "href": "/education/tests/quiz/tests-mssql/module-04/test-05"
         },
         {
-          "id": "lesson-06",
-          "title": "Ders 6: BETWEEN Operatörü",
+          "id": "test-06",
+          "title": "6: BETWEEN Operatörü",
           "description": "BETWEEN Operatörü konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-04/lesson-06"
+          "href": "/education/tests/quiz/tests-mssql/module-04/test-06"
         },
         {
-          "id": "lesson-07",
-          "title": "Ders 7: IS NULL ve IS NOT NULL",
+          "id": "test-07",
+          "title": "7: IS NULL ve IS NOT NULL",
           "description": "IS NULL ve IS NOT NULL konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-04/lesson-07"
+          "href": "/education/tests/quiz/tests-mssql/module-04/test-07"
         },
         {
-          "id": "lesson-08",
-          "title": "Ders 8: DISTINCT Kullanımı",
+          "id": "test-08",
+          "title": "8: DISTINCT Kullanımı",
           "description": "DISTINCT Kullanımı konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-04/lesson-08"
+          "href": "/education/tests/quiz/tests-mssql/module-04/test-08"
         },
         {
-          "id": "lesson-09",
-          "title": "Ders 9: Alias Kullanımı",
+          "id": "test-09",
+          "title": "9: Alias Kullanımı",
           "description": "Alias Kullanımı konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-04/lesson-09"
+          "href": "/education/tests/quiz/tests-mssql/module-04/test-09"
         },
         {
-          "id": "lesson-10",
-          "title": "Ders 10: CASE WHEN İfadesi",
+          "id": "test-10",
+          "title": "10: CASE WHEN İfadesi",
           "description": "CASE WHEN İfadesi konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-04/lesson-10"
+          "href": "/education/tests/quiz/tests-mssql/module-04/test-10"
         },
         {
-          "id": "lesson-11",
-          "title": "Ders 11: CAST ve CONVERT",
+          "id": "test-11",
+          "title": "11: CAST ve CONVERT",
           "description": "CAST ve CONVERT konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-04/lesson-11"
+          "href": "/education/tests/quiz/tests-mssql/module-04/test-11"
         },
         {
-          "id": "lesson-12",
-          "title": "Ders 12: String Fonksiyonları",
+          "id": "test-12",
+          "title": "12: String Fonksiyonları",
           "description": "String Fonksiyonları konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-04/lesson-12"
+          "href": "/education/tests/quiz/tests-mssql/module-04/test-12"
         },
         {
-          "id": "lesson-13",
-          "title": "Ders 13: Tarih Fonksiyonları",
+          "id": "test-13",
+          "title": "13: Tarih Fonksiyonları",
           "description": "Tarih Fonksiyonları konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-04/lesson-13"
+          "href": "/education/tests/quiz/tests-mssql/module-04/test-13"
         },
         {
-          "id": "lesson-14",
-          "title": "Ders 14: Matematik Fonksiyonları",
+          "id": "test-14",
+          "title": "14: Matematik Fonksiyonları",
           "description": "Matematik Fonksiyonları konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-04/lesson-14"
+          "href": "/education/tests/quiz/tests-mssql/module-04/test-14"
         },
         {
-          "id": "lesson-15",
-          "title": "Ders 15: Modül Özeti",
+          "id": "test-15",
+          "title": "15: Modül Özeti",
           "description": "Modül Özeti konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-04/lesson-15"
+          "href": "/education/tests/quiz/tests-mssql/module-04/test-15"
         }
       ]
     },
@@ -413,94 +413,94 @@
       "objectives": [],
       "relatedTests": [
         {
-          "id": "lesson-01",
-          "title": "Ders 1: INNER JOIN",
+          "id": "test-01",
+          "title": "1: INNER JOIN",
           "description": "INNER JOIN konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-05/lesson-01"
+          "href": "/education/tests/quiz/tests-mssql/module-05/test-01"
         },
         {
-          "id": "lesson-02",
-          "title": "Ders 2: LEFT JOIN",
+          "id": "test-02",
+          "title": "2: LEFT JOIN",
           "description": "LEFT JOIN konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-05/lesson-02"
+          "href": "/education/tests/quiz/tests-mssql/module-05/test-02"
         },
         {
-          "id": "lesson-03",
-          "title": "Ders 3: RIGHT JOIN",
+          "id": "test-03",
+          "title": "3: RIGHT JOIN",
           "description": "RIGHT JOIN konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-05/lesson-03"
+          "href": "/education/tests/quiz/tests-mssql/module-05/test-03"
         },
         {
-          "id": "lesson-04",
-          "title": "Ders 4: FULL OUTER JOIN",
+          "id": "test-04",
+          "title": "4: FULL OUTER JOIN",
           "description": "FULL OUTER JOIN konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-05/lesson-04"
+          "href": "/education/tests/quiz/tests-mssql/module-05/test-04"
         },
         {
-          "id": "lesson-05",
-          "title": "Ders 5: CROSS JOIN",
+          "id": "test-05",
+          "title": "5: CROSS JOIN",
           "description": "CROSS JOIN konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-05/lesson-05"
+          "href": "/education/tests/quiz/tests-mssql/module-05/test-05"
         },
         {
-          "id": "lesson-06",
-          "title": "Ders 6: Self JOIN",
+          "id": "test-06",
+          "title": "6: Self JOIN",
           "description": "Self JOIN konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-05/lesson-06"
+          "href": "/education/tests/quiz/tests-mssql/module-05/test-06"
         },
         {
-          "id": "lesson-07",
-          "title": "Ders 7: Multiple JOINs",
+          "id": "test-07",
+          "title": "7: Multiple JOINs",
           "description": "Multiple JOINs konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-05/lesson-07"
+          "href": "/education/tests/quiz/tests-mssql/module-05/test-07"
         },
         {
-          "id": "lesson-08",
-          "title": "Ders 8: JOIN ile WHERE",
+          "id": "test-08",
+          "title": "8: JOIN ile WHERE",
           "description": "JOIN ile WHERE konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-05/lesson-08"
+          "href": "/education/tests/quiz/tests-mssql/module-05/test-08"
         },
         {
-          "id": "lesson-09",
-          "title": "Ders 9: JOIN Performansı",
+          "id": "test-09",
+          "title": "9: JOIN Performansı",
           "description": "JOIN Performansı konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-05/lesson-09"
+          "href": "/education/tests/quiz/tests-mssql/module-05/test-09"
         },
         {
-          "id": "lesson-10",
-          "title": "Ders 10: JOIN vs Subquery",
+          "id": "test-10",
+          "title": "10: JOIN vs Subquery",
           "description": "JOIN vs Subquery konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-05/lesson-10"
+          "href": "/education/tests/quiz/tests-mssql/module-05/test-10"
         },
         {
-          "id": "lesson-11",
-          "title": "Ders 11: JOIN Best Practices",
+          "id": "test-11",
+          "title": "11: JOIN Best Practices",
           "description": "JOIN Best Practices konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-05/lesson-11"
+          "href": "/education/tests/quiz/tests-mssql/module-05/test-11"
         },
         {
-          "id": "lesson-12",
-          "title": "Ders 12: Complex JOIN Senaryoları",
+          "id": "test-12",
+          "title": "12: Complex JOIN Senaryoları",
           "description": "Complex JOIN Senaryoları konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-05/lesson-12"
+          "href": "/education/tests/quiz/tests-mssql/module-05/test-12"
         },
         {
-          "id": "lesson-13",
-          "title": "Ders 13: JOIN Hatalarını Önleme",
+          "id": "test-13",
+          "title": "13: JOIN Hatalarını Önleme",
           "description": "JOIN Hatalarını Önleme konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-05/lesson-13"
+          "href": "/education/tests/quiz/tests-mssql/module-05/test-13"
         },
         {
-          "id": "lesson-14",
-          "title": "Ders 14: JOIN Optimizasyonu",
+          "id": "test-14",
+          "title": "14: JOIN Optimizasyonu",
           "description": "JOIN Optimizasyonu konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-05/lesson-14"
+          "href": "/education/tests/quiz/tests-mssql/module-05/test-14"
         },
         {
-          "id": "lesson-15",
-          "title": "Ders 15: Modül Özeti",
+          "id": "test-15",
+          "title": "15: Modül Özeti",
           "description": "Modül Özeti konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-05/lesson-15"
+          "href": "/education/tests/quiz/tests-mssql/module-05/test-15"
         }
       ]
     },
@@ -512,94 +512,94 @@
       "objectives": [],
       "relatedTests": [
         {
-          "id": "lesson-01",
-          "title": "Ders 1: COUNT Fonksiyonu",
+          "id": "test-01",
+          "title": "1: COUNT Fonksiyonu",
           "description": "COUNT Fonksiyonu konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-06/lesson-01"
+          "href": "/education/tests/quiz/tests-mssql/module-06/test-01"
         },
         {
-          "id": "lesson-02",
-          "title": "Ders 2: SUM Fonksiyonu",
+          "id": "test-02",
+          "title": "2: SUM Fonksiyonu",
           "description": "SUM Fonksiyonu konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-06/lesson-02"
+          "href": "/education/tests/quiz/tests-mssql/module-06/test-02"
         },
         {
-          "id": "lesson-03",
-          "title": "Ders 3: AVG Fonksiyonu",
+          "id": "test-03",
+          "title": "3: AVG Fonksiyonu",
           "description": "AVG Fonksiyonu konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-06/lesson-03"
+          "href": "/education/tests/quiz/tests-mssql/module-06/test-03"
         },
         {
-          "id": "lesson-04",
-          "title": "Ders 4: MIN ve MAX",
+          "id": "test-04",
+          "title": "4: MIN ve MAX",
           "description": "MIN ve MAX konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-06/lesson-04"
+          "href": "/education/tests/quiz/tests-mssql/module-06/test-04"
         },
         {
-          "id": "lesson-05",
-          "title": "Ders 5: GROUP BY Kullanımı",
+          "id": "test-05",
+          "title": "5: GROUP BY Kullanımı",
           "description": "GROUP BY Kullanımı konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-06/lesson-05"
+          "href": "/education/tests/quiz/tests-mssql/module-06/test-05"
         },
         {
-          "id": "lesson-06",
-          "title": "Ders 6: HAVING Filtreleme",
+          "id": "test-06",
+          "title": "6: HAVING Filtreleme",
           "description": "HAVING Filtreleme konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-06/lesson-06"
+          "href": "/education/tests/quiz/tests-mssql/module-06/test-06"
         },
         {
-          "id": "lesson-07",
-          "title": "Ders 7: Aggregate Fonksiyonlar Kombinasyonu",
+          "id": "test-07",
+          "title": "7: Aggregate Fonksiyonlar Kombinasyonu",
           "description": "Aggregate Fonksiyonlar Kombinasyonu konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-06/lesson-07"
+          "href": "/education/tests/quiz/tests-mssql/module-06/test-07"
         },
         {
-          "id": "lesson-08",
-          "title": "Ders 8: DISTINCT ile Aggregate",
+          "id": "test-08",
+          "title": "8: DISTINCT ile Aggregate",
           "description": "DISTINCT ile Aggregate konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-06/lesson-08"
+          "href": "/education/tests/quiz/tests-mssql/module-06/test-08"
         },
         {
-          "id": "lesson-09",
-          "title": "Ders 9: Window Functions",
+          "id": "test-09",
+          "title": "9: Window Functions",
           "description": "Window Functions konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-06/lesson-09"
+          "href": "/education/tests/quiz/tests-mssql/module-06/test-09"
         },
         {
-          "id": "lesson-10",
-          "title": "Ders 10: ROLLUP ve CUBE",
+          "id": "test-10",
+          "title": "10: ROLLUP ve CUBE",
           "description": "ROLLUP ve CUBE konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-06/lesson-10"
+          "href": "/education/tests/quiz/tests-mssql/module-06/test-10"
         },
         {
-          "id": "lesson-11",
-          "title": "Ders 11: GROUPING SETS",
+          "id": "test-11",
+          "title": "11: GROUPING SETS",
           "description": "GROUPING SETS konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-06/lesson-11"
+          "href": "/education/tests/quiz/tests-mssql/module-06/test-11"
         },
         {
-          "id": "lesson-12",
-          "title": "Ders 12: Aggregate Best Practices",
+          "id": "test-12",
+          "title": "12: Aggregate Best Practices",
           "description": "Aggregate Best Practices konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-06/lesson-12"
+          "href": "/education/tests/quiz/tests-mssql/module-06/test-12"
         },
         {
-          "id": "lesson-13",
-          "title": "Ders 13: Performans Optimizasyonu",
+          "id": "test-13",
+          "title": "13: Performans Optimizasyonu",
           "description": "Performans Optimizasyonu konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-06/lesson-13"
+          "href": "/education/tests/quiz/tests-mssql/module-06/test-13"
         },
         {
-          "id": "lesson-14",
-          "title": "Ders 14: Complex Aggregations",
+          "id": "test-14",
+          "title": "14: Complex Aggregations",
           "description": "Complex Aggregations konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-06/lesson-14"
+          "href": "/education/tests/quiz/tests-mssql/module-06/test-14"
         },
         {
-          "id": "lesson-15",
-          "title": "Ders 15: Modül Özeti",
+          "id": "test-15",
+          "title": "15: Modül Özeti",
           "description": "Modül Özeti konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-06/lesson-15"
+          "href": "/education/tests/quiz/tests-mssql/module-06/test-15"
         }
       ]
     },
@@ -611,94 +611,94 @@
       "objectives": [],
       "relatedTests": [
         {
-          "id": "lesson-01",
-          "title": "Ders 1: Subquery Nedir?",
+          "id": "test-01",
+          "title": "1: Subquery Nedir?",
           "description": "Subquery Nedir? konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-07/lesson-01"
+          "href": "/education/tests/quiz/tests-mssql/module-07/test-01"
         },
         {
-          "id": "lesson-02",
-          "title": "Ders 2: Scalar Subquery",
+          "id": "test-02",
+          "title": "2: Scalar Subquery",
           "description": "Scalar Subquery konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-07/lesson-02"
+          "href": "/education/tests/quiz/tests-mssql/module-07/test-02"
         },
         {
-          "id": "lesson-03",
-          "title": "Ders 3: Correlated Subquery",
+          "id": "test-03",
+          "title": "3: Correlated Subquery",
           "description": "Correlated Subquery konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-07/lesson-03"
+          "href": "/education/tests/quiz/tests-mssql/module-07/test-03"
         },
         {
-          "id": "lesson-04",
-          "title": "Ders 4: EXISTS ve NOT EXISTS",
+          "id": "test-04",
+          "title": "4: EXISTS ve NOT EXISTS",
           "description": "EXISTS ve NOT EXISTS konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-07/lesson-04"
+          "href": "/education/tests/quiz/tests-mssql/module-07/test-04"
         },
         {
-          "id": "lesson-05",
-          "title": "Ders 5: IN ve NOT IN ile Subquery",
+          "id": "test-05",
+          "title": "5: IN ve NOT IN ile Subquery",
           "description": "IN ve NOT IN ile Subquery konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-07/lesson-05"
+          "href": "/education/tests/quiz/tests-mssql/module-07/test-05"
         },
         {
-          "id": "lesson-06",
-          "title": "Ders 6: ANY ve ALL",
+          "id": "test-06",
+          "title": "6: ANY ve ALL",
           "description": "ANY ve ALL konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-07/lesson-06"
+          "href": "/education/tests/quiz/tests-mssql/module-07/test-06"
         },
         {
-          "id": "lesson-07",
-          "title": "Ders 7: Common Table Expressions (CTE)",
+          "id": "test-07",
+          "title": "7: Common Table Expressions (CTE)",
           "description": "Common Table Expressions (CTE) konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-07/lesson-07"
+          "href": "/education/tests/quiz/tests-mssql/module-07/test-07"
         },
         {
-          "id": "lesson-08",
-          "title": "Ders 8: Recursive CTE",
+          "id": "test-08",
+          "title": "8: Recursive CTE",
           "description": "Recursive CTE konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-07/lesson-08"
+          "href": "/education/tests/quiz/tests-mssql/module-07/test-08"
         },
         {
-          "id": "lesson-09",
-          "title": "Ders 9: CTE vs Subquery",
+          "id": "test-09",
+          "title": "9: CTE vs Subquery",
           "description": "CTE vs Subquery konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-07/lesson-09"
+          "href": "/education/tests/quiz/tests-mssql/module-07/test-09"
         },
         {
-          "id": "lesson-10",
-          "title": "Ders 10: CTE Best Practices",
+          "id": "test-10",
+          "title": "10: CTE Best Practices",
           "description": "CTE Best Practices konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-07/lesson-10"
+          "href": "/education/tests/quiz/tests-mssql/module-07/test-10"
         },
         {
-          "id": "lesson-11",
-          "title": "Ders 11: Window Functions ile CTE",
+          "id": "test-11",
+          "title": "11: Window Functions ile CTE",
           "description": "Window Functions ile CTE konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-07/lesson-11"
+          "href": "/education/tests/quiz/tests-mssql/module-07/test-11"
         },
         {
-          "id": "lesson-12",
-          "title": "Ders 12: Multiple CTEs",
+          "id": "test-12",
+          "title": "12: Multiple CTEs",
           "description": "Multiple CTEs konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-07/lesson-12"
+          "href": "/education/tests/quiz/tests-mssql/module-07/test-12"
         },
         {
-          "id": "lesson-13",
-          "title": "Ders 13: CTE Performansı",
+          "id": "test-13",
+          "title": "13: CTE Performansı",
           "description": "CTE Performansı konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-07/lesson-13"
+          "href": "/education/tests/quiz/tests-mssql/module-07/test-13"
         },
         {
-          "id": "lesson-14",
-          "title": "Ders 14: Complex CTE Senaryoları",
+          "id": "test-14",
+          "title": "14: Complex CTE Senaryoları",
           "description": "Complex CTE Senaryoları konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-07/lesson-14"
+          "href": "/education/tests/quiz/tests-mssql/module-07/test-14"
         },
         {
-          "id": "lesson-15",
-          "title": "Ders 15: Modül Özeti",
+          "id": "test-15",
+          "title": "15: Modül Özeti",
           "description": "Modül Özeti konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-07/lesson-15"
+          "href": "/education/tests/quiz/tests-mssql/module-07/test-15"
         }
       ]
     },
@@ -710,94 +710,94 @@
       "objectives": [],
       "relatedTests": [
         {
-          "id": "lesson-01",
-          "title": "Ders 1: Stored Procedure Nedir?",
+          "id": "test-01",
+          "title": "1: Stored Procedure Nedir?",
           "description": "Stored Procedure Nedir? konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-08/lesson-01"
+          "href": "/education/tests/quiz/tests-mssql/module-08/test-01"
         },
         {
-          "id": "lesson-02",
-          "title": "Ders 2: Stored Procedure Oluşturma",
+          "id": "test-02",
+          "title": "2: Stored Procedure Oluşturma",
           "description": "Stored Procedure Oluşturma konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-08/lesson-02"
+          "href": "/education/tests/quiz/tests-mssql/module-08/test-02"
         },
         {
-          "id": "lesson-03",
-          "title": "Ders 3: Parametreli Stored Procedures",
+          "id": "test-03",
+          "title": "3: Parametreli Stored Procedures",
           "description": "Parametreli Stored Procedures konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-08/lesson-03"
+          "href": "/education/tests/quiz/tests-mssql/module-08/test-03"
         },
         {
-          "id": "lesson-04",
-          "title": "Ders 4: Return Değerleri",
+          "id": "test-04",
+          "title": "4: Return Değerleri",
           "description": "Return Değerleri konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-08/lesson-04"
+          "href": "/education/tests/quiz/tests-mssql/module-08/test-04"
         },
         {
-          "id": "lesson-05",
-          "title": "Ders 5: Output Parametreleri",
+          "id": "test-05",
+          "title": "5: Output Parametreleri",
           "description": "Output Parametreleri konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-08/lesson-05"
+          "href": "/education/tests/quiz/tests-mssql/module-08/test-05"
         },
         {
-          "id": "lesson-06",
-          "title": "Ders 6: Error Handling",
+          "id": "test-06",
+          "title": "6: Error Handling",
           "description": "Error Handling konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-08/lesson-06"
+          "href": "/education/tests/quiz/tests-mssql/module-08/test-06"
         },
         {
-          "id": "lesson-07",
-          "title": "Ders 7: Transaction Yönetimi",
+          "id": "test-07",
+          "title": "7: Transaction Yönetimi",
           "description": "Transaction Yönetimi konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-08/lesson-07"
+          "href": "/education/tests/quiz/tests-mssql/module-08/test-07"
         },
         {
-          "id": "lesson-08",
-          "title": "Ders 8: Dynamic SQL",
+          "id": "test-08",
+          "title": "8: Dynamic SQL",
           "description": "Dynamic SQL konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-08/lesson-08"
+          "href": "/education/tests/quiz/tests-mssql/module-08/test-08"
         },
         {
-          "id": "lesson-09",
-          "title": "Ders 9: Stored Procedure Best Practices",
+          "id": "test-09",
+          "title": "9: Stored Procedure Best Practices",
           "description": "Stored Procedure Best Practices konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-08/lesson-09"
+          "href": "/education/tests/quiz/tests-mssql/module-08/test-09"
         },
         {
-          "id": "lesson-10",
-          "title": "Ders 10: Stored Procedure Performansı",
+          "id": "test-10",
+          "title": "10: Stored Procedure Performansı",
           "description": "Stored Procedure Performansı konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-08/lesson-10"
+          "href": "/education/tests/quiz/tests-mssql/module-08/test-10"
         },
         {
-          "id": "lesson-11",
-          "title": "Ders 11: Nested Procedures",
+          "id": "test-11",
+          "title": "11: Nested Procedures",
           "description": "Nested Procedures konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-08/lesson-11"
+          "href": "/education/tests/quiz/tests-mssql/module-08/test-11"
         },
         {
-          "id": "lesson-12",
-          "title": "Ders 12: System Stored Procedures",
+          "id": "test-12",
+          "title": "12: System Stored Procedures",
           "description": "System Stored Procedures konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-08/lesson-12"
+          "href": "/education/tests/quiz/tests-mssql/module-08/test-12"
         },
         {
-          "id": "lesson-13",
-          "title": "Ders 13: Stored Procedure Debugging",
+          "id": "test-13",
+          "title": "13: Stored Procedure Debugging",
           "description": "Stored Procedure Debugging konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-08/lesson-13"
+          "href": "/education/tests/quiz/tests-mssql/module-08/test-13"
         },
         {
-          "id": "lesson-14",
-          "title": "Ders 14: Deployment Stratejileri",
+          "id": "test-14",
+          "title": "14: Deployment Stratejileri",
           "description": "Deployment Stratejileri konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-08/lesson-14"
+          "href": "/education/tests/quiz/tests-mssql/module-08/test-14"
         },
         {
-          "id": "lesson-15",
-          "title": "Ders 15: Modül Özeti",
+          "id": "test-15",
+          "title": "15: Modül Özeti",
           "description": "Modül Özeti konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-08/lesson-15"
+          "href": "/education/tests/quiz/tests-mssql/module-08/test-15"
         }
       ]
     },
@@ -809,94 +809,94 @@
       "objectives": [],
       "relatedTests": [
         {
-          "id": "lesson-01",
-          "title": "Ders 1: Function Nedir?",
+          "id": "test-01",
+          "title": "1: Function Nedir?",
           "description": "Function Nedir? konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-09/lesson-01"
+          "href": "/education/tests/quiz/tests-mssql/module-09/test-01"
         },
         {
-          "id": "lesson-02",
-          "title": "Ders 2: Scalar Functions",
+          "id": "test-02",
+          "title": "2: Scalar Functions",
           "description": "Scalar Functions konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-09/lesson-02"
+          "href": "/education/tests/quiz/tests-mssql/module-09/test-02"
         },
         {
-          "id": "lesson-03",
-          "title": "Ders 3: Table-Valued Functions",
+          "id": "test-03",
+          "title": "3: Table-Valued Functions",
           "description": "Table-Valued Functions konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-09/lesson-03"
+          "href": "/education/tests/quiz/tests-mssql/module-09/test-03"
         },
         {
-          "id": "lesson-04",
-          "title": "Ders 4: Inline Table-Valued Functions",
+          "id": "test-04",
+          "title": "4: Inline Table-Valued Functions",
           "description": "Inline Table-Valued Functions konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-09/lesson-04"
+          "href": "/education/tests/quiz/tests-mssql/module-09/test-04"
         },
         {
-          "id": "lesson-05",
-          "title": "Ders 5: Multi-Statement Table-Valued Functions",
+          "id": "test-05",
+          "title": "5: Multi-Statement Table-Valued Functions",
           "description": "Multi-Statement Table-Valued Functions konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-09/lesson-05"
+          "href": "/education/tests/quiz/tests-mssql/module-09/test-05"
         },
         {
-          "id": "lesson-06",
-          "title": "Ders 6: Function Parametreleri",
+          "id": "test-06",
+          "title": "6: Function Parametreleri",
           "description": "Function Parametreleri konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-09/lesson-06"
+          "href": "/education/tests/quiz/tests-mssql/module-09/test-06"
         },
         {
-          "id": "lesson-07",
-          "title": "Ders 7: Function vs Stored Procedure",
+          "id": "test-07",
+          "title": "7: Function vs Stored Procedure",
           "description": "Function vs Stored Procedure konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-09/lesson-07"
+          "href": "/education/tests/quiz/tests-mssql/module-09/test-07"
         },
         {
-          "id": "lesson-08",
-          "title": "Ders 8: Deterministic Functions",
+          "id": "test-08",
+          "title": "8: Deterministic Functions",
           "description": "Deterministic Functions konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-09/lesson-08"
+          "href": "/education/tests/quiz/tests-mssql/module-09/test-08"
         },
         {
-          "id": "lesson-09",
-          "title": "Ders 9: Function Best Practices",
+          "id": "test-09",
+          "title": "9: Function Best Practices",
           "description": "Function Best Practices konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-09/lesson-09"
+          "href": "/education/tests/quiz/tests-mssql/module-09/test-09"
         },
         {
-          "id": "lesson-10",
-          "title": "Ders 10: Function Performansı",
+          "id": "test-10",
+          "title": "10: Function Performansı",
           "description": "Function Performansı konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-09/lesson-10"
+          "href": "/education/tests/quiz/tests-mssql/module-09/test-10"
         },
         {
-          "id": "lesson-11",
-          "title": "Ders 11: System Functions",
+          "id": "test-11",
+          "title": "11: System Functions",
           "description": "System Functions konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-09/lesson-11"
+          "href": "/education/tests/quiz/tests-mssql/module-09/test-11"
         },
         {
-          "id": "lesson-12",
-          "title": "Ders 12: User-Defined Functions",
+          "id": "test-12",
+          "title": "12: User-Defined Functions",
           "description": "User-Defined Functions konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-09/lesson-12"
+          "href": "/education/tests/quiz/tests-mssql/module-09/test-12"
         },
         {
-          "id": "lesson-13",
-          "title": "Ders 13: Function Limitations",
+          "id": "test-13",
+          "title": "13: Function Limitations",
           "description": "Function Limitations konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-09/lesson-13"
+          "href": "/education/tests/quiz/tests-mssql/module-09/test-13"
         },
         {
-          "id": "lesson-14",
-          "title": "Ders 14: Function Testing",
+          "id": "test-14",
+          "title": "14: Function Testing",
           "description": "Function Testing konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-09/lesson-14"
+          "href": "/education/tests/quiz/tests-mssql/module-09/test-14"
         },
         {
-          "id": "lesson-15",
-          "title": "Ders 15: Modül Özeti",
+          "id": "test-15",
+          "title": "15: Modül Özeti",
           "description": "Modül Özeti konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-09/lesson-15"
+          "href": "/education/tests/quiz/tests-mssql/module-09/test-15"
         }
       ]
     },
@@ -908,94 +908,94 @@
       "objectives": [],
       "relatedTests": [
         {
-          "id": "lesson-01",
-          "title": "Ders 1: Trigger Nedir?",
+          "id": "test-01",
+          "title": "1: Trigger Nedir?",
           "description": "Trigger Nedir? konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-10/lesson-01"
+          "href": "/education/tests/quiz/tests-mssql/module-10/test-01"
         },
         {
-          "id": "lesson-02",
-          "title": "Ders 2: AFTER Triggers",
+          "id": "test-02",
+          "title": "2: AFTER Triggers",
           "description": "AFTER Triggers konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-10/lesson-02"
+          "href": "/education/tests/quiz/tests-mssql/module-10/test-02"
         },
         {
-          "id": "lesson-03",
-          "title": "Ders 3: INSTEAD OF Triggers",
+          "id": "test-03",
+          "title": "3: INSTEAD OF Triggers",
           "description": "INSTEAD OF Triggers konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-10/lesson-03"
+          "href": "/education/tests/quiz/tests-mssql/module-10/test-03"
         },
         {
-          "id": "lesson-04",
-          "title": "Ders 4: DML Triggers",
+          "id": "test-04",
+          "title": "4: DML Triggers",
           "description": "DML Triggers konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-10/lesson-04"
+          "href": "/education/tests/quiz/tests-mssql/module-10/test-04"
         },
         {
-          "id": "lesson-05",
-          "title": "Ders 5: DDL Triggers",
+          "id": "test-05",
+          "title": "5: DDL Triggers",
           "description": "DDL Triggers konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-10/lesson-05"
+          "href": "/education/tests/quiz/tests-mssql/module-10/test-05"
         },
         {
-          "id": "lesson-06",
-          "title": "Ders 6: Trigger Execution Order",
+          "id": "test-06",
+          "title": "6: Trigger Execution Order",
           "description": "Trigger Execution Order konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-10/lesson-06"
+          "href": "/education/tests/quiz/tests-mssql/module-10/test-06"
         },
         {
-          "id": "lesson-07",
-          "title": "Ders 7: Trigger içinde INSERTED ve DELETED",
+          "id": "test-07",
+          "title": "7: Trigger içinde INSERTED ve DELETED",
           "description": "Trigger içinde INSERTED ve DELETED konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-10/lesson-07"
+          "href": "/education/tests/quiz/tests-mssql/module-10/test-07"
         },
         {
-          "id": "lesson-08",
-          "title": "Ders 8: Nested Triggers",
+          "id": "test-08",
+          "title": "8: Nested Triggers",
           "description": "Nested Triggers konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-10/lesson-08"
+          "href": "/education/tests/quiz/tests-mssql/module-10/test-08"
         },
         {
-          "id": "lesson-09",
-          "title": "Ders 9: Recursive Triggers",
+          "id": "test-09",
+          "title": "9: Recursive Triggers",
           "description": "Recursive Triggers konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-10/lesson-09"
+          "href": "/education/tests/quiz/tests-mssql/module-10/test-09"
         },
         {
-          "id": "lesson-10",
-          "title": "Ders 10: Trigger Best Practices",
+          "id": "test-10",
+          "title": "10: Trigger Best Practices",
           "description": "Trigger Best Practices konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-10/lesson-10"
+          "href": "/education/tests/quiz/tests-mssql/module-10/test-10"
         },
         {
-          "id": "lesson-11",
-          "title": "Ders 11: Trigger Performansı",
+          "id": "test-11",
+          "title": "11: Trigger Performansı",
           "description": "Trigger Performansı konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-10/lesson-11"
+          "href": "/education/tests/quiz/tests-mssql/module-10/test-11"
         },
         {
-          "id": "lesson-12",
-          "title": "Ders 12: Trigger Debugging",
+          "id": "test-12",
+          "title": "12: Trigger Debugging",
           "description": "Trigger Debugging konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-10/lesson-12"
+          "href": "/education/tests/quiz/tests-mssql/module-10/test-12"
         },
         {
-          "id": "lesson-13",
-          "title": "Ders 13: Trigger Güvenliği",
+          "id": "test-13",
+          "title": "13: Trigger Güvenliği",
           "description": "Trigger Güvenliği konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-10/lesson-13"
+          "href": "/education/tests/quiz/tests-mssql/module-10/test-13"
         },
         {
-          "id": "lesson-14",
-          "title": "Ders 14: Trigger Alternatifleri",
+          "id": "test-14",
+          "title": "14: Trigger Alternatifleri",
           "description": "Trigger Alternatifleri konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-10/lesson-14"
+          "href": "/education/tests/quiz/tests-mssql/module-10/test-14"
         },
         {
-          "id": "lesson-15",
-          "title": "Ders 15: Modül Özeti",
+          "id": "test-15",
+          "title": "15: Modül Özeti",
           "description": "Modül Özeti konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-10/lesson-15"
+          "href": "/education/tests/quiz/tests-mssql/module-10/test-15"
         }
       ]
     },
@@ -1007,94 +1007,94 @@
       "objectives": [],
       "relatedTests": [
         {
-          "id": "lesson-01",
-          "title": "Ders 1: Index Nedir?",
+          "id": "test-01",
+          "title": "1: Index Nedir?",
           "description": "Index Nedir? konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-11/lesson-01"
+          "href": "/education/tests/quiz/tests-mssql/module-11/test-01"
         },
         {
-          "id": "lesson-02",
-          "title": "Ders 2: Clustered Index",
+          "id": "test-02",
+          "title": "2: Clustered Index",
           "description": "Clustered Index konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-11/lesson-02"
+          "href": "/education/tests/quiz/tests-mssql/module-11/test-02"
         },
         {
-          "id": "lesson-03",
-          "title": "Ders 3: Non-Clustered Index",
+          "id": "test-03",
+          "title": "3: Non-Clustered Index",
           "description": "Non-Clustered Index konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-11/lesson-03"
+          "href": "/education/tests/quiz/tests-mssql/module-11/test-03"
         },
         {
-          "id": "lesson-04",
-          "title": "Ders 4: Composite Index",
+          "id": "test-04",
+          "title": "4: Composite Index",
           "description": "Composite Index konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-11/lesson-04"
+          "href": "/education/tests/quiz/tests-mssql/module-11/test-04"
         },
         {
-          "id": "lesson-05",
-          "title": "Ders 5: Covering Index",
+          "id": "test-05",
+          "title": "5: Covering Index",
           "description": "Covering Index konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-11/lesson-05"
+          "href": "/education/tests/quiz/tests-mssql/module-11/test-05"
         },
         {
-          "id": "lesson-06",
-          "title": "Ders 6: Index Fragmentation",
+          "id": "test-06",
+          "title": "6: Index Fragmentation",
           "description": "Index Fragmentation konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-11/lesson-06"
+          "href": "/education/tests/quiz/tests-mssql/module-11/test-06"
         },
         {
-          "id": "lesson-07",
-          "title": "Ders 7: Index Maintenance",
+          "id": "test-07",
+          "title": "7: Index Maintenance",
           "description": "Index Maintenance konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-11/lesson-07"
+          "href": "/education/tests/quiz/tests-mssql/module-11/test-07"
         },
         {
-          "id": "lesson-08",
-          "title": "Ders 8: Index Statistics",
+          "id": "test-08",
+          "title": "8: Index Statistics",
           "description": "Index Statistics konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-11/lesson-08"
+          "href": "/education/tests/quiz/tests-mssql/module-11/test-08"
         },
         {
-          "id": "lesson-09",
-          "title": "Ders 9: Query Optimizer",
+          "id": "test-09",
+          "title": "9: Query Optimizer",
           "description": "Query Optimizer konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-11/lesson-09"
+          "href": "/education/tests/quiz/tests-mssql/module-11/test-09"
         },
         {
-          "id": "lesson-10",
-          "title": "Ders 10: Index Best Practices",
+          "id": "test-10",
+          "title": "10: Index Best Practices",
           "description": "Index Best Practices konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-11/lesson-10"
+          "href": "/education/tests/quiz/tests-mssql/module-11/test-10"
         },
         {
-          "id": "lesson-11",
-          "title": "Ders 11: Index Performans Analizi",
+          "id": "test-11",
+          "title": "11: Index Performans Analizi",
           "description": "Index Performans Analizi konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-11/lesson-11"
+          "href": "/education/tests/quiz/tests-mssql/module-11/test-11"
         },
         {
-          "id": "lesson-12",
-          "title": "Ders 12: Missing Index Suggestions",
+          "id": "test-12",
+          "title": "12: Missing Index Suggestions",
           "description": "Missing Index Suggestions konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-11/lesson-12"
+          "href": "/education/tests/quiz/tests-mssql/module-11/test-12"
         },
         {
-          "id": "lesson-13",
-          "title": "Ders 13: Index Design Patterns",
+          "id": "test-13",
+          "title": "13: Index Design Patterns",
           "description": "Index Design Patterns konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-11/lesson-13"
+          "href": "/education/tests/quiz/tests-mssql/module-11/test-13"
         },
         {
-          "id": "lesson-14",
-          "title": "Ders 14: Index Monitoring",
+          "id": "test-14",
+          "title": "14: Index Monitoring",
           "description": "Index Monitoring konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-11/lesson-14"
+          "href": "/education/tests/quiz/tests-mssql/module-11/test-14"
         },
         {
-          "id": "lesson-15",
-          "title": "Ders 15: Modül Özeti",
+          "id": "test-15",
+          "title": "15: Modül Özeti",
           "description": "Modül Özeti konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-11/lesson-15"
+          "href": "/education/tests/quiz/tests-mssql/module-11/test-15"
         }
       ]
     },
@@ -1106,94 +1106,94 @@
       "objectives": [],
       "relatedTests": [
         {
-          "id": "lesson-01",
-          "title": "Ders 1: View Nedir?",
+          "id": "test-01",
+          "title": "1: View Nedir?",
           "description": "View Nedir? konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-12/lesson-01"
+          "href": "/education/tests/quiz/tests-mssql/module-12/test-01"
         },
         {
-          "id": "lesson-02",
-          "title": "Ders 2: View Oluşturma",
+          "id": "test-02",
+          "title": "2: View Oluşturma",
           "description": "View Oluşturma konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-12/lesson-02"
+          "href": "/education/tests/quiz/tests-mssql/module-12/test-02"
         },
         {
-          "id": "lesson-03",
-          "title": "Ders 3: Simple Views",
+          "id": "test-03",
+          "title": "3: Simple Views",
           "description": "Simple Views konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-12/lesson-03"
+          "href": "/education/tests/quiz/tests-mssql/module-12/test-03"
         },
         {
-          "id": "lesson-04",
-          "title": "Ders 4: Complex Views",
+          "id": "test-04",
+          "title": "4: Complex Views",
           "description": "Complex Views konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-12/lesson-04"
+          "href": "/education/tests/quiz/tests-mssql/module-12/test-04"
         },
         {
-          "id": "lesson-05",
-          "title": "Ders 5: Indexed Views",
+          "id": "test-05",
+          "title": "5: Indexed Views",
           "description": "Indexed Views konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-12/lesson-05"
+          "href": "/education/tests/quiz/tests-mssql/module-12/test-05"
         },
         {
-          "id": "lesson-06",
-          "title": "Ders 6: View ile DML",
+          "id": "test-06",
+          "title": "6: View ile DML",
           "description": "View ile DML konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-12/lesson-06"
+          "href": "/education/tests/quiz/tests-mssql/module-12/test-06"
         },
         {
-          "id": "lesson-07",
-          "title": "Ders 7: View Best Practices",
+          "id": "test-07",
+          "title": "7: View Best Practices",
           "description": "View Best Practices konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-12/lesson-07"
+          "href": "/education/tests/quiz/tests-mssql/module-12/test-07"
         },
         {
-          "id": "lesson-08",
-          "title": "Ders 8: View Performansı",
+          "id": "test-08",
+          "title": "8: View Performansı",
           "description": "View Performansı konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-12/lesson-08"
+          "href": "/education/tests/quiz/tests-mssql/module-12/test-08"
         },
         {
-          "id": "lesson-09",
-          "title": "Ders 9: View Güvenliği",
+          "id": "test-09",
+          "title": "9: View Güvenliği",
           "description": "View Güvenliği konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-12/lesson-09"
+          "href": "/education/tests/quiz/tests-mssql/module-12/test-09"
         },
         {
-          "id": "lesson-10",
-          "title": "Ders 10: System Views",
+          "id": "test-10",
+          "title": "10: System Views",
           "description": "System Views konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-12/lesson-10"
+          "href": "/education/tests/quiz/tests-mssql/module-12/test-10"
         },
         {
-          "id": "lesson-11",
-          "title": "Ders 11: Dynamic Management Views",
+          "id": "test-11",
+          "title": "11: Dynamic Management Views",
           "description": "Dynamic Management Views konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-12/lesson-11"
+          "href": "/education/tests/quiz/tests-mssql/module-12/test-11"
         },
         {
-          "id": "lesson-12",
-          "title": "Ders 12: View Maintenance",
+          "id": "test-12",
+          "title": "12: View Maintenance",
           "description": "View Maintenance konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-12/lesson-12"
+          "href": "/education/tests/quiz/tests-mssql/module-12/test-12"
         },
         {
-          "id": "lesson-13",
-          "title": "Ders 13: View vs Table",
+          "id": "test-13",
+          "title": "13: View vs Table",
           "description": "View vs Table konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-12/lesson-13"
+          "href": "/education/tests/quiz/tests-mssql/module-12/test-13"
         },
         {
-          "id": "lesson-14",
-          "title": "Ders 14: View Senaryoları",
+          "id": "test-14",
+          "title": "14: View Senaryoları",
           "description": "View Senaryoları konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-12/lesson-14"
+          "href": "/education/tests/quiz/tests-mssql/module-12/test-14"
         },
         {
-          "id": "lesson-15",
-          "title": "Ders 15: Modül Özeti",
+          "id": "test-15",
+          "title": "15: Modül Özeti",
           "description": "Modül Özeti konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-12/lesson-15"
+          "href": "/education/tests/quiz/tests-mssql/module-12/test-15"
         }
       ]
     },
@@ -1205,94 +1205,94 @@
       "objectives": [],
       "relatedTests": [
         {
-          "id": "lesson-01",
-          "title": "Ders 1: Transaction Nedir?",
+          "id": "test-01",
+          "title": "1: Transaction Nedir?",
           "description": "Transaction Nedir? konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-13/lesson-01"
+          "href": "/education/tests/quiz/tests-mssql/module-13/test-01"
         },
         {
-          "id": "lesson-02",
-          "title": "Ders 2: ACID Properties",
+          "id": "test-02",
+          "title": "2: ACID Properties",
           "description": "ACID Properties konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-13/lesson-02"
+          "href": "/education/tests/quiz/tests-mssql/module-13/test-02"
         },
         {
-          "id": "lesson-03",
-          "title": "Ders 3: BEGIN TRANSACTION",
+          "id": "test-03",
+          "title": "3: BEGIN TRANSACTION",
           "description": "BEGIN TRANSACTION konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-13/lesson-03"
+          "href": "/education/tests/quiz/tests-mssql/module-13/test-03"
         },
         {
-          "id": "lesson-04",
-          "title": "Ders 4: COMMIT ve ROLLBACK",
+          "id": "test-04",
+          "title": "4: COMMIT ve ROLLBACK",
           "description": "COMMIT ve ROLLBACK konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-13/lesson-04"
+          "href": "/education/tests/quiz/tests-mssql/module-13/test-04"
         },
         {
-          "id": "lesson-05",
-          "title": "Ders 5: Savepoints",
+          "id": "test-05",
+          "title": "5: Savepoints",
           "description": "Savepoints konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-13/lesson-05"
+          "href": "/education/tests/quiz/tests-mssql/module-13/test-05"
         },
         {
-          "id": "lesson-06",
-          "title": "Ders 6: Transaction Isolation Levels",
+          "id": "test-06",
+          "title": "6: Transaction Isolation Levels",
           "description": "Transaction Isolation Levels konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-13/lesson-06"
+          "href": "/education/tests/quiz/tests-mssql/module-13/test-06"
         },
         {
-          "id": "lesson-07",
-          "title": "Ders 7: Locking",
+          "id": "test-07",
+          "title": "7: Locking",
           "description": "Locking konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-13/lesson-07"
+          "href": "/education/tests/quiz/tests-mssql/module-13/test-07"
         },
         {
-          "id": "lesson-08",
-          "title": "Ders 8: Deadlocks",
+          "id": "test-08",
+          "title": "8: Deadlocks",
           "description": "Deadlocks konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-13/lesson-08"
+          "href": "/education/tests/quiz/tests-mssql/module-13/test-08"
         },
         {
-          "id": "lesson-09",
-          "title": "Ders 9: Concurrency Control",
+          "id": "test-09",
+          "title": "9: Concurrency Control",
           "description": "Concurrency Control konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-13/lesson-09"
+          "href": "/education/tests/quiz/tests-mssql/module-13/test-09"
         },
         {
-          "id": "lesson-10",
-          "title": "Ders 10: Transaction Best Practices",
+          "id": "test-10",
+          "title": "10: Transaction Best Practices",
           "description": "Transaction Best Practices konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-13/lesson-10"
+          "href": "/education/tests/quiz/tests-mssql/module-13/test-10"
         },
         {
-          "id": "lesson-11",
-          "title": "Ders 11: Nested Transactions",
+          "id": "test-11",
+          "title": "11: Nested Transactions",
           "description": "Nested Transactions konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-13/lesson-11"
+          "href": "/education/tests/quiz/tests-mssql/module-13/test-11"
         },
         {
-          "id": "lesson-12",
-          "title": "Ders 12: Distributed Transactions",
+          "id": "test-12",
+          "title": "12: Distributed Transactions",
           "description": "Distributed Transactions konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-13/lesson-12"
+          "href": "/education/tests/quiz/tests-mssql/module-13/test-12"
         },
         {
-          "id": "lesson-13",
-          "title": "Ders 13: Transaction Log",
+          "id": "test-13",
+          "title": "13: Transaction Log",
           "description": "Transaction Log konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-13/lesson-13"
+          "href": "/education/tests/quiz/tests-mssql/module-13/test-13"
         },
         {
-          "id": "lesson-14",
-          "title": "Ders 14: Recovery Models",
+          "id": "test-14",
+          "title": "14: Recovery Models",
           "description": "Recovery Models konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-13/lesson-14"
+          "href": "/education/tests/quiz/tests-mssql/module-13/test-14"
         },
         {
-          "id": "lesson-15",
-          "title": "Ders 15: Modül Özeti",
+          "id": "test-15",
+          "title": "15: Modül Özeti",
           "description": "Modül Özeti konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-13/lesson-15"
+          "href": "/education/tests/quiz/tests-mssql/module-13/test-15"
         }
       ]
     },
@@ -1304,94 +1304,94 @@
       "objectives": [],
       "relatedTests": [
         {
-          "id": "lesson-01",
-          "title": "Ders 1: Security Model",
+          "id": "test-01",
+          "title": "1: Security Model",
           "description": "Security Model konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-14/lesson-01"
+          "href": "/education/tests/quiz/tests-mssql/module-14/test-01"
         },
         {
-          "id": "lesson-02",
-          "title": "Ders 2: Login Oluşturma",
+          "id": "test-02",
+          "title": "2: Login Oluşturma",
           "description": "Login Oluşturma konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-14/lesson-02"
+          "href": "/education/tests/quiz/tests-mssql/module-14/test-02"
         },
         {
-          "id": "lesson-03",
-          "title": "Ders 3: User Oluşturma",
+          "id": "test-03",
+          "title": "3: User Oluşturma",
           "description": "User Oluşturma konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-14/lesson-03"
+          "href": "/education/tests/quiz/tests-mssql/module-14/test-03"
         },
         {
-          "id": "lesson-04",
-          "title": "Ders 4: Roles",
+          "id": "test-04",
+          "title": "4: Roles",
           "description": "Roles konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-14/lesson-04"
+          "href": "/education/tests/quiz/tests-mssql/module-14/test-04"
         },
         {
-          "id": "lesson-05",
-          "title": "Ders 5: Permissions",
+          "id": "test-05",
+          "title": "5: Permissions",
           "description": "Permissions konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-14/lesson-05"
+          "href": "/education/tests/quiz/tests-mssql/module-14/test-05"
         },
         {
-          "id": "lesson-06",
-          "title": "Ders 6: Schema Security",
+          "id": "test-06",
+          "title": "6: Schema Security",
           "description": "Schema Security konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-14/lesson-06"
+          "href": "/education/tests/quiz/tests-mssql/module-14/test-06"
         },
         {
-          "id": "lesson-07",
-          "title": "Ders 7: Row-Level Security",
+          "id": "test-07",
+          "title": "7: Row-Level Security",
           "description": "Row-Level Security konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-14/lesson-07"
+          "href": "/education/tests/quiz/tests-mssql/module-14/test-07"
         },
         {
-          "id": "lesson-08",
-          "title": "Ders 8: Dynamic Data Masking",
+          "id": "test-08",
+          "title": "8: Dynamic Data Masking",
           "description": "Dynamic Data Masking konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-14/lesson-08"
+          "href": "/education/tests/quiz/tests-mssql/module-14/test-08"
         },
         {
-          "id": "lesson-09",
-          "title": "Ders 9: Encryption",
+          "id": "test-09",
+          "title": "9: Encryption",
           "description": "Encryption konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-14/lesson-09"
+          "href": "/education/tests/quiz/tests-mssql/module-14/test-09"
         },
         {
-          "id": "lesson-10",
-          "title": "Ders 10: Auditing",
+          "id": "test-10",
+          "title": "10: Auditing",
           "description": "Auditing konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-14/lesson-10"
+          "href": "/education/tests/quiz/tests-mssql/module-14/test-10"
         },
         {
-          "id": "lesson-11",
-          "title": "Ders 11: Security Best Practices",
+          "id": "test-11",
+          "title": "11: Security Best Practices",
           "description": "Security Best Practices konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-14/lesson-11"
+          "href": "/education/tests/quiz/tests-mssql/module-14/test-11"
         },
         {
-          "id": "lesson-12",
-          "title": "Ders 12: Compliance",
+          "id": "test-12",
+          "title": "12: Compliance",
           "description": "Compliance konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-14/lesson-12"
+          "href": "/education/tests/quiz/tests-mssql/module-14/test-12"
         },
         {
-          "id": "lesson-13",
-          "title": "Ders 13: Security Monitoring",
+          "id": "test-13",
+          "title": "13: Security Monitoring",
           "description": "Security Monitoring konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-14/lesson-13"
+          "href": "/education/tests/quiz/tests-mssql/module-14/test-13"
         },
         {
-          "id": "lesson-14",
-          "title": "Ders 14: Security Troubleshooting",
+          "id": "test-14",
+          "title": "14: Security Troubleshooting",
           "description": "Security Troubleshooting konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-14/lesson-14"
+          "href": "/education/tests/quiz/tests-mssql/module-14/test-14"
         },
         {
-          "id": "lesson-15",
-          "title": "Ders 15: Modül Özeti",
+          "id": "test-15",
+          "title": "15: Modül Özeti",
           "description": "Modül Özeti konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-14/lesson-15"
+          "href": "/education/tests/quiz/tests-mssql/module-14/test-15"
         }
       ]
     },
@@ -1403,94 +1403,94 @@
       "objectives": [],
       "relatedTests": [
         {
-          "id": "lesson-01",
-          "title": "Ders 1: Backup Türleri",
+          "id": "test-01",
+          "title": "1: Backup Türleri",
           "description": "Backup Türleri konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-15/lesson-01"
+          "href": "/education/tests/quiz/tests-mssql/module-15/test-01"
         },
         {
-          "id": "lesson-02",
-          "title": "Ders 2: Full Backup",
+          "id": "test-02",
+          "title": "2: Full Backup",
           "description": "Full Backup konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-15/lesson-02"
+          "href": "/education/tests/quiz/tests-mssql/module-15/test-02"
         },
         {
-          "id": "lesson-03",
-          "title": "Ders 3: Differential Backup",
+          "id": "test-03",
+          "title": "3: Differential Backup",
           "description": "Differential Backup konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-15/lesson-03"
+          "href": "/education/tests/quiz/tests-mssql/module-15/test-03"
         },
         {
-          "id": "lesson-04",
-          "title": "Ders 4: Transaction Log Backup",
+          "id": "test-04",
+          "title": "4: Transaction Log Backup",
           "description": "Transaction Log Backup konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-15/lesson-04"
+          "href": "/education/tests/quiz/tests-mssql/module-15/test-04"
         },
         {
-          "id": "lesson-05",
-          "title": "Ders 5: Backup Stratejileri",
+          "id": "test-05",
+          "title": "5: Backup Stratejileri",
           "description": "Backup Stratejileri konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-15/lesson-05"
+          "href": "/education/tests/quiz/tests-mssql/module-15/test-05"
         },
         {
-          "id": "lesson-06",
-          "title": "Ders 6: Restore İşlemleri",
+          "id": "test-06",
+          "title": "6: Restore İşlemleri",
           "description": "Restore İşlemleri konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-15/lesson-06"
+          "href": "/education/tests/quiz/tests-mssql/module-15/test-06"
         },
         {
-          "id": "lesson-07",
-          "title": "Ders 7: Point-in-Time Recovery",
+          "id": "test-07",
+          "title": "7: Point-in-Time Recovery",
           "description": "Point-in-Time Recovery konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-15/lesson-07"
+          "href": "/education/tests/quiz/tests-mssql/module-15/test-07"
         },
         {
-          "id": "lesson-08",
-          "title": "Ders 8: Database Maintenance Plans",
+          "id": "test-08",
+          "title": "8: Database Maintenance Plans",
           "description": "Database Maintenance Plans konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-15/lesson-08"
+          "href": "/education/tests/quiz/tests-mssql/module-15/test-08"
         },
         {
-          "id": "lesson-09",
-          "title": "Ders 9: Index Maintenance",
+          "id": "test-09",
+          "title": "9: Index Maintenance",
           "description": "Index Maintenance konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-15/lesson-09"
+          "href": "/education/tests/quiz/tests-mssql/module-15/test-09"
         },
         {
-          "id": "lesson-10",
-          "title": "Ders 10: Statistics Update",
+          "id": "test-10",
+          "title": "10: Statistics Update",
           "description": "Statistics Update konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-15/lesson-10"
+          "href": "/education/tests/quiz/tests-mssql/module-15/test-10"
         },
         {
-          "id": "lesson-11",
-          "title": "Ders 11: Database Consistency Check",
+          "id": "test-11",
+          "title": "11: Database Consistency Check",
           "description": "Database Consistency Check konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-15/lesson-11"
+          "href": "/education/tests/quiz/tests-mssql/module-15/test-11"
         },
         {
-          "id": "lesson-12",
-          "title": "Ders 12: Automated Maintenance",
+          "id": "test-12",
+          "title": "12: Automated Maintenance",
           "description": "Automated Maintenance konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-15/lesson-12"
+          "href": "/education/tests/quiz/tests-mssql/module-15/test-12"
         },
         {
-          "id": "lesson-13",
-          "title": "Ders 13: Monitoring ve Alerting",
+          "id": "test-13",
+          "title": "13: Monitoring ve Alerting",
           "description": "Monitoring ve Alerting konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-15/lesson-13"
+          "href": "/education/tests/quiz/tests-mssql/module-15/test-13"
         },
         {
-          "id": "lesson-14",
-          "title": "Ders 14: Disaster Recovery",
+          "id": "test-14",
+          "title": "14: Disaster Recovery",
           "description": "Disaster Recovery konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-15/lesson-14"
+          "href": "/education/tests/quiz/tests-mssql/module-15/test-14"
         },
         {
-          "id": "lesson-15",
-          "title": "Ders 15: Modül Özeti",
+          "id": "test-15",
+          "title": "15: Modül Özeti",
           "description": "Modül Özeti konusunda detaylı bilgi ve uygulamalar.",
-          "href": "/education/lessons/mssql/module-15/lesson-15"
+          "href": "/education/tests/quiz/tests-mssql/module-15/test-15"
         }
       ]
     }

@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
+import { MessageContent } from "@/app/(dashboard)/education/lessons/_components/MessageContent";
 
 interface WrongQuestion {
   id: string;
@@ -423,7 +424,15 @@ export default function TutorPage() {
                           : "bg-white text-gray-800 dark:bg-gray-900/70 dark:text-gray-100 border border-gray-200 dark:border-gray-700"
                       }`}
                     >
-                      <p className="whitespace-pre-wrap leading-6">{message.content}</p>
+                      {message.role === "assistant" ? (
+                        <MessageContent 
+                          content={message.content} 
+                          isAI={true}
+                          className="text-gray-800 dark:text-gray-100"
+                        />
+                      ) : (
+                        <p className="whitespace-pre-wrap leading-6 text-white/90">{message.content}</p>
+                      )}
                       <span
                         className={`mt-2 block text-xs ${
                           message.role === "user"

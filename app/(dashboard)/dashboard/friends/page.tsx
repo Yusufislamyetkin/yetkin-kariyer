@@ -2,16 +2,14 @@
 
 import { useEffect, useMemo, useState, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
 import { formatDistanceToNow } from "date-fns";
 import { tr } from "date-fns/locale";
-import { UserPlus, Users, Loader2, Check, X, MailQuestion, Search, MessageSquare, User } from "lucide-react";
+import { UserPlus, Users, Loader2, Check, X, Search, MessageSquare, User, Send } from "lucide-react";
 import { useSession } from "next-auth/react";
 import * as signalR from "@microsoft/signalr";
 import { startSignalRConnection } from "@/lib/realtime/signalr-client";
-
-import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
-import { Button } from "@/app/components/ui/Button";
-import { Input } from "@/app/components/ui/Input";
 import { useFriendRequest } from "@/app/contexts/FriendRequestContext";
 
 type FriendshipStatus = "pending" | "accepted" | "declined" | "blocked";
@@ -51,6 +49,27 @@ export default function FriendsPage() {
     friendshipStatus: string | null;
     isRequester: boolean;
   }>>([]);
+
+  // Memoized unique search results - remove duplicates by both ID and email
+  const uniqueSearchResults = useMemo(() => {
+    const seenIds = new Set<string>();
+    const seenEmails = new Set<string>();
+    return searchResults.filter((user) => {
+      // Check for duplicate ID
+      if (seenIds.has(user.id)) {
+        return false;
+      }
+      // Check for duplicate email (normalized to lowercase)
+      const normalizedEmail = user.email.toLowerCase().trim();
+      if (seenEmails.has(normalizedEmail)) {
+        return false;
+      }
+      // If unique, add to both sets
+      seenIds.add(user.id);
+      seenEmails.add(normalizedEmail);
+      return true;
+    });
+  }, [searchResults]);
   const [searching, setSearching] = useState(false);
   const [searchError, setSearchError] = useState<string | null>(null);
   const [sendingRequest, setSendingRequest] = useState(false);
@@ -71,14 +90,14 @@ export default function FriendsPage() {
       });
       if (!response.ok) {
         const data = await response.json().catch(() => null);
-        throw new Error(data?.error || "Arkadaş listesi alınamadı.");
+        throw new Error(data?.error || "Bağlantı listesi alınamadı.");
       }
       const data = await response.json();
       setFriendships(data.friendships ?? []);
       lastRefreshTimeRef.current = Date.now();
     } catch (err) {
       console.error("Error fetching friendships:", err);
-      setError((err as Error).message || "Arkadaş listesi yüklenemedi.");
+      setError((err as Error).message || "Bağlantı listesi yüklenemedi.");
     } finally {
       setLoading(false);
     }
@@ -98,21 +117,17 @@ export default function FriendsPage() {
   useEffect(() => {
     if (!lastUpdatedAt) return;
     
-    // Only refresh if lastUpdatedAt actually changed (not just a re-render)
     if (previousLastUpdatedAtRef.current === lastUpdatedAt) return;
     
-    // Only refresh if enough time has passed since last refresh (minimum 2 seconds debounce)
     const timeSinceLastRefresh = Date.now() - lastRefreshTimeRef.current;
-    const minDebounceTime = 2000; // 2 seconds minimum between refreshes
+    const minDebounceTime = 2000;
     
     if (timeSinceLastRefresh < minDebounceTime) {
-      // Clear any existing timeout and set a new one
       if (debounceTimeoutRef.current) {
         clearTimeout(debounceTimeoutRef.current);
       }
       const remainingTime = minDebounceTime - timeSinceLastRefresh;
       debounceTimeoutRef.current = setTimeout(() => {
-        // Double-check that lastUpdatedAt actually changed before refreshing
         if (previousLastUpdatedAtRef.current !== lastUpdatedAt) {
           previousLastUpdatedAtRef.current = lastUpdatedAt;
           lastRefreshTimeRef.current = Date.now();
@@ -122,12 +137,10 @@ export default function FriendsPage() {
       return;
     }
     
-    // Update the ref and refresh only if enough time has passed
     previousLastUpdatedAtRef.current = lastUpdatedAt;
     lastRefreshTimeRef.current = Date.now();
     refreshFriends();
     
-    // Cleanup timeout on unmount
     return () => {
       if (debounceTimeoutRef.current) {
         clearTimeout(debounceTimeoutRef.current);
@@ -153,7 +166,6 @@ export default function FriendsPage() {
           return;
         }
 
-        // Listen for friend request received
         connection.on("FriendRequestReceived", (payload: {
           type: "friend_request";
           requesterId: string;
@@ -164,14 +176,11 @@ export default function FriendsPage() {
           };
         }) => {
           if (!isMounted) return;
-          console.log("[FriendsPage] FriendRequestReceived event:", payload);
-          // Refresh friends list when a new request is received
           if (refreshFriendsRef.current) {
             refreshFriendsRef.current();
           }
         });
 
-        // Listen for friend request accepted
         connection.on("FriendRequestAccepted", (payload: {
           type: "friend_request_accepted";
           accepterId: string;
@@ -182,23 +191,17 @@ export default function FriendsPage() {
           };
         }) => {
           if (!isMounted) return;
-          console.log("[FriendsPage] FriendRequestAccepted event:", payload);
-          // Refresh friends list when a request is accepted
           if (refreshFriendsRef.current) {
             refreshFriendsRef.current();
           }
         });
 
-        // Listen for friend request declined/cancelled
         connection.on("FriendRequestDeclined", () => {
           if (!isMounted) return;
-          console.log("[FriendsPage] FriendRequestDeclined event");
           if (refreshFriendsRef.current) {
             refreshFriendsRef.current();
           }
         });
-
-        console.log("[FriendsPage] ✅ SignalR listeners setup completed");
       } catch (error) {
         console.error("[FriendsPage] ❌ SignalR setup failed:", error);
       }
@@ -215,10 +218,6 @@ export default function FriendsPage() {
       }
     };
   }, [session?.user?.id]);
-
-  // Removed visibilitychange listener - SignalR handles real-time updates
-  // Manual refresh on visibility change causes unnecessary refreshes
-  // SignalR listeners already handle all real-time friend request events
 
   const showActionMessage = (message: string, type: "success" | "error") => {
     setActionMessage(message);
@@ -244,7 +243,19 @@ export default function FriendsPage() {
       if (!response.ok) {
         throw new Error(data?.error || "Kullanıcı arama başarısız oldu.");
       }
-      setSearchResults(data.users ?? []);
+      // Remove duplicates by id
+      const users = data.users ?? [];
+      const uniqueUsers = Array.from(
+        new Map(users.map((user: { id: string; name: string | null; email: string; profileImage: string | null; friendshipStatus: string | null; isRequester: boolean }) => [user.id, user])).values()
+      ) as Array<{
+        id: string;
+        name: string | null;
+        email: string;
+        profileImage: string | null;
+        friendshipStatus: string | null;
+        isRequester: boolean;
+      }>;
+      setSearchResults(uniqueUsers);
     } catch (err) {
       console.error("Error searching users:", err);
       setSearchError((err as Error).message || "Kullanıcı arama sırasında bir hata oluştu.");
@@ -280,18 +291,17 @@ export default function FriendsPage() {
       });
       const data = await response.json().catch(() => ({}));
       if (!response.ok) {
-        throw new Error(data?.error || "Arkadaşlık isteği gönderilemedi.");
+        throw new Error(data?.error || "Bağlantı isteği gönderilemedi.");
       }
-      showActionMessage(data?.message || "Arkadaşlık isteği gönderildi.", "success");
+      showActionMessage(data?.message || "Bağlantı isteği gönderildi.", "success");
       await refreshFriends();
-      // Refresh search results to update friendship status if search query exists
       if (currentQuery.length >= 2) {
         await searchUsers(currentQuery);
       }
     } catch (err) {
       console.error("Error sending friend request:", err);
       showActionMessage(
-        (err as Error).message || "Arkadaşlık isteği gönderilirken bir hata oluştu.",
+        (err as Error).message || "Bağlantı isteği gönderilirken bir hata oluştu.",
         "error"
       );
     } finally {
@@ -327,26 +337,48 @@ export default function FriendsPage() {
     }
   };
 
-  const incomingRequests = useMemo(
-    () =>
-      friendships.filter(
-        (friendship) => friendship.direction === "incoming" && friendship.status === "pending"
-      ),
-    [friendships]
-  );
+  const incomingRequests = useMemo(() => {
+    const incoming = friendships.filter(
+      (friendship) => friendship.direction === "incoming" && friendship.status === "pending"
+    );
+    // Remove duplicates by counterpart.id
+    const seen = new Set<string>();
+    return incoming.filter((friendship) => {
+      if (seen.has(friendship.counterpart.id)) {
+        return false;
+      }
+      seen.add(friendship.counterpart.id);
+      return true;
+    });
+  }, [friendships]);
 
-  const outgoingRequests = useMemo(
-    () =>
-      friendships.filter(
-        (friendship) => friendship.direction === "outgoing" && friendship.status === "pending"
-      ),
-    [friendships]
-  );
+  const outgoingRequests = useMemo(() => {
+    const outgoing = friendships.filter(
+      (friendship) => friendship.direction === "outgoing" && friendship.status === "pending"
+    );
+    // Remove duplicates by counterpart.id
+    const seen = new Set<string>();
+    return outgoing.filter((friendship) => {
+      if (seen.has(friendship.counterpart.id)) {
+        return false;
+      }
+      seen.add(friendship.counterpart.id);
+      return true;
+    });
+  }, [friendships]);
 
-  const acceptedFriends = useMemo(
-    () => friendships.filter((friendship) => friendship.status === "accepted"),
-    [friendships]
-  );
+  const acceptedFriends = useMemo(() => {
+    const accepted = friendships.filter((friendship) => friendship.status === "accepted");
+    // Remove duplicates by counterpart.id
+    const seen = new Set<string>();
+    return accepted.filter((friendship) => {
+      if (seen.has(friendship.counterpart.id)) {
+        return false;
+      }
+      seen.add(friendship.counterpart.id);
+      return true;
+    });
+  }, [friendships]);
 
   const filteredAcceptedFriends = useMemo(() => {
     if (!friendsListSearchQuery.trim()) {
@@ -394,72 +426,81 @@ export default function FriendsPage() {
   };
 
   return (
-    <div className="animate-fade-in space-y-4 sm:space-y-6">
-      <div className="flex flex-col gap-2">
-        <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900 dark:text-gray-100">Arkadaşlarım</h1>
-        <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
-          Ekip kurmak için arkadaşlarını yönet, gelen istekleri yanıtla ve yeni bağlantılar kur.
-        </p>
-      </div>
-
-      {actionMessage && actionType && (
-        <div
-          className={`flex items-center gap-2 rounded-lg border px-4 py-3 text-sm ${
-            actionType === "success"
-              ? "border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-200"
-              : "border-rose-200 bg-rose-50 text-rose-700 dark:border-rose-500/30 dark:bg-rose-500/10 dark:text-rose-200"
-          }`}
-        >
-          {actionType === "success" ? <Check className="h-4 w-4" /> : <X className="h-4 w-4" />}
-          <span>{actionMessage}</span>
-        </div>
-      )}
-
-      <Card variant="elevated">
-        <CardHeader>
-          <CardTitle>Arkadaş ekle</CardTitle>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            Takım arkadaşlarınla iletişime geçmek için isim veya email ile kullanıcıları arayabilir ve arkadaşlık isteği gönderebilirsin.
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Header */}
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+            Bağlantılarım
+          </h1>
+          <p className="text-base text-gray-600 dark:text-gray-400">
+            Ekip kurmak için bağlantılarınızı yönetin, gelen istekleri yanıtlayın ve yeni bağlantılar kurun.
           </p>
-        </CardHeader>
-        <CardContent className="flex flex-col gap-3">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-            <Input
+        </div>
+
+        {/* Action Message */}
+        {actionMessage && actionType && (
+          <div
+            className={`mb-6 flex items-center gap-3 rounded-xl border-2 px-5 py-4 text-base ${
+              actionType === "success"
+                ? "border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-200"
+                : "border-rose-200 bg-rose-50 text-rose-700 dark:border-rose-500/30 dark:bg-rose-500/10 dark:text-rose-200"
+            }`}
+          >
+            {actionType === "success" ? <Check className="h-5 w-5" /> : <X className="h-5 w-5" />}
+            <span>{actionMessage}</span>
+          </div>
+        )}
+
+        {/* Search Section */}
+        <div className="bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 rounded-2xl p-6 shadow-lg mb-8">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+            Bağlantı Ekle
+          </h2>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+            Takım arkadaşlarınızla iletişime geçmek için isim veya email ile kullanıcıları arayabilir ve bağlantı isteği gönderebilirsiniz.
+          </p>
+          <div className="relative mb-4">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+            <input
+              type="text"
               placeholder="İsim veya email ile ara..."
               value={searchQuery}
               onChange={(event) => setSearchQuery(event.target.value)}
-              className="pl-10"
+              className="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl text-base text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0095f6] focus:border-transparent transition-all"
             />
           </div>
           {searching && (
-            <div className="flex items-center justify-center py-4">
-              <Loader2 className="h-5 w-5 animate-spin text-blue-500" />
-              <span className="ml-2 text-sm text-gray-500 dark:text-gray-400">Aranıyor...</span>
+            <div className="flex items-center justify-center py-6">
+              <Loader2 className="h-6 w-6 animate-spin text-[#0095f6]" />
+              <span className="ml-3 text-base text-gray-600 dark:text-gray-400">Aranıyor...</span>
             </div>
           )}
           {searchError && (
-            <div className="rounded-lg border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700 dark:border-rose-500/30 dark:bg-rose-500/10 dark:text-rose-200">
+            <div className="rounded-xl border-2 border-rose-200 bg-rose-50 px-5 py-4 text-sm text-rose-700 dark:border-rose-500/30 dark:bg-rose-500/10 dark:text-rose-200">
               {searchError}
             </div>
           )}
-          {!searching && !searchError && searchResults.length > 0 && (
-            <div className="space-y-2 max-h-64 overflow-y-auto">
-              {searchResults.map((user) => (
+          {!searching && !searchError && uniqueSearchResults.length > 0 && (
+            <div className="space-y-3 max-h-80 overflow-y-auto">
+              {uniqueSearchResults.map((user) => (
                 <div
                   key={user.id}
-                  className="flex items-center justify-between rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm shadow-sm dark:border-gray-700 dark:bg-gray-900"
+                  className="flex items-center justify-between rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-4 py-3 shadow-sm hover:shadow-md transition-shadow"
                 >
-                  <div className="flex items-center gap-3 flex-1 min-w-0">
+                  <div className="flex items-center gap-4 flex-1 min-w-0">
                     {user.profileImage ? (
-                      <img
-                        src={user.profileImage}
-                        alt={user.name || user.email}
-                        className="w-10 h-10 rounded-full object-cover"
-                        referrerPolicy="no-referrer"
-                      />
+                      <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-gray-200 dark:ring-gray-700 flex-shrink-0">
+                        <Image
+                          src={user.profileImage}
+                          alt={user.name || user.email}
+                          width={48}
+                          height={48}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
                     ) : (
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-semibold text-sm">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-base flex-shrink-0 ring-2 ring-gray-200 dark:ring-gray-700">
                         {(user.name || user.email)
                           .split(" ")
                           .map((word) => word[0])
@@ -469,256 +510,290 @@ export default function FriendsPage() {
                       </div>
                     )}
                     <div className="flex-1 min-w-0">
-                      <p className="font-semibold text-gray-900 dark:text-gray-100 truncate">
+                      <p className="font-semibold text-gray-900 dark:text-gray-100 truncate text-base">
                         {user.name || "İsimsiz Kullanıcı"}
                       </p>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                      <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
                         {user.email}
                       </p>
                     </div>
                   </div>
-                  <div className="ml-3">
+                  <div className="ml-4">
                     {user.friendshipStatus === "accepted" ? (
-                      <span className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">
-                        Arkadaş
+                      <span className="text-sm text-emerald-600 dark:text-emerald-400 font-semibold px-3 py-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-900/20">
+                        Bağlantı
                       </span>
                     ) : user.friendshipStatus === "pending" ? (
-                      <span className="text-xs text-blue-600 dark:text-blue-400 font-medium">
+                      <span className="text-sm text-blue-600 dark:text-blue-400 font-semibold px-3 py-1.5 rounded-lg bg-blue-50 dark:bg-blue-900/20">
                         {user.isRequester ? "İstek gönderildi" : "İstek bekliyor"}
                       </span>
                     ) : (
-                      <Button
-                        size="sm"
-                        variant="gradient"
+                      <button
                         onClick={() => handleSendRequest(user.id)}
                         disabled={sendingRequest}
+                        className="px-4 py-2 bg-[#0095f6] hover:bg-[#1877f2] text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                       >
                         {sendingRequest ? (
                           <Loader2 className="h-4 w-4 animate-spin" />
                         ) : (
                           <>
-                            <UserPlus className="mr-2 h-4 w-4" />
-                            Ekle
+                            <UserPlus className="h-4 w-4" />
+                            Bağlantı Kur
                           </>
                         )}
-                      </Button>
+                      </button>
                     )}
                   </div>
                 </div>
               ))}
             </div>
           )}
-          {!searching && !searchError && searchQuery.trim().length >= 2 && searchResults.length === 0 && (
-            <div className="rounded-lg border border-dashed border-gray-300 p-4 text-sm text-gray-600 dark:border-gray-700 dark:text-gray-400 text-center">
+          {!searching && !searchError && searchQuery.trim().length >= 2 && uniqueSearchResults.length === 0 && (
+            <div className="rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700 p-6 text-center text-base text-gray-600 dark:text-gray-400">
               Kullanıcı bulunamadı.
             </div>
           )}
           {!searching && !searchError && searchQuery.trim().length < 2 && searchQuery.length > 0 && (
-            <div className="rounded-lg border border-dashed border-gray-300 p-4 text-sm text-gray-600 dark:border-gray-700 dark:text-gray-400 text-center">
+            <div className="rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700 p-6 text-center text-base text-gray-600 dark:text-gray-400">
               Arama için en az 2 karakter girin.
             </div>
           )}
-        </CardContent>
-      </Card>
-
-      {loading ? (
-        <div className="flex min-h-[200px] items-center justify-center">
-          <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
         </div>
-      ) : error ? (
-        <Card variant="elevated">
-          <CardContent className="py-12 text-center text-sm text-gray-600 dark:text-gray-400">
-            {error}
-          </CardContent>
-        </Card>
-      ) : (
-        <div className="grid gap-4 sm:gap-6 lg:grid-cols-2">
-          <Card variant="elevated">
-            <CardHeader>
-              <CardTitle className="text-lg sm:text-xl">Gelen istekler</CardTitle>
-              <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
-                Gelen arkadaşlık isteklerine buradan yanıt ver.
-              </p>
-            </CardHeader>
-            <CardContent className="space-y-2 sm:space-y-3">
-              {incomingRequests.length === 0 ? (
-                <div className="rounded-lg border border-dashed border-gray-300 p-3 sm:p-4 text-xs sm:text-sm text-gray-600 dark:border-gray-700 dark:text-gray-400">
-                  Şu anda bekleyen arkadaşlık isteği yok.
-                </div>
-              ) : (
-                incomingRequests.map((friendship) => (
-                  <div
-                    key={friendship.id}
-                    className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 rounded-lg border border-gray-200 bg-white px-3 py-2.5 sm:py-2 text-sm shadow-sm dark:border-gray-700 dark:bg-gray-900"
-                  >
-                    <div className="flex-1 min-w-0">
-                      <p className="font-semibold text-gray-900 dark:text-gray-100 truncate">
-                        {friendship.counterpart.name ?? "İsimsiz Kullanıcı"}
-                      </p>
-                      <p className="text-xs text-gray-500 dark:text-gray-400">
-                        {formatDistanceToNow(new Date(friendship.requestedAt), {
-                          addSuffix: true,
-                          locale: tr,
-                        })}
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-2 sm:ml-3">
-                      <Button
-                        size="sm"
-                        variant="gradient"
-                        onClick={() => handleRespond(friendship.id, "accept")}
-                        disabled={respondingId === friendship.id}
-                        className="flex-1 sm:flex-initial text-xs sm:text-sm"
-                      >
-                        Kabul et
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => handleRespond(friendship.id, "decline")}
-                        disabled={respondingId === friendship.id}
-                        className="flex-1 sm:flex-initial text-xs sm:text-sm"
-                      >
-                        Reddet
-                      </Button>
-                    </div>
-                  </div>
-                ))
-              )}
-            </CardContent>
-          </Card>
 
-          <Card variant="elevated">
-            <CardHeader>
-              <CardTitle className="text-lg sm:text-xl">Gönderilen istekler</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2 sm:space-y-3">
-              {outgoingRequests.length === 0 ? (
-                <div className="rounded-lg border border-dashed border-gray-300 p-3 sm:p-4 text-xs sm:text-sm text-gray-600 dark:border-gray-700 dark:text-gray-400">
-                  Bekleyen giden arkadaşlık isteğiniz yok.
-                </div>
-              ) : (
-                outgoingRequests.map((friendship) => (
-                  <div
-                    key={friendship.id}
-                    className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 rounded-lg border border-gray-200 bg-white px-3 py-2.5 sm:py-2 text-sm shadow-sm dark:border-gray-700 dark:bg-gray-900"
-                  >
-                    <div className="flex-1 min-w-0">
-                      <p className="font-semibold text-gray-900 dark:text-gray-100 truncate">
-                        {friendship.counterpart.name ?? "İsimsiz Kullanıcı"}
-                      </p>
-                      <p className="text-xs text-gray-500 dark:text-gray-400">
-                        {formatDistanceToNow(new Date(friendship.requestedAt), {
-                          addSuffix: true,
-                          locale: tr,
-                        })}
-                      </p>
-                    </div>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={() => handleRespond(friendship.id, "cancel")}
-                      disabled={respondingId === friendship.id}
-                      className="w-full sm:w-auto text-xs sm:text-sm"
+        {loading ? (
+          <div className="flex min-h-[400px] items-center justify-center bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 rounded-2xl shadow-lg">
+            <Loader2 className="h-10 w-10 animate-spin text-[#0095f6]" />
+          </div>
+        ) : error ? (
+          <div className="bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 rounded-2xl p-12 text-center shadow-lg">
+            <p className="text-base text-gray-600 dark:text-gray-400">{error}</p>
+          </div>
+        ) : (
+          <div className="grid gap-6 lg:grid-cols-2">
+            {/* Incoming Requests */}
+            <div className="bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 rounded-2xl p-6 shadow-lg">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+                Gelen İstekler
+              </h2>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                Gelen bağlantı isteklerine buradan yanıt verin.
+              </p>
+              <div className="space-y-3">
+                {incomingRequests.length === 0 ? (
+                  <div className="rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700 p-6 text-center text-sm text-gray-600 dark:text-gray-400">
+                    Şu anda bekleyen bağlantı isteği yok.
+                  </div>
+                ) : (
+                  incomingRequests.map((friendship) => (
+                    <div
+                      key={friendship.id}
+                      className="flex items-center justify-between rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-4 py-3 shadow-sm hover:shadow-md transition-shadow"
                     >
-                      İsteği iptal et
-                    </Button>
-                  </div>
-                ))
-              )}
-            </CardContent>
-          </Card>
+                      <div className="flex items-center gap-3 flex-1 min-w-0">
+                        {friendship.counterpart.profileImage ? (
+                          <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-gray-200 dark:ring-gray-700 flex-shrink-0">
+                            <Image
+                              src={friendship.counterpart.profileImage}
+                              alt={friendship.counterpart.name || "User"}
+                              width={48}
+                              height={48}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        ) : (
+                          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-base flex-shrink-0 ring-2 ring-gray-200 dark:ring-gray-700">
+                            {(friendship.counterpart.name || "U")[0].toUpperCase()}
+                          </div>
+                        )}
+                        <div className="flex-1 min-w-0">
+                          <p className="font-semibold text-gray-900 dark:text-gray-100 truncate text-base">
+                            {friendship.counterpart.name ?? "İsimsiz Kullanıcı"}
+                          </p>
+                          <p className="text-xs text-gray-500 dark:text-gray-400">
+                            {formatDistanceToNow(new Date(friendship.requestedAt), {
+                              addSuffix: true,
+                              locale: tr,
+                            })}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2 ml-4">
+                        <button
+                          onClick={() => handleRespond(friendship.id, "accept")}
+                          disabled={respondingId === friendship.id}
+                          className="px-4 py-2 bg-[#0095f6] hover:bg-[#1877f2] text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                        >
+                          Kabul Et
+                        </button>
+                        <button
+                          onClick={() => handleRespond(friendship.id, "decline")}
+                          disabled={respondingId === friendship.id}
+                          className="px-4 py-2 border-2 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 font-semibold rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                        >
+                          Reddet
+                        </button>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
 
-          <Card variant="elevated" className="lg:col-span-2">
-            <CardHeader>
-              <CardTitle className="text-lg sm:text-xl">Arkadaş listesi</CardTitle>
-              <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
-                Takım kurarken buradaki kullanıcılara davet gönderebilirsin.
+            {/* Outgoing Requests */}
+            <div className="bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 rounded-2xl p-6 shadow-lg">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+                Gönderilen İstekler
+              </h2>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                Gönderdiğiniz bağlantı istekleri.
               </p>
-            </CardHeader>
-            <CardContent className="space-y-3 sm:space-y-4">
-              {/* Search input for friends list */}
+              <div className="space-y-3">
+                {outgoingRequests.length === 0 ? (
+                  <div className="rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700 p-6 text-center text-sm text-gray-600 dark:text-gray-400">
+                    Bekleyen giden bağlantı isteğiniz yok.
+                  </div>
+                ) : (
+                  outgoingRequests.map((friendship) => (
+                    <div
+                      key={friendship.id}
+                      className="flex items-center justify-between rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-4 py-3 shadow-sm hover:shadow-md transition-shadow"
+                    >
+                      <div className="flex items-center gap-3 flex-1 min-w-0">
+                        {friendship.counterpart.profileImage ? (
+                          <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-gray-200 dark:ring-gray-700 flex-shrink-0">
+                            <Image
+                              src={friendship.counterpart.profileImage}
+                              alt={friendship.counterpart.name || "User"}
+                              width={48}
+                              height={48}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        ) : (
+                          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-base flex-shrink-0 ring-2 ring-gray-200 dark:ring-gray-700">
+                            {(friendship.counterpart.name || "U")[0].toUpperCase()}
+                          </div>
+                        )}
+                        <div className="flex-1 min-w-0">
+                          <p className="font-semibold text-gray-900 dark:text-gray-100 truncate text-base">
+                            {friendship.counterpart.name ?? "İsimsiz Kullanıcı"}
+                          </p>
+                          <p className="text-xs text-gray-500 dark:text-gray-400">
+                            {formatDistanceToNow(new Date(friendship.requestedAt), {
+                              addSuffix: true,
+                              locale: tr,
+                            })}
+                          </p>
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => handleRespond(friendship.id, "cancel")}
+                        disabled={respondingId === friendship.id}
+                        className="px-4 py-2 border-2 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 font-semibold rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm ml-4"
+                      >
+                        İptal Et
+                      </button>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
+
+            {/* Connections List */}
+            <div className="bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 rounded-2xl p-6 shadow-lg lg:col-span-2">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+                Tüm Bağlantılarım
+              </h2>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                Takım kurarken buradaki kullanıcılara davet gönderebilirsiniz.
+              </p>
               {acceptedFriends.length > 0 && (
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-                  <Input
-                    placeholder="Arkadaşlarını ara..."
+                <div className="relative mb-4">
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                  <input
+                    type="text"
+                    placeholder="Bağlantılarınızı ara..."
                     value={friendsListSearchQuery}
                     onChange={(event) => setFriendsListSearchQuery(event.target.value)}
-                    className="pl-10 text-sm"
+                    className="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl text-base text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0095f6] focus:border-transparent transition-all"
                   />
                 </div>
               )}
               {acceptedFriends.length === 0 ? (
-                <div className="rounded-lg border border-dashed border-gray-300 p-3 sm:p-4 text-xs sm:text-sm text-gray-600 dark:border-gray-700 dark:text-gray-400">
-                  Henüz arkadaş eklemediniz. Yukarıdaki arama kutusunu kullanarak kullanıcıları arayabilir ve arkadaşlık isteği gönderebilirsiniz.
+                <div className="rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700 p-8 text-center text-base text-gray-600 dark:text-gray-400">
+                  Henüz bağlantı eklemediniz. Yukarıdaki arama kutusunu kullanarak kullanıcıları arayabilir ve bağlantı isteği gönderebilirsiniz.
                 </div>
               ) : filteredAcceptedFriends.length === 0 ? (
-                <div className="rounded-lg border border-dashed border-gray-300 p-3 sm:p-4 text-xs sm:text-sm text-gray-600 dark:border-gray-700 dark:text-gray-400 text-center">
-                  Arama kriterinize uygun arkadaş bulunamadı.
+                <div className="rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700 p-8 text-center text-base text-gray-600 dark:text-gray-400">
+                  Arama kriterinize uygun bağlantı bulunamadı.
                 </div>
               ) : (
-                <div className="space-y-2 sm:space-y-3">
+                <div className="space-y-3">
                   {filteredAcceptedFriends.map((friendship) => (
-                  <div
-                    key={friendship.id}
-                    className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0 rounded-lg border border-gray-200 bg-white px-3 py-2.5 sm:py-2 text-sm shadow-sm dark:border-gray-700 dark:bg-gray-900"
-                  >
-                    <div className="flex items-center gap-3 flex-1 min-w-0">
-                      <Users className="h-4 w-4 text-blue-500 flex-shrink-0" />
-                      <div className="min-w-0">
-                        <p className="font-semibold text-gray-900 dark:text-gray-100 truncate">
-                          {friendship.counterpart.name ?? "İsimsiz Kullanıcı"}
-                        </p>
+                    <div
+                      key={friendship.id}
+                      className="flex items-center justify-between rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-4 py-3 shadow-sm hover:shadow-md transition-shadow"
+                    >
+                      <div className="flex items-center gap-4 flex-1 min-w-0">
+                        {friendship.counterpart.profileImage ? (
+                          <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-gray-200 dark:ring-gray-700 flex-shrink-0">
+                            <Image
+                              src={friendship.counterpart.profileImage}
+                              alt={friendship.counterpart.name || "User"}
+                              width={48}
+                              height={48}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        ) : (
+                          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-base flex-shrink-0 ring-2 ring-gray-200 dark:ring-gray-700">
+                            {(friendship.counterpart.name || "U")[0].toUpperCase()}
+                          </div>
+                        )}
+                        <div className="flex-1 min-w-0">
+                          <p className="font-semibold text-gray-900 dark:text-gray-100 truncate text-base">
+                            {friendship.counterpart.name ?? "İsimsiz Kullanıcı"}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2 ml-4">
+                        <button
+                          onClick={() => handleStartMessage(friendship.counterpart.id)}
+                          disabled={startingMessage === friendship.counterpart.id}
+                          className="px-4 py-2 bg-[#0095f6] hover:bg-[#1877f2] text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 text-sm"
+                        >
+                          {startingMessage === friendship.counterpart.id ? (
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                          ) : (
+                            <>
+                              <MessageSquare className="h-4 w-4" />
+                              Mesajlaş
+                            </>
+                          )}
+                        </button>
+                        <button
+                          onClick={() => handleVisitProfile(friendship.counterpart.id)}
+                          className="px-4 py-2 border-2 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 font-semibold rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors flex items-center gap-2 text-sm"
+                        >
+                          <User className="h-4 w-4" />
+                          Profil
+                        </button>
+                        <button
+                          onClick={() => handleRespond(friendship.id, "remove")}
+                          disabled={respondingId === friendship.id}
+                          className="px-4 py-2 border-2 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 font-semibold rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                        >
+                          Kaldır
+                        </button>
                       </div>
                     </div>
-                    <div className="flex flex-wrap items-center gap-2 sm:ml-3">
-                      <Button
-                        size="sm"
-                        variant="gradient"
-                        onClick={() => handleStartMessage(friendship.counterpart.id)}
-                        disabled={startingMessage === friendship.counterpart.id}
-                        className="flex-1 sm:flex-initial text-xs sm:text-sm"
-                      >
-                        {startingMessage === friendship.counterpart.id ? (
-                          <Loader2 className="h-4 w-4 animate-spin" />
-                        ) : (
-                          <>
-                            <MessageSquare className="mr-1.5 sm:mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                            <span className="hidden sm:inline">Mesajlaş</span>
-                            <span className="sm:hidden">Mesaj</span>
-                          </>
-                        )}
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => handleVisitProfile(friendship.counterpart.id)}
-                        className="flex-1 sm:flex-initial text-xs sm:text-sm"
-                      >
-                        <User className="mr-1.5 sm:mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                        Profil
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => handleRespond(friendship.id, "remove")}
-                        disabled={respondingId === friendship.id}
-                        className="flex-1 sm:flex-initial text-xs sm:text-sm"
-                      >
-                        <span className="hidden sm:inline">Listeden çıkar</span>
-                        <span className="sm:hidden">Çıkar</span>
-                      </Button>
-                    </div>
-                  </div>
                   ))}
                 </div>
               )}
-            </CardContent>
-          </Card>
-        </div>
-      )}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
-

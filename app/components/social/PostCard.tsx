@@ -1,17 +1,23 @@
 "use client";
 
-import { useState, memo } from "react";
+import { useState, memo, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import {
-  ThumbsUp,
+  Heart,
   MessageCircle,
   Share2,
   Send,
   MoreHorizontal,
+  Bookmark,
+  Trash2,
+  Flag,
 } from "lucide-react";
 import { SharePostModal } from "./SharePostModal";
 import { SendPostModal } from "./SendPostModal";
+import { formatDistanceToNow } from "date-fns";
+import { tr } from "date-fns/locale";
 
 interface PostCardProps {
   post: {
@@ -55,11 +61,72 @@ export const PostCard = memo(function PostCard({
   onCommentClick,
   currentUserId,
 }: PostCardProps) {
+  const router = useRouter();
   const [isLiked, setIsLiked] = useState(post.isLiked);
   const [likesCount, setLikesCount] = useState(post.likesCount);
   const [isLiking, setIsLiking] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
   const [showSendModal, setShowSendModal] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  const isOwner = post.userId === currentUserId;
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        menuRef.current &&
+        buttonRef.current &&
+        !menuRef.current.contains(event.target as Node) &&
+        !buttonRef.current.contains(event.target as Node)
+      ) {
+        setShowMenu(false);
+      }
+    };
+
+    if (showMenu) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showMenu]);
+
+  const handleDelete = async () => {
+    if (!confirm("Bu gönderiyi silmek istediğinize emin misiniz?")) {
+      return;
+    }
+
+    setIsDeleting(true);
+    try {
+      const response = await fetch(`/api/posts/${post.id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("Gönderi silinirken bir hata oluştu");
+      }
+
+      // Reload the page or remove the post from the list
+      router.refresh();
+      window.location.reload();
+    } catch (error) {
+      console.error("Error deleting post:", error);
+      alert("Gönderi silinirken bir hata oluştu");
+    } finally {
+      setIsDeleting(false);
+      setShowMenu(false);
+    }
+  };
+
+  const handleReport = () => {
+    alert("Şikayet özelliği yakında eklenecek.");
+    setShowMenu(false);
+  };
 
   const handleLike = async () => {
     if (isLiking || !onLike) return;
@@ -83,139 +150,205 @@ export const PostCard = memo(function PostCard({
     }
   };
 
+  const timeAgo = formatDistanceToNow(new Date(post.createdAt), {
+    addSuffix: true,
+    locale: tr,
+  });
+
   return (
-    <div className="bg-white dark:bg-[#1d1d1d] border border-gray-200 dark:border-gray-800 rounded-lg mb-3 max-w-[800px] w-full mx-auto overflow-hidden shadow-sm">
+    <div className="bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 rounded-2xl shadow-lg overflow-hidden">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3">
-        <div className="flex items-center gap-3">
+      <div className="flex items-center justify-between px-5 py-4">
+        <div className="flex items-center gap-4">
           <Link href={`/profile/${post.userId}`} className="flex-shrink-0">
-            <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
+            <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-gray-100 dark:ring-gray-800">
               {post.user.profileImage ? (
                 <Image
                   src={post.user.profileImage}
                   alt={post.user.name || post.user.email}
-                  width={40}
-                  height={40}
+                  width={48}
+                  height={48}
                   className="w-full h-full object-cover"
-                  unoptimized={post.user.profileImage?.includes('blob.vercel-storage.com')}
+                  sizes="48px"
                 />
               ) : (
-                <div className="w-full h-full bg-gradient-to-br from-[#0a66c2] to-[#0073b1] flex items-center justify-center text-white text-sm font-semibold">
+                <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white text-lg font-bold">
                   {(post.user.name || post.user.email)[0].toUpperCase()}
                 </div>
               )}
             </div>
           </Link>
-          <div className="flex flex-col">
-            <Link
-              href={`/profile/${post.userId}`}
-              className="text-sm font-semibold text-gray-900 dark:text-gray-100 hover:text-[#0a66c2] dark:hover:text-[#70b5f9] transition-colors"
-            >
-              {post.user.name || post.user.email.split("@")[0]}
-            </Link>
-          </div>
+          <Link
+            href={`/profile/${post.userId}`}
+            className="text-base font-semibold text-gray-900 dark:text-gray-100 hover:opacity-70 transition-opacity"
+          >
+            {post.user.name || post.user.email.split("@")[0]}
+          </Link>
         </div>
-        <button 
-          className="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
-          aria-label="Daha fazla seçenek"
-        >
-          <MoreHorizontal className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-        </button>
+        <div className="relative">
+          <button
+            ref={buttonRef}
+            onClick={() => setShowMenu(!showMenu)}
+            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
+            aria-label="Daha fazla seçenek"
+            disabled={isDeleting}
+          >
+            <MoreHorizontal className="w-7 h-7 text-gray-900 dark:text-gray-100" />
+          </button>
+
+          {/* Dropdown Menu */}
+          {showMenu && (
+            <div
+              ref={menuRef}
+              className="absolute right-0 top-full mt-2 w-48 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl shadow-xl z-50 overflow-hidden"
+            >
+              {isOwner ? (
+                <button
+                  onClick={handleDelete}
+                  disabled={isDeleting}
+                  className="w-full px-4 py-3 text-left text-base font-semibold text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors flex items-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <Trash2 className="w-5 h-5" />
+                  {isDeleting ? "Siliniyor..." : "Sil"}
+                </button>
+              ) : (
+                <button
+                  onClick={handleReport}
+                  className="w-full px-4 py-3 text-left text-base font-semibold text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors flex items-center gap-3"
+                >
+                  <Flag className="w-5 h-5" />
+                  Şikayet Et
+                </button>
+              )}
+            </div>
+          )}
+        </div>
       </div>
 
-      {/* Content */}
-      {post.content && (
-        <div className="px-4 pb-3">
-          <p className="text-sm text-gray-900 dark:text-gray-100 whitespace-pre-wrap break-words leading-relaxed">
-            {post.content}
-          </p>
-        </div>
-      )}
-
-      {/* Image - Only show if imageUrl exists */}
+      {/* Image */}
       {post.imageUrl && (
-        <div className="relative w-full bg-gray-100 dark:bg-gray-900 overflow-hidden">
-          <div className="relative w-full max-h-[600px] sm:max-h-[700px] flex items-center justify-center">
+        <div className="relative w-full bg-gray-100 dark:bg-gray-950">
+          <div className="relative w-full" style={{ minHeight: '800px', maxHeight: '1200px' }}>
             <Image
               src={post.imageUrl}
               alt={post.content || "Post image"}
-              width={800}
-              height={600}
-              className="w-full h-auto max-h-[600px] sm:max-h-[700px] object-contain"
-              sizes="(max-width: 768px) 100vw, 800px"
+              fill
+              className="object-contain"
+              sizes="800px"
+              loading="lazy"
               priority={false}
-              unoptimized={post.imageUrl.includes('blob.vercel-storage.com')}
-              onError={(e) => {
-                console.error("Image load error:", post.imageUrl);
-                e.currentTarget.style.display = 'none';
-              }}
             />
           </div>
         </div>
       )}
 
+      {/* Content Only - LinkedIn Style */}
+      {!post.imageUrl && post.content && (
+        <div className="px-6 py-6 bg-white dark:bg-gray-900">
+          <div className="text-lg leading-relaxed text-gray-900 dark:text-gray-100 whitespace-pre-wrap break-words font-normal">
+            {post.content}
+          </div>
+        </div>
+      )}
+
       {/* Actions */}
-      <div className="px-2 sm:px-4 py-2 border-t border-gray-200 dark:border-gray-800">
-        <div className="flex items-center justify-around sm:justify-between gap-1 sm:gap-0">
+      <div className="px-5 py-4">
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-5">
+            <button
+              onClick={handleLike}
+              disabled={isLiking}
+              className="hover:opacity-70 transition-opacity disabled:opacity-50 p-1"
+              aria-label={isLiked ? "Beğenmekten vazgeç" : "Beğen"}
+            >
+              <Heart
+                className={`w-7 h-7 ${
+                  isLiked
+                    ? "fill-red-500 text-red-500"
+                    : "text-gray-900 dark:text-gray-100"
+                }`}
+              />
+            </button>
+            <button
+              onClick={() => onCommentClick?.(post.id)}
+              className="hover:opacity-70 transition-opacity p-1"
+              aria-label="Yorum yap"
+            >
+              <MessageCircle className="w-7 h-7 text-gray-900 dark:text-gray-100" />
+            </button>
+            <button
+              onClick={() => setShowShareModal(true)}
+              className="hover:opacity-70 transition-opacity p-1"
+              aria-label="Paylaş"
+            >
+              <Share2 className="w-7 h-7 text-gray-900 dark:text-gray-100" />
+            </button>
+            <button
+              onClick={() => setShowSendModal(true)}
+              className="hover:opacity-70 transition-opacity p-1"
+              aria-label="Gönder"
+            >
+              <Send className="w-7 h-7 text-gray-900 dark:text-gray-100" />
+            </button>
+          </div>
           <button
-            onClick={handleLike}
-            disabled={isLiking}
-            className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors disabled:opacity-50 text-gray-700 dark:text-gray-300 flex-1 sm:flex-initial justify-center"
-            aria-label={isLiked ? "Beğenmekten vazgeç" : "Beğen"}
+            onClick={() => onSave?.(post.id)}
+            className="hover:opacity-70 transition-opacity p-1"
+            aria-label={post.isSaved ? "Kaydettiklerinden çıkar" : "Kaydet"}
           >
-            <ThumbsUp className={`w-4 h-4 sm:w-5 sm:h-5 ${isLiked ? 'text-[#0a66c2] dark:text-[#70b5f9] fill-[#0a66c2] dark:fill-[#70b5f9]' : ''}`} />
-            <span className="text-xs sm:text-sm font-medium hidden sm:inline">Beğen</span>
-          </button>
-          <button
-            onClick={() => onCommentClick?.(post.id)}
-            className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors text-gray-700 dark:text-gray-300 flex-1 sm:flex-initial justify-center"
-            aria-label="Yorum yap"
-          >
-            <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5" />
-            <span className="text-xs sm:text-sm font-medium hidden sm:inline">Yorum</span>
-          </button>
-          <button 
-            onClick={() => setShowShareModal(true)}
-            className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors text-gray-700 dark:text-gray-300 flex-1 sm:flex-initial justify-center"
-            aria-label="Paylaş"
-          >
-            <Share2 className="w-4 h-4 sm:w-5 sm:h-5" />
-            <span className="text-xs sm:text-sm font-medium hidden sm:inline">Paylaş</span>
-          </button>
-          <button 
-            onClick={() => setShowSendModal(true)}
-            className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors text-gray-700 dark:text-gray-300 flex-1 sm:flex-initial justify-center"
-            aria-label="Gönder"
-          >
-            <Send className="w-4 h-4 sm:w-5 sm:h-5" />
-            <span className="text-xs sm:text-sm font-medium hidden sm:inline">Gönder</span>
+            <Bookmark
+              className={`w-7 h-7 ${
+                post.isSaved
+                  ? "fill-gray-900 dark:fill-gray-100 text-gray-900 dark:text-gray-100"
+                  : "text-gray-900 dark:text-gray-100"
+              }`}
+            />
           </button>
         </div>
 
-        {/* Engagement stats */}
-        {(likesCount > 0 || post.commentsCount > 0) && (
-          <div className="mt-2 pt-2 border-t border-gray-200 dark:border-gray-800">
-            {likesCount > 0 && (
-              <button
-                onClick={() => onCommentClick?.(post.id)}
-                className="text-sm text-gray-600 dark:text-gray-400 hover:underline"
-              >
-                {likesCount.toLocaleString()} beğeni
-              </button>
-            )}
-            {likesCount > 0 && post.commentsCount > 0 && (
-              <span className="text-sm text-gray-600 dark:text-gray-400 mx-1">·</span>
-            )}
-            {post.commentsCount > 0 && (
-              <button
-                onClick={() => onCommentClick?.(post.id)}
-                className="text-sm text-gray-600 dark:text-gray-400 hover:underline"
-              >
-                {post.commentsCount} yorum
-              </button>
-            )}
+        {/* Likes count */}
+        {likesCount > 0 && (
+          <div className="mb-2">
+            <button
+              onClick={() => onCommentClick?.(post.id)}
+              className="text-base font-semibold text-gray-900 dark:text-gray-100 hover:opacity-70 transition-opacity"
+            >
+              {likesCount.toLocaleString()} beğeni
+            </button>
           </div>
         )}
+
+        {/* Caption - Only show if there's an image (for image posts) */}
+        {post.imageUrl && post.content && (
+          <div className="mb-2">
+            <span className="text-base leading-relaxed">
+              <Link
+                href={`/profile/${post.userId}`}
+                className="font-semibold text-gray-900 dark:text-gray-100 hover:opacity-70 mr-2 transition-opacity"
+              >
+                {post.user.name || post.user.email.split("@")[0]}
+              </Link>
+              <span className="text-gray-900 dark:text-gray-100">
+                {post.content}
+              </span>
+            </span>
+          </div>
+        )}
+
+        {/* View all comments */}
+        {post.commentsCount > 0 && (
+          <button
+            onClick={() => onCommentClick?.(post.id)}
+            className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 mb-2 transition-colors font-medium"
+          >
+            {post.commentsCount} yorumun tümünü gör
+          </button>
+        )}
+
+        {/* Time ago */}
+        <div className="text-xs text-gray-500 dark:text-gray-400 uppercase font-medium mt-3">
+          {timeAgo}
+        </div>
       </div>
 
       {/* Modals */}

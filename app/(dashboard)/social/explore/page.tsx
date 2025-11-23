@@ -126,8 +126,8 @@ export default function ExplorePage() {
 
   if (status === "loading" || isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
+      <div className="flex items-center justify-center min-h-[600px] bg-gray-50 dark:bg-gray-950">
+        <Loader2 className="w-10 h-10 animate-spin text-[#0095f6]" />
       </div>
     );
   }
@@ -137,78 +137,50 @@ export default function ExplorePage() {
   }
 
   return (
-    <div className="animate-fade-in space-y-4 sm:space-y-6">
-      {/* Header */}
-      <Card variant="elevated">
-        <CardHeader>
-          <div className="flex flex-col gap-4">
-            <div className="flex flex-col gap-2">
-              <CardTitle className="text-2xl sm:text-3xl">Keşfet</CardTitle>
-              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
-                Platformdaki en popüler ve ilgi çekici gönderileri keşfedin
-              </p>
-            </div>
-            
-            {/* Search Bar */}
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500" />
-              <input
-                type="text"
-                placeholder="Gönderi veya kullanıcı ara..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => setSearchQuery("")}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                  aria-label="Aramayı temizle"
-                >
-                  <X className="w-4 h-4 text-gray-400 dark:text-gray-500" />
-                </button>
-              )}
-            </div>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Header */}
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+            Keşfet
+          </h1>
+          <p className="text-base text-gray-600 dark:text-gray-400">
+            Popüler gönderileri keşfedin
+          </p>
+        </div>
+
+        {/* Error */}
+        {error && (
+          <div className="mb-6 p-5 bg-red-50 dark:bg-red-900/20 border-2 border-red-200 dark:border-red-800 rounded-xl text-base text-red-700 dark:text-red-400 shadow-sm">
+            {error}
           </div>
-        </CardHeader>
-      </Card>
+        )}
 
-      {/* Error */}
-      {error && (
-        <Card variant="elevated">
-          <CardContent className="py-4">
-            <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-200">
-              {error}
-            </div>
-          </CardContent>
-        </Card>
-      )}
-
-      {/* Posts Grid */}
-      {posts.length === 0 && !isLoading ? (
-        <Card variant="elevated">
-          <CardContent className="py-12 text-center">
-            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
+        {/* Posts Grid */}
+        {posts.length === 0 && !isLoading ? (
+          <div className="bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 rounded-2xl p-16 text-center shadow-lg">
+            <p className="text-lg text-gray-600 dark:text-gray-400">
               {searchQuery
                 ? `"${searchQuery}" için sonuç bulunamadı.`
-                : "Henüz keşfedilecek gönderi yok. Bağlantılarınızın gönderileri burada görünecek."}
+                : "Henüz keşfedilecek gönderi yok."}
             </p>
-          </CardContent>
-        </Card>
-      ) : (
-        <Card variant="elevated">
-          <CardContent className="p-2 sm:p-4">
-            <ExploreGrid posts={posts} onPostClick={handlePostClick} />
-          </CardContent>
-        </Card>
-      )}
+          </div>
+        ) : (
+          <ExploreGrid posts={posts} onPostClick={handlePostClick} />
+        )}
 
-      {/* Loading more */}
-      {isLoadingMore && (
-        <div className="flex justify-center py-6">
-          <Loader2 className="w-6 h-6 animate-spin text-blue-500" />
-        </div>
-      )}
+        {/* Loading more */}
+        {isLoadingMore && (
+          <div className="flex justify-center py-12">
+            <div className="flex items-center gap-3">
+              <Loader2 className="w-8 h-8 animate-spin text-[#0095f6]" />
+              <span className="text-base text-gray-600 dark:text-gray-400 font-medium">
+                Daha fazla yükleniyor...
+              </span>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

@@ -30,28 +30,31 @@ export default function CreatePostPage() {
   }
 
   return (
-    <div className="animate-fade-in space-y-4 sm:space-y-6">
-      {/* Header */}
-      <Card variant="elevated">
-        <CardHeader>
-          <div className="flex flex-col gap-2">
-            <CardTitle className="text-2xl sm:text-3xl">Yeni Gönderi Oluştur</CardTitle>
-            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="animate-fade-in space-y-6">
+          {/* Header */}
+          <div className="mb-8">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+              Yeni Gönderi Oluştur
+            </h1>
+            <p className="text-lg text-gray-600 dark:text-gray-400">
               Paylaşmak istediğiniz içeriği oluşturun ve bağlantılarınızla paylaşın
             </p>
           </div>
-        </CardHeader>
-      </Card>
 
-      {/* Post Create Form */}
-      <Card variant="elevated">
-        <CardContent className="p-4 sm:p-6">
-          <PostCreate
-            onSuccess={() => router.push("/social/feed")}
-            onClose={() => router.back()}
-          />
-        </CardContent>
-      </Card>
+          {/* Post Create Form */}
+          <Card variant="elevated" className="rounded-2xl shadow-lg">
+            <CardContent className="p-6 sm:p-8">
+              <PostCreate
+                isModal={false}
+                onSuccess={() => router.push("/social/feed")}
+                onClose={() => router.back()}
+              />
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 }
