@@ -145,8 +145,12 @@ export function SendPostModal({
           });
           if (!threadRes.ok) throw new Error("Mesaj thread'i oluşturulamadı");
           const threadData = await threadRes.json();
+          const threadId = threadData?.thread?.id ?? threadData?.threadId ?? threadData?.id;
+          if (!threadId) {
+            throw new Error("Mesaj thread bilgisi alınamadı");
+          }
 
-          const response = await fetch(`/api/chat/direct/${threadData.threadId}/messages`, {
+          const response = await fetch(`/api/chat/direct/${threadId}/messages`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

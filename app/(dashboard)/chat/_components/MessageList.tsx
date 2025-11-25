@@ -157,7 +157,7 @@ function MessageBubble({ message, currentUserId }: MessageBubbleProps) {
 
         {message.content && (
           <p className={cn("whitespace-pre-wrap break-words text-sm leading-relaxed", isOwn ? "text-white/90" : "text-gray-800 dark:text-gray-100")}>
-            {message.content}
+            {renderMessageContentWithLinks(message.content)}
           </p>
         )}
 
@@ -268,5 +268,30 @@ function EmptyState() {
       <p className="text-xs">İlk mesajı göndererek iletişimi başlatın.</p>
     </div>
   );
+}
+
+function renderMessageContentWithLinks(content: string) {
+  const segments = content.split(/(https?:\/\/[^\s]+)/gi);
+  return segments.map((segment, index) => {
+    if (!segment) {
+      return null;
+    }
+
+    if (/^https?:\/\/[^\s]+$/i.test(segment)) {
+      return (
+        <a
+          key={`segment-${index}`}
+          href={segment}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="break-all underline decoration-dotted underline-offset-2 hover:opacity-80"
+        >
+          {segment}
+        </a>
+      );
+    }
+
+    return <span key={`segment-${index}`}>{segment}</span>;
+  });
 }
 
