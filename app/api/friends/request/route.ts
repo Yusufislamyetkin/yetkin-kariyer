@@ -5,6 +5,7 @@ import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { FriendshipStatus } from "@prisma/client";
 import { broadcastFriendRequestNotification } from "@/lib/realtime/signalr-triggers";
+import { checkSocialInteractionBadges } from "@/app/api/badges/check/badge-service";
 
 const requestSchema = z.object({
   targetUserId: z
@@ -76,6 +77,14 @@ export async function POST(request: Request) {
               status: FriendshipStatus.accepted,
               respondedAt: new Date(),
             },
+          });
+
+          // Sosyal etkileşim rozetlerini kontrol et (hem requester hem addressee için)
+          Promise.all([
+            checkSocialInteractionBadges({ userId: existing.requesterId }),
+            checkSocialInteractionBadges({ userId: userId }),
+          ]).catch((error) => {
+            console.error("Error checking social interaction badges:", error);
           });
 
           return NextResponse.json(

@@ -4,6 +4,7 @@ import { z } from "zod";
 
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { checkSocialInteractionBadges } from "@/app/api/badges/check/badge-service";
 
 const respondSchema = z.object({
   friendshipId: z.string().cuid(),
@@ -55,6 +56,14 @@ export async function POST(request: Request) {
         updatedStatus = FriendshipStatus.accepted;
         respondedAt = new Date();
         cancelledAt = null;
+        
+        // Sosyal etkileşim rozetlerini kontrol et (hem requester hem addressee için)
+        Promise.all([
+          checkSocialInteractionBadges({ userId: friendship.requesterId }),
+          checkSocialInteractionBadges({ userId: userId }),
+        ]).catch((error) => {
+          console.error("Error checking social interaction badges:", error);
+        });
         
         // Send notification to requester (the person who sent the request)
         try {
@@ -213,6 +222,9 @@ export async function POST(request: Request) {
         cancelledAt,
       },
     });
+
+    // Eğer arkadaşlık kabul edildiyse, rozet kontrolü zaten yukarıda yapıldı
+    // Diğer durumlar için rozet kontrolü gerekmiyor
 
     return NextResponse.json({ friendship: updated });
   } catch (error) {

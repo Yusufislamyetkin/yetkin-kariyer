@@ -8,6 +8,7 @@ import { createFlutterCourse } from "@/lib/admin/create-flutter-course";
 import { createDockerKubernetesCourse } from "@/lib/admin/create-docker-kubernetes-course";
 import { createOwaspCourse } from "@/lib/admin/create-owasp-course";
 import { createAICourse } from "@/lib/admin/create-ai-course";
+import { createPythonCourse } from "@/lib/admin/create-python-course";
 import { readFileSync } from "fs";
 import { join } from "path";
 
@@ -116,6 +117,7 @@ async function main() {
     { courseId: "course-ethical-hacking-roadmap", fileName: "ethical-hacking-test-modules.json", generator: getEthicalHackingCourseContent, name: "Ethical Hacking" },
     { courseId: "course-mssql-roadmap", fileName: "mssql-test-modules.json", generator: getMSSQLCourseContent, name: "MSSQL" },
     { courseId: "course-ai-for-developers-roadmap", fileName: "ai-for-developers-test-modules.json", generator: createAICourse, name: "AI for Developers" },
+    { courseId: "course-python-roadmap", fileName: "python-test-modules.json", generator: createPythonCourse, name: "Python" },
   ];
 
   const results = [];

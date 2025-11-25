@@ -15,5 +15,6 @@ export const TEST_MODULE_FILE_MAP: Record<string, string> = {
   "MSSQL": "mssql-test-modules.json",
   "Yapay Zeka": "ai-for-developers-test-modules.json",
   "AI for Developers": "ai-for-developers-test-modules.json",
+  "Python": "python-test-modules.json",
 };
 

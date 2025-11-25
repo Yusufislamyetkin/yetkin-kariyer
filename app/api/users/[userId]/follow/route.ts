@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
+import { checkSocialInteractionBadges } from "@/app/api/badges/check/badge-service";
 
 export async function POST(
   request: Request,
@@ -67,6 +68,14 @@ export async function POST(
           addresseeId: targetUserId,
           status: "accepted", // Direct follow, no pending state
         },
+      });
+
+      // Sosyal etkileşim rozetlerini kontrol et (hem requester hem addressee için)
+      Promise.all([
+        checkSocialInteractionBadges({ userId: currentUserId }),
+        checkSocialInteractionBadges({ userId: targetUserId }),
+      ]).catch((error) => {
+        console.error("Error checking social interaction badges:", error);
       });
     }
 

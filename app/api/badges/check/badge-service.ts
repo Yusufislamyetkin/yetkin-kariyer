@@ -101,6 +101,12 @@ export async function checkBadgesForAttempt({
     totalQuizCount > 0
       ? userQuizAttempts.reduce((sum: number, qa: { score: number }) => sum + qa.score, 0) / totalQuizCount
       : 0;
+  const maxSingleScore = userQuizAttempts.length > 0
+    ? Math.max(...userQuizAttempts.map((qa: { score: number }) => qa.score))
+    : 0;
+  const perfectScoreCount = userQuizAttempts.filter(
+    (qa: { score: number }) => qa.score === 100
+  ).length;
 
   const streakData = await updateUserStreak(userId);
   const newStreak = streakData.currentStreak;
@@ -125,7 +131,67 @@ export async function checkBadgesForAttempt({
         }
         break;
       case "score":
-        if (criteria.type === "average_score" && averageScore >= criteria.value) {
+        // Yeni badges.json yapısı: criteria.type === "score", criteria.score_type, criteria.min_score
+        if (criteria.type === "score" && criteria.score_type && criteria.min_score !== undefined) {
+          const maxSingleScore = userQuizAttempts.length > 0
+            ? Math.max(...userQuizAttempts.map((qa: { score: number }) => qa.score))
+            : 0;
+          const totalScore = userQuizAttempts.reduce((sum: number, qa: { score: number }) => sum + qa.score, 0);
+          const perfectScoreCount = userQuizAttempts.filter(
+            (qa: { score: number }) => qa.score === 100
+          ).length;
+          
+          switch (criteria.score_type) {
+            case "tek test":
+              if (maxSingleScore >= criteria.min_score) {
+                shouldEarn = true;
+              }
+              break;
+            case "efsanevi":
+              if (maxSingleScore >= criteria.min_score) {
+                shouldEarn = true;
+              }
+              break;
+            case "ortalama":
+              if (averageScore >= criteria.min_score) {
+                shouldEarn = true;
+              }
+              break;
+            case "toplam":
+              if (totalScore >= criteria.min_score) {
+                shouldEarn = true;
+              }
+              break;
+            case "mükemmel":
+              if (maxSingleScore >= criteria.min_score || perfectScoreCount > 0) {
+                shouldEarn = true;
+              }
+              break;
+            case "yüksek":
+              if (maxSingleScore >= criteria.min_score) {
+                shouldEarn = true;
+              }
+              break;
+            case "tutarlı":
+              // Tutarlı skor: tüm skorların standart sapması düşük olmalı (basitleştirilmiş: ortalama yüksekse tutarlı sayılır)
+              if (averageScore >= criteria.min_score) {
+                shouldEarn = true;
+              }
+              break;
+            case "başarılı":
+              if (maxSingleScore >= criteria.min_score) {
+                shouldEarn = true;
+              }
+              break;
+            case "harika":
+              if (maxSingleScore >= criteria.min_score) {
+                shouldEarn = true;
+              }
+              break;
+          }
+        }
+        // Eski yapı desteği (geriye dönük uyumluluk)
+        else if (criteria.type === "average_score" && averageScore >= criteria.value) {
           shouldEarn = true;
         } else if (
           criteria.type === "single_score" &&
@@ -150,7 +216,16 @@ export async function checkBadgesForAttempt({
         }
         break;
       case "streak":
-        if (
+        // Yeni badges.json yapısı: criteria.type === "streak", criteria.streak_type, criteria.days
+        if (criteria.type === "streak" && criteria.streak_type && criteria.days !== undefined) {
+          // Şu an için tüm streak_type'lar için currentStreak kullanıyoruz
+          // Gelecekte farklı streak tipleri için ayrı tracking eklenebilir
+          if (newStreak >= criteria.days) {
+            shouldEarn = true;
+          }
+        }
+        // Eski yapı desteği (geriye dönük uyumluluk)
+        else if (
           criteria.type === "current_streak" &&
           newStreak >= criteria.value
         ) {
@@ -212,7 +287,74 @@ export async function checkBadgesForAttempt({
         }
         break;
       case "special":
-        if (criteria.type === "first_quiz" && totalQuizCount === 1) {
+        // Yeni badges.json yapısı: criteria.type === "special", criteria.special_type
+        if (criteria.type === "special" && criteria.special_type) {
+          switch (criteria.special_type) {
+            case "ilk test":
+              if (totalQuizCount === 1) {
+                shouldEarn = true;
+              }
+              break;
+            case "ilk kurs":
+              // İlk kurs tamamlama kontrolü
+              const courseCompletions = await db.lessonCompletion.findMany({
+                where: { userId },
+                distinct: ['lessonId'],
+              });
+              if (courseCompletions.length === 1) {
+                shouldEarn = true;
+              }
+              break;
+            case "ilk post":
+              const postCount = await db.post.count({ where: { userId } });
+              if (postCount === 1) {
+                shouldEarn = true;
+              }
+              break;
+            case "hızlı tamamlama":
+              if (quizAttempt.duration && quizAttempt.duration <= 300) { // 5 dakika
+                shouldEarn = true;
+              }
+              break;
+            case "mükemmel performans":
+              if (quizAttempt.score === 100) {
+                shouldEarn = true;
+              }
+              break;
+            case "özel kombinasyon":
+              // Özel kombinasyon: yüksek skor + hızlı tamamlama
+              if (quizAttempt.score >= 90 && quizAttempt.duration && quizAttempt.duration <= 600) {
+                shouldEarn = true;
+              }
+              break;
+            case "nadir başarı":
+              // Nadir başarı: perfect score
+              if (quizAttempt.score === 100) {
+                shouldEarn = true;
+              }
+              break;
+            case "efsanevi an":
+              // Efsanevi an: perfect score + çok hızlı
+              if (quizAttempt.score === 100 && quizAttempt.duration && quizAttempt.duration <= 300) {
+                shouldEarn = true;
+              }
+              break;
+            case "tarihi başarı":
+              // Tarihi başarı: ilk perfect score
+              if (quizAttempt.score === 100 && perfectScoreCount === 1) {
+                shouldEarn = true;
+              }
+              break;
+            case "benzersiz başarı":
+              // Benzersiz başarı: çok yüksek skor
+              if (quizAttempt.score >= 95) {
+                shouldEarn = true;
+              }
+              break;
+          }
+        }
+        // Eski yapı desteği (geriye dönük uyumluluk)
+        else if (criteria.type === "first_quiz" && totalQuizCount === 1) {
           shouldEarn = true;
         } else if (
           criteria.type === "fast_completion" &&
@@ -280,6 +422,28 @@ export async function checkBadgesForAttempt({
               },
             });
             todayCount = todayBugFix;
+          } else if (criteria.activity_type === "pratik") {
+            // Pratik: quiz attempt olarak sayılabilir
+            const todayPratik = await db.quizAttempt.count({
+              where: {
+                userId,
+                completedAt: {
+                  gte: today,
+                },
+              },
+            });
+            todayCount = todayPratik;
+          } else if (criteria.activity_type === "eğitim") {
+            // Eğitim: lesson completion olarak sayılabilir
+            const todayEgitim = await db.lessonCompletion.count({
+              where: {
+                userId,
+                completedAt: {
+                  gte: today,
+                },
+              },
+            });
+            todayCount = todayEgitim;
           }
           
           if (todayCount >= criteria.count) {
@@ -322,6 +486,28 @@ export async function checkBadgesForAttempt({
             const likes = await db.postLike.count({ where: { userId } });
             const comments = await db.postComment.count({ where: { userId } });
             interactionCount = posts + likes + comments;
+          } else if (criteria.interaction_type === "topluluk") {
+            // Topluluk: tüm sosyal etkileşimlerin toplamı
+            const posts = await db.post.count({ where: { userId } });
+            const likes = await db.postLike.count({ where: { userId } });
+            const comments = await db.postComment.count({ where: { userId } });
+            const stories = await db.story.count({ where: { userId } });
+            interactionCount = posts + likes + comments + stories;
+          } else if (criteria.interaction_type === "sosyal") {
+            // Sosyal: tüm sosyal etkileşimlerin toplamı
+            const posts = await db.post.count({ where: { userId } });
+            const likes = await db.postLike.count({ where: { userId } });
+            const comments = await db.postComment.count({ where: { userId } });
+            const stories = await db.story.count({ where: { userId } });
+            const friendships = await db.friendship.count({
+              where: {
+                OR: [
+                  { requesterId: userId, status: "accepted" },
+                  { addresseeId: userId, status: "accepted" },
+                ],
+              },
+            });
+            interactionCount = posts + likes + comments + stories + friendships;
           }
           
           if (interactionCount >= criteria.count) {
@@ -383,7 +569,14 @@ export async function checkBadgesForActivity({
 
     switch (badge.category) {
       case "streak":
-        if (
+        // Yeni badges.json yapısı: criteria.type === "streak", criteria.streak_type, criteria.days
+        if (criteria.type === "streak" && criteria.streak_type && criteria.days !== undefined) {
+          if (newStreak >= criteria.days) {
+            shouldEarn = true;
+          }
+        }
+        // Eski yapı desteği (geriye dönük uyumluluk)
+        else if (
           criteria.type === "current_streak" &&
           newStreak >= criteria.value
         ) {
@@ -396,7 +589,31 @@ export async function checkBadgesForActivity({
         }
         break;
       case "special":
-        if (
+        // Yeni badges.json yapısı: criteria.type === "special", criteria.special_type
+        if (criteria.type === "special" && criteria.special_type) {
+          // checkBadgesForActivity'de quizAttempt yok, bu yüzden sadece genel kontroller yapılabilir
+          const postCount = await db.post.count({ where: { userId } });
+          const courseCompletions = await db.lessonCompletion.findMany({
+            where: { userId },
+            distinct: ['lessonId'],
+          });
+          
+          switch (criteria.special_type) {
+            case "ilk kurs":
+              if (courseCompletions.length === 1) {
+                shouldEarn = true;
+              }
+              break;
+            case "ilk post":
+              if (postCount === 1) {
+                shouldEarn = true;
+              }
+              break;
+            // Diğer special_type'lar quizAttempt gerektirdiği için burada kontrol edilemez
+          }
+        }
+        // Eski yapı desteği (geriye dönük uyumluluk)
+        else if (
           criteria.type === "total_days_active" &&
           criteria.value
         ) {
@@ -470,6 +687,28 @@ export async function checkBadgesForActivity({
               },
             });
             todayCount = todayQuizzes;
+          } else if (criteria.activity_type === "pratik") {
+            // Pratik: quiz attempt olarak sayılabilir
+            const todayPratik = await db.quizAttempt.count({
+              where: {
+                userId,
+                completedAt: {
+                  gte: today,
+                },
+              },
+            });
+            todayCount = todayPratik;
+          } else if (criteria.activity_type === "eğitim") {
+            // Eğitim: lesson completion olarak sayılabilir
+            const todayEgitim = await db.lessonCompletion.count({
+              where: {
+                userId,
+                completedAt: {
+                  gte: today,
+                },
+              },
+            });
+            todayCount = todayEgitim;
           }
           
           if (todayCount >= criteria.count) {
@@ -561,6 +800,28 @@ export async function checkSocialInteractionBadges({
       const likes = await db.postLike.count({ where: { userId } });
       const comments = await db.postComment.count({ where: { userId } });
       interactionCount = posts + likes + comments;
+    } else if (criteria.interaction_type === "topluluk") {
+      // Topluluk: tüm sosyal etkileşimlerin toplamı
+      const posts = await db.post.count({ where: { userId } });
+      const likes = await db.postLike.count({ where: { userId } });
+      const comments = await db.postComment.count({ where: { userId } });
+      const stories = await db.story.count({ where: { userId } });
+      interactionCount = posts + likes + comments + stories;
+    } else if (criteria.interaction_type === "sosyal") {
+      // Sosyal: tüm sosyal etkileşimlerin toplamı
+      const posts = await db.post.count({ where: { userId } });
+      const likes = await db.postLike.count({ where: { userId } });
+      const comments = await db.postComment.count({ where: { userId } });
+      const stories = await db.story.count({ where: { userId } });
+      const friendships = await db.friendship.count({
+        where: {
+          OR: [
+            { requesterId: userId, status: "accepted" },
+            { addresseeId: userId, status: "accepted" },
+          ],
+        },
+      });
+      interactionCount = posts + likes + comments + stories + friendships;
     }
 
     if (interactionCount >= criteria.count) {
@@ -643,7 +904,61 @@ export async function checkAllUserBadges({
         }
         break;
       case "score":
-        if (criteria.type === "average_score" && averageScore >= criteria.value) {
+        // Yeni badges.json yapısı: criteria.type === "score", criteria.score_type, criteria.min_score
+        if (criteria.type === "score" && criteria.score_type && criteria.min_score !== undefined) {
+          const totalScore = userQuizAttempts.reduce((sum: number, qa: { score: number }) => sum + qa.score, 0);
+          
+          switch (criteria.score_type) {
+            case "tek test":
+              if (maxSingleScore >= criteria.min_score) {
+                shouldEarn = true;
+              }
+              break;
+            case "efsanevi":
+              if (maxSingleScore >= criteria.min_score) {
+                shouldEarn = true;
+              }
+              break;
+            case "ortalama":
+              if (averageScore >= criteria.min_score) {
+                shouldEarn = true;
+              }
+              break;
+            case "toplam":
+              if (totalScore >= criteria.min_score) {
+                shouldEarn = true;
+              }
+              break;
+            case "mükemmel":
+              if (maxSingleScore >= criteria.min_score || perfectScoreCount > 0) {
+                shouldEarn = true;
+              }
+              break;
+            case "yüksek":
+              if (maxSingleScore >= criteria.min_score) {
+                shouldEarn = true;
+              }
+              break;
+            case "tutarlı":
+              // Tutarlı skor: tüm skorların standart sapması düşük olmalı (basitleştirilmiş: ortalama yüksekse tutarlı sayılır)
+              if (averageScore >= criteria.min_score) {
+                shouldEarn = true;
+              }
+              break;
+            case "başarılı":
+              if (maxSingleScore >= criteria.min_score) {
+                shouldEarn = true;
+              }
+              break;
+            case "harika":
+              if (maxSingleScore >= criteria.min_score) {
+                shouldEarn = true;
+              }
+              break;
+          }
+        }
+        // Eski yapı desteği (geriye dönük uyumluluk)
+        else if (criteria.type === "average_score" && averageScore >= criteria.value) {
           shouldEarn = true;
         } else if (
           criteria.type === "single_score" &&
@@ -665,7 +980,14 @@ export async function checkAllUserBadges({
         }
         break;
       case "streak":
-        if (
+        // Yeni badges.json yapısı: criteria.type === "streak", criteria.streak_type, criteria.days
+        if (criteria.type === "streak" && criteria.streak_type && criteria.days !== undefined) {
+          if (newStreak >= criteria.days) {
+            shouldEarn = true;
+          }
+        }
+        // Eski yapı desteği (geriye dönük uyumluluk)
+        else if (
           criteria.type === "current_streak" &&
           newStreak >= criteria.value
         ) {
@@ -727,7 +1049,77 @@ export async function checkAllUserBadges({
         }
         break;
       case "special":
-        if (criteria.type === "first_quiz" && totalQuizCount >= 1) {
+        // Yeni badges.json yapısı: criteria.type === "special", criteria.special_type
+        if (criteria.type === "special" && criteria.special_type) {
+          const postCount = await db.post.count({ where: { userId } });
+          const courseCompletions = await db.lessonCompletion.findMany({
+            where: { userId },
+            distinct: ['lessonId'],
+          });
+          const fastestAttempt = userQuizAttempts
+            .filter((qa: { duration: number | null }) => qa.duration !== null)
+            .sort((a: { duration: number }, b: { duration: number }) => a.duration - b.duration)[0];
+          
+          switch (criteria.special_type) {
+            case "ilk test":
+              if (totalQuizCount === 1) {
+                shouldEarn = true;
+              }
+              break;
+            case "ilk kurs":
+              if (courseCompletions.length === 1) {
+                shouldEarn = true;
+              }
+              break;
+            case "ilk post":
+              if (postCount === 1) {
+                shouldEarn = true;
+              }
+              break;
+            case "hızlı tamamlama":
+              if (fastestAttempt && fastestAttempt.duration <= 300) { // 5 dakika
+                shouldEarn = true;
+              }
+              break;
+            case "mükemmel performans":
+              if (maxSingleScore === 100) {
+                shouldEarn = true;
+              }
+              break;
+            case "özel kombinasyon":
+              // Özel kombinasyon: yüksek skor + hızlı tamamlama
+              if (maxSingleScore >= 90 && fastestAttempt && fastestAttempt.duration <= 600) {
+                shouldEarn = true;
+              }
+              break;
+            case "nadir başarı":
+              // Nadir başarı: perfect score
+              if (maxSingleScore === 100) {
+                shouldEarn = true;
+              }
+              break;
+            case "efsanevi an":
+              // Efsanevi an: perfect score + çok hızlı
+              if (maxSingleScore === 100 && fastestAttempt && fastestAttempt.duration <= 300) {
+                shouldEarn = true;
+              }
+              break;
+            case "tarihi başarı":
+              // Tarihi başarı: ilk perfect score
+              if (maxSingleScore === 100 && perfectScoreCount === 1) {
+                shouldEarn = true;
+              }
+              break;
+            case "benzersiz başarı":
+              // Benzersiz başarı: çok yüksek skor
+              if (maxSingleScore >= 95) {
+                shouldEarn = true;
+              }
+              break;
+          }
+        }
+        // Eski yapı desteği (geriye dönük uyumluluk)
+        else if (criteria.type === "first_quiz" && totalQuizCount >= 1) {
           shouldEarn = true;
         } else if (
           criteria.type === "fast_completion" &&
@@ -801,6 +1193,48 @@ export async function checkAllUserBadges({
               },
             });
             todayCount = todayBugFix;
+          } else if (criteria.activity_type === "ders") {
+            const todayLessons = await db.lessonCompletion.count({
+              where: {
+                userId,
+                completedAt: {
+                  gte: today,
+                },
+              },
+            });
+            todayCount = todayLessons;
+          } else if (criteria.activity_type === "quiz") {
+            const todayQuizzes = await db.quizAttempt.count({
+              where: {
+                userId,
+                completedAt: {
+                  gte: today,
+                },
+              },
+            });
+            todayCount = todayQuizzes;
+          } else if (criteria.activity_type === "pratik") {
+            // Pratik: quiz attempt olarak sayılabilir
+            const todayPratik = await db.quizAttempt.count({
+              where: {
+                userId,
+                completedAt: {
+                  gte: today,
+                },
+              },
+            });
+            todayCount = todayPratik;
+          } else if (criteria.activity_type === "eğitim") {
+            // Eğitim: lesson completion olarak sayılabilir
+            const todayEgitim = await db.lessonCompletion.count({
+              where: {
+                userId,
+                completedAt: {
+                  gte: today,
+                },
+              },
+            });
+            todayCount = todayEgitim;
           }
           
           if (todayCount >= criteria.count) {
@@ -843,6 +1277,28 @@ export async function checkAllUserBadges({
             const likes = await db.postLike.count({ where: { userId } });
             const comments = await db.postComment.count({ where: { userId } });
             interactionCount = posts + likes + comments;
+          } else if (criteria.interaction_type === "topluluk") {
+            // Topluluk: tüm sosyal etkileşimlerin toplamı
+            const posts = await db.post.count({ where: { userId } });
+            const likes = await db.postLike.count({ where: { userId } });
+            const comments = await db.postComment.count({ where: { userId } });
+            const stories = await db.story.count({ where: { userId } });
+            interactionCount = posts + likes + comments + stories;
+          } else if (criteria.interaction_type === "sosyal") {
+            // Sosyal: tüm sosyal etkileşimlerin toplamı
+            const posts = await db.post.count({ where: { userId } });
+            const likes = await db.postLike.count({ where: { userId } });
+            const comments = await db.postComment.count({ where: { userId } });
+            const stories = await db.story.count({ where: { userId } });
+            const friendships = await db.friendship.count({
+              where: {
+                OR: [
+                  { requesterId: userId, status: "accepted" },
+                  { addresseeId: userId, status: "accepted" },
+                ],
+              },
+            });
+            interactionCount = posts + likes + comments + stories + friendships;
           }
           
           if (interactionCount >= criteria.count) {
