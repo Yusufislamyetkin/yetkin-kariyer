@@ -203,14 +203,41 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
         let shouldComplete = false;
         
         if (data.isCompleted) {
-          shouldComplete = true;
+          // API explicitly marked as completed, but verify all steps are done if roadmap exists
+          const roadmapText = data.roadmap || roadmap;
+          if (roadmapText && data.progress) {
+            const stepMatches = roadmapText.match(/\d+[\.\)]/g);
+            if (stepMatches && stepMatches.length > 0) {
+              const allStepNumbers = stepMatches.map((m: string) => parseInt(m.replace(/[\.\)]/g, '')));
+              const lastStepNumber = Math.max(...allStepNumbers);
+              
+              if (data.progress.step === lastStepNumber && data.progress.status === "completed") {
+                shouldComplete = true;
+              } else {
+                console.log("[LessonChat] Completion signal received but not all steps completed:", {
+                  progressStep: data.progress.step,
+                  lastStepNumber,
+                  status: data.progress.status
+                });
+                shouldComplete = false;
+              }
+            } else {
+              shouldComplete = true;
+            }
+          } else if (!roadmapText) {
+            shouldComplete = true;
+          } else {
+            shouldComplete = false;
+          }
         } else if (data.roadmap && data.progress) {
           const roadmapText = data.roadmap || roadmap;
           if (roadmapText) {
             const stepMatches = roadmapText.match(/\d+[\.\)]/g);
             if (stepMatches) {
-              const lastStepNumber = Math.max(...stepMatches.map((m: string) => parseInt(m.replace(/[\.\)]/g, ''))));
-              if (data.progress.step >= lastStepNumber && data.progress.status === "completed") {
+              const allStepNumbers = stepMatches.map((m: string) => parseInt(m.replace(/[\.\)]/g, '')));
+              const lastStepNumber = Math.max(...allStepNumbers);
+              
+              if (data.progress.step === lastStepNumber && data.progress.status === "completed") {
                 shouldComplete = true;
               }
             }
@@ -363,26 +390,59 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
         }
 
         // Smart completion detection:
-        // 1. API explicitly says completed (via [LESSON_COMPLETE] tag - now more strict)
-        // 2. OR roadmap exists and all steps are completed
+        // 1. API explicitly says completed (via [LESSON_COMPLETE] tag)
+        // 2. BUT if roadmap exists, verify ALL steps are completed before accepting completion
+        // 3. OR roadmap exists and all steps are completed (even without explicit completion signal)
         let shouldComplete = false;
         
         if (data.isCompleted) {
-          // API explicitly marked as completed (strict detection)
-          shouldComplete = true;
+          // API explicitly marked as completed, but verify all steps are done if roadmap exists
+          const roadmapText = data.roadmap || roadmap;
+          if (roadmapText && data.progress) {
+            // Parse all step numbers from roadmap
+            const stepMatches = roadmapText.match(/\d+[\.\)]/g);
+            if (stepMatches && stepMatches.length > 0) {
+              const allStepNumbers = stepMatches.map((m: string) => parseInt(m.replace(/[\.\)]/g, '')));
+              const lastStepNumber = Math.max(...allStepNumbers);
+              
+              // Verify that we've reached the last step AND it's completed
+              // Use === instead of >= to ensure we're exactly on the last step
+              if (data.progress.step === lastStepNumber && data.progress.status === "completed") {
+                shouldComplete = true;
+              } else {
+                // Not all steps completed yet, ignore the completion signal
+                console.log("[LessonChat] Completion signal received but not all steps completed:", {
+                  progressStep: data.progress.step,
+                  lastStepNumber,
+                  status: data.progress.status,
+                  allStepNumbers
+                });
+                shouldComplete = false;
+              }
+            } else {
+              // No roadmap steps found, trust the API completion signal
+              shouldComplete = true;
+            }
+          } else if (!roadmapText) {
+            // No roadmap exists, trust the API completion signal
+            shouldComplete = true;
+          } else {
+            // Roadmap exists but no progress, don't complete yet
+            shouldComplete = false;
+          }
         } else if (data.roadmap && data.progress) {
-          // Check if all roadmap steps are completed
-          // Parse roadmap to count total steps
+          // Check if all roadmap steps are completed (even without explicit completion signal)
           const roadmapText = data.roadmap || roadmap;
           if (roadmapText) {
-            // Simple parsing to count steps - we just need the count
             const stepMatches = roadmapText.match(/\d+[\.\)]/g);
             if (stepMatches) {
-              const totalSteps = stepMatches.length;
-              const lastStepNumber = Math.max(...stepMatches.map((m: string) => parseInt(m.replace(/[\.\)]/g, ''))));
+              const allStepNumbers = stepMatches.map((m: string) => parseInt(m.replace(/[\.\)]/g, '')));
+              const lastStepNumber = Math.max(...allStepNumbers);
               
-              // If progress step is >= last step and status is completed, all steps are done
-              if (data.progress.step >= lastStepNumber && data.progress.status === "completed") {
+              // All steps are done only if:
+              // 1. Progress step equals the last step number (not just >=)
+              // 2. Status is "completed"
+              if (data.progress.step === lastStepNumber && data.progress.status === "completed") {
                 shouldComplete = true;
               }
             }
@@ -490,9 +550,41 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
         }
       }
 
+      // Smart completion detection (same logic as in handleSendMessage)
       if (data.isCompleted) {
-        setIsCompleted(true);
-        // Don't show alert, only pop-up will be shown
+        // API explicitly marked as completed, but verify all steps are done if roadmap exists
+        const roadmapText = data.roadmap || roadmap;
+        if (roadmapText && data.progress) {
+          const stepMatches = roadmapText.match(/\d+[\.\)]/g);
+          if (stepMatches && stepMatches.length > 0) {
+            const allStepNumbers = stepMatches.map((m: string) => parseInt(m.replace(/[\.\)]/g, '')));
+            const lastStepNumber = Math.max(...allStepNumbers);
+            
+            if (data.progress.step === lastStepNumber && data.progress.status === "completed") {
+              setIsCompleted(true);
+            } else {
+              console.log("[LessonChat] Completion signal in continue but not all steps completed");
+            }
+          } else {
+            setIsCompleted(true);
+          }
+        } else if (!roadmapText) {
+          setIsCompleted(true);
+        }
+      } else if (data.roadmap && data.progress) {
+        // Check if all roadmap steps are completed (even without explicit completion signal)
+        const roadmapText = data.roadmap || roadmap;
+        if (roadmapText) {
+          const stepMatches = roadmapText.match(/\d+[\.\)]/g);
+          if (stepMatches) {
+            const allStepNumbers = stepMatches.map((m: string) => parseInt(m.replace(/[\.\)]/g, '')));
+            const lastStepNumber = Math.max(...allStepNumbers);
+            
+            if (data.progress.step === lastStepNumber && data.progress.status === "completed") {
+              setIsCompleted(true);
+            }
+          }
+        }
       }
 
       handleActions(data.actions || []);
@@ -577,8 +669,41 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
             }
           }
 
+          // Smart completion detection (same logic as in handleSendMessage)
           if (data.isCompleted) {
-            setIsCompleted(true);
+            // API explicitly marked as completed, but verify all steps are done if roadmap exists
+            const roadmapText = data.roadmap || roadmap;
+            if (roadmapText && data.progress) {
+              const stepMatches = roadmapText.match(/\d+[\.\)]/g);
+              if (stepMatches && stepMatches.length > 0) {
+                const allStepNumbers = stepMatches.map((m: string) => parseInt(m.replace(/[\.\)]/g, '')));
+                const lastStepNumber = Math.max(...allStepNumbers);
+                
+                if (data.progress.step === lastStepNumber && data.progress.status === "completed") {
+                  setIsCompleted(true);
+                } else {
+                  console.log("[LessonChat] Completion signal in test answer but not all steps completed");
+                }
+              } else {
+                setIsCompleted(true);
+              }
+            } else if (!roadmapText) {
+              setIsCompleted(true);
+            }
+          } else if (data.roadmap && data.progress) {
+            // Check if all roadmap steps are completed (even without explicit completion signal)
+            const roadmapText = data.roadmap || roadmap;
+            if (roadmapText) {
+              const stepMatches = roadmapText.match(/\d+[\.\)]/g);
+              if (stepMatches) {
+                const allStepNumbers = stepMatches.map((m: string) => parseInt(m.replace(/[\.\)]/g, '')));
+                const lastStepNumber = Math.max(...allStepNumbers);
+                
+                if (data.progress.step === lastStepNumber && data.progress.status === "completed") {
+                  setIsCompleted(true);
+                }
+              }
+            }
           }
 
           handleActions(data.actions || []);

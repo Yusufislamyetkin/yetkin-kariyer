@@ -29,94 +29,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Docker Nedir?",
           "description": "Docker'ın tanımı, tarihçesi ve containerization kavramı",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-01/test-01"
+          "href": "/education/lessons/docker-kubernetes/module-01/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Container vs Virtual Machine",
           "description": "Container ve VM arasındaki farklar ve avantajları",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-01/test-02"
+          "href": "/education/lessons/docker-kubernetes/module-01/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Docker Mimarisi",
           "description": "Docker Engine, daemon, client ve registry yapısı",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-01/test-03"
+          "href": "/education/lessons/docker-kubernetes/module-01/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Docker Kurulumu",
           "description": "Windows, Linux ve macOS'ta Docker kurulumu",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-01/test-04"
+          "href": "/education/lessons/docker-kubernetes/module-01/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Docker Hub ve Registry",
           "description": "Docker Hub kullanımı ve private registry kurulumu",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-01/test-05"
+          "href": "/education/lessons/docker-kubernetes/module-01/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: İlk Container'ı Çalıştırma",
           "description": "docker run komutu ve temel container işlemleri",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-01/test-06"
+          "href": "/education/lessons/docker-kubernetes/module-01/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Docker Image Yönetimi",
           "description": "Image pull, push, tag ve remove işlemleri",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-01/test-07"
+          "href": "/education/lessons/docker-kubernetes/module-01/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Container Lifecycle",
           "description": "Container oluşturma, başlatma, durdurma ve silme",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-01/test-08"
+          "href": "/education/lessons/docker-kubernetes/module-01/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Docker Temel Komutları",
           "description": "docker ps, logs, exec, inspect gibi temel komutlar",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-01/test-09"
+          "href": "/education/lessons/docker-kubernetes/module-01/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Container İçinde Çalışma",
           "description": "docker exec ile container içine giriş ve komut çalıştırma",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-01/test-10"
+          "href": "/education/lessons/docker-kubernetes/module-01/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Docker Network Temelleri",
           "description": "Docker network tipleri ve temel network yapılandırması",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-01/test-11"
+          "href": "/education/lessons/docker-kubernetes/module-01/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Docker Volume Temelleri",
           "description": "Volume oluşturma ve container'lara bağlama",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-01/test-12"
+          "href": "/education/lessons/docker-kubernetes/module-01/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Docker Desktop Kullanımı",
           "description": "Docker Desktop GUI ve temel özellikleri",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-01/test-13"
+          "href": "/education/lessons/docker-kubernetes/module-01/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Docker Troubleshooting",
           "description": "Yaygın Docker sorunları ve çözüm yöntemleri",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-01/test-14"
+          "href": "/education/lessons/docker-kubernetes/module-01/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Modül Özeti ve Değerlendirme",
           "description": "Modül kapsamında öğrenilenlerin özeti ve pratik uygulama",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-01/test-15"
+          "href": "/education/lessons/docker-kubernetes/module-01/lesson-15"
         }
       ]
     },
@@ -133,94 +133,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Dockerfile Nedir?",
           "description": "Dockerfile kavramı ve temel yapısı",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-02/test-01"
+          "href": "/education/lessons/docker-kubernetes/module-02/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Dockerfile Temel Komutları",
           "description": "FROM, RUN, COPY, ADD, WORKDIR komutları",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-02/test-02"
+          "href": "/education/lessons/docker-kubernetes/module-02/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: İlk Dockerfile'ı Yazma",
           "description": "Basit bir web uygulaması için Dockerfile oluşturma",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-02/test-03"
+          "href": "/education/lessons/docker-kubernetes/module-02/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Image Build Etme",
           "description": "docker build komutu ve build süreci",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-02/test-04"
+          "href": "/education/lessons/docker-kubernetes/module-02/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Layer Caching",
           "description": "Layer caching mekanizması ve optimizasyonu",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-02/test-05"
+          "href": "/education/lessons/docker-kubernetes/module-02/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: ENV ve ARG Kullanımı",
           "description": "Environment variable ve build argument'ları",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-02/test-06"
+          "href": "/education/lessons/docker-kubernetes/module-02/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: EXPOSE ve Port Yönetimi",
           "description": "Port mapping ve network yapılandırması",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-02/test-07"
+          "href": "/education/lessons/docker-kubernetes/module-02/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: CMD vs ENTRYPOINT",
           "description": "Container başlatma komutları arasındaki farklar",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-02/test-08"
+          "href": "/education/lessons/docker-kubernetes/module-02/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Multi-stage Builds",
           "description": "Build ve runtime stage'lerini ayırma",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-02/test-09"
+          "href": "/education/lessons/docker-kubernetes/module-02/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Image Size Optimizasyonu",
           "description": "Image boyutunu küçültme teknikleri",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-02/test-10"
+          "href": "/education/lessons/docker-kubernetes/module-02/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: .dockerignore Kullanımı",
           "description": "Build context'inden dosya hariç tutma",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-02/test-11"
+          "href": "/education/lessons/docker-kubernetes/module-02/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Healthcheck Ekleme",
           "description": "Container sağlık kontrolü yapılandırması",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-02/test-12"
+          "href": "/education/lessons/docker-kubernetes/module-02/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: BuildKit ve Gelişmiş Özellikler",
           "description": "BuildKit ile gelişmiş build özellikleri",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-02/test-13"
+          "href": "/education/lessons/docker-kubernetes/module-02/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Dockerfile Best Practices",
           "description": "Güvenlik, performans ve maintainability best practices",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-02/test-14"
+          "href": "/education/lessons/docker-kubernetes/module-02/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Pratik Uygulama",
           "description": "Gerçek bir uygulama için optimize edilmiş Dockerfile oluşturma",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-02/test-15"
+          "href": "/education/lessons/docker-kubernetes/module-02/lesson-15"
         }
       ]
     },
@@ -237,94 +237,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Docker Compose Nedir?",
           "description": "Docker Compose'un amacı ve kullanım alanları",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-03/test-01"
+          "href": "/education/lessons/docker-kubernetes/module-03/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: docker-compose.yml Yapısı",
           "description": "YAML formatı ve temel yapılandırma",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-03/test-02"
+          "href": "/education/lessons/docker-kubernetes/module-03/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Service Tanımlama",
           "description": "Service'leri tanımlama ve yapılandırma",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-03/test-03"
+          "href": "/education/lessons/docker-kubernetes/module-03/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Network Yönetimi",
           "description": "Custom network'ler ve service iletişimi",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-03/test-04"
+          "href": "/education/lessons/docker-kubernetes/module-03/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Volume Yönetimi",
           "description": "Named volume'ler ve bind mount'lar",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-03/test-05"
+          "href": "/education/lessons/docker-kubernetes/module-03/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Environment Variables",
           "description": ".env dosyası ve environment variable yönetimi",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-03/test-06"
+          "href": "/education/lessons/docker-kubernetes/module-03/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Dependency ve Health Checks",
           "description": "Service bağımlılıkları ve başlatma sırası",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-03/test-07"
+          "href": "/education/lessons/docker-kubernetes/module-03/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Scaling Services",
           "description": "docker-compose scale komutu ile servis ölçeklendirme",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-03/test-08"
+          "href": "/education/lessons/docker-kubernetes/module-03/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Docker Compose Komutları",
           "description": "up, down, ps, logs, exec gibi komutlar",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-03/test-09"
+          "href": "/education/lessons/docker-kubernetes/module-03/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Override Files",
           "description": "docker-compose.override.yml ile yapılandırma override",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-03/test-10"
+          "href": "/education/lessons/docker-kubernetes/module-03/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Production Yapılandırması",
           "description": "Production ortamı için best practices",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-03/test-11"
+          "href": "/education/lessons/docker-kubernetes/module-03/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Multi-Environment Setup",
           "description": "Development, staging ve production ortamları",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-03/test-12"
+          "href": "/education/lessons/docker-kubernetes/module-03/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Docker Compose v2",
           "description": "Yeni Compose V2 özellikleri ve değişiklikleri",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-03/test-13"
+          "href": "/education/lessons/docker-kubernetes/module-03/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Troubleshooting",
           "description": "Yaygın sorunlar ve çözüm yöntemleri",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-03/test-14"
+          "href": "/education/lessons/docker-kubernetes/module-03/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Pratik Proje",
           "description": "Full-stack uygulama için docker-compose yapılandırması",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-03/test-15"
+          "href": "/education/lessons/docker-kubernetes/module-03/lesson-15"
         }
       ]
     },
@@ -341,94 +341,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Docker Network Mimarisi",
           "description": "Network driver'lar ve network yapısı",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-04/test-01"
+          "href": "/education/lessons/docker-kubernetes/module-04/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Bridge Network",
           "description": "Default bridge network ve kullanımı",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-04/test-02"
+          "href": "/education/lessons/docker-kubernetes/module-04/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Custom Network Oluşturma",
           "description": "User-defined network'ler ve avantajları",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-04/test-03"
+          "href": "/education/lessons/docker-kubernetes/module-04/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Host ve None Network",
           "description": "Host ve none network driver'ları",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-04/test-04"
+          "href": "/education/lessons/docker-kubernetes/module-04/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Overlay Network",
           "description": "Swarm mode'da overlay network kullanımı",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-04/test-05"
+          "href": "/education/lessons/docker-kubernetes/module-04/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Macvlan Network",
           "description": "Macvlan ile container'lara direkt IP atama",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-04/test-06"
+          "href": "/education/lessons/docker-kubernetes/module-04/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Docker Volume Tipleri",
           "description": "Named volume, anonymous volume ve bind mount",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-04/test-07"
+          "href": "/education/lessons/docker-kubernetes/module-04/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Volume Oluşturma ve Yönetimi",
           "description": "Volume CRUD işlemleri ve yönetimi",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-04/test-08"
+          "href": "/education/lessons/docker-kubernetes/module-04/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Bind Mount Kullanımı",
           "description": "Host dosya sistemini container'a bağlama",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-04/test-09"
+          "href": "/education/lessons/docker-kubernetes/module-04/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Volume Driver'lar",
           "description": "Third-party volume driver'lar ve kullanımı",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-04/test-10"
+          "href": "/education/lessons/docker-kubernetes/module-04/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Storage Driver'lar",
           "description": "overlay2, aufs, devicemapper gibi storage driver'lar",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-04/test-11"
+          "href": "/education/lessons/docker-kubernetes/module-04/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Data Backup ve Restore",
           "description": "Volume backup stratejileri ve restore işlemleri",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-04/test-12"
+          "href": "/education/lessons/docker-kubernetes/module-04/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Network Troubleshooting",
           "description": "Network sorunlarını teşhis etme ve çözme",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-04/test-13"
+          "href": "/education/lessons/docker-kubernetes/module-04/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Storage Best Practices",
           "description": "Volume yönetimi için best practices",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-04/test-14"
+          "href": "/education/lessons/docker-kubernetes/module-04/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Pratik Uygulama",
           "description": "Multi-container uygulama için network ve storage yapılandırması",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-04/test-15"
+          "href": "/education/lessons/docker-kubernetes/module-04/lesson-15"
         }
       ]
     },
@@ -445,94 +445,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Kubernetes Nedir?",
           "description": "Kubernetes'in tanımı, tarihçesi ve kullanım alanları",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-05/test-01"
+          "href": "/education/lessons/docker-kubernetes/module-05/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Container Orchestration",
           "description": "Orchestration kavramı ve Kubernetes'in rolü",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-05/test-02"
+          "href": "/education/lessons/docker-kubernetes/module-05/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Kubernetes Mimarisi",
           "description": "Control plane, worker node'lar ve component'ler",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-05/test-03"
+          "href": "/education/lessons/docker-kubernetes/module-05/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Cluster Yapısı",
           "description": "Master ve worker node'ların görevleri",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-05/test-04"
+          "href": "/education/lessons/docker-kubernetes/module-05/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Kubernetes Kurulumu",
           "description": "Minikube, kind ve kubeadm ile kurulum",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-05/test-05"
+          "href": "/education/lessons/docker-kubernetes/module-05/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: kubectl Kurulumu ve Yapılandırması",
           "description": "kubectl CLI aracının kurulumu ve kubeconfig",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-05/test-06"
+          "href": "/education/lessons/docker-kubernetes/module-05/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: kubectl Temel Komutları",
           "description": "get, create, delete, describe, logs komutları",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-05/test-07"
+          "href": "/education/lessons/docker-kubernetes/module-05/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Kubernetes Namespace",
           "description": "Namespace kavramı ve kullanımı",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-05/test-08"
+          "href": "/education/lessons/docker-kubernetes/module-05/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Context ve Config Yönetimi",
           "description": "Multi-cluster yönetimi ve context switching",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-05/test-09"
+          "href": "/education/lessons/docker-kubernetes/module-05/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Kubernetes API",
           "description": "RESTful API ve Kubernetes API server",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-05/test-10"
+          "href": "/education/lessons/docker-kubernetes/module-05/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: YAML ve JSON Formatları",
           "description": "Kubernetes manifest dosyaları ve formatları",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-05/test-11"
+          "href": "/education/lessons/docker-kubernetes/module-05/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Kubernetes Object Model",
           "description": "Resource, object ve API version kavramları",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-05/test-12"
+          "href": "/education/lessons/docker-kubernetes/module-05/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Label ve Selector",
           "description": "Label'lar ile resource organizasyonu",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-05/test-13"
+          "href": "/education/lessons/docker-kubernetes/module-05/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Kubernetes Dashboard",
           "description": "Web UI ile cluster yönetimi",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-05/test-14"
+          "href": "/education/lessons/docker-kubernetes/module-05/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Modül Özeti",
           "description": "Temel kavramların özeti ve pratik uygulama",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-05/test-15"
+          "href": "/education/lessons/docker-kubernetes/module-05/lesson-15"
         }
       ]
     },
@@ -549,94 +549,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Pod Nedir?",
           "description": "Pod kavramı ve Kubernetes'teki rolü",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-06/test-01"
+          "href": "/education/lessons/docker-kubernetes/module-06/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Pod Lifecycle",
           "description": "Pod state'leri ve lifecycle event'leri",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-06/test-02"
+          "href": "/education/lessons/docker-kubernetes/module-06/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Pod Manifest Oluşturma",
           "description": "YAML ile pod tanımlama",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-06/test-03"
+          "href": "/education/lessons/docker-kubernetes/module-06/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Container Image ve Pull Policy",
           "description": "Image pull stratejileri ve policy'ler",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-06/test-04"
+          "href": "/education/lessons/docker-kubernetes/module-06/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Environment Variables",
           "description": "Pod içinde environment variable kullanımı",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-06/test-05"
+          "href": "/education/lessons/docker-kubernetes/module-06/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Resource Requests ve Limits",
           "description": "CPU ve memory resource yönetimi",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-06/test-06"
+          "href": "/education/lessons/docker-kubernetes/module-06/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Multi-Container Pods",
           "description": "Sidecar pattern ve multi-container pod'lar",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-06/test-07"
+          "href": "/education/lessons/docker-kubernetes/module-06/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Init Containers",
           "description": "Init container'lar ile initialization logic",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-06/test-08"
+          "href": "/education/lessons/docker-kubernetes/module-06/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Pod Health Checks",
           "description": "Liveness, readiness ve startup probe'lar",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-06/test-09"
+          "href": "/education/lessons/docker-kubernetes/module-06/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Volume Mounts in Pods",
           "description": "Pod içinde volume kullanımı",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-06/test-10"
+          "href": "/education/lessons/docker-kubernetes/module-06/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Security Context",
           "description": "Pod ve container security context yapılandırması",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-06/test-11"
+          "href": "/education/lessons/docker-kubernetes/module-06/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Pod Disruption Budget",
           "description": "Voluntary disruption'ları yönetme",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-06/test-12"
+          "href": "/education/lessons/docker-kubernetes/module-06/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Pod Debugging",
           "description": "Pod sorunlarını teşhis etme ve çözme",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-06/test-13"
+          "href": "/education/lessons/docker-kubernetes/module-06/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Pod Best Practices",
           "description": "Pod tasarımı için best practices",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-06/test-14"
+          "href": "/education/lessons/docker-kubernetes/module-06/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Pratik Uygulama",
           "description": "Production-ready pod yapılandırması oluşturma",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-06/test-15"
+          "href": "/education/lessons/docker-kubernetes/module-06/lesson-15"
         }
       ]
     },
@@ -653,94 +653,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Deployment Nedir?",
           "description": "Deployment controller ve kullanım alanları",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-07/test-01"
+          "href": "/education/lessons/docker-kubernetes/module-07/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Deployment Oluşturma",
           "description": "YAML ile deployment manifest oluşturma",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-07/test-02"
+          "href": "/education/lessons/docker-kubernetes/module-07/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: ReplicaSet ve Replicas",
           "description": "Replica management ve desired state",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-07/test-03"
+          "href": "/education/lessons/docker-kubernetes/module-07/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Deployment Scaling",
           "description": "kubectl scale ve horizontal scaling",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-07/test-04"
+          "href": "/education/lessons/docker-kubernetes/module-07/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Rolling Update",
           "description": "Zero-downtime deployment stratejisi",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-07/test-05"
+          "href": "/education/lessons/docker-kubernetes/module-07/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Update Strategy",
           "description": "RollingUpdate vs Recreate stratejileri",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-07/test-06"
+          "href": "/education/lessons/docker-kubernetes/module-07/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Rollback İşlemleri",
           "description": "kubectl rollout undo ile geri alma",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-07/test-07"
+          "href": "/education/lessons/docker-kubernetes/module-07/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Deployment History",
           "description": "Rollout history ve revision yönetimi",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-07/test-08"
+          "href": "/education/lessons/docker-kubernetes/module-07/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Pause ve Resume",
           "description": "Deployment'ı geçici olarak durdurma",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-07/test-09"
+          "href": "/education/lessons/docker-kubernetes/module-07/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Max Surge ve Max Unavailable",
           "description": "Rolling update parametreleri",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-07/test-10"
+          "href": "/education/lessons/docker-kubernetes/module-07/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Deployment Status",
           "description": "Deployment durumunu izleme ve kontrol etme",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-07/test-11"
+          "href": "/education/lessons/docker-kubernetes/module-07/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Blue-Green Deployment",
           "description": "Blue-green deployment pattern'i",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-07/test-12"
+          "href": "/education/lessons/docker-kubernetes/module-07/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Canary Deployment",
           "description": "Canary deployment stratejisi",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-07/test-13"
+          "href": "/education/lessons/docker-kubernetes/module-07/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Deployment Best Practices",
           "description": "Production deployment'lar için best practices",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-07/test-14"
+          "href": "/education/lessons/docker-kubernetes/module-07/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Pratik Uygulama",
           "description": "Gerçek bir uygulama için deployment yapılandırması",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-07/test-15"
+          "href": "/education/lessons/docker-kubernetes/module-07/lesson-15"
         }
       ]
     },
@@ -757,94 +757,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Service Nedir?",
           "description": "Service kavramı ve pod iletişimi",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-08/test-01"
+          "href": "/education/lessons/docker-kubernetes/module-08/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Service Discovery",
           "description": "DNS-based service discovery mekanizması",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-08/test-02"
+          "href": "/education/lessons/docker-kubernetes/module-08/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: ClusterIP Service",
           "description": "Internal service ve cluster içi erişim",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-08/test-03"
+          "href": "/education/lessons/docker-kubernetes/module-08/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: NodePort Service",
           "description": "Node port ile external erişim",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-08/test-04"
+          "href": "/education/lessons/docker-kubernetes/module-08/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: LoadBalancer Service",
           "description": "Cloud provider load balancer entegrasyonu",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-08/test-05"
+          "href": "/education/lessons/docker-kubernetes/module-08/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Service Selector ve Endpoints",
           "description": "Label selector ile pod eşleştirme",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-08/test-06"
+          "href": "/education/lessons/docker-kubernetes/module-08/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Headless Service",
           "description": "StatefulSet'ler için headless service",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-08/test-07"
+          "href": "/education/lessons/docker-kubernetes/module-08/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: ExternalName Service",
           "description": "External service'leri Kubernetes'e bağlama",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-08/test-08"
+          "href": "/education/lessons/docker-kubernetes/module-08/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Session Affinity",
           "description": "ClientIP-based session affinity",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-08/test-09"
+          "href": "/education/lessons/docker-kubernetes/module-08/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Service Port Yapılandırması",
           "description": "Port, targetPort ve nodePort yapılandırması",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-08/test-10"
+          "href": "/education/lessons/docker-kubernetes/module-08/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: kube-proxy ve iptables",
           "description": "Service proxy mekanizması",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-08/test-11"
+          "href": "/education/lessons/docker-kubernetes/module-08/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Service Troubleshooting",
           "description": "Service bağlantı sorunlarını çözme",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-08/test-12"
+          "href": "/education/lessons/docker-kubernetes/module-08/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Multi-Port Services",
           "description": "Birden fazla port expose etme",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-08/test-13"
+          "href": "/education/lessons/docker-kubernetes/module-08/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Service Best Practices",
           "description": "Service tasarımı için best practices",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-08/test-14"
+          "href": "/education/lessons/docker-kubernetes/module-08/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Pratik Uygulama",
           "description": "Microservice mimarisi için service yapılandırması",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-08/test-15"
+          "href": "/education/lessons/docker-kubernetes/module-08/lesson-15"
         }
       ]
     },
@@ -861,94 +861,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: ConfigMap Nedir?",
           "description": "ConfigMap kavramı ve kullanım alanları",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-09/test-01"
+          "href": "/education/lessons/docker-kubernetes/module-09/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: ConfigMap Oluşturma",
           "description": "YAML ve kubectl ile ConfigMap oluşturma",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-09/test-02"
+          "href": "/education/lessons/docker-kubernetes/module-09/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: ConfigMap'i Pod'a Bağlama",
           "description": "Volume ve environment variable olarak kullanım",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-09/test-03"
+          "href": "/education/lessons/docker-kubernetes/module-09/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: ConfigMap Data Yönetimi",
           "description": "Key-value pair'ler ve dosya içeriği",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-09/test-04"
+          "href": "/education/lessons/docker-kubernetes/module-09/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: ConfigMap Hot Reload",
           "description": "ConfigMap değişikliklerini pod'a yansıtma",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-09/test-05"
+          "href": "/education/lessons/docker-kubernetes/module-09/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Secret Nedir?",
           "description": "Secret kavramı ve güvenlik",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-09/test-06"
+          "href": "/education/lessons/docker-kubernetes/module-09/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Secret Oluşturma",
           "description": "Opaque, docker-registry ve tls secret'lar",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-09/test-07"
+          "href": "/education/lessons/docker-kubernetes/module-09/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Secret'i Pod'a Bağlama",
           "description": "Secret'ları volume ve env var olarak kullanma",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-09/test-08"
+          "href": "/education/lessons/docker-kubernetes/module-09/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Base64 Encoding",
           "description": "Secret encoding ve decoding işlemleri",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-09/test-09"
+          "href": "/education/lessons/docker-kubernetes/module-09/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: External Secret Management",
           "description": "External secret operator ve Vault entegrasyonu",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-09/test-10"
+          "href": "/education/lessons/docker-kubernetes/module-09/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: ConfigMap ve Secret Best Practices",
           "description": "Güvenlik ve yönetim best practices",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-09/test-11"
+          "href": "/education/lessons/docker-kubernetes/module-09/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Immutable ConfigMap ve Secret",
           "description": "Immutable resource'lar ve kullanım alanları",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-09/test-12"
+          "href": "/education/lessons/docker-kubernetes/module-09/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: ConfigMap ve Secret Troubleshooting",
           "description": "Yaygın sorunlar ve çözüm yöntemleri",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-09/test-13"
+          "href": "/education/lessons/docker-kubernetes/module-09/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Multi-Environment Config",
           "description": "Farklı ortamlar için yapılandırma yönetimi",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-09/test-14"
+          "href": "/education/lessons/docker-kubernetes/module-09/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Pratik Uygulama",
           "description": "Production uygulama için config ve secret yönetimi",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-09/test-15"
+          "href": "/education/lessons/docker-kubernetes/module-09/lesson-15"
         }
       ]
     },
@@ -965,94 +965,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Ingress Nedir?",
           "description": "Ingress kavramı ve service'lerden farkı",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-10/test-01"
+          "href": "/education/lessons/docker-kubernetes/module-10/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Ingress Controller",
           "description": "NGINX, Traefik gibi ingress controller'lar",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-10/test-02"
+          "href": "/education/lessons/docker-kubernetes/module-10/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: NGINX Ingress Controller Kurulumu",
           "description": "NGINX ingress controller kurulumu",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-10/test-03"
+          "href": "/education/lessons/docker-kubernetes/module-10/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Ingress Resource Oluşturma",
           "description": "YAML ile ingress manifest oluşturma",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-10/test-04"
+          "href": "/education/lessons/docker-kubernetes/module-10/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Path-based Routing",
           "description": "URL path'lerine göre routing",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-10/test-05"
+          "href": "/education/lessons/docker-kubernetes/module-10/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Host-based Routing",
           "description": "Hostname'lere göre routing",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-10/test-06"
+          "href": "/education/lessons/docker-kubernetes/module-10/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: TLS Termination",
           "description": "HTTPS yapılandırması ve sertifika yönetimi",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-10/test-07"
+          "href": "/education/lessons/docker-kubernetes/module-10/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Ingress Annotations",
           "description": "Controller-specific annotations kullanımı",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-10/test-08"
+          "href": "/education/lessons/docker-kubernetes/module-10/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Rewrite Rules",
           "description": "URL rewrite ve redirect kuralları",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-10/test-09"
+          "href": "/education/lessons/docker-kubernetes/module-10/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Rate Limiting",
           "description": "Ingress seviyesinde rate limiting",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-10/test-10"
+          "href": "/education/lessons/docker-kubernetes/module-10/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: SSL Passthrough",
           "description": "End-to-end SSL encryption",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-10/test-11"
+          "href": "/education/lessons/docker-kubernetes/module-10/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Ingress Class",
           "description": "Multiple ingress controller yönetimi",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-10/test-12"
+          "href": "/education/lessons/docker-kubernetes/module-10/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Cert-Manager ile Otomatik Sertifika",
           "description": "Let's Encrypt ile otomatik TLS sertifikaları",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-10/test-13"
+          "href": "/education/lessons/docker-kubernetes/module-10/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Ingress Best Practices",
           "description": "Production ingress yapılandırması için best practices",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-10/test-14"
+          "href": "/education/lessons/docker-kubernetes/module-10/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Pratik Uygulama",
           "description": "Multi-service uygulama için ingress yapılandırması",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-10/test-15"
+          "href": "/education/lessons/docker-kubernetes/module-10/lesson-15"
         }
       ]
     },
@@ -1069,94 +1069,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: StatefulSet Nedir?",
           "description": "StatefulSet kavramı ve Deployment'tan farkları",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-11/test-01"
+          "href": "/education/lessons/docker-kubernetes/module-11/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: StatefulSet Oluşturma",
           "description": "YAML ile StatefulSet manifest oluşturma",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-11/test-02"
+          "href": "/education/lessons/docker-kubernetes/module-11/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Ordered Pod Management",
           "description": "Pod'ların sıralı oluşturulması ve silinmesi",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-11/test-03"
+          "href": "/education/lessons/docker-kubernetes/module-11/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Persistent Volume Claims",
           "description": "StatefulSet için persistent storage",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-11/test-04"
+          "href": "/education/lessons/docker-kubernetes/module-11/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Stable Network Identity",
           "description": "Stable hostname ve DNS yapısı",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-11/test-05"
+          "href": "/education/lessons/docker-kubernetes/module-11/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: StatefulSet Scaling",
           "description": "StatefulSet ölçeklendirme stratejileri",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-11/test-06"
+          "href": "/education/lessons/docker-kubernetes/module-11/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: StatefulSet Update Strategy",
           "description": "Rolling update ve on-delete stratejileri",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-11/test-07"
+          "href": "/education/lessons/docker-kubernetes/module-11/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: DaemonSet Nedir?",
           "description": "DaemonSet kavramı ve kullanım alanları",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-11/test-08"
+          "href": "/education/lessons/docker-kubernetes/module-11/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: DaemonSet Oluşturma",
           "description": "YAML ile DaemonSet manifest oluşturma",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-11/test-09"
+          "href": "/education/lessons/docker-kubernetes/module-11/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Node Selector ve Taints",
           "description": "DaemonSet'in belirli node'larda çalışması",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-11/test-10"
+          "href": "/education/lessons/docker-kubernetes/module-11/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: DaemonSet Update Strategy",
           "description": "Rolling update ve on-delete stratejileri",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-11/test-11"
+          "href": "/education/lessons/docker-kubernetes/module-11/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: StatefulSet Kullanım Senaryoları",
           "description": "Database, message queue gibi stateful uygulamalar",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-11/test-12"
+          "href": "/education/lessons/docker-kubernetes/module-11/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: DaemonSet Kullanım Senaryoları",
           "description": "Logging, monitoring, network plugin'ler",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-11/test-13"
+          "href": "/education/lessons/docker-kubernetes/module-11/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Best Practices",
           "description": "StatefulSet ve DaemonSet için best practices",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-11/test-14"
+          "href": "/education/lessons/docker-kubernetes/module-11/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Pratik Uygulama",
           "description": "Database ve logging agent için yapılandırma",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-11/test-15"
+          "href": "/education/lessons/docker-kubernetes/module-11/lesson-15"
         }
       ]
     },
@@ -1173,94 +1173,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Helm Nedir?",
           "description": "Helm package manager ve Kubernetes'teki rolü",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-12/test-01"
+          "href": "/education/lessons/docker-kubernetes/module-12/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Helm Kurulumu",
           "description": "Helm CLI kurulumu ve yapılandırması",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-12/test-02"
+          "href": "/education/lessons/docker-kubernetes/module-12/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Helm Chart Yapısı",
           "description": "Chart dizin yapısı ve dosyalar",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-12/test-03"
+          "href": "/education/lessons/docker-kubernetes/module-12/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Helm Chart Kullanımı",
           "description": "helm install, upgrade, uninstall komutları",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-12/test-04"
+          "href": "/education/lessons/docker-kubernetes/module-12/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Values Dosyası",
           "description": "values.yaml ile yapılandırma yönetimi",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-12/test-05"
+          "href": "/education/lessons/docker-kubernetes/module-12/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Template Engine",
           "description": "Go template syntax ve kullanımı",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-12/test-06"
+          "href": "/education/lessons/docker-kubernetes/module-12/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Chart Dependencies",
           "description": "Sub-chart'lar ve dependency yönetimi",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-12/test-07"
+          "href": "/education/lessons/docker-kubernetes/module-12/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Helm Repository",
           "description": "Chart repository oluşturma ve yönetimi",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-12/test-08"
+          "href": "/education/lessons/docker-kubernetes/module-12/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Helm Hooks",
           "description": "Pre-install, post-install gibi hook'lar",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-12/test-09"
+          "href": "/education/lessons/docker-kubernetes/module-12/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Chart Testing",
           "description": "helm test ve chart validation",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-12/test-10"
+          "href": "/education/lessons/docker-kubernetes/module-12/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Helm Secrets",
           "description": "Sealed Secrets ve secret yönetimi",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-12/test-11"
+          "href": "/education/lessons/docker-kubernetes/module-12/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Helm 3 vs Helm 2",
           "description": "Helm versiyonları arasındaki farklar",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-12/test-12"
+          "href": "/education/lessons/docker-kubernetes/module-12/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Chart Best Practices",
           "description": "Chart tasarımı için best practices",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-12/test-13"
+          "href": "/education/lessons/docker-kubernetes/module-12/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Helm Operator",
           "description": "Operator pattern ile Helm kullanımı",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-12/test-14"
+          "href": "/education/lessons/docker-kubernetes/module-12/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Pratik Uygulama",
           "description": "Production-ready Helm chart oluşturma",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-12/test-15"
+          "href": "/education/lessons/docker-kubernetes/module-12/lesson-15"
         }
       ]
     },
@@ -1277,94 +1277,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Monitoring Temelleri",
           "description": "Monitoring, metrics, logging ve tracing kavramları",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-13/test-01"
+          "href": "/education/lessons/docker-kubernetes/module-13/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Prometheus Nedir?",
           "description": "Prometheus monitoring sistemi ve mimarisi",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-13/test-02"
+          "href": "/education/lessons/docker-kubernetes/module-13/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Prometheus Kurulumu",
           "description": "Kubernetes'te Prometheus deployment'ı",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-13/test-03"
+          "href": "/education/lessons/docker-kubernetes/module-13/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: ServiceMonitor ve PodMonitor",
           "description": "Prometheus Operator ile metric scraping",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-13/test-04"
+          "href": "/education/lessons/docker-kubernetes/module-13/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Grafana Kurulumu",
           "description": "Grafana dashboard ve visualization",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-13/test-05"
+          "href": "/education/lessons/docker-kubernetes/module-13/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Kubernetes Metrics",
           "description": "cAdvisor, kube-state-metrics ve node exporter",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-13/test-06"
+          "href": "/education/lessons/docker-kubernetes/module-13/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Custom Metrics",
           "description": "Application-level custom metrics oluşturma",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-13/test-07"
+          "href": "/education/lessons/docker-kubernetes/module-13/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Alerting Rules",
           "description": "Prometheus alerting rules ve Alertmanager",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-13/test-08"
+          "href": "/education/lessons/docker-kubernetes/module-13/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Logging Stratejileri",
           "description": "Centralized logging ve log aggregation",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-13/test-09"
+          "href": "/education/lessons/docker-kubernetes/module-13/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: EFK Stack",
           "description": "Elasticsearch, Fluentd, Kibana kurulumu",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-13/test-10"
+          "href": "/education/lessons/docker-kubernetes/module-13/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Loki ve Promtail",
           "description": "Grafana Loki ile log aggregation",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-13/test-11"
+          "href": "/education/lessons/docker-kubernetes/module-13/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Distributed Tracing",
           "description": "Jaeger ve OpenTelemetry ile tracing",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-13/test-12"
+          "href": "/education/lessons/docker-kubernetes/module-13/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: APM Tools",
           "description": "Application Performance Monitoring araçları",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-13/test-13"
+          "href": "/education/lessons/docker-kubernetes/module-13/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Monitoring Best Practices",
           "description": "Production monitoring için best practices",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-13/test-14"
+          "href": "/education/lessons/docker-kubernetes/module-13/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Pratik Uygulama",
           "description": "Full observability stack kurulumu",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-13/test-15"
+          "href": "/education/lessons/docker-kubernetes/module-13/lesson-15"
         }
       ]
     },
@@ -1381,94 +1381,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Kubernetes Security Model",
           "description": "Güvenlik katmanları ve defense in depth",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-14/test-01"
+          "href": "/education/lessons/docker-kubernetes/module-14/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: RBAC Nedir?",
           "description": "Role-Based Access Control kavramı",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-14/test-02"
+          "href": "/education/lessons/docker-kubernetes/module-14/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Role ve RoleBinding",
           "description": "Namespace-level RBAC yapılandırması",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-14/test-03"
+          "href": "/education/lessons/docker-kubernetes/module-14/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: ClusterRole ve ClusterRoleBinding",
           "description": "Cluster-level RBAC yapılandırması",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-14/test-04"
+          "href": "/education/lessons/docker-kubernetes/module-14/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Service Account",
           "description": "Service account'lar ve pod authentication",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-14/test-05"
+          "href": "/education/lessons/docker-kubernetes/module-14/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Network Policies",
           "description": "Network isolation ve traffic control",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-14/test-06"
+          "href": "/education/lessons/docker-kubernetes/module-14/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Pod Security Policies",
           "description": "Pod security context ve policy enforcement",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-14/test-07"
+          "href": "/education/lessons/docker-kubernetes/module-14/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Pod Security Standards",
           "description": "Pod Security Admission ve standards",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-14/test-08"
+          "href": "/education/lessons/docker-kubernetes/module-14/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Image Security",
           "description": "Image scanning ve vulnerability management",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-14/test-09"
+          "href": "/education/lessons/docker-kubernetes/module-14/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Secrets Management",
           "description": "Secret encryption ve external secret management",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-14/test-10"
+          "href": "/education/lessons/docker-kubernetes/module-14/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Admission Controllers",
           "description": "Validating ve mutating admission webhooks",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-14/test-11"
+          "href": "/education/lessons/docker-kubernetes/module-14/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: TLS ve mTLS",
           "description": "Service mesh ve mutual TLS",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-14/test-12"
+          "href": "/education/lessons/docker-kubernetes/module-14/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Security Scanning Tools",
           "description": "Falco, Trivy, kube-bench gibi araçlar",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-14/test-13"
+          "href": "/education/lessons/docker-kubernetes/module-14/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Security Best Practices",
           "description": "Production cluster güvenliği için best practices",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-14/test-14"
+          "href": "/education/lessons/docker-kubernetes/module-14/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Pratik Uygulama",
           "description": "Güvenli bir cluster yapılandırması oluşturma",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-14/test-15"
+          "href": "/education/lessons/docker-kubernetes/module-14/lesson-15"
         }
       ]
     },
@@ -1485,94 +1485,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: CI/CD Temelleri",
           "description": "Continuous Integration ve Continuous Deployment",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-15/test-01"
+          "href": "/education/lessons/docker-kubernetes/module-15/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Kubernetes'te CI/CD",
           "description": "Kubernetes-native CI/CD yaklaşımları",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-15/test-02"
+          "href": "/education/lessons/docker-kubernetes/module-15/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Jenkins ve Kubernetes",
           "description": "Jenkins pipeline'ları ile Kubernetes deployment",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-15/test-03"
+          "href": "/education/lessons/docker-kubernetes/module-15/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: GitLab CI/CD",
           "description": "GitLab Runner ve Kubernetes executor",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-15/test-04"
+          "href": "/education/lessons/docker-kubernetes/module-15/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: GitHub Actions",
           "description": "GitHub Actions ile Kubernetes deployment",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-15/test-05"
+          "href": "/education/lessons/docker-kubernetes/module-15/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: GitOps Nedir?",
           "description": "GitOps metodolojisi ve prensipleri",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-15/test-06"
+          "href": "/education/lessons/docker-kubernetes/module-15/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: ArgoCD Kurulumu",
           "description": "ArgoCD GitOps tool kurulumu",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-15/test-07"
+          "href": "/education/lessons/docker-kubernetes/module-15/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: ArgoCD Application",
           "description": "Application manifest ve sync stratejileri",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-15/test-08"
+          "href": "/education/lessons/docker-kubernetes/module-15/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Flux CD",
           "description": "Flux CD ile GitOps implementation",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-15/test-09"
+          "href": "/education/lessons/docker-kubernetes/module-15/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Blue-Green Deployment",
           "description": "Production'da blue-green deployment stratejisi",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-15/test-10"
+          "href": "/education/lessons/docker-kubernetes/module-15/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Canary Deployment",
           "description": "Canary deployment ve traffic splitting",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-15/test-11"
+          "href": "/education/lessons/docker-kubernetes/module-15/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Rollback Stratejileri",
           "description": "Hızlı rollback mekanizmaları",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-15/test-12"
+          "href": "/education/lessons/docker-kubernetes/module-15/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Production Readiness",
           "description": "Production ortamı için hazırlık checklist'i",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-15/test-13"
+          "href": "/education/lessons/docker-kubernetes/module-15/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Disaster Recovery",
           "description": "Backup, restore ve disaster recovery planları",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-15/test-14"
+          "href": "/education/lessons/docker-kubernetes/module-15/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Capstone Project",
           "description": "End-to-end production-ready uygulama deployment'ı",
-          "href": "/education/tests/quiz/tests-docker-kubernetes/module-15/test-15"
+          "href": "/education/lessons/docker-kubernetes/module-15/lesson-15"
         }
       ]
     }

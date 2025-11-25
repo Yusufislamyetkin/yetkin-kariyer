@@ -105,7 +105,7 @@ CREATE TYPE "UserRole" AS ENUM ('candidate', 'employer', 'admin');
 CREATE TYPE "JobStatus" AS ENUM ('draft', 'published', 'closed');
 CREATE TYPE "ApplicationStatus" AS ENUM ('pending', 'reviewing', 'accepted', 'rejected');
 CREATE TYPE "WrongQuestionStatus" AS ENUM ('not_reviewed', 'reviewed', 'understood');
-CREATE TYPE "BadgeCategory" AS ENUM ('test_count', 'score', 'topic', 'streak', 'special');
+CREATE TYPE "BadgeCategory" AS ENUM ('test_count', 'score', 'topic', 'streak', 'special', 'daily_activities', 'social_interaction');
 CREATE TYPE "BadgeRarity" AS ENUM ('common', 'rare', 'epic', 'legendary');
 CREATE TYPE "GoalType" AS ENUM ('test_count', 'topic_complete', 'score_target', 'streak_maintain');
 CREATE TYPE "LeaderboardPeriod" AS ENUM ('daily', 'monthly');
@@ -1134,6 +1134,7 @@ CREATE INDEX IF NOT EXISTS "leaderboard_snapshots_period_createdAt_idx" ON "lead
 CREATE INDEX IF NOT EXISTS "quest_progress_questId_idx" ON "quest_progress"("questId");
 CREATE INDEX IF NOT EXISTS "reward_redemptions_userId_createdAt_idx" ON "reward_redemptions"("userId", "createdAt");
 CREATE INDEX IF NOT EXISTS "reward_redemptions_rewardId_idx" ON "reward_redemptions"("rewardId");
+CREATE INDEX IF NOT EXISTS "admin_audit_logs_adminId_createdAt_idx" ON "admin_audit_logs"("adminId", "createdAt");
 CREATE INDEX IF NOT EXISTS "daily_goals_userId_idx" ON "daily_goals"("userId", "date");
 CREATE INDEX IF NOT EXISTS "leaderboard_entries_period_idx" ON "leaderboard_entries"("period", "periodDate");
 CREATE INDEX IF NOT EXISTS "leaderboard_entries_userId_idx" ON "leaderboard_entries"("userId", "period");

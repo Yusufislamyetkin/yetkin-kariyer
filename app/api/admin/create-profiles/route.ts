@@ -3,7 +3,7 @@ import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { put } from "@vercel/blob";
 import bcrypt from "bcryptjs";
-import { readdirSync, readFileSync } from "fs";
+import { readdirSync, readFileSync, existsSync } from "fs";
 import { join } from "path";
 import { TURKISH_FEMALE_NAMES, TURKISH_MALE_NAMES, TURKISH_SURNAMES } from "@/lib/admin/turkish-names";
 
@@ -27,9 +27,53 @@ export async function POST() {
 
     console.log("[CREATE_PROFILES] Starting profile creation...");
 
-    const photosBasePath = join(process.cwd(), "Photos", "ProfilePhotos");
+    // Try multiple possible paths for the photos directory
+    const possiblePaths = [
+      join(process.cwd(), "public", "Photos", "ProfilePhotos"),
+      join(process.cwd(), "Photos", "ProfilePhotos"),
+    ];
+
+    let photosBasePath: string | null = null;
+    for (const path of possiblePaths) {
+      if (existsSync(path)) {
+        photosBasePath = path;
+        break;
+      }
+    }
+
+    if (!photosBasePath) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: `Fotoğraf klasörü bulunamadı. Şu yollarda arandı: ${possiblePaths.join(", ")}. Lütfen Photos/ProfilePhotos klasörünün doğru konumda olduğundan emin olun.`,
+        },
+        { status: 500 }
+      );
+    }
+
     const manPhotosPath = join(photosBasePath, "Man");
     const womanPhotosPath = join(photosBasePath, "Woman");
+
+    // Check if directories exist
+    if (!existsSync(manPhotosPath)) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: `Erkek fotoğrafları klasörü bulunamadı: ${manPhotosPath}`,
+        },
+        { status: 500 }
+      );
+    }
+
+    if (!existsSync(womanPhotosPath)) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: `Kadın fotoğrafları klasörü bulunamadı: ${womanPhotosPath}`,
+        },
+        { status: 500 }
+      );
+    }
 
     // Read photo files
     const manPhotos = readdirSync(manPhotosPath).filter(
@@ -40,6 +84,16 @@ export async function POST() {
     );
 
     console.log(`[CREATE_PROFILES] Found ${manPhotos.length} male photos and ${womanPhotos.length} female photos`);
+
+    if (manPhotos.length === 0 && womanPhotos.length === 0) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Fotoğraf klasörlerinde hiç fotoğraf bulunamadı. Lütfen .jpg veya .png uzantılı fotoğrafların mevcut olduğundan emin olun.",
+        },
+        { status: 500 }
+      );
+    }
 
     const createdUsers: Array<{ name: string; email: string; gender: string }> = [];
     const errors: Array<{ photo: string; error: string }> = [];

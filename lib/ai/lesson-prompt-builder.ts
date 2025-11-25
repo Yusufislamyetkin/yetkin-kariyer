@@ -100,13 +100,15 @@ KRİTİK YOL HARİTASI KURALLARI - MUTLAKA UYULMALI!
    - ⚠️ KRİTİK: Her mesajda SADECE BİR adım için yanıt ver! Birden fazla adımı tek mesajda birleştirme!
    - Eğer bir adımı tamamladıysan: [CURRENT_STEP: 2] [STEP_COMPLETE: 2] şeklinde her ikisini de kullan
 
-3. ADIM TAMAMLAMA (HER ADIM İÇİN AYRI!):
-   - Her adım tamamlandığında [STEP_COMPLETE: adım_numarası] sinyali ver
+3. ADIM TAMAMLAMA (HER ADIM İÇİN AYRI - ZORUNLU!):
+   - Her adım tamamlandığında MUTLAKA [STEP_COMPLETE: adım_numarası] sinyali ver
    - Örneğin ilk adımı bitirdiysen: [STEP_COMPLETE: 1]
    - İkinci adımı bitirdiysen: [STEP_COMPLETE: 2]
    - Adımları atlama veya sırayı bozma!
+   - ⚠️ KRİTİK: TÜM adımlar için [STEP_COMPLETE: n] göndermelisin! Hiçbir adımı atlama!
    - ⚠️ ÖNEMLİ: Her adımı tamamladıktan sonra, sonraki adıma geçmek için YENİ BİR MESAJ gönder!
    - Örnek: 5. adımı tamamladıysan [STEP_COMPLETE: 5] ile bitir, sonra 6. adım için YENİ MESAJ gönder ve [CURRENT_STEP: 6] kullan!
+   - ⚠️ DERS BİTİRME: [LESSON_COMPLETE] tag'ini SADECE tüm adımlar için [STEP_COMPLETE: n] gönderdikten SONRA kullan!
 
 4. ÖRNEK KULLANIM:
    Mesaj örneği:
@@ -140,11 +142,13 @@ KRİTİK YOL HARİTASI TAKİP KURALLARI - MUTLAKA UYULMALI!
    - ⚠️ KRİTİK: Her mesajda SADECE BİR adım için yanıt ver! Birden fazla adımı tek mesajda birleştirme!
    - Eğer bir adımı tamamladıysan: [CURRENT_STEP: 2] [STEP_COMPLETE: 2] şeklinde her ikisini de kullan
 
-3. ADIM TAMAMLAMA (HER ADIM İÇİN AYRI!):
-   - Her adım tamamlandığında [STEP_COMPLETE: adım_numarası] sinyali ver.
+3. ADIM TAMAMLAMA (HER ADIM İÇİN AYRI - ZORUNLU!):
+   - Her adım tamamlandığında MUTLAKA [STEP_COMPLETE: adım_numarası] sinyali ver.
    - Örnek: İlk adımı bitirdiysen [STEP_COMPLETE: 1], ikinci adımı bitirdiysen [STEP_COMPLETE: 2]
+   - ⚠️ KRİTİK: TÜM adımlar için [STEP_COMPLETE: n] göndermelisin! Hiçbir adımı atlama!
    - ⚠️ ÖNEMLİ: Her adımı tamamladıktan sonra, sonraki adıma geçmek için YENİ BİR MESAJ gönder!
    - Örnek: 5. adımı tamamladıysan [STEP_COMPLETE: 5] ile bitir, sonra 6. adım için YENİ MESAJ gönder ve [CURRENT_STEP: 6] kullan!
+   - ⚠️ DERS BİTİRME: [LESSON_COMPLETE] tag'ini SADECE tüm adımlar için [STEP_COMPLETE: n] gönderdikten SONRA kullan!
 
 4. TEST SORULARI ZORUNLULUĞU:
    - "Mini test soruları" adımında MUTLAKA EN AZ 3 adet test sorusu sor!
@@ -172,11 +176,13 @@ KRİTİK YOL HARİTASI TAKİP KURALLARI - MUTLAKA UYULMALI!
    - ⚠️ KRİTİK: Her mesajda SADECE BİR adım için yanıt ver! Birden fazla adımı tek mesajda birleştirme!
    - Eğer bir adımı tamamladıysan: [CURRENT_STEP: 2] [STEP_COMPLETE: 2] şeklinde her ikisini de kullan
 
-3. ADIM TAMAMLAMA (HER ADIM İÇİN AYRI!):
-   - Her adım tamamlandığında [STEP_COMPLETE: adım_numarası] sinyali ver.
+3. ADIM TAMAMLAMA (HER ADIM İÇİN AYRI - ZORUNLU!):
+   - Her adım tamamlandığında MUTLAKA [STEP_COMPLETE: adım_numarası] sinyali ver.
    - Örnek: İlk adımı bitirdiysen [STEP_COMPLETE: 1], ikinci adımı bitirdiysen [STEP_COMPLETE: 2]
+   - ⚠️ KRİTİK: TÜM adımlar için [STEP_COMPLETE: n] göndermelisin! Hiçbir adımı atlama!
    - ⚠️ ÖNEMLİ: Her adımı tamamladıktan sonra, sonraki adıma geçmek için YENİ BİR MESAJ gönder!
    - Örnek: 5. adımı tamamladıysan [STEP_COMPLETE: 5] ile bitir, sonra 6. adım için YENİ MESAJ gönder ve [CURRENT_STEP: 6] kullan!
+   - ⚠️ DERS BİTİRME: [LESSON_COMPLETE] tag'ini SADECE tüm adımlar için [STEP_COMPLETE: n] gönderdikten SONRA kullan!
 
 4. TEST SORULARI ZORUNLULUĞU:
    - "Mini test soruları" adımında MUTLAKA EN AZ 3 adet test sorusu sor!
@@ -354,9 +360,40 @@ Direkt [MINI_TEST: ...] tag'i ile başla!
 
 ═══════════════════════════════════════════════════════════════
 
-5. DERS TAMAMLAMA:
-- Ders bitince MUTLAKA şu sinyallerden birini ver: [LESSON_COMPLETE] veya "Ders tamamlandı!", "Ders bitti!", "Tebrikler, ders tamamlandı!"
-- Kullanıcıyı kutla ve özet ver
+5. DERS TAMAMLAMA (KRİTİK KURALLAR):
+═══════════════════════════════════════════════════════════════
+DERS TAMAMLAMA KURALLARI - TÜM ADIMLAR TAMAMLANMALI!
+═══════════════════════════════════════════════════════════════
+
+⚠️ KRİTİK: DERS BİTMEDEN ÖNCE TÜM ADIMLAR TAMAMLANMALI!
+
+1. ADIM TAMAMLAMA ZORUNLULUĞU:
+   - Her roadmap adımı için MUTLAKA [STEP_COMPLETE: n] tag'i göndermelisin!
+   - Hiçbir adımı atlama! Tüm adımları sırayla tamamla!
+   - Örnek: 5 adımlı bir roadmap varsa, 1, 2, 3, 4, 5. adımların HEPSİ için [STEP_COMPLETE: 1], [STEP_COMPLETE: 2], vb. göndermelisin!
+
+2. DERS BİTİRME KURALLARI:
+   - [LESSON_COMPLETE] tag'ini SADECE tüm roadmap adımları tamamlandıktan sonra gönder!
+   - Son adım (en yüksek numaralı adım) tamamlanmadan ders bitirme!
+   - Örnek: Roadmap'te 5 adım varsa, 5. adım için [STEP_COMPLETE: 5] gönderdikten SONRA [LESSON_COMPLETE] gönder!
+   - Eğer roadmap varsa ama tüm adımlar tamamlanmamışsa, [LESSON_COMPLETE] ASLA gönderme!
+
+3. DERS TAMAMLAMA SİNYALİ:
+   - Tüm adımlar tamamlandıktan sonra MUTLAKA şu sinyallerden birini ver:
+     • [LESSON_COMPLETE] tag'i
+     • VEYA "Ders tamamlandı!", "Ders bitti!", "Tebrikler, ders tamamlandı!" gibi açık ifadeler
+   - Kullanıcıyı kutla ve özet ver
+   - Ancak bu sinyali SADECE tüm adımlar tamamlandıktan sonra ver!
+
+4. KONTROL LİSTESİ (DERS BİTİRMEDEN ÖNCE):
+   ✓ Tüm roadmap adımları için [STEP_COMPLETE: n] gönderildi mi?
+   ✓ Son adım (en yüksek numaralı) tamamlandı mı?
+   ✓ Tüm adımlar sırayla işlendi mi?
+   ✓ Hiçbir adım atlanmadı mı?
+   
+   Eğer yukarıdakilerin HEPSİ "Evet" ise, o zaman [LESSON_COMPLETE] gönderebilirsin!
+
+═══════════════════════════════════════════════════════════════
 
 ÖNEMLİ TAG'LER:
 - [ROADMAP: ...] - Yol haritası (sadece ilk mesajda)

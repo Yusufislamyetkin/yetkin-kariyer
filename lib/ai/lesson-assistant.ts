@@ -285,7 +285,11 @@ export async function sendMessageToLessonAssistant(
   userId: string,
   lessonSlug: string,
   message: string,
-  assistantId: string
+  assistantId: string,
+  context?: {
+    roadmap?: string | null;
+    progress?: { step: number; status: "pending" | "in_progress" | "completed" } | null;
+  }
 ): Promise<LessonAssistantResponse> {
   let lastError: Error | null = null;
   
@@ -295,8 +299,56 @@ export async function sendMessageToLessonAssistant(
       // Thread'i al veya oluştur
       const { threadId } = await getOrCreateLessonThread(userId, lessonSlug);
 
+      // Mesaja context bilgisi ekle (eğer roadmap veya progress varsa)
+      let messageWithContext = message;
+      if (context && (context.roadmap || context.progress)) {
+        const contextParts: string[] = [];
+        contextParts.push("\n\n[KULLANICI DURUMU]");
+        
+        if (context.roadmap) {
+          contextParts.push(`- Mevcut Yol Haritası: ${context.roadmap}`);
+        }
+        
+        if (context.progress) {
+          contextParts.push(`- Şu Anki Adım: ${context.progress.step} (Durum: ${context.progress.status})`);
+          
+          // Tamamlanan adımları hesapla
+          if (context.progress.status === "completed") {
+            const completedSteps: number[] = [];
+            for (let i = 1; i < context.progress.step; i++) {
+              completedSteps.push(i);
+            }
+            completedSteps.push(context.progress.step);
+            if (completedSteps.length > 0) {
+              contextParts.push(`- Tamamlanan Adımlar: ${completedSteps.join(", ")}`);
+            }
+          }
+          
+          // Sonraki adımı belirle
+          if (context.roadmap) {
+            const stepMatches = context.roadmap.match(/\d+[\.\)]/g);
+            if (stepMatches) {
+              const allStepNumbers = stepMatches.map((m: string) => parseInt(m.replace(/[\.\)]/g, '')));
+              const lastStepNumber = Math.max(...allStepNumbers);
+              const nextStep = context.progress.step < lastStepNumber 
+                ? context.progress.step + 1 
+                : null;
+              if (nextStep) {
+                contextParts.push(`- Sonraki Adım: ${nextStep}`);
+              } else if (context.progress.step === lastStepNumber && context.progress.status === "completed") {
+                contextParts.push(`- Sonraki Adım: Tüm adımlar tamamlandı, ders bitirilebilir`);
+              }
+            }
+          }
+        }
+        
+        contextParts.push("\nLütfen bu bilgilere göre yanıt ver ve kullanıcıyı doğru adımda tut. Eğer kullanıcı bir adımı tamamlamışsa, bir sonraki adıma geç.");
+        
+        messageWithContext = message + contextParts.join("\n");
+      }
+
       // Thread'e mesaj ekle
-      await addMessageToThread(threadId, message);
+      await addMessageToThread(threadId, messageWithContext);
 
       // Assistant'ı çalıştır ve yanıtı al
       const response = await runLessonAssistant(threadId, assistantId);

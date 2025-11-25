@@ -27,94 +27,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Angular Nedir?",
           "description": "Angular'un temel tanımı ve genel bakış",
-          "href": "/education/tests/quiz/tests-angular/module-01/test-01"
+          "href": "/education/lessons/angular/module-01/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Angular vs React vs Vue",
           "description": "Popüler frontend framework'lerin karşılaştırması",
-          "href": "/education/tests/quiz/tests-angular/module-01/test-02"
+          "href": "/education/lessons/angular/module-01/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Angular'un Tarihçesi ve Gelişimi",
           "description": "AngularJS'den Angular'a geçiş ve versiyon geçmişi",
-          "href": "/education/tests/quiz/tests-angular/module-01/test-03"
+          "href": "/education/lessons/angular/module-01/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Angular'un Avantajları",
           "description": "TypeScript, DI, CLI gibi avantajlar",
-          "href": "/education/tests/quiz/tests-angular/module-01/test-04"
+          "href": "/education/lessons/angular/module-01/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Angular Kullanım Alanları",
           "description": "SPA, enterprise uygulamalar, mobil uygulamalar",
-          "href": "/education/tests/quiz/tests-angular/module-01/test-05"
+          "href": "/education/lessons/angular/module-01/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Angular Ekosistemi",
           "description": "Angular CLI, Material, RxJS ekosistemi",
-          "href": "/education/tests/quiz/tests-angular/module-01/test-06"
+          "href": "/education/lessons/angular/module-01/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Angular CLI'ye Giriş",
           "description": "Angular CLI kurulumu ve temel komutlar",
-          "href": "/education/tests/quiz/tests-angular/module-01/test-07"
+          "href": "/education/lessons/angular/module-01/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: İlk Angular Projesi",
           "description": "Yeni proje oluşturma ve yapılandırma",
-          "href": "/education/tests/quiz/tests-angular/module-01/test-08"
+          "href": "/education/lessons/angular/module-01/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Proje Yapısı",
           "description": "Angular proje klasör yapısı ve dosya organizasyonu",
-          "href": "/education/tests/quiz/tests-angular/module-01/test-09"
+          "href": "/education/lessons/angular/module-01/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Angular Versiyonları",
           "description": "Angular versiyon geçmişi ve güncelleme stratejileri",
-          "href": "/education/tests/quiz/tests-angular/module-01/test-10"
+          "href": "/education/lessons/angular/module-01/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Angular Kurulum Gereksinimleri",
           "description": "Node.js, npm ve sistem gereksinimleri",
-          "href": "/education/tests/quiz/tests-angular/module-01/test-11"
+          "href": "/education/lessons/angular/module-01/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Angular ile Neler Yapılabilir?",
           "description": "Web, mobil ve desktop uygulamaları",
-          "href": "/education/tests/quiz/tests-angular/module-01/test-12"
+          "href": "/education/lessons/angular/module-01/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Angular Performans Özellikleri",
           "description": "Change detection, lazy loading, AOT compilation",
-          "href": "/education/tests/quiz/tests-angular/module-01/test-13"
+          "href": "/education/lessons/angular/module-01/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Angular Topluluk Desteği",
           "description": "Açık kaynak topluluk ve kaynaklar",
-          "href": "/education/tests/quiz/tests-angular/module-01/test-14"
+          "href": "/education/lessons/angular/module-01/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Modül Özeti ve Değerlendirme",
           "description": "Modül kapsamında öğrenilenlerin özeti",
-          "href": "/education/tests/quiz/tests-angular/module-01/test-15"
+          "href": "/education/lessons/angular/module-01/lesson-15"
         }
       ]
     },
@@ -131,94 +131,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: TypeScript'e Giriş",
           "description": "TypeScript'in ne olduğu ve avantajları",
-          "href": "/education/tests/quiz/tests-angular/module-02/test-01"
+          "href": "/education/lessons/angular/module-02/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Veri Tipleri",
           "description": "string, number, boolean, any, void tipleri",
-          "href": "/education/tests/quiz/tests-angular/module-02/test-02"
+          "href": "/education/lessons/angular/module-02/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Array ve Tuple",
           "description": "Dizi ve tuple kullanımı",
-          "href": "/education/tests/quiz/tests-angular/module-02/test-03"
+          "href": "/education/lessons/angular/module-02/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Enum ve Union Types",
           "description": "Enum tanımlama ve union type'lar",
-          "href": "/education/tests/quiz/tests-angular/module-02/test-04"
+          "href": "/education/lessons/angular/module-02/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Interface ve Type Aliases",
           "description": "Interface tanımlama ve type aliases",
-          "href": "/education/tests/quiz/tests-angular/module-02/test-05"
+          "href": "/education/lessons/angular/module-02/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Class ve Inheritance",
           "description": "Sınıf tanımlama ve kalıtım",
-          "href": "/education/tests/quiz/tests-angular/module-02/test-06"
+          "href": "/education/lessons/angular/module-02/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Access Modifiers",
           "description": "public, private, protected kullanımı",
-          "href": "/education/tests/quiz/tests-angular/module-02/test-07"
+          "href": "/education/lessons/angular/module-02/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Generics",
           "description": "Generic type'lar ve kullanımı",
-          "href": "/education/tests/quiz/tests-angular/module-02/test-08"
+          "href": "/education/lessons/angular/module-02/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Decorators",
           "description": "Decorator'lar ve Angular'da kullanımı",
-          "href": "/education/tests/quiz/tests-angular/module-02/test-09"
+          "href": "/education/lessons/angular/module-02/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Modules ve Namespaces",
           "description": "ES6 modules ve namespace'ler",
-          "href": "/education/tests/quiz/tests-angular/module-02/test-10"
+          "href": "/education/lessons/angular/module-02/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Async/Await",
           "description": "Asenkron programlama ve Promise'ler",
-          "href": "/education/tests/quiz/tests-angular/module-02/test-11"
+          "href": "/education/lessons/angular/module-02/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Type Guards",
           "description": "Type narrowing ve type guards",
-          "href": "/education/tests/quiz/tests-angular/module-02/test-12"
+          "href": "/education/lessons/angular/module-02/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Utility Types",
           "description": "Partial, Pick, Omit gibi utility type'lar",
-          "href": "/education/tests/quiz/tests-angular/module-02/test-13"
+          "href": "/education/lessons/angular/module-02/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: TypeScript Configuration",
           "description": "tsconfig.json yapılandırması",
-          "href": "/education/tests/quiz/tests-angular/module-02/test-14"
+          "href": "/education/lessons/angular/module-02/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: TypeScript Best Practices",
           "description": "TypeScript kullanımında en iyi uygulamalar",
-          "href": "/education/tests/quiz/tests-angular/module-02/test-15"
+          "href": "/education/lessons/angular/module-02/lesson-15"
         }
       ]
     },
@@ -235,94 +235,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Component Nedir?",
           "description": "Component kavramı ve yapısı",
-          "href": "/education/tests/quiz/tests-angular/module-03/test-01"
+          "href": "/education/lessons/angular/module-03/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Component Oluşturma",
           "description": "Yeni component oluşturma ve yapılandırma",
-          "href": "/education/tests/quiz/tests-angular/module-03/test-02"
+          "href": "/education/lessons/angular/module-03/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Template Syntax",
           "description": "Template yazım kuralları ve syntax",
-          "href": "/education/tests/quiz/tests-angular/module-03/test-03"
+          "href": "/education/lessons/angular/module-03/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Interpolation",
           "description": "String interpolation ve kullanımı",
-          "href": "/education/tests/quiz/tests-angular/module-03/test-04"
+          "href": "/education/lessons/angular/module-03/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Property Binding",
           "description": "Property binding syntax ve örnekleri",
-          "href": "/education/tests/quiz/tests-angular/module-03/test-05"
+          "href": "/education/lessons/angular/module-03/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Event Binding",
           "description": "Event handling ve event binding",
-          "href": "/education/tests/quiz/tests-angular/module-03/test-06"
+          "href": "/education/lessons/angular/module-03/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Two-Way Data Binding",
           "description": "ngModel ile iki yönlü veri bağlama",
-          "href": "/education/tests/quiz/tests-angular/module-03/test-07"
+          "href": "/education/lessons/angular/module-03/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Structural Directives",
           "description": "*ngIf, *ngFor, *ngSwitch kullanımı",
-          "href": "/education/tests/quiz/tests-angular/module-03/test-08"
+          "href": "/education/lessons/angular/module-03/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Attribute Directives",
           "description": "ngClass, ngStyle kullanımı",
-          "href": "/education/tests/quiz/tests-angular/module-03/test-09"
+          "href": "/education/lessons/angular/module-03/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Component Lifecycle",
           "description": "Lifecycle hooks ve kullanım senaryoları",
-          "href": "/education/tests/quiz/tests-angular/module-03/test-10"
+          "href": "/education/lessons/angular/module-03/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: ViewChild ve ContentChild",
           "description": "Child component'lere erişim",
-          "href": "/education/tests/quiz/tests-angular/module-03/test-11"
+          "href": "/education/lessons/angular/module-03/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Component Communication",
           "description": "@Input ve @Output ile iletişim",
-          "href": "/education/tests/quiz/tests-angular/module-03/test-12"
+          "href": "/education/lessons/angular/module-03/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Component Styling",
           "description": "Component styles ve ViewEncapsulation",
-          "href": "/education/tests/quiz/tests-angular/module-03/test-13"
+          "href": "/education/lessons/angular/module-03/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Dynamic Components",
           "description": "Dinamik component oluşturma",
-          "href": "/education/tests/quiz/tests-angular/module-03/test-14"
+          "href": "/education/lessons/angular/module-03/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Component Best Practices",
           "description": "Component tasarımında en iyi uygulamalar",
-          "href": "/education/tests/quiz/tests-angular/module-03/test-15"
+          "href": "/education/lessons/angular/module-03/lesson-15"
         }
       ]
     },
@@ -339,94 +339,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Service Nedir?",
           "description": "Service kavramı ve kullanım alanları",
-          "href": "/education/tests/quiz/tests-angular/module-04/test-01"
+          "href": "/education/lessons/angular/module-04/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Service Oluşturma",
           "description": "Yeni service oluşturma",
-          "href": "/education/tests/quiz/tests-angular/module-04/test-02"
+          "href": "/education/lessons/angular/module-04/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Dependency Injection Temelleri",
           "description": "DI kavramı ve Angular'da kullanımı",
-          "href": "/education/tests/quiz/tests-angular/module-04/test-03"
+          "href": "/education/lessons/angular/module-04/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Injectable Decorator",
           "description": "@Injectable ve providedIn kullanımı",
-          "href": "/education/tests/quiz/tests-angular/module-04/test-04"
+          "href": "/education/lessons/angular/module-04/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Provider Kavramı",
           "description": "Provider'lar ve servis kayıtları",
-          "href": "/education/tests/quiz/tests-angular/module-04/test-05"
+          "href": "/education/lessons/angular/module-04/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Root vs Component Level Providers",
           "description": "Provider scope'ları ve farkları",
-          "href": "/education/tests/quiz/tests-angular/module-04/test-06"
+          "href": "/education/lessons/angular/module-04/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Singleton Pattern",
           "description": "Singleton servisler ve kullanımı",
-          "href": "/education/tests/quiz/tests-angular/module-04/test-07"
+          "href": "/education/lessons/angular/module-04/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Service Injection",
           "description": "Constructor injection ve kullanımı",
-          "href": "/education/tests/quiz/tests-angular/module-04/test-08"
+          "href": "/education/lessons/angular/module-04/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Multiple Instances",
           "description": "Çoklu instance oluşturma",
-          "href": "/education/tests/quiz/tests-angular/module-04/test-09"
+          "href": "/education/lessons/angular/module-04/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Service Communication",
           "description": "Servisler arası iletişim",
-          "href": "/education/tests/quiz/tests-angular/module-04/test-10"
+          "href": "/education/lessons/angular/module-04/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Shared Services",
           "description": "Paylaşılan servisler ve state management",
-          "href": "/education/tests/quiz/tests-angular/module-04/test-11"
+          "href": "/education/lessons/angular/module-04/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Factory Providers",
           "description": "Factory function'lar ile servis oluşturma",
-          "href": "/education/tests/quiz/tests-angular/module-04/test-12"
+          "href": "/education/lessons/angular/module-04/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Value Providers",
           "description": "Value provider'lar ve kullanımı",
-          "href": "/education/tests/quiz/tests-angular/module-04/test-13"
+          "href": "/education/lessons/angular/module-04/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Optional Dependencies",
           "description": "@Optional ve @Inject kullanımı",
-          "href": "/education/tests/quiz/tests-angular/module-04/test-14"
+          "href": "/education/lessons/angular/module-04/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Service Best Practices",
           "description": "Service tasarımında en iyi uygulamalar",
-          "href": "/education/tests/quiz/tests-angular/module-04/test-15"
+          "href": "/education/lessons/angular/module-04/lesson-15"
         }
       ]
     },
@@ -443,94 +443,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Routing Temelleri",
           "description": "SPA routing kavramı ve Angular Router",
-          "href": "/education/tests/quiz/tests-angular/module-05/test-01"
+          "href": "/education/lessons/angular/module-05/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Router Module Yapılandırması",
           "description": "RouterModule import ve yapılandırma",
-          "href": "/education/tests/quiz/tests-angular/module-05/test-02"
+          "href": "/education/lessons/angular/module-05/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Route Tanımlama",
           "description": "Routes array ve path tanımlama",
-          "href": "/education/tests/quiz/tests-angular/module-05/test-03"
+          "href": "/education/lessons/angular/module-05/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Router Outlet",
           "description": "<router-outlet> kullanımı",
-          "href": "/education/tests/quiz/tests-angular/module-05/test-04"
+          "href": "/education/lessons/angular/module-05/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: RouterLink Directive",
           "description": "routerLink ile navigation",
-          "href": "/education/tests/quiz/tests-angular/module-05/test-05"
+          "href": "/education/lessons/angular/module-05/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Programmatic Navigation",
           "description": "Router service ile programatik navigation",
-          "href": "/education/tests/quiz/tests-angular/module-05/test-06"
+          "href": "/education/lessons/angular/module-05/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Route Parameters",
           "description": "Route parametreleri ve ActivatedRoute",
-          "href": "/education/tests/quiz/tests-angular/module-05/test-07"
+          "href": "/education/lessons/angular/module-05/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Query Parameters",
           "description": "Query string parametreleri",
-          "href": "/education/tests/quiz/tests-angular/module-05/test-08"
+          "href": "/education/lessons/angular/module-05/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Child Routes",
           "description": "Nested routing ve child routes",
-          "href": "/education/tests/quiz/tests-angular/module-05/test-09"
+          "href": "/education/lessons/angular/module-05/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Route Guards",
           "description": "CanActivate, CanDeactivate guards",
-          "href": "/education/tests/quiz/tests-angular/module-05/test-10"
+          "href": "/education/lessons/angular/module-05/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Resolve Guards",
           "description": "Resolve guard ile data preloading",
-          "href": "/education/tests/quiz/tests-angular/module-05/test-11"
+          "href": "/education/lessons/angular/module-05/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Lazy Loading",
           "description": "Lazy loading modules ve routing",
-          "href": "/education/tests/quiz/tests-angular/module-05/test-12"
+          "href": "/education/lessons/angular/module-05/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Wildcard Routes",
           "description": "404 sayfası ve wildcard routing",
-          "href": "/education/tests/quiz/tests-angular/module-05/test-13"
+          "href": "/education/lessons/angular/module-05/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Route Animations",
           "description": "Route transition animasyonları",
-          "href": "/education/tests/quiz/tests-angular/module-05/test-14"
+          "href": "/education/lessons/angular/module-05/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Routing Best Practices",
           "description": "Routing tasarımında en iyi uygulamalar",
-          "href": "/education/tests/quiz/tests-angular/module-05/test-15"
+          "href": "/education/lessons/angular/module-05/lesson-15"
         }
       ]
     },
@@ -547,94 +547,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Reactive Programming",
           "description": "Reactive programming kavramı",
-          "href": "/education/tests/quiz/tests-angular/module-06/test-01"
+          "href": "/education/lessons/angular/module-06/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Observables Nedir?",
           "description": "Observable pattern ve kullanımı",
-          "href": "/education/tests/quiz/tests-angular/module-06/test-02"
+          "href": "/education/lessons/angular/module-06/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Observables vs Promises",
           "description": "İki pattern'in karşılaştırması",
-          "href": "/education/tests/quiz/tests-angular/module-06/test-03"
+          "href": "/education/lessons/angular/module-06/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Observable Oluşturma",
           "description": "of, from, create ile observable oluşturma",
-          "href": "/education/tests/quiz/tests-angular/module-06/test-04"
+          "href": "/education/lessons/angular/module-06/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Subscription ve Unsubscribe",
           "description": "Subscribe ve memory leak önleme",
-          "href": "/education/tests/quiz/tests-angular/module-06/test-05"
+          "href": "/education/lessons/angular/module-06/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Map ve Filter Operators",
           "description": "Transformation ve filtering operators",
-          "href": "/education/tests/quiz/tests-angular/module-06/test-06"
+          "href": "/education/lessons/angular/module-06/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Merge ve Concat",
           "description": "Observable birleştirme operators",
-          "href": "/education/tests/quiz/tests-angular/module-06/test-07"
+          "href": "/education/lessons/angular/module-06/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: SwitchMap ve MergeMap",
           "description": "Higher-order mapping operators",
-          "href": "/education/tests/quiz/tests-angular/module-06/test-08"
+          "href": "/education/lessons/angular/module-06/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Debounce ve Throttle",
           "description": "Time-based operators",
-          "href": "/education/tests/quiz/tests-angular/module-06/test-09"
+          "href": "/education/lessons/angular/module-06/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Subjects",
           "description": "Subject, BehaviorSubject, ReplaySubject",
-          "href": "/education/tests/quiz/tests-angular/module-06/test-10"
+          "href": "/education/lessons/angular/module-06/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Async Pipe",
           "description": "async pipe ile template'te kullanım",
-          "href": "/education/tests/quiz/tests-angular/module-06/test-11"
+          "href": "/education/lessons/angular/module-06/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Error Handling",
           "description": "catchError ve retry operators",
-          "href": "/education/tests/quiz/tests-angular/module-06/test-12"
+          "href": "/education/lessons/angular/module-06/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Custom Operators",
           "description": "Kendi operator'larınızı yazma",
-          "href": "/education/tests/quiz/tests-angular/module-06/test-13"
+          "href": "/education/lessons/angular/module-06/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: RxJS Best Practices",
           "description": "RxJS kullanımında en iyi uygulamalar",
-          "href": "/education/tests/quiz/tests-angular/module-06/test-14"
+          "href": "/education/lessons/angular/module-06/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: RxJS Testing",
           "description": "Observable'ları test etme",
-          "href": "/education/tests/quiz/tests-angular/module-06/test-15"
+          "href": "/education/lessons/angular/module-06/lesson-15"
         }
       ]
     },
@@ -651,94 +651,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Forms Temelleri",
           "description": "Angular forms ve yaklaşımlar",
-          "href": "/education/tests/quiz/tests-angular/module-07/test-01"
+          "href": "/education/lessons/angular/module-07/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Template-Driven Forms",
           "description": "NgForm ve template-driven yaklaşım",
-          "href": "/education/tests/quiz/tests-angular/module-07/test-02"
+          "href": "/education/lessons/angular/module-07/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Two-Way Binding ile Forms",
           "description": "ngModel ile form binding",
-          "href": "/education/tests/quiz/tests-angular/module-07/test-03"
+          "href": "/education/lessons/angular/module-07/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Reactive Forms Giriş",
           "description": "FormBuilder ve FormGroup",
-          "href": "/education/tests/quiz/tests-angular/module-07/test-04"
+          "href": "/education/lessons/angular/module-07/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: FormControl ve FormArray",
           "description": "FormControl ve FormArray kullanımı",
-          "href": "/education/tests/quiz/tests-angular/module-07/test-05"
+          "href": "/education/lessons/angular/module-07/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Built-in Validators",
           "description": "required, email, min, max validators",
-          "href": "/education/tests/quiz/tests-angular/module-07/test-06"
+          "href": "/education/lessons/angular/module-07/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Custom Validators",
           "description": "Kendi validator fonksiyonlarınızı yazma",
-          "href": "/education/tests/quiz/tests-angular/module-07/test-07"
+          "href": "/education/lessons/angular/module-07/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Async Validators",
           "description": "Asenkron validation işlemleri",
-          "href": "/education/tests/quiz/tests-angular/module-07/test-08"
+          "href": "/education/lessons/angular/module-07/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Form Status ve Errors",
           "description": "Form state yönetimi ve hata gösterimi",
-          "href": "/education/tests/quiz/tests-angular/module-07/test-09"
+          "href": "/education/lessons/angular/module-07/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Dynamic Forms",
           "description": "Dinamik form alanları oluşturma",
-          "href": "/education/tests/quiz/tests-angular/module-07/test-10"
+          "href": "/education/lessons/angular/module-07/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Nested FormGroups",
           "description": "İç içe form grupları",
-          "href": "/education/tests/quiz/tests-angular/module-07/test-11"
+          "href": "/education/lessons/angular/module-07/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Form Submission",
           "description": "Form gönderimi ve veri işleme",
-          "href": "/education/tests/quiz/tests-angular/module-07/test-12"
+          "href": "/education/lessons/angular/module-07/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Form Reset ve Pristine",
           "description": "Form sıfırlama ve state yönetimi",
-          "href": "/education/tests/quiz/tests-angular/module-07/test-13"
+          "href": "/education/lessons/angular/module-07/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: FormArray ile Dinamik Listeler",
           "description": "FormArray ile dinamik form alanları",
-          "href": "/education/tests/quiz/tests-angular/module-07/test-14"
+          "href": "/education/lessons/angular/module-07/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Forms Best Practices",
           "description": "Form tasarımında en iyi uygulamalar",
-          "href": "/education/tests/quiz/tests-angular/module-07/test-15"
+          "href": "/education/lessons/angular/module-07/lesson-15"
         }
       ]
     },
@@ -755,94 +755,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: HttpClient Giriş",
           "description": "HttpClientModule ve yapılandırma",
-          "href": "/education/tests/quiz/tests-angular/module-08/test-01"
+          "href": "/education/lessons/angular/module-08/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: GET Request",
           "description": "GET isteği yapma ve veri çekme",
-          "href": "/education/tests/quiz/tests-angular/module-08/test-02"
+          "href": "/education/lessons/angular/module-08/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: POST Request",
           "description": "POST isteği ile veri gönderme",
-          "href": "/education/tests/quiz/tests-angular/module-08/test-03"
+          "href": "/education/lessons/angular/module-08/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: PUT ve DELETE Request",
           "description": "PUT ve DELETE istekleri",
-          "href": "/education/tests/quiz/tests-angular/module-08/test-04"
+          "href": "/education/lessons/angular/module-08/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Request Options",
           "description": "Headers, params ve options",
-          "href": "/education/tests/quiz/tests-angular/module-08/test-05"
+          "href": "/education/lessons/angular/module-08/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Response Types",
           "description": "JSON, text, blob response tipleri",
-          "href": "/education/tests/quiz/tests-angular/module-08/test-06"
+          "href": "/education/lessons/angular/module-08/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Error Handling",
           "description": "HttpErrorResponse ve hata yönetimi",
-          "href": "/education/tests/quiz/tests-angular/module-08/test-07"
+          "href": "/education/lessons/angular/module-08/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Retry ve Timeout",
           "description": "Retry logic ve timeout yönetimi",
-          "href": "/education/tests/quiz/tests-angular/module-08/test-08"
+          "href": "/education/lessons/angular/module-08/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: HTTP Interceptors",
           "description": "Interceptor'lar ve kullanım senaryoları",
-          "href": "/education/tests/quiz/tests-angular/module-08/test-09"
+          "href": "/education/lessons/angular/module-08/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Auth Interceptor",
           "description": "Token ekleme ve authentication",
-          "href": "/education/tests/quiz/tests-angular/module-08/test-10"
+          "href": "/education/lessons/angular/module-08/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Error Interceptor",
           "description": "Global error handling interceptor",
-          "href": "/education/tests/quiz/tests-angular/module-08/test-11"
+          "href": "/education/lessons/angular/module-08/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Loading Interceptor",
           "description": "Loading state yönetimi",
-          "href": "/education/tests/quiz/tests-angular/module-08/test-12"
+          "href": "/education/lessons/angular/module-08/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Caching Strategies",
           "description": "HTTP response caching",
-          "href": "/education/tests/quiz/tests-angular/module-08/test-13"
+          "href": "/education/lessons/angular/module-08/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Progress Events",
           "description": "Upload/download progress tracking",
-          "href": "/education/tests/quiz/tests-angular/module-08/test-14"
+          "href": "/education/lessons/angular/module-08/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: HTTP Best Practices",
           "description": "HTTP client kullanımında en iyi uygulamalar",
-          "href": "/education/tests/quiz/tests-angular/module-08/test-15"
+          "href": "/education/lessons/angular/module-08/lesson-15"
         }
       ]
     },
@@ -859,94 +859,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Pipes Nedir?",
           "description": "Pipe kavramı ve kullanım alanları",
-          "href": "/education/tests/quiz/tests-angular/module-09/test-01"
+          "href": "/education/lessons/angular/module-09/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Built-in Pipes",
           "description": "DatePipe, CurrencyPipe, DecimalPipe",
-          "href": "/education/tests/quiz/tests-angular/module-09/test-02"
+          "href": "/education/lessons/angular/module-09/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: String Pipes",
           "description": "UpperCasePipe, LowerCasePipe, TitleCasePipe",
-          "href": "/education/tests/quiz/tests-angular/module-09/test-03"
+          "href": "/education/lessons/angular/module-09/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Async Pipe",
           "description": "AsyncPipe ile observable handling",
-          "href": "/education/tests/quiz/tests-angular/module-09/test-04"
+          "href": "/education/lessons/angular/module-09/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Custom Pipe Oluşturma",
           "description": "@Pipe decorator ile custom pipe",
-          "href": "/education/tests/quiz/tests-angular/module-09/test-05"
+          "href": "/education/lessons/angular/module-09/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Pipe Parameters",
           "description": "Pipe'lara parametre geçirme",
-          "href": "/education/tests/quiz/tests-angular/module-09/test-06"
+          "href": "/education/lessons/angular/module-09/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Pure vs Impure Pipes",
           "description": "Pipe performansı ve pure/impure",
-          "href": "/education/tests/quiz/tests-angular/module-09/test-07"
+          "href": "/education/lessons/angular/module-09/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Directives Giriş",
           "description": "Directive türleri ve kullanımı",
-          "href": "/education/tests/quiz/tests-angular/module-09/test-08"
+          "href": "/education/lessons/angular/module-09/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Structural Directives",
           "description": "*ngIf, *ngFor gibi structural directives",
-          "href": "/education/tests/quiz/tests-angular/module-09/test-09"
+          "href": "/education/lessons/angular/module-09/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Custom Structural Directive",
           "description": "Kendi structural directive'inizi yazma",
-          "href": "/education/tests/quiz/tests-angular/module-09/test-10"
+          "href": "/education/lessons/angular/module-09/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Attribute Directives",
           "description": "ngClass, ngStyle attribute directives",
-          "href": "/education/tests/quiz/tests-angular/module-09/test-11"
+          "href": "/education/lessons/angular/module-09/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Custom Attribute Directive",
           "description": "Kendi attribute directive'inizi yazma",
-          "href": "/education/tests/quiz/tests-angular/module-09/test-12"
+          "href": "/education/lessons/angular/module-09/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: HostListener ve HostBinding",
           "description": "Host element event ve property binding",
-          "href": "/education/tests/quiz/tests-angular/module-09/test-13"
+          "href": "/education/lessons/angular/module-09/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Directive Communication",
           "description": "Directive'ler arası iletişim",
-          "href": "/education/tests/quiz/tests-angular/module-09/test-14"
+          "href": "/education/lessons/angular/module-09/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Pipes ve Directives Best Practices",
           "description": "Pipes ve directives kullanımında en iyi uygulamalar",
-          "href": "/education/tests/quiz/tests-angular/module-09/test-15"
+          "href": "/education/lessons/angular/module-09/lesson-15"
         }
       ]
     },
@@ -963,94 +963,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: State Management Nedir?",
           "description": "State management kavramı ve ihtiyaç",
-          "href": "/education/tests/quiz/tests-angular/module-10/test-01"
+          "href": "/education/lessons/angular/module-10/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Component State",
           "description": "Component içi state yönetimi",
-          "href": "/education/tests/quiz/tests-angular/module-10/test-02"
+          "href": "/education/lessons/angular/module-10/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Service-Based State",
           "description": "Service ile state yönetimi",
-          "href": "/education/tests/quiz/tests-angular/module-10/test-03"
+          "href": "/education/lessons/angular/module-10/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: BehaviorSubject ile State",
           "description": "RxJS ile reactive state",
-          "href": "/education/tests/quiz/tests-angular/module-10/test-04"
+          "href": "/education/lessons/angular/module-10/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: NgRx Giriş",
           "description": "NgRx kütüphanesi ve Redux pattern",
-          "href": "/education/tests/quiz/tests-angular/module-10/test-05"
+          "href": "/education/lessons/angular/module-10/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Store ve Actions",
           "description": "NgRx Store ve Action'lar",
-          "href": "/education/tests/quiz/tests-angular/module-10/test-06"
+          "href": "/education/lessons/angular/module-10/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Reducers",
           "description": "Reducer fonksiyonları ve state güncelleme",
-          "href": "/education/tests/quiz/tests-angular/module-10/test-07"
+          "href": "/education/lessons/angular/module-10/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Selectors",
           "description": "Selector'lar ile state seçimi",
-          "href": "/education/tests/quiz/tests-angular/module-10/test-08"
+          "href": "/education/lessons/angular/module-10/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Effects",
           "description": "NgRx Effects ile side effects",
-          "href": "/education/tests/quiz/tests-angular/module-10/test-09"
+          "href": "/education/lessons/angular/module-10/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Entity Adapter",
           "description": "EntityAdapter ile collection yönetimi",
-          "href": "/education/tests/quiz/tests-angular/module-10/test-10"
+          "href": "/education/lessons/angular/module-10/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Feature Modules",
           "description": "Feature-based state organization",
-          "href": "/education/tests/quiz/tests-angular/module-10/test-11"
+          "href": "/education/lessons/angular/module-10/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: DevTools",
           "description": "Redux DevTools ile debugging",
-          "href": "/education/tests/quiz/tests-angular/module-10/test-12"
+          "href": "/education/lessons/angular/module-10/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: State Management Patterns",
           "description": "Farklı state management pattern'leri",
-          "href": "/education/tests/quiz/tests-angular/module-10/test-13"
+          "href": "/education/lessons/angular/module-10/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: When to Use NgRx",
           "description": "NgRx kullanım senaryoları",
-          "href": "/education/tests/quiz/tests-angular/module-10/test-14"
+          "href": "/education/lessons/angular/module-10/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: State Management Best Practices",
           "description": "State management en iyi uygulamaları",
-          "href": "/education/tests/quiz/tests-angular/module-10/test-15"
+          "href": "/education/lessons/angular/module-10/lesson-15"
         }
       ]
     },
@@ -1067,94 +1067,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Testing Temelleri",
           "description": "Testing kavramı ve Angular testing",
-          "href": "/education/tests/quiz/tests-angular/module-11/test-01"
+          "href": "/education/lessons/angular/module-11/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Jasmine ve Karma",
           "description": "Testing framework'leri",
-          "href": "/education/tests/quiz/tests-angular/module-11/test-02"
+          "href": "/education/lessons/angular/module-11/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: TestBed Yapılandırması",
           "description": "TestBed ile test ortamı kurulumu",
-          "href": "/education/tests/quiz/tests-angular/module-11/test-03"
+          "href": "/education/lessons/angular/module-11/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Component Testing",
           "description": "Component testleri yazma",
-          "href": "/education/tests/quiz/tests-angular/module-11/test-04"
+          "href": "/education/lessons/angular/module-11/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Component DOM Testing",
           "description": "DOM element'lerini test etme",
-          "href": "/education/tests/quiz/tests-angular/module-11/test-05"
+          "href": "/education/lessons/angular/module-11/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Service Testing",
           "description": "Service testleri yazma",
-          "href": "/education/tests/quiz/tests-angular/module-11/test-06"
+          "href": "/education/lessons/angular/module-11/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: HTTP Testing",
           "description": "HttpTestingController ile HTTP testleri",
-          "href": "/education/tests/quiz/tests-angular/module-11/test-07"
+          "href": "/education/lessons/angular/module-11/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Router Testing",
           "description": "Router ve navigation testleri",
-          "href": "/education/tests/quiz/tests-angular/module-11/test-08"
+          "href": "/education/lessons/angular/module-11/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Form Testing",
           "description": "Form ve validation testleri",
-          "href": "/education/tests/quiz/tests-angular/module-11/test-09"
+          "href": "/education/lessons/angular/module-11/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Async Testing",
           "description": "Asenkron işlemlerin test edilmesi",
-          "href": "/education/tests/quiz/tests-angular/module-11/test-10"
+          "href": "/education/lessons/angular/module-11/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Mocking ve Spies",
           "description": "Jasmine spies ve mock objeler",
-          "href": "/education/tests/quiz/tests-angular/module-11/test-11"
+          "href": "/education/lessons/angular/module-11/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Code Coverage",
           "description": "Test coverage analizi",
-          "href": "/education/tests/quiz/tests-angular/module-11/test-12"
+          "href": "/education/lessons/angular/module-11/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: E2E Testing",
           "description": "Protractor ve Cypress ile E2E testler",
-          "href": "/education/tests/quiz/tests-angular/module-11/test-13"
+          "href": "/education/lessons/angular/module-11/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Testing Best Practices",
           "description": "Test yazma en iyi uygulamaları",
-          "href": "/education/tests/quiz/tests-angular/module-11/test-14"
+          "href": "/education/lessons/angular/module-11/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Test-Driven Development",
           "description": "TDD yaklaşımı ve Angular'da uygulama",
-          "href": "/education/tests/quiz/tests-angular/module-11/test-15"
+          "href": "/education/lessons/angular/module-11/lesson-15"
         }
       ]
     },
@@ -1171,94 +1171,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Performance Temelleri",
           "description": "Web uygulaması performans metrikleri",
-          "href": "/education/tests/quiz/tests-angular/module-12/test-01"
+          "href": "/education/lessons/angular/module-12/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Change Detection",
           "description": "Angular change detection mekanizması",
-          "href": "/education/tests/quiz/tests-angular/module-12/test-02"
+          "href": "/education/lessons/angular/module-12/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: OnPush Change Detection",
           "description": "OnPush strategy ve kullanımı",
-          "href": "/education/tests/quiz/tests-angular/module-12/test-03"
+          "href": "/education/lessons/angular/module-12/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Detach ve Reattach",
           "description": "ChangeDetectorRef ile manuel kontrol",
-          "href": "/education/tests/quiz/tests-angular/module-12/test-04"
+          "href": "/education/lessons/angular/module-12/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: TrackBy Functions",
           "description": "*ngFor ile trackBy kullanımı",
-          "href": "/education/tests/quiz/tests-angular/module-12/test-05"
+          "href": "/education/lessons/angular/module-12/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Lazy Loading Modules",
           "description": "Lazy loading ile bundle size azaltma",
-          "href": "/education/tests/quiz/tests-angular/module-12/test-06"
+          "href": "/education/lessons/angular/module-12/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: AOT Compilation",
           "description": "Ahead-of-Time compilation avantajları",
-          "href": "/education/tests/quiz/tests-angular/module-12/test-07"
+          "href": "/education/lessons/angular/module-12/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Tree Shaking",
           "description": "Dead code elimination",
-          "href": "/education/tests/quiz/tests-angular/module-12/test-08"
+          "href": "/education/lessons/angular/module-12/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Bundle Analysis",
           "description": "Webpack bundle analyzer",
-          "href": "/education/tests/quiz/tests-angular/module-12/test-09"
+          "href": "/education/lessons/angular/module-12/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Code Splitting",
           "description": "Code splitting stratejileri",
-          "href": "/education/tests/quiz/tests-angular/module-12/test-10"
+          "href": "/education/lessons/angular/module-12/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Virtual Scrolling",
           "description": "CDK Virtual Scrolling",
-          "href": "/education/tests/quiz/tests-angular/module-12/test-11"
+          "href": "/education/lessons/angular/module-12/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Image Optimization",
           "description": "Lazy loading images ve optimization",
-          "href": "/education/tests/quiz/tests-angular/module-12/test-12"
+          "href": "/education/lessons/angular/module-12/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Service Workers",
           "description": "PWA ve service worker caching",
-          "href": "/education/tests/quiz/tests-angular/module-12/test-13"
+          "href": "/education/lessons/angular/module-12/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Performance Monitoring",
           "description": "Performance monitoring araçları",
-          "href": "/education/tests/quiz/tests-angular/module-12/test-14"
+          "href": "/education/lessons/angular/module-12/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Performance Best Practices",
           "description": "Performance optimizasyon en iyi uygulamaları",
-          "href": "/education/tests/quiz/tests-angular/module-12/test-15"
+          "href": "/education/lessons/angular/module-12/lesson-15"
         }
       ]
     },
@@ -1275,94 +1275,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Angular Material Giriş",
           "description": "Material Design ve Angular Material",
-          "href": "/education/tests/quiz/tests-angular/module-13/test-01"
+          "href": "/education/lessons/angular/module-13/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Material Components",
           "description": "Button, Card, Dialog gibi component'ler",
-          "href": "/education/tests/quiz/tests-angular/module-13/test-02"
+          "href": "/education/lessons/angular/module-13/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Material Forms",
           "description": "Material form component'leri",
-          "href": "/education/tests/quiz/tests-angular/module-13/test-03"
+          "href": "/education/lessons/angular/module-13/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Material Navigation",
           "description": "Sidenav, toolbar, menu component'leri",
-          "href": "/education/tests/quiz/tests-angular/module-13/test-04"
+          "href": "/education/lessons/angular/module-13/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Angular Animations",
           "description": "BrowserAnimationsModule ve animations",
-          "href": "/education/tests/quiz/tests-angular/module-13/test-05"
+          "href": "/education/lessons/angular/module-13/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Animation Triggers",
           "description": "Trigger, state, transition tanımlama",
-          "href": "/education/tests/quiz/tests-angular/module-13/test-06"
+          "href": "/education/lessons/angular/module-13/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Route Animations",
           "description": "Route transition animasyonları",
-          "href": "/education/tests/quiz/tests-angular/module-13/test-07"
+          "href": "/education/lessons/angular/module-13/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Internationalization (i18n)",
           "description": "Çoklu dil desteği ve i18n",
-          "href": "/education/tests/quiz/tests-angular/module-13/test-08"
+          "href": "/education/lessons/angular/module-13/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: PWA Temelleri",
           "description": "Progressive Web App kavramı",
-          "href": "/education/tests/quiz/tests-angular/module-13/test-09"
+          "href": "/education/lessons/angular/module-13/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Service Workers",
           "description": "Service worker ve offline support",
-          "href": "/education/tests/quiz/tests-angular/module-13/test-10"
+          "href": "/education/lessons/angular/module-13/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Server-Side Rendering",
           "description": "Angular Universal ve SSR",
-          "href": "/education/tests/quiz/tests-angular/module-13/test-11"
+          "href": "/education/lessons/angular/module-13/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Micro Frontends",
           "description": "Micro frontend architecture",
-          "href": "/education/tests/quiz/tests-angular/module-13/test-12"
+          "href": "/education/lessons/angular/module-13/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Angular Elements",
           "description": "Web Components ve Angular Elements",
-          "href": "/education/tests/quiz/tests-angular/module-13/test-13"
+          "href": "/education/lessons/angular/module-13/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Schematics",
           "description": "Custom schematics oluşturma",
-          "href": "/education/tests/quiz/tests-angular/module-13/test-14"
+          "href": "/education/lessons/angular/module-13/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Enterprise Patterns",
           "description": "Enterprise uygulama pattern'leri",
-          "href": "/education/tests/quiz/tests-angular/module-13/test-15"
+          "href": "/education/lessons/angular/module-13/lesson-15"
         }
       ]
     },
@@ -1379,94 +1379,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Code Organization",
           "description": "Proje yapısı ve dosya organizasyonu",
-          "href": "/education/tests/quiz/tests-angular/module-14/test-01"
+          "href": "/education/lessons/angular/module-14/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Feature Modules",
           "description": "Feature-based module organization",
-          "href": "/education/tests/quiz/tests-angular/module-14/test-02"
+          "href": "/education/lessons/angular/module-14/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Shared Modules",
           "description": "Shared module pattern ve kullanımı",
-          "href": "/education/tests/quiz/tests-angular/module-14/test-03"
+          "href": "/education/lessons/angular/module-14/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Core Module",
           "description": "Core module ve singleton services",
-          "href": "/education/tests/quiz/tests-angular/module-14/test-04"
+          "href": "/education/lessons/angular/module-14/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Naming Conventions",
           "description": "Angular naming conventions",
-          "href": "/education/tests/quiz/tests-angular/module-14/test-05"
+          "href": "/education/lessons/angular/module-14/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Component Design",
           "description": "Component tasarım prensipleri",
-          "href": "/education/tests/quiz/tests-angular/module-14/test-06"
+          "href": "/education/lessons/angular/module-14/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Service Design",
           "description": "Service tasarım ve sorumlulukları",
-          "href": "/education/tests/quiz/tests-angular/module-14/test-07"
+          "href": "/education/lessons/angular/module-14/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Error Handling Strategies",
           "description": "Global error handling ve strategies",
-          "href": "/education/tests/quiz/tests-angular/module-14/test-08"
+          "href": "/education/lessons/angular/module-14/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Logging Best Practices",
           "description": "Logging stratejileri ve tools",
-          "href": "/education/tests/quiz/tests-angular/module-14/test-09"
+          "href": "/education/lessons/angular/module-14/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Security Best Practices",
           "description": "XSS, CSRF ve güvenlik önlemleri",
-          "href": "/education/tests/quiz/tests-angular/module-14/test-10"
+          "href": "/education/lessons/angular/module-14/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Code Review Guidelines",
           "description": "Code review checklist ve guidelines",
-          "href": "/education/tests/quiz/tests-angular/module-14/test-11"
+          "href": "/education/lessons/angular/module-14/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Documentation",
           "description": "Kod dokümantasyonu ve JSDoc",
-          "href": "/education/tests/quiz/tests-angular/module-14/test-12"
+          "href": "/education/lessons/angular/module-14/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Refactoring Techniques",
           "description": "Kod refactoring teknikleri",
-          "href": "/education/tests/quiz/tests-angular/module-14/test-13"
+          "href": "/education/lessons/angular/module-14/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Technical Debt",
           "description": "Technical debt yönetimi",
-          "href": "/education/tests/quiz/tests-angular/module-14/test-14"
+          "href": "/education/lessons/angular/module-14/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Continuous Improvement",
           "description": "Sürekli iyileştirme kültürü",
-          "href": "/education/tests/quiz/tests-angular/module-14/test-15"
+          "href": "/education/lessons/angular/module-14/lesson-15"
         }
       ]
     },
@@ -1483,94 +1483,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Proje Planlama",
           "description": "Proje gereksinimleri ve planlama",
-          "href": "/education/tests/quiz/tests-angular/module-15/test-01"
+          "href": "/education/lessons/angular/module-15/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Mimari Tasarım",
           "description": "Uygulama mimarisi tasarımı",
-          "href": "/education/tests/quiz/tests-angular/module-15/test-02"
+          "href": "/education/lessons/angular/module-15/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Component Hierarchy",
           "description": "Component yapısı ve hiyerarşi",
-          "href": "/education/tests/quiz/tests-angular/module-15/test-03"
+          "href": "/education/lessons/angular/module-15/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Routing Yapılandırması",
           "description": "Route yapılandırması ve lazy loading",
-          "href": "/education/tests/quiz/tests-angular/module-15/test-04"
+          "href": "/education/lessons/angular/module-15/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: State Management",
           "description": "State management implementasyonu",
-          "href": "/education/tests/quiz/tests-angular/module-15/test-05"
+          "href": "/education/lessons/angular/module-15/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: API Entegrasyonu",
           "description": "HTTP client ve API entegrasyonu",
-          "href": "/education/tests/quiz/tests-angular/module-15/test-06"
+          "href": "/education/lessons/angular/module-15/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Forms ve Validation",
           "description": "Form handling ve validation",
-          "href": "/education/tests/quiz/tests-angular/module-15/test-07"
+          "href": "/education/lessons/angular/module-15/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Authentication",
           "description": "Auth implementasyonu ve guards",
-          "href": "/education/tests/quiz/tests-angular/module-15/test-08"
+          "href": "/education/lessons/angular/module-15/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: UI/UX Implementation",
           "description": "Material Design ve UI implementation",
-          "href": "/education/tests/quiz/tests-angular/module-15/test-09"
+          "href": "/education/lessons/angular/module-15/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Error Handling",
           "description": "Kapsamlı error handling",
-          "href": "/education/tests/quiz/tests-angular/module-15/test-10"
+          "href": "/education/lessons/angular/module-15/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Testing Strategy",
           "description": "Test stratejisi ve implementasyonu",
-          "href": "/education/tests/quiz/tests-angular/module-15/test-11"
+          "href": "/education/lessons/angular/module-15/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Performance Optimization",
           "description": "Performance optimizasyonu",
-          "href": "/education/tests/quiz/tests-angular/module-15/test-12"
+          "href": "/education/lessons/angular/module-15/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Deployment Preparation",
           "description": "Production build ve deployment",
-          "href": "/education/tests/quiz/tests-angular/module-15/test-13"
+          "href": "/education/lessons/angular/module-15/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Documentation",
           "description": "Proje dokümantasyonu",
-          "href": "/education/tests/quiz/tests-angular/module-15/test-14"
+          "href": "/education/lessons/angular/module-15/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Project Review ve Presentation",
           "description": "Proje incelemesi ve sunumu",
-          "href": "/education/tests/quiz/tests-angular/module-15/test-15"
+          "href": "/education/lessons/angular/module-15/lesson-15"
         }
       ]
     }

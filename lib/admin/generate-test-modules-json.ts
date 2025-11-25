@@ -60,19 +60,26 @@ export async function generateTestModulesJson(
   try {
     let courseContent: CourseContent | null = null;
 
-    // Önce veritabanından kursu oku
-    const course = await db.course.findUnique({
-      where: { id: courseId },
-      select: { content: true },
-    });
+    // Önce veritabanından kursu okumayı dene (veritabanı bağlantısı varsa)
+    try {
+      const course = await db.course.findUnique({
+        where: { id: courseId },
+        select: { content: true },
+      });
 
-    if (course && course.content) {
-      courseContent = course.content as CourseContent;
-    } else if (courseContentGenerator) {
-      // Veritabanında yoksa kurs oluşturma fonksiyonunu kullan
-      console.log(`Kurs veritabanında bulunamadı, kurs oluşturma fonksiyonu kullanılıyor: ${courseId}`);
+      if (course && course.content) {
+        courseContent = course.content as CourseContent;
+      }
+    } catch (dbError: any) {
+      // Veritabanı bağlantısı yoksa veya hata varsa, generator kullan
+      console.log(`Veritabanı bağlantısı yok veya kurs bulunamadı, kurs oluşturma fonksiyonu kullanılıyor: ${courseId}`);
+    }
+
+    // Veritabanından alınamadıysa ve generator varsa, generator'ı kullan
+    if (!courseContent && courseContentGenerator) {
+      console.log(`Kurs oluşturma fonksiyonu kullanılıyor: ${courseId}`);
       courseContent = await courseContentGenerator();
-    } else {
+    } else if (!courseContent) {
       return {
         success: false,
         error: `Kurs bulunamadı ve kurs oluşturma fonksiyonu sağlanmadı: ${courseId}`,

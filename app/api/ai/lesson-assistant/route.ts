@@ -439,15 +439,27 @@ export async function POST(request: Request) {
       userMessage = "Merhaba! Bu dersi öğrenmeye hazırım. Bana dersi anlatabilir misin?";
     }
 
+    // Prepare context for AI (roadmap and progress)
+    const context = {
+      roadmap: roadmap || null,
+      progress: progress || null,
+    };
+
     // Send message to assistant
     let response;
     try {
-      console.log("[LESSON-ASSISTANT] Mesaj gönderiliyor...");
+      console.log("[LESSON-ASSISTANT] Mesaj gönderiliyor...", {
+        hasRoadmap: !!context.roadmap,
+        hasProgress: !!context.progress,
+        currentStep: context.progress?.step,
+        stepStatus: context.progress?.status,
+      });
       response = await sendMessageToLessonAssistant(
         userId,
         lessonSlug,
         userMessage,
-        assistantId
+        assistantId,
+        context
       );
       console.log("[LESSON-ASSISTANT] Yanıt alındı, uzunluk:", response.content.length);
     } catch (error) {

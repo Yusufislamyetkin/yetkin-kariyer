@@ -26,94 +26,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: .NET Core Nedir",
           "description": ".NET Core'un temel tanımı ve genel bakış",
-          "href": "/education/tests/quiz/tests-net-core/module-01/test-01"
+          "href": "/education/lessons/dotnet-core/module-01/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: .NET Core diğer backend teknolojilerinden farkı nedir?",
           "description": ".NET Core'un Node.js, Python, Java gibi teknolojilerden farkları",
-          "href": "/education/tests/quiz/tests-net-core/module-01/test-02"
+          "href": "/education/lessons/dotnet-core/module-01/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: .NET Core'un Tarihçesi ve Gelişimi",
           "description": ".NET Core'un ortaya çıkışı ve versiyon geçmişi",
-          "href": "/education/tests/quiz/tests-net-core/module-01/test-03"
+          "href": "/education/lessons/dotnet-core/module-01/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: .NET Core vs .NET Framework",
           "description": "İki framework arasındaki temel farklar ve karşılaştırma",
-          "href": "/education/tests/quiz/tests-net-core/module-01/test-04"
+          "href": "/education/lessons/dotnet-core/module-01/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: .NET Core'un Avantajları",
           "description": "Performans, açık kaynak, platform bağımsızlığı gibi avantajlar",
-          "href": "/education/tests/quiz/tests-net-core/module-01/test-05"
+          "href": "/education/lessons/dotnet-core/module-01/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: .NET Core Kullanım Alanları",
           "description": "Web API, mikroservisler, cloud uygulamaları gibi kullanım senaryoları",
-          "href": "/education/tests/quiz/tests-net-core/module-01/test-06"
+          "href": "/education/lessons/dotnet-core/module-01/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: .NET Core Ekosistemi",
           "description": "NuGet paketleri, topluluk desteği ve ekosistem",
-          "href": "/education/tests/quiz/tests-net-core/module-01/test-07"
+          "href": "/education/lessons/dotnet-core/module-01/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: .NET Core Lisanslama",
           "description": "MIT lisansı ve ticari kullanım hakları",
-          "href": "/education/tests/quiz/tests-net-core/module-01/test-08"
+          "href": "/education/lessons/dotnet-core/module-01/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: .NET Core Topluluk Desteği",
           "description": "Açık kaynak topluluğu ve katkı süreçleri",
-          "href": "/education/tests/quiz/tests-net-core/module-01/test-09"
+          "href": "/education/lessons/dotnet-core/module-01/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: .NET Core'un Geleceği",
           "description": ".NET 5, .NET 6+ ve gelecek planları",
-          "href": "/education/tests/quiz/tests-net-core/module-01/test-10"
+          "href": "/education/lessons/dotnet-core/module-01/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: .NET Core Kurulum Gereksinimleri",
           "description": "Sistem gereksinimleri ve desteklenen platformlar",
-          "href": "/education/tests/quiz/tests-net-core/module-01/test-11"
+          "href": "/education/lessons/dotnet-core/module-01/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: .NET Core ile Neler Yapılabilir?",
           "description": "Web, mobil, desktop ve cloud uygulamaları",
-          "href": "/education/tests/quiz/tests-net-core/module-01/test-12"
+          "href": "/education/lessons/dotnet-core/module-01/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: .NET Core Performans Özellikleri",
           "description": "Yüksek performans ve ölçeklenebilirlik özellikleri",
-          "href": "/education/tests/quiz/tests-net-core/module-01/test-13"
+          "href": "/education/lessons/dotnet-core/module-01/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: .NET Core Güvenlik Özellikleri",
           "description": "Güvenlik mekanizmaları ve en iyi uygulamalar",
-          "href": "/education/tests/quiz/tests-net-core/module-01/test-14"
+          "href": "/education/lessons/dotnet-core/module-01/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Modül Özeti ve Değerlendirme",
           "description": "Modül kapsamında öğrenilenlerin özeti ve değerlendirme",
-          "href": "/education/tests/quiz/tests-net-core/module-01/test-15"
+          "href": "/education/lessons/dotnet-core/module-01/lesson-15"
         }
       ]
     },
@@ -130,94 +130,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: C# Diline Giriş",
           "description": "C# programlama dilinin temel özellikleri",
-          "href": "/education/tests/quiz/tests-net-core/module-02/test-01"
+          "href": "/education/lessons/dotnet-core/module-02/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Veri Tipleri ve Değişkenler",
           "description": "int, string, bool gibi temel veri tipleri",
-          "href": "/education/tests/quiz/tests-net-core/module-02/test-02"
+          "href": "/education/lessons/dotnet-core/module-02/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Operatörler",
           "description": "Aritmetik, karşılaştırma ve mantıksal operatörler",
-          "href": "/education/tests/quiz/tests-net-core/module-02/test-03"
+          "href": "/education/lessons/dotnet-core/module-02/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Koşul İfadeleri (if-else)",
           "description": "Koşullu programlama ve if-else yapıları",
-          "href": "/education/tests/quiz/tests-net-core/module-02/test-04"
+          "href": "/education/lessons/dotnet-core/module-02/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Switch-Case Yapısı",
           "description": "Çoklu koşul kontrolü için switch-case",
-          "href": "/education/tests/quiz/tests-net-core/module-02/test-05"
+          "href": "/education/lessons/dotnet-core/module-02/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Döngüler (for, while, foreach)",
           "description": "Tekrarlayan işlemler için döngü yapıları",
-          "href": "/education/tests/quiz/tests-net-core/module-02/test-06"
+          "href": "/education/lessons/dotnet-core/module-02/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Diziler (Arrays)",
           "description": "Dizi tanımlama ve kullanımı",
-          "href": "/education/tests/quiz/tests-net-core/module-02/test-07"
+          "href": "/education/lessons/dotnet-core/module-02/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: String İşlemleri",
           "description": "String manipülasyonu ve metodları",
-          "href": "/education/tests/quiz/tests-net-core/module-02/test-08"
+          "href": "/education/lessons/dotnet-core/module-02/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Metodlar (Methods)",
           "description": "Metod tanımlama ve çağırma",
-          "href": "/education/tests/quiz/tests-net-core/module-02/test-09"
+          "href": "/education/lessons/dotnet-core/module-02/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Parametreler ve Return Değerleri",
           "description": "Metod parametreleri ve dönüş değerleri",
-          "href": "/education/tests/quiz/tests-net-core/module-02/test-10"
+          "href": "/education/lessons/dotnet-core/module-02/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Nullable Types",
           "description": "Null değer alabilen veri tipleri",
-          "href": "/education/tests/quiz/tests-net-core/module-02/test-11"
+          "href": "/education/lessons/dotnet-core/module-02/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Enum Kullanımı",
           "description": "Sabit değer listeleri için enum",
-          "href": "/education/tests/quiz/tests-net-core/module-02/test-12"
+          "href": "/education/lessons/dotnet-core/module-02/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Struct ve Class Farkı",
           "description": "Value type vs reference type",
-          "href": "/education/tests/quiz/tests-net-core/module-02/test-13"
+          "href": "/education/lessons/dotnet-core/module-02/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Exception Handling (try-catch)",
           "description": "Hata yönetimi ve exception handling",
-          "href": "/education/tests/quiz/tests-net-core/module-02/test-14"
+          "href": "/education/lessons/dotnet-core/module-02/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Modül Özeti ve Uygulama",
           "description": "Öğrenilenlerin pratik uygulaması",
-          "href": "/education/tests/quiz/tests-net-core/module-02/test-15"
+          "href": "/education/lessons/dotnet-core/module-02/lesson-15"
         }
       ]
     },
@@ -234,94 +234,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: OOP Prensiplerine Giriş",
           "description": "Nesne yönelimli programlamanın temelleri",
-          "href": "/education/tests/quiz/tests-net-core/module-03/test-01"
+          "href": "/education/lessons/dotnet-core/module-03/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Class ve Object Kavramları",
           "description": "Sınıf tanımlama ve nesne oluşturma",
-          "href": "/education/tests/quiz/tests-net-core/module-03/test-02"
+          "href": "/education/lessons/dotnet-core/module-03/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Constructor ve Destructor",
           "description": "Nesne başlatma ve temizleme",
-          "href": "/education/tests/quiz/tests-net-core/module-03/test-03"
+          "href": "/education/lessons/dotnet-core/module-03/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Properties ve Access Modifiers",
           "description": "Property tanımlama ve erişim kontrolü",
-          "href": "/education/tests/quiz/tests-net-core/module-03/test-04"
+          "href": "/education/lessons/dotnet-core/module-03/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Encapsulation (Kapsülleme)",
           "description": "Veri gizleme ve kapsülleme prensibi",
-          "href": "/education/tests/quiz/tests-net-core/module-03/test-05"
+          "href": "/education/lessons/dotnet-core/module-03/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Inheritance (Kalıtım)",
           "description": "Sınıf kalıtımı ve base class kullanımı",
-          "href": "/education/tests/quiz/tests-net-core/module-03/test-06"
+          "href": "/education/lessons/dotnet-core/module-03/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Polymorphism (Çok Biçimlilik)",
           "description": "Method overriding ve virtual/override",
-          "href": "/education/tests/quiz/tests-net-core/module-03/test-07"
+          "href": "/education/lessons/dotnet-core/module-03/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Abstract Class ve Interface",
           "description": "Soyut sınıflar ve arayüzler",
-          "href": "/education/tests/quiz/tests-net-core/module-03/test-08"
+          "href": "/education/lessons/dotnet-core/module-03/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Interface Kullanımı",
           "description": "Interface tanımlama ve implementasyon",
-          "href": "/education/tests/quiz/tests-net-core/module-03/test-09"
+          "href": "/education/lessons/dotnet-core/module-03/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Abstraction (Soyutlama)",
           "description": "Soyutlama prensibi ve uygulaması",
-          "href": "/education/tests/quiz/tests-net-core/module-03/test-10"
+          "href": "/education/lessons/dotnet-core/module-03/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Static Class ve Members",
           "description": "Static anahtar kelimesi kullanımı",
-          "href": "/education/tests/quiz/tests-net-core/module-03/test-11"
+          "href": "/education/lessons/dotnet-core/module-03/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Sealed Class ve Method",
           "description": "Kalıtımı engelleme",
-          "href": "/education/tests/quiz/tests-net-core/module-03/test-12"
+          "href": "/education/lessons/dotnet-core/module-03/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Partial Class",
           "description": "Sınıfları bölme ve partial kullanımı",
-          "href": "/education/tests/quiz/tests-net-core/module-03/test-13"
+          "href": "/education/lessons/dotnet-core/module-03/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Nested Class",
           "description": "İç içe sınıf tanımlama",
-          "href": "/education/tests/quiz/tests-net-core/module-03/test-14"
+          "href": "/education/lessons/dotnet-core/module-03/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: OOP Best Practices",
           "description": "OOP tasarım prensipleri ve en iyi uygulamalar",
-          "href": "/education/tests/quiz/tests-net-core/module-03/test-15"
+          "href": "/education/lessons/dotnet-core/module-03/lesson-15"
         }
       ]
     },
@@ -338,94 +338,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: .NET Core Mimarisine Genel Bakış",
           "description": ".NET Core'un genel mimari yapısı",
-          "href": "/education/tests/quiz/tests-net-core/module-04/test-01"
+          "href": "/education/lessons/dotnet-core/module-04/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Common Language Runtime (CLR)",
           "description": "CLR'in rolü ve işlevleri",
-          "href": "/education/tests/quiz/tests-net-core/module-04/test-02"
+          "href": "/education/lessons/dotnet-core/module-04/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Base Class Library (BCL)",
           "description": "Temel sınıf kütüphanesi ve kullanımı",
-          "href": "/education/tests/quiz/tests-net-core/module-04/test-03"
+          "href": "/education/lessons/dotnet-core/module-04/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: .NET Core Runtime",
           "description": "Runtime yapısı ve çalışma prensipleri",
-          "href": "/education/tests/quiz/tests-net-core/module-04/test-04"
+          "href": "/education/lessons/dotnet-core/module-04/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Assembly ve Namespace",
           "description": "Assembly kavramı ve namespace kullanımı",
-          "href": "/education/tests/quiz/tests-net-core/module-04/test-05"
+          "href": "/education/lessons/dotnet-core/module-04/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Garbage Collection",
           "description": "Bellek yönetimi ve çöp toplama",
-          "href": "/education/tests/quiz/tests-net-core/module-04/test-06"
+          "href": "/education/lessons/dotnet-core/module-04/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Just-In-Time (JIT) Compilation",
           "description": "JIT derleme süreci",
-          "href": "/education/tests/quiz/tests-net-core/module-04/test-07"
+          "href": "/education/lessons/dotnet-core/module-04/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: .NET Core SDK ve Runtime",
           "description": "SDK ve runtime farkları",
-          "href": "/education/tests/quiz/tests-net-core/module-04/test-08"
+          "href": "/education/lessons/dotnet-core/module-04/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Package Management",
           "description": "NuGet paket yönetimi",
-          "href": "/education/tests/quiz/tests-net-core/module-04/test-09"
+          "href": "/education/lessons/dotnet-core/module-04/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Project File Yapısı",
           "description": ".csproj dosyası ve yapılandırma",
-          "href": "/education/tests/quiz/tests-net-core/module-04/test-10"
+          "href": "/education/lessons/dotnet-core/module-04/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Dependency Management",
           "description": "Bağımlılık yönetimi ve çözümleme",
-          "href": "/education/tests/quiz/tests-net-core/module-04/test-11"
+          "href": "/education/lessons/dotnet-core/module-04/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Framework Targeting",
           "description": "Framework hedefleme ve uyumluluk",
-          "href": "/education/tests/quiz/tests-net-core/module-04/test-12"
+          "href": "/education/lessons/dotnet-core/module-04/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Cross-Platform Development",
           "description": "Platformlar arası geliştirme",
-          "href": "/education/tests/quiz/tests-net-core/module-04/test-13"
+          "href": "/education/lessons/dotnet-core/module-04/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: .NET Core Deployment",
           "description": "Dağıtım modelleri ve seçenekleri",
-          "href": "/education/tests/quiz/tests-net-core/module-04/test-14"
+          "href": "/education/lessons/dotnet-core/module-04/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Mimarı Karşılaştırma",
           "description": ".NET Core vs diğer framework'ler",
-          "href": "/education/tests/quiz/tests-net-core/module-04/test-15"
+          "href": "/education/lessons/dotnet-core/module-04/lesson-15"
         }
       ]
     },
@@ -442,94 +442,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Dependency Injection Nedir?",
           "description": "DI kavramına giriş ve temel prensipler",
-          "href": "/education/tests/quiz/tests-net-core/module-05/test-01"
+          "href": "/education/lessons/dotnet-core/module-05/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Inversion of Control (IoC)",
           "description": "Kontrolün tersine çevrilmesi prensibi",
-          "href": "/education/tests/quiz/tests-net-core/module-05/test-02"
+          "href": "/education/lessons/dotnet-core/module-05/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: .NET Core DI Container",
           "description": "Built-in DI container kullanımı",
-          "href": "/education/tests/quiz/tests-net-core/module-05/test-03"
+          "href": "/education/lessons/dotnet-core/module-05/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Service Registration",
           "description": "Servis kayıt işlemleri",
-          "href": "/education/tests/quiz/tests-net-core/module-05/test-04"
+          "href": "/education/lessons/dotnet-core/module-05/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Service Lifetimes",
           "description": "Singleton, Scoped, Transient yaşam döngüleri",
-          "href": "/education/tests/quiz/tests-net-core/module-05/test-05"
+          "href": "/education/lessons/dotnet-core/module-05/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Constructor Injection",
           "description": "Constructor üzerinden bağımlılık enjeksiyonu",
-          "href": "/education/tests/quiz/tests-net-core/module-05/test-06"
+          "href": "/education/lessons/dotnet-core/module-05/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Property Injection",
           "description": "Property üzerinden enjeksiyon",
-          "href": "/education/tests/quiz/tests-net-core/module-05/test-07"
+          "href": "/education/lessons/dotnet-core/module-05/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Method Injection",
           "description": "Metod parametresi olarak enjeksiyon",
-          "href": "/education/tests/quiz/tests-net-core/module-05/test-08"
+          "href": "/education/lessons/dotnet-core/module-05/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Interface-based DI",
           "description": "Interface kullanarak bağımlılık yönetimi",
-          "href": "/education/tests/quiz/tests-net-core/module-05/test-09"
+          "href": "/education/lessons/dotnet-core/module-05/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Multiple Implementations",
           "description": "Aynı interface için birden fazla implementasyon",
-          "href": "/education/tests/quiz/tests-net-core/module-05/test-10"
+          "href": "/education/lessons/dotnet-core/module-05/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Factory Pattern with DI",
           "description": "Factory pattern ve DI birlikte kullanımı",
-          "href": "/education/tests/quiz/tests-net-core/module-05/test-11"
+          "href": "/education/lessons/dotnet-core/module-05/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Third-party DI Containers",
           "description": "Autofac, Ninject gibi container'lar",
-          "href": "/education/tests/quiz/tests-net-core/module-05/test-12"
+          "href": "/education/lessons/dotnet-core/module-05/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: DI Best Practices",
           "description": "En iyi uygulamalar ve anti-pattern'ler",
-          "href": "/education/tests/quiz/tests-net-core/module-05/test-13"
+          "href": "/education/lessons/dotnet-core/module-05/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: DI Testing",
           "description": "DI ile test yazma stratejileri",
-          "href": "/education/tests/quiz/tests-net-core/module-05/test-14"
+          "href": "/education/lessons/dotnet-core/module-05/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Advanced DI Scenarios",
           "description": "İleri seviye DI senaryoları",
-          "href": "/education/tests/quiz/tests-net-core/module-05/test-15"
+          "href": "/education/lessons/dotnet-core/module-05/lesson-15"
         }
       ]
     },
@@ -546,94 +546,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Entity Framework Core Giriş",
           "description": "EF Core'un ne olduğu ve avantajları",
-          "href": "/education/tests/quiz/tests-net-core/module-06/test-01"
+          "href": "/education/lessons/dotnet-core/module-06/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Code First Approach",
           "description": "Code First yaklaşımı ile model tanımlama",
-          "href": "/education/tests/quiz/tests-net-core/module-06/test-02"
+          "href": "/education/lessons/dotnet-core/module-06/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: DbContext Oluşturma",
           "description": "DbContext sınıfı ve yapılandırma",
-          "href": "/education/tests/quiz/tests-net-core/module-06/test-03"
+          "href": "/education/lessons/dotnet-core/module-06/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Entity Configuration",
           "description": "Entity yapılandırması ve fluent API",
-          "href": "/education/tests/quiz/tests-net-core/module-06/test-04"
+          "href": "/education/lessons/dotnet-core/module-06/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Relationships (İlişkiler)",
           "description": "One-to-One, One-to-Many, Many-to-Many",
-          "href": "/education/tests/quiz/tests-net-core/module-06/test-05"
+          "href": "/education/lessons/dotnet-core/module-06/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Migrations",
           "description": "Migration oluşturma ve uygulama",
-          "href": "/education/tests/quiz/tests-net-core/module-06/test-06"
+          "href": "/education/lessons/dotnet-core/module-06/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: LINQ Queries",
           "description": "LINQ ile veritabanı sorguları",
-          "href": "/education/tests/quiz/tests-net-core/module-06/test-07"
+          "href": "/education/lessons/dotnet-core/module-06/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: CRUD Operations",
           "description": "Create, Read, Update, Delete işlemleri",
-          "href": "/education/tests/quiz/tests-net-core/module-06/test-08"
+          "href": "/education/lessons/dotnet-core/module-06/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Async Operations",
           "description": "Asenkron veritabanı işlemleri",
-          "href": "/education/tests/quiz/tests-net-core/module-06/test-09"
+          "href": "/education/lessons/dotnet-core/module-06/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Query Performance",
           "description": "Sorgu performansı optimizasyonu",
-          "href": "/education/tests/quiz/tests-net-core/module-06/test-10"
+          "href": "/education/lessons/dotnet-core/module-06/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Raw SQL Queries",
           "description": "Ham SQL sorguları çalıştırma",
-          "href": "/education/tests/quiz/tests-net-core/module-06/test-11"
+          "href": "/education/lessons/dotnet-core/module-06/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Database Providers",
           "description": "SQL Server, PostgreSQL, MySQL desteği",
-          "href": "/education/tests/quiz/tests-net-core/module-06/test-12"
+          "href": "/education/lessons/dotnet-core/module-06/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Change Tracking",
           "description": "Değişiklik takibi mekanizması",
-          "href": "/education/tests/quiz/tests-net-core/module-06/test-13"
+          "href": "/education/lessons/dotnet-core/module-06/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Transactions",
           "description": "Transaction yönetimi",
-          "href": "/education/tests/quiz/tests-net-core/module-06/test-14"
+          "href": "/education/lessons/dotnet-core/module-06/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: EF Core Best Practices",
           "description": "En iyi uygulamalar ve performans ipuçları",
-          "href": "/education/tests/quiz/tests-net-core/module-06/test-15"
+          "href": "/education/lessons/dotnet-core/module-06/lesson-15"
         }
       ]
     },
@@ -650,94 +650,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: RESTful API Nedir?",
           "description": "REST prensipleri ve API tasarımı",
-          "href": "/education/tests/quiz/tests-net-core/module-07/test-01"
+          "href": "/education/lessons/dotnet-core/module-07/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: ASP.NET Core Web API Projesi",
           "description": "Web API projesi oluşturma",
-          "href": "/education/tests/quiz/tests-net-core/module-07/test-02"
+          "href": "/education/lessons/dotnet-core/module-07/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Controller Yapısı",
           "description": "Controller sınıfları ve action metodları",
-          "href": "/education/tests/quiz/tests-net-core/module-07/test-03"
+          "href": "/education/lessons/dotnet-core/module-07/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Routing Yapılandırması",
           "description": "Route tanımlama ve yapılandırma",
-          "href": "/education/tests/quiz/tests-net-core/module-07/test-04"
+          "href": "/education/lessons/dotnet-core/module-07/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: HTTP Verbs ve Actions",
           "description": "GET, POST, PUT, DELETE metodları",
-          "href": "/education/tests/quiz/tests-net-core/module-07/test-05"
+          "href": "/education/lessons/dotnet-core/module-07/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Request ve Response Models",
           "description": "DTO'lar ve model binding",
-          "href": "/education/tests/quiz/tests-net-core/module-07/test-06"
+          "href": "/education/lessons/dotnet-core/module-07/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Status Codes",
           "description": "HTTP durum kodları ve kullanımı",
-          "href": "/education/tests/quiz/tests-net-core/module-07/test-07"
+          "href": "/education/lessons/dotnet-core/module-07/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: API Versioning",
           "description": "API versiyonlama stratejileri",
-          "href": "/education/tests/quiz/tests-net-core/module-07/test-08"
+          "href": "/education/lessons/dotnet-core/module-07/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Content Negotiation",
           "description": "JSON, XML format desteği",
-          "href": "/education/tests/quiz/tests-net-core/module-07/test-09"
+          "href": "/education/lessons/dotnet-core/module-07/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: API Documentation (Swagger)",
           "description": "Swagger/OpenAPI entegrasyonu",
-          "href": "/education/tests/quiz/tests-net-core/module-07/test-10"
+          "href": "/education/lessons/dotnet-core/module-07/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Error Handling",
           "description": "Hata yönetimi ve exception handling",
-          "href": "/education/tests/quiz/tests-net-core/module-07/test-11"
+          "href": "/education/lessons/dotnet-core/module-07/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: API Validation",
           "description": "Model validation ve data annotations",
-          "href": "/education/tests/quiz/tests-net-core/module-07/test-12"
+          "href": "/education/lessons/dotnet-core/module-07/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: API Security",
           "description": "Güvenlik best practices",
-          "href": "/education/tests/quiz/tests-net-core/module-07/test-13"
+          "href": "/education/lessons/dotnet-core/module-07/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: API Testing",
           "description": "API test stratejileri",
-          "href": "/education/tests/quiz/tests-net-core/module-07/test-14"
+          "href": "/education/lessons/dotnet-core/module-07/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: API Best Practices",
           "description": "RESTful API tasarım en iyi uygulamaları",
-          "href": "/education/tests/quiz/tests-net-core/module-07/test-15"
+          "href": "/education/lessons/dotnet-core/module-07/lesson-15"
         }
       ]
     },
@@ -754,94 +754,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Authentication vs Authorization",
           "description": "Kimlik doğrulama ve yetkilendirme farkları",
-          "href": "/education/tests/quiz/tests-net-core/module-08/test-01"
+          "href": "/education/lessons/dotnet-core/module-08/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: JWT (JSON Web Tokens)",
           "description": "JWT token yapısı ve kullanımı",
-          "href": "/education/tests/quiz/tests-net-core/module-08/test-02"
+          "href": "/education/lessons/dotnet-core/module-08/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: JWT Implementation",
           "description": "JWT token oluşturma ve doğrulama",
-          "href": "/education/tests/quiz/tests-net-core/module-08/test-03"
+          "href": "/education/lessons/dotnet-core/module-08/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: ASP.NET Core Identity",
           "description": "Identity framework'e giriş",
-          "href": "/education/tests/quiz/tests-net-core/module-08/test-04"
+          "href": "/education/lessons/dotnet-core/module-08/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: User Registration",
           "description": "Kullanıcı kayıt işlemleri",
-          "href": "/education/tests/quiz/tests-net-core/module-08/test-05"
+          "href": "/education/lessons/dotnet-core/module-08/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: User Login",
           "description": "Giriş işlemleri ve token üretme",
-          "href": "/education/tests/quiz/tests-net-core/module-08/test-06"
+          "href": "/education/lessons/dotnet-core/module-08/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Password Hashing",
           "description": "Şifre hashleme ve güvenlik",
-          "href": "/education/tests/quiz/tests-net-core/module-08/test-07"
+          "href": "/education/lessons/dotnet-core/module-08/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Role-based Authorization",
           "description": "Rol tabanlı yetkilendirme",
-          "href": "/education/tests/quiz/tests-net-core/module-08/test-08"
+          "href": "/education/lessons/dotnet-core/module-08/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Policy-based Authorization",
           "description": "Politika tabanlı yetkilendirme",
-          "href": "/education/tests/quiz/tests-net-core/module-08/test-09"
+          "href": "/education/lessons/dotnet-core/module-08/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Claims-based Authorization",
           "description": "Claim tabanlı yetkilendirme",
-          "href": "/education/tests/quiz/tests-net-core/module-08/test-10"
+          "href": "/education/lessons/dotnet-core/module-08/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: OAuth 2.0",
           "description": "OAuth 2.0 protokolü ve kullanımı",
-          "href": "/education/tests/quiz/tests-net-core/module-08/test-11"
+          "href": "/education/lessons/dotnet-core/module-08/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: External Authentication",
           "description": "Google, Facebook gibi dış servislerle giriş",
-          "href": "/education/tests/quiz/tests-net-core/module-08/test-12"
+          "href": "/education/lessons/dotnet-core/module-08/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Refresh Tokens",
           "description": "Token yenileme mekanizması",
-          "href": "/education/tests/quiz/tests-net-core/module-08/test-13"
+          "href": "/education/lessons/dotnet-core/module-08/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Security Best Practices",
           "description": "Güvenlik en iyi uygulamaları",
-          "href": "/education/tests/quiz/tests-net-core/module-08/test-14"
+          "href": "/education/lessons/dotnet-core/module-08/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Authentication Testing",
           "description": "Auth mekanizmalarını test etme",
-          "href": "/education/tests/quiz/tests-net-core/module-08/test-15"
+          "href": "/education/lessons/dotnet-core/module-08/lesson-15"
         }
       ]
     },
@@ -858,94 +858,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Testing Temelleri",
           "description": "Test türleri ve test pyramid",
-          "href": "/education/tests/quiz/tests-net-core/module-09/test-01"
+          "href": "/education/lessons/dotnet-core/module-09/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: xUnit Framework",
           "description": "xUnit test framework'üne giriş",
-          "href": "/education/tests/quiz/tests-net-core/module-09/test-02"
+          "href": "/education/lessons/dotnet-core/module-09/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Unit Test Yazma",
           "description": "İlk unit test örnekleri",
-          "href": "/education/tests/quiz/tests-net-core/module-09/test-03"
+          "href": "/education/lessons/dotnet-core/module-09/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Test Assertions",
           "description": "Assert metodları ve kullanımı",
-          "href": "/education/tests/quiz/tests-net-core/module-09/test-04"
+          "href": "/education/lessons/dotnet-core/module-09/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Test Organization",
           "description": "Test organizasyonu ve yapısı",
-          "href": "/education/tests/quiz/tests-net-core/module-09/test-05"
+          "href": "/education/lessons/dotnet-core/module-09/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Mocking with Moq",
           "description": "Moq framework ile mock oluşturma",
-          "href": "/education/tests/quiz/tests-net-core/module-09/test-06"
+          "href": "/education/lessons/dotnet-core/module-09/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Test Data Builders",
           "description": "Test verisi oluşturma stratejileri",
-          "href": "/education/tests/quiz/tests-net-core/module-09/test-07"
+          "href": "/education/lessons/dotnet-core/module-09/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Integration Testing",
           "description": "Entegrasyon testleri yazma",
-          "href": "/education/tests/quiz/tests-net-core/module-09/test-08"
+          "href": "/education/lessons/dotnet-core/module-09/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: API Testing",
           "description": "Web API testleri",
-          "href": "/education/tests/quiz/tests-net-core/module-09/test-09"
+          "href": "/education/lessons/dotnet-core/module-09/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Database Testing",
           "description": "Veritabanı test stratejileri",
-          "href": "/education/tests/quiz/tests-net-core/module-09/test-10"
+          "href": "/education/lessons/dotnet-core/module-09/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Test Coverage",
           "description": "Test kapsamı analizi",
-          "href": "/education/tests/quiz/tests-net-core/module-09/test-11"
+          "href": "/education/lessons/dotnet-core/module-09/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Test-Driven Development (TDD)",
           "description": "TDD yaklaşımı ve uygulaması",
-          "href": "/education/tests/quiz/tests-net-core/module-09/test-12"
+          "href": "/education/lessons/dotnet-core/module-09/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Behavior-Driven Development (BDD)",
           "description": "BDD yaklaşımı ve SpecFlow",
-          "href": "/education/tests/quiz/tests-net-core/module-09/test-13"
+          "href": "/education/lessons/dotnet-core/module-09/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Performance Testing",
           "description": "Performans testleri",
-          "href": "/education/tests/quiz/tests-net-core/module-09/test-14"
+          "href": "/education/lessons/dotnet-core/module-09/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Testing Best Practices",
           "description": "Test yazma en iyi uygulamaları",
-          "href": "/education/tests/quiz/tests-net-core/module-09/test-15"
+          "href": "/education/lessons/dotnet-core/module-09/lesson-15"
         }
       ]
     },
@@ -962,94 +962,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Performance Temelleri",
           "description": "Performans ölçümü ve metrikler",
-          "href": "/education/tests/quiz/tests-net-core/module-10/test-01"
+          "href": "/education/lessons/dotnet-core/module-10/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Profiling Tools",
           "description": "Performance profiler araçları",
-          "href": "/education/tests/quiz/tests-net-core/module-10/test-02"
+          "href": "/education/lessons/dotnet-core/module-10/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Memory Management",
           "description": "Bellek yönetimi ve optimizasyon",
-          "href": "/education/tests/quiz/tests-net-core/module-10/test-03"
+          "href": "/education/lessons/dotnet-core/module-10/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Caching Strategies",
           "description": "Önbellekleme stratejileri",
-          "href": "/education/tests/quiz/tests-net-core/module-10/test-04"
+          "href": "/education/lessons/dotnet-core/module-10/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: In-Memory Caching",
           "description": "IMemoryCache kullanımı",
-          "href": "/education/tests/quiz/tests-net-core/module-10/test-05"
+          "href": "/education/lessons/dotnet-core/module-10/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Distributed Caching",
           "description": "Redis gibi dağıtık cache",
-          "href": "/education/tests/quiz/tests-net-core/module-10/test-06"
+          "href": "/education/lessons/dotnet-core/module-10/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Async/Await Optimization",
           "description": "Asenkron kod optimizasyonu",
-          "href": "/education/tests/quiz/tests-net-core/module-10/test-07"
+          "href": "/education/lessons/dotnet-core/module-10/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Database Query Optimization",
           "description": "Veritabanı sorgu optimizasyonu",
-          "href": "/education/tests/quiz/tests-net-core/module-10/test-08"
+          "href": "/education/lessons/dotnet-core/module-10/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Connection Pooling",
           "description": "Bağlantı havuzlama",
-          "href": "/education/tests/quiz/tests-net-core/module-10/test-09"
+          "href": "/education/lessons/dotnet-core/module-10/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Response Compression",
           "description": "Yanıt sıkıştırma",
-          "href": "/education/tests/quiz/tests-net-core/module-10/test-10"
+          "href": "/education/lessons/dotnet-core/module-10/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Lazy Loading",
           "description": "Tembel yükleme stratejileri",
-          "href": "/education/tests/quiz/tests-net-core/module-10/test-11"
+          "href": "/education/lessons/dotnet-core/module-10/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Pagination",
           "description": "Sayfalama ve veri sınırlama",
-          "href": "/education/tests/quiz/tests-net-core/module-10/test-12"
+          "href": "/education/lessons/dotnet-core/module-10/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Background Jobs",
           "description": "Arka plan işleri ve queue'lar",
-          "href": "/education/tests/quiz/tests-net-core/module-10/test-13"
+          "href": "/education/lessons/dotnet-core/module-10/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Load Testing",
           "description": "Yük testleri ve stres testleri",
-          "href": "/education/tests/quiz/tests-net-core/module-10/test-14"
+          "href": "/education/lessons/dotnet-core/module-10/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Performance Best Practices",
           "description": "Performans optimizasyon en iyi uygulamaları",
-          "href": "/education/tests/quiz/tests-net-core/module-10/test-15"
+          "href": "/education/lessons/dotnet-core/module-10/lesson-15"
         }
       ]
     },
@@ -1066,94 +1066,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Deployment Stratejileri",
           "description": "Dağıtım modelleri ve seçenekleri",
-          "href": "/education/tests/quiz/tests-net-core/module-11/test-01"
+          "href": "/education/lessons/dotnet-core/module-11/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Docker Temelleri",
           "description": "Docker kavramları ve kullanımı",
-          "href": "/education/tests/quiz/tests-net-core/module-11/test-02"
+          "href": "/education/lessons/dotnet-core/module-11/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Dockerfile Oluşturma",
           "description": ".NET Core için Dockerfile",
-          "href": "/education/tests/quiz/tests-net-core/module-11/test-03"
+          "href": "/education/lessons/dotnet-core/module-11/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Docker Compose",
           "description": "Multi-container uygulamalar",
-          "href": "/education/tests/quiz/tests-net-core/module-11/test-04"
+          "href": "/education/lessons/dotnet-core/module-11/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Environment Configuration",
           "description": "Ortam yapılandırması ve appsettings",
-          "href": "/education/tests/quiz/tests-net-core/module-11/test-05"
+          "href": "/education/lessons/dotnet-core/module-11/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: CI/CD Concepts",
           "description": "Sürekli entegrasyon ve dağıtım",
-          "href": "/education/tests/quiz/tests-net-core/module-11/test-06"
+          "href": "/education/lessons/dotnet-core/module-11/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: GitHub Actions",
           "description": "GitHub Actions ile CI/CD",
-          "href": "/education/tests/quiz/tests-net-core/module-11/test-07"
+          "href": "/education/lessons/dotnet-core/module-11/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Azure Deployment",
           "description": "Azure App Service'e dağıtım",
-          "href": "/education/tests/quiz/tests-net-core/module-11/test-08"
+          "href": "/education/lessons/dotnet-core/module-11/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: AWS Deployment",
           "description": "AWS Elastic Beanstalk ve ECS",
-          "href": "/education/tests/quiz/tests-net-core/module-11/test-09"
+          "href": "/education/lessons/dotnet-core/module-11/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Linux Deployment",
           "description": "Linux sunuculara dağıtım",
-          "href": "/education/tests/quiz/tests-net-core/module-11/test-10"
+          "href": "/education/lessons/dotnet-core/module-11/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Windows Deployment",
           "description": "IIS ve Windows Server",
-          "href": "/education/tests/quiz/tests-net-core/module-11/test-11"
+          "href": "/education/lessons/dotnet-core/module-11/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Health Checks",
           "description": "Sağlık kontrolü ve monitoring",
-          "href": "/education/tests/quiz/tests-net-core/module-11/test-12"
+          "href": "/education/lessons/dotnet-core/module-11/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Logging and Monitoring",
           "description": "Loglama ve izleme stratejileri",
-          "href": "/education/tests/quiz/tests-net-core/module-11/test-13"
+          "href": "/education/lessons/dotnet-core/module-11/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Scaling Strategies",
           "description": "Ölçeklendirme stratejileri",
-          "href": "/education/tests/quiz/tests-net-core/module-11/test-14"
+          "href": "/education/lessons/dotnet-core/module-11/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Production Best Practices",
           "description": "Production ortamı en iyi uygulamaları",
-          "href": "/education/tests/quiz/tests-net-core/module-11/test-15"
+          "href": "/education/lessons/dotnet-core/module-11/lesson-15"
         }
       ]
     },
@@ -1170,94 +1170,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Microservices Mimarisi",
           "description": "Mikroservis kavramı ve avantajları",
-          "href": "/education/tests/quiz/tests-net-core/module-12/test-01"
+          "href": "/education/lessons/dotnet-core/module-12/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Monolith vs Microservices",
           "description": "Monolitik vs mikroservis karşılaştırması",
-          "href": "/education/tests/quiz/tests-net-core/module-12/test-02"
+          "href": "/education/lessons/dotnet-core/module-12/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Service Communication",
           "description": "Servisler arası iletişim",
-          "href": "/education/tests/quiz/tests-net-core/module-12/test-03"
+          "href": "/education/lessons/dotnet-core/module-12/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: RESTful Communication",
           "description": "HTTP/REST ile servis iletişimi",
-          "href": "/education/tests/quiz/tests-net-core/module-12/test-04"
+          "href": "/education/lessons/dotnet-core/module-12/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: gRPC Communication",
           "description": "gRPC protokolü ve kullanımı",
-          "href": "/education/tests/quiz/tests-net-core/module-12/test-05"
+          "href": "/education/lessons/dotnet-core/module-12/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Message Queues",
           "description": "RabbitMQ, Azure Service Bus",
-          "href": "/education/tests/quiz/tests-net-core/module-12/test-06"
+          "href": "/education/lessons/dotnet-core/module-12/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: API Gateway",
           "description": "API Gateway pattern ve Ocelot",
-          "href": "/education/tests/quiz/tests-net-core/module-12/test-07"
+          "href": "/education/lessons/dotnet-core/module-12/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Service Discovery",
           "description": "Servis keşfi ve kayıt",
-          "href": "/education/tests/quiz/tests-net-core/module-12/test-08"
+          "href": "/education/lessons/dotnet-core/module-12/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Circuit Breaker Pattern",
           "description": "Circuit breaker deseni",
-          "href": "/education/tests/quiz/tests-net-core/module-12/test-09"
+          "href": "/education/lessons/dotnet-core/module-12/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Distributed Transactions",
           "description": "Dağıtık transaction yönetimi",
-          "href": "/education/tests/quiz/tests-net-core/module-12/test-10"
+          "href": "/education/lessons/dotnet-core/module-12/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Event Sourcing",
           "description": "Event sourcing pattern",
-          "href": "/education/tests/quiz/tests-net-core/module-12/test-11"
+          "href": "/education/lessons/dotnet-core/module-12/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: CQRS Pattern",
           "description": "Command Query Responsibility Segregation",
-          "href": "/education/tests/quiz/tests-net-core/module-12/test-12"
+          "href": "/education/lessons/dotnet-core/module-12/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Saga Pattern",
           "description": "Saga pattern ile transaction yönetimi",
-          "href": "/education/tests/quiz/tests-net-core/module-12/test-13"
+          "href": "/education/lessons/dotnet-core/module-12/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Microservices Testing",
           "description": "Mikroservis test stratejileri",
-          "href": "/education/tests/quiz/tests-net-core/module-12/test-14"
+          "href": "/education/lessons/dotnet-core/module-12/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Microservices Best Practices",
           "description": "Mikroservis mimarisi en iyi uygulamaları",
-          "href": "/education/tests/quiz/tests-net-core/module-12/test-15"
+          "href": "/education/lessons/dotnet-core/module-12/lesson-15"
         }
       ]
     },
@@ -1274,94 +1274,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: SOLID Principles",
           "description": "SOLID prensiplerine giriş",
-          "href": "/education/tests/quiz/tests-net-core/module-13/test-01"
+          "href": "/education/lessons/dotnet-core/module-13/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Single Responsibility Principle",
           "description": "Tek sorumluluk prensibi",
-          "href": "/education/tests/quiz/tests-net-core/module-13/test-02"
+          "href": "/education/lessons/dotnet-core/module-13/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Open/Closed Principle",
           "description": "Açık/kapalı prensibi",
-          "href": "/education/tests/quiz/tests-net-core/module-13/test-03"
+          "href": "/education/lessons/dotnet-core/module-13/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Liskov Substitution Principle",
           "description": "Liskov yerine geçme prensibi",
-          "href": "/education/tests/quiz/tests-net-core/module-13/test-04"
+          "href": "/education/lessons/dotnet-core/module-13/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Interface Segregation Principle",
           "description": "Arayüz ayrımı prensibi",
-          "href": "/education/tests/quiz/tests-net-core/module-13/test-05"
+          "href": "/education/lessons/dotnet-core/module-13/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Dependency Inversion Principle",
           "description": "Bağımlılık tersine çevirme",
-          "href": "/education/tests/quiz/tests-net-core/module-13/test-06"
+          "href": "/education/lessons/dotnet-core/module-13/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Creational Patterns",
           "description": "Factory, Builder, Singleton pattern'leri",
-          "href": "/education/tests/quiz/tests-net-core/module-13/test-07"
+          "href": "/education/lessons/dotnet-core/module-13/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Structural Patterns",
           "description": "Adapter, Decorator, Facade pattern'leri",
-          "href": "/education/tests/quiz/tests-net-core/module-13/test-08"
+          "href": "/education/lessons/dotnet-core/module-13/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Behavioral Patterns",
           "description": "Observer, Strategy, Command pattern'leri",
-          "href": "/education/tests/quiz/tests-net-core/module-13/test-09"
+          "href": "/education/lessons/dotnet-core/module-13/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Repository Pattern",
           "description": "Repository pattern ve uygulaması",
-          "href": "/education/tests/quiz/tests-net-core/module-13/test-10"
+          "href": "/education/lessons/dotnet-core/module-13/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Unit of Work Pattern",
           "description": "Unit of Work pattern",
-          "href": "/education/tests/quiz/tests-net-core/module-13/test-11"
+          "href": "/education/lessons/dotnet-core/module-13/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Mediator Pattern",
           "description": "MediatR kütüphanesi",
-          "href": "/education/tests/quiz/tests-net-core/module-13/test-12"
+          "href": "/education/lessons/dotnet-core/module-13/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Specification Pattern",
           "description": "Specification pattern",
-          "href": "/education/tests/quiz/tests-net-core/module-13/test-13"
+          "href": "/education/lessons/dotnet-core/module-13/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Clean Architecture",
           "description": "Temiz mimari prensipleri",
-          "href": "/education/tests/quiz/tests-net-core/module-13/test-14"
+          "href": "/education/lessons/dotnet-core/module-13/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Domain-Driven Design (DDD)",
           "description": "DDD kavramları ve uygulaması",
-          "href": "/education/tests/quiz/tests-net-core/module-13/test-15"
+          "href": "/education/lessons/dotnet-core/module-13/lesson-15"
         }
       ]
     },
@@ -1378,94 +1378,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Code Quality Standards",
           "description": "Kod kalitesi standartları",
-          "href": "/education/tests/quiz/tests-net-core/module-14/test-01"
+          "href": "/education/lessons/dotnet-core/module-14/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Code Review Best Practices",
           "description": "Kod inceleme en iyi uygulamaları",
-          "href": "/education/tests/quiz/tests-net-core/module-14/test-02"
+          "href": "/education/lessons/dotnet-core/module-14/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Naming Conventions",
           "description": "İsimlendirme kuralları",
-          "href": "/education/tests/quiz/tests-net-core/module-14/test-03"
+          "href": "/education/lessons/dotnet-core/module-14/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: Code Documentation",
           "description": "XML dokümantasyon ve yorumlar",
-          "href": "/education/tests/quiz/tests-net-core/module-14/test-04"
+          "href": "/education/lessons/dotnet-core/module-14/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Error Handling Strategies",
           "description": "Hata yönetimi stratejileri",
-          "href": "/education/tests/quiz/tests-net-core/module-14/test-05"
+          "href": "/education/lessons/dotnet-core/module-14/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Logging Best Practices",
           "description": "Loglama en iyi uygulamaları",
-          "href": "/education/tests/quiz/tests-net-core/module-14/test-06"
+          "href": "/education/lessons/dotnet-core/module-14/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Security Best Practices",
           "description": "Güvenlik en iyi uygulamaları",
-          "href": "/education/tests/quiz/tests-net-core/module-14/test-07"
+          "href": "/education/lessons/dotnet-core/module-14/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Configuration Management",
           "description": "Yapılandırma yönetimi",
-          "href": "/education/tests/quiz/tests-net-core/module-14/test-08"
+          "href": "/education/lessons/dotnet-core/module-14/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Environment Variables",
           "description": "Ortam değişkenleri kullanımı",
-          "href": "/education/tests/quiz/tests-net-core/module-14/test-09"
+          "href": "/education/lessons/dotnet-core/module-14/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Secrets Management",
           "description": "Gizli bilgi yönetimi",
-          "href": "/education/tests/quiz/tests-net-core/module-14/test-10"
+          "href": "/education/lessons/dotnet-core/module-14/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Code Refactoring",
           "description": "Kod refaktörleme teknikleri",
-          "href": "/education/tests/quiz/tests-net-core/module-14/test-11"
+          "href": "/education/lessons/dotnet-core/module-14/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Technical Debt Management",
           "description": "Teknik borç yönetimi",
-          "href": "/education/tests/quiz/tests-net-core/module-14/test-12"
+          "href": "/education/lessons/dotnet-core/module-14/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: Maintainability",
           "description": "Bakım yapılabilirlik prensipleri",
-          "href": "/education/tests/quiz/tests-net-core/module-14/test-13"
+          "href": "/education/lessons/dotnet-core/module-14/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Code Metrics",
           "description": "Kod metrikleri ve analiz",
-          "href": "/education/tests/quiz/tests-net-core/module-14/test-14"
+          "href": "/education/lessons/dotnet-core/module-14/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Continuous Improvement",
           "description": "Sürekli iyileştirme kültürü",
-          "href": "/education/tests/quiz/tests-net-core/module-14/test-15"
+          "href": "/education/lessons/dotnet-core/module-14/lesson-15"
         }
       ]
     },
@@ -1482,94 +1482,94 @@
       ],
       "relatedTests": [
         {
-          "id": "test-01",
+          "id": "lesson-01",
           "title": "Ders 1: Proje Planlama",
           "description": "Proje gereksinimleri ve planlama",
-          "href": "/education/tests/quiz/tests-net-core/module-15/test-01"
+          "href": "/education/lessons/dotnet-core/module-15/lesson-01"
         },
         {
-          "id": "test-02",
+          "id": "lesson-02",
           "title": "Ders 2: Mimari Tasarım",
           "description": "Sistem mimarisi tasarımı",
-          "href": "/education/tests/quiz/tests-net-core/module-15/test-02"
+          "href": "/education/lessons/dotnet-core/module-15/lesson-02"
         },
         {
-          "id": "test-03",
+          "id": "lesson-03",
           "title": "Ders 3: Database Design",
           "description": "Veritabanı tasarımı ve şema",
-          "href": "/education/tests/quiz/tests-net-core/module-15/test-03"
+          "href": "/education/lessons/dotnet-core/module-15/lesson-03"
         },
         {
-          "id": "test-04",
+          "id": "lesson-04",
           "title": "Ders 4: API Development",
           "description": "RESTful API geliştirme",
-          "href": "/education/tests/quiz/tests-net-core/module-15/test-04"
+          "href": "/education/lessons/dotnet-core/module-15/lesson-04"
         },
         {
-          "id": "test-05",
+          "id": "lesson-05",
           "title": "Ders 5: Authentication Implementation",
           "description": "Kimlik doğrulama implementasyonu",
-          "href": "/education/tests/quiz/tests-net-core/module-15/test-05"
+          "href": "/education/lessons/dotnet-core/module-15/lesson-05"
         },
         {
-          "id": "test-06",
+          "id": "lesson-06",
           "title": "Ders 6: Business Logic",
           "description": "İş mantığı geliştirme",
-          "href": "/education/tests/quiz/tests-net-core/module-15/test-06"
+          "href": "/education/lessons/dotnet-core/module-15/lesson-06"
         },
         {
-          "id": "test-07",
+          "id": "lesson-07",
           "title": "Ders 7: Error Handling",
           "description": "Kapsamlı hata yönetimi",
-          "href": "/education/tests/quiz/tests-net-core/module-15/test-07"
+          "href": "/education/lessons/dotnet-core/module-15/lesson-07"
         },
         {
-          "id": "test-08",
+          "id": "lesson-08",
           "title": "Ders 8: Testing Strategy",
           "description": "Test stratejisi ve implementasyonu",
-          "href": "/education/tests/quiz/tests-net-core/module-15/test-08"
+          "href": "/education/lessons/dotnet-core/module-15/lesson-08"
         },
         {
-          "id": "test-09",
+          "id": "lesson-09",
           "title": "Ders 9: Performance Optimization",
           "description": "Performans optimizasyonu",
-          "href": "/education/tests/quiz/tests-net-core/module-15/test-09"
+          "href": "/education/lessons/dotnet-core/module-15/lesson-09"
         },
         {
-          "id": "test-10",
+          "id": "lesson-10",
           "title": "Ders 10: Security Hardening",
           "description": "Güvenlik sertleştirme",
-          "href": "/education/tests/quiz/tests-net-core/module-15/test-10"
+          "href": "/education/lessons/dotnet-core/module-15/lesson-10"
         },
         {
-          "id": "test-11",
+          "id": "lesson-11",
           "title": "Ders 11: Documentation",
           "description": "API dokümantasyonu ve kullanım kılavuzu",
-          "href": "/education/tests/quiz/tests-net-core/module-15/test-11"
+          "href": "/education/lessons/dotnet-core/module-15/lesson-11"
         },
         {
-          "id": "test-12",
+          "id": "lesson-12",
           "title": "Ders 12: Deployment Preparation",
           "description": "Dağıtım hazırlığı ve yapılandırma",
-          "href": "/education/tests/quiz/tests-net-core/module-15/test-12"
+          "href": "/education/lessons/dotnet-core/module-15/lesson-12"
         },
         {
-          "id": "test-13",
+          "id": "lesson-13",
           "title": "Ders 13: CI/CD Setup",
           "description": "Sürekli entegrasyon ve dağıtım kurulumu",
-          "href": "/education/tests/quiz/tests-net-core/module-15/test-13"
+          "href": "/education/lessons/dotnet-core/module-15/lesson-13"
         },
         {
-          "id": "test-14",
+          "id": "lesson-14",
           "title": "Ders 14: Monitoring and Logging",
           "description": "İzleme ve loglama implementasyonu",
-          "href": "/education/tests/quiz/tests-net-core/module-15/test-14"
+          "href": "/education/lessons/dotnet-core/module-15/lesson-14"
         },
         {
-          "id": "test-15",
+          "id": "lesson-15",
           "title": "Ders 15: Project Review and Presentation",
           "description": "Proje incelemesi ve sunumu",
-          "href": "/education/tests/quiz/tests-net-core/module-15/test-15"
+          "href": "/education/lessons/dotnet-core/module-15/lesson-15"
         }
       ]
     }

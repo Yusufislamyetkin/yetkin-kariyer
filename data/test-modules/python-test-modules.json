@@ -1,0 +1,1578 @@
+{
+  "overview": {
+    "description": "Python, modern yazılım geliştirmede en popüler programlama dillerinden biridir. Bu kapsamlı kurs ile Python'un temellerinden ileri seviye konularına kadar her şeyi öğreneceksiniz. Web geliştirme, veri bilimi, API geliştirme ve daha fazlası için Python becerileri kazanacaksınız.",
+    "estimatedDurationMinutes": 6750
+  },
+  "learningObjectives": [
+    "Python programlama dilinin temel syntax'ını ve kavramlarını öğrenmek",
+    "Veri yapıları ve algoritmaları Python ile uygulamak",
+    "Nesne yönelimli programlama prensiplerini Python'da kullanmak",
+    "Web framework'leri (Django/Flask) ile web uygulamaları geliştirmek",
+    "RESTful API'ler geliştirmek",
+    "Veritabanı işlemleri ve ORM kullanımını öğrenmek",
+    "Test yazma ve yazılım kalitesini artırma tekniklerini öğrenmek",
+    "Async programming ve modern Python özelliklerini kullanmak"
+  ],
+  "modules": [
+    {
+      "id": "module-01",
+      "title": "Module 1: Python Temelleri Testi",
+      "summary": "Python programlama diline giriş, kurulum, temel syntax, değişkenler, veri tipleri ve temel programlama kavramları.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Python'un ne olduğunu ve neden kullanıldığını anlamak",
+        "Python kurulumu ve geliştirme ortamı hazırlamak",
+        "Temel Python syntax'ını öğrenmek",
+        "Değişkenler ve veri tiplerini kullanmak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Python Nedir?",
+          "description": "Python programlama dilinin tanımı ve genel bakış",
+          "href": "/education/lessons/python/module-01/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Python'un Avantajları ve Kullanım Alanları",
+          "description": "Python'un diğer dillerden farkları ve avantajları",
+          "href": "/education/lessons/python/module-01/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Python Kurulumu",
+          "description": "Python'un farklı işletim sistemlerinde kurulumu",
+          "href": "/education/lessons/python/module-01/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Geliştirme Ortamı Hazırlama",
+          "description": "IDE seçimi ve geliştirme ortamı kurulumu",
+          "href": "/education/lessons/python/module-01/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: İlk Python Programı",
+          "description": "Hello World ve temel program yapısı",
+          "href": "/education/lessons/python/module-01/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Değişkenler ve İsimlendirme",
+          "description": "Değişken tanımlama ve Python isimlendirme kuralları",
+          "href": "/education/lessons/python/module-01/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Veri Tipleri",
+          "description": "int, float, str, bool gibi temel veri tipleri",
+          "href": "/education/lessons/python/module-01/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Type Conversion",
+          "description": "Veri tipi dönüşümleri ve type casting",
+          "href": "/education/lessons/python/module-01/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Input ve Output",
+          "description": "Kullanıcıdan veri alma ve ekrana yazdırma",
+          "href": "/education/lessons/python/module-01/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Comments ve Documentation",
+          "description": "Yorum satırları ve dokümantasyon yazma",
+          "href": "/education/lessons/python/module-01/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Python Syntax Kuralları",
+          "description": "Indentation, satır sonları ve syntax kuralları",
+          "href": "/education/lessons/python/module-01/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Python Interpreter Kullanımı",
+          "description": "REPL (Read-Eval-Print Loop) kullanımı",
+          "href": "/education/lessons/python/module-01/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Python Versiyonları",
+          "description": "Python 2 vs Python 3 farkları",
+          "href": "/education/lessons/python/module-01/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Python Ekosistemi",
+          "description": "PyPI, pip ve Python paket yönetimi",
+          "href": "/education/lessons/python/module-01/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Değerlendirme",
+          "description": "Modül kapsamında öğrenilenlerin özeti ve değerlendirme",
+          "href": "/education/lessons/python/module-01/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-02",
+      "title": "Module 2: Veri Yapıları Testi",
+      "summary": "Python'daki temel veri yapıları: listeler, sözlükler, tuple'lar, set'ler ve bunların kullanımı.",
+      "durationMinutes": 450,
+      "objectives": [
+        "List, dict, tuple, set veri yapılarını anlamak",
+        "Veri yapılarını etkili bir şekilde kullanmak",
+        "Veri yapıları üzerinde işlemler yapmak",
+        "Uygun veri yapısını seçmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Listeler (Lists)",
+          "description": "List veri yapısı ve temel işlemler",
+          "href": "/education/lessons/python/module-02/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Liste Metodları",
+          "description": "append, extend, insert, remove gibi liste metodları",
+          "href": "/education/lessons/python/module-02/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Liste Slicing ve Indexing",
+          "description": "Liste elemanlarına erişim ve dilimleme",
+          "href": "/education/lessons/python/module-02/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Sözlükler (Dictionaries)",
+          "description": "Dict veri yapısı ve key-value çiftleri",
+          "href": "/education/lessons/python/module-02/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Sözlük Metodları",
+          "description": "get, keys, values, items gibi sözlük metodları",
+          "href": "/education/lessons/python/module-02/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Tuple'lar",
+          "description": "Immutable tuple veri yapısı",
+          "href": "/education/lessons/python/module-02/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Set'ler",
+          "description": "Set veri yapısı ve matematiksel işlemler",
+          "href": "/education/lessons/python/module-02/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Veri Yapıları Karşılaştırması",
+          "description": "Hangi durumda hangi veri yapısı kullanılmalı",
+          "href": "/education/lessons/python/module-02/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Nested Data Structures",
+          "description": "İç içe veri yapıları",
+          "href": "/education/lessons/python/module-02/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: List Comprehensions",
+          "description": "Liste üreteçleri ve kısa yazım",
+          "href": "/education/lessons/python/module-02/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Dictionary Comprehensions",
+          "description": "Sözlük üreteçleri",
+          "href": "/education/lessons/python/module-02/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Veri Yapıları Üzerinde İterasyon",
+          "description": "for döngüleri ve iterasyon",
+          "href": "/education/lessons/python/module-02/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Copy ve Deep Copy",
+          "description": "Veri yapılarını kopyalama",
+          "href": "/education/lessons/python/module-02/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Veri Yapıları Performansı",
+          "description": "Veri yapılarının zaman karmaşıklığı",
+          "href": "/education/lessons/python/module-02/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/python/module-02/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-03",
+      "title": "Module 3: Fonksiyonlar ve Modüller Testi",
+      "summary": "Fonksiyon tanımlama, parametreler, return değerleri, lambda fonksiyonlar, modüller ve paketler.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Fonksiyon tanımlamayı ve kullanmayı öğrenmek",
+        "Parametreler ve return değerlerini anlamak",
+        "Lambda fonksiyonlarını kullanmak",
+        "Modül ve paket sistemini öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Fonksiyon Tanımlama",
+          "description": "def anahtar kelimesi ile fonksiyon oluşturma",
+          "href": "/education/lessons/python/module-03/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Fonksiyon Parametreleri",
+          "description": "Positional ve keyword parametreler",
+          "href": "/education/lessons/python/module-03/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Return Değerleri",
+          "description": "Fonksiyonlardan değer döndürme",
+          "href": "/education/lessons/python/module-03/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Default Parametreler",
+          "description": "Varsayılan parametre değerleri",
+          "href": "/education/lessons/python/module-03/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: *args ve **kwargs",
+          "description": "Değişken sayıda parametre",
+          "href": "/education/lessons/python/module-03/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Lambda Fonksiyonlar",
+          "description": "Anonim fonksiyonlar ve kullanım alanları",
+          "href": "/education/lessons/python/module-03/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Scope ve Namespace",
+          "description": "Değişken kapsamı ve isim alanları",
+          "href": "/education/lessons/python/module-03/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Decorators",
+          "description": "Fonksiyon dekoratörleri",
+          "href": "/education/lessons/python/module-03/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Generator Fonksiyonlar",
+          "description": "yield anahtar kelimesi ve generator'lar",
+          "href": "/education/lessons/python/module-03/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Modül Oluşturma",
+          "description": "Python modül dosyası oluşturma",
+          "href": "/education/lessons/python/module-03/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Modül İçe Aktarma",
+          "description": "import, from import kullanımı",
+          "href": "/education/lessons/python/module-03/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Paketler (Packages)",
+          "description": "Paket yapısı ve __init__.py",
+          "href": "/education/lessons/python/module-03/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Standart Kütüphane",
+          "description": "Python standart kütüphane modülleri",
+          "href": "/education/lessons/python/module-03/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Third-party Paketler",
+          "description": "pip ile paket yükleme ve kullanma",
+          "href": "/education/lessons/python/module-03/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/python/module-03/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-04",
+      "title": "Module 4: Nesne Yönelimli Programlama Testi",
+      "summary": "Sınıflar, nesneler, kalıtım, polimorfizm, encapsulation, abstraction ve Python'da OOP prensipleri.",
+      "durationMinutes": 450,
+      "objectives": [
+        "OOP prensiplerini Python'da uygulamak",
+        "Sınıf ve nesne kavramlarını öğrenmek",
+        "Kalıtım ve polimorfizm kullanmak",
+        "Encapsulation ve abstraction uygulamak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: OOP Prensiplerine Giriş",
+          "description": "Nesne yönelimli programlamanın temelleri",
+          "href": "/education/lessons/python/module-04/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Class ve Object",
+          "description": "Sınıf tanımlama ve nesne oluşturma",
+          "href": "/education/lessons/python/module-04/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: __init__ ve Constructor",
+          "description": "Nesne başlatma metodları",
+          "href": "/education/lessons/python/module-04/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Instance ve Class Variables",
+          "description": "Örnek ve sınıf değişkenleri",
+          "href": "/education/lessons/python/module-04/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Methods ve self",
+          "description": "Instance metodları ve self parametresi",
+          "href": "/education/lessons/python/module-04/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Encapsulation",
+          "description": "Veri gizleme ve kapsülleme",
+          "href": "/education/lessons/python/module-04/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Properties ve @property",
+          "description": "Property dekoratörü ve getter/setter",
+          "href": "/education/lessons/python/module-04/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Inheritance (Kalıtım)",
+          "description": "Sınıf kalıtımı ve super()",
+          "href": "/education/lessons/python/module-04/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Method Overriding",
+          "description": "Metod ezme ve polimorfizm",
+          "href": "/education/lessons/python/module-04/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Multiple Inheritance",
+          "description": "Çoklu kalıtım ve MRO",
+          "href": "/education/lessons/python/module-04/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Abstract Base Classes",
+          "description": "Soyut sınıflar ve abc modülü",
+          "href": "/education/lessons/python/module-04/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Magic Methods",
+          "description": "__str__, __repr__, __len__ gibi özel metodlar",
+          "href": "/education/lessons/python/module-04/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Static ve Class Methods",
+          "description": "@staticmethod ve @classmethod",
+          "href": "/education/lessons/python/module-04/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: OOP Design Patterns",
+          "description": "Python'da tasarım desenleri",
+          "href": "/education/lessons/python/module-04/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: OOP Best Practices",
+          "description": "OOP tasarım prensipleri ve en iyi uygulamalar",
+          "href": "/education/lessons/python/module-04/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-05",
+      "title": "Module 5: Dosya İşlemleri Testi",
+      "summary": "Dosya okuma, yazma, dosya yönetimi, JSON, CSV işlemleri ve dosya formatları.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Dosya okuma ve yazma işlemlerini öğrenmek",
+        "Farklı dosya formatlarını işlemek",
+        "Dosya yönetimi yapmak",
+        "JSON ve CSV işlemlerini öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Dosya Okuma",
+          "description": "open() fonksiyonu ve dosya okuma",
+          "href": "/education/lessons/python/module-05/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Dosya Yazma",
+          "description": "Dosyaya veri yazma işlemleri",
+          "href": "/education/lessons/python/module-05/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Dosya Modları",
+          "description": "r, w, a, x modları ve kullanımı",
+          "href": "/education/lessons/python/module-05/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Context Managers",
+          "description": "with statement ve dosya yönetimi",
+          "href": "/education/lessons/python/module-05/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Dosya Yolları",
+          "description": "os.path ve pathlib kullanımı",
+          "href": "/education/lessons/python/module-05/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: JSON İşlemleri",
+          "description": "json modülü ile JSON okuma/yazma",
+          "href": "/education/lessons/python/module-05/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: CSV İşlemleri",
+          "description": "csv modülü ile CSV dosyaları",
+          "href": "/education/lessons/python/module-05/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Binary Dosyalar",
+          "description": "Binary mod ve dosya işlemleri",
+          "href": "/education/lessons/python/module-05/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Dosya ve Klasör Yönetimi",
+          "description": "os ve shutil modülleri",
+          "href": "/education/lessons/python/module-05/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Exception Handling in Files",
+          "description": "Dosya işlemlerinde hata yönetimi",
+          "href": "/education/lessons/python/module-05/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: File Encoding",
+          "description": "UTF-8, encoding parametreleri",
+          "href": "/education/lessons/python/module-05/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Temporary Files",
+          "description": "Geçici dosya oluşturma",
+          "href": "/education/lessons/python/module-05/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: File Compression",
+          "description": "zipfile ve tarfile modülleri",
+          "href": "/education/lessons/python/module-05/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Logging to Files",
+          "description": "logging modülü ile dosyaya log yazma",
+          "href": "/education/lessons/python/module-05/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/python/module-05/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-06",
+      "title": "Module 6: Veritabanı İşlemleri Testi",
+      "summary": "SQLite, PostgreSQL bağlantıları, SQLAlchemy ORM, veritabanı sorguları ve transaction yönetimi.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Veritabanı bağlantıları kurmak",
+        "SQLAlchemy ORM kullanmayı öğrenmek",
+        "CRUD işlemleri yapmak",
+        "Transaction yönetimi yapmak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Veritabanı Temelleri",
+          "description": "Veritabanı kavramları ve SQL'e giriş",
+          "href": "/education/lessons/python/module-06/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: SQLite ile Çalışma",
+          "description": "sqlite3 modülü ve SQLite kullanımı",
+          "href": "/education/lessons/python/module-06/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: SQLite CRUD İşlemleri",
+          "description": "Create, Read, Update, Delete işlemleri",
+          "href": "/education/lessons/python/module-06/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: PostgreSQL Bağlantısı",
+          "description": "psycopg2 ile PostgreSQL bağlantısı",
+          "href": "/education/lessons/python/module-06/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: SQLAlchemy Giriş",
+          "description": "ORM kavramı ve SQLAlchemy'ye giriş",
+          "href": "/education/lessons/python/module-06/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: SQLAlchemy Models",
+          "description": "Model tanımlama ve tablo oluşturma",
+          "href": "/education/lessons/python/module-06/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: SQLAlchemy Relationships",
+          "description": "One-to-Many, Many-to-Many ilişkiler",
+          "href": "/education/lessons/python/module-06/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: SQLAlchemy Queries",
+          "description": "Query API ve sorgu yazma",
+          "href": "/education/lessons/python/module-06/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: SQLAlchemy Sessions",
+          "description": "Session yönetimi ve transaction'lar",
+          "href": "/education/lessons/python/module-06/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Database Migrations",
+          "description": "Alembic ile migration yönetimi",
+          "href": "/education/lessons/python/module-06/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Raw SQL Queries",
+          "description": "SQLAlchemy ile ham SQL sorguları",
+          "href": "/education/lessons/python/module-06/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Connection Pooling",
+          "description": "Bağlantı havuzlama ve optimizasyon",
+          "href": "/education/lessons/python/module-06/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Database Best Practices",
+          "description": "Veritabanı işlemleri en iyi uygulamaları",
+          "href": "/education/lessons/python/module-06/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Database Testing",
+          "description": "Test veritabanları ve test stratejileri",
+          "href": "/education/lessons/python/module-06/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/python/module-06/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-07",
+      "title": "Module 7: Web Framework (Django/Flask) Testi",
+      "summary": "Django ve Flask web framework'leri, proje yapısı, routing, template engine ve web uygulaması geliştirme.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Django ve Flask framework'lerini anlamak",
+        "Web uygulaması projesi oluşturmak",
+        "Routing ve view'ları yapılandırmak",
+        "Template engine kullanmak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Web Framework Nedir?",
+          "description": "Web framework kavramı ve Python framework'leri",
+          "href": "/education/lessons/python/module-07/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Django Giriş",
+          "description": "Django kurulumu ve ilk proje",
+          "href": "/education/lessons/python/module-07/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Django Proje Yapısı",
+          "description": "Django proje ve app yapısı",
+          "href": "/education/lessons/python/module-07/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Django Models",
+          "description": "Django ORM ve model tanımlama",
+          "href": "/education/lessons/python/module-07/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Django Views",
+          "description": "Function-based ve class-based views",
+          "href": "/education/lessons/python/module-07/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Django Templates",
+          "description": "Django template engine ve syntax",
+          "href": "/education/lessons/python/module-07/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Django URL Routing",
+          "description": "URL patterns ve routing",
+          "href": "/education/lessons/python/module-07/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Flask Giriş",
+          "description": "Flask kurulumu ve ilk uygulama",
+          "href": "/education/lessons/python/module-07/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Flask Routing",
+          "description": "Flask route decorators ve URL patterns",
+          "href": "/education/lessons/python/module-07/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Flask Templates",
+          "description": "Jinja2 template engine",
+          "href": "/education/lessons/python/module-07/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Flask Blueprints",
+          "description": "Modüler uygulama yapısı",
+          "href": "/education/lessons/python/module-07/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Django vs Flask",
+          "description": "İki framework'ün karşılaştırması",
+          "href": "/education/lessons/python/module-07/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Static Files ve Media",
+          "description": "CSS, JS ve medya dosyaları yönetimi",
+          "href": "/education/lessons/python/module-07/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Form Handling",
+          "description": "Form işleme ve validation",
+          "href": "/education/lessons/python/module-07/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/python/module-07/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-08",
+      "title": "Module 8: RESTful API Geliştirme Testi",
+      "summary": "RESTful API tasarımı, Django REST Framework, Flask-RESTful, API authentication ve API best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "RESTful API tasarım prensiplerini öğrenmek",
+        "Django REST Framework kullanmak",
+        "Flask ile API geliştirmek",
+        "API authentication ve security uygulamak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: RESTful API Nedir?",
+          "description": "REST prensipleri ve API tasarımı",
+          "href": "/education/lessons/python/module-08/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Django REST Framework Giriş",
+          "description": "DRF kurulumu ve temel kavramlar",
+          "href": "/education/lessons/python/module-08/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: DRF Serializers",
+          "description": "Serializer'lar ve data validation",
+          "href": "/education/lessons/python/module-08/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: DRF ViewSets",
+          "description": "ViewSet'ler ve CRUD işlemleri",
+          "href": "/education/lessons/python/module-08/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: DRF Routers",
+          "description": "URL routing ve endpoint yapılandırması",
+          "href": "/education/lessons/python/module-08/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: DRF Permissions",
+          "description": "İzin yönetimi ve authentication",
+          "href": "/education/lessons/python/module-08/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Flask-RESTful",
+          "description": "Flask-RESTful ile API geliştirme",
+          "href": "/education/lessons/python/module-08/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: API Authentication",
+          "description": "JWT, Token authentication",
+          "href": "/education/lessons/python/module-08/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: API Versioning",
+          "description": "API versiyonlama stratejileri",
+          "href": "/education/lessons/python/module-08/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: API Pagination",
+          "description": "Sayfalama ve veri sınırlama",
+          "href": "/education/lessons/python/module-08/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: API Filtering ve Searching",
+          "description": "Filtreleme ve arama özellikleri",
+          "href": "/education/lessons/python/module-08/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: API Documentation",
+          "description": "Swagger/OpenAPI dokümantasyonu",
+          "href": "/education/lessons/python/module-08/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: API Error Handling",
+          "description": "Hata yönetimi ve status kodları",
+          "href": "/education/lessons/python/module-08/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: API Testing",
+          "description": "API test stratejileri",
+          "href": "/education/lessons/python/module-08/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: API Best Practices",
+          "description": "RESTful API tasarım en iyi uygulamaları",
+          "href": "/education/lessons/python/module-08/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-09",
+      "title": "Module 9: Testing Testi",
+      "summary": "Unit testing, integration testing, unittest, pytest framework, mocking ve test best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Test yazma prensiplerini öğrenmek",
+        "unittest ve pytest kullanmak",
+        "Mocking ve test araçlarını kullanmak",
+        "Test coverage ve best practices uygulamak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Testing Temelleri",
+          "description": "Test türleri ve test pyramid",
+          "href": "/education/lessons/python/module-09/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: unittest Framework",
+          "description": "unittest modülüne giriş",
+          "href": "/education/lessons/python/module-09/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: unittest Test Yazma",
+          "description": "Test class'ları ve test metodları",
+          "href": "/education/lessons/python/module-09/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: unittest Assertions",
+          "description": "Assert metodları ve kullanımı",
+          "href": "/education/lessons/python/module-09/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: pytest Framework",
+          "description": "pytest kurulumu ve temel kullanım",
+          "href": "/education/lessons/python/module-09/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: pytest Fixtures",
+          "description": "Fixture'lar ve test setup",
+          "href": "/education/lessons/python/module-09/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: pytest Parametrization",
+          "description": "Parametreli testler",
+          "href": "/education/lessons/python/module-09/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Mocking with unittest.mock",
+          "description": "Mock objeler ve patching",
+          "href": "/education/lessons/python/module-09/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Mocking with pytest-mock",
+          "description": "pytest-mock kullanımı",
+          "href": "/education/lessons/python/module-09/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Integration Testing",
+          "description": "Entegrasyon testleri yazma",
+          "href": "/education/lessons/python/module-09/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Django Testing",
+          "description": "Django test framework'ü",
+          "href": "/education/lessons/python/module-09/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Flask Testing",
+          "description": "Flask test client kullanımı",
+          "href": "/education/lessons/python/module-09/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Test Coverage",
+          "description": "coverage.py ile test kapsamı",
+          "href": "/education/lessons/python/module-09/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Test-Driven Development",
+          "description": "TDD yaklaşımı ve uygulaması",
+          "href": "/education/lessons/python/module-09/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Testing Best Practices",
+          "description": "Test yazma en iyi uygulamaları",
+          "href": "/education/lessons/python/module-09/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-10",
+      "title": "Module 10: Async Programming Testi",
+      "summary": "Asynchronous programming, async/await, asyncio, concurrent programming ve async patterns.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Async programming kavramını anlamak",
+        "async/await syntax'ını kullanmak",
+        "asyncio kütüphanesini öğrenmek",
+        "Concurrent programming yapmak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Async Programming Nedir?",
+          "description": "Asenkron programlama kavramı",
+          "href": "/education/lessons/python/module-10/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: async/await Syntax",
+          "description": "async ve await anahtar kelimeleri",
+          "href": "/education/lessons/python/module-10/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Coroutines",
+          "description": "Coroutine fonksiyonlar",
+          "href": "/education/lessons/python/module-10/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: asyncio Modülü",
+          "description": "asyncio kütüphanesine giriş",
+          "href": "/education/lessons/python/module-10/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Event Loop",
+          "description": "Event loop yönetimi",
+          "href": "/education/lessons/python/module-10/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Tasks ve Futures",
+          "description": "Task oluşturma ve yönetimi",
+          "href": "/education/lessons/python/module-10/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Concurrent Execution",
+          "description": "asyncio.gather ve concurrent işlemler",
+          "href": "/education/lessons/python/module-10/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Async Context Managers",
+          "description": "Async with statement",
+          "href": "/education/lessons/python/module-10/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Async Generators",
+          "description": "Async generator fonksiyonlar",
+          "href": "/education/lessons/python/module-10/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Async HTTP Requests",
+          "description": "aiohttp ile async HTTP istekleri",
+          "href": "/education/lessons/python/module-10/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Async Database Operations",
+          "description": "Async veritabanı işlemleri",
+          "href": "/education/lessons/python/module-10/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Async Web Frameworks",
+          "description": "FastAPI, Quart gibi async framework'ler",
+          "href": "/education/lessons/python/module-10/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Threading vs Async",
+          "description": "Threading ve async karşılaştırması",
+          "href": "/education/lessons/python/module-10/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Async Best Practices",
+          "description": "Async programlama en iyi uygulamaları",
+          "href": "/education/lessons/python/module-10/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/python/module-10/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-11",
+      "title": "Module 11: Data Science Temelleri Testi",
+      "summary": "NumPy, Pandas, veri analizi, data manipulation ve temel data science kavramları.",
+      "durationMinutes": 450,
+      "objectives": [
+        "NumPy kütüphanesini öğrenmek",
+        "Pandas ile veri analizi yapmak",
+        "Veri manipülasyonu yapmak",
+        "Temel data science kavramlarını anlamak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Data Science Giriş",
+          "description": "Veri bilimi kavramları ve Python ekosistemi",
+          "href": "/education/lessons/python/module-11/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: NumPy Giriş",
+          "description": "NumPy kurulumu ve temel kavramlar",
+          "href": "/education/lessons/python/module-11/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: NumPy Arrays",
+          "description": "NumPy array oluşturma ve işlemler",
+          "href": "/education/lessons/python/module-11/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: NumPy Operations",
+          "description": "Matematiksel işlemler ve fonksiyonlar",
+          "href": "/education/lessons/python/module-11/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: NumPy Indexing ve Slicing",
+          "description": "Array indeksleme ve dilimleme",
+          "href": "/education/lessons/python/module-11/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Pandas Giriş",
+          "description": "Pandas kurulumu ve DataFrame kavramı",
+          "href": "/education/lessons/python/module-11/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Pandas DataFrame",
+          "description": "DataFrame oluşturma ve temel işlemler",
+          "href": "/education/lessons/python/module-11/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Pandas Series",
+          "description": "Series veri yapısı",
+          "href": "/education/lessons/python/module-11/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Pandas Data Selection",
+          "description": "Veri seçme ve filtreleme",
+          "href": "/education/lessons/python/module-11/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Pandas Data Cleaning",
+          "description": "Eksik veri ve veri temizleme",
+          "href": "/education/lessons/python/module-11/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Pandas GroupBy",
+          "description": "Gruplama ve aggregasyon işlemleri",
+          "href": "/education/lessons/python/module-11/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Pandas Merging",
+          "description": "DataFrame birleştirme işlemleri",
+          "href": "/education/lessons/python/module-11/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Data Visualization",
+          "description": "matplotlib ve seaborn ile görselleştirme",
+          "href": "/education/lessons/python/module-11/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Data Analysis Examples",
+          "description": "Pratik veri analizi örnekleri",
+          "href": "/education/lessons/python/module-11/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/python/module-11/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-12",
+      "title": "Module 12: Web Scraping Testi",
+      "summary": "Web scraping, BeautifulSoup, Scrapy, HTTP requests ve web verisi çekme teknikleri.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Web scraping kavramını anlamak",
+        "BeautifulSoup kullanmayı öğrenmek",
+        "Scrapy framework'ünü kullanmak",
+        "Web verisi çekme tekniklerini öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Web Scraping Nedir?",
+          "description": "Web scraping kavramı ve kullanım alanları",
+          "href": "/education/lessons/python/module-12/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: HTTP Requests",
+          "description": "requests kütüphanesi ile HTTP istekleri",
+          "href": "/education/lessons/python/module-12/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: HTML Parsing",
+          "description": "HTML yapısını anlama",
+          "href": "/education/lessons/python/module-12/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: BeautifulSoup Giriş",
+          "description": "BeautifulSoup kurulumu ve temel kullanım",
+          "href": "/education/lessons/python/module-12/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: BeautifulSoup Selectors",
+          "description": "CSS selectors ve find metodları",
+          "href": "/education/lessons/python/module-12/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: BeautifulSoup Data Extraction",
+          "description": "Veri çıkarma ve işleme",
+          "href": "/education/lessons/python/module-12/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Scrapy Framework",
+          "description": "Scrapy kurulumu ve proje yapısı",
+          "href": "/education/lessons/python/module-12/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Scrapy Spiders",
+          "description": "Spider oluşturma ve yapılandırma",
+          "href": "/education/lessons/python/module-12/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Scrapy Items",
+          "description": "Item tanımlama ve data pipeline",
+          "href": "/education/lessons/python/module-12/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Handling JavaScript",
+          "description": "Selenium ile JavaScript içerik",
+          "href": "/education/lessons/python/module-12/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: API vs Scraping",
+          "description": "API kullanımı vs web scraping",
+          "href": "/education/lessons/python/module-12/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Scraping Ethics",
+          "description": "Yasal ve etik konular",
+          "href": "/education/lessons/python/module-12/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Rate Limiting",
+          "description": "İstek hızı sınırlama",
+          "href": "/education/lessons/python/module-12/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Error Handling in Scraping",
+          "description": "Hata yönetimi ve retry mekanizmaları",
+          "href": "/education/lessons/python/module-12/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/python/module-12/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-13",
+      "title": "Module 13: Deployment Testi",
+      "summary": "Uygulama dağıtımı, Docker containerization, cloud deployment, CI/CD ve production best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Uygulama dağıtım stratejilerini öğrenmek",
+        "Docker containerization yapmak",
+        "Cloud platformlara deployment yapmak",
+        "CI/CD pipeline'ları kurmak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Deployment Stratejileri",
+          "description": "Dağıtım modelleri ve seçenekleri",
+          "href": "/education/lessons/python/module-13/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Environment Configuration",
+          "description": "Ortam değişkenleri ve yapılandırma",
+          "href": "/education/lessons/python/module-13/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Docker Temelleri",
+          "description": "Docker kavramları ve kullanımı",
+          "href": "/education/lessons/python/module-13/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Dockerfile Oluşturma",
+          "description": "Python uygulamaları için Dockerfile",
+          "href": "/education/lessons/python/module-13/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Docker Compose",
+          "description": "Multi-container uygulamalar",
+          "href": "/education/lessons/python/module-13/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Virtual Environments",
+          "description": "venv ve virtualenv kullanımı",
+          "href": "/education/lessons/python/module-13/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Requirements Management",
+          "description": "requirements.txt ve dependency yönetimi",
+          "href": "/education/lessons/python/module-13/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Heroku Deployment",
+          "description": "Heroku'ya Python uygulaması deploy etme",
+          "href": "/education/lessons/python/module-13/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: AWS Deployment",
+          "description": "AWS Elastic Beanstalk ve EC2",
+          "href": "/education/lessons/python/module-13/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Google Cloud Deployment",
+          "description": "Google App Engine ve Cloud Run",
+          "href": "/education/lessons/python/module-13/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Azure Deployment",
+          "description": "Azure App Service'e dağıtım",
+          "href": "/education/lessons/python/module-13/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: CI/CD Concepts",
+          "description": "Sürekli entegrasyon ve dağıtım",
+          "href": "/education/lessons/python/module-13/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: GitHub Actions",
+          "description": "GitHub Actions ile CI/CD",
+          "href": "/education/lessons/python/module-13/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Production Best Practices",
+          "description": "Production ortamı en iyi uygulamaları",
+          "href": "/education/lessons/python/module-13/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Monitoring ve Logging",
+          "description": "Uygulama izleme ve loglama",
+          "href": "/education/lessons/python/module-13/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-14",
+      "title": "Module 14: Best Practices Testi",
+      "summary": "Python geliştirmede en iyi uygulamalar, kod kalitesi, PEP 8, güvenlik, performans ve maintainability.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Kod kalitesi standartlarını öğrenmek",
+        "PEP 8 style guide uygulamak",
+        "Güvenlik best practices uygulamak",
+        "Maintainable kod yazmak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: PEP 8 Style Guide",
+          "description": "Python kod stil rehberi",
+          "href": "/education/lessons/python/module-14/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Code Formatting",
+          "description": "black, autopep8 gibi formatlayıcılar",
+          "href": "/education/lessons/python/module-14/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Linting Tools",
+          "description": "pylint, flake8 ile kod analizi",
+          "href": "/education/lessons/python/module-14/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Type Hints",
+          "description": "Type annotations ve mypy",
+          "href": "/education/lessons/python/module-14/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Docstrings",
+          "description": "Dokümantasyon string'leri",
+          "href": "/education/lessons/python/module-14/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Error Handling Best Practices",
+          "description": "Exception handling stratejileri",
+          "href": "/education/lessons/python/module-14/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Logging Best Practices",
+          "description": "logging modülü ve en iyi uygulamalar",
+          "href": "/education/lessons/python/module-14/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Security Best Practices",
+          "description": "Güvenlik en iyi uygulamaları",
+          "href": "/education/lessons/python/module-14/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Performance Optimization",
+          "description": "Kod performansı optimizasyonu",
+          "href": "/education/lessons/python/module-14/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Memory Management",
+          "description": "Bellek yönetimi ve optimizasyon",
+          "href": "/education/lessons/python/module-14/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Code Organization",
+          "description": "Proje yapısı ve kod organizasyonu",
+          "href": "/education/lessons/python/module-14/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Dependency Management",
+          "description": "pip, pipenv, poetry kullanımı",
+          "href": "/education/lessons/python/module-14/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Code Review",
+          "description": "Kod inceleme en iyi uygulamaları",
+          "href": "/education/lessons/python/module-14/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Refactoring",
+          "description": "Kod refaktörleme teknikleri",
+          "href": "/education/lessons/python/module-14/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Continuous Improvement",
+          "description": "Sürekli iyileştirme kültürü",
+          "href": "/education/lessons/python/module-14/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-15",
+      "title": "Module 15: Capstone Project Testi",
+      "summary": "Kapsamlı bir proje geliştirerek tüm öğrenilenleri uygulama, gerçek dünya senaryosu ve portfolio projesi.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Tüm öğrenilenleri bir projede uygulamak",
+        "Gerçek dünya senaryosu geliştirmek",
+        "Portfolio projesi oluşturmak",
+        "End-to-end uygulama geliştirmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Proje Planlama",
+          "description": "Proje gereksinimleri ve planlama",
+          "href": "/education/lessons/python/module-15/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Mimari Tasarım",
+          "description": "Sistem mimarisi tasarımı",
+          "href": "/education/lessons/python/module-15/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Database Design",
+          "description": "Veritabanı tasarımı ve şema",
+          "href": "/education/lessons/python/module-15/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Backend Development",
+          "description": "API ve backend geliştirme",
+          "href": "/education/lessons/python/module-15/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Authentication Implementation",
+          "description": "Kimlik doğrulama implementasyonu",
+          "href": "/education/lessons/python/module-15/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Business Logic",
+          "description": "İş mantığı geliştirme",
+          "href": "/education/lessons/python/module-15/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Error Handling",
+          "description": "Kapsamlı hata yönetimi",
+          "href": "/education/lessons/python/module-15/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Testing Strategy",
+          "description": "Test stratejisi ve implementasyonu",
+          "href": "/education/lessons/python/module-15/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Performance Optimization",
+          "description": "Performans optimizasyonu",
+          "href": "/education/lessons/python/module-15/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Security Hardening",
+          "description": "Güvenlik sertleştirme",
+          "href": "/education/lessons/python/module-15/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Documentation",
+          "description": "API dokümantasyonu ve kullanım kılavuzu",
+          "href": "/education/lessons/python/module-15/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Deployment Preparation",
+          "description": "Dağıtım hazırlığı ve yapılandırma",
+          "href": "/education/lessons/python/module-15/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: CI/CD Setup",
+          "description": "Sürekli entegrasyon ve dağıtım kurulumu",
+          "href": "/education/lessons/python/module-15/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Monitoring and Logging",
+          "description": "İzleme ve loglama implementasyonu",
+          "href": "/education/lessons/python/module-15/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Project Review and Presentation",
+          "description": "Proje incelemesi ve sunumu",
+          "href": "/education/lessons/python/module-15/lesson-15"
+        }
+      ]
+    }
+  ]
+}
