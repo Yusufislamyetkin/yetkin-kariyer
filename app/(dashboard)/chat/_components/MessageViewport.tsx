@@ -40,6 +40,16 @@ export const MessageViewport = forwardRef<HTMLDivElement, MessageViewportProps>(
   const prevMessagesRef = useRef<{ ids: Set<string>; length: number }>({ ids: new Set(), length: 0 });
   const isInitialMount = useRef(true);
 
+  const filteredMessages = useMemo(() => {
+    return messages.filter((message) => {
+      const id = message.id ?? "";
+      const hasTempPrefix = typeof id === "string" && (id.startsWith("temp-") || id.startsWith("front-"));
+      const { tempId } = message as ChatMessage & { tempId?: string | null };
+      const hasExplicitTempId = typeof tempId === "string" && tempId.length > 0;
+      return !hasTempPrefix && !hasExplicitTempId;
+    });
+  }, [messages]);
+
   const content = useMemo(() => {
     if (loading) {
       return (
@@ -49,7 +59,7 @@ export const MessageViewport = forwardRef<HTMLDivElement, MessageViewportProps>(
       );
     }
 
-    if (messages.length === 0) {
+    if (filteredMessages.length === 0) {
       return (
         <div className="flex flex-col items-center justify-center text-center py-20 gap-3 text-gray-500 dark:text-gray-400">
           <div className="text-blue-500">{emptyState.icon}</div>
@@ -75,7 +85,7 @@ export const MessageViewport = forwardRef<HTMLDivElement, MessageViewportProps>(
           </div>
         ) : null}
 
-        {messages.map((message) => {
+        {filteredMessages.map((message) => {
           const isOwn = message.userId === currentUserId;
           const isSystem = message.type === "system";
           const isAI = message.sender.id === "assistant" || message.sender.name === "AI Asistan";
@@ -261,17 +271,17 @@ export const MessageViewport = forwardRef<HTMLDivElement, MessageViewportProps>(
         })}
       </>
     );
-  }, [currentUserId, hasMore, loading, loadingMore, messages, onLoadMore, emptyState]);
+  }, [currentUserId, hasMore, loading, loadingMore, filteredMessages, onLoadMore, emptyState]);
 
   // İlk yüklemede ve yeni mesaj eklendiğinde scroll-to-bottom
   useEffect(() => {
-    if (!loading && messages.length > 0 && endRef && typeof endRef !== "function") {
-      const currentIds = new Set(messages.map((m) => m.id));
+    if (!loading && filteredMessages.length > 0 && endRef && typeof endRef !== "function") {
+      const currentIds = new Set(filteredMessages.map((m) => m.id));
       const prevIds = prevMessagesRef.current.ids;
       
       // Yeni mesaj var mı kontrol et (sadece ID'ler değiştiyse değil, yeni ID eklendiyse)
-      const hasNewMessage = messages.length > prevMessagesRef.current.length || 
-        (messages.length > 0 && !prevIds.has(messages[messages.length - 1]?.id));
+      const hasNewMessage = filteredMessages.length > prevMessagesRef.current.length || 
+        (filteredMessages.length > 0 && !prevIds.has(filteredMessages[filteredMessages.length - 1]?.id));
       
       // İlk mount'ta veya yeni mesaj eklendiğinde scroll yap
       const shouldScroll = isInitialMount.current || hasNewMessage;
@@ -285,20 +295,20 @@ export const MessageViewport = forwardRef<HTMLDivElement, MessageViewportProps>(
         }, 100);
         
         // Ref'leri güncelle
-        prevMessagesRef.current = { ids: currentIds, length: messages.length };
+        prevMessagesRef.current = { ids: currentIds, length: filteredMessages.length };
         isInitialMount.current = false;
         
         return () => clearTimeout(timeoutId);
       } else {
         // Sadece ref'leri güncelle, scroll yapma
-        prevMessagesRef.current = { ids: currentIds, length: messages.length };
+        prevMessagesRef.current = { ids: currentIds, length: filteredMessages.length };
       }
-    } else if (!loading && messages.length === 0) {
+    } else if (!loading && filteredMessages.length === 0) {
       // Mesajlar temizlendiğinde ref'i sıfırla
       prevMessagesRef.current = { ids: new Set(), length: 0 };
       isInitialMount.current = true;
     }
-  }, [loading, messages, endRef]);
+  }, [loading, filteredMessages, endRef]);
 
   return (
     <div

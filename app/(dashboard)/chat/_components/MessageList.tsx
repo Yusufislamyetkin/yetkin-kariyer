@@ -33,8 +33,14 @@ export function MessageList({
   emptyState,
   topInset,
 }: MessageListProps) {
-  // Filter out temporary ID messages (starting with 'temp-')
-  const filteredMessages = messages.filter((message) => !message.id.startsWith('temp-'));
+  // Filter out temporary frontend IDs so they never render on the client
+  const filteredMessages = messages.filter((message) => {
+    const id = message.id ?? "";
+    const hasTempPrefix = typeof id === "string" && (id.startsWith("temp-") || id.startsWith("front-"));
+    const { tempId } = message as ChatMessage & { tempId?: string | null };
+    const hasExplicitTempId = typeof tempId === "string" && tempId.length > 0;
+    return !hasTempPrefix && !hasExplicitTempId;
+  });
 
   return (
     <div
