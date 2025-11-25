@@ -409,14 +409,14 @@ export default function Home() {
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {[
-            { name: ".NET Core Temelleri", icon: "🔷", courses: 18, desc: ".NET Core ekosistemi, CLI, proje yapısı ve temel kavramlar", color: "from-blue-500 to-cyan-500" },
-            { name: "ASP.NET Core Web", icon: "🌐", courses: 12, desc: "MVC, Razor Pages, Web API ve web uygulama geliştirme", color: "from-indigo-500 to-purple-500" },
-            { name: "API Geliştirme", icon: "🔌", courses: 10, desc: "RESTful API, Minimal API, Controller Based API geliştirme", color: "from-green-500 to-emerald-500" },
-            { name: "Authentication & Authorization", icon: "🔐", courses: 8, desc: "JWT, Cookie Auth, Identity, güvenlik ve yetkilendirme", color: "from-orange-500 to-red-500" },
-            { name: "Veritabanı ve ORM", icon: "💾", courses: 9, desc: "Entity Framework Core, LINQ, veritabanı yönetimi", color: "from-purple-500 to-pink-500" },
-            { name: "Konsol Uygulamaları", icon: "💻", courses: 7, desc: "Console app geliştirme, CLI araçları ve pratik uygulamalar", color: "from-cyan-500 to-blue-500" },
-            { name: "Dependency Injection", icon: "🔧", courses: 6, desc: "DI container, servis yaşam döngüsü ve best practices", color: "from-teal-500 to-green-500" },
-            { name: "Middleware ve Pipeline", icon: "⚙️", courses: 5, desc: "Request pipeline, middleware yapısı ve custom middleware", color: "from-pink-500 to-rose-500" },
+            { name: "Backend Geliştirme", icon: "⚙️", courses: 3, desc: ".NET Core, Node.js, Java ile backend geliştirme ve API oluşturma", color: "from-blue-500 to-cyan-500" },
+            { name: "Frontend Geliştirme", icon: "🎨", courses: 3, desc: "React, Angular, Next.js ile modern web uygulamaları geliştirme", color: "from-indigo-500 to-purple-500" },
+            { name: "Mobil Geliştirme", icon: "📱", courses: 1, desc: "Flutter ile cross-platform mobil uygulama geliştirme", color: "from-green-500 to-emerald-500" },
+            { name: "Veritabanı", icon: "💾", courses: 1, desc: "MSSQL ile veritabanı yönetimi, sorgulama ve optimizasyon", color: "from-orange-500 to-red-500" },
+            { name: "Güvenlik", icon: "🔐", courses: 2, desc: "Ethical Hacking, OWASP güvenlik standartları ve web uygulama güvenliği", color: "from-purple-500 to-pink-500" },
+            { name: "DevOps", icon: "🚀", courses: 1, desc: "Docker, Kubernetes ile containerization ve orchestration", color: "from-cyan-500 to-blue-500" },
+            { name: "AI & Machine Learning", icon: "🤖", courses: 1, desc: "AI for Developers ile yapay zeka ve makine öğrenmesi temelleri", color: "from-teal-500 to-green-500" },
+            { name: ".NET Core", icon: "🔷", courses: 18, desc: ".NET Core ekosistemi, ASP.NET Core, API geliştirme ve daha fazlası", color: "from-pink-500 to-rose-500" },
           ].map((category, index) => (
             <Card
               key={index}

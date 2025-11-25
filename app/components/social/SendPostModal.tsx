@@ -168,11 +168,12 @@ export function SendPostModal({
           
           const threadData = await threadRes.json();
           
-          if (!threadData.threadId) {
+          const threadId = threadData.thread?.id;
+          if (!threadId) {
             throw new Error("Thread ID alınamadı");
           }
 
-          const response = await fetch(`/api/chat/direct/${threadData.threadId}/messages`, {
+          const response = await fetch(`/api/chat/direct/${threadId}/messages`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

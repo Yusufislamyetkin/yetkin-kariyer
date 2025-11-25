@@ -3,9 +3,9 @@
 import { useEffect, useState, useMemo } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { Medal, Info, Trophy, Lightbulb, Crown, Award, Star } from "lucide-react";
+import { Medal, Trophy, Crown, Star, Calendar, MessageCircle, Flame } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
-import { BadgeCollection } from "@/app/components/badges/BadgeDisplay";
+import { BadgeDisplay } from "@/app/components/badges/BadgeDisplay";
 
 interface Badge {
   id: string;
@@ -15,9 +15,129 @@ interface Badge {
   color: string;
   category: string;
   rarity: "common" | "rare" | "epic" | "legendary";
+  tier?: "bronze" | "silver" | "gold" | "platinum";
   points: number;
   earnedAt?: string;
   isDisplayed?: boolean;
+  criteria?: any;
+  key?: string;
+}
+
+// Unique isimler için utility fonksiyonu
+function generateUniqueBadgeName(badge: Badge, allBadges: Badge[]): string {
+  const activityType = badge.criteria?.activity_type || "";
+  const tier = badge.tier || "";
+  const count = badge.criteria?.count || 0;
+  
+  // Eğer isim zaten unique görünüyorsa (sayı içermiyorsa veya özel bir isimse), olduğu gibi bırak
+  if (!badge.name.match(/^\d+\s/) && !badge.name.includes("Uzmanı") && !badge.name.includes("Ustası") && !badge.name.includes("Efsanesi")) {
+    return badge.name;
+  }
+
+  // Activity type'a göre unique isimler oluştur
+  const nameVariations: Record<string, Record<string, string[]>> = {
+    bugfix: {
+      bronze: ["Bugfix Başlangıcı", "İlk Hata Düzeltme", "Bugfix Acemisi"],
+      silver: ["Bugfix Ustası", "Hata Avcısı", "Sorun Çözücü"],
+      gold: ["BugFix Splinter", "Bugfix Avcısı", "Hata Ayıklayıcı", "Sorun Bulucu", "Problem Çözme Uzmanı"],
+      platinum: ["Muhteşem Sorun Çözücü", "Bugfix Efsanesi", "Hata Düzeltme Ustası"],
+    },
+    "hata düzeltme": {
+      bronze: ["Hata Düzeltme Başlangıcı", "İlk Hata Düzeltme", "Hata Düzeltme Acemisi"],
+      silver: ["Hata Düzeltme Ustası", "Hata Avcısı", "Sorun Çözücü"],
+      gold: ["Hata Ayıklayıcı", "Sorun Bulucu", "Problem Çözme Uzmanı", "Hata Düzeltme Uzmanı"],
+      platinum: ["Muhteşem Sorun Çözücü", "Hata Düzeltme Efsanesi", "Hata Düzeltme Ustası"],
+    },
+    test: {
+      bronze: ["Test Başlangıcı", "İlk Test", "Test Acemisi"],
+      silver: ["Test Ustası", "Test Sever", "Test Tutkunu"],
+      gold: ["Test Uzmanı", "Test Master", "Test Champion"],
+      platinum: ["Test Efsanesi", "Test Kralı", "Test Şampiyonu"],
+    },
+    kurs: {
+      bronze: ["Kurs Başlangıcı", "İlk Kurs", "Kurs Acemisi"],
+      silver: ["Kurs Ustası", "Kurs Sever", "Kurs Tutkunu"],
+      gold: ["Kurs Uzmanı", "Kurs Master", "Kurs Champion"],
+      platinum: ["Kurs Efsanesi", "Kurs Kralı", "Kurs Şampiyonu"],
+    },
+    "canlı kod": {
+      bronze: ["Canlı Kod Başlangıcı", "İlk Canlı Kod", "Canlı Kod Acemisi"],
+      silver: ["Canlı Kod Ustası", "Canlı Kod Sever", "Canlı Kod Tutkunu"],
+      gold: ["Canlı Kod Uzmanı", "Canlı Kod Master", "Canlı Kod Champion"],
+      platinum: ["Canlı Kod Efsanesi", "Canlı Kod Kralı", "Canlı Kod Şampiyonu"],
+    },
+    "canlı kodlama": {
+      bronze: ["Canlı Kodlama Başlangıcı", "İlk Canlı Kodlama", "Canlı Kodlama Acemisi"],
+      silver: ["Canlı Kodlama Ustası", "Canlı Kodlama Sever", "Canlı Kodlama Tutkunu"],
+      gold: ["Canlı Kodlama Uzmanı", "Canlı Kodlama Master", "Canlı Kodlama Champion"],
+      platinum: ["Canlı Kodlama Efsanesi", "Canlı Kodlama Kralı", "Canlı Kodlama Şampiyonu"],
+    },
+    ders: {
+      bronze: ["Ders Başlangıcı", "İlk Ders", "Ders Acemisi"],
+      silver: ["Ders Ustası", "Ders Sever", "Ders Tutkunu"],
+      gold: ["Ders Uzmanı", "Ders Master", "Ders Champion"],
+      platinum: ["Ders Efsanesi", "Ders Kralı", "Ders Şampiyonu"],
+    },
+    quiz: {
+      bronze: ["Quiz Başlangıcı", "İlk Quiz", "Quiz Acemisi"],
+      silver: ["Quiz Ustası", "Quiz Sever", "Quiz Tutkunu"],
+      gold: ["Quiz Uzmanı", "Quiz Master", "Quiz Champion"],
+      platinum: ["Quiz Efsanesi", "Quiz Kralı", "Quiz Şampiyonu"],
+    },
+    eğitim: {
+      bronze: ["Eğitim Başlangıcı", "İlk Eğitim", "Eğitim Acemisi"],
+      silver: ["Eğitim Ustası", "Eğitim Sever", "Eğitim Tutkunu"],
+      gold: ["Eğitim Uzmanı", "Eğitim Master", "Eğitim Champion"],
+      platinum: ["Eğitim Efsanesi", "Eğitim Kralı", "Eğitim Şampiyonu"],
+    },
+    pratik: {
+      bronze: ["Pratik Başlangıcı", "İlk Pratik", "Pratik Acemisi"],
+      silver: ["Pratik Ustası", "Pratik Sever", "Pratik Tutkunu"],
+      gold: ["Pratik Uzmanı", "Pratik Master", "Pratik Champion"],
+      platinum: ["Pratik Efsanesi", "Pratik Kralı", "Pratik Şampiyonu"],
+    },
+  };
+
+  const normalizedActivityType = activityType.toLowerCase();
+  const variations = nameVariations[normalizedActivityType]?.[tier] || [];
+  
+  if (variations.length === 0) {
+    // Fallback: activity type ve tier'e göre genel isim
+    const tierNames: Record<string, string> = {
+      bronze: "Başlangıç",
+      silver: "Usta",
+      gold: "Uzman",
+      platinum: "Efsane",
+    };
+    return `${activityType} ${tierNames[tier] || ""}`.trim();
+  }
+
+  // Aynı activity type ve tier'deki rozetleri bul
+  const sameTypeTierBadges = allBadges.filter(
+    (b) =>
+      b.criteria?.activity_type?.toLowerCase() === normalizedActivityType &&
+      b.tier === tier &&
+      b.id !== badge.id
+  );
+
+  // Kullanılmış isimleri topla
+  const usedNames = new Set(sameTypeTierBadges.map((b) => b.name));
+
+  // Kullanılmamış bir isim bul
+  for (const variation of variations) {
+    if (!usedNames.has(variation)) {
+      return variation;
+    }
+  }
+
+  // Tüm isimler kullanılmışsa, count'a göre unique isim oluştur
+  const fallbackTierNames: Record<string, string> = {
+    bronze: "Başlangıç",
+    silver: "Usta",
+    gold: "Uzman",
+    platinum: "Efsane",
+  };
+  return `${activityType} ${fallbackTierNames[tier] || ""} ${count}`.trim();
 }
 
 export default function RozetlerPage() {
@@ -28,14 +148,14 @@ export default function RozetlerPage() {
   const [userBadges, setUserBadges] = useState<Badge[]>([]);
   const [earnedBadgeIds, setEarnedBadgeIds] = useState<Set<string>>(new Set());
   const [totalBadgesCount, setTotalBadgesCount] = useState(93);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>("daily_activities");
 
   const categories = useMemo(
     () => [
       {
         id: "daily_activities",
         name: "Günlük Aktiviteler",
-        icon: "📅",
+        icon: Calendar,
         description: "Günlük test, kurs, canlı kod ve bugfix aktiviteleriniz için rozetler",
         gradient: "from-blue-500 to-cyan-500",
         badgeCategories: ["daily_activities"],
@@ -43,7 +163,7 @@ export default function RozetlerPage() {
       {
         id: "total_achievements",
         name: "Toplam Başarılar",
-        icon: "🏆",
+        icon: Trophy,
         description: "Toplam başarılarınız için rozetler",
         gradient: "from-purple-500 to-pink-500",
         badgeCategories: ["score"],
@@ -51,7 +171,7 @@ export default function RozetlerPage() {
       {
         id: "social_interaction",
         name: "Sosyal Etkileşim",
-        icon: "💬",
+        icon: MessageCircle,
         description: "Sosyal aktiviteleriniz için rozetler",
         gradient: "from-green-500 to-emerald-500",
         badgeCategories: ["social_interaction"],
@@ -59,7 +179,7 @@ export default function RozetlerPage() {
       {
         id: "consistency",
         name: "Süreklilik ve Disiplin",
-        icon: "🔥",
+        icon: Flame,
         description: "Süreklilik ve disiplin rozetleri",
         gradient: "from-orange-500 to-red-500",
         badgeCategories: ["streak"],
@@ -67,7 +187,7 @@ export default function RozetlerPage() {
       {
         id: "special",
         name: "Özel Başarılar",
-        icon: "⭐",
+        icon: Star,
         description: "Özel başarılarınız için rozetler",
         gradient: "from-yellow-500 to-amber-500",
         badgeCategories: ["special"],
@@ -92,38 +212,45 @@ export default function RozetlerPage() {
     });
   }, [allBadges, earnedBadgeIds, categories]);
 
+  // Rozetleri unique isimlerle güncelle
+  const badgesWithUniqueNames = useMemo(() => {
+    return allBadges.map((badge) => ({
+      ...badge,
+      name: generateUniqueBadgeName(badge, allBadges),
+    }));
+  }, [allBadges]);
+
   const filteredBadges = useMemo(() => {
-    if (!selectedCategory) return allBadges;
+    if (!selectedCategory) return badgesWithUniqueNames;
     const category = categories.find((c) => c.id === selectedCategory);
-    if (!category) return allBadges;
-    return allBadges.filter((badge) =>
+    if (!category) return badgesWithUniqueNames;
+    return badgesWithUniqueNames.filter((badge) =>
       category.badgeCategories.includes(badge.category)
     );
-  }, [selectedCategory, allBadges, categories]);
+  }, [selectedCategory, badgesWithUniqueNames, categories]);
 
-  // Calculate tier statistics for selected category
-  const tierStats = useMemo(() => {
-    if (!selectedCategory) return null;
-    const categoryBadges = filteredBadges;
-    const tiers = ["bronze", "silver", "gold", "platinum"];
-    const tierNames = {
-      bronze: "Başlangıç Seviye",
-      silver: "Orta Seviye",
-      gold: "İleri Seviye",
-      platinum: "Efsanevi",
-    };
+  // Rozetleri seviyelere göre grupla
+  const badgesByTier = useMemo(() => {
+    const tiers = ["bronze", "silver", "gold", "platinum"] as const;
+    const grouped: Record<string, Badge[]> = {};
     
-    return tiers.map((tier) => {
-      const tierBadges = categoryBadges.filter((b: Badge) => (b as any).tier === tier);
-      const earnedInTier = tierBadges.filter((b: Badge) => earnedBadgeIds.has(b.id)).length;
-      return {
-        tier,
-        name: tierNames[tier as keyof typeof tierNames],
-        total: tierBadges.length,
-        earned: earnedInTier,
-      };
+    tiers.forEach((tier) => {
+      grouped[tier] = filteredBadges.filter((badge) => badge.tier === tier);
     });
-  }, [selectedCategory, filteredBadges, earnedBadgeIds]);
+    
+    // Tier olmayan rozetleri "other" kategorisine ekle
+    grouped.other = filteredBadges.filter((badge) => !badge.tier);
+    
+    return grouped;
+  }, [filteredBadges]);
+
+  const tierNames = {
+    bronze: "Başlangıç Seviye",
+    silver: "Orta Seviye",
+    gold: "İleri Seviye",
+    platinum: "Efsanevi",
+    other: "Diğer",
+  };
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -206,18 +333,18 @@ export default function RozetlerPage() {
   return (
     <div className="space-y-6 md:space-y-8 animate-fade-in pb-8">
       {/* Top Section - Header, Stats, and Info */}
-      <Card variant="elevated" className="bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50 dark:from-purple-950/30 dark:via-blue-950/30 dark:to-indigo-950/30 border border-purple-200/50 dark:border-purple-800/50">
+      <Card variant="elevated" className="bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-500 dark:from-blue-600 dark:via-purple-600 dark:to-indigo-600 border border-purple-200/50 dark:border-purple-800/50">
         <CardContent className="p-8 md:p-12">
           {/* Header with Trophy Icon */}
           <div className="flex items-start gap-4 mb-6">
-            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-indigo-500 flex items-center justify-center flex-shrink-0">
-              <Trophy className="h-8 w-8 text-white" />
+            <div className="w-16 h-16 rounded-full bg-purple-300/30 dark:bg-purple-400/30 flex items-center justify-center flex-shrink-0">
+              <Trophy className="h-8 w-8 text-purple-200 dark:text-purple-300" />
             </div>
             <div className="flex-1">
-              <h1 className="text-3xl md:text-4xl font-display font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 bg-clip-text text-transparent mb-2">
+              <h1 className="text-3xl md:text-4xl font-display font-bold bg-gradient-to-r from-blue-200 via-purple-200 to-indigo-200 bg-clip-text text-transparent mb-2">
                 Rozetler
               </h1>
-              <p className="text-gray-600 dark:text-gray-400 text-lg font-medium">
+              <p className="text-purple-100 dark:text-purple-200 text-lg font-medium">
                 Başarılarınızı rozetlerle taçlandırın ve ödüller kazanın!
               </p>
             </div>
@@ -225,10 +352,10 @@ export default function RozetlerPage() {
 
           {/* Statistics Cards */}
           <div className="grid md:grid-cols-2 gap-4 mb-6">
-            <Card variant="elevated" className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border border-purple-200/50 dark:border-purple-800/50">
+            <Card variant="elevated" className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border border-purple-200/50 dark:border-purple-800/50 rounded-xl">
               <CardContent className="p-4 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-indigo-400 flex items-center justify-center flex-shrink-0">
-                  <Medal className="h-5 w-5 text-white" />
+                <div className="w-10 h-10 rounded-full bg-purple-300/20 dark:bg-purple-400/20 flex items-center justify-center flex-shrink-0">
+                  <Medal className="h-5 w-5 text-purple-500 dark:text-purple-400" />
                 </div>
                 <div className="flex-1">
                   <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Kazandığınız Rozetler</p>
@@ -238,10 +365,10 @@ export default function RozetlerPage() {
                 </div>
               </CardContent>
             </Card>
-            <Card variant="elevated" className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border border-purple-200/50 dark:border-purple-800/50">
+            <Card variant="elevated" className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border border-purple-200/50 dark:border-purple-800/50 rounded-xl">
               <CardContent className="p-4 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-indigo-400 flex items-center justify-center flex-shrink-0">
-                  <Star className="h-5 w-5 text-white" />
+                <div className="w-10 h-10 rounded-full bg-purple-300/20 dark:bg-purple-400/20 flex items-center justify-center flex-shrink-0">
+                  <Star className="h-5 w-5 text-purple-500 dark:text-purple-400" />
                 </div>
                 <div className="flex-1">
                   <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Toplam Puan</p>
@@ -255,10 +382,10 @@ export default function RozetlerPage() {
 
           {/* Info Section */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
+            <h3 className="text-lg font-semibold text-purple-100 dark:text-purple-200 mb-2">
               Rozetler nedir?
             </h3>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-purple-100/90 dark:text-purple-200/90">
               Platformdaki aktivitelerinizi tamamlayarak rozetler kazanabilirsiniz. Her rozet size puan kazandırır ve bu puanlar aylık sıralamada yer almanızı sağlar. Rozetlerinizi kazanmak için test çözün, kurslar tamamlayın, sosyal paylaşımlar yapın ve düzenli olarak aktif olun!
             </p>
           </div>
@@ -266,10 +393,10 @@ export default function RozetlerPage() {
       </Card>
 
       {/* Monthly Reward System */}
-      <Card variant="elevated" className="border-b border-purple-200/50 dark:border-purple-800/50 bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-indigo-500/10">
-        <CardHeader className="flex flex-col space-y-1.5 p-6 border-b border-purple-200/50 dark:border-purple-800/50 bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-indigo-500/10">
+      <Card variant="elevated" className="border-b border-purple-200/50 dark:border-purple-800/50 bg-gradient-to-br from-purple-100 via-blue-100 to-indigo-100 dark:from-purple-900/40 dark:via-blue-900/40 dark:to-indigo-900/40">
+        <CardHeader className="flex flex-col space-y-1.5 p-6 border-b border-purple-200/50 dark:border-purple-800/50">
           <CardTitle className="flex items-center gap-2 text-xl font-bold text-gray-900 dark:text-gray-100">
-            <Crown className="h-5 w-5 text-purple-600 dark:text-purple-400" />
+            <Crown className="h-5 w-5 text-purple-500 dark:text-purple-400" />
             Aylık Ödül Sistemi
           </CardTitle>
         </CardHeader>
@@ -278,7 +405,7 @@ export default function RozetlerPage() {
             Aylık sıralamada rozetlerden kazandığınız puanlarla ilk 3&apos;e girenlere para ödülü verilir!
           </p>
           <div className="space-y-3">
-            <div className="reward-card-shine flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-purple-500 to-indigo-500 border border-purple-300 dark:border-purple-700">
+            <div className="reward-card-shine flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-purple-500 to-purple-600 border border-purple-300 dark:border-purple-700">
               <div className="relative z-10 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
                 <Crown className="h-5 w-5 text-white" />
               </div>
@@ -287,16 +414,16 @@ export default function RozetlerPage() {
                 <p className="text-xl font-bold text-white">10.000 TL</p>
               </div>
             </div>
-            <div className="reward-card-shine flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 border border-blue-300 dark:border-blue-700">
+            <div className="reward-card-shine flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 border border-blue-300 dark:border-blue-700">
               <div className="relative z-10 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
-                <Award className="h-5 w-5 text-white" />
+                <Medal className="h-5 w-5 text-white" />
               </div>
               <div className="relative z-10 flex-1">
                 <p className="text-sm text-white/90">2. Sıra</p>
                 <p className="text-xl font-bold text-white">7.500 TL</p>
               </div>
             </div>
-            <div className="reward-card-shine flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 border border-purple-300 dark:border-purple-700">
+            <div className="reward-card-shine flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-purple-500 to-purple-600 border border-purple-300 dark:border-purple-700">
               <div className="relative z-10 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
                 <Trophy className="h-5 w-5 text-white" />
               </div>
@@ -305,12 +432,6 @@ export default function RozetlerPage() {
                 <p className="text-xl font-bold text-white">5.000 TL</p>
               </div>
             </div>
-          </div>
-          <div className="mt-4 p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 flex items-start gap-2">
-            <Lightbulb className="h-5 w-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
-            <p className="text-sm text-gray-700 dark:text-gray-300">
-              <span className="font-semibold">💡 İpucu:</span> Daha fazla rozet kazanarak puanlarınızı artırın ve aylık ödüllerde yer alın!
-            </p>
           </div>
         </CardContent>
       </Card>
@@ -328,31 +449,42 @@ export default function RozetlerPage() {
               </h2>
             </div>
             {selectedCategory && (
-              <>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-                  {categories.find((c) => c.id === selectedCategory)?.description}
-                </p>
-                {tierStats && (
-                  <div className="flex flex-wrap gap-2">
-                    {tierStats.map((tier) => (
-                      <span
-                        key={tier.tier}
-                        className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700"
-                      >
-                        <span className="w-2 h-2 rounded-full bg-green-500"></span>
-                        {tier.name} ({tier.earned} / {tier.total})
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                {categories.find((c) => c.id === selectedCategory)?.description}
+              </p>
             )}
           </div>
           {filteredBadges.length > 0 ? (
-            <BadgeCollection
-              badges={filteredBadges}
-              earnedBadgeIds={earnedBadgeIds}
-            />
+            <div className="space-y-8">
+              {(["bronze", "silver", "gold", "platinum", "other"] as const).map((tier) => {
+                const tierBadges = badgesByTier[tier] || [];
+                if (tierBadges.length === 0) return null;
+
+                const earnedInTier = tierBadges.filter((b) => earnedBadgeIds.has(b.id)).length;
+
+                return (
+                  <div key={tier} className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                        {tierNames[tier]}
+                      </h3>
+                      <span className="text-sm text-gray-600 dark:text-gray-400">
+                        {earnedInTier} / {tierBadges.length}
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+                      {tierBadges.map((badge) => (
+                        <BadgeDisplay
+                          key={badge.id}
+                          badge={badge}
+                          earned={earnedBadgeIds.has(badge.id)}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           ) : (
             <Card variant="elevated">
               <CardContent className="py-12 text-center">
@@ -378,48 +510,41 @@ export default function RozetlerPage() {
             </CardHeader>
             <CardContent className="p-0">
               <div className="flex flex-col space-y-1.5 p-6 pt-0">
-                {categoryStats.map((category) => (
-                  <div key={category.id} className="flex flex-col space-y-1.5">
-                    <button
-                      onClick={() =>
-                        setSelectedCategory(
-                          selectedCategory === category.id ? null : category.id
-                        )
-                      }
-                      className={`w-full text-left p-0 transition-all duration-200 ${
-                        selectedCategory === category.id
-                          ? ""
-                          : "hover:opacity-80"
-                      }`}
-                    >
-                      <div className="flex items-center justify-between text-base">
-                        <span className="font-medium text-gray-900 dark:text-gray-100">
-                          {category.icon} {category.name}
-                        </span>
-                        <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                          {category.earned} / {category.total}
-                        </span>
-                      </div>
-                    </button>
-                    {selectedCategory === category.id && (
-                      <div
-                        className={`flex flex-col space-y-1.5 p-6 bg-gradient-to-r ${category.gradient} border-b border-gray-200 dark:border-gray-800 text-white rounded-lg mt-1`}
+                {categoryStats.map((category) => {
+                  const IconComponent = category.icon;
+                  return (
+                    <div key={category.id} className="flex flex-col space-y-1.5">
+                      <button
+                        onClick={() => setSelectedCategory(category.id)}
+                        className={`w-full text-left p-3 rounded-lg transition-all duration-200 ${
+                          selectedCategory === category.id
+                            ? `bg-gradient-to-r ${category.gradient} text-white shadow-md`
+                            : "hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-900 dark:text-gray-100"
+                        }`}
                       >
                         <div className="flex items-center justify-between">
-                          <span className="text-base font-semibold">
-                            {category.icon} {category.name}
-                          </span>
-                          <span className="text-sm font-medium text-white/90">
+                          <div className="flex items-center gap-3">
+                            <IconComponent className={`h-5 w-5 flex-shrink-0 ${
+                              selectedCategory === category.id
+                                ? "text-white"
+                                : "text-gray-600 dark:text-gray-400"
+                            }`} />
+                            <span className="font-medium text-base">
+                              {category.name}
+                            </span>
+                          </div>
+                          <span className={`text-sm font-medium ${
+                            selectedCategory === category.id
+                              ? "text-white/90"
+                              : "text-gray-600 dark:text-gray-400"
+                          }`}>
                             {category.earned} / {category.total}
                           </span>
                         </div>
-                        <p className="text-sm text-white/90">
-                          {category.description}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                ))}
+                      </button>
+                    </div>
+                  );
+                })}
               </div>
             </CardContent>
           </Card>

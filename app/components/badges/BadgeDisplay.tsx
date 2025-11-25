@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckCircle, Lock, Sparkles } from "lucide-react";
+import { CheckCircle, Sparkles } from "lucide-react";
 import { Card } from "@/app/components/ui/Card";
 
 interface Badge {
@@ -98,21 +98,15 @@ export function BadgeDisplay({
                   ? {
                       background: `linear-gradient(135deg, ${badge.color}dd, ${badge.color}88)`,
                     }
-                  : undefined
+                  : {
+                      background: `linear-gradient(135deg, #9ca3af, #6b7280)`,
+                    }
               }
             >
               {!earned && (
-                <>
-                  <div className="absolute inset-0 bg-gradient-to-br from-gray-200 via-gray-300 to-gray-400 dark:from-gray-700 dark:via-gray-800 dark:to-gray-900 opacity-80" />
-                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-gray-500 dark:text-gray-300">
-                    <Lock className="h-6 w-6" />
-                    <span className="text-xs font-semibold uppercase tracking-wide">
-                      Kilitli
-                    </span>
-                  </div>
-                </>
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-200 via-gray-300 to-gray-400 dark:from-gray-700 dark:via-gray-800 dark:to-gray-900 opacity-80" />
               )}
-              <span className={`relative z-10 drop-shadow-xl ${sizeConfig.icon}`}>
+              <span className={`relative z-10 drop-shadow-xl ${sizeConfig.icon} ${!earned ? "opacity-50" : ""}`}>
                 {badge.icon || "🏅"}
               </span>
               {earned && (
@@ -142,7 +136,7 @@ export function BadgeDisplay({
           )}
         </div>
       </div>
-      <div className="mt-3 text-center space-y-1">
+      <div className="mt-3 text-center space-y-2">
         <p className={`text-sm font-semibold tracking-wide ${earned ? "text-gray-900 dark:text-gray-100" : "text-gray-500 dark:text-gray-400"}`}>
           {badge.name}
         </p>
@@ -150,8 +144,6 @@ export function BadgeDisplay({
           <div className="flex flex-col items-center gap-1">
             <div className="flex items-center justify-center gap-2 text-xs text-gray-500 dark:text-gray-400">
               <span className="font-semibold">{badge.points} puan</span>
-              <span className="w-1 h-1 rounded-full bg-gray-300 dark:bg-gray-600" />
-              <span>{badge.category}</span>
             </div>
             {badge.tier && (
               <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold uppercase tracking-wide bg-gradient-to-r ${tierColors[badge.tier]} text-white shadow-sm`}>
@@ -160,8 +152,8 @@ export function BadgeDisplay({
             )}
           </div>
         )}
-        {size === "lg" && badge.description && (
-          <p className="text-xs text-gray-500 dark:text-gray-400 px-4 line-clamp-2">
+        {badge.description && (
+          <p className="text-xs text-gray-600 dark:text-gray-400 px-2 mt-2 leading-relaxed">
             {badge.description}
           </p>
         )}
@@ -200,7 +192,7 @@ export function BadgeCollection({
   });
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-5">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
       {sortedBadges.map((badge) => (
         <BadgeDisplay
           key={badge.id}

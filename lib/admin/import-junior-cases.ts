@@ -160,11 +160,6 @@ export async function importJuniorCases(): Promise<{
             where: { id: caseItem.id },
           });
 
-          if (existingQuiz) {
-            console.log(`[IMPORT_JUNIOR_CASES] Quiz ${caseItem.id} already exists, skipping`);
-            continue; // Skip if already exists
-          }
-
           // Get initial code template for the target language
           const initialCode = getJuniorCaseTemplate(targetLanguage);
 
@@ -207,22 +202,39 @@ export async function importJuniorCases(): Promise<{
             throw new Error(`Invalid task structure for ${caseItem.id}: missing required fields`);
           }
 
-          // Create quiz
-          await db.quiz.create({
-            data: {
-              id: caseItem.id,
-              courseId: course.id,
-              title: caseItem.title,
-              description: caseItem.description,
-              topic: languageNames[targetLanguage],
-              type: "LIVE_CODING",
-              level: (caseItem.level === "beginner" || caseItem.level === "intermediate" || caseItem.level === "advanced")
-                ? caseItem.level
-                : "beginner",
-              questions,
-              passingScore: 60,
-            },
-          });
+          // Update existing quiz or create new one
+          if (existingQuiz) {
+            console.log(`[IMPORT_JUNIOR_CASES] Quiz ${caseItem.id} already exists, updating...`);
+            await db.quiz.update({
+              where: { id: caseItem.id },
+              data: {
+                title: caseItem.title,
+                description: caseItem.description,
+                topic: languageNames[targetLanguage],
+                level: (caseItem.level === "beginner" || caseItem.level === "intermediate" || caseItem.level === "advanced")
+                  ? caseItem.level
+                  : "beginner",
+                questions,
+              },
+            });
+          } else {
+            // Create quiz
+            await db.quiz.create({
+              data: {
+                id: caseItem.id,
+                courseId: course.id,
+                title: caseItem.title,
+                description: caseItem.description,
+                topic: languageNames[targetLanguage],
+                type: "LIVE_CODING",
+                level: (caseItem.level === "beginner" || caseItem.level === "intermediate" || caseItem.level === "advanced")
+                  ? caseItem.level
+                  : "beginner",
+                questions,
+                passingScore: 60,
+              },
+            });
+          }
 
           console.log(`[IMPORT_JUNIOR_CASES] Successfully imported case: ${caseItem.id} for target language: ${targetLanguage}`, {
             quizId: caseItem.id,

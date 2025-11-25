@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/app/components/ui/Button";
-import { Loader2, CheckCircle2, AlertCircle, BookOpen, Trash2, Code2, Database, Globe, Zap, Shield, Container, Lock, FileText, Users, Trophy, Briefcase, MessageCircle, Building2, Bug } from "lucide-react";
+import { Loader2, CheckCircle2, AlertCircle, BookOpen, Trash2, Code2, Database, Globe, Zap, Shield, Container, Lock, FileText, Users, Trophy, Briefcase, MessageCircle, Building2, Bug, Upload } from "lucide-react";
 
 interface CourseStatus {
   loading: boolean;
@@ -123,6 +123,12 @@ export default function AdminPage() {
   });
 
   const [deleteLiveCodingCasesState, setDeleteLiveCodingCasesState] = useState<ClearStatus>({
+    loading: false,
+    success: null,
+    error: null,
+  });
+
+  const [juniorCasesState, setJuniorCasesState] = useState<ClearStatus>({
     loading: false,
     success: null,
     error: null,
@@ -1033,6 +1039,39 @@ export default function AdminPage() {
       });
     } catch (err: any) {
       setDeleteLiveCodingCasesState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+      });
+    }
+  };
+
+  const handleImportJuniorCases = async () => {
+    setJuniorCasesState({
+      loading: true,
+      success: null,
+      error: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/import-junior-cases", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Junior case'ler import edilirken bir hata oluştu");
+      }
+
+      setJuniorCasesState({
+        loading: false,
+        success: data.message || `${data.imported} adet junior case başarıyla import edildi`,
+        error: null,
+      });
+    } catch (err: any) {
+      setJuniorCasesState({
         loading: false,
         success: null,
         error: err.message || "Bir hata oluştu",
@@ -2629,44 +2668,71 @@ export default function AdminPage() {
             12 farklı programlama dili (C#, Java, Python, PHP, JavaScript, TypeScript, Go, Rust, C++, Kotlin, Swift, Ruby) için her birinde 3&apos;er canlı kodlama case&apos;i veritabanına ekler. Toplam 36 case oluşturulur.
           </p>
           
-          <div className="max-w-md flex gap-4">
-            <Button
-              onClick={handleInsertLiveCodingCases}
-              disabled={liveCodingCasesState.loading || deleteLiveCodingCasesState.loading}
-              size="lg"
-              className="flex-1 bg-gradient-to-r from-cyan-600 to-blue-700 hover:from-cyan-700 hover:to-blue-800 text-white font-medium"
-            >
-              {liveCodingCasesState.loading ? (
-                <>
-                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                  Case&apos;ler Ekleniyor...
-                 </>
-               ) : (
-                 <>
-                   <Code2 className="mr-2 h-5 w-5" />
-                  Case&apos;leri Veritabanına Ekle
-                 </>
-               )}
-             </Button>
-             <Button
-              onClick={handleDeleteLiveCodingCases}
-              disabled={deleteLiveCodingCasesState.loading || liveCodingCasesState.loading}
-              size="lg"
-              variant="outline"
-              className="flex-1 border-red-300 dark:border-red-700 text-red-700 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30"
-            >
-              {deleteLiveCodingCasesState.loading ? (
-                <>
-                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                  Siliniyor...
-                </>
-              ) : (
-                <>
-                  <Trash2 className="mr-2 h-5 w-5" />
-                  Case&apos;leri Kaldır
-                </>
-              )}
-            </Button>
+          <div className="max-w-md space-y-4">
+            <div className="flex gap-4">
+              <Button
+                onClick={handleInsertLiveCodingCases}
+                disabled={liveCodingCasesState.loading || deleteLiveCodingCasesState.loading}
+                size="lg"
+                className="flex-1 bg-gradient-to-r from-cyan-600 to-blue-700 hover:from-cyan-700 hover:to-blue-800 text-white font-medium"
+              >
+                {liveCodingCasesState.loading ? (
+                  <>
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    Case&apos;ler Ekleniyor...
+                   </>
+                 ) : (
+                   <>
+                     <Code2 className="mr-2 h-5 w-5" />
+                    Case&apos;leri Veritabanına Ekle
+                   </>
+                 )}
+               </Button>
+               <Button
+                onClick={handleDeleteLiveCodingCases}
+                disabled={deleteLiveCodingCasesState.loading || liveCodingCasesState.loading}
+                size="lg"
+                variant="outline"
+                className="flex-1 border-red-300 dark:border-red-700 text-red-700 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30"
+              >
+                {deleteLiveCodingCasesState.loading ? (
+                  <>
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    Siliniyor...
+                  </>
+                ) : (
+                  <>
+                    <Trash2 className="mr-2 h-5 w-5" />
+                    Case&apos;leri Kaldır
+                  </>
+                )}
+              </Button>
+             </div>
+             
+             {/* Junior Cases Import Button */}
+             <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
+               <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
+                 Junior seviye canlı kodlama case&apos;lerini JSON dosyalarından import et
+               </p>
+               <Button
+                 onClick={handleImportJuniorCases}
+                 disabled={juniorCasesState.loading}
+                 size="lg"
+                 className="w-full bg-gradient-to-r from-purple-600 to-indigo-700 hover:from-purple-700 hover:to-indigo-800 text-white font-medium"
+               >
+                 {juniorCasesState.loading ? (
+                   <>
+                     <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                     Import Ediliyor...
+                   </>
+                 ) : (
+                   <>
+                     <Upload className="mr-2 h-5 w-5" />
+                     Junior Case&apos;leri Import Et (Güncelle)
+                   </>
+                 )}
+               </Button>
+             </div>
            </div>
 
            {/* Success/Error Messages */}
@@ -2716,6 +2782,30 @@ export default function AdminPage() {
                </div>
              </div>
            )}
+
+          {/* Junior Cases Import Success/Error Messages */}
+          {juniorCasesState.success && (
+            <div className="mt-6 p-4 rounded-2xl border border-purple-300/50 bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-950/40 dark:to-indigo-950/40 dark:border-purple-800/50 backdrop-blur-sm shadow-lg">
+              <div className="flex items-start gap-3 text-purple-700 dark:text-purple-300">
+                <div className="p-2 rounded-lg bg-purple-500/20">
+                  <CheckCircle2 className="h-5 w-5 flex-shrink-0" />
+                </div>
+                <div className="flex-1">
+                  <div className="font-semibold text-base">{juniorCasesState.success}</div>
+                </div>
+              </div>
+            </div>
+          )}
+          {juniorCasesState.error && (
+            <div className="mt-6 p-4 rounded-2xl border border-red-300/50 bg-gradient-to-br from-red-50 to-rose-50 dark:from-red-950/40 dark:to-rose-950/40 dark:border-red-800/50 backdrop-blur-sm shadow-lg">
+              <div className="flex items-start gap-3 text-red-700 dark:text-red-300">
+                <div className="p-2 rounded-lg bg-red-500/20">
+                  <AlertCircle className="h-5 w-5 flex-shrink-0" />
+                </div>
+                <div className="text-sm font-semibold">{juniorCasesState.error}</div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
