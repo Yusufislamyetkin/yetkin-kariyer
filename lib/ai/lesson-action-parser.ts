@@ -141,21 +141,13 @@ export function parseLessonActions(content: string): ParsedLessonActions {
     const language = languageMatch[1].trim();
     const afterLanguage = afterTag.substring(languageMatch[0].length);
     
-    // Now we need to extract the code content
-    // The code can contain commas, brackets, newlines, etc.
-    // We need to find the closing ] that matches the opening [CODE_BLOCK:
-    // Strategy: Track bracket depth to find the correct closing bracket
-    
+    // Find the closing bracket by tracking bracket depth
+    // Strategy: First find the closing bracket, then parse backwards from the end
+    // This way, code content with commas (like function parameters) won't be mistaken for parameter separators
     let bracketDepth = 1; // We're inside [CODE_BLOCK: ... ]
-    let pos = 0;
-    let codeEnd = -1;
-    let editableStr = '';
-    let runnableStr = '';
-    let lastTopLevelComma = -1;
-    let paramIndex = 0; // 0 = code, 1 = editable, 2 = runnable
+    let closingBracketPos = -1;
     
-    // Scan through the content to find the closing bracket
-    while (pos < afterLanguage.length && bracketDepth > 0) {
+    for (let pos = 0; pos < afterLanguage.length; pos++) {
       const char = afterLanguage[pos];
       
       if (char === '[') {
@@ -163,55 +155,71 @@ export function parseLessonActions(content: string): ParsedLessonActions {
       } else if (char === ']') {
         bracketDepth--;
         if (bracketDepth === 0) {
-          // Found the closing bracket for the tag
-          if (paramIndex === 0) {
-            // Only code parameter: [CODE_BLOCK: lang, code]
-            codeEnd = pos;
-          } else if (paramIndex === 1) {
-            // Code and editable: [CODE_BLOCK: lang, code, editable]
-            codeEnd = lastTopLevelComma;
-            editableStr = afterLanguage.substring(lastTopLevelComma + 1, pos).trim();
-          } else if (paramIndex === 2) {
-            // Code, editable, and runnable: [CODE_BLOCK: lang, code, editable, runnable]
-            // Find the comma before editable
-            const editableCommaPos = afterLanguage.lastIndexOf(',', lastTopLevelComma - 1);
-            codeEnd = editableCommaPos;
-            editableStr = afterLanguage.substring(editableCommaPos + 1, lastTopLevelComma).trim();
-            runnableStr = afterLanguage.substring(lastTopLevelComma + 1, pos).trim();
-          }
+          closingBracketPos = pos;
           break;
         }
-      } else if (char === ',' && bracketDepth === 1) {
-        // This is a top-level comma (not inside nested brackets)
-        // It separates parameters
-        if (paramIndex === 0) {
-          // First comma after code - marks end of code, start of editable
-          lastTopLevelComma = pos;
-          paramIndex = 1;
-        } else if (paramIndex === 1) {
-          // Second comma - marks end of editable, start of runnable
-          lastTopLevelComma = pos;
-          paramIndex = 2;
-        }
       }
+    }
+    
+    if (closingBracketPos === -1) {
+      console.error("[CODE_BLOCK] Invalid format - no closing bracket found");
+      continue;
+    }
+    
+    // Extract the content between language and closing bracket
+    const contentBetween = afterLanguage.substring(0, closingBracketPos);
+    
+    // Now parse from the end backwards to find editable/runnable parameters
+    // Strategy: Check if last parts are "true"/"false"/"editable"/"runnable"
+    // If so, they are parameters; otherwise, everything is code
+    // This way, code with commas (like "def topla(a, b)") won't be split incorrectly
+    
+    let code = contentBetween.trim();
+    let editableStr = '';
+    let runnableStr = '';
+    
+    // Valid parameter values
+    const validParamValues = ['true', 'false', 'editable', 'runnable'];
+    
+    // Try to detect if there are editable/runnable parameters at the end
+    // Look for patterns like: ", true", ", false", ", editable", ", runnable" at the end
+    const trimmedContent = contentBetween.trim();
+    
+    // Check if the last part (after last comma) is a valid parameter value
+    const lastCommaIndex = trimmedContent.lastIndexOf(',');
+    if (lastCommaIndex !== -1) {
+      const afterLastComma = trimmedContent.substring(lastCommaIndex + 1).trim().toLowerCase();
       
-      pos++;
-    }
-    
-    if (codeEnd === -1 || bracketDepth !== 0) {
-      // Couldn't find proper closing bracket
-      // Fallback: try to extract everything until the last ]
-      const lastBracketPos = afterLanguage.lastIndexOf(']');
-      if (lastBracketPos > 0) {
-        codeEnd = lastBracketPos;
-        console.warn("[CODE_BLOCK] Using fallback parsing for:", language);
+      if (validParamValues.includes(afterLastComma)) {
+        // We have at least one parameter (runnable)
+        runnableStr = afterLastComma;
+        const beforeLastComma = trimmedContent.substring(0, lastCommaIndex).trim();
+        
+        // Check if there's another parameter before this one
+        const secondLastCommaIndex = beforeLastComma.lastIndexOf(',');
+        if (secondLastCommaIndex !== -1) {
+          const afterSecondLastComma = beforeLastComma.substring(secondLastCommaIndex + 1).trim().toLowerCase();
+          
+          if (validParamValues.includes(afterSecondLastComma)) {
+            // We have both editable and runnable
+            editableStr = afterSecondLastComma;
+            code = beforeLastComma.substring(0, secondLastCommaIndex).trim();
+          } else {
+            // Only runnable parameter, everything before is code
+            code = beforeLastComma;
+          }
+        } else {
+          // Only runnable parameter, everything before is code
+          code = beforeLastComma;
+        }
       } else {
-        console.error("[CODE_BLOCK] Invalid format - no closing bracket found");
-        continue;
+        // Last part is not a parameter, everything is code
+        code = contentBetween.trim();
       }
+    } else {
+      // No commas found, everything is code
+      code = contentBetween.trim();
     }
-    
-    let code = afterLanguage.substring(0, codeEnd).trim();
     // Remove leading/trailing quotes if present
     code = code.replace(/^["']|["']$/g, '');
     // Replace escaped newlines
@@ -222,7 +230,7 @@ export function parseLessonActions(content: string): ParsedLessonActions {
     const readonly = !editable;
     
     // Extract the full tag for removal
-    const fullTagEnd = afterTagStart + pos + 1; // +1 for the closing ]
+    const fullTagEnd = afterTagStart + closingBracketPos + 1; // +1 for the closing ]
     const fullTag = content.substring(tagStart, fullTagEnd);
     
     actions.push({

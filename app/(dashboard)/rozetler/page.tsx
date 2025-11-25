@@ -256,8 +256,11 @@ export default function RozetlerPage() {
     if (status === "unauthenticated") {
       router.push("/login");
     } else if (status === "authenticated") {
-      fetchBadges();
-      fetchUserBadges();
+      // Her iki API çağrısını koordine et ve loading state'i yönet
+      Promise.all([fetchBadges(), fetchUserBadges()])
+        .finally(() => {
+          setLoading(false);
+        });
       // Tüm rozetleri kontrol et (eksik olanları tespit et)
       checkAllBadges();
     }
@@ -268,21 +271,21 @@ export default function RozetlerPage() {
       const response = await fetch("/api/badges");
       const data = await response.json();
 
-      if (response.ok) {
+      if (response.ok && data.badges) {
         setAllBadges(data.badges || []);
         setTotalBadgesCount(data.badges?.length || 93);
+        return;
+      }
+      
+      // Fallback: try to load from JSON file
+      const jsonResponse = await fetch("/data/badges.json");
+      if (jsonResponse.ok) {
+        const jsonData = await jsonResponse.json();
+        setAllBadges(jsonData.badges || []);
+        setTotalBadgesCount(jsonData.totalBadges || 93);
       } else {
-        // Fallback: try to load from JSON file
-        try {
-          const jsonResponse = await fetch("/data/badges.json");
-          if (jsonResponse.ok) {
-            const jsonData = await jsonResponse.json();
-            setAllBadges(jsonData.badges || []);
-            setTotalBadgesCount(jsonData.totalBadges || 93);
-          }
-        } catch (jsonError) {
-          console.error("Error loading badges JSON:", jsonError);
-        }
+        console.error("Failed to load badges from API and JSON fallback");
+        setAllBadges([]);
       }
     } catch (error) {
       console.error("Error fetching badges:", error);
@@ -293,9 +296,12 @@ export default function RozetlerPage() {
           const jsonData = await jsonResponse.json();
           setAllBadges(jsonData.badges || []);
           setTotalBadgesCount(jsonData.totalBadges || 93);
+        } else {
+          setAllBadges([]);
         }
       } catch (jsonError) {
         console.error("Error loading badges JSON:", jsonError);
+        setAllBadges([]);
       }
     }
   };
@@ -309,11 +315,15 @@ export default function RozetlerPage() {
         setUserBadges(data.badges || []);
         const earnedIds = new Set<string>((data.badges || []).map((b: Badge) => b.id));
         setEarnedBadgeIds(earnedIds);
+      } else {
+        console.error("Failed to fetch user badges:", data.error);
+        setUserBadges([]);
+        setEarnedBadgeIds(new Set());
       }
     } catch (error) {
       console.error("Error fetching user badges:", error);
-    } finally {
-      setLoading(false);
+      setUserBadges([]);
+      setEarnedBadgeIds(new Set());
     }
   };
 
@@ -509,11 +519,15 @@ export default function RozetlerPage() {
               <CardContent className="py-12 text-center">
                 <Medal className="h-16 w-16 text-gray-400 dark:text-gray-600 mx-auto mb-4" />
                 <p className="text-gray-600 dark:text-gray-400 font-medium mb-2">
-                  Henüz rozet bulunamadı
+                  {loading ? "Rozetler yükleniyor..." : "Henüz rozet bulunamadı"}
                 </p>
-                <p className="text-sm text-gray-500 dark:text-gray-500">
-                  Rozetler yükleniyor...
-                </p>
+                {!loading && (
+                  <p className="text-sm text-gray-500 dark:text-gray-500">
+                    {selectedCategory
+                      ? "Bu kategoride henüz rozet bulunmuyor."
+                      : "Sistemde henüz rozet tanımlanmamış."}
+                  </p>
+                )}
               </CardContent>
             </Card>
           )}

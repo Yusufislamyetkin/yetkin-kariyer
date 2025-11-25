@@ -294,9 +294,53 @@ MESAJ FORMATI (KRİTİK):
 - Test sorularına geçerken HİÇBİR GİRİŞ MESAJI ATMA! Direkt [MINI_TEST: ...] tag'i ile başla!
 
 4. EĞİTİM MATERYALLERİ:
-- [CODE_BLOCK: dil, kod] - Kod örnekleri (salt okunur)
-- [CODE_BLOCK: dil, kod, editable] - Düzenlenebilir kod örnekleri
-- [CODE_BLOCK: dil, kod, editable, runnable] - Düzenlenebilir ve çalıştırılabilir kod
+
+═══════════════════════════════════════════════════════════════
+CODE_BLOCK FORMATI - TAM VE DOĞRU KULLANIM ZORUNLU!
+═══════════════════════════════════════════════════════════════
+
+FORMAT ŞABLONLARI:
+1. [CODE_BLOCK: dil, kod] - Kod örnekleri (salt okunur)
+2. [CODE_BLOCK: dil, kod, editable] - Düzenlenebilir kod örnekleri
+3. [CODE_BLOCK: dil, kod, editable, runnable] - Düzenlenebilir ve çalıştırılabilir kod
+
+ZORUNLU KURALLAR:
+1. Kod içinde virgül kullanabilirsin (örnek: function parameters, array elements)
+2. Sistem otomatik olarak kod içindeki virgülleri parametre ayırıcı olarak algılamaz
+3. Parametreler (editable, runnable) SADECE tag'in sonunda olmalı
+4. Parametre değerleri: "true", "false", "editable", "runnable" (küçük/büyük harf duyarsız)
+
+DOĞRU FORMAT ÖRNEKLERİ:
+
+ÖRNEK 1 (Basit kod, virgül içeren):
+[CODE_BLOCK: python, def topla(a, b): return a + b]
+
+ÖRNEK 2 (Düzenlenebilir kod):
+[CODE_BLOCK: python, def topla(a, b): return a + b, editable]
+
+ÖRNEK 3 (Düzenlenebilir ve çalıştırılabilir):
+[CODE_BLOCK: python, def topla(a, b): return a + b, editable, runnable]
+
+ÖRNEK 4 (Çok satırlı kod):
+[CODE_BLOCK: python, def topla(a, b):
+    sonuc = a + b
+    return sonuc]
+
+ÖRNEK 5 (Array içeren kod):
+[CODE_BLOCK: javascript, const arr = [1, 2, 3, 4, 5]; console.log(arr);]
+
+YANLIŞ KULLANIM ÖRNEKLERİ (ASLA YAPMA!):
+
+❌ YANLIŞ 1 - Parametreleri kod içine koyma:
+[CODE_BLOCK: python, def topla(a, b, editable): return a + b]
+→ DOĞRUSU: Parametreler tag'in sonunda olmalı: [CODE_BLOCK: python, def topla(a, b): return a + b, editable]
+
+❌ YANLIŞ 2 - Parametre değerlerini yanlış yazma:
+[CODE_BLOCK: python, def topla(a, b): return a + b, yes, no]
+→ DOĞRUSU: Sadece "true", "false", "editable", "runnable" kullan!
+
+═══════════════════════════════════════════════════════════════
+
 - [MINI_TEST: soru, A, B, C, D, doğru_index] - Mini test sorusu (MUTLAKA şıkları da gönder! Format: soru metni, A şıkkı, B şıkkı, C şıkkı, D şıkkı, doğru şık index'i (0-3 arası))
 - NOT: Sadece mini test soruları kullan! Diğer aktiviteler (TEST_QUESTION, TIMED_BUGFIX, FILL_BLANK, CHOICES) KULLANMA!
 
