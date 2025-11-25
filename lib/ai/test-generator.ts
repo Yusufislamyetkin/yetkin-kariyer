@@ -1,8 +1,10 @@
 import OpenAI from "openai";
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+const openai = process.env.OPENAI_API_KEY
+  ? new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    })
+  : null;
 
 export interface GeneratedQuestion {
   id: string;
@@ -35,6 +37,10 @@ export async function generateTestQuestions(
   } = options;
 
   try {
+    if (!openai) {
+      throw new Error("OpenAI API key is not configured");
+    }
+
     const topic = `${technology} - ${module}`;
     const prompt = `${topic} konusunda ${level} seviyesinde ${questionCount} adet ${questionType} tipinde çoktan seçmeli test sorusu üret. Her soru için 4 seçenek olsun ve doğru cevabın index'ini belirt. Sorular JSON formatında döndür. Format: [{"id": "q1", "question": "Soru metni", "options": ["A", "B", "C", "D"], "correctAnswer": 0, "explanation": "Açıklama"}]`;
 

@@ -371,13 +371,6 @@ export function ChatSummaryProvider({ children }: { children: React.ReactNode })
   }, [fetchSummary, userId]);
 
   useEffect(() => {
-    // Presence heartbeat - her 30 saniyede bir (direct/page.tsx ile senkronize)
-    const presenceInterval = setInterval(() => {
-      if (document.visibilityState === "visible") {
-        sendPresence("online");
-      }
-    }, 30_000);
-
     // Summary refresh - her 60 saniyede bir (SignalR mesajları zaten real-time)
     // Sadece sayfa görünür olduğunda ve SignalR bağlantısı yoksa polling yap
     const summaryInterval = setInterval(() => {
@@ -415,6 +408,30 @@ export function ChatSummaryProvider({ children }: { children: React.ReactNode })
       sendPresence("offline", { useBeacon: true }).catch(() => {});
     };
 
+    // Event-based presence: track user activity instead of heartbeat
+    let activityDebounceTimer: ReturnType<typeof setTimeout> | null = null;
+    const handleUserActivity = () => {
+      if (document.visibilityState !== "visible") return;
+      
+      // Debounce presence updates to avoid excessive API calls (max once per 5 seconds)
+      if (activityDebounceTimer) {
+        clearTimeout(activityDebounceTimer);
+      }
+      
+      activityDebounceTimer = setTimeout(() => {
+        if (document.visibilityState === "visible") {
+          sendPresence("online").catch(() => {});
+        }
+      }, 5000); // Update presence at most once every 5 seconds
+    };
+
+    // Add event listeners for user activity
+    window.addEventListener("scroll", handleUserActivity, { passive: true });
+    window.addEventListener("click", handleUserActivity, { passive: true });
+    window.addEventListener("mousemove", handleUserActivity, { passive: true });
+    window.addEventListener("keydown", handleUserActivity, { passive: true });
+    window.addEventListener("touchstart", handleUserActivity, { passive: true });
+
     // pagehide en güvenilir event (mobile ve modern tarayıcılarda)
     window.addEventListener("pagehide", handlePageHide, { capture: true });
     window.addEventListener("beforeunload", handleBeforeUnload);
@@ -422,12 +439,19 @@ export function ChatSummaryProvider({ children }: { children: React.ReactNode })
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
-      clearInterval(presenceInterval);
       clearInterval(summaryInterval);
+      if (activityDebounceTimer) {
+        clearTimeout(activityDebounceTimer);
+      }
       window.removeEventListener("pagehide", handlePageHide, { capture: true });
       window.removeEventListener("beforeunload", handleBeforeUnload);
       window.removeEventListener("unload", handleUnload);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("scroll", handleUserActivity);
+      window.removeEventListener("click", handleUserActivity);
+      window.removeEventListener("mousemove", handleUserActivity);
+      window.removeEventListener("keydown", handleUserActivity);
+      window.removeEventListener("touchstart", handleUserActivity);
       sendPresence("offline", { useBeacon: true }).catch(() => {});
       // Clear debounce timer on cleanup
       if (debounceTimerRef.current) {

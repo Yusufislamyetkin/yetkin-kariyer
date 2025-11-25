@@ -201,9 +201,9 @@ function DashboardLayoutContent({
             icon: Bug,
           },
           {
-            name: "Hedefler",
-            href: "/goals",
-            icon: Target,
+            name: "Rozetler",
+            href: "/rozetler",
+            icon: Medal,
           },
           {
             name: "Gelişim ve Analiz",
@@ -249,11 +249,6 @@ function DashboardLayoutContent({
             name: "CV",
             href: "/cv/my-cvs",
             icon: FileText,
-          },
-          {
-            name: "Mülakat",
-            href: "/interview/practice",
-            icon: Video,
           },
           {
             name: "İş İlanları",

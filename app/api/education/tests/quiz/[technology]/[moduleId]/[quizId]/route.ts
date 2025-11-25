@@ -7,10 +7,6 @@ import {
   checkBadgesForAttempt,
   type BadgeCheckResult,
 } from "@/app/api/badges/check/badge-service";
-import {
-  checkGoalsForToday,
-  type GoalCheckResult,
-} from "@/app/api/goals/check/goal-service";
 import { recordEvent } from "@/lib/services/gamification/antiAbuse";
 import { applyRules } from "@/lib/services/gamification/rules";
 import { normalizeTechnologyName, compareTechnologyNames } from "@/lib/utils/technology-normalize";
@@ -189,7 +185,7 @@ export async function POST(
       newlyEarnedBadges: [],
       totalEarned: 0,
     };
-    let goalResults: GoalCheckResult = {
+    let goalResults = {
       updated: false,
       updatedGoals: [],
       completedGoals: [],
@@ -199,12 +195,6 @@ export async function POST(
       badgeResults = await checkBadgesForAttempt({ userId, quizAttemptId: quizAttempt.id });
     } catch (error) {
       console.error("Badge check failed:", error);
-    }
-
-    try {
-      goalResults = await checkGoalsForToday({ userId });
-    } catch (error) {
-      console.error("Goal check failed:", error);
     }
 
     return NextResponse.json({ testAttempt, quizAttempt, score, badgeResults, goalResults });

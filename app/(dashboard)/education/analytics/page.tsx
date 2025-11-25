@@ -682,14 +682,9 @@ export default function AnalyticsPage() {
   ].filter((item) => item.duration !== "-");
 
   return (
-    <div className="animate-fade-in space-y-10 pb-10">
-      <header className="flex flex-col gap-2">
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100">Performans Analizi</h1>
-        <p className="max-w-3xl text-gray-600 dark:text-gray-400">
-          Bitirdiğiniz eğitimleri, sıralamalardaki konumunuzu ve çalışma verimliliğinizi tek ekranda
-          takip edin. AI değerlendirmeleri ve rozetlerinizle gelişiminizi gözlemleyin.
-        </p>
-      </header>
+    <main className="p-4 lg:p-6">
+      Performans Analizi Bitirdiğiniz eğitimleri, sıralamalardaki konumunuzu ve çalışma verimliliğinizi tek ekranda takip edin. AI değerlendirmeleri ve rozetlerinizle gelişiminizi gözlemleyin. TOPLAM ÖĞRE
+      <div className="space-y-10 pb-10 mt-6">
 
       <section className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
         {overviewCards.map((card) => {
@@ -1220,6 +1215,7 @@ export default function AnalyticsPage() {
           </CardContent>
         </Card>
       </section>
-    </div>
+      </div>
+    </main>
   );
 }

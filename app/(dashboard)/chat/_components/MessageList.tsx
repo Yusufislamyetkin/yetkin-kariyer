@@ -33,6 +33,9 @@ export function MessageList({
   emptyState,
   topInset,
 }: MessageListProps) {
+  // Filter out temporary ID messages (starting with 'temp-')
+  const filteredMessages = messages.filter((message) => !message.id.startsWith('temp-'));
+
   return (
     <div
       ref={containerRef}
@@ -59,10 +62,10 @@ export function MessageList({
           <div className="flex h-40 items-center justify-center">
             <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
           </div>
-        ) : messages.length === 0 ? (
+        ) : filteredMessages.length === 0 ? (
           emptyState ?? <EmptyState />
         ) : (
-          messages.map((message) => (
+          filteredMessages.map((message) => (
             <MessageBubble key={message.id} message={message} currentUserId={currentUserId} />
           ))
         )}

@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { X, Search, Loader2, User, Users, MessageCircle } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/app/components/ui/Button";
+import { useNotification } from "@/app/contexts/NotificationContext";
 
 interface SendPostModalProps {
   postId: string;
@@ -36,6 +37,7 @@ export function SendPostModal({
   onSuccess,
 }: SendPostModalProps) {
   const { data: session } = useSession();
+  const { showNotification } = useNotification();
   const [activeTab, setActiveTab] = useState<"friends" | "groups" | "communities">("friends");
   const [friends, setFriends] = useState<Friend[]>([]);
   const [groups, setGroups] = useState<Group[]>([]);
@@ -110,9 +112,11 @@ export function SendPostModal({
 
     try {
       const recipients = Array.from(selectedRecipients);
-      const messageContent = postImageUrl
-        ? `${postContent || ""}\n\n[Gönderi görseli: ${postImageUrl}]`
-        : postContent || "";
+      // Send post link instead of post content
+      const postLink = typeof window !== 'undefined' 
+        ? `${window.location.origin}/social/posts/${postId}`
+        : `/social/posts/${postId}`;
+      const messageContent = postLink;
 
       // Send to each recipient
       const sendPromises = recipients.map(async (recipientId) => {
@@ -165,6 +169,17 @@ export function SendPostModal({
         // Silently fail - notification is not critical
         console.error("Failed to send share notification:", err);
       }
+
+      // Show success notification
+      const recipientCount = recipients.length;
+      showNotification(
+        "success",
+        "Gönderi başarıyla gönderildi",
+        recipientCount === 1 
+          ? "Gönderi mesaj olarak gönderildi."
+          : `${recipientCount} kişiye gönderi mesaj olarak gönderildi.`,
+        { duration: 5000 }
+      );
 
       if (onSuccess) onSuccess();
       onClose();

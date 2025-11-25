@@ -1139,6 +1139,13 @@ CREATE INDEX IF NOT EXISTS "leaderboard_entries_period_idx" ON "leaderboard_entr
 CREATE INDEX IF NOT EXISTS "leaderboard_entries_userId_idx" ON "leaderboard_entries"("userId", "period");
 CREATE INDEX IF NOT EXISTS "employer_comments_candidateId_idx" ON "employer_comments"("candidateId");
 CREATE INDEX IF NOT EXISTS "employer_comments_employerId_idx" ON "employer_comments"("employerId");
+CREATE INDEX IF NOT EXISTS "badges_key_idx" ON "badges"("key");
+CREATE INDEX IF NOT EXISTS "badges_category_idx" ON "badges"("category");
+CREATE INDEX IF NOT EXISTS "badges_rarity_idx" ON "badges"("rarity");
+CREATE INDEX IF NOT EXISTS "user_badges_userId_idx" ON "user_badges"("userId");
+CREATE INDEX IF NOT EXISTS "user_badges_badgeId_idx" ON "user_badges"("badgeId");
+CREATE INDEX IF NOT EXISTS "user_badges_userId_earnedAt_idx" ON "user_badges"("userId", "earnedAt" DESC);
+CREATE INDEX IF NOT EXISTS "user_badges_userId_isDisplayed_idx" ON "user_badges"("userId", "isDisplayed") WHERE "isDisplayed" = TRUE;
 CREATE INDEX IF NOT EXISTS "user_streaks_userId_idx" ON "user_streaks"("userId");
 CREATE INDEX IF NOT EXISTS "test_attempts_userId_completedAt_idx" ON "test_attempts"("userId", "completedAt");
 CREATE INDEX IF NOT EXISTS "test_attempts_quizId_idx" ON "test_attempts"("quizId");
