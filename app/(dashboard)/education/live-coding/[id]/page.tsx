@@ -25,6 +25,7 @@ import type { LiveCodingLanguage } from "@/types/live-coding";
 import { cn } from "@/lib/utils";
 import { normalizeLiveCodingPayload } from "@/lib/education/liveCoding";
 import type { LiveCodingTask } from "@/types/live-coding";
+import { useCelebration } from "@/app/contexts/CelebrationContext";
 
 interface Quiz {
   id: string;
@@ -72,6 +73,7 @@ const normalizeLanguage = (value: unknown): LiveCodingLanguage | null => {
 export default function LiveCodingPage() {
   const params = useParams();
   const router = useRouter();
+  const { celebrate } = useCelebration();
 
   const resolvedLiveCodingId =
     typeof params.id === "string"
@@ -546,6 +548,29 @@ export default function LiveCodingPage() {
         // Update completed tasks if AI says it's correct
         if (evalData.isCorrect) {
           setCompletedTasks((prev) => new Set(prev).add(activeTask.id));
+          
+          // Trigger confetti celebration
+          celebrate({
+            title: "Case Tamamlandı! 🎉",
+            message: `${activeTask.title} başarıyla tamamlandı. Harika iş çıkardın!`,
+            variant: "success",
+            durationMs: 5000,
+          });
+
+          // Mark case as completed in database
+          try {
+            await fetch(`/api/education/live-coding/${resolvedLiveCodingId}/complete-case`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                taskId: activeTask.id,
+                completedAt: new Date().toISOString(),
+              }),
+            });
+          } catch (error) {
+            console.error("Error completing case:", error);
+            // Don't show error to user, this is a background operation
+          }
         }
 
         // Scroll to AI feedback area
@@ -576,7 +601,7 @@ export default function LiveCodingPage() {
         specificErrors: [],
       });
     }
-  }, [activeTask, activeLanguage, activeUserCode, runResult]);
+  }, [activeTask, activeLanguage, activeUserCode, runResult, resolvedLiveCodingId, celebrate]);
 
   const handleSubmit = async () => {
     if (submitting || !quiz) return;

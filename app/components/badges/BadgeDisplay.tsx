@@ -11,6 +11,7 @@ interface Badge {
   color: string;
   category: string;
   rarity: "common" | "rare" | "epic" | "legendary";
+  tier?: "bronze" | "silver" | "gold" | "platinum";
   points: number;
   earnedAt?: string;
   isDisplayed?: boolean;
@@ -35,6 +36,20 @@ const rarityBorders = {
   rare: "border-blue-300 dark:border-blue-700",
   epic: "border-purple-300 dark:border-purple-700",
   legendary: "border-yellow-300 dark:border-orange-700",
+};
+
+const tierNames = {
+  bronze: "Başlangıç Seviye",
+  silver: "Orta Seviye",
+  gold: "İleri Seviye",
+  platinum: "Efsanevi",
+};
+
+const tierColors = {
+  bronze: "from-amber-600 to-orange-600",
+  silver: "from-gray-400 to-gray-600",
+  gold: "from-yellow-400 to-amber-500",
+  platinum: "from-purple-400 to-pink-500",
 };
 
 export function BadgeDisplay({
@@ -132,10 +147,17 @@ export function BadgeDisplay({
           {badge.name}
         </p>
         {size !== "sm" && (
-          <div className="flex items-center justify-center gap-2 text-xs text-gray-500 dark:text-gray-400">
-            <span className="font-semibold">{badge.points} puan</span>
-            <span className="w-1 h-1 rounded-full bg-gray-300 dark:bg-gray-600" />
-            <span>{badge.category}</span>
+          <div className="flex flex-col items-center gap-1">
+            <div className="flex items-center justify-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+              <span className="font-semibold">{badge.points} puan</span>
+              <span className="w-1 h-1 rounded-full bg-gray-300 dark:bg-gray-600" />
+              <span>{badge.category}</span>
+            </div>
+            {badge.tier && (
+              <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold uppercase tracking-wide bg-gradient-to-r ${tierColors[badge.tier]} text-white shadow-sm`}>
+                {tierNames[badge.tier]}
+              </span>
+            )}
           </div>
         )}
         {size === "lg" && badge.description && (

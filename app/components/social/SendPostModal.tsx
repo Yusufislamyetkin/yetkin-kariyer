@@ -107,6 +107,12 @@ export function SendPostModal({
   const handleSend = async () => {
     if (selectedRecipients.size === 0 || !session?.user?.id) return;
 
+    // Validate postId
+    if (!postId || postId.trim() === "") {
+      setError("Gönderi ID'si bulunamadı");
+      return;
+    }
+
     setIsSending(true);
     setError(null);
 
@@ -116,7 +122,14 @@ export function SendPostModal({
       const postLink = typeof window !== 'undefined' 
         ? `${window.location.origin}/social/posts/${postId}`
         : `/social/posts/${postId}`;
-      const messageContent = postLink;
+      
+      // Ensure the link is valid
+      if (!postLink || postLink.trim() === "") {
+        throw new Error("Gönderi linki oluşturulamadı");
+      }
+      
+      // Format message with intro text and clickable link
+      const messageContent = `Buna göz atmak isteyebilirsin\n${postLink.trim()}`;
 
       // Send to each recipient
       const sendPromises = recipients.map(async (recipientId) => {
@@ -134,7 +147,11 @@ export function SendPostModal({
               type: "text",
             }),
           });
-          if (!response.ok) throw new Error("Grup mesajı gönderilemedi");
+          
+          if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.error || "Grup mesajı gönderilemedi");
+          }
         } else {
           // Send to friend (direct message)
           // First, get or create thread
@@ -143,8 +160,17 @@ export function SendPostModal({
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ userId: recipientId }),
           });
-          if (!threadRes.ok) throw new Error("Mesaj thread'i oluşturulamadı");
+          
+          if (!threadRes.ok) {
+            const errorData = await threadRes.json().catch(() => ({}));
+            throw new Error(errorData.error || "Mesaj thread'i oluşturulamadı");
+          }
+          
           const threadData = await threadRes.json();
+          
+          if (!threadData.threadId) {
+            throw new Error("Thread ID alınamadı");
+          }
 
           const response = await fetch(`/api/chat/direct/${threadData.threadId}/messages`, {
             method: "POST",
@@ -154,7 +180,11 @@ export function SendPostModal({
               type: "text",
             }),
           });
-          if (!response.ok) throw new Error("Mesaj gönderilemedi");
+          
+          if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.error || "Mesaj gönderilemedi");
+          }
         }
       });
 
@@ -356,31 +386,38 @@ export function SendPostModal({
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-4 border-t border-gray-200 dark:border-gray-800 flex items-center justify-between">
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            {selectedRecipients.size > 0
-              ? `${selectedRecipients.size} seçili`
-              : "Alıcı seçin"}
-          </p>
-          <div className="flex items-center gap-3">
-            <Button onClick={onClose} variant="outline" disabled={isSending}>
-              İptal
-            </Button>
-            <Button
-              onClick={handleSend}
-              variant="primary"
-              disabled={selectedRecipients.size === 0 || isSending}
-              className="bg-[#0a66c2] hover:bg-[#004182] text-white"
-            >
-              {isSending ? (
-                <>
-                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Gönderiliyor...
-                </>
-              ) : (
-                "Gönder"
-              )}
-            </Button>
+        <div className="px-6 py-4 border-t border-gray-200 dark:border-gray-800">
+          {error && (
+            <div className="mb-3 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md">
+              <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+            </div>
+          )}
+          <div className="flex items-center justify-between">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              {selectedRecipients.size > 0
+                ? `${selectedRecipients.size} seçili`
+                : "Alıcı seçin"}
+            </p>
+            <div className="flex items-center gap-3">
+              <Button onClick={onClose} variant="outline" disabled={isSending}>
+                İptal
+              </Button>
+              <Button
+                onClick={handleSend}
+                variant="primary"
+                disabled={selectedRecipients.size === 0 || isSending}
+                className="bg-[#0a66c2] hover:bg-[#004182] text-white"
+              >
+                {isSending ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    Gönderiliyor...
+                  </>
+                ) : (
+                  "Gönder"
+                )}
+              </Button>
+            </div>
           </div>
         </div>
       </div>

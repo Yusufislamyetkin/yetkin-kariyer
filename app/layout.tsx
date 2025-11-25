@@ -4,7 +4,7 @@ import { ThemeProvider } from "@/app/contexts/ThemeContext";
 import { Providers } from "@/app/providers";
 
 export const metadata: Metadata = {
-  title: "AI Recruit - Kariyer Platformu",
+  title: "YTK Academy - Kariyer Platformu",
   description: "Yapay zeka destekli kariyer geliştirme ve mülakat platformu",
 };
 

@@ -132,15 +132,12 @@ export default function Home() {
 
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-cyan-50 dark:from-gray-900 dark:via-slate-900 dark:to-gray-800 transition-colors duration-200">
-        <div className="bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 text-white text-center text-sm md:text-base font-semibold py-2">
-          Bu proje YTKN ekibi tarafından geliştirilmiştir.
-        </div>
       {/* Navigation */}
       <nav className="sticky top-0 z-50 glass border-b border-gray-200/50 dark:border-gray-700/50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <Link href="/" className="text-2xl font-display font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent md:bg-gradient-to-r md:from-blue-600 md:via-indigo-600 md:to-cyan-600 md:bg-[length:200%_auto] md:animate-text-shimmer">
-              AI Recruit
+              YTK Academy
             </Link>
             <div className="flex items-center gap-4">
               <ThemeSwitchButton />
@@ -587,7 +584,7 @@ export default function Home() {
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
               <h3 className="text-xl font-display font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent mb-4">
-                AI Recruit
+                YTK Academy
               </h3>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
                 Kapsamlı eğitim, sosyal ağ, hackathon, freelancer fırsatları ve kariyer geliştirme platformu. Eğitim, topluluk ve kariyerin tek adresi.
@@ -631,7 +628,7 @@ export default function Home() {
           <div className="border-t border-gray-200/50 dark:border-gray-700/50 pt-8">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               <p className="text-sm text-gray-600 dark:text-gray-400 text-center md:text-left">
-                &copy; 2024 AI Recruit. Tüm hakları saklıdır.
+                &copy; 2024 YTK Academy. Tüm hakları saklıdır.
               </p>
               <div className="flex items-center gap-6 text-sm text-gray-600 dark:text-gray-400">
                 <span>Türkçe</span>

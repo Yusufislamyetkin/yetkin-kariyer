@@ -94,7 +94,7 @@ function LoginForm() {
       <div className="max-w-md w-full space-y-8 animate-fade-in">
         <div className="text-center">
           <h1 className="text-4xl font-display font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent md:bg-gradient-to-r md:from-blue-600 md:via-purple-600 md:to-pink-600 md:bg-[length:200%_auto] md:animate-text-shimmer mb-2">
-            AI Recruit
+            YTK Academy
           </h1>
           <p className="text-gray-600 dark:text-gray-400 font-medium text-lg">
             Kariyerinize hoş geldiniz

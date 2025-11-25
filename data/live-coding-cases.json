@@ -9,14 +9,14 @@
           "title": "Sayısal Çıktı Döngüsü",
           "description": "1'den 50'ye kadar sayıları ekrana yazdırın.",
           "difficulty": "beginner",
-          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dünya 1', 'Selam Sana Dünya 2', ... 'Selam Sana Dünya 50'",
+          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Hello World 1', 'Hello World 2', ... 'Hello World 50'",
           "starterCode": {
             "csharp": "using System;\n\nclass Program\n{\n    static void Main(string[] args)\n    {\n        // Kodunu buraya yaz\n        \n    }\n}"
           },
           "testCases": [
             {
               "input": "",
-              "expectedOutput": "Selam Sana Dünya 1\nSelam Sana Dünya 2\n...\nSelam Sana Dünya 50"
+              "expectedOutput": "Hello World 1\nHello World 2\n...\nHello World 50"
             }
           ],
           "hints": [

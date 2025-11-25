@@ -372,7 +372,7 @@ function DashboardLayoutContent({
               href="/dashboard"
               className="text-2xl font-display font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent md:bg-gradient-to-r md:from-blue-600 md:via-purple-600 md:to-pink-600 md:bg-[length:200%_auto] md:animate-text-shimmer flex-shrink-0 min-w-0"
             >
-              AI Recruit
+              YTK Academy
             </Link>
             <button
               onClick={() => setSidebarOpen(false)}
@@ -514,7 +514,7 @@ function DashboardLayoutContent({
               href="/dashboard"
               className="text-xl font-display font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 bg-clip-text text-transparent flex-shrink-0 min-w-0 truncate"
             >
-              AI Recruit
+              YTK Academy
             </Link>
             <div className="w-6 flex-shrink-0" />
           </div>

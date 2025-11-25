@@ -3,7 +3,7 @@
 import { useEffect, useState, useMemo } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { Medal, Info, Trophy, Lightbulb } from "lucide-react";
+import { Medal, Info, Trophy, Lightbulb, Crown, Award, Star } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { BadgeCollection } from "@/app/components/badges/BadgeDisplay";
 
@@ -38,7 +38,7 @@ export default function RozetlerPage() {
         icon: "📅",
         description: "Günlük test, kurs, canlı kod ve bugfix aktiviteleriniz için rozetler",
         gradient: "from-blue-500 to-cyan-500",
-        badgeCategories: ["test_count", "topic"],
+        badgeCategories: ["daily_activities"],
       },
       {
         id: "total_achievements",
@@ -54,7 +54,7 @@ export default function RozetlerPage() {
         icon: "💬",
         description: "Sosyal aktiviteleriniz için rozetler",
         gradient: "from-green-500 to-emerald-500",
-        badgeCategories: [],
+        badgeCategories: ["social_interaction"],
       },
       {
         id: "consistency",
@@ -100,6 +100,30 @@ export default function RozetlerPage() {
       category.badgeCategories.includes(badge.category)
     );
   }, [selectedCategory, allBadges, categories]);
+
+  // Calculate tier statistics for selected category
+  const tierStats = useMemo(() => {
+    if (!selectedCategory) return null;
+    const categoryBadges = filteredBadges;
+    const tiers = ["bronze", "silver", "gold", "platinum"];
+    const tierNames = {
+      bronze: "Başlangıç Seviye",
+      silver: "Orta Seviye",
+      gold: "İleri Seviye",
+      platinum: "Efsanevi",
+    };
+    
+    return tiers.map((tier) => {
+      const tierBadges = categoryBadges.filter((b: Badge) => (b as any).tier === tier);
+      const earnedInTier = tierBadges.filter((b: Badge) => earnedBadgeIds.has(b.id)).length;
+      return {
+        tier,
+        name: tierNames[tier as keyof typeof tierNames],
+        total: tierBadges.length,
+        earned: earnedInTier,
+      };
+    });
+  }, [selectedCategory, filteredBadges, earnedBadgeIds]);
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -182,82 +206,103 @@ export default function RozetlerPage() {
   return (
     <div className="space-y-6 md:space-y-8 animate-fade-in pb-8">
       {/* Top Section - Header, Stats, and Info */}
-      <div className="relative p-8 md:p-12">
-        {/* Header */}
-        <div className="mb-6">
-          <h1 className="text-3xl md:text-4xl font-display font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 bg-clip-text text-transparent mb-2">
-            Rozetler
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400 text-lg font-medium">
-            Başarılarınızı rozetlerle taçlandırın ve ödüller kazanın!
-          </p>
-        </div>
-
-        {/* Statistics - Inline */}
-        <div className="flex flex-wrap items-center gap-6 mb-6">
-          <div className="flex items-center gap-2">
-            <span className="text-sm text-gray-600 dark:text-gray-400">Kazandığınız Rozetler</span>
-            <span className="text-xl font-bold text-gray-900 dark:text-gray-100">
-              {earnedCount} / {totalBadges}
-            </span>
+      <Card variant="elevated" className="bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50 dark:from-purple-950/30 dark:via-blue-950/30 dark:to-indigo-950/30 border border-purple-200/50 dark:border-purple-800/50">
+        <CardContent className="p-8 md:p-12">
+          {/* Header with Trophy Icon */}
+          <div className="flex items-start gap-4 mb-6">
+            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-indigo-500 flex items-center justify-center flex-shrink-0">
+              <Trophy className="h-8 w-8 text-white" />
+            </div>
+            <div className="flex-1">
+              <h1 className="text-3xl md:text-4xl font-display font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 bg-clip-text text-transparent mb-2">
+                Rozetler
+              </h1>
+              <p className="text-gray-600 dark:text-gray-400 text-lg font-medium">
+                Başarılarınızı rozetlerle taçlandırın ve ödüller kazanın!
+              </p>
+            </div>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="text-sm text-gray-600 dark:text-gray-400">Toplam Puan</span>
-            <span className="text-xl font-bold text-gray-900 dark:text-gray-100">
-              {totalPoints}
-            </span>
-          </div>
-        </div>
 
-        {/* Info Section */}
-        <div className="mb-6">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
-            Rozetler nedir?
-          </h3>
-          <p className="text-gray-600 dark:text-gray-400">
-            Platformdaki aktivitelerinizi tamamlayarak rozetler kazanabilirsiniz.
-          </p>
-        </div>
-      </div>
+          {/* Statistics Cards */}
+          <div className="grid md:grid-cols-2 gap-4 mb-6">
+            <Card variant="elevated" className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border border-purple-200/50 dark:border-purple-800/50">
+              <CardContent className="p-4 flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-indigo-400 flex items-center justify-center flex-shrink-0">
+                  <Medal className="h-5 w-5 text-white" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Kazandığınız Rozetler</p>
+                  <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                    {earnedCount} / {totalBadges}
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+            <Card variant="elevated" className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border border-purple-200/50 dark:border-purple-800/50">
+              <CardContent className="p-4 flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-indigo-400 flex items-center justify-center flex-shrink-0">
+                  <Star className="h-5 w-5 text-white" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Toplam Puan</p>
+                  <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                    {totalPoints}
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Info Section */}
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
+              Rozetler nedir?
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400">
+              Platformdaki aktivitelerinizi tamamlayarak rozetler kazanabilirsiniz. Her rozet size puan kazandırır ve bu puanlar aylık sıralamada yer almanızı sağlar. Rozetlerinizi kazanmak için test çözün, kurslar tamamlayın, sosyal paylaşımlar yapın ve düzenli olarak aktif olun!
+            </p>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Monthly Reward System */}
       <Card variant="elevated" className="border-b border-purple-200/50 dark:border-purple-800/50 bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-indigo-500/10">
-        <CardHeader className="border-b border-purple-200/50 dark:border-purple-800/50 bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-indigo-500/10">
+        <CardHeader className="flex flex-col space-y-1.5 p-6 border-b border-purple-200/50 dark:border-purple-800/50 bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-indigo-500/10">
           <CardTitle className="flex items-center gap-2 text-xl font-bold text-gray-900 dark:text-gray-100">
-            <Trophy className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+            <Crown className="h-5 w-5 text-purple-600 dark:text-purple-400" />
             Aylık Ödül Sistemi
           </CardTitle>
         </CardHeader>
-        <CardContent className="pt-6">
+        <CardContent className="p-6">
           <p className="text-gray-700 dark:text-gray-300 mb-4">
             Aylık sıralamada rozetlerden kazandığınız puanlarla ilk 3&apos;e girenlere para ödülü verilir!
           </p>
           <div className="space-y-3">
-            <div className="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-yellow-50 to-amber-50 dark:from-yellow-900/20 dark:to-amber-900/20 border border-yellow-200 dark:border-yellow-800">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-500 to-amber-500 flex items-center justify-center flex-shrink-0">
-                <span className="text-white font-bold text-lg">1</span>
+            <div className="reward-card-shine flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-purple-500 to-indigo-500 border border-purple-300 dark:border-purple-700">
+              <div className="relative z-10 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
+                <Crown className="h-5 w-5 text-white" />
               </div>
-              <div className="flex-1">
-                <p className="text-sm text-gray-600 dark:text-gray-400">1. Sıra</p>
-                <p className="text-lg font-bold text-gray-900 dark:text-gray-100">10.000 TL</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-gray-50 to-slate-50 dark:from-gray-800/20 dark:to-slate-800/20 border border-gray-200 dark:border-gray-700">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-gray-400 to-slate-500 flex items-center justify-center flex-shrink-0">
-                <span className="text-white font-bold text-lg">2</span>
-              </div>
-              <div className="flex-1">
-                <p className="text-sm text-gray-600 dark:text-gray-400">2. Sıra</p>
-                <p className="text-lg font-bold text-gray-900 dark:text-gray-100">7.500 TL</p>
+              <div className="relative z-10 flex-1">
+                <p className="text-sm text-white/90">1. Sıra</p>
+                <p className="text-xl font-bold text-white">10.000 TL</p>
               </div>
             </div>
-            <div className="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 border border-orange-200 dark:border-orange-800">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center flex-shrink-0">
-                <span className="text-white font-bold text-lg">3</span>
+            <div className="reward-card-shine flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 border border-blue-300 dark:border-blue-700">
+              <div className="relative z-10 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
+                <Award className="h-5 w-5 text-white" />
               </div>
-              <div className="flex-1">
-                <p className="text-sm text-gray-600 dark:text-gray-400">3. Sıra</p>
-                <p className="text-lg font-bold text-gray-900 dark:text-gray-100">5.000 TL</p>
+              <div className="relative z-10 flex-1">
+                <p className="text-sm text-white/90">2. Sıra</p>
+                <p className="text-xl font-bold text-white">7.500 TL</p>
+              </div>
+            </div>
+            <div className="reward-card-shine flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 border border-purple-300 dark:border-purple-700">
+              <div className="relative z-10 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
+                <Trophy className="h-5 w-5 text-white" />
+              </div>
+              <div className="relative z-10 flex-1">
+                <p className="text-sm text-white/90">3. Sıra</p>
+                <p className="text-xl font-bold text-white">5.000 TL</p>
               </div>
             </div>
           </div>
@@ -275,15 +320,32 @@ export default function RozetlerPage() {
         {/* Left Column - Badges Collection */}
         <div className="lg:col-span-2">
           <div className="mb-6">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
-              {selectedCategory
-                ? categories.find((c) => c.id === selectedCategory)?.name || "Tüm Rozetler"
-                : "Tüm Rozetler"}
-            </h2>
+            <div className="flex items-center gap-3 mb-2">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                {selectedCategory
+                  ? categories.find((c) => c.id === selectedCategory)?.name || "Tüm Rozetler"
+                  : "Tüm Rozetler"}
+              </h2>
+            </div>
             {selectedCategory && (
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                {categories.find((c) => c.id === selectedCategory)?.description}
-              </p>
+              <>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                  {categories.find((c) => c.id === selectedCategory)?.description}
+                </p>
+                {tierStats && (
+                  <div className="flex flex-wrap gap-2">
+                    {tierStats.map((tier) => (
+                      <span
+                        key={tier.tier}
+                        className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700"
+                      >
+                        <span className="w-2 h-2 rounded-full bg-green-500"></span>
+                        {tier.name} ({tier.earned} / {tier.total})
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </>
             )}
           </div>
           {filteredBadges.length > 0 ? (

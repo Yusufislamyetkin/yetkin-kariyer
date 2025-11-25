@@ -6,13 +6,13 @@
       "id": "csharp-junior-1",
       "title": "Sayısal Çıktı Döngüsü",
       "description": "1'den 50'ye kadar sayıları ekrana yazdırın.",
-      "taskDescription": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dünya 1', 'Selam Sana Dünya 2', ... 'Selam Sana Dünya 50'",
+      "taskDescription": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Hello World 1', 'Hello World 2', ... 'Hello World 50'",
       "level": "beginner",
       "timeLimitMinutes": 30,
       "acceptanceCriteria": [
         "Kod derlenmeli ve hatasız çalışmalı",
         "1'den 50'ye kadar tüm sayılar yazdırılmalı",
-        "Her satır 'Selam Sana Dünya X' formatında olmalı",
+        "Her satır 'Hello World X' formatında olmalı",
         "Döngü kullanılmalı",
         "Kod okunabilir ve temiz olmalı"
       ]

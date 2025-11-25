@@ -8,6 +8,44 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/app/components/ui/Button";
 import type { ChatAttachment, ChatMessage } from "./types";
 
+// Helper function to convert URLs in text to clickable links
+function renderMessageWithLinks(content: string): ReactNode {
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  const parts: ReactNode[] = [];
+  let lastIndex = 0;
+  let match;
+
+  while ((match = urlRegex.exec(content)) !== null) {
+    // Add text before the URL
+    if (match.index > lastIndex) {
+      parts.push(content.substring(lastIndex, match.index));
+    }
+    
+    // Add the URL as a clickable link
+    const url = match[0];
+    parts.push(
+      <Link
+        key={match.index}
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="underline hover:opacity-80"
+      >
+        {url}
+      </Link>
+    );
+    
+    lastIndex = match.index + match[0].length;
+  }
+  
+  // Add remaining text after the last URL
+  if (lastIndex < content.length) {
+    parts.push(content.substring(lastIndex));
+  }
+  
+  return parts.length > 0 ? <>{parts}</> : content;
+}
+
 interface MessageListProps {
   messages: ChatMessage[];
   currentUserId?: string;
@@ -163,7 +201,7 @@ function MessageBubble({ message, currentUserId }: MessageBubbleProps) {
 
         {message.content && (
           <p className={cn("whitespace-pre-wrap break-words text-sm leading-relaxed", isOwn ? "text-white/90" : "text-gray-800 dark:text-gray-100")}>
-            {message.content}
+            {renderMessageWithLinks(message.content)}
           </p>
         )}
 

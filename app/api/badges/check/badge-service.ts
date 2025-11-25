@@ -170,6 +170,106 @@ export async function checkBadgesForAttempt({
           quizAttempt.duration <= criteria.value
         ) {
           shouldEarn = true;
+        } else if (criteria.type === "special") {
+          // Özel başarı rozetleri için genel kontrol
+          shouldEarn = true; // Bu daha spesifik kontrol gerektirebilir
+        }
+        break;
+      case "daily_activities":
+        if (criteria.type === "daily_activity" && criteria.daily) {
+          const today = new Date();
+          today.setHours(0, 0, 0, 0);
+          
+          // Bugünkü aktiviteleri say
+          let todayCount = 0;
+          
+          if (criteria.activity_type === "test") {
+            const todayAttempts = await db.quizAttempt.count({
+              where: {
+                userId,
+                completedAt: {
+                  gte: today,
+                },
+              },
+            });
+            todayCount = todayAttempts;
+          } else if (criteria.activity_type === "kurs") {
+            const todayCompletions = await db.lessonCompletion.count({
+              where: {
+                userId,
+                completedAt: {
+                  gte: today,
+                },
+              },
+            });
+            todayCount = todayCompletions;
+          } else if (criteria.activity_type === "canlı kod" || criteria.activity_type === "canlı kodlama") {
+            const todayLiveCoding = await db.liveCodingAttempt.count({
+              where: {
+                userId,
+                completedAt: {
+                  gte: today,
+                },
+              },
+            });
+            todayCount = todayLiveCoding;
+          } else if (criteria.activity_type === "bugfix" || criteria.activity_type === "hata düzeltme") {
+            const todayBugFix = await db.bugFixAttempt.count({
+              where: {
+                userId,
+                completedAt: {
+                  gte: today,
+                },
+              },
+            });
+            todayCount = todayBugFix;
+          }
+          
+          if (todayCount >= criteria.count) {
+            shouldEarn = true;
+          }
+        }
+        break;
+      case "social_interaction":
+        if (criteria.type === "social_interaction") {
+          let interactionCount = 0;
+          
+          if (criteria.interaction_type === "post") {
+            interactionCount = await db.post.count({
+              where: { userId },
+            });
+          } else if (criteria.interaction_type === "beğeni") {
+            interactionCount = await db.postLike.count({
+              where: { userId },
+            });
+          } else if (criteria.interaction_type === "yorum") {
+            interactionCount = await db.postComment.count({
+              where: { userId },
+            });
+          } else if (criteria.interaction_type === "story") {
+            interactionCount = await db.story.count({
+              where: { userId },
+            });
+          } else if (criteria.interaction_type === "arkadaş" || criteria.interaction_type === "takipçi") {
+            interactionCount = await db.friendship.count({
+              where: {
+                OR: [
+                  { requesterId: userId, status: "accepted" },
+                  { addresseeId: userId, status: "accepted" },
+                ],
+              },
+            });
+          } else if (criteria.interaction_type === "paylaşım" || criteria.interaction_type === "etkileşim") {
+            // Toplam sosyal etkileşim
+            const posts = await db.post.count({ where: { userId } });
+            const likes = await db.postLike.count({ where: { userId } });
+            const comments = await db.postComment.count({ where: { userId } });
+            interactionCount = posts + likes + comments;
+          }
+          
+          if (interactionCount >= criteria.count) {
+            shouldEarn = true;
+          }
         }
         break;
     }

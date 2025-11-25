@@ -42,6 +42,8 @@ enum BadgeCategory {
   topic
   streak
   special
+  daily_activities
+  social_interaction
 }
 
 enum BadgeRarity {
