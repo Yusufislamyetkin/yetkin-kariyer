@@ -7,6 +7,58 @@ import { Medal, Info, Trophy, Lightbulb } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { BadgeCollection } from "@/app/components/badges/BadgeDisplay";
 
+type CategoryDefinition = {
+  id: string;
+  name: string;
+  icon: string;
+  description: string;
+  gradient: string;
+  badgeCategories: string[];
+};
+
+const CATEGORIES: CategoryDefinition[] = [
+  {
+    id: "daily_activities",
+    name: "Günlük Aktiviteler",
+    icon: "📅",
+    description: "Günlük test, kurs, canlı kod ve bugfix aktiviteleriniz için rozetler",
+    gradient: "from-blue-500 to-cyan-500",
+    badgeCategories: ["test_count", "topic"],
+  },
+  {
+    id: "total_achievements",
+    name: "Toplam Başarılar",
+    icon: "🏆",
+    description: "Toplam başarılarınız için rozetler",
+    gradient: "from-purple-500 to-pink-500",
+    badgeCategories: ["score"],
+  },
+  {
+    id: "social_interaction",
+    name: "Sosyal Etkileşim",
+    icon: "💬",
+    description: "Sosyal aktiviteleriniz için rozetler",
+    gradient: "from-green-500 to-emerald-500",
+    badgeCategories: [],
+  },
+  {
+    id: "consistency",
+    name: "Süreklilik ve Disiplin",
+    icon: "🔥",
+    description: "Süreklilik ve disiplin rozetleri",
+    gradient: "from-orange-500 to-red-500",
+    badgeCategories: ["streak"],
+  },
+  {
+    id: "special",
+    name: "Özel Başarılar",
+    icon: "⭐",
+    description: "Özel başarılarınız için rozetler",
+    gradient: "from-yellow-500 to-amber-500",
+    badgeCategories: ["special"],
+  },
+];
+
 interface Badge {
   id: string;
   name: string;
@@ -163,17 +215,6 @@ export default function RozetlerPage() {
       setLoading(false);
     }
   };
-
-  if (loading || !session) {
-    return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin dark:border-blue-400"></div>
-          <p className="text-gray-600 dark:text-gray-400">Yükleniyor...</p>
-        </div>
-      </div>
-    );
-  }
 
   const earnedCount = userBadges.length;
   const totalBadges = totalBadgesCount || allBadges.length || 93;
