@@ -3,6 +3,7 @@ import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { recordEvent } from "@/lib/services/gamification/antiAbuse";
 import { applyRules } from "@/lib/services/gamification/rules";
+import { checkBadgesForActivity } from "@/app/api/badges/check/badge-service";
 
 function resolveLessonSlug(params: { slug: string[] }): string | null {
   if (!params.slug || params.slug.length === 0) {
@@ -106,6 +107,16 @@ export async function POST(
       await applyRules({ userId, type: "lesson_complete", payload: { sourceEventId: event.id } });
     } catch (e) {
       console.warn("Gamification lesson_complete failed:", e);
+    }
+
+    // Check for badges (daily activities, streak, etc.)
+    try {
+      await checkBadgesForActivity({
+        userId,
+        activityType: "kurs",
+      });
+    } catch (e) {
+      console.warn("Badge check failed:", e);
     }
 
     return NextResponse.json({

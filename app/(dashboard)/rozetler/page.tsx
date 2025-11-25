@@ -258,6 +258,8 @@ export default function RozetlerPage() {
     } else if (status === "authenticated") {
       fetchBadges();
       fetchUserBadges();
+      // Tüm rozetleri kontrol et (eksik olanları tespit et)
+      checkAllBadges();
     }
   }, [status, router]);
 
@@ -312,6 +314,23 @@ export default function RozetlerPage() {
       console.error("Error fetching user badges:", error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const checkAllBadges = async () => {
+    try {
+      const response = await fetch("/api/badges/check/all", {
+        method: "POST",
+      });
+      const data = await response.json();
+
+      if (response.ok && data.totalEarned > 0) {
+        // Yeni rozetler kazanıldı, kullanıcı rozetlerini yeniden yükle
+        await fetchUserBadges();
+      }
+    } catch (error) {
+      // Sessizce hata yok say (kullanıcı deneyimini bozmamak için)
+      console.error("Error checking all badges:", error);
     }
   };
 
@@ -404,32 +423,32 @@ export default function RozetlerPage() {
           <p className="text-gray-700 dark:text-gray-300 mb-4">
             Aylık sıralamada rozetlerden kazandığınız puanlarla ilk 3&apos;e girenlere para ödülü verilir!
           </p>
-          <div className="space-y-3">
-            <div className="reward-card-shine flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-purple-500 to-purple-600 border border-purple-300 dark:border-purple-700">
-              <div className="relative z-10 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
-                <Crown className="h-5 w-5 text-white" />
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="lux-glow reward-card-shine flex flex-col items-center justify-center gap-3 p-6 rounded-xl bg-gradient-to-br from-[#61c5ff]/50 via-[#6f49ff]/35 to-[#ffe9c9]/50 border-transparent shadow-[0_22px_48px_-28px_rgba(79,70,229,0.8)] ring-2 ring-sky-400/40 min-h-[140px]">
+              <div className="relative z-10 w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
+                <Crown className="h-6 w-6 text-white" />
               </div>
-              <div className="relative z-10 flex-1">
-                <p className="text-sm text-white/90">1. Sıra</p>
-                <p className="text-xl font-bold text-white">10.000 TL</p>
-              </div>
-            </div>
-            <div className="reward-card-shine flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 border border-blue-300 dark:border-blue-700">
-              <div className="relative z-10 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
-                <Medal className="h-5 w-5 text-white" />
-              </div>
-              <div className="relative z-10 flex-1">
-                <p className="text-sm text-white/90">2. Sıra</p>
-                <p className="text-xl font-bold text-white">7.500 TL</p>
+              <div className="relative z-10 text-center">
+                <p className="text-sm text-white/90 mb-1">1. Sıra</p>
+                <p className="text-2xl font-bold text-white">10.000 TL</p>
               </div>
             </div>
-            <div className="reward-card-shine flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-purple-500 to-purple-600 border border-purple-300 dark:border-purple-700">
-              <div className="relative z-10 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
-                <Trophy className="h-5 w-5 text-white" />
+            <div className="lux-glow reward-card-shine flex flex-col items-center justify-center gap-3 p-6 rounded-xl bg-gradient-to-br from-[#ffe7a0]/60 via-[#f8b84f]/40 to-[#fff4d9]/65 border-transparent shadow-[0_22px_48px_-28px_rgba(217,119,6,0.75)] ring-2 ring-amber-400/40 min-h-[140px]">
+              <div className="relative z-10 w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
+                <Medal className="h-6 w-6 text-white" />
               </div>
-              <div className="relative z-10 flex-1">
-                <p className="text-sm text-white/90">3. Sıra</p>
-                <p className="text-xl font-bold text-white">5.000 TL</p>
+              <div className="relative z-10 text-center">
+                <p className="text-sm text-white/90 mb-1">2. Sıra</p>
+                <p className="text-2xl font-bold text-white">7.500 TL</p>
+              </div>
+            </div>
+            <div className="lux-glow reward-card-shine flex flex-col items-center justify-center gap-3 p-6 rounded-xl bg-gradient-to-br from-[#fdba74]/55 via-[#fb923c]/40 to-[#f97316]/50 border-transparent shadow-[0_22px_48px_-28px_rgba(251,146,60,0.7)] ring-2 ring-orange-400/40 min-h-[140px]">
+              <div className="relative z-10 w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
+                <Trophy className="h-6 w-6 text-white" />
+              </div>
+              <div className="relative z-10 text-center">
+                <p className="text-sm text-white/90 mb-1">3. Sıra</p>
+                <p className="text-2xl font-bold text-white">5.000 TL</p>
               </div>
             </div>
           </div>

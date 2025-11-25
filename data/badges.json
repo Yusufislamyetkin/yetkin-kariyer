@@ -1,10 +1,10 @@
 {
-  "totalBadges": 93,
+  "totalBadges": 140,
   "badges": [
     {
       "id": "badge-001",
       "key": "first_test",
-      "name": "İlk Adım",
+      "name": "Yolculuğun Başlangıcı",
       "description": "İlk testinizi tamamlayın",
       "icon": "🎯",
       "color": "#3B82F6",
@@ -18,7 +18,7 @@
     {
       "id": "badge-002",
       "key": "test_5",
-      "name": "Test Sever",
+      "name": "Test Çırağı",
       "description": "5 test tamamlayın",
       "icon": "📝",
       "color": "#3B82F6",
@@ -33,7 +33,7 @@
     {
       "id": "badge-003",
       "key": "test_10",
-      "name": "Test Tutkunu",
+      "name": "Test Kaşifi",
       "description": "10 test tamamlayın",
       "icon": "📚",
       "color": "#6366F1",
@@ -78,7 +78,7 @@
     {
       "id": "badge-006",
       "key": "test_100",
-      "name": "Test Efsanesi",
+      "name": "Test Şampiyonu",
       "description": "100 test tamamlayın",
       "icon": "📘",
       "color": "#8B5CF6",
@@ -93,7 +93,7 @@
     {
       "id": "badge-007",
       "key": "test_250",
-      "name": "Test Efsanesi",
+      "name": "Test Kralı",
       "description": "250 test tamamlayın",
       "icon": "📙",
       "color": "#F59E0B",
@@ -123,7 +123,7 @@
     {
       "id": "badge-009",
       "key": "score_60",
-      "name": "Geçer Not",
+      "name": "Başarı Çırağı",
       "description": "Bir testte en az 60 puan alın",
       "icon": "✅",
       "color": "#3B82F6",
@@ -138,7 +138,7 @@
     {
       "id": "badge-010",
       "key": "score_70",
-      "name": "İyi Not",
+      "name": "Başarı Kaşifi",
       "description": "Bir testte en az 70 puan alın",
       "icon": "👍",
       "color": "#3B82F6",
@@ -153,7 +153,7 @@
     {
       "id": "badge-011",
       "key": "score_80",
-      "name": "Çok İyi",
+      "name": "Başarı Ustası",
       "description": "Bir testte en az 80 puan alın",
       "icon": "⭐",
       "color": "#6366F1",
@@ -168,7 +168,7 @@
     {
       "id": "badge-012",
       "key": "score_90",
-      "name": "Mükemmel",
+      "name": "Mükemmellik Efendisi",
       "description": "Bir testte en az 90 puan alın",
       "icon": "🌟",
       "color": "#6366F1",
@@ -183,7 +183,7 @@
     {
       "id": "badge-013",
       "key": "score_100",
-      "name": "Tam Puan",
+      "name": "Kusursuzluk Kralı",
       "description": "Bir testte 100 puan alın",
       "icon": "💯",
       "color": "#8B5CF6",
@@ -212,7 +212,7 @@
     {
       "id": "badge-015",
       "key": "avg_score_80",
-      "name": "Başarılı Öğrenci",
+      "name": "İstikrar Şampiyonu",
       "description": "Ortalama skorunuz 80'in üzerinde olsun",
       "icon": "📈",
       "color": "#8B5CF6",
@@ -227,7 +227,7 @@
     {
       "id": "badge-016",
       "key": "avg_score_90",
-      "name": "Mükemmel Öğrenci",
+      "name": "Mükemmellik Kralı",
       "description": "Ortalama skorunuz 90'ın üzerinde olsun",
       "icon": "🎓",
       "color": "#F59E0B",
@@ -242,7 +242,7 @@
     {
       "id": "badge-017",
       "key": "streak_3",
-      "name": "Başlangıç",
+      "name": "Disiplin Adayı",
       "description": "3 gün üst üste aktif olun",
       "icon": "🔥",
       "color": "#3B82F6",
@@ -257,7 +257,7 @@
     {
       "id": "badge-018",
       "key": "streak_7",
-      "name": "Haftalık Disiplin",
+      "name": "Disiplin Kaşifi",
       "description": "7 gün üst üste aktif olun",
       "icon": "🔥",
       "color": "#6366F1",
@@ -272,7 +272,7 @@
     {
       "id": "badge-019",
       "key": "streak_14",
-      "name": "İki Haftalık",
+      "name": "İstikrar Ustası",
       "description": "14 gün üst üste aktif olun",
       "icon": "🔥",
       "color": "#6366F1",
@@ -287,7 +287,7 @@
     {
       "id": "badge-020",
       "key": "streak_30",
-      "name": "Aylık Disiplin",
+      "name": "Kararlılık Şampiyonu",
       "description": "30 gün üst üste aktif olun",
       "icon": "🔥",
       "color": "#8B5CF6",
@@ -302,7 +302,7 @@
     {
       "id": "badge-021",
       "key": "streak_60",
-      "name": "İki Aylık",
+      "name": "Süreklilik Efendisi",
       "description": "60 gün üst üste aktif olun",
       "icon": "🔥",
       "color": "#8B5CF6",
@@ -317,7 +317,7 @@
     {
       "id": "badge-022",
       "key": "streak_100",
-      "name": "Yüz Günlük",
+      "name": "Disiplin Kralı",
       "description": "100 gün üst üste aktif olun",
       "icon": "🔥",
       "color": "#F59E0B",
@@ -332,7 +332,7 @@
     {
       "id": "badge-023",
       "key": "streak_365",
-      "name": "Yıllık Efsane",
+      "name": "Disiplin Sultanı",
       "description": "365 gün üst üste aktif olun",
       "icon": "🔥",
       "color": "#F59E0B",
@@ -347,7 +347,7 @@
     {
       "id": "badge-024",
       "key": "longest_streak_30",
-      "name": "En Uzun: 30",
+      "name": "Aylık Rekor Şampiyonu",
       "description": "En uzun streak'iniz 30 gün olsun",
       "icon": "📅",
       "color": "#6366F1",
@@ -362,7 +362,7 @@
     {
       "id": "badge-025",
       "key": "longest_streak_100",
-      "name": "En Uzun: 100",
+      "name": "Yüz Günlük Rekor Efendisi",
       "description": "En uzun streak'iniz 100 gün olsun",
       "icon": "📅",
       "color": "#8B5CF6",
@@ -377,7 +377,7 @@
     {
       "id": "badge-026",
       "key": "topic_complete_1",
-      "name": "Konu Ustası",
+      "name": "Konu Kaşifi",
       "description": "Bir konudaki tüm testleri tam puanla tamamlayın",
       "icon": "🎯",
       "color": "#6366F1",
@@ -391,7 +391,7 @@
     {
       "id": "badge-027",
       "key": "topic_complete_5",
-      "name": "Çoklu Konu Ustası",
+      "name": "Bilgi Avcısı",
       "description": "5 farklı konudaki tüm testleri tam puanla tamamlayın",
       "icon": "🎯",
       "color": "#8B5CF6",
@@ -406,7 +406,7 @@
     {
       "id": "badge-028",
       "key": "topic_complete_10",
-      "name": "Master Konu Ustası",
+      "name": "Uzmanlık Kralı",
       "description": "10 farklı konudaki tüm testleri tam puanla tamamlayın",
       "icon": "🎯",
       "color": "#F59E0B",
@@ -421,7 +421,7 @@
     {
       "id": "badge-029",
       "key": "fast_completion_5min",
-      "name": "Hızlı Çözücü",
+      "name": "Şimşek Ustası",
       "description": "Bir testi 5 dakikadan kısa sürede tamamlayın",
       "icon": "⚡",
       "color": "#6366F1",
@@ -436,7 +436,7 @@
     {
       "id": "badge-030",
       "key": "fast_completion_3min",
-      "name": "Çok Hızlı",
+      "name": "Işık Hızı Efendisi",
       "description": "Bir testi 3 dakikadan kısa sürede tamamlayın",
       "icon": "⚡",
       "color": "#8B5CF6",
@@ -451,7 +451,7 @@
     {
       "id": "badge-031",
       "key": "perfect_5",
-      "name": "5 Mükemmel",
+      "name": "Kusursuzluk Ustası",
       "description": "5 testte tam puan alın",
       "icon": "💯",
       "color": "#8B5CF6",
@@ -466,7 +466,7 @@
     {
       "id": "badge-032",
       "key": "perfect_10",
-      "name": "10 Mükemmel",
+      "name": "Mükemmellik Şampiyonu",
       "description": "10 testte tam puan alın",
       "icon": "💯",
       "color": "#F59E0B",
@@ -481,7 +481,7 @@
     {
       "id": "badge-033",
       "key": "perfect_25",
-      "name": "25 Mükemmel",
+      "name": "Kusursuzluk Kralı",
       "description": "25 testte tam puan alın",
       "icon": "💯",
       "color": "#F59E0B",
@@ -496,7 +496,7 @@
     {
       "id": "badge-034",
       "key": "daily_active_7",
-      "name": "Haftalık Aktif",
+      "name": "Aktiflik Adayı",
       "description": "7 gün boyunca aktif olun",
       "icon": "📆",
       "color": "#3B82F6",
@@ -511,7 +511,7 @@
     {
       "id": "badge-035",
       "key": "daily_active_30",
-      "name": "Aylık Aktif",
+      "name": "Düzenli Usta",
       "description": "30 gün boyunca aktif olun",
       "icon": "📆",
       "color": "#6366F1",
@@ -526,7 +526,7 @@
     {
       "id": "badge-036",
       "key": "daily_active_100",
-      "name": "Yüz Günlük Aktif",
+      "name": "Bağlılık Şampiyonu",
       "description": "100 gün boyunca aktif olun",
       "icon": "📆",
       "color": "#8B5CF6",
@@ -541,7 +541,7 @@
     {
       "id": "badge-037",
       "key": "daily_active_365",
-      "name": "Yıllık Aktif",
+      "name": "Adanmışlık Kralı",
       "description": "365 gün boyunca aktif olun",
       "icon": "📆",
       "color": "#F59E0B",
@@ -556,7 +556,7 @@
     {
       "id": "badge-038",
       "key": "test_15",
-      "name": "Test Sevdalısı",
+      "name": "Test Meraklısı",
       "description": "15 test tamamlayın",
       "icon": "📝",
       "color": "#6366F1",
@@ -571,7 +571,7 @@
     {
       "id": "badge-039",
       "key": "test_75",
-      "name": "Test Aşığı",
+      "name": "Test Avcısı",
       "description": "75 test tamamlayın",
       "icon": "📚",
       "color": "#8B5CF6",
@@ -586,7 +586,7 @@
     {
       "id": "badge-040",
       "key": "test_200",
-      "name": "Test Fanatiği",
+      "name": "Test Fatihi",
       "description": "200 test tamamlayın",
       "icon": "📖",
       "color": "#8B5CF6",
@@ -601,7 +601,7 @@
     {
       "id": "badge-041",
       "key": "test_750",
-      "name": "Test Efsanesi",
+      "name": "Test İmparatoru",
       "description": "750 test tamamlayın",
       "icon": "📗",
       "color": "#F59E0B",
@@ -616,7 +616,7 @@
     {
       "id": "badge-042",
       "key": "test_1000",
-      "name": "Test Efsanesi",
+      "name": "Test Sultanı",
       "description": "1000 test tamamlayın",
       "icon": "📘",
       "color": "#F59E0B",
@@ -631,7 +631,7 @@
     {
       "id": "badge-043",
       "key": "score_85",
-      "name": "Harika",
+      "name": "Başarı Uzmanı",
       "description": "Bir testte en az 85 puan alın",
       "icon": "⭐",
       "color": "#6366F1",
@@ -646,7 +646,7 @@
     {
       "id": "badge-044",
       "key": "score_95",
-      "name": "Neredeyse Mükemmel",
+      "name": "Kusursuzluk Avcısı",
       "description": "Bir testte en az 95 puan alın",
       "icon": "🌟",
       "color": "#8B5CF6",
@@ -661,7 +661,7 @@
     {
       "id": "badge-045",
       "key": "avg_score_75",
-      "name": "İyi Ortalama",
+      "name": "Ortalama İstikrar Ustası",
       "description": "Ortalama skorunuz 75'in üzerinde olsun",
       "icon": "📊",
       "color": "#6366F1",
@@ -676,7 +676,7 @@
     {
       "id": "badge-046",
       "key": "avg_score_85",
-      "name": "Çok İyi Ortalama",
+      "name": "Ortalama Mükemmellik Efendisi",
       "description": "Ortalama skorunuz 85'in üzerinde olsun",
       "icon": "📈",
       "color": "#8B5CF6",
@@ -691,7 +691,7 @@
     {
       "id": "badge-047",
       "key": "avg_score_95",
-      "name": "Mükemmel Ortalama",
+      "name": "Kusursuzluk Sultanı",
       "description": "Ortalama skorunuz 95'in üzerinde olsun",
       "icon": "🎓",
       "color": "#F59E0B",
@@ -706,7 +706,7 @@
     {
       "id": "badge-048",
       "key": "streak_5",
-      "name": "Beş Günlük",
+      "name": "Disiplin Çırağı",
       "description": "5 gün üst üste aktif olun",
       "icon": "🔥",
       "color": "#3B82F6",
@@ -721,7 +721,7 @@
     {
       "id": "badge-049",
       "key": "streak_10",
-      "name": "On Günlük",
+      "name": "Kararlılık Avcısı",
       "description": "10 gün üst üste aktif olun",
       "icon": "🔥",
       "color": "#6366F1",
@@ -736,7 +736,7 @@
     {
       "id": "badge-050",
       "key": "streak_21",
-      "name": "Üç Haftalık",
+      "name": "İstikrar Uzmanı",
       "description": "21 gün üst üste aktif olun",
       "icon": "🔥",
       "color": "#6366F1",
@@ -751,7 +751,7 @@
     {
       "id": "badge-051",
       "key": "streak_45",
-      "name": "Bir Buçuk Aylık",
+      "name": "Disiplin Fatihi",
       "description": "45 gün üst üste aktif olun",
       "icon": "🔥",
       "color": "#8B5CF6",
@@ -766,7 +766,7 @@
     {
       "id": "badge-052",
       "key": "streak_90",
-      "name": "Üç Aylık",
+      "name": "Süreklilik Şampiyonu",
       "description": "90 gün üst üste aktif olun",
       "icon": "🔥",
       "color": "#8B5CF6",
@@ -781,7 +781,7 @@
     {
       "id": "badge-053",
       "key": "streak_180",
-      "name": "Altı Aylık",
+      "name": "İstikrar İmparatoru",
       "description": "180 gün üst üste aktif olun",
       "icon": "🔥",
       "color": "#F59E0B",
@@ -796,7 +796,7 @@
     {
       "id": "badge-054",
       "key": "streak_200",
-      "name": "İki Yüz Günlük",
+      "name": "Kararlılık Kralı",
       "description": "200 gün üst üste aktif olun",
       "icon": "🔥",
       "color": "#F59E0B",
@@ -811,7 +811,7 @@
     {
       "id": "badge-055",
       "key": "longest_streak_7",
-      "name": "En Uzun: 7",
+      "name": "İlk Rekor",
       "description": "En uzun streak'iniz 7 gün olsun",
       "icon": "📅",
       "color": "#3B82F6",
@@ -826,7 +826,7 @@
     {
       "id": "badge-056",
       "key": "longest_streak_14",
-      "name": "En Uzun: 14",
+      "name": "İki Haftalık Rekor Kaşifi",
       "description": "En uzun streak'iniz 14 gün olsun",
       "icon": "📅",
       "color": "#6366F1",
@@ -841,7 +841,7 @@
     {
       "id": "badge-057",
       "key": "longest_streak_60",
-      "name": "En Uzun: 60",
+      "name": "İki Aylık Rekor Ustası",
       "description": "En uzun streak'iniz 60 gün olsun",
       "icon": "📅",
       "color": "#8B5CF6",
@@ -856,7 +856,7 @@
     {
       "id": "badge-058",
       "key": "longest_streak_180",
-      "name": "En Uzun: 180",
+      "name": "Altı Aylık Rekor İmparatoru",
       "description": "En uzun streak'iniz 180 gün olsun",
       "icon": "📅",
       "color": "#F59E0B",
@@ -871,7 +871,7 @@
     {
       "id": "badge-059",
       "key": "longest_streak_365",
-      "name": "En Uzun: 365",
+      "name": "Yıllık Rekor Sultanı",
       "description": "En uzun streak'iniz 365 gün olsun",
       "icon": "📅",
       "color": "#F59E0B",
@@ -886,7 +886,7 @@
     {
       "id": "badge-060",
       "key": "topic_complete_2",
-      "name": "İkili Konu Ustası",
+      "name": "Bilgi Ustası",
       "description": "2 farklı konudaki tüm testleri tam puanla tamamlayın",
       "icon": "🎯",
       "color": "#6366F1",
@@ -901,7 +901,7 @@
     {
       "id": "badge-061",
       "key": "topic_complete_3",
-      "name": "Üçlü Konu Ustası",
+      "name": "Uzmanlık Çırağı",
       "description": "3 farklı konudaki tüm testleri tam puanla tamamlayın",
       "icon": "🎯",
       "color": "#8B5CF6",
@@ -916,7 +916,7 @@
     {
       "id": "badge-062",
       "key": "topic_complete_7",
-      "name": "Yedili Konu Ustası",
+      "name": "Bilgi Efendisi",
       "description": "7 farklı konudaki tüm testleri tam puanla tamamlayın",
       "icon": "🎯",
       "color": "#8B5CF6",
@@ -931,7 +931,7 @@
     {
       "id": "badge-063",
       "key": "topic_complete_15",
-      "name": "On Beşli Konu Ustası",
+      "name": "Uzmanlık İmparatoru",
       "description": "15 farklı konudaki tüm testleri tam puanla tamamlayın",
       "icon": "🎯",
       "color": "#F59E0B",
@@ -946,7 +946,7 @@
     {
       "id": "badge-064",
       "key": "topic_complete_20",
-      "name": "Yirmili Konu Ustası",
+      "name": "Bilgi Sultanı",
       "description": "20 farklı konudaki tüm testleri tam puanla tamamlayın",
       "icon": "🎯",
       "color": "#F59E0B",
@@ -961,7 +961,7 @@
     {
       "id": "badge-065",
       "key": "fast_completion_10min",
-      "name": "Hızlı",
+      "name": "Hızlı Çırak",
       "description": "Bir testi 10 dakikadan kısa sürede tamamlayın",
       "icon": "⚡",
       "color": "#3B82F6",
@@ -976,7 +976,7 @@
     {
       "id": "badge-066",
       "key": "fast_completion_2min",
-      "name": "Süper Hızlı",
+      "name": "Hız Kralı",
       "description": "Bir testi 2 dakikadan kısa sürede tamamlayın",
       "icon": "⚡",
       "color": "#F59E0B",
@@ -991,7 +991,7 @@
     {
       "id": "badge-067",
       "key": "perfect_3",
-      "name": "3 Mükemmel",
+      "name": "Mükemmellik Kaşifi",
       "description": "3 testte tam puan alın",
       "icon": "💯",
       "color": "#6366F1",
@@ -1006,7 +1006,7 @@
     {
       "id": "badge-068",
       "key": "perfect_50",
-      "name": "50 Mükemmel",
+      "name": "Kusursuzluk İmparatoru",
       "description": "50 testte tam puan alın",
       "icon": "💯",
       "color": "#F59E0B",
@@ -1021,7 +1021,7 @@
     {
       "id": "badge-069",
       "key": "perfect_100",
-      "name": "100 Mükemmel",
+      "name": "Mükemmellik Sultanı",
       "description": "100 testte tam puan alın",
       "icon": "💯",
       "color": "#F59E0B",
@@ -1036,7 +1036,7 @@
     {
       "id": "badge-070",
       "key": "daily_active_14",
-      "name": "İki Haftalık Aktif",
+      "name": "İki Haftalık Aktiflik Kaşifi",
       "description": "14 gün boyunca aktif olun",
       "icon": "📆",
       "color": "#3B82F6",
@@ -1051,7 +1051,7 @@
     {
       "id": "badge-071",
       "key": "daily_active_60",
-      "name": "Altmış Günlük Aktif",
+      "name": "Aktiflik Efendisi",
       "description": "60 gün boyunca aktif olun",
       "icon": "📆",
       "color": "#6366F1",
@@ -1066,7 +1066,7 @@
     {
       "id": "badge-072",
       "key": "daily_active_180",
-      "name": "Altı Aylık Aktif",
+      "name": "Süreklilik İmparatoru",
       "description": "180 gün boyunca aktif olun",
       "icon": "📆",
       "color": "#8B5CF6",
@@ -1081,7 +1081,7 @@
     {
       "id": "badge-073",
       "key": "daily_active_500",
-      "name": "Beş Yüz Günlük Aktif",
+      "name": "Adanmışlık Efsanesi",
       "description": "500 gün boyunca aktif olun",
       "icon": "📆",
       "color": "#F59E0B",
@@ -1096,7 +1096,7 @@
     {
       "id": "badge-074",
       "key": "daily_active_730",
-      "name": "İki Yıllık Aktif",
+      "name": "İki Yıllık Bağlılık Sultanı",
       "description": "730 gün boyunca aktif olun",
       "icon": "📆",
       "color": "#F59E0B",
@@ -1111,7 +1111,7 @@
     {
       "id": "badge-075",
       "key": "test_150",
-      "name": "Test Sever",
+      "name": "Test Tutkunu",
       "description": "150 test tamamlayın",
       "icon": "📝",
       "color": "#8B5CF6",
@@ -1126,7 +1126,7 @@
     {
       "id": "badge-076",
       "key": "test_300",
-      "name": "Test Uzmanı",
+      "name": "Test Master'ı",
       "description": "300 test tamamlayın",
       "icon": "📚",
       "color": "#8B5CF6",
@@ -1141,7 +1141,7 @@
     {
       "id": "badge-077",
       "key": "test_400",
-      "name": "Test Fanatiği",
+      "name": "Test Efendisi",
       "description": "400 test tamamlayın",
       "icon": "📖",
       "color": "#F59E0B",
@@ -1156,7 +1156,7 @@
     {
       "id": "badge-078",
       "key": "test_600",
-      "name": "Test Efsanesi",
+      "name": "Test Kahramanı",
       "description": "600 test tamamlayın",
       "icon": "📗",
       "color": "#F59E0B",
@@ -1171,7 +1171,7 @@
     {
       "id": "badge-079",
       "key": "test_1500",
-      "name": "Test Efsanesi",
+      "name": "Test Mitik Kahramanı",
       "description": "1500 test tamamlayın",
       "icon": "📘",
       "color": "#F59E0B",
@@ -1186,7 +1186,7 @@
     {
       "id": "badge-080",
       "key": "score_65",
-      "name": "Geçer",
+      "name": "İlk Başarı",
       "description": "Bir testte en az 65 puan alın",
       "icon": "✅",
       "color": "#3B82F6",
@@ -1201,7 +1201,7 @@
     {
       "id": "badge-081",
       "key": "score_75",
-      "name": "İyi",
+      "name": "Başarı Şampiyonu",
       "description": "Bir testte en az 75 puan alın",
       "icon": "👍",
       "color": "#3B82F6",
@@ -1216,7 +1216,7 @@
     {
       "id": "badge-082",
       "key": "score_88",
-      "name": "Çok İyi",
+      "name": "Başarı Mükemmellik Kaşifi",
       "description": "Bir testte en az 88 puan alın",
       "icon": "⭐",
       "color": "#6366F1",
@@ -1231,7 +1231,7 @@
     {
       "id": "badge-083",
       "key": "score_92",
-      "name": "Harika",
+      "name": "Mükemmellik Ustası",
       "description": "Bir testte en az 92 puan alın",
       "icon": "🌟",
       "color": "#6366F1",
@@ -1246,7 +1246,7 @@
     {
       "id": "badge-084",
       "key": "avg_score_65",
-      "name": "Tutarlı",
+      "name": "Tutarlı Çırak",
       "description": "Ortalama skorunuz 65'in üzerinde olsun",
       "icon": "📊",
       "color": "#3B82F6",
@@ -1261,7 +1261,7 @@
     {
       "id": "badge-085",
       "key": "avg_score_88",
-      "name": "Çok İyi Ortalama",
+      "name": "Kusursuzluk Ustası",
       "description": "Ortalama skorunuz 88'in üzerinde olsun",
       "icon": "📈",
       "color": "#8B5CF6",
@@ -1276,7 +1276,7 @@
     {
       "id": "badge-086",
       "key": "streak_15",
-      "name": "On Beş Günlük",
+      "name": "Disiplin Master'ı",
       "description": "15 gün üst üste aktif olun",
       "icon": "🔥",
       "color": "#6366F1",
@@ -1291,7 +1291,7 @@
     {
       "id": "badge-087",
       "key": "streak_50",
-      "name": "Elli Günlük",
+      "name": "Süreklilik Ustası",
       "description": "50 gün üst üste aktif olun",
       "icon": "🔥",
       "color": "#8B5CF6",
@@ -1306,7 +1306,7 @@
     {
       "id": "badge-088",
       "key": "streak_120",
-      "name": "Yüz Yirmi Günlük",
+      "name": "Disiplin Efendisi",
       "description": "120 gün üst üste aktif olun",
       "icon": "🔥",
       "color": "#8B5CF6",
@@ -1321,7 +1321,7 @@
     {
       "id": "badge-089",
       "key": "streak_250",
-      "name": "İki Yüz Elli Günlük",
+      "name": "Disiplin Efsanesi",
       "description": "250 gün üst üste aktif olun",
       "icon": "🔥",
       "color": "#F59E0B",
@@ -1336,7 +1336,7 @@
     {
       "id": "badge-090",
       "key": "longest_streak_21",
-      "name": "En Uzun: 21",
+      "name": "Üç Haftalık Rekor Master'ı",
       "description": "En uzun streak'iniz 21 gün olsun",
       "icon": "📅",
       "color": "#6366F1",
@@ -1351,7 +1351,7 @@
     {
       "id": "badge-091",
       "key": "longest_streak_90",
-      "name": "En Uzun: 90",
+      "name": "Üç Aylık Rekor Kralı",
       "description": "En uzun streak'iniz 90 gün olsun",
       "icon": "📅",
       "color": "#8B5CF6",
@@ -1366,7 +1366,7 @@
     {
       "id": "badge-092",
       "key": "topic_complete_4",
-      "name": "Dörtlü Konu Ustası",
+      "name": "Bilgi Şampiyonu",
       "description": "4 farklı konudaki tüm testleri tam puanla tamamlayın",
       "icon": "🎯",
       "color": "#8B5CF6",
@@ -1381,7 +1381,7 @@
     {
       "id": "badge-093",
       "key": "topic_complete_12",
-      "name": "On İkili Konu Ustası",
+      "name": "Uzmanlık Efendisi",
       "description": "12 farklı konudaki tüm testleri tam puanla tamamlayın",
       "icon": "🎯",
       "color": "#F59E0B",
@@ -1391,6 +1391,805 @@
       "criteria": {
         "type": "topic_complete",
         "value": 12
+      }
+    },
+    {
+      "id": "badge-094",
+      "key": "post_1",
+      "name": "İlk Paylaşım",
+      "description": "1 gönderi paylaşın",
+      "icon": "📝",
+      "color": "#3B82F6",
+      "category": "social_interaction",
+      "rarity": "common",
+      "tier": "bronze",
+      "points": 10,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "post",
+        "count": 1
+      }
+    },
+    {
+      "id": "badge-095",
+      "key": "post_5",
+      "name": "Paylaşım Çırağı",
+      "description": "5 gönderi paylaşın",
+      "icon": "📝",
+      "color": "#3B82F6",
+      "category": "social_interaction",
+      "rarity": "common",
+      "tier": "bronze",
+      "points": 15,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "post",
+        "count": 5
+      }
+    },
+    {
+      "id": "badge-096",
+      "key": "post_10",
+      "name": "Paylaşım Kaşifi",
+      "description": "10 gönderi paylaşın",
+      "icon": "📝",
+      "color": "#6366F1",
+      "category": "social_interaction",
+      "rarity": "common",
+      "tier": "silver",
+      "points": 25,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "post",
+        "count": 10
+      }
+    },
+    {
+      "id": "badge-097",
+      "key": "post_25",
+      "name": "Paylaşım Ustası",
+      "description": "25 gönderi paylaşın",
+      "icon": "📝",
+      "color": "#6366F1",
+      "category": "social_interaction",
+      "rarity": "rare",
+      "tier": "silver",
+      "points": 40,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "post",
+        "count": 25
+      }
+    },
+    {
+      "id": "badge-098",
+      "key": "post_50",
+      "name": "Paylaşım Uzmanı",
+      "description": "50 gönderi paylaşın",
+      "icon": "📝",
+      "color": "#8B5CF6",
+      "category": "social_interaction",
+      "rarity": "rare",
+      "tier": "gold",
+      "points": 60,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "post",
+        "count": 50
+      }
+    },
+    {
+      "id": "badge-099",
+      "key": "post_100",
+      "name": "Paylaşım Şampiyonu",
+      "description": "100 gönderi paylaşın",
+      "icon": "📝",
+      "color": "#8B5CF6",
+      "category": "social_interaction",
+      "rarity": "epic",
+      "tier": "gold",
+      "points": 100,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "post",
+        "count": 100
+      }
+    },
+    {
+      "id": "badge-100",
+      "key": "post_250",
+      "name": "Paylaşım Kralı",
+      "description": "250 gönderi paylaşın",
+      "icon": "📝",
+      "color": "#F59E0B",
+      "category": "social_interaction",
+      "rarity": "epic",
+      "tier": "platinum",
+      "points": 200,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "post",
+        "count": 250
+      }
+    },
+    {
+      "id": "badge-101",
+      "key": "post_500",
+      "name": "Paylaşım Efsanesi",
+      "description": "500 gönderi paylaşın",
+      "icon": "📝",
+      "color": "#F59E0B",
+      "category": "social_interaction",
+      "rarity": "legendary",
+      "tier": "platinum",
+      "points": 500,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "post",
+        "count": 500
+      }
+    },
+    {
+      "id": "badge-102",
+      "key": "like_1",
+      "name": "İlk Beğeni",
+      "description": "1 gönderiyi beğenin",
+      "icon": "❤️",
+      "color": "#3B82F6",
+      "category": "social_interaction",
+      "rarity": "common",
+      "tier": "bronze",
+      "points": 5,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "beğeni",
+        "count": 1
+      }
+    },
+    {
+      "id": "badge-103",
+      "key": "like_5",
+      "name": "Beğeni Çırağı",
+      "description": "5 gönderiyi beğenin",
+      "icon": "❤️",
+      "color": "#3B82F6",
+      "category": "social_interaction",
+      "rarity": "common",
+      "tier": "bronze",
+      "points": 10,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "beğeni",
+        "count": 5
+      }
+    },
+    {
+      "id": "badge-104",
+      "key": "like_10",
+      "name": "Beğeni Kaşifi",
+      "description": "10 gönderiyi beğenin",
+      "icon": "❤️",
+      "color": "#6366F1",
+      "category": "social_interaction",
+      "rarity": "common",
+      "tier": "silver",
+      "points": 20,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "beğeni",
+        "count": 10
+      }
+    },
+    {
+      "id": "badge-105",
+      "key": "like_25",
+      "name": "Beğeni Ustası",
+      "description": "25 gönderiyi beğenin",
+      "icon": "❤️",
+      "color": "#6366F1",
+      "category": "social_interaction",
+      "rarity": "rare",
+      "tier": "silver",
+      "points": 35,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "beğeni",
+        "count": 25
+      }
+    },
+    {
+      "id": "badge-106",
+      "key": "like_50",
+      "name": "Beğeni Uzmanı",
+      "description": "50 gönderiyi beğenin",
+      "icon": "❤️",
+      "color": "#8B5CF6",
+      "category": "social_interaction",
+      "rarity": "rare",
+      "tier": "gold",
+      "points": 50,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "beğeni",
+        "count": 50
+      }
+    },
+    {
+      "id": "badge-107",
+      "key": "like_100",
+      "name": "Beğeni Şampiyonu",
+      "description": "100 gönderiyi beğenin",
+      "icon": "❤️",
+      "color": "#8B5CF6",
+      "category": "social_interaction",
+      "rarity": "epic",
+      "tier": "gold",
+      "points": 75,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "beğeni",
+        "count": 100
+      }
+    },
+    {
+      "id": "badge-108",
+      "key": "like_250",
+      "name": "Beğeni Kralı",
+      "description": "250 gönderiyi beğenin",
+      "icon": "❤️",
+      "color": "#F59E0B",
+      "category": "social_interaction",
+      "rarity": "epic",
+      "tier": "platinum",
+      "points": 150,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "beğeni",
+        "count": 250
+      }
+    },
+    {
+      "id": "badge-109",
+      "key": "like_500",
+      "name": "Beğeni Efsanesi",
+      "description": "500 gönderiyi beğenin",
+      "icon": "❤️",
+      "color": "#F59E0B",
+      "category": "social_interaction",
+      "rarity": "legendary",
+      "tier": "platinum",
+      "points": 300,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "beğeni",
+        "count": 500
+      }
+    },
+    {
+      "id": "badge-110",
+      "key": "comment_1",
+      "name": "İlk Yorum",
+      "description": "1 yorum yapın",
+      "icon": "💬",
+      "color": "#3B82F6",
+      "category": "social_interaction",
+      "rarity": "common",
+      "tier": "bronze",
+      "points": 10,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "yorum",
+        "count": 1
+      }
+    },
+    {
+      "id": "badge-111",
+      "key": "comment_5",
+      "name": "Yorum Çırağı",
+      "description": "5 yorum yapın",
+      "icon": "💬",
+      "color": "#3B82F6",
+      "category": "social_interaction",
+      "rarity": "common",
+      "tier": "bronze",
+      "points": 15,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "yorum",
+        "count": 5
+      }
+    },
+    {
+      "id": "badge-112",
+      "key": "comment_10",
+      "name": "Yorum Kaşifi",
+      "description": "10 yorum yapın",
+      "icon": "💬",
+      "color": "#6366F1",
+      "category": "social_interaction",
+      "rarity": "common",
+      "tier": "silver",
+      "points": 25,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "yorum",
+        "count": 10
+      }
+    },
+    {
+      "id": "badge-113",
+      "key": "comment_25",
+      "name": "Yorum Ustası",
+      "description": "25 yorum yapın",
+      "icon": "💬",
+      "color": "#6366F1",
+      "category": "social_interaction",
+      "rarity": "rare",
+      "tier": "silver",
+      "points": 40,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "yorum",
+        "count": 25
+      }
+    },
+    {
+      "id": "badge-114",
+      "key": "comment_50",
+      "name": "Yorum Uzmanı",
+      "description": "50 yorum yapın",
+      "icon": "💬",
+      "color": "#8B5CF6",
+      "category": "social_interaction",
+      "rarity": "rare",
+      "tier": "gold",
+      "points": 60,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "yorum",
+        "count": 50
+      }
+    },
+    {
+      "id": "badge-115",
+      "key": "comment_100",
+      "name": "Yorum Şampiyonu",
+      "description": "100 yorum yapın",
+      "icon": "💬",
+      "color": "#8B5CF6",
+      "category": "social_interaction",
+      "rarity": "epic",
+      "tier": "gold",
+      "points": 100,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "yorum",
+        "count": 100
+      }
+    },
+    {
+      "id": "badge-116",
+      "key": "comment_250",
+      "name": "Yorum Kralı",
+      "description": "250 yorum yapın",
+      "icon": "💬",
+      "color": "#F59E0B",
+      "category": "social_interaction",
+      "rarity": "epic",
+      "tier": "platinum",
+      "points": 200,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "yorum",
+        "count": 250
+      }
+    },
+    {
+      "id": "badge-117",
+      "key": "comment_500",
+      "name": "Yorum Efsanesi",
+      "description": "500 yorum yapın",
+      "icon": "💬",
+      "color": "#F59E0B",
+      "category": "social_interaction",
+      "rarity": "legendary",
+      "tier": "platinum",
+      "points": 500,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "yorum",
+        "count": 500
+      }
+    },
+    {
+      "id": "badge-118",
+      "key": "story_1",
+      "name": "İlk Story",
+      "description": "1 story paylaşın",
+      "icon": "📸",
+      "color": "#3B82F6",
+      "category": "social_interaction",
+      "rarity": "common",
+      "tier": "bronze",
+      "points": 10,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "story",
+        "count": 1
+      }
+    },
+    {
+      "id": "badge-119",
+      "key": "story_5",
+      "name": "Story Çırağı",
+      "description": "5 story paylaşın",
+      "icon": "📸",
+      "color": "#3B82F6",
+      "category": "social_interaction",
+      "rarity": "common",
+      "tier": "bronze",
+      "points": 15,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "story",
+        "count": 5
+      }
+    },
+    {
+      "id": "badge-120",
+      "key": "story_10",
+      "name": "Story Kaşifi",
+      "description": "10 story paylaşın",
+      "icon": "📸",
+      "color": "#6366F1",
+      "category": "social_interaction",
+      "rarity": "common",
+      "tier": "silver",
+      "points": 25,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "story",
+        "count": 10
+      }
+    },
+    {
+      "id": "badge-121",
+      "key": "story_25",
+      "name": "Story Ustası",
+      "description": "25 story paylaşın",
+      "icon": "📸",
+      "color": "#6366F1",
+      "category": "social_interaction",
+      "rarity": "rare",
+      "tier": "silver",
+      "points": 40,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "story",
+        "count": 25
+      }
+    },
+    {
+      "id": "badge-122",
+      "key": "story_50",
+      "name": "Story Uzmanı",
+      "description": "50 story paylaşın",
+      "icon": "📸",
+      "color": "#8B5CF6",
+      "category": "social_interaction",
+      "rarity": "rare",
+      "tier": "gold",
+      "points": 60,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "story",
+        "count": 50
+      }
+    },
+    {
+      "id": "badge-123",
+      "key": "story_100",
+      "name": "Story Şampiyonu",
+      "description": "100 story paylaşın",
+      "icon": "📸",
+      "color": "#8B5CF6",
+      "category": "social_interaction",
+      "rarity": "epic",
+      "tier": "gold",
+      "points": 100,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "story",
+        "count": 100
+      }
+    },
+    {
+      "id": "badge-124",
+      "key": "friend_1",
+      "name": "İlk Arkadaş",
+      "description": "1 arkadaş edinin",
+      "icon": "👥",
+      "color": "#3B82F6",
+      "category": "social_interaction",
+      "rarity": "common",
+      "tier": "bronze",
+      "points": 10,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "arkadaş",
+        "count": 1
+      }
+    },
+    {
+      "id": "badge-125",
+      "key": "friend_5",
+      "name": "Arkadaş Çırağı",
+      "description": "5 arkadaş edinin",
+      "icon": "👥",
+      "color": "#3B82F6",
+      "category": "social_interaction",
+      "rarity": "common",
+      "tier": "bronze",
+      "points": 15,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "arkadaş",
+        "count": 5
+      }
+    },
+    {
+      "id": "badge-126",
+      "key": "friend_10",
+      "name": "Arkadaş Kaşifi",
+      "description": "10 arkadaş edinin",
+      "icon": "👥",
+      "color": "#6366F1",
+      "category": "social_interaction",
+      "rarity": "common",
+      "tier": "silver",
+      "points": 25,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "arkadaş",
+        "count": 10
+      }
+    },
+    {
+      "id": "badge-127",
+      "key": "friend_25",
+      "name": "Arkadaş Ustası",
+      "description": "25 arkadaş edinin",
+      "icon": "👥",
+      "color": "#6366F1",
+      "category": "social_interaction",
+      "rarity": "rare",
+      "tier": "silver",
+      "points": 40,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "arkadaş",
+        "count": 25
+      }
+    },
+    {
+      "id": "badge-128",
+      "key": "friend_50",
+      "name": "Arkadaş Uzmanı",
+      "description": "50 arkadaş edinin",
+      "icon": "👥",
+      "color": "#8B5CF6",
+      "category": "social_interaction",
+      "rarity": "rare",
+      "tier": "gold",
+      "points": 60,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "arkadaş",
+        "count": 50
+      }
+    },
+    {
+      "id": "badge-129",
+      "key": "friend_100",
+      "name": "Arkadaş Şampiyonu",
+      "description": "100 arkadaş edinin",
+      "icon": "👥",
+      "color": "#8B5CF6",
+      "category": "social_interaction",
+      "rarity": "epic",
+      "tier": "gold",
+      "points": 100,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "arkadaş",
+        "count": 100
+      }
+    },
+    {
+      "id": "badge-130",
+      "key": "friend_250",
+      "name": "Arkadaş Kralı",
+      "description": "250 arkadaş edinin",
+      "icon": "👥",
+      "color": "#F59E0B",
+      "category": "social_interaction",
+      "rarity": "epic",
+      "tier": "platinum",
+      "points": 200,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "arkadaş",
+        "count": 250
+      }
+    },
+    {
+      "id": "badge-131",
+      "key": "friend_500",
+      "name": "Arkadaş Efsanesi",
+      "description": "500 arkadaş edinin",
+      "icon": "👥",
+      "color": "#F59E0B",
+      "category": "social_interaction",
+      "rarity": "legendary",
+      "tier": "platinum",
+      "points": 500,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "arkadaş",
+        "count": 500
+      }
+    },
+    {
+      "id": "badge-132",
+      "key": "interaction_10",
+      "name": "Sosyal Başlangıç",
+      "description": "10 toplam etkileşim yapın",
+      "icon": "🌟",
+      "color": "#3B82F6",
+      "category": "social_interaction",
+      "rarity": "common",
+      "tier": "bronze",
+      "points": 15,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "etkileşim",
+        "count": 10
+      }
+    },
+    {
+      "id": "badge-133",
+      "key": "interaction_25",
+      "name": "Sosyal Kaşif",
+      "description": "25 toplam etkileşim yapın",
+      "icon": "🌟",
+      "color": "#6366F1",
+      "category": "social_interaction",
+      "rarity": "common",
+      "tier": "silver",
+      "points": 30,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "etkileşim",
+        "count": 25
+      }
+    },
+    {
+      "id": "badge-134",
+      "key": "interaction_50",
+      "name": "Sosyal Usta",
+      "description": "50 toplam etkileşim yapın",
+      "icon": "🌟",
+      "color": "#6366F1",
+      "category": "social_interaction",
+      "rarity": "rare",
+      "tier": "silver",
+      "points": 50,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "etkileşim",
+        "count": 50
+      }
+    },
+    {
+      "id": "badge-135",
+      "key": "interaction_100",
+      "name": "Sosyal Uzman",
+      "description": "100 toplam etkileşim yapın",
+      "icon": "🌟",
+      "color": "#8B5CF6",
+      "category": "social_interaction",
+      "rarity": "rare",
+      "tier": "gold",
+      "points": 75,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "etkileşim",
+        "count": 100
+      }
+    },
+    {
+      "id": "badge-136",
+      "key": "interaction_250",
+      "name": "Sosyal Şampiyon",
+      "description": "250 toplam etkileşim yapın",
+      "icon": "🌟",
+      "color": "#8B5CF6",
+      "category": "social_interaction",
+      "rarity": "epic",
+      "tier": "gold",
+      "points": 125,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "etkileşim",
+        "count": 250
+      }
+    },
+    {
+      "id": "badge-137",
+      "key": "interaction_500",
+      "name": "Sosyal Kral",
+      "description": "500 toplam etkileşim yapın",
+      "icon": "🌟",
+      "color": "#F59E0B",
+      "category": "social_interaction",
+      "rarity": "epic",
+      "tier": "platinum",
+      "points": 250,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "etkileşim",
+        "count": 500
+      }
+    },
+    {
+      "id": "badge-138",
+      "key": "interaction_1000",
+      "name": "Sosyal Efsane",
+      "description": "1000 toplam etkileşim yapın",
+      "icon": "🌟",
+      "color": "#F59E0B",
+      "category": "social_interaction",
+      "rarity": "legendary",
+      "tier": "platinum",
+      "points": 500,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "etkileşim",
+        "count": 1000
+      }
+    },
+    {
+      "id": "badge-139",
+      "key": "interaction_2500",
+      "name": "Sosyal İmparator",
+      "description": "2500 toplam etkileşim yapın",
+      "icon": "🌟",
+      "color": "#F59E0B",
+      "category": "social_interaction",
+      "rarity": "legendary",
+      "tier": "platinum",
+      "points": 1000,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "etkileşim",
+        "count": 2500
+      }
+    },
+    {
+      "id": "badge-140",
+      "key": "interaction_5000",
+      "name": "Sosyal Sultan",
+      "description": "5000 toplam etkileşim yapın",
+      "icon": "🌟",
+      "color": "#F59E0B",
+      "category": "social_interaction",
+      "rarity": "legendary",
+      "tier": "platinum",
+      "points": 2000,
+      "criteria": {
+        "type": "social_interaction",
+        "interaction_type": "etkileşim",
+        "count": 5000
       }
     }
   ]

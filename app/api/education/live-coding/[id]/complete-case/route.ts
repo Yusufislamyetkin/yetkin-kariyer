@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
+import { checkBadgesForActivity } from "@/app/api/badges/check/badge-service";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -85,6 +86,16 @@ export async function POST(
         },
       });
 
+      // Check for badges (daily activities, streak, etc.)
+      try {
+        await checkBadgesForActivity({
+          userId,
+          activityType: "canlı kod",
+        });
+      } catch (e) {
+        console.warn("Badge check failed:", e);
+      }
+
       return NextResponse.json({
         success: true,
         attempt: existingAttempt,
@@ -110,6 +121,16 @@ export async function POST(
         completedAt: completedAtDate,
       },
     });
+
+    // Check for badges (daily activities, streak, etc.)
+    try {
+      await checkBadgesForActivity({
+        userId,
+        activityType: "canlı kod",
+      });
+    } catch (e) {
+      console.warn("Badge check failed:", e);
+    }
 
     return NextResponse.json({
       success: true,

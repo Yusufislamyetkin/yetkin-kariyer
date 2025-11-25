@@ -4,6 +4,7 @@ import { auth } from "@/lib/auth";
 import { recordEvent } from "@/lib/services/gamification/antiAbuse";
 import { applyRules } from "@/lib/services/gamification/rules";
 import { ensureAIEnabled, isAIEnabled } from "@/lib/ai/client";
+import { checkBadgesForActivity } from "@/app/api/badges/check/badge-service";
 
 export async function GET(
   request: Request,
@@ -254,6 +255,16 @@ JSON formatında yanıt ver:
       await applyRules({ userId, type: "bug_fix_completed", payload: { sourceEventId: event.id } });
     } catch (e) {
       console.warn("Gamification bug_fix_completed failed:", e);
+    }
+
+    // Check for badges (daily activities, streak, etc.)
+    try {
+      await checkBadgesForActivity({
+        userId,
+        activityType: "bugfix",
+      });
+    } catch (e) {
+      console.warn("Badge check failed:", e);
     }
 
     return NextResponse.json({

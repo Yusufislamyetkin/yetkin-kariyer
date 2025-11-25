@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
 import { broadcastSocialNotification } from "@/lib/realtime/signalr-triggers";
+import { checkSocialInteractionBadges } from "@/app/api/badges/check/badge-service";
 
 export async function POST(
   request: Request,
@@ -60,6 +61,11 @@ export async function POST(
           postId,
           userId,
         },
+      });
+
+      // Sosyal etkileşim rozetlerini kontrol et (async, hata olsa bile devam et)
+      checkSocialInteractionBadges({ userId }).catch((error) => {
+        console.error("Error checking social interaction badges:", error);
       });
 
       // Send notification to post owner if not the same user

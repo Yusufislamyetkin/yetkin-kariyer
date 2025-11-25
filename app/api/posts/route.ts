@@ -4,6 +4,7 @@ import { auth } from "@/lib/auth";
 import { z } from "zod";
 import { sanitizePlainText } from "@/lib/security/sanitize";
 import { checkRateLimit, rateLimitKey, Limits, isDuplicateWithin } from "@/lib/security/rateLimit";
+import { checkSocialInteractionBadges } from "@/app/api/badges/check/badge-service";
 
 const createPostSchema = z.object({
   content: z.string().max(2200).trim().transform((val) => val === "" ? null : val).nullable().optional(),
@@ -428,6 +429,11 @@ export async function POST(request: Request) {
           },
         },
       },
+    });
+
+    // Sosyal etkileşim rozetlerini kontrol et (async, hata olsa bile devam et)
+    checkSocialInteractionBadges({ userId }).catch((error) => {
+      console.error("Error checking social interaction badges:", error);
     });
 
     return NextResponse.json({
