@@ -30,6 +30,77 @@ export default function RozetlerPage() {
   const [totalBadgesCount, setTotalBadgesCount] = useState(93);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
+  const categories = useMemo(
+    () => [
+      {
+        id: "daily_activities",
+        name: "Günlük Aktiviteler",
+        icon: "📅",
+        description: "Günlük test, kurs, canlı kod ve bugfix aktiviteleriniz için rozetler",
+        gradient: "from-blue-500 to-cyan-500",
+        badgeCategories: ["test_count", "topic"],
+      },
+      {
+        id: "total_achievements",
+        name: "Toplam Başarılar",
+        icon: "🏆",
+        description: "Toplam başarılarınız için rozetler",
+        gradient: "from-purple-500 to-pink-500",
+        badgeCategories: ["score"],
+      },
+      {
+        id: "social_interaction",
+        name: "Sosyal Etkileşim",
+        icon: "💬",
+        description: "Sosyal aktiviteleriniz için rozetler",
+        gradient: "from-green-500 to-emerald-500",
+        badgeCategories: [],
+      },
+      {
+        id: "consistency",
+        name: "Süreklilik ve Disiplin",
+        icon: "🔥",
+        description: "Süreklilik ve disiplin rozetleri",
+        gradient: "from-orange-500 to-red-500",
+        badgeCategories: ["streak"],
+      },
+      {
+        id: "special",
+        name: "Özel Başarılar",
+        icon: "⭐",
+        description: "Özel başarılarınız için rozetler",
+        gradient: "from-yellow-500 to-amber-500",
+        badgeCategories: ["special"],
+      },
+    ],
+    []
+  );
+
+  const categoryStats = useMemo(() => {
+    return categories.map((cat) => {
+      const categoryBadges = allBadges.filter((badge) =>
+        cat.badgeCategories.includes(badge.category)
+      );
+      const earnedInCategory = categoryBadges.filter((badge) =>
+        earnedBadgeIds.has(badge.id)
+      ).length;
+      return {
+        ...cat,
+        total: categoryBadges.length,
+        earned: earnedInCategory,
+      };
+    });
+  }, [allBadges, earnedBadgeIds, categories]);
+
+  const filteredBadges = useMemo(() => {
+    if (!selectedCategory) return allBadges;
+    const category = categories.find((c) => c.id === selectedCategory);
+    if (!category) return allBadges;
+    return allBadges.filter((badge) =>
+      category.badgeCategories.includes(badge.category)
+    );
+  }, [selectedCategory, allBadges, categories]);
+
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push("/login");
@@ -108,77 +179,6 @@ export default function RozetlerPage() {
   const totalBadges = totalBadgesCount || allBadges.length || 93;
   const totalPoints = userBadges.reduce((sum, badge) => sum + (badge.points || 0), 0);
 
-  // Category definitions
-  const categories = [
-    {
-      id: "daily_activities",
-      name: "Günlük Aktiviteler",
-      icon: "📅",
-      description: "Günlük test, kurs, canlı kod ve bugfix aktiviteleriniz için rozetler",
-      gradient: "from-blue-500 to-cyan-500",
-      badgeCategories: ["test_count", "topic"],
-    },
-    {
-      id: "total_achievements",
-      name: "Toplam Başarılar",
-      icon: "🏆",
-      description: "Toplam başarılarınız için rozetler",
-      gradient: "from-purple-500 to-pink-500",
-      badgeCategories: ["score"],
-    },
-    {
-      id: "social_interaction",
-      name: "Sosyal Etkileşim",
-      icon: "💬",
-      description: "Sosyal aktiviteleriniz için rozetler",
-      gradient: "from-green-500 to-emerald-500",
-      badgeCategories: [],
-    },
-    {
-      id: "consistency",
-      name: "Süreklilik ve Disiplin",
-      icon: "🔥",
-      description: "Süreklilik ve disiplin rozetleri",
-      gradient: "from-orange-500 to-red-500",
-      badgeCategories: ["streak"],
-    },
-    {
-      id: "special",
-      name: "Özel Başarılar",
-      icon: "⭐",
-      description: "Özel başarılarınız için rozetler",
-      gradient: "from-yellow-500 to-amber-500",
-      badgeCategories: ["special"],
-    },
-  ];
-
-  // Calculate category stats
-  const categoryStats = useMemo(() => {
-    return categories.map((cat) => {
-      const categoryBadges = allBadges.filter((badge) =>
-        cat.badgeCategories.includes(badge.category)
-      );
-      const earnedInCategory = categoryBadges.filter((badge) =>
-        earnedBadgeIds.has(badge.id)
-      ).length;
-      return {
-        ...cat,
-        total: categoryBadges.length,
-        earned: earnedInCategory,
-      };
-    });
-  }, [allBadges, earnedBadgeIds]);
-
-  // Filter badges by selected category
-  const filteredBadges = useMemo(() => {
-    if (!selectedCategory) return allBadges;
-    const category = categories.find((c) => c.id === selectedCategory);
-    if (!category) return allBadges;
-    return allBadges.filter((badge) =>
-      category.badgeCategories.includes(badge.category)
-    );
-  }, [selectedCategory, allBadges]);
-
   return (
     <div className="space-y-6 md:space-y-8 animate-fade-in pb-8">
       {/* Top Section - Header, Stats, and Info */}
@@ -230,7 +230,7 @@ export default function RozetlerPage() {
         </CardHeader>
         <CardContent className="pt-6">
           <p className="text-gray-700 dark:text-gray-300 mb-4">
-            Aylık sıralamada rozetlerden kazandığınız puanlarla ilk 3'e girenlere para ödülü verilir!
+            Aylık sıralamada rozetlerden kazandığınız puanlarla ilk 3&apos;e girenlere para ödülü verilir!
           </p>
           <div className="space-y-3">
             <div className="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-yellow-50 to-amber-50 dark:from-yellow-900/20 dark:to-amber-900/20 border border-yellow-200 dark:border-yellow-800">
