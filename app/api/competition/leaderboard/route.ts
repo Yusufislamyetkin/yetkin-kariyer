@@ -6,7 +6,7 @@ import { LeaderboardPeriod } from "@prisma/client";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-type Period = "daily" | "monthly";
+type Period = "daily" | "weekly" | "monthly";
 
 interface ScoreAccumulator {
   total: number;
@@ -65,24 +65,48 @@ const calculateAverage = (acc: ScoreAccumulator): number => {
 
 const getPeriodBounds = (period: Period) => {
   const now = new Date();
-  const periodDate =
-    period === "daily"
-      ? now.toISOString().split("T")[0]
-      : `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+  let periodDate: string;
+  let startDate: Date;
+  let endDate: Date;
 
-  const startDate =
-    period === "daily"
-      ? new Date(periodDate)
-      : new Date(`${periodDate}-01`);
-
-  const endDate = new Date(startDate);
   if (period === "daily") {
+    periodDate = now.toISOString().split("T")[0];
+    startDate = new Date(periodDate);
+    endDate = new Date(startDate);
     endDate.setDate(endDate.getDate() + 1);
+  } else if (period === "weekly") {
+    // Get Monday of current week
+    const day = now.getDay();
+    const diff = now.getDate() - day + (day === 0 ? -6 : 1); // Adjust when day is Sunday
+    const monday = new Date(now.setDate(diff));
+    monday.setHours(0, 0, 0, 0);
+    startDate = monday;
+    
+    // Get Sunday of current week
+    endDate = new Date(startDate);
+    endDate.setDate(endDate.getDate() + 7);
+    
+    // Format periodDate as YYYY-WW (year-week number)
+    const year = startDate.getFullYear();
+    const weekNumber = getWeekNumber(startDate);
+    periodDate = `${year}-W${String(weekNumber).padStart(2, "0")}`;
   } else {
+    // monthly
+    periodDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+    startDate = new Date(`${periodDate}-01`);
+    endDate = new Date(startDate);
     endDate.setMonth(endDate.getMonth() + 1);
   }
 
   return { periodDate, startDate, endDate };
+};
+
+const getWeekNumber = (date: Date): number => {
+  const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+  const dayNum = d.getUTCDay() || 7;
+  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  return Math.ceil(((d.getTime() - yearStart.getTime()) / 86400000 + 1) / 7);
 };
 
 export async function GET(request: Request) {
@@ -128,6 +152,7 @@ export async function GET(request: Request) {
         hackaton: number;
       };
       compositeScore: number;
+      points: number;
       rank: number;
       displayedBadges: Array<{
         id: string;
@@ -167,6 +192,7 @@ export async function GET(request: Request) {
         hackaton: number;
       };
       compositeScore: number;
+      points: number;
       rank: number;
       displayedBadges: Array<{
         id: string;
@@ -505,26 +531,15 @@ export async function GET(request: Request) {
       };
     });
 
-    leaderboardData.sort((a, b) => {
-      if (b.compositeScore !== a.compositeScore) {
-        return b.compositeScore - a.compositeScore;
-      }
-      return b.metrics.topicCompletion - a.metrics.topicCompletion;
-    });
+    // Get all user IDs from leaderboardData to fetch their badges
+    const allLeaderboardUserIds = leaderboardData.map((entry) => entry.userId);
 
-    const leaderboard = leaderboardData.slice(0, limit).map((entry, index) => ({
-      ...entry,
-      rank: index + 1,
-    }));
-
-    const leaderboardUserIds = leaderboard.map((entry) => entry.userId);
-
-    const displayedBadgesRaw =
-      leaderboardUserIds.length > 0
+    // Fetch all user badges to calculate total points for ALL users (before sorting)
+    const allUserBadges =
+      allLeaderboardUserIds.length > 0
         ? await db.userBadge.findMany({
             where: {
-              userId: { in: leaderboardUserIds },
-              isDisplayed: true,
+              userId: { in: allLeaderboardUserIds },
             },
             include: {
               badge: {
@@ -534,14 +549,54 @@ export async function GET(request: Request) {
                   icon: true,
                   color: true,
                   rarity: true,
+                  points: true,
                 },
               },
             },
-            orderBy: [
-              { earnedAt: "desc" },
-            ],
           })
         : [];
+
+    // Calculate total points for each user from badges
+    const userPointsMap = new Map<string, number>();
+    for (const userBadge of allUserBadges) {
+      if (userBadge.badge) {
+        const currentPoints = userPointsMap.get(userBadge.userId) || 0;
+        userPointsMap.set(
+          userBadge.userId,
+          currentPoints + (userBadge.badge.points || 0)
+        );
+      }
+    }
+
+    // Add points to all leaderboard entries
+    const leaderboardWithPoints = leaderboardData.map((entry) => ({
+      ...entry,
+      points: userPointsMap.get(entry.userId) || 0,
+    }));
+
+    // Sort by points instead of compositeScore
+    leaderboardWithPoints.sort((a, b) => {
+      if (b.points !== a.points) {
+        return b.points - a.points;
+      }
+      // If points are equal, use compositeScore as tiebreaker
+      if (b.compositeScore !== a.compositeScore) {
+        return b.compositeScore - a.compositeScore;
+      }
+      return b.metrics.topicCompletion - a.metrics.topicCompletion;
+    });
+
+    // Slice to limit and assign ranks
+    const leaderboard = leaderboardWithPoints.slice(0, limit).map((entry, index) => ({
+      ...entry,
+      rank: index + 1,
+    }));
+
+    // Get displayed badges (max 3 per user) for the top entries
+    const leaderboardUserIds = leaderboard.map((entry) => entry.userId);
+    const displayedBadgesRaw = allUserBadges.filter(
+      (ub: typeof allUserBadges[0]) => ub.isDisplayed && ub.badge && leaderboardUserIds.includes(ub.userId)
+    );
 
     const displayedBadgeMap = displayedBadgesRaw.reduce(
       (
@@ -550,7 +605,13 @@ export async function GET(request: Request) {
       ) => {
         const list = acc.get(current.userId) ?? [];
         if (list.length < 3 && current.badge) {
-          list.push(current.badge);
+          list.push({
+            id: current.badge.id,
+            name: current.badge.name,
+            icon: current.badge.icon,
+            color: current.badge.color,
+            rarity: current.badge.rarity,
+          });
         }
         acc.set(current.userId, list);
         return acc;
@@ -568,62 +629,33 @@ export async function GET(request: Request) {
     const rankTargetUserId = explicitUserId || userId;
 
     if (rankTargetUserId) {
-      const userIndex = leaderboardData.findIndex(
+      const userEntry = leaderboardWithBadges.find(
         (entry) => entry.userId === rankTargetUserId
       );
-      if (userIndex >= 0) {
-        userRank = {
-          ...leaderboardData[userIndex],
-          rank: userIndex + 1,
-          displayedBadges:
-            displayedBadgeMap.get(rankTargetUserId)?.slice(0, 3) ?? [],
-        };
+      if (userEntry) {
+        userRank = userEntry;
+      } else {
+        // If user is not in top leaderboard, find their data and calculate points
+        const userData = leaderboardData.find(
+          (entry) => entry.userId === rankTargetUserId
+        );
+        if (userData) {
+          const userPoints = userPointsMap.get(rankTargetUserId) || 0;
+          userRank = {
+            ...userData,
+            points: userPoints,
+            rank: leaderboardWithBadges.length + 1, // Approximate rank if not in top list
+            displayedBadges:
+              displayedBadgeMap.get(rankTargetUserId)?.slice(0, 3) ?? [],
+          };
+        }
       }
     }
 
     const leaderboardPeriod: LeaderboardPeriod =
-      period === "daily" ? "daily" : "monthly";
+      (period === "daily" ? "daily" : period === "weekly" ? "weekly" : "monthly") as LeaderboardPeriod;
 
-    const upsertPayload = leaderboardData.slice(0, 100);
-
-    await Promise.all(
-      upsertPayload.map((entry) =>
-        db.leaderboardEntry.upsert({
-          where: {
-            userId_period_periodDate: {
-              userId: entry.userId,
-              period: leaderboardPeriod,
-              periodDate,
-            },
-          },
-          update: {
-            quizCount: entry.attempts.quiz,
-            averageScore: entry.metrics.test,
-            totalScore: Math.round(entry.metrics.test * entry.attempts.test),
-            highestScore: entry.highestScores.test,
-            points: Math.round(entry.compositeScore),
-            rank:
-              leaderboardWithBadges.findIndex(
-                (e) => e.userId === entry.userId
-              ) + 1,
-          },
-          create: {
-            userId: entry.userId,
-            period: leaderboardPeriod,
-            periodDate,
-            quizCount: entry.attempts.quiz,
-            averageScore: entry.metrics.test,
-            totalScore: Math.round(entry.metrics.test * entry.attempts.test),
-            highestScore: entry.highestScores.test,
-            points: Math.round(entry.compositeScore),
-            rank:
-              leaderboardWithBadges.findIndex(
-                (e) => e.userId === entry.userId
-              ) + 1,
-          },
-        })
-      )
-    );
+    const upsertPayload = leaderboardWithBadges.slice(0, 100);
 
     try {
       await Promise.all(
@@ -641,11 +673,8 @@ export async function GET(request: Request) {
               averageScore: entry.metrics.test,
               totalScore: Math.round(entry.metrics.test * entry.attempts.test),
               highestScore: entry.highestScores.test,
-              points: Math.round(entry.compositeScore),
-              rank:
-                leaderboardWithBadges.findIndex(
-                  (e) => e.userId === entry.userId
-                ) + 1,
+              points: entry.points, // Use badge points instead of compositeScore
+              rank: entry.rank,
             },
             create: {
               userId: entry.userId,
@@ -655,11 +684,8 @@ export async function GET(request: Request) {
               averageScore: entry.metrics.test,
               totalScore: Math.round(entry.metrics.test * entry.attempts.test),
               highestScore: entry.highestScores.test,
-              points: Math.round(entry.compositeScore),
-              rank:
-                leaderboardWithBadges.findIndex(
-                  (e) => e.userId === entry.userId
-                ) + 1,
+              points: entry.points, // Use badge points instead of compositeScore
+              rank: entry.rank,
             },
           })
         )

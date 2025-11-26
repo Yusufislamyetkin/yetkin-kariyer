@@ -44,6 +44,13 @@ const LANGUAGE_LABEL: Record<LiveCodingLanguage, string> = {
   python: "Python",
   javascript: "JavaScript",
   java: "Java",
+  php: "PHP",
+  typescript: "TypeScript",
+  go: "Go",
+  rust: "Rust",
+  cpp: "C++",
+  kotlin: "Kotlin",
+  ruby: "Ruby",
 };
 
 const LANGUAGE_ALIASES: Record<string, LiveCodingLanguage> = {
@@ -56,10 +63,20 @@ const LANGUAGE_ALIASES: Record<string, LiveCodingLanguage> = {
   py: "python",
   javascript: "javascript",
   js: "javascript",
-  typescript: "javascript",
-  ts: "javascript",
+  typescript: "typescript",
+  ts: "typescript",
   node: "javascript",
   java: "java",
+  php: "php",
+  go: "go",
+  golang: "go",
+  rust: "rust",
+  cpp: "cpp",
+  "c++": "cpp",
+  kotlin: "kotlin",
+  kt: "kotlin",
+  ruby: "ruby",
+  rb: "ruby",
 };
 
 const DEFAULT_LANGUAGE: LiveCodingLanguage = "javascript";

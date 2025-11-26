@@ -1,6 +1,6 @@
 import { LiveCodingLanguage, LiveCodingTask, ProgrammingLanguage } from "@/types/live-coding";
 
-export const SUPPORTED_LANGUAGES: LiveCodingLanguage[] = ["csharp", "python", "javascript", "java"];
+export const SUPPORTED_LANGUAGES: LiveCodingLanguage[] = ["csharp", "python", "javascript", "java", "php", "typescript", "go", "rust", "cpp", "kotlin", "ruby"];
 const DEFAULT_TIME_LIMIT = 45;
 const MAX_TASK_COUNT = 5;
 

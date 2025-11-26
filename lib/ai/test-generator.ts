@@ -42,21 +42,21 @@ export async function generateTestQuestions(
     }
 
     const topic = `${technology} - ${module}`;
-    const prompt = `${topic} konusunda ${level} seviyesinde ${questionCount} adet ${questionType} tipinde çoktan seçmeli test sorusu üret. Her soru için 4 seçenek olsun ve doğru cevabın index'ini belirt. Sorular JSON formatında döndür. Format: [{"id": "q1", "question": "Soru metni", "options": ["A", "B", "C", "D"], "correctAnswer": 0, "explanation": "Açıklama"}]`;
+    const prompt = `${topic} konusunda ${level} seviyesinde ${questionCount} adet çoktan seçmeli test sorusu üret. Her soru: 4 seçenek, 0-3 index ile doğru cevap, Türkçe, teknik ve pratik. JSON array formatında: [{"id":"q1","question":"...","options":["A","B","C","D"],"correctAnswer":0}]`;
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
         {
           role: "system",
-          content: "Sen bir yazılım test soruları oluşturma uzmanısın. Verilen konu ve seviyeye uygun, kaliteli test soruları üretiyorsun.",
+          content: "Yazılım test soruları üreticisi. Verilen konu ve seviyeye uygun, kaliteli sorular üret.",
         },
         {
           role: "user",
           content: prompt,
         },
       ],
-      temperature: 0.7,
+      temperature: 0.5,
       response_format: { type: "json_object" },
     });
 
@@ -74,7 +74,6 @@ export async function generateTestQuestions(
       question: q.question || q.questionText || "",
       options: Array.isArray(q.options) ? q.options : [],
       correctAnswer: typeof q.correctAnswer === "number" ? q.correctAnswer : 0,
-      explanation: q.explanation || q.answerGuide || undefined,
     }));
 
     return normalizedQuestions;

@@ -116,14 +116,14 @@ export function RankingList({ entries, currentUserId }: RankingListProps) {
                   </div>
                   <div className="flex flex-col items-start gap-2 md:items-end">
                     <span className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                      Kompozit Skor
+                      Toplam Puan
                     </span>
                     <div className="flex items-baseline gap-2">
                       <span className="text-3xl font-bold text-gray-900 dark:text-gray-100">
-                        {entry.compositeScore.toFixed(1)}
+                        {entry.points?.toLocaleString() ?? 0}
                       </span>
                       <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                        / 100
+                        puan
                       </span>
                     </div>
                   </div>

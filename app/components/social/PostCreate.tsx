@@ -223,7 +223,7 @@ export function PostCreate({ onClose, onSuccess, isModal = true }: PostCreatePro
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
                   placeholder="Bir şey paylaşın..."
-                  className={`${isModal ? 'min-h-[120px]' : 'min-h-[180px]'} resize-none text-base border border-gray-300 dark:border-gray-600 focus:ring-0 focus:shadow-none focus:!border-gray-400 dark:focus:!border-gray-500 p-0 placeholder:text-gray-400 dark:placeholder:text-gray-500`}
+                  className={`${isModal ? 'min-h-[120px]' : 'min-h-[180px]'} resize-none text-base border border-gray-300 dark:border-gray-600 focus:ring-0 focus:shadow-none focus:!border-gray-400 dark:focus:!border-gray-500 ${isModal ? 'p-0' : 'pt-4 p-0'} placeholder:text-gray-400 dark:placeholder:text-gray-500`}
                   maxLength={2200}
                   disabled={isSubmitting}
                 />

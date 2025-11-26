@@ -42,6 +42,7 @@ export interface LeaderboardEntry {
   user: LeaderboardUser;
   rank: number;
   compositeScore: number;
+  points?: number;
   metrics: LeaderboardMetrics;
   attempts?: LeaderboardAttempts;
   highestScores?: LeaderboardScores;

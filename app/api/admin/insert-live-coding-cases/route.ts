@@ -9,15 +9,15 @@ const LANGUAGE_TO_LIVECODING: Record<string, LiveCodingLanguage> = {
   csharp: "csharp",
   java: "java",
   python: "python",
-  php: "javascript",
+  php: "php",
   javascript: "javascript",
-  typescript: "javascript", // TypeScript uses JavaScript runtime
-  go: "javascript", // Go uses JavaScript runtime for now
-  rust: "javascript", // Rust uses JavaScript runtime for now
-  cpp: "javascript", // C++ uses JavaScript runtime for now
-  kotlin: "java", // Kotlin uses Java runtime
-  swift: "javascript", // Swift uses JavaScript runtime for now
-  ruby: "javascript", // Ruby uses JavaScript runtime for now
+  typescript: "typescript",
+  go: "go",
+  rust: "rust",
+  cpp: "cpp",
+  kotlin: "kotlin",
+  swift: "javascript", // Swift not supported by Piston API, mapping to javascript
+  ruby: "ruby",
 };
 
 export async function POST() {

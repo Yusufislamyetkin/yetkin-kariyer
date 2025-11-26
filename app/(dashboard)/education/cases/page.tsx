@@ -16,7 +16,6 @@ const LANGUAGE_ICONS: Record<string, string> = {
   rust: "🦀",
   cpp: "⚡",
   kotlin: "🔷",
-  swift: "🦉",
   ruby: "💎",
 };
 
@@ -31,7 +30,6 @@ const LANGUAGE_COLORS: Record<string, string> = {
   rust: "#000000",
   cpp: "#00599C",
   kotlin: "#7F52FF",
-  swift: "#FA7343",
   ruby: "#CC342D",
 };
 

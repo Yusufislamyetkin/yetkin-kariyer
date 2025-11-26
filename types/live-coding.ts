@@ -1,4 +1,4 @@
-export type LiveCodingLanguage = "csharp" | "python" | "javascript" | "java";
+export type LiveCodingLanguage = "csharp" | "python" | "javascript" | "java" | "php" | "typescript" | "go" | "rust" | "cpp" | "kotlin" | "ruby";
 
 export interface ProgrammingLanguage {
   id: string;

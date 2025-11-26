@@ -74,23 +74,29 @@ export async function checkBadgesForAttempt({
   userId,
   quizAttemptId,
 }: BadgeCheckParams): Promise<BadgeCheckResult> {
-  const quizAttempt = await db.quizAttempt.findUnique({
-    where: { id: quizAttemptId },
-    include: { quiz: true },
-  });
+  try {
+    const quizAttempt = await db.quizAttempt.findUnique({
+      where: { id: quizAttemptId },
+      include: { quiz: true },
+    });
 
-  if (!quizAttempt || quizAttempt.userId !== userId) {
-    throw new Error("Test denemesi bulunamadı");
-  }
+    if (!quizAttempt || quizAttempt.userId !== userId) {
+      console.error(`[BADGE_CHECK] QuizAttempt bulunamadı veya userId eşleşmiyor. quizAttemptId: ${quizAttemptId}, userId: ${userId}`);
+      throw new Error("Test denemesi bulunamadı");
+    }
 
-  const allBadges = await db.badge.findMany();
-  const userBadges = await db.userBadge.findMany({
-    where: { userId },
-    select: { badgeId: true },
-  });
+    console.log(`[BADGE_CHECK] Rozet kontrolü başlatıldı. userId: ${userId}, quizAttemptId: ${quizAttemptId}, score: ${quizAttempt.score}, completedAt: ${quizAttempt.completedAt}`);
 
-  const earnedBadgeIds = new Set(userBadges.map((ub: { badgeId: string }) => ub.badgeId));
-  const newlyEarnedBadges: any[] = [];
+    const allBadges = await db.badge.findMany();
+    const userBadges = await db.userBadge.findMany({
+      where: { userId },
+      select: { badgeId: true },
+    });
+
+    const earnedBadgeIds = new Set(userBadges.map((ub: { badgeId: string }) => ub.badgeId));
+    const newlyEarnedBadges: any[] = [];
+    
+    console.log(`[BADGE_CHECK] Toplam ${allBadges.length} rozet bulundu, kullanıcının ${earnedBadgeIds.size} rozeti var.`);
 
   const userQuizAttempts = await db.quizAttempt.findMany({
     where: { userId },
@@ -376,28 +382,61 @@ export async function checkBadgesForAttempt({
         break;
       case "daily_activities":
         if (criteria.type === "daily_activity" && criteria.daily) {
-          const today = new Date();
-          today.setHours(0, 0, 0, 0);
+          // UTC timezone kullanarak bugünün başlangıcını hesapla
+          // Veritabanındaki tarihler UTC'de saklandığı için UTC kullanıyoruz
+          const now = new Date();
+          const today = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0, 0));
+          const tomorrow = new Date(today);
+          tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
+          
+          // Mevcut attempt'in bugünkü tarih aralığında olup olmadığını kontrol et
+          // completedAt değeri UTC'de saklanıyor, bu yüzden UTC ile karşılaştırıyoruz
+          const currentAttemptDate = quizAttempt.completedAt 
+            ? new Date(quizAttempt.completedAt) 
+            : new Date(); // Eğer completedAt yoksa şu anki zamanı kullan
+          
+          // UTC'de karşılaştırma yap
+          const currentAttemptUTC = new Date(Date.UTC(
+            currentAttemptDate.getUTCFullYear(),
+            currentAttemptDate.getUTCMonth(),
+            currentAttemptDate.getUTCDate(),
+            currentAttemptDate.getUTCHours(),
+            currentAttemptDate.getUTCMinutes(),
+            currentAttemptDate.getUTCSeconds()
+          ));
+          
+          const currentAttemptIsToday = currentAttemptUTC >= today && currentAttemptUTC < tomorrow;
+          
+          console.log(`[BADGE_CHECK] Daily activity kontrolü. userId: ${userId}, activity_type: ${criteria.activity_type}, today: ${today.toISOString()}, currentAttempt: ${currentAttemptUTC.toISOString()}, isToday: ${currentAttemptIsToday}`);
           
           // Bugünkü aktiviteleri say
           let todayCount = 0;
+          let shouldIncludeCurrentAttempt = false;
           
           if (criteria.activity_type === "test") {
+            // Test için quizAttempt kullanılır
+            shouldIncludeCurrentAttempt = currentAttemptIsToday;
             const todayAttempts = await db.quizAttempt.count({
               where: {
                 userId,
+                id: { not: quizAttempt.id }, // Mevcut attempt'i hariç tut
                 completedAt: {
                   gte: today,
+                  lt: tomorrow,
                 },
               },
             });
             todayCount = todayAttempts;
+            if (shouldIncludeCurrentAttempt) {
+              todayCount += 1;
+            }
           } else if (criteria.activity_type === "kurs") {
             const todayCompletions = await db.lessonCompletion.count({
               where: {
                 userId,
                 completedAt: {
                   gte: today,
+                  lt: tomorrow,
                 },
               },
             });
@@ -408,6 +447,7 @@ export async function checkBadgesForAttempt({
                 userId,
                 completedAt: {
                   gte: today,
+                  lt: tomorrow,
                 },
               },
             });
@@ -418,21 +458,28 @@ export async function checkBadgesForAttempt({
                 userId,
                 completedAt: {
                   gte: today,
+                  lt: tomorrow,
                 },
               },
             });
             todayCount = todayBugFix;
           } else if (criteria.activity_type === "pratik") {
             // Pratik: quiz attempt olarak sayılabilir
+            shouldIncludeCurrentAttempt = currentAttemptIsToday;
             const todayPratik = await db.quizAttempt.count({
               where: {
                 userId,
+                id: { not: quizAttempt.id }, // Mevcut attempt'i hariç tut
                 completedAt: {
                   gte: today,
+                  lt: tomorrow,
                 },
               },
             });
             todayCount = todayPratik;
+            if (shouldIncludeCurrentAttempt) {
+              todayCount += 1;
+            }
           } else if (criteria.activity_type === "eğitim") {
             // Eğitim: lesson completion olarak sayılabilir
             const todayEgitim = await db.lessonCompletion.count({
@@ -440,10 +487,28 @@ export async function checkBadgesForAttempt({
                 userId,
                 completedAt: {
                   gte: today,
+                  lt: tomorrow,
                 },
               },
             });
             todayCount = todayEgitim;
+          } else if (criteria.activity_type === "quiz") {
+            // Quiz: quiz attempt olarak sayılabilir
+            shouldIncludeCurrentAttempt = currentAttemptIsToday;
+            const todayQuizzes = await db.quizAttempt.count({
+              where: {
+                userId,
+                id: { not: quizAttempt.id }, // Mevcut attempt'i hariç tut
+                completedAt: {
+                  gte: today,
+                  lt: tomorrow,
+                },
+              },
+            });
+            todayCount = todayQuizzes;
+            if (shouldIncludeCurrentAttempt) {
+              todayCount += 1;
+            }
           }
           
           if (todayCount >= criteria.count) {
@@ -518,22 +583,37 @@ export async function checkBadgesForAttempt({
     }
 
     if (shouldEarn) {
-      await db.userBadge.create({
-        data: {
-          userId,
-          badgeId: badge.id,
-        },
-      });
+      try {
+        await db.userBadge.create({
+          data: {
+            userId,
+            badgeId: badge.id,
+          },
+        });
 
-      newlyEarnedBadges.push(badge);
-      earnedBadgeIds.add(badge.id);
+        newlyEarnedBadges.push(badge);
+        earnedBadgeIds.add(badge.id);
+        console.log(`[BADGE_CHECK] Rozet kazanıldı! userId: ${userId}, badgeId: ${badge.id}, badgeName: ${badge.name}, category: ${badge.category}`);
+      } catch (error) {
+        console.error(`[BADGE_CHECK] Rozet kaydedilirken hata oluştu. userId: ${userId}, badgeId: ${badge.id}`, error);
+        // Rozet zaten varsa (unique constraint hatası), sessizce devam et
+        if (error instanceof Error && !error.message.includes("Unique constraint")) {
+          throw error;
+        }
+      }
     }
   }
 
+  console.log(`[BADGE_CHECK] Rozet kontrolü tamamlandı. userId: ${userId}, kazanılan rozet sayısı: ${newlyEarnedBadges.length}`);
+  
   return {
     newlyEarnedBadges,
     totalEarned: newlyEarnedBadges.length,
   };
+  } catch (error) {
+    console.error(`[BADGE_CHECK] Rozet kontrolü sırasında beklenmeyen hata. userId: ${userId}, quizAttemptId: ${quizAttemptId}`, error);
+    throw error;
+  }
 }
 
 // Aktivite tamamlandığında rozet kontrolü yapar (quizAttemptId gerektirmez)

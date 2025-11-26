@@ -81,22 +81,9 @@ export default function CompetitionPage() {
     }
   };
 
+  // Leaderboard is already sorted by points from API, just use it as-is
   const sortedLeaderboard = useMemo(() => {
-    if (!leaderboard.length) return [];
-
-    return leaderboard
-      .map((entry) => ({ ...entry }))
-      .sort((a, b) => {
-        const compositeDiff = b.compositeScore - a.compositeScore;
-        if (compositeDiff !== 0) {
-          return compositeDiff;
-        }
-        return b.metrics.topicCompletion - a.metrics.topicCompletion;
-      })
-      .map((entry, index) => ({
-        ...entry,
-        rank: index + 1,
-      }));
+    return leaderboard;
   }, [leaderboard]);
 
   const currentUserEntry = useMemo(() => {
@@ -137,7 +124,7 @@ export default function CompetitionPage() {
         <RankingDisplay
           currentRank={currentUserEntry.rank}
           period={period}
-          compositeScore={currentUserEntry.compositeScore}
+          points={currentUserEntry.points}
         />
       )}
 
@@ -179,8 +166,8 @@ export default function CompetitionPage() {
           </div>
         </div>
         <div className="mt-4 rounded-2xl border border-dashed border-gray-200/60 bg-white/70 px-5 py-4 text-sm text-gray-600 shadow-sm dark:border-gray-700/60 dark:bg-gray-900/70 dark:text-gray-300">
-          Kompozit skor; konu tamamlama, test, canlı kodlama, bug fix ve
-          hackaton performanslarının birleşik ortalamasıdır.
+          Sıralama, kazandığınız rozetlerden toplam puanınıza göre yapılmaktadır.
+          Rozetleri aktivitelerinizi tamamlayarak kazanabilirsiniz.
         </div>
       </div>
 
@@ -198,17 +185,17 @@ export default function CompetitionPage() {
               </div>
               <div>
                 <p className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                  {period === "daily" ? "Günlük" : "Aylık"} Kompozit Liderlik
-                  Tablosu
+                  {period === "daily" ? "Günlük" : "Aylık"} Rozet Puanları
+                  Liderlik Tablosu
                 </p>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                  Ortalama performans skorlarına göre sıralama.
+                  Kazanılan rozet puanlarına göre sıralama.
                 </p>
               </div>
             </div>
             <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
               <BookOpenCheck className="h-4 w-4 text-emerald-500" />
-              Tek kriter: kompozit skor (0 - 100 arası).
+              Sıralama kriteri: toplam rozet puanları.
             </div>
           </CardTitle>
         </CardHeader>

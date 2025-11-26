@@ -108,6 +108,13 @@ export function BugFixChallengeModal({
     python: "Python",
     javascript: "JavaScript",
     java: "Java",
+    php: "PHP",
+    typescript: "TypeScript",
+    go: "Go",
+    rust: "Rust",
+    cpp: "C++",
+    kotlin: "Kotlin",
+    ruby: "Ruby",
   };
 
   return (

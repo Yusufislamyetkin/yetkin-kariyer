@@ -29,6 +29,13 @@ interface ProfileStatus {
     totalCreated?: number;
     maleCount?: number;
     femaleCount?: number;
+    newAvatarMaleCount?: number;
+    newAvatarFemaleCount?: number;
+    regularMaleCount?: number;
+    regularFemaleCount?: number;
+    noPhotoMaleCount?: number;
+    noPhotoFemaleCount?: number;
+    noPhotoTotalCount?: number;
   } | null;
 }
 
@@ -1829,10 +1836,31 @@ export default function AdminPage() {
                     <div className="flex-1">
                       <div className="text-sm font-medium mb-1">{profileState.success}</div>
                       {profileState.stats && (
-                        <div className="flex flex-wrap gap-3 text-xs opacity-90">
-                          <span>Toplam: <strong>{profileState.stats.totalCreated}</strong></span>
-                          <span>Erkek: <strong>{profileState.stats.maleCount}</strong></span>
-                          <span>Kadın: <strong>{profileState.stats.femaleCount}</strong></span>
+                        <div className="flex flex-col gap-2 text-xs opacity-90">
+                          <div className="flex flex-wrap gap-3">
+                            <span>Toplam: <strong>{profileState.stats.totalCreated}</strong></span>
+                            <span>Erkek: <strong>{profileState.stats.maleCount}</strong></span>
+                            <span>Kadın: <strong>{profileState.stats.femaleCount}</strong></span>
+                          </div>
+                          {profileState.stats.newAvatarMaleCount !== undefined && profileState.stats.newAvatarFemaleCount !== undefined && (
+                            <div className="flex flex-wrap gap-3 pt-1 border-t border-green-300 dark:border-green-800">
+                              <span className="text-green-700 dark:text-green-300">Yeni Avatar Erkek: <strong>{profileState.stats.newAvatarMaleCount}</strong></span>
+                              <span className="text-green-700 dark:text-green-300">Yeni Avatar Kadın: <strong>{profileState.stats.newAvatarFemaleCount}</strong></span>
+                            </div>
+                          )}
+                          {profileState.stats.regularMaleCount !== undefined && profileState.stats.regularFemaleCount !== undefined && (
+                            <div className="flex flex-wrap gap-3 text-xs opacity-75">
+                              <span>Normal Erkek: <strong>{profileState.stats.regularMaleCount}</strong></span>
+                              <span>Normal Kadın: <strong>{profileState.stats.regularFemaleCount}</strong></span>
+                            </div>
+                          )}
+                          {profileState.stats.noPhotoTotalCount !== undefined && (
+                            <div className="flex flex-wrap gap-3 pt-1 border-t border-green-300 dark:border-green-800">
+                              <span className="text-blue-700 dark:text-blue-300">Fotoğrafsız Toplam: <strong>{profileState.stats.noPhotoTotalCount}</strong></span>
+                              <span className="text-blue-700 dark:text-blue-300">Fotoğrafsız Erkek: <strong>{profileState.stats.noPhotoMaleCount || 0}</strong></span>
+                              <span className="text-blue-700 dark:text-blue-300">Fotoğrafsız Kadın: <strong>{profileState.stats.noPhotoFemaleCount || 0}</strong></span>
+                            </div>
+                          )}
                         </div>
                       )}
                     </div>

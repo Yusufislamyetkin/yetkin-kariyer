@@ -228,13 +228,13 @@ export const PostCard = memo(function PostCard({
       {/* Image */}
       {post.imageUrl && (
         <div className="relative w-full bg-gray-100 dark:bg-gray-950">
-          <div className="relative w-full" style={{ minHeight: '800px', maxHeight: '1200px' }}>
+          <div className="relative w-full aspect-auto max-h-[600px] sm:max-h-[800px] md:max-h-[1000px]">
             <Image
               src={post.imageUrl}
               alt={post.content || "Post image"}
               fill
               className="object-contain"
-              sizes="800px"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 800px, 1200px"
               loading="lazy"
               priority={false}
             />

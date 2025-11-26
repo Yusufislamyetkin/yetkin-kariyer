@@ -37,6 +37,13 @@ const LANGUAGE_MAP: Record<
   javascript: { language: "javascript", version: "18.15.0", fileName: "main.js" },
   java: { language: "java", version: "15.0.2", fileName: "Main.java" },
   csharp: { language: "csharp", version: "6.12.0", fileName: "Program.cs" },
+  php: { language: "php", version: "8.2.0", fileName: "main.php" },
+  typescript: { language: "typescript", version: "5.0.0", fileName: "main.ts" },
+  go: { language: "go", version: "1.21.0", fileName: "main.go" },
+  rust: { language: "rust", version: "1.70.0", fileName: "main.rs" },
+  cpp: { language: "cpp", version: "10.2.0", fileName: "main.cpp" },
+  kotlin: { language: "kotlin", version: "1.9.0", fileName: "Main.kt" },
+  ruby: { language: "ruby", version: "3.2.0", fileName: "main.rb" },
 };
 
 const MAX_CODE_LENGTH = 100_000;

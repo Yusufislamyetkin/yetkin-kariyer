@@ -11,6 +11,13 @@ const LANGUAGE_LABELS: Record<LiveCodingLanguage, string> = {
   python: "Python",
   javascript: "JavaScript",
   java: "Java",
+  php: "PHP",
+  typescript: "TypeScript",
+  go: "Go",
+  rust: "Rust",
+  cpp: "C++",
+  kotlin: "Kotlin",
+  ruby: "Ruby",
 };
 
 const MONACO_LANGUAGE_MAP: Record<LiveCodingLanguage, string> = {
@@ -18,6 +25,13 @@ const MONACO_LANGUAGE_MAP: Record<LiveCodingLanguage, string> = {
   python: "python",
   javascript: "javascript",
   java: "java",
+  php: "php",
+  typescript: "typescript",
+  go: "go",
+  rust: "rust",
+  cpp: "cpp",
+  kotlin: "kotlin",
+  ruby: "ruby",
 };
 
 interface LiveCodingEditorProps {
@@ -63,7 +77,7 @@ export function LiveCodingEditor({
 
   const displayLanguages = useMemo<LiveCodingLanguage[]>(() => {
     if (languages.length === 0) {
-      return ["csharp", "python", "javascript", "java"];
+      return ["csharp", "python", "javascript", "java", "php", "typescript", "go", "rust", "cpp", "kotlin", "ruby"];
     }
     return languages;
   }, [languages]);

@@ -5,8 +5,8 @@ import { Trophy, TrendingUp, TrendingDown, Minus } from "lucide-react";
 interface RankingDisplayProps {
   currentRank: number | null;
   previousRank?: number | null;
-  period: "daily" | "monthly";
-  compositeScore?: number | null;
+  period: "daily" | "weekly" | "monthly";
+  points?: number | null;
   expertise?: string | null;
 }
 
@@ -14,14 +14,14 @@ export function RankingDisplay({
   currentRank,
   previousRank,
   period,
-  compositeScore,
+  points,
   expertise,
 }: RankingDisplayProps) {
   if (currentRank === null) {
     return (
       <div className="text-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
         <p className="text-gray-600 dark:text-gray-400">
-          Bu {period === "daily" ? "gün" : "ay"} henüz sıralamada değilsiniz
+          Bu {period === "daily" ? "gün" : period === "weekly" ? "hafta" : "ay"} henüz sıralamada değilsiniz
         </p>
       </div>
     );
@@ -39,7 +39,7 @@ export function RankingDisplay({
           <Trophy className="h-10 w-10 text-yellow-500" />
           <div>
             <p className="text-xs font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-300">
-              {period === "daily" ? "Günlük" : "Aylık"} Sıralama
+              {period === "daily" ? "Günlük" : period === "weekly" ? "Haftalık" : "Aylık"} Sıralama
             </p>
             <div className="flex items-baseline gap-2">
               <span className="text-4xl font-bold text-gray-900 dark:text-gray-100">
@@ -55,17 +55,17 @@ export function RankingDisplay({
         </div>
       </div>
       <div className="flex flex-col items-start sm:items-end gap-1">
-        {typeof compositeScore === "number" && compositeScore >= 0 && (
+        {typeof points === "number" && points >= 0 && (
           <div>
             <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400 text-right">
-              Kompozit Skor
+              Toplam Puan
             </p>
             <div className="flex items-baseline gap-2 text-right">
               <span className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                {compositeScore.toFixed(1)}
+                {points.toLocaleString()}
               </span>
               <span className="text-sm text-gray-500 dark:text-gray-400 font-medium">
-                / 100
+                puan
               </span>
             </div>
           </div>

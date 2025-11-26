@@ -273,8 +273,12 @@ export async function POST(
 
     try {
       badgeResults = await checkBadgesForAttempt({ userId, quizAttemptId: quizAttempt.id });
+      if (badgeResults.totalEarned > 0) {
+        console.log(`[TEST_SUBMIT] Kullanıcı ${badgeResults.totalEarned} rozet kazandı. userId: ${userId}, quizAttemptId: ${quizAttempt.id}`);
+      }
     } catch (error) {
-      console.error("Badge check failed:", error);
+      console.error(`[TEST_SUBMIT] Badge check failed. userId: ${userId}, quizAttemptId: ${quizAttempt.id}`, error);
+      // Hata olsa bile test sonucunu döndür, sadece rozet kontrolü başarısız oldu
     }
 
     return NextResponse.json({ testAttempt, quizAttempt, score, badgeResults, goalResults });

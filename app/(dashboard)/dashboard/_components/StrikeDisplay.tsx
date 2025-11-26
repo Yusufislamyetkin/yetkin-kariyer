@@ -135,35 +135,35 @@ export function StrikeDisplay({ strikeData, loading }: StrikeDisplayProps) {
           Günlük Strike
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-6">
+      <CardContent className="space-y-4 md:space-y-6">
         {/* Main Strike Display */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center shadow-lg">
-              <Flame className="h-10 w-10 text-white" />
+        <div className="flex items-center justify-between gap-2 sm:gap-4">
+          <div className="flex items-center gap-2 sm:gap-4 min-w-0 flex-1">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center shadow-lg flex-shrink-0">
+              <Flame className="h-8 w-8 sm:h-10 sm:w-10 text-white" />
             </div>
-            <div>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Mevcut Strike</p>
-              <p className="text-4xl font-bold text-gray-900 dark:text-gray-100">
-                {currentStreak} <span className="text-2xl text-orange-600 dark:text-orange-400">gün</span>
+            <div className="min-w-0">
+              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-1">Mevcut Strike</p>
+              <p className="text-2xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100">
+                {currentStreak} <span className="text-xl sm:text-2xl text-orange-600 dark:text-orange-400">gün</span>
               </p>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 mt-1">
                 En uzun: {longestStreak} gün
               </p>
             </div>
           </div>
-          <div className="text-right">
-            <p className="text-sm text-gray-600 dark:text-gray-400">Toplam Aktif Gün</p>
-            <p className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+          <div className="text-right flex-shrink-0">
+            <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Toplam Aktif Gün</p>
+            <p className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">
               {totalDaysActive}
             </p>
           </div>
         </div>
 
         {/* Weekly Days Visualization (Monday to Sunday) */}
-        <div className="space-y-3">
-          <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">Haftalık Görünüm (Pazartesi - Pazar)</p>
-          <div className="grid grid-cols-7 gap-2">
+        <div className="space-y-2 md:space-y-3">
+          <p className="text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300">Haftalık Görünüm (Pazartesi - Pazar)</p>
+          <div className="grid grid-cols-7 gap-1 sm:gap-2">
             {weekDays.length > 0 ? weekDays.map((day) => {
               const allCompleted = day.allTasksCompleted;
               const hasAnyActivity = day.tasks.login || day.tasks.testSolved || day.tasks.topicCompleted || 
@@ -174,7 +174,7 @@ export function StrikeDisplay({ strikeData, loading }: StrikeDisplayProps) {
                   key={day.date}
                   onClick={() => handleDayClick(day)}
                   disabled={day.isFuture}
-                  className={`flex flex-col items-center gap-1 p-2 rounded-lg border-2 transition-all ${
+                  className={`flex flex-col items-center gap-0.5 sm:gap-1 p-1 sm:p-2 rounded-lg border-2 transition-all ${
                     day.isFuture
                       ? "bg-gray-50 dark:bg-gray-900/30 border-gray-200 dark:border-gray-800 cursor-not-allowed opacity-50"
                       : allCompleted
@@ -182,16 +182,16 @@ export function StrikeDisplay({ strikeData, loading }: StrikeDisplayProps) {
                       : hasAnyActivity
                       ? "bg-gradient-to-br from-orange-400 to-red-500 border-orange-500 dark:border-orange-600 shadow-md hover:shadow-lg cursor-pointer"
                       : "bg-gray-100 dark:bg-gray-800/50 border-gray-300 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-600 cursor-pointer"
-                  } ${day.isToday ? "ring-2 ring-orange-300 dark:ring-orange-600 ring-offset-2" : ""}`}
+                  } ${day.isToday ? "ring-1 sm:ring-2 ring-orange-300 dark:ring-orange-600 ring-offset-1 sm:ring-offset-2" : ""}`}
                 >
-                  <div className={`text-xs font-bold ${
+                  <div className={`text-[10px] sm:text-xs font-bold ${
                     allCompleted || hasAnyActivity
                       ? "text-white"
                       : "text-gray-500 dark:text-gray-400"
                   }`}>
                     {allCompleted ? "✓✓✓" : hasAnyActivity ? "✓" : "○"}
                   </div>
-                  <div className={`text-[10px] font-medium text-center leading-tight ${
+                  <div className={`text-[8px] sm:text-[10px] font-medium text-center leading-tight ${
                     allCompleted || hasAnyActivity
                       ? "text-white"
                       : "text-gray-600 dark:text-gray-400"
@@ -216,14 +216,14 @@ export function StrikeDisplay({ strikeData, loading }: StrikeDisplayProps) {
         </div>
 
         {/* Today's Progress */}
-        <div className="space-y-3">
+        <div className="space-y-2 md:space-y-3">
           <div>
-            <p className="text-sm font-semibold text-gray-700 dark:text-gray-300">Bugünün Hedefleri</p>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            <p className="text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300">Bugünün Hedefleri</p>
+            <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 mt-1">
               💡 Strike alabilmek için günün tüm görevlerinin tamamlanması gerekmektedir.
             </p>
           </div>
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
             <div className={`flex flex-col items-center gap-2 p-2.5 rounded-lg border-2 ${
               todayCompleted.login
                 ? "bg-green-50 dark:bg-green-900/20 border-green-300 dark:border-green-700"
@@ -279,7 +279,7 @@ export function StrikeDisplay({ strikeData, loading }: StrikeDisplayProps) {
               </span>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
             <div className={`flex flex-col items-center gap-2 p-2.5 rounded-lg border-2 ${
               todayCompleted.liveCodingCompleted
                 ? "bg-cyan-50 dark:bg-cyan-900/20 border-cyan-300 dark:border-cyan-700"

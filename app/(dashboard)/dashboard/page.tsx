@@ -304,13 +304,6 @@ export default function DashboardPage() {
             Kariyerinize genel bakış ve hızlı erişim
           </p>
         </div>
-        <div className="flex gap-3">
-          <Link href="/education/courses">
-            <Button variant="gradient" size="md">
-              Yeni Kurs Keşfet
-            </Button>
-          </Link>
-        </div>
       </div>
 
       {/* Strike Display */}

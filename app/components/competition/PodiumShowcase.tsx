@@ -79,7 +79,7 @@ export function PodiumShowcase({ entries, viewType }: PodiumShowcaseProps) {
         const isChampion = entry.rank === 1;
         const metricValue =
           metricKey === "composite"
-            ? entry.compositeScore
+            ? (entry.points ?? 0)
             : entry.metrics[metricKey] ?? 0;
 
         return (
@@ -148,27 +148,31 @@ export function PodiumShowcase({ entries, viewType }: PodiumShowcaseProps) {
                 </div>
                 <div className="flex-1">
                   <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                    {metricLabel(viewType)} Skoru
+                    {metricKey === "composite" ? "Toplam Puan" : `${metricLabel(viewType)} Skoru`}
                   </p>
                   <div className="flex items-baseline gap-2">
                     <span className="text-4xl font-black text-gray-900 dark:text-gray-100">
-                      {metricValue.toFixed(1)}
+                      {metricKey === "composite" 
+                        ? metricValue.toLocaleString() 
+                        : metricValue.toFixed(1)}
                     </span>
                     <span className="text-sm font-semibold text-gray-500 dark:text-gray-400">
-                      {metricKey === "composite" ? "/ 100" : "%"}
+                      {metricKey === "composite" ? "puan" : "%"}
                     </span>
                   </div>
-                  <div className="mt-3 h-3.5 w-full overflow-hidden rounded-full bg-gray-200/70 shadow-inner dark:bg-gray-800/70">
-                    <div
-                      className={cn(
-                        "h-full rounded-full bg-gradient-to-r bg-[length:200%_100%] transition-all duration-700 ease-out animate-pulse",
-                        `from-white/20 via-white/0 ${progressGradient}`
-                      )}
-                      style={{
-                        width: `${Math.min(100, metricValue)}%`,
-                      }}
-                    />
-                  </div>
+                  {metricKey !== "composite" && (
+                    <div className="mt-3 h-3.5 w-full overflow-hidden rounded-full bg-gray-200/70 shadow-inner dark:bg-gray-800/70">
+                      <div
+                        className={cn(
+                          "h-full rounded-full bg-gradient-to-r bg-[length:200%_100%] transition-all duration-700 ease-out animate-pulse",
+                          `from-white/20 via-white/0 ${progressGradient}`
+                        )}
+                        style={{
+                          width: `${Math.min(100, metricValue)}%`,
+                        }}
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
 

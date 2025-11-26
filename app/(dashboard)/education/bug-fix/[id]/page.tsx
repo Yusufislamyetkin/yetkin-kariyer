@@ -56,6 +56,13 @@ const LANGUAGE_LABEL: Record<LiveCodingLanguage, string> = {
   python: "Python",
   javascript: "JavaScript",
   java: "Java",
+  php: "PHP",
+  typescript: "TypeScript",
+  go: "Go",
+  rust: "Rust",
+  cpp: "C++",
+  kotlin: "Kotlin",
+  ruby: "Ruby",
 };
 
 const LANGUAGE_ALIASES: Record<string, LiveCodingLanguage> = {

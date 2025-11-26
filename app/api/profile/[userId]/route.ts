@@ -29,6 +29,7 @@ export async function GET(
 
     const [
       badgeCount,
+      completedLessons,
       recentBadges,
       quizAttempts,
       testAttempts,
@@ -37,6 +38,7 @@ export async function GET(
       hackatonAttempts,
     ] = await Promise.all([
       db.userBadge.count({ where: { userId } }),
+      db.lessonCompletion.count({ where: { userId } }),
       db.userBadge.findMany({
         where: { userId },
         include: {
@@ -182,6 +184,7 @@ export async function GET(
       user,
       stats: {
         badgeCount,
+        completedLessons,
         quizAttempts: quizAttempts.length,
         testAttempts: testAttempts.length,
         liveCodingAttempts: liveCodingAttempts.length,

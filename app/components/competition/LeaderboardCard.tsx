@@ -191,19 +191,19 @@ export function LeaderboardCard({
 
             <div className="flex flex-col items-start gap-2 md:items-end">
               <span className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                Kompozit Skor
+                Toplam Puan
               </span>
               <div className="flex items-baseline gap-2">
                 <span className="text-3xl font-bold text-gray-900 dark:text-gray-100">
-                  {entry.compositeScore.toFixed(1)}
+                  {entry.points?.toLocaleString() ?? 0}
                 </span>
                 <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                  / 100
+                  puan
                 </span>
               </div>
               <div className="flex items-center gap-2 rounded-full bg-white/70 px-2 py-1 text-xs font-semibold text-gray-500 shadow-sm backdrop-blur-sm dark:bg-gray-800/70 dark:text-gray-300">
                 <Award className="h-4 w-4 text-amber-500" />
-                Dengeli uzmanlık performansı
+                Rozet puanları
               </div>
             </div>
           </div>

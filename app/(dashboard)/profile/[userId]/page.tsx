@@ -34,7 +34,6 @@ import { BadgeOverlay } from "@/app/components/badges/BadgeOverlay";
 import { RankingDisplay } from "@/app/components/competition/RankingDisplay";
 import { Button } from "@/app/components/ui/Button";
 import { ProfileGrid } from "@/app/components/social/ProfileGrid";
-import { FollowButton } from "@/app/components/social/FollowButton";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -49,6 +48,7 @@ interface PublicProfileResponse {
   };
   stats: {
     badgeCount: number;
+    completedLessons: number;
     quizAttempts: number;
     testAttempts: number;
     liveCodingAttempts: number;
@@ -128,7 +128,10 @@ export default function PublicProfilePage() {
   const [displayedBadges, setDisplayedBadges] = useState<Badge[]>([]);
   const [comments, setComments] = useState<Comment[]>([]);
   const [dailyRank, setDailyRank] = useState<LeaderboardEntry | null>(null);
+  const [weeklyRank, setWeeklyRank] = useState<LeaderboardEntry | null>(null);
   const [monthlyRank, setMonthlyRank] = useState<LeaderboardEntry | null>(null);
+  const [connectionsCount, setConnectionsCount] = useState(0);
+  const [categoryRankings, setCategoryRankings] = useState<Record<string, number>>({});
   const [idCopied, setIdCopied] = useState(false);
   const [friendRequestState, setFriendRequestState] = useState<{
     status: "idle" | "loading" | "success" | "error";
@@ -162,6 +165,7 @@ export default function PublicProfilePage() {
           badgesRes,
           commentsRes,
           dailyRes,
+          weeklyRes,
           monthlyRes,
           postsRes,
           followersRes,
@@ -171,10 +175,12 @@ export default function PublicProfilePage() {
           fetch(`/api/profile/${userId}/badges`),
           fetch(`/api/profile/${userId}/comments`),
           fetch(`/api/competition/leaderboard?period=daily&limit=1&userId=${userId}`),
+          fetch(`/api/competition/leaderboard?period=weekly&limit=1&userId=${userId}`),
           fetch(`/api/competition/leaderboard?period=monthly&limit=1&userId=${userId}`),
           fetch(`/api/posts?type=profile&userId=${userId}&limit=100`).catch(() => null),
           fetch(`/api/users/${userId}/followers?limit=1`).catch(() => null),
           fetch(`/api/users/${userId}/following?limit=1`).catch(() => null),
+          fetch(`/api/friends`).catch(() => null),
         ]);
 
         if (!profileRes.ok) {
@@ -211,6 +217,17 @@ export default function PublicProfilePage() {
           }
         }
 
+        if (weeklyRes.ok) {
+          const weeklyData = await weeklyRes.json();
+          if (weeklyData.userRank) {
+            setWeeklyRank({
+              rank: weeklyData.userRank.rank,
+              compositeScore: weeklyData.userRank.compositeScore,
+              metrics: weeklyData.userRank.metrics,
+            });
+          }
+        }
+
         if (monthlyRes.ok) {
           const monthlyData = await monthlyRes.json();
           if (monthlyData.userRank) {
@@ -220,6 +237,42 @@ export default function PublicProfilePage() {
               metrics: monthlyData.userRank.metrics,
             });
           }
+        }
+
+        // Fetch connections count - use followers count as connections
+        // Note: This should ideally query accepted friendships, but using followers for now
+        setConnectionsCount(followersCount);
+
+        // Fetch category-specific rankings
+        try {
+          const categoryRankPromises = [
+            fetch(`/api/competition/leaderboard/test?period=monthly&userId=${userId}`).catch(() => null),
+            fetch(`/api/competition/leaderboard/live-coding?period=monthly&userId=${userId}`).catch(() => null),
+            fetch(`/api/competition/leaderboard/bug-fix?period=monthly&userId=${userId}`).catch(() => null),
+            fetch(`/api/competition/leaderboard/hackaton?period=monthly&userId=${userId}`).catch(() => null),
+          ];
+
+          const categoryRankResults = await Promise.all(categoryRankPromises);
+          const rankings: Record<string, number> = {};
+          
+          for (let i = 0; i < categoryRankResults.length; i++) {
+            const res = categoryRankResults[i];
+            if (res?.ok) {
+              try {
+                const data = await res.json();
+                if (data.userRank) {
+                  const category = i === 0 ? "test" : i === 1 ? "liveCoding" : i === 2 ? "bugFix" : "hackaton";
+                  rankings[category] = data.userRank.rank;
+                }
+              } catch (e) {
+                // Ignore errors
+              }
+            }
+          }
+          
+          setCategoryRankings(rankings);
+        } catch (e) {
+          // Ignore ranking errors
         }
 
         // Fetch posts
@@ -364,26 +417,6 @@ export default function PublicProfilePage() {
     }
   };
 
-  const handleFollow = async (targetUserId: string): Promise<{ following: boolean; followersCount: number }> => {
-    if (!currentUserId) {
-      return { following: isFollowing, followersCount };
-    }
-    try {
-      const response = await fetch(`/api/users/${targetUserId}/follow`, {
-        method: "POST",
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setIsFollowing(data.following);
-        setFollowersCount(data.followersCount);
-        return { following: data.following, followersCount: data.followersCount };
-      }
-      return { following: isFollowing, followersCount };
-    } catch (error) {
-      console.error("Error toggling follow:", error);
-      return { following: isFollowing, followersCount };
-    }
-  };
 
   const handlePostClick = (postId: string) => {
     router.push(`/social/posts/${postId}`);
@@ -434,6 +467,12 @@ export default function PublicProfilePage() {
       value: profile.stats.badgeCount,
       icon: Award,
       color: "from-yellow-400 to-orange-500",
+    },
+    {
+      label: "Tamamlanan Ders",
+      value: profile.stats.completedLessons || 0,
+      icon: Layers,
+      color: "from-green-400 to-emerald-500",
     },
     {
       label: "Toplam Test",
@@ -550,28 +589,28 @@ export default function PublicProfilePage() {
                   <span className="block text-lg font-semibold">{postsCount}</span>
                   <span className="text-sm opacity-80">gönderi</span>
                 </div>
-                <button
-                  onClick={() => router.push(`/social/profile/${params?.userId}/followers`)}
-                  className="text-center hover:opacity-70 transition-opacity"
-                >
-                  <span className="block text-lg font-semibold">{followersCount}</span>
-                  <span className="text-sm opacity-80">takipçi</span>
-                </button>
-                <button
-                  onClick={() => router.push(`/social/profile/${params?.userId}/following`)}
-                  className="text-center hover:opacity-70 transition-opacity"
-                >
-                  <span className="block text-lg font-semibold">{followingCount}</span>
-                  <span className="text-sm opacity-80">takip</span>
-                </button>
+                <div className="text-center">
+                  <span className="block text-lg font-semibold">{connectionsCount}</span>
+                  <span className="text-sm opacity-80">bağlantı</span>
+                </div>
+                {monthlyRank && (
+                  <div className="text-center">
+                    <span className="block text-lg font-semibold">#{monthlyRank.rank}</span>
+                    <span className="text-sm opacity-80">aylık sıra</span>
+                  </div>
+                )}
               </div>
               {!isOwnProfile && sessionStatus === "authenticated" && (
-                <FollowButton
-                  userId={profile.user.id}
-                  isFollowing={isFollowing}
-                  onFollow={handleFollow}
-                  className="bg-white/20 hover:bg-white/30 text-white border-white/30"
-                />
+                <Button
+                  variant="gradient"
+                  onClick={handleSendFriendRequest}
+                  isLoading={friendRequestState.status === "loading"}
+                  disabled={isFriendButtonDisabled}
+                  className="w-full md:w-auto px-5 py-2 text-sm md:text-base bg-white/20 hover:bg-white/30 text-white border-white/30"
+                >
+                  <UserPlus className="mr-2 h-4 w-4" />
+                  {friendButtonLabel}
+                </Button>
               )}
               {!isOwnProfile && sessionStatus !== "authenticated" && (
                 <Button
@@ -649,22 +688,22 @@ export default function PublicProfilePage() {
             </CardTitle>
           </CardHeader>
           <CardContent className="px-6 pt-8 pb-6 space-y-6">
-            {dailyRank ? (
+            {weeklyRank ? (
               <RankingDisplay
-                currentRank={dailyRank.rank}
-                period="daily"
-                compositeScore={dailyRank.compositeScore}
+                currentRank={weeklyRank.rank}
+                period="weekly"
+                points={weeklyRank.compositeScore}
               />
             ) : (
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                Günlük sıralama kaydı bulunamadı.
+                Haftalık sıralama kaydı bulunamadı.
               </p>
             )}
             {monthlyRank ? (
               <RankingDisplay
                 currentRank={monthlyRank.rank}
                 period="monthly"
-                compositeScore={monthlyRank.compositeScore}
+                points={monthlyRank.compositeScore}
               />
             ) : (
               <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -687,14 +726,21 @@ export default function PublicProfilePage() {
                 <div key={key} className="flex items-center justify-between gap-4">
                   <span className="text-sm font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wide">
                     {key === "quiz" && "Test"}
-                    {key === "test" && "Uzman Test"}
+                    {key === "test" && "Ders"}
                     {key === "liveCoding" && "Canlı Kodlama"}
                     {key === "bugFix" && "Bug Fix"}
                     {key === "hackaton" && "Hackaton"}
                   </span>
-                  <span className="text-base font-semibold text-gray-900 dark:text-gray-100">
-                    %{value}
-                  </span>
+                  <div className="flex flex-col items-end gap-1">
+                    <span className="text-base font-semibold text-gray-900 dark:text-gray-100">
+                      %{value}
+                    </span>
+                    {categoryRankings[key] && (
+                      <span className="text-xs text-gray-500 dark:text-gray-400">
+                        Sıra: {categoryRankings[key]}
+                      </span>
+                    )}
+                  </div>
                 </div>
               )
             )}
@@ -736,202 +782,19 @@ export default function PublicProfilePage() {
         </CardContent>
       </Card>
 
-      <Card variant="elevated" className="border border-gray-200 dark:border-gray-800">
-        <CardHeader className="border-b border-gray-200 dark:border-gray-800">
-          <CardTitle className="flex items-center gap-2 text-lg">
-            <Star className="h-5 w-5 text-amber-500" />
-            İşveren Yorumları
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="px-6 pt-8 pb-6 space-y-4">
-          {comments.length === 0 ? (
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-              Bu aday için henüz kamuya açık yorum bulunmuyor.
-            </p>
-          ) : (
-            comments.map((comment) => (
-              <div
-                key={comment.id}
-                className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white/70 dark:bg-gray-900/70 p-5 shadow-sm"
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 text-white flex items-center justify-center font-semibold">
-                      {(comment.employer.name || comment.employer.email)
-                        .charAt(0)
-                        .toUpperCase()}
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                        {comment.employer.name || comment.employer.email}
-                      </p>
-                      <div className="flex items-center gap-1">
-                        {[...Array(5)].map((_, index) => (
-                          <Star
-                            key={index}
-                            className={`h-4 w-4 ${
-                              index < comment.rating
-                                ? "text-yellow-500 fill-yellow-500"
-                                : "text-gray-300 dark:text-gray-600"
-                            }`}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  <span className="text-xs text-gray-500 dark:text-gray-400">
-                    {new Date(comment.createdAt).toLocaleDateString("tr-TR")}
-                  </span>
-                </div>
-                <p className="mt-3 text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                  {comment.comment}
-                </p>
-                {comment.badge && (
-                  <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-gray-200 dark:border-gray-700 bg-gray-100/80 dark:bg-gray-800/60 px-3 py-1 text-xs text-gray-600 dark:text-gray-300">
-                    <span>{comment.badge.icon}</span>
-                    <span>{comment.badge.name}</span>
-                  </div>
-                )}
-              </div>
-            ))
-          )}
-        </CardContent>
-      </Card>
 
       {/* Posts Section - Instagram style */}
       <Card variant="elevated" className="border border-gray-200 dark:border-gray-800">
         <CardHeader className="border-b border-gray-200 dark:border-gray-800">
-          <div className="flex items-center justify-center gap-8 border-b border-gray-200 dark:border-gray-800 -mx-6 -mt-6 mb-6">
-            <button
-              onClick={() => setActiveTab("posts")}
-              className={`flex items-center gap-2 px-6 py-4 border-b-2 transition-colors ${
-                activeTab === "posts"
-                  ? "border-[#262626] dark:border-[#fafafa] text-[#262626] dark:text-[#fafafa] font-semibold"
-                  : "border-transparent text-[#8e8e8e] hover:text-[#262626] dark:hover:text-[#fafafa]"
-              }`}
-            >
-              <Grid3x3 className="w-4 h-4" />
-              <span className="text-sm uppercase tracking-wider">Gönderiler</span>
-            </button>
-            <button
-              onClick={() => setActiveTab("stats")}
-              className={`flex items-center gap-2 px-6 py-4 border-b-2 transition-colors ${
-                activeTab === "stats"
-                  ? "border-[#262626] dark:border-[#fafafa] text-[#262626] dark:text-[#fafafa] font-semibold"
-                  : "border-transparent text-[#8e8e8e] hover:text-[#262626] dark:hover:text-[#fafafa]"
-              }`}
-            >
-              <BarChart3 className="w-4 h-4" />
-              <span className="text-sm uppercase tracking-wider">İstatistikler</span>
-            </button>
-          </div>
         </CardHeader>
         <CardContent className="px-6 pt-8 pb-6">
-          {activeTab === "posts" ? (
-            <div>
-              {posts.length === 0 ? (
-                <div className="text-center py-12">
-                  <Grid3x3 className="w-12 h-12 text-gray-300 dark:text-gray-700 mx-auto mb-4" />
-                  <p className="text-sm text-[#8e8e8e]">Henüz gönderi yok</p>
-                </div>
-              ) : (
-                <ProfileGrid posts={posts} onPostClick={handlePostClick} />
-              )}
+          {posts.length === 0 ? (
+            <div className="text-center py-12">
+              <Grid3x3 className="w-12 h-12 text-gray-300 dark:text-gray-700 mx-auto mb-4" />
+              <p className="text-sm text-[#8e8e8e]">Henüz gönderi yok</p>
             </div>
           ) : (
-            <div className="space-y-6">
-              {/* Existing stats cards */}
-              <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-6">
-                {infoTiles.map((tile) => {
-                  const Icon = tile.icon;
-                  return (
-                    <Card
-                      key={tile.label}
-                      variant="elevated"
-                      className="overflow-hidden border border-gray-200/80 dark:border-gray-800/80 bg-white/70 dark:bg-gray-900/70"
-                    >
-                      <CardContent className="px-5 pt-7 pb-5 flex items-center gap-4">
-                        <div
-                          className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${tile.color} flex items-center justify-center text-white shadow-[0_12px_20px_-12px_rgba(79,70,229,0.55)]`}
-                        >
-                          <Icon className="h-6 w-6" />
-                        </div>
-                        <div>
-                          <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                            {tile.value}
-                          </p>
-                          <p className="text-xs uppercase font-semibold tracking-wide text-gray-500 dark:text-gray-400">
-                            {tile.label}
-                          </p>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
-              </div>
-
-              <div className="grid lg:grid-cols-2 gap-6">
-                <Card variant="elevated" className="border border-gray-200 dark:border-gray-800">
-                  <CardHeader className="border-b border-gray-200 dark:border-gray-800">
-                    <CardTitle className="flex items-center gap-2 text-lg">
-                      <Trophy className="h-5 w-5 text-yellow-500" />
-                      Güncel Sıralama
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="px-6 pt-8 pb-6 space-y-6">
-                    {dailyRank ? (
-                      <RankingDisplay
-                        currentRank={dailyRank.rank}
-                        period="daily"
-                        compositeScore={dailyRank.compositeScore}
-                      />
-                    ) : (
-                      <p className="text-sm text-gray-500 dark:text-gray-400">
-                        Günlük sıralama kaydı bulunamadı.
-                      </p>
-                    )}
-                    {monthlyRank ? (
-                      <RankingDisplay
-                        currentRank={monthlyRank.rank}
-                        period="monthly"
-                        compositeScore={monthlyRank.compositeScore}
-                      />
-                    ) : (
-                      <p className="text-sm text-gray-500 dark:text-gray-400">
-                        Aylık sıralama kaydı bulunamadı.
-                      </p>
-                    )}
-                  </CardContent>
-                </Card>
-
-                <Card variant="elevated" className="border border-gray-200 dark:border-gray-800">
-                  <CardHeader className="border-b border-gray-200 dark:border-gray-800">
-                    <CardTitle className="flex items-center gap-2 text-lg">
-                      <TrendingUp className="h-5 w-5 text-emerald-500" />
-                      Ortalama Skorlar
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="px-6 pt-8 pb-6 space-y-4">
-                    {Object.entries(profile.stats.averageScores).map(
-                      ([key, value]) => (
-                        <div key={key} className="flex items-center justify-between gap-4">
-                          <span className="text-sm font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wide">
-                            {key === "quiz" && "Test"}
-                            {key === "test" && "Uzman Test"}
-                            {key === "liveCoding" && "Canlı Kodlama"}
-                            {key === "bugFix" && "Bug Fix"}
-                            {key === "hackaton" && "Hackaton"}
-                          </span>
-                          <span className="text-base font-semibold text-gray-900 dark:text-gray-100">
-                            %{value}
-                          </span>
-                        </div>
-                      )
-                    )}
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
+            <ProfileGrid posts={posts} onPostClick={handlePostClick} />
           )}
         </CardContent>
       </Card>
