@@ -29,6 +29,7 @@ import { StrikeDisplay } from "./_components/StrikeDisplay";
 
 interface DashboardStats {
   quizAttempts: number;
+  testAttempts?: number;
   interviewAttempts: number;
   cvs: number;
   applications: number;
@@ -255,8 +256,8 @@ export default function DashboardPage() {
   const statCards = [
     {
       title: "Test Denemeleri",
-      value: stats?.quizAttempts || 0,
-      subtitle: `Ortalama: ${stats?.averageQuizScore || 0}%`,
+      value: stats?.testAttempts || 0,
+      subtitle: `Quiz denemeleri: ${stats?.quizAttempts || 0}`,
       icon: BookOpen,
       color: "from-blue-500 to-cyan-500",
       bgColor: "bg-blue-50 dark:bg-blue-900/20",

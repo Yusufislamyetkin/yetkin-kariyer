@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { isGamificationEnabled } from "@/lib/featureFlags";
+import { calculateLevelFromPoints } from "@/lib/services/gamification/level";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -31,10 +32,17 @@ export async function GET() {
 			}),
 			db.userStreak.findUnique({ where: { userId } }),
 		]);
+		
+		// Calculate total points from badges
+		const totalPoints = badges.reduce((sum: number, userBadge: typeof badges[0]) => sum + (userBadge.badge.points || 0), 0);
+		
+		// Calculate level from total points
+		const calculatedLevel = calculateLevelFromPoints(totalPoints);
+		
 		return NextResponse.json({
-			points: balance?.points ?? 0,
+			points: totalPoints, // Use total badge points instead of balance.points
 			xp: balance?.lifetimeXp ?? 0,
-			level: balance?.level ?? 1,
+			level: calculatedLevel, // Calculate level from points
 			streak: {
 				current: streak?.currentStreak ?? 0,
 				longest: streak?.longestStreak ?? 0,

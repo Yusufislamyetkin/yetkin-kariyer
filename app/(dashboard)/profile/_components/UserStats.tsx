@@ -27,12 +27,18 @@ export function UserStats({
   streak,
   stats,
 }: UserStatsProps) {
-  // Calculate XP needed for next level (simplified formula: level * 1000)
-  const xpForCurrentLevel = (level - 1) * 1000;
-  const xpForNextLevel = level * 1000;
-  const xpNeeded = xpForNextLevel - xpForCurrentLevel;
-  const xpProgress = xp - xpForCurrentLevel;
-  const progressPercentage = Math.min((xpProgress / xpNeeded) * 100, 100);
+  // Calculate points needed for next level based on points-based leveling
+  // Formula: 25 * n * (n + 3) - Linear at start, gradually increases
+  const pointsForLevel = (lvl: number): number => {
+    if (lvl <= 1) return 0;
+    return Math.floor(25 * lvl * (lvl + 3));
+  };
+  
+  const pointsForCurrentLevel = pointsForLevel(level);
+  const pointsForNextLevel = pointsForLevel(level + 1);
+  const pointsNeeded = pointsForNextLevel - pointsForCurrentLevel;
+  const pointsProgress = points - pointsForCurrentLevel;
+  const progressPercentage = Math.min((pointsProgress / pointsNeeded) * 100, 100);
 
   const totalCompleted = 
     stats.completedLessons + 
@@ -48,7 +54,7 @@ export function UserStats({
         {/* Points */}
         <Card variant="glass" className="relative overflow-hidden tech-card-glow">
           <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-pink-500/10 to-red-500/10" />
-          <CardContent className="relative p-6">
+          <CardContent className="relative p-6 pt-8">
             <div className="flex items-center justify-between mb-4">
               <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500 via-pink-500 to-red-500 flex items-center justify-center shadow-lg">
                 <Star className="w-7 h-7 text-white" />
@@ -66,7 +72,7 @@ export function UserStats({
         {/* Level */}
         <Card variant="glass" className="relative overflow-hidden tech-card-glow">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10" />
-          <CardContent className="relative p-6">
+          <CardContent className="relative p-6 pt-8">
             <div className="flex items-center justify-between mb-4">
               <div className="relative">
                 <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 flex items-center justify-center shadow-lg">
@@ -84,7 +90,7 @@ export function UserStats({
               Seviye {level}
             </p>
             <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
-              {xpProgress}/{xpNeeded} XP
+              {pointsProgress}/{pointsNeeded} Puan
             </p>
           </CardContent>
         </Card>
@@ -92,7 +98,7 @@ export function UserStats({
         {/* Streak */}
         <Card variant="glass" className="relative overflow-hidden tech-card-glow">
           <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-red-500/10 to-pink-500/10" />
-          <CardContent className="relative p-6">
+          <CardContent className="relative p-6 pt-8">
             <div className="flex items-center justify-between mb-4">
               <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 flex items-center justify-center shadow-lg">
                 <Flame className="w-7 h-7 text-white" />
@@ -113,7 +119,7 @@ export function UserStats({
         {/* Total Completed */}
         <Card variant="glass" className="relative overflow-hidden tech-card-glow">
           <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 via-emerald-500/10 to-teal-500/10" />
-          <CardContent className="relative p-6">
+          <CardContent className="relative p-6 pt-8">
             <div className="flex items-center justify-between mb-4">
               <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-green-500 via-emerald-500 to-teal-500 flex items-center justify-center shadow-lg">
                 <BookOpen className="w-7 h-7 text-white" />
@@ -135,7 +141,7 @@ export function UserStats({
       {/* Level Progress Bar */}
       <Card variant="gradient" className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20" />
-        <CardContent className="relative p-6">
+        <CardContent className="relative p-6 pt-8">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center shadow-lg">
@@ -163,8 +169,8 @@ export function UserStats({
             </div>
           </div>
           <div className="flex items-center justify-between mt-2 text-xs text-gray-500 dark:text-gray-400">
-            <span>{xpProgress} XP</span>
-            <span>{xpNeeded} XP gerekli</span>
+            <span>{pointsProgress} Puan</span>
+            <span>{pointsNeeded} Puan gerekli</span>
           </div>
         </CardContent>
       </Card>

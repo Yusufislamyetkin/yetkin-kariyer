@@ -14,10 +14,14 @@ export async function GET() {
 
     const userId = session.user.id as string;
 
-    const [quizAttempts, interviewAttempts, cvs, applications, completedTopics] = await Promise.all([
+    const [quizAttempts, testAttempts, interviewAttempts, cvs, applications, completedTopics] = await Promise.all([
       db.quizAttempt.findMany({
         where: { userId },
         select: { score: true },
+      }),
+      db.testAttempt.findMany({
+        where: { userId },
+        select: { id: true },
       }),
       db.interviewAttempt.findMany({
         where: { userId },
@@ -53,6 +57,7 @@ export async function GET() {
     return NextResponse.json({
       stats: {
         quizAttempts: quizAttempts.length,
+        testAttempts: testAttempts.length,
         interviewAttempts: interviewAttempts.length,
         cvs: cvs.length,
         applications: applications.length,

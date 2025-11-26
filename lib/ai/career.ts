@@ -10,12 +10,24 @@ const careerPlanSchema = z.object({
       z.object({
         stage: z.string(),
         title: z.string(),
+        description: z.string().optional(),
         tasks: z.array(z.string()).default([]),
         milestones: z.array(z.string()).default([]),
+        importantPoints: z.array(z.string()).optional(),
+        developmentTopics: z.array(z.string()).optional(),
+        practicalProjects: z.array(z.string()).optional(),
+        priority: z.string().optional(),
+        estimatedDuration: z.string().optional(),
       })
     )
     .default([]),
   recommendedCourses: z.array(z.string()).default([]),
+  recommendedResources: z.array(z.object({
+    title: z.string(),
+    type: z.string().optional(),
+    description: z.string().optional(),
+    link: z.string().optional(),
+  })).optional(),
   skillsToDevelop: z.array(z.string()).default([]),
   timeline: z.string().default(""),
   summary: z.string().default(""),
@@ -38,6 +50,7 @@ const buildCareerPlanPrompt = ({
   avgQuizScore,
   avgInterviewScore,
   questionnaire,
+  availableResources,
 }: {
   cvData: any;
   quizScores: { course: string; score: number }[];
@@ -45,6 +58,7 @@ const buildCareerPlanPrompt = ({
   avgQuizScore: number;
   avgInterviewScore: number;
   questionnaire?: QuestionnaireData | null;
+  availableResources?: Array<{ title: string; category?: string; topic?: string; difficulty?: string }>;
 }) => {
   // Check for uncertainty indicators
   const hasUncertainty = questionnaire && (
@@ -117,8 +131,17 @@ ${uncertaintyNotes.length > 0 ? `\nÖNEMLİ NOTLAR:\n${uncertaintyNotes.map(note
     }
   }
 
+  const resourcesSection = availableResources && availableResources.length > 0
+    ? `
+Platformda Mevcut Kaynaklar:
+${availableResources.map((r, i) => `- ${r.title}${r.category ? ` (${r.category})` : ""}${r.topic ? ` - Konu: ${r.topic}` : ""}${r.difficulty ? ` - Zorluk: ${r.difficulty}` : ""}`).join("\n")}
+
+ÖNEMLİ: Platformdaki mevcut kaynakları kariyer planına entegre et. Kullanıcıya platform içindeki kursları, modülleri ve dersleri öner.
+`
+    : "";
+
   return `
-Kullanıcının CV bilgileri, test sonuçları ve mülakat performansına göre kişiselleştirilmiş bir kariyer planı oluştur.
+Sen AI Öğretmen Selin'sin. Kullanıcının CV bilgileri, test sonuçları ve mülakat performansına göre kişiselleştirilmiş, detaylı bir kariyer planı oluştur. Planı baştan sona sen sunacaksın, kullanıcıya rehberlik edeceksin.
 
 CV Bilgileri:
 - İsim: ${(cvData?.personalInfo as any)?.name || "Bilinmiyor"}
@@ -136,30 +159,58 @@ Mülakat Performansı:
 - Mülakat Detayları: ${JSON.stringify(interviewScores)}
 ${interviewScores.length === 0 ? "- Kullanıcı henüz mülakat yapmamış" : ""}
 ${questionnaireSection}
+${resourcesSection}
 ${guidanceInstructions}
-Aşağıdaki JSON formatında kariyer planı oluştur:
+
+ROADMAP OLUŞTURMA TALİMATLARI:
+1. Her aşama için detaylı bir açıklama (description) ekle
+2. Her aşamada en az 4-6 görev (tasks) belirle - somut, uygulanabilir görevler
+3. Her aşamada 2-3 kilometre taşı (milestones) tanımla - ölçülebilir başarılar
+4. Gelişim konuları (developmentTopics) ekle - öğrenilmesi gereken temel konular
+5. Önemli noktalar (importantPoints) vurgula - dikkat edilmesi gereken kritik bilgiler
+6. Pratik projeler (practicalProjects) öner - gerçek dünya uygulamaları
+7. Öncelik (priority) belirle: "Yüksek", "Orta", "Düşük"
+8. Tahmini süre (estimatedDuration) ekle: "2-3 hafta", "1 ay" gibi
+
+Aşağıdaki JSON formatında DETAYLI kariyer planı oluştur:
 {
   "goals": ["hedef 1", "hedef 2", "hedef 3"],
   "roadmap": [
     {
       "stage": "1-3 ay",
       "title": "Aşama başlığı",
-      "tasks": ["görev 1", "görev 2"],
-      "milestones": ["kilometre taşı 1"]
+      "description": "Bu aşamada ne yapılacak, neden önemli - detaylı açıklama",
+      "tasks": ["görev 1", "görev 2", "görev 3", "görev 4"],
+      "milestones": ["kilometre taşı 1", "kilometre taşı 2"],
+      "importantPoints": ["önemli nokta 1", "önemli nokta 2"],
+      "developmentTopics": ["gelişim konusu 1", "gelişim konusu 2"],
+      "practicalProjects": ["pratik proje 1", "pratik proje 2"],
+      "priority": "Yüksek",
+      "estimatedDuration": "2-3 hafta"
     }
   ],
   "recommendedCourses": ["kurs 1", "kurs 2"],
+  "recommendedResources": [
+    {
+      "title": "Kurs/Modül adı",
+      "type": "Kurs",
+      "description": "Bu kaynak neden öneriliyor",
+      "link": "platform içi link (varsa)"
+    }
+  ],
   "skillsToDevelop": ["beceri 1", "beceri 2"],
   "timeline": "${questionnaire?.timeline && questionnaire.timeline !== "Henüz belirlemedim" ? questionnaire.timeline : "6-12 ay"}",
-  "summary": "Kariyer planı özeti - Kullanıcının durumunu, hedeflerini ve yol haritasını açıkça özetle"
+  "summary": "Kariyer planı özeti - AI Öğretmen Selin olarak kullanıcıya hitap ederek, durumunu değerlendirerek, hedeflerini ve yol haritasını açıkça özetle. Planı sen sunuyorsun, kullanıcıya rehberlik ediyorsun."
 }
 
-ÖZET (summary) alanı özellikle önemli:
+ÖZET (summary) alanı özellikle önemli - AI Öğretmen Selin olarak:
+- Kullanıcıya doğrudan hitap et ("Merhaba! Senin için...", "Sana özel...")
 - Kullanıcının mevcut durumunu değerlendir
 - Belirsizlik varsa, farklı seçenekleri keşfetmesine yardımcı ol
 - Başlangıç seviyesindeyse, cesaretlendirici ve yol gösterici ol
 - Somut adımlar ve öneriler sun
 - Planın esnekliğini ve uyarlanabilirliğini vurgula
+- Platformdaki kaynaklardan bahset
 
 Sadece JSON döndür, başka açıklama yapma.
 `;
@@ -191,6 +242,27 @@ export async function generateCareerPlan(userId: string, questionnaire?: Questio
       orderBy: { completedAt: "desc" },
       take: 5,
     });
+
+    // Get available platform resources (courses)
+    const availableCourses = await db.course.findMany({
+      select: {
+        title: true,
+        category: true,
+        field: true,
+        topic: true,
+        difficulty: true,
+        description: true,
+      },
+      take: 50, // Limit to avoid too much data
+    });
+
+    const availableResources = availableCourses.map((course: typeof availableCourses[0]) => ({
+      title: course.title,
+      category: course.category || course.field || undefined,
+      topic: course.topic || undefined,
+      difficulty: course.difficulty || undefined,
+      description: course.description || undefined,
+    }));
 
     // Build context
     const cvData = (cv?.data as any) || {};
@@ -227,7 +299,7 @@ export async function generateCareerPlan(userId: string, questionnaire?: Questio
         {
           role: "system",
           content:
-            "Sen deneyimli ve empatik bir kariyer danışmanısın. Özellikle yeni başlayanlar ve henüz karar vermemiş kişiler için yol gösterici, cesaretlendirici ve pratik kariyer planları oluşturuyorsun. Belirsizlik durumlarında genel ama değerli planlar hazırlıyorsun. Her seviyeden kullanıcıya uygun, adım adım ilerleyen, esnek ve uyarlanabilir planlar sunuyorsun.",
+            "Sen AI Öğretmen Selin'sin. Deneyimli, empatik ve öğrencilerine ilham veren bir öğretmensin. Özellikle yeni başlayanlar ve henüz karar vermemiş kişiler için yol gösterici, cesaretlendirici ve pratik kariyer planları oluşturuyorsun. Belirsizlik durumlarında genel ama değerli planlar hazırlıyorsun. Her seviyeden kullanıcıya uygun, adım adım ilerleyen, esnek ve uyarlanabilir planlar sunuyorsun. Planları baştan sona sen sunarsın, kullanıcıya rehberlik edersin. Platformdaki mevcut kaynakları (kurslar, modüller, dersler) plana entegre edersin.",
         },
         {
           role: "user",
@@ -238,6 +310,7 @@ export async function generateCareerPlan(userId: string, questionnaire?: Questio
             avgQuizScore,
             avgInterviewScore,
             questionnaire,
+            availableResources,
           }),
         },
       ],
@@ -251,9 +324,16 @@ export async function generateCareerPlan(userId: string, questionnaire?: Questio
       goals: plan.goals ?? [],
       roadmap: plan.roadmap ?? [],
       recommendedCourses: plan.recommendedCourses ?? [],
+      recommendedResources: plan.recommendedResources ?? [],
       skillsToDevelop: plan.skillsToDevelop ?? [],
       timeline: plan.timeline ?? "",
       summary: plan.summary ?? "",
+    };
+
+    // Store recommendedResources in recommendedCourses Json field as a combined structure
+    const coursesData = {
+      courses: normalizedPlan.recommendedCourses,
+      resources: normalizedPlan.recommendedResources || [],
     };
 
     // Save to database
@@ -267,7 +347,7 @@ export async function generateCareerPlan(userId: string, questionnaire?: Questio
         data: {
           goals: normalizedPlan.goals as any,
           roadmap: normalizedPlan.roadmap as any,
-          recommendedCourses: normalizedPlan.recommendedCourses as any,
+          recommendedCourses: coursesData as any,
           skillsToDevelop: normalizedPlan.skillsToDevelop as any,
           timeline: normalizedPlan.timeline,
           summary: normalizedPlan.summary,
@@ -280,7 +360,7 @@ export async function generateCareerPlan(userId: string, questionnaire?: Questio
           userId,
           goals: normalizedPlan.goals as any,
           roadmap: normalizedPlan.roadmap as any,
-          recommendedCourses: normalizedPlan.recommendedCourses as any,
+          recommendedCourses: coursesData as any,
           skillsToDevelop: normalizedPlan.skillsToDevelop as any,
           timeline: normalizedPlan.timeline,
           summary: normalizedPlan.summary,
@@ -318,6 +398,7 @@ export async function generateCareerPlan(userId: string, questionnaire?: Questio
       goals: ["Kariyer gelişiminize devam edin", "Planı daha sonra yeniden oluşturmayı deneyin"],
       roadmap: [],
       recommendedCourses: [],
+      recommendedResources: [],
       skillsToDevelop: [],
       timeline: questionnaire?.timeline && questionnaire.timeline !== "Henüz belirlemedim" 
         ? questionnaire.timeline 
