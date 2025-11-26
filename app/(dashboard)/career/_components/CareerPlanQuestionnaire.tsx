@@ -3,16 +3,16 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
-import { Target, ArrowRight, ArrowLeft } from "lucide-react";
+import { Target, ArrowRight, ArrowLeft, HelpCircle } from "lucide-react";
 
 interface QuestionnaireData {
   specialization: string;
   careerGoal: string;
   timeline: string;
   skillLevel: string;
-  technologies: string[];
+  technologies?: string[];
   workPreference: string;
-  industryInterests: string[];
+  industryInterests?: string[];
 }
 
 interface CareerPlanQuestionnaireProps {
@@ -31,6 +31,7 @@ const SPECIALIZATIONS = [
   "Cybersecurity",
   "Game Development",
   "Diğer",
+  "Henüz karar vermedim",
 ];
 
 const CAREER_GOALS = [
@@ -44,6 +45,7 @@ const CAREER_GOALS = [
   "Freelancer",
   "Startup Founder",
   "Diğer",
+  "Henüz karar vermedim",
 ];
 
 const TIMELINES = [
@@ -52,6 +54,7 @@ const TIMELINES = [
   "2 yıl",
   "3 yıl",
   "5+ yıl",
+  "Henüz belirlemedim",
 ];
 
 const SKILL_LEVELS = [
@@ -146,11 +149,13 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
       case 4:
         return formData.skillLevel !== "";
       case 5:
-        return formData.technologies.length > 0;
+        // Technologies are now optional - can proceed without selection
+        return true;
       case 6:
         return formData.workPreference !== "";
       case 7:
-        return formData.industryInterests.length > 0;
+        // Industry interests are now optional - can proceed without selection
+        return true;
       default:
         return false;
     }
@@ -159,18 +164,18 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
   const toggleTechnology = (tech: string) => {
     setFormData((prev) => ({
       ...prev,
-      technologies: prev.technologies.includes(tech)
-        ? prev.technologies.filter((t) => t !== tech)
-        : [...prev.technologies, tech],
+      technologies: (prev.technologies || []).includes(tech)
+        ? (prev.technologies || []).filter((t) => t !== tech)
+        : [...(prev.technologies || []), tech],
     }));
   };
 
   const toggleIndustryInterest = (interest: string) => {
     setFormData((prev) => ({
       ...prev,
-      industryInterests: prev.industryInterests.includes(interest)
-        ? prev.industryInterests.filter((i) => i !== interest)
-        : [...prev.industryInterests, interest],
+      industryInterests: (prev.industryInterests || []).includes(interest)
+        ? (prev.industryInterests || []).filter((i) => i !== interest)
+        : [...(prev.industryInterests || []), interest],
     }));
   };
 
@@ -179,9 +184,17 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
       case 1:
         return (
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
-              Hangi alanda uzmanlaşmak istiyorsunuz?
-            </h3>
+            <div className="space-y-2">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                Hangi alanda uzmanlaşmak istiyorsunuz?
+              </h3>
+              <div className="flex items-start gap-2 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                <HelpCircle className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
+                <p className="text-sm text-blue-800 dark:text-blue-200">
+                  Eğer henüz karar vermediyseniz, &quot;Henüz karar vermedim&quot; seçeneğini işaretleyin. Size genel bir kariyer planı hazırlayacağız ve farklı alanları keşfetmenize yardımcı olacağız.
+                </p>
+              </div>
+            </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {SPECIALIZATIONS.map((spec) => (
                 <button
@@ -191,6 +204,8 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
                   className={`p-3 rounded-lg border-2 transition-all ${
                     formData.specialization === spec
                       ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
+                      : spec === "Henüz karar vermedim"
+                      ? "border-orange-300 dark:border-orange-700 hover:border-orange-400 dark:hover:border-orange-600"
                       : "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
                   }`}
                 >
@@ -204,9 +219,17 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
       case 2:
         return (
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
-              Kariyer hedefiniz nedir?
-            </h3>
+            <div className="space-y-2">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                Kariyer hedefiniz nedir?
+              </h3>
+              <div className="flex items-start gap-2 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                <HelpCircle className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
+                <p className="text-sm text-blue-800 dark:text-blue-200">
+                  Kariyer hedefinizi belirlemekte zorlanıyorsanız endişelenmeyin. &quot;Henüz karar vermedim&quot; seçeneğini işaretleyin, size farklı kariyer yollarını gösterecek bir plan hazırlayacağız.
+                </p>
+              </div>
+            </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {CAREER_GOALS.map((goal) => (
                 <button
@@ -216,6 +239,8 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
                   className={`p-3 rounded-lg border-2 transition-all ${
                     formData.careerGoal === goal
                       ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
+                      : goal === "Henüz karar vermedim"
+                      ? "border-orange-300 dark:border-orange-700 hover:border-orange-400 dark:hover:border-orange-600"
                       : "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
                   }`}
                 >
@@ -229,9 +254,17 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
       case 3:
         return (
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
-              Hedef zaman çizelgeniz nedir?
-            </h3>
+            <div className="space-y-2">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                Hedef zaman çizelgeniz nedir?
+              </h3>
+              <div className="flex items-start gap-2 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                <HelpCircle className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
+                <p className="text-sm text-blue-800 dark:text-blue-200">
+                  Belirli bir zaman çizelgeniz yoksa &quot;Henüz belirlemedim&quot; seçeneğini işaretleyin. Size esnek bir plan hazırlayacağız.
+                </p>
+              </div>
+            </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {TIMELINES.map((timeline) => (
                 <button
@@ -241,6 +274,8 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
                   className={`p-3 rounded-lg border-2 transition-all ${
                     formData.timeline === timeline
                       ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
+                      : timeline === "Henüz belirlemedim"
+                      ? "border-orange-300 dark:border-orange-700 hover:border-orange-400 dark:hover:border-orange-600"
                       : "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
                   }`}
                 >
@@ -254,9 +289,17 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
       case 4:
         return (
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
-              Mevcut seviyeniz nedir?
-            </h3>
+            <div className="space-y-2">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                Mevcut seviyeniz nedir?
+              </h3>
+              <div className="flex items-start gap-2 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                <HelpCircle className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
+                <p className="text-sm text-blue-800 dark:text-blue-200">
+                  Başlangıç: Programlamaya yeni başlıyorsunuz. Orta: Temel konularda bilginiz var. İleri: Deneyimli ve karmaşık projeler yapabiliyorsunuz.
+                </p>
+              </div>
+            </div>
             <div className="grid grid-cols-3 gap-3">
               {SKILL_LEVELS.map((level) => (
                 <button
@@ -279,9 +322,17 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
       case 5:
         return (
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
-              Hangi teknolojilerle çalışmak istiyorsunuz? (Birden fazla seçebilirsiniz)
-            </h3>
+            <div className="space-y-2">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                Hangi teknolojilerle çalışmak istiyorsunuz? (Opsiyonel)
+              </h3>
+              <div className="flex items-start gap-2 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                <HelpCircle className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
+                <p className="text-sm text-blue-800 dark:text-blue-200">
+                  Henüz hangi teknolojileri öğrenmek istediğinizden emin değilseniz, bu adımı atlayabilirsiniz. Size popüler ve öğrenmeye değer teknolojileri önereceğiz.
+                </p>
+              </div>
+            </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 max-h-96 overflow-y-auto">
               {TECHNOLOGIES.map((tech) => (
                 <button
@@ -289,7 +340,7 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
                   type="button"
                   onClick={() => toggleTechnology(tech)}
                   className={`p-3 rounded-lg border-2 transition-all text-sm ${
-                    formData.technologies.includes(tech)
+                    (formData.technologies || []).includes(tech)
                       ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
                       : "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
                   }`}
@@ -298,9 +349,13 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
                 </button>
               ))}
             </div>
-            {formData.technologies.length > 0 && (
+            {(formData.technologies || []).length > 0 ? (
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Seçilen: {formData.technologies.join(", ")}
+                Seçilen: {(formData.technologies || []).join(", ")}
+              </p>
+            ) : (
+              <p className="text-sm text-gray-500 dark:text-gray-400 italic">
+                Hiçbir teknoloji seçmediniz. Devam edebilirsiniz, size öneriler sunacağız.
               </p>
             )}
           </div>
@@ -309,9 +364,17 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
       case 6:
         return (
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
-              Çalışma tercihiniz nedir?
-            </h3>
+            <div className="space-y-2">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                Çalışma tercihiniz nedir?
+              </h3>
+              <div className="flex items-start gap-2 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                <HelpCircle className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
+                <p className="text-sm text-blue-800 dark:text-blue-200">
+                  Remote: Uzaktan çalışma. On-site: Ofiste çalışma. Hybrid: Karma model. Tercihiniz yoksa &quot;Fark etmez&quot; seçeneğini işaretleyin.
+                </p>
+              </div>
+            </div>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {WORK_PREFERENCES.map((pref) => (
                 <button
@@ -334,9 +397,17 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
       case 7:
         return (
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
-              Hangi sektörlerle ilgileniyorsunuz? (Birden fazla seçebilirsiniz)
-            </h3>
+            <div className="space-y-2">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                Hangi sektörlerle ilgileniyorsunuz? (Opsiyonel)
+              </h3>
+              <div className="flex items-start gap-2 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                <HelpCircle className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
+                <p className="text-sm text-blue-800 dark:text-blue-200">
+                  Belirli bir sektör tercihiniz yoksa bu adımı atlayabilirsiniz. Size farklı sektörlerdeki fırsatları gösterecek bir plan hazırlayacağız.
+                </p>
+              </div>
+            </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 max-h-96 overflow-y-auto">
               {INDUSTRY_INTERESTS.map((interest) => (
                 <button
@@ -344,7 +415,7 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
                   type="button"
                   onClick={() => toggleIndustryInterest(interest)}
                   className={`p-3 rounded-lg border-2 transition-all text-sm ${
-                    formData.industryInterests.includes(interest)
+                    (formData.industryInterests || []).includes(interest)
                       ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
                       : "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
                   }`}
@@ -353,9 +424,13 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
                 </button>
               ))}
             </div>
-            {formData.industryInterests.length > 0 && (
+            {(formData.industryInterests || []).length > 0 ? (
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Seçilen: {formData.industryInterests.join(", ")}
+                Seçilen: {(formData.industryInterests || []).join(", ")}
+              </p>
+            ) : (
+              <p className="text-sm text-gray-500 dark:text-gray-400 italic">
+                Hiçbir sektör seçmediniz. Devam edebilirsiniz, size farklı sektörleri tanıtacağız.
               </p>
             )}
           </div>

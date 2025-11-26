@@ -46,8 +46,41 @@ const buildCareerPlanPrompt = ({
   avgInterviewScore: number;
   questionnaire?: QuestionnaireData | null;
 }) => {
+  // Check for uncertainty indicators
+  const hasUncertainty = questionnaire && (
+    questionnaire.specialization === "Henüz karar vermedim" ||
+    questionnaire.careerGoal === "Henüz karar vermedim" ||
+    questionnaire.timeline === "Henüz belirlemedim" ||
+    !questionnaire.technologies || questionnaire.technologies.length === 0 ||
+    !questionnaire.industryInterests || questionnaire.industryInterests.length === 0
+  );
+
+  const isBeginner = questionnaire?.skillLevel === "Başlangıç" || 
+    (avgQuizScore < 50 && quizScores.length === 0) ||
+    (cvData.skills && (cvData.skills as string[]).length === 0);
+
   let questionnaireSection = "";
+  let guidanceInstructions = "";
+
   if (questionnaire) {
+    const uncertaintyNotes: string[] = [];
+    
+    if (questionnaire.specialization === "Henüz karar vermedim") {
+      uncertaintyNotes.push("Kullanıcı hangi alanda uzmanlaşmak istediğine henüz karar vermemiş.");
+    }
+    if (questionnaire.careerGoal === "Henüz karar vermedim") {
+      uncertaintyNotes.push("Kullanıcı kariyer hedefini henüz belirlememiş.");
+    }
+    if (questionnaire.timeline === "Henüz belirlemedim") {
+      uncertaintyNotes.push("Kullanıcı zaman çizelgesini henüz belirlememiş.");
+    }
+    if (!questionnaire.technologies || questionnaire.technologies.length === 0) {
+      uncertaintyNotes.push("Kullanıcı teknoloji tercihi belirtmemiş.");
+    }
+    if (!questionnaire.industryInterests || questionnaire.industryInterests.length === 0) {
+      uncertaintyNotes.push("Kullanıcı sektör tercihi belirtmemiş.");
+    }
+
     questionnaireSection = `
 Kullanıcı Tercihleri (Anket Sonuçları):
 - Uzmanlaşmak İstediği Alan: ${questionnaire.specialization || "Belirtilmemiş"}
@@ -57,9 +90,31 @@ Kullanıcı Tercihleri (Anket Sonuçları):
 - Tercih Edilen Teknolojiler: ${questionnaire.technologies?.join(", ") || "Belirtilmemiş"}
 - Çalışma Tercihi: ${questionnaire.workPreference || "Belirtilmemiş"}
 - İlgi Duyduğu Sektörler: ${questionnaire.industryInterests?.join(", ") || "Belirtilmemiş"}
-
-Bu tercihleri dikkate alarak kariyer planını oluştur. Özellikle uzmanlaşmak istediği alan, kariyer hedefi ve tercih ettiği teknolojilere odaklan.
+${uncertaintyNotes.length > 0 ? `\nÖNEMLİ NOTLAR:\n${uncertaintyNotes.map(note => `- ${note}`).join("\n")}` : ""}
 `;
+
+    if (hasUncertainty) {
+      guidanceInstructions = `
+ÖNEMLİ: Kullanıcı henüz bazı kararlarını vermemiş. Bu durumda:
+1. Genel ve kapsayıcı bir kariyer planı oluştur
+2. Farklı alanları, teknolojileri ve kariyer yollarını keşfetmesine yardımcı ol
+3. Her aşamada seçenekleri açıkla ve öneriler sun
+4. Planı esnek ve uyarlanabilir yap
+5. Kullanıcıya farklı yolları denemesi için rehberlik et
+`;
+    }
+
+    if (isBeginner) {
+      guidanceInstructions += `
+ÖNEMLİ: Kullanıcı başlangıç seviyesinde. Bu durumda:
+1. Temel kavramları ve adım adım öğrenme yolunu vurgula
+2. Her aşamayı detaylı açıkla
+3. Pratik projeler ve örnekler öner
+4. Motivasyonu artıracak küçük başarılar planla
+5. Öğrenme kaynaklarını ve toplulukları öner
+6. Hata yapmanın normal olduğunu ve öğrenme sürecinin bir parçası olduğunu belirt
+`;
+    }
   }
 
   return `
@@ -69,16 +124,19 @@ CV Bilgileri:
 - İsim: ${(cvData?.personalInfo as any)?.name || "Bilinmiyor"}
 - Deneyim: ${JSON.stringify(cvData.experience ?? [])}
 - Eğitim: ${JSON.stringify(cvData.education ?? [])}
-- Beceriler: ${(cvData.skills ?? []).join(", ")}
+- Beceriler: ${(cvData.skills ?? []).join(", ") || "Henüz belirtilmemiş"}
 
 Test Performansı:
 - Ortalama Test Skoru: ${Math.round(avgQuizScore)}%
 - Test Detayları: ${JSON.stringify(quizScores)}
+${quizScores.length === 0 ? "- Kullanıcı henüz test çözmemiş" : ""}
 
 Mülakat Performansı:
 - Ortalama Mülakat Skoru: ${Math.round(avgInterviewScore)}%
 - Mülakat Detayları: ${JSON.stringify(interviewScores)}
+${interviewScores.length === 0 ? "- Kullanıcı henüz mülakat yapmamış" : ""}
 ${questionnaireSection}
+${guidanceInstructions}
 Aşağıdaki JSON formatında kariyer planı oluştur:
 {
   "goals": ["hedef 1", "hedef 2", "hedef 3"],
@@ -92,9 +150,16 @@ Aşağıdaki JSON formatında kariyer planı oluştur:
   ],
   "recommendedCourses": ["kurs 1", "kurs 2"],
   "skillsToDevelop": ["beceri 1", "beceri 2"],
-  "timeline": "6-12 ay",
-  "summary": "Kariyer planı özeti"
+  "timeline": "${questionnaire?.timeline && questionnaire.timeline !== "Henüz belirlemedim" ? questionnaire.timeline : "6-12 ay"}",
+  "summary": "Kariyer planı özeti - Kullanıcının durumunu, hedeflerini ve yol haritasını açıkça özetle"
 }
+
+ÖZET (summary) alanı özellikle önemli:
+- Kullanıcının mevcut durumunu değerlendir
+- Belirsizlik varsa, farklı seçenekleri keşfetmesine yardımcı ol
+- Başlangıç seviyesindeyse, cesaretlendirici ve yol gösterici ol
+- Somut adımlar ve öneriler sun
+- Planın esnekliğini ve uyarlanabilirliğini vurgula
 
 Sadece JSON döndür, başka açıklama yapma.
 `;
@@ -158,7 +223,7 @@ export async function generateCareerPlan(userId: string, questionnaire?: Questio
         {
           role: "system",
           content:
-            "Sen bir kariyer danışmanısın. Kullanıcılara kişiselleştirilmiş kariyer planları oluşturuyorsun.",
+            "Sen deneyimli ve empatik bir kariyer danışmanısın. Özellikle yeni başlayanlar ve henüz karar vermemiş kişiler için yol gösterici, cesaretlendirici ve pratik kariyer planları oluşturuyorsun. Belirsizlik durumlarında genel ama değerli planlar hazırlıyorsun. Her seviyeden kullanıcıya uygun, adım adım ilerleyen, esnek ve uyarlanabilir planlar sunuyorsun.",
         },
         {
           role: "user",
@@ -222,14 +287,38 @@ export async function generateCareerPlan(userId: string, questionnaire?: Questio
 
     return normalizedPlan;
   } catch (error) {
-    console.error("Error generating career plan:", error);
+    const errorMessage = error instanceof Error ? error.message : "Bilinmeyen hata";
+    const errorDetails = error instanceof Error ? error.stack : String(error);
+    
+    console.error("Error generating career plan:", {
+      message: errorMessage,
+      details: errorDetails,
+      userId,
+      hasQuestionnaire: !!questionnaire,
+    });
+
+    // Provide more helpful error messages based on error type
+    let userFriendlySummary = "Kariyer planı oluşturulurken bir sorun oluştu.";
+    
+    if (errorMessage.includes("AI servisi devre dışı") || errorMessage.includes("AI servisi")) {
+      userFriendlySummary = "AI servisi şu anda kullanılamıyor. Lütfen daha sonra tekrar deneyin veya sistem yöneticisiyle iletişime geçin.";
+    } else if (errorMessage.includes("zaman aşımı") || errorMessage.includes("timeout")) {
+      userFriendlySummary = "İstek zaman aşımına uğradı. Lütfen tekrar deneyin.";
+    } else if (errorMessage.includes("doğrulanamadı") || errorMessage.includes("validation")) {
+      userFriendlySummary = "AI yanıtı beklenen formatta değil. Lütfen tekrar deneyin.";
+    } else if (errorMessage.includes("API")) {
+      userFriendlySummary = "AI servisi ile iletişim kurulamadı. Lütfen daha sonra tekrar deneyin.";
+    }
+
     return {
-      goals: ["Kariyer gelişiminize devam edin"],
+      goals: ["Kariyer gelişiminize devam edin", "Planı daha sonra yeniden oluşturmayı deneyin"],
       roadmap: [],
       recommendedCourses: [],
       skillsToDevelop: [],
-      timeline: "6-12 ay",
-      summary: "Kariyer planı oluşturulamadı.",
+      timeline: questionnaire?.timeline && questionnaire.timeline !== "Henüz belirlemedim" 
+        ? questionnaire.timeline 
+        : "6-12 ay",
+      summary: userFriendlySummary,
     };
   }
 }

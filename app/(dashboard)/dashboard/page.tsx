@@ -151,21 +151,21 @@ export default function DashboardPage() {
       }
 
       const dailyRankData = await dailyRankResponse.json();
-      if (dailyRankData.userRank) {
+      if (dailyRankData.userRank && dailyRankData.userRank.rank && dailyRankData.userRank.rank > 0) {
         setDailyRank({
-          rank: dailyRankData.userRank.rank || 0,
-          quizCount: dailyRankData.userRank.quizCount || 0,
-          averageScore: dailyRankData.userRank.averageScore || 0,
+          rank: dailyRankData.userRank.rank,
+          quizCount: dailyRankData.userRank.attempts?.quiz || 0,
+          averageScore: dailyRankData.userRank.metrics?.test || 0,
           points: dailyRankData.userRank.points || 0,
         });
       }
 
       const monthlyRankData = await monthlyRankResponse.json();
-      if (monthlyRankData.userRank) {
+      if (monthlyRankData.userRank && monthlyRankData.userRank.rank && monthlyRankData.userRank.rank > 0) {
         setMonthlyRank({
-          rank: monthlyRankData.userRank.rank || 0,
-          quizCount: monthlyRankData.userRank.quizCount || 0,
-          averageScore: monthlyRankData.userRank.averageScore || 0,
+          rank: monthlyRankData.userRank.rank,
+          quizCount: monthlyRankData.userRank.attempts?.quiz || 0,
+          averageScore: monthlyRankData.userRank.metrics?.test || 0,
           points: monthlyRankData.userRank.points || 0,
         });
       }
@@ -400,19 +400,17 @@ export default function DashboardPage() {
                   >
                     <Icon className="h-4 w-4 text-white flex-shrink-0" />
                   </div>
-                  <div className={`px-2.5 py-1 rounded-full ${stat.bgColor} backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 flex-shrink-0 min-w-0 max-w-[60%]`}>
-                    <span className={`text-xs font-semibold ${stat.textColor} truncate block whitespace-nowrap`}>
-                      {stat.subtitle}
-                    </span>
-                  </div>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 font-medium uppercase tracking-wide flex-1 min-w-0">
+                    {stat.title}
+                  </p>
                 </div>
                 <div className="min-w-0">
                   <p className="text-3xl md:text-4xl font-display font-bold text-gray-900 dark:text-gray-100 mb-1">
                     {stat.value}
                   </p>
-                  <p className="text-xs text-gray-600 dark:text-gray-400 font-medium uppercase tracking-wide">
-                    {stat.title}
-                  </p>
+                  <span className={`text-xs font-semibold ${stat.textColor} truncate block whitespace-nowrap`}>
+                    {stat.subtitle}
+                  </span>
                 </div>
               </CardContent>
             </Card>
@@ -685,20 +683,13 @@ export default function DashboardPage() {
                     <div className="flex items-center gap-2 mb-2">
                       <span className="text-2xl">{motivationMessage.emoji}</span>
                       <span className="text-sm font-semibold text-purple-700 dark:text-purple-300">
-                        Yetkin Mentor
+                        AI Öğretmen Selin
                       </span>
                     </div>
                     <p className="text-base text-gray-800 dark:text-gray-200 leading-relaxed">
                       {motivationMessage.message}
                     </p>
                   </div>
-                </div>
-                <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 pt-2 border-t border-gray-200 dark:border-gray-700">
-                  <span>Kişiselleştirilmiş motivasyon mesajı</span>
-                  <span className="flex items-center gap-1">
-                    <Sparkles className="h-3 w-3" />
-                    AI ile oluşturuldu
-                  </span>
                 </div>
               </div>
             ) : (

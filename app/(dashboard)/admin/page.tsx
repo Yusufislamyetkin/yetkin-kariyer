@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/app/components/ui/Button";
-import { Loader2, CheckCircle2, AlertCircle, BookOpen, Trash2, Code2, Database, Globe, Zap, Shield, Container, Lock, FileText, Users, Trophy, Briefcase, MessageCircle, Building2, Bug, Upload } from "lucide-react";
+import { Loader2, CheckCircle2, AlertCircle, BookOpen, Trash2, Code2, Database, Globe, Zap, Shield, Container, Lock, FileText, Users, Trophy, Briefcase, MessageCircle, Building2, Bug, Upload, Eye } from "lucide-react";
 
 interface CourseStatus {
   loading: boolean;
@@ -40,6 +41,7 @@ interface ProfileStatus {
 }
 
 export default function AdminPage() {
+  const router = useRouter();
   const [courseState, setCourseState] = useState<CourseStatus>({
     loading: false,
     success: null,
@@ -1808,6 +1810,18 @@ export default function AdminPage() {
           <p className="text-gray-600 dark:text-gray-400 mb-8 text-sm">
             Photos klasöründeki kadın ve erkek fotoğrafları için Türk isimleriyle profil hesapları oluşturun. Her hesap için rastgele şifre ve email oluşturulur.
           </p>
+          
+          {/* View All Users Button */}
+          <div className="mb-6 max-w-md">
+            <Button
+              onClick={() => router.push("/admin/users")}
+              size="lg"
+              className="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              <Eye className="mr-2 h-5 w-5" />
+              Tüm Kullanıcıları Görüntüle
+            </Button>
+          </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl">
             <div>

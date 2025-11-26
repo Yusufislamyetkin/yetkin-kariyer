@@ -46,9 +46,9 @@ interface QuestionnaireData {
   careerGoal: string;
   timeline: string;
   skillLevel: string;
-  technologies: string[];
+  technologies?: string[];
   workPreference: string;
-  industryInterests: string[];
+  industryInterests?: string[];
 }
 
 export default function CareerRoadmapPage() {
@@ -91,17 +91,42 @@ export default function CareerRoadmapPage() {
 
       const data = await response.json();
       if (response.ok) {
-        setPlan(normalizePlan(data.plan));
-        setShowQuestionnaire(false);
-        if (questionnaire) {
-          setQuestionnaireData(questionnaire);
+        // Check if plan was actually generated successfully
+        if (data.plan && data.plan.summary && !data.plan.summary.includes("oluşturulamadı") && !data.plan.summary.includes("sorun oluştu")) {
+          setPlan(normalizePlan(data.plan));
+          setShowQuestionnaire(false);
+          if (questionnaire) {
+            setQuestionnaireData(questionnaire);
+          }
+        } else {
+          // Plan was returned but indicates an error
+          const errorMsg = data.plan?.summary || "Plan oluşturulurken bir sorun oluştu. Lütfen tekrar deneyin.";
+          alert(errorMsg);
+          // Still set the plan so user can see what was generated
+          if (data.plan) {
+            setPlan(normalizePlan(data.plan));
+          }
         }
       } else {
-        alert(data.error || "Plan oluşturulamadı");
+        // Handle different error status codes
+        let errorMessage = "Plan oluşturulamadı.";
+        if (response.status === 401) {
+          errorMessage = "Oturum açmanız gerekiyor. Lütfen giriş yapın.";
+        } else if (response.status === 503) {
+          errorMessage = "AI servisi şu anda kullanılamıyor. Lütfen daha sonra tekrar deneyin.";
+        } else if (response.status === 500) {
+          errorMessage = data.error || "Sunucu hatası oluştu. Lütfen daha sonra tekrar deneyin.";
+        } else {
+          errorMessage = data.error || "Plan oluşturulurken bir hata oluştu.";
+        }
+        alert(errorMessage);
       }
     } catch (error) {
       console.error("Error generating plan:", error);
-      alert("Plan oluşturulurken bir hata oluştu");
+      const errorMessage = error instanceof Error 
+        ? `Bağlantı hatası: ${error.message}` 
+        : "Plan oluşturulurken beklenmeyen bir hata oluştu. Lütfen internet bağlantınızı kontrol edip tekrar deneyin.";
+      alert(errorMessage);
     } finally {
       setGenerating(false);
     }

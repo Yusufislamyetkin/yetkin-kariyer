@@ -636,8 +636,12 @@ export async function checkBadgesForActivity({
   const longestStreak = streakData.longestStreak;
   const totalDaysActive = streakData.totalDaysActive;
 
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  // UTC timezone kullanarak bugünün başlangıcını hesapla
+  // Veritabanındaki tarihler UTC'de saklandığı için UTC kullanıyoruz
+  const now = new Date();
+  const today = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0, 0));
+  const tomorrow = new Date(today);
+  tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
 
   for (const badge of allBadges) {
     if (earnedBadgeIds.has(badge.id)) {
@@ -713,6 +717,7 @@ export async function checkBadgesForActivity({
                 userId,
                 completedAt: {
                   gte: today,
+                  lt: tomorrow,
                 },
               },
             });
@@ -723,6 +728,7 @@ export async function checkBadgesForActivity({
                 userId,
                 completedAt: {
                   gte: today,
+                  lt: tomorrow,
                 },
               },
             });
@@ -733,6 +739,7 @@ export async function checkBadgesForActivity({
                 userId,
                 completedAt: {
                   gte: today,
+                  lt: tomorrow,
                 },
               },
             });
@@ -743,6 +750,7 @@ export async function checkBadgesForActivity({
                 userId,
                 completedAt: {
                   gte: today,
+                  lt: tomorrow,
                 },
               },
             });
@@ -753,6 +761,7 @@ export async function checkBadgesForActivity({
                 userId,
                 completedAt: {
                   gte: today,
+                  lt: tomorrow,
                 },
               },
             });
@@ -763,6 +772,7 @@ export async function checkBadgesForActivity({
                 userId,
                 completedAt: {
                   gte: today,
+                  lt: tomorrow,
                 },
               },
             });
@@ -774,6 +784,7 @@ export async function checkBadgesForActivity({
                 userId,
                 completedAt: {
                   gte: today,
+                  lt: tomorrow,
                 },
               },
             });
@@ -785,6 +796,7 @@ export async function checkBadgesForActivity({
                 userId,
                 completedAt: {
                   gte: today,
+                  lt: tomorrow,
                 },
               },
             });
@@ -1227,8 +1239,12 @@ export async function checkAllUserBadges({
         break;
       case "daily_activities":
         if (criteria.type === "daily_activity" && criteria.daily) {
-          const today = new Date();
-          today.setHours(0, 0, 0, 0);
+          // UTC timezone kullanarak bugünün başlangıcını hesapla
+          // Veritabanındaki tarihler UTC'de saklandığı için UTC kullanıyoruz
+          const now = new Date();
+          const today = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0, 0));
+          const tomorrow = new Date(today);
+          tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
           
           // Bugünkü aktiviteleri say
           let todayCount = 0;
@@ -1239,6 +1255,7 @@ export async function checkAllUserBadges({
                 userId,
                 completedAt: {
                   gte: today,
+                  lt: tomorrow,
                 },
               },
             });
@@ -1249,6 +1266,7 @@ export async function checkAllUserBadges({
                 userId,
                 completedAt: {
                   gte: today,
+                  lt: tomorrow,
                 },
               },
             });
@@ -1259,6 +1277,7 @@ export async function checkAllUserBadges({
                 userId,
                 completedAt: {
                   gte: today,
+                  lt: tomorrow,
                 },
               },
             });
@@ -1269,6 +1288,7 @@ export async function checkAllUserBadges({
                 userId,
                 completedAt: {
                   gte: today,
+                  lt: tomorrow,
                 },
               },
             });
@@ -1279,6 +1299,7 @@ export async function checkAllUserBadges({
                 userId,
                 completedAt: {
                   gte: today,
+                  lt: tomorrow,
                 },
               },
             });
@@ -1289,6 +1310,7 @@ export async function checkAllUserBadges({
                 userId,
                 completedAt: {
                   gte: today,
+                  lt: tomorrow,
                 },
               },
             });
@@ -1300,6 +1322,7 @@ export async function checkAllUserBadges({
                 userId,
                 completedAt: {
                   gte: today,
+                  lt: tomorrow,
                 },
               },
             });
@@ -1311,6 +1334,7 @@ export async function checkAllUserBadges({
                 userId,
                 completedAt: {
                   gte: today,
+                  lt: tomorrow,
                 },
               },
             });

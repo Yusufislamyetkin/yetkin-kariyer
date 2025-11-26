@@ -721,29 +721,28 @@ export default function PublicProfilePage() {
             </CardTitle>
           </CardHeader>
           <CardContent className="px-6 pt-8 pb-6 space-y-4">
-            {Object.entries(profile.stats.averageScores).map(
-              ([key, value]) => (
-                <div key={key} className="flex items-center justify-between gap-4">
-                  <span className="text-sm font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wide">
-                    {key === "quiz" && "Test"}
-                    {key === "test" && "Ders"}
-                    {key === "liveCoding" && "Canlı Kodlama"}
-                    {key === "bugFix" && "Bug Fix"}
-                    {key === "hackaton" && "Hackaton"}
+            {[
+              { key: "quiz", label: "Konu", value: profile.stats.averageScores.quiz },
+              { key: "test", label: "Test", value: profile.stats.averageScores.test },
+              { key: "liveCoding", label: "Canlı Kodlama", value: profile.stats.averageScores.liveCoding },
+              { key: "bugFix", label: "Bug Fix", value: profile.stats.averageScores.bugFix },
+            ].map(({ key, label, value }) => (
+              <div key={key} className="flex items-center justify-between gap-4">
+                <span className="text-sm font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wide">
+                  {label}
+                </span>
+                <div className="flex flex-col items-end gap-1">
+                  <span className="text-base font-semibold text-gray-900 dark:text-gray-100">
+                    %{value}
                   </span>
-                  <div className="flex flex-col items-end gap-1">
-                    <span className="text-base font-semibold text-gray-900 dark:text-gray-100">
-                      %{value}
+                  {categoryRankings[key] && (
+                    <span className="text-xs text-gray-500 dark:text-gray-400">
+                      Sıra: {categoryRankings[key]}
                     </span>
-                    {categoryRankings[key] && (
-                      <span className="text-xs text-gray-500 dark:text-gray-400">
-                        Sıra: {categoryRankings[key]}
-                      </span>
-                    )}
-                  </div>
+                  )}
                 </div>
-              )
-            )}
+              </div>
+            ))}
           </CardContent>
         </Card>
       </div>

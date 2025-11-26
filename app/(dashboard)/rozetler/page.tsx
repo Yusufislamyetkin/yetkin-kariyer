@@ -473,7 +473,7 @@ export default function RozetlerPage() {
             {selectedCategory ? (
               <Card variant="elevated" className={`bg-gradient-to-r ${categories.find((c) => c.id === selectedCategory)?.gradient || "from-gray-500 to-gray-600"} border-0 shadow-md`}>
                 <CardContent className="p-4">
-                  <div className="flex items-center gap-3 mb-2">
+                  <div className="flex items-center gap-3 mb-2 pt-4">
                     {(() => {
                       const category = categories.find((c) => c.id === selectedCategory);
                       const IconComponent = category?.icon || Medal;
