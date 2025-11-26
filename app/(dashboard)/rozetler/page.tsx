@@ -382,7 +382,7 @@ export default function RozetlerPage() {
           {/* Statistics Cards */}
           <div className="grid md:grid-cols-2 gap-4 mb-6">
             <Card variant="elevated" className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border border-purple-200/50 dark:border-purple-800/50 rounded-xl">
-              <CardContent className="p-4 flex items-center gap-3">
+              <CardContent className="p-4 pt-6 flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-purple-300/20 dark:bg-purple-400/20 flex items-center justify-center flex-shrink-0">
                   <Medal className="h-5 w-5 text-purple-500 dark:text-purple-400" />
                 </div>
@@ -395,7 +395,7 @@ export default function RozetlerPage() {
               </CardContent>
             </Card>
             <Card variant="elevated" className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border border-purple-200/50 dark:border-purple-800/50 rounded-xl">
-              <CardContent className="p-4 flex items-center gap-3">
+              <CardContent className="p-4 pt-6 flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-purple-300/20 dark:bg-purple-400/20 flex items-center justify-center flex-shrink-0">
                   <Star className="h-5 w-5 text-purple-500 dark:text-purple-400" />
                 </div>
@@ -434,7 +434,7 @@ export default function RozetlerPage() {
             Aylık sıralamada rozetlerden kazandığınız puanlarla ilk 3&apos;e girenlere para ödülü verilir!
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="lux-glow reward-card-shine flex flex-col items-center justify-center gap-3 p-6 rounded-xl bg-gradient-to-br from-[#61c5ff]/50 via-[#6f49ff]/35 to-[#ffe9c9]/50 border-transparent shadow-[0_22px_48px_-28px_rgba(79,70,229,0.8)] ring-2 ring-sky-400/40 min-h-[140px]">
+            <div className="lux-glow reward-card-shine flex flex-col items-center justify-center gap-3 p-6 rounded-xl bg-gradient-to-br from-blue-500 via-indigo-600 to-purple-600 border-transparent shadow-[0_22px_48px_-28px_rgba(79,70,229,0.9)] ring-2 ring-blue-400/60 min-h-[140px]">
               <div className="relative z-10 w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
                 <Crown className="h-6 w-6 text-white" />
               </div>
@@ -443,7 +443,7 @@ export default function RozetlerPage() {
                 <p className="text-2xl font-bold text-white">10.000 TL</p>
               </div>
             </div>
-            <div className="lux-glow reward-card-shine flex flex-col items-center justify-center gap-3 p-6 rounded-xl bg-gradient-to-br from-[#ffe7a0]/60 via-[#f8b84f]/40 to-[#fff4d9]/65 border-transparent shadow-[0_22px_48px_-28px_rgba(217,119,6,0.75)] ring-2 ring-amber-400/40 min-h-[140px]">
+            <div className="lux-glow reward-card-shine flex flex-col items-center justify-center gap-3 p-6 rounded-xl bg-gradient-to-br from-yellow-400 via-amber-500 to-orange-500 border-transparent shadow-[0_22px_48px_-28px_rgba(217,119,6,0.9)] ring-2 ring-amber-400/60 min-h-[140px]">
               <div className="relative z-10 w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
                 <Medal className="h-6 w-6 text-white" />
               </div>
@@ -452,7 +452,7 @@ export default function RozetlerPage() {
                 <p className="text-2xl font-bold text-white">7.500 TL</p>
               </div>
             </div>
-            <div className="lux-glow reward-card-shine flex flex-col items-center justify-center gap-3 p-6 rounded-xl bg-gradient-to-br from-[#fdba74]/55 via-[#fb923c]/40 to-[#f97316]/50 border-transparent shadow-[0_22px_48px_-28px_rgba(251,146,60,0.7)] ring-2 ring-orange-400/40 min-h-[140px]">
+            <div className="lux-glow reward-card-shine flex flex-col items-center justify-center gap-3 p-6 rounded-xl bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 border-transparent shadow-[0_22px_48px_-28px_rgba(251,146,60,0.9)] ring-2 ring-orange-400/60 min-h-[140px]">
               <div className="relative z-10 w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
                 <Trophy className="h-6 w-6 text-white" />
               </div>
@@ -470,17 +470,34 @@ export default function RozetlerPage() {
         {/* Left Column - Badges Collection */}
         <div className="lg:col-span-2">
           <div className="mb-6">
-            <div className="flex items-center gap-3 mb-2">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                {selectedCategory
-                  ? categories.find((c) => c.id === selectedCategory)?.name || "Tüm Rozetler"
-                  : "Tüm Rozetler"}
-              </h2>
-            </div>
-            {selectedCategory && (
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                {categories.find((c) => c.id === selectedCategory)?.description}
-              </p>
+            {selectedCategory ? (
+              <Card variant="elevated" className={`bg-gradient-to-r ${categories.find((c) => c.id === selectedCategory)?.gradient || "from-gray-500 to-gray-600"} border-0 shadow-md`}>
+                <CardContent className="p-4">
+                  <div className="flex items-center gap-3 mb-2">
+                    {(() => {
+                      const category = categories.find((c) => c.id === selectedCategory);
+                      const IconComponent = category?.icon || Medal;
+                      return (
+                        <IconComponent className="h-6 w-6 text-white flex-shrink-0" />
+                      );
+                    })()}
+                    <h2 className="text-2xl font-bold text-white">
+                      {categories.find((c) => c.id === selectedCategory)?.name || "Tüm Rozetler"}
+                    </h2>
+                  </div>
+                  <p className="text-sm text-white/90">
+                    {categories.find((c) => c.id === selectedCategory)?.description}
+                  </p>
+                </CardContent>
+              </Card>
+            ) : (
+              <div>
+                <div className="flex items-center gap-3 mb-2">
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                    Tüm Rozetler
+                  </h2>
+                </div>
+              </div>
             )}
           </div>
           {filteredBadges.length > 0 ? (

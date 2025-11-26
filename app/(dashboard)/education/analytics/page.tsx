@@ -5,6 +5,7 @@ import {
   Activity,
   Award,
   BarChart3,
+  Briefcase,
   CalendarRange,
   CheckCircle,
   Flame,
@@ -13,6 +14,7 @@ import {
   PieChart as PieChartIcon,
   Sparkles,
   Timer,
+  Trophy,
   TrendingDown,
   TrendingUp,
 } from "lucide-react";
@@ -299,10 +301,40 @@ export default function AnalyticsPage() {
   const [analytics, setAnalytics] = useState<AnalyticsData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [jobApplicationsCount, setJobApplicationsCount] = useState<number>(0);
+  const [hackathonApplicationsCount, setHackathonApplicationsCount] = useState<number>(0);
 
   useEffect(() => {
     void fetchAnalytics();
+    void fetchJobAndHackathonData();
   }, []);
+
+  const fetchJobAndHackathonData = async () => {
+    try {
+      const [jobResponse, hackathonResponse] = await Promise.all([
+        fetch("/api/jobs/applications").catch(() => ({ ok: false, json: async () => ({ applications: [] }) })),
+        fetch("/api/hackathons?limit=100").catch(() => ({ ok: false, json: async () => ({ hackathons: [] }) })),
+      ]);
+      
+      if (jobResponse.ok) {
+        const jobData = await jobResponse.json();
+        if (jobData.applications) {
+          setJobApplicationsCount(jobData.applications.length || 0);
+        }
+      }
+
+      if (hackathonResponse.ok) {
+        const hackathonData = await hackathonResponse.json();
+        if (hackathonData.hackathons) {
+          // Count hackathons where user has applied (hasApplication field)
+          const appliedCount = hackathonData.hackathons.filter((h: any) => h.hasApplication).length || 0;
+          setHackathonApplicationsCount(appliedCount);
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching job and hackathon data:", error);
+    }
+  };
 
   const fetchAnalytics = async () => {
     try {
@@ -418,6 +450,10 @@ export default function AnalyticsPage() {
         {
           label: "Canlı Kodlama",
           data: analytics.activity.timeline.map((day) => day.liveCoding),
+        },
+        {
+          label: "Bug Fix",
+          data: analytics.activity.timeline.map((day) => day.bugFix),
         },
       ],
     };
@@ -549,7 +585,6 @@ export default function AnalyticsPage() {
         accent: "from-emerald-500/10 via-emerald-500/5 to-transparent",
       },
       { type: "bugFix", label: "Bug Fix", accent: "from-amber-500/10 via-amber-500/5 to-transparent" },
-      { type: "hackaton", label: "Hackaton", accent: "from-violet-500/10 via-violet-500/5 to-transparent" },
     ];
     return types.map(({ type, label, accent }) => {
       const entries = analytics.leaderboard.dailyRankTrend[type];
@@ -610,6 +645,10 @@ export default function AnalyticsPage() {
     );
   }
 
+  // Calculate completed topics count from lesson completions
+  // We'll use totalCompletions as a proxy for completed topics since analytics doesn't separate them
+  const completedTopicsCount = analytics.overview.totalCompletions || 0;
+
   const overviewCards = [
     {
       title: "Toplam Öğrenme Süresi",
@@ -625,36 +664,21 @@ export default function AnalyticsPage() {
       value: analytics.overview.totalCompletions,
       icon: Activity,
       accent: "from-emerald-500 to-teal-500",
-      description: `${analytics.overview.completionCounts.tests} test · ${analytics.overview.completionCounts.liveCoding} canlı kodlama · ${analytics.overview.completionCounts.hackaton} hackaton`,
+      description: `${analytics.overview.completionCounts.tests} test · ${completedTopicsCount} konu · ${analytics.overview.completionCounts.liveCoding} canlı kodlama · ${analytics.overview.completionCounts.bugFix} bug fix`,
     },
     {
-      title: "Kurs Etkileşimleri",
-      value: analytics.overview.courseEngagementCount,
-      icon: Gauge,
+      title: "Başvurulan İş İlanları",
+      value: jobApplicationsCount,
+      icon: Briefcase,
       accent: "from-purple-500 to-indigo-500",
-      description: `${analytics.overview.completionCounts.bugFix} bug fix · ${analytics.overview.completionCounts.interviews} mülakat`,
+      description: `Toplam ${jobApplicationsCount} iş ilanına başvuru yaptınız`,
     },
     {
-      title: "AI Ortalama Skor",
-      value:
-        analytics.overview.aiAverages.quiz || analytics.overview.aiAverages.interview
-          ? [
-              analytics.overview.aiAverages.quiz
-                ? `Quiz %${analytics.overview.aiAverages.quiz}`
-                : null,
-              analytics.overview.aiAverages.interview
-                ? `Mülakat %${analytics.overview.aiAverages.interview}`
-                : null,
-            ]
-              .filter(Boolean)
-              .join(" • ")
-          : "-",
-      icon: Sparkles,
+      title: "Başvurulan Hackatonlar",
+      value: hackathonApplicationsCount,
+      icon: Trophy,
       accent: "from-amber-500 to-orange-500",
-      description:
-        analytics.overview.aiAverages.quiz || analytics.overview.aiAverages.interview
-          ? "AI değerlendirmelerindeki ortalama skor"
-          : "AI analizi henüz oluşturulmadı",
+      description: `Toplam ${hackathonApplicationsCount} hackatona başvuru yaptınız`,
     },
   ];
 
@@ -702,7 +726,9 @@ export default function AnalyticsPage() {
               <CardContent className="relative z-10 flex flex-col gap-4 px-6 py-6">
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex flex-col gap-1">
-                    <span className="text-sm font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                    <span className={`text-sm font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400 ${
+                      card.title === "Toplam Öğrenme Süresi" || card.title === "Tamamlanan Eğitimler" ? "pt-4" : ""
+                    }`}>
                       {card.title}
                     </span>
                     <span className="text-3xl font-display font-bold text-gray-900 dark:text-gray-100">
@@ -728,7 +754,7 @@ export default function AnalyticsPage() {
               30 Günlük Aktivite Akışı
             </CardTitle>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              Gün bazlı toplam aktivite ve test yoğunluğu
+              Gün bazlı toplam aktivite, test, canlı kodlama ve bug fix yoğunluğu
             </p>
           </CardHeader>
           <CardContent className="pt-6">
@@ -760,6 +786,12 @@ export default function AnalyticsPage() {
             </div>
             <ul className="space-y-3">
               <li className="flex items-center justify-between rounded-lg border border-gray-200/60 px-3 py-2 dark:border-gray-800/60">
+                <span className="text-gray-600 dark:text-gray-300">Konu</span>
+                <span className="font-semibold text-gray-900 dark:text-gray-100">
+                  {formatNumber(completedTopicsCount)}
+                </span>
+              </li>
+              <li className="flex items-center justify-between rounded-lg border border-gray-200/60 px-3 py-2 dark:border-gray-800/60">
                 <span className="text-gray-600 dark:text-gray-300">Test</span>
                 <span className="font-semibold text-gray-900 dark:text-gray-100">
                   {formatNumber(analytics.activity.totals.last30Days.tests)}
@@ -778,9 +810,9 @@ export default function AnalyticsPage() {
                 </span>
               </li>
               <li className="flex items-center justify-between rounded-lg border border-gray-200/60 px-3 py-2 dark:border-gray-800/60">
-                <span className="text-gray-600 dark:text-gray-300">Hackaton</span>
+                <span className="text-gray-600 dark:text-gray-300">Kurs</span>
                 <span className="font-semibold text-gray-900 dark:text-gray-100">
-                  {formatNumber(analytics.activity.totals.last30Days.hackaton)}
+                  {formatNumber(analytics.overview.courseEngagementCount)}
                 </span>
               </li>
             </ul>

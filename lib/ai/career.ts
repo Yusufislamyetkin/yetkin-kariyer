@@ -21,19 +21,48 @@ const careerPlanSchema = z.object({
   summary: z.string().default(""),
 });
 
+interface QuestionnaireData {
+  specialization?: string;
+  careerGoal?: string;
+  timeline?: string;
+  skillLevel?: string;
+  technologies?: string[];
+  workPreference?: string;
+  industryInterests?: string[];
+}
+
 const buildCareerPlanPrompt = ({
   cvData,
   quizScores,
   interviewScores,
   avgQuizScore,
   avgInterviewScore,
+  questionnaire,
 }: {
   cvData: any;
   quizScores: { course: string; score: number }[];
   interviewScores: number[];
   avgQuizScore: number;
   avgInterviewScore: number;
-}) => `
+  questionnaire?: QuestionnaireData | null;
+}) => {
+  let questionnaireSection = "";
+  if (questionnaire) {
+    questionnaireSection = `
+Kullanıcı Tercihleri (Anket Sonuçları):
+- Uzmanlaşmak İstediği Alan: ${questionnaire.specialization || "Belirtilmemiş"}
+- Kariyer Hedefi: ${questionnaire.careerGoal || "Belirtilmemiş"}
+- Hedef Zaman Çizelgesi: ${questionnaire.timeline || "Belirtilmemiş"}
+- Mevcut Seviye: ${questionnaire.skillLevel || "Belirtilmemiş"}
+- Tercih Edilen Teknolojiler: ${questionnaire.technologies?.join(", ") || "Belirtilmemiş"}
+- Çalışma Tercihi: ${questionnaire.workPreference || "Belirtilmemiş"}
+- İlgi Duyduğu Sektörler: ${questionnaire.industryInterests?.join(", ") || "Belirtilmemiş"}
+
+Bu tercihleri dikkate alarak kariyer planını oluştur. Özellikle uzmanlaşmak istediği alan, kariyer hedefi ve tercih ettiği teknolojilere odaklan.
+`;
+  }
+
+  return `
 Kullanıcının CV bilgileri, test sonuçları ve mülakat performansına göre kişiselleştirilmiş bir kariyer planı oluştur.
 
 CV Bilgileri:
@@ -49,7 +78,7 @@ Test Performansı:
 Mülakat Performansı:
 - Ortalama Mülakat Skoru: ${Math.round(avgInterviewScore)}%
 - Mülakat Detayları: ${JSON.stringify(interviewScores)}
-
+${questionnaireSection}
 Aşağıdaki JSON formatında kariyer planı oluştur:
 {
   "goals": ["hedef 1", "hedef 2", "hedef 3"],
@@ -69,8 +98,9 @@ Aşağıdaki JSON formatında kariyer planı oluştur:
 
 Sadece JSON döndür, başka açıklama yapma.
 `;
+}
 
-export async function generateCareerPlan(userId: string): Promise<any> {
+export async function generateCareerPlan(userId: string, questionnaire?: QuestionnaireData | null): Promise<any> {
   try {
     // Get user's CV, quiz attempts, and interview attempts
     const cv = await db.cV.findFirst({
@@ -138,6 +168,7 @@ export async function generateCareerPlan(userId: string): Promise<any> {
             interviewScores,
             avgQuizScore,
             avgInterviewScore,
+            questionnaire,
           }),
         },
       ],

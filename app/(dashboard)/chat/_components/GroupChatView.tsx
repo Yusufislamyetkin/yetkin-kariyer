@@ -1811,66 +1811,6 @@ export function GroupChatView({ category }: GroupChatViewProps) {
       </div>
       </div>
       <div className="flex flex-col items-end gap-3 min-w-0">
-        {isJoinedToSelectedGroup && activeMembers.length > 0 ? (
-          <div className="flex flex-wrap items-center gap-3 justify-end">
-            {activeMembers.slice(0, 3).map((member) => (
-              <div
-                key={member.id}
-                className="flex items-center gap-2 rounded-2xl bg-white/80 dark:bg-gray-900/60 px-3 py-2 border border-gray-200/60 dark:border-gray-700/60 shadow-sm"
-              >
-                <Link
-                  href={`/profile/${member.user.id}`}
-                  className="relative transition-transform hover:scale-105"
-                >
-                  {member.user.profileImage ? (
-                    <img
-                      src={member.user.profileImage}
-                      alt={member.user.name ?? member.user.email}
-                      className="w-9 h-9 rounded-full object-cover border border-white/70 dark:border-gray-900/70 shadow-sm"
-                      referrerPolicy="no-referrer"
-                    />
-                  ) : (
-                    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-semibold">
-                      {(member.user.name ?? member.user.email)
-                        .split(" ")
-                        .map((word) => word[0])
-                        .join("")
-                        .slice(0, 2)
-                        .toUpperCase()}
-                    </div>
-                  )}
-                  <span
-                    className={cn(
-                      "absolute -bottom-1 -right-1 h-3 w-3 rounded-full border-2 border-white dark:border-gray-900",
-                      member.presence.status === "online" ? "bg-emerald-400" : "bg-gray-400"
-                    )}
-                  />
-                </Link>
-                <div className="hidden lg:block">
-                  <p className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate max-w-[160px]">
-                    {member.user.name ?? member.user.email}
-                  </p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">
-                    {(() => {
-                      // Gerçek zamanlı status kontrolü - lastSeenAt'a göre (timeNow ile dinamik güncelleme)
-                      const actualStatus = member.presence.lastSeenAt 
-                        ? derivePresenceStatus(member.presence.lastSeenAt, timeNow)
-                        : "offline";
-                      
-                      if (actualStatus === "online") {
-                        return "Çevrimiçi";
-                      } else if (member.presence.lastSeenAt) {
-                        return `${formatRelativeDate(member.presence.lastSeenAt, timeNow)} çevrimiçi oldu`;
-                      } else {
-                        return "Çevrimdışı";
-                      }
-                    })()}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : null}
         {canManageSelectedGroup ? (
           <div className="flex flex-col items-end gap-2 min-w-0">
             <div className="flex flex-wrap items-center justify-end gap-2">

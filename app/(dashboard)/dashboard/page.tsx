@@ -14,6 +14,11 @@ import {
   CheckCircle,
   Clock,
   Sparkles,
+  Compass,
+  Plus,
+  Code,
+  Bug,
+  Search,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
@@ -29,6 +34,7 @@ interface DashboardStats {
   applications: number;
   averageQuizScore: number;
   averageInterviewScore: number;
+  completedTopics?: number;
 }
 
 
@@ -74,6 +80,10 @@ export default function DashboardPage() {
   const [activities, setActivities] = useState<Activity[]>([]);
   const [strikeData, setStrikeData] = useState<any>(null);
   const [strikeLoading, setStrikeLoading] = useState(true);
+  const [completedTopics, setCompletedTopics] = useState<number>(0);
+  const [totalEarnings, setTotalEarnings] = useState<number>(0);
+  const [motivationMessage, setMotivationMessage] = useState<{ message: string; emoji: string } | null>(null);
+  const [motivationLoading, setMotivationLoading] = useState(true);
   const recentBadges = badges.slice(0, 3);
 
   // Fetch core dashboard data (non-blocking)
@@ -86,10 +96,15 @@ export default function DashboardPage() {
     fetchAIRecommendations();
   }, []);
 
+  // Fetch motivation message separately (non-blocking)
+  useEffect(() => {
+    fetchMotivationMessage();
+  }, []);
+
   const fetchCoreData = async () => {
     try {
       // Fetch strike data first and in parallel with stats for faster loading
-      const [strikeResponse, statsResponse, interviewResponse, badgesResponse, dailyRankResponse, monthlyRankResponse, activitiesResponse] = await Promise.all([
+      const [strikeResponse, statsResponse, interviewResponse, badgesResponse, dailyRankResponse, monthlyRankResponse, activitiesResponse, earningsResponse] = await Promise.all([
         fetch("/api/strike").catch(() => {
           // Return a response-like object that indicates failure
           return {
@@ -114,11 +129,17 @@ export default function DashboardPage() {
         fetch("/api/profile/activity?limit=10").catch(() => ({
           json: async () => ({ activities: [] }),
         })),
+        fetch("/api/earnings").catch(() => ({
+          json: async () => ({ earnings: { total: 0 } }),
+        })),
       ]);
 
       const statsData = await statsResponse.json();
       if (statsResponse.ok && statsData.stats) {
         setStats(statsData.stats);
+        if (statsData.stats.completedTopics !== undefined) {
+          setCompletedTopics(statsData.stats.completedTopics);
+        }
       }
 
       const interviewData = await interviewResponse.json();
@@ -152,6 +173,11 @@ export default function DashboardPage() {
       const activitiesData = await activitiesResponse.json();
       if (activitiesData.activities) {
         setActivities(activitiesData.activities || []);
+      }
+
+      const earningsData = await earningsResponse.json();
+      if (earningsData.earnings) {
+        setTotalEarnings(earningsData.earnings.total || 0);
       }
 
       // Process strike data first for faster display
@@ -202,6 +228,30 @@ export default function DashboardPage() {
     }
   };
 
+  const fetchMotivationMessage = async () => {
+    try {
+      setMotivationLoading(true);
+      const response = await fetch("/api/ai/motivation");
+      if (response.ok) {
+        const data = await response.json();
+        setMotivationMessage(data);
+      } else {
+        setMotivationMessage({
+          message: "Her gün küçük adımlar atarak büyük başarılara ulaşırsın. Bugün de bir adım daha at! 🚀",
+          emoji: "🚀",
+        });
+      }
+    } catch (error) {
+      console.error("Error fetching motivation message:", error);
+      setMotivationMessage({
+        message: "Harika bir ilerleme kaydediyorsun! Devam et, hedeflerine ulaşmana çok az kaldı. 💪",
+        emoji: "💪",
+      });
+    } finally {
+      setMotivationLoading(false);
+    }
+  };
+
   const statCards = [
     {
       title: "Test Denemeleri",
@@ -215,7 +265,7 @@ export default function DashboardPage() {
     {
       title: "Mülakat Denemeleri",
       value: stats?.interviewAttempts || 0,
-      subtitle: `Ortalama: ${stats?.averageInterviewScore || 0}%`,
+      subtitle: `Bitirilen konular: ${completedTopics}`,
       icon: Video,
       color: "from-green-500 to-emerald-500",
       bgColor: "bg-green-50 dark:bg-green-900/20",
@@ -224,7 +274,7 @@ export default function DashboardPage() {
     {
       title: "CV'ler",
       value: stats?.cvs || 0,
-      subtitle: "Toplam CV sayısı",
+      subtitle: monthlyRank && monthlyRank.rank > 0 ? `Aylık sıralama: #${monthlyRank.rank}` : "Aylık sıralama: -",
       icon: FileText,
       color: "from-purple-500 to-pink-500",
       bgColor: "bg-purple-50 dark:bg-purple-900/20",
@@ -233,7 +283,7 @@ export default function DashboardPage() {
     {
       title: "Başvurular",
       value: stats?.applications || 0,
-      subtitle: "Aktif başvurular",
+      subtitle: `Toplam kazanç: ${totalEarnings.toLocaleString('tr-TR')} ₺`,
       icon: Briefcase,
       color: "from-orange-500 to-red-500",
       bgColor: "bg-orange-50 dark:bg-orange-900/20",
@@ -243,39 +293,60 @@ export default function DashboardPage() {
 
   const quickActions = [
     {
-      title: "Kurslara Git",
-      description: "Yeni beceriler öğrenin",
-      href: "/education/courses",
-      icon: BookOpen,
+      title: "Keşfet",
+      description: "Yeni içerikleri keşfedin",
+      href: "/social/explore",
+      icon: Compass,
       color: "from-blue-500 to-cyan-500",
     },
     {
-      title: "Mülakat Pratiği",
-      description: "Mülakat becerilerinizi geliştirin",
-      href: "/interview/practice",
-      icon: Video,
+      title: "İçerik Oluşturma",
+      description: "İçerik oluşturun ve paylaşın",
+      href: "/social/create",
+      icon: Plus,
       color: "from-green-500 to-emerald-500",
     },
     {
-      title: "CV'lerim",
-      description: "CV'lerinizi yönetin",
-      href: "/cv/my-cvs",
-      icon: FileText,
+      title: "Kurslar",
+      description: "Yeni beceriler öğrenin",
+      href: "/education/courses",
+      icon: BookOpen,
       color: "from-purple-500 to-pink-500",
     },
     {
-      title: "İş İlanları",
-      description: "Yeni fırsatları keşfedin",
-      href: "/jobs/browse",
-      icon: Briefcase,
+      title: "Testler",
+      description: "Bilginizi test edin",
+      href: "/education/tests",
+      icon: FileText,
       color: "from-orange-500 to-red-500",
     },
     {
-      title: "Kariyer Planım",
-      description: "Kariyer yolculuğunuzu planlayın",
-      href: "/career/roadmap",
-      icon: TrendingUp,
+      title: "Canlı Kodalama",
+      description: "Kodlama pratiği yapın",
+      href: "/education/cases",
+      icon: Code,
       color: "from-indigo-500 to-purple-500",
+    },
+    {
+      title: "Bugfix",
+      description: "Hata düzeltme pratiği",
+      href: "/education/bugfix-cases",
+      icon: Bug,
+      color: "from-yellow-500 to-orange-500",
+    },
+    {
+      title: "İş Arama",
+      description: "Yeni fırsatları keşfedin",
+      href: "/jobs/browse",
+      icon: Search,
+      color: "from-teal-500 to-cyan-500",
+    },
+    {
+      title: "CV Oluşturma",
+      description: "CV'nizi oluşturun",
+      href: "/cv/create",
+      icon: FileText,
+      color: "from-pink-500 to-rose-500",
     },
   ];
 
@@ -552,11 +623,6 @@ export default function DashboardPage() {
                     <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">Günlük Sıralama</span>
                     <span className="text-2xl font-bold text-yellow-600 dark:text-yellow-400">#{dailyRank.rank}</span>
                   </div>
-                  <div className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
-                    <p>Test: {dailyRank.quizCount}</p>
-                    <p>Ortalama: %{dailyRank.averageScore.toFixed(1)}</p>
-                    <p>Puan: {dailyRank.points}</p>
-                  </div>
                 </div>
               ) : (
                 <div className="p-4 rounded-xl bg-gradient-to-br from-gray-50 to-gray-100/50 dark:from-gray-800/50 dark:to-gray-700/50 border border-gray-200/50 dark:border-gray-700/50">
@@ -568,11 +634,6 @@ export default function DashboardPage() {
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">Aylık Sıralama</span>
                     <span className="text-2xl font-bold text-purple-600 dark:text-purple-400">#{monthlyRank.rank}</span>
-                  </div>
-                  <div className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
-                    <p>Test: {monthlyRank.quizCount}</p>
-                    <p>Ortalama: %{monthlyRank.averageScore.toFixed(1)}</p>
-                    <p>Puan: {monthlyRank.points}</p>
                   </div>
                 </div>
               ) : (
@@ -594,41 +655,63 @@ export default function DashboardPage() {
         <Card variant="elevated" hover>
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-xl">
-              <TrendingUp className="h-6 w-6 text-green-600 dark:text-green-400" />
-              İlerleme Durumu
+              <Sparkles className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+              AI Öğretmen Mesajı
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
-              <div>
-                <div className="flex justify-between mb-2">
-                  <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">Test Başarısı</span>
-                  <span className="text-sm font-bold text-green-600 dark:text-green-400">
-                    {stats?.averageQuizScore || 0}%
-                  </span>
-                </div>
-                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
-                  <div 
-                    className="bg-gradient-to-r from-green-500 to-emerald-500 h-3 rounded-full" 
-                    style={{ width: `${stats?.averageQuizScore || 0}%` }} 
-                  />
+            {motivationLoading ? (
+              <div className="flex items-center justify-center py-8">
+                <div className="flex flex-col items-center gap-3">
+                  <div className="w-10 h-10 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Mesaj hazırlanıyor...</p>
                 </div>
               </div>
-              <div>
-                <div className="flex justify-between mb-2">
-                  <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">Mülakat Başarısı</span>
-                  <span className="text-sm font-bold text-blue-600 dark:text-blue-400">
-                    {stats?.averageInterviewScore || 0}%
+            ) : motivationMessage ? (
+              <div className="space-y-4">
+                <div className="flex items-start gap-4 p-4 rounded-xl bg-gradient-to-br from-purple-50 via-pink-50 to-rose-50 dark:from-purple-900/20 dark:via-pink-900/20 dark:to-rose-900/20 border border-purple-200/50 dark:border-purple-800/50">
+                  <div className="flex-shrink-0">
+                    <img
+                      src="/Photos/AiTeacher/teacher.jpg"
+                      alt="AI Öğretmen"
+                      className="w-16 h-16 rounded-full object-cover border-2 border-purple-300 dark:border-purple-700 shadow-md"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = "none";
+                      }}
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-2xl">{motivationMessage.emoji}</span>
+                      <span className="text-sm font-semibold text-purple-700 dark:text-purple-300">
+                        Yetkin Mentor
+                      </span>
+                    </div>
+                    <p className="text-base text-gray-800 dark:text-gray-200 leading-relaxed">
+                      {motivationMessage.message}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 pt-2 border-t border-gray-200 dark:border-gray-700">
+                  <span>Kişiselleştirilmiş motivasyon mesajı</span>
+                  <span className="flex items-center gap-1">
+                    <Sparkles className="h-3 w-3" />
+                    AI ile oluşturuldu
                   </span>
                 </div>
-                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
-                  <div 
-                    className="bg-gradient-to-r from-blue-500 to-cyan-500 h-3 rounded-full" 
-                    style={{ width: `${stats?.averageInterviewScore || 0}%` }} 
-                  />
-                </div>
               </div>
-            </div>
+            ) : (
+              <div className="text-center py-8">
+                <Sparkles className="h-12 w-12 text-gray-400 dark:text-gray-600 mx-auto mb-4" />
+                <p className="text-gray-500 dark:text-gray-400 mb-2 font-medium text-sm">
+                  Mesaj yüklenemedi
+                </p>
+                <p className="text-xs text-gray-400 dark:text-gray-500">
+                  Lütfen sayfayı yenileyin
+                </p>
+              </div>
+            )}
           </CardContent>
         </Card>
       </div>

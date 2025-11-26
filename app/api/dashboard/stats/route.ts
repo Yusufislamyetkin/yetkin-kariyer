@@ -14,7 +14,7 @@ export async function GET() {
 
     const userId = session.user.id as string;
 
-    const [quizAttempts, interviewAttempts, cvs, applications] = await Promise.all([
+    const [quizAttempts, interviewAttempts, cvs, applications, completedTopics] = await Promise.all([
       db.quizAttempt.findMany({
         where: { userId },
         select: { score: true },
@@ -28,6 +28,10 @@ export async function GET() {
         select: { id: true },
       }),
       db.jobApplication.findMany({
+        where: { userId },
+        select: { id: true },
+      }),
+      db.lessonCompletion.findMany({
         where: { userId },
         select: { id: true },
       }),
@@ -54,6 +58,7 @@ export async function GET() {
         applications: applications.length,
         averageQuizScore: Math.round(averageQuizScore),
         averageInterviewScore: Math.round(averageInterviewScore),
+        completedTopics: completedTopics.length,
       },
     });
   } catch (error) {

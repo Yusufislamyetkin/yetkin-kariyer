@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
+import { CareerPlanQuestionnaire } from "../_components/CareerPlanQuestionnaire";
 
 interface CareerPlan {
   goals: string[];
@@ -40,10 +41,22 @@ const normalizePlan = (raw: any): CareerPlan => ({
   summary: typeof raw?.summary === "string" ? raw.summary : "",
 });
 
+interface QuestionnaireData {
+  specialization: string;
+  careerGoal: string;
+  timeline: string;
+  skillLevel: string;
+  technologies: string[];
+  workPreference: string;
+  industryInterests: string[];
+}
+
 export default function CareerRoadmapPage() {
   const [plan, setPlan] = useState<CareerPlan | null>(null);
   const [loading, setLoading] = useState(true);
   const [generating, setGenerating] = useState(false);
+  const [showQuestionnaire, setShowQuestionnaire] = useState(false);
+  const [questionnaireData, setQuestionnaireData] = useState<QuestionnaireData | null>(null);
 
   useEffect(() => {
     fetchPlan();
@@ -63,16 +76,26 @@ export default function CareerRoadmapPage() {
     }
   };
 
-  const handleGeneratePlan = async () => {
+  const handleGeneratePlan = async (questionnaire?: QuestionnaireData) => {
     setGenerating(true);
     try {
       const response = await fetch("/api/ai/generate-career-plan", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          questionnaire: questionnaire || questionnaireData,
+        }),
       });
 
       const data = await response.json();
       if (response.ok) {
         setPlan(normalizePlan(data.plan));
+        setShowQuestionnaire(false);
+        if (questionnaire) {
+          setQuestionnaireData(questionnaire);
+        }
       } else {
         alert(data.error || "Plan oluşturulamadı");
       }
@@ -82,6 +105,19 @@ export default function CareerRoadmapPage() {
     } finally {
       setGenerating(false);
     }
+  };
+
+  const handleQuestionnaireComplete = (data: QuestionnaireData) => {
+    setQuestionnaireData(data);
+    handleGeneratePlan(data);
+  };
+
+  const handleStartQuestionnaire = () => {
+    setShowQuestionnaire(true);
+  };
+
+  const handleGeneratePlanClick = () => {
+    handleGeneratePlan();
   };
 
   const handleExportPlan = () => {
@@ -112,6 +148,17 @@ export default function CareerRoadmapPage() {
     );
   }
 
+  if (showQuestionnaire) {
+    return (
+      <div className="container mx-auto px-4 py-12">
+        <CareerPlanQuestionnaire
+          onComplete={handleQuestionnaireComplete}
+          onCancel={() => setShowQuestionnaire(false)}
+        />
+      </div>
+    );
+  }
+
   if (!plan) {
     return (
       <div className="container mx-auto px-4 py-12">
@@ -119,27 +166,18 @@ export default function CareerRoadmapPage() {
           <CardHeader>
             <CardTitle className="text-2xl">Kariyer planı bulunamadı</CardTitle>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              Henüz bir plan oluşturulmamış. Aşağıdaki butonu kullanarak hemen oluşturabilirsiniz.
+              Henüz bir plan oluşturulmamış. Size özel bir kariyer planı oluşturmak için önce birkaç soru cevaplayalım.
             </p>
           </CardHeader>
           <CardContent>
             <Button
               variant="gradient"
               className="inline-flex items-center gap-2"
-              onClick={handleGeneratePlan}
+              onClick={handleStartQuestionnaire}
               disabled={generating}
             >
-              {generating ? (
-                <>
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  Plan oluşturuluyor...
-                </>
-              ) : (
-                <>
-                  <Sparkles className="h-4 w-4" />
-                  Kariyer Planı Oluştur
-                </>
-              )}
+              <Sparkles className="h-4 w-4" />
+              Kariyer Planı Oluştur
             </Button>
           </CardContent>
         </Card>
@@ -175,7 +213,7 @@ export default function CareerRoadmapPage() {
             <Button
               variant="gradient"
               className="flex items-center gap-2"
-              onClick={handleGeneratePlan}
+              onClick={handleGeneratePlanClick}
               disabled={generating}
             >
               {generating ? (

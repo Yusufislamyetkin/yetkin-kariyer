@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { generateCareerPlan } from "@/lib/ai/career";
 
-export async function POST() {
+export async function POST(request: Request) {
   try {
     const session = await auth();
     if (!session?.user?.id) {
@@ -16,7 +16,10 @@ export async function POST() {
       );
     }
 
-    const plan = await generateCareerPlan(session.user.id as string);
+    const body = await request.json().catch(() => ({}));
+    const questionnaire = body.questionnaire || null;
+
+    const plan = await generateCareerPlan(session.user.id as string, questionnaire);
 
     return NextResponse.json({ plan });
   } catch (error) {

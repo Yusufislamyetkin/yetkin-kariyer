@@ -255,6 +255,11 @@ function DashboardLayoutContent({
             href: "/jobs/browse",
             icon: Briefcase,
           },
+          {
+            name: "Kariyer Planım",
+            href: "/career/roadmap",
+            icon: Target,
+          },
         ],
       },
     ];
