@@ -45,10 +45,10 @@ export function ActivityTimeline({ activities }: ActivityTimelineProps) {
   }
 
   return (
-    <Card variant="glass" className="relative overflow-hidden">
+    <Card variant="glass" className="relative overflow-hidden tech-card-glow">
       <CardHeader>
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center shadow-lg">
             <Clock className="w-5 h-5 text-white" />
           </div>
           <div>

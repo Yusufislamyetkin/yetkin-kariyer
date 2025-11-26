@@ -43,7 +43,7 @@ export function BadgesSection({ badges, displayedBadges }: BadgesSectionProps) {
     <div className="space-y-6">
       {/* Featured Badges */}
       {displayedBadges.length > 0 && (
-        <Card variant="gradient" className="relative overflow-hidden">
+        <Card variant="gradient" className="relative overflow-hidden tech-card-glow">
           <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/20 via-orange-500/20 to-red-500/20" />
           <CardHeader className="relative">
             <div className="flex items-center gap-3">
@@ -51,7 +51,7 @@ export function BadgesSection({ badges, displayedBadges }: BadgesSectionProps) {
                 <Trophy className="w-6 h-6 text-white" />
               </div>
               <div>
-                <CardTitle className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                <CardTitle className="text-xl font-bold text-gray-900 dark:text-gray-100">
                   Öne Çıkan Rozetler
                 </CardTitle>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
@@ -61,7 +61,7 @@ export function BadgesSection({ badges, displayedBadges }: BadgesSectionProps) {
             </div>
           </CardHeader>
           <CardContent className="relative">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {displayedBadges.slice(0, 3).map((badge) => (
                 <div key={badge.id} className="flex justify-center">
                   <BadgeDisplay badge={badge} earned={!!badge.earnedAt} size="lg" />
@@ -73,11 +73,11 @@ export function BadgesSection({ badges, displayedBadges }: BadgesSectionProps) {
       )}
 
       {/* All Badges */}
-      <Card variant="glass" className="relative overflow-hidden">
+      <Card variant="glass" className="relative overflow-hidden tech-card-glow">
         <CardHeader>
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center shadow-lg">
                 <Trophy className="w-5 h-5 text-white" />
               </div>
               <div>
@@ -91,7 +91,7 @@ export function BadgesSection({ badges, displayedBadges }: BadgesSectionProps) {
             </div>
             <div className="flex items-center gap-2">
               <Filter className="w-4 h-4 text-gray-500" />
-              <div className="flex gap-2">
+              <div className="flex gap-2 flex-wrap">
                 <Button
                   variant={filter === "all" ? "gradient" : "outline"}
                   size="sm"

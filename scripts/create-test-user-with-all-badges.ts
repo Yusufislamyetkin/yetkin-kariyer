@@ -195,7 +195,17 @@ async function createInitialActivities(userId: string) {
     });
   }
   
-  await db.lessonCompletion.createMany({ data: lessonCompletions });
+  // Unique constraint için mevcut completions'ı kontrol et
+  for (const completion of lessonCompletions) {
+    try {
+      await db.lessonCompletion.create({ data: completion });
+    } catch (e: any) {
+      // Zaten varsa atla
+      if (!e.code || e.code !== 'P2002') {
+        throw e;
+      }
+    }
+  }
   console.log(`✅ ${lessonCompletions.length} lesson completion oluşturuldu`);
 
   // Posts oluştur
@@ -259,15 +269,24 @@ async function createInitialActivities(userId: string) {
   // Stories oluştur
   const stories = [];
   for (let i = 0; i < 50; i++) {
+    const createdAt = randomDateBetween(sixMonthsAgo, now);
+    const expiresAt = new Date(createdAt);
+    expiresAt.setHours(expiresAt.getHours() + 24); // 24 saat sonra expire
+    
     stories.push({
       userId,
-      content: `Test story ${i + 1}`,
-      createdAt: randomDateBetween(sixMonthsAgo, now),
+      imageUrl: `https://picsum.photos/400/600?random=${i}`,
+      expiresAt,
+      createdAt,
     });
   }
   
-  await db.story.createMany({ data: stories });
-  console.log(`✅ ${stories.length} story oluşturuldu`);
+  try {
+    await db.story.createMany({ data: stories });
+    console.log(`✅ ${stories.length} story oluşturuldu`);
+  } catch (error: any) {
+    console.log(`⚠️  Story oluşturma hatası (devam ediliyor): ${error.message}`);
+  }
 
   // Live coding attempts
   const liveCodingChallenges = await db.liveCodingChallenge.findMany({ take: 20 });
@@ -585,14 +604,23 @@ async function addMissingActivities(
     if (needed > 0) {
       const newStories = [];
       for (let i = 0; i < needed; i++) {
+        const createdAt = randomDateBetween(oneYearAgo, now);
+        const expiresAt = new Date(createdAt);
+        expiresAt.setHours(expiresAt.getHours() + 24); // 24 saat sonra expire
+        
         newStories.push({
           userId,
-          content: `Test story ${i + 1}`,
-          createdAt: randomDateBetween(oneYearAgo, now),
+          imageUrl: `https://picsum.photos/400/600?random=${i + 1000}`,
+          expiresAt,
+          createdAt,
         });
       }
-      await db.story.createMany({ data: newStories });
-      console.log(`✅ ${newStories.length} ek story eklendi`);
+      try {
+        await db.story.createMany({ data: newStories });
+        console.log(`✅ ${newStories.length} ek story eklendi`);
+      } catch (error: any) {
+        console.log(`⚠️  Story ekleme hatası (devam ediliyor): ${error.message}`);
+      }
     }
   }
 

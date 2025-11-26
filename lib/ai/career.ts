@@ -195,10 +195,14 @@ export async function generateCareerPlan(userId: string, questionnaire?: Questio
     // Build context
     const cvData = (cv?.data as any) || {};
 
-    const quizScores = quizAttempts.map((attempt: { quiz: { course: { title: string } }; score: number }) => ({
-      course: attempt.quiz.course.title,
-      score: attempt.score,
-    }));
+    const quizScores = quizAttempts
+      .filter((attempt: { quiz: { course: { title: string } | null } | null }) => 
+        attempt.quiz?.course?.title != null
+      )
+      .map((attempt: { quiz: { course: { title: string } }; score: number }) => ({
+        course: attempt.quiz.course.title,
+        score: attempt.score,
+      }));
 
     const interviewScores = interviewAttempts
       .filter((attempt: { aiScore: number | null }) => attempt.aiScore !== null)

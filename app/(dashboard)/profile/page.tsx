@@ -4,13 +4,10 @@ import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { ProfileHeader } from "./_components/ProfileHeader";
-import { GamificationSummary } from "./_components/GamificationSummary";
-import { StatsGrid } from "./_components/StatsGrid";
+import { UserStats } from "./_components/UserStats";
 import { BadgesSection } from "./_components/BadgesSection";
 import { ActivityTimeline } from "./_components/ActivityTimeline";
-import { CVSection } from "./_components/CVSection";
-import { CareerPlanSection } from "./_components/CareerPlanSection";
-import { LearningPathSection } from "./_components/LearningPathSection";
+import { PostsSection } from "./_components/PostsSection";
 import { Button } from "@/app/components/ui/Button";
 
 export default function ProfilePage() {
@@ -26,9 +23,6 @@ export default function ProfilePage() {
   const [badges, setBadges] = useState<any[]>([]);
   const [displayedBadges, setDisplayedBadges] = useState<any[]>([]);
   const [activities, setActivities] = useState<any[]>([]);
-  const [cvs, setCvs] = useState<any[]>([]);
-  const [careerPlan, setCareerPlan] = useState<any | null>(null);
-  const [learningPath, setLearningPath] = useState<any | null>(null);
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -60,15 +54,11 @@ export default function ProfilePage() {
         badgesResponse,
         activityResponse,
         gamiResponse,
-        cvsResponse,
-        careerResponse,
       ] = await Promise.allSettled([
         fetch(`/api/profile/${userId}`),
         fetch(`/api/profile/${userId}/badges`),
         fetch("/api/profile/activity?limit=10"),
         fetch("/api/gamification/me/summary"),
-        fetch("/api/cv"),
-        fetch("/api/career/plan"),
       ]);
 
       // Handle profile data
@@ -96,22 +86,6 @@ export default function ProfilePage() {
         const gami = await gamiResponse.value.json();
         setGamiSummary(gami);
       }
-
-      // Handle CVs
-      if (cvsResponse.status === "fulfilled" && cvsResponse.value.ok) {
-        const cvsData = await cvsResponse.value.json();
-        setCvs(cvsData.cvs || []);
-      }
-
-      // Handle career plan
-      if (careerResponse.status === "fulfilled" && careerResponse.value.ok) {
-        const careerData = await careerResponse.value.json();
-        setCareerPlan(careerData.plan || null);
-      }
-
-      // Learning path will be fetched separately if needed
-      // For now, we'll leave it as null
-      setLearningPath(null);
     } catch (error) {
       console.error("Error fetching profile data:", error);
       setError("Profil verileri yüklenirken bir hata oluştu. Lütfen sayfayı yenileyin.");
@@ -170,43 +144,49 @@ export default function ProfilePage() {
     streak: gamiSummary?.streak ?? { current: 0, longest: 0 },
   };
 
+  const userStatsData = {
+    level: gamificationData.level,
+    points: gamificationData.points,
+    xp: gamificationData.xp,
+    streak: gamificationData.streak,
+    stats: {
+      completedLessons: profileStats?.completedLessons ?? 0,
+      quizAttempts: profileStats?.quizAttempts ?? 0,
+      testAttempts: profileStats?.testAttempts ?? 0,
+      liveCodingAttempts: profileStats?.liveCodingAttempts ?? 0,
+      bugFixAttempts: profileStats?.bugFixAttempts ?? 0,
+    },
+  };
+
   return (
     <main className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-purple-50/30 dark:from-gray-900 dark:via-gray-900 dark:to-gray-900 p-4 lg:p-6 space-y-6">
       {/* Profile Header */}
       <ProfileHeader user={displayUser} onUpdate={() => fetchProfileData({ silent: true })} />
 
-      {/* Gamification Summary */}
-      {gamiSummary && (
-        <GamificationSummary
-          level={gamificationData.level}
-          points={gamificationData.points}
-          xp={gamificationData.xp}
-          streak={gamificationData.streak}
+      {/* User Stats */}
+      {gamiSummary && profileStats && (
+        <UserStats
+          level={userStatsData.level}
+          points={userStatsData.points}
+          xp={userStatsData.xp}
+          streak={userStatsData.streak}
+          stats={userStatsData.stats}
         />
-      )}
-
-      {/* Stats Grid */}
-      {profileStats && (
-        <StatsGrid stats={profileStats} leaderboardRank={undefined} />
-      )}
-
-      {/* Badges Section */}
-      {badges.length > 0 && (
-        <BadgesSection badges={badges} displayedBadges={displayedBadges} />
       )}
 
       {/* Main Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left Column - Activities */}
+        {/* Left Column - Posts */}
         <div className="lg:col-span-2 space-y-6">
-          <ActivityTimeline activities={activities} />
+          <PostsSection userId={displayUser.id} compact={false} />
         </div>
 
-        {/* Right Column - Sidebar */}
+        {/* Right Column - Badges and Activities */}
         <div className="space-y-6">
-          <CVSection cvs={cvs} />
-          <CareerPlanSection careerPlan={careerPlan} />
-          <LearningPathSection learningPath={learningPath} />
+          {badges.length > 0 && (
+            <BadgesSection badges={badges} displayedBadges={displayedBadges} />
+          )}
+          <ActivityTimeline activities={activities} />
         </div>
       </div>
     </main>
