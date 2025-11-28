@@ -1628,16 +1628,40 @@ export async function checkAllUserBadges({
         break;
     }
 
-    if (shouldEarn) {
-      await db.userBadge.create({
-        data: {
-          userId,
-          badgeId: badge.id,
-        },
-      });
+    // Eğer criteria kontrolü ile rozet kazanılmadıysa, ilerleme kontrolü yap
+    // İlerleme tamamlanmışsa (current >= target) rozeti otomatik olarak aç
+    if (!shouldEarn) {
+      try {
+        const progress = await calculateBadgeProgress(userId, badge);
+        if (progress.isCompleted && progress.target > 0 && progress.current >= progress.target) {
+          shouldEarn = true;
+          console.log(`[BADGE_CHECK] Rozet ilerleme tamamlandığı için otomatik açılıyor. userId: ${userId}, badgeId: ${badge.id}, current: ${progress.current}, target: ${progress.target}`);
+        }
+      } catch (error) {
+        console.error(`[BADGE_CHECK] İlerleme kontrolü sırasında hata. badgeId: ${badge.id}`, error);
+        // Hata durumunda sessizce devam et, criteria kontrolüne güven
+      }
+    }
 
-      newlyEarnedBadges.push(badge);
-      earnedBadgeIds.add(badge.id);
+    if (shouldEarn) {
+      try {
+        await db.userBadge.create({
+          data: {
+            userId,
+            badgeId: badge.id,
+          },
+        });
+
+        newlyEarnedBadges.push(badge);
+        earnedBadgeIds.add(badge.id);
+        console.log(`[BADGE_CHECK] Rozet kazanıldı! userId: ${userId}, badgeId: ${badge.id}, badgeName: ${badge.name}, category: ${badge.category}`);
+      } catch (error) {
+        console.error(`[BADGE_CHECK] Rozet kaydedilirken hata oluştu. userId: ${userId}, badgeId: ${badge.id}`, error);
+        // Rozet zaten varsa (unique constraint hatası), sessizce devam et
+        if (error instanceof Error && !error.message.includes("Unique constraint")) {
+          throw error;
+        }
+      }
     }
   }
 

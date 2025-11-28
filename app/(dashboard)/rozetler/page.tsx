@@ -352,8 +352,9 @@ export default function RozetlerPage() {
       });
       const data = await response.json();
 
-      if (response.ok && data.totalEarned > 0) {
-        // Yeni rozetler kazanıldı, kullanıcı rozetlerini ve ilerlemeyi yeniden yükle
+      if (response.ok) {
+        // Rozet kontrolü tamamlandı, her zaman kullanıcı rozetlerini ve ilerlemeyi yeniden yükle
+        // Çünkü ilerleme tamamlanmış rozetler otomatik açılmış olabilir
         await Promise.all([fetchUserBadges(), fetchProgress()]);
       }
     } catch (error) {

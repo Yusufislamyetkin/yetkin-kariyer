@@ -653,9 +653,11 @@ export default function AnalyticsPage() {
     );
   }
 
-  // Calculate completed topics count from lesson completions
-  // We'll use totalCompletions as a proxy for completed topics since analytics doesn't separate them
-  const completedTopicsCount = analytics.overview.totalCompletions || 0;
+  // Calculate completed lessons count from activity timeline (last 30 days)
+  const completedLessonsCount = analytics.activity.timeline.reduce(
+    (sum, day) => sum + (day.course ?? 0),
+    0
+  );
 
   const overviewCards = [
     {
@@ -672,7 +674,7 @@ export default function AnalyticsPage() {
       value: analytics.overview.totalCompletions,
       icon: Activity,
       accent: "from-emerald-500 to-teal-500",
-      description: `${analytics.overview.completionCounts.tests} test · ${completedTopicsCount} konu · ${analytics.overview.completionCounts.liveCoding} canlı kodlama · ${analytics.overview.completionCounts.bugFix} bug fix`,
+      description: `${analytics.overview.completionCounts.tests} test · ${completedLessonsCount} ders · ${analytics.overview.completionCounts.liveCoding} canlı kodlama · ${analytics.overview.completionCounts.bugFix} bug fix`,
     },
     {
       title: "Başvurulan İş İlanları",
@@ -790,13 +792,12 @@ export default function AnalyticsPage() {
               <p className="mt-1 text-2xl font-semibold text-gray-900 dark:text-gray-100">
                 {formatNumber(analytics.activity.totals.last30Days.total)}
               </p>
-              <p className="text-gray-500 dark:text-gray-400">Tüm eğitim türleri</p>
             </div>
             <ul className="space-y-3">
               <li className="flex items-center justify-between rounded-lg border border-gray-200/60 px-3 py-2 dark:border-gray-800/60">
-                <span className="text-gray-600 dark:text-gray-300">Bitirilen Ders</span>
+                <span className="text-gray-600 dark:text-gray-300">Ders</span>
                 <span className="font-semibold text-gray-900 dark:text-gray-100">
-                  {formatNumber(completedTopicsCount)}
+                  {formatNumber(completedLessonsCount)}
                 </span>
               </li>
               <li className="flex items-center justify-between rounded-lg border border-gray-200/60 px-3 py-2 dark:border-gray-800/60">

@@ -371,6 +371,12 @@ export async function calculateBadgeProgress(
     current = target;
   }
 
+  // İlerleme tamamlanmış mı kontrol et (current >= target)
+  // Bu kontrol, rozet henüz userBadge tablosunda olmasa bile ilerleme tamamlanmışsa true döndürür
+  if (!isCompleted && target > 0 && current >= target) {
+    isCompleted = true;
+  }
+
   // Percentage hesapla
   const percentage = target > 0 ? Math.min((current / target) * 100, 100) : 0;
 
