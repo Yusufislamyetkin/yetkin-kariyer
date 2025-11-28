@@ -2,8 +2,11 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
-import { ArrowLeft, Code, Clock, Target } from "lucide-react";
+import { ArrowLeft, Code, Clock, Target, CheckCircle } from "lucide-react";
 import liveCodingCases from "@/data/live-coding-cases.json";
+import { auth } from "@/lib/auth";
+import { db } from "@/lib/db";
+import { cn } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
 
@@ -41,7 +44,7 @@ const DIFFICULTY_LABELS: Record<string, string> = {
   advanced: "İleri",
 };
 
-export default function LanguageCasesPage({
+export default async function LanguageCasesPage({
   params,
 }: {
   params: { language: string };
@@ -56,6 +59,32 @@ export default function LanguageCasesPage({
 
   const icon = LANGUAGE_ICONS[language.id] || "💻";
   const color = LANGUAGE_COLORS[language.id] || "#666";
+
+  // Get user session and completed cases
+  const session = await auth();
+  let completedCaseIds = new Set<string>();
+
+  if (session?.user?.id) {
+    // Get all live coding attempts for this user
+    const attempts = await db.liveCodingAttempt.findMany({
+      where: {
+        userId: session.user.id as string,
+      },
+      select: {
+        quizId: true,
+        metrics: true,
+      },
+    });
+
+    // Filter attempts where caseCompleted is true
+    attempts.forEach((attempt: { quizId: string; metrics: any }) => {
+      const metrics = attempt.metrics as any;
+      if (metrics?.caseCompleted === true && attempt.quizId.startsWith("quiz-")) {
+        const caseId = attempt.quizId.replace("quiz-", "");
+        completedCaseIds.add(caseId);
+      }
+    });
+  }
 
   return (
     <div className="space-y-8 animate-fade-in">
@@ -93,82 +122,115 @@ export default function LanguageCasesPage({
       </section>
 
       <section className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {language.cases.map((caseItem) => (
-          <Link
-            key={caseItem.id}
-            href={`/education/live-coding/quiz-${caseItem.id}`}
-            className="group block"
-          >
-            <Card
-              variant="elevated"
-              className="h-full border-2 border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 transition-all duration-300 hover:border-emerald-500 dark:hover:border-emerald-500 hover:shadow-2xl hover:-translate-y-2"
+        {language.cases.map((caseItem) => {
+          const isCompleted = completedCaseIds.has(caseItem.id);
+          
+          return (
+            <Link
+              key={caseItem.id}
+              href={`/education/live-coding/quiz-${caseItem.id}`}
+              className="group block"
             >
-              <CardHeader className="pb-3">
-                <div className="flex items-start justify-between mb-3">
-                  <div
-                    className="flex h-12 w-12 items-center justify-center rounded-xl"
-                    style={{
-                      backgroundColor: `${color}15`,
-                      border: `2px solid ${color}30`,
-                    }}
-                  >
-                    <Code className="h-6 w-6" style={{ color }} />
-                  </div>
-                  <span
-                    className="rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider"
-                    style={{
-                      backgroundColor: `${color}15`,
-                      color,
-                      border: `1px solid ${color}30`,
-                    }}
-                  >
-                    {DIFFICULTY_LABELS[caseItem.difficulty] || caseItem.difficulty}
-                  </span>
-                </div>
-                <CardTitle className="text-lg font-bold text-gray-900 dark:text-gray-100 leading-tight mb-2 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors line-clamp-2">
-                  {caseItem.title}
-                </CardTitle>
-                <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-3">
-                  {caseItem.description}
-                </p>
-              </CardHeader>
-              <CardContent className="space-y-4 pt-0">
-                <div className="rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/50 p-3">
-                  <p className="text-xs font-semibold text-emerald-700 dark:text-emerald-300 mb-2">
-                    Görev
-                  </p>
-                  <p className="text-xs text-gray-700 dark:text-gray-300 line-clamp-3">
-                    {caseItem.instructions}
-                  </p>
-                </div>
-
-                {caseItem.hints && caseItem.hints.length > 0 && (
-                  <div className="rounded-lg border border-gray-200 dark:border-gray-800 bg-blue-50 dark:bg-blue-950/30 p-3">
-                    <p className="text-xs font-semibold text-blue-700 dark:text-blue-300 mb-2 flex items-center gap-1">
-                      <Target className="h-3 w-3" />
-                      İpuçları
-                    </p>
-                    <ul className="space-y-1">
-                      {caseItem.hints.slice(0, 2).map((hint, index) => (
-                        <li key={index} className="flex items-start gap-2 text-xs text-gray-700 dark:text-gray-300">
-                          <span className="mt-1 h-1 w-1 rounded-full bg-blue-500 dark:bg-blue-400 flex-shrink-0" />
-                          <span className="flex-1 line-clamp-1">{hint}</span>
-                        </li>
-                      ))}
-                    </ul>
+              <Card
+                variant="elevated"
+                className={cn(
+                  "h-full border-2 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 relative",
+                  isCompleted
+                    ? "border-emerald-500/60 bg-gradient-to-br from-emerald-50/50 to-green-50/50 dark:from-emerald-950/30 dark:to-green-950/30 dark:border-emerald-500/40"
+                    : "border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 hover:border-emerald-500 dark:hover:border-emerald-500"
+                )}
+              >
+                {isCompleted && (
+                  <div className="absolute top-3 right-3 z-10">
+                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-500 text-white shadow-lg">
+                      <CheckCircle className="h-5 w-5" />
+                    </div>
                   </div>
                 )}
+                <CardHeader className="pb-3">
+                  <div className="flex items-start justify-between mb-3">
+                    <div
+                      className="flex h-12 w-12 items-center justify-center rounded-xl"
+                      style={{
+                        backgroundColor: `${color}15`,
+                        border: `2px solid ${color}30`,
+                      }}
+                    >
+                      <Code className="h-6 w-6" style={{ color }} />
+                    </div>
+                    <div className="flex flex-col items-end gap-2">
+                      {isCompleted && (
+                        <span className="rounded-full px-2.5 py-1 text-xs font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
+                          Çözüldü
+                        </span>
+                      )}
+                      <span
+                        className="rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider"
+                        style={{
+                          backgroundColor: `${color}15`,
+                          color,
+                          border: `1px solid ${color}30`,
+                        }}
+                      >
+                        {DIFFICULTY_LABELS[caseItem.difficulty] || caseItem.difficulty}
+                      </span>
+                    </div>
+                  </div>
+                  <CardTitle className="text-lg font-bold text-gray-900 dark:text-gray-100 leading-tight mb-2 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors line-clamp-2">
+                    {caseItem.title}
+                  </CardTitle>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-3">
+                    {caseItem.description}
+                  </p>
+                </CardHeader>
+                <CardContent className="space-y-4 pt-0">
+                  <div className="rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/50 p-3">
+                    <p className="text-xs font-semibold text-emerald-700 dark:text-emerald-300 mb-2">
+                      Görev
+                    </p>
+                    <p className="text-xs text-gray-700 dark:text-gray-300 line-clamp-3">
+                      {caseItem.instructions}
+                    </p>
+                  </div>
 
-                <div className="flex items-center justify-between pt-3 border-t border-gray-200 dark:border-gray-800">
-                  <span className="text-sm font-semibold text-emerald-600 dark:text-emerald-400 group-hover:text-emerald-700 dark:group-hover:text-emerald-300 transition-colors">
-                    Case&apos;i Çöz
-                  </span>
-                  <ArrowLeft className="h-4 w-4 text-emerald-600 dark:text-emerald-400 transition-transform duration-200 group-hover:-translate-x-1 rotate-180" />
-                </div>
-              </CardContent>
-            </Card>
-          </Link>
-        ))}
+                  {caseItem.hints && caseItem.hints.length > 0 && (
+                    <div className="rounded-lg border border-gray-200 dark:border-gray-800 bg-blue-50 dark:bg-blue-950/30 p-3">
+                      <p className="text-xs font-semibold text-blue-700 dark:text-blue-300 mb-2 flex items-center gap-1">
+                        <Target className="h-3 w-3" />
+                        İpuçları
+                      </p>
+                      <ul className="space-y-1">
+                        {caseItem.hints.slice(0, 2).map((hint, index) => (
+                          <li key={index} className="flex items-start gap-2 text-xs text-gray-700 dark:text-gray-300">
+                            <span className="mt-1 h-1 w-1 rounded-full bg-blue-500 dark:bg-blue-400 flex-shrink-0" />
+                            <span className="flex-1 line-clamp-1">{hint}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  <div className="flex items-center justify-between pt-3 border-t border-gray-200 dark:border-gray-800">
+                    <span className={cn(
+                      "text-sm font-semibold transition-colors",
+                      isCompleted
+                        ? "text-emerald-600 dark:text-emerald-400"
+                        : "text-emerald-600 dark:text-emerald-400 group-hover:text-emerald-700 dark:group-hover:text-emerald-300"
+                    )}>
+                      {isCompleted ? "Tekrar Çöz" : "Case'i Çöz"}
+                    </span>
+                    <ArrowLeft className={cn(
+                      "h-4 w-4 transition-transform duration-200 group-hover:-translate-x-1 rotate-180",
+                      isCompleted
+                        ? "text-emerald-600 dark:text-emerald-400"
+                        : "text-emerald-600 dark:text-emerald-400"
+                    )} />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          );
+        })}
       </section>
     </div>
   );

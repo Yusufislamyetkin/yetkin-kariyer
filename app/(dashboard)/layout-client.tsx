@@ -41,6 +41,7 @@ import {
 import { useState, useEffect, useMemo, type ComponentType, type SVGProps } from "react";
 import { usePathname } from "next/navigation";
 import { CelebrationProvider } from "@/app/contexts/CelebrationContext";
+import { BadgeNotificationProvider } from "@/app/contexts/BadgeNotificationContext";
 import { ChatSummaryProvider, useChatSummary } from "@/app/contexts/ChatSummaryContext";
 import { FriendRequestProvider, useFriendRequest } from "@/app/contexts/FriendRequestContext";
 import { NotificationProvider, useNotification } from "@/app/contexts/NotificationContext";
@@ -355,7 +356,8 @@ function DashboardLayoutContent({
 
   return (
     <CelebrationProvider>
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-purple-50/30 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-200">
+      <BadgeNotificationProvider>
+        <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-purple-50/30 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-200">
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (
         <div
@@ -534,7 +536,8 @@ function DashboardLayoutContent({
         notifications={notifications}
         onDismiss={dismissNotification}
       />
-      </div>
+        </div>
+      </BadgeNotificationProvider>
     </CelebrationProvider>
   );
 }

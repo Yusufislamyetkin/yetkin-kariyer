@@ -22,7 +22,7 @@ import {
 } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
 import { AIAnalysis } from "@/types";
-import { useCelebration } from "@/app/contexts/CelebrationContext";
+import { useBadgeNotification } from "@/app/contexts/BadgeNotificationContext";
 
 interface QuizQuestion {
   id: string;
@@ -96,8 +96,8 @@ export default function QuizResultsPage() {
   const [analysisLoading, setAnalysisLoading] = useState(false);
   const [analysisError, setAnalysisError] = useState<string | null>(null);
   const [achievement, setAchievement] = useState<AchievementPayload | null>(null);
-  const { celebrate } = useCelebration();
-  const celebratedBadgeIds = useRef<Set<string>>(new Set());
+  const { showBadges } = useBadgeNotification();
+  const processedBadgeIds = useRef<Set<string>>(new Set());
 
   useEffect(() => {
     if (params.id) {
@@ -106,28 +106,26 @@ export default function QuizResultsPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.id]);
 
-  // Rozet kazanıldığında kutlama yap
+  // Rozet kazanıldığında notification göster
   useEffect(() => {
     const newBadges = achievement?.badgeResults?.newlyEarnedBadges ?? [];
     if (newBadges.length > 0) {
-      newBadges.forEach((badge) => {
-        // Her rozet için sadece bir kere kutlama yap
-        if (!celebratedBadgeIds.current.has(badge.id)) {
-          celebratedBadgeIds.current.add(badge.id);
-          
-          // Her rozet için ayrı ayrı kutlama yap (sırayla)
-          setTimeout(() => {
-            celebrate({
-              title: "Yeni Rozet Kazandın!",
-              message: `${badge.icon ?? "🏅"} ${badge.name} - ${badge.description}`,
-              variant: "badge",
-              durationMs: 5000,
-            });
-          }, celebratedBadgeIds.current.size * 600); // Her rozet için 600ms gecikme
-        }
-      });
+      // Filter out already processed badges
+      const unprocessedBadges = newBadges.filter(
+        (badge) => !processedBadgeIds.current.has(badge.id)
+      );
+      
+      if (unprocessedBadges.length > 0) {
+        // Mark badges as processed
+        unprocessedBadges.forEach((badge) => {
+          processedBadgeIds.current.add(badge.id);
+        });
+        
+        // Show badges in notification modal
+        showBadges(unprocessedBadges);
+      }
     }
-  }, [achievement, celebrate]);
+  }, [achievement, showBadges]);
 
   const fetchResults = async () => {
     try {

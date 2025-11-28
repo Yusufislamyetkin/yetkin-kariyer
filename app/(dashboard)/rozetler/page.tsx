@@ -149,6 +149,7 @@ export default function RozetlerPage() {
   const [earnedBadgeIds, setEarnedBadgeIds] = useState<Set<string>>(new Set());
   const [totalBadgesCount, setTotalBadgesCount] = useState(93);
   const [selectedCategory, setSelectedCategory] = useState<string | null>("daily_activities");
+  const [progressMap, setProgressMap] = useState<Map<string, { current: number; target: number; percentage: number; isCompleted: boolean }>>(new Map());
 
   const categories = useMemo(
     () => [
@@ -166,7 +167,7 @@ export default function RozetlerPage() {
         icon: Trophy,
         description: "Toplam başarılarınız için rozetler",
         gradient: "from-purple-500 to-pink-500",
-        badgeCategories: ["score"],
+        badgeCategories: ["total_achievements"],
       },
       {
         id: "social_interaction",
@@ -257,7 +258,7 @@ export default function RozetlerPage() {
       router.push("/login");
     } else if (status === "authenticated") {
       // Her iki API çağrısını koordine et ve loading state'i yönet
-      Promise.all([fetchBadges(), fetchUserBadges()])
+      Promise.all([fetchBadges(), fetchUserBadges(), fetchProgress()])
         .finally(() => {
           setLoading(false);
         });
@@ -327,6 +328,28 @@ export default function RozetlerPage() {
     }
   };
 
+  const fetchProgress = async () => {
+    try {
+      const response = await fetch("/api/badges/progress");
+      const data = await response.json();
+
+      if (response.ok && data.progress) {
+        const progressMap = new Map<string, { current: number; target: number; percentage: number; isCompleted: boolean }>();
+        data.progress.forEach((p: { badgeId: string; current: number; target: number; percentage: number; isCompleted: boolean }) => {
+          progressMap.set(p.badgeId, {
+            current: p.current,
+            target: p.target,
+            percentage: p.percentage,
+            isCompleted: p.isCompleted,
+          });
+        });
+        setProgressMap(progressMap);
+      }
+    } catch (error) {
+      console.error("Error fetching badge progress:", error);
+    }
+  };
+
   const checkAllBadges = async () => {
     try {
       const response = await fetch("/api/badges/check/all", {
@@ -335,8 +358,8 @@ export default function RozetlerPage() {
       const data = await response.json();
 
       if (response.ok && data.totalEarned > 0) {
-        // Yeni rozetler kazanıldı, kullanıcı rozetlerini yeniden yükle
-        await fetchUserBadges();
+        // Yeni rozetler kazanıldı, kullanıcı rozetlerini ve ilerlemeyi yeniden yükle
+        await Promise.all([fetchUserBadges(), fetchProgress()]);
       }
     } catch (error) {
       // Sessizce hata yok say (kullanıcı deneyimini bozmamak için)
@@ -524,6 +547,7 @@ export default function RozetlerPage() {
                           key={badge.id}
                           badge={badge}
                           earned={earnedBadgeIds.has(badge.id)}
+                          progress={progressMap.get(badge.id)}
                         />
                       ))}
                     </div>

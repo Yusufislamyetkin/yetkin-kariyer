@@ -4,7 +4,7 @@ import { z } from "zod";
 
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { checkSocialInteractionBadges } from "@/app/api/badges/check/badge-service";
+import { checkSocialInteractionBadges, type BadgeCheckResult } from "@/app/api/badges/check/badge-service";
 
 const respondSchema = z.object({
   friendshipId: z.string().cuid(),
@@ -44,6 +44,10 @@ export async function POST(request: Request) {
     let updatedStatus: FriendshipStatus | null = null;
     let respondedAt: Date | null = friendship.respondedAt;
     let cancelledAt: Date | null = friendship.cancelledAt;
+    let badgeResults: BadgeCheckResult = {
+      newlyEarnedBadges: [],
+      totalEarned: 0,
+    };
 
     switch (data.action) {
       case "accept":
@@ -58,12 +62,19 @@ export async function POST(request: Request) {
         cancelledAt = null;
         
         // Sosyal etkileşim rozetlerini kontrol et (hem requester hem addressee için)
-        Promise.all([
-          checkSocialInteractionBadges({ userId: friendship.requesterId }),
-          checkSocialInteractionBadges({ userId: userId }),
-        ]).catch((error) => {
+        try {
+          const [requesterBadges, addresseeBadges] = await Promise.all([
+            checkSocialInteractionBadges({ userId: friendship.requesterId }),
+            checkSocialInteractionBadges({ userId: userId }),
+          ]);
+          // Return badges for the current user (addressee who accepted)
+          badgeResults = addresseeBadges;
+          if (badgeResults.totalEarned > 0) {
+            console.log(`[FRIEND_RESPOND] Kullanıcı ${badgeResults.totalEarned} rozet kazandı. userId: ${userId}`);
+          }
+        } catch (error) {
           console.error("Error checking social interaction badges:", error);
-        });
+        }
         
         // Send notification to requester (the person who sent the request)
         try {
@@ -226,7 +237,7 @@ export async function POST(request: Request) {
     // Eğer arkadaşlık kabul edildiyse, rozet kontrolü zaten yukarıda yapıldı
     // Diğer durumlar için rozet kontrolü gerekmiyor
 
-    return NextResponse.json({ friendship: updated });
+    return NextResponse.json({ friendship: updated, badgeResults });
   } catch (error) {
     console.error("Error responding to friend request:", error);
     if (error instanceof z.ZodError) {

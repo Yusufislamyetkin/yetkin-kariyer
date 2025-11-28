@@ -8,6 +8,7 @@ import { Textarea } from "@/app/components/ui/Textarea";
 import { Button } from "@/app/components/ui/Button";
 import { X, Loader2, ImageIcon } from "lucide-react";
 import { z } from "zod";
+import { useBadgeNotificationHandler } from "@/hooks/useBadgeNotificationHandler";
 
 interface PostCreateProps {
   onClose?: () => void;
@@ -18,6 +19,7 @@ interface PostCreateProps {
 export function PostCreate({ onClose, onSuccess, isModal = true }: PostCreateProps) {
   const router = useRouter();
   const { data: session } = useSession();
+  const { handleBadgeResults } = useBadgeNotificationHandler();
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [content, setContent] = useState("");
@@ -151,6 +153,13 @@ export function PostCreate({ onClose, onSuccess, isModal = true }: PostCreatePro
       if (!response.ok) {
         const data = await response.json();
         throw new Error(data.error || "Gönderi oluşturulurken bir hata oluştu");
+      }
+
+      const data = await response.json();
+      
+      // Check for badge results and show notification
+      if (data.badgeResults) {
+        handleBadgeResults(data.badgeResults);
       }
 
       // Reset form state

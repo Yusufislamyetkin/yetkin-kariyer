@@ -580,6 +580,43 @@ export async function checkBadgesForAttempt({
           }
         }
         break;
+      case "total_achievements":
+        if (criteria.type && criteria.count !== undefined) {
+          let totalCount = 0;
+          
+          if (criteria.type === "test_count") {
+            totalCount = totalQuizCount;
+          } else if (criteria.type === "course_count") {
+            const courseCompletions = await db.lessonCompletion.findMany({
+              where: { userId },
+              distinct: ['lessonId'],
+            });
+            totalCount = courseCompletions.length;
+          } else if (criteria.type === "perfect_score_count") {
+            totalCount = perfectScoreCount;
+          } else if (criteria.type === "total_score") {
+            totalCount = userQuizAttempts.reduce((sum: number, qa: { score: number }) => sum + qa.score, 0);
+          } else if (criteria.type === "lesson_count") {
+            totalCount = await db.lessonCompletion.count({
+              where: { userId },
+            });
+          } else if (criteria.type === "quiz_count") {
+            totalCount = totalQuizCount;
+          } else if (criteria.type === "live_coding_count") {
+            totalCount = await db.liveCodingAttempt.count({
+              where: { userId },
+            });
+          } else if (criteria.type === "bugfix_count") {
+            totalCount = await db.bugFixAttempt.count({
+              where: { userId },
+            });
+          }
+          
+          if (totalCount >= criteria.count) {
+            shouldEarn = true;
+          }
+        }
+        break;
     }
 
     if (shouldEarn) {
@@ -1406,6 +1443,43 @@ export async function checkAllUserBadges({
           }
           
           if (interactionCount >= criteria.count) {
+            shouldEarn = true;
+          }
+        }
+        break;
+      case "total_achievements":
+        if (criteria.type && criteria.count !== undefined) {
+          let totalCount = 0;
+          
+          if (criteria.type === "test_count") {
+            totalCount = totalQuizCount;
+          } else if (criteria.type === "course_count") {
+            const courseCompletions = await db.lessonCompletion.findMany({
+              where: { userId },
+              distinct: ['lessonId'],
+            });
+            totalCount = courseCompletions.length;
+          } else if (criteria.type === "perfect_score_count") {
+            totalCount = perfectScoreCount;
+          } else if (criteria.type === "total_score") {
+            totalCount = userQuizAttempts.reduce((sum: number, qa: { score: number }) => sum + qa.score, 0);
+          } else if (criteria.type === "lesson_count") {
+            totalCount = await db.lessonCompletion.count({
+              where: { userId },
+            });
+          } else if (criteria.type === "quiz_count") {
+            totalCount = totalQuizCount;
+          } else if (criteria.type === "live_coding_count") {
+            totalCount = await db.liveCodingAttempt.count({
+              where: { userId },
+            });
+          } else if (criteria.type === "bugfix_count") {
+            totalCount = await db.bugFixAttempt.count({
+              where: { userId },
+            });
+          }
+          
+          if (totalCount >= criteria.count) {
             shouldEarn = true;
           }
         }

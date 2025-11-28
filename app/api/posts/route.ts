@@ -4,7 +4,7 @@ import { auth } from "@/lib/auth";
 import { z } from "zod";
 import { sanitizePlainText } from "@/lib/security/sanitize";
 import { checkRateLimit, rateLimitKey, Limits, isDuplicateWithin } from "@/lib/security/rateLimit";
-import { checkSocialInteractionBadges } from "@/app/api/badges/check/badge-service";
+import { checkSocialInteractionBadges, type BadgeCheckResult } from "@/app/api/badges/check/badge-service";
 
 const createPostSchema = z.object({
   content: z.string().max(2200).trim().transform((val) => val === "" ? null : val).nullable().optional(),
@@ -431,10 +431,19 @@ export async function POST(request: Request) {
       },
     });
 
-    // Sosyal etkileşim rozetlerini kontrol et (async, hata olsa bile devam et)
-    checkSocialInteractionBadges({ userId }).catch((error) => {
+    // Sosyal etkileşim rozetlerini kontrol et
+    let badgeResults: BadgeCheckResult = {
+      newlyEarnedBadges: [],
+      totalEarned: 0,
+    };
+    try {
+      badgeResults = await checkSocialInteractionBadges({ userId });
+      if (badgeResults.totalEarned > 0) {
+        console.log(`[POST_CREATE] Kullanıcı ${badgeResults.totalEarned} rozet kazandı. userId: ${userId}`);
+      }
+    } catch (error) {
       console.error("Error checking social interaction badges:", error);
-    });
+    }
 
     return NextResponse.json({
       id: post.id,
@@ -447,6 +456,7 @@ export async function POST(request: Request) {
       likesCount: post._count.likes,
       commentsCount: post._count.comments,
       isLiked: false,
+      badgeResults,
       isSaved: false,
       comments: [],
     });

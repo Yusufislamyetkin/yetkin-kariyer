@@ -13,6 +13,8 @@ import {
   Wallet,
   Building,
   Target,
+  Circle,
+  Star,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
@@ -169,6 +171,95 @@ export default function JobDetailPage() {
     }
   };
 
+  const renderRequirements = (requirements: any) => {
+    // If requirements is a string, show it as is
+    if (typeof requirements === "string") {
+      return (
+        <p className="text-sm leading-6 text-gray-700 dark:text-gray-300 whitespace-pre-wrap">
+          {requirements}
+        </p>
+      );
+    }
+
+    // If requirements is an object with mustHave or niceToHave
+    if (
+      requirements &&
+      typeof requirements === "object" &&
+      !Array.isArray(requirements)
+    ) {
+      const mustHave = Array.isArray(requirements.mustHave)
+        ? requirements.mustHave
+        : [];
+      const niceToHave = Array.isArray(requirements.niceToHave)
+        ? requirements.niceToHave
+        : [];
+
+      // If both are empty, fallback to JSON
+      if (mustHave.length === 0 && niceToHave.length === 0) {
+        return (
+          <pre className="max-h-64 overflow-y-auto whitespace-pre-wrap text-xs">
+            {JSON.stringify(requirements, null, 2)}
+          </pre>
+        );
+      }
+
+      return (
+        <div className="space-y-4">
+          {mustHave.length > 0 && (
+            <div className="rounded-lg border border-red-200 bg-red-50/50 p-4 dark:border-red-900/40 dark:bg-red-900/20">
+              <div className="mb-3 flex items-center gap-2">
+                <AlertTriangle className="h-5 w-5 text-red-600 dark:text-red-400" />
+                <h3 className="text-sm font-semibold text-red-800 dark:text-red-300">
+                  Zorunlu Gereksinimler
+                </h3>
+              </div>
+              <ul className="space-y-2">
+                {mustHave.map((req: string, index: number) => (
+                  <li
+                    key={`must-have-${index}`}
+                    className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-200"
+                  >
+                    <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-red-600 dark:text-red-400" />
+                    <span className="leading-relaxed">{req}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {niceToHave.length > 0 && (
+            <div className="rounded-lg border border-blue-200 bg-blue-50/50 p-4 dark:border-blue-900/40 dark:bg-blue-900/20">
+              <div className="mb-3 flex items-center gap-2">
+                <Star className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                <h3 className="text-sm font-semibold text-blue-800 dark:text-blue-300">
+                  Tercih Edilen Özellikler
+                </h3>
+              </div>
+              <ul className="space-y-2">
+                {niceToHave.map((req: string, index: number) => (
+                  <li
+                    key={`nice-to-have-${index}`}
+                    className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-200"
+                  >
+                    <Circle className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-600 dark:text-blue-400 fill-blue-600 dark:fill-blue-400" />
+                    <span className="leading-relaxed">{req}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    // Fallback: show as JSON
+    return (
+      <pre className="max-h-64 overflow-y-auto whitespace-pre-wrap text-xs">
+        {JSON.stringify(requirements, null, 2)}
+      </pre>
+    );
+  };
+
   if (loading) {
     return (
       <div className="container mx-auto px-4 py-12">
@@ -236,14 +327,8 @@ export default function JobDetailPage() {
             <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
               Gereksinimler
             </h2>
-            <div className="mt-3 rounded-xl border border-gray-200 bg-gray-50 p-4 text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-900/40 dark:text-gray-200">
-              {typeof job.requirements === "string" ? (
-                <p>{job.requirements}</p>
-              ) : (
-                <pre className="max-h-64 overflow-y-auto whitespace-pre-wrap">
-                  {JSON.stringify(job.requirements, null, 2)}
-                </pre>
-              )}
+            <div className="mt-3 rounded-xl border border-gray-200 bg-gray-50 p-4 shadow-sm dark:border-gray-700 dark:bg-gray-900/40">
+              {renderRequirements(job.requirements)}
             </div>
           </div>
         </CardContent>

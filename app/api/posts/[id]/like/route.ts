@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
 import { broadcastSocialNotification } from "@/lib/realtime/signalr-triggers";
-import { checkSocialInteractionBadges } from "@/app/api/badges/check/badge-service";
+import { checkSocialInteractionBadges, type BadgeCheckResult } from "@/app/api/badges/check/badge-service";
 
 export async function POST(
   request: Request,
@@ -47,6 +47,12 @@ export async function POST(
       },
     });
 
+    // Initialize badge results
+    let badgeResults: BadgeCheckResult = {
+      newlyEarnedBadges: [],
+      totalEarned: 0,
+    };
+
     if (existingLike) {
       // Unlike
       await db.postLike.delete({
@@ -63,10 +69,15 @@ export async function POST(
         },
       });
 
-      // Sosyal etkileşim rozetlerini kontrol et (async, hata olsa bile devam et)
-      checkSocialInteractionBadges({ userId }).catch((error) => {
+      // Sosyal etkileşim rozetlerini kontrol et
+      try {
+        badgeResults = await checkSocialInteractionBadges({ userId });
+        if (badgeResults.totalEarned > 0) {
+          console.log(`[POST_LIKE] Kullanıcı ${badgeResults.totalEarned} rozet kazandı. userId: ${userId}`);
+        }
+      } catch (error) {
         console.error("Error checking social interaction badges:", error);
-      });
+      }
 
       // Send notification to post owner if not the same user
       if (post.userId !== userId) {
@@ -108,6 +119,7 @@ export async function POST(
     return NextResponse.json({
       liked: !existingLike,
       likesCount,
+      badgeResults: existingLike ? { newlyEarnedBadges: [], totalEarned: 0 } : badgeResults,
     });
   } catch (error) {
     console.error("Error toggling like:", error);

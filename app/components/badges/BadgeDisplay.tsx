@@ -17,11 +17,19 @@ interface Badge {
   isDisplayed?: boolean;
 }
 
+interface BadgeProgress {
+  current: number;
+  target: number;
+  percentage: number;
+  isCompleted: boolean;
+}
+
 interface BadgeDisplayProps {
   badge: Badge;
   earned?: boolean;
   onClick?: () => void;
   size?: "sm" | "md" | "lg";
+  progress?: BadgeProgress;
 }
 
 const rarityColors = {
@@ -57,6 +65,7 @@ export function BadgeDisplay({
   earned = false,
   onClick,
   size = "md",
+  progress,
 }: BadgeDisplayProps) {
   const sizeConfig = {
     sm: {
@@ -157,6 +166,33 @@ export function BadgeDisplay({
             {badge.description}
           </p>
         )}
+        {progress && progress.target > 0 && (
+          <div className="mt-3 space-y-1">
+            <div className="flex items-center justify-between text-xs px-2">
+              <span className={`font-medium ${earned ? "text-gray-700 dark:text-gray-300" : "text-gray-500 dark:text-gray-400"}`}>
+                İlerleme
+              </span>
+              <span className={`font-semibold ${earned ? "text-emerald-600 dark:text-emerald-400" : "text-blue-600 dark:text-blue-400"}`}>
+                {progress.current} / {progress.target}
+              </span>
+            </div>
+            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
+              <div
+                className={`h-full transition-all duration-300 rounded-full ${
+                  earned
+                    ? "bg-gradient-to-r from-emerald-500 to-emerald-600"
+                    : "bg-gradient-to-r from-blue-500 to-blue-600"
+                }`}
+                style={{ width: `${progress.percentage}%` }}
+              />
+            </div>
+            {progress.isCompleted && (
+              <p className="text-xs text-center text-emerald-600 dark:text-emerald-400 font-medium px-2">
+                Tamamlandı ✓
+              </p>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -165,11 +201,13 @@ export function BadgeDisplay({
 interface BadgeCollectionProps {
   badges: Badge[];
   earnedBadgeIds?: Set<string>;
+  progressMap?: Map<string, BadgeProgress>;
 }
 
 export function BadgeCollection({
   badges,
   earnedBadgeIds = new Set(),
+  progressMap,
 }: BadgeCollectionProps) {
   const sortedBadges = [...badges].sort((a, b) => {
     const aEarned = earnedBadgeIds.has(a.id);
@@ -198,6 +236,7 @@ export function BadgeCollection({
           key={badge.id}
           badge={badge}
           earned={earnedBadgeIds.has(badge.id)}
+          progress={progressMap?.get(badge.id)}
         />
       ))}
     </div>

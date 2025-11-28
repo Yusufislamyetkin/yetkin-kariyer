@@ -5,7 +5,7 @@ import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { FriendshipStatus } from "@prisma/client";
 import { broadcastFriendRequestNotification } from "@/lib/realtime/signalr-triggers";
-import { checkSocialInteractionBadges } from "@/app/api/badges/check/badge-service";
+import { checkSocialInteractionBadges, type BadgeCheckResult } from "@/app/api/badges/check/badge-service";
 
 const requestSchema = z.object({
   targetUserId: z
@@ -80,15 +80,26 @@ export async function POST(request: Request) {
           });
 
           // Sosyal etkileşim rozetlerini kontrol et (hem requester hem addressee için)
-          Promise.all([
-            checkSocialInteractionBadges({ userId: existing.requesterId }),
-            checkSocialInteractionBadges({ userId: userId }),
-          ]).catch((error) => {
+          let badgeResults: BadgeCheckResult = {
+            newlyEarnedBadges: [],
+            totalEarned: 0,
+          };
+          try {
+            const [requesterBadges, addresseeBadges] = await Promise.all([
+              checkSocialInteractionBadges({ userId: existing.requesterId }),
+              checkSocialInteractionBadges({ userId: userId }),
+            ]);
+            // Return badges for the current user (addressee)
+            badgeResults = addresseeBadges;
+            if (badgeResults.totalEarned > 0) {
+              console.log(`[FRIEND_REQUEST] Kullanıcı ${badgeResults.totalEarned} rozet kazandı. userId: ${userId}`);
+            }
+          } catch (error) {
             console.error("Error checking social interaction badges:", error);
-          });
+          }
 
           return NextResponse.json(
-            { friendship: updated, message: "Arkadaşlık isteği kabul edildi." },
+            { friendship: updated, message: "Arkadaşlık isteği kabul edildi.", badgeResults },
             { status: 200 }
           );
         }

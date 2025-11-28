@@ -1,0 +1,294 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { X, Sparkles, Award } from "lucide-react";
+import { Button } from "@/app/components/ui/Button";
+
+interface Badge {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  color: string;
+  category: string;
+  rarity: "common" | "rare" | "epic" | "legendary";
+  tier?: "bronze" | "silver" | "gold" | "platinum";
+  points: number;
+}
+
+interface BadgeNotificationModalProps {
+  badge: Badge | null;
+  onNext: () => void;
+  onDismiss: () => void;
+  currentIndex: number;
+  totalCount: number;
+}
+
+const rarityColors = {
+  common: "from-gray-400 to-gray-600",
+  rare: "from-blue-400 to-blue-600",
+  epic: "from-purple-400 to-purple-600",
+  legendary: "from-yellow-400 to-orange-600",
+};
+
+const rarityBorders = {
+  common: "border-gray-300 dark:border-gray-700",
+  rare: "border-blue-300 dark:border-blue-700",
+  epic: "border-purple-300 dark:border-purple-700",
+  legendary: "border-yellow-300 dark:border-orange-700",
+};
+
+const tierNames = {
+  bronze: "Başlangıç Seviye",
+  silver: "Orta Seviye",
+  gold: "İleri Seviye",
+  platinum: "Efsanevi",
+};
+
+const tierColors = {
+  bronze: "from-amber-600 to-orange-600",
+  silver: "from-gray-400 to-gray-600",
+  gold: "from-yellow-400 to-amber-500",
+  platinum: "from-purple-400 to-pink-500",
+};
+
+export function BadgeNotificationModal({
+  badge,
+  onNext,
+  onDismiss,
+  currentIndex,
+  totalCount,
+}: BadgeNotificationModalProps) {
+  const [isVisible, setIsVisible] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  useEffect(() => {
+    if (badge) {
+      setIsVisible(true);
+      setIsAnimating(true);
+      
+      // Auto-advance after 4 seconds
+      const autoAdvanceTimer = setTimeout(() => {
+        handleNext();
+      }, 4000);
+
+      return () => {
+        clearTimeout(autoAdvanceTimer);
+      };
+    } else {
+      setIsVisible(false);
+      setIsAnimating(false);
+    }
+  }, [badge]);
+
+  const handleNext = () => {
+    setIsAnimating(false);
+    setTimeout(() => {
+      if (currentIndex < totalCount - 1) {
+        onNext();
+      } else {
+        onDismiss();
+      }
+    }, 300);
+  };
+
+  const handleDismiss = () => {
+    setIsAnimating(false);
+    setTimeout(() => {
+      onDismiss();
+    }, 300);
+  };
+
+  if (!badge || !isVisible) {
+    return null;
+  }
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center pointer-events-none"
+      aria-live="assertive"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="badge-modal-title"
+    >
+      {/* Backdrop */}
+      <div
+        className={`absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${
+          isAnimating ? "opacity-100" : "opacity-0"
+        }`}
+        onClick={handleDismiss}
+      />
+
+      {/* Modal */}
+      <div
+        className={`relative w-full max-w-md mx-4 pointer-events-auto transform transition-all duration-300 ${
+          isAnimating
+            ? "scale-100 opacity-100 translate-y-0"
+            : "scale-95 opacity-0 translate-y-4"
+        }`}
+      >
+        <div
+          className={`relative overflow-hidden rounded-3xl border backdrop-blur-xl shadow-2xl bg-gradient-to-br ${rarityColors[badge.rarity]} ${rarityBorders[badge.rarity]}`}
+        >
+          {/* Glow effect */}
+          <div className="absolute inset-0 opacity-30 mix-blend-soft-light bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.5),_transparent_70%)]" />
+          
+          {/* Animated sparkles */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute top-10 left-10 w-2 h-2 bg-white rounded-full animate-ping" />
+            <div className="absolute top-20 right-16 w-1.5 h-1.5 bg-white rounded-full animate-ping" style={{ animationDelay: "0.5s" }} />
+            <div className="absolute bottom-16 left-20 w-1 h-1 bg-white rounded-full animate-ping" style={{ animationDelay: "1s" }} />
+            <div className="absolute bottom-20 right-12 w-2.5 h-2.5 bg-white rounded-full animate-ping" style={{ animationDelay: "1.5s" }} />
+          </div>
+
+          <div className="relative px-6 py-8 sm:px-8 sm:py-10 space-y-6">
+            {/* Close button */}
+            <button
+              onClick={handleDismiss}
+              className="absolute top-4 right-4 shrink-0 rounded-full bg-white/20 hover:bg-white/30 text-white transition-colors p-2 z-10"
+              aria-label="Kapat"
+            >
+              <X className="h-5 w-5" />
+            </button>
+
+            {/* Header */}
+            <div className="text-center space-y-2">
+              <div className="flex items-center justify-center gap-2 text-white/90">
+                <Sparkles className="h-5 w-5 animate-pulse" />
+                <p className="text-sm font-semibold uppercase tracking-wide">
+                  Yeni Rozet Kazandın!
+                </p>
+              </div>
+              {totalCount > 1 && (
+                <p className="text-xs text-white/80">
+                  {currentIndex + 1} / {totalCount}
+                </p>
+              )}
+            </div>
+
+            {/* Badge Display */}
+            <div className="flex flex-col items-center space-y-4">
+              <div
+                className={`relative transform transition-all duration-500 ${
+                  isAnimating ? "scale-100 rotate-0" : "scale-0 rotate-180"
+                }`}
+                style={{ transitionDelay: "200ms" }}
+              >
+                {/* Glow ring */}
+                <div
+                  className={`absolute -inset-4 rounded-full bg-gradient-to-br ${rarityColors[badge.rarity]} opacity-50 blur-xl animate-pulse`}
+                />
+                
+                {/* Badge container */}
+                <div className="relative w-40 h-40 rounded-3xl border-4 border-white/40 dark:border-white/20 bg-white/20 backdrop-blur-xl shadow-2xl overflow-hidden">
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background: `linear-gradient(135deg, ${badge.color}dd, ${badge.color}88)`,
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-transparent opacity-80 mix-blend-screen" />
+                  
+                  {/* Badge icon */}
+                  <div className="relative h-full flex items-center justify-center">
+                    <span className="text-7xl drop-shadow-2xl filter drop-shadow-[0_0_10px_rgba(0,0,0,0.3)]">
+                      {badge.icon || "🏅"}
+                    </span>
+                  </div>
+                  
+                  {/* Shine effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full animate-shine" />
+                </div>
+
+                {/* Rarity badge */}
+                <div className="absolute -bottom-2 left-1/2 -translate-x-1/2">
+                  <span className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide bg-white/90 dark:bg-white/10 text-gray-900 dark:text-gray-50 shadow-lg border border-white/40 dark:border-white/10">
+                    <Award className="h-3 w-3" />
+                    {badge.rarity === "common" && "Klasik"}
+                    {badge.rarity === "rare" && "Nadir"}
+                    {badge.rarity === "epic" && "Efsanevi"}
+                    {badge.rarity === "legendary" && "Mitik"}
+                  </span>
+                </div>
+              </div>
+
+              {/* Badge Info */}
+              <div
+                className={`text-center space-y-2 transform transition-all duration-500 ${
+                  isAnimating ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+                }`}
+                style={{ transitionDelay: "400ms" }}
+              >
+                <h3
+                  id="badge-modal-title"
+                  className="text-2xl font-bold text-white drop-shadow-lg"
+                >
+                  {badge.name}
+                </h3>
+                <p className="text-sm text-white/90 leading-relaxed px-4">
+                  {badge.description}
+                </p>
+                
+                {/* Points and Tier */}
+                <div className="flex items-center justify-center gap-3 pt-2">
+                  <span className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold bg-white/20 text-white backdrop-blur-sm">
+                    <Sparkles className="h-3 w-3" />
+                    {badge.points} puan
+                  </span>
+                  {badge.tier && (
+                    <span
+                      className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wide bg-gradient-to-r ${tierColors[badge.tier]} text-white shadow-md`}
+                    >
+                      {tierNames[badge.tier]}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div
+              className={`flex items-center justify-center gap-3 pt-4 transform transition-all duration-500 ${
+                isAnimating ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+              }`}
+              style={{ transitionDelay: "600ms" }}
+            >
+              {currentIndex < totalCount - 1 ? (
+                <Button
+                  onClick={handleNext}
+                  variant="gradient"
+                  className="bg-white/20 hover:bg-white/30 text-white border-white/30 backdrop-blur-sm"
+                >
+                  Sıradaki Rozet ({currentIndex + 2}/{totalCount})
+                </Button>
+              ) : (
+                <Button
+                  onClick={handleDismiss}
+                  variant="gradient"
+                  className="bg-white/20 hover:bg-white/30 text-white border-white/30 backdrop-blur-sm"
+                >
+                  Harika!
+                </Button>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style jsx>{`
+        @keyframes shine {
+          0% {
+            transform: translateX(-100%);
+          }
+          100% {
+            transform: translateX(100%);
+          }
+        }
+        .animate-shine {
+          animation: shine 2s infinite;
+        }
+      `}</style>
+    </div>
+  );
+}
+

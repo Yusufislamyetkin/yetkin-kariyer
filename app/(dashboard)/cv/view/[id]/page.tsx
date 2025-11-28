@@ -29,6 +29,8 @@ export default function ViewCVPage() {
   const [uploading, setUploading] = useState(false);
   const [lastUploadUrl, setLastUploadUrl] = useState<string | null>(null);
   const [lastUploadName, setLastUploadName] = useState<string | null>(null);
+  const [retryCount, setRetryCount] = useState(0);
+  const MAX_RETRIES = 2;
 
   const handleCvUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -89,8 +91,9 @@ export default function ViewCVPage() {
     }
   };
 
-  const handleDownload = async () => {
+  const handleDownload = async (retryAttempt: number = 0) => {
     let url: string | null = null;
+    let timeoutId: NodeJS.Timeout | null = null;
     try {
       setDownloading(true);
       setError(null);
@@ -99,12 +102,22 @@ export default function ViewCVPage() {
         throw new Error("CV ID bulunamadı");
       }
       
+      // Create abort controller for timeout
+      const abortController = new AbortController();
+      timeoutId = setTimeout(() => abortController.abort(), 60000); // 60 second timeout
+      
       const response = await fetch(`/api/cv/${params.id}/pdf?download=1`, {
         method: "GET",
         headers: {
           "Accept": "application/pdf",
         },
+        signal: abortController.signal,
       });
+      
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+        timeoutId = null;
+      }
       
       // Check content type first
       const contentType = response.headers.get("content-type") || "";
@@ -112,13 +125,38 @@ export default function ViewCVPage() {
       if (!response.ok) {
         // Try to get error message from JSON response
         let errorMessage = "PDF oluşturulamadı";
+        let shouldRetry = false;
+        
         try {
           const errorData = await response.json();
           errorMessage = errorData.error || errorMessage;
+          
+          // Determine if we should retry based on status code
+          if (response.status === 500 || response.status === 503) {
+            shouldRetry = true;
+          } else if (response.status === 503 && errorMessage.includes("yapılandırılmadı")) {
+            errorMessage = "PDF servisi şu anda kullanılamıyor. Lütfen daha sonra tekrar deneyin.";
+          } else if (response.status === 401) {
+            errorMessage = "Oturum süreniz dolmuş. Lütfen tekrar giriş yapın.";
+          } else if (response.status === 404) {
+            errorMessage = "CV bulunamadı. Lütfen sayfayı yenileyin ve tekrar deneyin.";
+          }
         } catch {
           // If not JSON, use status text
           errorMessage = response.statusText || errorMessage;
+          if (response.status === 500 || response.status === 503) {
+            shouldRetry = true;
+          }
         }
+        
+        // Retry if appropriate
+        if (shouldRetry && retryAttempt < MAX_RETRIES) {
+          console.log(`[PDF] Retry attempt ${retryAttempt + 1}/${MAX_RETRIES}`);
+          setRetryCount(retryAttempt + 1);
+          await new Promise((resolve) => setTimeout(resolve, 2000 * (retryAttempt + 1))); // Exponential backoff
+          return handleDownload(retryAttempt + 1);
+        }
+        
         throw new Error(errorMessage);
       }
 
@@ -135,10 +173,25 @@ export default function ViewCVPage() {
           const errorText = await blob.text();
           const errorData = JSON.parse(errorText);
           throw new Error(errorData.error || "PDF oluşturulamadı");
-        } catch {
+        } catch (parseError) {
           throw new Error("PDF oluşturulamadı: Geçersiz dosya formatı");
         }
       }
+      
+      // Verify blob size (should be at least 1KB for a valid PDF)
+      if (blob.size < 1024) {
+        // Might be an error message, try to read it
+        try {
+          const errorText = await blob.text();
+          const errorData = JSON.parse(errorText);
+          throw new Error(errorData.error || "PDF oluşturulamadı: Dosya çok küçük");
+        } catch {
+          throw new Error("PDF oluşturulamadı: Geçersiz dosya boyutu");
+        }
+      }
+      
+      // Reset retry count on success
+      setRetryCount(0);
       
       // Create download link
       url = URL.createObjectURL(blob);
@@ -158,11 +211,28 @@ export default function ViewCVPage() {
       }, 100);
     } catch (err: any) {
       console.error("Error downloading PDF:", err);
-      setError(err.message || "PDF indirilirken bir hata oluştu");
+      
+      // Handle specific error types
+      let errorMessage = err.message || "PDF indirilirken bir hata oluştu";
+      
+      if (err.name === "AbortError" || err.name === "TimeoutError") {
+        errorMessage = "PDF oluşturma işlemi zaman aşımına uğradı. Lütfen tekrar deneyin.";
+      } else if (err.message && err.message.includes("network")) {
+        errorMessage = "Ağ bağlantı hatası. İnternet bağlantınızı kontrol edin ve tekrar deneyin.";
+      } else if (err.message && err.message.includes("fetch")) {
+        errorMessage = "Sunucuya bağlanılamadı. Lütfen daha sonra tekrar deneyin.";
+      }
+      
+      setError(errorMessage);
+      setRetryCount(0);
+      
       if (url) {
         URL.revokeObjectURL(url);
       }
     } finally {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
       setDownloading(false);
     }
   };
@@ -197,12 +267,19 @@ export default function ViewCVPage() {
               <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
                 Hata
               </h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">
+              <p className="text-gray-600 dark:text-gray-400 mb-6 whitespace-pre-line">
                 {error}
               </p>
-              <Button onClick={loadCV}>
-                Tekrar Dene
-              </Button>
+              <div className="flex gap-2 justify-center">
+                <Button onClick={loadCV}>
+                  Sayfayı Yenile
+                </Button>
+                {error?.includes("PDF") && (
+                  <Button variant="primary" onClick={() => handleDownload(0)}>
+                    PDF İndirmeyi Tekrar Dene
+                  </Button>
+                )}
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -239,13 +316,21 @@ export default function ViewCVPage() {
             </Button>
           </Link>
           <Button 
-            onClick={handleDownload} 
+            onClick={() => handleDownload(0)} 
             disabled={downloading || !cv}
             className="flex-1 sm:flex-initial"
           >
             <Download className="h-4 w-4 mr-2" />
-            <span className="hidden sm:inline">{downloading ? "PDF Oluşturuluyor..." : "PDF İndir"}</span>
-            <span className="sm:hidden">{downloading ? "Oluşturuluyor..." : "PDF"}</span>
+            <span className="hidden sm:inline">
+              {downloading 
+                ? (retryCount > 0 ? `Tekrar deneniyor (${retryCount}/${MAX_RETRIES})...` : "PDF Oluşturuluyor...") 
+                : "PDF İndir"}
+            </span>
+            <span className="sm:hidden">
+              {downloading 
+                ? (retryCount > 0 ? `Tekrar (${retryCount})` : "Oluşturuluyor...") 
+                : "PDF"}
+            </span>
           </Button>
           <label className="flex-1 sm:flex-initial">
             <input
@@ -300,4 +385,5 @@ export default function ViewCVPage() {
     </div>
   );
 }
+
 

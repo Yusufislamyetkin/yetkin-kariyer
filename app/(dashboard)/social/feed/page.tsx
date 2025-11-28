@@ -11,6 +11,7 @@ import { StoriesBar } from "@/app/components/social/StoriesBar";
 import { Loader2 } from "lucide-react";
 import { Button } from "@/app/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
+import { useBadgeNotificationHandler } from "@/hooks/useBadgeNotificationHandler";
 
 interface Post {
   id: string;
@@ -44,6 +45,7 @@ interface Post {
 export default function FeedPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const { handleBadgeResults } = useBadgeNotificationHandler();
   const [posts, setPosts] = useState<Post[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
@@ -130,6 +132,11 @@ export default function FeedPage() {
 
       const data = await response.json();
 
+      // Check for badge results and show notification
+      if (data.badgeResults) {
+        handleBadgeResults(data.badgeResults);
+      }
+
       // Update local state
       setPosts((prev) =>
         prev.map((post) => {
@@ -147,7 +154,7 @@ export default function FeedPage() {
       console.error("Error liking post:", error);
       throw error;
     }
-  }, []);
+  }, [handleBadgeResults]);
 
   const handleSave = useCallback(async (postId: string) => {
     try {
@@ -262,6 +269,11 @@ export default function FeedPage() {
         method: "POST",
       });
       if (response.ok) {
+        const data = await response.json();
+        // Check for badge results and show notification
+        if (data.badgeResults) {
+          handleBadgeResults(data.badgeResults);
+        }
         setSuggestedUsers((prev) => prev.filter((u) => u.id !== userId));
       }
     } catch (error) {
@@ -280,6 +292,10 @@ export default function FeedPage() {
       });
       if (response.ok) {
         const data = await response.json();
+        // Check for badge results and show notification
+        if (data.badgeResults) {
+          handleBadgeResults(data.badgeResults);
+        }
         // Kullanıcıyı listeden kaldırmak yerine, istek gönderildi durumunu işaretle
         setSentRequests((prev) => new Set(prev).add(userId));
         // Friendship ID'yi sakla (iptal için gerekli)

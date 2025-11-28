@@ -3,7 +3,7 @@ import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
 import { put } from "@vercel/blob";
 import { optimizeImage } from "@/lib/image-optimization";
-import { checkSocialInteractionBadges } from "@/app/api/badges/check/badge-service";
+import { checkSocialInteractionBadges, type BadgeCheckResult } from "@/app/api/badges/check/badge-service";
 
 const MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024; // 10MB
 const ALLOWED_MIME_TYPES = ["image/jpeg", "image/png", "image/webp", "image/jpg"];
@@ -93,10 +93,19 @@ export async function POST(request: Request) {
       },
     });
 
-    // Sosyal etkileşim rozetlerini kontrol et (async, hata olsa bile devam et)
-    checkSocialInteractionBadges({ userId: session.user.id }).catch((error) => {
+    // Sosyal etkileşim rozetlerini kontrol et
+    let badgeResults: BadgeCheckResult = {
+      newlyEarnedBadges: [],
+      totalEarned: 0,
+    };
+    try {
+      badgeResults = await checkSocialInteractionBadges({ userId: session.user.id });
+      if (badgeResults.totalEarned > 0) {
+        console.log(`[STORY_CREATE] Kullanıcı ${badgeResults.totalEarned} rozet kazandı. userId: ${session.user.id}`);
+      }
+    } catch (error) {
       console.error("Error checking social interaction badges:", error);
-    });
+    }
 
     return NextResponse.json({
       story: {
@@ -108,6 +117,7 @@ export async function POST(request: Request) {
         user: story.user,
         isViewed: story.views.length > 0,
       },
+      badgeResults,
     });
   } catch (error) {
     console.error("[STORY_CREATE]", error);

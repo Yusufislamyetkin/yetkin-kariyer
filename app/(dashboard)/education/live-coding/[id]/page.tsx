@@ -26,6 +26,7 @@ import { cn } from "@/lib/utils";
 import { normalizeLiveCodingPayload } from "@/lib/education/liveCoding";
 import type { LiveCodingTask } from "@/types/live-coding";
 import { useCelebration } from "@/app/contexts/CelebrationContext";
+import { useBadgeNotification } from "@/app/contexts/BadgeNotificationContext";
 
 interface Quiz {
   id: string;
@@ -91,6 +92,7 @@ export default function LiveCodingPage() {
   const params = useParams();
   const router = useRouter();
   const { celebrate } = useCelebration();
+  const { showBadges } = useBadgeNotification();
 
   const resolvedLiveCodingId =
     typeof params.id === "string"
@@ -101,7 +103,6 @@ export default function LiveCodingPage() {
 
   const [quiz, setQuiz] = useState<Quiz | null>(null);
   const [loading, setLoading] = useState(true);
-  const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [taskLanguages, setTaskLanguages] = useState<Record<string, LiveCodingLanguage>>({});
   const [taskCodes, setTaskCodes] =
@@ -136,7 +137,7 @@ export default function LiveCodingPage() {
   const aiFeedbackRef = useRef<HTMLDivElement>(null);
 
   // Normalize output for comparison (trim, normalize whitespace, remove trailing newlines)
-  const normalizeOutput = (output: string): string => {
+  const normalizeOutput = useCallback((output: string): string => {
     return output
       .trim()
       .replace(/\r\n/g, "\n") // Normalize line endings
@@ -146,10 +147,10 @@ export default function LiveCodingPage() {
       .replace(/[ \t]+\n/g, "\n") // Remove trailing spaces
       .replace(/\n[ \t]+/g, "\n") // Remove leading spaces
       .trim();
-  };
+  }, []);
 
   // Compare output with expected output
-  const compareOutputs = (actual: string, expected: string): boolean => {
+  const compareOutputs = useCallback((actual: string, expected: string): boolean => {
     const normalizedActual = normalizeOutput(actual);
     const normalizedExpected = normalizeOutput(expected);
     
@@ -169,7 +170,7 @@ export default function LiveCodingPage() {
     }
     
     return false;
-  };
+  }, [normalizeOutput]);
 
   useEffect(() => {
     const resolvedId = typeof params.id === "string"
@@ -392,8 +393,6 @@ export default function LiveCodingPage() {
     return completedTasks.size;
   }, [completedTasks]);
 
-  const submitDisabled = submitting || completedTaskCount === 0;
-
   const handleSelectTask = useCallback((taskId: string) => {
     setActiveTaskId(taskId);
     setSubmitError(null);
@@ -495,6 +494,37 @@ export default function LiveCodingPage() {
         
         if (isCorrect) {
           setCompletedTasks((prev) => new Set(prev).add(activeTask.id));
+          
+          // Trigger confetti celebration
+          celebrate({
+            title: "Case Tamamlandı! 🎉",
+            message: `${activeTask.title} başarıyla tamamlandı. Harika iş çıkardın!`,
+            variant: "success",
+            durationMs: 5000,
+          });
+
+          // Mark case as completed in database
+          try {
+            const response = await fetch(`/api/education/live-coding/${resolvedLiveCodingId}/complete-case`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                taskId: activeTask.id,
+                completedAt: new Date().toISOString(),
+              }),
+            });
+            
+            if (response.ok) {
+              const data = await response.json();
+              // Show badge notification if badges were earned
+              if (data.badgeResults?.newlyEarnedBadges?.length > 0) {
+                showBadges(data.badgeResults.newlyEarnedBadges);
+              }
+            }
+          } catch (error) {
+            console.error("Error completing case:", error);
+            // Don't show error to user, this is a background operation
+          }
         }
       }
 
@@ -520,7 +550,7 @@ export default function LiveCodingPage() {
     } finally {
       setRunning(false);
     }
-  }, [activeTask, activeLanguage, activeUserCode, compareOutputs]);
+  }, [activeTask, activeLanguage, activeUserCode, compareOutputs, resolvedLiveCodingId, celebrate, showBadges]);
 
   const handleAIAnalysis = useCallback(async () => {
     if (!activeTask || !activeLanguage || !activeUserCode.trim()) return;
@@ -576,7 +606,7 @@ export default function LiveCodingPage() {
 
           // Mark case as completed in database
           try {
-            await fetch(`/api/education/live-coding/${resolvedLiveCodingId}/complete-case`, {
+            const response = await fetch(`/api/education/live-coding/${resolvedLiveCodingId}/complete-case`, {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
@@ -584,6 +614,14 @@ export default function LiveCodingPage() {
                 completedAt: new Date().toISOString(),
               }),
             });
+            
+            if (response.ok) {
+              const data = await response.json();
+              // Show badge notification if badges were earned
+              if (data.badgeResults?.newlyEarnedBadges?.length > 0) {
+                showBadges(data.badgeResults.newlyEarnedBadges);
+              }
+            }
           } catch (error) {
             console.error("Error completing case:", error);
             // Don't show error to user, this is a background operation
@@ -620,85 +658,6 @@ export default function LiveCodingPage() {
     }
   }, [activeTask, activeLanguage, activeUserCode, runResult, resolvedLiveCodingId, celebrate]);
 
-  const handleSubmit = async () => {
-    if (submitting || !quiz) return;
-
-    if (completedTaskCount === 0) {
-      setSubmitError("En az bir görevi başarıyla tamamladıktan sonra gönderim yapabilirsiniz.");
-      return;
-    }
-
-    setSubmitting(true);
-    setSubmitError(null);
-
-    try {
-      const durationSeconds = startedAtRef.current
-        ? Math.max(0, Math.round((Date.now() - startedAtRef.current) / 1000))
-        : 0;
-
-      const normalizedTasks = tasks.map((task) => {
-        const language = taskLanguages[task.id] ?? task.languages[0] ?? DEFAULT_LANGUAGE;
-        const userCode = taskCodes[task.id]?.[language] ?? "";
-        const initialCode =
-          task.initialCode?.[language] ??
-          task.initialCode?.[task.languages[0] ?? DEFAULT_LANGUAGE] ??
-          "";
-
-        return {
-          taskId: task.id,
-          language,
-          code: userCode || initialCode,
-          durationSeconds: durationSeconds,
-          timeLimitSeconds: task.timeLimitMinutes ? task.timeLimitMinutes * 60 : null,
-        };
-      });
-
-      const response = await fetch(`/api/education/live-coding/${resolvedLiveCodingId}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          tasks: normalizedTasks,
-          metadata: {
-            startedAt: startedAtRef.current ? new Date(startedAtRef.current).toISOString() : null,
-            completedAt: new Date().toISOString(),
-          },
-          metrics: {
-            totalDurationSeconds: durationSeconds,
-            completedTaskCount,
-            totalTaskCount: tasks.length,
-          },
-          startedAt: startedAtRef.current ? new Date(startedAtRef.current).toISOString() : null,
-          completedAt: new Date().toISOString(),
-        }),
-      });
-
-        const data = await response.json();
-        if (!response.ok) {
-        throw new Error(data?.error || "Canlı kodlama gönderimi başarısız oldu.");
-        }
-
-        if (typeof window !== "undefined" && data?.liveCodingAttempt) {
-          sessionStorage.setItem(
-            "latest-live-coding-attempt",
-            JSON.stringify({
-              attempt: data.liveCodingAttempt,
-            quizId: resolvedLiveCodingId,
-              quizTitle: quiz?.title ?? "",
-              storedAt: Date.now(),
-            })
-          );
-        }
-
-      router.push(`/education/live-coding/${resolvedLiveCodingId}/result`);
-    } catch (error) {
-      console.error("Error submitting live coding:", error);
-      setSubmitError(
-        error instanceof Error ? error.message : "Canlı kodlama gönderimi sırasında bir hata oluştu."
-      );
-    } finally {
-      setSubmitting(false);
-    }
-  };
 
   if (loading) {
     return (
@@ -1274,42 +1233,6 @@ export default function LiveCodingPage() {
             </Card>
                     )}
                   </div>
-                )}
-
-                {/* Submit Button */}
-                {completedTaskCount > 0 && (
-                  <Card variant="elevated" className="border-2 shadow-lg border-emerald-500/40 bg-gradient-to-br from-emerald-500/10 to-green-500/10">
-                    <CardContent className="space-y-4 pt-6">
-              {submitError && (
-                        <div className="rounded-xl border-2 border-red-500/40 bg-gradient-to-br from-red-500/10 to-rose-500/10 px-4 py-3 text-sm text-red-200 shadow-sm">
-                  {submitError}
-                </div>
-              )}
-                      <div className="rounded-xl bg-emerald-500/20 border border-emerald-500/40 px-4 py-3 mb-2">
-                        <p className="text-sm font-semibold text-emerald-200 text-center">
-                          {completedTaskCount} / {tasks.length} case başarıyla tamamlandı
-                        </p>
-                      </div>
-              <Button
-                onClick={handleSubmit}
-                        disabled={submitDisabled}
-                variant="gradient"
-                        className="w-full h-12 text-base font-semibold shadow-lg shadow-emerald-500/20 hover:shadow-xl hover:shadow-emerald-500/30 transition-all duration-200 bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700"
-              >
-                {submitting ? (
-                  <>
-                            <div className="mr-2 h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                    Gönderiliyor...
-                  </>
-                ) : (
-                  <>
-                            <CheckCircle className="mr-2 h-5 w-5" />
-                            Çözümü Gönder ({completedTaskCount}/{tasks.length})
-                  </>
-                )}
-              </Button>
-            </CardContent>
-          </Card>
                 )}
               </>
             ) : (

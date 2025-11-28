@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef } from "react";
+import { useMemo, useRef } from "react";
 import Editor from "@monaco-editor/react";
 import type { editor } from "monaco-editor";
 import { LiveCodingLanguage } from "@/types/live-coding";
@@ -85,49 +85,8 @@ export function LiveCodingEditor({
   const monacoLanguage = MONACO_LANGUAGE_MAP[activeLanguage] || "javascript";
   const heightValue = typeof height === "number" ? `${height}px` : height;
 
-  // Disable paste, copy, cut, and context menu
-  useEffect(() => {
-    const editor = editorRef.current;
-    if (!editor) return;
-
-    const disposable = editor.onKeyDown((e) => {
-      // Disable Ctrl+V / Cmd+V (paste)
-      if ((e.ctrlKey || e.metaKey) && e.keyCode === 86) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-      // Disable Ctrl+C / Cmd+C (copy)
-      if ((e.ctrlKey || e.metaKey) && e.keyCode === 67) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-      // Disable Ctrl+X / Cmd+X (cut)
-      if ((e.ctrlKey || e.metaKey) && e.keyCode === 88) {
-        if (readOnly) {
-          e.preventDefault();
-          e.stopPropagation();
-        }
-      }
-    });
-
-    // Disable context menu
-    const contextMenuDisposable = editor.onContextMenu((e) => {
-      e.event.preventDefault();
-    });
-
-    return () => {
-      disposable.dispose();
-      contextMenuDisposable.dispose();
-    };
-  }, [readOnly]);
-
   const handleEditorDidMount = (editor: editor.IStandaloneCodeEditor) => {
     editorRef.current = editor;
-
-    // Disable paste via right-click menu
-    editor.onContextMenu(() => {
-      // Context menu is already disabled above
-    });
   };
 
   return (
@@ -162,10 +121,6 @@ export function LiveCodingEditor({
               Süre: {formatSeconds(timeRemainingSeconds)}
             </span>
           )}
-          <span className="hidden sm:inline-flex items-center gap-1">
-            <span className="h-2 w-2 bg-red-500 rounded-full animate-pulse" />
-            Kopyalama / yapıştırma devre dışı
-          </span>
         </div>
       </div>
       <Editor
@@ -191,7 +146,7 @@ export function LiveCodingEditor({
           suggestOnTriggerCharacters: false,
           acceptSuggestionOnEnter: "off",
           quickSuggestions: false,
-          contextmenu: false,
+          contextmenu: true,
           copyWithSyntaxHighlighting: false,
           domReadOnly: true,
           unicodeHighlight: {

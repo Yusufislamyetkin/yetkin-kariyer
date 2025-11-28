@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
-import { checkBadgesForActivity } from "@/app/api/badges/check/badge-service";
+import { checkBadgesForActivity, type BadgeCheckResult } from "@/app/api/badges/check/badge-service";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -87,11 +87,18 @@ export async function POST(
       });
 
       // Check for badges (daily activities, streak, etc.)
+      let badgeResults: BadgeCheckResult = {
+        newlyEarnedBadges: [],
+        totalEarned: 0,
+      };
       try {
-        await checkBadgesForActivity({
+        badgeResults = await checkBadgesForActivity({
           userId,
           activityType: "canlı kod",
         });
+        if (badgeResults.totalEarned > 0) {
+          console.log(`[LIVE_CODING] Kullanıcı ${badgeResults.totalEarned} rozet kazandı. userId: ${userId}`);
+        }
       } catch (e) {
         console.warn("Badge check failed:", e);
       }
@@ -100,6 +107,7 @@ export async function POST(
         success: true,
         attempt: existingAttempt,
         updated: true,
+        badgeResults,
       });
     }
 
@@ -123,11 +131,18 @@ export async function POST(
     });
 
     // Check for badges (daily activities, streak, etc.)
+    let badgeResults: BadgeCheckResult = {
+      newlyEarnedBadges: [],
+      totalEarned: 0,
+    };
     try {
-      await checkBadgesForActivity({
+      badgeResults = await checkBadgesForActivity({
         userId,
         activityType: "canlı kod",
       });
+      if (badgeResults.totalEarned > 0) {
+        console.log(`[LIVE_CODING] Kullanıcı ${badgeResults.totalEarned} rozet kazandı. userId: ${userId}`);
+      }
     } catch (e) {
       console.warn("Badge check failed:", e);
     }
@@ -136,6 +151,7 @@ export async function POST(
       success: true,
       attempt: liveCodingAttempt,
       created: true,
+      badgeResults,
     });
   } catch (error) {
     console.error("[LIVE_CODING] Error completing case:", error);

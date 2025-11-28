@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
-import { checkSocialInteractionBadges } from "@/app/api/badges/check/badge-service";
+import { checkSocialInteractionBadges, type BadgeCheckResult } from "@/app/api/badges/check/badge-service";
 
 export async function POST(
   request: Request,
@@ -44,6 +44,12 @@ export async function POST(
       },
     });
 
+    // Initialize badge results
+    let badgeResults: BadgeCheckResult = {
+      newlyEarnedBadges: [],
+      totalEarned: 0,
+    };
+
     if (existingFriendship) {
       if (existingFriendship.status === "accepted") {
         // Unfollow (delete friendship)
@@ -60,6 +66,7 @@ export async function POST(
           },
         });
       }
+      // Unfollow or cancel - no badges
     } else {
       // Follow (create friendship with accepted status directly for one-way follow)
       await db.friendship.create({
@@ -71,12 +78,19 @@ export async function POST(
       });
 
       // Sosyal etkileşim rozetlerini kontrol et (hem requester hem addressee için)
-      Promise.all([
-        checkSocialInteractionBadges({ userId: currentUserId }),
-        checkSocialInteractionBadges({ userId: targetUserId }),
-      ]).catch((error) => {
+      try {
+        const [currentUserBadges, targetUserBadges] = await Promise.all([
+          checkSocialInteractionBadges({ userId: currentUserId }),
+          checkSocialInteractionBadges({ userId: targetUserId }),
+        ]);
+        // Return badges for the current user (follower)
+        badgeResults = currentUserBadges;
+        if (badgeResults.totalEarned > 0) {
+          console.log(`[FOLLOW] Kullanıcı ${badgeResults.totalEarned} rozet kazandı. userId: ${currentUserId}`);
+        }
+      } catch (error) {
         console.error("Error checking social interaction badges:", error);
-      });
+      }
     }
 
     // Get updated followers count
@@ -102,6 +116,7 @@ export async function POST(
     return NextResponse.json({
       following,
       followersCount,
+      badgeResults,
     });
   } catch (error) {
     console.error("Error toggling connection:", error);

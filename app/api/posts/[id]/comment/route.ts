@@ -5,7 +5,7 @@ import { z } from "zod";
 import { broadcastSocialNotification } from "@/lib/realtime/signalr-triggers";
 import { sanitizePlainText } from "@/lib/security/sanitize";
 import { checkRateLimit, rateLimitKey, Limits } from "@/lib/security/rateLimit";
-import { checkSocialInteractionBadges } from "@/app/api/badges/check/badge-service";
+import { checkSocialInteractionBadges, type BadgeCheckResult } from "@/app/api/badges/check/badge-service";
 
 const createCommentSchema = z.object({
   content: z.string().min(1).max(1000),
@@ -69,10 +69,19 @@ export async function POST(
       },
     });
 
-    // Sosyal etkileşim rozetlerini kontrol et (async, hata olsa bile devam et)
-    checkSocialInteractionBadges({ userId }).catch((error) => {
+    // Sosyal etkileşim rozetlerini kontrol et
+    let badgeResults: BadgeCheckResult = {
+      newlyEarnedBadges: [],
+      totalEarned: 0,
+    };
+    try {
+      badgeResults = await checkSocialInteractionBadges({ userId });
+      if (badgeResults.totalEarned > 0) {
+        console.log(`[POST_COMMENT] Kullanıcı ${badgeResults.totalEarned} rozet kazandı. userId: ${userId}`);
+      }
+    } catch (error) {
       console.error("Error checking social interaction badges:", error);
-    });
+    }
 
     // Get updated comment count
     const commentsCount = await db.postComment.count({
@@ -111,6 +120,7 @@ export async function POST(
         user: comment.user,
       },
       commentsCount,
+      badgeResults,
     });
   } catch (error) {
     console.error("Error creating comment:", error);

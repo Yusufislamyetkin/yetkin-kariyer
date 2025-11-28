@@ -3,7 +3,7 @@ import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { recordEvent } from "@/lib/services/gamification/antiAbuse";
 import { applyRules } from "@/lib/services/gamification/rules";
-import { checkBadgesForActivity } from "@/app/api/badges/check/badge-service";
+import { checkBadgesForActivity, type BadgeCheckResult } from "@/app/api/badges/check/badge-service";
 
 function resolveLessonSlug(params: { slug: string[] }): string | null {
   if (!params.slug || params.slug.length === 0) {
@@ -110,11 +110,18 @@ export async function POST(
     }
 
     // Check for badges (daily activities, streak, etc.)
+    let badgeResults: BadgeCheckResult = {
+      newlyEarnedBadges: [],
+      totalEarned: 0,
+    };
     try {
-      await checkBadgesForActivity({
+      badgeResults = await checkBadgesForActivity({
         userId,
         activityType: "kurs",
       });
+      if (badgeResults.totalEarned > 0) {
+        console.log(`[LESSON_COMPLETE] Kullanıcı ${badgeResults.totalEarned} rozet kazandı. userId: ${userId}`);
+      }
     } catch (e) {
       console.warn("Badge check failed:", e);
     }
@@ -125,6 +132,7 @@ export async function POST(
         completedAt: completion.completedAt,
         lessonSlug: completion.lessonSlug,
       },
+      badgeResults,
     });
   } catch (error) {
     console.error("Error marking lesson as completed:", error);

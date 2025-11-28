@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
+import { generatePdfToken } from "@/lib/cv/pdf-token";
 
 export const runtime = "nodejs";
 
@@ -137,25 +138,38 @@ export async function GET(
     // Get the base URL for the render page
     const requestUrl = new URL(request.url);
     const baseUrl = `${requestUrl.protocol}//${requestUrl.host}`;
-    const renderUrl = `${baseUrl}/cv/render/${cv.id}`;
+    
+    // Generate secure token for PDF generation
+    const pdfToken = generatePdfToken(cv.id, session.user.id as string);
+    const renderUrl = `${baseUrl}/cv/render/${cv.id}?pdf=true&token=${pdfToken}`;
 
-      const isVercel = process.env.VERCEL === "1";
-      const puppeteer = await loadPuppeteer(isVercel);
+    const isVercel = process.env.VERCEL === "1";
+    const puppeteer = await loadPuppeteer(isVercel);
 
     if (!puppeteer) {
+      console.error("[PDF] Puppeteer not available");
       return NextResponse.json(
         { error: "Sunucu PDF oluşturma için yapılandırılmadı" },
         { status: 503 }
       );
     }
 
-    const cookies = request.headers.get("cookie") || "";
-
     const chromium = await loadChromium();
 
     const launchOptions: Record<string, unknown> = {
       headless: true,
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-dev-shm-usage",
+        "--disable-gpu",
+        "--disable-extensions",
+        "--disable-background-networking",
+        "--disable-background-timer-throttling",
+        "--disable-renderer-backgrounding",
+        "--disable-features=TranslateUI",
+        "--disable-ipc-flooding-protection",
+      ],
     };
 
     if (isVercel && chromium) {
@@ -172,32 +186,30 @@ export async function GET(
       ];
     }
 
-    const browser = await puppeteer.launch(launchOptions);
+    let browser;
+    try {
+      browser = await puppeteer.launch(launchOptions);
+      console.log("[PDF] Browser launched successfully");
+    } catch (error: any) {
+      console.error("[PDF] Failed to launch browser:", error);
+      return NextResponse.json(
+        { error: `Tarayıcı başlatılamadı: ${error.message || "Bilinmeyen hata"}` },
+        { status: 500 }
+      );
+    }
 
     try {
       const page = await browser.newPage();
+      
+      // Set user agent to avoid bot detection
+      await page.setUserAgent(
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+      );
 
-      if (cookies) {
-        const cookieArray = cookies.split(";").map((cookie) => {
-          const trimmed = cookie.trim();
-          const equalIndex = trimmed.indexOf("=");
-          if (equalIndex === -1) return null;
-          
-          const name = trimmed.substring(0, equalIndex);
-          const value = trimmed.substring(equalIndex + 1);
-          
-          return {
-            name: name.trim(),
-            value: value.trim(),
-            domain: requestUrl.hostname,
-            path: "/",
-          };
-        }).filter((cookie): cookie is { name: string; value: string; domain: string; path: string } => cookie !== null);
-
-        if (cookieArray.length > 0) {
-          await page.setCookie(...cookieArray);
-        }
-      }
+      // Set extra headers
+      await page.setExtraHTTPHeaders({
+        "Accept-Language": "tr-TR,tr;q=0.9,en-US;q=0.8,en;q=0.7",
+      });
 
       await page.setViewport({
         width: 794,
@@ -207,25 +219,43 @@ export async function GET(
       // Ensure screen media CSS is applied and page size from CSS is respected
       try {
         await page.emulateMediaType("screen");
-      } catch {}
+      } catch (error) {
+        console.warn("[PDF] Failed to emulate media type:", error);
+      }
 
-      await page.goto(renderUrl, {
-        waitUntil: "networkidle0",
-        timeout: 30000,
-      });
+      console.log("[PDF] Navigating to render URL:", renderUrl);
+      
+      // Navigate to render page
+      try {
+        await page.goto(renderUrl, {
+          waitUntil: "networkidle0",
+          timeout: 45000,
+        });
+        console.log("[PDF] Page navigation completed");
+      } catch (error: any) {
+        console.error("[PDF] Navigation failed:", error);
+        throw new Error(`Sayfa yüklenemedi: ${error.message || "Zaman aşımı"}`);
+      }
 
       // Wait for CV content to be rendered
       try {
-        await page.waitForSelector("#cv-content", { timeout: 10000 });
+        await page.waitForSelector("#cv-content", { timeout: 15000 });
+        console.log("[PDF] CV content selector found");
       } catch (error) {
-        console.error("CV content selector not found:", error);
+        console.error("[PDF] CV content selector not found:", error);
+        // Check if page loaded with error message
+        const pageContent = await page.content();
+        if (pageContent.includes("CV bulunamadı") || pageContent.includes("Unauthorized")) {
+          throw new Error("CV erişim hatası: Kimlik doğrulama başarısız");
+        }
         // Try to wait a bit more and check if page loaded
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+        await new Promise((resolve) => setTimeout(resolve, 3000));
       }
       
-      // Additional wait for any dynamic content
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // Additional wait for any dynamic content and fonts to load
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
+      console.log("[PDF] Generating PDF...");
       const pdfBuffer = await page.pdf({
         format: "A4",
         printBackground: true,
@@ -241,6 +271,8 @@ export async function GET(
       const requestUrlObj = new URL(request.url);
       const forceDownload = requestUrlObj.searchParams.get("download") === "1";
       const contentLength = (pdfBuffer as unknown as Buffer).length;
+      
+      console.log("[PDF] PDF generated successfully, size:", contentLength, "bytes");
 
       return new NextResponse(pdfBuffer as unknown as BodyInit, {
         headers: {
@@ -249,19 +281,26 @@ export async function GET(
           "Content-Length": contentLength.toString(),
         },
       });
-    } catch (error) {
-      console.error("Error generating PDF:", error);
+    } catch (error: any) {
+      console.error("[PDF] Error generating PDF:", error);
+      const errorMessage = error.message || "PDF oluşturulurken bir hata oluştu";
       return NextResponse.json(
-        { error: "PDF oluşturulurken bir hata oluştu" },
+        { error: errorMessage },
         { status: 500 }
       );
     } finally {
-      await browser.close();
+      try {
+        await browser.close();
+        console.log("[PDF] Browser closed");
+      } catch (error) {
+        console.error("[PDF] Error closing browser:", error);
+      }
     }
-  } catch (error) {
-    console.error("Error generating PDF:", error);
+  } catch (error: any) {
+    console.error("[PDF] Error in PDF route:", error);
+    const errorMessage = error.message || "PDF oluşturulurken bir hata oluştu";
     return NextResponse.json(
-      { error: "PDF oluşturulurken bir hata oluştu" },
+      { error: errorMessage },
       { status: 500 }
     );
   }

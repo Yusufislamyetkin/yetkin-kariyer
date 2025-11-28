@@ -79,7 +79,7 @@ export function CelebrationProvider({ children }: { children: React.ReactNode })
     };
   }, []);
 
-  const triggerConfetti = useCallback(() => {
+  const triggerConfetti = useCallback((variant?: CelebrationVariant) => {
     if (typeof window === "undefined") {
       return;
     }
@@ -123,28 +123,82 @@ export function CelebrationProvider({ children }: { children: React.ReactNode })
       }
     };
 
-    window.requestAnimationFrame(() => {
-      fire(200, { origin: { x: 0.18, y: 0.82 }, angle: 60 });
-      fire(200, { origin: { x: 0.82, y: 0.82 }, angle: 120 });
+    // Special confetti for badge variant
+    if (variant === "badge") {
+      window.requestAnimationFrame(() => {
+        // Multiple bursts from different positions for more celebration
+        fire(300, { origin: { x: 0.2, y: 0.8 }, angle: 45, colors: ["#FFD700", "#FFA500", "#FF6347"] });
+        fire(300, { origin: { x: 0.8, y: 0.8 }, angle: 135, colors: ["#FFD700", "#FFA500", "#FF6347"] });
+        
+        scheduleBurst(() => {
+          fire(400, {
+            origin: { x: 0.5, y: 0.3 },
+            spread: 150,
+            startVelocity: 65,
+            gravity: 0.6,
+            colors: ["#FFD700", "#FFA500", "#FF6347", "#9370DB", "#00CED1"],
+            scalar: 1.5,
+          });
+        }, 100);
 
-      scheduleBurst(() => {
-        fire(260, {
-          origin: { x: 0.5, y: 0.35 },
-          spread: 130,
-          startVelocity: 58,
-          gravity: 0.7,
-        });
-      }, 160);
+        scheduleBurst(() => {
+          fire(350, {
+            origin: { x: 0.3, y: 0.5 },
+            spread: 120,
+            startVelocity: 55,
+            gravity: 0.7,
+            colors: ["#FFD700", "#FFA500", "#FF6347"],
+            scalar: 1.3,
+          });
+        }, 250);
 
-      scheduleBurst(() => {
-        fire(180, {
-          origin: { x: 0.5, y: 0.45 },
-          spread: 110,
-          startVelocity: 52,
-          scalar: 1.2,
-        });
-      }, 320);
-    });
+        scheduleBurst(() => {
+          fire(350, {
+            origin: { x: 0.7, y: 0.5 },
+            spread: 120,
+            startVelocity: 55,
+            gravity: 0.7,
+            colors: ["#FFD700", "#FFA500", "#FF6347"],
+            scalar: 1.3,
+          });
+        }, 400);
+
+        scheduleBurst(() => {
+          fire(300, {
+            origin: { x: 0.5, y: 0.6 },
+            spread: 140,
+            startVelocity: 60,
+            gravity: 0.65,
+            colors: ["#FFD700", "#FFA500", "#FF6347", "#9370DB"],
+            scalar: 1.4,
+          });
+        }, 550);
+      });
+    } else {
+      // Default confetti for other variants
+      window.requestAnimationFrame(() => {
+        fire(200, { origin: { x: 0.18, y: 0.82 }, angle: 60 });
+        fire(200, { origin: { x: 0.82, y: 0.82 }, angle: 120 });
+
+        scheduleBurst(() => {
+          fire(260, {
+            origin: { x: 0.5, y: 0.35 },
+            spread: 130,
+            startVelocity: 58,
+            gravity: 0.7,
+          });
+        }, 160);
+
+        scheduleBurst(() => {
+          fire(180, {
+            origin: { x: 0.5, y: 0.45 },
+            spread: 110,
+            startVelocity: 52,
+            scalar: 1.2,
+          });
+        }, 320);
+      });
+    }
   }, [clearBurstTimeouts]);
 
   const dismiss = useCallback(() => {
@@ -181,7 +235,7 @@ export function CelebrationProvider({ children }: { children: React.ReactNode })
       return;
     }
 
-    triggerConfetti();
+    triggerConfetti(celebration.variant);
   }, [celebration, triggerConfetti]);
 
   const value = useMemo(

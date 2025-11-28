@@ -4,7 +4,7 @@ import { auth } from "@/lib/auth";
 import { recordEvent } from "@/lib/services/gamification/antiAbuse";
 import { applyRules } from "@/lib/services/gamification/rules";
 import { ensureAIEnabled, isAIEnabled } from "@/lib/ai/client";
-import { checkBadgesForActivity } from "@/app/api/badges/check/badge-service";
+import { checkBadgesForActivity, type BadgeCheckResult } from "@/app/api/badges/check/badge-service";
 
 export async function GET(
   request: Request,
@@ -258,11 +258,18 @@ JSON formatında yanıt ver:
     }
 
     // Check for badges (daily activities, streak, etc.)
+    let badgeResults: BadgeCheckResult = {
+      newlyEarnedBadges: [],
+      totalEarned: 0,
+    };
     try {
-      await checkBadgesForActivity({
+      badgeResults = await checkBadgesForActivity({
         userId,
         activityType: "bugfix",
       });
+      if (badgeResults.totalEarned > 0) {
+        console.log(`[BUG_FIX] Kullanıcı ${badgeResults.totalEarned} rozet kazandı. userId: ${userId}`);
+      }
     } catch (e) {
       console.warn("Badge check failed:", e);
     }
@@ -271,6 +278,7 @@ JSON formatında yanıt ver:
       bugFixAttempt,
       aiEvaluation: aiEvaluationResults,
       isCorrect: overallCorrect,
+      badgeResults,
     });
   } catch (error) {
     console.error("[BUG_FIX] Error submitting bug fix:", error);
