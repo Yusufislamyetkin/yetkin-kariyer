@@ -1,4 +1,6 @@
 import { db } from "@/lib/db";
+import { Prisma } from "@prisma/client";
+import { calculateBadgeProgress } from "@/lib/services/gamification/badge-progress";
 
 export interface BadgeCheckResult {
   newlyEarnedBadges: any[];
@@ -12,7 +14,7 @@ interface BadgeCheckParams {
 
 interface ActivityBadgeCheckParams {
   userId: string;
-  activityType?: "test" | "kurs" | "canlı kod" | "canlı kodlama" | "bugfix" | "hata düzeltme" | "ders" | "quiz";
+  activityType?: "test" | "canlı kod" | "canlı kodlama" | "bugfix" | "hata düzeltme" | "ders" | "quiz" | "eğitim faaliyeti";
 }
 
 // Ortak streak güncelleme fonksiyonu
@@ -302,12 +304,13 @@ export async function checkBadgesForAttempt({
               }
               break;
             case "ilk kurs":
-              // İlk kurs tamamlama kontrolü
-              const courseCompletions = await db.lessonCompletion.findMany({
+            case "ilk ders":
+              // İlk ders tamamlama kontrolü
+              const lessonCompletions = await db.lessonCompletion.findMany({
                 where: { userId },
-                distinct: ['lessonId'],
+                distinct: [Prisma.LessonCompletionScalarFieldEnum.lessonSlug],
               });
-              if (courseCompletions.length === 1) {
+              if (lessonCompletions.length === 1) {
                 shouldEarn = true;
               }
               break;
@@ -430,17 +433,6 @@ export async function checkBadgesForAttempt({
             if (shouldIncludeCurrentAttempt) {
               todayCount += 1;
             }
-          } else if (criteria.activity_type === "kurs") {
-            const todayCompletions = await db.lessonCompletion.count({
-              where: {
-                userId,
-                completedAt: {
-                  gte: today,
-                  lt: tomorrow,
-                },
-              },
-            });
-            todayCount = todayCompletions;
           } else if (criteria.activity_type === "canlı kod" || criteria.activity_type === "canlı kodlama") {
             const todayLiveCoding = await db.liveCodingAttempt.count({
               where: {
@@ -463,26 +455,28 @@ export async function checkBadgesForAttempt({
               },
             });
             todayCount = todayBugFix;
-          } else if (criteria.activity_type === "pratik") {
-            // Pratik: quiz attempt olarak sayılabilir
+          } else if (criteria.activity_type === "eğitim faaliyeti") {
+            // Eğitim faaliyeti: test + ders + canlı kodlama + bugfix toplamı
             shouldIncludeCurrentAttempt = currentAttemptIsToday;
-            const todayPratik = await db.quizAttempt.count({
+            
+            // Test (quiz attempt)
+            const todayTests = await db.quizAttempt.count({
               where: {
                 userId,
-                id: { not: quizAttempt.id }, // Mevcut attempt'i hariç tut
+                id: { not: quizAttempt.id },
                 completedAt: {
                   gte: today,
                   lt: tomorrow,
                 },
               },
             });
-            todayCount = todayPratik;
+            let testCount = todayTests;
             if (shouldIncludeCurrentAttempt) {
-              todayCount += 1;
+              testCount += 1;
             }
-          } else if (criteria.activity_type === "eğitim") {
-            // Eğitim: lesson completion olarak sayılabilir
-            const todayEgitim = await db.lessonCompletion.count({
+            
+            // Ders (lesson completion)
+            const todayLessons = await db.lessonCompletion.count({
               where: {
                 userId,
                 completedAt: {
@@ -491,7 +485,30 @@ export async function checkBadgesForAttempt({
                 },
               },
             });
-            todayCount = todayEgitim;
+            
+            // Canlı kodlama (live coding attempt)
+            const todayLiveCoding = await db.liveCodingAttempt.count({
+              where: {
+                userId,
+                completedAt: {
+                  gte: today,
+                  lt: tomorrow,
+                },
+              },
+            });
+            
+            // Bugfix (bugfix attempt)
+            const todayBugFix = await db.bugFixAttempt.count({
+              where: {
+                userId,
+                completedAt: {
+                  gte: today,
+                  lt: tomorrow,
+                },
+              },
+            });
+            
+            todayCount = testCount + todayLessons + todayLiveCoding + todayBugFix;
           } else if (criteria.activity_type === "quiz") {
             // Quiz: quiz attempt olarak sayılabilir
             shouldIncludeCurrentAttempt = currentAttemptIsToday;
@@ -532,6 +549,10 @@ export async function checkBadgesForAttempt({
             interactionCount = await db.postComment.count({
               where: { userId },
             });
+          } else if (criteria.interaction_type === "mesaj") {
+            interactionCount = await db.chatMessage.count({
+              where: { userId },
+            });
           } else if (criteria.interaction_type === "story") {
             interactionCount = await db.story.count({
               where: { userId },
@@ -558,6 +579,21 @@ export async function checkBadgesForAttempt({
             const comments = await db.postComment.count({ where: { userId } });
             const stories = await db.story.count({ where: { userId } });
             interactionCount = posts + likes + comments + stories;
+          } else if (criteria.interaction_type === "sosyal_etkileşim") {
+            // Sosyal etkileşim: tüm sosyal etkileşimlerin toplamı
+            const posts = await db.post.count({ where: { userId } });
+            const likes = await db.postLike.count({ where: { userId } });
+            const comments = await db.postComment.count({ where: { userId } });
+            const stories = await db.story.count({ where: { userId } });
+            const friendships = await db.friendship.count({
+              where: {
+                OR: [
+                  { requesterId: userId, status: "accepted" },
+                  { addresseeId: userId, status: "accepted" },
+                ],
+              },
+            });
+            interactionCount = posts + likes + comments + stories + friendships;
           } else if (criteria.interaction_type === "sosyal") {
             // Sosyal: tüm sosyal etkileşimlerin toplamı
             const posts = await db.post.count({ where: { userId } });
@@ -586,12 +622,6 @@ export async function checkBadgesForAttempt({
           
           if (criteria.type === "test_count") {
             totalCount = totalQuizCount;
-          } else if (criteria.type === "course_count") {
-            const courseCompletions = await db.lessonCompletion.findMany({
-              where: { userId },
-              distinct: ['lessonId'],
-            });
-            totalCount = courseCompletions.length;
           } else if (criteria.type === "perfect_score_count") {
             totalCount = perfectScoreCount;
           } else if (criteria.type === "total_score") {
@@ -643,8 +673,29 @@ export async function checkBadgesForAttempt({
 
   console.log(`[BADGE_CHECK] Rozet kontrolü tamamlandı. userId: ${userId}, kazanılan rozet sayısı: ${newlyEarnedBadges.length}`);
   
+  // Add progress information to each badge
+  const badgesWithProgress = await Promise.all(
+    newlyEarnedBadges.map(async (badge) => {
+      try {
+        const progress = await calculateBadgeProgress(userId, badge);
+        return {
+          ...badge,
+          progress: {
+            current: progress.current,
+            target: progress.target,
+            percentage: progress.percentage,
+            isCompleted: progress.isCompleted,
+          },
+        };
+      } catch (error) {
+        console.error(`[BADGE_CHECK] Progress hesaplanırken hata. badgeId: ${badge.id}`, error);
+        return badge;
+      }
+    })
+  );
+  
   return {
-    newlyEarnedBadges,
+    newlyEarnedBadges: badgesWithProgress,
     totalEarned: newlyEarnedBadges.length,
   };
   } catch (error) {
@@ -714,14 +765,15 @@ export async function checkBadgesForActivity({
         if (criteria.type === "special" && criteria.special_type) {
           // checkBadgesForActivity'de quizAttempt yok, bu yüzden sadece genel kontroller yapılabilir
           const postCount = await db.post.count({ where: { userId } });
-          const courseCompletions = await db.lessonCompletion.findMany({
+          const lessonCompletions = await db.lessonCompletion.findMany({
             where: { userId },
-            distinct: ['lessonId'],
+            distinct: [Prisma.LessonCompletionScalarFieldEnum.lessonSlug],
           });
           
           switch (criteria.special_type) {
             case "ilk kurs":
-              if (courseCompletions.length === 1) {
+            case "ilk ders":
+              if (lessonCompletions.length === 1) {
                 shouldEarn = true;
               }
               break;
@@ -759,17 +811,6 @@ export async function checkBadgesForActivity({
               },
             });
             todayCount = todayAttempts;
-          } else if (criteria.activity_type === "kurs") {
-            const todayCompletions = await db.lessonCompletion.count({
-              where: {
-                userId,
-                completedAt: {
-                  gte: today,
-                  lt: tomorrow,
-                },
-              },
-            });
-            todayCount = todayCompletions;
           } else if (criteria.activity_type === "canlı kod" || criteria.activity_type === "canlı kodlama") {
             const todayLiveCoding = await db.liveCodingAttempt.count({
               where: {
@@ -814,9 +855,10 @@ export async function checkBadgesForActivity({
               },
             });
             todayCount = todayQuizzes;
-          } else if (criteria.activity_type === "pratik") {
-            // Pratik: quiz attempt olarak sayılabilir
-            const todayPratik = await db.quizAttempt.count({
+          } else if (criteria.activity_type === "eğitim faaliyeti") {
+            // Eğitim faaliyeti: test + ders + canlı kodlama + bugfix toplamı
+            // Test (quiz attempt)
+            const todayTests = await db.quizAttempt.count({
               where: {
                 userId,
                 completedAt: {
@@ -825,10 +867,9 @@ export async function checkBadgesForActivity({
                 },
               },
             });
-            todayCount = todayPratik;
-          } else if (criteria.activity_type === "eğitim") {
-            // Eğitim: lesson completion olarak sayılabilir
-            const todayEgitim = await db.lessonCompletion.count({
+            
+            // Ders (lesson completion)
+            const todayLessons = await db.lessonCompletion.count({
               where: {
                 userId,
                 completedAt: {
@@ -837,7 +878,30 @@ export async function checkBadgesForActivity({
                 },
               },
             });
-            todayCount = todayEgitim;
+            
+            // Canlı kodlama (live coding attempt)
+            const todayLiveCoding = await db.liveCodingAttempt.count({
+              where: {
+                userId,
+                completedAt: {
+                  gte: today,
+                  lt: tomorrow,
+                },
+              },
+            });
+            
+            // Bugfix (bugfix attempt)
+            const todayBugFix = await db.bugFixAttempt.count({
+              where: {
+                userId,
+                completedAt: {
+                  gte: today,
+                  lt: tomorrow,
+                },
+              },
+            });
+            
+            todayCount = todayTests + todayLessons + todayLiveCoding + todayBugFix;
           }
           
           if (todayCount >= criteria.count) {
@@ -860,8 +924,29 @@ export async function checkBadgesForActivity({
     }
   }
 
+  // Add progress information to each badge
+  const badgesWithProgress = await Promise.all(
+    newlyEarnedBadges.map(async (badge) => {
+      try {
+        const progress = await calculateBadgeProgress(userId, badge);
+        return {
+          ...badge,
+          progress: {
+            current: progress.current,
+            target: progress.target,
+            percentage: progress.percentage,
+            isCompleted: progress.isCompleted,
+          },
+        };
+      } catch (error) {
+        console.error(`[BADGE_CHECK] Progress hesaplanırken hata. badgeId: ${badge.id}`, error);
+        return badge;
+      }
+    })
+  );
+
   return {
-    newlyEarnedBadges,
+    newlyEarnedBadges: badgesWithProgress,
     totalEarned: newlyEarnedBadges.length,
   };
 }
@@ -966,8 +1051,29 @@ export async function checkSocialInteractionBadges({
     }
   }
 
+  // Add progress information to each badge
+  const badgesWithProgress = await Promise.all(
+    newlyEarnedBadges.map(async (badge) => {
+      try {
+        const progress = await calculateBadgeProgress(userId, badge);
+        return {
+          ...badge,
+          progress: {
+            current: progress.current,
+            target: progress.target,
+            percentage: progress.percentage,
+            isCompleted: progress.isCompleted,
+          },
+        };
+      } catch (error) {
+        console.error(`[BADGE_CHECK] Progress hesaplanırken hata. badgeId: ${badge.id}`, error);
+        return badge;
+      }
+    })
+  );
+
   return {
-    newlyEarnedBadges,
+    newlyEarnedBadges: badgesWithProgress,
     totalEarned: newlyEarnedBadges.length,
   };
 }
@@ -1181,9 +1287,9 @@ export async function checkAllUserBadges({
         // Yeni badges.json yapısı: criteria.type === "special", criteria.special_type
         if (criteria.type === "special" && criteria.special_type) {
           const postCount = await db.post.count({ where: { userId } });
-          const courseCompletions = await db.lessonCompletion.findMany({
+          const lessonCompletions = await db.lessonCompletion.findMany({
             where: { userId },
-            distinct: ['lessonId'],
+            distinct: [Prisma.LessonCompletionScalarFieldEnum.lessonSlug],
           });
           const fastestAttempt = userQuizAttempts
             .filter((qa: { duration: number | null }) => qa.duration !== null)
@@ -1196,7 +1302,8 @@ export async function checkAllUserBadges({
               }
               break;
             case "ilk kurs":
-              if (courseCompletions.length === 1) {
+            case "ilk ders":
+              if (lessonCompletions.length === 1) {
                 shouldEarn = true;
               }
               break;
@@ -1297,17 +1404,6 @@ export async function checkAllUserBadges({
               },
             });
             todayCount = todayAttempts;
-          } else if (criteria.activity_type === "kurs") {
-            const todayCompletions = await db.lessonCompletion.count({
-              where: {
-                userId,
-                completedAt: {
-                  gte: today,
-                  lt: tomorrow,
-                },
-              },
-            });
-            todayCount = todayCompletions;
           } else if (criteria.activity_type === "canlı kod" || criteria.activity_type === "canlı kodlama") {
             const todayLiveCoding = await db.liveCodingAttempt.count({
               where: {
@@ -1352,9 +1448,10 @@ export async function checkAllUserBadges({
               },
             });
             todayCount = todayQuizzes;
-          } else if (criteria.activity_type === "pratik") {
-            // Pratik: quiz attempt olarak sayılabilir
-            const todayPratik = await db.quizAttempt.count({
+          } else if (criteria.activity_type === "eğitim faaliyeti") {
+            // Eğitim faaliyeti: test + ders + canlı kodlama + bugfix toplamı
+            // Test (quiz attempt)
+            const todayTests = await db.quizAttempt.count({
               where: {
                 userId,
                 completedAt: {
@@ -1363,10 +1460,9 @@ export async function checkAllUserBadges({
                 },
               },
             });
-            todayCount = todayPratik;
-          } else if (criteria.activity_type === "eğitim") {
-            // Eğitim: lesson completion olarak sayılabilir
-            const todayEgitim = await db.lessonCompletion.count({
+            
+            // Ders (lesson completion)
+            const todayLessons = await db.lessonCompletion.count({
               where: {
                 userId,
                 completedAt: {
@@ -1375,7 +1471,30 @@ export async function checkAllUserBadges({
                 },
               },
             });
-            todayCount = todayEgitim;
+            
+            // Canlı kodlama (live coding attempt)
+            const todayLiveCoding = await db.liveCodingAttempt.count({
+              where: {
+                userId,
+                completedAt: {
+                  gte: today,
+                  lt: tomorrow,
+                },
+              },
+            });
+            
+            // Bugfix (bugfix attempt)
+            const todayBugFix = await db.bugFixAttempt.count({
+              where: {
+                userId,
+                completedAt: {
+                  gte: today,
+                  lt: tomorrow,
+                },
+              },
+            });
+            
+            todayCount = todayTests + todayLessons + todayLiveCoding + todayBugFix;
           }
           
           if (todayCount >= criteria.count) {
@@ -1397,6 +1516,10 @@ export async function checkAllUserBadges({
             });
           } else if (criteria.interaction_type === "yorum") {
             interactionCount = await db.postComment.count({
+              where: { userId },
+            });
+          } else if (criteria.interaction_type === "mesaj") {
+            interactionCount = await db.chatMessage.count({
               where: { userId },
             });
           } else if (criteria.interaction_type === "story") {
@@ -1425,6 +1548,21 @@ export async function checkAllUserBadges({
             const comments = await db.postComment.count({ where: { userId } });
             const stories = await db.story.count({ where: { userId } });
             interactionCount = posts + likes + comments + stories;
+          } else if (criteria.interaction_type === "sosyal_etkileşim") {
+            // Sosyal etkileşim: tüm sosyal etkileşimlerin toplamı
+            const posts = await db.post.count({ where: { userId } });
+            const likes = await db.postLike.count({ where: { userId } });
+            const comments = await db.postComment.count({ where: { userId } });
+            const stories = await db.story.count({ where: { userId } });
+            const friendships = await db.friendship.count({
+              where: {
+                OR: [
+                  { requesterId: userId, status: "accepted" },
+                  { addresseeId: userId, status: "accepted" },
+                ],
+              },
+            });
+            interactionCount = posts + likes + comments + stories + friendships;
           } else if (criteria.interaction_type === "sosyal") {
             // Sosyal: tüm sosyal etkileşimlerin toplamı
             const posts = await db.post.count({ where: { userId } });
@@ -1453,12 +1591,6 @@ export async function checkAllUserBadges({
           
           if (criteria.type === "test_count") {
             totalCount = totalQuizCount;
-          } else if (criteria.type === "course_count") {
-            const courseCompletions = await db.lessonCompletion.findMany({
-              where: { userId },
-              distinct: ['lessonId'],
-            });
-            totalCount = courseCompletions.length;
           } else if (criteria.type === "perfect_score_count") {
             totalCount = perfectScoreCount;
           } else if (criteria.type === "total_score") {
@@ -1499,8 +1631,29 @@ export async function checkAllUserBadges({
     }
   }
 
+  // Add progress information to each badge
+  const badgesWithProgress = await Promise.all(
+    newlyEarnedBadges.map(async (badge) => {
+      try {
+        const progress = await calculateBadgeProgress(userId, badge);
+        return {
+          ...badge,
+          progress: {
+            current: progress.current,
+            target: progress.target,
+            percentage: progress.percentage,
+            isCompleted: progress.isCompleted,
+          },
+        };
+      } catch (error) {
+        console.error(`[BADGE_CHECK] Progress hesaplanırken hata. badgeId: ${badge.id}`, error);
+        return badge;
+      }
+    })
+  );
+
   return {
-    newlyEarnedBadges,
+    newlyEarnedBadges: badgesWithProgress,
     totalEarned: newlyEarnedBadges.length,
   };
 }

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
+import { HackathonTeamMemberStatus } from "@prisma/client";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -14,7 +15,7 @@ export async function GET() {
 
     const userId = session.user.id as string;
 
-    const [quizAttempts, testAttempts, interviewAttempts, cvs, applications, completedTopics] = await Promise.all([
+    const [quizAttempts, testAttempts, interviewAttempts, cvs, applications, completedTopics, hackathonMemberships] = await Promise.all([
       db.quizAttempt.findMany({
         where: { userId },
         select: { score: true },
@@ -39,6 +40,19 @@ export async function GET() {
         where: { userId },
         select: { id: true },
       }),
+      db.hackathonTeamMember.findMany({
+        where: {
+          userId,
+          status: HackathonTeamMemberStatus.active,
+        },
+        select: {
+          team: {
+            select: {
+              hackathonId: true,
+            },
+          },
+        },
+      }),
     ]);
 
     const averageQuizScore =
@@ -54,6 +68,12 @@ export async function GET() {
         ? interviewScores.reduce((sum: number, s: number) => sum + s, 0) / interviewScores.length
         : 0;
 
+    // Get distinct hackathon IDs where user is an active team member
+    const distinctHackathonIds = new Set(
+      hackathonMemberships.map((membership: { team: { hackathonId: string } }) => membership.team.hackathonId)
+    );
+    const participatedHackathons = distinctHackathonIds.size;
+
     return NextResponse.json({
       stats: {
         quizAttempts: quizAttempts.length,
@@ -64,6 +84,7 @@ export async function GET() {
         averageQuizScore: Math.round(averageQuizScore),
         averageInterviewScore: Math.round(averageInterviewScore),
         completedTopics: completedTopics.length,
+        participatedHackathons,
       },
     });
   } catch (error) {

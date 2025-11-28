@@ -23,6 +23,7 @@ import {
 import { Button } from "@/app/components/ui/Button";
 import { AIAnalysis } from "@/types";
 import { useBadgeNotification } from "@/app/contexts/BadgeNotificationContext";
+import { useCelebration } from "@/app/contexts/CelebrationContext";
 
 interface QuizQuestion {
   id: string;
@@ -97,7 +98,9 @@ export default function QuizResultsPage() {
   const [analysisError, setAnalysisError] = useState<string | null>(null);
   const [achievement, setAchievement] = useState<AchievementPayload | null>(null);
   const { showBadges } = useBadgeNotification();
+  const { celebrate } = useCelebration();
   const processedBadgeIds = useRef<Set<string>>(new Set());
+  const hasCelebratedRef = useRef(false);
 
   useEffect(() => {
     if (params.id) {
@@ -126,6 +129,22 @@ export default function QuizResultsPage() {
       }
     }
   }, [achievement, showBadges]);
+
+  // Celebrate when test is passed (only once)
+  useEffect(() => {
+    if (attempt && !hasCelebratedRef.current) {
+      const passed = attempt.score >= attempt.quiz.passingScore;
+      if (passed) {
+        hasCelebratedRef.current = true;
+        celebrate({
+          title: "🎉 Test Geçildi!",
+          message: `Tebrikler! ${attempt.quiz.title || "Test"} başarıyla tamamlandı.`,
+          variant: "success",
+          durationMs: 5000,
+        });
+      }
+    }
+  }, [attempt, celebrate]);
 
   const fetchResults = async () => {
     try {

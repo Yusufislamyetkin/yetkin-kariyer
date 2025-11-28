@@ -117,7 +117,7 @@ export async function POST(
     try {
       badgeResults = await checkBadgesForActivity({
         userId,
-        activityType: "kurs",
+        activityType: "ders",
       });
       if (badgeResults.totalEarned > 0) {
         console.log(`[LESSON_COMPLETE] Kullanıcı ${badgeResults.totalEarned} rozet kazandı. userId: ${userId}`);

@@ -14,6 +14,7 @@ import { TestQuestionChatbox } from "./TestQuestionChatbox";
 import { Button } from "@/app/components/ui/Button";
 import { Card, CardContent } from "@/app/components/ui/Card";
 import { useCelebration } from "@/app/contexts/CelebrationContext";
+import { useBadgeNotification } from "@/app/contexts/BadgeNotificationContext";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 
@@ -43,6 +44,7 @@ type CurrentActivity = {
 
 export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadmapChange }: LessonChatProps) {
   const { celebrate } = useCelebration();
+  const { showBadges } = useBadgeNotification();
   const router = useRouter();
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(true);
@@ -94,18 +96,44 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
     }
   }, [messages, assistantTyping]);
 
-  // Celebrate when lesson is completed (only once)
+  // Celebrate when lesson is completed (only once) and check for badges
   useEffect(() => {
     if (isCompleted && !hasCelebratedRef.current && messages.length > 0) {
       hasCelebratedRef.current = true;
+      
+      // Trigger celebration
       celebrate({
         title: "🎉 Ders Tamamlandı!",
         message: `${lessonTitle} dersini başarıyla tamamladın!`,
         variant: "success",
         durationMs: 5000,
       });
+
+      // Mark lesson as completed and check for badges
+      const markLessonComplete = async () => {
+        try {
+          // Convert lessonSlug to API format
+          const slugParts = lessonSlug.replace(/^\/education\/lessons\//, '').split('/');
+          const response = await fetch(`/api/lessons/complete/${slugParts.join('/')}`, {
+            method: "POST",
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            // Show badge notification if badges were earned
+            if (data.badgeResults?.newlyEarnedBadges?.length > 0) {
+              showBadges(data.badgeResults.newlyEarnedBadges);
+            }
+          }
+        } catch (error) {
+          console.error("Error marking lesson as completed:", error);
+          // Don't show error to user, this is a background operation
+        }
+      };
+
+      markLessonComplete();
     }
-  }, [isCompleted, messages.length, lessonTitle, celebrate]);
+  }, [isCompleted, messages.length, lessonTitle, celebrate, lessonSlug, showBadges]);
 
   // Find next lesson when lesson is completed
   useEffect(() => {

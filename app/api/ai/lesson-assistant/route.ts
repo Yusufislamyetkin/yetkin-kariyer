@@ -478,10 +478,48 @@ export async function POST(request: Request) {
     let parsed;
     try {
       parsed = parseLessonActions(response.content);
+      
+      // Validate and filter actions - especially mini_test actions
+      if (parsed.actions && parsed.actions.length > 0) {
+        const validActions = parsed.actions.filter((action: any) => {
+          if (action.type === "mini_test") {
+            // Validate mini_test action structure
+            const hasValidQuestion = action.data?.question?.text && action.data.question.text.length > 0;
+            const hasValidOptions = Array.isArray(action.data?.question?.options) && 
+                                   action.data.question.options.length === 4 &&
+                                   action.data.question.options.every((opt: string) => opt && opt.length > 0);
+            const hasValidIndex = typeof action.data?.question?.correctIndex === 'number' &&
+                                 action.data.question.correctIndex >= 0 &&
+                                 action.data.question.correctIndex < 4;
+            
+            if (!hasValidQuestion || !hasValidOptions || !hasValidIndex) {
+              console.warn("[LESSON-ASSISTANT] Invalid mini_test action filtered out:", {
+                hasValidQuestion,
+                hasValidOptions,
+                hasValidIndex,
+                action: JSON.stringify(action).substring(0, 200),
+              });
+              return false;
+            }
+          }
+          return true;
+        });
+        
+        if (validActions.length !== parsed.actions.length) {
+          console.warn("[LESSON-ASSISTANT] Filtered out invalid actions:", {
+            originalCount: parsed.actions.length,
+            validCount: validActions.length,
+            filteredCount: parsed.actions.length - validActions.length,
+          });
+          parsed.actions = validActions;
+        }
+      }
+      
       console.log("[LESSON-ASSISTANT] Actions parse edildi:", {
         actionCount: parsed.actions?.length ?? 0,
         hasRoadmap: !!parsed.roadmap,
         hasProgress: !!parsed.progress,
+        miniTestCount: parsed.actions?.filter((a: any) => a.type === "mini_test").length ?? 0,
       });
     } catch (error) {
       console.error("[LESSON-ASSISTANT] Action parse hatası:", error);
@@ -493,6 +531,18 @@ export async function POST(request: Request) {
         progress: undefined,
         isCompleted: false,
       };
+    }
+    
+    // Additional content cleaning - remove any remaining malformed MINI_TEST patterns
+    // This catches patterns that might have been missed by the parser
+    if (parsed.content) {
+      // Remove patterns like "= 10, A) ..., B) ..., C) ..., D) ..., 1]" that weren't properly parsed
+      const malformedPattern = /=\s*[^,]+?,\s*[A-D]\)[^,]+?,\s*[A-D]\)[^,]+?,\s*[A-D]\)[^,]+?,\s*[A-D]\)[^,]+?,\s*[0-3]\s*\]/gi;
+      const cleanedContent = parsed.content.replace(malformedPattern, '');
+      if (cleanedContent !== parsed.content) {
+        console.warn("[LESSON-ASSISTANT] Removed malformed MINI_TEST pattern from content");
+        parsed.content = cleanedContent;
+      }
     }
 
     // Update roadmap if provided

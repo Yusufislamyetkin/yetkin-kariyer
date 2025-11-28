@@ -14,6 +14,12 @@ interface Badge {
   rarity: "common" | "rare" | "epic" | "legendary";
   tier?: "bronze" | "silver" | "gold" | "platinum";
   points: number;
+  progress?: {
+    current: number;
+    target: number;
+    percentage: number;
+    isCompleted: boolean;
+  };
 }
 
 interface BadgeNotificationModalProps {
@@ -228,6 +234,24 @@ export function BadgeNotificationModal({
                 <p className="text-sm text-white/90 leading-relaxed px-4">
                   {badge.description}
                 </p>
+                
+                {/* Progress Information */}
+                {badge.progress && badge.progress.target > 0 && !badge.progress.isCompleted && (
+                  <div className="mt-3 space-y-2 px-4">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="text-white/80 font-medium">İlerleme</span>
+                      <span className="text-white font-semibold">
+                        {badge.progress.current} / {badge.progress.target}
+                      </span>
+                    </div>
+                    <div className="w-full bg-white/20 rounded-full h-2 overflow-hidden">
+                      <div
+                        className="h-full bg-gradient-to-r from-white/60 to-white/80 rounded-full transition-all duration-300"
+                        style={{ width: `${badge.progress.percentage}%` }}
+                      />
+                    </div>
+                  </div>
+                )}
                 
                 {/* Points and Tier */}
                 <div className="flex items-center justify-center gap-3 pt-2">

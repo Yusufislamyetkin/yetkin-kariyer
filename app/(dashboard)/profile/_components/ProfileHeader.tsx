@@ -175,7 +175,7 @@ export function ProfileHeader({ user, onUpdate }: ProfileHeaderProps) {
 
   return (
     <>
-      <Card variant="glass" className="relative overflow-hidden particle-bg-tech bg-purple-700 border-0">
+      <Card variant="glass" className="relative overflow-hidden !bg-purple-900 border-0 shadow-[0_0_40px_rgba(147,51,234,0.6),0_0_80px_rgba(147,51,234,0.3)]">
         <div className="p-8">
           {/* Unified Card Content */}
           <div className="flex flex-col sm:flex-row gap-6">

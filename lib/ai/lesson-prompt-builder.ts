@@ -361,6 +361,10 @@ ZORUNLU KURALLAR:
 5. Doğru şık index'i MUTLAKA belirt! (0=A, 1=B, 2=C, 3=D)
 6. Soru metninde virgül varsa, virgülü koru ama formatı bozma!
 7. Soru metninde numaralandırma KULLANMA! Direkt soruyu yaz!
+8. KRİTİK: Tag'i MUTLAKA kapat! [MINI_TEST: ...] formatında, sonunda MUTLAKA ] parantezi olmalı!
+9. KRİTİK: Soru metninde köşeli parantez varsa (örn: my_list[0]), bunları koru! Sistem bunları doğru parse eder.
+10. KRİTİK: Şıklarda "A)", "B)", "C)", "D)" formatı KULLANMA! Sadece şık metnini yaz: "A) Seçenek metni" yerine "Seçenek metni"
+11. KRİTİK: Tag dışında başka format KULLANMA! "= 10, A) ..." gibi formatlar YASAK! MUTLAKA [MINI_TEST: ...] ile başla!
 
 DOĞRU FORMAT ÖRNEKLERİ:
 
@@ -372,6 +376,11 @@ DOĞRU FORMAT ÖRNEKLERİ:
 
 ÖRNEK 3 (Uzun soru):
 [MINI_TEST: Entity Framework Core'da Code First yaklaşımında, veritabanı şeması nasıl oluşturulur?, A) Manuel olarak SQL scriptleri ile, B) C# sınıflarından otomatik olarak migration'lar ile, C) Sadece veritabanı yöneticisi tarafından, D) Hiçbir zaman otomatik oluşturulmaz, 1]
+
+ÖRNEK 4 (Köşeli parantez içeren soru - ÖNEMLİ!):
+[MINI_TEST: Python'da my_list[0] = 10 ifadesi ne yapar?, Listenin tüm elemanlarını değiştirir, İlk elemanı 10 ile değiştirir, Listeyi siler, Listeyi sıfırlar, 1]
+
+NOT: Köşeli parantez içeren sorularda (my_list[0] gibi), parantezleri koru! Sistem bunları doğru parse eder.
 
 YANLIŞ KULLANIM ÖRNEKLERİ (ASLA YAPMA!):
 
@@ -395,12 +404,35 @@ YANLIŞ KULLANIM ÖRNEKLERİ (ASLA YAPMA!):
 "[MINI_TEST: 1. Soru nedir?, A, B, C, D, 0]"
 → DOĞRUSU: Numaralandırma kullanma, direkt soruyu yaz!
 
+❌ YANLIŞ 6 - Eksik kapanış parantezi:
+"[MINI_TEST: Soru?, A, B, C, D, 0"
+→ DOĞRUSU: MUTLAKA sonunda ] parantezi olmalı: [MINI_TEST: Soru?, A, B, C, D, 0]
+
+❌ YANLIŞ 7 - Tag olmadan format:
+"= 10, A) Listenin tüm elemanlarını değiştirir, B) İlk elemanı 10 ile değiştirir, C) Listeyi siler, D) Listeyi sıfırlar, 1]"
+→ DOĞRUSU: MUTLAKA [MINI_TEST: ...] tag'i ile başla! [MINI_TEST: my_list[0] = 10 ifadesi ne yapar?, Listenin tüm elemanlarını değiştirir, İlk elemanı 10 ile değiştirir, Listeyi siler, Listeyi sıfırlar, 1]
+
+❌ YANLIŞ 8 - Şıklarda "A)", "B)" formatı:
+"[MINI_TEST: Soru?, A) Seçenek 1, B) Seçenek 2, C) Seçenek 3, D) Seçenek 4, 0]"
+→ DOĞRUSU: Şıklarda sadece metni yaz, "A)" kısmını kaldır: [MINI_TEST: Soru?, Seçenek 1, Seçenek 2, Seçenek 3, Seçenek 4, 0]
+
+❌ YANLIŞ 9 - Köşeli parantez içeren soruda hatalı format:
+"= 10, A) Listenin tüm elemanlarını değiştirir, B) İlk elemanı 10 ile değiştirir, C) Listeyi siler, D) Listeyi sıfırlar, 1]"
+→ DOĞRUSU: MUTLAKA [MINI_TEST: ile başla ve soruyu tam yaz: [MINI_TEST: my_list[0] = 10 ifadesi ne yapar?, Listenin tüm elemanlarını değiştirir, İlk elemanı 10 ile değiştirir, Listeyi siler, Listeyi sıfırlar, 1]
+
 GEREKSIZ GİRİŞ MESAJLARI TAMAMEN YASAK:
 "Bilgini test edelim!", "Şimdi mini test sorularına geçelim!", 
 "İlk soru ile başlayalım:", "Mini test soruları:", 
 "İkinci soruya bakalım:", "Ve üçüncü sorumuz:", 
 "Cevaplarını bekliyorum!" gibi mesajlar YASAK!
 Direkt [MINI_TEST: ...] tag'i ile başla!
+
+KRİTİK FORMAT HATALARINDAN KAÇINMA:
+- ASLA tag olmadan format gönderme! Her zaman [MINI_TEST: ile başla!
+- ASLA eksik kapanış parantezi bırakma! Her zaman ] ile kapat!
+- ASLA "= 10, A) ..." gibi formatlar kullanma! MUTLAKA [MINI_TEST: ile başla!
+- ASLA şıklarda "A)", "B)" formatı kullanma! Sadece şık metnini yaz!
+- Soru metninde köşeli parantez varsa (my_list[0] gibi), bunları koru ama tag formatını bozma!
 
 ═══════════════════════════════════════════════════════════════
 

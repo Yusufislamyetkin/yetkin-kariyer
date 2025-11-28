@@ -1,5 +1,5 @@
 {
-  "totalBadges": 200,
+  "totalBadges": 160,
   "badges": [
     {
       "id": "badge-001",
@@ -23,7 +23,7 @@
       "id": "badge-010",
       "key": "G-BRONZE-002",
       "name": "G-BRONZE-002",
-      "description": "Bir günde 1 pratik tamamla",
+      "description": "Bir günde 1 adet eğitim faaliyetini tamamla",
       "icon": "👍",
       "color": "#1F140D",
       "category": "daily_activities",
@@ -32,7 +32,7 @@
       "points": 15,
       "criteria": {
         "type": "daily_activity",
-        "activity_type": "pratik",
+        "activity_type": "eğitim faaliyeti",
         "count": 1,
         "daily": true
       }
@@ -50,7 +50,7 @@
       "points": 15,
       "criteria": {
         "type": "daily_activity",
-        "activity_type": "kurs",
+        "activity_type": "ders",
         "count": 2,
         "daily": true
       }
@@ -167,7 +167,7 @@
       "id": "badge-009",
       "key": "G-BRONZE-010",
       "name": "G-BRONZE-010",
-      "description": "Bir günde 3 eğitim tamamla",
+      "description": "Bir günde 3 adet eğitim faaliyetini tamamla",
       "icon": "✅",
       "color": "#2F1F14",
       "category": "daily_activities",
@@ -176,7 +176,7 @@
       "points": 15,
       "criteria": {
         "type": "daily_activity",
-        "activity_type": "eğitim",
+        "activity_type": "eğitim faaliyeti",
         "count": 3,
         "daily": true
       }
@@ -203,7 +203,7 @@
       "id": "badge-020",
       "key": "G-SILVER-012",
       "name": "G-SILVER-012",
-      "description": "Bir günde 5 pratik tamamla",
+      "description": "Bir günde 5 adet eğitim faaliyetini tamamla",
       "icon": "📆",
       "color": "#080808",
       "category": "daily_activities",
@@ -212,7 +212,7 @@
       "points": 40,
       "criteria": {
         "type": "daily_activity",
-        "activity_type": "pratik",
+        "activity_type": "eğitim faaliyeti",
         "count": 5,
         "daily": true
       }
@@ -230,7 +230,7 @@
       "points": 40,
       "criteria": {
         "type": "daily_activity",
-        "activity_type": "kurs",
+        "activity_type": "ders",
         "count": 6,
         "daily": true
       }
@@ -347,7 +347,7 @@
       "id": "badge-019",
       "key": "G-SILVER-020",
       "name": "G-SILVER-020",
-      "description": "Bir günde 7 eğitim tamamla",
+      "description": "Bir günde 7 adet eğitim faaliyetini tamamla",
       "icon": "⚡",
       "color": "#101010",
       "category": "daily_activities",
@@ -356,7 +356,7 @@
       "points": 40,
       "criteria": {
         "type": "daily_activity",
-        "activity_type": "eğitim",
+        "activity_type": "eğitim faaliyeti",
         "count": 7,
         "daily": true
       }
@@ -383,7 +383,7 @@
       "id": "badge-030",
       "key": "G-GOLD-022",
       "name": "G-GOLD-022",
-      "description": "Bir günde 10 pratik tamamla",
+      "description": "Bir günde 10 adet eğitim faaliyetini tamamla",
       "icon": "🃏",
       "color": "#FF00FF",
       "category": "daily_activities",
@@ -392,7 +392,7 @@
       "points": 100,
       "criteria": {
         "type": "daily_activity",
-        "activity_type": "pratik",
+        "activity_type": "eğitim faaliyeti",
         "count": 10,
         "daily": true
       }
@@ -410,7 +410,7 @@
       "points": 100,
       "criteria": {
         "type": "daily_activity",
-        "activity_type": "kurs",
+        "activity_type": "ders",
         "count": 12,
         "daily": true
       }
@@ -527,7 +527,7 @@
       "id": "badge-029",
       "key": "G-GOLD-030",
       "name": "G-GOLD-030",
-      "description": "Bir günde 15 eğitim tamamla",
+      "description": "Bir günde 15 adet eğitim faaliyetini tamamla",
       "icon": "🎲",
       "color": "#FF1493",
       "category": "daily_activities",
@@ -536,7 +536,7 @@
       "points": 100,
       "criteria": {
         "type": "daily_activity",
-        "activity_type": "eğitim",
+        "activity_type": "eğitim faaliyeti",
         "count": 15,
         "daily": true
       }
@@ -563,7 +563,7 @@
       "id": "badge-040",
       "key": "G-PLAT-032",
       "name": "G-PLAT-032",
-      "description": "Bir günde 20 pratik tamamla",
+      "description": "Bir günde 20 adet eğitim faaliyetini tamamla",
       "icon": "🎮",
       "color": "#1C1C1C",
       "category": "daily_activities",
@@ -572,7 +572,7 @@
       "points": 300,
       "criteria": {
         "type": "daily_activity",
-        "activity_type": "pratik",
+        "activity_type": "eğitim faaliyeti",
         "count": 20,
         "daily": true
       }
@@ -590,7 +590,7 @@
       "points": 300,
       "criteria": {
         "type": "daily_activity",
-        "activity_type": "kurs",
+        "activity_type": "ders",
         "count": 25,
         "daily": true
       }
@@ -707,7 +707,7 @@
       "id": "badge-039",
       "key": "G-PLAT-040",
       "name": "G-PLAT-040",
-      "description": "Bir günde 30 eğitim tamamla",
+      "description": "Bir günde 30 adet eğitim faaliyetini tamamla",
       "icon": "🎧",
       "color": "#2F2F2F",
       "category": "daily_activities",
@@ -716,7 +716,7 @@
       "points": 300,
       "criteria": {
         "type": "daily_activity",
-        "activity_type": "eğitim",
+        "activity_type": "eğitim faaliyeti",
         "count": 30,
         "daily": true
       }
@@ -725,7 +725,7 @@
       "id": "badge-081",
       "key": "SI-BRONZE-001",
       "name": "SI-BRONZE-001",
-      "description": "Toplam 10 post yap",
+      "description": "10 gönderi paylaş",
       "icon": "🎉",
       "color": "#CD7F32",
       "category": "social_interaction",
@@ -742,7 +742,7 @@
       "id": "badge-090",
       "key": "SI-BRONZE-002",
       "name": "SI-BRONZE-002",
-      "description": "Toplam 10 mesaj gönder",
+      "description": "10 mesaj gönder",
       "icon": "🍫",
       "color": "#1F140D",
       "category": "social_interaction",
@@ -776,7 +776,7 @@
       "id": "badge-083",
       "key": "SI-BRONZE-004",
       "name": "SI-BRONZE-004",
-      "description": "Toplam 20 yorum yap",
+      "description": "20 yorum yap",
       "icon": "🎁",
       "color": "#A0522D",
       "category": "social_interaction",
@@ -793,7 +793,7 @@
       "id": "badge-084",
       "key": "SI-BRONZE-005",
       "name": "SI-BRONZE-005",
-      "description": "Toplam 10 story oluştur",
+      "description": "10 hikaye oluştur",
       "icon": "🎀",
       "color": "#8B4513",
       "category": "social_interaction",
@@ -810,7 +810,7 @@
       "id": "badge-085",
       "key": "SI-BRONZE-006",
       "name": "SI-BRONZE-006",
-      "description": "Toplam 15 arkadaş ekle",
+      "description": "15 arkadaş ekle",
       "icon": "🎂",
       "color": "#654321",
       "category": "social_interaction",
@@ -827,7 +827,7 @@
       "id": "badge-086",
       "key": "SI-BRONZE-007",
       "name": "SI-BRONZE-007",
-      "description": "Toplam 20 takipçi kazan",
+      "description": "20 takipçi kazan",
       "icon": "🍰",
       "color": "#5C4033",
       "category": "social_interaction",
@@ -844,7 +844,7 @@
       "id": "badge-087",
       "key": "SI-BRONZE-008",
       "name": "SI-BRONZE-008",
-      "description": "Toplam 10 paylaşım yap",
+      "description": "10 içerik paylaş",
       "icon": "🧁",
       "color": "#4A3728",
       "category": "social_interaction",
@@ -861,7 +861,7 @@
       "id": "badge-088",
       "key": "SI-BRONZE-009",
       "name": "SI-BRONZE-009",
-      "description": "Toplam 15 beğeni, yorum veya paylaşım yap",
+      "description": "15 beğeni, yorum veya paylaşım gerçekleştir",
       "icon": "🍭",
       "color": "#3D2817",
       "category": "social_interaction",
@@ -878,7 +878,7 @@
       "id": "badge-089",
       "key": "SI-BRONZE-010",
       "name": "SI-BRONZE-010",
-      "description": "Toplam 20 sosyal etkileşim gerçekleştir",
+      "description": "20 sosyal etkileşim gerçekleştir",
       "icon": "🍬",
       "color": "#2F1F14",
       "category": "social_interaction",
@@ -895,7 +895,7 @@
       "id": "badge-091",
       "key": "SI-SILVER-011",
       "name": "SI-SILVER-011",
-      "description": "Toplam 50 post yap",
+      "description": "50 gönderi paylaş",
       "icon": "🍪",
       "color": "#C0C0C0",
       "category": "social_interaction",
@@ -912,7 +912,7 @@
       "id": "badge-100",
       "key": "SI-SILVER-012",
       "name": "SI-SILVER-012",
-      "description": "Toplam 50 mesaj gönder",
+      "description": "50 mesaj gönder",
       "icon": "🍭",
       "color": "#080808",
       "category": "social_interaction",
@@ -946,7 +946,7 @@
       "id": "badge-093",
       "key": "SI-SILVER-014",
       "name": "SI-SILVER-014",
-      "description": "Toplam 100 yorum yap",
+      "description": "100 yorum yap",
       "icon": "🍨",
       "color": "#909090",
       "category": "social_interaction",
@@ -963,7 +963,7 @@
       "id": "badge-094",
       "key": "SI-SILVER-015",
       "name": "SI-SILVER-015",
-      "description": "Toplam 50 story oluştur",
+      "description": "50 hikaye oluştur",
       "icon": "🍧",
       "color": "#787878",
       "category": "social_interaction",
@@ -980,7 +980,7 @@
       "id": "badge-095",
       "key": "SI-SILVER-016",
       "name": "SI-SILVER-016",
-      "description": "Toplam 75 arkadaş ekle",
+      "description": "75 arkadaş ekle",
       "icon": "🍦",
       "color": "#606060",
       "category": "social_interaction",
@@ -997,7 +997,7 @@
       "id": "badge-096",
       "key": "SI-SILVER-017",
       "name": "SI-SILVER-017",
-      "description": "Toplam 100 takipçi kazan",
+      "description": "100 takipçi kazan",
       "icon": "🥧",
       "color": "#484848",
       "category": "social_interaction",
@@ -1014,7 +1014,7 @@
       "id": "badge-097",
       "key": "SI-SILVER-018",
       "name": "SI-SILVER-018",
-      "description": "Toplam 50 paylaşım yap",
+      "description": "50 içerik paylaş",
       "icon": "🍰",
       "color": "#303030",
       "category": "social_interaction",
@@ -1031,7 +1031,7 @@
       "id": "badge-098",
       "key": "SI-SILVER-019",
       "name": "SI-SILVER-019",
-      "description": "Toplam 75 beğeni, yorum veya paylaşım yap",
+      "description": "75 beğeni, yorum veya paylaşım gerçekleştir",
       "icon": "🎂",
       "color": "#181818",
       "category": "social_interaction",
@@ -1048,7 +1048,7 @@
       "id": "badge-099",
       "key": "SI-SILVER-020",
       "name": "SI-SILVER-020",
-      "description": "Toplam 100 sosyal etkileşim gerçekleştir",
+      "description": "100 sosyal etkileşim gerçekleştir",
       "icon": "🧁",
       "color": "#101010",
       "category": "social_interaction",
@@ -1065,7 +1065,7 @@
       "id": "badge-101",
       "key": "SI-GOLD-021",
       "name": "SI-GOLD-021",
-      "description": "Toplam 200 post yap",
+      "description": "200 gönderi paylaş",
       "icon": "🚀",
       "color": "#FFD700",
       "category": "social_interaction",
@@ -1082,7 +1082,7 @@
       "id": "badge-110",
       "key": "SI-GOLD-022",
       "name": "SI-GOLD-022",
-      "description": "Toplam 200 mesaj gönder",
+      "description": "200 mesaj gönder",
       "icon": "🧭",
       "color": "#FF00FF",
       "category": "social_interaction",
@@ -1116,7 +1116,7 @@
       "id": "badge-103",
       "key": "SI-GOLD-024",
       "name": "SI-GOLD-024",
-      "description": "Toplam 500 yorum yap",
+      "description": "500 yorum yap",
       "icon": "🛸",
       "color": "#FFB347",
       "category": "social_interaction",
@@ -1133,7 +1133,7 @@
       "id": "badge-104",
       "key": "SI-GOLD-025",
       "name": "SI-GOLD-025",
-      "description": "Toplam 200 story oluştur",
+      "description": "200 hikaye oluştur",
       "icon": "🛰️",
       "color": "#FFA500",
       "category": "social_interaction",
@@ -1150,7 +1150,7 @@
       "id": "badge-105",
       "key": "SI-GOLD-026",
       "name": "SI-GOLD-026",
-      "description": "Toplam 300 arkadaş ekle",
+      "description": "300 arkadaş ekle",
       "icon": "🌍",
       "color": "#FF8C00",
       "category": "social_interaction",
@@ -1167,7 +1167,7 @@
       "id": "badge-106",
       "key": "SI-GOLD-027",
       "name": "SI-GOLD-027",
-      "description": "Toplam 500 takipçi kazan",
+      "description": "500 takipçi kazan",
       "icon": "🌎",
       "color": "#FF7F50",
       "category": "social_interaction",
@@ -1184,7 +1184,7 @@
       "id": "badge-107",
       "key": "SI-GOLD-028",
       "name": "SI-GOLD-028",
-      "description": "Toplam 200 paylaşım yap",
+      "description": "200 içerik paylaş",
       "icon": "🌏",
       "color": "#FF6347",
       "category": "social_interaction",
@@ -1201,7 +1201,7 @@
       "id": "badge-108",
       "key": "SI-GOLD-029",
       "name": "SI-GOLD-029",
-      "description": "Toplam 300 beğeni, yorum veya paylaşım yap",
+      "description": "300 beğeni, yorum veya paylaşım gerçekleştir",
       "icon": "🌐",
       "color": "#FF4500",
       "category": "social_interaction",
@@ -1218,7 +1218,7 @@
       "id": "badge-109",
       "key": "SI-GOLD-030",
       "name": "SI-GOLD-030",
-      "description": "Toplam 500 sosyal etkileşim gerçekleştir",
+      "description": "500 sosyal etkileşim gerçekleştir",
       "icon": "🗺️",
       "color": "#FF1493",
       "category": "social_interaction",
@@ -1235,7 +1235,7 @@
       "id": "badge-111",
       "key": "SI-PLAT-031",
       "name": "SI-PLAT-031",
-      "description": "Toplam 1000 post yap",
+      "description": "1000 gönderi paylaş",
       "icon": "⛰️",
       "color": "#E5E4E2",
       "category": "social_interaction",
@@ -1252,7 +1252,7 @@
       "id": "badge-120",
       "key": "SI-PLAT-032",
       "name": "SI-PLAT-032",
-      "description": "Toplam 1000 mesaj gönder",
+      "description": "1000 mesaj gönder",
       "icon": "🌅",
       "color": "#1C1C1C",
       "category": "social_interaction",
@@ -1286,7 +1286,7 @@
       "id": "badge-113",
       "key": "SI-PLAT-034",
       "name": "SI-PLAT-034",
-      "description": "Toplam 2000 yorum yap",
+      "description": "2000 yorum yap",
       "icon": "🌋",
       "color": "#C0C0C0",
       "category": "social_interaction",
@@ -1303,7 +1303,7 @@
       "id": "badge-114",
       "key": "SI-PLAT-035",
       "name": "SI-PLAT-035",
-      "description": "Toplam 1000 story oluştur",
+      "description": "1000 hikaye oluştur",
       "icon": "🗻",
       "color": "#A9A9A9",
       "category": "social_interaction",
@@ -1320,7 +1320,7 @@
       "id": "badge-115",
       "key": "SI-PLAT-036",
       "name": "SI-PLAT-036",
-      "description": "Toplam 1500 arkadaş ekle",
+      "description": "1500 arkadaş ekle",
       "icon": "🏕️",
       "color": "#808080",
       "category": "social_interaction",
@@ -1337,7 +1337,7 @@
       "id": "badge-116",
       "key": "SI-PLAT-037",
       "name": "SI-PLAT-037",
-      "description": "Toplam 2000 takipçi kazan",
+      "description": "2000 takipçi kazan",
       "icon": "🏖️",
       "color": "#696969",
       "category": "social_interaction",
@@ -1354,7 +1354,7 @@
       "id": "badge-117",
       "key": "SI-PLAT-038",
       "name": "SI-PLAT-038",
-      "description": "Toplam 1000 paylaşım yap",
+      "description": "1000 içerik paylaş",
       "icon": "🏜️",
       "color": "#555555",
       "category": "social_interaction",
@@ -1371,7 +1371,7 @@
       "id": "badge-118",
       "key": "SI-PLAT-039",
       "name": "SI-PLAT-039",
-      "description": "Toplam 1500 beğeni, yorum veya paylaşım yap",
+      "description": "1500 beğeni, yorum veya paylaşım gerçekleştir",
       "icon": "🏝️",
       "color": "#404040",
       "category": "social_interaction",
@@ -1388,7 +1388,7 @@
       "id": "badge-119",
       "key": "SI-PLAT-040",
       "name": "SI-PLAT-040",
-      "description": "Toplam 2000 sosyal etkileşim gerçekleştir",
+      "description": "2000 sosyal etkileşim gerçekleştir",
       "icon": "🏞️",
       "color": "#2F2F2F",
       "category": "social_interaction",
@@ -1456,7 +1456,7 @@
       "id": "badge-123",
       "key": "SD-BRONZE-004",
       "name": "SD-BRONZE-004",
-      "description": "7 gün üst üste kurs tamamla",
+      "description": "7 gün üst üste ders tamamla",
       "icon": "🌇",
       "color": "#A0522D",
       "category": "streak",
@@ -1465,7 +1465,7 @@
       "points": 22,
       "criteria": {
         "type": "streak",
-        "streak_type": "kurs tamamlama",
+        "streak_type": "ders tamamlama",
         "days": 7
       }
     },
@@ -1626,7 +1626,7 @@
       "id": "badge-133",
       "key": "SD-SILVER-014",
       "name": "SD-SILVER-014",
-      "description": "30 gün üst üste kurs tamamla",
+      "description": "30 gün üst üste ders tamamla",
       "icon": "🏈",
       "color": "#909090",
       "category": "streak",
@@ -1635,7 +1635,7 @@
       "points": 60,
       "criteria": {
         "type": "streak",
-        "streak_type": "kurs tamamlama",
+        "streak_type": "ders tamamlama",
         "days": 30
       }
     },
@@ -1796,7 +1796,7 @@
       "id": "badge-143",
       "key": "SD-GOLD-024",
       "name": "SD-GOLD-024",
-      "description": "100 gün üst üste kurs tamamla",
+      "description": "100 gün üst üste ders tamamla",
       "icon": "🥌",
       "color": "#FFB347",
       "category": "streak",
@@ -1805,7 +1805,7 @@
       "points": 150,
       "criteria": {
         "type": "streak",
-        "streak_type": "kurs tamamlama",
+        "streak_type": "ders tamamlama",
         "days": 100
       }
     },
@@ -1949,7 +1949,7 @@
       "id": "badge-152",
       "key": "SD-PLAT-033",
       "name": "SD-PLAT-033",
-      "description": "500 gün üst üste test çöz",
+      "description": "365 gün üst üste test çöz",
       "icon": "⛹️",
       "color": "#D3D3D3",
       "category": "streak",
@@ -1959,14 +1959,14 @@
       "criteria": {
         "type": "streak",
         "streak_type": "test çözme",
-        "days": 500
+        "days": 365
       }
     },
     {
       "id": "badge-153",
       "key": "SD-PLAT-034",
       "name": "SD-PLAT-034",
-      "description": "730 gün üst üste kurs tamamla",
+      "description": "365 gün üst üste ders tamamla",
       "icon": "🤾",
       "color": "#C0C0C0",
       "category": "streak",
@@ -1975,8 +1975,8 @@
       "points": 450,
       "criteria": {
         "type": "streak",
-        "streak_type": "kurs tamamlama",
-        "days": 730
+        "streak_type": "ders tamamlama",
+        "days": 365
       }
     },
     {
@@ -2000,7 +2000,7 @@
       "id": "badge-155",
       "key": "SD-PLAT-036",
       "name": "SD-PLAT-036",
-      "description": "500 gün üst üste aktivite yap",
+      "description": "365 gün üst üste aktivite yap",
       "icon": "🏇",
       "color": "#808080",
       "category": "streak",
@@ -2010,14 +2010,14 @@
       "criteria": {
         "type": "streak",
         "streak_type": "aktif",
-        "days": 500
+        "days": 365
       }
     },
     {
       "id": "badge-156",
       "key": "SD-PLAT-037",
       "name": "SD-PLAT-037",
-      "description": "730 gün üst üste düzenli aktivite yap",
+      "description": "365 gün üst üste düzenli aktivite yap",
       "icon": "🧘",
       "color": "#696969",
       "category": "streak",
@@ -2027,7 +2027,7 @@
       "criteria": {
         "type": "streak",
         "streak_type": "disiplin",
-        "days": 730
+        "days": 365
       }
     },
     {
@@ -2051,7 +2051,7 @@
       "id": "badge-158",
       "key": "SD-PLAT-039",
       "name": "SD-PLAT-039",
-      "description": "500 gün üst üste düzenli aktivite yap",
+      "description": "365 gün üst üste düzenli aktivite yap",
       "icon": "🏊",
       "color": "#404040",
       "category": "streak",
@@ -2061,14 +2061,14 @@
       "criteria": {
         "type": "streak",
         "streak_type": "düzen",
-        "days": 500
+        "days": 365
       }
     },
     {
       "id": "badge-159",
       "key": "SD-PLAT-040",
       "name": "SD-PLAT-040",
-      "description": "730 gün üst üste düzenli aktivite yap",
+      "description": "365 gün üst üste düzenli aktivite yap",
       "icon": "🤽",
       "color": "#2F2F2F",
       "category": "streak",
@@ -2078,647 +2078,7 @@
       "criteria": {
         "type": "streak",
         "streak_type": "alışkanlık",
-        "days": 730
-      }
-    },
-    {
-      "id": "badge-161",
-      "key": "OZ-BRONZE-001",
-      "name": "OZ-BRONZE-001",
-      "description": "İlk testi tamamla",
-      "icon": "🧗",
-      "color": "#CD7F32",
-      "category": "total_achievements",
-      "tier": "bronze",
-      "rarity": "common",
-      "points": 30,
-      "criteria": {
-        "type": "special",
-        "special_type": "ilk test"
-      }
-    },
-    {
-      "id": "badge-170",
-      "key": "OZ-BRONZE-002",
-      "name": "OZ-BRONZE-002",
-      "description": "1 hafta içinde 50 test tamamla",
-      "icon": "🧠",
-      "color": "#1F140D",
-      "category": "special",
-      "tier": "bronze",
-      "rarity": "common",
-      "points": 30,
-      "criteria": {
-        "type": "special",
-        "special_type": "benzersiz başarı"
-      }
-    },
-    {
-      "id": "badge-162",
-      "key": "OZ-BRONZE-003",
-      "name": "OZ-BRONZE-003",
-      "description": "İlk kursu tamamla",
-      "icon": "🚵",
-      "color": "#B87333",
-      "category": "total_achievements",
-      "tier": "bronze",
-      "rarity": "common",
-      "points": 30,
-      "criteria": {
-        "type": "special",
-        "special_type": "ilk kurs"
-      }
-    },
-    {
-      "id": "badge-163",
-      "key": "OZ-BRONZE-004",
-      "name": "OZ-BRONZE-004",
-      "description": "İlk postu oluştur",
-      "icon": "🚴",
-      "color": "#A0522D",
-      "category": "social_interaction",
-      "tier": "bronze",
-      "rarity": "common",
-      "points": 30,
-      "criteria": {
-        "type": "special",
-        "special_type": "ilk post"
-      }
-    },
-    {
-      "id": "badge-164",
-      "key": "OZ-BRONZE-005",
-      "name": "OZ-BRONZE-005",
-      "description": "5 dakika içinde test tamamla",
-      "icon": "🏃",
-      "color": "#8B4513",
-      "category": "special",
-      "tier": "bronze",
-      "rarity": "common",
-      "points": 30,
-      "criteria": {
-        "type": "special",
-        "special_type": "hızlı tamamlama"
-      }
-    },
-    {
-      "id": "badge-165",
-      "key": "OZ-BRONZE-006",
-      "name": "OZ-BRONZE-006",
-      "description": "100% puanla test tamamla",
-      "icon": "🚶",
-      "color": "#654321",
-      "category": "special",
-      "tier": "bronze",
-      "rarity": "common",
-      "points": 30,
-      "criteria": {
-        "type": "special",
-        "special_type": "mükemmel performans"
-      }
-    },
-    {
-      "id": "badge-166",
-      "key": "OZ-BRONZE-007",
-      "name": "OZ-BRONZE-007",
-      "description": "Bir günde test, kurs ve quiz tamamla",
-      "icon": "🕴️",
-      "color": "#5C4033",
-      "category": "special",
-      "tier": "bronze",
-      "rarity": "common",
-      "points": 30,
-      "criteria": {
-        "type": "special",
-        "special_type": "özel kombinasyon"
-      }
-    },
-    {
-      "id": "badge-167",
-      "key": "OZ-BRONZE-008",
-      "name": "OZ-BRONZE-008",
-      "description": "Tek bir günde 50+ puan topla",
-      "icon": "👤",
-      "color": "#4A3728",
-      "category": "special",
-      "tier": "bronze",
-      "rarity": "common",
-      "points": 30,
-      "criteria": {
-        "type": "special",
-        "special_type": "nadir başarı"
-      }
-    },
-    {
-      "id": "badge-168",
-      "key": "OZ-BRONZE-009",
-      "name": "OZ-BRONZE-009",
-      "description": "Bir testte 90+ puan al",
-      "icon": "👥",
-      "color": "#3D2817",
-      "category": "special",
-      "tier": "bronze",
-      "rarity": "common",
-      "points": 30,
-      "criteria": {
-        "type": "special",
-        "special_type": "efsanevi an"
-      }
-    },
-    {
-      "id": "badge-169",
-      "key": "OZ-BRONZE-010",
-      "name": "OZ-BRONZE-010",
-      "description": "100 rozet kazan",
-      "icon": "👣",
-      "color": "#2F1F14",
-      "category": "special",
-      "tier": "bronze",
-      "rarity": "common",
-      "points": 30,
-      "criteria": {
-        "type": "special",
-        "special_type": "tarihi başarı"
-      }
-    },
-    {
-      "id": "badge-171",
-      "key": "OZ-SILVER-011",
-      "name": "OZ-SILVER-011",
-      "description": "İlk testi tamamla",
-      "icon": "💪",
-      "color": "#C0C0C0",
-      "category": "total_achievements",
-      "tier": "silver",
-      "rarity": "rare",
-      "points": 80,
-      "criteria": {
-        "type": "special",
-        "special_type": "ilk test"
-      }
-    },
-    {
-      "id": "badge-180",
-      "key": "OZ-SILVER-012",
-      "name": "OZ-SILVER-012",
-      "description": "1 hafta içinde 50 test tamamla",
-      "icon": "👁️",
-      "color": "#080808",
-      "category": "special",
-      "tier": "silver",
-      "rarity": "rare",
-      "points": 80,
-      "criteria": {
-        "type": "special",
-        "special_type": "benzersiz başarı"
-      }
-    },
-    {
-      "id": "badge-172",
-      "key": "OZ-SILVER-013",
-      "name": "OZ-SILVER-013",
-      "description": "İlk kursu tamamla",
-      "icon": "🦾",
-      "color": "#A8A8A8",
-      "category": "total_achievements",
-      "tier": "silver",
-      "rarity": "rare",
-      "points": 80,
-      "criteria": {
-        "type": "special",
-        "special_type": "ilk kurs"
-      }
-    },
-    {
-      "id": "badge-173",
-      "key": "OZ-SILVER-014",
-      "name": "OZ-SILVER-014",
-      "description": "İlk postu oluştur",
-      "icon": "🦿",
-      "color": "#909090",
-      "category": "social_interaction",
-      "tier": "silver",
-      "rarity": "rare",
-      "points": 80,
-      "criteria": {
-        "type": "special",
-        "special_type": "ilk post"
-      }
-    },
-    {
-      "id": "badge-174",
-      "key": "OZ-SILVER-015",
-      "name": "OZ-SILVER-015",
-      "description": "5 dakika içinde test tamamla",
-      "icon": "🦵",
-      "color": "#787878",
-      "category": "special",
-      "tier": "silver",
-      "rarity": "rare",
-      "points": 80,
-      "criteria": {
-        "type": "special",
-        "special_type": "hızlı tamamlama"
-      }
-    },
-    {
-      "id": "badge-175",
-      "key": "OZ-SILVER-016",
-      "name": "OZ-SILVER-016",
-      "description": "100% puanla test tamamla",
-      "icon": "🦶",
-      "color": "#606060",
-      "category": "special",
-      "tier": "silver",
-      "rarity": "rare",
-      "points": 80,
-      "criteria": {
-        "type": "special",
-        "special_type": "mükemmel performans"
-      }
-    },
-    {
-      "id": "badge-176",
-      "key": "OZ-SILVER-017",
-      "name": "OZ-SILVER-017",
-      "description": "Bir günde test, kurs ve quiz tamamla",
-      "icon": "👂",
-      "color": "#484848",
-      "category": "special",
-      "tier": "silver",
-      "rarity": "rare",
-      "points": 80,
-      "criteria": {
-        "type": "special",
-        "special_type": "özel kombinasyon"
-      }
-    },
-    {
-      "id": "badge-177",
-      "key": "OZ-SILVER-018",
-      "name": "OZ-SILVER-018",
-      "description": "Tek bir günde 50+ puan topla",
-      "icon": "🦻",
-      "color": "#303030",
-      "category": "special",
-      "tier": "silver",
-      "rarity": "rare",
-      "points": 80,
-      "criteria": {
-        "type": "special",
-        "special_type": "nadir başarı"
-      }
-    },
-    {
-      "id": "badge-178",
-      "key": "OZ-SILVER-019",
-      "name": "OZ-SILVER-019",
-      "description": "Bir testte 90+ puan al",
-      "icon": "👃",
-      "color": "#181818",
-      "category": "special",
-      "tier": "silver",
-      "rarity": "rare",
-      "points": 80,
-      "criteria": {
-        "type": "special",
-        "special_type": "efsanevi an"
-      }
-    },
-    {
-      "id": "badge-179",
-      "key": "OZ-SILVER-020",
-      "name": "OZ-SILVER-020",
-      "description": "100 rozet kazan",
-      "icon": "👀",
-      "color": "#101010",
-      "category": "special",
-      "tier": "silver",
-      "rarity": "rare",
-      "points": 80,
-      "criteria": {
-        "type": "special",
-        "special_type": "tarihi başarı"
-      }
-    },
-    {
-      "id": "badge-181",
-      "key": "OZ-GOLD-021",
-      "name": "OZ-GOLD-021",
-      "description": "İlk testi 100% puanla tamamla",
-      "icon": "👅",
-      "color": "#FFD700",
-      "category": "special",
-      "tier": "gold",
-      "rarity": "epic",
-      "points": 200,
-      "criteria": {
-        "type": "special",
-        "special_type": "ilk test"
-      }
-    },
-    {
-      "id": "badge-190",
-      "key": "OZ-GOLD-022",
-      "name": "OZ-GOLD-022",
-      "description": "1 hafta içinde 250 test tamamla",
-      "icon": "💕",
-      "color": "#FF00FF",
-      "category": "special",
-      "tier": "gold",
-      "rarity": "epic",
-      "points": 200,
-      "criteria": {
-        "type": "special",
-        "special_type": "benzersiz başarı"
-      }
-    },
-    {
-      "id": "badge-182",
-      "key": "OZ-GOLD-023",
-      "name": "OZ-GOLD-023",
-      "description": "İlk kursu 100% puanla tamamla",
-      "icon": "👄",
-      "color": "#FFC125",
-      "category": "special",
-      "tier": "gold",
-      "rarity": "epic",
-      "points": 200,
-      "criteria": {
-        "type": "special",
-        "special_type": "ilk kurs"
-      }
-    },
-    {
-      "id": "badge-183",
-      "key": "OZ-GOLD-024",
-      "name": "OZ-GOLD-024",
-      "description": "İlk postu 100+ beğeni ile oluştur",
-      "icon": "💋",
-      "color": "#FFB347",
-      "category": "social_interaction",
-      "tier": "gold",
-      "rarity": "epic",
-      "points": 200,
-      "criteria": {
-        "type": "special",
-        "special_type": "ilk post"
-      }
-    },
-    {
-      "id": "badge-184",
-      "key": "OZ-GOLD-025",
-      "name": "OZ-GOLD-025",
-      "description": "3 dakika içinde test tamamla",
-      "icon": "💘",
-      "color": "#FFA500",
-      "category": "special",
-      "tier": "gold",
-      "rarity": "epic",
-      "points": 200,
-      "criteria": {
-        "type": "special",
-        "special_type": "hızlı tamamlama"
-      }
-    },
-    {
-      "id": "badge-185",
-      "key": "OZ-GOLD-026",
-      "name": "OZ-GOLD-026",
-      "description": "5 kez üst üste 100% puanla test tamamla",
-      "icon": "💝",
-      "color": "#FF8C00",
-      "category": "special",
-      "tier": "gold",
-      "rarity": "epic",
-      "points": 200,
-      "criteria": {
-        "type": "special",
-        "special_type": "mükemmel performans"
-      }
-    },
-    {
-      "id": "badge-186",
-      "key": "OZ-GOLD-027",
-      "name": "OZ-GOLD-027",
-      "description": "Bir günde 5 farklı aktivite türü tamamla",
-      "icon": "💖",
-      "color": "#FF7F50",
-      "category": "special",
-      "tier": "gold",
-      "rarity": "epic",
-      "points": 200,
-      "criteria": {
-        "type": "special",
-        "special_type": "özel kombinasyon"
-      }
-    },
-    {
-      "id": "badge-187",
-      "key": "OZ-GOLD-028",
-      "name": "OZ-GOLD-028",
-      "description": "Tek bir günde 200+ puan topla",
-      "icon": "💗",
-      "color": "#FF6347",
-      "category": "special",
-      "tier": "gold",
-      "rarity": "epic",
-      "points": 200,
-      "criteria": {
-        "type": "special",
-        "special_type": "nadir başarı"
-      }
-    },
-    {
-      "id": "badge-188",
-      "key": "OZ-GOLD-029",
-      "name": "OZ-GOLD-029",
-      "description": "Bir testte 95+ puan al",
-      "icon": "💓",
-      "color": "#FF4500",
-      "category": "special",
-      "tier": "gold",
-      "rarity": "epic",
-      "points": 200,
-      "criteria": {
-        "type": "special",
-        "special_type": "efsanevi an"
-      }
-    },
-    {
-      "id": "badge-189",
-      "key": "OZ-GOLD-030",
-      "name": "OZ-GOLD-030",
-      "description": "150 rozet kazan",
-      "icon": "💞",
-      "color": "#FF1493",
-      "category": "special",
-      "tier": "gold",
-      "rarity": "epic",
-      "points": 200,
-      "criteria": {
-        "type": "special",
-        "special_type": "tarihi başarı"
-      }
-    },
-    {
-      "id": "badge-191",
-      "key": "OZ-PLAT-031",
-      "name": "OZ-PLAT-031",
-      "description": "İlk testi 1 dakika içinde 100% puanla tamamla",
-      "icon": "💟",
-      "color": "#E5E4E2",
-      "category": "special",
-      "tier": "platinum",
-      "rarity": "legendary",
-      "points": 600,
-      "criteria": {
-        "type": "special",
-        "special_type": "ilk test"
-      }
-    },
-    {
-      "id": "badge-200",
-      "key": "OZ-PLAT-032",
-      "name": "OZ-PLAT-032",
-      "description": "1 hafta içinde 500 test tamamla",
-      "icon": "🖤",
-      "color": "#1C1C1C",
-      "category": "special",
-      "tier": "platinum",
-      "rarity": "legendary",
-      "points": 600,
-      "criteria": {
-        "type": "special",
-        "special_type": "benzersiz başarı"
-      }
-    },
-    {
-      "id": "badge-192",
-      "key": "OZ-PLAT-033",
-      "name": "OZ-PLAT-033",
-      "description": "İlk kursu 1 günde 100% puanla tamamla",
-      "icon": "❣️",
-      "color": "#D3D3D3",
-      "category": "special",
-      "tier": "platinum",
-      "rarity": "legendary",
-      "points": 600,
-      "criteria": {
-        "type": "special",
-        "special_type": "ilk kurs"
-      }
-    },
-    {
-      "id": "badge-193",
-      "key": "OZ-PLAT-034",
-      "name": "OZ-PLAT-034",
-      "description": "İlk postu 500+ beğeni ile oluştur",
-      "icon": "💔",
-      "color": "#C0C0C0",
-      "category": "social_interaction",
-      "tier": "platinum",
-      "rarity": "legendary",
-      "points": 600,
-      "criteria": {
-        "type": "special",
-        "special_type": "ilk post"
-      }
-    },
-    {
-      "id": "badge-194",
-      "key": "OZ-PLAT-035",
-      "name": "OZ-PLAT-035",
-      "description": "1 dakika içinde test tamamla",
-      "icon": "❤️",
-      "color": "#A9A9A9",
-      "category": "special",
-      "tier": "platinum",
-      "rarity": "legendary",
-      "points": 600,
-      "criteria": {
-        "type": "special",
-        "special_type": "hızlı tamamlama"
-      }
-    },
-    {
-      "id": "badge-195",
-      "key": "OZ-PLAT-036",
-      "name": "OZ-PLAT-036",
-      "description": "10 kez üst üste 100% puanla test tamamla",
-      "icon": "🧡",
-      "color": "#808080",
-      "category": "special",
-      "tier": "platinum",
-      "rarity": "legendary",
-      "points": 600,
-      "criteria": {
-        "type": "special",
-        "special_type": "mükemmel performans"
-      }
-    },
-    {
-      "id": "badge-196",
-      "key": "OZ-PLAT-037",
-      "name": "OZ-PLAT-037",
-      "description": "Bir günde 10 farklı aktivite türü tamamla",
-      "icon": "💛",
-      "color": "#696969",
-      "category": "special",
-      "tier": "platinum",
-      "rarity": "legendary",
-      "points": 600,
-      "criteria": {
-        "type": "special",
-        "special_type": "özel kombinasyon"
-      }
-    },
-    {
-      "id": "badge-197",
-      "key": "OZ-PLAT-038",
-      "name": "OZ-PLAT-038",
-      "description": "Tek bir günde 500+ puan topla",
-      "icon": "💚",
-      "color": "#555555",
-      "category": "special",
-      "tier": "platinum",
-      "rarity": "legendary",
-      "points": 600,
-      "criteria": {
-        "type": "special",
-        "special_type": "nadir başarı"
-      }
-    },
-    {
-      "id": "badge-198",
-      "key": "OZ-PLAT-039",
-      "name": "OZ-PLAT-039",
-      "description": "Bir testte 98+ puan al",
-      "icon": "💙",
-      "color": "#404040",
-      "category": "special",
-      "tier": "platinum",
-      "rarity": "legendary",
-      "points": 600,
-      "criteria": {
-        "type": "special",
-        "special_type": "efsanevi an"
-      }
-    },
-    {
-      "id": "badge-199",
-      "key": "OZ-PLAT-040",
-      "name": "OZ-PLAT-040",
-      "description": "200 rozet kazan",
-      "icon": "💜",
-      "color": "#2F2F2F",
-      "category": "special",
-      "tier": "platinum",
-      "rarity": "legendary",
-      "points": 600,
-      "criteria": {
-        "type": "special",
-        "special_type": "tarihi başarı"
+        "days": 365
       }
     },
     {
@@ -2813,7 +2173,7 @@
       "rarity": "common",
       "points": 20,
       "criteria": {
-        "type": "course_count",
+        "type": "lesson_count",
         "count": 5
       }
     },
@@ -2829,7 +2189,7 @@
       "rarity": "rare",
       "points": 50,
       "criteria": {
-        "type": "course_count",
+        "type": "lesson_count",
         "count": 25
       }
     },
@@ -2845,7 +2205,7 @@
       "rarity": "epic",
       "points": 120,
       "criteria": {
-        "type": "course_count",
+        "type": "lesson_count",
         "count": 50
       }
     },
@@ -2861,7 +2221,7 @@
       "rarity": "legendary",
       "points": 360,
       "criteria": {
-        "type": "course_count",
+        "type": "lesson_count",
         "count": 100
       }
     },
@@ -2877,7 +2237,7 @@
       "rarity": "mythic",
       "points": 1000,
       "criteria": {
-        "type": "course_count",
+        "type": "lesson_count",
         "count": 250
       }
     },

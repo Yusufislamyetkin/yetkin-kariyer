@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Search, MapPin, Briefcase, DollarSign, Filter, X } from "lucide-react";
 import { Card, CardContent } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
+import { getCompanyInfoForJob } from "@/lib/utils/job-company-helper";
 
 interface Job {
   id: string;
@@ -349,13 +350,23 @@ export default function BrowseJobsPage() {
                   <div className="flex-1 space-y-3">
                     {/* Header: Employer + New badge + Posted time */}
                     <div className="flex items-center gap-3">
-                      <div className="h-10 w-10 rounded-full bg-gradient-to-br from-indigo-500 to-blue-600 text-white flex items-center justify-center font-semibold">
-                        {(job.employer.name || "İşveren").charAt(0).toUpperCase()}
-                      </div>
+                      {(() => {
+                        const companyInfo = getCompanyInfoForJob(job.title);
+                        return (
+                          <div className="h-10 w-10 rounded-full bg-gradient-to-br from-indigo-500 to-blue-600 text-white flex items-center justify-center font-semibold text-sm">
+                            {companyInfo.initial}
+                          </div>
+                        );
+                      })()}
                       <div className="flex items-center gap-2 flex-wrap">
-                        <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                          {job.employer.name || "İşveren"}
-                        </span>
+                        {(() => {
+                          const companyInfo = getCompanyInfoForJob(job.title);
+                          return (
+                            <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                              {companyInfo.name}
+                            </span>
+                          );
+                        })()}
                         {/* Badges */}
                         {(() => {
                           const created = new Date(job.createdAt);
@@ -402,10 +413,15 @@ export default function BrowseJobsPage() {
                           <span>{job.salary}</span>
                         </span>
                       )}
-                      <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300">
-                        <Briefcase className="h-4 w-4 flex-shrink-0" />
-                        <span>{job.employer.name || "İşveren"}</span>
-                      </span>
+                      {(() => {
+                        const companyInfo = getCompanyInfoForJob(job.title);
+                        return (
+                          <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300">
+                            <Briefcase className="h-4 w-4 flex-shrink-0" />
+                            <span>{companyInfo.name}</span>
+                          </span>
+                        );
+                      })()}
                     </div>
                   </div>
 

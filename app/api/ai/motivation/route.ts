@@ -21,45 +21,93 @@ export async function GET() {
 
     const userId = session.user.id as string;
 
-    // Kullanıcı istatistiklerini al
-    const [quizStats, interviewStats, recentBadges, completedTopics] = await Promise.all([
-      db.quizAttempt.aggregate({
-        where: { userId },
-        _avg: { score: true },
-        _count: { _all: true },
-      }),
-      db.interviewAttempt.aggregate({
-        where: { userId },
-        _avg: { aiScore: true },
-        _count: { _all: true },
-      }),
-      db.badgeEarned.findMany({
-        where: { userId },
-        orderBy: { earnedAt: "desc" },
-        take: 3,
-        include: {
-          badge: {
-            select: {
-              name: true,
+    // Kullanıcı istatistiklerini al - her birini ayrı ayrı handle et
+    const getQuizStats = async () => {
+      try {
+        if (!db.quizAttempt?.aggregate) {
+          return { _avg: { score: null }, _count: { _all: 0 } };
+        }
+        return await db.quizAttempt.aggregate({
+          where: { userId },
+          _avg: { score: true },
+          _count: { _all: true },
+        });
+      } catch {
+        return { _avg: { score: null }, _count: { _all: 0 } };
+      }
+    };
+
+    const getInterviewStats = async () => {
+      try {
+        if (!db.interviewAttempt?.aggregate) {
+          return { _avg: { aiScore: null }, _count: { _all: 0 } };
+        }
+        return await db.interviewAttempt.aggregate({
+          where: { userId },
+          _avg: { aiScore: true },
+          _count: { _all: true },
+        });
+      } catch {
+        return { _avg: { aiScore: null }, _count: { _all: 0 } };
+      }
+    };
+
+    const getRecentBadges = async () => {
+      try {
+        if (!db.badgeEarned?.findMany) {
+          return [];
+        }
+        return await db.badgeEarned.findMany({
+          where: { userId },
+          orderBy: { earnedAt: "desc" },
+          take: 3,
+          include: {
+            badge: {
+              select: {
+                name: true,
+              },
             },
           },
-        },
-      }),
-      db.topicProgress.count({
-        where: {
-          userId,
-          completed: true,
-        },
-      }),
+        });
+      } catch {
+        return [];
+      }
+    };
+
+    const getCompletedTopics = async () => {
+      try {
+        if (!db.topicProgress?.count) {
+          return 0;
+        }
+        return await db.topicProgress.count({
+          where: {
+            userId,
+            completed: true,
+          },
+        });
+      } catch {
+        return 0;
+      }
+    };
+
+    const [quizStats, interviewStats, recentBadges, completedTopics] = await Promise.all([
+      getQuizStats(),
+      getInterviewStats(),
+      getRecentBadges(),
+      getCompletedTopics(),
     ]);
 
     const stats = {
-      quizCount: quizStats._count._all,
-      avgQuizScore: Math.round(quizStats._avg.score ?? 0),
-      interviewCount: interviewStats._count._all,
-      avgInterviewScore: Math.round(interviewStats._avg.aiScore ?? 0),
-      recentBadges: recentBadges.map((b: typeof recentBadges[0]) => b.badge.name),
-      completedTopics,
+      quizCount: quizStats._count?._all ?? 0,
+      avgQuizScore: Math.round(quizStats._avg?.score ?? 0),
+      interviewCount: interviewStats._count?._all ?? 0,
+      avgInterviewScore: Math.round(interviewStats._avg?.aiScore ?? 0),
+      recentBadges: Array.isArray(recentBadges)
+        ? recentBadges
+            .map((b: any) => b?.badge?.name)
+            .filter((name: string | undefined): name is string => !!name)
+        : [],
+      completedTopics: completedTopics ?? 0,
     };
 
     if (!isAIEnabled()) {

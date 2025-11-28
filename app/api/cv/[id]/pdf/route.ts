@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
 import { generatePdfToken } from "@/lib/cv/pdf-token";
+import { createRequire } from "module";
 
 export const runtime = "nodejs";
 
@@ -20,16 +21,81 @@ async function loadPuppeteer(preferCore: boolean) {
     ? ["puppeteer-core", "puppeteer"]
     : ["puppeteer", "puppeteer-core"];
 
+  const errors: string[] = [];
+
+  // Try dynamic import first
   for (const moduleName of moduleOrder) {
     try {
+      console.log(`[PDF] Attempting to load ${moduleName}...`);
       const mod = await import(moduleName);
-      cachedPuppeteer = (mod as any).default ?? mod;
-      return cachedPuppeteer;
-    } catch (error) {
-      console.warn(`Puppeteer import failed for ${moduleName}:`, error);
+      
+      // Check if the module has the expected structure
+      const puppeteerInstance = (mod as any).default ?? mod;
+      
+      // Verify it has the launch method
+      if (typeof puppeteerInstance?.launch === "function") {
+        console.log(`[PDF] Successfully loaded ${moduleName}`);
+        cachedPuppeteer = puppeteerInstance;
+        return cachedPuppeteer;
+      } else {
+        errors.push(`${moduleName}: module loaded but missing 'launch' method`);
+      }
+    } catch (error: any) {
+      const errorMsg = error?.message || String(error);
+      errors.push(`${moduleName} (import): ${errorMsg}`);
+      console.warn(`[PDF] Puppeteer import failed for ${moduleName}:`, errorMsg);
+      
+      // Check if it's a module not found error
+      if (errorMsg.includes("Cannot find module") || errorMsg.includes("MODULE_NOT_FOUND")) {
+        console.error(`[PDF] Module ${moduleName} is not installed. Run: npm install ${moduleName}`);
+      }
     }
   }
 
+  // Try require as fallback (for Node.js runtime)
+  try {
+    let requireModule: NodeRequire;
+    
+    if (typeof require !== "undefined") {
+      requireModule = require;
+    } else {
+      // Use createRequire if import.meta.url is available
+      try {
+        // @ts-ignore - import.meta.url might not be available in all contexts
+        if (typeof import.meta !== "undefined" && import.meta.url) {
+          requireModule = createRequire(import.meta.url);
+        } else {
+          throw new Error("import.meta.url not available");
+        }
+      } catch {
+        // If createRequire fails, skip require fallback
+        throw new Error("Cannot create require function");
+      }
+    }
+    
+    for (const moduleName of moduleOrder) {
+      try {
+        console.log(`[PDF] Attempting to require ${moduleName}...`);
+        const mod = requireModule(moduleName);
+        const puppeteerInstance = mod.default ?? mod;
+        
+        if (typeof puppeteerInstance?.launch === "function") {
+          console.log(`[PDF] Successfully loaded ${moduleName} via require`);
+          cachedPuppeteer = puppeteerInstance;
+          return cachedPuppeteer;
+        }
+      } catch (error: any) {
+        const errorMsg = error?.message || String(error);
+        errors.push(`${moduleName} (require): ${errorMsg}`);
+        console.warn(`[PDF] Puppeteer require failed for ${moduleName}:`, errorMsg);
+      }
+    }
+  } catch (requireError: any) {
+    console.warn(`[PDF] Could not use require fallback:`, requireError?.message);
+  }
+
+  // Log all errors for debugging
+  console.error("[PDF] Failed to load Puppeteer from all sources:", errors);
   cachedPuppeteer = null;
   return cachedPuppeteer;
 }
@@ -144,12 +210,27 @@ export async function GET(
     const renderUrl = `${baseUrl}/cv/render/${cv.id}?pdf=true&token=${pdfToken}`;
 
     const isVercel = process.env.VERCEL === "1";
+    const isLocal = process.env.NODE_ENV === "development";
+    
+    console.log("[PDF] Environment:", { 
+      isVercel, 
+      isLocal, 
+      nodeEnv: process.env.NODE_ENV,
+      preferCore: isVercel 
+    });
+    
     const puppeteer = await loadPuppeteer(isVercel);
 
     if (!puppeteer) {
       console.error("[PDF] Puppeteer not available");
+      
+      // Provide more helpful error message
+      const errorMessage = isLocal
+        ? "Puppeteer modülleri yüklü değil. Lütfen 'npm install puppeteer puppeteer-core' komutunu çalıştırın."
+        : "Sunucu PDF oluşturma için yapılandırılmadı. Puppeteer modülleri yüklü değil.";
+      
       return NextResponse.json(
-        { error: "Sunucu PDF oluşturma için yapılandırılmadı" },
+        { error: errorMessage },
         { status: 503 }
       );
     }

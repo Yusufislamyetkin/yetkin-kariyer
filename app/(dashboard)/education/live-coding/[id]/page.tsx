@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
@@ -456,46 +456,138 @@ export default function LiveCodingPage() {
     [activeTask, activeLanguage]
   );
 
-  const handleRunCode = useCallback(async () => {
-    if (!activeTask || !activeLanguage || !activeUserCode.trim()) return;
+  const handleRunCode = useCallback(async (event?: React.MouseEvent<HTMLButtonElement>) => {
+    const logPrefix = "[Run Code]";
+    const startTime = Date.now();
+    
+    console.log(`${logPrefix} ========== Kod Çalıştırma Başlatıldı ==========`);
+    console.log(`${logPrefix} Timestamp:`, new Date().toISOString());
+    
+    // Prevent event propagation to avoid conflicts with Monaco Editor
+    if (event) {
+      console.log(`${logPrefix} Event mevcut, preventDefault ve stopPropagation çağrılıyor`);
+      event.preventDefault();
+      event.stopPropagation();
+      console.log(`${logPrefix} Event işlendi:`, {
+        type: event.type,
+        target: event.target,
+        currentTarget: event.currentTarget,
+        defaultPrevented: event.defaultPrevented,
+        isPropagationStopped: !event.isPropagationStopped,
+      });
+    } else {
+      console.log(`${logPrefix} Event parametresi yok`);
+    }
 
+    // Validation checks
+    console.log(`${logPrefix} Validasyon kontrolleri başlatılıyor...`);
+    console.log(`${logPrefix} activeTask:`, activeTask ? { id: activeTask.id, title: activeTask.title } : null);
+    console.log(`${logPrefix} activeLanguage:`, activeLanguage);
+    console.log(`${logPrefix} activeUserCode length:`, activeUserCode?.length || 0);
+    console.log(`${logPrefix} activeUserCode trimmed length:`, activeUserCode?.trim()?.length || 0);
+
+    if (!activeTask || !activeLanguage || !activeUserCode.trim()) {
+      console.warn(`${logPrefix} ❌ Validasyon başarısız:`, {
+        hasActiveTask: !!activeTask,
+        hasActiveLanguage: !!activeLanguage,
+        hasActiveUserCode: !!activeUserCode.trim(),
+      });
+      return;
+    }
+
+    console.log(`${logPrefix} ✅ Validasyon başarılı, kod çalıştırılıyor...`);
     setRunning(true);
     setRunResult(null);
     setSubmitError(null);
 
     try {
+      const requestPayload = {
+        language: activeLanguage,
+        code: activeUserCode.trim(),
+      };
+
+      console.log(`${logPrefix} API isteği hazırlanıyor...`);
+      console.log(`${logPrefix} Request payload:`, {
+        language: requestPayload.language,
+        codeLength: requestPayload.code.length,
+        codePreview: requestPayload.code.substring(0, 100),
+      });
+
+      const fetchStartTime = Date.now();
       const runResponse = await fetch("/api/education/live-coding/run", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          language: activeLanguage,
-          code: activeUserCode.trim(),
-        }),
+        body: JSON.stringify(requestPayload),
       });
 
-      const runData = await runResponse.json();
+      const fetchDuration = Date.now() - fetchStartTime;
+      console.log(`${logPrefix} API yanıtı alındı (${fetchDuration}ms):`, {
+        ok: runResponse.ok,
+        status: runResponse.status,
+        statusText: runResponse.statusText,
+      });
+
+      let runData;
+      try {
+        runData = await runResponse.json();
+        console.log(`${logPrefix} Response data:`, {
+          hasRun: !!runData.run,
+          hasCompile: !!runData.compile,
+          runCode: runData.run?.code,
+          hasStdout: !!runData.run?.stdout,
+          hasStderr: !!runData.run?.stderr,
+          hasOutput: !!runData.run?.output,
+          stdoutPreview: runData.run?.stdout?.substring(0, 100),
+          stderrPreview: runData.run?.stderr?.substring(0, 100),
+        });
+      } catch (parseError) {
+        console.error(`${logPrefix} ❌ Response parse edilemedi:`, parseError);
+        setRunResult({
+          errorMessage: "Yanıt parse edilemedi",
+          isCorrect: false,
+        });
+        return;
+      }
 
       if (!runResponse.ok) {
+        console.error(`${logPrefix} ❌ API yanıtı başarısız:`, {
+          error: runData.error,
+          status: runResponse.status,
+        });
         setRunResult({
           errorMessage: runData.error || "Kod çalıştırılırken bir hata oluştu",
           isCorrect: false,
         });
-      return;
-    }
+        return;
+      }
 
       const actualOutput = runData.run?.stdout || runData.run?.output || "";
       const hasError = runData.run?.code !== 0 || runData.run?.stderr || runData.compile?.stderr;
+
+      console.log(`${logPrefix} Çıktı analizi:`, {
+        actualOutputLength: actualOutput.length,
+        actualOutputPreview: actualOutput.substring(0, 100),
+        hasError,
+        exitCode: runData.run?.code,
+        hasStderr: !!runData.run?.stderr,
+        hasCompileStderr: !!runData.compile?.stderr,
+      });
 
       // Check if output matches expected output (simple comparison)
       let isCorrect = false;
       if (!hasError && activeTask.testCases && activeTask.testCases.length > 0) {
         const expectedOutput = activeTask.testCases[0].expectedOutput;
+        console.log(`${logPrefix} Beklenen çıktı ile karşılaştırma yapılıyor...`);
+        console.log(`${logPrefix} Expected output:`, expectedOutput.substring(0, 100));
         isCorrect = compareOutputs(actualOutput, expectedOutput);
+        console.log(`${logPrefix} Karşılaştırma sonucu:`, isCorrect ? "✅ Doğru" : "❌ Yanlış");
         
         if (isCorrect) {
+          console.log(`${logPrefix} ✅ Kod doğru, case tamamlanıyor...`);
           setCompletedTasks((prev) => new Set(prev).add(activeTask.id));
           
           // Trigger confetti celebration
+          console.log(`${logPrefix} Celebration tetikleniyor...`);
           celebrate({
             title: "Case Tamamlandı! 🎉",
             message: `${activeTask.title} başarıyla tamamlandı. Harika iş çıkardın!`,
@@ -505,30 +597,52 @@ export default function LiveCodingPage() {
 
           // Mark case as completed in database
           try {
+            console.log(`${logPrefix} Database'e case tamamlanma kaydı gönderiliyor...`);
+            const completeCasePayload = {
+              taskId: activeTask.id,
+              completedAt: new Date().toISOString(),
+            };
+            console.log(`${logPrefix} Complete case payload:`, completeCasePayload);
+
             const response = await fetch(`/api/education/live-coding/${resolvedLiveCodingId}/complete-case`, {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                taskId: activeTask.id,
-                completedAt: new Date().toISOString(),
-              }),
+              body: JSON.stringify(completeCasePayload),
             });
             
+            console.log(`${logPrefix} Complete case response:`, {
+              ok: response.ok,
+              status: response.status,
+              statusText: response.statusText,
+            });
+
             if (response.ok) {
               const data = await response.json();
+              console.log(`${logPrefix} ✅ Case başarıyla tamamlandı:`, {
+                hasBadgeResults: !!data.badgeResults,
+                newlyEarnedBadgesCount: data.badgeResults?.newlyEarnedBadges?.length || 0,
+              });
               // Show badge notification if badges were earned
               if (data.badgeResults?.newlyEarnedBadges?.length > 0) {
+                console.log(`${logPrefix} Rozet bildirimi gösteriliyor:`, data.badgeResults.newlyEarnedBadges);
                 showBadges(data.badgeResults.newlyEarnedBadges);
               }
+            } else {
+              const errorData = await response.json().catch(() => ({}));
+              console.error(`${logPrefix} ❌ Case tamamlanma hatası:`, errorData);
             }
           } catch (error) {
-            console.error("Error completing case:", error);
+            console.error(`${logPrefix} ❌ Case tamamlanma exception:`, error);
             // Don't show error to user, this is a background operation
           }
+        } else {
+          console.log(`${logPrefix} ⚠️ Kod çıktısı beklenenle eşleşmiyor`);
         }
+      } else {
+        console.log(`${logPrefix} ⚠️ Hata var veya test case yok, doğruluk kontrolü yapılmadı`);
       }
 
-      setRunResult({
+      const runResultData = {
         stdout: runData.run?.stdout,
         stderr: runData.run?.stderr,
         output: runData.run?.output,
@@ -536,31 +650,100 @@ export default function LiveCodingPage() {
         compileStderr: runData.compile?.stderr,
         exitCode: runData.run?.code,
         isCorrect,
+      };
+
+      console.log(`${logPrefix} Run result set ediliyor:`, {
+        hasStdout: !!runResultData.stdout,
+        hasStderr: !!runResultData.stderr,
+        hasOutput: !!runResultData.output,
+        exitCode: runResultData.exitCode,
+        isCorrect: runResultData.isCorrect,
       });
 
+      setRunResult(runResultData);
+
       // Scroll to output area
+      console.log(`${logPrefix} Output alanına scroll yapılıyor...`);
       setTimeout(() => {
-        outputRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        const scrollElement = outputRef.current;
+        console.log(`${logPrefix} Scroll element:`, scrollElement ? "bulundu" : "bulunamadı");
+        scrollElement?.scrollIntoView({ behavior: "smooth", block: "start" });
       }, 100);
     } catch (error) {
-      console.error("Code run error:", error);
+      const errorDuration = Date.now() - startTime;
+      console.error(`${logPrefix} ❌❌❌ EXCEPTION (${errorDuration}ms):`, error);
+      console.error(`${logPrefix} Error details:`, {
+        name: error instanceof Error ? error.name : "Unknown",
+        message: error instanceof Error ? error.message : String(error),
+        stack: error instanceof Error ? error.stack : undefined,
+      });
       setRunResult({
         errorMessage: "Kod çalıştırma servisine ulaşılamadı",
       });
     } finally {
+      const totalDuration = Date.now() - startTime;
+      console.log(`${logPrefix} ========== Kod Çalıştırma Tamamlandı (${totalDuration}ms) ==========`);
       setRunning(false);
     }
   }, [activeTask, activeLanguage, activeUserCode, compareOutputs, resolvedLiveCodingId, celebrate, showBadges]);
 
-  const handleAIAnalysis = useCallback(async () => {
-    if (!activeTask || !activeLanguage || !activeUserCode.trim()) return;
+  const handleAIAnalysis = useCallback(async (event?: React.MouseEvent<HTMLButtonElement>) => {
+    const logPrefix = "[AI Analysis]";
+    const startTime = Date.now();
+    
+    console.log(`${logPrefix} ========== AI Analysis Başlatıldı ==========`);
+    console.log(`${logPrefix} Timestamp:`, new Date().toISOString());
+    
+    // Prevent event propagation to avoid conflicts with Monaco Editor
+    if (event) {
+      console.log(`${logPrefix} Event mevcut, preventDefault ve stopPropagation çağrılıyor`);
+      event.preventDefault();
+      event.stopPropagation();
+      console.log(`${logPrefix} Event işlendi:`, {
+        type: event.type,
+        target: event.target,
+        currentTarget: event.currentTarget,
+        defaultPrevented: event.defaultPrevented,
+        isPropagationStopped: !event.isPropagationStopped,
+      });
+    } else {
+      console.log(`${logPrefix} Event parametresi yok`);
+    }
+
+    // Validation checks
+    console.log(`${logPrefix} Validasyon kontrolleri başlatılıyor...`);
+    console.log(`${logPrefix} activeTask:`, activeTask ? { id: activeTask.id, title: activeTask.title } : null);
+    console.log(`${logPrefix} activeLanguage:`, activeLanguage);
+    console.log(`${logPrefix} activeUserCode length:`, activeUserCode?.length || 0);
+    console.log(`${logPrefix} activeUserCode trimmed length:`, activeUserCode?.trim()?.length || 0);
+
+    if (!activeTask || !activeLanguage || !activeUserCode.trim()) {
+      console.warn(`${logPrefix} ❌ Validasyon başarısız:`, {
+        hasActiveTask: !!activeTask,
+        hasActiveLanguage: !!activeLanguage,
+        hasActiveUserCode: !!activeUserCode.trim(),
+      });
+      return;
+    }
 
     // Check if we have run result
+    console.log(`${logPrefix} Run result kontrolü yapılıyor...`);
+    console.log(`${logPrefix} runResult:`, runResult ? {
+      hasStdout: !!runResult.stdout,
+      hasOutput: !!runResult.output,
+      hasErrorMessage: !!runResult.errorMessage,
+      stdout: runResult.stdout?.substring(0, 100),
+      output: runResult.output?.substring(0, 100),
+      errorMessage: runResult.errorMessage,
+    } : null);
+
     if (!runResult || (!runResult.stdout && !runResult.output && !runResult.errorMessage)) {
+      console.warn(`${logPrefix} ❌ Run result yok veya geçersiz`);
       setSubmitError("Önce kodu çalıştırmanız gerekiyor.");
       return;
     }
 
+    console.log(`${logPrefix} ✅ Validasyon başarılı, AI analizi başlatılıyor...`);
     setAiEvaluation({ loading: true });
     setSubmitError(null);
 
@@ -568,20 +751,51 @@ export default function LiveCodingPage() {
       const actualOutput = runResult.stdout || runResult.output || "";
       const expectedOutput = activeTask.testCases?.[0]?.expectedOutput || "";
 
+      const requestPayload = {
+        taskDescription: activeTask.description || activeTask.title,
+        expectedOutput,
+        userCode: activeUserCode.trim(),
+        userOutput: actualOutput,
+        language: activeLanguage,
+      };
+
+      console.log(`${logPrefix} API isteği hazırlanıyor...`);
+      console.log(`${logPrefix} Request payload:`, {
+        taskDescription: requestPayload.taskDescription,
+        expectedOutputLength: requestPayload.expectedOutput.length,
+        userCodeLength: requestPayload.userCode.length,
+        userOutputLength: requestPayload.userOutput.length,
+        language: requestPayload.language,
+      });
+
+      const fetchStartTime = Date.now();
       const evalResponse = await fetch("/api/education/live-coding/evaluate-output", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          taskDescription: activeTask.description || activeTask.title,
-          expectedOutput,
-          userCode: activeUserCode.trim(),
-          userOutput: actualOutput,
-          language: activeLanguage,
-        }),
+        body: JSON.stringify(requestPayload),
+      });
+
+      const fetchDuration = Date.now() - fetchStartTime;
+      console.log(`${logPrefix} API yanıtı alındı (${fetchDuration}ms):`, {
+        ok: evalResponse.ok,
+        status: evalResponse.status,
+        statusText: evalResponse.statusText,
+        headers: Object.fromEntries(evalResponse.headers.entries()),
       });
 
       if (evalResponse.ok) {
         const evalData = await evalResponse.json();
+        console.log(`${logPrefix} ✅ API yanıtı başarılı:`, {
+          hasFeedback: !!evalData.feedback,
+          feedbackLength: evalData.feedback?.length || 0,
+          hasCorrectedCode: !!evalData.correctedCode,
+          correctedCodeLength: evalData.correctedCode?.length || 0,
+          isCorrect: evalData.isCorrect,
+          errorsCount: evalData.errors?.length || 0,
+          specificErrorsCount: evalData.specificErrors?.length || 0,
+          commentsCount: evalData.comments?.length || 0,
+        });
+
         setAiEvaluation({
           loading: false,
           feedback: evalData.feedback,
@@ -594,9 +808,11 @@ export default function LiveCodingPage() {
 
         // Update completed tasks if AI says it's correct
         if (evalData.isCorrect) {
+          console.log(`${logPrefix} ✅ Kod doğru olarak değerlendirildi, case tamamlanıyor...`);
           setCompletedTasks((prev) => new Set(prev).add(activeTask.id));
           
           // Trigger confetti celebration
+          console.log(`${logPrefix} Celebration tetikleniyor...`);
           celebrate({
             title: "Case Tamamlandı! 🎉",
             message: `${activeTask.title} başarıyla tamamlandı. Harika iş çıkardın!`,
@@ -606,34 +822,66 @@ export default function LiveCodingPage() {
 
           // Mark case as completed in database
           try {
+            console.log(`${logPrefix} Database'e case tamamlanma kaydı gönderiliyor...`);
+            const completeCasePayload = {
+              taskId: activeTask.id,
+              completedAt: new Date().toISOString(),
+            };
+            console.log(`${logPrefix} Complete case payload:`, completeCasePayload);
+
             const response = await fetch(`/api/education/live-coding/${resolvedLiveCodingId}/complete-case`, {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                taskId: activeTask.id,
-                completedAt: new Date().toISOString(),
-              }),
+              body: JSON.stringify(completeCasePayload),
             });
             
+            console.log(`${logPrefix} Complete case response:`, {
+              ok: response.ok,
+              status: response.status,
+              statusText: response.statusText,
+            });
+
             if (response.ok) {
               const data = await response.json();
+              console.log(`${logPrefix} ✅ Case başarıyla tamamlandı:`, {
+                hasBadgeResults: !!data.badgeResults,
+                newlyEarnedBadgesCount: data.badgeResults?.newlyEarnedBadges?.length || 0,
+              });
               // Show badge notification if badges were earned
               if (data.badgeResults?.newlyEarnedBadges?.length > 0) {
+                console.log(`${logPrefix} Rozet bildirimi gösteriliyor:`, data.badgeResults.newlyEarnedBadges);
                 showBadges(data.badgeResults.newlyEarnedBadges);
               }
+            } else {
+              const errorData = await response.json().catch(() => ({}));
+              console.error(`${logPrefix} ❌ Case tamamlanma hatası:`, errorData);
             }
           } catch (error) {
-            console.error("Error completing case:", error);
+            console.error(`${logPrefix} ❌ Case tamamlanma exception:`, error);
             // Don't show error to user, this is a background operation
           }
+        } else {
+          console.log(`${logPrefix} ⚠️ Kod doğru değil, iyileştirme gerekli`);
         }
 
         // Scroll to AI feedback area
+        console.log(`${logPrefix} AI feedback alanına scroll yapılıyor...`);
         setTimeout(() => {
-          aiFeedbackRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+          const scrollElement = aiFeedbackRef.current;
+          console.log(`${logPrefix} Scroll element:`, scrollElement ? "bulundu" : "bulunamadı");
+          scrollElement?.scrollIntoView({ behavior: "smooth", block: "start" });
         }, 100);
       } else {
-        const errorData = await evalResponse.json();
+        console.error(`${logPrefix} ❌ API yanıtı başarısız (${evalResponse.status})`);
+        let errorData;
+        try {
+          errorData = await evalResponse.json();
+          console.error(`${logPrefix} Error data:`, errorData);
+        } catch (parseError) {
+          console.error(`${logPrefix} ❌ Error response parse edilemedi:`, parseError);
+          errorData = { error: `HTTP ${evalResponse.status}: ${evalResponse.statusText}` };
+        }
+
         setAiEvaluation({
           loading: false,
           feedback: errorData.error || "AI değerlendirmesi alınamadı",
@@ -645,7 +893,14 @@ export default function LiveCodingPage() {
         });
       }
     } catch (evalError) {
-      console.error("AI evaluation error:", evalError);
+      const errorDuration = Date.now() - startTime;
+      console.error(`${logPrefix} ❌❌❌ EXCEPTION (${errorDuration}ms):`, evalError);
+      console.error(`${logPrefix} Error details:`, {
+        name: evalError instanceof Error ? evalError.name : "Unknown",
+        message: evalError instanceof Error ? evalError.message : String(evalError),
+        stack: evalError instanceof Error ? evalError.stack : undefined,
+      });
+      
       setAiEvaluation({
         loading: false,
         feedback: "AI değerlendirmesi sırasında bir hata oluştu",
@@ -655,8 +910,11 @@ export default function LiveCodingPage() {
         errors: [],
         specificErrors: [],
       });
+    } finally {
+      const totalDuration = Date.now() - startTime;
+      console.log(`${logPrefix} ========== AI Analysis Tamamlandı (${totalDuration}ms) ==========`);
     }
-  }, [activeTask, activeLanguage, activeUserCode, runResult, resolvedLiveCodingId, celebrate]);
+  }, [activeTask, activeLanguage, activeUserCode, runResult, resolvedLiveCodingId, celebrate, showBadges]);
 
 
   if (loading) {
@@ -898,7 +1156,23 @@ export default function LiveCodingPage() {
                       </div>
                       <div className="flex items-center gap-3">
                     <Button
-                          onClick={handleAIAnalysis}
+                          type="button"
+                          onClick={(e) => {
+                            console.log("[Button Click] AI Analysis butonu tıklandı");
+                            console.log("[Button Click] Event:", {
+                              type: e.type,
+                              target: e.target,
+                              currentTarget: e.currentTarget,
+                              timeStamp: e.timeStamp,
+                            });
+                            console.log("[Button Click] Button state:", {
+                              disabled: aiEvaluation?.loading || !runResult || !activeUserCode.trim(),
+                              aiEvaluationLoading: aiEvaluation?.loading,
+                              hasRunResult: !!runResult,
+                              hasActiveUserCode: !!activeUserCode.trim(),
+                            });
+                            handleAIAnalysis(e);
+                          }}
                           disabled={aiEvaluation?.loading || !runResult || !activeUserCode.trim()}
                       variant="outline"
                           size="sm"
@@ -917,7 +1191,22 @@ export default function LiveCodingPage() {
                           )}
                         </Button>
                         <Button
-                      onClick={handleRunCode}
+                      type="button"
+                      onClick={(e) => {
+                        console.log("[Button Click] Run Code butonu tıklandı");
+                        console.log("[Button Click] Event:", {
+                          type: e.type,
+                          target: e.target,
+                          currentTarget: e.currentTarget,
+                          timeStamp: e.timeStamp,
+                        });
+                        console.log("[Button Click] Button state:", {
+                          disabled: running || !activeUserCode.trim(),
+                          running,
+                          hasActiveUserCode: !!activeUserCode.trim(),
+                        });
+                        handleRunCode(e);
+                      }}
                           disabled={running || !activeUserCode.trim()}
                           variant="gradient"
                           size="sm"

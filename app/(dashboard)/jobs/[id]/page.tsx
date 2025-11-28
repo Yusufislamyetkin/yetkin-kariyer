@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
+import { getCompanyInfoForJob } from "@/lib/utils/job-company-helper";
 
 interface Job {
   id: string;
@@ -290,9 +291,14 @@ export default function JobDetailPage() {
       <Card variant="elevated">
         <CardHeader>
           <CardTitle className="text-3xl">{job.title}</CardTitle>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            {job.employer.name || "İşveren"}
-          </p>
+          {(() => {
+            const companyInfo = getCompanyInfoForJob(job.title);
+            return (
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                {companyInfo.name}
+              </p>
+            );
+          })()}
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-300">
@@ -308,10 +314,15 @@ export default function JobDetailPage() {
                 {job.salary}
               </span>
             )}
-            <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1 text-gray-700 dark:bg-gray-800 dark:text-gray-300">
-              <Building className="h-4 w-4" />
-              {job.employer.name || "İşveren"}
-            </span>
+            {(() => {
+              const companyInfo = getCompanyInfoForJob(job.title);
+              return (
+                <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1 text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+                  <Building className="h-4 w-4" />
+                  {companyInfo.name}
+                </span>
+              );
+            })()}
           </div>
 
           <div>

@@ -5,6 +5,18 @@ const nextConfig = {
       bodySizeLimit: '10mb',
     },
   },
+  webpack: (config, { isServer }) => {
+    // Exclude Puppeteer from bundling - it should be loaded at runtime
+    if (isServer) {
+      config.externals = config.externals || [];
+      config.externals.push({
+        'puppeteer': 'commonjs puppeteer',
+        'puppeteer-core': 'commonjs puppeteer-core',
+        '@sparticuz/chromium': 'commonjs @sparticuz/chromium',
+      });
+    }
+    return config;
+  },
   images: {
     remotePatterns: [
       {

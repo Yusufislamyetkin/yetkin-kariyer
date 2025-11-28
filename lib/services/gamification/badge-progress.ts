@@ -1,4 +1,5 @@
 import { db } from "@/lib/db";
+import { Prisma } from "@prisma/client";
 
 export interface BadgeProgress {
   badgeId: string;
@@ -100,16 +101,6 @@ export async function calculateBadgeProgress(
               },
             },
           });
-        } else if (criteria.activity_type === "kurs") {
-          current = await db.lessonCompletion.count({
-            where: {
-              userId,
-              completedAt: {
-                gte: today,
-                lt: tomorrow,
-              },
-            },
-          });
         } else if (
           criteria.activity_type === "canlı kod" ||
           criteria.activity_type === "canlı kodlama"
@@ -156,8 +147,10 @@ export async function calculateBadgeProgress(
               },
             },
           });
-        } else if (criteria.activity_type === "pratik") {
-          current = await db.quizAttempt.count({
+        } else if (criteria.activity_type === "eğitim faaliyeti") {
+          // Eğitim faaliyeti: test + ders + canlı kodlama + bugfix toplamı
+          // Test (quiz attempt)
+          const todayTests = await db.quizAttempt.count({
             where: {
               userId,
               completedAt: {
@@ -166,8 +159,9 @@ export async function calculateBadgeProgress(
               },
             },
           });
-        } else if (criteria.activity_type === "eğitim") {
-          current = await db.lessonCompletion.count({
+          
+          // Ders (lesson completion)
+          const todayLessons = await db.lessonCompletion.count({
             where: {
               userId,
               completedAt: {
@@ -176,6 +170,30 @@ export async function calculateBadgeProgress(
               },
             },
           });
+          
+          // Canlı kodlama (live coding attempt)
+          const todayLiveCoding = await db.liveCodingAttempt.count({
+            where: {
+              userId,
+              completedAt: {
+                gte: today,
+                lt: tomorrow,
+              },
+            },
+          });
+          
+          // Bugfix (bugfix attempt)
+          const todayBugFix = await db.bugFixAttempt.count({
+            where: {
+              userId,
+              completedAt: {
+                gte: today,
+                lt: tomorrow,
+              },
+            },
+          });
+          
+          current = todayTests + todayLessons + todayLiveCoding + todayBugFix;
         }
       }
       break;
@@ -266,12 +284,6 @@ export async function calculateBadgeProgress(
           current = await db.quizAttempt.count({
             where: { userId },
           });
-        } else if (criteria.type === "course_count") {
-          const courseCompletions = await db.lessonCompletion.findMany({
-            where: { userId },
-            distinct: ["lessonId"],
-          });
-          current = courseCompletions.length;
         } else if (criteria.type === "perfect_score_count") {
           const userQuizAttempts = await db.quizAttempt.findMany({
             where: { userId },
@@ -320,11 +332,12 @@ export async function calculateBadgeProgress(
             current = totalQuizCount >= 1 ? 1 : 0;
             break;
           case "ilk kurs":
-            const courseCompletions = await db.lessonCompletion.findMany({
+          case "ilk ders":
+            const lessonCompletions = await db.lessonCompletion.findMany({
               where: { userId },
-              distinct: ["lessonId"],
+              distinct: [Prisma.LessonCompletionScalarFieldEnum.lessonSlug],
             });
-            current = courseCompletions.length >= 1 ? 1 : 0;
+            current = lessonCompletions.length >= 1 ? 1 : 0;
             break;
           case "ilk post":
             const postCount = await db.post.count({ where: { userId } });
