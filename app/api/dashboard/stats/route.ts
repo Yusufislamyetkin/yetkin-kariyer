@@ -15,7 +15,7 @@ export async function GET() {
 
     const userId = session.user.id as string;
 
-    const [quizAttempts, testAttempts, interviewAttempts, cvs, applications, completedTopics, hackathonMemberships] = await Promise.all([
+    const [quizAttempts, testAttempts, interviewAttempts, cvs, applications, completedTopics, hackathonMemberships, liveCodingAttempts, bugFixAttempts] = await Promise.all([
       db.quizAttempt.findMany({
         where: { userId },
         select: { score: true },
@@ -53,6 +53,14 @@ export async function GET() {
           },
         },
       }),
+      db.liveCodingAttempt.findMany({
+        where: { userId },
+        select: { id: true },
+      }),
+      db.bugFixAttempt.findMany({
+        where: { userId },
+        select: { id: true },
+      }),
     ]);
 
     const averageQuizScore =
@@ -85,6 +93,8 @@ export async function GET() {
         averageInterviewScore: Math.round(averageInterviewScore),
         completedTopics: completedTopics.length,
         participatedHackathons,
+        completedLiveCoding: liveCodingAttempts.length,
+        completedBugfix: bugFixAttempts.length,
       },
     });
   } catch (error) {

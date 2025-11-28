@@ -185,14 +185,6 @@ export default function RozetlerPage() {
         gradient: "from-orange-500 to-red-500",
         badgeCategories: ["streak"],
       },
-      {
-        id: "special",
-        name: "Özel Başarılar",
-        icon: Star,
-        description: "Özel başarılarınız için rozetler",
-        gradient: "from-yellow-500 to-amber-500",
-        badgeCategories: ["special"],
-      },
     ],
     []
   );
@@ -202,9 +194,11 @@ export default function RozetlerPage() {
       const categoryBadges = allBadges.filter((badge) =>
         cat.badgeCategories.includes(badge.category)
       );
-      const earnedInCategory = categoryBadges.filter((badge) =>
-        earnedBadgeIds.has(badge.id)
-      ).length;
+      // Key bazlı eşleştirme: key varsa key, yoksa id kullan
+      const earnedInCategory = categoryBadges.filter((badge) => {
+        const badgeKey = (badge as any).key || badge.id;
+        return earnedBadgeIds.has(badgeKey);
+      }).length;
       return {
         ...cat,
         total: categoryBadges.length,
@@ -314,7 +308,8 @@ export default function RozetlerPage() {
 
       if (response.ok) {
         setUserBadges(data.badges || []);
-        const earnedIds = new Set<string>((data.badges || []).map((b: Badge) => b.id));
+        // Key bazlı eşleştirme: key varsa key, yoksa id kullan
+        const earnedIds = new Set<string>((data.badges || []).map((b: Badge) => (b as any).key || b.id));
         setEarnedBadgeIds(earnedIds);
       } else {
         console.error("Failed to fetch user badges:", data.error);
@@ -529,7 +524,11 @@ export default function RozetlerPage() {
                 const tierBadges = badgesByTier[tier] || [];
                 if (tierBadges.length === 0) return null;
 
-                const earnedInTier = tierBadges.filter((b) => earnedBadgeIds.has(b.id)).length;
+                // Key bazlı eşleştirme: key varsa key, yoksa id kullan
+                const earnedInTier = tierBadges.filter((b) => {
+                  const badgeKey = (b as any).key || b.id;
+                  return earnedBadgeIds.has(badgeKey);
+                }).length;
 
                 return (
                   <div key={tier} className="space-y-4">
@@ -542,14 +541,18 @@ export default function RozetlerPage() {
                       </span>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-                      {tierBadges.map((badge) => (
-                        <BadgeDisplay
-                          key={badge.id}
-                          badge={badge}
-                          earned={earnedBadgeIds.has(badge.id)}
-                          progress={progressMap.get(badge.id)}
-                        />
-                      ))}
+                      {tierBadges.map((badge) => {
+                        // Key bazlı eşleştirme: key varsa key, yoksa id kullan
+                        const badgeKey = (badge as any).key || badge.id;
+                        return (
+                          <BadgeDisplay
+                            key={badge.id}
+                            badge={badge}
+                            earned={earnedBadgeIds.has(badgeKey)}
+                            progress={progressMap.get(badgeKey)}
+                          />
+                        );
+                      })}
                     </div>
                   </div>
                 );

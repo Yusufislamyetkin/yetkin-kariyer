@@ -1,101 +1,37 @@
--- Kariyer Platform Database Schema
--- Bu script tüm veritabanı şemasını tek seferde kurar.
--- Çalıştırmadan önce önemli verilerinizi yedekleyin; tablo ve enumlar kaldırılıp yeniden oluşturulur.
-
-BEGIN;
+-- Kariyer Platform Database Schema - VERCEL OPTIMIZED
+-- Bu script timeout sorununu önlemek için optimize edilmiştir.
+-- Transaction yok, index'ler sonra oluşturuluyor.
 
 -- ============================================
 -- 1. TABLOLARI VE ENUM'LARI TEMİZLE
 -- ============================================
 
-DROP TABLE IF EXISTS "story_views" CASCADE;
-DROP TABLE IF EXISTS "stories" CASCADE;
-DROP TABLE IF EXISTS "post_saves" CASCADE;
-DROP TABLE IF EXISTS "post_comments" CASCADE;
-DROP TABLE IF EXISTS "post_likes" CASCADE;
-DROP TABLE IF EXISTS "posts" CASCADE;
-DROP TABLE IF EXISTS "admin_audit_logs" CASCADE;
-DROP TABLE IF EXISTS "user_inventory" CASCADE;
-DROP TABLE IF EXISTS "reward_redemptions" CASCADE;
-DROP TABLE IF EXISTS "rewards" CASCADE;
-DROP TABLE IF EXISTS "leaderboard_snapshots" CASCADE;
-DROP TABLE IF EXISTS "quest_progress" CASCADE;
-DROP TABLE IF EXISTS "quests" CASCADE;
-DROP TABLE IF EXISTS "user_balances" CASCADE;
-DROP TABLE IF EXISTS "point_transactions" CASCADE;
-DROP TABLE IF EXISTS "gamification_events" CASCADE;
-DROP TABLE IF EXISTS "cv_uploads" CASCADE;
-DROP TABLE IF EXISTS "live_coding_challenges" CASCADE;
-DROP TABLE IF EXISTS "bug_fix_challenges" CASCADE;
-DROP TABLE IF EXISTS "chat_message_receipts" CASCADE;
-DROP TABLE IF EXISTS "chat_attachments" CASCADE;
-DROP TABLE IF EXISTS "chat_messages" CASCADE;
-DROP TABLE IF EXISTS "chat_group_memberships" CASCADE;
-DROP TABLE IF EXISTS "chat_groups" CASCADE;
-DROP TABLE IF EXISTS "friendships" CASCADE;
-DROP TABLE IF EXISTS "hackathon_submissions" CASCADE;
-DROP TABLE IF EXISTS "hackathon_team_members" CASCADE;
-DROP TABLE IF EXISTS "hackathon_teams" CASCADE;
-DROP TABLE IF EXISTS "hackathon_applications" CASCADE;
-DROP TABLE IF EXISTS "hackathons" CASCADE;
-DROP TABLE IF EXISTS "dashboard_goal_plans" CASCADE;
-DROP TABLE IF EXISTS "hackaton_leaderboard_entries" CASCADE;
-DROP TABLE IF EXISTS "bug_fix_leaderboard_entries" CASCADE;
-DROP TABLE IF EXISTS "live_coding_leaderboard_entries" CASCADE;
-DROP TABLE IF EXISTS "test_leaderboard_entries" CASCADE;
-DROP TABLE IF EXISTS "hackaton_attempts" CASCADE;
-DROP TABLE IF EXISTS "bug_fix_attempts" CASCADE;
-DROP TABLE IF EXISTS "live_coding_attempts" CASCADE;
-DROP TABLE IF EXISTS "test_attempts" CASCADE;
-DROP TABLE IF EXISTS "user_streaks" CASCADE;
-DROP TABLE IF EXISTS "employer_comments" CASCADE;
-DROP TABLE IF EXISTS "leaderboard_entries" CASCADE;
-DROP TABLE IF EXISTS "daily_goals" CASCADE;
-DROP TABLE IF EXISTS "user_badges" CASCADE;
-DROP TABLE IF EXISTS "badges" CASCADE;
-DROP TABLE IF EXISTS "lesson_completions" CASCADE;
-DROP TABLE IF EXISTS "lesson_mini_test_attempts" CASCADE;
-DROP TABLE IF EXISTS "wrong_questions" CASCADE;
-DROP TABLE IF EXISTS "lesson_threads" CASCADE;
-DROP TABLE IF EXISTS "assistant_threads" CASCADE;
-DROP TABLE IF EXISTS "learning_paths" CASCADE;
-DROP TABLE IF EXISTS "career_plans" CASCADE;
-DROP TABLE IF EXISTS "freelancer_bids" CASCADE;
-DROP TABLE IF EXISTS "freelancer_projects" CASCADE;
-DROP TABLE IF EXISTS "job_applications" CASCADE;
-DROP TABLE IF EXISTS "jobs" CASCADE;
-DROP TABLE IF EXISTS "cvs" CASCADE;
-DROP TABLE IF EXISTS "cv_templates" CASCADE;
-DROP TABLE IF EXISTS "interview_attempts" CASCADE;
-DROP TABLE IF EXISTS "interviews" CASCADE;
-DROP TABLE IF EXISTS "quiz_attempts" CASCADE;
-DROP TABLE IF EXISTS "quizzes" CASCADE;
-DROP TABLE IF EXISTS "courses" CASCADE;
-DROP TABLE IF EXISTS "app_users" CASCADE;
+-- Tabloları toplu olarak DROP et (CASCADE ile bağımlılıkları otomatik çözer)
+DO $$ 
+DECLARE
+    r RECORD;
+BEGIN
+    FOR r IN (SELECT tablename FROM pg_tables WHERE schemaname = 'public') LOOP
+        EXECUTE 'DROP TABLE IF EXISTS public.' || quote_ident(r.tablename) || ' CASCADE';
+    END LOOP;
+END $$;
 
-DROP TYPE IF EXISTS "ChatAttachmentType" CASCADE;
-DROP TYPE IF EXISTS "ChatMessageType" CASCADE;
-DROP TYPE IF EXISTS "ChatGroupRole" CASCADE;
-DROP TYPE IF EXISTS "ChatGroupVisibility" CASCADE;
-DROP TYPE IF EXISTS "LeaderboardPeriod" CASCADE;
-DROP TYPE IF EXISTS "GoalFrequency" CASCADE;
-DROP TYPE IF EXISTS "GoalType" CASCADE;
-DROP TYPE IF EXISTS "BadgeRarity" CASCADE;
-DROP TYPE IF EXISTS "BadgeCategory" CASCADE;
-DROP TYPE IF EXISTS "WrongQuestionStatus" CASCADE;
-DROP TYPE IF EXISTS "ApplicationStatus" CASCADE;
-DROP TYPE IF EXISTS "JobStatus" CASCADE;
-DROP TYPE IF EXISTS "EducationType" CASCADE;
-DROP TYPE IF EXISTS "UserRole" CASCADE;
-DROP TYPE IF EXISTS "FriendshipStatus" CASCADE;
-DROP TYPE IF EXISTS "HackathonVisibility" CASCADE;
-DROP TYPE IF EXISTS "HackathonPhase" CASCADE;
-DROP TYPE IF EXISTS "HackathonApplicationStatus" CASCADE;
-DROP TYPE IF EXISTS "HackathonTeamRole" CASCADE;
-DROP TYPE IF EXISTS "HackathonTeamMemberStatus" CASCADE;
-DROP TYPE IF EXISTS "HackathonSubmissionStatus" CASCADE;
-DROP TYPE IF EXISTS "RewardType" CASCADE;
-DROP TYPE IF EXISTS "BadgeTier" CASCADE;
+-- Enum'ları toplu olarak DROP et
+DO $$ 
+DECLARE
+    r RECORD;
+BEGIN
+    FOR r IN (SELECT typname FROM pg_type WHERE typtype = 'e' AND typname IN (
+        'ChatAttachmentType', 'ChatMessageType', 'ChatGroupRole', 'ChatGroupVisibility',
+        'LeaderboardPeriod', 'GoalFrequency', 'GoalType', 'BadgeRarity', 'BadgeCategory',
+        'WrongQuestionStatus', 'ApplicationStatus', 'JobStatus', 'EducationType', 'UserRole',
+        'FriendshipStatus', 'HackathonVisibility', 'HackathonPhase', 'HackathonApplicationStatus',
+        'HackathonTeamRole', 'HackathonTeamMemberStatus', 'HackathonSubmissionStatus',
+        'RewardType', 'BadgeTier'
+    )) LOOP
+        EXECUTE 'DROP TYPE IF EXISTS ' || quote_ident(r.typname) || ' CASCADE';
+    END LOOP;
+END $$;
 
 -- ============================================
 -- 2. ENUM'LARI OLUŞTUR
@@ -126,7 +62,7 @@ CREATE TYPE "BadgeTier" AS ENUM ('bronze', 'silver', 'gold', 'platinum');
 CREATE TYPE "RewardType" AS ENUM ('VIRTUAL', 'VOUCHER', 'PHYSICAL');
 
 -- ============================================
--- 3. TABLOLARI OLUŞTUR
+-- 3. TABLOLARI OLUŞTUR (INDEX'ler olmadan)
 -- ============================================
 
 CREATE TABLE "app_users" (
@@ -253,8 +189,8 @@ CREATE TABLE "lesson_mini_test_attempts" (
     CONSTRAINT "lesson_mini_test_attempts_questions_check" CHECK ("totalQuestions" > 0 AND "correctCount" >= 0 AND "correctCount" <= "totalQuestions")
 );
 
-CREATE INDEX "lesson_mini_test_attempts_lessonSlug_idx" ON "lesson_mini_test_attempts" ("lessonSlug");
-CREATE INDEX "lesson_mini_test_attempts_user_lesson_idx" ON "lesson_mini_test_attempts" ("userId", "lessonSlug");
+CREATE INDEX IF NOT EXISTS "lesson_mini_test_attempts_lessonSlug_idx" ON "lesson_mini_test_attempts" ("lessonSlug");
+CREATE INDEX IF NOT EXISTS "lesson_mini_test_attempts_user_lesson_idx" ON "lesson_mini_test_attempts" ("userId", "lessonSlug");
 
 CREATE TABLE "lesson_completions" (
     "id" TEXT PRIMARY KEY,
@@ -270,8 +206,8 @@ CREATE TABLE "lesson_completions" (
     CONSTRAINT "lesson_completions_miniTestAttemptId_fkey" FOREIGN KEY ("miniTestAttemptId") REFERENCES "lesson_mini_test_attempts"("id") ON DELETE SET NULL ON UPDATE CASCADE
 );
 
-CREATE UNIQUE INDEX "lesson_completions_user_lesson_key" ON "lesson_completions" ("userId", "lessonSlug");
-CREATE INDEX "lesson_completions_lessonSlug_idx" ON "lesson_completions" ("lessonSlug");
+CREATE UNIQUE INDEX IF NOT EXISTS "lesson_completions_user_lesson_key" ON "lesson_completions" ("userId", "lessonSlug");
+CREATE INDEX IF NOT EXISTS "lesson_completions_lessonSlug_idx" ON "lesson_completions" ("lessonSlug");
 
 CREATE TABLE "interviews" (
     "id" TEXT PRIMARY KEY,
@@ -633,7 +569,6 @@ CREATE TABLE "hackaton_attempts" (
     CONSTRAINT "hackaton_attempts_hackathonId_fkey" FOREIGN KEY ("hackathonId") REFERENCES "hackathons"("id") ON DELETE SET NULL ON UPDATE CASCADE
 );
 
--- Gamification core tables
 CREATE TABLE "gamification_events" (
     "id" TEXT PRIMARY KEY,
     "userId" TEXT NOT NULL,
@@ -745,7 +680,6 @@ CREATE TABLE "admin_audit_logs" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
--- Challenge content tables
 CREATE TABLE "live_coding_challenges" (
     "id" TEXT PRIMARY KEY,
     "title" TEXT NOT NULL,
@@ -1001,10 +935,6 @@ CREATE TABLE "chat_message_receipts" (
     CONSTRAINT "chat_message_receipts_messageId_userId_key" UNIQUE ("messageId", "userId")
 );
 
--- ============================================
--- Social Media Posts Tables
--- ============================================
-
 CREATE TABLE "posts" (
     "id" TEXT PRIMARY KEY,
     "userId" TEXT NOT NULL,
@@ -1046,10 +976,6 @@ CREATE TABLE "post_saves" (
     CONSTRAINT "post_saves_postId_userId_key" UNIQUE ("postId", "userId")
 );
 
--- ============================================
--- Stories Tables
--- ============================================
-
 CREATE TABLE "stories" (
     "id" TEXT PRIMARY KEY,
     "userId" TEXT NOT NULL,
@@ -1071,145 +997,18 @@ CREATE TABLE "story_views" (
 );
 
 -- ============================================
--- 4. REALTIME PUBLICATION AYARLARI
+-- 4. REALTIME & RLS AYARLARI
 -- ============================================
 
--- Chat altyapısı SignalR kullanıyor, Supabase Realtime gerekmiyor
 ALTER TABLE public.chat_groups REPLICA IDENTITY FULL;
 ALTER TABLE public.app_users REPLICA IDENTITY FULL;
 
--- ============================================
--- 5. ROW LEVEL SECURITY (RLS) - OPSİYONEL
--- ============================================
-
--- RLS'yi aktif et (production için önerilir, test için devre dışı bırakılabilir)
--- ALTER TABLE public.chat_messages ENABLE ROW LEVEL SECURITY;
--- ALTER TABLE public.chat_groups ENABLE ROW LEVEL SECURITY;
--- ALTER TABLE public.app_users ENABLE ROW LEVEL SECURITY;
-
--- Test için RLS'yi devre dışı bırak (production'da mutlaka aktif et!)
 ALTER TABLE public.chat_messages DISABLE ROW LEVEL SECURITY;
 ALTER TABLE public.chat_groups DISABLE ROW LEVEL SECURITY;
 ALTER TABLE public.app_users DISABLE ROW LEVEL SECURITY;
 
 -- ============================================
--- 6. İNDEKSLERİ OLUŞTUR
+-- NOT: Index'ler ayrı bir dosyada oluşturulacak (database-schema-indexes.sql)
+-- Bu script sadece tablo ve enum oluşturma için optimize edilmiştir.
 -- ============================================
-
-CREATE INDEX IF NOT EXISTS "hackathons_organizerId_idx" ON "hackathons"("organizerId");
-CREATE INDEX IF NOT EXISTS "hackathon_applications_hackathonId_status_idx" ON "hackathon_applications"("hackathonId", "status");
-CREATE INDEX IF NOT EXISTS "hackathon_applications_teamId_idx" ON "hackathon_applications"("teamId");
-CREATE INDEX IF NOT EXISTS "hackathon_teams_hackathonId_idx" ON "hackathon_teams"("hackathonId");
-CREATE INDEX IF NOT EXISTS "hackathon_team_members_userId_idx" ON "hackathon_team_members"("userId");
-CREATE INDEX IF NOT EXISTS "hackathon_submissions_hackathonId_status_idx" ON "hackathon_submissions"("hackathonId", "status");
-CREATE INDEX IF NOT EXISTS "friendships_addresseeId_status_idx" ON "friendships"("addresseeId", "status");
-CREATE INDEX IF NOT EXISTS "friendships_requesterId_status_idx" ON "friendships"("requesterId", "status");
-CREATE INDEX IF NOT EXISTS "dashboard_goal_plans_userId_frequency_idx" ON "dashboard_goal_plans"("userId", "frequency");
-CREATE INDEX IF NOT EXISTS "dashboard_goal_plans_userId_frequency_nextUpdateAt_idx" ON "dashboard_goal_plans"("userId", "frequency", "nextUpdateAt");
-CREATE INDEX IF NOT EXISTS "quiz_attempts_userId_idx" ON "quiz_attempts"("userId");
-CREATE INDEX IF NOT EXISTS "quiz_attempts_quizId_idx" ON "quiz_attempts"("quizId");
-CREATE INDEX IF NOT EXISTS "interview_attempts_userId_idx" ON "interview_attempts"("userId");
-CREATE INDEX IF NOT EXISTS "interview_attempts_interviewId_idx" ON "interview_attempts"("interviewId");
-CREATE INDEX IF NOT EXISTS "cvs_userId_idx" ON "cvs"("userId");
-CREATE INDEX IF NOT EXISTS "jobs_employerId_idx" ON "jobs"("employerId");
-CREATE INDEX IF NOT EXISTS "jobs_status_idx" ON "jobs"("status");
-CREATE INDEX IF NOT EXISTS "job_applications_userId_idx" ON "job_applications"("userId");
-CREATE INDEX IF NOT EXISTS "job_applications_jobId_idx" ON "job_applications"("jobId");
-CREATE INDEX IF NOT EXISTS "freelancer_projects_createdBy_idx" ON "freelancer_projects"("createdBy");
-CREATE INDEX IF NOT EXISTS "freelancer_projects_status_idx" ON "freelancer_projects"("status");
-CREATE INDEX IF NOT EXISTS "freelancer_bids_projectId_idx" ON "freelancer_bids"("projectId");
-CREATE INDEX IF NOT EXISTS "freelancer_bids_userId_idx" ON "freelancer_bids"("userId");
-CREATE INDEX IF NOT EXISTS "freelancer_bids_status_idx" ON "freelancer_bids"("status");
-CREATE INDEX IF NOT EXISTS "career_plans_userId_idx" ON "career_plans"("userId");
-CREATE INDEX IF NOT EXISTS "learning_paths_userId_idx" ON "learning_paths"("userId");
-CREATE INDEX IF NOT EXISTS "assistant_threads_createdAt_idx" ON "assistant_threads"("createdAt");
-CREATE INDEX IF NOT EXISTS "lesson_threads_lessonSlug_idx" ON "lesson_threads"("lessonSlug");
-CREATE INDEX IF NOT EXISTS "lesson_threads_userId_lessonSlug_idx" ON "lesson_threads"("userId", "lessonSlug");
-CREATE INDEX IF NOT EXISTS "wrong_questions_userId_idx" ON "wrong_questions"("userId");
-CREATE INDEX IF NOT EXISTS "wrong_questions_quizAttemptId_idx" ON "wrong_questions"("quizAttemptId");
-CREATE INDEX IF NOT EXISTS "gamification_events_userId_occurredAt_idx" ON "gamification_events"("userId", "occurredAt");
-CREATE INDEX IF NOT EXISTS "gamification_events_type_occurredAt_idx" ON "gamification_events"("type", "occurredAt");
-CREATE INDEX IF NOT EXISTS "point_transactions_userId_createdAt_idx" ON "point_transactions"("userId", "createdAt");
-CREATE INDEX IF NOT EXISTS "leaderboard_snapshots_period_createdAt_idx" ON "leaderboard_snapshots"("period", "createdAt");
-CREATE INDEX IF NOT EXISTS "quest_progress_questId_idx" ON "quest_progress"("questId");
-CREATE INDEX IF NOT EXISTS "reward_redemptions_userId_createdAt_idx" ON "reward_redemptions"("userId", "createdAt");
-CREATE INDEX IF NOT EXISTS "reward_redemptions_rewardId_idx" ON "reward_redemptions"("rewardId");
-CREATE INDEX IF NOT EXISTS "admin_audit_logs_adminId_createdAt_idx" ON "admin_audit_logs"("adminId", "createdAt");
-CREATE INDEX IF NOT EXISTS "daily_goals_userId_idx" ON "daily_goals"("userId", "date");
-CREATE INDEX IF NOT EXISTS "leaderboard_entries_period_idx" ON "leaderboard_entries"("period", "periodDate");
-CREATE INDEX IF NOT EXISTS "leaderboard_entries_userId_idx" ON "leaderboard_entries"("userId", "period");
-CREATE INDEX IF NOT EXISTS "employer_comments_candidateId_idx" ON "employer_comments"("candidateId");
-CREATE INDEX IF NOT EXISTS "employer_comments_employerId_idx" ON "employer_comments"("employerId");
-CREATE INDEX IF NOT EXISTS "badges_key_idx" ON "badges"("key");
-CREATE INDEX IF NOT EXISTS "badges_category_idx" ON "badges"("category");
-CREATE INDEX IF NOT EXISTS "badges_rarity_idx" ON "badges"("rarity");
-CREATE INDEX IF NOT EXISTS "user_badges_userId_idx" ON "user_badges"("userId");
-CREATE INDEX IF NOT EXISTS "user_badges_badgeId_idx" ON "user_badges"("badgeId");
-CREATE INDEX IF NOT EXISTS "user_badges_userId_earnedAt_idx" ON "user_badges"("userId", "earnedAt" DESC);
-CREATE INDEX IF NOT EXISTS "user_badges_userId_isDisplayed_idx" ON "user_badges"("userId", "isDisplayed") WHERE "isDisplayed" = TRUE;
-CREATE INDEX IF NOT EXISTS "user_streaks_userId_idx" ON "user_streaks"("userId");
-CREATE INDEX IF NOT EXISTS "test_attempts_userId_completedAt_idx" ON "test_attempts"("userId", "completedAt");
-CREATE INDEX IF NOT EXISTS "test_attempts_quizId_idx" ON "test_attempts"("quizId");
-CREATE INDEX IF NOT EXISTS "live_coding_attempts_userId_completedAt_idx" ON "live_coding_attempts"("userId", "completedAt");
-CREATE INDEX IF NOT EXISTS "live_coding_attempts_quizId_idx" ON "live_coding_attempts"("quizId");
-CREATE INDEX IF NOT EXISTS "bug_fix_attempts_userId_completedAt_idx" ON "bug_fix_attempts"("userId", "completedAt");
-CREATE INDEX IF NOT EXISTS "bug_fix_attempts_quizId_idx" ON "bug_fix_attempts"("quizId");
-CREATE INDEX IF NOT EXISTS "hackaton_attempts_userId_completedAt_idx" ON "hackaton_attempts"("userId", "completedAt");
-CREATE INDEX IF NOT EXISTS "hackaton_attempts_quizId_idx" ON "hackaton_attempts"("quizId");
-CREATE INDEX IF NOT EXISTS "hackaton_attempts_hackathonId_idx" ON "hackaton_attempts"("hackathonId");
-CREATE INDEX IF NOT EXISTS "test_leaderboard_entries_period_idx" ON "test_leaderboard_entries"("period", "periodDate");
-CREATE INDEX IF NOT EXISTS "test_leaderboard_entries_userId_idx" ON "test_leaderboard_entries"("userId", "period");
-CREATE INDEX IF NOT EXISTS "live_coding_leaderboard_entries_period_idx" ON "live_coding_leaderboard_entries"("period", "periodDate");
-CREATE INDEX IF NOT EXISTS "live_coding_leaderboard_entries_userId_idx" ON "live_coding_leaderboard_entries"("userId", "period");
-CREATE INDEX IF NOT EXISTS "bug_fix_leaderboard_entries_period_idx" ON "bug_fix_leaderboard_entries"("period", "periodDate");
-CREATE INDEX IF NOT EXISTS "bug_fix_leaderboard_entries_userId_idx" ON "bug_fix_leaderboard_entries"("userId", "period");
-CREATE INDEX IF NOT EXISTS "hackaton_leaderboard_entries_period_idx" ON "hackaton_leaderboard_entries"("period", "periodDate");
-CREATE INDEX IF NOT EXISTS "hackaton_leaderboard_entries_userId_idx" ON "hackaton_leaderboard_entries"("userId", "period");
-CREATE INDEX IF NOT EXISTS "chat_groups_slug_idx" ON "chat_groups"("slug");
-CREATE INDEX IF NOT EXISTS "chat_groups_createdById_idx" ON "chat_groups"("createdById");
-CREATE INDEX IF NOT EXISTS "chat_group_memberships_userId_idx" ON "chat_group_memberships"("userId");
-CREATE INDEX IF NOT EXISTS "chat_messages_groupId_createdAt_idx" ON "chat_messages"("groupId", "createdAt");
-CREATE INDEX IF NOT EXISTS "chat_messages_userId_idx" ON "chat_messages"("userId");
-CREATE INDEX IF NOT EXISTS "chat_attachments_messageId_idx" ON "chat_attachments"("messageId");
-CREATE INDEX IF NOT EXISTS "chat_message_receipts_userId_idx" ON "chat_message_receipts"("userId");
-CREATE INDEX IF NOT EXISTS "posts_userId_idx" ON "posts"("userId");
-CREATE INDEX IF NOT EXISTS "posts_createdAt_idx" ON "posts"("createdAt");
-CREATE INDEX IF NOT EXISTS "post_likes_postId_idx" ON "post_likes"("postId");
-CREATE INDEX IF NOT EXISTS "post_likes_userId_idx" ON "post_likes"("userId");
-CREATE INDEX IF NOT EXISTS "post_comments_postId_idx" ON "post_comments"("postId");
-CREATE INDEX IF NOT EXISTS "post_comments_postId_createdAt_idx" ON "post_comments"("postId", "createdAt");
-CREATE INDEX IF NOT EXISTS "post_comments_userId_idx" ON "post_comments"("userId");
-CREATE INDEX IF NOT EXISTS "post_saves_postId_idx" ON "post_saves"("postId");
-CREATE INDEX IF NOT EXISTS "post_saves_userId_idx" ON "post_saves"("userId");
-CREATE INDEX IF NOT EXISTS "stories_userId_idx" ON "stories"("userId");
-CREATE INDEX IF NOT EXISTS "stories_expiresAt_idx" ON "stories"("expiresAt");
-CREATE INDEX IF NOT EXISTS "stories_createdAt_idx" ON "stories"("createdAt");
-CREATE INDEX IF NOT EXISTS "story_views_storyId_idx" ON "story_views"("storyId");
-CREATE INDEX IF NOT EXISTS "story_views_userId_idx" ON "story_views"("userId");
-CREATE INDEX IF NOT EXISTS "quizzes_courseId_idx" ON "quizzes"("courseId");
-CREATE INDEX IF NOT EXISTS "quizzes_lessonSlug_idx" ON "quizzes"("lessonSlug");
-CREATE INDEX IF NOT EXISTS "quizzes_type_idx" ON "quizzes"("type");
-CREATE INDEX IF NOT EXISTS "quizzes_courseId_type_idx" ON "quizzes"("courseId", "type");
-CREATE INDEX IF NOT EXISTS "courses_topic_idx" ON "courses"("topic");
-CREATE INDEX IF NOT EXISTS "courses_category_idx" ON "courses"("category");
-CREATE INDEX IF NOT EXISTS "courses_field_idx" ON "courses"("field");
-CREATE INDEX IF NOT EXISTS "courses_difficulty_idx" ON "courses"("difficulty");
--- Challenge content indexes
-CREATE INDEX IF NOT EXISTS "live_coding_challenges_isPublished_createdAt_idx" ON "live_coding_challenges"("isPublished", "createdAt");
-CREATE INDEX IF NOT EXISTS "bug_fix_challenges_language_published_createdAt_idx" ON "bug_fix_challenges"("language", "isPublished", "createdAt");
-CREATE INDEX IF NOT EXISTS "live_coding_challenges_tags_idx" ON "live_coding_challenges" USING GIN ("tags");
-CREATE INDEX IF NOT EXISTS "bug_fix_challenges_tags_idx" ON "bug_fix_challenges" USING GIN ("tags");
-
--- ============================================
--- 7. BİLGİLENDİRME
--- ============================================
-
-DO $$
-BEGIN
-    RAISE NOTICE 'Database schema created successfully.';
-    RAISE NOTICE 'Enums: UserRole, JobStatus, ApplicationStatus, WrongQuestionStatus, BadgeCategory, BadgeRarity, GoalType, GoalFrequency, LeaderboardPeriod, EducationType, ChatGroupRole, ChatGroupVisibility, ChatMessageType, ChatAttachmentType, FriendshipStatus, HackathonVisibility, HackathonPhase, HackathonApplicationStatus, HackathonTeamRole, HackathonTeamMemberStatus, HackathonSubmissionStatus, BadgeTier, RewardType';
-    RAISE NOTICE 'Tables: app_users, courses, quizzes, hackathons, quiz_attempts, interviews, interview_attempts, cv_templates, cvs, cv_uploads, jobs, job_applications, freelancer_projects, freelancer_bids, career_plans, learning_paths, assistant_threads, lesson_threads, wrong_questions, badges, user_badges, daily_goals, dashboard_goal_plans, leaderboard_entries, employer_comments, user_streaks, test_attempts, live_coding_attempts, bug_fix_attempts, hackaton_attempts, gamification_events, point_transactions, user_balances, quests, quest_progress, leaderboard_snapshots, rewards, reward_redemptions, user_inventory, admin_audit_logs, hackathon_applications, hackathon_teams, hackathon_team_members, hackathon_submissions, friendships, test_leaderboard_entries, live_coding_leaderboard_entries, bug_fix_leaderboard_entries, hackaton_leaderboard_entries, chat_groups, chat_group_memberships, chat_messages, chat_attachments, chat_message_receipts, posts, post_likes, post_comments, post_saves, stories, story_views, live_coding_challenges, bug_fix_challenges';
-END $$;
-
-COMMIT;
 

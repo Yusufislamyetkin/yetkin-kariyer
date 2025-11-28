@@ -81,6 +81,7 @@ function initializeActivityTimeline() {
       liveCoding: number;
       bugFix: number;
       hackaton: number;
+      course: number;
       total: number;
     }
   > = {};
@@ -100,6 +101,7 @@ function initializeActivityTimeline() {
       liveCoding: 0,
       bugFix: 0,
       hackaton: 0,
+      course: 0,
       total: 0,
     };
   }
@@ -200,6 +202,7 @@ export async function GET() {
           liveCoding: number;
           bugFix: number;
           hackaton: number;
+          course: number;
           total: number;
         }>,
         totals: {
@@ -209,6 +212,7 @@ export async function GET() {
             liveCoding: 0,
             bugFix: 0,
             hackaton: 0,
+            course: 0,
           },
         },
       },
@@ -333,6 +337,7 @@ export async function GET() {
       userBadges,
       allBadges,
       interviewAttempts,
+      lessonCompletions,
     ] = await Promise.all([
       db.liveCodingAttempt.findMany({
         where: { userId },
@@ -409,6 +414,15 @@ export async function GET() {
         select: {
           id: true,
           aiScore: true,
+          completedAt: true,
+        },
+        orderBy: {
+          completedAt: "asc",
+        },
+      }),
+      db.lessonCompletion.findMany({
+        where: { userId },
+        select: {
           completedAt: true,
         },
         orderBy: {
@@ -622,6 +636,14 @@ export async function GET() {
       }
     });
 
+    lessonCompletions.forEach((completion: { completedAt: Date | string | null }) => {
+      const key = getDateKey(completion.completedAt);
+      if (key && activityTimeline[key]) {
+        activityTimeline[key].course += 1;
+        activityTimeline[key].total += 1;
+      }
+    });
+
     const timelineArray = Object.values(activityTimeline);
     const totalsLast30 = timelineArray.reduce(
       (acc, day) => {
@@ -630,6 +652,7 @@ export async function GET() {
         acc.liveCoding += day.liveCoding;
         acc.bugFix += day.bugFix;
         acc.hackaton += day.hackaton;
+        acc.course += day.course;
         return acc;
       },
       {
@@ -638,6 +661,7 @@ export async function GET() {
         liveCoding: 0,
         bugFix: 0,
         hackaton: 0,
+        course: 0,
       }
     );
 
@@ -808,8 +832,9 @@ export async function GET() {
       ...bugFixAttempts,
       ...hackatonAttempts,
       ...interviewAttempts,
+      ...lessonCompletions,
     ]
-      .map((attempt) => getDateKey((attempt as { completedAt?: Date | string }).completedAt ?? null))
+      .map((attempt) => getDateKey((attempt as { completedAt?: Date | string | null }).completedAt ?? null))
       .filter((value): value is string => Boolean(value))
       .sort()
       .pop() ?? null;

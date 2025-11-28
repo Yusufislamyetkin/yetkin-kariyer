@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Ca
 import { Button } from "@/app/components/ui/Button";
 import Link from "next/link";
 import CVRenderer from "@/app/components/cv/CVRenderer";
+import { generatePDFFromElement } from "@/lib/cv/pdf-generator";
 
 interface CV {
   id: string;
@@ -30,7 +31,6 @@ export default function ViewCVPage() {
   const [lastUploadUrl, setLastUploadUrl] = useState<string | null>(null);
   const [lastUploadName, setLastUploadName] = useState<string | null>(null);
   const [retryCount, setRetryCount] = useState(0);
-  const MAX_RETRIES = 2;
 
   const handleCvUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -91,9 +91,7 @@ export default function ViewCVPage() {
     }
   };
 
-  const handleDownload = async (retryAttempt: number = 0) => {
-    let url: string | null = null;
-    let timeoutId: NodeJS.Timeout | null = null;
+  const handleDownload = async () => {
     try {
       setDownloading(true);
       setError(null);
@@ -101,138 +99,39 @@ export default function ViewCVPage() {
       if (!params.id) {
         throw new Error("CV ID bulunamadı");
       }
-      
-      // Create abort controller for timeout
-      const abortController = new AbortController();
-      timeoutId = setTimeout(() => abortController.abort(), 60000); // 60 second timeout
-      
-      const response = await fetch(`/api/cv/${params.id}/pdf?download=1`, {
-        method: "GET",
-        headers: {
-          "Accept": "application/pdf",
-        },
-        signal: abortController.signal,
-      });
-      
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-        timeoutId = null;
-      }
-      
-      // Check content type first
-      const contentType = response.headers.get("content-type") || "";
-      
-      if (!response.ok) {
-        // Try to get error message from JSON response
-        let errorMessage = "PDF oluşturulamadı";
-        let shouldRetry = false;
-        
-        try {
-          const errorData = await response.json();
-          errorMessage = errorData.error || errorMessage;
-          
-          // Determine if we should retry based on status code
-          if (response.status === 500 || response.status === 503) {
-            shouldRetry = true;
-          } else if (response.status === 503 && errorMessage.includes("yapılandırılmadı")) {
-            errorMessage = "PDF servisi şu anda kullanılamıyor. Lütfen daha sonra tekrar deneyin.";
-          } else if (response.status === 401) {
-            errorMessage = "Oturum süreniz dolmuş. Lütfen tekrar giriş yapın.";
-          } else if (response.status === 404) {
-            errorMessage = "CV bulunamadı. Lütfen sayfayı yenileyin ve tekrar deneyin.";
-          }
-        } catch {
-          // If not JSON, use status text
-          errorMessage = response.statusText || errorMessage;
-          if (response.status === 500 || response.status === 503) {
-            shouldRetry = true;
-          }
-        }
-        
-        // Retry if appropriate
-        if (shouldRetry && retryAttempt < MAX_RETRIES) {
-          console.log(`[PDF] Retry attempt ${retryAttempt + 1}/${MAX_RETRIES}`);
-          setRetryCount(retryAttempt + 1);
-          await new Promise((resolve) => setTimeout(resolve, 2000 * (retryAttempt + 1))); // Exponential backoff
-          return handleDownload(retryAttempt + 1);
-        }
-        
-        throw new Error(errorMessage);
+
+      if (!cv) {
+        throw new Error("CV yüklenmedi. Lütfen bekleyin ve tekrar deneyin.");
       }
 
-      // Read response as blob
-      const blob = await response.blob();
-      
-      // Verify it's actually a PDF
-      if (!blob.type.includes("pdf") && blob.type !== "application/octet-stream" && contentType.includes("application/pdf")) {
-        // If content-type says PDF but blob type doesn't, it might still be a PDF
-        // This can happen in some browsers
-      } else if (!blob.type.includes("pdf") && blob.type !== "application/octet-stream" && !contentType.includes("application/pdf")) {
-        // Might be an error JSON, try to read it
-        try {
-          const errorText = await blob.text();
-          const errorData = JSON.parse(errorText);
-          throw new Error(errorData.error || "PDF oluşturulamadı");
-        } catch (parseError) {
-          throw new Error("PDF oluşturulamadı: Geçersiz dosya formatı");
-        }
-      }
-      
-      // Verify blob size (should be at least 1KB for a valid PDF)
-      if (blob.size < 1024) {
-        // Might be an error message, try to read it
-        try {
-          const errorText = await blob.text();
-          const errorData = JSON.parse(errorText);
-          throw new Error(errorData.error || "PDF oluşturulamadı: Dosya çok küçük");
-        } catch {
-          throw new Error("PDF oluşturulamadı: Geçersiz dosya boyutu");
-        }
-      }
-      
-      // Reset retry count on success
+      // Wait a bit to ensure DOM is ready
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      // Generate PDF from the CV content element
+      await generatePDFFromElement("cv-preview-content", {
+        filename: `cv-${params.id}.pdf`,
+        format: "a4",
+        orientation: "portrait",
+        quality: 0.98,
+        scale: 2,
+      });
+
       setRetryCount(0);
-      
-      // Create download link
-      url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = `cv-${params.id}.pdf`;
-      link.style.display = "none";
-      document.body.appendChild(link);
-      link.click();
-      
-      // Cleanup
-      setTimeout(() => {
-        document.body.removeChild(link);
-        if (url) {
-          URL.revokeObjectURL(url);
-        }
-      }, 100);
     } catch (err: any) {
-      console.error("Error downloading PDF:", err);
+      console.error("Error generating PDF:", err);
       
       // Handle specific error types
-      let errorMessage = err.message || "PDF indirilirken bir hata oluştu";
+      let errorMessage = err.message || "PDF oluşturulurken bir hata oluştu";
       
-      if (err.name === "AbortError" || err.name === "TimeoutError") {
-        errorMessage = "PDF oluşturma işlemi zaman aşımına uğradı. Lütfen tekrar deneyin.";
+      if (err.message && err.message.includes("not found")) {
+        errorMessage = "CV içeriği bulunamadı. Lütfen sayfayı yenileyin ve tekrar deneyin.";
       } else if (err.message && err.message.includes("network")) {
         errorMessage = "Ağ bağlantı hatası. İnternet bağlantınızı kontrol edin ve tekrar deneyin.";
-      } else if (err.message && err.message.includes("fetch")) {
-        errorMessage = "Sunucuya bağlanılamadı. Lütfen daha sonra tekrar deneyin.";
       }
       
       setError(errorMessage);
       setRetryCount(0);
-      
-      if (url) {
-        URL.revokeObjectURL(url);
-      }
     } finally {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
       setDownloading(false);
     }
   };
@@ -275,7 +174,7 @@ export default function ViewCVPage() {
                   Sayfayı Yenile
                 </Button>
                 {error?.includes("PDF") && (
-                  <Button variant="primary" onClick={() => handleDownload(0)}>
+                  <Button variant="primary" onClick={handleDownload}>
                     PDF İndirmeyi Tekrar Dene
                   </Button>
                 )}
@@ -316,20 +215,16 @@ export default function ViewCVPage() {
             </Button>
           </Link>
           <Button 
-            onClick={() => handleDownload(0)} 
+            onClick={handleDownload} 
             disabled={downloading || !cv}
             className="flex-1 sm:flex-initial"
           >
             <Download className="h-4 w-4 mr-2" />
             <span className="hidden sm:inline">
-              {downloading 
-                ? (retryCount > 0 ? `Tekrar deneniyor (${retryCount}/${MAX_RETRIES})...` : "PDF Oluşturuluyor...") 
-                : "PDF İndir"}
+              {downloading ? "PDF Oluşturuluyor..." : "PDF İndir"}
             </span>
             <span className="sm:hidden">
-              {downloading 
-                ? (retryCount > 0 ? `Tekrar (${retryCount})` : "Oluşturuluyor...") 
-                : "PDF"}
+              {downloading ? "Oluşturuluyor..." : "PDF"}
             </span>
           </Button>
           <label className="flex-1 sm:flex-initial">
@@ -371,7 +266,11 @@ export default function ViewCVPage() {
         <CardContent className="p-0">
           {cv ? (
             <div className="bg-gray-100 p-2 sm:p-4 overflow-auto" style={{ maxHeight: "calc(100vh - 300px)", minHeight: "400px" }}>
-              <div className="bg-white shadow-lg mx-auto w-full max-w-[210mm] scale-[0.75] sm:scale-[0.9] md:scale-100 origin-top transition-transform" style={{ width: "210mm" }}>
+              <div 
+                id="cv-preview-content"
+                className="bg-white shadow-lg mx-auto w-full max-w-[210mm] scale-[0.75] sm:scale-[0.9] md:scale-100 origin-top transition-transform" 
+                style={{ width: "210mm" }}
+              >
                 <CVRenderer data={cv.data} templateId={cv.templateId} />
               </div>
             </div>

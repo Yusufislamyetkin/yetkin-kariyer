@@ -108,6 +108,7 @@ interface ActivityDay {
   liveCoding: number;
   bugFix: number;
   hackaton: number;
+  course?: number;
   total: number;
 }
 
@@ -131,7 +132,7 @@ interface LeaderboardTrendItem {
   attemptCount: number;
 }
 
-type LeaderboardType = "test" | "liveCoding" | "bugFix" | "hackaton";
+type LeaderboardType = "test" | "liveCoding" | "bugFix" | "hackaton" | "course";
 
 interface LeaderboardData {
   dailyRankTrend: Record<LeaderboardType, LeaderboardTrendItem[]>;
@@ -455,6 +456,10 @@ export default function AnalyticsPage() {
           label: "Bug Fix",
           data: analytics.activity.timeline.map((day) => day.bugFix),
         },
+        {
+          label: "Ders",
+          data: analytics.activity.timeline.map((day) => day.course ?? 0),
+        },
       ],
     };
   }, [analytics]);
@@ -473,7 +478,7 @@ export default function AnalyticsPage() {
       return null;
     }
     const labels = dates.map((date) => formatDateLabel(date));
-    const datasetMeta: Record<LeaderboardType, { label: string; color: string }> = {
+    const datasetMeta: Partial<Record<LeaderboardType, { label: string; color: string }>> = {
       test: { label: "Test", color: "#2563eb" },
       liveCoding: { label: "Canlı Kodlama", color: "#10b981" },
       bugFix: { label: "Bug Fix", color: "#f59e0b" },
@@ -481,6 +486,8 @@ export default function AnalyticsPage() {
     };
     const datasets = types
       .map((type) => {
+        const meta = datasetMeta[type];
+        if (!meta) return null;
         const map = new Map(
           analytics.leaderboard.dailyRankTrend[type].map((entry) => [entry.date, entry.rank])
         );
@@ -492,10 +499,10 @@ export default function AnalyticsPage() {
           return null;
         }
         return {
-          label: datasetMeta[type].label,
+          label: meta.label,
           data,
-          borderColor: datasetMeta[type].color,
-          backgroundColor: `${datasetMeta[type].color}33`,
+          borderColor: meta.color,
+          backgroundColor: `${meta.color}33`,
           fill: false,
         };
       })
@@ -585,9 +592,10 @@ export default function AnalyticsPage() {
         accent: "from-emerald-500/10 via-emerald-500/5 to-transparent",
       },
       { type: "bugFix", label: "Bug Fix", accent: "from-amber-500/10 via-amber-500/5 to-transparent" },
+      { type: "course", label: "Ders", accent: "from-purple-500/10 via-purple-500/5 to-transparent" },
     ];
     return types.map(({ type, label, accent }) => {
-      const entries = analytics.leaderboard.dailyRankTrend[type];
+      const entries = analytics.leaderboard.dailyRankTrend[type] || [];
       const ranks = entries.filter((entry) => entry.rank !== null).map((entry) => entry.rank as number);
       const averageRank =
         ranks.length > 0 ? (ranks.reduce((sum, rank) => sum + rank, 0) / ranks.length).toFixed(1) : null;
@@ -727,7 +735,7 @@ export default function AnalyticsPage() {
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex flex-col gap-1">
                     <span className={`text-sm font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400 ${
-                      card.title === "Toplam Öğrenme Süresi" || card.title === "Tamamlanan Eğitimler" ? "pt-4" : ""
+                      card.title === "Toplam Öğrenme Süresi" || card.title === "Tamamlanan Eğitimler" || card.title === "Başvurulan İş İlanları" || card.title === "Başvurulan Hackatonlar" ? "pt-4" : ""
                     }`}>
                       {card.title}
                     </span>
@@ -754,7 +762,7 @@ export default function AnalyticsPage() {
               30 Günlük Aktivite Akışı
             </CardTitle>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              Gün bazlı toplam aktivite, test, canlı kodlama ve bug fix yoğunluğu
+              Gün bazlı toplam aktivite, ders, test, canlı kodlama ve bug fix yoğunluğu
             </p>
           </CardHeader>
           <CardContent className="pt-6">
@@ -786,7 +794,7 @@ export default function AnalyticsPage() {
             </div>
             <ul className="space-y-3">
               <li className="flex items-center justify-between rounded-lg border border-gray-200/60 px-3 py-2 dark:border-gray-800/60">
-                <span className="text-gray-600 dark:text-gray-300">Konu</span>
+                <span className="text-gray-600 dark:text-gray-300">Bitirilen Ders</span>
                 <span className="font-semibold text-gray-900 dark:text-gray-100">
                   {formatNumber(completedTopicsCount)}
                 </span>
@@ -804,15 +812,9 @@ export default function AnalyticsPage() {
                 </span>
               </li>
               <li className="flex items-center justify-between rounded-lg border border-gray-200/60 px-3 py-2 dark:border-gray-800/60">
-                <span className="text-gray-600 dark:text-gray-300">Bug Fix</span>
+                <span className="text-gray-600 dark:text-gray-300">Bugfix</span>
                 <span className="font-semibold text-gray-900 dark:text-gray-100">
                   {formatNumber(analytics.activity.totals.last30Days.bugFix)}
-                </span>
-              </li>
-              <li className="flex items-center justify-between rounded-lg border border-gray-200/60 px-3 py-2 dark:border-gray-800/60">
-                <span className="text-gray-600 dark:text-gray-300">Kurs</span>
-                <span className="font-semibold text-gray-900 dark:text-gray-100">
-                  {formatNumber(analytics.overview.courseEngagementCount)}
                 </span>
               </li>
             </ul>

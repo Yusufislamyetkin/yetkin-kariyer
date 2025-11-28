@@ -189,7 +189,10 @@ export function PostCreate({ onClose, onSuccess, isModal = true }: PostCreatePro
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const postContent = (
-    <div className={`${isModal ? 'bg-white dark:bg-black rounded-lg w-full max-w-2xl max-h-[90vh] overflow-hidden flex flex-col shadow-xl' : 'w-full'}`}>
+    <div 
+      className={`${isModal ? 'bg-white dark:bg-black rounded-lg w-full max-w-2xl max-h-[90vh] overflow-hidden flex flex-col shadow-xl' : 'w-full'}`}
+      onClick={(e) => e.stopPropagation()}
+    >
       {/* Header */}
       {isModal && (
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-800">
@@ -361,8 +364,16 @@ export function PostCreate({ onClose, onSuccess, isModal = true }: PostCreatePro
 
   if (isModal) {
     return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-        {content}
+      <div 
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+        onClick={(e) => {
+          // Close modal when clicking on overlay (not on modal content)
+          if (e.target === e.currentTarget && onClose) {
+            onClose();
+          }
+        }}
+      >
+        {postContent}
       </div>
     );
   }

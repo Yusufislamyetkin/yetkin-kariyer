@@ -57,11 +57,25 @@ export async function calculateBadgeProgress(
   let isCompleted = false;
 
   // Önce kullanıcının bu rozeti kazanıp kazanmadığını kontrol et
+  // Key bazlı eşleştirme yap: eğer badge.key varsa, önce key ile badge bul, sonra id ile userBadge ara
+  let badgeIdToCheck = badge.id;
+  
+  if (badge.key) {
+    // Key ile badge bul
+    const badgeByKey = await db.badge.findUnique({
+      where: { key: badge.key },
+      select: { id: true },
+    });
+    if (badgeByKey) {
+      badgeIdToCheck = badgeByKey.id;
+    }
+  }
+
   const userBadge = await db.userBadge.findUnique({
     where: {
       userId_badgeId: {
         userId,
-        badgeId: badge.id,
+        badgeId: badgeIdToCheck,
       },
     },
   });
@@ -360,8 +374,9 @@ export async function calculateBadgeProgress(
   // Percentage hesapla
   const percentage = target > 0 ? Math.min((current / target) * 100, 100) : 0;
 
+  // Return badgeId olarak key varsa key, yoksa id kullan (frontend'de eşleştirme için)
   return {
-    badgeId: badge.id,
+    badgeId: badge.key || badge.id,
     current,
     target,
     percentage,

@@ -724,6 +724,16 @@ export async function checkBadgesForActivity({
   const longestStreak = streakData.longestStreak;
   const totalDaysActive = streakData.totalDaysActive;
 
+  // Quiz attempt verilerini al (total_achievements rozetleri için gerekli)
+  const userQuizAttempts = await db.quizAttempt.findMany({
+    where: { userId },
+  });
+
+  const totalQuizCount = userQuizAttempts.length;
+  const perfectScoreCount = userQuizAttempts.filter(
+    (qa: { score: number }) => qa.score === 100
+  ).length;
+
   // UTC timezone kullanarak bugünün başlangıcını hesapla
   // Veritabanındaki tarihler UTC'de saklandığı için UTC kullanıyoruz
   const now = new Date();
