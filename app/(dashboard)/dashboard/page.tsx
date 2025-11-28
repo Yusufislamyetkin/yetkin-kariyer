@@ -19,11 +19,14 @@ import {
   Code,
   Bug,
   Search,
+  GraduationCap,
+  Coins,
+  Trophy,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
 import { BadgeDisplay } from "@/app/components/badges/BadgeDisplay";
-import { Trophy, Award } from "lucide-react";
+import { Award } from "lucide-react";
 import type { MentorRecommendation } from "@/types";
 import { StrikeDisplay } from "./_components/StrikeDisplay";
 
@@ -36,6 +39,9 @@ interface DashboardStats {
   averageQuizScore: number;
   averageInterviewScore: number;
   completedTopics?: number;
+  participatedHackathons?: number;
+  completedLiveCoding?: number;
+  completedBugfix?: number;
 }
 
 
@@ -83,6 +89,7 @@ export default function DashboardPage() {
   const [strikeLoading, setStrikeLoading] = useState(true);
   const [completedTopics, setCompletedTopics] = useState<number>(0);
   const [totalEarnings, setTotalEarnings] = useState<number>(0);
+  const [participatedHackathons, setParticipatedHackathons] = useState<number>(0);
   const [motivationMessage, setMotivationMessage] = useState<{ message: string; emoji: string } | null>(null);
   const [motivationLoading, setMotivationLoading] = useState(true);
   const recentBadges = badges.slice(0, 3);
@@ -140,6 +147,9 @@ export default function DashboardPage() {
         setStats(statsData.stats);
         if (statsData.stats.completedTopics !== undefined) {
           setCompletedTopics(statsData.stats.completedTopics);
+        }
+        if (statsData.stats.participatedHackathons !== undefined) {
+          setParticipatedHackathons(statsData.stats.participatedHackathons);
         }
       }
 
@@ -255,37 +265,33 @@ export default function DashboardPage() {
 
   const statCards = [
     {
-      title: "Test Denemeleri",
+      title: "Test",
       value: stats?.testAttempts || 0,
-      subtitle: `Quiz denemeleri: ${stats?.quizAttempts || 0}`,
       icon: BookOpen,
       color: "from-blue-500 to-cyan-500",
       bgColor: "bg-blue-50 dark:bg-blue-900/20",
       textColor: "text-blue-600 dark:text-blue-400",
     },
     {
-      title: "Mülakat Denemeleri",
-      value: stats?.interviewAttempts || 0,
-      subtitle: `Bitirilen konular: ${completedTopics}`,
-      icon: Video,
+      title: "Ders",
+      value: completedTopics,
+      icon: GraduationCap,
       color: "from-green-500 to-emerald-500",
       bgColor: "bg-green-50 dark:bg-green-900/20",
       textColor: "text-green-600 dark:text-green-400",
     },
     {
-      title: "CV'ler",
-      value: stats?.cvs || 0,
-      subtitle: monthlyRank && monthlyRank.rank > 0 ? `Aylık sıralama: #${monthlyRank.rank}` : "Aylık sıralama: -",
-      icon: FileText,
+      title: "Canlı Kodlama",
+      value: stats?.completedLiveCoding || 0,
+      icon: Code,
       color: "from-purple-500 to-pink-500",
       bgColor: "bg-purple-50 dark:bg-purple-900/20",
       textColor: "text-purple-600 dark:text-purple-400",
     },
     {
-      title: "Başvurular",
-      value: stats?.applications || 0,
-      subtitle: `Toplam kazanç: ${totalEarnings.toLocaleString('tr-TR')} ₺`,
-      icon: Briefcase,
+      title: "Bugfix",
+      value: stats?.completedBugfix || 0,
+      icon: Bug,
       color: "from-orange-500 to-red-500",
       bgColor: "bg-orange-50 dark:bg-orange-900/20",
       textColor: "text-orange-600 dark:text-orange-400",
@@ -406,12 +412,9 @@ export default function DashboardPage() {
                   </p>
                 </div>
                 <div className="min-w-0">
-                  <p className="text-3xl md:text-4xl font-display font-bold text-gray-900 dark:text-gray-100 mb-1">
+                  <p className="text-3xl md:text-4xl font-display font-bold text-gray-900 dark:text-gray-100">
                     {stat.value}
                   </p>
-                  <span className={`text-xs font-semibold ${stat.textColor} truncate block whitespace-nowrap`}>
-                    {stat.subtitle}
-                  </span>
                 </div>
               </CardContent>
             </Card>
@@ -667,30 +670,28 @@ export default function DashboardPage() {
                 </div>
               </div>
             ) : motivationMessage ? (
-              <div className="space-y-4">
-                <div className="flex items-start gap-4 p-4 rounded-xl bg-gradient-to-br from-purple-50 via-pink-50 to-rose-50 dark:from-purple-900/20 dark:via-pink-900/20 dark:to-rose-900/20 border border-purple-200/50 dark:border-purple-800/50">
-                  <div className="flex-shrink-0">
-                    <img
-                      src="/Photos/AiTeacher/teacher.jpg"
-                      alt="AI Öğretmen"
-                      className="w-16 h-16 rounded-full object-cover border-2 border-purple-300 dark:border-purple-700 shadow-md"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = "none";
-                      }}
-                    />
+              <div className="flex items-start gap-4 p-6 -mx-6 -my-6 rounded-xl bg-gradient-to-br from-purple-50 via-pink-50 to-rose-50 dark:from-purple-900/20 dark:via-pink-900/20 dark:to-rose-900/20 border-x-0 border-y border-purple-200/50 dark:border-purple-800/50 w-[calc(100%+3rem)]">
+                <div className="flex-shrink-0">
+                  <img
+                    src="/Photos/AiTeacher/teacher.jpg"
+                    alt="AI Öğretmen"
+                    className="w-16 h-16 rounded-full object-cover border-2 border-purple-300 dark:border-purple-700 shadow-md"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = "none";
+                    }}
+                  />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-2xl">{motivationMessage.emoji}</span>
+                    <span className="text-sm font-semibold text-purple-700 dark:text-purple-300">
+                      AI Öğretmen Selin
+                    </span>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-2xl">{motivationMessage.emoji}</span>
-                      <span className="text-sm font-semibold text-purple-700 dark:text-purple-300">
-                        AI Öğretmen Selin
-                      </span>
-                    </div>
-                    <p className="text-base text-gray-800 dark:text-gray-200 leading-relaxed">
-                      {motivationMessage.message}
-                    </p>
-                  </div>
+                  <p className="text-base text-gray-800 dark:text-gray-200 leading-relaxed">
+                    {motivationMessage.message}
+                  </p>
                 </div>
               </div>
             ) : (

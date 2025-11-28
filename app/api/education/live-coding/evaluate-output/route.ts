@@ -36,33 +36,35 @@ export async function POST(request: Request) {
     const body: EvaluateOutputRequest = await request.json();
     const { taskDescription, expectedOutput, userCode, userOutput, language } = body;
 
-    if (!taskDescription || !userCode || !userOutput) {
+    if (!taskDescription || !userCode) {
       return NextResponse.json(
-        { error: "Eksik parametreler: taskDescription, userCode ve userOutput gerekli" },
+        { error: "Eksik parametreler: taskDescription ve userCode gerekli" },
         { status: 400 }
       );
     }
 
+    // userOutput is optional - if not provided, we'll do code-only analysis
+    const hasUserOutput = userOutput && userOutput.trim().length > 0;
+
     const openai = await ensureAIEnabled();
 
-    const prompt = `Sen bir programlama öğretmenisin. Öğrencinin kodunu ve çıktısını değerlendir.
+    const prompt = `Sen bir programlama öğretmenisin. Öğrencinin kodunu değerlendir.${hasUserOutput ? ' Öğrencinin kodunu ve çıktısını değerlendir.' : ' Kod henüz çalıştırılmamış, sadece kod analizi yap.'}
 
 GÖREV AÇIKLAMASI:
 ${taskDescription}
 
 BEKLENEN ÇIKTI:
-${expectedOutput}
+${expectedOutput || "Belirtilmemiş"}
 
 ÖĞRENCİNİN KODU (${language}):
 \`\`\`${language}
 ${userCode}
 \`\`\`
-
-ÖĞRENCİNİN ÜRETTİĞİ ÇIKTI:
-${userOutput}
+${hasUserOutput ? `ÖĞRENCİNİN ÜRETTİĞİ ÇIKTI:
+${userOutput}` : `NOT: Kod henüz çalıştırılmamış. Sadece kod analizi yap.`}
 
 DEĞERLENDİRME GÖREVİN:
-1. Öğrencinin çıktısı beklenen çıktı ile eşleşiyor mu? (isCorrect: true/false)
+${hasUserOutput ? `1. Öğrencinin çıktısı beklenen çıktı ile eşleşiyor mu? (isCorrect: true/false)` : `1. Kodun doğru olup olmadığını analiz et. Kod çalıştırılmadığı için isCorrect'i false olarak işaretle.`}
 2. Kodda hatalar var mı? Varsa hangi satırlarda ve ne tür hatalar? (errors array)
 3. **ÖNEMLİ**: Kullanıcının yaptığı hatayı ÖZELLİKLE BELİRT. Hangi satırda, hangi kod bloğunda, ne tür bir hata var?
 4. **ÖNEMLİ**: Kullanıcının nereyi düzeltmesi gerektiğini ÖZELLİKLE BELİRT. Satır numarası, kod bloğu, değişken adı, fonksiyon adı gibi spesifik bilgiler ver.
@@ -70,6 +72,7 @@ DEĞERLENDİRME GÖREVİN:
 6. Genel bir geri bildirim ver (feedback)
 7. Önemli noktalar için yorum satırı açıklamaları listele (comments array)
 8. Her hata için spesifik bilgi ver: location (örn: "Satır 5", "for döngüsü", "if bloğu"), issue (hatanın ne olduğu), fix (nasıl düzeltileceği)
+${!hasUserOutput ? `9. **ÖNEMLİ**: Kod henüz çalıştırılmamış. Kullanıcıya kodunu çalıştırmasını öner.` : ''}
 
 ÖNEMLİ KURALLAR:
 - correctedCode'da yorum satırları ile açıklamalar ekle (// veya /* */ formatında)

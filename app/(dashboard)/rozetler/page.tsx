@@ -195,9 +195,16 @@ export default function RozetlerPage() {
         cat.badgeCategories.includes(badge.category)
       );
       // Key bazlı eşleştirme: key varsa key, yoksa id kullan
+      // Hem earnedBadgeIds içindeki rozetler hem de ilerleme tamamlanmış rozetler sayılmalı
       const earnedInCategory = categoryBadges.filter((badge) => {
         const badgeKey = (badge as any).key || badge.id;
-        return earnedBadgeIds.has(badgeKey);
+        const isEarned = earnedBadgeIds.has(badgeKey);
+        // Eğer henüz kazanılmamışsa, ilerleme tamamlanmış mı kontrol et
+        if (!isEarned) {
+          const progress = progressMap.get(badgeKey);
+          return progress?.isCompleted === true;
+        }
+        return isEarned;
       }).length;
       return {
         ...cat,
@@ -205,7 +212,7 @@ export default function RozetlerPage() {
         earned: earnedInCategory,
       };
     });
-  }, [allBadges, earnedBadgeIds, categories]);
+  }, [allBadges, earnedBadgeIds, categories, progressMap]);
 
   // Rozetleri unique isimlerle güncelle
   const badgesWithUniqueNames = useMemo(() => {
@@ -374,9 +381,29 @@ export default function RozetlerPage() {
     );
   }
 
-  const earnedCount = userBadges.length;
+  // Kazanılan rozet sayısını hesapla: hem userBadges hem de ilerleme tamamlanmış rozetler
+  const completedBadgeKeys = new Set<string>();
+  
+  // İlerleme tamamlanmış ama henüz userBadges içinde olmayan rozetleri bul
+  allBadges.forEach((badge) => {
+    const badgeKey = (badge as any).key || badge.id;
+    const progress = progressMap.get(badgeKey);
+    if (progress?.isCompleted === true && !earnedBadgeIds.has(badgeKey)) {
+      completedBadgeKeys.add(badgeKey);
+    }
+  });
+  
+  // Toplam kazanılan rozet sayısı: userBadges + ilerleme tamamlanmış rozetler
+  const earnedCount = userBadges.length + completedBadgeKeys.size;
   const totalBadges = totalBadgesCount || allBadges.length || 93;
-  const totalPoints = userBadges.reduce((sum, badge) => sum + (badge.points || 0), 0);
+  
+  // Toplam puan: userBadges'den gelen puanlar + ilerleme tamamlanmış rozetlerin puanları
+  const userBadgesPoints = userBadges.reduce((sum, badge) => sum + (badge.points || 0), 0);
+  const completedBadgesPoints = Array.from(completedBadgeKeys).reduce((sum, badgeKey) => {
+    const badge = allBadges.find((b) => ((b as any).key || b.id) === badgeKey);
+    return sum + (badge?.points || 0);
+  }, 0);
+  const totalPoints = userBadgesPoints + completedBadgesPoints;
 
   return (
     <div className="space-y-6 md:space-y-8 animate-fade-in pb-8">
@@ -545,12 +572,15 @@ export default function RozetlerPage() {
                       {tierBadges.map((badge) => {
                         // Key bazlı eşleştirme: key varsa key, yoksa id kullan
                         const badgeKey = (badge as any).key || badge.id;
+                        const progress = progressMap.get(badgeKey);
+                        // Rozet kazanılmışsa veya ilerleme tamamlanmışsa açık göster
+                        const isEarned = earnedBadgeIds.has(badgeKey) || (progress?.isCompleted === true);
                         return (
                           <BadgeDisplay
                             key={badge.id}
                             badge={badge}
-                            earned={earnedBadgeIds.has(badgeKey)}
-                            progress={progressMap.get(badgeKey)}
+                            earned={isEarned}
+                            progress={progress}
                           />
                         );
                       })}

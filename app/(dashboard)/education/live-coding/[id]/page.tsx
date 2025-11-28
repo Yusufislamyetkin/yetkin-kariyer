@@ -441,6 +441,16 @@ export default function LiveCodingPage() {
   const handleActiveCodeChange = useCallback(
     (code: string) => {
     if (!activeTask || !activeLanguage) return;
+    
+    const logPrefix = "[Code Change]";
+    const codeChanged = code !== (taskCodes[activeTask.id]?.[activeLanguage] ?? "");
+    
+    if (codeChanged) {
+      console.log(`${logPrefix} Kod değişti, runResult ve AI evaluation temizleniyor...`);
+      console.log(`${logPrefix} Eski kod uzunluğu:`, taskCodes[activeTask.id]?.[activeLanguage]?.length || 0);
+      console.log(`${logPrefix} Yeni kod uzunluğu:`, code.length);
+    }
+    
     setTaskCodes((prev) => ({
       ...prev,
       [activeTask.id]: {
@@ -450,10 +460,13 @@ export default function LiveCodingPage() {
     }));
       setSubmitError(null);
       // Clear run result and AI evaluation when code changes
-      setRunResult(null);
-      setAiEvaluation(null);
+      if (codeChanged) {
+        console.log(`${logPrefix} ⚠️ runResult ve aiEvaluation state'leri temizlendi`);
+        setRunResult(null);
+        setAiEvaluation(null);
+      }
     },
-    [activeTask, activeLanguage]
+    [activeTask, activeLanguage, taskCodes]
   );
 
   const handleRunCode = useCallback(async (event?: React.MouseEvent<HTMLButtonElement>) => {
@@ -726,21 +739,37 @@ export default function LiveCodingPage() {
       return;
     }
 
-    // Check if we have run result
-    console.log(`${logPrefix} Run result kontrolü yapılıyor...`);
+    // Check if we have run result (optional - if exists, we'll use it)
+    console.log(`${logPrefix} Run result kontrolü yapılıyor (opsiyonel)...`);
     console.log(`${logPrefix} runResult:`, runResult ? {
       hasStdout: !!runResult.stdout,
       hasOutput: !!runResult.output,
+      hasStderr: !!runResult.stderr,
+      hasCompileStdout: !!runResult.compileStdout,
+      hasCompileStderr: !!runResult.compileStderr,
       hasErrorMessage: !!runResult.errorMessage,
       stdout: runResult.stdout?.substring(0, 100),
       output: runResult.output?.substring(0, 100),
+      stderr: runResult.stderr?.substring(0, 100),
+      compileStdout: runResult.compileStdout?.substring(0, 100),
+      compileStderr: runResult.compileStderr?.substring(0, 100),
       errorMessage: runResult.errorMessage,
     } : null);
 
-    if (!runResult || (!runResult.stdout && !runResult.output && !runResult.errorMessage)) {
-      console.warn(`${logPrefix} ❌ Run result yok veya geçersiz`);
-      setSubmitError("Önce kodu çalıştırmanız gerekiyor.");
-      return;
+    // Check if we have any output or error information (optional)
+    const hasAnyResult = runResult && (
+      runResult.stdout ||
+      runResult.output ||
+      runResult.stderr ||
+      runResult.compileStdout ||
+      runResult.compileStderr ||
+      runResult.errorMessage
+    );
+
+    if (hasAnyResult) {
+      console.log(`${logPrefix} ✅ Run result mevcut, çıktı bilgisi kullanılacak`);
+    } else {
+      console.log(`${logPrefix} ℹ️ Run result yok, sadece kod analizi yapılacak`);
     }
 
     console.log(`${logPrefix} ✅ Validasyon başarılı, AI analizi başlatılıyor...`);
@@ -748,7 +777,8 @@ export default function LiveCodingPage() {
     setSubmitError(null);
 
     try {
-      const actualOutput = runResult.stdout || runResult.output || "";
+      // Use run result if available, otherwise use empty string
+      const actualOutput = hasAnyResult ? (runResult.stdout || runResult.output || "") : "";
       const expectedOutput = activeTask.testCases?.[0]?.expectedOutput || "";
 
       const requestPayload = {
@@ -765,7 +795,10 @@ export default function LiveCodingPage() {
         expectedOutputLength: requestPayload.expectedOutput.length,
         userCodeLength: requestPayload.userCode.length,
         userOutputLength: requestPayload.userOutput.length,
+        hasUserOutput: !!requestPayload.userOutput,
+        userOutputPreview: requestPayload.userOutput.substring(0, 100),
         language: requestPayload.language,
+        note: hasAnyResult ? "Run result mevcut, çıktı bilgisi gönderiliyor" : "Run result yok, sadece kod analizi yapılacak",
       });
 
       const fetchStartTime = Date.now();
@@ -1165,15 +1198,53 @@ export default function LiveCodingPage() {
                               currentTarget: e.currentTarget,
                               timeStamp: e.timeStamp,
                             });
+                            
+                            const isDisabled = aiEvaluation?.loading || !activeUserCode.trim();
+                            const hasAnyRunResult = runResult && (
+                              runResult.stdout ||
+                              runResult.output ||
+                              runResult.stderr ||
+                              runResult.compileStdout ||
+                              runResult.compileStderr ||
+                              runResult.errorMessage
+                            );
+                            
                             console.log("[Button Click] Button state:", {
-                              disabled: aiEvaluation?.loading || !runResult || !activeUserCode.trim(),
+                              disabled: isDisabled,
                               aiEvaluationLoading: aiEvaluation?.loading,
                               hasRunResult: !!runResult,
+                              hasAnyRunResult,
+                              runResultDetails: runResult ? {
+                                hasStdout: !!runResult.stdout,
+                                hasOutput: !!runResult.output,
+                                hasStderr: !!runResult.stderr,
+                                hasCompileStdout: !!runResult.compileStdout,
+                                hasCompileStderr: !!runResult.compileStderr,
+                                hasErrorMessage: !!runResult.errorMessage,
+                              } : null,
                               hasActiveUserCode: !!activeUserCode.trim(),
+                              activeUserCodeLength: activeUserCode?.length || 0,
+                              note: hasAnyRunResult ? "Run result mevcut, çıktı bilgisi kullanılacak" : "Run result yok, sadece kod analizi yapılacak",
                             });
+                            
+                            if (isDisabled) {
+                              console.warn("[Button Click] ⚠️ Buton disabled, işlem yapılamıyor");
+                              if (!activeUserCode.trim()) {
+                                console.warn("[Button Click] 💡 Sebep: Kod boş");
+                              } else if (aiEvaluation?.loading) {
+                                console.warn("[Button Click] 💡 Sebep: AI analizi zaten devam ediyor");
+                              }
+                            } else {
+                              if (hasAnyRunResult) {
+                                console.log("[Button Click] ℹ️ Run result mevcut, çıktı bilgisi ile birlikte analiz yapılacak");
+                              } else {
+                                console.log("[Button Click] ℹ️ Run result yok, sadece kod analizi yapılacak");
+                              }
+                            }
+                            
                             handleAIAnalysis(e);
                           }}
-                          disabled={aiEvaluation?.loading || !runResult || !activeUserCode.trim()}
+                          disabled={aiEvaluation?.loading || !activeUserCode.trim()}
                       variant="outline"
                           size="sm"
                           className="h-9 px-4 text-sm font-semibold border-2 border-purple-500/50 dark:border-purple-500/50 text-purple-300 dark:text-purple-300 hover:bg-purple-500/20 dark:hover:bg-purple-500/20 hover:border-purple-500 dark:hover:border-purple-500 transition-all duration-200 gap-2"

@@ -210,8 +210,11 @@ export function BadgeCollection({
   progressMap,
 }: BadgeCollectionProps) {
   const sortedBadges = [...badges].sort((a, b) => {
-    const aEarned = earnedBadgeIds.has(a.id);
-    const bEarned = earnedBadgeIds.has(b.id);
+    const aProgress = progressMap?.get(a.id);
+    const bProgress = progressMap?.get(b.id);
+    // Rozet kazanılmışsa veya ilerleme tamamlanmışsa açık say
+    const aEarned = earnedBadgeIds.has(a.id) || (aProgress?.isCompleted === true);
+    const bEarned = earnedBadgeIds.has(b.id) || (bProgress?.isCompleted === true);
 
     if (aEarned !== bEarned) {
       return aEarned ? -1 : 1;
@@ -231,14 +234,19 @@ export function BadgeCollection({
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-      {sortedBadges.map((badge) => (
-        <BadgeDisplay
-          key={badge.id}
-          badge={badge}
-          earned={earnedBadgeIds.has(badge.id)}
-          progress={progressMap?.get(badge.id)}
-        />
-      ))}
+      {sortedBadges.map((badge) => {
+        const progress = progressMap?.get(badge.id);
+        // Rozet kazanılmışsa veya ilerleme tamamlanmışsa açık göster
+        const isEarned = earnedBadgeIds.has(badge.id) || (progress?.isCompleted === true);
+        return (
+          <BadgeDisplay
+            key={badge.id}
+            badge={badge}
+            earned={isEarned}
+            progress={progress}
+          />
+        );
+      })}
     </div>
   );
 }
