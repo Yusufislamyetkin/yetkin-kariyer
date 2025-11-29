@@ -227,19 +227,27 @@ export default function TestQuestionsPage() {
         return;
       }
 
+      console.log("[TestSubmit] API Response:", {
+        quizAttemptId: data.quizAttempt.id,
+        badgeResults: data.badgeResults,
+        newlyEarnedBadges: data.badgeResults?.newlyEarnedBadges,
+        goalResults: data.goalResults,
+        score: data.score,
+      });
+
       if (typeof window !== "undefined") {
-        sessionStorage.setItem(
-          "latest-achievement",
-          JSON.stringify({
-            attemptId: data.quizAttempt.id,
-            source: "test",
-            badgeResults: data.badgeResults,
-            goalResults: data.goalResults,
-            score: data.score,
-            quizTitle: quiz?.title ?? "",
-            timestamp: Date.now(),
-          })
-        );
+        const achievementData = {
+          attemptId: data.quizAttempt.id,
+          source: "test",
+          badgeResults: data.badgeResults || null,
+          goalResults: data.goalResults || null,
+          score: data.score,
+          quizTitle: quiz?.title ?? "",
+          timestamp: Date.now(),
+        };
+        
+        console.log("[TestSubmit] Saving to sessionStorage:", achievementData);
+        sessionStorage.setItem("latest-achievement", JSON.stringify(achievementData));
       }
       
       router.push(`/education/results/${data.quizAttempt.id}`);

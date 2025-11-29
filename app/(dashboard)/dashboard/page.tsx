@@ -73,6 +73,12 @@ interface Activity {
   date: string;
   icon: string;
   timeAgo: string;
+  userId?: string;
+  user?: {
+    id: string;
+    name: string;
+    profileImage?: string | null;
+  } | null;
 }
 
 export default function DashboardPage() {
@@ -85,6 +91,8 @@ export default function DashboardPage() {
   const [dailyRank, setDailyRank] = useState<LeaderboardRank | null>(null);
   const [monthlyRank, setMonthlyRank] = useState<LeaderboardRank | null>(null);
   const [activities, setActivities] = useState<Activity[]>([]);
+  const [activityType, setActivityType] = useState<"global" | "connections">("global");
+  const [activitiesLoading, setActivitiesLoading] = useState(false);
   const [strikeData, setStrikeData] = useState<any>(null);
   const [strikeLoading, setStrikeLoading] = useState(true);
   const [completedTopics, setCompletedTopics] = useState<number>(0);
@@ -108,6 +116,11 @@ export default function DashboardPage() {
   useEffect(() => {
     fetchMotivationMessage();
   }, []);
+
+  // Fetch activities when type changes
+  useEffect(() => {
+    fetchActivities();
+  }, [activityType]);
 
   const fetchCoreData = async () => {
     try {
@@ -134,7 +147,7 @@ export default function DashboardPage() {
         fetch("/api/competition/leaderboard?period=monthly&type=quiz_count").catch(() => ({
           json: async () => ({ userRank: null }),
         })),
-        fetch("/api/profile/activity?limit=10").catch(() => ({
+        fetch(`/api/profile/activity?limit=10&type=global`).catch(() => ({
           json: async () => ({ activities: [] }),
         })),
         fetch("/api/earnings").catch(() => ({
@@ -260,6 +273,24 @@ export default function DashboardPage() {
       });
     } finally {
       setMotivationLoading(false);
+    }
+  };
+
+  const fetchActivities = async () => {
+    try {
+      setActivitiesLoading(true);
+      const response = await fetch(`/api/profile/activity?limit=10&type=${activityType}`);
+      if (response.ok) {
+        const data = await response.json();
+        setActivities(data.activities || []);
+      } else {
+        setActivities([]);
+      }
+    } catch (error) {
+      console.error("Error fetching activities:", error);
+      setActivities([]);
+    } finally {
+      setActivitiesLoading(false);
     }
   };
 
@@ -654,48 +685,70 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
 
-        <Card variant="elevated" hover>
-          <CardHeader>
+        <Card variant="elevated" hover className="overflow-hidden">
+          <CardHeader className="pb-4">
             <CardTitle className="flex items-center gap-2 text-xl">
               <Sparkles className="h-6 w-6 text-purple-600 dark:text-purple-400" />
               AI Öğretmen Mesajı
             </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pt-0">
             {motivationLoading ? (
-              <div className="flex items-center justify-center py-8">
+              <div className="flex items-center justify-center py-12">
                 <div className="flex flex-col items-center gap-3">
                   <div className="w-10 h-10 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
                   <p className="text-sm text-gray-600 dark:text-gray-400">Mesaj hazırlanıyor...</p>
                 </div>
               </div>
             ) : motivationMessage ? (
-              <div className="flex items-start gap-4 p-6 -mx-6 -my-6 rounded-xl bg-gradient-to-br from-purple-50 via-pink-50 to-rose-50 dark:from-purple-900/20 dark:via-pink-900/20 dark:to-rose-900/20 border-x-0 border-y border-purple-200/50 dark:border-purple-800/50 w-[calc(100%+3rem)]">
-                <div className="flex-shrink-0">
-                  <img
-                    src="/Photos/AiTeacher/teacher.jpg"
-                    alt="AI Öğretmen"
-                    className="w-16 h-16 rounded-full object-cover border-2 border-purple-300 dark:border-purple-700 shadow-md"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = "none";
-                    }}
-                  />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-2xl">{motivationMessage.emoji}</span>
-                    <span className="text-sm font-semibold text-purple-700 dark:text-purple-300">
-                      AI Öğretmen Selin
-                    </span>
+              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-purple-50 via-pink-50 to-rose-50 dark:from-purple-900/30 dark:via-pink-900/20 dark:to-rose-900/20 border border-purple-200/60 dark:border-purple-800/40 shadow-lg">
+                {/* Decorative background elements */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-200/30 to-pink-200/30 dark:from-purple-700/20 dark:to-pink-700/20 rounded-full -mr-16 -mt-16 blur-2xl"></div>
+                <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-rose-200/30 to-purple-200/30 dark:from-rose-700/20 dark:to-purple-700/20 rounded-full -ml-12 -mb-12 blur-2xl"></div>
+                
+                <div className="relative p-6">
+                  <div className="flex items-start gap-4">
+                    {/* Profile Image */}
+                    <div className="flex-shrink-0 relative">
+                      <div className="absolute inset-0 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full blur-sm opacity-50"></div>
+                      <img
+                        src="/Photos/AiTeacher/teacher.jpg"
+                        alt="AI Öğretmen Selin"
+                        className="relative w-20 h-20 rounded-full object-cover border-4 border-white dark:border-purple-900/50 shadow-xl ring-2 ring-purple-200/50 dark:ring-purple-700/50"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = "none";
+                        }}
+                      />
+                    </div>
+                    
+                    {/* Content */}
+                    <div className="flex-1 min-w-0">
+                      {/* Header with emoji and name */}
+                      <div className="flex items-center gap-3 mb-3">
+                        <span className="text-3xl leading-none">{motivationMessage.emoji}</span>
+                        <div>
+                          <h4 className="text-lg font-bold text-purple-900 dark:text-purple-100 leading-tight">
+                            AI Öğretmen Selin
+                          </h4>
+                          <p className="text-xs text-purple-600/80 dark:text-purple-300/80 font-medium">
+                            Kişisel Mentorunuz
+                          </p>
+                        </div>
+                      </div>
+                      
+                      {/* Message */}
+                      <div className="bg-white/60 dark:bg-gray-900/40 backdrop-blur-sm rounded-xl p-4 border border-purple-100/50 dark:border-purple-800/30 shadow-sm">
+                        <p className="text-sm md:text-base text-gray-800 dark:text-gray-100 leading-relaxed font-medium">
+                          {motivationMessage.message}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-base text-gray-800 dark:text-gray-200 leading-relaxed">
-                    {motivationMessage.message}
-                  </p>
                 </div>
               </div>
             ) : (
-              <div className="text-center py-8">
+              <div className="text-center py-12">
                 <Sparkles className="h-12 w-12 text-gray-400 dark:text-gray-600 mx-auto mb-4" />
                 <p className="text-gray-500 dark:text-gray-400 mb-2 font-medium text-sm">
                   Mesaj yüklenemedi
@@ -763,35 +816,87 @@ export default function DashboardPage() {
       {/* Recent Activity */}
       <Card variant="elevated" hover>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-xl">
-            <Clock className="h-6 w-6 text-gray-600 dark:text-gray-400" />
-            Son Aktiviteler
-          </CardTitle>
+          <div className="flex items-center justify-between">
+            <CardTitle className="flex items-center gap-2 text-xl">
+              <Clock className="h-6 w-6 text-gray-600 dark:text-gray-400" />
+              Haber Akışı
+            </CardTitle>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setActivityType("global")}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                  activityType === "global"
+                    ? "bg-blue-600 text-white shadow-md"
+                    : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+                }`}
+              >
+                Global
+              </button>
+              <button
+                onClick={() => setActivityType("connections")}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                  activityType === "connections"
+                    ? "bg-blue-600 text-white shadow-md"
+                    : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+                }`}
+              >
+                Bağlantılar
+              </button>
+            </div>
+          </div>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
-            {activities.length > 0 ? (
-              activities.map((activity) => (
-                <div key={activity.id} className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-br from-gray-50 to-gray-100/50 dark:from-gray-800/50 dark:to-gray-700/50 border border-gray-200/50 dark:border-gray-700/50">
-                  <div className="text-2xl">{activity.icon}</div>
-                  <div className="flex-1">
-                    <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">{activity.title}</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">{activity.timeAgo}</p>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div className="text-center py-8">
-                <Clock className="h-12 w-12 text-gray-400 dark:text-gray-600 mx-auto mb-4" />
-                <p className="text-gray-500 dark:text-gray-400 mb-2 font-medium text-sm">
-                  Henüz aktivite yok
-                </p>
-                <p className="text-xs text-gray-400 dark:text-gray-500">
-                  Test çözerek veya kurslara başlayarak aktiviteler oluşturun
-                </p>
+          {activitiesLoading ? (
+            <div className="flex items-center justify-center py-8">
+              <div className="flex flex-col items-center gap-3">
+                <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Yükleniyor...</p>
               </div>
-            )}
-          </div>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {activities.length > 0 ? (
+                activities.map((activity: any) => (
+                  <div key={activity.id} className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-br from-gray-50 to-gray-100/50 dark:from-gray-800/50 dark:to-gray-700/50 border border-gray-200/50 dark:border-gray-700/50">
+                    {activity.user && (activityType === "global" || activityType === "connections") && (
+                      <div className="flex-shrink-0">
+                        {activity.user.profileImage ? (
+                          <img
+                            src={activity.user.profileImage}
+                            alt={activity.user.name}
+                            className="w-10 h-10 rounded-full object-cover border-2 border-gray-200 dark:border-gray-700"
+                          />
+                        ) : (
+                          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-semibold text-sm">
+                            {activity.user.name?.charAt(0)?.toUpperCase() || "?"}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                    <div className="text-2xl flex-shrink-0">{activity.icon}</div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">{activity.title}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">{activity.timeAgo}</p>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="text-center py-8">
+                  <Clock className="h-12 w-12 text-gray-400 dark:text-gray-600 mx-auto mb-4" />
+                  <p className="text-gray-500 dark:text-gray-400 mb-2 font-medium text-sm">
+                    {activityType === "connections"
+                      ? "Henüz bağlantılarınızın aktivitesi yok"
+                      : "Henüz aktivite yok"}
+                  </p>
+                  <p className="text-xs text-gray-400 dark:text-gray-500">
+                    {activityType === "connections"
+                      ? "Bağlantılarınız aktivite yaptıkça burada görünecek"
+                      : "Test çözerek veya kurslara başlayarak aktiviteler oluşturun"}
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>

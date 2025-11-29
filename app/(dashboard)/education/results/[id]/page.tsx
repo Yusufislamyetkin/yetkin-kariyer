@@ -111,22 +111,42 @@ export default function QuizResultsPage() {
 
   // Rozet kazanıldığında notification göster
   useEffect(() => {
-    const newBadges = achievement?.badgeResults?.newlyEarnedBadges ?? [];
-    if (newBadges.length > 0) {
-      // Filter out already processed badges
-      const unprocessedBadges = newBadges.filter(
-        (badge) => !processedBadgeIds.current.has(badge.id)
-      );
-      
-      if (unprocessedBadges.length > 0) {
-        // Mark badges as processed
-        unprocessedBadges.forEach((badge) => {
+    if (!achievement) {
+      return;
+    }
+
+    const badgeResults = achievement.badgeResults;
+    if (!badgeResults) {
+      console.log("[BadgeNotification] No badgeResults in achievement");
+      return;
+    }
+
+    const newBadges = badgeResults.newlyEarnedBadges;
+    if (!Array.isArray(newBadges) || newBadges.length === 0) {
+      console.log("[BadgeNotification] No newly earned badges", { badgeResults });
+      return;
+    }
+
+    console.log("[BadgeNotification] Found newly earned badges:", newBadges);
+
+    // Filter out already processed badges
+    const unprocessedBadges = newBadges.filter(
+      (badge) => badge && badge.id && !processedBadgeIds.current.has(badge.id)
+    );
+    
+    if (unprocessedBadges.length > 0) {
+      console.log("[BadgeNotification] Showing badges:", unprocessedBadges);
+      // Mark badges as processed
+      unprocessedBadges.forEach((badge) => {
+        if (badge?.id) {
           processedBadgeIds.current.add(badge.id);
-        });
-        
-        // Show badges in notification modal
-        showBadges(unprocessedBadges);
-      }
+        }
+      });
+      
+      // Show badges in notification modal
+      showBadges(unprocessedBadges);
+    } else {
+      console.log("[BadgeNotification] All badges already processed");
     }
   }, [achievement, showBadges]);
 
@@ -222,15 +242,26 @@ export default function QuizResultsPage() {
     try {
       const raw = sessionStorage.getItem("latest-achievement");
       if (!raw) {
+        console.log("[Achievement] No latest-achievement in sessionStorage");
         return;
       }
+
       const parsed: AchievementPayload = JSON.parse(raw);
+      console.log("[Achievement] Parsed achievement from sessionStorage:", {
+        parsedAttemptId: parsed?.attemptId,
+        currentAttemptId: attempt.id,
+        badgeResults: parsed?.badgeResults,
+      });
+
       if (parsed?.attemptId === attempt.id) {
+        console.log("[Achievement] Setting achievement state");
         setAchievement(parsed);
         sessionStorage.removeItem("latest-achievement");
+      } else {
+        console.log("[Achievement] Attempt ID mismatch, not setting achievement");
       }
     } catch (storageError) {
-      console.error("Achievement verisi okunamadı:", storageError);
+      console.error("[Achievement] Error reading achievement data:", storageError);
     }
   }, [attempt]);
 

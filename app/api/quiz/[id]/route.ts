@@ -145,8 +145,13 @@ export async function POST(
 
     try {
       badgeResults = await checkBadgesForAttempt({ userId, quizAttemptId: quizAttempt.id });
+      console.log("[QuizAPI] Badge check result:", {
+        newlyEarnedCount: badgeResults.newlyEarnedBadges?.length || 0,
+        totalEarned: badgeResults.totalEarned,
+        badges: badgeResults.newlyEarnedBadges,
+      });
     } catch (error) {
-      console.error("Badge check failed:", error);
+      console.error("[QuizAPI] Badge check failed:", error);
     }
 
     return NextResponse.json({ quizAttempt, score, badgeResults, goalResults });

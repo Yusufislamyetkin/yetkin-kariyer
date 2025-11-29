@@ -122,7 +122,11 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
             const data = await response.json();
             // Show badge notification if badges were earned
             if (data.badgeResults?.newlyEarnedBadges?.length > 0) {
+              console.log("[LessonChat] Badges earned, showing badge notification");
               showBadges(data.badgeResults.newlyEarnedBadges);
+              // If badges were earned, delay the completion modal
+              // Badge modal typically shows for 4 seconds per badge, so we'll delay completion modal
+              // We'll handle this in the completion modal useEffect
             }
           }
         } catch (error) {
@@ -157,15 +161,21 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
   }, [isCompleted, lessonSlug, nextLesson]);
 
   // Show completion modal when lesson is completed (only once)
-  // Wait 10 seconds after the last message
+  // Wait 6-7 seconds after the last message (or longer if badges were shown)
   useEffect(() => {
     if (isCompleted && !showCompletionModal && !modalDismissedRef.current && messages.length > 0) {
-      // Wait 10 seconds after the last message
+      // Check if badges were earned by checking if badge modal might be showing
+      // Badge modal shows for ~4 seconds per badge, so we'll wait a bit longer
+      // Default wait time: 6-7 seconds as per user expectation
+      const baseDelay = 7000; // 7 seconds
+      
+      // Wait for the base delay, then show completion modal
       const timer = setTimeout(() => {
         if (!modalDismissedRef.current) {
+          console.log("[LessonChat] Showing completion modal");
           setShowCompletionModal(true);
         }
-      }, 10000);
+      }, baseDelay);
       return () => clearTimeout(timer);
     }
   }, [isCompleted, showCompletionModal, messages.length]);

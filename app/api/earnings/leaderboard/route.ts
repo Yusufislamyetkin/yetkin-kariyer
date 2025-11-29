@@ -73,7 +73,7 @@ export async function GET(request: Request) {
           status: {
             in: ["winner", "finalist"],
           },
-          createdAt: {
+          updatedAt: {
             gte: startDate,
           },
         },
@@ -173,7 +173,7 @@ export async function GET(request: Request) {
       console.error("Error fetching freelancer earnings:", error);
     }
 
-    // Build leaderboard entries
+    // Build leaderboard entries - only include users with actual earnings (> 0)
     const leaderboard: EarningsLeaderboardEntry[] = users
       .map((user: { id: string; name: string | null; email: string; profileImage: string | null }) => {
         const earnings = earningsMap.get(user.id);
@@ -183,6 +183,11 @@ export async function GET(request: Request) {
 
         const totalEarnings =
           earnings.hackathon + earnings.leaderboard + earnings.freelancer;
+
+        // Only include users with actual earnings (greater than 0)
+        if (totalEarnings <= 0) {
+          return null;
+        }
 
         return {
           userId: user.id,

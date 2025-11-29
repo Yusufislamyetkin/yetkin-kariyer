@@ -1,0 +1,179 @@
+[
+  {
+    "id": "modern",
+    "name": "Modern CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "experience",
+        "education",
+        "skills",
+        "languages",
+        "projects",
+        "achievements",
+        "certifications",
+        "references",
+        "hobbies"
+      ],
+      "theme": "modern",
+      "layout": "two-column"
+    }
+  },
+  {
+    "id": "classic",
+    "name": "Klasik CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "experience",
+        "education",
+        "skills",
+        "languages",
+        "projects",
+        "achievements",
+        "certifications",
+        "references",
+        "hobbies"
+      ],
+      "theme": "classic",
+      "layout": "single-column"
+    }
+  },
+  {
+    "id": "creative",
+    "name": "Yaratıcı CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "experience",
+        "education",
+        "skills",
+        "languages",
+        "projects",
+        "achievements",
+        "certifications",
+        "references",
+        "hobbies"
+      ],
+      "theme": "creative",
+      "layout": "highlighted-header"
+    }
+  },
+  {
+    "id": "professional",
+    "name": "Profesyonel CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "experience",
+        "education",
+        "skills",
+        "languages",
+        "projects",
+        "achievements",
+        "certifications",
+        "references",
+        "hobbies"
+      ],
+      "theme": "professional",
+      "layout": "balanced"
+    }
+  },
+  {
+    "id": "minimal",
+    "name": "Minimal CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "experience",
+        "education",
+        "skills",
+        "languages",
+        "projects",
+        "achievements",
+        "certifications",
+        "references",
+        "hobbies"
+      ],
+      "theme": "minimal",
+      "layout": "single-column"
+    }
+  },
+  {
+    "id": "executive",
+    "name": "Yönetici CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "experience",
+        "education",
+        "skills",
+        "languages",
+        "projects",
+        "achievements",
+        "certifications",
+        "references",
+        "hobbies"
+      ],
+      "theme": "executive",
+      "layout": "two-column"
+    }
+  },
+  {
+    "id": "colorful",
+    "name": "Renkli CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "experience",
+        "education",
+        "skills",
+        "languages",
+        "projects",
+        "achievements",
+        "certifications",
+        "references",
+        "hobbies"
+      ],
+      "theme": "colorful",
+      "layout": "two-column"
+    }
+  },
+  {
+    "id": "tech",
+    "name": "Teknoloji CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "experience",
+        "education",
+        "skills",
+        "languages",
+        "projects",
+        "achievements",
+        "certifications",
+        "references",
+        "hobbies"
+      ],
+      "theme": "tech",
+      "layout": "two-column"
+    }
+  }
+]
+

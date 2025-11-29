@@ -134,6 +134,7 @@ CREATE TABLE "app_users" (
     "email" TEXT NOT NULL UNIQUE,
     "password" TEXT NOT NULL,
     "name" TEXT,
+    "iban" TEXT,
     "role" "UserRole" NOT NULL DEFAULT 'candidate',
     "profileImage" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,

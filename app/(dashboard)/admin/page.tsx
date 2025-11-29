@@ -147,6 +147,12 @@ export default function AdminPage() {
     stats: null,
   });
 
+  const [cvTemplatesState, setCvTemplatesState] = useState<ClearStatus>({
+    loading: false,
+    success: null,
+    error: null,
+  });
+
   const handleCreateDotNetCourse = async () => {
     setCourseState({
       loading: true,
@@ -1243,6 +1249,43 @@ export default function AdminPage() {
     }
   };
 
+  const handleSeedCvTemplates = async () => {
+    if (cvTemplatesState.loading) {
+      return; // Prevent multiple simultaneous requests
+    }
+
+    setCvTemplatesState({
+      loading: true,
+      success: null,
+      error: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/seed-cv-templates", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "CV şablonları yüklenirken bir hata oluştu");
+      }
+
+      setCvTemplatesState({
+        loading: false,
+        success: data.message || `${data.created || 0} adet şablon oluşturuldu, ${data.updated || 0} adet şablon güncellendi`,
+        error: null,
+      });
+    } catch (err: any) {
+      setCvTemplatesState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+      });
+    }
+  };
+
   return (
     <div className="space-y-8 animate-fade-in">
       {/* Header */}
@@ -2263,6 +2306,79 @@ export default function AdminPage() {
           )}
          </div>
        </div>
+
+      {/* CV Templates Management Section */}
+      <div className="relative rounded-3xl border border-purple-200/50 bg-gradient-to-br from-white via-purple-50/30 to-pink-50/30 shadow-2xl dark:border-purple-800/50 dark:from-gray-950 dark:via-purple-950/20 dark:to-pink-950/20 backdrop-blur-sm p-6 md:p-8 overflow-hidden">
+        {/* Animated background pattern */}
+        <div className="absolute inset-0 opacity-5 dark:opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundSize: '60px 60px'
+          }}></div>
+        </div>
+        
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-2 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 shadow-lg">
+              <FileText className="h-6 w-6 text-white" />
+            </div>
+            <div>
+              <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 bg-clip-text text-transparent">
+                📄 CV Şablonları Yönetimi
+              </h2>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                JSON dosyasından CV şablonlarını veritabanına yükleyin
+              </p>
+            </div>
+          </div>
+          <p className="text-gray-600 dark:text-gray-400 mb-6 text-sm">
+            data/cv-templates.json dosyasından 8 adet CV şablonunu veritabanına yükler. Mevcut şablonlar güncellenir, yeni şablonlar oluşturulur.
+          </p>
+          
+          <div className="max-w-md">
+            <Button
+              onClick={handleSeedCvTemplates}
+              disabled={cvTemplatesState.loading}
+              size="lg"
+              className="w-full bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 hover:from-purple-700 hover:via-pink-700 hover:to-rose-700 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              {cvTemplatesState.loading ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  Şablonlar Yükleniyor...
+                </>
+              ) : (
+                <>
+                  <FileText className="mr-2 h-5 w-5" />
+                  JSON&apos;dan Şablonları Yükle
+                </>
+              )}
+            </Button>
+          </div>
+
+          {/* Success/Error Messages */}
+          {cvTemplatesState.success && (
+            <div className="mt-6 p-4 rounded-2xl border border-green-300/50 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/40 dark:to-emerald-950/40 dark:border-green-800/50 backdrop-blur-sm shadow-lg">
+              <div className="flex items-start gap-3 text-green-700 dark:text-green-300">
+                <div className="p-2 rounded-lg bg-green-500/20">
+                  <CheckCircle2 className="h-5 w-5 flex-shrink-0" />
+                </div>
+                <div className="text-sm font-semibold">{cvTemplatesState.success}</div>
+              </div>
+            </div>
+          )}
+          {cvTemplatesState.error && (
+            <div className="mt-6 p-4 rounded-2xl border border-red-300/50 bg-gradient-to-br from-red-50 to-rose-50 dark:from-red-950/40 dark:to-rose-950/40 dark:border-red-800/50 backdrop-blur-sm shadow-lg">
+              <div className="flex items-start gap-3 text-red-700 dark:text-red-300">
+                <div className="p-2 rounded-lg bg-red-500/20">
+                  <AlertCircle className="h-5 w-5 flex-shrink-0" />
+                </div>
+                <div className="text-sm font-semibold">{cvTemplatesState.error}</div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
 
       {/* Clear All Course Data Section */}
       <div className="rounded-3xl border border-red-200 bg-white shadow-lg dark:border-red-800 dark:bg-gray-950 p-6 md:p-8">

@@ -2,6 +2,47 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
 
+// GET /api/profile/update - Mevcut kullanıcı profil bilgilerini getirir
+export async function GET() {
+  try {
+    const session = await auth();
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const userId = session.user.id as string;
+
+    const user = await db.user.findUnique({
+      where: { id: userId },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        profileImage: true,
+        role: true,
+        iban: true,
+      },
+    });
+
+    if (!user) {
+      return NextResponse.json(
+        { error: "Kullanıcı bulunamadı" },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json({
+      user,
+    });
+  } catch (error) {
+    console.error("Error fetching profile:", error);
+    return NextResponse.json(
+      { error: "Profil bilgileri alınırken bir hata oluştu" },
+      { status: 500 }
+    );
+  }
+}
+
 // PUT /api/profile/update - Kullanıcı profilini günceller
 export async function PUT(request: Request) {
   try {
@@ -12,7 +53,7 @@ export async function PUT(request: Request) {
 
     const userId = session.user.id as string;
     const body = await request.json();
-    const { name, email, profileImage } = body;
+    const { name, email, profileImage, iban } = body;
 
     // Update only provided fields
     const updateData: any = {};
@@ -31,6 +72,17 @@ export async function PUT(request: Request) {
       updateData.email = email;
     }
     if (profileImage !== undefined) updateData.profileImage = profileImage;
+    if (iban !== undefined) {
+      // Clean IBAN (remove spaces and convert to uppercase)
+      const cleanIban = iban.replace(/\s/g, "").toUpperCase();
+      if (cleanIban.length > 0 && (cleanIban.length < 26 || cleanIban.length > 34)) {
+        return NextResponse.json(
+          { error: "Geçersiz IBAN formatı" },
+          { status: 400 }
+        );
+      }
+      updateData.iban = cleanIban.length > 0 ? cleanIban : null;
+    }
 
     if (Object.keys(updateData).length === 0) {
       return NextResponse.json(
@@ -48,6 +100,7 @@ export async function PUT(request: Request) {
         email: true,
         profileImage: true,
         role: true,
+        iban: true,
       },
     });
 

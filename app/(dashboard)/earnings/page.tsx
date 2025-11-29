@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Trophy, Award, Briefcase, TrendingUp, Calendar, DollarSign, RefreshCw, AlertCircle } from "lucide-react";
+import { Trophy, Award, Briefcase, TrendingUp, Calendar, DollarSign, RefreshCw, AlertCircle, Wallet, User } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
+import { BottomSheet } from "@/app/components/ui/BottomSheet";
+import { Input } from "@/app/components/ui/Input";
 
 interface EarningsItem {
   id: string;
@@ -39,10 +41,46 @@ export default function EarningsPage() {
   const [earnings, setEarnings] = useState<EarningsData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [showTransferModal, setShowTransferModal] = useState(false);
+  const [userInfo, setUserInfo] = useState<{ name: string | null; iban: string | null } | null>(null);
+  const [transferLoading, setTransferLoading] = useState(false);
+  const [transferFormData, setTransferFormData] = useState({
+    fullName: "",
+    iban: "",
+  });
+  const [transferError, setTransferError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchEarnings();
+    fetchUserInfo();
   }, []);
+
+  const fetchUserInfo = async () => {
+    try {
+      const response = await fetch("/api/profile/update");
+      if (response.ok) {
+        const data = await response.json();
+        setUserInfo({
+          name: data.user?.name || null,
+          iban: data.user?.iban || null, // IBAN alanı henüz yok, sonra ekleyeceğiz
+        });
+        if (data.user?.name) {
+          setTransferFormData((prev) => ({
+            ...prev,
+            fullName: data.user.name,
+          }));
+        }
+        if (data.user?.iban) {
+          setTransferFormData((prev) => ({
+            ...prev,
+            iban: data.user.iban,
+          }));
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching user info:", error);
+    }
+  };
 
   const fetchEarnings = async () => {
     try {
@@ -62,6 +100,109 @@ export default function EarningsPage() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleTransferClick = async () => {
+    if (!earnings) return;
+
+    // Check if balance is 0
+    if (earnings.total === 0) {
+      setTransferError("Henüz bir kazanç elde etmediniz");
+      setShowTransferModal(true);
+      return;
+    }
+
+    // Check if user has name and IBAN
+    const hasName = userInfo?.name && userInfo.name.trim() !== "";
+    const hasIban = userInfo?.iban && userInfo.iban.trim() !== "";
+
+    if (!hasName || !hasIban) {
+      // Show modal to collect missing information
+      setShowTransferModal(true);
+      setTransferError(null);
+      return;
+    }
+
+    // Proceed with transfer
+    await processTransfer(userInfo.name!, userInfo.iban!);
+  };
+
+  const processTransfer = async (fullName: string, iban: string) => {
+    try {
+      setTransferLoading(true);
+      setTransferError(null);
+
+      const response = await fetch("/api/earnings/transfer", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fullName,
+          iban,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert(`Başarılı! ${data.amount} ₺ hesabınıza aktarılıyor.`);
+        setShowTransferModal(false);
+        // Refresh user info and earnings (IBAN is already saved in transfer API)
+        await fetchUserInfo();
+        fetchEarnings();
+      } else {
+        if (data.error === "AD_SOYAD_REQUIRED" || data.error === "IBAN_REQUIRED") {
+          setShowTransferModal(true);
+          setTransferError(data.message);
+        } else if (data.error === "ZERO_BALANCE") {
+          setTransferError(data.message);
+          setShowTransferModal(false);
+        } else {
+          setTransferError(data.message || "Transfer işlemi sırasında bir hata oluştu");
+        }
+      }
+    } catch (error) {
+      console.error("Error processing transfer:", error);
+      setTransferError("Transfer işlemi sırasında bir hata oluştu. Lütfen tekrar deneyin.");
+    } finally {
+      setTransferLoading(false);
+    }
+  };
+
+  const handleTransferSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!transferFormData.fullName || transferFormData.fullName.trim() === "") {
+      setTransferError("Lütfen ad ve soyad bilgilerinizi giriniz");
+      return;
+    }
+
+    if (!transferFormData.iban || transferFormData.iban.trim() === "") {
+      setTransferError("Lütfen IBAN bilginizi giriniz");
+      return;
+    }
+
+    // Save name and IBAN to profile first
+    try {
+      await fetch("/api/profile/update", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: transferFormData.fullName,
+          iban: transferFormData.iban.replace(/\s/g, "").toUpperCase(),
+        }),
+      });
+      // Refresh user info
+      await fetchUserInfo();
+    } catch (error) {
+      console.error("Error saving profile:", error);
+    }
+
+    // Update user info with new data and proceed with transfer
+    await processTransfer(transferFormData.fullName, transferFormData.iban);
   };
 
   const getTypeIcon = (type: string) => {
@@ -164,14 +305,14 @@ export default function EarningsPage() {
           </p>
         </div>
         <Button
-          onClick={fetchEarnings}
-          variant="outline"
+          onClick={handleTransferClick}
+          variant="gradient"
           size="sm"
           className="gap-2"
-          disabled={loading}
+          disabled={loading || transferLoading || (earnings?.total === 0)}
         >
-          <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
-          Yenile
+          <Wallet className="h-4 w-4" />
+          Kazancı Hesabıma Aktar
         </Button>
       </div>
 
@@ -329,6 +470,109 @@ export default function EarningsPage() {
           )}
         </CardContent>
       </Card>
+
+      {/* Transfer Modal */}
+      <BottomSheet
+        isOpen={showTransferModal}
+        onClose={() => {
+          setShowTransferModal(false);
+          setTransferError(null);
+        }}
+        title="Kazancı Hesabıma Aktar"
+      >
+        <div className="space-y-6">
+          {earnings && earnings.total === 0 ? (
+            <div className="text-center py-8">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-yellow-500 to-orange-500 flex items-center justify-center shadow-lg mx-auto mb-4">
+                <AlertCircle className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">
+                Henüz bir kazanç elde etmediniz
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                Hackathon&apos;lara katılarak, liderlik tablosunda yer alarak veya freelancer projelerinde çalışarak kazanç elde edebilirsiniz.
+              </p>
+            </div>
+          ) : (
+            <>
+              <div className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30 rounded-xl p-4 border-2 border-blue-200 dark:border-blue-800">
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Aktarılacak Tutar</p>
+                <p className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+                  {earnings?.total.toLocaleString("tr-TR")} ₺
+                </p>
+              </div>
+
+              <form onSubmit={handleTransferSubmit} className="space-y-4">
+                <Input
+                  label="Ad Soyad"
+                  type="text"
+                  placeholder="Adınız ve Soyadınız"
+                  value={transferFormData.fullName}
+                  onChange={(e) =>
+                    setTransferFormData((prev) => ({
+                      ...prev,
+                      fullName: e.target.value,
+                    }))
+                  }
+                  required
+                  error={
+                    transferError && transferError.includes("ad") ? transferError : undefined
+                  }
+                />
+
+                <Input
+                  label="IBAN"
+                  type="text"
+                  placeholder="TR00 0000 0000 0000 0000 0000 00"
+                  value={transferFormData.iban}
+                  onChange={(e) =>
+                    setTransferFormData((prev) => ({
+                      ...prev,
+                      iban: e.target.value.toUpperCase().replace(/\s/g, ""),
+                    }))
+                  }
+                  required
+                  maxLength={26}
+                  error={
+                    transferError && transferError.includes("IBAN") ? transferError : undefined
+                  }
+                  helperText="IBAN numaranızı boşluk olmadan giriniz"
+                />
+
+                {transferError && !transferError.includes("ad") && !transferError.includes("IBAN") && (
+                  <div className="bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800 rounded-lg p-3">
+                    <p className="text-sm text-red-600 dark:text-red-400">{transferError}</p>
+                  </div>
+                )}
+
+                <div className="flex gap-3 pt-4">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => {
+                      setShowTransferModal(false);
+                      setTransferError(null);
+                    }}
+                    className="flex-1"
+                    disabled={transferLoading}
+                  >
+                    İptal
+                  </Button>
+                  <Button
+                    type="submit"
+                    variant="gradient"
+                    className="flex-1"
+                    disabled={transferLoading}
+                    isLoading={transferLoading}
+                  >
+                    Aktar
+                  </Button>
+                </div>
+              </form>
+            </>
+          )}
+        </div>
+      </BottomSheet>
     </div>
   );
 }

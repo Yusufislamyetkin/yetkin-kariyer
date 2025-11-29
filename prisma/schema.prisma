@@ -154,6 +154,7 @@ model User {
   email        String   @unique
   password     String
   name         String?
+  iban         String?  // Bank account IBAN
   role         UserRole @default(candidate)
   profileImage String?
   createdAt    DateTime @default(now())
