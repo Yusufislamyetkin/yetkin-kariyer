@@ -25,6 +25,8 @@ import {
 import { LiveCodingEditor } from "@/app/components/education/LiveCodingEditor";
 import type { LiveCodingLanguage } from "@/types/live-coding";
 import { cn } from "@/lib/utils";
+import { useBadgeNotification } from "@/app/contexts/BadgeNotificationContext";
+import { useDelayedBadgeCheck } from "@/hooks/useDelayedBadgeCheck";
 
 interface Quiz {
   id: string;
@@ -269,6 +271,7 @@ const parseBugFixTasks = (raw: unknown): BugFixTask[] => {
 export default function BugFixPage() {
   const params = useParams();
   const router = useRouter();
+  const { showBadges } = useBadgeNotification();
 
   const resolvedBugFixId =
     typeof params.id === "string"
@@ -288,6 +291,7 @@ export default function BugFixPage() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [mobileTaskSheetOpen, setMobileTaskSheetOpen] = useState(false);
   const [running, setRunning] = useState(false);
+  const bugfixCompletedAtRef = useRef<Date | null>(null);
   const [runResult, setRunResult] = useState<{
     stdout?: string;
     stderr?: string;
@@ -545,6 +549,15 @@ export default function BugFixPage() {
 
   const isAnyTaskEdited = completedTaskCount > 0;
   const submitDisabled = submitting || !isAnyTaskEdited;
+
+  // Delayed badge check for bugfix completion
+  useDelayedBadgeCheck({
+    activityType: "bugfix",
+    activityId: resolvedBugFixId,
+    completionTime: bugfixCompletedAtRef.current,
+    enabled: !!bugfixCompletedAtRef.current,
+    delayMs: 2500,
+  });
 
   const handleSelectTask = useCallback((taskId: string) => {
     setActiveTaskId(taskId);
@@ -830,6 +843,15 @@ export default function BugFixPage() {
       const data = await response.json();
       if (!response.ok) {
         throw new Error(data?.error || "Bug fix gönderimi başarısız oldu.");
+      }
+
+      // Store completion time for badge check
+      bugfixCompletedAtRef.current = new Date();
+
+      // Show badge notification if badges were earned (from API response)
+      if (data.badgeResults?.newlyEarnedBadges?.length > 0) {
+        console.log("[BugFixPage] Badges earned from API, showing badge notification");
+        showBadges(data.badgeResults.newlyEarnedBadges);
       }
 
       if (typeof window !== "undefined" && data?.bugFixAttempt) {

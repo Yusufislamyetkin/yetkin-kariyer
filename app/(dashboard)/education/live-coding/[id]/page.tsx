@@ -27,6 +27,7 @@ import { normalizeLiveCodingPayload } from "@/lib/education/liveCoding";
 import type { LiveCodingTask } from "@/types/live-coding";
 import { useCelebration } from "@/app/contexts/CelebrationContext";
 import { useBadgeNotification } from "@/app/contexts/BadgeNotificationContext";
+import { useDelayedBadgeCheck } from "@/hooks/useDelayedBadgeCheck";
 
 interface Quiz {
   id: string;
@@ -122,6 +123,7 @@ export default function LiveCodingPage() {
     isCorrect?: boolean;
   } | null>(null);
   const [completedTasks, setCompletedTasks] = useState<Set<string>>(new Set());
+  const liveCodingCompletedAtRef = useRef<Date | null>(null);
   const [aiEvaluation, setAiEvaluation] = useState<{
     loading: boolean;
     feedback?: string;
@@ -392,6 +394,28 @@ export default function LiveCodingPage() {
   const completedTaskCount = useMemo(() => {
     return completedTasks.size;
   }, [completedTasks]);
+
+  // Check if all tasks are completed
+  const allTasksCompleted = useMemo(() => {
+    return tasks.length > 0 && completedTasks.size === tasks.length;
+  }, [tasks.length, completedTasks.size]);
+
+  // Store completion time when all tasks are completed
+  useEffect(() => {
+    if (allTasksCompleted && !liveCodingCompletedAtRef.current) {
+      liveCodingCompletedAtRef.current = new Date();
+      console.log("[LiveCodingPage] All tasks completed, storing completion time");
+    }
+  }, [allTasksCompleted]);
+
+  // Delayed badge check for live coding completion
+  useDelayedBadgeCheck({
+    activityType: "live-coding",
+    activityId: resolvedLiveCodingId,
+    completionTime: liveCodingCompletedAtRef.current,
+    enabled: allTasksCompleted && !!liveCodingCompletedAtRef.current,
+    delayMs: 2500,
+  });
 
   const handleSelectTask = useCallback((taskId: string) => {
     setActiveTaskId(taskId);

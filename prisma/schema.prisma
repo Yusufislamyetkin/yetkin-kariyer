@@ -157,6 +157,7 @@ model User {
   iban         String?  // Bank account IBAN
   role         UserRole @default(candidate)
   profileImage String?
+  isBot        Boolean  @default(false)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
@@ -218,6 +219,9 @@ model User {
   questProgresses               QuestProgress[]
   rewardRedemptions             RewardRedemption[]
   inventoryItems                UserInventory[]
+  botCharacter                  BotCharacter?
+  botConfiguration              BotConfiguration?
+  botActivities                 BotActivity[]
 
   @@map("app_users")
 }
@@ -1471,4 +1475,81 @@ model BugFixChallenge {
 
   @@index([language, isPublished, createdAt])
   @@map("bug_fix_challenges")
+}
+
+// Bot System Models
+model BotCharacter {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  name        String
+  persona     String   // Character personality description
+  systemPrompt String  // OpenAI system prompt
+  traits      Json?    // Character traits as JSON
+  expertise   String[] @default([]) // Areas of expertise
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("bot_characters")
+}
+
+model BotConfiguration {
+  id                    String   @id @default(cuid())
+  userId                String   @unique
+  isActive              Boolean  @default(true)
+  minPostsPerDay        Int      @default(1)
+  maxPostsPerDay        Int      @default(3)
+  minCommentsPerDay     Int      @default(0)
+  maxCommentsPerDay     Int      @default(5)
+  minLikesPerDay        Int      @default(0)
+  maxLikesPerDay        Int      @default(10)
+  minTestsPerWeek       Int      @default(0)
+  maxTestsPerWeek       Int      @default(3)
+  minLiveCodingPerWeek  Int      @default(0)
+  maxLiveCodingPerWeek  Int      @default(2)
+  minBugFixPerWeek      Int      @default(0)
+  maxBugFixPerWeek      Int      @default(2)
+  minLessonsPerWeek     Int      @default(0)
+  maxLessonsPerWeek     Int      @default(5)
+  minChatMessagesPerDay Int      @default(0)
+  maxChatMessagesPerDay Int      @default(10)
+  activityHours         Int[]    @default([9, 12, 18, 21]) // Hours when bot is most active
+  lastActivityAt        DateTime?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([isActive, lastActivityAt])
+  @@map("bot_configurations")
+}
+
+enum BotActivityType {
+  POST
+  COMMENT
+  LIKE
+  TEST
+  LIVE_CODING
+  BUG_FIX
+  LESSON
+  CHAT
+}
+
+model BotActivity {
+  id          String           @id @default(cuid())
+  userId      String
+  activityType BotActivityType
+  targetId    String?          // ID of the target (post, comment, test, etc.)
+  details     Json?            // Additional activity details
+  success     Boolean          @default(true)
+  errorMessage String?
+  executedAt  DateTime         @default(now())
+  createdAt   DateTime         @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, executedAt])
+  @@index([activityType, executedAt])
+  @@map("bot_activities")
 }

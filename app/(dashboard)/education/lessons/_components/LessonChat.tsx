@@ -15,6 +15,7 @@ import { Button } from "@/app/components/ui/Button";
 import { Card, CardContent } from "@/app/components/ui/Card";
 import { useCelebration } from "@/app/contexts/CelebrationContext";
 import { useBadgeNotification } from "@/app/contexts/BadgeNotificationContext";
+import { useDelayedBadgeCheck } from "@/hooks/useDelayedBadgeCheck";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 
@@ -69,6 +70,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const hasCelebratedRef = useRef(false);
   const modalDismissedRef = useRef(false);
+  const lessonCompletedAtRef = useRef<Date | null>(null);
 
   // Loading messages rotation
   const loadingMessages = [
@@ -100,6 +102,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
   useEffect(() => {
     if (isCompleted && !hasCelebratedRef.current && messages.length > 0) {
       hasCelebratedRef.current = true;
+      lessonCompletedAtRef.current = new Date(); // Store completion time
       
       // Trigger celebration
       celebrate({
@@ -120,14 +123,12 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
 
           if (response.ok) {
             const data = await response.json();
-            // Show badge notification if badges were earned
+            // Show badge notification if badges were earned (from API response)
             if (data.badgeResults?.newlyEarnedBadges?.length > 0) {
-              console.log("[LessonChat] Badges earned, showing badge notification");
+              console.log("[LessonChat] Badges earned from API, showing badge notification");
               showBadges(data.badgeResults.newlyEarnedBadges);
-              // If badges were earned, delay the completion modal
-              // Badge modal typically shows for 4 seconds per badge, so we'll delay completion modal
-              // We'll handle this in the completion modal useEffect
             }
+            // Note: Delayed badge check hook will also check for badges
           }
         } catch (error) {
           console.error("Error marking lesson as completed:", error);
@@ -138,6 +139,15 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
       markLessonComplete();
     }
   }, [isCompleted, messages.length, lessonTitle, celebrate, lessonSlug, showBadges]);
+
+  // Delayed badge check for lesson completion
+  useDelayedBadgeCheck({
+    activityType: "lesson",
+    activityId: lessonSlug,
+    completionTime: lessonCompletedAtRef.current,
+    enabled: isCompleted && !!lessonCompletedAtRef.current,
+    delayMs: 2500,
+  });
 
   // Find next lesson when lesson is completed
   useEffect(() => {

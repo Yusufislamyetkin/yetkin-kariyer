@@ -24,6 +24,7 @@ import { Button } from "@/app/components/ui/Button";
 import { AIAnalysis } from "@/types";
 import { useBadgeNotification } from "@/app/contexts/BadgeNotificationContext";
 import { useCelebration } from "@/app/contexts/CelebrationContext";
+import { useDelayedBadgeCheck } from "@/hooks/useDelayedBadgeCheck";
 
 interface QuizQuestion {
   id: string;
@@ -264,6 +265,17 @@ export default function QuizResultsPage() {
       console.error("[Achievement] Error reading achievement data:", storageError);
     }
   }, [attempt]);
+
+  // Delayed badge check using the general hook
+  // Determine activity type from achievement source or default to "quiz"
+  const activityType = achievement?.source === "test" ? "test" : "quiz";
+  useDelayedBadgeCheck({
+    activityType,
+    activityId: attempt?.id,
+    completionTime: attempt?.completedAt || null,
+    enabled: !!attempt && !!attempt.completedAt,
+    delayMs: 2500,
+  });
 
 
   if (loading) {
