@@ -54,7 +54,7 @@ export async function POST(request: Request) {
     const userBadges = await db.userBadge.findMany({
       where: {
         userId,
-        createdAt: {
+        earnedAt: {
           gte: checkStartTime,
           lte: checkEndTime,
         },
@@ -63,7 +63,7 @@ export async function POST(request: Request) {
         badge: true,
       },
       orderBy: {
-        createdAt: "desc",
+        earnedAt: "desc",
       },
     });
 
@@ -73,7 +73,7 @@ export async function POST(request: Request) {
         badgeId: ub.badgeId,
         badgeName: ub.badge.name,
         category: ub.badge.category,
-        createdAt: ub.createdAt.toISOString(),
+        earnedAt: ub.earnedAt.toISOString(),
       })),
     });
 
