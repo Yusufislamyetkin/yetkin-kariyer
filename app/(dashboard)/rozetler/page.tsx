@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Medal, Trophy, Crown, Star, Calendar, MessageCircle, Flame } from "lucide-react";
@@ -268,6 +268,31 @@ export default function RozetlerPage() {
     }
   }, [status, router]);
 
+  // Sayfa görünür olduğunda veya focus aldığında rozetleri yenile
+  useEffect(() => {
+    if (status !== "authenticated" || loading) return;
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        console.log("[ROZETLER] Sayfa görünür oldu, rozetler yenileniyor...");
+        checkAllBadges();
+      }
+    };
+
+    const handleFocus = () => {
+      console.log("[ROZETLER] Sayfa focus aldı, rozetler yenileniyor...");
+      checkAllBadges();
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("focus", handleFocus);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("focus", handleFocus);
+    };
+  }, [status, loading, checkAllBadges]);
+
   const fetchBadges = async () => {
     try {
       const response = await fetch("/api/badges");
@@ -308,7 +333,7 @@ export default function RozetlerPage() {
     }
   };
 
-  const fetchUserBadges = async () => {
+  const fetchUserBadges = useCallback(async () => {
     try {
       const response = await fetch("/api/badges/user");
       const data = await response.json();
@@ -328,9 +353,9 @@ export default function RozetlerPage() {
       setUserBadges([]);
       setEarnedBadgeIds(new Set());
     }
-  };
+  }, []);
 
-  const fetchProgress = async () => {
+  const fetchProgress = useCallback(async () => {
     try {
       const response = await fetch("/api/badges/progress");
       const data = await response.json();
@@ -350,25 +375,39 @@ export default function RozetlerPage() {
     } catch (error) {
       console.error("Error fetching badge progress:", error);
     }
-  };
+  }, []);
 
-  const checkAllBadges = async () => {
+  const checkAllBadges = useCallback(async () => {
     try {
+      console.log("[ROZETLER] Tüm rozetler kontrol ediliyor...");
       const response = await fetch("/api/badges/check/all", {
         method: "POST",
       });
       const data = await response.json();
 
       if (response.ok) {
+        const newlyEarnedCount = data.newlyEarnedBadges?.length || 0;
+        if (newlyEarnedCount > 0) {
+          console.log(`[ROZETLER] ${newlyEarnedCount} yeni rozet kazanıldı!`);
+        }
         // Rozet kontrolü tamamlandı, her zaman kullanıcı rozetlerini ve ilerlemeyi yeniden yükle
         // Çünkü ilerleme tamamlanmış rozetler otomatik açılmış olabilir
         await Promise.all([fetchUserBadges(), fetchProgress()]);
+        console.log("[ROZETLER] Rozet kontrolü tamamlandı ve veriler yenilendi.");
+      } else {
+        console.error("[ROZETLER] Rozet kontrolü başarısız:", data.error);
       }
     } catch (error) {
-      // Sessizce hata yok say (kullanıcı deneyimini bozmamak için)
-      console.error("Error checking all badges:", error);
+      // Hata loglama iyileştirildi
+      console.error("[ROZETLER] Rozet kontrolü sırasında hata:", error);
+      // Hata olsa bile kullanıcı rozetlerini yeniden yükle (cache'den gelebilir)
+      try {
+        await fetchUserBadges();
+      } catch (fetchError) {
+        console.error("[ROZETLER] Kullanıcı rozetleri yenilenirken hata:", fetchError);
+      }
     }
-  };
+  }, [fetchUserBadges, fetchProgress]);
 
   if (loading || !session) {
     return (

@@ -72,6 +72,116 @@ async function updateUserStreak(userId: string) {
   return { currentStreak: newStreak, longestStreak, totalDaysActive: userStreak.totalDaysActive + (lastActivityDay?.getTime() !== today.getTime() ? 1 : 0) };
 }
 
+// Rozet kaydetme helper fonksiyonu - hata yakalama, doğrulama ve loglama ile
+async function saveUserBadge(
+  userId: string,
+  badge: any,
+  earnedBadgeIds: Set<string>
+): Promise<boolean> {
+  try {
+    // Önce rozetin zaten kazanılmış olup olmadığını kontrol et
+    if (earnedBadgeIds.has(badge.id)) {
+      console.log(`[BADGE_SAVE] Rozet zaten kazanılmış, atlanıyor. userId: ${userId}, badgeId: ${badge.id}, badgeName: ${badge.name}`);
+      return false;
+    }
+
+    // Veritabanında zaten var mı kontrol et
+    const existingBadge = await db.userBadge.findUnique({
+      where: {
+        userId_badgeId: {
+          userId,
+          badgeId: badge.id,
+        },
+      },
+    });
+
+    if (existingBadge) {
+      console.log(`[BADGE_SAVE] Rozet zaten veritabanında mevcut. userId: ${userId}, badgeId: ${badge.id}, badgeName: ${badge.name}`);
+      earnedBadgeIds.add(badge.id);
+      return false;
+    }
+
+    // Upsert kullanarak kaydet (unique constraint sorunlarını önlemek için)
+    const savedBadge = await db.userBadge.upsert({
+      where: {
+        userId_badgeId: {
+          userId,
+          badgeId: badge.id,
+        },
+      },
+      create: {
+        userId,
+        badgeId: badge.id,
+      },
+      update: {
+        // Update durumunda bir şey değiştirmiyoruz, sadece mevcut kaydı koruyoruz
+      },
+    });
+
+    // Kayıt sonrası doğrulama
+    const verification = await db.userBadge.findUnique({
+      where: {
+        userId_badgeId: {
+          userId,
+          badgeId: badge.id,
+        },
+      },
+    });
+
+    if (!verification) {
+      console.error(`[BADGE_SAVE] Rozet kaydedildi ama doğrulama başarısız! userId: ${userId}, badgeId: ${badge.id}, badgeName: ${badge.name}`);
+      return false;
+    }
+
+    console.log(`[BADGE_SAVE] Rozet başarıyla kaydedildi ve doğrulandı! userId: ${userId}, badgeId: ${badge.id}, badgeName: ${badge.name}, category: ${badge.category}, key: ${badge.key || 'N/A'}`);
+    earnedBadgeIds.add(badge.id);
+    return true;
+  } catch (error) {
+    // Detaylı hata loglama
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    const errorStack = error instanceof Error ? error.stack : undefined;
+    
+    console.error(`[BADGE_SAVE] Rozet kaydedilirken hata oluştu!`, {
+      userId,
+      badgeId: badge.id,
+      badgeName: badge.name,
+      badgeKey: badge.key || 'N/A',
+      badgeCategory: badge.category,
+      error: errorMessage,
+      stack: errorStack,
+    });
+
+    // Unique constraint hatası ise sessizce devam et (rozet zaten var demektir)
+    if (error instanceof Error && (
+      error.message.includes("Unique constraint") ||
+      error.message.includes("P2002") ||
+      error.message.includes("duplicate key")
+    )) {
+      console.log(`[BADGE_SAVE] Unique constraint hatası - rozet zaten mevcut. userId: ${userId}, badgeId: ${badge.id}`);
+      // Veritabanından kontrol et ve earnedBadgeIds'e ekle
+      try {
+        const existing = await db.userBadge.findUnique({
+          where: {
+            userId_badgeId: {
+              userId,
+              badgeId: badge.id,
+            },
+          },
+        });
+        if (existing) {
+          earnedBadgeIds.add(badge.id);
+        }
+      } catch (checkError) {
+        console.error(`[BADGE_SAVE] Mevcut rozet kontrolü sırasında hata:`, checkError);
+      }
+      return false;
+    }
+
+    // Diğer hatalar için throw et
+    throw error;
+  }
+}
+
 export async function checkBadgesForAttempt({
   userId,
   quizAttemptId,
@@ -650,23 +760,9 @@ export async function checkBadgesForAttempt({
     }
 
     if (shouldEarn) {
-      try {
-        await db.userBadge.create({
-          data: {
-            userId,
-            badgeId: badge.id,
-          },
-        });
-
+      const saved = await saveUserBadge(userId, badge, earnedBadgeIds);
+      if (saved) {
         newlyEarnedBadges.push(badge);
-        earnedBadgeIds.add(badge.id);
-        console.log(`[BADGE_CHECK] Rozet kazanıldı! userId: ${userId}, badgeId: ${badge.id}, badgeName: ${badge.name}, category: ${badge.category}`);
-      } catch (error) {
-        console.error(`[BADGE_CHECK] Rozet kaydedilirken hata oluştu. userId: ${userId}, badgeId: ${badge.id}`, error);
-        // Rozet zaten varsa (unique constraint hatası), sessizce devam et
-        if (error instanceof Error && !error.message.includes("Unique constraint")) {
-          throw error;
-        }
       }
     }
   }
@@ -922,15 +1018,10 @@ export async function checkBadgesForActivity({
     }
 
     if (shouldEarn) {
-      await db.userBadge.create({
-        data: {
-          userId,
-          badgeId: badge.id,
-        },
-      });
-
-      newlyEarnedBadges.push(badge);
-      earnedBadgeIds.add(badge.id);
+      const saved = await saveUserBadge(userId, badge, earnedBadgeIds);
+      if (saved) {
+        newlyEarnedBadges.push(badge);
+      }
     }
   }
 
@@ -1049,15 +1140,10 @@ export async function checkSocialInteractionBadges({
     }
 
     if (interactionCount >= criteria.count) {
-      await db.userBadge.create({
-        data: {
-          userId,
-          badgeId: badge.id,
-        },
-      });
-
-      newlyEarnedBadges.push(badge);
-      earnedBadgeIds.add(badge.id);
+      const saved = await saveUserBadge(userId, badge, earnedBadgeIds);
+      if (saved) {
+        newlyEarnedBadges.push(badge);
+      }
     }
   }
 
@@ -1644,23 +1730,9 @@ export async function checkAllUserBadges({
     }
 
     if (shouldEarn) {
-      try {
-        await db.userBadge.create({
-          data: {
-            userId,
-            badgeId: badge.id,
-          },
-        });
-
+      const saved = await saveUserBadge(userId, badge, earnedBadgeIds);
+      if (saved) {
         newlyEarnedBadges.push(badge);
-        earnedBadgeIds.add(badge.id);
-        console.log(`[BADGE_CHECK] Rozet kazanıldı! userId: ${userId}, badgeId: ${badge.id}, badgeName: ${badge.name}, category: ${badge.category}`);
-      } catch (error) {
-        console.error(`[BADGE_CHECK] Rozet kaydedilirken hata oluştu. userId: ${userId}, badgeId: ${badge.id}`, error);
-        // Rozet zaten varsa (unique constraint hatası), sessizce devam et
-        if (error instanceof Error && !error.message.includes("Unique constraint")) {
-          throw error;
-        }
       }
     }
   }
