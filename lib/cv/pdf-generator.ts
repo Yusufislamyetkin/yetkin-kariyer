@@ -38,7 +38,8 @@ export async function generatePDFFromElement(
   }
 
   try {
-    // Store original styles
+    // Store original styles and class name
+    const originalClassName = element.className;
     const originalStyles = {
       display: element.style.display,
       transform: element.style.transform,
@@ -48,7 +49,9 @@ export async function generatePDFFromElement(
       opacity: element.style.opacity,
     };
 
-    // Temporarily make element fully visible and at full scale for PDF generation
+    // Temporarily remove scale classes and make element fully visible at full scale for PDF generation
+    // Remove Tailwind scale classes that might interfere
+    element.className = element.className.replace(/scale-\[.*?\]|scale-\d+/g, '').trim();
     element.style.display = 'block';
     element.style.transform = 'scale(1)';
     element.style.position = 'absolute';
@@ -72,7 +75,8 @@ export async function generatePDFFromElement(
       windowHeight: element.scrollHeight || element.offsetHeight,
     });
 
-    // Restore original styles
+    // Restore original styles and class name
+    element.className = originalClassName;
     element.style.display = originalStyles.display || '';
     element.style.transform = originalStyles.transform || '';
     element.style.position = originalStyles.position || '';
@@ -92,14 +96,21 @@ export async function generatePDFFromElement(
     const pdfHeight = format === 'a4' ? a4Height : 279; // Letter height in mm
 
     // Calculate dimensions maintaining aspect ratio
+    // The element is designed to be 210mm wide, so we maintain that width
+    // and scale height proportionally
     const ratio = imgWidth / imgHeight;
+    
+    // Start with A4 width (210mm)
     let pdfImgWidth = pdfWidth;
     let pdfImgHeight = pdfWidth / ratio;
 
-    // If image height exceeds PDF height, scale down
+    // If content is taller than A4 height, scale down everything proportionally
+    // to fit within one page while preserving format
     if (pdfImgHeight > pdfHeight) {
+      // Calculate scale factor to fit height within A4
+      const scaleFactor = pdfHeight / pdfImgHeight;
       pdfImgHeight = pdfHeight;
-      pdfImgWidth = pdfHeight * ratio;
+      pdfImgWidth = pdfImgWidth * scaleFactor;
     }
 
     // Create PDF
@@ -112,25 +123,11 @@ export async function generatePDFFromElement(
     // Convert canvas to image data
     const imgData = canvas.toDataURL('image/png', quality);
 
-    // Add image to PDF
-    pdf.addImage(imgData, 'PNG', 0, 0, pdfImgWidth, pdfImgHeight);
+    // Center the image horizontally if it's narrower than page width
+    const xPosition = (pdfWidth - pdfImgWidth) / 2;
 
-    // If content is taller than one page, add additional pages
-    const pageHeight = pdf.internal.pageSize.getHeight();
-    const pageWidth = pdf.internal.pageSize.getWidth();
-    let heightLeft = pdfImgHeight;
-    let position = 0;
-
-    // Add pages if needed
-    while (heightLeft > 0) {
-      if (position < 0) {
-        pdf.addPage();
-        position = 0;
-      }
-      pdf.addImage(imgData, 'PNG', 0, position, pdfImgWidth, pdfImgHeight);
-      heightLeft -= pageHeight;
-      position -= pageHeight;
-    }
+    // Add image to PDF (single page, scaled to fit)
+    pdf.addImage(imgData, 'PNG', xPosition, 0, pdfImgWidth, pdfImgHeight);
 
     // Save PDF
     pdf.save(filename);
@@ -191,9 +188,12 @@ export async function generatePDFFromElements(
       let pdfImgWidth = pdfWidth;
       let pdfImgHeight = pdfWidth / ratio;
 
+      // If content is taller than A4 height, scale down to fit within one page
+      // This ensures format is preserved and everything fits on one A4 page
       if (pdfImgHeight > pdfHeight) {
+        const scaleFactor = pdfHeight / pdfImgHeight;
         pdfImgHeight = pdfHeight;
-        pdfImgWidth = pdfHeight * ratio;
+        pdfImgWidth = pdfImgWidth * scaleFactor;
       }
 
       const imgData = canvas.toDataURL('image/png', quality);
@@ -202,23 +202,11 @@ export async function generatePDFFromElements(
         pdf.addPage();
       }
 
-      // Add image to PDF
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfImgWidth, pdfImgHeight);
+      // Center the image horizontally if it's narrower than page width
+      const xPosition = (pdfWidth - pdfImgWidth) / 2;
 
-      // Handle multi-page content
-      const pageHeight = pdf.internal.pageSize.getHeight();
-      let heightLeft = pdfImgHeight;
-      let position = 0;
-
-      while (heightLeft > 0) {
-        if (position < 0) {
-          pdf.addPage();
-          position = 0;
-        }
-        pdf.addImage(imgData, 'PNG', 0, position, pdfImgWidth, pdfImgHeight);
-        heightLeft -= pageHeight;
-        position -= pageHeight;
-      }
+      // Add image to PDF (single page per element, scaled to fit)
+      pdf.addImage(imgData, 'PNG', xPosition, 0, pdfImgWidth, pdfImgHeight);
 
       isFirstPage = false;
     } catch (error) {

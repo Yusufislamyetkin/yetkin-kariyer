@@ -6,7 +6,7 @@ import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
-import { Clock, CheckCircle, ChevronLeft, ChevronRight, AlertCircle, ArrowLeft, X, Sparkles, Brain, MessageSquare } from "lucide-react";
+import { Clock, CheckCircle, ChevronLeft, ChevronRight, AlertCircle, ArrowLeft, X, Sparkles, Brain, MessageSquare, Zap, Target, TrendingUp, BookOpen } from "lucide-react";
 import { routeToTechnology, technologyToRoute } from "@/lib/utils/technology-normalize";
 
 interface Question {
@@ -69,6 +69,21 @@ export default function QuizDetailPage() {
       icon: MessageSquare,
       text: "Test Sonrası Soruları AI İle Tartışmayı Unutmayın",
       color: "text-rose-600 dark:text-rose-400",
+    },
+    {
+      icon: Zap,
+      text: "Soru Zorluk Seviyeleri Optimize Ediliyor",
+      color: "text-indigo-600 dark:text-indigo-400",
+    },
+    {
+      icon: Target,
+      text: "İçerik Kalitesi ve Doğruluğu Kontrol Ediliyor",
+      color: "text-violet-600 dark:text-violet-400",
+    },
+    {
+      icon: TrendingUp,
+      text: "Öğrenme Hedeflerinize Uygun Sorular Hazırlanıyor",
+      color: "text-fuchsia-600 dark:text-fuchsia-400",
     },
   ];
 
@@ -262,7 +277,7 @@ export default function QuizDetailPage() {
           <CardContent className="p-8">
             <div className="flex flex-col items-center gap-6">
               {/* Animated Icon */}
-              <div className="relative">
+              <div className="relative pt-4">
                 <div className="w-20 h-20 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-rose-500 flex items-center justify-center animate-pulse">
                   <CurrentIcon className={`h-10 w-10 ${currentColor.replace('text-', 'text-white')} animate-bounce`} />
                 </div>

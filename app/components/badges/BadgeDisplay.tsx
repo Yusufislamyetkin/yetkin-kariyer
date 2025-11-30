@@ -87,7 +87,7 @@ export function BadgeDisplay({
 
   return (
     <div
-      className={`group relative transition-transform duration-200 ${earned ? "hover:-translate-y-1" : "opacity-60"}`}
+      className={`group relative transition-transform duration-200 flex flex-col h-full ${earned ? "hover:-translate-y-1" : "opacity-60"}`}
       onClick={onClick}
     >
       <div className="relative">
@@ -145,54 +145,69 @@ export function BadgeDisplay({
           )}
         </div>
       </div>
-      <div className="mt-3 text-center space-y-2">
-        <p className={`text-sm font-semibold tracking-wide ${earned ? "text-gray-900 dark:text-gray-100" : "text-gray-500 dark:text-gray-400"}`}>
-          {badge.name}
-        </p>
-        {size !== "sm" && (
-          <div className="flex flex-col items-center gap-1">
-            <div className="flex items-center justify-center gap-2 text-xs text-gray-500 dark:text-gray-400">
-              <span className="font-semibold">{badge.points} puan</span>
-            </div>
-            {badge.tier && (
-              <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold uppercase tracking-wide bg-gradient-to-r ${tierColors[badge.tier]} text-white shadow-sm`}>
-                {tierNames[badge.tier]}
-              </span>
-            )}
-          </div>
-        )}
-        {badge.description && (
-          <p className="text-xs text-gray-600 dark:text-gray-400 px-2 mt-2 leading-relaxed">
-            {badge.description}
+      <div className="mt-3 text-center space-y-2 flex-1 flex flex-col">
+        <div className="flex-1">
+          <p className={`text-sm font-semibold tracking-wide ${earned ? "text-gray-900 dark:text-gray-100" : "text-gray-500 dark:text-gray-400"}`}>
+            {badge.name}
           </p>
-        )}
-        {progress && progress.target > 0 && (
-          <div className="mt-3 space-y-1">
-            <div className="flex items-center justify-between text-xs px-2">
-              <span className={`font-medium ${earned ? "text-gray-700 dark:text-gray-300" : "text-gray-500 dark:text-gray-400"}`}>
-                İlerleme
-              </span>
-              <span className={`font-semibold ${earned ? "text-emerald-600 dark:text-emerald-400" : "text-blue-600 dark:text-blue-400"}`}>
-                {progress.current} / {progress.target}
-              </span>
+          {size !== "sm" && (
+            <div className="flex flex-col items-center gap-1 mt-1">
+              <div className="flex items-center justify-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                <span className="font-semibold">{badge.points} puan</span>
+              </div>
+              {badge.tier && (
+                <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold uppercase tracking-wide bg-gradient-to-r ${tierColors[badge.tier]} text-white shadow-sm`}>
+                  {tierNames[badge.tier]}
+                </span>
+              )}
             </div>
-            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
-              <div
-                className={`h-full transition-all duration-300 rounded-full ${
-                  earned
-                    ? "bg-gradient-to-r from-emerald-500 to-emerald-600"
-                    : "bg-gradient-to-r from-blue-500 to-blue-600"
-                }`}
-                style={{ width: `${progress.percentage}%` }}
-              />
-            </div>
-            {progress.isCompleted && (
-              <p className="text-xs text-center text-emerald-600 dark:text-emerald-400 font-medium px-2">
-                Tamamlandı ✓
+          )}
+          {badge.description && (
+            <p className="text-xs text-gray-600 dark:text-gray-400 px-2 mt-2 leading-relaxed">
+              {badge.description}
+            </p>
+          )}
+        </div>
+        <div className="mt-3 min-h-[4.5rem] flex flex-col justify-end">
+          {progress && progress.target > 0 ? (
+            <div className="space-y-1">
+              <div className="flex items-center justify-between text-xs px-2">
+                <span className={`font-medium ${earned ? "text-gray-700 dark:text-gray-300" : "text-gray-500 dark:text-gray-400"}`}>
+                  İlerleme
+                </span>
+                <span className={`font-semibold ${earned ? "text-emerald-600 dark:text-emerald-400" : "text-blue-600 dark:text-blue-400"}`}>
+                  {progress.current} / {progress.target}
+                </span>
+              </div>
+              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
+                <div
+                  className={`h-full transition-all duration-300 rounded-full ${
+                    earned
+                      ? "bg-gradient-to-r from-emerald-500 to-emerald-600"
+                      : "bg-gradient-to-r from-blue-500 to-blue-600"
+                  }`}
+                  style={{ width: `${progress.percentage}%` }}
+                />
+              </div>
+              <p className={`text-xs text-center font-medium px-2 mt-1 min-h-[1.25rem] ${progress.isCompleted ? "text-emerald-600 dark:text-emerald-400" : "text-transparent"}`}>
+                {progress.isCompleted ? "Tamamlandı ✓" : "\u00A0"}
               </p>
-            )}
-          </div>
-        )}
+            </div>
+          ) : (
+            <div className="space-y-1">
+              <div className="flex items-center justify-between text-xs px-2 opacity-0 pointer-events-none">
+                <span className="font-medium">İlerleme</span>
+                <span className="font-semibold">0 / 0</span>
+              </div>
+              <div className="w-full bg-transparent rounded-full h-2 overflow-hidden">
+                <div className="h-full rounded-full" />
+              </div>
+              <p className="text-xs text-center text-transparent font-medium px-2 mt-1 min-h-[1.25rem]">
+                &nbsp;
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

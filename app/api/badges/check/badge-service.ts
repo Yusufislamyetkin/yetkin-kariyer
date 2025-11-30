@@ -205,7 +205,7 @@ export async function checkBadgesForAttempt({
       select: { badgeId: true },
     });
 
-    const earnedBadgeIds = new Set(userBadges.map((ub: { badgeId: string }) => ub.badgeId));
+    const earnedBadgeIds = new Set<string>(userBadges.map((ub: { badgeId: string }) => ub.badgeId as string));
     const newlyEarnedBadges: any[] = [];
     
     console.log(`[BADGE_CHECK] Toplam ${allBadges.length} rozet bulundu, kullanıcının ${earnedBadgeIds.size} rozeti var.`);
@@ -811,7 +811,7 @@ export async function checkBadgesForActivity({
     select: { badgeId: true },
   });
 
-  const earnedBadgeIds = new Set(userBadges.map((ub: { badgeId: string }) => ub.badgeId));
+    const earnedBadgeIds = new Set<string>(userBadges.map((ub: { badgeId: string }) => ub.badgeId as string));
   const newlyEarnedBadges: any[] = [];
 
   // Streak güncellemesi yap
@@ -1069,7 +1069,7 @@ export async function checkSocialInteractionBadges({
     select: { badgeId: true },
   });
 
-  const earnedBadgeIds = new Set(userBadges.map((ub: { badgeId: string }) => ub.badgeId));
+    const earnedBadgeIds = new Set<string>(userBadges.map((ub: { badgeId: string }) => ub.badgeId as string));
   const newlyEarnedBadges: any[] = [];
 
   for (const badge of allBadges) {
@@ -1186,7 +1186,7 @@ export async function checkAllUserBadges({
     select: { badgeId: true },
   });
 
-  const earnedBadgeIds = new Set(userBadges.map((ub: { badgeId: string }) => ub.badgeId));
+    const earnedBadgeIds = new Set<string>(userBadges.map((ub: { badgeId: string }) => ub.badgeId as string));
   const newlyEarnedBadges: any[] = [];
 
   // Kullanıcının tüm quiz attempt'lerini al

@@ -2,6 +2,10 @@ import ModernTemplate from './templates/ModernTemplate';
 import ClassicTemplate from './templates/ClassicTemplate';
 import CreativeTemplate from './templates/CreativeTemplate';
 import ProfessionalTemplate from './templates/ProfessionalTemplate';
+import MinimalTemplate from './templates/MinimalTemplate';
+import ExecutiveTemplate from './templates/ExecutiveTemplate';
+import ColorfulTemplate from './templates/ColorfulTemplate';
+import TechTemplate from './templates/TechTemplate';
 
 interface CVData {
   personalInfo: {
@@ -85,6 +89,14 @@ export default function CVRenderer({ data, templateId, className = '', id }: CVR
       return <CreativeTemplate data={data} />;
     } else if (normalizedTemplateId.includes('professional') || normalizedTemplateId === 'template_4') {
       return <ProfessionalTemplate data={data} />;
+    } else if (normalizedTemplateId.includes('minimal')) {
+      return <MinimalTemplate data={data} />;
+    } else if (normalizedTemplateId.includes('executive')) {
+      return <ExecutiveTemplate data={data} />;
+    } else if (normalizedTemplateId.includes('colorful')) {
+      return <ColorfulTemplate data={data} />;
+    } else if (normalizedTemplateId.includes('tech')) {
+      return <TechTemplate data={data} />;
     }
     // Default to Modern template
     return <ModernTemplate data={data} />;

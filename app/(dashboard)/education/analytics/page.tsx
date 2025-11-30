@@ -443,22 +443,32 @@ export default function AnalyticsPage() {
         {
           label: "Toplam Aktivite",
           data: analytics.activity.timeline.map((day) => day.total),
+          borderColor: "#2563eb",
+          backgroundColor: "rgba(37, 99, 235, 0.2)",
         },
         {
           label: "Test",
           data: analytics.activity.timeline.map((day) => day.tests),
+          borderColor: "#f97316",
+          backgroundColor: "rgba(249, 115, 22, 0.2)",
         },
         {
           label: "Canlı Kodlama",
           data: analytics.activity.timeline.map((day) => day.liveCoding),
+          borderColor: "#a855f7",
+          backgroundColor: "rgba(168, 85, 247, 0.2)",
         },
         {
           label: "Bug Fix",
           data: analytics.activity.timeline.map((day) => day.bugFix),
+          borderColor: "#eab308",
+          backgroundColor: "rgba(234, 179, 8, 0.2)",
         },
         {
           label: "Ders",
           data: analytics.activity.timeline.map((day) => day.course ?? 0),
+          borderColor: "#10b981",
+          backgroundColor: "rgba(16, 185, 129, 0.2)",
         },
       ],
     };

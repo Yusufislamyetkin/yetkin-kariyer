@@ -61,6 +61,7 @@ export default function EarningsLeaderboardPage() {
   const [period, setPeriod] = useState<"daily" | "monthly">("daily");
   const [leaderboard, setLeaderboard] = useState<EarningsLeaderboardEntry[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [visibleCount, setVisibleCount] = useState(20);
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -72,6 +73,11 @@ export default function EarningsLeaderboardPage() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status, period]);
+
+  useEffect(() => {
+    // Reset visible count when period changes
+    setVisibleCount(20);
+  }, [period]);
 
   const fetchLeaderboard = async () => {
     try {
@@ -104,7 +110,12 @@ export default function EarningsLeaderboardPage() {
   );
 
   const topThree = useMemo(() => leaderboard.slice(0, 3), [leaderboard]);
-  const restOfLeaderboard = useMemo(() => leaderboard.slice(3), [leaderboard]);
+  const allRestOfLeaderboard = useMemo(() => leaderboard.slice(3), [leaderboard]);
+  const restOfLeaderboard = useMemo(() => 
+    allRestOfLeaderboard.slice(0, visibleCount), 
+    [allRestOfLeaderboard, visibleCount]
+  );
+  const hasMoreUsers = allRestOfLeaderboard.length > visibleCount;
 
   if (loading && leaderboard.length === 0) {
     return (
@@ -610,6 +621,17 @@ export default function EarningsLeaderboardPage() {
                       );
                     })}
                   </ol>
+                  {hasMoreUsers && (
+                    <div className="flex justify-center pt-6">
+                      <button
+                        onClick={() => setVisibleCount((prev) => prev + 20)}
+                        className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-500 via-indigo-500 to-cyan-500 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                      >
+                        <Users className="h-5 w-5" />
+                        Diğer Kullanıcıları Gör
+                      </button>
+                    </div>
+                  )}
                 </div>
               )}
             </>

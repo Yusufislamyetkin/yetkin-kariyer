@@ -254,45 +254,6 @@ export default function RozetlerPage() {
     other: "Diğer",
   };
 
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/login");
-    } else if (status === "authenticated") {
-      // Her iki API çağrısını koordine et ve loading state'i yönet
-      Promise.all([fetchBadges(), fetchUserBadges(), fetchProgress()])
-        .finally(() => {
-          setLoading(false);
-        });
-      // Tüm rozetleri kontrol et (eksik olanları tespit et)
-      checkAllBadges();
-    }
-  }, [status, router]);
-
-  // Sayfa görünür olduğunda veya focus aldığında rozetleri yenile
-  useEffect(() => {
-    if (status !== "authenticated" || loading) return;
-
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === "visible") {
-        console.log("[ROZETLER] Sayfa görünür oldu, rozetler yenileniyor...");
-        checkAllBadges();
-      }
-    };
-
-    const handleFocus = () => {
-      console.log("[ROZETLER] Sayfa focus aldı, rozetler yenileniyor...");
-      checkAllBadges();
-    };
-
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    window.addEventListener("focus", handleFocus);
-
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-      window.removeEventListener("focus", handleFocus);
-    };
-  }, [status, loading, checkAllBadges]);
-
   const fetchBadges = async () => {
     try {
       const response = await fetch("/api/badges");
@@ -408,6 +369,45 @@ export default function RozetlerPage() {
       }
     }
   }, [fetchUserBadges, fetchProgress]);
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login");
+    } else if (status === "authenticated") {
+      // Her iki API çağrısını koordine et ve loading state'i yönet
+      Promise.all([fetchBadges(), fetchUserBadges(), fetchProgress()])
+        .finally(() => {
+          setLoading(false);
+        });
+      // Tüm rozetleri kontrol et (eksik olanları tespit et)
+      checkAllBadges();
+    }
+  }, [status, router]);
+
+  // Sayfa görünür olduğunda veya focus aldığında rozetleri yenile
+  useEffect(() => {
+    if (status !== "authenticated" || loading) return;
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        console.log("[ROZETLER] Sayfa görünür oldu, rozetler yenileniyor...");
+        checkAllBadges();
+      }
+    };
+
+    const handleFocus = () => {
+      console.log("[ROZETLER] Sayfa focus aldı, rozetler yenileniyor...");
+      checkAllBadges();
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("focus", handleFocus);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("focus", handleFocus);
+    };
+  }, [status, loading, checkAllBadges]);
 
   if (loading || !session) {
     return (

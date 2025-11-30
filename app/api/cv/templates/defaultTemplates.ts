@@ -62,6 +62,46 @@ export const DEFAULT_TEMPLATES: TemplateResponse[] = [
       layout: "balanced",
     },
   },
+  {
+    id: "minimal",
+    name: "Minimal CV",
+    preview: null,
+    structure: {
+      ...BASE_STRUCTURE,
+      theme: "minimal",
+      layout: "single-column",
+    },
+  },
+  {
+    id: "executive",
+    name: "Yönetici CV",
+    preview: null,
+    structure: {
+      ...BASE_STRUCTURE,
+      theme: "executive",
+      layout: "two-column",
+    },
+  },
+  {
+    id: "colorful",
+    name: "Renkli CV",
+    preview: null,
+    structure: {
+      ...BASE_STRUCTURE,
+      theme: "colorful",
+      layout: "two-column",
+    },
+  },
+  {
+    id: "tech",
+    name: "Teknoloji CV",
+    preview: null,
+    structure: {
+      ...BASE_STRUCTURE,
+      theme: "tech",
+      layout: "two-column",
+    },
+  },
 ];
 
 

@@ -22,7 +22,7 @@ export function CareerPlanSection({ careerPlan }: CareerPlanSectionProps) {
     return (
       <Card variant="glass" className="relative overflow-hidden">
         <CardContent className="py-12 text-center">
-          <Target className="w-16 h-16 text-gray-400 dark:text-gray-600 mx-auto mb-4" />
+          <Target className="w-16 h-16 text-gray-400 dark:text-gray-600 mx-auto mb-4 pt-4" />
           <p className="text-gray-500 dark:text-gray-400 mb-4">
             Henüz kariyer planınız yok
           </p>

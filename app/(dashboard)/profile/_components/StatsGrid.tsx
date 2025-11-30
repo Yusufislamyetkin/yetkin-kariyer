@@ -36,15 +36,14 @@ interface StatsGridProps {
 export function StatsGrid({ stats, leaderboardRank }: StatsGridProps) {
   const statCards = [
     {
-      title: "Test Sayıları",
+      title: "Eğitim Sayıları",
       icon: FileText,
       color: "from-blue-500 to-cyan-500",
       items: [
-        { label: "Quiz", value: stats.quizAttempts },
-        { label: "Test", value: stats.testAttempts },
+        { label: "Konu Bitirme Sayısı", value: stats.quizAttempts },
+        { label: "Test Bitirme", value: stats.testAttempts },
         { label: "Live Coding", value: stats.liveCodingAttempts },
         { label: "Bug Fix", value: stats.bugFixAttempts },
-        { label: "Hackathon", value: stats.hackatonAttempts },
       ],
     },
     {
@@ -52,11 +51,10 @@ export function StatsGrid({ stats, leaderboardRank }: StatsGridProps) {
       icon: Target,
       color: "from-purple-500 to-pink-500",
       items: [
-        { label: "Quiz", value: `${stats.averageScores.quiz}%` },
+        { label: "Konu", value: `${stats.averageScores.quiz}%` },
         { label: "Test", value: `${stats.averageScores.test}%` },
-        { label: "Live Coding", value: `${stats.averageScores.liveCoding}%` },
+        { label: "Canlı Kodlama", value: `${stats.averageScores.liveCoding}%` },
         { label: "Bug Fix", value: `${stats.averageScores.bugFix}%` },
-        { label: "Hackathon", value: `${stats.averageScores.hackaton}%` },
       ],
     },
     {

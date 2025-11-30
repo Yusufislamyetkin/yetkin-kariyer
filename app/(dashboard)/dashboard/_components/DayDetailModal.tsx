@@ -123,6 +123,8 @@ export function DayDetailModal({ day, onClose }: DayDetailModalProps) {
               >
                 {day.allTasksCompleted
                   ? "Tüm görevler tamamlandı! ✓"
+                  : !day.isToday && !day.isFuture
+                  ? "Tüm görevler başarısız"
                   : "Tüm görevler henüz tamamlanmadı"}
               </span>
             </div>
@@ -192,7 +194,9 @@ export function DayDetailModal({ day, onClose }: DayDetailModalProps) {
                     )}
                     {!task.completed && (
                       <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-                        Bu görev henüz tamamlanmadı
+                        {!day.isToday && !day.isFuture
+                          ? "Görev Başarısız"
+                          : "Bu görev henüz tamamlanmadı"}
                       </p>
                     )}
                   </div>

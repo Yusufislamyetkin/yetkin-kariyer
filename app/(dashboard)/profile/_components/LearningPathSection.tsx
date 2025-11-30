@@ -21,7 +21,7 @@ export function LearningPathSection({ learningPath }: LearningPathSectionProps) 
     return (
       <Card variant="glass" className="relative overflow-hidden">
         <CardContent className="py-12 text-center">
-          <BookOpen className="w-16 h-16 text-gray-400 dark:text-gray-600 mx-auto mb-4" />
+          <BookOpen className="w-16 h-16 text-gray-400 dark:text-gray-600 mx-auto mb-4 pt-4" />
           <p className="text-gray-500 dark:text-gray-400 mb-4">
             Henüz öğrenme yolunuz yok
           </p>
