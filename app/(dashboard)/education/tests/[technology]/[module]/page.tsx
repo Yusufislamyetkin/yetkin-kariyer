@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { ChevronLeft, FileText, Clock, ArrowRight, Sparkles, ArrowLeft, Code2, BookOpen } from "lucide-react";
+import { ChevronLeft, FileText, Clock, ArrowRight, Sparkles, ArrowLeft, Code2, BookOpen, Eye } from "lucide-react";
 import { Card, CardContent } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
 
@@ -14,6 +14,8 @@ interface Test {
   level: string | null;
   questionCount: number;
   timeLimitMinutes: number | null;
+  hasAttempted?: boolean;
+  lastAttemptId?: string | null;
 }
 
 export default function ModuleTestsPage() {
@@ -259,15 +261,25 @@ export default function ModuleTestsPage() {
                         </div>
                       </div>
                     </div>
-                    <div className="relative z-10 shrink-0">
+                    <div className="relative z-10 shrink-0 flex gap-2 flex-wrap">
                       <Button 
                         href={`/education/tests/${encodeURIComponent(decodedTechnology)}/${encodeURIComponent(decodedModule)}/${test.id}`}
                         className="w-full sm:w-auto inline-flex items-center gap-2"
                         variant="primary"
                       >
-                        Teste Başla
+                        {test.hasAttempted ? "Testi Yeniden Çöz" : "Teste Başla"}
                         <ArrowRight className="h-4 w-4" />
                       </Button>
+                      {test.hasAttempted && test.lastAttemptId && (
+                        <Button 
+                          href={`/education/results/${test.lastAttemptId}`}
+                          className="w-full sm:w-auto inline-flex items-center gap-2"
+                          variant="outline"
+                        >
+                          <Eye className="h-4 w-4" />
+                          Sonuçları Görüntüle
+                        </Button>
+                      )}
                     </div>
                   </div>
                 );

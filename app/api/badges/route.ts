@@ -62,6 +62,7 @@ async function importBadgesFromJson() {
           "silver": "silver",
           "gold": "gold",
           "platinum": "platinum",
+          "diamond": "diamond",
         };
 
         const tier = badgeData.tier ? tierMap[badgeData.tier] : null;
@@ -94,28 +95,46 @@ async function importBadgesFromJson() {
         };
 
         // Upsert işlemi (key veya id ile kontrol et)
-        const existingBadge = await db.badge.findFirst({
-          where: {
-            OR: [
-              { id: badgeData.id },
-              ...(badgeData.key ? [{ key: badgeData.key }] : []),
-            ],
-          },
-        });
+        // Önce key ile kontrol et (daha güvenilir)
+        let existingBadge = null;
+        if (badgeData.key) {
+          existingBadge = await db.badge.findUnique({
+            where: { key: badgeData.key },
+          });
+        }
+        
+        // Key ile bulunamazsa id ile kontrol et
+        if (!existingBadge && badgeData.id) {
+          existingBadge = await db.badge.findUnique({
+            where: { id: badgeData.id },
+          });
+        }
 
         if (existingBadge) {
-          // Güncelle
-          await db.badge.update({
-            where: { id: existingBadge.id },
-            data: badgePayload,
-          });
-          updated++;
+          // Güncelle - tüm alanları güncelle
+          try {
+            await db.badge.update({
+              where: { id: existingBadge.id },
+              data: badgePayload,
+            });
+            updated++;
+          } catch (updateError: any) {
+            // Update hatası (örn: unique constraint) durumunda logla ve devam et
+            console.error(`[BADGES_AUTO_IMPORT] Update hatası (${badgeData.id || badgeData.key || 'unknown'}):`, updateError.message);
+            skipped++;
+          }
         } else {
           // Oluştur
-          await db.badge.create({
-            data: badgePayload,
-          });
-          created++;
+          try {
+            await db.badge.create({
+              data: badgePayload,
+            });
+            created++;
+          } catch (createError: any) {
+            // Create hatası (örn: unique constraint) durumunda logla ve devam et
+            console.error(`[BADGES_AUTO_IMPORT] Create hatası (${badgeData.id || badgeData.key || 'unknown'}):`, createError.message);
+            skipped++;
+          }
         }
       } catch (error: any) {
         console.error(`[BADGES_AUTO_IMPORT] Rozet işlenirken hata (${badgeData.id || badgeData.key || 'unknown'}):`, error.message);
@@ -123,8 +142,11 @@ async function importBadgesFromJson() {
       }
     }
 
-    console.log(`[BADGES_AUTO_IMPORT] Import completed: ${created} created, ${updated} updated, ${skipped} skipped`);
-    return { success: true, imported: created + updated };
+    // Import sonrası toplam rozet sayısını kontrol et
+    const finalCount = await db.badge.count();
+    console.log(`[BADGES_AUTO_IMPORT] Import completed: ${created} created, ${updated} updated, ${skipped} skipped. Toplam DB rozet sayısı: ${finalCount}`);
+    
+    return { success: true, imported: created + updated, total: finalCount };
   } catch (error: any) {
     console.error("[BADGES_AUTO_IMPORT] Error:", error);
     return { success: false, imported: 0 };

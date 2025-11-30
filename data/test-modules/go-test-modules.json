@@ -1,0 +1,1577 @@
+{
+  "overview": {
+    "description": "Go (Golang), Google tarafından geliştirilen açık kaynaklı bir programlama dilidir. Bu kapsamlı kurs ile Go'nun temellerinden ileri seviye konularına kadar her şeyi öğreneceksiniz. Yüksek performanslı, eşzamanlı programlama ve mikroservis mimarileri geliştirme becerileri kazanacaksınız.",
+    "estimatedDurationMinutes": 6750
+  },
+  "learningObjectives": [
+    "Go programlama dilinin temel kavramlarını ve syntax'ını anlamak",
+    "Goroutines ve channels ile eşzamanlı programlama yapmak",
+    "Go packages ve modules yapısını öğrenmek",
+    "Web uygulamaları ve RESTful API'ler geliştirmek",
+    "Database işlemleri ve ORM kullanımını öğrenmek",
+    "Mikroservis mimarileri geliştirmek",
+    "Testing ve deployment stratejilerini öğrenmek"
+  ],
+  "modules": [
+    {
+      "id": "module-01",
+      "title": "Module 1: Go Tanımı ve Temelleri Testi",
+      "summary": "Go'nun ne olduğu, tarihçesi, avantajları, diğer dillerden farkları ve temel kavramlar.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Go'nun ne olduğunu ve neden kullanıldığını anlamak",
+        "Go'nun diğer programlama dillerinden farklarını öğrenmek",
+        "Go'nun avantajlarını ve kullanım alanlarını keşfetmek",
+        "Go'nun tasarım felsefesini anlamak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Go Nedir?",
+          "description": "Go'nun temel tanımı ve genel bakış",
+          "href": "/education/lessons/go/module-01/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Go diğer dillerden farkı nedir?",
+          "description": "Go'nun C++, Java, Python gibi dillerden farkları",
+          "href": "/education/lessons/go/module-01/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Go'nun Tarihçesi",
+          "description": "Go'nun ortaya çıkışı ve gelişimi",
+          "href": "/education/lessons/go/module-01/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Go'nun Tasarım Felsefesi",
+          "description": "Basitlik, hız, güvenlik prensipleri",
+          "href": "/education/lessons/go/module-01/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Go'nun Avantajları",
+          "description": "Performans, eşzamanlılık, derleme hızı",
+          "href": "/education/lessons/go/module-01/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Go Kullanım Alanları",
+          "description": "Web servisleri, mikroservisler, CLI araçları",
+          "href": "/education/lessons/go/module-01/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Go Ekosistemi",
+          "description": "Go topluluğu ve araçlar",
+          "href": "/education/lessons/go/module-01/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Go Lisanslama",
+          "description": "BSD-style lisans",
+          "href": "/education/lessons/go/module-01/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Go Topluluk Desteği",
+          "description": "Açık kaynak topluluğu",
+          "href": "/education/lessons/go/module-01/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Go'nun Geleceği",
+          "description": "Go roadmap ve gelecek planları",
+          "href": "/education/lessons/go/module-01/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Go Kurulum Gereksinimleri",
+          "description": "Sistem gereksinimleri",
+          "href": "/education/lessons/go/module-01/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Go ile Neler Yapılabilir?",
+          "description": "Kullanım senaryoları",
+          "href": "/education/lessons/go/module-01/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Go Performans",
+          "description": "Performans özellikleri",
+          "href": "/education/lessons/go/module-01/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Go Geliştirici Deneyimi",
+          "description": "IDE desteği ve tooling",
+          "href": "/education/lessons/go/module-01/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Değerlendirme",
+          "description": "Modül kapsamında öğrenilenlerin özeti",
+          "href": "/education/lessons/go/module-01/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-02",
+      "title": "Module 2: Go Kurulumu ve Yapılandırma Testi",
+      "summary": "Go kurulumu, GOPATH, GOROOT, workspace yapısı, go.mod, go.sum ve proje yapılandırması.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Go kurulumunu öğrenmek",
+        "Workspace yapısını anlamak",
+        "Go modules kullanmayı öğrenmek",
+        "Proje yapısını kurmak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Go Kurulumu",
+          "description": "Go kurulumu ve yapılandırma",
+          "href": "/education/lessons/go/module-02/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: GOPATH ve GOROOT",
+          "description": "Go ortam değişkenleri",
+          "href": "/education/lessons/go/module-02/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Workspace Yapısı",
+          "description": "Go workspace organizasyonu",
+          "href": "/education/lessons/go/module-02/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Go Modules",
+          "description": "go.mod ve go.sum dosyaları",
+          "href": "/education/lessons/go/module-02/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: go mod init",
+          "description": "Yeni modül oluşturma",
+          "href": "/education/lessons/go/module-02/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: go get ve go install",
+          "description": "Paket yükleme ve kurulum",
+          "href": "/education/lessons/go/module-02/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: go build ve go run",
+          "description": "Derleme ve çalıştırma",
+          "href": "/education/lessons/go/module-02/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: go test",
+          "description": "Test çalıştırma",
+          "href": "/education/lessons/go/module-02/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: go fmt ve go vet",
+          "description": "Kod formatlama ve kontrol",
+          "href": "/education/lessons/go/module-02/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: IDE Integration",
+          "description": "VS Code, GoLand entegrasyonu",
+          "href": "/education/lessons/go/module-02/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Environment Variables",
+          "description": "Ortam değişkenleri yönetimi",
+          "href": "/education/lessons/go/module-02/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Cross-Compilation",
+          "description": "Farklı platformlar için derleme",
+          "href": "/education/lessons/go/module-02/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Build Tags",
+          "description": "Koşullu derleme",
+          "href": "/education/lessons/go/module-02/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Go Best Practices",
+          "description": "Yapılandırma en iyi uygulamaları",
+          "href": "/education/lessons/go/module-02/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/go/module-02/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-03",
+      "title": "Module 3: Go Syntax ve Temel Kavramlar Testi",
+      "summary": "Go syntax, değişkenler, veri tipleri, operatörler, kontrol yapıları, döngüler ve fonksiyonlar.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Go syntax kurallarını öğrenmek",
+        "Veri tipleri ve değişken kullanımını anlamak",
+        "Kontrol yapılarını kullanmak",
+        "Fonksiyon tanımlamayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Go Syntax Temelleri",
+          "description": "Go syntax kuralları",
+          "href": "/education/lessons/go/module-03/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Değişkenler ve Sabitler",
+          "description": "var, const, := kullanımı",
+          "href": "/education/lessons/go/module-03/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Veri Tipleri",
+          "description": "int, string, bool, float64",
+          "href": "/education/lessons/go/module-03/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Operatörler",
+          "description": "Aritmetik, karşılaştırma, mantıksal",
+          "href": "/education/lessons/go/module-03/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: if-else Statements",
+          "description": "Koşullu ifadeler",
+          "href": "/education/lessons/go/module-03/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: switch Statements",
+          "description": "Switch-case yapısı",
+          "href": "/education/lessons/go/module-03/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: for Loops",
+          "description": "Döngü yapıları",
+          "href": "/education/lessons/go/module-03/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Arrays ve Slices",
+          "description": "Dizi ve slice kullanımı",
+          "href": "/education/lessons/go/module-03/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Maps",
+          "description": "Map veri yapısı",
+          "href": "/education/lessons/go/module-03/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Functions",
+          "description": "Fonksiyon tanımlama",
+          "href": "/education/lessons/go/module-03/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Multiple Return Values",
+          "description": "Çoklu dönüş değerleri",
+          "href": "/education/lessons/go/module-03/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Variadic Functions",
+          "description": "Değişken sayıda parametre",
+          "href": "/education/lessons/go/module-03/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Defer Statement",
+          "description": "Defer kullanımı",
+          "href": "/education/lessons/go/module-03/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Pointers",
+          "description": "Pointer kavramı ve kullanımı",
+          "href": "/education/lessons/go/module-03/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/go/module-03/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-04",
+      "title": "Module 4: Packages ve Modules Testi",
+      "summary": "Go packages, package organization, imports, exports, module system ve package management.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Package kavramını anlamak",
+        "Package oluşturmayı öğrenmek",
+        "Import ve export kullanmayı öğrenmek",
+        "Module system kullanmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Packages Nedir?",
+          "description": "Package kavramı",
+          "href": "/education/lessons/go/module-04/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Package Declaration",
+          "description": "package anahtar kelimesi",
+          "href": "/education/lessons/go/module-04/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Import Statements",
+          "description": "Paket import etme",
+          "href": "/education/lessons/go/module-04/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Exported vs Unexported",
+          "description": "Büyük/küçük harf kuralları",
+          "href": "/education/lessons/go/module-04/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Standard Library Packages",
+          "description": "Go standart kütüphanesi",
+          "href": "/education/lessons/go/module-04/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Custom Packages",
+          "description": "Özel paket oluşturma",
+          "href": "/education/lessons/go/module-04/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Package Organization",
+          "description": "Paket organizasyonu",
+          "href": "/education/lessons/go/module-04/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Module System",
+          "description": "Go modules",
+          "href": "/education/lessons/go/module-04/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: go.mod File",
+          "description": "Modül tanımlama",
+          "href": "/education/lessons/go/module-04/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Version Management",
+          "description": "Paket versiyon yönetimi",
+          "href": "/education/lessons/go/module-04/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Private Modules",
+          "description": "Özel modül kullanımı",
+          "href": "/education/lessons/go/module-04/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Package Aliasing",
+          "description": "Paket takma adları",
+          "href": "/education/lessons/go/module-04/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Blank Imports",
+          "description": "Side-effect imports",
+          "href": "/education/lessons/go/module-04/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Package Best Practices",
+          "description": "Paket kullanım en iyi uygulamaları",
+          "href": "/education/lessons/go/module-04/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/go/module-04/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-05",
+      "title": "Module 5: Functions ve Methods Testi",
+      "summary": "Go functions, methods, function types, closures, higher-order functions ve function composition.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Function kavramını anlamak",
+        "Method tanımlamayı öğrenmek",
+        "Function types kullanmayı öğrenmek",
+        "Closures ve higher-order functions kullanmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Functions Temelleri",
+          "description": "Fonksiyon tanımlama",
+          "href": "/education/lessons/go/module-05/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Function Parameters",
+          "description": "Parametre tanımlama",
+          "href": "/education/lessons/go/module-05/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Return Values",
+          "description": "Dönüş değerleri",
+          "href": "/education/lessons/go/module-05/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Named Return Values",
+          "description": "İsimlendirilmiş dönüş değerleri",
+          "href": "/education/lessons/go/module-05/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Methods",
+          "description": "Method tanımlama",
+          "href": "/education/lessons/go/module-05/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Value vs Pointer Receivers",
+          "description": "Receiver tipleri",
+          "href": "/education/lessons/go/module-05/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Function Types",
+          "description": "Fonksiyon tipi tanımlama",
+          "href": "/education/lessons/go/module-05/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Closures",
+          "description": "Closure kavramı",
+          "href": "/education/lessons/go/module-05/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Higher-Order Functions",
+          "description": "Yüksek dereceli fonksiyonlar",
+          "href": "/education/lessons/go/module-05/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Anonymous Functions",
+          "description": "İsimsiz fonksiyonlar",
+          "href": "/education/lessons/go/module-05/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Function Composition",
+          "description": "Fonksiyon birleştirme",
+          "href": "/education/lessons/go/module-05/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Recursion",
+          "description": "Özyineleme",
+          "href": "/education/lessons/go/module-05/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Function Best Practices",
+          "description": "Fonksiyon tasarım en iyi uygulamaları",
+          "href": "/education/lessons/go/module-05/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Error Handling in Functions",
+          "description": "Fonksiyonlarda hata yönetimi",
+          "href": "/education/lessons/go/module-05/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/go/module-05/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-06",
+      "title": "Module 6: Structs ve Interfaces Testi",
+      "summary": "Go structs, struct methods, interfaces, interface implementation, type assertions ve polymorphism.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Struct kavramını anlamak",
+        "Struct tanımlamayı öğrenmek",
+        "Interface kavramını anlamak",
+        "Polymorphism uygulamayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Structs Nedir?",
+          "description": "Struct kavramı",
+          "href": "/education/lessons/go/module-06/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Struct Definition",
+          "description": "Struct tanımlama",
+          "href": "/education/lessons/go/module-06/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Struct Fields",
+          "description": "Struct alanları",
+          "href": "/education/lessons/go/module-06/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Struct Initialization",
+          "description": "Struct başlatma",
+          "href": "/education/lessons/go/module-06/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Struct Methods",
+          "description": "Struct metodları",
+          "href": "/education/lessons/go/module-06/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Embedded Structs",
+          "description": "İç içe struct'lar",
+          "href": "/education/lessons/go/module-06/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Interfaces Nedir?",
+          "description": "Interface kavramı",
+          "href": "/education/lessons/go/module-06/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Interface Definition",
+          "description": "Interface tanımlama",
+          "href": "/education/lessons/go/module-06/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Interface Implementation",
+          "description": "Interface implementasyonu",
+          "href": "/education/lessons/go/module-06/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Empty Interface",
+          "description": "interface{} kullanımı",
+          "href": "/education/lessons/go/module-06/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Type Assertions",
+          "description": "Tip kontrolü",
+          "href": "/education/lessons/go/module-06/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Type Switches",
+          "description": "Tip switch'leri",
+          "href": "/education/lessons/go/module-06/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Polymorphism",
+          "description": "Çok biçimlilik",
+          "href": "/education/lessons/go/module-06/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Interface Best Practices",
+          "description": "Interface kullanım en iyi uygulamaları",
+          "href": "/education/lessons/go/module-06/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/go/module-06/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-07",
+      "title": "Module 7: Goroutines ve Channels Testi",
+      "summary": "Go concurrency, goroutines, channels, select statement, channel patterns ve synchronization.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Concurrency kavramını anlamak",
+        "Goroutines kullanmayı öğrenmek",
+        "Channels kullanmayı öğrenmek",
+        "Synchronization yapmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Concurrency Nedir?",
+          "description": "Eşzamanlılık kavramı",
+          "href": "/education/lessons/go/module-07/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Goroutines",
+          "description": "Goroutine oluşturma",
+          "href": "/education/lessons/go/module-07/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Goroutine Lifecycle",
+          "description": "Goroutine yaşam döngüsü",
+          "href": "/education/lessons/go/module-07/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Channels Nedir?",
+          "description": "Channel kavramı",
+          "href": "/education/lessons/go/module-07/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Channel Creation",
+          "description": "Channel oluşturma",
+          "href": "/education/lessons/go/module-07/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Channel Operations",
+          "description": "Channel gönderme/alma",
+          "href": "/education/lessons/go/module-07/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Buffered Channels",
+          "description": "Tamponlu channel'lar",
+          "href": "/education/lessons/go/module-07/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Channel Direction",
+          "description": "Tek yönlü channel'lar",
+          "href": "/education/lessons/go/module-07/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Select Statement",
+          "description": "select kullanımı",
+          "href": "/education/lessons/go/module-07/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Channel Patterns",
+          "description": "Yaygın channel desenleri",
+          "href": "/education/lessons/go/module-07/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: sync Package",
+          "description": "WaitGroup, Mutex",
+          "href": "/education/lessons/go/module-07/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Context Package",
+          "description": "Context kullanımı",
+          "href": "/education/lessons/go/module-07/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Race Conditions",
+          "description": "Yarış durumları ve önleme",
+          "href": "/education/lessons/go/module-07/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Concurrency Best Practices",
+          "description": "Eşzamanlılık en iyi uygulamaları",
+          "href": "/education/lessons/go/module-07/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/go/module-07/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-08",
+      "title": "Module 8: Error Handling Testi",
+      "summary": "Go error handling, error interface, error wrapping, custom errors, panic, recover ve error best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Error handling kavramını anlamak",
+        "Error interface kullanmayı öğrenmek",
+        "Custom errors oluşturmayı öğrenmek",
+        "Panic ve recover kullanmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Error Handling Temelleri",
+          "description": "Go error handling yaklaşımı",
+          "href": "/education/lessons/go/module-08/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: error Interface",
+          "description": "error interface yapısı",
+          "href": "/education/lessons/go/module-08/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Error Return Pattern",
+          "description": "Hata döndürme deseni",
+          "href": "/education/lessons/go/module-08/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Error Checking",
+          "description": "Hata kontrolü",
+          "href": "/education/lessons/go/module-08/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Custom Errors",
+          "description": "Özel hata tipleri",
+          "href": "/education/lessons/go/module-08/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Error Wrapping",
+          "description": "fmt.Errorf ve errors.Wrap",
+          "href": "/education/lessons/go/module-08/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: errors.Is ve errors.As",
+          "description": "Hata kontrol fonksiyonları",
+          "href": "/education/lessons/go/module-08/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Panic",
+          "description": "panic kullanımı",
+          "href": "/education/lessons/go/module-08/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Recover",
+          "description": "recover kullanımı",
+          "href": "/education/lessons/go/module-08/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Defer ve Error Handling",
+          "description": "defer ile hata yönetimi",
+          "href": "/education/lessons/go/module-08/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Error Logging",
+          "description": "Hata loglama",
+          "href": "/education/lessons/go/module-08/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Error Context",
+          "description": "Hata bağlamı ekleme",
+          "href": "/education/lessons/go/module-08/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Error Best Practices",
+          "description": "Hata yönetimi en iyi uygulamaları",
+          "href": "/education/lessons/go/module-08/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Common Error Patterns",
+          "description": "Yaygın hata desenleri",
+          "href": "/education/lessons/go/module-08/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/go/module-08/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-09",
+      "title": "Module 9: Testing Testi",
+      "summary": "Go testing, unit tests, table-driven tests, benchmarks, test coverage, mocking ve integration tests.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Testing kavramını anlamak",
+        "Unit test yazmayı öğrenmek",
+        "Benchmark test yazmayı öğrenmek",
+        "Test coverage analizi yapmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Testing Temelleri",
+          "description": "Go testing yaklaşımı",
+          "href": "/education/lessons/go/module-09/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Test Functions",
+          "description": "Test fonksiyonu yazma",
+          "href": "/education/lessons/go/module-09/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Testing Package",
+          "description": "testing paketi",
+          "href": "/education/lessons/go/module-09/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Test Execution",
+          "description": "go test komutu",
+          "href": "/education/lessons/go/module-09/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Table-Driven Tests",
+          "description": "Tablo tabanlı testler",
+          "href": "/education/lessons/go/module-09/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Subtests",
+          "description": "Alt testler",
+          "href": "/education/lessons/go/module-09/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Benchmarks",
+          "description": "Benchmark testleri",
+          "href": "/education/lessons/go/module-09/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Test Coverage",
+          "description": "Test kapsamı analizi",
+          "href": "/education/lessons/go/module-09/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Test Helpers",
+          "description": "Test yardımcı fonksiyonları",
+          "href": "/education/lessons/go/module-09/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Mocking",
+          "description": "Mock objeler",
+          "href": "/education/lessons/go/module-09/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Integration Tests",
+          "description": "Entegrasyon testleri",
+          "href": "/education/lessons/go/module-09/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Test Fixtures",
+          "description": "Test verileri",
+          "href": "/education/lessons/go/module-09/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Test Organization",
+          "description": "Test organizasyonu",
+          "href": "/education/lessons/go/module-09/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Testing Best Practices",
+          "description": "Test yazma en iyi uygulamaları",
+          "href": "/education/lessons/go/module-09/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/go/module-09/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-10",
+      "title": "Module 10: Web Development Testi",
+      "summary": "Go web development, net/http package, HTTP handlers, routing, middleware, templates ve RESTful APIs.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Web development kavramını anlamak",
+        "HTTP server oluşturmayı öğrenmek",
+        "Routing yapmayı öğrenmek",
+        "RESTful API geliştirmeyi öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Web Development Temelleri",
+          "description": "Go web geliştirme yaklaşımı",
+          "href": "/education/lessons/go/module-10/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: net/http Package",
+          "description": "HTTP paketi",
+          "href": "/education/lessons/go/module-10/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: HTTP Server",
+          "description": "HTTP sunucu oluşturma",
+          "href": "/education/lessons/go/module-10/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: HTTP Handlers",
+          "description": "Handler fonksiyonları",
+          "href": "/education/lessons/go/module-10/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Request ve Response",
+          "description": "HTTP request/response",
+          "href": "/education/lessons/go/module-10/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Routing",
+          "description": "URL routing",
+          "href": "/education/lessons/go/module-10/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: URL Parameters",
+          "description": "URL parametreleri",
+          "href": "/education/lessons/go/module-10/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Query Parameters",
+          "description": "Query string",
+          "href": "/education/lessons/go/module-10/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Middleware",
+          "description": "Middleware pattern",
+          "href": "/education/lessons/go/module-10/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Templates",
+          "description": "HTML template'ler",
+          "href": "/education/lessons/go/module-10/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: JSON Handling",
+          "description": "JSON encode/decode",
+          "href": "/education/lessons/go/module-10/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: RESTful API",
+          "description": "REST API geliştirme",
+          "href": "/education/lessons/go/module-10/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: HTTP Client",
+          "description": "HTTP istekleri gönderme",
+          "href": "/education/lessons/go/module-10/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Web Best Practices",
+          "description": "Web geliştirme en iyi uygulamaları",
+          "href": "/education/lessons/go/module-10/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/go/module-10/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-11",
+      "title": "Module 11: Database Integration Testi",
+      "summary": "Go database integration, database/sql package, SQL queries, prepared statements, transactions ve ORM.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Database integration kavramını anlamak",
+        "database/sql kullanmayı öğrenmek",
+        "SQL queries yazmayı öğrenmek",
+        "ORM kullanmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Database Integration Temelleri",
+          "description": "Go database yaklaşımı",
+          "href": "/education/lessons/go/module-11/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: database/sql Package",
+          "description": "SQL paketi",
+          "href": "/education/lessons/go/module-11/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Database Connection",
+          "description": "Veritabanı bağlantısı",
+          "href": "/education/lessons/go/module-11/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Connection Pooling",
+          "description": "Bağlantı havuzlama",
+          "href": "/education/lessons/go/module-11/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: SQL Queries",
+          "description": "SQL sorguları",
+          "href": "/education/lessons/go/module-11/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Prepared Statements",
+          "description": "Hazırlanmış ifadeler",
+          "href": "/education/lessons/go/module-11/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Transactions",
+          "description": "Transaction yönetimi",
+          "href": "/education/lessons/go/module-11/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Rows Scanning",
+          "description": "Sonuç satırlarını okuma",
+          "href": "/education/lessons/go/module-11/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: GORM ORM",
+          "description": "GORM kullanımı",
+          "href": "/education/lessons/go/module-11/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Database Migrations",
+          "description": "Veritabanı migration'ları",
+          "href": "/education/lessons/go/module-11/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Multiple Databases",
+          "description": "Çoklu veritabanı",
+          "href": "/education/lessons/go/module-11/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Database Best Practices",
+          "description": "Veritabanı kullanım en iyi uygulamaları",
+          "href": "/education/lessons/go/module-11/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Performance Optimization",
+          "description": "Performans optimizasyonu",
+          "href": "/education/lessons/go/module-11/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Error Handling",
+          "description": "Veritabanı hata yönetimi",
+          "href": "/education/lessons/go/module-11/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/go/module-11/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-12",
+      "title": "Module 12: Microservices Testi",
+      "summary": "Go microservices, service communication, gRPC, message queues, service discovery ve distributed systems.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Microservices kavramını anlamak",
+        "Service communication yapmayı öğrenmek",
+        "gRPC kullanmayı öğrenmek",
+        "Distributed systems desenlerini öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Microservices Mimarisi",
+          "description": "Mikroservis kavramı",
+          "href": "/education/lessons/go/module-12/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Service Communication",
+          "description": "Servis iletişimi",
+          "href": "/education/lessons/go/module-12/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: RESTful Communication",
+          "description": "HTTP/REST iletişim",
+          "href": "/education/lessons/go/module-12/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: gRPC",
+          "description": "gRPC protokolü",
+          "href": "/education/lessons/go/module-12/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Protocol Buffers",
+          "description": "protobuf kullanımı",
+          "href": "/education/lessons/go/module-12/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Message Queues",
+          "description": "RabbitMQ, Kafka",
+          "href": "/education/lessons/go/module-12/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Service Discovery",
+          "description": "Servis keşfi",
+          "href": "/education/lessons/go/module-12/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: API Gateway",
+          "description": "API Gateway pattern",
+          "href": "/education/lessons/go/module-12/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Circuit Breaker",
+          "description": "Circuit breaker deseni",
+          "href": "/education/lessons/go/module-12/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Distributed Tracing",
+          "description": "Dağıtık izleme",
+          "href": "/education/lessons/go/module-12/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Service Mesh",
+          "description": "Service mesh kavramı",
+          "href": "/education/lessons/go/module-12/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Microservices Testing",
+          "description": "Mikroservis testleri",
+          "href": "/education/lessons/go/module-12/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Microservices Best Practices",
+          "description": "Mikroservis en iyi uygulamaları",
+          "href": "/education/lessons/go/module-12/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Deployment Strategies",
+          "description": "Dağıtım stratejileri",
+          "href": "/education/lessons/go/module-12/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/go/module-12/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-13",
+      "title": "Module 13: Performance Optimization Testi",
+      "summary": "Go performance optimization, profiling, memory management, garbage collection, benchmarking ve optimization techniques.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Performance optimization tekniklerini öğrenmek",
+        "Profiling yapmayı öğrenmek",
+        "Memory management yapmayı öğrenmek",
+        "Optimization techniques uygulamayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Performance Temelleri",
+          "description": "Performans ölçümü",
+          "href": "/education/lessons/go/module-13/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Profiling Tools",
+          "description": "pprof kullanımı",
+          "href": "/education/lessons/go/module-13/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: CPU Profiling",
+          "description": "CPU profil analizi",
+          "href": "/education/lessons/go/module-13/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Memory Profiling",
+          "description": "Bellek profil analizi",
+          "href": "/education/lessons/go/module-13/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Garbage Collection",
+          "description": "Çöp toplama mekanizması",
+          "href": "/education/lessons/go/module-13/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Memory Management",
+          "description": "Bellek yönetimi",
+          "href": "/education/lessons/go/module-13/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Benchmarking",
+          "description": "Benchmark testleri",
+          "href": "/education/lessons/go/module-13/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Optimization Techniques",
+          "description": "Optimizasyon teknikleri",
+          "href": "/education/lessons/go/module-13/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Code Optimization",
+          "description": "Kod optimizasyonu",
+          "href": "/education/lessons/go/module-13/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Algorithm Optimization",
+          "description": "Algoritma optimizasyonu",
+          "href": "/education/lessons/go/module-13/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Concurrency Optimization",
+          "description": "Eşzamanlılık optimizasyonu",
+          "href": "/education/lessons/go/module-13/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: I/O Optimization",
+          "description": "Girdi/çıktı optimizasyonu",
+          "href": "/education/lessons/go/module-13/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Performance Monitoring",
+          "description": "Performans izleme",
+          "href": "/education/lessons/go/module-13/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Performance Best Practices",
+          "description": "Performans en iyi uygulamaları",
+          "href": "/education/lessons/go/module-13/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/go/module-13/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-14",
+      "title": "Module 14: Deployment Testi",
+      "summary": "Go deployment, Docker containerization, CI/CD pipelines, cloud deployment ve production best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Deployment stratejilerini öğrenmek",
+        "Docker containerization yapmayı öğrenmek",
+        "CI/CD pipeline'ları kurmayı öğrenmek",
+        "Cloud deployment yapmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Deployment Stratejileri",
+          "description": "Dağıtım modelleri",
+          "href": "/education/lessons/go/module-14/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Build Process",
+          "description": "Derleme süreci",
+          "href": "/education/lessons/go/module-14/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Static Binary",
+          "description": "Statik binary oluşturma",
+          "href": "/education/lessons/go/module-14/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Docker Temelleri",
+          "description": "Docker kavramları",
+          "href": "/education/lessons/go/module-14/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Dockerfile Oluşturma",
+          "description": "Go için Dockerfile",
+          "href": "/education/lessons/go/module-14/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Multi-Stage Builds",
+          "description": "Çok aşamalı derleme",
+          "href": "/education/lessons/go/module-14/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Docker Compose",
+          "description": "Multi-container uygulamalar",
+          "href": "/education/lessons/go/module-14/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: CI/CD Concepts",
+          "description": "Sürekli entegrasyon",
+          "href": "/education/lessons/go/module-14/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: GitHub Actions",
+          "description": "GitHub Actions CI/CD",
+          "href": "/education/lessons/go/module-14/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Cloud Deployment",
+          "description": "AWS, GCP, Azure deployment",
+          "href": "/education/lessons/go/module-14/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Kubernetes Deployment",
+          "description": "Kubernetes ile dağıtım",
+          "href": "/education/lessons/go/module-14/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Environment Configuration",
+          "description": "Ortam yapılandırması",
+          "href": "/education/lessons/go/module-14/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Monitoring ve Logging",
+          "description": "Production monitoring",
+          "href": "/education/lessons/go/module-14/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Deployment Best Practices",
+          "description": "Deployment en iyi uygulamaları",
+          "href": "/education/lessons/go/module-14/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/go/module-14/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-15",
+      "title": "Module 15: Best Practices ve Capstone Testi",
+      "summary": "Go geliştirmede en iyi uygulamalar, kod kalitesi, güvenlik, performans ve kapsamlı bir proje geliştirme.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Kod kalitesi standartlarını öğrenmek",
+        "Güvenlik best practices uygulamak",
+        "Performans optimizasyon tekniklerini öğrenmek",
+        "Kapsamlı bir proje geliştirmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Code Quality Standards",
+          "description": "Kod kalitesi standartları",
+          "href": "/education/lessons/go/module-15/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Naming Conventions",
+          "description": "İsimlendirme kuralları",
+          "href": "/education/lessons/go/module-15/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Code Organization",
+          "description": "Kod organizasyonu",
+          "href": "/education/lessons/go/module-15/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Documentation",
+          "description": "Kod dokümantasyonu",
+          "href": "/education/lessons/go/module-15/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Error Handling Best Practices",
+          "description": "Hata yönetimi en iyi uygulamaları",
+          "href": "/education/lessons/go/module-15/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Security Best Practices",
+          "description": "Güvenlik en iyi uygulamaları",
+          "href": "/education/lessons/go/module-15/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Proje Planlama",
+          "description": "Proje gereksinimleri",
+          "href": "/education/lessons/go/module-15/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Mimari Tasarım",
+          "description": "Sistem mimarisi",
+          "href": "/education/lessons/go/module-15/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Core Implementation",
+          "description": "Temel implementasyon",
+          "href": "/education/lessons/go/module-15/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: API Development",
+          "description": "RESTful API geliştirme",
+          "href": "/education/lessons/go/module-15/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Database Integration",
+          "description": "Veritabanı entegrasyonu",
+          "href": "/education/lessons/go/module-15/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Testing Strategy",
+          "description": "Test stratejisi",
+          "href": "/education/lessons/go/module-15/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Performance Optimization",
+          "description": "Performans optimizasyonu",
+          "href": "/education/lessons/go/module-15/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Deployment ve CI/CD",
+          "description": "Dağıtım ve sürekli entegrasyon",
+          "href": "/education/lessons/go/module-15/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Project Review ve Presentation",
+          "description": "Proje incelemesi ve sunumu",
+          "href": "/education/lessons/go/module-15/lesson-15"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1577 @@
+{
+  "overview": {
+    "description": "Kotlin, JetBrains tarafından geliştirilen modern, güvenli ve Java ile tam uyumlu bir programlama dilidir. Android geliştirmenin resmi dili olan Kotlin ile Android uygulamaları, backend servisleri ve multiplatform projeler geliştirebilirsiniz. Bu kapsamlı kurs ile Kotlin'in temellerinden ileri seviye konularına kadar her şeyi öğreneceksiniz.",
+    "estimatedDurationMinutes": 6750
+  },
+  "learningObjectives": [
+    "Kotlin programlama dilinin temel kavramlarını ve syntax'ını anlamak",
+    "Null safety, Data classes ve Extension functions kullanmayı öğrenmek",
+    "Object-Oriented Programming ve Functional Programming yapmak",
+    "Coroutines ile asenkron programlama yapmayı öğrenmek",
+    "Android Development ve Jetpack Compose ile modern Android uygulamaları geliştirmek",
+    "Kotlin Multiplatform ile cross-platform projeler geliştirmek",
+    "Testing ve deployment stratejilerini öğrenmek"
+  ],
+  "modules": [
+    {
+      "id": "module-01",
+      "title": "Module 1: Kotlin Tanımı ve Temelleri Testi",
+      "summary": "Kotlin'in ne olduğu, tarihçesi, avantajları, Java ile uyumluluğu ve temel kavramlar.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Kotlin'in ne olduğunu ve neden kullanıldığını anlamak",
+        "Kotlin'in Java'dan farklarını öğrenmek",
+        "Kotlin'in avantajlarını ve kullanım alanlarını keşfetmek",
+        "Kotlin ekosistemini tanımak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Kotlin Nedir?",
+          "description": "Kotlin'in temel tanımı ve genel bakış",
+          "href": "/education/lessons/kotlin/module-01/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Kotlin vs Java",
+          "description": "Kotlin ve Java karşılaştırması",
+          "href": "/education/lessons/kotlin/module-01/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Kotlin'in Tarihçesi",
+          "description": "Kotlin'in ortaya çıkışı ve gelişimi",
+          "href": "/education/lessons/kotlin/module-01/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Kotlin'in Avantajları",
+          "description": "Null safety, conciseness, interoperability",
+          "href": "/education/lessons/kotlin/module-01/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Kotlin Kullanım Alanları",
+          "description": "Android, Backend, Multiplatform",
+          "href": "/education/lessons/kotlin/module-01/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Kotlin Ekosistemi",
+          "description": "JetBrains, Android, Gradle",
+          "href": "/education/lessons/kotlin/module-01/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Kotlin Lisanslama",
+          "description": "Apache 2.0 lisansı",
+          "href": "/education/lessons/kotlin/module-01/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Kotlin Topluluk Desteği",
+          "description": "Açık kaynak topluluğu",
+          "href": "/education/lessons/kotlin/module-01/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Kotlin'in Geleceği",
+          "description": "Kotlin roadmap",
+          "href": "/education/lessons/kotlin/module-01/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Kotlin Kurulum Gereksinimleri",
+          "description": "JDK ve IDE gereksinimleri",
+          "href": "/education/lessons/kotlin/module-01/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Kotlin ile Neler Yapılabilir?",
+          "description": "Kullanım senaryoları",
+          "href": "/education/lessons/kotlin/module-01/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Kotlin Performans",
+          "description": "Performans özellikleri",
+          "href": "/education/lessons/kotlin/module-01/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Kotlin Geliştirici Deneyimi",
+          "description": "IDE desteği ve tooling",
+          "href": "/education/lessons/kotlin/module-01/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Kotlin Güvenlik",
+          "description": "Güvenlik özellikleri",
+          "href": "/education/lessons/kotlin/module-01/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Değerlendirme",
+          "description": "Modül kapsamında öğrenilenlerin özeti",
+          "href": "/education/lessons/kotlin/module-01/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-02",
+      "title": "Module 2: Kotlin Kurulumu ve IDE Testi",
+      "summary": "Kotlin kurulumu, IntelliJ IDEA, Android Studio, proje oluşturma, Gradle yapılandırması ve temel geliştirme ortamı.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Kotlin kurulumunu öğrenmek",
+        "IntelliJ IDEA kullanmayı öğrenmek",
+        "Android Studio ile Kotlin kullanmayı öğrenmek",
+        "Gradle yapılandırmasını anlamak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Kotlin Kurulumu",
+          "description": "Kotlin indirme ve kurulum",
+          "href": "/education/lessons/kotlin/module-02/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: IntelliJ IDEA",
+          "description": "IntelliJ IDEA arayüzü",
+          "href": "/education/lessons/kotlin/module-02/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Android Studio",
+          "description": "Android Studio kurulumu",
+          "href": "/education/lessons/kotlin/module-02/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Yeni Proje Oluşturma",
+          "description": "Kotlin projesi oluşturma",
+          "href": "/education/lessons/kotlin/module-02/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Project Structure",
+          "description": "Proje yapısı",
+          "href": "/education/lessons/kotlin/module-02/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Gradle Yapılandırması",
+          "description": "build.gradle dosyası",
+          "href": "/education/lessons/kotlin/module-02/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Build ve Run",
+          "description": "Derleme ve çalıştırma",
+          "href": "/education/lessons/kotlin/module-02/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Debugging",
+          "description": "Hata ayıklama",
+          "href": "/education/lessons/kotlin/module-02/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Kotlin REPL",
+          "description": "Kotlin REPL kullanımı",
+          "href": "/education/lessons/kotlin/module-02/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Kotlin Playground",
+          "description": "Online Kotlin playground",
+          "href": "/education/lessons/kotlin/module-02/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Version Control",
+          "description": "Git entegrasyonu",
+          "href": "/education/lessons/kotlin/module-02/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Kotlin Plugins",
+          "description": "IDE eklentileri",
+          "href": "/education/lessons/kotlin/module-02/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Build Tools",
+          "description": "Gradle, Maven",
+          "href": "/education/lessons/kotlin/module-02/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: IDE Best Practices",
+          "description": "IDE kullanım en iyi uygulamaları",
+          "href": "/education/lessons/kotlin/module-02/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/kotlin/module-02/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-03",
+      "title": "Module 3: Kotlin Syntax ve Temel Kavramlar Testi",
+      "summary": "Kotlin syntax, değişkenler, sabitler, veri tipleri, operatörler, kontrol yapıları, döngüler ve fonksiyonlar.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Kotlin syntax kurallarını öğrenmek",
+        "Veri tipleri ve değişken kullanımını anlamak",
+        "Kontrol yapılarını kullanmak",
+        "Fonksiyon tanımlamayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Kotlin Syntax Temelleri",
+          "description": "Kotlin syntax kuralları",
+          "href": "/education/lessons/kotlin/module-03/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Variables ve Val",
+          "description": "var ve val kullanımı",
+          "href": "/education/lessons/kotlin/module-03/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Veri Tipleri",
+          "description": "Int, String, Boolean, Double",
+          "href": "/education/lessons/kotlin/module-03/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Type Inference",
+          "description": "Tip çıkarımı",
+          "href": "/education/lessons/kotlin/module-03/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Type Annotations",
+          "description": "Tip tanımlama",
+          "href": "/education/lessons/kotlin/module-03/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Operatörler",
+          "description": "Aritmetik, karşılaştırma, mantıksal",
+          "href": "/education/lessons/kotlin/module-03/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: if-else Expressions",
+          "description": "Koşullu ifadeler",
+          "href": "/education/lessons/kotlin/module-03/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: when Expressions",
+          "description": "when yapısı (switch benzeri)",
+          "href": "/education/lessons/kotlin/module-03/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: for Loops",
+          "description": "Döngü yapıları",
+          "href": "/education/lessons/kotlin/module-03/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: while ve do-while",
+          "description": "While döngüleri",
+          "href": "/education/lessons/kotlin/module-03/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Functions",
+          "description": "Fonksiyon tanımlama",
+          "href": "/education/lessons/kotlin/module-03/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Function Parameters",
+          "description": "Parametreler ve dönüş değerleri",
+          "href": "/education/lessons/kotlin/module-03/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: String Templates",
+          "description": "String birleştirme",
+          "href": "/education/lessons/kotlin/module-03/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Comments ve Documentation",
+          "description": "Yorumlar ve dokümantasyon",
+          "href": "/education/lessons/kotlin/module-03/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/kotlin/module-03/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-04",
+      "title": "Module 4: Null Safety Testi",
+      "summary": "Kotlin null safety, nullable types, safe calls, elvis operator, not-null assertions ve null handling stratejileri.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Null safety kavramını anlamak",
+        "Nullable types kullanmayı öğrenmek",
+        "Safe calls kullanmayı öğrenmek",
+        "Null handling stratejilerini öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Null Safety Nedir?",
+          "description": "Null safety kavramı",
+          "href": "/education/lessons/kotlin/module-04/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Nullable Types",
+          "description": "? operatörü ile nullable",
+          "href": "/education/lessons/kotlin/module-04/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Non-Null Types",
+          "description": "Non-null tipler",
+          "href": "/education/lessons/kotlin/module-04/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Safe Calls",
+          "description": "?. operatörü",
+          "href": "/education/lessons/kotlin/module-04/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Elvis Operator",
+          "description": "?: operatörü",
+          "href": "/education/lessons/kotlin/module-04/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Not-Null Assertions",
+          "description": "!! operatörü",
+          "href": "/education/lessons/kotlin/module-04/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Safe Casts",
+          "description": "as? operatörü",
+          "href": "/education/lessons/kotlin/module-04/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: let Function",
+          "description": "let ile null kontrolü",
+          "href": "/education/lessons/kotlin/module-04/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Nullable in Functions",
+          "description": "Fonksiyonlarda nullable",
+          "href": "/education/lessons/kotlin/module-04/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Null Safety Best Practices",
+          "description": "Null safety kullanım en iyi uygulamaları",
+          "href": "/education/lessons/kotlin/module-04/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Platform Types",
+          "description": "Java interop'ta null safety",
+          "href": "/education/lessons/kotlin/module-04/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Null Safety Patterns",
+          "description": "Null safety desenleri",
+          "href": "/education/lessons/kotlin/module-04/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Null Safety in Collections",
+          "description": "Koleksiyonlarda null safety",
+          "href": "/education/lessons/kotlin/module-04/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Common Null Safety Mistakes",
+          "description": "Yaygın null safety hataları",
+          "href": "/education/lessons/kotlin/module-04/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/kotlin/module-04/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-05",
+      "title": "Module 5: Collections Testi",
+      "summary": "Kotlin collections, Lists, Sets, Maps, collection operations, iteration, higher-order functions ve collection methods.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Collection kavramını anlamak",
+        "Lists kullanmayı öğrenmek",
+        "Maps kullanmayı öğrenmek",
+        "Sets kullanmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Collections Temelleri",
+          "description": "Collection kavramı",
+          "href": "/education/lessons/kotlin/module-05/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Lists",
+          "description": "List oluşturma ve kullanımı",
+          "href": "/education/lessons/kotlin/module-05/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: List Operations",
+          "description": "List işlemleri",
+          "href": "/education/lessons/kotlin/module-05/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Mutable Lists",
+          "description": "Değiştirilebilir listeler",
+          "href": "/education/lessons/kotlin/module-05/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Maps",
+          "description": "Map oluşturma",
+          "href": "/education/lessons/kotlin/module-05/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Map Operations",
+          "description": "Map işlemleri",
+          "href": "/education/lessons/kotlin/module-05/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Sets",
+          "description": "Set oluşturma",
+          "href": "/education/lessons/kotlin/module-05/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Set Operations",
+          "description": "Set işlemleri",
+          "href": "/education/lessons/kotlin/module-05/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Collection Iteration",
+          "description": "Koleksiyon dolaşma",
+          "href": "/education/lessons/kotlin/module-05/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Higher-Order Functions",
+          "description": "map, filter, reduce",
+          "href": "/education/lessons/kotlin/module-05/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Collection Subscripting",
+          "description": "İndeksleme",
+          "href": "/education/lessons/kotlin/module-05/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Collection Mutability",
+          "description": "Değiştirilebilirlik",
+          "href": "/education/lessons/kotlin/module-05/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Collection Performance",
+          "description": "Performans düşünceleri",
+          "href": "/education/lessons/kotlin/module-05/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Collection Best Practices",
+          "description": "Collection kullanım en iyi uygulamaları",
+          "href": "/education/lessons/kotlin/module-05/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/kotlin/module-05/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-06",
+      "title": "Module 6: Functions ve Lambdas Testi",
+      "summary": "Kotlin functions, function parameters, default parameters, named parameters, lambda expressions, higher-order functions ve inline functions.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Function kavramını anlamak",
+        "Function parameters kullanmayı öğrenmek",
+        "Lambda expressions kullanmayı öğrenmek",
+        "Higher-order functions yazmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Functions Temelleri",
+          "description": "Fonksiyon tanımlama",
+          "href": "/education/lessons/kotlin/module-06/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Function Parameters",
+          "description": "Parametre tanımlama",
+          "href": "/education/lessons/kotlin/module-06/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Default Parameters",
+          "description": "Varsayılan parametreler",
+          "href": "/education/lessons/kotlin/module-06/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Named Parameters",
+          "description": "İsimlendirilmiş parametreler",
+          "href": "/education/lessons/kotlin/module-06/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Variable Arguments",
+          "description": "vararg kullanımı",
+          "href": "/education/lessons/kotlin/module-06/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Lambda Expressions",
+          "description": "Lambda ifadeleri",
+          "href": "/education/lessons/kotlin/module-06/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Higher-Order Functions",
+          "description": "Yüksek seviye fonksiyonlar",
+          "href": "/education/lessons/kotlin/module-06/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Inline Functions",
+          "description": "inline fonksiyonlar",
+          "href": "/education/lessons/kotlin/module-06/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Extension Functions",
+          "description": "Genişletme fonksiyonları",
+          "href": "/education/lessons/kotlin/module-06/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Infix Functions",
+          "description": "Infix fonksiyonlar",
+          "href": "/education/lessons/kotlin/module-06/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Tail Recursion",
+          "description": "Kuyruk özyineleme",
+          "href": "/education/lessons/kotlin/module-06/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Function Types",
+          "description": "Fonksiyon tipleri",
+          "href": "/education/lessons/kotlin/module-06/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Function Best Practices",
+          "description": "Fonksiyon tasarım en iyi uygulamaları",
+          "href": "/education/lessons/kotlin/module-06/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Common Function Patterns",
+          "description": "Yaygın fonksiyon desenleri",
+          "href": "/education/lessons/kotlin/module-06/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/kotlin/module-06/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-07",
+      "title": "Module 7: Classes ve Objects Testi",
+      "summary": "Kotlin classes, objects, properties, constructors, inheritance, data classes, sealed classes ve object declarations.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Class kavramını anlamak",
+        "Class tanımlamayı öğrenmek",
+        "Data classes kullanmayı öğrenmek",
+        "Inheritance yapmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Classes ve Objects",
+          "description": "Class ve object kavramı",
+          "href": "/education/lessons/kotlin/module-07/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Class Definition",
+          "description": "Class tanımlama",
+          "href": "/education/lessons/kotlin/module-07/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Properties",
+          "description": "Özellik tanımlama",
+          "href": "/education/lessons/kotlin/module-07/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Constructors",
+          "description": "Yapıcılar",
+          "href": "/education/lessons/kotlin/module-07/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Primary ve Secondary Constructors",
+          "description": "Birincil ve ikincil yapıcılar",
+          "href": "/education/lessons/kotlin/module-07/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Data Classes",
+          "description": "Veri sınıfları",
+          "href": "/education/lessons/kotlin/module-07/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Sealed Classes",
+          "description": "Mühürlü sınıflar",
+          "href": "/education/lessons/kotlin/module-07/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Inheritance",
+          "description": "Kalıtım",
+          "href": "/education/lessons/kotlin/module-07/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Overriding",
+          "description": "Override etme",
+          "href": "/education/lessons/kotlin/module-07/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Abstract Classes",
+          "description": "Soyut sınıflar",
+          "href": "/education/lessons/kotlin/module-07/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Object Declarations",
+          "description": "Object tanımlamaları",
+          "href": "/education/lessons/kotlin/module-07/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Companion Objects",
+          "description": "Eşlik nesneleri",
+          "href": "/education/lessons/kotlin/module-07/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Access Modifiers",
+          "description": "Erişim değiştiricileri",
+          "href": "/education/lessons/kotlin/module-07/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Class Best Practices",
+          "description": "Class kullanım en iyi uygulamaları",
+          "href": "/education/lessons/kotlin/module-07/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/kotlin/module-07/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-08",
+      "title": "Module 8: Generics ve Type System Testi",
+      "summary": "Kotlin generics, generic functions, generic classes, type parameters, variance, reified types ve type system.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Generic kavramını anlamak",
+        "Generic functions yazmayı öğrenmek",
+        "Generic classes kullanmayı öğrenmek",
+        "Variance kavramını öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Generics Nedir?",
+          "description": "Generic kavramı",
+          "href": "/education/lessons/kotlin/module-08/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Generic Functions",
+          "description": "Generic fonksiyonlar",
+          "href": "/education/lessons/kotlin/module-08/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Generic Classes",
+          "description": "Generic sınıflar",
+          "href": "/education/lessons/kotlin/module-08/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Type Parameters",
+          "description": "Tip parametreleri",
+          "href": "/education/lessons/kotlin/module-08/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Type Constraints",
+          "description": "Tip kısıtlamaları",
+          "href": "/education/lessons/kotlin/module-08/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Variance",
+          "description": "Varyans kavramı",
+          "href": "/education/lessons/kotlin/module-08/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Covariance",
+          "description": "Kovaryans",
+          "href": "/education/lessons/kotlin/module-08/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Contravariance",
+          "description": "Kontravaryans",
+          "href": "/education/lessons/kotlin/module-08/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Reified Type Parameters",
+          "description": "Somutlaştırılmış tip parametreleri",
+          "href": "/education/lessons/kotlin/module-08/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Star Projections",
+          "description": "Yıldız projeksiyonları",
+          "href": "/education/lessons/kotlin/module-08/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Type Erasure",
+          "description": "Tip silme",
+          "href": "/education/lessons/kotlin/module-08/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Generic Best Practices",
+          "description": "Generic kullanım en iyi uygulamaları",
+          "href": "/education/lessons/kotlin/module-08/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Common Generic Patterns",
+          "description": "Yaygın generic desenleri",
+          "href": "/education/lessons/kotlin/module-08/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Type System Overview",
+          "description": "Tip sistemi genel bakış",
+          "href": "/education/lessons/kotlin/module-08/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/kotlin/module-08/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-09",
+      "title": "Module 9: Coroutines Testi",
+      "summary": "Kotlin coroutines, async programming, suspend functions, coroutine scope, coroutine context, flow ve channel.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Coroutine kavramını anlamak",
+        "Suspend functions kullanmayı öğrenmek",
+        "Coroutine scope yönetmeyi öğrenmek",
+        "Asenkron programlama yapmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Coroutines Nedir?",
+          "description": "Coroutine kavramı",
+          "href": "/education/lessons/kotlin/module-09/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Async Programming",
+          "description": "Asenkron programlama",
+          "href": "/education/lessons/kotlin/module-09/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Suspend Functions",
+          "description": "Askıya alma fonksiyonları",
+          "href": "/education/lessons/kotlin/module-09/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Coroutine Builders",
+          "description": "launch, async, runBlocking",
+          "href": "/education/lessons/kotlin/module-09/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Coroutine Scope",
+          "description": "Coroutine kapsamı",
+          "href": "/education/lessons/kotlin/module-09/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Coroutine Context",
+          "description": "Coroutine bağlamı",
+          "href": "/education/lessons/kotlin/module-09/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Dispatchers",
+          "description": "Dağıtıcılar",
+          "href": "/education/lessons/kotlin/module-09/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Job ve Deferred",
+          "description": "İş ve ertelenmiş değerler",
+          "href": "/education/lessons/kotlin/module-09/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Exception Handling",
+          "description": "Hata yönetimi",
+          "href": "/education/lessons/kotlin/module-09/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Flow",
+          "description": "Akış yapısı",
+          "href": "/education/lessons/kotlin/module-09/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Channel",
+          "description": "Kanal yapısı",
+          "href": "/education/lessons/kotlin/module-09/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Coroutine Best Practices",
+          "description": "Coroutine kullanım en iyi uygulamaları",
+          "href": "/education/lessons/kotlin/module-09/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Testing Coroutines",
+          "description": "Coroutine testleri",
+          "href": "/education/lessons/kotlin/module-09/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Common Coroutine Patterns",
+          "description": "Yaygın coroutine desenleri",
+          "href": "/education/lessons/kotlin/module-09/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/kotlin/module-09/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-10",
+      "title": "Module 10: Android Development Temelleri Testi",
+      "summary": "Android geliştirme temelleri, Activity lifecycle, Fragment, Layout, Views, Resources, Manifest ve Android architecture.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Android geliştirme temellerini anlamak",
+        "Activity lifecycle yönetmeyi öğrenmek",
+        "Fragment kullanmayı öğrenmek",
+        "Android UI oluşturmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Android Development Temelleri",
+          "description": "Android geliştirme giriş",
+          "href": "/education/lessons/kotlin/module-10/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Android Studio Setup",
+          "description": "Android Studio kurulumu",
+          "href": "/education/lessons/kotlin/module-10/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Activity Lifecycle",
+          "description": "Activity yaşam döngüsü",
+          "href": "/education/lessons/kotlin/module-10/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Fragment",
+          "description": "Fragment yapısı",
+          "href": "/education/lessons/kotlin/module-10/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Layouts",
+          "description": "Yerleşim yapıları",
+          "href": "/education/lessons/kotlin/module-10/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Views",
+          "description": "Görünüm bileşenleri",
+          "href": "/education/lessons/kotlin/module-10/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Resources",
+          "description": "Kaynak yönetimi",
+          "href": "/education/lessons/kotlin/module-10/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: AndroidManifest",
+          "description": "Manifest dosyası",
+          "href": "/education/lessons/kotlin/module-10/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Intents",
+          "description": "Intent yapısı",
+          "href": "/education/lessons/kotlin/module-10/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: SharedPreferences",
+          "description": "Veri saklama",
+          "href": "/education/lessons/kotlin/module-10/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: RecyclerView",
+          "description": "Liste görünümü",
+          "href": "/education/lessons/kotlin/module-10/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Android Architecture",
+          "description": "Mimari desenler",
+          "href": "/education/lessons/kotlin/module-10/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Android Best Practices",
+          "description": "Android geliştirme en iyi uygulamaları",
+          "href": "/education/lessons/kotlin/module-10/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Common Android Patterns",
+          "description": "Yaygın Android desenleri",
+          "href": "/education/lessons/kotlin/module-10/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/kotlin/module-10/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-11",
+      "title": "Module 11: Jetpack Compose Testi",
+      "summary": "Jetpack Compose, declarative UI, Composable functions, State management, Navigation, Theming ve Compose best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Jetpack Compose framework'ünü anlamak",
+        "Declarative UI yaklaşımını öğrenmek",
+        "State management yapmayı öğrenmek",
+        "Modern Android UI geliştirmeyi öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Jetpack Compose Nedir?",
+          "description": "Compose framework",
+          "href": "/education/lessons/kotlin/module-11/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Declarative UI",
+          "description": "Bildirimsel arayüz",
+          "href": "/education/lessons/kotlin/module-11/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Composable Functions",
+          "description": "@Composable fonksiyonlar",
+          "href": "/education/lessons/kotlin/module-11/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: State Management",
+          "description": "remember, mutableStateOf",
+          "href": "/education/lessons/kotlin/module-11/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Recomposition",
+          "description": "Yeniden oluşturma",
+          "href": "/education/lessons/kotlin/module-11/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Layouts",
+          "description": "Column, Row, Box",
+          "href": "/education/lessons/kotlin/module-11/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Modifiers",
+          "description": "Değiştiriciler",
+          "href": "/education/lessons/kotlin/module-11/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Lists",
+          "description": "LazyColumn, LazyRow",
+          "href": "/education/lessons/kotlin/module-11/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Navigation",
+          "description": "Navigasyon yapısı",
+          "href": "/education/lessons/kotlin/module-11/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Theming",
+          "description": "Tema yönetimi",
+          "href": "/education/lessons/kotlin/module-11/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Animations",
+          "description": "Animasyonlar",
+          "href": "/education/lessons/kotlin/module-11/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: ViewModel Integration",
+          "description": "ViewModel entegrasyonu",
+          "href": "/education/lessons/kotlin/module-11/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Compose Best Practices",
+          "description": "Compose kullanım en iyi uygulamaları",
+          "href": "/education/lessons/kotlin/module-11/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Compose vs XML",
+          "description": "Compose ve XML karşılaştırması",
+          "href": "/education/lessons/kotlin/module-11/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/kotlin/module-11/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-12",
+      "title": "Module 12: Android Architecture Components Testi",
+      "summary": "Android Architecture Components, ViewModel, LiveData, Room, WorkManager, Navigation Component ve Data Binding.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Architecture Components'ı anlamak",
+        "ViewModel kullanmayı öğrenmek",
+        "LiveData kullanmayı öğrenmek",
+        "Room database kullanmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Architecture Components",
+          "description": "Mimari bileşenler",
+          "href": "/education/lessons/kotlin/module-12/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: ViewModel",
+          "description": "ViewModel yapısı",
+          "href": "/education/lessons/kotlin/module-12/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: LiveData",
+          "description": "LiveData kullanımı",
+          "href": "/education/lessons/kotlin/module-12/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Room Database",
+          "description": "Room veritabanı",
+          "href": "/education/lessons/kotlin/module-12/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Entities ve DAOs",
+          "description": "Varlıklar ve veri erişim nesneleri",
+          "href": "/education/lessons/kotlin/module-12/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: WorkManager",
+          "description": "Arka plan işleri",
+          "href": "/education/lessons/kotlin/module-12/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Navigation Component",
+          "description": "Navigasyon bileşeni",
+          "href": "/education/lessons/kotlin/module-12/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Data Binding",
+          "description": "Veri bağlama",
+          "href": "/education/lessons/kotlin/module-12/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Paging Library",
+          "description": "Sayfalama kütüphanesi",
+          "href": "/education/lessons/kotlin/module-12/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Lifecycle Components",
+          "description": "Yaşam döngüsü bileşenleri",
+          "href": "/education/lessons/kotlin/module-12/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Dependency Injection",
+          "description": "Bağımlılık enjeksiyonu",
+          "href": "/education/lessons/kotlin/module-12/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Architecture Best Practices",
+          "description": "Mimari en iyi uygulamaları",
+          "href": "/education/lessons/kotlin/module-12/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: MVVM Pattern",
+          "description": "MVVM deseni",
+          "href": "/education/lessons/kotlin/module-12/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Common Architecture Patterns",
+          "description": "Yaygın mimari desenler",
+          "href": "/education/lessons/kotlin/module-12/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/kotlin/module-12/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-13",
+      "title": "Module 13: Testing Testi",
+      "summary": "Kotlin testing, JUnit, Mockito, Android testing, unit testing, integration testing, UI testing ve testing best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Testing kavramını anlamak",
+        "Unit test yazmayı öğrenmek",
+        "Android test yazmayı öğrenmek",
+        "Testing stratejilerini öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Testing Temelleri",
+          "description": "Test türleri",
+          "href": "/education/lessons/kotlin/module-13/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: JUnit",
+          "description": "JUnit framework",
+          "href": "/education/lessons/kotlin/module-13/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Unit Testing",
+          "description": "Birim testleri",
+          "href": "/education/lessons/kotlin/module-13/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Mockito",
+          "description": "Mock kütüphanesi",
+          "href": "/education/lessons/kotlin/module-13/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Android Testing",
+          "description": "Android test yapısı",
+          "href": "/education/lessons/kotlin/module-13/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Instrumented Tests",
+          "description": "Enstrümantasyon testleri",
+          "href": "/education/lessons/kotlin/module-13/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: UI Testing",
+          "description": "Arayüz testleri",
+          "href": "/education/lessons/kotlin/module-13/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Espresso",
+          "description": "Espresso framework",
+          "href": "/education/lessons/kotlin/module-13/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Test Coverage",
+          "description": "Test kapsamı",
+          "href": "/education/lessons/kotlin/module-13/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Testing Coroutines",
+          "description": "Coroutine testleri",
+          "href": "/education/lessons/kotlin/module-13/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Testing ViewModel",
+          "description": "ViewModel testleri",
+          "href": "/education/lessons/kotlin/module-13/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Testing Best Practices",
+          "description": "Test yazma en iyi uygulamaları",
+          "href": "/education/lessons/kotlin/module-13/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Test Automation",
+          "description": "Test otomasyonu",
+          "href": "/education/lessons/kotlin/module-13/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Common Testing Patterns",
+          "description": "Yaygın test desenleri",
+          "href": "/education/lessons/kotlin/module-13/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/kotlin/module-13/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-14",
+      "title": "Module 14: Deployment ve Publishing Testi",
+      "summary": "Android app deployment, Google Play Store, app signing, versioning, release management, analytics ve app store optimization.",
+      "durationMinutes": 450,
+      "objectives": [
+        "App deployment sürecini anlamak",
+        "App signing yapmayı öğrenmek",
+        "Google Play Store'a yüklemeyi öğrenmek",
+        "Release management yapmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Deployment Temelleri",
+          "description": "Dağıtım süreci",
+          "href": "/education/lessons/kotlin/module-14/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: App Signing",
+          "description": "Uygulama imzalama",
+          "href": "/education/lessons/kotlin/module-14/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Build Variants",
+          "description": "Derleme varyantları",
+          "href": "/education/lessons/kotlin/module-14/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: ProGuard",
+          "description": "Kod karartma",
+          "href": "/education/lessons/kotlin/module-14/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Version Management",
+          "description": "Versiyon yönetimi",
+          "href": "/education/lessons/kotlin/module-14/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Google Play Console",
+          "description": "Play Console yönetimi",
+          "href": "/education/lessons/kotlin/module-14/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: App Store Listing",
+          "description": "Mağaza listeleme",
+          "href": "/education/lessons/kotlin/module-14/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Release Management",
+          "description": "Sürüm yönetimi",
+          "href": "/education/lessons/kotlin/module-14/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Beta Testing",
+          "description": "Beta test dağıtımı",
+          "href": "/education/lessons/kotlin/module-14/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Analytics",
+          "description": "Analitik entegrasyonu",
+          "href": "/education/lessons/kotlin/module-14/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Crash Reporting",
+          "description": "Çökme raporlama",
+          "href": "/education/lessons/kotlin/module-14/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: App Store Optimization",
+          "description": "ASO stratejileri",
+          "href": "/education/lessons/kotlin/module-14/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Deployment Best Practices",
+          "description": "Dağıtım en iyi uygulamaları",
+          "href": "/education/lessons/kotlin/module-14/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Continuous Integration",
+          "description": "CI/CD pipeline",
+          "href": "/education/lessons/kotlin/module-14/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/kotlin/module-14/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-15",
+      "title": "Module 15: Best Practices ve Capstone Testi",
+      "summary": "Kotlin geliştirmede en iyi uygulamalar, kod kalitesi, güvenlik, performans ve kapsamlı bir Android uygulaması geliştirme.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Kod kalitesi standartlarını öğrenmek",
+        "Güvenlik best practices uygulamak",
+        "Performans optimizasyon tekniklerini öğrenmek",
+        "Kapsamlı bir Android uygulaması geliştirmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Code Quality Standards",
+          "description": "Kod kalitesi standartları",
+          "href": "/education/lessons/kotlin/module-15/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Naming Conventions",
+          "description": "İsimlendirme kuralları",
+          "href": "/education/lessons/kotlin/module-15/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Code Organization",
+          "description": "Kod organizasyonu",
+          "href": "/education/lessons/kotlin/module-15/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Proje Planlama",
+          "description": "Proje gereksinimleri",
+          "href": "/education/lessons/kotlin/module-15/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Mimari Tasarım",
+          "description": "Uygulama mimarisi",
+          "href": "/education/lessons/kotlin/module-15/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Core Implementation",
+          "description": "Temel implementasyon",
+          "href": "/education/lessons/kotlin/module-15/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: UI Implementation",
+          "description": "Arayüz implementasyonu",
+          "href": "/education/lessons/kotlin/module-15/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Data Management",
+          "description": "Veri yönetimi",
+          "href": "/education/lessons/kotlin/module-15/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Network Integration",
+          "description": "Ağ entegrasyonu",
+          "href": "/education/lessons/kotlin/module-15/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Error Handling",
+          "description": "Kapsamlı hata yönetimi",
+          "href": "/education/lessons/kotlin/module-15/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Testing Strategy",
+          "description": "Test stratejisi",
+          "href": "/education/lessons/kotlin/module-15/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Performance Optimization",
+          "description": "Performans optimizasyonu",
+          "href": "/education/lessons/kotlin/module-15/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Documentation",
+          "description": "Proje dokümantasyonu",
+          "href": "/education/lessons/kotlin/module-15/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Project Review",
+          "description": "Proje incelemesi",
+          "href": "/education/lessons/kotlin/module-15/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Project Presentation",
+          "description": "Proje sunumu",
+          "href": "/education/lessons/kotlin/module-15/lesson-15"
+        }
+      ]
+    }
+  ]
+}

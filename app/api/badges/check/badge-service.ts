@@ -72,6 +72,7 @@ async function ensureBadgesInDatabase() {
           "silver": "silver",
           "gold": "gold",
           "platinum": "platinum",
+          "diamond": "diamond",
         };
 
         const tier = badgeData.tier ? tierMap[badgeData.tier] : null;
@@ -104,21 +105,45 @@ async function ensureBadgesInDatabase() {
         };
 
         // Upsert işlemi (key veya id ile kontrol et)
-        const existingBadge = await db.badge.findFirst({
-          where: {
-            OR: [
-              { id: badgeData.id },
-              ...(badgeData.key ? [{ key: badgeData.key }] : []),
-            ],
-          },
-        });
+        // Önce key ile kontrol et (daha güvenilir)
+        let existingBadge = null;
+        if (badgeData.key) {
+          existingBadge = await db.badge.findUnique({
+            where: { key: badgeData.key },
+          });
+        }
+        
+        // Key ile bulunamazsa id ile kontrol et
+        if (!existingBadge && badgeData.id) {
+          existingBadge = await db.badge.findUnique({
+            where: { id: badgeData.id },
+          });
+        }
 
         if (!existingBadge) {
           // Oluştur
-          await db.badge.create({
-            data: badgePayload,
-          });
-          created++;
+          try {
+            await db.badge.create({
+              data: badgePayload,
+            });
+            created++;
+          } catch (createError: any) {
+            // Create hatası (örn: unique constraint) durumunda logla ve devam et
+            console.error(`[BADGE_SERVICE] Create hatası (${badgeData.id || badgeData.key || 'unknown'}):`, createError.message);
+            skipped++;
+          }
+        } else {
+          // Mevcut rozeti güncelle (upsert mantığı)
+          try {
+            await db.badge.update({
+              where: { id: existingBadge.id },
+              data: badgePayload,
+            });
+            // Updated sayısını takip etmek için (opsiyonel)
+          } catch (updateError: any) {
+            console.error(`[BADGE_SERVICE] Update hatası (${badgeData.id || badgeData.key || 'unknown'}):`, updateError.message);
+            skipped++;
+          }
         }
       } catch (error: any) {
         console.error(`[BADGE_SERVICE] Rozet işlenirken hata (${badgeData.id || badgeData.key || 'unknown'}):`, error.message);

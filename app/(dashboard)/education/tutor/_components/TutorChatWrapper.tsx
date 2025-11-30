@@ -27,7 +27,7 @@ interface WrongQuestion {
 }
 
 export function TutorChatWrapper() {
-  const [wrongQuestions, setWrongQuestions] = useState<WrongQuestion[]>([]);
+  const [allWrongQuestions, setAllWrongQuestions] = useState<WrongQuestion[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number | null>(null);
 
@@ -38,16 +38,21 @@ export function TutorChatWrapper() {
         const data = await response.json();
         const questions = data.wrongQuestions || [];
         
-        // Sadece "understood" olmayan soruları filtrele
+        // Tüm soruları sakla (sidebar için)
+        setAllWrongQuestions(questions);
+        
+        // Sadece "understood" olmayan soruları bul (chat için)
         const notUnderstoodQuestions = questions.filter(
           (q: WrongQuestion) => q.status !== "understood"
         );
         
-        setWrongQuestions(notUnderstoodQuestions);
-        
-        // İlk soruyu aktif yap
+        // İlk soruyu aktif yap (understood olmayanlar arasından)
         if (notUnderstoodQuestions.length > 0) {
-          setCurrentQuestionIndex(0);
+          // Tüm sorular listesinde ilk understood olmayan sorunun index'ini bul
+          const firstNotUnderstoodIndex = questions.findIndex(
+            (q: WrongQuestion) => q.id === notUnderstoodQuestions[0].id
+          );
+          setCurrentQuestionIndex(firstNotUnderstoodIndex);
         }
       } catch (error) {
         console.error("Error fetching wrong questions:", error);
@@ -68,23 +73,25 @@ export function TutorChatWrapper() {
       });
 
       if (response.ok) {
-        // Soruyu listeden kaldır
-        setWrongQuestions((prev) => {
-          const updated = prev.filter((q) => q.id !== questionId);
-          
-          // Eğer aktif soru anlaşıldıysa, ilk kalan soruya geç (index 0)
-          const currentIndex = prev.findIndex((q) => q.id === questionId);
-          if (currentIndex !== -1) {
-            if (updated.length > 0) {
-              // Her zaman ilk soruya geç (çünkü liste güncelleniyor)
-              setCurrentQuestionIndex(0);
-            } else {
-              setCurrentQuestionIndex(null);
-            }
-          }
-          
-          return updated;
+        // Sorunun status'unu güncelle
+        setAllWrongQuestions((prev) => {
+          return prev.map((q) => 
+            q.id === questionId ? { ...q, status: "understood" as const } : q
+          );
         });
+        
+        // Eğer aktif soru anlaşıldıysa, bir sonraki understood olmayan soruya geç
+        const notUnderstoodQuestions = allWrongQuestions
+          .map((q, idx) => ({ q, idx }))
+          .filter(({ q }) => q.id !== questionId && q.status !== "understood");
+        
+        if (notUnderstoodQuestions.length > 0) {
+          const nextQuestion = notUnderstoodQuestions[0];
+          const nextIndex = allWrongQuestions.findIndex((q) => q.id === nextQuestion.q.id);
+          setCurrentQuestionIndex(nextIndex >= 0 ? nextIndex : null);
+        } else {
+          setCurrentQuestionIndex(null);
+        }
       }
     } catch (error) {
       console.error("Error updating question status:", error);
@@ -92,22 +99,36 @@ export function TutorChatWrapper() {
   };
 
   const handleSetCurrentQuestion = (index: number) => {
-    if (index >= 0 && index < wrongQuestions.length) {
-      setCurrentQuestionIndex(index);
+    if (index >= 0 && index < allWrongQuestions.length) {
+      // Sadece understood olmayan sorulara geçiş yapılabilir
+      if (allWrongQuestions[index].status !== "understood") {
+        setCurrentQuestionIndex(index);
+      }
     }
   };
 
   const handleNextQuestion = () => {
-    // Always go to first question (index 0) since list is updated
-    if (wrongQuestions.length > 0) {
-      setCurrentQuestionIndex(0);
+    // Bir sonraki understood olmayan soruya geç
+    const notUnderstoodQuestions = allWrongQuestions
+      .map((q, idx) => ({ q, idx }))
+      .filter(({ q }) => q.status !== "understood");
+    
+    if (notUnderstoodQuestions.length > 0) {
+      const nextQuestion = notUnderstoodQuestions[0];
+      const nextIndex = allWrongQuestions.findIndex((q) => q.id === nextQuestion.q.id);
+      setCurrentQuestionIndex(nextIndex >= 0 ? nextIndex : null);
     } else {
       setCurrentQuestionIndex(null);
     }
   };
 
-  const currentQuestion = currentQuestionIndex !== null && wrongQuestions.length > 0
-    ? wrongQuestions[currentQuestionIndex]
+  // Chat için sadece understood olmayan sorular
+  const notUnderstoodQuestions = allWrongQuestions.filter(
+    (q) => q.status !== "understood"
+  );
+  
+  const currentQuestion = currentQuestionIndex !== null && allWrongQuestions.length > 0
+    ? allWrongQuestions[currentQuestionIndex]
     : null;
 
   return (
@@ -115,7 +136,7 @@ export function TutorChatWrapper() {
       {/* Main Content - Chat */}
       <div className="flex-1 overflow-hidden min-w-0">
         <TutorChat
-          wrongQuestions={wrongQuestions}
+          wrongQuestions={notUnderstoodQuestions}
           currentQuestion={currentQuestion}
           onQuestionUnderstood={handleQuestionUnderstood}
           onNextQuestion={handleNextQuestion}
@@ -140,7 +161,7 @@ export function TutorChatWrapper() {
                 Yanlış Sorularım
               </h1>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                {wrongQuestions.length} soru kaldı
+                {notUnderstoodQuestions.length} soru kaldı
               </p>
             </div>
           </div>
@@ -149,7 +170,7 @@ export function TutorChatWrapper() {
         {/* Questions List - Scrollable */}
         <div className="flex-1 overflow-y-auto min-h-0">
           <WrongQuestionsSidebar
-            wrongQuestions={wrongQuestions}
+            wrongQuestions={allWrongQuestions}
             currentQuestionIndex={currentQuestionIndex}
             onQuestionSelect={handleSetCurrentQuestion}
             loading={loading}

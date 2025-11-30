@@ -1,0 +1,1578 @@
+{
+  "overview": {
+    "description": "MongoDB, modern uygulamalar için tasarlanmış popüler bir NoSQL doküman veritabanıdır. Bu kapsamlı kurs ile MongoDB'nin temellerinden ileri seviye konularına kadar her şeyi öğreneceksiniz. Doküman modeli, sorgulama, indeksleme, aggregation pipeline, replication, sharding ve performans optimizasyonu konularında uzmanlaşacaksınız.",
+    "estimatedDurationMinutes": 6750
+  },
+  "learningObjectives": [
+    "MongoDB'nin temel kavramlarını ve NoSQL yaklaşımını anlamak",
+    "Doküman modeli ve BSON formatını öğrenmek",
+    "CRUD operasyonlarını etkili kullanmak",
+    "Gelişmiş sorgulama ve filtreleme yapmak",
+    "Aggregation pipeline ile karmaşık veri analizi yapmak",
+    "İndeksleme ve performans optimizasyonu yapmak",
+    "Replication ve sharding ile ölçeklenebilirlik sağlamak",
+    "Güvenlik, backup ve recovery stratejilerini uygulamak"
+  ],
+  "modules": [
+    {
+      "id": "module-01",
+      "title": "Module 1: MongoDB Tanımı ve Temelleri Testi",
+      "summary": "MongoDB'nin ne olduğu, NoSQL kavramı, tarihçesi, avantajları, ilişkisel veritabanlarından farkları ve temel kavramlar.",
+      "durationMinutes": 450,
+      "objectives": [
+        "MongoDB'nin ne olduğunu ve neden kullanıldığını anlamak",
+        "NoSQL kavramını öğrenmek",
+        "MongoDB'nin ilişkisel veritabanlarından farklarını öğrenmek",
+        "MongoDB'nin avantajlarını ve kullanım alanlarını keşfetmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: MongoDB Nedir?",
+          "description": "MongoDB'nin temel tanımı ve genel bakış",
+          "href": "/education/lessons/mongodb/module-01/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: NoSQL Nedir?",
+          "description": "NoSQL veritabanı kavramı",
+          "href": "/education/lessons/mongodb/module-01/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: MongoDB vs İlişkisel Veritabanları",
+          "description": "MongoDB ve SQL veritabanları karşılaştırması",
+          "href": "/education/lessons/mongodb/module-01/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: MongoDB'nin Tarihçesi",
+          "description": "MongoDB'nin ortaya çıkışı ve gelişimi",
+          "href": "/education/lessons/mongodb/module-01/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: MongoDB'nin Avantajları",
+          "description": "Esneklik, ölçeklenebilirlik, performans",
+          "href": "/education/lessons/mongodb/module-01/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: MongoDB Kullanım Alanları",
+          "description": "Web uygulamaları, big data, IoT",
+          "href": "/education/lessons/mongodb/module-01/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: MongoDB Ekosistemi",
+          "description": "MongoDB topluluğu ve araçlar",
+          "href": "/education/lessons/mongodb/module-01/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Doküman Modeli",
+          "description": "Doküman tabanlı veri modeli",
+          "href": "/education/lessons/mongodb/module-01/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: BSON Formatı",
+          "description": "Binary JSON formatı",
+          "href": "/education/lessons/mongodb/module-01/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: MongoDB Lisanslama",
+          "description": "Lisans modelleri",
+          "href": "/education/lessons/mongodb/module-01/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: MongoDB Atlas",
+          "description": "Bulut tabanlı MongoDB servisi",
+          "href": "/education/lessons/mongodb/module-01/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: MongoDB Performans",
+          "description": "Performans özellikleri",
+          "href": "/education/lessons/mongodb/module-01/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: MongoDB Güvenlik",
+          "description": "Güvenlik özellikleri",
+          "href": "/education/lessons/mongodb/module-01/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: MongoDB Topluluk",
+          "description": "Açık kaynak topluluğu",
+          "href": "/education/lessons/mongodb/module-01/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Değerlendirme",
+          "description": "Modül kapsamında öğrenilenlerin özeti",
+          "href": "/education/lessons/mongodb/module-01/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-02",
+      "title": "Module 2: MongoDB Kurulumu ve Yapılandırma Testi",
+      "summary": "MongoDB kurulumu, MongoDB Shell, Compass GUI, bağlantı yapılandırması, temel komutlar ve geliştirme ortamı.",
+      "durationMinutes": 450,
+      "objectives": [
+        "MongoDB kurulumunu öğrenmek",
+        "MongoDB Shell kullanmayı öğrenmek",
+        "MongoDB Compass kullanmayı öğrenmek",
+        "Bağlantı yapılandırmasını anlamak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: MongoDB Kurulumu",
+          "description": "MongoDB indirme ve kurulum",
+          "href": "/education/lessons/mongodb/module-02/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: MongoDB Shell",
+          "description": "mongo shell kullanımı",
+          "href": "/education/lessons/mongodb/module-02/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: MongoDB Compass",
+          "description": "GUI aracı",
+          "href": "/education/lessons/mongodb/module-02/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: MongoDB Bağlantısı",
+          "description": "Connection string",
+          "href": "/education/lessons/mongodb/module-02/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: MongoDB Yapılandırması",
+          "description": "Yapılandırma dosyası",
+          "href": "/education/lessons/mongodb/module-02/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Temel Komutlar",
+          "description": "show dbs, use, help",
+          "href": "/education/lessons/mongodb/module-02/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: MongoDB Servis Yönetimi",
+          "description": "Servis başlatma/durdurma",
+          "href": "/education/lessons/mongodb/module-02/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: MongoDB Atlas Kurulumu",
+          "description": "Bulut kurulumu",
+          "href": "/education/lessons/mongodb/module-02/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: MongoDB Driver'ları",
+          "description": "Programlama dili driver'ları",
+          "href": "/education/lessons/mongodb/module-02/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: MongoDB Logging",
+          "description": "Log yönetimi",
+          "href": "/education/lessons/mongodb/module-02/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: MongoDB Monitoring",
+          "description": "İzleme araçları",
+          "href": "/education/lessons/mongodb/module-02/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: MongoDB Best Practices",
+          "description": "Kurulum en iyi uygulamaları",
+          "href": "/education/lessons/mongodb/module-02/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Troubleshooting",
+          "description": "Sorun giderme",
+          "href": "/education/lessons/mongodb/module-02/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: MongoDB Versiyonları",
+          "description": "Versiyon yönetimi",
+          "href": "/education/lessons/mongodb/module-02/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/mongodb/module-02/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-03",
+      "title": "Module 3: Doküman Modeli ve Veri Yapıları Testi",
+      "summary": "MongoDB doküman modeli, collections, documents, BSON, veri tipleri, nested documents, arrays ve veri yapıları.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Doküman modelini anlamak",
+        "Collections ve documents kavramını öğrenmek",
+        "BSON veri tiplerini öğrenmek",
+        "Nested documents ve arrays kullanmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Doküman Modeli",
+          "description": "Doküman tabanlı model",
+          "href": "/education/lessons/mongodb/module-03/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Collections",
+          "description": "Koleksiyon kavramı",
+          "href": "/education/lessons/mongodb/module-03/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Documents",
+          "description": "Doküman yapısı",
+          "href": "/education/lessons/mongodb/module-03/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: BSON Veri Tipleri",
+          "description": "BSON tip sistemi",
+          "href": "/education/lessons/mongodb/module-03/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Nested Documents",
+          "description": "İç içe dokümanlar",
+          "href": "/education/lessons/mongodb/module-03/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Arrays",
+          "description": "Dizi yapıları",
+          "href": "/education/lessons/mongodb/module-03/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: ObjectId",
+          "description": "Doküman kimliği",
+          "href": "/education/lessons/mongodb/module-03/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Date ve Timestamp",
+          "description": "Tarih ve zaman",
+          "href": "/education/lessons/mongodb/module-03/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Binary Data",
+          "description": "İkili veri",
+          "href": "/education/lessons/mongodb/module-03/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Decimal128",
+          "description": "Ondalık sayılar",
+          "href": "/education/lessons/mongodb/module-03/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Veri Yapısı Tasarımı",
+          "description": "Doküman tasarımı",
+          "href": "/education/lessons/mongodb/module-03/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Schema Design",
+          "description": "Şema tasarımı",
+          "href": "/education/lessons/mongodb/module-03/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Veri Tipleri Best Practices",
+          "description": "Veri tipi seçimi",
+          "href": "/education/lessons/mongodb/module-03/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Common Data Patterns",
+          "description": "Yaygın veri desenleri",
+          "href": "/education/lessons/mongodb/module-03/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/mongodb/module-03/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-04",
+      "title": "Module 4: CRUD Operasyonları Testi",
+      "summary": "MongoDB CRUD operasyonları, insert, find, update, delete, query operators, projection ve cursor operations.",
+      "durationMinutes": 450,
+      "objectives": [
+        "CRUD operasyonlarını anlamak",
+        "Insert operasyonlarını öğrenmek",
+        "Find ve query operasyonlarını öğrenmek",
+        "Update ve delete operasyonlarını öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: CRUD Operasyonları",
+          "description": "CRUD kavramı",
+          "href": "/education/lessons/mongodb/module-04/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Insert One",
+          "description": "Tek doküman ekleme",
+          "href": "/education/lessons/mongodb/module-04/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Insert Many",
+          "description": "Çoklu doküman ekleme",
+          "href": "/education/lessons/mongodb/module-04/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Find",
+          "description": "Doküman bulma",
+          "href": "/education/lessons/mongodb/module-04/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Query Operators",
+          "description": "Sorgu operatörleri",
+          "href": "/education/lessons/mongodb/module-04/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Comparison Operators",
+          "description": "Karşılaştırma operatörleri",
+          "href": "/education/lessons/mongodb/module-04/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Logical Operators",
+          "description": "Mantıksal operatörler",
+          "href": "/education/lessons/mongodb/module-04/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Update One",
+          "description": "Tek doküman güncelleme",
+          "href": "/education/lessons/mongodb/module-04/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Update Many",
+          "description": "Çoklu doküman güncelleme",
+          "href": "/education/lessons/mongodb/module-04/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Update Operators",
+          "description": "Güncelleme operatörleri",
+          "href": "/education/lessons/mongodb/module-04/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Delete One",
+          "description": "Tek doküman silme",
+          "href": "/education/lessons/mongodb/module-04/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Delete Many",
+          "description": "Çoklu doküman silme",
+          "href": "/education/lessons/mongodb/module-04/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Projection",
+          "description": "Alan seçimi",
+          "href": "/education/lessons/mongodb/module-04/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Cursor Operations",
+          "description": "İmleç işlemleri",
+          "href": "/education/lessons/mongodb/module-04/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/mongodb/module-04/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-05",
+      "title": "Module 5: Gelişmiş Sorgulama Testi",
+      "summary": "Gelişmiş sorgulama teknikleri, array queries, text search, geospatial queries, regex, sorting, limiting ve pagination.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Gelişmiş sorgulama tekniklerini öğrenmek",
+        "Array queries yapmayı öğrenmek",
+        "Text search kullanmayı öğrenmek",
+        "Geospatial queries yapmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Gelişmiş Sorgulama",
+          "description": "İleri seviye sorgular",
+          "href": "/education/lessons/mongodb/module-05/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Array Queries",
+          "description": "Dizi sorguları",
+          "href": "/education/lessons/mongodb/module-05/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Array Operators",
+          "description": "Dizi operatörleri",
+          "href": "/education/lessons/mongodb/module-05/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Text Search",
+          "description": "Metin arama",
+          "href": "/education/lessons/mongodb/module-05/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Text Index",
+          "description": "Metin indeksi",
+          "href": "/education/lessons/mongodb/module-05/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Geospatial Queries",
+          "description": "Coğrafi sorgular",
+          "href": "/education/lessons/mongodb/module-05/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Geospatial Indexes",
+          "description": "Coğrafi indeksler",
+          "href": "/education/lessons/mongodb/module-05/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Regex Queries",
+          "description": "Düzenli ifade sorguları",
+          "href": "/education/lessons/mongodb/module-05/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Sorting",
+          "description": "Sıralama",
+          "href": "/education/lessons/mongodb/module-05/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Limiting",
+          "description": "Sınırlama",
+          "href": "/education/lessons/mongodb/module-05/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Pagination",
+          "description": "Sayfalama",
+          "href": "/education/lessons/mongodb/module-05/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Count ve Distinct",
+          "description": "Sayma ve benzersiz değerler",
+          "href": "/education/lessons/mongodb/module-05/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Query Performance",
+          "description": "Sorgu performansı",
+          "href": "/education/lessons/mongodb/module-05/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Query Best Practices",
+          "description": "Sorgulama en iyi uygulamaları",
+          "href": "/education/lessons/mongodb/module-05/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/mongodb/module-05/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-06",
+      "title": "Module 6: İndeksleme Testi",
+      "summary": "MongoDB indexing, index types, single field indexes, compound indexes, multikey indexes, text indexes, geospatial indexes ve index management.",
+      "durationMinutes": 450,
+      "objectives": [
+        "İndeksleme kavramını anlamak",
+        "Index types öğrenmek",
+        "Index oluşturmayı öğrenmek",
+        "Index yönetimini öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: İndeksleme Nedir?",
+          "description": "İndeks kavramı",
+          "href": "/education/lessons/mongodb/module-06/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Index Types",
+          "description": "İndeks türleri",
+          "href": "/education/lessons/mongodb/module-06/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Single Field Indexes",
+          "description": "Tek alan indeksleri",
+          "href": "/education/lessons/mongodb/module-06/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Compound Indexes",
+          "description": "Bileşik indeksler",
+          "href": "/education/lessons/mongodb/module-06/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Multikey Indexes",
+          "description": "Çoklu anahtar indeksleri",
+          "href": "/education/lessons/mongodb/module-06/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Text Indexes",
+          "description": "Metin indeksleri",
+          "href": "/education/lessons/mongodb/module-06/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Geospatial Indexes",
+          "description": "Coğrafi indeksler",
+          "href": "/education/lessons/mongodb/module-06/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Index Creation",
+          "description": "İndeks oluşturma",
+          "href": "/education/lessons/mongodb/module-06/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Index Management",
+          "description": "İndeks yönetimi",
+          "href": "/education/lessons/mongodb/module-06/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Index Performance",
+          "description": "İndeks performansı",
+          "href": "/education/lessons/mongodb/module-06/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Index Strategy",
+          "description": "İndeks stratejisi",
+          "href": "/education/lessons/mongodb/module-06/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Index Analysis",
+          "description": "İndeks analizi",
+          "href": "/education/lessons/mongodb/module-06/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Index Best Practices",
+          "description": "İndeksleme en iyi uygulamaları",
+          "href": "/education/lessons/mongodb/module-06/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Common Index Patterns",
+          "description": "Yaygın indeks desenleri",
+          "href": "/education/lessons/mongodb/module-06/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/mongodb/module-06/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-07",
+      "title": "Module 7: Aggregation Pipeline Testi",
+      "summary": "MongoDB aggregation pipeline, pipeline stages, $match, $group, $project, $sort, $limit, $unwind ve aggregation operators.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Aggregation pipeline kavramını anlamak",
+        "Pipeline stages öğrenmek",
+        "Aggregation operators kullanmayı öğrenmek",
+        "Karmaşık veri analizi yapmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Aggregation Pipeline",
+          "description": "Pipeline kavramı",
+          "href": "/education/lessons/mongodb/module-07/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Pipeline Stages",
+          "description": "Pipeline aşamaları",
+          "href": "/education/lessons/mongodb/module-07/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: $match Stage",
+          "description": "Filtreleme aşaması",
+          "href": "/education/lessons/mongodb/module-07/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: $group Stage",
+          "description": "Gruplama aşaması",
+          "href": "/education/lessons/mongodb/module-07/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: $project Stage",
+          "description": "Projeksiyon aşaması",
+          "href": "/education/lessons/mongodb/module-07/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: $sort Stage",
+          "description": "Sıralama aşaması",
+          "href": "/education/lessons/mongodb/module-07/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: $limit ve $skip",
+          "description": "Sınırlama aşamaları",
+          "href": "/education/lessons/mongodb/module-07/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: $unwind",
+          "description": "Dizi açma",
+          "href": "/education/lessons/mongodb/module-07/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: $lookup",
+          "description": "Birleştirme",
+          "href": "/education/lessons/mongodb/module-07/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Aggregation Operators",
+          "description": "Toplama operatörleri",
+          "href": "/education/lessons/mongodb/module-07/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: $addFields",
+          "description": "Alan ekleme",
+          "href": "/education/lessons/mongodb/module-07/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: $facet",
+          "description": "Çoklu pipeline",
+          "href": "/education/lessons/mongodb/module-07/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Aggregation Best Practices",
+          "description": "Aggregation en iyi uygulamaları",
+          "href": "/education/lessons/mongodb/module-07/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Common Aggregation Patterns",
+          "description": "Yaygın aggregation desenleri",
+          "href": "/education/lessons/mongodb/module-07/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/mongodb/module-07/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-08",
+      "title": "Module 8: Transactions Testi",
+      "summary": "MongoDB transactions, ACID properties, transaction operations, multi-document transactions, transaction best practices ve error handling.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Transaction kavramını anlamak",
+        "ACID properties öğrenmek",
+        "Transaction operations yapmayı öğrenmek",
+        "Multi-document transactions kullanmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Transactions Nedir?",
+          "description": "Transaction kavramı",
+          "href": "/education/lessons/mongodb/module-08/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: ACID Properties",
+          "description": "ACID özellikleri",
+          "href": "/education/lessons/mongodb/module-08/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Transaction Operations",
+          "description": "Transaction işlemleri",
+          "href": "/education/lessons/mongodb/module-08/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Start Transaction",
+          "description": "Transaction başlatma",
+          "href": "/education/lessons/mongodb/module-08/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Commit Transaction",
+          "description": "Transaction onaylama",
+          "href": "/education/lessons/mongodb/module-08/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Abort Transaction",
+          "description": "Transaction iptal",
+          "href": "/education/lessons/mongodb/module-08/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Multi-Document Transactions",
+          "description": "Çoklu doküman transaction'ları",
+          "href": "/education/lessons/mongodb/module-08/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Transaction Isolation",
+          "description": "Transaction izolasyonu",
+          "href": "/education/lessons/mongodb/module-08/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Transaction Timeout",
+          "description": "Zaman aşımı",
+          "href": "/education/lessons/mongodb/module-08/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Error Handling",
+          "description": "Hata yönetimi",
+          "href": "/education/lessons/mongodb/module-08/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Transaction Best Practices",
+          "description": "Transaction en iyi uygulamaları",
+          "href": "/education/lessons/mongodb/module-08/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Transaction Performance",
+          "description": "Transaction performansı",
+          "href": "/education/lessons/mongodb/module-08/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Common Transaction Patterns",
+          "description": "Yaygın transaction desenleri",
+          "href": "/education/lessons/mongodb/module-08/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Transaction vs Single Operations",
+          "description": "Ne zaman transaction kullanılır",
+          "href": "/education/lessons/mongodb/module-08/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/mongodb/module-08/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-09",
+      "title": "Module 9: Replication Testi",
+      "summary": "MongoDB replication, replica sets, primary ve secondary nodes, oplog, failover, read preferences ve replication best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Replication kavramını anlamak",
+        "Replica sets öğrenmek",
+        "Primary ve secondary nodes yönetmeyi öğrenmek",
+        "Failover mekanizmasını öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Replication Nedir?",
+          "description": "Replikasyon kavramı",
+          "href": "/education/lessons/mongodb/module-09/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Replica Sets",
+          "description": "Replika setleri",
+          "href": "/education/lessons/mongodb/module-09/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Primary Node",
+          "description": "Birincil düğüm",
+          "href": "/education/lessons/mongodb/module-09/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Secondary Nodes",
+          "description": "İkincil düğümler",
+          "href": "/education/lessons/mongodb/module-09/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Oplog",
+          "description": "Operasyon günlüğü",
+          "href": "/education/lessons/mongodb/module-09/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Replication Lag",
+          "description": "Replikasyon gecikmesi",
+          "href": "/education/lessons/mongodb/module-09/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Failover",
+          "description": "Yedekleme mekanizması",
+          "href": "/education/lessons/mongodb/module-09/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Read Preferences",
+          "description": "Okuma tercihleri",
+          "href": "/education/lessons/mongodb/module-09/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Write Concern",
+          "description": "Yazma endişesi",
+          "href": "/education/lessons/mongodb/module-09/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Replica Set Configuration",
+          "description": "Replika set yapılandırması",
+          "href": "/education/lessons/mongodb/module-09/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Replication Best Practices",
+          "description": "Replikasyon en iyi uygulamaları",
+          "href": "/education/lessons/mongodb/module-09/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Monitoring Replication",
+          "description": "Replikasyon izleme",
+          "href": "/education/lessons/mongodb/module-09/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Common Replication Patterns",
+          "description": "Yaygın replikasyon desenleri",
+          "href": "/education/lessons/mongodb/module-09/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Replication Troubleshooting",
+          "description": "Replikasyon sorun giderme",
+          "href": "/education/lessons/mongodb/module-09/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/mongodb/module-09/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-10",
+      "title": "Module 10: Sharding Testi",
+      "summary": "MongoDB sharding, sharded clusters, shard keys, mongos, config servers, sharding strategies ve sharding best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Sharding kavramını anlamak",
+        "Sharded clusters öğrenmek",
+        "Shard keys seçmeyi öğrenmek",
+        "Sharding stratejilerini öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Sharding Nedir?",
+          "description": "Parçalama kavramı",
+          "href": "/education/lessons/mongodb/module-10/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Sharded Clusters",
+          "description": "Parçalı kümeler",
+          "href": "/education/lessons/mongodb/module-10/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Shard Keys",
+          "description": "Parça anahtarları",
+          "href": "/education/lessons/mongodb/module-10/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Mongos",
+          "description": "Yönlendirici",
+          "href": "/education/lessons/mongodb/module-10/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Config Servers",
+          "description": "Yapılandırma sunucuları",
+          "href": "/education/lessons/mongodb/module-10/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Sharding Strategies",
+          "description": "Parçalama stratejileri",
+          "href": "/education/lessons/mongodb/module-10/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Range Sharding",
+          "description": "Aralık parçalama",
+          "href": "/education/lessons/mongodb/module-10/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Hash Sharding",
+          "description": "Karma parçalama",
+          "href": "/education/lessons/mongodb/module-10/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Zone Sharding",
+          "description": "Bölge parçalama",
+          "href": "/education/lessons/mongodb/module-10/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Chunk Management",
+          "description": "Parça yönetimi",
+          "href": "/education/lessons/mongodb/module-10/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Sharding Best Practices",
+          "description": "Parçalama en iyi uygulamaları",
+          "href": "/education/lessons/mongodb/module-10/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Monitoring Sharding",
+          "description": "Parçalama izleme",
+          "href": "/education/lessons/mongodb/module-10/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Common Sharding Patterns",
+          "description": "Yaygın parçalama desenleri",
+          "href": "/education/lessons/mongodb/module-10/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Sharding Troubleshooting",
+          "description": "Parçalama sorun giderme",
+          "href": "/education/lessons/mongodb/module-10/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/mongodb/module-10/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-11",
+      "title": "Module 11: Performans Optimizasyonu Testi",
+      "summary": "MongoDB performans optimizasyonu, query optimization, index optimization, connection pooling, caching, monitoring ve performance tuning.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Performans optimizasyonu kavramını anlamak",
+        "Query optimization yapmayı öğrenmek",
+        "Index optimization yapmayı öğrenmek",
+        "Performance tuning yapmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Performans Optimizasyonu",
+          "description": "Performans kavramı",
+          "href": "/education/lessons/mongodb/module-11/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Query Optimization",
+          "description": "Sorgu optimizasyonu",
+          "href": "/education/lessons/mongodb/module-11/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Index Optimization",
+          "description": "İndeks optimizasyonu",
+          "href": "/education/lessons/mongodb/module-11/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Explain Plan",
+          "description": "Sorgu planı analizi",
+          "href": "/education/lessons/mongodb/module-11/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Connection Pooling",
+          "description": "Bağlantı havuzlama",
+          "href": "/education/lessons/mongodb/module-11/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Caching",
+          "description": "Önbellekleme",
+          "href": "/education/lessons/mongodb/module-11/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Monitoring Tools",
+          "description": "İzleme araçları",
+          "href": "/education/lessons/mongodb/module-11/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Profiling",
+          "description": "Profil oluşturma",
+          "href": "/education/lessons/mongodb/module-11/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Resource Management",
+          "description": "Kaynak yönetimi",
+          "href": "/education/lessons/mongodb/module-11/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Write Performance",
+          "description": "Yazma performansı",
+          "href": "/education/lessons/mongodb/module-11/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Read Performance",
+          "description": "Okuma performansı",
+          "href": "/education/lessons/mongodb/module-11/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Performance Best Practices",
+          "description": "Performans en iyi uygulamaları",
+          "href": "/education/lessons/mongodb/module-11/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Common Performance Issues",
+          "description": "Yaygın performans sorunları",
+          "href": "/education/lessons/mongodb/module-11/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Performance Testing",
+          "description": "Performans testleri",
+          "href": "/education/lessons/mongodb/module-11/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/mongodb/module-11/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-12",
+      "title": "Module 12: Güvenlik Testi",
+      "summary": "MongoDB güvenlik, authentication, authorization, roles, privileges, encryption, network security ve security best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Güvenlik kavramını anlamak",
+        "Authentication yapılandırmayı öğrenmek",
+        "Authorization yapılandırmayı öğrenmek",
+        "Encryption kullanmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Güvenlik Temelleri",
+          "description": "Güvenlik kavramı",
+          "href": "/education/lessons/mongodb/module-12/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Authentication",
+          "description": "Kimlik doğrulama",
+          "href": "/education/lessons/mongodb/module-12/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Authorization",
+          "description": "Yetkilendirme",
+          "href": "/education/lessons/mongodb/module-12/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Roles",
+          "description": "Roller",
+          "href": "/education/lessons/mongodb/module-12/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Privileges",
+          "description": "Ayrıcalıklar",
+          "href": "/education/lessons/mongodb/module-12/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: User Management",
+          "description": "Kullanıcı yönetimi",
+          "href": "/education/lessons/mongodb/module-12/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Encryption",
+          "description": "Şifreleme",
+          "href": "/education/lessons/mongodb/module-12/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Network Security",
+          "description": "Ağ güvenliği",
+          "href": "/education/lessons/mongodb/module-12/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: TLS/SSL",
+          "description": "Güvenli bağlantı",
+          "href": "/education/lessons/mongodb/module-12/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Firewall Configuration",
+          "description": "Güvenlik duvarı",
+          "href": "/education/lessons/mongodb/module-12/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Security Best Practices",
+          "description": "Güvenlik en iyi uygulamaları",
+          "href": "/education/lessons/mongodb/module-12/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Security Auditing",
+          "description": "Güvenlik denetimi",
+          "href": "/education/lessons/mongodb/module-12/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Common Security Issues",
+          "description": "Yaygın güvenlik sorunları",
+          "href": "/education/lessons/mongodb/module-12/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Security Monitoring",
+          "description": "Güvenlik izleme",
+          "href": "/education/lessons/mongodb/module-12/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/mongodb/module-12/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-13",
+      "title": "Module 13: Backup ve Recovery Testi",
+      "summary": "MongoDB backup ve recovery, mongodump, mongorestore, point-in-time recovery, backup strategies ve disaster recovery.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Backup kavramını anlamak",
+        "mongodump kullanmayı öğrenmek",
+        "mongorestore kullanmayı öğrenmek",
+        "Recovery stratejilerini öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Backup Temelleri",
+          "description": "Yedekleme kavramı",
+          "href": "/education/lessons/mongodb/module-13/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: mongodump",
+          "description": "Yedekleme aracı",
+          "href": "/education/lessons/mongodb/module-13/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: mongorestore",
+          "description": "Geri yükleme aracı",
+          "href": "/education/lessons/mongodb/module-13/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Backup Strategies",
+          "description": "Yedekleme stratejileri",
+          "href": "/education/lessons/mongodb/module-13/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Point-in-Time Recovery",
+          "description": "Zaman noktası kurtarma",
+          "href": "/education/lessons/mongodb/module-13/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Oplog Backup",
+          "description": "Oplog yedekleme",
+          "href": "/education/lessons/mongodb/module-13/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Snapshot Backup",
+          "description": "Anlık görüntü yedekleme",
+          "href": "/education/lessons/mongodb/module-13/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Automated Backups",
+          "description": "Otomatik yedekleme",
+          "href": "/education/lessons/mongodb/module-13/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Backup Storage",
+          "description": "Yedekleme depolama",
+          "href": "/education/lessons/mongodb/module-13/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Recovery Procedures",
+          "description": "Kurtarma prosedürleri",
+          "href": "/education/lessons/mongodb/module-13/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Disaster Recovery",
+          "description": "Felaket kurtarma",
+          "href": "/education/lessons/mongodb/module-13/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Backup Best Practices",
+          "description": "Yedekleme en iyi uygulamaları",
+          "href": "/education/lessons/mongodb/module-13/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Testing Backups",
+          "description": "Yedekleme testleri",
+          "href": "/education/lessons/mongodb/module-13/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Common Backup Issues",
+          "description": "Yaygın yedekleme sorunları",
+          "href": "/education/lessons/mongodb/module-13/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/mongodb/module-13/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-14",
+      "title": "Module 14: MongoDB Driver'ları ve Uygulama Entegrasyonu Testi",
+      "summary": "MongoDB driver'ları, Node.js, Python, Java, C# driver'ları, connection management, error handling ve application integration.",
+      "durationMinutes": 450,
+      "objectives": [
+        "MongoDB driver'larını anlamak",
+        "Node.js driver kullanmayı öğrenmek",
+        "Python driver kullanmayı öğrenmek",
+        "Application integration yapmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: MongoDB Driver'ları",
+          "description": "Driver kavramı",
+          "href": "/education/lessons/mongodb/module-14/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Node.js Driver",
+          "description": "Node.js entegrasyonu",
+          "href": "/education/lessons/mongodb/module-14/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Python Driver",
+          "description": "Python entegrasyonu",
+          "href": "/education/lessons/mongodb/module-14/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Java Driver",
+          "description": "Java entegrasyonu",
+          "href": "/education/lessons/mongodb/module-14/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: C# Driver",
+          "description": "C# entegrasyonu",
+          "href": "/education/lessons/mongodb/module-14/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Connection Management",
+          "description": "Bağlantı yönetimi",
+          "href": "/education/lessons/mongodb/module-14/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Error Handling",
+          "description": "Hata yönetimi",
+          "href": "/education/lessons/mongodb/module-14/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Async Operations",
+          "description": "Asenkron işlemler",
+          "href": "/education/lessons/mongodb/module-14/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Driver Best Practices",
+          "description": "Driver kullanım en iyi uygulamaları",
+          "href": "/education/lessons/mongodb/module-14/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: ORM Integration",
+          "description": "ORM entegrasyonu",
+          "href": "/education/lessons/mongodb/module-14/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Application Patterns",
+          "description": "Uygulama desenleri",
+          "href": "/education/lessons/mongodb/module-14/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Common Integration Issues",
+          "description": "Yaygın entegrasyon sorunları",
+          "href": "/education/lessons/mongodb/module-14/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Performance in Applications",
+          "description": "Uygulamalarda performans",
+          "href": "/education/lessons/mongodb/module-14/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Testing with Drivers",
+          "description": "Driver'larla test",
+          "href": "/education/lessons/mongodb/module-14/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/mongodb/module-14/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-15",
+      "title": "Module 15: Best Practices ve Capstone Testi",
+      "summary": "MongoDB geliştirmede en iyi uygulamalar, kod kalitesi, güvenlik, performans ve kapsamlı bir MongoDB uygulaması geliştirme.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Kod kalitesi standartlarını öğrenmek",
+        "Güvenlik best practices uygulamak",
+        "Performans optimizasyon tekniklerini öğrenmek",
+        "Kapsamlı bir MongoDB uygulaması geliştirmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Code Quality Standards",
+          "description": "Kod kalitesi standartları",
+          "href": "/education/lessons/mongodb/module-15/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Schema Design Best Practices",
+          "description": "Şema tasarım en iyi uygulamaları",
+          "href": "/education/lessons/mongodb/module-15/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Query Optimization",
+          "description": "Sorgu optimizasyonu",
+          "href": "/education/lessons/mongodb/module-15/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Proje Planlama",
+          "description": "Proje gereksinimleri",
+          "href": "/education/lessons/mongodb/module-15/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Mimari Tasarım",
+          "description": "Uygulama mimarisi",
+          "href": "/education/lessons/mongodb/module-15/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Core Implementation",
+          "description": "Temel implementasyon",
+          "href": "/education/lessons/mongodb/module-15/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Data Modeling",
+          "description": "Veri modelleme",
+          "href": "/education/lessons/mongodb/module-15/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Index Strategy",
+          "description": "İndeks stratejisi",
+          "href": "/education/lessons/mongodb/module-15/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Performance Tuning",
+          "description": "Performans ayarlama",
+          "href": "/education/lessons/mongodb/module-15/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Security Implementation",
+          "description": "Güvenlik implementasyonu",
+          "href": "/education/lessons/mongodb/module-15/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Backup Strategy",
+          "description": "Yedekleme stratejisi",
+          "href": "/education/lessons/mongodb/module-15/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Monitoring ve Logging",
+          "description": "İzleme ve loglama",
+          "href": "/education/lessons/mongodb/module-15/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Documentation",
+          "description": "Proje dokümantasyonu",
+          "href": "/education/lessons/mongodb/module-15/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Project Review",
+          "description": "Proje incelemesi",
+          "href": "/education/lessons/mongodb/module-15/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Project Presentation",
+          "description": "Proje sunumu",
+          "href": "/education/lessons/mongodb/module-15/lesson-15"
+        }
+      ]
+    }
+  ]
+}

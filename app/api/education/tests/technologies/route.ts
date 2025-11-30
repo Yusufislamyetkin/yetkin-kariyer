@@ -7,6 +7,7 @@ interface Technology {
   name: string;
   description: string | null;
   testCount: number;
+  moduleCount: number;
 }
 
 export async function GET() {
@@ -49,6 +50,11 @@ export async function GET() {
           // Description'ı al
           const description = testContent.overview?.description || null;
 
+          // Modül sayısını hesapla
+          const moduleCount = testContent.modules && Array.isArray(testContent.modules) 
+            ? testContent.modules.length 
+            : 0;
+
           // Test sayısını hesapla: Tüm modüllerin relatedTests array uzunluklarının toplamı
           let testCount = 0;
           if (testContent.modules && Array.isArray(testContent.modules)) {
@@ -63,6 +69,7 @@ export async function GET() {
             name: technologyName,
             description,
             testCount,
+            moduleCount,
           });
         } catch (fileError: any) {
           // JSON dosyası okunamazsa veya hatalıysa, o teknolojiyi atla

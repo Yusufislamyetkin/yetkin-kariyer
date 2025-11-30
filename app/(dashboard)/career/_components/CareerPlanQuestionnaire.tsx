@@ -30,7 +30,6 @@ const SPECIALIZATIONS = [
   "AI/ML",
   "Cybersecurity",
   "Game Development",
-  "Diğer",
   "Henüz karar vermedim",
 ];
 
@@ -44,7 +43,6 @@ const SPECIALIZATION_DESCRIPTIONS: Record<string, string> = {
   "AI/ML": "Yapay zeka ve makine öğrenmesi algoritmaları geliştirme alanı. Python, TensorFlow, PyTorch gibi araçlarla çalışır.",
   "Cybersecurity": "Bilgisayar sistemlerini ve ağları siber saldırılara karşı koruma alanı. Güvenlik açıklarını tespit etme ve güvenlik politikaları oluşturma üzerine çalışır.",
   "Game Development": "Video oyunları tasarlama ve geliştirme alanı. Unity, Unreal Engine gibi oyun motorları ve C#, C++ gibi diller kullanır.",
-  "Diğer": "Yukarıdaki kategorilere girmeyen veya birden fazla alanı kapsayan özel uzmanlaşma alanları.",
   "Henüz karar vermedim": "Farklı alanları keşfetmek ve size uygun olanı bulmak için genel bir kariyer planı hazırlanır.",
 };
 
@@ -58,7 +56,6 @@ const CAREER_GOALS = [
   "CTO",
   "Freelancer",
   "Startup Founder",
-  "Diğer",
   "Henüz karar vermedim",
 ];
 
@@ -72,7 +69,6 @@ const CAREER_GOAL_DESCRIPTIONS: Record<string, string> = {
   "CTO": "Teknik direktör. Şirketin teknik stratejisini belirler, teknoloji yatırımlarını yönetir ve inovasyonu yönlendirir.",
   "Freelancer": "Serbest çalışan geliştirici. Farklı projelerde bağımsız olarak çalışır ve kendi işini yönetir.",
   "Startup Founder": "Startup kurucusu. Kendi teknoloji şirketini kurar ve hem teknik hem de iş geliştirme faaliyetlerinde bulunur.",
-  "Diğer": "Yukarıdaki kategorilere girmeyen özel kariyer hedefleri.",
   "Henüz karar vermedim": "Farklı kariyer yollarını keşfetmek ve size uygun olanı bulmak için genel bir plan hazırlanır.",
 };
 
@@ -90,50 +86,41 @@ const SKILL_LEVELS = [
   "İleri",
 ];
 
-const TECHNOLOGIES = [
-  "JavaScript",
-  "TypeScript",
-  "React",
-  "Vue.js",
-  "Angular",
-  "Node.js",
-  "Python",
-  "Java",
-  "C#",
-  ".NET",
-  "Go",
-  "Rust",
-  "PHP",
-  "Swift",
-  "Kotlin",
-  "Docker",
-  "Kubernetes",
-  "AWS",
-  "Azure",
-  "GCP",
-];
+// Technology mapping based on specialization (used for filtering)
+const SPECIALIZATION_TECH_MAP: Record<string, string[]> = {
+  "Frontend": ["React", "Vue.js", "Angular", "TypeScript", "JavaScript", "Next.js"],
+  "Backend": ["Node.js", "Python", "Java", "C#", ".NET", "Go", "PHP"],
+  "Full-stack": ["React", "Node.js", "TypeScript", "JavaScript", "Python"],
+  "Mobile": ["React Native", "Flutter", "Swift", "Kotlin"],
+  "DevOps": ["Docker", "Kubernetes", "AWS", "Azure", "GCP"],
+  "Data Science": ["Python", "R", "SQL"],
+  "AI/ML": ["Python", "TensorFlow", "PyTorch"],
+  "Cybersecurity": ["Python", "Linux"],
+  "Game Development": ["Unity", "C#", "C++"],
+};
 
+// Fallback descriptions for common technologies
 const TECHNOLOGY_DESCRIPTIONS: Record<string, string> = {
-  "JavaScript": "Web geliştirmenin temel dili. Hem tarayıcıda hem de sunucuda çalışabilen, dinamik ve esnek bir programlama dili. Modern web uygulamalarının yapı taşı.",
+  "JavaScript": "Web geliştirmenin temel dili. Hem tarayıcıda hem de sunucuda çalışabilen, dinamik ve esnek bir programlama dili.",
   "TypeScript": "JavaScript'in üzerine tip güvenliği ekleyen dil. Büyük projelerde hata önleme ve daha iyi geliştirici deneyimi sağlar.",
-  "React": "Facebook tarafından geliştirilen popüler frontend kütüphanesi. Bileşen tabanlı UI geliştirme ve sanal DOM kullanımı ile güçlü kullanıcı arayüzleri oluşturur.",
-  "Vue.js": "Kullanımı kolay, ilerici bir JavaScript framework'ü. Küçük projelerden büyük uygulamalara kadar ölçeklenebilir, öğrenmesi kolay bir framework.",
-  "Angular": "Google'ın geliştirdiği kapsamlı TypeScript tabanlı framework. Enterprise düzeyinde uygulamalar için güçlü araçlar ve yapı sunar.",
+  "React": "Facebook tarafından geliştirilen popüler frontend kütüphanesi. Bileşen tabanlı UI geliştirme ile güçlü kullanıcı arayüzleri oluşturur.",
+  "Vue.js": "Kullanımı kolay, ilerici bir JavaScript framework'ü. Küçük projelerden büyük uygulamalara kadar ölçeklenebilir.",
+  "Angular": "Google'ın geliştirdiği kapsamlı TypeScript tabanlı framework. Enterprise düzeyinde uygulamalar için güçlü araçlar sunar.",
   "Node.js": "JavaScript'i sunucu tarafında çalıştıran runtime. Asenkron programlama ile yüksek performanslı backend uygulamaları geliştirmeyi sağlar.",
-  "Python": "Okunabilir sözdizimi ile popüler, çok amaçlı programlama dili. Web geliştirme, veri bilimi, yapay zeka ve otomasyon için yaygın olarak kullanılır.",
-  "Java": "Platform bağımsız, nesne yönelimli programlama dili. Kurumsal uygulamalar, Android geliştirme ve büyük ölçekli sistemler için güvenilir bir seçim.",
-  "C#": "Microsoft'un geliştirdiği modern, tip güvenli programlama dili. .NET ekosistemi ile Windows, web ve mobil uygulamalar geliştirmek için kullanılır.",
-  ".NET": "Microsoft'un açık kaynaklı, platformlar arası geliştirme platformu. Web, mobil, masaüstü ve cloud uygulamaları için kapsamlı framework ve araçlar sunar.",
-  "Go": "Google'ın geliştirdiği basit, hızlı ve güvenilir programlama dili. Eşzamanlı programlama ve mikroservis mimarileri için idealdir.",
-  "Rust": "Bellek güvenliği ve performansı birleştiren modern sistem programlama dili. C/C++'a alternatif olarak yüksek performanslı uygulamalar geliştirmek için kullanılır.",
-  "PHP": "Web geliştirme için tasarlanmış popüler sunucu tarafı scripting dili. WordPress, Laravel gibi birçok popüler CMS ve framework PHP kullanır.",
-  "Swift": "Apple'ın geliştirdiği modern, güvenli programlama dili. iOS, macOS, watchOS ve tvOS uygulamaları geliştirmek için kullanılır.",
-  "Kotlin": "JVM üzerinde çalışan modern programlama dili. Android geliştirme için resmi dil olarak Java'nın yerini alıyor ve daha kısa, güvenli kod yazmayı sağlar.",
-  "Docker": "Uygulamaları konteynerler içinde paketleyip dağıtmayı sağlayan platform. Geliştirme ve üretim ortamlarında tutarlılık sağlar.",
-  "Kubernetes": "Konteyner orkestrasyon platformu. Büyük ölçekli uygulamaların otomatik dağıtım, ölçeklendirme ve yönetimini sağlar.",
-  "AWS": "Amazon Web Services - Bulut bilişim platformu. Sunucu, depolama, veritabanı, AI ve daha fazlası için kapsamlı bulut hizmetleri sunar.",
-  "Azure": "Microsoft'un bulut bilişim platformu. Kurumsal ihtiyaçlara yönelik güvenli, ölçeklenebilir bulut hizmetleri ve araçlar sağlar.",
-  "GCP": "Google Cloud Platform - Google'ın bulut bilişim hizmeti. Büyük veri, makine öğrenmesi ve yüksek performanslı bilgi işlem için güçlü araçlar sunar.",
+  "Python": "Okunabilir sözdizimi ile popüler, çok amaçlı programlama dili. Web geliştirme, veri bilimi ve yapay zeka için yaygın olarak kullanılır.",
+  "Java": "Platform bağımsız, nesne yönelimli programlama dili. Kurumsal uygulamalar ve büyük ölçekli sistemler için güvenilir bir seçim.",
+  "C#": "Microsoft'un geliştirdiği modern, tip güvenli programlama dili. .NET ekosistemi ile web ve mobil uygulamalar geliştirmek için kullanılır.",
+  ".NET": "Microsoft'un açık kaynaklı, platformlar arası geliştirme platformu. Web, mobil ve cloud uygulamaları için kapsamlı framework sunar.",
+  "Go": "Google'ın geliştirdiği basit, hızlı ve güvenilir programlama dili. Mikroservis mimarileri için idealdir.",
+  "Rust": "Bellek güvenliği ve performansı birleştiren modern sistem programlama dili.",
+  "PHP": "Web geliştirme için tasarlanmış popüler sunucu tarafı scripting dili.",
+  "Swift": "Apple'ın geliştirdiği modern, güvenli programlama dili. iOS uygulamaları için kullanılır.",
+  "Kotlin": "JVM üzerinde çalışan modern programlama dili. Android geliştirme için resmi dil olarak kullanılır.",
+  "Docker": "Uygulamaları konteynerler içinde paketleyip dağıtmayı sağlayan platform.",
+  "Kubernetes": "Konteyner orkestrasyon platformu. Büyük ölçekli uygulamaların otomatik dağıtımını sağlar.",
+  "AWS": "Amazon Web Services - Bulut bilişim platformu.",
+  "Azure": "Microsoft'un bulut bilişim platformu.",
+  "GCP": "Google Cloud Platform - Google'ın bulut bilişim hizmeti.",
 };
 
 const WORK_PREFERENCES = [
@@ -171,6 +158,13 @@ const INDUSTRY_DESCRIPTIONS: Record<string, string> = {
   "Henüz karar vermedim": "Farklı sektörleri keşfetmek ve size uygun olanı bulmak için genel bir kariyer planı hazırlanır. Size çeşitli sektör fırsatlarını tanıtacağız.",
 };
 
+interface Technology {
+  name: string;
+  description: string | null;
+  testCount: number;
+  moduleCount: number;
+}
+
 export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQuestionnaireProps) {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<QuestionnaireData>({
@@ -182,13 +176,11 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
     workPreference: "",
     industryInterests: [],
   });
-  const [expandedSpecialization, setExpandedSpecialization] = useState<string | null>(null);
-  const [expandedCareerGoal, setExpandedCareerGoal] = useState<string | null>(null);
-  const [expandedTechnology, setExpandedTechnology] = useState<string | null>(null);
-  const [expandedIndustry, setExpandedIndustry] = useState<string | null>(null);
   const [showLoadingPopup, setShowLoadingPopup] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
+  const [availableTechnologies, setAvailableTechnologies] = useState<Technology[]>([]);
+  const [loadingTechnologies, setLoadingTechnologies] = useState(false);
 
   const loadingMessages = [
     {
@@ -220,24 +212,55 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
 
   const totalSteps = 6;
 
+  // Fetch technologies from API
+  useEffect(() => {
+    const fetchTechnologies = async () => {
+      setLoadingTechnologies(true);
+      try {
+        const response = await fetch("/api/education/tests/technologies");
+        const data = await response.json();
+        if (data.technologies && Array.isArray(data.technologies)) {
+          setAvailableTechnologies(data.technologies);
+        }
+      } catch (error) {
+        console.error("Error fetching technologies:", error);
+        // Continue with empty array if fetch fails
+        setAvailableTechnologies([]);
+      } finally {
+        setLoadingTechnologies(false);
+      }
+    };
+
+    fetchTechnologies();
+  }, []);
+
+  // Get filtered technologies based on specialization
+  const getFilteredTechnologies = (): Technology[] => {
+    if (!formData.specialization || formData.specialization === "Henüz karar vermedim") {
+      // Show all technologies if no specialization selected
+      return availableTechnologies;
+    }
+
+    const relevantTechNames = SPECIALIZATION_TECH_MAP[formData.specialization] || [];
+    
+    // Filter technologies that match the specialization or are in the relevant tech list
+    return availableTechnologies.filter((tech) => {
+      const techName = tech.name.toLowerCase();
+      return relevantTechNames.some((relevantTech) => 
+        techName.includes(relevantTech.toLowerCase()) || 
+        relevantTech.toLowerCase().includes(techName)
+      );
+    });
+  };
+
   const handleNext = () => {
     if (currentStep < totalSteps) {
-      // Reset expanded states when changing steps
-      setExpandedSpecialization(null);
-      setExpandedCareerGoal(null);
-      setExpandedTechnology(null);
-      setExpandedIndustry(null);
       setCurrentStep(currentStep + 1);
     }
   };
 
   const handlePrevious = () => {
     if (currentStep > 1) {
-      // Reset expanded states when changing steps
-      setExpandedSpecialization(null);
-      setExpandedCareerGoal(null);
-      setExpandedTechnology(null);
-      setExpandedIndustry(null);
       setCurrentStep(currentStep - 1);
     }
   };
@@ -328,38 +351,27 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {SPECIALIZATIONS.map((spec) => (
-                <div key={spec} className="space-y-2">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setFormData((prev) => ({ ...prev, specialization: spec }));
-                      setExpandedSpecialization(expandedSpecialization === spec ? null : spec);
-                    }}
-                    className={`w-full p-4 rounded-lg border-2 transition-all text-left ${
-                      formData.specialization === spec
-                        ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
-                        : spec === "Henüz karar vermedim"
-                        ? "border-orange-300 dark:border-orange-700 hover:border-orange-400 dark:hover:border-orange-600"
-                        : "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
-                    }`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="font-semibold">{spec}</span>
-                      {expandedSpecialization === spec ? (
-                        <span className="text-sm">▲</span>
-                      ) : (
-                        <span className="text-sm">▼</span>
-                      )}
-                    </div>
-                  </button>
-                  {(expandedSpecialization === spec || formData.specialization === spec) && (
-                    <div className="p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700">
-                      <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                        {SPECIALIZATION_DESCRIPTIONS[spec]}
-                      </p>
-                    </div>
-                  )}
-                </div>
+                <button
+                  key={spec}
+                  type="button"
+                  onClick={() => {
+                    setFormData((prev) => ({ ...prev, specialization: spec }));
+                  }}
+                  className={`w-full p-4 rounded-lg border-2 transition-all text-left ${
+                    formData.specialization === spec
+                      ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
+                      : spec === "Henüz karar vermedim"
+                      ? "border-orange-300 dark:border-orange-700 hover:border-orange-400 dark:hover:border-orange-600"
+                      : "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
+                  }`}
+                >
+                  <div className="space-y-2">
+                    <div className="font-semibold">{spec}</div>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                      {SPECIALIZATION_DESCRIPTIONS[spec]}
+                    </p>
+                  </div>
+                </button>
               ))}
             </div>
           </div>
@@ -375,38 +387,27 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {CAREER_GOALS.map((goal) => (
-                <div key={goal} className="space-y-2">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setFormData((prev) => ({ ...prev, careerGoal: goal }));
-                      setExpandedCareerGoal(expandedCareerGoal === goal ? null : goal);
-                    }}
-                    className={`w-full p-4 rounded-lg border-2 transition-all text-left ${
-                      formData.careerGoal === goal
-                        ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
-                        : goal === "Henüz karar vermedim"
-                        ? "border-orange-300 dark:border-orange-700 hover:border-orange-400 dark:hover:border-orange-600"
-                        : "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
-                    }`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="font-semibold">{goal}</span>
-                      {expandedCareerGoal === goal ? (
-                        <span className="text-sm">▲</span>
-                      ) : (
-                        <span className="text-sm">▼</span>
-                      )}
-                    </div>
-                  </button>
-                  {(expandedCareerGoal === goal || formData.careerGoal === goal) && (
-                    <div className="p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700">
-                      <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                        {CAREER_GOAL_DESCRIPTIONS[goal]}
-                      </p>
-                    </div>
-                  )}
-                </div>
+                <button
+                  key={goal}
+                  type="button"
+                  onClick={() => {
+                    setFormData((prev) => ({ ...prev, careerGoal: goal }));
+                  }}
+                  className={`w-full p-4 rounded-lg border-2 transition-all text-left ${
+                    formData.careerGoal === goal
+                      ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
+                      : goal === "Henüz karar vermedim"
+                      ? "border-orange-300 dark:border-orange-700 hover:border-orange-400 dark:hover:border-orange-600"
+                      : "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
+                  }`}
+                >
+                  <div className="space-y-2">
+                    <div className="font-semibold">{goal}</div>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                      {CAREER_GOAL_DESCRIPTIONS[goal]}
+                    </p>
+                  </div>
+                </button>
               ))}
             </div>
           </div>
@@ -481,53 +482,75 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
         );
 
       case 5:
+        const filteredTechs = getFilteredTechnologies();
+        const displayTechnologies = filteredTechs.length > 0 ? filteredTechs : availableTechnologies;
+        
         return (
           <div className="space-y-4">
             <div className="space-y-2">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
                 Hangi teknolojilerle çalışmak istiyorsunuz? (Opsiyonel)
               </h3>
+              {formData.specialization && formData.specialization !== "Henüz karar vermedim" && (
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  {formData.specialization} alanına uygun teknolojiler gösteriliyor. İstediğiniz teknolojileri seçebilirsiniz.
+                </p>
+              )}
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-96 overflow-y-auto">
-              {TECHNOLOGIES.map((tech) => (
-                <div key={tech} className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={() => toggleTechnology(tech)}
-                      className={`flex-1 p-3 rounded-lg border-2 transition-all text-sm text-left ${
-                        (formData.technologies || []).includes(tech)
-                          ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
-                          : "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
-                      }`}
-                    >
-                      {tech}
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setExpandedTechnology(expandedTechnology === tech ? null : tech)}
-                      className="p-2 rounded-lg border-2 border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 text-sm"
-                    >
-                      {expandedTechnology === tech ? "▲" : "▼"}
-                    </button>
-                  </div>
-                  {expandedTechnology === tech && (
-                    <div className="p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700">
-                      <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                        {TECHNOLOGY_DESCRIPTIONS[tech]}
-                      </p>
-                    </div>
-                  )}
+            {loadingTechnologies ? (
+              <div className="flex items-center justify-center py-8">
+                <Loader2 className="h-6 w-6 animate-spin text-blue-600 dark:text-blue-400" />
+                <span className="ml-2 text-gray-600 dark:text-gray-400">Teknolojiler yükleniyor...</span>
+              </div>
+            ) : displayTechnologies.length > 0 ? (
+              <>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-96 overflow-y-auto">
+                  {displayTechnologies.map((tech) => {
+                    const techName = tech.name;
+                    const techDescription = tech.description || TECHNOLOGY_DESCRIPTIONS[techName] || "Bu teknoloji hakkında detaylı bilgi için platform içindeki ilgili kursları inceleyebilirsiniz.";
+                    
+                    return (
+                      <button
+                        key={techName}
+                        type="button"
+                        onClick={() => toggleTechnology(techName)}
+                        className={`w-full p-4 rounded-lg border-2 transition-all text-left ${
+                          (formData.technologies || []).includes(techName)
+                            ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
+                            : "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
+                        }`}
+                      >
+                        <div className="space-y-2">
+                          <div className="flex items-center justify-between">
+                            <div className="font-semibold">{techName}</div>
+                            {(tech.testCount > 0 || tech.moduleCount > 0) && (
+                              <span className="text-xs text-gray-500 dark:text-gray-400">
+                                {tech.moduleCount > 0 && `${tech.moduleCount} modül`}
+                                {tech.testCount > 0 && ` • ${tech.testCount} test`}
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                            {techDescription}
+                          </p>
+                        </div>
+                      </button>
+                    );
+                  })}
                 </div>
-              ))}
-            </div>
-            {(formData.technologies || []).length > 0 ? (
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Seçilen: {(formData.technologies || []).join(", ")}
-              </p>
+                {(formData.technologies || []).length > 0 ? (
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    Seçilen: {(formData.technologies || []).join(", ")}
+                  </p>
+                ) : (
+                  <p className="text-sm text-gray-500 dark:text-gray-400 italic">
+                    Hiçbir teknoloji seçmediniz. Devam edebilirsiniz, size öneriler sunacağız.
+                  </p>
+                )}
+              </>
             ) : (
-              <p className="text-sm text-gray-500 dark:text-gray-400 italic">
-                Hiçbir teknoloji seçmediniz. Devam edebilirsiniz, size öneriler sunacağız.
+              <p className="text-sm text-gray-500 dark:text-gray-400 italic text-center py-8">
+                Teknolojiler yüklenemedi. Devam edebilirsiniz, size öneriler sunacağız.
               </p>
             )}
           </div>
@@ -543,58 +566,46 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-96 overflow-y-auto">
               {INDUSTRY_INTERESTS.map((interest) => (
-                <div key={interest} className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        if (interest === "Henüz karar vermedim") {
-                          // "Henüz karar vermedim" seçilirse diğer seçimleri temizle
-                          const isSelected = (formData.industryInterests || []).includes(interest);
-                          setFormData((prev) => ({
-                            ...prev,
-                            industryInterests: isSelected ? [] : ["Henüz karar vermedim"],
-                          }));
-                        } else {
-                          // Diğer seçenekler seçilirse "Henüz karar vermedim"i kaldır
-                          const currentInterests = (formData.industryInterests || []).filter(
-                            (i) => i !== "Henüz karar vermedim"
-                          );
-                          const isSelected = currentInterests.includes(interest);
-                          setFormData((prev) => ({
-                            ...prev,
-                            industryInterests: isSelected
-                              ? currentInterests.filter((i) => i !== interest)
-                              : [...currentInterests, interest],
-                          }));
-                        }
-                      }}
-                      className={`flex-1 p-3 rounded-lg border-2 transition-all text-sm text-left ${
-                        (formData.industryInterests || []).includes(interest)
-                          ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
-                          : interest === "Henüz karar vermedim"
-                          ? "border-orange-300 dark:border-orange-700 hover:border-orange-400 dark:hover:border-orange-600"
-                          : "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
-                      }`}
-                    >
-                      {interest}
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setExpandedIndustry(expandedIndustry === interest ? null : interest)}
-                      className="p-2 rounded-lg border-2 border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 text-sm"
-                    >
-                      {expandedIndustry === interest ? "▲" : "▼"}
-                    </button>
+                <button
+                  key={interest}
+                  type="button"
+                  onClick={() => {
+                    if (interest === "Henüz karar vermedim") {
+                      // "Henüz karar vermedim" seçilirse diğer seçimleri temizle
+                      const isSelected = (formData.industryInterests || []).includes(interest);
+                      setFormData((prev) => ({
+                        ...prev,
+                        industryInterests: isSelected ? [] : ["Henüz karar vermedim"],
+                      }));
+                    } else {
+                      // Diğer seçenekler seçilirse "Henüz karar vermedim"i kaldır
+                      const currentInterests = (formData.industryInterests || []).filter(
+                        (i) => i !== "Henüz karar vermedim"
+                      );
+                      const isSelected = currentInterests.includes(interest);
+                      setFormData((prev) => ({
+                        ...prev,
+                        industryInterests: isSelected
+                          ? currentInterests.filter((i) => i !== interest)
+                          : [...currentInterests, interest],
+                      }));
+                    }
+                  }}
+                  className={`w-full p-4 rounded-lg border-2 transition-all text-left ${
+                    (formData.industryInterests || []).includes(interest)
+                      ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
+                      : interest === "Henüz karar vermedim"
+                      ? "border-orange-300 dark:border-orange-700 hover:border-orange-400 dark:hover:border-orange-600"
+                      : "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
+                  }`}
+                >
+                  <div className="space-y-2">
+                    <div className="font-semibold">{interest}</div>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                      {INDUSTRY_DESCRIPTIONS[interest]}
+                    </p>
                   </div>
-                  {expandedIndustry === interest && (
-                    <div className="p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700">
-                      <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                        {INDUSTRY_DESCRIPTIONS[interest]}
-                      </p>
-                    </div>
-                  )}
-                </div>
+                </button>
               ))}
             </div>
             {(formData.industryInterests || []).length > 0 ? (

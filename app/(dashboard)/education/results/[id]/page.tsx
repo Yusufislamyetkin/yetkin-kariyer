@@ -976,7 +976,8 @@ export default function QuizResultsPage() {
         <CardContent className="space-y-4">
           {attempt.quiz.questions.map((question, index) => {
             const userAnswer = attempt.answers[index];
-            const isCorrect = userAnswer === question.correctAnswer;
+            const isEmpty = userAnswer === -1 || userAnswer === null || userAnswer === undefined;
+            const isCorrect = !isEmpty && userAnswer === question.correctAnswer;
 
             return (
               <div
@@ -984,6 +985,8 @@ export default function QuizResultsPage() {
                 className={`rounded-xl border p-5 transition-all ${
                   isCorrect
                     ? "border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-900/10"
+                    : isEmpty
+                    ? "border-gray-200 bg-gray-50 dark:border-gray-800 dark:bg-gray-900/10"
                     : "border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-900/10"
                 }`}
               >
@@ -1002,6 +1005,8 @@ export default function QuizResultsPage() {
                     className={`flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold ${
                       isCorrect
                         ? "bg-green-200 text-green-700 dark:bg-green-900/40 dark:text-green-300"
+                        : isEmpty
+                        ? "bg-gray-200 text-gray-700 dark:bg-gray-900/40 dark:text-gray-300"
                         : "bg-red-200 text-red-700 dark:bg-red-900/40 dark:text-red-300"
                     }`}
                   >
@@ -1009,6 +1014,11 @@ export default function QuizResultsPage() {
                       <>
                         <CheckCircle className="h-3.5 w-3.5" />
                         Doğru
+                      </>
+                    ) : isEmpty ? (
+                      <>
+                        <AlertTriangle className="h-3.5 w-3.5" />
+                        Boş
                       </>
                     ) : (
                       <>
@@ -1026,7 +1036,7 @@ export default function QuizResultsPage() {
                 <div className="space-y-2">
                   {question.options.map((option, optIndex) => {
                     const isCorrectOption = optIndex === question.correctAnswer;
-                    const isUserAnswer = optIndex === userAnswer;
+                    const isUserAnswer = !isEmpty && optIndex === userAnswer;
                     return (
                       <div
                         key={`${question.id}-option-${optIndex}`}
@@ -1042,6 +1052,11 @@ export default function QuizResultsPage() {
                       </div>
                     );
                   })}
+                  {isEmpty && (
+                    <div className="rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 px-4 py-2 text-sm text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400">
+                      Boş bırakıldı
+                    </div>
+                  )}
                 </div>
               </div>
             );

@@ -1,0 +1,1577 @@
+{
+  "overview": {
+    "description": "Amazon Web Services (AWS), dünyanın en kapsamlı ve yaygın olarak kullanılan bulut platformudur. Bu kapsamlı kurs ile AWS'in temellerinden ileri seviye konularına kadar her şeyi öğreneceksiniz. Bulut altyapısı, compute, storage, database, networking ve güvenlik konularında uzmanlaşacaksınız.",
+    "estimatedDurationMinutes": 6750
+  },
+  "learningObjectives": [
+    "AWS'in temel kavramlarını ve mimarisini anlamak",
+    "EC2, S3, RDS gibi temel AWS servislerini kullanmak",
+    "IAM ile güvenlik ve erişim yönetimi yapmak",
+    "VPC ile network yapılandırması yapmak",
+    "Lambda ile serverless uygulamalar geliştirmek",
+    "CloudFormation ile Infrastructure as Code uygulamak",
+    "CI/CD pipeline'ları kurmak ve monitoring yapmak"
+  ],
+  "modules": [
+    {
+      "id": "module-01",
+      "title": "Module 1: AWS Tanımı ve Temelleri Testi",
+      "summary": "AWS'in ne olduğu, tarihçesi, avantajları, bulut computing kavramları ve AWS global infrastructure.",
+      "durationMinutes": 450,
+      "objectives": [
+        "AWS'in ne olduğunu ve neden kullanıldığını anlamak",
+        "Bulut computing kavramını öğrenmek",
+        "AWS'in avantajlarını ve kullanım alanlarını keşfetmek",
+        "AWS global infrastructure'ı anlamak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: AWS Nedir?",
+          "description": "AWS'in temel tanımı ve genel bakış",
+          "href": "/education/lessons/aws/module-01/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Bulut Computing Nedir?",
+          "description": "Cloud computing kavramı",
+          "href": "/education/lessons/aws/module-01/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: AWS'in Tarihçesi",
+          "description": "AWS'in ortaya çıkışı ve gelişimi",
+          "href": "/education/lessons/aws/module-01/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: IaaS, PaaS, SaaS",
+          "description": "Bulut servis modelleri",
+          "href": "/education/lessons/aws/module-01/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: AWS'in Avantajları",
+          "description": "Ölçeklenebilirlik, maliyet, güvenlik",
+          "href": "/education/lessons/aws/module-01/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: AWS Kullanım Alanları",
+          "description": "Web hosting, big data, AI/ML",
+          "href": "/education/lessons/aws/module-01/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: AWS Global Infrastructure",
+          "description": "Regions, Availability Zones, Edge Locations",
+          "href": "/education/lessons/aws/module-01/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: AWS Regions",
+          "description": "Bölge seçimi ve özellikleri",
+          "href": "/education/lessons/aws/module-01/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Availability Zones",
+          "description": "Yüksek erişilebilirlik",
+          "href": "/education/lessons/aws/module-01/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: AWS Pricing Model",
+          "description": "Fiyatlandırma modeli",
+          "href": "/education/lessons/aws/module-01/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: AWS Free Tier",
+          "description": "Ücretsiz kullanım seviyesi",
+          "href": "/education/lessons/aws/module-01/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: AWS Support Plans",
+          "description": "Destek planları",
+          "href": "/education/lessons/aws/module-01/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: AWS Marketplace",
+          "description": "AWS pazar yeri",
+          "href": "/education/lessons/aws/module-01/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: AWS Ekosistemi",
+          "description": "AWS topluluğu ve araçlar",
+          "href": "/education/lessons/aws/module-01/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Değerlendirme",
+          "description": "Modül kapsamında öğrenilenlerin özeti",
+          "href": "/education/lessons/aws/module-01/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-02",
+      "title": "Module 2: AWS Hesap Yönetimi ve IAM Testi",
+      "summary": "AWS hesap oluşturma, IAM (Identity and Access Management), kullanıcı yönetimi, roller, politikalar ve güvenlik.",
+      "durationMinutes": 450,
+      "objectives": [
+        "AWS hesap yönetimini öğrenmek",
+        "IAM kavramını anlamak",
+        "Kullanıcı ve rol yönetimi yapmayı öğrenmek",
+        "Politika yönetimi yapmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: AWS Hesap Oluşturma",
+          "description": "AWS hesabı açma",
+          "href": "/education/lessons/aws/module-02/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: AWS Console",
+          "description": "AWS Management Console",
+          "href": "/education/lessons/aws/module-02/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: IAM Nedir?",
+          "description": "IAM kavramı",
+          "href": "/education/lessons/aws/module-02/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: IAM Users",
+          "description": "Kullanıcı oluşturma ve yönetimi",
+          "href": "/education/lessons/aws/module-02/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: IAM Groups",
+          "description": "Grup yönetimi",
+          "href": "/education/lessons/aws/module-02/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: IAM Roles",
+          "description": "Rol oluşturma ve yönetimi",
+          "href": "/education/lessons/aws/module-02/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: IAM Policies",
+          "description": "Politika oluşturma",
+          "href": "/education/lessons/aws/module-02/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Policy Documents",
+          "description": "JSON politika dokümanları",
+          "href": "/education/lessons/aws/module-02/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: MFA (Multi-Factor Authentication)",
+          "description": "Çok faktörlü kimlik doğrulama",
+          "href": "/education/lessons/aws/module-02/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Access Keys",
+          "description": "API erişim anahtarları",
+          "href": "/education/lessons/aws/module-02/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: IAM Best Practices",
+          "description": "IAM kullanım en iyi uygulamaları",
+          "href": "/education/lessons/aws/module-02/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Cross-Account Access",
+          "description": "Hesaplar arası erişim",
+          "href": "/education/lessons/aws/module-02/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: IAM Identity Center",
+          "description": "Merkezi kimlik yönetimi",
+          "href": "/education/lessons/aws/module-02/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Security Best Practices",
+          "description": "Güvenlik en iyi uygulamaları",
+          "href": "/education/lessons/aws/module-02/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/aws/module-02/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-03",
+      "title": "Module 3: EC2 (Elastic Compute Cloud) Testi",
+      "summary": "EC2 instances, instance types, AMIs, security groups, key pairs, EBS volumes, load balancing ve auto scaling.",
+      "durationMinutes": 450,
+      "objectives": [
+        "EC2 kavramını anlamak",
+        "EC2 instance oluşturmayı öğrenmek",
+        "Security groups yapılandırmasını öğrenmek",
+        "EBS volumes kullanmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: EC2 Nedir?",
+          "description": "EC2 kavramı",
+          "href": "/education/lessons/aws/module-03/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: EC2 Instance Types",
+          "description": "Instance türleri",
+          "href": "/education/lessons/aws/module-03/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: AMI (Amazon Machine Image)",
+          "description": "AMI kavramı ve kullanımı",
+          "href": "/education/lessons/aws/module-03/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: EC2 Instance Launch",
+          "description": "Instance başlatma",
+          "href": "/education/lessons/aws/module-03/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Key Pairs",
+          "description": "SSH anahtar çiftleri",
+          "href": "/education/lessons/aws/module-03/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Security Groups",
+          "description": "Güvenlik grupları",
+          "href": "/education/lessons/aws/module-03/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Network ACLs",
+          "description": "Ağ erişim kontrol listeleri",
+          "href": "/education/lessons/aws/module-03/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: EBS Volumes",
+          "description": "Elastic Block Store",
+          "href": "/education/lessons/aws/module-03/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: EBS Volume Types",
+          "description": "EBS volume türleri",
+          "href": "/education/lessons/aws/module-03/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Instance Storage",
+          "description": "Instance store volumes",
+          "href": "/education/lessons/aws/module-03/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Elastic IP Addresses",
+          "description": "Statik IP adresleri",
+          "href": "/education/lessons/aws/module-03/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: EC2 Instance Lifecycle",
+          "description": "Instance yaşam döngüsü",
+          "href": "/education/lessons/aws/module-03/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: EC2 Best Practices",
+          "description": "EC2 kullanım en iyi uygulamaları",
+          "href": "/education/lessons/aws/module-03/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Cost Optimization",
+          "description": "Maliyet optimizasyonu",
+          "href": "/education/lessons/aws/module-03/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/aws/module-03/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-04",
+      "title": "Module 4: S3 (Simple Storage Service) Testi",
+      "summary": "S3 buckets, objects, storage classes, versioning, lifecycle policies, encryption, access control ve S3 best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "S3 kavramını anlamak",
+        "S3 bucket oluşturmayı öğrenmek",
+        "Storage classes kullanmayı öğrenmek",
+        "S3 güvenlik yapılandırmasını öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: S3 Nedir?",
+          "description": "S3 kavramı",
+          "href": "/education/lessons/aws/module-04/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: S3 Buckets",
+          "description": "Bucket oluşturma",
+          "href": "/education/lessons/aws/module-04/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: S3 Objects",
+          "description": "Object yükleme ve yönetimi",
+          "href": "/education/lessons/aws/module-04/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: S3 Storage Classes",
+          "description": "Depolama sınıfları",
+          "href": "/education/lessons/aws/module-04/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: S3 Standard",
+          "description": "Standart depolama",
+          "href": "/education/lessons/aws/module-04/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: S3 Intelligent-Tiering",
+          "description": "Akıllı katmanlama",
+          "href": "/education/lessons/aws/module-04/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: S3 Glacier",
+          "description": "Arşiv depolama",
+          "href": "/education/lessons/aws/module-04/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: S3 Versioning",
+          "description": "Versiyonlama",
+          "href": "/education/lessons/aws/module-04/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: S3 Lifecycle Policies",
+          "description": "Yaşam döngüsü politikaları",
+          "href": "/education/lessons/aws/module-04/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: S3 Encryption",
+          "description": "Şifreleme",
+          "href": "/education/lessons/aws/module-04/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: S3 Access Control",
+          "description": "Erişim kontrolü",
+          "href": "/education/lessons/aws/module-04/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: S3 CORS",
+          "description": "Cross-Origin Resource Sharing",
+          "href": "/education/lessons/aws/module-04/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: S3 Transfer Acceleration",
+          "description": "Transfer hızlandırma",
+          "href": "/education/lessons/aws/module-04/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: S3 Best Practices",
+          "description": "S3 kullanım en iyi uygulamaları",
+          "href": "/education/lessons/aws/module-04/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/aws/module-04/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-05",
+      "title": "Module 5: RDS (Relational Database Service) Testi",
+      "summary": "RDS database instances, database engines, multi-AZ deployments, read replicas, backups, snapshots ve RDS best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "RDS kavramını anlamak",
+        "RDS instance oluşturmayı öğrenmek",
+        "Database engine seçimini öğrenmek",
+        "Backup ve recovery yapmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: RDS Nedir?",
+          "description": "RDS kavramı",
+          "href": "/education/lessons/aws/module-05/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: RDS Database Engines",
+          "description": "MySQL, PostgreSQL, MariaDB, Oracle, SQL Server",
+          "href": "/education/lessons/aws/module-05/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: RDS Instance Creation",
+          "description": "RDS instance oluşturma",
+          "href": "/education/lessons/aws/module-05/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: RDS Instance Classes",
+          "description": "Instance sınıfları",
+          "href": "/education/lessons/aws/module-05/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: RDS Storage",
+          "description": "Depolama yapılandırması",
+          "href": "/education/lessons/aws/module-05/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Multi-AZ Deployments",
+          "description": "Çoklu bölge dağıtımı",
+          "href": "/education/lessons/aws/module-05/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Read Replicas",
+          "description": "Okuma replikaları",
+          "href": "/education/lessons/aws/module-05/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: RDS Backups",
+          "description": "Otomatik yedekleme",
+          "href": "/education/lessons/aws/module-05/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: RDS Snapshots",
+          "description": "Manuel snapshot'lar",
+          "href": "/education/lessons/aws/module-05/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: RDS Security",
+          "description": "Güvenlik yapılandırması",
+          "href": "/education/lessons/aws/module-05/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: RDS Monitoring",
+          "description": "Performans izleme",
+          "href": "/education/lessons/aws/module-05/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: RDS Maintenance",
+          "description": "Bakım pencereleri",
+          "href": "/education/lessons/aws/module-05/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: RDS Best Practices",
+          "description": "RDS kullanım en iyi uygulamaları",
+          "href": "/education/lessons/aws/module-05/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: RDS vs Self-Managed",
+          "description": "RDS ve self-managed karşılaştırması",
+          "href": "/education/lessons/aws/module-05/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/aws/module-05/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-06",
+      "title": "Module 6: Lambda (Serverless Computing) Testi",
+      "summary": "AWS Lambda, serverless computing, function creation, triggers, event sources, Lambda layers, environment variables ve Lambda best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Lambda kavramını anlamak",
+        "Lambda function oluşturmayı öğrenmek",
+        "Event sources kullanmayı öğrenmek",
+        "Serverless architecture tasarlamayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Lambda Nedir?",
+          "description": "Lambda kavramı",
+          "href": "/education/lessons/aws/module-06/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Serverless Computing",
+          "description": "Serverless yaklaşımı",
+          "href": "/education/lessons/aws/module-06/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Lambda Function Creation",
+          "description": "Fonksiyon oluşturma",
+          "href": "/education/lessons/aws/module-06/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Lambda Runtime",
+          "description": "Runtime ortamları",
+          "href": "/education/lessons/aws/module-06/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Lambda Handlers",
+          "description": "Handler fonksiyonları",
+          "href": "/education/lessons/aws/module-06/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Event Sources",
+          "description": "Olay kaynakları",
+          "href": "/education/lessons/aws/module-06/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: API Gateway Integration",
+          "description": "API Gateway entegrasyonu",
+          "href": "/education/lessons/aws/module-06/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: S3 Triggers",
+          "description": "S3 event trigger'ları",
+          "href": "/education/lessons/aws/module-06/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Lambda Layers",
+          "description": "Lambda katmanları",
+          "href": "/education/lessons/aws/module-06/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Environment Variables",
+          "description": "Ortam değişkenleri",
+          "href": "/education/lessons/aws/module-06/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Lambda Permissions",
+          "description": "İzin yönetimi",
+          "href": "/education/lessons/aws/module-06/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Lambda Monitoring",
+          "description": "CloudWatch entegrasyonu",
+          "href": "/education/lessons/aws/module-06/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Lambda Best Practices",
+          "description": "Lambda kullanım en iyi uygulamaları",
+          "href": "/education/lessons/aws/module-06/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Cost Optimization",
+          "description": "Maliyet optimizasyonu",
+          "href": "/education/lessons/aws/module-06/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/aws/module-06/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-07",
+      "title": "Module 7: VPC (Virtual Private Cloud) Testi",
+      "summary": "VPC kavramı, subnets, route tables, internet gateways, NAT gateways, security groups, NACLs ve VPC peering.",
+      "durationMinutes": 450,
+      "objectives": [
+        "VPC kavramını anlamak",
+        "VPC oluşturmayı öğrenmek",
+        "Subnet yapılandırmasını öğrenmek",
+        "Network routing yapmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: VPC Nedir?",
+          "description": "VPC kavramı",
+          "href": "/education/lessons/aws/module-07/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: VPC Creation",
+          "description": "VPC oluşturma",
+          "href": "/education/lessons/aws/module-07/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: CIDR Blocks",
+          "description": "IP adres aralıkları",
+          "href": "/education/lessons/aws/module-07/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Subnets",
+          "description": "Alt ağlar",
+          "href": "/education/lessons/aws/module-07/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Public vs Private Subnets",
+          "description": "Public ve private subnet'ler",
+          "href": "/education/lessons/aws/module-07/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Internet Gateway",
+          "description": "İnternet ağ geçidi",
+          "href": "/education/lessons/aws/module-07/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Route Tables",
+          "description": "Yönlendirme tabloları",
+          "href": "/education/lessons/aws/module-07/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: NAT Gateway",
+          "description": "Network Address Translation",
+          "href": "/education/lessons/aws/module-07/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Security Groups",
+          "description": "Güvenlik grupları",
+          "href": "/education/lessons/aws/module-07/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Network ACLs",
+          "description": "Ağ erişim kontrol listeleri",
+          "href": "/education/lessons/aws/module-07/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: VPC Peering",
+          "description": "VPC eşleştirme",
+          "href": "/education/lessons/aws/module-07/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: VPN Connections",
+          "description": "VPN bağlantıları",
+          "href": "/education/lessons/aws/module-07/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: VPC Best Practices",
+          "description": "VPC kullanım en iyi uygulamaları",
+          "href": "/education/lessons/aws/module-07/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Network Security",
+          "description": "Ağ güvenliği",
+          "href": "/education/lessons/aws/module-07/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/aws/module-07/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-08",
+      "title": "Module 8: CloudFormation (Infrastructure as Code) Testi",
+      "summary": "CloudFormation kavramı, templates, stacks, parameters, outputs, resources, nested stacks ve CloudFormation best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Infrastructure as Code kavramını anlamak",
+        "CloudFormation templates yazmayı öğrenmek",
+        "Stack yönetimi yapmayı öğrenmek",
+        "CloudFormation best practices uygulamak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Infrastructure as Code",
+          "description": "IaC kavramı",
+          "href": "/education/lessons/aws/module-08/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: CloudFormation Nedir?",
+          "description": "CloudFormation kavramı",
+          "href": "/education/lessons/aws/module-08/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: CloudFormation Templates",
+          "description": "Template yapısı",
+          "href": "/education/lessons/aws/module-08/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: YAML vs JSON",
+          "description": "Template formatları",
+          "href": "/education/lessons/aws/module-08/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Template Sections",
+          "description": "Template bölümleri",
+          "href": "/education/lessons/aws/module-08/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Parameters",
+          "description": "Parametreler",
+          "href": "/education/lessons/aws/module-08/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Resources",
+          "description": "Kaynak tanımları",
+          "href": "/education/lessons/aws/module-08/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Outputs",
+          "description": "Çıktılar",
+          "href": "/education/lessons/aws/module-08/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Intrinsic Functions",
+          "description": "Yerleşik fonksiyonlar",
+          "href": "/education/lessons/aws/module-08/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Stack Creation",
+          "description": "Stack oluşturma",
+          "href": "/education/lessons/aws/module-08/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Stack Updates",
+          "description": "Stack güncelleme",
+          "href": "/education/lessons/aws/module-08/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Nested Stacks",
+          "description": "İç içe stack'ler",
+          "href": "/education/lessons/aws/module-08/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Change Sets",
+          "description": "Değişiklik setleri",
+          "href": "/education/lessons/aws/module-08/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: CloudFormation Best Practices",
+          "description": "CloudFormation kullanım en iyi uygulamaları",
+          "href": "/education/lessons/aws/module-08/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/aws/module-08/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-09",
+      "title": "Module 9: CI/CD (CodePipeline, CodeBuild, CodeDeploy) Testi",
+      "summary": "AWS CI/CD servisleri, CodePipeline, CodeBuild, CodeDeploy, GitHub integration, build specifications ve deployment strategies.",
+      "durationMinutes": 450,
+      "objectives": [
+        "CI/CD kavramını anlamak",
+        "CodePipeline kurmayı öğrenmek",
+        "CodeBuild yapılandırmasını öğrenmek",
+        "CodeDeploy kullanmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: CI/CD Temelleri",
+          "description": "Sürekli entegrasyon ve dağıtım",
+          "href": "/education/lessons/aws/module-09/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: CodePipeline Nedir?",
+          "description": "CodePipeline kavramı",
+          "href": "/education/lessons/aws/module-09/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Pipeline Creation",
+          "description": "Pipeline oluşturma",
+          "href": "/education/lessons/aws/module-09/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Pipeline Stages",
+          "description": "Pipeline aşamaları",
+          "href": "/education/lessons/aws/module-09/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Source Actions",
+          "description": "Kaynak aksiyonları",
+          "href": "/education/lessons/aws/module-09/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Build Actions",
+          "description": "Derleme aksiyonları",
+          "href": "/education/lessons/aws/module-09/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Deploy Actions",
+          "description": "Dağıtım aksiyonları",
+          "href": "/education/lessons/aws/module-09/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: CodeBuild",
+          "description": "CodeBuild kavramı",
+          "href": "/education/lessons/aws/module-09/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Buildspec Files",
+          "description": "Build yapılandırma dosyaları",
+          "href": "/education/lessons/aws/module-09/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: CodeDeploy",
+          "description": "CodeDeploy kavramı",
+          "href": "/education/lessons/aws/module-09/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Deployment Strategies",
+          "description": "Dağıtım stratejileri",
+          "href": "/education/lessons/aws/module-09/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: GitHub Integration",
+          "description": "GitHub entegrasyonu",
+          "href": "/education/lessons/aws/module-09/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: CI/CD Best Practices",
+          "description": "CI/CD kullanım en iyi uygulamaları",
+          "href": "/education/lessons/aws/module-09/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Pipeline Monitoring",
+          "description": "Pipeline izleme",
+          "href": "/education/lessons/aws/module-09/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/aws/module-09/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-10",
+      "title": "Module 10: Monitoring ve Logging (CloudWatch) Testi",
+      "summary": "CloudWatch metrics, alarms, logs, dashboards, CloudWatch Insights, X-Ray ve monitoring best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "CloudWatch kavramını anlamak",
+        "Metrics ve alarms kullanmayı öğrenmek",
+        "Logs yönetimini öğrenmek",
+        "Monitoring stratejileri uygulamayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: CloudWatch Nedir?",
+          "description": "CloudWatch kavramı",
+          "href": "/education/lessons/aws/module-10/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: CloudWatch Metrics",
+          "description": "Metrikler",
+          "href": "/education/lessons/aws/module-10/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Custom Metrics",
+          "description": "Özel metrikler",
+          "href": "/education/lessons/aws/module-10/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: CloudWatch Alarms",
+          "description": "Alarm oluşturma",
+          "href": "/education/lessons/aws/module-10/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Alarm Actions",
+          "description": "Alarm aksiyonları",
+          "href": "/education/lessons/aws/module-10/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: CloudWatch Logs",
+          "description": "Log grupları ve akışları",
+          "href": "/education/lessons/aws/module-10/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Log Groups",
+          "description": "Log grup yönetimi",
+          "href": "/education/lessons/aws/module-10/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Log Streams",
+          "description": "Log akışları",
+          "href": "/education/lessons/aws/module-10/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: CloudWatch Dashboards",
+          "description": "Gösterge panelleri",
+          "href": "/education/lessons/aws/module-10/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: CloudWatch Insights",
+          "description": "Log sorgulama",
+          "href": "/education/lessons/aws/module-10/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: CloudWatch Events",
+          "description": "EventBridge",
+          "href": "/education/lessons/aws/module-10/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: X-Ray",
+          "description": "Dağıtık izleme",
+          "href": "/education/lessons/aws/module-10/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Monitoring Best Practices",
+          "description": "İzleme en iyi uygulamaları",
+          "href": "/education/lessons/aws/module-10/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Cost Monitoring",
+          "description": "Maliyet izleme",
+          "href": "/education/lessons/aws/module-10/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/aws/module-10/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-11",
+      "title": "Module 11: Security ve Compliance Testi",
+      "summary": "AWS güvenlik, security groups, IAM best practices, encryption, AWS Shield, WAF, GuardDuty ve compliance frameworks.",
+      "durationMinutes": 450,
+      "objectives": [
+        "AWS güvenlik kavramını anlamak",
+        "Security best practices uygulamayı öğrenmek",
+        "Encryption kullanmayı öğrenmek",
+        "Compliance frameworks anlamak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: AWS Security Model",
+          "description": "AWS güvenlik modeli",
+          "href": "/education/lessons/aws/module-11/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Shared Responsibility Model",
+          "description": "Paylaşılan sorumluluk modeli",
+          "href": "/education/lessons/aws/module-11/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Security Groups Best Practices",
+          "description": "Güvenlik grubu en iyi uygulamaları",
+          "href": "/education/lessons/aws/module-11/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Encryption at Rest",
+          "description": "Beklemede şifreleme",
+          "href": "/education/lessons/aws/module-11/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Encryption in Transit",
+          "description": "Aktarımda şifreleme",
+          "href": "/education/lessons/aws/module-11/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: AWS KMS",
+          "description": "Key Management Service",
+          "href": "/education/lessons/aws/module-11/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: AWS Secrets Manager",
+          "description": "Gizli bilgi yönetimi",
+          "href": "/education/lessons/aws/module-11/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: AWS Shield",
+          "description": "DDoS koruması",
+          "href": "/education/lessons/aws/module-11/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: AWS WAF",
+          "description": "Web Application Firewall",
+          "href": "/education/lessons/aws/module-11/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: GuardDuty",
+          "description": "Tehdit tespiti",
+          "href": "/education/lessons/aws/module-11/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Security Hub",
+          "description": "Güvenlik merkezi",
+          "href": "/education/lessons/aws/module-11/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Compliance Frameworks",
+          "description": "Uyumluluk çerçeveleri",
+          "href": "/education/lessons/aws/module-11/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Security Best Practices",
+          "description": "Güvenlik en iyi uygulamaları",
+          "href": "/education/lessons/aws/module-11/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Security Auditing",
+          "description": "Güvenlik denetimi",
+          "href": "/education/lessons/aws/module-11/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/aws/module-11/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-12",
+      "title": "Module 12: Cost Management Testi",
+      "summary": "AWS cost management, pricing models, cost optimization, AWS Cost Explorer, budgets, reserved instances ve cost best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "AWS pricing modelini anlamak",
+        "Cost optimization tekniklerini öğrenmek",
+        "Cost Explorer kullanmayı öğrenmek",
+        "Budget yönetimi yapmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: AWS Pricing Model",
+          "description": "Fiyatlandırma modeli",
+          "href": "/education/lessons/aws/module-12/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Pay-as-You-Go",
+          "description": "Kullandıkça öde",
+          "href": "/education/lessons/aws/module-12/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Reserved Instances",
+          "description": "Rezerve edilmiş instance'lar",
+          "href": "/education/lessons/aws/module-12/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Savings Plans",
+          "description": "Tasarruf planları",
+          "href": "/education/lessons/aws/module-12/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Spot Instances",
+          "description": "Spot instance'lar",
+          "href": "/education/lessons/aws/module-12/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: AWS Cost Explorer",
+          "description": "Maliyet analiz aracı",
+          "href": "/education/lessons/aws/module-12/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Cost Allocation Tags",
+          "description": "Maliyet tahsis etiketleri",
+          "href": "/education/lessons/aws/module-12/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: AWS Budgets",
+          "description": "Bütçe yönetimi",
+          "href": "/education/lessons/aws/module-12/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Cost Anomaly Detection",
+          "description": "Maliyet anomali tespiti",
+          "href": "/education/lessons/aws/module-12/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Right Sizing",
+          "description": "Doğru boyutlandırma",
+          "href": "/education/lessons/aws/module-12/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Resource Optimization",
+          "description": "Kaynak optimizasyonu",
+          "href": "/education/lessons/aws/module-12/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Cost Optimization Strategies",
+          "description": "Maliyet optimizasyon stratejileri",
+          "href": "/education/lessons/aws/module-12/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Cost Best Practices",
+          "description": "Maliyet yönetimi en iyi uygulamaları",
+          "href": "/education/lessons/aws/module-12/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Cost Reporting",
+          "description": "Maliyet raporlama",
+          "href": "/education/lessons/aws/module-12/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/aws/module-12/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-13",
+      "title": "Module 13: Advanced Services Testi",
+      "summary": "AWS gelişmiş servisler, API Gateway, SQS, SNS, DynamoDB, ElastiCache, Route 53, CloudFront ve advanced features.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Gelişmiş AWS servislerini öğrenmek",
+        "API Gateway kullanmayı öğrenmek",
+        "Message queuing kullanmayı öğrenmek",
+        "Advanced features kullanmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: API Gateway",
+          "description": "API Gateway kavramı",
+          "href": "/education/lessons/aws/module-13/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: API Gateway Features",
+          "description": "API Gateway özellikleri",
+          "href": "/education/lessons/aws/module-13/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: SQS (Simple Queue Service)",
+          "description": "Kuyruk servisi",
+          "href": "/education/lessons/aws/module-13/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: SNS (Simple Notification Service)",
+          "description": "Bildirim servisi",
+          "href": "/education/lessons/aws/module-13/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: DynamoDB",
+          "description": "NoSQL veritabanı",
+          "href": "/education/lessons/aws/module-13/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: ElastiCache",
+          "description": "Cache servisi",
+          "href": "/education/lessons/aws/module-13/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Route 53",
+          "description": "DNS servisi",
+          "href": "/education/lessons/aws/module-13/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: CloudFront",
+          "description": "CDN servisi",
+          "href": "/education/lessons/aws/module-13/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: ECS (Elastic Container Service)",
+          "description": "Container servisi",
+          "href": "/education/lessons/aws/module-13/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: EKS (Elastic Kubernetes Service)",
+          "description": "Kubernetes servisi",
+          "href": "/education/lessons/aws/module-13/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Step Functions",
+          "description": "Workflow servisi",
+          "href": "/education/lessons/aws/module-13/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: EventBridge",
+          "description": "Event-driven architecture",
+          "href": "/education/lessons/aws/module-13/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Advanced Features",
+          "description": "Gelişmiş özellikler",
+          "href": "/education/lessons/aws/module-13/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Service Integration",
+          "description": "Servis entegrasyonu",
+          "href": "/education/lessons/aws/module-13/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/aws/module-13/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-14",
+      "title": "Module 14: Best Practices Testi",
+      "summary": "AWS geliştirmede en iyi uygulamalar, well-architected framework, güvenlik, performans, maliyet optimizasyonu ve operasyonel mükemmellik.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Well-Architected Framework öğrenmek",
+        "Güvenlik best practices uygulamak",
+        "Performans optimizasyon tekniklerini öğrenmek",
+        "Operasyonel mükemmellik sağlamak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Well-Architected Framework",
+          "description": "İyi mimari çerçevesi",
+          "href": "/education/lessons/aws/module-14/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Operational Excellence",
+          "description": "Operasyonel mükemmellik",
+          "href": "/education/lessons/aws/module-14/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Security Pillar",
+          "description": "Güvenlik sütunu",
+          "href": "/education/lessons/aws/module-14/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Reliability Pillar",
+          "description": "Güvenilirlik sütunu",
+          "href": "/education/lessons/aws/module-14/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Performance Efficiency",
+          "description": "Performans verimliliği",
+          "href": "/education/lessons/aws/module-14/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Cost Optimization",
+          "description": "Maliyet optimizasyonu",
+          "href": "/education/lessons/aws/module-14/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Security Best Practices",
+          "description": "Güvenlik en iyi uygulamaları",
+          "href": "/education/lessons/aws/module-14/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Performance Best Practices",
+          "description": "Performans en iyi uygulamaları",
+          "href": "/education/lessons/aws/module-14/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Cost Best Practices",
+          "description": "Maliyet en iyi uygulamaları",
+          "href": "/education/lessons/aws/module-14/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Monitoring Best Practices",
+          "description": "İzleme en iyi uygulamaları",
+          "href": "/education/lessons/aws/module-14/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Disaster Recovery",
+          "description": "Felaket kurtarma",
+          "href": "/education/lessons/aws/module-14/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: High Availability",
+          "description": "Yüksek erişilebilirlik",
+          "href": "/education/lessons/aws/module-14/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Scalability Patterns",
+          "description": "Ölçeklenebilirlik desenleri",
+          "href": "/education/lessons/aws/module-14/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Architecture Patterns",
+          "description": "Mimari desenler",
+          "href": "/education/lessons/aws/module-14/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/aws/module-14/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-15",
+      "title": "Module 15: Capstone Project Testi",
+      "summary": "Kapsamlı bir AWS projesi geliştirerek tüm öğrenilenleri uygulama, gerçek dünya senaryosu ve portfolio projesi.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Tüm öğrenilenleri bir projede uygulamak",
+        "Gerçek dünya senaryosu geliştirmek",
+        "Portfolio projesi oluşturmak",
+        "End-to-end AWS uygulaması geliştirmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Proje Planlama",
+          "description": "Proje gereksinimleri ve planlama",
+          "href": "/education/lessons/aws/module-15/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Mimari Tasarım",
+          "description": "AWS mimarisi tasarımı",
+          "href": "/education/lessons/aws/module-15/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: VPC Setup",
+          "description": "VPC yapılandırması",
+          "href": "/education/lessons/aws/module-15/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: EC2 Implementation",
+          "description": "EC2 instance'ları",
+          "href": "/education/lessons/aws/module-15/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: RDS Setup",
+          "description": "RDS veritabanı",
+          "href": "/education/lessons/aws/module-15/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: S3 Implementation",
+          "description": "S3 depolama",
+          "href": "/education/lessons/aws/module-15/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Lambda Functions",
+          "description": "Serverless fonksiyonlar",
+          "href": "/education/lessons/aws/module-15/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: API Gateway",
+          "description": "API Gateway yapılandırması",
+          "href": "/education/lessons/aws/module-15/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Security Implementation",
+          "description": "Güvenlik implementasyonu",
+          "href": "/education/lessons/aws/module-15/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Monitoring Setup",
+          "description": "CloudWatch yapılandırması",
+          "href": "/education/lessons/aws/module-15/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: CI/CD Pipeline",
+          "description": "CodePipeline kurulumu",
+          "href": "/education/lessons/aws/module-15/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Cost Optimization",
+          "description": "Maliyet optimizasyonu",
+          "href": "/education/lessons/aws/module-15/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Documentation",
+          "description": "Proje dokümantasyonu",
+          "href": "/education/lessons/aws/module-15/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Project Review",
+          "description": "Proje incelemesi",
+          "href": "/education/lessons/aws/module-15/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Project Presentation",
+          "description": "Proje sunumu",
+          "href": "/education/lessons/aws/module-15/lesson-15"
+        }
+      ]
+    }
+  ]
+}

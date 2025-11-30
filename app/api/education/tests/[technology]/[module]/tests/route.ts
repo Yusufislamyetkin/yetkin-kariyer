@@ -3,6 +3,8 @@ import { readFileSync } from "fs";
 import { join } from "path";
 import { normalizeTechnologyName, compareTechnologyNames, routeToTechnology } from "@/lib/utils/technology-normalize";
 import { TEST_MODULE_FILE_MAP } from "@/lib/admin/test-module-files";
+import { db } from "@/lib/db";
+import { auth } from "@/lib/auth";
 
 interface Test {
   id: string;
@@ -12,6 +14,8 @@ interface Test {
   questionCount: number;
   timeLimitMinutes: number | null;
   href: string | null;
+  lastAttemptId?: string | null;
+  hasAttempted?: boolean;
 }
 
 export async function GET(
@@ -77,6 +81,10 @@ export async function GET(
     // Modülün relatedTests array'inden testleri oluştur
     const tests: Test[] = [];
     
+    // Kullanıcı kimlik doğrulaması (opsiyonel - giriş yapmamışsa attempt bilgisi olmayacak)
+    const session = await auth();
+    const userId = session?.user?.id as string | undefined;
+
     if (moduleItem.relatedTests && Array.isArray(moduleItem.relatedTests)) {
       for (const testItem of moduleItem.relatedTests) {
         if (!testItem.id || !testItem.title) continue;
@@ -84,7 +92,7 @@ export async function GET(
         // Modülün durationMinutes'ını timeLimitMinutes olarak kullan
         const timeLimitMinutes = moduleItem.durationMinutes || null;
 
-        tests.push({
+        const testData: Test = {
           id: testItem.id,
           title: testItem.title,
           description: testItem.description || null,
@@ -92,7 +100,91 @@ export async function GET(
           questionCount: 0, // JSON'da soru sayısı yok, boş array olarak işaretle
           timeLimitMinutes,
           href: testItem.href || null, // JSON'daki href'i ekle
-        });
+          hasAttempted: false,
+          lastAttemptId: null,
+        };
+
+        // Kullanıcı giriş yapmışsa, test için quiz attempt'lerini kontrol et
+        if (userId) {
+          try {
+            // Quiz ID'sini oluştur (test submit API'deki mantıkla aynı)
+            const normalizedTech = normalizeTechnologyName(technologyName);
+            const technologySlug = normalizedTech.replace(/\s+/g, '-');
+            const possibleQuizIds = [
+              testItem.id, // Direkt test ID
+              `test-${technologySlug}-${decodedModule}-${testItem.id}`, // Oluşturulmuş ID
+            ];
+
+            // Her olası quiz ID'si için attempt kontrolü yap
+            let foundAttempt = null;
+            for (const quizId of possibleQuizIds) {
+              // Önce quiz attempt'leri kontrol et
+              const quizAttempt = await db.quizAttempt.findFirst({
+                where: {
+                  userId,
+                  quizId,
+                },
+                orderBy: {
+                  completedAt: 'desc',
+                },
+                select: {
+                  id: true,
+                },
+              });
+
+              if (quizAttempt) {
+                foundAttempt = quizAttempt;
+                break;
+              }
+
+              // Quiz attempt bulunamazsa, test attempt'leri üzerinden quiz ID'sini bulmaya çalış
+              // Test attempt'lerinde quizId var, bu quizId ile quizAttempt'i bulabiliriz
+              const testAttempt = await db.testAttempt.findFirst({
+                where: {
+                  userId,
+                  quizId,
+                },
+                orderBy: {
+                  createdAt: 'desc',
+                },
+                select: {
+                  quizId: true,
+                },
+              });
+
+              if (testAttempt && testAttempt.quizId) {
+                // Test attempt'ten quiz ID'sini al ve quiz attempt'i bul
+                const relatedQuizAttempt = await db.quizAttempt.findFirst({
+                  where: {
+                    userId,
+                    quizId: testAttempt.quizId,
+                  },
+                  orderBy: {
+                    completedAt: 'desc',
+                  },
+                  select: {
+                    id: true,
+                  },
+                });
+
+                if (relatedQuizAttempt) {
+                  foundAttempt = relatedQuizAttempt;
+                  break;
+                }
+              }
+            }
+
+            if (foundAttempt) {
+              testData.hasAttempted = true;
+              testData.lastAttemptId = foundAttempt.id;
+            }
+          } catch (error) {
+            console.error(`[TESTS_API] Error checking attempts for test ${testItem.id}:`, error);
+            // Hata olsa bile testi listeye ekle, sadece attempt bilgisi olmayacak
+          }
+        }
+
+        tests.push(testData);
       }
     }
 

@@ -254,50 +254,91 @@ export default function RozetlerPage() {
     other: "Diğer",
   };
 
-  const fetchBadges = async () => {
+  const fetchBadges = async (): Promise<boolean> => {
     try {
-      const response = await fetch("/api/badges");
+      // Timeout ekle (10 saniye)
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+      const response = await fetch("/api/badges", {
+        signal: controller.signal,
+      });
+      clearTimeout(timeoutId);
+
       const data = await response.json();
 
       if (response.ok && data.badges) {
         setAllBadges(data.badges || []);
         // API'den gelen totalBadges field'ını kullan, yoksa badges.length kullan
         setTotalBadgesCount(data.totalBadges || data.badges?.length || 160);
-        return;
+        return true;
       }
       
       // Fallback: try to load from JSON file
-      const jsonResponse = await fetch("/data/badges.json");
+      console.warn("[ROZETLER] API'den rozetler yüklenemedi, JSON'dan yükleniyor...");
+      const jsonController = new AbortController();
+      const jsonTimeoutId = setTimeout(() => jsonController.abort(), 5000);
+      
+      const jsonResponse = await fetch("/data/badges.json", {
+        signal: jsonController.signal,
+      });
+      clearTimeout(jsonTimeoutId);
+      
       if (jsonResponse.ok) {
         const jsonData = await jsonResponse.json();
         setAllBadges(jsonData.badges || []);
         setTotalBadgesCount(jsonData.totalBadges || 160);
+        return true;
       } else {
-        console.error("Failed to load badges from API and JSON fallback");
+        console.error("[ROZETLER] JSON'dan da yüklenemedi");
         setAllBadges([]);
+        return false;
       }
-    } catch (error) {
-      console.error("Error fetching badges:", error);
+    } catch (error: any) {
+      if (error.name === 'AbortError') {
+        console.error("[ROZETLER] Rozet yükleme timeout oldu");
+      } else {
+        console.error("[ROZETLER] Rozet yükleme hatası:", error);
+      }
+      
       // Fallback: try to load from JSON file
       try {
-        const jsonResponse = await fetch("/data/badges.json");
+        const jsonController = new AbortController();
+        const jsonTimeoutId = setTimeout(() => jsonController.abort(), 5000);
+        
+        const jsonResponse = await fetch("/data/badges.json", {
+          signal: jsonController.signal,
+        });
+        clearTimeout(jsonTimeoutId);
+        
         if (jsonResponse.ok) {
           const jsonData = await jsonResponse.json();
           setAllBadges(jsonData.badges || []);
           setTotalBadgesCount(jsonData.totalBadges || 160);
+          return true;
         } else {
           setAllBadges([]);
+          return false;
         }
-      } catch (jsonError) {
-        console.error("Error loading badges JSON:", jsonError);
+      } catch (jsonError: any) {
+        console.error("[ROZETLER] JSON yükleme hatası:", jsonError);
         setAllBadges([]);
+        return false;
       }
     }
   };
 
-  const fetchUserBadges = useCallback(async () => {
+  const fetchUserBadges = useCallback(async (): Promise<boolean> => {
     try {
-      const response = await fetch("/api/badges/user");
+      // Timeout ekle (10 saniye)
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+      const response = await fetch("/api/badges/user", {
+        signal: controller.signal,
+      });
+      clearTimeout(timeoutId);
+
       const data = await response.json();
 
       if (response.ok) {
@@ -305,27 +346,44 @@ export default function RozetlerPage() {
         // Key bazlı eşleştirme: key varsa key, yoksa id kullan
         const earnedIds = new Set<string>((data.badges || []).map((b: Badge) => (b as any).key || b.id));
         setEarnedBadgeIds(earnedIds);
+        return true;
       } else {
-        console.error("Failed to fetch user badges:", data.error);
+        console.error("[ROZETLER] Kullanıcı rozetleri yüklenemedi:", data.error);
         setUserBadges([]);
         setEarnedBadgeIds(new Set());
+        return false;
       }
-    } catch (error) {
-      console.error("Error fetching user badges:", error);
+    } catch (error: any) {
+      if (error.name === 'AbortError') {
+        console.error("[ROZETLER] Kullanıcı rozetleri yükleme timeout oldu");
+      } else {
+        console.error("[ROZETLER] Kullanıcı rozetleri yükleme hatası:", error);
+      }
       setUserBadges([]);
       setEarnedBadgeIds(new Set());
+      return false;
     }
   }, []);
 
-  const fetchProgress = useCallback(async () => {
+  const fetchProgress = useCallback(async (): Promise<boolean> => {
     try {
-      const response = await fetch("/api/badges/progress");
+      // Timeout ekle (15 saniye - progress hesaplama daha uzun sürebilir)
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 15000);
+
+      const response = await fetch("/api/badges/progress", {
+        signal: controller.signal,
+      });
+      clearTimeout(timeoutId);
+
       const data = await response.json();
 
       if (response.ok && data.progress) {
         const progressMap = new Map<string, { current: number; target: number; percentage: number; isCompleted: boolean }>();
         data.progress.forEach((p: { badgeId: string; current: number; target: number; percentage: number; isCompleted: boolean }) => {
-          progressMap.set(p.badgeId, {
+          // Key bazlı eşleştirme için badgeId yerine key kullan (eğer varsa)
+          const badgeKey = p.badgeId;
+          progressMap.set(badgeKey, {
             current: p.current,
             target: p.target,
             percentage: p.percentage,
@@ -333,9 +391,18 @@ export default function RozetlerPage() {
           });
         });
         setProgressMap(progressMap);
+        return true;
+      } else {
+        console.error("[ROZETLER] İlerleme yüklenemedi:", data.error);
+        return false;
       }
-    } catch (error) {
-      console.error("Error fetching badge progress:", error);
+    } catch (error: any) {
+      if (error.name === 'AbortError') {
+        console.error("[ROZETLER] İlerleme yükleme timeout oldu");
+      } else {
+        console.error("[ROZETLER] İlerleme yükleme hatası:", error);
+      }
+      return false;
     }
   }, []);
 
@@ -375,13 +442,47 @@ export default function RozetlerPage() {
     if (status === "unauthenticated") {
       router.push("/login");
     } else if (status === "authenticated") {
-      // Her iki API çağrısını koordine et ve loading state'i yönet
-      Promise.all([fetchBadges(), fetchUserBadges(), fetchProgress()])
+      // Her üç API çağrısını koordine et ve loading state'i yönet
+      // En azından badges yüklenene kadar bekle, diğerleri opsiyonel
+      Promise.allSettled([
+        fetchBadges(),
+        fetchUserBadges(),
+        fetchProgress(),
+      ])
+        .then((results) => {
+          const [badgesResult, userBadgesResult, progressResult] = results;
+          
+          // En azından badges yüklendi mi kontrol et
+          if (badgesResult.status === 'fulfilled' && badgesResult.value) {
+            console.log("[ROZETLER] Rozetler başarıyla yüklendi");
+          } else {
+            console.warn("[ROZETLER] Rozetler yüklenirken sorun oluştu");
+          }
+          
+          if (userBadgesResult.status === 'fulfilled' && userBadgesResult.value) {
+            console.log("[ROZETLER] Kullanıcı rozetleri başarıyla yüklendi");
+          } else {
+            console.warn("[ROZETLER] Kullanıcı rozetleri yüklenirken sorun oluştu");
+          }
+          
+          if (progressResult.status === 'fulfilled' && progressResult.value) {
+            console.log("[ROZETLER] İlerleme başarıyla yüklendi");
+          } else {
+            console.warn("[ROZETLER] İlerleme yüklenirken sorun oluştu");
+          }
+        })
         .finally(() => {
+          // Her durumda loading'i kapat (hata olsa bile sayfa gösterilsin)
           setLoading(false);
         });
-      // Tüm rozetleri kontrol et (eksik olanları tespit et)
-      checkAllBadges();
+      
+      // Tüm rozetleri kontrol et (eksik olanları tespit et) - arka planda çalışsın
+      // Bu işlem uzun sürebilir, bu yüzden sayfa yüklenmesini engellememeli
+      setTimeout(() => {
+        checkAllBadges().catch((error) => {
+          console.error("[ROZETLER] Rozet kontrolü hatası:", error);
+        });
+      }, 1000); // 1 saniye bekle, sayfa önce yüklensin
     }
   }, [status, router, fetchUserBadges, fetchProgress, checkAllBadges]);
 

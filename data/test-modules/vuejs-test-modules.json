@@ -1,0 +1,1577 @@
+{
+  "overview": {
+    "description": "Vue.js, kullanıcı arayüzleri geliştirmek için kullanılan ilerici bir JavaScript framework'üdür. Bu kapsamlı kurs ile Vue.js'in temellerinden ileri seviye konularına kadar her şeyi öğreneceksiniz. Modern, performanslı ve ölçeklenebilir web uygulamaları geliştirme becerileri kazanacaksınız.",
+    "estimatedDurationMinutes": 6750
+  },
+  "learningObjectives": [
+    "Vue.js framework'ünün temel kavramlarını ve mimarisini anlamak",
+    "Component-based development yaklaşımını öğrenmek",
+    "Vue.js directives ve template syntax'ını etkili kullanmak",
+    "State management (Vuex/Pinia) ile uygulama durumunu yönetmek",
+    "Vue Router ile routing ve navigation implementasyonu yapmak",
+    "Composition API ile modern Vue.js geliştirme tekniklerini öğrenmek",
+    "Testing ve deployment stratejilerini uygulamak"
+  ],
+  "modules": [
+    {
+      "id": "module-01",
+      "title": "Module 1: Vue.js Tanımı ve Temelleri Testi",
+      "summary": "Vue.js'in ne olduğu, tarihçesi, avantajları, diğer framework'lerden farkları ve temel kavramlar.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Vue.js'in ne olduğunu ve neden kullanıldığını anlamak",
+        "Vue.js'in React ve Angular gibi framework'lerden farklarını öğrenmek",
+        "Vue.js'in avantajlarını ve kullanım alanlarını keşfetmek",
+        "Progressive framework kavramını anlamak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Vue.js Nedir?",
+          "description": "Vue.js'in temel tanımı ve genel bakış",
+          "href": "/education/lessons/vuejs/module-01/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Vue.js diğer framework'lerden farkı nedir?",
+          "description": "Vue.js'in React, Angular gibi framework'lerden farkları",
+          "href": "/education/lessons/vuejs/module-01/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Vue.js'in Tarihçesi ve Gelişimi",
+          "description": "Vue.js'in ortaya çıkışı ve versiyon geçmişi",
+          "href": "/education/lessons/vuejs/module-01/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Progressive Framework",
+          "description": "İlerici framework kavramı ve avantajları",
+          "href": "/education/lessons/vuejs/module-01/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Vue.js'in Avantajları",
+          "description": "Öğrenme kolaylığı, performans, esneklik gibi avantajlar",
+          "href": "/education/lessons/vuejs/module-01/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Vue.js Kullanım Alanları",
+          "description": "SPA, SSR, mobil uygulamalar gibi kullanım senaryoları",
+          "href": "/education/lessons/vuejs/module-01/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Vue.js Ekosistemi",
+          "description": "Vue CLI, Vuex, Vue Router ve topluluk desteği",
+          "href": "/education/lessons/vuejs/module-01/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Vue.js Lisanslama",
+          "description": "MIT lisansı ve ticari kullanım hakları",
+          "href": "/education/lessons/vuejs/module-01/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Vue.js Topluluk Desteği",
+          "description": "Açık kaynak topluluğu ve katkı süreçleri",
+          "href": "/education/lessons/vuejs/module-01/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Vue.js'in Geleceği",
+          "description": "Vue 3+ ve gelecek planları",
+          "href": "/education/lessons/vuejs/module-01/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Vue.js Kurulum Gereksinimleri",
+          "description": "Sistem gereksinimleri ve desteklenen platformlar",
+          "href": "/education/lessons/vuejs/module-01/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Vue.js ile Neler Yapılabilir?",
+          "description": "Web, mobil, desktop uygulamaları",
+          "href": "/education/lessons/vuejs/module-01/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Vue.js Performans Özellikleri",
+          "description": "Yüksek performans ve optimizasyon özellikleri",
+          "href": "/education/lessons/vuejs/module-01/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Vue.js Geliştirici Deneyimi",
+          "description": "Geliştirici dostu özellikler ve araçlar",
+          "href": "/education/lessons/vuejs/module-01/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Değerlendirme",
+          "description": "Modül kapsamında öğrenilenlerin özeti ve değerlendirme",
+          "href": "/education/lessons/vuejs/module-01/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-02",
+      "title": "Module 2: Vue.js Kurulumu ve Proje Yapısı Testi",
+      "summary": "Vue.js projesi oluşturma, kurulum yöntemleri, proje yapısı ve geliştirme ortamı kurulumu.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Vue.js projesi oluşturmayı öğrenmek",
+        "Farklı kurulum yöntemlerini anlamak",
+        "Proje yapısını ve dosya organizasyonunu öğrenmek",
+        "Geliştirme ortamını kurmak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Vue.js Kurulum Yöntemleri",
+          "description": "CDN, npm, Vue CLI kurulum seçenekleri",
+          "href": "/education/lessons/vuejs/module-02/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Vue CLI ile Proje Oluşturma",
+          "description": "Vue CLI kullanarak yeni proje oluşturma",
+          "href": "/education/lessons/vuejs/module-02/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Vite ile Proje Oluşturma",
+          "description": "Vite build tool ile modern Vue.js projesi",
+          "href": "/education/lessons/vuejs/module-02/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Proje Yapısı ve Dosya Organizasyonu",
+          "description": "Klasör yapısı ve dosya organizasyonu",
+          "href": "/education/lessons/vuejs/module-02/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: package.json ve Bağımlılıklar",
+          "description": "Package yönetimi ve bağımlılıklar",
+          "href": "/education/lessons/vuejs/module-02/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Development Server",
+          "description": "Geliştirme sunucusu ve hot reload",
+          "href": "/education/lessons/vuejs/module-02/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Build ve Production",
+          "description": "Production build oluşturma",
+          "href": "/education/lessons/vuejs/module-02/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: IDE ve Editor Kurulumu",
+          "description": "VS Code ve Vue.js eklentileri",
+          "href": "/education/lessons/vuejs/module-02/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: ESLint ve Prettier",
+          "description": "Kod kalitesi araçları",
+          "href": "/education/lessons/vuejs/module-02/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: TypeScript Desteği",
+          "description": "TypeScript ile Vue.js projesi",
+          "href": "/education/lessons/vuejs/module-02/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Environment Variables",
+          "description": "Ortam değişkenleri yönetimi",
+          "href": "/education/lessons/vuejs/module-02/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Proxy Configuration",
+          "description": "API proxy yapılandırması",
+          "href": "/education/lessons/vuejs/module-02/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Webpack ve Vite Yapılandırması",
+          "description": "Build tool yapılandırması",
+          "href": "/education/lessons/vuejs/module-02/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Testing Setup",
+          "description": "Test ortamı kurulumu",
+          "href": "/education/lessons/vuejs/module-02/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/vuejs/module-02/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-03",
+      "title": "Module 3: Template Syntax ve Directives Testi",
+      "summary": "Vue.js template syntax, directives (v-if, v-for, v-bind, v-on), interpolation ve data binding.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Vue.js template syntax'ını öğrenmek",
+        "Directives kullanımını anlamak",
+        "Data binding tekniklerini uygulamak",
+        "Event handling yapmak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Template Syntax Temelleri",
+          "description": "Vue.js template yapısı ve syntax",
+          "href": "/education/lessons/vuejs/module-03/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Interpolation (Mustache Syntax)",
+          "description": "Veri gösterimi ve interpolation",
+          "href": "/education/lessons/vuejs/module-03/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: v-bind Directive",
+          "description": "Attribute binding ve v-bind kullanımı",
+          "href": "/education/lessons/vuejs/module-03/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: v-if, v-else-if, v-else",
+          "description": "Koşullu rendering",
+          "href": "/education/lessons/vuejs/module-03/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: v-show Directive",
+          "description": "v-show vs v-if farkları",
+          "href": "/education/lessons/vuejs/module-03/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: v-for Directive",
+          "description": "Liste rendering ve v-for kullanımı",
+          "href": "/education/lessons/vuejs/module-03/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: v-on Directive (Event Handling)",
+          "description": "Event handling ve metod çağırma",
+          "href": "/education/lessons/vuejs/module-03/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Event Modifiers",
+          "description": ".prevent, .stop, .once gibi modifier'lar",
+          "href": "/education/lessons/vuejs/module-03/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: v-model Directive",
+          "description": "Two-way data binding",
+          "href": "/education/lessons/vuejs/module-03/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Computed Properties in Templates",
+          "description": "Template'lerde computed kullanımı",
+          "href": "/education/lessons/vuejs/module-03/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Methods in Templates",
+          "description": "Template'lerde metod çağırma",
+          "href": "/education/lessons/vuejs/module-03/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Class ve Style Binding",
+          "description": "Dinamik class ve style binding",
+          "href": "/education/lessons/vuejs/module-03/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Key Attribute",
+          "description": "v-for'da key kullanımı",
+          "href": "/education/lessons/vuejs/module-03/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Directives Best Practices",
+          "description": "Directive kullanım en iyi uygulamaları",
+          "href": "/education/lessons/vuejs/module-03/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/vuejs/module-03/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-04",
+      "title": "Module 4: Components Temelleri Testi",
+      "summary": "Vue.js component yapısı, component oluşturma, props, events, component communication ve reusability.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Component kavramını anlamak",
+        "Component oluşturmayı öğrenmek",
+        "Props ve events kullanmayı öğrenmek",
+        "Component communication yapmak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Component Nedir?",
+          "description": "Component kavramı ve avantajları",
+          "href": "/education/lessons/vuejs/module-04/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Single File Components (SFC)",
+          "description": ".vue dosya yapısı",
+          "href": "/education/lessons/vuejs/module-04/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Component Registration",
+          "description": "Global ve local component kaydı",
+          "href": "/education/lessons/vuejs/module-04/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Props Temelleri",
+          "description": "Props tanımlama ve kullanımı",
+          "href": "/education/lessons/vuejs/module-04/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Props Validation",
+          "description": "Props tip kontrolü ve validasyon",
+          "href": "/education/lessons/vuejs/module-04/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Events ve $emit",
+          "description": "Child-to-parent communication",
+          "href": "/education/lessons/vuejs/module-04/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Slots",
+          "description": "Content projection ve slots",
+          "href": "/education/lessons/vuejs/module-04/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Named Slots",
+          "description": "Çoklu slot kullanımı",
+          "href": "/education/lessons/vuejs/module-04/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Scoped Slots",
+          "description": "Slot props ve scoped slots",
+          "href": "/education/lessons/vuejs/module-04/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Component Communication Patterns",
+          "description": "Farklı iletişim desenleri",
+          "href": "/education/lessons/vuejs/module-04/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Dynamic Components",
+          "description": "Dinamik component rendering",
+          "href": "/education/lessons/vuejs/module-04/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Component Reusability",
+          "description": "Yeniden kullanılabilir component tasarımı",
+          "href": "/education/lessons/vuejs/module-04/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Component Composition",
+          "description": "Component birleştirme stratejileri",
+          "href": "/education/lessons/vuejs/module-04/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Component Best Practices",
+          "description": "Component tasarım en iyi uygulamaları",
+          "href": "/education/lessons/vuejs/module-04/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/vuejs/module-04/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-05",
+      "title": "Module 5: Computed Properties ve Watchers Testi",
+      "summary": "Computed properties, watchers, reactive data, dependency tracking ve performans optimizasyonu.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Computed properties kavramını anlamak",
+        "Watchers kullanmayı öğrenmek",
+        "Reactive data sistemini öğrenmek",
+        "Performans optimizasyonu yapmak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Computed Properties Nedir?",
+          "description": "Computed properties kavramı",
+          "href": "/education/lessons/vuejs/module-05/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Computed vs Methods",
+          "description": "Computed ve methods farkları",
+          "href": "/education/lessons/vuejs/module-05/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Computed Properties Kullanımı",
+          "description": "Computed property tanımlama",
+          "href": "/education/lessons/vuejs/module-05/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Computed Setters",
+          "description": "Computed property setter'ları",
+          "href": "/education/lessons/vuejs/module-05/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Watchers Nedir?",
+          "description": "Watcher kavramı ve kullanım alanları",
+          "href": "/education/lessons/vuejs/module-05/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Watch Kullanımı",
+          "description": "watch API kullanımı",
+          "href": "/education/lessons/vuejs/module-05/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Deep Watching",
+          "description": "Nested object watching",
+          "href": "/education/lessons/vuejs/module-05/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Immediate Watchers",
+          "description": "İlk yüklemede çalışan watchers",
+          "href": "/education/lessons/vuejs/module-05/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Watch Multiple Sources",
+          "description": "Birden fazla kaynağı izleme",
+          "href": "/education/lessons/vuejs/module-05/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Reactive System",
+          "description": "Vue.js reactive sistem",
+          "href": "/education/lessons/vuejs/module-05/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Dependency Tracking",
+          "description": "Bağımlılık takibi mekanizması",
+          "href": "/education/lessons/vuejs/module-05/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Performance Considerations",
+          "description": "Performans optimizasyonu",
+          "href": "/education/lessons/vuejs/module-05/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: When to Use Computed vs Watch",
+          "description": "Kullanım senaryoları",
+          "href": "/education/lessons/vuejs/module-05/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Advanced Patterns",
+          "description": "İleri seviye kullanım desenleri",
+          "href": "/education/lessons/vuejs/module-05/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/vuejs/module-05/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-06",
+      "title": "Module 6: Component Lifecycle Testi",
+      "summary": "Vue.js component lifecycle hooks, lifecycle stages, hook kullanımı ve best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Component lifecycle kavramını anlamak",
+        "Lifecycle hooks kullanmayı öğrenmek",
+        "Lifecycle stages'i öğrenmek",
+        "Hook kullanım best practices uygulamak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Component Lifecycle Nedir?",
+          "description": "Lifecycle kavramı ve aşamaları",
+          "href": "/education/lessons/vuejs/module-06/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: beforeCreate Hook",
+          "description": "Component oluşturma öncesi",
+          "href": "/education/lessons/vuejs/module-06/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: created Hook",
+          "description": "Component oluşturulduktan sonra",
+          "href": "/education/lessons/vuejs/module-06/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: beforeMount Hook",
+          "description": "DOM'a mount edilmeden önce",
+          "href": "/education/lessons/vuejs/module-06/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: mounted Hook",
+          "description": "DOM'a mount edildikten sonra",
+          "href": "/education/lessons/vuejs/module-06/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: beforeUpdate Hook",
+          "description": "Güncelleme öncesi",
+          "href": "/education/lessons/vuejs/module-06/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: updated Hook",
+          "description": "Güncelleme sonrası",
+          "href": "/education/lessons/vuejs/module-06/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: beforeUnmount Hook",
+          "description": "Unmount öncesi",
+          "href": "/education/lessons/vuejs/module-06/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: unmounted Hook",
+          "description": "Unmount sonrası",
+          "href": "/education/lessons/vuejs/module-06/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Error Handling Hooks",
+          "description": "errorCaptured hook",
+          "href": "/education/lessons/vuejs/module-06/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Lifecycle in Composition API",
+          "description": "Composition API lifecycle",
+          "href": "/education/lessons/vuejs/module-06/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Common Use Cases",
+          "description": "Yaygın kullanım senaryoları",
+          "href": "/education/lessons/vuejs/module-06/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Lifecycle Best Practices",
+          "description": "Hook kullanım en iyi uygulamaları",
+          "href": "/education/lessons/vuejs/module-06/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Memory Leaks Prevention",
+          "description": "Bellek sızıntısı önleme",
+          "href": "/education/lessons/vuejs/module-06/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/vuejs/module-06/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-07",
+      "title": "Module 7: State Management (Vuex/Pinia) Testi",
+      "summary": "State management kavramı, Vuex store, mutations, actions, getters ve Pinia kullanımı.",
+      "durationMinutes": 450,
+      "objectives": [
+        "State management kavramını anlamak",
+        "Vuex store yapısını öğrenmek",
+        "Mutations, actions ve getters kullanmayı öğrenmek",
+        "Pinia ile modern state management yapmak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: State Management Nedir?",
+          "description": "State management kavramı ve ihtiyacı",
+          "href": "/education/lessons/vuejs/module-07/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Vuex Store Yapısı",
+          "description": "Vuex store oluşturma ve yapılandırma",
+          "href": "/education/lessons/vuejs/module-07/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: State",
+          "description": "Store state tanımlama",
+          "href": "/education/lessons/vuejs/module-07/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Getters",
+          "description": "Computed state değerleri",
+          "href": "/education/lessons/vuejs/module-07/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Mutations",
+          "description": "State değişiklikleri",
+          "href": "/education/lessons/vuejs/module-07/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Actions",
+          "description": "Asenkron işlemler ve actions",
+          "href": "/education/lessons/vuejs/module-07/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Modules",
+          "description": "Store modülleri ve organizasyon",
+          "href": "/education/lessons/vuejs/module-07/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Vuex in Components",
+          "description": "Component'lerde Vuex kullanımı",
+          "href": "/education/lessons/vuejs/module-07/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Pinia Giriş",
+          "description": "Pinia nedir ve avantajları",
+          "href": "/education/lessons/vuejs/module-07/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Pinia Stores",
+          "description": "Pinia store oluşturma",
+          "href": "/education/lessons/vuejs/module-07/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Pinia State ve Getters",
+          "description": "Pinia state yönetimi",
+          "href": "/education/lessons/vuejs/module-07/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Pinia Actions",
+          "description": "Pinia actions kullanımı",
+          "href": "/education/lessons/vuejs/module-07/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Vuex vs Pinia",
+          "description": "İki kütüphane karşılaştırması",
+          "href": "/education/lessons/vuejs/module-07/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: State Management Best Practices",
+          "description": "State management en iyi uygulamaları",
+          "href": "/education/lessons/vuejs/module-07/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/vuejs/module-07/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-08",
+      "title": "Module 8: Routing (Vue Router) Testi",
+      "summary": "Vue Router kullanımı, route tanımlama, navigation, route guards, nested routes ve dynamic routes.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Vue Router kavramını anlamak",
+        "Route tanımlamayı öğrenmek",
+        "Navigation yapmayı öğrenmek",
+        "Route guards kullanmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Vue Router Nedir?",
+          "description": "Vue Router kavramı ve kullanımı",
+          "href": "/education/lessons/vuejs/module-08/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Vue Router Kurulumu",
+          "description": "Router kurulumu ve yapılandırma",
+          "href": "/education/lessons/vuejs/module-08/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Basic Routing",
+          "description": "Temel route tanımlama",
+          "href": "/education/lessons/vuejs/module-08/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: router-view ve router-link",
+          "description": "Route rendering ve navigation",
+          "href": "/education/lessons/vuejs/module-08/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Dynamic Routes",
+          "description": "Parametreli route'lar",
+          "href": "/education/lessons/vuejs/module-08/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Nested Routes",
+          "description": "İç içe route yapıları",
+          "href": "/education/lessons/vuejs/module-08/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Named Routes",
+          "description": "İsimlendirilmiş route'lar",
+          "href": "/education/lessons/vuejs/module-08/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Programmatic Navigation",
+          "description": "Kod ile navigation",
+          "href": "/education/lessons/vuejs/module-08/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Route Params ve Query",
+          "description": "Route parametreleri ve query string",
+          "href": "/education/lessons/vuejs/module-08/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Route Guards",
+          "description": "beforeEach, beforeResolve, afterEach",
+          "href": "/education/lessons/vuejs/module-08/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Per-Route Guards",
+          "description": "beforeEnter guard",
+          "href": "/education/lessons/vuejs/module-08/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Component Guards",
+          "description": "beforeRouteEnter, beforeRouteUpdate",
+          "href": "/education/lessons/vuejs/module-08/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Lazy Loading Routes",
+          "description": "Code splitting ve lazy loading",
+          "href": "/education/lessons/vuejs/module-08/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Router Best Practices",
+          "description": "Routing en iyi uygulamaları",
+          "href": "/education/lessons/vuejs/module-08/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/vuejs/module-08/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-09",
+      "title": "Module 9: Forms ve Validation Testi",
+      "summary": "Form handling, v-model kullanımı, form validation, custom validators ve form libraries.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Form handling tekniklerini öğrenmek",
+        "Form validation yapmayı öğrenmek",
+        "Custom validators oluşturmayı öğrenmek",
+        "Form libraries kullanmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Form Handling Temelleri",
+          "description": "Vue.js'de form işleme",
+          "href": "/education/lessons/vuejs/module-09/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: v-model ile Form Binding",
+          "description": "Form elemanları ile two-way binding",
+          "href": "/education/lessons/vuejs/module-09/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Input Types",
+          "description": "Farklı input tipleri",
+          "href": "/education/lessons/vuejs/module-09/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Checkbox ve Radio",
+          "description": "Checkbox ve radio button handling",
+          "href": "/education/lessons/vuejs/module-09/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Select ve Option",
+          "description": "Dropdown ve select handling",
+          "href": "/education/lessons/vuejs/module-09/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Form Validation Temelleri",
+          "description": "Temel validation teknikleri",
+          "href": "/education/lessons/vuejs/module-09/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Custom Validators",
+          "description": "Özel validator fonksiyonları",
+          "href": "/education/lessons/vuejs/module-09/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Validation Messages",
+          "description": "Hata mesajları gösterimi",
+          "href": "/education/lessons/vuejs/module-09/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: VeeValidate Library",
+          "description": "VeeValidate kütüphanesi",
+          "href": "/education/lessons/vuejs/module-09/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Form Submission",
+          "description": "Form gönderimi ve işleme",
+          "href": "/education/lessons/vuejs/module-09/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Async Validation",
+          "description": "Asenkron validation",
+          "href": "/education/lessons/vuejs/module-09/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Form Reset ve Clear",
+          "description": "Form sıfırlama",
+          "href": "/education/lessons/vuejs/module-09/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Multi-Step Forms",
+          "description": "Çok adımlı formlar",
+          "href": "/education/lessons/vuejs/module-09/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Form Best Practices",
+          "description": "Form tasarım en iyi uygulamaları",
+          "href": "/education/lessons/vuejs/module-09/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/vuejs/module-09/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-10",
+      "title": "Module 10: Composition API Testi",
+      "summary": "Vue 3 Composition API, setup function, reactive API, ref, computed, watch ve composables.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Composition API kavramını anlamak",
+        "setup function kullanmayı öğrenmek",
+        "Reactive API kullanmayı öğrenmek",
+        "Composables oluşturmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Composition API Nedir?",
+          "description": "Composition API kavramı ve avantajları",
+          "href": "/education/lessons/vuejs/module-10/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: setup Function",
+          "description": "setup function kullanımı",
+          "href": "/education/lessons/vuejs/module-10/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: ref API",
+          "description": "ref ile reactive değişkenler",
+          "href": "/education/lessons/vuejs/module-10/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: reactive API",
+          "description": "reactive ile object reactivity",
+          "href": "/education/lessons/vuejs/module-10/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: computed in Composition API",
+          "description": "Composition API'de computed",
+          "href": "/education/lessons/vuejs/module-10/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: watch in Composition API",
+          "description": "Composition API'de watch",
+          "href": "/education/lessons/vuejs/module-10/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Lifecycle Hooks in Composition API",
+          "description": "onMounted, onUpdated gibi hooks",
+          "href": "/education/lessons/vuejs/module-10/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Props in Composition API",
+          "description": "Props kullanımı",
+          "href": "/education/lessons/vuejs/module-10/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Emits in Composition API",
+          "description": "Events emit etme",
+          "href": "/education/lessons/vuejs/module-10/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Composables",
+          "description": "Reusable logic composables",
+          "href": "/education/lessons/vuejs/module-10/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Custom Composables",
+          "description": "Özel composable fonksiyonları",
+          "href": "/education/lessons/vuejs/module-10/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: provide/inject in Composition API",
+          "description": "Dependency injection",
+          "href": "/education/lessons/vuejs/module-10/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Options API vs Composition API",
+          "description": "İki API karşılaştırması",
+          "href": "/education/lessons/vuejs/module-10/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Composition API Best Practices",
+          "description": "Composition API en iyi uygulamaları",
+          "href": "/education/lessons/vuejs/module-10/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/vuejs/module-10/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-11",
+      "title": "Module 11: Testing Testi",
+      "summary": "Vue.js testing, unit testing, component testing, Vue Test Utils, Jest, Vitest ve E2E testing.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Testing kavramını anlamak",
+        "Unit test yazmayı öğrenmek",
+        "Component test yazmayı öğrenmek",
+        "E2E test yazmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Testing Temelleri",
+          "description": "Test türleri ve test pyramid",
+          "href": "/education/lessons/vuejs/module-11/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Vue Test Utils",
+          "description": "Vue Test Utils kütüphanesi",
+          "href": "/education/lessons/vuejs/module-11/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Component Mounting",
+          "description": "Component mount etme",
+          "href": "/education/lessons/vuejs/module-11/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Testing Component Props",
+          "description": "Props test etme",
+          "href": "/education/lessons/vuejs/module-11/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Testing Events",
+          "description": "Event test etme",
+          "href": "/education/lessons/vuejs/module-11/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Testing Slots",
+          "description": "Slot test etme",
+          "href": "/education/lessons/vuejs/module-11/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Jest Integration",
+          "description": "Jest test framework",
+          "href": "/education/lessons/vuejs/module-11/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Vitest Integration",
+          "description": "Vitest test framework",
+          "href": "/education/lessons/vuejs/module-11/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Mocking",
+          "description": "Mock ve stub kullanımı",
+          "href": "/education/lessons/vuejs/module-11/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Testing Async Operations",
+          "description": "Asenkron işlem testleri",
+          "href": "/education/lessons/vuejs/module-11/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Testing Vuex/Pinia",
+          "description": "State management testleri",
+          "href": "/education/lessons/vuejs/module-11/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Testing Vue Router",
+          "description": "Router testleri",
+          "href": "/education/lessons/vuejs/module-11/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: E2E Testing",
+          "description": "Cypress, Playwright ile E2E testler",
+          "href": "/education/lessons/vuejs/module-11/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Testing Best Practices",
+          "description": "Test yazma en iyi uygulamaları",
+          "href": "/education/lessons/vuejs/module-11/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/vuejs/module-11/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-12",
+      "title": "Module 12: Performance Optimization Testi",
+      "summary": "Vue.js performans optimizasyonu, lazy loading, code splitting, virtual scrolling ve bundle optimization.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Performans optimizasyon tekniklerini öğrenmek",
+        "Lazy loading uygulamayı öğrenmek",
+        "Code splitting yapmayı öğrenmek",
+        "Bundle optimization yapmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Performance Temelleri",
+          "description": "Performans ölçümü ve metrikler",
+          "href": "/education/lessons/vuejs/module-12/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Component Lazy Loading",
+          "description": "Async component loading",
+          "href": "/education/lessons/vuejs/module-12/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Route-based Code Splitting",
+          "description": "Route bazlı code splitting",
+          "href": "/education/lessons/vuejs/module-12/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Virtual Scrolling",
+          "description": "Büyük listeler için virtual scrolling",
+          "href": "/education/lessons/vuejs/module-12/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: v-memo Directive",
+          "description": "Memoization ile optimizasyon",
+          "href": "/education/lessons/vuejs/module-12/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Computed Caching",
+          "description": "Computed property caching",
+          "href": "/education/lessons/vuejs/module-12/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: v-once Directive",
+          "description": "One-time rendering",
+          "href": "/education/lessons/vuejs/module-12/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Bundle Analysis",
+          "description": "Bundle boyutu analizi",
+          "href": "/education/lessons/vuejs/module-12/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Tree Shaking",
+          "description": "Kullanılmayan kod temizleme",
+          "href": "/education/lessons/vuejs/module-12/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Image Optimization",
+          "description": "Görsel optimizasyonu",
+          "href": "/education/lessons/vuejs/module-12/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Prefetching ve Preloading",
+          "description": "Kaynak ön yükleme",
+          "href": "/education/lessons/vuejs/module-12/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: SSR Performance",
+          "description": "Server-side rendering performansı",
+          "href": "/education/lessons/vuejs/module-12/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Performance Monitoring",
+          "description": "Performans izleme araçları",
+          "href": "/education/lessons/vuejs/module-12/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Performance Best Practices",
+          "description": "Performans optimizasyon en iyi uygulamaları",
+          "href": "/education/lessons/vuejs/module-12/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/vuejs/module-12/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-13",
+      "title": "Module 13: Deployment Testi",
+      "summary": "Vue.js uygulama deployment, build process, hosting options, CI/CD ve production best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Deployment stratejilerini öğrenmek",
+        "Build process'i anlamak",
+        "Hosting seçeneklerini öğrenmek",
+        "CI/CD pipeline'ları kurmak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Deployment Stratejileri",
+          "description": "Dağıtım modelleri ve seçenekleri",
+          "href": "/education/lessons/vuejs/module-13/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Production Build",
+          "description": "Production build oluşturma",
+          "href": "/education/lessons/vuejs/module-13/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Environment Configuration",
+          "description": "Ortam yapılandırması",
+          "href": "/education/lessons/vuejs/module-13/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Static Hosting",
+          "description": "Netlify, Vercel gibi static hosting",
+          "href": "/education/lessons/vuejs/module-13/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: CDN Deployment",
+          "description": "CDN ile dağıtım",
+          "href": "/education/lessons/vuejs/module-13/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Docker Deployment",
+          "description": "Containerization ve Docker",
+          "href": "/education/lessons/vuejs/module-13/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: CI/CD Concepts",
+          "description": "Sürekli entegrasyon ve dağıtım",
+          "href": "/education/lessons/vuejs/module-13/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: GitHub Actions",
+          "description": "GitHub Actions ile CI/CD",
+          "href": "/education/lessons/vuejs/module-13/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: GitLab CI/CD",
+          "description": "GitLab CI/CD pipeline",
+          "href": "/education/lessons/vuejs/module-13/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: SSR Deployment",
+          "description": "Nuxt.js SSR deployment",
+          "href": "/education/lessons/vuejs/module-13/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Monitoring ve Logging",
+          "description": "Production monitoring",
+          "href": "/education/lessons/vuejs/module-13/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Error Tracking",
+          "description": "Sentry gibi error tracking",
+          "href": "/education/lessons/vuejs/module-13/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Performance Monitoring",
+          "description": "Production performans izleme",
+          "href": "/education/lessons/vuejs/module-13/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Deployment Best Practices",
+          "description": "Deployment en iyi uygulamaları",
+          "href": "/education/lessons/vuejs/module-13/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/vuejs/module-13/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-14",
+      "title": "Module 14: Best Practices Testi",
+      "summary": "Vue.js geliştirmede en iyi uygulamalar, kod kalitesi, güvenlik, performans ve maintainability.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Kod kalitesi standartlarını öğrenmek",
+        "Güvenlik best practices uygulamak",
+        "Performans optimizasyon tekniklerini öğrenmek",
+        "Maintainable kod yazmak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Code Quality Standards",
+          "description": "Kod kalitesi standartları",
+          "href": "/education/lessons/vuejs/module-14/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Naming Conventions",
+          "description": "İsimlendirme kuralları",
+          "href": "/education/lessons/vuejs/module-14/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Component Structure",
+          "description": "Component yapısı ve organizasyon",
+          "href": "/education/lessons/vuejs/module-14/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Code Organization",
+          "description": "Kod organizasyonu",
+          "href": "/education/lessons/vuejs/module-14/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Error Handling",
+          "description": "Hata yönetimi stratejileri",
+          "href": "/education/lessons/vuejs/module-14/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Security Best Practices",
+          "description": "Güvenlik en iyi uygulamaları",
+          "href": "/education/lessons/vuejs/module-14/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Accessibility",
+          "description": "Erişilebilirlik (a11y) standartları",
+          "href": "/education/lessons/vuejs/module-14/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: SEO Best Practices",
+          "description": "SEO optimizasyonu",
+          "href": "/education/lessons/vuejs/module-14/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Code Review Guidelines",
+          "description": "Kod inceleme kılavuzları",
+          "href": "/education/lessons/vuejs/module-14/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Documentation",
+          "description": "Kod dokümantasyonu",
+          "href": "/education/lessons/vuejs/module-14/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Refactoring Techniques",
+          "description": "Kod refaktörleme teknikleri",
+          "href": "/education/lessons/vuejs/module-14/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Technical Debt Management",
+          "description": "Teknik borç yönetimi",
+          "href": "/education/lessons/vuejs/module-14/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Maintainability",
+          "description": "Bakım yapılabilirlik prensipleri",
+          "href": "/education/lessons/vuejs/module-14/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Team Collaboration",
+          "description": "Takım işbirliği ve workflow",
+          "href": "/education/lessons/vuejs/module-14/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/vuejs/module-14/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-15",
+      "title": "Module 15: Capstone Project Testi",
+      "summary": "Kapsamlı bir Vue.js projesi geliştirerek tüm öğrenilenleri uygulama, gerçek dünya senaryosu ve portfolio projesi.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Tüm öğrenilenleri bir projede uygulamak",
+        "Gerçek dünya senaryosu geliştirmek",
+        "Portfolio projesi oluşturmak",
+        "End-to-end uygulama geliştirmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Proje Planlama",
+          "description": "Proje gereksinimleri ve planlama",
+          "href": "/education/lessons/vuejs/module-15/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Mimari Tasarım",
+          "description": "Uygulama mimarisi tasarımı",
+          "href": "/education/lessons/vuejs/module-15/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Component Architecture",
+          "description": "Component yapısı tasarımı",
+          "href": "/education/lessons/vuejs/module-15/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: State Management Setup",
+          "description": "State management yapılandırması",
+          "href": "/education/lessons/vuejs/module-15/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Routing Implementation",
+          "description": "Routing yapılandırması",
+          "href": "/education/lessons/vuejs/module-15/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: API Integration",
+          "description": "Backend API entegrasyonu",
+          "href": "/education/lessons/vuejs/module-15/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Authentication Implementation",
+          "description": "Kimlik doğrulama implementasyonu",
+          "href": "/education/lessons/vuejs/module-15/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Form Handling",
+          "description": "Form işleme ve validation",
+          "href": "/education/lessons/vuejs/module-15/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Error Handling",
+          "description": "Kapsamlı hata yönetimi",
+          "href": "/education/lessons/vuejs/module-15/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Testing Strategy",
+          "description": "Test stratejisi ve implementasyonu",
+          "href": "/education/lessons/vuejs/module-15/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Performance Optimization",
+          "description": "Performans optimizasyonu",
+          "href": "/education/lessons/vuejs/module-15/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Documentation",
+          "description": "Proje dokümantasyonu",
+          "href": "/education/lessons/vuejs/module-15/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Deployment Preparation",
+          "description": "Dağıtım hazırlığı",
+          "href": "/education/lessons/vuejs/module-15/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: CI/CD Setup",
+          "description": "Sürekli entegrasyon kurulumu",
+          "href": "/education/lessons/vuejs/module-15/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Project Review ve Presentation",
+          "description": "Proje incelemesi ve sunumu",
+          "href": "/education/lessons/vuejs/module-15/lesson-15"
+        }
+      ]
+    }
+  ]
+}

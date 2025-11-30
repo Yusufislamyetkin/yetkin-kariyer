@@ -52,6 +52,7 @@ enum BadgeRarity {
   rare
   epic
   legendary
+  mythic
 }
 
 enum GoalType {
@@ -79,6 +80,7 @@ enum BadgeTier {
   silver
   gold
   platinum
+  diamond
 }
 
 enum RewardType {

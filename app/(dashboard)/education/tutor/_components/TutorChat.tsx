@@ -71,6 +71,21 @@ export function TutorChat({
   const explainCurrentQuestion = useCallback(async (question: WrongQuestion | null) => {
     if (!question) return;
 
+    // İlk mesaj: Soruyu ve kullanıcının cevabını göster
+    const userAnswerDisplay = question.userAnswer === "-1" || question.userAnswer === "" || !question.userAnswer
+      ? "Boş bırakıldı"
+      : question.userAnswer;
+    
+    const questionMessage: Message = {
+      id: `msg-${Date.now()}-question`,
+      role: "assistant",
+      content: `**Soru:**\n${question.questionText}\n\n**Senin Cevabın:**\n${userAnswerDisplay}\n\n**Doğru Cevap:**\n${question.correctAnswer}`,
+      timestamp: new Date().toISOString(),
+    };
+
+    setMessages((prev) => [...prev, questionMessage]);
+
+    // İkinci mesaj: AI'dan açıklama iste
     setSending(true);
     setAssistantTyping(true);
     setError(null);
@@ -80,12 +95,14 @@ export function TutorChat({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          message: "Bu soruyu detaylıca açıkla, neden yanlış olduğunu anlat ve doğru cevabı öğret. Kullanıcı anladığında 'anlaşıldı' olarak işaretlemesini iste.",
+          message: "Bu sorunun doğru cevabının neden doğru olduğunu kısa ve öz bir şekilde açıkla. Maksimum 100 kelime kullan. Açıklamadan sonra, eğer kullanıcı sorunun doğru cevabını anladıysa gönder butonun yanında duran 'Anlaşıldı' butonuna basmasını söyle.",
           currentQuestionId: question.id,
           currentQuestion: {
             questionText: question.questionText,
             correctAnswer: question.correctAnswer,
-            userAnswer: question.userAnswer,
+            userAnswer: question.userAnswer === "-1" || question.userAnswer === "" || !question.userAnswer
+              ? "Boş bırakıldı"
+              : question.userAnswer,
           },
         }),
       });
@@ -97,7 +114,7 @@ export function TutorChat({
 
       const data = await response.json();
       const assistantMessage: Message = {
-        id: `msg-${Date.now()}`,
+        id: `msg-${Date.now()}-explanation`,
         role: "assistant",
         content: data.reply || "Soruyu açıklayamadım.",
         timestamp: new Date().toISOString(),
@@ -112,6 +129,27 @@ export function TutorChat({
       setAssistantTyping(false);
     }
   }, []);
+
+  // Initialize: Load first question when component mounts or when currentQuestion becomes available
+  useEffect(() => {
+    if (hasInitializedRef.current) return; // Already initialized
+    
+    if (currentQuestion) {
+      // First time we have a question - initialize
+      hasInitializedRef.current = true;
+      setLoading(false);
+      prevQuestionIdRef.current = currentQuestion.id;
+      
+      // Explain the first question
+      setTimeout(() => {
+        explainCurrentQuestion(currentQuestion);
+      }, 500);
+    } else if (wrongQuestions.length === 0) {
+      // No questions available - stop loading
+      hasInitializedRef.current = true;
+      setLoading(false);
+    }
+  }, [currentQuestion, wrongQuestions.length, explainCurrentQuestion]);
 
   // When current question changes (after initialization), explain it
   useEffect(() => {
@@ -164,20 +202,8 @@ export function TutorChat({
           
           if (remainingQuestions.length > 0) {
             // Move to next question (first remaining question)
-            const nextQuestion = remainingQuestions[0];
-            const nextMessage = `Harika! 🎉 Bu soruyu anladın. Şimdi bir sonraki soruya geçelim:\n\n**Soru:** ${nextQuestion.questionText}\n**Senin Cevabın:** ${nextQuestion.userAnswer}\n**Doğru Cevap:** ${nextQuestion.correctAnswer}\n\nBu soruyu şimdi açıklayayım mı?`;
-
-            const assistantMessage: Message = {
-              id: `msg-${Date.now()}`,
-              role: "assistant",
-              content: nextMessage,
-              timestamp: new Date().toISOString(),
-            };
-
-            setMessages((prev) => [...prev, assistantMessage]);
-            onNextQuestion();
-            
             // Next question will be explained automatically via useEffect
+            onNextQuestion();
           } else {
             // All questions completed
             const completionMessage: Message = {
@@ -197,12 +223,14 @@ export function TutorChat({
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            message: userMessage.content,
+            message: `${userMessage.content}\n\nNot: Eğer kullanıcı sorunun doğru cevabını anladıysa, gönder butonun yanında duran 'Anlaşıldı' butonuna basmasını hatırlat.`,
             currentQuestionId: currentQuestion?.id,
             currentQuestion: currentQuestion ? {
               questionText: currentQuestion.questionText,
               correctAnswer: currentQuestion.correctAnswer,
-              userAnswer: currentQuestion.userAnswer,
+              userAnswer: currentQuestion.userAnswer === "-1" || currentQuestion.userAnswer === "" || !currentQuestion.userAnswer
+                ? "Boş bırakıldı"
+                : currentQuestion.userAnswer,
             } : undefined,
           }),
         });
@@ -253,20 +281,8 @@ export function TutorChat({
       
       if (remainingQuestions.length > 0) {
         // Move to next question (first remaining question)
-        const nextQuestion = remainingQuestions[0];
-        const nextMessage = `Harika! 🎉 Bu soruyu anladın. Şimdi bir sonraki soruya geçelim:\n\n**Soru:** ${nextQuestion.questionText}\n**Senin Cevabın:** ${nextQuestion.userAnswer}\n**Doğru Cevap:** ${nextQuestion.correctAnswer}\n\nBu soruyu şimdi açıklayayım mı?`;
-
-        const assistantMessage: Message = {
-          id: `msg-${Date.now()}`,
-          role: "assistant",
-          content: nextMessage,
-          timestamp: new Date().toISOString(),
-        };
-
-        setMessages((prev) => [...prev, assistantMessage]);
-        onNextQuestion();
-        
         // Next question will be explained automatically via useEffect
+        onNextQuestion();
       } else {
         // All questions completed
         const completionMessage: Message = {
@@ -302,7 +318,14 @@ export function TutorChat({
             {messages.length === 0 ? (
               <div className="flex flex-col items-center justify-center text-center py-20 gap-3 text-gray-500 dark:text-gray-400">
                 <MessageSquare className="h-10 w-10 text-blue-500" />
-                <p className="font-medium">AI Öğretmen Selin hazırlanıyor...</p>
+                {wrongQuestions.length === 0 ? (
+                  <>
+                    <p className="font-medium">Henüz yanlış sorunuz yok!</p>
+                    <p className="text-sm">Testlerde yanlış cevapladığınız sorular burada görünecek.</p>
+                  </>
+                ) : (
+                  <p className="font-medium">AI Öğretmen Selin hazırlanıyor...</p>
+                )}
               </div>
             ) : (
               <>

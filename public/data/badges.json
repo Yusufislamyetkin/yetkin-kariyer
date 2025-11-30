@@ -2083,7 +2083,7 @@
     },
     {
       "id": "badge-200",
-      "key": "TA-BRON-001",
+      "key": "TA-BRON-001-TEST",
       "name": "TA-BRON-001",
       "description": "Toplam 10 test tamamla",
       "icon": "📝",
@@ -2099,7 +2099,7 @@
     },
     {
       "id": "badge-201",
-      "key": "TA-SILV-002",
+      "key": "TA-SILV-002-TEST",
       "name": "TA-SILV-002",
       "description": "Toplam 50 test tamamla",
       "icon": "📝",
@@ -2115,7 +2115,7 @@
     },
     {
       "id": "badge-202",
-      "key": "TA-GOLD-003",
+      "key": "TA-GOLD-003-TEST",
       "name": "TA-GOLD-003",
       "description": "Toplam 100 test tamamla",
       "icon": "📝",
@@ -2131,7 +2131,7 @@
     },
     {
       "id": "badge-203",
-      "key": "TA-PLAT-004",
+      "key": "TA-PLAT-004-TEST",
       "name": "TA-PLAT-004",
       "description": "Toplam 500 test tamamla",
       "icon": "📝",
@@ -2147,7 +2147,7 @@
     },
     {
       "id": "badge-204",
-      "key": "TA-DIAM-005",
+      "key": "TA-DIAM-005-TEST",
       "name": "TA-DIAM-005",
       "description": "Toplam 1000 test tamamla",
       "icon": "📝",
@@ -2163,7 +2163,7 @@
     },
     {
       "id": "badge-205",
-      "key": "TA-BRON-001",
+      "key": "TA-BRON-001-COURSE",
       "name": "TA-BRON-001",
       "description": "Toplam 5 kurs tamamla",
       "icon": "📚",
@@ -2179,7 +2179,7 @@
     },
     {
       "id": "badge-206",
-      "key": "TA-SILV-002",
+      "key": "TA-SILV-002-COURSE",
       "name": "TA-SILV-002",
       "description": "Toplam 25 kurs tamamla",
       "icon": "📚",
@@ -2195,7 +2195,7 @@
     },
     {
       "id": "badge-207",
-      "key": "TA-GOLD-003",
+      "key": "TA-GOLD-003-COURSE",
       "name": "TA-GOLD-003",
       "description": "Toplam 50 kurs tamamla",
       "icon": "📚",
@@ -2211,7 +2211,7 @@
     },
     {
       "id": "badge-208",
-      "key": "TA-PLAT-004",
+      "key": "TA-PLAT-004-COURSE",
       "name": "TA-PLAT-004",
       "description": "Toplam 100 kurs tamamla",
       "icon": "📚",
@@ -2227,7 +2227,7 @@
     },
     {
       "id": "badge-209",
-      "key": "TA-DIAM-005",
+      "key": "TA-DIAM-005-COURSE",
       "name": "TA-DIAM-005",
       "description": "Toplam 250 kurs tamamla",
       "icon": "📚",
@@ -2243,7 +2243,7 @@
     },
     {
       "id": "badge-210",
-      "key": "TA-BRON-001",
+      "key": "TA-BRON-001-PERFECT",
       "name": "TA-BRON-001",
       "description": "Toplam 1 testte 100% puan al",
       "icon": "⭐",
@@ -2259,7 +2259,7 @@
     },
     {
       "id": "badge-211",
-      "key": "TA-SILV-002",
+      "key": "TA-SILV-002-PERFECT",
       "name": "TA-SILV-002",
       "description": "Toplam 5 testte 100% puan al",
       "icon": "⭐",
@@ -2275,7 +2275,7 @@
     },
     {
       "id": "badge-212",
-      "key": "TA-GOLD-003",
+      "key": "TA-GOLD-003-PERFECT",
       "name": "TA-GOLD-003",
       "description": "Toplam 10 testte 100% puan al",
       "icon": "⭐",
@@ -2291,7 +2291,7 @@
     },
     {
       "id": "badge-213",
-      "key": "TA-PLAT-004",
+      "key": "TA-PLAT-004-PERFECT",
       "name": "TA-PLAT-004",
       "description": "Toplam 25 testte 100% puan al",
       "icon": "⭐",
@@ -2307,7 +2307,7 @@
     },
     {
       "id": "badge-214",
-      "key": "TA-DIAM-005",
+      "key": "TA-DIAM-005-PERFECT",
       "name": "TA-DIAM-005",
       "description": "Toplam 50 testte 100% puan al",
       "icon": "⭐",
@@ -2323,7 +2323,7 @@
     },
     {
       "id": "badge-215",
-      "key": "TA-BRON-001",
+      "key": "TA-BRON-001-SCORE",
       "name": "TA-BRON-001",
       "description": "Toplam 100 puan topla",
       "icon": "🏆",
@@ -2339,7 +2339,7 @@
     },
     {
       "id": "badge-216",
-      "key": "TA-SILV-002",
+      "key": "TA-SILV-002-SCORE",
       "name": "TA-SILV-002",
       "description": "Toplam 500 puan topla",
       "icon": "🏆",
@@ -2355,7 +2355,7 @@
     },
     {
       "id": "badge-217",
-      "key": "TA-GOLD-003",
+      "key": "TA-GOLD-003-SCORE",
       "name": "TA-GOLD-003",
       "description": "Toplam 2000 puan topla",
       "icon": "🏆",
@@ -2371,7 +2371,7 @@
     },
     {
       "id": "badge-218",
-      "key": "TA-PLAT-004",
+      "key": "TA-PLAT-004-SCORE",
       "name": "TA-PLAT-004",
       "description": "Toplam 10000 puan topla",
       "icon": "🏆",
@@ -2387,7 +2387,7 @@
     },
     {
       "id": "badge-219",
-      "key": "TA-DIAM-005",
+      "key": "TA-DIAM-005-SCORE",
       "name": "TA-DIAM-005",
       "description": "Toplam 20000 puan topla",
       "icon": "🏆",
@@ -2403,7 +2403,7 @@
     },
     {
       "id": "badge-220",
-      "key": "TA-BRON-001",
+      "key": "TA-BRON-001-LESSON",
       "name": "TA-BRON-001",
       "description": "Toplam 10 ders tamamla",
       "icon": "📖",
@@ -2419,7 +2419,7 @@
     },
     {
       "id": "badge-221",
-      "key": "TA-SILV-002",
+      "key": "TA-SILV-002-LESSON",
       "name": "TA-SILV-002",
       "description": "Toplam 50 ders tamamla",
       "icon": "📖",
@@ -2435,7 +2435,7 @@
     },
     {
       "id": "badge-222",
-      "key": "TA-GOLD-003",
+      "key": "TA-GOLD-003-LESSON",
       "name": "TA-GOLD-003",
       "description": "Toplam 100 ders tamamla",
       "icon": "📖",
@@ -2451,7 +2451,7 @@
     },
     {
       "id": "badge-223",
-      "key": "TA-PLAT-004",
+      "key": "TA-PLAT-004-LESSON",
       "name": "TA-PLAT-004",
       "description": "Toplam 500 ders tamamla",
       "icon": "📖",
@@ -2467,7 +2467,7 @@
     },
     {
       "id": "badge-224",
-      "key": "TA-DIAM-005",
+      "key": "TA-DIAM-005-LESSON",
       "name": "TA-DIAM-005",
       "description": "Toplam 1000 ders tamamla",
       "icon": "📖",
@@ -2483,7 +2483,7 @@
     },
     {
       "id": "badge-225",
-      "key": "TA-BRON-001",
+      "key": "TA-BRON-001-QUIZ",
       "name": "TA-BRON-001",
       "description": "Toplam 10 quiz tamamla",
       "icon": "🎯",
@@ -2499,7 +2499,7 @@
     },
     {
       "id": "badge-226",
-      "key": "TA-SILV-002",
+      "key": "TA-SILV-002-QUIZ",
       "name": "TA-SILV-002",
       "description": "Toplam 50 quiz tamamla",
       "icon": "🎯",
@@ -2515,7 +2515,7 @@
     },
     {
       "id": "badge-227",
-      "key": "TA-GOLD-003",
+      "key": "TA-GOLD-003-QUIZ",
       "name": "TA-GOLD-003",
       "description": "Toplam 100 quiz tamamla",
       "icon": "🎯",
@@ -2531,7 +2531,7 @@
     },
     {
       "id": "badge-228",
-      "key": "TA-PLAT-004",
+      "key": "TA-PLAT-004-QUIZ",
       "name": "TA-PLAT-004",
       "description": "Toplam 500 quiz tamamla",
       "icon": "🎯",
@@ -2547,7 +2547,7 @@
     },
     {
       "id": "badge-229",
-      "key": "TA-DIAM-005",
+      "key": "TA-DIAM-005-QUIZ",
       "name": "TA-DIAM-005",
       "description": "Toplam 1000 quiz tamamla",
       "icon": "🎯",
@@ -2563,7 +2563,7 @@
     },
     {
       "id": "badge-230",
-      "key": "TA-BRON-001",
+      "key": "TA-BRON-001-LIVECODING",
       "name": "TA-BRON-001",
       "description": "Toplam 5 canlı kod tamamla",
       "icon": "💻",
@@ -2579,7 +2579,7 @@
     },
     {
       "id": "badge-231",
-      "key": "TA-SILV-002",
+      "key": "TA-SILV-002-LIVECODING",
       "name": "TA-SILV-002",
       "description": "Toplam 25 canlı kod tamamla",
       "icon": "💻",
@@ -2595,7 +2595,7 @@
     },
     {
       "id": "badge-232",
-      "key": "TA-GOLD-003",
+      "key": "TA-GOLD-003-LIVECODING",
       "name": "TA-GOLD-003",
       "description": "Toplam 50 canlı kod tamamla",
       "icon": "💻",
@@ -2611,7 +2611,7 @@
     },
     {
       "id": "badge-233",
-      "key": "TA-PLAT-004",
+      "key": "TA-PLAT-004-LIVECODING",
       "name": "TA-PLAT-004",
       "description": "Toplam 100 canlı kod tamamla",
       "icon": "💻",
@@ -2627,7 +2627,7 @@
     },
     {
       "id": "badge-234",
-      "key": "TA-DIAM-005",
+      "key": "TA-DIAM-005-LIVECODING",
       "name": "TA-DIAM-005",
       "description": "Toplam 250 canlı kod tamamla",
       "icon": "💻",
@@ -2643,7 +2643,7 @@
     },
     {
       "id": "badge-235",
-      "key": "TA-BRON-001",
+      "key": "TA-BRON-001-BUGFIX",
       "name": "TA-BRON-001",
       "description": "Toplam 5 bugfix tamamla",
       "icon": "🐛",
@@ -2659,7 +2659,7 @@
     },
     {
       "id": "badge-236",
-      "key": "TA-SILV-002",
+      "key": "TA-SILV-002-BUGFIX",
       "name": "TA-SILV-002",
       "description": "Toplam 25 bugfix tamamla",
       "icon": "🐛",
@@ -2675,7 +2675,7 @@
     },
     {
       "id": "badge-237",
-      "key": "TA-GOLD-003",
+      "key": "TA-GOLD-003-BUGFIX",
       "name": "TA-GOLD-003",
       "description": "Toplam 50 bugfix tamamla",
       "icon": "🐛",
@@ -2691,7 +2691,7 @@
     },
     {
       "id": "badge-238",
-      "key": "TA-PLAT-004",
+      "key": "TA-PLAT-004-BUGFIX",
       "name": "TA-PLAT-004",
       "description": "Toplam 100 bugfix tamamla",
       "icon": "🐛",
@@ -2707,7 +2707,7 @@
     },
     {
       "id": "badge-239",
-      "key": "TA-DIAM-005",
+      "key": "TA-DIAM-005-BUGFIX",
       "name": "TA-DIAM-005",
       "description": "Toplam 250 bugfix tamamla",
       "icon": "🐛",

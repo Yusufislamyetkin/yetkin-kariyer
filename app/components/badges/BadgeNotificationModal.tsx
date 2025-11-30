@@ -92,20 +92,11 @@ export function BadgeNotificationModal({
     if (badge) {
       setIsVisible(true);
       setIsAnimating(true);
-      
-      // Auto-advance after 4 seconds
-      const autoAdvanceTimer = setTimeout(() => {
-        handleNext();
-      }, 4000);
-
-      return () => {
-        clearTimeout(autoAdvanceTimer);
-      };
     } else {
       setIsVisible(false);
       setIsAnimating(false);
     }
-  }, [badge, handleNext]);
+  }, [badge]);
 
   const handleDismiss = () => {
     setIsAnimating(false);
@@ -126,35 +117,66 @@ export function BadgeNotificationModal({
       aria-modal="true"
       aria-labelledby="badge-modal-title"
     >
-      {/* Backdrop */}
+      {/* Backdrop - optimized for performance */}
       <div
-        className={`absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${
+        className={`absolute inset-0 bg-black/60 transition-opacity duration-300 ${
           isAnimating ? "opacity-100" : "opacity-0"
         }`}
+        style={{
+          willChange: 'opacity',
+          transform: 'translateZ(0)', // GPU acceleration
+        }}
         onClick={handleDismiss}
       />
 
-      {/* Modal */}
+      {/* Modal - optimized for GPU acceleration */}
       <div
         className={`relative w-full max-w-md mx-4 pointer-events-auto transform transition-all duration-300 ${
           isAnimating
             ? "scale-100 opacity-100 translate-y-0"
             : "scale-95 opacity-0 translate-y-4"
         }`}
+        style={{
+          willChange: 'transform, opacity',
+          transform: 'translateZ(0)', // GPU acceleration
+        }}
       >
         <div
-          className={`relative overflow-hidden rounded-3xl border backdrop-blur-xl shadow-2xl bg-gradient-to-br ${rarityColors[badge.rarity]} ${rarityBorders[badge.rarity]}`}
+          className={`relative overflow-hidden rounded-3xl border shadow-2xl bg-gradient-to-br ${rarityColors[badge.rarity]} ${rarityBorders[badge.rarity]}`}
+          style={{
+            willChange: 'transform',
+            transform: 'translateZ(0)', // GPU acceleration
+          }}
         >
-          {/* Glow effect */}
-          <div className="absolute inset-0 opacity-30 mix-blend-soft-light bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.5),_transparent_70%)]" />
+          {/* Glow effect - optimized */}
+          <div 
+            className="absolute inset-0 opacity-30 mix-blend-soft-light bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.5),_transparent_70%)]"
+            style={{
+              willChange: 'opacity',
+              transform: 'translateZ(0)',
+            }}
+          />
           
-          {/* Animated sparkles */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute top-10 left-10 w-2 h-2 bg-white rounded-full animate-ping" />
-            <div className="absolute top-20 right-16 w-1.5 h-1.5 bg-white rounded-full animate-ping" style={{ animationDelay: "0.5s" }} />
-            <div className="absolute bottom-16 left-20 w-1 h-1 bg-white rounded-full animate-ping" style={{ animationDelay: "1s" }} />
-            <div className="absolute bottom-20 right-12 w-2.5 h-2.5 bg-white rounded-full animate-ping" style={{ animationDelay: "1.5s" }} />
-          </div>
+          {/* Animated sparkles - reduced for better performance */}
+          {isAnimating && (
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <div 
+                className="absolute top-10 left-10 w-2 h-2 bg-white rounded-full animate-ping" 
+                style={{ 
+                  willChange: 'transform, opacity',
+                  transform: 'translateZ(0)',
+                }}
+              />
+              <div 
+                className="absolute top-20 right-16 w-1.5 h-1.5 bg-white rounded-full animate-ping" 
+                style={{ 
+                  animationDelay: "0.5s",
+                  willChange: 'transform, opacity',
+                  transform: 'translateZ(0)',
+                }} 
+              />
+            </div>
+          )}
 
           <div className="relative px-6 py-8 sm:px-8 sm:py-10 space-y-6">
             {/* Close button */}
@@ -187,32 +209,69 @@ export function BadgeNotificationModal({
                 className={`relative transform transition-all duration-500 ${
                   isAnimating ? "scale-100 rotate-0" : "scale-0 rotate-180"
                 }`}
-                style={{ transitionDelay: "200ms" }}
+                style={{ 
+                  transitionDelay: "200ms",
+                  willChange: 'transform',
+                  transform: 'translateZ(0)',
+                }}
               >
-                {/* Glow ring */}
+                {/* Glow ring - optimized */}
                 <div
-                  className={`absolute -inset-4 rounded-full bg-gradient-to-br ${rarityColors[badge.rarity]} opacity-50 blur-xl animate-pulse`}
+                  className={`absolute -inset-4 rounded-full bg-gradient-to-br ${rarityColors[badge.rarity]} opacity-50 blur-xl ${
+                    isAnimating ? 'animate-pulse' : ''
+                  }`}
+                  style={{
+                    willChange: 'opacity',
+                    transform: 'translateZ(0)',
+                  }}
                 />
                 
-                {/* Badge container */}
-                <div className="relative w-40 h-40 rounded-3xl border-4 border-white/40 dark:border-white/20 bg-white/20 backdrop-blur-xl shadow-2xl overflow-hidden">
+                {/* Badge container - optimized */}
+                <div 
+                  className="relative w-40 h-40 rounded-3xl border-4 border-white/40 dark:border-white/20 bg-white/20 shadow-2xl overflow-hidden"
+                  style={{
+                    willChange: 'transform',
+                    transform: 'translateZ(0)',
+                  }}
+                >
                   <div
                     className="absolute inset-0"
                     style={{
                       background: `linear-gradient(135deg, ${badge.color}dd, ${badge.color}88)`,
+                      willChange: 'opacity',
                     }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-transparent opacity-80 mix-blend-screen" />
+                  <div 
+                    className="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-transparent opacity-80 mix-blend-screen"
+                    style={{
+                      willChange: 'opacity',
+                    }}
+                  />
                   
                   {/* Badge icon */}
                   <div className="relative h-full flex items-center justify-center">
-                    <span className="text-7xl drop-shadow-2xl filter drop-shadow-[0_0_10px_rgba(0,0,0,0.3)]">
+                    <span 
+                      className="text-7xl drop-shadow-2xl"
+                      style={{
+                        filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.3))',
+                        willChange: 'transform',
+                        transform: 'translateZ(0)',
+                      }}
+                    >
                       {badge.icon || "🏅"}
                     </span>
                   </div>
                   
-                  {/* Shine effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full animate-shine" />
+                  {/* Shine effect - only when animating */}
+                  {isAnimating && (
+                    <div 
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full animate-shine"
+                      style={{
+                        willChange: 'transform',
+                        transform: 'translateZ(0)',
+                      }}
+                    />
+                  )}
                 </div>
 
                 {/* Rarity badge */}
@@ -227,12 +286,16 @@ export function BadgeNotificationModal({
                 </div>
               </div>
 
-              {/* Badge Info */}
+              {/* Badge Info - optimized */}
               <div
                 className={`text-center space-y-2 transform transition-all duration-500 ${
                   isAnimating ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
                 }`}
-                style={{ transitionDelay: "400ms" }}
+                style={{ 
+                  transitionDelay: "400ms",
+                  willChange: 'transform, opacity',
+                  transform: 'translateZ(0)',
+                }}
               >
                 <h3
                   id="badge-modal-title"
@@ -279,12 +342,16 @@ export function BadgeNotificationModal({
               </div>
             </div>
 
-            {/* Action Buttons */}
+            {/* Action Buttons - optimized */}
             <div
               className={`flex items-center justify-center gap-3 pt-4 transform transition-all duration-500 ${
                 isAnimating ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
               }`}
-              style={{ transitionDelay: "600ms" }}
+              style={{ 
+                transitionDelay: "600ms",
+                willChange: 'transform, opacity',
+                transform: 'translateZ(0)',
+              }}
             >
               {currentIndex < totalCount - 1 ? (
                 <Button
@@ -311,14 +378,15 @@ export function BadgeNotificationModal({
       <style jsx>{`
         @keyframes shine {
           0% {
-            transform: translateX(-100%);
+            transform: translateX(-100%) translateZ(0);
           }
           100% {
-            transform: translateX(100%);
+            transform: translateX(100%) translateZ(0);
           }
         }
         .animate-shine {
-          animation: shine 2s infinite;
+          animation: shine 3s infinite;
+          will-change: transform;
         }
       `}</style>
     </div>

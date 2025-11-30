@@ -15,7 +15,9 @@
     "db:schema": "psql $env:POSTGRES_PRISMA_URL -f database-schema.sql",
     "db:seed": "psql $env:POSTGRES_PRISMA_URL -f database-seed.sql",
     "postinstall": "prisma generate",
-    "test:hackathon": "tsx --test tests/**/*.test.ts"
+    "test:hackathon": "tsx --test tests/**/*.test.ts",
+    "test:code-generation": "tsx --test tests/code-generation/**/*.test.ts",
+    "test:all-languages": "tsx --test tests/code-generation/**/*.test.ts"
   },
   "dependencies": {
     "@microsoft/signalr": "^8.0.17",

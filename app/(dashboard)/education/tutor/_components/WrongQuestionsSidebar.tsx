@@ -69,6 +69,7 @@ export function WrongQuestionsSidebar({
         {wrongQuestions.map((question, index) => {
           const isActive = currentQuestionIndex === index;
           const isReviewed = question.status === "reviewed";
+          const isUnderstood = question.status === "understood";
           const isNotReviewed = question.status === "not_reviewed";
 
           return (
@@ -79,6 +80,8 @@ export function WrongQuestionsSidebar({
                 "w-full text-left p-4 rounded-xl border-2 transition-all duration-200",
                 isActive
                   ? "border-blue-500 bg-blue-50 dark:bg-blue-950/30 shadow-md"
+                  : isUnderstood
+                  ? "border-green-500 bg-green-50 dark:bg-green-950/30"
                   : "border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/50 hover:border-gray-300 dark:hover:border-gray-600",
                 "hover:shadow-sm"
               )}
@@ -90,6 +93,8 @@ export function WrongQuestionsSidebar({
                     "flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-colors",
                     isActive
                       ? "bg-blue-600 text-white"
+                      : isUnderstood
+                      ? "bg-green-500 text-white"
                       : isReviewed
                       ? "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
                       : "bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300"
@@ -104,6 +109,8 @@ export function WrongQuestionsSidebar({
                   <div className="flex items-center gap-2">
                     {isActive ? (
                       <Clock className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                    ) : isUnderstood ? (
+                      <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
                     ) : isReviewed ? (
                       <CheckCircle className="h-4 w-4 text-blue-600 dark:text-blue-400" />
                     ) : (
@@ -114,6 +121,8 @@ export function WrongQuestionsSidebar({
                         "text-xs font-semibold",
                         isActive
                           ? "text-blue-700 dark:text-blue-300"
+                          : isUnderstood
+                          ? "text-green-700 dark:text-green-300"
                           : isReviewed
                           ? "text-blue-600 dark:text-blue-400"
                           : "text-yellow-600 dark:text-yellow-400"
@@ -121,6 +130,8 @@ export function WrongQuestionsSidebar({
                     >
                       {isActive
                         ? "Aktif"
+                        : isUnderstood
+                        ? "Anlaşıldı"
                         : isReviewed
                         ? "Gözden Geçirildi"
                         : "Gözden Geçirilmemiş"}
@@ -160,14 +171,14 @@ export function WrongQuestionsSidebar({
           <div className="flex items-center justify-between text-xs">
             <span className="text-gray-600 dark:text-gray-400">İlerleme</span>
             <span className="font-semibold text-gray-900 dark:text-gray-100">
-              {wrongQuestions.length} soru kaldı
+              {wrongQuestions.filter((q) => q.status === "understood").length} / {wrongQuestions.length} anlaşıldı
             </span>
           </div>
           <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
             <div
-              className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-300"
+              className="bg-gradient-to-r from-green-500 to-emerald-500 h-2 rounded-full transition-all duration-300"
               style={{
-                width: `${wrongQuestions.length > 0 ? ((wrongQuestions.length - (currentQuestionIndex !== null ? currentQuestionIndex + 1 : 0)) / wrongQuestions.length) * 100 : 0}%`,
+                width: `${wrongQuestions.length > 0 ? (wrongQuestions.filter((q) => q.status === "understood").length / wrongQuestions.length) * 100 : 0}%`,
               }}
             />
           </div>

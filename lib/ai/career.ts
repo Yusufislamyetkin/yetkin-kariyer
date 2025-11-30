@@ -58,7 +58,7 @@ const buildCareerPlanPrompt = ({
   avgQuizScore: number;
   avgInterviewScore: number;
   questionnaire?: QuestionnaireData | null;
-  availableResources?: Array<{ title: string; category?: string; topic?: string; difficulty?: string }>;
+  availableResources?: Array<{ id: string; title: string; category?: string; topic?: string; difficulty?: string }>;
 }) => {
   // Check for uncertainty indicators
   const hasUncertainty = questionnaire && (
@@ -95,174 +95,128 @@ const buildCareerPlanPrompt = ({
       uncertaintyNotes.push("Kullanıcı sektör tercihi belirtmemiş.");
     }
 
-    questionnaireSection = `
-Kullanıcı Tercihleri (Anket Sonuçları):
-- Uzmanlaşmak İstediği Alan: ${questionnaire.specialization || "Belirtilmemiş"}
-- Kariyer Hedefi: ${questionnaire.careerGoal || "Belirtilmemiş"}
-- Hedef Zaman Çizelgesi: ${questionnaire.timeline || "Belirtilmemiş"}
-- Mevcut Seviye: ${questionnaire.skillLevel || "Belirtilmemiş"}
-- Tercih Edilen Teknolojiler: ${questionnaire.technologies?.join(", ") || "Belirtilmemiş"}
-- Çalışma Tercihi: ${questionnaire.workPreference || "Belirtilmemiş"}
-- İlgi Duyduğu Sektörler: ${questionnaire.industryInterests?.join(", ") || "Belirtilmemiş"}
-${uncertaintyNotes.length > 0 ? `\nÖNEMLİ NOTLAR:\n${uncertaintyNotes.map(note => `- ${note}`).join("\n")}` : ""}
-`;
+    questionnaireSection = `Tercihler: ${questionnaire.specialization || "?"} | ${questionnaire.careerGoal || "?"} | ${questionnaire.timeline || "?"} | ${questionnaire.skillLevel || "?"} | Teknolojiler: ${questionnaire.technologies?.join(", ") || "Yok"} | Sektörler: ${questionnaire.industryInterests?.join(", ") || "Yok"}. ${uncertaintyNotes.length > 0 ? `Notlar: ${uncertaintyNotes.join("; ")}` : ""}`;
 
     if (hasUncertainty) {
-      guidanceInstructions = `
-ÖNEMLİ: Kullanıcı henüz bazı kararlarını vermemiş. Bu durumda:
-1. Genel ve kapsayıcı bir kariyer planı oluştur
-2. Farklı alanları, teknolojileri ve kariyer yollarını keşfetmesine yardımcı ol
-3. Her aşamada seçenekleri açıkla ve öneriler sun
-4. Planı esnek ve uyarlanabilir yap
-5. Kullanıcıya farklı yolları denemesi için rehberlik et
-`;
+      guidanceInstructions = "Genel, esnek plan oluştur. Farklı alanları keşfetmesine yardımcı ol. ";
     }
 
     if (isBeginner) {
-      guidanceInstructions += `
-ÖNEMLİ: Kullanıcı başlangıç seviyesinde. Bu durumda:
-1. Temel kavramları ve adım adım öğrenme yolunu vurgula
-2. Her aşamayı detaylı açıkla
-3. Pratik projeler ve örnekler öner
-4. Motivasyonu artıracak küçük başarılar planla
-5. Öğrenme kaynaklarını ve toplulukları öner
-6. Hata yapmanın normal olduğunu ve öğrenme sürecinin bir parçası olduğunu belirt
-`;
+      guidanceInstructions += "Başlangıç seviyesi: Temel kavramları vurgula, adım adım ilerle, pratik projeler öner. ";
     }
   }
 
   const resourcesSection = availableResources && availableResources.length > 0
-    ? `
-Platformda Mevcut Kaynaklar (kurs ID'leri ile birlikte):
-${availableResources.map((r: any, i: number) => `- ${r.title} [ID: ${r.id}]${r.category ? ` (${r.category})` : ""}${r.topic ? ` - Konu: ${r.topic}` : ""}${r.difficulty ? ` - Zorluk: ${r.difficulty}` : ""}`).join("\n")}
+    ? `Platform Kaynakları: ${availableResources.slice(0, 20).map((r: any) => `${r.title} [${r.id}]`).join(", ")}. Bu kaynakları plana entegre et. Link için kurs ID kullan (örn: "${availableResources[0]?.id}" veya "/education/courses/${availableResources[0]?.id}") veya boş bırak.`
+    : "";
 
-ÖNEMLİ: Platformdaki mevcut kaynakları kariyer planına entegre et. Kullanıcıya platform içindeki kursları, modülleri ve dersleri öner.
+  const cvSection = (cvData?.skills && (cvData.skills as string[]).length > 0) || cvData?.experience || cvData?.education
+    ? `CV: ${(cvData.skills ?? []).join(", ") || "Yok"}. Deneyim: ${Array.isArray(cvData.experience) ? cvData.experience.length : 0} kayıt.`
+    : "";
 
-LİNK FORMATI ÇOK ÖNEMLİ:
-- Eğer yukarıdaki listeden bir kurs öneriyorsan, link alanına sadece kurs ID'sini yaz (örn: "course-react" veya "/education/courses/course-react")
-- Kurslar için format: sadece kurs ID (örn: "course-react") veya tam format: "/education/courses/course-react"
-- Modüller için: "/education/courses/[courseId]/modules/[moduleId]" formatını kullan
-- Eğer listede olmayan bir kaynak öneriyorsan VEYA emin değilsen, link alanını BOŞ BIRAK (null veya "") - sistem otomatik olarak kurs başlığına göre arama yapacak
-- ASLA "platform içi link (varsa)" veya benzer placeholder metinler kullanma - ya gerçek kurs ID'si yaz ya da boş bırak
-`
+  const testSection = quizScores.length > 0 || avgQuizScore > 0
+    ? `Testler: Ortalama ${Math.round(avgQuizScore)}% (${quizScores.length} test)`
+    : "";
+
+  const interviewSection = interviewScores.length > 0
+    ? `Mülakat: Ortalama ${Math.round(avgInterviewScore)}%`
     : "";
 
   return `
-Sen AI Öğretmen Selin'sin. Kullanıcının CV bilgileri, test sonuçları ve mülakat performansına göre kişiselleştirilmiş, detaylı bir kariyer planı oluştur. Planı baştan sona sen sunacaksın, kullanıcıya rehberlik edeceksin.
+Kişiselleştirilmiş kariyer planı oluştur. JSON formatında döndür.
 
-CV Bilgileri:
-- İsim: ${(cvData?.personalInfo as any)?.name || "Bilinmiyor"}
-- Deneyim: ${JSON.stringify(cvData.experience ?? [])}
-- Eğitim: ${JSON.stringify(cvData.education ?? [])}
-- Beceriler: ${(cvData.skills ?? []).join(", ") || "Henüz belirtilmemiş"}
-
-Test Performansı:
-- Ortalama Test Skoru: ${Math.round(avgQuizScore)}%
-- Test Detayları: ${JSON.stringify(quizScores)}
-${quizScores.length === 0 ? "- Kullanıcı henüz test çözmemiş" : ""}
-
-Mülakat Performansı:
-- Ortalama Mülakat Skoru: ${Math.round(avgInterviewScore)}%
-- Mülakat Detayları: ${JSON.stringify(interviewScores)}
-${interviewScores.length === 0 ? "- Kullanıcı henüz mülakat yapmamış" : ""}
+KULLANICI BİLGİLERİ:
+${cvSection}${testSection ? ` ${testSection}` : ""}${interviewSection ? ` ${interviewSection}` : ""}
 ${questionnaireSection}
 ${resourcesSection}
 ${guidanceInstructions}
 
-ROADMAP OLUŞTURMA TALİMATLARI:
-1. Her aşama için detaylı bir açıklama (description) ekle
-2. Her aşamada en az 4-6 görev (tasks) belirle - somut, uygulanabilir görevler
-3. Her aşamada 2-3 kilometre taşı (milestones) tanımla - ölçülebilir başarılar
-4. Gelişim konuları (developmentTopics) ekle - öğrenilmesi gereken temel konular
-5. Önemli noktalar (importantPoints) vurgula - dikkat edilmesi gereken kritik bilgiler
-6. Pratik projeler (practicalProjects) öner - gerçek dünya uygulamaları
-7. Öncelik (priority) belirle: "Yüksek", "Orta", "Düşük"
-8. Tahmini süre (estimatedDuration) ekle: "2-3 hafta", "1 ay" gibi
+ROADMAP:
+- Her aşama: description, 4-6 tasks, 2-3 milestones, developmentTopics, importantPoints, practicalProjects, priority (Yüksek/Orta/Düşük), estimatedDuration
+- 3-5 aşama oluştur
 
-Aşağıdaki JSON formatında DETAYLI kariyer planı oluştur:
+JSON:
 {
-  "goals": ["hedef 1", "hedef 2", "hedef 3"],
-  "roadmap": [
-    {
-      "stage": "1-3 ay",
-      "title": "Aşama başlığı",
-      "description": "Bu aşamada ne yapılacak, neden önemli - detaylı açıklama",
-      "tasks": ["görev 1", "görev 2", "görev 3", "görev 4"],
-      "milestones": ["kilometre taşı 1", "kilometre taşı 2"],
-      "importantPoints": ["önemli nokta 1", "önemli nokta 2"],
-      "developmentTopics": ["gelişim konusu 1", "gelişim konusu 2"],
-      "practicalProjects": ["pratik proje 1", "pratik proje 2"],
-      "priority": "Yüksek",
-      "estimatedDuration": "2-3 hafta"
-    }
-  ],
-  "recommendedCourses": ["kurs 1", "kurs 2"],
-  "recommendedResources": [
-    {
-      "title": "Kurs/Modül adı",
-      "type": "Kurs",
-      "description": "Bu kaynak neden öneriliyor",
-      "link": "course-react veya /education/courses/course-react veya boş string - ÖNEMLİ: Yukarıdaki listede verilen kurs ID'sini kullan. Eğer listede yoksa veya emin değilsen link alanını boş string olarak bırak (\"\"). ASLA placeholder metin kullanma."
-    }
-  ],
-  "skillsToDevelop": ["beceri 1", "beceri 2"],
+  "goals": ["hedef 1", "hedef 2"],
+  "roadmap": [{"stage": "1-3 ay", "title": "...", "description": "...", "tasks": [...], "milestones": [...], "developmentTopics": [...], "importantPoints": [...], "practicalProjects": [...], "priority": "Yüksek", "estimatedDuration": "2-3 hafta"}],
+  "recommendedCourses": [...],
+  "recommendedResources": [{"title": "...", "type": "Kurs", "description": "...", "link": "course-id veya boş string"}],
+  "skillsToDevelop": [...],
   "timeline": "${questionnaire?.timeline && questionnaire.timeline !== "Henüz belirlemedim" ? questionnaire.timeline : "6-12 ay"}",
-  "summary": "Kariyer planı özeti - AI Öğretmen Selin olarak kullanıcıya hitap ederek, durumunu değerlendirerek, hedeflerini ve yol haritasını açıkça özetle. Planı sen sunuyorsun, kullanıcıya rehberlik ediyorsun."
+  "summary": "AI Öğretmen Selin olarak kullanıcıya doğrudan hitap et, durumu değerlendir, somut adımlar sun."
 }
 
-ÖZET (summary) alanı özellikle önemli - AI Öğretmen Selin olarak:
-- Kullanıcıya doğrudan hitap et ("Merhaba! Senin için...", "Sana özel...")
-- Kullanıcının mevcut durumunu değerlendir
-- Belirsizlik varsa, farklı seçenekleri keşfetmesine yardımcı ol
-- Başlangıç seviyesindeyse, cesaretlendirici ve yol gösterici ol
-- Somut adımlar ve öneriler sun
-- Planın esnekliğini ve uyarlanabilirliğini vurgula
-- Platformdaki kaynaklardan bahset
-
-Sadece JSON döndür, başka açıklama yapma.
+Sadece JSON döndür.
 `;
 }
 
 export async function generateCareerPlan(userId: string, questionnaire?: QuestionnaireData | null): Promise<any> {
+  const isDevelopment = process.env.NODE_ENV === "development";
+  
   try {
     // Get user's CV, quiz attempts, and interview attempts
-    const cv = await db.cV.findFirst({
-      where: { userId },
-      orderBy: { updatedAt: "desc" },
-    });
+    let cv;
+    try {
+      cv = await db.cV.findFirst({
+        where: { userId },
+        orderBy: { updatedAt: "desc" },
+      });
+    } catch (dbError: any) {
+      const errorMsg = isDevelopment ? `CV verisi alınırken hata: ${dbError?.message || "Bilinmeyen hata"}` : "Kullanıcı verileri alınırken bir sorun oluştu.";
+      console.error("[CAREER_PLAN] CV fetch error:", { error: dbError, userId });
+      throw new Error(errorMsg);
+    }
 
-    const quizAttempts = await db.quizAttempt.findMany({
-      where: { userId },
-      include: {
-        quiz: {
-          include: {
-            course: true,
+    let quizAttempts;
+    try {
+      quizAttempts = await db.quizAttempt.findMany({
+        where: { userId },
+        include: {
+          quiz: {
+            include: {
+              course: true,
+            },
           },
         },
-      },
-      orderBy: { completedAt: "desc" },
-      take: 10,
-    });
+        orderBy: { completedAt: "desc" },
+        take: 10,
+      });
+    } catch (dbError: any) {
+      console.warn("[CAREER_PLAN] Quiz attempts fetch error (non-critical):", { error: dbError?.message, userId });
+      quizAttempts = []; // Continue with empty array if quiz fetch fails
+    }
 
-    const interviewAttempts = await db.interviewAttempt.findMany({
-      where: { userId },
-      orderBy: { completedAt: "desc" },
-      take: 5,
-    });
+    let interviewAttempts;
+    try {
+      interviewAttempts = await db.interviewAttempt.findMany({
+        where: { userId },
+        orderBy: { completedAt: "desc" },
+        take: 5,
+      });
+    } catch (dbError: any) {
+      console.warn("[CAREER_PLAN] Interview attempts fetch error (non-critical):", { error: dbError?.message, userId });
+      interviewAttempts = []; // Continue with empty array if interview fetch fails
+    }
 
     // Get available platform resources (courses)
-    const availableCourses = await db.course.findMany({
-      select: {
-        id: true,
-        title: true,
-        category: true,
-        field: true,
-        topic: true,
-        difficulty: true,
-        description: true,
-      },
-      take: 50, // Limit to avoid too much data
-    });
+    let availableCourses;
+    try {
+      availableCourses = await db.course.findMany({
+        select: {
+          id: true,
+          title: true,
+          category: true,
+          field: true,
+          topic: true,
+          difficulty: true,
+          description: true,
+        },
+        take: 50, // Limit to avoid too much data
+      });
+    } catch (dbError: any) {
+      console.warn("[CAREER_PLAN] Courses fetch error (non-critical):", { error: dbError?.message });
+      availableCourses = []; // Continue with empty array if courses fetch fails
+    }
 
     const availableResources = availableCourses.map((course: typeof availableCourses[0]) => ({
       id: course.id,
@@ -299,34 +253,62 @@ export async function generateCareerPlan(userId: string, questionnaire?: Questio
         : 0;
 
     if (!isAIEnabled()) {
-      throw new Error("AI servisi devre dışı");
+      const errorMsg = isDevelopment 
+        ? "AI servisi devre dışı. OPENAI_API_KEY environment variable kontrol edin." 
+        : "AI servisi şu anda kullanılamıyor.";
+      console.error("[CAREER_PLAN] AI service disabled:", { userId, hasQuestionnaire: !!questionnaire });
+      throw new Error(errorMsg);
     }
 
-    const { parsed: plan } = await createChatCompletion({
-      schema: careerPlanSchema,
-      messages: [
+    let plan;
+    try {
+      const result = await createChatCompletion({
+        schema: careerPlanSchema,
+        messages: [
         {
           role: "system",
           content:
-            "Sen AI Öğretmen Selin'sin. Deneyimli, empatik ve öğrencilerine ilham veren bir öğretmensin. Özellikle yeni başlayanlar ve henüz karar vermemiş kişiler için yol gösterici, cesaretlendirici ve pratik kariyer planları oluşturuyorsun. Belirsizlik durumlarında genel ama değerli planlar hazırlıyorsun. Her seviyeden kullanıcıya uygun, adım adım ilerleyen, esnek ve uyarlanabilir planlar sunuyorsun. Planları baştan sona sen sunarsın, kullanıcıya rehberlik edersin. Platformdaki mevcut kaynakları (kurslar, modüller, dersler) plana entegre edersin.",
+            "Sen AI Öğretmen Selin'sin. Kişiselleştirilmiş, pratik kariyer planları oluştur. Yeni başlayanlar ve belirsizlik durumlarında yol gösterici ol. Platform kaynaklarını plana entegre et. JSON formatında yanıt ver.",
         },
-        {
-          role: "user",
-          content: buildCareerPlanPrompt({
-            cvData,
-            quizScores,
-            interviewScores,
-            avgQuizScore,
-            avgInterviewScore,
-            questionnaire,
-            availableResources,
-          }),
-        },
-      ],
-    });
+          {
+            role: "user",
+            content: buildCareerPlanPrompt({
+              cvData,
+              quizScores,
+              interviewScores,
+              avgQuizScore,
+              avgInterviewScore,
+              questionnaire,
+              availableResources,
+            }),
+          },
+        ],
+      });
 
-    if (!plan) {
-      throw new Error("AI yanıtı doğrulanamadı");
+      plan = result.parsed;
+      
+      if (!plan) {
+        const errorMsg = isDevelopment 
+          ? "AI yanıtı doğrulanamadı. API response formatı beklenen şema ile uyuşmuyor." 
+          : "AI yanıtı işlenirken bir sorun oluştu.";
+        console.error("[CAREER_PLAN] Invalid AI response:", { userId, hasQuestionnaire: !!questionnaire });
+        throw new Error(errorMsg);
+      }
+    } catch (aiError: any) {
+      const errorMsg = aiError?.message || "AI servisi ile iletişim kurulamadı.";
+      console.error("[CAREER_PLAN] AI completion error:", {
+        error: aiError,
+        message: aiError?.message,
+        stack: aiError?.stack,
+        userId,
+        hasQuestionnaire: !!questionnaire,
+      });
+      
+      // Re-throw with more context if in development
+      if (isDevelopment) {
+        throw new Error(`AI işlemi hatası: ${errorMsg}. Stack: ${aiError?.stack || "Yok"}`);
+      }
+      throw new Error(errorMsg);
     }
 
     const normalizedPlan = {
@@ -346,61 +328,99 @@ export async function generateCareerPlan(userId: string, questionnaire?: Questio
     };
 
     // Save to database
-    const existing = await db.careerPlan.findFirst({
-      where: { userId },
-    });
+    try {
+      const existing = await db.careerPlan.findFirst({
+        where: { userId },
+      });
 
-    if (existing) {
-      await db.careerPlan.update({
-        where: { id: existing.id },
-        data: {
-          goals: normalizedPlan.goals as any,
-          roadmap: normalizedPlan.roadmap as any,
-          recommendedCourses: coursesData as any,
-          skillsToDevelop: normalizedPlan.skillsToDevelop as any,
-          timeline: normalizedPlan.timeline,
-          summary: normalizedPlan.summary,
-          aiGenerated: true,
-        },
+      if (existing) {
+        await db.careerPlan.update({
+          where: { id: existing.id },
+          data: {
+            goals: normalizedPlan.goals as any,
+            roadmap: normalizedPlan.roadmap as any,
+            recommendedCourses: coursesData as any,
+            skillsToDevelop: normalizedPlan.skillsToDevelop as any,
+            timeline: normalizedPlan.timeline,
+            summary: normalizedPlan.summary,
+            aiGenerated: true,
+          },
+        });
+      } else {
+        await db.careerPlan.create({
+          data: {
+            userId,
+            goals: normalizedPlan.goals as any,
+            roadmap: normalizedPlan.roadmap as any,
+            recommendedCourses: coursesData as any,
+            skillsToDevelop: normalizedPlan.skillsToDevelop as any,
+            timeline: normalizedPlan.timeline,
+            summary: normalizedPlan.summary,
+            aiGenerated: true,
+          },
+        });
+      }
+    } catch (dbError: any) {
+      // Log database error but still return the plan to user
+      console.error("[CAREER_PLAN] Database save error:", {
+        error: dbError,
+        message: dbError?.message,
+        userId,
+        hasQuestionnaire: !!questionnaire,
       });
-    } else {
-      await db.careerPlan.create({
-        data: {
-          userId,
-          goals: normalizedPlan.goals as any,
-          roadmap: normalizedPlan.roadmap as any,
-          recommendedCourses: coursesData as any,
-          skillsToDevelop: normalizedPlan.skillsToDevelop as any,
-          timeline: normalizedPlan.timeline,
-          summary: normalizedPlan.summary,
-          aiGenerated: true,
-        },
-      });
+      
+      if (isDevelopment) {
+        console.warn("[CAREER_PLAN] Plan generated but not saved to DB:", dbError?.message);
+      }
+      // Continue and return plan even if save fails
     }
 
     return normalizedPlan;
   } catch (error) {
+    const isDevelopment = process.env.NODE_ENV === "development";
     const errorMessage = error instanceof Error ? error.message : "Bilinmeyen hata";
     const errorDetails = error instanceof Error ? error.stack : String(error);
     
-    console.error("Error generating career plan:", {
+    // Enhanced error logging with more context
+    console.error("[CAREER_PLAN] Error generating career plan:", {
       message: errorMessage,
       details: errorDetails,
       userId,
       hasQuestionnaire: !!questionnaire,
+      questionnaireSummary: questionnaire ? {
+        specialization: questionnaire.specialization,
+        careerGoal: questionnaire.careerGoal,
+        skillLevel: questionnaire.skillLevel,
+        hasTechnologies: !!questionnaire.technologies && questionnaire.technologies.length > 0,
+      } : null,
+      timestamp: new Date().toISOString(),
+      environment: process.env.NODE_ENV,
     });
 
     // Provide more helpful error messages based on error type
     let userFriendlySummary = "Kariyer planı oluşturulurken bir sorun oluştu.";
     
     if (errorMessage.includes("AI servisi devre dışı") || errorMessage.includes("AI servisi")) {
-      userFriendlySummary = "AI servisi şu anda kullanılamıyor. Lütfen daha sonra tekrar deneyin veya sistem yöneticisiyle iletişime geçin.";
+      userFriendlySummary = isDevelopment
+        ? "AI servisi devre dışı. OPENAI_API_KEY environment variable'ını kontrol edin."
+        : "AI servisi şu anda kullanılamıyor. Lütfen daha sonra tekrar deneyin veya sistem yöneticisiyle iletişime geçin.";
     } else if (errorMessage.includes("zaman aşımı") || errorMessage.includes("timeout")) {
       userFriendlySummary = "İstek zaman aşımına uğradı. Lütfen tekrar deneyin.";
     } else if (errorMessage.includes("doğrulanamadı") || errorMessage.includes("validation")) {
-      userFriendlySummary = "AI yanıtı beklenen formatta değil. Lütfen tekrar deneyin.";
-    } else if (errorMessage.includes("API")) {
-      userFriendlySummary = "AI servisi ile iletişim kurulamadı. Lütfen daha sonra tekrar deneyin.";
+      userFriendlySummary = isDevelopment
+        ? "AI yanıtı beklenen formatta değil. API response şemasını kontrol edin."
+        : "AI yanıtı işlenirken bir sorun oluştu. Lütfen tekrar deneyin.";
+    } else if (errorMessage.includes("API") || errorMessage.includes("iletişim")) {
+      userFriendlySummary = isDevelopment
+        ? `AI servisi ile iletişim hatası: ${errorMessage}`
+        : "AI servisi ile iletişim kurulamadı. Lütfen daha sonra tekrar deneyin.";
+    } else if (errorMessage.includes("CV verisi")) {
+      userFriendlySummary = isDevelopment
+        ? errorMessage
+        : "Kullanıcı verileri alınırken bir sorun oluştu. Lütfen tekrar deneyin.";
+    } else if (isDevelopment) {
+      // In development, show more details
+      userFriendlySummary = `[DEV] ${errorMessage}`;
     }
 
     return {

@@ -139,7 +139,7 @@ export function buildContextMessage(
     parts.push(`Soru: ${currentQuestion.questionText}`);
     parts.push(`Kullanıcının Cevabı: ${currentQuestion.userAnswer}`);
     parts.push(`Doğru Cevap: ${currentQuestion.correctAnswer}`);
-    parts.push("Bu soruyu detaylıca açıkla, neden yanlış olduğunu anlat ve doğru cevabı öğret.");
+    parts.push("ÖNEMLİ: Bu sorunun doğru cevabının neden doğru olduğunu kısa ve öz bir şekilde açıkla. Maksimum 100 kelime kullan. Açıklamadan sonra, eğer kullanıcı sorunun doğru cevabını anladıysa gönder butonun yanında duran 'Anlaşıldı' butonuna basmasını hatırlat.");
   }
 
   // Öğrenme hızı

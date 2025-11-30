@@ -1,0 +1,1577 @@
+{
+  "overview": {
+    "description": "Swift, Apple'ın geliştirdiği modern, güvenli ve güçlü bir programlama dilidir. Bu kapsamlı kurs ile Swift'in temellerinden ileri seviye konularına kadar her şeyi öğreneceksiniz. iOS, macOS, watchOS ve tvOS uygulamaları geliştirme becerileri kazanacaksınız.",
+    "estimatedDurationMinutes": 6750
+  },
+  "learningObjectives": [
+    "Swift programlama dilinin temel kavramlarını ve syntax'ını anlamak",
+    "Optionals, Collections ve Control Flow kullanmayı öğrenmek",
+    "Object-Oriented Programming ve Protocol-Oriented Programming yapmak",
+    "Closures, Generics ve Error Handling kullanmayı öğrenmek",
+    "UIKit ve SwiftUI ile iOS uygulamaları geliştirmek",
+    "Memory management ve ARC (Automatic Reference Counting) anlamak",
+    "Testing ve deployment stratejilerini öğrenmek"
+  ],
+  "modules": [
+    {
+      "id": "module-01",
+      "title": "Module 1: Swift Tanımı ve Temelleri Testi",
+      "summary": "Swift'in ne olduğu, tarihçesi, avantajları, diğer dillerden farkları ve temel kavramlar.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Swift'in ne olduğunu ve neden kullanıldığını anlamak",
+        "Swift'in Objective-C ve diğer dillerden farklarını öğrenmek",
+        "Swift'in avantajlarını ve kullanım alanlarını keşfetmek",
+        "Swift Playgrounds ile tanışmak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Swift Nedir?",
+          "description": "Swift'in temel tanımı ve genel bakış",
+          "href": "/education/lessons/swift/module-01/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Swift vs Objective-C",
+          "description": "Swift ve Objective-C karşılaştırması",
+          "href": "/education/lessons/swift/module-01/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Swift'in Tarihçesi",
+          "description": "Swift'in ortaya çıkışı ve gelişimi",
+          "href": "/education/lessons/swift/module-01/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Swift'in Avantajları",
+          "description": "Güvenlik, hız, modern syntax",
+          "href": "/education/lessons/swift/module-01/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Swift Kullanım Alanları",
+          "description": "iOS, macOS, watchOS, tvOS",
+          "href": "/education/lessons/swift/module-01/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Swift Ekosistemi",
+          "description": "Xcode, Swift Package Manager, CocoaPods",
+          "href": "/education/lessons/swift/module-01/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Swift Lisanslama",
+          "description": "Apache 2.0 lisansı",
+          "href": "/education/lessons/swift/module-01/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Swift Topluluk Desteği",
+          "description": "Açık kaynak topluluğu",
+          "href": "/education/lessons/swift/module-01/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Swift'in Geleceği",
+          "description": "Swift roadmap",
+          "href": "/education/lessons/swift/module-01/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Swift Kurulum Gereksinimleri",
+          "description": "Xcode ve sistem gereksinimleri",
+          "href": "/education/lessons/swift/module-01/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Swift ile Neler Yapılabilir?",
+          "description": "Kullanım senaryoları",
+          "href": "/education/lessons/swift/module-01/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Swift Performans",
+          "description": "Performans özellikleri",
+          "href": "/education/lessons/swift/module-01/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Swift Geliştirici Deneyimi",
+          "description": "Xcode IDE desteği",
+          "href": "/education/lessons/swift/module-01/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Swift Güvenlik",
+          "description": "Güvenlik özellikleri",
+          "href": "/education/lessons/swift/module-01/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Değerlendirme",
+          "description": "Modül kapsamında öğrenilenlerin özeti",
+          "href": "/education/lessons/swift/module-01/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-02",
+      "title": "Module 2: Swift Kurulumu ve Xcode Testi",
+      "summary": "Xcode kurulumu, Swift Playgrounds, proje oluşturma, Xcode interface, debugging ve temel geliştirme ortamı.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Xcode kurulumunu öğrenmek",
+        "Swift Playgrounds kullanmayı öğrenmek",
+        "Xcode interface'i anlamak",
+        "Proje oluşturmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Xcode Kurulumu",
+          "description": "Xcode indirme ve kurulum",
+          "href": "/education/lessons/swift/module-02/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Xcode Interface",
+          "description": "Xcode arayüzü",
+          "href": "/education/lessons/swift/module-02/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Swift Playgrounds",
+          "description": "Playground kullanımı",
+          "href": "/education/lessons/swift/module-02/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Yeni Proje Oluşturma",
+          "description": "Xcode projesi oluşturma",
+          "href": "/education/lessons/swift/module-02/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Project Structure",
+          "description": "Proje yapısı",
+          "href": "/education/lessons/swift/module-02/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Build ve Run",
+          "description": "Derleme ve çalıştırma",
+          "href": "/education/lessons/swift/module-02/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Debugging",
+          "description": "Hata ayıklama",
+          "href": "/education/lessons/swift/module-02/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Breakpoints",
+          "description": "Breakpoint kullanımı",
+          "href": "/education/lessons/swift/module-02/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Console ve Logging",
+          "description": "Konsol ve loglama",
+          "href": "/education/lessons/swift/module-02/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Simulator",
+          "description": "iOS Simulator kullanımı",
+          "href": "/education/lessons/swift/module-02/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Version Control",
+          "description": "Git entegrasyonu",
+          "href": "/education/lessons/swift/module-02/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Swift Package Manager",
+          "description": "Paket yönetimi",
+          "href": "/education/lessons/swift/module-02/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: CocoaPods",
+          "description": "CocoaPods kullanımı",
+          "href": "/education/lessons/swift/module-02/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Xcode Best Practices",
+          "description": "Xcode kullanım en iyi uygulamaları",
+          "href": "/education/lessons/swift/module-02/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/swift/module-02/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-03",
+      "title": "Module 3: Swift Syntax ve Temel Kavramlar Testi",
+      "summary": "Swift syntax, değişkenler, sabitler, veri tipleri, operatörler, kontrol yapıları, döngüler ve fonksiyonlar.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Swift syntax kurallarını öğrenmek",
+        "Veri tipleri ve değişken kullanımını anlamak",
+        "Kontrol yapılarını kullanmak",
+        "Fonksiyon tanımlamayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Swift Syntax Temelleri",
+          "description": "Swift syntax kuralları",
+          "href": "/education/lessons/swift/module-03/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Variables ve Constants",
+          "description": "var ve let kullanımı",
+          "href": "/education/lessons/swift/module-03/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Veri Tipleri",
+          "description": "Int, String, Bool, Double",
+          "href": "/education/lessons/swift/module-03/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Type Inference",
+          "description": "Tip çıkarımı",
+          "href": "/education/lessons/swift/module-03/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Type Annotations",
+          "description": "Tip tanımlama",
+          "href": "/education/lessons/swift/module-03/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Operatörler",
+          "description": "Aritmetik, karşılaştırma, mantıksal",
+          "href": "/education/lessons/swift/module-03/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: if-else Statements",
+          "description": "Koşullu ifadeler",
+          "href": "/education/lessons/swift/module-03/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: switch Statements",
+          "description": "Switch-case yapısı",
+          "href": "/education/lessons/swift/module-03/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: for-in Loops",
+          "description": "Döngü yapıları",
+          "href": "/education/lessons/swift/module-03/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: while ve repeat-while",
+          "description": "While döngüleri",
+          "href": "/education/lessons/swift/module-03/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Functions",
+          "description": "Fonksiyon tanımlama",
+          "href": "/education/lessons/swift/module-03/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Function Parameters",
+          "description": "Parametreler ve dönüş değerleri",
+          "href": "/education/lessons/swift/module-03/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: String Interpolation",
+          "description": "String birleştirme",
+          "href": "/education/lessons/swift/module-03/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Comments ve Documentation",
+          "description": "Yorumlar ve dokümantasyon",
+          "href": "/education/lessons/swift/module-03/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/swift/module-03/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-04",
+      "title": "Module 4: Optionals ve Nil Handling Testi",
+      "summary": "Swift Optionals, nil handling, optional binding, optional chaining, nil coalescing ve force unwrapping.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Optional kavramını anlamak",
+        "Optional binding kullanmayı öğrenmek",
+        "Optional chaining kullanmayı öğrenmek",
+        "Nil handling stratejilerini öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Optionals Nedir?",
+          "description": "Optional kavramı",
+          "href": "/education/lessons/swift/module-04/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Optional Declaration",
+          "description": "Optional tanımlama",
+          "href": "/education/lessons/swift/module-04/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: nil Value",
+          "description": "nil değeri",
+          "href": "/education/lessons/swift/module-04/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Optional Binding",
+          "description": "if let, guard let",
+          "href": "/education/lessons/swift/module-04/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Optional Chaining",
+          "description": "? operatörü",
+          "href": "/education/lessons/swift/module-04/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Nil Coalescing",
+          "description": "?? operatörü",
+          "href": "/education/lessons/swift/module-04/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Force Unwrapping",
+          "description": "! operatörü",
+          "href": "/education/lessons/swift/module-04/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Implicitly Unwrapped Optionals",
+          "description": "IUO kullanımı",
+          "href": "/education/lessons/swift/module-04/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Optional in Functions",
+          "description": "Fonksiyonlarda optional",
+          "href": "/education/lessons/swift/module-04/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Optional Best Practices",
+          "description": "Optional kullanım en iyi uygulamaları",
+          "href": "/education/lessons/swift/module-04/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Optional vs Non-Optional",
+          "description": "Ne zaman optional kullanılır",
+          "href": "/education/lessons/swift/module-04/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Optional Patterns",
+          "description": "Optional desenleri",
+          "href": "/education/lessons/swift/module-04/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Optional in Collections",
+          "description": "Koleksiyonlarda optional",
+          "href": "/education/lessons/swift/module-04/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Common Optional Mistakes",
+          "description": "Yaygın optional hataları",
+          "href": "/education/lessons/swift/module-04/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/swift/module-04/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-05",
+      "title": "Module 5: Collections Testi",
+      "summary": "Swift collections, Arrays, Dictionaries, Sets, collection operations, iteration ve collection methods.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Collection kavramını anlamak",
+        "Arrays kullanmayı öğrenmek",
+        "Dictionaries kullanmayı öğrenmek",
+        "Sets kullanmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Collections Temelleri",
+          "description": "Collection kavramı",
+          "href": "/education/lessons/swift/module-05/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Arrays",
+          "description": "Dizi oluşturma ve kullanımı",
+          "href": "/education/lessons/swift/module-05/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Array Operations",
+          "description": "Dizi işlemleri",
+          "href": "/education/lessons/swift/module-05/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Array Methods",
+          "description": "Dizi metodları",
+          "href": "/education/lessons/swift/module-05/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Dictionaries",
+          "description": "Sözlük oluşturma",
+          "href": "/education/lessons/swift/module-05/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Dictionary Operations",
+          "description": "Sözlük işlemleri",
+          "href": "/education/lessons/swift/module-05/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Sets",
+          "description": "Küme oluşturma",
+          "href": "/education/lessons/swift/module-05/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Set Operations",
+          "description": "Küme işlemleri",
+          "href": "/education/lessons/swift/module-05/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Collection Iteration",
+          "description": "Koleksiyon dolaşma",
+          "href": "/education/lessons/swift/module-05/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Higher-Order Functions",
+          "description": "map, filter, reduce",
+          "href": "/education/lessons/swift/module-05/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Collection Subscripting",
+          "description": "İndeksleme",
+          "href": "/education/lessons/swift/module-05/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Collection Mutability",
+          "description": "Değiştirilebilirlik",
+          "href": "/education/lessons/swift/module-05/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Collection Performance",
+          "description": "Performans düşünceleri",
+          "href": "/education/lessons/swift/module-05/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Collection Best Practices",
+          "description": "Collection kullanım en iyi uygulamaları",
+          "href": "/education/lessons/swift/module-05/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/swift/module-05/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-06",
+      "title": "Module 6: Functions ve Methods Testi",
+      "summary": "Swift functions, function parameters, return types, variadic parameters, inout parameters, function types ve methods.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Function kavramını anlamak",
+        "Function parameters kullanmayı öğrenmek",
+        "Function types kullanmayı öğrenmek",
+        "Methods tanımlamayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Functions Temelleri",
+          "description": "Fonksiyon tanımlama",
+          "href": "/education/lessons/swift/module-06/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Function Parameters",
+          "description": "Parametre tanımlama",
+          "href": "/education/lessons/swift/module-06/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Return Types",
+          "description": "Dönüş tipleri",
+          "href": "/education/lessons/swift/module-06/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Parameter Labels",
+          "description": "Parametre etiketleri",
+          "href": "/education/lessons/swift/module-06/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Variadic Parameters",
+          "description": "Değişken sayıda parametre",
+          "href": "/education/lessons/swift/module-06/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: In-Out Parameters",
+          "description": "inout parametreler",
+          "href": "/education/lessons/swift/module-06/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Function Types",
+          "description": "Fonksiyon tipi",
+          "href": "/education/lessons/swift/module-06/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Functions as Values",
+          "description": "Fonksiyonları değer olarak kullanma",
+          "href": "/education/lessons/swift/module-06/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Nested Functions",
+          "description": "İç içe fonksiyonlar",
+          "href": "/education/lessons/swift/module-06/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Methods",
+          "description": "Metod tanımlama",
+          "href": "/education/lessons/swift/module-06/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Instance Methods",
+          "description": "Instance metodları",
+          "href": "/education/lessons/swift/module-06/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Type Methods",
+          "description": "Static metodlar",
+          "href": "/education/lessons/swift/module-06/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Function Best Practices",
+          "description": "Fonksiyon tasarım en iyi uygulamaları",
+          "href": "/education/lessons/swift/module-06/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Function Overloading",
+          "description": "Fonksiyon aşırı yükleme",
+          "href": "/education/lessons/swift/module-06/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/swift/module-06/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-07",
+      "title": "Module 7: Classes ve Structures Testi",
+      "summary": "Swift classes, structures, properties, methods, initializers, inheritance, computed properties ve property observers.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Class ve struct kavramını anlamak",
+        "Class tanımlamayı öğrenmek",
+        "Struct tanımlamayı öğrenmek",
+        "Inheritance yapmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Classes ve Structures",
+          "description": "Class ve struct kavramı",
+          "href": "/education/lessons/swift/module-07/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Class Definition",
+          "description": "Class tanımlama",
+          "href": "/education/lessons/swift/module-07/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Structure Definition",
+          "description": "Struct tanımlama",
+          "href": "/education/lessons/swift/module-07/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Properties",
+          "description": "Özellik tanımlama",
+          "href": "/education/lessons/swift/module-07/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Stored Properties",
+          "description": "Saklanan özellikler",
+          "href": "/education/lessons/swift/module-07/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Computed Properties",
+          "description": "Hesaplanan özellikler",
+          "href": "/education/lessons/swift/module-07/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Property Observers",
+          "description": "willSet ve didSet",
+          "href": "/education/lessons/swift/module-07/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Initializers",
+          "description": "Başlatıcılar",
+          "href": "/education/lessons/swift/module-07/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Inheritance",
+          "description": "Kalıtım",
+          "href": "/education/lessons/swift/module-07/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Overriding",
+          "description": "Override etme",
+          "href": "/education/lessons/swift/module-07/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Class vs Struct",
+          "description": "Class ve struct farkları",
+          "href": "/education/lessons/swift/module-07/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Value Types vs Reference Types",
+          "description": "Değer ve referans tipleri",
+          "href": "/education/lessons/swift/module-07/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Access Control",
+          "description": "Erişim kontrolü",
+          "href": "/education/lessons/swift/module-07/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Class ve Struct Best Practices",
+          "description": "Kullanım en iyi uygulamaları",
+          "href": "/education/lessons/swift/module-07/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/swift/module-07/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-08",
+      "title": "Module 8: Protocols ve Extensions Testi",
+      "summary": "Swift protocols, protocol conformance, protocol extensions, protocol-oriented programming ve extensions.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Protocol kavramını anlamak",
+        "Protocol tanımlamayı öğrenmek",
+        "Protocol extensions kullanmayı öğrenmek",
+        "Protocol-oriented programming yapmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Protocols Nedir?",
+          "description": "Protocol kavramı",
+          "href": "/education/lessons/swift/module-08/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Protocol Definition",
+          "description": "Protocol tanımlama",
+          "href": "/education/lessons/swift/module-08/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Protocol Conformance",
+          "description": "Protocol uyumluluğu",
+          "href": "/education/lessons/swift/module-08/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Protocol Properties",
+          "description": "Protocol özellikleri",
+          "href": "/education/lessons/swift/module-08/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Protocol Methods",
+          "description": "Protocol metodları",
+          "href": "/education/lessons/swift/module-08/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Protocol Inheritance",
+          "description": "Protocol kalıtımı",
+          "href": "/education/lessons/swift/module-08/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Protocol Extensions",
+          "description": "Protocol genişletme",
+          "href": "/education/lessons/swift/module-08/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Protocol-Oriented Programming",
+          "description": "POP yaklaşımı",
+          "href": "/education/lessons/swift/module-08/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Extensions",
+          "description": "Extension kavramı",
+          "href": "/education/lessons/swift/module-08/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Extension Syntax",
+          "description": "Extension tanımlama",
+          "href": "/education/lessons/swift/module-08/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Computed Properties in Extensions",
+          "description": "Extension'da özellikler",
+          "href": "/education/lessons/swift/module-08/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Methods in Extensions",
+          "description": "Extension'da metodlar",
+          "href": "/education/lessons/swift/module-08/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Protocol Best Practices",
+          "description": "Protocol kullanım en iyi uygulamaları",
+          "href": "/education/lessons/swift/module-08/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Common Protocols",
+          "description": "Yaygın protocol'ler",
+          "href": "/education/lessons/swift/module-08/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/swift/module-08/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-09",
+      "title": "Module 9: Closures ve Generics Testi",
+      "summary": "Swift closures, closure syntax, capturing values, escaping closures, generics, generic functions ve generic types.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Closure kavramını anlamak",
+        "Closure syntax kullanmayı öğrenmek",
+        "Generics kavramını anlamak",
+        "Generic functions yazmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Closures Nedir?",
+          "description": "Closure kavramı",
+          "href": "/education/lessons/swift/module-09/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Closure Syntax",
+          "description": "Closure yazımı",
+          "href": "/education/lessons/swift/module-09/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Closure Expressions",
+          "description": "Closure ifadeleri",
+          "href": "/education/lessons/swift/module-09/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Trailing Closures",
+          "description": "Sondaki closure'lar",
+          "href": "/education/lessons/swift/module-09/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Capturing Values",
+          "description": "Değer yakalama",
+          "href": "/education/lessons/swift/module-09/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Escaping Closures",
+          "description": "Kaçan closure'lar",
+          "href": "/education/lessons/swift/module-09/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Autoclosures",
+          "description": "Otomatik closure'lar",
+          "href": "/education/lessons/swift/module-09/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Generics Nedir?",
+          "description": "Generic kavramı",
+          "href": "/education/lessons/swift/module-09/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Generic Functions",
+          "description": "Generic fonksiyonlar",
+          "href": "/education/lessons/swift/module-09/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Generic Types",
+          "description": "Generic tipler",
+          "href": "/education/lessons/swift/module-09/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Type Constraints",
+          "description": "Tip kısıtlamaları",
+          "href": "/education/lessons/swift/module-09/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Associated Types",
+          "description": "İlişkili tipler",
+          "href": "/education/lessons/swift/module-09/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Generic Best Practices",
+          "description": "Generic kullanım en iyi uygulamaları",
+          "href": "/education/lessons/swift/module-09/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Common Closure Patterns",
+          "description": "Yaygın closure desenleri",
+          "href": "/education/lessons/swift/module-09/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/swift/module-09/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-10",
+      "title": "Module 10: Error Handling Testi",
+      "summary": "Swift error handling, Error protocol, throwing functions, do-catch statements, try-catch, defer statements ve error propagation.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Error handling kavramını anlamak",
+        "Error protocol kullanmayı öğrenmek",
+        "Throwing functions yazmayı öğrenmek",
+        "Error handling stratejilerini öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Error Handling Temelleri",
+          "description": "Hata yönetimi yaklaşımı",
+          "href": "/education/lessons/swift/module-10/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Error Protocol",
+          "description": "Error protocol",
+          "href": "/education/lessons/swift/module-10/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Custom Errors",
+          "description": "Özel hata tipleri",
+          "href": "/education/lessons/swift/module-10/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Throwing Functions",
+          "description": "Hata fırlatan fonksiyonlar",
+          "href": "/education/lessons/swift/module-10/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: do-catch Statements",
+          "description": "Hata yakalama",
+          "href": "/education/lessons/swift/module-10/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: try Keyword",
+          "description": "try kullanımı",
+          "href": "/education/lessons/swift/module-10/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: try? ve try!",
+          "description": "Optional ve force try",
+          "href": "/education/lessons/swift/module-10/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Error Propagation",
+          "description": "Hata yayılımı",
+          "href": "/education/lessons/swift/module-10/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: defer Statements",
+          "description": "defer kullanımı",
+          "href": "/education/lessons/swift/module-10/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Result Type",
+          "description": "Result tipi",
+          "href": "/education/lessons/swift/module-10/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Error Handling Patterns",
+          "description": "Hata yönetimi desenleri",
+          "href": "/education/lessons/swift/module-10/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Error Recovery",
+          "description": "Hata kurtarma",
+          "href": "/education/lessons/swift/module-10/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Error Handling Best Practices",
+          "description": "Hata yönetimi en iyi uygulamaları",
+          "href": "/education/lessons/swift/module-10/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Common Error Scenarios",
+          "description": "Yaygın hata senaryoları",
+          "href": "/education/lessons/swift/module-10/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/swift/module-10/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-11",
+      "title": "Module 11: Memory Management ve ARC Testi",
+      "summary": "Swift memory management, ARC (Automatic Reference Counting), strong references, weak references, unowned references ve memory leaks.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Memory management kavramını anlamak",
+        "ARC mekanizmasını öğrenmek",
+        "Reference types anlamak",
+        "Memory leaks önlemeyi öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Memory Management Temelleri",
+          "description": "Bellek yönetimi kavramı",
+          "href": "/education/lessons/swift/module-11/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: ARC Nedir?",
+          "description": "Automatic Reference Counting",
+          "href": "/education/lessons/swift/module-11/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Strong References",
+          "description": "Güçlü referanslar",
+          "href": "/education/lessons/swift/module-11/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Weak References",
+          "description": "Zayıf referanslar",
+          "href": "/education/lessons/swift/module-11/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Unowned References",
+          "description": "Sahipsiz referanslar",
+          "href": "/education/lessons/swift/module-11/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Reference Cycles",
+          "description": "Referans döngüleri",
+          "href": "/education/lessons/swift/module-11/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Breaking Reference Cycles",
+          "description": "Referans döngülerini kırma",
+          "href": "/education/lessons/swift/module-11/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Closures ve Memory",
+          "description": "Closure'larda bellek yönetimi",
+          "href": "/education/lessons/swift/module-11/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Memory Leaks",
+          "description": "Bellek sızıntıları",
+          "href": "/education/lessons/swift/module-11/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Instruments",
+          "description": "Bellek analiz araçları",
+          "href": "/education/lessons/swift/module-11/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Value Types Memory",
+          "description": "Değer tiplerinde bellek",
+          "href": "/education/lessons/swift/module-11/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Memory Best Practices",
+          "description": "Bellek yönetimi en iyi uygulamaları",
+          "href": "/education/lessons/swift/module-11/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Performance Considerations",
+          "description": "Performans düşünceleri",
+          "href": "/education/lessons/swift/module-11/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Common Memory Issues",
+          "description": "Yaygın bellek sorunları",
+          "href": "/education/lessons/swift/module-11/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/swift/module-11/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-12",
+      "title": "Module 12: UIKit ile iOS Development Testi",
+      "summary": "UIKit framework, View Controllers, Views, Auto Layout, Interface Builder, Storyboards, Navigation ve UIKit best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "UIKit framework'ünü anlamak",
+        "View Controllers kullanmayı öğrenmek",
+        "Auto Layout yapmayı öğrenmek",
+        "UIKit ile iOS uygulaması geliştirmeyi öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: UIKit Nedir?",
+          "description": "UIKit framework",
+          "href": "/education/lessons/swift/module-12/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: View Controllers",
+          "description": "ViewController yapısı",
+          "href": "/education/lessons/swift/module-12/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Views",
+          "description": "View hiyerarşisi",
+          "href": "/education/lessons/swift/module-12/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Interface Builder",
+          "description": "Görsel arayüz oluşturma",
+          "href": "/education/lessons/swift/module-12/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Storyboards",
+          "description": "Storyboard kullanımı",
+          "href": "/education/lessons/swift/module-12/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Auto Layout",
+          "description": "Otomatik yerleşim",
+          "href": "/education/lessons/swift/module-12/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Constraints",
+          "description": "Kısıtlamalar",
+          "href": "/education/lessons/swift/module-12/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Navigation Controllers",
+          "description": "Navigasyon yönetimi",
+          "href": "/education/lessons/swift/module-12/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Table Views",
+          "description": "Tablo görünümleri",
+          "href": "/education/lessons/swift/module-12/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Collection Views",
+          "description": "Koleksiyon görünümleri",
+          "href": "/education/lessons/swift/module-12/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: User Interactions",
+          "description": "Kullanıcı etkileşimleri",
+          "href": "/education/lessons/swift/module-12/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Delegation Pattern",
+          "description": "Delegasyon deseni",
+          "href": "/education/lessons/swift/module-12/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: UIKit Best Practices",
+          "description": "UIKit kullanım en iyi uygulamaları",
+          "href": "/education/lessons/swift/module-12/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: UIKit vs SwiftUI",
+          "description": "İki framework karşılaştırması",
+          "href": "/education/lessons/swift/module-12/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/swift/module-12/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-13",
+      "title": "Module 13: SwiftUI Testi",
+      "summary": "SwiftUI framework, declarative UI, Views, Modifiers, State management, Data binding, Navigation ve SwiftUI best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "SwiftUI framework'ünü anlamak",
+        "Declarative UI yaklaşımını öğrenmek",
+        "State management yapmayı öğrenmek",
+        "SwiftUI ile modern iOS uygulaması geliştirmeyi öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: SwiftUI Nedir?",
+          "description": "SwiftUI framework",
+          "href": "/education/lessons/swift/module-13/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Declarative UI",
+          "description": "Bildirimsel arayüz",
+          "href": "/education/lessons/swift/module-13/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: SwiftUI Views",
+          "description": "View yapısı",
+          "href": "/education/lessons/swift/module-13/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: View Modifiers",
+          "description": "View değiştiricileri",
+          "href": "/education/lessons/swift/module-13/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: State Management",
+          "description": "@State, @Binding",
+          "href": "/education/lessons/swift/module-13/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: ObservableObject",
+          "description": "Gözlemlenebilir nesneler",
+          "href": "/education/lessons/swift/module-13/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Environment Objects",
+          "description": "Ortam nesneleri",
+          "href": "/education/lessons/swift/module-13/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Navigation",
+          "description": "Navigasyon yapısı",
+          "href": "/education/lessons/swift/module-13/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Lists ve ForEach",
+          "description": "Liste görünümleri",
+          "href": "/education/lessons/swift/module-13/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Forms",
+          "description": "Form yapıları",
+          "href": "/education/lessons/swift/module-13/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Animations",
+          "description": "Animasyonlar",
+          "href": "/education/lessons/swift/module-13/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Combine Framework",
+          "description": "Combine entegrasyonu",
+          "href": "/education/lessons/swift/module-13/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: SwiftUI Best Practices",
+          "description": "SwiftUI kullanım en iyi uygulamaları",
+          "href": "/education/lessons/swift/module-13/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: SwiftUI vs UIKit",
+          "description": "Framework karşılaştırması",
+          "href": "/education/lessons/swift/module-13/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/swift/module-13/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-14",
+      "title": "Module 14: Testing ve Deployment Testi",
+      "summary": "Swift testing, XCTest framework, unit testing, UI testing, TestFlight, App Store deployment ve iOS deployment best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Testing kavramını anlamak",
+        "Unit test yazmayı öğrenmek",
+        "UI test yazmayı öğrenmek",
+        "App Store deployment yapmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Testing Temelleri",
+          "description": "Test türleri",
+          "href": "/education/lessons/swift/module-14/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: XCTest Framework",
+          "description": "XCTest kullanımı",
+          "href": "/education/lessons/swift/module-14/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Unit Testing",
+          "description": "Birim testleri",
+          "href": "/education/lessons/swift/module-14/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Test Assertions",
+          "description": "Test iddiaları",
+          "href": "/education/lessons/swift/module-14/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Mocking",
+          "description": "Mock objeler",
+          "href": "/education/lessons/swift/module-14/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: UI Testing",
+          "description": "Arayüz testleri",
+          "href": "/education/lessons/swift/module-14/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Test Coverage",
+          "description": "Test kapsamı",
+          "href": "/education/lessons/swift/module-14/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Code Signing",
+          "description": "Kod imzalama",
+          "href": "/education/lessons/swift/module-14/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: App Store Connect",
+          "description": "App Store yönetimi",
+          "href": "/education/lessons/swift/module-14/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: TestFlight",
+          "description": "Beta test dağıtımı",
+          "href": "/education/lessons/swift/module-14/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: App Store Submission",
+          "description": "App Store gönderimi",
+          "href": "/education/lessons/swift/module-14/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: App Review Process",
+          "description": "Uygulama inceleme süreci",
+          "href": "/education/lessons/swift/module-14/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Deployment Best Practices",
+          "description": "Dağıtım en iyi uygulamaları",
+          "href": "/education/lessons/swift/module-14/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Version Management",
+          "description": "Versiyon yönetimi",
+          "href": "/education/lessons/swift/module-14/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/swift/module-14/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-15",
+      "title": "Module 15: Best Practices ve Capstone Testi",
+      "summary": "Swift geliştirmede en iyi uygulamalar, kod kalitesi, güvenlik, performans ve kapsamlı bir iOS uygulaması geliştirme.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Kod kalitesi standartlarını öğrenmek",
+        "Güvenlik best practices uygulamak",
+        "Performans optimizasyon tekniklerini öğrenmek",
+        "Kapsamlı bir iOS uygulaması geliştirmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Code Quality Standards",
+          "description": "Kod kalitesi standartları",
+          "href": "/education/lessons/swift/module-15/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Naming Conventions",
+          "description": "İsimlendirme kuralları",
+          "href": "/education/lessons/swift/module-15/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Code Organization",
+          "description": "Kod organizasyonu",
+          "href": "/education/lessons/swift/module-15/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Proje Planlama",
+          "description": "Proje gereksinimleri",
+          "href": "/education/lessons/swift/module-15/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Mimari Tasarım",
+          "description": "Uygulama mimarisi",
+          "href": "/education/lessons/swift/module-15/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Core Implementation",
+          "description": "Temel implementasyon",
+          "href": "/education/lessons/swift/module-15/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: UI Implementation",
+          "description": "Arayüz implementasyonu",
+          "href": "/education/lessons/swift/module-15/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Data Management",
+          "description": "Veri yönetimi",
+          "href": "/education/lessons/swift/module-15/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Network Integration",
+          "description": "Ağ entegrasyonu",
+          "href": "/education/lessons/swift/module-15/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Error Handling",
+          "description": "Kapsamlı hata yönetimi",
+          "href": "/education/lessons/swift/module-15/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Testing Strategy",
+          "description": "Test stratejisi",
+          "href": "/education/lessons/swift/module-15/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Performance Optimization",
+          "description": "Performans optimizasyonu",
+          "href": "/education/lessons/swift/module-15/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Documentation",
+          "description": "Proje dokümantasyonu",
+          "href": "/education/lessons/swift/module-15/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Project Review",
+          "description": "Proje incelemesi",
+          "href": "/education/lessons/swift/module-15/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Project Presentation",
+          "description": "Proje sunumu",
+          "href": "/education/lessons/swift/module-15/lesson-15"
+        }
+      ]
+    }
+  ]
+}

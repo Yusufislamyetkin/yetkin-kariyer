@@ -1,0 +1,1577 @@
+{
+  "overview": {
+    "description": "PostgreSQL, güçlü ve açık kaynaklı bir ilişkisel veritabanı yönetim sistemidir. Bu kapsamlı kurs ile PostgreSQL'in temellerinden ileri seviye konularına kadar her şeyi öğreneceksiniz. Veritabanı tasarımı, SQL sorguları, performans optimizasyonu ve güvenlik konularında uzmanlaşacaksınız.",
+    "estimatedDurationMinutes": 6750
+  },
+  "learningObjectives": [
+    "PostgreSQL'in temel kavramlarını ve mimarisini anlamak",
+    "SQL syntax ve komutlarını etkili kullanmak",
+    "Veritabanı tasarımı ve normalizasyon yapmak",
+    "Gelişmiş SQL sorguları ve join'ler yazmak",
+    "Functions, stored procedures ve triggers oluşturmak",
+    "Performans optimizasyonu ve indexing yapmak",
+    "Backup, recovery ve güvenlik stratejilerini uygulamak"
+  ],
+  "modules": [
+    {
+      "id": "module-01",
+      "title": "Module 1: PostgreSQL Tanımı ve Temelleri Testi",
+      "summary": "PostgreSQL'in ne olduğu, tarihçesi, avantajları, diğer veritabanlarından farkları ve temel kavramlar.",
+      "durationMinutes": 450,
+      "objectives": [
+        "PostgreSQL'in ne olduğunu ve neden kullanıldığını anlamak",
+        "PostgreSQL'in diğer veritabanlarından farklarını öğrenmek",
+        "PostgreSQL'in avantajlarını ve kullanım alanlarını keşfetmek",
+        "ACID özelliklerini anlamak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: PostgreSQL Nedir?",
+          "description": "PostgreSQL'in temel tanımı ve genel bakış",
+          "href": "/education/lessons/postgresql/module-01/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: PostgreSQL diğer veritabanlarından farkı nedir?",
+          "description": "PostgreSQL'in MySQL, MSSQL gibi veritabanlarından farkları",
+          "href": "/education/lessons/postgresql/module-01/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: PostgreSQL'in Tarihçesi",
+          "description": "PostgreSQL'in ortaya çıkışı ve gelişimi",
+          "href": "/education/lessons/postgresql/module-01/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: ACID Özellikleri",
+          "description": "ACID prensipleri",
+          "href": "/education/lessons/postgresql/module-01/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: PostgreSQL'in Avantajları",
+          "description": "Açık kaynak, güvenilirlik, özellik zenginliği",
+          "href": "/education/lessons/postgresql/module-01/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: PostgreSQL Kullanım Alanları",
+          "description": "Web uygulamaları, enterprise sistemler",
+          "href": "/education/lessons/postgresql/module-01/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: PostgreSQL Ekosistemi",
+          "description": "PostgreSQL topluluğu ve araçlar",
+          "href": "/education/lessons/postgresql/module-01/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: PostgreSQL Lisanslama",
+          "description": "PostgreSQL lisansı",
+          "href": "/education/lessons/postgresql/module-01/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: PostgreSQL Topluluk Desteği",
+          "description": "Açık kaynak topluluğu",
+          "href": "/education/lessons/postgresql/module-01/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: PostgreSQL'in Geleceği",
+          "description": "PostgreSQL roadmap",
+          "href": "/education/lessons/postgresql/module-01/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: PostgreSQL Kurulum Gereksinimleri",
+          "description": "Sistem gereksinimleri",
+          "href": "/education/lessons/postgresql/module-01/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: PostgreSQL ile Neler Yapılabilir?",
+          "description": "Kullanım senaryoları",
+          "href": "/education/lessons/postgresql/module-01/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: PostgreSQL Performans",
+          "description": "Performans özellikleri",
+          "href": "/education/lessons/postgresql/module-01/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: PostgreSQL Güvenlik",
+          "description": "Güvenlik özellikleri",
+          "href": "/education/lessons/postgresql/module-01/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Değerlendirme",
+          "description": "Modül kapsamında öğrenilenlerin özeti",
+          "href": "/education/lessons/postgresql/module-01/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-02",
+      "title": "Module 2: PostgreSQL Kurulumu ve Yapılandırma Testi",
+      "summary": "PostgreSQL kurulumu, yapılandırma dosyaları, bağlantı ayarları, kullanıcı yönetimi ve temel yönetim.",
+      "durationMinutes": 450,
+      "objectives": [
+        "PostgreSQL kurulumunu öğrenmek",
+        "Yapılandırma dosyalarını anlamak",
+        "Kullanıcı yönetimi yapmayı öğrenmek",
+        "Temel yönetim işlemlerini yapmak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: PostgreSQL Kurulumu",
+          "description": "PostgreSQL kurulumu",
+          "href": "/education/lessons/postgresql/module-02/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: psql Komut Satırı Aracı",
+          "description": "psql kullanımı",
+          "href": "/education/lessons/postgresql/module-02/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: pgAdmin Kurulumu",
+          "description": "GUI yönetim aracı",
+          "href": "/education/lessons/postgresql/module-02/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Yapılandırma Dosyaları",
+          "description": "postgresql.conf, pg_hba.conf",
+          "href": "/education/lessons/postgresql/module-02/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Database Oluşturma",
+          "description": "CREATE DATABASE",
+          "href": "/education/lessons/postgresql/module-02/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Kullanıcı ve Rol Yönetimi",
+          "description": "CREATE USER, CREATE ROLE",
+          "href": "/education/lessons/postgresql/module-02/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: İzin Yönetimi",
+          "description": "GRANT, REVOKE",
+          "href": "/education/lessons/postgresql/module-02/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Bağlantı Yönetimi",
+          "description": "Connection pooling",
+          "href": "/education/lessons/postgresql/module-02/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Log Yönetimi",
+          "description": "Logging yapılandırması",
+          "href": "/education/lessons/postgresql/module-02/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Memory Yapılandırması",
+          "description": "Bellek ayarları",
+          "href": "/education/lessons/postgresql/module-02/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Network Yapılandırması",
+          "description": "Ağ ayarları",
+          "href": "/education/lessons/postgresql/module-02/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Service Yönetimi",
+          "description": "PostgreSQL servis yönetimi",
+          "href": "/education/lessons/postgresql/module-02/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Environment Variables",
+          "description": "Ortam değişkenleri",
+          "href": "/education/lessons/postgresql/module-02/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Yapılandırma Best Practices",
+          "description": "Yapılandırma en iyi uygulamaları",
+          "href": "/education/lessons/postgresql/module-02/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/postgresql/module-02/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-03",
+      "title": "Module 3: SQL Syntax ve Temel Komutlar Testi",
+      "summary": "SQL syntax, DDL komutları (CREATE, ALTER, DROP), DML komutları (SELECT, INSERT, UPDATE, DELETE) ve temel SQL işlemleri.",
+      "durationMinutes": 450,
+      "objectives": [
+        "SQL syntax kurallarını öğrenmek",
+        "DDL komutlarını kullanmayı öğrenmek",
+        "DML komutlarını kullanmayı öğrenmek",
+        "Temel SQL işlemlerini yapmak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: SQL Syntax Temelleri",
+          "description": "SQL syntax kuralları",
+          "href": "/education/lessons/postgresql/module-03/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: CREATE TABLE",
+          "description": "Tablo oluşturma",
+          "href": "/education/lessons/postgresql/module-03/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: ALTER TABLE",
+          "description": "Tablo değiştirme",
+          "href": "/education/lessons/postgresql/module-03/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: DROP TABLE",
+          "description": "Tablo silme",
+          "href": "/education/lessons/postgresql/module-03/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: SELECT Statement",
+          "description": "Veri sorgulama",
+          "href": "/education/lessons/postgresql/module-03/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: INSERT Statement",
+          "description": "Veri ekleme",
+          "href": "/education/lessons/postgresql/module-03/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: UPDATE Statement",
+          "description": "Veri güncelleme",
+          "href": "/education/lessons/postgresql/module-03/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: DELETE Statement",
+          "description": "Veri silme",
+          "href": "/education/lessons/postgresql/module-03/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: WHERE Clause",
+          "description": "Koşul filtreleme",
+          "href": "/education/lessons/postgresql/module-03/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: ORDER BY",
+          "description": "Sıralama",
+          "href": "/education/lessons/postgresql/module-03/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: LIMIT ve OFFSET",
+          "description": "Sonuç sınırlama",
+          "href": "/education/lessons/postgresql/module-03/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: DISTINCT",
+          "description": "Benzersiz değerler",
+          "href": "/education/lessons/postgresql/module-03/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: SQL Best Practices",
+          "description": "SQL yazma en iyi uygulamaları",
+          "href": "/education/lessons/postgresql/module-03/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Common SQL Patterns",
+          "description": "Yaygın SQL desenleri",
+          "href": "/education/lessons/postgresql/module-03/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/postgresql/module-03/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-04",
+      "title": "Module 4: Data Types ve Constraints Testi",
+      "summary": "PostgreSQL veri tipleri, constraint'ler (PRIMARY KEY, FOREIGN KEY, UNIQUE, CHECK, NOT NULL) ve veri bütünlüğü.",
+      "durationMinutes": 450,
+      "objectives": [
+        "PostgreSQL veri tiplerini öğrenmek",
+        "Constraint kavramını anlamak",
+        "Constraint tanımlamayı öğrenmek",
+        "Veri bütünlüğünü sağlamak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Numeric Types",
+          "description": "INTEGER, BIGINT, DECIMAL, NUMERIC",
+          "href": "/education/lessons/postgresql/module-04/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Character Types",
+          "description": "VARCHAR, CHAR, TEXT",
+          "href": "/education/lessons/postgresql/module-04/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Date/Time Types",
+          "description": "DATE, TIME, TIMESTAMP",
+          "href": "/education/lessons/postgresql/module-04/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Boolean ve Other Types",
+          "description": "BOOLEAN, UUID, JSON",
+          "href": "/education/lessons/postgresql/module-04/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Array Types",
+          "description": "Dizi veri tipleri",
+          "href": "/education/lessons/postgresql/module-04/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Constraints Nedir?",
+          "description": "Constraint kavramı",
+          "href": "/education/lessons/postgresql/module-04/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: PRIMARY KEY",
+          "description": "Birincil anahtar",
+          "href": "/education/lessons/postgresql/module-04/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: FOREIGN KEY",
+          "description": "Yabancı anahtar",
+          "href": "/education/lessons/postgresql/module-04/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: UNIQUE Constraint",
+          "description": "Benzersizlik kısıtı",
+          "href": "/education/lessons/postgresql/module-04/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: CHECK Constraint",
+          "description": "Kontrol kısıtı",
+          "href": "/education/lessons/postgresql/module-04/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: NOT NULL Constraint",
+          "description": "Boş değer kısıtı",
+          "href": "/education/lessons/postgresql/module-04/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: DEFAULT Values",
+          "description": "Varsayılan değerler",
+          "href": "/education/lessons/postgresql/module-04/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Constraint Management",
+          "description": "Constraint yönetimi",
+          "href": "/education/lessons/postgresql/module-04/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Data Type Best Practices",
+          "description": "Veri tipi seçimi en iyi uygulamaları",
+          "href": "/education/lessons/postgresql/module-04/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/postgresql/module-04/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-05",
+      "title": "Module 5: Tables ve Indexes Testi",
+      "summary": "Tablo tasarımı, normalizasyon, index oluşturma, index türleri, composite indexes ve index yönetimi.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Tablo tasarımını öğrenmek",
+        "Normalizasyon yapmayı öğrenmek",
+        "Index oluşturmayı öğrenmek",
+        "Index yönetimi yapmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Tablo Tasarımı",
+          "description": "Tablo tasarım prensipleri",
+          "href": "/education/lessons/postgresql/module-05/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Normalizasyon",
+          "description": "1NF, 2NF, 3NF",
+          "href": "/education/lessons/postgresql/module-05/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Denormalizasyon",
+          "description": "Denormalizasyon stratejileri",
+          "href": "/education/lessons/postgresql/module-05/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Indexes Nedir?",
+          "description": "Index kavramı",
+          "href": "/education/lessons/postgresql/module-05/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: B-tree Indexes",
+          "description": "B-tree index türü",
+          "href": "/education/lessons/postgresql/module-05/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Hash Indexes",
+          "description": "Hash index türü",
+          "href": "/education/lessons/postgresql/module-05/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: GiST Indexes",
+          "description": "GiST index türü",
+          "href": "/education/lessons/postgresql/module-05/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: GIN Indexes",
+          "description": "GIN index türü",
+          "href": "/education/lessons/postgresql/module-05/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Composite Indexes",
+          "description": "Çoklu sütun index'leri",
+          "href": "/education/lessons/postgresql/module-05/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Partial Indexes",
+          "description": "Kısmi index'ler",
+          "href": "/education/lessons/postgresql/module-05/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Unique Indexes",
+          "description": "Benzersiz index'ler",
+          "href": "/education/lessons/postgresql/module-05/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Index Maintenance",
+          "description": "Index bakımı",
+          "href": "/education/lessons/postgresql/module-05/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Index Best Practices",
+          "description": "Index kullanım en iyi uygulamaları",
+          "href": "/education/lessons/postgresql/module-05/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Table ve Index Optimization",
+          "description": "Tablo ve index optimizasyonu",
+          "href": "/education/lessons/postgresql/module-05/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/postgresql/module-05/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-06",
+      "title": "Module 6: Queries ve Joins Testi",
+      "summary": "Gelişmiş SQL sorguları, JOIN türleri (INNER, LEFT, RIGHT, FULL), subqueries, CTEs ve window functions.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Gelişmiş SQL sorguları yazmayı öğrenmek",
+        "JOIN türlerini kullanmayı öğrenmek",
+        "Subqueries yazmayı öğrenmek",
+        "Window functions kullanmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Advanced SELECT",
+          "description": "Gelişmiş SELECT sorguları",
+          "href": "/education/lessons/postgresql/module-06/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Aggregate Functions",
+          "description": "COUNT, SUM, AVG, MAX, MIN",
+          "href": "/education/lessons/postgresql/module-06/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: GROUP BY",
+          "description": "Gruplama",
+          "href": "/education/lessons/postgresql/module-06/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: HAVING Clause",
+          "description": "Gruplama filtreleme",
+          "href": "/education/lessons/postgresql/module-06/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: INNER JOIN",
+          "description": "İç birleştirme",
+          "href": "/education/lessons/postgresql/module-06/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: LEFT JOIN",
+          "description": "Sol dış birleştirme",
+          "href": "/education/lessons/postgresql/module-06/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: RIGHT JOIN",
+          "description": "Sağ dış birleştirme",
+          "href": "/education/lessons/postgresql/module-06/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: FULL OUTER JOIN",
+          "description": "Tam dış birleştirme",
+          "href": "/education/lessons/postgresql/module-06/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: CROSS JOIN",
+          "description": "Kartezyen çarpım",
+          "href": "/education/lessons/postgresql/module-06/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Self JOIN",
+          "description": "Kendi kendine birleştirme",
+          "href": "/education/lessons/postgresql/module-06/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Subqueries",
+          "description": "Alt sorgular",
+          "href": "/education/lessons/postgresql/module-06/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Common Table Expressions (CTE)",
+          "description": "WITH clause",
+          "href": "/education/lessons/postgresql/module-06/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Window Functions",
+          "description": "Pencere fonksiyonları",
+          "href": "/education/lessons/postgresql/module-06/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Query Optimization",
+          "description": "Sorgu optimizasyonu",
+          "href": "/education/lessons/postgresql/module-06/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/postgresql/module-06/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-07",
+      "title": "Module 7: Functions ve Stored Procedures Testi",
+      "summary": "PostgreSQL functions, stored procedures, function parameters, return types, PL/pgSQL ve function best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Function kavramını anlamak",
+        "Function oluşturmayı öğrenmek",
+        "Stored procedures kullanmayı öğrenmek",
+        "PL/pgSQL kullanmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Functions Nedir?",
+          "description": "Function kavramı",
+          "href": "/education/lessons/postgresql/module-07/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Built-in Functions",
+          "description": "PostgreSQL yerleşik fonksiyonları",
+          "href": "/education/lessons/postgresql/module-07/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: CREATE FUNCTION",
+          "description": "Fonksiyon oluşturma",
+          "href": "/education/lessons/postgresql/module-07/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Function Parameters",
+          "description": "Fonksiyon parametreleri",
+          "href": "/education/lessons/postgresql/module-07/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Return Types",
+          "description": "Dönüş tipleri",
+          "href": "/education/lessons/postgresql/module-07/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: PL/pgSQL Giriş",
+          "description": "PL/pgSQL programlama dili",
+          "href": "/education/lessons/postgresql/module-07/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: PL/pgSQL Variables",
+          "description": "Değişken tanımlama",
+          "href": "/education/lessons/postgresql/module-07/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: PL/pgSQL Control Structures",
+          "description": "Kontrol yapıları",
+          "href": "/education/lessons/postgresql/module-07/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Stored Procedures",
+          "description": "Saklı prosedürler",
+          "href": "/education/lessons/postgresql/module-07/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Function Overloading",
+          "description": "Fonksiyon aşırı yükleme",
+          "href": "/education/lessons/postgresql/module-07/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Recursive Functions",
+          "description": "Özyinelemeli fonksiyonlar",
+          "href": "/education/lessons/postgresql/module-07/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Function Security",
+          "description": "Fonksiyon güvenliği",
+          "href": "/education/lessons/postgresql/module-07/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Function Best Practices",
+          "description": "Fonksiyon yazma en iyi uygulamaları",
+          "href": "/education/lessons/postgresql/module-07/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Performance Considerations",
+          "description": "Performans düşünceleri",
+          "href": "/education/lessons/postgresql/module-07/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/postgresql/module-07/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-08",
+      "title": "Module 8: Triggers ve Events Testi",
+      "summary": "PostgreSQL triggers, trigger types, trigger functions, event triggers ve trigger best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Trigger kavramını anlamak",
+        "Trigger oluşturmayı öğrenmek",
+        "Trigger functions yazmayı öğrenmek",
+        "Event triggers kullanmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Triggers Nedir?",
+          "description": "Trigger kavramı",
+          "href": "/education/lessons/postgresql/module-08/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: BEFORE Triggers",
+          "description": "Önce tetiklenen trigger'lar",
+          "href": "/education/lessons/postgresql/module-08/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: AFTER Triggers",
+          "description": "Sonra tetiklenen trigger'lar",
+          "href": "/education/lessons/postgresql/module-08/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: INSTEAD OF Triggers",
+          "description": "Yerine tetiklenen trigger'lar",
+          "href": "/education/lessons/postgresql/module-08/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: CREATE TRIGGER",
+          "description": "Trigger oluşturma",
+          "href": "/education/lessons/postgresql/module-08/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Trigger Functions",
+          "description": "Trigger fonksiyonları",
+          "href": "/education/lessons/postgresql/module-08/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: OLD ve NEW Records",
+          "description": "Eski ve yeni kayıtlar",
+          "href": "/education/lessons/postgresql/module-08/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Row-level Triggers",
+          "description": "Satır seviyesi trigger'lar",
+          "href": "/education/lessons/postgresql/module-08/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Statement-level Triggers",
+          "description": "İfade seviyesi trigger'lar",
+          "href": "/education/lessons/postgresql/module-08/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Conditional Triggers",
+          "description": "Koşullu trigger'lar",
+          "href": "/education/lessons/postgresql/module-08/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Event Triggers",
+          "description": "Olay trigger'ları",
+          "href": "/education/lessons/postgresql/module-08/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Trigger Management",
+          "description": "Trigger yönetimi",
+          "href": "/education/lessons/postgresql/module-08/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Trigger Best Practices",
+          "description": "Trigger kullanım en iyi uygulamaları",
+          "href": "/education/lessons/postgresql/module-08/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Common Trigger Patterns",
+          "description": "Yaygın trigger desenleri",
+          "href": "/education/lessons/postgresql/module-08/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/postgresql/module-08/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-09",
+      "title": "Module 9: Views ve Materialized Views Testi",
+      "summary": "PostgreSQL views, materialized views, view management, view updates ve view best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "View kavramını anlamak",
+        "View oluşturmayı öğrenmek",
+        "Materialized views kullanmayı öğrenmek",
+        "View yönetimi yapmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Views Nedir?",
+          "description": "View kavramı",
+          "href": "/education/lessons/postgresql/module-09/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: CREATE VIEW",
+          "description": "View oluşturma",
+          "href": "/education/lessons/postgresql/module-09/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Simple Views",
+          "description": "Basit view'lar",
+          "href": "/education/lessons/postgresql/module-09/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Complex Views",
+          "description": "Karmaşık view'lar",
+          "href": "/education/lessons/postgresql/module-09/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: View Updates",
+          "description": "View güncelleme",
+          "href": "/education/lessons/postgresql/module-09/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Updatable Views",
+          "description": "Güncellenebilir view'lar",
+          "href": "/education/lessons/postgresql/module-09/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Materialized Views",
+          "description": "Materialized view kavramı",
+          "href": "/education/lessons/postgresql/module-09/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: CREATE MATERIALIZED VIEW",
+          "description": "Materialized view oluşturma",
+          "href": "/education/lessons/postgresql/module-09/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: REFRESH MATERIALIZED VIEW",
+          "description": "Materialized view yenileme",
+          "href": "/education/lessons/postgresql/module-09/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: View Indexes",
+          "description": "View index'leri",
+          "href": "/education/lessons/postgresql/module-09/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: View Security",
+          "description": "View güvenliği",
+          "href": "/education/lessons/postgresql/module-09/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: View Management",
+          "description": "View yönetimi",
+          "href": "/education/lessons/postgresql/module-09/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: View Best Practices",
+          "description": "View kullanım en iyi uygulamaları",
+          "href": "/education/lessons/postgresql/module-09/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Performance Considerations",
+          "description": "Performans düşünceleri",
+          "href": "/education/lessons/postgresql/module-09/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/postgresql/module-09/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-10",
+      "title": "Module 10: Transactions ve Locking Testi",
+      "summary": "PostgreSQL transactions, ACID properties, transaction isolation levels, locking mechanisms ve deadlock handling.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Transaction kavramını anlamak",
+        "ACID properties öğrenmek",
+        "Transaction isolation levels anlamak",
+        "Locking mechanisms kullanmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Transactions Nedir?",
+          "description": "Transaction kavramı",
+          "href": "/education/lessons/postgresql/module-10/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: BEGIN, COMMIT, ROLLBACK",
+          "description": "Transaction komutları",
+          "href": "/education/lessons/postgresql/module-10/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: ACID Properties",
+          "description": "ACID özellikleri",
+          "href": "/education/lessons/postgresql/module-10/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Transaction Isolation",
+          "description": "İzolasyon seviyeleri",
+          "href": "/education/lessons/postgresql/module-10/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Read Uncommitted",
+          "description": "Okunmamış okuma",
+          "href": "/education/lessons/postgresql/module-10/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Read Committed",
+          "description": "Okunmuş okuma",
+          "href": "/education/lessons/postgresql/module-10/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Repeatable Read",
+          "description": "Tekrarlanabilir okuma",
+          "href": "/education/lessons/postgresql/module-10/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Serializable",
+          "description": "Serileştirilebilir",
+          "href": "/education/lessons/postgresql/module-10/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Locking Nedir?",
+          "description": "Kilit mekanizması",
+          "href": "/education/lessons/postgresql/module-10/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Row-level Locking",
+          "description": "Satır seviyesi kilitleme",
+          "href": "/education/lessons/postgresql/module-10/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Table-level Locking",
+          "description": "Tablo seviyesi kilitleme",
+          "href": "/education/lessons/postgresql/module-10/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Deadlocks",
+          "description": "Kilitlenme durumları",
+          "href": "/education/lessons/postgresql/module-10/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Lock Management",
+          "description": "Kilit yönetimi",
+          "href": "/education/lessons/postgresql/module-10/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Transaction Best Practices",
+          "description": "Transaction kullanım en iyi uygulamaları",
+          "href": "/education/lessons/postgresql/module-10/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/postgresql/module-10/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-11",
+      "title": "Module 11: Performance Tuning Testi",
+      "summary": "PostgreSQL performans optimizasyonu, query optimization, EXPLAIN ANALYZE, VACUUM, ANALYZE ve performance monitoring.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Performans optimizasyon tekniklerini öğrenmek",
+        "Query optimization yapmayı öğrenmek",
+        "EXPLAIN ANALYZE kullanmayı öğrenmek",
+        "Performance monitoring yapmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Performance Temelleri",
+          "description": "Performans ölçümü",
+          "href": "/education/lessons/postgresql/module-11/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: EXPLAIN Statement",
+          "description": "Sorgu planı analizi",
+          "href": "/education/lessons/postgresql/module-11/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: EXPLAIN ANALYZE",
+          "description": "Gerçek zamanlı analiz",
+          "href": "/education/lessons/postgresql/module-11/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Query Plan Reading",
+          "description": "Sorgu planı okuma",
+          "href": "/education/lessons/postgresql/module-11/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Index Usage",
+          "description": "Index kullanımı",
+          "href": "/education/lessons/postgresql/module-11/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Sequential Scan vs Index Scan",
+          "description": "Tarama türleri",
+          "href": "/education/lessons/postgresql/module-11/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: VACUUM",
+          "description": "VACUUM komutu",
+          "href": "/education/lessons/postgresql/module-11/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: ANALYZE",
+          "description": "İstatistik güncelleme",
+          "href": "/education/lessons/postgresql/module-11/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: REINDEX",
+          "description": "Index yeniden oluşturma",
+          "href": "/education/lessons/postgresql/module-11/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Query Optimization",
+          "description": "Sorgu optimizasyonu",
+          "href": "/education/lessons/postgresql/module-11/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Connection Pooling",
+          "description": "Bağlantı havuzlama",
+          "href": "/education/lessons/postgresql/module-11/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Partitioning",
+          "description": "Tablo bölümleme",
+          "href": "/education/lessons/postgresql/module-11/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Performance Monitoring",
+          "description": "Performans izleme",
+          "href": "/education/lessons/postgresql/module-11/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Performance Best Practices",
+          "description": "Performans optimizasyon en iyi uygulamaları",
+          "href": "/education/lessons/postgresql/module-11/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/postgresql/module-11/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-12",
+      "title": "Module 12: Backup ve Recovery Testi",
+      "summary": "PostgreSQL backup stratejileri, pg_dump, pg_restore, continuous archiving, point-in-time recovery ve backup best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Backup stratejilerini öğrenmek",
+        "pg_dump kullanmayı öğrenmek",
+        "pg_restore kullanmayı öğrenmek",
+        "Point-in-time recovery yapmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Backup Stratejileri",
+          "description": "Yedekleme yaklaşımları",
+          "href": "/education/lessons/postgresql/module-12/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: pg_dump",
+          "description": "pg_dump kullanımı",
+          "href": "/education/lessons/postgresql/module-12/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: pg_dumpall",
+          "description": "Tüm veritabanı yedekleme",
+          "href": "/education/lessons/postgresql/module-12/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: pg_restore",
+          "description": "Yedekten geri yükleme",
+          "href": "/education/lessons/postgresql/module-12/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: SQL Dump Format",
+          "description": "SQL format yedek",
+          "href": "/education/lessons/postgresql/module-12/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Custom Format",
+          "description": "Özel format yedek",
+          "href": "/education/lessons/postgresql/module-12/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Continuous Archiving",
+          "description": "Sürekli arşivleme",
+          "href": "/education/lessons/postgresql/module-12/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: WAL Archiving",
+          "description": "Write-Ahead Log arşivleme",
+          "href": "/education/lessons/postgresql/module-12/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Point-in-Time Recovery",
+          "description": "Belirli nokta geri yükleme",
+          "href": "/education/lessons/postgresql/module-12/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Base Backup",
+          "description": "Temel yedek",
+          "href": "/education/lessons/postgresql/module-12/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Recovery Configuration",
+          "description": "Geri yükleme yapılandırması",
+          "href": "/education/lessons/postgresql/module-12/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Backup Automation",
+          "description": "Otomatik yedekleme",
+          "href": "/education/lessons/postgresql/module-12/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Backup Best Practices",
+          "description": "Yedekleme en iyi uygulamaları",
+          "href": "/education/lessons/postgresql/module-12/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Disaster Recovery",
+          "description": "Felaket kurtarma",
+          "href": "/education/lessons/postgresql/module-12/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/postgresql/module-12/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-13",
+      "title": "Module 13: Security ve Authentication Testi",
+      "summary": "PostgreSQL güvenlik, authentication methods, SSL/TLS, encryption, row-level security ve security best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Güvenlik kavramını anlamak",
+        "Authentication methods kullanmayı öğrenmek",
+        "SSL/TLS yapılandırmasını öğrenmek",
+        "Row-level security uygulamayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Security Temelleri",
+          "description": "Güvenlik kavramı",
+          "href": "/education/lessons/postgresql/module-13/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Authentication Methods",
+          "description": "Kimlik doğrulama yöntemleri",
+          "href": "/education/lessons/postgresql/module-13/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Password Authentication",
+          "description": "Şifre tabanlı kimlik doğrulama",
+          "href": "/education/lessons/postgresql/module-13/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Certificate Authentication",
+          "description": "Sertifika tabanlı kimlik doğrulama",
+          "href": "/education/lessons/postgresql/module-13/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: SSL/TLS Configuration",
+          "description": "SSL/TLS yapılandırması",
+          "href": "/education/lessons/postgresql/module-13/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Encryption at Rest",
+          "description": "Beklemede şifreleme",
+          "href": "/education/lessons/postgresql/module-13/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Encryption in Transit",
+          "description": "Aktarımda şifreleme",
+          "href": "/education/lessons/postgresql/module-13/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Row-Level Security",
+          "description": "Satır seviyesi güvenlik",
+          "href": "/education/lessons/postgresql/module-13/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Column-Level Security",
+          "description": "Sütun seviyesi güvenlik",
+          "href": "/education/lessons/postgresql/module-13/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Audit Logging",
+          "description": "Denetim loglama",
+          "href": "/education/lessons/postgresql/module-13/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: SQL Injection Prevention",
+          "description": "SQL injection önleme",
+          "href": "/education/lessons/postgresql/module-13/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Access Control",
+          "description": "Erişim kontrolü",
+          "href": "/education/lessons/postgresql/module-13/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Security Best Practices",
+          "description": "Güvenlik en iyi uygulamaları",
+          "href": "/education/lessons/postgresql/module-13/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Security Auditing",
+          "description": "Güvenlik denetimi",
+          "href": "/education/lessons/postgresql/module-13/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/postgresql/module-13/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-14",
+      "title": "Module 14: Advanced Features Testi",
+      "summary": "PostgreSQL gelişmiş özellikler, JSON/JSONB, full-text search, extensions, foreign data wrappers ve advanced SQL features.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Gelişmiş özellikleri öğrenmek",
+        "JSON/JSONB kullanmayı öğrenmek",
+        "Full-text search yapmayı öğrenmek",
+        "Extensions kullanmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: JSON ve JSONB Types",
+          "description": "JSON veri tipleri",
+          "href": "/education/lessons/postgresql/module-14/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: JSON Functions",
+          "description": "JSON fonksiyonları",
+          "href": "/education/lessons/postgresql/module-14/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: JSONB Indexing",
+          "description": "JSONB index'leme",
+          "href": "/education/lessons/postgresql/module-14/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Full-Text Search",
+          "description": "Tam metin arama",
+          "href": "/education/lessons/postgresql/module-14/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: tsvector ve tsquery",
+          "description": "Arama veri tipleri",
+          "href": "/education/lessons/postgresql/module-14/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: GIN Indexes for Full-Text",
+          "description": "Tam metin arama index'leri",
+          "href": "/education/lessons/postgresql/module-14/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Extensions",
+          "description": "PostgreSQL eklentileri",
+          "href": "/education/lessons/postgresql/module-14/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Popular Extensions",
+          "description": "Yaygın eklentiler",
+          "href": "/education/lessons/postgresql/module-14/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Foreign Data Wrappers",
+          "description": "Dış veri sarmalayıcıları",
+          "href": "/education/lessons/postgresql/module-14/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Array Operations",
+          "description": "Dizi işlemleri",
+          "href": "/education/lessons/postgresql/module-14/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: HStore",
+          "description": "Anahtar-değer depolama",
+          "href": "/education/lessons/postgresql/module-14/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: PostGIS",
+          "description": "Coğrafi veri eklentisi",
+          "href": "/education/lessons/postgresql/module-14/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Advanced SQL Features",
+          "description": "Gelişmiş SQL özellikleri",
+          "href": "/education/lessons/postgresql/module-14/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Feature Best Practices",
+          "description": "Özellik kullanım en iyi uygulamaları",
+          "href": "/education/lessons/postgresql/module-14/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/postgresql/module-14/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-15",
+      "title": "Module 15: Best Practices ve Capstone Testi",
+      "summary": "PostgreSQL geliştirmede en iyi uygulamalar, kod kalitesi, güvenlik, performans ve kapsamlı bir veritabanı projesi geliştirme.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Kod kalitesi standartlarını öğrenmek",
+        "Güvenlik best practices uygulamak",
+        "Performans optimizasyon tekniklerini öğrenmek",
+        "Kapsamlı bir veritabanı projesi geliştirmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Code Quality Standards",
+          "description": "Kod kalitesi standartları",
+          "href": "/education/lessons/postgresql/module-15/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Naming Conventions",
+          "description": "İsimlendirme kuralları",
+          "href": "/education/lessons/postgresql/module-15/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Database Design Best Practices",
+          "description": "Veritabanı tasarım en iyi uygulamaları",
+          "href": "/education/lessons/postgresql/module-15/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Proje Planlama",
+          "description": "Proje gereksinimleri",
+          "href": "/education/lessons/postgresql/module-15/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Database Schema Design",
+          "description": "Veritabanı şema tasarımı",
+          "href": "/education/lessons/postgresql/module-15/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Data Modeling",
+          "description": "Veri modelleme",
+          "href": "/education/lessons/postgresql/module-15/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Index Strategy",
+          "description": "Index stratejisi",
+          "href": "/education/lessons/postgresql/module-15/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Function Implementation",
+          "description": "Fonksiyon implementasyonu",
+          "href": "/education/lessons/postgresql/module-15/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Trigger Implementation",
+          "description": "Trigger implementasyonu",
+          "href": "/education/lessons/postgresql/module-15/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Security Implementation",
+          "description": "Güvenlik implementasyonu",
+          "href": "/education/lessons/postgresql/module-15/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Performance Optimization",
+          "description": "Performans optimizasyonu",
+          "href": "/education/lessons/postgresql/module-15/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Backup Strategy",
+          "description": "Yedekleme stratejisi",
+          "href": "/education/lessons/postgresql/module-15/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Documentation",
+          "description": "Proje dokümantasyonu",
+          "href": "/education/lessons/postgresql/module-15/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Project Review",
+          "description": "Proje incelemesi",
+          "href": "/education/lessons/postgresql/module-15/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Project Presentation",
+          "description": "Proje sunumu",
+          "href": "/education/lessons/postgresql/module-15/lesson-15"
+        }
+      ]
+    }
+  ]
+}

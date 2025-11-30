@@ -182,20 +182,20 @@ export default function Home() {
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto mt-12">
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-display font-bold text-blue-600 dark:text-blue-400 mb-1">18+</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Eğitim Modülü</div>
+              <div className="text-3xl md:text-4xl font-display font-bold text-blue-600 dark:text-blue-400 mb-1">24+</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">Eğitim Modülü</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-display font-bold text-indigo-600 dark:text-indigo-400 mb-1">100+</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Ders İçeriği</div>
+              <div className="text-3xl md:text-4xl font-display font-bold text-indigo-600 dark:text-indigo-400 mb-1">500+</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">Ders İçeriği</div>
             </div>
             <div className="text-center">
               <div className="text-3xl md:text-4xl font-display font-bold text-cyan-600 dark:text-cyan-400 mb-1">7/24</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Erişim</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">Erişim</div>
             </div>
             <div className="text-center">
               <div className="text-3xl md:text-4xl font-display font-bold text-green-600 dark:text-green-400 mb-1">AI</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Destekli Öğrenme</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">Destekli Öğrenme</div>
             </div>
           </div>
         </div>
@@ -409,14 +409,13 @@ export default function Home() {
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {[
-            { name: "Backend Geliştirme", icon: "⚙️", courses: 3, desc: ".NET Core, Node.js, Java ile backend geliştirme ve API oluşturma", color: "from-blue-500 to-cyan-500" },
-            { name: "Frontend Geliştirme", icon: "🎨", courses: 3, desc: "React, Angular, Next.js ile modern web uygulamaları geliştirme", color: "from-indigo-500 to-purple-500" },
-            { name: "Mobil Geliştirme", icon: "📱", courses: 1, desc: "Flutter ile cross-platform mobil uygulama geliştirme", color: "from-green-500 to-emerald-500" },
-            { name: "Veritabanı", icon: "💾", courses: 1, desc: "MSSQL ile veritabanı yönetimi, sorgulama ve optimizasyon", color: "from-orange-500 to-red-500" },
+            { name: "Backend Geliştirme", icon: "⚙️", courses: 8, desc: ".NET Core, Java, Node.js, Python, Go, Kotlin, Spring Boot, NestJS ile backend geliştirme", color: "from-blue-500 to-cyan-500" },
+            { name: "Frontend Geliştirme", icon: "🎨", courses: 5, desc: "React, Angular, Next.js, Vue.js, TypeScript ile modern web uygulamaları geliştirme", color: "from-indigo-500 to-purple-500" },
+            { name: "Mobil Geliştirme", icon: "📱", courses: 2, desc: "Flutter ve Swift ile cross-platform ve native mobil uygulama geliştirme", color: "from-green-500 to-emerald-500" },
+            { name: "Veritabanı", icon: "💾", courses: 3, desc: "MSSQL, MongoDB, PostgreSQL ile veritabanı yönetimi, sorgulama ve optimizasyon", color: "from-orange-500 to-red-500" },
+            { name: "Cloud & DevOps", icon: "☁️", courses: 3, desc: "AWS, Azure, Docker & Kubernetes ile bulut altyapısı ve DevOps pratikleri", color: "from-cyan-500 to-blue-500" },
             { name: "Güvenlik", icon: "🔐", courses: 2, desc: "Ethical Hacking, OWASP güvenlik standartları ve web uygulama güvenliği", color: "from-purple-500 to-pink-500" },
-            { name: "DevOps", icon: "🚀", courses: 1, desc: "Docker, Kubernetes ile containerization ve orchestration", color: "from-cyan-500 to-blue-500" },
             { name: "AI & Machine Learning", icon: "🤖", courses: 1, desc: "AI for Developers ile yapay zeka ve makine öğrenmesi temelleri", color: "from-teal-500 to-green-500" },
-            { name: ".NET Core", icon: "🔷", courses: 18, desc: ".NET Core ekosistemi, ASP.NET Core, API geliştirme ve daha fazlası", color: "from-pink-500 to-rose-500" },
           ].map((category, index) => (
             <Card
               key={index}

@@ -1,0 +1,1577 @@
+{
+  "overview": {
+    "description": "Microsoft Azure, dünyanın önde gelen bulut platformlarından biridir. Bu kapsamlı kurs ile Azure'un temellerinden ileri seviye konularına kadar her şeyi öğreneceksiniz. Bulut altyapısı, compute, storage, database, networking, güvenlik ve DevOps konularında uzmanlaşacaksınız.",
+    "estimatedDurationMinutes": 6750
+  },
+  "learningObjectives": [
+    "Azure'un temel kavramlarını ve mimarisini anlamak",
+    "App Service, Functions, Storage gibi temel Azure servislerini kullanmak",
+    "Azure Active Directory ile kimlik ve erişim yönetimi yapmak",
+    "Virtual Network ile network yapılandırması yapmak",
+    "Azure Functions ile serverless uygulamalar geliştirmek",
+    "ARM Templates ile Infrastructure as Code uygulamak",
+    "Azure DevOps ile CI/CD pipeline'ları kurmak ve monitoring yapmak"
+  ],
+  "modules": [
+    {
+      "id": "module-01",
+      "title": "Module 1: Azure Tanımı ve Temelleri Testi",
+      "summary": "Azure'un ne olduğu, tarihçesi, avantajları, bulut computing kavramları ve Azure global infrastructure.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Azure'un ne olduğunu ve neden kullanıldığını anlamak",
+        "Bulut computing kavramını öğrenmek",
+        "Azure'un avantajlarını ve kullanım alanlarını keşfetmek",
+        "Azure global infrastructure'ı anlamak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Azure Nedir?",
+          "description": "Azure'un temel tanımı ve genel bakış",
+          "href": "/education/lessons/azure/module-01/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Bulut Computing Nedir?",
+          "description": "Cloud computing kavramı",
+          "href": "/education/lessons/azure/module-01/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Azure'un Tarihçesi",
+          "description": "Azure'un ortaya çıkışı ve gelişimi",
+          "href": "/education/lessons/azure/module-01/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: IaaS, PaaS, SaaS",
+          "description": "Bulut servis modelleri",
+          "href": "/education/lessons/azure/module-01/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Azure'un Avantajları",
+          "description": "Ölçeklenebilirlik, maliyet, güvenlik",
+          "href": "/education/lessons/azure/module-01/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Azure Kullanım Alanları",
+          "description": "Web hosting, big data, AI/ML",
+          "href": "/education/lessons/azure/module-01/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Azure Global Infrastructure",
+          "description": "Regions, Availability Zones, Edge Locations",
+          "href": "/education/lessons/azure/module-01/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Azure vs AWS vs GCP",
+          "description": "Bulut sağlayıcıları karşılaştırması",
+          "href": "/education/lessons/azure/module-01/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Azure Pricing Model",
+          "description": "Fiyatlandırma modelleri ve maliyet yönetimi",
+          "href": "/education/lessons/azure/module-01/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Azure Free Tier",
+          "description": "Ücretsiz servisler ve limitler",
+          "href": "/education/lessons/azure/module-01/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Azure Portal'a Giriş",
+          "description": "Azure Portal kullanımı",
+          "href": "/education/lessons/azure/module-01/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Azure CLI ve PowerShell",
+          "description": "Komut satırı araçları",
+          "href": "/education/lessons/azure/module-01/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Azure Resource Manager",
+          "description": "ARM mimarisi ve kaynak yönetimi",
+          "href": "/education/lessons/azure/module-01/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Azure Service Categories",
+          "description": "Compute, Storage, Database, Networking",
+          "href": "/education/lessons/azure/module-01/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Değerlendirme",
+          "description": "Modül kapsamında öğrenilenlerin özeti",
+          "href": "/education/lessons/azure/module-01/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-02",
+      "title": "Module 2: Azure App Service Testi",
+      "summary": "Azure App Service ile web uygulamaları, API'ler ve mobil backend'ler geliştirme ve deploy etme.",
+      "durationMinutes": 450,
+      "objectives": [
+        "App Service'in ne olduğunu ve nasıl kullanıldığını anlamak",
+        "Web App oluşturma ve deploy etme",
+        "App Service planları ve pricing",
+        "Continuous Deployment yapılandırması"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: App Service Nedir?",
+          "description": "App Service tanımı ve özellikleri",
+          "href": "/education/lessons/azure/module-02/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: App Service Planları",
+          "description": "Plan türleri ve seçimi",
+          "href": "/education/lessons/azure/module-02/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Web App Oluşturma",
+          "description": "Portal üzerinden web app oluşturma",
+          "href": "/education/lessons/azure/module-02/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Deployment Options",
+          "description": "Deploy yöntemleri",
+          "href": "/education/lessons/azure/module-02/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Continuous Deployment",
+          "description": "GitHub, Azure DevOps entegrasyonu",
+          "href": "/education/lessons/azure/module-02/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Application Settings",
+          "description": "App settings ve connection strings",
+          "href": "/education/lessons/azure/module-02/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Custom Domains ve SSL",
+          "description": "Domain yapılandırması",
+          "href": "/education/lessons/azure/module-02/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Scaling ve Performance",
+          "description": "Scale up/down ve auto-scaling",
+          "href": "/education/lessons/azure/module-02/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Deployment Slots",
+          "description": "Staging ve production slots",
+          "href": "/education/lessons/azure/module-02/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: App Service Logs",
+          "description": "Logging ve monitoring",
+          "href": "/education/lessons/azure/module-02/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: App Service Backup",
+          "description": "Backup ve restore işlemleri",
+          "href": "/education/lessons/azure/module-02/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: App Service Authentication",
+          "description": "Built-in authentication",
+          "href": "/education/lessons/azure/module-02/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: API Apps ve Mobile Apps",
+          "description": "API ve mobil backend",
+          "href": "/education/lessons/azure/module-02/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: App Service Best Practices",
+          "description": "En iyi uygulamalar",
+          "href": "/education/lessons/azure/module-02/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Değerlendirme",
+          "description": "Modül kapsamında öğrenilenlerin özeti",
+          "href": "/education/lessons/azure/module-02/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-03",
+      "title": "Module 3: Azure Functions Testi",
+      "summary": "Azure Functions ile serverless uygulamalar geliştirme, event-driven architecture ve mikroservisler.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Azure Functions'ın ne olduğunu anlamak",
+        "Function App oluşturma ve yapılandırma",
+        "Triggers ve bindings kullanımı",
+        "Serverless architecture tasarımı"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Azure Functions Nedir?",
+          "description": "Serverless computing ve Functions",
+          "href": "/education/lessons/azure/module-03/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Function App Oluşturma",
+          "description": "Portal ve CLI ile oluşturma",
+          "href": "/education/lessons/azure/module-03/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: HTTP Trigger Functions",
+          "description": "HTTP trigger ile API oluşturma",
+          "href": "/education/lessons/azure/module-03/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Timer Trigger Functions",
+          "description": "Zamanlanmış görevler",
+          "href": "/education/lessons/azure/module-03/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Blob Storage Trigger",
+          "description": "Blob events ile tetikleme",
+          "href": "/education/lessons/azure/module-03/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Queue Trigger Functions",
+          "description": "Queue messages ile işleme",
+          "href": "/education/lessons/azure/module-03/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Cosmos DB Trigger",
+          "description": "Database change feed",
+          "href": "/education/lessons/azure/module-03/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Input ve Output Bindings",
+          "description": "Binding kavramı ve kullanımı",
+          "href": "/education/lessons/azure/module-03/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Function App Settings",
+          "description": "Configuration ve environment variables",
+          "href": "/education/lessons/azure/module-03/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Durable Functions",
+          "description": "Orchestration ve state management",
+          "href": "/education/lessons/azure/module-03/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Function Monitoring",
+          "description": "Application Insights entegrasyonu",
+          "href": "/education/lessons/azure/module-03/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Function Pricing",
+          "description": "Consumption vs Premium plan",
+          "href": "/education/lessons/azure/module-03/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Function Security",
+          "description": "Authentication ve authorization",
+          "href": "/education/lessons/azure/module-03/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Function Best Practices",
+          "description": "Performance ve maliyet optimizasyonu",
+          "href": "/education/lessons/azure/module-03/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Değerlendirme",
+          "description": "Modül kapsamında öğrenilenlerin özeti",
+          "href": "/education/lessons/azure/module-03/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-04",
+      "title": "Module 4: Azure Storage Accounts Testi",
+      "summary": "Azure Storage ile blob, file, queue ve table storage kullanımı, data management ve backup stratejileri.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Azure Storage'un ne olduğunu anlamak",
+        "Storage Account oluşturma ve yapılandırma",
+        "Blob, File, Queue, Table storage kullanımı",
+        "Storage security ve performance"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Azure Storage Nedir?",
+          "description": "Storage servisleri genel bakış",
+          "href": "/education/lessons/azure/module-04/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Storage Account Oluşturma",
+          "description": "Account türleri ve yapılandırma",
+          "href": "/education/lessons/azure/module-04/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Blob Storage Temelleri",
+          "description": "Blob storage kavramı",
+          "href": "/education/lessons/azure/module-04/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Blob Containers",
+          "description": "Container oluşturma ve yönetimi",
+          "href": "/education/lessons/azure/module-04/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Blob Types (Block, Page, Append)",
+          "description": "Blob türleri ve kullanım alanları",
+          "href": "/education/lessons/azure/module-04/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: File Storage",
+          "description": "Azure Files ve SMB protokolü",
+          "href": "/education/lessons/azure/module-04/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Queue Storage",
+          "description": "Message queue yönetimi",
+          "href": "/education/lessons/azure/module-04/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Table Storage",
+          "description": "NoSQL table storage",
+          "href": "/education/lessons/azure/module-04/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Storage Access Keys",
+          "description": "Authentication ve access control",
+          "href": "/education/lessons/azure/module-04/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Shared Access Signatures (SAS)",
+          "description": "Güvenli erişim token'ları",
+          "href": "/education/lessons/azure/module-04/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Storage Lifecycle Management",
+          "description": "Data tiering ve archiving",
+          "href": "/education/lessons/azure/module-04/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Storage Replication",
+          "description": "LRS, GRS, ZRS, RA-GRS",
+          "href": "/education/lessons/azure/module-04/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Storage Performance",
+          "description": "Standard vs Premium storage",
+          "href": "/education/lessons/azure/module-04/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Storage Security",
+          "description": "Encryption ve network security",
+          "href": "/education/lessons/azure/module-04/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Değerlendirme",
+          "description": "Modül kapsamında öğrenilenlerin özeti",
+          "href": "/education/lessons/azure/module-04/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-05",
+      "title": "Module 5: Azure SQL Database Testi",
+      "summary": "Azure SQL Database ile managed relational database servisleri, migration, scaling ve performance optimization.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Azure SQL Database'in ne olduğunu anlamak",
+        "SQL Database oluşturma ve yapılandırma",
+        "Migration stratejileri",
+        "Performance tuning ve optimization"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Azure SQL Database Nedir?",
+          "description": "Managed database servisi",
+          "href": "/education/lessons/azure/module-05/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: SQL Database Oluşturma",
+          "description": "Portal ve CLI ile oluşturma",
+          "href": "/education/lessons/azure/module-05/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Database Service Tiers",
+          "description": "DTU ve vCore modelleri",
+          "href": "/education/lessons/azure/module-05/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Elastic Pools",
+          "description": "Resource sharing ve cost optimization",
+          "href": "/education/lessons/azure/module-05/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Database Migration",
+          "description": "On-premises'den Azure'a migration",
+          "href": "/education/lessons/azure/module-05/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Connection Strings",
+          "description": "Application connection yapılandırması",
+          "href": "/education/lessons/azure/module-05/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Firewall Rules",
+          "description": "Network security ve access control",
+          "href": "/education/lessons/azure/module-05/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Database Backup",
+          "description": "Automated backups ve restore",
+          "href": "/education/lessons/azure/module-05/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Point-in-Time Restore",
+          "description": "Time-based restore işlemleri",
+          "href": "/education/lessons/azure/module-05/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Geo-Replication",
+          "description": "Multi-region replication",
+          "href": "/education/lessons/azure/module-05/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Query Performance Insights",
+          "description": "Performance monitoring ve optimization",
+          "href": "/education/lessons/azure/module-05/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Automatic Tuning",
+          "description": "AI-powered performance optimization",
+          "href": "/education/lessons/azure/module-05/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Database Security",
+          "description": "Encryption, auditing, threat detection",
+          "href": "/education/lessons/azure/module-05/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: SQL Database Best Practices",
+          "description": "Design patterns ve optimization",
+          "href": "/education/lessons/azure/module-05/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Değerlendirme",
+          "description": "Modül kapsamında öğrenilenlerin özeti",
+          "href": "/education/lessons/azure/module-05/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-06",
+      "title": "Module 6: Azure Cosmos DB Testi",
+      "summary": "Azure Cosmos DB ile globally distributed NoSQL database, multi-model support ve high availability.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Cosmos DB'nin ne olduğunu anlamak",
+        "Cosmos DB account ve database oluşturma",
+        "API seçimi (SQL, MongoDB, Cassandra, etc.)",
+        "Global distribution ve consistency"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Cosmos DB Nedir?",
+          "description": "Globally distributed NoSQL database",
+          "href": "/education/lessons/azure/module-06/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Cosmos DB Account Oluşturma",
+          "description": "Account yapılandırması",
+          "href": "/education/lessons/azure/module-06/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: API Models",
+          "description": "SQL, MongoDB, Cassandra, Gremlin",
+          "href": "/education/lessons/azure/module-06/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Database ve Container Oluşturma",
+          "description": "Data model yapısı",
+          "href": "/education/lessons/azure/module-06/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Request Units (RU)",
+          "description": "Throughput ve pricing model",
+          "href": "/education/lessons/azure/module-06/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Partition Keys",
+          "description": "Data partitioning stratejileri",
+          "href": "/education/lessons/azure/module-06/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Consistency Levels",
+          "description": "Strong, Bounded, Session, Eventual",
+          "href": "/education/lessons/azure/module-06/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Global Distribution",
+          "description": "Multi-region deployment",
+          "href": "/education/lessons/azure/module-06/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Cosmos DB Queries",
+          "description": "SQL API queries",
+          "href": "/education/lessons/azure/module-06/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Indexing Policies",
+          "description": "Automatic ve custom indexing",
+          "href": "/education/lessons/azure/module-06/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Change Feed",
+          "description": "Real-time data streaming",
+          "href": "/education/lessons/azure/module-06/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Cosmos DB Security",
+          "description": "Encryption, firewall, access control",
+          "href": "/education/lessons/azure/module-06/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Performance Optimization",
+          "description": "RU optimization ve best practices",
+          "href": "/education/lessons/azure/module-06/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Cosmos DB Migration",
+          "description": "Data migration tools",
+          "href": "/education/lessons/azure/module-06/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Değerlendirme",
+          "description": "Modül kapsamında öğrenilenlerin özeti",
+          "href": "/education/lessons/azure/module-06/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-07",
+      "title": "Module 7: Azure Virtual Network Testi",
+      "summary": "Azure Virtual Network ile network yapılandırması, subnets, network security groups ve connectivity.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Virtual Network'un ne olduğunu anlamak",
+        "VNet oluşturma ve yapılandırma",
+        "Subnets, NSGs ve routing",
+        "Site-to-Site ve Point-to-Site VPN"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Virtual Network Nedir?",
+          "description": "Network isolation ve segmentation",
+          "href": "/education/lessons/azure/module-07/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: VNet Oluşturma",
+          "description": "Address space yapılandırması",
+          "href": "/education/lessons/azure/module-07/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Subnets",
+          "description": "Subnet design ve yönetimi",
+          "href": "/education/lessons/azure/module-07/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Network Security Groups (NSG)",
+          "description": "Firewall rules ve security",
+          "href": "/education/lessons/azure/module-07/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Application Security Groups",
+          "description": "ASG ile security management",
+          "href": "/education/lessons/azure/module-07/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: VNet Peering",
+          "description": "VNet'ler arası bağlantı",
+          "href": "/education/lessons/azure/module-07/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: User Defined Routes (UDR)",
+          "description": "Custom routing tables",
+          "href": "/education/lessons/azure/module-07/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: VPN Gateway",
+          "description": "Site-to-Site VPN",
+          "href": "/education/lessons/azure/module-07/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Point-to-Site VPN",
+          "description": "Client-to-VNet connection",
+          "href": "/education/lessons/azure/module-07/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: ExpressRoute",
+          "description": "Private connection to Azure",
+          "href": "/education/lessons/azure/module-07/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Load Balancer",
+          "description": "Traffic distribution",
+          "href": "/education/lessons/azure/module-07/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Application Gateway",
+          "description": "Layer 7 load balancing",
+          "href": "/education/lessons/azure/module-07/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Network Watcher",
+          "description": "Network monitoring ve diagnostics",
+          "href": "/education/lessons/azure/module-07/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Network Best Practices",
+          "description": "Design patterns ve security",
+          "href": "/education/lessons/azure/module-07/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Değerlendirme",
+          "description": "Modül kapsamında öğrenilenlerin özeti",
+          "href": "/education/lessons/azure/module-07/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-08",
+      "title": "Module 8: Azure Active Directory Testi",
+      "summary": "Azure AD ile identity ve access management, authentication, authorization ve single sign-on.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Azure AD'nin ne olduğunu anlamak",
+        "User ve group yönetimi",
+        "Application registration ve SSO",
+        "Conditional Access policies"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Azure AD Nedir?",
+          "description": "Identity and access management",
+          "href": "/education/lessons/azure/module-08/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Azure AD Tenant",
+          "description": "Directory yapısı",
+          "href": "/education/lessons/azure/module-08/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: User Management",
+          "description": "User oluşturma ve yönetimi",
+          "href": "/education/lessons/azure/module-08/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Group Management",
+          "description": "Security ve distribution groups",
+          "href": "/education/lessons/azure/module-08/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Application Registration",
+          "description": "App registration ve configuration",
+          "href": "/education/lessons/azure/module-08/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Single Sign-On (SSO)",
+          "description": "SAML ve OAuth 2.0",
+          "href": "/education/lessons/azure/module-08/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Multi-Factor Authentication (MFA)",
+          "description": "Two-factor authentication",
+          "href": "/education/lessons/azure/module-08/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Conditional Access",
+          "description": "Policy-based access control",
+          "href": "/education/lessons/azure/module-08/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Role-Based Access Control (RBAC)",
+          "description": "Azure resource permissions",
+          "href": "/education/lessons/azure/module-08/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Azure AD B2B",
+          "description": "External user collaboration",
+          "href": "/education/lessons/azure/module-08/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Azure AD B2C",
+          "description": "Consumer identity management",
+          "href": "/education/lessons/azure/module-08/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Identity Protection",
+          "description": "Risk detection ve remediation",
+          "href": "/education/lessons/azure/module-08/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Privileged Identity Management",
+          "description": "Just-in-time access",
+          "href": "/education/lessons/azure/module-08/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Azure AD Best Practices",
+          "description": "Security ve governance",
+          "href": "/education/lessons/azure/module-08/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Değerlendirme",
+          "description": "Modül kapsamında öğrenilenlerin özeti",
+          "href": "/education/lessons/azure/module-08/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-09",
+      "title": "Module 9: Azure DevOps Testi",
+      "summary": "Azure DevOps ile CI/CD pipelines, source control, testing, release management ve project management.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Azure DevOps'un ne olduğunu anlamak",
+        "Repositories ve source control",
+        "Build ve release pipelines",
+        "Test management ve reporting"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Azure DevOps Nedir?",
+          "description": "DevOps platform genel bakış",
+          "href": "/education/lessons/azure/module-09/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Azure Repos",
+          "description": "Git repositories",
+          "href": "/education/lessons/azure/module-09/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Azure Pipelines",
+          "description": "CI/CD pipeline'ları",
+          "href": "/education/lessons/azure/module-09/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Build Pipelines",
+          "description": "YAML ve classic pipelines",
+          "href": "/education/lessons/azure/module-09/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Release Pipelines",
+          "description": "Multi-stage deployments",
+          "href": "/education/lessons/azure/module-09/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Azure Artifacts",
+          "description": "Package management",
+          "href": "/education/lessons/azure/module-09/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Azure Test Plans",
+          "description": "Test case management",
+          "href": "/education/lessons/azure/module-09/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Azure Boards",
+          "description": "Work item tracking",
+          "href": "/education/lessons/azure/module-09/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Pipeline Variables",
+          "description": "Configuration ve secrets",
+          "href": "/education/lessons/azure/module-09/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Service Connections",
+          "description": "Azure resource connections",
+          "href": "/education/lessons/azure/module-09/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Deployment Groups",
+          "description": "Target machine groups",
+          "href": "/education/lessons/azure/module-09/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Pipeline Templates",
+          "description": "Reusable pipeline components",
+          "href": "/education/lessons/azure/module-09/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Azure DevOps Best Practices",
+          "description": "CI/CD patterns ve strategies",
+          "href": "/education/lessons/azure/module-09/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Integration with GitHub",
+          "description": "External repository integration",
+          "href": "/education/lessons/azure/module-09/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Değerlendirme",
+          "description": "Modül kapsamında öğrenilenlerin özeti",
+          "href": "/education/lessons/azure/module-09/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-10",
+      "title": "Module 10: ARM Templates Testi",
+      "summary": "Azure Resource Manager Templates ile Infrastructure as Code, template authoring ve deployment automation.",
+      "durationMinutes": 450,
+      "objectives": [
+        "ARM Templates'ın ne olduğunu anlamak",
+        "Template syntax ve structure",
+        "Parameters, variables ve outputs",
+        "Template deployment stratejileri"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: ARM Templates Nedir?",
+          "description": "Infrastructure as Code",
+          "href": "/education/lessons/azure/module-10/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Template Structure",
+          "description": "JSON schema ve format",
+          "href": "/education/lessons/azure/module-10/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Parameters",
+          "description": "Dynamic values ve validation",
+          "href": "/education/lessons/azure/module-10/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Variables",
+          "description": "Reusable values",
+          "href": "/education/lessons/azure/module-10/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Resources",
+          "description": "Resource definitions",
+          "href": "/education/lessons/azure/module-10/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Outputs",
+          "description": "Deployment results",
+          "href": "/education/lessons/azure/module-10/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Template Functions",
+          "description": "Built-in functions",
+          "href": "/education/lessons/azure/module-10/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Linked Templates",
+          "description": "Template composition",
+          "href": "/education/lessons/azure/module-10/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Template Deployment",
+          "description": "Portal, CLI, PowerShell",
+          "href": "/education/lessons/azure/module-10/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Resource Dependencies",
+          "description": "dependsOn ve implicit dependencies",
+          "href": "/education/lessons/azure/module-10/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Template Validation",
+          "description": "Pre-deployment validation",
+          "href": "/education/lessons/azure/module-10/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Template Best Practices",
+          "description": "Design patterns ve organization",
+          "href": "/education/lessons/azure/module-10/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Bicep Language",
+          "description": "Modern template language",
+          "href": "/education/lessons/azure/module-10/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Template Gallery",
+          "description": "Community templates",
+          "href": "/education/lessons/azure/module-10/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Değerlendirme",
+          "description": "Modül kapsamında öğrenilenlerin özeti",
+          "href": "/education/lessons/azure/module-10/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-11",
+      "title": "Module 11: Azure Security Testi",
+      "summary": "Azure Security Center, Key Vault, encryption, threat protection ve security best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Azure security modelini anlamak",
+        "Security Center kullanımı",
+        "Key Vault ile secret management",
+        "Threat detection ve response"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Azure Security Model",
+          "description": "Shared responsibility model",
+          "href": "/education/lessons/azure/module-11/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Azure Security Center",
+          "description": "Unified security management",
+          "href": "/education/lessons/azure/module-11/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Security Recommendations",
+          "description": "Automated security assessments",
+          "href": "/education/lessons/azure/module-11/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Azure Key Vault",
+          "description": "Secrets, keys, certificates",
+          "href": "/education/lessons/azure/module-11/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Key Vault Access Policies",
+          "description": "RBAC ve access control",
+          "href": "/education/lessons/azure/module-11/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Encryption at Rest",
+          "description": "Data encryption",
+          "href": "/education/lessons/azure/module-11/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Encryption in Transit",
+          "description": "TLS/SSL configuration",
+          "href": "/education/lessons/azure/module-11/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Azure Firewall",
+          "description": "Network security",
+          "href": "/education/lessons/azure/module-11/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: DDoS Protection",
+          "description": "Distributed denial of service",
+          "href": "/education/lessons/azure/module-11/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Azure Sentinel",
+          "description": "SIEM ve SOAR",
+          "href": "/education/lessons/azure/module-11/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Threat Detection",
+          "description": "Anomaly detection",
+          "href": "/education/lessons/azure/module-11/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Compliance and Governance",
+          "description": "Regulatory compliance",
+          "href": "/education/lessons/azure/module-11/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Azure Policy",
+          "description": "Governance ve compliance",
+          "href": "/education/lessons/azure/module-11/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Security Best Practices",
+          "description": "Defense in depth",
+          "href": "/education/lessons/azure/module-11/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Değerlendirme",
+          "description": "Modül kapsamında öğrenilenlerin özeti",
+          "href": "/education/lessons/azure/module-11/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-12",
+      "title": "Module 12: Azure Monitoring Testi",
+      "summary": "Azure Monitor, Application Insights, Log Analytics, metrics, alerts ve diagnostics.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Azure monitoring ekosistemini anlamak",
+        "Application Insights kullanımı",
+        "Log Analytics queries",
+        "Alerts ve action groups"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Azure Monitor Nedir?",
+          "description": "Unified monitoring platform",
+          "href": "/education/lessons/azure/module-12/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Application Insights",
+          "description": "Application performance monitoring",
+          "href": "/education/lessons/azure/module-12/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Application Insights Setup",
+          "description": "SDK integration",
+          "href": "/education/lessons/azure/module-12/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Custom Telemetry",
+          "description": "Custom events ve metrics",
+          "href": "/education/lessons/azure/module-12/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Log Analytics Workspace",
+          "description": "Centralized logging",
+          "href": "/education/lessons/azure/module-12/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: KQL Queries",
+          "description": "Kusto Query Language",
+          "href": "/education/lessons/azure/module-12/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Metrics Explorer",
+          "description": "Performance metrics",
+          "href": "/education/lessons/azure/module-12/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Alert Rules",
+          "description": "Condition-based alerts",
+          "href": "/education/lessons/azure/module-12/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Action Groups",
+          "description": "Alert notifications",
+          "href": "/education/lessons/azure/module-12/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Diagnostic Settings",
+          "description": "Resource logging",
+          "href": "/education/lessons/azure/module-12/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Workbooks",
+          "description": "Custom dashboards",
+          "href": "/education/lessons/azure/module-12/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Azure Monitor for VMs",
+          "description": "VM performance monitoring",
+          "href": "/education/lessons/azure/module-12/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Cost Management",
+          "description": "Cost analysis ve optimization",
+          "href": "/education/lessons/azure/module-12/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Monitoring Best Practices",
+          "description": "Observability patterns",
+          "href": "/education/lessons/azure/module-12/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Değerlendirme",
+          "description": "Modül kapsamında öğrenilenlerin özeti",
+          "href": "/education/lessons/azure/module-12/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-13",
+      "title": "Module 13: Azure Cost Management Testi",
+      "summary": "Azure Cost Management ile maliyet analizi, budgeting, cost optimization ve resource tagging.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Azure pricing modelini anlamak",
+        "Cost Management kullanımı",
+        "Budget ve alerts yapılandırması",
+        "Cost optimization stratejileri"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Azure Pricing Model",
+          "description": "Pay-as-you-go, reservations",
+          "href": "/education/lessons/azure/module-13/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Cost Management Overview",
+          "description": "Cost analysis tools",
+          "href": "/education/lessons/azure/module-13/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Cost Analysis",
+          "description": "Spending breakdown",
+          "href": "/education/lessons/azure/module-13/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Budgets",
+          "description": "Budget creation ve tracking",
+          "href": "/education/lessons/azure/module-13/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Cost Alerts",
+          "description": "Spending notifications",
+          "href": "/education/lessons/azure/module-13/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Resource Tagging",
+          "description": "Cost allocation",
+          "href": "/education/lessons/azure/module-13/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Azure Reservations",
+          "description": "Pre-purchase discounts",
+          "href": "/education/lessons/azure/module-13/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Azure Hybrid Benefit",
+          "description": "License optimization",
+          "href": "/education/lessons/azure/module-13/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Spot VMs",
+          "description": "Cost-effective compute",
+          "href": "/education/lessons/azure/module-13/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Right-Sizing",
+          "description": "Resource optimization",
+          "href": "/education/lessons/azure/module-13/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Cost Optimization Recommendations",
+          "description": "Automated suggestions",
+          "href": "/education/lessons/azure/module-13/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Cost Allocation",
+          "description": "Department/project tracking",
+          "href": "/education/lessons/azure/module-13/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Azure Cost Calculator",
+          "description": "Estimation tools",
+          "href": "/education/lessons/azure/module-13/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Cost Management Best Practices",
+          "description": "Cost control strategies",
+          "href": "/education/lessons/azure/module-13/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Değerlendirme",
+          "description": "Modül kapsamında öğrenilenlerin özeti",
+          "href": "/education/lessons/azure/module-13/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-14",
+      "title": "Module 14: Azure Advanced Services Testi",
+      "summary": "Azure Kubernetes Service (AKS), Azure Container Instances, Azure Logic Apps ve Azure Service Bus.",
+      "durationMinutes": 450,
+      "objectives": [
+        "AKS ile container orchestration",
+        "Container Instances kullanımı",
+        "Logic Apps ile workflow automation",
+        "Service Bus ile messaging"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Azure Kubernetes Service (AKS)",
+          "description": "Managed Kubernetes",
+          "href": "/education/lessons/azure/module-14/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: AKS Cluster Oluşturma",
+          "description": "Cluster setup ve configuration",
+          "href": "/education/lessons/azure/module-14/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Container Instances",
+          "description": "Serverless containers",
+          "href": "/education/lessons/azure/module-14/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Azure Logic Apps",
+          "description": "Workflow automation",
+          "href": "/education/lessons/azure/module-14/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Logic App Connectors",
+          "description": "Integration connectors",
+          "href": "/education/lessons/azure/module-14/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Azure Service Bus",
+          "description": "Message queuing",
+          "href": "/education/lessons/azure/module-14/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Service Bus Queues",
+          "description": "Queue messaging",
+          "href": "/education/lessons/azure/module-14/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Service Bus Topics",
+          "description": "Pub/Sub messaging",
+          "href": "/education/lessons/azure/module-14/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Event Grid",
+          "description": "Event-driven architecture",
+          "href": "/education/lessons/azure/module-14/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Azure API Management",
+          "description": "API gateway",
+          "href": "/education/lessons/azure/module-14/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Azure CDN",
+          "description": "Content delivery network",
+          "href": "/education/lessons/azure/module-14/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Azure Search",
+          "description": "Search-as-a-service",
+          "href": "/education/lessons/azure/module-14/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Azure Cognitive Services",
+          "description": "AI/ML services",
+          "href": "/education/lessons/azure/module-14/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Service Integration Patterns",
+          "description": "Architecture patterns",
+          "href": "/education/lessons/azure/module-14/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Değerlendirme",
+          "description": "Modül kapsamında öğrenilenlerin özeti",
+          "href": "/education/lessons/azure/module-14/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-15",
+      "title": "Module 15: Azure Best Practices ve Case Studies Testi",
+      "summary": "Azure best practices, architecture patterns, real-world case studies ve production deployment stratejileri.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Azure best practices'i öğrenmek",
+        "Architecture patterns uygulamak",
+        "Real-world scenarios analiz etmek",
+        "Production deployment planlaması"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Azure Well-Architected Framework",
+          "description": "Architecture best practices",
+          "href": "/education/lessons/azure/module-15/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Reliability Patterns",
+          "description": "High availability design",
+          "href": "/education/lessons/azure/module-15/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Security Patterns",
+          "description": "Defense in depth",
+          "href": "/education/lessons/azure/module-15/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Performance Optimization",
+          "description": "Scalability patterns",
+          "href": "/education/lessons/azure/module-15/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Cost Optimization Patterns",
+          "description": "Cost-effective architectures",
+          "href": "/education/lessons/azure/module-15/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Disaster Recovery",
+          "description": "Business continuity planning",
+          "href": "/education/lessons/azure/module-15/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Multi-Region Deployment",
+          "description": "Global distribution",
+          "href": "/education/lessons/azure/module-15/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Microservices Architecture",
+          "description": "Container-based services",
+          "href": "/education/lessons/azure/module-15/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Serverless Architecture",
+          "description": "Function-based design",
+          "href": "/education/lessons/azure/module-15/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Case Study: E-Commerce Platform",
+          "description": "Real-world implementation",
+          "href": "/education/lessons/azure/module-15/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Case Study: SaaS Application",
+          "description": "Multi-tenant architecture",
+          "href": "/education/lessons/azure/module-15/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Case Study: Data Analytics Platform",
+          "description": "Big data processing",
+          "href": "/education/lessons/azure/module-15/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Migration Strategies",
+          "description": "On-premises to cloud",
+          "href": "/education/lessons/azure/module-15/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Production Deployment Checklist",
+          "description": "Go-live preparation",
+          "href": "/education/lessons/azure/module-15/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Kurs Özeti ve Final Değerlendirme",
+          "description": "Tüm kurs kapsamında öğrenilenlerin özeti",
+          "href": "/education/lessons/azure/module-15/lesson-15"
+        }
+      ]
+    }
+  ]
+}

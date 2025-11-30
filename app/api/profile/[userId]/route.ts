@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { HackathonTeamMemberStatus } from "@prisma/client";
 
 export async function GET(
   request: Request,
@@ -31,11 +32,16 @@ export async function GET(
       badgeCount,
       completedLessons,
       recentBadges,
+      allUserBadges,
       quizAttempts,
       testAttempts,
       liveCodingAttempts,
       bugFixAttempts,
       hackatonAttempts,
+      hackathonMemberships,
+      hackathonSubmissions,
+      monthlyFirstPlaces,
+      freelancerEarnings,
     ] = await Promise.all([
       db.userBadge.count({ where: { userId } }),
       db.lessonCompletion.count({ where: { userId } }),
@@ -48,6 +54,12 @@ export async function GET(
           earnedAt: "desc",
         },
         take: 3,
+      }),
+      db.userBadge.findMany({
+        where: { userId },
+        include: {
+          badge: true,
+        },
       }),
       db.quizAttempt.findMany({
         where: { userId },
@@ -112,6 +124,55 @@ export async function GET(
               },
             },
           },
+        },
+      }),
+      db.hackathonTeamMember.findMany({
+        where: {
+          userId,
+          status: HackathonTeamMemberStatus.active,
+        },
+        select: {
+          team: {
+            select: {
+              hackathonId: true,
+            },
+          },
+        },
+      }),
+      db.hackathonSubmission.findMany({
+        where: {
+          OR: [
+            { userId: userId },
+            {
+              team: {
+                members: {
+                  some: {
+                    userId: userId,
+                    status: "active",
+                  },
+                },
+              },
+            },
+          ],
+          status: {
+            in: ["winner", "finalist"],
+          },
+        },
+      }),
+      db.leaderboardEntry.findMany({
+        where: {
+          userId: userId,
+          period: "monthly",
+          rank: 1,
+        },
+      }),
+      db.freelancerBid.findMany({
+        where: {
+          userId: userId,
+          status: "accepted",
+        },
+        select: {
+          amount: true,
         },
       }),
     ]);
@@ -180,6 +241,24 @@ export async function GET(
         earnedAt: badge.earnedAt,
       }));
 
+    // Calculate total points from badges
+    const totalPoints = allUserBadges.reduce(
+      (sum: number, userBadge: { badge: { points?: number | null } }) => sum + (userBadge.badge.points || 0),
+      0
+    );
+
+    // Calculate participated hackathons count
+    const distinctHackathonIds = new Set(
+      hackathonMemberships.map((membership: { team: { hackathonId: string } }) => membership.team.hackathonId)
+    );
+    const participatedHackathons = distinctHackathonIds.size;
+
+    // Calculate total earnings
+    const hackathonTotal = hackathonSubmissions.length * 1000; // Placeholder: 1000 TL per win
+    const leaderboardTotal = monthlyFirstPlaces.length * 500; // Placeholder: 500 TL per #1
+    const freelancerTotal = freelancerEarnings.reduce((sum: number, bid: { amount: number | null }) => sum + (bid.amount || 0), 0);
+    const totalEarnings = hackathonTotal + leaderboardTotal + freelancerTotal;
+
     return NextResponse.json({
       user,
       stats: {
@@ -197,6 +276,9 @@ export async function GET(
           bugFix: Math.round(average(bugFixScores)),
           hackaton: Math.round(average(hackatonScores)),
         },
+        totalPoints,
+        participatedHackathons,
+        totalEarnings,
       },
       expertises: Array.from(expertiseSet),
       recentAchievements,

@@ -1,26 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
-import { useEffect, useRef, useState, type KeyboardEvent } from "react";
+import { useEffect, useState } from "react";
 import {
-  MessageSquare,
   AlertCircle,
   Eye,
   CheckCircle,
-  X,
   Edit,
   Save,
   Filter,
-  Sparkles,
   Loader2,
-  Send,
-  Brain,
   ArrowRight,
+  Sparkles,
 } from "lucide-react";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
-import { MessageContent } from "@/app/(dashboard)/education/lessons/_components/MessageContent";
 
 interface WrongQuestion {
   id: string;
@@ -49,11 +44,6 @@ interface Stats {
   understood: number;
 }
 
-interface TutorChatMessage {
-  role: "assistant" | "user";
-  content: string;
-  timestamp: string;
-}
 
 export default function TutorPage() {
   const [wrongQuestions, setWrongQuestions] = useState<WrongQuestion[]>([]);
@@ -68,106 +58,7 @@ export default function TutorPage() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editNotes, setEditNotes] = useState<string>("");
   const [updatingStatusId, setUpdatingStatusId] = useState<string | null>(null);
-  const [chatMessages, setChatMessages] = useState<TutorChatMessage[]>(() => [
-    {
-      role: "assistant",
-      content: "Merhaba! Nasıl yardımcı olabilirim?",
-      timestamp: new Date().toISOString(),
-    },
-  ]);
-  const [chatInput, setChatInput] = useState("");
-  const [chatLoading, setChatLoading] = useState(false);
-  const [chatError, setChatError] = useState<string | null>(null);
-  const [lessonPlan, setLessonPlan] = useState<{
-    recommendedCourses: string[];
-    learningPath: string[];
-    message: string;
-  } | null>(null);
-  const chatEndRef = useRef<HTMLDivElement | null>(null);
 
-  const formatChatTime = (value: string) =>
-    new Date(value).toLocaleTimeString("tr-TR", {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-
-  const handleSendMessage = async () => {
-    if (!chatInput.trim() || chatLoading) {
-      return;
-    }
-
-    const userMessage: TutorChatMessage = {
-      role: "user",
-      content: chatInput.trim(),
-      timestamp: new Date().toISOString(),
-    };
-
-    const pendingMessages = [...chatMessages, userMessage];
-    setChatMessages(pendingMessages);
-    setChatInput("");
-    setChatError(null);
-    setChatLoading(true);
-
-    try {
-      // Yeni smart-teacher endpoint'ini kullan
-      // Sadece son kullanıcı mesajını gönder (conversation history thread'de saklanıyor)
-      const lastUserMessage = userMessage.content;
-      
-      const response = await fetch("/api/ai/smart-teacher", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: lastUserMessage,
-        }),
-      });
-
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error(data.error || "AI yanıtı alınamadı");
-      }
-
-      if (data.reply) {
-        setChatMessages((prev) => [
-          ...prev,
-          {
-            role: "assistant",
-            content: data.reply,
-            timestamp: new Date().toISOString(),
-          },
-        ]);
-      }
-
-      // Context bilgilerini göster (opsiyonel)
-      if (data.context) {
-        // Zayıf konular ve öğrenme ilerlemesi bilgisi mevcut
-        // İsterseniz bunları UI'da gösterebilirsiniz
-      }
-    } catch (error) {
-      console.error("Error sending tutor message:", error);
-      setChatError(
-        error instanceof Error ? error.message : "Mesaj gönderilemedi."
-      );
-    } finally {
-      setChatLoading(false);
-    }
-  };
-
-  const handleChatKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (event.key === "Enter" && !event.shiftKey) {
-      event.preventDefault();
-      handleSendMessage();
-    }
-  };
-
-  useEffect(() => {
-    if (!chatEndRef.current) {
-      return;
-    }
-
-    chatEndRef.current.scrollIntoView({
-      behavior: chatMessages.length > 1 ? "smooth" : "auto",
-    });
-  }, [chatMessages, chatLoading]);
 
   useEffect(() => {
     fetchWrongQuestions();
@@ -393,13 +284,29 @@ export default function TutorPage() {
       </div>
 
       {/* AI Öğretmen Selin ile Öğren Butonu */}
-      <Card variant="elevated" className="border-purple-200/50 dark:border-purple-800/50 bg-gradient-to-br from-purple-50 via-pink-50/50 to-indigo-50 dark:from-purple-900/20 dark:via-pink-900/20 dark:to-indigo-900/20">
+      <Card variant="elevated" className="border-purple-200/50 dark:border-purple-800/50 bg-gradient-to-br from-purple-50 via-pink-50/50 to-indigo-50 dark:from-purple-900/20 dark:via-pink-900/20 dark:to-indigo-900/20 pt-8">
         <CardContent className="p-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div className="flex-1 space-y-2">
               <div className="flex items-center gap-3">
-                <div className="p-3 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 shadow-lg">
-                  <Brain className="h-6 w-6 text-white" />
+                <div className="relative flex-shrink-0">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center shadow-lg ring-4 ring-purple-100 dark:ring-purple-900/30 overflow-hidden">
+                    <img
+                      src="/Photos/AiTeacher/teacher.jpg"
+                      alt="AI Öğretmen Selin"
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        if (target.parentElement) {
+                          target.parentElement.innerHTML = '<svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/></svg>';
+                        }
+                      }}
+                    />
+                  </div>
+                  <div className="absolute -top-1 -right-1 w-5 h-5 bg-yellow-400 rounded-full flex items-center justify-center shadow-md">
+                    <Sparkles className="w-3 h-3 text-yellow-900" />
+                  </div>
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white">
@@ -421,183 +328,6 @@ export default function TutorPage() {
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* AI Chat Section */}
-      <Card variant="elevated">
-        <CardHeader className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-          <div>
-            <CardTitle className="flex items-center gap-2">
-              <MessageSquare className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-              AI Mentor Sohbeti
-            </CardTitle>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              Test performansına göre kişisel öneriler ve çalışma planı alın.
-            </p>
-          </div>
-          {chatLoading && (
-            <div className="flex items-center gap-2 text-sm text-blue-600 dark:text-blue-400">
-              <Loader2 className="h-4 w-4 animate-spin" />
-              Yapay zekâ düşünüyor...
-            </div>
-          )}
-        </CardHeader>
-        <CardContent className="grid gap-6 lg:grid-cols-3">
-          <div className="flex flex-col gap-4 lg:col-span-2">
-            {chatError && (
-              <div className="flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600 dark:border-red-900/50 dark:bg-red-900/20 dark:text-red-300">
-                <AlertCircle className="h-4 w-4 flex-shrink-0" />
-                <span>{chatError}</span>
-              </div>
-            )}
-            <div className="flex-1 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-900/40">
-              <div className="flex h-full min-h-[320px] max-h-[65vh] flex-col gap-4 overflow-y-auto p-4 sm:max-h-[420px]">
-                {chatMessages.length === 0 && !chatLoading && !chatError && (
-                  <div className="flex flex-1 flex-col items-center justify-center text-center text-sm text-gray-500 dark:text-gray-400">
-                    <Sparkles className="mb-3 h-10 w-10 text-blue-500 dark:text-blue-300" />
-                    <p className="font-semibold text-gray-700 dark:text-gray-200">
-                      AI mentorunuzu davet edin
-                    </p>
-                    <p>
-                      Sorularınızı yazın; hangi konularda gelişmeniz gerektiğini birlikte planlayalım.
-                    </p>
-                  </div>
-                )}
-
-                {chatMessages.map((message, index) => (
-                  <div
-                    key={`${message.timestamp}-${index}`}
-                    className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
-                  >
-                    <div
-                      className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm shadow-md transition-all ${
-                        message.role === "user"
-                          ? "bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white"
-                          : "bg-white text-gray-800 dark:bg-gray-900/70 dark:text-gray-100 border border-gray-200 dark:border-gray-700"
-                      }`}
-                    >
-                      {message.role === "assistant" ? (
-                        <MessageContent 
-                          content={message.content} 
-                          isAI={true}
-                          className="text-gray-800 dark:text-gray-100"
-                        />
-                      ) : (
-                        <p className="whitespace-pre-wrap leading-6 text-white/90">{message.content}</p>
-                      )}
-                      <span
-                        className={`mt-2 block text-xs ${
-                          message.role === "user"
-                            ? "text-blue-100/80"
-                            : "text-gray-500 dark:text-gray-400"
-                        }`}
-                      >
-                        {formatChatTime(message.timestamp)}
-                      </span>
-                    </div>
-                  </div>
-                ))}
-
-                {chatLoading && (
-                  <div className="flex justify-start">
-                    <div className="flex items-center gap-2 rounded-2xl border border-gray-200 bg-white px-4 py-2 text-sm text-gray-600 shadow-sm dark:border-gray-700 dark:bg-gray-900/70 dark:text-gray-300">
-                      <Loader2 className="h-4 w-4 animate-spin" />
-                      Yanıt hazırlanıyor...
-                    </div>
-                  </div>
-                )}
-                <div ref={chatEndRef} />
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-3 rounded-xl border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-900/60 sm:flex-row sm:items-end">
-              <textarea
-                value={chatInput}
-                onChange={(event) => setChatInput(event.target.value)}
-                onKeyDown={handleChatKeyDown}
-                placeholder="Örneğin: 'Temel veri yapılarında nasıl ilerlemeliyim?'"
-                rows={chatInput.split("\n").length > 2 ? 3 : 2}
-                className="w-full flex-1 resize-none rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900/80 dark:text-gray-100"
-              />
-              <Button
-                variant="gradient"
-                className="flex w-full items-center justify-center gap-2 sm:w-auto"
-                onClick={handleSendMessage}
-                disabled={chatLoading || !chatInput.trim()}
-              >
-                {chatLoading ? (
-                  <>
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                    Gönderiliyor
-                  </>
-                ) : (
-                  <>
-                    <Send className="h-4 w-4" />
-                    Gönder
-                  </>
-                )}
-              </Button>
-            </div>
-          </div>
-
-          <div className="rounded-xl border border-blue-200 bg-gradient-to-br from-blue-50 via-cyan-50 to-indigo-50 p-5 dark:border-blue-900/50 dark:from-blue-900/20 dark:via-cyan-900/20 dark:to-indigo-900/20">
-            <h4 className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase text-blue-700 dark:text-blue-300">
-              <Sparkles className="h-4 w-4" />
-              Kişisel Öğrenme Planı
-            </h4>
-            <p className="text-sm text-gray-700 dark:text-gray-200">
-              {lessonPlan?.message?.trim()
-                ? lessonPlan.message
-                : "AI analizi tamamlandığında önerilen kurslar ve öğrenme adımları burada görünecek."}
-            </p>
-
-            <div className="mt-4 space-y-4 text-sm">
-              <div>
-                <p className="font-semibold text-gray-800 dark:text-gray-100">
-                  Önerilen Kurslar
-                </p>
-                {lessonPlan && lessonPlan.recommendedCourses?.length > 0 ?
-                  (
-                    <ul className="mt-2 space-y-2 text-gray-700 dark:text-gray-200">
-                      {lessonPlan.recommendedCourses.map((course, index) => (
-                        <li key={`course-${index}`} className="flex items-start gap-2">
-                          <CheckCircle className="mt-0.5 h-4 w-4 text-blue-500 dark:text-blue-300" />
-                          <span>{course}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p className="mt-2 text-gray-500 dark:text-gray-400">
-                      Henüz kurs önerisi yok.
-                    </p>
-                  )}
-              </div>
-
-              <div>
-                <p className="font-semibold text-gray-800 dark:text-gray-100">
-                  Öğrenme Adımları
-                </p>
-                {lessonPlan && lessonPlan.learningPath?.length > 0 ?
-                  (
-                    <ol className="mt-2 space-y-2 text-gray-700 dark:text-gray-200">
-                      {lessonPlan.learningPath.map((step, index) => (
-                        <li key={`step-${index}`} className="flex items-start gap-2">
-                          <span className="mt-0.5 h-5 w-5 flex-shrink-0 rounded-full bg-blue-600 text-center text-xs font-semibold text-white dark:bg-blue-500">
-                            {index + 1}
-                          </span>
-                          <span>{step}</span>
-                        </li>
-                      ))}
-                    </ol>
-                  ) : (
-                    <p className="mt-2 text-gray-500 dark:text-gray-400">
-                      Öncelikli öğrenme adımları burada listelenecek.
-                    </p>
-                  )}
-              </div>
-            </div>
           </div>
         </CardContent>
       </Card>

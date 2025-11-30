@@ -1,0 +1,1578 @@
+{
+  "overview": {
+    "description": "NestJS, TypeScript ile yazılmış, güçlü ve ölçeklenebilir Node.js backend framework'üdür. Angular'dan ilham alan mimarisi ile modern, modüler ve test edilebilir uygulamalar geliştirebilirsiniz. Bu kapsamlı kurs ile NestJS'in temellerinden ileri seviye konularına kadar her şeyi öğreneceksiniz. RESTful API'ler, GraphQL, mikroservisler, WebSocket ve güvenlik konularında uzmanlaşacaksınız.",
+    "estimatedDurationMinutes": 6750
+  },
+  "learningObjectives": [
+    "NestJS framework'ünün temel kavramlarını ve mimarisini anlamak",
+    "TypeScript ile NestJS uygulamaları geliştirmek",
+    "Modules, Controllers, Providers ve Dependency Injection kullanmayı öğrenmek",
+    "RESTful API'ler ve GraphQL API'ler geliştirmek",
+    "Database entegrasyonu ve ORM kullanmayı öğrenmek",
+    "Authentication, Authorization ve güvenlik implement etmek",
+    "Mikroservisler, WebSocket ve real-time uygulamalar geliştirmek",
+    "Testing ve deployment stratejilerini öğrenmek"
+  ],
+  "modules": [
+    {
+      "id": "module-01",
+      "title": "Module 1: NestJS Tanımı ve Temelleri Testi",
+      "summary": "NestJS'in ne olduğu, Node.js ekosistemindeki yeri, Angular'dan ilham alan mimarisi, avantajları ve kullanım alanları.",
+      "durationMinutes": 450,
+      "objectives": [
+        "NestJS'in ne olduğunu ve neden kullanıldığını anlamak",
+        "NestJS'in diğer Node.js framework'lerinden farklarını öğrenmek",
+        "NestJS'in avantajlarını ve kullanım alanlarını keşfetmek",
+        "NestJS ekosistemini tanımak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: NestJS Nedir?",
+          "description": "NestJS'in temel tanımı ve genel bakış",
+          "href": "/education/lessons/nestjs/module-01/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: NestJS vs Express",
+          "description": "NestJS ve Express karşılaştırması",
+          "href": "/education/lessons/nestjs/module-01/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: NestJS'in Tarihçesi",
+          "description": "NestJS'in ortaya çıkışı ve gelişimi",
+          "href": "/education/lessons/nestjs/module-01/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: NestJS'in Avantajları",
+          "description": "TypeScript, modülerlik, test edilebilirlik",
+          "href": "/education/lessons/nestjs/module-01/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: NestJS Kullanım Alanları",
+          "description": "Web uygulamaları, REST API, GraphQL, mikroservisler",
+          "href": "/education/lessons/nestjs/module-01/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: NestJS Ekosistemi",
+          "description": "NestJS CLI, paketler, topluluk",
+          "href": "/education/lessons/nestjs/module-01/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Angular'dan İlham",
+          "description": "Angular mimarisi benzerliği",
+          "href": "/education/lessons/nestjs/module-01/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: TypeScript Desteği",
+          "description": "TypeScript entegrasyonu",
+          "href": "/education/lessons/nestjs/module-01/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: NestJS'in Geleceği",
+          "description": "NestJS roadmap",
+          "href": "/education/lessons/nestjs/module-01/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: NestJS Kurulum Gereksinimleri",
+          "description": "Node.js, npm/yarn gereksinimleri",
+          "href": "/education/lessons/nestjs/module-01/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: NestJS ile Neler Yapılabilir?",
+          "description": "Kullanım senaryoları",
+          "href": "/education/lessons/nestjs/module-01/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: NestJS Performans",
+          "description": "Performans özellikleri",
+          "href": "/education/lessons/nestjs/module-01/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: NestJS Geliştirici Deneyimi",
+          "description": "IDE desteği ve tooling",
+          "href": "/education/lessons/nestjs/module-01/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: NestJS Topluluk",
+          "description": "Açık kaynak topluluğu",
+          "href": "/education/lessons/nestjs/module-01/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Değerlendirme",
+          "description": "Modül kapsamında öğrenilenlerin özeti",
+          "href": "/education/lessons/nestjs/module-01/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-02",
+      "title": "Module 2: NestJS Kurulumu ve Proje Oluşturma Testi",
+      "summary": "NestJS CLI kurulumu, proje oluşturma, proje yapısı, package.json yapılandırması, TypeScript yapılandırması ve ilk NestJS uygulaması.",
+      "durationMinutes": 450,
+      "objectives": [
+        "NestJS CLI kurulumunu öğrenmek",
+        "NestJS projesi oluşturmayı öğrenmek",
+        "Proje yapısını anlamak",
+        "TypeScript yapılandırmasını öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: NestJS CLI Kurulumu",
+          "description": "CLI indirme ve kurulum",
+          "href": "/education/lessons/nestjs/module-02/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Yeni Proje Oluşturma",
+          "description": "nest new komutu",
+          "href": "/education/lessons/nestjs/module-02/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Project Structure",
+          "description": "Proje yapısı",
+          "href": "/education/lessons/nestjs/module-02/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: package.json",
+          "description": "Paket yapılandırması",
+          "href": "/education/lessons/nestjs/module-02/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: TypeScript Configuration",
+          "description": "tsconfig.json",
+          "href": "/education/lessons/nestjs/module-02/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Nest CLI Commands",
+          "description": "CLI komutları",
+          "href": "/education/lessons/nestjs/module-02/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Build ve Run",
+          "description": "Derleme ve çalıştırma",
+          "href": "/education/lessons/nestjs/module-02/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Development Mode",
+          "description": "Geliştirme modu",
+          "href": "/education/lessons/nestjs/module-02/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Hot Reload",
+          "description": "Sıcak yeniden yükleme",
+          "href": "/education/lessons/nestjs/module-02/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Environment Variables",
+          "description": "Ortam değişkenleri",
+          "href": "/education/lessons/nestjs/module-02/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: IDE Setup",
+          "description": "VS Code, WebStorm",
+          "href": "/education/lessons/nestjs/module-02/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: NestJS Best Practices",
+          "description": "Kurulum en iyi uygulamaları",
+          "href": "/education/lessons/nestjs/module-02/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Troubleshooting",
+          "description": "Sorun giderme",
+          "href": "/education/lessons/nestjs/module-02/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Project Templates",
+          "description": "Proje şablonları",
+          "href": "/education/lessons/nestjs/module-02/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/nestjs/module-02/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-03",
+      "title": "Module 3: Modules, Controllers ve Providers Testi",
+      "summary": "NestJS modules, @Module decorator, controllers, @Controller decorator, providers, @Injectable decorator ve dependency injection.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Modules kavramını anlamak",
+        "Controllers kullanmayı öğrenmek",
+        "Providers kullanmayı öğrenmek",
+        "Dependency Injection yapmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Modules",
+          "description": "Modül kavramı",
+          "href": "/education/lessons/nestjs/module-03/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: @Module Decorator",
+          "description": "Modül dekoratörü",
+          "href": "/education/lessons/nestjs/module-03/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: App Module",
+          "description": "Ana modül",
+          "href": "/education/lessons/nestjs/module-03/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Feature Modules",
+          "description": "Özellik modülleri",
+          "href": "/education/lessons/nestjs/module-03/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Controllers",
+          "description": "Kontrolör kavramı",
+          "href": "/education/lessons/nestjs/module-03/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: @Controller Decorator",
+          "description": "Kontrolör dekoratörü",
+          "href": "/education/lessons/nestjs/module-03/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Route Handlers",
+          "description": "Rota işleyicileri",
+          "href": "/education/lessons/nestjs/module-03/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Providers",
+          "description": "Sağlayıcı kavramı",
+          "href": "/education/lessons/nestjs/module-03/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: @Injectable Decorator",
+          "description": "Enjekte edilebilir dekoratör",
+          "href": "/education/lessons/nestjs/module-03/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Dependency Injection",
+          "description": "Bağımlılık enjeksiyonu",
+          "href": "/education/lessons/nestjs/module-03/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Custom Providers",
+          "description": "Özel sağlayıcılar",
+          "href": "/education/lessons/nestjs/module-03/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Module Best Practices",
+          "description": "Modül kullanım en iyi uygulamaları",
+          "href": "/education/lessons/nestjs/module-03/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Common Patterns",
+          "description": "Yaygın desenler",
+          "href": "/education/lessons/nestjs/module-03/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Module Organization",
+          "description": "Modül organizasyonu",
+          "href": "/education/lessons/nestjs/module-03/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/nestjs/module-03/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-04",
+      "title": "Module 4: RESTful APIs Testi",
+      "summary": "RESTful API geliştirme, HTTP methods, route parameters, query parameters, request body, response handling ve status codes.",
+      "durationMinutes": 450,
+      "objectives": [
+        "RESTful API kavramını anlamak",
+        "HTTP methods kullanmayı öğrenmek",
+        "Route parameters kullanmayı öğrenmek",
+        "Request ve response handling yapmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: RESTful API",
+          "description": "REST kavramı",
+          "href": "/education/lessons/nestjs/module-04/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: HTTP Methods",
+          "description": "GET, POST, PUT, DELETE",
+          "href": "/education/lessons/nestjs/module-04/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: @Get Decorator",
+          "description": "GET istekleri",
+          "href": "/education/lessons/nestjs/module-04/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: @Post Decorator",
+          "description": "POST istekleri",
+          "href": "/education/lessons/nestjs/module-04/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: @Put ve @Delete",
+          "description": "PUT ve DELETE istekleri",
+          "href": "/education/lessons/nestjs/module-04/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Route Parameters",
+          "description": "@Param dekoratörü",
+          "href": "/education/lessons/nestjs/module-04/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Query Parameters",
+          "description": "@Query dekoratörü",
+          "href": "/education/lessons/nestjs/module-04/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Request Body",
+          "description": "@Body dekoratörü",
+          "href": "/education/lessons/nestjs/module-04/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: DTOs",
+          "description": "Data Transfer Objects",
+          "href": "/education/lessons/nestjs/module-04/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Response Handling",
+          "description": "Yanıt işleme",
+          "href": "/education/lessons/nestjs/module-04/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Status Codes",
+          "description": "@HttpCode, @HttpStatus",
+          "href": "/education/lessons/nestjs/module-04/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Headers",
+          "description": "@Header dekoratörü",
+          "href": "/education/lessons/nestjs/module-04/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: RESTful API Best Practices",
+          "description": "REST API en iyi uygulamaları",
+          "href": "/education/lessons/nestjs/module-04/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Common API Patterns",
+          "description": "Yaygın API desenleri",
+          "href": "/education/lessons/nestjs/module-04/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/nestjs/module-04/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-05",
+      "title": "Module 5: Database Integration Testi",
+      "summary": "Database entegrasyonu, TypeORM, Prisma, Mongoose, database configuration, entities, repositories ve database operations.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Database entegrasyonu kavramını anlamak",
+        "TypeORM kullanmayı öğrenmek",
+        "Prisma kullanmayı öğrenmek",
+        "Database operations yapmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Database Integration",
+          "description": "Veritabanı entegrasyonu",
+          "href": "/education/lessons/nestjs/module-05/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: TypeORM",
+          "description": "TypeORM ORM",
+          "href": "/education/lessons/nestjs/module-05/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Prisma",
+          "description": "Prisma ORM",
+          "href": "/education/lessons/nestjs/module-05/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Mongoose",
+          "description": "MongoDB için Mongoose",
+          "href": "/education/lessons/nestjs/module-05/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Database Configuration",
+          "description": "Veritabanı yapılandırması",
+          "href": "/education/lessons/nestjs/module-05/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Entities",
+          "description": "Varlık tanımlama",
+          "href": "/education/lessons/nestjs/module-05/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Repositories",
+          "description": "Depo pattern",
+          "href": "/education/lessons/nestjs/module-05/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: CRUD Operations",
+          "description": "CRUD işlemleri",
+          "href": "/education/lessons/nestjs/module-05/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Relationships",
+          "description": "İlişkiler",
+          "href": "/education/lessons/nestjs/module-05/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Migrations",
+          "description": "Veritabanı göçleri",
+          "href": "/education/lessons/nestjs/module-05/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Transactions",
+          "description": "İşlemler",
+          "href": "/education/lessons/nestjs/module-05/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Database Best Practices",
+          "description": "Veritabanı en iyi uygulamaları",
+          "href": "/education/lessons/nestjs/module-05/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Common Database Patterns",
+          "description": "Yaygın veritabanı desenleri",
+          "href": "/education/lessons/nestjs/module-05/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Performance Optimization",
+          "description": "Performans optimizasyonu",
+          "href": "/education/lessons/nestjs/module-05/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/nestjs/module-05/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-06",
+      "title": "Module 6: Validation ve Error Handling Testi",
+      "summary": "Validation, class-validator, DTO validation, pipes, custom pipes, exception filters, global exception handling ve error responses.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Validation kavramını anlamak",
+        "class-validator kullanmayı öğrenmek",
+        "Pipes kullanmayı öğrenmek",
+        "Exception handling yapmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Validation",
+          "description": "Doğrulama kavramı",
+          "href": "/education/lessons/nestjs/module-06/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: class-validator",
+          "description": "Doğrulama kütüphanesi",
+          "href": "/education/lessons/nestjs/module-06/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Validation Decorators",
+          "description": "@IsString, @IsNumber, @IsEmail",
+          "href": "/education/lessons/nestjs/module-06/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: DTO Validation",
+          "description": "DTO doğrulama",
+          "href": "/education/lessons/nestjs/module-06/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Pipes",
+          "description": "Boru kavramı",
+          "href": "/education/lessons/nestjs/module-06/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: ValidationPipe",
+          "description": "Doğrulama borusu",
+          "href": "/education/lessons/nestjs/module-06/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Custom Pipes",
+          "description": "Özel borular",
+          "href": "/education/lessons/nestjs/module-06/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Exception Filters",
+          "description": "İstisna filtreleri",
+          "href": "/education/lessons/nestjs/module-06/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Global Exception Handling",
+          "description": "Global hata yönetimi",
+          "href": "/education/lessons/nestjs/module-06/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Custom Exceptions",
+          "description": "Özel istisnalar",
+          "href": "/education/lessons/nestjs/module-06/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Error Responses",
+          "description": "Hata yanıtları",
+          "href": "/education/lessons/nestjs/module-06/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Validation Best Practices",
+          "description": "Doğrulama en iyi uygulamaları",
+          "href": "/education/lessons/nestjs/module-06/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Common Validation Patterns",
+          "description": "Yaygın doğrulama desenleri",
+          "href": "/education/lessons/nestjs/module-06/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Error Handling Best Practices",
+          "description": "Hata yönetimi en iyi uygulamaları",
+          "href": "/education/lessons/nestjs/module-06/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/nestjs/module-06/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-07",
+      "title": "Module 7: Authentication ve Authorization Testi",
+      "summary": "Authentication, JWT, Passport, guards, decorators, role-based access control, OAuth2 ve security best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Authentication kavramını anlamak",
+        "JWT kullanmayı öğrenmek",
+        "Passport entegrasyonu yapmayı öğrenmek",
+        "Authorization yapılandırmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Authentication",
+          "description": "Kimlik doğrulama",
+          "href": "/education/lessons/nestjs/module-07/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: JWT",
+          "description": "JSON Web Token",
+          "href": "/education/lessons/nestjs/module-07/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Passport",
+          "description": "Passport entegrasyonu",
+          "href": "/education/lessons/nestjs/module-07/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: JWT Strategy",
+          "description": "JWT stratejisi",
+          "href": "/education/lessons/nestjs/module-07/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Guards",
+          "description": "Koruma mekanizması",
+          "href": "/education/lessons/nestjs/module-07/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: @UseGuards",
+          "description": "Koruma kullanımı",
+          "href": "/education/lessons/nestjs/module-07/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Custom Guards",
+          "description": "Özel korumalar",
+          "href": "/education/lessons/nestjs/module-07/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Authorization",
+          "description": "Yetkilendirme",
+          "href": "/education/lessons/nestjs/module-07/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Role-Based Access Control",
+          "description": "Rol tabanlı erişim kontrolü",
+          "href": "/education/lessons/nestjs/module-07/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: @Roles Decorator",
+          "description": "Rol dekoratörü",
+          "href": "/education/lessons/nestjs/module-07/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: OAuth2",
+          "description": "OAuth2 entegrasyonu",
+          "href": "/education/lessons/nestjs/module-07/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Password Hashing",
+          "description": "Şifre hashleme",
+          "href": "/education/lessons/nestjs/module-07/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Security Best Practices",
+          "description": "Güvenlik en iyi uygulamaları",
+          "href": "/education/lessons/nestjs/module-07/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Common Security Patterns",
+          "description": "Yaygın güvenlik desenleri",
+          "href": "/education/lessons/nestjs/module-07/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/nestjs/module-07/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-08",
+      "title": "Module 8: Middleware ve Interceptors Testi",
+      "summary": "Middleware, custom middleware, interceptors, @UseInterceptors, request/response transformation, logging ve performance monitoring.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Middleware kavramını anlamak",
+        "Custom middleware yazmayı öğrenmek",
+        "Interceptors kullanmayı öğrenmek",
+        "Request/response transformation yapmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Middleware",
+          "description": "Ara yazılım kavramı",
+          "href": "/education/lessons/nestjs/module-08/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Custom Middleware",
+          "description": "Özel ara yazılım",
+          "href": "/education/lessons/nestjs/module-08/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: @Injectable Middleware",
+          "description": "Enjekte edilebilir ara yazılım",
+          "href": "/education/lessons/nestjs/module-08/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Global Middleware",
+          "description": "Global ara yazılım",
+          "href": "/education/lessons/nestjs/module-08/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Interceptors",
+          "description": "Kesici kavramı",
+          "href": "/education/lessons/nestjs/module-08/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: @UseInterceptors",
+          "description": "Kesici kullanımı",
+          "href": "/education/lessons/nestjs/module-08/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Request Interceptors",
+          "description": "İstek kesicileri",
+          "href": "/education/lessons/nestjs/module-08/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Response Interceptors",
+          "description": "Yanıt kesicileri",
+          "href": "/education/lessons/nestjs/module-08/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Logging Interceptor",
+          "description": "Loglama kesicisi",
+          "href": "/education/lessons/nestjs/module-08/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Transform Interceptor",
+          "description": "Dönüştürme kesicisi",
+          "href": "/education/lessons/nestjs/module-08/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Timeout Interceptor",
+          "description": "Zaman aşımı kesicisi",
+          "href": "/education/lessons/nestjs/module-08/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Cache Interceptor",
+          "description": "Önbellek kesicisi",
+          "href": "/education/lessons/nestjs/module-08/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Middleware ve Interceptor Best Practices",
+          "description": "Kullanım en iyi uygulamaları",
+          "href": "/education/lessons/nestjs/module-08/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Common Patterns",
+          "description": "Yaygın desenler",
+          "href": "/education/lessons/nestjs/module-08/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/nestjs/module-08/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-09",
+      "title": "Module 9: GraphQL Testi",
+      "summary": "GraphQL, @nestjs/graphql, schema definition, resolvers, queries, mutations, subscriptions ve GraphQL best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "GraphQL kavramını anlamak",
+        "GraphQL schema tanımlamayı öğrenmek",
+        "Resolvers yazmayı öğrenmek",
+        "Queries, mutations ve subscriptions kullanmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: GraphQL",
+          "description": "GraphQL kavramı",
+          "href": "/education/lessons/nestjs/module-09/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: GraphQL vs REST",
+          "description": "GraphQL ve REST karşılaştırması",
+          "href": "/education/lessons/nestjs/module-09/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: @nestjs/graphql",
+          "description": "GraphQL modülü",
+          "href": "/education/lessons/nestjs/module-09/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Schema Definition",
+          "description": "Şema tanımlama",
+          "href": "/education/lessons/nestjs/module-09/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Resolvers",
+          "description": "Çözücüler",
+          "href": "/education/lessons/nestjs/module-09/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: @Query",
+          "description": "Sorgu dekoratörü",
+          "href": "/education/lessons/nestjs/module-09/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: @Mutation",
+          "description": "Değişiklik dekoratörü",
+          "href": "/education/lessons/nestjs/module-09/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: @Subscription",
+          "description": "Abonelik dekoratörü",
+          "href": "/education/lessons/nestjs/module-09/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: GraphQL Types",
+          "description": "GraphQL tipleri",
+          "href": "/education/lessons/nestjs/module-09/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Input Types",
+          "description": "Girdi tipleri",
+          "href": "/education/lessons/nestjs/module-09/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Field Resolvers",
+          "description": "Alan çözücüleri",
+          "href": "/education/lessons/nestjs/module-09/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: GraphQL Best Practices",
+          "description": "GraphQL en iyi uygulamaları",
+          "href": "/education/lessons/nestjs/module-09/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Common GraphQL Patterns",
+          "description": "Yaygın GraphQL desenleri",
+          "href": "/education/lessons/nestjs/module-09/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: GraphQL Tools",
+          "description": "GraphQL araçları",
+          "href": "/education/lessons/nestjs/module-09/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/nestjs/module-09/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-10",
+      "title": "Module 10: WebSocket ve Real-time Testi",
+      "summary": "WebSocket, @nestjs/websockets, gateways, real-time communication, Socket.IO, event handling ve real-time best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "WebSocket kavramını anlamak",
+        "Gateways kullanmayı öğrenmek",
+        "Real-time communication yapmayı öğrenmek",
+        "Socket.IO entegrasyonu yapmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: WebSocket",
+          "description": "WebSocket kavramı",
+          "href": "/education/lessons/nestjs/module-10/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: @nestjs/websockets",
+          "description": "WebSocket modülü",
+          "href": "/education/lessons/nestjs/module-10/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Gateways",
+          "description": "Ağ geçidi kavramı",
+          "href": "/education/lessons/nestjs/module-10/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: @WebSocketGateway",
+          "description": "WebSocket ağ geçidi",
+          "href": "/education/lessons/nestjs/module-10/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: @SubscribeMessage",
+          "description": "Mesaj aboneliği",
+          "href": "/education/lessons/nestjs/module-10/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Socket.IO",
+          "description": "Socket.IO entegrasyonu",
+          "href": "/education/lessons/nestjs/module-10/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Real-time Communication",
+          "description": "Gerçek zamanlı iletişim",
+          "href": "/education/lessons/nestjs/module-10/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Event Handling",
+          "description": "Olay işleme",
+          "href": "/education/lessons/nestjs/module-10/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Connection Management",
+          "description": "Bağlantı yönetimi",
+          "href": "/education/lessons/nestjs/module-10/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Rooms ve Namespaces",
+          "description": "Odalar ve ad alanları",
+          "href": "/education/lessons/nestjs/module-10/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Broadcasting",
+          "description": "Yayınlama",
+          "href": "/education/lessons/nestjs/module-10/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: WebSocket Best Practices",
+          "description": "WebSocket en iyi uygulamaları",
+          "href": "/education/lessons/nestjs/module-10/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Common WebSocket Patterns",
+          "description": "Yaygın WebSocket desenleri",
+          "href": "/education/lessons/nestjs/module-10/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Performance Considerations",
+          "description": "Performans düşünceleri",
+          "href": "/education/lessons/nestjs/module-10/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/nestjs/module-10/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-11",
+      "title": "Module 11: Microservices Testi",
+      "summary": "NestJS microservices, transport layers, message patterns, gRPC, RabbitMQ, Kafka, service communication ve microservices patterns.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Microservices kavramını anlamak",
+        "Transport layers kullanmayı öğrenmek",
+        "Message patterns öğrenmek",
+        "Service communication yapmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Microservices",
+          "description": "Mikroservis kavramı",
+          "href": "/education/lessons/nestjs/module-11/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Transport Layers",
+          "description": "Taşıma katmanları",
+          "href": "/education/lessons/nestjs/module-11/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: TCP Transport",
+          "description": "TCP taşıma",
+          "href": "/education/lessons/nestjs/module-11/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Redis Transport",
+          "description": "Redis taşıma",
+          "href": "/education/lessons/nestjs/module-11/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Message Patterns",
+          "description": "Mesaj desenleri",
+          "href": "/education/lessons/nestjs/module-11/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Request-Response",
+          "description": "İstek-yanıt",
+          "href": "/education/lessons/nestjs/module-11/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Event-Based",
+          "description": "Olay tabanlı",
+          "href": "/education/lessons/nestjs/module-11/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: gRPC",
+          "description": "gRPC entegrasyonu",
+          "href": "/education/lessons/nestjs/module-11/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: RabbitMQ",
+          "description": "RabbitMQ entegrasyonu",
+          "href": "/education/lessons/nestjs/module-11/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Kafka",
+          "description": "Kafka entegrasyonu",
+          "href": "/education/lessons/nestjs/module-11/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Service Communication",
+          "description": "Servis iletişimi",
+          "href": "/education/lessons/nestjs/module-11/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Microservices Best Practices",
+          "description": "Mikroservis en iyi uygulamaları",
+          "href": "/education/lessons/nestjs/module-11/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Common Microservices Patterns",
+          "description": "Yaygın mikroservis desenleri",
+          "href": "/education/lessons/nestjs/module-11/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Service Discovery",
+          "description": "Servis keşfi",
+          "href": "/education/lessons/nestjs/module-11/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/nestjs/module-11/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-12",
+      "title": "Module 12: Testing Testi",
+      "summary": "NestJS testing, Jest, unit testing, integration testing, e2e testing, test utilities, mocking ve testing best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Testing kavramını anlamak",
+        "Unit test yazmayı öğrenmek",
+        "Integration test yazmayı öğrenmek",
+        "E2E test yazmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Testing Temelleri",
+          "description": "Test türleri",
+          "href": "/education/lessons/nestjs/module-12/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Jest",
+          "description": "Test framework'ü",
+          "href": "/education/lessons/nestjs/module-12/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Unit Testing",
+          "description": "Birim testleri",
+          "href": "/education/lessons/nestjs/module-12/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Testing Module",
+          "description": "Test modülü",
+          "href": "/education/lessons/nestjs/module-12/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Mocking",
+          "description": "Mock objeler",
+          "href": "/education/lessons/nestjs/module-12/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Integration Testing",
+          "description": "Entegrasyon testleri",
+          "href": "/education/lessons/nestjs/module-12/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: E2E Testing",
+          "description": "Uçtan uca testler",
+          "href": "/education/lessons/nestjs/module-12/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Test Utilities",
+          "description": "Test yardımcıları",
+          "href": "/education/lessons/nestjs/module-12/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Testing Controllers",
+          "description": "Kontrolör testleri",
+          "href": "/education/lessons/nestjs/module-12/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Testing Services",
+          "description": "Servis testleri",
+          "href": "/education/lessons/nestjs/module-12/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Testing Guards",
+          "description": "Koruma testleri",
+          "href": "/education/lessons/nestjs/module-12/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Test Coverage",
+          "description": "Test kapsamı",
+          "href": "/education/lessons/nestjs/module-12/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Testing Best Practices",
+          "description": "Test yazma en iyi uygulamaları",
+          "href": "/education/lessons/nestjs/module-12/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Common Testing Patterns",
+          "description": "Yaygın test desenleri",
+          "href": "/education/lessons/nestjs/module-12/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/nestjs/module-12/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-13",
+      "title": "Module 13: Caching ve Performance Testi",
+      "summary": "Caching, @nestjs/cache-manager, Redis caching, cache strategies, performance optimization, monitoring ve performance best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Caching kavramını anlamak",
+        "@nestjs/cache-manager kullanmayı öğrenmek",
+        "Redis caching yapmayı öğrenmek",
+        "Performance optimization yapmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Caching",
+          "description": "Önbellekleme kavramı",
+          "href": "/education/lessons/nestjs/module-13/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: @nestjs/cache-manager",
+          "description": "Önbellek yöneticisi",
+          "href": "/education/lessons/nestjs/module-13/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Cache Module",
+          "description": "Önbellek modülü",
+          "href": "/education/lessons/nestjs/module-13/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: @CacheKey ve @CacheTTL",
+          "description": "Önbellek dekoratörleri",
+          "href": "/education/lessons/nestjs/module-13/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Redis Caching",
+          "description": "Redis önbellekleme",
+          "href": "/education/lessons/nestjs/module-13/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Cache Strategies",
+          "description": "Önbellek stratejileri",
+          "href": "/education/lessons/nestjs/module-13/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Cache Invalidation",
+          "description": "Önbellek geçersiz kılma",
+          "href": "/education/lessons/nestjs/module-13/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Performance Optimization",
+          "description": "Performans optimizasyonu",
+          "href": "/education/lessons/nestjs/module-13/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Monitoring",
+          "description": "İzleme",
+          "href": "/education/lessons/nestjs/module-13/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Load Balancing",
+          "description": "Yük dengeleme",
+          "href": "/education/lessons/nestjs/module-13/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Caching Best Practices",
+          "description": "Önbellekleme en iyi uygulamaları",
+          "href": "/education/lessons/nestjs/module-13/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Common Caching Patterns",
+          "description": "Yaygın önbellekleme desenleri",
+          "href": "/education/lessons/nestjs/module-13/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Performance Best Practices",
+          "description": "Performans en iyi uygulamaları",
+          "href": "/education/lessons/nestjs/module-13/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Performance Testing",
+          "description": "Performans testleri",
+          "href": "/education/lessons/nestjs/module-13/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/nestjs/module-13/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-14",
+      "title": "Module 14: Deployment ve Production Testi",
+      "summary": "NestJS deployment, Docker, Kubernetes, CI/CD, production configuration, environment setup ve deployment best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Deployment sürecini anlamak",
+        "Docker containerization yapmayı öğrenmek",
+        "Kubernetes deployment yapmayı öğrenmek",
+        "CI/CD pipeline kurmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Deployment Temelleri",
+          "description": "Dağıtım süreci",
+          "href": "/education/lessons/nestjs/module-14/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Build Process",
+          "description": "Derleme süreci",
+          "href": "/education/lessons/nestjs/module-14/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Docker",
+          "description": "Konteynerleştirme",
+          "href": "/education/lessons/nestjs/module-14/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Dockerfile",
+          "description": "Docker dosyası",
+          "href": "/education/lessons/nestjs/module-14/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Docker Compose",
+          "description": "Docker Compose",
+          "href": "/education/lessons/nestjs/module-14/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Kubernetes",
+          "description": "Kubernetes dağıtımı",
+          "href": "/education/lessons/nestjs/module-14/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: CI/CD",
+          "description": "Sürekli entegrasyon/dağıtım",
+          "href": "/education/lessons/nestjs/module-14/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: GitHub Actions",
+          "description": "GitHub Actions",
+          "href": "/education/lessons/nestjs/module-14/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Production Configuration",
+          "description": "Üretim yapılandırması",
+          "href": "/education/lessons/nestjs/module-14/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Environment Setup",
+          "description": "Ortam kurulumu",
+          "href": "/education/lessons/nestjs/module-14/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Process Management",
+          "description": "PM2, systemd",
+          "href": "/education/lessons/nestjs/module-14/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Deployment Best Practices",
+          "description": "Dağıtım en iyi uygulamaları",
+          "href": "/education/lessons/nestjs/module-14/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Common Deployment Issues",
+          "description": "Yaygın dağıtım sorunları",
+          "href": "/education/lessons/nestjs/module-14/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Monitoring in Production",
+          "description": "Üretimde izleme",
+          "href": "/education/lessons/nestjs/module-14/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/nestjs/module-14/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-15",
+      "title": "Module 15: Best Practices ve Capstone Testi",
+      "summary": "NestJS geliştirmede en iyi uygulamalar, kod kalitesi, güvenlik, performans ve kapsamlı bir NestJS uygulaması geliştirme.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Kod kalitesi standartlarını öğrenmek",
+        "Güvenlik best practices uygulamak",
+        "Performans optimizasyon tekniklerini öğrenmek",
+        "Kapsamlı bir NestJS uygulaması geliştirmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Code Quality Standards",
+          "description": "Kod kalitesi standartları",
+          "href": "/education/lessons/nestjs/module-15/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Naming Conventions",
+          "description": "İsimlendirme kuralları",
+          "href": "/education/lessons/nestjs/module-15/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Code Organization",
+          "description": "Kod organizasyonu",
+          "href": "/education/lessons/nestjs/module-15/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Proje Planlama",
+          "description": "Proje gereksinimleri",
+          "href": "/education/lessons/nestjs/module-15/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Mimari Tasarım",
+          "description": "Uygulama mimarisi",
+          "href": "/education/lessons/nestjs/module-15/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Core Implementation",
+          "description": "Temel implementasyon",
+          "href": "/education/lessons/nestjs/module-15/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: API Implementation",
+          "description": "API implementasyonu",
+          "href": "/education/lessons/nestjs/module-15/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Data Management",
+          "description": "Veri yönetimi",
+          "href": "/education/lessons/nestjs/module-15/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Security Implementation",
+          "description": "Güvenlik implementasyonu",
+          "href": "/education/lessons/nestjs/module-15/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Error Handling",
+          "description": "Kapsamlı hata yönetimi",
+          "href": "/education/lessons/nestjs/module-15/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Testing Strategy",
+          "description": "Test stratejisi",
+          "href": "/education/lessons/nestjs/module-15/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Performance Optimization",
+          "description": "Performans optimizasyonu",
+          "href": "/education/lessons/nestjs/module-15/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Documentation",
+          "description": "Proje dokümantasyonu",
+          "href": "/education/lessons/nestjs/module-15/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Project Review",
+          "description": "Proje incelemesi",
+          "href": "/education/lessons/nestjs/module-15/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Project Presentation",
+          "description": "Proje sunumu",
+          "href": "/education/lessons/nestjs/module-15/lesson-15"
+        }
+      ]
+    }
+  ]
+}

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/app/components/ui/Button";
-import { Loader2, CheckCircle2, AlertCircle, BookOpen, Trash2, Code2, Database, Globe, Zap, Shield, Container, Lock, FileText, Users, Trophy, Briefcase, MessageCircle, Building2, Bug, Upload, Eye } from "lucide-react";
+import { Loader2, CheckCircle2, AlertCircle, BookOpen, Trash2, Code2, Database, Globe, Zap, Shield, Container, Lock, FileText, Users, Trophy, Briefcase, MessageCircle, Building2, Bug, Upload, Eye, Cloud } from "lucide-react";
 
 interface CourseStatus {
   loading: boolean;
@@ -595,6 +595,404 @@ export default function AdminPage() {
 
     try {
       const response = await fetch("/api/admin/create-course/python", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Kurs oluşturulurken bir hata oluştu");
+      }
+
+      setCourseState({
+        loading: false,
+        success: data.message || "Kurs başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
+    } catch (err: any) {
+      setCourseState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
+    }
+  };
+
+  // Faz 1 Teknolojileri
+  const handleCreateVueJSCourse = async () => {
+    setCourseState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/create-course/vuejs", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Kurs oluşturulurken bir hata oluştu");
+      }
+
+      setCourseState({
+        loading: false,
+        success: data.message || "Kurs başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
+    } catch (err: any) {
+      setCourseState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
+    }
+  };
+
+  const handleCreateTypeScriptCourse = async () => {
+    setCourseState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/create-course/typescript", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Kurs oluşturulurken bir hata oluştu");
+      }
+
+      setCourseState({
+        loading: false,
+        success: data.message || "Kurs başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
+    } catch (err: any) {
+      setCourseState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
+    }
+  };
+
+  const handleCreateGoCourse = async () => {
+    setCourseState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/create-course/go", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Kurs oluşturulurken bir hata oluştu");
+      }
+
+      setCourseState({
+        loading: false,
+        success: data.message || "Kurs başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
+    } catch (err: any) {
+      setCourseState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
+    }
+  };
+
+  const handleCreatePostgreSQLCourse = async () => {
+    setCourseState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/create-course/postgresql", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Kurs oluşturulurken bir hata oluştu");
+      }
+
+      setCourseState({
+        loading: false,
+        success: data.message || "Kurs başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
+    } catch (err: any) {
+      setCourseState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
+    }
+  };
+
+  const handleCreateAWSCourse = async () => {
+    setCourseState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/create-course/aws", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Kurs oluşturulurken bir hata oluştu");
+      }
+
+      setCourseState({
+        loading: false,
+        success: data.message || "Kurs başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
+    } catch (err: any) {
+      setCourseState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
+    }
+  };
+
+  const handleCreateAzureCourse = async () => {
+    setCourseState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/create-course/azure", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Kurs oluşturulurken bir hata oluştu");
+      }
+
+      setCourseState({
+        loading: false,
+        success: data.message || "Kurs başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
+    } catch (err: any) {
+      setCourseState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
+    }
+  };
+
+  // Faz 2 Teknolojileri
+  const handleCreateSwiftCourse = async () => {
+    setCourseState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/create-course/swift", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Kurs oluşturulurken bir hata oluştu");
+      }
+
+      setCourseState({
+        loading: false,
+        success: data.message || "Kurs başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
+    } catch (err: any) {
+      setCourseState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
+    }
+  };
+
+  const handleCreateKotlinCourse = async () => {
+    setCourseState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/create-course/kotlin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Kurs oluşturulurken bir hata oluştu");
+      }
+
+      setCourseState({
+        loading: false,
+        success: data.message || "Kurs başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
+    } catch (err: any) {
+      setCourseState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
+    }
+  };
+
+  const handleCreateMongoDBCourse = async () => {
+    setCourseState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/create-course/mongodb", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Kurs oluşturulurken bir hata oluştu");
+      }
+
+      setCourseState({
+        loading: false,
+        success: data.message || "Kurs başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
+    } catch (err: any) {
+      setCourseState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
+    }
+  };
+
+  const handleCreateSpringBootCourse = async () => {
+    setCourseState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/create-course/spring-boot", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Kurs oluşturulurken bir hata oluştu");
+      }
+
+      setCourseState({
+        loading: false,
+        success: data.message || "Kurs başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
+    } catch (err: any) {
+      setCourseState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
+    }
+  };
+
+  const handleCreateNestJSCourse = async () => {
+    setCourseState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/create-course/nestjs", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
       });
@@ -1422,6 +1820,86 @@ export default function AdminPage() {
                 gradient: "from-yellow-500 via-blue-500 to-green-600",
                 icon: Code2,
                 description: "Programming Language"
+              },
+              // Faz 1 Teknolojileri
+              { 
+                title: "Vue.js", 
+                handler: handleCreateVueJSCourse, 
+                gradient: "from-green-500 via-emerald-500 to-teal-600",
+                icon: Globe,
+                description: "Frontend Framework"
+              },
+              { 
+                title: "TypeScript", 
+                handler: handleCreateTypeScriptCourse, 
+                gradient: "from-blue-600 via-indigo-600 to-purple-600",
+                icon: Code2,
+                description: "Programming Language"
+              },
+              { 
+                title: "Go", 
+                handler: handleCreateGoCourse, 
+                gradient: "from-cyan-500 via-blue-500 to-indigo-600",
+                icon: Code2,
+                description: "Backend Language"
+              },
+              { 
+                title: "PostgreSQL", 
+                handler: handleCreatePostgreSQLCourse, 
+                gradient: "from-blue-500 via-indigo-500 to-purple-600",
+                icon: Database,
+                description: "Database System"
+              },
+              { 
+                title: "AWS", 
+                handler: handleCreateAWSCourse, 
+                gradient: "from-orange-500 via-yellow-500 to-orange-600",
+                icon: Cloud,
+                description: "Cloud Platform"
+              },
+              // Faz 2 Teknolojileri
+              { 
+                title: "Swift", 
+                handler: handleCreateSwiftCourse, 
+                gradient: "from-orange-400 via-orange-500 to-orange-600",
+                icon: Code2,
+                description: "iOS Development"
+              },
+              { 
+                title: "Kotlin", 
+                handler: handleCreateKotlinCourse, 
+                gradient: "from-purple-500 via-indigo-500 to-blue-600",
+                icon: Code2,
+                description: "Android Development"
+              },
+              { 
+                title: "MongoDB", 
+                handler: handleCreateMongoDBCourse, 
+                gradient: "from-green-600 via-emerald-600 to-teal-600",
+                icon: Database,
+                description: "NoSQL Database"
+              },
+              { 
+                title: "Spring Boot", 
+                handler: handleCreateSpringBootCourse, 
+                gradient: "from-green-500 via-emerald-500 to-green-600",
+                icon: Code2,
+                description: "Java Framework"
+              },
+              { 
+                title: "NestJS", 
+                handler: handleCreateNestJSCourse, 
+                gradient: "from-red-500 via-pink-500 to-rose-600",
+                icon: Code2,
+                description: "Node.js Framework"
+              },
+              // Faz 3 Teknolojileri
+              { 
+                title: "Azure", 
+                handler: handleCreateAzureCourse, 
+                gradient: "from-blue-500 via-cyan-500 to-blue-600",
+                icon: Cloud,
+                description: "Cloud Platform"
               },
             ].map((course, idx) => {
               const Icon = course.icon;

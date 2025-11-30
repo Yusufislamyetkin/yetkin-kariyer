@@ -1,0 +1,1577 @@
+{
+  "overview": {
+    "description": "TypeScript, JavaScript'e tip güvenliği ekleyen güçlü bir programlama dilidir. Bu kapsamlı kurs ile TypeScript'in temellerinden ileri seviye konularına kadar her şeyi öğreneceksiniz. Modern web geliştirmede hata önleme, daha iyi geliştirici deneyimi ve ölçeklenebilir kod yazma becerileri kazanacaksınız.",
+    "estimatedDurationMinutes": 6750
+  },
+  "learningObjectives": [
+    "TypeScript'in ne olduğunu ve JavaScript'ten farklarını anlamak",
+    "Type annotations ve type system kullanmayı öğrenmek",
+    "Interfaces, classes ve generics ile kod organizasyonu yapmak",
+    "Advanced types ve utility types kullanmayı öğrenmek",
+    "TypeScript'i React, Vue.js ve Node.js ile entegre etmek",
+    "TypeScript compiler yapılandırması ve best practices öğrenmek",
+    "Büyük projelerde TypeScript kullanım stratejilerini öğrenmek"
+  ],
+  "modules": [
+    {
+      "id": "module-01",
+      "title": "Module 1: TypeScript Tanımı ve Temelleri Testi",
+      "summary": "TypeScript'in ne olduğu, JavaScript'ten farkları, avantajları, tarihçesi ve temel kavramlar.",
+      "durationMinutes": 450,
+      "objectives": [
+        "TypeScript'in ne olduğunu ve neden kullanıldığını anlamak",
+        "JavaScript ile TypeScript arasındaki farkları öğrenmek",
+        "TypeScript'in avantajlarını ve kullanım alanlarını keşfetmek",
+        "Type safety kavramını anlamak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: TypeScript Nedir?",
+          "description": "TypeScript'in temel tanımı ve genel bakış",
+          "href": "/education/lessons/typescript/module-01/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: TypeScript vs JavaScript",
+          "description": "TypeScript ve JavaScript arasındaki farklar",
+          "href": "/education/lessons/typescript/module-01/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: TypeScript'in Tarihçesi",
+          "description": "TypeScript'in ortaya çıkışı ve gelişimi",
+          "href": "/education/lessons/typescript/module-01/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Type Safety Kavramı",
+          "description": "Tip güvenliği ve avantajları",
+          "href": "/education/lessons/typescript/module-01/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: TypeScript'in Avantajları",
+          "description": "Hata önleme, IDE desteği, refactoring gibi avantajlar",
+          "href": "/education/lessons/typescript/module-01/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: TypeScript Kullanım Alanları",
+          "description": "Web, Node.js, mobil uygulamalar",
+          "href": "/education/lessons/typescript/module-01/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: TypeScript Ekosistemi",
+          "description": "TypeScript topluluğu ve araçlar",
+          "href": "/education/lessons/typescript/module-01/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: TypeScript Lisanslama",
+          "description": "Apache 2.0 lisansı",
+          "href": "/education/lessons/typescript/module-01/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: TypeScript Topluluk Desteği",
+          "description": "Açık kaynak topluluğu",
+          "href": "/education/lessons/typescript/module-01/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: TypeScript'in Geleceği",
+          "description": "TypeScript roadmap ve gelecek planları",
+          "href": "/education/lessons/typescript/module-01/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: TypeScript Kurulum Gereksinimleri",
+          "description": "Sistem gereksinimleri",
+          "href": "/education/lessons/typescript/module-01/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: TypeScript ile Neler Yapılabilir?",
+          "description": "Kullanım senaryoları",
+          "href": "/education/lessons/typescript/module-01/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: TypeScript Performans",
+          "description": "Compile time vs runtime",
+          "href": "/education/lessons/typescript/module-01/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: TypeScript Geliştirici Deneyimi",
+          "description": "IDE desteği ve tooling",
+          "href": "/education/lessons/typescript/module-01/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Değerlendirme",
+          "description": "Modül kapsamında öğrenilenlerin özeti",
+          "href": "/education/lessons/typescript/module-01/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-02",
+      "title": "Module 2: TypeScript Kurulumu ve Yapılandırma Testi",
+      "summary": "TypeScript kurulumu, tsconfig.json yapılandırması, compiler seçenekleri ve proje setup.",
+      "durationMinutes": 450,
+      "objectives": [
+        "TypeScript kurulumunu öğrenmek",
+        "tsconfig.json yapılandırmasını anlamak",
+        "Compiler seçeneklerini öğrenmek",
+        "Proje yapısını kurmak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: TypeScript Kurulumu",
+          "description": "npm ile TypeScript kurulumu",
+          "href": "/education/lessons/typescript/module-02/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: TypeScript Compiler (tsc)",
+          "description": "tsc komutu ve kullanımı",
+          "href": "/education/lessons/typescript/module-02/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: tsconfig.json Oluşturma",
+          "description": "TypeScript yapılandırma dosyası",
+          "href": "/education/lessons/typescript/module-02/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Compiler Options",
+          "description": "Compiler seçenekleri",
+          "href": "/education/lessons/typescript/module-02/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Target ve Module",
+          "description": "ES versiyon seçimi",
+          "href": "/education/lessons/typescript/module-02/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Strict Mode",
+          "description": "Strict type checking",
+          "href": "/education/lessons/typescript/module-02/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Module Resolution",
+          "description": "Module çözümleme stratejileri",
+          "href": "/education/lessons/typescript/module-02/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Path Mapping",
+          "description": "Path alias yapılandırması",
+          "href": "/education/lessons/typescript/module-02/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Source Maps",
+          "description": "Debug için source map",
+          "href": "/education/lessons/typescript/module-02/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Watch Mode",
+          "description": "Otomatik derleme",
+          "href": "/education/lessons/typescript/module-02/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Project References",
+          "description": "Monorepo yapılandırması",
+          "href": "/education/lessons/typescript/module-02/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: IDE Integration",
+          "description": "VS Code ve diğer IDE'ler",
+          "href": "/education/lessons/typescript/module-02/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Build Tools Integration",
+          "description": "Webpack, Vite, esbuild",
+          "href": "/education/lessons/typescript/module-02/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: TypeScript Best Practices",
+          "description": "Yapılandırma en iyi uygulamaları",
+          "href": "/education/lessons/typescript/module-02/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/typescript/module-02/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-03",
+      "title": "Module 3: Types ve Type Annotations Testi",
+      "summary": "TypeScript type system, primitive types, type annotations, type inference ve type checking.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Type system kavramını anlamak",
+        "Primitive types kullanmayı öğrenmek",
+        "Type annotations yazmayı öğrenmek",
+        "Type inference anlamak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Type System Temelleri",
+          "description": "Type system kavramı",
+          "href": "/education/lessons/typescript/module-03/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Primitive Types",
+          "description": "string, number, boolean, null, undefined",
+          "href": "/education/lessons/typescript/module-03/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Type Annotations",
+          "description": "Değişken tip tanımlama",
+          "href": "/education/lessons/typescript/module-03/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Type Inference",
+          "description": "Otomatik tip çıkarımı",
+          "href": "/education/lessons/typescript/module-03/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: any Type",
+          "description": "any tipi ve kullanımı",
+          "href": "/education/lessons/typescript/module-03/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: unknown Type",
+          "description": "unknown tipi ve type safety",
+          "href": "/education/lessons/typescript/module-03/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: void ve never Types",
+          "description": "void ve never tip kullanımı",
+          "href": "/education/lessons/typescript/module-03/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Literal Types",
+          "description": "String ve number literal types",
+          "href": "/education/lessons/typescript/module-03/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Union Types",
+          "description": "Birden fazla tip birleştirme",
+          "href": "/education/lessons/typescript/module-03/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Intersection Types",
+          "description": "Tip kesişimi",
+          "href": "/education/lessons/typescript/module-03/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Type Aliases",
+          "description": "Tip takma adları",
+          "href": "/education/lessons/typescript/module-03/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Type Assertions",
+          "description": "Tip dönüşümü",
+          "href": "/education/lessons/typescript/module-03/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Type Guards",
+          "description": "Tip kontrolü fonksiyonları",
+          "href": "/education/lessons/typescript/module-03/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Type Narrowing",
+          "description": "Tip daraltma",
+          "href": "/education/lessons/typescript/module-03/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/typescript/module-03/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-04",
+      "title": "Module 4: Interfaces Testi",
+      "summary": "Interface tanımlama, interface kullanımı, optional properties, readonly, index signatures ve interface extension.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Interface kavramını anlamak",
+        "Interface tanımlamayı öğrenmek",
+        "Interface kullanmayı öğrenmek",
+        "Interface extension yapmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Interface Nedir?",
+          "description": "Interface kavramı",
+          "href": "/education/lessons/typescript/module-04/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Basic Interface",
+          "description": "Temel interface tanımlama",
+          "href": "/education/lessons/typescript/module-04/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Optional Properties",
+          "description": "Opsiyonel özellikler",
+          "href": "/education/lessons/typescript/module-04/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Readonly Properties",
+          "description": "Sadece okunabilir özellikler",
+          "href": "/education/lessons/typescript/module-04/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Function Types in Interfaces",
+          "description": "Interface'de fonksiyon tipleri",
+          "href": "/education/lessons/typescript/module-04/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Index Signatures",
+          "description": "Dinamik özellikler",
+          "href": "/education/lessons/typescript/module-04/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Interface Extension",
+          "description": "Interface genişletme",
+          "href": "/education/lessons/typescript/module-04/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Multiple Interface Extension",
+          "description": "Birden fazla interface genişletme",
+          "href": "/education/lessons/typescript/module-04/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Interface vs Type Alias",
+          "description": "Interface ve type alias farkları",
+          "href": "/education/lessons/typescript/module-04/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Interface Merging",
+          "description": "Interface birleştirme",
+          "href": "/education/lessons/typescript/module-04/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Generic Interfaces",
+          "description": "Generic interface'ler",
+          "href": "/education/lessons/typescript/module-04/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Interface Implementation",
+          "description": "Class'larda interface kullanımı",
+          "href": "/education/lessons/typescript/module-04/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Interface Best Practices",
+          "description": "Interface kullanım en iyi uygulamaları",
+          "href": "/education/lessons/typescript/module-04/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Utility Types with Interfaces",
+          "description": "Utility types kullanımı",
+          "href": "/education/lessons/typescript/module-04/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/typescript/module-04/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-05",
+      "title": "Module 5: Classes Testi",
+      "summary": "TypeScript classes, inheritance, access modifiers, abstract classes, static members ve class decorators.",
+      "durationMinutes": 450,
+      "objectives": [
+        "TypeScript classes kavramını anlamak",
+        "Class tanımlamayı öğrenmek",
+        "Inheritance yapmayı öğrenmek",
+        "Access modifiers kullanmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Classes Temelleri",
+          "description": "TypeScript class yapısı",
+          "href": "/education/lessons/typescript/module-05/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Class Properties",
+          "description": "Class özellikleri ve tip tanımlama",
+          "href": "/education/lessons/typescript/module-05/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Constructors",
+          "description": "Constructor tanımlama",
+          "href": "/education/lessons/typescript/module-05/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Methods",
+          "description": "Class metodları",
+          "href": "/education/lessons/typescript/module-05/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Access Modifiers",
+          "description": "public, private, protected",
+          "href": "/education/lessons/typescript/module-05/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Readonly Modifier",
+          "description": "Readonly özellikler",
+          "href": "/education/lessons/typescript/module-05/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Inheritance",
+          "description": "Class kalıtımı",
+          "href": "/education/lessons/typescript/module-05/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: super Keyword",
+          "description": "Parent class erişimi",
+          "href": "/education/lessons/typescript/module-05/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Method Overriding",
+          "description": "Metod override etme",
+          "href": "/education/lessons/typescript/module-05/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Abstract Classes",
+          "description": "Soyut sınıflar",
+          "href": "/education/lessons/typescript/module-05/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Static Members",
+          "description": "Static özellikler ve metodlar",
+          "href": "/education/lessons/typescript/module-05/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Getters ve Setters",
+          "description": "Property accessors",
+          "href": "/education/lessons/typescript/module-05/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Class Decorators",
+          "description": "Class decorator'ları",
+          "href": "/education/lessons/typescript/module-05/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Class Best Practices",
+          "description": "Class tasarım en iyi uygulamaları",
+          "href": "/education/lessons/typescript/module-05/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/typescript/module-05/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-06",
+      "title": "Module 6: Generics Testi",
+      "summary": "Generic types, generic functions, generic classes, constraints, default type parameters ve utility generics.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Generic kavramını anlamak",
+        "Generic functions yazmayı öğrenmek",
+        "Generic classes kullanmayı öğrenmek",
+        "Generic constraints uygulamayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Generics Nedir?",
+          "description": "Generic kavramı ve avantajları",
+          "href": "/education/lessons/typescript/module-06/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Generic Functions",
+          "description": "Generic fonksiyon tanımlama",
+          "href": "/education/lessons/typescript/module-06/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Generic Classes",
+          "description": "Generic class tanımlama",
+          "href": "/education/lessons/typescript/module-06/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Generic Interfaces",
+          "description": "Generic interface'ler",
+          "href": "/education/lessons/typescript/module-06/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Multiple Type Parameters",
+          "description": "Birden fazla generic parametre",
+          "href": "/education/lessons/typescript/module-06/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Generic Constraints",
+          "description": "extends ile constraint",
+          "href": "/education/lessons/typescript/module-06/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Using Type Parameters in Constraints",
+          "description": "Constraint'te tip parametresi kullanımı",
+          "href": "/education/lessons/typescript/module-06/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Default Type Parameters",
+          "description": "Varsayılan tip parametreleri",
+          "href": "/education/lessons/typescript/module-06/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Conditional Types",
+          "description": "Koşullu tipler",
+          "href": "/education/lessons/typescript/module-06/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Mapped Types",
+          "description": "Tip dönüşümü",
+          "href": "/education/lessons/typescript/module-06/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Template Literal Types",
+          "description": "String literal type manipulation",
+          "href": "/education/lessons/typescript/module-06/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Generic Utility Types",
+          "description": "Partial, Required, Pick, Omit",
+          "href": "/education/lessons/typescript/module-06/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Generic Best Practices",
+          "description": "Generic kullanım en iyi uygulamaları",
+          "href": "/education/lessons/typescript/module-06/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Advanced Generic Patterns",
+          "description": "İleri seviye generic desenleri",
+          "href": "/education/lessons/typescript/module-06/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/typescript/module-06/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-07",
+      "title": "Module 7: Modules ve Namespaces Testi",
+      "summary": "ES modules, import/export, namespace, module resolution, declaration files ve ambient modules.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Module system kavramını anlamak",
+        "Import/export kullanmayı öğrenmek",
+        "Namespace kullanmayı öğrenmek",
+        "Declaration files oluşturmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Modules Temelleri",
+          "description": "Module system kavramı",
+          "href": "/education/lessons/typescript/module-07/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Export Statements",
+          "description": "Export kullanımı",
+          "href": "/education/lessons/typescript/module-07/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Import Statements",
+          "description": "Import kullanımı",
+          "href": "/education/lessons/typescript/module-07/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Default Exports",
+          "description": "Varsayılan export",
+          "href": "/education/lessons/typescript/module-07/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Named Exports",
+          "description": "İsimlendirilmiş export",
+          "href": "/education/lessons/typescript/module-07/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Re-exporting",
+          "description": "Yeniden export etme",
+          "href": "/education/lessons/typescript/module-07/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Namespaces",
+          "description": "Namespace kullanımı",
+          "href": "/education/lessons/typescript/module-07/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Module vs Namespace",
+          "description": "Module ve namespace farkları",
+          "href": "/education/lessons/typescript/module-07/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Declaration Files (.d.ts)",
+          "description": "Type declaration dosyaları",
+          "href": "/education/lessons/typescript/module-07/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Ambient Modules",
+          "description": "Ambient module tanımlama",
+          "href": "/education/lessons/typescript/module-07/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Module Augmentation",
+          "description": "Module genişletme",
+          "href": "/education/lessons/typescript/module-07/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Triple-Slash Directives",
+          "description": "/// reference directives",
+          "href": "/education/lessons/typescript/module-07/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Module Resolution",
+          "description": "Module çözümleme stratejileri",
+          "href": "/education/lessons/typescript/module-07/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Module Best Practices",
+          "description": "Module kullanım en iyi uygulamaları",
+          "href": "/education/lessons/typescript/module-07/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/typescript/module-07/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-08",
+      "title": "Module 8: Advanced Types Testi",
+      "summary": "Utility types, conditional types, mapped types, template literal types ve type manipulation.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Utility types kullanmayı öğrenmek",
+        "Conditional types anlamak",
+        "Mapped types kullanmayı öğrenmek",
+        "Type manipulation tekniklerini öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Utility Types Overview",
+          "description": "Utility types genel bakış",
+          "href": "/education/lessons/typescript/module-08/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Partial ve Required",
+          "description": "Partial ve Required utility types",
+          "href": "/education/lessons/typescript/module-08/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Pick ve Omit",
+          "description": "Pick ve Omit utility types",
+          "href": "/education/lessons/typescript/module-08/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Record",
+          "description": "Record utility type",
+          "href": "/education/lessons/typescript/module-08/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Exclude ve Extract",
+          "description": "Exclude ve Extract utility types",
+          "href": "/education/lessons/typescript/module-08/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: NonNullable",
+          "description": "NonNullable utility type",
+          "href": "/education/lessons/typescript/module-08/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: ReturnType ve Parameters",
+          "description": "Function type utilities",
+          "href": "/education/lessons/typescript/module-08/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Awaited",
+          "description": "Awaited utility type",
+          "href": "/education/lessons/typescript/module-08/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Conditional Types",
+          "description": "Koşullu tip tanımlama",
+          "href": "/education/lessons/typescript/module-08/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Mapped Types",
+          "description": "Tip dönüşümü",
+          "href": "/education/lessons/typescript/module-08/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Template Literal Types",
+          "description": "String literal manipulation",
+          "href": "/education/lessons/typescript/module-08/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Recursive Types",
+          "description": "Özyinelemeli tipler",
+          "href": "/education/lessons/typescript/module-08/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Branded Types",
+          "description": "Brand pattern",
+          "href": "/education/lessons/typescript/module-08/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Advanced Type Patterns",
+          "description": "İleri seviye tip desenleri",
+          "href": "/education/lessons/typescript/module-08/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/typescript/module-08/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-09",
+      "title": "Module 9: Decorators Testi",
+      "summary": "Decorator kavramı, class decorators, method decorators, property decorators ve decorator factories.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Decorator kavramını anlamak",
+        "Class decorators kullanmayı öğrenmek",
+        "Method decorators kullanmayı öğrenmek",
+        "Decorator factories oluşturmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Decorators Nedir?",
+          "description": "Decorator kavramı",
+          "href": "/education/lessons/typescript/module-09/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Decorator Configuration",
+          "description": "experimentalDecorators ayarı",
+          "href": "/education/lessons/typescript/module-09/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Class Decorators",
+          "description": "Class decorator'ları",
+          "href": "/education/lessons/typescript/module-09/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Method Decorators",
+          "description": "Method decorator'ları",
+          "href": "/education/lessons/typescript/module-09/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Property Decorators",
+          "description": "Property decorator'ları",
+          "href": "/education/lessons/typescript/module-09/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Parameter Decorators",
+          "description": "Parameter decorator'ları",
+          "href": "/education/lessons/typescript/module-09/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Decorator Factories",
+          "description": "Parametreli decorator'lar",
+          "href": "/education/lessons/typescript/module-09/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Decorator Composition",
+          "description": "Birden fazla decorator",
+          "href": "/education/lessons/typescript/module-09/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Metadata Reflection",
+          "description": "reflect-metadata kullanımı",
+          "href": "/education/lessons/typescript/module-09/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Common Decorator Patterns",
+          "description": "Yaygın decorator desenleri",
+          "href": "/education/lessons/typescript/module-09/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Validation Decorators",
+          "description": "Validasyon decorator'ları",
+          "href": "/education/lessons/typescript/module-09/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Logging Decorators",
+          "description": "Logging decorator'ları",
+          "href": "/education/lessons/typescript/module-09/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Dependency Injection Decorators",
+          "description": "DI decorator'ları",
+          "href": "/education/lessons/typescript/module-09/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Decorator Best Practices",
+          "description": "Decorator kullanım en iyi uygulamaları",
+          "href": "/education/lessons/typescript/module-09/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/typescript/module-09/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-10",
+      "title": "Module 10: TypeScript ile React Testi",
+      "summary": "React + TypeScript entegrasyonu, component typing, hooks typing, props interfaces ve React best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "React + TypeScript entegrasyonunu öğrenmek",
+        "Component typing yapmayı öğrenmek",
+        "Hooks typing yapmayı öğrenmek",
+        "React TypeScript best practices uygulamak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: React + TypeScript Setup",
+          "description": "React TypeScript projesi oluşturma",
+          "href": "/education/lessons/typescript/module-10/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Component Props Typing",
+          "description": "Component props tip tanımlama",
+          "href": "/education/lessons/typescript/module-10/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Functional Components",
+          "description": "Fonksiyonel component typing",
+          "href": "/education/lessons/typescript/module-10/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Class Components",
+          "description": "Class component typing",
+          "href": "/education/lessons/typescript/module-10/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: useState Hook Typing",
+          "description": "useState tip tanımlama",
+          "href": "/education/lessons/typescript/module-10/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: useEffect Hook Typing",
+          "description": "useEffect tip tanımlama",
+          "href": "/education/lessons/typescript/module-10/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Custom Hooks Typing",
+          "description": "Özel hook tip tanımlama",
+          "href": "/education/lessons/typescript/module-10/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Event Handlers",
+          "description": "Event handler tip tanımlama",
+          "href": "/education/lessons/typescript/module-10/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Refs Typing",
+          "description": "useRef tip tanımlama",
+          "href": "/education/lessons/typescript/module-10/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Context Typing",
+          "description": "Context tip tanımlama",
+          "href": "/education/lessons/typescript/module-10/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Higher-Order Components",
+          "description": "HOC tip tanımlama",
+          "href": "/education/lessons/typescript/module-10/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: React Router Typing",
+          "description": "React Router tip tanımlama",
+          "href": "/education/lessons/typescript/module-10/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Redux Typing",
+          "description": "Redux tip tanımlama",
+          "href": "/education/lessons/typescript/module-10/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: React TypeScript Best Practices",
+          "description": "React TypeScript en iyi uygulamaları",
+          "href": "/education/lessons/typescript/module-10/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/typescript/module-10/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-11",
+      "title": "Module 11: TypeScript ile Vue.js Testi",
+      "summary": "Vue.js + TypeScript entegrasyonu, component typing, Composition API typing ve Vue TypeScript best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Vue.js + TypeScript entegrasyonunu öğrenmek",
+        "Component typing yapmayı öğrenmek",
+        "Composition API typing yapmayı öğrenmek",
+        "Vue TypeScript best practices uygulamak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Vue.js + TypeScript Setup",
+          "description": "Vue TypeScript projesi oluşturma",
+          "href": "/education/lessons/typescript/module-11/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Component Props Typing",
+          "description": "Vue component props tip tanımlama",
+          "href": "/education/lessons/typescript/module-11/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Options API Typing",
+          "description": "Options API tip tanımlama",
+          "href": "/education/lessons/typescript/module-11/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Composition API Typing",
+          "description": "Composition API tip tanımlama",
+          "href": "/education/lessons/typescript/module-11/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: ref ve reactive Typing",
+          "description": "ref ve reactive tip tanımlama",
+          "href": "/education/lessons/typescript/module-11/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Computed Typing",
+          "description": "computed tip tanımlama",
+          "href": "/education/lessons/typescript/module-11/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Watch Typing",
+          "description": "watch tip tanımlama",
+          "href": "/education/lessons/typescript/module-11/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Emits Typing",
+          "description": "Event emit tip tanımlama",
+          "href": "/education/lessons/typescript/module-11/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Vuex/Pinia Typing",
+          "description": "State management tip tanımlama",
+          "href": "/education/lessons/typescript/module-11/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Vue Router Typing",
+          "description": "Vue Router tip tanımlama",
+          "href": "/education/lessons/typescript/module-11/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Composables Typing",
+          "description": "Composable fonksiyon tip tanımlama",
+          "href": "/education/lessons/typescript/module-11/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Plugin Typing",
+          "description": "Vue plugin tip tanımlama",
+          "href": "/education/lessons/typescript/module-11/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Nuxt.js TypeScript",
+          "description": "Nuxt.js TypeScript entegrasyonu",
+          "href": "/education/lessons/typescript/module-11/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Vue TypeScript Best Practices",
+          "description": "Vue TypeScript en iyi uygulamaları",
+          "href": "/education/lessons/typescript/module-11/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/typescript/module-11/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-12",
+      "title": "Module 12: TypeScript ile Node.js Testi",
+      "summary": "Node.js + TypeScript entegrasyonu, Express typing, database typing, API typing ve Node.js TypeScript best practices.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Node.js + TypeScript entegrasyonunu öğrenmek",
+        "Express typing yapmayı öğrenmek",
+        "Database typing yapmayı öğrenmek",
+        "Node.js TypeScript best practices uygulamak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Node.js + TypeScript Setup",
+          "description": "Node.js TypeScript projesi oluşturma",
+          "href": "/education/lessons/typescript/module-12/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Express Typing",
+          "description": "Express.js tip tanımlama",
+          "href": "/education/lessons/typescript/module-12/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Request ve Response Typing",
+          "description": "HTTP request/response tip tanımlama",
+          "href": "/education/lessons/typescript/module-12/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Middleware Typing",
+          "description": "Express middleware tip tanımlama",
+          "href": "/education/lessons/typescript/module-12/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Database Typing",
+          "description": "ORM ve database tip tanımlama",
+          "href": "/education/lessons/typescript/module-12/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: API Routes Typing",
+          "description": "API route tip tanımlama",
+          "href": "/education/lessons/typescript/module-12/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Error Handling Typing",
+          "description": "Error tip tanımlama",
+          "href": "/education/lessons/typescript/module-12/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Environment Variables Typing",
+          "description": "Ortam değişkenleri tip tanımlama",
+          "href": "/education/lessons/typescript/module-12/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: File System Typing",
+          "description": "fs module tip tanımlama",
+          "href": "/education/lessons/typescript/module-12/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Stream Typing",
+          "description": "Stream tip tanımlama",
+          "href": "/education/lessons/typescript/module-12/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Event Emitter Typing",
+          "description": "EventEmitter tip tanımlama",
+          "href": "/education/lessons/typescript/module-12/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Testing Typing",
+          "description": "Test framework tip tanımlama",
+          "href": "/education/lessons/typescript/module-12/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Microservices Typing",
+          "description": "Mikroservis tip tanımlama",
+          "href": "/education/lessons/typescript/module-12/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Node.js TypeScript Best Practices",
+          "description": "Node.js TypeScript en iyi uygulamaları",
+          "href": "/education/lessons/typescript/module-12/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/typescript/module-12/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-13",
+      "title": "Module 13: TypeScript Compiler Testi",
+      "summary": "TypeScript compiler detayları, compiler API, programmatic API, AST manipulation ve custom transformers.",
+      "durationMinutes": 450,
+      "objectives": [
+        "TypeScript compiler detaylarını anlamak",
+        "Compiler API kullanmayı öğrenmek",
+        "Programmatic API kullanmayı öğrenmek",
+        "Custom transformers oluşturmayı öğrenmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: TypeScript Compiler Overview",
+          "description": "Compiler yapısı ve süreç",
+          "href": "/education/lessons/typescript/module-13/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Compiler API",
+          "description": "TypeScript compiler API",
+          "href": "/education/lessons/typescript/module-13/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Program API",
+          "description": "Program oluşturma ve yönetme",
+          "href": "/education/lessons/typescript/module-13/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: TypeChecker API",
+          "description": "Tip kontrolü API",
+          "href": "/education/lessons/typescript/module-13/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: AST (Abstract Syntax Tree)",
+          "description": "AST yapısı ve kullanımı",
+          "href": "/education/lessons/typescript/module-13/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: AST Traversal",
+          "description": "AST dolaşma",
+          "href": "/education/lessons/typescript/module-13/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: AST Transformation",
+          "description": "AST dönüşümü",
+          "href": "/education/lessons/typescript/module-13/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Custom Transformers",
+          "description": "Özel transformer oluşturma",
+          "href": "/education/lessons/typescript/module-13/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Source File Manipulation",
+          "description": "Kaynak dosya manipülasyonu",
+          "href": "/education/lessons/typescript/module-13/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Code Generation",
+          "description": "Kod üretimi",
+          "href": "/education/lessons/typescript/module-13/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Language Service API",
+          "description": "Language service kullanımı",
+          "href": "/education/lessons/typescript/module-13/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Diagnostic Messages",
+          "description": "Hata mesajları",
+          "href": "/education/lessons/typescript/module-13/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Custom Linting",
+          "description": "Özel linting kuralları",
+          "href": "/education/lessons/typescript/module-13/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Compiler Best Practices",
+          "description": "Compiler kullanım en iyi uygulamaları",
+          "href": "/education/lessons/typescript/module-13/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/typescript/module-13/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-14",
+      "title": "Module 14: Best Practices Testi",
+      "summary": "TypeScript geliştirmede en iyi uygulamalar, kod kalitesi, tip güvenliği, performans ve maintainability.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Kod kalitesi standartlarını öğrenmek",
+        "Tip güvenliği best practices uygulamak",
+        "Performans optimizasyon tekniklerini öğrenmek",
+        "Maintainable kod yazmak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Code Quality Standards",
+          "description": "Kod kalitesi standartları",
+          "href": "/education/lessons/typescript/module-14/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Naming Conventions",
+          "description": "İsimlendirme kuralları",
+          "href": "/education/lessons/typescript/module-14/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Type Safety Best Practices",
+          "description": "Tip güvenliği en iyi uygulamaları",
+          "href": "/education/lessons/typescript/module-14/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Avoiding any Type",
+          "description": "any kullanımından kaçınma",
+          "href": "/education/lessons/typescript/module-14/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Error Handling",
+          "description": "Hata yönetimi stratejileri",
+          "href": "/education/lessons/typescript/module-14/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Code Organization",
+          "description": "Kod organizasyonu",
+          "href": "/education/lessons/typescript/module-14/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Documentation",
+          "description": "JSDoc ve tip dokümantasyonu",
+          "href": "/education/lessons/typescript/module-14/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Testing with Types",
+          "description": "Tip güvenli test yazma",
+          "href": "/education/lessons/typescript/module-14/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Refactoring Techniques",
+          "description": "Kod refaktörleme teknikleri",
+          "href": "/education/lessons/typescript/module-14/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Performance Considerations",
+          "description": "Performans düşünceleri",
+          "href": "/education/lessons/typescript/module-14/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Migration Strategies",
+          "description": "JavaScript'ten TypeScript'e geçiş",
+          "href": "/education/lessons/typescript/module-14/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Team Collaboration",
+          "description": "Takım işbirliği",
+          "href": "/education/lessons/typescript/module-14/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Maintainability",
+          "description": "Bakım yapılabilirlik",
+          "href": "/education/lessons/typescript/module-14/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Common Pitfalls",
+          "description": "Yaygın hatalar ve çözümleri",
+          "href": "/education/lessons/typescript/module-14/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Modül Özeti ve Uygulama",
+          "description": "Öğrenilenlerin pratik uygulaması",
+          "href": "/education/lessons/typescript/module-14/lesson-15"
+        }
+      ]
+    },
+    {
+      "id": "module-15",
+      "title": "Module 15: Capstone Project Testi",
+      "summary": "Kapsamlı bir TypeScript projesi geliştirerek tüm öğrenilenleri uygulama, gerçek dünya senaryosu ve portfolio projesi.",
+      "durationMinutes": 450,
+      "objectives": [
+        "Tüm öğrenilenleri bir projede uygulamak",
+        "Gerçek dünya senaryosu geliştirmek",
+        "Portfolio projesi oluşturmak",
+        "End-to-end uygulama geliştirmek"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Proje Planlama",
+          "description": "Proje gereksinimleri ve planlama",
+          "href": "/education/lessons/typescript/module-15/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Type System Design",
+          "description": "Tip sistemi tasarımı",
+          "href": "/education/lessons/typescript/module-15/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Architecture Setup",
+          "description": "Mimari yapılandırma",
+          "href": "/education/lessons/typescript/module-15/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Core Types Implementation",
+          "description": "Temel tip implementasyonu",
+          "href": "/education/lessons/typescript/module-15/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Generic Components",
+          "description": "Generic component geliştirme",
+          "href": "/education/lessons/typescript/module-15/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: API Integration",
+          "description": "API entegrasyonu ve tip tanımlama",
+          "href": "/education/lessons/typescript/module-15/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Error Handling",
+          "description": "Kapsamlı hata yönetimi",
+          "href": "/education/lessons/typescript/module-15/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Testing Strategy",
+          "description": "Test stratejisi",
+          "href": "/education/lessons/typescript/module-15/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Performance Optimization",
+          "description": "Performans optimizasyonu",
+          "href": "/education/lessons/typescript/module-15/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Documentation",
+          "description": "Proje dokümantasyonu",
+          "href": "/education/lessons/typescript/module-15/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Code Review",
+          "description": "Kod incelemesi",
+          "href": "/education/lessons/typescript/module-15/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Deployment Preparation",
+          "description": "Dağıtım hazırlığı",
+          "href": "/education/lessons/typescript/module-15/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: CI/CD Setup",
+          "description": "Sürekli entegrasyon kurulumu",
+          "href": "/education/lessons/typescript/module-15/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Project Review",
+          "description": "Proje incelemesi",
+          "href": "/education/lessons/typescript/module-15/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Project Presentation",
+          "description": "Proje sunumu",
+          "href": "/education/lessons/typescript/module-15/lesson-15"
+        }
+      ]
+    }
+  ]
+}
