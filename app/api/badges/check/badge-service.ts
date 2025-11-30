@@ -1,10 +1,131 @@
 import { db } from "@/lib/db";
 import { Prisma } from "@prisma/client";
 import { calculateBadgeProgress } from "@/lib/services/gamification/badge-progress";
+import { readFile } from "fs/promises";
+import { join } from "path";
 
 export interface BadgeCheckResult {
   newlyEarnedBadges: any[];
   totalEarned: number;
+}
+
+// Helper function to import badges from JSON to database
+async function ensureBadgesInDatabase() {
+  try {
+    // Önce veritabanında rozet var mı kontrol et
+    const existingBadges = await db.badge.findMany({ take: 1 });
+    if (existingBadges.length > 0) {
+      return; // Rozetler zaten var, import gerekmez
+    }
+
+    console.log("[BADGE_SERVICE] Veritabanında rozet bulunamadı, JSON'dan otomatik import başlatılıyor...");
+    
+    // JSON dosyasını oku
+    const filePath = join(process.cwd(), "public", "data", "badges.json");
+    const fileContents = await readFile(filePath, "utf-8");
+    const jsonData = JSON.parse(fileContents);
+
+    if (!jsonData.badges || !Array.isArray(jsonData.badges)) {
+      console.error("[BADGE_SERVICE] Geçersiz JSON formatı. 'badges' array'i bulunamadı.");
+      return;
+    }
+
+    const badges = jsonData.badges;
+    console.log(`[BADGE_SERVICE] Found ${badges.length} badges in JSON file, importing...`);
+
+    let created = 0;
+    let skipped = 0;
+
+    // Her rozeti işle
+    for (const badgeData of badges) {
+      try {
+        // Gerekli alanları kontrol et
+        if (!badgeData.id || !badgeData.name || !badgeData.category) {
+          skipped++;
+          continue;
+        }
+
+        // Category enum mapping
+        const categoryMap: Record<string, string> = {
+          "daily_activities": "daily_activities",
+          "score": "score",
+          "social_interaction": "social_interaction",
+          "streak": "streak",
+          "special": "special",
+          "test_count": "test_count",
+          "topic": "topic",
+        };
+
+        const category = categoryMap[badgeData.category];
+        if (!category) {
+          skipped++;
+          continue;
+        }
+
+        // Tier enum mapping (optional)
+        const tierMap: Record<string, string> = {
+          "bronze": "bronze",
+          "silver": "silver",
+          "gold": "gold",
+          "platinum": "platinum",
+        };
+
+        const tier = badgeData.tier ? tierMap[badgeData.tier] : null;
+
+        // Rarity enum mapping
+        const rarityMap: Record<string, string> = {
+          "common": "common",
+          "rare": "rare",
+          "epic": "epic",
+          "legendary": "legendary",
+        };
+
+        const rarity = rarityMap[badgeData.rarity] || "common";
+
+        // Rozet verilerini hazırla
+        const badgePayload = {
+          id: badgeData.id,
+          key: badgeData.key || null,
+          name: badgeData.name,
+          description: badgeData.description || "",
+          icon: badgeData.icon || "🏆",
+          iconUrl: badgeData.iconUrl || null,
+          color: badgeData.color || "#FFD700",
+          category: category as any,
+          tier: tier ? (tier as any) : null,
+          rarity: rarity as any,
+          points: badgeData.points || 10,
+          criteria: badgeData.criteria || {},
+          ruleJson: badgeData.ruleJson || null,
+        };
+
+        // Upsert işlemi (key veya id ile kontrol et)
+        const existingBadge = await db.badge.findFirst({
+          where: {
+            OR: [
+              { id: badgeData.id },
+              ...(badgeData.key ? [{ key: badgeData.key }] : []),
+            ],
+          },
+        });
+
+        if (!existingBadge) {
+          // Oluştur
+          await db.badge.create({
+            data: badgePayload,
+          });
+          created++;
+        }
+      } catch (error: any) {
+        console.error(`[BADGE_SERVICE] Rozet işlenirken hata (${badgeData.id || badgeData.key || 'unknown'}):`, error.message);
+        skipped++;
+      }
+    }
+
+    console.log(`[BADGE_SERVICE] Import completed: ${created} created, ${skipped} skipped`);
+  } catch (error: any) {
+    console.error("[BADGE_SERVICE] Error importing badges:", error);
+  }
 }
 
 interface BadgeCheckParams {
@@ -198,6 +319,9 @@ export async function checkBadgesForAttempt({
     }
 
     console.log(`[BADGE_CHECK] Rozet kontrolü başlatıldı. userId: ${userId}, quizAttemptId: ${quizAttemptId}, score: ${quizAttempt.score}, completedAt: ${quizAttempt.completedAt}`);
+
+    // Rozetlerin veritabanında olduğundan emin ol
+    await ensureBadgesInDatabase();
 
     const allBadges = await db.badge.findMany();
     const userBadges = await db.userBadge.findMany({
@@ -805,6 +929,9 @@ export async function checkBadgesForActivity({
   userId,
   activityType,
 }: ActivityBadgeCheckParams): Promise<BadgeCheckResult> {
+  // Rozetlerin veritabanında olduğundan emin ol
+  await ensureBadgesInDatabase();
+
   const allBadges = await db.badge.findMany();
   const userBadges = await db.userBadge.findMany({
     where: { userId },
@@ -1058,6 +1185,9 @@ export async function checkSocialInteractionBadges({
 }: {
   userId: string;
 }): Promise<BadgeCheckResult> {
+  // Rozetlerin veritabanında olduğundan emin ol
+  await ensureBadgesInDatabase();
+
   const allBadges = await db.badge.findMany({
     where: {
       category: "social_interaction",
@@ -1180,6 +1310,9 @@ export async function checkAllUserBadges({
 }: {
   userId: string;
 }): Promise<BadgeCheckResult> {
+  // Rozetlerin veritabanında olduğundan emin ol
+  await ensureBadgesInDatabase();
+
   const allBadges = await db.badge.findMany();
   const userBadges = await db.userBadge.findMany({
     where: { userId },

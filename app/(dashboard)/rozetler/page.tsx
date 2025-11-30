@@ -382,7 +382,7 @@ export default function RozetlerPage() {
       // Tüm rozetleri kontrol et (eksik olanları tespit et)
       checkAllBadges();
     }
-  }, [status, router]);
+  }, [status, router, fetchUserBadges, fetchProgress, checkAllBadges]);
 
   // Sayfa görünür olduğunda veya focus aldığında rozetleri yenile
   useEffect(() => {

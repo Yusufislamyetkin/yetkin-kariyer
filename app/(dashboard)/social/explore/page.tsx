@@ -3,20 +3,44 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { ExploreGrid } from "@/app/components/social/ExploreGrid";
-import { Loader2, Search, X } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
+import { PostCard } from "@/app/components/social/PostCard";
+import { Loader2 } from "lucide-react";
+import { Button } from "@/app/components/ui/Button";
+import { useBadgeNotificationHandler } from "@/hooks/useBadgeNotificationHandler";
 
 interface Post {
   id: string;
-  imageUrl: string;
+  userId: string;
+  content: string | null;
+  imageUrl: string | null;
+  createdAt: string;
+  user: {
+    id: string;
+    name: string | null;
+    email: string;
+    profileImage: string | null;
+  };
   likesCount: number;
   commentsCount: number;
+  isLiked: boolean;
+  isSaved: boolean;
+  comments?: Array<{
+    id: string;
+    userId: string;
+    content: string;
+    createdAt: string;
+    user: {
+      id: string;
+      name: string | null;
+      profileImage: string | null;
+    };
+  }>;
 }
 
 export default function ExplorePage() {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const { handleBadgeResults } = useBadgeNotificationHandler();
   const [posts, setPosts] = useState<Post[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
@@ -30,16 +54,16 @@ export default function ExplorePage() {
     if (status !== "authenticated" || !session?.user?.id) return;
 
     try {
-      if (pageNum === 1) {
-        setIsLoading(true);
-      } else {
+      if (pageNum !== 1) {
         setIsLoadingMore(true);
+      } else {
+        setIsLoading(true);
       }
       setError(null);
 
       const searchParam = search && search.trim() ? `&search=${encodeURIComponent(search.trim())}` : "";
       const response = await fetch(
-        `/api/posts?type=explore&page=${pageNum}&limit=21${searchParam}`
+        `/api/posts?type=explore&page=${pageNum}&limit=10${searchParam}`
       );
 
       if (!response.ok) {
@@ -59,8 +83,11 @@ export default function ExplorePage() {
       setError(error.message || "Gönderiler yüklenirken bir hata oluştu");
       console.error("Error fetching posts:", error);
     } finally {
-      setIsLoading(false);
-      setIsLoadingMore(false);
+      if (pageNum !== 1) {
+        setIsLoadingMore(false);
+      } else {
+        setIsLoading(false);
+      }
     }
   }, [session, status]);
 
@@ -105,29 +132,81 @@ export default function ExplorePage() {
     }
   }, [page, hasMore, isLoadingMore, fetchPosts, searchQuery]);
 
-  const handlePostClick = useCallback((postId: string) => {
+  const handleLike = useCallback(async (postId: string) => {
+    try {
+      const response = await fetch(`/api/posts/${postId}/like`, {
+        method: "POST",
+      });
+
+      if (!response.ok) {
+        throw new Error("Beğeni işlemi başarısız");
+      }
+
+      const data = await response.json();
+
+      // Check for badge results and show notification
+      if (data.badgeResults) {
+        handleBadgeResults(data.badgeResults);
+      }
+
+      // Update local state
+      setPosts((prev) =>
+        prev.map((post) => {
+          if (post.id === postId) {
+            return {
+              ...post,
+              isLiked: data.liked,
+              likesCount: data.likesCount,
+            };
+          }
+          return post;
+        })
+      );
+    } catch (error) {
+      console.error("Error liking post:", error);
+      throw error;
+    }
+  }, [handleBadgeResults]);
+
+  const handleSave = useCallback(async (postId: string) => {
+    try {
+      const response = await fetch(`/api/posts/${postId}/save`, {
+        method: "POST",
+      });
+
+      if (!response.ok) {
+        throw new Error("Kaydetme işlemi başarısız");
+      }
+
+      const data = await response.json();
+
+      // Update local state
+      setPosts((prev) =>
+        prev.map((post) => {
+          if (post.id === postId) {
+            return {
+              ...post,
+              isSaved: data.saved,
+            };
+          }
+          return post;
+        })
+      );
+    } catch (error) {
+      console.error("Error saving post:", error);
+      throw error;
+    }
+  }, []);
+
+  const handleCommentClick = useCallback((postId: string) => {
     router.push(`/social/posts/${postId}`);
   }, [router]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (
-        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 1000 &&
-        !isLoadingMore &&
-        hasMore
-      ) {
-        loadMore();
-      }
-    };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [loadMore, isLoadingMore, hasMore]);
-
-  if (status === "loading" || isLoading) {
+  if (status === "loading" || (isLoading && posts.length === 0)) {
     return (
-      <div className="flex items-center justify-center min-h-[600px] bg-gray-50 dark:bg-gray-950">
-        <Loader2 className="w-10 h-10 animate-spin text-[#0095f6]" />
+      <div className="flex items-center justify-center min-h-[400px]">
+        <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
       </div>
     );
   }
@@ -156,30 +235,55 @@ export default function ExplorePage() {
           </div>
         )}
 
-        {/* Posts Grid */}
-        {posts.length === 0 && !isLoading ? (
-          <div className="bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 rounded-2xl p-16 text-center shadow-lg">
-            <p className="text-lg text-gray-600 dark:text-gray-400">
-              {searchQuery
-                ? `"${searchQuery}" için sonuç bulunamadı.`
-                : "Henüz keşfedilecek gönderi yok."}
-            </p>
-          </div>
-        ) : (
-          <ExploreGrid posts={posts} onPostClick={handlePostClick} />
-        )}
+        {/* Posts Feed */}
+        <div className="flex justify-center">
+          <div className="w-full max-w-[900px]">
+            {posts.length === 0 && !isLoading ? (
+              <div className="bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 rounded-2xl p-16 text-center shadow-lg">
+                <p className="text-lg text-gray-600 dark:text-gray-400">
+                  {searchQuery
+                    ? `"${searchQuery}" için sonuç bulunamadı.`
+                    : "Henüz keşfedilecek gönderi yok."}
+                </p>
+              </div>
+            ) : (
+              <div className="space-y-6">
+                {posts.map((post) => (
+                  <PostCard
+                    key={post.id}
+                    post={post}
+                    onLike={handleLike}
+                    onSave={handleSave}
+                    onCommentClick={handleCommentClick}
+                    currentUserId={session?.user?.id || ""}
+                  />
+                ))}
 
-        {/* Loading more */}
-        {isLoadingMore && (
-          <div className="flex justify-center py-12">
-            <div className="flex items-center gap-3">
-              <Loader2 className="w-8 h-8 animate-spin text-[#0095f6]" />
-              <span className="text-base text-gray-600 dark:text-gray-400 font-medium">
-                Daha fazla yükleniyor...
-              </span>
-            </div>
+                {/* Load more */}
+                {hasMore && (
+                  <div className="flex justify-center py-8">
+                    <Button
+                      onClick={loadMore}
+                      disabled={isLoadingMore}
+                      variant="outline"
+                      size="lg"
+                      className="min-w-[200px] px-8 py-3 text-base font-semibold rounded-xl border-2"
+                    >
+                      {isLoadingMore ? (
+                        <>
+                          <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                          Yükleniyor...
+                        </>
+                      ) : (
+                        "Daha Fazla Yükle"
+                      )}
+                    </Button>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );

@@ -363,7 +363,7 @@ export default function BrowseJobsPage() {
                           const companyInfo = getCompanyInfoForJob(job.title);
                           return (
                             <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                              {companyInfo.name}
+                              Kategori : {companyInfo.name}
                             </span>
                           );
                         })()}

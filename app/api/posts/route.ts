@@ -111,49 +111,31 @@ export async function GET(request: Request) {
         posts = posts.slice(0, limit);
       }
     } else if (type === "explore") {
-      // Get popular posts (most liked in last 7 days + recent posts)
-      const sevenDaysAgo = new Date();
-      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-
+      // Get all posts from all profiles (sorted by popularity and date)
       // Build where clause
-      const whereClause: any = {
-        createdAt: {
-          gte: sevenDaysAgo,
-        },
-      };
+      const whereClause: any = {};
 
       // Add search filter if provided
       if (search && search.trim()) {
-        whereClause.AND = [
+        whereClause.OR = [
           {
-            createdAt: {
-              gte: sevenDaysAgo,
+            content: {
+              contains: search.trim(),
+              mode: "insensitive" as const,
             },
           },
           {
-            OR: [
-              {
-                content: {
-                  contains: search.trim(),
-                  mode: "insensitive" as const,
-                },
+            user: {
+              name: {
+                contains: search.trim(),
+                mode: "insensitive" as const,
               },
-              {
-                user: {
-                  name: {
-                    contains: search.trim(),
-                    mode: "insensitive" as const,
-                  },
-                },
-              },
-            ],
+            },
           },
         ];
-        // Remove the top-level createdAt since it's now in AND
-        delete whereClause.createdAt;
       }
 
-      // Get all posts from last 7 days (with optional search filter)
+      // Get all posts (with optional search filter)
       const allPosts = await db.post.findMany({
         where: whereClause,
         include: {

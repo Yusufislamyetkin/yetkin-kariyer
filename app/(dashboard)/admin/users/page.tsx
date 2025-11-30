@@ -134,39 +134,118 @@ export default function AdminUsersPage() {
   };
 
   const handleConvertToBots = async () => {
+    console.log("[BOT_CONVERT] Button clicked, selectedUsers:", selectedUsers.size);
+    
     if (selectedUsers.size === 0) {
       alert("Lütfen en az bir kullanıcı seçin");
       return;
     }
 
     if (!confirm(`${selectedUsers.size} kullanıcıyı bot'a dönüştürmek istediğinizden emin misiniz?`)) {
+      console.log("[BOT_CONVERT] User cancelled the operation");
       return;
     }
 
     setConverting(true);
+    const userIds = Array.from(selectedUsers);
+    console.log("[BOT_CONVERT] Starting conversion for users:", userIds);
+    
     try {
       const response = await fetch("/api/admin/bots/convert", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          userIds: Array.from(selectedUsers),
+          userIds,
           autoGenerateCharacter: true,
         }),
       });
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Bot'a dönüştürme başarısız");
+      console.log("[BOT_CONVERT] Response status:", response.status);
+      
+      let data;
+      try {
+        data = await response.json();
+        console.log("[BOT_CONVERT] Response data:", data);
+      } catch (jsonError: any) {
+        console.error("[BOT_CONVERT] Failed to parse JSON response:", jsonError);
+        const text = await response.text();
+        console.error("[BOT_CONVERT] Response text:", text);
+        throw new Error("Sunucudan geçersiz yanıt alındı");
       }
 
-      alert(`${data.summary.successful} kullanıcı başarıyla bot'a dönüştürüldü. ${data.summary.failed > 0 ? `${data.summary.failed} kullanıcı için hata oluştu.` : ""}`);
+      if (!response.ok) {
+        const errorMessage = data?.error || `HTTP ${response.status}: Bot'a dönüştürme başarısız`;
+        console.error("[BOT_CONVERT] API error:", errorMessage);
+        throw new Error(errorMessage);
+      }
+
+      if (!data || !data.summary) {
+        console.error("[BOT_CONVERT] Invalid response format:", data);
+        throw new Error("Sunucudan beklenmeyen yanıt formatı alındı");
+      }
+
+      // Build detailed success message
+      let successMessage = "";
+      if (data.summary.successful > 0) {
+        successMessage = `✅ ${data.summary.successful} kullanıcı başarıyla bot'a dönüştürüldü.`;
+      }
+      
+      if (data.summary.failed > 0) {
+        const failedMessage = `\n⚠️ ${data.summary.failed} kullanıcı için hata oluştu.`;
+        successMessage += failedMessage;
+        
+        // Show detailed error information if available
+        if (data.results && Array.isArray(data.results)) {
+          const failedResults = data.results.filter((r: any) => !r.success);
+          if (failedResults.length > 0) {
+            const errorDetails = failedResults
+              .map((r: any) => `\n  - ${r.userName || r.userId}: ${r.error || "Bilinmeyen hata"}`)
+              .join("");
+            successMessage += `\n\nHata detayları:${errorDetails}`;
+          }
+        }
+      }
+
+      if (data.summary.successful === 0 && data.summary.failed > 0) {
+        // All failed
+        throw new Error(successMessage.replace("✅", "").replace("⚠️", "❌"));
+      }
+
+      console.log("[BOT_CONVERT] Success:", successMessage);
+      
+      alert(successMessage);
       setSelectedUsers(new Set());
-      fetchUsers(currentPage, search, roleFilter);
+      
+      // Refresh the user list to show updated bot status
+      await fetchUsers(currentPage, search, roleFilter);
     } catch (error: any) {
-      alert(`Hata: ${error.message}`);
+      console.error("[BOT_CONVERT] Error occurred:", error);
+      
+      let errorMessage = "Bilinmeyen bir hata oluştu";
+      
+      if (error?.message) {
+        errorMessage = error.message;
+      } else if (typeof error === "string") {
+        errorMessage = error;
+      } else if (error?.response?.data?.error) {
+        errorMessage = error.response.data.error;
+      }
+      
+      // Provide more helpful error messages
+      if (errorMessage.includes("Network") || errorMessage.includes("fetch")) {
+        errorMessage = "Ağ hatası: Sunucuya bağlanılamadı. Lütfen internet bağlantınızı kontrol edin.";
+      } else if (errorMessage.includes("401") || errorMessage.includes("Unauthorized")) {
+        errorMessage = "Yetkilendirme hatası: Bu işlem için admin yetkisi gereklidir.";
+      } else if (errorMessage.includes("400")) {
+        errorMessage = `Geçersiz istek: ${errorMessage}`;
+      } else if (errorMessage.includes("500")) {
+        errorMessage = "Sunucu hatası: Lütfen daha sonra tekrar deneyin veya sistem yöneticisine başvurun.";
+      }
+      
+      alert(`❌ Hata: ${errorMessage}`);
     } finally {
       setConverting(false);
+      console.log("[BOT_CONVERT] Conversion process completed");
     }
   };
 
@@ -318,10 +397,18 @@ export default function AdminUsersPage() {
                         Seçimi Temizle
                       </Button>
                       <Button
-                        onClick={handleConvertToBots}
-                        disabled={converting}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          console.log("[BOT_CONVERT] Button clicked, selectedUsers:", selectedUsers.size, "converting:", converting);
+                          if (!converting && selectedUsers.size > 0) {
+                            handleConvertToBots();
+                          }
+                        }}
+                        disabled={converting || selectedUsers.size === 0}
                         size="sm"
-                        className="bg-blue-600 hover:bg-blue-700"
+                        className="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                        type="button"
                       >
                         {converting ? (
                           <>
