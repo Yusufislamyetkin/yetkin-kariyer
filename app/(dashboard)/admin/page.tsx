@@ -1508,23 +1508,30 @@ export default function AdminPage() {
   };
 
   const handleCreateProfiles = async () => {
-    if (!noPhotoUserCount || noPhotoUserCount < 0) {
+    console.log("[ADMIN] handleCreateProfiles called", { noPhotoUserCount });
+    
+    const userCount = noPhotoUserCount ?? 1000;
+    
+    if (userCount < 0) {
       alert("Lütfen geçerli bir kullanıcı sayısı girin (0 veya daha büyük)");
       return;
     }
 
     if (
       !confirm(
-        `Photos klasöründeki tüm fotoğraflar için profil hesapları oluşturulacak ve ${noPhotoUserCount} adet fotoğrafsız kullanıcı eklenecek. Devam etmek istiyor musunuz?`
+        `Photos klasöründeki tüm fotoğraflar için profil hesapları oluşturulacak ve ${userCount} adet fotoğrafsız kullanıcı eklenecek. Devam etmek istiyor musunuz?`
       )
     ) {
+      console.log("[ADMIN] User cancelled profile creation");
       return;
     }
 
     if (profileState.loading) {
+      console.log("[ADMIN] Already loading, skipping");
       return;
     }
 
+    console.log("[ADMIN] Starting profile creation...");
     setProfileState({
       loading: true,
       success: null,
@@ -1533,13 +1540,16 @@ export default function AdminPage() {
     });
 
     try {
+      console.log("[ADMIN] Sending request to /api/admin/create-profiles", { noPhotoUserCount: userCount });
       const response = await fetch("/api/admin/create-profiles", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ noPhotoUserCount }),
+        body: JSON.stringify({ noPhotoUserCount: userCount }),
       });
 
+      console.log("[ADMIN] Response status:", response.status);
       const data = await response.json();
+      console.log("[ADMIN] Response data:", data);
 
       if (!response.ok) {
         throw new Error(data.error || "Profil hesapları oluşturulurken bir hata oluştu");
@@ -1552,6 +1562,7 @@ export default function AdminPage() {
         stats: data.stats || null,
       });
     } catch (err: any) {
+      console.error("[ADMIN] Error creating profiles:", err);
       setProfileState({
         loading: false,
         success: null,
@@ -1562,18 +1573,23 @@ export default function AdminPage() {
   };
 
   const handleDeleteProfiles = async () => {
+    console.log("[ADMIN] handleDeleteProfiles called");
+    
     if (
       !confirm(
         "TÜM oluşturulan profil hesaplarını silmek istediğinizden emin misiniz? Bu işlem geri alınamaz!"
       )
     ) {
+      console.log("[ADMIN] User cancelled profile deletion");
       return;
     }
 
     if (deleteProfileState.loading) {
+      console.log("[ADMIN] Already loading, skipping");
       return;
     }
 
+    console.log("[ADMIN] Starting profile deletion...");
     setDeleteProfileState({
       loading: true,
       success: null,
@@ -1581,12 +1597,15 @@ export default function AdminPage() {
     });
 
     try {
+      console.log("[ADMIN] Sending request to /api/admin/delete-profiles");
       const response = await fetch("/api/admin/delete-profiles", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
       });
 
+      console.log("[ADMIN] Response status:", response.status);
       const data = await response.json();
+      console.log("[ADMIN] Response data:", data);
 
       if (!response.ok) {
         throw new Error(data.error || "Profil hesapları silinirken bir hata oluştu");
@@ -1598,6 +1617,7 @@ export default function AdminPage() {
         error: null,
       });
     } catch (err: any) {
+      console.error("[ADMIN] Error deleting profiles:", err);
       setDeleteProfileState({
         loading: false,
         success: null,
