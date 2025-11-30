@@ -7,7 +7,7 @@
   "crons": [
     {
       "path": "/api/cron/bot-activities",
-      "schedule": "* * * * *"
+      "schedule": "0 * * * *"
     }
   ]
 }
