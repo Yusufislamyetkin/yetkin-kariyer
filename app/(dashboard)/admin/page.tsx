@@ -2457,7 +2457,12 @@ export default function AdminPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl">
             <div>
               <Button
-                onClick={handleCreateProfiles}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  console.log("[ADMIN] Button clicked - handleCreateProfiles");
+                  handleCreateProfiles();
+                }}
                 disabled={profileState.loading}
                 size="lg"
                 className="w-full bg-gradient-to-r from-green-600 to-emerald-700 hover:from-green-700 hover:to-emerald-800 text-white font-medium"
@@ -2594,7 +2599,12 @@ export default function AdminPage() {
             </div>
             <div>
               <Button
-                onClick={handleDeleteProfiles}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  console.log("[ADMIN] Button clicked - handleDeleteProfiles");
+                  handleDeleteProfiles();
+                }}
                 disabled={deleteProfileState.loading}
                 size="lg"
                 variant="danger"
