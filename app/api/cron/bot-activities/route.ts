@@ -2,10 +2,13 @@ import { NextResponse } from "next/server";
 import { executeBotActivity } from "@/lib/bot/activity-executor";
 import { db } from "@/lib/db";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 /**
- * Cron endpoint for bot activities (Test Mode)
- * Runs every minute and makes each active bot perform one random activity
- * This should be called by Vercel Cron or similar scheduler
+ * Bot activities endpoint
+ * Can be called manually from admin panel or by Vercel Cron
+ * Makes each active bot perform one random activity
  */
 enum BotActivityType {
   POST = "POST",
