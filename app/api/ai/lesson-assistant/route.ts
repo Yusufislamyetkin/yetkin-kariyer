@@ -458,6 +458,8 @@ export async function POST(request: Request) {
         hasProgress: !!context.progress,
         currentStep: context.progress?.step,
         stepStatus: context.progress?.status,
+        assistantId,
+        messageLength: userMessage.length,
       });
       response = await sendMessageToLessonAssistant(
         userId,
@@ -468,12 +470,43 @@ export async function POST(request: Request) {
       );
       console.log("[LESSON-ASSISTANT] Yanıt alındı, uzunluk:", response.content.length);
     } catch (error) {
-      console.error("[LESSON-ASSISTANT] Mesaj gönderme hatası:", error);
+      // Detaylı hata loglama
+      const errorDetails = {
+        errorMessage: error instanceof Error ? error.message : String(error),
+        errorStack: error instanceof Error ? error.stack : undefined,
+        errorName: error instanceof Error ? error.name : typeof error,
+        assistantId,
+        lessonSlug,
+        userId,
+      };
+      
+      console.error("[LESSON-ASSISTANT] Mesaj gönderme hatası:", errorDetails);
+      
+      // Daha açıklayıcı hata mesajları
+      let userFriendlyError = "AI'ye mesaj gönderilemedi";
+      let technicalDetails = error instanceof Error ? error.message : String(error);
+      
+      // Özel hata durumları için daha açıklayıcı mesajlar
+      if (technicalDetails.includes("rate_limit") || technicalDetails.includes("rate limit")) {
+        userFriendlyError = "Çok fazla istek gönderildi. Lütfen birkaç saniye bekleyip tekrar deneyin.";
+      } else if (technicalDetails.includes("timeout") || technicalDetails.includes("süresi aşıldı")) {
+        userFriendlyError = "İstek zaman aşımına uğradı. Lütfen tekrar deneyin.";
+      } else if (technicalDetails.includes("model_not_found") || technicalDetails.includes("model")) {
+        userFriendlyError = "AI modeli bulunamadı. Lütfen sistem yöneticisine bildirin.";
+      } else if (technicalDetails.includes("invalid_request") || technicalDetails.includes("Geçersiz")) {
+        userFriendlyError = "Geçersiz istek. Lütfen sayfayı yenileyip tekrar deneyin.";
+      } else if (technicalDetails.includes("authentication") || technicalDetails.includes("API key")) {
+        userFriendlyError = "AI servisi yapılandırma hatası. Lütfen sistem yöneticisine bildirin.";
+      }
+      
       return NextResponse.json(
         { 
-          error: "AI'ye mesaj gönderilemedi", 
-          details: error instanceof Error ? error.message : String(error),
-          stack: error instanceof Error ? error.stack : undefined
+          error: userFriendlyError, 
+          details: technicalDetails,
+          debug: process.env.NODE_ENV === "development" ? {
+            stack: error instanceof Error ? error.stack : undefined,
+            fullError: errorDetails
+          } : undefined
         },
         { status: 500 }
       );

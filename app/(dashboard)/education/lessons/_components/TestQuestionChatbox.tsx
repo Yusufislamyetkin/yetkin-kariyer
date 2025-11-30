@@ -34,6 +34,10 @@ export function TestQuestionChatbox({
 }: TestQuestionChatboxProps) {
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  
+  // Reset state when isAnswered changes from true to false (shouldn't happen, but safety check)
+  // Also ensure that if isAnswered is true, we don't allow new selections
+  // IMPORTANT: Don't auto-select an option when isAnswered is true - user should see the question as answered but not pre-selected
 
   // Normalize question data - handle nested question structure
   // Expected structure from parser: { question: { text: "...", options: [...], type: "multiple_choice", correctIndex: ... } }
@@ -138,7 +142,8 @@ export function TestQuestionChatbox({
   const hasCriticalError = !hasQuestionText && options.length === 0;
 
   const handleOptionClick = (index: number, option: string) => {
-    if (disabled || isSubmitted) return;
+    // Don't allow selection if already answered or disabled
+    if (disabled || isSubmitted || isAnswered) return;
     setSelectedOption(index);
     setIsSubmitted(true);
     onAnswer(option);
@@ -210,8 +215,9 @@ export function TestQuestionChatbox({
             <div className="space-y-3">
               {options.map((option, index) => {
                 const optionLetter = String.fromCharCode(65 + index); // A, B, C, D
-                const isSelected = selectedOption === index;
-                const isDisabled = disabled || isSubmitted;
+                // Only show as selected if user actually selected it (not pre-selected)
+                const isSelected = selectedOption === index && !isAnswered;
+                const isDisabled = disabled || isSubmitted || isAnswered;
 
                 return (
                   <button
@@ -265,8 +271,9 @@ export function TestQuestionChatbox({
             <div className="space-y-3">
               {options.map((option, index) => {
                 const optionLetter = String.fromCharCode(65 + index); // A, B, C, D
-                const isSelected = selectedOption === index;
-                const isDisabled = disabled || isSubmitted;
+                // Only show as selected if user actually selected it (not pre-selected)
+                const isSelected = selectedOption === index && !isAnswered;
+                const isDisabled = disabled || isSubmitted || isAnswered;
 
                 return (
                   <button

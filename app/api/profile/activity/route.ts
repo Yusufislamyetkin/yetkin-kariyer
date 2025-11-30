@@ -7,6 +7,7 @@ export const revalidate = 0;
 
 // GET /api/profile/activity - Kullanıcının son aktivitelerini döner
 // type: "own" (default), "global", "connections"
+// userId: Belirli bir kullanıcının aktivitelerini çekmek için (opsiyonel)
 export async function GET(request: Request) {
   try {
     const session = await auth();
@@ -14,22 +15,26 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const userId = session.user.id as string;
+    const currentUserId = session.user.id as string;
     const { searchParams } = new URL(request.url);
     const limit = parseInt(searchParams.get("limit") || "10");
     const type = searchParams.get("type") || "own"; // own, global, connections
+    const requestedUserId = searchParams.get("userId"); // Belirli bir kullanıcının aktivitelerini çekmek için
 
     // Determine which user IDs to fetch activities for
-    let targetUserIds: string[] = [userId];
-
-    if (type === "global") {
+    let targetUserIds: string[] = [];
+    
+    // Eğer userId parametresi verildiyse, o kullanıcının aktivitelerini çek (type'ı override eder)
+    if (requestedUserId) {
+      targetUserIds = [requestedUserId];
+    } else if (type === "global") {
       // Get all users (no filter)
       targetUserIds = [];
     } else if (type === "connections") {
       // Get users that the current user follows
       const following = await db.friendship.findMany({
         where: {
-          requesterId: userId,
+          requesterId: currentUserId,
           status: "accepted",
         },
         select: {
@@ -41,11 +46,14 @@ export async function GET(request: Request) {
       if (targetUserIds.length === 0) {
         return NextResponse.json({ activities: [] });
       }
+    } else {
+      // Default: own activities (current user)
+      targetUserIds = [currentUserId];
     }
 
     // Build where clause for user filtering
-    const userWhere = type === "global" 
-      ? {} // No user filter for global
+    const userWhere = (type === "global" && !requestedUserId)
+      ? {} // No user filter for global (unless userId is explicitly requested)
       : { userId: { in: targetUserIds } };
 
     // Get recent quiz attempts
@@ -133,7 +141,7 @@ export async function GET(request: Request) {
     quizAttempts.forEach((attempt: any) => {
       if (attempt.quiz) {
         const userName = attempt.user?.name || "Birisi";
-        const isOwn = attempt.userId === userId;
+        const isOwn = attempt.userId === currentUserId;
         activities.push({
           id: attempt.id,
           type: "quiz",
@@ -156,7 +164,7 @@ export async function GET(request: Request) {
     interviewAttempts.forEach((attempt: any) => {
       if (attempt.interview) {
         const userName = attempt.user?.name || "Birisi";
-        const isOwn = attempt.userId === userId;
+        const isOwn = attempt.userId === currentUserId;
         activities.push({
           id: attempt.id,
           type: "interview",
@@ -178,7 +186,7 @@ export async function GET(request: Request) {
 
     cvs.forEach((cv: any) => {
       const userName = cv.user?.name || "Birisi";
-      const isOwn = cv.userId === userId;
+      const isOwn = cv.userId === currentUserId;
       activities.push({
         id: cv.id,
         type: "cv",
@@ -197,7 +205,7 @@ export async function GET(request: Request) {
     applications.forEach((app: any) => {
       if (app.job) {
         const userName = app.user?.name || "Birisi";
-        const isOwn = app.userId === userId;
+        const isOwn = app.userId === currentUserId;
         activities.push({
           id: app.id,
           type: "application",

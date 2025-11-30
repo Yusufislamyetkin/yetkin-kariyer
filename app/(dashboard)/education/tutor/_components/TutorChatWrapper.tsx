@@ -29,14 +29,26 @@ interface WrongQuestion {
 export function TutorChatWrapper() {
   const [allWrongQuestions, setAllWrongQuestions] = useState<WrongQuestion[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchWrongQuestions = async () => {
       try {
+        console.log("[TutorChatWrapper] Fetching wrong questions...");
+        setError(null);
         const response = await fetch("/api/education/wrong-questions");
+        
+        console.log("[TutorChatWrapper] Response status:", response.status);
+        
+        if (!response.ok) {
+          throw new Error("Sorular yüklenirken bir hata oluştu");
+        }
+        
         const data = await response.json();
+        console.log("[TutorChatWrapper] Received data:", data);
         const questions = data.wrongQuestions || [];
+        console.log("[TutorChatWrapper] Questions count:", questions.length);
         
         // Tüm soruları sakla (sidebar için)
         setAllWrongQuestions(questions);
@@ -45,6 +57,7 @@ export function TutorChatWrapper() {
         const notUnderstoodQuestions = questions.filter(
           (q: WrongQuestion) => q.status !== "understood"
         );
+        console.log("[TutorChatWrapper] Not understood questions count:", notUnderstoodQuestions.length);
         
         // İlk soruyu aktif yap (understood olmayanlar arasından)
         if (notUnderstoodQuestions.length > 0) {
@@ -52,11 +65,16 @@ export function TutorChatWrapper() {
           const firstNotUnderstoodIndex = questions.findIndex(
             (q: WrongQuestion) => q.id === notUnderstoodQuestions[0].id
           );
+          console.log("[TutorChatWrapper] Setting current question index:", firstNotUnderstoodIndex);
           setCurrentQuestionIndex(firstNotUnderstoodIndex);
+        } else {
+          console.log("[TutorChatWrapper] No not-understood questions found");
         }
       } catch (error) {
-        console.error("Error fetching wrong questions:", error);
+        console.error("[TutorChatWrapper] Error fetching wrong questions:", error);
+        setError(error instanceof Error ? error.message : "Bir hata oluştu");
       } finally {
+        console.log("[TutorChatWrapper] Setting loading to false");
         setLoading(false);
       }
     };
@@ -140,6 +158,8 @@ export function TutorChatWrapper() {
           currentQuestion={currentQuestion}
           onQuestionUnderstood={handleQuestionUnderstood}
           onNextQuestion={handleNextQuestion}
+          wrapperLoading={loading}
+          wrapperError={error}
         />
       </div>
       

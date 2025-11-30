@@ -18,7 +18,7 @@ export async function POST() {
 
     console.log("[CREATE_TEST_API] Starting AI for Developers test creation...");
 
-    const expertise = "AI for Developers";
+    const expertise = "Yazılımcılar İçin Yapay Zeka";
     
     // Read test modules from JSON file
     let testContent: any = null;
@@ -117,7 +117,7 @@ export async function POST() {
 
     return NextResponse.json({
       success: true,
-      message: `AI for Developers testleri başarıyla oluşturuldu. ${modules.length} modül, ${totalTests} test eklendi.`,
+      message: `Yazılımcılar İçin Yapay Zeka testleri başarıyla oluşturuldu. ${modules.length} modül, ${totalTests} test eklendi.`,
       stats: {
         testsCreated: totalTests,
         modulesCreated: modules.length,

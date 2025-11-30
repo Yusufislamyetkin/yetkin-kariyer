@@ -39,6 +39,8 @@ type TutorChatProps = {
   currentQuestion: WrongQuestion | null;
   onQuestionUnderstood: (questionId: string) => void;
   onNextQuestion: () => void;
+  wrapperLoading: boolean;
+  wrapperError: string | null;
 };
 
 export function TutorChat({
@@ -46,6 +48,8 @@ export function TutorChat({
   currentQuestion,
   onQuestionUnderstood,
   onNextQuestion,
+  wrapperLoading,
+  wrapperError,
 }: TutorChatProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(true);
@@ -69,7 +73,12 @@ export function TutorChat({
 
   // Explain current question when it changes (after initialization)
   const explainCurrentQuestion = useCallback(async (question: WrongQuestion | null) => {
-    if (!question) return;
+    if (!question) {
+      console.log("[TutorChat] explainCurrentQuestion called with null question");
+      return;
+    }
+
+    console.log("[TutorChat] explainCurrentQuestion called for question:", question.id);
 
     // İlk mesaj: Soruyu ve kullanıcının cevabını göster
     const userAnswerDisplay = question.userAnswer === "-1" || question.userAnswer === "" || !question.userAnswer
@@ -91,28 +100,36 @@ export function TutorChat({
     setError(null);
 
     try {
+      console.log("[TutorChat] Calling /api/ai/smart-teacher");
+      const requestBody = {
+        message: "Bu sorunun doğru cevabının neden doğru olduğunu kısa ve öz bir şekilde açıkla. Maksimum 100 kelime kullan. Açıklamadan sonra, eğer kullanıcı sorunun doğru cevabını anladıysa gönder butonun yanında duran 'Anlaşıldı' butonuna basmasını söyle.",
+        currentQuestionId: question.id,
+        currentQuestion: {
+          questionText: question.questionText,
+          correctAnswer: question.correctAnswer,
+          userAnswer: question.userAnswer === "-1" || question.userAnswer === "" || !question.userAnswer
+            ? "Boş bırakıldı"
+            : question.userAnswer,
+        },
+      };
+      console.log("[TutorChat] Request body:", requestBody);
+
       const response = await fetch("/api/ai/smart-teacher", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: "Bu sorunun doğru cevabının neden doğru olduğunu kısa ve öz bir şekilde açıkla. Maksimum 100 kelime kullan. Açıklamadan sonra, eğer kullanıcı sorunun doğru cevabını anladıysa gönder butonun yanında duran 'Anlaşıldı' butonuna basmasını söyle.",
-          currentQuestionId: question.id,
-          currentQuestion: {
-            questionText: question.questionText,
-            correctAnswer: question.correctAnswer,
-            userAnswer: question.userAnswer === "-1" || question.userAnswer === "" || !question.userAnswer
-              ? "Boş bırakıldı"
-              : question.userAnswer,
-          },
-        }),
+        body: JSON.stringify(requestBody),
       });
+
+      console.log("[TutorChat] Response status:", response.status);
 
       if (!response.ok) {
         const data = await response.json().catch(() => ({}));
+        console.error("[TutorChat] API error:", data);
         throw new Error(data.error || "AI yanıtı alınamadı");
       }
 
       const data = await response.json();
+      console.log("[TutorChat] Received AI response:", data);
       const assistantMessage: Message = {
         id: `msg-${Date.now()}-explanation`,
         role: "assistant",
@@ -122,7 +139,7 @@ export function TutorChat({
 
       setMessages((prev) => [...prev, assistantMessage]);
     } catch (err) {
-      console.error("Error explaining question:", err);
+      console.error("[TutorChat] Error explaining question:", err);
       setError(err instanceof Error ? err.message : "Bir hata oluştu");
     } finally {
       setSending(false);
@@ -130,26 +147,63 @@ export function TutorChat({
     }
   }, []);
 
-  // Initialize: Load first question when component mounts or when currentQuestion becomes available
+  // Initialize: Load first question when wrapper finishes loading and currentQuestion becomes available
   useEffect(() => {
-    if (hasInitializedRef.current) return; // Already initialized
+    console.log("[TutorChat] Initialization effect:", {
+      wrapperLoading,
+      wrapperError,
+      hasInitialized: hasInitializedRef.current,
+      currentQuestion: currentQuestion?.id,
+      wrongQuestionsCount: wrongQuestions.length,
+    });
+
+    // Wait for wrapper to finish loading
+    if (wrapperLoading) {
+      console.log("[TutorChat] Waiting for wrapper to finish loading...");
+      setLoading(true);
+      return;
+    }
+
+    // If wrapper has an error, stop loading and show error
+    if (wrapperError) {
+      console.log("[TutorChat] Wrapper error:", wrapperError);
+      hasInitializedRef.current = true;
+      setLoading(false);
+      setError(wrapperError);
+      return;
+    }
+
+    // If already initialized, don't re-initialize
+    if (hasInitializedRef.current) {
+      console.log("[TutorChat] Already initialized, skipping");
+      return;
+    }
     
     if (currentQuestion) {
       // First time we have a question - initialize
+      console.log("[TutorChat] Initializing with current question:", currentQuestion.id);
       hasInitializedRef.current = true;
       setLoading(false);
       prevQuestionIdRef.current = currentQuestion.id;
       
       // Explain the first question
+      console.log("[TutorChat] Scheduling explainCurrentQuestion in 500ms");
       setTimeout(() => {
+        console.log("[TutorChat] Calling explainCurrentQuestion");
         explainCurrentQuestion(currentQuestion);
       }, 500);
     } else if (wrongQuestions.length === 0) {
       // No questions available - stop loading
+      console.log("[TutorChat] No questions available");
+      hasInitializedRef.current = true;
+      setLoading(false);
+    } else {
+      // We have questions but no currentQuestion - this shouldn't happen, but stop loading anyway
+      console.log("[TutorChat] Has questions but no currentQuestion. Questions:", wrongQuestions.length);
       hasInitializedRef.current = true;
       setLoading(false);
     }
-  }, [currentQuestion, wrongQuestions.length, explainCurrentQuestion]);
+  }, [wrapperLoading, wrapperError, currentQuestion, wrongQuestions.length, explainCurrentQuestion]);
 
   // When current question changes (after initialization), explain it
   useEffect(() => {
@@ -318,13 +372,23 @@ export function TutorChat({
             {messages.length === 0 ? (
               <div className="flex flex-col items-center justify-center text-center py-20 gap-3 text-gray-500 dark:text-gray-400">
                 <MessageSquare className="h-10 w-10 text-blue-500" />
-                {wrongQuestions.length === 0 ? (
+                {wrapperError ? (
+                  <>
+                    <p className="font-medium text-red-600 dark:text-red-400">Hata oluştu</p>
+                    <p className="text-sm">{wrapperError}</p>
+                  </>
+                ) : wrongQuestions.length === 0 ? (
                   <>
                     <p className="font-medium">Henüz yanlış sorunuz yok!</p>
                     <p className="text-sm">Testlerde yanlış cevapladığınız sorular burada görünecek.</p>
                   </>
-                ) : (
+                ) : currentQuestion ? (
                   <p className="font-medium">AI Öğretmen Selin hazırlanıyor...</p>
+                ) : (
+                  <>
+                    <p className="font-medium">Sorular yükleniyor...</p>
+                    <p className="text-sm">Lütfen bekleyin.</p>
+                  </>
                 )}
               </div>
             ) : (
@@ -418,12 +482,15 @@ export function TutorChat({
       </div>
 
       {/* Error Display */}
-      {error && (
+      {(error || wrapperError) && (
         <div className="px-4 py-2 bg-red-50 dark:bg-red-900/20 border-t border-red-200 dark:border-red-800">
           <div className="flex items-center gap-2 text-sm text-red-600 dark:text-red-300">
-            <span>{error}</span>
+            <span>{wrapperError || error}</span>
             <button
-              onClick={() => setError(null)}
+              onClick={() => {
+                setError(null);
+                // Note: wrapperError is managed by parent, but we can still close the display
+              }}
               className="ml-auto text-red-700 dark:text-red-400 hover:underline"
             >
               Kapat

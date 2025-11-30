@@ -13,7 +13,7 @@ export const TEST_MODULE_FILE_MAP: Record<string, string> = {
   "OWASP Security": "owasp-security-test-modules.json",
   "Ethical Hacking": "ethical-hacking-test-modules.json",
   "MSSQL": "mssql-test-modules.json",
-  "AI for Developers": "ai-for-developers-test-modules.json",
+  "Yazılımcılar İçin Yapay Zeka": "ai-for-developers-test-modules.json",
   "Python": "python-test-modules.json",
   "AWS": "aws-test-modules.json",
   "Azure": "azure-test-modules.json",

@@ -198,9 +198,9 @@ export default function PublicProfilePage() {
           fetch(`/api/posts?type=profile&userId=${userId}&limit=100`).catch(() => null),
           fetch(`/api/users/${userId}/followers?limit=1`).catch(() => null),
           fetch(`/api/users/${userId}/following?limit=1`).catch(() => null),
-          // Fetch activities - only if viewing own profile
-          isOwnProfile
-            ? fetch(`/api/profile/activity?limit=5`).catch(() => null)
+          // Fetch activities for the profile being viewed
+          sessionStatus === "authenticated"
+            ? fetch(`/api/profile/activity?limit=5&userId=${userId}`).catch(() => null)
             : Promise.resolve(null),
           // Fetch friendship status if authenticated and not own profile
           sessionStatus === "authenticated" && !isOwnProfile

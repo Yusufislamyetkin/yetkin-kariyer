@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/app/components/ui/Button";
-import { Loader2, Search, ArrowLeft, User as UserIcon, Mail, Calendar, Shield, ChevronLeft, ChevronRight, Bot, Check } from "lucide-react";
+import { Loader2, Search, ArrowLeft, User as UserIcon, Mail, Calendar, Shield, ChevronLeft, ChevronRight, Bot, Check, Activity } from "lucide-react";
 import Image from "next/image";
 
 interface User {
@@ -141,11 +141,7 @@ export default function AdminUsersPage() {
       return;
     }
 
-    if (!confirm(`${selectedUsers.size} kullanıcıyı bot'a dönüştürmek istediğinizden emin misiniz?`)) {
-      console.log("[BOT_CONVERT] User cancelled the operation");
-      return;
-    }
-
+    // Directly proceed with conversion - user already confirmed by clicking the button
     setConverting(true);
     const userIds = Array.from(selectedUsers);
     console.log("[BOT_CONVERT] Starting conversion for users:", userIds);
@@ -274,16 +270,27 @@ export default function AdminUsersPage() {
                 </p>
               </div>
             </div>
-            {pagination && (
-              <div className="text-right shrink-0">
-                <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                  {pagination.totalCount}
+            <div className="flex items-center gap-4">
+              <Button
+                onClick={() => router.push("/admin/activity-feed")}
+                variant="outline"
+                size="sm"
+                className="shrink-0"
+              >
+                <Activity className="h-4 w-4 mr-2" />
+                Etkileşim Akışı
+              </Button>
+              {pagination && (
+                <div className="text-right shrink-0">
+                  <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                    {pagination.totalCount}
+                  </div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400">
+                    Toplam Kullanıcı
+                  </div>
                 </div>
-                <div className="text-xs text-gray-500 dark:text-gray-400">
-                  Toplam Kullanıcı
-                </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </div>

@@ -306,151 +306,29 @@ export function parseLessonActions(content: string): ParsedLessonActions {
   }
 
   /**
-   * Try to fix malformed MINI_TEST content
-   */
-  function tryFixMiniTestContent(rawContent: string): string | null {
-    // Pattern 1: Missing opening bracket, starts with "= " or similar
-    // Example: "= 10, A) Listenin tüm elemanlarını değiştirir, B) İlk elemanı 10 ile değiştirir, C) Listeyi siler, D) Listeyi sıfırlar, 1]"
-    const missingBracketPattern = /^=\s*([^,]+?),\s*(.+?),\s*(\d+)\]?$/;
-    const match1 = rawContent.match(missingBracketPattern);
-    if (match1) {
-      // This looks like: "= question, A) option1, B) option2, C) option3, D) option4, index]"
-      // We need to extract properly - this is tricky, let's try a different approach
-      // Actually, this pattern might be too complex, let's handle it in the main parser
-    }
-
-    // Pattern 2: Content that looks like it should be a question but is malformed
-    // Try to detect if it starts with a question-like pattern
-    if (rawContent.includes('A)') && rawContent.includes('B)') && rawContent.includes('C)') && rawContent.includes('D)')) {
-      // Has all options, might be fixable
-      return rawContent;
-    }
-
-    return null;
-  }
-
-  /**
-   * Parse MINI_TEST with improved error handling and auto-fix
+   * Parse MINI_TEST tag - simplified version that only handles standard format
+   * Format: [MINI_TEST: soru, A, B, C, D, doğru_index]
    */
   function parseMiniTestTag(fullMatch: string, innerContent: string): boolean {
-    let rawContent = innerContent.trim();
+    const rawContent = innerContent.trim();
     
-    // Try to fix malformed content first
-    const fixedContent = tryFixMiniTestContent(rawContent);
-    if (fixedContent && fixedContent !== rawContent) {
-      rawContent = fixedContent;
-    }
-
-    // Handle missing closing bracket - look for content that ends with "]"
-    // but might be missing from the tag itself
-    let actualContent = rawContent;
-    if (!rawContent.endsWith(']') && rawContent.includes(',')) {
-      // Might be missing closing bracket, try to find where it should end
-      // Look for pattern: question, A) ..., B) ..., C) ..., D) ..., index]
-      const lastBracketIndex = content.indexOf(']', content.indexOf(fullMatch) + fullMatch.length);
-      if (lastBracketIndex !== -1) {
-        const extendedContent = content.substring(
-          content.indexOf(fullMatch) + fullMatch.length - 1, // -1 to include the ]
-          lastBracketIndex + 1
-        );
-        if (extendedContent.match(/^[^\]]+,\s*[A-D]\)/i)) {
-          actualContent = extendedContent.slice(1, -1); // Remove the ] we added
-        }
-      }
-    }
-
-    // Try to parse by splitting on comma, but handle commas in text
-    // Format: question, optionA, optionB, optionC, optionD, correctIndex
-    // We know the last item is the index (single digit), and we need 4 options before it
-    // So we split and take the last 5 items (4 options + 1 index)
-    let parts = actualContent.split(',').map(p => p.trim()).filter(p => p.length > 0);
+    // Split by comma - last 5 items should be: optionA, optionB, optionC, optionD, index
+    // Everything before that is the question (may contain commas)
+    const parts = rawContent.split(',').map(p => p.trim()).filter(p => p.length > 0);
     
-    // If we have fewer than 6 parts, try to detect malformed patterns
+    // Need at least 6 parts (question + 4 options + 1 index)
     if (parts.length < 6) {
-      // Pattern: "= 10, A) option, B) option, C) option, D) option, 1]"
-      // This might be parsed as: ["= 10", "A) option", "B) option", "C) option", "D) option", "1]"]
-      // We need to handle this case
-      
-      // Check if first part starts with "=" and might be part of the question
-      if (parts.length >= 5 && parts[0].startsWith('=')) {
-        // Try to reconstruct: the "= 10" might be part of a question like "my_list[0] = 10"
-        // Look for patterns like "A)", "B)", "C)", "D)" in the parts
-        const optionPattern = /^[A-D]\)/i;
-        let optionStartIndex = -1;
-        for (let i = 0; i < parts.length; i++) {
-          if (optionPattern.test(parts[i])) {
-            optionStartIndex = i;
-            break;
-          }
-        }
-        
-        if (optionStartIndex !== -1 && optionStartIndex + 4 < parts.length) {
-          // We found where options start
-          const questionParts = parts.slice(0, optionStartIndex);
-          const optionA = normalizeOption(parts[optionStartIndex]);
-          const optionB = normalizeOption(parts[optionStartIndex + 1]);
-          const optionC = normalizeOption(parts[optionStartIndex + 2]);
-          const optionD = normalizeOption(parts[optionStartIndex + 3]);
-          const correctIndexStr = parts[optionStartIndex + 4].replace(/\]/g, '').trim();
-          const question = questionParts.join(', ');
-          
-          const correctIndex = parseInt(correctIndexStr, 10);
-          
-    // Build action data and validate
-    const actionData = {
-      question: {
-        text: question,
-        type: "multiple_choice",
-        options: [optionA, optionB, optionC, optionD],
-        correctIndex,
-      },
-    };
-
-    const validationResult = validateMiniTestAction(actionData);
-    
-    if (validationResult.isValid && validationResult.data) {
-      actions.push({
-        type: "mini_test",
-        data: {
-          question: {
-            text: validationResult.data.question,
-            type: "multiple_choice",
-            options: validationResult.data.options,
-            correctIndex: validationResult.data.correctIndex,
-          },
-        },
-      });
-      cleanedContent = cleanedContent.replace(fullMatch, "");
-      
-      if (validationResult.warnings.length > 0) {
-        console.warn("[MINI_TEST] Fixed malformed pattern with warnings:", {
-          warnings: validationResult.warnings,
-          original: fullMatch.substring(0, 100),
-        });
-      }
-      
-      return true;
-          }
-        }
-      }
-      
-      // Log error for insufficient parts
-      console.error("[MINI_TEST] Invalid format detected - insufficient parts:", {
+      console.error("[MINI_TEST] Invalid format - insufficient parts:", {
         rawContent: innerContent,
-        actualContent: actualContent,
         partsCount: parts.length,
         expectedParts: 6,
-        allParts: parts,
-        fullMatch: fullMatch,
+        fullMatch: fullMatch.substring(0, 150),
       });
-      // Still remove the tag to avoid showing it in content
       cleanedContent = cleanedContent.replace(fullMatch, "");
       return false;
     }
 
-    // Normal parsing path - we have at least 6 parts
-    // The last 5 should be: optionA, optionB, optionC, optionD, index
-    // Everything before that is the question (may contain commas)
+    // Extract: last 5 items are options + index, rest is question
     const correctIndexStr = parts[parts.length - 1].replace(/\]/g, '').trim();
     const optionD = normalizeOption(parts[parts.length - 2]);
     const optionC = normalizeOption(parts[parts.length - 3]);
@@ -470,7 +348,7 @@ export function parseLessonActions(content: string): ParsedLessonActions {
       },
     };
 
-    // Use validator for additional validation and normalization
+    // Validate using the validator
     const validationResult = validateMiniTestAction(actionData);
     
     if (validationResult.isValid && validationResult.data) {
@@ -487,34 +365,15 @@ export function parseLessonActions(content: string): ParsedLessonActions {
         },
       });
       cleanedContent = cleanedContent.replace(fullMatch, "");
-      
-      // Log warnings if any
-      if (validationResult.warnings.length > 0) {
-        console.warn("[MINI_TEST] Parsing warnings:", {
-          warnings: validationResult.warnings,
-          tag: fullMatch.substring(0, 100),
-        });
-      }
-      
       return true;
     } else {
-      // Invalid format - log detailed error with validation details
-      console.error("[MINI_TEST] Invalid format detected - validation failed:", {
+      // Invalid format - log error and remove tag
+      console.error("[MINI_TEST] Invalid format - validation failed:", {
         rawContent: innerContent,
-        actualContent: actualContent,
         partsCount: parts.length,
         validationErrors: validationResult.errors,
-        validationWarnings: validationResult.warnings,
-        question: question || "missing or empty",
-        optionA: optionA || "missing or empty",
-        optionB: optionB || "missing or empty",
-        optionC: optionC || "missing or empty",
-        optionD: optionD || "missing or empty",
-        correctIndex: isNaN(correctIndex) ? "invalid" : correctIndex,
-        allParts: parts,
-        tagPreview: fullMatch.substring(0, 150),
+        fullMatch: fullMatch.substring(0, 150),
       });
-      // Still remove the tag to avoid showing it in content
       cleanedContent = cleanedContent.replace(fullMatch, "");
       return false;
     }
@@ -552,34 +411,12 @@ export function parseLessonActions(content: string): ParsedLessonActions {
     }
     
     if (closingBracketPos === -1) {
-      // No closing bracket found - might be malformed
-      // Try to find content that looks like it should be a MINI_TEST
-      // Look for pattern: content ending with ", 0]" or ", 1]" etc. within reasonable distance
-      const searchLimit = Math.min(afterTag.length, 500); // Search up to 500 chars
-      const indexPattern = /,\s*([0-3])\s*\]/;
-      const indexMatch = afterTag.substring(0, searchLimit).match(indexPattern);
-      
-      if (indexMatch) {
-        // Found a potential closing pattern, use it
-        closingBracketPos = (indexMatch.index || 0) + indexMatch[0].length - 1;
-      } else {
-        // Still no closing bracket, log and skip
-        console.error("[MINI_TEST] Invalid format - no closing bracket found:", {
-          tagStart,
-          afterTagPreview: afterTag.substring(0, 100),
-        });
-        // Try to remove the malformed tag by finding the next reasonable end point
-        // Look for end of line or next tag start
-        const nextTagStart = content.indexOf('[', afterTagStart);
-        const nextNewline = content.indexOf('\n', afterTagStart);
-        const endPoint = nextTagStart !== -1 && nextNewline !== -1 
-          ? Math.min(nextTagStart, nextNewline)
-          : (nextTagStart !== -1 ? nextTagStart : (nextNewline !== -1 ? nextNewline : afterTagStart + 200));
-        
-        const malformedTag = content.substring(tagStart, endPoint);
-        cleanedContent = cleanedContent.replace(malformedTag, "");
-        continue;
-      }
+      // No closing bracket found - invalid format, skip this tag
+      console.error("[MINI_TEST] Invalid format - no closing bracket found:", {
+        tagStart,
+        afterTagPreview: afterTag.substring(0, 100),
+      });
+      continue;
     }
     
     // Extract the full tag
@@ -599,57 +436,6 @@ export function parseLessonActions(content: string): ParsedLessonActions {
     parseMiniTestTag(fullTag, innerContent);
   }
   
-  // Also try to catch malformed patterns that don't have [MINI_TEST: prefix
-  // Pattern: "= 10, A) ..., B) ..., C) ..., D) ..., 1]"
-  const malformedPattern = /=\s*([^,]+?),\s*([A-D]\)[^,]+?),\s*([A-D]\)[^,]+?),\s*([A-D]\)[^,]+?),\s*([A-D]\)[^,]+?),\s*([0-3])\s*\]/gi;
-  let malformedMatch;
-  while ((malformedMatch = malformedPattern.exec(content)) !== null) {
-    // This looks like a malformed MINI_TEST
-    const question = malformedMatch[1].trim();
-    const optionA = normalizeOption(malformedMatch[2]);
-    const optionB = normalizeOption(malformedMatch[3]);
-    const optionC = normalizeOption(malformedMatch[4]);
-    const optionD = normalizeOption(malformedMatch[5]);
-    const correctIndex = parseInt(malformedMatch[6], 10);
-    
-    // Build and validate
-    const actionData = {
-      question: {
-        text: question,
-        type: "multiple_choice",
-        options: [optionA, optionB, optionC, optionD],
-        correctIndex,
-      },
-    };
-
-    const validationResult = validateMiniTestAction(actionData);
-    
-    if (validationResult.isValid && validationResult.data) {
-      actions.push({
-        type: "mini_test",
-        data: {
-          question: {
-            text: validationResult.data.question,
-            type: "multiple_choice",
-            options: validationResult.data.options,
-            correctIndex: validationResult.data.correctIndex,
-          },
-        },
-      });
-      cleanedContent = cleanedContent.replace(malformedMatch[0], "");
-      console.warn("[MINI_TEST] Fixed malformed pattern (missing [MINI_TEST: prefix):", {
-        original: malformedMatch[0].substring(0, 100),
-        question: validationResult.data.question,
-        warnings: validationResult.warnings,
-      });
-    } else {
-      console.error("[MINI_TEST] Failed to fix malformed pattern:", {
-        original: malformedMatch[0].substring(0, 150),
-        validationErrors: validationResult.errors,
-      });
-    }
-  }
-
   // Parse CHOICES tags
   const choicesRegex = /\[CHOICES:\s*([^\]]+)\]/gi;
   while ((match = choicesRegex.exec(content)) !== null) {

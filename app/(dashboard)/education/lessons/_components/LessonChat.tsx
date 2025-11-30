@@ -61,9 +61,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
   const [showCompletionModal, setShowCompletionModal] = useState(false);
   const [nextLesson, setNextLesson] = useState<{ href: string; label: string } | null>(null);
   const [loadingMessage, setLoadingMessage] = useState(0);
-  const [pendingTestQuestions, setPendingTestQuestions] = useState<any[]>([]);
-  const [currentTestQuestionIndex, setCurrentTestQuestionIndex] = useState(0);
-  const [answeredTestQuestionIndex, setAnsweredTestQuestionIndex] = useState<number | null>(null);
+  const [answeredQuestionIds, setAnsweredQuestionIds] = useState<Set<string>>(new Set());
   const messagesContainerRef = useRef<HTMLDivElement>(null);
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -197,19 +195,25 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
       setError(null);
       setLoadingMessage(0);
 
+      // Retry mekanizması için
+      const MAX_RETRIES = 2;
+      let lastError: Error | null = null;
+
       try {
-        // Send initial message to start the lesson
-        const response = await fetch("/api/ai/lesson-assistant", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            lessonSlug,
-            message: "Merhaba! Bu dersi öğrenmeye hazırım. Bana dersi anlatabilir misin?",
-          }),
-        });
+        for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+        try {
+          // Send initial message to start the lesson
+          const response = await fetch("/api/ai/lesson-assistant", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              lessonSlug,
+              message: "Merhaba! Bu dersi öğrenmeye hazırım. Bana dersi anlatabilir misin?",
+            }),
+          });
 
         if (!response.ok) {
-          const data = await response.json();
+          const data = await response.json().catch(() => ({ error: "Yanıt parse edilemedi" }));
           // API key eksikse daha açıklayıcı hata mesajı göster
           if (response.status === 503 && data.details?.includes("OPENAI_API_KEY")) {
             const errorMsg = data.isLocal 
@@ -217,7 +221,21 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
               : data.error || data.details || "AI servisi şu anda mevcut değil";
             throw new Error(errorMsg);
           }
-          throw new Error(data.error || data.details || "AI yanıtı alınamadı");
+          
+          // Daha detaylı hata loglama
+          console.error("[LessonChat] API Error (Initial Message):", {
+            status: response.status,
+            statusText: response.statusText,
+            error: data.error,
+            details: data.details,
+            debug: data.debug,
+            fullResponse: data,
+          });
+          
+          const errorMessage = data.error || "AI yanıtı alınamadı";
+          const errorDetails = data.details ? `\n\nDetay: ${data.details}` : "";
+          const debugInfo = data.debug ? `\n\nDebug Bilgisi:\n${JSON.stringify(data.debug, null, 2)}` : "";
+          throw new Error(`${errorMessage}${errorDetails}${debugInfo}`);
         }
 
         const data = await response.json();
@@ -299,14 +317,64 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
         // Handle initial actions
         handleActions(data.actions || []);
         
-        // Show continue button after first assistant message if no activity is set
-        if (!data.actions || data.actions.length === 0 || 
-            !data.actions.some((a: any) => ["timed_bugfix", "choices"].includes(a.type))) {
-          setShowContinueButton(true);
+          // Show continue button after first assistant message if no activity is set
+          if (!data.actions || data.actions.length === 0 || 
+              !data.actions.some((a: any) => ["timed_bugfix", "choices"].includes(a.type))) {
+            setShowContinueButton(true);
+          }
+          
+          // Başarılı, retry döngüsünden çık
+          return;
+        } catch (err) {
+          lastError = err instanceof Error ? err : new Error(String(err));
+          console.error(`Error loading initial message (attempt ${attempt + 1}/${MAX_RETRIES + 1}):`, err);
+          
+          // Retry yapılabilir hatalar
+          const isRetryable = 
+            (err instanceof Error && (
+              err.message.includes("Failed to fetch") ||
+              err.message.includes("NetworkError") ||
+              err.message.includes("timeout") ||
+              err.message.includes("rate_limit") ||
+              err.message.includes("rate limit")
+            )) ||
+            (err instanceof TypeError && err.message.includes("fetch"));
+          
+          // Son deneme değilse ve retry yapılabilirse tekrar dene
+          if (attempt < MAX_RETRIES && isRetryable) {
+            const delay = (attempt + 1) * 2000; // 2s, 4s
+            console.log(`Retrying after ${delay}ms...`);
+            await new Promise(resolve => setTimeout(resolve, delay));
+            continue;
+          }
+          
+          // Retry yapılamaz veya max retry'a ulaşıldı
+          // Daha açıklayıcı hata mesajları
+          let errorMessage = "Bir hata oluştu";
+          
+          if (lastError instanceof Error) {
+            errorMessage = lastError.message;
+            
+            // Network hataları için özel mesajlar
+            if (lastError.message.includes("Failed to fetch") || lastError.message.includes("NetworkError")) {
+              errorMessage = "Bağlantı hatası. İnternet bağlantınızı kontrol edip tekrar deneyin.";
+            } else if (lastError.message.includes("timeout") || lastError.message.includes("süresi aşıldı")) {
+              errorMessage = "İstek zaman aşımına uğradı. Lütfen tekrar deneyin.";
+            } else if (lastError.message.includes("rate_limit") || lastError.message.includes("rate limit")) {
+              errorMessage = "Çok fazla istek gönderildi. Lütfen birkaç saniye bekleyip tekrar deneyin.";
+            }
+          } else if (typeof err === "string") {
+            errorMessage = err;
+          }
+          
+          setError(errorMessage);
         }
-      } catch (err) {
-        console.error("Error loading initial message:", err);
-        setError(err instanceof Error ? err.message : "Bir hata oluştu");
+        }
+        
+        // Tüm retry'lar başarısız oldu
+        if (lastError) {
+          console.error("All retry attempts failed:", lastError);
+        }
       } finally {
         setLoading(false);
       }
@@ -316,17 +384,11 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
   }, [lessonSlug]);
 
   // Handle actions from AI response
-  // Note: Test questions are now rendered inline with messages, not as separate activities
   const handleActions = useCallback((actions: Array<{ type: string; data: any }>) => {
     if (!actions || actions.length === 0) return;
-
-    // Collect all test questions
-    const testQuestions: any[] = [];
     
     for (const action of actions) {
-      // Test questions and mini tests are now rendered inline with messages
       // Only interactive activities that require user input are set as currentActivity
-      // fill_blank activity removed - user already has input field
       if (action.type === "timed_bugfix" && action.data) {
         setCurrentActivity({
           type: "timed_bugfix",
@@ -337,58 +399,10 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
           type: "choices",
           data: { choices: action.data.choices },
         });
-      } else if (action.type === "mini_test" && action.data) {
-        // Validate and collect test questions
-        // Ensure data structure is correct
-        const questionData = action.data;
-        
-        // Handle both nested and direct structures
-        const normalizedData = questionData.question || questionData;
-        
-        // Basic validation - check if we have minimum required data
-        const hasQuestion = normalizedData.text || normalizedData.question;
-        const hasOptions = Array.isArray(normalizedData.options) && normalizedData.options.length > 0;
-        
-        if (hasQuestion || hasOptions) {
-          // Even if partially valid, add it so user can see what's wrong
-          console.log("[LessonChat] Mini test action data (validated):", {
-            hasQuestion,
-            hasOptions,
-            optionsCount: normalizedData.options?.length || 0,
-            data: questionData,
-          });
-          
-          // Ensure we always push valid data structure
-          testQuestions.push({
-            question: normalizedData,
-            ...questionData, // Keep original structure as fallback
-          });
-        } else {
-          console.warn("[LessonChat] Invalid mini_test action - missing question or options:", action.data);
-        }
       }
+      // mini_test actions are now rendered directly from message actions, no state management needed
     }
-    
-    // If we have test questions, replace existing ones (new set of questions)
-    // This ensures that when "devam et" is clicked, new questions replace old ones
-    if (testQuestions.length > 0) {
-      console.log("[LessonChat] Setting new test questions:", testQuestions.length);
-      setPendingTestQuestions(testQuestions);
-      setCurrentTestQuestionIndex(0);
-      setAnsweredTestQuestionIndex(null);
-    } else {
-      // If no valid questions, ensure we don't have stale questions
-      // But don't clear if we're in the middle of answering
-      if (answeredTestQuestionIndex === null || currentTestQuestionIndex >= pendingTestQuestions.length) {
-        // Safe to clear - no active question being answered
-        if (pendingTestQuestions.length > 0) {
-          console.log("[LessonChat] Clearing stale test questions");
-          setPendingTestQuestions([]);
-          setCurrentTestQuestionIndex(0);
-        }
-      }
-    }
-  }, [answeredTestQuestionIndex, currentTestQuestionIndex, pendingTestQuestions.length]);
+  }, []);
 
   // Handle sending message
   const handleSendMessage = useCallback(
@@ -574,7 +588,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
         setAssistantTyping(false);
       }
     },
-    [messageInput, sending, lessonSlug, lessonTitle, celebrate, handleActions, currentTestQuestionIndex, pendingTestQuestions]
+    [messageInput, sending, lessonSlug, lessonTitle, celebrate, handleActions]
   );
 
   // Handle activity completion
@@ -708,13 +722,13 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
       setSending(false);
       setAssistantTyping(false);
     }
-  }, [lessonSlug, lessonTitle, celebrate, handleActions, currentTestQuestionIndex, pendingTestQuestions]);
+  }, [lessonSlug, lessonTitle, celebrate, handleActions, roadmap, onRoadmapChange]);
 
   // Handle test question answer
   const handleTestQuestionAnswer = useCallback(
-    async (answer: string) => {
-      // Mark current question as answered (keep test box visible but disabled)
-      setAnsweredTestQuestionIndex(currentTestQuestionIndex);
+    async (questionId: string, answer: string, messageId: string) => {
+      // Mark question as answered
+      setAnsweredQuestionIds((prev) => new Set(prev).add(questionId));
       
       const answerMessage: Message = {
         id: `msg-${Date.now()}`,
@@ -725,17 +739,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
 
       setMessages((prev) => [...prev, answerMessage]);
 
-      // Check if there are more test questions to show
-      const nextIndex = currentTestQuestionIndex + 1;
-      if (nextIndex < pendingTestQuestions.length) {
-        // Show next test question
-        setCurrentTestQuestionIndex(nextIndex);
-        setAnsweredTestQuestionIndex(null); // Reset for next question
-        return;
-      }
-
-      // All test questions answered, continue conversation
-      // Keep test questions visible until AI response is received
+      // Send answer to AI
       setSending(true);
       setAssistantTyping(true);
       try {
@@ -768,16 +772,14 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
 
           if (data.progress) {
             setProgress(data.progress);
-            // Update roadmap with new progress
             const currentRoadmap = data.roadmap || roadmap;
             if (currentRoadmap) {
               onRoadmapChange?.(currentRoadmap, data.progress);
             }
           }
 
-          // Smart completion detection (same logic as in handleSendMessage)
+          // Smart completion detection
           if (data.isCompleted) {
-            // API explicitly marked as completed, but verify all steps are done if roadmap exists
             const roadmapText = data.roadmap || roadmap;
             if (roadmapText && data.progress) {
               const stepMatches = roadmapText.match(/\d+[\.\)]/g);
@@ -787,8 +789,6 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
                 
                 if (data.progress.step === lastStepNumber && data.progress.status === "completed") {
                   setIsCompleted(true);
-                } else {
-                  console.log("[LessonChat] Completion signal in test answer but not all steps completed");
                 }
               } else {
                 setIsCompleted(true);
@@ -797,7 +797,6 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
               setIsCompleted(true);
             }
           } else if (data.roadmap && data.progress) {
-            // Check if all roadmap steps are completed (even without explicit completion signal)
             const roadmapText = data.roadmap || roadmap;
             if (roadmapText) {
               const stepMatches = roadmapText.match(/\d+[\.\)]/g);
@@ -814,19 +813,13 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
 
           handleActions(data.actions || []);
           
-          // Keep test questions visible - do not clear them
-          // Quiz marking should never disappear under any condition
-          // Only reset answered index to allow interaction if new questions arrive
-          setAnsweredTestQuestionIndex(null);
-          
-          // Show continue button if no new interactive activity (mini_test questions don't block continue button)
+          // Show continue button if no new interactive activity
           const hasInteractiveActivity = data.actions?.some((a: any) => ["fill_blank", "timed_bugfix", "choices"].includes(a.type));
           if (!hasInteractiveActivity) {
             setShowContinueButton(true);
           }
         } else {
           const data = await response.json().catch(() => ({ error: "Yanıt parse edilemedi" }));
-          // API key eksikse daha açıklayıcı hata mesajı göster
           let errorMessage: string;
           if (response.status === 503 && data.details?.includes("OPENAI_API_KEY")) {
             errorMessage = data.isLocal 
@@ -846,22 +839,16 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
             fullResponse: data,
           });
           setError(`${errorMessage}${errorDetails}${debugInfo}`);
-          // On error, keep test questions visible - do not clear them
-          // Quiz marking should never disappear under any condition
-          setAnsweredTestQuestionIndex(null);
         }
       } catch (err) {
         console.error("Error processing answer:", err);
         setError(err instanceof Error ? err.message : "Bir hata oluştu");
-        // On error, keep test questions visible - do not clear them
-        // Quiz marking should never disappear under any condition
-        setAnsweredTestQuestionIndex(null);
       } finally {
         setSending(false);
         setAssistantTyping(false);
       }
     },
-    [lessonSlug, handleActions, currentTestQuestionIndex, pendingTestQuestions.length, roadmap]
+    [lessonSlug, handleActions, roadmap, onRoadmapChange]
   );
 
   // Handle choice selection
@@ -1157,30 +1144,34 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
                         </div>
                       )}
                       
-                      {/* Test Questions - Rendered inline with the message that contains them */}
+                      {/* Mini Test Questions - Rendered as cards after the message */}
                       {hasTestQuestions && testQuestions.length > 0 && (
                         <div className={cn("space-y-3", isAI ? "ml-20" : "ml-0", isOwn ? "mr-0" : "")}>
-                          {testQuestions.map((testQuestion: any, questionIndex: number) => {
-                            // Check if this question is in pendingTestQuestions and is the current one
-                            // Use both reference equality and deep comparison for robustness
-                            const questionIndexInPending = pendingTestQuestions.findIndex((q: any) => 
-                              q === testQuestion || JSON.stringify(q) === JSON.stringify(testQuestion)
-                            );
-                            const isCurrentQuestion = questionIndexInPending >= 0 && questionIndexInPending === currentTestQuestionIndex;
-                            const isAnswered = questionIndexInPending >= 0 && answeredTestQuestionIndex === questionIndexInPending;
-                            
-                            // Show current question or if pendingTestQuestions is empty (means inline question should be shown)
-                            // Priority: pendingTestQuestions takes precedence for card display
-                            const shouldShow = pendingTestQuestions.length === 0 || isCurrentQuestion;
-                            
-                            // If we have pendingTestQuestions and this is not the current one, don't show inline
-                            // (it will be shown as a card from pendingTestQuestions)
-                            if (pendingTestQuestions.length > 0 && !isCurrentQuestion) return null;
-                            
-                            if (!shouldShow) return null;
+                          {testQuestions
+                            // Filter out duplicate questions based on question text and options
+                            .filter((testQuestion: any, index: number, self: any[]) => {
+                              // Get question text and options for comparison
+                              const getQuestionKey = (q: any) => {
+                                const qData = q?.question || q;
+                                const text = (qData?.text || qData?.question || "").trim().toLowerCase();
+                                const options = (qData?.options || []).map((opt: any) => 
+                                  (typeof opt === "string" ? opt : opt?.text || opt?.label || "").trim().toLowerCase()
+                                ).filter(Boolean).sort().join("|");
+                                return `${text}::${options}`;
+                              };
+                              
+                              const currentKey = getQuestionKey(testQuestion);
+                              // Keep only the first occurrence of each unique question
+                              const firstIndex = self.findIndex((q: any) => getQuestionKey(q) === currentKey);
+                              return firstIndex === index;
+                            })
+                            .map((testQuestion: any, questionIndex: number) => {
+                            // Generate unique ID for this question
+                            const questionId = `${chatMsg.id}-test-${questionIndex}`;
+                            const isAnswered = answeredQuestionIds.has(questionId);
                             
                             return (
-                              <div key={`test-question-${chatMsg.id}-${questionIndex}`} className="flex w-full items-end gap-1.5 relative justify-start">
+                              <div key={questionId} className="flex w-full items-end gap-1.5 relative justify-start">
                                 {isAI && (
                                   <div className="absolute -bottom-0.5 -left-1 z-10">
                                     <div className="relative w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/70 bg-gradient-to-br from-blue-500 to-purple-500 text-white shadow-sm">
@@ -1202,10 +1193,8 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
                                 <div className={cn("max-w-full sm:max-w-[70%] md:max-w-[65%]", isAI ? "ml-12 sm:ml-14" : "")}>
                                   <TestQuestionChatbox
                                     question={testQuestion}
-                                    onAnswer={(answer) => handleTestQuestionAnswer(answer)}
+                                    onAnswer={(answer) => handleTestQuestionAnswer(questionId, answer, chatMsg.id)}
                                     disabled={sending || isAnswered}
-                                    questionNumber={questionIndexInPending >= 0 ? questionIndexInPending + 1 : undefined}
-                                    totalQuestions={pendingTestQuestions.length > 0 ? pendingTestQuestions.length : undefined}
                                     isAnswered={isAnswered}
                                   />
                                 </div>
@@ -1221,88 +1210,8 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
               </>
             )}
             
-            {/* Test Questions from pendingTestQuestions - Show current question at the end */}
-            {/* Always show pending questions as cards, even if they were rendered inline (they might have been parsed differently) */}
-            {pendingTestQuestions.length > 0 && currentTestQuestionIndex < pendingTestQuestions.length && (
-              (() => {
-                const currentQuestion = pendingTestQuestions[currentTestQuestionIndex];
-                
-                // Always render - don't skip even if rendered inline
-                // This ensures cards are always visible even if parsing had issues
-                
-                return (
-                  <div className="space-y-3">
-                    <div className="flex w-full items-end gap-1.5 relative justify-start">
-                      <div className="absolute -bottom-0.5 -left-1 z-10">
-                        <div className="relative w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/70 bg-gradient-to-br from-blue-500 to-purple-500 text-white shadow-sm">
-                          <Image
-                            src="/Photos/AiTeacher/teacher.jpg"
-                            alt="AI Öğretmen"
-                            fill
-                            className="object-cover"
-                            sizes="48px"
-                            priority={false}
-                            unoptimized={true}
-                            onError={(e) => {
-                              console.error("Failed to load AI teacher image:", e);
-                            }}
-                          />
-                        </div>
-                      </div>
-                      <div className="ml-12 sm:ml-14 max-w-full sm:max-w-[70%] md:max-w-[65%]">
-                        {(() => {
-                          const isAnswered = answeredTestQuestionIndex === currentTestQuestionIndex;
-                          return (
-                            <TestQuestionChatbox
-                              question={currentQuestion}
-                              onAnswer={(answer) => handleTestQuestionAnswer(answer)}
-                              disabled={sending || isAnswered}
-                              questionNumber={currentTestQuestionIndex + 1}
-                              totalQuestions={pendingTestQuestions.length}
-                              isAnswered={isAnswered}
-                            />
-                          );
-                        })()}
-                      </div>
-                    </div>
-                    
-                    {/* AI Öğretmen Düşünüyor - Mini Quiz Kartının Altında */}
-                    {assistantTyping && (
-                      <div className="flex w-full items-end gap-1.5 relative justify-start mt-3">
-                        <div className="absolute -bottom-0.5 -left-1 z-10">
-                          <div className="relative w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/70 bg-gradient-to-br from-blue-500 to-purple-500 text-white shadow-sm">
-                            <Image
-                              src="/Photos/AiTeacher/teacher.jpg"
-                              alt="AI Öğretmen"
-                              fill
-                              className="object-cover"
-                              sizes="48px"
-                              priority={false}
-                              unoptimized={true}
-                              onError={(e) => {
-                                console.error("Failed to load AI teacher image:", e);
-                              }}
-                            />
-                          </div>
-                        </div>
-                        <div className="ml-12 sm:ml-16 pr-4 sm:pr-6 inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-3 rounded-xl sm:rounded-2xl bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300 border-2 border-blue-200 dark:border-blue-800 shadow-sm">
-                          <div className="flex items-center gap-1.5 sm:gap-2">
-                            <Loader2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 animate-spin" />
-                          </div>
-                          <div className="flex flex-col">
-                            <span className="font-semibold text-xs sm:text-sm">AI Öğretmen</span>
-                            <span className="text-[10px] sm:text-xs opacity-80">Düşünüyor...</span>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                );
-              })()
-            )}
-            
-            {/* Typing indicator - Enhanced for teacher (only show if no mini quiz is active) */}
-            {assistantTyping && !(pendingTestQuestions.length > 0 && currentTestQuestionIndex < pendingTestQuestions.length) && (
+            {/* Typing indicator - Enhanced for teacher */}
+            {assistantTyping && (
               <div className="flex w-full items-end gap-1.5 relative justify-start">
                 <div className="absolute -bottom-0.5 -left-1 z-10">
                   <div className="relative w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/70 bg-gradient-to-br from-blue-500 to-purple-500 text-white shadow-sm">
