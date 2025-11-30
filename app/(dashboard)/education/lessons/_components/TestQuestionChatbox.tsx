@@ -18,6 +18,9 @@ interface TestQuestionChatboxProps {
   onAnswer: (answer: string) => void;
   disabled?: boolean;
   className?: string;
+  questionNumber?: number;
+  totalQuestions?: number;
+  isAnswered?: boolean;
 }
 
 export function TestQuestionChatbox({
@@ -25,6 +28,9 @@ export function TestQuestionChatbox({
   onAnswer,
   disabled = false,
   className,
+  questionNumber,
+  totalQuestions,
+  isAnswered = false,
 }: TestQuestionChatboxProps) {
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -142,9 +148,24 @@ export function TestQuestionChatbox({
     <div className={cn("w-full", className)}>
       <Card className="border-purple-200 bg-gradient-to-br from-purple-50 via-white to-purple-50/50 dark:border-purple-900/40 dark:from-purple-950/30 dark:via-gray-900/50 dark:to-purple-950/20 shadow-lg">
         <CardHeader className="pb-4">
-          <CardTitle className="text-lg font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-2">
-            <span className="text-2xl">📝</span>
-            {isMiniTest ? "Mini Test Sorusu" : "Test Sorusu"}
+          <CardTitle className="text-lg font-semibold text-gray-900 dark:text-gray-100 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="text-2xl">📝</span>
+              <div>
+                {isMiniTest ? "Mini Test Sorusu" : "Test Sorusu"}
+                {questionNumber !== undefined && totalQuestions !== undefined && (
+                  <span className="ml-2 text-sm font-normal text-gray-500 dark:text-gray-400">
+                    ({questionNumber}/{totalQuestions})
+                  </span>
+                )}
+              </div>
+            </div>
+            {isAnswered && (
+              <div className="flex items-center gap-1 text-sm text-green-600 dark:text-green-400">
+                <CheckCircle className="h-4 w-4" />
+                <span>Cevap Verildi</span>
+              </div>
+            )}
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">

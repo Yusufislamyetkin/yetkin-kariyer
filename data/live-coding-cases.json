@@ -78,14 +78,14 @@
           "title": "Sayısal Çıktı Döngüsü",
           "description": "1'den 50'ye kadar sayıları ekrana yazdırın.",
           "difficulty": "beginner",
-          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dünya 1', 'Selam Sana Dünya 2', ... 'Selam Sana Dünya 50'",
+          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dunya 1', 'Selam Sana Dunya 2', ... 'Selam Sana Dunya 50'",
           "starterCode": {
             "java": "public class Main {\n    public static void main(String[] args) {\n        // Kodunu buraya yaz\n        \n    }\n}"
           },
           "testCases": [
             {
               "input": "",
-              "expectedOutput": "Selam Sana Dünya 1\nSelam Sana Dünya 2\n...\nSelam Sana Dünya 50"
+              "expectedOutput": "Selam Sana Dunya 1\nSelam Sana Dunya 2\n...\nSelam Sana Dunya 50"
             }
           ],
           "hints": [
@@ -147,14 +147,14 @@
           "title": "Sayısal Çıktı Döngüsü",
           "description": "1'den 50'ye kadar sayıları ekrana yazdırın.",
           "difficulty": "beginner",
-          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dünya 1', 'Selam Sana Dünya 2', ... 'Selam Sana Dünya 50'",
+          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dunya 1', 'Selam Sana Dunya 2', ... 'Selam Sana Dunya 50'",
           "starterCode": {
             "python": "# Kodunu buraya yaz\n"
           },
           "testCases": [
             {
               "input": "",
-              "expectedOutput": "Selam Sana Dünya 1\nSelam Sana Dünya 2\n...\nSelam Sana Dünya 50"
+              "expectedOutput": "Selam Sana Dunya 1\nSelam Sana Dunya 2\n...\nSelam Sana Dunya 50"
             }
           ],
           "hints": [
@@ -217,14 +217,14 @@
           "title": "Sayısal Çıktı Döngüsü",
           "description": "1'den 50'ye kadar sayıları ekrana yazdırın.",
           "difficulty": "beginner",
-          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dünya 1', 'Selam Sana Dünya 2', ... 'Selam Sana Dünya 50'",
+          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dunya 1', 'Selam Sana Dunya 2', ... 'Selam Sana Dunya 50'",
           "starterCode": {
             "php": "<?php\n// Kodunu buraya yaz\n?>"
           },
           "testCases": [
             {
               "input": "",
-              "expectedOutput": "Selam Sana Dünya 1\nSelam Sana Dünya 2\n...\nSelam Sana Dünya 50"
+              "expectedOutput": "Selam Sana Dunya 1\nSelam Sana Dunya 2\n...\nSelam Sana Dunya 50"
             }
           ],
           "hints": [
@@ -287,14 +287,14 @@
           "title": "Sayısal Çıktı Döngüsü",
           "description": "1'den 50'ye kadar sayıları ekrana yazdırın.",
           "difficulty": "beginner",
-          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dünya 1', 'Selam Sana Dünya 2', ... 'Selam Sana Dünya 50'",
+          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dunya 1', 'Selam Sana Dunya 2', ... 'Selam Sana Dunya 50'",
           "starterCode": {
             "javascript": "// Kodunu buraya yaz\n"
           },
           "testCases": [
             {
               "input": "",
-              "expectedOutput": "Selam Sana Dünya 1\nSelam Sana Dünya 2\n...\nSelam Sana Dünya 50"
+              "expectedOutput": "Selam Sana Dunya 1\nSelam Sana Dunya 2\n...\nSelam Sana Dunya 50"
             }
           ],
           "hints": [
@@ -357,14 +357,14 @@
           "title": "Sayısal Çıktı Döngüsü",
           "description": "1'den 50'ye kadar sayıları ekrana yazdırın.",
           "difficulty": "beginner",
-          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dünya 1', 'Selam Sana Dünya 2', ... 'Selam Sana Dünya 50'",
+          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dunya 1', 'Selam Sana Dunya 2', ... 'Selam Sana Dunya 50'",
           "starterCode": {
             "typescript": "// Kodunu buraya yaz\n"
           },
           "testCases": [
             {
               "input": "",
-              "expectedOutput": "Selam Sana Dünya 1\nSelam Sana Dünya 2\n...\nSelam Sana Dünya 50"
+              "expectedOutput": "Selam Sana Dunya 1\nSelam Sana Dunya 2\n...\nSelam Sana Dunya 50"
             }
           ],
           "hints": [
@@ -426,14 +426,14 @@
           "title": "Sayısal Çıktı Döngüsü",
           "description": "1'den 50'ye kadar sayıları ekrana yazdırın.",
           "difficulty": "beginner",
-          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dünya 1', 'Selam Sana Dünya 2', ... 'Selam Sana Dünya 50'",
+          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dunya 1', 'Selam Sana Dunya 2', ... 'Selam Sana Dunya 50'",
           "starterCode": {
             "go": "package main\n\nimport \"fmt\"\n\nfunc main() {\n    // Kodunu buraya yaz\n}"
           },
           "testCases": [
             {
               "input": "",
-              "expectedOutput": "Selam Sana Dünya 1\nSelam Sana Dünya 2\n...\nSelam Sana Dünya 50"
+              "expectedOutput": "Selam Sana Dunya 1\nSelam Sana Dunya 2\n...\nSelam Sana Dunya 50"
             }
           ],
           "hints": [
@@ -496,14 +496,14 @@
           "title": "Sayısal Çıktı Döngüsü",
           "description": "1'den 50'ye kadar sayıları ekrana yazdırın.",
           "difficulty": "beginner",
-          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dünya 1', 'Selam Sana Dünya 2', ... 'Selam Sana Dünya 50'",
+          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dunya 1', 'Selam Sana Dunya 2', ... 'Selam Sana Dunya 50'",
           "starterCode": {
             "rust": "fn main() {\n    // Kodunu buraya yaz\n}"
           },
           "testCases": [
             {
               "input": "",
-              "expectedOutput": "Selam Sana Dünya 1\nSelam Sana Dünya 2\n...\nSelam Sana Dünya 50"
+              "expectedOutput": "Selam Sana Dunya 1\nSelam Sana Dunya 2\n...\nSelam Sana Dunya 50"
             }
           ],
           "hints": [
@@ -566,14 +566,14 @@
           "title": "Sayısal Çıktı Döngüsü",
           "description": "1'den 50'ye kadar sayıları ekrana yazdırın.",
           "difficulty": "beginner",
-          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dünya 1', 'Selam Sana Dünya 2', ... 'Selam Sana Dünya 50'",
+          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dunya 1', 'Selam Sana Dunya 2', ... 'Selam Sana Dunya 50'",
           "starterCode": {
             "cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    // Kodunu buraya yaz\n    return 0;\n}"
           },
           "testCases": [
             {
               "input": "",
-              "expectedOutput": "Selam Sana Dünya 1\nSelam Sana Dünya 2\n...\nSelam Sana Dünya 50"
+              "expectedOutput": "Selam Sana Dunya 1\nSelam Sana Dunya 2\n...\nSelam Sana Dunya 50"
             }
           ],
           "hints": [
@@ -636,14 +636,14 @@
           "title": "Sayısal Çıktı Döngüsü",
           "description": "1'den 50'ye kadar sayıları ekrana yazdırın.",
           "difficulty": "beginner",
-          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dünya 1', 'Selam Sana Dünya 2', ... 'Selam Sana Dünya 50'",
+          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dunya 1', 'Selam Sana Dunya 2', ... 'Selam Sana Dunya 50'",
           "starterCode": {
             "kotlin": "fun main() {\n    // Kodunu buraya yaz\n}"
           },
           "testCases": [
             {
               "input": "",
-              "expectedOutput": "Selam Sana Dünya 1\nSelam Sana Dünya 2\n...\nSelam Sana Dünya 50"
+              "expectedOutput": "Selam Sana Dunya 1\nSelam Sana Dunya 2\n...\nSelam Sana Dunya 50"
             }
           ],
           "hints": [
@@ -706,14 +706,14 @@
           "title": "Sayısal Çıktı Döngüsü",
           "description": "1'den 50'ye kadar sayıları ekrana yazdırın.",
           "difficulty": "beginner",
-          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dünya 1', 'Selam Sana Dünya 2', ... 'Selam Sana Dünya 50'",
+          "instructions": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dunya 1', 'Selam Sana Dunya 2', ... 'Selam Sana Dunya 50'",
           "starterCode": {
             "ruby": "# Kodunu buraya yaz\n"
           },
           "testCases": [
             {
               "input": "",
-              "expectedOutput": "Selam Sana Dünya 1\nSelam Sana Dünya 2\n...\nSelam Sana Dünya 50"
+              "expectedOutput": "Selam Sana Dunya 1\nSelam Sana Dunya 2\n...\nSelam Sana Dunya 50"
             }
           ],
           "hints": [

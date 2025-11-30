@@ -1,4 +1,5 @@
 import type { LiveCodingLanguage } from "@/types/live-coding";
+import { validateMiniTestAction } from "@/lib/ai/mini-test-validator";
 
 export interface ParsedLessonActions {
   content: string;
@@ -395,25 +396,40 @@ export function parseLessonActions(content: string): ParsedLessonActions {
           
           const correctIndex = parseInt(correctIndexStr, 10);
           
-          if (question && question.length > 0 && 
-              optionA && optionA.length > 0 &&
-              optionB && optionB.length > 0 &&
-              optionC && optionC.length > 0 &&
-              optionD && optionD.length > 0 &&
-              !isNaN(correctIndex) && correctIndex >= 0 && correctIndex < 4) {
-            actions.push({
-              type: "mini_test",
-              data: {
-                question: {
-                  text: question,
-                  type: "multiple_choice",
-                  options: [optionA, optionB, optionC, optionD],
-                  correctIndex,
-                },
-              },
-            });
-            cleanedContent = cleanedContent.replace(fullMatch, "");
-            return true;
+    // Build action data and validate
+    const actionData = {
+      question: {
+        text: question,
+        type: "multiple_choice",
+        options: [optionA, optionB, optionC, optionD],
+        correctIndex,
+      },
+    };
+
+    const validationResult = validateMiniTestAction(actionData);
+    
+    if (validationResult.isValid && validationResult.data) {
+      actions.push({
+        type: "mini_test",
+        data: {
+          question: {
+            text: validationResult.data.question,
+            type: "multiple_choice",
+            options: validationResult.data.options,
+            correctIndex: validationResult.data.correctIndex,
+          },
+        },
+      });
+      cleanedContent = cleanedContent.replace(fullMatch, "");
+      
+      if (validationResult.warnings.length > 0) {
+        console.warn("[MINI_TEST] Fixed malformed pattern with warnings:", {
+          warnings: validationResult.warnings,
+          original: fullMatch.substring(0, 100),
+        });
+      }
+      
+      return true;
           }
         }
       }
@@ -444,32 +460,51 @@ export function parseLessonActions(content: string): ParsedLessonActions {
     
     const correctIndex = parseInt(correctIndexStr, 10);
     
-    // Validate all required fields
-    if (question && question.length > 0 && 
-        optionA && optionA.length > 0 &&
-        optionB && optionB.length > 0 &&
-        optionC && optionC.length > 0 &&
-        optionD && optionD.length > 0 &&
-        !isNaN(correctIndex) && correctIndex >= 0 && correctIndex < 4) {
+    // Build action data structure
+    const actionData = {
+      question: {
+        text: question,
+        type: "multiple_choice",
+        options: [optionA, optionB, optionC, optionD],
+        correctIndex,
+      },
+    };
+
+    // Use validator for additional validation and normalization
+    const validationResult = validateMiniTestAction(actionData);
+    
+    if (validationResult.isValid && validationResult.data) {
+      // Use validated data
       actions.push({
         type: "mini_test",
         data: {
           question: {
-            text: question,
+            text: validationResult.data.question,
             type: "multiple_choice",
-            options: [optionA, optionB, optionC, optionD],
-            correctIndex,
+            options: validationResult.data.options,
+            correctIndex: validationResult.data.correctIndex,
           },
         },
       });
       cleanedContent = cleanedContent.replace(fullMatch, "");
+      
+      // Log warnings if any
+      if (validationResult.warnings.length > 0) {
+        console.warn("[MINI_TEST] Parsing warnings:", {
+          warnings: validationResult.warnings,
+          tag: fullMatch.substring(0, 100),
+        });
+      }
+      
       return true;
     } else {
-      // Invalid format - log detailed warning
-      console.warn("[MINI_TEST] Invalid format detected - validation failed:", {
+      // Invalid format - log detailed error with validation details
+      console.error("[MINI_TEST] Invalid format detected - validation failed:", {
         rawContent: innerContent,
         actualContent: actualContent,
         partsCount: parts.length,
+        validationErrors: validationResult.errors,
+        validationWarnings: validationResult.warnings,
         question: question || "missing or empty",
         optionA: optionA || "missing or empty",
         optionB: optionB || "missing or empty",
@@ -477,6 +512,7 @@ export function parseLessonActions(content: string): ParsedLessonActions {
         optionD: optionD || "missing or empty",
         correctIndex: isNaN(correctIndex) ? "invalid" : correctIndex,
         allParts: parts,
+        tagPreview: fullMatch.substring(0, 150),
       });
       // Still remove the tag to avoid showing it in content
       cleanedContent = cleanedContent.replace(fullMatch, "");
@@ -576,27 +612,40 @@ export function parseLessonActions(content: string): ParsedLessonActions {
     const optionD = normalizeOption(malformedMatch[5]);
     const correctIndex = parseInt(malformedMatch[6], 10);
     
-    if (question && question.length > 0 && 
-        optionA && optionA.length > 0 &&
-        optionB && optionB.length > 0 &&
-        optionC && optionC.length > 0 &&
-        optionD && optionD.length > 0 &&
-        !isNaN(correctIndex) && correctIndex >= 0 && correctIndex < 4) {
+    // Build and validate
+    const actionData = {
+      question: {
+        text: question,
+        type: "multiple_choice",
+        options: [optionA, optionB, optionC, optionD],
+        correctIndex,
+      },
+    };
+
+    const validationResult = validateMiniTestAction(actionData);
+    
+    if (validationResult.isValid && validationResult.data) {
       actions.push({
         type: "mini_test",
         data: {
           question: {
-            text: question,
+            text: validationResult.data.question,
             type: "multiple_choice",
-            options: [optionA, optionB, optionC, optionD],
-            correctIndex,
+            options: validationResult.data.options,
+            correctIndex: validationResult.data.correctIndex,
           },
         },
       });
       cleanedContent = cleanedContent.replace(malformedMatch[0], "");
       console.warn("[MINI_TEST] Fixed malformed pattern (missing [MINI_TEST: prefix):", {
         original: malformedMatch[0].substring(0, 100),
-        question,
+        question: validationResult.data.question,
+        warnings: validationResult.warnings,
+      });
+    } else {
+      console.error("[MINI_TEST] Failed to fix malformed pattern:", {
+        original: malformedMatch[0].substring(0, 150),
+        validationErrors: validationResult.errors,
       });
     }
   }

@@ -427,12 +427,48 @@ GEREKSIZ GİRİŞ MESAJLARI TAMAMEN YASAK:
 "Cevaplarını bekliyorum!" gibi mesajlar YASAK!
 Direkt [MINI_TEST: ...] tag'i ile başla!
 
+DÖNGÜ VE TEKRAR ÖNLEME:
+- Kullanıcıya "Cevabını bekliyorum!" mesajı göndermek YASAK!
+- Aynı soruyu tekrar tekrar sormak YASAK!
+- Eğer kullanıcı bir soruya cevap verdi, otomatik olarak bir sonraki soruya geç!
+- Sadece yeni sorular sor, eski soruları tekrar sorma!
+- Format hatası aldıysan, düzelt ve SADECE bir kez tekrar dene!
+- Sürekli aynı mesajı göndermek yerine, soruyu doğru formatta gönder!
+
 KRİTİK FORMAT HATALARINDAN KAÇINMA:
 - ASLA tag olmadan format gönderme! Her zaman [MINI_TEST: ile başla!
 - ASLA eksik kapanış parantezi bırakma! Her zaman ] ile kapat!
 - ASLA "= 10, A) ..." gibi formatlar kullanma! MUTLAKA [MINI_TEST: ile başla!
 - ASLA şıklarda "A)", "B)" formatı kullanma! Sadece şık metnini yaz!
 - Soru metninde köşeli parantez varsa (my_list[0] gibi), bunları koru ama tag formatını bozma!
+
+FORMAT DOĞRULAMA VE HATA ÖNLEME:
+
+1. GÖNDERMEDEN ÖNCE KONTROL ET:
+   - Soru metni var mı ve boş değil mi?
+   - Tam olarak 4 şık (A, B, C, D) var mı?
+   - Doğru cevap index'i (0-3) belirtildi mi?
+   - Tag başında [MINI_TEST: ve sonda ] var mı?
+
+2. FORMAT HATASI DURUMUNDA:
+   - Eğer format hatası tespit edilirse, sisteme hata mesajı gönderilir
+   - Bu durumda ders akışı bozulur ve kullanıcı deneyimi kötüleşir
+   - MUTLAKA ilk seferde doğru formatı kullan!
+
+3. DÖNGÜ ÖNLEME:
+   - Aynı soruyu tekrar tekrar sorma!
+   - "Cevabını bekliyorum!" gibi mesajları tekrar etme!
+   - Kullanıcı cevap verdiyse bir sonraki soruya geç!
+   - Eğer format hatası aldıysan, düzelt ve SADECE bir kez tekrar gönder!
+
+4. VALIDATION CHECKLIST (Her MINI_TEST göndermeden önce):
+   ✓ Soru metni yazıldı mı?
+   ✓ 4 şık (A, B, C, D) yazıldı mı?
+   ✓ Her şık boş değil mi?
+   ✓ Doğru index (0-3) eklendi mi?
+   ✓ Tag açılış [MINI_TEST: var mı?
+   ✓ Tag kapanış ] var mı?
+   ✓ Şıklarda "A)", "B)" gibi prefix'ler yok mu?
 
 ═══════════════════════════════════════════════════════════════
 

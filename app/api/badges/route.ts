@@ -142,34 +142,38 @@ export async function GET() {
       ],
     });
 
-    // Eğer veritabanında 160 rozet varsa, onları döndür
-    // 160'tan azsa, eksik olanları import et
+    // Her zaman import et (upsert kullanıyor, mevcutları günceller, eksikleri ekler)
     const expectedBadgeCount = 160;
-    if (badges && badges.length >= expectedBadgeCount) {
-      return NextResponse.json({ badges });
-    }
-
-    // Veritabanında rozet yoksa veya eksikse, otomatik import et
-    if (badges && badges.length > 0) {
-      console.log(`[BADGES] Veritabanında ${badges.length} rozet var, ${expectedBadgeCount} olması gerekiyor. Eksik rozetler import ediliyor...`);
+    const currentCount = badges?.length || 0;
+    
+    if (currentCount > 0) {
+      console.log(`[BADGES] Veritabanında ${currentCount} rozet var, ${expectedBadgeCount} olması gerekiyor. Tüm rozetler import ediliyor (upsert)...`);
     } else {
       console.log("[BADGES] Veritabanında rozet bulunamadı, JSON'dan otomatik import başlatılıyor...");
     }
+    
     const importResult = await importBadgesFromJson();
 
-    if (importResult.success && importResult.imported > 0) {
-      // Import başarılıysa, tekrar veritabanından çek
-      const importedBadges = await db.badge.findMany({
-        orderBy: [
-          { rarity: "asc" },
-          { points: "desc" },
-        ],
-      });
+    // Import sonrası tekrar veritabanından çek
+    const importedBadges = await db.badge.findMany({
+      orderBy: [
+        { rarity: "asc" },
+        { points: "desc" },
+      ],
+    });
 
-      if (importedBadges && importedBadges.length > 0) {
-        console.log(`[BADGES] ${importedBadges.length} rozet başarıyla import edildi ve döndürülüyor.`);
-        return NextResponse.json({ badges: importedBadges });
-      }
+    if (importedBadges && importedBadges.length > 0) {
+      // Kategori bazında rozet sayısını log'la
+      const byCategory: Record<string, number> = {};
+      importedBadges.forEach((badge: any) => {
+        byCategory[badge.category] = (byCategory[badge.category] || 0) + 1;
+      });
+      console.log(`[BADGES] Import tamamlandı. Toplam: ${importedBadges.length} rozet. Kategori bazında:`, byCategory);
+      
+      return NextResponse.json({ 
+        badges: importedBadges,
+        totalBadges: expectedBadgeCount
+      });
     }
 
     // Import başarısızsa veya hala rozet yoksa, JSON dosyasından oku (fallback)
@@ -180,12 +184,15 @@ export async function GET() {
       
       return NextResponse.json({ 
         badges: jsonData.badges || [],
-        totalBadges: jsonData.totalBadges || 0
+        totalBadges: 160 // Her zaman 160 döndür
       });
     } catch (jsonError) {
       console.error("Error reading badges.json:", jsonError);
-      // JSON dosyası da yoksa boş array döndür
-      return NextResponse.json({ badges: [] });
+      // JSON dosyası da yoksa boş array döndür ama totalBadges yine 160
+      return NextResponse.json({ 
+        badges: [],
+        totalBadges: 160
+      });
     }
   } catch (error) {
     console.error("Error fetching badges:", error);
@@ -198,12 +205,15 @@ export async function GET() {
       
       return NextResponse.json({ 
         badges: jsonData.badges || [],
-        totalBadges: jsonData.totalBadges || 0
+        totalBadges: 160 // Her zaman 160 döndür
       });
     } catch (jsonError) {
       console.error("Error reading badges.json:", jsonError);
       return NextResponse.json(
-        { error: "Rozetler yüklenirken bir hata oluştu" },
+        { 
+          error: "Rozetler yüklenirken bir hata oluştu",
+          totalBadges: 160
+        },
         { status: 500 }
       );
     }

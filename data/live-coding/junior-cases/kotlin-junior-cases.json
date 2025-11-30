@@ -6,13 +6,13 @@
       "id": "kotlin-junior-1",
       "title": "Sayısal Çıktı Döngüsü",
       "description": "1'den 50'ye kadar sayıları ekrana yazdırın.",
-      "taskDescription": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dünya 1', 'Selam Sana Dünya 2', ... 'Selam Sana Dünya 50'",
+      "taskDescription": "1'den 50'ye kadar olan sayıları ekrana yazdırın. Her satırda bir sayı olsun ve format şu şekilde olsun: 'Selam Sana Dunya 1', 'Selam Sana Dunya 2', ... 'Selam Sana Dunya 50'",
       "level": "beginner",
       "timeLimitMinutes": 30,
       "acceptanceCriteria": [
         "Kod derlenmeli ve hatasız çalışmalı",
         "1'den 50'ye kadar tüm sayılar yazdırılmalı",
-        "Her satır 'Selam Sana Dünya X' formatında olmalı",
+        "Her satır 'Selam Sana Dunya X' formatında olmalı",
         "Döngü kullanılmalı",
         "Kod okunabilir ve temiz olmalı"
       ]

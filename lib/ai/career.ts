@@ -133,10 +133,17 @@ ${uncertaintyNotes.length > 0 ? `\nÖNEMLİ NOTLAR:\n${uncertaintyNotes.map(note
 
   const resourcesSection = availableResources && availableResources.length > 0
     ? `
-Platformda Mevcut Kaynaklar:
-${availableResources.map((r, i) => `- ${r.title}${r.category ? ` (${r.category})` : ""}${r.topic ? ` - Konu: ${r.topic}` : ""}${r.difficulty ? ` - Zorluk: ${r.difficulty}` : ""}`).join("\n")}
+Platformda Mevcut Kaynaklar (kurs ID'leri ile birlikte):
+${availableResources.map((r: any, i: number) => `- ${r.title} [ID: ${r.id}]${r.category ? ` (${r.category})` : ""}${r.topic ? ` - Konu: ${r.topic}` : ""}${r.difficulty ? ` - Zorluk: ${r.difficulty}` : ""}`).join("\n")}
 
 ÖNEMLİ: Platformdaki mevcut kaynakları kariyer planına entegre et. Kullanıcıya platform içindeki kursları, modülleri ve dersleri öner.
+
+LİNK FORMATI ÇOK ÖNEMLİ:
+- Eğer yukarıdaki listeden bir kurs öneriyorsan, link alanına sadece kurs ID'sini yaz (örn: "course-react" veya "/education/courses/course-react")
+- Kurslar için format: sadece kurs ID (örn: "course-react") veya tam format: "/education/courses/course-react"
+- Modüller için: "/education/courses/[courseId]/modules/[moduleId]" formatını kullan
+- Eğer listede olmayan bir kaynak öneriyorsan VEYA emin değilsen, link alanını BOŞ BIRAK (null veya "") - sistem otomatik olarak kurs başlığına göre arama yapacak
+- ASLA "platform içi link (varsa)" veya benzer placeholder metinler kullanma - ya gerçek kurs ID'si yaz ya da boş bırak
 `
     : "";
 
@@ -195,7 +202,7 @@ Aşağıdaki JSON formatında DETAYLI kariyer planı oluştur:
       "title": "Kurs/Modül adı",
       "type": "Kurs",
       "description": "Bu kaynak neden öneriliyor",
-      "link": "platform içi link (varsa)"
+      "link": "course-react veya /education/courses/course-react veya boş string - ÖNEMLİ: Yukarıdaki listede verilen kurs ID'sini kullan. Eğer listede yoksa veya emin değilsen link alanını boş string olarak bırak (\"\"). ASLA placeholder metin kullanma."
     }
   ],
   "skillsToDevelop": ["beceri 1", "beceri 2"],
@@ -246,6 +253,7 @@ export async function generateCareerPlan(userId: string, questionnaire?: Questio
     // Get available platform resources (courses)
     const availableCourses = await db.course.findMany({
       select: {
+        id: true,
         title: true,
         category: true,
         field: true,
@@ -257,6 +265,7 @@ export async function generateCareerPlan(userId: string, questionnaire?: Questio
     });
 
     const availableResources = availableCourses.map((course: typeof availableCourses[0]) => ({
+      id: course.id,
       title: course.title,
       category: course.category || course.field || undefined,
       topic: course.topic || undefined,

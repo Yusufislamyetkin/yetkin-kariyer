@@ -83,6 +83,7 @@ ${!hasUserOutput ? `9. **ÖNEMLİ**: Kod henüz çalıştırılmamış. Kullanı
 - Kullanıcının nereyi düzeltmesi gerektiğini çok net bir şekilde açıkla
 - JSON formatında yanıt ver, başka açıklama yapma
 - Türkçe karakterleri doğru kullan (UTF-8 encoding)
+- **KRİTİK**: correctedCode ve feedback alanlarında ASLA markdown kod blokları (\`\`\` veya \`\`\`python gibi) KULLANMA! Kodları doğrudan metin olarak yaz, markdown formatı kullanma!
 
 YANIT FORMATI (JSON):
 {
@@ -145,6 +146,21 @@ YANIT FORMATI (JSON):
       if (parsedResponse.specificErrors && !Array.isArray(parsedResponse.specificErrors)) {
         parsedResponse.specificErrors = [];
       }
+
+      // Remove markdown code blocks from correctedCode and feedback
+      // Pattern: ```language\ncode\n``` or ```\ncode\n```
+      const removeMarkdownCodeBlocks = (text: string): string => {
+        if (!text) return text;
+        // Remove code blocks with language: ```python\ncode\n```
+        let cleaned = text.replace(/```[\w]*\n?([\s\S]*?)```/g, '$1');
+        // Also remove any remaining triple backticks at start/end
+        cleaned = cleaned.replace(/^```[\w]*\n?/gm, '').replace(/\n?```$/gm, '');
+        return cleaned.trim();
+      };
+
+      // Clean correctedCode and feedback
+      parsedResponse.correctedCode = removeMarkdownCodeBlocks(parsedResponse.correctedCode);
+      parsedResponse.feedback = removeMarkdownCodeBlocks(parsedResponse.feedback);
 
       return NextResponse.json(parsedResponse, {
       headers: {

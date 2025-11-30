@@ -338,10 +338,34 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
           data: { choices: action.data.choices },
         });
       } else if (action.type === "mini_test" && action.data) {
-        // Collect test questions to show sequentially
-        // Debug: Log the data structure
-        console.log("[LessonChat] Mini test action data:", action.data);
-        testQuestions.push(action.data);
+        // Validate and collect test questions
+        // Ensure data structure is correct
+        const questionData = action.data;
+        
+        // Handle both nested and direct structures
+        const normalizedData = questionData.question || questionData;
+        
+        // Basic validation - check if we have minimum required data
+        const hasQuestion = normalizedData.text || normalizedData.question;
+        const hasOptions = Array.isArray(normalizedData.options) && normalizedData.options.length > 0;
+        
+        if (hasQuestion || hasOptions) {
+          // Even if partially valid, add it so user can see what's wrong
+          console.log("[LessonChat] Mini test action data (validated):", {
+            hasQuestion,
+            hasOptions,
+            optionsCount: normalizedData.options?.length || 0,
+            data: questionData,
+          });
+          
+          // Ensure we always push valid data structure
+          testQuestions.push({
+            question: normalizedData,
+            ...questionData, // Keep original structure as fallback
+          });
+        } else {
+          console.warn("[LessonChat] Invalid mini_test action - missing question or options:", action.data);
+        }
       }
     }
     
@@ -352,8 +376,19 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
       setPendingTestQuestions(testQuestions);
       setCurrentTestQuestionIndex(0);
       setAnsweredTestQuestionIndex(null);
+    } else {
+      // If no valid questions, ensure we don't have stale questions
+      // But don't clear if we're in the middle of answering
+      if (answeredTestQuestionIndex === null || currentTestQuestionIndex >= pendingTestQuestions.length) {
+        // Safe to clear - no active question being answered
+        if (pendingTestQuestions.length > 0) {
+          console.log("[LessonChat] Clearing stale test questions");
+          setPendingTestQuestions([]);
+          setCurrentTestQuestionIndex(0);
+        }
+      }
     }
-  }, []);
+  }, [answeredTestQuestionIndex, currentTestQuestionIndex, pendingTestQuestions.length]);
 
   // Handle sending message
   const handleSendMessage = useCallback(
@@ -421,6 +456,17 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
         };
 
         setMessages((prev) => [...prev, assistantMessage]);
+
+        // Handle validation warnings
+        if (data.validationWarning) {
+          console.warn("[LessonChat] Validation warning received:", data.validationWarning);
+          // Validation warning indicates format errors - actions might be empty
+          // But we still want to show user that there was an issue
+          if (data.validationWarning.hasFormatErrors && (!data.actions || data.actions.length === 0)) {
+            // Show error to user but don't block flow
+            setError(`Format hatası: ${data.validationWarning.message}. AI'ya düzeltme bildirimi gönderildi.`);
+          }
+        }
 
         if (data.roadmap) {
           setRoadmap(data.roadmap);
@@ -502,6 +548,18 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
         }
 
         handleActions(data.actions || []);
+        
+        // Always ensure mini_test questions are shown even if parsing had issues
+        // Check if there are mini_test actions in the message metadata
+        if (data.actions && data.actions.length > 0) {
+          const hasMiniTest = data.actions.some((a: any) => a.type === "mini_test");
+          if (hasMiniTest) {
+            // Force show continue button after a short delay to allow state to update
+            setTimeout(() => {
+              setShowContinueButton(true);
+            }, 100);
+          }
+        }
         
         // Show continue button if no new activity is set
         if (!data.actions || data.actions.length === 0 || 
@@ -1111,8 +1169,13 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
                             const isCurrentQuestion = questionIndexInPending >= 0 && questionIndexInPending === currentTestQuestionIndex;
                             const isAnswered = questionIndexInPending >= 0 && answeredTestQuestionIndex === questionIndexInPending;
                             
-                            // Only show if it's the current question from pendingTestQuestions, or if pendingTestQuestions is empty
+                            // Show current question or if pendingTestQuestions is empty (means inline question should be shown)
+                            // Priority: pendingTestQuestions takes precedence for card display
                             const shouldShow = pendingTestQuestions.length === 0 || isCurrentQuestion;
+                            
+                            // If we have pendingTestQuestions and this is not the current one, don't show inline
+                            // (it will be shown as a card from pendingTestQuestions)
+                            if (pendingTestQuestions.length > 0 && !isCurrentQuestion) return null;
                             
                             if (!shouldShow) return null;
                             
@@ -1141,6 +1204,9 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
                                     question={testQuestion}
                                     onAnswer={(answer) => handleTestQuestionAnswer(answer)}
                                     disabled={sending || isAnswered}
+                                    questionNumber={questionIndexInPending >= 0 ? questionIndexInPending + 1 : undefined}
+                                    totalQuestions={pendingTestQuestions.length > 0 ? pendingTestQuestions.length : undefined}
+                                    isAnswered={isAnswered}
                                   />
                                 </div>
                               </div>
@@ -1155,23 +1221,14 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
               </>
             )}
             
-            {/* Test Questions from pendingTestQuestions - Show current question at the end if not already rendered inline */}
+            {/* Test Questions from pendingTestQuestions - Show current question at the end */}
+            {/* Always show pending questions as cards, even if they were rendered inline (they might have been parsed differently) */}
             {pendingTestQuestions.length > 0 && currentTestQuestionIndex < pendingTestQuestions.length && (
               (() => {
-                // Check if current question was already rendered inline with a message
                 const currentQuestion = pendingTestQuestions[currentTestQuestionIndex];
-                const wasRenderedInline = messagesWithTestQuestions.some((msg) => {
-                  const msgTestQuestions = (msg.metadata as any)?.testQuestions || [];
-                  // Check if any test question in this message matches the current question
-                  return msgTestQuestions.some((q: any) => {
-                    // Deep comparison might be needed, but for now use reference equality
-                    // If questions are the same object reference, they're the same
-                    return q === currentQuestion || JSON.stringify(q) === JSON.stringify(currentQuestion);
-                  });
-                });
                 
-                // Only render here if it wasn't already rendered inline
-                if (wasRenderedInline) return null;
+                // Always render - don't skip even if rendered inline
+                // This ensures cards are always visible even if parsing had issues
                 
                 return (
                   <div className="space-y-3">
@@ -1200,6 +1257,9 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
                               question={currentQuestion}
                               onAnswer={(answer) => handleTestQuestionAnswer(answer)}
                               disabled={sending || isAnswered}
+                              questionNumber={currentTestQuestionIndex + 1}
+                              totalQuestions={pendingTestQuestions.length}
+                              isAnswered={isAnswered}
                             />
                           );
                         })()}

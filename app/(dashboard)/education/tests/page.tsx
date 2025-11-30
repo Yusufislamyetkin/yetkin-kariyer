@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { BookOpen, Sparkles, Code, FileText } from "lucide-react";
+import { BookOpen, Sparkles, Code, FileText, MessageSquare, ArrowRight, Brain } from "lucide-react";
 import { Card, CardContent } from "@/app/components/ui/Card";
 import { technologyToRoute } from "@/lib/utils/technology-normalize";
 
@@ -91,6 +91,9 @@ export default function TestsPage() {
   return (
     <div className="space-y-8 md:space-y-10 animate-fade-in">
       <HeroSection stats={heroStats} />
+
+      {/* AI Öğretmen Yönlendirme Kartı */}
+      <AITeacherCard />
 
       <div className="flex flex-col gap-6">
         {error ? (
@@ -210,6 +213,84 @@ function CategoryCardSkeleton() {
 interface HeroSectionProps {
   loading?: boolean;
   stats: { label: string; value: string }[];
+}
+
+function AITeacherCard() {
+  return (
+    <Link
+      href="/education/tutor"
+      className="group relative overflow-hidden rounded-2xl sm:rounded-3xl border border-purple-200/50 dark:border-purple-800/50 bg-gradient-to-br from-purple-50 via-pink-50/50 to-indigo-50 dark:from-purple-900/20 dark:via-pink-900/20 dark:to-indigo-900/20 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]"
+    >
+      {/* Background gradient orbs */}
+      <div className="absolute inset-0">
+        <div className="absolute -top-12 -right-12 h-40 w-40 sm:h-56 sm:w-56 rounded-full bg-purple-400/30 dark:bg-purple-500/20 blur-3xl group-hover:bg-purple-400/40 dark:group-hover:bg-purple-500/30 transition-colors duration-300" />
+        <div className="absolute -bottom-8 -left-8 h-32 w-32 sm:h-48 sm:w-48 rounded-full bg-pink-400/30 dark:bg-pink-500/20 blur-3xl group-hover:bg-pink-400/40 dark:group-hover:bg-pink-500/30 transition-colors duration-300" />
+      </div>
+
+      {/* Subtle pattern */}
+      <div className="absolute inset-0 opacity-20 dark:opacity-10">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239f46e5' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundSize: "60px 60px",
+          }}
+        ></div>
+      </div>
+
+      <div className="relative z-10 p-6 sm:p-8 md:p-10">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+          <div className="flex-1 space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="p-3 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 shadow-lg group-hover:shadow-xl transition-shadow">
+                <Brain className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
+              </div>
+              <div className="inline-flex items-center gap-2 rounded-full bg-purple-100 dark:bg-purple-900/40 px-3 py-1.5 text-xs sm:text-sm font-semibold text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800">
+                <Sparkles className="h-3 w-3 sm:h-4 sm:w-4" />
+                AI Öğretmen
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
+                Test Hatalarınızı{" "}
+                <span className="bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 dark:from-purple-400 dark:via-pink-400 dark:to-indigo-400 bg-clip-text text-transparent">
+                  AI ile Öğrenin
+                </span>
+              </h2>
+              <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl">
+                Testlerde yaptığınız hataları inceleyin, AI öğretmeninizle çalışın ve zayıf olduğunuz konularda kişiselleştirilmiş öğrenme planı alın.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-3 pt-2">
+              <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200">
+                <MessageSquare className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+                <span>Yanlış sorularınızı analiz edin</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200">
+                <Brain className="h-4 w-4 text-pink-600 dark:text-pink-400" />
+                <span>Kişiselleştirilmiş öğrenme planı</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-center sm:justify-end">
+            <div className="group/button relative">
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300"></div>
+              <div className="relative flex items-center gap-2 rounded-xl bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 px-6 py-3.5 text-white font-semibold shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
+                <span className="text-sm sm:text-base">Öğretmenime Git</span>
+                <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Shine effect on hover */}
+      <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none"></div>
+    </Link>
+  );
 }
 
 function HeroSection({ loading = false, stats }: HeroSectionProps) {

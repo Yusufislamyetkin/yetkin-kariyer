@@ -12,17 +12,13 @@ export interface BadgeCheckResult {
 // Helper function to import badges from JSON to database
 async function ensureBadgesInDatabase() {
   try {
-    // Önce veritabanında kaç rozet var kontrol et
+    // Her zaman import et (upsert kullanıyor, mevcutları günceller, eksikleri ekler)
     const existingBadges = await db.badge.findMany();
     const expectedBadgeCount = 160;
+    const currentCount = existingBadges.length;
     
-    // Eğer 160 rozet varsa, import gerekmez
-    if (existingBadges.length >= expectedBadgeCount) {
-      return; // Tüm rozetler zaten var, import gerekmez
-    }
-
-    if (existingBadges.length > 0) {
-      console.log(`[BADGE_SERVICE] Veritabanında ${existingBadges.length} rozet var, ${expectedBadgeCount} olması gerekiyor. Eksik rozetler import ediliyor...`);
+    if (currentCount > 0) {
+      console.log(`[BADGE_SERVICE] Veritabanında ${currentCount} rozet var, ${expectedBadgeCount} olması gerekiyor. Tüm rozetler import ediliyor (upsert)...`);
     } else {
       console.log("[BADGE_SERVICE] Veritabanında rozet bulunamadı, JSON'dan otomatik import başlatılıyor...");
     }
@@ -130,7 +126,14 @@ async function ensureBadgesInDatabase() {
       }
     }
 
-    console.log(`[BADGE_SERVICE] Import completed: ${created} created, ${skipped} skipped`);
+    // Import sonrası kategori bazında rozet sayısını log'la
+    const finalBadges = await db.badge.findMany();
+    const byCategory: Record<string, number> = {};
+    finalBadges.forEach((badge: any) => {
+      byCategory[badge.category] = (byCategory[badge.category] || 0) + 1;
+    });
+    
+    console.log(`[BADGE_SERVICE] Import completed: ${created} created, ${skipped} skipped. Toplam: ${finalBadges.length} rozet. Kategori bazında:`, byCategory);
   } catch (error: any) {
     console.error("[BADGE_SERVICE] Error importing badges:", error);
   }

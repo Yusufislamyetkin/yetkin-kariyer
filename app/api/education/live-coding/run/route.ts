@@ -37,13 +37,13 @@ const LANGUAGE_MAP: Record<
   javascript: { language: "javascript", version: "18.15.0", fileName: "main.js" },
   java: { language: "java", version: "15.0.2", fileName: "Main.java" },
   csharp: { language: "csharp", version: "6.12.0", fileName: "Program.cs" },
-  php: { language: "php", version: "8.2.0", fileName: "main.php" },
-  typescript: { language: "typescript", version: "5.0.0", fileName: "main.ts" },
-  go: { language: "go", version: "1.21.0", fileName: "main.go" },
-  rust: { language: "rust", version: "1.70.0", fileName: "main.rs" },
+  php: { language: "php", version: "8.2", fileName: "main.php" },
+  typescript: { language: "typescript", version: "5.0", fileName: "main.ts" },
+  go: { language: "go", version: "1.21", fileName: "main.go" },
+  rust: { language: "rust", version: "1.70", fileName: "main.rs" },
   cpp: { language: "cpp", version: "10.2.0", fileName: "main.cpp" },
-  kotlin: { language: "kotlin", version: "1.9.0", fileName: "Main.kt" },
-  ruby: { language: "ruby", version: "3.2.0", fileName: "main.rb" },
+  kotlin: { language: "kotlin", version: "1.9", fileName: "Main.kt" },
+  ruby: { language: "ruby", version: "3.2", fileName: "main.rb" },
 };
 
 const MAX_CODE_LENGTH = 100_000;
@@ -120,54 +120,108 @@ export async function POST(request: Request) {
     const stdin = typeof body.stdin === "string" ? body.stdin : undefined;
     const config = LANGUAGE_MAP[language];
 
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+    // PHP, TypeScript, Go, Rust, Kotlin ve Ruby için fallback versiyonlar (eğer bir versiyon çalışmazsa diğerini dene)
+    const getFallbackVersions = (lang: LiveCodingLanguage, defaultVersion: string): string[] => {
+      if (lang === "php") {
+        return ["8.2", "8.1", "8.0", "7.4"];
+      }
+      if (lang === "typescript") {
+        return ["5.0", "4.9", "4.8", "4.7"];
+      }
+      if (lang === "go") {
+        return ["1.21", "1.20", "1.19", "1.18"];
+      }
+      if (lang === "rust") {
+        return ["1.70", "1.69", "1.68", "1.67"];
+      }
+      if (lang === "kotlin") {
+        return ["1.9", "1.8", "1.7", "1.6"];
+      }
+      if (lang === "ruby") {
+        return ["3.2", "3.1", "3.0", "2.7"];
+      }
+      return [defaultVersion];
+    };
+    const fallbackVersions = getFallbackVersions(language, config.version);
+    let lastError: string | null = null;
+    let pistonResponse: Response | null = null;
+    let payload: PistonRunResponse | null = null;
 
-    let pistonResponse: Response;
+    // Try each version until one works
+    for (const version of fallbackVersions) {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
-    try {
-      pistonResponse = await fetch("https://emkc.org/api/v2/piston/execute", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          language: config.language,
-          version: config.version,
-          files: [
-            {
-              name: config.fileName,
-              content: code,
-            },
-          ],
-          stdin,
-          compile_timeout: 10_000,
-          run_timeout: 10_000,
-          compile_memory_limit: -1,
-          run_memory_limit: -1,
-        }),
-        cache: "no-store",
-        signal: controller.signal,
-      });
-    } catch (error) {
-      const isAbortError = (error as Error)?.name === "AbortError";
-      return NextResponse.json(
-        { error: isAbortError ? "Kod çalıştırma zaman aşımına uğradı." : "Kod çalıştırma servisine ulaşılamadı." },
-        { status: 504 }
-      );
-    } finally {
-      clearTimeout(timeoutId);
+      try {
+        pistonResponse = await fetch("https://emkc.org/api/v2/piston/execute", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            language: config.language,
+            version: version,
+            files: [
+              {
+                name: config.fileName,
+                content: code,
+              },
+            ],
+            stdin,
+            compile_timeout: 10_000,
+            run_timeout: 10_000,
+            compile_memory_limit: -1,
+            run_memory_limit: -1,
+          }),
+          cache: "no-store",
+          signal: controller.signal,
+        });
+
+        clearTimeout(timeoutId);
+        payload = (await pistonResponse.json()) as PistonRunResponse;
+
+        // Check if this version works
+        if (pistonResponse.ok) {
+          // Success! Use this version
+          break;
+        }
+
+        // Check if error is about unknown runtime
+        const errorMessage = payload?.message || payload?.run?.stderr || "";
+        if (errorMessage.includes("runtime") && errorMessage.includes("unknown")) {
+          // This version doesn't exist, try next one
+          lastError = errorMessage;
+          continue;
+        }
+
+        // Other error, return it
+        lastError = errorMessage;
+        break;
+      } catch (error) {
+        clearTimeout(timeoutId);
+        const isAbortError = (error as Error)?.name === "AbortError";
+        if (isAbortError) {
+          return NextResponse.json(
+            { error: "Kod çalıştırma zaman aşımına uğradı." },
+            { status: 504 }
+          );
+        }
+        // Network error, return immediately
+        return NextResponse.json(
+          { error: "Kod çalıştırma servisine ulaşılamadı." },
+          { status: 504 }
+        );
+      }
     }
 
-    const payload = (await pistonResponse.json()) as PistonRunResponse;
-
-    if (!pistonResponse.ok) {
-      const message = payload?.message || payload?.run?.stderr || "Kod çalıştırma başarısız oldu.";
+    // If we tried all versions and none worked
+    if (!pistonResponse || !pistonResponse.ok) {
+      const message = lastError || payload?.message || payload?.run?.stderr || "Kod çalıştırma başarısız oldu.";
       const translatedMessage = await translateErrorToTurkish(message);
       return NextResponse.json(
         { error: translatedMessage },
         { 
-          status: pistonResponse.status,
+          status: pistonResponse?.status || 500,
           headers: {
             'Content-Type': 'application/json; charset=utf-8',
           },
@@ -176,6 +230,13 @@ export async function POST(request: Request) {
     }
 
     // Translate error messages in response
+    if (!payload) {
+      return NextResponse.json(
+        { error: "Kod çalıştırma yanıtı alınamadı." },
+        { status: 500 }
+      );
+    }
+
     const translatedPayload = { ...payload };
     
     if (translatedPayload.compile?.stderr) {

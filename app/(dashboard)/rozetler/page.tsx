@@ -147,7 +147,7 @@ export default function RozetlerPage() {
   const [allBadges, setAllBadges] = useState<Badge[]>([]);
   const [userBadges, setUserBadges] = useState<Badge[]>([]);
   const [earnedBadgeIds, setEarnedBadgeIds] = useState<Set<string>>(new Set());
-  const [totalBadgesCount, setTotalBadgesCount] = useState(93);
+  const [totalBadgesCount, setTotalBadgesCount] = useState(160);
   const [selectedCategory, setSelectedCategory] = useState<string | null>("daily_activities");
   const [progressMap, setProgressMap] = useState<Map<string, { current: number; target: number; percentage: number; isCompleted: boolean }>>(new Map());
 
@@ -261,7 +261,8 @@ export default function RozetlerPage() {
 
       if (response.ok && data.badges) {
         setAllBadges(data.badges || []);
-        setTotalBadgesCount(data.badges?.length || 93);
+        // API'den gelen totalBadges field'ını kullan, yoksa badges.length kullan
+        setTotalBadgesCount(data.totalBadges || data.badges?.length || 160);
         return;
       }
       
@@ -270,7 +271,7 @@ export default function RozetlerPage() {
       if (jsonResponse.ok) {
         const jsonData = await jsonResponse.json();
         setAllBadges(jsonData.badges || []);
-        setTotalBadgesCount(jsonData.totalBadges || 93);
+        setTotalBadgesCount(jsonData.totalBadges || 160);
       } else {
         console.error("Failed to load badges from API and JSON fallback");
         setAllBadges([]);
@@ -283,7 +284,7 @@ export default function RozetlerPage() {
         if (jsonResponse.ok) {
           const jsonData = await jsonResponse.json();
           setAllBadges(jsonData.badges || []);
-          setTotalBadgesCount(jsonData.totalBadges || 93);
+          setTotalBadgesCount(jsonData.totalBadges || 160);
         } else {
           setAllBadges([]);
         }
@@ -434,7 +435,7 @@ export default function RozetlerPage() {
   
   // Toplam kazanılan rozet sayısı: userBadges + ilerleme tamamlanmış rozetler
   const earnedCount = userBadges.length + completedBadgeKeys.size;
-  const totalBadges = totalBadgesCount || allBadges.length || 93;
+  const totalBadges = totalBadgesCount || allBadges.length || 160;
   
   // Toplam puan: userBadges'den gelen puanlar + ilerleme tamamlanmış rozetlerin puanları
   const userBadgesPoints = userBadges.reduce((sum, badge) => sum + (badge.points || 0), 0);
@@ -445,7 +446,7 @@ export default function RozetlerPage() {
   const totalPoints = userBadgesPoints + completedBadgesPoints;
 
   return (
-    <div className="space-y-6 md:space-y-8 animate-fade-in pb-8">
+    <div className="space-y-6 md:space-y-8 animate-fade-in pb-8 pt-6 md:pt-8">
       {/* Top Section - Header, Stats, and Info */}
       <Card variant="elevated" className="bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-500 dark:from-blue-600 dark:via-purple-600 dark:to-indigo-600 border border-purple-200/50 dark:border-purple-800/50">
         <CardContent className="p-8 md:p-12">
@@ -550,6 +551,56 @@ export default function RozetlerPage() {
         </CardContent>
       </Card>
 
+      {/* Categories Card - Mobile View (below Monthly Reward System) */}
+      <div className="lg:hidden">
+        <Card variant="elevated">
+          <CardHeader className="p-6">
+            <CardTitle className="text-lg font-bold text-gray-900 dark:text-gray-100">
+              Kategoriler
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-0">
+            <div className="flex flex-col space-y-1.5 p-6 pt-0">
+              {categoryStats.map((category) => {
+                const IconComponent = category.icon;
+                return (
+                  <div key={category.id} className="flex flex-col space-y-1.5">
+                    <button
+                      onClick={() => setSelectedCategory(category.id)}
+                      className={`w-full text-left p-3 rounded-lg transition-all duration-200 ${
+                        selectedCategory === category.id
+                          ? `bg-gradient-to-r ${category.gradient} text-white shadow-md`
+                          : "hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-900 dark:text-gray-100"
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <IconComponent className={`h-5 w-5 flex-shrink-0 ${
+                            selectedCategory === category.id
+                              ? "text-white"
+                              : "text-gray-600 dark:text-gray-400"
+                          }`} />
+                          <span className="font-medium text-base">
+                            {category.name}
+                          </span>
+                        </div>
+                        <span className={`text-sm font-medium ${
+                          selectedCategory === category.id
+                            ? "text-white/90"
+                            : "text-gray-600 dark:text-gray-400"
+                        }`}>
+                          {category.earned} / {category.total}
+                        </span>
+                      </div>
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
       {/* Main Content - Two Column Layout */}
       <div className="grid lg:grid-cols-3 gap-6">
         {/* Left Column - Badges Collection */}
@@ -647,9 +698,10 @@ export default function RozetlerPage() {
           )}
         </div>
 
-        {/* Right Column - Categories */}
+        {/* Right Column - Categories (Desktop View) */}
         <div className="lg:col-span-1">
-          <Card variant="elevated" className="sticky top-6">
+          <div className="hidden lg:block">
+            <Card variant="elevated" className="sticky top-6">
             <CardHeader className="p-6">
               <CardTitle className="text-lg font-bold text-gray-900 dark:text-gray-100">
                 Kategoriler
@@ -695,6 +747,7 @@ export default function RozetlerPage() {
               </div>
             </CardContent>
           </Card>
+          </div>
         </div>
       </div>
     </div>

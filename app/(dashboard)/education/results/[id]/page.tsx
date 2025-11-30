@@ -11,6 +11,7 @@ import {
   RefreshCcw,
   Sparkles,
   Target,
+  ArrowRight,
 } from "lucide-react";
 
 import {
@@ -89,6 +90,11 @@ const formatDuration = (seconds?: number | null) => {
   return `${mins} dk ${secs.toString().padStart(2, "0")} sn`;
 };
 
+interface NextQuiz {
+  id: string;
+  title: string;
+}
+
 export default function QuizResultsPage() {
   const params = useParams();
   const [attempt, setAttempt] = useState<QuizAttempt | null>(null);
@@ -98,6 +104,7 @@ export default function QuizResultsPage() {
   const [analysisLoading, setAnalysisLoading] = useState(false);
   const [analysisError, setAnalysisError] = useState<string | null>(null);
   const [achievement, setAchievement] = useState<AchievementPayload | null>(null);
+  const [nextQuiz, setNextQuiz] = useState<NextQuiz | null>(null);
   const { showBadges } = useBadgeNotification();
   const { celebrate } = useCelebration();
   const processedBadgeIds = useRef<Set<string>>(new Set());
@@ -194,11 +201,43 @@ export default function QuizResultsPage() {
       } else {
         setAnalysis(existingAnalysis);
       }
+
+      // Fetch next quiz if course exists
+      if (data.attempt?.quiz?.course?.id) {
+        await fetchNextQuiz(data.attempt.quiz.id, data.attempt.quiz.course.id);
+      }
     } catch (err) {
       console.error("Error fetching results:", err);
       setError(err instanceof Error ? err.message : "Bilinmeyen bir hata oluştu");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchNextQuiz = async (currentQuizId: string, courseId: string) => {
+    try {
+      // Fetch course with quizzes
+      const courseResponse = await fetch(`/api/courses/${courseId}`);
+      if (!courseResponse.ok) {
+        return;
+      }
+      const courseData = await courseResponse.json();
+      const quizzes = courseData.course?.quizzes || [];
+      
+      // Find current quiz index
+      const currentIndex = quizzes.findIndex((q: { id: string }) => q.id === currentQuizId);
+      
+      // Get next quiz
+      if (currentIndex >= 0 && currentIndex < quizzes.length - 1) {
+        const nextQuizData = quizzes[currentIndex + 1];
+        setNextQuiz({
+          id: nextQuizData.id,
+          title: nextQuizData.title,
+        });
+      }
+    } catch (err) {
+      console.error("Error fetching next quiz:", err);
+      // Silently fail - next quiz is optional
     }
   };
 
@@ -1018,9 +1057,14 @@ export default function QuizResultsPage() {
             </Button>
           </Link>
         )}
-        <Link href="/education/courses">
-          <Button variant="secondary">Tüm kurslar</Button>
-        </Link>
+        {nextQuiz && (
+          <Link href={`/education/quiz/${nextQuiz.id}`}>
+            <Button variant="primary" className="flex items-center gap-2">
+              Sonraki Test
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          </Link>
+        )}
       </div>
     </div>
   );

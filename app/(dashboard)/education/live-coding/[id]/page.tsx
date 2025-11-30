@@ -137,6 +137,21 @@ export default function LiveCodingPage() {
   const startedAtRef = useRef<number | null>(null);
   const outputRef = useRef<HTMLDivElement>(null);
   const aiFeedbackRef = useRef<HTMLDivElement>(null);
+  
+  // Auto-scroll to output when runResult changes
+  useEffect(() => {
+    if (runResult && outputRef.current) {
+      // Use setTimeout to ensure DOM is updated
+      const timer = setTimeout(() => {
+        outputRef.current?.scrollIntoView({ 
+          behavior: "smooth", 
+          block: "start",
+          inline: "nearest"
+        });
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [runResult]);
 
   // Normalize output for comparison (trim, normalize whitespace, remove trailing newlines)
   const normalizeOutput = useCallback((output: string): string => {
@@ -698,14 +713,6 @@ export default function LiveCodingPage() {
       });
 
       setRunResult(runResultData);
-
-      // Scroll to output area
-      console.log(`${logPrefix} Output alanına scroll yapılıyor...`);
-      setTimeout(() => {
-        const scrollElement = outputRef.current;
-        console.log(`${logPrefix} Scroll element:`, scrollElement ? "bulundu" : "bulunamadı");
-        scrollElement?.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 100);
     } catch (error) {
       const errorDuration = Date.now() - startTime;
       console.error(`${logPrefix} ❌❌❌ EXCEPTION (${errorDuration}ms):`, error);
@@ -1350,8 +1357,7 @@ export default function LiveCodingPage() {
 
                 {/* Output Display */}
                 {runResult && (
-                  <>
-                    <div ref={outputRef} className="pt-4" />
+                  <div ref={outputRef}>
                     <Card
                     variant="elevated"
                     className={cn(
@@ -1440,7 +1446,7 @@ export default function LiveCodingPage() {
                       )}
                     </CardContent>
                   </Card>
-                  </>
+                  </div>
                 )}
 
                 {/* AI Feedback and Corrected Code Section */}

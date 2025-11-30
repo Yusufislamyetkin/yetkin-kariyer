@@ -14,7 +14,10 @@ import {
   Sparkles,
   Loader2,
   Send,
+  Brain,
+  ArrowRight,
 } from "lucide-react";
+import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
 import { MessageContent } from "@/app/(dashboard)/education/lessons/_components/MessageContent";
@@ -64,6 +67,7 @@ export default function TutorPage() {
   const [filter, setFilter] = useState<"all" | "not_reviewed" | "reviewed" | "understood">("all");
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editNotes, setEditNotes] = useState<string>("");
+  const [updatingStatusId, setUpdatingStatusId] = useState<string | null>(null);
   const [chatMessages, setChatMessages] = useState<TutorChatMessage[]>(() => [
     {
       role: "assistant",
@@ -195,6 +199,14 @@ export default function TutorPage() {
   };
 
   const updateStatus = async (id: string, status: "not_reviewed" | "reviewed" | "understood") => {
+    setUpdatingStatusId(id);
+    
+    // Optimistic update - save previous state for rollback
+    const previousQuestions = [...wrongQuestions];
+    setWrongQuestions(
+      wrongQuestions.map((q) => (q.id === id ? { ...q, status } : q))
+    );
+
     try {
       const response = await fetch("/api/education/wrong-questions", {
         method: "PATCH",
@@ -204,12 +216,21 @@ export default function TutorPage() {
 
       const data = await response.json();
       if (response.ok) {
-        setWrongQuestions(
-          wrongQuestions.map((q) => (q.id === id ? { ...q, status: data.wrongQuestion.status } : q))
+        // Update with server response
+        setWrongQuestions((prev) =>
+          prev.map((q) => (q.id === id ? { ...q, status: data.wrongQuestion.status } : q))
         );
+      } else {
+        // Rollback on error
+        setWrongQuestions(previousQuestions);
+        throw new Error(data.error || "Durum güncellenemedi");
       }
     } catch (error) {
       console.error("Error updating status:", error);
+      // Rollback on error
+      setWrongQuestions(previousQuestions);
+    } finally {
+      setUpdatingStatusId(null);
     }
   };
 
@@ -370,6 +391,39 @@ export default function TutorPage() {
           </CardContent>
         </Card>
       </div>
+
+      {/* AI Öğretmen Selin ile Öğren Butonu */}
+      <Card variant="elevated" className="border-purple-200/50 dark:border-purple-800/50 bg-gradient-to-br from-purple-50 via-pink-50/50 to-indigo-50 dark:from-purple-900/20 dark:via-pink-900/20 dark:to-indigo-900/20">
+        <CardContent className="p-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="flex-1 space-y-2">
+              <div className="flex items-center gap-3">
+                <div className="p-3 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 shadow-lg">
+                  <Brain className="h-6 w-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                    Soruları AI Öğretmen Selin ile Öğren
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    Yanlış sorularını adım adım anlat, her birini anlaşıldı olarak işaretle
+                  </p>
+                </div>
+              </div>
+            </div>
+            <Link href="/education/tutor/chat">
+              <Button
+                variant="gradient"
+                size="lg"
+                className="w-full sm:w-auto flex items-center gap-2"
+              >
+                <span>Başla</span>
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* AI Chat Section */}
       <Card variant="elevated">
@@ -550,20 +604,49 @@ export default function TutorPage() {
 
       {/* Yanlış Sorular */}
       <Card variant="elevated">
-        <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle>Yanlış Sorularım</CardTitle>
-          <div className="flex gap-2">
-            <Filter className="h-5 w-5 text-gray-600 dark:text-gray-400" />
-            <select
-              value={filter}
-              onChange={(e) => setFilter(e.target.value as any)}
-              className="px-3 py-1 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-            >
-              <option value="all">Tümü</option>
-              <option value="not_reviewed">Gözden Geçirilmemiş</option>
-              <option value="reviewed">Gözden Geçirilmiş</option>
-              <option value="understood">Anlaşıldı</option>
-            </select>
+        <CardHeader className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <CardTitle>Yanlış Sorularım</CardTitle>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+              {filteredQuestions.length} soru gösteriliyor
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <Filter className="h-5 w-5 text-gray-600 dark:text-gray-400 self-center" />
+            <div className="flex gap-2 flex-wrap">
+              <Button
+                variant={filter === "all" ? "primary" : "outline"}
+                size="sm"
+                onClick={() => setFilter("all")}
+                className="text-xs sm:text-sm"
+              >
+                Tümü ({stats.total})
+              </Button>
+              <Button
+                variant={filter === "not_reviewed" ? "primary" : "outline"}
+                size="sm"
+                onClick={() => setFilter("not_reviewed")}
+                className="text-xs sm:text-sm"
+              >
+                Gözden Geçirilmemiş ({stats.notReviewed})
+              </Button>
+              <Button
+                variant={filter === "reviewed" ? "primary" : "outline"}
+                size="sm"
+                onClick={() => setFilter("reviewed")}
+                className="text-xs sm:text-sm"
+              >
+                Gözden Geçirilmiş ({stats.reviewed})
+              </Button>
+              <Button
+                variant={filter === "understood" ? "primary" : "outline"}
+                size="sm"
+                onClick={() => setFilter("understood")}
+                className="text-xs sm:text-sm"
+              >
+                Anlaşıldı ({stats.understood})
+              </Button>
+            </div>
           </div>
         </CardHeader>
         <CardContent>
@@ -688,34 +771,86 @@ export default function TutorPage() {
                             variant="ghost"
                             size="sm"
                             onClick={() => startEditing(question)}
+                            disabled={updatingStatusId === question.id}
                           >
                             <Edit className="h-4 w-4 mr-2" />
                             {question.notes ? "Notları Düzenle" : "Not Ekle"}
                           </Button>
-                          {question.status !== "not_reviewed" && (
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              onClick={() => updateStatus(question.id, "not_reviewed")}
-                            >
-                              Gözden Geçirilmemiş Yap
-                            </Button>
-                          )}
-                          {question.status !== "reviewed" && (
+                          
+                          {/* Durum butonları - sadece ilerleyen durumları göster */}
+                          {question.status === "not_reviewed" && (
                             <Button
                               variant="outline"
                               size="sm"
                               onClick={() => updateStatus(question.id, "reviewed")}
+                              disabled={updatingStatusId === question.id}
                             >
-                              Gözden Geçirildi İşaretle
+                              {updatingStatusId === question.id ? (
+                                <>
+                                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                                  Güncelleniyor...
+                                </>
+                              ) : (
+                                <>
+                                  <Eye className="h-4 w-4 mr-2" />
+                                  Gözden Geçirildi İşaretle
+                                </>
+                              )}
                             </Button>
                           )}
-                          {question.status !== "understood" && (
+                          
+                          {question.status === "reviewed" && (
+                            <>
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => updateStatus(question.id, "not_reviewed")}
+                                disabled={updatingStatusId === question.id}
+                              >
+                                {updatingStatusId === question.id ? (
+                                  <>
+                                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                                    Güncelleniyor...
+                                  </>
+                                ) : (
+                                  "Geri Al"
+                                )}
+                              </Button>
+                              <Button
+                                size="sm"
+                                onClick={() => updateStatus(question.id, "understood")}
+                                disabled={updatingStatusId === question.id}
+                              >
+                                {updatingStatusId === question.id ? (
+                                  <>
+                                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                                    Güncelleniyor...
+                                  </>
+                                ) : (
+                                  <>
+                                    <CheckCircle className="h-4 w-4 mr-2" />
+                                    Anlaşıldı İşaretle
+                                  </>
+                                )}
+                              </Button>
+                            </>
+                          )}
+                          
+                          {question.status === "understood" && (
                             <Button
+                              variant="outline"
                               size="sm"
-                              onClick={() => updateStatus(question.id, "understood")}
+                              onClick={() => updateStatus(question.id, "reviewed")}
+                              disabled={updatingStatusId === question.id}
                             >
-                              Anlaşıldı İşaretle
+                              {updatingStatusId === question.id ? (
+                                <>
+                                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                                  Güncelleniyor...
+                                </>
+                              ) : (
+                                "Geri Al"
+                              )}
                             </Button>
                           )}
                         </div>

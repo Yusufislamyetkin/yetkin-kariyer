@@ -14,6 +14,11 @@ import { buildLessonSystemPrompt } from "@/lib/ai/lesson-prompt-builder";
 import { parseLessonActions } from "@/lib/ai/lesson-action-parser";
 import { isAIEnabled } from "@/lib/ai/client";
 import { AI_IS_ENABLED } from "@/lib/ai/config";
+import { 
+  validateMiniTestAction, 
+  generateAICorrectionMessage,
+  getValidationErrorMessage 
+} from "@/lib/ai/mini-test-validator";
 
 const LessonAssistantRequestSchema = z.object({
   lessonSlug: z.string().min(1),
@@ -476,40 +481,81 @@ export async function POST(request: Request) {
 
     // Parse actions from response
     let parsed;
+    let needsCorrection = false;
+    let correctionMessage = '';
+    
     try {
       parsed = parseLessonActions(response.content);
       
       // Validate and filter actions - especially mini_test actions
       if (parsed.actions && parsed.actions.length > 0) {
-        const validActions = parsed.actions.filter((action: any) => {
+        const validActions: any[] = [];
+        const invalidMiniTestActions: any[] = [];
+        
+        for (const action of parsed.actions) {
           if (action.type === "mini_test") {
-            // Validate mini_test action structure
-            const hasValidQuestion = action.data?.question?.text && action.data.question.text.length > 0;
-            const hasValidOptions = Array.isArray(action.data?.question?.options) && 
-                                   action.data.question.options.length === 4 &&
-                                   action.data.question.options.every((opt: string) => opt && opt.length > 0);
-            const hasValidIndex = typeof action.data?.question?.correctIndex === 'number' &&
-                                 action.data.question.correctIndex >= 0 &&
-                                 action.data.question.correctIndex < 4;
+            // Use the new validator
+            const validationResult = validateMiniTestAction(action.data);
             
-            if (!hasValidQuestion || !hasValidOptions || !hasValidIndex) {
-              console.warn("[LESSON-ASSISTANT] Invalid mini_test action filtered out:", {
-                hasValidQuestion,
-                hasValidOptions,
-                hasValidIndex,
+            if (validationResult.isValid && validationResult.data) {
+              // Normalize the action data with validated values
+              action.data = {
+                question: {
+                  text: validationResult.data.question,
+                  options: validationResult.data.options,
+                  type: "multiple_choice",
+                  correctIndex: validationResult.data.correctIndex,
+                },
+              };
+              validActions.push(action);
+              
+              // Log warnings if any
+              if (validationResult.warnings.length > 0) {
+                console.warn("[LESSON-ASSISTANT] Mini test validation warnings:", {
+                  warnings: validationResult.warnings,
+                  action: JSON.stringify(action).substring(0, 200),
+                });
+              }
+            } else {
+              // Invalid action - collect for correction
+              invalidMiniTestActions.push({
+                action,
+                validationResult,
+              });
+              
+              console.warn("[LESSON-ASSISTANT] Invalid mini_test action detected:", {
+                errors: validationResult.errors,
                 action: JSON.stringify(action).substring(0, 200),
               });
-              return false;
             }
+          } else {
+            // Non-mini_test actions are valid as-is
+            validActions.push(action);
           }
-          return true;
-        });
+        }
         
+        // If we have invalid mini_test actions, prepare correction message
+        // (Retry will be handled in response metadata for frontend handling)
+        if (invalidMiniTestActions.length > 0) {
+          needsCorrection = true;
+          
+          // Generate correction message from first invalid action (usually there's only one)
+          const firstInvalid = invalidMiniTestActions[0];
+          correctionMessage = generateAICorrectionMessage(firstInvalid.validationResult);
+          
+          console.warn("[LESSON-ASSISTANT] Invalid mini_test actions found:", {
+            invalidCount: invalidMiniTestActions.length,
+            correctionMessage: correctionMessage.substring(0, 200),
+          });
+        }
+        
+        // Update parsed actions with only valid ones
         if (validActions.length !== parsed.actions.length) {
           console.warn("[LESSON-ASSISTANT] Filtered out invalid actions:", {
             originalCount: parsed.actions.length,
             validCount: validActions.length,
             filteredCount: parsed.actions.length - validActions.length,
+            invalidMiniTestCount: invalidMiniTestActions.length,
           });
           parsed.actions = validActions;
         }
@@ -639,7 +685,8 @@ export async function POST(request: Request) {
       }
     }
 
-    return NextResponse.json({
+    // Prepare response with validation info
+    const responseData: any = {
       content: parsed.content,
       roadmap: parsed.roadmap || roadmap || undefined,
       progress: parsed.progress || (progress as any) || undefined,
@@ -651,7 +698,18 @@ export async function POST(request: Request) {
         description: lesson.description,
         slug: lessonSlug,
       },
-    });
+    };
+
+    // Add validation warnings if needed
+    if (needsCorrection && correctionMessage) {
+      responseData.validationWarning = {
+        hasFormatErrors: true,
+        correctionMessage: correctionMessage,
+        message: "Mini test sorusu formatı hatalı. AI'ya düzeltme bildirimi gönderildi.",
+      };
+    }
+
+    return NextResponse.json(responseData);
   } catch (error) {
     // Detaylı hata loglama
     console.error("[LESSON-ASSISTANT] Hata Detayları:", {
