@@ -110,83 +110,44 @@ export function BadgeNotificationProvider({
         if (typeof instance === "function") {
           const defaults = {
             disableForReducedMotion: true,
-            spread: 90,
-            ticks: 220,
-            gravity: 0.85,
-            startVelocity: 48,
-            scalar: 1.4,
+            spread: 70,
+            ticks: 150,
+            gravity: 0.9,
+            startVelocity: 40,
+            scalar: 1.2,
             zIndex: 1200,
           };
 
-          // Badge-specific confetti with multiple bursts
+          // Optimized confetti with fewer particles and bursts for better performance
           window.requestAnimationFrame(() => {
-            // Multiple bursts from different positions for more celebration
+            // Main burst from center
             instance({
               ...defaults,
-              particleCount: 300,
-              origin: { x: 0.2, y: 0.8 },
-              angle: 45,
-              colors: ["#FFD700", "#FFA500", "#FF6347"],
-            });
-            instance({
-              ...defaults,
-              particleCount: 300,
-              origin: { x: 0.8, y: 0.8 },
-              angle: 135,
+              particleCount: 100,
+              origin: { x: 0.5, y: 0.5 },
+              spread: 60,
               colors: ["#FFD700", "#FFA500", "#FF6347"],
             });
             
+            // Side bursts (delayed for effect but fewer particles)
             setTimeout(() => {
               instance({
                 ...defaults,
-                particleCount: 400,
-                origin: { x: 0.5, y: 0.3 },
-                spread: 150,
-                startVelocity: 65,
-                gravity: 0.6,
-                colors: ["#FFD700", "#FFA500", "#FF6347", "#9370DB", "#00CED1"],
-                scalar: 1.5,
+                particleCount: 80,
+                origin: { x: 0.3, y: 0.7 },
+                angle: 45,
+                spread: 50,
+                colors: ["#FFD700", "#FFA500"],
               });
-            }, 100);
-
-            setTimeout(() => {
               instance({
                 ...defaults,
-                particleCount: 350,
-                origin: { x: 0.3, y: 0.5 },
-                spread: 120,
-                startVelocity: 55,
-                gravity: 0.7,
-                colors: ["#FFD700", "#FFA500", "#FF6347"],
-                scalar: 1.3,
+                particleCount: 80,
+                origin: { x: 0.7, y: 0.7 },
+                angle: 135,
+                spread: 50,
+                colors: ["#FFD700", "#FFA500"],
               });
-            }, 250);
-
-            setTimeout(() => {
-              instance({
-                ...defaults,
-                particleCount: 350,
-                origin: { x: 0.7, y: 0.5 },
-                spread: 120,
-                startVelocity: 55,
-                gravity: 0.7,
-                colors: ["#FFD700", "#FFA500", "#FF6347"],
-                scalar: 1.3,
-              });
-            }, 400);
-
-            setTimeout(() => {
-              instance({
-                ...defaults,
-                particleCount: 300,
-                origin: { x: 0.5, y: 0.6 },
-                spread: 140,
-                startVelocity: 60,
-                gravity: 0.65,
-                colors: ["#FFD700", "#FFA500", "#FF6347", "#9370DB"],
-                scalar: 1.4,
-              });
-            }, 550);
+            }, 150);
           });
         }
       } else {
@@ -217,13 +178,29 @@ export function BadgeNotificationProvider({
       return;
     }
 
-    console.log("[BadgeNotificationContext] Showing badges:", validBadges);
+    // Remove duplicates by id (keep first occurrence)
+    const seenIds = new Set<string>();
+    const uniqueBadges = validBadges.filter((badge) => {
+      if (seenIds.has(badge.id)) {
+        console.warn(`[BadgeNotificationContext] Duplicate badge detected, skipping: ${badge.id} - ${badge.name}`);
+        return false;
+      }
+      seenIds.add(badge.id);
+      return true;
+    });
+
+    if (uniqueBadges.length === 0) {
+      console.warn("[BadgeNotificationContext] No unique badges to show after deduplication");
+      return;
+    }
+
+    console.log("[BadgeNotificationContext] Showing unique badges:", uniqueBadges);
 
     // Reset confetti tracking for new badges
     confettiTriggeredRef.current.clear();
 
     // Add badges to queue
-    setBadgeQueue(validBadges);
+    setBadgeQueue(uniqueBadges);
     setCurrentIndex(0);
     setIsVisible(true);
   }, []);
@@ -239,13 +216,16 @@ export function BadgeNotificationProvider({
   }, []);
 
   const nextBadge = useCallback(() => {
-    if (currentIndex < badgeQueue.length - 1) {
-      setCurrentIndex((prev) => prev + 1);
-    } else {
-      // All badges shown, dismiss
-      dismiss();
-    }
-  }, [currentIndex, badgeQueue.length, dismiss]);
+    setCurrentIndex((prev) => {
+      if (prev < badgeQueue.length - 1) {
+        return prev + 1;
+      } else {
+        // All badges shown, dismiss
+        dismiss();
+        return prev;
+      }
+    });
+  }, [badgeQueue.length, dismiss]);
 
   const value = useMemo(
     () => ({

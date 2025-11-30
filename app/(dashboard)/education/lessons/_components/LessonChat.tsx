@@ -911,7 +911,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
               </div>
             </div>
           ) : (
-          <div className="flex-1 overflow-y-auto overflow-x-hidden h-full max-h-full min-h-0 px-4 md:px-8 py-6 space-y-5">
+          <div className="flex-1 overflow-y-auto overflow-x-hidden h-full max-h-full min-h-0 px-3 sm:px-4 md:px-8 py-4 sm:py-5 md:py-6 space-y-3 sm:space-y-4 md:space-y-5">
             {chatMessages.length === 0 ? (
               <div className="flex flex-col items-center justify-center text-center py-20 gap-3 text-gray-500 dark:text-gray-400">
                 <MessageSquare className="h-10 w-10 text-blue-500" />
@@ -954,7 +954,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
                         >
                           {isAI && (
                             <div className="absolute -bottom-0.5 -left-1 z-10">
-                              <div className="relative w-14 h-14 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/70 bg-gradient-to-br from-blue-500 to-purple-500 text-white shadow-sm">
+                              <div className="relative w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/70 bg-gradient-to-br from-blue-500 to-purple-500 text-white shadow-sm">
                                 <Image
                                   src="/Photos/AiTeacher/teacher.jpg"
                                   alt="AI Öğretmen"
@@ -972,11 +972,11 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
                           )}
                           <div
                             className={cn(
-                              "max-w-full sm:max-w-[70%] md:max-w-[65%] rounded-3xl px-5 py-3 shadow-md backdrop-blur-md border",
+                              "max-w-full sm:max-w-[70%] md:max-w-[65%] rounded-2xl sm:rounded-3xl px-3 py-2 sm:px-4 sm:py-2.5 md:px-5 md:py-3 shadow-md backdrop-blur-md border",
                               isOwn
                                 ? "bg-gradient-to-br from-blue-600 to-purple-600 text-white border-blue-500/30"
                                 : isAI
-                                ? "bg-blue-50/90 dark:bg-blue-950/50 border-blue-200/70 dark:border-blue-800/60 text-gray-900 dark:text-gray-100 ml-14"
+                                ? "bg-blue-50/90 dark:bg-blue-950/50 border-blue-200/70 dark:border-blue-800/60 text-gray-900 dark:text-gray-100 ml-12 sm:ml-14"
                                 : "bg-white/85 dark:bg-gray-900/75 border-gray-200/70 dark:border-gray-700/60 text-gray-900 dark:text-gray-100"
                             )}
                           >
@@ -990,7 +990,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
                               ) : (
                                 <p className={cn(
                                   "whitespace-pre-wrap break-words leading-relaxed",
-                                  isOwn ? "text-white/90 text-base" : "text-gray-800 dark:text-gray-200 text-base"
+                                  isOwn ? "text-white/90 text-sm sm:text-base" : "text-gray-800 dark:text-gray-200 text-sm sm:text-base"
                                 )}>
                                   {chatMsg.content}
                                 </p>
@@ -1015,7 +1015,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
                                 >
                                   {isAI && (
                                     <div className="absolute -bottom-0.5 -left-1 z-10">
-                                      <div className="relative w-12 h-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/70 bg-gradient-to-br from-blue-500 to-purple-500 text-white shadow-sm">
+                                      <div className="relative w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/70 bg-gradient-to-br from-blue-500 to-purple-500 text-white shadow-sm">
                                         <Image
                                           src="/Photos/AiTeacher/teacher.jpg"
                                           alt="AI Öğretmen"
@@ -1033,8 +1033,8 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
                                   )}
                                   <div
                                     className={cn(
-                                      "rounded-2xl bg-gray-950/90 border border-gray-800 overflow-hidden max-w-full sm:max-w-[70%] md:max-w-[65%]",
-                                      isAI ? "ml-14" : ""
+                                      "rounded-xl sm:rounded-2xl bg-gray-950/90 border border-gray-800 overflow-hidden max-w-full sm:max-w-[70%] md:max-w-[65%]",
+                                      isAI ? "ml-12 sm:ml-14" : ""
                                     )}
                                     style={{ minWidth: 0 }}
                                   >
@@ -1066,7 +1066,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
                               >
                                 {isAI && (
                                   <div className="absolute -bottom-0.5 -left-1 z-10">
-                                    <div className="relative w-12 h-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/70 bg-gradient-to-br from-blue-500 to-purple-500 text-white shadow-sm">
+                                    <div className="relative w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/70 bg-gradient-to-br from-blue-500 to-purple-500 text-white shadow-sm">
                                       <Image
                                         src="/Photos/AiTeacher/teacher.jpg"
                                         alt="AI Öğretmen"
@@ -1084,8 +1084,8 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
                                 )}
                                 <div
                                   className={cn(
-                                    "rounded-2xl bg-blue-50/60 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/40 overflow-hidden max-w-[65%]",
-                                    isAI ? "ml-14" : ""
+                                    "rounded-xl sm:rounded-2xl bg-blue-50/60 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/40 overflow-hidden max-w-full sm:max-w-[70%] md:max-w-[65%]",
+                                    isAI ? "ml-12 sm:ml-14" : ""
                                   )}
                                 >
                                   <CodeBlock
@@ -1120,7 +1120,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
                               <div key={`test-question-${chatMsg.id}-${questionIndex}`} className="flex w-full items-end gap-1.5 relative justify-start">
                                 {isAI && (
                                   <div className="absolute -bottom-0.5 -left-1 z-10">
-                                    <div className="relative w-12 h-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/70 bg-gradient-to-br from-blue-500 to-purple-500 text-white shadow-sm">
+                                    <div className="relative w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/70 bg-gradient-to-br from-blue-500 to-purple-500 text-white shadow-sm">
                                       <Image
                                         src="/Photos/AiTeacher/teacher.jpg"
                                         alt="AI Öğretmen"
@@ -1136,7 +1136,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
                                     </div>
                                   </div>
                                 )}
-                                <div className={cn("max-w-full sm:max-w-[70%] md:max-w-[65%]", isAI ? "ml-14" : "")}>
+                                <div className={cn("max-w-full sm:max-w-[70%] md:max-w-[65%]", isAI ? "ml-12 sm:ml-14" : "")}>
                                   <TestQuestionChatbox
                                     question={testQuestion}
                                     onAnswer={(answer) => handleTestQuestionAnswer(answer)}
@@ -1177,7 +1177,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
                   <div className="space-y-3">
                     <div className="flex w-full items-end gap-1.5 relative justify-start">
                       <div className="absolute -bottom-0.5 -left-1 z-10">
-                        <div className="relative w-12 h-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/70 bg-gradient-to-br from-blue-500 to-purple-500 text-white shadow-sm">
+                        <div className="relative w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/70 bg-gradient-to-br from-blue-500 to-purple-500 text-white shadow-sm">
                           <Image
                             src="/Photos/AiTeacher/teacher.jpg"
                             alt="AI Öğretmen"
@@ -1192,7 +1192,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
                           />
                         </div>
                       </div>
-                      <div className="ml-14 max-w-full sm:max-w-[70%] md:max-w-[65%]">
+                      <div className="ml-12 sm:ml-14 max-w-full sm:max-w-[70%] md:max-w-[65%]">
                         {(() => {
                           const isAnswered = answeredTestQuestionIndex === currentTestQuestionIndex;
                           return (
@@ -1210,7 +1210,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
                     {assistantTyping && (
                       <div className="flex w-full items-end gap-1.5 relative justify-start mt-3">
                         <div className="absolute -bottom-0.5 -left-1 z-10">
-                          <div className="relative w-12 h-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/70 bg-gradient-to-br from-blue-500 to-purple-500 text-white shadow-sm">
+                          <div className="relative w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/70 bg-gradient-to-br from-blue-500 to-purple-500 text-white shadow-sm">
                             <Image
                               src="/Photos/AiTeacher/teacher.jpg"
                               alt="AI Öğretmen"
@@ -1225,13 +1225,13 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
                             />
                           </div>
                         </div>
-                        <div className="ml-16 pr-6 inline-flex items-center gap-3 px-4 py-3 rounded-2xl bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300 border-2 border-blue-200 dark:border-blue-800 shadow-sm">
-                          <div className="flex items-center gap-2">
-                            <Loader2 className="h-4 w-4 animate-spin" />
+                        <div className="ml-12 sm:ml-16 pr-4 sm:pr-6 inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-3 rounded-xl sm:rounded-2xl bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300 border-2 border-blue-200 dark:border-blue-800 shadow-sm">
+                          <div className="flex items-center gap-1.5 sm:gap-2">
+                            <Loader2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 animate-spin" />
                           </div>
                           <div className="flex flex-col">
-                            <span className="font-semibold text-sm">AI Öğretmen</span>
-                            <span className="text-xs opacity-80">Düşünüyor...</span>
+                            <span className="font-semibold text-xs sm:text-sm">AI Öğretmen</span>
+                            <span className="text-[10px] sm:text-xs opacity-80">Düşünüyor...</span>
                           </div>
                         </div>
                       </div>
@@ -1245,7 +1245,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
             {assistantTyping && !(pendingTestQuestions.length > 0 && currentTestQuestionIndex < pendingTestQuestions.length) && (
               <div className="flex w-full items-end gap-1.5 relative justify-start">
                 <div className="absolute -bottom-0.5 -left-1 z-10">
-                  <div className="relative w-12 h-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/70 bg-gradient-to-br from-blue-500 to-purple-500 text-white shadow-sm">
+                  <div className="relative w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/70 bg-gradient-to-br from-blue-500 to-purple-500 text-white shadow-sm">
                     <Image
                       src="/Photos/AiTeacher/teacher.jpg"
                       alt="AI Öğretmen"
@@ -1260,13 +1260,13 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
                     />
                   </div>
                 </div>
-                <div className="ml-16 pr-6 inline-flex items-center gap-3 px-4 py-3 rounded-2xl bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300 border-2 border-blue-200 dark:border-blue-800 shadow-sm">
-                  <div className="flex items-center gap-2">
-                    <Loader2 className="h-4 w-4 animate-spin" />
+                <div className="ml-12 sm:ml-16 pr-4 sm:pr-6 inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-3 rounded-xl sm:rounded-2xl bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300 border-2 border-blue-200 dark:border-blue-800 shadow-sm">
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <Loader2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 animate-spin" />
                   </div>
                   <div className="flex flex-col">
-                    <span className="font-semibold text-sm">AI Öğretmen</span>
-                    <span className="text-xs opacity-80">Düşünüyor...</span>
+                    <span className="font-semibold text-xs sm:text-sm">AI Öğretmen</span>
+                    <span className="text-[10px] sm:text-xs opacity-80">Düşünüyor...</span>
                   </div>
                 </div>
               </div>
@@ -1313,9 +1313,9 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
       )}
 
       {/* Composer with Continue Button */}
-      <div className="border-t border-gray-200/70 dark:border-gray-800/60 px-4 md:px-6 py-4 bg-white/90 dark:bg-gray-950/80 backdrop-blur-md">
-        <div className="rounded-3xl border border-gray-200/70 dark:border-gray-700/60 bg-white/90 dark:bg-gray-900/70 shadow-sm px-3 py-2 sm:px-4 sm:py-3">
-          <div className="flex items-center gap-2 sm:gap-3">
+      <div className="border-t border-gray-200/70 dark:border-gray-800/60 px-3 sm:px-4 md:px-6 py-3 sm:py-3.5 md:py-4 bg-white/90 dark:bg-gray-950/80 backdrop-blur-md">
+        <div className="rounded-2xl sm:rounded-3xl border border-gray-200/70 dark:border-gray-700/60 bg-white/90 dark:bg-gray-900/70 shadow-sm px-2.5 py-1.5 sm:px-3 sm:py-2 md:px-4 md:py-3">
+          <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3">
             <div className="flex-1 min-w-0">
               <textarea
                 ref={textareaRef}
@@ -1330,7 +1330,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
                 placeholder={currentActivity ? "Lütfen yukarıdaki aktiviteyi tamamlayın..." : isCompleted ? "Ders tamamlandı!" : "Sorunu yaz veya ders hakkında bilgi iste..."}
                 rows={1}
                 className={cn(
-                  "w-full resize-none bg-transparent px-2 sm:px-3 py-2 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-0 overflow-hidden",
+                  "w-full resize-none bg-transparent px-2 sm:px-3 py-1.5 sm:py-2 text-sm sm:text-base text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-0 overflow-hidden",
                   "placeholder:text-gray-400 dark:placeholder:text-gray-500"
                 )}
                 disabled={sending || !!currentActivity || isCompleted}
@@ -1344,7 +1344,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
                 variant="gradient"
                 size="lg"
                 className={cn(
-                  "min-w-[140px] h-11 text-base font-semibold rounded-full shrink-0",
+                  "min-w-[100px] sm:min-w-[120px] md:min-w-[140px] h-9 sm:h-10 md:h-11 text-xs sm:text-sm md:text-base font-semibold rounded-full shrink-0",
                   "bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600",
                   "hover:from-purple-700 hover:via-pink-700 hover:to-rose-700",
                   "text-white shadow-lg",
@@ -1355,8 +1355,9 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
                 )}
                 disabled={sending || assistantTyping}
               >
-                <ArrowRight className="h-5 w-5 mr-2" />
-                Devam Et
+                <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 md:h-5 md:w-5 mr-1 sm:mr-1.5 md:mr-2" />
+                <span className="hidden sm:inline">Devam Et</span>
+                <span className="sm:hidden">Devam</span>
               </Button>
             )}
             <Button
@@ -1369,10 +1370,10 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
                 e.preventDefault();
                 handleSendMessage();
               }}
-              className="min-w-[44px] h-11 rounded-full p-0 flex items-center justify-center shrink-0"
+              className="min-w-[36px] sm:min-w-[40px] md:min-w-[44px] h-9 sm:h-10 md:h-11 rounded-full p-0 flex items-center justify-center shrink-0"
               aria-label="Mesaj gönder"
             >
-              <Send className="h-5 w-5" />
+              <Send className="h-4 w-4 sm:h-4 sm:w-4 md:h-5 md:w-5" />
             </Button>
           </div>
         </div>

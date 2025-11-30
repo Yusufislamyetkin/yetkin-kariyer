@@ -44,6 +44,7 @@ enum BadgeCategory {
   special
   daily_activities
   social_interaction
+  total_achievements
 }
 
 enum BadgeRarity {

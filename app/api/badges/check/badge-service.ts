@@ -12,13 +12,20 @@ export interface BadgeCheckResult {
 // Helper function to import badges from JSON to database
 async function ensureBadgesInDatabase() {
   try {
-    // Önce veritabanında rozet var mı kontrol et
-    const existingBadges = await db.badge.findMany({ take: 1 });
-    if (existingBadges.length > 0) {
-      return; // Rozetler zaten var, import gerekmez
+    // Önce veritabanında kaç rozet var kontrol et
+    const existingBadges = await db.badge.findMany();
+    const expectedBadgeCount = 160;
+    
+    // Eğer 160 rozet varsa, import gerekmez
+    if (existingBadges.length >= expectedBadgeCount) {
+      return; // Tüm rozetler zaten var, import gerekmez
     }
 
-    console.log("[BADGE_SERVICE] Veritabanında rozet bulunamadı, JSON'dan otomatik import başlatılıyor...");
+    if (existingBadges.length > 0) {
+      console.log(`[BADGE_SERVICE] Veritabanında ${existingBadges.length} rozet var, ${expectedBadgeCount} olması gerekiyor. Eksik rozetler import ediliyor...`);
+    } else {
+      console.log("[BADGE_SERVICE] Veritabanında rozet bulunamadı, JSON'dan otomatik import başlatılıyor...");
+    }
     
     // JSON dosyasını oku
     const filePath = join(process.cwd(), "public", "data", "badges.json");
@@ -54,6 +61,7 @@ async function ensureBadgesInDatabase() {
           "special": "special",
           "test_count": "test_count",
           "topic": "topic",
+          "total_achievements": "total_achievements",
         };
 
         const category = categoryMap[badgeData.category];

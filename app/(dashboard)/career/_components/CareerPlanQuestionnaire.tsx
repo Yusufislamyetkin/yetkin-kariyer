@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
-import { Target, ArrowRight, ArrowLeft, HelpCircle } from "lucide-react";
+import { Target, ArrowRight, ArrowLeft, HelpCircle, Brain, Sparkles, MessageSquare, Zap, TrendingUp, Loader2 } from "lucide-react";
 
 interface QuestionnaireData {
   specialization: string;
@@ -34,6 +34,20 @@ const SPECIALIZATIONS = [
   "Henüz karar vermedim",
 ];
 
+const SPECIALIZATION_DESCRIPTIONS: Record<string, string> = {
+  "Frontend": "Web sitelerinin ve uygulamaların kullanıcıların gördüğü, etkileşimde bulunduğu arayüz kısmını geliştirme alanı. React, Vue, Angular gibi teknolojilerle çalışır.",
+  "Backend": "Web uygulamalarının sunucu tarafında çalışan, veritabanı işlemleri ve iş mantığını yöneten kısmını geliştirme alanı. Node.js, Python, Java gibi teknolojilerle çalışır.",
+  "Full-stack": "Hem frontend hem de backend geliştirme alanlarında uzmanlaşarak uygulamanın tüm katmanlarını geliştirme alanı. Kapsamlı bir bakış açısı gerektirir.",
+  "Mobile": "Akıllı telefonlar ve tabletler için mobil uygulamalar geliştirme alanı. iOS (Swift) veya Android (Kotlin/Java) platformlarında çalışır.",
+  "DevOps": "Yazılım geliştirme ve operasyon süreçlerini birleştirerek, sürekli entegrasyon ve dağıtım (CI/CD) sağlayan alan. Docker, Kubernetes, bulut servisleri ile çalışır.",
+  "Data Science": "Büyük verileri analiz ederek anlamlı içgörüler çıkarma alanı. Python, R, makine öğrenmesi ve istatistik bilgisi gerektirir.",
+  "AI/ML": "Yapay zeka ve makine öğrenmesi algoritmaları geliştirme alanı. Python, TensorFlow, PyTorch gibi araçlarla çalışır.",
+  "Cybersecurity": "Bilgisayar sistemlerini ve ağları siber saldırılara karşı koruma alanı. Güvenlik açıklarını tespit etme ve güvenlik politikaları oluşturma üzerine çalışır.",
+  "Game Development": "Video oyunları tasarlama ve geliştirme alanı. Unity, Unreal Engine gibi oyun motorları ve C#, C++ gibi diller kullanır.",
+  "Diğer": "Yukarıdaki kategorilere girmeyen veya birden fazla alanı kapsayan özel uzmanlaşma alanları.",
+  "Henüz karar vermedim": "Farklı alanları keşfetmek ve size uygun olanı bulmak için genel bir kariyer planı hazırlanır.",
+};
+
 const CAREER_GOALS = [
   "Junior Developer",
   "Mid-level Developer",
@@ -48,12 +62,25 @@ const CAREER_GOALS = [
   "Henüz karar vermedim",
 ];
 
+const CAREER_GOAL_DESCRIPTIONS: Record<string, string> = {
+  "Junior Developer": "Yazılım geliştirme kariyerinin başlangıç seviyesi. Temel programlama bilgisi ve mentorluk desteği ile projelerde çalışır.",
+  "Mid-level Developer": "Orta seviye geliştirici. Temel görevleri bağımsız olarak yapabilir ve küçük ekiplere liderlik edebilir.",
+  "Senior Developer": "Deneyimli geliştirici. Karmaşık problemleri çözebilir, teknik kararlar verebilir ve junior geliştiricilere mentorluk yapar.",
+  "Tech Lead": "Teknik lider. Teknik kararlar alır, mimari tasarım yapar ve geliştirici ekibine rehberlik eder.",
+  "Architect": "Yazılım mimarı. Sistem mimarisini tasarlar, teknoloji stack'i belirler ve teknik stratejiler oluşturur.",
+  "Engineering Manager": "Mühendislik yöneticisi. Teknik ekibi yönetir, proje planlaması yapar ve teknik ile yönetim arasında köprü görevi görür.",
+  "CTO": "Teknik direktör. Şirketin teknik stratejisini belirler, teknoloji yatırımlarını yönetir ve inovasyonu yönlendirir.",
+  "Freelancer": "Serbest çalışan geliştirici. Farklı projelerde bağımsız olarak çalışır ve kendi işini yönetir.",
+  "Startup Founder": "Startup kurucusu. Kendi teknoloji şirketini kurar ve hem teknik hem de iş geliştirme faaliyetlerinde bulunur.",
+  "Diğer": "Yukarıdaki kategorilere girmeyen özel kariyer hedefleri.",
+  "Henüz karar vermedim": "Farklı kariyer yollarını keşfetmek ve size uygun olanı bulmak için genel bir plan hazırlanır.",
+};
+
 const TIMELINES = [
+  "3 ay",
   "6 ay",
+  "9 ay",
   "1 yıl",
-  "2 yıl",
-  "3 yıl",
-  "5+ yıl",
   "Henüz belirlemedim",
 ];
 
@@ -86,6 +113,29 @@ const TECHNOLOGIES = [
   "GCP",
 ];
 
+const TECHNOLOGY_DESCRIPTIONS: Record<string, string> = {
+  "JavaScript": "Web geliştirmenin temel dili. Hem tarayıcıda hem de sunucuda çalışabilen, dinamik ve esnek bir programlama dili. Modern web uygulamalarının yapı taşı.",
+  "TypeScript": "JavaScript'in üzerine tip güvenliği ekleyen dil. Büyük projelerde hata önleme ve daha iyi geliştirici deneyimi sağlar.",
+  "React": "Facebook tarafından geliştirilen popüler frontend kütüphanesi. Bileşen tabanlı UI geliştirme ve sanal DOM kullanımı ile güçlü kullanıcı arayüzleri oluşturur.",
+  "Vue.js": "Kullanımı kolay, ilerici bir JavaScript framework'ü. Küçük projelerden büyük uygulamalara kadar ölçeklenebilir, öğrenmesi kolay bir framework.",
+  "Angular": "Google'ın geliştirdiği kapsamlı TypeScript tabanlı framework. Enterprise düzeyinde uygulamalar için güçlü araçlar ve yapı sunar.",
+  "Node.js": "JavaScript'i sunucu tarafında çalıştıran runtime. Asenkron programlama ile yüksek performanslı backend uygulamaları geliştirmeyi sağlar.",
+  "Python": "Okunabilir sözdizimi ile popüler, çok amaçlı programlama dili. Web geliştirme, veri bilimi, yapay zeka ve otomasyon için yaygın olarak kullanılır.",
+  "Java": "Platform bağımsız, nesne yönelimli programlama dili. Kurumsal uygulamalar, Android geliştirme ve büyük ölçekli sistemler için güvenilir bir seçim.",
+  "C#": "Microsoft'un geliştirdiği modern, tip güvenli programlama dili. .NET ekosistemi ile Windows, web ve mobil uygulamalar geliştirmek için kullanılır.",
+  ".NET": "Microsoft'un açık kaynaklı, platformlar arası geliştirme platformu. Web, mobil, masaüstü ve cloud uygulamaları için kapsamlı framework ve araçlar sunar.",
+  "Go": "Google'ın geliştirdiği basit, hızlı ve güvenilir programlama dili. Eşzamanlı programlama ve mikroservis mimarileri için idealdir.",
+  "Rust": "Bellek güvenliği ve performansı birleştiren modern sistem programlama dili. C/C++'a alternatif olarak yüksek performanslı uygulamalar geliştirmek için kullanılır.",
+  "PHP": "Web geliştirme için tasarlanmış popüler sunucu tarafı scripting dili. WordPress, Laravel gibi birçok popüler CMS ve framework PHP kullanır.",
+  "Swift": "Apple'ın geliştirdiği modern, güvenli programlama dili. iOS, macOS, watchOS ve tvOS uygulamaları geliştirmek için kullanılır.",
+  "Kotlin": "JVM üzerinde çalışan modern programlama dili. Android geliştirme için resmi dil olarak Java'nın yerini alıyor ve daha kısa, güvenli kod yazmayı sağlar.",
+  "Docker": "Uygulamaları konteynerler içinde paketleyip dağıtmayı sağlayan platform. Geliştirme ve üretim ortamlarında tutarlılık sağlar.",
+  "Kubernetes": "Konteyner orkestrasyon platformu. Büyük ölçekli uygulamaların otomatik dağıtım, ölçeklendirme ve yönetimini sağlar.",
+  "AWS": "Amazon Web Services - Bulut bilişim platformu. Sunucu, depolama, veritabanı, AI ve daha fazlası için kapsamlı bulut hizmetleri sunar.",
+  "Azure": "Microsoft'un bulut bilişim platformu. Kurumsal ihtiyaçlara yönelik güvenli, ölçeklenebilir bulut hizmetleri ve araçlar sağlar.",
+  "GCP": "Google Cloud Platform - Google'ın bulut bilişim hizmeti. Büyük veri, makine öğrenmesi ve yüksek performanslı bilgi işlem için güçlü araçlar sunar.",
+};
+
 const WORK_PREFERENCES = [
   "Remote",
   "On-site",
@@ -104,7 +154,22 @@ const INDUSTRY_INTERESTS = [
   "Enterprise",
   "Startup",
   "Açık kaynak",
+  "Henüz karar vermedim",
 ];
+
+const INDUSTRY_DESCRIPTIONS: Record<string, string> = {
+  "E-ticaret": "Online alışveriş platformları ve dijital pazarlama çözümleri. E-ticaret siteleri, ödeme sistemleri ve sipariş yönetim sistemleri geliştirme fırsatları.",
+  "Fintech": "Finansal teknolojiler. Dijital bankacılık, ödeme sistemleri, kripto para, yatırım platformları ve finansal inovasyon projeleri.",
+  "SaaS": "Software as a Service - Bulut tabanlı yazılım hizmetleri. Abonelik modeliyle çalışan, ölçeklenebilir iş uygulamaları geliştirme.",
+  "Gaming": "Oyun endüstrisi. Video oyun geliştirme, oyun motorları, mobil oyunlar ve e-spor teknolojileri. Yaratıcılık ve teknik becerilerin birleştiği alan.",
+  "Healthcare": "Sağlık teknolojileri. Elektronik sağlık kayıtları, tele-tıp, medikal cihaz yazılımları ve sağlık analitik sistemleri geliştirme.",
+  "Education": "Eğitim teknolojileri. Online öğrenme platformları, eğitim içerik yönetimi, öğrenci takip sistemleri ve interaktif öğretim araçları.",
+  "Social Media": "Sosyal medya platformları. İçerik paylaşımı, etkileşim araçları, sosyal ağ algoritmaları ve topluluk yönetim sistemleri.",
+  "Enterprise": "Kurumsal yazılım çözümleri. Büyük şirketler için özelleştirilmiş sistemler, iş süreç otomasyonu ve kurumsal kaynak planlama (ERP) uygulamaları.",
+  "Startup": "Yeni nesil teknoloji girişimleri. Hızlı büyüme, inovasyon odaklı projeler, esnek çalışma ortamı ve yüksek etki potansiyeli olan projeler.",
+  "Açık kaynak": "Açık kaynak yazılım geliştirme. Topluluk projeleri, ücretsiz ve özgür yazılım geliştirme, teknoloji paylaşımı ve işbirlikçi projeler.",
+  "Henüz karar vermedim": "Farklı sektörleri keşfetmek ve size uygun olanı bulmak için genel bir kariyer planı hazırlanır. Size çeşitli sektör fırsatlarını tanıtacağız.",
+};
 
 export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQuestionnaireProps) {
   const [currentStep, setCurrentStep] = useState(1);
@@ -117,24 +182,98 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
     workPreference: "",
     industryInterests: [],
   });
+  const [expandedSpecialization, setExpandedSpecialization] = useState<string | null>(null);
+  const [expandedCareerGoal, setExpandedCareerGoal] = useState<string | null>(null);
+  const [expandedTechnology, setExpandedTechnology] = useState<string | null>(null);
+  const [expandedIndustry, setExpandedIndustry] = useState<string | null>(null);
+  const [showLoadingPopup, setShowLoadingPopup] = useState(false);
+  const [loadingProgress, setLoadingProgress] = useState(0);
+  const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
 
-  const totalSteps = 7;
+  const loadingMessages = [
+    {
+      icon: Brain,
+      text: "Profil Bilgilerinize Göre Kariyer Planı Oluşturuluyor",
+      color: "text-purple-600 dark:text-purple-400",
+    },
+    {
+      icon: Sparkles,
+      text: "Hedeflerinize Uygun Yol Haritası Hazırlanıyor",
+      color: "text-pink-600 dark:text-pink-400",
+    },
+    {
+      icon: Target,
+      text: "Size Özel Kariyer Yol Haritanız AI İle Oluşturuluyor",
+      color: "text-blue-600 dark:text-blue-400",
+    },
+    {
+      icon: TrendingUp,
+      text: "Kariyer Hedeflerinize Uygun Adımlar Belirleniyor",
+      color: "text-indigo-600 dark:text-indigo-400",
+    },
+    {
+      icon: Zap,
+      text: "Öğrenme Yol Haritanız ve Kaynaklar Hazırlanıyor",
+      color: "text-violet-600 dark:text-violet-400",
+    },
+  ];
+
+  const totalSteps = 6;
 
   const handleNext = () => {
     if (currentStep < totalSteps) {
+      // Reset expanded states when changing steps
+      setExpandedSpecialization(null);
+      setExpandedCareerGoal(null);
+      setExpandedTechnology(null);
+      setExpandedIndustry(null);
       setCurrentStep(currentStep + 1);
     }
   };
 
   const handlePrevious = () => {
     if (currentStep > 1) {
+      // Reset expanded states when changing steps
+      setExpandedSpecialization(null);
+      setExpandedCareerGoal(null);
+      setExpandedTechnology(null);
+      setExpandedIndustry(null);
       setCurrentStep(currentStep - 1);
     }
   };
 
+  // Loading progress ve mesaj animasyonu
+  useEffect(() => {
+    if (!showLoadingPopup) return;
+
+    // Progress bar animasyonu (0-90% arası, gerçek yükleme tamamlanana kadar)
+    const progressInterval = setInterval(() => {
+      setLoadingProgress((prev) => {
+        if (prev >= 90) return 90; // %90'a kadar gider, gerçek yükleme bitince %100 olur
+        return prev + Math.random() * 3; // Yavaş yavaş artır
+      });
+    }, 200);
+
+    // Mesaj değiştirme animasyonu
+    const messageInterval = setInterval(() => {
+      setLoadingMessageIndex((prev) => (prev + 1) % loadingMessages.length);
+    }, 3000);
+
+    return () => {
+      clearInterval(progressInterval);
+      clearInterval(messageInterval);
+    };
+  }, [showLoadingPopup]);
+
   const handleSubmit = () => {
     if (validateCurrentStep()) {
-      onComplete(formData);
+      setShowLoadingPopup(true);
+      setLoadingProgress(0);
+      setLoadingMessageIndex(0);
+      // onComplete'i çağırmadan önce kısa bir gecikme ekleyelim ki popup görünsün
+      setTimeout(() => {
+        onComplete(formData);
+      }, 100);
     }
   };
 
@@ -152,8 +291,6 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
         // Technologies are now optional - can proceed without selection
         return true;
       case 6:
-        return formData.workPreference !== "";
-      case 7:
         // Industry interests are now optional - can proceed without selection
         return true;
       default:
@@ -188,29 +325,41 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
               <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
                 Hangi alanda uzmanlaşmak istiyorsunuz?
               </h3>
-              <div className="flex items-start gap-2 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
-                <HelpCircle className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
-                <p className="text-sm text-blue-800 dark:text-blue-200">
-                  Eğer henüz karar vermediyseniz, &quot;Henüz karar vermedim&quot; seçeneğini işaretleyin. Size genel bir kariyer planı hazırlayacağız ve farklı alanları keşfetmenize yardımcı olacağız.
-                </p>
-              </div>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {SPECIALIZATIONS.map((spec) => (
-                <button
-                  key={spec}
-                  type="button"
-                  onClick={() => setFormData((prev) => ({ ...prev, specialization: spec }))}
-                  className={`p-3 rounded-lg border-2 transition-all ${
-                    formData.specialization === spec
-                      ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
-                      : spec === "Henüz karar vermedim"
-                      ? "border-orange-300 dark:border-orange-700 hover:border-orange-400 dark:hover:border-orange-600"
-                      : "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
-                  }`}
-                >
-                  {spec}
-                </button>
+                <div key={spec} className="space-y-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setFormData((prev) => ({ ...prev, specialization: spec }));
+                      setExpandedSpecialization(expandedSpecialization === spec ? null : spec);
+                    }}
+                    className={`w-full p-4 rounded-lg border-2 transition-all text-left ${
+                      formData.specialization === spec
+                        ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
+                        : spec === "Henüz karar vermedim"
+                        ? "border-orange-300 dark:border-orange-700 hover:border-orange-400 dark:hover:border-orange-600"
+                        : "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="font-semibold">{spec}</span>
+                      {expandedSpecialization === spec ? (
+                        <span className="text-sm">▲</span>
+                      ) : (
+                        <span className="text-sm">▼</span>
+                      )}
+                    </div>
+                  </button>
+                  {(expandedSpecialization === spec || formData.specialization === spec) && (
+                    <div className="p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700">
+                      <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                        {SPECIALIZATION_DESCRIPTIONS[spec]}
+                      </p>
+                    </div>
+                  )}
+                </div>
               ))}
             </div>
           </div>
@@ -223,29 +372,41 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
               <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
                 Kariyer hedefiniz nedir?
               </h3>
-              <div className="flex items-start gap-2 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
-                <HelpCircle className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
-                <p className="text-sm text-blue-800 dark:text-blue-200">
-                  Kariyer hedefinizi belirlemekte zorlanıyorsanız endişelenmeyin. &quot;Henüz karar vermedim&quot; seçeneğini işaretleyin, size farklı kariyer yollarını gösterecek bir plan hazırlayacağız.
-                </p>
-              </div>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {CAREER_GOALS.map((goal) => (
-                <button
-                  key={goal}
-                  type="button"
-                  onClick={() => setFormData((prev) => ({ ...prev, careerGoal: goal }))}
-                  className={`p-3 rounded-lg border-2 transition-all ${
-                    formData.careerGoal === goal
-                      ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
-                      : goal === "Henüz karar vermedim"
-                      ? "border-orange-300 dark:border-orange-700 hover:border-orange-400 dark:hover:border-orange-600"
-                      : "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
-                  }`}
-                >
-                  {goal}
-                </button>
+                <div key={goal} className="space-y-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setFormData((prev) => ({ ...prev, careerGoal: goal }));
+                      setExpandedCareerGoal(expandedCareerGoal === goal ? null : goal);
+                    }}
+                    className={`w-full p-4 rounded-lg border-2 transition-all text-left ${
+                      formData.careerGoal === goal
+                        ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
+                        : goal === "Henüz karar vermedim"
+                        ? "border-orange-300 dark:border-orange-700 hover:border-orange-400 dark:hover:border-orange-600"
+                        : "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="font-semibold">{goal}</span>
+                      {expandedCareerGoal === goal ? (
+                        <span className="text-sm">▲</span>
+                      ) : (
+                        <span className="text-sm">▼</span>
+                      )}
+                    </div>
+                  </button>
+                  {(expandedCareerGoal === goal || formData.careerGoal === goal) && (
+                    <div className="p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700">
+                      <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                        {CAREER_GOAL_DESCRIPTIONS[goal]}
+                      </p>
+                    </div>
+                  )}
+                </div>
               ))}
             </div>
           </div>
@@ -326,27 +487,38 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
               <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
                 Hangi teknolojilerle çalışmak istiyorsunuz? (Opsiyonel)
               </h3>
-              <div className="flex items-start gap-2 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
-                <HelpCircle className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
-                <p className="text-sm text-blue-800 dark:text-blue-200">
-                  Henüz hangi teknolojileri öğrenmek istediğinizden emin değilseniz, bu adımı atlayabilirsiniz. Size popüler ve öğrenmeye değer teknolojileri önereceğiz.
-                </p>
-              </div>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 max-h-96 overflow-y-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-96 overflow-y-auto">
               {TECHNOLOGIES.map((tech) => (
-                <button
-                  key={tech}
-                  type="button"
-                  onClick={() => toggleTechnology(tech)}
-                  className={`p-3 rounded-lg border-2 transition-all text-sm ${
-                    (formData.technologies || []).includes(tech)
-                      ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
-                      : "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
-                  }`}
-                >
-                  {tech}
-                </button>
+                <div key={tech} className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => toggleTechnology(tech)}
+                      className={`flex-1 p-3 rounded-lg border-2 transition-all text-sm text-left ${
+                        (formData.technologies || []).includes(tech)
+                          ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
+                          : "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
+                      }`}
+                    >
+                      {tech}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setExpandedTechnology(expandedTechnology === tech ? null : tech)}
+                      className="p-2 rounded-lg border-2 border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 text-sm"
+                    >
+                      {expandedTechnology === tech ? "▲" : "▼"}
+                    </button>
+                  </div>
+                  {expandedTechnology === tech && (
+                    <div className="p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700">
+                      <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                        {TECHNOLOGY_DESCRIPTIONS[tech]}
+                      </p>
+                    </div>
+                  )}
+                </div>
               ))}
             </div>
             {(formData.technologies || []).length > 0 ? (
@@ -366,62 +538,63 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
           <div className="space-y-4">
             <div className="space-y-2">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                Çalışma tercihiniz nedir?
-              </h3>
-              <div className="flex items-start gap-2 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
-                <HelpCircle className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
-                <p className="text-sm text-blue-800 dark:text-blue-200">
-                  Remote: Uzaktan çalışma. On-site: Ofiste çalışma. Hybrid: Karma model. Tercihiniz yoksa &quot;Fark etmez&quot; seçeneğini işaretleyin.
-                </p>
-              </div>
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              {WORK_PREFERENCES.map((pref) => (
-                <button
-                  key={pref}
-                  type="button"
-                  onClick={() => setFormData((prev) => ({ ...prev, workPreference: pref }))}
-                  className={`p-4 rounded-lg border-2 transition-all ${
-                    formData.workPreference === pref
-                      ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
-                      : "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
-                  }`}
-                >
-                  {pref}
-                </button>
-              ))}
-            </div>
-          </div>
-        );
-
-      case 7:
-        return (
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
                 Hangi sektörlerle ilgileniyorsunuz? (Opsiyonel)
               </h3>
-              <div className="flex items-start gap-2 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
-                <HelpCircle className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
-                <p className="text-sm text-blue-800 dark:text-blue-200">
-                  Belirli bir sektör tercihiniz yoksa bu adımı atlayabilirsiniz. Size farklı sektörlerdeki fırsatları gösterecek bir plan hazırlayacağız.
-                </p>
-              </div>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 max-h-96 overflow-y-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-96 overflow-y-auto">
               {INDUSTRY_INTERESTS.map((interest) => (
-                <button
-                  key={interest}
-                  type="button"
-                  onClick={() => toggleIndustryInterest(interest)}
-                  className={`p-3 rounded-lg border-2 transition-all text-sm ${
-                    (formData.industryInterests || []).includes(interest)
-                      ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
-                      : "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
-                  }`}
-                >
-                  {interest}
-                </button>
+                <div key={interest} className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (interest === "Henüz karar vermedim") {
+                          // "Henüz karar vermedim" seçilirse diğer seçimleri temizle
+                          const isSelected = (formData.industryInterests || []).includes(interest);
+                          setFormData((prev) => ({
+                            ...prev,
+                            industryInterests: isSelected ? [] : ["Henüz karar vermedim"],
+                          }));
+                        } else {
+                          // Diğer seçenekler seçilirse "Henüz karar vermedim"i kaldır
+                          const currentInterests = (formData.industryInterests || []).filter(
+                            (i) => i !== "Henüz karar vermedim"
+                          );
+                          const isSelected = currentInterests.includes(interest);
+                          setFormData((prev) => ({
+                            ...prev,
+                            industryInterests: isSelected
+                              ? currentInterests.filter((i) => i !== interest)
+                              : [...currentInterests, interest],
+                          }));
+                        }
+                      }}
+                      className={`flex-1 p-3 rounded-lg border-2 transition-all text-sm text-left ${
+                        (formData.industryInterests || []).includes(interest)
+                          ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
+                          : interest === "Henüz karar vermedim"
+                          ? "border-orange-300 dark:border-orange-700 hover:border-orange-400 dark:hover:border-orange-600"
+                          : "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
+                      }`}
+                    >
+                      {interest}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setExpandedIndustry(expandedIndustry === interest ? null : interest)}
+                      className="p-2 rounded-lg border-2 border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 text-sm"
+                    >
+                      {expandedIndustry === interest ? "▲" : "▼"}
+                    </button>
+                  </div>
+                  {expandedIndustry === interest && (
+                    <div className="p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700">
+                      <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                        {INDUSTRY_DESCRIPTIONS[interest]}
+                      </p>
+                    </div>
+                  )}
+                </div>
               ))}
             </div>
             {(formData.industryInterests || []).length > 0 ? (
@@ -440,6 +613,103 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
         return null;
     }
   };
+
+  // Loading popup gösteriliyorsa, sadece popup'ı göster
+  if (showLoadingPopup) {
+    const CurrentIcon = loadingMessages[loadingMessageIndex].icon;
+    const currentMessage = loadingMessages[loadingMessageIndex].text;
+    const currentColor = loadingMessages[loadingMessageIndex].color;
+
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm px-4">
+        <Card variant="elevated" className="w-full max-w-2xl">
+          <CardContent className="p-8">
+            <div className="flex flex-col items-center gap-6">
+              {/* Animated Icon */}
+              <div className="relative pt-8">
+                <div className="w-20 h-20 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-rose-500 flex items-center justify-center animate-pulse">
+                  <CurrentIcon className={`h-10 w-10 text-white animate-bounce`} />
+                </div>
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-rose-500 opacity-20 animate-ping"></div>
+              </div>
+
+              {/* Main Message */}
+              <div className="text-center space-y-2">
+                <h2 className="text-2xl font-display font-bold text-gray-900 dark:text-gray-100">
+                  {currentMessage}
+                </h2>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Kariyer planınız hazırlanıyor, lütfen bekleyin...
+                </p>
+              </div>
+
+              {/* Progress Bar */}
+              <div className="w-full space-y-2">
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-gray-600 dark:text-gray-400 font-medium">İlerleme</span>
+                  <span className="text-purple-600 dark:text-purple-400 font-bold">
+                    {Math.round(loadingProgress)}%
+                  </span>
+                </div>
+                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+                  <div
+                    className="bg-gradient-to-r from-purple-500 via-pink-500 to-rose-500 h-3 rounded-full transition-all duration-500 ease-out shadow-lg"
+                    style={{ width: `${loadingProgress}%` }}
+                  >
+                    <div className="h-full w-full bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer"></div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Info Cards */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full mt-4">
+                {loadingMessages.map((msg, index) => {
+                  const Icon = msg.icon;
+                  const isActive = index === loadingMessageIndex;
+                  return (
+                    <div
+                      key={index}
+                      className={`p-4 rounded-xl border-2 transition-all duration-300 ${
+                        isActive
+                          ? "border-purple-500 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 shadow-md"
+                          : "border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 opacity-60"
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <Icon
+                          className={`h-5 w-5 ${
+                            isActive
+                              ? msg.color
+                              : "text-gray-400 dark:text-gray-500"
+                          }`}
+                        />
+                        <p
+                          className={`text-xs font-medium ${
+                            isActive
+                              ? "text-gray-900 dark:text-gray-100"
+                              : "text-gray-500 dark:text-gray-400"
+                          }`}
+                        >
+                          {msg.text}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Loading Dots */}
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                <div className="w-2 h-2 bg-pink-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                <div className="w-2 h-2 bg-rose-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 
   return (
     <Card variant="elevated" className="max-w-3xl mx-auto">

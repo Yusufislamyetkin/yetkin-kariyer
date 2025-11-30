@@ -4,6 +4,9 @@ import { auth } from "@/lib/auth";
 import { readFile } from "fs/promises";
 import { join } from "path";
 
+// Force dynamic rendering to prevent build timeout
+export const dynamic = 'force-dynamic';
+
 // Helper function to import badges from JSON to database
 async function importBadgesFromJson() {
   try {
@@ -44,6 +47,7 @@ async function importBadgesFromJson() {
           "special": "special",
           "test_count": "test_count",
           "topic": "topic",
+          "total_achievements": "total_achievements",
         };
 
         const category = categoryMap[badgeData.category];
@@ -138,13 +142,19 @@ export async function GET() {
       ],
     });
 
-    // Eğer veritabanında rozet varsa, onları döndür
-    if (badges && badges.length > 0) {
+    // Eğer veritabanında 160 rozet varsa, onları döndür
+    // 160'tan azsa, eksik olanları import et
+    const expectedBadgeCount = 160;
+    if (badges && badges.length >= expectedBadgeCount) {
       return NextResponse.json({ badges });
     }
 
-    // Veritabanında rozet yoksa, otomatik import et
-    console.log("[BADGES] Veritabanında rozet bulunamadı, JSON'dan otomatik import başlatılıyor...");
+    // Veritabanında rozet yoksa veya eksikse, otomatik import et
+    if (badges && badges.length > 0) {
+      console.log(`[BADGES] Veritabanında ${badges.length} rozet var, ${expectedBadgeCount} olması gerekiyor. Eksik rozetler import ediliyor...`);
+    } else {
+      console.log("[BADGES] Veritabanında rozet bulunamadı, JSON'dan otomatik import başlatılıyor...");
+    }
     const importResult = await importBadgesFromJson();
 
     if (importResult.success && importResult.imported > 0) {

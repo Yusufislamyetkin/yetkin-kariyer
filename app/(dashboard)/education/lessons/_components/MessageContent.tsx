@@ -47,28 +47,28 @@ export function MessageContent({ content, isAI = false, className }: MessageCont
   );
 
   return (
-    <div className={cn("prose prose-sm max-w-none", className)}>
+    <div className={cn("prose prose-sm sm:prose-sm max-w-none", className)}>
       <ReactMarkdown
         components={{
           // Paragraph styling
           p: ({ children }) => (
-            <p className="mb-3 last:mb-0 leading-relaxed text-gray-800 dark:text-gray-200">
+            <p className="mb-2 sm:mb-3 last:mb-0 leading-relaxed text-sm sm:text-base text-gray-800 dark:text-gray-200">
               {children}
             </p>
           ),
           // Headings
           h1: ({ children }) => (
-            <h1 className="text-xl font-bold mb-3 mt-4 first:mt-0 text-gray-900 dark:text-gray-100">
+            <h1 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3 mt-3 sm:mt-4 first:mt-0 text-gray-900 dark:text-gray-100">
               {children}
             </h1>
           ),
           h2: ({ children }) => (
-            <h2 className="text-lg font-semibold mb-2 mt-3 first:mt-0 text-gray-900 dark:text-gray-100">
+            <h2 className="text-base sm:text-lg font-semibold mb-2 mt-2 sm:mt-3 first:mt-0 text-gray-900 dark:text-gray-100">
               {children}
             </h2>
           ),
           h3: ({ children }) => (
-            <h3 className="text-base font-semibold mb-2 mt-3 first:mt-0 text-gray-900 dark:text-gray-100">
+            <h3 className="text-sm sm:text-base font-semibold mb-1.5 sm:mb-2 mt-2 sm:mt-3 first:mt-0 text-gray-900 dark:text-gray-100">
               {children}
             </h3>
           ),
@@ -85,7 +85,7 @@ export function MessageContent({ content, isAI = false, className }: MessageCont
               );
             }
             return (
-              <ul className="list-disc list-inside mb-3 space-y-1 text-gray-800 dark:text-gray-200">
+              <ul className="list-disc list-inside mb-2 sm:mb-3 space-y-0.5 sm:space-y-1 text-sm sm:text-base text-gray-800 dark:text-gray-200">
                 {children}
               </ul>
             );
@@ -94,7 +94,7 @@ export function MessageContent({ content, isAI = false, className }: MessageCont
             // Convert all numbered lists to bullet point lists
             // This ensures consistency with the prompt requirement to avoid numbered lists
             return (
-              <ul className="list-disc list-inside mb-3 space-y-1 text-gray-800 dark:text-gray-200">
+              <ul className="list-disc list-inside mb-2 sm:mb-3 space-y-0.5 sm:space-y-1 text-sm sm:text-base text-gray-800 dark:text-gray-200">
                 {children}
               </ul>
             );
@@ -108,11 +108,11 @@ export function MessageContent({ content, isAI = false, className }: MessageCont
               // Remove the number prefix
               const textWithoutNumber = childrenStr.replace(numberPattern, '').trim();
               return (
-                <li className="ml-2 leading-relaxed">{textWithoutNumber}</li>
+                <li className="ml-2 leading-relaxed text-sm sm:text-base">{textWithoutNumber}</li>
               );
             }
             return (
-              <li className="ml-2 leading-relaxed">{children}</li>
+              <li className="ml-2 leading-relaxed text-sm sm:text-base">{children}</li>
             );
           },
           // Code blocks
@@ -120,7 +120,7 @@ export function MessageContent({ content, isAI = false, className }: MessageCont
             const isInline = !className;
             if (isInline) {
               return (
-                <code className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-sm font-mono text-gray-900 dark:text-gray-100">
+                <code className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-xs sm:text-sm font-mono text-gray-900 dark:text-gray-100">
                   {children}
                 </code>
               );
@@ -130,7 +130,7 @@ export function MessageContent({ content, isAI = false, className }: MessageCont
             );
           },
           pre: ({ children }) => (
-            <pre className="mb-3 rounded-lg bg-gray-100 dark:bg-gray-800 p-3 overflow-x-auto">
+            <pre className="mb-2 sm:mb-3 rounded-lg bg-gray-100 dark:bg-gray-800 p-2 sm:p-3 overflow-x-auto text-xs sm:text-sm">
               {children}
             </pre>
           ),
@@ -158,7 +158,7 @@ export function MessageContent({ content, isAI = false, className }: MessageCont
           ),
           // Blockquote
           blockquote: ({ children }) => (
-            <blockquote className="border-l-4 border-blue-500 pl-4 my-3 italic text-gray-700 dark:text-gray-300">
+            <blockquote className="border-l-4 border-blue-500 pl-3 sm:pl-4 my-2 sm:my-3 italic text-sm sm:text-base text-gray-700 dark:text-gray-300">
               {children}
             </blockquote>
           ),

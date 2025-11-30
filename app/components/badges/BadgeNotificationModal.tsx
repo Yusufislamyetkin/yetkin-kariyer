@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { X, Sparkles, Award } from "lucide-react";
 import { Button } from "@/app/components/ui/Button";
 
@@ -67,6 +67,26 @@ export function BadgeNotificationModal({
 }: BadgeNotificationModalProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+  const currentIndexRef = useRef(currentIndex);
+  const totalCountRef = useRef(totalCount);
+
+  // Keep refs in sync with props
+  useEffect(() => {
+    currentIndexRef.current = currentIndex;
+    totalCountRef.current = totalCount;
+  }, [currentIndex, totalCount]);
+
+  const handleNext = useCallback(() => {
+    setIsAnimating(false);
+    setTimeout(() => {
+      // Use refs to get current values, not closure values
+      if (currentIndexRef.current < totalCountRef.current - 1) {
+        onNext();
+      } else {
+        onDismiss();
+      }
+    }, 300);
+  }, [onNext, onDismiss]);
 
   useEffect(() => {
     if (badge) {
@@ -85,18 +105,7 @@ export function BadgeNotificationModal({
       setIsVisible(false);
       setIsAnimating(false);
     }
-  }, [badge]);
-
-  const handleNext = () => {
-    setIsAnimating(false);
-    setTimeout(() => {
-      if (currentIndex < totalCount - 1) {
-        onNext();
-      } else {
-        onDismiss();
-      }
-    }, 300);
-  };
+  }, [badge, handleNext]);
 
   const handleDismiss = () => {
     setIsAnimating(false);

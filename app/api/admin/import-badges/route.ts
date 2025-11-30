@@ -56,6 +56,7 @@ export async function POST() {
           "special": "special",
           "test_count": "test_count",
           "topic": "topic",
+          "total_achievements": "total_achievements",
         };
 
         const category = categoryMap[badgeData.category];
