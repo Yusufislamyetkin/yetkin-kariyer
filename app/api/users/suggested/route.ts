@@ -48,7 +48,7 @@ export async function GET(request: Request) {
           },
         },
       },
-      take: 10,
+      take: 8,
       orderBy: {
         posts: {
           _count: "desc",

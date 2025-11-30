@@ -1,0 +1,300 @@
+[
+  {
+    "title": "Full Stack Developer (React + .NET) - YTK Career",
+    "description": "Sağlık projemizde çalışacak full stack geliştiricisi arıyoruz. Hastane yönetim sistemleri, hasta kayıt sistemleri ve tıbbi veri yönetim uygulamaları geliştirme konularında yeteneklere sahip, React, .NET Core ve SQL Server teknolojilerinde tecrübeleri elde etmiş, HL7 ve FHIR standartlarında deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 5 yıl çalışma tecrübesi olan, sağlık sektöründe proje deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 3-6 aylık olup, YTKN Career'in anlaşmalı olduğu sağlık projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "requirements": {
+      "mustHave": [
+        "En az 5 yıl full stack geliştirme deneyimi",
+        "Sağlık sektörü veya healthcare proje deneyimi",
+        "React ve TypeScript bilgisi",
+        ".NET Core ve C# bilgisi",
+        "SQL Server veritabanı kullanımı",
+        "RESTful API geliştirme",
+        "HIPAA compliance bilgisi",
+        "İyi düzeyde İngilizce"
+      ],
+      "niceToHave": [
+        "HL7 ve FHIR standartları",
+        "Docker ve Kubernetes",
+        "Azure cloud platform",
+        "Unit test yazma deneyimi",
+        "Medical terminology bilgisi"
+      ]
+    },
+    "location": "İstanbul / Hibrit",
+    "salary": "30.000 - 48.000₺",
+    "contractDuration": "3-6 ay",
+    "daysAgo": 1
+  },
+  {
+    "title": "Java Spring Boot Developer - YTK Career",
+    "description": "Sağlık projemizde çalışacak Java Spring Boot geliştiricisi arıyoruz. Elektronik sağlık kayıtları (EHR), hasta bilgi sistemleri ve tıbbi görüntüleme sistemleri geliştirme konularında yeteneklere sahip, Spring Boot, Java ve Oracle teknolojilerinde tecrübeleri elde etmiş, Hibernate ve JPA sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, sağlık sektöründe Java geliştirme deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 1 yıllık olup, YTKN Career'in anlaşmalı olduğu sağlık projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "requirements": {
+      "mustHave": [
+        "En az 4 yıl Java geliştirme deneyimi",
+        "Spring Boot ve Spring Framework bilgisi",
+        "Sağlık sektörü veya healthcare proje deneyimi",
+        "Oracle veya PostgreSQL veritabanı kullanımı",
+        "RESTful API geliştirme",
+        "Hibernate ve JPA",
+        "HIPAA compliance bilgisi",
+        "Maven veya Gradle build tool"
+      ],
+      "niceToHave": [
+        "HL7 ve FHIR standartları",
+        "Docker ve Kubernetes",
+        "Microservices mimarisi",
+        "JUnit ve Mockito test framework",
+        "Medical data modeling"
+      ]
+    },
+    "location": "Ankara / Hibrit",
+    "salary": "28.000 - 44.000₺",
+    "contractDuration": "1 yıl",
+    "daysAgo": 2
+  },
+  {
+    "title": "Python Data Engineer - YTK Career",
+    "description": "Sağlık projemizde çalışacak Python veri mühendisi arıyoruz. Tıbbi veri işleme, hasta verileri analizi ve sağlık verisi pipeline'ları geliştirme konularında yeteneklere sahip, Python, Pandas ve Apache Spark teknolojilerinde tecrübeleri elde etmiş, ETL süreçleri ve veri modelleme sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, sağlık sektöründe veri mühendisliği deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 2 yıllık olup, YTKN Career'in anlaşmalı olduğu sağlık projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "requirements": {
+      "mustHave": [
+        "En az 4 yıl Python geliştirme deneyimi",
+        "Pandas ve NumPy kütüphaneleri",
+        "Sağlık sektörü veya healthcare proje deneyimi",
+        "SQL ve veritabanı sorgulama",
+        "ETL pipeline geliştirme deneyimi",
+        "Apache Spark veya Hadoop bilgisi",
+        "Veri modelleme ve tasarım bilgisi",
+        "HIPAA compliance bilgisi"
+      ],
+      "niceToHave": [
+        "Apache Airflow deneyimi",
+        "AWS Glue veya Azure Data Factory",
+        "Machine Learning model deployment",
+        "Snowflake veya Redshift deneyimi",
+        "Medical data standards"
+      ]
+    },
+    "location": "İzmir / Hibrit",
+    "salary": "26.000 - 42.000₺",
+    "contractDuration": "2 yıl",
+    "daysAgo": 3
+  },
+  {
+    "title": "Mobile Developer (React Native) - YTK Career",
+    "description": "Sağlık projemizde çalışacak React Native mobil geliştiricisi arıyoruz. Hasta takip uygulamaları, randevu sistemleri ve sağlık verisi görselleştirme uygulamaları geliştirme konularında yeteneklere sahip, React Native, TypeScript ve Redux teknolojilerinde tecrübeleri elde etmiş, iOS ve Android platformlarında deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 3 yıl çalışma tecrübesi olan, sağlık sektöründe mobil uygulama geliştirme deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 3 yıllık olup, YTKN Career'in anlaşmalı olduğu sağlık projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "requirements": {
+      "mustHave": [
+        "En az 3 yıl React Native geliştirme deneyimi",
+        "TypeScript bilgisi",
+        "Sağlık sektörü veya healthcare mobil uygulama deneyimi",
+        "Redux veya MobX state management",
+        "RESTful API entegrasyonu",
+        "iOS ve Android deployment süreçleri",
+        "App Store ve Google Play Store yayınlama deneyimi",
+        "HIPAA compliance bilgisi"
+      ],
+      "niceToHave": [
+        "Native module geliştirme",
+        "Biometric authentication",
+        "Push notification implementasyonu",
+        "Health data encryption",
+        "Automated testing (Jest, Detox)"
+      ]
+    },
+    "location": "Bursa / Hibrit",
+    "salary": "24.000 - 38.000₺",
+    "contractDuration": "3 yıl",
+    "daysAgo": 4
+  },
+  {
+    "title": "DevOps Engineer - YTK Career",
+    "description": "Sağlık projemizde çalışacak DevOps mühendisi arıyoruz. Sağlık sistemleri için cloud altyapısı yönetimi, CI/CD pipeline kurulumu ve güvenlik odaklı otomasyon süreçleri geliştirme konularında yeteneklere sahip, AWS, Docker ve Kubernetes teknolojilerinde tecrübeleri elde etmiş, Terraform ve monitoring sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, sağlık sektöründe DevOps deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 3-6 aylık olup, YTKN Career'in anlaşmalı olduğu sağlık projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "requirements": {
+      "mustHave": [
+        "En az 4 yıl DevOps deneyimi",
+        "Sağlık sektörü veya healthcare proje deneyimi",
+        "Docker ve Kubernetes bilgisi",
+        "AWS veya Azure cloud platform deneyimi",
+        "CI/CD pipeline kurulumu (Jenkins, GitLab CI, GitHub Actions)",
+        "Linux sistem yönetimi",
+        "Infrastructure as Code (Terraform veya CloudFormation)",
+        "HIPAA compliance bilgisi"
+      ],
+      "niceToHave": [
+        "Prometheus ve Grafana ile monitoring",
+        "Ansible veya Chef ile configuration management",
+        "Elasticsearch ve Logstash deneyimi",
+        "Python veya Bash scripting",
+        "Security ve compliance automation"
+      ]
+    },
+    "location": "Ankara / Hibrit",
+    "salary": "32.000 - 50.000₺",
+    "contractDuration": "3-6 ay",
+    "daysAgo": 5
+  },
+  {
+    "title": "QA Automation Engineer - YTK Career",
+    "description": "Sağlık projemizde çalışacak QA otomasyon mühendisi arıyoruz. Sağlık uygulamaları için test otomasyonu, regression testing ve compliance testing konularında yeteneklere sahip, Selenium, Cypress ve TestNG teknolojilerinde tecrübeleri elde etmiş, API testing ve security testing sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 3 yıl çalışma tecrübesi olan, sağlık sektöründe test deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 1 yıllık olup, YTKN Career'in anlaşmalı olduğu sağlık projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "requirements": {
+      "mustHave": [
+        "En az 3 yıl QA otomasyon deneyimi",
+        "Sağlık sektörü veya healthcare proje deneyimi",
+        "Selenium WebDriver veya Cypress",
+        "Java, Python veya JavaScript programlama",
+        "TestNG, JUnit veya Jest test framework",
+        "API testing (Postman, REST Assured)",
+        "Agile metodolojiler deneyimi",
+        "HIPAA compliance testing bilgisi"
+      ],
+      "niceToHave": [
+        "Playwright veya Puppeteer",
+        "Performance testing (JMeter, Gatling)",
+        "BDD framework (Cucumber, SpecFlow)",
+        "CI/CD entegrasyonu",
+        "Medical software validation"
+      ]
+    },
+    "location": "İstanbul / Hibrit",
+    "salary": "22.000 - 36.000₺",
+    "contractDuration": "1 yıl",
+    "daysAgo": 6
+  },
+  {
+    "title": "Backend Developer (Node.js) - YTK Career",
+    "description": "Sağlık projemizde çalışacak Node.js backend geliştiricisi arıyoruz. Sağlık API'leri, hasta verisi yönetim sistemleri ve real-time notification sistemleri geliştirme konularında yeteneklere sahip, Node.js, Express.js ve MongoDB teknolojilerinde tecrübeleri elde etmiş, microservices mimarisi ve message queue sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, sağlık sektöründe backend geliştirme deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 2 yıllık olup, YTKN Career'in anlaşmalı olduğu sağlık projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "requirements": {
+      "mustHave": [
+        "En az 4 yıl Node.js geliştirme deneyimi",
+        "Express.js framework bilgisi",
+        "Sağlık sektörü veya healthcare proje deneyimi",
+        "MongoDB veya PostgreSQL veritabanı kullanımı",
+        "RESTful API geliştirme",
+        "Microservices mimarisi bilgisi",
+        "HIPAA compliance bilgisi",
+        "Git versiyon kontrolü"
+      ],
+      "niceToHave": [
+        "TypeScript bilgisi",
+        "RabbitMQ veya Kafka message broker",
+        "Docker ve Kubernetes",
+        "Jest veya Mocha test framework",
+        "HL7 ve FHIR standartları"
+      ]
+    },
+    "location": "İzmir / Hibrit",
+    "salary": "27.000 - 43.000₺",
+    "contractDuration": "2 yıl",
+    "daysAgo": 7
+  },
+  {
+    "title": "Frontend Developer (React) - YTK Career",
+    "description": "Sağlık projemizde çalışacak React frontend geliştiricisi arıyoruz. Hastane yönetim sistemleri arayüzleri, hasta portalleri ve tıbbi veri görselleştirme dashboard'ları geliştirme konularında yeteneklere sahip, React, TypeScript ve Redux teknolojilerinde tecrübeleri elde etmiş, Material-UI ve responsive design sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, sağlık sektöründe frontend geliştirme deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 3 yıllık olup, YTKN Career'in anlaşmalı olduğu sağlık projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "requirements": {
+      "mustHave": [
+        "En az 4 yıl React geliştirme deneyimi",
+        "TypeScript bilgisi",
+        "Sağlık sektörü veya healthcare proje deneyimi",
+        "Redux veya Context API state management",
+        "Responsive web tasarım bilgisi",
+        "RESTful API entegrasyonu",
+        "HTML5, CSS3 ve JavaScript",
+        "HIPAA compliance bilgisi"
+      ],
+      "niceToHave": [
+        "Next.js framework deneyimi",
+        "Material-UI veya Ant Design",
+        "WebSocket ve real-time uygulama geliştirme",
+        "Jest veya React Testing Library",
+        "Accessibility (WCAG) standartları"
+      ]
+    },
+    "location": "Antalya / Hibrit",
+    "salary": "25.000 - 40.000₺",
+    "contractDuration": "3 yıl",
+    "daysAgo": 8
+  },
+  {
+    "title": "Database Administrator - YTK Career",
+    "description": "Sağlık projemizde çalışacak veritabanı yöneticisi arıyoruz. Tıbbi veri yönetimi, hasta kayıt sistemleri ve sağlık verisi güvenliği konularında yeteneklere sahip, SQL Server, Oracle ve PostgreSQL teknolojilerinde tecrübeleri elde etmiş, backup/recovery ve disaster recovery sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 5 yıl çalışma tecrübesi olan, sağlık sektöründe DBA deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 3-6 aylık olup, YTKN Career'in anlaşmalı olduğu sağlık projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "requirements": {
+      "mustHave": [
+        "En az 5 yıl DBA deneyimi",
+        "SQL Server, Oracle veya PostgreSQL uzmanlığı",
+        "Sağlık sektörü veya healthcare proje deneyimi",
+        "Veritabanı tasarımı ve optimizasyonu",
+        "Backup ve recovery stratejileri",
+        "Performance tuning ve query optimization",
+        "Güvenlik ve access control",
+        "HIPAA compliance bilgisi"
+      ],
+      "niceToHave": [
+        "Always On Availability Groups",
+        "Database replication",
+        "Disaster recovery planlama",
+        "Cloud database yönetimi (Azure SQL, AWS RDS)",
+        "Medical data encryption"
+      ]
+    },
+    "location": "Ankara / Hibrit",
+    "salary": "29.000 - 46.000₺",
+    "contractDuration": "3-6 ay",
+    "daysAgo": 9
+  },
+  {
+    "title": "Security Engineer - YTK Career",
+    "description": "Sağlık projemizde çalışacak güvenlik mühendisi arıyoruz. Sağlık sistemleri için güvenlik mimarisi tasarımı, HIPAA compliance ve security audit konularında yeteneklere sahip, OWASP standartları ve encryption teknolojilerinde tecrübeleri elde etmiş, penetration testing ve vulnerability assessment sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 5 yıl çalışma tecrübesi olan, sağlık sektöründe güvenlik deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 1 yıllık olup, YTKN Career'in anlaşmalı olduğu sağlık projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "requirements": {
+      "mustHave": [
+        "En az 5 yıl cybersecurity deneyimi",
+        "Sağlık sektörü veya healthcare güvenlik deneyimi",
+        "OWASP Top 10 bilgisi",
+        "HIPAA compliance uzmanlığı",
+        "Penetration testing ve vulnerability assessment",
+        "Encryption ve cryptography bilgisi",
+        "Security architecture tasarımı",
+        "İyi düzeyde İngilizce"
+      ],
+      "niceToHave": [
+        "CEH, CISSP veya benzeri sertifikalar",
+        "SIEM sistemleri (Splunk, QRadar)",
+        "Identity and Access Management (IAM)",
+        "Network security ve firewall yönetimi",
+        "Medical data security"
+      ]
+    },
+    "location": "İstanbul / Hibrit",
+    "salary": "34.000 - 56.000₺",
+    "contractDuration": "1 yıl",
+    "daysAgo": 10
+  },
+  {
+    "title": "Business Analyst - YTK Career",
+    "description": "Sağlık projemizde çalışacak iş analisti arıyoruz. Sağlık sistemleri için gereksinim analizi, süreç iyileştirme ve kullanıcı hikayeleri yazma konularında yeteneklere sahip, sağlık domain bilgisi ve Agile metodolojilerinde tecrübeleri elde etmiş, Jira, Confluence ve UML diagram araçlarında deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, sağlık sektöründe iş analizi deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 2 yıllık olup, YTKN Career'in anlaşmalı olduğu sağlık projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "requirements": {
+      "mustHave": [
+        "En az 4 yıl iş analizi deneyimi",
+        "Sağlık sektörü veya healthcare domain bilgisi",
+        "Gereksinim analizi ve dokümantasyon",
+        "Agile ve Scrum metodolojileri",
+        "Jira ve Confluence kullanımı",
+        "UML ve process diagram oluşturma",
+        "Stakeholder yönetimi",
+        "HIPAA compliance bilgisi"
+      ],
+      "niceToHave": [
+        "SQL temel bilgisi",
+        "HL7 ve FHIR standartları",
+        "User story yazma",
+        "Acceptance criteria tanımlama",
+        "Medical terminology bilgisi"
+      ]
+    },
+    "location": "İzmir / Hibrit",
+    "salary": "24.000 - 38.000₺",
+    "contractDuration": "2 yıl",
+    "daysAgo": 11
+  }
+]
+

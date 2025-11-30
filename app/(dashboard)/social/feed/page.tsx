@@ -233,8 +233,8 @@ export default function FeedPage() {
             new Map(allUsers.map((user: any) => [user.id, user])).values()
           );
           
-          // Limit to 10 users
-          setSuggestedUsers(uniqueUsers.slice(0, 10));
+          // Limit to 8 users
+          setSuggestedUsers(uniqueUsers.slice(0, 8));
         })
         .catch((err) => console.error("Error fetching suggested users:", err))
         .finally(() => setIsLoadingFriendSuggestions(false));

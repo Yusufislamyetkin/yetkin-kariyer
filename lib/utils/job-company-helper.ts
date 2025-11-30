@@ -11,8 +11,19 @@ export interface CompanyInfo {
 /**
  * İş ilanı başlığına göre şirket bilgisini döndürür
  */
-export function getCompanyInfoForJob(jobTitle: string): CompanyInfo {
+export function getCompanyInfoForJob(jobTitle: string, description?: string): CompanyInfo {
   const title = jobTitle.toLowerCase();
+  const desc = description?.toLowerCase() || '';
+
+  // YTK Career iş ilanlarını kontrol et (başlıkta veya açıklamada ytkncareer/ytk career geçiyorsa)
+  if (title.includes('ytk career') || title.includes('ytkncareer') || title.includes('ytkcareer') ||
+      desc.includes('ytkncareer') || desc.includes('ytk career')) {
+    return {
+      name: 'YTK Career',
+      profileImage: '/Photos/YtkCareerLogo/ytkncareer.jpeg',
+      initial: 'YC'
+    };
+  }
 
   // Teknoloji stack'ine göre şirket belirleme
   if (title.includes('.net') || title.includes('backend') || title.includes('c#')) {

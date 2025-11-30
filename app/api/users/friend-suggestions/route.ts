@@ -55,7 +55,7 @@ export async function GET(request: Request) {
           },
         },
       },
-      take: 10,
+      take: 8,
       orderBy: {
         posts: {
           _count: "desc",
@@ -103,8 +103,8 @@ export async function GET(request: Request) {
         // Shuffle the array for better randomness
         allAvailableUsers = allAvailableUsers.sort(() => Math.random() - 0.5);
         
-        // Take first 10 random users
-        suggestedUsers = allAvailableUsers.slice(0, 10);
+        // Take first 8 random users
+        suggestedUsers = allAvailableUsers.slice(0, 8);
       }
     }
 

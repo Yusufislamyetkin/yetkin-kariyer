@@ -1,0 +1,219 @@
+[
+  {
+    "title": "Full Stack Developer (React + Node.js) - YTK Career",
+    "description": "Eğitim projemizde çalışacak full stack geliştiricisi arıyoruz. Online eğitim platformları, öğrenci yönetim sistemleri ve içerik yönetim uygulamaları geliştirme konularında yeteneklere sahip, React, Node.js ve MongoDB teknolojilerinde tecrübeleri elde etmiş, Express.js ve Redux state management sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, eğitim sektöründe proje deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 3-6 aylık olup, YTKN Career'in anlaşmalı olduğu eğitim projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "requirements": {
+      "mustHave": [
+        "En az 4 yıl full stack geliştirme deneyimi",
+        "Eğitim veya edtech sektörü proje deneyimi",
+        "React ve TypeScript bilgisi",
+        "Node.js ve Express.js deneyimi",
+        "MongoDB veya PostgreSQL veritabanı kullanımı",
+        "RESTful API geliştirme",
+        "Responsive web tasarım bilgisi",
+        "İyi düzeyde İngilizce"
+      ],
+      "niceToHave": [
+        "Next.js framework deneyimi",
+        "GraphQL kullanımı",
+        "Video streaming entegrasyonları",
+        "AWS veya Heroku deployment deneyimi",
+        "Jest veya Mocha test framework'leri"
+      ]
+    },
+    "location": "İstanbul / Hibrit",
+    "salary": "26.000 - 42.000₺",
+    "contractDuration": "3-6 ay",
+    "daysAgo": 1
+  },
+  {
+    "title": "Python Backend Developer (Django) - YTK Career",
+    "description": "Eğitim projemizde çalışacak Python Django backend geliştiricisi arıyoruz. Eğitim platformu backend sistemleri, öğrenci kayıt sistemleri ve sınav yönetim modülleri geliştirme konularında yeteneklere sahip, Django, Python ve PostgreSQL teknolojilerinde tecrübeleri elde etmiş, RESTful API ve Celery task queue sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, eğitim sektöründe Python geliştirme deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 1 yıllık olup, YTKN Career'in anlaşmalı olduğu eğitim projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "requirements": {
+      "mustHave": [
+        "En az 4 yıl Python geliştirme deneyimi",
+        "Django framework uzmanlığı",
+        "Eğitim veya edtech sektörü proje deneyimi",
+        "PostgreSQL veya MySQL veritabanı kullanımı",
+        "RESTful API geliştirme",
+        "Git versiyon kontrolü",
+        "Linux sistem bilgisi",
+        "İyi düzeyde İngilizce"
+      ],
+      "niceToHave": [
+        "Celery task queue",
+        "Redis cache kullanımı",
+        "Docker ve containerization",
+        "Pytest test framework",
+        "Django REST Framework"
+      ]
+    },
+    "location": "Ankara / Hibrit",
+    "salary": "24.000 - 38.000₺",
+    "contractDuration": "1 yıl",
+    "daysAgo": 2
+  },
+  {
+    "title": "React Frontend Developer - YTK Career",
+    "description": "Eğitim projemizde çalışacak React frontend geliştiricisi arıyoruz. Online eğitim arayüzleri, öğrenci dashboard'ları ve içerik görüntüleme sistemleri geliştirme konularında yeteneklere sahip, React, TypeScript ve Redux teknolojilerinde tecrübeleri elde etmiş, Material-UI ve responsive design sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 3 yıl çalışma tecrübesi olan, eğitim sektöründe frontend geliştirme deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 2 yıllık olup, YTKN Career'in anlaşmalı olduğu eğitim projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "requirements": {
+      "mustHave": [
+        "En az 3 yıl React geliştirme deneyimi",
+        "TypeScript bilgisi",
+        "Eğitim veya edtech sektörü proje deneyimi",
+        "Redux veya Context API state management",
+        "Responsive web tasarım bilgisi",
+        "RESTful API entegrasyonu",
+        "HTML5, CSS3 ve JavaScript",
+        "Git versiyon kontrolü"
+      ],
+      "niceToHave": [
+        "Next.js framework deneyimi",
+        "Material-UI veya Ant Design",
+        "Video player entegrasyonları",
+        "Jest veya React Testing Library",
+        "Accessibility (WCAG) standartları"
+      ]
+    },
+    "location": "İzmir / Hibrit",
+    "salary": "22.000 - 36.000₺",
+    "contractDuration": "2 yıl",
+    "daysAgo": 3
+  },
+  {
+    "title": "Mobile Developer (Flutter) - YTK Career",
+    "description": "Eğitim projemizde çalışacak Flutter mobil geliştiricisi arıyoruz. Eğitim mobil uygulamaları, öğrenci takip sistemleri ve offline içerik erişim uygulamaları geliştirme konularında yeteneklere sahip, Flutter, Dart ve Firebase teknolojilerinde tecrübeleri elde etmiş, iOS ve Android platformlarında deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 3 yıl çalışma tecrübesi olan, eğitim sektöründe mobil uygulama geliştirme deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 3 yıllık olup, YTKN Career'in anlaşmalı olduğu eğitim projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "requirements": {
+      "mustHave": [
+        "En az 3 yıl Flutter geliştirme deneyimi",
+        "Dart programlama dili bilgisi",
+        "Eğitim veya edtech mobil uygulama deneyimi",
+        "State management (Provider, Bloc, Riverpod)",
+        "RESTful API entegrasyonu",
+        "iOS ve Android deployment süreçleri",
+        "App Store ve Google Play Store yayınlama deneyimi",
+        "Git versiyon kontrolü"
+      ],
+      "niceToHave": [
+        "Firebase entegrasyonu",
+        "Push notification implementasyonu",
+        "Offline data storage",
+        "Automated testing (Flutter Test)",
+        "Video playback entegrasyonu"
+      ]
+    },
+    "location": "Bursa / Hibrit",
+    "salary": "21.000 - 35.000₺",
+    "contractDuration": "3 yıl",
+    "daysAgo": 4
+  },
+  {
+    "title": "DevOps Engineer - YTK Career",
+    "description": "Eğitim projemizde çalışacak DevOps mühendisi arıyoruz. Eğitim platformu altyapısı yönetimi, CI/CD pipeline kurulumu ve scaling çözümleri geliştirme konularında yeteneklere sahip, AWS, Docker ve Kubernetes teknolojilerinde tecrübeleri elde etmiş, Terraform ve monitoring sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 3 yıl çalışma tecrübesi olan, eğitim sektöründe DevOps deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 3-6 aylık olup, YTKN Career'in anlaşmalı olduğu eğitim projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "requirements": {
+      "mustHave": [
+        "En az 3 yıl DevOps deneyimi",
+        "Eğitim veya edtech sektörü proje deneyimi",
+        "Docker ve Kubernetes bilgisi",
+        "AWS veya Azure cloud platform deneyimi",
+        "CI/CD pipeline kurulumu (Jenkins, GitLab CI, GitHub Actions)",
+        "Linux sistem yönetimi",
+        "Infrastructure as Code (Terraform veya CloudFormation)",
+        "İyi düzeyde İngilizce"
+      ],
+      "niceToHave": [
+        "Prometheus ve Grafana ile monitoring",
+        "Ansible veya Chef ile configuration management",
+        "Elasticsearch ve Logstash deneyimi",
+        "Python veya Bash scripting",
+        "Load balancing ve auto-scaling"
+      ]
+    },
+    "location": "Antalya / Uzaktan",
+    "salary": "28.000 - 45.000₺",
+    "contractDuration": "3-6 ay",
+    "daysAgo": 5
+  },
+  {
+    "title": "QA Automation Engineer - YTK Career",
+    "description": "Eğitim projemizde çalışacak QA otomasyon mühendisi arıyoruz. Eğitim uygulamaları için test otomasyonu, regression testing ve cross-platform testing konularında yeteneklere sahip, Selenium, Cypress ve TestNG teknolojilerinde tecrübeleri elde etmiş, API testing ve mobile testing sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 3 yıl çalışma tecrübesi olan, eğitim sektöründe test deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 1 yıllık olup, YTKN Career'in anlaşmalı olduğu eğitim projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "requirements": {
+      "mustHave": [
+        "En az 3 yıl QA otomasyon deneyimi",
+        "Eğitim veya edtech sektörü proje deneyimi",
+        "Selenium WebDriver veya Cypress",
+        "Java, Python veya JavaScript programlama",
+        "TestNG, JUnit veya Jest test framework",
+        "API testing (Postman, REST Assured)",
+        "Agile metodolojiler deneyimi",
+        "Test planlama ve raporlama"
+      ],
+      "niceToHave": [
+        "Playwright veya Puppeteer",
+        "Mobile testing (Appium, Detox)",
+        "BDD framework (Cucumber, SpecFlow)",
+        "CI/CD entegrasyonu",
+        "Cross-browser testing"
+      ]
+    },
+    "location": "İstanbul / Hibrit",
+    "salary": "20.000 - 33.000₺",
+    "contractDuration": "1 yıl",
+    "daysAgo": 6
+  },
+  {
+    "title": "UI/UX Designer - YTK Career",
+    "description": "Eğitim projemizde çalışacak UI/UX tasarımcısı arıyoruz. Online eğitim platformu arayüz tasarımları, öğrenci deneyimi optimizasyonu ve içerik görselleştirme konularında yeteneklere sahip, Figma, Adobe XD ve Sketch teknolojilerinde tecrübeleri elde etmiş, user research ve prototyping araçlarında deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 3 yıl çalışma tecrübesi olan, eğitim sektöründe tasarım deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 2 yıllık olup, YTKN Career'in anlaşmalı olduğu eğitim projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "requirements": {
+      "mustHave": [
+        "En az 3 yıl UI/UX tasarım deneyimi",
+        "Eğitim veya edtech sektörü proje deneyimi",
+        "Figma veya Adobe XD kullanımı",
+        "User research ve usability testing",
+        "Wireframing ve prototyping",
+        "Responsive design prensipleri",
+        "Design system oluşturma",
+        "İyi düzeyde İngilizce"
+      ],
+      "niceToHave": [
+        "HTML5, CSS3 temel bilgisi",
+        "Animation ve transition tasarımı",
+        "A/B testing ve user analytics",
+        "Accessibility (WCAG) standartları",
+        "Educational content design"
+      ]
+    },
+    "location": "Ankara / Hibrit",
+    "salary": "19.000 - 32.000₺",
+    "contractDuration": "2 yıl",
+    "daysAgo": 7
+  },
+  {
+    "title": ".NET Core Backend Developer - YTK Career",
+    "description": "Eğitim projemizde çalışacak .NET Core backend geliştiricisi arıyoruz. Eğitim platformu backend sistemleri, öğrenci kayıt API'leri ve içerik yönetim modülleri geliştirme konularında yeteneklere sahip, .NET Core, C# ve SQL Server teknolojilerinde tecrübeleri elde etmiş, Entity Framework Core ve RESTful API sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, eğitim sektöründe .NET geliştirme deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 3 yıllık olup, YTKN Career'in anlaşmalı olduğu eğitim projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "requirements": {
+      "mustHave": [
+        "En az 4 yıl .NET Core ve C# geliştirme deneyimi",
+        "Eğitim veya edtech sektörü proje deneyimi",
+        "Entity Framework Core ile veritabanı yönetimi",
+        "RESTful API tasarımı ve geliştirme deneyimi",
+        "SQL Server veritabanı kullanımı",
+        "Git versiyon kontrolü",
+        "Microservices mimarisi bilgisi",
+        "İyi düzeyde İngilizce"
+      ],
+      "niceToHave": [
+        "Docker ve Kubernetes deneyimi",
+        "Azure cloud platform",
+        "SignalR real-time communication",
+        "Unit test yazma deneyimi (xUnit, NUnit)",
+        "CI/CD pipeline kurulumu"
+      ]
+    },
+    "location": "İzmir / Hibrit",
+    "salary": "25.000 - 40.000₺",
+    "contractDuration": "3 yıl",
+    "daysAgo": 8
+  }
+]
+

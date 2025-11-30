@@ -39,7 +39,7 @@ export async function GET(request: Request) {
     const activeBots = await db.user.findMany({
       where: {
         isBot: true,
-        configuration: {
+        botConfiguration: {
           isActive: true,
         },
       },

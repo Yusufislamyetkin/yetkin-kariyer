@@ -71,11 +71,101 @@ export const PostCard = memo(function PostCard({
   const [showMenu, setShowMenu] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [isVideoVisible, setIsVideoVisible] = useState(false);
+  const [isVideoLoading, setIsVideoLoading] = useState(false);
+  const [videoError, setVideoError] = useState(false);
+  const [videoCanPlay, setVideoCanPlay] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const videoContainerRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const playTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const networkTypeRef = useRef<string>("4g");
 
   const isOwner = post.userId === currentUserId;
+
+  // Detect network connection type
+  useEffect(() => {
+    if (typeof navigator !== "undefined" && "connection" in navigator) {
+      const connection = (navigator as any).connection || (navigator as any).mozConnection || (navigator as any).webkitConnection;
+      if (connection) {
+        networkTypeRef.current = connection.effectiveType || "4g";
+        const handleConnectionChange = () => {
+          networkTypeRef.current = connection.effectiveType || "4g";
+        };
+        connection.addEventListener("change", handleConnectionChange);
+        return () => connection.removeEventListener("change", handleConnectionChange);
+      }
+    }
+  }, []);
+
+  // Intersection Observer for video lazy loading with network-aware optimization
+  useEffect(() => {
+    if (!post.videoUrl || !videoContainerRef.current) return;
+
+    // Adjust rootMargin based on network speed
+    const rootMargin = networkTypeRef.current === "slow-2g" || networkTypeRef.current === "2g" 
+      ? "0px" // Don't preload on slow connections
+      : networkTypeRef.current === "3g" 
+      ? "25px" // Less aggressive preloading on 3g
+      : "50px"; // Normal preloading on 4g
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVideoVisible(true);
+            setVideoError(false);
+            // Load and play video when visible
+            if (videoRef.current) {
+              setIsVideoLoading(true);
+              videoRef.current.load();
+              
+              // Throttle play to avoid multiple rapid calls
+              if (playTimeoutRef.current) {
+                clearTimeout(playTimeoutRef.current);
+              }
+              playTimeoutRef.current = setTimeout(() => {
+                if (videoRef.current && entry.isIntersecting) {
+                  videoRef.current.play().catch(() => {
+                    // Autoplay was prevented, user interaction required
+                    setIsVideoLoading(false);
+                  });
+                }
+              }, 100);
+            }
+          } else {
+            setIsVideoVisible(false);
+            setVideoCanPlay(false);
+            // Pause and unload video when not visible to free memory
+            if (videoRef.current) {
+              videoRef.current.pause();
+              videoRef.current.currentTime = 0;
+              // Unload video source to free memory
+              videoRef.current.src = "";
+              videoRef.current.load();
+            }
+            if (playTimeoutRef.current) {
+              clearTimeout(playTimeoutRef.current);
+            }
+          }
+        });
+      },
+      {
+        rootMargin,
+        threshold: 0.1, // Trigger when 10% of video is visible
+      }
+    );
+
+    observer.observe(videoContainerRef.current);
+
+    return () => {
+      observer.disconnect();
+      if (playTimeoutRef.current) {
+        clearTimeout(playTimeoutRef.current);
+      }
+    };
+  }, [post.videoUrl]);
 
   // Close menu when clicking outside
   useEffect(() => {
@@ -230,41 +320,116 @@ export const PostCard = memo(function PostCard({
 
       {/* Video - Reels Style */}
       {post.videoUrl && (
-        <div className="relative w-full bg-black">
+        <div className="relative w-full bg-black" ref={videoContainerRef}>
           <div className="relative w-full max-w-md mx-auto" style={{ aspectRatio: '9/16', maxHeight: '800px' }}>
             <video
               ref={videoRef}
-              src={post.videoUrl}
+              src={isVideoVisible ? post.videoUrl : undefined}
               className="w-full h-full object-contain"
               loop
               muted
               playsInline
-              onPlay={() => setIsVideoPlaying(true)}
+              preload="none"
+              onPlay={() => {
+                setIsVideoPlaying(true);
+                setIsVideoLoading(false);
+              }}
               onPause={() => setIsVideoPlaying(false)}
+              onWaiting={() => setIsVideoLoading(true)}
+              onCanPlay={() => {
+                setVideoCanPlay(true);
+                setIsVideoLoading(false);
+              }}
+              onCanPlayThrough={() => {
+                setVideoCanPlay(true);
+                setIsVideoLoading(false);
+              }}
               onLoadedMetadata={() => {
-                // Auto-play when video is loaded
-                if (videoRef.current) {
+                setIsVideoLoading(false);
+                // Auto-play when video is loaded and visible
+                if (videoRef.current && isVideoVisible && !videoError) {
                   videoRef.current.play().catch(() => {
                     // Autoplay was prevented, user interaction required
+                    setIsVideoLoading(false);
                   });
                 }
               }}
+              onLoadStart={() => setIsVideoLoading(true)}
+              onError={(e) => {
+                console.error("Video error:", e);
+                setVideoError(true);
+                setIsVideoLoading(false);
+                // Retry loading after 2 seconds
+                setTimeout(() => {
+                  if (videoRef.current && isVideoVisible && !isVideoPlaying) {
+                    setVideoError(false);
+                    videoRef.current.load();
+                  }
+                }, 2000);
+              }}
+              onProgress={() => {
+                // Check if enough data is buffered
+                if (videoRef.current) {
+                  const buffered = videoRef.current.buffered;
+                  if (buffered.length > 0) {
+                    const bufferedEnd = buffered.end(buffered.length - 1);
+                    const currentTime = videoRef.current.currentTime;
+                    const duration = videoRef.current.duration;
+                    // If buffered enough (at least 2 seconds ahead or 10% of video), reduce loading state
+                    if (bufferedEnd - currentTime > 2 || (duration > 0 && bufferedEnd / duration > 0.1)) {
+                      setIsVideoLoading(false);
+                    }
+                  }
+                }
+              }}
             />
+            
+            {/* Loading Spinner */}
+            {isVideoLoading && isVideoVisible && (
+              <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-20">
+                <div className="w-12 h-12 border-4 border-white/30 border-t-white rounded-full animate-spin" />
+              </div>
+            )}
+
+            {/* Error State */}
+            {videoError && isVideoVisible && (
+              <div className="absolute inset-0 flex items-center justify-center bg-black/80 z-20">
+                <div className="text-center text-white px-4">
+                  <p className="text-sm mb-2">Video yüklenirken bir hata oluştu</p>
+                  <button
+                    onClick={() => {
+                      setVideoError(false);
+                      if (videoRef.current) {
+                        videoRef.current.load();
+                      }
+                    }}
+                    className="px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg text-sm transition-colors"
+                  >
+                    Tekrar Dene
+                  </button>
+                </div>
+              </div>
+            )}
+
             {/* Play/Pause Overlay */}
             <button
               onClick={() => {
-                if (videoRef.current) {
+                if (videoRef.current && !videoError) {
                   if (isVideoPlaying) {
                     videoRef.current.pause();
                   } else {
-                    videoRef.current.play();
+                    setIsVideoLoading(true);
+                    videoRef.current.play().catch(() => {
+                      setIsVideoLoading(false);
+                    });
                   }
                 }
               }}
               className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-colors z-10"
               aria-label={isVideoPlaying ? "Duraklat" : "Oynat"}
+              disabled={videoError}
             >
-              {!isVideoPlaying && (
+              {!isVideoPlaying && !isVideoLoading && !videoError && (
                 <div className="w-16 h-16 rounded-full bg-white/80 flex items-center justify-center">
                   <svg
                     className="w-8 h-8 text-black ml-1"
