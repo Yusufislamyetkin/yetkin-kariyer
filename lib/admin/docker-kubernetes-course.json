@@ -1,7 +1,7 @@
 {
   "overview": {
     "description": "Docker ve Kubernetes, modern yazılım geliştirme ve deployment süreçlerinin temel taşlarıdır. Bu kapsamlı kurs ile containerization'dan orchestration'a kadar tüm konuları öğreneceksiniz. Production-ready uygulamaları containerize etme, Kubernetes cluster'ları yönetme ve modern DevOps pratiklerini uygulama becerileri kazanacaksınız.",
-    "estimatedDurationMinutes": 6750
+    "estimatedDurationMinutes": 788
   },
   "learningObjectives": [
     "Docker containerization teknolojisini anlamak ve uygulamak",

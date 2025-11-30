@@ -31,7 +31,7 @@ export async function createSpringBootCourse(): Promise<CourseContent> {
     overview: {
       description:
         "Spring Boot, Java ekosisteminde en popüler framework'lerden biridir. Spring Boot ile hızlı, üretime hazır ve production-ready Java uygulamaları geliştirebilirsiniz. Bu kapsamlı kurs ile Spring Boot'un temellerinden ileri seviye konularına kadar her şeyi öğreneceksiniz. RESTful API'ler, mikroservisler, veritabanı entegrasyonu ve güvenlik konularında uzmanlaşacaksınız.",
-      estimatedDurationMinutes: 6750, // 15 modül × 15 ders × 30 dakika
+      estimatedDurationMinutes: 788, // 15 modül × 15 ders × 3.5 dakika (ortalama)
     },
     learningObjectives: [
       "Spring Boot framework'ünün temel kavramlarını ve mimarisini anlamak",

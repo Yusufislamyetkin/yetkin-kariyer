@@ -31,7 +31,7 @@ export async function createAzureCourse(): Promise<CourseContent> {
     overview: {
       description:
         "Microsoft Azure, dünyanın önde gelen bulut platformlarından biridir. Bu kapsamlı kurs ile Azure'un temellerinden ileri seviye konularına kadar her şeyi öğreneceksiniz. Bulut altyapısı, compute, storage, database, networking, güvenlik ve DevOps konularında uzmanlaşacaksınız.",
-      estimatedDurationMinutes: 6750, // 15 modül × 15 ders × 30 dakika
+      estimatedDurationMinutes: 788, // 15 modül × 15 ders × 3.5 dakika (ortalama)
     },
     learningObjectives: [
       "Azure'un temel kavramlarını ve mimarisini anlamak",

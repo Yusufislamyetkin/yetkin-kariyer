@@ -31,7 +31,7 @@ export async function createPostgreSQLCourse(): Promise<CourseContent> {
     overview: {
       description:
         "PostgreSQL, güçlü ve açık kaynaklı bir ilişkisel veritabanı yönetim sistemidir. Bu kapsamlı kurs ile PostgreSQL'in temellerinden ileri seviye konularına kadar her şeyi öğreneceksiniz. Veritabanı tasarımı, SQL sorguları, performans optimizasyonu ve güvenlik konularında uzmanlaşacaksınız.",
-      estimatedDurationMinutes: 6750, // 15 modül × 15 ders × 30 dakika
+      estimatedDurationMinutes: 788, // 15 modül × 15 ders × 3.5 dakika (ortalama)
     },
     learningObjectives: [
       "PostgreSQL'in temel kavramlarını ve mimarisini anlamak",

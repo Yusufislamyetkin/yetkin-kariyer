@@ -31,7 +31,7 @@ export async function createPythonCourse(): Promise<CourseContent> {
     overview: {
       description:
         "Python, modern yazılım geliştirmede en popüler programlama dillerinden biridir. Bu kapsamlı kurs ile Python'un temellerinden ileri seviye konularına kadar her şeyi öğreneceksiniz. Web geliştirme, veri bilimi, API geliştirme ve daha fazlası için Python becerileri kazanacaksınız.",
-      estimatedDurationMinutes: 6750, // 15 modül × 15 ders × 30 dakika
+      estimatedDurationMinutes: 788, // 15 modül × 15 ders × 3.5 dakika (ortalama)
     },
     learningObjectives: [
       "Python programlama dilinin temel syntax'ını ve kavramlarını öğrenmek",

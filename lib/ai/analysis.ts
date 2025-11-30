@@ -12,15 +12,15 @@ const focusAreaSchema = z.object({
 });
 
 const quizAnalysisSchema = z.object({
-  summary: z.string().min(20),
+  summary: z.string().min(10),
   strengths: z.array(z.string()).default([]),
   weaknesses: z.array(z.string()).default([]),
   recommendations: z.array(z.string()).default([]),
   focusAreas: z.array(focusAreaSchema).default([]),
   nextSteps: z.array(z.string()).default([]),
   score: z.coerce.number().min(0).max(100),
-  feedback: z.string().min(1),
-  detailedReport: z.string().optional(),
+  feedback: z.string().default(""),
+  detailedReport: z.string().default(""),
 });
 
 const buildQuizAnalysisPrompt = (context: {
@@ -76,62 +76,30 @@ const buildQuizAnalysisPrompt = (context: {
     .join("\n");
 
   return `
-Bir quiz analizi yap ve JSON formatında sonuç döndür.
+Bir quiz analizi yap ve JSON formatında sonuç döndür. Analiz çok kısa ve net olmalı - sadece 2-3 cümlelik özet yeterli.
 
 Quiz: ${quizTitle}
-Kurs: ${courseTitle ?? "Bilinmiyor"}
-Ana konu: ${quizTopic ?? "Belirtilmedi"}
-Seviye: ${quizLevel ?? "Belirtilmedi"}
-Süre: ${
-    durationSeconds ? `${Math.floor(durationSeconds / 60)} dk ${durationSeconds % 60} sn` : "Bilgi yok"
-  }
 Skor: ${score}%
 Genel doğruluk: %${accuracy}
-Soru başına ortalama süre: ${
-    averageTimePerQuestionSeconds !== null && averageTimePerQuestionSeconds !== undefined
-      ? `${Math.floor(averageTimePerQuestionSeconds / 60)} dk ${String(
-          averageTimePerQuestionSeconds % 60
-        ).padStart(2, "0")} sn`
-      : "Hesaplanamadı"
-  }
+Doğru: ${correctCount}/${totalQuestions}
+Yanlış: ${wrongCount}/${totalQuestions}
+${hardestTopicsText !== "Belirgin bir zayıf konu yok" ? `En çok zorlanılan konu: ${hardestTopicsText.split(";")[0]?.split("(")[0]?.trim() || hardestTopicsText}` : ""}
+${standoutTopicsText !== "Öne çıkan güçlü konu bulunmuyor" ? `En güçlü konu: ${standoutTopicsText.split(";")[0]?.split("(")[0]?.trim() || standoutTopicsText}` : ""}
 
-Soru istatistikleri:
-- Doğru cevaplanan sorular: ${correctCount}/${totalQuestions}
-- Yanlış cevaplanan sorular: ${wrongCount}/${totalQuestions}
-- Konu dağılımı:
-${formattedTopicBreakdown || "- Veri yok"}
-
-Doğru cevaplanan konular: ${correctTopicList || "Yok"}
-Yanlış cevaplanan konular: ${wrongTopicList || "Yok"}
-Öne çıkan güçlü konular: ${standoutTopicsText}
-En çok zorlanılan konular: ${hardestTopicsText}
-
-Detaylı yanlış soru listesi:
-${wrongQuestionDetails || "Kritik yanlış soru bulunamadı."}
-
-Aşağıdaki JSON formatında yanıt ver:
+Aşağıdaki JSON formatında yanıt ver. Tüm alanları doldur ama çok kısa tut:
 {
-  "summary": "Kullanıcının test performansını 3-4 cümlede anlatan rapor",
-  "strengths": ["güçlü yön 1", "güçlü yön 2"],
-  "weaknesses": ["zayıf yön 1", "zayıf yön 2"],
-  "recommendations": ["öneri 1", "öneri 2"],
-  "focusAreas": [
-    {
-      "topic": "Zorlanılan konu adı",
-      "accuracy": 58,
-      "impact": "critical | major | moderate | minor",
-      "description": "Neden zorlanıldı, hangi soru tipleri problemli",
-      "actions": ["Uygulanabilir aksiyon 1", "Uygulanabilir aksiyon 2"]
-    }
-  ],
-  "nextSteps": [
-    "1-2 haftalık somut gelişim adımları",
-    "Önceliklendirilmiş çalışma planı"
-  ],
+  "summary": "2-3 cümlelik kısa ve net performans özeti. Skor, güçlü/zayıf yönler ve bir öneri içermeli.",
+  "strengths": [],
+  "weaknesses": [],
+  "recommendations": [],
+  "focusAreas": [],
+  "nextSteps": [],
   "score": ${score},
-  "feedback": "Genel geri bildirim metni",
-  "detailedReport": "Motivasyonu da gözeten uzun paragraflık değerlendirme"
+  "feedback": "",
+  "detailedReport": ""
 }
+
+ÖNEMLİ: Sadece "summary" alanını doldur, diğer tüm alanları boş array veya boş string olarak bırak. Summary maksimum 2-3 cümle olsun, çok kısa ve net.
 
 Sadece JSON döndür, başka açıklama yapma.
 `;

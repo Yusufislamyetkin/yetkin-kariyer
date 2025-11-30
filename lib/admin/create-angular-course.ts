@@ -31,7 +31,7 @@ export async function createAngularCourse(): Promise<CourseContent> {
     overview: {
       description:
         "Angular, Google tarafından geliştirilen modern bir frontend framework'üdür. Bu kapsamlı kurs ile Angular'un temellerinden ileri seviye konularına kadar her şeyi öğreneceksiniz. TypeScript, Components, Services, Routing, RxJS ve daha fazlası ile modern web uygulamaları geliştirme becerileri kazanacaksınız.",
-      estimatedDurationMinutes: 6750, // 15 modül × 15 ders × 30 dakika
+      estimatedDurationMinutes: 788, // 15 modül × 15 ders × 3.5 dakika (ortalama)
     },
     learningObjectives: [
       "Angular framework'ünün temel kavramlarını ve mimarisini anlamak",

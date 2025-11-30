@@ -1,7 +1,7 @@
 {
   "overview": {
     "description": "Next.js, React tabanlı modern web uygulamaları geliştirmek için güçlü bir framework'tür. Bu kapsamlı kurs ile Next.js'in temellerinden ileri seviye konularına kadar her şeyi öğreneceksiniz. Server-Side Rendering, Static Site Generation, API Routes ve daha fazlasını kullanarak production-ready uygulamalar geliştirme becerileri kazanacaksınız.",
-    "estimatedDurationMinutes": 6750
+    "estimatedDurationMinutes": 788
   },
   "learningObjectives": [
     "Next.js framework'ünün temel kavramlarını ve mimarisini anlamak",

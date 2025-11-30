@@ -31,7 +31,7 @@ export async function createKotlinCourse(): Promise<CourseContent> {
     overview: {
       description:
         "Kotlin, JetBrains tarafından geliştirilen modern, güvenli ve Java ile tam uyumlu bir programlama dilidir. Android geliştirmenin resmi dili olan Kotlin ile Android uygulamaları, backend servisleri ve multiplatform projeler geliştirebilirsiniz. Bu kapsamlı kurs ile Kotlin'in temellerinden ileri seviye konularına kadar her şeyi öğreneceksiniz.",
-      estimatedDurationMinutes: 6750, // 15 modül × 15 ders × 30 dakika
+      estimatedDurationMinutes: 788, // 15 modül × 15 ders × 3.5 dakika (ortalama)
     },
     learningObjectives: [
       "Kotlin programlama dilinin temel kavramlarını ve syntax'ını anlamak",

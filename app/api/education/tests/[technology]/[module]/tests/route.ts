@@ -89,15 +89,15 @@ export async function GET(
       for (const testItem of moduleItem.relatedTests) {
         if (!testItem.id || !testItem.title) continue;
 
-        // Modülün durationMinutes'ını timeLimitMinutes olarak kullan
-        const timeLimitMinutes = moduleItem.durationMinutes || null;
+        // Tüm testler için sabit 10 dakika süre
+        const timeLimitMinutes = 10;
 
         const testData: Test = {
           id: testItem.id,
           title: testItem.title,
           description: testItem.description || null,
           level: "intermediate", // Varsayılan seviye, JSON'da yoksa
-          questionCount: 0, // JSON'da soru sayısı yok, boş array olarak işaretle
+          questionCount: 10, // Tüm testler için sabit 10 soru
           timeLimitMinutes,
           href: testItem.href || null, // JSON'daki href'i ekle
           hasAttempted: false,

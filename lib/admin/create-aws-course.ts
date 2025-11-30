@@ -31,7 +31,7 @@ export async function createAWSCourse(): Promise<CourseContent> {
     overview: {
       description:
         "Amazon Web Services (AWS), dünyanın en kapsamlı ve yaygın olarak kullanılan bulut platformudur. Bu kapsamlı kurs ile AWS'in temellerinden ileri seviye konularına kadar her şeyi öğreneceksiniz. Bulut altyapısı, compute, storage, database, networking ve güvenlik konularında uzmanlaşacaksınız.",
-      estimatedDurationMinutes: 6750, // 15 modül × 15 ders × 30 dakika
+      estimatedDurationMinutes: 788, // 15 modül × 15 ders × 3.5 dakika (ortalama)
     },
     learningObjectives: [
       "AWS'in temel kavramlarını ve mimarisini anlamak",

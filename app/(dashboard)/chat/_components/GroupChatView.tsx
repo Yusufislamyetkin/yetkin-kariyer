@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { formatDistance } from "date-fns";
 import { tr } from "date-fns/locale";
@@ -162,6 +162,7 @@ export function GroupChatView({ category }: GroupChatViewProps) {
   const copy = CATEGORY_COPY[category];
   const { data: session } = useSession();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { refresh: refreshChatSummary } = useChatSummary();
   const refreshTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -238,6 +239,21 @@ export function GroupChatView({ category }: GroupChatViewProps) {
       return new Date(bDate).getTime() - new Date(aDate).getTime();
     });
   }, [groups]);
+
+  // Read group ID from URL query params on mount and when searchParams change
+  useEffect(() => {
+    const groupId = searchParams.get("group");
+    if (groupId && groupId !== selectedGroupId) {
+      // Only set if group exists in groups list
+      const groupExists = groups.some((group) => group.id === groupId);
+      if (groupExists) {
+        setSelectedGroupId(groupId);
+      }
+    } else if (!groupId && selectedGroupId) {
+      // Clear selection if group param is removed
+      setSelectedGroupId(null);
+    }
+  }, [searchParams, groups, selectedGroupId]);
 
   const selectedGroup = selectedGroupId ? groups.find((group) => group.id === selectedGroupId) ?? null : null;
   const isJoinedToSelectedGroup = Boolean(selectedGroup?.membership);
@@ -633,12 +649,14 @@ export function GroupChatView({ category }: GroupChatViewProps) {
         setJoinInviteCode("");
         setJoinInviteError(null);
         setShowSidebar(false);
+        router.replace(`/chat/groups?group=${groupId}`);
         return;
       }
       setSelectedGroupId(groupId);
       setShowSidebar(false);
+      router.replace(`/chat/groups?group=${groupId}`);
     },
-    [groups]
+    [groups, router]
   );
 
   const handleJoinGroup = useCallback(
@@ -1478,27 +1496,46 @@ export function GroupChatView({ category }: GroupChatViewProps) {
       setPresenceState({ ...revalidated });
     };
 
-    const postPresence = async (status: "online" | "offline", { useBeacon = false } = {}) => {
+    const postPresence = async (status: "online" | "offline", { useBeacon = false } = {}, retryCount: number = 0) => {
       if (!active) return;
       updateLocalPresence(status);
 
+      const MAX_RETRIES = 2;
       const payload = JSON.stringify({ status });
+      
       if (useBeacon && typeof navigator !== "undefined" && "sendBeacon" in navigator) {
         const blob = new Blob([payload], { type: "application/json" });
-        navigator.sendBeacon(`/api/chat/groups/${selectedGroupId}/presence`, blob);
+        const sent = navigator.sendBeacon(`/api/chat/groups/${selectedGroupId}/presence`, blob);
+        if (!sent && retryCount < MAX_RETRIES) {
+          // If sendBeacon failed, retry with fetch
+          return postPresence(status, { useBeacon: false }, retryCount + 1);
+        }
         return;
       }
 
       try {
-        await fetch(`/api/chat/groups/${selectedGroupId}/presence`, {
+        const response = await fetch(`/api/chat/groups/${selectedGroupId}/presence`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: payload,
         });
+        if (!response.ok) {
+          // Only retry on server errors (5xx), not client errors (4xx)
+          if (response.status >= 500 && retryCount < MAX_RETRIES) {
+            await new Promise(resolve => setTimeout(resolve, 1000 * (retryCount + 1)));
+            return postPresence(status, { useBeacon }, retryCount + 1);
+          }
+          console.warn(`[GroupChatView] Presence update returned ${response.status}, will retry on next activity`);
+        }
       } catch (err) {
-        console.error("Presence update failed", err);
+        // Only retry on network errors
+        if (retryCount < MAX_RETRIES && err instanceof TypeError && err.message.includes("fetch")) {
+          await new Promise(resolve => setTimeout(resolve, 1000 * (retryCount + 1)));
+          return postPresence(status, { useBeacon }, retryCount + 1);
+        }
+        console.error("[GroupChatView] Presence update failed", err);
       }
     };
 
@@ -1540,16 +1577,18 @@ export function GroupChatView({ category }: GroupChatViewProps) {
     const handleUserActivity = () => {
       if (!active || document.visibilityState !== "visible") return;
       
-      // Debounce presence updates to avoid excessive API calls (max once per 5 seconds)
+      // Debounce presence updates to avoid excessive API calls (max once per 2.5 seconds)
       if (activityDebounceTimer) {
         clearTimeout(activityDebounceTimer);
       }
       
       activityDebounceTimer = setTimeout(() => {
         if (active && document.visibilityState === "visible") {
-          postPresence("online");
+          postPresence("online").catch((error) => {
+            console.warn("[GroupChatView] Presence update failed, will retry on next activity:", error);
+          });
         }
-      }, 5000); // Update presence at most once every 5 seconds
+      }, 2500); // Update presence at most once every 2.5 seconds
     };
 
     // Add event listeners for user activity

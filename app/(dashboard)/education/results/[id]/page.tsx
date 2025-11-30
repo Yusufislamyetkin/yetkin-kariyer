@@ -796,170 +796,165 @@ export default function QuizResultsPage() {
                 <div className="rounded-2xl border border-blue-200/80 bg-blue-50/70 p-6 dark:border-blue-900/40 dark:bg-blue-950/20">
                   <h4 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-blue-700 dark:text-blue-300">
                     <Sparkles className="h-4 w-4" />
-                    Genel Özet
+                    AI Analizi
                   </h4>
-                  <p className="mt-3 text-sm leading-6 text-slate-700 dark:text-slate-200">
+                  <p className="mt-3 text-base leading-7 text-slate-700 dark:text-slate-200">
                     {summaryText}
                   </p>
                 </div>
               )}
 
-              <div className="grid gap-4 md:grid-cols-2">
-                <div className="rounded-2xl border border-emerald-200/70 bg-emerald-50/80 p-5 dark:border-emerald-900/40 dark:bg-emerald-900/20">
-                  <h4 className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-emerald-700 dark:text-emerald-300">
-                    <CheckCircle className="h-4 w-4" />
-                    Güçlü Yönler
-                  </h4>
-                  {strengthsList.length > 0 ? (
-                    <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-200">
-                      {strengthsList.map((item, index) => (
-                        <li key={`strength-${index}`} className="flex items-start gap-2">
-                          <span className="mt-1 h-2.5 w-2.5 flex-shrink-0 rounded-full bg-emerald-400" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p className="text-sm text-slate-500 dark:text-slate-400">
-                      Güçlü yön bilgisi bulunamadı.
-                    </p>
+              {/* Diğer bölümler sadece veri varsa gösterilir, ancak kısa analiz için genellikle boş olacak */}
+              {(strengthsList.length > 0 || weaknessesList.length > 0 || recommendationsList.length > 0 || nextStepsList.length > 0 || focusAreasList.length > 0 || hasDistinctFeedback || analysis.detailedReport) && (
+                <>
+                  {strengthsList.length > 0 && (
+                    <div className="rounded-2xl border border-emerald-200/70 bg-emerald-50/80 p-5 dark:border-emerald-900/40 dark:bg-emerald-900/20">
+                      <h4 className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-emerald-700 dark:text-emerald-300">
+                        <CheckCircle className="h-4 w-4" />
+                        Güçlü Yönler
+                      </h4>
+                      <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-200">
+                        {strengthsList.map((item, index) => (
+                          <li key={`strength-${index}`} className="flex items-start gap-2">
+                            <span className="mt-1 h-2.5 w-2.5 flex-shrink-0 rounded-full bg-emerald-400" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   )}
-                </div>
 
-                <div className="rounded-2xl border border-amber-200/70 bg-amber-50/80 p-5 dark:border-amber-900/40 dark:bg-amber-900/20">
-                  <h4 className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-300">
-                    <AlertTriangle className="h-4 w-4" />
-                    Gelişim Alanları
-                  </h4>
-                  {weaknessesList.length > 0 ? (
-                    <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-200">
-                      {weaknessesList.map((item, index) => (
-                        <li key={`weakness-${index}`} className="flex items-start gap-2">
-                          <span className="mt-1 h-2.5 w-2.5 flex-shrink-0 rounded-full bg-amber-400" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p className="text-sm text-slate-500 dark:text-slate-400">
-                      Geliştirilmesi gereken alan bilgisi bulunamadı.
-                    </p>
+                  {weaknessesList.length > 0 && (
+                    <div className="rounded-2xl border border-amber-200/70 bg-amber-50/80 p-5 dark:border-amber-900/40 dark:bg-amber-900/20">
+                      <h4 className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-300">
+                        <AlertTriangle className="h-4 w-4" />
+                        Gelişim Alanları
+                      </h4>
+                      <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-200">
+                        {weaknessesList.map((item, index) => (
+                          <li key={`weakness-${index}`} className="flex items-start gap-2">
+                            <span className="mt-1 h-2.5 w-2.5 flex-shrink-0 rounded-full bg-amber-400" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   )}
-                </div>
-              </div>
 
-              {focusAreasList.length > 0 && (
-                <div className="space-y-3">
-                  <h4 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-200">
-                    <Target className="h-4 w-4" />
-                    Öncelikli Gelişim Alanları
-                  </h4>
-                  <div className="grid gap-4 md:grid-cols-2">
-                    {focusAreasList.map((area, index) => {
-                      const impact = (area.impact ?? "moderate") as keyof typeof focusImpactStyles;
-                      return (
-                        <div
-                          key={`focus-area-${index}`}
-                          className="rounded-2xl border border-slate-200/70 bg-white/90 p-5 shadow-sm backdrop-blur-sm dark:border-slate-800/40 dark:bg-slate-900/40"
-                        >
-                          <div className="flex flex-wrap items-center justify-between gap-2">
-                            <p className="text-lg font-semibold text-slate-800 dark:text-slate-100">
-                              {area.topic}
-                            </p>
-                            <span
-                              className={`rounded-full px-3 py-1 text-xs font-semibold ${focusImpactStyles[impact]}`}
+                  {focusAreasList.length > 0 && (
+                    <div className="space-y-3">
+                      <h4 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-200">
+                        <Target className="h-4 w-4" />
+                        Öncelikli Gelişim Alanları
+                      </h4>
+                      <div className="grid gap-4 md:grid-cols-2">
+                        {focusAreasList.map((area, index) => {
+                          const impact = (area.impact ?? "moderate") as keyof typeof focusImpactStyles;
+                          return (
+                            <div
+                              key={`focus-area-${index}`}
+                              className="rounded-2xl border border-slate-200/70 bg-white/90 p-5 shadow-sm backdrop-blur-sm dark:border-slate-800/40 dark:bg-slate-900/40"
                             >
-                              {focusImpactLabel[impact]}
-                            </span>
-                          </div>
-                          <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">
-                            {area.description}
-                          </p>
-                          <div className="mt-4 flex flex-wrap gap-2 text-xs text-slate-500 dark:text-slate-400">
-                            <span className="rounded-full bg-slate-200/60 px-3 py-1 dark:bg-slate-800/60">
-                              Doğruluk %{area.accuracy}
-                            </span>
-                            {weakestTopic && weakestTopic.topic === area.topic && (
-                              <span className="rounded-full bg-rose-500/15 px-3 py-1 text-rose-600 dark:bg-rose-500/20 dark:text-rose-200">
-                                Sınavdaki en düşük performans
-                              </span>
-                            )}
-                          </div>
-                          {area.actions?.length > 0 && (
-                            <ul className="mt-4 space-y-2 text-sm text-slate-700 dark:text-slate-200">
-                              {area.actions.map((action, actionIndex) => (
-                                <li
-                                  key={`focus-area-${index}-action-${actionIndex}`}
-                                  className="flex items-start gap-2"
+                              <div className="flex flex-wrap items-center justify-between gap-2">
+                                <p className="text-lg font-semibold text-slate-800 dark:text-slate-100">
+                                  {area.topic}
+                                </p>
+                                <span
+                                  className={`rounded-full px-3 py-1 text-xs font-semibold ${focusImpactStyles[impact]}`}
                                 >
-                                  <span className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-indigo-400 dark:bg-indigo-300" />
-                                  <span>{action}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
+                                  {focusImpactLabel[impact]}
+                                </span>
+                              </div>
+                              <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">
+                                {area.description}
+                              </p>
+                              <div className="mt-4 flex flex-wrap gap-2 text-xs text-slate-500 dark:text-slate-400">
+                                <span className="rounded-full bg-slate-200/60 px-3 py-1 dark:bg-slate-800/60">
+                                  Doğruluk %{area.accuracy}
+                                </span>
+                                {weakestTopic && weakestTopic.topic === area.topic && (
+                                  <span className="rounded-full bg-rose-500/15 px-3 py-1 text-rose-600 dark:bg-rose-500/20 dark:text-rose-200">
+                                    Sınavdaki en düşük performans
+                                  </span>
+                                )}
+                              </div>
+                              {area.actions?.length > 0 && (
+                                <ul className="mt-4 space-y-2 text-sm text-slate-700 dark:text-slate-200">
+                                  {area.actions.map((action, actionIndex) => (
+                                    <li
+                                      key={`focus-area-${index}-action-${actionIndex}`}
+                                      className="flex items-start gap-2"
+                                    >
+                                      <span className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-indigo-400 dark:bg-indigo-300" />
+                                      <span>{action}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
 
-              {recommendationsList.length > 0 && (
-                <div className="rounded-2xl border border-indigo-200/70 bg-indigo-50/80 p-5 dark:border-indigo-900/40 dark:bg-indigo-950/20">
-                  <h4 className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-indigo-700 dark:text-indigo-300">
-                    <Brain className="h-4 w-4" />
-                    Uzman Önerileri
-                  </h4>
-                  <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-200">
-                    {recommendationsList.map((item, index) => (
-                      <li key={`recommendation-${index}`} className="flex items-start gap-2">
-                        <span className="mt-1 h-2.5 w-2.5 flex-shrink-0 rounded-full bg-indigo-400" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+                  {recommendationsList.length > 0 && (
+                    <div className="rounded-2xl border border-indigo-200/70 bg-indigo-50/80 p-5 dark:border-indigo-900/40 dark:bg-indigo-950/20">
+                      <h4 className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-indigo-700 dark:text-indigo-300">
+                        <Brain className="h-4 w-4" />
+                        Uzman Önerileri
+                      </h4>
+                      <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-200">
+                        {recommendationsList.map((item, index) => (
+                          <li key={`recommendation-${index}`} className="flex items-start gap-2">
+                            <span className="mt-1 h-2.5 w-2.5 flex-shrink-0 rounded-full bg-indigo-400" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
 
-              {nextStepsList.length > 0 && (
-                <div className="rounded-2xl border border-teal-200/70 bg-teal-50/80 p-5 dark:border-teal-900/40 dark:bg-teal-950/20">
-                  <h4 className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-teal-700 dark:text-teal-300">
-                    <Target className="h-4 w-4" />
-                    Sonraki Günler İçin Aksiyon Planı
-                  </h4>
-                  <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-200">
-                    {nextStepsList.map((step, index) => (
-                      <li key={`next-step-${index}`} className="flex items-start gap-2">
-                        <span className="mt-1 h-2.5 w-2.5 flex-shrink-0 rounded-full bg-teal-400" />
-                        <span>{step}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+                  {nextStepsList.length > 0 && (
+                    <div className="rounded-2xl border border-teal-200/70 bg-teal-50/80 p-5 dark:border-teal-900/40 dark:bg-teal-950/20">
+                      <h4 className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-teal-700 dark:text-teal-300">
+                        <Target className="h-4 w-4" />
+                        Sonraki Günler İçin Aksiyon Planı
+                      </h4>
+                      <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-200">
+                        {nextStepsList.map((step, index) => (
+                          <li key={`next-step-${index}`} className="flex items-start gap-2">
+                            <span className="mt-1 h-2.5 w-2.5 flex-shrink-0 rounded-full bg-teal-400" />
+                            <span>{step}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
 
-              {hasDistinctFeedback && (
-                <div className="rounded-2xl border border-purple-200/70 bg-purple-50/80 p-5 dark:border-purple-900/40 dark:bg-purple-900/20">
-                  <h4 className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-purple-700 dark:text-purple-300">
-                    Genel Geri Bildirim
-                  </h4>
-                  <p className="text-sm leading-6 text-slate-700 dark:text-slate-200">
-                    {analysis.feedback}
-                  </p>
-                </div>
-              )}
+                  {hasDistinctFeedback && (
+                    <div className="rounded-2xl border border-purple-200/70 bg-purple-50/80 p-5 dark:border-purple-900/40 dark:bg-purple-900/20">
+                      <h4 className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-purple-700 dark:text-purple-300">
+                        Genel Geri Bildirim
+                      </h4>
+                      <p className="text-sm leading-6 text-slate-700 dark:text-slate-200">
+                        {analysis.feedback}
+                      </p>
+                    </div>
+                  )}
 
-              {analysis.detailedReport && (
-                <div className="rounded-2xl border border-slate-200/70 bg-white/90 p-5 shadow-sm backdrop-blur-sm dark:border-slate-800/40 dark:bg-slate-900/40">
-                  <h4 className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-200">
-                    <Brain className="h-4 w-4" />
-                    Detaylı Rapor
-                  </h4>
-                  <p className="text-sm leading-6 text-slate-700 dark:text-slate-200">
-                    {analysis.detailedReport}
-                  </p>
-                </div>
+                  {analysis.detailedReport && (
+                    <div className="rounded-2xl border border-slate-200/70 bg-white/90 p-5 shadow-sm backdrop-blur-sm dark:border-slate-800/40 dark:bg-slate-900/40">
+                      <h4 className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-slate-700 dark:text-slate-200">
+                        <Brain className="h-4 w-4" />
+                        Detaylı Rapor
+                      </h4>
+                      <p className="text-sm leading-6 text-slate-700 dark:text-slate-200">
+                        {analysis.detailedReport}
+                      </p>
+                    </div>
+                  )}
+                </>
               )}
             </div>
           )}

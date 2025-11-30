@@ -157,6 +157,21 @@ export default function DirectChatPage() {
     return () => clearInterval(interval);
   }, []);
 
+  // Read thread ID from URL query params on mount and when searchParams change
+  useEffect(() => {
+    const threadId = searchParams.get("thread");
+    if (threadId && threadId !== selectedThreadId) {
+      // Only set if thread exists in threads list
+      const threadExists = threads.some((thread) => thread.id === threadId);
+      if (threadExists) {
+        setSelectedThreadId(threadId);
+      }
+    } else if (!threadId && selectedThreadId) {
+      // Clear selection if thread param is removed
+      setSelectedThreadId(null);
+    }
+  }, [searchParams, threads, selectedThreadId]);
+
   const selectedThread = useMemo(() => {
     if (!selectedThreadId) return null;
     return threads.find((thread) => thread.id === selectedThreadId) ?? null;
@@ -1131,27 +1146,46 @@ export default function DirectChatPage() {
       setPresenceState({ ...presenceStateRef.current });
     };
 
-    const postPresence = async (status: "online" | "offline", { useBeacon = false } = {}) => {
+    const postPresence = async (status: "online" | "offline", { useBeacon = false } = {}, retryCount: number = 0) => {
       if (!active) return;
       updateLocalPresence(status);
 
+      const MAX_RETRIES = 2;
       const payload = JSON.stringify({ status });
+      
       if (useBeacon && typeof navigator !== "undefined" && "sendBeacon" in navigator) {
         const blob = new Blob([payload], { type: "application/json" });
-        navigator.sendBeacon(`/api/chat/direct/${selectedThreadId}/presence`, blob);
+        const sent = navigator.sendBeacon(`/api/chat/direct/${selectedThreadId}/presence`, blob);
+        if (!sent && retryCount < MAX_RETRIES) {
+          // If sendBeacon failed, retry with fetch
+          return postPresence(status, { useBeacon: false }, retryCount + 1);
+        }
         return;
       }
 
       try {
-        await fetch(`/api/chat/direct/${selectedThreadId}/presence`, {
+        const response = await fetch(`/api/chat/direct/${selectedThreadId}/presence`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: payload,
         });
+        if (!response.ok) {
+          // Only retry on server errors (5xx), not client errors (4xx)
+          if (response.status >= 500 && retryCount < MAX_RETRIES) {
+            await new Promise(resolve => setTimeout(resolve, 1000 * (retryCount + 1)));
+            return postPresence(status, { useBeacon }, retryCount + 1);
+          }
+          console.warn(`[DirectChat] Presence update returned ${response.status}, will retry on next activity`);
+        }
       } catch (err) {
-        console.error("Presence update failed", err);
+        // Only retry on network errors
+        if (retryCount < MAX_RETRIES && err instanceof TypeError && err.message.includes("fetch")) {
+          await new Promise(resolve => setTimeout(resolve, 1000 * (retryCount + 1)));
+          return postPresence(status, { useBeacon }, retryCount + 1);
+        }
+        console.error("[DirectChat] Presence update failed", err);
       }
     };
 
@@ -1193,16 +1227,18 @@ export default function DirectChatPage() {
     const handleUserActivity = () => {
       if (!active || document.visibilityState !== "visible") return;
       
-      // Debounce presence updates to avoid excessive API calls (max once per 5 seconds)
+      // Debounce presence updates to avoid excessive API calls (max once per 2.5 seconds)
       if (activityDebounceTimer) {
         clearTimeout(activityDebounceTimer);
       }
       
       activityDebounceTimer = setTimeout(() => {
         if (active && document.visibilityState === "visible") {
-          postPresence("online");
+          postPresence("online").catch((error) => {
+            console.warn("[DirectChat] Presence update failed, will retry on next activity:", error);
+          });
         }
-      }, 5000); // Update presence at most once every 5 seconds
+      }, 2500); // Update presence at most once every 2.5 seconds
     };
 
     // Add event listeners for user activity

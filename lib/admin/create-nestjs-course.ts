@@ -31,7 +31,7 @@ export async function createNestJSCourse(): Promise<CourseContent> {
     overview: {
       description:
         "NestJS, TypeScript ile yazılmış, güçlü ve ölçeklenebilir Node.js backend framework'üdür. Angular'dan ilham alan mimarisi ile modern, modüler ve test edilebilir uygulamalar geliştirebilirsiniz. Bu kapsamlı kurs ile NestJS'in temellerinden ileri seviye konularına kadar her şeyi öğreneceksiniz. RESTful API'ler, GraphQL, mikroservisler, WebSocket ve güvenlik konularında uzmanlaşacaksınız.",
-      estimatedDurationMinutes: 6750, // 15 modül × 15 ders × 30 dakika
+      estimatedDurationMinutes: 788, // 15 modül × 15 ders × 3.5 dakika (ortalama)
     },
     learningObjectives: [
       "NestJS framework'ünün temel kavramlarını ve mimarisini anlamak",

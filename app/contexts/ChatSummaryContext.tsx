@@ -27,21 +27,45 @@ type ChatSummaryContextValue = {
 
 const ChatSummaryContext = createContext<ChatSummaryContextValue | undefined>(undefined);
 
-async function postPresence(endpoint: string, body: string, useBeacon: boolean) {
+async function postPresence(endpoint: string, body: string, useBeacon: boolean, retryCount: number = 0): Promise<void> {
+  const MAX_RETRIES = 2;
+  
   if (useBeacon && typeof navigator !== "undefined" && "sendBeacon" in navigator) {
     const blob = new Blob([body], { type: "application/json" });
-    navigator.sendBeacon(endpoint, blob);
+    const sent = navigator.sendBeacon(endpoint, blob);
+    if (!sent && retryCount < MAX_RETRIES) {
+      // If sendBeacon failed, retry with fetch
+      return postPresence(endpoint, body, false, retryCount + 1);
+    }
     return;
   }
 
-  await fetch(endpoint, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body,
-    keepalive: useBeacon,
-  });
+  try {
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body,
+      keepalive: useBeacon,
+    });
+    
+    if (!response.ok) {
+      // Only retry on server errors (5xx), not client errors (4xx)
+      if (response.status >= 500 && retryCount < MAX_RETRIES) {
+        await new Promise(resolve => setTimeout(resolve, 1000 * (retryCount + 1)));
+        return postPresence(endpoint, body, useBeacon, retryCount + 1);
+      }
+      throw new Error(`Presence update failed: ${response.status} ${response.statusText}`);
+    }
+  } catch (error) {
+    // Only retry on network errors, not on other errors
+    if (retryCount < MAX_RETRIES && error instanceof TypeError && error.message.includes("fetch")) {
+      await new Promise(resolve => setTimeout(resolve, 1000 * (retryCount + 1)));
+      return postPresence(endpoint, body, useBeacon, retryCount + 1);
+    }
+    throw error;
+  }
 }
 
 export function ChatSummaryProvider({ children }: { children: React.ReactNode }) {
@@ -75,7 +99,7 @@ export function ChatSummaryProvider({ children }: { children: React.ReactNode })
         try {
           await postPresence(`/api/chat/direct/${channelId}/presence`, payload, useBeacon);
         } catch (error) {
-          console.error("[CHAT_SUMMARY_PRESENCE_DIRECT]", error);
+          console.warn("[CHAT_SUMMARY_PRESENCE_DIRECT] Failed for channel", channelId, error);
         }
       }
 
@@ -85,7 +109,7 @@ export function ChatSummaryProvider({ children }: { children: React.ReactNode })
         try {
           await postPresence(`/api/chat/groups/${groupId}/presence`, payload, useBeacon);
         } catch (error) {
-          console.error("[CHAT_SUMMARY_PRESENCE_GROUP]", error);
+          console.warn("[CHAT_SUMMARY_PRESENCE_GROUP] Failed for group", groupId, error);
         }
       }
     },
@@ -413,16 +437,18 @@ export function ChatSummaryProvider({ children }: { children: React.ReactNode })
     const handleUserActivity = () => {
       if (document.visibilityState !== "visible") return;
       
-      // Debounce presence updates to avoid excessive API calls (max once per 5 seconds)
+      // Debounce presence updates to avoid excessive API calls (max once per 2.5 seconds)
       if (activityDebounceTimer) {
         clearTimeout(activityDebounceTimer);
       }
       
       activityDebounceTimer = setTimeout(() => {
         if (document.visibilityState === "visible") {
-          sendPresence("online").catch(() => {});
+          sendPresence("online").catch((error) => {
+            console.warn("[ChatSummaryContext] Presence update failed, will retry on next activity:", error);
+          });
         }
-      }, 5000); // Update presence at most once every 5 seconds
+      }, 2500); // Update presence at most once every 2.5 seconds
     };
 
     // Add event listeners for user activity

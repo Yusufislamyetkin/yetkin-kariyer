@@ -31,7 +31,7 @@ export async function createGoCourse(): Promise<CourseContent> {
     overview: {
       description:
         "Go (Golang), Google tarafından geliştirilen açık kaynaklı bir programlama dilidir. Bu kapsamlı kurs ile Go'nun temellerinden ileri seviye konularına kadar her şeyi öğreneceksiniz. Yüksek performanslı, eşzamanlı programlama ve mikroservis mimarileri geliştirme becerileri kazanacaksınız.",
-      estimatedDurationMinutes: 6750, // 15 modül × 15 ders × 30 dakika
+      estimatedDurationMinutes: 788, // 15 modül × 15 ders × 3.5 dakika (ortalama)
     },
     learningObjectives: [
       "Go programlama dilinin temel kavramlarını ve syntax'ını anlamak",

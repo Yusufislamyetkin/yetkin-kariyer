@@ -31,7 +31,7 @@ export async function createMongoDBCourse(): Promise<CourseContent> {
     overview: {
       description:
         "MongoDB, modern uygulamalar için tasarlanmış popüler bir NoSQL doküman veritabanıdır. Bu kapsamlı kurs ile MongoDB'nin temellerinden ileri seviye konularına kadar her şeyi öğreneceksiniz. Doküman modeli, sorgulama, indeksleme, aggregation pipeline, replication, sharding ve performans optimizasyonu konularında uzmanlaşacaksınız.",
-      estimatedDurationMinutes: 6750, // 15 modül × 15 ders × 30 dakika
+      estimatedDurationMinutes: 788, // 15 modül × 15 ders × 3.5 dakika (ortalama)
     },
     learningObjectives: [
       "MongoDB'nin temel kavramlarını ve NoSQL yaklaşımını anlamak",

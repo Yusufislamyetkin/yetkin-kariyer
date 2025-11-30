@@ -1,7 +1,7 @@
 {
   "overview": {
     "description": "Yazılımcılar için kapsamlı bir yapay zeka kursu. Makine öğrenmesi temellerinden derin öğrenmeye, NLP'den görüntü işlemeye kadar modern AI teknolojilerini öğreneceksiniz. Python, TensorFlow, PyTorch gibi araçlarla pratik projeler geliştirerek gerçek dünya uygulamaları oluşturacaksınız.",
-    "estimatedDurationMinutes": 6750
+    "estimatedDurationMinutes": 788
   },
   "learningObjectives": [
     "Yapay zeka ve makine öğrenmesi temel kavramlarını anlamak",
@@ -24,7 +24,7 @@
       "id": "module-01",
       "title": "Module 1: Yapay Zeka ve Makine Öğrenmesi Temelleri",
       "summary": "Yapay zeka, makine öğrenmesi ve derin öğrenme kavramlarına giriş. AI'ın tarihçesi, kullanım alanları ve temel terminoloji.",
-      "durationMinutes": 450,
+      "durationMinutes": 53,
       "objectives": [
         "Yapay zeka, makine öğrenmesi ve derin öğrenme arasındaki farkları anlamak",
         "AI'ın tarihsel gelişimini öğrenmek",
@@ -113,7 +113,7 @@
       "id": "module-02",
       "title": "Module 2: Python ile Veri İşleme",
       "summary": "Python programlama dili ile veri manipülasyonu, NumPy, Pandas kütüphaneleri ve veri görselleştirme teknikleri.",
-      "durationMinutes": 450,
+      "durationMinutes": 53,
       "objectives": [
         "Python ile veri işleme temellerini öğrenmek",
         "NumPy ile sayısal hesaplamalar yapmak",
@@ -202,7 +202,7 @@
       "id": "module-03",
       "title": "Module 3: Makine Öğrenmesi Algoritmaları",
       "summary": "Temel ML algoritmaları: linear regression, logistic regression, decision trees, random forest, SVM ve clustering algoritmaları.",
-      "durationMinutes": 450,
+      "durationMinutes": 53,
       "objectives": [
         "Supervised learning algoritmalarını öğrenmek",
         "Classification ve regression problemlerini çözmek",
@@ -291,7 +291,7 @@
       "id": "module-04",
       "title": "Module 4: Derin Öğrenme ve Neural Networks",
       "summary": "Neural network'lerin temelleri, perceptron, backpropagation, activation functions ve derin öğrenme mimarileri.",
-      "durationMinutes": 450,
+      "durationMinutes": 53,
       "objectives": [
         "Neural network'lerin nasıl çalıştığını anlamak",
         "Perceptron ve multi-layer perceptron yapısını öğrenmek",
@@ -380,7 +380,7 @@
       "id": "module-05",
       "title": "Module 5: Doğal Dil İşleme (NLP)",
       "summary": "NLP temelleri, metin ön işleme, tokenization, word embeddings, sentiment analysis ve metin sınıflandırma.",
-      "durationMinutes": 450,
+      "durationMinutes": 53,
       "objectives": [
         "NLP temel kavramlarını öğrenmek",
         "Metin ön işleme tekniklerini uygulamak",
@@ -469,7 +469,7 @@
       "id": "module-06",
       "title": "Module 6: Görüntü İşleme ve Computer Vision",
       "summary": "Computer vision temelleri, görüntü ön işleme, CNN'ler, object detection, image segmentation ve OpenCV kullanımı.",
-      "durationMinutes": 450,
+      "durationMinutes": 53,
       "objectives": [
         "Computer vision temel kavramlarını öğrenmek",
         "Görüntü ön işleme tekniklerini uygulamak",
@@ -558,7 +558,7 @@
       "id": "module-07",
       "title": "Module 7: TensorFlow ve Keras",
       "summary": "TensorFlow framework'ü, Keras API, model oluşturma, eğitim ve deployment. TensorFlow 2.x ile modern deep learning.",
-      "durationMinutes": 450,
+      "durationMinutes": 53,
       "objectives": [
         "TensorFlow ve Keras framework'lerini öğrenmek",
         "Model oluşturma ve eğitim yapmak",
@@ -647,7 +647,7 @@
       "id": "module-08",
       "title": "Module 8: PyTorch ile Derin Öğrenme",
       "summary": "PyTorch framework'ü, tensors, autograd, neural network modelleri, training loops ve PyTorch best practices.",
-      "durationMinutes": 450,
+      "durationMinutes": 53,
       "objectives": [
         "PyTorch framework'ünü öğrenmek",
         "Tensors ve autograd sistemini kavramak",
@@ -736,7 +736,7 @@
       "id": "module-09",
       "title": "Module 9: Veri Ön İşleme ve Feature Engineering",
       "summary": "Feature engineering teknikleri, feature selection, encoding, scaling, handling missing data ve feature importance analizi.",
-      "durationMinutes": 450,
+      "durationMinutes": 53,
       "objectives": [
         "Feature engineering tekniklerini öğrenmek",
         "Kategorik ve sayısal verileri işlemek",
@@ -825,7 +825,7 @@
       "id": "module-10",
       "title": "Module 10: Model Değerlendirme ve Optimizasyon",
       "summary": "Model performans metrikleri, cross-validation, hyperparameter tuning, model interpretability ve A/B testing.",
-      "durationMinutes": 450,
+      "durationMinutes": 53,
       "objectives": [
         "Model değerlendirme metriklerini anlamak",
         "Hyperparameter tuning tekniklerini uygulamak",
@@ -914,7 +914,7 @@
       "id": "module-11",
       "title": "Module 11: Production'da ML Modelleri",
       "summary": "ML model deployment, MLOps, model serving, containerization, API development, monitoring ve model versioning.",
-      "durationMinutes": 450,
+      "durationMinutes": 53,
       "objectives": [
         "ML modellerini production'a deploy etmek",
         "MLOps pipeline'ları kurmak",
@@ -1003,7 +1003,7 @@
       "id": "module-12",
       "title": "Module 12: AI Ethics ve Responsible AI",
       "summary": "AI etiği, bias ve fairness, privacy, explainability, AI güvenliği ve sorumlu AI geliştirme prensipleri.",
-      "durationMinutes": 450,
+      "durationMinutes": 53,
       "objectives": [
         "AI etik sorunlarını anlamak",
         "Bias ve fairness problemlerini çözmek",
@@ -1092,7 +1092,7 @@
       "id": "module-13",
       "title": "Module 13: Generative AI ve LLM'ler",
       "summary": "Generative AI, Large Language Models (LLM), GPT modelleri, fine-tuning, prompt engineering ve generative applications.",
-      "durationMinutes": 450,
+      "durationMinutes": 53,
       "objectives": [
         "Generative AI kavramlarını öğrenmek",
         "LLM'leri anlamak ve kullanmak",
@@ -1181,7 +1181,7 @@
       "id": "module-14",
       "title": "Module 14: AI Entegrasyonu ve API'ler",
       "summary": "AI servislerini uygulamalara entegre etme, API kullanımı, cloud AI services, real-time AI ve AI pipeline'ları.",
-      "durationMinutes": 450,
+      "durationMinutes": 53,
       "objectives": [
         "AI servislerini uygulamalara entegre etmek",
         "Cloud AI API'lerini kullanmak",
@@ -1270,7 +1270,7 @@
       "id": "module-15",
       "title": "Module 15: Capstone Project",
       "summary": "Kapsamlı bir AI projesi geliştirerek tüm öğrenilenleri uygulama. Gerçek dünya problemi çözme ve portfolio projesi.",
-      "durationMinutes": 450,
+      "durationMinutes": 53,
       "objectives": [
         "Tüm öğrenilenleri bir projede uygulamak",
         "Gerçek dünya AI problemi çözmek",

@@ -40,7 +40,7 @@ export async function POST() {
     const transformedContent = {
       overview: {
         description: courseContent.description || "Microsoft SQL Server veritabanı yönetimi ve geliştirme konularında kapsamlı bir kurs.",
-        estimatedDurationMinutes: courseContent.totalLessons * 30, // 30 minutes per lesson
+        estimatedDurationMinutes: Math.round(courseContent.totalLessons * 3.5), // 3.5 minutes per lesson (average)
       },
       learningObjectives: [
         "MSSQL veritabanı yönetimini öğrenmek",
@@ -58,7 +58,7 @@ export async function POST() {
         id: module.moduleId,
         title: module.moduleTitle,
         summary: `${module.moduleTitle} modülü MSSQL veritabanı yönetimi için temel konuları kapsar.`,
-        durationMinutes: module.lessons.length * 30,
+        durationMinutes: Math.round(module.lessons.length * 3.5),
         objectives: [
           `${module.moduleTitle} konularını öğrenmek`,
           "Pratik örnekler ile konuları pekiştirmek",

@@ -31,7 +31,7 @@ export async function createSwiftCourse(): Promise<CourseContent> {
     overview: {
       description:
         "Swift, Apple'ın geliştirdiği modern, güvenli ve güçlü bir programlama dilidir. Bu kapsamlı kurs ile Swift'in temellerinden ileri seviye konularına kadar her şeyi öğreneceksiniz. iOS, macOS, watchOS ve tvOS uygulamaları geliştirme becerileri kazanacaksınız.",
-      estimatedDurationMinutes: 6750, // 15 modül × 15 ders × 30 dakika
+      estimatedDurationMinutes: 788, // 15 modül × 15 ders × 3.5 dakika (ortalama)
     },
     learningObjectives: [
       "Swift programlama dilinin temel kavramlarını ve syntax'ını anlamak",

@@ -1,7 +1,7 @@
 {
   "overview": {
     "description": "Flutter, Google'ın açık kaynaklı, çapraz platform mobil uygulama geliştirme framework'üdür. Bu kapsamlı kurs ile Flutter'ın temellerinden ileri seviye konularına kadar her şeyi öğreneceksiniz. iOS ve Android için tek kod tabanıyla modern mobil uygulamalar geliştirme becerileri kazanacaksınız.",
-    "estimatedDurationMinutes": 6750
+    "estimatedDurationMinutes": 788
   },
   "learningObjectives": [
     "Flutter framework'ünün temel kavramlarını ve mimarisini anlamak",
@@ -23,7 +23,7 @@
       "id": "module-01",
       "title": "Module 1: Flutter Tanımı",
       "summary": "Flutter'ın ne olduğu, tarihçesi, avantajları ve diğer mobil geliştirme teknolojilerinden farkları hakkında temel bilgiler.",
-      "durationMinutes": 450,
+      "durationMinutes": 53,
       "objectives": [
         "Flutter'ın ne olduğunu ve neden kullanıldığını anlamak",
         "React Native, Xamarin gibi teknolojilerle karşılaştırmak",
@@ -112,7 +112,7 @@
       "id": "module-02",
       "title": "Module 2: Dart Syntax ve Temelleri",
       "summary": "Dart programlama dilinin temel syntax'ı, veri tipleri, değişkenler, operatörler ve temel programlama kavramları.",
-      "durationMinutes": 450,
+      "durationMinutes": 53,
       "objectives": [
         "Dart syntax kurallarını öğrenmek",
         "Veri tipleri ve değişken kullanımını anlamak",
@@ -201,7 +201,7 @@
       "id": "module-03",
       "title": "Module 3: Flutter Widget Sistemi",
       "summary": "Flutter'ın widget sistemi, StatelessWidget, StatefulWidget, widget ağacı ve temel UI bileşenleri.",
-      "durationMinutes": 450,
+      "durationMinutes": 53,
       "objectives": [
         "Widget sistemini anlamak",
         "StatelessWidget ve StatefulWidget kullanmak",
@@ -290,7 +290,7 @@
       "id": "module-04",
       "title": "Module 4: Layout ve Styling",
       "summary": "Flutter'da layout sistemleri, responsive tasarım, theming, styling ve görsel düzenleme.",
-      "durationMinutes": 450,
+      "durationMinutes": 53,
       "objectives": [
         "Layout sistemlerini anlamak",
         "Responsive tasarım yapmak",
@@ -379,7 +379,7 @@
       "id": "module-05",
       "title": "Module 5: State Management",
       "summary": "Flutter'da state management, setState, Provider, Riverpod, Bloc pattern ve durum yönetimi çözümleri.",
-      "durationMinutes": 450,
+      "durationMinutes": 53,
       "objectives": [
         "State management kavramını anlamak",
         "setState kullanmayı öğrenmek",
@@ -468,7 +468,7 @@
       "id": "module-06",
       "title": "Module 6: Navigasyon ve Routing",
       "summary": "Flutter'da navigasyon, routing, named routes, deep linking ve sayfa geçişleri.",
-      "durationMinutes": 450,
+      "durationMinutes": 53,
       "objectives": [
         "Navigasyon sistemini anlamak",
         "Navigator.push ve pop kullanmak",
@@ -557,7 +557,7 @@
       "id": "module-07",
       "title": "Module 7: Form Handling ve Validation",
       "summary": "Flutter'da form oluşturma, input kontrolü, validation, form state yönetimi ve kullanıcı girişleri.",
-      "durationMinutes": 450,
+      "durationMinutes": 53,
       "objectives": [
         "Form widget'larını kullanmayı öğrenmek",
         "Input kontrolleri yapmak",
@@ -646,7 +646,7 @@
       "id": "module-08",
       "title": "Module 8: HTTP ve API Entegrasyonu",
       "summary": "Flutter'da HTTP istekleri, REST API entegrasyonu, JSON parsing, error handling ve network yönetimi.",
-      "durationMinutes": 450,
+      "durationMinutes": 53,
       "objectives": [
         "HTTP istekleri yapmayı öğrenmek",
         "REST API'lerle çalışmak",
@@ -735,7 +735,7 @@
       "id": "module-09",
       "title": "Module 9: Local Storage ve Veritabanı",
       "summary": "Flutter'da yerel veri saklama, SharedPreferences, SQLite, Hive, sembox ve veritabanı yönetimi.",
-      "durationMinutes": 450,
+      "durationMinutes": 53,
       "objectives": [
         "Yerel veri saklamayı öğrenmek",
         "SharedPreferences kullanmak",
@@ -824,7 +824,7 @@
       "id": "module-10",
       "title": "Module 10: Firebase Entegrasyonu",
       "summary": "Firebase servisleri, Authentication, Firestore, Cloud Storage, Cloud Messaging ve Firebase Analytics.",
-      "durationMinutes": 450,
+      "durationMinutes": 53,
       "objectives": [
         "Firebase servislerini anlamak",
         "Firebase Authentication kullanmak",
@@ -913,7 +913,7 @@
       "id": "module-11",
       "title": "Module 11: Animations ve Transitions",
       "summary": "Flutter'da animasyonlar, AnimationController, Tween, Hero animasyonları, page transitions ve custom animasyonlar.",
-      "durationMinutes": 450,
+      "durationMinutes": 53,
       "objectives": [
         "Animasyon sistemini anlamak",
         "AnimationController kullanmayı öğrenmek",
@@ -1002,7 +1002,7 @@
       "id": "module-12",
       "title": "Module 12: Platform Channels ve Native Kod",
       "summary": "Flutter'da platform channels, method channels, event channels, native kod yazma ve platform spesifik özellikler.",
-      "durationMinutes": 450,
+      "durationMinutes": 53,
       "objectives": [
         "Platform channels kavramını anlamak",
         "Method channels kullanmayı öğrenmek",
@@ -1091,7 +1091,7 @@
       "id": "module-13",
       "title": "Module 13: Testing",
       "summary": "Flutter'da test yazma, unit tests, widget tests, integration tests, mocking ve test best practices.",
-      "durationMinutes": 450,
+      "durationMinutes": 53,
       "objectives": [
         "Test yazma prensiplerini öğrenmek",
         "Unit test yazmak",
@@ -1180,7 +1180,7 @@
       "id": "module-14",
       "title": "Module 14: Build ve Deployment",
       "summary": "Flutter'da build yapma, Android APK/AAB, iOS IPA, app signing, app store deployment ve CI/CD.",
-      "durationMinutes": 450,
+      "durationMinutes": 53,
       "objectives": [
         "Build süreçlerini anlamak",
         "Android build yapmak",
@@ -1269,7 +1269,7 @@
       "id": "module-15",
       "title": "Module 15: Capstone Project",
       "summary": "Kapsamlı bir Flutter projesi geliştirerek tüm öğrenilenleri uygulama, gerçek dünya senaryosu ve portfolio projesi.",
-      "durationMinutes": 450,
+      "durationMinutes": 53,
       "objectives": [
         "Tüm öğrenilenleri bir projede uygulamak",
         "Gerçek dünya senaryosu geliştirmek",

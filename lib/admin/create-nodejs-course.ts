@@ -31,7 +31,7 @@ export async function createNodeJSCourse(): Promise<CourseContent> {
     overview: {
       description:
         "Node.js, JavaScript'in sunucu tarafında çalışmasını sağlayan açık kaynaklı bir runtime ortamıdır. Bu kapsamlı kurs ile Node.js'in temellerinden ileri seviye konularına kadar her şeyi öğreneceksiniz. Modern web uygulamaları, API'ler, mikroservisler ve gerçek zamanlı uygulamalar geliştirme becerileri kazanacaksınız.",
-      estimatedDurationMinutes: 6750, // 15 modül × 15 ders × 30 dakika
+      estimatedDurationMinutes: 788, // 15 modül × 15 ders × 3.5 dakika (ortalama)
     },
     learningObjectives: [
       "Node.js runtime ortamını ve event loop mekanizmasını anlamak",

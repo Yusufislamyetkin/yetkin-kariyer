@@ -531,10 +531,34 @@ export async function GET(request: Request) {
       };
     });
 
-    // Get all user IDs from leaderboardData to fetch their badges
+    // Get all user IDs from leaderboardData to fetch their badges and points
     const allLeaderboardUserIds = leaderboardData.map((entry) => entry.userId);
 
-    // Fetch all user badges to calculate total points for ALL users (before sorting)
+    // Fetch point transactions for the period to calculate daily/weekly/monthly points
+    const pointTransactions = allLeaderboardUserIds.length > 0
+      ? await db.pointTransaction.groupBy({
+          by: ["userId"],
+          where: {
+            userId: { in: allLeaderboardUserIds },
+            createdAt: {
+              gte: startDate,
+              lt: endDate,
+            },
+          },
+          _sum: {
+            delta: true,
+          },
+        })
+      : [];
+
+    // Calculate points earned in the period for each user from point_transactions
+    const userPointsMap = new Map<string, number>();
+    for (const transaction of pointTransactions) {
+      const points = transaction._sum.delta || 0;
+      userPointsMap.set(transaction.userId, points);
+    }
+
+    // Fetch all user badges for display purposes only (not for sorting)
     const allUserBadges =
       allLeaderboardUserIds.length > 0
         ? await db.userBadge.findMany({
@@ -555,18 +579,6 @@ export async function GET(request: Request) {
             },
           })
         : [];
-
-    // Calculate total points for each user from badges
-    const userPointsMap = new Map<string, number>();
-    for (const userBadge of allUserBadges) {
-      if (userBadge.badge) {
-        const currentPoints = userPointsMap.get(userBadge.userId) || 0;
-        userPointsMap.set(
-          userBadge.userId,
-          currentPoints + (userBadge.badge.points || 0)
-        );
-      }
-    }
 
     // Add points to all leaderboard entries
     const leaderboardWithPoints = leaderboardData.map((entry) => ({
@@ -640,10 +652,27 @@ export async function GET(request: Request) {
           (entry) => entry.userId === rankTargetUserId
         );
         if (userData) {
-          const userPoints = userPointsMap.get(rankTargetUserId) || 0;
+          // Get points from point_transactions for this period if not already in map
+          let userPoints = userPointsMap.get(rankTargetUserId);
+          if (userPoints === undefined) {
+            const userPointTransactions = await db.pointTransaction.groupBy({
+              by: ["userId"],
+              where: {
+                userId: rankTargetUserId,
+                createdAt: {
+                  gte: startDate,
+                  lt: endDate,
+                },
+              },
+              _sum: {
+                delta: true,
+              },
+            });
+            userPoints = userPointTransactions[0]?._sum.delta || 0;
+          }
           userRank = {
             ...userData,
-            points: userPoints,
+            points: userPoints ?? 0,
             rank: leaderboardWithBadges.length + 1, // Approximate rank if not in top list
             displayedBadges:
               displayedBadgeMap.get(rankTargetUserId)?.slice(0, 3) ?? [],

@@ -31,7 +31,7 @@ export async function createVueJSCourse(): Promise<CourseContent> {
     overview: {
       description:
         "Vue.js, kullanıcı arayüzleri geliştirmek için kullanılan ilerici bir JavaScript framework'üdür. Bu kapsamlı kurs ile Vue.js'in temellerinden ileri seviye konularına kadar her şeyi öğreneceksiniz. Modern, performanslı ve ölçeklenebilir web uygulamaları geliştirme becerileri kazanacaksınız.",
-      estimatedDurationMinutes: 6750, // 15 modül × 15 ders × 30 dakika
+      estimatedDurationMinutes: 788, // 15 modül × 15 ders × 3.5 dakika (ortalama)
     },
     learningObjectives: [
       "Vue.js framework'ünün temel kavramlarını ve mimarisini anlamak",

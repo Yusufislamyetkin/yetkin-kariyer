@@ -48,7 +48,8 @@ export async function optimizeImage(
   }
 
   // Resize and optimize
-  let optimized = image.resize(width, height, {
+  // Use rotate() to automatically handle EXIF orientation from mobile devices
+  let optimized = image.rotate().resize(width, height, {
     fit: "inside",
     withoutEnlargement: true,
   });
@@ -81,7 +82,8 @@ export async function createThumbnail(
   const image = sharp(inputBuffer);
 
   // Resize to thumbnail size
-  let thumbnail = image.resize(THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT, {
+  // Use rotate() to automatically handle EXIF orientation from mobile devices
+  let thumbnail = image.rotate().resize(THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT, {
     fit: "cover",
     position: "center",
   });

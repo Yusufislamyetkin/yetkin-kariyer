@@ -60,22 +60,34 @@ export function useGlobalNotifications() {
   const joinedGroupsRef = useRef<Set<string>>(new Set());
   const joiningGroupsRef = useRef<Set<string>>(new Set());
 
-  // Track current thread/group ID from pathname
+  // Track current thread/group ID from pathname and query params
   useEffect(() => {
     if (typeof window !== "undefined") {
-      // Extract thread ID from path if on direct chat page
-      const directChatMatch = pathname.match(/\/chat\/direct\/([^\/]+)/);
-      if (directChatMatch) {
-        currentThreadIdRef.current = directChatMatch[1];
-        currentGroupIdRef.current = null;
+      // Check if we're on direct chat page
+      if (pathname === "/chat/direct") {
+        // Extract thread ID from query params
+        const urlParams = new URLSearchParams(window.location.search);
+        const threadId = urlParams.get("thread");
+        if (threadId) {
+          currentThreadIdRef.current = threadId;
+          currentGroupIdRef.current = null;
+        } else {
+          currentThreadIdRef.current = null;
+        }
       } else {
         currentThreadIdRef.current = null;
       }
 
-      // Extract group ID from path if on group chat page
-      const groupChatMatch = pathname.match(/\/chat\/groups\/([^\/]+)/);
-      if (groupChatMatch) {
-        currentGroupIdRef.current = groupChatMatch[1];
+      // Check if we're on group chat page
+      if (pathname === "/chat/groups") {
+        // Extract group ID from query params
+        const urlParams = new URLSearchParams(window.location.search);
+        const groupId = urlParams.get("group");
+        if (groupId) {
+          currentGroupIdRef.current = groupId;
+        } else {
+          currentGroupIdRef.current = null;
+        }
       } else {
         currentGroupIdRef.current = null;
       }
@@ -110,23 +122,48 @@ export function useGlobalNotifications() {
         }
 
         // Fetch all user's chat memberships (both direct threads and groups)
-        const [directResponse, groupsResponse] = await Promise.all([
-          fetch("/api/chat/direct"),
-          fetch("/api/chat/summary"),
-        ]);
+        let directData: any = null;
+        let summaryData: any = null;
+        
+        try {
+          const [directResponse, groupsResponse] = await Promise.all([
+            fetch("/api/chat/direct"),
+            fetch("/api/chat/summary"),
+          ]);
 
-        if (!directResponse.ok || !groupsResponse.ok) {
-          console.warn("[GlobalNotifications] Failed to fetch chat memberships");
+          if (!directResponse.ok) {
+            console.warn(`[GlobalNotifications] Failed to fetch direct threads: ${directResponse.status}`);
+          } else {
+            directData = await directResponse.json();
+          }
+
+          if (!groupsResponse.ok) {
+            console.warn(`[GlobalNotifications] Failed to fetch groups summary: ${groupsResponse.status}`);
+          } else {
+            summaryData = await groupsResponse.json();
+          }
+
+          if (!directData && !summaryData) {
+            console.warn("[GlobalNotifications] Failed to fetch any chat memberships, will retry later");
+            if (retryCount < MAX_RETRIES) {
+              await new Promise(resolve => setTimeout(resolve, 2000 * (retryCount + 1)));
+              return joinAllChatGroups(conn, retryCount + 1);
+            }
+            return;
+          }
+        } catch (error) {
+          console.error("[GlobalNotifications] Error fetching chat memberships:", error);
+          if (retryCount < MAX_RETRIES) {
+            await new Promise(resolve => setTimeout(resolve, 2000 * (retryCount + 1)));
+            return joinAllChatGroups(conn, retryCount + 1);
+          }
           return;
         }
-
-        const directData = await directResponse.json();
-        const summaryData = await groupsResponse.json();
 
         const groupIds = new Set<string>();
 
         // Add direct thread IDs
-        if (directData.threads && Array.isArray(directData.threads)) {
+        if (directData?.threads && Array.isArray(directData.threads)) {
           directData.threads.forEach((thread: { id: string }) => {
             if (thread.id) {
               groupIds.add(thread.id);
@@ -135,7 +172,7 @@ export function useGlobalNotifications() {
         }
 
         // Add group IDs from summary (both user groups and community groups)
-        if (summaryData.userGroups && Array.isArray(summaryData.userGroups)) {
+        if (summaryData?.userGroups && Array.isArray(summaryData.userGroups)) {
           summaryData.userGroups.forEach((group: { groupId: string }) => {
             if (group.groupId) {
               groupIds.add(group.groupId);
@@ -143,12 +180,17 @@ export function useGlobalNotifications() {
           });
         }
 
-        if (summaryData.communityGroups && Array.isArray(summaryData.communityGroups)) {
+        if (summaryData?.communityGroups && Array.isArray(summaryData.communityGroups)) {
           summaryData.communityGroups.forEach((group: { groupId: string }) => {
             if (group.groupId) {
               groupIds.add(group.groupId);
             }
           });
+        }
+
+        if (groupIds.size === 0) {
+          console.log("[GlobalNotifications] No groups to join");
+          return;
         }
 
         // Track groups we're about to join
@@ -196,12 +238,25 @@ export function useGlobalNotifications() {
                 return;
               }
               
-              if (attempt < maxJoinRetries) {
-                console.warn(`[GlobalNotifications] ⚠️ Failed to join group ${groupId} (attempt ${attempt}/${maxJoinRetries}), retrying...`);
-                await new Promise(resolve => setTimeout(resolve, 500 * attempt)); // Exponential backoff
-              } else {
-                console.warn(`[GlobalNotifications] ⚠️ Failed to join group ${groupId} after ${maxJoinRetries} attempts:`, error);
+              // Connection state errors - don't retry if connection is closed/disconnected
+              if (error instanceof Error && (
+                error.message.includes("Connection is not in the 'Connected' state") ||
+                conn.state === signalR.HubConnectionState.Disconnected ||
+                conn.state === signalR.HubConnectionState.Disconnecting
+              )) {
+                console.warn(`[GlobalNotifications] Connection not ready for group ${groupId}, will retry on reconnection`);
                 joiningGroupsRef.current.delete(groupId);
+                return;
+              }
+              
+              if (attempt < maxJoinRetries) {
+                const delay = 500 * Math.pow(2, attempt - 1); // Exponential backoff: 500ms, 1s, 2s
+                console.warn(`[GlobalNotifications] ⚠️ Failed to join group ${groupId} (attempt ${attempt}/${maxJoinRetries}), retrying in ${delay}ms...`, error instanceof Error ? error.message : error);
+                await new Promise(resolve => setTimeout(resolve, delay));
+              } else {
+                console.error(`[GlobalNotifications] ❌ Failed to join group ${groupId} after ${maxJoinRetries} attempts:`, error);
+                joiningGroupsRef.current.delete(groupId);
+                // Don't return - let it fail so we can track which groups failed
               }
             }
           }
@@ -303,9 +358,13 @@ export function useGlobalNotifications() {
                 // Try to join the group asynchronously (don't block notification)
                 ensureConnected(connectionRef.current)
                   .then(() => {
-                    if (connectionRef.current && connectionRef.current.state === signalR.HubConnectionState.Connected) {
-                      return connectionRef.current.invoke("JoinGroup", groupId);
+                    if (!connectionRef.current) {
+                      throw new Error("Connection ref is null");
                     }
+                    if (connectionRef.current.state !== signalR.HubConnectionState.Connected) {
+                      throw new Error(`Connection not connected: ${connectionRef.current.state}`);
+                    }
+                    return connectionRef.current.invoke("JoinGroup", groupId);
                   })
                   .then(() => {
                     console.log(`[GlobalNotifications] ✅ Lazy joined group ${groupId} after receiving message`);
@@ -314,7 +373,31 @@ export function useGlobalNotifications() {
                     }
                   })
                   .catch((error) => {
-                    console.warn(`[GlobalNotifications] ⚠️ Failed to lazy join group ${groupId}:`, error);
+                    console.warn(`[GlobalNotifications] ⚠️ Failed to lazy join group ${groupId}:`, error instanceof Error ? error.message : error);
+                    // Retry once after a delay if it's a transient error
+                    if (error instanceof Error && !error.message.includes("no connection") && connectionRef.current) {
+                      setTimeout(() => {
+                        if (connectionRef.current && 
+                            connectionRef.current.state === signalR.HubConnectionState.Connected &&
+                            !joinedGroupsRef.current.has(groupId) &&
+                            !joiningGroupsRef.current.has(groupId)) {
+                          joiningGroupsRef.current.add(groupId);
+                          connectionRef.current.invoke("JoinGroup", groupId)
+                            .then(() => {
+                              console.log(`[GlobalNotifications] ✅ Retry lazy join succeeded for group ${groupId}`);
+                              if (connectionRef.current) {
+                                joinedGroupsRef.current.add(groupId);
+                              }
+                            })
+                            .catch((retryError) => {
+                              console.warn(`[GlobalNotifications] ⚠️ Retry lazy join failed for group ${groupId}:`, retryError);
+                            })
+                            .finally(() => {
+                              joiningGroupsRef.current.delete(groupId);
+                            });
+                        }
+                      }, 2000);
+                    }
                   })
                   .finally(() => {
                     joiningGroupsRef.current.delete(groupId);
@@ -343,9 +426,9 @@ export function useGlobalNotifications() {
                 actorName: sender?.name || "Birisi",
                 onClick: () => {
                   if (isDirectThread) {
-                    router.push(`/chat/direct/${message.groupId}`);
+                    router.push(`/chat/direct?thread=${message.groupId}`);
                   } else if (message.groupId) {
-                    router.push(`/chat/groups/${message.groupId}`);
+                    router.push(`/chat/groups?group=${message.groupId}`);
                   } else {
                     router.push("/chat/direct");
                   }

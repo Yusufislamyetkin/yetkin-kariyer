@@ -70,7 +70,9 @@ export async function POST(request: Request) {
       }
     }
     
+    // Use rotate() to automatically handle EXIF orientation from mobile devices
     const resizedBuffer = await image
+      .rotate()
       .resize(width, height, {
         fit: "inside",
         withoutEnlargement: true,

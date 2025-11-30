@@ -195,7 +195,7 @@ export async function createReactCourse(): Promise<CourseContent> {
       };
     });
 
-    const durationMinutes = lessonsData.length * 30; // 30 minutes per lesson
+    const durationMinutes = lessonsData.length * 3.5; // 3.5 minutes per lesson (average)
     totalDuration += durationMinutes;
 
     modules.push({

@@ -31,7 +31,7 @@ export async function createTypeScriptCourse(): Promise<CourseContent> {
     overview: {
       description:
         "TypeScript, JavaScript'e tip güvenliği ekleyen güçlü bir programlama dilidir. Bu kapsamlı kurs ile TypeScript'in temellerinden ileri seviye konularına kadar her şeyi öğreneceksiniz. Modern web geliştirmede hata önleme, daha iyi geliştirici deneyimi ve ölçeklenebilir kod yazma becerileri kazanacaksınız.",
-      estimatedDurationMinutes: 6750, // 15 modül × 15 ders × 30 dakika
+      estimatedDurationMinutes: 788, // 15 modül × 15 ders × 3.5 dakika (ortalama)
     },
     learningObjectives: [
       "TypeScript'in ne olduğunu ve JavaScript'ten farklarını anlamak",

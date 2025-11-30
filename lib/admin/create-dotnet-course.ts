@@ -31,7 +31,7 @@ export async function createDotNetCourse(): Promise<CourseContent> {
     overview: {
       description:
         ".NET Core, Microsoft'un açık kaynaklı, platformlar arası bir framework'üdür. Bu kapsamlı kurs ile .NET Core'un temellerinden ileri seviye konularına kadar her şeyi öğreneceksiniz. Modern web uygulamaları, API'ler ve mikroservisler geliştirme becerileri kazanacaksınız.",
-      estimatedDurationMinutes: 6750, // 15 modül × 15 ders × 30 dakika
+      estimatedDurationMinutes: 788, // 15 modül × 15 ders × 3.5 dakika (ortalama)
     },
     learningObjectives: [
       ".NET Core framework'ünün temel kavramlarını ve mimarisini anlamak",
