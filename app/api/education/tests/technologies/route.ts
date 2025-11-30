@@ -85,8 +85,8 @@ export async function GET() {
       );
     }
 
-    // Teknolojileri isme göre sırala
-    technologies.sort((a, b) => a.name.localeCompare(b.name));
+    // Teknolojileri isme göre alfabetik sırala (Türkçe karakterler için)
+    technologies.sort((a, b) => a.name.localeCompare(b.name, 'tr', { sensitivity: 'base' }));
 
     return NextResponse.json({
       technologies,

@@ -360,8 +360,6 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
                   className={`w-full p-4 rounded-lg border-2 transition-all text-left ${
                     formData.specialization === spec
                       ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
-                      : spec === "Henüz karar vermedim"
-                      ? "border-orange-300 dark:border-orange-700 hover:border-orange-400 dark:hover:border-orange-600"
                       : "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
                   }`}
                 >
@@ -396,8 +394,6 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
                   className={`w-full p-4 rounded-lg border-2 transition-all text-left ${
                     formData.careerGoal === goal
                       ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
-                      : goal === "Henüz karar vermedim"
-                      ? "border-orange-300 dark:border-orange-700 hover:border-orange-400 dark:hover:border-orange-600"
                       : "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
                   }`}
                 >
@@ -436,8 +432,6 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
                   className={`p-3 rounded-lg border-2 transition-all ${
                     formData.timeline === timeline
                       ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
-                      : timeline === "Henüz belirlemedim"
-                      ? "border-orange-300 dark:border-orange-700 hover:border-orange-400 dark:hover:border-orange-600"
                       : "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
                   }`}
                 >
@@ -594,8 +588,6 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
                   className={`w-full p-4 rounded-lg border-2 transition-all text-left ${
                     (formData.industryInterests || []).includes(interest)
                       ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
-                      : interest === "Henüz karar vermedim"
-                      ? "border-orange-300 dark:border-orange-700 hover:border-orange-400 dark:hover:border-orange-600"
                       : "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
                   }`}
                 >

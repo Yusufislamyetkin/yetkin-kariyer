@@ -47,6 +47,8 @@ export default function CoursesPage() {
         const data = await response.json();
         console.log("Fetched courses data:", data);
         const coursesList = data.courses || [];
+        // Alfabetik sıralama (title'a göre)
+        coursesList.sort((a: Course, b: Course) => a.title.localeCompare(b.title, 'tr', { sensitivity: 'base' }));
         console.log("Courses list:", coursesList);
         setCourses(coursesList);
       } catch (err) {

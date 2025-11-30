@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Ca
 import { Button } from "@/app/components/ui/Button";
 import dynamic from "next/dynamic";
 import { useTheme } from "@/app/contexts/ThemeContext";
+import { useEffect, useState } from "react";
 
 const ThemeToggleIcon = dynamic(
   () => import("@/app/components/ThemeToggle").then((mod) => ({ default: mod.ThemeToggle })),
@@ -28,6 +29,25 @@ function ThemeSwitchButton() {
 }
 
 export default function Home() {
+  const [categoryLessonCounts, setCategoryLessonCounts] = useState<Record<string, number>>({});
+  const [isLoadingCounts, setIsLoadingCounts] = useState(true);
+
+  useEffect(() => {
+    // Fetch category lesson counts
+    fetch("/api/courses/category-lesson-counts")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.categoryCounts) {
+          setCategoryLessonCounts(data.categoryCounts);
+        }
+        setIsLoadingCounts(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching category lesson counts:", error);
+        setIsLoadingCounts(false);
+      });
+  }, []);
+
   const features = [
     {
       icon: BookOpen,
@@ -409,36 +429,43 @@ export default function Home() {
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {[
-            { name: "Backend Geliştirme", icon: "⚙️", courses: 8, desc: ".NET Core, Java, Node.js, Python, Go, Kotlin, Spring Boot, NestJS ile backend geliştirme", color: "from-blue-500 to-cyan-500" },
-            { name: "Frontend Geliştirme", icon: "🎨", courses: 5, desc: "React, Angular, Next.js, Vue.js, TypeScript ile modern web uygulamaları geliştirme", color: "from-indigo-500 to-purple-500" },
-            { name: "Mobil Geliştirme", icon: "📱", courses: 2, desc: "Flutter ve Swift ile cross-platform ve native mobil uygulama geliştirme", color: "from-green-500 to-emerald-500" },
-            { name: "Veritabanı", icon: "💾", courses: 3, desc: "MSSQL, MongoDB, PostgreSQL ile veritabanı yönetimi, sorgulama ve optimizasyon", color: "from-orange-500 to-red-500" },
-            { name: "Cloud & DevOps", icon: "☁️", courses: 3, desc: "AWS, Azure, Docker & Kubernetes ile bulut altyapısı ve DevOps pratikleri", color: "from-cyan-500 to-blue-500" },
-            { name: "Güvenlik", icon: "🔐", courses: 2, desc: "Ethical Hacking, OWASP güvenlik standartları ve web uygulama güvenliği", color: "from-purple-500 to-pink-500" },
-            { name: "AI & Machine Learning", icon: "🤖", courses: 1, desc: "AI for Developers ile yapay zeka ve makine öğrenmesi temelleri", color: "from-teal-500 to-green-500" },
-          ].map((category, index) => (
-            <Card
-              key={index}
-              variant="elevated"
-              hover
-              className="p-6 group animate-fade-in overflow-hidden"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <div className="text-4xl mb-3">{category.icon}</div>
-              <h3 className="text-lg font-display font-bold mb-2 text-gray-900 dark:text-gray-100">
-                {category.name}
-              </h3>
-              <p className="text-xs text-gray-600 dark:text-gray-400 mb-3 line-clamp-2">
-                {category.desc}
-              </p>
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-semibold text-blue-600 dark:text-blue-400">
-                  {category.courses} Kurs
-                </span>
-                <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:translate-x-1 transition-all" />
-              </div>
-            </Card>
-          ))}
+            { name: "Backend Geliştirme", icon: "⚙️", desc: ".NET Core, Java, Node.js, Python, Go, Kotlin, Spring Boot, NestJS ile backend geliştirme", color: "from-blue-500 to-cyan-500" },
+            { name: "Frontend Geliştirme", icon: "🎨", desc: "React, Angular, Next.js, Vue.js, TypeScript ile modern web uygulamaları geliştirme", color: "from-indigo-500 to-purple-500" },
+            { name: "Mobil Geliştirme", icon: "📱", desc: "Flutter ve Swift ile cross-platform ve native mobil uygulama geliştirme", color: "from-green-500 to-emerald-500" },
+            { name: "Veritabanı", icon: "💾", desc: "MSSQL, MongoDB, PostgreSQL ile veritabanı yönetimi, sorgulama ve optimizasyon", color: "from-orange-500 to-red-500" },
+            { name: "Cloud & DevOps", icon: "☁️", desc: "AWS, Azure, Docker & Kubernetes ile bulut altyapısı ve DevOps pratikleri", color: "from-cyan-500 to-blue-500" },
+            { name: "Güvenlik", icon: "🔐", desc: "Ethical Hacking, OWASP güvenlik standartları ve web uygulama güvenliği", color: "from-purple-500 to-pink-500" },
+            { name: "AI & Machine Learning", icon: "🤖", desc: "AI for Developers ile yapay zeka ve makine öğrenmesi temelleri", color: "from-teal-500 to-green-500" },
+          ].map((category, index) => {
+            const lessonCount = categoryLessonCounts[category.name] || 0;
+            return (
+              <Card
+                key={index}
+                variant="elevated"
+                hover
+                className="p-6 group animate-fade-in overflow-hidden"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className="text-4xl mb-3">{category.icon}</div>
+                <h3 className="text-lg font-display font-bold mb-2 text-gray-900 dark:text-gray-100">
+                  {category.name}
+                </h3>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mb-3 line-clamp-2">
+                  {category.desc}
+                </p>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-semibold text-blue-600 dark:text-blue-400">
+                    {isLoadingCounts ? (
+                      <span className="animate-pulse">Yükleniyor...</span>
+                    ) : (
+                      `${lessonCount} Ders`
+                    )}
+                  </span>
+                  <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:translate-x-1 transition-all" />
+                </div>
+              </Card>
+            );
+          })}
         </div>
       </section>
 

@@ -69,6 +69,8 @@ export default function AdminPage() {
     stats: null,
   });
 
+  const [noPhotoUserCount, setNoPhotoUserCount] = useState<number>(1000);
+
   const [deleteProfileState, setDeleteProfileState] = useState<ClearStatus>({
     loading: false,
     success: null,
@@ -1444,9 +1446,14 @@ export default function AdminPage() {
   };
 
   const handleCreateProfiles = async () => {
+    if (!noPhotoUserCount || noPhotoUserCount < 0) {
+      alert("Lütfen geçerli bir kullanıcı sayısı girin (0 veya daha büyük)");
+      return;
+    }
+
     if (
       !confirm(
-        "Photos klasöründeki tüm fotoğraflar için profil hesapları oluşturulacak. Devam etmek istiyor musunuz?"
+        `Photos klasöründeki tüm fotoğraflar için profil hesapları oluşturulacak ve ${noPhotoUserCount} adet fotoğrafsız kullanıcı eklenecek. Devam etmek istiyor musunuz?`
       )
     ) {
       return;
@@ -1467,6 +1474,7 @@ export default function AdminPage() {
       const response = await fetch("/api/admin/create-profiles", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ noPhotoUserCount }),
       });
 
       const data = await response.json();
@@ -2328,9 +2336,29 @@ export default function AdminPage() {
               </p>
             </div>
           </div>
-          <p className="text-gray-600 dark:text-gray-400 mb-8 text-sm">
+          <p className="text-gray-600 dark:text-gray-400 mb-6 text-sm">
             Photos klasöründeki kadın ve erkek fotoğrafları için Türk isimleriyle profil hesapları oluşturun. Her hesap için rastgele şifre ve email oluşturulur.
           </p>
+          
+          {/* Fotoğrafsız Kullanıcı Sayısı Input */}
+          <div className="mb-6 max-w-md">
+            <label htmlFor="noPhotoCount" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Fotoğrafsız Kullanıcı Sayısı
+            </label>
+            <input
+              id="noPhotoCount"
+              type="number"
+              min="0"
+              max="10000"
+              value={noPhotoUserCount}
+              onChange={(e) => setNoPhotoUserCount(parseInt(e.target.value) || 0)}
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-green-500 focus:border-transparent"
+              placeholder="Fotoğrafsız kullanıcı sayısı"
+            />
+            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+              Fotoğrafsız oluşturulacak kullanıcı sayısını girin (varsayılan: 1000)
+            </p>
+          </div>
           
           {/* View All Users Button */}
           <div className="mb-6 max-w-md">

@@ -25,6 +25,7 @@ interface PostCardProps {
     userId: string;
     content: string | null;
     imageUrl: string | null;
+    videoUrl: string | null;
     createdAt: string;
     user: {
       id: string;
@@ -69,6 +70,8 @@ export const PostCard = memo(function PostCard({
   const [showSendModal, setShowSendModal] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -225,8 +228,60 @@ export const PostCard = memo(function PostCard({
         </div>
       </div>
 
+      {/* Video - Reels Style */}
+      {post.videoUrl && (
+        <div className="relative w-full bg-black">
+          <div className="relative w-full max-w-md mx-auto" style={{ aspectRatio: '9/16', maxHeight: '800px' }}>
+            <video
+              ref={videoRef}
+              src={post.videoUrl}
+              className="w-full h-full object-contain"
+              loop
+              muted
+              playsInline
+              onPlay={() => setIsVideoPlaying(true)}
+              onPause={() => setIsVideoPlaying(false)}
+              onLoadedMetadata={() => {
+                // Auto-play when video is loaded
+                if (videoRef.current) {
+                  videoRef.current.play().catch(() => {
+                    // Autoplay was prevented, user interaction required
+                  });
+                }
+              }}
+            />
+            {/* Play/Pause Overlay */}
+            <button
+              onClick={() => {
+                if (videoRef.current) {
+                  if (isVideoPlaying) {
+                    videoRef.current.pause();
+                  } else {
+                    videoRef.current.play();
+                  }
+                }
+              }}
+              className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-colors z-10"
+              aria-label={isVideoPlaying ? "Duraklat" : "Oynat"}
+            >
+              {!isVideoPlaying && (
+                <div className="w-16 h-16 rounded-full bg-white/80 flex items-center justify-center">
+                  <svg
+                    className="w-8 h-8 text-black ml-1"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              )}
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Image */}
-      {post.imageUrl && (
+      {post.imageUrl && !post.videoUrl && (
         <div className="relative w-full bg-gray-100 dark:bg-gray-950">
           <div className="relative w-full" style={{ height: '800px', minHeight: '500px', maxHeight: '1200px' }}>
             <Image
@@ -243,7 +298,7 @@ export const PostCard = memo(function PostCard({
       )}
 
       {/* Content Only - LinkedIn Style */}
-      {!post.imageUrl && post.content && (
+      {!post.imageUrl && !post.videoUrl && post.content && (
         <div className="px-6 py-6 bg-white dark:bg-gray-900">
           <div className="text-lg leading-relaxed text-gray-900 dark:text-gray-100 whitespace-pre-wrap break-words font-normal">
             {post.content}
@@ -318,8 +373,8 @@ export const PostCard = memo(function PostCard({
           </div>
         )}
 
-        {/* Caption - Only show if there's an image (for image posts) */}
-        {post.imageUrl && post.content && (
+        {/* Caption - Only show if there's an image or video (for media posts) */}
+        {(post.imageUrl || post.videoUrl) && post.content && (
           <div className="mb-2">
             <span className="text-base leading-relaxed">
               <Link
@@ -365,6 +420,7 @@ export const PostCard = memo(function PostCard({
           postId={post.id}
           postContent={post.content}
           postImageUrl={post.imageUrl}
+          postVideoUrl={post.videoUrl}
           onClose={() => setShowSendModal(false)}
         />
       )}

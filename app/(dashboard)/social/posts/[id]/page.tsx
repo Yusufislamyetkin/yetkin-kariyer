@@ -14,6 +14,7 @@ interface Post {
   userId: string;
   content: string | null;
   imageUrl: string | null;
+  videoUrl: string | null;
   createdAt: string;
   user: {
     id: string;
@@ -301,7 +302,7 @@ export default function PostDetailPage() {
     <div className="min-h-screen bg-[#fafafa] dark:bg-black">
       {/* Mobile: Full page, Desktop: Modal-like */}
       <div className="lg:fixed lg:inset-0 lg:flex lg:items-center lg:justify-center lg:bg-black/50 lg:p-4">
-        <div className={`bg-white dark:bg-black lg:rounded-lg ${post.imageUrl ? 'lg:max-w-5xl' : 'lg:max-w-3xl'} lg:max-h-[90vh] lg:w-full lg:overflow-hidden lg:flex`}>
+        <div className={`bg-white dark:bg-black lg:rounded-lg ${(post.imageUrl || post.videoUrl) ? 'lg:max-w-5xl' : 'lg:max-w-3xl'} lg:max-h-[90vh] lg:w-full lg:overflow-hidden lg:flex`}>
           {/* Close button - Desktop */}
           <button
             onClick={() => router.back()}
@@ -321,8 +322,22 @@ export default function PostDetailPage() {
             <div className="w-6" />
           </div>
 
-          {/* Image - Left side (Desktop) or top (Mobile) - Only show if imageUrl exists */}
-          {post.imageUrl && (
+          {/* Video - Reels Style */}
+          {post.videoUrl && (
+            <div className="lg:w-1/2 lg:flex-shrink-0 relative aspect-[9/16] lg:aspect-[9/16] lg:h-[90vh] bg-black flex items-center justify-center">
+              <video
+                src={post.videoUrl}
+                controls
+                className="w-full h-full object-contain"
+                loop
+                muted
+                playsInline
+              />
+            </div>
+          )}
+
+          {/* Image - Left side (Desktop) or top (Mobile) - Only show if imageUrl exists and no video */}
+          {post.imageUrl && !post.videoUrl && (
             <div className="lg:w-1/2 lg:flex-shrink-0 relative aspect-square lg:aspect-auto lg:h-[90vh] bg-gray-100 dark:bg-gray-900">
               <Image
                 src={post.imageUrl}
@@ -336,7 +351,7 @@ export default function PostDetailPage() {
           )}
 
           {/* Content - Right side (Desktop) or bottom (Mobile) */}
-          <div className={`${post.imageUrl ? 'lg:w-1/2' : 'lg:w-full'} lg:flex lg:flex-col lg:h-[90vh]`}>
+          <div className={`${(post.imageUrl || post.videoUrl) ? 'lg:w-1/2' : 'lg:w-full'} lg:flex lg:flex-col lg:h-[90vh]`}>
             {/* User info */}
             <div className="flex items-center justify-between px-3 sm:px-4 py-2.5 sm:py-3 border-b border-[#dbdbdb] dark:border-[#383838]">
               <div className="flex items-center gap-3">

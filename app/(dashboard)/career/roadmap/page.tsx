@@ -331,38 +331,38 @@ export default function CareerRoadmapPage() {
   }
 
   return (
-    <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-6 md:py-8 space-y-4 sm:space-y-5 md:space-y-6">
+    <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-6 space-y-3 sm:space-y-4">
       {/* AI Öğretmen Selin Introduction */}
       <Card variant="elevated" className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 border-purple-200 dark:border-purple-800">
-        <CardContent className="pt-4 px-4 pb-4 sm:pt-5 sm:px-5 sm:pb-5 md:pt-6 md:px-6 md:pb-6">
+        <CardContent className="pt-4 px-4 pb-4 sm:pt-5 sm:px-5 sm:pb-5">
           <AITeacherSelin 
-            message={plan.summary || "Size özel kariyer planınız hazır! Aşağıda detaylı yol haritanızı bulabilirsiniz."}
+            message={plan.summary || "Size özel kariyer planınız hazır! Aşağıda yol haritanızı bulabilirsiniz."}
           />
         </CardContent>
       </Card>
 
       <Card variant="elevated">
-        <CardHeader className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+        <CardHeader className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
           <div className="space-y-2">
-            <CardTitle className="flex items-center gap-2 text-3xl">
-              <Target className="h-7 w-7 text-blue-600 dark:text-blue-400" />
+            <CardTitle className="flex items-center gap-2 text-2xl">
+              <Target className="h-6 w-6 text-blue-600 dark:text-blue-400" />
               Kariyer Planım
             </CardTitle>
             {plan.timeline && (
               <span className="inline-flex items-center gap-2 rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700 dark:bg-blue-900/30 dark:text-blue-200">
                 <Clock className="h-3 w-3" />
-                Hedef zaman çizelgesi: {plan.timeline}
+                {plan.timeline}
               </span>
             )}
           </div>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2">
             <Button
               variant="outline"
               className="flex items-center gap-2"
               onClick={handleExportPlan}
             >
               <Download className="h-4 w-4" />
-              Planı Dışa Aktar
+              Dışa Aktar
             </Button>
             <Button
               variant="outline"
@@ -371,7 +371,7 @@ export default function CareerRoadmapPage() {
               disabled={generating}
             >
               <Sparkles className="h-4 w-4" />
-              Yeni Plan Oluştur
+              Yeni Plan
             </Button>
             <Button
               variant="gradient"
@@ -382,12 +382,12 @@ export default function CareerRoadmapPage() {
               {generating ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin" />
-                  Yeniden oluşturuluyor...
+                  Yenileniyor...
                 </>
               ) : (
                 <>
                   <RefreshCcw className="h-4 w-4" />
-                  Planı yenile
+                  Yenile
                 </>
               )}
             </Button>
@@ -395,42 +395,43 @@ export default function CareerRoadmapPage() {
         </CardHeader>
       </Card>
 
-      {plan.skillsToDevelop.length > 0 && (
+      {/* Combined Skills and Goals */}
+      {(plan.skillsToDevelop.length > 0 || plan.goals.length > 0) && (
         <Card variant="elevated">
           <CardHeader>
-            <CardTitle>Öncelikli Beceriler</CardTitle>
+            <CardTitle>Öncelikler</CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="flex flex-wrap gap-2">
-              {plan.skillsToDevelop.map((skill, index) => (
-                <span
-                  key={`skill-${index}`}
-                  className="rounded-full bg-purple-100 px-3 py-1 text-xs font-semibold text-purple-700 dark:bg-purple-900/30 dark:text-purple-200"
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      )}
-
-      {plan.goals.length > 0 && (
-        <Card variant="elevated">
-          <CardHeader>
-            <CardTitle>Hedefler</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-200">
-              {plan.goals.map((goal, index) => (
-                <li
-                  key={`goal-${index}`}
-                  className="rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 shadow-sm dark:border-gray-700 dark:bg-gray-900/40"
-                >
-                  {goal}
-                </li>
-              ))}
-            </ul>
+          <CardContent className="space-y-4">
+            {plan.skillsToDevelop.length > 0 && (
+              <div>
+                <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Beceriler</h4>
+                <div className="flex flex-wrap gap-2">
+                  {plan.skillsToDevelop.map((skill, index) => (
+                    <span
+                      key={`skill-${index}`}
+                      className="rounded-full bg-purple-100 px-3 py-1 text-xs font-semibold text-purple-700 dark:bg-purple-900/30 dark:text-purple-200"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+            {plan.goals.length > 0 && (
+              <div>
+                <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Hedefler</h4>
+                <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-200">
+                  {plan.goals.map((goal, index) => (
+                    <li
+                      key={`goal-${index}`}
+                      className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 dark:border-gray-700 dark:bg-gray-900/40"
+                    >
+                      {goal}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </CardContent>
         </Card>
       )}
@@ -439,65 +440,42 @@ export default function CareerRoadmapPage() {
       {getTechnologyRecommendations().length > 0 && (
         <Card variant="elevated">
           <CardHeader>
-            <div className="flex items-center gap-3">
-              <CardTitle className="flex items-center gap-2">
-                <Code2 className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-                Teknoloji Önerileri
-              </CardTitle>
-              <AITeacherSelin 
-                showAvatar={false} 
-                className="ml-auto" 
-                message={questionnaireData?.specialization 
-                  ? `${questionnaireData.specialization} alanı için önerdiğim teknolojiler:`
-                  : "Size önerdiğim teknolojiler:"
-                } 
-              />
-            </div>
+            <CardTitle className="flex items-center gap-2">
+              <Code2 className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+              Teknoloji Önerileri
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                {getTechnologyRecommendations().map((tech) => {
-                  const isSelected = questionnaireData?.technologies?.includes(tech);
-                  const techLink = getTechnologyLink(tech);
-                  const techRecommendation = getTechnologyRecommendation(tech);
-                  
-                  return (
-                    <Link
-                      key={tech}
-                      href={techLink}
-                      className="group block"
-                    >
-                      <div className="rounded-xl border-2 p-4 transition-all hover:border-blue-400 hover:shadow-md bg-white dark:bg-gray-900/40 border-blue-200 dark:border-blue-800">
-                        <div className="flex items-start justify-between gap-3 mb-2">
-                          <div className="flex items-center gap-2 flex-1 min-w-0">
-                            <Zap className="h-5 w-5 flex-shrink-0 text-blue-600 dark:text-blue-400" />
-                            <span className="font-semibold text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 truncate">
-                              {tech}
-                            </span>
-                          </div>
-                          {isSelected && (
-                            <span className="flex-shrink-0 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700 dark:bg-green-900/30 dark:text-green-400">
-                              Seçildi
-                            </span>
-                          )}
-                          <ExternalLink className="h-4 w-4 flex-shrink-0 text-gray-400 group-hover:text-blue-600 dark:text-gray-500 dark:group-hover:text-blue-400" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+              {getTechnologyRecommendations().map((tech) => {
+                const isSelected = questionnaireData?.technologies?.includes(tech);
+                const techLink = getTechnologyLink(tech);
+                
+                return (
+                  <Link
+                    key={tech}
+                    href={techLink}
+                    className="group block"
+                  >
+                    <div className="rounded-lg border-2 p-3 transition-all hover:border-blue-400 hover:shadow-md bg-white dark:bg-gray-900/40 border-blue-200 dark:border-blue-800">
+                      <div className="flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-2 flex-1 min-w-0">
+                          <Zap className="h-4 w-4 flex-shrink-0 text-blue-600 dark:text-blue-400" />
+                          <span className="font-semibold text-sm text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 truncate">
+                            {tech}
+                          </span>
                         </div>
-                        <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
-                          {techRecommendation}
-                        </p>
+                        {isSelected && (
+                          <span className="flex-shrink-0 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700 dark:bg-green-900/30 dark:text-green-400">
+                            Seçildi
+                          </span>
+                        )}
+                        <ExternalLink className="h-3 w-3 flex-shrink-0 text-gray-400 group-hover:text-blue-600 dark:text-gray-500 dark:group-hover:text-blue-400" />
                       </div>
-                    </Link>
-                  );
-                })}
-              </div>
-              {questionnaireData?.technologies && questionnaireData.technologies.length > 0 && (
-                <div className="rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 p-3">
-                  <p className="text-sm text-blue-800 dark:text-blue-200">
-                    <strong>Seçtiğiniz teknolojiler:</strong> {questionnaireData.technologies.join(", ")}
-                  </p>
-                </div>
-              )}
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           </CardContent>
         </Card>
@@ -506,246 +484,97 @@ export default function CareerRoadmapPage() {
       {plan.roadmap.length > 0 && (
         <Card variant="elevated">
           <CardHeader>
-            <div className="flex items-center gap-3">
-              <CardTitle>Kariyer Yol Haritası</CardTitle>
-              <AITeacherSelin showAvatar={false} className="ml-auto" message="Size özel hazırladığım detaylı yol haritanız:" />
-            </div>
+            <CardTitle>Kariyer Yol Haritası</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-6">
+          <CardContent className="space-y-4">
             {plan.roadmap.map((stage, index) => (
-              <div key={`stage-${index}`} className="space-y-4">
+              <div key={`stage-${index}`} className="space-y-3">
                 {/* Stage Header */}
-                <div className="flex items-center gap-3 pb-3 border-b border-gray-200 dark:border-gray-700">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-base font-bold text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
+                <div className="flex items-center gap-3 pb-2 border-b border-gray-200 dark:border-gray-700">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
                     {index + 1}
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
                       {stage.stage}: {stage.title}
                     </h3>
                     {stage.description && (
-                      <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                      <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">
                         {stage.description}
                       </p>
                     )}
                   </div>
                   <div className="flex gap-2">
                     {stage.priority && (
-                      <span className={`inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs font-medium ${
+                      <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium ${
                         stage.priority === "Yüksek" 
                           ? "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
                           : stage.priority === "Orta"
                           ? "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400"
                           : "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300"
                       }`}>
-                        <Flag className="h-3 w-3" />
                         {stage.priority}
                       </span>
                     )}
                     {stage.estimatedDuration && (
-                      <span className="inline-flex items-center gap-1 rounded-full bg-blue-100 px-2 py-1 text-xs font-medium text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
-                        <Clock className="h-3 w-3" />
+                      <span className="inline-flex items-center gap-1 rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
                         {stage.estimatedDuration}
                       </span>
                     )}
                   </div>
                 </div>
 
-                {/* All items as individual checkable cards */}
-                <div className="grid gap-3 md:grid-cols-2">
-                  {/* Development Topics */}
-                  {stage.developmentTopics && stage.developmentTopics.map((topic, topicIndex) => {
-                    const itemId = `topic-${index}-${topicIndex}`;
+                {/* Simplified items - combine all types */}
+                <div className="grid gap-2 md:grid-cols-2">
+                  {/* Combine all items into a simpler format */}
+                  {[
+                    ...(stage.tasks || []).map((task, taskIndex) => ({ type: 'task', content: task, index: taskIndex })),
+                    ...(stage.milestones || []).map((milestone, milestoneIndex) => ({ type: 'milestone', content: milestone, index: milestoneIndex })),
+                    ...(stage.developmentTopics || []).map((topic, topicIndex) => ({ type: 'topic', content: topic, index: topicIndex })),
+                    ...(stage.importantPoints || []).map((point, pointIndex) => ({ type: 'point', content: point, index: pointIndex })),
+                    ...(stage.practicalProjects || []).map((project, projectIndex) => ({ type: 'project', content: project, index: projectIndex })),
+                  ].map((item, itemIndex) => {
+                    const itemId = `${item.type}-${index}-${item.index}`;
+                    const isChecked = checkedItems.has(itemId);
+                    const colorClasses = {
+                      task: isChecked ? "border-green-500 bg-green-50 dark:bg-green-900/20" : "border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-900/20",
+                      milestone: isChecked ? "border-green-500 bg-green-50 dark:bg-green-900/20" : "border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-900/20",
+                      topic: isChecked ? "border-green-500 bg-green-50 dark:bg-green-900/20" : "border-purple-200 bg-purple-50 dark:border-purple-800 dark:bg-purple-900/20",
+                      point: isChecked ? "border-green-500 bg-green-50 dark:bg-green-900/20" : "border-orange-200 bg-orange-50 dark:border-orange-800 dark:bg-orange-900/20",
+                      project: isChecked ? "border-green-500 bg-green-50 dark:bg-green-900/20" : "border-indigo-200 bg-indigo-50 dark:border-indigo-800 dark:bg-indigo-900/20",
+                    };
+                    
                     return (
                       <div
                         key={itemId}
                         onClick={() => toggleChecked(itemId)}
-                        className={`relative rounded-xl border-2 p-4 cursor-pointer transition-all ${
-                          checkedItems.has(itemId)
-                            ? "border-green-500 bg-green-50 dark:bg-green-900/20"
-                            : "border-purple-200 bg-purple-50 dark:border-purple-800 dark:bg-purple-900/20 hover:border-purple-400 hover:shadow-md"
-                        }`}
+                        className={`relative rounded-lg border-2 p-3 cursor-pointer transition-all hover:shadow-md ${colorClasses[item.type as keyof typeof colorClasses]}`}
                       >
-                        <div className="flex items-start gap-3">
-                          <div className={`flex-shrink-0 mt-0.5 ${
-                            checkedItems.has(itemId) ? "text-green-600 dark:text-green-400" : "text-purple-600 dark:text-purple-400"
-                          }`}>
-                            {checkedItems.has(itemId) ? (
-                              <CheckCircle2 className="h-5 w-5" />
+                        <div className="flex items-start gap-2">
+                          <div className="flex-shrink-0 mt-0.5">
+                            {isChecked ? (
+                              <CheckCircle2 className="h-4 w-4 text-green-600 dark:text-green-400" />
                             ) : (
-                              <Lightbulb className="h-5 w-5" />
+                              item.type === 'task' ? (
+                                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-100 text-xs font-semibold text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
+                                  {item.index + 1}
+                                </span>
+                              ) : item.type === 'milestone' ? (
+                                <CheckCircle2 className="h-4 w-4 text-green-600 dark:text-green-400" />
+                              ) : item.type === 'project' ? (
+                                <Code className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
+                              ) : (
+                                <Lightbulb className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+                              )
                             )}
                           </div>
-                          <div className="flex-1">
-                            <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-1">
-                              Gelişim Konusu
-                            </p>
-                            <p className={`text-sm ${
-                              checkedItems.has(itemId)
-                                ? "text-green-800 dark:text-green-300"
-                                : "text-purple-800 dark:text-purple-300"
-                            }`}>
-                              {topic}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-
-                  {/* Important Points */}
-                  {stage.importantPoints && stage.importantPoints.map((point, pointIndex) => {
-                    const itemId = `point-${index}-${pointIndex}`;
-                    return (
-                      <div
-                        key={itemId}
-                        onClick={() => toggleChecked(itemId)}
-                        className={`relative rounded-xl border-2 p-4 cursor-pointer transition-all ${
-                          checkedItems.has(itemId)
-                            ? "border-green-500 bg-green-50 dark:bg-green-900/20"
-                            : "border-orange-200 bg-orange-50 dark:border-orange-800 dark:bg-orange-900/20 hover:border-orange-400 hover:shadow-md"
-                        }`}
-                      >
-                        <div className="flex items-start gap-3">
-                          <div className={`flex-shrink-0 mt-0.5 ${
-                            checkedItems.has(itemId) ? "text-green-600 dark:text-green-400" : "text-orange-600 dark:text-orange-400"
+                          <p className={`text-sm flex-1 ${
+                            isChecked
+                              ? "text-green-800 dark:text-green-300"
+                              : "text-gray-800 dark:text-gray-200"
                           }`}>
-                            {checkedItems.has(itemId) ? (
-                              <CheckCircle2 className="h-5 w-5" />
-                            ) : (
-                              <AlertCircle className="h-5 w-5" />
-                            )}
-                          </div>
-                          <div className="flex-1">
-                            <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-1">
-                              Önemli Nokta
-                            </p>
-                            <p className={`text-sm ${
-                              checkedItems.has(itemId)
-                                ? "text-green-800 dark:text-green-300"
-                                : "text-orange-800 dark:text-orange-300"
-                            }`}>
-                              {point}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-
-                  {/* Tasks */}
-                  {stage.tasks && stage.tasks.map((task, taskIndex) => {
-                    const itemId = `task-${index}-${taskIndex}`;
-                    return (
-                      <div
-                        key={itemId}
-                        onClick={() => toggleChecked(itemId)}
-                        className={`relative rounded-xl border-2 p-4 cursor-pointer transition-all ${
-                          checkedItems.has(itemId)
-                            ? "border-green-500 bg-green-50 dark:bg-green-900/20"
-                            : "border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-900/20 hover:border-blue-400 hover:shadow-md"
-                        }`}
-                      >
-                        <div className="flex items-start gap-3">
-                          <div className={`flex-shrink-0 mt-0.5 ${
-                            checkedItems.has(itemId) ? "text-green-600 dark:text-green-400" : "text-blue-600 dark:text-blue-400"
-                          }`}>
-                            {checkedItems.has(itemId) ? (
-                              <CheckCircle2 className="h-5 w-5" />
-                            ) : (
-                              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-100 text-xs font-semibold text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
-                                {taskIndex + 1}
-                              </span>
-                            )}
-                          </div>
-                          <div className="flex-1">
-                            <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-1">
-                              Kilit Görev
-                            </p>
-                            <p className={`text-sm ${
-                              checkedItems.has(itemId)
-                                ? "text-green-800 dark:text-green-300"
-                                : "text-blue-800 dark:text-blue-300"
-                            }`}>
-                              {task}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-
-                  {/* Milestones */}
-                  {stage.milestones && stage.milestones.map((milestone, milestoneIndex) => {
-                    const itemId = `milestone-${index}-${milestoneIndex}`;
-                    return (
-                      <div
-                        key={itemId}
-                        onClick={() => toggleChecked(itemId)}
-                        className={`relative rounded-xl border-2 p-4 cursor-pointer transition-all ${
-                          checkedItems.has(itemId)
-                            ? "border-green-500 bg-green-50 dark:bg-green-900/20"
-                            : "border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-900/20 hover:border-green-400 hover:shadow-md"
-                        }`}
-                      >
-                        <div className="flex items-start gap-3">
-                          <div className={`flex-shrink-0 mt-0.5 ${
-                            checkedItems.has(itemId) ? "text-green-600 dark:text-green-400" : "text-green-600 dark:text-green-400"
-                          }`}>
-                            <CheckCircle2 className="h-5 w-5" />
-                          </div>
-                          <div className="flex-1">
-                            <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-1">
-                              Kilometre Taşı
-                            </p>
-                            <p className={`text-sm ${
-                              checkedItems.has(itemId)
-                                ? "text-green-800 dark:text-green-300"
-                                : "text-green-800 dark:text-green-300"
-                            }`}>
-                              {milestone}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-
-                  {/* Practical Projects */}
-                  {stage.practicalProjects && stage.practicalProjects.map((project, projectIndex) => {
-                    const itemId = `project-${index}-${projectIndex}`;
-                    return (
-                      <div
-                        key={itemId}
-                        onClick={() => toggleChecked(itemId)}
-                        className={`relative rounded-xl border-2 p-4 cursor-pointer transition-all ${
-                          checkedItems.has(itemId)
-                            ? "border-green-500 bg-green-50 dark:bg-green-900/20"
-                            : "border-indigo-200 bg-indigo-50 dark:border-indigo-800 dark:bg-indigo-900/20 hover:border-indigo-400 hover:shadow-md"
-                        }`}
-                      >
-                        <div className="flex items-start gap-3">
-                          <div className={`flex-shrink-0 mt-0.5 ${
-                            checkedItems.has(itemId) ? "text-green-600 dark:text-green-400" : "text-indigo-600 dark:text-indigo-400"
-                          }`}>
-                            {checkedItems.has(itemId) ? (
-                              <CheckCircle2 className="h-5 w-5" />
-                            ) : (
-                              <Code className="h-5 w-5" />
-                            )}
-                          </div>
-                          <div className="flex-1">
-                            <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-1">
-                              Pratik Proje
-                            </p>
-                            <p className={`text-sm ${
-                              checkedItems.has(itemId)
-                                ? "text-green-800 dark:text-green-300"
-                                : "text-indigo-800 dark:text-indigo-300"
-                            }`}>
-                              {project}
-                            </p>
-                          </div>
+                            {item.content}
+                          </p>
                         </div>
                       </div>
                     );
@@ -757,47 +586,34 @@ export default function CareerRoadmapPage() {
         </Card>
       )}
 
-      {/* Recommended Resources with Cards */}
+      {/* Recommended Resources */}
       {(plan.recommendedResources && plan.recommendedResources.length > 0) || plan.recommendedCourses.length > 0 ? (
         <Card variant="elevated">
           <CardHeader>
-            <div className="flex items-center justify-between">
-              <CardTitle className="flex items-center gap-2">
-                <BookOpen className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-                Platform Kaynakları
-              </CardTitle>
-              <AITeacherSelin showAvatar={false} message="Size önerdiğim platform içi kaynaklar:" />
-            </div>
+            <CardTitle className="flex items-center gap-2">
+              <BookOpen className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+              Platform Kaynakları
+            </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
-            {/* New Resource Cards */}
+          <CardContent className="space-y-3">
             {plan.recommendedResources && plan.recommendedResources.length > 0 && (
-              <div className="grid gap-4 md:grid-cols-2">
+              <div className="grid gap-3 md:grid-cols-2">
                 {plan.recommendedResources.map((resource, index) => (
                   <CareerPlanResourceCard key={`resource-${index}`} resource={resource} />
                 ))}
               </div>
             )}
-            
-            {/* Legacy Recommended Courses */}
             {plan.recommendedCourses.length > 0 && (
-              <div>
-                {plan.recommendedResources && plan.recommendedResources.length > 0 && (
-                  <h4 className="mb-3 text-sm font-semibold text-gray-700 dark:text-gray-300">
-                    Diğer Önerilen Kaynaklar
-                  </h4>
-                )}
-                <ul className="space-y-3">
-                  {plan.recommendedCourses.map((course, index) => (
-                    <li
-                      key={`course-${index}`}
-                      className="rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-800 shadow-sm dark:border-gray-700 dark:bg-gray-900/40 dark:text-gray-100"
-                    >
-                      {course}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <ul className="space-y-2">
+                {plan.recommendedCourses.map((course, index) => (
+                  <li
+                    key={`course-${index}`}
+                    className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-800 dark:border-gray-700 dark:bg-gray-900/40 dark:text-gray-100"
+                  >
+                    {course}
+                  </li>
+                ))}
+              </ul>
             )}
           </CardContent>
         </Card>

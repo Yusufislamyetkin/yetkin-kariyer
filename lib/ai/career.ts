@@ -123,7 +123,7 @@ const buildCareerPlanPrompt = ({
     : "";
 
   return `
-Kişiselleştirilmiş kariyer planı oluştur. JSON formatında döndür.
+Kişiselleştirilmiş kariyer planı oluştur. Kısa, öz ve net olsun. JSON formatında döndür.
 
 KULLANICI BİLGİLERİ:
 ${cvSection}${testSection ? ` ${testSection}` : ""}${interviewSection ? ` ${interviewSection}` : ""}
@@ -132,8 +132,10 @@ ${resourcesSection}
 ${guidanceInstructions}
 
 ROADMAP:
-- Her aşama: description, 4-6 tasks, 2-3 milestones, developmentTopics, importantPoints, practicalProjects, priority (Yüksek/Orta/Düşük), estimatedDuration
-- 3-5 aşama oluştur
+- Her aşama: kısa description, 3-4 tasks, 1-2 milestones
+- developmentTopics, importantPoints, practicalProjects opsiyonel (sadece gerekliyse ekle)
+- priority (Yüksek/Orta/Düşük) ve estimatedDuration ekle
+- 2-3 aşama oluştur (kısa ve öz)
 
 JSON:
 {
@@ -143,7 +145,7 @@ JSON:
   "recommendedResources": [{"title": "...", "type": "Kurs", "description": "...", "link": "course-id veya boş string"}],
   "skillsToDevelop": [...],
   "timeline": "${questionnaire?.timeline && questionnaire.timeline !== "Henüz belirlemedim" ? questionnaire.timeline : "6-12 ay"}",
-  "summary": "AI Öğretmen Selin olarak kullanıcıya doğrudan hitap et, durumu değerlendir, somut adımlar sun."
+  "summary": "Kısa ve öz bir özet (2-3 cümle). AI Öğretmen Selin olarak kullanıcıya doğrudan hitap et."
 }
 
 Sadece JSON döndür.

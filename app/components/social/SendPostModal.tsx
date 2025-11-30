@@ -11,6 +11,7 @@ interface SendPostModalProps {
   postId: string;
   postContent: string | null;
   postImageUrl: string | null;
+  postVideoUrl: string | null;
   onClose: () => void;
   onSuccess?: () => void;
 }
@@ -33,6 +34,7 @@ export function SendPostModal({
   postId,
   postContent,
   postImageUrl,
+  postVideoUrl,
   onClose,
   onSuccess,
 }: SendPostModalProps) {

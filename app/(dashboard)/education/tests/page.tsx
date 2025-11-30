@@ -128,7 +128,9 @@ export default function TestsPage() {
 
       {/* AI Öğretmen Yönlendirme Kartı - Sadece yanlış cevaplar varsa göster */}
       {!loadingWrongQuestions && wrongQuestionsData?.hasWrongQuestions && (
-        <AITeacherCard wrongQuestionsCount={wrongQuestionsData.wrongQuestionsCount} />
+        <div className="pt-8 md:pt-10">
+          <AITeacherCard wrongQuestionsCount={wrongQuestionsData.wrongQuestionsCount} />
+        </div>
       )}
 
       <div className="flex flex-col gap-6">

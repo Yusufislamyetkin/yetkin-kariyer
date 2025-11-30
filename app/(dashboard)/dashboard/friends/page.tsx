@@ -427,13 +427,13 @@ export default function FriendsPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-[1400px] mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 md:py-8">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+        <div className="mb-4 sm:mb-6 md:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-1 sm:mb-2">
             Bağlantılarım
           </h1>
-          <p className="text-base text-gray-600 dark:text-gray-400">
+          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
             Ekip kurmak için bağlantılarınızı yönetin, gelen istekleri yanıtlayın ve yeni bağlantılar kurun.
           </p>
         </div>
@@ -441,56 +441,56 @@ export default function FriendsPage() {
         {/* Action Message */}
         {actionMessage && actionType && (
           <div
-            className={`mb-6 flex items-center gap-3 rounded-xl border-2 px-5 py-4 text-base ${
+            className={`mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3 rounded-xl border-2 px-3 sm:px-5 py-3 sm:py-4 text-sm sm:text-base ${
               actionType === "success"
                 ? "border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-200"
                 : "border-rose-200 bg-rose-50 text-rose-700 dark:border-rose-500/30 dark:bg-rose-500/10 dark:text-rose-200"
             }`}
           >
-            {actionType === "success" ? <Check className="h-5 w-5" /> : <X className="h-5 w-5" />}
-            <span>{actionMessage}</span>
+            {actionType === "success" ? <Check className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" /> : <X className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />}
+            <span className="break-words">{actionMessage}</span>
           </div>
         )}
 
         {/* Search Section */}
-        <div className="bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 rounded-2xl p-6 shadow-lg mb-8">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+        <div className="bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg mb-4 sm:mb-6 md:mb-8">
+          <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-100 mb-1 sm:mb-2">
             Bağlantı Ekle
           </h2>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+          <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-3 sm:mb-4">
             Takım arkadaşlarınızla iletişime geçmek için isim veya email ile kullanıcıları arayabilir ve bağlantı isteği gönderebilirsiniz.
           </p>
           <div className="relative mb-4">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+            <Search className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
             <input
               type="text"
               placeholder="İsim veya email ile ara..."
               value={searchQuery}
               onChange={(event) => setSearchQuery(event.target.value)}
-              className="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl text-base text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0095f6] focus:border-transparent transition-all"
+              className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2.5 sm:py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-lg sm:rounded-xl text-sm sm:text-base text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0095f6] focus:border-transparent transition-all"
             />
           </div>
           {searching && (
-            <div className="flex items-center justify-center py-6">
-              <Loader2 className="h-6 w-6 animate-spin text-[#0095f6]" />
-              <span className="ml-3 text-base text-gray-600 dark:text-gray-400">Aranıyor...</span>
+            <div className="flex items-center justify-center py-4 sm:py-6">
+              <Loader2 className="h-5 w-5 sm:h-6 sm:w-6 animate-spin text-[#0095f6]" />
+              <span className="ml-2 sm:ml-3 text-sm sm:text-base text-gray-600 dark:text-gray-400">Aranıyor...</span>
             </div>
           )}
           {searchError && (
-            <div className="rounded-xl border-2 border-rose-200 bg-rose-50 px-5 py-4 text-sm text-rose-700 dark:border-rose-500/30 dark:bg-rose-500/10 dark:text-rose-200">
+            <div className="rounded-lg sm:rounded-xl border-2 border-rose-200 bg-rose-50 px-3 sm:px-5 py-3 sm:py-4 text-xs sm:text-sm text-rose-700 dark:border-rose-500/30 dark:bg-rose-500/10 dark:text-rose-200">
               {searchError}
             </div>
           )}
           {!searching && !searchError && uniqueSearchResults.length > 0 && (
-            <div className="space-y-3 max-h-80 overflow-y-auto">
+            <div className="space-y-2 sm:space-y-3 max-h-80 overflow-y-auto">
               {uniqueSearchResults.map((user) => (
                 <div
                   key={user.id}
-                  className="flex items-center justify-between rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-4 py-3 shadow-sm hover:shadow-md transition-shadow"
+                  className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-lg sm:rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-3 sm:px-4 sm:py-3 shadow-sm hover:shadow-md transition-shadow gap-3 sm:gap-0"
                 >
-                  <div className="flex items-center gap-4 flex-1 min-w-0">
+                  <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
                     {user.profileImage ? (
-                      <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-gray-200 dark:ring-gray-700 flex-shrink-0">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden ring-2 ring-gray-200 dark:ring-gray-700 flex-shrink-0">
                         <Image
                           src={user.profileImage}
                           alt={user.name || user.email}
@@ -500,7 +500,7 @@ export default function FriendsPage() {
                         />
                       </div>
                     ) : (
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-base flex-shrink-0 ring-2 ring-gray-200 dark:ring-gray-700">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-sm sm:text-base flex-shrink-0 ring-2 ring-gray-200 dark:ring-gray-700">
                         {(user.name || user.email)
                           .split(" ")
                           .map((word) => word[0])
@@ -510,28 +510,28 @@ export default function FriendsPage() {
                       </div>
                     )}
                     <div className="flex-1 min-w-0">
-                      <p className="font-semibold text-gray-900 dark:text-gray-100 truncate text-base">
+                      <p className="font-semibold text-gray-900 dark:text-gray-100 truncate text-sm sm:text-base">
                         {user.name || "İsimsiz Kullanıcı"}
                       </p>
-                      <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
+                      <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 truncate">
                         {user.email}
                       </p>
                     </div>
                   </div>
-                  <div className="ml-4">
+                  <div className="ml-0 sm:ml-4 flex-shrink-0 w-full sm:w-auto">
                     {user.friendshipStatus === "accepted" ? (
-                      <span className="text-sm text-emerald-600 dark:text-emerald-400 font-semibold px-3 py-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-900/20">
+                      <span className="inline-block text-xs sm:text-sm text-emerald-600 dark:text-emerald-400 font-semibold px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-900/20 text-center w-full sm:w-auto">
                         Bağlantı
                       </span>
                     ) : user.friendshipStatus === "pending" ? (
-                      <span className="text-sm text-blue-600 dark:text-blue-400 font-semibold px-3 py-1.5 rounded-lg bg-blue-50 dark:bg-blue-900/20">
+                      <span className="inline-block text-xs sm:text-sm text-blue-600 dark:text-blue-400 font-semibold px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-center w-full sm:w-auto">
                         {user.isRequester ? "İstek gönderildi" : "İstek bekliyor"}
                       </span>
                     ) : (
                       <button
                         onClick={() => handleSendRequest(user.id)}
                         disabled={sendingRequest}
-                        className="px-4 py-2 bg-[#0095f6] hover:bg-[#1877f2] text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                        className="w-full sm:w-auto px-3 sm:px-4 py-2 bg-[#0095f6] hover:bg-[#1877f2] text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm"
                       >
                         {sendingRequest ? (
                           <Loader2 className="h-4 w-4 animate-spin" />
@@ -549,49 +549,49 @@ export default function FriendsPage() {
             </div>
           )}
           {!searching && !searchError && searchQuery.trim().length >= 2 && uniqueSearchResults.length === 0 && (
-            <div className="rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700 p-6 text-center text-base text-gray-600 dark:text-gray-400">
+            <div className="rounded-lg sm:rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700 p-4 sm:p-6 text-center text-sm sm:text-base text-gray-600 dark:text-gray-400">
               Kullanıcı bulunamadı.
             </div>
           )}
           {!searching && !searchError && searchQuery.trim().length < 2 && searchQuery.length > 0 && (
-            <div className="rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700 p-6 text-center text-base text-gray-600 dark:text-gray-400">
+            <div className="rounded-lg sm:rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700 p-4 sm:p-6 text-center text-sm sm:text-base text-gray-600 dark:text-gray-400">
               Arama için en az 2 karakter girin.
             </div>
           )}
         </div>
 
         {loading ? (
-          <div className="flex min-h-[400px] items-center justify-center bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 rounded-2xl shadow-lg">
-            <Loader2 className="h-10 w-10 animate-spin text-[#0095f6]" />
+          <div className="flex min-h-[300px] sm:min-h-[400px] items-center justify-center bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 rounded-xl sm:rounded-2xl shadow-lg">
+            <Loader2 className="h-8 w-8 sm:h-10 sm:w-10 animate-spin text-[#0095f6]" />
           </div>
         ) : error ? (
-          <div className="bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 rounded-2xl p-12 text-center shadow-lg">
-            <p className="text-base text-gray-600 dark:text-gray-400">{error}</p>
+          <div className="bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 rounded-xl sm:rounded-2xl p-6 sm:p-12 text-center shadow-lg">
+            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">{error}</p>
           </div>
         ) : (
-          <div className="grid gap-6 lg:grid-cols-2">
+          <div className="grid gap-4 sm:gap-6 grid-cols-1 lg:grid-cols-2">
             {/* Incoming Requests */}
-            <div className="bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 rounded-2xl p-6 shadow-lg">
-              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+            <div className="bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg">
+              <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-100 mb-1 sm:mb-2">
                 Gelen İstekler
               </h2>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-3 sm:mb-4">
                 Gelen bağlantı isteklerine buradan yanıt verin.
               </p>
-              <div className="space-y-3">
+              <div className="space-y-2 sm:space-y-3">
                 {incomingRequests.length === 0 ? (
-                  <div className="rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700 p-6 text-center text-sm text-gray-600 dark:text-gray-400">
+                  <div className="rounded-lg sm:rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700 p-4 sm:p-6 text-center text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                     Şu anda bekleyen bağlantı isteği yok.
                   </div>
                 ) : (
                   incomingRequests.map((friendship) => (
                     <div
                       key={friendship.id}
-                      className="flex items-center justify-between rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-4 py-3 shadow-sm hover:shadow-md transition-shadow"
+                      className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-lg sm:rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-3 sm:px-4 sm:py-3 shadow-sm hover:shadow-md transition-shadow gap-3 sm:gap-0"
                     >
                       <div className="flex items-center gap-3 flex-1 min-w-0">
                         {friendship.counterpart.profileImage ? (
-                          <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-gray-200 dark:ring-gray-700 flex-shrink-0">
+                          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden ring-2 ring-gray-200 dark:ring-gray-700 flex-shrink-0">
                             <Image
                               src={friendship.counterpart.profileImage}
                               alt={friendship.counterpart.name || "User"}
@@ -601,12 +601,12 @@ export default function FriendsPage() {
                             />
                           </div>
                         ) : (
-                          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-base flex-shrink-0 ring-2 ring-gray-200 dark:ring-gray-700">
+                          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-sm sm:text-base flex-shrink-0 ring-2 ring-gray-200 dark:ring-gray-700">
                             {(friendship.counterpart.name || "U")[0].toUpperCase()}
                           </div>
                         )}
                         <div className="flex-1 min-w-0">
-                          <p className="font-semibold text-gray-900 dark:text-gray-100 truncate text-base">
+                          <p className="font-semibold text-gray-900 dark:text-gray-100 truncate text-sm sm:text-base">
                             {friendship.counterpart.name ?? "İsimsiz Kullanıcı"}
                           </p>
                           <p className="text-xs text-gray-500 dark:text-gray-400">
@@ -617,18 +617,18 @@ export default function FriendsPage() {
                           </p>
                         </div>
                       </div>
-                      <div className="flex items-center gap-2 ml-4">
+                      <div className="flex items-center gap-2 sm:ml-4 w-full sm:w-auto">
                         <button
                           onClick={() => handleRespond(friendship.id, "accept")}
                           disabled={respondingId === friendship.id}
-                          className="px-4 py-2 bg-[#0095f6] hover:bg-[#1877f2] text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                          className="flex-1 sm:flex-none px-3 sm:px-4 py-2 bg-[#0095f6] hover:bg-[#1877f2] text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-xs sm:text-sm"
                         >
                           Kabul Et
                         </button>
                         <button
                           onClick={() => handleRespond(friendship.id, "decline")}
                           disabled={respondingId === friendship.id}
-                          className="px-4 py-2 border-2 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 font-semibold rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                          className="flex-1 sm:flex-none px-3 sm:px-4 py-2 border-2 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 font-semibold rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-xs sm:text-sm"
                         >
                           Reddet
                         </button>
@@ -640,27 +640,27 @@ export default function FriendsPage() {
             </div>
 
             {/* Outgoing Requests */}
-            <div className="bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 rounded-2xl p-6 shadow-lg">
-              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+            <div className="bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg">
+              <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-100 mb-1 sm:mb-2">
                 Gönderilen İstekler
               </h2>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-3 sm:mb-4">
                 Gönderdiğiniz bağlantı istekleri.
               </p>
-              <div className="space-y-3">
+              <div className="space-y-2 sm:space-y-3">
                 {outgoingRequests.length === 0 ? (
-                  <div className="rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700 p-6 text-center text-sm text-gray-600 dark:text-gray-400">
+                  <div className="rounded-lg sm:rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700 p-4 sm:p-6 text-center text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                     Bekleyen giden bağlantı isteğiniz yok.
                   </div>
                 ) : (
                   outgoingRequests.map((friendship) => (
                     <div
                       key={friendship.id}
-                      className="flex items-center justify-between rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-4 py-3 shadow-sm hover:shadow-md transition-shadow"
+                      className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-lg sm:rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-3 sm:px-4 sm:py-3 shadow-sm hover:shadow-md transition-shadow gap-3 sm:gap-0"
                     >
                       <div className="flex items-center gap-3 flex-1 min-w-0">
                         {friendship.counterpart.profileImage ? (
-                          <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-gray-200 dark:ring-gray-700 flex-shrink-0">
+                          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden ring-2 ring-gray-200 dark:ring-gray-700 flex-shrink-0">
                             <Image
                               src={friendship.counterpart.profileImage}
                               alt={friendship.counterpart.name || "User"}
@@ -670,12 +670,12 @@ export default function FriendsPage() {
                             />
                           </div>
                         ) : (
-                          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-base flex-shrink-0 ring-2 ring-gray-200 dark:ring-gray-700">
+                          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-sm sm:text-base flex-shrink-0 ring-2 ring-gray-200 dark:ring-gray-700">
                             {(friendship.counterpart.name || "U")[0].toUpperCase()}
                           </div>
                         )}
                         <div className="flex-1 min-w-0">
-                          <p className="font-semibold text-gray-900 dark:text-gray-100 truncate text-base">
+                          <p className="font-semibold text-gray-900 dark:text-gray-100 truncate text-sm sm:text-base">
                             {friendship.counterpart.name ?? "İsimsiz Kullanıcı"}
                           </p>
                           <p className="text-xs text-gray-500 dark:text-gray-400">
@@ -689,7 +689,7 @@ export default function FriendsPage() {
                       <button
                         onClick={() => handleRespond(friendship.id, "cancel")}
                         disabled={respondingId === friendship.id}
-                        className="px-4 py-2 border-2 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 font-semibold rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm ml-4"
+                        className="w-full sm:w-auto px-3 sm:px-4 py-2 border-2 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 font-semibold rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-xs sm:text-sm sm:ml-4"
                       >
                         İptal Et
                       </button>
@@ -700,43 +700,43 @@ export default function FriendsPage() {
             </div>
 
             {/* Connections List */}
-            <div className="bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 rounded-2xl p-6 shadow-lg lg:col-span-2">
-              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+            <div className="bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg lg:col-span-2">
+              <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-100 mb-1 sm:mb-2">
                 Tüm Bağlantılarım
               </h2>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-3 sm:mb-4">
                 Takım kurarken buradaki kullanıcılara davet gönderebilirsiniz.
               </p>
               {acceptedFriends.length > 0 && (
                 <div className="relative mb-4">
-                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                  <Search className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
                   <input
                     type="text"
                     placeholder="Bağlantılarınızı ara..."
                     value={friendsListSearchQuery}
                     onChange={(event) => setFriendsListSearchQuery(event.target.value)}
-                    className="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl text-base text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0095f6] focus:border-transparent transition-all"
+                    className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2.5 sm:py-3 bg-gray-50 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-lg sm:rounded-xl text-sm sm:text-base text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0095f6] focus:border-transparent transition-all"
                   />
                 </div>
               )}
               {acceptedFriends.length === 0 ? (
-                <div className="rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700 p-8 text-center text-base text-gray-600 dark:text-gray-400">
+                <div className="rounded-lg sm:rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700 p-6 sm:p-8 text-center text-sm sm:text-base text-gray-600 dark:text-gray-400">
                   Henüz bağlantı eklemediniz. Yukarıdaki arama kutusunu kullanarak kullanıcıları arayabilir ve bağlantı isteği gönderebilirsiniz.
                 </div>
               ) : filteredAcceptedFriends.length === 0 ? (
-                <div className="rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700 p-8 text-center text-base text-gray-600 dark:text-gray-400">
+                <div className="rounded-lg sm:rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-700 p-6 sm:p-8 text-center text-sm sm:text-base text-gray-600 dark:text-gray-400">
                   Arama kriterinize uygun bağlantı bulunamadı.
                 </div>
               ) : (
-                <div className="space-y-3">
+                <div className="space-y-2 sm:space-y-3">
                   {filteredAcceptedFriends.map((friendship) => (
                     <div
                       key={friendship.id}
-                      className="flex items-center justify-between rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-4 py-3 shadow-sm hover:shadow-md transition-shadow"
+                      className="flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-lg sm:rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-3 sm:px-4 sm:py-3 shadow-sm hover:shadow-md transition-shadow gap-3 sm:gap-0"
                     >
-                      <div className="flex items-center gap-4 flex-1 min-w-0">
+                      <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
                         {friendship.counterpart.profileImage ? (
-                          <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-gray-200 dark:ring-gray-700 flex-shrink-0">
+                          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden ring-2 ring-gray-200 dark:ring-gray-700 flex-shrink-0">
                             <Image
                               src={friendship.counterpart.profileImage}
                               alt={friendship.counterpart.name || "User"}
@@ -746,42 +746,42 @@ export default function FriendsPage() {
                             />
                           </div>
                         ) : (
-                          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-base flex-shrink-0 ring-2 ring-gray-200 dark:ring-gray-700">
+                          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-sm sm:text-base flex-shrink-0 ring-2 ring-gray-200 dark:ring-gray-700">
                             {(friendship.counterpart.name || "U")[0].toUpperCase()}
                           </div>
                         )}
                         <div className="flex-1 min-w-0">
-                          <p className="font-semibold text-gray-900 dark:text-gray-100 truncate text-base">
+                          <p className="font-semibold text-gray-900 dark:text-gray-100 truncate text-sm sm:text-base">
                             {friendship.counterpart.name ?? "İsimsiz Kullanıcı"}
                           </p>
                         </div>
                       </div>
-                      <div className="flex items-center gap-2 ml-4">
+                      <div className="flex flex-wrap items-center gap-2 sm:ml-4 w-full sm:w-auto">
                         <button
                           onClick={() => handleStartMessage(friendship.counterpart.id)}
                           disabled={startingMessage === friendship.counterpart.id}
-                          className="px-4 py-2 bg-[#0095f6] hover:bg-[#1877f2] text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 text-sm"
+                          className="flex-1 sm:flex-none px-3 sm:px-4 py-2 bg-[#0095f6] hover:bg-[#1877f2] text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-xs sm:text-sm"
                         >
                           {startingMessage === friendship.counterpart.id ? (
                             <Loader2 className="h-4 w-4 animate-spin" />
                           ) : (
                             <>
-                              <MessageSquare className="h-4 w-4" />
+                              <MessageSquare className="h-3 w-3 sm:h-4 sm:w-4" />
                               Mesajlaş
                             </>
                           )}
                         </button>
                         <button
                           onClick={() => handleVisitProfile(friendship.counterpart.id)}
-                          className="px-4 py-2 border-2 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 font-semibold rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors flex items-center gap-2 text-sm"
+                          className="flex-1 sm:flex-none px-3 sm:px-4 py-2 border-2 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 font-semibold rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors flex items-center justify-center gap-2 text-xs sm:text-sm"
                         >
-                          <User className="h-4 w-4" />
+                          <User className="h-3 w-3 sm:h-4 sm:w-4" />
                           Profil
                         </button>
                         <button
                           onClick={() => handleRespond(friendship.id, "remove")}
                           disabled={respondingId === friendship.id}
-                          className="px-4 py-2 border-2 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 font-semibold rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                          className="flex-1 sm:flex-none px-3 sm:px-4 py-2 border-2 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 font-semibold rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-xs sm:text-sm"
                         >
                           Kaldır
                         </button>

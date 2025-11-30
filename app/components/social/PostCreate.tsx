@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { Textarea } from "@/app/components/ui/Textarea";
 import { Button } from "@/app/components/ui/Button";
-import { X, Loader2, ImageIcon } from "lucide-react";
+import { X, Loader2, ImageIcon, VideoIcon } from "lucide-react";
 import { z } from "zod";
 import { useBadgeNotificationHandler } from "@/hooks/useBadgeNotificationHandler";
 
@@ -22,6 +22,9 @@ export function PostCreate({ onClose, onSuccess, isModal = true }: PostCreatePro
   const { handleBadgeResults } = useBadgeNotificationHandler();
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [videoFile, setVideoFile] = useState<File | null>(null);
+  const [videoUrl, setVideoUrl] = useState<string | null>(null);
+  const [videoDuration, setVideoDuration] = useState<number | null>(null);
   const [content, setContent] = useState("");
   const [isUploading, setIsUploading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -33,6 +36,13 @@ export function PostCreate({ onClose, onSuccess, isModal = true }: PostCreatePro
   const userProfileImage = user?.profileImage;
 
   const handleImageSelect = async (file: File) => {
+    // Remove video if image is selected
+    if (videoFile || videoUrl) {
+      setVideoFile(null);
+      setVideoUrl(null);
+      setVideoDuration(null);
+    }
+
     setImageFile(file);
     setError(null);
 
@@ -81,6 +91,103 @@ export function PostCreate({ onClose, onSuccess, isModal = true }: PostCreatePro
     setImageUrl(null);
   };
 
+  const handleVideoSelect = async (file: File) => {
+    // Remove image if video is selected
+    if (imageFile || imageUrl) {
+      setImageFile(null);
+      setImageUrl(null);
+    }
+
+    setError(null);
+
+    // Validate file size (100MB)
+    const MAX_SIZE = 100 * 1024 * 1024;
+    if (file.size > MAX_SIZE) {
+      setError(`Video boyutu 100MB'ı aşamaz`);
+      return;
+    }
+
+    // Validate file type
+    const allowedTypes = ["video/mp4", "video/webm", "video/quicktime"];
+    if (!allowedTypes.includes(file.type)) {
+      setError("Sadece MP4, WebM ve MOV formatları desteklenir");
+      return;
+    }
+
+    // Get video duration using HTML5 video element
+    const video = document.createElement("video");
+    video.preload = "metadata";
+    
+    const videoDurationPromise = new Promise<number>((resolve, reject) => {
+      video.onloadedmetadata = () => {
+        window.URL.revokeObjectURL(video.src);
+        const duration = video.duration;
+        if (duration > 30) {
+          reject(new Error("Video süresi 30 saniyeyi aşamaz"));
+        } else {
+          resolve(duration);
+        }
+      };
+      video.onerror = () => {
+        window.URL.revokeObjectURL(video.src);
+        reject(new Error("Video yüklenirken bir hata oluştu"));
+      };
+    });
+
+    video.src = URL.createObjectURL(file);
+    setVideoFile(file);
+
+    try {
+      const duration = await videoDurationPromise;
+      setVideoDuration(duration);
+
+      // Upload video
+      setIsUploading(true);
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("duration", duration.toString());
+
+      const response = await fetch("/api/upload/post-video", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || "Video yüklenirken bir hata oluştu");
+      }
+
+      const data = await response.json();
+      
+      // Validate that we received a valid URL
+      if (!data.url || typeof data.url !== "string") {
+        throw new Error("Video yükleme başarısız: Geçersiz URL alındı");
+      }
+      
+      // Validate URL format
+      try {
+        new URL(data.url);
+      } catch {
+        throw new Error("Video yükleme başarısız: Geçersiz URL formatı");
+      }
+      
+      setVideoUrl(data.url);
+    } catch (error: any) {
+      setError(error.message || "Video yüklenirken bir hata oluştu");
+      setVideoFile(null);
+      setVideoUrl(null);
+      setVideoDuration(null);
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  const handleVideoRemove = () => {
+    setVideoFile(null);
+    setVideoUrl(null);
+    setVideoDuration(null);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Client-side schema validation (Türkçe mesajlarla)
@@ -94,16 +201,24 @@ export function PostCreate({ onClose, onSuccess, isModal = true }: PostCreatePro
           .optional(),
         imageUrl: z
           .union([z.string().url("Geçersiz görsel URL formatı").transform((v) => v.trim()), z.null()])
+          .optional(),
+        videoUrl: z
+          .union([z.string().url("Geçersiz video URL formatı").transform((v) => v.trim()), z.null()])
           .optional()
       })
-      .refine((data) => (data.content && data.content.length > 0) || data.imageUrl, {
-        message: "Lütfen bir mesaj yazın veya görsel ekleyin"
+      .refine((data) => (data.content && data.content.length > 0) || data.imageUrl || data.videoUrl, {
+        message: "Lütfen bir mesaj yazın, görsel veya video ekleyin"
+      })
+      .refine((data) => !(data.imageUrl && data.videoUrl), {
+        message: "Bir gönderi hem görsel hem video içeremez"
       });
 
-    // Wait for image upload to complete
-    if (imageFile && !imageUrl && isUploading) {
-      setError("Lütfen görsel yüklenmesini bekleyin");
-      return;
+    // Wait for upload to complete
+    if ((imageFile && !imageUrl) || (videoFile && !videoUrl)) {
+      if (isUploading) {
+        setError("Lütfen yüklenmesini bekleyin");
+        return;
+      }
     }
 
     if (isSubmitting || isUploading) return;
@@ -114,7 +229,8 @@ export function PostCreate({ onClose, onSuccess, isModal = true }: PostCreatePro
     try {
       const payload = {
         content: content ? content.trim() : "",
-        imageUrl: imageUrl ?? null
+        imageUrl: imageUrl ?? null,
+        videoUrl: videoUrl ?? null
       };
       const parsed = createPostSchema.safeParse(payload);
       if (!parsed.success) {
@@ -123,16 +239,30 @@ export function PostCreate({ onClose, onSuccess, isModal = true }: PostCreatePro
         setIsSubmitting(false);
         return;
       }
-      // Validate imageUrl if it exists
+      // Validate URLs if they exist
       let finalImageUrl: string | null = null;
+      let finalVideoUrl: string | null = null;
+      
       if (imageUrl) {
-        // Ensure it's a valid URL string
         if (typeof imageUrl === "string" && imageUrl.trim() !== "") {
           try {
             new URL(imageUrl);
             finalImageUrl = imageUrl.trim();
           } catch {
             setError("Geçersiz görsel URL formatı");
+            setIsSubmitting(false);
+            return;
+          }
+        }
+      }
+
+      if (videoUrl) {
+        if (typeof videoUrl === "string" && videoUrl.trim() !== "") {
+          try {
+            new URL(videoUrl);
+            finalVideoUrl = videoUrl.trim();
+          } catch {
+            setError("Geçersiz video URL formatı");
             setIsSubmitting(false);
             return;
           }
@@ -147,6 +277,7 @@ export function PostCreate({ onClose, onSuccess, isModal = true }: PostCreatePro
         body: JSON.stringify({
           content: payload.content || null,
           imageUrl: finalImageUrl,
+          videoUrl: finalVideoUrl,
         }),
       });
 
@@ -166,11 +297,17 @@ export function PostCreate({ onClose, onSuccess, isModal = true }: PostCreatePro
       setContent("");
       setImageFile(null);
       setImageUrl(null);
+      setVideoFile(null);
+      setVideoUrl(null);
+      setVideoDuration(null);
       setError(null);
       
-      // Clear file input
+      // Clear file inputs
       if (fileInputRef.current) {
         fileInputRef.current.value = "";
+      }
+      if (videoInputRef.current) {
+        videoInputRef.current.value = "";
       }
 
       if (onSuccess) {
@@ -187,6 +324,7 @@ export function PostCreate({ onClose, onSuccess, isModal = true }: PostCreatePro
   };
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const videoInputRef = useRef<HTMLInputElement>(null);
 
   const postContent = (
     <div 
@@ -211,11 +349,11 @@ export function PostCreate({ onClose, onSuccess, isModal = true }: PostCreatePro
       )}
 
         {/* Content */}
-        <form onSubmit={handleSubmit} className={`flex-1 overflow-y-auto flex flex-col ${isModal ? '' : 'min-h-[500px]'}`}>
-          <div className={`flex-1 ${isModal ? 'p-6' : 'p-0'} space-y-4`}>
+        <form onSubmit={handleSubmit} className={`flex-1 overflow-y-auto flex flex-col ${isModal ? '' : 'min-h-[600px]'}`}>
+          <div className={`flex-1 ${isModal ? 'p-6' : 'p-6 sm:p-8'} space-y-6`}>
             {/* User info */}
             <div className="flex items-start gap-4">
-              <div className={`${isModal ? 'w-10 h-10' : 'w-12 h-12'} rounded-full overflow-hidden bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-semibold flex-shrink-0`}>
+              <div className={`${isModal ? 'w-10 h-10' : 'w-12 h-12'} rounded-full overflow-hidden bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-semibold flex-shrink-0 ring-2 ring-gray-200 dark:ring-gray-700`}>
                 {userProfileImage ? (
                   <Image
                     src={userProfileImage}
@@ -230,60 +368,93 @@ export function PostCreate({ onClose, onSuccess, isModal = true }: PostCreatePro
               </div>
               
               <div className="flex-1 space-y-4">
-                {/* Text input - LinkedIn style */}
+                {/* Text input */}
                 <Textarea
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
-                  placeholder="Bir şey paylaşın..."
-                  className={`${isModal ? 'min-h-[120px]' : 'min-h-[180px]'} resize-none text-base border border-gray-300 dark:border-gray-600 focus:ring-0 focus:shadow-none focus:!border-gray-400 dark:focus:!border-gray-500 ${isModal ? 'p-0' : 'pt-4 p-0'} placeholder:text-gray-400 dark:placeholder:text-gray-500`}
+                  placeholder="Bir şey paylaşın... (Fotoğraf, video veya metin)"
+                  className={`${isModal ? 'min-h-[120px]' : 'min-h-[200px]'} resize-none text-base border-2 border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:focus:border-blue-500 ${isModal ? 'p-4' : 'p-4 sm:p-5'} placeholder:text-gray-400 dark:placeholder:text-gray-500 rounded-xl`}
                   maxLength={2200}
                   disabled={isSubmitting}
                 />
 
                 {/* Image preview */}
                 {isUploading && imageFile && !imageUrl && (
-                  <div className="relative w-full rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                  <div className="relative w-full rounded-xl overflow-hidden border-2 border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
                     <div className="relative aspect-video w-full flex items-center justify-center">
                       <div className="flex flex-col items-center gap-3">
-                        <Loader2 className="w-8 h-8 animate-spin text-[#0a66c2]" />
-                        <p className="text-sm text-gray-600 dark:text-gray-400">Görsel yükleniyor...</p>
+                        <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
+                        <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Görsel yükleniyor...</p>
                       </div>
                     </div>
                   </div>
                 )}
                 {imageUrl && (
-                  <div className="relative w-full rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-                    <div className="relative aspect-video w-full max-h-[400px]">
+                  <div className="relative w-full rounded-xl overflow-hidden border-2 border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                    <div className="relative aspect-video w-full max-h-[500px]">
                       <Image
                         src={imageUrl}
                         alt="Preview"
                         fill
                         className="object-contain"
-                        sizes="(max-width: 768px) 100vw, 600px"
+                        sizes="(max-width: 768px) 100vw, 800px"
                         unoptimized={imageUrl.includes('blob.vercel-storage.com')}
                       />
                     </div>
                     <button
                       type="button"
                       onClick={handleImageRemove}
-                      className="absolute top-2 right-2 p-2 bg-black/50 hover:bg-black/70 rounded-full transition-colors z-10"
+                      className="absolute top-3 right-3 p-2 bg-black/60 hover:bg-black/80 rounded-full transition-colors z-10 backdrop-blur-sm"
                       disabled={isUploading || isSubmitting}
                     >
-                      <X className="w-4 h-4 text-white" />
+                      <X className="w-5 h-5 text-white" />
+                    </button>
+                  </div>
+                )}
+
+                {/* Video preview */}
+                {isUploading && videoFile && !videoUrl && (
+                  <div className="relative w-full rounded-xl overflow-hidden border-2 border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                    <div className="relative aspect-[9/16] w-full max-w-md mx-auto flex items-center justify-center">
+                      <div className="flex flex-col items-center gap-3">
+                        <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
+                        <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Video yükleniyor...</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-500">Bu işlem biraz zaman alabilir</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {videoUrl && (
+                  <div className="relative w-full rounded-xl overflow-hidden border-2 border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                    <div className="relative aspect-[9/16] w-full max-w-md mx-auto">
+                      <video
+                        src={videoUrl}
+                        controls
+                        className="w-full h-full object-contain rounded-lg"
+                        preload="metadata"
+                      />
+                    </div>
+                    <button
+                      type="button"
+                      onClick={handleVideoRemove}
+                      className="absolute top-3 right-3 p-2 bg-black/60 hover:bg-black/80 rounded-full transition-colors z-10 backdrop-blur-sm"
+                      disabled={isUploading || isSubmitting}
+                    >
+                      <X className="w-5 h-5 text-white" />
                     </button>
                   </div>
                 )}
 
                 {/* Error message */}
                 {error && (
-                  <div className="p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
-                    <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+                  <div className="p-4 bg-red-50 dark:bg-red-900/20 border-2 border-red-200 dark:border-red-800 rounded-xl">
+                    <p className="text-sm font-medium text-red-600 dark:text-red-400">{error}</p>
                   </div>
                 )}
 
                 {/* Character count */}
                 {content.length > 0 && (
-                  <p className="text-xs text-gray-500 dark:text-gray-400 text-right">
+                  <p className="text-xs text-gray-500 dark:text-gray-400 text-right font-medium">
                     {content.length}/2200
                   </p>
                 )}
@@ -292,10 +463,10 @@ export function PostCreate({ onClose, onSuccess, isModal = true }: PostCreatePro
           </div>
 
           {/* Footer - Action buttons */}
-          <div className={`border-t border-gray-200 dark:border-gray-800 ${isModal ? 'px-6 py-4' : 'pt-6 mt-6'}`}>
-            <div className="flex items-center justify-between gap-4">
-              {/* Image upload button */}
-              <div className="flex items-center gap-2">
+          <div className={`border-t-2 border-gray-200 dark:border-gray-800 ${isModal ? 'px-6 py-4' : 'px-6 sm:px-8 py-5'}`}>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+              {/* Media upload buttons */}
+              <div className="flex items-center gap-3">
                 <input
                   ref={fileInputRef}
                   type="file"
@@ -306,23 +477,53 @@ export function PostCreate({ onClose, onSuccess, isModal = true }: PostCreatePro
                     }
                   }}
                   className="hidden"
-                  disabled={isUploading || isSubmitting}
+                  disabled={isUploading || isSubmitting || !!videoUrl}
+                />
+                <input
+                  ref={videoInputRef}
+                  type="file"
+                  accept="video/mp4,video/webm,video/quicktime"
+                  onChange={(e) => {
+                    if (e.target.files && e.target.files[0]) {
+                      handleVideoSelect(e.target.files[0]);
+                    }
+                  }}
+                  className="hidden"
+                  disabled={isUploading || isSubmitting || !!imageUrl}
                 />
                 <button
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
-                  disabled={isUploading || isSubmitting}
-                  className="flex items-center gap-2 px-4 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={isUploading || isSubmitting || !!videoUrl}
+                  className="flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed border-2 border-transparent hover:border-gray-300 dark:hover:border-gray-600"
                 >
-                  {isUploading ? (
+                  {isUploading && imageFile ? (
                     <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                      Yükleniyor...
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      <span>Yükleniyor...</span>
                     </>
                   ) : (
                     <>
-                      <ImageIcon className="w-4 h-4" />
-                      Fotoğraf
+                      <ImageIcon className="w-5 h-5" />
+                      <span>Fotoğraf</span>
+                    </>
+                  )}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => videoInputRef.current?.click()}
+                  disabled={isUploading || isSubmitting || !!imageUrl}
+                  className="flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed border-2 border-blue-200 dark:border-blue-800 hover:border-blue-300 dark:hover:border-blue-700"
+                >
+                  {isUploading && videoFile ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      <span>Yükleniyor...</span>
+                    </>
+                  ) : (
+                    <>
+                      <VideoIcon className="w-5 h-5" />
+                      <span>Video</span>
                     </>
                   )}
                 </button>
@@ -336,6 +537,7 @@ export function PostCreate({ onClose, onSuccess, isModal = true }: PostCreatePro
                     variant="outline"
                     onClick={onClose}
                     disabled={isSubmitting}
+                    size="lg"
                   >
                     İptal
                   </Button>
@@ -343,12 +545,13 @@ export function PostCreate({ onClose, onSuccess, isModal = true }: PostCreatePro
                 <Button
                   type="submit"
                   variant="primary"
-                  disabled={(!content.trim() && !imageUrl) || isSubmitting || isUploading}
-                  className="bg-[#0a66c2] hover:bg-[#004182] text-white dark:bg-[#0a66c2] dark:hover:bg-[#004182] disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={(!content.trim() && !imageUrl && !videoUrl) || isSubmitting || isUploading}
+                  size="lg"
+                  className="bg-[#0095f6] hover:bg-[#1877f2] text-white dark:bg-[#0095f6] dark:hover:bg-[#1877f2] disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transition-all min-w-[120px]"
                 >
                   {isSubmitting ? (
                     <>
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      <Loader2 className="w-5 h-5 mr-2 animate-spin" />
                       Paylaşılıyor...
                     </>
                   ) : (

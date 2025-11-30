@@ -18,12 +18,12 @@ export async function POST() {
 
     console.log("[CREATE_TEST_API] Starting AI for Developers test creation...");
 
-    const expertise = "Yapay Zeka";
+    const expertise = "AI for Developers";
     
     // Read test modules from JSON file
     let testContent: any = null;
     try {
-      const fileName = TEST_MODULE_FILE_MAP[expertise] || TEST_MODULE_FILE_MAP["AI for Developers"] || "ai-for-developers-test-modules.json";
+      const fileName = TEST_MODULE_FILE_MAP[expertise] || "ai-for-developers-test-modules.json";
       const jsonPath = join(process.cwd(), "data", "test-modules", fileName);
       const jsonContent = readFileSync(jsonPath, "utf-8");
       testContent = JSON.parse(jsonContent);
@@ -117,7 +117,7 @@ export async function POST() {
 
     return NextResponse.json({
       success: true,
-      message: `Yapay Zeka testleri başarıyla oluşturuldu. ${modules.length} modül, ${totalTests} test eklendi.`,
+      message: `AI for Developers testleri başarıyla oluşturuldu. ${modules.length} modül, ${totalTests} test eklendi.`,
       stats: {
         testsCreated: totalTests,
         modulesCreated: modules.length,

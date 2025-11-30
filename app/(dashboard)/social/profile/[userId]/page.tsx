@@ -18,7 +18,8 @@ interface User {
 
 interface Post {
   id: string;
-  imageUrl: string;
+  imageUrl: string | null;
+  videoUrl: string | null;
   likesCount: number;
   commentsCount: number;
 }

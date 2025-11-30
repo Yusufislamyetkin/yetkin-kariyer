@@ -15,6 +15,7 @@ interface Post {
   userId: string;
   content: string | null;
   imageUrl: string | null;
+  videoUrl: string | null;
   createdAt: string;
   user: {
     id: string;
