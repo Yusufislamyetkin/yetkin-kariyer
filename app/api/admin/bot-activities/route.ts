@@ -7,7 +7,7 @@ export const revalidate = 0;
 
 /**
  * Bot activities endpoint
- * Can be called manually from admin panel or by Vercel Cron
+ * Called manually from admin panel
  * Makes each active bot perform one random activity
  */
 enum BotActivityType {
@@ -35,17 +35,6 @@ const ACTIVITY_TYPES: BotActivityType[] = [
 
 export async function GET(request: Request) {
   try {
-    // Simple auth check - you can add a secret header for security
-    const authHeader = request.headers.get("authorization");
-    const cronSecret = process.env.CRON_SECRET;
-
-    if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
-      return NextResponse.json(
-        { error: "Unauthorized" },
-        { status: 401 }
-      );
-    }
-
     // Get all active bots
     const activeBots = await db.user.findMany({
       where: {
@@ -70,7 +59,7 @@ export async function GET(request: Request) {
           ACTIVITY_TYPES[Math.floor(Math.random() * ACTIVITY_TYPES.length)];
 
         console.log(
-          `[BOT_CRON] Executing ${randomActivityType} for bot ${bot.id} (${bot.name})`
+          `[BOT_ACTIVITIES] Executing ${randomActivityType} for bot ${bot.id} (${bot.name})`
         );
 
         // Execute the activity
@@ -89,15 +78,15 @@ export async function GET(request: Request) {
 
         if (result.success) {
           console.log(
-            `[BOT_CRON] Successfully executed ${randomActivityType} for bot ${bot.id}`
+            `[BOT_ACTIVITIES] Successfully executed ${randomActivityType} for bot ${bot.id}`
           );
         } else {
           console.error(
-            `[BOT_CRON] Failed to execute ${randomActivityType} for bot ${bot.id}: ${result.error}`
+            `[BOT_ACTIVITIES] Failed to execute ${randomActivityType} for bot ${bot.id}: ${result.error}`
           );
         }
       } catch (botError: any) {
-        console.error(`[BOT_CRON] Error processing bot ${bot.id}:`, botError);
+        console.error(`[BOT_ACTIVITIES] Error processing bot ${bot.id}:`, botError);
         executedActivities.push({
           botId: bot.id,
           botName: bot.name,
@@ -135,7 +124,7 @@ export async function GET(request: Request) {
       activities: executedActivities,
     });
   } catch (error: any) {
-    console.error("[BOT_CRON]", error);
+    console.error("[BOT_ACTIVITIES]", error);
     return NextResponse.json(
       { error: error.message || "Bot aktiviteleri işlenirken bir hata oluştu" },
       { status: 500 }
