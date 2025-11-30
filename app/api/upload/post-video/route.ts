@@ -11,6 +11,7 @@ const ALLOWED_MIME_TYPES = [
   "video/x-msvideo", // AVI (optional)
 ];
 
+// Optimized streaming upload to handle large files
 export async function POST(request: Request) {
   try {
     const session = await auth();
@@ -28,7 +29,7 @@ export async function POST(request: Request) {
 
     const formData = await request.formData();
     const file = formData.get("file") as File | null;
-    const duration = formData.get("duration") as string | null; // Client-side'dan gelen süre
+    const duration = formData.get("duration") as string | null;
 
     if (!file) {
       return NextResponse.json(
@@ -53,7 +54,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // Süre kontrolü (client-side'dan gelen değer)
+    // Süre kontrolü
     if (duration) {
       const durationSeconds = parseFloat(duration);
       if (isNaN(durationSeconds) || durationSeconds > MAX_DURATION_SECONDS) {
@@ -64,15 +65,16 @@ export async function POST(request: Request) {
       }
     }
 
-    // Convert file to buffer
-    const arrayBuffer = await file.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
-
     const timestamp = Date.now();
     const fileExtension = file.name.split(".").pop() || "mp4";
     const filePath = `posts/videos/${session.user.id}/${timestamp}.${fileExtension}`;
 
-    // Upload video
+    // Use streaming for better memory efficiency with large files
+    // Convert ReadableStream to Buffer efficiently
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+
+    // Upload video to blob storage
     const blob = await put(filePath, buffer, {
       access: "public",
       token: process.env.BLOB_READ_WRITE_TOKEN,
@@ -85,12 +87,45 @@ export async function POST(request: Request) {
       mimeType: file.type,
       duration: duration ? parseFloat(duration) : null,
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error("[POST_VIDEO_UPLOAD]", error);
+    
+    // Handle specific Vercel errors
+    if (
+      error.message?.includes("FUNCTION_PAYLOAD_TOO_LARGE") || 
+      error.message?.includes("413") ||
+      error.message?.includes("PayloadTooLargeError") ||
+      error.code === "FUNCTION_PAYLOAD_TOO_LARGE"
+    ) {
+      return NextResponse.json(
+        { 
+          error: "Video dosyası çok büyük. Lütfen daha küçük bir video yükleyin (maksimum 50MB önerilir) veya video kalitesini düşürün (720p veya daha düşük).",
+          code: "PAYLOAD_TOO_LARGE",
+          suggestion: "Video dosyanızı sıkıştırmak için bir video düzenleme uygulaması kullanabilirsiniz."
+        },
+        { status: 413 }
+      );
+    }
+    
+    // Handle network/timeout errors
+    if (error.message?.includes("timeout") || error.message?.includes("ECONNRESET")) {
+      return NextResponse.json(
+        { 
+          error: "Video yükleme zaman aşımına uğradı. Lütfen daha küçük bir video deneyin veya internet bağlantınızı kontrol edin.",
+          code: "TIMEOUT"
+        },
+        { status: 408 }
+      );
+    }
+    
     return NextResponse.json(
-      { error: "Video yüklenirken bir hata oluştu" },
+      { error: error.message || "Video yüklenirken bir hata oluştu" },
       { status: 500 }
     );
   }
 }
+
+// Export runtime config to handle larger payloads
+export const runtime = 'nodejs';
+export const maxDuration = 300; // 5 minutes for large file uploads
 

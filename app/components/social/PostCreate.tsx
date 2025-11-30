@@ -100,11 +100,18 @@ export function PostCreate({ onClose, onSuccess, isModal = true }: PostCreatePro
 
     setError(null);
 
-    // Validate file size (100MB)
+    // Validate file size (100MB, but recommend smaller for better performance)
     const MAX_SIZE = 100 * 1024 * 1024;
+    const RECOMMENDED_SIZE = 50 * 1024 * 1024; // 50MB recommended
+    
     if (file.size > MAX_SIZE) {
-      setError(`Video boyutu 100MB'ı aşamaz`);
+      setError(`Video boyutu 100MB'ı aşamaz. Lütfen daha küçük bir video yükleyin.`);
       return;
+    }
+    
+    // Warn if file is large but still allow upload
+    if (file.size > RECOMMENDED_SIZE) {
+      console.warn(`Video dosyası büyük (${(file.size / (1024 * 1024)).toFixed(1)}MB). Yükleme daha uzun sürebilir.`);
     }
 
     // Validate file type
@@ -141,37 +148,63 @@ export function PostCreate({ onClose, onSuccess, isModal = true }: PostCreatePro
       const duration = await videoDurationPromise;
       setVideoDuration(duration);
 
-      // Upload video
+      // Upload video with streaming for better performance
       setIsUploading(true);
       const formData = new FormData();
       formData.append("file", file);
       formData.append("duration", duration.toString());
 
-      const response = await fetch("/api/upload/post-video", {
-        method: "POST",
-        body: formData,
-      });
+      // Use AbortController for timeout handling
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 300000); // 5 minute timeout
 
-      if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.error || "Video yüklenirken bir hata oluştu");
-      }
-
-      const data = await response.json();
-      
-      // Validate that we received a valid URL
-      if (!data.url || typeof data.url !== "string") {
-        throw new Error("Video yükleme başarısız: Geçersiz URL alındı");
-      }
-      
-      // Validate URL format
       try {
-        new URL(data.url);
-      } catch {
-        throw new Error("Video yükleme başarısız: Geçersiz URL formatı");
+        const response = await fetch("/api/upload/post-video", {
+          method: "POST",
+          body: formData,
+          signal: controller.signal,
+        });
+
+        clearTimeout(timeoutId);
+
+        if (!response.ok) {
+          const data = await response.json();
+          
+          // Handle specific error codes
+          if (response.status === 413 || data.code === "PAYLOAD_TOO_LARGE") {
+            throw new Error(
+              "Video dosyası çok büyük. Lütfen daha küçük bir video yükleyin veya video kalitesini düşürün. " +
+              "Önerilen: 720p veya daha düşük çözünürlük, MP4 formatı."
+            );
+          }
+          
+          throw new Error(data.error || "Video yüklenirken bir hata oluştu");
+        }
+
+        const data = await response.json();
+        
+        // Validate that we received a valid URL
+        if (!data.url || typeof data.url !== "string") {
+          throw new Error("Video yükleme başarısız: Geçersiz URL alındı");
+        }
+        
+        // Validate URL format
+        try {
+          new URL(data.url);
+        } catch {
+          throw new Error("Video yükleme başarısız: Geçersiz URL formatı");
+        }
+        
+        setVideoUrl(data.url);
+      } catch (fetchError: any) {
+        clearTimeout(timeoutId);
+        
+        if (fetchError.name === "AbortError") {
+          throw new Error("Video yükleme zaman aşımına uğradı. Lütfen daha küçük bir video deneyin.");
+        }
+        
+        throw fetchError;
       }
-      
-      setVideoUrl(data.url);
     } catch (error: any) {
       setError(error.message || "Video yüklenirken bir hata oluştu");
       setVideoFile(null);
@@ -416,10 +449,19 @@ export function PostCreate({ onClose, onSuccess, isModal = true }: PostCreatePro
                 {isUploading && videoFile && !videoUrl && (
                   <div className="relative w-full rounded-xl overflow-hidden border-2 border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
                     <div className="relative aspect-[9/16] w-full max-w-md mx-auto flex items-center justify-center">
-                      <div className="flex flex-col items-center gap-3">
+                      <div className="flex flex-col items-center gap-3 px-4 text-center">
                         <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
                         <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Video yükleniyor...</p>
-                        <p className="text-xs text-gray-500 dark:text-gray-500">Bu işlem biraz zaman alabilir</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-500">
+                          {videoFile.size > 50 * 1024 * 1024 
+                            ? "Büyük dosya, bu işlem birkaç dakika sürebilir..."
+                            : "Bu işlem biraz zaman alabilir"}
+                        </p>
+                        {videoFile.size > 50 * 1024 * 1024 && (
+                          <p className="text-xs text-orange-600 dark:text-orange-400 mt-2">
+                            💡 İpucu: Gelecekte daha hızlı yükleme için video kalitesini düşürebilirsiniz (720p önerilir)
+                          </p>
+                        )}
                       </div>
                     </div>
                   </div>

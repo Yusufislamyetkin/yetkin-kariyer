@@ -8,16 +8,36 @@ const careerPlanSchema = z.object({
   roadmap: z
     .array(
       z.object({
-        stage: z.string(),
-        title: z.string(),
-        description: z.string().optional(),
-        tasks: z.array(z.string()).default([]),
-        milestones: z.array(z.string()).default([]),
+        stage: z.string(), // "Aşama 1"
+        title: z.string(), // "Frontend Temelleri"
+        description: z.string().optional(), // Aşama açıklaması
+        estimatedDuration: z.string().optional(), // "2-3 ay"
+        priority: z.enum(["Yüksek", "Orta", "Düşük"]).optional(),
+        learningObjectives: z.array(z.string()).optional(), // Öğrenme hedefleri
+        tasks: z.array(z.object({
+          title: z.string(),
+          description: z.string().optional(),
+          estimatedTime: z.string().optional(),
+          order: z.number(),
+        })).default([]),
+        practicalProjects: z.array(z.object({
+          name: z.string(),
+          description: z.string().optional(),
+          difficulty: z.enum(["Başlangıç", "Orta", "İleri"]).optional(),
+          estimatedTime: z.string().optional(),
+        })).optional(),
+        milestones: z.array(z.object({
+          title: z.string(),
+          criteria: z.array(z.string()),
+        })).default([]),
         importantPoints: z.array(z.string()).optional(),
-        developmentTopics: z.array(z.string()).optional(),
-        practicalProjects: z.array(z.string()).optional(),
-        priority: z.string().optional(),
-        estimatedDuration: z.string().optional(),
+        developmentTopics: z.array(z.string()).optional(), // Geriye dönük uyumluluk için
+        recommendedResources: z.array(z.object({
+          title: z.string(),
+          type: z.string().optional(),
+          description: z.string().optional(),
+          link: z.string().optional(),
+        })).optional(),
       })
     )
     .default([]),
@@ -123,7 +143,7 @@ const buildCareerPlanPrompt = ({
     : "";
 
   return `
-Kişiselleştirilmiş kariyer planı oluştur. Kısa, öz ve net olsun. JSON formatında döndür.
+Kişiselleştirilmiş kariyer planı oluştur. Detaylı, yapılandırılmış ve uygulanabilir olsun. JSON formatında döndür.
 
 KULLANICI BİLGİLERİ:
 ${cvSection}${testSection ? ` ${testSection}` : ""}${interviewSection ? ` ${interviewSection}` : ""}
@@ -131,24 +151,137 @@ ${questionnaireSection}
 ${resourcesSection}
 ${guidanceInstructions}
 
-ROADMAP:
-- Her aşama: kısa description, 3-4 tasks, 1-2 milestones
-- developmentTopics, importantPoints, practicalProjects opsiyonel (sadece gerekliyse ekle)
-- priority (Yüksek/Orta/Düşük) ve estimatedDuration ekle
-- 2-3 aşama oluştur (kısa ve öz)
+ROADMAP YAPISI (ÖNEMLİ):
+Her aşama için şu yapıyı kullan:
 
-JSON:
+1. **Aşama Bilgileri:**
+   - stage: "Aşama 1", "Aşama 2" gibi
+   - title: Aşamanın net başlığı (örn: "React Temelleri", "Backend API Geliştirme")
+   - description: Bu aşamada ne öğreneceğini açıklayan 1-2 cümle
+   - estimatedDuration: "2-3 ay", "1-2 hafta" gibi
+   - priority: "Yüksek", "Orta", veya "Düşük"
+
+2. **Öğrenme Hedefleri (learningObjectives):**
+   - Her hedef açık ve ölçülebilir olsun
+   - Örnek: "React bileşenlerini oluşturabilmek", "State yönetimini anlamak"
+   - 3-5 hedef ekle
+
+3. **Görevler (tasks):** 
+   - Her görev bir obje olmalı: {title, description, estimatedTime, order}
+   - title: Görevin kısa adı (örn: "React hooks öğrenme")
+   - description: Ne yapılacağının açıklaması (opsiyonel ama önerilir)
+   - estimatedTime: "1 hafta", "2 gün" gibi (opsiyonel)
+   - order: Sıralama numarası (1, 2, 3...)
+   - Aksiyona odaklı, net görevler yaz (örn: "useState ve useEffect hook'larını öğrenin ve 3 örnek proje yapın")
+   - 4-6 görev ekle
+
+4. **Pratik Projeler (practicalProjects):**
+   - Her proje bir obje olmalı: {name, description, difficulty, estimatedTime}
+   - name: Proje adı (örn: "Todo List Uygulaması")
+   - description: Projenin ne yapacağının açıklaması (opsiyonel ama önerilir)
+   - difficulty: "Başlangıç", "Orta", veya "İleri" (opsiyonel)
+   - estimatedTime: Tahmini süre (opsiyonel)
+   - Gerçek dünya projeleri öner (örn: "Weather API kullanan hava durumu uygulaması")
+   - 2-3 proje ekle
+
+5. **Milestone'lar (milestones):**
+   - Her milestone bir obje olmalı: {title, criteria}
+   - title: Milestone adı (örn: "React Temelleri Tamamlandı")
+   - criteria: Ölçülebilir kriterler array'i (örn: ["5 farklı React projesi tamamlandı", "Hook'lar anlaşıldı ve uygulandı"])
+   - 1-2 milestone ekle
+
+6. **Önemli Notlar (importantPoints):**
+   - Bu aşamaya özel püf noktaları, dikkat edilmesi gerekenler
+   - 2-4 önemli nokta ekle
+
+7. **Kaynak Önerileri (recommendedResources - aşamaya özel, opsiyonel):**
+   - Bu aşama için önerilen platform kaynakları
+   - Eğer resourcesSection'da kaynaklar varsa, uygun olanları buraya ekle
+
+**Genel Kurallar:**
+- 2-4 aşama oluştur (kullanıcının seviyesi ve zaman çizelgesine göre)
+- İlk aşamalar temel konulara odaklanmalı
+- Her aşama bir sonrakine mantıklı bir geçiş sağlamalı
+- Görevler sıralı ve ilerlemeli olmalı
+- Pratik projeler gerçek dünya örnekleri olmalı
+- Milestone'lar ölçülebilir kriterler içermeli
+
+JSON FORMATI:
 {
-  "goals": ["hedef 1", "hedef 2"],
-  "roadmap": [{"stage": "1-3 ay", "title": "...", "description": "...", "tasks": [...], "milestones": [...], "developmentTopics": [...], "importantPoints": [...], "practicalProjects": [...], "priority": "Yüksek", "estimatedDuration": "2-3 hafta"}],
-  "recommendedCourses": [...],
-  "recommendedResources": [{"title": "...", "type": "Kurs", "description": "...", "link": "course-id veya boş string"}],
-  "skillsToDevelop": [...],
+  "goals": ["hedef 1", "hedef 2", "hedef 3"],
+  "roadmap": [
+    {
+      "stage": "Aşama 1",
+      "title": "Frontend Temelleri",
+      "description": "Bu aşamada modern web geliştirmenin temellerini öğreneceksiniz",
+      "estimatedDuration": "2-3 ay",
+      "priority": "Yüksek",
+      "learningObjectives": [
+        "React bileşenlerini oluşturabilmek",
+        "State yönetimini anlamak",
+        "Props ve event handling'i kullanabilmek"
+      ],
+      "tasks": [
+        {
+          "title": "React Temellerini Öğren",
+          "description": "React bileşenleri, JSX ve temel kavramları öğrenin",
+          "estimatedTime": "1 hafta",
+          "order": 1
+        },
+        {
+          "title": "React Hooks Çalış",
+          "description": "useState ve useEffect hook'larını öğrenin ve 3 örnek proje yapın",
+          "estimatedTime": "2 hafta",
+          "order": 2
+        }
+      ],
+      "practicalProjects": [
+        {
+          "name": "Todo List Uygulaması",
+          "description": "React ve TypeScript kullanarak tam fonksiyonel todo list uygulaması",
+          "difficulty": "Başlangıç",
+          "estimatedTime": "1 hafta"
+        }
+      ],
+      "milestones": [
+        {
+          "title": "React Temelleri Tamamlandı",
+          "criteria": [
+            "5 farklı React projesi tamamlandı",
+            "useState ve useEffect hook'ları kullanıldı",
+            "Component lifecycle anlaşıldı"
+          ]
+        }
+      ],
+      "importantPoints": [
+        "State yönetimini anlamak çok önemli",
+        "Her görevden sonra pratik yapmayı unutmayın"
+      ],
+      "recommendedResources": [
+        {
+          "title": "React Temelleri Kursu",
+          "type": "Kurs",
+          "description": "...",
+          "link": "course-id veya boş"
+        }
+      ]
+    }
+  ],
+  "recommendedCourses": ["Kurs 1", "Kurs 2"],
+  "recommendedResources": [
+    {
+      "title": "...",
+      "type": "Kurs",
+      "description": "...",
+      "link": "course-id veya boş string"
+    }
+  ],
+  "skillsToDevelop": ["React", "TypeScript", "State Management"],
   "timeline": "${questionnaire?.timeline && questionnaire.timeline !== "Henüz belirlemedim" ? questionnaire.timeline : "6-12 ay"}",
-  "summary": "Kısa ve öz bir özet (2-3 cümle). AI Öğretmen Selin olarak kullanıcıya doğrudan hitap et."
+  "summary": "Kısa ve öz bir özet (2-3 cümle). AI Öğretmen Selin olarak kullanıcıya doğrudan hitap et, motive edici ve yol gösterici ol."
 }
 
-Sadece JSON döndür.
+Sadece JSON döndür. Tüm roadmap aşamaları için yukarıdaki yapıyı kullan.
 `;
 }
 
