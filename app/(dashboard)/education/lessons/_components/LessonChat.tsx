@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import { MessageSquare, Loader2, X, ArrowRight, CheckCircle, Send } from "lucide-react";
 import Image from "next/image";
 import { Composer } from "@/app/(dashboard)/chat/_components/Composer";
@@ -881,47 +881,95 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
     return cleaned.trim();
   }, []);
 
+  // Helper function to generate a unique key for a question
+  const getQuestionKey = useCallback((q: any) => {
+    const qData = q?.question || q;
+    const text = (qData?.text || qData?.question || "").trim().toLowerCase();
+    const options = (qData?.options || []).map((opt: any) => 
+      (typeof opt === "string" ? opt : opt?.text || opt?.label || "").trim().toLowerCase()
+    ).filter(Boolean).sort().join("|");
+    return `${text}::${options}`;
+  }, []);
+
   // Convert messages to ChatMessage format with code blocks and test questions
   // Also include pending test questions in the message flow
-  const chatMessages = messages.map((msg) => {
-    // Extract code blocks and test questions from actions
-    const codeBlocks = msg.actions?.filter((action) => action.type === "code_block").map((action) => action.data) || [];
-    const testQuestions = msg.actions?.filter((action) => action.type === "test_question" || action.type === "mini_test").map((action) => action.data) || [];
-    
-    return {
-      id: msg.id,
-      groupId: "lesson-chat",
-      userId: msg.role === "user" ? "current-user" : "assistant",
-      type: msg.role === "assistant" ? ("system" as const) : ("text" as const),
-      content: msg.role === "assistant" ? cleanMessageContent(msg.content) : msg.content,
-      mentionIds: [],
-      createdAt: msg.timestamp,
-      updatedAt: msg.timestamp,
-      deletedAt: null,
-      sender: {
-        id: msg.role === "user" ? "current-user" : "assistant",
-        name: msg.role === "user" ? "Siz" : "AI Öğretmen",
-        profileImage: msg.role === "assistant" ? "/Photos/AiTeacher/teacher.jpg" : null, // Teacher image as avatar
-      },
-      attachments: msg.images
-        ? msg.images.map((img, idx) => ({
-            id: `img-${msg.id}-${idx}`,
-            messageId: msg.id,
-            url: img,
-            type: "image" as const,
-            metadata: {},
-            size: null,
-            createdAt: msg.timestamp,
-          }))
-        : [],
-      readByUserIds: [],
-      // Custom metadata for lesson-specific content
-      metadata: {
-        codeBlocks,
-        testQuestions,
-      },
-    };
-  });
+  // IMPORTANT: Filter duplicate test questions across ALL messages before assigning to metadata
+  const chatMessages = useMemo(() => {
+    // First, collect all test questions from all messages to detect duplicates
+    const allTestQuestions: Array<{ question: any; messageId: string; originalIndex: number }> = [];
+    messages.forEach((msg) => {
+      const testQuestions = msg.actions?.filter((action) => action.type === "test_question" || action.type === "mini_test").map((action) => action.data) || [];
+      testQuestions.forEach((q: any, idx: number) => {
+        allTestQuestions.push({
+          question: q,
+          messageId: msg.id,
+          originalIndex: idx,
+        });
+      });
+    });
+
+    // Filter duplicates: keep only the first occurrence of each unique question
+    const seenKeys = new Set<string>();
+    const uniqueTestQuestions = allTestQuestions.filter((item) => {
+      const key = getQuestionKey(item.question);
+      if (seenKeys.has(key)) {
+        return false; // Duplicate, skip
+      }
+      seenKeys.add(key);
+      return true; // First occurrence, keep
+    });
+
+    // Create a map: messageId -> array of unique test questions for that message
+    const testQuestionsByMessage = new Map<string, any[]>();
+    uniqueTestQuestions.forEach((item) => {
+      if (!testQuestionsByMessage.has(item.messageId)) {
+        testQuestionsByMessage.set(item.messageId, []);
+      }
+      testQuestionsByMessage.get(item.messageId)!.push(item.question);
+    });
+
+    // Now create chatMessages with filtered test questions
+    return messages.map((msg) => {
+      // Extract code blocks and test questions from actions
+      const codeBlocks = msg.actions?.filter((action) => action.type === "code_block").map((action) => action.data) || [];
+      // Use filtered test questions (only unique ones for this message)
+      const testQuestions = testQuestionsByMessage.get(msg.id) || [];
+      
+      return {
+        id: msg.id,
+        groupId: "lesson-chat",
+        userId: msg.role === "user" ? "current-user" : "assistant",
+        type: msg.role === "assistant" ? ("system" as const) : ("text" as const),
+        content: msg.role === "assistant" ? cleanMessageContent(msg.content) : msg.content,
+        mentionIds: [],
+        createdAt: msg.timestamp,
+        updatedAt: msg.timestamp,
+        deletedAt: null,
+        sender: {
+          id: msg.role === "user" ? "current-user" : "assistant",
+          name: msg.role === "user" ? "Siz" : "AI Öğretmen",
+          profileImage: msg.role === "assistant" ? "/Photos/AiTeacher/teacher.jpg" : null, // Teacher image as avatar
+        },
+        attachments: msg.images
+          ? msg.images.map((img, idx) => ({
+              id: `img-${msg.id}-${idx}`,
+              messageId: msg.id,
+              url: img,
+              type: "image" as const,
+              metadata: {},
+              size: null,
+              createdAt: msg.timestamp,
+            }))
+          : [],
+        readByUserIds: [],
+        // Custom metadata for lesson-specific content
+        metadata: {
+          codeBlocks,
+          testQuestions,
+        },
+      };
+    });
+  }, [messages, getQuestionKey, cleanMessageContent]);
 
   // Use chatMessages directly - don't modify the message flow
   // Mini test questions will be rendered separately at the end of the message flow
@@ -1148,23 +1196,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
                       {hasTestQuestions && testQuestions.length > 0 && (
                         <div className={cn("space-y-3", isAI ? "ml-20" : "ml-0", isOwn ? "mr-0" : "")}>
                           {testQuestions
-                            // Filter out duplicate questions based on question text and options
-                            .filter((testQuestion: any, index: number, self: any[]) => {
-                              // Get question text and options for comparison
-                              const getQuestionKey = (q: any) => {
-                                const qData = q?.question || q;
-                                const text = (qData?.text || qData?.question || "").trim().toLowerCase();
-                                const options = (qData?.options || []).map((opt: any) => 
-                                  (typeof opt === "string" ? opt : opt?.text || opt?.label || "").trim().toLowerCase()
-                                ).filter(Boolean).sort().join("|");
-                                return `${text}::${options}`;
-                              };
-                              
-                              const currentKey = getQuestionKey(testQuestion);
-                              // Keep only the first occurrence of each unique question
-                              const firstIndex = self.findIndex((q: any) => getQuestionKey(q) === currentKey);
-                              return firstIndex === index;
-                            })
+                            // Duplicates are already filtered in chatMessages creation, so just render them
                             .map((testQuestion: any, questionIndex: number) => {
                             // Generate unique ID for this question
                             const questionId = `${chatMsg.id}-test-${questionIndex}`;

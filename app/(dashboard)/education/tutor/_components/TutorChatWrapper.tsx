@@ -91,25 +91,34 @@ export function TutorChatWrapper() {
       });
 
       if (response.ok) {
-        // Sorunun status'unu güncelle
+        // Sorunun status'unu güncelle ve güncellenmiş state ile çalış
         setAllWrongQuestions((prev) => {
-          return prev.map((q) => 
+          // Önce state'i güncelle
+          const updated = prev.map((q) => 
             q.id === questionId ? { ...q, status: "understood" as const } : q
           );
+          
+          // Güncellenmiş state ile understood olmayan soruları bul
+          const notUnderstoodQuestions = updated
+            .map((q, idx) => ({ q, idx }))
+            .filter(({ q }) => q.status !== "understood");
+          
+          // Eğer aktif soru anlaşıldıysa, bir sonraki understood olmayan soruya geç
+          if (notUnderstoodQuestions.length > 0) {
+            const nextQuestion = notUnderstoodQuestions[0];
+            const nextIndex = updated.findIndex((q) => q.id === nextQuestion.q.id);
+            // State güncellemesi tamamlandıktan sonra index'i güncelle
+            setTimeout(() => {
+              setCurrentQuestionIndex(nextIndex >= 0 ? nextIndex : null);
+            }, 0);
+          } else {
+            setTimeout(() => {
+              setCurrentQuestionIndex(null);
+            }, 0);
+          }
+          
+          return updated;
         });
-        
-        // Eğer aktif soru anlaşıldıysa, bir sonraki understood olmayan soruya geç
-        const notUnderstoodQuestions = allWrongQuestions
-          .map((q, idx) => ({ q, idx }))
-          .filter(({ q }) => q.id !== questionId && q.status !== "understood");
-        
-        if (notUnderstoodQuestions.length > 0) {
-          const nextQuestion = notUnderstoodQuestions[0];
-          const nextIndex = allWrongQuestions.findIndex((q) => q.id === nextQuestion.q.id);
-          setCurrentQuestionIndex(nextIndex >= 0 ? nextIndex : null);
-        } else {
-          setCurrentQuestionIndex(null);
-        }
       }
     } catch (error) {
       console.error("Error updating question status:", error);

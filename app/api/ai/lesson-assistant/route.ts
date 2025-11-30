@@ -524,6 +524,17 @@ export async function POST(request: Request) {
       if (parsed.actions && parsed.actions.length > 0) {
         const validActions: any[] = [];
         const invalidMiniTestActions: any[] = [];
+        const seenQuestionKeys = new Set<string>();
+        
+        // Helper function to generate a unique key for a question
+        const getQuestionKey = (actionData: any): string => {
+          const qData = actionData?.question || actionData;
+          const text = (qData?.text || qData?.question || "").trim().toLowerCase();
+          const options = (qData?.options || []).map((opt: any) => 
+            (typeof opt === "string" ? opt : opt?.text || opt?.label || "").trim().toLowerCase()
+          ).filter(Boolean).sort().join("|");
+          return `${text}::${options}`;
+        };
         
         for (const action of parsed.actions) {
           if (action.type === "mini_test") {
@@ -532,7 +543,7 @@ export async function POST(request: Request) {
             
             if (validationResult.isValid && validationResult.data) {
               // Normalize the action data with validated values
-              action.data = {
+              const normalizedData = {
                 question: {
                   text: validationResult.data.question,
                   options: validationResult.data.options,
@@ -540,6 +551,21 @@ export async function POST(request: Request) {
                   correctIndex: validationResult.data.correctIndex,
                 },
               };
+              
+              // Check for duplicates based on question text and options
+              const questionKey = getQuestionKey(normalizedData);
+              if (seenQuestionKeys.has(questionKey)) {
+                console.warn("[LESSON-ASSISTANT] Duplicate mini_test question detected and filtered:", {
+                  question: validationResult.data.question.substring(0, 100),
+                  questionKey,
+                });
+                continue; // Skip this duplicate question
+              }
+              
+              // Mark this question as seen
+              seenQuestionKeys.add(questionKey);
+              
+              action.data = normalizedData;
               validActions.push(action);
               
               // Log warnings if any

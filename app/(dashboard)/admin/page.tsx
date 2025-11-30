@@ -1134,51 +1134,6 @@ export default function AdminPage() {
     }
   };
 
-  const handleBotActivity = async () => {
-    if (botActivityState.loading) {
-      return;
-    }
-
-    setBotActivityState({
-      loading: true,
-      success: null,
-      error: null,
-      stats: null,
-    });
-
-    try {
-      const response = await fetch("/api/cron/bot-activities", {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Bot aktiviteleri çalıştırılırken bir hata oluştu");
-      }
-
-      setBotActivityState({
-        loading: false,
-        success: `Bot aktiviteleri başarıyla çalıştırıldı. ${data.successfulActivities || 0} başarılı, ${data.failedActivities || 0} başarısız.`,
-        error: null,
-        stats: {
-          botsProcessed: data.botsProcessed || 0,
-          activitiesExecuted: data.activitiesExecuted || 0,
-          successfulActivities: data.successfulActivities || 0,
-          failedActivities: data.failedActivities || 0,
-        },
-      });
-    } catch (err: any) {
-      setBotActivityState({
-        loading: false,
-        success: null,
-        error: err.message || "Bir hata oluştu",
-        stats: null,
-      });
-    }
-  };
-
   const handleInsertTestTechnologies = async () => {
     setTestTechnologiesState({
       loading: true,
@@ -1215,6 +1170,51 @@ export default function AdminPage() {
     }
   };
 
+  const handleBotActivity = async () => {
+    if (botActivityState.loading) {
+      return;
+    }
+
+    setBotActivityState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/bot-activities", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Bot aktiviteleri çalıştırılırken bir hata oluştu");
+      }
+
+      setBotActivityState({
+        loading: false,
+        success: `Bot aktiviteleri başarıyla çalıştırıldı. ${data.successfulActivities || 0} başarılı, ${data.failedActivities || 0} başarısız.`,
+        error: null,
+        stats: {
+          botsProcessed: data.botsProcessed || 0,
+          activitiesExecuted: data.activitiesExecuted || 0,
+          successfulActivities: data.successfulActivities || 0,
+          failedActivities: data.failedActivities || 0,
+        },
+      });
+    } catch (err: any) {
+      setBotActivityState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
+    }
+  };
 
   const handleInsertLiveCodingCases = async () => {
     setLiveCodingCasesState({

@@ -385,6 +385,30 @@ export function parseLessonActions(content: string): ParsedLessonActions {
   const miniTestTagStartRegex = /\[MINI_TEST:\s*/gi;
   let miniTestMatch;
   const processedMatches: string[] = [];
+  const seenQuestionKeys = new Set<string>();
+  
+  // Helper function to generate a unique key for a question (used for duplicate detection)
+  const getQuestionKeyFromTag = (innerContent: string): string | null => {
+    try {
+      const parts = innerContent.split(',').map(p => p.trim()).filter(p => p.length > 0);
+      if (parts.length < 6) return null;
+      
+      const optionD = normalizeOption(parts[parts.length - 2]);
+      const optionC = normalizeOption(parts[parts.length - 3]);
+      const optionB = normalizeOption(parts[parts.length - 4]);
+      const optionA = normalizeOption(parts[parts.length - 5]);
+      const question = parts.slice(0, parts.length - 5).join(', ').trim().toLowerCase();
+      const options = [optionA, optionB, optionC, optionD]
+        .map(opt => opt.trim().toLowerCase())
+        .filter(Boolean)
+        .sort()
+        .join("|");
+      
+      return `${question}::${options}`;
+    } catch {
+      return null;
+    }
+  };
   
   while ((miniTestMatch = miniTestTagStartRegex.exec(content)) !== null) {
     const tagStart = miniTestMatch.index;
@@ -423,14 +447,29 @@ export function parseLessonActions(content: string): ParsedLessonActions {
     const fullTagEnd = afterTagStart + closingBracketPos + 1;
     const fullTag = content.substring(tagStart, fullTagEnd);
     
-    // Skip if we've already processed this match
+    // Skip if we've already processed this exact tag
     if (processedMatches.includes(fullTag)) {
       continue;
     }
-    processedMatches.push(fullTag);
     
     // Extract inner content
     const innerContent = afterTag.substring(0, closingBracketPos).trim();
+    
+    // Check for duplicate questions based on content (not just tag string)
+    const questionKey = getQuestionKeyFromTag(innerContent);
+    if (questionKey && seenQuestionKeys.has(questionKey)) {
+      console.warn("[MINI_TEST] Duplicate question detected and skipped:", {
+        questionKey: questionKey.substring(0, 100),
+        tagPreview: fullTag.substring(0, 150),
+      });
+      continue; // Skip this duplicate question
+    }
+    
+    // Mark this tag and question as processed
+    processedMatches.push(fullTag);
+    if (questionKey) {
+      seenQuestionKeys.add(questionKey);
+    }
     
     // Parse the tag
     parseMiniTestTag(fullTag, innerContent);

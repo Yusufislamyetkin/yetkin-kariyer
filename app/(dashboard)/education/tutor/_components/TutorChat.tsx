@@ -211,14 +211,33 @@ export function TutorChat({
     
     // Only explain if question actually changed (not initial load)
     if (prevQuestionIdRef.current !== null && prevQuestionIdRef.current !== currentQuestion.id) {
-      // Question changed, explain it after a short delay
+      // Question changed, clear previous messages and explain new question
+      setMessages([]);
       setTimeout(() => {
         explainCurrentQuestion(currentQuestion);
-      }, 1500);
+      }, 500);
     }
     
     prevQuestionIdRef.current = currentQuestion.id;
   }, [currentQuestion?.id, explainCurrentQuestion]);
+
+  // Track wrongQuestions changes to detect when all questions are completed
+  useEffect(() => {
+    if (wrongQuestions.length === 0 && currentQuestion === null && hasInitializedRef.current && !allQuestionsCompleted) {
+      // All questions completed - show completion message
+      setAllQuestionsCompleted(true);
+      const completionMessage: Message = {
+        id: `msg-${Date.now()}-completion`,
+        role: "assistant",
+        content: "🎉 Harika! Tüm soruları başarıyla anladın! Artık bu konularda daha iyi olacaksın. Başka bir konuda yardıma ihtiyacın var mı?",
+        timestamp: new Date().toISOString(),
+      };
+      setMessages((prev) => [...prev, completionMessage]);
+    } else if (wrongQuestions.length > 0) {
+      // Still have questions, reset completion state
+      setAllQuestionsCompleted(false);
+    }
+  }, [wrongQuestions.length, currentQuestion, hasInitializedRef.current, allQuestionsCompleted]);
 
   const handleSendMessage = useCallback(async () => {
     if (!messageInput.trim() || sending) return;
@@ -250,27 +269,10 @@ export function TutorChat({
         // Mark question as understood - this will update the wrongQuestions list
         await onQuestionUnderstood(currentQuestion.id);
 
-        // Wait a bit for state to update, then check remaining questions
-        setTimeout(() => {
-          const remainingQuestions = wrongQuestions.filter((q) => q.id !== currentQuestion.id);
-          
-          if (remainingQuestions.length > 0) {
-            // Move to next question (first remaining question)
-            // Next question will be explained automatically via useEffect
-            onNextQuestion();
-          } else {
-            // All questions completed
-            const completionMessage: Message = {
-              id: `msg-${Date.now()}`,
-              role: "assistant",
-              content: "🎉 Harika! Tüm soruları başarıyla anladın! Artık bu konularda daha iyi olacaksın. Başka bir konuda yardıma ihtiyacın var mı?",
-              timestamp: new Date().toISOString(),
-            };
-
-            setMessages((prev) => [...prev, completionMessage]);
-            setAllQuestionsCompleted(true);
-          }
-        }, 300);
+        // Next question transition is handled by parent component (TutorChatWrapper)
+        // which will update currentQuestion prop, triggering useEffect to explain new question
+        // or set allQuestionsCompleted if no more questions
+        onNextQuestion();
       } else {
         // Regular chat message
         const response = await fetch("/api/ai/smart-teacher", {
@@ -328,28 +330,10 @@ export function TutorChat({
     // Mark as understood - this will update the wrongQuestions list
     await onQuestionUnderstood(currentQuestion.id);
 
-    // Wait a bit for state to update, then check remaining questions
-    setTimeout(() => {
-      // Check remaining questions after update
-      const remainingQuestions = wrongQuestions.filter((q) => q.id !== currentQuestion.id);
-      
-      if (remainingQuestions.length > 0) {
-        // Move to next question (first remaining question)
-        // Next question will be explained automatically via useEffect
-        onNextQuestion();
-      } else {
-        // All questions completed
-        const completionMessage: Message = {
-          id: `msg-${Date.now()}`,
-          role: "assistant",
-          content: "🎉 Harika! Tüm soruları başarıyla anladın! Artık bu konularda daha iyi olacaksın. Başka bir konuda yardıma ihtiyacın var mı?",
-          timestamp: new Date().toISOString(),
-        };
-
-        setMessages((prev) => [...prev, completionMessage]);
-        setAllQuestionsCompleted(true);
-      }
-    }, 300);
+    // Next question transition is handled by parent component (TutorChatWrapper)
+    // which will update currentQuestion prop, triggering useEffect to explain new question
+    // or set allQuestionsCompleted if no more questions
+    onNextQuestion();
   };
 
   return (
