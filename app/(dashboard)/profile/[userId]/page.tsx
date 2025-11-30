@@ -34,6 +34,7 @@ import { BadgeOverlay } from "@/app/components/badges/BadgeOverlay";
 import { RankingDisplay } from "@/app/components/competition/RankingDisplay";
 import { Button } from "@/app/components/ui/Button";
 import { ProfileGrid } from "@/app/components/social/ProfileGrid";
+import { ActivityTimeline } from "@/app/(dashboard)/profile/_components/ActivityTimeline";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -61,6 +62,9 @@ interface PublicProfileResponse {
       bugFix: number;
       hackaton: number;
     };
+    totalPoints?: number;
+    participatedHackathons?: number;
+    totalEarnings?: number;
   };
   expertises: string[];
   recentAchievements: Array<{
@@ -146,6 +150,16 @@ export default function PublicProfilePage() {
   const [postsCount, setPostsCount] = useState(0);
   const [isFollowing, setIsFollowing] = useState(false);
   const [activeTab, setActiveTab] = useState<"posts" | "stats">("posts");
+  const [activities, setActivities] = useState<any[]>([]);
+  const [friendshipStatus, setFriendshipStatus] = useState<{
+    status: "none" | "pending" | "accepted" | "declined";
+    friendshipId: string | null;
+    direction: "outgoing" | "incoming" | null;
+  }>({
+    status: "none",
+    friendshipId: null,
+    direction: null,
+  });
 
   useEffect(() => {
     const userId = params?.userId;
@@ -160,6 +174,8 @@ export default function PublicProfilePage() {
         setLoading(true);
         setError(null);
 
+        const isOwnProfile = sessionStatus === "authenticated" && session?.user?.id === userId;
+        
         const [
           profileRes,
           badgesRes,
@@ -170,6 +186,8 @@ export default function PublicProfilePage() {
           postsRes,
           followersRes,
           followingRes,
+          activitiesRes,
+          friendsRes,
         ] = await Promise.all([
           fetch(`/api/profile/${userId}`),
           fetch(`/api/profile/${userId}/badges`),
@@ -180,7 +198,14 @@ export default function PublicProfilePage() {
           fetch(`/api/posts?type=profile&userId=${userId}&limit=100`).catch(() => null),
           fetch(`/api/users/${userId}/followers?limit=1`).catch(() => null),
           fetch(`/api/users/${userId}/following?limit=1`).catch(() => null),
-          fetch(`/api/friends`).catch(() => null),
+          // Fetch activities - only if viewing own profile
+          isOwnProfile
+            ? fetch(`/api/profile/activity?limit=5`).catch(() => null)
+            : Promise.resolve(null),
+          // Fetch friendship status if authenticated and not own profile
+          sessionStatus === "authenticated" && !isOwnProfile
+            ? fetch(`/api/friends`).catch(() => null)
+            : Promise.resolve(null),
         ]);
 
         if (!profileRes.ok) {
@@ -301,6 +326,35 @@ export default function PublicProfilePage() {
           setFollowingCount(followingData.totalCount || 0);
         }
 
+        // Fetch activities
+        if (activitiesRes?.ok) {
+          const activitiesData = await activitiesRes.json();
+          setActivities(activitiesData.activities || []);
+        }
+
+        // Check friendship status
+        if (friendsRes?.ok) {
+          const friendsData = await friendsRes.json();
+          const friendships = friendsData.friendships || [];
+          const friendshipWithUser = friendships.find((f: any) => 
+            f.counterpart?.id === userId
+          );
+          
+          if (friendshipWithUser) {
+            setFriendshipStatus({
+              status: friendshipWithUser.status,
+              friendshipId: friendshipWithUser.id,
+              direction: friendshipWithUser.direction,
+            });
+          } else {
+            setFriendshipStatus({
+              status: "none",
+              friendshipId: null,
+              direction: null,
+            });
+          }
+        }
+
         // Check if current user is following this user
         if (sessionStatus === "authenticated" && session?.user?.id && session.user.id !== userId) {
           const followCheckResponse = await fetch(`/api/users/${userId}/followers?limit=1000`).catch(() => null);
@@ -321,7 +375,7 @@ export default function PublicProfilePage() {
     };
 
     loadProfile();
-  }, [params?.userId, router]);
+  }, [params?.userId, router, sessionStatus, session?.user?.id]);
 
   useEffect(() => {
     setFriendRequestState({
@@ -407,12 +461,85 @@ export default function PublicProfilePage() {
         status: "success",
         message: data?.message || "Arkadaşlık isteği gönderildi.",
       });
+      
+      // Update friendship status after successful request
+      if (data?.friendship) {
+        setFriendshipStatus({
+          status: "pending",
+          friendshipId: data.friendship.id,
+          direction: "outgoing",
+        });
+      }
+      
+      // Clear success message after 3 seconds
+      setTimeout(() => {
+        setFriendRequestState({
+          status: "idle",
+          message: null,
+        });
+      }, 3000);
     } catch (err) {
       setFriendRequestState({
         status: "error",
         message:
           (err as Error).message ||
           "Arkadaşlık isteği gönderilirken bir hata oluştu.",
+      });
+    }
+  };
+
+  const handleCancelFriendRequest = async () => {
+    if (!friendshipStatus.friendshipId || friendshipStatus.status !== "pending") {
+      return;
+    }
+
+    setFriendRequestState({
+      status: "loading",
+      message: null,
+    });
+
+    try {
+      const response = await fetch("/api/friends/respond", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          friendshipId: friendshipStatus.friendshipId,
+          action: "cancel",
+        }),
+      });
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(data?.error || "Arkadaşlık isteği iptal edilemedi.");
+      }
+
+      setFriendRequestState({
+        status: "success",
+        message: "Arkadaşlık isteği iptal edildi.",
+      });
+      
+      // Update friendship status after cancellation
+      setFriendshipStatus({
+        status: "none",
+        friendshipId: null,
+        direction: null,
+      });
+      
+      // Clear success message after 3 seconds
+      setTimeout(() => {
+        setFriendRequestState({
+          status: "idle",
+          message: null,
+        });
+      }, 3000);
+    } catch (err) {
+      setFriendRequestState({
+        status: "error",
+        message:
+          (err as Error).message ||
+          "Arkadaşlık isteği iptal edilirken bir hata oluştu.",
       });
     }
   };
@@ -452,14 +579,45 @@ export default function PublicProfilePage() {
   const isOwnProfile = currentUserId === profile.user.id;
   const isFriendButtonDisabled =
     friendRequestState.status === "loading" ||
-    friendRequestState.status === "success" ||
     sessionStatus === "loading";
-  const friendButtonLabel =
-    sessionStatus !== "authenticated"
-      ? "Giriş yap ve arkadaşlık isteği gönder"
-      : friendRequestState.status === "success"
-      ? "İstek gönderildi"
-      : "Arkadaşlık isteği gönder";
+  
+  // Determine button label and action based on friendship status
+  const getFriendButtonConfig = () => {
+    if (sessionStatus !== "authenticated") {
+      return {
+        label: "Giriş yap ve arkadaşlık isteği gönder",
+        onClick: handleSendFriendRequest,
+      };
+    }
+    
+    if (friendshipStatus.status === "pending" && friendshipStatus.direction === "outgoing") {
+      return {
+        label: "Arkadaşlık isteğini iptal et",
+        onClick: handleCancelFriendRequest,
+      };
+    }
+    
+    if (friendshipStatus.status === "accepted") {
+      return {
+        label: "Arkadaşsınız",
+        onClick: () => {},
+      };
+    }
+    
+    if (friendshipStatus.status === "pending" && friendshipStatus.direction === "incoming") {
+      return {
+        label: "Bekleyen istek",
+        onClick: () => {},
+      };
+    }
+    
+    return {
+      label: "Arkadaşlık isteği gönder",
+      onClick: handleSendFriendRequest,
+    };
+  };
+  
+  const friendButtonConfig = getFriendButtonConfig();
 
   const infoTiles = [
     {
@@ -469,25 +627,43 @@ export default function PublicProfilePage() {
       color: "from-yellow-400 to-orange-500",
     },
     {
-      label: "Tamamlanan Ders",
+      label: "Kazanılan Puan",
+      value: profile.stats.totalPoints || 0,
+      icon: Star,
+      color: "from-purple-500 to-pink-500",
+    },
+    {
+      label: "Katılanılan Hackaton",
+      value: profile.stats.participatedHackathons || 0,
+      icon: Trophy,
+      color: "from-blue-500 to-cyan-500",
+    },
+    {
+      label: "Elde Edilen Kazanç",
+      value: `${(profile.stats.totalEarnings || 0).toLocaleString()} TL`,
+      icon: TrendingUp,
+      color: "from-green-500 to-emerald-500",
+    },
+    {
+      label: "TOPLAM DERS",
       value: profile.stats.completedLessons || 0,
       icon: Layers,
       color: "from-green-400 to-emerald-500",
     },
     {
-      label: "Toplam Test",
+      label: "TOPLAM TEST",
       value: profile.stats.quizAttempts,
       icon: Target,
       color: "from-blue-400 to-indigo-500",
     },
     {
-      label: "Canlı Kodlama",
+      label: "TOPLAM CANLI KODLAMA",
       value: profile.stats.liveCodingAttempts,
       icon: Activity,
       color: "from-purple-500 to-fuchsia-500",
     },
     {
-      label: "Bug Fix",
+      label: "TOPLAM BUGFIX",
       value: profile.stats.bugFixAttempts,
       icon: Users,
       color: "from-rose-500 to-orange-500",
@@ -495,7 +671,7 @@ export default function PublicProfilePage() {
   ];
 
   return (
-    <div className="space-y-6 md:space-y-8 pb-12 animate-fade-in">
+    <div className="space-y-6 md:space-y-8 pb-12 animate-fade-in pt-4 md:pt-0">
       <Card variant="elevated" className="overflow-hidden border border-gray-200 dark:border-gray-800">
         <div className="relative bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-900 dark:via-indigo-900 dark:to-purple-900">
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 dark:from-black/50 to-transparent" />
@@ -600,28 +776,24 @@ export default function PublicProfilePage() {
                   </div>
                 )}
               </div>
-              {!isOwnProfile && sessionStatus === "authenticated" && (
+              {!isOwnProfile && (
                 <Button
                   variant="gradient"
-                  onClick={handleSendFriendRequest}
+                  onClick={friendButtonConfig.onClick}
                   isLoading={friendRequestState.status === "loading"}
-                  disabled={isFriendButtonDisabled}
-                  className="w-full md:w-auto px-5 py-2 text-sm md:text-base bg-white/20 hover:bg-white/30 text-white border-white/30"
+                  disabled={isFriendButtonDisabled || friendshipStatus.status === "accepted" || (friendshipStatus.status === "pending" && friendshipStatus.direction === "incoming")}
+                  className={`w-full md:w-auto px-5 py-2 text-sm md:text-base ${
+                    sessionStatus === "authenticated"
+                      ? "bg-white/20 hover:bg-white/30 text-white border-white/30"
+                      : "mt-2"
+                  }`}
                 >
-                  <UserPlus className="mr-2 h-4 w-4" />
-                  {friendButtonLabel}
-                </Button>
-              )}
-              {!isOwnProfile && sessionStatus !== "authenticated" && (
-                <Button
-                  variant="gradient"
-                  onClick={handleSendFriendRequest}
-                  isLoading={friendRequestState.status === "loading"}
-                  disabled={isFriendButtonDisabled}
-                  className="w-full md:w-auto px-5 py-2 text-sm md:text-base mt-2"
-                >
-                  <UserPlus className="mr-2 h-4 w-4" />
-                  {friendButtonLabel}
+                  {friendshipStatus.status === "pending" && friendshipStatus.direction === "outgoing" ? (
+                    <XCircle className="mr-2 h-4 w-4" />
+                  ) : (
+                    <UserPlus className="mr-2 h-4 w-4" />
+                  )}
+                  {friendButtonConfig.label}
                 </Button>
               )}
               {friendRequestState.status === "error" && friendRequestState.message && (
@@ -713,38 +885,26 @@ export default function PublicProfilePage() {
           </CardContent>
         </Card>
 
-        <Card variant="elevated" className="border border-gray-200 dark:border-gray-800">
-          <CardHeader className="border-b border-gray-200 dark:border-gray-800">
-            <CardTitle className="flex items-center gap-2 text-lg">
-              <TrendingUp className="h-5 w-5 text-emerald-500" />
-              Ortalama Skorlar
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="px-6 pt-8 pb-6 space-y-4">
-            {[
-              { key: "quiz", label: "Konu", value: profile.stats.averageScores.quiz },
-              { key: "test", label: "Test", value: profile.stats.averageScores.test },
-              { key: "liveCoding", label: "Canlı Kodlama", value: profile.stats.averageScores.liveCoding },
-              { key: "bugFix", label: "Bug Fix", value: profile.stats.averageScores.bugFix },
-            ].map(({ key, label, value }) => (
-              <div key={key} className="flex items-center justify-between gap-4">
-                <span className="text-sm font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wide">
-                  {label}
-                </span>
-                <div className="flex flex-col items-end gap-1">
-                  <span className="text-base font-semibold text-gray-900 dark:text-gray-100">
-                    %{value}
-                  </span>
-                  {categoryRankings[key] && (
-                    <span className="text-xs text-gray-500 dark:text-gray-400">
-                      Sıra: {categoryRankings[key]}
-                    </span>
-                  )}
-                </div>
+        {activities.length === 0 ? (
+          <Card variant="elevated" className="border border-gray-200 dark:border-gray-800">
+            <CardHeader className="border-b border-gray-200 dark:border-gray-800">
+              <CardTitle className="flex items-center gap-2 text-lg">
+                <Clock className="h-5 w-5 text-blue-500" />
+                Son Aktiviteler
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="px-6 pt-8 pb-6">
+              <div className="text-center py-8">
+                <Clock className="w-12 h-12 text-gray-300 dark:text-gray-700 mx-auto mb-4" />
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  Henüz aktivite bulunmuyor
+                </p>
               </div>
-            ))}
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        ) : (
+          <ActivityTimeline activities={activities} />
+        )}
       </div>
 
       <Card variant="elevated" className="border border-gray-200 dark:border-gray-800">

@@ -1,4 +1,5 @@
 import { db } from "@/lib/db";
+import { cache } from "./cache";
 
 export interface UserContext {
   userId: string;
@@ -9,12 +10,11 @@ export interface UserContext {
     weakTopics: Array<{ topic: string; count: number; avgScore: number }>;
   };
   wrongQuestions: Array<{
-    questionText: string;
-    correctAnswer: string;
-    userAnswer: string;
+    id: string;
     topic?: string;
     createdAt: Date;
   }>;
+  wrongQuestionsCount: number;
   learningHistory: {
     completedLessons: number;
     recentLessons: Array<{ title: string; completedAt: Date | null }>;
@@ -115,7 +115,8 @@ async function analyzeTestPerformance(userId: string) {
 }
 
 /**
- * Kullanıcının yanlış sorularını analiz et
+ * Kullanıcının yanlış sorularını analiz et (lazy loading - sadece metadata)
+ * İçerikler sadece gerektiğinde (aktif soru seçildiğinde) yüklenir
  */
 async function analyzeWrongQuestions(userId: string) {
   const wrongQuestions = await db.wrongQuestion.findMany({
@@ -123,7 +124,9 @@ async function analyzeWrongQuestions(userId: string) {
       userId,
       status: "not_reviewed",
     },
-    include: {
+    select: {
+      id: true,
+      createdAt: true,
       quizAttempt: {
         select: {
           topic: true,
@@ -134,10 +137,8 @@ async function analyzeWrongQuestions(userId: string) {
     take: 20,
   });
 
-  return wrongQuestions.map((wq: { questionText: string; correctAnswer: string; userAnswer: string; createdAt: Date; quizAttempt?: { topic?: string | null } | null }) => ({
-    questionText: wq.questionText,
-    correctAnswer: wq.correctAnswer,
-    userAnswer: wq.userAnswer,
+  return wrongQuestions.map((wq: { id: string; createdAt: Date; quizAttempt?: { topic?: string | null } | null }) => ({
+    id: wq.id,
     topic: wq.quizAttempt?.topic || undefined,
     createdAt: wq.createdAt,
   }));
@@ -202,8 +203,19 @@ function analyzeLearningStyle(
 
 /**
  * Kullanıcı bağlamını topla ve analiz et
+ * Cache mekanizması ile 30 saniye TTL
  */
 export async function getUserContext(userId: string): Promise<UserContext> {
+  // Cache key
+  const cacheKey = `user-context:${userId}`;
+  
+  // Cache'den kontrol et
+  const cached = cache.get<UserContext>(cacheKey);
+  if (cached) {
+    return cached;
+  }
+
+  // Cache miss - DB'den çek
   const [testPerformance, wrongQuestions, learningHistory] = await Promise.all([
     analyzeTestPerformance(userId),
     analyzeWrongQuestions(userId),
@@ -212,13 +224,19 @@ export async function getUserContext(userId: string): Promise<UserContext> {
 
   const learningStyle = analyzeLearningStyle(testPerformance, learningHistory);
 
-  return {
+  const userContext: UserContext = {
     userId,
     testPerformance,
     wrongQuestions,
+    wrongQuestionsCount: wrongQuestions.length,
     learningHistory,
     learningStyle,
   };
+
+  // Cache'e kaydet (30 saniye TTL)
+  cache.set(cacheKey, userContext, 30 * 1000);
+
+  return userContext;
 }
 
 /**
@@ -242,18 +260,10 @@ export function formatUserContextForPrompt(context: UserContext): string {
     });
   }
 
-  if (context.wrongQuestions.length > 0) {
-    parts.push(`\nGözden Geçirilmemiş Yanlış Sorular: ${context.wrongQuestions.length} adet`);
-    if (context.wrongQuestions.length <= 5) {
-      parts.push("\nYanlış Sorular Özeti:");
-      context.wrongQuestions.forEach((wq, idx) => {
-        parts.push(
-          `${idx + 1}. Soru: ${wq.questionText.substring(0, 100)}...`
-        );
-        parts.push(`   Doğru Cevap: ${wq.correctAnswer}`);
-        parts.push(`   Kullanıcı Cevabı: ${wq.userAnswer}`);
-      });
-    }
+  // Yanlış sorular için sadece sayı bilgisi (içerikler lazy loading ile yüklenecek)
+  if (context.wrongQuestionsCount > 0) {
+    parts.push(`\nGözden Geçirilmemiş Yanlış Sorular: ${context.wrongQuestionsCount} adet`);
+    // İçerikler prompt'a eklenmez - sadece aktif soru context message'da gönderilir
   }
 
   parts.push(

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
+import { calculateLevelFromPoints } from "@/lib/services/gamification/level";
 
 export async function GET(request: Request) {
   try {
@@ -54,7 +55,7 @@ export async function GET(request: Request) {
           },
         },
       },
-      take: 5,
+      take: 10,
       orderBy: {
         posts: {
           _count: "desc",
@@ -102,12 +103,12 @@ export async function GET(request: Request) {
         // Shuffle the array for better randomness
         allAvailableUsers = allAvailableUsers.sort(() => Math.random() - 0.5);
         
-        // Take first 5 random users
-        suggestedUsers = allAvailableUsers.slice(0, 5);
+        // Take first 10 random users
+        suggestedUsers = allAvailableUsers.slice(0, 10);
       }
     }
 
-    // Get mutual connections count for each suggested user
+    // Get mutual connections count and level for each suggested user
     const usersWithMutual = await Promise.all(
       suggestedUsers.map(async (user: { id: string; name: string | null; email: string; profileImage: string | null; _count: { posts: number } }) => {
         // Get users that both current user and suggested user follow
@@ -138,9 +139,18 @@ export async function GET(request: Request) {
           currentUserFollowingIds.has(f.addresseeId)
         ).length;
 
+        // Get user badges to calculate level
+        const userBadges = await db.userBadge.findMany({
+          where: { userId: user.id },
+          include: { badge: true },
+        });
+        const totalPoints = userBadges.reduce((sum: number, userBadge: { badge: { points: number | null } }) => sum + (userBadge.badge.points || 0), 0);
+        const level = calculateLevelFromPoints(totalPoints);
+
         return {
           ...user,
           mutualConnections: mutualCount,
+          level,
         };
       })
     );

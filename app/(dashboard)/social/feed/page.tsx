@@ -54,7 +54,6 @@ export default function FeedPage() {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [suggestedUsers, setSuggestedUsers] = useState<any[]>([]);
-  const [friendSuggestions, setFriendSuggestions] = useState<any[]>([]);
   const [isLoadingFriendSuggestions, setIsLoadingFriendSuggestions] = useState(true);
   const [currentUserProfile, setCurrentUserProfile] = useState<any>(null);
   const [sentRequests, setSentRequests] = useState<Set<string>>(new Set());
@@ -211,28 +210,32 @@ export default function FeedPage() {
     }
   }, [session?.user?.id]);
 
-  // Fetch suggested users
+  // Fetch suggested users (combined from both APIs)
   useEffect(() => {
     if (session?.user?.id) {
       setIsLoadingFriendSuggestions(true);
-      fetch("/api/users/suggested")
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.users) {
-            setSuggestedUsers(data.users);
-          }
+      
+      // Fetch both APIs and combine results
+      Promise.all([
+        fetch("/api/users/suggested").then((res) => res.json()),
+        fetch("/api/users/friend-suggestions").then((res) => res.json()),
+      ])
+        .then(([suggestedData, friendSuggestionsData]) => {
+          // Combine users from both APIs, remove duplicates
+          const allUsers = [
+            ...(suggestedData.users || []),
+            ...(friendSuggestionsData.users || []),
+          ];
+          
+          // Remove duplicates by user id
+          const uniqueUsers = Array.from(
+            new Map(allUsers.map((user: any) => [user.id, user])).values()
+          );
+          
+          // Limit to 10 users
+          setSuggestedUsers(uniqueUsers.slice(0, 10));
         })
-        .catch((err) => console.error("Error fetching suggested users:", err));
-
-      // Fetch friend suggestions
-      fetch("/api/users/friend-suggestions")
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.users) {
-            setFriendSuggestions(data.users);
-          }
-        })
-        .catch((err) => console.error("Error fetching friend suggestions:", err))
+        .catch((err) => console.error("Error fetching suggested users:", err))
         .finally(() => setIsLoadingFriendSuggestions(false));
 
       // Fetch existing pending requests to populate state
@@ -263,23 +266,6 @@ export default function FeedPage() {
     }
   }, [session?.user?.id]);
 
-  const handleFollow = async (userId: string) => {
-    try {
-      const response = await fetch(`/api/users/${userId}/follow`, {
-        method: "POST",
-      });
-      if (response.ok) {
-        const data = await response.json();
-        // Check for badge results and show notification
-        if (data.badgeResults) {
-          handleBadgeResults(data.badgeResults);
-        }
-        setSuggestedUsers((prev) => prev.filter((u) => u.id !== userId));
-      }
-    } catch (error) {
-      console.error("Error following user:", error);
-    }
-  };
 
   const handleSendFriendRequest = async (userId: string) => {
     try {
@@ -469,11 +455,11 @@ export default function FeedPage() {
                 </div>
               )}
 
-              {/* Friend Suggestions */}
+              {/* Suggested Users - Combined */}
               <div className="bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 rounded-xl p-4 shadow-lg">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100">
-                    Bağlantı Önerileri
+                    Önerilenler
                   </h3>
                   <Link
                     href="/dashboard/friends"
@@ -486,80 +472,7 @@ export default function FeedPage() {
                   <div className="flex items-center justify-center py-8">
                     <Loader2 className="w-5 h-5 animate-spin text-gray-400" />
                   </div>
-                ) : friendSuggestions.length > 0 ? (
-                  <div className="space-y-3">
-                    {friendSuggestions.map((user) => (
-                      <div
-                        key={user.id}
-                        className="flex items-center justify-between p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-                      >
-                        <Link
-                          href={`/profile/${user.id}`}
-                          className="flex items-center gap-3 flex-1 min-w-0"
-                        >
-                          <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-gray-200 dark:ring-gray-700">
-                            {user.profileImage ? (
-                              <Image
-                                src={user.profileImage}
-                                alt={user.name || user.email}
-                                width={48}
-                                height={48}
-                                className="w-full h-full object-cover"
-                              />
-                            ) : (
-                              <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white text-base font-bold">
-                                {(user.name || user.email)[0].toUpperCase()}
-                              </div>
-                            )}
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">
-                              {user.name || user.email.split("@")[0]}
-                            </p>
-                          {user.mutualConnections > 0 ? (
-                            <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
-                              {user.mutualConnections} ortak bağlantı
-                            </p>
-                          ) : (
-                            <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
-                              Yeni üye
-                            </p>
-                          )}
-                          </div>
-                        </Link>
-                        <button
-                        onClick={() => 
-                          sentRequests.has(user.id) 
-                            ? handleCancelFriendRequest(user.id)
-                            : handleSendFriendRequest(user.id)
-                        }
-                        className="text-sm text-[#0095f6] hover:text-[#1877f2] font-semibold flex-shrink-0 ml-2 px-3 py-1.5 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
-                      >
-                        {sentRequests.has(user.id) ? "İstek gönderildi" : "Bağlantı Kur"}
-                      </button>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="text-center py-6">
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      Henüz bağlantı önerisi yok
-                    </p>
-                  </div>
-                )}
-              </div>
-
-              {/* Suggested Users (Follow) */}
-              {suggestedUsers.length > 0 && (
-                <div className="bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 rounded-xl p-4 shadow-lg">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100">
-                      Önerilenler
-                    </h3>
-                    <button className="text-sm text-[#0095f6] hover:text-[#1877f2] font-semibold hover:underline">
-                      Tümünü Gör
-                    </button>
-                  </div>
+                ) : suggestedUsers.length > 0 ? (
                   <div className="space-y-3">
                     {suggestedUsers.map((user) => (
                       <div
@@ -589,28 +502,32 @@ export default function FeedPage() {
                             <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">
                               {user.name || user.email.split("@")[0]}
                             </p>
-                            {user.mutualConnections > 0 ? (
-                              <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
-                                {user.mutualConnections} ortak bağlantı
-                              </p>
-                            ) : (
-                              <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
-                                Yeni üye
-                              </p>
-                            )}
+                            <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+                              Yazılımcı Seviyesi: {user.level || 1}
+                            </p>
                           </div>
                         </Link>
                         <button
-                          onClick={() => handleFollow(user.id)}
+                          onClick={() => 
+                            sentRequests.has(user.id) 
+                              ? handleCancelFriendRequest(user.id)
+                              : handleSendFriendRequest(user.id)
+                          }
                           className="text-sm text-[#0095f6] hover:text-[#1877f2] font-semibold flex-shrink-0 ml-2 px-3 py-1.5 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
                         >
-                          Takip Et
+                          {sentRequests.has(user.id) ? "İstek gönderildi" : "Bağlantı Kur"}
                         </button>
                       </div>
                     ))}
                   </div>
-                </div>
-              )}
+                ) : (
+                  <div className="text-center py-6">
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      Henüz öneri yok
+                    </p>
+                  </div>
+                )}
+              </div>
 
               {/* Footer Links */}
               <div className="text-sm text-gray-500 dark:text-gray-400 space-y-3 pt-4">

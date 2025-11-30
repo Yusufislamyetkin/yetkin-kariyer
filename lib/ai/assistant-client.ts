@@ -14,7 +14,11 @@ export interface AssistantResponse {
 }
 
 const MAX_POLL_ATTEMPTS = 60; // 60 saniye timeout
-const POLL_INTERVAL = 1000; // 1 saniye
+const INITIAL_POLL_INTERVAL = 500; // İlk 5 saniye: 500ms
+const MID_POLL_INTERVAL = 1000; // Sonraki 15 saniye: 1 saniye
+const FINAL_POLL_INTERVAL = 2000; // Sonrası: 2 saniye
+const INITIAL_PHASE_DURATION = 5000; // 5 saniye
+const MID_PHASE_DURATION = 15000; // 15 saniye
 
 /**
  * Kullanıcı için thread oluştur veya mevcut thread'i getir
@@ -83,9 +87,10 @@ async function runAssistant(
     assistant_id: assistantId,
   });
 
-  // Run'ın tamamlanmasını bekle
+  // Run'ın tamamlanmasını bekle (adaptive polling)
   let runStatus = await client.beta.threads.runs.retrieve(threadId, run.id);
   let attempts = 0;
+  const startTime = Date.now();
 
   while (
     runStatus.status === "queued" ||
@@ -96,7 +101,22 @@ async function runAssistant(
       throw new Error("Assistant yanıt verme süresi aşıldı");
     }
 
-    await new Promise((resolve) => setTimeout(resolve, POLL_INTERVAL));
+    // Adaptive polling: elapsed time'a göre interval seç
+    const elapsed = Date.now() - startTime;
+    let pollInterval: number;
+    
+    if (elapsed < INITIAL_PHASE_DURATION) {
+      // İlk 5 saniye: 500ms
+      pollInterval = INITIAL_POLL_INTERVAL;
+    } else if (elapsed < INITIAL_PHASE_DURATION + MID_PHASE_DURATION) {
+      // Sonraki 15 saniye: 1 saniye
+      pollInterval = MID_POLL_INTERVAL;
+    } else {
+      // Sonrası: 2 saniye
+      pollInterval = FINAL_POLL_INTERVAL;
+    }
+
+    await new Promise((resolve) => setTimeout(resolve, pollInterval));
     runStatus = await client.beta.threads.runs.retrieve(threadId, run.id);
     attempts++;
   }

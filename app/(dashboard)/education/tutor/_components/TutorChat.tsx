@@ -76,13 +76,17 @@ export function TutorChat({
     setError(null);
 
     try {
-      const questionContext = `Şu anki soru:\nSoru: ${question.questionText}\nKullanıcının Cevabı: ${question.userAnswer}\nDoğru Cevap: ${question.correctAnswer}\n\nBu soruyu detaylıca açıkla, neden yanlış olduğunu anlat ve doğru cevabı öğret. Kullanıcı anladığında "anlaşıldı" olarak işaretlemesini iste.`;
-
       const response = await fetch("/api/ai/smart-teacher", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          message: questionContext,
+          message: "Bu soruyu detaylıca açıkla, neden yanlış olduğunu anlat ve doğru cevabı öğret. Kullanıcı anladığında 'anlaşıldı' olarak işaretlemesini iste.",
+          currentQuestionId: question.id,
+          currentQuestion: {
+            questionText: question.questionText,
+            correctAnswer: question.correctAnswer,
+            userAnswer: question.userAnswer,
+          },
         }),
       });
 
@@ -194,6 +198,12 @@ export function TutorChat({
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             message: userMessage.content,
+            currentQuestionId: currentQuestion?.id,
+            currentQuestion: currentQuestion ? {
+              questionText: currentQuestion.questionText,
+              correctAnswer: currentQuestion.correctAnswer,
+              userAnswer: currentQuestion.userAnswer,
+            } : undefined,
           }),
         });
 

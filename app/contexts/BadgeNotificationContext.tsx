@@ -111,21 +111,32 @@ export function BadgeNotificationProvider({
           const defaults = {
             disableForReducedMotion: true,
             spread: 70,
-            ticks: 150,
-            gravity: 0.9,
-            startVelocity: 40,
-            scalar: 1.2,
+            ticks: 100, // Reduced from 150 for shorter animation
+            gravity: 1.0, // Slightly increased for faster fall
+            startVelocity: 35, // Slightly reduced
+            scalar: 1.0, // Reduced from 1.2 for smaller particles
             zIndex: 1200,
+            useWorker: true, // Use web worker if available
           };
 
           // Optimized confetti with fewer particles and bursts for better performance
-          window.requestAnimationFrame(() => {
-            // Main burst from center
+          // Use requestIdleCallback for better performance when available
+          const scheduleConfetti = (callback: () => void) => {
+            if ('requestIdleCallback' in window) {
+              (window as any).requestIdleCallback(callback, { timeout: 100 });
+            } else {
+              requestAnimationFrame(callback);
+            }
+          };
+
+          scheduleConfetti(() => {
+            // Main burst from center - reduced particles for better performance
             instance({
               ...defaults,
-              particleCount: 100,
+              particleCount: 50, // Reduced from 100
               origin: { x: 0.5, y: 0.5 },
               spread: 60,
+              ticks: 100, // Reduced from 150 for shorter animation
               colors: ["#FFD700", "#FFA500", "#FF6347"],
             });
             
@@ -133,21 +144,23 @@ export function BadgeNotificationProvider({
             setTimeout(() => {
               instance({
                 ...defaults,
-                particleCount: 80,
+                particleCount: 40, // Reduced from 80
                 origin: { x: 0.3, y: 0.7 },
                 angle: 45,
                 spread: 50,
+                ticks: 100, // Reduced from 150
                 colors: ["#FFD700", "#FFA500"],
               });
               instance({
                 ...defaults,
-                particleCount: 80,
+                particleCount: 40, // Reduced from 80
                 origin: { x: 0.7, y: 0.7 },
                 angle: 135,
                 spread: 50,
+                ticks: 100, // Reduced from 150
                 colors: ["#FFD700", "#FFA500"],
               });
-            }, 150);
+            }, 100); // Reduced delay from 150ms
           });
         }
       } else {

@@ -103,8 +103,17 @@ Yukarıdaki kullanıcı profilini dikkate alarak, kişiselleştirilmiş öğreti
 
 /**
  * Kullanıcı bağlamına göre dinamik context mesajı oluştur
+ * @param userContext Kullanıcı bağlamı
+ * @param currentQuestion Aktif soru bilgisi (eğer varsa)
  */
-export function buildContextMessage(userContext: UserContext): string {
+export function buildContextMessage(
+  userContext: UserContext,
+  currentQuestion?: {
+    questionText: string;
+    correctAnswer: string;
+    userAnswer: string;
+  }
+): string {
   const parts: string[] = [];
 
   // Zayıf konular varsa önceliklendir
@@ -117,11 +126,20 @@ export function buildContextMessage(userContext: UserContext): string {
     );
   }
 
-  // Yanlış sorular varsa belirt
-  if (userContext.wrongQuestions.length > 0) {
+  // Yanlış sorular varsa belirt (sadece sayı)
+  if (userContext.wrongQuestionsCount > 0) {
     parts.push(
-      `${userContext.wrongQuestions.length} adet gözden geçirilmemiş yanlış soru var. Bu soruları önceliklendir.`
+      `${userContext.wrongQuestionsCount} adet gözden geçirilmemiş yanlış soru var. Bu soruları önceliklendir.`
     );
+  }
+
+  // Aktif soru varsa içeriğini ekle (sadece bu soru)
+  if (currentQuestion) {
+    parts.push("\n=== ŞU ANKİ SORU ===");
+    parts.push(`Soru: ${currentQuestion.questionText}`);
+    parts.push(`Kullanıcının Cevabı: ${currentQuestion.userAnswer}`);
+    parts.push(`Doğru Cevap: ${currentQuestion.correctAnswer}`);
+    parts.push("Bu soruyu detaylıca açıkla, neden yanlış olduğunu anlat ve doğru cevabı öğret.");
   }
 
   // Öğrenme hızı
