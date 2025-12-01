@@ -282,6 +282,64 @@ export async function POST(request: Request) {
       messageLength: message.length,
     });
 
+    // Verify user exists in database
+    let userExists;
+    try {
+      userExists = await db.user.findUnique({
+        where: { id: userId },
+        select: { id: true },
+      });
+      
+      // If user not found by ID, try to find by email (for Google OAuth users)
+      if (!userExists && session.user.email) {
+        console.warn("[LESSON-ASSISTANT] Kullanıcı ID ile bulunamadı, email ile kontrol ediliyor:", {
+          userId,
+          email: session.user.email,
+        });
+        
+        const userByEmail = await db.user.findUnique({
+          where: { email: session.user.email },
+          select: { id: true },
+        });
+        
+        if (userByEmail) {
+          console.warn("[LESSON-ASSISTANT] Kullanıcı email ile bulundu ama session userId farklı:", {
+            sessionUserId: userId,
+            dbUserId: userByEmail.id,
+            email: session.user.email,
+          });
+          // This indicates a session mismatch - user should re-login
+          return NextResponse.json(
+            { 
+              error: "Oturum uyumsuzluğu tespit edildi. Lütfen çıkış yapıp tekrar giriş yapın.",
+              details: "Google OAuth ile giriş yaptıysanız, lütfen tekrar giriş yapmayı deneyin."
+            },
+            { status: 401 }
+          );
+        }
+      }
+      
+      if (!userExists) {
+        console.error("[LESSON-ASSISTANT] Kullanıcı veritabanında bulunamadı:", { 
+          userId,
+          email: session.user.email,
+        });
+        return NextResponse.json(
+          { 
+            error: "Kullanıcı bulunamadı. Lütfen çıkış yapıp tekrar giriş yapın.",
+            details: "Google OAuth ile giriş yaptıysanız, lütfen tekrar giriş yapmayı deneyin."
+          },
+          { status: 401 }
+        );
+      }
+    } catch (error) {
+      console.error("[LESSON-ASSISTANT] Kullanıcı kontrolü hatası:", error);
+      return NextResponse.json(
+        { error: "Kullanıcı doğrulama hatası" },
+        { status: 500 }
+      );
+    }
+
     // Get user info for personalization
     let userInfo: { name?: string | null; firstName?: string | null } | null = null;
     try {
@@ -381,10 +439,28 @@ export async function POST(request: Request) {
         hasRoadmap: !!threadData.roadmap,
       });
     } catch (error) {
-      console.error("[LESSON-ASSISTANT] Thread oluşturma hatası:", error);
+      console.error("[LESSON-ASSISTANT] Thread oluşturma hatası:", {
+        error: error instanceof Error ? error.message : String(error),
+        stack: error instanceof Error ? error.stack : undefined,
+        userId,
+        lessonSlug,
+      });
+      
+      // Daha açıklayıcı hata mesajları
+      let errorMessage = "Thread oluşturulamadı";
+      if (error instanceof Error) {
+        if (error.message.includes("Kullanıcı bulunamadı")) {
+          errorMessage = error.message;
+        } else if (error.message.includes("Foreign key")) {
+          errorMessage = "Kullanıcı doğrulama hatası. Lütfen oturum açın ve tekrar deneyin.";
+        } else {
+          errorMessage = error.message;
+        }
+      }
+      
       return NextResponse.json(
         { 
-          error: "Thread oluşturulamadı", 
+          error: errorMessage,
           details: error instanceof Error ? error.message : String(error)
         },
         { status: 500 }
@@ -414,8 +490,9 @@ export async function POST(request: Request) {
       threadRecord = null;
     }
 
-    const roadmap = threadRecord?.roadmap || threadData.roadmap || null;
-    const progress = (threadRecord?.progress as any) || threadData.progress || null;
+    // Safely get roadmap and progress with null checks
+    const roadmap = threadRecord?.roadmap || threadData?.roadmap || null;
+    const progress = (threadRecord?.progress as any) || threadData?.progress || null;
     const difficultyLevel = threadRecord?.difficultyLevel || null;
     const performanceData = threadRecord?.performanceData || null;
 

@@ -146,37 +146,66 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             }
           } else {
             // Create new user
-            const newUser = await db.user.create({
-              data: {
-                email: user.email,
-                name: user.name || (profile as any)?.name || null,
-                emailVerified: new Date(),
-                profileImage: user.image || (profile as any)?.picture || null,
-                role: "candidate" as UserRole,
-              },
-            });
-
-            // Create account if Account model exists
+            let newUser;
             try {
-              await db.account.create({
+              newUser = await db.user.create({
                 data: {
-                  userId: newUser.id,
-                  type: account.type || "oauth",
-                  provider: account.provider,
-                  providerAccountId: account.providerAccountId,
-                  refresh_token: account.refresh_token,
-                  access_token: account.access_token,
-                  expires_at: account.expires_at,
-                  token_type: account.token_type,
-                  scope: account.scope,
-                  id_token: account.id_token,
-                  session_state: account.session_state,
+                  email: user.email,
+                  name: user.name || (profile as any)?.name || null,
+                  emailVerified: new Date(),
+                  profileImage: user.image || (profile as any)?.picture || null,
+                  role: "candidate" as UserRole,
+                  password: null, // Explicitly set to null for OAuth users
                 },
               });
-            } catch (accountError: any) {
-              // If Account model doesn't exist, log warning but continue
-              console.warn("Account model error (might need migration):", accountError);
-              // User is created, they can still sign in
+              console.log("Google OAuth: Yeni kullanıcı oluşturuldu:", {
+                userId: newUser.id,
+                email: newUser.email,
+              });
+            } catch (createError: any) {
+              console.error("Google OAuth: Kullanıcı oluşturma hatası:", {
+                error: createError?.message,
+                code: createError?.code,
+                email: user.email,
+              });
+              // If user creation fails, try to find user again (might have been created by another request)
+              const retryUser = await db.user.findUnique({
+                where: { email: user.email },
+              });
+              if (retryUser) {
+                newUser = retryUser;
+                console.log("Google OAuth: Kullanıcı retry ile bulundu:", {
+                  userId: retryUser.id,
+                  email: retryUser.email,
+                });
+              } else {
+                throw new Error(`Kullanıcı oluşturulamadı: ${createError?.message || "Bilinmeyen hata"}`);
+              }
+            }
+
+            // Create account if Account model exists
+            if (newUser) {
+              try {
+                await db.account.create({
+                  data: {
+                    userId: newUser.id,
+                    type: account.type || "oauth",
+                    provider: account.provider,
+                    providerAccountId: account.providerAccountId,
+                    refresh_token: account.refresh_token,
+                    access_token: account.access_token,
+                    expires_at: account.expires_at,
+                    token_type: account.token_type,
+                    scope: account.scope,
+                    id_token: account.id_token,
+                    session_state: account.session_state,
+                  },
+                });
+              } catch (accountError: any) {
+                // If Account model doesn't exist, log warning but continue
+                console.warn("Account model error (might need migration):", accountError);
+                // User is created, they can still sign in
+              }
             }
           }
 
@@ -201,7 +230,29 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         token.role = (user as any).role;
         token.email = user.email;
       } else if (account?.provider === "google" && token.email) {
-        // For Google OAuth, fetch user from database if not in token
+        // For Google OAuth, always fetch user from database by email
+        // This ensures we have the correct userId even if signIn callback had issues
+        try {
+          const { db } = await import("@/lib/db");
+          const dbUser = await db.user.findUnique({
+            where: { email: token.email as string },
+          });
+          if (dbUser) {
+            token.id = dbUser.id;
+            token.role = dbUser.role;
+          } else {
+            // User not found - this shouldn't happen if signIn callback worked
+            console.error("Google OAuth: User not found in database:", {
+              email: token.email,
+              provider: account.provider,
+            });
+          }
+        } catch (error) {
+          console.error("Error fetching user in jwt callback:", error);
+        }
+      } else if (token.email && !token.id) {
+        // Fallback: if we have email but no id, try to find user by email
+        // This handles edge cases where user object wasn't passed correctly
         try {
           const { db } = await import("@/lib/db");
           const dbUser = await db.user.findUnique({
@@ -212,7 +263,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             token.role = dbUser.role;
           }
         } catch (error) {
-          console.error("Error fetching user in jwt callback:", error);
+          console.error("Error fetching user by email in jwt callback:", error);
         }
       }
       return token;

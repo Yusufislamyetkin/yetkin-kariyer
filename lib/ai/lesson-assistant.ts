@@ -90,14 +90,34 @@ export async function getOrCreateLessonThread(
       lessonSlug,
       threadId: thread.id,
       errorMessage: dbError?.message,
+      errorCode: dbError?.code,
+      errorMeta: dbError?.meta,
     });
-    // Thread oluşturuldu ama veritabanına kaydedilemedi, devam et
+    
+    // Foreign key hatası ise kullanıcının var olup olmadığını kontrol et
+    if (dbError?.code === 'P2003' || dbError?.message?.includes('Foreign key constraint')) {
+      // Kullanıcının var olup olmadığını kontrol et
+      const userExists = await db.user.findUnique({
+        where: { id: userId },
+        select: { id: true },
+      });
+      
+      if (!userExists) {
+        throw new Error(`Kullanıcı bulunamadı. Lütfen oturum açın ve tekrar deneyin.`);
+      }
+      
+      // Kullanıcı varsa ama başka bir foreign key hatası varsa, tekrar dene
+      throw new Error(`Thread kaydedilemedi: ${dbError?.message || "Bilinmeyen hata"}`);
+    }
+    
+    // Thread oluşturuldu ama veritabanına kaydedilemedi, devam et ama record null olacak
+    console.warn("[LESSON-ASSISTANT] Thread veritabanına kaydedilemedi ama devam ediliyor");
   }
 
   return {
     threadId: thread.id,
-    roadmap: record.roadmap || undefined,
-    progress: record.progress as any,
+    roadmap: record?.roadmap || undefined,
+    progress: record?.progress as any || undefined,
   };
 }
 
