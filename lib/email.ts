@@ -39,8 +39,22 @@ export async function sendPasswordResetEmail(
   const smtpPassword = process.env.SMTP_PASSWORD;
 
   if (!smtpUser || !smtpPassword) {
+    // Enhanced error logging for debugging
+    console.error("Email configuration error - Environment variables check:", {
+      SMTP_USER: smtpUser ? `${smtpUser.substring(0, 3)}***` : "NOT SET",
+      SMTP_PASSWORD: smtpPassword ? "***SET***" : "NOT SET",
+      SMTP_HOST: process.env.SMTP_HOST || "NOT SET (using default: smtp.gmail.com)",
+      SMTP_PORT: process.env.SMTP_PORT || "NOT SET (using default: 587)",
+      NODE_ENV: process.env.NODE_ENV,
+      VERCEL: process.env.VERCEL ? "true" : "false",
+      allEnvKeys: Object.keys(process.env).filter(key => key.includes("SMTP")).join(", "),
+    });
+    
     const error = new Error(
-      "SMTP_USER and SMTP_PASSWORD environment variables are not set"
+      "SMTP_USER and SMTP_PASSWORD environment variables are not set. " +
+      "Please check: 1) Variables are set in Vercel dashboard (Settings > Environment Variables), " +
+      "2) Deployment was restarted after adding variables, " +
+      "3) Variables are set for the correct environment (Production/Preview/Development)"
     );
     console.error("Email configuration error:", error);
     throw error;

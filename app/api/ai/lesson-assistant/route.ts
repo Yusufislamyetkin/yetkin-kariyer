@@ -274,7 +274,7 @@ export async function POST(request: Request) {
     const json = await request.json().catch(() => ({}));
     const { lessonSlug, message } = LessonAssistantRequestSchema.parse(json);
 
-    const userId = session.user.id as string;
+    let userId = session.user.id as string;
 
     console.log("[LESSON-ASSISTANT] İstek alındı:", {
       userId,
@@ -303,19 +303,15 @@ export async function POST(request: Request) {
         });
         
         if (userByEmail) {
-          console.warn("[LESSON-ASSISTANT] Kullanıcı email ile bulundu ama session userId farklı:", {
-            sessionUserId: userId,
+          const sessionUserId = userId; // Capture original session userId for logging
+          console.warn("[LESSON-ASSISTANT] Kullanıcı email ile bulundu ama session userId farklı, database userId kullanılıyor:", {
+            sessionUserId,
             dbUserId: userByEmail.id,
             email: session.user.email,
           });
-          // This indicates a session mismatch - user should re-login
-          return NextResponse.json(
-            { 
-              error: "Oturum uyumsuzluğu tespit edildi. Lütfen çıkış yapıp tekrar giriş yapın.",
-              details: "Google OAuth ile giriş yaptıysanız, lütfen tekrar giriş yapmayı deneyin."
-            },
-            { status: 401 }
-          );
+          // Use the database userId instead of session userId for Google OAuth users
+          userId = userByEmail.id;
+          userExists = userByEmail;
         }
       }
       
