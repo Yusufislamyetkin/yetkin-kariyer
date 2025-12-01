@@ -3,6 +3,8 @@ import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { normalizeCourseContent } from "@/lib/education/courseContent";
 
+export const dynamic = 'force-dynamic';
+
 function ensureString(value: unknown): string | undefined {
   if (typeof value !== "string") {
     return undefined;

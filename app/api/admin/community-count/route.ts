@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 
+export const dynamic = 'force-dynamic';
+
 // Topluluk slug'ları (create-course-communities API'sinden)
 const COMMUNITY_SLUGS = [
   "dotnet-core-community",

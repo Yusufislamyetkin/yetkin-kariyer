@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 
+export const dynamic = 'force-dynamic';
+
 // Placeholder for image search API
 // Will support Unsplash or Pexels when keys are provided
 export async function GET(request: Request) {
