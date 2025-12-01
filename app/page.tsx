@@ -202,7 +202,7 @@ export default function Home() {
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto mt-12">
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-display font-bold text-blue-600 dark:text-blue-400 mb-1">24+</div>
+              <div className="text-3xl md:text-4xl font-display font-bold text-blue-600 dark:text-blue-400 mb-1">25+</div>
               <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">Eğitim Modülü</div>
             </div>
             <div className="text-center">
@@ -257,7 +257,7 @@ export default function Home() {
                   <ul className="space-y-2 text-xs text-gray-500 dark:text-gray-400">
                     {feature.title === "Eğitim Modülü" && (
                       <>
-                        <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> 24+ Teknoloji Kursları</li>
+                        <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> 25+ Teknoloji Kursları</li>
                         <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> Gerçek zamanlı testler</li>
                         <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> AI destekli öğrenme yolu</li>
                       </>
