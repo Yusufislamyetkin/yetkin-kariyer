@@ -25,14 +25,31 @@ if (!authSecret) {
   }
 }
 
+// Get secret with proper error handling
+function getAuthSecretForConfig(): string {
+  if (authSecret) {
+    return authSecret;
+  }
+  if (process.env.NODE_ENV === "development") {
+    return "temp-dev-secret-change-in-production-please-set-auth-secret";
+  }
+  // In production, throw error if secret is missing
+  throw new Error(
+    "NEXTAUTH_SECRET veya AUTH_SECRET environment variable'ı eksik. " +
+    "Lütfen .env dosyanıza veya Vercel environment variables'a ekleyin."
+  );
+}
+
 export const { handlers, signIn, signOut, auth } = NextAuth({
   trustHost: true,
-  secret: authSecret || "temp-dev-secret-change-in-production-please-set-auth-secret",
+  secret: getAuthSecretForConfig(),
+  useSecureCookies: process.env.NODE_ENV === "production",
   providers: [
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       allowDangerousEmailAccountLinking: true, // Allow linking accounts with same email
+      // PKCE is enabled by default in NextAuth v5, no need to explicitly set
     }),
     Credentials({
       credentials: {
@@ -293,6 +310,34 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         sameSite: "lax",
         path: "/",
         secure: process.env.NODE_ENV === "production",
+      },
+    },
+    callbackUrl: {
+      name: `${process.env.NODE_ENV === "production" ? "__Secure-" : ""}next-auth.callback-url`,
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+      },
+    },
+    csrfToken: {
+      name: `${process.env.NODE_ENV === "production" ? "__Host-" : ""}next-auth.csrf-token`,
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+      },
+    },
+    pkceCodeVerifier: {
+      name: `${process.env.NODE_ENV === "production" ? "__Secure-" : ""}next-auth.pkce.code_verifier`,
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+        maxAge: 60 * 15, // 15 minutes - PKCE code verifier expires after 15 minutes
       },
     },
   },
