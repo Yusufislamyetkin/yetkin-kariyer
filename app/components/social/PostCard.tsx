@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { SharePostModal } from "./SharePostModal";
 import { SendPostModal } from "./SendPostModal";
+import { PostLikesModal } from "./PostLikesModal";
 import { formatDistanceToNow } from "date-fns";
 import { tr } from "date-fns/locale";
 
@@ -68,6 +69,7 @@ export const PostCard = memo(function PostCard({
   const [isLiking, setIsLiking] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
   const [showSendModal, setShowSendModal] = useState(false);
+  const [showLikesModal, setShowLikesModal] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
@@ -258,7 +260,7 @@ export const PostCard = memo(function PostCard({
               {post.user.profileImage ? (
                 <Image
                   src={post.user.profileImage}
-                  alt={post.user.name || post.user.email}
+                  alt={post.user.name || "User"}
                   width={48}
                   height={48}
                   className="w-full h-full object-cover"
@@ -266,7 +268,7 @@ export const PostCard = memo(function PostCard({
                 />
               ) : (
                 <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white text-lg font-bold">
-                  {(post.user.name || post.user.email)[0].toUpperCase()}
+                  {(post.user.name || "K")[0].toUpperCase()}
                 </div>
               )}
             </div>
@@ -275,7 +277,7 @@ export const PostCard = memo(function PostCard({
             href={`/profile/${post.userId}`}
             className="text-base font-semibold text-gray-900 dark:text-gray-100 hover:opacity-70 transition-opacity"
           >
-            {post.user.name || post.user.email.split("@")[0]}
+            {post.user.name || "Kullanıcı"}
           </Link>
         </div>
         <div className="relative">
@@ -530,8 +532,8 @@ export const PostCard = memo(function PostCard({
         {likesCount > 0 && (
           <div className="mb-2">
             <button
-              onClick={() => onCommentClick?.(post.id)}
-              className="text-base font-semibold text-gray-900 dark:text-gray-100 hover:opacity-70 transition-opacity"
+              onClick={() => setShowLikesModal(true)}
+              className="text-base font-semibold text-gray-900 dark:text-gray-100 hover:opacity-70 transition-opacity cursor-pointer"
             >
               {likesCount.toLocaleString()} beğeni
             </button>
@@ -546,7 +548,7 @@ export const PostCard = memo(function PostCard({
                 href={`/profile/${post.userId}`}
                 className="font-semibold text-gray-900 dark:text-gray-100 hover:opacity-70 mr-2 transition-opacity"
               >
-                {post.user.name || post.user.email.split("@")[0]}
+                {post.user.name || "Kullanıcı"}
               </Link>
               <span className="text-gray-900 dark:text-gray-100">
                 {post.content}
@@ -587,6 +589,13 @@ export const PostCard = memo(function PostCard({
           postImageUrl={post.imageUrl}
           postVideoUrl={post.videoUrl}
           onClose={() => setShowSendModal(false)}
+        />
+      )}
+
+      {showLikesModal && (
+        <PostLikesModal
+          postId={post.id}
+          onClose={() => setShowLikesModal(false)}
         />
       )}
     </div>

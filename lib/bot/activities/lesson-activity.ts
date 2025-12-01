@@ -29,11 +29,11 @@ export async function createLessonActivity(
       const bot = await db.user.findUnique({
         where: { id: userId, isBot: true },
         include: {
-          character: true,
+          botCharacter: true,
         },
       });
 
-      const botExpertise = bot?.character?.expertise || [];
+      const botExpertise = bot?.botCharacter?.expertise || [];
 
       // Find a course
       const courses = await db.course.findMany({

@@ -18,20 +18,8 @@ const createPostSchema = z.object({
     },
     z.union([z.string().url(), z.null()]).optional()
   ),
-  videoUrl: z.preprocess(
-    (val) => {
-      // Convert empty string, null, or undefined to null
-      if (val === "" || val === null || val === undefined) {
-        return null;
-      }
-      return val;
-    },
-    z.union([z.string().url(), z.null()]).optional()
-  ),
-}).refine((data) => (data.content && data.content.trim().length > 0) || data.imageUrl || data.videoUrl, {
-  message: "Gönderi için en az içerik, görsel veya video gerekli",
-}).refine((data) => !(data.imageUrl && data.videoUrl), {
-  message: "Bir gönderi hem görsel hem video içeremez",
+}).refine((data) => (data.content && data.content.trim().length > 0) || data.imageUrl, {
+  message: "Gönderi için en az içerik veya görsel gerekli",
 });
 
 export async function GET(request: Request) {
@@ -407,7 +395,7 @@ export async function POST(request: Request) {
         userId,
         content: safeContent || null,
         imageUrl: data.imageUrl || null,
-        videoUrl: data.videoUrl || null,
+        videoUrl: null, // Video yükleme özelliği kaldırıldı
       },
       include: {
         user: {
@@ -468,11 +456,11 @@ export async function POST(request: Request) {
           { status: 400 }
         );
       }
-      // Check if it's a refine error (content, imageUrl, or videoUrl required)
+      // Check if it's a refine error (content or imageUrl required)
       const refineError = error.errors.find((e) => e.code === "custom");
       if (refineError) {
         return NextResponse.json(
-          { error: refineError.message || "Gönderi için en az içerik, görsel veya video gerekli" },
+          { error: refineError.message || "Gönderi için en az içerik veya görsel gerekli" },
           { status: 400 }
         );
       }

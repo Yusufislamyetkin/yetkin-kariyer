@@ -30,13 +30,13 @@ export async function getActiveBotsForScheduling() {
   const bots = await db.user.findMany({
     where: {
       isBot: true,
-      configuration: {
+      botConfiguration: {
         isActive: true,
       },
     },
     include: {
-      configuration: true,
-      character: true,
+      botConfiguration: true,
+      botCharacter: true,
       botActivities: {
         where: {
           executedAt: {
@@ -52,10 +52,10 @@ export async function getActiveBotsForScheduling() {
   });
 
   return bots.filter((bot: any) => {
-    if (!bot.configuration) return false;
+    if (!bot.botConfiguration) return false;
 
     // Check if bot should be active at this hour
-    const activityHours = bot.configuration.activityHours || BOT_CONFIG.DEFAULT_ACTIVITY_HOURS;
+    const activityHours = bot.botConfiguration.activityHours || BOT_CONFIG.DEFAULT_ACTIVITY_HOURS;
     return activityHours.includes(currentHour);
   });
 }
@@ -67,7 +67,7 @@ export async function calculateBotActivities(
   bot: any,
   activitiesLast24h: Array<{ activityType: BotActivityType; executedAt: Date }>
 ) {
-  const config = bot.configuration || {};
+  const config = bot.botConfiguration || {};
   const scheduled: ScheduledActivity[] = [];
 
   if (!config.isActive) return scheduled;

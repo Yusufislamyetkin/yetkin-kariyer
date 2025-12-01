@@ -434,14 +434,14 @@ export default function ExplorePage() {
                       {currentUserProfile?.profileImage ? (
                         <Image
                           src={currentUserProfile.profileImage}
-                          alt={currentUserProfile.name || currentUserProfile.email || "User"}
+                          alt={currentUserProfile.name || "User"}
                           width={56}
                           height={56}
                           className="w-full h-full object-cover"
                         />
                       ) : (
                         <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white text-lg font-bold">
-                          {(currentUserProfile?.name || session.user.name || session.user.email || "U")[0].toUpperCase()}
+                          {(currentUserProfile?.name || session.user.name || "K")[0].toUpperCase()}
                         </div>
                       )}
                     </div>
@@ -451,11 +451,8 @@ export default function ExplorePage() {
                       href="/profile"
                       className="block text-base font-semibold text-gray-900 dark:text-gray-100 hover:underline truncate"
                     >
-                      {currentUserProfile?.name || session.user.name || (session.user.email?.split("@")[0] || "User")}
+                      {currentUserProfile?.name || session.user.name || "Kullanıcı"}
                     </Link>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 truncate mt-0.5">
-                      {currentUserProfile?.email || session.user.email}
-                    </p>
                   </div>
                   <Link
                     href="/profile"
@@ -498,20 +495,20 @@ export default function ExplorePage() {
                             {user.profileImage ? (
                               <Image
                                 src={user.profileImage}
-                                alt={user.name || user.email}
+                                alt={user.name || "User"}
                                 width={48}
                                 height={48}
                                 className="w-full h-full object-cover"
                               />
                             ) : (
                               <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white text-base font-bold">
-                                {(user.name || user.email)[0].toUpperCase()}
+                                {(user.name || "K")[0].toUpperCase()}
                               </div>
                             )}
                           </div>
                           <div className="flex-1 min-w-0">
                             <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">
-                              {user.name || user.email.split("@")[0]}
+                              {user.name || "Kullanıcı"}
                             </p>
                             {user.mutualConnections > 0 ? (
                               <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">

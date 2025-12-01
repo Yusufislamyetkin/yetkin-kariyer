@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { BookOpen, Video, FileText, Sparkles, TrendingUp, Users, Zap, CheckCircle, Award, Clock, Target, BarChart3, MessageSquare, HelpCircle, ArrowRight, Star, PlayCircle, Shield, Globe, Trophy, Code, Bug, Handshake, DollarSign, MessageCircle, Compass, UserPlus } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
@@ -156,8 +157,17 @@ export default function Home() {
       <nav className="sticky top-0 z-50 glass border-b border-gray-200/50 dark:border-gray-700/50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <Link href="/" className="text-2xl font-display font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent md:bg-gradient-to-r md:from-blue-600 md:via-indigo-600 md:to-cyan-600 md:bg-[length:200%_auto] md:animate-text-shimmer">
-              YTK Academy
+            <Link href="/" className="flex items-center gap-3">
+              <Image
+                src="/Photos/YtkCareerLogo/ytkncareer.jpeg"
+                alt="YTK Academy Logo"
+                width={40}
+                height={40}
+                className="rounded-lg"
+              />
+              <span className="text-2xl font-display font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent md:bg-gradient-to-r md:from-blue-600 md:via-indigo-600 md:to-cyan-600 md:bg-[length:200%_auto] md:animate-text-shimmer">
+                YTK Academy
+              </span>
             </Link>
             <div className="flex items-center gap-4">
               <ThemeSwitchButton />
@@ -257,7 +267,7 @@ export default function Home() {
                   <ul className="space-y-2 text-xs text-gray-500 dark:text-gray-400">
                     {feature.title === "Eğitim Modülü" && (
                       <>
-                        <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> .NET Core ve teknoloji kursları</li>
+                        <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> 24+ Teknoloji Kursları</li>
                         <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> Gerçek zamanlı testler</li>
                         <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-green-500" /> AI destekli öğrenme yolu</li>
                       </>
@@ -353,7 +363,7 @@ export default function Home() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {[
             { step: "01", title: "Hesap Oluştur", desc: "Ücretsiz kayıt olun, profilinizi oluşturun ve topluluğa katılın", icon: Users, color: "from-blue-500 to-cyan-500" },
-            { step: "02", title: "Keşfet ve Öğren", desc: ".NET Core kurslarına başlayın, canlı kodlama yapın ve testlerle öğrenin", icon: BookOpen, color: "from-indigo-500 to-purple-500" },
+            { step: "02", title: "Keşfet ve Öğren", desc: "Kurslarla Başlayın", icon: BookOpen, color: "from-indigo-500 to-purple-500" },
             { step: "03", title: "Toplulukla Bağlan", desc: "Sosyal ağa katılın, hackathon'lara başvurun ve freelancer fırsatlarını keşfedin", icon: MessageCircle, color: "from-green-500 to-emerald-500" },
             { step: "04", title: "Kazan ve Geliş", desc: "Sertifikalar alın, ödüller kazanın ve kariyerinizi bir sonraki seviyeye taşıyın", icon: Trophy, color: "from-orange-500 to-red-500" },
           ].map((item, index) => {
@@ -436,6 +446,7 @@ export default function Home() {
             { name: "Cloud & DevOps", icon: "☁️", desc: "AWS, Azure, Docker & Kubernetes ile bulut altyapısı ve DevOps pratikleri", color: "from-cyan-500 to-blue-500" },
             { name: "Güvenlik", icon: "🔐", desc: "Ethical Hacking, OWASP güvenlik standartları ve web uygulama güvenliği", color: "from-purple-500 to-pink-500" },
             { name: "AI & Machine Learning", icon: "🤖", desc: "AI for Developers ile yapay zeka ve makine öğrenmesi temelleri", color: "from-teal-500 to-green-500" },
+            { name: "Full Stack Development", icon: "🚀", desc: "MEAN, MERN, MEVN stack'leri ile end-to-end web uygulama geliştirme", color: "from-rose-500 to-pink-500" },
           ].map((category, index) => {
             const lessonCount = categoryLessonCounts[category.name] || 0;
             return (

@@ -360,14 +360,14 @@ export default function PostDetailPage() {
                     {post.user.profileImage ? (
                       <Image
                         src={post.user.profileImage}
-                        alt={post.user.name || post.user.email}
+                        alt={post.user.name || "User"}
                         width={32}
                         height={32}
                         className="w-full h-full object-cover"
                       />
                     ) : (
                       <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white text-xs font-semibold">
-                        {(post.user.name || post.user.email)[0].toUpperCase()}
+                        {(post.user.name || "K")[0].toUpperCase()}
                       </div>
                     )}
                   </div>
@@ -376,7 +376,7 @@ export default function PostDetailPage() {
                   href={`/profile/${post.userId}`}
                   className="text-sm font-semibold text-[#262626] dark:text-[#fafafa] hover:opacity-70 transition-opacity"
                 >
-                  {post.user.name || post.user.email.split("@")[0]}
+                  {post.user.name || "Kullanıcı"}
                 </Link>
               </div>
               <div className="relative">
@@ -428,7 +428,7 @@ export default function PostDetailPage() {
                       href={`/profile/${post.userId}`}
                       className="text-sm font-semibold text-[#262626] dark:text-[#fafafa] hover:opacity-70 transition-opacity mr-2"
                     >
-                      {post.user.name || post.user.email.split("@")[0]}
+                      {post.user.name || "Kullanıcı"}
                     </Link>
                     <span className="text-sm text-[#262626] dark:text-[#fafafa] whitespace-pre-wrap break-words">
                       {post.content}

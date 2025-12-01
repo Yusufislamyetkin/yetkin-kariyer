@@ -50,7 +50,7 @@ export default function CreatePostPage() {
                 Yeni Gönderi Oluştur
               </h1>
               <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 mt-1">
-                Fotoğraf, video veya metin paylaşın
+                Fotoğraf veya metin paylaşın
               </p>
             </div>
           </div>

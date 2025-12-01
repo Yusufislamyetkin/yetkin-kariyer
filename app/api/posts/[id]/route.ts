@@ -72,6 +72,7 @@ export async function GET(
       userId: post.userId,
       content: post.content,
       imageUrl: post.imageUrl,
+      videoUrl: post.videoUrl,
       createdAt: post.createdAt,
       updatedAt: post.updatedAt,
       user: post.user,

@@ -31,7 +31,10 @@ const categoryMappings: Record<string, string[]> = {
   ],
   "AI & Machine Learning": [
     "AI", "Artificial Intelligence", "Machine Learning", "ML", "Deep Learning", 
-    "Neural Network", "TensorFlow", "PyTorch", "Yapay Zeka"
+    "Neural Network", "TensorFlow", "PyTorch", "Yapay Zeka", "AI for Developers"
+  ],
+  "Full Stack Development": [
+    "Full Stack", "Fullstack", "Full-Stack", "MEAN", "MERN", "MEVN", "LAMP", "LEMP"
   ]
 };
 

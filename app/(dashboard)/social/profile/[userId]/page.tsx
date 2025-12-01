@@ -194,14 +194,14 @@ export default function SocialProfilePage() {
                 {user.profileImage ? (
                   <Image
                     src={user.profileImage}
-                    alt={user.name || user.email}
+                    alt={user.name || "User"}
                     width={128}
                     height={128}
                     className="w-full h-full object-cover"
                   />
                 ) : (
                   <div className="w-full h-full bg-gradient-to-br from-[#0a66c2] to-[#0073b1] flex items-center justify-center text-white text-4xl font-semibold">
-                    {(user.name || user.email)[0].toUpperCase()}
+                    {(user.name || "K")[0].toUpperCase()}
                   </div>
                 )}
               </div>
@@ -209,10 +209,10 @@ export default function SocialProfilePage() {
               <div className="flex-1 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 pt-20 sm:pt-0">
                 <div>
                   <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-1">
-                    {user.name || user.email.split("@")[0]}
+                    {user.name || "Kullanıcı"}
                   </h1>
                   <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                    {user.name ? user.email : "Profesyonel" /* Placeholder headline */}
+                    Profesyonel
                   </p>
                   <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
                     <span>{followersCount} bağlantı</span>

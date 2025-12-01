@@ -49,11 +49,11 @@ export async function createLiveCodingActivity(
     const bot = await db.user.findUnique({
       where: { id: userId, isBot: true },
       include: {
-        character: true,
+        botCharacter: true,
       },
     });
 
-    const traits = bot?.character?.traits as any;
+    const traits = bot?.botCharacter?.traits as any;
     const technicalLevel = traits?.technicalLevel || "intermediate";
 
     // Generate realistic metrics based on technical level

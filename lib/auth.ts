@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import Google from "next-auth/providers/google";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
 import type { UserRole } from "@/types";
@@ -28,6 +29,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   trustHost: true,
   secret: authSecret || "temp-dev-secret-change-in-production-please-set-auth-secret",
   providers: [
+    Google({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      allowDangerousEmailAccountLinking: true, // Allow linking accounts with same email
+    }),
     Credentials({
       credentials: {
         email: { label: "Email", type: "email" },
@@ -50,6 +56,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           }
 
           if (!user) {
+            return null;
+          }
+
+          // Check if user has a password (OAuth users might not have one)
+          if (!user.password) {
             return null;
           }
 
@@ -77,10 +88,100 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async signIn({ user, account, profile }) {
+      if (account?.provider === "google") {
+        try {
+          const { db } = await import("@/lib/db");
+          
+          // Check if user exists
+          const existingUser = await db.user.findUnique({
+            where: { email: user.email! },
+          });
+
+          if (existingUser) {
+            // User exists, check if account exists
+            const existingAccount = await db.account.findUnique({
+              where: {
+                provider_providerAccountId: {
+                  provider: "google",
+                  providerAccountId: account.providerAccountId,
+                },
+              },
+            });
+
+            if (!existingAccount) {
+              // Link account to existing user
+              await db.account.create({
+                data: {
+                  userId: existingUser.id,
+                  type: account.type,
+                  provider: account.provider,
+                  providerAccountId: account.providerAccountId,
+                  refresh_token: account.refresh_token,
+                  access_token: account.access_token,
+                  expires_at: account.expires_at,
+                  token_type: account.token_type,
+                  scope: account.scope,
+                  id_token: account.id_token,
+                  session_state: account.session_state,
+                },
+              });
+            }
+          } else {
+            // Create new user
+            const newUser = await db.user.create({
+              data: {
+                email: user.email!,
+                name: user.name || profile?.name || null,
+                emailVerified: new Date(),
+                profileImage: user.image || profile?.picture || null,
+                role: "candidate" as UserRole,
+              },
+            });
+
+            // Create account
+            await db.account.create({
+              data: {
+                userId: newUser.id,
+                type: account.type,
+                provider: account.provider,
+                providerAccountId: account.providerAccountId,
+                refresh_token: account.refresh_token,
+                access_token: account.access_token,
+                expires_at: account.expires_at,
+                token_type: account.token_type,
+                scope: account.scope,
+                id_token: account.id_token,
+                session_state: account.session_state,
+              },
+            });
+          }
+        } catch (error) {
+          console.error("Error in signIn callback:", error);
+          return false;
+        }
+      }
+      return true;
+    },
+    async jwt({ token, user, account }) {
       if (user) {
         token.id = user.id;
         token.role = (user as any).role;
+        token.email = user.email;
+      } else if (account?.provider === "google" && token.email) {
+        // For Google OAuth, fetch user from database if not in token
+        try {
+          const { db } = await import("@/lib/db");
+          const dbUser = await db.user.findUnique({
+            where: { email: token.email as string },
+          });
+          if (dbUser) {
+            token.id = dbUser.id;
+            token.role = dbUser.role;
+          }
+        } catch (error) {
+          console.error("Error fetching user in jwt callback:", error);
+        }
       }
       return token;
     },
@@ -99,6 +200,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   debug: process.env.NODE_ENV === "development",
   session: {
     strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+  },
+  cookies: {
+    sessionToken: {
+      name: `${process.env.NODE_ENV === "production" ? "__Secure-" : ""}next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+      },
+    },
   },
 });
 

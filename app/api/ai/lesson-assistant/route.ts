@@ -282,6 +282,32 @@ export async function POST(request: Request) {
       messageLength: message.length,
     });
 
+    // Get user info for personalization
+    let userInfo: { name?: string | null; firstName?: string | null } | null = null;
+    try {
+      const user = await db.user.findUnique({
+        where: { id: userId },
+        select: {
+          name: true,
+        },
+      });
+      
+      if (user) {
+        // Extract first name from full name if available
+        const fullName = user.name || "";
+        const nameParts = fullName.trim().split(/\s+/);
+        const firstName = nameParts.length > 0 ? nameParts[0] : null;
+        
+        userInfo = {
+          name: user.name,
+          firstName: firstName || null,
+        };
+      }
+    } catch (error) {
+      console.error("[LESSON-ASSISTANT] Kullanıcı bilgisi alınamadı:", error);
+      // Continue without user info, not critical
+    }
+
     // Find lesson content
     let lessonMatch;
     try {
@@ -403,7 +429,8 @@ export async function POST(request: Request) {
         availableContent,
         roadmap,
         difficultyLevel,
-        performanceData as any
+        performanceData as any,
+        userInfo
       );
       console.log("[LESSON-ASSISTANT] System prompt oluşturuldu, uzunluk:", systemPrompt.length);
     } catch (error) {

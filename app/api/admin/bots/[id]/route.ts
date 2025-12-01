@@ -33,8 +33,8 @@ export async function GET(
         isBot: true,
       },
       include: {
-        character: true,
-        configuration: true,
+        botCharacter: true,
+        botConfiguration: true,
         botActivities: {
           take: 50,
           orderBy: {
@@ -85,7 +85,7 @@ export async function PUT(
         isBot: true,
       },
       include: {
-        configuration: true,
+        botConfiguration: true,
       },
     });
 
@@ -97,7 +97,7 @@ export async function PUT(
     }
 
     // Update configuration
-    if (bot.configuration) {
+    if (bot.botConfiguration) {
       await db.botConfiguration.update({
         where: { userId: params.id },
         data,

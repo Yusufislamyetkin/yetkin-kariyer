@@ -40,8 +40,8 @@ interface Bot {
   profileImage: string | null;
   isBot: boolean;
   createdAt: string;
-  character: BotCharacter | null;
-  configuration: BotConfiguration | null;
+  botCharacter: BotCharacter | null;
+  botConfiguration: BotConfiguration | null;
 }
 
 export default function AdminBotsPage() {
@@ -194,7 +194,7 @@ export default function AdminBotsPage() {
                           <Bot className="h-10 w-10 text-gray-400" />
                         )}
                       </div>
-                      {bot.configuration?.isActive && (
+                      {bot.botConfiguration?.isActive && (
                         <div className="absolute top-2 right-2">
                           <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
                             <Activity className="h-3 w-3" />
@@ -207,17 +207,17 @@ export default function AdminBotsPage() {
                     {/* Bot Info */}
                     <div className="p-5">
                       <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">
-                        {bot.character?.name || bot.name || "İsimsiz Bot"}
+                        {bot.botCharacter?.name || bot.name || "İsimsiz Bot"}
                       </h3>
 
                       <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 line-clamp-2">
-                        {bot.character?.persona || "Karakter tanımı yok"}
+                        {bot.botCharacter?.persona || "Karakter tanımı yok"}
                       </p>
 
-                      {bot.character?.expertise && bot.character.expertise.length > 0 && (
+                      {bot.botCharacter?.expertise && bot.botCharacter.expertise.length > 0 && (
                         <div className="mb-3">
                           <div className="flex flex-wrap gap-1">
-                            {bot.character.expertise.slice(0, 3).map((exp, idx) => (
+                            {bot.botCharacter.expertise.slice(0, 3).map((exp, idx) => (
                               <span
                                 key={idx}
                                 className="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400"
@@ -225,23 +225,23 @@ export default function AdminBotsPage() {
                                 {exp}
                               </span>
                             ))}
-                            {bot.character.expertise.length > 3 && (
+                            {bot.botCharacter.expertise.length > 3 && (
                               <span className="px-2 py-1 text-xs text-gray-500">
-                                +{bot.character.expertise.length - 3}
+                                +{bot.botCharacter.expertise.length - 3}
                               </span>
                             )}
                           </div>
                         </div>
                       )}
 
-                      {bot.configuration && (
+                      {bot.botConfiguration && (
                         <div className="text-xs text-gray-500 dark:text-gray-400 mb-3 pt-3 border-t border-gray-200 dark:border-gray-700">
                           <p>
-                            Günde {bot.configuration.minPostsPerDay} - {bot.configuration.maxPostsPerDay} post
+                            Günde {bot.botConfiguration.minPostsPerDay} - {bot.botConfiguration.maxPostsPerDay} post
                           </p>
-                          {bot.configuration.lastActivityAt && (
+                          {bot.botConfiguration.lastActivityAt && (
                             <p className="mt-1">
-                              Son aktivite: {new Date(bot.configuration.lastActivityAt).toLocaleDateString("tr-TR")}
+                              Son aktivite: {new Date(bot.botConfiguration.lastActivityAt).toLocaleDateString("tr-TR")}
                             </p>
                           )}
                         </div>
@@ -250,7 +250,7 @@ export default function AdminBotsPage() {
                       {/* Actions */}
                       <div className="flex gap-2 mt-4">
                         <Button
-                          onClick={() => handleToggleActive(bot.id, bot.configuration?.isActive || false)}
+                          onClick={() => handleToggleActive(bot.id, bot.botConfiguration?.isActive || false)}
                           disabled={toggling.has(bot.id)}
                           variant="outline"
                           size="sm"
@@ -258,7 +258,7 @@ export default function AdminBotsPage() {
                         >
                           {toggling.has(bot.id) ? (
                             <Loader2 className="h-4 w-4 animate-spin" />
-                          ) : bot.configuration?.isActive ? (
+                          ) : bot.botConfiguration?.isActive ? (
                             <>
                               <Pause className="h-4 w-4 mr-1" />
                               Durdur

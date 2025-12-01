@@ -17,12 +17,12 @@ export async function createPostActivity(userId: string): Promise<ActivityResult
     const bot = await db.user.findUnique({
       where: { id: userId, isBot: true },
       include: {
-        character: true,
-        configuration: true,
+        botCharacter: true,
+        botConfiguration: true,
       },
     });
 
-    if (!bot || !bot.character) {
+    if (!bot || !bot.botCharacter) {
       return {
         success: false,
         error: "Bot character not found",
@@ -30,7 +30,7 @@ export async function createPostActivity(userId: string): Promise<ActivityResult
     }
 
     // Get system prompt
-    const systemPrompt = bot.character.systemPrompt;
+    const systemPrompt = bot.botCharacter.systemPrompt;
 
     // Get recent posts to understand context
     const recentPosts = await db.post.findMany({
@@ -50,7 +50,7 @@ export async function createPostActivity(userId: string): Promise<ActivityResult
     const postTypes = ["technical_tip", "achievement", "question", "discussion", "learning_share"];
     const selectedType = postTypes[Math.floor(Math.random() * postTypes.length)];
 
-    const prompt = `You are ${bot.character.name}, a developer in a Turkish developer community.
+    const prompt = `You are ${bot.botCharacter.name}, a developer in a Turkish developer community.
 
 ${systemPrompt}
 

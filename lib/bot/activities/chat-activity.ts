@@ -24,11 +24,11 @@ export async function createChatActivity(
     const bot = await db.user.findUnique({
       where: { id: userId, isBot: true },
       include: {
-        character: true,
+        botCharacter: true,
       },
     });
 
-    if (!bot || !bot.character) {
+    if (!bot || !bot.botCharacter) {
       return {
         success: false,
         error: "Bot character not found",
@@ -114,9 +114,9 @@ export async function createChatActivity(
     });
 
     // Generate chat message using AI
-    const prompt = `You are ${bot.character.name}, a developer in a Turkish developer community chat.
+    const prompt = `You are ${bot.botCharacter.name}, a developer in a Turkish developer community chat.
 
-${bot.character.systemPrompt}
+${bot.botCharacter.systemPrompt}
 
 The community is discussing in a group. Write a short, relevant chat message in Turkish that:
 - Is conversational and natural
@@ -135,7 +135,7 @@ Generate only the chat message text, nothing else.`;
       messages: [
         {
           role: "system",
-          content: bot.character.systemPrompt,
+          content: bot.botCharacter.systemPrompt,
         },
         {
           role: "user",

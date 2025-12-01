@@ -24,11 +24,11 @@ export async function createCommentActivity(
     const bot = await db.user.findUnique({
       where: { id: userId, isBot: true },
       include: {
-        character: true,
+        botCharacter: true,
       },
     });
 
-    if (!bot || !bot.character) {
+    if (!bot || !bot.botCharacter) {
       return {
         success: false,
         error: "Bot character not found",
@@ -135,9 +135,9 @@ export async function createCommentActivity(
     }
 
     // Generate comment using AI
-    const prompt = `You are ${bot.character.name}, a developer in a Turkish developer community.
+    const prompt = `You are ${bot.botCharacter.name}, a developer in a Turkish developer community.
 
-${bot.character.systemPrompt}
+${bot.botCharacter.systemPrompt}
 
 Write a thoughtful, relevant comment in Turkish for this post:
 
@@ -160,7 +160,7 @@ Generate only the comment text, nothing else.`;
       messages: [
         {
           role: "system",
-          content: bot.character.systemPrompt,
+          content: bot.botCharacter.systemPrompt,
         },
         {
           role: "user",

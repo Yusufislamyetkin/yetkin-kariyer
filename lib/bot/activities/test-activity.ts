@@ -24,11 +24,11 @@ export async function createTestActivity(
     const bot = await db.user.findUnique({
       where: { id: userId, isBot: true },
       include: {
-        character: true,
+        botCharacter: true,
       },
     });
 
-    if (!bot || !bot.character) {
+    if (!bot || !bot.botCharacter) {
       return {
         success: false,
         error: "Bot character not found",
@@ -63,7 +63,7 @@ export async function createTestActivity(
       }
 
       // Pick a random test that matches bot's expertise
-      const botExpertise = bot.character.expertise || [];
+      const botExpertise = bot.botCharacter.expertise || [];
       const matchingQuizzes = availableQuizzes.filter((q: any) => {
         const titleLower = q.title?.toLowerCase() || "";
         return botExpertise.some((exp: any) => titleLower.includes(exp.toLowerCase()));
@@ -103,7 +103,7 @@ export async function createTestActivity(
     }
 
     // Generate answers based on bot's technical level
-    const traits = bot.character.traits as any;
+    const traits = bot.botCharacter.traits as any;
     const technicalLevel = traits?.technicalLevel || "intermediate";
     
     // Calculate success rate based on technical level

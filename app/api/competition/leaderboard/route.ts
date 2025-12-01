@@ -470,6 +470,77 @@ export async function GET(request: Request) {
       }
     }
 
+    // FIRST: Fetch point transactions for the period to get users with badge points
+    // This ensures users with badge points appear even if they have no attempts
+    const pointTransactions = await db.pointTransaction.groupBy({
+      by: ["userId"],
+      where: {
+        createdAt: {
+          gte: startDate,
+          lt: endDate,
+        },
+      },
+      _sum: {
+        delta: true,
+      },
+    });
+
+    // Calculate points earned in the period for each user from point_transactions
+    const userPointsMap = new Map<string, number>();
+    const usersWithPoints = new Set<string>();
+    for (const transaction of pointTransactions) {
+      const points = transaction._sum.delta || 0;
+      if (points > 0) {
+        userPointsMap.set(transaction.userId, points);
+        usersWithPoints.add(transaction.userId);
+      }
+    }
+
+    // Get all unique user IDs: those with attempts OR those with points
+    const allUserIdsFromAttempts = Array.from(userMetrics.keys());
+    const allUniqueUserIds = Array.from(
+      new Set([...allUserIdsFromAttempts, ...Array.from(usersWithPoints)])
+    );
+
+    // Fetch user data for all users (those with attempts or points)
+    const usersData =
+      allUniqueUserIds.length > 0
+        ? await db.user.findMany({
+            where: {
+              id: { in: allUniqueUserIds },
+            },
+            select: {
+              id: true,
+              name: true,
+              email: true,
+              profileImage: true,
+            },
+          })
+        : [];
+
+    const userDataMap = new Map(
+      usersData.map((user: any) => [user.id, user])
+    );
+
+    // Ensure all users with points are in userMetrics (even if no attempts)
+    for (const userId of usersWithPoints) {
+      if (!userMetrics.has(userId)) {
+        const userData = userDataMap.get(userId) as { id: string; name: string | null; email: string; profileImage: string | null; } | undefined;
+        if (userData) {
+          userMetrics.set(userId, {
+            userId,
+            user: userData,
+            topicCourseIds: new Set<string>(),
+            quizScore: initAccumulator(),
+            testScore: initAccumulator(),
+            liveCodingScore: initAccumulator(),
+            bugFixScore: initAccumulator(),
+            hackatonScore: initAccumulator(),
+          });
+        }
+      }
+    }
+
     const leaderboardData = Array.from(userMetrics.values()).map((metrics) => {
       const topicCompletion =
         Math.min(
@@ -531,32 +602,8 @@ export async function GET(request: Request) {
       };
     });
 
-    // Get all user IDs from leaderboardData to fetch their badges and points
+    // Get all user IDs from leaderboardData to fetch their badges
     const allLeaderboardUserIds = leaderboardData.map((entry) => entry.userId);
-
-    // Fetch point transactions for the period to calculate daily/weekly/monthly points
-    const pointTransactions = allLeaderboardUserIds.length > 0
-      ? await db.pointTransaction.groupBy({
-          by: ["userId"],
-          where: {
-            userId: { in: allLeaderboardUserIds },
-            createdAt: {
-              gte: startDate,
-              lt: endDate,
-            },
-          },
-          _sum: {
-            delta: true,
-          },
-        })
-      : [];
-
-    // Calculate points earned in the period for each user from point_transactions
-    const userPointsMap = new Map<string, number>();
-    for (const transaction of pointTransactions) {
-      const points = transaction._sum.delta || 0;
-      userPointsMap.set(transaction.userId, points);
-    }
 
     // Fetch all user badges for display purposes only (not for sorting)
     const allUserBadges =
@@ -586,8 +633,12 @@ export async function GET(request: Request) {
       points: userPointsMap.get(entry.userId) || 0,
     }));
 
-    // Sort by points instead of compositeScore
-    leaderboardWithPoints.sort((a, b) => {
+    // Filter out users with 0 or negative points, then sort by points
+    const leaderboardWithPointsFiltered = leaderboardWithPoints.filter(
+      (entry) => entry.points > 0
+    );
+
+    leaderboardWithPointsFiltered.sort((a, b) => {
       if (b.points !== a.points) {
         return b.points - a.points;
       }
@@ -599,7 +650,7 @@ export async function GET(request: Request) {
     });
 
     // Slice to limit and assign ranks
-    const leaderboard = leaderboardWithPoints.slice(0, limit).map((entry, index) => ({
+    const leaderboard = leaderboardWithPointsFiltered.slice(0, limit).map((entry, index) => ({
       ...entry,
       rank: index + 1,
     }));

@@ -43,6 +43,9 @@ OPENAI_API_KEY="your-openai-api-key"
 BLOB_READ_WRITE_TOKEN="your-blob-storage-token"
 # For development, HTTP is fine. For production, use HTTPS to avoid mixed content issues.
 NEXT_PUBLIC_SIGNALR_URL="http://softwareinterview.tryasp.net/chatHub"
+# Google OAuth (Optional - for Google Sign In)
+GOOGLE_CLIENT_ID="your-google-client-id"
+GOOGLE_CLIENT_SECRET="your-google-client-secret"
 ```
 
 4. Veritabanını hazırlayın:
@@ -53,7 +56,23 @@ npx prisma db push
 # psql $DATABASE_URL -f prisma/migrations/20241108_add_chat_tables/migration.sql
 ```
 
-5. Geliştirme sunucusunu başlatın:
+5. Google OAuth Kurulumu (Opsiyonel):
+
+Google ile giriş özelliğini kullanmak için:
+
+a) [Google Cloud Console](https://console.cloud.google.com/)'a gidin ve yeni bir proje oluşturun veya mevcut projeyi seçin.
+
+b) "APIs & Services" > "Credentials" bölümüne gidin ve "Create Credentials" > "OAuth client ID" seçin.
+
+c) Application type olarak "Web application" seçin.
+
+d) Authorized redirect URIs'ye şunları ekleyin:
+   - Development: `http://localhost:3000/api/auth/callback/google`
+   - Production: `https://your-domain.com/api/auth/callback/google`
+
+e) Client ID ve Client Secret'ı kopyalayıp `.env` dosyanıza ekleyin.
+
+6. Geliştirme sunucusunu başlatın:
 ```bash
 npm run dev
 ```
@@ -92,6 +111,10 @@ OPENAI_API_KEY=your-openai-api-key-here
 
 BLOB_READ_WRITE_TOKEN=your-vercel-blob-token-here
 NEXT_PUBLIC_SIGNALR_URL=https://softwareinterview.tryasp.net/chatHub
+
+# Google OAuth (Optional - for Google Sign In)
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
 ```
 
 **Not:** 
@@ -99,6 +122,7 @@ NEXT_PUBLIC_SIGNALR_URL=https://softwareinterview.tryasp.net/chatHub
 - `OPENAI_API_KEY` değerini OpenAI'den alın
 - `BLOB_READ_WRITE_TOKEN` değerini Vercel Blob Storage'dan alın
 - `NEXT_PUBLIC_SIGNALR_URL` için **production'da HTTPS kullanın** (mixed content sorunlarını önlemek için). Development için HTTP kullanılabilir.
+- `GOOGLE_CLIENT_ID` ve `GOOGLE_CLIENT_SECRET` için Google Cloud Console'dan OAuth 2.0 credentials oluşturun. Authorized redirect URI: `https://your-domain.com/api/auth/callback/google`
 
 ### 5. Build Settings
 

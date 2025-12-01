@@ -18,8 +18,8 @@ export async function GET(request: Request) {
         isBot: true,
       },
       include: {
-        character: true,
-        configuration: true,
+        botCharacter: true,
+        botConfiguration: true,
       },
       orderBy: {
         createdAt: "desc",
