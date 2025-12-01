@@ -43,6 +43,12 @@ OPENAI_API_KEY="your-openai-api-key"
 BLOB_READ_WRITE_TOKEN="your-blob-storage-token"
 # For development, HTTP is fine. For production, use HTTPS to avoid mixed content issues.
 NEXT_PUBLIC_SIGNALR_URL="http://softwareinterview.tryasp.net/chatHub"
+# Email Service (Gmail SMTP) - Required for password reset
+SMTP_HOST="smtp.gmail.com"
+SMTP_PORT="587"
+SMTP_USER="your-email@gmail.com"
+SMTP_PASSWORD="your-gmail-app-password"
+SMTP_FROM_EMAIL="YTK Academy <your-email@gmail.com>" # Optional, defaults to SMTP_USER
 # Google OAuth (Optional - for Google Sign In)
 GOOGLE_CLIENT_ID="your-google-client-id"
 GOOGLE_CLIENT_SECRET="your-google-client-secret"
@@ -72,7 +78,25 @@ d) Authorized redirect URIs'ye şunları ekleyin:
 
 e) Client ID ve Client Secret'ı kopyalayıp `.env` dosyanıza ekleyin.
 
-6. Geliştirme sunucusunu başlatın:
+6. Gmail SMTP Kurulumu (Şifre Sıfırlama için Gerekli):
+
+Gmail ile e-posta göndermek için App Password oluşturmanız gerekir:
+
+a) Google Account'unuzda [2-Step Verification](https://myaccount.google.com/security) özelliğini aktifleştirin.
+
+b) [App Passwords](https://myaccount.google.com/apppasswords) sayfasına gidin.
+
+c) "Select app" dropdown'ından "Mail" seçin, "Select device" dropdown'ından "Other (Custom name)" seçin ve "YTK Academy" yazın.
+
+d) "Generate" butonuna tıklayın. 16 karakterlik bir şifre oluşturulacak (boşluksuz, örnek: `abcd efgh ijkl mnop`).
+
+e) Bu şifreyi kopyalayıp `.env` dosyasındaki `SMTP_PASSWORD` değişkenine ekleyin (boşluksuz olarak).
+
+f) `SMTP_USER` değişkenine Gmail e-posta adresinizi ekleyin (örn: `your-email@gmail.com`).
+
+**Not:** Normal Gmail şifrenizi kullanmayın, mutlaka App Password kullanın. App Password olmadan Gmail SMTP çalışmaz.
+
+7. Geliştirme sunucusunu başlatın:
 ```bash
 npm run dev
 ```
@@ -112,12 +136,12 @@ OPENAI_API_KEY=your-openai-api-key-here
 BLOB_READ_WRITE_TOKEN=your-vercel-blob-token-here
 NEXT_PUBLIC_SIGNALR_URL=https://softwareinterview.tryasp.net/chatHub
 
-# Email Service (Resend) - Required for password reset
-RESEND_API_KEY=your-resend-api-key-here
-# For Vercel deployments, use your vercel.app domain (e.g., "YTK Academy <noreply@your-app.vercel.app>")
-# Or use Resend's test domain: "onboarding@resend.dev"
-# For custom domains, ensure the domain is verified in Resend dashboard
-RESEND_FROM_EMAIL=YTK Academy <noreply@your-app.vercel.app>
+# Email Service (Gmail SMTP) - Required for password reset
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=your-email@gmail.com
+SMTP_PASSWORD=your-gmail-app-password-16-chars
+SMTP_FROM_EMAIL=YTK Academy <your-email@gmail.com>
 
 # Google OAuth (Optional - for Google Sign In)
 GOOGLE_CLIENT_ID=your-google-client-id
@@ -128,8 +152,12 @@ GOOGLE_CLIENT_SECRET=your-google-client-secret
 - `NEXTAUTH_URL` değerini Vercel deployment URL'iniz ile değiştirin
 - `OPENAI_API_KEY` değerini OpenAI'den alın
 - `BLOB_READ_WRITE_TOKEN` değerini Vercel Blob Storage'dan alın
-- `RESEND_API_KEY` değerini [Resend](https://resend.com) hesabınızdan alın (şifre sıfırlama e-postaları için gerekli)
-- `RESEND_FROM_EMAIL` formatı: `"Display Name <email@domain.com>"` şeklinde olmalı. Domain'in Resend'de doğrulanmış olması gerekir. Vercel deployment'ları için `.vercel.app` domain'ini kullanabilirsiniz (otomatik olarak doğrulanmıştır). Özel domain'ler için Resend dashboard'unda domain doğrulaması yapmanız gerekir.
+- **Gmail SMTP Kurulumu:**
+  - `SMTP_USER`: Gmail e-posta adresiniz (örn: `your-email@gmail.com`)
+  - `SMTP_PASSWORD`: Gmail App Password (16 karakter, boşluksuz). [App Passwords](https://myaccount.google.com/apppasswords) sayfasından oluşturun. **Normal Gmail şifrenizi kullanmayın!**
+  - `SMTP_FROM_EMAIL`: Gönderen e-posta formatı (opsiyonel, varsayılan olarak `SMTP_USER` kullanılır)
+  - Gmail günlük limit: 500 e-posta/gün (ücretsiz hesap)
+  - Domain doğrulama **GEREKMEZ** - Sadece Gmail hesabı + App Password yeterli
 - `NEXT_PUBLIC_SIGNALR_URL` için **production'da HTTPS kullanın** (mixed content sorunlarını önlemek için). Development için HTTP kullanılabilir.
 - `GOOGLE_CLIENT_ID` ve `GOOGLE_CLIENT_SECRET` için Google Cloud Console'dan OAuth 2.0 credentials oluşturun. Authorized redirect URI: `https://your-domain.com/api/auth/callback/google`
 
