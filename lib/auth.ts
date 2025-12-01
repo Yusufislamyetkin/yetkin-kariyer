@@ -91,30 +91,77 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async signIn({ user, account, profile }) {
       if (account?.provider === "google") {
         try {
+          // Validate required data
+          if (!user.email) {
+            console.error("Google OAuth: User email is missing");
+            return false;
+          }
+
+          if (!account.providerAccountId) {
+            console.error("Google OAuth: Provider account ID is missing");
+            return false;
+          }
+
           const { db } = await import("@/lib/db");
           
           // Check if user exists
           const existingUser = await db.user.findUnique({
-            where: { email: user.email! },
+            where: { email: user.email },
           });
 
           if (existingUser) {
             // User exists, check if account exists
-            const existingAccount = await db.account.findUnique({
-              where: {
-                provider_providerAccountId: {
-                  provider: "google",
-                  providerAccountId: account.providerAccountId,
+            try {
+              const existingAccount = await db.account.findUnique({
+                where: {
+                  provider_providerAccountId: {
+                    provider: "google",
+                    providerAccountId: account.providerAccountId,
+                  },
                 },
+              });
+
+              if (!existingAccount) {
+                // Link account to existing user
+                await db.account.create({
+                  data: {
+                    userId: existingUser.id,
+                    type: account.type || "oauth",
+                    provider: account.provider,
+                    providerAccountId: account.providerAccountId,
+                    refresh_token: account.refresh_token,
+                    access_token: account.access_token,
+                    expires_at: account.expires_at,
+                    token_type: account.token_type,
+                    scope: account.scope,
+                    id_token: account.id_token,
+                    session_state: account.session_state,
+                  },
+                });
+              }
+            } catch (accountError: any) {
+              // If Account model doesn't exist, try to create user without account linking
+              console.warn("Account model error (might need migration):", accountError);
+              // Continue anyway - user can still sign in
+            }
+          } else {
+            // Create new user
+            const newUser = await db.user.create({
+              data: {
+                email: user.email,
+                name: user.name || (profile as any)?.name || null,
+                emailVerified: new Date(),
+                profileImage: user.image || (profile as any)?.picture || null,
+                role: "candidate" as UserRole,
               },
             });
 
-            if (!existingAccount) {
-              // Link account to existing user
+            // Create account if Account model exists
+            try {
               await db.account.create({
                 data: {
-                  userId: existingUser.id,
-                  type: account.type,
+                  userId: newUser.id,
+                  type: account.type || "oauth",
                   provider: account.provider,
                   providerAccountId: account.providerAccountId,
                   refresh_token: account.refresh_token,
@@ -126,38 +173,23 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                   session_state: account.session_state,
                 },
               });
+            } catch (accountError: any) {
+              // If Account model doesn't exist, log warning but continue
+              console.warn("Account model error (might need migration):", accountError);
+              // User is created, they can still sign in
             }
-          } else {
-            // Create new user
-            const newUser = await db.user.create({
-              data: {
-                email: user.email!,
-                name: user.name || profile?.name || null,
-                emailVerified: new Date(),
-                profileImage: user.image || profile?.picture || null,
-                role: "candidate" as UserRole,
-              },
-            });
-
-            // Create account
-            await db.account.create({
-              data: {
-                userId: newUser.id,
-                type: account.type,
-                provider: account.provider,
-                providerAccountId: account.providerAccountId,
-                refresh_token: account.refresh_token,
-                access_token: account.access_token,
-                expires_at: account.expires_at,
-                token_type: account.token_type,
-                scope: account.scope,
-                id_token: account.id_token,
-                session_state: account.session_state,
-              },
-            });
           }
-        } catch (error) {
+
+          return true;
+        } catch (error: any) {
           console.error("Error in signIn callback:", error);
+          console.error("Error details:", {
+            message: error.message,
+            stack: error.stack,
+            email: user.email,
+            provider: account?.provider,
+          });
+          // Return false to deny access, but log the error for debugging
           return false;
         }
       }

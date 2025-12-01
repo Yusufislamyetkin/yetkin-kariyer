@@ -7,7 +7,7 @@ import { signIn } from "next-auth/react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
 import { Input } from "@/app/components/ui/Input";
-import { UserPlus, Mail, Lock, User, Briefcase, AlertCircle } from "lucide-react";
+import { UserPlus, Mail, Lock, User, AlertCircle } from "lucide-react";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -15,7 +15,6 @@ export default function RegisterPage() {
     email: "",
     password: "",
     name: "",
-    role: "candidate" as "candidate" | "employer",
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -29,7 +28,7 @@ export default function RegisterPage() {
       const response = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, role: "candidate" }),
       });
 
       const data = await response.json();
@@ -130,38 +129,6 @@ export default function RegisterPage() {
                     required
                     minLength={6}
                   />
-                </div>
-                <div className="space-y-2">
-                  <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                    <Briefcase className="h-4 w-4 text-gray-400 dark:text-gray-500" />
-                    Hesap Tipi
-                  </label>
-                  <div className="grid grid-cols-2 gap-3">
-                    <button
-                      type="button"
-                      onClick={() => setFormData({ ...formData, role: "candidate" })}
-                      className={`flex items-center justify-center gap-2 px-4 py-3 rounded-xl border-2 transition-all font-medium ${
-                        formData.role === "candidate"
-                          ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 shadow-md"
-                          : "border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:border-gray-400 dark:hover:border-gray-500"
-                      }`}
-                    >
-                      <User className="h-5 w-5" />
-                      <span>Aday</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setFormData({ ...formData, role: "employer" })}
-                      className={`flex items-center justify-center gap-2 px-4 py-3 rounded-xl border-2 transition-all font-medium ${
-                        formData.role === "employer"
-                          ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 shadow-md"
-                          : "border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:border-gray-400 dark:hover:border-gray-500"
-                      }`}
-                    >
-                      <Briefcase className="h-5 w-5" />
-                      <span>İşveren</span>
-                    </button>
-                  </div>
                 </div>
               </div>
 

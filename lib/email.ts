@@ -14,13 +14,26 @@ function getResend() {
 }
 
 export async function sendPasswordResetEmail(email: string, resetToken: string) {
+  // Check if Resend is configured
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    const error = new Error("RESEND_API_KEY environment variable is not set");
+    console.error("Email configuration error:", error);
+    throw error;
+  }
+
   const resend = getResend();
   const baseUrl = process.env.NEXTAUTH_URL || process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
   const resetUrl = `${baseUrl}/reset-password?token=${resetToken}`;
+  const fromEmail = process.env.RESEND_FROM_EMAIL || "YTK Academy <noreply@yetkinhub.com>";
+
+  console.log(`Attempting to send password reset email to: ${email}`);
+  console.log(`From email: ${fromEmail}`);
+  console.log(`Base URL: ${baseUrl}`);
 
   try {
     const { data, error } = await resend.emails.send({
-      from: process.env.RESEND_FROM_EMAIL || "YTK Academy <noreply@yetkinhub.com>",
+      from: fromEmail,
       to: email,
       subject: "Şifre Sıfırlama İsteği - YTK Academy",
       html: `
@@ -115,13 +128,29 @@ export async function sendPasswordResetEmail(email: string, resetToken: string) 
     });
 
     if (error) {
-      console.error("Resend error:", error);
-      throw new Error("E-posta gönderilemedi");
+      console.error("Resend API error:", {
+        message: error.message,
+        name: error.name,
+        error: JSON.stringify(error, null, 2),
+      });
+      throw new Error(`E-posta gönderilemedi: ${error.message || "Bilinmeyen hata"}`);
     }
 
+    if (!data) {
+      console.error("Resend returned no data and no error");
+      throw new Error("E-posta gönderilemedi: Yanıt alınamadı");
+    }
+
+    console.log(`Password reset email sent successfully. Resend ID: ${data.id}`);
     return data;
-  } catch (error) {
-    console.error("Email send error:", error);
+  } catch (error: any) {
+    console.error("Email send error details:", {
+      message: error?.message,
+      stack: error?.stack,
+      email: email,
+      fromEmail: fromEmail,
+      baseUrl: baseUrl,
+    });
     throw error;
   }
 }

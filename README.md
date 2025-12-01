@@ -112,6 +112,10 @@ OPENAI_API_KEY=your-openai-api-key-here
 BLOB_READ_WRITE_TOKEN=your-vercel-blob-token-here
 NEXT_PUBLIC_SIGNALR_URL=https://softwareinterview.tryasp.net/chatHub
 
+# Email Service (Resend) - Required for password reset
+RESEND_API_KEY=your-resend-api-key-here
+RESEND_FROM_EMAIL=YTK Academy <noreply@yetkinhub.com>
+
 # Google OAuth (Optional - for Google Sign In)
 GOOGLE_CLIENT_ID=your-google-client-id
 GOOGLE_CLIENT_SECRET=your-google-client-secret
@@ -121,6 +125,8 @@ GOOGLE_CLIENT_SECRET=your-google-client-secret
 - `NEXTAUTH_URL` değerini Vercel deployment URL'iniz ile değiştirin
 - `OPENAI_API_KEY` değerini OpenAI'den alın
 - `BLOB_READ_WRITE_TOKEN` değerini Vercel Blob Storage'dan alın
+- `RESEND_API_KEY` değerini [Resend](https://resend.com) hesabınızdan alın (şifre sıfırlama e-postaları için gerekli)
+- `RESEND_FROM_EMAIL` formatı: `"Display Name <email@domain.com>"` şeklinde olmalı. Domain'in Resend'de doğrulanmış olması gerekir.
 - `NEXT_PUBLIC_SIGNALR_URL` için **production'da HTTPS kullanın** (mixed content sorunlarını önlemek için). Development için HTTP kullanılabilir.
 - `GOOGLE_CLIENT_ID` ve `GOOGLE_CLIENT_SECRET` için Google Cloud Console'dan OAuth 2.0 credentials oluşturun. Authorized redirect URI: `https://your-domain.com/api/auth/callback/google`
 

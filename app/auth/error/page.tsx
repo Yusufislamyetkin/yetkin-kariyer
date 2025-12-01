@@ -39,9 +39,9 @@ function ErrorContent() {
       case "Configuration":
         return "Sunucu yapılandırma hatası. NEXTAUTH_SECRET veya AUTH_SECRET environment variable'ı eksik olabilir. Lütfen yöneticiye başvurun.";
       case "AccessDenied":
-        return "Erişim reddedildi.";
+        return "Erişim reddedildi. Bu hata genellikle şu nedenlerden kaynaklanır:\n\n• Veritabanı migration'ı yapılmamış olabilir (Account tablosu eksik)\n• Google OAuth credentials eksik veya hatalı olabilir\n• Veritabanı bağlantı hatası olabilir\n\nLütfen yöneticiye başvurun veya tekrar deneyin.";
       case "Verification":
-        return "Doğrulama hatası.";
+        return "Doğrulama hatası. Email doğrulaması başarısız oldu.";
       default:
         return error ? `Hata: ${error}` : "Bir hata oluştu. Lütfen tekrar deneyin.";
     }
@@ -61,7 +61,7 @@ function ErrorContent() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <p className="text-gray-700 dark:text-gray-300">
+            <p className="text-gray-700 dark:text-gray-300 whitespace-pre-line">
               {getErrorMessage(error)}
             </p>
             <Link href="/login">

@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { BookOpen, Video, FileText, Sparkles, TrendingUp, Users, Zap, CheckCircle, Award, Clock, Target, BarChart3, MessageSquare, HelpCircle, ArrowRight, Star, PlayCircle, Shield, Globe, Trophy, Code, Bug, Handshake, DollarSign, MessageCircle, Compass, UserPlus } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
@@ -157,17 +156,8 @@ export default function Home() {
       <nav className="sticky top-0 z-50 glass border-b border-gray-200/50 dark:border-gray-700/50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-3">
-              <Image
-                src="/Photos/YtkCareerLogo/ytkncareer.jpeg"
-                alt="YTK Academy Logo"
-                width={40}
-                height={40}
-                className="rounded-lg"
-              />
-              <span className="text-2xl font-display font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent md:bg-gradient-to-r md:from-blue-600 md:via-indigo-600 md:to-cyan-600 md:bg-[length:200%_auto] md:animate-text-shimmer">
-                YTK Academy
-              </span>
+            <Link href="/" className="text-2xl font-display font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent md:bg-gradient-to-r md:from-blue-600 md:via-indigo-600 md:to-cyan-600 md:bg-[length:200%_auto] md:animate-text-shimmer">
+              YTK Academy
             </Link>
             <div className="flex items-center gap-4">
               <ThemeSwitchButton />

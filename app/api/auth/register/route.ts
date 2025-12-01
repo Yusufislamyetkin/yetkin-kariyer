@@ -38,7 +38,7 @@ export async function POST(request: Request) {
           email: validatedData.email,
           password: hashedPassword,
           name: validatedData.name,
-          role: validatedData.role,
+          role: validatedData.role || "candidate",
         },
         select: {
           id: true,
