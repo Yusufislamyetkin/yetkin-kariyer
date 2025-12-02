@@ -2319,16 +2319,16 @@ export default function AdminPage() {
               <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
                 {communityCount !== null ? (
                   <>
-                    <span className="font-semibold text-blue-600 dark:text-blue-400">{communityCount}</span> / 12 topluluk mevcut
+                    <span className="font-semibold text-blue-600 dark:text-blue-400">{communityCount}</span> / 24 topluluk mevcut
                   </>
                 ) : (
-                  "12 adet kurs bazlı yardımlaşma topluluğu oluşturun"
+                  "24 adet kurs bazlı yardımlaşma topluluğu oluşturun"
                 )}
               </p>
             </div>
           </div>
           <p className="text-gray-600 dark:text-gray-400 mb-8 text-sm">
-            Her teknoloji için yardımlaşma toplulukları oluşturur. Toplam 12 topluluk oluşturulur (.NET Core, Java, MSSQL, React, Angular, Node.js, Yapay Zeka, Flutter, Ethical Hacking, Next.js, Docker & K8s, OWASP Security).
+            Her teknoloji için yardımlaşma toplulukları oluşturur. Toplam 24 topluluk oluşturulur (.NET Core, Java, MSSQL, React, Angular, Node.js, Yapay Zeka, Flutter, Ethical Hacking, Next.js, Docker & K8s, OWASP Security, Python, Vue.js, TypeScript, Go, PostgreSQL, AWS, Swift, Kotlin, MongoDB, Spring Boot, NestJS, Azure).
           </p>
           
           <div className="max-w-md">

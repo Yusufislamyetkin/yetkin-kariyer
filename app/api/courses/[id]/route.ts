@@ -109,6 +109,13 @@ export async function GET(
               }
             }
           }
+          
+          // Calculate module duration: each lesson is 5 minutes
+          // Module duration = number of lessons × 5 minutes
+          const lessonCount = courseModule.relatedTopics.length;
+          if (lessonCount > 0) {
+            courseModule.durationMinutes = lessonCount * 5;
+          }
         }
       }
     }

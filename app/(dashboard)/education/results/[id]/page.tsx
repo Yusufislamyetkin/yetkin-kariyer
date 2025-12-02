@@ -875,7 +875,7 @@ export default function QuizResultsPage() {
           {topicStats.length > 0 ? (
             <div className="overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-700">
               <div className="grid grid-cols-12 bg-slate-100/70 text-xs font-semibold uppercase tracking-wide text-slate-600 dark:bg-slate-800/60 dark:text-slate-300">
-                <div className="col-span-4 px-4 py-3">Konu</div>
+                <div className="col-span-3 px-4 py-3">Konu</div>
                 <div className="col-span-2 px-4 py-3 text-center">Toplam</div>
                 <div className="col-span-2 px-4 py-3 text-center text-emerald-600 dark:text-emerald-300">
                   Doğru
@@ -883,12 +883,15 @@ export default function QuizResultsPage() {
                 <div className="col-span-2 px-4 py-3 text-center text-rose-600 dark:text-rose-300">
                   Yanlış
                 </div>
-                <div className="col-span-2 px-4 py-3 text-center">Doğruluk</div>
+                <div className="col-span-2 px-4 py-3 text-center text-amber-600 dark:text-amber-300">
+                  Boş
+                </div>
+                <div className="col-span-1 px-4 py-3 text-center">Doğruluk</div>
               </div>
               <div className="divide-y divide-slate-200 dark:divide-slate-700">
                 {topicStats.map((item) => (
                   <div key={item.topic} className="grid grid-cols-12 bg-white/90 px-4 py-3 text-sm dark:bg-slate-900/60">
-                    <div className="col-span-4 font-medium text-slate-700 dark:text-slate-200">
+                    <div className="col-span-3 font-medium text-slate-700 dark:text-slate-200">
                       {item.topic}
                     </div>
                     <div className="col-span-2 text-center text-slate-600 dark:text-slate-300">
@@ -900,7 +903,10 @@ export default function QuizResultsPage() {
                     <div className="col-span-2 text-center text-rose-600 dark:text-rose-300">
                       {item.wrong}
                     </div>
-                    <div className="col-span-2 text-center text-slate-700 dark:text-slate-200">
+                    <div className="col-span-2 text-center text-amber-600 dark:text-amber-300">
+                      {item.empty}
+                    </div>
+                    <div className="col-span-1 text-center text-slate-700 dark:text-slate-200">
                       %{item.accuracy}
                     </div>
                   </div>

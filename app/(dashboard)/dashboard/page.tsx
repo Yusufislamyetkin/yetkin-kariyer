@@ -91,6 +91,7 @@ export default function DashboardPage() {
   const [aiRecommendationSource, setAiRecommendationSource] = useState<string | null>(null);
   const [badges, setBadges] = useState<Badge[]>([]);
   const [dailyRank, setDailyRank] = useState<LeaderboardRank | null>(null);
+  const [weeklyRank, setWeeklyRank] = useState<LeaderboardRank | null>(null);
   const [monthlyRank, setMonthlyRank] = useState<LeaderboardRank | null>(null);
   const [activities, setActivities] = useState<Activity[]>([]);
   const [activityType, setActivityType] = useState<"global" | "connections">("global");
@@ -127,7 +128,7 @@ export default function DashboardPage() {
   const fetchCoreData = async () => {
     try {
       // Fetch strike data first and in parallel with stats for faster loading
-      const [strikeResponse, statsResponse, interviewResponse, badgesResponse, dailyRankResponse, monthlyRankResponse, activitiesResponse, earningsResponse] = await Promise.all([
+      const [strikeResponse, statsResponse, interviewResponse, badgesResponse, dailyRankResponse, weeklyRankResponse, monthlyRankResponse, activitiesResponse, earningsResponse] = await Promise.all([
         fetch("/api/strike").catch(() => {
           // Return a response-like object that indicates failure
           return {
@@ -144,6 +145,9 @@ export default function DashboardPage() {
           json: async () => ({ badges: [] }),
         })),
         fetch("/api/competition/leaderboard?period=daily&type=quiz_count").catch(() => ({
+          json: async () => ({ userRank: null }),
+        })),
+        fetch("/api/competition/leaderboard?period=weekly&type=quiz_count").catch(() => ({
           json: async () => ({ userRank: null }),
         })),
         fetch("/api/competition/leaderboard?period=monthly&type=quiz_count").catch(() => ({
@@ -183,6 +187,16 @@ export default function DashboardPage() {
           quizCount: dailyRankData.userRank.attempts?.quiz || 0,
           averageScore: dailyRankData.userRank.metrics?.test || 0,
           points: dailyRankData.userRank.points || 0,
+        });
+      }
+
+      const weeklyRankData = await weeklyRankResponse.json();
+      if (weeklyRankData.userRank && weeklyRankData.userRank.rank && weeklyRankData.userRank.rank > 0) {
+        setWeeklyRank({
+          rank: weeklyRankData.userRank.rank,
+          quizCount: weeklyRankData.userRank.attempts?.quiz || 0,
+          averageScore: weeklyRankData.userRank.metrics?.test || 0,
+          points: weeklyRankData.userRank.points || 0,
         });
       }
 
@@ -662,6 +676,18 @@ export default function DashboardPage() {
               ) : (
                 <div className="p-4 rounded-xl bg-gradient-to-br from-gray-50 to-gray-100/50 dark:from-gray-800/50 dark:to-gray-700/50 border border-gray-200/50 dark:border-gray-700/50">
                   <p className="text-sm text-gray-600 dark:text-gray-400">Henüz günlük sıralamada yer almıyorsunuz</p>
+                </div>
+              )}
+              {weeklyRank && weeklyRank.rank > 0 ? (
+                <div className="p-4 rounded-xl bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 border border-blue-200/50 dark:border-blue-800/50">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">Haftalık Sıralama</span>
+                    <span className="text-2xl font-bold text-blue-600 dark:text-blue-400">#{weeklyRank.rank}</span>
+                  </div>
+                </div>
+              ) : (
+                <div className="p-4 rounded-xl bg-gradient-to-br from-gray-50 to-gray-100/50 dark:from-gray-800/50 dark:to-gray-700/50 border border-gray-200/50 dark:border-gray-700/50">
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Henüz haftalık sıralamada yer almıyorsunuz</p>
                 </div>
               )}
               {monthlyRank && monthlyRank.rank > 0 ? (

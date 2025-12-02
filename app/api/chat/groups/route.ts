@@ -127,6 +127,18 @@ export async function GET(request: Request) {
       "nextjs-community",
       "docker-kubernetes-community",
       "owasp-community",
+      "python-community",
+      "vuejs-community",
+      "typescript-community",
+      "go-community",
+      "postgresql-community",
+      "aws-community",
+      "swift-community",
+      "kotlin-community",
+      "mongodb-community",
+      "spring-boot-community",
+      "nestjs-community",
+      "azure-community",
     ];
 
     const communityIds = DEFAULT_CHAT_GROUP_IDS;

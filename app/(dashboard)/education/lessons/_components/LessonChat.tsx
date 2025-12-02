@@ -175,22 +175,38 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
   }, [isCompleted, nextLesson, onCompletionChange]);
 
   // Show completion modal when lesson is completed (only once)
-  // Wait 6-7 seconds after the last message (or longer if badges were shown)
+  // Wait 6-7 seconds after the lesson is marked as completed
   useEffect(() => {
-    if (isCompleted && !showCompletionModal && !modalDismissedRef.current && messages.length > 0) {
+    if (isCompleted && !showCompletionModal && !modalDismissedRef.current) {
+      // Ensure we have at least one message before showing modal
+      if (messages.length === 0) {
+        console.log("[LessonChat] Waiting for messages before showing completion modal");
+        return;
+      }
+      
       // Check if badges were earned by checking if badge modal might be showing
       // Badge modal shows for ~4 seconds per badge, so we'll wait a bit longer
-      // Default wait time: 6-7 seconds as per user expectation
+      // Default wait time: 7 seconds as per user expectation
       const baseDelay = 7000; // 7 seconds
+      
+      console.log("[LessonChat] Lesson completed, scheduling completion modal in", baseDelay, "ms");
       
       // Wait for the base delay, then show completion modal
       const timer = setTimeout(() => {
-        if (!modalDismissedRef.current) {
+        if (!modalDismissedRef.current && isCompleted) {
           console.log("[LessonChat] Showing completion modal");
           setShowCompletionModal(true);
+        } else {
+          console.log("[LessonChat] Completion modal cancelled:", {
+            modalDismissed: modalDismissedRef.current,
+            isCompleted
+          });
         }
       }, baseDelay);
-      return () => clearTimeout(timer);
+      
+      return () => {
+        clearTimeout(timer);
+      };
     }
   }, [isCompleted, showCompletionModal, messages.length]);
 
@@ -275,7 +291,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
         let shouldComplete = false;
         
         if (data.isCompleted) {
-          // API explicitly marked as completed, but verify all steps are done if roadmap exists
+          // API explicitly marked as completed - trust it, but log warning if roadmap steps aren't all done
           const roadmapText = data.roadmap || roadmap;
           if (roadmapText && data.progress) {
             const stepMatches = roadmapText.match(/\d+[\.\)]/g);
@@ -283,25 +299,32 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
               const allStepNumbers = stepMatches.map((m: string) => parseInt(m.replace(/[\.\)]/g, '')));
               const lastStepNumber = Math.max(...allStepNumbers);
               
+              // Check if all steps are completed (for logging purposes)
               if (data.progress.step === lastStepNumber && data.progress.status === "completed") {
                 shouldComplete = true;
               } else {
-                console.log("[LessonChat] Completion signal received but not all steps completed:", {
+                // Not all steps completed yet, but API says completed - trust API but log warning
+                console.warn("[LessonChat] Completion signal received but roadmap steps may not be all completed:", {
                   progressStep: data.progress.step,
                   lastStepNumber,
-                  status: data.progress.status
+                  status: data.progress.status,
+                  note: "Accepting completion signal from AI despite roadmap check"
                 });
-                shouldComplete = false;
+                shouldComplete = true; // Trust the API completion signal
               }
             } else {
+              // No roadmap steps found, trust the API completion signal
               shouldComplete = true;
             }
           } else if (!roadmapText) {
+            // No roadmap exists, trust the API completion signal
             shouldComplete = true;
           } else {
-            shouldComplete = false;
+            // Roadmap exists but no progress - trust API completion signal
+            shouldComplete = true;
           }
         } else if (data.roadmap && data.progress) {
+          // No explicit completion signal, but check if all roadmap steps are completed
           const roadmapText = data.roadmap || roadmap;
           if (roadmapText) {
             const stepMatches = roadmapText.match(/\d+[\.\)]/g);
@@ -504,13 +527,12 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
         }
 
         // Smart completion detection:
-        // 1. API explicitly says completed (via [LESSON_COMPLETE] tag)
-        // 2. BUT if roadmap exists, verify ALL steps are completed before accepting completion
-        // 3. OR roadmap exists and all steps are completed (even without explicit completion signal)
+        // 1. If API explicitly says completed (via [LESSON_COMPLETE] tag or "dersi tamamladık"), trust it
+        // 2. If no explicit completion signal, check if all roadmap steps are completed
         let shouldComplete = false;
         
         if (data.isCompleted) {
-          // API explicitly marked as completed, but verify all steps are done if roadmap exists
+          // API explicitly marked as completed - trust it, but log warning if roadmap steps aren't all done
           const roadmapText = data.roadmap || roadmap;
           if (roadmapText && data.progress) {
             // Parse all step numbers from roadmap
@@ -519,19 +541,19 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
               const allStepNumbers = stepMatches.map((m: string) => parseInt(m.replace(/[\.\)]/g, '')));
               const lastStepNumber = Math.max(...allStepNumbers);
               
-              // Verify that we've reached the last step AND it's completed
-              // Use === instead of >= to ensure we're exactly on the last step
+              // Check if all steps are completed (for logging purposes)
               if (data.progress.step === lastStepNumber && data.progress.status === "completed") {
                 shouldComplete = true;
               } else {
-                // Not all steps completed yet, ignore the completion signal
-                console.log("[LessonChat] Completion signal received but not all steps completed:", {
+                // Not all steps completed yet, but API says completed - trust API but log warning
+                console.warn("[LessonChat] Completion signal received but roadmap steps may not be all completed:", {
                   progressStep: data.progress.step,
                   lastStepNumber,
                   status: data.progress.status,
-                  allStepNumbers
+                  allStepNumbers,
+                  note: "Accepting completion signal from AI despite roadmap check"
                 });
-                shouldComplete = false;
+                shouldComplete = true; // Trust the API completion signal
               }
             } else {
               // No roadmap steps found, trust the API completion signal
@@ -541,11 +563,11 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
             // No roadmap exists, trust the API completion signal
             shouldComplete = true;
           } else {
-            // Roadmap exists but no progress, don't complete yet
-            shouldComplete = false;
+            // Roadmap exists but no progress - trust API completion signal
+            shouldComplete = true;
           }
         } else if (data.roadmap && data.progress) {
-          // Check if all roadmap steps are completed (even without explicit completion signal)
+          // No explicit completion signal, but check if all roadmap steps are completed
           const roadmapText = data.roadmap || roadmap;
           if (roadmapText) {
             const stepMatches = roadmapText.match(/\d+[\.\)]/g);
@@ -678,7 +700,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
 
       // Smart completion detection (same logic as in handleSendMessage)
       if (data.isCompleted) {
-        // API explicitly marked as completed, but verify all steps are done if roadmap exists
+        // API explicitly marked as completed - trust it, but log warning if roadmap steps aren't all done
         const roadmapText = data.roadmap || roadmap;
         if (roadmapText && data.progress) {
           const stepMatches = roadmapText.match(/\d+[\.\)]/g);
@@ -686,19 +708,30 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
             const allStepNumbers = stepMatches.map((m: string) => parseInt(m.replace(/[\.\)]/g, '')));
             const lastStepNumber = Math.max(...allStepNumbers);
             
+            // Check if all steps are completed (for logging purposes)
             if (data.progress.step === lastStepNumber && data.progress.status === "completed") {
               setIsCompleted(true);
             } else {
-              console.log("[LessonChat] Completion signal in continue but not all steps completed");
+              // Not all steps completed yet, but API says completed - trust API but log warning
+              console.warn("[LessonChat] Completion signal in continue but roadmap steps may not be all completed:", {
+                progressStep: data.progress.step,
+                lastStepNumber,
+                status: data.progress.status,
+                note: "Accepting completion signal from AI despite roadmap check"
+              });
+              setIsCompleted(true); // Trust the API completion signal
             }
           } else {
             setIsCompleted(true);
           }
         } else if (!roadmapText) {
           setIsCompleted(true);
+        } else {
+          // Roadmap exists but no progress - trust API completion signal
+          setIsCompleted(true);
         }
       } else if (data.roadmap && data.progress) {
-        // Check if all roadmap steps are completed (even without explicit completion signal)
+        // No explicit completion signal, but check if all roadmap steps are completed
         const roadmapText = data.roadmap || roadmap;
         if (roadmapText) {
           const stepMatches = roadmapText.match(/\d+[\.\)]/g);
@@ -786,6 +819,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
 
           // Smart completion detection
           if (data.isCompleted) {
+            // API explicitly marked as completed - trust it, but log warning if roadmap steps aren't all done
             const roadmapText = data.roadmap || roadmap;
             if (roadmapText && data.progress) {
               const stepMatches = roadmapText.match(/\d+[\.\)]/g);
@@ -793,16 +827,30 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
                 const allStepNumbers = stepMatches.map((m: string) => parseInt(m.replace(/[\.\)]/g, '')));
                 const lastStepNumber = Math.max(...allStepNumbers);
                 
+                // Check if all steps are completed (for logging purposes)
                 if (data.progress.step === lastStepNumber && data.progress.status === "completed") {
                   setIsCompleted(true);
+                } else {
+                  // Not all steps completed yet, but API says completed - trust API but log warning
+                  console.warn("[LessonChat] Completion signal in test answer but roadmap steps may not be all completed:", {
+                    progressStep: data.progress.step,
+                    lastStepNumber,
+                    status: data.progress.status,
+                    note: "Accepting completion signal from AI despite roadmap check"
+                  });
+                  setIsCompleted(true); // Trust the API completion signal
                 }
               } else {
                 setIsCompleted(true);
               }
             } else if (!roadmapText) {
               setIsCompleted(true);
+            } else {
+              // Roadmap exists but no progress - trust API completion signal
+              setIsCompleted(true);
             }
           } else if (data.roadmap && data.progress) {
+            // No explicit completion signal, but check if all roadmap steps are completed
             const roadmapText = data.roadmap || roadmap;
             if (roadmapText) {
               const stepMatches = roadmapText.match(/\d+[\.\)]/g);

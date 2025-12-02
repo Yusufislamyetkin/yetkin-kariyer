@@ -109,13 +109,32 @@ export function parseLessonActions(content: string): ParsedLessonActions {
       const isQuestion = /[?]/.test(afterMatch.substring(0, 10));
       const isConditional = /eğer|if|when|ne zaman/i.test(beforeMatch);
       
-      return !isQuestion && !isConditional;
+      const shouldAccept = !isQuestion && !isConditional;
+      
+      if (shouldAccept) {
+        console.log("[LESSON-ACTION-PARSER] Completion phrase detected:", {
+          matched: match[0],
+          pattern: pattern.toString(),
+          beforeMatch: beforeMatch.substring(Math.max(0, beforeMatch.length - 10)),
+          afterMatch: afterMatch.substring(0, 10),
+        });
+      } else {
+        console.log("[LESSON-ACTION-PARSER] Completion phrase found but rejected:", {
+          matched: match[0],
+          reason: isQuestion ? "question detected" : "conditional detected",
+          beforeMatch: beforeMatch.substring(Math.max(0, beforeMatch.length - 10)),
+          afterMatch: afterMatch.substring(0, 10),
+        });
+      }
+      
+      return shouldAccept;
     }
     return false;
   });
   
   if (hasExplicitCompletion) {
     isCompleted = true;
+    console.log("[LESSON-ACTION-PARSER] Lesson marked as completed via explicit completion phrase");
   }
   
   // Note: We do NOT check for generic words like "tebrikler" as they can appear

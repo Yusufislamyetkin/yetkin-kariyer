@@ -724,8 +724,13 @@ export async function POST(request: Request) {
         actionCount: parsed.actions?.length ?? 0,
         hasRoadmap: !!parsed.roadmap,
         hasProgress: !!parsed.progress,
+        isCompleted: parsed.isCompleted ?? false,
         miniTestCount: parsed.actions?.filter((a: any) => a.type === "mini_test").length ?? 0,
       });
+      
+      if (parsed.isCompleted) {
+        console.log("[LESSON-ASSISTANT] ✅ Lesson completion detected in parsed response");
+      }
     } catch (error) {
       console.error("[LESSON-ASSISTANT] Action parse hatası:", error);
       // Parse hatası olsa bile devam et, sadece actions olmayacak
@@ -845,13 +850,19 @@ export async function POST(request: Request) {
     }
 
     // Prepare response with validation info
+    const isCompletedValue = parsed.isCompleted || false;
+    
+    if (isCompletedValue) {
+      console.log("[LESSON-ASSISTANT] ✅ Sending isCompleted: true in API response");
+    }
+    
     const responseData: any = {
       content: parsed.content,
       roadmap: parsed.roadmap || roadmap || undefined,
       progress: parsed.progress || (progress as any) || undefined,
       actions: parsed.actions,
       images: imageUrls.length > 0 ? imageUrls : undefined,
-      isCompleted: parsed.isCompleted || false,
+      isCompleted: isCompletedValue,
       lesson: {
         title: lesson.label,
         description: lesson.description,

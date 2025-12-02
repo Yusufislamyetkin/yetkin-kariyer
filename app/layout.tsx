@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/app/contexts/ThemeContext";
 import { Providers } from "@/app/providers";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   title: "YTK Academy - Kariyer Platformu",
@@ -19,6 +20,7 @@ export default function RootLayout({
         <Providers>
           <ThemeProvider>{children}</ThemeProvider>
         </Providers>
+        <SpeedInsights />
       </body>
     </html>
   );

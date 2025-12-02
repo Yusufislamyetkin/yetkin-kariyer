@@ -58,7 +58,7 @@ export function RankingDisplay({
         {typeof points === "number" && points >= 0 && (
           <div>
             <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400 text-right">
-              Toplam Puan
+              {period === "daily" ? "Günlük Puan" : period === "weekly" ? "Haftalık Puan" : "Aylık Puan"}
             </p>
             <div className="flex items-baseline gap-2 text-right">
               <span className="text-2xl font-bold text-gray-900 dark:text-gray-100">

@@ -38,7 +38,7 @@ import {
   ChevronDown,
   ChevronRight,
 } from "lucide-react";
-import { useState, useEffect, useMemo, type ComponentType, type SVGProps } from "react";
+import { useState, useEffect, useMemo, useCallback, type ComponentType, type SVGProps } from "react";
 import { usePathname } from "next/navigation";
 import { CelebrationProvider } from "@/app/contexts/CelebrationContext";
 import { BadgeNotificationProvider } from "@/app/contexts/BadgeNotificationContext";
@@ -85,16 +85,36 @@ function DashboardLayoutContent({
   // Setup global notifications listener
   useGlobalNotifications();
 
-  useEffect(() => {
-    const checkMobile = () => {
-      const mobile = window.innerWidth < 1024;
-      setIsMobile(mobile);
-      // On desktop, keep sidebar state; on mobile, close it
-      if (mobile) {
-        setSidebarOpen(false);
+  // Throttle function for resize listener
+  const throttle = useCallback((func: () => void, delay: number) => {
+    let timeoutId: NodeJS.Timeout | null = null;
+    let lastExecTime = 0;
+    return () => {
+      const currentTime = Date.now();
+      if (currentTime - lastExecTime > delay) {
+        func();
+        lastExecTime = currentTime;
+      } else {
+        if (timeoutId) clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+          func();
+          lastExecTime = Date.now();
+        }, delay - (currentTime - lastExecTime));
       }
     };
+  }, []);
 
+  // Memoized checkMobile function with throttle
+  const checkMobile = useCallback(() => {
+    const mobile = window.innerWidth < 1024;
+    setIsMobile(mobile);
+    // On desktop, keep sidebar state; on mobile, close it
+    if (mobile) {
+      setSidebarOpen(false);
+    }
+  }, []);
+
+  useEffect(() => {
     // Initialize based on screen size
     if (typeof window !== "undefined") {
       const mobile = window.innerWidth < 1024;
@@ -102,9 +122,10 @@ function DashboardLayoutContent({
       setSidebarOpen(!mobile);
     }
 
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+    const throttledCheckMobile = throttle(checkMobile, 150);
+    window.addEventListener("resize", throttledCheckMobile);
+    return () => window.removeEventListener("resize", throttledCheckMobile);
+  }, [checkMobile, throttle]);
 
   type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
 
@@ -302,7 +323,7 @@ function DashboardLayoutContent({
     return groups;
   }, [session.user]);
 
-  const isActiveLink = (href: string) => {
+  const isActiveLink = useCallback((href: string) => {
     if (!pathname) {
       return false;
     }
@@ -324,7 +345,7 @@ function DashboardLayoutContent({
     }
 
     return pathname.startsWith(`${href}/`);
-  };
+  }, [pathname, navigationGroups]);
 
   // Find which group contains the active link
   const activeGroup = useMemo(() => {
@@ -350,7 +371,7 @@ function DashboardLayoutContent({
     }
   }, [activeGroup]);
 
-  const toggleGroup = (groupTitle: string) => {
+  const toggleGroup = useCallback((groupTitle: string) => {
     setExpandedGroups((prev) => {
       const newSet = new Set(prev);
       if (newSet.has(groupTitle)) {
@@ -360,25 +381,37 @@ function DashboardLayoutContent({
       }
       return newSet;
     });
-  };
+  }, []);
 
   return (
     <CelebrationProvider>
       <BadgeNotificationProvider>
         <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-purple-50/30 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-200">
-      {/* Sidebar overlay */}
-      {sidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black/50 z-40 backdrop-blur-sm"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
+      {/* Sidebar overlay - optimized with opacity/pointer-events instead of conditional rendering */}
+      <div
+        className={`fixed inset-0 z-40 bg-black/50 transition-opacity duration-300 ease-in-out ${
+          isMobile ? "backdrop-blur-sm" : ""
+        }`}
+        style={{
+          opacity: sidebarOpen ? 1 : 0,
+          pointerEvents: sidebarOpen ? "auto" : "none",
+          willChange: "opacity",
+          transform: "translateZ(0)",
+        }}
+        onClick={() => setSidebarOpen(false)}
+        aria-hidden={!sidebarOpen}
+      />
 
-      {/* Sidebar */}
+      {/* Sidebar - optimized with GPU acceleration and reduced backdrop blur */}
       <aside
-        className={`fixed top-0 left-0 z-50 h-screen w-64 glass border-r border-gray-200/50 dark:border-gray-700/50 transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 left-0 z-50 h-screen w-64 border-r border-gray-200/50 dark:border-gray-700/50 transition-transform duration-300 ease-in-out bg-white/85 dark:bg-gray-900/85 backdrop-blur-md ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
+        style={{
+          willChange: "transform",
+          transform: sidebarOpen ? "translateX(0) translateZ(0)" : "translateX(-100%) translateZ(0)",
+          boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.15)",
+        }}
       >
         <div className="flex flex-col h-full">
           {/* Logo */}
@@ -517,7 +550,7 @@ function DashboardLayoutContent({
       {/* Main content */}
       <div className={sidebarOpen ? "lg:pl-64" : ""}>
         {/* Header with menu button */}
-        <div className="sticky top-0 z-30 bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg border-b border-gray-200/50 dark:border-gray-700/50 min-w-0 pt-4">
+        <div className="sticky top-0 z-30 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-700/50 min-w-0 pt-4">
           <div className="flex items-center justify-between h-14 px-4 min-w-0">
             <button
               onClick={() => setSidebarOpen(true)}

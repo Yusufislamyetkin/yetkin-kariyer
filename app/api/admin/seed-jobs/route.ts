@@ -21,7 +21,7 @@ function loadJobTemplates() {
 
   for (const file of jobFiles) {
     try {
-      const filePath = path.join(process.cwd(), 'app', 'api', 'admin', 'seed-jobs', file);
+      const filePath = path.join(process.cwd(), 'data', 'seed-jobs', file);
       
       // Dosyanın var olup olmadığını kontrol et
       if (!fs.existsSync(filePath)) {

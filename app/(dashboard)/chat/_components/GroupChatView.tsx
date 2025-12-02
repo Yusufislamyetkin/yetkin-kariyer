@@ -240,16 +240,22 @@ export function GroupChatView({ category }: GroupChatViewProps) {
     });
   }, [groups]);
 
-  // Read group ID from URL query params on mount and when searchParams change
+  // Read group ID or slug from URL query params on mount and when searchParams change
   useEffect(() => {
-    const groupId = searchParams.get("group");
-    if (groupId && groupId !== selectedGroupId) {
-      // Only set if group exists in groups list
-      const groupExists = groups.some((group) => group.id === groupId);
-      if (groupExists) {
-        setSelectedGroupId(groupId);
+    const groupParam = searchParams.get("group");
+    if (groupParam && groupParam !== selectedGroupId) {
+      // First try to find by ID
+      let foundGroup = groups.find((group) => group.id === groupParam);
+      
+      // If not found by ID, try to find by slug
+      if (!foundGroup) {
+        foundGroup = groups.find((group) => group.slug === groupParam);
       }
-    } else if (!groupId && selectedGroupId) {
+      
+      if (foundGroup && foundGroup.id !== selectedGroupId) {
+        setSelectedGroupId(foundGroup.id);
+      }
+    } else if (!groupParam && selectedGroupId) {
       // Clear selection if group param is removed
       setSelectedGroupId(null);
     }
@@ -415,6 +421,22 @@ export function GroupChatView({ category }: GroupChatViewProps) {
             return options.selectGroupId;
           }
 
+          // Check URL for group parameter (could be ID or slug)
+          const urlGroupParam = searchParams.get("group");
+          if (urlGroupParam) {
+            // First try to find by ID
+            let foundGroup = data.groups.find((group: ChatGroup) => group.id === urlGroupParam);
+            
+            // If not found by ID, try to find by slug
+            if (!foundGroup) {
+              foundGroup = data.groups.find((group: ChatGroup) => group.slug === urlGroupParam);
+            }
+            
+            if (foundGroup) {
+              return foundGroup.id;
+            }
+          }
+
           if (prev && data.groups.some((group: ChatGroup) => group.id === prev)) {
             return prev;
           }
@@ -429,7 +451,7 @@ export function GroupChatView({ category }: GroupChatViewProps) {
     } finally {
       setLoadingGroups(false);
     }
-  }, [category]);
+  }, [category, searchParams]);
 
   const fetchMembers = useCallback(
     async (groupId: string) => {
@@ -643,20 +665,21 @@ export function GroupChatView({ category }: GroupChatViewProps) {
   const handleSelectGroup = useCallback(
     (groupId: string) => {
       const target = groups.find((group) => group.id === groupId);
+      const basePath = category === "community" ? "/chat" : "/chat/groups";
       if (target && !target.membership) {
         setSelectedGroupId(groupId);
         setJoinPromptGroupId(groupId);
         setJoinInviteCode("");
         setJoinInviteError(null);
         setShowSidebar(false);
-        router.replace(`/chat/groups?group=${groupId}`);
+        router.replace(`${basePath}?group=${groupId}`);
         return;
       }
       setSelectedGroupId(groupId);
       setShowSidebar(false);
-      router.replace(`/chat/groups?group=${groupId}`);
+      router.replace(`${basePath}?group=${groupId}`);
     },
-    [groups, router]
+    [category, groups, router]
   );
 
   const handleJoinGroup = useCallback(
