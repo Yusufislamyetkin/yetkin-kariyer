@@ -16,6 +16,7 @@ import { Card, CardContent } from "@/app/components/ui/Card";
 import { useCelebration } from "@/app/contexts/CelebrationContext";
 import { useBadgeNotification } from "@/app/contexts/BadgeNotificationContext";
 import { useDelayedBadgeCheck } from "@/hooks/useDelayedBadgeCheck";
+import { useStrikeCompletionCheck } from "@/hooks/useStrikeCompletionCheck";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 
@@ -47,6 +48,7 @@ type CurrentActivity = {
 export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadmapChange, onCompletionChange }: LessonChatProps) {
   const { celebrate } = useCelebration();
   const { showBadges } = useBadgeNotification();
+  const { checkStrikeCompletion } = useStrikeCompletionCheck();
   const router = useRouter();
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(true);
@@ -128,6 +130,9 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
               showBadges(data.badgeResults.newlyEarnedBadges);
             }
             // Note: Delayed badge check hook will also check for badges
+            
+            // Check if strike was completed after lesson
+            checkStrikeCompletion();
           }
         } catch (error) {
           console.error("Error marking lesson as completed:", error);
@@ -137,7 +142,7 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
 
       markLessonComplete();
     }
-  }, [isCompleted, messages.length, lessonTitle, celebrate, lessonSlug, showBadges]);
+  }, [isCompleted, messages.length, lessonTitle, celebrate, lessonSlug, showBadges, checkStrikeCompletion]);
 
   // Delayed badge check for lesson completion
   useDelayedBadgeCheck({

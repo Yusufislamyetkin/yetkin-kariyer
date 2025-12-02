@@ -31,6 +31,7 @@ import { BadgeDisplay } from "@/app/components/badges/BadgeDisplay";
 import { Award } from "lucide-react";
 import type { MentorRecommendation } from "@/types";
 import { StrikeDisplay } from "./_components/StrikeDisplay";
+import { useStrikeCompletionCheck } from "@/hooks/useStrikeCompletionCheck";
 
 interface DashboardStats {
   quizAttempts: number;
@@ -104,6 +105,7 @@ export default function DashboardPage() {
   const [motivationMessage, setMotivationMessage] = useState<{ message: string; emoji: string } | null>(null);
   const [motivationLoading, setMotivationLoading] = useState(true);
   const recentBadges = badges.slice(0, 3);
+  const { checkStrikeCompletion } = useStrikeCompletionCheck();
 
   // Fetch core dashboard data (non-blocking)
   useEffect(() => {
@@ -226,6 +228,10 @@ export default function DashboardPage() {
           const strikeData = await strikeResponse.json();
           if (strikeData && !strikeData.error) {
             setStrikeData(strikeData);
+            // Check if strike was newly completed and show notification
+            if (strikeData.isNewlyCompleted) {
+              checkStrikeCompletion();
+            }
           } else {
             // Set to null so StrikeDisplay shows default/empty state
             setStrikeData(null);

@@ -350,23 +350,17 @@ export default function BrowseJobsPage() {
                   <div className="flex-1 space-y-3">
                     {/* Header: Employer + New badge + Posted time */}
                     <div className="flex items-center gap-3">
-                      {(() => {
-                        const companyInfo = getCompanyInfoForJob(job.title);
-                        return (
-                          <div className="h-10 w-10 rounded-full bg-gradient-to-br from-indigo-500 to-blue-600 text-white flex items-center justify-center font-semibold text-sm">
-                            {companyInfo.initial}
-                          </div>
-                        );
-                      })()}
+                      <div className="h-10 w-10 rounded-full overflow-hidden flex items-center justify-center bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+                        <img 
+                          src="/Photos/YtkCareerLogo/ytkncareer.jpeg" 
+                          alt="YTK Career Logo" 
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
                       <div className="flex items-center gap-2 flex-wrap">
-                        {(() => {
-                          const companyInfo = getCompanyInfoForJob(job.title);
-                          return (
-                            <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                              Kategori : {companyInfo.name}
-                            </span>
-                          );
-                        })()}
+                        <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                          Anlaşmalı İş İlanı : YTK Career
+                        </span>
                         {/* Badges */}
                         {(() => {
                           const created = new Date(job.createdAt);

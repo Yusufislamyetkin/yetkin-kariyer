@@ -1,11 +1,10 @@
 [
   {
     "title": "Senior .NET Core Backend Developer - YTK Career",
-    "description": "Banka projemizde çalışacak deneyimli .NET Core backend geliştiricisi arıyoruz. Finansal sistemler, ödeme gateway entegrasyonları ve güvenlik odaklı uygulamalar geliştirme konularında yeteneklere sahip, microservices mimarisi ve Entity Framework Core teknolojilerinde tecrübeleri elde etmiş, Azure cloud platformunda deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 5 yıl çalışma tecrübesi olan, bankacılık sektöründe proje deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 3-6 aylık olup, YTKN Career'in anlaşmalı olduğu banka projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "description": "Anlaşmalı olduğumuz banka projesinde çalışacak deneyimli backend geliştiricisi arıyoruz. Finansal işlemlerin güvenli ve ölçeklenebilir şekilde işlenmesi, ödeme sistemleri entegrasyonları ve gerçek zamanlı veri akışı yönetimi konularında uzmanlaşmış profesyoneller arayışındayız. Microservices mimarisi ile dağıtık sistemler tasarlama, yüksek hacimli transaction işleme ve sistem performans optimizasyonu deneyimi olan adaylar değerlendirilecektir. Kritik finansal operasyonların kesintisiz çalışmasını sağlayacak, yüksek erişilebilirlik standartlarına uygun çözümler geliştirebilecek yetkinlik beklenmektedir. Güvenlik protokollerine tam uyum, veri şifreleme ve yetkilendirme mekanizmaları konularında derin bilgi sahibi olunması gerekmektedir. Ekip içi iş birliği, teknik dokümantasyon oluşturma ve kod kalitesi standartlarını sürdürme konularında aktif rol alınacaktır. Bu pozisyonda en az 6 yıl çalışma tecrübesi olan, bankacılık sektöründe kritik sistemler geliştirmiş profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
     "requirements": {
       "mustHave": [
-        "En az 5 yıl .NET Core ve C# geliştirme deneyimi",
-        "Bankacılık veya finans sektörü proje deneyimi",
+        "En az 6 yıl .NET Core ve C# geliştirme deneyimi",
         "Entity Framework Core ile veritabanı yönetimi",
         "RESTful API tasarımı ve geliştirme deneyimi",
         "Microservices mimarisi bilgisi",
@@ -22,19 +21,18 @@
       ]
     },
     "location": "İstanbul / Hibrit",
-    "salary": "30.000 - 50.000₺",
+    "salary": "110.000 - 150.000₺",
     "contractDuration": "3-6 ay",
     "daysAgo": 1
   },
   {
     "title": "Java Spring Boot Developer - YTK Career",
-    "description": "Banka projemizde çalışacak Java Spring Boot geliştiricisi arıyoruz. Enterprise seviyesinde finansal uygulamalar, kredi yönetim sistemleri ve müşteri portalleri geliştirme konularında yeteneklere sahip, Spring Framework ekosistemi ve Hibernate teknolojilerinde tecrübeleri elde etmiş, Oracle ve PostgreSQL veritabanlarında deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, bankacılık domain bilgisi bulunan profesyoneller arıyoruz. Sözleşme süresi 1 yıllık olup, YTKN Career'in anlaşmalı olduğu banka projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "description": "Anlaşmalı olduğumuz banka projesinde çalışacak Java geliştiricisi arıyoruz. Kurumsal seviyede finansal uygulamalar geliştirme, kredi yönetim sistemleri ve müşteri portalleri oluşturma konularında deneyimli adaylar arayışındayız. Spring Framework ekosistemi ile enterprise çözümler tasarlama, veritabanı optimizasyonu ve sistem entegrasyonları konularında yetkinlik beklenmektedir. Karmaşık iş kurallarını kodlayabilme, performanslı sorgular yazma ve ölçeklenebilir mimariler oluşturma yeteneği önemlidir. Bankacılık domain bilgisi ile teknik yetenekleri birleştirerek, iş ihtiyaçlarını etkin şekilde karşılayabilecek çözümler üretilmesi gerekmektedir. Kod kalitesi, test kapsamı ve dokümantasyon standartlarına uyum sağlanması beklenmektedir. Ekip çalışması, code review süreçlerine katılım ve sürekli öğrenme yaklaşımı değerlendirilecektir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, bankacılık domain bilgisi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
     "requirements": {
       "mustHave": [
         "En az 4 yıl Java geliştirme deneyimi",
         "Spring Boot ve Spring Framework bilgisi",
         "Spring Data JPA ve Hibernate",
-        "Bankacılık sektörü proje deneyimi",
         "RESTful API geliştirme",
         "Oracle veya PostgreSQL veritabanı kullanımı",
         "Maven veya Gradle build tool",
@@ -49,19 +47,18 @@
       ]
     },
     "location": "Ankara / Hibrit",
-    "salary": "28.000 - 45.000₺",
+    "salary": "85.000 - 125.000₺",
     "contractDuration": "1 yıl",
     "daysAgo": 2
   },
   {
     "title": "React Frontend Developer - YTK Career",
-    "description": "Banka projemizde çalışacak React frontend geliştiricisi arıyoruz. Finansal dashboard'lar, müşteri self-servis portalleri ve mobil uygulama arayüzleri geliştirme konularında yeteneklere sahip, React, TypeScript ve Redux teknolojilerinde tecrübeleri elde etmiş, responsive design ve accessibility standartlarında deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 3 yıl çalışma tecrübesi olan, finansal uygulama geliştirme deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 2 yıllık olup, YTKN Career'in anlaşmalı olduğu banka projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "description": "Anlaşmalı olduğumuz banka projesinde çalışacak frontend geliştiricisi arıyoruz. Modern kullanıcı arayüzleri tasarlama, finansal dashboard'lar ve interaktif müşteri portalleri geliştirme konularında deneyimli adaylar arayışındayız. Kullanıcı deneyimi odaklı çözümler üretme, performans optimizasyonu ve erişilebilirlik standartlarına uyum sağlama yetkinliği beklenmektedir. Responsive tasarım prensipleri ile mobil ve masaüstü platformlarda tutarlı deneyim sunulması gerekmektedir. Karmaşık veri görselleştirmeleri, gerçek zamanlı güncellemeler ve interaktif form yönetimi konularında uzmanlaşma önemlidir. Erişilebilirlik standartlarına (WCAG) tam uyum, klavye navigasyonu ve ekran okuyucu desteği sağlanması beklenmektedir. Kod organizasyonu, component reusability ve state management best practices konularında bilgi sahibi olunması gerekmektedir. Bu pozisyonda en az 3 yıl çalışma tecrübesi olan, finansal uygulama geliştirme deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
     "requirements": {
       "mustHave": [
         "En az 3 yıl React geliştirme deneyimi",
         "TypeScript bilgisi",
         "Redux veya Context API state management",
-        "Bankacılık veya finans sektörü proje deneyimi",
         "Responsive web tasarım bilgisi",
         "RESTful API entegrasyonu",
         "HTML5, CSS3 ve JavaScript",
@@ -76,17 +73,16 @@
       ]
     },
     "location": "İzmir / Hibrit",
-    "salary": "25.000 - 40.000₺",
+    "salary": "65.000 - 105.000₺",
     "contractDuration": "2 yıl",
     "daysAgo": 3
   },
   {
     "title": "DevOps Engineer - YTK Career",
-    "description": "Banka projemizde çalışacak DevOps mühendisi arıyoruz. Finansal sistemler için cloud altyapısı yönetimi, CI/CD pipeline kurulumu ve güvenlik odaklı otomasyon süreçleri geliştirme konularında yeteneklere sahip, AWS veya Azure platformlarında tecrübeleri elde etmiş, Docker, Kubernetes ve Terraform teknolojilerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, finansal sektörde infrastructure yönetimi deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 3 yıllık olup, YTKN Career'in anlaşmalı olduğu banka projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "description": "Anlaşmalı olduğumuz banka projesinde çalışacak DevOps mühendisi arıyoruz. Finansal sistemler için bulut altyapısı yönetimi, sürekli entegrasyon ve dağıtım süreçleri kurma, güvenlik odaklı otomasyon çözümleri geliştirme konularında uzmanlaşmış profesyoneller arayışındayız. Yüksek erişilebilirlik ve felaket kurtarma stratejileri tasarlama, sistem izleme ve performans yönetimi deneyimi olan adaylar değerlendirilecektir. Infrastructure as Code yaklaşımı ile altyapı yönetimi, otomatik ölçeklendirme ve kaynak optimizasyonu konularında yetkinlik beklenmektedir. Güvenlik politikalarının uygulanması, compliance gereksinimlerinin karşılanması ve audit trail'lerin oluşturulması kritik öneme sahiptir. Monitoring ve alerting sistemleri kurma, log yönetimi ve performans analizi yapma yetenekleri gereklidir. CI/CD pipeline'ları tasarlama, test otomasyonu entegrasyonu ve deployment stratejileri geliştirme konularında deneyim önemlidir. Ekip içi koordinasyon, dokümantasyon oluşturma ve best practices paylaşımı konularında aktif rol alınacaktır. Bu pozisyonda en az 5 yıl çalışma tecrübesi olan, finansal sektörde infrastructure yönetimi deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
     "requirements": {
       "mustHave": [
-        "En az 4 yıl DevOps deneyimi",
-        "Bankacılık veya finans sektörü deneyimi",
+        "En az 5 yıl DevOps deneyimi",
         "Docker ve Kubernetes bilgisi",
         "AWS veya Azure cloud platform deneyimi",
         "CI/CD pipeline kurulumu (Jenkins, GitLab CI, GitHub Actions)",
@@ -103,17 +99,16 @@
       ]
     },
     "location": "İstanbul / Hibrit",
-    "salary": "35.000 - 55.000₺",
+    "salary": "115.000 - 155.000₺",
     "contractDuration": "3 yıl",
     "daysAgo": 4
   },
   {
     "title": "QA Automation Engineer - YTK Career",
-    "description": "Banka projemizde çalışacak QA otomasyon mühendisi arıyoruz. Finansal uygulamalar için test otomasyonu framework'leri geliştirme, Selenium ve Cypress araçlarıyla end-to-end testler yazma konularında yeteneklere sahip, Java veya JavaScript programlama dillerinde tecrübeleri elde etmiş, API testing ve performance testing teknolojilerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 3 yıl çalışma tecrübesi olan, bankacılık sektöründe test deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 3-6 aylık olup, YTKN Career'in anlaşmalı olduğu banka projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "description": "Anlaşmalı olduğumuz banka projesinde çalışacak test otomasyon mühendisi arıyoruz. Finansal uygulamalar için kapsamlı test stratejileri geliştirme, otomasyon framework'leri kurma ve sürekli test süreçleri yönetme konularında deneyimli adaylar arayışındayız. Kritik finansal işlemlerin doğruluğunu ve güvenliğini sağlama, performans testleri yürütme ve test raporlama sistemleri oluşturma yetkinliği beklenmektedir. Test case tasarımı, test data yönetimi ve regression test süreçleri konularında derin bilgi sahibi olunması gerekmektedir. API testleri, entegrasyon testleri ve end-to-end test senaryoları geliştirme yetenekleri önemlidir. Test otomasyonu araçlarını etkin kullanma, CI/CD pipeline'larına test entegrasyonu yapma ve test coverage raporlama konularında deneyim beklenmektedir. Hata ayıklama, root cause analysis ve test sonuçlarını analiz etme yetenekleri değerlendirilecektir. Bu pozisyonda en az 3 yıl çalışma tecrübesi olan, bankacılık sektöründe test deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
     "requirements": {
       "mustHave": [
         "En az 3 yıl QA otomasyon deneyimi",
-        "Bankacılık sektörü proje deneyimi",
         "Selenium WebDriver veya Cypress",
         "Java, Python veya JavaScript programlama",
         "TestNG, JUnit veya Jest test framework",
@@ -130,18 +125,17 @@
       ]
     },
     "location": "Ankara / Uzaktan",
-    "salary": "22.000 - 38.000₺",
+    "salary": "70.000 - 110.000₺",
     "contractDuration": "3-6 ay",
     "daysAgo": 5
   },
   {
     "title": "Node.js Backend Developer - YTK Career",
-    "description": "Banka projemizde çalışacak Node.js backend geliştiricisi arıyoruz. Finansal API'ler, ödeme işleme sistemleri ve real-time transaction processing uygulamaları geliştirme konularında yeteneklere sahip, Node.js, Express.js ve MongoDB teknolojilerinde tecrübeleri elde etmiş, microservices mimarisi ve message queue sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, bankacılık sektöründe backend geliştirme deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 1 yıllık olup, YTKN Career'in anlaşmalı olduğu banka projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "description": "Anlaşmalı olduğumuz banka projesinde çalışacak Node.js geliştiricisi arıyoruz. Yüksek performanslı API'ler geliştirme, gerçek zamanlı işlem işleme sistemleri ve ölçeklenebilir backend servisleri oluşturma konularında uzmanlaşmış profesyoneller arayışındayız. Asenkron programlama, event-driven mimariler ve veri akışı optimizasyonu konularında derin bilgi sahibi adaylar değerlendirilecektir. Non-blocking I/O operasyonları, stream processing ve memory management konularında yetkinlik beklenmektedir. Microservices mimarisi ile servisler arası iletişim, message queue entegrasyonları ve distributed system patterns konularında deneyim önemlidir. Veritabanı optimizasyonu, caching stratejileri ve API rate limiting mekanizmaları geliştirme yetenekleri gereklidir. Error handling, logging ve monitoring entegrasyonları konularında bilgi sahibi olunması beklenmektedir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, bankacılık sektöründe backend geliştirme deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
     "requirements": {
       "mustHave": [
         "En az 4 yıl Node.js geliştirme deneyimi",
         "Express.js framework bilgisi",
-        "Bankacılık veya finans sektörü proje deneyimi",
         "MongoDB veya PostgreSQL veritabanı kullanımı",
         "RESTful API geliştirme",
         "Microservices mimarisi bilgisi",
@@ -157,18 +151,17 @@
       ]
     },
     "location": "İstanbul / Hibrit",
-    "salary": "28.000 - 45.000₺",
+    "salary": "85.000 - 125.000₺",
     "contractDuration": "1 yıl",
     "daysAgo": 6
   },
   {
     "title": "Python Backend Developer - YTK Career",
-    "description": "Banka projemizde çalışacak Python backend geliştiricisi arıyoruz. Finansal veri işleme sistemleri, risk analiz modelleri ve machine learning entegrasyonları geliştirme konularında yeteneklere sahip, Python, Django veya Flask framework'lerinde tecrübeleri elde etmiş, PostgreSQL ve Redis teknolojilerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, bankacılık sektöründe Python geliştirme deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 2 yıllık olup, YTKN Career'in anlaşmalı olduğu banka projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "description": "Anlaşmalı olduğumuz banka projesinde çalışacak Python geliştiricisi arıyoruz. Finansal veri analizi ve işleme sistemleri, risk hesaplama modelleri ve makine öğrenmesi entegrasyonları geliştirme konularında deneyimli adaylar arayışındayız. Büyük veri setleri üzerinde işlem yapma, algoritma optimizasyonu ve veri pipeline'ları oluşturma yetkinliği beklenmektedir. Veri manipülasyonu, istatistiksel analiz ve raporlama sistemleri geliştirme konularında uzmanlaşma önemlidir. API geliştirme, veritabanı entegrasyonları ve background job processing konularında deneyim gereklidir. Kod kalitesi, test yazma ve dokümantasyon standartlarına uyum sağlanması beklenmektedir. Performans optimizasyonu, memory management ve concurrent programming konularında bilgi sahibi olunması gerekmektedir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, bankacılık sektöründe Python geliştirme deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
     "requirements": {
       "mustHave": [
         "En az 4 yıl Python geliştirme deneyimi",
         "Django veya Flask framework bilgisi",
-        "Bankacılık veya finans sektörü proje deneyimi",
         "PostgreSQL veya MySQL veritabanı kullanımı",
         "RESTful API geliştirme",
         "Redis cache kullanımı",
@@ -184,19 +177,18 @@
       ]
     },
     "location": "İzmir / Hibrit",
-    "salary": "26.000 - 42.000₺",
+    "salary": "85.000 - 125.000₺",
     "contractDuration": "2 yıl",
     "daysAgo": 7
   },
   {
     "title": "Full Stack Developer (.NET + React) - YTK Career",
-    "description": "Banka projemizde çalışacak full stack geliştiricisi arıyoruz. Finansal web uygulamaları, müşteri portalleri ve admin paneli geliştirme konularında yeteneklere sahip, .NET Core backend ve React frontend teknolojilerinde tecrübeleri elde etmiş, Entity Framework ve Redux state management sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 5 yıl çalışma tecrübesi olan, bankacılık sektöründe full stack geliştirme deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 3 yıllık olup, YTKN Career'in anlaşmalı olduğu banka projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "description": "Anlaşmalı olduğumuz banka projesinde çalışacak full stack geliştiricisi arıyoruz. Uçtan uca web uygulamaları geliştirme, kullanıcı arayüzü ve backend entegrasyonları, admin paneli ve müşteri portalleri oluşturma konularında deneyimli adaylar arayışındayız. Hem frontend hem backend teknolojilerinde derin bilgi sahibi, tam stack çözümler tasarlayabilen profesyoneller değerlendirilecektir. API tasarımı, veri akışı yönetimi ve kullanıcı deneyimi optimizasyonu konularında yetkinlik beklenmektedir. State management, component architecture ve reusable code patterns konularında uzmanlaşma önemlidir. Veritabanı tasarımı, ORM kullanımı ve query optimizasyonu konularında deneyim gereklidir. Cross-functional collaboration, teknik karar verme ve problem çözme yetenekleri değerlendirilecektir. Bu pozisyonda en az 5 yıl çalışma tecrübesi olan, bankacılık sektöründe full stack geliştirme deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
     "requirements": {
       "mustHave": [
         "En az 5 yıl full stack geliştirme deneyimi",
         ".NET Core ve C# bilgisi",
         "React ve TypeScript bilgisi",
-        "Bankacılık veya finans sektörü proje deneyimi",
         "Entity Framework Core",
         "Redux veya Context API",
         "RESTful API geliştirme ve entegrasyonu",
@@ -211,18 +203,17 @@
       ]
     },
     "location": "İstanbul / Hibrit",
-    "salary": "32.000 - 52.000₺",
+    "salary": "110.000 - 150.000₺",
     "contractDuration": "3 yıl",
     "daysAgo": 8
   },
   {
     "title": "Database Administrator - YTK Career",
-    "description": "Banka projemizde çalışacak veritabanı yöneticisi arıyoruz. Finansal sistemler için veritabanı tasarımı, performans optimizasyonu ve güvenlik yönetimi konularında yeteneklere sahip, SQL Server, Oracle ve PostgreSQL teknolojilerinde tecrübeleri elde etmiş, backup/recovery ve disaster recovery sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 5 yıl çalışma tecrübesi olan, bankacılık sektöründe DBA deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 3-6 aylık olup, YTKN Career'in anlaşmalı olduğu banka projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "description": "Anlaşmalı olduğumuz banka projesinde çalışacak veritabanı yöneticisi arıyoruz. Finansal sistemler için veritabanı mimarisi tasarlama, performans optimizasyonu, güvenlik yönetimi ve veri bütünlüğü sağlama konularında uzmanlaşmış profesyoneller arayışındayız. Yüksek erişilebilirlik çözümleri, yedekleme ve felaket kurtarma stratejileri, veri arşivleme ve yedekleme sistemleri konularında deneyimli adaylar değerlendirilecektir. Query optimization, index management ve execution plan analizi konularında derin bilgi sahibi olunması gerekmektedir. Database security, access control ve audit logging konularında yetkinlik beklenmektedir. Capacity planning, resource monitoring ve performance tuning konularında deneyim önemlidir. Backup ve recovery prosedürleri, disaster recovery planlama ve data retention policies konularında bilgi sahibi olunması gerekmektedir. Bu pozisyonda en az 6 yıl çalışma tecrübesi olan, bankacılık sektöründe DBA deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
     "requirements": {
       "mustHave": [
-        "En az 5 yıl DBA deneyimi",
+        "En az 6 yıl DBA deneyimi",
         "SQL Server, Oracle veya PostgreSQL uzmanlığı",
-        "Bankacılık veya finans sektörü deneyimi",
         "Veritabanı tasarımı ve optimizasyonu",
         "Backup ve recovery stratejileri",
         "Performance tuning ve query optimization",
@@ -238,17 +229,16 @@
       ]
     },
     "location": "Ankara / Hibrit",
-    "salary": "30.000 - 48.000₺",
+    "salary": "115.000 - 155.000₺",
     "contractDuration": "3-6 ay",
     "daysAgo": 9
   },
   {
     "title": "Security Engineer - YTK Career",
-    "description": "Banka projemizde çalışacak güvenlik mühendisi arıyoruz. Finansal sistemler için güvenlik mimarisi tasarımı, penetration testing ve security audit konularında yeteneklere sahip, OWASP standartları ve PCI-DSS compliance teknolojilerinde tecrübeleri elde etmiş, encryption, authentication ve authorization sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 5 yıl çalışma tecrübesi olan, bankacılık sektöründe güvenlik deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 1 yıllık olup, YTKN Career'in anlaşmalı olduğu banka projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "description": "Anlaşmalı olduğumuz banka projesinde çalışacak güvenlik mühendisi arıyoruz. Finansal sistemler için güvenlik mimarisi tasarlama, penetrasyon testleri yürütme, güvenlik denetimleri gerçekleştirme ve tehdit analizi yapma konularında uzmanlaşmış profesyoneller arayışındayız. Siber güvenlik standartlarına uyum, güvenlik açığı yönetimi ve olay müdahale süreçleri konularında derin bilgi sahibi adaylar değerlendirilecektir. Security assessment, risk analizi ve compliance kontrolü konularında yetkinlik beklenmektedir. Encryption, authentication ve authorization mekanizmaları konularında uzmanlaşma önemlidir. Security monitoring, threat detection ve incident response konularında deneyim gereklidir. Security policies oluşturma, security awareness training ve best practices uygulama konularında bilgi sahibi olunması beklenmektedir. Bu pozisyonda en az 6 yıl çalışma tecrübesi olan, bankacılık sektöründe güvenlik deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
     "requirements": {
       "mustHave": [
-        "En az 5 yıl cybersecurity deneyimi",
-        "Bankacılık veya finans sektörü güvenlik deneyimi",
+        "En az 6 yıl cybersecurity deneyimi",
         "OWASP Top 10 bilgisi",
         "PCI-DSS compliance deneyimi",
         "Penetration testing ve vulnerability assessment",
@@ -265,18 +255,17 @@
       ]
     },
     "location": "İstanbul / Hibrit",
-    "salary": "35.000 - 58.000₺",
+    "salary": "120.000 - 160.000₺",
     "contractDuration": "1 yıl",
     "daysAgo": 10
   },
   {
     "title": "Mobile Developer (React Native) - YTK Career",
-    "description": "Banka projemizde çalışacak React Native mobil geliştiricisi arıyoruz. Finansal mobil uygulamalar, bankacılık uygulamaları ve ödeme sistemleri geliştirme konularında yeteneklere sahip, React Native, TypeScript ve Redux teknolojilerinde tecrübeleri elde etmiş, iOS ve Android platformlarında deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, bankacılık sektöründe mobil uygulama geliştirme deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 2 yıllık olup, YTKN Career'in anlaşmalı olduğu banka projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "description": "Anlaşmalı olduğumuz banka projesinde çalışacak mobil geliştiricisi arıyoruz. Finansal mobil uygulamalar geliştirme, bankacılık uygulamaları ve ödeme sistemleri oluşturma konularında deneyimli adaylar arayışındayız. Cross-platform mobil çözümler tasarlama, native performans optimizasyonu ve kullanıcı deneyimi iyileştirme konularında yetkinlik beklenmektedir. Platform-specific optimizasyonlar, native module entegrasyonları ve third-party SDK kullanımı konularında deneyim önemlidir. App store submission, version management ve update strategies konularında bilgi sahibi olunması gerekmektedir. Security best practices, data encryption ve secure storage konularında yetkinlik beklenmektedir. Performance profiling, memory management ve battery optimization konularında deneyim değerlendirilecektir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, bankacılık sektöründe mobil uygulama geliştirme deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
     "requirements": {
       "mustHave": [
         "En az 4 yıl React Native geliştirme deneyimi",
         "TypeScript bilgisi",
-        "Bankacılık veya finans sektörü mobil uygulama deneyimi",
         "Redux veya MobX state management",
         "RESTful API entegrasyonu",
         "iOS ve Android deployment süreçleri",
@@ -292,17 +281,16 @@
       ]
     },
     "location": "İzmir / Hibrit",
-    "salary": "27.000 - 43.000₺",
+    "salary": "85.000 - 125.000₺",
     "contractDuration": "2 yıl",
     "daysAgo": 11
   },
   {
     "title": "Business Analyst - YTK Career",
-    "description": "Banka projemizde çalışacak iş analisti arıyoruz. Finansal sistemler için gereksinim analizi, süreç iyileştirme ve kullanıcı hikayeleri yazma konularında yeteneklere sahip, bankacılık domain bilgisi ve Agile metodolojilerinde tecrübeleri elde etmiş, Jira, Confluence ve UML diagram araçlarında deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, bankacılık sektöründe iş analizi deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 3 yıllık olup, YTKN Career'in anlaşmalı olduğu banka projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "description": "Anlaşmalı olduğumuz banka projesinde çalışacak iş analisti arıyoruz. Finansal sistemler için gereksinim analizi yapma, süreç iyileştirme önerileri geliştirme, kullanıcı hikayeleri yazma ve paydaş yönetimi konularında deneyimli adaylar arayışındayız. İş ihtiyaçlarını teknik gereksinimlere dönüştürme, dokümantasyon oluşturma ve proje yönetimi süreçlerine katkı sağlama yetkinliği beklenmektedir. Stakeholder interviews, requirement gathering ve gap analysis konularında deneyim önemlidir. Process mapping, workflow design ve business rules documentation konularında yetkinlik beklenmektedir. User acceptance testing koordinasyonu, change management ve training material hazırlama konularında bilgi sahibi olunması gerekmektedir. Data analysis, reporting ve KPI tracking konularında deneyim değerlendirilecektir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, bankacılık sektöründe iş analizi deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
     "requirements": {
       "mustHave": [
         "En az 4 yıl iş analizi deneyimi",
-        "Bankacılık veya finans sektörü domain bilgisi",
         "Gereksinim analizi ve dokümantasyon",
         "Agile ve Scrum metodolojileri",
         "Jira ve Confluence kullanımı",
@@ -319,9 +307,8 @@
       ]
     },
     "location": "Ankara / Hibrit",
-    "salary": "25.000 - 40.000₺",
+    "salary": "85.000 - 125.000₺",
     "contractDuration": "3 yıl",
     "daysAgo": 12
   }
 ]
-

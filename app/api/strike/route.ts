@@ -25,6 +25,7 @@ interface DayTaskStatus {
     socialInteraction?: { completedAt: string | null; count: number };
     communityContribution?: { completedAt: string | null; count: number };
   };
+  _isNewlyCompleted?: boolean; // Internal flag to track if strike was just completed
 }
 
 export async function GET() {
@@ -361,6 +362,10 @@ export async function GET() {
                 type: "daily_strike_completed",
                 payload: { sourceEventId: event.id, date: dayDateStr },
               });
+              // Mark that this day's strike was newly completed
+              if (day.isToday) {
+                day._isNewlyCompleted = true;
+              }
             } catch (e) {
               console.warn("Gamification daily_strike_completed failed:", e);
             }
@@ -461,10 +466,158 @@ export async function GET() {
       weekEnd: sunday.toISOString(),
     };
 
+    // Calculate current strike combo (consecutive days with all tasks completed)
+    let currentStrikeCombo = 0;
+    const todayAllCompleted = todayDay?.allTasksCompleted || false;
+    
+    if (todayAllCompleted) {
+      // Get all daily_strike_completed events for this user, ordered by date descending
+      const strikeEvents = await db.gamificationEvent.findMany({
+        where: {
+          userId,
+          type: "daily_strike_completed",
+        },
+        select: {
+          occurredAt: true,
+          payload: true,
+        },
+        orderBy: {
+          occurredAt: "desc",
+        },
+      });
+
+      // Extract unique dates from events
+      const strikeDates = new Set<string>();
+      strikeEvents.forEach((event: { occurredAt: Date; payload: any }) => {
+        const eventDate = new Date(event.occurredAt);
+        const dateStr = eventDate.toISOString().split("T")[0];
+        strikeDates.add(dateStr);
+      });
+
+      // Check if today is completed (might not be in events yet if just completed)
+      const todayDateStr = today.toISOString().split("T")[0];
+      if (todayAllCompleted) {
+        strikeDates.add(todayDateStr);
+      }
+
+      // Calculate consecutive days from today backwards
+      let checkDate = new Date(today);
+      checkDate.setHours(0, 0, 0, 0);
+      
+      while (true) {
+        const dateStr = checkDate.toISOString().split("T")[0];
+        if (strikeDates.has(dateStr)) {
+          currentStrikeCombo++;
+          checkDate.setDate(checkDate.getDate() - 1);
+        } else {
+          break;
+        }
+      }
+    }
+
+    // Calculate longest strike combo (all time)
+    const allStrikeEvents = await db.gamificationEvent.findMany({
+      where: {
+        userId,
+        type: "daily_strike_completed",
+      },
+      select: {
+        occurredAt: true,
+      },
+      orderBy: {
+        occurredAt: "asc",
+      },
+    });
+
+    let longestStrikeCombo = 0;
+    if (allStrikeEvents.length > 0) {
+      // Extract unique dates and sort them
+      const allStrikeDates = new Set<string>();
+      allStrikeEvents.forEach((event: { occurredAt: Date }) => {
+        const eventDate = new Date(event.occurredAt);
+        const dateStr = eventDate.toISOString().split("T")[0];
+        allStrikeDates.add(dateStr);
+      });
+
+      const sortedDates = Array.from(allStrikeDates).sort();
+      
+      // Find longest consecutive sequence
+      let currentSequence = 0;
+      let maxSequence = 0;
+      let previousDate: Date | null = null;
+
+      for (const dateStr of sortedDates) {
+        const currentDate = new Date(dateStr + "T00:00:00.000Z");
+        
+        if (previousDate === null) {
+          currentSequence = 1;
+        } else {
+          const daysDiff = Math.floor(
+            (currentDate.getTime() - previousDate.getTime()) / (1000 * 60 * 60 * 24)
+          );
+          
+          if (daysDiff === 1) {
+            // Consecutive day
+            currentSequence++;
+          } else {
+            // Break in sequence
+            maxSequence = Math.max(maxSequence, currentSequence);
+            currentSequence = 1;
+          }
+        }
+        
+        previousDate = currentDate;
+      }
+      
+      longestStrikeCombo = Math.max(maxSequence, currentSequence);
+    }
+
+    // Calculate total login days (days user logged in)
+    // Count unique days from daily_login events
+    const loginEvents = await db.gamificationEvent.findMany({
+      where: {
+        userId,
+        type: "daily_login",
+      },
+      select: {
+        occurredAt: true,
+      },
+    });
+
+    // Count unique dates from login events
+    const loginDates = new Set<string>();
+    loginEvents.forEach((event: { occurredAt: Date }) => {
+      const eventDate = new Date(event.occurredAt);
+      const dateStr = eventDate.toISOString().split("T")[0];
+      loginDates.add(dateStr);
+    });
+
+    // Also add today if user has lastActivityDate set for today
+    if (streak.lastActivityDate) {
+      const lastActivity = new Date(streak.lastActivityDate);
+      const lastActivityDateStr = lastActivity.toISOString().split("T")[0];
+      loginDates.add(lastActivityDateStr);
+    }
+
+    let totalLoginDays = loginDates.size;
+    
+    // If no login events found, use totalDaysActive as fallback
+    // This happens when daily_login events are not being recorded
+    if (totalLoginDays === 0 && streak.totalDaysActive > 0) {
+      totalLoginDays = streak.totalDaysActive;
+    }
+
+    // Check if today's strike was newly completed
+    // This means all tasks are completed today and the event was just created in this request
+    const isNewlyCompleted = todayDay?._isNewlyCompleted === true;
+
     return NextResponse.json({
       currentStreak: streak.currentStreak,
       longestStreak: streak.longestStreak,
-      totalDaysActive: streak.totalDaysActive,
+      totalDaysActive: totalLoginDays, // Changed to totalLoginDays
+      currentStrikeCombo, // New field
+      longestStrikeCombo, // New field
+      isNewlyCompleted, // New field - true if strike was just completed in this request
       todayCompleted,
       weekDays,
       weeklyProgress,

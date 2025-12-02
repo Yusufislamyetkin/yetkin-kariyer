@@ -8,6 +8,7 @@ import Link from "next/link";
 import { X, Loader2, Heart, Bookmark, MoreHorizontal, Trash2, Flag } from "lucide-react";
 import { CommentSection } from "@/app/components/social/CommentSection";
 import { Button } from "@/app/components/ui/Button";
+import { useStrikeCompletionCheck } from "@/hooks/useStrikeCompletionCheck";
 
 interface Post {
   id: string;
@@ -44,6 +45,7 @@ export default function PostDetailPage() {
   const router = useRouter();
   const params = useParams();
   const postId = params.id as string;
+  const { checkStrikeCompletion } = useStrikeCompletionCheck();
 
   const [post, setPost] = useState<Post | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -236,6 +238,9 @@ export default function PostDetailPage() {
           return [data.comment, ...withoutTemp];
         });
         setCommentsCount(data.commentsCount);
+        
+        // Check if strike was completed after comment
+        checkStrikeCompletion();
       } catch (error) {
         console.error("Error commenting:", error);
         throw error;
@@ -243,7 +248,7 @@ export default function PostDetailPage() {
         setIsCommenting(false);
       }
     },
-    [postId, isCommenting, post]
+    [postId, isCommenting, post, checkStrikeCompletion]
   );
 
   const handleDeleteComment = useCallback(

@@ -1,6 +1,6 @@
 "use client";
 
-import { X, Calendar, Target, BookOpen, MessageCircle, Users, Check, XCircle } from "lucide-react";
+import { X, Calendar, Target, BookOpen, MessageCircle, Users, Check, XCircle, CheckCircle2 } from "lucide-react";
 
 interface DayTaskStatus {
   date: string;
@@ -81,6 +81,12 @@ export function DayDetailModal({ day, onClose }: DayDetailModalProps) {
     },
   ];
 
+  // Calculate how many tasks are completed
+  const completedTasksCount = tasks.filter((task) => task.completed).length;
+  const totalTasksCount = tasks.length;
+  const hasSomeTasksCompleted = completedTasksCount > 0;
+  const hasNoTasksCompleted = completedTasksCount === 0;
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" onClick={onClose}>
       <div
@@ -105,12 +111,16 @@ export function DayDetailModal({ day, onClose }: DayDetailModalProps) {
             className={`p-4 rounded-lg border-2 ${
               day.allTasksCompleted
                 ? "bg-green-50 dark:bg-green-900/20 border-green-300 dark:border-green-700"
+                : hasSomeTasksCompleted && !day.isToday && !day.isFuture
+                ? "bg-yellow-50 dark:bg-yellow-900/20 border-yellow-300 dark:border-yellow-700"
                 : "bg-gray-50 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700"
             }`}
           >
             <div className="flex items-center gap-2">
               {day.allTasksCompleted ? (
                 <Check className="w-5 h-5 text-green-600 dark:text-green-400" />
+              ) : hasSomeTasksCompleted && !day.isToday && !day.isFuture ? (
+                <CheckCircle2 className="w-5 h-5 text-yellow-600 dark:text-yellow-400" />
               ) : (
                 <XCircle className="w-5 h-5 text-gray-400 dark:text-gray-500" />
               )}
@@ -118,12 +128,16 @@ export function DayDetailModal({ day, onClose }: DayDetailModalProps) {
                 className={`font-semibold ${
                   day.allTasksCompleted
                     ? "text-green-700 dark:text-green-300"
+                    : hasSomeTasksCompleted && !day.isToday && !day.isFuture
+                    ? "text-yellow-700 dark:text-yellow-300"
                     : "text-gray-600 dark:text-gray-400"
                 }`}
               >
                 {day.allTasksCompleted
                   ? "Tüm görevler tamamlandı! ✓"
-                  : !day.isToday && !day.isFuture
+                  : hasSomeTasksCompleted && !day.isToday && !day.isFuture
+                  ? `Kısmen tamamlandı (${completedTasksCount}/${totalTasksCount})`
+                  : hasNoTasksCompleted && !day.isToday && !day.isFuture
                   ? "Tüm görevler başarısız"
                   : "Tüm görevler henüz tamamlanmadı"}
               </span>

@@ -9,6 +9,7 @@ import { Button } from "@/app/components/ui/Button";
 import { X, Loader2, ImageIcon } from "lucide-react";
 import { z } from "zod";
 import { useBadgeNotificationHandler } from "@/hooks/useBadgeNotificationHandler";
+import { useStrikeCompletionCheck } from "@/hooks/useStrikeCompletionCheck";
 
 interface PostCreateProps {
   onClose?: () => void;
@@ -20,6 +21,7 @@ export function PostCreate({ onClose, onSuccess, isModal = true }: PostCreatePro
   const router = useRouter();
   const { data: session } = useSession();
   const { handleBadgeResults } = useBadgeNotificationHandler();
+  const { checkStrikeCompletion } = useStrikeCompletionCheck();
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [content, setContent] = useState("");
@@ -164,6 +166,9 @@ export function PostCreate({ onClose, onSuccess, isModal = true }: PostCreatePro
       if (data.badgeResults) {
         handleBadgeResults(data.badgeResults);
       }
+
+      // Check if strike was completed after post creation
+      checkStrikeCompletion();
 
       // Reset form state
       setContent("");

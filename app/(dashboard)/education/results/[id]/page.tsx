@@ -27,6 +27,7 @@ import { AIAnalysis } from "@/types";
 import { useBadgeNotification } from "@/app/contexts/BadgeNotificationContext";
 import { useCelebration } from "@/app/contexts/CelebrationContext";
 import { useDelayedBadgeCheck } from "@/hooks/useDelayedBadgeCheck";
+import { useStrikeCompletionCheck } from "@/hooks/useStrikeCompletionCheck";
 
 interface QuizQuestion {
   id: string;
@@ -117,6 +118,7 @@ export default function QuizResultsPage() {
   const [nextTest, setNextTest] = useState<NextTest | null>(null);
   const { showBadges } = useBadgeNotification();
   const { celebrate } = useCelebration();
+  const { checkStrikeCompletion } = useStrikeCompletionCheck();
   const processedBadgeIds = useRef<Set<string>>(new Set());
   const hasCelebratedRef = useRef(false);
 
@@ -221,6 +223,9 @@ export default function QuizResultsPage() {
       if (data.attempt?.quiz && !data.attempt.quiz.course?.id) {
         await fetchNextTestInModule(data.attempt.quiz);
       }
+
+      // Check if strike was completed after test
+      checkStrikeCompletion();
     } catch (err) {
       console.error("Error fetching results:", err);
       setError(err instanceof Error ? err.message : "Bilinmeyen bir hata oluştu");

@@ -19,6 +19,7 @@ import {
 } from "@/lib/chat/presence";
 import { cn } from "@/lib/utils";
 import { useChatSummary } from "@/app/contexts/ChatSummaryContext";
+import { useStrikeCompletionCheck } from "@/hooks/useStrikeCompletionCheck";
 
 import {
   ChatShell,
@@ -164,6 +165,7 @@ export function GroupChatView({ category }: GroupChatViewProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { refresh: refreshChatSummary } = useChatSummary();
+  const { checkStrikeCompletion } = useStrikeCompletionCheck();
   const refreshTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const currentUserId = useMemo(() => session?.user && (session.user as any).id, [session?.user]) as
@@ -1299,6 +1301,29 @@ export function GroupChatView({ category }: GroupChatViewProps) {
         });
 
         await markMessagesAsRead(selectedGroupId, [payload.id]);
+
+        // Check if strike was completed after community message
+        // Only check for community groups (not user groups)
+        if (category === "community") {
+          const selectedGroup = groups.find((g) => g.id === selectedGroupId);
+          const COMMUNITY_SLUGS = [
+            "dotnet-core-community",
+            "java-community",
+            "mssql-community",
+            "react-community",
+            "angular-community",
+            "nodejs-community",
+            "ai-community",
+            "flutter-community",
+            "ethical-hacking-community",
+            "nextjs-community",
+            "docker-kubernetes-community",
+            "owasp-community",
+          ];
+          if (selectedGroup && COMMUNITY_SLUGS.includes(selectedGroup.slug)) {
+            checkStrikeCompletion();
+          }
+        }
       } catch (err: any) {
         console.error(err);
         // Hata olursa optimistic mesajı kaldır
@@ -1315,7 +1340,10 @@ export function GroupChatView({ category }: GroupChatViewProps) {
     },
     [
       attachments,
+      category,
+      checkStrikeCompletion,
       currentUserId,
+      groups,
       markMessagesAsRead,
       messageInput,
       selectedGroupId,

@@ -1,12 +1,11 @@
 [
   {
     "title": "Senior Full Stack Developer (MERN Stack) - YTK Career",
-    "description": "Teknoloji projemizde çalışacak full stack geliştiricisi arıyoruz. SaaS platformları, cloud-based uygulamalar ve enterprise çözümler geliştirme konularında yeteneklere sahip, MongoDB, Express.js, React ve Node.js teknolojilerinde tecrübeleri elde etmiş, microservices mimarisi ve GraphQL sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 5 yıl çalışma tecrübesi olan, teknoloji sektöründe proje deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 3-6 aylık olup, YTKN Career'in anlaşmalı olduğu teknoloji projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "description": "Anlaşmalı olduğumuz teknoloji projesinde çalışacak full stack geliştiricisi arıyoruz. SaaS platformlar, cloud-based uygulamalar ve enterprise çözümler geliştirme konularında deneyimli adaylar arayışındayız. Modern web teknolojileri ile ölçeklenebilir uygulamalar tasarlama, microservices mimarisi ve distributed systems konularında yetkinlik beklenmektedir. API design, database optimization ve caching strategies konularında uzmanlaşma önemlidir. Code quality, testing ve documentation standartlarına uyum sağlanması beklenmektedir. Ekip liderliği, teknik mentörlük ve best practices paylaşımı konularında deneyim değerlendirilecektir. Bu pozisyonda en az 5 yıl çalışma tecrübesi olan, teknoloji sektöründe proje deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
     "requirements": {
       "mustHave": [
         "En az 5 yıl full stack geliştirme deneyimi",
         "MongoDB, Express.js, React, Node.js (MERN) stack",
-        "Teknoloji veya SaaS sektörü proje deneyimi",
         "TypeScript bilgisi",
         "RESTful API ve GraphQL geliştirme",
         "Microservices mimarisi bilgisi",
@@ -22,18 +21,17 @@
       ]
     },
     "location": "İstanbul / Hibrit",
-    "salary": "30.000 - 50.000₺",
+    "salary": "110.000 - 150.000₺",
     "contractDuration": "3-6 ay",
     "daysAgo": 1
   },
   {
     "title": "Cloud Solutions Architect - YTK Career",
-    "description": "Teknoloji projemizde çalışacak cloud çözüm mimarı arıyoruz. Kurumsal cloud mimarisi tasarımı, scalable sistemler ve multi-cloud çözümler geliştirme konularında yeteneklere sahip, AWS, Azure ve GCP teknolojilerinde tecrübeleri elde etmiş, Terraform ve CloudFormation sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 6 yıl çalışma tecrübesi olan, teknoloji sektöründe cloud architecture deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 1 yıllık olup, YTKN Career'in anlaşmalı olduğu teknoloji projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "description": "Anlaşmalı olduğumuz teknoloji projesinde çalışacak bulut çözüm mimarı arıyoruz. Kurumsal cloud mimarisi tasarımı, scalable sistemler ve multi-cloud çözümler geliştirme konularında uzmanlaşmış profesyoneller arayışındayız. AWS, Azure ve GCP platformlarında architecture design, cost optimization ve security best practices konularında yetkinlik beklenmektedir. Microservices architecture, serverless computing ve container orchestration konularında uzmanlaşma önemlidir. Disaster recovery, high availability ve scalability planning konularında deneyim gereklidir. Compliance, security ve governance konularında bilgi sahibi olunması beklenmektedir. Bu pozisyonda en az 6 yıl çalışma tecrübesi olan, teknoloji sektöründe cloud architecture deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
     "requirements": {
       "mustHave": [
         "En az 6 yıl cloud architecture deneyimi",
         "AWS, Azure veya GCP sertifikaları",
-        "Teknoloji veya SaaS sektörü proje deneyimi",
         "Microservices ve serverless architecture",
         "Security ve compliance bilgisi",
         "Network ve infrastructure design",
@@ -49,18 +47,17 @@
       ]
     },
     "location": "Ankara / Uzaktan",
-    "salary": "40.000 - 65.000₺",
+    "salary": "120.000 - 160.000₺",
     "contractDuration": "1 yıl",
     "daysAgo": 2
   },
   {
     "title": "DevOps Engineer - YTK Career",
-    "description": "Teknoloji projemizde çalışacak DevOps mühendisi arıyoruz. CI/CD pipeline kurulumu, infrastructure automation ve monitoring sistemleri geliştirme konularında yeteneklere sahip, Docker, Kubernetes ve Terraform teknolojilerinde tecrübeleri elde etmiş, Jenkins, GitLab CI ve GitHub Actions sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, teknoloji sektöründe DevOps deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 2 yıllık olup, YTKN Career'in anlaşmalı olduğu teknoloji projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "description": "Anlaşmalı olduğumuz teknoloji projesinde çalışacak DevOps mühendisi arıyoruz. CI/CD pipeline kurulumu, infrastructure automation ve monitoring sistemleri geliştirme konularında deneyimli adaylar arayışındayız. Containerization, orchestration ve infrastructure as code konularında yetkinlik beklenmektedir. Deployment strategies, rollback procedures ve disaster recovery konularında uzmanlaşma önemlidir. Monitoring, logging ve alerting sistemleri kurma konularında deneyim gereklidir. Security best practices, compliance ve audit konularında bilgi sahibi olunması beklenmektedir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, teknoloji sektöründe DevOps deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
     "requirements": {
       "mustHave": [
         "En az 4 yıl DevOps deneyimi",
         "Docker ve Kubernetes bilgisi",
-        "Teknoloji veya SaaS sektörü proje deneyimi",
         "AWS veya Azure cloud platform deneyimi",
         "CI/CD pipeline kurulumu (Jenkins, GitLab CI, GitHub Actions)",
         "Linux sistem yönetimi",
@@ -76,18 +73,17 @@
       ]
     },
     "location": "İzmir / Hibrit",
-    "salary": "32.000 - 52.000₺",
+    "salary": "85.000 - 125.000₺",
     "contractDuration": "2 yıl",
     "daysAgo": 3
   },
   {
     "title": "React Native Developer - YTK Career",
-    "description": "Teknoloji projemizde çalışacak React Native mobil geliştiricisi arıyoruz. Cross-platform mobil uygulamalar, native module entegrasyonları ve performance optimization konularında yeteneklere sahip, React Native, TypeScript ve Redux teknolojilerinde tecrübeleri elde etmiş, iOS ve Android platformlarında deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, teknoloji sektöründe mobil uygulama geliştirme deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 3 yıllık olup, YTKN Career'in anlaşmalı olduğu teknoloji projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "description": "Anlaşmalı olduğumuz teknoloji projesinde çalışacak mobil geliştiricisi arıyoruz. Cross-platform mobil uygulamalar, native module entegrasyonları ve performance optimization konularında deneyimli adaylar arayışındayız. React Native framework, TypeScript ve state management konularında yetkinlik beklenmektedir. Platform-specific optimizations, native modules ve third-party SDK entegrasyonları konularında uzmanlaşma önemlidir. App store deployment, version management ve update strategies konularında deneyim gereklidir. Performance profiling, memory management ve battery optimization konularında bilgi sahibi olunması beklenmektedir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, teknoloji sektöründe mobil uygulama geliştirme deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
     "requirements": {
       "mustHave": [
         "En az 4 yıl React Native geliştirme deneyimi",
         "TypeScript bilgisi",
-        "Teknoloji veya SaaS mobil uygulama deneyimi",
         "Redux veya MobX state management",
         "RESTful API entegrasyonu",
         "iOS ve Android deployment süreçleri",
@@ -103,18 +99,17 @@
       ]
     },
     "location": "Bursa / Hibrit",
-    "salary": "28.000 - 45.000₺",
+    "salary": "85.000 - 125.000₺",
     "contractDuration": "3 yıl",
     "daysAgo": 4
   },
   {
     "title": "Python Developer - YTK Career",
-    "description": "Teknoloji projemizde çalışacak Python geliştiricisi arıyoruz. Backend API geliştirme, data processing ve automation scriptleri geliştirme konularında yeteneklere sahip, Python, Django ve FastAPI teknolojilerinde tecrübeleri elde etmiş, PostgreSQL ve Redis sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, teknoloji sektöründe Python geliştirme deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 3-6 aylık olup, YTKN Career'in anlaşmalı olduğu teknoloji projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "description": "Anlaşmalı olduğumuz teknoloji projesinde çalışacak Python geliştiricisi arıyoruz. Backend API geliştirme, data processing ve automation scriptleri geliştirme konularında deneyimli adaylar arayışındayız. Python programlama, Django ve FastAPI framework'leri konularında yetkinlik beklenmektedir. Database integration, caching strategies ve background job processing konularında uzmanlaşma önemlidir. Code organization, testing ve documentation konularında deneyim gereklidir. Performance optimization, memory management ve concurrent programming konularında bilgi sahibi olunması beklenmektedir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, teknoloji sektöründe Python geliştirme deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
     "requirements": {
       "mustHave": [
         "En az 4 yıl Python geliştirme deneyimi",
         "Django veya FastAPI framework bilgisi",
-        "Teknoloji veya SaaS sektörü proje deneyimi",
         "PostgreSQL veya MySQL veritabanı kullanımı",
         "RESTful API geliştirme",
         "Git versiyon kontrolü",
@@ -130,18 +125,17 @@
       ]
     },
     "location": "Antalya / Hibrit",
-    "salary": "27.000 - 44.000₺",
+    "salary": "85.000 - 125.000₺",
     "contractDuration": "3-6 ay",
     "daysAgo": 5
   },
   {
     "title": "Vue.js Frontend Developer - YTK Career",
-    "description": "Teknoloji projemizde çalışacak Vue.js frontend geliştiricisi arıyoruz. Modern web uygulamaları, admin panelleri ve dashboard geliştirme konularında yeteneklere sahip, Vue 3, Composition API ve Pinia teknolojilerinde tecrübeleri elde etmiş, Nuxt.js ve Vite build tool sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, teknoloji sektöründe frontend geliştirme deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 1 yıllık olup, YTKN Career'in anlaşmalı olduğu teknoloji projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "description": "Anlaşmalı olduğumuz teknoloji projesinde çalışacak frontend geliştiricisi arıyoruz. Modern web uygulamaları, admin panelleri ve dashboard geliştirme konularında deneyimli adaylar arayışındayız. Vue 3 framework, Composition API ve state management konularında yetkinlik beklenmektedir. Component architecture, routing ve form handling konularında uzmanlaşma önemlidir. Performance optimization, code splitting ve lazy loading konularında deneyim gereklidir. Testing, code quality ve documentation konularında bilgi sahibi olunması beklenmektedir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, teknoloji sektöründe frontend geliştirme deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
     "requirements": {
       "mustHave": [
         "En az 4 yıl Vue.js geliştirme deneyimi",
         "Vue 3 ve Composition API bilgisi",
-        "Teknoloji veya SaaS sektörü proje deneyimi",
         "Vuex veya Pinia state management",
         "Vue Router ile routing",
         "HTML5, CSS3 ve JavaScript/TypeScript",
@@ -157,18 +151,17 @@
       ]
     },
     "location": "İstanbul / Hibrit",
-    "salary": "26.000 - 42.000₺",
+    "salary": "85.000 - 125.000₺",
     "contractDuration": "1 yıl",
     "daysAgo": 6
   },
   {
     "title": "Angular Frontend Developer - YTK Career",
-    "description": "Teknoloji projemizde çalışacak Angular frontend geliştiricisi arıyoruz. Enterprise web uygulamaları, complex form yönetimi ve data visualization konularında yeteneklere sahip, Angular, TypeScript ve RxJS teknolojilerinde tecrübeleri elde etmiş, NgRx state management ve Angular Material sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, teknoloji sektöründe Angular geliştirme deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 2 yıllık olup, YTKN Career'in anlaşmalı olduğu teknoloji projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "description": "Anlaşmalı olduğumuz teknoloji projesinde çalışacak frontend geliştiricisi arıyoruz. Enterprise web uygulamaları, complex form yönetimi ve data visualization konularında deneyimli adaylar arayışındayız. Angular framework, TypeScript ve RxJS konularında yetkinlik beklenmektedir. Component architecture, dependency injection ve reactive programming konularında uzmanlaşma önemlidir. State management, routing ve lazy loading konularında deneyim gereklidir. Testing, code quality ve performance optimization konularında bilgi sahibi olunması beklenmektedir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, teknoloji sektöründe Angular geliştirme deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
     "requirements": {
       "mustHave": [
         "En az 4 yıl Angular geliştirme deneyimi",
         "TypeScript bilgisi",
-        "Teknoloji veya SaaS sektörü proje deneyimi",
         "Angular CLI ve RxJS",
         "NgRx veya NgXS state management",
         "HTML5, CSS3 ve JavaScript",
@@ -184,18 +177,17 @@
       ]
     },
     "location": "Ankara / Hibrit",
-    "salary": "27.000 - 43.000₺",
+    "salary": "85.000 - 125.000₺",
     "contractDuration": "2 yıl",
     "daysAgo": 7
   },
   {
     "title": "Java Spring Boot Developer - YTK Career",
-    "description": "Teknoloji projemizde çalışacak Java Spring Boot geliştiricisi arıyoruz. Enterprise backend sistemleri, microservices ve API gateway geliştirme konularında yeteneklere sahip, Spring Boot, Java ve PostgreSQL teknolojilerinde tecrübeleri elde etmiş, Spring Cloud ve Hibernate sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 5 yıl çalışma tecrübesi olan, teknoloji sektöründe Java geliştirme deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 3 yıllık olup, YTKN Career'in anlaşmalı olduğu teknoloji projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "description": "Anlaşmalı olduğumuz teknoloji projesinde çalışacak Java geliştiricisi arıyoruz. Enterprise backend sistemleri, microservices ve API gateway geliştirme konularında deneyimli adaylar arayışındayız. Spring Boot framework, Java ve database technologies konularında yetkinlik beklenmektedir. Microservices architecture, service discovery ve inter-service communication konularında uzmanlaşma önemlidir. Code organization, design patterns ve best practices konularında deneyim gereklidir. Testing, code quality ve documentation konularında bilgi sahibi olunması beklenmektedir. Bu pozisyonda en az 5 yıl çalışma tecrübesi olan, teknoloji sektöründe Java geliştirme deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
     "requirements": {
       "mustHave": [
         "En az 5 yıl Java geliştirme deneyimi",
         "Spring Boot ve Spring Framework bilgisi",
-        "Teknoloji veya SaaS sektörü proje deneyimi",
         "PostgreSQL veya MySQL veritabanı kullanımı",
         "RESTful API geliştirme",
         "Hibernate ve JPA",
@@ -211,17 +203,16 @@
       ]
     },
     "location": "İzmir / Hibrit",
-    "salary": "29.000 - 47.000₺",
+    "salary": "110.000 - 150.000₺",
     "contractDuration": "3 yıl",
     "daysAgo": 8
   },
   {
     "title": "QA Automation Engineer - YTK Career",
-    "description": "Teknoloji projemizde çalışacak QA otomasyon mühendisi arıyoruz. Test otomasyonu framework'leri, end-to-end testler ve performance testing konularında yeteneklere sahip, Selenium, Cypress ve Playwright teknolojilerinde tecrübeleri elde etmiş, API testing ve load testing sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 3 yıl çalışma tecrübesi olan, teknoloji sektöründe test deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 3-6 aylık olup, YTKN Career'in anlaşmalı olduğu teknoloji projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "description": "Anlaşmalı olduğumuz teknoloji projesinde çalışacak test otomasyon mühendisi arıyoruz. Test otomasyonu framework'leri, end-to-end testler ve performance testing konularında deneyimli adaylar arayışındayız. Selenium, Cypress ve Playwright gibi test araçları konularında yetkinlik beklenmektedir. Test case tasarımı, test data yönetimi ve regression testing konularında uzmanlaşma önemlidir. API testing, integration testing ve load testing konularında deneyim gereklidir. CI/CD entegrasyonu, test reporting ve metrics tracking konularında bilgi sahibi olunması beklenmektedir. Bu pozisyonda en az 3 yıl çalışma tecrübesi olan, teknoloji sektöründe test deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
     "requirements": {
       "mustHave": [
         "En az 3 yıl QA otomasyon deneyimi",
-        "Teknoloji veya SaaS sektörü proje deneyimi",
         "Selenium WebDriver veya Cypress",
         "Java, Python veya JavaScript programlama",
         "TestNG, JUnit veya Jest test framework",
@@ -238,17 +229,16 @@
       ]
     },
     "location": "Bursa / Hibrit",
-    "salary": "22.000 - 36.000₺",
+    "salary": "70.000 - 110.000₺",
     "contractDuration": "3-6 ay",
     "daysAgo": 9
   },
   {
     "title": ".NET Core Backend Developer - YTK Career",
-    "description": "Teknoloji projemizde çalışacak .NET Core backend geliştiricisi arıyoruz. Enterprise backend sistemleri, API geliştirme ve microservices geliştirme konularında yeteneklere sahip, .NET Core, C# ve SQL Server teknolojilerinde tecrübeleri elde etmiş, Entity Framework Core ve gRPC sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 5 yıl çalışma tecrübesi olan, teknoloji sektöründe .NET geliştirme deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 1 yıllık olup, YTKN Career'in anlaşmalı olduğu teknoloji projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "description": "Anlaşmalı olduğumuz teknoloji projesinde çalışacak backend geliştiricisi arıyoruz. Enterprise backend sistemleri, API geliştirme ve microservices geliştirme konularında deneyimli adaylar arayışındayız. .NET Core framework, C# programlama ve SQL Server konularında yetkinlik beklenmektedir. Entity Framework Core, LINQ ve stored procedures konularında uzmanlaşma önemlidir. Authentication, authorization ve security best practices konularında deneyim gereklidir. Code organization, design patterns ve SOLID principles konularında bilgi sahibi olunması beklenmektedir. Bu pozisyonda en az 5 yıl çalışma tecrübesi olan, teknoloji sektöründe .NET geliştirme deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
     "requirements": {
       "mustHave": [
         "En az 5 yıl .NET Core ve C# geliştirme deneyimi",
-        "Teknoloji veya SaaS sektörü proje deneyimi",
         "Entity Framework Core ile veritabanı yönetimi",
         "RESTful API tasarımı ve geliştirme deneyimi",
         "SQL Server veritabanı kullanımı",
@@ -265,7 +255,7 @@
       ]
     },
     "location": "Antalya / Hibrit",
-    "salary": "28.000 - 46.000₺",
+    "salary": "110.000 - 150.000₺",
     "contractDuration": "1 yıl",
     "daysAgo": 10
   }

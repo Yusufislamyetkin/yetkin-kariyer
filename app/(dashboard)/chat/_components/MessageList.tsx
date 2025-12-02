@@ -71,13 +71,12 @@ export function MessageList({
   emptyState,
   topInset,
 }: MessageListProps) {
-  // Filter out temporary frontend IDs so they never render on the client
+  // Filter out only messages with explicit tempId property (not optimistic updates with temp- prefix)
   const filteredMessages = messages.filter((message) => {
-    const id = message.id ?? "";
-    const hasTempPrefix = typeof id === "string" && (id.startsWith("temp-") || id.startsWith("front-"));
     const { tempId } = message as ChatMessage & { tempId?: string | null };
     const hasExplicitTempId = typeof tempId === "string" && tempId.length > 0;
-    return !hasTempPrefix && !hasExplicitTempId;
+    // Allow optimistic messages (temp- prefix) to show, but filter out explicit tempId
+    return !hasExplicitTempId;
   });
 
   return (

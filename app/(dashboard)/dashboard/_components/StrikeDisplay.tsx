@@ -32,6 +32,8 @@ interface StrikeData {
   currentStreak: number;
   longestStreak: number;
   totalDaysActive: number;
+  currentStrikeCombo?: number; // New field for strike combo
+  longestStrikeCombo?: number; // New field for longest strike combo
   todayCompleted: {
     login: boolean;
     testSolved: boolean;
@@ -75,6 +77,8 @@ export function StrikeDisplay({ strikeData, loading }: StrikeDisplayProps) {
     currentStreak: 0,
     longestStreak: 0,
     totalDaysActive: 0,
+    currentStrikeCombo: 0,
+    longestStrikeCombo: 0,
     todayCompleted: {
       login: false,
       testSolved: false,
@@ -93,7 +97,16 @@ export function StrikeDisplay({ strikeData, loading }: StrikeDisplayProps) {
   };
 
   const strike = strikeData || defaultStrikeData;
-  const { currentStreak, longestStreak, totalDaysActive, todayCompleted, weekDays, weeklyProgress } = strike;
+  const { 
+    currentStreak, 
+    longestStreak, 
+    totalDaysActive, 
+    currentStrikeCombo = 0, 
+    longestStrikeCombo = 0,
+    todayCompleted, 
+    weekDays, 
+    weeklyProgress 
+  } = strike;
   const weeklyPercentage = (weeklyProgress.daysCompleted / weeklyProgress.totalDays) * 100;
 
   const handleDayClick = (day: DayTaskStatus) => {
@@ -145,10 +158,10 @@ export function StrikeDisplay({ strikeData, loading }: StrikeDisplayProps) {
             <div className="min-w-0">
               <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-1">Mevcut Strike</p>
               <p className="text-2xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100">
-                {currentStreak} <span className="text-xl sm:text-2xl text-orange-600 dark:text-orange-400">gün</span>
+                {currentStrikeCombo} <span className="text-xl sm:text-2xl text-orange-600 dark:text-orange-400">gün</span>
               </p>
               <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 mt-1">
-                En uzun: {longestStreak} gün
+                En uzun strike combosu: {longestStrikeCombo} gün
               </p>
             </div>
           </div>
@@ -189,7 +202,7 @@ export function StrikeDisplay({ strikeData, loading }: StrikeDisplayProps) {
                       ? "text-white"
                       : "text-gray-500 dark:text-gray-400"
                   }`}>
-                    {allCompleted ? "✓✓✓" : hasAnyActivity ? "✓" : "○"}
+                    {allCompleted ? "✓" : hasAnyActivity ? "✓" : "○"}
                   </div>
                   <div className={`text-[8px] sm:text-[10px] font-medium text-center leading-tight ${
                     allCompleted || hasAnyActivity

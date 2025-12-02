@@ -1,38 +1,36 @@
 [
   {
-    "title": "Senior Full Stack Developer (React + Node.js) - YTK Career",
-    "description": "E-ticaret projemizde çalışacak full stack geliştiricisi arıyoruz. Online mağaza platformları, ödeme entegrasyonları ve müşteri yönetim sistemleri geliştirme konularında yeteneklere sahip, React, Node.js ve MongoDB teknolojilerinde tecrübeleri elde etmiş, Express.js ve Redux state management sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 5 yıl çalışma tecrübesi olan, e-ticaret sektöründe proje deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 3-6 aylık olup, YTKN Career'in anlaşmalı olduğu e-ticaret projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "title": "Full Stack Developer (React + Node.js) - YTK Career",
+    "description": "Anlaşmalı olduğumuz e-ticaret projesinde çalışacak full stack geliştiricisi arıyoruz. Online mağaza platformları, ödeme sistemleri entegrasyonları ve müşteri yönetim sistemleri geliştirme konularında deneyimli adaylar arayışındayız. Modern web teknolojileri ile ölçeklenebilir e-ticaret uygulamaları tasarlama, performans optimizasyonu ve güvenlik standartları konularında yetkinlik beklenmektedir. Kullanıcı arayüzü tasarımı, backend API geliştirme ve veritabanı yönetimi konularında uzmanlaşma önemlidir. Ödeme gateway entegrasyonları, sepet yönetimi ve sipariş işleme sistemleri konularında deneyim gereklidir. Ekip çalışması, agile metodolojiler ve sürekli öğrenme yaklaşımı değerlendirilecektir. Bu pozisyonda en az 3 yıl çalışma tecrübesi olan, e-ticaret sektöründe proje deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
     "requirements": {
       "mustHave": [
-        "En az 5 yıl full stack geliştirme deneyimi",
-        "E-ticaret veya e-commerce proje deneyimi",
+        "En az 3 yıl full stack geliştirme deneyimi",
         "React ve TypeScript bilgisi",
         "Node.js ve Express.js deneyimi",
         "MongoDB veya PostgreSQL veritabanı kullanımı",
         "RESTful API geliştirme",
         "Responsive web tasarım bilgisi",
-        "İyi düzeyde İngilizce"
+        "Git versiyon kontrolü"
       ],
       "niceToHave": [
-        "Next.js framework deneyimi",
-        "GraphQL kullanımı",
-        "Stripe, PayPal gibi ödeme entegrasyonları",
-        "AWS veya Heroku deployment deneyimi",
-        "Jest veya Mocha test framework'leri"
+        "Ödeme gateway entegrasyonları",
+        "Docker ve containerization",
+        "Unit test yazma deneyimi",
+        "E-ticaret platformları deneyimi",
+        "SEO optimization bilgisi"
       ]
     },
     "location": "İstanbul / Hibrit",
-    "salary": "28.000 - 45.000₺",
-    "contractDuration": "3-6 ay",
+    "salary": "60.000 - 100.000₺",
+    "contractDuration": "1 yıl",
     "daysAgo": 1
   },
   {
-    "title": "Vue.js Frontend Developer - YTK Career",
-    "description": "E-ticaret projemizde çalışacak Vue.js frontend geliştiricisi arıyoruz. Online mağaza arayüzleri, ürün katalogları ve sepet yönetim sistemleri geliştirme konularında yeteneklere sahip, Vue 3, Composition API ve Pinia teknolojilerinde tecrübeleri elde etmiş, responsive design ve mobile-first yaklaşımında deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, e-ticaret sektöründe frontend geliştirme deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 1 yıllık olup, YTKN Career'in anlaşmalı olduğu e-ticaret projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "title": "Frontend Developer (Vue.js) - YTK Career",
+    "description": "Anlaşmalı olduğumuz e-ticaret projesinde çalışacak frontend geliştiricisi arıyoruz. Online mağaza arayüzleri, ürün katalogları ve müşteri portalleri geliştirme konularında deneyimli adaylar arayışındayız. Modern JavaScript framework'leri ile kullanıcı deneyimi odaklı arayüzler tasarlama, responsive design ve performance optimization konularında yetkinlik beklenmektedir. Component-based architecture, state management ve API entegrasyonları konularında uzmanlaşma önemlidir. E-ticaret özellikleri (sepet, ödeme, sipariş takibi) geliştirme konularında deneyim gereklidir. SEO optimization, accessibility ve cross-browser compatibility konularında bilgi sahibi olunması beklenmektedir. Bu pozisyonda en az 3 yıl çalışma tecrübesi olan, e-ticaret sektöründe frontend geliştirme deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
     "requirements": {
       "mustHave": [
-        "En az 4 yıl Vue.js geliştirme deneyimi",
-        "E-ticaret veya e-commerce proje deneyimi",
+        "En az 3 yıl Vue.js geliştirme deneyimi",
         "Vue 3 ve Composition API bilgisi",
         "Vuex veya Pinia state management",
         "Vue Router ile routing",
@@ -42,105 +40,100 @@
       ],
       "niceToHave": [
         "Nuxt.js framework deneyimi",
-        "Vite build tool kullanımı",
-        "Webpack veya Vite konfigürasyonu",
+        "E-ticaret platformları deneyimi",
+        "Performance optimization",
         "Jest veya Vitest test framework",
-        "Design system ve component library deneyimi"
+        "SEO optimization bilgisi"
       ]
     },
     "location": "Ankara / Hibrit",
-    "salary": "24.000 - 38.000₺",
-    "contractDuration": "1 yıl",
+    "salary": "60.000 - 100.000₺",
+    "contractDuration": "2 yıl",
     "daysAgo": 2
   },
   {
-    "title": "PHP Backend Developer (Laravel) - YTK Career",
-    "description": "E-ticaret projemizde çalışacak PHP Laravel backend geliştiricisi arıyoruz. Online mağaza backend sistemleri, ürün yönetimi ve sipariş işleme modülleri geliştirme konularında yeteneklere sahip, Laravel, PHP ve MySQL teknolojilerinde tecrübeleri elde etmiş, RESTful API ve Eloquent ORM sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, e-ticaret sektöründe PHP geliştirme deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 2 yıllık olup, YTKN Career'in anlaşmalı olduğu e-ticaret projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "title": "Backend Developer (PHP Laravel) - YTK Career",
+    "description": "Anlaşmalı olduğumuz e-ticaret projesinde çalışacak backend geliştiricisi arıyoruz. E-ticaret platformları, ödeme işleme sistemleri ve envanter yönetim modülleri geliştirme konularında deneyimli adaylar arayışındayız. Laravel framework ile backend uygulamaları geliştirme, database migrations ve API development konularında yetkinlik beklenmektedir. Ödeme gateway entegrasyonları, sepet yönetimi ve sipariş işleme sistemleri konularında uzmanlaşma önemlidir. Code organization, service layer pattern ve repository pattern konularında deneyim gereklidir. Performance optimization, caching strategies ve database optimization konularında bilgi sahibi olunması beklenmektedir. Bu pozisyonda en az 3 yıl çalışma tecrübesi olan, e-ticaret sektöründe PHP geliştirme deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
     "requirements": {
       "mustHave": [
-        "En az 4 yıl PHP geliştirme deneyimi",
-        "Laravel framework uzmanlığı",
-        "E-ticaret veya e-commerce proje deneyimi",
+        "En az 3 yıl PHP geliştirme deneyimi",
+        "Laravel framework bilgisi",
         "MySQL veya PostgreSQL veritabanı kullanımı",
         "RESTful API geliştirme",
-        "Eloquent ORM bilgisi",
         "Git versiyon kontrolü",
-        "İyi düzeyde İngilizce"
+        "Linux sistem bilgisi"
       ],
       "niceToHave": [
-        "Laravel Queue ve Jobs",
+        "Ödeme gateway entegrasyonları",
         "Redis cache kullanımı",
-        "Payment gateway entegrasyonları",
         "Docker ve containerization",
-        "PHPUnit test framework"
+        "PHPUnit test framework",
+        "E-ticaret platformları deneyimi"
       ]
     },
     "location": "İzmir / Hibrit",
-    "salary": "22.000 - 36.000₺",
-    "contractDuration": "2 yıl",
+    "salary": "60.000 - 100.000₺",
+    "contractDuration": "1 yıl",
     "daysAgo": 3
   },
   {
-    "title": "UI/UX Designer - YTK Career",
-    "description": "E-ticaret projemizde çalışacak UI/UX tasarımcısı arıyoruz. Online mağaza arayüz tasarımları, kullanıcı deneyimi optimizasyonu ve conversion rate iyileştirme konularında yeteneklere sahip, Figma, Adobe XD ve Sketch teknolojilerinde tecrübeleri elde etmiş, user research ve prototyping araçlarında deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, e-ticaret sektöründe tasarım deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 3 yıllık olup, YTKN Career'in anlaşmalı olduğu e-ticaret projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "title": "Mobile Developer (React Native) - YTK Career",
+    "description": "Anlaşmalı olduğumuz e-ticaret projesinde çalışacak mobil geliştiricisi arıyoruz. Mobil e-ticaret uygulamaları, ürün katalogları ve müşteri portalleri geliştirme konularında deneyimli adaylar arayışındayız. Cross-platform mobil uygulamalar geliştirme, native performance optimization ve kullanıcı deneyimi iyileştirme konularında yetkinlik beklenmektedir. E-ticaret özellikleri (ürün arama, sepet, ödeme) geliştirme konularında uzmanlaşma önemlidir. Push notifications, offline support ve payment integration konularında deneyim gereklidir. App store deployment, version management ve update strategies konularında bilgi sahibi olunması beklenmektedir. Bu pozisyonda en az 3 yıl çalışma tecrübesi olan, e-ticaret sektöründe mobil uygulama geliştirme deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
     "requirements": {
       "mustHave": [
-        "En az 4 yıl UI/UX tasarım deneyimi",
-        "E-ticaret veya e-commerce proje deneyimi",
-        "Figma veya Adobe XD kullanımı",
-        "User research ve usability testing",
-        "Wireframing ve prototyping",
-        "Responsive design prensipleri",
-        "Design system oluşturma",
-        "İyi düzeyde İngilizce"
+        "En az 3 yıl React Native geliştirme deneyimi",
+        "TypeScript bilgisi",
+        "Redux veya MobX state management",
+        "RESTful API entegrasyonu",
+        "iOS ve Android deployment süreçleri",
+        "App Store ve Google Play Store yayınlama deneyimi",
+        "Git versiyon kontrolü"
       ],
       "niceToHave": [
-        "HTML5, CSS3 temel bilgisi",
-        "Animation ve transition tasarımı",
-        "A/B testing ve user analytics",
-        "Accessibility (WCAG) standartları",
-        "Conversion rate optimization"
+        "Ödeme gateway entegrasyonları",
+        "Push notification implementasyonu",
+        "Performance optimization",
+        "Automated testing (Jest, Detox)",
+        "E-ticaret platformları deneyimi"
       ]
     },
     "location": "Bursa / Hibrit",
-    "salary": "20.000 - 35.000₺",
-    "contractDuration": "3 yıl",
+    "salary": "60.000 - 100.000₺",
+    "contractDuration": "1 yıl",
     "daysAgo": 4
   },
   {
     "title": "DevOps Engineer - YTK Career",
-    "description": "E-ticaret projemizde çalışacak DevOps mühendisi arıyoruz. Online mağaza altyapısı yönetimi, CI/CD pipeline kurulumu ve scaling çözümleri geliştirme konularında yeteneklere sahip, AWS, Docker ve Kubernetes teknolojilerinde tecrübeleri elde etmiş, Terraform ve monitoring sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, e-ticaret sektöründe DevOps deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 3-6 aylık olup, YTKN Career'in anlaşmalı olduğu e-ticaret projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "description": "Anlaşmalı olduğumuz e-ticaret projesinde çalışacak DevOps mühendisi arıyoruz. E-ticaret platformları için bulut altyapısı yönetimi, CI/CD pipeline kurulumu ve monitoring sistemleri geliştirme konularında deneyimli adaylar arayışındayız. Containerization, orchestration ve infrastructure automation konularında yetkinlik beklenmektedir. High availability, scalability ve performance optimization konularında uzmanlaşma önemlidir. Monitoring, logging ve alerting sistemleri kurma konularında deneyim gereklidir. Security best practices, compliance ve audit konularında bilgi sahibi olunması beklenmektedir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, e-ticaret sektöründe DevOps deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
     "requirements": {
       "mustHave": [
         "En az 4 yıl DevOps deneyimi",
-        "E-ticaret veya e-commerce proje deneyimi",
         "Docker ve Kubernetes bilgisi",
         "AWS veya Azure cloud platform deneyimi",
-        "CI/CD pipeline kurulumu (Jenkins, GitLab CI, GitHub Actions)",
+        "CI/CD pipeline kurulumu",
         "Linux sistem yönetimi",
-        "Infrastructure as Code (Terraform veya CloudFormation)",
-        "İyi düzeyde İngilizce"
+        "Infrastructure as Code",
+        "Güvenlik ve compliance bilgisi"
       ],
       "niceToHave": [
+        "E-ticaret platformları deneyimi",
         "Prometheus ve Grafana ile monitoring",
-        "Ansible veya Chef ile configuration management",
-        "Elasticsearch ve Logstash deneyimi",
+        "Ansible veya Chef",
         "Python veya Bash scripting",
         "Load balancing ve auto-scaling"
       ]
     },
-    "location": "Antalya / Uzaktan",
-    "salary": "30.000 - 48.000₺",
-    "contractDuration": "3-6 ay",
+    "location": "İstanbul / Hibrit",
+    "salary": "85.000 - 125.000₺",
+    "contractDuration": "2 yıl",
     "daysAgo": 5
   },
   {
     "title": "QA Automation Engineer - YTK Career",
-    "description": "E-ticaret projemizde çalışacak QA otomasyon mühendisi arıyoruz. Online mağaza test otomasyonu, end-to-end testler ve regression testing konularında yeteneklere sahip, Selenium, Cypress ve Playwright teknolojilerinde tecrübeleri elde etmiş, API testing ve performance testing sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 3 yıl çalışma tecrübesi olan, e-ticaret sektöründe test deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 1 yıllık olup, YTKN Career'in anlaşmalı olduğu e-ticaret projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "description": "Anlaşmalı olduğumuz e-ticaret projesinde çalışacak test otomasyon mühendisi arıyoruz. E-ticaret platformları için test otomasyonu framework'leri, end-to-end testler ve performance testing konularında deneyimli adaylar arayışındayız. Selenium, Cypress ve Playwright gibi test araçları konularında yetkinlik beklenmektedir. E-ticaret senaryoları (ürün arama, sepet, ödeme) test etme konularında uzmanlaşma önemlidir. API testing, integration testing ve load testing konularında deneyim gereklidir. CI/CD entegrasyonu, test reporting ve metrics tracking konularında bilgi sahibi olunması beklenmektedir. Bu pozisyonda en az 3 yıl çalışma tecrübesi olan, e-ticaret sektöründe test deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
     "requirements": {
       "mustHave": [
         "En az 3 yıl QA otomasyon deneyimi",
-        "E-ticaret veya e-commerce proje deneyimi",
         "Selenium WebDriver veya Cypress",
         "Java, Python veya JavaScript programlama",
         "TestNG, JUnit veya Jest test framework",
@@ -149,107 +142,25 @@
         "Test planlama ve raporlama"
       ],
       "niceToHave": [
-        "Playwright veya Puppeteer",
+        "E-ticaret platformları deneyimi",
         "Performance testing (JMeter, Gatling)",
         "BDD framework (Cucumber, SpecFlow)",
         "CI/CD entegrasyonu",
         "Cross-browser testing"
       ]
     },
-    "location": "İstanbul / Hibrit",
-    "salary": "20.000 - 34.000₺",
+    "location": "Ankara / Hibrit",
+    "salary": "70.000 - 110.000₺",
     "contractDuration": "1 yıl",
     "daysAgo": 6
   },
   {
-    "title": "Mobile Developer (Flutter) - YTK Career",
-    "description": "E-ticaret projemizde çalışacak Flutter mobil geliştiricisi arıyoruz. Online mağaza mobil uygulamaları, ürün katalogları ve ödeme sistemleri geliştirme konularında yeteneklere sahip, Flutter, Dart ve Firebase teknolojilerinde tecrübeleri elde etmiş, iOS ve Android platformlarında deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 3 yıl çalışma tecrübesi olan, e-ticaret sektöründe mobil uygulama geliştirme deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 2 yıllık olup, YTKN Career'in anlaşmalı olduğu e-ticaret projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "title": "Backend Developer (Python) - YTK Career",
+    "description": "Anlaşmalı olduğumuz e-ticaret projesinde çalışacak Python geliştiricisi arıyoruz. E-ticaret backend sistemleri, öneri motorları ve analitik servisleri geliştirme konularında deneyimli adaylar arayışındayız. Python programlama, Django ve FastAPI framework'leri konularında yetkinlik beklenmektedir. Database integration, caching strategies ve background job processing konularında uzmanlaşma önemlidir. Ödeme gateway entegrasyonları, sepet yönetimi ve sipariş işleme sistemleri konularında deneyim gereklidir. Performance optimization, memory management ve concurrent programming konularında bilgi sahibi olunması beklenmektedir. Bu pozisyonda en az 3 yıl çalışma tecrübesi olan, e-ticaret sektöründe Python geliştirme deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
     "requirements": {
       "mustHave": [
-        "En az 3 yıl Flutter geliştirme deneyimi",
-        "Dart programlama dili bilgisi",
-        "E-ticaret veya e-commerce mobil uygulama deneyimi",
-        "State management (Provider, Bloc, Riverpod)",
-        "RESTful API entegrasyonu",
-        "iOS ve Android deployment süreçleri",
-        "App Store ve Google Play Store yayınlama deneyimi",
-        "Git versiyon kontrolü"
-      ],
-      "niceToHave": [
-        "Firebase entegrasyonu",
-        "Push notification implementasyonu",
-        "Performance optimization",
-        "Automated testing (Flutter Test)",
-        "Native module entegrasyonu"
-      ]
-    },
-    "location": "Ankara / Hibrit",
-    "salary": "23.000 - 37.000₺",
-    "contractDuration": "2 yıl",
-    "daysAgo": 7
-  },
-  {
-    "title": "Data Analyst - YTK Career",
-    "description": "E-ticaret projemizde çalışacak veri analisti arıyoruz. Online mağaza veri analizi, müşteri davranış analizi ve satış raporlama konularında yeteneklere sahip, SQL, Python ve Excel teknolojilerinde tecrübeleri elde etmiş, Tableau, Power BI ve Google Analytics sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 3 yıl çalışma tecrübesi olan, e-ticaret sektöründe veri analizi deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 3 yıllık olup, YTKN Career'in anlaşmalı olduğu e-ticaret projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
-    "requirements": {
-      "mustHave": [
-        "En az 3 yıl veri analizi deneyimi",
-        "E-ticaret veya e-commerce proje deneyimi",
-        "SQL ve veritabanı sorgulama",
-        "Python veya R programlama",
-        "Excel ve Google Sheets",
-        "Tableau veya Power BI",
-        "Google Analytics ve web analytics",
-        "İyi düzeyde İngilizce"
-      ],
-      "niceToHave": [
-        "Pandas ve NumPy kütüphaneleri",
-        "Machine Learning temel bilgisi",
-        "A/B testing ve experiment design",
-        "Data visualization",
-        "Statistical analysis"
-      ]
-    },
-    "location": "İzmir / Hibrit",
-    "salary": "21.000 - 35.000₺",
-    "contractDuration": "3 yıl",
-    "daysAgo": 8
-  },
-  {
-    "title": "Product Manager - YTK Career",
-    "description": "E-ticaret projemizde çalışacak ürün yöneticisi arıyoruz. Online mağaza ürün geliştirme, roadmap planlama ve kullanıcı deneyimi iyileştirme konularında yeteneklere sahip, Agile metodolojiler ve product management araçlarında tecrübeleri elde etmiş, data-driven decision making ve A/B testing sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 5 yıl çalışma tecrübesi olan, e-ticaret sektöründe ürün yönetimi deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 3-6 aylık olup, YTKN Career'in anlaşmalı olduğu e-ticaret projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
-    "requirements": {
-      "mustHave": [
-        "En az 5 yıl product management deneyimi",
-        "E-ticaret veya e-commerce proje deneyimi",
-        "Product roadmap ve strategy",
-        "Agile ve Scrum metodolojileri",
-        "User research ve customer insights",
-        "Data analysis ve metrics",
-        "Stakeholder yönetimi",
-        "İyi düzeyde İngilizce"
-      ],
-      "niceToHave": [
-        "A/B testing ve experiment design",
-        "Jira ve Confluence kullanımı",
-        "Technical background",
-        "Business analysis",
-        "Competitive analysis"
-      ]
-    },
-    "location": "İstanbul / Hibrit",
-    "salary": "32.000 - 50.000₺",
-    "contractDuration": "3-6 ay",
-    "daysAgo": 9
-  },
-  {
-    "title": "Backend Developer (Python Django) - YTK Career",
-    "description": "E-ticaret projemizde çalışacak Python Django backend geliştiricisi arıyoruz. Online mağaza backend sistemleri, API geliştirme ve veritabanı yönetimi konularında yeteneklere sahip, Django, Python ve PostgreSQL teknolojilerinde tecrübeleri elde etmiş, RESTful API ve Celery task queue sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, e-ticaret sektöründe Python geliştirme deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 1 yıllık olup, YTKN Career'in anlaşmalı olduğu e-ticaret projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
-    "requirements": {
-      "mustHave": [
-        "En az 4 yıl Python geliştirme deneyimi",
-        "Django framework uzmanlığı",
-        "E-ticaret veya e-commerce proje deneyimi",
+        "En az 3 yıl Python geliştirme deneyimi",
+        "Django veya FastAPI framework bilgisi",
         "PostgreSQL veya MySQL veritabanı kullanımı",
         "RESTful API geliştirme",
         "Git versiyon kontrolü",
@@ -257,70 +168,144 @@
         "İyi düzeyde İngilizce"
       ],
       "niceToHave": [
+        "Ödeme gateway entegrasyonları",
         "Celery task queue",
         "Redis cache kullanımı",
         "Docker ve containerization",
-        "Pytest test framework",
-        "Django REST Framework"
+        "Pytest test framework"
       ]
     },
-    "location": "Bursa / Hibrit",
-    "salary": "25.000 - 40.000₺",
+    "location": "İzmir / Hibrit",
+    "salary": "60.000 - 100.000₺",
     "contractDuration": "1 yıl",
+    "daysAgo": 7
+  },
+  {
+    "title": "UI/UX Designer - YTK Career",
+    "description": "Anlaşmalı olduğumuz e-ticaret projesinde çalışacak tasarımcı arıyoruz. E-ticaret platformları için kullanıcı arayüzü tasarımı, kullanıcı deneyimi optimizasyonu ve conversion rate iyileştirme konularında deneyimli adaylar arayışındayız. User research, wireframing ve prototyping konularında yetkinlik beklenmektedir. E-ticaret özellikleri (ürün sayfaları, sepet, ödeme) tasarlama konularında uzmanlaşma önemlidir. Responsive design, accessibility ve usability testing konularında deneyim gereklidir. Design systems, component libraries ve style guides oluşturma konularında bilgi sahibi olunması beklenmektedir. Bu pozisyonda en az 3 yıl çalışma tecrübesi olan, e-ticaret sektöründe UI/UX tasarım deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
+    "requirements": {
+      "mustHave": [
+        "En az 3 yıl UI/UX tasarım deneyimi",
+        "Figma, Sketch veya Adobe XD bilgisi",
+        "User research ve usability testing",
+        "Wireframing ve prototyping",
+        "Responsive design bilgisi",
+        "E-ticaret platformları deneyimi",
+        "İyi düzeyde İngilizce"
+      ],
+      "niceToHave": [
+        "Conversion rate optimization",
+        "A/B testing deneyimi",
+        "Accessibility (WCAG) standartları",
+        "Design thinking metodolojisi",
+        "User journey mapping"
+      ]
+    },
+    "location": "İstanbul / Hibrit",
+    "salary": "60.000 - 100.000₺",
+    "contractDuration": "6 ay",
+    "daysAgo": 8
+  },
+  {
+    "title": "Data Analyst - YTK Career",
+    "description": "Anlaşmalı olduğumuz e-ticaret projesinde çalışacak veri analisti arıyoruz. Satış verileri analizi, müşteri davranışı incelemesi ve iş zekası raporları hazırlama konularında deneyimli adaylar arayışındayız. SQL sorguları yazma, veri temizleme ve veri görselleştirme konularında yetkinlik beklenmektedir. E-ticaret metrikleri (conversion rate, AOV, retention) analiz etme konularında uzmanlaşma önemlidir. Reporting tools, dashboard creation ve KPI tracking konularında deneyim gereklidir. Data quality, data validation ve data governance konularında bilgi sahibi olunması beklenmektedir. Bu pozisyonda en az 2 yıl çalışma tecrübesi olan, e-ticaret sektöründe veri analizi deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
+    "requirements": {
+      "mustHave": [
+        "En az 2 yıl veri analizi deneyimi",
+        "SQL bilgisi",
+        "Excel ve Google Sheets ileri seviye",
+        "Veri görselleştirme araçları (Tableau, Power BI)",
+        "İstatistiksel analiz bilgisi",
+        "E-ticaret metrikleri bilgisi",
+        "İyi düzeyde İngilizce"
+      ],
+      "niceToHave": [
+        "Python veya R programlama",
+        "Machine Learning temel bilgisi",
+        "Google Analytics deneyimi",
+        "A/B testing deneyimi",
+        "Business intelligence tools"
+      ]
+    },
+    "location": "Ankara / Hibrit",
+    "salary": "55.000 - 95.000₺",
+    "contractDuration": "1 yıl",
+    "daysAgo": 9
+  },
+  {
+    "title": "SEO Specialist - YTK Career",
+    "description": "Anlaşmalı olduğumuz e-ticaret projesinde çalışacak SEO uzmanı arıyoruz. E-ticaret platformları için arama motoru optimizasyonu, içerik stratejisi ve teknik SEO konularında deneyimli adaylar arayışındayız. Keyword research, on-page optimization ve link building konularında yetkinlik beklenmektedir. E-ticaret SEO (ürün sayfaları, kategori sayfaları) konularında uzmanlaşma önemlidir. Technical SEO, site speed optimization ve mobile SEO konularında deneyim gereklidir. Analytics, reporting ve conversion tracking konularında bilgi sahibi olunması beklenmektedir. Bu pozisyonda en az 2 yıl çalışma tecrübesi olan, e-ticaret sektöründe SEO deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
+    "requirements": {
+      "mustHave": [
+        "En az 2 yıl SEO deneyimi",
+        "Keyword research ve analysis",
+        "On-page ve off-page SEO",
+        "Google Analytics ve Search Console",
+        "E-ticaret SEO deneyimi",
+        "İyi düzeyde İngilizce"
+      ],
+      "niceToHave": [
+        "Technical SEO bilgisi",
+        "Content marketing deneyimi",
+        "Link building stratejileri",
+        "Local SEO deneyimi",
+        "SEO tools (Ahrefs, SEMrush)"
+      ]
+    },
+    "location": "İstanbul / Uzaktan",
+    "salary": "50.000 - 90.000₺",
+    "contractDuration": "6 ay",
     "daysAgo": 10
   },
   {
-    "title": "Frontend Developer (Angular) - YTK Career",
-    "description": "E-ticaret projemizde çalışacak Angular frontend geliştiricisi arıyoruz. Online mağaza arayüzleri, admin panelleri ve dashboard geliştirme konularında yeteneklere sahip, Angular, TypeScript ve RxJS teknolojilerinde tecrübeleri elde etmiş, NgRx state management ve Angular Material sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, e-ticaret sektöründe Angular geliştirme deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 2 yıllık olup, YTKN Career'in anlaşmalı olduğu e-ticaret projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "title": "Product Manager - YTK Career",
+    "description": "Anlaşmalı olduğumuz e-ticaret projesinde çalışacak ürün yöneticisi arıyoruz. E-ticaret platformları için ürün stratejisi geliştirme, roadmap planlama ve ürün geliştirme süreçlerini yönetme konularında deneyimli adaylar arayışındayız. Kullanıcı ihtiyaçlarını analiz etme, conversion rate optimization ve ürün metriklerini takip etme konularında yetkinlik beklenmektedir. Stakeholder management, cross-functional collaboration ve prioritization konularında uzmanlaşma önemlidir. Market research, competitive analysis ve user research konularında deneyim gereklidir. Product requirements, user stories ve acceptance criteria oluşturma konularında bilgi sahibi olunması beklenmektedir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, e-ticaret sektöründe ürün yönetimi deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
     "requirements": {
       "mustHave": [
-        "En az 4 yıl Angular geliştirme deneyimi",
-        "TypeScript bilgisi",
-        "E-ticaret veya e-commerce proje deneyimi",
-        "Angular CLI ve RxJS",
-        "NgRx veya NgXS state management",
-        "HTML5, CSS3 ve JavaScript",
-        "RESTful API entegrasyonu",
-        "Git versiyon kontrolü"
+        "En az 4 yıl ürün yönetimi deneyimi",
+        "Product strategy ve roadmap planning",
+        "User research ve market analysis",
+        "Agile ve Scrum metodolojileri",
+        "Stakeholder management",
+        "Analytics ve metrics tracking",
+        "İyi düzeyde İngilizce"
       ],
       "niceToHave": [
-        "Angular Material",
-        "Unit testing (Jasmine, Karma)",
-        "E2E testing (Protractor, Cypress)",
-        "Server-side rendering (Angular Universal)",
-        "PWA development"
+        "E-ticaret domain bilgisi",
+        "Conversion rate optimization",
+        "A/B testing deneyimi",
+        "Data analysis yetenekleri",
+        "Product management sertifikaları"
       ]
     },
-    "location": "Antalya / Hibrit",
-    "salary": "26.000 - 41.000₺",
+    "location": "İstanbul / Hibrit",
+    "salary": "90.000 - 130.000₺",
     "contractDuration": "2 yıl",
     "daysAgo": 11
   },
   {
-    "title": "SEO Specialist - YTK Career",
-    "description": "E-ticaret projemizde çalışacak SEO uzmanı arıyoruz. Online mağaza SEO optimizasyonu, keyword research ve content strategy konularında yeteneklere sahip, Google Analytics, Google Search Console ve SEO araçlarında tecrübeleri elde etmiş, technical SEO ve link building sistemlerinde deneyim göstermiş adaylar tercih edilecektir. Bu pozisyonda en az 3 yıl çalışma tecrübesi olan, e-ticaret sektöründe SEO deneyimi bulunan profesyoneller arıyoruz. Sözleşme süresi 3 yıllık olup, YTKN Career'in anlaşmalı olduğu e-ticaret projesinde çalışacaksınız. Bu maaş pozisyonu için imzalanan sözleşmede 100/1 aylık ytkncareer tarafından sözleşme bedeli şeklinde kesinti olacağından bahset.",
+    "title": "Backend Developer (Node.js) - YTK Career",
+    "description": "Anlaşmalı olduğumuz e-ticaret projesinde çalışacak Node.js geliştiricisi arıyoruz. E-ticaret backend sistemleri, ödeme işleme API'leri ve envanter yönetim servisleri geliştirme konularında deneyimli adaylar arayışındayız. Node.js programlama, Express.js framework ve database technologies konularında yetkinlik beklenmektedir. Ödeme gateway entegrasyonları, sepet yönetimi ve sipariş işleme sistemleri konularında uzmanlaşma önemlidir. Microservices architecture, caching strategies ve background job processing konularında deneyim gereklidir. Performance optimization, scalability ve security best practices konularında bilgi sahibi olunması beklenmektedir. Bu pozisyonda en az 3 yıl çalışma tecrübesi olan, e-ticaret sektöründe Node.js geliştirme deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
     "requirements": {
       "mustHave": [
-        "En az 3 yıl SEO deneyimi",
-        "E-ticaret veya e-commerce SEO deneyimi",
-        "Google Analytics ve Google Search Console",
-        "Keyword research ve analysis",
-        "On-page ve off-page SEO",
-        "Technical SEO bilgisi",
-        "Content strategy",
+        "En az 3 yıl Node.js geliştirme deneyimi",
+        "Express.js framework bilgisi",
+        "MongoDB veya PostgreSQL veritabanı kullanımı",
+        "RESTful API geliştirme",
+        "Git versiyon kontrolü",
         "İyi düzeyde İngilizce"
       ],
       "niceToHave": [
-        "SEO tools (Ahrefs, SEMrush, Moz)",
-        "Link building stratejileri",
-        "Local SEO",
-        "Schema markup",
-        "Conversion rate optimization"
+        "Ödeme gateway entegrasyonları",
+        "TypeScript bilgisi",
+        "Docker ve Kubernetes",
+        "Jest veya Mocha test framework",
+        "Microservices mimarisi bilgisi"
       ]
     },
-    "location": "İstanbul / Uzaktan",
-    "salary": "18.000 - 30.000₺",
-    "contractDuration": "3 yıl",
+    "location": "Bursa / Hibrit",
+    "salary": "60.000 - 100.000₺",
+    "contractDuration": "1 yıl",
     "daysAgo": 12
   }
 ]
