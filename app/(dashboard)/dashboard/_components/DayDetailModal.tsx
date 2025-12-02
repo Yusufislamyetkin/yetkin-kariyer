@@ -1,6 +1,6 @@
 "use client";
 
-import { X, Calendar, Target, BookOpen, Code, Bug, Check, XCircle } from "lucide-react";
+import { X, Calendar, Target, BookOpen, MessageCircle, Users, Check, XCircle } from "lucide-react";
 
 interface DayTaskStatus {
   date: string;
@@ -12,16 +12,16 @@ interface DayTaskStatus {
     login: boolean;
     testSolved: boolean;
     topicCompleted: boolean;
-    liveCodingCompleted: boolean;
-    bugFixCompleted: boolean;
+    socialInteraction: boolean;
+    communityContribution: boolean;
   };
   allTasksCompleted: boolean;
   taskDetails?: {
     login?: { completedAt: string | null };
     testSolved?: { completedAt: string | null; count: number };
     topicCompleted?: { completedAt: string | null; count: number };
-    liveCodingCompleted?: { completedAt: string | null; count: number };
-    bugFixCompleted?: { completedAt: string | null; count: number };
+    socialInteraction?: { completedAt: string | null; count: number };
+    communityContribution?: { completedAt: string | null; count: number };
   };
 }
 
@@ -66,18 +66,18 @@ export function DayDetailModal({ day, onClose }: DayDetailModalProps) {
       details: day.taskDetails?.topicCompleted,
     },
     {
-      key: "liveCodingCompleted",
-      name: "Canlı Kod",
-      icon: Code,
-      completed: day.tasks.liveCodingCompleted,
-      details: day.taskDetails?.liveCodingCompleted,
+      key: "socialInteraction",
+      name: "Sosyal Etkileşim",
+      icon: MessageCircle,
+      completed: day.tasks.socialInteraction,
+      details: day.taskDetails?.socialInteraction,
     },
     {
-      key: "bugFixCompleted",
-      name: "Bug Fix",
-      icon: Bug,
-      completed: day.tasks.bugFixCompleted,
-      details: day.taskDetails?.bugFixCompleted,
+      key: "communityContribution",
+      name: "Topluluğa Katkı",
+      icon: Users,
+      completed: day.tasks.communityContribution,
+      details: day.taskDetails?.communityContribution,
     },
   ];
 
@@ -186,8 +186,8 @@ export function DayDetailModal({ day, onClose }: DayDetailModalProps) {
                           <p className="mt-0.5">
                             {task.key === "testSolved" && `${count} test çözüldü`}
                             {task.key === "topicCompleted" && `${count} konu tamamlandı`}
-                            {task.key === "liveCodingCompleted" && `${count} canlı kod yapıldı`}
-                            {task.key === "bugFixCompleted" && `${count} bug fix yapıldı`}
+                            {task.key === "socialInteraction" && `${count} sosyal etkileşim yapıldı`}
+                            {task.key === "communityContribution" && `${count} topluluk mesajı gönderildi`}
                           </p>
                         )}
                       </div>

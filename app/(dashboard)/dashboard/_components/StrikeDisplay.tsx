@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Flame, Calendar, Target, BookOpen, Code, Bug, Trophy } from "lucide-react";
+import { Flame, Calendar, Target, BookOpen, MessageCircle, Users, Trophy } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { DayDetailModal } from "./DayDetailModal";
 
@@ -15,16 +15,16 @@ interface DayTaskStatus {
     login: boolean;
     testSolved: boolean;
     topicCompleted: boolean;
-    liveCodingCompleted: boolean;
-    bugFixCompleted: boolean;
+    socialInteraction: boolean;
+    communityContribution: boolean;
   };
   allTasksCompleted: boolean;
   taskDetails?: {
     login?: { completedAt: string | null };
     testSolved?: { completedAt: string | null; count: number };
     topicCompleted?: { completedAt: string | null; count: number };
-    liveCodingCompleted?: { completedAt: string | null; count: number };
-    bugFixCompleted?: { completedAt: string | null; count: number };
+    socialInteraction?: { completedAt: string | null; count: number };
+    communityContribution?: { completedAt: string | null; count: number };
   };
 }
 
@@ -36,8 +36,8 @@ interface StrikeData {
     login: boolean;
     testSolved: boolean;
     topicCompleted: boolean;
-    liveCodingCompleted: boolean;
-    bugFixCompleted: boolean;
+    socialInteraction: boolean;
+    communityContribution: boolean;
   };
   weekDays: DayTaskStatus[];
   weeklyProgress: {
@@ -79,8 +79,8 @@ export function StrikeDisplay({ strikeData, loading }: StrikeDisplayProps) {
       login: false,
       testSolved: false,
       topicCompleted: false,
-      liveCodingCompleted: false,
-      bugFixCompleted: false,
+      socialInteraction: false,
+      communityContribution: false,
     },
     weekDays: [],
     weeklyProgress: {
@@ -167,7 +167,7 @@ export function StrikeDisplay({ strikeData, loading }: StrikeDisplayProps) {
             {weekDays.length > 0 ? weekDays.map((day) => {
               const allCompleted = day.allTasksCompleted;
               const hasAnyActivity = day.tasks.login || day.tasks.testSolved || day.tasks.topicCompleted || 
-                                     day.tasks.liveCodingCompleted || day.tasks.bugFixCompleted;
+                                     day.tasks.socialInteraction || day.tasks.communityContribution;
               
               return (
                 <button
@@ -281,39 +281,39 @@ export function StrikeDisplay({ strikeData, loading }: StrikeDisplayProps) {
           </div>
           <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
             <div className={`flex flex-col items-center gap-2 p-2.5 rounded-lg border-2 ${
-              todayCompleted.liveCodingCompleted
+              todayCompleted.socialInteraction
                 ? "bg-cyan-50 dark:bg-cyan-900/20 border-cyan-300 dark:border-cyan-700"
                 : "bg-gray-50 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700"
             }`}>
-              <Code className={`h-5 w-5 ${
-                todayCompleted.liveCodingCompleted
+              <MessageCircle className={`h-5 w-5 ${
+                todayCompleted.socialInteraction
                   ? "text-cyan-600 dark:text-cyan-400"
                   : "text-gray-400 dark:text-gray-500"
               }`} />
               <span className={`text-xs font-medium ${
-                todayCompleted.liveCodingCompleted
+                todayCompleted.socialInteraction
                   ? "text-cyan-700 dark:text-cyan-300"
                   : "text-gray-500 dark:text-gray-400"
               }`}>
-                {todayCompleted.liveCodingCompleted ? "✓ Canlı Kod" : "Canlı Kod"}
+                {todayCompleted.socialInteraction ? "✓ Sosyal" : "Sosyal"}
               </span>
             </div>
             <div className={`flex flex-col items-center gap-2 p-2.5 rounded-lg border-2 ${
-              todayCompleted.bugFixCompleted
+              todayCompleted.communityContribution
                 ? "bg-amber-50 dark:bg-amber-900/20 border-amber-300 dark:border-amber-700"
                 : "bg-gray-50 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700"
             }`}>
-              <Bug className={`h-5 w-5 ${
-                todayCompleted.bugFixCompleted
+              <Users className={`h-5 w-5 ${
+                todayCompleted.communityContribution
                   ? "text-amber-600 dark:text-amber-400"
                   : "text-gray-400 dark:text-gray-500"
               }`} />
               <span className={`text-xs font-medium ${
-                todayCompleted.bugFixCompleted
+                todayCompleted.communityContribution
                   ? "text-amber-700 dark:text-amber-300"
                   : "text-gray-500 dark:text-gray-400"
               }`}>
-                {todayCompleted.bugFixCompleted ? "✓ Bug Fix" : "Bug Fix"}
+                {todayCompleted.communityContribution ? "✓ Topluluk" : "Topluluk"}
               </span>
             </div>
           </div>

@@ -59,6 +59,7 @@ export async function POST(
 
     const questions = quiz.questions as any[];
     let correctCount = 0;
+    let answeredCount = 0;
     const wrongQuestions: Array<{
       questionId: string;
       questionText: string;
@@ -70,20 +71,32 @@ export async function POST(
       const userAnswerIndex = answers[index];
       const correctAnswerIndex = question.correctAnswer;
       
-      if (userAnswerIndex === correctAnswerIndex) {
-        correctCount++;
-      } else {
-        // Yanlış soru bulundu
-        wrongQuestions.push({
-          questionId: question.id || `q-${index}`,
-          questionText: question.question,
-          correctAnswer: question.options[correctAnswerIndex] || String(correctAnswerIndex),
-          userAnswer: question.options[userAnswerIndex] || String(userAnswerIndex),
-        });
+      // Check if answer is empty
+      const isEmpty = userAnswerIndex === -1 || userAnswerIndex === null || userAnswerIndex === undefined;
+      
+      if (!isEmpty) {
+        // Only count non-empty answers
+        answeredCount++;
+        
+        if (userAnswerIndex === correctAnswerIndex) {
+          correctCount++;
+        } else {
+          // Yanlış soru bulundu (sadece cevaplanan sorular için)
+          wrongQuestions.push({
+            questionId: question.id || `q-${index}`,
+            questionText: question.question,
+            correctAnswer: question.options[correctAnswerIndex] || String(correctAnswerIndex),
+            userAnswer: question.options[userAnswerIndex] || String(userAnswerIndex),
+          });
+        }
       }
     });
 
-    const score = Math.round((correctCount / questions.length) * 100);
+    // Calculate score based on answered questions only
+    // If no questions were answered, score is 0
+    const score = answeredCount > 0 
+      ? Math.round((correctCount / answeredCount) * 100)
+      : 0;
 
     const userId = session.user.id as string;
 

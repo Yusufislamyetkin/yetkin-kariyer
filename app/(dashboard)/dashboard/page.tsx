@@ -16,12 +16,14 @@ import {
   Sparkles,
   Compass,
   Plus,
-  Code,
-  Bug,
   Search,
   GraduationCap,
   Coins,
   Trophy,
+  MessageCircle,
+  Users,
+  DollarSign,
+  Medal,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
@@ -40,8 +42,8 @@ interface DashboardStats {
   averageInterviewScore: number;
   completedTopics?: number;
   participatedHackathons?: number;
-  completedLiveCoding?: number;
-  completedBugfix?: number;
+  socialInteractions?: number;
+  communityContributions?: number;
 }
 
 
@@ -312,17 +314,17 @@ export default function DashboardPage() {
       textColor: "text-green-600 dark:text-green-400",
     },
     {
-      title: "Canlı Kodlama",
-      value: stats?.completedLiveCoding || 0,
-      icon: Code,
+      title: "Sosyal Etkileşim",
+      value: stats?.socialInteractions || 0,
+      icon: MessageCircle,
       color: "from-purple-500 to-pink-500",
       bgColor: "bg-purple-50 dark:bg-purple-900/20",
       textColor: "text-purple-600 dark:text-purple-400",
     },
     {
-      title: "Bugfix",
-      value: stats?.completedBugfix || 0,
-      icon: Bug,
+      title: "Topluluğa Katkı",
+      value: stats?.communityContributions || 0,
+      icon: Users,
       color: "from-orange-500 to-red-500",
       bgColor: "bg-orange-50 dark:bg-orange-900/20",
       textColor: "text-orange-600 dark:text-orange-400",
@@ -359,18 +361,18 @@ export default function DashboardPage() {
       color: "from-orange-500 to-red-500",
     },
     {
-      title: "Canlı Kodalama",
-      description: "Kodlama pratiği yapın",
-      href: "/education/cases",
-      icon: Code,
-      color: "from-indigo-500 to-purple-500",
+      title: "En Çok Kazananlar",
+      description: "Kazanç sıralamasını görüntüleyin",
+      href: "/earnings/leaderboard",
+      icon: DollarSign,
+      color: "from-emerald-500 to-teal-500",
     },
     {
-      title: "Bugfix",
-      description: "Hata düzeltme pratiği",
-      href: "/education/bugfix-cases",
-      icon: Bug,
-      color: "from-yellow-500 to-orange-500",
+      title: "Derece Kazancı",
+      description: "Sıralama kazançlarınızı görün",
+      href: "/competition",
+      icon: Medal,
+      color: "from-amber-500 to-yellow-500",
     },
     {
       title: "İş Arama",

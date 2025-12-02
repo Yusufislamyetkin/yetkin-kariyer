@@ -4,6 +4,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
+import ReactMarkdown from "react-markdown";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
 import { Clock, CheckCircle, ChevronLeft, ChevronRight, AlertCircle, ArrowLeft, X, Sparkles, Brain, MessageSquare, Zap, Target, TrendingUp, BookOpen } from "lucide-react";
@@ -460,9 +461,50 @@ export default function TestQuestionsPage() {
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6">
-          <h2 className="text-xl md:text-2xl font-display font-bold text-gray-900 dark:text-gray-100 mb-6 leading-relaxed">
-            {question.question}
-          </h2>
+          <div className="text-xl md:text-2xl font-display font-bold text-gray-900 dark:text-gray-100 mb-6 leading-relaxed">
+            <ReactMarkdown
+              components={{
+                p: ({ children }) => (
+                  <p className="mb-0 leading-relaxed">{children}</p>
+                ),
+                code: ({ children, className }) => {
+                  const isInline = !className;
+                  if (isInline) {
+                    return (
+                      <code className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-base font-mono text-gray-900 dark:text-gray-100">
+                        {children}
+                      </code>
+                    );
+                  }
+                  return (
+                    <code className={className}>{children}</code>
+                  );
+                },
+                pre: ({ children }) => (
+                  <pre className="mb-3 rounded-lg bg-gray-900 dark:bg-gray-950 p-4 overflow-x-auto text-sm text-gray-100 font-mono">
+                    {children}
+                  </pre>
+                ),
+                strong: ({ children }) => (
+                  <strong className="font-bold">{children}</strong>
+                ),
+                em: ({ children }) => (
+                  <em className="italic">{children}</em>
+                ),
+                ul: ({ children }) => (
+                  <ul className="list-disc list-inside mb-2 space-y-1">{children}</ul>
+                ),
+                ol: ({ children }) => (
+                  <ol className="list-decimal list-inside mb-2 space-y-1">{children}</ol>
+                ),
+                li: ({ children }) => (
+                  <li className="leading-relaxed">{children}</li>
+                ),
+              }}
+            >
+              {question.question}
+            </ReactMarkdown>
+          </div>
           <div className="space-y-3">
             {question.options.map((option, index) => {
               const isSelected = answers[currentQuestion] === index;
@@ -476,23 +518,64 @@ export default function TestQuestionsPage() {
                       : "border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 hover:bg-gray-50 dark:hover:bg-gray-800/50"
                   }`}
                 >
-                  <div className="flex items-center gap-4">
-                    <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm transition-all ${
+                  <div className="flex items-start gap-4">
+                    <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm transition-all mt-0.5 ${
                       isSelected
                         ? "bg-purple-600 text-white shadow-lg scale-110"
                         : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400 group-hover:bg-purple-100 dark:group-hover:bg-purple-900/30"
                     }`}>
                       {String.fromCharCode(65 + index)}
                     </div>
-                    <span className={`flex-1 font-medium ${
+                    <div className={`flex-1 font-medium ${
                       isSelected
                         ? "text-purple-900 dark:text-purple-100"
                         : "text-gray-700 dark:text-gray-300"
                     }`}>
-                      {option}
-                    </span>
+                      <ReactMarkdown
+                        components={{
+                          p: ({ children }) => (
+                            <p className="mb-0 leading-relaxed">{children}</p>
+                          ),
+                          code: ({ children, className }) => {
+                            const isInline = !className;
+                            if (isInline) {
+                              return (
+                                <code className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-sm font-mono text-gray-900 dark:text-gray-100">
+                                  {children}
+                                </code>
+                              );
+                            }
+                            return (
+                              <code className={className}>{children}</code>
+                            );
+                          },
+                          pre: ({ children }) => (
+                            <pre className="mb-2 mt-2 rounded-lg bg-gray-900 dark:bg-gray-950 p-3 overflow-x-auto text-xs text-gray-100 font-mono">
+                              {children}
+                            </pre>
+                          ),
+                          strong: ({ children }) => (
+                            <strong className="font-semibold">{children}</strong>
+                          ),
+                          em: ({ children }) => (
+                            <em className="italic">{children}</em>
+                          ),
+                          ul: ({ children }) => (
+                            <ul className="list-disc list-inside mb-1 space-y-0.5 text-sm">{children}</ul>
+                          ),
+                          ol: ({ children }) => (
+                            <ol className="list-decimal list-inside mb-1 space-y-0.5 text-sm">{children}</ol>
+                          ),
+                          li: ({ children }) => (
+                            <li className="leading-relaxed">{children}</li>
+                          ),
+                        }}
+                      >
+                        {option}
+                      </ReactMarkdown>
+                    </div>
                     {isSelected && (
-                      <CheckCircle className="h-5 w-5 text-purple-600 dark:text-purple-400 flex-shrink-0" />
+                      <CheckCircle className="h-5 w-5 text-purple-600 dark:text-purple-400 flex-shrink-0 mt-0.5" />
                     )}
                   </div>
                 </button>

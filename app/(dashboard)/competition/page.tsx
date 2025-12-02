@@ -32,7 +32,7 @@ export default function CompetitionPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [loading, setLoading] = useState(true);
-  const [period, setPeriod] = useState<"daily" | "monthly">("daily");
+  const [period, setPeriod] = useState<"daily" | "weekly" | "monthly">("daily");
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
   const [userRank, setUserRank] = useState<LeaderboardEntry | null>(null);
   const [totals, setTotals] = useState<{ courses: number }>({ courses: 0 });
@@ -137,6 +137,8 @@ export default function CompetitionPage() {
             <p className="text-xs text-gray-500 dark:text-gray-400">
               {period === "daily"
                 ? "Son 24 saatteki performans ortalamaları"
+                : period === "weekly"
+                ? "Bu haftaki performans ortalamaları"
                 : "Son 30 gündeki performans ortalamaları"}
             </p>
           </div>
@@ -144,6 +146,7 @@ export default function CompetitionPage() {
             {(
               [
                 { value: "daily", label: "Günlük" },
+                { value: "weekly", label: "Haftalık" },
                 { value: "monthly", label: "Aylık" },
               ] as const
             ).map(({ value, label }) => {
@@ -185,7 +188,7 @@ export default function CompetitionPage() {
               </div>
               <div>
                 <p className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                  {period === "daily" ? "Günlük" : "Aylık"} Rozet Puanları
+                  {period === "daily" ? "Günlük" : period === "weekly" ? "Haftalık" : "Aylık"} Rozet Puanları
                   Liderlik Tablosu
                 </p>
                 <p className="text-sm text-gray-500 dark:text-gray-400">

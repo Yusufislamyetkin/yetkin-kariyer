@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import ReactMarkdown from "react-markdown";
 import {
   AlertTriangle,
   Brain,
@@ -50,6 +51,7 @@ interface QuizAttempt {
     topic?: string | null;
     level?: string | null;
     questions: QuizQuestion[];
+    content?: any;
     course: {
       id: string;
       title: string;
@@ -95,6 +97,13 @@ interface NextQuiz {
   title: string;
 }
 
+interface NextTest {
+  id: string;
+  title: string;
+  technology: string;
+  module: string;
+}
+
 export default function QuizResultsPage() {
   const params = useParams();
   const [attempt, setAttempt] = useState<QuizAttempt | null>(null);
@@ -105,6 +114,7 @@ export default function QuizResultsPage() {
   const [analysisError, setAnalysisError] = useState<string | null>(null);
   const [achievement, setAchievement] = useState<AchievementPayload | null>(null);
   const [nextQuiz, setNextQuiz] = useState<NextQuiz | null>(null);
+  const [nextTest, setNextTest] = useState<NextTest | null>(null);
   const { showBadges } = useBadgeNotification();
   const { celebrate } = useCelebration();
   const processedBadgeIds = useRef<Set<string>>(new Set());
@@ -206,6 +216,11 @@ export default function QuizResultsPage() {
       if (data.attempt?.quiz?.course?.id) {
         await fetchNextQuiz(data.attempt.quiz.id, data.attempt.quiz.course.id);
       }
+
+      // Fetch next test in module if quiz is a module test
+      if (data.attempt?.quiz && !data.attempt.quiz.course?.id) {
+        await fetchNextTestInModule(data.attempt.quiz);
+      }
     } catch (err) {
       console.error("Error fetching results:", err);
       setError(err instanceof Error ? err.message : "Bilinmeyen bir hata oluştu");
@@ -238,6 +253,146 @@ export default function QuizResultsPage() {
     } catch (err) {
       console.error("Error fetching next quiz:", err);
       // Silently fail - next quiz is optional
+    }
+  };
+
+  const fetchNextTestInModule = async (quiz: QuizAttempt['quiz']) => {
+    try {
+      // Extract technology and module from quiz content or topic
+      let technology: string | null = null;
+      let moduleId: string | null = null;
+
+      // Try to get from content field
+      if (quiz.content && typeof quiz.content === 'object') {
+        const content = quiz.content as any;
+        if (content.technology) {
+          technology = content.technology;
+        }
+        // Check if content has modules array
+        if (content.modules && Array.isArray(content.modules) && content.modules.length > 0) {
+          // Try to find which module this quiz belongs to by checking relatedTests
+          for (const mod of content.modules) {
+            if (mod.relatedTests && Array.isArray(mod.relatedTests)) {
+              // Check if quiz ID matches any test in this module
+              const matchingTest = mod.relatedTests.find((test: any) => {
+                // Try various matching strategies
+                if (test.id === quiz.id) return true;
+                // Quiz ID might be like "test-{tech}-{module}-{testId}" or just the testId
+                const quizIdLower = quiz.id.toLowerCase();
+                const testIdLower = (test.id || '').toLowerCase();
+                if (quizIdLower.includes(testIdLower) || testIdLower.includes(quizIdLower)) {
+                  return true;
+                }
+                // Try matching last part of quiz ID
+                const quizIdParts = quiz.id.split('-');
+                if (quizIdParts.length > 0 && test.id === quizIdParts[quizIdParts.length - 1]) {
+                  return true;
+                }
+                return false;
+              });
+              if (matchingTest) {
+                moduleId = mod.id;
+                break;
+              }
+            }
+          }
+          // If no match found but we have modules, use first module as fallback
+          if (!moduleId && content.modules.length > 0) {
+            moduleId = content.modules[0]?.id || null;
+          }
+        }
+      }
+
+      // If technology not found, try to extract from topic
+      if (!technology && quiz.topic) {
+        technology = quiz.topic;
+      }
+
+      // If still not found, try to extract from quiz ID
+      if (!technology) {
+        // Quiz IDs might contain technology name
+        // This is a fallback - ideally content should have this info
+        const quizIdLower = quiz.id.toLowerCase();
+        // Try common patterns
+        if (quizIdLower.includes('dotnet') || quizIdLower.includes('net-core')) {
+          technology = '.NET Core';
+        } else if (quizIdLower.includes('react')) {
+          technology = 'React';
+        } else if (quizIdLower.includes('angular')) {
+          technology = 'Angular';
+        } else if (quizIdLower.includes('nodejs') || quizIdLower.includes('node')) {
+          technology = 'Node.js';
+        }
+        // Add more as needed
+      }
+
+      if (!technology || !moduleId) {
+        // Cannot determine technology or module
+        return;
+      }
+
+      // Normalize technology name for route
+      // Remove special characters and convert to route format
+      const normalizedTech = technology.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, '-');
+      const technologyRoute = `tests-${normalizedTech}`;
+      const encodedTechnology = encodeURIComponent(technologyRoute);
+      const encodedModule = encodeURIComponent(moduleId);
+
+      // Fetch all tests in the module
+      const testsResponse = await fetch(`/api/education/tests/${encodedTechnology}/${encodedModule}/tests`);
+      if (!testsResponse.ok) {
+        return;
+      }
+      const testsData = await testsResponse.json();
+      const tests = testsData.tests || [];
+
+      if (tests.length === 0) {
+        return;
+      }
+
+      // Find current test by matching quiz ID
+      // Try various matching strategies
+      let currentTestIndex = -1;
+      for (let i = 0; i < tests.length; i++) {
+        const test = tests[i];
+        // Direct match
+        if (test.id === quiz.id) {
+          currentTestIndex = i;
+          break;
+        }
+        // Quiz ID might contain test ID
+        const quizIdLower = quiz.id.toLowerCase();
+        const testIdLower = (test.id || '').toLowerCase();
+        if (quizIdLower.includes(testIdLower) || testIdLower.includes(quizIdLower)) {
+          currentTestIndex = i;
+          break;
+        }
+        // Try matching last part of quiz ID
+        const quizIdParts = quiz.id.split('-');
+        if (quizIdParts.length > 0 && test.id === quizIdParts[quizIdParts.length - 1]) {
+          currentTestIndex = i;
+          break;
+        }
+        // Try matching by title similarity (fallback)
+        if (quiz.title && test.title && quiz.title.toLowerCase().includes(test.title.toLowerCase())) {
+          currentTestIndex = i;
+          break;
+        }
+      }
+
+      // Get next test
+      if (currentTestIndex >= 0 && currentTestIndex < tests.length - 1) {
+        const nextTestData = tests[currentTestIndex + 1];
+        setNextTest({
+          id: nextTestData.id,
+          title: nextTestData.title,
+          technology: encodedTechnology,
+          module: encodedModule,
+        });
+      }
+    } catch (err) {
+      console.error("Error fetching next test in module:", err);
+      // Silently fail - next test is optional
     }
   };
 
@@ -370,13 +525,35 @@ export default function QuizResultsPage() {
   const newBadges = achievement?.badgeResults?.newlyEarnedBadges ?? [];
   const completedGoals = achievement?.goalResults?.completedGoals ?? [];
   const totalQuestions = attempt.quiz.questions.length;
-  const correctCount = attempt.answers.reduce((count, userAnswer, index) => {
-    const correctAnswer = attempt.quiz.questions[index]?.correctAnswer;
-    return userAnswer === correctAnswer ? count + 1 : count;
-  }, 0);
-  const incorrectCount = Math.max(totalQuestions - correctCount, 0);
-  const accuracy =
-    totalQuestions > 0 ? Math.round((correctCount / totalQuestions) * 100) : attempt.score;
+  
+  // Calculate statistics with proper empty question handling
+  let correctCount = 0;
+  let incorrectCount = 0;
+  let emptyCount = 0;
+  let answeredCount = 0;
+  
+  attempt.answers.forEach((userAnswer, index) => {
+    const question = attempt.quiz.questions[index];
+    if (!question) return;
+    
+    const isEmpty = userAnswer === -1 || userAnswer === null || userAnswer === undefined;
+    
+    if (isEmpty) {
+      emptyCount++;
+    } else {
+      answeredCount++;
+      if (userAnswer === question.correctAnswer) {
+        correctCount++;
+      } else {
+        incorrectCount++;
+      }
+    }
+  });
+  
+  // Calculate accuracy based on answered questions only
+  const accuracy = answeredCount > 0 
+    ? Math.round((correctCount / answeredCount) * 100)
+    : 0;
   const averageTimePerQuestionSeconds =
     attempt.duration && totalQuestions > 0
       ? Math.round((attempt.duration ?? 0) / totalQuestions)
@@ -390,20 +567,29 @@ export default function QuizResultsPage() {
 
   const topicStatsMap = new Map<
     string,
-    { total: number; correct: number; wrong: number }
+    { total: number; correct: number; wrong: number; empty: number; answered: number }
   >();
 
   attempt.quiz.questions.forEach((question, index) => {
     const topicKey = question.topic ?? "Genel";
     if (!topicStatsMap.has(topicKey)) {
-      topicStatsMap.set(topicKey, { total: 0, correct: 0, wrong: 0 });
+      topicStatsMap.set(topicKey, { total: 0, correct: 0, wrong: 0, empty: 0, answered: 0 });
     }
     const entry = topicStatsMap.get(topicKey)!;
     entry.total += 1;
-    if (attempt.answers[index] === question.correctAnswer) {
-      entry.correct += 1;
+    
+    const userAnswer = attempt.answers[index];
+    const isEmpty = userAnswer === -1 || userAnswer === null || userAnswer === undefined;
+    
+    if (isEmpty) {
+      entry.empty += 1;
     } else {
-      entry.wrong += 1;
+      entry.answered += 1;
+      if (userAnswer === question.correctAnswer) {
+        entry.correct += 1;
+      } else {
+        entry.wrong += 1;
+      }
     }
   });
 
@@ -412,7 +598,9 @@ export default function QuizResultsPage() {
     total: data.total,
     correct: data.correct,
     wrong: data.wrong,
-    accuracy: data.total > 0 ? Math.round((data.correct / data.total) * 100) : 0,
+    empty: data.empty,
+    answered: data.answered,
+    accuracy: data.answered > 0 ? Math.round((data.correct / data.answered) * 100) : 0,
   }));
 
   const strongestTopic = topicStats
@@ -537,7 +725,7 @@ export default function QuizResultsPage() {
             </p>
             <p className="mt-2 text-2xl font-bold text-slate-900 dark:text-slate-100">%{accuracy}</p>
             <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-              {correctCount} doğru / {totalQuestions} soru
+              {correctCount} doğru / {answeredCount} cevaplanan
             </p>
           </div>
           <div className="rounded-2xl border border-white/60 bg-white/80 p-4 shadow-sm backdrop-blur-sm dark:border-slate-700/50 dark:bg-slate-900/60">
@@ -548,7 +736,7 @@ export default function QuizResultsPage() {
               {incorrectCount}
             </p>
             <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-              Doğruya en yakın konular için AI analizi önerileri
+              {emptyCount > 0 ? `${emptyCount} boş soru var` : "Doğruya en yakın konular için AI analizi önerileri"}
             </p>
           </div>
           <div className="rounded-2xl border border-white/60 bg-white/80 p-4 shadow-sm backdrop-blur-sm dark:border-slate-700/50 dark:bg-slate-900/60">
@@ -649,7 +837,7 @@ export default function QuizResultsPage() {
               {totalQuestions} soru
             </p>
             <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-              {correctCount} doğru • {incorrectCount} yanlış
+              {correctCount} doğru • {incorrectCount} yanlış{emptyCount > 0 ? ` • ${emptyCount} boş` : ''}
             </p>
           </div>
           <div className="rounded-2xl border border-white/60 bg-white/80 p-4 shadow-sm backdrop-blur-sm dark:border-slate-700/50 dark:bg-slate-900/60">
@@ -1024,9 +1212,50 @@ export default function QuizResultsPage() {
                   </span>
                 </div>
 
-                <p className="mb-4 text-sm text-gray-800 dark:text-gray-200">
-                  {question.question}
-                </p>
+                <div className="mb-4 text-sm text-gray-800 dark:text-gray-200">
+                  <ReactMarkdown
+                    components={{
+                      p: ({ children }) => (
+                        <p className="mb-0 leading-relaxed">{children}</p>
+                      ),
+                      code: ({ children, className }) => {
+                        const isInline = !className;
+                        if (isInline) {
+                          return (
+                            <code className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-sm font-mono text-gray-900 dark:text-gray-100">
+                              {children}
+                            </code>
+                          );
+                        }
+                        return (
+                          <code className={className}>{children}</code>
+                        );
+                      },
+                      pre: ({ children }) => (
+                        <pre className="mb-2 mt-2 rounded-lg bg-gray-900 dark:bg-gray-950 p-3 overflow-x-auto text-xs text-gray-100 font-mono">
+                          {children}
+                        </pre>
+                      ),
+                      strong: ({ children }) => (
+                        <strong className="font-semibold">{children}</strong>
+                      ),
+                      em: ({ children }) => (
+                        <em className="italic">{children}</em>
+                      ),
+                      ul: ({ children }) => (
+                        <ul className="list-disc list-inside mb-1 space-y-0.5 text-sm">{children}</ul>
+                      ),
+                      ol: ({ children }) => (
+                        <ol className="list-decimal list-inside mb-1 space-y-0.5 text-sm">{children}</ol>
+                      ),
+                      li: ({ children }) => (
+                        <li className="leading-relaxed">{children}</li>
+                      ),
+                    }}
+                  >
+                    {question.question}
+                  </ReactMarkdown>
+                </div>
 
                 <div className="space-y-2">
                   {question.options.map((option, optIndex) => {
@@ -1043,7 +1272,48 @@ export default function QuizResultsPage() {
                             : "border-gray-200 bg-white text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300"
                         }`}
                       >
-                        {option}
+                        <ReactMarkdown
+                          components={{
+                            p: ({ children }) => (
+                              <p className="mb-0 leading-relaxed">{children}</p>
+                            ),
+                            code: ({ children, className }) => {
+                              const isInline = !className;
+                              if (isInline) {
+                                return (
+                                  <code className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-xs font-mono text-gray-900 dark:text-gray-100">
+                                    {children}
+                                  </code>
+                                );
+                              }
+                              return (
+                                <code className={className}>{children}</code>
+                              );
+                            },
+                            pre: ({ children }) => (
+                              <pre className="mb-2 mt-2 rounded-lg bg-gray-900 dark:bg-gray-950 p-3 overflow-x-auto text-xs text-gray-100 font-mono">
+                                {children}
+                              </pre>
+                            ),
+                            strong: ({ children }) => (
+                              <strong className="font-semibold">{children}</strong>
+                            ),
+                            em: ({ children }) => (
+                              <em className="italic">{children}</em>
+                            ),
+                            ul: ({ children }) => (
+                              <ul className="list-disc list-inside mb-1 space-y-0.5 text-xs">{children}</ul>
+                            ),
+                            ol: ({ children }) => (
+                              <ol className="list-decimal list-inside mb-1 space-y-0.5 text-xs">{children}</ol>
+                            ),
+                            li: ({ children }) => (
+                              <li className="leading-relaxed">{children}</li>
+                            ),
+                          }}
+                        >
+                          {option}
+                        </ReactMarkdown>
                       </div>
                     );
                   })}
@@ -1071,6 +1341,14 @@ export default function QuizResultsPage() {
           <Link href={`/education/quiz/${nextQuiz.id}`}>
             <Button variant="primary" className="flex items-center gap-2">
               Sonraki Test
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          </Link>
+        )}
+        {nextTest && (
+          <Link href={`/education/tests/${nextTest.technology}/${nextTest.module}/${nextTest.id}`}>
+            <Button variant="primary" className="flex items-center gap-2">
+              Modüldeki Sonraki Test
               <ArrowRight className="h-4 w-4" />
             </Button>
           </Link>

@@ -15,7 +15,23 @@ export async function GET() {
 
     const userId = session.user.id as string;
 
-    const [quizAttempts, testAttempts, interviewAttempts, cvs, applications, completedTopics, hackathonMemberships, liveCodingAttempts, bugFixAttempts] = await Promise.all([
+    // Community group slugs for filtering
+    const COMMUNITY_SLUGS = [
+      "dotnet-core-community",
+      "java-community",
+      "mssql-community",
+      "react-community",
+      "angular-community",
+      "nodejs-community",
+      "ai-community",
+      "flutter-community",
+      "ethical-hacking-community",
+      "nextjs-community",
+      "docker-kubernetes-community",
+      "owasp-community",
+    ];
+
+    const [quizAttempts, testAttempts, interviewAttempts, cvs, applications, completedTopics, hackathonMemberships, posts, comments, communityMessages] = await Promise.all([
       db.quizAttempt.findMany({
         where: { userId },
         select: { score: true },
@@ -53,12 +69,21 @@ export async function GET() {
           },
         },
       }),
-      db.liveCodingAttempt.findMany({
+      db.post.findMany({
         where: { userId },
         select: { id: true },
       }),
-      db.bugFixAttempt.findMany({
+      db.postComment.findMany({
         where: { userId },
+        select: { id: true },
+      }),
+      db.chatMessage.findMany({
+        where: {
+          userId,
+          group: {
+            slug: { in: COMMUNITY_SLUGS },
+          },
+        },
         select: { id: true },
       }),
     ]);
@@ -82,6 +107,9 @@ export async function GET() {
     );
     const participatedHackathons = distinctHackathonIds.size;
 
+    // Calculate social interactions (posts + comments)
+    const socialInteractions = posts.length + comments.length;
+
     return NextResponse.json({
       stats: {
         quizAttempts: quizAttempts.length,
@@ -93,8 +121,8 @@ export async function GET() {
         averageInterviewScore: Math.round(averageInterviewScore),
         completedTopics: completedTopics.length,
         participatedHackathons,
-        completedLiveCoding: liveCodingAttempts.length,
-        completedBugfix: bugFixAttempts.length,
+        socialInteractions,
+        communityContributions: communityMessages.length,
       },
     });
   } catch (error) {

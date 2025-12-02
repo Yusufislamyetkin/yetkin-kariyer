@@ -22,14 +22,41 @@ function loadJobTemplates() {
   for (const file of jobFiles) {
     try {
       const filePath = path.join(process.cwd(), 'app', 'api', 'admin', 'seed-jobs', file);
+      
+      // Dosyanın var olup olmadığını kontrol et
+      if (!fs.existsSync(filePath)) {
+        console.error(`❌ Dosya bulunamadı: ${filePath}`);
+        continue;
+      }
+
       const fileContent = fs.readFileSync(filePath, 'utf-8');
+      
+      // Dosya boş mu kontrol et
+      if (!fileContent || fileContent.trim().length === 0) {
+        console.error(`❌ Dosya boş: ${file}`);
+        continue;
+      }
+
       const jobs = JSON.parse(fileContent);
+      
+      // JSON'un array olup olmadığını kontrol et
+      if (!Array.isArray(jobs)) {
+        console.error(`❌ ${file} geçerli bir array içermiyor`);
+        continue;
+      }
+
+      console.log(`✅ ${file}: ${jobs.length} adet iş ilanı yüklendi`);
       allJobs.push(...jobs);
-    } catch (error) {
-      console.error(`Error loading ${file}:`, error);
+    } catch (error: any) {
+      console.error(`❌ Error loading ${file}:`, error);
+      console.error(`   Error message: ${error.message}`);
+      if (error.stack) {
+        console.error(`   Stack: ${error.stack}`);
+      }
     }
   }
 
+  console.log(`📊 Toplam ${allJobs.length} adet iş ilanı şablonu yüklendi`);
   return allJobs;
 }
 
@@ -72,7 +99,35 @@ export async function POST() {
     // JSON dosyalarından tüm iş ilanlarını yükle
     const jobTemplates = loadJobTemplates();
 
-    console.log(`Toplam ${jobTemplates.length} adet iş ilanı şablonu yüklendi`);
+    // Eğer hiç iş ilanı yüklenmediyse hata döndür
+    if (jobTemplates.length === 0) {
+      return NextResponse.json(
+        { 
+          success: false,
+          created: 0,
+          error: "Hiç iş ilanı şablonu yüklenemedi. JSON dosyalarını kontrol edin." 
+        },
+        { status: 400 }
+      );
+    }
+
+    console.log(`📋 Toplam ${jobTemplates.length} adet iş ilanı şablonu yüklendi`);
+
+    // Mevcut YTK Career iş ilanlarını sil (title'da "YTK Career" geçenler)
+    try {
+      const deletedJobs = await db.job.deleteMany({
+        where: {
+          title: {
+            contains: "YTK Career",
+            mode: "insensitive"
+          }
+        }
+      });
+      console.log(`🗑️  ${deletedJobs.count} adet mevcut YTK Career iş ilanı silindi`);
+    } catch (deleteError: any) {
+      console.error("❌ Mevcut iş ilanları silinirken hata:", deleteError);
+      errors.push(`Mevcut iş ilanları silinirken hata: ${deleteError.message}`);
+    }
 
     // İş ilanlarını oluştur
     for (const jobTemplate of jobTemplates) {

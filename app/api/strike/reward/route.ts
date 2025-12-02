@@ -54,12 +54,29 @@ export async function POST() {
     // Determine the start date for checking
     const checkStartDate = registrationDate > monday ? registrationDate : monday;
 
+    // Community group slugs for filtering
+    const COMMUNITY_SLUGS = [
+      "dotnet-core-community",
+      "java-community",
+      "mssql-community",
+      "react-community",
+      "angular-community",
+      "nodejs-community",
+      "ai-community",
+      "flutter-community",
+      "ethical-hacking-community",
+      "nextjs-community",
+      "docker-kubernetes-community",
+      "owasp-community",
+    ];
+
     // Fetch all activities for the week
     const [
       weekQuizAttempts,
       weekTopicCompletions,
-      weekLiveCodingAttempts,
-      weekBugFixAttempts,
+      weekPosts,
+      weekComments,
+      weekCommunityMessages,
       weekUserStreakUpdates,
     ] = await Promise.all([
       db.quizAttempt.findMany({
@@ -86,28 +103,43 @@ export async function POST() {
           completedAt: true,
         },
       }),
-      db.liveCodingAttempt.findMany({
+      db.post.findMany({
         where: {
           userId,
-          completedAt: {
+          createdAt: {
             gte: checkStartDate,
             lte: sunday,
           },
         },
         select: {
-          completedAt: true,
+          createdAt: true,
         },
       }),
-      db.bugFixAttempt.findMany({
+      db.postComment.findMany({
         where: {
           userId,
-          completedAt: {
+          createdAt: {
             gte: checkStartDate,
             lte: sunday,
           },
         },
         select: {
-          completedAt: true,
+          createdAt: true,
+        },
+      }),
+      db.chatMessage.findMany({
+        where: {
+          userId,
+          createdAt: {
+            gte: checkStartDate,
+            lte: sunday,
+          },
+          group: {
+            slug: { in: COMMUNITY_SLUGS },
+          },
+        },
+        select: {
+          createdAt: true,
         },
       }),
       db.userStreak.findUnique({
@@ -123,8 +155,8 @@ export async function POST() {
         login: boolean;
         testSolved: boolean;
         topicCompleted: boolean;
-        liveCodingCompleted: boolean;
-        bugFixCompleted: boolean;
+        socialInteraction: boolean;
+        communityContribution: boolean;
       };
     }> = [];
 
@@ -173,19 +205,23 @@ export async function POST() {
       });
       const hasTopicCompleted = dayTopicCompletions.length > 0;
 
-      // Check live coding completed
-      const dayLiveCodingAttempts = weekLiveCodingAttempts.filter((attempt: { completedAt: Date | string }) => {
-        const attemptDate = new Date(attempt.completedAt);
-        return attemptDate >= dayStart && attemptDate <= dateEnd;
+      // Check social interaction (post or comment)
+      const dayPosts = weekPosts.filter((post: { createdAt: Date | string }) => {
+        const postDate = new Date(post.createdAt);
+        return postDate >= dayStart && postDate <= dateEnd;
       });
-      const hasLiveCodingCompleted = dayLiveCodingAttempts.length > 0;
+      const dayComments = weekComments.filter((comment: { createdAt: Date | string }) => {
+        const commentDate = new Date(comment.createdAt);
+        return commentDate >= dayStart && commentDate <= dateEnd;
+      });
+      const hasSocialInteraction = dayPosts.length > 0 || dayComments.length > 0;
 
-      // Check bug fix completed
-      const dayBugFixAttempts = weekBugFixAttempts.filter((attempt: { completedAt: Date | string }) => {
-        const attemptDate = new Date(attempt.completedAt);
-        return attemptDate >= dayStart && attemptDate <= dateEnd;
+      // Check community contribution (message in community group)
+      const dayCommunityMessages = weekCommunityMessages.filter((message: { createdAt: Date | string }) => {
+        const messageDate = new Date(message.createdAt);
+        return messageDate >= dayStart && messageDate <= dateEnd;
       });
-      const hasBugFixCompleted = dayBugFixAttempts.length > 0;
+      const hasCommunityContribution = dayCommunityMessages.length > 0;
 
       daysToCheck.push({
         date,
@@ -193,8 +229,8 @@ export async function POST() {
           login: hasLogin,
           testSolved: hasTestSolved,
           topicCompleted: hasTopicCompleted,
-          liveCodingCompleted: hasLiveCodingCompleted,
-          bugFixCompleted: hasBugFixCompleted,
+          socialInteraction: hasSocialInteraction,
+          communityContribution: hasCommunityContribution,
         },
       });
     }
@@ -205,8 +241,8 @@ export async function POST() {
         day.tasks.login &&
         day.tasks.testSolved &&
         day.tasks.topicCompleted &&
-        day.tasks.liveCodingCompleted &&
-        day.tasks.bugFixCompleted
+        day.tasks.socialInteraction &&
+        day.tasks.communityContribution
       );
     });
 
@@ -234,8 +270,8 @@ export async function POST() {
             day.tasks.login &&
             day.tasks.testSolved &&
             day.tasks.topicCompleted &&
-            day.tasks.liveCodingCompleted &&
-            day.tasks.bugFixCompleted
+            day.tasks.socialInteraction &&
+            day.tasks.communityContribution
           );
         }).length,
         totalDays: daysToCheck.length,
@@ -329,4 +365,5 @@ export async function POST() {
     return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
+
 

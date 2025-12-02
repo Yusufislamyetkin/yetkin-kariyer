@@ -68,6 +68,11 @@ export async function applyRules(event: Event) {
 			xpDelta = 60;
 			break;
 		}
+		case "daily_strike_completed": {
+			pointsDelta = 100;
+			xpDelta = 100;
+			break;
+		}
 		default:
 			break;
 	}

@@ -34,13 +34,19 @@ export async function GET() {
 		]);
 		
 		// Calculate total points from badges
-		const totalPoints = badges.reduce((sum: number, userBadge: typeof badges[0]) => sum + (userBadge.badge.points || 0), 0);
+		const badgePoints = badges.reduce((sum: number, userBadge: typeof badges[0]) => sum + (userBadge.badge.points || 0), 0);
+		
+		// Add strike points and other activity points from UserBalance
+		const balancePoints = balance?.points ?? 0;
+		
+		// Total points = badge points + strike/activity points
+		const totalPoints = badgePoints + balancePoints;
 		
 		// Calculate level from total points
 		const calculatedLevel = calculateLevelFromPoints(totalPoints);
 		
 		return NextResponse.json({
-			points: totalPoints, // Use total badge points instead of balance.points
+			points: totalPoints, // Badge points + strike/activity points
 			xp: balance?.lifetimeXp ?? 0,
 			level: calculatedLevel, // Calculate level from points
 			streak: {

@@ -73,7 +73,7 @@ function DashboardLayoutContent({
   children: React.ReactNode;
   session: any;
 }) {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set());
   const pathname = usePathname();
@@ -87,13 +87,21 @@ function DashboardLayoutContent({
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
-      if (window.innerWidth >= 1024) {
+      const mobile = window.innerWidth < 1024;
+      setIsMobile(mobile);
+      // On desktop, keep sidebar state; on mobile, close it
+      if (mobile) {
         setSidebarOpen(false);
       }
     };
 
-    checkMobile();
+    // Initialize based on screen size
+    if (typeof window !== "undefined") {
+      const mobile = window.innerWidth < 1024;
+      setIsMobile(mobile);
+      setSidebarOpen(!mobile);
+    }
+
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
@@ -358,10 +366,10 @@ function DashboardLayoutContent({
     <CelebrationProvider>
       <BadgeNotificationProvider>
         <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-purple-50/30 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-200">
-      {/* Mobile sidebar overlay */}
+      {/* Sidebar overlay */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-40 lg:hidden backdrop-blur-sm"
+          className="fixed inset-0 bg-black/50 z-40 backdrop-blur-sm"
           onClick={() => setSidebarOpen(false)}
         />
       )}
@@ -370,7 +378,7 @@ function DashboardLayoutContent({
       <aside
         className={`fixed top-0 left-0 z-50 h-screen w-64 glass border-r border-gray-200/50 dark:border-gray-700/50 transition-transform duration-300 ease-in-out ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } lg:translate-x-0`}
+        }`}
       >
         <div className="flex flex-col h-full">
           {/* Logo */}
@@ -383,7 +391,7 @@ function DashboardLayoutContent({
             </Link>
             <button
               onClick={() => setSidebarOpen(false)}
-              className="lg:hidden text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors flex-shrink-0 min-w-[24px]"
+              className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors flex-shrink-0 min-w-[24px]"
             >
               <X className="h-6 w-6" />
             </button>
@@ -507,9 +515,9 @@ function DashboardLayoutContent({
       </aside>
 
       {/* Main content */}
-      <div className="lg:pl-64">
-        {/* Mobile menu button - only visible on mobile */}
-        <div className="lg:hidden sticky top-0 z-30 bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg border-b border-gray-200/50 dark:border-gray-700/50 min-w-0">
+      <div className={sidebarOpen ? "lg:pl-64" : ""}>
+        {/* Header with menu button */}
+        <div className="sticky top-0 z-30 bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg border-b border-gray-200/50 dark:border-gray-700/50 min-w-0 pt-4">
           <div className="flex items-center justify-between h-14 px-4 min-w-0">
             <button
               onClick={() => setSidebarOpen(true)}

@@ -7,7 +7,6 @@ import { useSession } from "next-auth/react";
 import {
   Award,
   Trophy,
-  Mail,
   Shield,
   Clock,
   Star,
@@ -16,7 +15,6 @@ import {
   Activity,
   Users,
   Target,
-  Copy,
   Check,
   UserPlus,
   XCircle,
@@ -112,6 +110,7 @@ interface Comment {
 interface LeaderboardEntry {
   rank: number;
   compositeScore: number;
+  points: number;
   metrics: {
     topicCompletion: number;
     test: number;
@@ -136,7 +135,6 @@ export default function PublicProfilePage() {
   const [monthlyRank, setMonthlyRank] = useState<LeaderboardEntry | null>(null);
   const [connectionsCount, setConnectionsCount] = useState(0);
   const [categoryRankings, setCategoryRankings] = useState<Record<string, number>>({});
-  const [idCopied, setIdCopied] = useState(false);
   const [friendRequestState, setFriendRequestState] = useState<{
     status: "idle" | "loading" | "success" | "error";
     message: string | null;
@@ -237,6 +235,7 @@ export default function PublicProfilePage() {
             setDailyRank({
               rank: dailyData.userRank.rank,
               compositeScore: dailyData.userRank.compositeScore,
+              points: dailyData.userRank.points || 0,
               metrics: dailyData.userRank.metrics,
             });
           }
@@ -248,6 +247,7 @@ export default function PublicProfilePage() {
             setWeeklyRank({
               rank: weeklyData.userRank.rank,
               compositeScore: weeklyData.userRank.compositeScore,
+              points: weeklyData.userRank.points || 0,
               metrics: weeklyData.userRank.metrics,
             });
           }
@@ -259,6 +259,7 @@ export default function PublicProfilePage() {
             setMonthlyRank({
               rank: monthlyData.userRank.rank,
               compositeScore: monthlyData.userRank.compositeScore,
+              points: monthlyData.userRank.points || 0,
               metrics: monthlyData.userRank.metrics,
             });
           }
@@ -383,22 +384,6 @@ export default function PublicProfilePage() {
       message: null,
     });
   }, [params?.userId]);
-
-  const handleCopyUserId = () => {
-    if (typeof navigator === "undefined" || !profile?.user?.id) {
-      return;
-    }
-
-    navigator.clipboard
-      .writeText(profile.user.id)
-      .then(() => {
-        setIdCopied(true);
-        window.setTimeout(() => setIdCopied(false), 2000);
-      })
-      .catch((err) => {
-        console.error("Failed to copy user id:", err);
-      });
-  };
 
   const handleSendFriendRequest = async () => {
     if (!profile?.user?.id) {
@@ -699,36 +684,10 @@ export default function PublicProfilePage() {
                   <h1 className="text-3xl md:text-4xl font-display font-semibold tracking-tight">
                     {profile.user.name || "İsimsiz Yetek"}
                   </h1>
-                  <p className="text-white/80 flex items-center gap-2 mt-2 text-sm md:text-base">
-                    <Mail className="h-4 w-4" />
-                    {profile.user.email}
-                  </p>
                   <p className="text-white/70 flex items-center gap-2 mt-1 text-sm">
                     <Shield className="h-4 w-4" />
                     {profile.user.role}
                   </p>
-                  <div className="mt-3 flex flex-wrap items-center gap-2 text-xs md:text-sm text-white/80">
-                    <span className="font-mono rounded-md border border-white/20 bg-white/10 px-2.5 py-1">
-                      {profile.user.id}
-                    </span>
-                    <button
-                      type="button"
-                      onClick={handleCopyUserId}
-                      className="inline-flex items-center gap-1 rounded-full border border-white/30 bg-white/10 px-3 py-1 font-medium transition hover:bg-white/20"
-                    >
-                      {idCopied ? (
-                        <>
-                          <Check className="h-3.5 w-3.5" />
-                          Kopyalandı
-                        </>
-                      ) : (
-                        <>
-                          <Copy className="h-3.5 w-3.5" />
-                          ID’yi Kopyala
-                        </>
-                      )}
-                    </button>
-                  </div>
                 </div>
                 {displayedBadges.length > 0 && (
                   <div className="mt-4">
@@ -851,6 +810,71 @@ export default function PublicProfilePage() {
         })}
       </div>
 
+      {/* Level Progress Bar - Same design as /profile page */}
+      {(() => {
+        // Calculate level from points using the same formula as UserStats
+        const pointsForLevel = (lvl: number): number => {
+          if (lvl <= 1) return 0;
+          return Math.floor(25 * lvl * (lvl + 3));
+        };
+        
+        const calculateLevelFromPoints = (totalPoints: number): number => {
+          if (totalPoints < 100) return 1;
+          let level = 1;
+          while (pointsForLevel(level + 1) <= totalPoints) {
+            level += 1;
+            if (level > 1000) break;
+          }
+          return level;
+        };
+
+        const totalPoints = profile.stats.totalPoints || 0;
+        const level = calculateLevelFromPoints(totalPoints);
+        const pointsForCurrentLevel = pointsForLevel(level);
+        const pointsForNextLevel = pointsForLevel(level + 1);
+        const pointsNeeded = pointsForNextLevel - pointsForCurrentLevel;
+        const pointsProgress = totalPoints - pointsForCurrentLevel;
+        const progressPercentage = Math.min((pointsProgress / pointsNeeded) * 100, 100);
+
+        return (
+          <Card variant="gradient" className="relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20" />
+            <CardContent className="relative p-6 pt-8">
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center shadow-lg">
+                    <Trophy className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                      Seviye İlerlemesi
+                    </h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      Seviye {level} → {level + 1}
+                    </p>
+                  </div>
+                </div>
+                <span className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                  %{Math.round(progressPercentage)}
+                </span>
+              </div>
+              <div className="w-full h-4 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden shadow-inner">
+                <div
+                  className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full transition-all duration-500 ease-out shadow-lg relative"
+                  style={{ width: `${progressPercentage}%` }}
+                >
+                  <div className="h-full w-full bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer" />
+                </div>
+              </div>
+              <div className="flex items-center justify-between mt-2 text-xs text-gray-500 dark:text-gray-400">
+                <span>{pointsProgress} Puan</span>
+                <span>{pointsNeeded} Puan gerekli</span>
+              </div>
+            </CardContent>
+          </Card>
+        );
+      })()}
+
       <div className="grid lg:grid-cols-2 gap-6">
         <Card variant="elevated" className="border border-gray-200 dark:border-gray-800">
           <CardHeader className="border-b border-gray-200 dark:border-gray-800">
@@ -860,11 +884,22 @@ export default function PublicProfilePage() {
             </CardTitle>
           </CardHeader>
           <CardContent className="px-6 pt-8 pb-6 space-y-6">
+            {dailyRank ? (
+              <RankingDisplay
+                currentRank={dailyRank.rank}
+                period="daily"
+                points={dailyRank.points}
+              />
+            ) : (
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Günlük sıralama kaydı bulunamadı.
+              </p>
+            )}
             {weeklyRank ? (
               <RankingDisplay
                 currentRank={weeklyRank.rank}
                 period="weekly"
-                points={weeklyRank.compositeScore}
+                points={weeklyRank.points}
               />
             ) : (
               <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -875,7 +910,7 @@ export default function PublicProfilePage() {
               <RankingDisplay
                 currentRank={monthlyRank.rank}
                 period="monthly"
-                points={monthlyRank.compositeScore}
+                points={monthlyRank.points}
               />
             ) : (
               <p className="text-sm text-gray-500 dark:text-gray-400">

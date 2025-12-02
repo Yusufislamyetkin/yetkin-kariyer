@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
+import { recordEvent } from "@/lib/services/gamification/antiAbuse";
+import { applyRules } from "@/lib/services/gamification/rules";
 
 interface DayTaskStatus {
   date: string;
@@ -12,16 +14,16 @@ interface DayTaskStatus {
     login: boolean;
     testSolved: boolean;
     topicCompleted: boolean;
-    liveCodingCompleted: boolean;
-    bugFixCompleted: boolean;
+    socialInteraction: boolean;
+    communityContribution: boolean;
   };
   allTasksCompleted: boolean;
   taskDetails?: {
     login?: { completedAt: string | null };
     testSolved?: { completedAt: string | null; count: number };
     topicCompleted?: { completedAt: string | null; count: number };
-    liveCodingCompleted?: { completedAt: string | null; count: number };
-    bugFixCompleted?: { completedAt: string | null; count: number };
+    socialInteraction?: { completedAt: string | null; count: number };
+    communityContribution?: { completedAt: string | null; count: number };
   };
 }
 
@@ -113,26 +115,43 @@ export async function GET() {
           login: false,
           testSolved: false,
           topicCompleted: false,
-          liveCodingCompleted: false,
-          bugFixCompleted: false,
+          socialInteraction: false,
+          communityContribution: false,
         },
         allTasksCompleted: false,
         taskDetails: {
           login: { completedAt: null },
           testSolved: { completedAt: null, count: 0 },
           topicCompleted: { completedAt: null, count: 0 },
-          liveCodingCompleted: { completedAt: null, count: 0 },
-          bugFixCompleted: { completedAt: null, count: 0 },
+          socialInteraction: { completedAt: null, count: 0 },
+          communityContribution: { completedAt: null, count: 0 },
         },
       });
     }
+
+    // Community group slugs for filtering
+    const COMMUNITY_SLUGS = [
+      "dotnet-core-community",
+      "java-community",
+      "mssql-community",
+      "react-community",
+      "angular-community",
+      "nodejs-community",
+      "ai-community",
+      "flutter-community",
+      "ethical-hacking-community",
+      "nextjs-community",
+      "docker-kubernetes-community",
+      "owasp-community",
+    ];
 
     // Fetch all activities for the week
     const [
       weekQuizAttempts,
       weekTopicCompletions,
-      weekLiveCodingAttempts,
-      weekBugFixAttempts,
+      weekPosts,
+      weekComments,
+      weekCommunityMessages,
       weekUserStreakUpdates,
     ] = await Promise.all([
       db.quizAttempt.findMany({
@@ -165,34 +184,52 @@ export async function GET() {
           completedAt: "desc",
         },
       }),
-      db.liveCodingAttempt.findMany({
+      db.post.findMany({
         where: {
           userId,
-          completedAt: {
+          createdAt: {
             gte: checkStartDate,
             lte: sunday,
           },
         },
         select: {
-          completedAt: true,
+          createdAt: true,
         },
         orderBy: {
-          completedAt: "desc",
+          createdAt: "desc",
         },
       }),
-      db.bugFixAttempt.findMany({
+      db.postComment.findMany({
         where: {
           userId,
-          completedAt: {
+          createdAt: {
             gte: checkStartDate,
             lte: sunday,
           },
         },
         select: {
-          completedAt: true,
+          createdAt: true,
         },
         orderBy: {
-          completedAt: "desc",
+          createdAt: "desc",
+        },
+      }),
+      db.chatMessage.findMany({
+        where: {
+          userId,
+          createdAt: {
+            gte: checkStartDate,
+            lte: sunday,
+          },
+          group: {
+            slug: { in: COMMUNITY_SLUGS },
+          },
+        },
+        select: {
+          createdAt: true,
+        },
+        orderBy: {
+          createdAt: "desc",
         },
       }),
       // Get lastActivityDate for login tracking
@@ -203,7 +240,7 @@ export async function GET() {
     ]);
 
     // Process activities for each day
-    weekDays.forEach((day) => {
+    for (const day of weekDays) {
       const dayStart = new Date(day.date);
       dayStart.setHours(0, 0, 0, 0);
       const dayEnd = new Date(dayStart);
@@ -241,26 +278,32 @@ export async function GET() {
         day.taskDetails!.topicCompleted!.count = dayTopicCompletions.length;
       }
 
-      // Check live coding completed
-      const dayLiveCodingAttempts = weekLiveCodingAttempts.filter((attempt: { completedAt: Date | string }) => {
-        const attemptDate = new Date(attempt.completedAt);
-        return attemptDate >= dayStart && attemptDate <= dayEnd;
+      // Check social interaction (post or comment)
+      const dayPosts = weekPosts.filter((post: { createdAt: Date | string }) => {
+        const postDate = new Date(post.createdAt);
+        return postDate >= dayStart && postDate <= dayEnd;
       });
-      if (dayLiveCodingAttempts.length > 0) {
-        day.tasks.liveCodingCompleted = true;
-        day.taskDetails!.liveCodingCompleted!.completedAt = dayLiveCodingAttempts[0].completedAt.toISOString();
-        day.taskDetails!.liveCodingCompleted!.count = dayLiveCodingAttempts.length;
+      const dayComments = weekComments.filter((comment: { createdAt: Date | string }) => {
+        const commentDate = new Date(comment.createdAt);
+        return commentDate >= dayStart && commentDate <= dayEnd;
+      });
+      const daySocialInteractions = dayPosts.length + dayComments.length;
+      if (daySocialInteractions > 0) {
+        day.tasks.socialInteraction = true;
+        const firstActivity = dayPosts[0] || dayComments[0];
+        day.taskDetails!.socialInteraction!.completedAt = firstActivity.createdAt.toISOString();
+        day.taskDetails!.socialInteraction!.count = daySocialInteractions;
       }
 
-      // Check bug fix completed
-      const dayBugFixAttempts = weekBugFixAttempts.filter((attempt: { completedAt: Date | string }) => {
-        const attemptDate = new Date(attempt.completedAt);
-        return attemptDate >= dayStart && attemptDate <= dayEnd;
+      // Check community contribution (message in community group)
+      const dayCommunityMessages = weekCommunityMessages.filter((message: { createdAt: Date | string }) => {
+        const messageDate = new Date(message.createdAt);
+        return messageDate >= dayStart && messageDate <= dayEnd;
       });
-      if (dayBugFixAttempts.length > 0) {
-        day.tasks.bugFixCompleted = true;
-        day.taskDetails!.bugFixCompleted!.completedAt = dayBugFixAttempts[0].completedAt.toISOString();
-        day.taskDetails!.bugFixCompleted!.count = dayBugFixAttempts.length;
+      if (dayCommunityMessages.length > 0) {
+        day.tasks.communityContribution = true;
+        day.taskDetails!.communityContribution!.completedAt = dayCommunityMessages[0].createdAt.toISOString();
+        day.taskDetails!.communityContribution!.count = dayCommunityMessages.length;
       }
 
       // Check if all tasks are completed (only for days that are not future and not before registration)
@@ -269,10 +312,40 @@ export async function GET() {
           day.tasks.login &&
           day.tasks.testSolved &&
           day.tasks.topicCompleted &&
-          day.tasks.liveCodingCompleted &&
-          day.tasks.bugFixCompleted;
+          day.tasks.socialInteraction &&
+          day.tasks.communityContribution;
+
+        // Award 100 points for daily strike completion (only once per day)
+        if (day.allTasksCompleted) {
+          const dayDateStr = dayStart.toISOString().split("T")[0];
+          const dedupKey = `daily_strike_${userId}_${dayDateStr}`;
+          
+          // Check if points were already awarded for this day
+          const existingEvent = await db.gamificationEvent.findUnique({
+            where: { dedupKey },
+          });
+
+          if (!existingEvent) {
+            try {
+              const event = await recordEvent({
+                userId,
+                type: "daily_strike_completed",
+                payload: { date: dayDateStr },
+                dedupKey,
+                occurredAt: dayStart,
+              });
+              await applyRules({
+                userId,
+                type: "daily_strike_completed",
+                payload: { sourceEventId: event.id, date: dayDateStr },
+              });
+            } catch (e) {
+              console.warn("Gamification daily_strike_completed failed:", e);
+            }
+          }
+        }
       }
-    });
+    }
 
     // Calculate today's completed tasks
     const todayDay = weekDays.find((d) => d.isToday);
@@ -281,23 +354,23 @@ export async function GET() {
           login: todayDay.tasks.login,
           testSolved: todayDay.tasks.testSolved,
           topicCompleted: todayDay.tasks.topicCompleted,
-          liveCodingCompleted: todayDay.tasks.liveCodingCompleted,
-          bugFixCompleted: todayDay.tasks.bugFixCompleted,
+          socialInteraction: todayDay.tasks.socialInteraction,
+          communityContribution: todayDay.tasks.communityContribution,
         }
       : {
           login: false,
           testSolved: false,
           topicCompleted: false,
-          liveCodingCompleted: false,
-          bugFixCompleted: false,
+          socialInteraction: false,
+          communityContribution: false,
         };
 
     // Update streak based on today's activity
     const hasRealActivityToday =
       todayCompleted.testSolved ||
       todayCompleted.topicCompleted ||
-      todayCompleted.liveCodingCompleted ||
-      todayCompleted.bugFixCompleted;
+      todayCompleted.socialInteraction ||
+      todayCompleted.communityContribution;
 
     if (hasRealActivityToday) {
       const yesterday = new Date(today);

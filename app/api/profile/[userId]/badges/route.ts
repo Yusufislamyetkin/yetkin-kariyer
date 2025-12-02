@@ -19,6 +19,15 @@ export async function GET(
       );
     }
 
+    // Get all badges from database
+    const allBadges = await db.badge.findMany({
+      orderBy: [
+        { rarity: "asc" },
+        { points: "desc" },
+      ],
+    });
+
+    // Get user's earned badges
     const userBadges = await db.userBadge.findMany({
       where: { userId: params.userId },
       include: {
@@ -30,6 +39,27 @@ export async function GET(
       ],
     });
 
+    // Create a map of earned badges for quick lookup
+    const earnedBadgesMap = new Map(
+      userBadges.map((ub: { badge: any; earnedAt: Date; isDisplayed: boolean }) => [
+        ub.badge.id,
+        {
+          earnedAt: ub.earnedAt,
+          isDisplayed: ub.isDisplayed,
+        },
+      ])
+    );
+
+    // Combine all badges with earned status
+    const badgesWithStatus = allBadges.map((badge: any) => {
+      const earnedInfo = earnedBadgesMap.get(badge.id) as { earnedAt: Date; isDisplayed: boolean } | undefined;
+      return {
+        ...badge,
+        earnedAt: earnedInfo?.earnedAt || null,
+        isDisplayed: earnedInfo?.isDisplayed || false,
+      };
+    });
+
     // Get displayed badges (max 3)
     const displayedBadges = userBadges
       .filter((ub: { isDisplayed: boolean }) => ub.isDisplayed)
@@ -37,13 +67,10 @@ export async function GET(
       .map((ub: { badge: any }) => ub.badge);
 
     return NextResponse.json({
-      badges: userBadges.map((ub: { badge: any; earnedAt: Date; isDisplayed: boolean }) => ({
-        ...ub.badge,
-        earnedAt: ub.earnedAt,
-        isDisplayed: ub.isDisplayed,
-      })),
+      badges: badgesWithStatus,
       displayedBadges,
-      totalCount: userBadges.length,
+      totalCount: allBadges.length,
+      earnedCount: userBadges.length,
     });
   } catch (error) {
     console.error("Error fetching user badges:", error);
