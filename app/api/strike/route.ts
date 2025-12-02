@@ -30,11 +30,28 @@ interface DayTaskStatus {
 export async function GET() {
   try {
     const session = await auth();
-    if (!session?.user?.id) {
+    
+    // Get userId - handle Gmail OAuth users where session.user.id might not be set immediately
+    let userId: string | null = session?.user?.id as string | null;
+    
+    if (!userId && session?.user?.email) {
+      // For Gmail OAuth users, try to get userId from email as fallback
+      try {
+        const dbUser = await db.user.findUnique({
+          where: { email: session.user.email },
+          select: { id: true },
+        });
+        if (dbUser) {
+          userId = dbUser.id;
+        }
+      } catch (error) {
+        console.error("Error fetching user by email in strike API:", error);
+      }
+    }
+    
+    if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-
-    const userId = session.user.id as string;
 
     // Get user and user streak
     const [user, userStreak] = await Promise.all([
@@ -145,6 +162,17 @@ export async function GET() {
       "owasp-community",
     ];
 
+    // Update lastActivityDate for today's login BEFORE processing activities
+    // This ensures login is marked as completed when the API is called
+    if (!streak.lastActivityDate || new Date(streak.lastActivityDate).setHours(0, 0, 0, 0) !== today.getTime()) {
+      streak = await db.userStreak.update({
+        where: { userId },
+        data: {
+          lastActivityDate: today,
+        },
+      });
+    }
+
     // Fetch all activities for the week
     const [
       weekQuizAttempts,
@@ -152,7 +180,6 @@ export async function GET() {
       weekPosts,
       weekComments,
       weekCommunityMessages,
-      weekUserStreakUpdates,
     ] = await Promise.all([
       db.quizAttempt.findMany({
         where: {
@@ -232,11 +259,6 @@ export async function GET() {
           createdAt: "desc",
         },
       }),
-      // Get lastActivityDate for login tracking
-      db.userStreak.findUnique({
-        where: { userId },
-        select: { lastActivityDate: true },
-      }),
     ]);
 
     // Process activities for each day
@@ -246,9 +268,9 @@ export async function GET() {
       const dayEnd = new Date(dayStart);
       dayEnd.setHours(23, 59, 59, 999);
 
-      // Check login (lastActivityDate)
-      if (weekUserStreakUpdates?.lastActivityDate) {
-        const lastActivity = new Date(weekUserStreakUpdates.lastActivityDate);
+      // Check login (lastActivityDate) - use updated streak object
+      if (streak?.lastActivityDate) {
+        const lastActivity = new Date(streak.lastActivityDate);
         if (lastActivity >= dayStart && lastActivity <= dayEnd) {
           day.tasks.login = true;
           day.taskDetails!.login!.completedAt = lastActivity.toISOString();
@@ -421,15 +443,9 @@ export async function GET() {
           },
         });
       }
-    } else if (!streak.lastActivityDate || new Date(streak.lastActivityDate).setHours(0, 0, 0, 0) !== today.getTime()) {
-      // Mark login for today
-      streak = await db.userStreak.update({
-        where: { userId },
-        data: {
-          lastActivityDate: today,
-        },
-      });
     }
+    // Note: lastActivityDate is already updated at the beginning of the function
+    // This section is only for updating streak when there's real activity today
 
     // Count days with all tasks completed
     const daysWithAllTasksCompleted = weekDays.filter(

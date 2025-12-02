@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, CheckCircle2, ArrowRight } from "lucide-react";
 import { LessonChat } from "../../_components/LessonChat";
 import { RoadmapDisplay } from "../../_components/RoadmapDisplay";
+import { Button } from "@/app/components/ui/Button";
 
 type LessonChatWrapperProps = {
   lessonSlug: string;
@@ -25,6 +26,8 @@ export function LessonChatWrapper({
 }: LessonChatWrapperProps) {
   const [roadmap, setRoadmap] = useState<string | null>(null);
   const [progress, setProgress] = useState<{ step: number; status: "pending" | "in_progress" | "completed" } | null>(null);
+  const [isCompleted, setIsCompleted] = useState(false);
+  const [nextLesson, setNextLesson] = useState<{ href: string; label: string } | null>(null);
 
   const handleRoadmapChange = (
     newRoadmap: string | null,
@@ -32,6 +35,14 @@ export function LessonChatWrapper({
   ) => {
     setRoadmap(newRoadmap);
     setProgress(newProgress);
+  };
+
+  const handleCompletionChange = (
+    completed: boolean,
+    next: { href: string; label: string } | null
+  ) => {
+    setIsCompleted(completed);
+    setNextLesson(next);
   };
 
   return (
@@ -43,6 +54,7 @@ export function LessonChatWrapper({
           lessonTitle={lessonTitle}
           lessonDescription={lessonDescription}
           onRoadmapChange={handleRoadmapChange}
+          onCompletionChange={handleCompletionChange}
         />
       </div>
       
@@ -79,10 +91,35 @@ export function LessonChatWrapper({
         
         {/* Roadmap Section - Scrollable */}
         {roadmap ? (
-          <div className="flex-1 overflow-y-auto min-h-0">
-            <div className="px-6 py-5">
+          <div className="flex-1 overflow-y-auto min-h-0 flex flex-col">
+            <div className="px-6 py-5 flex-1">
               <RoadmapDisplay roadmap={roadmap} progress={progress || undefined} />
             </div>
+            
+            {/* Completion Indicator */}
+            {isCompleted && (
+              <div className="px-6 pb-5 shrink-0 border-t border-gray-200/50 dark:border-gray-800/50 pt-5">
+                <div className="bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800/50 rounded-lg p-4 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400" />
+                    <span className="text-sm font-semibold text-green-700 dark:text-green-300">
+                      Ders Tamamlandı!
+                    </span>
+                  </div>
+                  
+                  {nextLesson && (
+                    <Button
+                      href={nextLesson.href}
+                      variant="gradient"
+                      className="w-full bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 hover:from-purple-700 hover:via-pink-700 hover:to-rose-700 text-white shadow-lg"
+                    >
+                      <span>Sonraki Derse Geç</span>
+                      <ArrowRight className="h-4 w-4 ml-2" />
+                    </Button>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         ) : (
           <div className="flex-1 flex items-center justify-center px-6 py-5 min-h-0">

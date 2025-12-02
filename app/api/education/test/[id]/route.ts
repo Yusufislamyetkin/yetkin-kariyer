@@ -158,7 +158,60 @@ export async function POST(
     });
 
     const score = Math.round((correctCount / questions.length) * 100);
-    const userId = session.user.id as string;
+    let userId = session.user.id as string;
+
+    // Verify user exists in database
+    // If user not found by ID, try to find by email (for Google OAuth users)
+    let userExists;
+    try {
+      userExists = await db.user.findUnique({
+        where: { id: userId },
+        select: { id: true },
+      });
+      
+      if (!userExists && session.user.email) {
+        console.warn("[TEST_SUBMIT] Kullanıcı ID ile bulunamadı, email ile kontrol ediliyor:", {
+          userId,
+          email: session.user.email,
+        });
+        
+        const userByEmail = await db.user.findUnique({
+          where: { email: session.user.email },
+          select: { id: true },
+        });
+        
+        if (userByEmail) {
+          const sessionUserId = userId;
+          console.warn("[TEST_SUBMIT] Kullanıcı email ile bulundu ama session userId farklı, database userId kullanılıyor:", {
+            sessionUserId,
+            dbUserId: userByEmail.id,
+            email: session.user.email,
+          });
+          userId = userByEmail.id;
+          userExists = userByEmail;
+        }
+      }
+      
+      if (!userExists) {
+        console.error("[TEST_SUBMIT] Kullanıcı veritabanında bulunamadı:", { 
+          userId,
+          email: session.user.email,
+        });
+        return NextResponse.json(
+          { 
+            error: "Kullanıcı bulunamadı. Lütfen çıkış yapıp tekrar giriş yapın.",
+            details: "Google OAuth ile giriş yaptıysanız, lütfen tekrar giriş yapmayı deneyin."
+          },
+          { status: 401 }
+        );
+      }
+    } catch (error) {
+      console.error("[TEST_SUBMIT] Kullanıcı kontrolü hatası:", error);
+      return NextResponse.json(
+        { error: "Kullanıcı doğrulama hatası" },
+        { status: 500 }
+      );
+    }
 
     // TestAttempt oluştur
     // QuizAttempt oluştur (analiz, hedef ve rozet kontrolü için ortak kayıt)

@@ -357,11 +357,29 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const session = await auth();
-    if (!session?.user?.id) {
+    
+    // Get userId - handle Gmail OAuth users where session.user.id might not be set immediately
+    let userId: string | null = session?.user?.id as string | null;
+    
+    if (!userId && session?.user?.email) {
+      // For Gmail OAuth users, try to get userId from email as fallback
+      try {
+        const { db } = await import("@/lib/db");
+        const userByEmail = await db.user.findUnique({
+          where: { email: session.user.email },
+          select: { id: true },
+        });
+        if (userByEmail) {
+          userId = userByEmail.id;
+        }
+      } catch (error) {
+        console.error("Error fetching user by email:", error);
+      }
+    }
+    
+    if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-
-    const userId = session.user.id as string;
     // Rate limit: 20 posts / 10 min per user
     {
       const key = rateLimitKey(["post:create", userId]);

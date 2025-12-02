@@ -36,6 +36,7 @@ type LessonChatProps = {
   lessonTitle: string;
   lessonDescription?: string | null;
   onRoadmapChange?: (roadmap: string | null, progress: { step: number; status: "pending" | "in_progress" | "completed" } | null) => void;
+  onCompletionChange?: (isCompleted: boolean, nextLesson: { href: string; label: string } | null) => void;
 };
 
 type CurrentActivity = {
@@ -43,7 +44,7 @@ type CurrentActivity = {
   data: any;
 } | null;
 
-export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadmapChange }: LessonChatProps) {
+export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadmapChange, onCompletionChange }: LessonChatProps) {
   const { celebrate } = useCelebration();
   const { showBadges } = useBadgeNotification();
   const router = useRouter();
@@ -167,6 +168,11 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
       findNextLesson();
     }
   }, [isCompleted, lessonSlug, nextLesson]);
+
+  // Notify parent about completion status changes
+  useEffect(() => {
+    onCompletionChange?.(isCompleted, nextLesson);
+  }, [isCompleted, nextLesson, onCompletionChange]);
 
   // Show completion modal when lesson is completed (only once)
   // Wait 6-7 seconds after the last message (or longer if badges were shown)

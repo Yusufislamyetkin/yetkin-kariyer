@@ -299,9 +299,9 @@ export default function PostDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#fafafa] dark:bg-black">
+    <div className="min-h-screen bg-[#fafafa] dark:bg-black pt-[72px] lg:pt-0">
       {/* Mobile: Full page, Desktop: Modal-like */}
-      <div className="lg:fixed lg:inset-0 lg:flex lg:items-center lg:justify-center lg:bg-black/50 lg:p-4">
+      <div className="lg:fixed lg:inset-0 lg:flex lg:items-center lg:justify-center lg:bg-black/50 lg:p-4 lg:z-40">
         <div className={`bg-white dark:bg-black lg:rounded-lg ${(post.imageUrl || post.videoUrl) ? 'lg:max-w-5xl' : 'lg:max-w-3xl'} lg:max-h-[90vh] lg:w-full lg:overflow-hidden lg:flex`}>
           {/* Close button - Desktop */}
           <button

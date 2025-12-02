@@ -52,17 +52,47 @@ export const Limits = {
 };
 
 function hashValue(input: string): string {
-	// Simple FNV-1a hash
+	// Improved hash: include length to reduce collisions
+	// Use a more robust hash algorithm (FNV-1a with length prefix)
+	const length = input.length;
 	let hash = 2166136261;
+	// Include length in hash to reduce collisions
+	hash ^= length;
+	hash += (hash << 1) + (hash << 4) + (hash << 7) + (hash << 8) + (hash << 24);
+	// Hash the content
 	for (let i = 0; i < input.length; i++) {
 		hash ^= input.charCodeAt(i);
 		hash += (hash << 1) + (hash << 4) + (hash << 7) + (hash << 8) + (hash << 24);
 	}
-	// Convert to unsigned hex
-	return (hash >>> 0).toString(16);
+	// Convert to unsigned hex with length prefix for better collision resistance
+	return `${length}:${(hash >>> 0).toString(16)}`;
 }
 
 export function isDuplicateWithin(key: Key, value: string, ttlMs: number): boolean {
+	// Normalize value: trim and lowercase for comparison
+	// This prevents false positives from whitespace differences
+	const normalized = value.trim().toLowerCase();
+	
+	// For very short content, use exact match instead of hash to avoid collisions
+	if (normalized.length < 10) {
+		const ts = now();
+		let map = dedupe.get(key);
+		if (!map) {
+			map = new Map<string, number>();
+			dedupe.set(key, map);
+		}
+		// Cleanup expired
+		for (const [h, exp] of map.entries()) {
+			if (exp <= ts) map.delete(h);
+		}
+		// For short content, use normalized value directly
+		const lookupKey = `short:${normalized}`;
+		const exists = map.has(lookupKey);
+		map.set(lookupKey, ts + ttlMs);
+		return exists;
+	}
+	
+	// For longer content, use hash
 	const ts = now();
 	let map = dedupe.get(key);
 	if (!map) {
@@ -73,7 +103,7 @@ export function isDuplicateWithin(key: Key, value: string, ttlMs: number): boole
 	for (const [h, exp] of map.entries()) {
 		if (exp <= ts) map.delete(h);
 	}
-	const h = hashValue(value);
+	const h = hashValue(normalized);
 	const exists = map.has(h);
 	map.set(h, ts + ttlMs);
 	return exists;
