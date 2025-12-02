@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { generateCareerPlan } from "@/lib/ai/career";
 
+export const maxDuration = 60; // 60 seconds timeout for Vercel
+
 export async function POST(request: Request) {
   let session: { user?: { id?: string } } | null = null;
   let body: { questionnaire?: unknown } = {};

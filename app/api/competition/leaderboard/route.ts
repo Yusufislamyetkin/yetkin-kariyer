@@ -64,38 +64,38 @@ const calculateAverage = (acc: ScoreAccumulator): number => {
 };
 
 const getPeriodBounds = (period: Period) => {
+  // Use UTC for all date calculations to match database timestamps
   const now = new Date();
+  const nowUTC = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds()));
+  
   let periodDate: string;
   let startDate: Date;
   let endDate: Date;
 
   if (period === "daily") {
-    periodDate = now.toISOString().split("T")[0];
-    startDate = new Date(periodDate);
-    endDate = new Date(startDate);
-    endDate.setDate(endDate.getDate() + 1);
+    // Get today's date in UTC
+    periodDate = nowUTC.toISOString().split("T")[0];
+    startDate = new Date(Date.UTC(nowUTC.getUTCFullYear(), nowUTC.getUTCMonth(), nowUTC.getUTCDate(), 0, 0, 0, 0));
+    endDate = new Date(Date.UTC(nowUTC.getUTCFullYear(), nowUTC.getUTCMonth(), nowUTC.getUTCDate() + 1, 0, 0, 0, 0));
   } else if (period === "weekly") {
-    // Get Monday of current week
-    const day = now.getDay();
-    const diff = now.getDate() - day + (day === 0 ? -6 : 1); // Adjust when day is Sunday
-    const monday = new Date(now.setDate(diff));
-    monday.setHours(0, 0, 0, 0);
-    startDate = monday;
+    // Get Monday of current week in UTC
+    const day = nowUTC.getUTCDay();
+    const diff = nowUTC.getUTCDate() - day + (day === 0 ? -6 : 1); // Adjust when day is Sunday
+    const mondayUTC = new Date(Date.UTC(nowUTC.getUTCFullYear(), nowUTC.getUTCMonth(), diff, 0, 0, 0, 0));
+    startDate = mondayUTC;
     
-    // Get Sunday of current week
-    endDate = new Date(startDate);
-    endDate.setDate(endDate.getDate() + 7);
+    // Get Sunday of current week (end of week)
+    endDate = new Date(Date.UTC(mondayUTC.getUTCFullYear(), mondayUTC.getUTCMonth(), mondayUTC.getUTCDate() + 7, 0, 0, 0, 0));
     
     // Format periodDate as YYYY-WW (year-week number)
-    const year = startDate.getFullYear();
+    const year = startDate.getUTCFullYear();
     const weekNumber = getWeekNumber(startDate);
     periodDate = `${year}-W${String(weekNumber).padStart(2, "0")}`;
   } else {
-    // monthly
-    periodDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
-    startDate = new Date(`${periodDate}-01`);
-    endDate = new Date(startDate);
-    endDate.setMonth(endDate.getMonth() + 1);
+    // monthly - use UTC
+    periodDate = `${nowUTC.getUTCFullYear()}-${String(nowUTC.getUTCMonth() + 1).padStart(2, "0")}`;
+    startDate = new Date(Date.UTC(nowUTC.getUTCFullYear(), nowUTC.getUTCMonth(), 1, 0, 0, 0, 0));
+    endDate = new Date(Date.UTC(nowUTC.getUTCFullYear(), nowUTC.getUTCMonth() + 1, 1, 0, 0, 0, 0));
   }
 
   return { periodDate, startDate, endDate };
@@ -470,29 +470,29 @@ export async function GET(request: Request) {
       }
     }
 
-    // FIRST: Fetch point transactions for the period to get users with badge points
-    // This ensures users with badge points appear even if they have no attempts
-    const pointTransactions = await db.pointTransaction.groupBy({
+    // FIRST: Fetch earned points for the period (BADGE + STRIKE)
+    // This ensures users with badge/strike points appear even if they have no attempts
+    const earnedPoints = await db.userEarnedPoint.groupBy({
       by: ["userId"],
       where: {
-        createdAt: {
+        earnedAt: {
           gte: startDate,
           lt: endDate,
         },
       },
       _sum: {
-        delta: true,
+        points: true,
       },
     });
 
-    // Calculate points earned in the period for each user from point_transactions
+    // Calculate total points earned in the period for each user (BADGE + STRIKE)
     const userPointsMap = new Map<string, number>();
     const usersWithPoints = new Set<string>();
-    for (const transaction of pointTransactions) {
-      const points = transaction._sum.delta || 0;
+    for (const earned of earnedPoints) {
+      const points = earned._sum.points || 0;
       if (points > 0) {
-        userPointsMap.set(transaction.userId, points);
-        usersWithPoints.add(transaction.userId);
+        userPointsMap.set(earned.userId, points);
+        usersWithPoints.add(earned.userId);
       }
     }
 
@@ -633,19 +633,32 @@ export async function GET(request: Request) {
       points: userPointsMap.get(entry.userId) || 0,
     }));
 
-    // Filter out users with 0 or negative points, then sort by points
+    // Filter: Include users with points > 0 OR users with at least one attempt
+    // This ensures users with activity are shown even if they have 0 points in this period
     const leaderboardWithPointsFiltered = leaderboardWithPoints.filter(
-      (entry) => entry.points > 0
+      (entry) => {
+        const hasPoints = entry.points > 0;
+        const hasAttempts = 
+          entry.attempts.quiz > 0 ||
+          entry.attempts.test > 0 ||
+          entry.attempts.liveCoding > 0 ||
+          entry.attempts.bugFix > 0 ||
+          entry.attempts.hackaton > 0;
+        return hasPoints || hasAttempts;
+      }
     );
 
     leaderboardWithPointsFiltered.sort((a, b) => {
+      // First sort by points (descending) - users with 0 points will be at the end
       if (b.points !== a.points) {
         return b.points - a.points;
       }
-      // If points are equal, use compositeScore as tiebreaker
+      // If points are equal (including both 0), use compositeScore as tiebreaker
+      // This ensures users with 0 points but higher activity appear first among 0-point users
       if (b.compositeScore !== a.compositeScore) {
         return b.compositeScore - a.compositeScore;
       }
+      // Final tiebreaker: topicCompletion
       return b.metrics.topicCompletion - a.metrics.topicCompletion;
     });
 
@@ -703,23 +716,23 @@ export async function GET(request: Request) {
           (entry) => entry.userId === rankTargetUserId
         );
         if (userData) {
-          // Get points from point_transactions for this period if not already in map
+          // Get points from user_earned_points for this period if not already in map
           let userPoints = userPointsMap.get(rankTargetUserId);
           if (userPoints === undefined) {
-            const userPointTransactions = await db.pointTransaction.groupBy({
+            const userEarnedPoints = await db.userEarnedPoint.groupBy({
               by: ["userId"],
               where: {
                 userId: rankTargetUserId,
-                createdAt: {
+                earnedAt: {
                   gte: startDate,
                   lt: endDate,
                 },
               },
               _sum: {
-                delta: true,
+                points: true,
               },
             });
-            userPoints = userPointTransactions[0]?._sum.delta || 0;
+            userPoints = userEarnedPoints[0]?._sum.points || 0;
           }
           userRank = {
             ...userData,

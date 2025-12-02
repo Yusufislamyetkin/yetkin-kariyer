@@ -10,6 +10,24 @@ export async function awardBadgeIfEligible(userId: string, key: string) {
 	const created = await db.userBadge.create({
 		data: { userId, badgeId: badge.id, isDisplayed: false },
 	});
+	
+	// UserEarnedPoint kaydı ekle
+	if (created && badge.points && badge.points > 0) {
+		try {
+			await db.userEarnedPoint.create({
+				data: {
+					userId,
+					points: badge.points,
+					source: "BADGE",
+					sourceId: badge.id,
+				},
+			});
+		} catch (pointError) {
+			// UserEarnedPoint kaydı başarısız olsa bile rozet kaydı başarılı sayılır
+			console.warn(`[awardBadgeIfEligible] UserEarnedPoint kaydı eklenirken hata:`, pointError);
+		}
+	}
+	
 	return created;
 }
 

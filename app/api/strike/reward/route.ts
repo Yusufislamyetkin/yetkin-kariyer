@@ -337,13 +337,29 @@ export async function POST() {
     }
 
     // Award the badge
-    await db.userBadge.create({
+    const created = await db.userBadge.create({
       data: {
         userId,
         badgeId: rewardBadge.id,
         isDisplayed: true,
       },
     });
+
+    // UserEarnedPoint kaydı ekle (source: STRIKE)
+    if (created && rewardBadge.points && rewardBadge.points > 0) {
+      try {
+        await db.userEarnedPoint.create({
+          data: {
+            userId,
+            points: rewardBadge.points,
+            source: "STRIKE",
+            sourceId: rewardBadge.id,
+          },
+        });
+      } catch (pointError) {
+        console.warn(`[STRIKE_REWARD] UserEarnedPoint kaydı eklenirken hata:`, pointError);
+      }
+    }
 
     return NextResponse.json({
       eligible: true,

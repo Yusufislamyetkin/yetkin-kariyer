@@ -221,6 +221,7 @@ model User {
   // Gamification and rewards
   gamificationEvents            GamificationEvent[]
   pointTransactions             PointTransaction[]
+  earnedPoints                  UserEarnedPoint[]
   balance                       UserBalance?
   questProgresses               QuestProgress[]
   rewardRedemptions             RewardRedemption[]
@@ -832,6 +833,26 @@ model UserBalance {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("user_balances")
+}
+
+enum PointSource {
+  BADGE
+  STRIKE
+}
+
+model UserEarnedPoint {
+  id        String      @id @default(cuid())
+  userId    String
+  points    Int
+  source    PointSource
+  sourceId  String?     // badgeId veya strikeId
+  earnedAt  DateTime    @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, earnedAt])
+  @@index([userId, source])
+  @@map("user_earned_points")
 }
 
 model Quest {

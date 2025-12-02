@@ -1192,8 +1192,7 @@ export function GroupChatView({ category }: GroupChatViewProps) {
         return;
       }
 
-      // Optimistic update için gerekli verileri hazırla
-      const tempId = `temp-${Date.now()}-${Math.random()}`;
+      // Attachment'ları ve input'u sakla (hata durumunda geri yüklemek için)
       const tempAttachments = [...attachments];
       const tempMessageInput = trimmed;
 
@@ -1202,51 +1201,6 @@ export function GroupChatView({ category }: GroupChatViewProps) {
         
         // Önce attachment'ları yükle (varsa)
         const uploadedAttachments = await uploadAttachments();
-        
-        // Optimistic update: Mesajı hemen ekle
-        const optimisticMessage: ChatMessage = {
-          id: tempId,
-          groupId: selectedGroupId,
-          userId: currentUserId ?? "",
-          type: hasText ? "text" : (uploadedAttachments[0]?.type ?? attachments[0]?.type ?? "text"),
-          content: trimmed || null,
-          mentionIds: [],
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-          attachments: uploadedAttachments.map((att, idx) => ({
-            id: `temp-attachment-${idx}`,
-            messageId: tempId,
-            url: att.url,
-            type: att.type,
-            metadata: att.metadata || null,
-            size: att.size,
-            width: undefined,
-            height: undefined,
-            duration: undefined,
-            createdAt: new Date().toISOString(),
-          })),
-          sender: {
-            id: currentUserId ?? "",
-            name: (session?.user as any)?.name || null,
-            profileImage: (session?.user as any)?.profileImage || null,
-          },
-          readByUserIds: [currentUserId ?? ""].filter(Boolean),
-        };
-
-        // Mesajı hemen ekle
-        upsertMessage(optimisticMessage, { scroll: true });
-        
-        // Input ve attachment'ları hemen temizle
-        setMessageInput("");
-        setAttachments([]);
-        
-        // Textarea yüksekliğini hemen sıfırla
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            const textarea = messageInputRef.current;
-            if (textarea) textarea.style.height = "auto";
-          });
-        });
 
         const response = await fetch(`/api/chat/groups/${selectedGroupId}/messages`, {
           method: "POST",
@@ -1254,7 +1208,7 @@ export function GroupChatView({ category }: GroupChatViewProps) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            content: hasText ? tempMessageInput : undefined,
+            content: hasText ? trimmed : undefined,
             attachments: uploadedAttachments,
             type: hasText ? "text" : uploadedAttachments[0]?.type ?? "text",
           }),
@@ -1273,20 +1227,21 @@ export function GroupChatView({ category }: GroupChatViewProps) {
           readByUserIds: [currentUserId ?? ""].filter(Boolean),
         };
 
-        // Optimistic mesajı gerçek mesajla değiştir
-        setMessages((prev) => {
-          const filtered = prev.filter((msg) => msg.id !== tempId);
-          const updated = [...filtered, payload];
-          updated.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
-          return updated;
-        });
-
-        // Scroll yap
+        // Mesajı ekle
+        upsertMessage(payload, { scroll: true });
+        
+        // Input ve attachment'ları temizle
+        setMessageInput("");
+        setAttachments([]);
+        
+        // Textarea yüksekliğini sıfırla
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
-            scrollToBottom(true);
+            const textarea = messageInputRef.current;
+            if (textarea) textarea.style.height = "auto";
           });
         });
+        
         updateGroupMeta(selectedGroupId, (current) => ({
           ...current,
           lastMessage: payload,
@@ -1326,13 +1281,9 @@ export function GroupChatView({ category }: GroupChatViewProps) {
         }
       } catch (err: any) {
         console.error(err);
-        // Hata olursa optimistic mesajı kaldır
-        setMessages((prev) => prev.filter((msg) => msg.id !== tempId));
-        // Input ve attachment'ları geri yükle (sadece henüz optimistic update yapılmadıysa)
-        if (messageInput === "") {
-          setMessageInput(tempMessageInput);
-          setAttachments(tempAttachments);
-        }
+        // Hata olursa input ve attachment'ları geri yükle
+        setMessageInput(tempMessageInput);
+        setAttachments(tempAttachments);
         setError(err.message ?? "Mesaj gönderilirken hata oluştu");
       } finally {
         setSendingMessage(false);
@@ -1454,16 +1405,15 @@ export function GroupChatView({ category }: GroupChatViewProps) {
       };
 
       if (incoming.groupId === selectedGroupId) {
-        // Kendi gönderdiğimiz mesajları kontrol et - eğer zaten varsa tekrar ekleme
-        // Bu, optimistic update ve API response'dan sonra SignalR'ın aynı mesajı tekrar eklemesini önler
-        const isOwnMessage = incoming.userId === currentUserId;
+        // Tüm mesajlar için duplicate kontrolü - eğer mesaj zaten varsa tekrar ekleme
+        // Bu, API response'dan sonra SignalR'ın aynı mesajı tekrar eklemesini önler
         const messageAlreadyExists = messagesRef.current.some((msg) => msg.id === incoming.id);
         
-        if (isOwnMessage && messageAlreadyExists) {
-          // Kendi mesajımız zaten mevcut, SignalR'dan gelen duplicate'i atla
-          console.log("[GroupChat] Skipping duplicate own message from SignalR:", incoming.id);
+        if (messageAlreadyExists) {
+          // Mesaj zaten mevcut, SignalR'dan gelen duplicate'i atla
+          console.log("[GroupChat] Skipping duplicate message from SignalR:", incoming.id);
         } else {
-          // Mesajı ekle ve scroll yap (kendi mesajımız veya başkasının mesajı fark etmez, hep scroll yap)
+          // Mesajı ekle ve scroll yap
           upsertMessage(incoming, { scroll: true });
 
           if (incoming.userId !== currentUserId) {

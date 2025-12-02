@@ -42,10 +42,12 @@ export const MessageViewport = forwardRef<HTMLDivElement, MessageViewportProps>(
 
   const filteredMessages = useMemo(() => {
     return messages.filter((message) => {
+      const id = message.id ?? "";
+      const hasTempPrefix = typeof id === "string" && (id.startsWith("temp-") || id.startsWith("front-"));
       const { tempId } = message as ChatMessage & { tempId?: string | null };
       const hasExplicitTempId = typeof tempId === "string" && tempId.length > 0;
-      // Allow optimistic messages (temp- prefix) to show, but filter out explicit tempId
-      return !hasExplicitTempId;
+      // Filter out both temp- prefix IDs and explicit tempId
+      return !hasTempPrefix && !hasExplicitTempId;
     });
   }, [messages]);
 

@@ -289,22 +289,20 @@ export async function generateCareerPlan(userId: string, questionnaire?: Questio
   const isDevelopment = process.env.NODE_ENV === "development";
   
   try {
-    // Get user's CV, quiz attempts, and interview attempts
-    let cv;
-    try {
-      cv = await db.cV.findFirst({
+    // Get user's CV, quiz attempts, interview attempts, and courses in parallel
+    const [cv, quizAttempts, interviewAttempts, availableCourses] = await Promise.all([
+      // CV fetch (critical - throws on error)
+      db.cV.findFirst({
         where: { userId },
         orderBy: { updatedAt: "desc" },
-      });
-    } catch (dbError: any) {
-      const errorMsg = isDevelopment ? `CV verisi alınırken hata: ${dbError?.message || "Bilinmeyen hata"}` : "Kullanıcı verileri alınırken bir sorun oluştu.";
-      console.error("[CAREER_PLAN] CV fetch error:", { error: dbError, userId });
-      throw new Error(errorMsg);
-    }
-
-    let quizAttempts;
-    try {
-      quizAttempts = await db.quizAttempt.findMany({
+      }).catch((dbError: any) => {
+        const errorMsg = isDevelopment ? `CV verisi alınırken hata: ${dbError?.message || "Bilinmeyen hata"}` : "Kullanıcı verileri alınırken bir sorun oluştu.";
+        console.error("[CAREER_PLAN] CV fetch error:", { error: dbError, userId });
+        throw new Error(errorMsg);
+      }),
+      
+      // Quiz attempts fetch (non-critical)
+      db.quizAttempt.findMany({
         where: { userId },
         include: {
           quiz: {
@@ -315,28 +313,23 @@ export async function generateCareerPlan(userId: string, questionnaire?: Questio
         },
         orderBy: { completedAt: "desc" },
         take: 10,
-      });
-    } catch (dbError: any) {
-      console.warn("[CAREER_PLAN] Quiz attempts fetch error (non-critical):", { error: dbError?.message, userId });
-      quizAttempts = []; // Continue with empty array if quiz fetch fails
-    }
-
-    let interviewAttempts;
-    try {
-      interviewAttempts = await db.interviewAttempt.findMany({
+      }).catch((dbError: any) => {
+        console.warn("[CAREER_PLAN] Quiz attempts fetch error (non-critical):", { error: dbError?.message, userId });
+        return []; // Continue with empty array if quiz fetch fails
+      }),
+      
+      // Interview attempts fetch (non-critical)
+      db.interviewAttempt.findMany({
         where: { userId },
         orderBy: { completedAt: "desc" },
         take: 5,
-      });
-    } catch (dbError: any) {
-      console.warn("[CAREER_PLAN] Interview attempts fetch error (non-critical):", { error: dbError?.message, userId });
-      interviewAttempts = []; // Continue with empty array if interview fetch fails
-    }
-
-    // Get available platform resources (courses)
-    let availableCourses;
-    try {
-      availableCourses = await db.course.findMany({
+      }).catch((dbError: any) => {
+        console.warn("[CAREER_PLAN] Interview attempts fetch error (non-critical):", { error: dbError?.message, userId });
+        return []; // Continue with empty array if interview fetch fails
+      }),
+      
+      // Courses fetch (non-critical)
+      db.course.findMany({
         select: {
           id: true,
           title: true,
@@ -347,11 +340,11 @@ export async function generateCareerPlan(userId: string, questionnaire?: Questio
           description: true,
         },
         take: 50, // Limit to avoid too much data
-      });
-    } catch (dbError: any) {
-      console.warn("[CAREER_PLAN] Courses fetch error (non-critical):", { error: dbError?.message });
-      availableCourses = []; // Continue with empty array if courses fetch fails
-    }
+      }).catch((dbError: any) => {
+        console.warn("[CAREER_PLAN] Courses fetch error (non-critical):", { error: dbError?.message });
+        return []; // Continue with empty array if courses fetch fails
+      }),
+    ]);
 
     const availableResources = availableCourses.map((course: typeof availableCourses[0]) => ({
       id: course.id,
@@ -399,6 +392,7 @@ export async function generateCareerPlan(userId: string, questionnaire?: Questio
     try {
       const result = await createChatCompletion({
         schema: careerPlanSchema,
+        timeoutMs: 50000, // 50 seconds timeout (less than route timeout of 60s)
         messages: [
         {
           role: "system",

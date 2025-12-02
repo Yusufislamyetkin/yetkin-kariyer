@@ -290,6 +290,27 @@ async function saveUserBadge(
       return false;
     }
 
+    // UserEarnedPoint kaydı ekle (sadece yeni kayıt oluşturulduysa)
+    if (savedBadge) {
+      const badgePoints = badge.points || 0;
+      if (badgePoints > 0) {
+        try {
+          await db.userEarnedPoint.create({
+            data: {
+              userId,
+              points: badgePoints,
+              source: "BADGE",
+              sourceId: badge.id,
+            },
+          });
+          console.log(`[BADGE_SAVE] UserEarnedPoint kaydı eklendi. userId: ${userId}, badgeId: ${badge.id}, points: ${badgePoints}`);
+        } catch (pointError) {
+          // UserEarnedPoint kaydı başarısız olsa bile rozet kaydı başarılı sayılır
+          console.warn(`[BADGE_SAVE] UserEarnedPoint kaydı eklenirken hata:`, pointError);
+        }
+      }
+    }
+
     console.log(`[BADGE_SAVE] Rozet başarıyla kaydedildi ve doğrulandı! userId: ${userId}, badgeId: ${badge.id}, badgeName: ${badge.name}, category: ${badge.category}, key: ${badge.key || 'N/A'}`);
     earnedBadgeIds.add(badge.id);
     return true;

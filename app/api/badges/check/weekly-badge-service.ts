@@ -136,13 +136,30 @@ export async function awardWeeklyBadge(userId: string): Promise<boolean> {
       });
 
       if (!existingBadge) {
-        await db.userBadge.create({
+        const created = await db.userBadge.create({
           data: {
             userId,
             badgeId: newBadge.id,
             isDisplayed: true,
           },
         });
+        
+        // UserEarnedPoint kaydı ekle
+        if (created && newBadge.points && newBadge.points > 0) {
+          try {
+            await db.userEarnedPoint.create({
+              data: {
+                userId,
+                points: newBadge.points,
+                source: "BADGE",
+                sourceId: newBadge.id,
+              },
+            });
+          } catch (pointError) {
+            console.warn(`[awardWeeklyBadge] UserEarnedPoint kaydı eklenirken hata:`, pointError);
+          }
+        }
+        
         return true;
       }
       return false;
@@ -165,13 +182,30 @@ export async function awardWeeklyBadge(userId: string): Promise<boolean> {
       });
 
       if (!existingBadge) {
-        await db.userBadge.create({
+        const created = await db.userBadge.create({
           data: {
             userId,
             badgeId: weeklyBadge.id,
             isDisplayed: true,
           },
         });
+        
+        // UserEarnedPoint kaydı ekle
+        if (created && weeklyBadge.points && weeklyBadge.points > 0) {
+          try {
+            await db.userEarnedPoint.create({
+              data: {
+                userId,
+                points: weeklyBadge.points,
+                source: "BADGE",
+                sourceId: weeklyBadge.id,
+              },
+            });
+          } catch (pointError) {
+            console.warn(`[awardWeeklyBadge] UserEarnedPoint kaydı eklenirken hata:`, pointError);
+          }
+        }
+        
         return true;
       }
       return false;
