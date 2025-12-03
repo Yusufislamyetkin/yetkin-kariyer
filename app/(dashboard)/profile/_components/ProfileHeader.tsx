@@ -175,8 +175,8 @@ export function ProfileHeader({ user, onUpdate }: ProfileHeaderProps) {
 
   return (
     <>
-      <Card variant="glass" className="relative overflow-hidden !bg-purple-900 border-0 shadow-[0_0_40px_rgba(147,51,234,0.6),0_0_80px_rgba(147,51,234,0.3)]">
-        <div className="p-8">
+      <Card variant="glass" className="relative overflow-visible !bg-purple-900 border-0 shadow-[0_0_40px_rgba(147,51,234,0.6),0_0_80px_rgba(147,51,234,0.3)]">
+        <div className="p-8 pt-10 sm:pt-8">
           {/* Unified Card Content */}
           <div className="flex flex-col sm:flex-row gap-6">
             {/* Avatar Section */}
@@ -220,7 +220,7 @@ export function ProfileHeader({ user, onUpdate }: ProfileHeaderProps) {
               />
               
               {/* Role Badge on Avatar */}
-              <div className={`absolute -top-2 -left-2 px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-white/20 backdrop-blur-sm shadow-lg flex items-center gap-1.5 border-2 border-white/40`}>
+              <div className={`absolute top-0 left-0 sm:-top-2 sm:-left-2 px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-white/20 backdrop-blur-sm shadow-lg flex items-center gap-1.5 border-2 border-white/40`}>
                 <Shield className="w-3.5 h-3.5" />
                 {getRoleLabel(user.role)}
               </div>

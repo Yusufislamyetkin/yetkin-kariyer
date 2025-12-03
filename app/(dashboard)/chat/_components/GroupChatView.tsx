@@ -1331,6 +1331,16 @@ export function GroupChatView({ category }: GroupChatViewProps) {
     fetchGroups();
   }, [fetchGroups]);
 
+  // Mobilde sidebar'ı otomatik aç
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const isMobile = window.innerWidth < 1024;
+      if (isMobile) {
+        setShowSidebar(true);
+      }
+    }
+  }, []);
+
   useEffect(() => {
     adjustMessageInputHeight();
   }, [adjustMessageInputHeight, messageInput]);

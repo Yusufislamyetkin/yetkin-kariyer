@@ -660,9 +660,9 @@ export default function PublicProfilePage() {
       <Card variant="elevated" className="overflow-hidden border border-gray-200 dark:border-gray-800">
         <div className="relative bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-900 dark:via-indigo-900 dark:to-purple-900">
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 dark:from-black/50 to-transparent" />
-          <CardContent className="relative z-10 p-6 md:p-10 flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
+          <CardContent className="relative z-10 p-6 md:p-10 pt-8 md:pt-10 flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
             <div className="flex flex-col gap-6 md:flex-row md:items-end">
-              <div className="relative -mt-4 md:-mt-8">
+              <div className="relative mt-0 md:-mt-8">
                 <div className="w-32 h-32 md:w-40 md:h-40 rounded-3xl bg-white/10 backdrop-blur-sm border border-white/40 flex items-center justify-center text-4xl md:text-5xl text-white font-bold shadow-2xl overflow-hidden">
                   {profile.user.profileImage ? (
                     <img

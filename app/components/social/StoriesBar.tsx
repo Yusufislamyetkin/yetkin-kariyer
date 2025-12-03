@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { Plus } from "lucide-react";
@@ -29,19 +29,13 @@ interface StoriesGroup {
 }
 
 export function StoriesBar() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [stories, setStories] = useState<StoriesGroup[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedStoryGroup, setSelectedStoryGroup] = useState<StoriesGroup | null>(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
 
-  useEffect(() => {
-    if (session?.user?.id) {
-      fetchStories();
-    }
-  }, [session?.user?.id]);
-
-  const fetchStories = async () => {
+  const fetchStories = useCallback(async () => {
     try {
       setIsLoading(true);
       const response = await fetch("/api/stories");
@@ -54,7 +48,15 @@ export function StoriesBar() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    if (status === "authenticated" && session?.user?.id) {
+      fetchStories();
+    } else if (status === "unauthenticated") {
+      setIsLoading(false);
+    }
+  }, [status, session?.user?.id, fetchStories]);
 
   const handleStoryClick = (storyGroup: StoriesGroup) => {
     setSelectedStoryGroup(storyGroup);
@@ -70,7 +72,8 @@ export function StoriesBar() {
     fetchStories();
   };
 
-  if (isLoading) {
+  // Show loading skeleton when session is loading, or when we're fetching stories
+  if (status === "loading" || isLoading || !session?.user?.id) {
     return (
       <div className="w-full bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 rounded-xl p-4 shadow-lg mb-6">
         <div className="flex gap-4 overflow-x-auto">

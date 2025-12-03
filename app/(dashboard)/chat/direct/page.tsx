@@ -157,6 +157,16 @@ export default function DirectChatPage() {
     return () => clearInterval(interval);
   }, []);
 
+  // Mobilde sidebar'ı otomatik aç
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const isMobile = window.innerWidth < 1024;
+      if (isMobile) {
+        setShowSidebar(true);
+      }
+    }
+  }, []);
+
   // Read thread ID from URL query params on mount and when searchParams change
   useEffect(() => {
     const threadId = searchParams.get("thread");

@@ -14,12 +14,12 @@ interface CVTemplate {
 // Sample CV data for previews
 const sampleCVData = {
   personalInfo: {
-    name: "Ahmet Yılmaz",
-    email: "ahmet.yilmaz@email.com",
+    name: "Yusuf İslam Yetkin",
+    email: "yusuf.islam.yetkin@email.com",
     phone: "+90 555 123 4567",
     address: "İstanbul, Türkiye",
-    linkedin: "linkedin.com/in/ahmetyilmaz",
-    website: "ahmetyilmaz.dev",
+    linkedin: "linkedin.com/in/yusufislamyetkin",
+    website: "yusufislamyetkin.dev",
   },
   summary: "5+ yıllık deneyime sahip, yazılım geliştirme ve proje yönetimi konularında uzmanlaşmış bir yazılım mühendisi. Modern web teknolojileri ve bulut çözümleri konusunda derin bilgi sahibi. Ekip çalışması ve liderlik deneyimi ile başarılı projeler yürütmüştür.",
   experience: [
@@ -165,23 +165,24 @@ export default function CVTemplatesPage() {
               style={{ 
                 aspectRatio: '210 / 297',
                 maxHeight: '400px',
-                width: '100%'
+                width: '100%',
+                minHeight: '280px'
               }}
             >
               <div 
-                className="absolute inset-0 flex items-center justify-center"
+                className="absolute inset-0 overflow-auto"
                 style={{ 
                   transform: 'scale(0.22)',
-                  transformOrigin: 'center center',
+                  transformOrigin: 'top left',
                   width: '454%',
                   height: '454%'
                 }}
               >
-                <div style={{ pointerEvents: 'none', width: '210mm', height: '297mm' }}>
+                <div style={{ pointerEvents: 'none' }}>
                   <CVRenderer 
                     data={sampleCVData} 
                     templateId={template.id}
-                    className="!w-[210mm] !h-[297mm]"
+                    className="!w-[210mm] !min-h-[297mm]"
                   />
                 </div>
               </div>
