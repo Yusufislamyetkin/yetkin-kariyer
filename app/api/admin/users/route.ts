@@ -47,7 +47,6 @@ export async function GET(request: Request) {
         email: true,
         role: true,
         profileImage: true,
-        isBot: true,
         createdAt: true,
         updatedAt: true,
       },

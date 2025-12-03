@@ -104,8 +104,6 @@ export async function POST() {
       stats.hackathonTeams = await tx.hackathonTeam.deleteMany({}).then((r: any) => r.count);
       stats.hackathonApplications = await tx.hackathonApplication.deleteMany({}).then((r: any) => r.count);
 
-      // Bot aktiviteleri
-      stats.botActivities = await tx.botActivity.deleteMany({}).then((r: any) => r.count);
 
       // Kullanıcı badge'leri (badge tanımları korunur)
       stats.userBadges = await tx.userBadge.deleteMany({}).then((r: any) => r.count);

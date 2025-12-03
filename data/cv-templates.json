@@ -174,6 +174,579 @@
       "theme": "tech",
       "layout": "two-column"
     }
+  },
+  {
+    "id": "academic",
+    "name": "Akademik CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "education",
+        "experience",
+        "research",
+        "publications",
+        "skills",
+        "languages",
+        "certifications",
+        "achievements"
+      ],
+      "theme": "academic",
+      "layout": "single-column"
+    }
+  },
+  {
+    "id": "startup",
+    "name": "Startup CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "experience",
+        "projects",
+        "skills",
+        "education",
+        "achievements",
+        "certifications"
+      ],
+      "theme": "startup",
+      "layout": "two-column"
+    }
+  },
+  {
+    "id": "designer",
+    "name": "Tasarımcı CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "experience",
+        "projects",
+        "skills",
+        "education",
+        "achievements",
+        "certifications"
+      ],
+      "theme": "designer",
+      "layout": "creative-layout"
+    }
+  },
+  {
+    "id": "finance",
+    "name": "Finans CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "experience",
+        "education",
+        "skills",
+        "certifications",
+        "achievements",
+        "languages"
+      ],
+      "theme": "finance",
+      "layout": "professional-column"
+    }
+  },
+  {
+    "id": "medical",
+    "name": "Tıp CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "education",
+        "experience",
+        "certifications",
+        "skills",
+        "languages",
+        "achievements"
+      ],
+      "theme": "medical",
+      "layout": "single-column"
+    }
+  },
+  {
+    "id": "legal",
+    "name": "Hukuk CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "education",
+        "experience",
+        "certifications",
+        "skills",
+        "languages",
+        "achievements"
+      ],
+      "theme": "legal",
+      "layout": "formal-column"
+    }
+  },
+  {
+    "id": "marketing",
+    "name": "Pazarlama CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "experience",
+        "projects",
+        "skills",
+        "education",
+        "achievements",
+        "certifications"
+      ],
+      "theme": "marketing",
+      "layout": "two-column"
+    }
+  },
+  {
+    "id": "engineering",
+    "name": "Mühendislik CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "experience",
+        "education",
+        "projects",
+        "skills",
+        "certifications",
+        "achievements"
+      ],
+      "theme": "engineering",
+      "layout": "technical-layout"
+    }
+  },
+  {
+    "id": "sales",
+    "name": "Satış CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "experience",
+        "achievements",
+        "skills",
+        "education",
+        "certifications"
+      ],
+      "theme": "sales",
+      "layout": "results-focused"
+    }
+  },
+  {
+    "id": "education",
+    "name": "Eğitim CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "education",
+        "experience",
+        "certifications",
+        "skills",
+        "achievements",
+        "languages"
+      ],
+      "theme": "education",
+      "layout": "single-column"
+    }
+  },
+  {
+    "id": "artistic",
+    "name": "Sanatsal CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "experience",
+        "projects",
+        "achievements",
+        "education",
+        "skills"
+      ],
+      "theme": "artistic",
+      "layout": "portfolio-style"
+    }
+  },
+  {
+    "id": "bold",
+    "name": "Cesur CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "experience",
+        "education",
+        "skills",
+        "projects",
+        "achievements",
+        "certifications"
+      ],
+      "theme": "bold",
+      "layout": "bold-layout"
+    }
+  },
+  {
+    "id": "elegant",
+    "name": "Zarif CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "experience",
+        "education",
+        "skills",
+        "languages",
+        "certifications",
+        "achievements"
+      ],
+      "theme": "elegant",
+      "layout": "elegant-column"
+    }
+  },
+  {
+    "id": "corporate",
+    "name": "Kurumsal CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "experience",
+        "education",
+        "skills",
+        "certifications",
+        "languages",
+        "achievements"
+      ],
+      "theme": "corporate",
+      "layout": "corporate-layout"
+    }
+  },
+  {
+    "id": "innovative",
+    "name": "Yenilikçi CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "experience",
+        "projects",
+        "skills",
+        "education",
+        "achievements",
+        "certifications"
+      ],
+      "theme": "innovative",
+      "layout": "innovative-layout"
+    }
+  },
+  {
+    "id": "timeline",
+    "name": "Zaman Çizelgesi CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "experience",
+        "education",
+        "projects",
+        "skills",
+        "achievements",
+        "certifications"
+      ],
+      "theme": "timeline",
+      "layout": "timeline-layout"
+    }
+  },
+  {
+    "id": "portfolio",
+    "name": "Portföy CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "projects",
+        "experience",
+        "skills",
+        "education",
+        "achievements",
+        "certifications"
+      ],
+      "theme": "portfolio",
+      "layout": "portfolio-layout"
+    }
+  },
+  {
+    "id": "ats-focused",
+    "name": "ATS Odaklı CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "experience",
+        "education",
+        "skills",
+        "certifications",
+        "languages"
+      ],
+      "theme": "ats-focused",
+      "layout": "ats-optimized"
+    }
+  },
+  {
+    "id": "international",
+    "name": "Uluslararası CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "experience",
+        "education",
+        "skills",
+        "languages",
+        "certifications",
+        "achievements"
+      ],
+      "theme": "international",
+      "layout": "international-layout"
+    }
+  },
+  {
+    "id": "bilingual",
+    "name": "İki Dilli CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "experience",
+        "education",
+        "skills",
+        "languages",
+        "certifications",
+        "achievements"
+      ],
+      "theme": "bilingual",
+      "layout": "bilingual-layout"
+    }
+  },
+  {
+    "id": "compact",
+    "name": "Kompakt CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "experience",
+        "education",
+        "skills",
+        "certifications"
+      ],
+      "theme": "compact",
+      "layout": "compact-layout"
+    }
+  },
+  {
+    "id": "detailed",
+    "name": "Detaylı CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "experience",
+        "education",
+        "skills",
+        "languages",
+        "projects",
+        "achievements",
+        "certifications",
+        "references",
+        "hobbies"
+      ],
+      "theme": "detailed",
+      "layout": "detailed-layout"
+    }
+  },
+  {
+    "id": "developer",
+    "name": "Geliştirici CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "experience",
+        "projects",
+        "skills",
+        "education",
+        "certifications",
+        "achievements"
+      ],
+      "theme": "developer",
+      "layout": "developer-layout"
+    }
+  },
+  {
+    "id": "devops",
+    "name": "DevOps CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "experience",
+        "skills",
+        "projects",
+        "education",
+        "certifications",
+        "achievements"
+      ],
+      "theme": "devops",
+      "layout": "technical-layout"
+    }
+  },
+  {
+    "id": "research",
+    "name": "Araştırma CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "education",
+        "experience",
+        "research",
+        "publications",
+        "skills",
+        "certifications",
+        "achievements"
+      ],
+      "theme": "research",
+      "layout": "academic-layout"
+    }
+  },
+  {
+    "id": "consultant",
+    "name": "Danışman CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "experience",
+        "education",
+        "skills",
+        "certifications",
+        "achievements",
+        "languages"
+      ],
+      "theme": "consultant",
+      "layout": "consultant-layout"
+    }
+  },
+  {
+    "id": "entrepreneur",
+    "name": "Girişimci CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "experience",
+        "projects",
+        "achievements",
+        "skills",
+        "education",
+        "certifications"
+      ],
+      "theme": "entrepreneur",
+      "layout": "entrepreneur-layout"
+    }
+  },
+  {
+    "id": "student",
+    "name": "Öğrenci CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "education",
+        "experience",
+        "projects",
+        "skills",
+        "achievements",
+        "certifications",
+        "hobbies"
+      ],
+      "theme": "student",
+      "layout": "student-layout"
+    }
+  },
+  {
+    "id": "executive-premium",
+    "name": "Premium Yönetici CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "experience",
+        "education",
+        "achievements",
+        "skills",
+        "certifications",
+        "languages"
+      ],
+      "theme": "executive-premium",
+      "layout": "premium-layout"
+    }
+  },
+  {
+    "id": "hybrid",
+    "name": "Hibrit CV",
+    "preview": null,
+    "structure": {
+      "sections": [
+        "personalInfo",
+        "summary",
+        "experience",
+        "education",
+        "skills",
+        "projects",
+        "achievements",
+        "certifications",
+        "languages"
+      ],
+      "theme": "hybrid",
+      "layout": "hybrid-layout"
+    }
   }
 ]
 

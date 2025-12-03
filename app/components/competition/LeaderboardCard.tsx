@@ -203,7 +203,7 @@ export function LeaderboardCard({
               </div>
               <div className="flex items-center gap-2 rounded-full bg-white/70 px-2 py-1 text-xs font-semibold text-gray-500 shadow-sm backdrop-blur-sm dark:bg-gray-800/70 dark:text-gray-300">
                 <Award className="h-4 w-4 text-amber-500" />
-                Rozet puanları
+                Toplam puan (rozet + strike)
               </div>
             </div>
           </div>

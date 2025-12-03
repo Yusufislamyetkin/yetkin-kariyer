@@ -186,9 +186,10 @@ export default function FeedPage() {
     }
   }, []);
 
+  // Comment handling is now done internally by PostCard via bottom sheet
   const handleCommentClick = useCallback((postId: string) => {
-    router.push(`/social/posts/${postId}`);
-  }, [router]);
+    // No-op: PostCard handles comments via bottom sheet now
+  }, []);
 
   const handlePostCreated = useCallback(() => {
     setShowCreateModal(false);
@@ -501,7 +502,7 @@ export default function FeedPage() {
                               {user.name || "Kullanıcı"}
                             </p>
                             <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
-                              Yazılımcı Seviyesi: {user.level || 1}
+                              Seviye {user.level || 1}
                             </p>
                           </div>
                         </Link>
@@ -536,12 +537,6 @@ export default function FeedPage() {
                   <Link href="/help" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
                     Yardım
                   </Link>
-                  <Link href="/press" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
-                    Basın
-                  </Link>
-                  <Link href="/api" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
-                    API
-                  </Link>
                   <Link href="/jobs/browse" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
                     İş Fırsatları
                   </Link>
@@ -554,12 +549,12 @@ export default function FeedPage() {
                   <Link href="/locations" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
                     Konumlar
                   </Link>
-                  <Link href="/contact" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
+                  <a href="https://wa.me/905389351189?text=Merhaba" target="_blank" rel="noopener noreferrer" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
                     İletişim
-                  </Link>
+                  </a>
                 </div>
                 <p className="text-gray-500 dark:text-gray-400 font-medium">
-                  © 2025 AI RECRUIT
+                  © 2025 YTK Academy
                 </p>
               </div>
             </div>

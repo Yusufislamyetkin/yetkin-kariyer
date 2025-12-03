@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/app/components/ui/Button";
-import { Loader2, Search, ArrowLeft, User as UserIcon, Mail, Calendar, Shield, ChevronLeft, ChevronRight, Bot, Check, Activity } from "lucide-react";
+import { Loader2, Search, ArrowLeft, User as UserIcon, Mail, Calendar, Shield, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 
 interface User {
@@ -12,7 +12,6 @@ interface User {
   email: string;
   role: string;
   profileImage: string | null;
-  isBot: boolean;
   createdAt: string;
   updatedAt: string;
 }
@@ -36,8 +35,6 @@ export default function AdminUsersPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [pagination, setPagination] = useState<Pagination | null>(null);
   const [searchInput, setSearchInput] = useState("");
-  const [selectedUsers, setSelectedUsers] = useState<Set<string>>(new Set());
-  const [converting, setConverting] = useState(false);
 
   const fetchUsers = async (page: number = 1, searchQuery: string = "", role: string = "") => {
     setLoading(true);
@@ -112,138 +109,6 @@ export default function AdminUsersPage() {
     }).format(date);
   };
 
-  const handleUserSelect = (userId: string, event: React.MouseEvent) => {
-    event.stopPropagation();
-    setSelectedUsers((prev) => {
-      const newSet = new Set(prev);
-      if (newSet.has(userId)) {
-        newSet.delete(userId);
-      } else {
-        newSet.add(userId);
-      }
-      return newSet;
-    });
-  };
-
-  const handleSelectAll = () => {
-    if (selectedUsers.size === users.length) {
-      setSelectedUsers(new Set());
-    } else {
-      setSelectedUsers(new Set(users.map((u) => u.id)));
-    }
-  };
-
-  const handleConvertToBots = async () => {
-    console.log("[BOT_CONVERT] Button clicked, selectedUsers:", selectedUsers.size);
-    
-    if (selectedUsers.size === 0) {
-      alert("Lütfen en az bir kullanıcı seçin");
-      return;
-    }
-
-    // Directly proceed with conversion - user already confirmed by clicking the button
-    setConverting(true);
-    const userIds = Array.from(selectedUsers);
-    console.log("[BOT_CONVERT] Starting conversion for users:", userIds);
-    
-    try {
-      const response = await fetch("/api/admin/bots/convert", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          userIds,
-          autoGenerateCharacter: true,
-        }),
-      });
-
-      console.log("[BOT_CONVERT] Response status:", response.status);
-      
-      let data;
-      try {
-        data = await response.json();
-        console.log("[BOT_CONVERT] Response data:", data);
-      } catch (jsonError: any) {
-        console.error("[BOT_CONVERT] Failed to parse JSON response:", jsonError);
-        const text = await response.text();
-        console.error("[BOT_CONVERT] Response text:", text);
-        throw new Error("Sunucudan geçersiz yanıt alındı");
-      }
-
-      if (!response.ok) {
-        const errorMessage = data?.error || `HTTP ${response.status}: Bot'a dönüştürme başarısız`;
-        console.error("[BOT_CONVERT] API error:", errorMessage);
-        throw new Error(errorMessage);
-      }
-
-      if (!data || !data.summary) {
-        console.error("[BOT_CONVERT] Invalid response format:", data);
-        throw new Error("Sunucudan beklenmeyen yanıt formatı alındı");
-      }
-
-      // Build detailed success message
-      let successMessage = "";
-      if (data.summary.successful > 0) {
-        successMessage = `✅ ${data.summary.successful} kullanıcı başarıyla bot'a dönüştürüldü.`;
-      }
-      
-      if (data.summary.failed > 0) {
-        const failedMessage = `\n⚠️ ${data.summary.failed} kullanıcı için hata oluştu.`;
-        successMessage += failedMessage;
-        
-        // Show detailed error information if available
-        if (data.results && Array.isArray(data.results)) {
-          const failedResults = data.results.filter((r: any) => !r.success);
-          if (failedResults.length > 0) {
-            const errorDetails = failedResults
-              .map((r: any) => `\n  - ${r.userName || r.userId}: ${r.error || "Bilinmeyen hata"}`)
-              .join("");
-            successMessage += `\n\nHata detayları:${errorDetails}`;
-          }
-        }
-      }
-
-      if (data.summary.successful === 0 && data.summary.failed > 0) {
-        // All failed
-        throw new Error(successMessage.replace("✅", "").replace("⚠️", "❌"));
-      }
-
-      console.log("[BOT_CONVERT] Success:", successMessage);
-      
-      alert(successMessage);
-      setSelectedUsers(new Set());
-      
-      // Refresh the user list to show updated bot status
-      await fetchUsers(currentPage, search, roleFilter);
-    } catch (error: any) {
-      console.error("[BOT_CONVERT] Error occurred:", error);
-      
-      let errorMessage = "Bilinmeyen bir hata oluştu";
-      
-      if (error?.message) {
-        errorMessage = error.message;
-      } else if (typeof error === "string") {
-        errorMessage = error;
-      } else if (error?.response?.data?.error) {
-        errorMessage = error.response.data.error;
-      }
-      
-      // Provide more helpful error messages
-      if (errorMessage.includes("Network") || errorMessage.includes("fetch")) {
-        errorMessage = "Ağ hatası: Sunucuya bağlanılamadı. Lütfen internet bağlantınızı kontrol edin.";
-      } else if (errorMessage.includes("401") || errorMessage.includes("Unauthorized")) {
-        errorMessage = "Yetkilendirme hatası: Bu işlem için admin yetkisi gereklidir.";
-      } else if (errorMessage.includes("400")) {
-        errorMessage = `Geçersiz istek: ${errorMessage}`;
-      } else if (errorMessage.includes("500")) {
-        errorMessage = "Sunucu hatası: Lütfen daha sonra tekrar deneyin veya sistem yöneticisine başvurun.";
-      }
-      
-      alert(`❌ Hata: ${errorMessage}`);
-    } finally {
-      setConverting(false);
-      console.log("[BOT_CONVERT] Conversion process completed");
-    }
-  };
 
   return (
     <div className="space-y-6 animate-fade-in min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
@@ -271,15 +136,6 @@ export default function AdminUsersPage() {
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <Button
-                onClick={() => router.push("/admin/activity-feed")}
-                variant="outline"
-                size="sm"
-                className="shrink-0"
-              >
-                <Activity className="h-4 w-4 mr-2" />
-                Etkileşim Akışı
-              </Button>
               {pagination && (
                 <div className="text-right shrink-0">
                   <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
@@ -389,88 +245,12 @@ export default function AdminUsersPage() {
               </div>
             ) : (
               <>
-                {/* Selection Actions */}
-                {selectedUsers.size > 0 && (
-                  <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-4 flex items-center justify-between">
-                    <span className="text-blue-900 dark:text-blue-100 font-medium">
-                      {selectedUsers.size} kullanıcı seçildi
-                    </span>
-                    <div className="flex gap-2">
-                      <Button
-                        onClick={() => setSelectedUsers(new Set())}
-                        variant="outline"
-                        size="sm"
-                      >
-                        Seçimi Temizle
-                      </Button>
-                      <Button
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          console.log("[BOT_CONVERT] Button clicked, selectedUsers:", selectedUsers.size, "converting:", converting);
-                          if (!converting && selectedUsers.size > 0) {
-                            handleConvertToBots();
-                          }
-                        }}
-                        disabled={converting || selectedUsers.size === 0}
-                        size="sm"
-                        className="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
-                        type="button"
-                      >
-                        {converting ? (
-                          <>
-                            <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                            Dönüştürülüyor...
-                          </>
-                        ) : (
-                          <>
-                            <Bot className="h-4 w-4 mr-2" />
-                            Bot&apos;a Dönüştür
-                          </>
-                        )}
-                      </Button>
-                    </div>
-                  </div>
-                )}
-
-                {/* Select All Button */}
-                <div className="mb-4">
-                  <Button
-                    onClick={handleSelectAll}
-                    variant="outline"
-                    size="sm"
-                  >
-                    {selectedUsers.size === users.length ? "Tümünü Kaldır" : "Tümünü Seç"}
-                  </Button>
-                </div>
-
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                   {users.map((user) => (
                     <div
                       key={user.id}
-                      className={`bg-white dark:bg-gray-900 rounded-xl border ${
-                        selectedUsers.has(user.id)
-                          ? "border-blue-500 ring-2 ring-blue-500"
-                          : "border-gray-200 dark:border-gray-800"
-                      } shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group relative`}
+                      className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group relative"
                     >
-                      {/* Checkbox */}
-                      <div
-                        className="absolute top-2 right-2 z-10"
-                        onClick={(e) => handleUserSelect(user.id, e)}
-                      >
-                        <div
-                          className={`w-6 h-6 rounded border-2 flex items-center justify-center cursor-pointer transition-colors ${
-                            selectedUsers.has(user.id)
-                              ? "bg-blue-600 border-blue-600"
-                              : "bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600"
-                          }`}
-                        >
-                          {selectedUsers.has(user.id) && (
-                            <Check className="h-4 w-4 text-white" />
-                          )}
-                        </div>
-                      </div>
 
                       <div
                         onClick={() => router.push(`/profile/${user.id}`)}
@@ -517,12 +297,6 @@ export default function AdminUsersPage() {
                           <Shield className="h-3.5 w-3.5" />
                           {user.role === "admin" ? "Admin" : user.role === "candidate" ? "Aday" : "İşveren"}
                         </span>
-                        {user.isBot && (
-                          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400">
-                            <Bot className="h-3.5 w-3.5" />
-                            Bot
-                          </span>
-                        )}
                       </div>
 
                       {/* Date */}

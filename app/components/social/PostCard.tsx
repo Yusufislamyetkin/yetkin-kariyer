@@ -17,6 +17,7 @@ import {
 import { SharePostModal } from "./SharePostModal";
 import { SendPostModal } from "./SendPostModal";
 import { PostLikesModal } from "./PostLikesModal";
+import { CommentBottomSheet } from "./CommentBottomSheet";
 import { formatDistanceToNow } from "date-fns";
 import { tr } from "date-fns/locale";
 
@@ -70,6 +71,7 @@ export const PostCard = memo(function PostCard({
   const [showShareModal, setShowShareModal] = useState(false);
   const [showSendModal, setShowSendModal] = useState(false);
   const [showLikesModal, setShowLikesModal] = useState(false);
+  const [showCommentSheet, setShowCommentSheet] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
@@ -492,7 +494,7 @@ export const PostCard = memo(function PostCard({
               />
             </button>
             <button
-              onClick={() => onCommentClick?.(post.id)}
+              onClick={() => setShowCommentSheet(true)}
               className="hover:opacity-70 transition-opacity p-1"
               aria-label="Yorum yap"
             >
@@ -560,7 +562,7 @@ export const PostCard = memo(function PostCard({
         {/* View all comments */}
         {post.commentsCount > 0 && (
           <button
-            onClick={() => onCommentClick?.(post.id)}
+            onClick={() => setShowCommentSheet(true)}
             className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 mb-2 transition-colors font-medium"
           >
             {post.commentsCount} yorumun tümünü gör
@@ -596,6 +598,18 @@ export const PostCard = memo(function PostCard({
         <PostLikesModal
           postId={post.id}
           onClose={() => setShowLikesModal(false)}
+        />
+      )}
+
+      {showCommentSheet && (
+        <CommentBottomSheet
+          isOpen={showCommentSheet}
+          onClose={() => setShowCommentSheet(false)}
+          postId={post.id}
+          onCommentAdded={() => {
+            // Optionally update comments count if needed
+            // This will be handled by the bottom sheet's own state
+          }}
         />
       )}
     </div>

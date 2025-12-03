@@ -226,11 +226,6 @@ function DashboardLayoutContent({
             icon: Code,
           },
           {
-            name: "Bugfix",
-            href: "/education/bugfix-cases",
-            icon: Bug,
-          },
-          {
             name: "Rozetler",
             href: "/rozetler",
             icon: Medal,
@@ -315,6 +310,11 @@ function DashboardLayoutContent({
             name: "Admin Paneli",
             href: "/admin",
             icon: LifeBuoy,
+          },
+          {
+            name: "Bugfix",
+            href: "/education/bugfix-cases",
+            icon: Bug,
           },
         ],
       });
@@ -560,7 +560,7 @@ function DashboardLayoutContent({
             </button>
             <Link
               href="/dashboard"
-              className="text-xl font-display font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 bg-clip-text text-transparent flex-shrink-0 min-w-0 truncate"
+              className="text-xl font-display font-normal bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 bg-clip-text text-transparent flex-shrink-0 min-w-0 truncate"
             >
               YTK Academy
             </Link>

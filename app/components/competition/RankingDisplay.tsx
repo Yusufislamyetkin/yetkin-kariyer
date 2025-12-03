@@ -33,7 +33,7 @@ export function RankingDisplay({
       : null;
 
   return (
-    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950/40 dark:via-indigo-900/40 dark:to-purple-900/40 rounded-2xl border border-blue-200/60 dark:border-blue-800/60 shadow-[0_25px_45px_-35px_rgba(59,130,246,0.45)]">
+    <div className="grid grid-cols-1 sm:grid-cols-[minmax(200px,1fr)_auto] sm:items-center gap-4 p-6 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950/40 dark:via-indigo-900/40 dark:to-purple-900/40 rounded-2xl border border-blue-200/60 dark:border-blue-800/60 shadow-[0_25px_45px_-35px_rgba(59,130,246,0.45)]">
       <div className="flex items-center gap-4">
         <div className="flex items-center gap-2">
           <Trophy className="h-10 w-10 text-yellow-500" />
@@ -54,7 +54,7 @@ export function RankingDisplay({
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-start sm:items-end gap-1">
+      <div className="flex flex-col items-start sm:items-end gap-1 sm:min-w-[140px]">
         {typeof points === "number" && points >= 0 && (
           <div>
             <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400 text-right">

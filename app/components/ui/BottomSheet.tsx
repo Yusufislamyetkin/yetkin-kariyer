@@ -11,9 +11,10 @@ interface BottomSheetProps {
   title?: string;
   children: React.ReactNode;
   className?: string;
+  contentClassName?: string;
 }
 
-export function BottomSheet({ isOpen, onClose, title, children, className }: BottomSheetProps) {
+export function BottomSheet({ isOpen, onClose, title, children, className, contentClassName }: BottomSheetProps) {
   const sheetRef = useRef<HTMLDivElement>(null);
   const startY = useRef<number>(0);
   const currentY = useRef<number>(0);
@@ -101,7 +102,7 @@ export function BottomSheet({ isOpen, onClose, title, children, className }: Bot
         )}
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto px-6 py-4">{children}</div>
+        <div className={cn("flex-1 overflow-y-auto px-6 py-4", contentClassName)}>{children}</div>
       </div>
     </>
   );

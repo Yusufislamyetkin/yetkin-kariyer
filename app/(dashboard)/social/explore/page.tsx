@@ -207,9 +207,10 @@ export default function ExplorePage() {
     }
   }, []);
 
+  // Comment handling is now done internally by PostCard via bottom sheet
   const handleCommentClick = useCallback((postId: string) => {
-    router.push(`/social/posts/${postId}`);
-  }, [router]);
+    // No-op: PostCard handles comments via bottom sheet now
+  }, []);
 
   // Fetch current user profile from DB
   useEffect(() => {
@@ -516,7 +517,7 @@ export default function ExplorePage() {
                               </p>
                             ) : (
                               <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
-                                Yeni üye
+                                Seviye {user.level || 1}
                               </p>
                             )}
                           </div>
@@ -546,36 +547,30 @@ export default function ExplorePage() {
               {/* Footer Links */}
               <div className="text-sm text-gray-500 dark:text-gray-400 space-y-3 pt-4">
                 <div className="flex flex-wrap gap-x-4 gap-y-2">
-                  <a href="#" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
+                  <Link href="/about" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
                     Hakkında
-                  </a>
-                  <a href="#" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
+                  </Link>
+                  <Link href="/help" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
                     Yardım
-                  </a>
-                  <a href="#" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
-                    Basın
-                  </a>
-                  <a href="#" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
-                    API
-                  </a>
-                  <a href="#" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
+                  </Link>
+                  <Link href="/jobs/browse" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
                     İş Fırsatları
-                  </a>
-                  <a href="#" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
+                  </Link>
+                  <Link href="/privacy" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
                     Gizlilik
-                  </a>
-                  <a href="#" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
+                  </Link>
+                  <Link href="/terms" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
                     Koşullar
-                  </a>
-                  <a href="#" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
+                  </Link>
+                  <Link href="/locations" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
                     Konumlar
-                  </a>
-                  <a href="#" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
-                    Dil
+                  </Link>
+                  <a href="https://wa.me/905389351189?text=Merhaba" target="_blank" rel="noopener noreferrer" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
+                    İletişim
                   </a>
                 </div>
                 <p className="text-gray-500 dark:text-gray-400 font-medium">
-                  © 2025 AI RECRUIT
+                  © 2025 YTK Academy
                 </p>
               </div>
             </div>

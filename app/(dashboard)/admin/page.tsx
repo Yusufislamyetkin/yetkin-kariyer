@@ -84,22 +84,6 @@ export default function AdminPage() {
     stats: null,
   });
 
-  const [botActivityState, setBotActivityState] = useState<{
-    loading: boolean;
-    success: string | null;
-    error: string | null;
-    stats: {
-      botsProcessed?: number;
-      activitiesExecuted?: number;
-      successfulActivities?: number;
-      failedActivities?: number;
-    } | null;
-  }>({
-    loading: false,
-    success: null,
-    error: null,
-    stats: null,
-  });
 
   const [communityState, setCommunityState] = useState<CourseStatus>({
     loading: false,
@@ -1170,51 +1154,6 @@ export default function AdminPage() {
     }
   };
 
-  const handleBotActivity = async () => {
-    if (botActivityState.loading) {
-      return;
-    }
-
-    setBotActivityState({
-      loading: true,
-      success: null,
-      error: null,
-      stats: null,
-    });
-
-    try {
-      const response = await fetch("/api/admin/bot-activities", {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Bot aktiviteleri çalıştırılırken bir hata oluştu");
-      }
-
-      setBotActivityState({
-        loading: false,
-        success: `Bot aktiviteleri başarıyla çalıştırıldı. ${data.successfulActivities || 0} başarılı, ${data.failedActivities || 0} başarısız.`,
-        error: null,
-        stats: {
-          botsProcessed: data.botsProcessed || 0,
-          activitiesExecuted: data.activitiesExecuted || 0,
-          successfulActivities: data.successfulActivities || 0,
-          failedActivities: data.failedActivities || 0,
-        },
-      });
-    } catch (err: any) {
-      setBotActivityState({
-        loading: false,
-        success: null,
-        error: err.message || "Bir hata oluştu",
-        stats: null,
-      });
-    }
-  };
 
   const handleInsertLiveCodingCases = async () => {
     setLiveCodingCasesState({
@@ -2641,56 +2580,6 @@ export default function AdminPage() {
             </div>
           </div>
 
-          {/* Bot Activity Button */}
-          <div className="mt-6 max-w-md">
-            <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
-              Bot olarak işaretlenmiş profiller rastgele bir aktivite yapacak (POST, COMMENT, LIKE, TEST, LIVE_CODING, BUG_FIX, LESSON, CHAT)
-            </p>
-            <Button
-              onClick={handleBotActivity}
-              disabled={botActivityState.loading}
-              size="lg"
-              className="w-full bg-gradient-to-r from-purple-600 to-pink-700 hover:from-purple-700 hover:to-pink-800 text-white font-medium"
-            >
-              {botActivityState.loading ? (
-                <>
-                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                  Çalıştırılıyor...
-                </>
-              ) : (
-                <>
-                  <Zap className="mr-2 h-5 w-5" />
-                  Bot Aktivitelerini Çalıştır
-                </>
-              )}
-            </Button>
-            {botActivityState.success && (
-              <div className="mt-2 p-3 rounded-lg border border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-950/60">
-                <div className="flex items-start gap-2 text-green-600 dark:text-green-300">
-                  <CheckCircle2 className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                  <div className="flex-1">
-                    <div className="text-sm font-medium mb-1">{botActivityState.success}</div>
-                    {botActivityState.stats && (
-                      <div className="flex flex-col gap-1 text-xs opacity-90">
-                        <span>İşlenen Bot: <strong>{botActivityState.stats.botsProcessed}</strong></span>
-                        <span>Çalıştırılan Aktivite: <strong>{botActivityState.stats.activitiesExecuted}</strong></span>
-                        <span>Başarılı: <strong className="text-green-700 dark:text-green-400">{botActivityState.stats.successfulActivities}</strong></span>
-                        <span>Başarısız: <strong className="text-red-700 dark:text-red-400">{botActivityState.stats.failedActivities}</strong></span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-            )}
-            {botActivityState.error && (
-              <div className="mt-2 p-3 rounded-lg border border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/60">
-                <div className="flex items-start gap-2 text-red-600 dark:text-red-300">
-                  <AlertCircle className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                  <div className="text-sm font-medium">{botActivityState.error}</div>
-                </div>
-              </div>
-            )}
-          </div>
         </div>
       </div>
 

@@ -230,6 +230,7 @@ model User {
   botConfiguration              BotConfiguration?
   botActivities                 BotActivity[]
   accounts                     Account[]
+  certificates                  Certificate[]
 
   @@map("app_users")
 }
@@ -273,6 +274,7 @@ model Course {
   // Relations
   quizzes           Quiz[]
   lessonCompletions LessonCompletion[]
+  certificates      Certificate[]
 
   @@map("courses")
 }
@@ -342,6 +344,27 @@ model LessonCompletion {
   @@unique([userId, lessonSlug])
   @@index([lessonSlug])
   @@map("lesson_completions")
+}
+
+model Certificate {
+  id                String   @id @default(cuid())
+  userId            String
+  courseId          String
+  certificateNumber String   @unique
+  userName          String
+  courseName        String
+  issuedAt          DateTime @default(now())
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([courseId])
+  @@index([certificateNumber])
+  @@unique([userId, courseId])
+  @@map("certificates")
 }
 
 model Hackathon {

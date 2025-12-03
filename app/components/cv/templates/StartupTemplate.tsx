@@ -1,0 +1,226 @@
+/* eslint-disable @next/next/no-img-element */
+interface CVData {
+  personalInfo: {
+    name: string;
+    email: string;
+    phone: string;
+    address: string;
+    linkedin: string;
+    website: string;
+    profilePhoto?: string;
+  };
+  summary: string;
+  experience: Array<{
+    company: string;
+    position: string;
+    startDate: string;
+    endDate: string;
+    description: string;
+    current: boolean;
+  }>;
+  education: Array<{
+    school: string;
+    degree: string;
+    field: string;
+    startDate: string;
+    endDate: string;
+    gpa?: string;
+  }>;
+  skills: string[];
+  languages: Array<{
+    name: string;
+    level: string;
+  }>;
+  projects: Array<{
+    name: string;
+    description: string;
+    technologies: string;
+    url?: string;
+    startDate: string;
+    endDate: string;
+  }>;
+  achievements: Array<{
+    title: string;
+    description: string;
+    date: string;
+  }>;
+  certifications: Array<{
+    name: string;
+    issuer: string;
+    date: string;
+    expiryDate?: string;
+  }>;
+  references: Array<{
+    name: string;
+    position: string;
+    company: string;
+    email: string;
+    phone: string;
+  }>;
+  hobbies: string[];
+}
+
+interface StartupTemplateProps {
+  data: CVData;
+}
+
+export default function StartupTemplate({ data }: StartupTemplateProps) {
+  return (
+    <div className="bg-gradient-to-br from-purple-50 to-blue-50 text-gray-900 break-words">
+      <div className="max-w-5xl mx-auto">
+        {/* Header */}
+        <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-8">
+          <div className="flex items-center gap-6">
+            {data.personalInfo.profilePhoto && (
+              <img
+                src={data.personalInfo.profilePhoto}
+                alt="Profile"
+                className="w-28 h-28 rounded-full object-cover border-4 border-white shadow-lg"
+              />
+            )}
+            <div className="flex-1">
+              <h1 className="text-4xl font-bold mb-2">{data.personalInfo.name || "Ad Soyad"}</h1>
+              <div className="flex flex-wrap gap-4 text-purple-100 text-sm">
+                {data.personalInfo.email && <span>✉ {data.personalInfo.email}</span>}
+                {data.personalInfo.phone && <span>📱 {data.personalInfo.phone}</span>}
+                {data.personalInfo.linkedin && <span>💼 {data.personalInfo.linkedin}</span>}
+                {data.personalInfo.website && <span>🌐 {data.personalInfo.website}</span>}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="p-8">
+          {/* Summary */}
+          {data.summary && (
+            <section className="mb-8 bg-white p-6 rounded-lg shadow-sm border-l-4 border-purple-600">
+              <h2 className="text-2xl font-bold text-purple-600 mb-3">Özet</h2>
+              <p className="text-gray-700 leading-relaxed break-words whitespace-pre-line">
+                {data.summary}
+              </p>
+            </section>
+          )}
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Main Content */}
+            <div className="space-y-6">
+              {/* Experience */}
+              {data.experience.length > 0 && (
+                <section className="bg-white p-6 rounded-lg shadow-sm">
+                  <h2 className="text-2xl font-bold text-purple-600 mb-4 flex items-center gap-2">
+                    <span className="w-1 h-6 bg-purple-600"></span>
+                    İş Deneyimi
+                  </h2>
+                  <div className="space-y-4">
+                    {data.experience.map((exp, index) => (
+                      <div key={index} className="border-l-2 border-purple-300 pl-4">
+                        <h3 className="text-lg font-semibold text-gray-900">{exp.position || "Pozisyon"}</h3>
+                        <p className="text-purple-600 font-medium">{exp.company || "Şirket"}</p>
+                        <p className="text-sm text-gray-600 mb-2">
+                          {exp.startDate && `${exp.startDate} - `}
+                          {exp.current ? "Devam ediyor" : exp.endDate || ""}
+                        </p>
+                        {exp.description && (
+                          <p className="text-gray-700 mt-2 leading-relaxed break-words whitespace-pre-line text-sm">
+                            {exp.description}
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* Projects */}
+              {data.projects.length > 0 && (
+                <section className="bg-white p-6 rounded-lg shadow-sm">
+                  <h2 className="text-2xl font-bold text-purple-600 mb-4 flex items-center gap-2">
+                    <span className="w-1 h-6 bg-purple-600"></span>
+                    Projeler
+                  </h2>
+                  <div className="space-y-4">
+                    {data.projects.map((project, index) => (
+                      <div key={index} className="border-l-2 border-purple-300 pl-4">
+                        <h3 className="text-lg font-semibold text-gray-900">{project.name || "Proje Adı"}</h3>
+                        {project.technologies && (
+                          <div className="flex flex-wrap gap-2 mt-2">
+                            {project.technologies.split(',').map((tech, i) => (
+                              <span key={i} className="px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs">
+                                {tech.trim()}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                        {project.description && (
+                          <p className="text-gray-700 mt-2 leading-relaxed break-words whitespace-pre-line text-sm">
+                            {project.description}
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+            </div>
+
+            {/* Sidebar */}
+            <div className="space-y-6">
+              {/* Skills */}
+              {data.skills.length > 0 && (
+                <section className="bg-white p-6 rounded-lg shadow-sm">
+                  <h2 className="text-2xl font-bold text-purple-600 mb-4">Beceriler</h2>
+                  <div className="flex flex-wrap gap-2">
+                    {data.skills.map((skill, index) => (
+                      <span key={index} className="px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-700 rounded-full text-sm font-medium">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* Education */}
+              {data.education.length > 0 && (
+                <section className="bg-white p-6 rounded-lg shadow-sm">
+                  <h2 className="text-2xl font-bold text-purple-600 mb-4">Eğitim</h2>
+                  <div className="space-y-3">
+                    {data.education.map((edu, index) => (
+                      <div key={index}>
+                        <h3 className="font-semibold text-gray-900">{edu.degree || "Derece"}</h3>
+                        <p className="text-purple-600 text-sm">{edu.school || "Okul"}</p>
+                        <p className="text-gray-600 text-xs mt-1">
+                          {edu.startDate && `${edu.startDate} - `}
+                          {edu.endDate || ""}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* Achievements */}
+              {data.achievements.length > 0 && (
+                <section className="bg-white p-6 rounded-lg shadow-sm">
+                  <h2 className="text-2xl font-bold text-purple-600 mb-4">Başarılar</h2>
+                  <div className="space-y-3">
+                    {data.achievements.map((achievement, index) => (
+                      <div key={index} className="border-l-2 border-purple-300 pl-3">
+                        <h3 className="font-semibold text-gray-900 text-sm">{achievement.title || "Başlık"}</h3>
+                        {achievement.description && (
+                          <p className="text-gray-700 mt-1 break-words whitespace-pre-line text-xs">
+                            {achievement.description}
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+

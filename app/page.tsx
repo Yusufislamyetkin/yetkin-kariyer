@@ -608,60 +608,34 @@ export default function Home() {
       {/* Footer */}
       <footer className="border-t border-gray-200/50 dark:border-gray-700/50 glass mt-16">
         <div className="container mx-auto px-4 py-12">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <h3 className="text-xl font-display font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent mb-4">
-                YTK Academy
-              </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                Kapsamlı eğitim, sosyal ağ, hackathon, freelancer fırsatları ve kariyer geliştirme platformu. Eğitim, topluluk ve kariyerin tek adresi.
-              </p>
-              <div className="flex gap-3">
-                {[Globe, Users, Award].map((Icon, i) => (
-                  <div key={i} className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors cursor-pointer">
-                    <Icon className="h-5 w-5 text-gray-600 dark:text-gray-400" />
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div>
-              <h4 className="font-display font-bold text-gray-900 dark:text-gray-100 mb-4">Platform</h4>
-              <ul className="space-y-2 text-sm">
-                <li><Link href="/education/courses" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Kurslar</Link></li>
-                <li><Link href="/education/analytics" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Analitik</Link></li>
-                <li><Link href="/interview/practice" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Mülakat</Link></li>
-                <li><Link href="/cv/my-cvs" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">CV Oluştur</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-display font-bold text-gray-900 dark:text-gray-100 mb-4">Şirket</h4>
-              <ul className="space-y-2 text-sm">
-                <li><Link href="/about" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Hakkımızda</Link></li>
-                <li><Link href="/contact" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">İletişim</Link></li>
-                <li><Link href="/blog" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Blog</Link></li>
-                <li><Link href="/careers" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Kariyer</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-display font-bold text-gray-900 dark:text-gray-100 mb-4">Destek</h4>
-              <ul className="space-y-2 text-sm">
-                <li><Link href="/help" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Yardım Merkezi</Link></li>
-                <li><Link href="/faq" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">SSS</Link></li>
-                <li><Link href="/privacy" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Gizlilik</Link></li>
-                <li><Link href="/terms" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Şartlar</Link></li>
-              </ul>
-            </div>
-          </div>
           <div className="border-t border-gray-200/50 dark:border-gray-700/50 pt-8">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-              <p className="text-sm text-gray-600 dark:text-gray-400 text-center md:text-left">
-                &copy; 2024 YTK Academy. Tüm hakları saklıdır.
-              </p>
-              <div className="flex items-center gap-6 text-sm text-gray-600 dark:text-gray-400">
-                <span>Türkçe</span>
-                <span>•</span>
-                <span>Made with ❤️ in Turkey</span>
+            <div className="flex flex-col items-center gap-4">
+              <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm text-gray-600 dark:text-gray-400">
+                <Link href="/about" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
+                  Hakkında
+                </Link>
+                <Link href="/help" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
+                  Yardım
+                </Link>
+                <Link href="/jobs/browse" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
+                  İş Fırsatları
+                </Link>
+                <Link href="/privacy" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
+                  Gizlilik
+                </Link>
+                <Link href="/terms" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
+                  Koşullar
+                </Link>
+                <Link href="/locations" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
+                  Konumlar
+                </Link>
+                <a href="https://wa.me/905389351189?text=Merhaba" target="_blank" rel="noopener noreferrer" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
+                  İletişim
+                </a>
               </div>
+              <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
+                &copy; 2025 YTK Academy
+              </p>
             </div>
           </div>
         </div>

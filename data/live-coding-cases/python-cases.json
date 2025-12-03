@@ -1,0 +1,512 @@
+{
+  "id": "python",
+  "name": "Python",
+  "cases": [
+    {
+      "id": "python-case-1",
+      "title": "Sayisal Cikti Dongusu",
+      "description": "1'den 50'ye kadar sayilari ekrana yazdirin.",
+      "difficulty": "beginner",
+      "instructions": "1'den 50'ye kadar olan sayilari ekrana yazdirin. Her satirda bir sayi olsun ve format su sekilde olsun: 'Hello World 1', 'Hello World 2', ... 'Hello World 50'",
+      "starterCode": {
+        "python": "# Kodunu buraya yaz\n"
+      },
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Hello World 1\nHello World 2\nHello World 3\n...\nHello World 50"
+        }
+      ],
+      "hints": [
+        "for dongusu ve range() kullanabilirsiniz",
+        "print() ile cikti alabilirsiniz",
+        "f-string veya format() kullanabilirsiniz"
+      ]
+    },
+    {
+      "id": "python-case-2",
+      "title": "Temel Matematik Islemleri",
+      "description": "Iki sayi uzerinde temel matematik islemleri yapin.",
+      "difficulty": "beginner",
+      "instructions": "Iki sayi (a ve b) tanimlayin ve bu sayilar uzerinde toplama, cikarma, carpma ve bolme islemlerini yaparak sonuclari ekrana yazdirin. Ornek: a=10, b=5 icin '10 + 5 = 15', '10 - 5 = 5', '10 * 5 = 50', '10 / 5 = 2.0'",
+      "starterCode": {
+        "python": "a = 10\nb = 5\n# Kodunu buraya yaz\n"
+      },
+      "testCases": [
+        {
+          "input": "a=10, b=5",
+          "expectedOutput": "10 + 5 = 15\n10 - 5 = 5\n10 * 5 = 50\n10 / 5 = 2.0"
+        }
+      ],
+      "hints": [
+        "Dort islem operatorlerini kullanin: +, -, *, /",
+        "Bolme isleminde sifira bolme kontrolu yapin",
+        "f-string ile formatlanmis cikti alabilirsiniz"
+      ]
+    },
+    {
+      "id": "python-case-3",
+      "title": "String Islemleri",
+      "description": "Metin uzerinde temel string islemleri yapin.",
+      "difficulty": "beginner",
+      "instructions": "Bir string alin ve su islemleri yapin: 1) String'in uzunlugunu bulun, 2) String'i buyuk harfe cevirin, 3) String'i kucuk harfe cevirin, 4) String'in tersini alin, 5) String icinde belirli bir karakteri sayin. Tum sonuclari ekrana yazdirin.",
+      "starterCode": {
+        "python": "text = \"Hello World\"\n# Kodunu buraya yaz\n"
+      },
+      "testCases": [
+        {
+          "input": "text=\"Hello World\"",
+          "expectedOutput": "Length: 11\nUppercase: HELLO WORLD\nLowercase: hello world\nReversed: dlroW olleH\nCount of 'l': 3"
+        }
+      ],
+      "hints": [
+        "len() ile uzunluk bulunur",
+        "text.upper() ve text.lower() kullanin",
+        "text[::-1] ile tersine cevirebilirsiniz",
+        "text.count() ile karakter sayisi bulunur"
+      ]
+    },
+    {
+      "id": "python-case-4",
+      "title": "List Islemleri",
+      "description": "Liste uzerinde temel islemler yapin.",
+      "difficulty": "beginner",
+      "instructions": "Bir liste olusturun ve su islemleri yapin: 1) Listenin elemanlarini ekrana yazdirin, 2) Listenin toplamini bulun, 3) Listenin en buyuk elemanini bulun, 4) Listenin en kucuk elemanini bulun, 5) Listenin ortalamasini bulun.",
+      "starterCode": {
+        "python": "numbers = [5, 10, 15, 20, 25]\n# Kodunu buraya yaz\n"
+      },
+      "testCases": [
+        {
+          "input": "numbers = [5, 10, 15, 20, 25]",
+          "expectedOutput": "List: [5, 10, 15, 20, 25]\nSum: 75\nMax: 25\nMin: 5\nAverage: 15.0"
+        }
+      ],
+      "hints": [
+        "sum(), max(), min() fonksiyonlarini kullanin",
+        "Ortalama icin sum() / len() kullanin",
+        "print() ile sonuclari yazdirin"
+      ]
+    },
+    {
+      "id": "python-case-5",
+      "title": "Kosullu Ifadeler",
+      "description": "If-else yapilari ile kosullu islemler yapin.",
+      "difficulty": "beginner",
+      "instructions": "Bir sayi alin ve su kontrolleri yapin: Sayi pozitif mi, negatif mi, sifir mi? Sayi cift mi, tek mi? Sayi 100'den buyuk mu, kucuk mu? Tum sonuclari ekrana yazdirin.",
+      "starterCode": {
+        "python": "number = 42\n# Kodunu buraya yaz\n"
+      },
+      "testCases": [
+        {
+          "input": "number = 42",
+          "expectedOutput": "Number: 42\nPositive: True\nNegative: False\nZero: False\nEven: True\nOdd: False\nGreater than 100: False\nLess than 100: True"
+        }
+      ],
+      "hints": [
+        "if-elif-else yapilarini kullanin",
+        "Modulo operatoru (%) ile cift/tek kontrolu yapin",
+        "Karsilastirma operatorlerini kullanin: >, <, ==, !="
+      ]
+    },
+    {
+      "id": "python-case-6",
+      "title": "Fonksiyon Olusturma",
+      "description": "Fonksiyonlar ile fonksiyonel programlama yapin.",
+      "difficulty": "beginner",
+      "instructions": "Iki sayinin toplamini, farkini, carpimini ve bolumunu hesaplayan ayri fonksiyonlar olusturun. Bu fonksiyonlari cagirip sonuclari ekrana yazdirin.",
+      "starterCode": {
+        "python": "a = 20\nb = 4\n# Kodunu buraya yaz\n\n# Fonksiyonlari buraya yaz\n"
+      },
+      "testCases": [
+        {
+          "input": "a=20, b=4",
+          "expectedOutput": "Add: 24\nSubtract: 16\nMultiply: 80\nDivide: 5.0"
+        }
+      ],
+      "hints": [
+        "def keyword'u ile fonksiyon olusturun",
+        "Her fonksiyon iki parametre alip sonuc donmeli",
+        "Fonksiyonlari cagirip sonuclari yazdirin"
+      ]
+    },
+    {
+      "id": "python-case-7",
+      "title": "Basit Dongu Problemleri",
+      "description": "Farkli dongu turleri ile problem cozun.",
+      "difficulty": "beginner",
+      "instructions": "1'den 100'e kadar olan sayilardan 3'e bolunebilen sayilari bulun ve ekrana yazdirin. Ayrica bu sayilarin toplamini hesaplayin.",
+      "starterCode": {
+        "python": "# Kodunu buraya yaz\n"
+      },
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Numbers divisible by 3: 3, 6, 9, 12, 15, ... 99\nSum: 1683"
+        }
+      ],
+      "hints": [
+        "for dongusu ve range() kullanin",
+        "Modulo operatoru (%) ile bolunebilirlik kontrolu yapin",
+        "Toplami bir degiskende tutun"
+      ]
+    },
+    {
+      "id": "python-case-8",
+      "title": "Temel Veri Yapilari",
+      "description": "List ve Dictionary kullanimi.",
+      "difficulty": "beginner",
+      "instructions": "Bir liste olusturun ve 5 isim ekleyin. Sonra bu listeyi ekrana yazdirin. Ayrica bir dictionary olusturun ve 3 ogrencinin notlarini saklayin. Dictionary'yi ekrana yazdirin.",
+      "starterCode": {
+        "python": "# Kodunu buraya yaz\n"
+      },
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Names: ['Alice', 'Bob', 'Charlie', 'David', 'Eve']\nGrades:\nAlice: 85\nBob: 92\nCharlie: 78"
+        }
+      ],
+      "hints": [
+        "List olusturun: names = []",
+        "Dictionary olusturun: grades = {}",
+        "append() ve dict[key] = value ile eleman ekleyin"
+      ]
+    },
+    {
+      "id": "python-case-9",
+      "title": "Karmasik Liste Islemleri",
+      "description": "Cok boyutlu listeler ve gelismis islemler.",
+      "difficulty": "intermediate",
+      "instructions": "3x3 bir matris olusturun ve degerleri doldurun. Matrisin transpozunu bulun ve her iki matrisi ekrana yazdirin.",
+      "starterCode": {
+        "python": "matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]\n# Kodunu buraya yaz\n"
+      },
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Original Matrix:\n[1, 2, 3]\n[4, 5, 6]\n[7, 8, 9]\nTransposed Matrix:\n[1, 4, 7]\n[2, 5, 8]\n[3, 6, 9]"
+        }
+      ],
+      "hints": [
+        "List comprehension kullanabilirsiniz",
+        "zip() fonksiyonu ile transpoz yapabilirsiniz",
+        "Iki for dongusu ile matrisi dolasin"
+      ]
+    },
+    {
+      "id": "python-case-10",
+      "title": "String Manipulasyonu",
+      "description": "Gelismis string islemleri ve pattern matching.",
+      "difficulty": "intermediate",
+      "instructions": "Bir cumle alin ve su islemleri yapin: 1) Kelimeleri ayirin, 2) Her kelimenin uzunlugunu bulun, 3) En uzun kelimeyi bulun, 4) Cumledeki sesli harf sayisini bulun, 5) Cumleyi tersine cevirin.",
+      "starterCode": {
+        "python": "sentence = \"The quick brown fox jumps over the lazy dog\"\n# Kodunu buraya yaz\n"
+      },
+      "testCases": [
+        {
+          "input": "sentence = \"The quick brown fox\"",
+          "expectedOutput": "Words: ['The', 'quick', 'brown', 'fox']\nWord lengths: [3, 5, 5, 3]\nLongest word: quick\nVowel count: 5\nReversed: xof nworb kciuq ehT"
+        }
+      ],
+      "hints": [
+        "split() metodu ile kelimeleri ayirin",
+        "max() fonksiyonu ile en uzun kelimeyi bulun",
+        "in operatoru ile sesli harf kontrolu yapin"
+      ]
+    },
+    {
+      "id": "python-case-11",
+      "title": "Recursive Fonksiyonlar",
+      "description": "Ozyinelemeli fonksiyonlar ile problem cozun.",
+      "difficulty": "intermediate",
+      "instructions": "Faktoriyel hesaplayan recursive bir fonksiyon yazin. Ayrica Fibonacci serisinin n. elemanini bulan recursive bir fonksiyon yazin. Her ikisini de test edin.",
+      "starterCode": {
+        "python": "n = 5\n# Kodunu buraya yaz\n\n# Recursive fonksiyonlari buraya yaz\n"
+      },
+      "testCases": [
+        {
+          "input": "n = 5",
+          "expectedOutput": "Factorial of 5: 120\nFibonacci(5): 5"
+        }
+      ],
+      "hints": [
+        "Base case'i unutmayin (n == 0 veya n == 1)",
+        "Recursive cagri yapin: factorial(n-1)",
+        "Fibonacci icin iki base case gerekli: n==0 ve n==1"
+      ]
+    },
+    {
+      "id": "python-case-12",
+      "title": "Class Kullanimi",
+      "description": "Nesne yonelimli programlama temelleri.",
+      "difficulty": "intermediate",
+      "instructions": "Bir 'Person' class'i olusturun. Name, Age, Email attribute'lari olsun. __init__ metodu, __str__ metodu ve bir display_info() metodu olsun. Bir Person nesnesi olusturup bilgilerini ekrana yazdirin.",
+      "starterCode": {
+        "python": "# Kodunu buraya yaz\n\n# Person class'ini buraya yaz\n"
+      },
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Name: John Doe\nAge: 30\nEmail: john.doe@example.com\nDisplayInfo: John Doe, 30 years old, john.doe@example.com"
+        }
+      ],
+      "hints": [
+        "class Person olusturun",
+        "__init__ metodu ile constructor yapin",
+        "__str__ metodu ile string temsilini tanimlayin"
+      ]
+    },
+    {
+      "id": "python-case-13",
+      "title": "Dosya Islemleri",
+      "description": "Dosya okuma ve yazma islemleri (simule).",
+      "difficulty": "intermediate",
+      "instructions": "Bir string listesi olusturun ve 5 satir metin ekleyin. Bu listeyi bir dosyaya yazdirir gibi formatlayin (her satir bir dosya satiri gibi). Sonra bu 'dosyayi' okuyup ekrana yazdirin.",
+      "starterCode": {
+        "python": "lines = [\"Line 1\", \"Line 2\", \"Line 3\", \"Line 4\", \"Line 5\"]\n# Kodunu buraya yaz\n"
+      },
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Writing to file:\nLine 1\nLine 2\nLine 3\nLine 4\nLine 5\nReading from file:\nLine 1\nLine 2\nLine 3\nLine 4\nLine 5"
+        }
+      ],
+      "hints": [
+        "join() metodu ile satirlari birlestirin",
+        "Her satiri ayri bir string olarak tutun",
+        "Simulasyon yapin, gercek dosya islemi yapmayin"
+      ]
+    },
+    {
+      "id": "python-case-14",
+      "title": "Algoritma Problemleri",
+      "description": "Klasik algoritma problemlerini cozun.",
+      "difficulty": "intermediate",
+      "instructions": "Bir listede tekrar eden elemanlari bulun. Ayrica listedeki en cok tekrar eden elemani ve kac kere tekrar ettigini bulun.",
+      "starterCode": {
+        "python": "numbers = [1, 2, 3, 2, 4, 3, 5, 3, 2, 1]\n# Kodunu buraya yaz\n"
+      },
+      "testCases": [
+        {
+          "input": "numbers = [1, 2, 3, 2, 4, 3, 5, 3, 2, 1]",
+          "expectedOutput": "Duplicates: [1, 2, 3]\nMost frequent: 3\nCount: 3"
+        }
+      ],
+      "hints": [
+        "Counter from collections kullanabilirsiniz",
+        "set() ile tekrarlari bulun",
+        "max() ile en cok tekrar edeni bulun"
+      ]
+    },
+    {
+      "id": "python-case-15",
+      "title": "Veri Filtreleme ve Siralama",
+      "description": "List comprehension ve filter ile veri isleme.",
+      "difficulty": "intermediate",
+      "instructions": "Bir ogrenci listesi olusturun (isim ve not). Notu 70'ten buyuk olanlari filtreleyin ve notlarina gore buyukten kucuge siralam. Sonuclari ekrana yazdirin.",
+      "starterCode": {
+        "python": "students = [(\"Alice\", 85), (\"Bob\", 65), (\"Charlie\", 92), (\"David\", 78), (\"Eve\", 55)]\n# Kodunu buraya yaz\n"
+      },
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Filtered and sorted:\nCharlie: 92\nAlice: 85\nDavid: 78"
+        }
+      ],
+      "hints": [
+        "List comprehension ile filtreleme yapin",
+        "sorted() ile siralam yapin, reverse=True ile tersine cevirin",
+        "Lambda fonksiyonlari kullanabilirsiniz"
+      ]
+    },
+    {
+      "id": "python-case-16",
+      "title": "Matematiksel Hesaplamalar",
+      "description": "Gelismis matematiksel islemler.",
+      "difficulty": "intermediate",
+      "instructions": "Bir sayinin asal olup olmadigini kontrol eden bir fonksiyon yazin. Ayrica 1'den n'e kadar olan asal sayilari bulan bir fonksiyon yazin. Sonuclari ekrana yazdirin.",
+      "starterCode": {
+        "python": "n = 20\n# Kodunu buraya yaz\n\n# Fonksiyonlari buraya yaz\n"
+      },
+      "testCases": [
+        {
+          "input": "n = 20",
+          "expectedOutput": "Is 17 prime? True\nPrimes up to 20: [2, 3, 5, 7, 11, 13, 17, 19]"
+        }
+      ],
+      "hints": [
+        "Asal sayi kontrolu icin 2'den sqrt(n)'e kadar kontrol edin",
+        "Sieve of Eratosthenes algoritmasi kullanabilirsiniz",
+        "math.sqrt() kullanin"
+      ]
+    },
+    {
+      "id": "python-case-17",
+      "title": "Karmasik Algoritma Tasarimi",
+      "description": "Karmasik algoritmalar ve optimizasyon.",
+      "difficulty": "advanced",
+      "instructions": "Binary Search algoritmasi implementasyonu. Siralanmis bir listede bir elemanin var olup olmadigini O(log n) zamanda bulun.",
+      "starterCode": {
+        "python": "sorted_list = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]\ntarget = 11\n# Kodunu buraya yaz\n\n# Binary Search fonksiyonunu buraya yaz\n"
+      },
+      "testCases": [
+        {
+          "input": "target = 11",
+          "expectedOutput": "List: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]\nTarget: 11\nFound at index: 5"
+        }
+      ],
+      "hints": [
+        "Left ve right pointer'lar kullanin",
+        "Mid point hesaplayin: (left + right) // 2",
+        "Target'a gore left veya right'i guncelleyin"
+      ]
+    },
+    {
+      "id": "python-case-18",
+      "title": "Optimizasyon Problemleri",
+      "description": "Performans optimizasyonu ve verimli algoritmalar.",
+      "difficulty": "advanced",
+      "instructions": "Bir listedeki en uzun artan alt diziyi (Longest Increasing Subsequence) bulun. Dynamic Programming yaklasimi kullanin.",
+      "starterCode": {
+        "python": "array = [10, 9, 2, 5, 3, 7, 101, 18]\n# Kodunu buraya yaz\n\n# LIS fonksiyonunu buraya yaz\n"
+      },
+      "testCases": [
+        {
+          "input": "array = [10, 9, 2, 5, 3, 7, 101, 18]",
+          "expectedOutput": "Array: [10, 9, 2, 5, 3, 7, 101, 18]\nLIS length: 4\nLIS: [2, 5, 7, 18]"
+        }
+      ],
+      "hints": [
+        "DP listesi olusturun: dp[i] = i. elemana kadar LIS uzunlugu",
+        "Her eleman icin onceki elemanlari kontrol edin",
+        "O(n^2) zaman karmasikligi ile cozulebilir"
+      ]
+    },
+    {
+      "id": "python-case-19",
+      "title": "Veri Yapilari",
+      "description": "Tree veri yapisi implementasyonu.",
+      "difficulty": "advanced",
+      "instructions": "Bir Binary Search Tree (BST) implementasyonu yapin. Insert, Search ve Inorder traversal metodlari olsun. Test edin.",
+      "starterCode": {
+        "python": "# Kodunu buraya yaz\n\n# TreeNode ve BST class'larini buraya yaz\n"
+      },
+      "testCases": [
+        {
+          "input": "values = [5, 3, 7, 2, 4, 6, 8]",
+          "expectedOutput": "Inserting: 5, 3, 7, 2, 4, 6, 8\nInorder traversal: 2, 3, 4, 5, 6, 7, 8\nSearch 4: Found\nSearch 9: Not Found"
+        }
+      ],
+      "hints": [
+        "TreeNode class'i olusturun (val, left, right)",
+        "BST'de sol alt agacta kucuk, sag alt agacta buyuk degerler",
+        "Inorder: sol -> root -> sag"
+      ]
+    },
+    {
+      "id": "python-case-20",
+      "title": "Design Patterns",
+      "description": "Design pattern uygulamalari.",
+      "difficulty": "advanced",
+      "instructions": "Singleton pattern implementasyonu yapin. Bir Logger class'i olusturun ve singleton pattern kullanin. Logger'a mesaj ekleyip ekrana yazdirin.",
+      "starterCode": {
+        "python": "# Kodunu buraya yaz\n\n# Logger class'ini buraya yaz\n"
+      },
+      "testCases": [
+        {
+          "input": "",
+          "expectedOutput": "Logger instance created\nLog: Application started\nLog: User logged in\nLog: Processing data\nAll logs:\nApplication started\nUser logged in\nProcessing data"
+        }
+      ],
+      "hints": [
+        "__new__ metodu ile singleton yapin",
+        "Class variable ile instance tutun",
+        "get_instance() metodu ile tek instance dondurun"
+      ]
+    },
+    {
+      "id": "python-case-21",
+      "title": "Performans Optimizasyonu",
+      "description": "Kod optimizasyonu ve verimlilik.",
+      "difficulty": "advanced",
+      "instructions": "Bir listedeki iki sayinin toplaminin hedef degeri verdigi ciftleri bulun. O(n) zaman karmasikligi ile cozun (dictionary kullanin).",
+      "starterCode": {
+        "python": "array = [2, 7, 11, 15, 3, 6]\ntarget = 9\n# Kodunu buraya yaz\n"
+      },
+      "testCases": [
+        {
+          "input": "target = 9",
+          "expectedOutput": "Array: [2, 7, 11, 15, 3, 6]\nTarget: 9\nPairs: [(2, 7), (3, 6)]"
+        }
+      ],
+      "hints": [
+        "Dictionary kullanarak sayilari saklayin",
+        "Her eleman icin (target - current) degerini kontrol edin",
+        "O(n) zaman, O(n) alan karmasikligi"
+      ]
+    },
+    {
+      "id": "python-case-22",
+      "title": "Karmasik String Algoritmalari",
+      "description": "Gelismis string algoritmalari.",
+      "difficulty": "advanced",
+      "instructions": "Longest Common Subsequence (LCS) algoritmasi implementasyonu. Iki string arasindaki en uzun ortak alt diziyi bulun.",
+      "starterCode": {
+        "python": "str1 = \"ABCDGH\"\nstr2 = \"AEDFHR\"\n# Kodunu buraya yaz\n\n# LCS fonksiyonunu buraya yaz\n"
+      },
+      "testCases": [
+        {
+          "input": "str1 = \"ABCDGH\", str2 = \"AEDFHR\"",
+          "expectedOutput": "String 1: ABCDGH\nString 2: AEDFHR\nLCS length: 3\nLCS: ADH"
+        }
+      ],
+      "hints": [
+        "Dynamic Programming kullanin",
+        "2D list olusturun: dp[i][j] = LCS uzunlugu",
+        "Karakterler esitse: dp[i][j] = dp[i-1][j-1] + 1"
+      ]
+    },
+    {
+      "id": "python-case-23",
+      "title": "Graph Algoritmalari",
+      "description": "Graph veri yapisi ve algoritmalari.",
+      "difficulty": "advanced",
+      "instructions": "Bir graph olusturun ve Depth-First Search (DFS) algoritmasi implementasyonu yapin. Graph'i temsil edin ve DFS ile dolasin.",
+      "starterCode": {
+        "python": "# Kodunu buraya yaz\n\n# Graph ve DFS fonksiyonunu buraya yaz\n"
+      },
+      "testCases": [
+        {
+          "input": "graph with nodes: 0,1,2,3,4",
+          "expectedOutput": "Graph:\n0 -> [1, 2]\n1 -> [3]\n2 -> [4]\n3 -> [4]\nDFS starting from 0: [0, 1, 3, 4, 2]"
+        }
+      ],
+      "hints": [
+        "Dictionary ile adjacency list kullanin",
+        "Set ile visited tutun",
+        "Recursive veya stack ile DFS yapin"
+      ]
+    },
+    {
+      "id": "python-case-24",
+      "title": "Sistem Tasarimi Problemleri",
+      "description": "Buyuk olcekli sistem tasarimi problemleri.",
+      "difficulty": "advanced",
+      "instructions": "Basit bir Cache sistemi implementasyonu yapin. LRU (Least Recently Used) cache. Get ve Put metodlari olsun. Capacity limiti olsun.",
+      "starterCode": {
+        "python": "# Kodunu buraya yaz\n\n# LRUCache class'ini buraya yaz\n"
+      },
+      "testCases": [
+        {
+          "input": "capacity = 2",
+          "expectedOutput": "Cache created with capacity 2\nPut(1, 1)\nPut(2, 2)\nGet(1): 1\nPut(3, 3)\nGet(2): -1 (evicted)\nGet(3): 3"
+        }
+      ],
+      "hints": [
+        "OrderedDict kullanabilirsiniz",
+        "Dictionary ve list kullanarak da yapabilirsiniz",
+        "En son kullanilan head'de, en eski tail'de"
+      ]
+    }
+  ]
+}
+

@@ -169,8 +169,8 @@ export default function CompetitionPage() {
           </div>
         </div>
         <div className="mt-4 rounded-2xl border border-dashed border-gray-200/60 bg-white/70 px-5 py-4 text-sm text-gray-600 shadow-sm dark:border-gray-700/60 dark:bg-gray-900/70 dark:text-gray-300">
-          Sıralama, kazandığınız rozetlerden toplam puanınıza göre yapılmaktadır.
-          Rozetleri aktivitelerinizi tamamlayarak kazanabilirsiniz.
+          Sıralama, kazandığınız toplam puanlara (rozet puanları + strike puanları) göre yapılmaktadır.
+          Rozetleri ve strike puanlarını aktivitelerinizi tamamlayarak kazanabilirsiniz.
         </div>
       </div>
 
@@ -188,17 +188,17 @@ export default function CompetitionPage() {
               </div>
               <div>
                 <p className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                  {period === "daily" ? "Günlük" : period === "weekly" ? "Haftalık" : "Aylık"} Rozet Puanları
+                  {period === "daily" ? "Günlük" : period === "weekly" ? "Haftalık" : "Aylık"} Toplam Puan
                   Liderlik Tablosu
                 </p>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                  Kazanılan rozet puanlarına göre sıralama.
+                  Kazanılan toplam puanlara (rozet + strike) göre sıralama.
                 </p>
               </div>
             </div>
             <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
               <BookOpenCheck className="h-4 w-4 text-emerald-500" />
-              Sıralama kriteri: toplam rozet puanları.
+              Sıralama kriteri: toplam puan (rozet + strike).
             </div>
           </CardTitle>
         </CardHeader>

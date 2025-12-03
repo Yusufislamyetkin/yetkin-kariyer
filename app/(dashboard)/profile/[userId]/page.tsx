@@ -559,7 +559,7 @@ export default function PublicProfilePage() {
     return null;
   }
 
-  const earnedBadgeIds = new Set(badges.map((badge) => badge.id));
+  const earnedBadgeIds = new Set(badges.filter((badge) => badge.earnedAt).map((badge) => badge.id));
   const currentUserId = (session?.user as { id?: string } | undefined)?.id;
   const isOwnProfile = currentUserId === profile.user.id;
   const isFriendButtonDisabled =

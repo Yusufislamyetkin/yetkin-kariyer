@@ -160,13 +160,6 @@ const buildResourceCatalog = ({
       summary: "Tüm Yetkin Hub kurslarına göz at.",
     },
     {
-      id: "goals",
-      title: "Günlük Hedefler",
-      href: "/goals",
-      type: "goal",
-      summary: "Hedeflerini takip et ve güncelle.",
-    },
-    {
       id: "career-roadmap",
       title: "Kariyer Planım",
       href: "/career/roadmap",
@@ -200,8 +193,6 @@ const buildResourceCatalog = ({
     const typeSlug =
       item.type === "HACKATON"
         ? "hackaton"
-        : item.type === "BUG_FIX"
-        ? "bug-fix"
         : item.type === "LIVE_CODING"
         ? "live-coding"
         : "test";
@@ -255,7 +246,7 @@ const buildFallbackRecommendations = ({
 
   if (activeGoals.length > 0) {
     const goal = activeGoals[0];
-    const goalResource = resourceCatalog.find((resource) => resource.id === "goals");
+    const roadmapResource = resourceCatalog.find((resource) => resource.id === "career-roadmap");
     recommendations.push({
       title: `${goal.label} Hedefini Tamamla`,
       summary: `${goal.label} hedefini zamanında bitir.`,
@@ -265,8 +256,8 @@ const buildFallbackRecommendations = ({
         "Tamamlayınca sonucu sisteme işle.",
       ],
       timeframe: "Bugün",
-      ctaLabel: "Hedefleri yönet",
-      ctaHref: goalResource?.href ?? "/goals",
+      ctaLabel: "Kariyer planına git",
+      ctaHref: roadmapResource?.href ?? "/career/roadmap",
       category: "Hedef Yönetimi",
       relatedGoalId: goal.id,
       metric: `Hedef: ${goal.target}`,
@@ -597,7 +588,7 @@ export async function GET() {
       db.quiz.findMany({
         where: {
           type: {
-            in: ["HACKATON", "BUG_FIX", "LIVE_CODING"],
+            in: ["HACKATON", "LIVE_CODING"],
           },
         },
         select: {
@@ -620,23 +611,23 @@ export async function GET() {
       }))
     );
 
-    const lowScoreAttempts = lowScoreAttemptsRaw.map((attempt: { quizId: string; score: number; topic?: string | null; quiz?: { title?: string | null; type?: string | null } | null }) => ({
-      quizId: attempt.quizId,
-      quizTitle: attempt.quiz?.title ?? "Test",
-      score: attempt.score,
-      topic: attempt.topic,
-      type: attempt.quiz?.type ?? null,
-      href:
-        attempt.quiz?.type === "TEST" || !attempt.quiz?.type
-          ? `/education/test/${attempt.quizId}`
-          : attempt.quiz?.type === "HACKATON"
-          ? `/education/hackaton/${attempt.quizId}`
-          : attempt.quiz?.type === "BUG_FIX"
-          ? `/education/bug-fix/${attempt.quizId}`
-          : attempt.quiz?.type === "LIVE_CODING"
-          ? `/education/live-coding/${attempt.quizId}`
-          : `/education/test/${attempt.quizId}`,
-    }));
+    const lowScoreAttempts = lowScoreAttemptsRaw
+      .filter((attempt: { quiz?: { type?: string | null } | null }) => attempt.quiz?.type !== "BUG_FIX")
+      .map((attempt: { quizId: string; score: number; topic?: string | null; quiz?: { title?: string | null; type?: string | null } | null }) => ({
+        quizId: attempt.quizId,
+        quizTitle: attempt.quiz?.title ?? "Test",
+        score: attempt.score,
+        topic: attempt.topic,
+        type: attempt.quiz?.type ?? null,
+        href:
+          attempt.quiz?.type === "TEST" || !attempt.quiz?.type
+            ? `/education/test/${attempt.quizId}`
+            : attempt.quiz?.type === "HACKATON"
+            ? `/education/hackaton/${attempt.quizId}`
+            : attempt.quiz?.type === "LIVE_CODING"
+            ? `/education/live-coding/${attempt.quizId}`
+            : `/education/test/${attempt.quizId}`,
+      }));
 
     const lessons = await generatePersonalizedLessons(currentUserId);
 

@@ -1,0 +1,124 @@
+/* eslint-disable @next/next/no-img-element */
+interface CVData {
+  personalInfo: { name: string; email: string; phone: string; address: string; linkedin: string; website: string; profilePhoto?: string; };
+  summary: string;
+  experience: Array<{ company: string; position: string; startDate: string; endDate: string; description: string; current: boolean; }>;
+  education: Array<{ school: string; degree: string; field: string; startDate: string; endDate: string; gpa?: string; }>;
+  skills: string[];
+  languages: Array<{ name: string; level: string; }>;
+  projects: Array<{ name: string; description: string; technologies: string; url?: string; startDate: string; endDate: string; }>;
+  achievements: Array<{ title: string; description: string; date: string; }>;
+  certifications: Array<{ name: string; issuer: string; date: string; expiryDate?: string; }>;
+  references: Array<{ name: string; position: string; company: string; email: string; phone: string; }>;
+  hobbies: string[];
+}
+
+export default function StudentTemplate({ data }: { data: CVData }) {
+  return (
+    <div className="bg-white text-gray-900 break-words">
+      <div className="max-w-5xl mx-auto p-8">
+        <div className="bg-gradient-to-r from-green-500 to-teal-500 text-white p-8 mb-8 rounded-lg">
+          <h1 className="text-4xl font-bold mb-3">{data.personalInfo.name || "Ad Soyad"}</h1>
+          <div className="flex flex-wrap gap-6 text-green-100 text-sm">
+            {data.personalInfo.email && <span>✉ {data.personalInfo.email}</span>}
+            {data.personalInfo.phone && <span>📱 {data.personalInfo.phone}</span>}
+            {data.personalInfo.linkedin && <span>💼 {data.personalInfo.linkedin}</span>}
+          </div>
+        </div>
+        {data.summary && (
+          <section className="mb-8 bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
+            <h2 className="text-2xl font-bold text-green-700 mb-3">Özet</h2>
+            <p className="text-gray-700 leading-relaxed break-words whitespace-pre-line">{data.summary}</p>
+          </section>
+        )}
+        {data.education.length > 0 && (
+          <section className="mb-8">
+            <h2 className="text-2xl font-bold text-green-600 mb-4 border-b-2 border-green-600 pb-1">Eğitim</h2>
+            <div className="space-y-4">
+              {data.education.map((edu, i) => (
+                <div key={i} className="border-l-4 border-green-500 pl-4">
+                  <h3 className="text-xl font-semibold text-gray-900">{edu.degree}</h3>
+                  <p className="text-green-600 font-medium">{edu.school}</p>
+                  {edu.field && <p className="text-gray-700 text-sm">{edu.field}</p>}
+                  {edu.gpa && <p className="text-gray-600 text-sm">GPA: {edu.gpa}</p>}
+                  <p className="text-sm text-gray-600 mt-1">{edu.startDate} - {edu.endDate}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+        {data.experience.length > 0 && (
+          <section className="mb-8">
+            <h2 className="text-2xl font-bold text-green-600 mb-4 border-b-2 border-green-600 pb-1">Deneyim</h2>
+            <div className="space-y-4">
+              {data.experience.map((exp, i) => (
+                <div key={i} className="border-l-4 border-green-500 pl-4">
+                  <h3 className="text-lg font-semibold text-gray-900">{exp.position}</h3>
+                  <p className="text-green-600 font-medium">{exp.company}</p>
+                  <p className="text-sm text-gray-600 mb-2">{exp.startDate} - {exp.current ? "Devam ediyor" : exp.endDate}</p>
+                  {exp.description && <p className="text-gray-700 mt-2 break-words whitespace-pre-line text-sm">{exp.description}</p>}
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+        {data.projects.length > 0 && (
+          <section className="mb-8">
+            <h2 className="text-2xl font-bold text-green-600 mb-4 border-b-2 border-green-600 pb-1">Projeler</h2>
+            <div className="grid md:grid-cols-2 gap-4">
+              {data.projects.map((project, i) => (
+                <div key={i} className="bg-green-50 p-5 rounded-lg border-l-4 border-green-500">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{project.name}</h3>
+                  {project.technologies && (
+                    <div className="flex flex-wrap gap-2 mb-2">
+                      {project.technologies.split(',').map((tech, j) => (
+                        <span key={j} className="px-2 py-1 bg-green-100 text-green-700 rounded text-xs">{tech.trim()}</span>
+                      ))}
+                    </div>
+                  )}
+                  {project.description && <p className="text-gray-700 mt-2 break-words whitespace-pre-line text-sm">{project.description}</p>}
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+        <div className="grid md:grid-cols-2 gap-8">
+          <div>
+            {data.skills.length > 0 && (
+              <section className="mb-8">
+                <h2 className="text-xl font-bold text-green-600 mb-4">Beceriler</h2>
+                <div className="flex flex-wrap gap-2">
+                  {data.skills.map((skill, i) => (
+                    <span key={i} className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">{skill}</span>
+                  ))}
+                </div>
+              </section>
+            )}
+          </div>
+          <div>
+            {data.achievements.length > 0 && (
+              <section className="mb-8">
+                <h2 className="text-xl font-bold text-green-600 mb-4">Başarılar</h2>
+                <div className="space-y-3">
+                  {data.achievements.map((achievement, i) => (
+                    <div key={i} className="border-l-4 border-green-500 pl-3">
+                      <h3 className="font-semibold text-gray-900 text-sm">{achievement.title}</h3>
+                      {achievement.description && <p className="text-gray-700 mt-1 break-words whitespace-pre-line text-xs">{achievement.description}</p>}
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+            {data.hobbies.length > 0 && (
+              <section>
+                <h2 className="text-xl font-bold text-green-600 mb-4">Hobiler</h2>
+                <p className="text-gray-700">{data.hobbies.join(', ')}</p>
+              </section>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+

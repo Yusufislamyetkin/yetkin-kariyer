@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import { recordEvent } from "@/lib/services/gamification/antiAbuse";
 import { applyRules } from "@/lib/services/gamification/rules";
 import { checkBadgesForActivity, type BadgeCheckResult } from "@/app/api/badges/check/badge-service";
+import { checkCourseCompletion, generateCertificate } from "@/lib/certificates/certificate-service";
 
 function resolveLessonSlug(params: { slug: string[] }): string | null {
   if (!params.slug || params.slug.length === 0) {
@@ -126,6 +127,25 @@ export async function POST(
       console.warn("Badge check failed:", e);
     }
 
+    // Check if course is completed and generate certificate if needed
+    let certificateGenerated = false;
+    let certificateNumber: string | null = null;
+    if (courseId) {
+      try {
+        const completionStatus = await checkCourseCompletion(userId, courseId);
+        if (completionStatus.completed) {
+          const cert = await generateCertificate(userId, courseId);
+          if (cert) {
+            certificateGenerated = true;
+            certificateNumber = cert.certificateNumber;
+            console.log(`[LESSON_COMPLETE] Sertifika oluşturuldu. userId: ${userId}, courseId: ${courseId}, certNumber: ${cert.certificateNumber}`);
+          }
+        }
+      } catch (e) {
+        console.warn("Certificate generation failed:", e);
+      }
+    }
+
     return NextResponse.json({
       success: true,
       completion: {
@@ -133,6 +153,8 @@ export async function POST(
         lessonSlug: completion.lessonSlug,
       },
       badgeResults,
+      certificateGenerated,
+      certificateNumber,
     });
   } catch (error) {
     console.error("Error marking lesson as completed:", error);
