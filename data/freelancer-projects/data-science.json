@@ -1,73 +1,72 @@
 [
   {
     "title": "Machine Learning Model Geliştirme",
-    "description": "Python ile machine learning modeli geliştirilmesi. Data preprocessing, feature engineering, model training, evaluation ve deployment gerekiyor. Scikit-learn veya TensorFlow kullanılacak.",
+    "description": "E-ticaret platformu için müşteri davranışı tahmin modeli geliştirilmesi gerekiyor. Model, müşterilerin satın alma olasılığını tahmin ederek pazarlama kampanyalarını optimize etmeye yardımcı olacak.\n\nPython ile geliştirilecek. Scikit-learn veya TensorFlow kütüphaneleri kullanılacak. Veri preprocessing ile ham veriler temizlenecek ve hazırlanacak.\n\nFeature engineering ile anlamlı özellikler çıkarılacak. Model training ile farklı algoritmalar (Random Forest, XGBoost, Neural Networks) test edilecek.\n\nModel evaluation ile accuracy, precision, recall, F1-score metrikleri hesaplanacak. Cross-validation ile model performansı doğrulanacak.\n\nModel deployment ile production ortamına deploy edilecek. API endpoint ile model kullanılabilir hale getirilecek. Model monitoring ile production performansı takip edilecek.\n\nDokümantasyon ile model açıklaması, kullanım kılavuzu hazırlanacak. Model versioning ile model versiyonları yönetilecek.",
     "budget": 65000,
     "deadline": "2025-04-20T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Veri Analizi ve Raporlama Dashboard",
-    "description": "Python/Pandas ile veri analizi ve Power BI/Tableau dashboard oluşturulması. Data cleaning, visualization, interactive reports ve insights gerekiyor.",
+    "description": "Perakende sektöründe faaliyet gösteren bir şirket için kapsamlı veri analizi ve raporlama dashboard'u geliştirilmesi gerekiyor. Dashboard, iş kararlarını destekleyecek içgörüler sunmalı.\n\nPython/Pandas ile veri analizi yapılacak. Data cleaning ile eksik, hatalı veriler temizlenecek. Data transformation ile veriler analiz için hazırlanacak.\n\nPower BI veya Tableau ile interactive dashboard oluşturulacak. Farklı görselleştirmeler (grafikler, tablolar, heatmaps) ile veriler sunulacak.\n\nInteractive reports ile kullanıcılar filtreleme, drill-down yapabilecek. Scheduled reports ile düzenli raporlar otomatik oluşturulacak.\n\nInsights generation ile otomatik içgörüler çıkarılacak. Trend analysis ile zaman serisi analizi yapılacak.\n\nData pipeline ile veri kaynaklarından otomatik veri çekme yapılacak. ETL processes ile veri dönüşümü yapılacak.",
     "budget": 50000,
     "deadline": "2025-03-30T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Predictive Analytics Sistemi",
-    "description": "Tahmine dayalı analiz sistemi. Time series analysis, forecasting, model deployment ve API entegrasyonu gerekiyor. Python ve ML libraries kullanılacak.",
+    "description": "Üretim şirketi için tahmine dayalı analiz sistemi geliştirilmesi gerekiyor. Sistem, talep tahmini, stok optimizasyonu ve bakım planlaması için kullanılacak.\n\nTime series analysis ile geçmiş veriler analiz edilecek. Forecasting models (ARIMA, Prophet, LSTM) ile gelecek tahminleri yapılacak.\n\nModel deployment ile tahmin modelleri production ortamına alınacak. API entegrasyonu ile sistem diğer uygulamalarla entegre edilecek.\n\nReal-time predictions ile anlık tahminler yapılabilecek. Confidence intervals ile tahmin güvenilirliği gösterilecek.\n\nModel retraining ile modeller düzenli olarak güncellenecek. Performance monitoring ile model performansı takip edilecek.\n\nPython ve ML libraries (scikit-learn, statsmodels, Prophet) kullanılacak. Dashboard ile tahminler görselleştirilecek. Alerting system ile anomali tespiti yapılacak.",
     "budget": 70000,
     "deadline": "2025-04-25T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Natural Language Processing (NLP) Projesi",
-    "description": "NLP projesi. Text classification, sentiment analysis, named entity recognition veya chatbot geliştirilmesi. NLTK, spaCy veya transformers kullanılabilir.",
+    "description": "Müşteri hizmetleri için NLP tabanlı chatbot ve sentiment analysis sistemi geliştirilmesi gerekiyor. Sistem, müşteri mesajlarını anlayıp uygun yanıtlar üretecek.\n\nText classification ile müşteri mesajları kategorize edilecek. Sentiment analysis ile müşteri memnuniyeti analiz edilecek.\n\nNamed entity recognition ile önemli bilgiler (isim, tarih, ürün adı) çıkarılacak. Chatbot development ile conversational AI geliştirilecek.\n\nNLTK, spaCy veya transformers (BERT, GPT) kütüphaneleri kullanılabilir. Model training için labeled dataset hazırlanacak.\n\nAPI integration ile chatbot uygulamalara entegre edilecek. Real-time processing ile anlık yanıtlar üretilecek.\n\nModel evaluation ile accuracy, F1-score metrikleri hesaplanacak. Continuous learning ile model zamanla iyileştirilecek. Multilingual support ile farklı diller desteklenebilir.",
     "budget": 75000,
     "deadline": "2025-05-05T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Computer Vision Uygulaması",
-    "description": "Görüntü işleme ve computer vision projesi. Object detection, image classification veya OCR sistemi. OpenCV, TensorFlow veya PyTorch kullanılacak.",
+    "description": "Güvenlik ve kalite kontrolü için computer vision uygulaması geliştirilmesi gerekiyor. Sistem, görüntüleri analiz edip anomali tespiti yapacak.\n\nObject detection ile görüntülerdeki nesneler tespit edilecek. Image classification ile görüntüler kategorize edilecek.\n\nOCR (Optical Character Recognition) ile görüntülerden metin çıkarılacak. Quality inspection ile ürün kalitesi kontrol edilecek.\n\nOpenCV, TensorFlow veya PyTorch kütüphaneleri kullanılacak. Deep learning models ile yüksek doğruluk sağlanacak.\n\nReal-time processing ile canlı görüntü analizi yapılabilecek. API endpoint ile sistem entegre edilecek.\n\nModel training için labeled dataset hazırlanacak. Data augmentation ile veri seti genişletilecek. Model optimization ile inference hızı artırılacak.",
     "budget": 80000,
     "deadline": "2025-05-10T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Data Pipeline ve ETL",
-    "description": "ETL pipeline geliştirilmesi. Data extraction, transformation, loading, scheduling (Airflow) ve monitoring gerekiyor. Python ve SQL kullanılacak.",
+    "description": "Çoklu veri kaynaklarından veri toplama ve işleme için ETL pipeline geliştirilmesi gerekiyor. Pipeline, günlük milyonlarca kaydı işleyebilmeli.\n\nData extraction ile farklı kaynaklardan (databases, APIs, files) veri çekilecek. Data transformation ile veriler işlenecek ve temizlenecek.\n\nData loading ile hedef veritabanına veriler yüklenecek. Error handling ile hata yönetimi yapılacak.\n\nScheduling (Airflow, Prefect) ile pipeline'lar otomatik çalıştırılacak. Monitoring ile pipeline durumu takip edilecek.\n\nPython ve SQL kullanılacak. Incremental loading ile sadece değişen veriler işlenecek. Data quality checks ile veri kalitesi kontrol edilecek.\n\nDocumentation ile pipeline dokümante edilecek. Alerting ile hata durumları bildirilecek. Performance optimization ile işlem hızı artırılacak.",
     "budget": 55000,
     "deadline": "2025-04-10T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Recommendation System",
-    "description": "Öneri sistemi geliştirilmesi. Collaborative filtering, content-based filtering veya hybrid approach. Python ve ML libraries kullanılacak.",
+    "description": "E-ticaret platformu için öneri sistemi geliştirilmesi gerekiyor. Sistem, müşterilere kişiselleştirilmiş ürün önerileri sunacak.\n\nCollaborative filtering ile benzer müşterilerin tercihleri kullanılacak. Content-based filtering ile ürün özellikleri kullanılacak.\n\nHybrid approach ile her iki yöntem birleştirilecek. Matrix factorization ile öneri algoritması geliştirilecek.\n\nPython ve ML libraries (scikit-learn, Surprise) kullanılacak. Model training için user-item interaction data kullanılacak.\n\nReal-time recommendations ile anlık öneriler üretilecek. API endpoint ile sistem entegre edilecek.\n\nModel evaluation ile precision, recall, NDCG metrikleri hesaplanacak. A/B testing ile öneri performansı test edilecek. Cold start problem çözümü ile yeni kullanıcılar için öneriler üretilecek.",
     "budget": 70000,
     "deadline": "2025-04-30T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Data Warehouse Tasarımı",
-    "description": "Data warehouse tasarımı ve implementasyonu. Star/snowflake schema, ETL processes, data modeling ve reporting gerekiyor. SQL Server veya PostgreSQL.",
+    "description": "Kurumsal şirket için data warehouse tasarımı ve implementasyonu yapılması gerekiyor. Warehouse, farklı kaynaklardan gelen verileri birleştirip analiz için hazır hale getirecek.\n\nStar/snowflake schema ile veri modeli tasarlanacak. Fact tables ve dimension tables oluşturulacak.\n\nETL processes ile veri dönüşümü yapılacak. Data modeling ile optimal veri yapısı oluşturulacak.\n\nReporting ile business intelligence raporları oluşturulacak. OLAP cubes ile çok boyutlu analiz yapılacak.\n\nSQL Server veya PostgreSQL kullanılacak. Index optimization ile sorgu performansı artırılacak.\n\nData quality management ile veri kalitesi sağlanacak. Documentation ile warehouse dokümante edilecek. Maintenance plan ile düzenli bakım yapılacak.",
     "budget": 60000,
     "deadline": "2025-04-15T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Time Series Forecasting",
-    "description": "Zaman serisi tahminleme. ARIMA, Prophet veya LSTM modelleri, data preprocessing, model evaluation ve deployment gerekiyor. Python kullanılacak.",
+    "description": "Finansal hizmetler şirketi için zaman serisi tahminleme modeli geliştirilmesi gerekiyor. Model, finansal göstergeleri tahmin edecek.\n\nARIMA, Prophet veya LSTM modelleri kullanılacak. Time series decomposition ile trend, seasonality analiz edilecek.\n\nData preprocessing ile veriler hazırlanacak. Feature engineering ile zaman bazlı özellikler çıkarılacak.\n\nModel evaluation ile MAPE, RMSE metrikleri hesaplanacak. Cross-validation ile model doğrulanacak.\n\nModel deployment ile production ortamına alınacak. Real-time forecasting ile anlık tahminler yapılacak.\n\nPython kullanılacak. Visualization ile tahminler görselleştirilecek. Confidence intervals ile tahmin güvenilirliği gösterilecek. Model retraining ile modeller güncellenecek.",
     "budget": 65000,
     "deadline": "2025-04-20T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Data Visualization ve Dashboard",
-    "description": "Interactive data visualization dashboard. Python (Plotly/Dash) veya JavaScript (D3.js), real-time data updates ve responsive design gerekiyor.",
+    "description": "İş zekası ekibi için interaktif veri görselleştirme dashboard'u geliştirilmesi gerekiyor. Dashboard, karmaşık verileri anlaşılır şekilde sunmalı.\n\nPython (Plotly/Dash) veya JavaScript (D3.js) kullanılacak. Interactive visualizations ile kullanıcılar verileri keşfedebilecek.\n\nReal-time data updates ile canlı veri gösterimi yapılacak. WebSocket veya polling ile veri güncellemeleri alınacak.\n\nResponsive design ile tüm cihazlarda mükemmel görünecek. Custom charts ile özel görselleştirmeler oluşturulacak.\n\nFiltering ve drill-down ile detaylı analiz yapılabilecek. Export features ile raporlar indirilebilecek.\n\nPerformance optimization ile büyük veri setleri hızlı yüklenecek. User authentication ile güvenli erişim sağlanacak.",
     "budget": 45000,
     "deadline": "2025-03-25T00:00:00.000Z",
     "status": "open"
   }
 ]
-

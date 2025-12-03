@@ -1,0 +1,73 @@
+[
+  {
+    "title": "Mobil Uygulama UI/UX Tasarımı",
+    "description": "Yeni bir mobil uygulama için kapsamlı UI/UX tasarımı yapılması gerekiyor. Tasarım, kullanıcı deneyimini ön planda tutmalı ve modern tasarım trendlerini yansıtmalı.\n\nUser research ile hedef kitle analizi yapılacak. User personas oluşturulacak. User journey mapping ile kullanıcı akışları tasarlanacak.\n\nWireframing ile low-fidelity taslaklar oluşturulacak. Information architecture ile içerik yapısı belirlenecek.\n\nVisual design ile high-fidelity tasarımlar oluşturulacak. Design system ile tutarlı tasarım dili oluşturulacak. Color palette, typography, iconography belirlenecek.\n\nPrototyping ile interaktif prototipler oluşturulacak. Figma veya Adobe XD kullanılacak. User testing ile tasarım test edilecek.\n\nResponsive design ile farklı ekran boyutları için tasarım yapılacak. Accessibility guidelines ile erişilebilirlik sağlanacak. Design handoff ile developer'lara aktarım yapılacak.",
+    "budget": 45000,
+    "deadline": "2025-03-25T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Web Sitesi Redesign",
+    "description": "Mevcut web sitesinin modern ve kullanıcı dostu bir şekilde yeniden tasarlanması gerekiyor. Tasarım, marka kimliğini yansıtmalı ve dönüşüm oranını artırmalı.\n\nCurrent state analysis ile mevcut site analiz edilecek. Competitor analysis ile rakip siteler incelenecek. User feedback ile kullanıcı geri bildirimleri toplanacak.\n\nInformation architecture ile site yapısı yeniden düzenlenecek. Content strategy ile içerik stratejisi belirlenecek.\n\nVisual design ile yeni tasarım oluşturulacak. Modern UI trends ile güncel tasarım trendleri uygulanacak.\n\nPrototyping ile interaktif prototipler oluşturulacak. User testing ile tasarım doğrulanacak.\n\nResponsive design ile mobil uyumluluk sağlanacak. Performance optimization ile sayfa yükleme hızı optimize edilecek. SEO considerations ile arama motoru optimizasyonu düşünülecek.",
+    "budget": 40000,
+    "deadline": "2025-03-20T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "E-ticaret Platformu UI/UX Tasarımı",
+    "description": "E-ticaret platformu için kapsamlı UI/UX tasarımı yapılması gerekiyor. Tasarım, satış dönüşümünü artırmalı ve kullanıcı deneyimini optimize etmeli.\n\nUser research ile alışveriş davranışları analiz edilecek. Conversion optimization ile dönüşüm noktaları optimize edilecek.\n\nProduct page design ile ürün sayfaları tasarlanacak. Shopping cart ve checkout flow ile ödeme süreci tasarlanacak.\n\nVisual design ile marka kimliğine uygun tasarım oluşturulacak. Product photography guidelines ile fotoğraf standartları belirlenecek.\n\nPrototyping ile tüm akışlar test edilecek. A/B testing için alternatif tasarımlar hazırlanacak.\n\nMobile-first approach ile mobil deneyim önceliklendirilecek. Accessibility ile erişilebilirlik sağlanacak. Design system ile tutarlı tasarım dili oluşturulacak.",
+    "budget": 55000,
+    "deadline": "2025-04-05T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Dashboard ve Admin Panel Tasarımı",
+    "description": "Kurumsal uygulama için dashboard ve admin panel UI/UX tasarımı yapılması gerekiyor. Tasarım, karmaşık verileri anlaşılır şekilde sunmalı.\n\nData visualization design ile grafik ve tablo tasarımları yapılacak. Information hierarchy ile bilgi hiyerarşisi oluşturulacak.\n\nUser workflow design ile kullanıcı iş akışları tasarlanacak. Form design ile form tasarımları optimize edilecek.\n\nVisual design ile modern ve profesyonel tasarım oluşturulacak. Design system ile component library oluşturulacak.\n\nPrototyping ile interaktif prototipler oluşturulacak. User testing ile tasarım doğrulanacak.\n\nResponsive design ile farklı ekran boyutları desteklenecek. Dark mode design ile gece modu tasarımı yapılacak. Accessibility guidelines ile erişilebilirlik sağlanacak.",
+    "budget": 48000,
+    "deadline": "2025-03-30T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Landing Page Tasarımı",
+    "description": "Ürün lansmanı için etkileyici landing page tasarımı yapılması gerekiyor. Tasarım, ziyaretçileri harekete geçirmeli ve dönüşüm oranını maksimize etmeli.\n\nConversion-focused design ile dönüşüm odaklı tasarım yapılacak. Hero section design ile güçlü ilk izlenim yaratılacak.\n\nValue proposition design ile değer önerisi net bir şekilde sunulacak. CTA design ile call-to-action butonları optimize edilecek.\n\nVisual design ile görsel açıdan zengin tasarım oluşturulacak. Animation design ile smooth animasyonlar eklenebilir.\n\nPrototyping ile interaktif prototip oluşturulacak. User testing ile tasarım test edilecek.\n\nMobile-first design ile mobil deneyim önceliklendirilecek. Performance optimization ile sayfa hızı optimize edilecek. A/B testing için alternatif tasarımlar hazırlanabilir.",
+    "budget": 25000,
+    "deadline": "2025-02-20T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Brand Identity ve Logo Tasarımı",
+    "description": "Yeni bir marka için kapsamlı brand identity ve logo tasarımı yapılması gerekiyor. Tasarım, markanın kişiliğini yansıtmalı ve akılda kalıcı olmalı.\n\nBrand research ile marka analizi yapılacak. Competitor analysis ile rakip markalar incelenecek. Brand positioning ile marka konumlandırması belirlenecek.\n\nLogo design ile marka logosu oluşturulacak. Logo variations ile farklı kullanım senaryoları için varyasyonlar hazırlanacak.\n\nColor palette ile marka renk paleti oluşturulacak. Typography selection ile marka tipografisi seçilecek.\n\nBrand guidelines ile marka kılavuzu hazırlanacak. Application examples ile logo kullanım örnekleri gösterilecek.\n\nDigital assets ile logo dosyaları (SVG, PNG, PDF) hazırlanacak. Print-ready files ile baskı dosyaları hazırlanacak.",
+    "budget": 30000,
+    "deadline": "2025-02-25T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "SaaS Platform UI/UX Tasarımı",
+    "description": "B2B SaaS platformu için kapsamlı UI/UX tasarımı yapılması gerekiyor. Tasarım, profesyonel kullanıcılar için optimize edilmeli ve verimliliği artırmalı.\n\nUser research ile hedef kullanıcılar analiz edilecek. Task analysis ile kullanıcı görevleri belirlenecek.\n\nInformation architecture ile platform yapısı tasarlanacak. Navigation design ile kullanıcı navigasyonu optimize edilecek.\n\nFeature design ile platform özellikleri tasarlanacak. Workflow optimization ile iş akışları iyileştirilecek.\n\nVisual design ile modern ve profesyonel tasarım oluşturulacak. Design system ile scalable tasarım sistemi oluşturulacak.\n\nPrototyping ile interaktif prototipler oluşturulacak. User testing ile tasarım doğrulanacak. Responsive design ile farklı cihazlar desteklenecek.",
+    "budget": 60000,
+    "deadline": "2025-04-15T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Mobile App Icon ve Splash Screen Tasarımı",
+    "description": "Mobil uygulama için app icon ve splash screen tasarımı yapılması gerekiyor. Tasarım, App Store ve Google Play Store standartlarına uygun olmalı.\n\nIcon design ile uygulama ikonu oluşturulacak. Farklı boyutlarda (iOS, Android) icon variations hazırlanacak.\n\nSplash screen design ile açılış ekranı tasarlanacak. Brand consistency ile marka tutarlılığı sağlanacak.\n\nVisual design ile görsel açıdan çekici tasarım oluşturulacak. Platform guidelines ile platform standartlarına uyum sağlanacak.\n\nAsset preparation ile tüm gerekli dosyalar hazırlanacak. Export optimization ile dosya boyutları optimize edilecek.\n\nDesign variations ile farklı tema seçenekleri hazırlanabilir. A/B testing için alternatif tasarımlar oluşturulabilir.",
+    "budget": 15000,
+    "deadline": "2025-02-10T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "E-learning Platform UI/UX Tasarımı",
+    "description": "Online eğitim platformu için kapsamlı UI/UX tasarımı yapılması gerekiyor. Tasarım, öğrenme deneyimini optimize etmeli ve öğrenci motivasyonunu artırmalı.\n\nUser research ile öğrenci ihtiyaçları analiz edilecek. Learning experience design ile öğrenme deneyimi tasarlanacak.\n\nCourse page design ile ders sayfaları tasarlanacak. Video player design ile video oynatıcı arayüzü optimize edilecek.\n\nProgress tracking design ile ilerleme takibi görselleştirilecek. Gamification design ile oyunlaştırma öğeleri eklenebilir.\n\nVisual design ile modern ve ilham verici tasarım oluşturulacak. Design system ile tutarlı tasarım dili oluşturulacak.\n\nPrototyping ile interaktif prototipler oluşturulacak. User testing ile tasarım doğrulanacak. Responsive design ile tüm cihazlar desteklenecek.",
+    "budget": 50000,
+    "deadline": "2025-04-10T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Design System Oluşturma",
+    "description": "Kurumsal şirket için kapsamlı design system oluşturulması gerekiyor. Design system, tüm ürünlerde tutarlı tasarım sağlamalı.\n\nComponent library ile UI component'leri oluşturulacak. Button, input, card, modal gibi temel component'ler tasarlanacak.\n\nDesign tokens ile renk, tipografi, spacing, shadow gibi değerler tanımlanacak. Typography system ile tipografi hiyerarşisi oluşturulacak.\n\nColor system ile renk paleti ve kullanım kuralları belirlenecek. Icon system ile icon seti oluşturulacak.\n\nDocumentation ile component kullanım kılavuzu hazırlanacak. Code examples ile developer'lara örnekler verilecek.\n\nFigma library ile design system Figma'da oluşturulacak. Storybook ile component library dokümante edilecek. Version control ile design system versiyonları yönetilecek.",
+    "budget": 55000,
+    "deadline": "2025-04-12T00:00:00.000Z",
+    "status": "open"
+  }
+]
+

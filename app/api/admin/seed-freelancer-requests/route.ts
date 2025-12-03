@@ -1,6 +1,66 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
+import fs from "fs";
+import path from "path";
+
+// JSON dosyalarından freelancer proje taleplerini yükle
+function loadFreelancerProjectTemplates() {
+  const projectFiles = [
+    'web-development.json',
+    'mobile-development.json',
+    'backend-development.json',
+    'frontend-development.json',
+    'fullstack-development.json',
+    'devops.json',
+    'data-science.json',
+    'ui-ux-design.json',
+    'qa-testing.json',
+    'blockchain.json'
+  ];
+
+  const allProjects: any[] = [];
+
+  for (const file of projectFiles) {
+    try {
+      const filePath = path.join(process.cwd(), 'data', 'freelancer-projects', file);
+      
+      // Dosyanın var olup olmadığını kontrol et
+      if (!fs.existsSync(filePath)) {
+        console.error(`❌ Dosya bulunamadı: ${filePath}`);
+        continue;
+      }
+
+      const fileContent = fs.readFileSync(filePath, 'utf-8');
+      
+      // Dosya boş mu kontrol et
+      if (!fileContent || fileContent.trim().length === 0) {
+        console.error(`❌ Dosya boş: ${file}`);
+        continue;
+      }
+
+      const projects = JSON.parse(fileContent);
+      
+      // JSON'un array olup olmadığını kontrol et
+      if (!Array.isArray(projects)) {
+        console.error(`❌ ${file} geçerli bir array içermiyor`);
+        continue;
+      }
+
+      console.log(`✅ ${file}: ${projects.length} adet proje talebi yüklendi`);
+      allProjects.push(...projects);
+    } catch (error: any) {
+      console.error(`❌ Error loading ${file}:`, error);
+      console.error(`   Error message: ${error.message}`);
+      if (error.stack) {
+        console.error(`   Stack: ${error.stack}`);
+      }
+    }
+  }
+
+  console.log(`📊 Toplam ${allProjects.length} adet freelancer proje talebi şablonu yüklendi`);
+  return allProjects;
+}
 
 export async function POST() {
   try {
@@ -13,18 +73,28 @@ export async function POST() {
       );
     }
 
-    // Kullanıcıları bul (proje oluşturucular ve freelancer'lar için)
+    // Kullanıcıları bul (proje oluşturucular için)
     const users = await db.user.findMany({
       where: {
         role: { in: ["candidate", "employer"] }
       },
       select: { id: true },
-      take: 20
+      take: 50 // Daha fazla kullanıcı al, 100 proje için yeterli olsun
     });
 
-    if (users.length < 2) {
+    if (users.length < 1) {
       return NextResponse.json(
-        { error: "Yeterli kullanıcı bulunamadı. En az 2 kullanıcı gerekli." },
+        { error: "Yeterli kullanıcı bulunamadı. En az 1 kullanıcı gerekli." },
+        { status: 400 }
+      );
+    }
+
+    // JSON dosyalarından proje şablonlarını yükle
+    const projectTemplates = loadFreelancerProjectTemplates();
+
+    if (projectTemplates.length === 0) {
+      return NextResponse.json(
+        { error: "Hiç proje şablonu yüklenemedi. JSON dosyalarını kontrol edin." },
         { status: 400 }
       );
     }
@@ -33,161 +103,53 @@ export async function POST() {
     const created: string[] = [];
     const errors: string[] = [];
 
-    // Farklı durumlarda freelancer projeleri
-    const projectTemplates = [
-      // Open (açık) projeler
-      {
-        title: "E-ticaret Web Sitesi Geliştirme",
-        description: "Modern bir e-ticaret web sitesi geliştirmek için freelancer arıyorum. React ve Node.js kullanılacak. Responsive tasarım ve ödeme entegrasyonu gerekli.",
-        budget: 15000,
-        deadline: new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000), // 30 gün sonra
-        status: "open"
-      },
-      {
-        title: "Mobil Uygulama Tasarımı",
-        description: "iOS ve Android için mobil uygulama tasarımı yapılacak. Figma kullanılacak. Modern ve kullanıcı dostu bir arayüz isteniyor.",
-        budget: 8000,
-        deadline: new Date(now.getTime() + 20 * 24 * 60 * 60 * 1000), // 20 gün sonra
-        status: "open"
-      },
-      {
-        title: "Backend API Geliştirme",
-        description: ".NET Core ile RESTful API geliştirilecek. Entity Framework, JWT authentication ve Swagger dokümantasyonu gerekli.",
-        budget: 12000,
-        deadline: new Date(now.getTime() + 25 * 24 * 60 * 60 * 1000), // 25 gün sonra
-        status: "open"
-      },
-      {
-        title: "Database Optimizasyonu",
-        description: "Mevcut PostgreSQL veritabanının optimizasyonu yapılacak. Query performansı artırılacak ve index'ler optimize edilecek.",
-        budget: 5000,
-        deadline: new Date(now.getTime() + 15 * 24 * 60 * 60 * 1000), // 15 gün sonra
-        status: "open"
-      },
-      {
-        title: "WordPress Site Kurulumu",
-        description: "WordPress ile kurumsal web sitesi kurulacak. Tema özelleştirmesi, plugin kurulumu ve içerik yönetimi gerekli.",
-        budget: 6000,
-        deadline: new Date(now.getTime() + 18 * 24 * 60 * 60 * 1000), // 18 gün sonra
-        status: "open"
-      },
-      // In Progress (devam eden) projeler
-      {
-        title: "React Dashboard Geliştirme",
-        description: "Admin paneli için React dashboard geliştiriliyor. Material-UI kullanılıyor. Grafikler ve veri görselleştirme özellikleri ekleniyor.",
-        budget: 10000,
-        deadline: new Date(now.getTime() + 10 * 24 * 60 * 60 * 1000), // 10 gün sonra
-        status: "in_progress"
-      },
-      {
-        title: "Python Web Scraping Script",
-        description: "Python ile web scraping scripti yazılıyor. BeautifulSoup ve Selenium kullanılıyor. Veri toplama ve analiz özellikleri ekleniyor.",
-        budget: 7000,
-        deadline: new Date(now.getTime() + 12 * 24 * 60 * 60 * 1000), // 12 gün sonra
-        status: "in_progress"
-      },
-      {
-        title: "Vue.js Frontend Geliştirme",
-        description: "Vue.js ile frontend geliştirme devam ediyor. Vuex state management ve Vue Router kullanılıyor. Component library entegrasyonu yapılıyor.",
-        budget: 9000,
-        deadline: new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000), // 14 gün sonra
-        status: "in_progress"
-      },
-      // Completed (tamamlanmış) projeler
-      {
-        title: "Logo Tasarımı",
-        description: "Kurumsal logo tasarımı tamamlandı. Modern ve minimalist bir tasarım yapıldı. Farklı formatlarda dosyalar teslim edildi.",
-        budget: 3000,
-        deadline: new Date(now.getTime() - 5 * 24 * 60 * 60 * 1000), // 5 gün önce
-        status: "completed"
-      },
-      {
-        title: "SEO Optimizasyonu",
-        description: "Web sitesi SEO optimizasyonu tamamlandı. Meta tag'ler, sitemap ve robots.txt dosyaları oluşturuldu. Google Analytics entegrasyonu yapıldı.",
-        budget: 4000,
-        deadline: new Date(now.getTime() - 8 * 24 * 60 * 60 * 1000), // 8 gün önce
-        status: "completed"
-      },
-      {
-        title: "API Dokümantasyonu",
-        description: "RESTful API için Swagger dokümantasyonu hazırlandı. Tüm endpoint'ler dokümante edildi ve örnek request/response'lar eklendi.",
-        budget: 2500,
-        deadline: new Date(now.getTime() - 3 * 24 * 60 * 60 * 1000), // 3 gün önce
-        status: "completed"
-      },
-      // Cancelled (iptal edilmiş) projeler
-      {
-        title: "Mobile App Development",
-        description: "React Native ile mobil uygulama geliştirme projesi iptal edildi. Bütçe yetersizliği nedeniyle proje sonlandırıldı.",
-        budget: 20000,
-        deadline: new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000), // 30 gün sonra
-        status: "cancelled"
-      },
-      {
-        title: "E-commerce Platform",
-        description: "Büyük ölçekli e-ticaret platformu projesi iptal edildi. Zamanlama uyuşmazlığı nedeniyle proje sonlandırıldı.",
-        budget: 50000,
-        deadline: new Date(now.getTime() + 60 * 24 * 60 * 60 * 1000), // 60 gün sonra
-        status: "cancelled"
-      }
-    ];
-
     // Projeleri oluştur
     for (let i = 0; i < projectTemplates.length; i++) {
       const template = projectTemplates[i];
       const creatorIndex = i % users.length;
       
       try {
+        // Deadline'ı parse et - eğer string ise Date'e çevir
+        let deadlineDate: Date | null = null;
+        if (template.deadline) {
+          if (typeof template.deadline === 'string') {
+            deadlineDate = new Date(template.deadline);
+          } else {
+            deadlineDate = template.deadline;
+          }
+          
+          // Deadline'ın geçmişte olmamasını garanti et (constraint için)
+          if (deadlineDate && deadlineDate <= now) {
+            // Eğer deadline geçmişteyse, bugünden itibaren 15-90 gün arası rastgele bir tarih ekle
+            const daysToAdd = 15 + Math.floor(Math.random() * 75);
+            deadlineDate = new Date(now.getTime() + daysToAdd * 24 * 60 * 60 * 1000);
+          }
+        }
+
         const project = await db.freelancerProject.create({
           data: {
             title: template.title,
             description: template.description,
-            budget: template.budget,
-            deadline: template.deadline,
-            status: template.status,
+            budget: template.budget || null,
+            deadline: deadlineDate,
+            status: template.status || "open",
             createdBy: users[creatorIndex].id
           }
         });
 
-        // Eğer proje in_progress veya completed ise, bir bid ekle (accepted)
-        if (template.status === "in_progress" || template.status === "completed") {
-          const freelancerIndex = (creatorIndex + 1) % users.length;
-          await db.freelancerBid.create({
-            data: {
-              projectId: project.id,
-              userId: users[freelancerIndex].id,
-              amount: template.budget! * 0.9, // %10 indirimli teklif
-              message: "Projeyi zamanında ve kaliteli bir şekilde tamamlayabilirim. Önceki deneyimlerime dayanarak bu işi yapabileceğime inanıyorum.",
-              status: "accepted"
-            }
-          });
-        } else if (template.status === "open") {
-          // Open projeler için birkaç pending bid ekle
-          const bidCount = Math.min(3, users.length - 1);
-          for (let j = 0; j < bidCount; j++) {
-            const bidderIndex = (creatorIndex + j + 1) % users.length;
-            await db.freelancerBid.create({
-              data: {
-                projectId: project.id,
-                userId: users[bidderIndex].id,
-                amount: template.budget! * (0.85 + Math.random() * 0.15), // %85-100 arası rastgele
-                message: "Bu projeyi ilgiyle takip ediyorum. Deneyimlerime dayanarak bu işi başarıyla tamamlayabileceğime inanıyorum.",
-                status: "pending"
-              }
-            });
-          }
-        }
-
         created.push(project.title);
       } catch (error: any) {
-        errors.push(`${template.title}: ${error.message || 'Unknown error'}`);
+        const errorMessage = error.message || 'Unknown error';
+        errors.push(`${template.title}: ${errorMessage}`);
+        console.error(`❌ Error creating project "${template.title}":`, errorMessage);
       }
     }
 
     return NextResponse.json({
       success: errors.length === 0,
       created: created.length,
-      message: `${created.length} adet freelancer projesi başarıyla oluşturuldu${errors.length > 0 ? `, ${errors.length} hata oluştu` : ''}`,
+      total: projectTemplates.length,
+      message: `${created.length}/${projectTemplates.length} adet freelancer proje talebi başarıyla oluşturuldu${errors.length > 0 ? `, ${errors.length} hata oluştu` : ''}`,
       errors: errors.length > 0 ? errors : undefined
     });
   } catch (error: any) {
@@ -196,10 +158,9 @@ export async function POST() {
       { 
         success: false,
         created: 0,
-        error: error.message || "Freelancer projeleri oluşturulurken bir hata oluştu" 
+        error: error.message || "Freelancer proje talepleri oluşturulurken bir hata oluştu" 
       },
       { status: 500 }
     );
   }
 }
-

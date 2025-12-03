@@ -100,6 +100,12 @@ export default function AdminPage() {
     error: null,
   });
 
+  const [hackathonClearState, setHackathonClearState] = useState<ClearStatus>({
+    loading: false,
+    success: null,
+    error: null,
+  });
+
   const [freelancerSeedState, setFreelancerSeedState] = useState<ClearStatus>({
     loading: false,
     success: null,
@@ -1602,6 +1608,47 @@ export default function AdminPage() {
     }
   };
 
+  const handleClearHackathons = async () => {
+    if (hackathonClearState.loading) {
+      return; // Prevent multiple simultaneous requests
+    }
+
+    if (!confirm("Tüm hackathonları silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.")) {
+      return;
+    }
+
+    setHackathonClearState({
+      loading: true,
+      success: null,
+      error: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/clear-hackathons", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Hackathonlar silinirken bir hata oluştu");
+      }
+
+      setHackathonClearState({
+        loading: false,
+        success: data.message || `${data.deleted || 0} adet hackathon başarıyla silindi`,
+        error: null,
+      });
+    } catch (err: any) {
+      setHackathonClearState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+      });
+    }
+  };
+
   const handleSeedFreelancerProjects = async () => {
     if (freelancerSeedState.loading) {
       return; // Prevent multiple simultaneous requests
@@ -1628,6 +1675,48 @@ export default function AdminPage() {
       setFreelancerSeedState({
         loading: false,
         success: data.message || `${data.created || 0} adet freelancer projesi başarıyla oluşturuldu`,
+        error: null,
+      });
+    } catch (err: any) {
+      setFreelancerSeedState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+      });
+    }
+  };
+
+  const handleClearFreelancerProjects = async () => {
+    if (freelancerSeedState.loading) {
+      return; // Prevent multiple simultaneous requests
+    }
+
+    // Onay iste
+    if (!confirm("Tüm freelancer projeleri ve teklifleri silinecek. Emin misiniz?")) {
+      return;
+    }
+
+    setFreelancerSeedState({
+      loading: true,
+      success: null,
+      error: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/clear-freelancer-projects", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Freelancer projeleri silinirken bir hata oluştu");
+      }
+
+      setFreelancerSeedState({
+        loading: false,
+        success: data.message || "Freelancer projeleri başarıyla silindi",
         error: null,
       });
     } catch (err: any) {
@@ -2045,10 +2134,10 @@ export default function AdminPage() {
             Geçmiş, devam eden ve gelecek hackathonlar için örnek veriler oluşturur. Toplam 30 hackathon oluşturulur (10 geçmiş ay, 10 bu ay, 10 gelecek ay).
           </p>
           
-          <div className="max-w-md">
+          <div className="max-w-md space-y-3">
             <Button
               onClick={handleSeedHackathons}
-              disabled={hackathonSeedState.loading}
+              disabled={hackathonSeedState.loading || hackathonClearState.loading}
               size="lg"
               className="w-full bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 hover:from-amber-700 hover:via-orange-700 hover:to-red-700 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300"
             >
@@ -2061,6 +2150,25 @@ export default function AdminPage() {
                 <>
                   <Trophy className="mr-2 h-5 w-5" />
                   Seed Hackathon Oluştur
+                </>
+              )}
+            </Button>
+            <Button
+              onClick={handleClearHackathons}
+              disabled={hackathonClearState.loading || hackathonSeedState.loading}
+              size="lg"
+              variant="outline"
+              className="w-full border-red-300 text-red-600 hover:bg-red-50 hover:border-red-400 dark:border-red-800 dark:text-red-400 dark:hover:bg-red-950/40 dark:hover:border-red-700 font-medium shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              {hackathonClearState.loading ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  Hackathonlar Siliniyor...
+                </>
+              ) : (
+                <>
+                  <Trash2 className="mr-2 h-5 w-5" />
+                  Tüm Hackathonları Temizle
                 </>
               )}
             </Button>
@@ -2084,6 +2192,26 @@ export default function AdminPage() {
                   <AlertCircle className="h-5 w-5 flex-shrink-0" />
                 </div>
                 <div className="text-sm font-semibold">{hackathonSeedState.error}</div>
+              </div>
+            </div>
+          )}
+          {hackathonClearState.success && (
+            <div className="mt-6 p-4 rounded-2xl border border-green-300/50 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/40 dark:to-emerald-950/40 dark:border-green-800/50 backdrop-blur-sm shadow-lg">
+              <div className="flex items-start gap-3 text-green-700 dark:text-green-300">
+                <div className="p-2 rounded-lg bg-green-500/20">
+                  <CheckCircle2 className="h-5 w-5 flex-shrink-0" />
+                </div>
+                <div className="text-sm font-semibold">{hackathonClearState.success}</div>
+              </div>
+            </div>
+          )}
+          {hackathonClearState.error && (
+            <div className="mt-6 p-4 rounded-2xl border border-red-300/50 bg-gradient-to-br from-red-50 to-rose-50 dark:from-red-950/40 dark:to-rose-950/40 dark:border-red-800/50 backdrop-blur-sm shadow-lg">
+              <div className="flex items-start gap-3 text-red-700 dark:text-red-300">
+                <div className="p-2 rounded-lg bg-red-500/20">
+                  <AlertCircle className="h-5 w-5 flex-shrink-0" />
+                </div>
+                <div className="text-sm font-semibold">{hackathonClearState.error}</div>
               </div>
             </div>
           )}
@@ -2188,25 +2316,44 @@ export default function AdminPage() {
             </div>
           </div>
           <p className="text-gray-600 dark:text-gray-400 mb-6 text-sm">
-            Farklı durumlarda (açık, devam eden, tamamlanmış, iptal edilmiş) freelancer projeleri ve teklifler için örnek veriler oluşturur. Toplam 13 proje oluşturulur (5 açık, 3 devam eden, 3 tamamlanmış, 2 iptal edilmiş).
+            10 farklı kategoride (Web Development, Mobile Development, Backend, Frontend, Full Stack, DevOps, Data Science, UI/UX Design, QA/Testing, Blockchain) toplam 100 adet gerçekçi freelancer proje talebi JSON dosyalarından import edilir. Tüm projeler 2025 yılı Türkiye yazılımcı ücretlerine göre bütçelendirilmiştir ve &quot;open&quot; durumundadır.
           </p>
           
-          <div className="max-w-md">
+          <div className="max-w-2xl flex gap-4">
             <Button
               onClick={handleSeedFreelancerProjects}
               disabled={freelancerSeedState.loading}
               size="lg"
-              className="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300"
+              className="flex-1 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300"
             >
               {freelancerSeedState.loading ? (
                 <>
                   <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                  Projeler Oluşturuluyor...
+                  100 Proje Talebi Import Ediliyor...
                 </>
               ) : (
                 <>
                   <Briefcase className="mr-2 h-5 w-5" />
-                  Seed Freelancer Projeler Oluştur
+                  100 Freelancer Proje Talebi Import Et
+                </>
+              )}
+            </Button>
+            <Button
+              onClick={handleClearFreelancerProjects}
+              disabled={freelancerSeedState.loading}
+              size="lg"
+              variant="danger"
+              className="flex-1 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              {freelancerSeedState.loading ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  Siliniyor...
+                </>
+              ) : (
+                <>
+                  <Trash2 className="mr-2 h-5 w-5" />
+                  Tüm Projeleri Kaldır
                 </>
               )}
             </Button>

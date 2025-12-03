@@ -440,6 +440,22 @@ export async function POST() {
       ...futureHackathons.map(h => ({ ...h, phase: HackathonPhase.upcoming }))
     ];
 
+    // Mevcut seed hackathonlarını sil (oluşturulacak slug'lara sahip olanlar)
+    const slugsToCreate = allHackathons.map(h => h.slug);
+    try {
+      const deletedHackathons = await db.hackathon.deleteMany({
+        where: {
+          slug: {
+            in: slugsToCreate
+          }
+        }
+      });
+      console.log(`🗑️  ${deletedHackathons.count} adet mevcut seed hackathon silindi`);
+    } catch (deleteError: any) {
+      console.error("❌ Mevcut hackathonlar silinirken hata:", deleteError);
+      errors.push(`Mevcut hackathonlar silinirken hata: ${deleteError.message}`);
+    }
+
     // Hackathonları oluştur
     for (const hackathonData of allHackathons) {
       try {
