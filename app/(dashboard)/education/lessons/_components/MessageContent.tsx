@@ -2,19 +2,32 @@
 
 import ReactMarkdown from "react-markdown";
 import { cn } from "@/lib/utils";
+import { useTypingEffect } from "./useTypingEffect";
 
 interface MessageContentProps {
   content: string;
   isAI?: boolean;
   className?: string;
+  enableTypingEffect?: boolean;
 }
 
-export function MessageContent({ content, isAI = false, className }: MessageContentProps) {
+export function MessageContent({ content, isAI = false, className, enableTypingEffect = true }: MessageContentProps) {
+  // Use typing effect for AI messages (must be called before any early returns)
+  const { displayedText, isTyping } = useTypingEffect({
+    text: content || "",
+    speed: isAI ? 3 : 999, // Only animate AI messages, user messages show instantly
+    interval: 20,
+    enabled: isAI && enableTypingEffect && !!content,
+  });
+
   if (!content) return null;
+
+  // Use displayed text for rendering
+  const textToRender = isAI && enableTypingEffect ? displayedText : content;
 
   // Clean content: Remove roadmap patterns that might be rendered as lists
   // Pattern: "1. Step 2. Step 3. Step" or similar numbered sequences
-  let cleanedContent = content.replace(/(\d+\.\s+[^\n]+(?:\s+\d+\.\s+[^\n]+){2,})/g, (match) => {
+  let cleanedContent = textToRender.replace(/(\d+\.\s+[^\n]+(?:\s+\d+\.\s+[^\n]+){2,})/g, (match) => {
     // If it looks like a roadmap (3+ numbered items in sequence), remove it
     // Roadmap is already displayed in header, so we don't need it in message
     return '';
@@ -170,6 +183,11 @@ export function MessageContent({ content, isAI = false, className }: MessageCont
       >
         {cleanedContent}
       </ReactMarkdown>
+      {isAI && isTyping && (
+        <span 
+          className="inline-block w-0.5 h-4 sm:h-5 bg-blue-500 dark:bg-blue-400 ml-1 animate-pulse"
+        />
+      )}
     </div>
   );
 }

@@ -67,8 +67,12 @@ interface ProfessionalTemplateProps {
 export default function ProfessionalTemplate({ data }: ProfessionalTemplateProps) {
   return (
     <div
-      className="bg-white text-gray-900 break-words"
-      style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
+      className="bg-white text-gray-900 break-words overflow-hidden"
+      style={{ 
+        fontFamily: 'system-ui, -apple-system, sans-serif',
+        maxHeight: '297mm',
+        overflow: 'hidden'
+      }}
     >
       <div className="max-w-5xl mx-auto">
         {/* Header with Sidebar */}

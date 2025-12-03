@@ -159,22 +159,29 @@ export default function CVTemplatesPage() {
             className="bg-white rounded-lg shadow-md hover:shadow-xl transition-all cursor-pointer overflow-hidden"
             onClick={() => handleSelectTemplate(template.id)}
           >
-            {/* Preview Section */}
-            <div className="bg-gray-50 border-b border-gray-200 relative overflow-hidden" style={{ height: '400px' }}>
+            {/* Preview Section - A4 Aspect Ratio (210mm / 297mm = 0.707) */}
+            <div 
+              className="bg-gray-50 border-b border-gray-200 relative overflow-hidden"
+              style={{ 
+                aspectRatio: '210 / 297',
+                maxHeight: '400px',
+                width: '100%'
+              }}
+            >
               <div 
-                className="absolute inset-0 overflow-auto"
+                className="absolute inset-0 flex items-center justify-center"
                 style={{ 
                   transform: 'scale(0.22)',
-                  transformOrigin: 'top left',
+                  transformOrigin: 'center center',
                   width: '454%',
                   height: '454%'
                 }}
               >
-                <div style={{ pointerEvents: 'none' }}>
+                <div style={{ pointerEvents: 'none', width: '210mm', height: '297mm' }}>
                   <CVRenderer 
                     data={sampleCVData} 
                     templateId={template.id}
-                    className="!w-[210mm] !min-h-[297mm]"
+                    className="!w-[210mm] !h-[297mm]"
                   />
                 </div>
               </div>

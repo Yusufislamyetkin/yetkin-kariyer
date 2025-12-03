@@ -2,42 +2,8 @@ import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { Prisma } from "@prisma/client";
-import { readFileSync } from "fs";
-import { join } from "path";
 import type { LiveCodingLanguage } from "@/types/live-coding";
-
-// Read all language case files and combine them
-function loadLiveCodingCases() {
-  const casesDir = join(process.cwd(), "data", "live-coding-cases");
-  const languageFiles = [
-    "csharp-cases.json",
-    "java-cases.json",
-    "python-cases.json",
-    "javascript-cases.json",
-    "typescript-cases.json",
-    "php-cases.json",
-    "go-cases.json",
-    "rust-cases.json",
-    "cpp-cases.json",
-    "kotlin-cases.json",
-    "ruby-cases.json",
-  ];
-
-  const languages: Array<{ id: string; name: string; cases: any[] }> = [];
-
-  for (const file of languageFiles) {
-    try {
-      const filePath = join(casesDir, file);
-      const fileContent = readFileSync(filePath, "utf-8");
-      const languageData = JSON.parse(fileContent);
-      languages.push(languageData);
-    } catch (error) {
-      console.error(`Error loading ${file}:`, error);
-    }
-  }
-
-  return { languages };
-}
+import { loadLiveCodingCases } from "@/lib/education/loadLiveCodingCases";
 
 const LANGUAGE_TO_LIVECODING: Record<string, LiveCodingLanguage> = {
   csharp: "csharp",

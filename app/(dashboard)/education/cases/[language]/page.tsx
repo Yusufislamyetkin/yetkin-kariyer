@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
 import { ArrowLeft, Code, Clock, Target, CheckCircle } from "lucide-react";
-import liveCodingCases from "@/data/live-coding-cases.json";
+import { loadLiveCodingCases } from "@/lib/education/loadLiveCodingCases";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { cn } from "@/lib/utils";
@@ -49,6 +49,7 @@ export default async function LanguageCasesPage({
 }: {
   params: { language: string };
 }) {
+  const liveCodingCases = loadLiveCodingCases();
   const language = liveCodingCases.languages.find(
     (lang) => lang.id === params.language
   );

@@ -152,6 +152,12 @@ enum HackathonSubmissionStatus {
   winner
 }
 
+enum EarningType {
+  FREELANCER_PROJECT
+  MONTHLY_WINNER
+  HACKATHON
+}
+
 model User {
   id                   String    @id @default(cuid())
   email                String    @unique
@@ -231,6 +237,7 @@ model User {
   botActivities                 BotActivity[]
   accounts                     Account[]
   certificates                  Certificate[]
+  earnings                     Earning[]
 
   @@map("app_users")
 }
@@ -1046,6 +1053,25 @@ model LeaderboardEntry {
   @@index([period, periodDate])
   @@index([userId, period])
   @@map("leaderboard_entries")
+}
+
+model Earning {
+  id          String      @id @default(cuid())
+  userId      String
+  type        EarningType
+  amount      Float
+  referenceId String?     // hackathonSubmissionId, leaderboardEntryId, or freelancerBidId
+  metadata    Json?       // Additional context (hackathon title, project title, etc.)
+  earnedAt    DateTime    @default(now())
+  createdAt   DateTime    @default(now())
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, earnedAt])
+  @@index([type, earnedAt])
+  @@index([userId, type])
+  @@map("earnings")
 }
 
 model EmployerComment {

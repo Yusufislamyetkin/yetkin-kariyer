@@ -2042,7 +2042,7 @@ export default function AdminPage() {
             </div>
           </div>
           <p className="text-gray-600 dark:text-gray-400 mb-6 text-sm">
-            Geçmiş, devam eden ve gelecek hackathonlar için örnek veriler oluşturur. Toplam 9 hackathon oluşturulur (3 geçmiş, 3 devam eden, 3 gelecek).
+            Geçmiş, devam eden ve gelecek hackathonlar için örnek veriler oluşturur. Toplam 30 hackathon oluşturulur (10 geçmiş ay, 10 bu ay, 10 gelecek ay).
           </p>
           
           <div className="max-w-md">

@@ -90,6 +90,10 @@ export function buildLessonSystemPrompt(
 KRİTİK YOL HARİTASI KURALLARI - MUTLAKA UYULMALI!
 ═══════════════════════════════════════════════════════════════
 
+⚠️ KRİTİK: İlk adım "Konuya giriş" adımını ASLA atlama! Roadmap'i gösterdikten sonra, AYNI MESAJDA ilk adımın içeriğini de ver (konu tanıtımı, ne öğreneceği, önemi). Sadece roadmap göstermek yeterli değil!
+
+═══════════════════════════════════════════════════════════════
+
 1. YOL HARİTASINA SADIKLIK (ZORUNLU):
    - Bu yol haritasına MUTLAKA sadık kal! Adımları sırayla takip et, hiçbir adımı atlama!
    - Adımları atlamak, sırayı bozmak veya roadmap'i görmezden gelmek KESİNLİKLE YASAK!
@@ -142,7 +146,9 @@ KRİTİK YOL HARİTASI KURALLARI - MUTLAKA UYULMALI!
     // Determine roadmap template based on lesson content
     if (hasCodeContent) {
       // Practical lesson with code - include coding activities
-      roadmapSection = `\n\nYOL HARİTASI OLUŞTURMA GÖREVİ:\n- İLK MESAJDA mutlaka ders için detaylı bir yol haritası oluştur ve [ROADMAP: yol haritası içeriği] formatında sakla.\n- Bu ders KOD İÇERİĞİ içerdiği için yol haritası şu adımları içermelidir: 1. Konuya giriş 2. Temel kavramlar 3. Kod örnekleri ve açıklamaları 4. Mini test soruları (EN AZ 3 SORU - ZORUNLU!) 5. Özet ve tamamlama\n- KRİTİK: Yol haritasında numaralandırma (1. 2. 3.) KULLAN! Roadmap için numaralandırma gereklidir çünkü sistem bunu parse ediyor.\n- NOT: Roadmap'te numaralandırma kullan ama NORMAL MESAJLARDA numaralandırma KULLANMA, sadece madde işaretleri (•) kullan!\n\n═══════════════════════════════════════════════════════════════
+      roadmapSection = `\n\nYOL HARİTASI OLUŞTURMA GÖREVİ:\n- İLK MESAJDA mutlaka ders için detaylı bir yol haritası oluştur ve [ROADMAP: yol haritası içeriği] formatında sakla.\n- Bu ders KOD İÇERİĞİ içerdiği için yol haritası şu adımları içermelidir: 1. Konuya giriş 2. Temel kavramlar 3. Kod örnekleri ve açıklamaları 4. Mini test soruları (EN AZ 3 SORU - ZORUNLU!) 5. Özet ve tamamlama\n- KRİTİK: Yol haritasında numaralandırma (1. 2. 3.) KULLAN! Roadmap için numaralandırma gereklidir çünkü sistem bunu parse ediyor.\n- NOT: Roadmap'te numaralandırma kullan ama NORMAL MESAJLARDA numaralandırma KULLANMA, sadece madde işaretleri (•) kullan!\n\n⚠️ KRİTİK: İlk mesajda roadmap'i oluşturduktan SONRA, AYNI MESAJDA ilk adımın içeriğini de ver! Sadece roadmap göstermek yeterli değil - konu tanıtımı, ne öğreneceği ve önemi gibi içerikleri de ekle. [CURRENT_STEP: 1] kullan!
+
+═══════════════════════════════════════════════════════════════
 DETAYLI ROADMAP PLANLAMA ZORUNLULUĞU - KRİTİK!
 ═══════════════════════════════════════════════════════════════
 
@@ -174,9 +180,7 @@ KRİTİK YOL HARİTASI TAKİP KURALLARI - MUTLAKA UYULMALI!
    - ⚠️ ÖNEMLİ: Her adımı AYRI BİR MESAJDA ele al! Birden fazla adımı tek mesajda birleştirme!
    - Örnek: 5. "Kavram pekiştirme" adımını tamamladıktan sonra, 6. "Özet ve tamamlama" adımı için YENİ BİR MESAJ gönder!
    - Her adım için ayrı mesaj göndermek ZORUNLU! Bu sayede her adım doğru şekilde tamamlanmış olarak işaretlenir.
-   - ⚠️ KRİTİK: İLK ADIM "KONUYA GİRİŞ" MUTLAKA İÇERİKLE TAMAMLANMALI!
-   - "Konuya giriş" adımını atlama! Bu adımda ders konusunu tanıt, ne öğreneceğini açıkla, konunun önemini belirt!
-   - İlk adımı sadece roadmap göstererek geçiştirme! MUTLAKA içerik ver: konu tanıtımı, öğrenilecekler, konunun önemi!
+   - ⚠️ KRİTİK: İlk adım "Konuya giriş" adımını ASLA atlama! Roadmap'i gösterdikten sonra, AYNI MESAJDA ilk adımın içeriğini de ver!
    - Roadmap'te planladığın her kavramı mutlaka anlat! Roadmap'te "ne için kullanılır" dediysen, bunu mutlaka açıkla!
 
 2. CURRENT_STEP TAG ZORUNLULUĞU (HER MESAJDA!):
@@ -206,7 +210,9 @@ KRİTİK YOL HARİTASI TAKİP KURALLARI - MUTLAKA UYULMALI!
 ═══════════════════════════════════════════════════════════════`;
     } else {
       // Theoretical lesson without code - focus on explanation and tests
-      roadmapSection = `\n\nYOL HARİTASI OLUŞTURMA GÖREVİ:\n- İLK MESAJDA mutlaka ders için detaylı bir yol haritası oluştur ve [ROADMAP: yol haritası içeriği] formatında sakla.\n- Bu ders TEORİK bir ders olduğu için (kod içeriği yok) yol haritası şu adımları içermelidir: 1. Konuya giriş 2. Temel kavramlar ve açıklamalar 3. Detaylı örnekler ve senaryolar 4. Mini test soruları (EN AZ 3 SORU - ZORUNLU!) 5. Kavram pekiştirme 6. Özet ve tamamlama\n- KRİTİK: Yol haritasında numaralandırma (1. 2. 3.) KULLAN! Roadmap için numaralandırma gereklidir çünkü sistem bunu parse ediyor.\n- NOT: Roadmap'te numaralandırma kullan ama NORMAL MESAJLARDA numaralandırma KULLANMA, sadece madde işaretleri (•) kullan!\n\n═══════════════════════════════════════════════════════════════
+      roadmapSection = `\n\nYOL HARİTASI OLUŞTURMA GÖREVİ:\n- İLK MESAJDA mutlaka ders için detaylı bir yol haritası oluştur ve [ROADMAP: yol haritası içeriği] formatında sakla.\n- Bu ders TEORİK bir ders olduğu için (kod içeriği yok) yol haritası şu adımları içermelidir: 1. Konuya giriş 2. Temel kavramlar ve açıklamalar 3. Detaylı örnekler ve senaryolar 4. Mini test soruları (EN AZ 3 SORU - ZORUNLU!) 5. Kavram pekiştirme 6. Özet ve tamamlama\n- KRİTİK: Yol haritasında numaralandırma (1. 2. 3.) KULLAN! Roadmap için numaralandırma gereklidir çünkü sistem bunu parse ediyor.\n- NOT: Roadmap'te numaralandırma kullan ama NORMAL MESAJLARDA numaralandırma KULLANMA, sadece madde işaretleri (•) kullan!\n\n⚠️ KRİTİK: İlk mesajda roadmap'i oluşturduktan SONRA, AYNI MESAJDA ilk adımın içeriğini de ver! Sadece roadmap göstermek yeterli değil - konu tanıtımı, ne öğreneceği ve önemi gibi içerikleri de ekle. [CURRENT_STEP: 1] kullan!
+
+═══════════════════════════════════════════════════════════════
 DETAYLI ROADMAP PLANLAMA ZORUNLULUĞU - KRİTİK!
 ═══════════════════════════════════════════════════════════════
 
@@ -239,9 +245,7 @@ KRİTİK YOL HARİTASI TAKİP KURALLARI - MUTLAKA UYULMALI!
    - ⚠️ ÖNEMLİ: Her adımı AYRI BİR MESAJDA ele al! Birden fazla adımı tek mesajda birleştirme!
    - Örnek: 5. "Kavram pekiştirme" adımını tamamladıktan sonra, 6. "Özet ve tamamlama" adımı için YENİ BİR MESAJ gönder!
    - Her adım için ayrı mesaj göndermek ZORUNLU! Bu sayede her adım doğru şekilde tamamlanmış olarak işaretlenir.
-   - ⚠️ KRİTİK: İLK ADIM "KONUYA GİRİŞ" MUTLAKA İÇERİKLE TAMAMLANMALI!
-   - "Konuya giriş" adımını atlama! Bu adımda ders konusunu tanıt, ne öğreneceğini açıkla, konunun önemini belirt!
-   - İlk adımı sadece roadmap göstererek geçiştirme! MUTLAKA içerik ver: konu tanıtımı, öğrenilecekler, konunun önemi!
+   - ⚠️ KRİTİK: İlk adım "Konuya giriş" adımını ASLA atlama! Roadmap'i gösterdikten sonra, AYNI MESAJDA ilk adımın içeriğini de ver!
    - Roadmap'te planladığın her kavramı mutlaka anlat! Roadmap'te "ne için kullanılır" dediysen, bunu mutlaka açıkla!
 
 2. CURRENT_STEP TAG ZORUNLULUĞU (HER MESAJDA!):
@@ -344,6 +348,7 @@ TEMEL İLKELER:
 
 1. YOL HARİTASINA SADIKLIK (EN ÖNEMLİ KURAL!):
 - İLK MESAJDA mutlaka [ROADMAP: ...] ile yol haritası oluştur
+- ⚠️ KRİTİK: Roadmap'i gösterdikten sonra, AYNI MESAJDA ilk adımın içeriğini de ver (konu tanıtımı, ne öğreneceği, önemi)!
 - Yol haritasına sadık kal, kullanıcıyı ders içeriğinde tut
 - Sadece verilen ders konusunu anlat, konudan sapma
 

@@ -199,6 +199,7 @@ export default function CVRenderer({ data, templateId, className = '', id }: CVR
       style={{
         width: '210mm',
         minHeight: '297mm',
+        maxHeight: '297mm',
         margin: '0 auto',
         overflow: 'hidden',
         wordBreak: 'break-word',

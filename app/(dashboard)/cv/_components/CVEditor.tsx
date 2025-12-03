@@ -25,6 +25,18 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Ca
 import { Button } from "@/app/components/ui/Button";
 import { Input } from "@/app/components/ui/Input";
 import CVRenderer from "@/app/components/cv/CVRenderer";
+import {
+  CV_LIMITS,
+  countWords,
+  countChars,
+  getValidationStatus,
+  getValidationMessage,
+  validateExperienceCount,
+  validateProjectsCount,
+  validateEducationCount,
+  validateAchievementsCount,
+  validateCertificationsCount,
+} from "./cvValidation";
 
 interface CVTemplate {
   id: string;
@@ -565,48 +577,109 @@ export default function CVEditor({
         );
 
       case 2:
+        const summaryWordCount = countWords(cvData.summary);
+        const summaryCharCount = countChars(cvData.summary);
+        const summaryStatus = getValidationStatus(
+          cvData.summary,
+          CV_LIMITS.summary.maxWords,
+          CV_LIMITS.summary.maxChars
+        );
+        const summaryMessage = getValidationMessage(
+          cvData.summary,
+          CV_LIMITS.summary.maxWords,
+          CV_LIMITS.summary.maxChars,
+          "Özet"
+        );
+        
         return (
           <Card variant="elevated">
             <CardHeader>
               <CardTitle>Profesyonel Özet</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="space-y-2">
               <textarea
                 placeholder="Kendinizi ve kariyer hedeflerinizi kısaca açıklayın..."
                 value={cvData.summary}
-                onChange={(e) =>
-                  setCvData((prev) => ({ ...prev, summary: e.target.value }))
-                }
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 min-h-[200px]"
+                onChange={(e) => {
+                  const newValue = e.target.value;
+                  const newWordCount = countWords(newValue);
+                  const newCharCount = countChars(newValue);
+                  
+                  // Prevent exceeding limits
+                  if (newWordCount <= CV_LIMITS.summary.maxWords && 
+                      newCharCount <= CV_LIMITS.summary.maxChars) {
+                    setCvData((prev) => ({ ...prev, summary: newValue }));
+                  }
+                }}
+                maxLength={CV_LIMITS.summary.maxChars}
+                className={`w-full px-4 py-2 rounded-lg border min-h-[200px] bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 ${
+                  summaryStatus === 'error'
+                    ? 'border-red-500 dark:border-red-500'
+                    : summaryStatus === 'warning'
+                    ? 'border-yellow-500 dark:border-yellow-500'
+                    : 'border-gray-300 dark:border-gray-600'
+                }`}
                 rows={8}
               />
+              <div className="flex justify-between items-center text-sm">
+                <div className="flex gap-4">
+                  <span className={summaryStatus === 'error' ? 'text-red-600 dark:text-red-400' : 
+                                   summaryStatus === 'warning' ? 'text-yellow-600 dark:text-yellow-400' : 
+                                   'text-gray-600 dark:text-gray-400'}>
+                    {summaryWordCount}/{CV_LIMITS.summary.maxWords} kelime
+                  </span>
+                  <span className={summaryStatus === 'error' ? 'text-red-600 dark:text-red-400' : 
+                                   summaryStatus === 'warning' ? 'text-yellow-600 dark:text-yellow-400' : 
+                                   'text-gray-600 dark:text-gray-400'}>
+                    {summaryCharCount}/{CV_LIMITS.summary.maxChars} karakter
+                  </span>
+                </div>
+              </div>
+              {summaryMessage && (
+                <p className={`text-xs ${
+                  summaryStatus === 'error' ? 'text-red-600 dark:text-red-400' : 
+                  'text-yellow-600 dark:text-yellow-400'
+                }`}>
+                  {summaryMessage}
+                </p>
+              )}
             </CardContent>
           </Card>
         );
 
       case 3:
+        const canAddExperience = validateExperienceCount(cvData.experience.length);
+        
         return (
           <Card variant="elevated">
             <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle>İş Deneyimi</CardTitle>
+              <CardTitle>
+                İş Deneyimi
+                <span className="text-sm font-normal text-gray-500 ml-2">
+                  ({cvData.experience.length}/{CV_LIMITS.experience.maxEntries})
+                </span>
+              </CardTitle>
               <Button
                 size="sm"
-                onClick={() =>
-                  setCvData((prev) => ({
-                    ...prev,
-                    experience: [
-                      ...prev.experience,
-                      {
-                        company: "",
-                        position: "",
-                        startDate: "",
-                        endDate: "",
-                        description: "",
-                        current: false,
-                      },
-                    ],
-                  }))
-                }
+                onClick={() => {
+                  if (canAddExperience) {
+                    setCvData((prev) => ({
+                      ...prev,
+                      experience: [
+                        ...prev.experience,
+                        {
+                          company: "",
+                          position: "",
+                          startDate: "",
+                          endDate: "",
+                          description: "",
+                          current: false,
+                        },
+                      ],
+                    }));
+                  }
+                }}
+                disabled={!canAddExperience}
               >
                 <Plus className="h-4 w-4 mr-2" />
                 Ekle
@@ -671,17 +744,66 @@ export default function CVEditor({
                         Devam ediyor
                       </span>
                     </label>
-                    <textarea
-                      placeholder="Açıklama"
-                      value={exp.description}
-                      onChange={(e) => {
-                        const experience = [...cvData.experience];
-                        experience[index].description = e.target.value;
-                        setCvData((prev) => ({ ...prev, experience }));
-                      }}
-                      className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-                      rows={3}
-                    />
+                    {(() => {
+                      const expWordCount = countWords(exp.description);
+                      const expCharCount = countChars(exp.description);
+                      const expStatus = getValidationStatus(
+                        exp.description,
+                        CV_LIMITS.experience.descriptionMaxWords,
+                        CV_LIMITS.experience.descriptionMaxChars
+                      );
+                      const expMessage = getValidationMessage(
+                        exp.description,
+                        CV_LIMITS.experience.descriptionMaxWords,
+                        CV_LIMITS.experience.descriptionMaxChars,
+                        "Açıklama"
+                      );
+                      
+                      return (
+                        <div className="space-y-1">
+                          <textarea
+                            placeholder="Açıklama"
+                            value={exp.description}
+                            onChange={(e) => {
+                              const newValue = e.target.value;
+                              const newWordCount = countWords(newValue);
+                              const newCharCount = countChars(newValue);
+                              
+                              if (newWordCount <= CV_LIMITS.experience.descriptionMaxWords && 
+                                  newCharCount <= CV_LIMITS.experience.descriptionMaxChars) {
+                                const experience = [...cvData.experience];
+                                experience[index].description = newValue;
+                                setCvData((prev) => ({ ...prev, experience }));
+                              }
+                            }}
+                            maxLength={CV_LIMITS.experience.descriptionMaxChars}
+                            className={`w-full px-4 py-2 rounded-lg border bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 ${
+                              expStatus === 'error'
+                                ? 'border-red-500 dark:border-red-500'
+                                : expStatus === 'warning'
+                                ? 'border-yellow-500 dark:border-yellow-500'
+                                : 'border-gray-300 dark:border-gray-600'
+                            }`}
+                            rows={3}
+                          />
+                          <div className="flex justify-between items-center text-xs">
+                            <span className={expStatus === 'error' ? 'text-red-600 dark:text-red-400' : 
+                                             expStatus === 'warning' ? 'text-yellow-600 dark:text-yellow-400' : 
+                                             'text-gray-500 dark:text-gray-400'}>
+                              {expWordCount}/{CV_LIMITS.experience.descriptionMaxWords} kelime, {expCharCount}/{CV_LIMITS.experience.descriptionMaxChars} karakter
+                            </span>
+                          </div>
+                          {expMessage && (
+                            <p className={`text-xs ${
+                              expStatus === 'error' ? 'text-red-600 dark:text-red-400' : 
+                              'text-yellow-600 dark:text-yellow-400'
+                            }`}>
+                              {expMessage}
+                            </p>
+                          )}
+                        </div>
+                      );
+                    })()}
                     <Button
                       variant="ghost"
                       size="sm"
@@ -703,32 +825,47 @@ export default function CVEditor({
                   Henüz deneyim eklenmedi
                 </p>
               )}
+              {!canAddExperience && (
+                <p className="text-sm text-yellow-600 dark:text-yellow-400 text-center py-2">
+                  Maksimum {CV_LIMITS.experience.maxEntries} deneyim eklenebilir.
+                </p>
+              )}
             </CardContent>
           </Card>
         );
 
       case 4:
+        const canAddEducation = validateEducationCount(cvData.education.length);
+        
         return (
           <Card variant="elevated">
             <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle>Eğitim</CardTitle>
+              <CardTitle>
+                Eğitim
+                <span className="text-sm font-normal text-gray-500 ml-2">
+                  ({cvData.education.length}/{CV_LIMITS.education.maxEntries})
+                </span>
+              </CardTitle>
               <Button
                 size="sm"
-                onClick={() =>
-                  setCvData((prev) => ({
-                    ...prev,
-                    education: [
-                      ...prev.education,
-                      {
-                        school: "",
-                        degree: "",
-                        field: "",
-                        startDate: "",
-                        endDate: "",
-                      },
-                    ],
-                  }))
-                }
+                onClick={() => {
+                  if (canAddEducation) {
+                    setCvData((prev) => ({
+                      ...prev,
+                      education: [
+                        ...prev.education,
+                        {
+                          school: "",
+                          degree: "",
+                          field: "",
+                          startDate: "",
+                          endDate: "",
+                        },
+                      ],
+                    }));
+                  }
+                }}
+                disabled={!canAddEducation}
               >
                 <Plus className="h-4 w-4 mr-2" />
                 Ekle
@@ -806,6 +943,11 @@ export default function CVEditor({
               {cvData.education.length === 0 && (
                 <p className="text-center text-gray-500 dark:text-gray-400 py-8">
                   Henüz eğitim eklenmedi
+                </p>
+              )}
+              {!canAddEducation && (
+                <p className="text-sm text-yellow-600 dark:text-yellow-400 text-center py-2">
+                  Maksimum {CV_LIMITS.education.maxEntries} eğitim eklenebilir.
                 </p>
               )}
             </CardContent>
@@ -925,28 +1067,38 @@ export default function CVEditor({
         );
 
       case 7:
+        const canAddProject = validateProjectsCount(cvData.projects.length);
+        
         return (
           <Card variant="elevated">
             <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle>Projeler</CardTitle>
+              <CardTitle>
+                Projeler
+                <span className="text-sm font-normal text-gray-500 ml-2">
+                  ({cvData.projects.length}/{CV_LIMITS.projects.maxEntries})
+                </span>
+              </CardTitle>
               <Button
                 size="sm"
-                onClick={() =>
-                  setCvData((prev) => ({
-                    ...prev,
-                    projects: [
-                      ...prev.projects,
-                      {
-                        name: "",
-                        description: "",
-                        technologies: "",
-                        url: "",
-                        startDate: "",
-                        endDate: "",
-                      },
-                    ],
-                  }))
-                }
+                onClick={() => {
+                  if (canAddProject) {
+                    setCvData((prev) => ({
+                      ...prev,
+                      projects: [
+                        ...prev.projects,
+                        {
+                          name: "",
+                          description: "",
+                          technologies: "",
+                          url: "",
+                          startDate: "",
+                          endDate: "",
+                        },
+                      ],
+                    }));
+                  }
+                }}
+                disabled={!canAddProject}
               >
                 <Plus className="h-4 w-4 mr-2" />
                 Ekle
@@ -965,17 +1117,66 @@ export default function CVEditor({
                         setCvData((prev) => ({ ...prev, projects }));
                       }}
                     />
-                    <textarea
-                      placeholder="Açıklama"
-                      value={project.description}
-                      onChange={(e) => {
-                        const projects = [...cvData.projects];
-                        projects[index].description = e.target.value;
-                        setCvData((prev) => ({ ...prev, projects }));
-                      }}
-                      className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-                      rows={3}
-                    />
+                    {(() => {
+                      const projWordCount = countWords(project.description);
+                      const projCharCount = countChars(project.description);
+                      const projStatus = getValidationStatus(
+                        project.description,
+                        CV_LIMITS.projects.descriptionMaxWords,
+                        CV_LIMITS.projects.descriptionMaxChars
+                      );
+                      const projMessage = getValidationMessage(
+                        project.description,
+                        CV_LIMITS.projects.descriptionMaxWords,
+                        CV_LIMITS.projects.descriptionMaxChars,
+                        "Açıklama"
+                      );
+                      
+                      return (
+                        <div className="space-y-1">
+                          <textarea
+                            placeholder="Açıklama"
+                            value={project.description}
+                            onChange={(e) => {
+                              const newValue = e.target.value;
+                              const newWordCount = countWords(newValue);
+                              const newCharCount = countChars(newValue);
+                              
+                              if (newWordCount <= CV_LIMITS.projects.descriptionMaxWords && 
+                                  newCharCount <= CV_LIMITS.projects.descriptionMaxChars) {
+                                const projects = [...cvData.projects];
+                                projects[index].description = newValue;
+                                setCvData((prev) => ({ ...prev, projects }));
+                              }
+                            }}
+                            maxLength={CV_LIMITS.projects.descriptionMaxChars}
+                            className={`w-full px-4 py-2 rounded-lg border bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 ${
+                              projStatus === 'error'
+                                ? 'border-red-500 dark:border-red-500'
+                                : projStatus === 'warning'
+                                ? 'border-yellow-500 dark:border-yellow-500'
+                                : 'border-gray-300 dark:border-gray-600'
+                            }`}
+                            rows={3}
+                          />
+                          <div className="flex justify-between items-center text-xs">
+                            <span className={projStatus === 'error' ? 'text-red-600 dark:text-red-400' : 
+                                             projStatus === 'warning' ? 'text-yellow-600 dark:text-yellow-400' : 
+                                             'text-gray-500 dark:text-gray-400'}>
+                              {projWordCount}/{CV_LIMITS.projects.descriptionMaxWords} kelime, {projCharCount}/{CV_LIMITS.projects.descriptionMaxChars} karakter
+                            </span>
+                          </div>
+                          {projMessage && (
+                            <p className={`text-xs ${
+                              projStatus === 'error' ? 'text-red-600 dark:text-red-400' : 
+                              'text-yellow-600 dark:text-yellow-400'
+                            }`}>
+                              {projMessage}
+                            </p>
+                          )}
+                        </div>
+                      );
+                    })()}
                     <Input
                       placeholder="Teknolojiler (virgülle ayırın)"
                       value={project.technologies}
@@ -1032,26 +1233,41 @@ export default function CVEditor({
                   </div>
                 </Card>
               ))}
+              {!canAddProject && (
+                <p className="text-sm text-yellow-600 dark:text-yellow-400 text-center py-2">
+                  Maksimum {CV_LIMITS.projects.maxEntries} proje eklenebilir.
+                </p>
+              )}
             </CardContent>
           </Card>
         );
 
       case 8:
+        const canAddAchievement = validateAchievementsCount(cvData.achievements.length);
+        
         return (
           <Card variant="elevated">
             <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle>Başarılar & Ödüller</CardTitle>
+              <CardTitle>
+                Başarılar & Ödüller
+                <span className="text-sm font-normal text-gray-500 ml-2">
+                  ({cvData.achievements.length}/{CV_LIMITS.achievements.maxEntries})
+                </span>
+              </CardTitle>
               <Button
                 size="sm"
-                onClick={() =>
-                  setCvData((prev) => ({
-                    ...prev,
-                    achievements: [
-                      ...prev.achievements,
-                      { title: "", description: "", date: "" },
-                    ],
-                  }))
-                }
+                onClick={() => {
+                  if (canAddAchievement) {
+                    setCvData((prev) => ({
+                      ...prev,
+                      achievements: [
+                        ...prev.achievements,
+                        { title: "", description: "", date: "" },
+                      ],
+                    }));
+                  }
+                }}
+                disabled={!canAddAchievement}
               >
                 <Plus className="h-4 w-4 mr-2" />
                 Ekle
@@ -1070,17 +1286,66 @@ export default function CVEditor({
                         setCvData((prev) => ({ ...prev, achievements }));
                       }}
                     />
-                    <textarea
-                      placeholder="Açıklama"
-                      value={achievement.description}
-                      onChange={(e) => {
-                        const achievements = [...cvData.achievements];
-                        achievements[index].description = e.target.value;
-                        setCvData((prev) => ({ ...prev, achievements }));
-                      }}
-                      className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-                      rows={3}
-                    />
+                    {(() => {
+                      const achWordCount = countWords(achievement.description);
+                      const achCharCount = countChars(achievement.description);
+                      const achStatus = getValidationStatus(
+                        achievement.description,
+                        CV_LIMITS.achievements.descriptionMaxWords,
+                        CV_LIMITS.achievements.descriptionMaxChars
+                      );
+                      const achMessage = getValidationMessage(
+                        achievement.description,
+                        CV_LIMITS.achievements.descriptionMaxWords,
+                        CV_LIMITS.achievements.descriptionMaxChars,
+                        "Açıklama"
+                      );
+                      
+                      return (
+                        <div className="space-y-1">
+                          <textarea
+                            placeholder="Açıklama"
+                            value={achievement.description}
+                            onChange={(e) => {
+                              const newValue = e.target.value;
+                              const newWordCount = countWords(newValue);
+                              const newCharCount = countChars(newValue);
+                              
+                              if (newWordCount <= CV_LIMITS.achievements.descriptionMaxWords && 
+                                  newCharCount <= CV_LIMITS.achievements.descriptionMaxChars) {
+                                const achievements = [...cvData.achievements];
+                                achievements[index].description = newValue;
+                                setCvData((prev) => ({ ...prev, achievements }));
+                              }
+                            }}
+                            maxLength={CV_LIMITS.achievements.descriptionMaxChars}
+                            className={`w-full px-4 py-2 rounded-lg border bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 ${
+                              achStatus === 'error'
+                                ? 'border-red-500 dark:border-red-500'
+                                : achStatus === 'warning'
+                                ? 'border-yellow-500 dark:border-yellow-500'
+                                : 'border-gray-300 dark:border-gray-600'
+                            }`}
+                            rows={3}
+                          />
+                          <div className="flex justify-between items-center text-xs">
+                            <span className={achStatus === 'error' ? 'text-red-600 dark:text-red-400' : 
+                                             achStatus === 'warning' ? 'text-yellow-600 dark:text-yellow-400' : 
+                                             'text-gray-500 dark:text-gray-400'}>
+                              {achWordCount}/{CV_LIMITS.achievements.descriptionMaxWords} kelime, {achCharCount}/{CV_LIMITS.achievements.descriptionMaxChars} karakter
+                            </span>
+                          </div>
+                          {achMessage && (
+                            <p className={`text-xs ${
+                              achStatus === 'error' ? 'text-red-600 dark:text-red-400' : 
+                              'text-yellow-600 dark:text-yellow-400'
+                            }`}>
+                              {achMessage}
+                            </p>
+                          )}
+                        </div>
+                      );
+                    })()}
                     <Input
                       type="date"
                       placeholder="Tarih"
@@ -1107,26 +1372,41 @@ export default function CVEditor({
                   </div>
                 </Card>
               ))}
+              {!canAddAchievement && (
+                <p className="text-sm text-yellow-600 dark:text-yellow-400 text-center py-2">
+                  Maksimum {CV_LIMITS.achievements.maxEntries} başarı eklenebilir.
+                </p>
+              )}
             </CardContent>
           </Card>
         );
 
       case 9:
+        const canAddCertification = validateCertificationsCount(cvData.certifications.length);
+        
         return (
           <Card variant="elevated">
             <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle>Sertifikalar</CardTitle>
+              <CardTitle>
+                Sertifikalar
+                <span className="text-sm font-normal text-gray-500 ml-2">
+                  ({cvData.certifications.length}/{CV_LIMITS.certifications.maxEntries})
+                </span>
+              </CardTitle>
               <Button
                 size="sm"
-                onClick={() =>
-                  setCvData((prev) => ({
-                    ...prev,
-                    certifications: [
-                      ...prev.certifications,
-                      { name: "", issuer: "", date: "" },
-                    ],
-                  }))
-                }
+                onClick={() => {
+                  if (canAddCertification) {
+                    setCvData((prev) => ({
+                      ...prev,
+                      certifications: [
+                        ...prev.certifications,
+                        { name: "", issuer: "", date: "" },
+                      ],
+                    }));
+                  }
+                }}
+                disabled={!canAddCertification}
               >
                 <Plus className="h-4 w-4 mr-2" />
                 Ekle
@@ -1182,6 +1462,11 @@ export default function CVEditor({
                   </div>
                 </Card>
               ))}
+              {!canAddCertification && (
+                <p className="text-sm text-yellow-600 dark:text-yellow-400 text-center py-2">
+                  Maksimum {CV_LIMITS.certifications.maxEntries} sertifika eklenebilir.
+                </p>
+              )}
             </CardContent>
           </Card>
         );

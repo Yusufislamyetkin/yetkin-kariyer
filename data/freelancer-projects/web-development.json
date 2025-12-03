@@ -1,0 +1,72 @@
+[
+  {
+    "title": "Kurumsal Web Sitesi Geliştirme",
+    "description": "Orta ölçekli bir teknoloji şirketi için modern ve profesyonel bir kurumsal web sitesi geliştirilmesi gerekiyor. Site, şirketin hizmetlerini, referanslarını ve ekibini tanıtan kapsamlı bir platform olacak.\n\nReact.js veya Next.js framework'ü kullanılarak geliştirilecek. Site tam responsive olmalı ve tüm cihazlarda mükemmel görünmeli. SEO optimizasyonu kritik öneme sahip - Google'da üst sıralarda yer almak için teknik SEO ve içerik optimizasyonu yapılmalı.\n\nBlog modülü entegre edilmeli ve içerik yönetimi kolay olmalı. İletişim formu, canlı destek entegrasyonu ve harita entegrasyonu gerekiyor. Admin paneli ile tüm içerikler kolayca yönetilebilmeli.\n\nTasarım modern, minimal ve profesyonel olmalı. Şirketin kurumsal kimliğine uygun renk paleti ve tipografi kullanılmalı. Sayfa yükleme hızı optimize edilmeli ve Core Web Vitals metriklerine uygun olmalı.",
+    "budget": 35000,
+    "deadline": "2025-02-28T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "E-ticaret Platformu (WooCommerce)",
+    "description": "Giyim sektöründe faaliyet gösteren bir işletme için kapsamlı bir e-ticaret platformu kurulması gerekiyor. Platform, günlük yüzlerce siparişi karşılayabilecek kapasitede olmalı.\n\nWordPress ve WooCommerce kullanılarak geliştirilecek. Ürün kataloğu detaylı filtreleme, arama ve kategorilendirme özelliklerine sahip olmalı. Her ürün için çoklu görsel, varyant seçenekleri (beden, renk vb.) ve stok takibi yapılmalı.\n\nSepet ve checkout süreci kullanıcı dostu olmalı. iyzico ödeme entegrasyonu yapılacak ve taksit seçenekleri sunulmalı. Kargo entegrasyonu (Aras Kargo, Yurtiçi Kargo) ile otomatik kargo takip numarası gönderimi yapılmalı.\n\nSipariş yönetim paneli, stok yönetimi, kupon sistemi ve raporlama modülleri gerekiyor. Mobil uyumluluk zorunlu - mobil cihazlardan satışların büyük bir kısmı gerçekleşiyor. Güvenlik sertifikaları (SSL) ve PCI-DSS uyumluluğu sağlanmalı.",
+    "budget": 45000,
+    "deadline": "2025-03-15T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Restoran Web Sitesi ve Online Sipariş Sistemi",
+    "description": "İstanbul'da faaliyet gösteren bir restoran zinciri için modern web sitesi ve online sipariş sistemi geliştirilmesi gerekiyor. Sistem, hem masa rezervasyonu hem de online sipariş alma özelliklerini içermeli.\n\nMenü gösterimi görsel açıdan zengin olmalı - her yemek için yüksek kaliteli fotoğraflar, açıklamalar, fiyatlar ve alerjen bilgileri yer almalı. Kategorilere göre düzenlenmiş menü yapısı ve arama özelliği olmalı.\n\nSepet sistemi kullanıcı dostu olmalı ve sipariş özeti net bir şekilde gösterilmeli. Ödeme entegrasyonu (iyzico veya PayTR) ile güvenli ödeme alınmalı. SMS ve email bildirimleri ile müşteri sipariş durumunu takip edebilmeli.\n\nAdmin paneli ile menü yönetimi, sipariş takibi, rezervasyon yönetimi ve raporlama yapılabilmeli. Mobil uyumluluk kritik - müşterilerin çoğu mobil cihazlardan sipariş veriyor. Harita entegrasyonu ile restoran konumu gösterilmeli.",
+    "budget": 28000,
+    "deadline": "2025-02-20T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Portfolio Web Sitesi (React)",
+    "description": "Yetenekli bir grafik tasarımcı ve dijital sanatçı için kişisel portfolio web sitesi geliştirilmesi gerekiyor. Site, sanatçının çalışmalarını en iyi şekilde sergilemeli ve potansiyel müşterileri etkilemeli.\n\nReact.js kullanılarak geliştirilecek modern bir single-page application olacak. Smooth scroll animasyonları, parallax efektleri ve interaktif öğeler ile görsel açıdan etkileyici bir deneyim sunulmalı.\n\nProje galerisi grid layout ile düzenlenmeli ve lightbox ile detaylı görüntüleme yapılabilmeli. Her proje için detay sayfası, açıklama, kullanılan teknolojiler ve görseller yer almalı.\n\nBlog bölümü ile sanatçı düşüncelerini ve süreçlerini paylaşabilmeli. İletişim formu ve sosyal medya entegrasyonları olmalı. Dark mode özelliği ile kullanıcı tercihine göre tema değiştirilebilmeli.\n\nTasarım yaratıcı, modern ve sanatçının tarzını yansıtmalı. Sayfa yükleme hızı optimize edilmeli ve görseller lazy loading ile yüklenmeli.",
+    "budget": 18000,
+    "deadline": "2025-02-10T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "LMS (Learning Management System)",
+    "description": "Online eğitim platformu için kapsamlı bir Learning Management System geliştirilmesi gerekiyor. Platform, binlerce öğrenciye hizmet verebilecek kapasitede olmalı.\n\nLaravel backend ve React frontend kullanılarak geliştirilecek. Öğrenci kayıt ve giriş sistemi, profil yönetimi ve şifre sıfırlama özellikleri olmalı. Rol tabanlı yetkilendirme sistemi (öğrenci, eğitmen, admin) kurulmalı.\n\nVideo dersler için streaming altyapısı gerekiyor. Video player'da ilerleme takibi, not alma, hızlandırma özellikleri olmalı. Quiz sistemi çoktan seçmeli, doğru/yanlış, boşluk doldurma gibi farklı soru tiplerini desteklemeli.\n\nSertifika oluşturma ve PDF indirme özelliği gerekiyor. Ödeme entegrasyonu ile kurs satın alma yapılabilmeli. Admin paneli ile kurs yönetimi, öğrenci takibi, raporlama ve analitik yapılabilmeli.\n\nGamification özellikleri (rozetler, puanlar, liderlik tablosu) eklenmeli. Bildirim sistemi ve email marketing entegrasyonu olmalı.",
+    "budget": 85000,
+    "deadline": "2025-04-30T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Emlak İlan Sitesi",
+    "description": "Emlak sektöründe faaliyet gösteren bir platform için kapsamlı ilan yönetim sistemi geliştirilmesi gerekiyor. Sistem, emlakçılar ve bireysel kullanıcılar tarafından kullanılacak.\n\nPHP (Laravel) veya Node.js (Express) backend tercih edilebilir. İlan ekleme/düzenleme formu detaylı olmalı - konum, fiyat, oda sayısı, metrekare, bina yaşı, kat bilgisi gibi tüm detaylar girilebilmeli.\n\nGelişmiş arama ve filtreleme sistemi gerekiyor. Harita entegrasyonu (Google Maps) ile konum bazlı arama yapılabilmeli. Favori ilanlar özelliği ile kullanıcılar ilanları kaydedebilmeli.\n\nMesajlaşma sistemi ile emlakçı ve müşteri arasında iletişim kurulabilmeli. İlan detay sayfasında fotoğraf galerisi, sanal tur, video ve 360 derece görüntü desteği olmalı.\n\nAdmin paneli ile ilan onaylama, kullanıcı yönetimi, raporlama yapılabilmeli. SEO optimizasyonu yapılmalı ve ilanlar Google'da görünür olmalı. Mobil uyumluluk zorunlu.",
+    "budget": 55000,
+    "deadline": "2025-03-25T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Haber Portalı",
+    "description": "Dijital medya şirketi için haber portalı geliştirilmesi gerekiyor. Platform, günlük yüzlerce haber yayınlayacak ve binlerce ziyaretçiye hizmet verecek.\n\nWordPress veya custom PHP (Laravel) kullanılabilir. Kategori yönetimi ile haberler farklı kategorilere ayrılabilmeli. Yazar paneli ile editörler haber ekleyip düzenleyebilmeli.\n\nRich text editor ile haber içeriği zenginleştirilebilmeli - görseller, videolar, galeriler eklenebilmeli. Yorum sistemi ile okuyucular haberler hakkında yorum yapabilmeli ve moderasyon yapılabilmeli.\n\nHaber arama özelliği gelişmiş olmalı - başlık, içerik, yazar, tarih bazlı arama yapılabilmeli. RSS feed desteği ile haberler dış platformlara aktarılabilmeli.\n\nSosyal medya paylaşım butonları ve Open Graph etiketleri ile haberler sosyal medyada güzel görünmeli. Admin paneli ile içerik yönetimi, kullanıcı yönetimi, istatistikler görüntülenebilmeli. Sayfa yükleme hızı optimize edilmeli.",
+    "budget": 32000,
+    "deadline": "2025-03-05T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Doktor Randevu Sistemi",
+    "description": "Özel bir hastane grubu için online randevu sistemi geliştirilmesi gerekiyor. Sistem, hastaların kolayca randevu alabilmesini ve yönetim ekibinin randevuları takip edebilmesini sağlamalı.\n\nDoktor seçimi ile başlayan süreç, tarih ve saat seçimi ile devam etmeli. Takvim görünümü ile müsait saatler gösterilmeli. Hasta bilgileri formu ile kişisel ve iletişim bilgileri alınmalı.\n\nSMS ve email bildirimleri ile randevu onayı, hatırlatma ve iptal bildirimleri gönderilmeli. Randevu yönetimi ile randevu görüntüleme, düzenleme ve iptal etme yapılabilmeli.\n\nAdmin paneli ile doktor yönetimi, çalışma saatleri ayarlama, randevu takibi, hasta geçmişi görüntüleme yapılabilmeli. Raporlama modülü ile istatistikler çıkarılabilmeli.\n\nMobil uyumluluk kritik - hastaların çoğu mobil cihazlardan randevu alıyor. Güvenlik önemli - hasta bilgileri KVKK uyumlu şekilde korunmalı.",
+    "budget": 42000,
+    "deadline": "2025-03-20T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Etkinlik Yönetim Platformu",
+    "description": "Etkinlik organizasyon şirketi için kapsamlı bir etkinlik yönetim platformu geliştirilmesi gerekiyor. Platform, etkinlik oluşturma, bilet satışı ve katılımcı yönetimi yapabilmeli.\n\nReact frontend ve Node.js backend tercih ediliyor. Etkinlik oluşturma formu detaylı olmalı - başlık, açıklama, tarih, konum, kapasite, bilet fiyatları gibi tüm bilgiler girilebilmeli.\n\nBilet satışı için ödeme entegrasyonu (iyzico) yapılmalı. Farklı bilet tipleri (VIP, normal, öğrenci vb.) tanımlanabilmeli. QR kod bilet sistemi ile giriş yapılabilmeli.\n\nEtkinlik arama ve filtreleme özelliği ile kullanıcılar ilgi alanlarına göre etkinlik bulabilmeli. Organizatör paneli ile etkinlik yönetimi, katılımcı listesi, check-in yönetimi yapılabilmeli.\n\nEmail bildirimleri ile etkinlik hatırlatmaları gönderilmeli. Raporlama modülü ile satış istatistikleri görüntülenebilmeli. Mobil uyumluluk zorunlu.",
+    "budget": 48000,
+    "deadline": "2025-03-30T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Basit Kurumsal Web Sitesi (5 Sayfa)",
+    "description": "Küçük bir işletme için basit ama profesyonel bir kurumsal web sitesi geliştirilmesi gerekiyor. Site, şirketin temel bilgilerini ve hizmetlerini tanıtmalı.\n\nWordPress veya static site (Next.js) olarak geliştirilebilir. Ana sayfa, hakkımızda, hizmetler, iletişim ve blog sayfaları olacak. Her sayfa içerik yönetimi ile kolayca güncellenebilmeli.\n\nSEO optimizasyonu yapılmalı - meta tag'ler, structured data, sitemap oluşturulmalı. İletişim formu ile müşteriler kolayca ulaşabilmeli.\n\nMobil uyumluluk zorunlu - Google'ın mobil-first yaklaşımı nedeniyle tüm sayfalar mobil cihazlarda mükemmel görünmeli. Sayfa yükleme hızı optimize edilmeli.\n\nTasarım temiz, profesyonel ve şirketin kimliğine uygun olmalı. Sosyal medya entegrasyonları ve harita entegrasyonu eklenebilir.",
+    "budget": 12000,
+    "deadline": "2025-02-05T00:00:00.000Z",
+    "status": "open"
+  }
+]

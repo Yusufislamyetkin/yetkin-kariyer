@@ -251,7 +251,7 @@ function DashboardLayoutContent({
             icon: Handshake,
           },
           {
-            name: "Derece Kazancı",
+            name: "Derece Sıralaması",
             href: "/competition",
             icon: Medal,
           },

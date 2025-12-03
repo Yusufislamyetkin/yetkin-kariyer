@@ -67,8 +67,12 @@ interface ModernTemplateProps {
 export default function ModernTemplate({ data }: ModernTemplateProps) {
   return (
     <div
-      className="bg-white text-gray-900 break-words"
-      style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
+      className="bg-white text-gray-900 break-words overflow-hidden"
+      style={{ 
+        fontFamily: 'system-ui, -apple-system, sans-serif',
+        maxHeight: '297mm',
+        overflow: 'hidden'
+      }}
     >
       {/* Header */}
       <div className="bg-blue-600 text-white p-8">

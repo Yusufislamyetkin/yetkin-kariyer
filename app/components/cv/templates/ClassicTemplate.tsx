@@ -66,7 +66,14 @@ interface ClassicTemplateProps {
 
 export default function ClassicTemplate({ data }: ClassicTemplateProps) {
   return (
-    <div className="bg-white text-gray-900 break-words" style={{ fontFamily: 'Georgia, serif' }}>
+    <div 
+      className="bg-white text-gray-900 break-words overflow-hidden" 
+      style={{ 
+        fontFamily: 'Georgia, serif',
+        maxHeight: '297mm',
+        overflow: 'hidden'
+      }}
+    >
       <div className="max-w-4xl mx-auto p-10">
         {/* Header */}
         <header className="text-center border-b-4 border-navy-900 pb-6 mb-8">

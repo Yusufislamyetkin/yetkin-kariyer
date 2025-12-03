@@ -58,7 +58,7 @@ export default function EarningsLeaderboardPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [loading, setLoading] = useState(true);
-  const [period, setPeriod] = useState<"daily" | "monthly">("daily");
+  const [period, setPeriod] = useState<"daily" | "weekly" | "monthly">("daily");
   const [leaderboard, setLeaderboard] = useState<EarningsLeaderboardEntry[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [visibleCount, setVisibleCount] = useState(20);
@@ -153,6 +153,8 @@ export default function EarningsLeaderboardPage() {
             <p className="text-xs text-gray-500 dark:text-gray-400">
               {period === "daily"
                 ? "Son 24 saatteki kazançlar"
+                : period === "weekly"
+                ? "Bu haftaki kazançlar (Pazartesi-Pazar)"
                 : "Son 30 gündeki kazançlar"}
             </p>
           </div>
@@ -160,6 +162,7 @@ export default function EarningsLeaderboardPage() {
             {(
               [
                 { value: "daily", label: "Günlük" },
+                { value: "weekly", label: "Haftalık" },
                 { value: "monthly", label: "Aylık" },
               ] as const
             ).map(({ value, label }) => {
@@ -173,6 +176,8 @@ export default function EarningsLeaderboardPage() {
                     isActive
                       ? period === "daily"
                         ? "bg-gradient-to-r from-blue-500 via-indigo-500 to-cyan-500 text-white shadow"
+                        : period === "weekly"
+                        ? "bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 text-white shadow"
                         : "bg-gradient-to-r from-purple-500 via-pink-500 to-rose-500 text-white shadow"
                       : "text-gray-600 hover:bg-white dark:text-gray-300 dark:hover:bg-gray-800/70"
                   }`}
@@ -264,7 +269,12 @@ export default function EarningsLeaderboardPage() {
                   <div className="flex items-center gap-3 mb-4">
                     <Trophy className="h-6 w-6 text-yellow-500" />
                     <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                      {period === "daily" ? "Günlük" : "Aylık"} İlk Üç Kazanan
+                      {period === "daily"
+                        ? "Günlük"
+                        : period === "weekly"
+                        ? "Haftalık"
+                        : "Aylık"}{" "}
+                      İlk Üç Kazanan
                     </h2>
                   </div>
                   <div className="grid gap-6 md:grid-cols-3">

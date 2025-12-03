@@ -1,0 +1,72 @@
+[
+  {
+    "title": "iOS ve Android E-ticaret Uygulaması",
+    "description": "Başarılı bir e-ticaret platformu için iOS ve Android mobil uygulaması geliştirilmesi gerekiyor. Uygulama, web sitesinin tüm özelliklerini mobil platforma taşımalı.\n\nReact Native veya Flutter ile cross-platform geliştirme yapılacak. Ürün listeleme, detay sayfası, arama ve filtreleme özellikleri olmalı. Sepet yönetimi ve checkout süreci kullanıcı dostu olmalı.\n\nÖdeme entegrasyonu (iyzico SDK) ile güvenli ödeme alınmalı. Sipariş takibi ile kullanıcılar siparişlerinin durumunu görebilmeli. Push notification ile sipariş durumu, kampanyalar ve yeni ürünler hakkında bildirim gönderilmeli.\n\nKullanıcı hesap yönetimi ile profil düzenleme, adres yönetimi, sipariş geçmişi görüntülenebilmeli. Favoriler özelliği ile kullanıcılar ürünleri kaydedebilmeli.\n\nBackend API mevcut ve entegrasyon yapılacak. Uygulama App Store ve Google Play Store'a yüklenmeli. Performans optimize edilmeli ve crash-free olmalı.",
+    "budget": 75000,
+    "deadline": "2025-04-15T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Fitness Takip Uygulaması",
+    "description": "Spor ve fitness meraklıları için kapsamlı bir fitness takip uygulaması geliştirilmesi gerekiyor. Uygulama, kullanıcıların fitness hedeflerine ulaşmasına yardımcı olmalı.\n\nEgzersiz programları modülü ile hazır programlar ve özel program oluşturma özelliği olmalı. Her egzersiz için video, açıklama ve set/tekrar bilgileri yer almalı.\n\nİlerleme takibi ile kilo, vücut ölçüleri, fotoğraflar kaydedilebilmeli. Grafikler ile ilerleme görselleştirilmeli. Beslenme günlüğü ile kalori takibi yapılabilmeli.\n\nİstatistikler sayfası ile toplam antrenman, yakılan kalori, hedef tamamlama oranı gösterilmeli. Sosyal özellikler ile arkadaş ekleme, paylaşım yapma özellikleri olmalı.\n\nApple Health ve Google Fit entegrasyonu ile veriler senkronize edilebilmeli. Push notification ile antrenman hatırlatmaları gönderilmeli. Offline çalışma desteği olmalı.",
+    "budget": 65000,
+    "deadline": "2025-04-10T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Yemek Sipariş Uygulaması",
+    "description": "Yemek sipariş platformu için kullanıcı ve restoran uygulamaları geliştirilmesi gerekiyor. Sistem, restoranların menülerini sunmasını ve kullanıcıların sipariş vermesini sağlamalı.\n\nKullanıcı uygulamasında menü gösterimi, kategori bazlı düzenleme, arama özelliği olmalı. Sepet yönetimi ve checkout süreci akıcı olmalı. Ödeme entegrasyonu ile güvenli ödeme alınmalı.\n\nSipariş takibi ile gerçek zamanlı sipariş durumu gösterilmeli. Kurye takibi için harita entegrasyonu (Google Maps) ile kuryenin konumu görüntülenebilmeli.\n\nRestoran uygulamasında sipariş yönetimi, menü yönetimi, çalışma saatleri ayarlama özellikleri olmalı. Push notification ile yeni sipariş bildirimleri gönderilmeli.\n\nKullanıcı ve dealer panelleri ayrı olmalı. Rating ve yorum sistemi ile kullanıcılar deneyimlerini paylaşabilmeli. Firebase backend kullanılabilir.",
+    "budget": 80000,
+    "deadline": "2025-04-25T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Sosyal Medya Uygulaması",
+    "description": "Fotoğraf ve video paylaşım odaklı bir sosyal medya uygulaması geliştirilmesi gerekiyor. Uygulama, kullanıcıların içerik paylaşmasını ve etkileşim kurmasını sağlamalı.\n\nKullanıcı kayıt ve giriş sistemi (email, telefon, sosyal medya) olmalı. Feed sayfası ile takip edilen kullanıcıların paylaşımları gösterilmeli. Infinite scroll ile performanslı yükleme yapılmalı.\n\nProfil sayfası ile kullanıcı bilgileri, paylaşımlar, beğeniler görüntülenebilmeli. Beğeni ve yorum sistemi ile etkileşim kurulabilmeli. Takip sistemi ile kullanıcılar birbirini takip edebilmeli.\n\nStory özelliği ile 24 saatlik geçici içerik paylaşımı yapılabilmeli. Push notification ile beğeni, yorum, takip bildirimleri gönderilmeli.\n\nFirebase backend ile real-time veri senkronizasyonu yapılmalı. Görsel ve video optimizasyonu ile hızlı yükleme sağlanmalı. Güvenlik ve moderasyon önemli.",
+    "budget": 95000,
+    "deadline": "2025-05-10T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Haber Okuma Uygulaması",
+    "description": "Dijital haber platformu için mobil uygulama geliştirilmesi gerekiyor. Uygulama, kullanıcıların güncel haberleri kolayca okumasını sağlamalı.\n\nKategori bazlı haber gösterimi ile kullanıcılar ilgi alanlarına göre haberleri görüntüleyebilmeli. Haber detay sayfası zengin içerik desteği ile görseller, videolar, galeriler gösterilmeli.\n\nFavoriler özelliği ile kullanıcılar haberleri kaydedebilmeli. Offline okuma özelliği ile internet olmadan kaydedilen haberler okunabilmeli.\n\nPush notification ile önemli haberler hakkında bildirim gönderilmeli. Arama özelliği ile haberler arasında arama yapılabilmeli.\n\nPaylaşım özelliği ile haberler sosyal medyada paylaşılabilmeli. Dark mode desteği ile gece okuma deneyimi iyileştirilmeli.\n\nFlutter tercih ediliyor. Performans optimize edilmeli ve haberler hızlı yüklenmeli. RSS feed entegrasyonu yapılabilir.",
+    "budget": 45000,
+    "deadline": "2025-03-20T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Müzik Çalar Uygulaması",
+    "description": "Müzik dinleme platformu için mobil uygulama geliştirilmesi gerekiyor. Uygulama, kullanıcıların müzik koleksiyonlarını yönetmesini ve dinlemesini sağlamalı.\n\nÇalma listesi yönetimi ile oynatma listeleri oluşturulabilmeli, düzenlenebilmeli ve silinebilmeli. Şarkı arama özelliği ile kütüphane içinde arama yapılabilmeli.\n\nFavoriler özelliği ile kullanıcılar sevdikleri şarkıları kaydedebilmeli. Offline çalma özelliği ile indirilen şarkılar internet olmadan dinlenebilmeli.\n\nArka plan çalma özelliği ile uygulama kapalıyken müzik çalmaya devam etmeli. Bildirim kontrolü ile müzik kontrol edilebilmeli.\n\nNative iOS (Swift) ve Android (Kotlin) geliştirme tercih ediliyor. Ses kalitesi optimize edilmeli. Kütüphane yönetimi ile şarkılar, albümler, sanatçılar organize edilebilmeli.\n\nGörsel açıdan zengin bir arayüz ve smooth animasyonlar olmalı. Equalizer özelliği eklenebilir.",
+    "budget": 55000,
+    "deadline": "2025-03-30T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Taksi/Ulaşım Uygulaması",
+    "description": "Ulaşım platformu için yolcu ve sürücü uygulamaları geliştirilmesi gerekiyor. Sistem, yolcuların araç çağırmasını ve sürücülerin yolcu bulmasını sağlamalı.\n\nYolcu uygulamasında konum seçimi, araç tipi seçimi (ekonomi, konfor, lüks), fiyat tahmini özellikleri olmalı. Harita entegrasyonu (Google Maps) ile rota çizme ve sürücü takibi yapılabilmeli.\n\nÖdeme sistemi ile nakit veya kredi kartı ile ödeme yapılabilmeli. Rating sistemi ile yolcu ve sürücü birbirini değerlendirebilmeli.\n\nSürücü uygulamasında sipariş kabul/reddetme, navigasyon, kazanç takibi özellikleri olmalı. Canlı takip ile yolcu sürücünün konumunu görebilmeli.\n\nPush notification ile sipariş bildirimleri, varış bildirimleri gönderilmeli. React Native veya Flutter kullanılabilir.\n\nGüvenlik önemli - kullanıcı doğrulama, acil durum butonu, şoför bilgileri gösterimi yapılmalı. Gerçek zamanlı konum takibi için WebSocket kullanılmalı.",
+    "budget": 110000,
+    "deadline": "2025-05-20T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Not Alma Uygulaması",
+    "description": "Kişisel verimlilik için not alma uygulaması geliştirilmesi gerekiyor. Uygulama, kullanıcıların notlarını organize etmesini ve erişmesini kolaylaştırmalı.\n\nNot oluşturma ve düzenleme özelliği ile zengin metin editörü (kalın, italik, liste, bağlantı) olmalı. Kategori ve etiket sistemi ile notlar organize edilebilmeli.\n\nArama özelliği ile notlar arasında hızlı arama yapılabilmeli. Sync özelliği ile notlar bulut üzerinde senkronize edilebilmeli.\n\nOffline çalışma desteği ile internet olmadan notlar oluşturulabilmeli ve daha sonra senkronize edilebilmeli. Widget desteği ile ana ekrandan hızlı erişim sağlanabilmeli.\n\nBasit ve kullanıcı dostu bir arayüz olmalı. Markdown desteği eklenebilir. Görsel ekleme özelliği ile notlara fotoğraf eklenebilmeli.\n\nReact Native veya Flutter kullanılabilir. Performans önemli - notlar hızlı yüklenmeli ve kaydedilmeli.",
+    "budget": 30000,
+    "deadline": "2025-02-25T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "QR Kod Okuyucu ve Oluşturucu",
+    "description": "QR kod işlemleri için kapsamlı bir mobil uygulama geliştirilmesi gerekiyor. Uygulama, hem QR kod okuma hem de oluşturma özelliklerine sahip olmalı.\n\nQR kod okuma özelliği ile kamera kullanılarak QR kodlar okunabilmeli. Farklı QR kod türleri desteklenmeli - URL, metin, WiFi bilgileri, vCard (iletişim bilgileri), email, SMS, telefon numarası.\n\nQR kod oluşturma özelliği ile kullanıcılar kendi QR kodlarını oluşturabilmeli. Özelleştirme seçenekleri ile renk, logo ekleme, boyut ayarlama yapılabilmeli.\n\nGeçmiş kayıtları ile okunan ve oluşturulan QR kodlar kaydedilebilmeli. Paylaşım özelliği ile QR kodlar paylaşılabilmeli.\n\nNative geliştirme tercih ediliyor (iOS Swift, Android Kotlin). Kamera izinleri ve kullanımı optimize edilmeli. Hızlı ve doğru okuma yapılmalı.\n\nGörsel açıdan modern bir arayüz olmalı. Batch QR kod oluşturma özelliği eklenebilir.",
+    "budget": 20000,
+    "deadline": "2025-02-15T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Hava Durumu Uygulaması",
+    "description": "Hava durumu bilgisi için modern bir mobil uygulama geliştirilmesi gerekiyor. Uygulama, kullanıcılara detaylı ve güvenilir hava durumu bilgisi sunmalı.\n\nKonum bazlı hava durumu gösterimi ile GPS kullanılarak otomatik konum tespiti yapılmalı. Anlık hava durumu, sıcaklık, nem, rüzgar hızı, görünürlük gibi detaylar gösterilmeli.\n\n7 günlük hava durumu tahmini ile gelecek hafta planlaması yapılabilmeli. Saatlik tahmin ile gün içi değişiklikler takip edilebilmeli.\n\nWidget desteği ile ana ekrandan hızlı erişim sağlanabilmeli. Bildirimler ile hava durumu uyarıları (yağmur, kar, fırtına) gönderilmeli.\n\nFarklı şehirler ekleme özelliği ile kullanıcılar birden fazla konumu takip edebilmeli. Harita görünümü ile geniş alan hava durumu görüntülenebilmeli.\n\nModern ve görsel açıdan zengin bir tasarım olmalı. Animasyonlar ile hava durumu görselleştirilmeli. API entegrasyonu (OpenWeatherMap, WeatherAPI) yapılacak.",
+    "budget": 25000,
+    "deadline": "2025-02-20T00:00:00.000Z",
+    "status": "open"
+  }
+]

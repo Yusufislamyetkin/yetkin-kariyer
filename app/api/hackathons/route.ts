@@ -144,7 +144,27 @@ export async function GET(request: Request) {
       })
       .filter((item: { lifecycle: { derivedPhase: string } }) =>
         isValidPhase(phaseFilter) ? item.lifecycle.derivedPhase === phaseFilter : true
-      );
+      )
+      .sort((a: any, b: any) => {
+        const aCompleted = a.lifecycle.derivedPhase === HackathonPhase.completed;
+        const bCompleted = b.lifecycle.derivedPhase === HackathonPhase.completed;
+
+        // Completed hackathons go to the end
+        if (aCompleted && !bCompleted) return 1;
+        if (!aCompleted && bCompleted) return -1;
+
+        // If both are completed, sort by submissionClosesAt descending (most recent first)
+        if (aCompleted && bCompleted) {
+          const aDate = new Date(a.submissionClosesAt).getTime();
+          const bDate = new Date(b.submissionClosesAt).getTime();
+          return bDate - aDate;
+        }
+
+        // If both are not completed, sort by applicationOpensAt ascending
+        const aDate = new Date(a.applicationOpensAt).getTime();
+        const bDate = new Date(b.applicationOpensAt).getTime();
+        return aDate - bDate;
+      });
 
     if (phaseSyncPromises.length > 0) {
       await Promise.allSettled(phaseSyncPromises);

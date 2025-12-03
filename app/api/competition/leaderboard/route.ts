@@ -751,6 +751,20 @@ export async function GET(request: Request) {
     const upsertPayload = leaderboardWithBadges.slice(0, 100);
 
     try {
+      // Track old ranks to detect changes to rank 1
+      const oldEntries = await db.leaderboardEntry.findMany({
+        where: {
+          userId: { in: upsertPayload.map((e) => e.userId) },
+          period: leaderboardPeriod,
+          periodDate,
+        },
+        select: {
+          userId: true,
+          rank: true,
+        },
+      });
+      const oldRankMap = new Map(oldEntries.map((e: { userId: string; rank: number }) => [e.userId, e.rank]));
+
       await Promise.all(
         upsertPayload.map((entry) =>
           db.leaderboardEntry.upsert({
@@ -783,6 +797,38 @@ export async function GET(request: Request) {
           })
         )
       );
+
+      // Record earnings for monthly winners who got rank 1
+      if (leaderboardPeriod === "monthly") {
+        const { recordMonthlyWinnerEarning } = await import("@/lib/services/earnings");
+        for (const entry of upsertPayload) {
+          if (entry.rank === 1) {
+            const oldRank = oldRankMap.get(entry.userId);
+            // Record if newly created with rank 1, or rank changed to 1
+            if (oldRank === undefined || oldRank !== 1) {
+              const leaderboardEntry = await db.leaderboardEntry.findUnique({
+                where: {
+                  userId_period_periodDate: {
+                    userId: entry.userId,
+                    period: leaderboardPeriod,
+                    periodDate,
+                  },
+                },
+              });
+              if (leaderboardEntry) {
+                await recordMonthlyWinnerEarning({
+                  userId: entry.userId,
+                  amount: 500,
+                  leaderboardEntryId: leaderboardEntry.id,
+                  periodDate,
+                }).catch((error) => {
+                  console.error("Error recording monthly winner earning:", error);
+                });
+              }
+            }
+          }
+        }
+      }
     } catch (persistError) {
       console.error("Error persisting leaderboard snapshot:", persistError);
     }

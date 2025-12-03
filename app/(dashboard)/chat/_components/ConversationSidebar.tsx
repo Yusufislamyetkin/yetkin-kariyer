@@ -87,7 +87,11 @@ export function ConversationSidebar({
           {countLabel ? (
             <span className="text-xs font-medium text-gray-500 dark:text-gray-400">{countLabel}</span>
           ) : null}
-          {action}
+          {action ? (
+            <div className="hidden lg:flex items-center gap-2">
+              {action}
+            </div>
+          ) : null}
           {onCloseMobile ? (
             <button
               type="button"

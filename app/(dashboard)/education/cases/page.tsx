@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Code, ArrowRight } from "lucide-react";
-import liveCodingCases from "@/data/live-coding-cases.json";
+import { loadLiveCodingCases } from "@/lib/education/loadLiveCodingCases";
 
 export const dynamic = "force-dynamic";
 
@@ -34,6 +34,7 @@ const LANGUAGE_COLORS: Record<string, string> = {
 };
 
 export default function CasesPage() {
+  const liveCodingCases = loadLiveCodingCases();
   const languages = liveCodingCases.languages;
 
   return (
@@ -48,7 +49,7 @@ export default function CasesPage() {
             Programlama Dilleri
           </h1>
           <p className="max-w-2xl text-base text-white/80">
-            Farklı programlama dillerinde pratik yapmak için hazırlanmış case&apos;leri keşfedin. Her dil için 3 adet case bulunmaktadır.
+            Farklı programlama dillerinde pratik yapmak için hazırlanmış case&apos;leri keşfedin.
           </p>
         </div>
       </section>
