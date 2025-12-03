@@ -2603,12 +2603,12 @@ export default function AdminPage() {
                 💻 Canlı Kodlama Case Yönetimi
                </h2>
                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                12 programlama dili için 36 case yönetimi
+                11 programlama dili için 264 case yönetimi
                </p>
              </div>
            </div>
            <p className="text-gray-600 dark:text-gray-400 mb-8 text-sm">
-            12 farklı programlama dili (C#, Java, Python, PHP, JavaScript, TypeScript, Go, Rust, C++, Kotlin, Swift, Ruby) için her birinde 3&apos;er canlı kodlama case&apos;i veritabanına ekler. Toplam 36 case oluşturulur.
+            11 farklı programlama dili (C#, Java, Python, PHP, JavaScript, TypeScript, Go, Rust, C++, Kotlin, Ruby) için her birinde 24 canlı kodlama case&apos;i veritabanına ekler. Her dil için 8 başlangıç, 8 orta ve 8 ileri seviye case bulunur. Toplam 264 case oluşturulur.
           </p>
           
           <div className="max-w-md space-y-4">

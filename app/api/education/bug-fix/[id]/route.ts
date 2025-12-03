@@ -265,7 +265,7 @@ JSON formatında yanıt ver:
     try {
       badgeResults = await checkBadgesForActivity({
         userId,
-        activityType: "bugfix",
+        activityType: "eğitim faaliyeti",
       });
       if (badgeResults.totalEarned > 0) {
         console.log(`[BUG_FIX] Kullanıcı ${badgeResults.totalEarned} rozet kazandı. userId: ${userId}`);

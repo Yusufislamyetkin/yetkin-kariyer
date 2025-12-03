@@ -128,19 +128,6 @@ export async function calculateBadgeProgress(
               },
             },
           });
-        } else if (
-          criteria.activity_type === "bugfix" ||
-          criteria.activity_type === "hata düzeltme"
-        ) {
-          current = await db.bugFixAttempt.count({
-            where: {
-              userId,
-              completedAt: {
-                gte: today,
-                lt: tomorrow,
-              },
-            },
-          });
         } else if (criteria.activity_type === "ders") {
           current = await db.lessonCompletion.count({
             where: {
@@ -162,7 +149,7 @@ export async function calculateBadgeProgress(
             },
           });
         } else if (criteria.activity_type === "eğitim faaliyeti") {
-          // Eğitim faaliyeti: test + ders + canlı kodlama + bugfix toplamı
+          // Eğitim faaliyeti: test + ders + canlı kodlama toplamı
           // Test (quiz attempt)
           const todayTests = await db.quizAttempt.count({
             where: {
@@ -196,18 +183,7 @@ export async function calculateBadgeProgress(
             },
           });
           
-          // Bugfix (bugfix attempt)
-          const todayBugFix = await db.bugFixAttempt.count({
-            where: {
-              userId,
-              completedAt: {
-                gte: today,
-                lt: tomorrow,
-              },
-            },
-          });
-          
-          current = todayTests + todayLessons + todayLiveCoding + todayBugFix;
+          current = todayTests + todayLessons + todayLiveCoding;
         }
       }
       break;

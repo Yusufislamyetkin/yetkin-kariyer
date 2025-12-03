@@ -171,7 +171,7 @@ interface BadgeCheckParams {
 
 interface ActivityBadgeCheckParams {
   userId: string;
-  activityType?: "test" | "canlı kod" | "canlı kodlama" | "bugfix" | "hata düzeltme" | "ders" | "quiz" | "eğitim faaliyeti";
+  activityType?: "test" | "canlı kod" | "canlı kodlama" | "ders" | "quiz" | "eğitim faaliyeti";
 }
 
 // Ortak streak güncelleme fonksiyonu
@@ -735,19 +735,8 @@ export async function checkBadgesForAttempt({
               },
             });
             todayCount = todayLiveCoding;
-          } else if (criteria.activity_type === "bugfix" || criteria.activity_type === "hata düzeltme") {
-            const todayBugFix = await db.bugFixAttempt.count({
-              where: {
-                userId,
-                completedAt: {
-                  gte: today,
-                  lt: tomorrow,
-                },
-              },
-            });
-            todayCount = todayBugFix;
           } else if (criteria.activity_type === "eğitim faaliyeti") {
-            // Eğitim faaliyeti: test + ders + canlı kodlama + bugfix toplamı
+            // Eğitim faaliyeti: test + ders + canlı kodlama toplamı
             shouldIncludeCurrentAttempt = currentAttemptIsToday;
             
             // Test (quiz attempt)
@@ -788,18 +777,7 @@ export async function checkBadgesForAttempt({
               },
             });
             
-            // Bugfix (bugfix attempt)
-            const todayBugFix = await db.bugFixAttempt.count({
-              where: {
-                userId,
-                completedAt: {
-                  gte: today,
-                  lt: tomorrow,
-                },
-              },
-            });
-            
-            todayCount = testCount + todayLessons + todayLiveCoding + todayBugFix;
+            todayCount = testCount + todayLessons + todayLiveCoding;
           } else if (criteria.activity_type === "quiz") {
             // Quiz: quiz attempt olarak sayılabilir
             shouldIncludeCurrentAttempt = currentAttemptIsToday;
@@ -928,7 +906,8 @@ export async function checkBadgesForAttempt({
               where: { userId },
             });
           } else if (criteria.type === "bugfix_count") {
-            totalCount = await db.bugFixAttempt.count({
+            // Bugfix rozetleri kaldırıldı, test_count olarak sayılıyor
+            totalCount = await db.quizAttempt.count({
               where: { userId },
             });
           }
@@ -1112,17 +1091,6 @@ export async function checkBadgesForActivity({
               },
             });
             todayCount = todayLiveCoding;
-          } else if (criteria.activity_type === "bugfix" || criteria.activity_type === "hata düzeltme") {
-            const todayBugFix = await db.bugFixAttempt.count({
-              where: {
-                userId,
-                completedAt: {
-                  gte: today,
-                  lt: tomorrow,
-                },
-              },
-            });
-            todayCount = todayBugFix;
           } else if (criteria.activity_type === "ders") {
             const todayLessons = await db.lessonCompletion.count({
               where: {
@@ -1146,7 +1114,7 @@ export async function checkBadgesForActivity({
             });
             todayCount = todayQuizzes;
           } else if (criteria.activity_type === "eğitim faaliyeti") {
-            // Eğitim faaliyeti: test + ders + canlı kodlama + bugfix toplamı
+            // Eğitim faaliyeti: test + ders + canlı kodlama toplamı
             // Test (quiz attempt)
             const todayTests = await db.quizAttempt.count({
               where: {
@@ -1180,18 +1148,7 @@ export async function checkBadgesForActivity({
               },
             });
             
-            // Bugfix (bugfix attempt)
-            const todayBugFix = await db.bugFixAttempt.count({
-              where: {
-                userId,
-                completedAt: {
-                  gte: today,
-                  lt: tomorrow,
-                },
-              },
-            });
-            
-            todayCount = todayTests + todayLessons + todayLiveCoding + todayBugFix;
+            todayCount = todayTests + todayLessons + todayLiveCoding;
           }
           
           if (todayCount >= criteria.count) {
@@ -1701,17 +1658,6 @@ export async function checkAllUserBadges({
               },
             });
             todayCount = todayLiveCoding;
-          } else if (criteria.activity_type === "bugfix" || criteria.activity_type === "hata düzeltme") {
-            const todayBugFix = await db.bugFixAttempt.count({
-              where: {
-                userId,
-                completedAt: {
-                  gte: today,
-                  lt: tomorrow,
-                },
-              },
-            });
-            todayCount = todayBugFix;
           } else if (criteria.activity_type === "ders") {
             const todayLessons = await db.lessonCompletion.count({
               where: {
@@ -1735,7 +1681,7 @@ export async function checkAllUserBadges({
             });
             todayCount = todayQuizzes;
           } else if (criteria.activity_type === "eğitim faaliyeti") {
-            // Eğitim faaliyeti: test + ders + canlı kodlama + bugfix toplamı
+            // Eğitim faaliyeti: test + ders + canlı kodlama toplamı
             // Test (quiz attempt)
             const todayTests = await db.quizAttempt.count({
               where: {
@@ -1769,18 +1715,7 @@ export async function checkAllUserBadges({
               },
             });
             
-            // Bugfix (bugfix attempt)
-            const todayBugFix = await db.bugFixAttempt.count({
-              where: {
-                userId,
-                completedAt: {
-                  gte: today,
-                  lt: tomorrow,
-                },
-              },
-            });
-            
-            todayCount = todayTests + todayLessons + todayLiveCoding + todayBugFix;
+            todayCount = todayTests + todayLessons + todayLiveCoding;
           }
           
           if (todayCount >= criteria.count) {
@@ -1892,7 +1827,8 @@ export async function checkAllUserBadges({
               where: { userId },
             });
           } else if (criteria.type === "bugfix_count") {
-            totalCount = await db.bugFixAttempt.count({
+            // Bugfix rozetleri kaldırıldı, test_count olarak sayılıyor
+            totalCount = await db.quizAttempt.count({
               where: { userId },
             });
           }

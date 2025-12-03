@@ -92,7 +92,7 @@ export async function POST(request: Request) {
           quiz: ["quiz", "test"],
           lesson: ["ders", "lesson"],
           "live-coding": ["canlı kod", "canlı kodlama", "live coding"],
-          bugfix: ["bugfix", "hata düzeltme"],
+          bugfix: ["bug fix", "bugfix", "hata düzeltme"],
           social: ["post", "mesaj", "beğeni", "yorum", "story", "arkadaş", "takipçi", "paylaşım"],
         };
 

@@ -77,7 +77,7 @@
       "id": "badge-004",
       "key": "G-BRONZE-005",
       "name": "G-BRONZE-005",
-      "description": "Bir günde 1 bugfix tamamla",
+      "description": "Bir günde 1 adet eğitim faaliyetini tamamla",
       "icon": "📖",
       "color": "#8B4513",
       "category": "daily_activities",
@@ -86,7 +86,7 @@
       "points": 15,
       "criteria": {
         "type": "daily_activity",
-        "activity_type": "bugfix",
+        "activity_type": "eğitim faaliyeti",
         "count": 1,
         "daily": true
       }
@@ -149,7 +149,7 @@
       "id": "badge-008",
       "key": "G-BRONZE-009",
       "name": "G-BRONZE-009",
-      "description": "Bir günde 2 hata düzeltme tamamla",
+      "description": "Bir günde 2 adet eğitim faaliyetini tamamla",
       "icon": "🏆",
       "color": "#3D2817",
       "category": "daily_activities",
@@ -158,7 +158,7 @@
       "points": 15,
       "criteria": {
         "type": "daily_activity",
-        "activity_type": "hata düzeltme",
+        "activity_type": "eğitim faaliyeti",
         "count": 2,
         "daily": true
       }
@@ -257,7 +257,7 @@
       "id": "badge-014",
       "key": "G-SILVER-015",
       "name": "G-SILVER-015",
-      "description": "Bir günde 5 bugfix tamamla",
+      "description": "Bir günde 5 adet eğitim faaliyetini tamamla",
       "icon": "📊",
       "color": "#787878",
       "category": "daily_activities",
@@ -266,7 +266,7 @@
       "points": 40,
       "criteria": {
         "type": "daily_activity",
-        "activity_type": "bugfix",
+        "activity_type": "eğitim faaliyeti",
         "count": 5,
         "daily": true
       }
@@ -329,7 +329,7 @@
       "id": "badge-018",
       "key": "G-SILVER-019",
       "name": "G-SILVER-019",
-      "description": "Bir günde 6 hata düzeltme tamamla",
+      "description": "Bir günde 6 adet eğitim faaliyetini tamamla",
       "icon": "📅",
       "color": "#181818",
       "category": "daily_activities",
@@ -338,7 +338,7 @@
       "points": 40,
       "criteria": {
         "type": "daily_activity",
-        "activity_type": "hata düzeltme",
+        "activity_type": "eğitim faaliyeti",
         "count": 6,
         "daily": true
       }
@@ -437,7 +437,7 @@
       "id": "badge-024",
       "key": "G-GOLD-025",
       "name": "G-GOLD-025",
-      "description": "Bir günde 10 bugfix tamamla",
+      "description": "Bir günde 10 adet eğitim faaliyetini tamamla",
       "icon": "🎬",
       "color": "#FFA500",
       "category": "daily_activities",
@@ -446,7 +446,7 @@
       "points": 100,
       "criteria": {
         "type": "daily_activity",
-        "activity_type": "bugfix",
+        "activity_type": "eğitim faaliyeti",
         "count": 10,
         "daily": true
       }
@@ -509,7 +509,7 @@
       "id": "badge-028",
       "key": "G-GOLD-029",
       "name": "G-GOLD-029",
-      "description": "Bir günde 12 hata düzeltme tamamla",
+      "description": "Bir günde 12 adet eğitim faaliyetini tamamla",
       "icon": "🎰",
       "color": "#FF4500",
       "category": "daily_activities",
@@ -518,7 +518,7 @@
       "points": 100,
       "criteria": {
         "type": "daily_activity",
-        "activity_type": "hata düzeltme",
+        "activity_type": "eğitim faaliyeti",
         "count": 12,
         "daily": true
       }
@@ -617,7 +617,7 @@
       "id": "badge-034",
       "key": "G-PLAT-035",
       "name": "G-PLAT-035",
-      "description": "Bir günde 20 bugfix tamamla",
+      "description": "Bir günde 20 adet eğitim faaliyetini tamamla",
       "icon": "🎪",
       "color": "#A9A9A9",
       "category": "daily_activities",
@@ -626,7 +626,7 @@
       "points": 300,
       "criteria": {
         "type": "daily_activity",
-        "activity_type": "bugfix",
+        "activity_type": "eğitim faaliyeti",
         "count": 20,
         "daily": true
       }
@@ -689,7 +689,7 @@
       "id": "badge-038",
       "key": "G-PLAT-039",
       "name": "G-PLAT-039",
-      "description": "Bir günde 25 hata düzeltme tamamla",
+      "description": "Bir günde 25 adet eğitim faaliyetini tamamla",
       "icon": "🎤",
       "color": "#404040",
       "category": "daily_activities",
@@ -698,7 +698,7 @@
       "points": 300,
       "criteria": {
         "type": "daily_activity",
-        "activity_type": "hata düzeltme",
+        "activity_type": "eğitim faaliyeti",
         "count": 25,
         "daily": true
       }
@@ -2645,7 +2645,7 @@
       "id": "badge-235",
       "key": "TA-BRON-001-BUGFIX",
       "name": "TA-BRON-001",
-      "description": "Toplam 5 bugfix tamamla",
+      "description": "Toplam 5 test tamamla",
       "icon": "🐛",
       "color": "#CD7F32",
       "category": "total_achievements",
@@ -2653,7 +2653,7 @@
       "rarity": "common",
       "points": 20,
       "criteria": {
-        "type": "bugfix_count",
+        "type": "test_count",
         "count": 5
       }
     },
@@ -2661,7 +2661,7 @@
       "id": "badge-236",
       "key": "TA-SILV-002-BUGFIX",
       "name": "TA-SILV-002",
-      "description": "Toplam 25 bugfix tamamla",
+      "description": "Toplam 25 test tamamla",
       "icon": "🐛",
       "color": "#C0C0C0",
       "category": "total_achievements",
@@ -2669,7 +2669,7 @@
       "rarity": "rare",
       "points": 50,
       "criteria": {
-        "type": "bugfix_count",
+        "type": "test_count",
         "count": 25
       }
     },
@@ -2677,7 +2677,7 @@
       "id": "badge-237",
       "key": "TA-GOLD-003-BUGFIX",
       "name": "TA-GOLD-003",
-      "description": "Toplam 50 bugfix tamamla",
+      "description": "Toplam 50 test tamamla",
       "icon": "🐛",
       "color": "#FFD700",
       "category": "total_achievements",
@@ -2685,7 +2685,7 @@
       "rarity": "epic",
       "points": 120,
       "criteria": {
-        "type": "bugfix_count",
+        "type": "test_count",
         "count": 50
       }
     },
@@ -2693,7 +2693,7 @@
       "id": "badge-238",
       "key": "TA-PLAT-004-BUGFIX",
       "name": "TA-PLAT-004",
-      "description": "Toplam 100 bugfix tamamla",
+      "description": "Toplam 100 test tamamla",
       "icon": "🐛",
       "color": "#E5E4E2",
       "category": "total_achievements",
@@ -2701,7 +2701,7 @@
       "rarity": "legendary",
       "points": 360,
       "criteria": {
-        "type": "bugfix_count",
+        "type": "test_count",
         "count": 100
       }
     },
@@ -2709,7 +2709,7 @@
       "id": "badge-239",
       "key": "TA-DIAM-005-BUGFIX",
       "name": "TA-DIAM-005",
-      "description": "Toplam 250 bugfix tamamla",
+      "description": "Toplam 250 test tamamla",
       "icon": "🐛",
       "color": "#B9F2FF",
       "category": "total_achievements",
@@ -2717,7 +2717,7 @@
       "rarity": "mythic",
       "points": 1000,
       "criteria": {
-        "type": "bugfix_count",
+        "type": "test_count",
         "count": 250
       }
     }

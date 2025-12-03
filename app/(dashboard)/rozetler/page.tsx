@@ -36,18 +36,6 @@ function generateUniqueBadgeName(badge: Badge, allBadges: Badge[]): string {
 
   // Activity type'a göre unique isimler oluştur
   const nameVariations: Record<string, Record<string, string[]>> = {
-    bugfix: {
-      bronze: ["Bugfix Başlangıcı", "İlk Hata Düzeltme", "Bugfix Acemisi"],
-      silver: ["Bugfix Ustası", "Hata Avcısı", "Sorun Çözücü"],
-      gold: ["BugFix Splinter", "Bugfix Avcısı", "Hata Ayıklayıcı", "Sorun Bulucu", "Problem Çözme Uzmanı"],
-      platinum: ["Muhteşem Sorun Çözücü", "Bugfix Efsanesi", "Hata Düzeltme Ustası"],
-    },
-    "hata düzeltme": {
-      bronze: ["Hata Düzeltme Başlangıcı", "İlk Hata Düzeltme", "Hata Düzeltme Acemisi"],
-      silver: ["Hata Düzeltme Ustası", "Hata Avcısı", "Sorun Çözücü"],
-      gold: ["Hata Ayıklayıcı", "Sorun Bulucu", "Problem Çözme Uzmanı", "Hata Düzeltme Uzmanı"],
-      platinum: ["Muhteşem Sorun Çözücü", "Hata Düzeltme Efsanesi", "Hata Düzeltme Ustası"],
-    },
     test: {
       bronze: ["Test Başlangıcı", "İlk Test", "Test Acemisi"],
       silver: ["Test Ustası", "Test Sever", "Test Tutkunu"],
