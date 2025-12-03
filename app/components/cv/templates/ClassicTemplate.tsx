@@ -70,17 +70,19 @@ export default function ClassicTemplate({ data }: ClassicTemplateProps) {
       className="bg-white text-gray-900 break-words overflow-hidden" 
       style={{ 
         fontFamily: 'Georgia, serif',
-        maxHeight: '297mm',
-        overflow: 'hidden'
+        height: '100%',
+        overflow: 'hidden',
+        display: 'flex',
+        flexDirection: 'column'
       }}
     >
-      <div className="max-w-4xl mx-auto p-10">
+      <div className="max-w-4xl mx-auto p-4 flex-1 overflow-hidden" style={{ display: 'flex', flexDirection: 'column' }}>
         {/* Header */}
-        <header className="text-center border-b-4 border-navy-900 pb-6 mb-8">
-          <h1 className="text-5xl font-bold text-navy-900 mb-4" style={{ color: '#1e3a8a' }}>
+        <header className="text-center border-b-4 border-navy-900 pb-3 mb-3 flex-shrink-0" style={{ borderColor: '#1e3a8a' }}>
+          <h1 className="text-2xl font-bold text-navy-900 mb-2" style={{ color: '#1e3a8a' }}>
             {data.personalInfo.name || "Ad Soyad"}
           </h1>
-          <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-700">
+          <div className="flex flex-wrap justify-center gap-2 text-xs text-gray-700">
             {data.personalInfo.email && <span>{data.personalInfo.email}</span>}
             {data.personalInfo.phone && <span>• {data.personalInfo.phone}</span>}
             {data.personalInfo.address && <span>• {data.personalInfo.address}</span>}
@@ -88,219 +90,222 @@ export default function ClassicTemplate({ data }: ClassicTemplateProps) {
             {data.personalInfo.website && <span>• {data.personalInfo.website}</span>}
           </div>
           {data.personalInfo.profilePhoto && (
-            <div className="mt-4">
+            <div className="mt-2">
               <img
                 src={data.personalInfo.profilePhoto}
                 alt="Profile"
-                className="w-24 h-24 rounded-full object-cover mx-auto border-4"
+                className="w-16 h-16 rounded-full object-cover mx-auto border-2"
                 style={{ borderColor: '#1e3a8a' }}
               />
             </div>
           )}
         </header>
 
-        {/* Summary */}
-        {data.summary && (
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold mb-4" style={{ color: '#1e3a8a', borderBottom: '2px solid #1e3a8a', paddingBottom: '8px' }}>
-              Profesyonel Özet
-            </h2>
-            <p className="text-gray-700 leading-relaxed text-justify break-words whitespace-pre-line">
-              {data.summary}
-            </p>
-          </section>
-        )}
+        <div className="flex-1 overflow-y-auto" style={{ minHeight: 0 }}>
 
-        {/* Experience */}
-        {data.experience.length > 0 && (
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold mb-4" style={{ color: '#1e3a8a', borderBottom: '2px solid #1e3a8a', paddingBottom: '8px' }}>
-              İş Deneyimi
-            </h2>
-            <div className="space-y-6">
-              {data.experience.map((exp, index) => (
-                <div key={index} className="pl-4 border-l-4" style={{ borderColor: '#1e3a8a' }}>
-                  <div className="flex justify-between items-start mb-2">
-                    <div>
-                      <h3 className="text-xl font-semibold text-gray-900">{exp.position || "Pozisyon"}</h3>
-                      <p className="text-lg font-medium" style={{ color: '#1e3a8a' }}>{exp.company || "Şirket"}</p>
+          {/* Summary */}
+          {data.summary && (
+            <section className="mb-2">
+              <h2 className="text-lg font-bold mb-1" style={{ color: '#1e3a8a', borderBottom: '2px solid #1e3a8a', paddingBottom: '4px' }}>
+                Profesyonel Özet
+              </h2>
+              <p className="text-gray-700 text-sm leading-tight text-justify break-words whitespace-pre-line line-clamp-3">
+                {data.summary}
+              </p>
+            </section>
+          )}
+
+          {/* Experience */}
+          {data.experience.length > 0 && (
+            <section className="mb-2">
+              <h2 className="text-lg font-bold mb-2" style={{ color: '#1e3a8a', borderBottom: '2px solid #1e3a8a', paddingBottom: '4px' }}>
+                İş Deneyimi
+              </h2>
+              <div className="space-y-1.5">
+                {data.experience.map((exp, index) => (
+                  <div key={index} className="pl-2 border-l-4" style={{ borderColor: '#1e3a8a' }}>
+                    <div className="flex justify-between items-start mb-1">
+                      <div>
+                        <h3 className="text-base font-semibold text-gray-900">{exp.position || "Pozisyon"}</h3>
+                        <p className="text-sm font-medium" style={{ color: '#1e3a8a' }}>{exp.company || "Şirket"}</p>
+                      </div>
+                      <p className="text-xs text-gray-600 whitespace-nowrap">
+                        {exp.startDate && `${exp.startDate} - `}
+                        {exp.current ? "Devam ediyor" : exp.endDate || ""}
+                      </p>
                     </div>
-                    <p className="text-sm text-gray-600 whitespace-nowrap">
-                      {exp.startDate && `${exp.startDate} - `}
-                      {exp.current ? "Devam ediyor" : exp.endDate || ""}
-                    </p>
+                    {exp.description && (
+                      <p className="text-gray-700 text-xs mt-1 leading-tight text-justify break-words whitespace-pre-line line-clamp-2">
+                        {exp.description}
+                      </p>
+                    )}
                   </div>
-                  {exp.description && (
-                    <p className="text-gray-700 mt-2 leading-relaxed text-justify break-words whitespace-pre-line">
-                      {exp.description}
-                    </p>
-                  )}
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
+                ))}
+              </div>
+            </section>
+          )}
 
-        {/* Education */}
-        {data.education.length > 0 && (
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold mb-4" style={{ color: '#1e3a8a', borderBottom: '2px solid #1e3a8a', paddingBottom: '8px' }}>
-              Eğitim
-            </h2>
-            <div className="space-y-6">
-              {data.education.map((edu, index) => (
-                <div key={index} className="pl-4 border-l-4" style={{ borderColor: '#1e3a8a' }}>
-                  <div className="flex justify-between items-start mb-2">
-                    <div>
-                      <h3 className="text-xl font-semibold text-gray-900">{edu.degree || "Derece"}</h3>
-                      <p className="text-lg font-medium" style={{ color: '#1e3a8a' }}>{edu.school || "Okul"}</p>
-                      {edu.field && <p className="text-gray-600">{edu.field}</p>}
+          {/* Education */}
+          {data.education.length > 0 && (
+            <section className="mb-2">
+              <h2 className="text-lg font-bold mb-2" style={{ color: '#1e3a8a', borderBottom: '2px solid #1e3a8a', paddingBottom: '4px' }}>
+                Eğitim
+              </h2>
+              <div className="space-y-1.5">
+                {data.education.map((edu, index) => (
+                  <div key={index} className="pl-2 border-l-4" style={{ borderColor: '#1e3a8a' }}>
+                    <div className="flex justify-between items-start mb-1">
+                      <div>
+                        <h3 className="text-base font-semibold text-gray-900">{edu.degree || "Derece"}</h3>
+                        <p className="text-sm font-medium" style={{ color: '#1e3a8a' }}>{edu.school || "Okul"}</p>
+                        {edu.field && <p className="text-gray-600 text-xs">{edu.field}</p>}
+                      </div>
+                      <p className="text-xs text-gray-600 whitespace-nowrap">
+                        {edu.startDate && `${edu.startDate} - `}
+                        {edu.endDate || ""}
+                      </p>
                     </div>
-                    <p className="text-sm text-gray-600 whitespace-nowrap">
-                      {edu.startDate && `${edu.startDate} - `}
-                      {edu.endDate || ""}
-                    </p>
+                    {edu.gpa && <p className="text-xs text-gray-600">GPA: {edu.gpa}</p>}
                   </div>
-                  {edu.gpa && <p className="text-sm text-gray-600">GPA: {edu.gpa}</p>}
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
+                ))}
+              </div>
+            </section>
+          )}
 
-        {/* Skills */}
-        {data.skills.length > 0 && (
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold mb-4" style={{ color: '#1e3a8a', borderBottom: '2px solid #1e3a8a', paddingBottom: '8px' }}>
-              Beceriler
-            </h2>
-            <div className="flex flex-wrap gap-3">
-              {data.skills.map((skill, index) => (
-                <span
-                  key={index}
-                  className="px-4 py-2 border-2 rounded"
-                  style={{ borderColor: '#1e3a8a', color: '#1e3a8a' }}
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </section>
-        )}
+          {/* Skills */}
+          {data.skills.length > 0 && (
+            <section className="mb-2">
+              <h2 className="text-lg font-bold mb-1" style={{ color: '#1e3a8a', borderBottom: '2px solid #1e3a8a', paddingBottom: '4px' }}>
+                Beceriler
+              </h2>
+              <div className="flex flex-wrap gap-1">
+                {data.skills.map((skill, index) => (
+                  <span
+                    key={index}
+                    className="px-2 py-0.5 border-2 rounded text-xs"
+                    style={{ borderColor: '#1e3a8a', color: '#1e3a8a' }}
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </section>
+          )}
 
-        {/* Languages */}
-        {data.languages.length > 0 && (
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold mb-4" style={{ color: '#1e3a8a', borderBottom: '2px solid #1e3a8a', paddingBottom: '8px' }}>
-              Diller
-            </h2>
-            <div className="space-y-2">
-              {data.languages.map((lang, index) => (
-                <div key={index} className="flex justify-between items-center">
-                  <span className="font-semibold text-gray-900">{lang.name || "Dil"}</span>
-                  <span className="text-gray-600">{lang.level || "Seviye"}</span>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
+          {/* Languages */}
+          {data.languages.length > 0 && (
+            <section className="mb-2">
+              <h2 className="text-lg font-bold mb-1" style={{ color: '#1e3a8a', borderBottom: '2px solid #1e3a8a', paddingBottom: '4px' }}>
+                Diller
+              </h2>
+              <div className="space-y-1">
+                {data.languages.map((lang, index) => (
+                  <div key={index} className="flex justify-between items-center">
+                    <span className="font-semibold text-gray-900 text-xs">{lang.name || "Dil"}</span>
+                    <span className="text-gray-600 text-xs">{lang.level || "Seviye"}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
-        {/* Certifications */}
-        {data.certifications.length > 0 && (
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold mb-4" style={{ color: '#1e3a8a', borderBottom: '2px solid #1e3a8a', paddingBottom: '8px' }}>
-              Sertifikalar
-            </h2>
-            <div className="space-y-4">
-              {data.certifications.map((cert, index) => (
-                <div key={index}>
-                  <h3 className="font-semibold text-gray-900">{cert.name || "Sertifika"}</h3>
-                  <p className="text-gray-600">{cert.issuer || "Kurum"}</p>
-                  {cert.date && <p className="text-sm text-gray-500">{cert.date}</p>}
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
+          {/* Certifications */}
+          {data.certifications.length > 0 && (
+            <section className="mb-2">
+              <h2 className="text-lg font-bold mb-1" style={{ color: '#1e3a8a', borderBottom: '2px solid #1e3a8a', paddingBottom: '4px' }}>
+                Sertifikalar
+              </h2>
+              <div className="space-y-1">
+                {data.certifications.map((cert, index) => (
+                  <div key={index}>
+                    <h3 className="font-semibold text-gray-900 text-xs">{cert.name || "Sertifika"}</h3>
+                    <p className="text-gray-600 text-xs">{cert.issuer || "Kurum"}</p>
+                    {cert.date && <p className="text-xs text-gray-500">{cert.date}</p>}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
-        {/* Projects */}
-        {data.projects.length > 0 && (
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold mb-4" style={{ color: '#1e3a8a', borderBottom: '2px solid #1e3a8a', paddingBottom: '8px' }}>
-              Projeler
-            </h2>
-            <div className="space-y-4">
-              {data.projects.map((project, index) => (
-                <div key={index}>
-                  <h3 className="font-semibold text-gray-900">{project.name || "Proje Adı"}</h3>
-                  {project.technologies && <p className="text-sm text-gray-600 mb-1">{project.technologies}</p>}
-                  {project.description && (
-                    <p className="text-gray-700 text-justify break-words whitespace-pre-line">
-                      {project.description}
-                    </p>
-                  )}
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
+          {/* Projects */}
+          {data.projects.length > 0 && (
+            <section className="mb-2">
+              <h2 className="text-lg font-bold mb-1" style={{ color: '#1e3a8a', borderBottom: '2px solid #1e3a8a', paddingBottom: '4px' }}>
+                Projeler
+              </h2>
+              <div className="space-y-1.5">
+                {data.projects.map((project, index) => (
+                  <div key={index}>
+                    <h3 className="font-semibold text-gray-900 text-xs">{project.name || "Proje Adı"}</h3>
+                    {project.technologies && <p className="text-xs text-gray-600 mb-0.5">{project.technologies}</p>}
+                    {project.description && (
+                      <p className="text-gray-700 text-xs text-justify break-words whitespace-pre-line line-clamp-2">
+                        {project.description}
+                      </p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
-        {/* Achievements */}
-        {data.achievements.length > 0 && (
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold mb-4" style={{ color: '#1e3a8a', borderBottom: '2px solid #1e3a8a', paddingBottom: '8px' }}>
-              Başarılar
-            </h2>
-            <div className="space-y-3">
-              {data.achievements.map((achievement, index) => (
-                <div key={index}>
-                  <h3 className="font-semibold text-gray-900">{achievement.title || "Başlık"}</h3>
-                  {achievement.description && (
-                    <p className="text-gray-700 text-sm break-words whitespace-pre-line">
-                      {achievement.description}
-                    </p>
-                  )}
-                  {achievement.date && <p className="text-gray-600 text-xs">{achievement.date}</p>}
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
+          {/* Achievements */}
+          {data.achievements.length > 0 && (
+            <section className="mb-2">
+              <h2 className="text-lg font-bold mb-1" style={{ color: '#1e3a8a', borderBottom: '2px solid #1e3a8a', paddingBottom: '4px' }}>
+                Başarılar
+              </h2>
+              <div className="space-y-1">
+                {data.achievements.map((achievement, index) => (
+                  <div key={index}>
+                    <h3 className="font-semibold text-gray-900 text-xs">{achievement.title || "Başlık"}</h3>
+                    {achievement.description && (
+                      <p className="text-gray-700 text-xs break-words whitespace-pre-line line-clamp-1">
+                        {achievement.description}
+                      </p>
+                    )}
+                    {achievement.date && <p className="text-gray-600 text-xs">{achievement.date}</p>}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
-        {/* References */}
-        {data.references.length > 0 && (
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold mb-4" style={{ color: '#1e3a8a', borderBottom: '2px solid #1e3a8a', paddingBottom: '8px' }}>
-              Referanslar
-            </h2>
-            <div className="grid grid-cols-2 gap-4">
-              {data.references.map((ref, index) => (
-                <div key={index}>
-                  <p className="font-semibold text-gray-900">{ref.name || "İsim"}</p>
-                  <p className="text-sm text-gray-600">{ref.position || "Pozisyon"}</p>
-                  <p className="text-sm text-gray-600">{ref.company || "Şirket"}</p>
-                  <p className="text-xs text-gray-500">{ref.email || ""}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
+          {/* References */}
+          {data.references.length > 0 && (
+            <section className="mb-2">
+              <h2 className="text-lg font-bold mb-1" style={{ color: '#1e3a8a', borderBottom: '2px solid #1e3a8a', paddingBottom: '4px' }}>
+                Referanslar
+              </h2>
+              <div className="grid grid-cols-2 gap-2">
+                {data.references.map((ref, index) => (
+                  <div key={index}>
+                    <p className="font-semibold text-gray-900 text-xs">{ref.name || "İsim"}</p>
+                    <p className="text-xs text-gray-600">{ref.position || "Pozisyon"}</p>
+                    <p className="text-xs text-gray-600">{ref.company || "Şirket"}</p>
+                    <p className="text-xs text-gray-500">{ref.email || ""}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
-        {/* Hobbies */}
-        {data.hobbies.length > 0 && (
-          <section>
-            <h2 className="text-2xl font-bold mb-4" style={{ color: '#1e3a8a', borderBottom: '2px solid #1e3a8a', paddingBottom: '8px' }}>
-              Hobiler
-            </h2>
-            <div className="flex flex-wrap gap-2">
-              {data.hobbies.map((hobby, index) => (
-                <span key={index} className="text-gray-700">
-                  {hobby}{index < data.hobbies.length - 1 ? ',' : ''}
-                </span>
-              ))}
-            </div>
-          </section>
-        )}
+          {/* Hobbies */}
+          {data.hobbies.length > 0 && (
+            <section>
+              <h2 className="text-lg font-bold mb-1" style={{ color: '#1e3a8a', borderBottom: '2px solid #1e3a8a', paddingBottom: '4px' }}>
+                Hobiler
+              </h2>
+              <div className="flex flex-wrap gap-1">
+                {data.hobbies.map((hobby, index) => (
+                  <span key={index} className="text-gray-700 text-xs">
+                    {hobby}{index < data.hobbies.length - 1 ? ',' : ''}
+                  </span>
+                ))}
+              </div>
+            </section>
+          )}
+        </div>
       </div>
     </div>
   );
