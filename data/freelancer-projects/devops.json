@@ -1,70 +1,70 @@
 [
   {
     "title": "CI/CD Pipeline Kurulumu",
-    "description": "Yazılım geliştirme sürecini otomatikleştiren CI/CD pipeline. Kod değişikliklerini otomatik test edip deploy eden sistem. GitHub Actions veya GitLab CI.\n\nTest otomasyonu: Unit ve integration testler. Test coverage raporları.\n\nBuild ve containerization: Otomatik build süreci. Docker containerization. Image registry'ye push (Docker Hub, AWS ECR).\n\nDeployment: Staging ve production ortamlarına otomatik deploy. Blue-green veya rolling deployment stratejisi.\n\nYönetim: Environment variables. Secrets management (AWS Secrets Manager, HashiCorp Vault). Bildirim sistemi. Pipeline performans izleme.",
+    "description": "Yazılım geliştirme sürecimizi otomatikleştiren CI/CD pipeline kurmak istiyoruz. Kod değişikliklerini otomatik test edip deploy eden sistem oluşturulması gerekiyor. GitHub Actions veya GitLab CI kullanılacak. Test otomasyonu için unit ve integration testler çalıştırılmalı. Test coverage raporları oluşturulmalı. Build ve containerization kısmında otomatik build süreci kurulmalı. Docker containerization yapılmalı. Image registry'ye push (Docker Hub, AWS ECR) yapılabilmeli. Deployment için staging ve production ortamlarına otomatik deploy yapılmalı. Blue-green veya rolling deployment stratejisi uygulanmalı. Yönetim kısmında environment variables yönetimi yapılmalı. Secrets management (AWS Secrets Manager, HashiCorp Vault) kurulmalı. Bildirim sistemi eklenmeli. Pipeline performans izleme yapılmalı.",
     "budget": 40000,
     "deadline": "2025-03-20T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Docker ve Kubernetes Deployment",
-    "description": "Uygulamayı containerize edip Kubernetes cluster'a deploy etme. Yüksek kullanılabilirlik ve ölçeklenebilirlik.\n\nContainerization: Multi-stage builds, optimize edilmiş image'ler. Dockerfile best practices.\n\nKubernetes: Cluster kurulumu (EKS, GKE, AKS veya self-hosted). Deployment, Service, Ingress resource'ları. Helm charts. Service mesh (Istio, Linkerd).\n\nİzleme: Prometheus, Grafana (metrikler). ELK stack (log aggregation).\n\nÖlçeklendirme: Horizontal pod autoscaling. Health checks, liveness/readiness probes. Backup ve disaster recovery planı.",
+    "description": "Uygulamamızı containerize edip Kubernetes cluster'a deploy etmek istiyoruz. Yüksek kullanılabilirlik ve ölçeklenebilirlik sağlanması gerekiyor. Containerization için multi-stage builds, optimize edilmiş image'ler oluşturulmalı. Dockerfile best practices uygulanmalı. Kubernetes için cluster kurulumu (EKS, GKE, AKS veya self-hosted) yapılmalı. Deployment, Service, Ingress resource'ları oluşturulmalı. Helm charts hazırlanmalı. Service mesh (Istio, Linkerd) kurulabilir. İzleme için Prometheus, Grafana (metrikler) kurulmalı. ELK stack (log aggregation) yapılmalı. Ölçeklendirme için horizontal pod autoscaling yapılmalı. Health checks, liveness/readiness probes eklenmeli. Backup ve disaster recovery planı hazırlanmalı.",
     "budget": 55000,
     "deadline": "2025-04-05T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "AWS Infrastructure Setup",
-    "description": "AWS cloud üzerinde production-ready infrastructure. Yüksek kullanılabilirlik, güvenlik ve ölçeklenebilirlik.\n\nCompute: EC2 instances. Auto Scaling Groups. Load Balancer (ALB/NLB).\n\nVeritabanı: RDS (PostgreSQL/MySQL). Multi-AZ deployment. Otomatik yedeklemeler.\n\nDepolama ve dağıtım: S3 object storage. CloudFront CDN. Route 53 DNS.\n\nGüvenlik: Security Groups, Network ACLs. IAM roles ve policies.\n\nİzleme: CloudWatch (monitoring, alerting). CloudTrail (audit logging). Maliyet optimizasyonu.",
+    "description": "AWS cloud üzerinde production-ready infrastructure kurmak istiyoruz. Yüksek kullanılabilirlik, güvenlik ve ölçeklenebilirlik sağlanması gerekiyor. Compute kısmında EC2 instances oluşturulmalı. Auto Scaling Groups kurulmalı. Load Balancer (ALB/NLB) yapılandırılmalı. Veritabanı için RDS (PostgreSQL/MySQL) kurulmalı. Multi-AZ deployment yapılmalı. Otomatik yedeklemeler ayarlanmalı. Depolama ve dağıtım için S3 object storage kurulmalı. CloudFront CDN yapılandırılmalı. Route 53 DNS ayarlanmalı. Güvenlik açısından Security Groups, Network ACLs yapılandırılmalı. IAM roles ve policies oluşturulmalı. İzleme için CloudWatch (monitoring, alerting) kurulmalı. CloudTrail (audit logging) yapılandırılmalı. Maliyet optimizasyonu yapılmalı.",
     "budget": 50000,
     "deadline": "2025-03-25T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Azure DevOps Migration",
-    "description": "Mevcut projenin Azure DevOps platformuna taşınması. Minimum downtime, tüm süreçlerin korunması.\n\nKaynak kod: Azure Repos'a taşıma. Git history, branch strategy, tag'ler korunacak.\n\nPipeline: Azure Pipelines'a taşıma. Build ve release definitions. Artifact management.\n\nTest: Test otomasyonu. Test results ve coverage raporları.\n\nDeployment: Deployment stratejileri. Environment management (staging, production).\n\nYönetim: Work items (Azure Boards). Wiki migration. Integration testing.",
+    "description": "Mevcut projemizin Azure DevOps platformuna taşınması gerekiyor. Minimum downtime, tüm süreçlerin korunması hedefleniyor. Kaynak kod kısmında Azure Repos'a taşıma yapılmalı. Git history, branch strategy, tag'ler korunmalı. Pipeline kısmında Azure Pipelines'a taşıma yapılmalı. Build ve release definitions oluşturulmalı. Artifact management yapılmalı. Test kısmında test otomasyonu kurulmalı. Test results ve coverage raporları oluşturulmalı. Deployment için deployment stratejileri uygulanmalı. Environment management (staging, production) yapılmalı. Yönetim kısmında work items (Azure Boards) oluşturulmalı. Wiki migration yapılmalı. Integration testing yapılmalı.",
     "budget": 45000,
     "deadline": "2025-03-15T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Monitoring ve Logging Sistemi",
-    "description": "Uygulama ve infrastructure için kapsamlı monitoring ve logging. Proaktif sorun tespiti ve hızlı troubleshooting.\n\nMetrikler: Prometheus (toplama). Custom metrics. Service discovery.\n\nGörselleştirme: Grafana dashboards. Custom dashboards. Threshold-based alerting.\n\nLogging: ELK stack (Elasticsearch, Logstash, Kibana). Merkezi logging. Structured logging.\n\nBildirimler: Kritik durumlar için (e-posta, Slack, PagerDuty). Operasyonel dashboards.\n\nEntegrasyon: Monitoring ve logging entegrasyonu. Retention policies. Performans optimizasyonu.",
+    "description": "Uygulama ve infrastructure için kapsamlı monitoring ve logging sistemi kurmak istiyoruz. Proaktif sorun tespiti ve hızlı troubleshooting hedefleniyor. Metrikler için Prometheus (toplama) kurulmalı. Custom metrics oluşturulmalı. Service discovery yapılandırılmalı. Görselleştirme için Grafana dashboards oluşturulmalı. Custom dashboards hazırlanmalı. Threshold-based alerting yapılandırılmalı. Logging için ELK stack (Elasticsearch, Logstash, Kibana) kurulmalı. Merkezi logging yapılmalı. Structured logging uygulanmalı. Bildirimler için kritik durumlar için (e-posta, Slack, PagerDuty) ayarlanmalı. Operasyonel dashboards oluşturulmalı. Entegrasyon için monitoring ve logging entegrasyonu yapılmalı. Retention policies ayarlanmalı. Performans optimizasyonu yapılmalı.",
     "budget": 48000,
     "deadline": "2025-03-30T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Serverless Architecture (AWS Lambda)",
-    "description": "Mevcut uygulamayı serverless architecture'ya dönüştürme. Maliyet optimizasyonu ve otomatik ölçeklendirme.\n\nLambda: Serverless compute. Optimal function structure. Cold start optimizasyonu.\n\nAPI: API Gateway (RESTful API). Request/response transformation. Rate limiting, throttling.\n\nVeritabanı: DynamoDB. Optimal data model. Global secondary indexes.\n\nDepolama: S3. Event-driven architecture. Step Functions (workflow orchestration).\n\nOptimizasyon: Maliyet optimizasyonu. CloudWatch monitoring. Error handling, retry mechanisms.",
+    "description": "Mevcut uygulamamızı serverless architecture'ya dönüştürmek istiyoruz. Maliyet optimizasyonu ve otomatik ölçeklendirme hedefleniyor. Lambda için serverless compute yapılandırılmalı. Optimal function structure oluşturulmalı. Cold start optimizasyonu yapılmalı. API için API Gateway (RESTful API) kurulmalı. Request/response transformation yapılmalı. Rate limiting, throttling yapılandırılmalı. Veritabanı için DynamoDB kullanılmalı. Optimal data model oluşturulmalı. Global secondary indexes yapılandırılmalı. Depolama için S3 kullanılmalı. Event-driven architecture kurulmalı. Step Functions (workflow orchestration) yapılandırılmalı. Optimizasyon için maliyet optimizasyonu yapılmalı. CloudWatch monitoring kurulmalı. Error handling, retry mechanisms eklenmeli.",
     "budget": 60000,
     "deadline": "2025-04-10T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Database Backup ve Disaster Recovery",
-    "description": "Kritik veritabanları için otomatik backup ve disaster recovery. Veri kaybını önleme ve hızlı recovery.\n\nYedekleme: Otomatik scheduled backups. Full ve incremental backups. Retention policies.\n\nRecovery planı: Recovery procedures dokümantasyonu. RTO ve RPO hedefleri.\n\nTest: Düzenli restore testleri. Yedek bütünlüğü doğrulama.\n\nGeri yükleme: Hızlı restore procedures. Point-in-time recovery.\n\nAltyapı: PostgreSQL veya MySQL. Cloud storage (S3, Azure Blob). Monitoring. Alerting.",
+    "description": "Kritik veritabanlarımız için otomatik backup ve disaster recovery sistemi kurmak istiyoruz. Veri kaybını önleme ve hızlı recovery hedefleniyor. Yedekleme için otomatik scheduled backups yapılandırılmalı. Full ve incremental backups yapılmalı. Retention policies ayarlanmalı. Recovery planı için recovery procedures dokümantasyonu hazırlanmalı. RTO ve RPO hedefleri belirlenmeli. Test için düzenli restore testleri yapılmalı. Yedek bütünlüğü doğrulama yapılmalı. Geri yükleme için hızlı restore procedures oluşturulmalı. Point-in-time recovery yapılabilmeli. Altyapı için PostgreSQL veya MySQL kullanılmalı. Cloud storage (S3, Azure Blob) yapılandırılmalı. Monitoring yapılmalı. Alerting sistemi kurulmalı.",
     "budget": 35000,
     "deadline": "2025-03-10T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Infrastructure as Code (Terraform)",
-    "description": "Cloud infrastructure'ı Infrastructure as Code yaklaşımıyla yönetme. Version control, repeatability ve collaboration.\n\nProvisioning: Terraform ile AWS/Azure resources (EC2, RDS, S3, VPC).\n\nModüller: Reusable infrastructure components. Best practices.\n\nState yönetimi: Remote state (S3, Azure Storage). State locking.\n\nBest practices: Naming conventions, resource tagging, security groups. Dokümantasyon.\n\nCI/CD: Infrastructure changes otomatik apply. Plan review. Maliyet tahmini.",
+    "description": "Cloud infrastructure'ımızı Infrastructure as Code yaklaşımıyla yönetmek istiyoruz. Version control, repeatability ve collaboration hedefleniyor. Provisioning için Terraform ile AWS/Azure resources (EC2, RDS, S3, VPC) oluşturulmalı. Modüller için reusable infrastructure components oluşturulmalı. Best practices uygulanmalı. State yönetimi için remote state (S3, Azure Storage) yapılandırılmalı. State locking yapılmalı. Best practices için naming conventions, resource tagging, security groups yapılandırılmalı. Dokümantasyon hazırlanmalı. CI/CD için infrastructure changes otomatik apply yapılmalı. Plan review yapılmalı. Maliyet tahmini yapılabilmeli.",
     "budget": 52000,
     "deadline": "2025-04-01T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Load Balancing ve Auto Scaling",
-    "description": "Yüksek trafikli uygulama için load balancing ve auto scaling. Trafik artışlarını otomatik karşılama.\n\nLoad balancer: AWS ALB, NLB, Azure Load Balancer. Health checks. SSL/TLS termination.\n\nAuto scaling: Auto Scaling Groups. CPU, memory, request count bazlı scaling.\n\nİzleme: Load balancer ve instance metrikleri. Scaling events bildirimleri.\n\nOptimizasyon: Maliyet ve performans dengesi. Predictive scaling.\n\nYüksek kullanılabilirlik: Multi-AZ deployment. Session affinity. Health check optimizasyonu.",
+    "description": "Yüksek trafikli uygulamamız için load balancing ve auto scaling sistemi kurmak istiyoruz. Trafik artışlarını otomatik karşılama hedefleniyor. Load balancer için AWS ALB, NLB, Azure Load Balancer yapılandırılmalı. Health checks yapılmalı. SSL/TLS termination yapılandırılmalı. Auto scaling için Auto Scaling Groups kurulmalı. CPU, memory, request count bazlı scaling yapılmalı. İzleme için load balancer ve instance metrikleri takip edilmeli. Scaling events bildirimleri gönderilmeli. Optimizasyon için maliyet ve performans dengesi sağlanmalı. Predictive scaling yapılabilir. Yüksek kullanılabilirlik için multi-AZ deployment yapılmalı. Session affinity yapılandırılmalı. Health check optimizasyonu yapılmalı.",
     "budget": 45000,
     "deadline": "2025-03-18T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Security Hardening ve Compliance",
-    "description": "Production sunucuları için security hardening ve compliance. Güvenlik standartlarına uyum.\n\nAğ güvenliği: Firewall yapılandırması (UFW, iptables, cloud security groups). Port kısıtlamaları.\n\nSSL/TLS: Güvenli bağlantı. Let's Encrypt veya commercial certificates. Otomatik yenileme.\n\nGüvenlik taraması: Vulnerability assessment. OWASP Top 10 kontrolleri. Penetration testing.\n\nYönetim: Düzenli güvenlik taramaları. Patch management.\n\nUyumluluk: GDPR, KVKK, PCI-DSS dokümantasyonu. Audit logging. Access control (least privilege).",
+    "description": "Production sunucularımız için security hardening ve compliance çalışması yapmak istiyoruz. Güvenlik standartlarına uyum hedefleniyor. Ağ güvenliği için firewall yapılandırması (UFW, iptables, cloud security groups) yapılmalı. Port kısıtlamaları uygulanmalı. SSL/TLS için güvenli bağlantı sağlanmalı. Let's Encrypt veya commercial certificates kullanılmalı. Otomatik yenileme yapılandırılmalı. Güvenlik taraması için vulnerability assessment yapılmalı. OWASP Top 10 kontrolleri yapılmalı. Penetration testing yapılabilir. Yönetim için düzenli güvenlik taramaları yapılmalı. Patch management yapılmalı. Uyumluluk için GDPR, KVKK, PCI-DSS dokümantasyonu hazırlanmalı. Audit logging yapılmalı. Access control (least privilege) uygulanmalı.",
     "budget": 40000,
     "deadline": "2025-03-12T00:00:00.000Z",
     "status": "open"

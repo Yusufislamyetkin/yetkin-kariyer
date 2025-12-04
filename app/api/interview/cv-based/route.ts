@@ -3,6 +3,8 @@ import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { generateInterviewFromCV, formatQuestionsForInterview, extractCVInfo } from "@/lib/ai/interview-generator";
 
+export const maxDuration = 60; // 60 seconds timeout for Vercel
+
 export async function POST(request: Request) {
   try {
     const session = await auth();
@@ -67,6 +69,7 @@ export async function POST(request: Request) {
         type: "cv_based",
         difficulty: cvInfo.level, // CV'den çıkarılan seviye
         duration: Math.ceil(questions.length * 3), // Her soru için yaklaşık 3 dakika
+        cvId: cvId, // CV ile ilişkilendir
       },
     });
 

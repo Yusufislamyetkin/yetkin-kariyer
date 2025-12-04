@@ -1,70 +1,70 @@
 [
   {
     "title": "Web Uygulaması Test Otomasyonu",
-    "description": "E-ticaret web uygulaması için regression testlerini otomatik çalıştıran test otomasyonu. Manuel test yükünü azaltan sistem. Selenium WebDriver veya Playwright.\n\nTest yapısı: Test framework (Jest, Mocha, pytest). Functional testing. E2E testing.\n\nTest yönetimi: Test data management. Page Object Model pattern.\n\nEntegrasyon: CI/CD integration. Test reporting.\n\nKapsam: Cross-browser testing. Parallel execution. Error handling.",
+    "description": "E-ticaret web uygulamamız için regression testlerini otomatik çalıştıran test otomasyonu kurmak istiyoruz. Manuel test yükünü azaltan sistem oluşturulması gerekiyor. Selenium WebDriver veya Playwright kullanılacak. Test yapısı için test framework (Jest, Mocha, pytest) kurulmalı. Functional testing yapılmalı. E2E testing yapılmalı. Test yönetimi için test data management yapılmalı. Page Object Model pattern uygulanmalı. Entegrasyon için CI/CD integration yapılmalı. Test reporting yapılmalı. Kapsam için cross-browser testing yapılmalı. Parallel execution yapılabilmeli. Error handling yapılmalı.",
     "budget": 45000,
     "deadline": "2025-03-25T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "API Test Otomasyonu",
-    "description": "RESTful API için endpoint testleri, performans ve güvenlik kontrolleri yapan test otomasyonu. Postman, REST Assured veya pytest.\n\nFonksiyonel testler: Tüm endpoint'ler. Status code, response body, headers validation.\n\nPerformans: Response time, throughput. Load testing.\n\nGüvenlik: Authentication, authorization, input validation. Error handling testing.\n\nYönetim: Test data management. CI/CD integration. Test reporting.",
+    "description": "RESTful API'miz için endpoint testleri, performans ve güvenlik kontrolleri yapan test otomasyonu kurmak istiyoruz. Postman, REST Assured veya pytest kullanılacak. Fonksiyonel testler için tüm endpoint'ler test edilmeli. Status code, response body, headers validation yapılmalı. Performans için response time, throughput ölçülmeli. Load testing yapılmalı. Güvenlik için authentication, authorization, input validation test edilmeli. Error handling testing yapılmalı. Yönetim için test data management yapılmalı. CI/CD integration yapılmalı. Test reporting yapılmalı.",
     "budget": 40000,
     "deadline": "2025-03-20T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Mobil Uygulama Test Otomasyonu",
-    "description": "iOS ve Android mobil uygulama için tüm platformlarda test eden otomasyon. Appium veya Detox.\n\nTest kapsamı: Functional testing. UI testing. Device testing. OS version testing.\n\nPerformans: Uygulama performansı. Battery usage, memory leak.\n\nEntegrasyon: CI/CD integration. Cloud testing (BrowserStack, Sauce Labs). Test reporting.",
+    "description": "iOS ve Android mobil uygulamamız için tüm platformlarda test eden otomasyon kurmak istiyoruz. Appium veya Detox kullanılacak. Test kapsamı için functional testing yapılmalı. UI testing yapılmalı. Device testing yapılmalı. OS version testing yapılmalı. Performans için uygulama performansı ölçülmeli. Battery usage, memory leak test edilmeli. Entegrasyon için CI/CD integration yapılmalı. Cloud testing (BrowserStack, Sauce Labs) yapılabilir. Test reporting yapılmalı.",
     "budget": 50000,
     "deadline": "2025-04-05T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Performance ve Load Testing",
-    "description": "Yüksek trafikli web uygulaması için yük altındaki davranış analizi. JMeter, Gatling veya k6.\n\nTest senaryoları: Load testing scenarios. Performance testing: response time, throughput, error rate. Load testing. Stress testing. Spike testing.\n\nAnaliz: Performans darboğazları tespiti. İyileştirme önerileri.\n\nRaporlama: Detaylı raporlar. Monitoring integration. Kapasite planlaması.",
+    "description": "Yüksek trafikli web uygulamamız için yük altındaki davranış analizi yapmak istiyoruz. JMeter, Gatling veya k6 kullanılacak. Test senaryoları için load testing scenarios hazırlanmalı. Performance testing yapılmalı - response time, throughput, error rate ölçülmeli. Load testing yapılmalı. Stress testing yapılmalı. Spike testing yapılmalı. Analiz için performans darboğazları tespit edilmeli. İyileştirme önerileri sunulmalı. Raporlama için detaylı raporlar hazırlanmalı. Monitoring integration yapılmalı. Kapasite planlaması yapılmalı.",
     "budget": 55000,
     "deadline": "2025-04-10T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Güvenlik Testi (Penetration Testing)",
-    "description": "Web uygulaması için güvenlik açıklarını tespit eden, öneriler sunan güvenlik testi.\n\nKontroller: OWASP Top 10. Vulnerability scanning. Penetration testing: SQL injection, XSS, CSRF.\n\nKimlik doğrulama: Authentication, authorization testing. Session management testing.\n\nDeğerlendirme: Security audit. Risk assessment.\n\nRaporlama: Security report. Düzeltme önerileri. Retesting.",
+    "description": "Web uygulamamız için güvenlik açıklarını tespit eden, öneriler sunan güvenlik testi yapmak istiyoruz. Kontroller için OWASP Top 10 test edilmeli. Vulnerability scanning yapılmalı. Penetration testing yapılmalı - SQL injection, XSS, CSRF test edilmeli. Kimlik doğrulama için authentication, authorization testing yapılmalı. Session management testing yapılmalı. Değerlendirme için security audit yapılmalı. Risk assessment yapılmalı. Raporlama için security report hazırlanmalı. Düzeltme önerileri sunulmalı. Retesting yapılmalı.",
     "budget": 60000,
     "deadline": "2025-04-15T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Test Stratejisi ve Planlama",
-    "description": "Yeni proje için tüm test aktivitelerini kapsayan test stratejisi ve planlama.\n\nStrateji: Test strategy document. Test levels (unit, integration, system, acceptance).\n\nPlanlama: Test planı. Test scope, approach, schedule. Test case design. Test data management strategy.\n\nAltyapı: Test environment setup. Test tools selection.\n\nYönetim: Risk analysis. Test metrics. Test reporting strategy.",
+    "description": "Yeni projemiz için tüm test aktivitelerini kapsayan test stratejisi ve planlama yapmak istiyoruz. Strateji için test strategy document hazırlanmalı. Test levels (unit, integration, system, acceptance) belirlenmeli. Planlama için test planı hazırlanmalı. Test scope, approach, schedule belirlenmeli. Test case design yapılmalı. Test data management strategy oluşturulmalı. Altyapı için test environment setup yapılmalı. Test tools selection yapılmalı. Yönetim için risk analysis yapılmalı. Test metrics belirlenmeli. Test reporting strategy oluşturulmalı.",
     "budget": 35000,
     "deadline": "2025-03-15T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Accessibility Testing",
-    "description": "Web uygulaması için WCAG 2.1 standartlarına uygunluk kontrolü.\n\nKontroller: WCAG 2.1 Level AA compliance. Automated testing tools (axe, WAVE). Manual testing: klavye navigasyonu, screen reader. Color contrast testing.\n\nDeğerlendirme: Accessibility audit. User testing.\n\nRaporlama: Accessibility report. Düzeltme önerileri.\n\nEğitim: Development ekibi eğitimi. Best practices dokümantasyonu.",
+    "description": "Web uygulamamız için WCAG 2.1 standartlarına uygunluk kontrolü yapmak istiyoruz. Kontroller için WCAG 2.1 Level AA compliance test edilmeli. Automated testing tools (axe, WAVE) kullanılmalı. Manual testing yapılmalı - klavye navigasyonu, screen reader test edilmeli. Color contrast testing yapılmalı. Değerlendirme için accessibility audit yapılmalı. User testing yapılmalı. Raporlama için accessibility report hazırlanmalı. Düzeltme önerileri sunulmalı. Eğitim için development ekibi eğitimi yapılmalı. Best practices dokümantasyonu hazırlanmalı.",
     "budget": 40000,
     "deadline": "2025-03-22T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Test Infrastructure Kurulumu",
-    "description": "Test otomasyonunu destekleyen, CI/CD entegrasyonu sağlayan test infrastructure.\n\nOrtam: Test environment setup. Test data management.\n\nEntegrasyon: CI/CD integration. Test reporting tools.\n\nYönetim: Test management tool (Jira, TestRail). Test repository.\n\nİzleme: Monitoring, logging. Alerting.\n\nDokümantasyon: Infrastructure dokümantasyonu. Best practices. Training.",
+    "description": "Test otomasyonumuzu destekleyen, CI/CD entegrasyonu sağlayan test infrastructure kurmak istiyoruz. Ortam için test environment setup yapılmalı. Test data management yapılmalı. Entegrasyon için CI/CD integration yapılmalı. Test reporting tools kurulmalı. Yönetim için test management tool (Jira, TestRail) kurulmalı. Test repository oluşturulmalı. İzleme için monitoring, logging yapılmalı. Alerting sistemi kurulmalı. Dokümantasyon için infrastructure dokümantasyonu hazırlanmalı. Best practices dokümante edilmeli. Training yapılmalı.",
     "budget": 45000,
     "deadline": "2025-03-28T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Regression Test Suite Geliştirme",
-    "description": "Kritik fonksiyonları kapsayan, hızlı çalışan regression test suite.\n\nKapsam: Test scope analysis. Critical path identification.\n\nGeliştirme: Test case development. Test automation.\n\nStrateji: Test execution strategy. Smoke testing.\n\nYönetim: Test maintenance strategy. Test reporting.\n\nEntegrasyon: CI/CD integration. Parallel execution. Test metrics.",
+    "description": "Kritik fonksiyonları kapsayan, hızlı çalışan regression test suite geliştirmek istiyoruz. Kapsam için test scope analysis yapılmalı. Critical path identification yapılmalı. Geliştirme için test case development yapılmalı. Test automation yapılmalı. Strateji için test execution strategy oluşturulmalı. Smoke testing yapılmalı. Yönetim için test maintenance strategy oluşturulmalı. Test reporting yapılmalı. Entegrasyon için CI/CD integration yapılmalı. Parallel execution yapılabilmeli. Test metrics takip edilmeli.",
     "budget": 50000,
     "deadline": "2025-04-08T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Test Automation Framework Geliştirme",
-    "description": "Tüm projelerde kullanılabilir özelleştirilmiş test automation framework.\n\nMimari: Framework architecture. Reusable components.\n\nYardımcılar: Test utilities. Configuration management.\n\nFramework'ler: Reporting framework. Logging framework.\n\nDokümantasyon: Framework dokümantasyonu. Code examples.\n\nYönetim: Training. Best practices. Version control.",
+    "description": "Tüm projelerde kullanılabilir özelleştirilmiş test automation framework geliştirmek istiyoruz. Mimari için framework architecture tasarlanmalı. Reusable components oluşturulmalı. Yardımcılar için test utilities oluşturulmalı. Configuration management yapılmalı. Framework'ler için reporting framework, logging framework oluşturulmalı. Dokümantasyon için framework dokümantasyonu hazırlanmalı. Code examples hazırlanmalı. Yönetim için training yapılmalı. Best practices dokümante edilmeli. Version control yapılandırılmalı.",
     "budget": 60000,
     "deadline": "2025-04-18T00:00:00.000Z",
     "status": "open"

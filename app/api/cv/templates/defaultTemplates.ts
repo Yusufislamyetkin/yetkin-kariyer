@@ -24,7 +24,7 @@ const BASE_STRUCTURE = {
 export const DEFAULT_TEMPLATES: TemplateResponse[] = [
   {
     id: "modern",
-    name: "Modern CV",
+    name: "ATS Uyumlu CV Kod: 01",
     preview: null,
     structure: {
       ...BASE_STRUCTURE,
@@ -34,7 +34,7 @@ export const DEFAULT_TEMPLATES: TemplateResponse[] = [
   },
   {
     id: "classic",
-    name: "Klasik CV",
+    name: "ATS Uyumlu CV Kod: 02",
     preview: null,
     structure: {
       ...BASE_STRUCTURE,
@@ -44,7 +44,7 @@ export const DEFAULT_TEMPLATES: TemplateResponse[] = [
   },
   {
     id: "creative",
-    name: "Yaratıcı CV",
+    name: "ATS Uyumlu CV Kod: 03",
     preview: null,
     structure: {
       ...BASE_STRUCTURE,
@@ -54,7 +54,7 @@ export const DEFAULT_TEMPLATES: TemplateResponse[] = [
   },
   {
     id: "professional",
-    name: "Profesyonel CV",
+    name: "ATS Uyumlu CV Kod: 04",
     preview: null,
     structure: {
       ...BASE_STRUCTURE,
@@ -64,7 +64,7 @@ export const DEFAULT_TEMPLATES: TemplateResponse[] = [
   },
   {
     id: "minimal",
-    name: "Minimal CV",
+    name: "ATS Uyumlu CV Kod: 05",
     preview: null,
     structure: {
       ...BASE_STRUCTURE,
@@ -74,7 +74,7 @@ export const DEFAULT_TEMPLATES: TemplateResponse[] = [
   },
   {
     id: "executive",
-    name: "Yönetici CV",
+    name: "ATS Uyumlu CV Kod: 06",
     preview: null,
     structure: {
       ...BASE_STRUCTURE,
@@ -84,7 +84,7 @@ export const DEFAULT_TEMPLATES: TemplateResponse[] = [
   },
   {
     id: "colorful",
-    name: "Renkli CV",
+    name: "ATS Uyumlu CV Kod: 07",
     preview: null,
     structure: {
       ...BASE_STRUCTURE,
@@ -94,7 +94,7 @@ export const DEFAULT_TEMPLATES: TemplateResponse[] = [
   },
   {
     id: "tech",
-    name: "Teknoloji CV",
+    name: "ATS Uyumlu CV Kod: 08",
     preview: null,
     structure: {
       ...BASE_STRUCTURE,

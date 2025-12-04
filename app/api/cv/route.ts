@@ -3,6 +3,7 @@ import { Prisma } from "@prisma/client";
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
 import { DEFAULT_TEMPLATES } from "./templates/defaultTemplates";
+import { generateInterviewForCV } from "@/lib/background/cv-interview-generator";
 
 export async function GET() {
   try {
@@ -23,6 +24,17 @@ export async function GET() {
           select: {
             id: true,
             name: true,
+          },
+        },
+        uploads: {
+          orderBy: { createdAt: "desc" },
+          select: {
+            id: true,
+            url: true,
+            name: true,
+            mimeType: true,
+            size: true,
+            createdAt: true,
           },
         },
       },
@@ -105,6 +117,15 @@ export async function POST(request: Request) {
         template: true,
       },
     });
+
+    // Arka planda mülakat oluşturmayı tetikle (fire-and-forget)
+    if (process.env.OPENAI_API_KEY) {
+      // Fire and forget - don't await
+      generateInterviewForCV(cv.id, session.user.id as string).catch((error) => {
+        // Silently fail - interview can be generated later
+        console.error("[CV_CREATE] Background interview generation failed:", error);
+      });
+    }
 
     return NextResponse.json({ cv }, { status: 201 });
   } catch (error) {

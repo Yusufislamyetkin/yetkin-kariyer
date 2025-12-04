@@ -18,6 +18,7 @@ export async function GET(request: Request) {
     const limit = parseInt(searchParams.get("limit") || "50");
     const search = searchParams.get("search")?.trim() || "";
     const role = searchParams.get("role")?.trim() || "";
+    const isBot = searchParams.get("isBot")?.trim();
 
     const skip = (page - 1) * limit;
 
@@ -35,6 +36,12 @@ export async function GET(request: Request) {
       where.role = role;
     }
 
+    if (isBot === "true") {
+      where.isBot = true;
+    } else if (isBot === "false") {
+      where.isBot = false;
+    }
+
     // Get total count for pagination
     const totalCount = await db.user.count({ where });
 
@@ -47,8 +54,31 @@ export async function GET(request: Request) {
         email: true,
         role: true,
         profileImage: true,
+        isBot: true,
         createdAt: true,
         updatedAt: true,
+        botCharacter: {
+          select: {
+            id: true,
+            name: true,
+            persona: true,
+            expertise: true,
+          },
+        },
+        botConfiguration: {
+          select: {
+            id: true,
+            isActive: true,
+            minPostsPerDay: true,
+            maxPostsPerDay: true,
+            minCommentsPerDay: true,
+            maxCommentsPerDay: true,
+            minLikesPerDay: true,
+            maxLikesPerDay: true,
+            activityHours: true,
+            lastActivityAt: true,
+          },
+        },
       },
       orderBy: {
         createdAt: "desc",

@@ -538,11 +538,13 @@ model Interview {
   duration    Int? // in minutes
   type        String?
   difficulty  String?
+  cvId        String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
   // Relations
   interviewAttempts InterviewAttempt[]
+  cv                CV?              @relation(fields: [cvId], references: [id], onDelete: Cascade)
 
   @@map("interviews")
 }
@@ -596,6 +598,7 @@ model CV {
   template        CVTemplate       @relation(fields: [templateId], references: [id])
   jobApplications JobApplication[]
   uploads         CVUpload[]
+  interviews      Interview[]
 
   @@map("cvs")
 }
@@ -649,7 +652,7 @@ model JobApplication {
   // Relations
   job  Job  @relation(fields: [jobId], references: [id], onDelete: Cascade)
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  cv   CV   @relation(fields: [cvId], references: [id])
+  cv   CV   @relation(fields: [cvId], references: [id], onDelete: Cascade)
 
   @@map("job_applications")
 }

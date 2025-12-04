@@ -3,8 +3,41 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/app/components/ui/Button";
-import { Loader2, Search, ArrowLeft, User as UserIcon, Mail, Calendar, Shield, ChevronLeft, ChevronRight } from "lucide-react";
+import { Loader2, Search, ArrowLeft, User as UserIcon, Mail, Calendar, Shield, ChevronLeft, ChevronRight, Bot, Settings, Trash2, Play, Activity, CheckCircle2, XCircle, Clock } from "lucide-react";
 import Image from "next/image";
+import { BotConfigModal } from "./_components/BotConfigModal";
+import { ConfirmDialog } from "@/app/components/ui/ConfirmDialog";
+
+interface BotCharacter {
+  id: string;
+  name: string;
+  persona: string;
+  systemPrompt: string;
+  expertise: string[];
+}
+
+interface BotConfiguration {
+  id?: string;
+  isActive: boolean;
+  minPostsPerDay: number;
+  maxPostsPerDay: number;
+  minCommentsPerDay: number;
+  maxCommentsPerDay: number;
+  minLikesPerDay: number;
+  maxLikesPerDay: number;
+  minTestsPerWeek: number;
+  maxTestsPerWeek: number;
+  minLiveCodingPerWeek: number;
+  maxLiveCodingPerWeek: number;
+  minBugFixPerWeek: number;
+  maxBugFixPerWeek: number;
+  minLessonsPerWeek: number;
+  maxLessonsPerWeek: number;
+  minChatMessagesPerDay: number;
+  maxChatMessagesPerDay: number;
+  activityHours: number[];
+  lastActivityAt?: string | null;
+}
 
 interface User {
   id: string;
@@ -12,8 +45,11 @@ interface User {
   email: string;
   role: string;
   profileImage: string | null;
+  isBot: boolean;
   createdAt: string;
   updatedAt: string;
+  botCharacter: BotCharacter | null;
+  botConfiguration: BotConfiguration | null;
 }
 
 interface Pagination {
@@ -35,6 +71,17 @@ export default function AdminUsersPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [pagination, setPagination] = useState<Pagination | null>(null);
   const [searchInput, setSearchInput] = useState("");
+  const [botConfigModalOpen, setBotConfigModalOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+  const [userToDelete, setUserToDelete] = useState<string | null>(null);
+  const [actionLoading, setActionLoading] = useState<string | null>(null);
+  const [runningBots, setRunningBots] = useState(false);
+  const [runResult, setRunResult] = useState<any>(null);
+  const [showInteractions, setShowInteractions] = useState(false);
+  const [activities, setActivities] = useState<any[]>([]);
+  const [activitiesLoading, setActivitiesLoading] = useState(false);
+  const [activitiesPage, setActivitiesPage] = useState(1);
 
   const fetchUsers = async (page: number = 1, searchQuery: string = "", role: string = "") => {
     setLoading(true);
@@ -51,7 +98,11 @@ export default function AdminUsersPage() {
       }
 
       if (role) {
-        params.append("role", role);
+        if (role === "bot") {
+          params.append("isBot", "true");
+        } else {
+          params.append("role", role);
+        }
       }
 
       const response = await fetch(`/api/admin/users?${params.toString()}`);
@@ -109,6 +160,109 @@ export default function AdminUsersPage() {
     }).format(date);
   };
 
+  const handleBotAssign = (user: User) => {
+    setSelectedUser(user);
+    setBotConfigModalOpen(true);
+  };
+
+  const handleBotConfigUpdate = async () => {
+    await fetchUsers(currentPage, search, roleFilter);
+    setBotConfigModalOpen(false);
+    setSelectedUser(null);
+  };
+
+  const handleBotRemove = async (userId: string) => {
+    setActionLoading(userId);
+    try {
+      const response = await fetch(`/api/admin/users/${userId}/bot`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || "Bot ataması kaldırılırken bir hata oluştu");
+      }
+
+      await fetchUsers(currentPage, search, roleFilter);
+      setDeleteConfirmOpen(false);
+      setUserToDelete(null);
+    } catch (err: any) {
+      setError(err.message || "Bir hata oluştu");
+    } finally {
+      setActionLoading(null);
+    }
+  };
+
+  const openDeleteConfirm = (userId: string) => {
+    setUserToDelete(userId);
+    setDeleteConfirmOpen(true);
+  };
+
+  const handleRunBots = async () => {
+    setRunningBots(true);
+    setRunResult(null);
+    setError(null);
+
+    try {
+      const response = await fetch("/api/admin/bots/run", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ skipHourCheck: true }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Botlar çalıştırılırken bir hata oluştu");
+      }
+
+      setRunResult(data);
+      
+      // Refresh activities if interactions area is open
+      if (showInteractions) {
+        fetchActivities();
+      }
+      
+      // Refresh users to show updated bot statuses
+      fetchUsers(currentPage, search, roleFilter);
+    } catch (err: any) {
+      setError(err.message || "Bir hata oluştu");
+    } finally {
+      setRunningBots(false);
+    }
+  };
+
+  const fetchActivities = async (page: number = 1) => {
+    setActivitiesLoading(true);
+    try {
+      const limit = 50;
+      const offset = (page - 1) * limit;
+      const response = await fetch(`/api/admin/bots/activities?limit=${limit}&offset=${offset}`);
+
+      if (!response.ok) {
+        throw new Error("Aktiviteler alınırken bir hata oluştu");
+      }
+
+      const data = await response.json();
+      if (page === 1) {
+        setActivities(data.activities || []);
+      } else {
+        setActivities((prev) => [...prev, ...(data.activities || [])]);
+      }
+      setActivitiesPage(page);
+    } catch (err: any) {
+      setError(err.message || "Bir hata oluştu");
+    } finally {
+      setActivitiesLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (showInteractions) {
+      fetchActivities(1);
+    }
+  }, [showInteractions]);
+
 
   return (
     <div className="space-y-6 animate-fade-in min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
@@ -146,6 +300,23 @@ export default function AdminUsersPage() {
                   </div>
                 </div>
               )}
+              <Button
+                onClick={handleRunBots}
+                disabled={runningBots}
+                className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+              >
+                {runningBots ? (
+                  <>
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    Çalıştırılıyor...
+                  </>
+                ) : (
+                  <>
+                    <Play className="h-4 w-4 mr-2" />
+                    Botları Çalıştır
+                  </>
+                )}
+              </Button>
             </div>
           </div>
         </div>
@@ -213,6 +384,19 @@ export default function AdminUsersPage() {
             >
               Employer
             </button>
+            <button
+              onClick={() => {
+                const currentIsBot = roleFilter === "bot";
+                handleRoleFilter(currentIsBot ? "" : "bot");
+              }}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                roleFilter === "bot"
+                  ? "bg-purple-600 text-white"
+                  : "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+              }`}
+            >
+              Botlar
+            </button>
           </div>
         </div>
 
@@ -227,6 +411,175 @@ export default function AdminUsersPage() {
         {error && !loading && (
           <div className="bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800 rounded-lg p-4">
             <p className="text-red-700 dark:text-red-300">{error}</p>
+          </div>
+        )}
+
+        {/* Run Result */}
+        {runResult && (
+          <div className="bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800 rounded-lg p-4 mb-6">
+            <div className="flex items-start gap-3">
+              <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400 mt-0.5" />
+              <div className="flex-1">
+                <h3 className="font-semibold text-green-900 dark:text-green-100 mb-1">
+                  Botlar Başarıyla Çalıştırıldı
+                </h3>
+                <p className="text-sm text-green-700 dark:text-green-300">
+                  {runResult.processed} bot işlendi • {runResult.successful} başarılı • {runResult.failed} başarısız
+                  {runResult.skipped > 0 && ` • ${runResult.skipped} atlandı`}
+                </p>
+                {runResult.results && runResult.results.length > 0 && (
+                  <div className="mt-2 text-xs text-green-600 dark:text-green-400">
+                    Toplam aktivite: {runResult.results.reduce((sum: number, r: any) => sum + (r.totalActivities || 0), 0)}
+                  </div>
+                )}
+              </div>
+              <button
+                onClick={() => setRunResult(null)}
+                className="text-green-600 dark:text-green-400 hover:text-green-800 dark:hover:text-green-200"
+              >
+                <XCircle className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Interactions Area Toggle */}
+        <div className="mb-6">
+          <Button
+            onClick={() => setShowInteractions(!showInteractions)}
+            variant="outline"
+            className="w-full sm:w-auto"
+          >
+            <Activity className="h-4 w-4 mr-2" />
+            {showInteractions ? "Etkileşim Alanını Gizle" : "🤖 Bot Etkileşimleri"}
+          </Button>
+        </div>
+
+        {/* Interactions Area */}
+        {showInteractions && (
+          <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-lg p-6 mb-6">
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                  🤖 Bot Etkileşimleri
+                </h2>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                  Bot aktivitelerinin gerçek zamanlı listesi
+                </p>
+              </div>
+              <Button
+                onClick={() => fetchActivities(1)}
+                variant="outline"
+                size="sm"
+                disabled={activitiesLoading}
+              >
+                {activitiesLoading ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  "Yenile"
+                )}
+              </Button>
+            </div>
+
+            {activitiesLoading && activities.length === 0 ? (
+              <div className="flex items-center justify-center py-12">
+                <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+              </div>
+            ) : activities.length === 0 ? (
+              <div className="text-center py-12">
+                <Activity className="h-12 w-12 mx-auto text-gray-400 mb-4" />
+                <p className="text-gray-600 dark:text-gray-400">
+                  Henüz bot aktivitesi bulunmuyor
+                </p>
+              </div>
+            ) : (
+              <div className="space-y-3">
+                {activities.map((activity) => (
+                  <div
+                    key={activity.id}
+                    className="flex items-start gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                  >
+                    <div className="flex-shrink-0">
+                      {activity.botProfileImage ? (
+                        <Image
+                          src={activity.botProfileImage}
+                          alt={activity.botName}
+                          width={40}
+                          height={40}
+                          className="rounded-full"
+                        />
+                      ) : (
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center">
+                          <Bot className="h-5 w-5 text-white" />
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="font-semibold text-gray-900 dark:text-gray-100">
+                          {activity.botName}
+                        </span>
+                        <span
+                          className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                            activity.success
+                              ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400"
+                              : "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400"
+                          }`}
+                        >
+                          {activity.activityType}
+                        </span>
+                        {activity.success ? (
+                          <CheckCircle2 className="h-4 w-4 text-green-600" />
+                        ) : (
+                          <XCircle className="h-4 w-4 text-red-600" />
+                        )}
+                      </div>
+                      {activity.targetTitle && (
+                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-1 line-clamp-2">
+                          {activity.targetTitle}
+                        </p>
+                      )}
+                      {activity.errorMessage && (
+                        <p className="text-xs text-red-600 dark:text-red-400 mb-1">
+                          Hata: {activity.errorMessage}
+                        </p>
+                      )}
+                      <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                        <Clock className="h-3 w-3" />
+                        <span>
+                          {new Date(activity.executedAt).toLocaleString("tr-TR", {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {activities.length > 0 && (
+              <div className="mt-4 flex justify-center">
+                <Button
+                  onClick={() => fetchActivities(activitiesPage + 1)}
+                  variant="outline"
+                  disabled={activitiesLoading}
+                >
+                  {activitiesLoading ? (
+                    <>
+                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      Yükleniyor...
+                    </>
+                  ) : (
+                    "Daha Fazla Yükle"
+                  )}
+                </Button>
+              </div>
+            )}
           </div>
         )}
 
@@ -251,6 +604,46 @@ export default function AdminUsersPage() {
                       key={user.id}
                       className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group relative"
                     >
+                      {/* Bot Badge */}
+                      {user.isBot && (
+                        <div className="absolute top-3 right-3 z-10">
+                          <div className="flex items-center gap-1 px-2 py-1 bg-gradient-to-r from-purple-500 to-indigo-600 text-white text-xs font-semibold rounded-full shadow-lg">
+                            <Bot className="h-3 w-3" />
+                            <span>Bot</span>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Bot Actions */}
+                      {user.isBot && (
+                        <div className="absolute top-3 left-3 z-10 flex gap-2">
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleBotAssign(user);
+                            }}
+                            className="p-1.5 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all"
+                            title="Bot Yapılandırması"
+                          >
+                            <Settings className="h-4 w-4 text-gray-600 dark:text-gray-300" />
+                          </button>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              openDeleteConfirm(user.id);
+                            }}
+                            className="p-1.5 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all"
+                            title="Bot Atamasını Kaldır"
+                            disabled={actionLoading === user.id}
+                          >
+                            {actionLoading === user.id ? (
+                              <Loader2 className="h-4 w-4 text-gray-600 dark:text-gray-300 animate-spin" />
+                            ) : (
+                              <Trash2 className="h-4 w-4 text-red-600 dark:text-red-400" />
+                            )}
+                          </button>
+                        </div>
+                      )}
 
                       <div
                         onClick={() => router.push(`/profile/${user.id}`)}
@@ -299,6 +692,47 @@ export default function AdminUsersPage() {
                         </span>
                       </div>
 
+                      {/* Bot Assignment Button */}
+                      {!user.isBot && (
+                        <div className="mb-3">
+                          <Button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleBotAssign(user);
+                            }}
+                            variant="outline"
+                            size="sm"
+                            className="w-full"
+                          >
+                            <Bot className="h-4 w-4 mr-2" />
+                            Bot Olarak Ata
+                          </Button>
+                        </div>
+                      )}
+
+                      {/* Bot Status */}
+                      {user.isBot && user.botConfiguration && (
+                        <div className="mb-3 p-2 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                          <div className="flex items-center justify-between text-xs">
+                            <span className="text-gray-600 dark:text-gray-400">Durum:</span>
+                            <span
+                              className={`font-semibold ${
+                                user.botConfiguration.isActive
+                                  ? "text-green-600 dark:text-green-400"
+                                  : "text-gray-500"
+                              }`}
+                            >
+                              {user.botConfiguration.isActive ? "Aktif" : "Pasif"}
+                            </span>
+                          </div>
+                          {user.botConfiguration.lastActivityAt && (
+                            <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                              Son aktivite: {formatDate(user.botConfiguration.lastActivityAt)}
+                            </div>
+                          )}
+                        </div>
+                      )}
+
                       {/* Date */}
                       <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400 pt-3 border-t border-gray-200 dark:border-gray-700">
                         <Calendar className="h-4 w-4" />
@@ -343,6 +777,47 @@ export default function AdminUsersPage() {
           </>
         )}
       </div>
+
+      {/* Bot Config Modal */}
+      {selectedUser && (
+        <BotConfigModal
+          isOpen={botConfigModalOpen}
+          onClose={() => {
+            setBotConfigModalOpen(false);
+            setSelectedUser(null);
+          }}
+          userId={selectedUser.id}
+          userName={selectedUser.name}
+          existingConfig={
+            selectedUser.isBot
+              ? {
+                  botCharacter: selectedUser.botCharacter,
+                  botConfiguration: selectedUser.botConfiguration,
+                }
+              : undefined
+          }
+          onSuccess={handleBotConfigUpdate}
+        />
+      )}
+
+      {/* Delete Confirm Dialog */}
+      <ConfirmDialog
+        isOpen={deleteConfirmOpen}
+        title="Bot Atamasını Kaldır"
+        message="Bu kullanıcının bot atamasını kaldırmak istediğinizden emin misiniz? Bot yapılandırması pasif hale getirilecek."
+        confirmText="Kaldır"
+        cancelText="İptal"
+        confirmVariant="danger"
+        onConfirm={() => {
+          if (userToDelete) {
+            handleBotRemove(userToDelete);
+          }
+        }}
+        onCancel={() => {
+          setDeleteConfirmOpen(false);
+          setUserToDelete(null);
+        }}
+      />
     </div>
   );
 }

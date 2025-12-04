@@ -1,70 +1,70 @@
 [
   {
     "title": "Machine Learning Model Geliştirme",
-    "description": "E-ticaret platformu için müşteri davranışı tahmin modeli. Satın alma olasılığını tahmin ederek pazarlama kampanyalarını optimize edecek. Python, Scikit-learn veya TensorFlow.\n\nVeri hazırlama: Preprocessing ile ham verilerin temizlenmesi ve hazırlanması. Feature engineering.\n\nModel geliştirme: Farklı algoritmalar test edilecek (Random Forest, XGBoost, Neural Networks). Model evaluation: accuracy, precision, recall, F1-score. Cross-validation.\n\nDeployment: Production ortamına deploy. API endpoint. Model monitoring.\n\nDokümantasyon: Model açıklaması, kullanım kılavuzu. Model versioning.",
+    "description": "E-ticaret platformumuz için müşteri davranışı tahmin modeli geliştirmek istiyoruz. Satın alma olasılığını tahmin ederek pazarlama kampanyalarımızı optimize etmek hedefleniyor. Python, Scikit-learn veya TensorFlow kullanılacak. Veri hazırlama kısmında preprocessing ile ham verilerin temizlenmesi ve hazırlanması yapılmalı. Feature engineering yapılmalı. Model geliştirme için farklı algoritmalar test edilmeli (Random Forest, XGBoost, Neural Networks). Model evaluation yapılmalı - accuracy, precision, recall, F1-score metrikleri hesaplanmalı. Cross-validation yapılmalı. Deployment için production ortamına deploy yapılmalı. API endpoint oluşturulmalı. Model monitoring yapılmalı. Dokümantasyon için model açıklaması, kullanım kılavuzu hazırlanmalı. Model versioning yapılmalı.",
     "budget": 65000,
     "deadline": "2025-04-20T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Veri Analizi ve Raporlama Dashboard",
-    "description": "Perakende sektörü için iş kararlarını destekleyecek veri analizi ve raporlama dashboard'u. Python/Pandas analiz, Power BI veya Tableau görselleştirme.\n\nVeri işleme: Data cleaning, data transformation.\n\nGörselleştirme: Grafikler, tablolar, heatmaps. Interactive reports: filtreleme, drill-down. Scheduled reports.\n\nİçgörüler: Otomatik içgörü üretimi. Trend analysis.\n\nVeri pipeline: Otomatik veri çekme. ETL processes.",
+    "description": "Perakende sektörü için iş kararlarımızı destekleyecek veri analizi ve raporlama dashboard'u geliştirmek istiyoruz. Python/Pandas analiz, Power BI veya Tableau görselleştirme kullanılacak. Veri işleme için data cleaning, data transformation yapılmalı. Görselleştirme için grafikler, tablolar, heatmaps oluşturulmalı. Interactive reports hazırlanmalı - filtreleme, drill-down özellikleri olmalı. Scheduled reports oluşturulmalı. İçgörüler için otomatik içgörü üretimi yapılmalı. Trend analysis yapılabilmeli. Veri pipeline için otomatik veri çekme yapılmalı. ETL processes kurulmalı.",
     "budget": 50000,
     "deadline": "2025-03-30T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Predictive Analytics Sistemi",
-    "description": "Üretim şirketi için talep tahmini, stok optimizasyonu ve bakım planlaması odaklı tahmine dayalı analiz sistemi.\n\nZaman serisi: Geçmiş veriler analizi. Forecasting models (ARIMA, Prophet, LSTM).\n\nDeployment: Production ortamına alım. API entegrasyonu. Gerçek zamanlı tahminler. Confidence intervals.\n\nModel yönetimi: Düzenli retraining. Performance monitoring.\n\nTeknoloji: Python, ML libraries (scikit-learn, statsmodels, Prophet). Dashboard. Alerting system.",
+    "description": "Üretim şirketimiz için talep tahmini, stok optimizasyonu ve bakım planlaması odaklı tahmine dayalı analiz sistemi geliştirmek istiyoruz. Zaman serisi analizi için geçmiş veriler analiz edilmeli. Forecasting models (ARIMA, Prophet, LSTM) kullanılmalı. Deployment için production ortamına alım yapılmalı. API entegrasyonu yapılmalı. Gerçek zamanlı tahminler yapılabilmeli. Confidence intervals hesaplanmalı. Model yönetimi için düzenli retraining yapılmalı. Performance monitoring yapılmalı. Teknoloji olarak Python, ML libraries (scikit-learn, statsmodels, Prophet) kullanılmalı. Dashboard oluşturulmalı. Alerting system kurulmalı.",
     "budget": 70000,
     "deadline": "2025-04-25T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Natural Language Processing (NLP) Projesi",
-    "description": "Müşteri hizmetleri için NLP tabanlı chatbot ve sentiment analysis. Müşteri mesajlarını anlayıp uygun yanıtlar üretecek sistem.\n\nNLP özellikleri: Text classification. Sentiment analysis. Named entity recognition. Conversational AI.\n\nTeknoloji: NLTK, spaCy veya transformers (BERT, GPT). Labeled dataset. API integration. Gerçek zamanlı işleme.\n\nDeğerlendirme: Accuracy, F1-score metrikleri. Continuous learning. Multilingual support.",
+    "description": "Müşteri hizmetlerimiz için NLP tabanlı chatbot ve sentiment analysis sistemi geliştirmek istiyoruz. Müşteri mesajlarını anlayıp uygun yanıtlar üretecek sistem oluşturulması gerekiyor. NLP özellikleri için text classification yapılmalı. Sentiment analysis yapılmalı. Named entity recognition yapılmalı. Conversational AI kurulmalı. Teknoloji olarak NLTK, spaCy veya transformers (BERT, GPT) kullanılabilir. Labeled dataset hazırlanmalı. API integration yapılmalı. Gerçek zamanlı işleme yapılabilmeli. Değerlendirme için accuracy, F1-score metrikleri hesaplanmalı. Continuous learning yapılmalı. Multilingual support eklenebilir.",
     "budget": 75000,
     "deadline": "2025-05-05T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Computer Vision Uygulaması",
-    "description": "Güvenlik ve kalite kontrolü için görüntü analizi ve anomali tespiti. OpenCV, TensorFlow veya PyTorch.\n\nGörüntü işleme: Object detection. Image classification. OCR. Quality inspection.\n\nModel geliştirme: Deep learning models. Labeled dataset. Data augmentation. Model optimization.\n\nDeployment: Gerçek zamanlı işleme. API endpoint.",
+    "description": "Güvenlik ve kalite kontrolü için görüntü analizi ve anomali tespiti sistemi geliştirmek istiyoruz. OpenCV, TensorFlow veya PyTorch kullanılacak. Görüntü işleme için object detection yapılmalı. Image classification yapılmalı. OCR özellikleri eklenmeli. Quality inspection yapılabilmeli. Model geliştirme için deep learning models oluşturulmalı. Labeled dataset hazırlanmalı. Data augmentation yapılmalı. Model optimization yapılmalı. Deployment için gerçek zamanlı işleme yapılabilmeli. API endpoint oluşturulmalı.",
     "budget": 80000,
     "deadline": "2025-05-10T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Data Pipeline ve ETL",
-    "description": "Çoklu veri kaynaklarından günlük milyonlarca kaydı işleyebilen ETL pipeline. Python ve SQL.\n\nETL süreci: Data extraction (databases, APIs, files). Data transformation. Data loading. Error handling.\n\nOtomasyon: Scheduling (Airflow, Prefect). Monitoring.\n\nOptimizasyon: Incremental loading. Data quality checks. Performance optimization.\n\nDokümantasyon ve alerting.",
+    "description": "Çoklu veri kaynaklarından günlük milyonlarca kaydı işleyebilen ETL pipeline geliştirmek istiyoruz. Python ve SQL kullanılacak. ETL süreci için data extraction (databases, APIs, files) yapılmalı. Data transformation yapılmalı. Data loading yapılmalı. Error handling yapılmalı. Otomasyon için scheduling (Airflow, Prefect) yapılandırılmalı. Monitoring yapılmalı. Optimizasyon için incremental loading yapılmalı. Data quality checks yapılmalı. Performance optimization yapılmalı. Dokümantasyon hazırlanmalı. Alerting sistemi kurulmalı.",
     "budget": 55000,
     "deadline": "2025-04-10T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Recommendation System",
-    "description": "E-ticaret platformu için kişiselleştirilmiş ürün önerileri. Collaborative filtering, content-based filtering, hybrid approach.\n\nAlgoritma: Matrix factorization. Python, ML libraries (scikit-learn, Surprise). User-item interaction data.\n\nDeployment: Gerçek zamanlı öneriler. API endpoint.\n\nDeğerlendirme: Precision, recall, NDCG metrikleri. A/B testing. Cold start problem çözümü.",
+    "description": "E-ticaret platformumuz için kişiselleştirilmiş ürün önerileri sistemi geliştirmek istiyoruz. Collaborative filtering, content-based filtering, hybrid approach kullanılacak. Algoritma için matrix factorization yapılmalı. Python, ML libraries (scikit-learn, Surprise) kullanılmalı. User-item interaction data hazırlanmalı. Deployment için gerçek zamanlı öneriler yapılabilmeli. API endpoint oluşturulmalı. Değerlendirme için precision, recall, NDCG metrikleri hesaplanmalı. A/B testing yapılabilir. Cold start problem çözümü yapılmalı.",
     "budget": 70000,
     "deadline": "2025-04-30T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Data Warehouse Tasarımı",
-    "description": "Kurumsal şirket için farklı kaynaklardan gelen verileri birleştiren data warehouse. Star/snowflake schema.\n\nVeri modeli: Fact tables, dimension tables. ETL processes. Optimal veri yapısı.\n\nRaporlama: Business intelligence raporları. OLAP cubes.\n\nAltyapı: SQL Server veya PostgreSQL. Index optimization.\n\nYönetim: Data quality management. Dokümantasyon. Maintenance plan.",
+    "description": "Kurumsal şirketimiz için farklı kaynaklardan gelen verileri birleştiren data warehouse tasarlamak istiyoruz. Star/snowflake schema kullanılacak. Veri modeli için fact tables, dimension tables oluşturulmalı. ETL processes kurulmalı. Optimal veri yapısı tasarlanmalı. Raporlama için business intelligence raporları oluşturulmalı. OLAP cubes yapılandırılmalı. Altyapı için SQL Server veya PostgreSQL kullanılmalı. Index optimization yapılmalı. Yönetim için data quality management yapılmalı. Dokümantasyon hazırlanmalı. Maintenance plan oluşturulmalı.",
     "budget": 60000,
     "deadline": "2025-04-15T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Time Series Forecasting",
-    "description": "Finansal hizmetler şirketi için finansal göstergeleri tahmin eden zaman serisi modeli. ARIMA, Prophet veya LSTM.\n\nAnaliz: Time series decomposition (trend, seasonality). Data preprocessing. Feature engineering.\n\nDeğerlendirme: MAPE, RMSE metrikleri. Cross-validation.\n\nDeployment: Production ortamı. Gerçek zamanlı tahmin. Python. Visualization. Confidence intervals. Model retraining.",
+    "description": "Finansal hizmetler şirketimiz için finansal göstergeleri tahmin eden zaman serisi modeli geliştirmek istiyoruz. ARIMA, Prophet veya LSTM kullanılacak. Analiz için time series decomposition (trend, seasonality) yapılmalı. Data preprocessing yapılmalı. Feature engineering yapılmalı. Değerlendirme için MAPE, RMSE metrikleri hesaplanmalı. Cross-validation yapılmalı. Deployment için production ortamına alım yapılmalı. Gerçek zamanlı tahmin yapılabilmeli. Python kullanılmalı. Visualization yapılmalı. Confidence intervals hesaplanmalı. Model retraining yapılmalı.",
     "budget": 65000,
     "deadline": "2025-04-20T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Data Visualization ve Dashboard",
-    "description": "İş zekası ekibi için karmaşık verileri anlaşılır şekilde sunan interaktif görselleştirme dashboard'u. Python (Plotly/Dash) veya JavaScript (D3.js).\n\nGörselleştirme: Interactive visualizations. Gerçek zamanlı veri güncellemeleri (WebSocket/polling). Custom charts.\n\nAnaliz: Filtreleme, drill-down. Export features.\n\nPerformans: Büyük veri setleri için optimizasyon. User authentication.",
+    "description": "İş zekası ekibimiz için karmaşık verileri anlaşılır şekilde sunan interaktif görselleştirme dashboard'u geliştirmek istiyoruz. Python (Plotly/Dash) veya JavaScript (D3.js) kullanılacak. Görselleştirme için interactive visualizations oluşturulmalı. Gerçek zamanlı veri güncellemeleri (WebSocket/polling) yapılabilmeli. Custom charts oluşturulmalı. Analiz için filtreleme, drill-down özellikleri olmalı. Export features eklenmeli. Performans için büyük veri setleri için optimizasyon yapılmalı. User authentication yapılmalı.",
     "budget": 45000,
     "deadline": "2025-03-25T00:00:00.000Z",
     "status": "open"

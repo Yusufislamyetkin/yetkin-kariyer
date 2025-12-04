@@ -658,9 +658,16 @@ export default function HackatonDetailPage() {
               <div>
                 <h1 className="text-2xl font-semibold md:text-3xl">{detail.hackathon.title}</h1>
                 {detail.hackathon.description && (
-                  <p className="mt-2 max-w-2xl text-sm text-white/80">
-                    {detail.hackathon.description}
-                  </p>
+                  <div className="mt-2 max-w-2xl space-y-2">
+                    {detail.hackathon.description
+                      .split('\n\n')
+                      .filter(paragraph => paragraph.trim().length > 0)
+                      .map((paragraph, index) => (
+                        <p key={index} className="text-sm text-white/80">
+                          {paragraph.trim()}
+                        </p>
+                      ))}
+                  </div>
                 )}
                 <p className="mt-4 text-xs uppercase tracking-wide text-white/70">
                   Zaman Dilimi: {detail.hackathon.timezone}

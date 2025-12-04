@@ -11,6 +11,7 @@ type ChatShellProps = {
   overlay?: ReactNode;
   mobileSidebarOpen: boolean;
   onToggleMobileSidebar: (value: boolean) => void;
+  mobileHeaderActions?: ReactNode;
   className?: string;
 };
 
@@ -22,6 +23,7 @@ export function ChatShell({
   overlay,
   mobileSidebarOpen,
   onToggleMobileSidebar,
+  mobileHeaderActions,
   className,
 }: ChatShellProps) {
   return (
@@ -58,6 +60,12 @@ export function ChatShell({
               )}
             </Button>
           </div>
+
+          {mobileHeaderActions && (
+            <div className="lg:hidden absolute top-4 right-4 z-20">
+              {mobileHeaderActions}
+            </div>
+          )}
 
           {conversationHeader}
 

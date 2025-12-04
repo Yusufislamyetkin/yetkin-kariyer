@@ -1,70 +1,70 @@
 [
   {
     "title": "Mobil Uygulama UI/UX Tasarımı",
-    "description": "Kullanıcı deneyimini ön planda tutan, modern tasarım trendlerini yansıtan mobil uygulama tasarımı.\n\nAraştırma: Hedef kitle analizi, user personas, user journey mapping.\n\nTaslak: Low-fidelity wireframing. Information architecture.\n\nGörsel tasarım: High-fidelity tasarımlar. Design system: renk paleti, tipografi, iconography.\n\nPrototipleme: Figma veya Adobe XD ile interaktif prototipler. User testing.\n\nUyumluluk: Farklı ekran boyutları için responsive design. Accessibility guidelines. Design handoff.",
+    "description": "Kullanıcı deneyimini ön planda tutan, modern tasarım trendlerini yansıtan mobil uygulama tasarımı yapmak istiyoruz. Araştırma kısmında hedef kitle analizi, user personas, user journey mapping yapılmalı. Taslak için low-fidelity wireframing yapılmalı. Information architecture oluşturulmalı. Görsel tasarım için high-fidelity tasarımlar hazırlanmalı. Design system oluşturulmalı - renk paleti, tipografi, iconography. Prototipleme için Figma veya Adobe XD ile interaktif prototipler oluşturulmalı. User testing yapılmalı. Uyumluluk için farklı ekran boyutları için responsive design yapılmalı. Accessibility guidelines uygulanmalı. Design handoff yapılmalı.",
     "budget": 45000,
     "deadline": "2025-03-25T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Web Sitesi Redesign",
-    "description": "Mevcut web sitesinin modern ve kullanıcı dostu şekilde yeniden tasarlanması. Marka kimliğini yansıtan, dönüşüm oranını artıran çözüm.\n\nAnaliz: Mevcut site analizi, rakip analizi, kullanıcı geri bildirimleri.\n\nYapı: Information architecture, içerik stratejisi.\n\nTasarım: Modern UI trends. Interaktif prototipler. User testing.\n\nOptimizasyon: Mobil uyumluluk. Sayfa yükleme hızı. SEO considerations.",
+    "description": "Mevcut web sitemizin modern ve kullanıcı dostu şekilde yeniden tasarlanması gerekiyor. Marka kimliğimizi yansıtan, dönüşüm oranını artıran çözüm arıyoruz. Analiz için mevcut site analizi, rakip analizi, kullanıcı geri bildirimleri toplanmalı. Yapı için information architecture, içerik stratejisi oluşturulmalı. Tasarım için modern UI trends uygulanmalı. Interaktif prototipler hazırlanmalı. User testing yapılmalı. Optimizasyon için mobil uyumluluk sağlanmalı. Sayfa yükleme hızı optimize edilmeli. SEO considerations yapılmalı.",
     "budget": 40000,
     "deadline": "2025-03-20T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "E-ticaret Platformu UI/UX Tasarımı",
-    "description": "Satış dönüşümünü artıran, kullanıcı deneyimini optimize eden e-ticaret platformu tasarımı.\n\nAraştırma: Alışveriş davranışları analizi. Conversion optimization.\n\nSayfa tasarımları: Ürün sayfaları, sepet ve checkout akışı.\n\nGörsel: Marka kimliğine uygun tasarım. Ürün fotoğraf standartları.\n\nTest: Prototyping, A/B testing alternatifleri.\n\nYaklaşım: Mobile-first. Accessibility. Design system.",
+    "description": "Satış dönüşümünü artıran, kullanıcı deneyimini optimize eden e-ticaret platformu tasarımı yapmak istiyoruz. Araştırma için alışveriş davranışları analizi yapılmalı. Conversion optimization yapılmalı. Sayfa tasarımları için ürün sayfaları, sepet ve checkout akışı tasarlanmalı. Görsel için marka kimliğine uygun tasarım yapılmalı. Ürün fotoğraf standartları belirlenmeli. Test için prototyping, A/B testing alternatifleri hazırlanmalı. Yaklaşım olarak mobile-first uygulanmalı. Accessibility sağlanmalı. Design system oluşturulmalı.",
     "budget": 55000,
     "deadline": "2025-04-05T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Dashboard ve Admin Panel Tasarımı",
-    "description": "Karmaşık verileri anlaşılır şekilde sunan kurumsal dashboard ve admin panel tasarımı.\n\nVeri görselleştirme: Grafik ve tablo tasarımları. Information hierarchy.\n\nİş akışları: Kullanıcı iş akışları. Form tasarımları.\n\nGörsel: Modern ve profesyonel tasarım. Component library.\n\nPrototipleme: Interaktif prototipler. User testing.\n\nUyumluluk: Responsive design. Dark mode. Accessibility guidelines.",
+    "description": "Karmaşık verileri anlaşılır şekilde sunan kurumsal dashboard ve admin panel tasarımı yapmak istiyoruz. Veri görselleştirme için grafik ve tablo tasarımları yapılmalı. Information hierarchy oluşturulmalı. İş akışları için kullanıcı iş akışları tasarlanmalı. Form tasarımları yapılmalı. Görsel için modern ve profesyonel tasarım yapılmalı. Component library oluşturulmalı. Prototipleme için interaktif prototipler hazırlanmalı. User testing yapılmalı. Uyumluluk için responsive design yapılmalı. Dark mode desteği eklenmeli. Accessibility guidelines uygulanmalı.",
     "budget": 48000,
     "deadline": "2025-03-30T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Landing Page Tasarımı",
-    "description": "Ziyaretçileri harekete geçiren, dönüşüm oranını maksimize eden ürün lansman landing page'i.\n\nDönüşüm odaklı: Hero section, value proposition, CTA butonları.\n\nGörsel: Zengin tasarım, smooth animasyonlar.\n\nTest: Interaktif prototip, user testing.\n\nOptimizasyon: Mobile-first, sayfa hızı, A/B testing alternatifleri.",
+    "description": "Ziyaretçileri harekete geçiren, dönüşüm oranını maksimize eden ürün lansman landing page'i tasarlamak istiyoruz. Dönüşüm odaklı olarak hero section, value proposition, CTA butonları tasarlanmalı. Görsel için zengin tasarım, smooth animasyonlar eklenmeli. Test için interaktif prototip hazırlanmalı. User testing yapılmalı. Optimizasyon için mobile-first yaklaşım uygulanmalı. Sayfa hızı optimize edilmeli. A/B testing alternatifleri hazırlanmalı.",
     "budget": 25000,
     "deadline": "2025-02-20T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Brand Identity ve Logo Tasarımı",
-    "description": "Markanın kişiliğini yansıtan, akılda kalıcı brand identity ve logo tasarımı.\n\nAraştırma: Marka analizi, rakip analizi, marka konumlandırması.\n\nLogo: Marka logosu, farklı kullanım senaryoları için varyasyonlar.\n\nMarka öğeleri: Renk paleti, tipografi.\n\nKılavuz: Brand guidelines, logo kullanım örnekleri.\n\nDosyalar: Digital assets (SVG, PNG, PDF), print-ready files.",
+    "description": "Markamızın kişiliğini yansıtan, akılda kalıcı brand identity ve logo tasarımı yapmak istiyoruz. Araştırma için marka analizi, rakip analizi, marka konumlandırması yapılmalı. Logo için marka logosu, farklı kullanım senaryoları için varyasyonlar oluşturulmalı. Marka öğeleri için renk paleti, tipografi belirlenmeli. Kılavuz için brand guidelines, logo kullanım örnekleri hazırlanmalı. Dosyalar için digital assets (SVG, PNG, PDF), print-ready files oluşturulmalı.",
     "budget": 30000,
     "deadline": "2025-02-25T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "SaaS Platform UI/UX Tasarımı",
-    "description": "Profesyonel kullanıcılar için optimize edilmiş, verimliliği artıran B2B SaaS platformu tasarımı.\n\nAraştırma: Hedef kullanıcı analizi, görev analizi.\n\nYapı: Platform yapısı, navigasyon optimizasyonu.\n\nÖzellikler: Platform özellikleri, iş akışı optimizasyonu.\n\nTasarım: Modern ve profesyonel, scalable design system.\n\nTest: Interaktif prototipler, user testing. Responsive design.",
+    "description": "Profesyonel kullanıcılar için optimize edilmiş, verimliliği artıran B2B SaaS platformu tasarımı yapmak istiyoruz. Araştırma için hedef kullanıcı analizi, görev analizi yapılmalı. Yapı için platform yapısı, navigasyon optimizasyonu yapılmalı. Özellikler için platform özellikleri, iş akışı optimizasyonu yapılmalı. Tasarım için modern ve profesyonel, scalable design system oluşturulmalı. Test için interaktif prototipler hazırlanmalı. User testing yapılmalı. Responsive design yapılmalı.",
     "budget": 60000,
     "deadline": "2025-04-15T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Mobile App Icon ve Splash Screen Tasarımı",
-    "description": "App Store ve Google Play Store standartlarına uygun app icon ve splash screen tasarımı.\n\nIcon: Uygulama ikonu, farklı boyutlarda varyasyonlar (iOS, Android).\n\nSplash screen: Açılış ekranı, marka tutarlılığı.\n\nGörsel: Çekici tasarım, platform standartlarına uyum.\n\nDosyalar: Asset preparation, export optimizasyonu.\n\nVaryasyonlar: Farklı tema seçenekleri, A/B testing alternatifleri.",
+    "description": "App Store ve Google Play Store standartlarına uygun app icon ve splash screen tasarımı yapmak istiyoruz. Icon için uygulama ikonu, farklı boyutlarda varyasyonlar (iOS, Android) oluşturulmalı. Splash screen için açılış ekranı, marka tutarlılığı sağlanmalı. Görsel için çekici tasarım, platform standartlarına uyum sağlanmalı. Dosyalar için asset preparation, export optimizasyonu yapılmalı. Varyasyonlar için farklı tema seçenekleri, A/B testing alternatifleri hazırlanmalı.",
     "budget": 15000,
     "deadline": "2025-02-10T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "E-learning Platform UI/UX Tasarımı",
-    "description": "Öğrenme deneyimini optimize eden, öğrenci motivasyonunu artıran online eğitim platformu tasarımı.\n\nAraştırma: Öğrenci ihtiyaçları, öğrenme deneyimi tasarımı.\n\nSayfa tasarımları: Ders sayfaları, video oynatıcı arayüzü.\n\nİlerleme: İlerleme takibi görselleştirmesi, oyunlaştırma öğeleri.\n\nGörsel: Modern ve ilham verici tasarım, tutarlı design system.\n\nTest: Interaktif prototipler, user testing. Responsive design.",
+    "description": "Öğrenme deneyimini optimize eden, öğrenci motivasyonunu artıran online eğitim platformu tasarımı yapmak istiyoruz. Araştırma için öğrenci ihtiyaçları, öğrenme deneyimi tasarımı yapılmalı. Sayfa tasarımları için ders sayfaları, video oynatıcı arayüzü tasarlanmalı. İlerleme için ilerleme takibi görselleştirmesi, oyunlaştırma öğeleri eklenmeli. Görsel için modern ve ilham verici tasarım, tutarlı design system oluşturulmalı. Test için interaktif prototipler hazırlanmalı. User testing yapılmalı. Responsive design yapılmalı.",
     "budget": 50000,
     "deadline": "2025-04-10T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Design System Oluşturma",
-    "description": "Tüm ürünlerde tutarlı tasarım sağlayan kurumsal design system.\n\nComponent library: Button, input, card, modal gibi temel component'ler.\n\nDesign tokens: Renk, tipografi, spacing, shadow. Typography system.\n\nSistemler: Color system, icon system.\n\nDokümantasyon: Component kullanım kılavuzu, code examples.\n\nAraçlar: Figma library, Storybook, version control.",
+    "description": "Tüm ürünlerde tutarlı tasarım sağlayan kurumsal design system oluşturmak istiyoruz. Component library için button, input, card, modal gibi temel component'ler oluşturulmalı. Design tokens için renk, tipografi, spacing, shadow belirlenmeli. Typography system oluşturulmalı. Sistemler için color system, icon system oluşturulmalı. Dokümantasyon için component kullanım kılavuzu, code examples hazırlanmalı. Araçlar için Figma library, Storybook, version control yapılandırılmalı.",
     "budget": 55000,
     "deadline": "2025-04-12T00:00:00.000Z",
     "status": "open"

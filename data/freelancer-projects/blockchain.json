@@ -1,70 +1,70 @@
 [
   {
     "title": "Ethereum Smart Contract Geliştirme",
-    "description": "DeFi projesi için güvenli ve gas-efficient Ethereum smart contract. Solidity programlama dili.\n\nContract geliştirme: Token, staking, yield farming contract'ları. Security audit. Common vulnerabilities kontrolü (reentrancy, overflow).\n\nTest: Unit ve integration testler. Hardhat veya Truffle framework.\n\nOptimizasyon: Gas optimization. Dokümantasyon.\n\nDeployment: Testnet ve mainnet. Frontend integration. Monitoring.",
+    "description": "DeFi projemiz için güvenli ve gas-efficient Ethereum smart contract geliştirmek istiyoruz. Solidity programlama dili kullanılacak. Contract geliştirme için token, staking, yield farming contract'ları oluşturulmalı. Security audit yapılmalı. Common vulnerabilities kontrolü yapılmalı (reentrancy, overflow). Test için unit ve integration testler yazılmalı. Hardhat veya Truffle framework kullanılmalı. Optimizasyon için gas optimization yapılmalı. Dokümantasyon hazırlanmalı. Deployment için testnet ve mainnet deployment yapılmalı. Frontend integration yapılmalı. Monitoring yapılmalı.",
     "budget": 75000,
     "deadline": "2025-05-10T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "NFT Marketplace Geliştirme",
-    "description": "NFT minting, satış ve alım işlemlerini destekleyen marketplace platformu.\n\nSmart contract: NFT contract (ERC-721/ERC-1155), marketplace contract. IPFS entegrasyonu.\n\nFrontend: React/Next.js. Web3.js veya Ethers.js. Wallet integration (MetaMask, WalletConnect). Payment processing (ETH, token).\n\nKullanıcı arayüzü: NFT gallery, detail page, profile page. Search ve filtering.\n\nGüvenlik: Security audit. Testing. Dokümantasyon.",
+    "description": "NFT minting, satış ve alım işlemlerini destekleyen marketplace platformu geliştirmek istiyoruz. Smart contract için NFT contract (ERC-721/ERC-1155), marketplace contract oluşturulmalı. IPFS entegrasyonu yapılmalı. Frontend için React/Next.js kullanılmalı. Web3.js veya Ethers.js kullanılmalı. Wallet integration yapılmalı (MetaMask, WalletConnect). Payment processing yapılmalı (ETH, token). Kullanıcı arayüzü için NFT gallery, detail page, profile page oluşturulmalı. Search ve filtering özellikleri eklenmeli. Güvenlik için security audit yapılmalı. Testing yapılmalı. Dokümantasyon hazırlanmalı.",
     "budget": 95000,
     "deadline": "2025-05-25T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Blockchain Wallet Uygulaması",
-    "description": "Güvenli ve kullanıcı dostu multi-chain cryptocurrency wallet. iOS ve Android. React Native veya Flutter.\n\nCüzdan özellikleri: Cüzdan oluşturma, import, export. Multi-chain support (Ethereum, BSC, Polygon). Transaction management. Token management (ERC-20).\n\nGüvenlik: Private key encryption, biometric authentication. Backup ve recovery.\n\nEk özellikler: DApp browser. NFT support. Güvenlik testleri.",
+    "description": "Güvenli ve kullanıcı dostu multi-chain cryptocurrency wallet geliştirmek istiyoruz. iOS ve Android için React Native veya Flutter kullanılacak. Cüzdan özellikleri için cüzdan oluşturma, import, export yapılabilmeli. Multi-chain support eklenmeli (Ethereum, BSC, Polygon). Transaction management yapılabilmeli. Token management (ERC-20) yapılabilmeli. Güvenlik için private key encryption, biometric authentication yapılmalı. Backup ve recovery özellikleri eklenmeli. Ek özellikler için DApp browser eklenebilir. NFT support eklenebilir. Güvenlik testleri yapılmalı.",
     "budget": 110000,
     "deadline": "2025-06-05T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "DeFi Yield Farming Platformu",
-    "description": "Kullanıcıların likidite sağlayıp kazanç elde etmesini sağlayan DeFi yield farming platformu.\n\nSmart contract: Liquidity pool, staking, reward distribution contract'ları. AMM algoritması.\n\nFrontend: React/Next.js. Web3 integration.\n\nLikidite yönetimi: Likidite ekleme, çıkarma, stake etme. Reward calculation.\n\nAnalitik: Analytics dashboard (APY, TVL, user stats). Historical data.\n\nGüvenlik: Security audit. Risk assessment. Dokümantasyon.",
+    "description": "Kullanıcıların likidite sağlayıp kazanç elde etmesini sağlayan DeFi yield farming platformu geliştirmek istiyoruz. Smart contract için liquidity pool, staking, reward distribution contract'ları oluşturulmalı. AMM algoritması implementasyonu yapılmalı. Frontend için React/Next.js kullanılmalı. Web3 integration yapılmalı. Likidite yönetimi için likidite ekleme, çıkarma, stake etme yapılabilmeli. Reward calculation yapılmalı. Analitik için analytics dashboard oluşturulmalı (APY, TVL, user stats). Historical data görüntülenebilmeli. Güvenlik için security audit yapılmalı. Risk assessment yapılmalı. Dokümantasyon hazırlanmalı.",
     "budget": 120000,
     "deadline": "2025-06-15T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Blockchain Supply Chain Çözümü",
-    "description": "Tedarik zinciri yönetimi için ürün takibi ve doğrulama sağlayan blockchain çözümü.\n\nPlatform: Ethereum, Hyperledger veya Polygon seçimi. Smart contract development.\n\nTakip: Product tracking. QR code/NFC integration.\n\nDoğrulama: Verification system. Immutable records.\n\nUygulama: Web/mobil uygulama. API integration.\n\nAnalitik: Analytics dashboard. Reporting. Dokümantasyon.",
+    "description": "Tedarik zinciri yönetimimiz için ürün takibi ve doğrulama sağlayan blockchain çözümü geliştirmek istiyoruz. Ethereum, Hyperledger veya Polygon seçimi yapılabilir. Smart contract development yapılmalı. Takip için product tracking yapılmalı. QR code/NFC integration yapılmalı. Doğrulama için verification system kurulmalı. Immutable records tutulmalı. Uygulama için web/mobil uygulama geliştirilmeli. API integration yapılmalı. Analitik için analytics dashboard oluşturulmalı. Reporting yapılabilmeli. Dokümantasyon hazırlanmalı.",
     "budget": 100000,
     "deadline": "2025-06-01T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Token Launch ve ICO Platformu",
-    "description": "Güvenli token satışı sağlayan token launch ve ICO platformu.\n\nSmart contract: Token contract (ERC-20), crowdsale contract. Tokenomics design.\n\nFrontend: Token sale sayfası. KYC/AML integration.\n\nÖdeme: ETH ve stablecoin ödemeleri. Vesting mechanism.\n\nYönetim: Dashboard (token sale istatistikleri). Admin panel.\n\nGüvenlik: Security audit. Legal compliance. Dokümantasyon.",
+    "description": "Güvenli token satışı sağlayan token launch ve ICO platformu geliştirmek istiyoruz. Smart contract için token contract (ERC-20), crowdsale contract oluşturulmalı. Tokenomics design yapılmalı. Frontend için token sale sayfası oluşturulmalı. KYC/AML integration yapılmalı. Ödeme için ETH ve stablecoin ödemeleri desteklenmeli. Vesting mechanism kurulmalı. Yönetim için dashboard oluşturulmalı (token sale istatistikleri). Admin panel oluşturulmalı. Güvenlik için security audit yapılmalı. Legal compliance sağlanmalı. Dokümantasyon hazırlanmalı.",
     "budget": 85000,
     "deadline": "2025-05-20T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Blockchain Explorer Geliştirme",
-    "description": "Özel blockchain ağı için blokları, işlemleri ve adresleri görüntüleyen explorer.\n\nBackend: Blockchain node entegrasyonu. Indexing service.\n\nAPI: RESTful API. GraphQL API.\n\nFrontend: React/Next.js. Gerçek zamanlı güncellemeler.\n\nArama: Blok, işlem, adres arama. Analytics dashboard.\n\nPerformans: Performance optimization. Caching strategy. Dokümantasyon.",
+    "description": "Özel blockchain ağımız için blokları, işlemleri ve adresleri görüntüleyen explorer geliştirmek istiyoruz. Backend için blockchain node entegrasyonu yapılmalı. Indexing service kurulmalı. API için RESTful API, GraphQL API oluşturulmalı. Frontend için React/Next.js kullanılmalı. Gerçek zamanlı güncellemeler yapılabilmeli. Arama için blok, işlem, adres arama yapılabilmeli. Analytics dashboard oluşturulmalı. Performans için performance optimization yapılmalı. Caching strategy uygulanmalı. Dokümantasyon hazırlanmalı.",
     "budget": 70000,
     "deadline": "2025-05-05T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "DAO (Decentralized Autonomous Organization) Platformu",
-    "description": "Topluluk yönetimi ve karar alma süreçlerini blockchain üzerinde yöneten DAO platformu.\n\nSmart contract: Governance contract'ları. Voting mechanism.\n\nSistem: Proposal system. Token-based voting.\n\nFrontend: React/Next.js. Web3 integration.\n\nYönetim: Governance dashboard (öneriler, oylamalar, sonuçlar). Treasury management.\n\nGüvenlik: Security audit. Testing. Dokümantasyon.",
+    "description": "Topluluk yönetimi ve karar alma süreçlerini blockchain üzerinde yöneten DAO platformu geliştirmek istiyoruz. Smart contract için governance contract'ları oluşturulmalı. Voting mechanism kurulmalı. Sistem için proposal system oluşturulmalı. Token-based voting yapılabilmeli. Frontend için React/Next.js kullanılmalı. Web3 integration yapılmalı. Yönetim için governance dashboard oluşturulmalı (öneriler, oylamalar, sonuçlar). Treasury management yapılabilmeli. Güvenlik için security audit yapılmalı. Testing yapılmalı. Dokümantasyon hazırlanmalı.",
     "budget": 105000,
     "deadline": "2025-06-10T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Cross-chain Bridge Geliştirme",
-    "description": "Farklı blockchain ağları arasında güvenli ve hızlı token transferi sağlayan cross-chain bridge.\n\nSmart contract: Source ve destination chain contract'ları. Bridge mechanism (token lock/unlock).\n\nServis: Relayer service. Oracle integration.\n\nUygulama: Bridge arayüzü. Transaction tracking.\n\nGüvenlik: Security audit. Multi-signature wallet.\n\nTest ve izleme: Testing. Dokümantasyon. Monitoring.",
+    "description": "Farklı blockchain ağları arasında güvenli ve hızlı token transferi sağlayan cross-chain bridge geliştirmek istiyoruz. Smart contract için source ve destination chain contract'ları oluşturulmalı. Bridge mechanism kurulmalı (token lock/unlock). Servis için relayer service kurulmalı. Oracle integration yapılmalı. Uygulama için bridge arayüzü oluşturulmalı. Transaction tracking yapılabilmeli. Güvenlik için security audit yapılmalı. Multi-signature wallet kurulmalı. Test ve izleme için testing yapılmalı. Dokümantasyon hazırlanmalı. Monitoring yapılmalı.",
     "budget": 130000,
     "deadline": "2025-06-20T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Blockchain Gaming Platformu",
-    "description": "Play-to-earn blockchain oyun platformu. NFT karakterler, token ödülleri ve marketplace.\n\nOyun geliştirme: Oyun mekanikleri. NFT integration. Smart contract development. Token contract.\n\nMarketplace: NFT alım-satım. Staking mechanism.\n\nFrontend: Oyun arayüzü. Web3 integration. Wallet integration.\n\nÖzellikler: Leaderboard. Security audit.",
+    "description": "Play-to-earn blockchain oyun platformu geliştirmek istiyoruz. NFT karakterler, token ödülleri ve marketplace özellikleri olacak. Oyun geliştirme için oyun mekanikleri tasarlanmalı. NFT integration yapılmalı. Smart contract development yapılmalı. Token contract oluşturulmalı. Marketplace için NFT alım-satım yapılabilmeli. Staking mechanism kurulmalı. Frontend için oyun arayüzü oluşturulmalı. Web3 integration yapılmalı. Wallet integration yapılmalı. Özellikler için leaderboard eklenebilir. Security audit yapılmalı.",
     "budget": 140000,
     "deadline": "2025-06-25T00:00:00.000Z",
     "status": "open"

@@ -1,7 +1,7 @@
 [
   {
     "id": "modern",
-    "name": "Modern CV",
+    "name": "ATS Uyumlu CV Kod: 01",
     "preview": null,
     "structure": {
       "sections": [
@@ -23,7 +23,7 @@
   },
   {
     "id": "classic",
-    "name": "Klasik CV",
+    "name": "ATS Uyumlu CV Kod: 02",
     "preview": null,
     "structure": {
       "sections": [
@@ -45,7 +45,7 @@
   },
   {
     "id": "creative",
-    "name": "Yaratıcı CV",
+    "name": "ATS Uyumlu CV Kod: 03",
     "preview": null,
     "structure": {
       "sections": [
@@ -67,7 +67,7 @@
   },
   {
     "id": "professional",
-    "name": "Profesyonel CV",
+    "name": "ATS Uyumlu CV Kod: 04",
     "preview": null,
     "structure": {
       "sections": [
@@ -89,7 +89,7 @@
   },
   {
     "id": "minimal",
-    "name": "Minimal CV",
+    "name": "ATS Uyumlu CV Kod: 05",
     "preview": null,
     "structure": {
       "sections": [
@@ -111,7 +111,7 @@
   },
   {
     "id": "executive",
-    "name": "Yönetici CV",
+    "name": "ATS Uyumlu CV Kod: 06",
     "preview": null,
     "structure": {
       "sections": [
@@ -133,7 +133,7 @@
   },
   {
     "id": "colorful",
-    "name": "Renkli CV",
+    "name": "ATS Uyumlu CV Kod: 07",
     "preview": null,
     "structure": {
       "sections": [
@@ -155,7 +155,7 @@
   },
   {
     "id": "tech",
-    "name": "Teknoloji CV",
+    "name": "ATS Uyumlu CV Kod: 08",
     "preview": null,
     "structure": {
       "sections": [
@@ -177,7 +177,7 @@
   },
   {
     "id": "academic",
-    "name": "Akademik CV",
+    "name": "ATS Uyumlu CV Kod: 09",
     "preview": null,
     "structure": {
       "sections": [
@@ -198,7 +198,7 @@
   },
   {
     "id": "startup",
-    "name": "Startup CV",
+    "name": "ATS Uyumlu CV Kod: 10",
     "preview": null,
     "structure": {
       "sections": [
@@ -217,7 +217,7 @@
   },
   {
     "id": "designer",
-    "name": "Tasarımcı CV",
+    "name": "ATS Uyumlu CV Kod: 11",
     "preview": null,
     "structure": {
       "sections": [
@@ -236,7 +236,7 @@
   },
   {
     "id": "finance",
-    "name": "Finans CV",
+    "name": "ATS Uyumlu CV Kod: 12",
     "preview": null,
     "structure": {
       "sections": [
@@ -255,7 +255,7 @@
   },
   {
     "id": "medical",
-    "name": "Tıp CV",
+    "name": "ATS Uyumlu CV Kod: 13",
     "preview": null,
     "structure": {
       "sections": [
@@ -274,7 +274,7 @@
   },
   {
     "id": "legal",
-    "name": "Hukuk CV",
+    "name": "ATS Uyumlu CV Kod: 14",
     "preview": null,
     "structure": {
       "sections": [
@@ -293,7 +293,7 @@
   },
   {
     "id": "marketing",
-    "name": "Pazarlama CV",
+    "name": "ATS Uyumlu CV Kod: 15",
     "preview": null,
     "structure": {
       "sections": [
@@ -312,7 +312,7 @@
   },
   {
     "id": "engineering",
-    "name": "Mühendislik CV",
+    "name": "ATS Uyumlu CV Kod: 16",
     "preview": null,
     "structure": {
       "sections": [
@@ -331,7 +331,7 @@
   },
   {
     "id": "sales",
-    "name": "Satış CV",
+    "name": "ATS Uyumlu CV Kod: 17",
     "preview": null,
     "structure": {
       "sections": [
@@ -349,7 +349,7 @@
   },
   {
     "id": "education",
-    "name": "Eğitim CV",
+    "name": "ATS Uyumlu CV Kod: 18",
     "preview": null,
     "structure": {
       "sections": [
@@ -368,7 +368,7 @@
   },
   {
     "id": "artistic",
-    "name": "Sanatsal CV",
+    "name": "ATS Uyumlu CV Kod: 19",
     "preview": null,
     "structure": {
       "sections": [
@@ -386,7 +386,7 @@
   },
   {
     "id": "bold",
-    "name": "Cesur CV",
+    "name": "ATS Uyumlu CV Kod: 20",
     "preview": null,
     "structure": {
       "sections": [
@@ -405,7 +405,7 @@
   },
   {
     "id": "elegant",
-    "name": "Zarif CV",
+    "name": "ATS Uyumlu CV Kod: 21",
     "preview": null,
     "structure": {
       "sections": [
@@ -424,7 +424,7 @@
   },
   {
     "id": "corporate",
-    "name": "Kurumsal CV",
+    "name": "ATS Uyumlu CV Kod: 22",
     "preview": null,
     "structure": {
       "sections": [
@@ -443,7 +443,7 @@
   },
   {
     "id": "innovative",
-    "name": "Yenilikçi CV",
+    "name": "ATS Uyumlu CV Kod: 23",
     "preview": null,
     "structure": {
       "sections": [
@@ -462,7 +462,7 @@
   },
   {
     "id": "timeline",
-    "name": "Zaman Çizelgesi CV",
+    "name": "ATS Uyumlu CV Kod: 24",
     "preview": null,
     "structure": {
       "sections": [
@@ -481,7 +481,7 @@
   },
   {
     "id": "portfolio",
-    "name": "Portföy CV",
+    "name": "ATS Uyumlu CV Kod: 25",
     "preview": null,
     "structure": {
       "sections": [
@@ -500,7 +500,7 @@
   },
   {
     "id": "ats-focused",
-    "name": "ATS Odaklı CV",
+    "name": "ATS Uyumlu CV Kod: 26",
     "preview": null,
     "structure": {
       "sections": [
@@ -518,7 +518,7 @@
   },
   {
     "id": "international",
-    "name": "Uluslararası CV",
+    "name": "ATS Uyumlu CV Kod: 27",
     "preview": null,
     "structure": {
       "sections": [
@@ -537,7 +537,7 @@
   },
   {
     "id": "bilingual",
-    "name": "İki Dilli CV",
+    "name": "ATS Uyumlu CV Kod: 28",
     "preview": null,
     "structure": {
       "sections": [
@@ -556,7 +556,7 @@
   },
   {
     "id": "compact",
-    "name": "Kompakt CV",
+    "name": "ATS Uyumlu CV Kod: 29",
     "preview": null,
     "structure": {
       "sections": [
@@ -573,7 +573,7 @@
   },
   {
     "id": "detailed",
-    "name": "Detaylı CV",
+    "name": "ATS Uyumlu CV Kod: 30",
     "preview": null,
     "structure": {
       "sections": [
@@ -595,7 +595,7 @@
   },
   {
     "id": "developer",
-    "name": "Geliştirici CV",
+    "name": "ATS Uyumlu CV Kod: 31",
     "preview": null,
     "structure": {
       "sections": [
@@ -614,7 +614,7 @@
   },
   {
     "id": "devops",
-    "name": "DevOps CV",
+    "name": "ATS Uyumlu CV Kod: 32",
     "preview": null,
     "structure": {
       "sections": [
@@ -633,7 +633,7 @@
   },
   {
     "id": "research",
-    "name": "Araştırma CV",
+    "name": "ATS Uyumlu CV Kod: 33",
     "preview": null,
     "structure": {
       "sections": [
@@ -653,7 +653,7 @@
   },
   {
     "id": "consultant",
-    "name": "Danışman CV",
+    "name": "ATS Uyumlu CV Kod: 34",
     "preview": null,
     "structure": {
       "sections": [
@@ -672,7 +672,7 @@
   },
   {
     "id": "entrepreneur",
-    "name": "Girişimci CV",
+    "name": "ATS Uyumlu CV Kod: 35",
     "preview": null,
     "structure": {
       "sections": [
@@ -691,7 +691,7 @@
   },
   {
     "id": "student",
-    "name": "Öğrenci CV",
+    "name": "ATS Uyumlu CV Kod: 36",
     "preview": null,
     "structure": {
       "sections": [
@@ -711,7 +711,7 @@
   },
   {
     "id": "executive-premium",
-    "name": "Premium Yönetici CV",
+    "name": "ATS Uyumlu CV Kod: 37",
     "preview": null,
     "structure": {
       "sections": [
@@ -730,7 +730,7 @@
   },
   {
     "id": "hybrid",
-    "name": "Hibrit CV",
+    "name": "ATS Uyumlu CV Kod: 38",
     "preview": null,
     "structure": {
       "sections": [

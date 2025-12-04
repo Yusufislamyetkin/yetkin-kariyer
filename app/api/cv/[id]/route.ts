@@ -16,6 +16,17 @@ export async function GET(
       where: { id: params.id },
       include: {
         template: true,
+        uploads: {
+          orderBy: { createdAt: "desc" },
+          select: {
+            id: true,
+            url: true,
+            name: true,
+            mimeType: true,
+            size: true,
+            createdAt: true,
+          },
+        },
       },
     });
 
@@ -84,20 +95,27 @@ export async function DELETE(
 
     const cv = await db.cV.findUnique({
       where: { id: params.id },
+      include: {
+        jobApplications: true,
+      },
     });
 
     if (!cv || cv.userId !== (session.user.id as string)) {
       return NextResponse.json({ error: "CV bulunamadı" }, { status: 404 });
     }
 
+    // CV'yi sil (onDelete: Cascade ile ilgili job applications otomatik silinecek)
     await db.cV.delete({
       where: { id: params.id },
     });
 
     return NextResponse.json({ success: true });
-  } catch (error) {
+  } catch (error: any) {
+    console.error("[CV_DELETE] Hata:", error);
+    // Daha detaylı hata mesajı
+    const errorMessage = error?.message || "CV silinirken bir hata oluştu";
     return NextResponse.json(
-      { error: "CV silinirken bir hata oluştu" },
+      { error: errorMessage },
       { status: 500 }
     );
   }

@@ -1,70 +1,70 @@
 [
   {
     "title": "Full Stack E-ticaret Platformu",
-    "description": "Günlük binlerce siparişi karşılayabilecek kapasitede e-ticaret platformu. React frontend ve Node.js (Express) backend. MongoDB veya PostgreSQL veritabanı.\n\nKullanıcı yönetimi: Kayıt, giriş, profil yönetimi. JWT authentication. E-posta doğrulama ve şifre sıfırlama.\n\nÜrün yönetimi: Ürün ekleme/düzenleme, kategorilendirme. Varyant desteği (beden, renk). Otomatik stok takibi.\n\nSatış süreci: Kullanıcı dostu sepet ve checkout. iyzico ödeme entegrasyonu. Sipariş takibi.\n\nYönetim: Admin paneli, satış istatistikleri raporlama. Mobil uyumluluk. Performans optimizasyonu.",
+    "description": "Günlük binlerce siparişi karşılayabilecek kapasitede e-ticaret platformu geliştirmek istiyoruz. React frontend ve Node.js (Express) backend kullanılacak. MongoDB veya PostgreSQL veritabanı tercih edilebilir. Kullanıcı yönetimi için kayıt, giriş, profil yönetimi özellikleri olmalı. JWT authentication sistemi kurulmalı. E-posta doğrulama ve şifre sıfırlama özellikleri eklenmeli. Ürün yönetimi kısmında ürün ekleme/düzenleme, kategorilendirme yapılabilmeli. Varyant desteği (beden, renk) eklenmeli. Otomatik stok takibi yapılmalı. Satış sürecinde kullanıcı dostu sepet ve checkout akışı tasarlanmalı. iyzico ödeme entegrasyonu yapılmalı. Sipariş takibi özelliği eklenmeli. Yönetim panelinde admin paneli, satış istatistikleri raporlama yapılabilmeli. Mobil uyumluluk sağlanmalı. Performans optimizasyonu yapılmalı.",
     "budget": 120000,
     "deadline": "2025-05-15T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "SaaS Platform Geliştirme",
-    "description": "B2B SaaS platformu için multi-tenant architecture ile birden fazla müşteriye hizmet verebilen full stack çözüm. MERN stack (MongoDB, Express, React, Node.js).\n\nÇoklu müşteri yönetimi: Her müşteri için izole veri yönetimi. Abonelik yönetimi: free, basic, premium planlar. Otomatik faturalandırma.\n\nÖdeme: Kredi kartı işleme (Stripe veya benzer). Webhook handling.\n\nKullanıcı deneyimi: User dashboard, admin panel. Third-party API entegrasyonları.\n\nGüvenlik ve uyumluluk: Data isolation, GDPR/KVKK uyumluluğu. Monitoring ve logging.",
+    "description": "B2B SaaS platformumuz için multi-tenant architecture ile birden fazla müşteriye hizmet verebilen full stack çözüm geliştirmek istiyoruz. MERN stack (MongoDB, Express, React, Node.js) kullanılacak. Çoklu müşteri yönetimi için her müşteri için izole veri yönetimi yapılmalı. Abonelik yönetimi kısmında free, basic, premium planlar desteklenmeli. Otomatik faturalandırma sistemi kurulmalı. Ödeme kısmında kredi kartı işleme (Stripe veya benzer) yapılmalı. Webhook handling özellikleri eklenmeli. Kullanıcı deneyimi için user dashboard, admin panel oluşturulmalı. Third-party API entegrasyonları yapılabilmeli. Güvenlik ve uyumluluk açısından data isolation, GDPR/KVKK uyumluluğu sağlanmalı. Monitoring ve logging sistemi kurulmalı.",
     "budget": 140000,
     "deadline": "2025-05-30T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "CRM Sistemi",
-    "description": "Satış ekibinin müşteri ilişkilerini yönetmesini kolaylaştıran müşteri ilişkileri yönetim sistemi. React frontend, Node.js backend, PostgreSQL.\n\nMüşteri yönetimi: Müşteri bilgileri, iletişim geçmişi, notlar. Görev yönetimi.\n\nE-posta entegrasyonu: E-posta entegrasyonu, açılma/tıklama takibi.\n\nAnalitik: Satış metrikleri, müşteri analizi dashboard'u. Pipeline yönetimi.\n\nGüvenlik: Müşteri verilerinin korunması. Role-based access control. Audit logging.",
+    "description": "Satış ekibimizin müşteri ilişkilerini yönetmesini kolaylaştıran müşteri ilişkileri yönetim sistemi geliştirmek istiyoruz. React frontend, Node.js backend, PostgreSQL kullanılacak. Müşteri yönetimi için müşteri bilgileri, iletişim geçmişi, notlar tutulabilmeli. Görev yönetimi özellikleri eklenmeli. E-posta entegrasyonu yapılmalı. E-posta açılma/tıklama takibi yapılabilmeli. Analitik kısmında satış metrikleri, müşteri analizi dashboard'u oluşturulmalı. Pipeline yönetimi özellikleri eklenmeli. Güvenlik açısından müşteri verilerinin korunması sağlanmalı. Role-based access control yapılmalı. Audit logging sistemi kurulmalı.",
     "budget": 95000,
     "deadline": "2025-04-25T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Proje Yönetim Platformu",
-    "description": "Projelerin planlanması, takibi ve tamamlanmasını kolaylaştıran takım çalışması platformu. React, Node.js, WebSocket (gerçek zamanlı), MongoDB/PostgreSQL.\n\nGörev yönetimi: Görev oluşturma ve atama. Kanban board, drag-and-drop.\n\nİzleme: Çalışma saatleri takibi. Dosya paylaşımı. Takım içi chat.\n\nBildirimler: Görev güncellemeleri, deadline hatırlatmaları. Proje ilerlemesi ve zaman kullanımı raporlama.\n\nEntegrasyon: Slack, Jira entegrasyonları.",
+    "description": "Projelerin planlanması, takibi ve tamamlanmasını kolaylaştıran takım çalışması platformu geliştirmek istiyoruz. React, Node.js, WebSocket (gerçek zamanlı), MongoDB/PostgreSQL kullanılacak. Görev yönetimi için görev oluşturma ve atama yapılabilmeli. Kanban board, drag-and-drop özellikleri eklenmeli. İzleme kısmında çalışma saatleri takibi yapılabilmeli. Dosya paylaşımı özellikleri olmalı. Takım içi chat sistemi kurulmalı. Bildirimler için görev güncellemeleri, deadline hatırlatmaları gönderilmeli. Proje ilerlemesi ve zaman kullanımı raporlama yapılabilmeli. Entegrasyon olarak Slack, Jira entegrasyonları yapılabilmeli.",
     "budget": 110000,
     "deadline": "2025-05-10T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Sosyal Ağ Platformu",
-    "description": "Niche topluluk için içerik paylaşımı ve etkileşim odaklı sosyal ağ platformu. Modern tech stack, WebSocket (gerçek zamanlı), ölçeklenebilir mimari.\n\nKullanıcı özellikleri: Profiller, paylaşımlar, beğeniler. Feed sayfası. Beğeni ve yorum sistemi. Takip sistemi. Özel mesajlaşma.\n\nYönetim: Bildirimler. Admin paneli ile içerik moderasyonu.\n\nPerformans: Optimizasyon. Güvenlik ve gizlilik.",
+    "description": "Niche topluluk için içerik paylaşımı ve etkileşim odaklı sosyal ağ platformu geliştirmek istiyoruz. Modern tech stack, WebSocket (gerçek zamanlı), ölçeklenebilir mimari kullanılacak. Kullanıcı özellikleri için profiller, paylaşımlar, beğeniler gösterilmeli. Feed sayfası oluşturulmalı. Beğeni ve yorum sistemi kurulmalı. Takip sistemi eklenmeli. Özel mesajlaşma özellikleri olmalı. Yönetim kısmında bildirimler gönderilmeli. Admin paneli ile içerik moderasyonu yapılabilmeli. Performans optimizasyonu yapılmalı. Güvenlik ve gizlilik sağlanmalı.",
     "budget": 130000,
     "deadline": "2025-05-25T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Online Eğitim Platformu",
-    "description": "Öğrencilerin dersleri takip etmesi ve eğitmenlerin içerik yönetmesi için e-learning platformu. Modern tech stack, optimize edilmiş video streaming, ölçeklenebilir mimari.\n\nKullanıcı panelleri: Öğrenci ve eğitmen panelleri ayrı. Video streaming altyapısı. Quiz sistemi. Sertifika sistemi.\n\nÖdeme: Kurs satın alma entegrasyonu. Admin paneli.\n\nEk özellikler: Oyunlaştırma. Öğrenci ilerlemesi analitiği. Mobil uygulama entegrasyonu düşünülebilir.",
+    "description": "Öğrencilerin dersleri takip etmesi ve eğitmenlerin içerik yönetmesi için e-learning platformu geliştirmek istiyoruz. Modern tech stack, optimize edilmiş video streaming, ölçeklenebilir mimari kullanılacak. Kullanıcı panelleri için öğrenci ve eğitmen panelleri ayrı olmalı. Video streaming altyapısı kurulmalı. Quiz sistemi geliştirilmeli. Sertifika sistemi oluşturulmalı. Ödeme kısmında kurs satın alma entegrasyonu yapılmalı. Admin paneli oluşturulmalı. Ek özellikler olarak oyunlaştırma özellikleri eklenebilir. Öğrenci ilerlemesi analitiği yapılabilmeli. Mobil uygulama entegrasyonu düşünülebilir.",
     "budget": 125000,
     "deadline": "2025-05-20T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Restoran Yönetim Sistemi",
-    "description": "Restoran operasyonlarını dijitalleştiren, verimliliği artıran yönetim sistemi. React, Node.js, WebSocket (gerçek zamanlı), PostgreSQL.\n\nOperasyonel özellikler: Masa rezervasyonu. Menü yönetimi. Gerçek zamanlı sipariş takibi.\n\nÖdeme ve raporlama: Nakit ve kredi kartı ödemeleri. Günlük, haftalık, aylık raporlar.\n\nMobil: Tablet kullanımı için mobil uyumluluk. Mutfak ekranı entegrasyonu düşünülebilir.\n\nEk modüller: Stok takibi. Personel yönetimi.",
+    "description": "Restoran operasyonlarımızı dijitalleştiren, verimliliği artıran yönetim sistemi geliştirmek istiyoruz. React, Node.js, WebSocket (gerçek zamanlı), PostgreSQL kullanılacak. Operasyonel özellikler için masa rezervasyonu yapılabilmeli. Menü yönetimi özellikleri olmalı. Gerçek zamanlı sipariş takibi yapılabilmeli. Ödeme ve raporlama kısmında nakit ve kredi kartı ödemeleri desteklenmeli. Günlük, haftalık, aylık raporlar oluşturulabilmeli. Mobil kısmında tablet kullanımı için mobil uyumluluk sağlanmalı. Mutfak ekranı entegrasyonu düşünülebilir. Ek modüller olarak stok takibi, personel yönetimi özellikleri eklenebilir.",
     "budget": 85000,
     "deadline": "2025-04-15T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "İnsan Kaynakları Yönetim Sistemi",
-    "description": "Çalışan yönetimini dijitalleştiren, süreçleri otomatikleştiren HR platformu. Modern tech stack, KVKK/GDPR uyumluluğu.\n\nÇalışan yönetimi: Bilgiler, dokümanlar. İzin takibi: başvurular, onaylar.\n\nMaaş ve performans: Maaş hesaplamaları ve ödemeleri. Performans değerlendirme.\n\nRaporlama: HR metrikleri dashboard'u. Employee self-service portal.\n\nGüvenlik: Role-based access control, audit logging. Payroll sistemleri entegrasyonu.",
+    "description": "Çalışan yönetimimizi dijitalleştiren, süreçleri otomatikleştiren HR platformu geliştirmek istiyoruz. Modern tech stack, KVKK/GDPR uyumluluğu sağlanmalı. Çalışan yönetimi için bilgiler, dokümanlar tutulabilmeli. İzin takibi kısmında başvurular, onaylar yapılabilmeli. Maaş ve performans kısmında maaş hesaplamaları ve ödemeleri yapılabilmeli. Performans değerlendirme özellikleri eklenmeli. Raporlama için HR metrikleri dashboard'u oluşturulmalı. Employee self-service portal eklenmeli. Güvenlik açısından role-based access control, audit logging yapılmalı. Payroll sistemleri entegrasyonu yapılabilmeli.",
     "budget": 100000,
     "deadline": "2025-05-05T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Emlak Yönetim Platformu",
-    "description": "Emlakçıların ilan yönetmesi ve müşterilerin arama yapması için platform. Full stack geliştirme, ölçeklenebilir mimari, yüksek performanslı arama.\n\nİlan yönetimi: Ekleme, düzenleme, yayınlama. Gelişmiş arama ve filtreleme.\n\nHarita ve iletişim: Google Maps entegrasyonu (konum bazlı arama). Emlakçı-müşteri mesajlaşma.\n\nKullanıcı özellikleri: Favoriler. Admin paneli: ilan onaylama, kullanıcı yönetimi.\n\nOptimizasyon: SEO. Mobile-first yaklaşım. İlan performansı analitiği.",
+    "description": "Emlakçıların ilan yönetmesi ve müşterilerin arama yapması için platform geliştirmek istiyoruz. Full stack geliştirme, ölçeklenebilir mimari, yüksek performanslı arama yapılacak. İlan yönetimi için ekleme, düzenleme, yayınlama yapılabilmeli. Gelişmiş arama ve filtreleme özellikleri olmalı. Harita ve iletişim kısmında Google Maps entegrasyonu (konum bazlı arama) yapılmalı. Emlakçı-müşteri mesajlaşma sistemi kurulmalı. Kullanıcı özellikleri için favoriler eklenmeli. Admin paneli ile ilan onaylama, kullanıcı yönetimi yapılabilmeli. Optimizasyon için SEO yapılmalı. Mobile-first yaklaşım uygulanmalı. İlan performansı analitiği yapılabilmeli.",
     "budget": 90000,
     "deadline": "2025-04-20T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Etkinlik Yönetim ve Biletleme Sistemi",
-    "description": "Etkinlik oluşturma, bilet satışı ve katılımcı yönetimi için entegre sistem. React, Node.js, WebSocket, ölçeklenebilir mimari.\n\nEtkinlik yönetimi: Etkinlik bilgileri (tarih, konum, kapasite). Online bilet satışı.\n\nÖdeme ve giriş: iyzico entegrasyonu. QR kod bilet doğrulama. Check-in sistemi.\n\nRaporlama: Satış istatistikleri, katılımcı analizi. Mobil uyumluluk.\n\nEntegrasyonlar: E-posta pazarlama. Sosyal medya entegrasyonu.",
+    "description": "Etkinlik oluşturma, bilet satışı ve katılımcı yönetimi için entegre sistem geliştirmek istiyoruz. React, Node.js, WebSocket, ölçeklenebilir mimari kullanılacak. Etkinlik yönetimi için etkinlik bilgileri (tarih, konum, kapasite) girilebilmeli. Online bilet satışı yapılabilmeli. Ödeme ve giriş kısmında iyzico entegrasyonu yapılmalı. QR kod bilet doğrulama sistemi kurulmalı. Check-in sistemi oluşturulmalı. Raporlama için satış istatistikleri, katılımcı analizi yapılabilmeli. Mobil uyumluluk sağlanmalı. Entegrasyonlar olarak e-posta pazarlama, sosyal medya entegrasyonu yapılabilmeli.",
     "budget": 80000,
     "deadline": "2025-04-10T00:00:00.000Z",
     "status": "open"
