@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { FileText, Plus, Edit, Trash2, Calendar, Eye } from "lucide-react";
+import { FileText, Plus, Edit, Trash2, Calendar, Eye, LayoutTemplate } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
 import { ConfirmDialog } from "@/app/components/ui/ConfirmDialog";
@@ -207,27 +207,35 @@ export default function MyCVsPage() {
                     </div>
                   </div>
                 )}
-                <div className="flex gap-2">
-                  <Link href={`/cv/view/${cv.id}`} className="flex-1">
-                    <Button variant="primary" className="w-full">
-                      <Eye className="h-4 w-4 mr-2" />
-                      Görüntüle
+                <div className="flex flex-col gap-2">
+                  <div className="flex gap-2">
+                    <Link href={`/cv/view/${cv.id}`} className="flex-1">
+                      <Button variant="primary" className="w-full">
+                        <Eye className="h-4 w-4 mr-2" />
+                        Görüntüle
+                      </Button>
+                    </Link>
+                    <Link href={`/cv/edit/${cv.id}`} className="flex-1">
+                      <Button variant="outline" className="w-full">
+                        <Edit className="h-4 w-4 mr-2" />
+                        Düzenle
+                      </Button>
+                    </Link>
+                    <Button
+                      variant="danger"
+                      onClick={() => handleDeleteClick(cv.id, cv.data?.personalInfo?.name || "CV")}
+                      disabled={deleting === cv.id}
+                      isLoading={deleting === cv.id}
+                    >
+                      <Trash2 className="h-4 w-4" />
                     </Button>
-                  </Link>
-                  <Link href={`/cv/edit/${cv.id}`} className="flex-1">
+                  </div>
+                  <Link href={`/cv/change-template/${cv.id}`} className="w-full">
                     <Button variant="outline" className="w-full">
-                      <Edit className="h-4 w-4 mr-2" />
-                      Düzenle
+                      <LayoutTemplate className="h-4 w-4 mr-2" />
+                      Template Değiştir
                     </Button>
                   </Link>
-                  <Button
-                    variant="danger"
-                    onClick={() => handleDeleteClick(cv.id, cv.data?.personalInfo?.name || "CV")}
-                    disabled={deleting === cv.id}
-                    isLoading={deleting === cv.id}
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
                 </div>
               </CardContent>
             </Card>

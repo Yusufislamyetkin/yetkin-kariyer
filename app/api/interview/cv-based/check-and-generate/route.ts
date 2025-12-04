@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { generateInterviewForCV } from "@/lib/background/cv-interview-generator";
+import { queueJob } from "@/lib/qstash";
 
 export const dynamic = "force-dynamic";
+export const maxDuration = 60; // 60 seconds timeout for Vercel
 
 export async function POST(request: Request) {
   try {
@@ -51,34 +52,44 @@ export async function POST(request: Request) {
       });
     }
 
-    // Eksik mülakatları arka planda oluştur (fire-and-forget)
-    let generatedCount = 0;
+    // QStash ile her CV için job queue'ya ekle
+    let queuedCount = 0;
     if (process.env.OPENAI_API_KEY) {
-      for (const cvId of missingCvIds) {
-        // Fire and forget - don't await
-        generateInterviewForCV(cvId, userId)
-          .then((result) => {
-            if (result.success) {
-              generatedCount++;
-              console.log(`[CV_INTERVIEW_CHECK] Background interview generation completed for CV: ${cvId}`);
-            } else {
-              console.error(`[CV_INTERVIEW_CHECK] Failed to generate interview for CV ${cvId}:`, result.error);
+      for (let i = 0; i < missingCvIds.length; i++) {
+        const cvId = missingCvIds[i];
+        try {
+          // Her job'u 5 saniye arayla başlat (rate limiting için)
+          const delay = i * 5;
+          
+          await queueJob(
+            "/api/interview/cv-based/generate-background",
+            {
+              cvId,
+              userId,
+            },
+            {
+              retries: 2, // 2 kez retry yap
+              delay, // Her job'u sırayla başlat
             }
-          })
-          .catch((error) => {
-            // Silently fail - interview can be generated later
-            console.error(`[CV_INTERVIEW_CHECK] Failed to trigger interview for CV ${cvId}:`, error);
-          });
+          );
+          
+          queuedCount++;
+          console.log(`[CV_INTERVIEW_CHECK] Job queued for CV: ${cvId}`);
+        } catch (error: any) {
+          console.error(`[CV_INTERVIEW_CHECK] Failed to queue job for CV ${cvId}:`, error);
+          // Hata olsa bile devam et, diğer CV'ler için queue'ya eklemeye çalış
+        }
       }
     }
 
+    // Hemen response döndür (timeout önleme)
     return NextResponse.json({
       success: true,
-      message: `${missingCvIds.length} CV için mülakat oluşturma işlemi başlatıldı`,
+      message: `${missingCvIds.length} CV için mülakat oluşturma işlemi kuyruğa eklendi`,
       total: cvIds.length,
       existing: existingCvIds.size,
       missing: missingCvIds.length,
-      generated: generatedCount,
+      queued: queuedCount,
     });
   } catch (error: any) {
     console.error("[CV_INTERVIEW_CHECK] Hata:", error);

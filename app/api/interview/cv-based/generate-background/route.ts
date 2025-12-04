@@ -1,18 +1,51 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { generateInterviewForCV } from "@/lib/background/cv-interview-generator";
+import { verifyQStashSignature } from "@/lib/qstash";
 
-export const maxDuration = 60; // 60 seconds timeout for Vercel
+export const dynamic = "force-dynamic";
+export const maxDuration = 60; // 60 seconds timeout for Vercel (QStash sayesinde timeout riski azalır)
 
 export async function POST(request: Request) {
   try {
-    const session = await auth();
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    // Body'yi önce al (sadece bir kez okunabilir)
+    const bodyText = await request.text();
+    
+    // QStash webhook signature verification
+    // Header case-insensitive olabilir, her iki format'ı kontrol et
+    const signature = request.headers.get("Upstash-Signature") || request.headers.get("upstash-signature");
+    const isQStashRequest = signature !== null;
+    
+    if (isQStashRequest) {
+      // QStash'ten gelen request'i doğrula
+      const isValid = verifyQStashSignature(signature, bodyText, request.url);
+      if (!isValid) {
+        console.error("[CV_INTERVIEW_BG] Invalid QStash signature");
+        return NextResponse.json(
+          { error: "Invalid signature" },
+          { status: 401 }
+        );
+      }
+    } else {
+      // Direct call için session kontrolü (backward compatibility)
+      const session = await auth();
+      if (!session?.user?.id) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      }
     }
 
-    const body = await request.json();
-    const { cvId } = body;
+    // Body'yi parse et
+    let body: any;
+    try {
+      body = JSON.parse(bodyText);
+    } catch {
+      return NextResponse.json(
+        { error: "Invalid JSON body" },
+        { status: 400 }
+      );
+    }
+
+    const { cvId, userId } = body;
 
     if (!cvId || typeof cvId !== "string") {
       return NextResponse.json(
@@ -21,7 +54,25 @@ export async function POST(request: Request) {
       );
     }
 
-    const result = await generateInterviewForCV(cvId, session.user.id as string);
+    // userId'yi belirle: QStash request'lerinde body'den, direct call'larda session'dan
+    let finalUserId: string;
+    if (isQStashRequest) {
+      if (!userId || typeof userId !== "string") {
+        return NextResponse.json(
+          { error: "User ID gereklidir" },
+          { status: 400 }
+        );
+      }
+      finalUserId = userId;
+    } else {
+      const session = await auth();
+      if (!session?.user?.id) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      }
+      finalUserId = session.user.id as string;
+    }
+
+    const result = await generateInterviewForCV(cvId, finalUserId);
 
     if (!result.success) {
       return NextResponse.json(
