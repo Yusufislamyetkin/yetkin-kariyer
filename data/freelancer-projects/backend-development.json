@@ -1,70 +1,70 @@
 [
   {
     "title": "RESTful API Geliştirme (.NET Core)",
-    "description": "Kurumsal bir uygulama için .NET Core ile RESTful API geliştirilmesi gerekiyor. API, güvenli, ölçeklenebilir ve performanslı olmalı.\n\nEntity Framework Core kullanılarak veritabanı işlemleri yapılacak. PostgreSQL veritabanı kullanılacak ve migration sistemi kurulmalı. Repository pattern ve Unit of Work pattern uygulanmalı.\n\nJWT authentication ile güvenli kullanıcı doğrulama yapılmalı. Refresh token mekanizması ile kullanıcı deneyimi iyileştirilmeli. Role-based authorization ile yetkilendirme yapılmalı.\n\nSwagger dokümantasyonu ile API endpoint'leri dokümante edilmeli. Rate limiting ile API abuse önlenmeli. Comprehensive logging ile hata takibi yapılabilmeli.\n\nError handling middleware ile merkezi hata yönetimi yapılmalı. Validation ile giriş verileri kontrol edilmeli. CORS yapılandırması ile frontend entegrasyonu sağlanmalı.\n\nAPI versioning yapılmalı. Caching stratejisi (Redis) ile performans artırılmalı. Unit test ve integration test yazılmalı.",
+    "description": ".NET Core teknolojisiyle kurumsal uygulama için RESTful API geliştirme. Güvenlik, ölçeklenebilirlik ve performans odaklı bir mimari.\n\nVeritabanı katmanı: Entity Framework Core ile veri işlemleri. PostgreSQL veritabanı ve migration sistemi. Repository pattern ve Unit of Work pattern implementasyonu.\n\nGüvenlik: JWT authentication, refresh token mekanizması, role-based authorization. Swagger dokümantasyonu. Rate limiting.\n\nHata yönetimi: Merkezi error handling middleware. Input validation. CORS yapılandırması.\n\nPerformans: API versioning. Redis ile caching stratejisi. Unit ve integration testler.",
     "budget": 45000,
     "deadline": "2025-03-20T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Node.js Microservices Mimarisi",
-    "description": "Büyük ölçekli bir uygulama için Node.js ile microservices mimarisi kurulması gerekiyor. Sistem, yüksek trafiği karşılayabilecek ve ölçeklenebilir olmalı.\n\nAPI Gateway (Kong veya custom) ile tüm istekler yönlendirilmeli. Service discovery (Consul veya Eureka) ile servisler birbirini bulabilmeli. Load balancing ile trafik dağıtılmalı.\n\nMessage queue (RabbitMQ veya Apache Kafka) ile servisler arası asenkron iletişim sağlanmalı. Event-driven architecture ile loose coupling sağlanmalı.\n\nAuthentication service ile merkezi kimlik doğrulama yapılmalı. Her servis için ayrı veritabanı (database per service) kullanılmalı.\n\nLogging ve monitoring (ELK stack, Prometheus) ile sistem sağlığı takip edilmeli. Docker containerization ile servisler containerize edilmeli.\n\nAPI documentation (OpenAPI/Swagger) yapılmalı. Circuit breaker pattern ile hata yönetimi yapılmalı. Distributed tracing ile request takibi yapılabilmeli.",
+    "description": "Yüksek trafikli uygulama için Node.js tabanlı microservices mimarisi. Ölçeklenebilir ve dayanıklı bir sistem kurulumu.\n\nMimari bileşenler:\n- API Gateway (Kong veya custom) - istek yönlendirme\n- Service discovery (Consul/Eureka) - servis keşfi\n- Load balancing - trafik dağıtımı\n- Message queue (RabbitMQ/Kafka) - asenkron iletişim\n- Event-driven architecture - gevşek bağlantı\n\nGüvenlik ve yönetim: Merkezi authentication service. Database per service yaklaşımı. Logging ve monitoring (ELK stack, Prometheus). Docker containerization.\n\nDokümantasyon: OpenAPI/Swagger. Circuit breaker pattern. Distributed tracing.",
     "budget": 85000,
     "deadline": "2025-04-30T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Python Django REST API",
-    "description": "Web uygulaması için Django REST Framework ile RESTful API geliştirilmesi gerekiyor. API, modern standartlara uygun ve dokümante edilmiş olmalı.\n\nUser authentication ile JWT token tabanlı kimlik doğrulama yapılmalı. User registration, login, password reset, email verification özellikleri olmalı.\n\nCRUD operations ile tüm kaynaklar için create, read, update, delete işlemleri yapılabilmeli. File upload özelliği ile görsel ve dosya yükleme desteklenmeli.\n\nPagination ile büyük veri setleri sayfalanmalı. Filtering ve searching ile veriler filtrelenebilmeli ve aranabilmeli. Sorting ile veriler sıralanabilmeli.\n\nAPI documentation (drf-spectacular veya drf-yasg) ile Swagger/OpenAPI dokümantasyonu oluşturulmalı. Permission classes ile yetkilendirme yapılmalı.\n\nPostgreSQL veritabanı kullanılacak. Serializers ile veri doğrulama yapılmalı. Unit test ve integration test yazılmalı. CORS yapılandırması yapılmalı.",
+    "description": "Django REST Framework ile modern web uygulaması için RESTful API. Standartlara uygun, dokümante edilmiş bir çözüm.\n\nKimlik doğrulama: JWT token tabanlı authentication. Kullanıcı kayıt, giriş, şifre sıfırlama, e-posta doğrulama.\n\nCRUD işlemleri: Tüm kaynaklar için create, read, update, delete. Dosya yükleme desteği.\n\nVeri yönetimi: Pagination, filtering, searching, sorting. Swagger/OpenAPI dokümantasyonu (drf-spectacular veya drf-yasg). Permission classes.\n\nAltyapı: PostgreSQL veritabanı. Serializers ile veri doğrulama. Unit ve integration testler. CORS yapılandırması.",
     "budget": 40000,
     "deadline": "2025-03-15T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "GraphQL API (Node.js)",
-    "description": "Modern bir uygulama için GraphQL API geliştirilmesi gerekiyor. API, esnek sorgulama ve verimli veri çekme imkanı sunmalı.\n\nApollo Server veya GraphQL Yoga kullanılarak GraphQL server kurulacak. Schema definition ile type system oluşturulmalı. Resolvers ile business logic implement edilmeli.\n\nAuthentication ile güvenli erişim sağlanmalı. Authorization ile field-level ve object-level yetkilendirme yapılmalı. DataLoader ile N+1 query problemi çözülmeli.\n\nSubscriptions ile real-time data updates yapılabilmeli. File upload (graphql-upload) ile dosya yükleme desteklenmeli.\n\nGraphQL Playground veya GraphiQL ile API test edilebilmeli. Error handling ile anlamlı hata mesajları döndürülmeli.\n\nMongoDB veya PostgreSQL kullanılabilir. Caching stratejisi ile performans artırılmalı. Rate limiting ile abuse önlenmeli. API documentation yapılmalı.",
+    "description": "Esnek sorgulama ve verimli veri çekme imkanı sunan GraphQL API. Apollo Server veya GraphQL Yoga ile Node.js geliştirme.\n\nTemel yapı: Schema definition ile type system. Resolvers ile business logic. Authentication ve authorization (field-level, object-level). DataLoader ile N+1 query optimizasyonu.\n\nGerçek zamanlı özellikler: Subscriptions. Dosya yükleme (graphql-upload).\n\nTest ve hata yönetimi: GraphQL Playground veya GraphiQL. Anlamlı hata mesajları.\n\nAltyapı: MongoDB veya PostgreSQL. Caching stratejisi. Rate limiting. API dokümantasyonu.",
     "budget": 50000,
     "deadline": "2025-03-25T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Payment Gateway Entegrasyonu",
-    "description": "E-ticaret platformu için ödeme gateway entegrasyonu yapılması gerekiyor. Sistem, güvenli ve güvenilir ödeme işleme sağlamalı.\n\niyzico ve PayTR entegrasyonu yapılacak. Ödeme işleme ile kredi kartı, banka kartı, havale/EFT ödeme yöntemleri desteklenmeli. 3D Secure doğrulama yapılmalı.\n\nRefund işlemi ile iade işlemleri yapılabilmeli. Partial refund desteği olmalı. Webhook handling ile ödeme durumu güncellemeleri alınmalı.\n\nGüvenlik kontrolleri ile fraud detection yapılmalı. IP kontrolü, rate limiting, şüpheli işlem tespiti yapılmalı.\n\nComprehensive logging ile tüm ödeme işlemleri loglanmalı. Error handling ile hata durumları yönetilmeli.\n\nNode.js veya PHP backend kullanılabilir. Test ortamı ile sandbox testleri yapılmalı. Production deployment ile canlıya alınmalı. Dokümantasyon yapılmalı.",
+    "description": "E-ticaret platformu için güvenli ödeme işleme sistemi. iyzico ve PayTR entegrasyonları.\n\nÖdeme yöntemleri: Kredi kartı, banka kartı, havale/EFT. 3D Secure doğrulama. İade işlemleri (tam ve kısmi). Webhook handling.\n\nGüvenlik: Fraud detection, IP kontrolü, rate limiting, şüpheli işlem tespiti. Kapsamlı logging.\n\nGeliştirme: Node.js veya PHP backend. Sandbox test ortamı. Production deployment. Dokümantasyon.",
     "budget": 35000,
     "deadline": "2025-03-10T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Real-time Chat Backend",
-    "description": "Sosyal platform için WebSocket kullanarak real-time chat backend'i geliştirilmesi gerekiyor. Sistem, binlerce eşzamanlı kullanıcıyı destekleyebilmeli.\n\nSocket.io veya SignalR kullanılarak WebSocket server kurulacak. Connection management ile bağlantı yönetimi yapılmalı. Room management ile chat odaları oluşturulabilmeli.\n\nMessage history ile mesajlar veritabanında saklanmalı. Pagination ile eski mesajlar yüklenebilmeli. File sharing ile dosya ve görsel paylaşımı yapılabilmeli.\n\nUser presence ile kullanıcı online/offline durumu takip edilebilmeli. Typing indicators ile yazma durumu gösterilmeli.\n\nNode.js veya .NET Core kullanılabilir. Redis pub/sub ile horizontal scaling yapılabilmeli. Message queue ile reliable messaging sağlanmalı.\n\nAuthentication ile güvenli bağlantı sağlanmalı. Rate limiting ile spam önlenmeli. Moderation ile içerik kontrolü yapılabilmeli.",
+    "description": "Binlerce eşzamanlı kullanıcıyı destekleyen WebSocket tabanlı gerçek zamanlı chat backend'i. Socket.io veya SignalR teknolojileri.\n\nBağlantı yönetimi: Connection management, room management. Mesaj geçmişi ve pagination. Dosya ve görsel paylaşımı.\n\nKullanıcı durumu: Online/offline presence. Typing indicators.\n\nÖlçeklenebilirlik: Node.js veya .NET Core. Redis pub/sub ile horizontal scaling. Message queue ile güvenilir mesajlaşma.\n\nGüvenlik: Authentication. Rate limiting. İçerik moderasyonu.",
     "budget": 55000,
     "deadline": "2025-04-05T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Email Service API",
-    "description": "Uygulama için email gönderme servisi geliştirilmesi gerekiyor. Servis, güvenilir ve ölçeklenebilir email gönderimi sağlamalı.\n\nSMTP entegrasyonu ile email gönderimi yapılacak. SendGrid, Mailgun veya AWS SES gibi servisler kullanılabilir. Template engine ile dinamik email şablonları oluşturulabilmeli.\n\nQueue system (Bull, BullMQ) ile asenkron email gönderimi yapılmalı. Retry mechanism ile başarısız gönderimler tekrar denenmeli.\n\nBounce handling ile geri dönen emailler işlenmeli. Unsubscribe management ile kullanıcılar abonelikten çıkabilmeli.\n\nAnalytics ile email açılma, tıklama oranları takip edilebilmeli. API endpoints ile email gönderimi yapılabilmeli.\n\nNode.js veya Python tercih ediliyor. Rate limiting ile abuse önlenmeli. Logging ile tüm işlemler kaydedilmeli. Error handling ile hata yönetimi yapılmalı.",
+    "description": "Güvenilir ve ölçeklenebilir e-posta gönderim servisi. SMTP entegrasyonu ve SendGrid, Mailgun veya AWS SES kullanımı.\n\nŞablon yönetimi: Dinamik e-posta şablonları. Queue system (Bull, BullMQ) ile asenkron gönderim. Retry mechanism.\n\nYönetim: Bounce handling. Unsubscribe management. Analytics: açılma ve tıklama oranları. API endpoints.\n\nAltyapı: Node.js veya Python. Rate limiting. Logging. Error handling.",
     "budget": 30000,
     "deadline": "2025-02-28T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "File Storage Service",
-    "description": "Uygulama için dosya yükleme ve depolama servisi geliştirilmesi gerekiyor. Servis, güvenli ve ölçeklenebilir dosya yönetimi sağlamalı.\n\nAWS S3 veya Azure Blob Storage entegrasyonu yapılacak. File upload API ile dosya yükleme yapılabilmeli. Multipart upload ile büyük dosyalar yüklenebilmeli.\n\nImage processing ile görseller optimize edilmeli, resize, crop, watermark işlemleri yapılabilmeli. CDN entegrasyonu (CloudFront, Azure CDN) ile hızlı erişim sağlanmalı.\n\nAPI endpoints ile dosya yükleme, indirme, silme, listeleme işlemleri yapılabilmeli. Güvenlik ile dosya tipi kontrolü, boyut limiti, virus scanning yapılmalı.\n\nAccess control ile dosya erişim yetkileri yönetilmeli. Presigned URLs ile geçici erişim sağlanabilmeli.\n\nNode.js veya Python kullanılabilir. Logging ile tüm işlemler kaydedilmeli. Error handling ile hata yönetimi yapılmalı. Dokümantasyon yapılmalı.",
+    "description": "Güvenli ve ölçeklenebilir dosya yönetim servisi. AWS S3 veya Azure Blob Storage entegrasyonu.\n\nDosya işlemleri: Upload API, multipart upload (büyük dosyalar). Görsel işleme: optimize, resize, crop, watermark. CDN entegrasyonu (CloudFront, Azure CDN).\n\nAPI: Yükleme, indirme, silme, listeleme. Güvenlik: dosya tipi kontrolü, boyut limiti, virus scanning. Access control. Presigned URLs.\n\nGeliştirme: Node.js veya Python. Logging. Error handling. Dokümantasyon.",
     "budget": 40000,
     "deadline": "2025-03-12T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Background Job Processing",
-    "description": "Uygulama için arka plan iş işleme sistemi geliştirilmesi gerekiyor. Sistem, uzun süren işleri asenkron olarak işleyebilmeli.\n\nBull/BullMQ veya Hangfire kullanılarak job queue sistemi kurulacak. Job creation ile işler kuyruğa eklenebilmeli. Worker processes ile işler işlenebilmeli.\n\nRetry mechanism ile başarısız işler tekrar denenebilmeli. Exponential backoff ile retry stratejisi uygulanmalı. Job priority ile öncelikli işler önce işlenebilmeli.\n\nScheduling ile periyodik işler planlanabilmeli (cron jobs). Job status tracking ile iş durumu takip edilebilmeli.\n\nMonitoring ile kuyruk durumu, iş durumu, hata oranları görüntülenebilmeli. Dashboard ile görsel takip yapılabilmeli.\n\nNode.js veya .NET Core kullanılabilir. Redis ile queue storage yapılmalı. Error handling ile hata yönetimi yapılmalı. Logging ile işlemler kaydedilmeli.",
+    "description": "Uzun süren işleri asenkron olarak işleyen arka plan iş yönetim sistemi. Bull/BullMQ veya Hangfire kullanımı.\n\nİş yönetimi: Job creation, worker processes. Retry mechanism (exponential backoff). Job priority. Scheduling (cron jobs). Job status tracking.\n\nİzleme: Kuyruk durumu, iş durumu, hata oranları. Dashboard.\n\nAltyapı: Node.js veya .NET Core. Redis queue storage. Error handling. Logging.",
     "budget": 45000,
     "deadline": "2025-03-18T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "API Rate Limiting ve Caching",
-    "description": "Mevcut API'ye rate limiting ve caching özellikleri eklenmesi gerekiyor. Sistem, API abuse'i önlemeli ve performansı artırmalı.\n\nRedis kullanılarak rate limiting implement edilecek. Token bucket veya sliding window algoritması kullanılabilir. Per-user, per-IP, per-endpoint rate limiting yapılabilmeli.\n\nCache invalidation stratejisi ile cache yönetimi yapılmalı. TTL (Time To Live) ile cache süresi belirlenebilmeli. Cache warming ile popüler veriler önceden cache'lenebilmeli.\n\nRate limit rules ile farklı endpoint'ler için farklı limitler tanımlanabilmeli. Response headers ile rate limit bilgisi döndürülmeli.\n\nMonitoring ile rate limit ihlalleri, cache hit/miss oranları takip edilebilmeli. Dashboard ile görsel takip yapılabilmeli.\n\nRedis cluster ile yüksek kullanılabilirlik sağlanmalı. Error handling ile hata yönetimi yapılmalı. Dokümantasyon yapılmalı.",
+    "description": "Mevcut API'ye rate limiting ve caching özellikleri ekleme. API abuse önleme ve performans artırma.\n\nRate limiting: Redis tabanlı. Token bucket veya sliding window algoritması. Per-user, per-IP, per-endpoint limitler.\n\nCaching: Cache invalidation stratejisi. TTL yönetimi. Cache warming.\n\nYapılandırma: Endpoint bazlı limit kuralları. Response headers ile limit bilgisi.\n\nİzleme: Rate limit ihlalleri, cache hit/miss oranları. Dashboard. Redis cluster. Error handling. Dokümantasyon.",
     "budget": 25000,
     "deadline": "2025-02-22T00:00:00.000Z",
     "status": "open"

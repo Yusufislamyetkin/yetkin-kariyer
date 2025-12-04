@@ -37,6 +37,7 @@ import {
   Plus,
   ChevronDown,
   ChevronRight,
+  MessageSquare,
 } from "lucide-react";
 import { useState, useEffect, useMemo, useCallback, type ComponentType, type SVGProps } from "react";
 import { usePathname } from "next/navigation";
@@ -284,6 +285,11 @@ function DashboardLayoutContent({
             name: "Kariyer Planım",
             href: "/career/roadmap",
             icon: Target,
+          },
+          {
+            name: "Mülakat",
+            href: "/interview/cv-based",
+            icon: MessageSquare,
           },
         ],
       },

@@ -1,70 +1,70 @@
 [
   {
     "title": "React Dashboard Geliştirme",
-    "description": "Kurumsal bir şirket için admin paneli dashboard'u geliştirilmesi gerekiyor. Dashboard, yönetim ekibinin iş süreçlerini takip etmesini ve karar vermesini kolaylaştırmalı.\n\nReact.js kullanılarak geliştirilecek. Material-UI veya Ant Design component library kullanılacak. Modern ve kullanıcı dostu bir arayüz tasarlanmalı.\n\nGrafikler (Chart.js, Recharts) ile veri görselleştirme yapılmalı. Farklı grafik tipleri (line, bar, pie, area) desteklenmeli. Real-time data updates ile canlı veri gösterimi yapılabilmeli.\n\nVeri tabloları ile büyük veri setleri gösterilmeli. Pagination, sorting, filtering özellikleri olmalı. Export özelliği ile veriler Excel/CSV formatında indirilebilmeli.\n\nFiltreleme özellikleri ile tarih aralığı, kategori, durum gibi kriterlere göre filtreleme yapılabilmeli. Responsive tasarım ile tüm cihazlarda mükemmel görünmeli.\n\nAuthentication ile güvenli erişim sağlanmalı. Role-based access control ile yetkilendirme yapılmalı. Dark mode desteği eklenebilir.",
+    "description": "Yönetim ekibinin iş süreçlerini takip edip karar vermesini kolaylaştıracak admin paneli dashboard'u. React.js ile Material-UI veya Ant Design component kütüphaneleri kullanılacak.\n\nVeri görselleştirme: Chart.js veya Recharts ile grafikler. Line, bar, pie, area grafik tipleri. Gerçek zamanlı veri güncellemeleri.\n\nVeri tabloları: Büyük veri setleri, pagination, sorting, filtering. Excel/CSV export.\n\nFiltreleme: Tarih aralığı, kategori, durum bazlı. Responsive tasarım.\n\nGüvenlik: Authentication, role-based access control. Dark mode desteği.",
     "budget": 50000,
     "deadline": "2025-03-25T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Vue.js E-ticaret Frontend",
-    "description": "E-ticaret platformu için Vue.js ile frontend geliştirilmesi gerekiyor. Frontend, kullanıcı deneyimini ön planda tutmalı ve satış dönüşümünü artırmalı.\n\nVue.js 3 Composition API kullanılacak. Vuex veya Pinia ile state management yapılacak. Vue Router ile sayfa yönlendirme yapılacak.\n\nÜrün listeleme sayfası ile grid/list görünümü, filtreleme, sıralama özellikleri olmalı. Ürün detay sayfası ile görseller, açıklama, yorumlar, benzer ürünler gösterilmeli.\n\nSepet yönetimi ile ürün ekleme, çıkarma, miktar değiştirme yapılabilmeli. Checkout sayfası ile adres seçimi, ödeme yöntemi seçimi, sipariş özeti gösterilmeli.\n\nModern UI/UX isteniyor. Smooth animations, loading states, error handling ile kullanıcı deneyimi iyileştirilmeli. Responsive tasarım zorunlu.\n\nPerformance optimization yapılmalı. Lazy loading, code splitting, image optimization ile sayfa yükleme hızı artırılmalı. SEO optimizasyonu yapılmalı.",
+    "description": "Kullanıcı deneyimini ön planda tutan, satış dönüşümünü artıran e-ticaret frontend'i. Vue.js 3 Composition API, Vuex/Pinia state management, Vue Router.\n\nÜrün sayfaları: Grid/list görünümü, filtreleme, sıralama. Ürün detay: görseller, açıklama, yorumlar, benzer ürünler.\n\nSepet ve ödeme: Ürün ekleme/çıkarma, miktar değiştirme. Checkout: adres seçimi, ödeme yöntemi, sipariş özeti.\n\nKullanıcı deneyimi: Smooth animasyonlar, loading states, error handling. Responsive tasarım.\n\nPerformans: Lazy loading, code splitting, görsel optimizasyonu. SEO optimizasyonu.",
     "budget": 55000,
     "deadline": "2025-04-05T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Next.js Blog Platformu",
-    "description": "İçerik üreticileri için Next.js ile blog platformu geliştirilmesi gerekiyor. Platform, hızlı yükleme ve SEO optimizasyonu ile öne çıkmalı.\n\nNext.js 13+ App Router kullanılacak. SSG (Static Site Generation) ve SSR (Server-Side Rendering) kombinasyonu ile optimal performans sağlanmalı.\n\nMarkdown desteği ile içerik yazarları kolayca içerik oluşturabilmeli. Syntax highlighting ile kod blokları güzel görünmeli. MDX desteği ile React component'leri markdown içinde kullanılabilmeli.\n\nArama özelliği ile içerikler arasında arama yapılabilmeli. Kategori ve tag sistemi ile içerikler organize edilebilmeli. Yorum sistemi ile okuyucular yorum yapabilmeli.\n\nSEO optimizasyonu kritik. Meta tags, Open Graph, structured data, sitemap oluşturulmalı. Social sharing butonları ile içerikler paylaşılabilmeli.\n\nRSS feed desteği ile içerikler dış platformlara aktarılabilmeli. Dark mode desteği ile gece okuma deneyimi iyileştirilmeli.",
+    "description": "Hızlı yükleme ve SEO optimizasyonu odaklı blog platformu. Next.js 13+ App Router, SSG ve SSR kombinasyonu.\n\nİçerik yönetimi: Markdown desteği, syntax highlighting, MDX (React component'leri markdown içinde).\n\nKeşif: Arama özelliği, kategori ve tag sistemi. Yorum sistemi.\n\nSEO: Meta tags, Open Graph, structured data, sitemap. Sosyal medya paylaşım butonları.\n\nRSS feed. Dark mode.",
     "budget": 40000,
     "deadline": "2025-03-15T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Angular Admin Panel",
-    "description": "Kurumsal uygulama için Angular ile admin paneli geliştirilmesi gerekiyor. Panel, karmaşık iş süreçlerini yönetmeyi kolaylaştırmalı.\n\nAngular 15+ kullanılacak. Angular Material ile modern UI component'leri kullanılacak. TypeScript ile type-safe development yapılacak.\n\nRouting ile sayfa yönlendirme yapılacak. Lazy loading ile modüller ihtiyaç duyulduğunda yüklenecek. Form validation ile giriş verileri kontrol edilecek.\n\nData tables ile büyük veri setleri gösterilecek. Server-side pagination, sorting, filtering desteklenecek. Inline editing ile veriler düzenlenebilecek.\n\nCharts ile veri görselleştirme yapılacak. Ngx-charts veya Chart.js kullanılabilir. Dashboard ile özet bilgiler gösterilecek.\n\nAuthentication ve authorization ile güvenli erişim sağlanacak. JWT token management yapılacak. Error handling ve logging yapılacak.",
+    "description": "Karmaşık iş süreçlerini yönetmeyi kolaylaştıran kurumsal admin paneli. Angular 15+, Angular Material, TypeScript.\n\nNavigasyon: Routing, lazy loading. Form validation.\n\nVeri yönetimi: Data tables, server-side pagination/sorting/filtering, inline editing.\n\nGörselleştirme: Charts (Ngx-charts veya Chart.js), dashboard.\n\nGüvenlik: Authentication, authorization, JWT token management. Error handling, logging.",
     "budget": 60000,
     "deadline": "2025-04-10T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Landing Page (React)",
-    "description": "Yeni bir ürün/hizmet lansmanı için modern ve etkileyici landing page geliştirilmesi gerekiyor. Sayfa, ziyaretçileri ürünü denemeye veya satın almaya teşvik etmeli.\n\nReact.js kullanılacak. Framer Motion ile smooth animasyonlar eklenmeli. Scroll animations, parallax effects, hover effects ile görsel açıdan zengin bir deneyim sunulmalı.\n\nHero section ile güçlü bir ilk izlenim yaratılmalı. Value proposition net bir şekilde belirtilmeli. CTA (Call to Action) butonları stratejik konumlarda yer almalı.\n\nFeatures section ile ürün özellikleri gösterilmeli. Testimonials section ile müşteri yorumları yer almalı. Pricing section ile fiyatlandırma bilgisi verilmeli.\n\nForm entegrasyonu ile lead generation yapılabilmeli. Email capture formu ile potansiyel müşteriler toplanabilmeli.\n\nSEO optimizasyonu yapılmalı. Sayfa yükleme hızı optimize edilmeli (Core Web Vitals). Responsive tasarım zorunlu. A/B testing için hazır olmalı.",
+    "description": "Ürün/hizmet lansmanı için modern ve etkileyici landing page. React.js, Framer Motion animasyonları.\n\nGörsel efektler: Scroll animations, parallax effects, hover effects.\n\nİçerik bölümleri:\n- Hero section: güçlü ilk izlenim\n- Value proposition\n- CTA butonları\n- Features section\n- Testimonials\n- Pricing section\n\nLead generation: Form entegrasyonu, e-posta yakalama.\n\nSEO ve performans: Core Web Vitals optimizasyonu. Responsive tasarım. A/B testing hazırlığı.",
     "budget": 20000,
     "deadline": "2025-02-18T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Single Page Application (SPA)",
-    "description": "Modern web uygulaması için Single Page Application geliştirilmesi gerekiyor. Uygulama, hızlı ve akıcı bir kullanıcı deneyimi sunmalı.\n\nReact veya Vue.js kullanılabilir. Client-side routing ile sayfa geçişleri yapılacak. State management (Redux, Vuex) ile global state yönetimi yapılacak.\n\nAPI entegrasyonu ile backend ile iletişim kurulacak. Axios veya Fetch API kullanılabilir. Error handling ve loading states ile kullanıcı deneyimi iyileştirilecek.\n\nForm handling ile kullanıcı girişleri alınacak. Form validation ile veri doğrulama yapılacak. File upload özelliği eklenebilir.\n\nResponsive tasarım ile tüm cihazlarda mükemmel görünmeli. Modern ve kullanıcı dostu bir arayüz olmalı.\n\nPerformance optimization yapılmalı. Code splitting, lazy loading, memoization ile performans artırılmalı. SEO için SSR veya SSG düşünülebilir.",
+    "description": "Hızlı ve akıcı kullanıcı deneyimi sunan modern web uygulaması. React veya Vue.js, client-side routing, state management (Redux/Vuex).\n\nBackend entegrasyonu: API entegrasyonu (Axios/Fetch), error handling, loading states.\n\nForm yönetimi: Form handling, validation, dosya yükleme.\n\nTasarım: Responsive, modern ve kullanıcı dostu arayüz.\n\nPerformans: Code splitting, lazy loading, memoization. SEO için SSR/SSG.",
     "budget": 45000,
     "deadline": "2025-03-20T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Interactive Data Visualization",
-    "description": "Veri analiz platformu için interaktif veri görselleştirme dashboard'u geliştirilmesi gerekiyor. Dashboard, karmaşık verileri anlaşılır şekilde sunmalı.\n\nReact.js kullanılacak. D3.js veya Recharts ile interaktif grafikler oluşturulacak. Farklı grafik tipleri (line, bar, pie, scatter, heatmap) desteklenecek.\n\nFiltreleme özellikleri ile veriler dinamik olarak filtrelenebilmeli. Date range picker, dropdown filters, search box ile kullanıcılar verileri keşfedebilmeli.\n\nExport özellikleri ile grafikler PNG, PDF, SVG formatında indirilebilmeli. Print-friendly view ile yazdırma yapılabilmeli.\n\nResponsive tasarım ile tüm cihazlarda mükemmel görünmeli. Touch gestures ile mobil cihazlarda etkileşim kurulabilmeli.\n\nReal-time updates ile canlı veri gösterimi yapılabilmeli. WebSocket veya polling ile veri güncellemeleri alınabilmeli. Performance optimization yapılmalı.",
+    "description": "Karmaşık verileri anlaşılır şekilde sunan interaktif görselleştirme dashboard'u. React.js, D3.js veya Recharts.\n\nGrafik tipleri: Line, bar, pie, scatter, heatmap.\n\nFiltreleme: Dinamik filtreleme, date range picker, dropdown filters, search box.\n\nExport: PNG, PDF, SVG formatlarında indirme. Print-friendly view.\n\nResponsive tasarım, touch gestures. Gerçek zamanlı güncellemeler (WebSocket/polling). Performans optimizasyonu.",
     "budget": 50000,
     "deadline": "2025-03-28T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "E-learning Platform Frontend",
-    "description": "Online eğitim platformu için frontend geliştirilmesi gerekiyor. Frontend, öğrencilerin dersleri takip etmesini ve öğrenmesini kolaylaştırmalı.\n\nReact veya Vue.js kullanılabilir. Video player ile ders videoları oynatılacak. Video controls (play, pause, speed, quality) ile kullanıcı deneyimi iyileştirilecek.\n\nProgress tracking ile öğrenci ilerlemesi takip edilecek. Tamamlanan dersler, quiz'ler, ödevler gösterilecek. Certificate görüntüleme ile sertifikalar PDF olarak indirilebilecek.\n\nQuiz sistemi ile interaktif sorular sorulacak. Anlık geri bildirim ile öğrenci bilgilendirilecek. Sonuç sayfası ile performans gösterilecek.\n\nKullanıcı dashboard'u ile öğrenci profili, kurslar, ilerleme, sertifikalar görüntülenecek. Not alma özelliği ile öğrenciler notlar alabilecek.\n\nResponsive tasarım zorunlu. Offline mode ile dersler indirilebilmeli. Social features ile öğrenciler birbirleriyle etkileşim kurabilmeli.",
+    "description": "Öğrencilerin dersleri takip etmesini ve öğrenmesini kolaylaştıran eğitim platformu frontend'i. React veya Vue.js.\n\nVideo oynatıcı: Video player, controls (play, pause, speed, quality).\n\nİlerleme takibi: Tamamlanan dersler, quiz'ler, ödevler. Sertifika görüntüleme ve PDF indirme.\n\nQuiz sistemi: İnteraktif sorular, anlık geri bildirim, sonuç sayfası.\n\nKullanıcı dashboard'u: Profil, kurslar, ilerleme, sertifikalar. Not alma özelliği.\n\nResponsive tasarım. Offline mode. Sosyal özellikler.",
     "budget": 65000,
     "deadline": "2025-04-15T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Real-time Chat UI",
-    "description": "Sosyal platform için WebSocket ile real-time chat arayüzü geliştirilmesi gerekiyor. Arayüz, hızlı ve akıcı mesajlaşma deneyimi sunmalı.\n\nReact tercih ediliyor. WebSocket client ile real-time bağlantı kurulacak. Message list ile mesajlar gösterilecek. Infinite scroll ile eski mesajlar yüklenecek.\n\nEmoji picker ile emoji eklenebilmeli. File sharing ile görsel ve dosya paylaşımı yapılabilmeli. Image preview ile görseller önizlenebilmeli.\n\nTyping indicators ile yazma durumu gösterilmeli. Online/offline status ile kullanıcı durumu gösterilmeli. Read receipts ile mesaj okunma durumu takip edilebilmeli.\n\nModern UI ile görsel açıdan zengin bir arayüz olmalı. Dark mode desteği ile gece kullanımı iyileştirilmeli.\n\nPerformance optimization yapılmalı. Message caching, lazy loading, virtualization ile performans artırılmalı. Mobile-friendly olmalı.",
+    "description": "Hızlı ve akıcı mesajlaşma deneyimi sunan gerçek zamanlı chat arayüzü. React, WebSocket client.\n\nMesajlaşma: Message list, infinite scroll. Emoji picker. Dosya ve görsel paylaşımı, görsel önizleme.\n\nKullanıcı durumu: Typing indicators, online/offline status, read receipts.\n\nTasarım: Modern UI, dark mode.\n\nPerformans: Message caching, lazy loading, virtualization. Mobil uyumluluk.",
     "budget": 40000,
     "deadline": "2025-03-12T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Portfolio Website (Gatsby)",
-    "description": "Yaratıcı profesyonel için Gatsby ile static portfolio sitesi geliştirilmesi gerekiyor. Site, çalışmaları en iyi şekilde sergilemeli ve hızlı yüklenmeli.\n\nGatsby.js kullanılacak. Static Site Generation ile optimal performans sağlanacak. GraphQL ile veri yönetimi yapılacak.\n\nBlog entegrasyonu ile içerik paylaşımı yapılabilmeli. Markdown veya CMS (Contentful, Strapi) entegrasyonu yapılabilir.\n\nProje galerisi ile çalışmalar gösterilecek. Lightbox ile detaylı görüntüleme yapılabilmeli. Filtering ile projeler kategorilere göre filtrelenebilmeli.\n\nContact form ile iletişim kurulabilmeli. Form validation ve spam protection yapılmalı.\n\nSEO optimizasyonu yapılmalı. Meta tags, Open Graph, structured data, sitemap oluşturulmalı. Sayfa yükleme hızı optimize edilmeli (Lighthouse score 90+).\n\nModern ve yaratıcı tasarım olmalı. Animations ile görsel açıdan zengin bir deneyim sunulmalı. Responsive tasarım zorunlu.",
+    "description": "Çalışmaları sergileyen, hızlı yüklenen static portfolio sitesi. Gatsby.js, Static Site Generation, GraphQL.\n\nİçerik: Blog entegrasyonu (Markdown veya CMS: Contentful/Strapi). Proje galerisi, lightbox, kategori filtreleme.\n\nİletişim: Contact form, validation, spam protection.\n\nSEO: Meta tags, Open Graph, structured data, sitemap. Lighthouse score 90+.\n\nTasarım: Modern ve yaratıcı, animasyonlar. Responsive.",
     "budget": 25000,
     "deadline": "2025-02-25T00:00:00.000Z",
     "status": "open"

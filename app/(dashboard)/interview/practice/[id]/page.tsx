@@ -17,6 +17,7 @@ interface QuestionCommon {
   difficulty?: string;
   resources?: string[];
   description?: string;
+  stage?: number; // CV bazlı mülakatlar için aşama bilgisi (1, 2, 3)
 }
 
 interface StandardQuestion extends QuestionCommon {
@@ -133,6 +134,7 @@ const normalizeQuestions = (rawQuestions: unknown): InterviewQuestion[] => {
               : undefined,
           supportingText: typeof item.supportingText === "string" ? item.supportingText : undefined,
           acceptanceCriteria: normalizeStringArray(item.acceptanceCriteria),
+          stage: typeof item.stage === "number" ? item.stage : undefined,
         };
 
         return liveQuestion;
@@ -163,6 +165,7 @@ const normalizeQuestions = (rawQuestions: unknown): InterviewQuestion[] => {
               : undefined,
           supportingText: typeof item.supportingText === "string" ? item.supportingText : undefined,
           acceptanceCriteria: normalizeStringArray(item.acceptanceCriteria),
+          stage: typeof item.stage === "number" ? item.stage : undefined,
         };
 
         return bugFixQuestion;
@@ -179,6 +182,7 @@ const normalizeQuestions = (rawQuestions: unknown): InterviewQuestion[] => {
         difficulty: typeof item.difficulty === "string" ? item.difficulty : undefined,
         resources: normalizeStringArray(item.resources),
         description: typeof item.description === "string" ? item.description : undefined,
+        stage: typeof item.stage === "number" ? item.stage : undefined,
       };
 
       return standardQuestion;
@@ -243,6 +247,8 @@ export default function InterviewRoomPage() {
   const [textResponses, setTextResponses] = useState<Record<string, string>>({});
   const [codeResponses, setCodeResponses] = useState<Record<string, string>>({});
   const [codeLanguages, setCodeLanguages] = useState<Record<string, LiveCodingLanguage>>({});
+  const [isListening, setIsListening] = useState(false);
+  const [speechRecognition, setSpeechRecognition] = useState<any | null>(null);
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
@@ -275,7 +281,11 @@ export default function InterviewRoomPage() {
 
   const handleVisibilityChange = useCallback(() => {
     if (document.hidden && isRecording) {
-      setWarning("Sekme değiştirdiğiniz tespit edildi! Lütfen mülakat odasında kalın.");
+      const isCVBased = window.location.pathname.includes('/cv-based');
+      const warningMsg = isCVBased
+        ? "Sekme değiştirdiğiniz tespit edildi! Sisteminizi aldatma girişiminde bulunursanız hesabınız bloke edilecektir. Lütfen mülakat odasında kalın."
+        : "Sekme değiştirdiğiniz tespit edildi! Lütfen mülakat odasında kalın.";
+      setWarning(warningMsg);
     }
   }, [isRecording]);
 
@@ -299,7 +309,12 @@ export default function InterviewRoomPage() {
 
     setLoading(true);
     try {
-      const response = await fetch(`/api/interview/${interviewId}`);
+      // CV bazlı mülakatlar için farklı endpoint kullan
+      const isCVBased = window.location.pathname.includes('/cv-based');
+      const endpoint = isCVBased 
+        ? `/api/interview/cv-based/${interviewId}`
+        : `/api/interview/${interviewId}`;
+      const response = await fetch(endpoint);
       if (!response.ok) {
         throw new Error("Mülakat bilgileri alınamadı");
       }
@@ -499,7 +514,11 @@ export default function InterviewRoomPage() {
       setIsRecording(true);
       setWarning("");
 
-      await fetch(`/api/interview/${interviewId}`, {
+      const isCVBased = window.location.pathname.includes('/cv-based');
+      const endpoint = isCVBased 
+        ? `/api/interview/cv-based/${interviewId}`
+        : `/api/interview/${interviewId}`;
+      await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ action: "start" }),
@@ -611,7 +630,11 @@ export default function InterviewRoomPage() {
       };
 
       try {
-        const response = await fetch(`/api/interview/${interviewId}`, {
+        const isCVBased = window.location.pathname.includes('/cv-based');
+        const endpoint = isCVBased 
+          ? `/api/interview/cv-based/${interviewId}`
+          : `/api/interview/${interviewId}`;
+        const response = await fetch(endpoint, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -668,7 +691,8 @@ export default function InterviewRoomPage() {
     stopRecording();
     setExitIntent(null);
     setWarning("");
-    router.push("/interview/practice");
+    const isCVBased = window.location.pathname.includes('/cv-based');
+    router.push(isCVBased ? "/interview/cv-based" : "/interview/practice");
   }, [router, stopRecording, submitting]);
 
   const handleNextQuestion = () => {
@@ -699,6 +723,84 @@ export default function InterviewRoomPage() {
       [questionId]: language,
     }));
   };
+
+  // Voice-to-text functionality
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    // Check if browser supports Speech Recognition
+    const SpeechRecognition = 
+      (window as any).SpeechRecognition || 
+      (window as any).webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      console.warn("Speech Recognition not supported in this browser");
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    recognition.lang = "tr-TR"; // Turkish
+
+    recognition.onresult = (event: any) => {
+      if (!interview) return;
+      const question = interview.questions[currentQuestion];
+      if (!question) return;
+
+      let transcript = "";
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        transcript += event.results[i][0].transcript;
+      }
+
+      // Append to current question's response
+      setTextResponses((prev) => ({
+        ...prev,
+        [question.id]: (prev[question.id] || "") + transcript,
+      }));
+    };
+
+    recognition.onerror = (event: any) => {
+      console.error("Speech recognition error:", event.error);
+      if (event.error === "not-allowed") {
+        setWarning("Mikrofon erişimi reddedildi. Lütfen mikrofon izinlerini kontrol edin.");
+      }
+      setIsListening(false);
+    };
+
+    recognition.onend = () => {
+      setIsListening(false);
+    };
+
+    setSpeechRecognition(recognition);
+
+    return () => {
+      if (recognition) {
+        recognition.stop();
+      }
+    };
+  }, [interview, currentQuestion]);
+
+  const toggleListening = useCallback(() => {
+    if (!speechRecognition) {
+      setWarning("Ses tanıma bu tarayıcıda desteklenmiyor.");
+      return;
+    }
+
+    if (isListening) {
+      speechRecognition.stop();
+      setIsListening(false);
+    } else {
+      try {
+        speechRecognition.start();
+        setIsListening(true);
+        setWarning("");
+      } catch (error) {
+        console.error("Error starting speech recognition:", error);
+        setWarning("Ses tanıma başlatılamadı.");
+      }
+    }
+  }, [isListening, speechRecognition]);
 
   useEffect(() => {
     if (!interviewId) return;
@@ -860,17 +962,37 @@ export default function InterviewRoomPage() {
 
     return (
       <div className="mt-6 space-y-4">
-        <label htmlFor={`answer-${question.id}`} className="text-sm font-semibold text-gray-300">
-          Yanıtınız
-        </label>
+        <div className="flex items-center justify-between">
+          <label htmlFor={`answer-${question.id}`} className="text-sm font-semibold text-gray-300">
+            Yanıtınız
+          </label>
+          <button
+            type="button"
+            onClick={toggleListening}
+            className={`flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-medium transition ${
+              isListening
+                ? "bg-red-600 text-white hover:bg-red-700"
+                : "bg-gray-700 text-gray-200 hover:bg-gray-600"
+            }`}
+          >
+            <span className={`h-2 w-2 rounded-full ${isListening ? "bg-white animate-pulse" : "bg-gray-400"}`} />
+            {isListening ? "Dinleme Durdur" : "Sesli Yanıt"}
+          </button>
+        </div>
         <textarea
           id={`answer-${question.id}`}
           value={textResponses[question.id] ?? ""}
           onChange={(event) => handleTextChange(question.id, event.target.value)}
           onPaste={(event) => event.preventDefault()}
           className="w-full min-h-[160px] rounded-lg border border-gray-700 bg-gray-900 p-3 text-gray-100 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/30"
-          placeholder="Yanıtınızı buraya not alabilirsiniz. Tüm içerik kayıt altına alınır."
+          placeholder={isListening ? "Konuşun, sesli cevaplarınız otomatik olarak yazılacaktır..." : "Yanıtınızı buraya not alabilirsiniz. Tüm içerik kayıt altına alınır."}
         />
+        {isListening && (
+          <p className="text-xs text-blue-400 flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full bg-blue-400 animate-pulse" />
+            Dinleniyor... Konuşmaya devam edin.
+          </p>
+        )}
         {question.resources && (
           <div className="rounded-lg border border-gray-700 bg-gray-900/50 px-4 py-3 text-sm text-gray-300">
             <p className="mb-2 font-semibold text-gray-100">İpucu / Kaynaklar</p>
@@ -978,9 +1100,20 @@ export default function InterviewRoomPage() {
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_380px]">
           <div className="rounded-2xl border border-gray-800 bg-gray-900/80 p-6 shadow-xl shadow-gray-900/40">
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <h2 className="text-xl font-semibold">
-                Soru {currentQuestion + 1} / {interview.questions.length}
-              </h2>
+              <div>
+                <h2 className="text-xl font-semibold">
+                  Soru {currentQuestion + 1} / {interview.questions.length}
+                </h2>
+                {question.stage && (
+                  <p className="text-sm text-gray-400 mt-1">
+                    Aşama {question.stage}: {
+                      question.stage === 1 ? "Genel Tanışma" :
+                      question.stage === 2 ? "İş Deneyimleri" :
+                      "Teknik Mülakat"
+                    }
+                  </p>
+                )}
+              </div>
               <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-wide text-gray-300">
                 <span className="rounded-full bg-gray-800 px-3 py-1">
                   {questionTypeLabels[question.type as QuestionType]}
@@ -1040,6 +1173,11 @@ export default function InterviewRoomPage() {
               <p className="mt-2 text-sm text-gray-300">
                 Görüntü, ses ve ekran kaydınız güvenlik amacıyla saklanacaktır. Kopyala / yapıştır işlemleri
                 devre dışıdır.
+                {window.location.pathname.includes('/cv-based') && (
+                  <span className="block mt-2 text-red-400 font-semibold">
+                    ⚠️ Sisteminizi aldatma girişiminde bulunursanız hesabınız bloke edilecektir!
+                  </span>
+                )}
               </p>
 
               <div className="mt-4 grid grid-cols-1 gap-2 rounded-lg border border-gray-800 bg-gray-900/40 p-3 text-sm text-gray-200">

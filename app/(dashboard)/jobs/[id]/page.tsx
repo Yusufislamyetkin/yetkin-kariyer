@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
+import { SuccessModal } from "@/app/components/ui/SuccessModal";
 import { getCompanyInfoForJob } from "@/lib/utils/job-company-helper";
 
 interface Job {
@@ -65,6 +66,7 @@ export default function JobDetailPage() {
   const [matchLoading, setMatchLoading] = useState(false);
   const [matchError, setMatchError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   useEffect(() => {
     if (params.id) {
@@ -155,8 +157,7 @@ export default function JobDetailPage() {
 
       const data = await response.json();
       if (response.ok) {
-        alert("Başvurunuz başarıyla gönderildi!");
-        router.push("/jobs/applications");
+        setShowSuccessModal(true);
       } else {
         alert(data.error || "Başvuru yapılırken bir hata oluştu");
       }
@@ -695,6 +696,22 @@ export default function JobDetailPage() {
           )}
         </CardContent>
       </Card>
+
+      {/* Success Modal */}
+      <SuccessModal
+        isOpen={showSuccessModal}
+        onClose={() => {
+          setShowSuccessModal(false);
+          router.push("/jobs/applications");
+        }}
+        title="Başvurunuz Başarıyla Gönderildi! 🎉"
+        message="İş ilanına başvurunuz alındı. Başvurularınızı görüntülemek için başvurularım sayfasına yönlendiriliyorsunuz."
+        buttonText="Başvurularıma Git"
+        onButtonClick={() => {
+          setShowSuccessModal(false);
+          router.push("/jobs/applications");
+        }}
+      />
     </div>
   );
 }

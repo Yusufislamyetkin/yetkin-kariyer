@@ -1,7 +1,7 @@
 [
   {
     "title": "Full Stack Developer (React + Node.js) - YTK Career",
-    "description": "Anlaşmalı olduğumuz sağlık projesinde çalışacak full stack geliştiricisi arıyoruz. Hastane bilgi sistemleri, hasta kayıt uygulamaları ve telemedicine platformları geliştirme konularında deneyimli adaylar arayışındayız. Modern web teknolojileri ile güvenli ve uyumlu sağlık uygulamaları tasarlama, HIPAA compliance ve veri güvenliği konularında yetkinlik beklenmektedir. Kullanıcı arayüzü tasarımı, backend API geliştirme ve veritabanı yönetimi konularında uzmanlaşma önemlidir. Ölçeklenebilir mimariler, performans optimizasyonu ve güvenlik standartları konularında deneyim gereklidir. Ekip çalışması, agile metodolojiler ve sürekli öğrenme yaklaşımı değerlendirilecektir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, sağlık sektöründe proje deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
+    "description": "Anlaşmalı olduğumuz sağlık projesinde çalışacak full stack geliştiricisi arıyoruz. Hastane bilgi sistemleri, hasta kayıt uygulamaları ve telemedicine platformları geliştirme konularında deneyimli adaylar arayışındayız. Modern web teknolojileri ile güvenli ve uyumlu sağlık uygulamaları tasarlama, HIPAA compliance ve veri güvenliği konularında yetkinlik beklenmektedir. Kullanıcı arayüzü tasarımı, backend API geliştirme ve veritabanı yönetimi konularında uzmanlaşma önemlidir. Ölçeklenebilir mimariler, performans optimizasyonu ve güvenlik standartları konularında deneyim gereklidir. Ekip çalışması, agile metodolojiler ve sürekli öğrenme yaklaşımı değerlendirilecektir.\n\nBu pozisyonda en az 4 yıl çalışma tecrübesi olan, sağlık sektöründe proje deneyimi bulunan profesyoneller arıyoruz.",
     "requirements": {
       "mustHave": [
         "En az 4 yıl full stack geliştirme deneyimi",
@@ -27,7 +27,7 @@
   },
   {
     "title": "Backend Developer (Java) - YTK Career",
-    "description": "Anlaşmalı olduğumuz sağlık projesinde çalışacak backend geliştiricisi arıyoruz. Elektronik sağlık kayıtları (EHR) sistemleri, hasta veri yönetimi ve klinik bilgi sistemleri geliştirme konularında deneyimli adaylar arayışındayız. Enterprise seviyesinde backend uygulamaları geliştirme, veri güvenliği ve compliance konularında yetkinlik beklenmektedir. Database design, API development ve system integration konularında uzmanlaşma önemlidir. Security, encryption ve access control konularında deneyim gereklidir. Code quality, testing ve documentation konularında bilgi sahibi olunması beklenmektedir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, sağlık sektöründe Java geliştirme deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
+    "description": "Anlaşmalı olduğumuz sağlık projesinde çalışacak backend geliştiricisi arıyoruz. Elektronik sağlık kayıtları (EHR) sistemleri, hasta veri yönetimi ve klinik bilgi sistemleri geliştirme konularında deneyimli adaylar arayışındayız. Enterprise seviyesinde backend uygulamaları geliştirme, veri güvenliği ve compliance konularında yetkinlik beklenmektedir. Database design, API development ve system integration konularında uzmanlaşma önemlidir. Security, encryption ve access control konularında deneyim gereklidir. Code quality, testing ve documentation konularında bilgi sahibi olunması beklenmektedir.\n\nBu pozisyonda en az 4 yıl çalışma tecrübesi olan, sağlık sektöründe Java geliştirme deneyimi bulunan profesyoneller arıyoruz.",
     "requirements": {
       "mustHave": [
         "En az 4 yıl Java geliştirme deneyimi",
@@ -53,7 +53,7 @@
   },
   {
     "title": "Mobile Developer (React Native) - YTK Career",
-    "description": "Anlaşmalı olduğumuz sağlık projesinde çalışacak mobil geliştiricisi arıyoruz. Sağlık uygulamaları, hasta takip sistemleri ve telemedicine çözümleri geliştirme konularında deneyimli adaylar arayışındayız. Cross-platform mobil uygulamalar geliştirme, native performance optimization ve kullanıcı deneyimi iyileştirme konularında yetkinlik beklenmektedir. Security, privacy ve HIPAA compliance konularında uzmanlaşma önemlidir. Offline data storage, sync mechanisms ve push notifications konularında deneyim gereklidir. App store deployment, version management ve update strategies konularında bilgi sahibi olunması beklenmektedir. Bu pozisyonda en az 3 yıl çalışma tecrübesi olan, sağlık sektöründe mobil uygulama geliştirme deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
+    "description": "Anlaşmalı olduğumuz sağlık projesinde çalışacak mobil geliştiricisi arıyoruz. Sağlık uygulamaları, hasta takip sistemleri ve telemedicine çözümleri geliştirme konularında deneyimli adaylar arayışındayız. Cross-platform mobil uygulamalar geliştirme, native performance optimization ve kullanıcı deneyimi iyileştirme konularında yetkinlik beklenmektedir. Security, privacy ve HIPAA compliance konularında uzmanlaşma önemlidir. Offline data storage, sync mechanisms ve push notifications konularında deneyim gereklidir. App store deployment, version management ve update strategies konularında bilgi sahibi olunması beklenmektedir.\n\nBu pozisyonda en az 3 yıl çalışma tecrübesi olan, sağlık sektöründe mobil uygulama geliştirme deneyimi bulunan profesyoneller arıyoruz.",
     "requirements": {
       "mustHave": [
         "En az 3 yıl React Native geliştirme deneyimi",
@@ -79,7 +79,7 @@
   },
   {
     "title": "Database Administrator - YTK Career",
-    "description": "Anlaşmalı olduğumuz sağlık projesinde çalışacak veritabanı yöneticisi arıyoruz. Sağlık bilgi sistemleri için veritabanı mimarisi tasarlama, performans optimizasyonu ve güvenlik yönetimi konularında uzmanlaşmış profesyoneller arayışındayız. Yüksek erişilebilirlik çözümleri, yedekleme ve felaket kurtarma stratejileri konularında deneyimli adaylar değerlendirilecektir. Query optimization, index management ve execution plan analysis konularında derin bilgi sahibi olunması gerekmektedir. Database security, access control ve audit logging konularında yetkinlik beklenmektedir. HIPAA compliance, data encryption ve privacy protection konularında bilgi sahibi olunması beklenmektedir. Bu pozisyonda en az 5 yıl çalışma tecrübesi olan, sağlık sektöründe DBA deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
+    "description": "Anlaşmalı olduğumuz sağlık projesinde çalışacak veritabanı yöneticisi arıyoruz. Sağlık bilgi sistemleri için veritabanı mimarisi tasarlama, performans optimizasyonu ve güvenlik yönetimi konularında uzmanlaşmış profesyoneller arayışındayız. Yüksek erişilebilirlik çözümleri, yedekleme ve felaket kurtarma stratejileri konularında deneyimli adaylar değerlendirilecektir. Query optimization, index management ve execution plan analysis konularında derin bilgi sahibi olunması gerekmektedir. Database security, access control ve audit logging konularında yetkinlik beklenmektedir. HIPAA compliance, data encryption ve privacy protection konularında bilgi sahibi olunması beklenmektedir.\n\nBu pozisyonda en az 5 yıl çalışma tecrübesi olan, sağlık sektöründe DBA deneyimi bulunan profesyoneller arıyoruz.",
     "requirements": {
       "mustHave": [
         "En az 5 yıl DBA deneyimi",
@@ -105,7 +105,7 @@
   },
   {
     "title": "Security Engineer - YTK Career",
-    "description": "Anlaşmalı olduğumuz sağlık projesinde çalışacak güvenlik mühendisi arıyoruz. Sağlık bilgi sistemleri için güvenlik mimarisi tasarlama, penetrasyon testleri ve güvenlik denetimleri konularında uzmanlaşmış profesyoneller arayışındayız. HIPAA compliance, veri güvenliği ve privacy protection konularında yetkinlik beklenmektedir. Security assessment, risk analizi ve compliance kontrolü konularında uzmanlaşma önemlidir. Encryption, authentication ve authorization mekanizmaları konularında deneyim gereklidir. Security monitoring, threat detection ve incident response konularında bilgi sahibi olunması beklenmektedir. Bu pozisyonda en az 5 yıl çalışma tecrübesi olan, sağlık sektöründe güvenlik deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
+    "description": "Anlaşmalı olduğumuz sağlık projesinde çalışacak güvenlik mühendisi arıyoruz. Sağlık bilgi sistemleri için güvenlik mimarisi tasarlama, penetrasyon testleri ve güvenlik denetimleri konularında uzmanlaşmış profesyoneller arayışındayız. HIPAA compliance, veri güvenliği ve privacy protection konularında yetkinlik beklenmektedir. Security assessment, risk analizi ve compliance kontrolü konularında uzmanlaşma önemlidir. Encryption, authentication ve authorization mekanizmaları konularında deneyim gereklidir. Security monitoring, threat detection ve incident response konularında bilgi sahibi olunması beklenmektedir.\n\nBu pozisyonda en az 5 yıl çalışma tecrübesi olan, sağlık sektöründe güvenlik deneyimi bulunan profesyoneller arıyoruz.",
     "requirements": {
       "mustHave": [
         "En az 5 yıl cybersecurity deneyimi",
@@ -131,7 +131,7 @@
   },
   {
     "title": "HL7 Integration Specialist - YTK Career",
-    "description": "Anlaşmalı olduğumuz sağlık projesinde çalışacak entegrasyon uzmanı arıyoruz. HL7 ve FHIR standartları ile sağlık sistemleri entegrasyonu, veri değişimi ve interoperability çözümleri geliştirme konularında deneyimli adaylar arayışındayız. HL7 v2 ve v3, FHIR ve DICOM standartları konularında yetkinlik beklenmektedir. Message transformation, data mapping ve interface engine konularında uzmanlaşma önemlidir. System integration, API development ve error handling konularında deneyim gereklidir. Testing, validation ve troubleshooting konularında bilgi sahibi olunması beklenmektedir. Bu pozisyonda en az 3 yıl çalışma tecrübesi olan, sağlık sektöründe HL7 entegrasyon deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
+    "description": "Anlaşmalı olduğumuz sağlık projesinde çalışacak entegrasyon uzmanı arıyoruz. HL7 ve FHIR standartları ile sağlık sistemleri entegrasyonu, veri değişimi ve interoperability çözümleri geliştirme konularında deneyimli adaylar arayışındayız. HL7 v2 ve v3, FHIR ve DICOM standartları konularında yetkinlik beklenmektedir. Message transformation, data mapping ve interface engine konularında uzmanlaşma önemlidir. System integration, API development ve error handling konularında deneyim gereklidir. Testing, validation ve troubleshooting konularında bilgi sahibi olunması beklenmektedir.\n\nBu pozisyonda en az 3 yıl çalışma tecrübesi olan, sağlık sektöründe HL7 entegrasyon deneyimi bulunan profesyoneller arıyoruz.",
     "requirements": {
       "mustHave": [
         "En az 3 yıl HL7 entegrasyon deneyimi",
@@ -157,7 +157,7 @@
   },
   {
     "title": "Frontend Developer (React) - YTK Career",
-    "description": "Anlaşmalı olduğumuz sağlık projesinde çalışacak frontend geliştiricisi arıyoruz. Doktor portalleri, hasta dashboard'ları ve klinik bilgi sistemleri arayüzleri geliştirme konularında deneyimli adaylar arayışındayız. Modern JavaScript framework'leri ile kullanıcı deneyimi odaklı arayüzler tasarlama, accessibility ve usability konularında yetkinlik beklenmektedir. Component-based architecture, state management ve API entegrasyonları konularında uzmanlaşma önemlidir. Performance optimization, code splitting ve lazy loading konularında deneyim gereklidir. Security, data privacy ve HIPAA compliance konularında bilgi sahibi olunması beklenmektedir. Bu pozisyonda en az 3 yıl çalışma tecrübesi olan, sağlık sektöründe frontend geliştirme deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
+    "description": "Anlaşmalı olduğumuz sağlık projesinde çalışacak frontend geliştiricisi arıyoruz. Doktor portalleri, hasta dashboard'ları ve klinik bilgi sistemleri arayüzleri geliştirme konularında deneyimli adaylar arayışındayız. Modern JavaScript framework'leri ile kullanıcı deneyimi odaklı arayüzler tasarlama, accessibility ve usability konularında yetkinlik beklenmektedir. Component-based architecture, state management ve API entegrasyonları konularında uzmanlaşma önemlidir. Performance optimization, code splitting ve lazy loading konularında deneyim gereklidir. Security, data privacy ve HIPAA compliance konularında bilgi sahibi olunması beklenmektedir.\n\nBu pozisyonda en az 3 yıl çalışma tecrübesi olan, sağlık sektöründe frontend geliştirme deneyimi bulunan profesyoneller arıyoruz.",
     "requirements": {
       "mustHave": [
         "En az 3 yıl React geliştirme deneyimi",
@@ -183,7 +183,7 @@
   },
   {
     "title": "DevOps Engineer - YTK Career",
-    "description": "Anlaşmalı olduğumuz sağlık projesinde çalışacak DevOps mühendisi arıyoruz. Sağlık bilgi sistemleri için bulut altyapısı yönetimi, CI/CD pipeline kurulumu ve güvenlik odaklı otomasyon süreçleri geliştirme konularında uzmanlaşmış profesyoneller arayışındayız. HIPAA compliance, veri güvenliği ve privacy protection konularında yetkinlik beklenmektedir. Containerization, orchestration ve infrastructure automation konularında uzmanlaşma önemlidir. Monitoring, logging ve alerting sistemleri kurma konularında deneyim gereklidir. Security best practices, compliance ve audit konularında bilgi sahibi olunması beklenmektedir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, sağlık sektöründe DevOps deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
+    "description": "Anlaşmalı olduğumuz sağlık projesinde çalışacak DevOps mühendisi arıyoruz. Sağlık bilgi sistemleri için bulut altyapısı yönetimi, CI/CD pipeline kurulumu ve güvenlik odaklı otomasyon süreçleri geliştirme konularında uzmanlaşmış profesyoneller arayışındayız. HIPAA compliance, veri güvenliği ve privacy protection konularında yetkinlik beklenmektedir. Containerization, orchestration ve infrastructure automation konularında uzmanlaşma önemlidir. Monitoring, logging ve alerting sistemleri kurma konularında deneyim gereklidir. Security best practices, compliance ve audit konularında bilgi sahibi olunması beklenmektedir.\n\nBu pozisyonda en az 4 yıl çalışma tecrübesi olan, sağlık sektöründe DevOps deneyimi bulunan profesyoneller arıyoruz.",
     "requirements": {
       "mustHave": [
         "En az 4 yıl DevOps deneyimi",
@@ -209,7 +209,7 @@
   },
   {
     "title": "Data Analyst - YTK Career",
-    "description": "Anlaşmalı olduğumuz sağlık projesinde çalışacak veri analisti arıyoruz. Sağlık verileri analizi, klinik metrikler ve hasta sonuçları raporlama konularında deneyimli adaylar arayışındayız. SQL sorguları yazma, veri temizleme ve veri görselleştirme konularında yetkinlik beklenmektedir. Statistical analysis, trend analysis ve predictive modeling konularında uzmanlaşma önemlidir. Reporting tools, dashboard creation ve KPI tracking konularında deneyim gereklidir. HIPAA compliance, data privacy ve security konularında bilgi sahibi olunması beklenmektedir. Bu pozisyonda en az 3 yıl çalışma tecrübesi olan, sağlık sektöründe veri analizi deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
+    "description": "Anlaşmalı olduğumuz sağlık projesinde çalışacak veri analisti arıyoruz. Sağlık verileri analizi, klinik metrikler ve hasta sonuçları raporlama konularında deneyimli adaylar arayışındayız. SQL sorguları yazma, veri temizleme ve veri görselleştirme konularında yetkinlik beklenmektedir. Statistical analysis, trend analysis ve predictive modeling konularında uzmanlaşma önemlidir. Reporting tools, dashboard creation ve KPI tracking konularında deneyim gereklidir. HIPAA compliance, data privacy ve security konularında bilgi sahibi olunması beklenmektedir.\n\nBu pozisyonda en az 3 yıl çalışma tecrübesi olan, sağlık sektöründe veri analizi deneyimi bulunan profesyoneller arıyoruz.",
     "requirements": {
       "mustHave": [
         "En az 3 yıl veri analizi deneyimi",
@@ -235,7 +235,7 @@
   },
   {
     "title": "QA Engineer - YTK Career",
-    "description": "Anlaşmalı olduğumuz sağlık projesinde çalışacak test mühendisi arıyoruz. Sağlık bilgi sistemleri, hasta kayıt uygulamaları ve klinik sistemler için test süreçleri yürütme konularında deneyimli adaylar arayışındayız. Test planlama, test case tasarımı ve test execution konularında yetkinlik beklenmektedir. Manual testing, regression testing ve exploratory testing konularında uzmanlaşma önemlidir. Bug tracking, test reporting ve quality metrics konularında deneyim gereklidir. HIPAA compliance, data privacy ve security testing konularında bilgi sahibi olunması beklenmektedir. Bu pozisyonda en az 3 yıl çalışma tecrübesi olan, sağlık sektöründe QA deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
+    "description": "Anlaşmalı olduğumuz sağlık projesinde çalışacak test mühendisi arıyoruz. Sağlık bilgi sistemleri, hasta kayıt uygulamaları ve klinik sistemler için test süreçleri yürütme konularında deneyimli adaylar arayışındayız. Test planlama, test case tasarımı ve test execution konularında yetkinlik beklenmektedir. Manual testing, regression testing ve exploratory testing konularında uzmanlaşma önemlidir. Bug tracking, test reporting ve quality metrics konularında deneyim gereklidir. HIPAA compliance, data privacy ve security testing konularında bilgi sahibi olunması beklenmektedir.\n\nBu pozisyonda en az 3 yıl çalışma tecrübesi olan, sağlık sektöründe QA deneyimi bulunan profesyoneller arıyoruz.",
     "requirements": {
       "mustHave": [
         "En az 3 yıl QA deneyimi",
@@ -261,7 +261,7 @@
   },
   {
     "title": "Business Analyst - YTK Career",
-    "description": "Anlaşmalı olduğumuz sağlık projesinde çalışacak iş analisti arıyoruz. Sağlık bilgi sistemleri için gereksinim analizi yapma, süreç iyileştirme önerileri geliştirme ve kullanıcı hikayeleri yazma konularında deneyimli adaylar arayışındayız. İş ihtiyaçlarını teknik gereksinimlere dönüştürme, dokümantasyon oluşturma ve proje yönetimi süreçlerine katkı sağlama yetkinliği beklenmektedir. Stakeholder interviews, requirement gathering ve gap analysis konularında deneyim önemlidir. Process mapping, workflow design ve business rules documentation konularında yetkinlik beklenmektedir. HIPAA compliance, data privacy ve security requirements konularında bilgi sahibi olunması gerekmektedir. Bu pozisyonda en az 4 yıl çalışma tecrübesi olan, sağlık sektöründe iş analizi deneyimi bulunan profesyoneller arıyoruz. Bu iş pozisyonu için imzalanan sözleşmede, sözleşme süresince aylık olarak %1 hizmet bedeli maaşınızdan tahsil edilecektir.",
+    "description": "Anlaşmalı olduğumuz sağlık projesinde çalışacak iş analisti arıyoruz. Sağlık bilgi sistemleri için gereksinim analizi yapma, süreç iyileştirme önerileri geliştirme ve kullanıcı hikayeleri yazma konularında deneyimli adaylar arayışındayız. İş ihtiyaçlarını teknik gereksinimlere dönüştürme, dokümantasyon oluşturma ve proje yönetimi süreçlerine katkı sağlama yetkinliği beklenmektedir. Stakeholder interviews, requirement gathering ve gap analysis konularında deneyim önemlidir. Process mapping, workflow design ve business rules documentation konularında yetkinlik beklenmektedir. HIPAA compliance, data privacy ve security requirements konularında bilgi sahibi olunması gerekmektedir.\n\nBu pozisyonda en az 4 yıl çalışma tecrübesi olan, sağlık sektöründe iş analizi deneyimi bulunan profesyoneller arıyoruz.",
     "requirements": {
       "mustHave": [
         "En az 4 yıl iş analizi deneyimi",
@@ -286,4 +286,3 @@
     "daysAgo": 11
   }
 ]
-

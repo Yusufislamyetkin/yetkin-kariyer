@@ -15,42 +15,42 @@ interface CVData {
 
 export default function CompactTemplate({ data }: { data: CVData }) {
   return (
-    <div className="bg-white text-gray-900 break-words" style={{ fontFamily: 'Arial, sans-serif', fontSize: '11px' }}>
-      <div className="max-w-4xl mx-auto p-6">
-        <div className="border-b-2 border-gray-800 pb-3 mb-4">
-          <h1 className="text-3xl font-bold text-gray-900 mb-1">{data.personalInfo.name || "Ad Soyad"}</h1>
-          <div className="text-xs text-gray-700 flex flex-wrap gap-3">
+    <div className="bg-white text-gray-900 break-words overflow-hidden" style={{ fontFamily: 'Arial, sans-serif', fontSize: '11px', height: '100%', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+      <div className="max-w-4xl mx-auto p-3 flex-1 overflow-hidden" style={{ display: 'flex', flexDirection: 'column' }}>
+        <div className="border-b-2 border-gray-800 pb-2 mb-2 flex-shrink-0">
+          <h1 className="text-xl font-bold text-gray-900 mb-0.5">{data.personalInfo.name || "Ad Soyad"}</h1>
+          <div className="text-xs text-gray-700 flex flex-wrap gap-2">
             {data.personalInfo.email && <span>{data.personalInfo.email}</span>}
             {data.personalInfo.phone && <span>{data.personalInfo.phone}</span>}
             {data.personalInfo.linkedin && <span>{data.personalInfo.linkedin}</span>}
           </div>
         </div>
         {data.summary && (
-          <section className="mb-4">
-            <h2 className="text-sm font-bold text-gray-900 mb-1 uppercase">Özet</h2>
-            <p className="text-gray-700 leading-tight break-words whitespace-pre-line text-xs">{data.summary}</p>
+          <section className="mb-2 flex-shrink-0">
+            <h2 className="text-xs font-bold text-gray-900 mb-0.5 uppercase">Özet</h2>
+            <p className="text-gray-700 leading-tight break-words whitespace-pre-line text-xs line-clamp-2">{data.summary}</p>
           </section>
         )}
-        <div className="grid md:grid-cols-2 gap-4">
-          <div>
+        <div className="grid md:grid-cols-2 gap-2 flex-1 overflow-hidden" style={{ minHeight: 0 }}>
+          <div className="overflow-y-auto" style={{ maxHeight: '100%' }}>
             {data.experience.length > 0 && (
-              <section className="mb-4">
-                <h2 className="text-sm font-bold text-gray-900 mb-2 uppercase border-b border-gray-400 pb-1">İş Deneyimi</h2>
-                <div className="space-y-2">
+              <section className="mb-2">
+                <h2 className="text-xs font-bold text-gray-900 mb-1 uppercase border-b border-gray-400 pb-0.5">İş Deneyimi</h2>
+                <div className="space-y-1">
                   {data.experience.map((exp, i) => (
                     <div key={i}>
                       <h3 className="font-semibold text-gray-900 text-xs">{exp.position}</h3>
                       <p className="text-gray-700 text-xs">{exp.company} | {exp.startDate} - {exp.current ? "Devam" : exp.endDate}</p>
-                      {exp.description && <p className="text-gray-600 mt-1 break-words whitespace-pre-line text-xs leading-tight">{exp.description}</p>}
+                      {exp.description && <p className="text-gray-600 mt-0.5 break-words whitespace-pre-line text-xs leading-tight line-clamp-1">{exp.description}</p>}
                     </div>
                   ))}
                 </div>
               </section>
             )}
             {data.education.length > 0 && (
-              <section className="mb-4">
-                <h2 className="text-sm font-bold text-gray-900 mb-2 uppercase border-b border-gray-400 pb-1">Eğitim</h2>
-                <div className="space-y-1">
+              <section className="mb-2">
+                <h2 className="text-xs font-bold text-gray-900 mb-1 uppercase border-b border-gray-400 pb-0.5">Eğitim</h2>
+                <div className="space-y-0.5">
                   {data.education.map((edu, i) => (
                     <div key={i}>
                       <p className="font-semibold text-gray-900 text-xs">{edu.degree}</p>
@@ -61,17 +61,17 @@ export default function CompactTemplate({ data }: { data: CVData }) {
               </section>
             )}
           </div>
-          <div>
+          <div className="overflow-y-auto" style={{ maxHeight: '100%' }}>
             {data.skills.length > 0 && (
-              <section className="mb-4">
-                <h2 className="text-sm font-bold text-gray-900 mb-2 uppercase border-b border-gray-400 pb-1">Beceriler</h2>
+              <section className="mb-2">
+                <h2 className="text-xs font-bold text-gray-900 mb-1 uppercase border-b border-gray-400 pb-0.5">Beceriler</h2>
                 <p className="text-gray-700 text-xs leading-tight">{data.skills.join(' • ')}</p>
               </section>
             )}
             {data.certifications.length > 0 && (
               <section>
-                <h2 className="text-sm font-bold text-gray-900 mb-2 uppercase border-b border-gray-400 pb-1">Sertifikalar</h2>
-                <div className="space-y-1">
+                <h2 className="text-xs font-bold text-gray-900 mb-1 uppercase border-b border-gray-400 pb-0.5">Sertifikalar</h2>
+                <div className="space-y-0.5">
                   {data.certifications.map((cert, i) => (
                     <div key={i}>
                       <p className="font-semibold text-gray-900 text-xs">{cert.name}</p>

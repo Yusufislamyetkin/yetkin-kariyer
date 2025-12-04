@@ -15,60 +15,60 @@ interface CVData {
 
 export default function BoldTemplate({ data }: { data: CVData }) {
   return (
-    <div className="bg-white text-gray-900 break-words">
-      <div className="max-w-5xl mx-auto">
-        <div className="bg-black text-white p-10">
-          <h1 className="text-5xl font-black mb-3" style={{ letterSpacing: '2px', fontFamily: 'Arial Black, sans-serif' }}>{data.personalInfo.name || "AD SOYAD"}</h1>
-          <div className="flex flex-wrap gap-6 text-gray-300 text-sm font-bold">
+    <div className="bg-white text-gray-900 break-words overflow-hidden" style={{ height: '100%', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+      <div className="max-w-5xl mx-auto flex-1 overflow-hidden" style={{ display: 'flex', flexDirection: 'column' }}>
+        <div className="bg-black text-white p-4 flex-shrink-0">
+          <h1 className="text-2xl font-black mb-1" style={{ letterSpacing: '1px', fontFamily: 'Arial Black, sans-serif' }}>{data.personalInfo.name || "AD SOYAD"}</h1>
+          <div className="flex flex-wrap gap-2 text-gray-300 text-xs font-bold">
             {data.personalInfo.email && <span>{data.personalInfo.email.toUpperCase()}</span>}
             {data.personalInfo.phone && <span>{data.personalInfo.phone}</span>}
             {data.personalInfo.linkedin && <span>{data.personalInfo.linkedin.toUpperCase()}</span>}
           </div>
         </div>
-        <div className="p-10">
+        <div className="p-4 flex-1 overflow-hidden" style={{ display: 'flex', flexDirection: 'column' }}>
           {data.summary && (
-            <section className="mb-10 bg-yellow-400 p-8 -mx-10">
-              <h2 className="text-3xl font-black mb-4 text-black">ÖZET</h2>
-              <p className="text-gray-900 leading-relaxed break-words whitespace-pre-line font-semibold">{data.summary}</p>
+            <section className="mb-2 bg-yellow-400 p-3 -mx-4 flex-shrink-0">
+              <h2 className="text-lg font-black mb-1 text-black">ÖZET</h2>
+              <p className="text-gray-900 leading-tight break-words whitespace-pre-line font-semibold text-sm line-clamp-3">{data.summary}</p>
             </section>
           )}
-          <div className="grid md:grid-cols-2 gap-10">
-            <div className="space-y-8">
+          <div className="grid md:grid-cols-2 gap-4 flex-1 overflow-hidden" style={{ minHeight: 0 }}>
+            <div className="space-y-2 overflow-y-auto" style={{ maxHeight: '100%' }}>
               {data.experience.length > 0 && (
                 <section>
-                  <h2 className="text-3xl font-black mb-6 text-black border-b-4 border-black pb-2">İŞ DENEYİMİ</h2>
-                  <div className="space-y-6">
+                  <h2 className="text-lg font-black mb-2 text-black border-b-2 border-black pb-1">İŞ DENEYİMİ</h2>
+                  <div className="space-y-1.5">
                     {data.experience.map((exp, i) => (
-                      <div key={i} className="border-l-8 border-black pl-6">
-                        <h3 className="text-2xl font-black text-gray-900 mb-1">{exp.position.toUpperCase()}</h3>
-                        <p className="text-black font-bold text-lg">{exp.company}</p>
-                        <p className="text-gray-700 font-semibold mb-3">{exp.startDate} - {exp.current ? "DEVAM" : exp.endDate}</p>
-                        {exp.description && <p className="text-gray-800 mt-3 break-words whitespace-pre-line font-medium">{exp.description}</p>}
+                      <div key={i} className="border-l-4 border-black pl-2">
+                        <h3 className="text-base font-black text-gray-900 mb-0.5">{exp.position.toUpperCase()}</h3>
+                        <p className="text-black font-bold text-sm">{exp.company}</p>
+                        <p className="text-gray-700 font-semibold text-xs mb-1">{exp.startDate} - {exp.current ? "DEVAM" : exp.endDate}</p>
+                        {exp.description && <p className="text-gray-800 mt-1 break-words whitespace-pre-line font-medium text-xs line-clamp-2">{exp.description}</p>}
                       </div>
                     ))}
                   </div>
                 </section>
               )}
             </div>
-            <div className="space-y-8">
+            <div className="space-y-2 overflow-y-auto" style={{ maxHeight: '100%' }}>
               {data.skills.length > 0 && (
                 <section>
-                  <h2 className="text-3xl font-black mb-6 text-black border-b-4 border-black pb-2">BECERİLER</h2>
-                  <div className="space-y-3">
+                  <h2 className="text-lg font-black mb-2 text-black border-b-2 border-black pb-1">BECERİLER</h2>
+                  <div className="space-y-1">
                     {data.skills.map((skill, i) => (
-                      <div key={i} className="bg-black text-white p-4 font-bold text-center">{skill.toUpperCase()}</div>
+                      <div key={i} className="bg-black text-white p-2 font-bold text-center text-xs">{skill.toUpperCase()}</div>
                     ))}
                   </div>
                 </section>
               )}
               {data.education.length > 0 && (
                 <section>
-                  <h2 className="text-3xl font-black mb-6 text-black border-b-4 border-black pb-2">EĞİTİM</h2>
-                  <div className="space-y-4">
+                  <h2 className="text-lg font-black mb-2 text-black border-b-2 border-black pb-1">EĞİTİM</h2>
+                  <div className="space-y-1">
                     {data.education.map((edu, i) => (
-                      <div key={i} className="border-l-8 border-black pl-6">
-                        <h3 className="text-xl font-black text-gray-900">{edu.degree.toUpperCase()}</h3>
-                        <p className="text-black font-bold">{edu.school}</p>
+                      <div key={i} className="border-l-4 border-black pl-2">
+                        <h3 className="text-base font-black text-gray-900">{edu.degree.toUpperCase()}</h3>
+                        <p className="text-black font-bold text-xs">{edu.school}</p>
                       </div>
                     ))}
                   </div>

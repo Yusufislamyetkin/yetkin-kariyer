@@ -15,75 +15,77 @@ interface CVData {
 
 export default function ATSFocusedTemplate({ data }: { data: CVData }) {
   return (
-    <div className="bg-white text-gray-900 break-words" style={{ fontFamily: 'Arial, sans-serif' }}>
-      <div className="max-w-4xl mx-auto p-10">
-        <div className="text-center border-b-2 border-gray-800 pb-6 mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">{data.personalInfo.name || "Ad Soyad"}</h1>
-          <div className="text-sm text-gray-700 space-y-1">
+    <div className="bg-white text-gray-900 break-words overflow-hidden" style={{ fontFamily: 'Arial, sans-serif', height: '100%', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+      <div className="max-w-4xl mx-auto p-4 flex-1 overflow-hidden" style={{ display: 'flex', flexDirection: 'column' }}>
+        <div className="text-center border-b-2 border-gray-800 pb-3 mb-2 flex-shrink-0">
+          <h1 className="text-2xl font-bold text-gray-900 mb-1">{data.personalInfo.name || "Ad Soyad"}</h1>
+          <div className="text-xs text-gray-700 space-y-0.5">
             {data.personalInfo.email && <div>{data.personalInfo.email}</div>}
             {data.personalInfo.phone && <div>{data.personalInfo.phone}</div>}
             {data.personalInfo.address && <div>{data.personalInfo.address}</div>}
             {data.personalInfo.linkedin && <div>{data.personalInfo.linkedin}</div>}
           </div>
         </div>
-        {data.summary && (
-          <section className="mb-8">
-            <h2 className="text-xl font-bold text-gray-900 mb-3 uppercase">Özet</h2>
-            <p className="text-gray-700 leading-relaxed break-words whitespace-pre-line">{data.summary}</p>
-          </section>
-        )}
-        {data.experience.length > 0 && (
-          <section className="mb-8">
-            <h2 className="text-xl font-bold text-gray-900 mb-4 uppercase">İş Deneyimi</h2>
-            <div className="space-y-4">
-              {data.experience.map((exp, i) => (
-                <div key={i}>
-                  <h3 className="font-bold text-gray-900">{exp.position} | {exp.company}</h3>
-                  <p className="text-sm text-gray-600 mb-2">{exp.startDate} - {exp.current ? "Devam ediyor" : exp.endDate}</p>
-                  {exp.description && <p className="text-gray-700 break-words whitespace-pre-line text-sm">{exp.description}</p>}
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-        {data.education.length > 0 && (
-          <section className="mb-8">
-            <h2 className="text-xl font-bold text-gray-900 mb-4 uppercase">Eğitim</h2>
-            <div className="space-y-3">
-              {data.education.map((edu, i) => (
-                <div key={i}>
-                  <h3 className="font-bold text-gray-900">{edu.degree} | {edu.school}</h3>
-                  <p className="text-sm text-gray-600">{edu.startDate} - {edu.endDate}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-        {data.skills.length > 0 && (
-          <section className="mb-8">
-            <h2 className="text-xl font-bold text-gray-900 mb-4 uppercase">Beceriler</h2>
-            <p className="text-gray-700">{data.skills.join(', ')}</p>
-          </section>
-        )}
-        {data.certifications.length > 0 && (
-          <section className="mb-8">
-            <h2 className="text-xl font-bold text-gray-900 mb-4 uppercase">Sertifikalar</h2>
-            <div className="space-y-2">
-              {data.certifications.map((cert, i) => (
-                <div key={i}>
-                  <p className="font-semibold text-gray-900">{cert.name} | {cert.issuer}</p>
-                  {cert.date && <p className="text-sm text-gray-600">{cert.date}</p>}
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-        {data.languages.length > 0 && (
-          <section>
-            <h2 className="text-xl font-bold text-gray-900 mb-4 uppercase">Diller</h2>
-            <p className="text-gray-700">{data.languages.map(l => `${l.name} (${l.level})`).join(', ')}</p>
-          </section>
-        )}
+        <div className="flex-1 overflow-y-auto" style={{ minHeight: 0 }}>
+          {data.summary && (
+            <section className="mb-2">
+              <h2 className="text-lg font-bold text-gray-900 mb-1 uppercase">Özet</h2>
+              <p className="text-gray-700 leading-tight break-words whitespace-pre-line text-sm line-clamp-3">{data.summary}</p>
+            </section>
+          )}
+          {data.experience.length > 0 && (
+            <section className="mb-2">
+              <h2 className="text-lg font-bold text-gray-900 mb-2 uppercase">İş Deneyimi</h2>
+              <div className="space-y-1.5">
+                {data.experience.map((exp, i) => (
+                  <div key={i}>
+                    <h3 className="font-bold text-gray-900 text-xs">{exp.position} | {exp.company}</h3>
+                    <p className="text-xs text-gray-600 mb-1">{exp.startDate} - {exp.current ? "Devam ediyor" : exp.endDate}</p>
+                    {exp.description && <p className="text-gray-700 break-words whitespace-pre-line text-xs line-clamp-2">{exp.description}</p>}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+          {data.education.length > 0 && (
+            <section className="mb-2">
+              <h2 className="text-lg font-bold text-gray-900 mb-1 uppercase">Eğitim</h2>
+              <div className="space-y-1">
+                {data.education.map((edu, i) => (
+                  <div key={i}>
+                    <h3 className="font-bold text-gray-900 text-xs">{edu.degree} | {edu.school}</h3>
+                    <p className="text-xs text-gray-600">{edu.startDate} - {edu.endDate}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+          {data.skills.length > 0 && (
+            <section className="mb-2">
+              <h2 className="text-lg font-bold text-gray-900 mb-1 uppercase">Beceriler</h2>
+              <p className="text-gray-700 text-xs">{data.skills.join(', ')}</p>
+            </section>
+          )}
+          {data.certifications.length > 0 && (
+            <section className="mb-2">
+              <h2 className="text-lg font-bold text-gray-900 mb-1 uppercase">Sertifikalar</h2>
+              <div className="space-y-1">
+                {data.certifications.map((cert, i) => (
+                  <div key={i}>
+                    <p className="font-semibold text-gray-900 text-xs">{cert.name} | {cert.issuer}</p>
+                    {cert.date && <p className="text-xs text-gray-600">{cert.date}</p>}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+          {data.languages.length > 0 && (
+            <section>
+              <h2 className="text-lg font-bold text-gray-900 mb-1 uppercase">Diller</h2>
+              <p className="text-gray-700 text-xs">{data.languages.map(l => `${l.name} (${l.level})`).join(', ')}</p>
+            </section>
+          )}
+        </div>
       </div>
     </div>
   );

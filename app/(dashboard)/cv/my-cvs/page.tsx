@@ -5,6 +5,16 @@ import Link from "next/link";
 import { FileText, Plus, Edit, Trash2, Calendar, Eye } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
+import { ConfirmDialog } from "@/app/components/ui/ConfirmDialog";
+
+interface CVUpload {
+  id: string;
+  url: string;
+  name: string;
+  mimeType: string;
+  size: number;
+  createdAt: string;
+}
 
 interface CV {
   id: string;
@@ -15,11 +25,22 @@ interface CV {
     id: string;
     name: string;
   };
+  uploads?: CVUpload[];
 }
 
 export default function MyCVsPage() {
   const [cvs, setCvs] = useState<CV[]>([]);
   const [loading, setLoading] = useState(true);
+  const [deleteConfirm, setDeleteConfirm] = useState<{
+    isOpen: boolean;
+    cvId: string | null;
+    cvName: string;
+  }>({
+    isOpen: false,
+    cvId: null,
+    cvName: "",
+  });
+  const [deleting, setDeleting] = useState<string | null>(null);
 
   useEffect(() => {
     fetchCVs();
@@ -37,20 +58,43 @@ export default function MyCVsPage() {
     }
   };
 
-  const handleDelete = async (id: string) => {
-    if (!confirm("CV'yi silmek istediğinize emin misiniz?")) return;
+  const handleDeleteClick = (id: string, name: string) => {
+    setDeleteConfirm({
+      isOpen: true,
+      cvId: id,
+      cvName: name || "CV",
+    });
+  };
 
+  const handleDeleteConfirm = async () => {
+    if (!deleteConfirm.cvId) return;
+
+    setDeleting(deleteConfirm.cvId);
     try {
-      const response = await fetch(`/api/cv/${id}`, {
+      const response = await fetch(`/api/cv/${deleteConfirm.cvId}`, {
         method: "DELETE",
       });
 
-      if (response.ok) {
-        fetchCVs();
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        // Başarılı silme - state'i güncelle
+        setCvs((prev) => prev.filter((cv) => cv.id !== deleteConfirm.cvId));
+        setDeleteConfirm({ isOpen: false, cvId: null, cvName: "" });
+      } else {
+        // Hata durumu
+        alert(data.error || "CV silinirken bir hata oluştu");
       }
     } catch (error) {
       console.error("Error deleting CV:", error);
+      alert("CV silinirken bir hata oluştu");
+    } finally {
+      setDeleting(null);
     }
+  };
+
+  const handleDeleteCancel = () => {
+    setDeleteConfirm({ isOpen: false, cvId: null, cvName: "" });
   };
 
   if (loading) {
@@ -137,6 +181,32 @@ export default function MyCVsPage() {
                     })}
                   </span>
                 </div>
+                {cv.uploads && cv.uploads.length > 0 && (
+                  <div className="space-y-2">
+                    <p className="text-xs font-medium text-gray-700 dark:text-gray-300">
+                      Yüklenen Dosyalar:
+                    </p>
+                    <div className="space-y-1">
+                      {cv.uploads.map((upload) => (
+                        <a
+                          key={upload.id}
+                          href={`/api/cv/upload/${upload.id}/view`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 p-2 rounded-lg bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-sm"
+                        >
+                          <FileText className="h-4 w-4 text-blue-500 flex-shrink-0" />
+                          <span className="flex-1 truncate text-gray-700 dark:text-gray-300">
+                            {upload.name}
+                          </span>
+                          <span className="text-xs text-gray-500 dark:text-gray-400">
+                            {(upload.size / 1024).toFixed(1)} KB
+                          </span>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                )}
                 <div className="flex gap-2">
                   <Link href={`/cv/view/${cv.id}`} className="flex-1">
                     <Button variant="primary" className="w-full">
@@ -152,7 +222,9 @@ export default function MyCVsPage() {
                   </Link>
                   <Button
                     variant="danger"
-                    onClick={() => handleDelete(cv.id)}
+                    onClick={() => handleDeleteClick(cv.id, cv.data?.personalInfo?.name || "CV")}
+                    disabled={deleting === cv.id}
+                    isLoading={deleting === cv.id}
                   >
                     <Trash2 className="h-4 w-4" />
                   </Button>
@@ -162,6 +234,17 @@ export default function MyCVsPage() {
           ))}
         </div>
       )}
+
+      <ConfirmDialog
+        isOpen={deleteConfirm.isOpen}
+        title="CV'yi Sil"
+        message={`"${deleteConfirm.cvName}" adlı CV'yi silmek istediğinize emin misiniz? Bu işlem geri alınamaz.`}
+        confirmText="Evet, Sil"
+        cancelText="İptal"
+        confirmVariant="danger"
+        onConfirm={handleDeleteConfirm}
+        onCancel={handleDeleteCancel}
+      />
     </div>
   );
 }
