@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { ArrowLeft, LayoutTemplate, Loader2 } from "lucide-react";
+import { ArrowLeft, LayoutTemplate, Loader2, X } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
 import CVRenderer from "@/app/components/cv/CVRenderer";
@@ -32,6 +32,10 @@ export default function ChangeTemplatePage() {
   const [loading, setLoading] = useState(true);
   const [changing, setChanging] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [selectedTemplateId, setSelectedTemplateId] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [scaleFactor, setScaleFactor] = useState(1);
+  const cvContentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (params.id) {
@@ -71,6 +75,15 @@ export default function ChangeTemplatePage() {
     }
   };
 
+  const handleTemplatePreview = (templateId: string) => {
+    if (!cv) return;
+    if (cv.templateId === templateId) return;
+    
+    setSelectedTemplateId(templateId);
+    setIsModalOpen(true);
+    setScaleFactor(1); // Reset scale factor when opening modal
+  };
+
   const handleTemplateChange = async (templateId: string) => {
     if (!cv || changing) return;
 
@@ -82,6 +95,7 @@ export default function ChangeTemplatePage() {
     try {
       setChanging(templateId);
       setError(null);
+      setIsModalOpen(false); // Close modal when changing
 
       const response = await fetch(`/api/cv/${params.id}`, {
         method: "PUT",
@@ -104,6 +118,70 @@ export default function ChangeTemplatePage() {
       setChanging(null);
     }
   };
+
+  // Calculate scale factor based on content height
+  useEffect(() => {
+    if (!isModalOpen || !cvContentRef.current || !selectedTemplateId || !cv) {
+      return;
+    }
+
+    // Wait for content to render
+    const timeoutId = setTimeout(() => {
+      const contentElement = cvContentRef.current;
+      if (!contentElement) return;
+
+      const A4_HEIGHT_MM = 297;
+      const A4_HEIGHT_PX = 297 * 3.779527559; // ~1123px
+      
+      // Find the CVRenderer div (has width: 210mm in style)
+      const cvRenderer = contentElement.querySelector('div[style*="210mm"]') as HTMLElement;
+      if (!cvRenderer) {
+        setScaleFactor(1);
+        return;
+      }
+
+      // Find the actual template content (first child div inside CVRenderer)
+      const templateContent = cvRenderer.firstElementChild as HTMLElement;
+      if (!templateContent) {
+        setScaleFactor(1);
+        return;
+      }
+
+      // Temporarily remove height constraint to measure natural height
+      const originalHeight = cvRenderer.style.height;
+      const originalMaxHeight = cvRenderer.style.maxHeight;
+      const originalOverflow = cvRenderer.style.overflow;
+      const originalDisplay = cvRenderer.style.display;
+      
+      // Set to auto to measure natural height
+      cvRenderer.style.height = 'auto';
+      cvRenderer.style.maxHeight = 'none';
+      cvRenderer.style.overflow = 'visible';
+      cvRenderer.style.display = 'block';
+      
+      // Force reflow to get accurate measurements
+      void cvRenderer.offsetHeight;
+      
+      // Measure the natural height of the content
+      const naturalHeight = templateContent.scrollHeight || cvRenderer.scrollHeight;
+      
+      // Restore original styles
+      cvRenderer.style.height = originalHeight;
+      cvRenderer.style.maxHeight = originalMaxHeight;
+      cvRenderer.style.overflow = originalOverflow;
+      cvRenderer.style.display = originalDisplay;
+      
+      // Calculate scale factor if content is less than A4 height
+      if (naturalHeight < A4_HEIGHT_PX && naturalHeight > 0) {
+        const calculatedScale = Math.min(A4_HEIGHT_PX / naturalHeight, 1.5); // Max 1.5x scale
+        setScaleFactor(calculatedScale);
+      } else {
+        setScaleFactor(1);
+      }
+    }, 300);
+
+    return () => clearTimeout(timeoutId);
+  }, [isModalOpen, selectedTemplateId, cv?.data]);
 
   if (loading) {
     return (
@@ -264,7 +342,10 @@ export default function ChangeTemplatePage() {
                   <Button
                     variant={isCurrent ? "outline" : "primary"}
                     className="w-full"
-                    onClick={() => handleTemplateChange(template.id)}
+                    onClick={() => {
+                      if (isCurrent) return;
+                      handleTemplatePreview(template.id);
+                    }}
                     disabled={isCurrent || isChanging}
                     isLoading={isChanging}
                   >
@@ -293,6 +374,94 @@ export default function ChangeTemplatePage() {
           </Card>
         )}
       </div>
+
+      {/* Template Preview Modal */}
+      {isModalOpen && selectedTemplateId && cv && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm px-4 transition-opacity duration-300"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setIsModalOpen(false);
+              setSelectedTemplateId(null);
+            }
+          }}
+        >
+          <Card
+            variant="elevated"
+            className="w-full max-w-4xl max-h-[90vh] flex flex-col transform transition-all duration-300"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <CardHeader className="relative flex-shrink-0">
+              <button
+                onClick={() => {
+                  setIsModalOpen(false);
+                  setSelectedTemplateId(null);
+                }}
+                className="absolute top-4 right-4 p-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                aria-label="Kapat"
+              >
+                <X className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+              </button>
+              <CardTitle className="flex items-center gap-2 pr-8">
+                <LayoutTemplate className="h-5 w-5" />
+                {templates.find((t) => t.id === selectedTemplateId)?.name || "Template Önizleme"}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="flex-1 overflow-auto p-4">
+              <div 
+                ref={cvContentRef}
+                className="bg-gray-100 p-4 rounded-lg flex justify-center"
+              >
+                <div
+                  className="bg-white shadow-lg"
+                  style={{
+                    width: scaleFactor !== 1 ? `calc(210mm / ${scaleFactor})` : "210mm",
+                    maxHeight: "297mm",
+                    transform: scaleFactor !== 1 ? `scale(${scaleFactor})` : "none",
+                    transformOrigin: "top left",
+                    overflow: "hidden",
+                  }}
+                >
+                  <CVRenderer
+                    data={cv.data}
+                    templateId={selectedTemplateId}
+                  />
+                </div>
+              </div>
+            </CardContent>
+            <div className="p-4 border-t flex-shrink-0 flex gap-3 justify-end">
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setIsModalOpen(false);
+                  setSelectedTemplateId(null);
+                }}
+              >
+                İptal
+              </Button>
+              <Button
+                variant="primary"
+                onClick={() => {
+                  if (selectedTemplateId) {
+                    handleTemplateChange(selectedTemplateId);
+                  }
+                }}
+                disabled={changing === selectedTemplateId}
+                isLoading={changing === selectedTemplateId}
+              >
+                {changing === selectedTemplateId ? (
+                  <>
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    Değiştiriliyor...
+                  </>
+                ) : (
+                  "Bu Template'i Kullan"
+                )}
+              </Button>
+            </div>
+          </Card>
+        </div>
+      )}
     </div>
   );
 }
