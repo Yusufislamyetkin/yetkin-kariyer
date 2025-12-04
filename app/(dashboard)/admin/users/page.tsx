@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/app/components/ui/Button";
-import { Loader2, Search, ArrowLeft, User as UserIcon, Mail, Calendar, Shield, ChevronLeft, ChevronRight, Bot, Settings, Trash2, Play, Activity, CheckCircle2, XCircle, Clock } from "lucide-react";
+import { Loader2, Search, ArrowLeft, User as UserIcon, Mail, Calendar, Shield, ChevronLeft, ChevronRight, Bot, Settings, Trash2, Play, Activity, CheckCircle2, XCircle, Clock, UserMinus, Trash } from "lucide-react";
 import Image from "next/image";
 import { BotConfigModal } from "./_components/BotConfigModal";
 import { ConfirmDialog } from "@/app/components/ui/ConfirmDialog";
@@ -82,6 +82,10 @@ export default function AdminUsersPage() {
   const [activities, setActivities] = useState<any[]>([]);
   const [activitiesLoading, setActivitiesLoading] = useState(false);
   const [activitiesPage, setActivitiesPage] = useState(1);
+  const [removingAllBots, setRemovingAllBots] = useState(false);
+  const [clearingActivities, setClearingActivities] = useState(false);
+  const [removeAllBotsConfirmOpen, setRemoveAllBotsConfirmOpen] = useState(false);
+  const [clearActivitiesConfirmOpen, setClearActivitiesConfirmOpen] = useState(false);
 
   const fetchUsers = async (page: number = 1, searchQuery: string = "", role: string = "") => {
     setLoading(true);
@@ -263,6 +267,76 @@ export default function AdminUsersPage() {
     }
   }, [showInteractions]);
 
+  const handleRemoveAllBots = async () => {
+    setRemovingAllBots(true);
+    setError(null);
+
+    try {
+      const response = await fetch("/api/admin/bots/remove-all", {
+        method: "POST",
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Botlar geri çekilirken bir hata oluştu");
+      }
+
+      // Refresh users list
+      await fetchUsers(currentPage, search, roleFilter);
+      
+      // Show success message
+      setRunResult({
+        processed: data.removed,
+        successful: data.removed,
+        failed: 0,
+        message: data.message,
+      });
+
+      setRemoveAllBotsConfirmOpen(false);
+    } catch (err: any) {
+      setError(err.message || "Bir hata oluştu");
+    } finally {
+      setRemovingAllBots(false);
+    }
+  };
+
+  const handleClearActivities = async () => {
+    setClearingActivities(true);
+    setError(null);
+
+    try {
+      const response = await fetch("/api/admin/bots/activities/clear", {
+        method: "POST",
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Bot aktiviteleri temizlenirken bir hata oluştu");
+      }
+
+      // Refresh activities if interactions area is open
+      if (showInteractions) {
+        await fetchActivities(1);
+      }
+
+      // Show success message
+      setRunResult({
+        processed: 0,
+        successful: 0,
+        failed: 0,
+        message: data.message,
+      });
+
+      setClearActivitiesConfirmOpen(false);
+    } catch (err: any) {
+      setError(err.message || "Bir hata oluştu");
+    } finally {
+      setClearingActivities(false);
+    }
+  };
+
 
   return (
     <div className="space-y-6 animate-fade-in min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
@@ -289,7 +363,7 @@ export default function AdminUsersPage() {
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 flex-wrap">
               {pagination && (
                 <div className="text-right shrink-0">
                   <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
@@ -300,23 +374,61 @@ export default function AdminUsersPage() {
                   </div>
                 </div>
               )}
-              <Button
-                onClick={handleRunBots}
-                disabled={runningBots}
-                className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
-              >
-                {runningBots ? (
-                  <>
-                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                    Çalıştırılıyor...
-                  </>
-                ) : (
-                  <>
-                    <Play className="h-4 w-4 mr-2" />
-                    Botları Çalıştır
-                  </>
-                )}
-              </Button>
+              <div className="flex items-center gap-2 flex-wrap">
+                <Button
+                  onClick={handleRunBots}
+                  disabled={runningBots}
+                  className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+                >
+                  {runningBots ? (
+                    <>
+                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      Çalıştırılıyor...
+                    </>
+                  ) : (
+                    <>
+                      <Play className="h-4 w-4 mr-2" />
+                      Botları Çalıştır
+                    </>
+                  )}
+                </Button>
+                <Button
+                  onClick={() => setRemoveAllBotsConfirmOpen(true)}
+                  disabled={removingAllBots || runningBots}
+                  variant="outline"
+                  className="border-red-300 text-red-600 hover:bg-red-50 dark:border-red-800 dark:text-red-400 dark:hover:bg-red-950/30"
+                >
+                  {removingAllBots ? (
+                    <>
+                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      Geri Çekiliyor...
+                    </>
+                  ) : (
+                    <>
+                      <UserMinus className="h-4 w-4 mr-2" />
+                      Tüm Botları Geri Çek
+                    </>
+                  )}
+                </Button>
+                <Button
+                  onClick={() => setClearActivitiesConfirmOpen(true)}
+                  disabled={clearingActivities || runningBots}
+                  variant="outline"
+                  className="border-orange-300 text-orange-600 hover:bg-orange-50 dark:border-orange-800 dark:text-orange-400 dark:hover:bg-orange-950/30"
+                >
+                  {clearingActivities ? (
+                    <>
+                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      Temizleniyor...
+                    </>
+                  ) : (
+                    <>
+                      <Trash className="h-4 w-4 mr-2" />
+                      Aktiviteleri Temizle
+                    </>
+                  )}
+                </Button>
+              </div>
             </div>
           </div>
         </div>
@@ -816,6 +928,34 @@ export default function AdminUsersPage() {
         onCancel={() => {
           setDeleteConfirmOpen(false);
           setUserToDelete(null);
+        }}
+      />
+
+      {/* Remove All Bots Confirm Dialog */}
+      <ConfirmDialog
+        isOpen={removeAllBotsConfirmOpen}
+        title="Tüm Botları Geri Çek"
+        message="Tüm botları geri çekmek istediğinizden emin misiniz? Bu işlem tüm bot atamalarını kaldıracak ve bot yapılandırmalarını pasif hale getirecektir. Bu işlem geri alınamaz."
+        confirmText="Evet, Tümünü Geri Çek"
+        cancelText="İptal"
+        confirmVariant="danger"
+        onConfirm={handleRemoveAllBots}
+        onCancel={() => {
+          setRemoveAllBotsConfirmOpen(false);
+        }}
+      />
+
+      {/* Clear Activities Confirm Dialog */}
+      <ConfirmDialog
+        isOpen={clearActivitiesConfirmOpen}
+        title="Tüm Bot Aktivitelerini Temizle"
+        message="Tüm bot aktivitelerini temizlemek istediğinizden emin misiniz? Bu işlem tüm bot aktivite kayıtlarını kalıcı olarak silecektir. Bu işlem geri alınamaz."
+        confirmText="Evet, Temizle"
+        cancelText="İptal"
+        confirmVariant="danger"
+        onConfirm={handleClearActivities}
+        onCancel={() => {
+          setClearActivitiesConfirmOpen(false);
         }}
       />
     </div>

@@ -7,13 +7,30 @@ import crypto from "crypto";
 
 /**
  * Base URL'i environment variable'lardan al
+ * URL'de scheme yoksa otomatik olarak ekler (https:// production, http:// localhost)
+ * Vercel'de VERCEL_URL otomatik olarak mevcuttur
  */
 function getBaseUrl(): string {
-  return (
+  let baseUrl =
     process.env.NEXTAUTH_URL ||
     process.env.NEXT_PUBLIC_APP_URL ||
-    "http://localhost:3000"
-  );
+    process.env.VERCEL_URL || // Vercel otomatik olarak sağlar
+    "http://localhost:3000";
+
+  // URL'de scheme yoksa ekle
+  if (!baseUrl.startsWith("http://") && !baseUrl.startsWith("https://")) {
+    // Production'da (Vercel) https:// kullan, localhost'ta http://
+    if (baseUrl.includes("localhost") || baseUrl.includes("127.0.0.1")) {
+      baseUrl = `http://${baseUrl}`;
+    } else {
+      baseUrl = `https://${baseUrl}`;
+    }
+  }
+
+  // URL'in sonundaki slash'ı kaldır
+  baseUrl = baseUrl.replace(/\/$/, "");
+
+  return baseUrl;
 }
 
 /**

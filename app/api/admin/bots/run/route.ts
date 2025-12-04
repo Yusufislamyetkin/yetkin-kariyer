@@ -160,7 +160,7 @@ export async function POST(request: Request) {
         }
 
         // Create posts (if under limit)
-        if (todayPosts < config.minPostsPerDay) {
+        if (todayPosts < config.maxPostsPerDay) {
           const needed = config.maxPostsPerDay - todayPosts;
           if (needed > 0 && Math.random() < 0.5) {
             // 50% chance to create a post
@@ -174,7 +174,7 @@ export async function POST(request: Request) {
         }
 
         // Like posts (if under limit)
-        if (todayLikes < config.minLikesPerDay) {
+        if (todayLikes < config.maxLikesPerDay) {
           const needed = Math.min(
             config.maxLikesPerDay - todayLikes,
             Math.floor((config.maxLikesPerDay - config.minLikesPerDay) * Math.random()) + 1
@@ -188,7 +188,7 @@ export async function POST(request: Request) {
         }
 
         // Comment on posts (if under limit)
-        if (todayComments < config.minCommentsPerDay) {
+        if (todayComments < config.maxCommentsPerDay) {
           const needed = Math.min(
             config.maxCommentsPerDay - todayComments,
             Math.floor((config.maxCommentsPerDay - config.minCommentsPerDay) * Math.random()) + 1
@@ -204,7 +204,7 @@ export async function POST(request: Request) {
         }
 
         // Complete lessons (if under weekly limit)
-        if (weekLessons < config.minLessonsPerWeek) {
+        if (weekLessons < config.maxLessonsPerWeek) {
           const needed = Math.min(
             config.maxLessonsPerWeek - weekLessons,
             Math.floor((config.maxLessonsPerWeek - config.minLessonsPerWeek) * Math.random()) + 1
@@ -218,7 +218,7 @@ export async function POST(request: Request) {
         }
 
         // Complete tests (if under weekly limit)
-        if (weekTests < config.minTestsPerWeek) {
+        if (weekTests < config.maxTestsPerWeek) {
           const needed = Math.min(
             config.maxTestsPerWeek - weekTests,
             Math.floor((config.maxTestsPerWeek - config.minTestsPerWeek) * Math.random()) + 1
@@ -234,7 +234,7 @@ export async function POST(request: Request) {
         }
 
         // Complete live coding (if under weekly limit)
-        if (weekLiveCoding < config.minLiveCodingPerWeek) {
+        if (weekLiveCoding < config.maxLiveCodingPerWeek) {
           const needed = Math.min(
             config.maxLiveCodingPerWeek - weekLiveCoding,
             Math.floor((config.maxLiveCodingPerWeek - config.minLiveCodingPerWeek) * Math.random()) + 1
