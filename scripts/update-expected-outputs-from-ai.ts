@@ -25,6 +25,21 @@ import {
 const BASE_URL = process.env.TEST_BASE_URL || "http://localhost:3000";
 const DELAY_BETWEEN_CASES = 300; // ms
 
+// Supported languages that can be executed
+const SUPPORTED_LANGUAGES = new Set([
+  "javascript",
+  "python",
+  "csharp",
+  "java",
+  "php",
+  "typescript",
+  "go",
+  "rust",
+  "cpp",
+  "kotlin",
+  "ruby",
+]);
+
 interface UpdateResult {
   caseId: string;
   language: string;
@@ -137,6 +152,21 @@ function updateJsonFile(
 /**
  * Process a single case
  */
+/**
+ * Check if server is accessible
+ */
+async function checkServerHealth(): Promise<boolean> {
+  try {
+    const response = await fetch(`${BASE_URL}/api/health`, {
+      method: "GET",
+      signal: AbortSignal.timeout(5000), // 5 second timeout
+    });
+    return response.ok;
+  } catch (error) {
+    return false;
+  }
+}
+
 async function processCase(
   testCase: LiveCodingTestCase,
   authCookie: string | null,
@@ -156,6 +186,8 @@ async function processCase(
     return result;
   }
 
+  // Note: All languages are supported, but server may not be accessible for all
+
   result.oldExpectedOutput = expectedOutput;
 
   try {
@@ -172,6 +204,14 @@ async function processCase(
     const runResult = await runCodeForTestCase(correctCode, testCase.language, BASE_URL);
     
     if (runResult.errorMessage) {
+      // Check if it's a connection error
+      if (runResult.errorMessage.includes("ulaşılamadı") || 
+          runResult.errorMessage.includes("ECONNREFUSED") ||
+          runResult.errorMessage.includes("fetch failed")) {
+        result.status = "error";
+        result.error = `Server not accessible: ${runResult.errorMessage}`;
+        return result;
+      }
       result.status = "error";
       result.error = `Run failed: ${runResult.errorMessage}`;
       return result;
@@ -284,6 +324,17 @@ async function main() {
     console.log("✅ Authentication başarılı\n");
   }
 
+  // Check server health (optional, just for info)
+  console.log("🏥 Server sağlık kontrolü yapılıyor...");
+  const serverHealthy = await checkServerHealth();
+  if (!serverHealthy) {
+    console.warn("⚠️  Server erişilemiyor veya sağlık kontrolü başarısız.");
+    console.warn("   Tüm diller işlenecek, ancak bazı case'ler server erişim hatası verebilir.");
+    console.warn("   Devam ediliyor...\n");
+  } else {
+    console.log("✅ Server erişilebilir\n");
+  }
+
   // Load all cases
   const cases = loadLiveCodingCases();
   if (cases.length === 0) {
@@ -291,7 +342,7 @@ async function main() {
     process.exit(1);
   }
 
-  console.log(`📋 Toplam ${cases.length} case yüklendi\n`);
+  console.log(`📋 Toplam ${cases.length} case yüklendi (tüm diller)\n`);
 
   // Group cases by language for efficient JSON updates
   const casesByLanguage = new Map<string, LiveCodingTestCase[]>();
@@ -316,10 +367,10 @@ async function main() {
   let errorCount = 0;
   let alreadyMatchedCount = 0;
 
-  // Process each case
-  for (let i = 0; i < cases.length; i++) {
-    const testCase = cases[i];
-    const progress = `[${i + 1}/${cases.length}]`;
+  // Process each case (only supported languages)
+  for (let i = 0; i < supportedCases.length; i++) {
+    const testCase = supportedCases[i];
+    const progress = `[${i + 1}/${supportedCases.length}]`;
 
     console.log(`${progress} 🔄 ${testCase.id} (${testCase.language}) işleniyor...`);
 
@@ -357,12 +408,22 @@ async function main() {
   console.log("\n" + "=".repeat(60));
   console.log("📈 Özet:");
   console.log("=".repeat(60));
-  console.log(`  Toplam: ${cases.length}`);
+  console.log(`  Toplam case: ${cases.length}`);
   console.log(`  İşlenen: ${processedCount}`);
   console.log(`  Güncellenen: ${updatedCount}`);
   console.log(`  Zaten eşleşen: ${alreadyMatchedCount}`);
   console.log(`  Atlanan: ${skippedCount - alreadyMatchedCount}`);
   console.log(`  Hata: ${errorCount}`);
+  
+  // Group errors by type
+  const serverErrors = results.filter(r => r.status === "error" && r.error?.includes("ulaşılamadı")).length;
+  const otherErrors = errorCount - serverErrors;
+  if (serverErrors > 0) {
+    console.log(`    - Server erişim hatası: ${serverErrors}`);
+  }
+  if (otherErrors > 0) {
+    console.log(`    - Diğer hatalar: ${otherErrors}`);
+  }
 
   // Print updated cases
   if (updatedCount > 0) {

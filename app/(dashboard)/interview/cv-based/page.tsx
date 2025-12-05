@@ -35,6 +35,9 @@ export default function CVBasedInterviewPage() {
   const [success, setSuccess] = useState<string | null>(null);
   const [interviewStatus, setInterviewStatus] = useState<InterviewStatus | null>(null);
   const pollingIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const pollingStartTimeRef = useRef<number | null>(null);
+  const lastCvIdRef = useRef<string | null>(null); // Son denenen CV ID'yi sakla
+  const maxPollingDuration = 5 * 60 * 1000; // 5 dakika maksimum polling süresi
 
   useEffect(() => {
     fetchCVs();
@@ -56,6 +59,23 @@ export default function CVBasedInterviewPage() {
   // Polling fonksiyonu
   const pollInterviewStatus = async (interviewId: string) => {
     try {
+      // Timeout kontrolü
+      if (pollingStartTimeRef.current) {
+        const elapsed = Date.now() - pollingStartTimeRef.current;
+        if (elapsed > maxPollingDuration) {
+          console.warn(`[CV_INTERVIEW] Polling timeout: ${interviewId} (${Math.round(elapsed / 1000)}s)`);
+          if (pollingIntervalRef.current) {
+            clearInterval(pollingIntervalRef.current);
+            pollingIntervalRef.current = null;
+          }
+          setError("Mülakat oluşturma işlemi çok uzun sürdü. Lütfen sayfayı yenileyip tekrar deneyin.");
+          setCreating(null);
+          setInterviewStatus(null);
+          pollingStartTimeRef.current = null;
+          return;
+        }
+      }
+
       const response = await fetch(`/api/interview/cv-based/${interviewId}/status`);
       const data = await response.json();
 
@@ -71,9 +91,14 @@ export default function CVBasedInterviewPage() {
           clearInterval(pollingIntervalRef.current);
           pollingIntervalRef.current = null;
         }
-        setError(data.error || "Mülakat oluşturulurken bir hata oluştu. Lütfen tekrar deneyin.");
+        pollingStartTimeRef.current = null;
+        
+        // Hata mesajını kullanıcı dostu hale getir
+        const errorMsg = data.error || "Mülakat oluşturulurken bir hata oluştu. Lütfen tekrar deneyin.";
+        setError(errorMsg);
         setCreating(null);
         setInterviewStatus(null);
+        console.error(`[CV_INTERVIEW] Interview oluşturma hatası: ${interviewId}`, data.error);
         return;
       }
 
@@ -83,19 +108,21 @@ export default function CVBasedInterviewPage() {
           clearInterval(pollingIntervalRef.current);
           pollingIntervalRef.current = null;
         }
+        pollingStartTimeRef.current = null;
         setSuccess("Mülakat başarıyla oluşturuldu! Yönlendiriliyorsunuz...");
         setTimeout(() => {
           router.push(`/interview/practice/${interviewId}`);
         }, 1500);
       }
     } catch (error: any) {
-      console.error("Error polling interview status:", error);
+      console.error("[CV_INTERVIEW] Error polling interview status:", error);
       // Hata durumunda polling'i durdur
       if (pollingIntervalRef.current) {
         clearInterval(pollingIntervalRef.current);
         pollingIntervalRef.current = null;
       }
-      setError(error.message || "Mülakat durumu kontrol edilemedi");
+      pollingStartTimeRef.current = null;
+      setError(error.message || "Mülakat durumu kontrol edilemedi. Lütfen sayfayı yenileyip tekrar deneyin.");
       setCreating(null);
       setInterviewStatus(null);
     }
@@ -106,7 +133,9 @@ export default function CVBasedInterviewPage() {
     return () => {
       if (pollingIntervalRef.current) {
         clearInterval(pollingIntervalRef.current);
+        pollingIntervalRef.current = null;
       }
+      pollingStartTimeRef.current = null;
     };
   }, []);
 
@@ -115,14 +144,18 @@ export default function CVBasedInterviewPage() {
     setError(null);
     setSuccess(null);
     setInterviewStatus(null);
+    lastCvIdRef.current = cvId; // CV ID'yi sakla
 
     // Önceki polling'i temizle
     if (pollingIntervalRef.current) {
       clearInterval(pollingIntervalRef.current);
       pollingIntervalRef.current = null;
     }
+    pollingStartTimeRef.current = null;
 
     try {
+      console.log(`[CV_INTERVIEW] Interview oluşturma başlatılıyor: cvId=${cvId}`);
+      
       const response = await fetch("/api/interview/cv-based", {
         method: "POST",
         headers: {
@@ -138,19 +171,24 @@ export default function CVBasedInterviewPage() {
       }
 
       const interviewId = data.interview.id;
+      console.log(`[CV_INTERVIEW] Interview oluşturuldu: ${interviewId}, polling başlatılıyor...`);
+
+      // Polling başlangıç zamanını kaydet
+      pollingStartTimeRef.current = Date.now();
 
       // İlk status'u al
       await pollInterviewStatus(interviewId);
 
-      // Her 2-3 saniyede bir status kontrol et
+      // Her 2.5 saniyede bir status kontrol et
       pollingIntervalRef.current = setInterval(() => {
         pollInterviewStatus(interviewId);
       }, 2500); // 2.5 saniye
     } catch (error: any) {
-      console.error("Error creating interview:", error);
-      setError(error.message || "Mülakat oluşturulurken bir hata oluştu");
+      console.error("[CV_INTERVIEW] Error creating interview:", error);
+      setError(error.message || "Mülakat oluşturulurken bir hata oluştu. Lütfen tekrar deneyin.");
       setCreating(null);
       setInterviewStatus(null);
+      pollingStartTimeRef.current = null;
     }
   };
 
@@ -185,9 +223,25 @@ export default function CVBasedInterviewPage() {
       {error && (
         <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg flex items-start gap-3">
           <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
-          <div>
+          <div className="flex-1">
             <h3 className="font-semibold text-red-900 dark:text-red-100 mb-1">Hata</h3>
-            <p className="text-sm text-red-800 dark:text-red-200">{error}</p>
+            <p className="text-sm text-red-800 dark:text-red-200 mb-3">{error}</p>
+            {lastCvIdRef.current && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  setError(null);
+                  // Retry için son kullanılan CV ID'yi kullan
+                  if (lastCvIdRef.current) {
+                    handleCreateInterview(lastCvIdRef.current);
+                  }
+                }}
+                className="text-red-700 dark:text-red-300 border-red-300 dark:border-red-700 hover:bg-red-100 dark:hover:bg-red-900/30"
+              >
+                Tekrar Dene
+              </Button>
+            )}
           </div>
         </div>
       )}

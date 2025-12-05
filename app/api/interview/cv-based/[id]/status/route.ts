@@ -54,7 +54,23 @@ export async function GET(
     const questions = interview.questions as any;
     
     // Hata durumunu kontrol et (description'da hata mesajı varsa)
-    const hasError = interview.description?.includes("hata oluştu") || interview.description?.includes("error");
+    const description = interview.description || "";
+    const hasError = 
+      description.toLowerCase().includes("hata oluştu") || 
+      description.toLowerCase().includes("error") ||
+      description.toLowerCase().includes("hatası") ||
+      description.toLowerCase().includes("failed") ||
+      description.toLowerCase().includes("başarısız");
+    
+    // Hata mesajını çıkar (eğer varsa)
+    let errorMessage: string | undefined = undefined;
+    if (hasError) {
+      // Description'dan hata mesajını parse et
+      const errorMatch = description.match(/hata oluştu[^:]*:\s*(.+)/i) || 
+                        description.match(/error[^:]*:\s*(.+)/i) ||
+                        description.match(/hatası[^:]*:\s*(.+)/i);
+      errorMessage = errorMatch ? errorMatch[1].trim() : description;
+    }
     
     let status: "generating" | "completed" | "error" = hasError ? "error" : "generating";
     let stage: 0 | 1 | 2 | 3 = 0;
@@ -112,7 +128,7 @@ export async function GET(
       progress,
       interviewId: interview.id,
       questionCount,
-      error: hasError ? interview.description : undefined,
+      error: errorMessage,
     });
   } catch (error: any) {
     console.error("[CV_INTERVIEW_STATUS] Hata:", error);
