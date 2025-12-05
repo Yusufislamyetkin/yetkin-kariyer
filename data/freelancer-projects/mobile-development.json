@@ -1,72 +1,72 @@
 [
   {
-    "title": "iOS ve Android E-ticaret Uygulaması",
-    "description": "E-ticaret platformumuzun mobil deneyimini geliştirmek istiyoruz. Web sitemizin tüm fonksiyonlarını mobil platforma taşıyacak kapsamlı bir çözüm arıyoruz. Cross-platform geliştirme için React Native veya Flutter teknolojileri değerlendirilebilir. Ürün listeleme, detay sayfaları, arama ve filtreleme özellikleri olmalı. Kullanıcı dostu sepet yönetimi ve ödeme akışı tasarlanmalı. Güvenli ödeme için iyzico SDK entegrasyonu yapılmalı. Sipariş takip sistemiyle kullanıcılar sipariş durumunu izleyebilmeli. Push bildirimleri eklenmeli - sipariş durumu, kampanyalar, yeni ürün duyuruları için. Hesap yönetimi kısmında profil düzenleme, adres yönetimi, sipariş geçmişi görüntüleme olmalı. Favoriler özelliğiyle ürün kaydetme imkanı sunulmalı. Mevcut backend API ile entegrasyon yapılmalı. App Store ve Google Play Store'a yayınlama süreçleri tamamlanmalı. Performans optimizasyonu ve crash-free deneyim sağlanmalı.",
-    "budget": 75000,
-    "deadline": "2025-04-15T00:00:00.000Z",
-    "status": "open"
-  },
-  {
-    "title": "Fitness Takip Uygulaması",
-    "description": "Spor ve fitness tutkunlarının hedeflerine ulaşmasına yardımcı olacak kapsamlı bir takip uygulaması geliştirmek istiyoruz. Kullanıcıların antrenman ve beslenme süreçlerini yönetebileceği entegre bir platform arıyoruz. Egzersiz modülünde hazır programlar ve kişiselleştirilmiş program oluşturma özellikleri olmalı. Her egzersiz için video rehber, açıklama ve set/tekrar bilgileri eklenmeli. İlerleme analizi kısmında kilo, vücut ölçüleri, fotoğraf kayıtları tutulabilmeli. Görsel grafiklerle ilerleme takibi yapılabilmeli. Beslenme günlüğü ve kalori hesaplama özellikleri olmalı. İstatistikler bölümünde toplam antrenman sayısı, yakılan kalori, hedef tamamlama yüzdesi gösterilmeli. Sosyal özellikler eklenmeli - arkadaş ekleme, başarı paylaşımı gibi. Apple Health ve Google Fit ile veri senkronizasyonu yapılabilmeli. Push bildirimleriyle antrenman hatırlatmaları gönderilmeli. Offline mod desteği de olmalı.",
-    "budget": 65000,
-    "deadline": "2025-04-10T00:00:00.000Z",
-    "status": "open"
-  },
-  {
-    "title": "Yemek Sipariş Uygulaması",
-    "description": "Yemek sipariş ekosistemimiz için iki ayrı uygulama geliştirmek istiyoruz: kullanıcı ve restoran uygulamaları. Restoranların menülerini sunması ve kullanıcıların sipariş vermesi için tasarlanacak. Kullanıcı uygulamasında kategori bazlı menü gösterimi ve arama özelliği olmalı. Akıcı sepet yönetimi ve checkout süreci tasarlanmalı. Güvenli ödeme entegrasyonu yapılmalı. Gerçek zamanlı sipariş takibi sağlanmalı. Google Maps ile kurye konum takibi yapılabilmeli. Restoran uygulamasında sipariş yönetim paneli olmalı. Menü güncelleme araçları eklenmeli. Çalışma saatleri yapılandırması yapılabilmeli. Push bildirimleriyle yeni sipariş uyarıları gönderilmeli. Değerlendirme sistemi olmalı - rating ve yorum özellikleri. Firebase backend altyapısı kullanılabilir.",
-    "budget": 80000,
+    "title": "Sosyal Bağlantı ve Etkinlik Uygulaması",
+    "description": "Yerel toplulukların bir araya gelmesini kolaylaştıran sosyal bir mobil platform inşa ediyoruz. Kullanıcılar, ilgi alanlarına göre gruplar oluşturabiliyor ve etkinlikler düzenleyebiliyor. Profil yönetimi, kullanıcıların kendilerini tanıtmasına ve ilgi alanlarını paylaşmasına izin veriyor. Etkinlik oluşturma özelliği, tarih, konum ve detay bilgilerinin girilmesini sağlıyor. Harita entegrasyonu, yakındaki etkinliklerin keşfedilmesine yardımcı oluyor. Bildirim sistemi, yeni etkinlikler ve grup güncellemeleri için kullanılıyor. Mesajlaşma özelliği, grup üyeleri arasında iletişim kurulmasını destekliyor. Fotoğraf paylaşımı, etkinlik anılarının kaydedilmesine olanak veriyor. Arama ve filtreleme, ilgi alanlarına göre içerik bulmayı kolaylaştırıyor. Güvenlik özellikleri, kullanıcı doğrulama ve içerik moderasyonu içeriyor. Cross-platform geliştirme, iOS ve Android için native performans sağlıyor.",
+    "budget": 95000,
     "deadline": "2025-04-25T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "Sosyal Medya Uygulaması",
-    "description": "Fotoğraf ve video paylaşımına odaklanan sosyal medya platformu geliştirmek istiyoruz. Kullanıcıların içerik oluşturması ve etkileşim kurması için tasarlanacak. Kimlik doğrulama kısmında e-posta, telefon veya sosyal medya hesaplarıyla kayıt ve giriş yapılabilmeli. Feed sayfasında takip edilen kullanıcıların paylaşımları gösterilmeli. Infinite scroll ile performanslı içerik yükleme sağlanmalı. Kullanıcı profillerinde kişisel bilgiler, paylaşımlar, beğeniler görüntülenebilmeli. Beğeni ve yorum mekanizması kurulmalı. Takip sistemi eklenmeli. Hikayeler özelliği olmalı - 24 saatlik geçici içerik paylaşımı. Push bildirimleri eklenmeli - beğeni, yorum, takip uyarıları için. Firebase backend ile gerçek zamanlı veri senkronizasyonu yapılmalı. Görsel ve video optimizasyonu yapılmalı. Güvenlik ve içerik moderasyonu sağlanmalı.",
-    "budget": 95000,
-    "deadline": "2025-05-10T00:00:00.000Z",
+    "title": "Kişisel Finans Yönetim Uygulaması",
+    "description": "Bireysel finansal planlama ve bütçe takibi için kapsamlı bir mobil uygulama tasarlıyoruz. Gelir ve gider kayıtları, kategorilere göre organize ediliyor ve görselleştiriliyor. Bütçe planlama modülü, aylık ve yıllık hedeflerin belirlenmesine izin veriyor. Grafik ve istatistikler, finansal durumun anlaşılır şekilde analiz edilmesini sağlıyor. Fatura takibi, ödeme hatırlatmaları ile zamanında ödemelerin yapılmasına yardımcı oluyor. Yatırım portföyü takibi, varlık değerlerinin izlenmesine olanak veriyor. Hedef belirleme özelliği, tasarruf hedeflerinin takibini destekliyor. Raporlama araçları, detaylı finansal analizler sunuyor. Güvenlik, biyometrik kimlik doğrulama ve şifreleme ile veri koruması sağlıyor. Banka entegrasyonu, otomatik işlem senkronizasyonu için düşünülüyor. Offline mod, internet bağlantısı olmadan temel işlevlerin kullanılabilmesine izin veriyor.",
+    "budget": 72000,
+    "deadline": "2025-04-05T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "Haber Okuma Uygulaması",
-    "description": "Dijital haber platformumuzun mobil deneyimini oluşturmak için Flutter tabanlı uygulama geliştirmek istiyoruz. Kullanıcıların güncel haberleri kolayca okuyabilmesi hedefleniyor. İçerik organizasyonu kısmında kategori bazlı haber gösterimi, kullanıcıların ilgi alanlarına göre içerik filtreleme özellikleri olmalı. Haber detay sayfalarında görsel, video ve galeri desteği bulunmalı. Kişiselleştirme için favoriler özelliğiyle haber kaydetme imkanı sunulmalı. Offline okuma modu eklenmeli - internet bağlantısı olmadan kaydedilen haberler okunabilmeli. Önemli haberler için push bildirimleri gönderilmeli. Arama fonksiyonu olmalı. Sosyal medya paylaşım entegrasyonu yapılmalı. Kullanıcı deneyimi açısından dark mode desteğiyle gece okuma imkanı sunulmalı. Performans optimizasyonu yapılmalı. RSS feed entegrasyonu da eklenebilir.",
-    "budget": 45000,
-    "deadline": "2025-03-20T00:00:00.000Z",
+    "title": "Seyahat Planlama ve Rehber Uygulaması",
+    "description": "Seyahat tutkunları için rota planlama ve destinasyon keşfi sunan interaktif bir mobil çözüm geliştiriyoruz. Rota oluşturma aracı, çoklu destinasyon ekleme ve optimizasyon özellikleri içeriyor. Harita görünümü, interaktif harita üzerinde rota görselleştirmesi sunuyor. Destinasyon bilgileri, popüler yerler, restoranlar ve konaklama seçeneklerini içeriyor. Fotoğraf galerisi, kullanıcıların seyahat anılarını paylaşmasına izin veriyor. Offline harita desteği, internet bağlantısı olmadan navigasyon sağlıyor. Bütçe hesaplayıcı, seyahat maliyetlerinin tahmin edilmesine yardımcı oluyor. Hava durumu entegrasyonu, destinasyonlardaki güncel hava koşullarını gösteriyor. Sosyal özellikler, seyahat planlarının arkadaşlarla paylaşılmasını destekliyor. Bildirimler, seyahat hatırlatmaları ve önemli güncellemeler için kullanılıyor. Yerel dil desteği, farklı ülkelerde kullanımı kolaylaştırıyor.",
+    "budget": 68000,
+    "deadline": "2025-03-28T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "Müzik Çalar Uygulaması",
-    "description": "Müzik dinleme deneyimini mobil platforma taşıyan uygulama geliştirmek istiyoruz. Kullanıcıların müzik koleksiyonlarını yönetmesi ve dinlemesi için native iOS (Swift) ve Android (Kotlin) geliştirme yapılacak. Çalma listesi yönetimi kısmında oynatma listeleri oluşturma, düzenleme ve silme özellikleri olmalı. Kütüphane içi şarkı arama yapılabilmeli. Kişiselleştirme için favoriler özelliği eklenmeli. Offline çalma özelliği olmalı - indirilen şarkılar internet olmadan dinlenebilmeli. Arka plan çalma desteği eklenmeli - uygulama kapalıyken müzik devam etmeli. Bildirim kontrolü yapılabilmeli. Kütüphane organizasyonu kısmında şarkılar, albümler, sanatçılar görüntülenebilmeli. Ses kalitesi optimizasyonu yapılmalı. Görsel açıdan zengin arayüz ve akıcı animasyonlar olmalı. Equalizer özelliği eklenebilir.",
-    "budget": 55000,
-    "deadline": "2025-03-30T00:00:00.000Z",
+    "title": "Sağlık ve Wellness Takip Uygulaması",
+    "description": "Bireylerin sağlık hedeflerine ulaşmasına yardımcı olan kapsamlı bir wellness platformu oluşturuyoruz. Aktivite takibi, adım sayısı, mesafe ve kalori yakımını ölçüyor. Beslenme günlüğü, yemek kayıtları ve kalori takibi özellikleri içeriyor. Uyku analizi, uyku kalitesi ve süresinin izlenmesini sağlıyor. Su tüketimi takibi, günlük su içme hedeflerinin takibine izin veriyor. Meditasyon modülü, rehberli meditasyon seansları sunuyor. İlerleme grafikleri, sağlık metriklerinin zaman içindeki değişimini görselleştiriyor. Hedef belirleme, kullanıcıların kişisel hedeflerini tanımlamasına olanak veriyor. Bildirimler, hatırlatmalar ve motivasyon mesajları için kullanılıyor. Wearable cihaz entegrasyonu, fitness tracker verilerinin senkronizasyonunu destekliyor. Sosyal özellikler, arkadaşlarla rekabet ve başarı paylaşımı sunuyor. Kişiselleştirilmiş öneriler, kullanıcı verilerine göre özel tavsiyeler içeriyor.",
+    "budget": 78000,
+    "deadline": "2025-04-12T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "Taksi/Ulaşım Uygulaması",
-    "description": "Ulaşım platformumuz için çift taraflı uygulama ekosistemi geliştirmek istiyoruz: yolcu ve sürücü uygulamaları. Yolcuların araç çağırması ve sürücülerin yolcu bulması için React Native veya Flutter kullanılacak. Yolcu uygulamasında konum seçimi ve araç tipi seçimi (ekonomi, konfor, lüks) yapılabilmeli. Fiyat tahmini gösterilmeli. Google Maps entegrasyonuyla rota çizimi ve sürücü takibi yapılabilmeli. Ödeme kısmında nakit veya kredi kartı seçenekleri olmalı. Değerlendirme sistemi eklenmeli. Sürücü uygulamasında sipariş kabul/reddetme özelliği olmalı. Navigasyon desteği eklenmeli. Kazanç takibi yapılabilmeli. Canlı konum paylaşımı sağlanmalı. Güvenlik açısından kullanıcı doğrulama, acil durum butonu, şoför bilgileri gösterilmeli. WebSocket ile gerçek zamanlı konum takibi yapılmalı. Push bildirimleri eklenmeli.",
-    "budget": 110000,
-    "deadline": "2025-05-20T00:00:00.000Z",
+    "title": "Dil Öğrenme ve Pratik Uygulaması",
+    "description": "Etkileşimli dil öğrenme deneyimi sunan modern bir eğitim uygulaması geliştiriyoruz. Ders modülleri, seviye bazlı içerik organizasyonu ile yapılandırılıyor. Kelime öğrenme, flashcard sistemi ve tekrar algoritması ile destekleniyor. Telaffuz pratiği, ses tanıma teknolojisi ile doğru telaffuz kontrolü sağlıyor. Gramer alıştırmaları, interaktif egzersizler ve anında geri bildirim içeriyor. Konuşma pratiği, AI destekli konuşma partneri ile diyalog simülasyonu sunuyor. İlerleme takibi, tamamlanan dersler ve başarı istatistiklerini görüntülüyor. Rozet sistemi, motivasyonu artırmak için başarı rozetleri sunuyor. Offline mod, indirilen içeriklerin internet olmadan kullanılabilmesine izin veriyor. Çoklu dil desteği, farklı dillerin öğrenilmesini destekliyor. Sosyal özellikler, öğrenciler arası rekabet ve paylaşım imkanı sunuyor. Günlük hedefler, düzenli öğrenme alışkanlığı oluşturmayı teşvik ediyor.",
+    "budget": 88000,
+    "deadline": "2025-05-01T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "Not Alma Uygulaması",
-    "description": "Kişisel verimliliği artırmak için not yönetim uygulaması geliştirmek istiyoruz. Kullanıcıların notlarını organize etmesi ve erişmesi için React Native veya Flutter ile çalışılacak. Not yönetimi kısmında zengin metin editörü olmalı - kalın, italik, liste, bağlantı gibi özellikler. Kategori ve etiket sistemiyle organizasyon yapılabilmeli. Hızlı arama özelliği eklenmeli. Senkronizasyon için bulut üzerinde otomatik senkronizasyon sağlanmalı. Offline mod desteği olmalı - internet olmadan not oluşturma, sonra senkronizasyon yapılabilmeli. Widget desteği eklenmeli - ana ekrandan hızlı erişim için. Markdown desteği olmalı. Görsel ekleme özelliği eklenmeli - notlara fotoğraf eklenebilmeli. Basit ve kullanıcı dostu arayüz tasarlanmalı. Performans açısından hızlı yükleme ve kaydetme sağlanmalı.",
-    "budget": 30000,
-    "deadline": "2025-02-25T00:00:00.000Z",
+    "title": "Yerel İşletme Keşif ve Rezervasyon Uygulaması",
+    "description": "Yerel işletmelerin keşfedilmesini ve rezervasyon yapılmasını kolaylaştıran bir platform tasarlıyoruz. İşletme listeleme, kategorilere göre organize edilmiş yerel işletme veritabanı içeriyor. Arama ve filtreleme, konum, kategori ve değerlendirmelere göre sonuçları daraltıyor. Harita görünümü, yakındaki işletmelerin görselleştirilmesini sağlıyor. Rezervasyon sistemi, restoran, kuaför ve diğer hizmetler için online rezervasyon imkanı sunuyor. Değerlendirme ve yorum sistemi, kullanıcı deneyimlerinin paylaşılmasına izin veriyor. Özel teklifler, işletmelerin kampanya ve indirimlerini sunmasına olanak veriyor. Favoriler özelliği, ilgi duyulan işletmelerin kaydedilmesini sağlıyor. Bildirimler, rezervasyon hatırlatmaları ve özel teklifler için kullanılıyor. İşletme profilleri, detaylı bilgiler, fotoğraflar ve çalışma saatlerini içeriyor. Sosyal paylaşım, işletme önerilerinin arkadaşlarla paylaşılmasını destekliyor. Konum bazlı öneriler, kullanıcı konumuna göre kişiselleştirilmiş öneriler sunuyor.",
+    "budget": 65000,
+    "deadline": "2025-03-22T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "QR Kod Okuyucu ve Oluşturucu",
-    "description": "QR kod işlemleri için kapsamlı mobil uygulama geliştirmek istiyoruz. Hem okuma hem de oluşturma özelliklerine sahip olacak. Native iOS (Swift) ve Android (Kotlin) geliştirme yapılacak. QR kod okuma kısmında kamera kullanarak okuma yapılabilmeli. Desteklenen türler: URL, metin, WiFi bilgileri, vCard, e-posta, SMS, telefon numarası. QR kod oluşturma özelliği eklenmeli - kullanıcıların kendi QR kodlarını oluşturması sağlanmalı. Özelleştirme seçenekleri olmalı - renk, logo ekleme, boyut ayarlama gibi. Geçmiş özelliği eklenmeli - okunan ve oluşturulan QR kodların kaydı tutulmalı. Paylaşım özelliği olmalı. Kamera izinleri ve kullanımı optimizasyonu yapılmalı. Hızlı ve doğru okuma sağlanmalı. Modern arayüz tasarlanmalı. Toplu QR kod oluşturma özelliği eklenebilir.",
-    "budget": 20000,
-    "deadline": "2025-02-15T00:00:00.000Z",
+    "title": "Müzik Keşif ve Çalma Listesi Uygulaması",
+    "description": "Müzik severler için kişiselleştirilmiş keşif ve dinleme deneyimi sunan bir mobil uygulama inşa ediyoruz. Müzik kütüphanesi, geniş bir şarkı koleksiyonuna erişim sağlıyor. Akıllı öneri sistemi, kullanıcı dinleme geçmişine göre yeni şarkılar öneriyor. Çalma listesi yönetimi, özel ve paylaşılan listeler oluşturulmasına izin veriyor. Offline indirme, favori şarkıların internet olmadan dinlenebilmesini sağlıyor. Radio özelliği, temaya göre sürekli müzik akışı sunuyor. Şarkı sözleri görüntüleme, dinlerken sözlerin takip edilmesine olanak veriyor. Sosyal özellikler, arkadaşlarla çalma listesi paylaşımı ve müzik keşfi destekliyor. Podcast desteği, ses içeriklerinin dinlenmesine izin veriyor. Arka plan çalma, uygulama kapalıyken müziğin devam etmesini sağlıyor. Eşitleme ayarları, ses kalitesi tercihlerinin yapılandırılmasına olanak veriyor. Widget desteği, ana ekrandan hızlı erişim sağlıyor.",
+    "budget": 82000,
+    "deadline": "2025-04-18T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "Hava Durumu Uygulaması",
-    "description": "Detaylı ve güvenilir hava durumu bilgisi sunan modern mobil uygulama geliştirmek istiyoruz. OpenWeatherMap veya WeatherAPI entegrasyonu yapılacak. Konum yönetimi kısmında GPS ile otomatik konum tespiti yapılabilmeli. Anlık hava durumu bilgileri gösterilmeli - sıcaklık, nem, rüzgar hızı, görünürlük. 7 günlük tahmin özelliği olmalı. Saatlik tahmin gösterilmeli. Widget desteği eklenmeli - ana ekrandan hızlı erişim için. Bildirimler özelliği olmalı - hava durumu uyarıları (yağmur, kar, fırtına) gönderilmeli. Çoklu konum desteği eklenmeli - birden fazla şehir takibi yapılabilmeli. Harita görünümü eklenmeli - geniş alan hava durumu görselleştirmesi. Modern ve görsel açıdan zengin tasarım olmalı. Animasyonlarla hava durumu görselleştirmesi yapılmalı.",
-    "budget": 25000,
-    "deadline": "2025-02-20T00:00:00.000Z",
+    "title": "Ebeveyn Kontrolü ve Çocuk Güvenliği Uygulaması",
+    "description": "Ebeveynlerin çocuklarının dijital aktivitelerini yönetmesine yardımcı olan güvenlik odaklı bir platform oluşturuyoruz. Cihaz kullanım süresi takibi, günlük ve haftalık kullanım limitlerinin belirlenmesini sağlıyor. İçerik filtreleme, uygunsuz içeriklere erişimin engellenmesine izin veriyor. Uygulama kontrolü, izin verilen ve yasaklanan uygulamaların yönetimini destekliyor. Konum takibi, çocukların güvenliğini sağlamak için gerçek zamanlı konum paylaşımı sunuyor. Acil durum butonu, hızlı yardım çağrısı için kullanılabiliyor. Web sitesi engelleme, zararlı sitelere erişimin kısıtlanmasını sağlıyor. Mesajlaşma izleme, şüpheli içeriklerin tespit edilmesine yardımcı oluyor. Raporlama, detaylı aktivite raporlarının ebeveynlere sunulmasını sağlıyor. Uzaktan yönetim, ebeveyn panelinden tüm kontrollerin yapılabilmesine olanak veriyor. Güvenlik özellikleri, veri şifreleme ve güvenli iletişim protokolleri içeriyor.",
+    "budget": 75000,
+    "deadline": "2025-04-08T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Alışveriş Listesi ve Fiyat Karşılaştırma Uygulaması",
+    "description": "Alışveriş verimliliğini artıran akıllı liste yönetimi ve fiyat karşılaştırma çözümü geliştiriyoruz. Alışveriş listesi oluşturma, kategorilere göre organize edilmiş ürün listeleri sunuyor. Barkod tarama, ürün bilgilerinin hızlıca eklenmesine izin veriyor. Fiyat karşılaştırma, farklı mağazalardaki fiyatların karşılaştırılmasını sağlıyor. İndirim bildirimleri, favori ürünlerdeki fiyat düşüşlerini kullanıcıya iletiyor. Mağaza konumları, yakındaki mağazaların harita üzerinde gösterilmesini destekliyor. Paylaşım özelliği, aile üyeleriyle liste paylaşımına olanak veriyor. Stok takibi, evdeki ürünlerin stok durumunun yönetilmesini sağlıyor. Harcama analizi, alışveriş harcamalarının kategorilere göre analiz edilmesine izin veriyor. Hatırlatıcılar, düzenli alışveriş listeleri için otomatik bildirimler sunuyor. Çoklu liste desteği, farklı mağazalar için ayrı listeler oluşturulmasını destekliyor. Offline mod, internet bağlantısı olmadan temel işlevlerin kullanılabilmesine izin veriyor.",
+    "budget": 48000,
+    "deadline": "2025-03-15T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Spor Takımı ve Antrenman Yönetim Uygulaması",
+    "description": "Spor takımlarının organizasyonunu ve antrenman süreçlerini dijitalleştiren kapsamlı bir platform oluşturuyoruz. Takım yönetimi, oyuncu bilgileri ve takım organizasyonu özellikleri içeriyor. Antrenman planlama, antrenörlerin program oluşturmasına ve paylaşmasına izin veriyor. İstatistik takibi, oyuncu performans metriklerinin kaydedilmesini ve analiz edilmesini sağlıyor. Maç takvimi, yaklaşan maçların ve sonuçların yönetilmesini destekliyor. Mesajlaşma sistemi, takım üyeleri arasında iletişim kurulmasına olanak veriyor. Bildirimler, antrenman hatırlatmaları ve önemli duyurular için kullanılıyor. Fotoğraf ve video paylaşımı, maç ve antrenman anılarının kaydedilmesini sağlıyor. Raporlama, takım performans analizlerinin görselleştirilmesine izin veriyor. Oyuncu profilleri, bireysel istatistikler ve başarıların sergilenmesini destekliyor. Ebeveyn portalı, genç sporcuların ebeveynlerinin bilgilendirilmesine olanak veriyor. Sosyal özellikler, takım ruhunu güçlendirmek için etkileşim araçları sunuyor.",
+    "budget": 62000,
+    "deadline": "2025-03-25T00:00:00.000Z",
     "status": "open"
   }
 ]

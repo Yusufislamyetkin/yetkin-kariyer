@@ -1,6 +1,9 @@
 import { db } from "@/lib/db";
 import { logBotActivity } from "./bot-activity-logger";
 import { BotActivityType } from "@prisma/client";
+import { recordEvent } from "@/lib/services/gamification/antiAbuse";
+import { applyRules } from "@/lib/services/gamification/rules";
+import { checkBadgesForActivity } from "@/app/api/badges/check/badge-service";
 
 const COMMUNITY_SLUGS = [
   "dotnet-core-community",
@@ -226,6 +229,19 @@ export async function commentOnPosts(
               content: commentContent.trim().substring(0, 1000), // Limit to 1000 chars
             },
           });
+
+          // Gamification: Record event and apply rules
+          try {
+            const event = await recordEvent({
+              userId,
+              type: "comment_created",
+              payload: { commentId: comment.id, postId: post.id },
+            });
+            await applyRules({ userId, type: "comment_created", payload: { sourceEventId: event.id } });
+          } catch (e) {
+            console.warn(`[BOT_COMMENT] Gamification failed for comment ${comment.id}:`, e);
+          }
+
           comments.push(comment);
         }
       } catch (error: any) {
@@ -235,6 +251,19 @@ export async function commentOnPosts(
     }
 
     if (comments.length > 0) {
+      // Check badges for comment activity
+      try {
+        const badgeResults = await checkBadgesForActivity({
+          userId,
+          // activityType is optional, comment activity doesn't have a specific type
+        });
+        if (badgeResults.totalEarned > 0) {
+          console.log(`[BOT_COMMENT] Bot ${userId} earned ${badgeResults.totalEarned} badges`);
+        }
+      } catch (e) {
+        console.warn(`[BOT_COMMENT] Badge check failed:`, e);
+      }
+
       await logBotActivity({
         userId,
         activityType: BotActivityType.COMMENT,
@@ -275,6 +304,31 @@ export async function createPost(
         content: content.trim().substring(0, 2200), // Limit to 2200 chars
       },
     });
+
+    // Gamification: Record event and apply rules
+    try {
+      const event = await recordEvent({
+        userId,
+        type: "post_created",
+        payload: { postId: post.id },
+      });
+      await applyRules({ userId, type: "post_created", payload: { sourceEventId: event.id } });
+    } catch (e) {
+      console.warn(`[BOT_POST] Gamification failed:`, e);
+    }
+
+    // Check badges for post activity
+    try {
+      const badgeResults = await checkBadgesForActivity({
+        userId,
+        // activityType is optional, post activity doesn't have a specific type
+      });
+      if (badgeResults.totalEarned > 0) {
+        console.log(`[BOT_POST] Bot ${userId} earned ${badgeResults.totalEarned} badges`);
+      }
+    } catch (e) {
+      console.warn(`[BOT_POST] Badge check failed:`, e);
+    }
 
     await logBotActivity({
       userId,
@@ -320,15 +374,63 @@ export async function completeLessons(userId: string, count: number = 2) {
       return { success: false, completed: 0 };
     }
 
-    // Extract lesson slugs from courses
+    // Extract lesson slugs from courses (support both old and new formats)
     const lessonSlugs: string[] = [];
     for (const course of courses) {
       if (course.content && typeof course.content === "object") {
         const content = course.content as any;
+        
+        // Determine course expertise for building lesson hrefs (for old format)
+        const courseExpertise = content.expertise?.toLowerCase().replace(/\s+/g, '-') || 
+                               content.topic?.toLowerCase().replace(/\s+/g, '-') || 
+                               (course.id.includes('java') ? 'java' : 
+                                course.id.includes('dotnet') ? 'dotnet-core' : 
+                                course.id.includes('nodejs') ? 'nodejs' : 'java');
+        
+        // Check for modules (new format)
+        const modules = Array.isArray(content.modules) ? content.modules : [];
+        
+        // Extract from modules (new format)
+        for (const moduleItem of modules) {
+          if (!moduleItem || typeof moduleItem !== "object") continue;
+          
+          // Check for relatedTopics (new format)
+          const relatedTopics = Array.isArray((moduleItem as any).relatedTopics)
+            ? ((moduleItem as any).relatedTopics as Array<Record<string, any>>)
+            : [];
+          
+          // Check for lessons (old format within modules)
+          const lessons = Array.isArray((moduleItem as any).lessons)
+            ? ((moduleItem as any).lessons as Array<Record<string, any>>)
+            : [];
+          
+          // Extract from relatedTopics (new format)
+          for (const topic of relatedTopics) {
+            if (topic?.href && typeof topic.href === "string") {
+              lessonSlugs.push(topic.href);
+            }
+          }
+          
+          // Extract from lessons (old format within modules)
+          for (const lesson of lessons) {
+            if (lesson?.slug && typeof lesson.slug === "string") {
+              const moduleId = (moduleItem as any).id || '';
+              const lessonSlug = lesson.slug;
+              const href = `/education/lessons/${courseExpertise}/${moduleId}/${lessonSlug}`;
+              lessonSlugs.push(href);
+            } else if (lesson?.href && typeof lesson.href === "string") {
+              lessonSlugs.push(lesson.href);
+            }
+          }
+        }
+        
+        // Check for direct lessons array (old format at root level)
         if (Array.isArray(content.lessons)) {
           for (const lesson of content.lessons) {
             if (lesson.slug && typeof lesson.slug === "string") {
               lessonSlugs.push(lesson.slug);
+            } else if (lesson.href && typeof lesson.href === "string") {
+              lessonSlugs.push(lesson.href);
             }
           }
         }
@@ -379,8 +481,34 @@ export async function completeLessons(userId: string, count: number = 2) {
       const course = courses.find((c: typeof courses[0]) => {
         if (c.content && typeof c.content === "object") {
           const content = c.content as any;
+          
+          // Check modules (new format)
+          const modules = Array.isArray(content.modules) ? content.modules : [];
+          for (const moduleItem of modules) {
+            if (!moduleItem || typeof moduleItem !== "object") continue;
+            
+            // Check relatedTopics
+            const relatedTopics = Array.isArray((moduleItem as any).relatedTopics)
+              ? ((moduleItem as any).relatedTopics as Array<Record<string, any>>)
+              : [];
+            if (relatedTopics.some((topic: any) => topic?.href === lessonSlug)) {
+              return true;
+            }
+            
+            // Check lessons in module
+            const lessons = Array.isArray((moduleItem as any).lessons)
+              ? ((moduleItem as any).lessons as Array<Record<string, any>>)
+              : [];
+            if (lessons.some((l: any) => l?.href === lessonSlug || l?.slug === lessonSlug)) {
+              return true;
+            }
+          }
+          
+          // Check direct lessons array (old format)
           if (Array.isArray(content.lessons)) {
-            return content.lessons.some((l: any) => l.slug === lessonSlug);
+            if (content.lessons.some((l: any) => l?.slug === lessonSlug || l?.href === lessonSlug)) {
+              return true;
+            }
           }
         }
         return false;
@@ -407,6 +535,31 @@ export async function completeLessons(userId: string, count: number = 2) {
       });
 
       completions.push(completion);
+
+      // Gamification: Record event and check badges for each lesson
+      try {
+        const event = await recordEvent({
+          userId,
+          type: "lesson_complete",
+          payload: { lessonSlug },
+        });
+        await applyRules({ userId, type: "lesson_complete", payload: { sourceEventId: event.id } });
+      } catch (e) {
+        console.warn(`[BOT_LESSON] Gamification failed for lesson ${lessonSlug}:`, e);
+      }
+    }
+
+    // Check badges for lesson activity
+    try {
+      const badgeResults = await checkBadgesForActivity({
+        userId,
+        activityType: "ders",
+      });
+      if (badgeResults.totalEarned > 0) {
+        console.log(`[BOT_LESSON] Bot ${userId} earned ${badgeResults.totalEarned} badges`);
+      }
+    } catch (e) {
+      console.warn(`[BOT_LESSON] Badge check failed:`, e);
     }
 
     await logBotActivity({
@@ -552,6 +705,18 @@ export async function completeTests(
           },
         });
 
+        // Gamification: Record event and apply rules
+        try {
+          const event = await recordEvent({
+            userId,
+            type: "test_complete",
+            payload: { quizId: quiz.id, quizAttemptId: quizAttempt.id, score },
+          });
+          await applyRules({ userId, type: "test_complete", payload: { sourceEventId: event.id } });
+        } catch (e) {
+          console.warn(`[BOT_TEST] Gamification failed for test ${quiz.id}:`, e);
+        }
+
         attempts.push({ quizAttempt, testAttempt });
       } catch (error: any) {
         console.error(`[BOT_TEST] Error completing test ${quiz.id}:`, error);
@@ -560,6 +725,24 @@ export async function completeTests(
     }
 
     if (attempts.length > 0) {
+      // Check badges for test activity
+      try {
+        // Check badges for the last quiz attempt
+        const lastAttempt = attempts[attempts.length - 1];
+        if (lastAttempt?.quizAttempt?.id) {
+          const { checkBadgesForAttempt } = await import("@/app/api/badges/check/badge-service");
+          const badgeResults = await checkBadgesForAttempt({
+            userId,
+            quizAttemptId: lastAttempt.quizAttempt.id,
+          });
+          if (badgeResults.totalEarned > 0) {
+            console.log(`[BOT_TEST] Bot ${userId} earned ${badgeResults.totalEarned} badges`);
+          }
+        }
+      } catch (e) {
+        console.warn(`[BOT_TEST] Badge check failed:`, e);
+      }
+
       await logBotActivity({
         userId,
         activityType: BotActivityType.TEST,
@@ -663,6 +846,18 @@ export async function completeLiveCoding(userId: string, count: number = 1) {
           },
         });
 
+        // Gamification: Record event and apply rules
+        try {
+          const event = await recordEvent({
+            userId,
+            type: "live_coding_completed",
+            payload: { quizId: quiz.id, attemptId: attempt.id },
+          });
+          await applyRules({ userId, type: "live_coding_completed", payload: { sourceEventId: event.id } });
+        } catch (e) {
+          console.warn(`[BOT_LIVE_CODING] Gamification failed for challenge ${quiz.id}:`, e);
+        }
+
         attempts.push(attempt);
       } catch (error: any) {
         console.error(`[BOT_LIVE_CODING] Error completing challenge ${quiz.id}:`, error);
@@ -671,6 +866,19 @@ export async function completeLiveCoding(userId: string, count: number = 1) {
     }
 
     if (attempts.length > 0) {
+      // Check badges for live coding activity
+      try {
+        const badgeResults = await checkBadgesForActivity({
+          userId,
+          activityType: "canlı kodlama",
+        });
+        if (badgeResults.totalEarned > 0) {
+          console.log(`[BOT_LIVE_CODING] Bot ${userId} earned ${badgeResults.totalEarned} badges`);
+        }
+      } catch (e) {
+        console.warn(`[BOT_LIVE_CODING] Badge check failed:`, e);
+      }
+
       await logBotActivity({
         userId,
         activityType: BotActivityType.LIVE_CODING,

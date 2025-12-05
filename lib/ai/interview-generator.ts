@@ -338,15 +338,28 @@ export function extractCVInfo(cvData: CVData): {
   };
 }
 
-/**
- * CV'yi analiz edip mülakat soruları oluşturur
- */
-export async function generateInterviewFromCV(cvId: string): Promise<InterviewQuestions> {
-  if (!isAIEnabled()) {
-    throw new Error("AI servisi devre dışı. OPENAI_API_KEY environment variable kontrol edin.");
-  }
+// Stage-specific schemas
+const stage1QuestionsSchema = z.object({
+  stage1_introduction: z.array(interviewQuestionSchema),
+});
 
-  // CV'yi veritabanından al
+const stage2QuestionsSchema = z.object({
+  stage2_experience: z.array(interviewQuestionSchema),
+});
+
+const stage3QuestionsSchema = z.object({
+  stage3_technical: z.object({
+    testQuestions: z.array(interviewQuestionSchema).min(5),
+    liveCoding: interviewQuestionSchema.optional(),
+    bugFix: interviewQuestionSchema.optional(),
+    realWorldScenarios: z.array(interviewQuestionSchema).min(2),
+  }),
+});
+
+/**
+ * CV özetini oluşturan helper fonksiyon
+ */
+async function getCVSummary(cvId: string): Promise<{ cvData: CVData; cvInfo: ReturnType<typeof extractCVInfo>; cvSummary: string; positionTypeLabels: Record<PositionType, string> }> {
   const cv = await db.cV.findUnique({
     where: { id: cvId },
   });
@@ -358,7 +371,6 @@ export async function generateInterviewFromCV(cvId: string): Promise<InterviewQu
   const cvData = cv.data as CVData;
   const cvInfo = extractCVInfo(cvData);
 
-  // Pozisyon tipi etiketleri
   const positionTypeLabels: Record<PositionType, string> = {
     developer: "Yazılım Geliştirici",
     devops: "DevOps Engineer",
@@ -371,7 +383,6 @@ export async function generateInterviewFromCV(cvId: string): Promise<InterviewQu
     other: "Teknoloji Uzmanı",
   };
 
-  // CV özeti oluştur - TÜM bölümler dahil
   const cvSummary = `
 CV ÖZETİ:
 - İsim: ${cvData.personalInfo?.name || "Belirtilmemiş"}
@@ -479,6 +490,217 @@ HOBİLER:
 ${(cvData.hobbies || []).join(", ") || "Belirtilmemiş"}
 `;
 
+  return { cvData, cvInfo, cvSummary, positionTypeLabels };
+}
+
+/**
+ * Aşama 1: Genel Tanışma ve Kişisel Bilgiler soruları oluşturur
+ */
+export async function generateStage1Questions(cvId: string): Promise<z.infer<typeof stage1QuestionsSchema>> {
+  if (!isAIEnabled()) {
+    throw new Error("AI servisi devre dışı. OPENAI_API_KEY environment variable kontrol edin.");
+  }
+
+  const { cvData, cvInfo, cvSummary, positionTypeLabels } = await getCVSummary(cvId);
+
+  const prompt = `
+Bir ${positionTypeLabels[cvInfo.positionType]} pozisyonu için CV'ye göre genel tanışma ve kişisel bilgiler soruları hazırla.
+
+${cvSummary}
+
+AŞAMA 1 - GENEL TANIŞMA VE KİŞİSEL BİLGİLER (5-7 soru):
+CV'deki kişisel bilgiler, özet, eğitim ve diller bölümlerinden sorular oluştur:
+
+1. **Kişisel Tanışma** (1-2 soru):
+   - Kullanıcının kendisini tanıtması
+   - Kariyer yolculuğu hakkında genel sorular
+   - Bu pozisyona neden başvurduğu
+
+2. **CV Özeti** (1-2 soru):
+   - CV özetindeki bilgilere göre sorular
+   - Kariyer hedefleri ve motivasyonları
+   - Özet bölümünde bahsedilen önemli noktalar
+
+3. **Eğitim Geçmişi** (1-2 soru):
+   - Eğitim bilgilerine göre detaylı sorular
+   - Eğitimin pozisyonla ilişkisi
+   - Eğitim sırasında edinilen deneyimler
+   - GPA (varsa) ve akademik başarılar
+
+4. **Diller** (1-2 soru):
+   - İngilizce seviyesi detaylı test (özellikle teknik dokümantasyon okuma/yazma)
+   - Diğer diller (varsa) ve kullanım alanları
+   - Dil becerilerinin işe katkısı
+
+ÖNEMLİ NOTLAR:
+- Pozisyon Tipi: ${positionTypeLabels[cvInfo.positionType]}
+- Seviye: ${cvInfo.level}
+- Deneyim: ${cvInfo.yearsOfExperience} yıl
+- Sorular ${cvInfo.level} seviyeye uygun olmalı
+- Tüm sorular Türkçe olmalı
+- Sorular gerçekçi ve pratik olmalı
+- Behavioral sorular STAR metoduna uygun olmalı
+
+SORU FORMATI:
+Her soru şu formatta olmalı:
+{
+  "id": "unique_id",
+  "type": "behavioral",
+  "question": "Soru metni",
+  "prompt": "Ek açıklama (opsiyonel)",
+  "description": "Detaylı açıklama (opsiyonel)",
+  "difficulty": "${cvInfo.level}",
+  "resources": ["ipucu1", "ipucu2"] (opsiyonel)
+}
+
+JSON formatında yanıt ver:
+{
+  "stage1_introduction": [...] // 5-7 soru
+}
+`;
+
+  try {
+    const result = await createChatCompletion({
+      schema: stage1QuestionsSchema,
+      messages: [
+        {
+          role: "system",
+          content: `Sen bir ${positionTypeLabels[cvInfo.positionType]} mülakat uzmanısın ve İK profesyonelisin. CV'lere göre çok kapsamlı, gerçekçi ve adil mülakat soruları hazırlıyorsun. CV'deki kişisel bilgiler, özet, eğitim ve diller bölümlerini analiz ederek genel tanışma soruları oluşturuyorsun. Her zaman JSON formatında yanıt ver.`,
+        },
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
+      temperature: 0.7,
+    });
+
+    if (!result.parsed) {
+      throw new Error("AI yanıtı doğrulanamadı");
+    }
+
+    return result.parsed;
+  } catch (error: any) {
+    console.error("[generateStage1Questions] Hata:", error);
+    throw new Error(`Aşama 1 soruları oluşturulurken hata: ${error?.message || "Bilinmeyen hata"}`);
+  }
+}
+
+/**
+ * Aşama 2: Deneyim, Projeler ve Başarılar soruları oluşturur
+ */
+export async function generateStage2Questions(cvId: string): Promise<z.infer<typeof stage2QuestionsSchema>> {
+  if (!isAIEnabled()) {
+    throw new Error("AI servisi devre dışı. OPENAI_API_KEY environment variable kontrol edin.");
+  }
+
+  const { cvData, cvInfo, cvSummary, positionTypeLabels } = await getCVSummary(cvId);
+
+  const prompt = `
+Bir ${positionTypeLabels[cvInfo.positionType]} pozisyonu için CV'ye göre deneyim, projeler ve başarılar soruları hazırla.
+
+${cvSummary}
+
+AŞAMA 2 - DENEYİM, PROJELER VE BAŞARILAR (8-12 soru):
+CV'deki deneyim, projeler, başarılar, sertifikalar ve referanslar bölümlerinden sorular:
+
+1. **İş Deneyimleri** (Her iş yeri için 2-3 soru, toplam 4-6 soru):
+   - Şirket kültürü ve çalışma ortamı
+   - Takım yapısı ve çalışma şekli
+   - Kullanılan teknolojiler, araçlar ve metodolojiler
+   - Sorumluluklar ve başarılar
+   - Yaşanan zorluklar ve çözüm yöntemleri (STAR metodu ile)
+   - Takım çalışması deneyimleri
+   - Çalışma metodolojileri (Agile, Scrum, Kanban, vb.)
+   - İş yerinden ayrılma nedenleri (varsa)
+
+2. **Projeler** (Her önemli proje için 1-2 soru, toplam 2-4 soru):
+   - Proje amacı, kapsamı ve hedefleri
+   - Kullanılan teknolojiler ve neden seçildiği
+   - Projedeki rol ve sorumluluklar
+   - Karşılaşılan teknik zorluklar ve çözümler
+   - Proje sonuçları ve öğrenilenler
+   - Proje URL'i varsa (github, vb.) hakkında sorular
+
+3. **Başarılar** (1-2 soru, varsa):
+   - Başarıların detayları ve önemi
+   - Başarıya giden süreç
+   - Ölçülebilir sonuçlar ve etkileri
+
+4. **Sertifikalar** (1-2 soru, varsa):
+   - Sertifika içeriği ve kazanılan bilgiler
+   - Sertifikanın işe katkısı
+   - Sertifika sürecinde edinilen deneyimler
+
+5. **Referanslar** (1 soru, varsa ve opsiyonel):
+   - Referanslarla çalışma deneyimi
+   - Öneriler ve geri bildirimler
+
+ÖNEMLİ NOTLAR:
+- Pozisyon Tipi: ${positionTypeLabels[cvInfo.positionType]}
+- Seviye: ${cvInfo.level}
+- Deneyim: ${cvInfo.yearsOfExperience} yıl
+- Teknolojiler: ${cvInfo.technologies.join(", ") || "Belirtilmemiş"}
+- Sorular ${cvInfo.level} seviyeye uygun olmalı
+- Tüm sorular Türkçe olmalı
+- Sorular gerçekçi ve pratik olmalı
+- Behavioral sorular STAR metoduna uygun olmalı
+
+SORU FORMATI:
+Her soru şu formatta olmalı:
+{
+  "id": "unique_id",
+  "type": "behavioral" | "case",
+  "question": "Soru metni",
+  "prompt": "Ek açıklama (opsiyonel)",
+  "description": "Detaylı açıklama (opsiyonel)",
+  "difficulty": "${cvInfo.level}",
+  "resources": ["ipucu1", "ipucu2"] (opsiyonel)
+}
+
+JSON formatında yanıt ver:
+{
+  "stage2_experience": [...] // 8-12 soru
+}
+`;
+
+  try {
+    const result = await createChatCompletion({
+      schema: stage2QuestionsSchema,
+      messages: [
+        {
+          role: "system",
+          content: `Sen bir ${positionTypeLabels[cvInfo.positionType]} mülakat uzmanısın ve İK profesyonelisin. CV'lere göre çok kapsamlı, gerçekçi ve adil mülakat soruları hazırlıyorsun. CV'deki deneyim, projeler, başarılar, sertifikalar ve referanslar bölümlerini analiz ederek sorular oluşturuyorsun. Her zaman JSON formatında yanıt ver.`,
+        },
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
+      temperature: 0.7,
+    });
+
+    if (!result.parsed) {
+      throw new Error("AI yanıtı doğrulanamadı");
+    }
+
+    return result.parsed;
+  } catch (error: any) {
+    console.error("[generateStage2Questions] Hata:", error);
+    throw new Error(`Aşama 2 soruları oluşturulurken hata: ${error?.message || "Bilinmeyen hata"}`);
+  }
+}
+
+/**
+ * Aşama 3: Teknik Mülakat soruları oluşturur
+ */
+export async function generateStage3Questions(cvId: string): Promise<z.infer<typeof stage3QuestionsSchema>> {
+  if (!isAIEnabled()) {
+    throw new Error("AI servisi devre dışı. OPENAI_API_KEY environment variable kontrol edin.");
+  }
+
+  const { cvData, cvInfo, cvSummary, positionTypeLabels } = await getCVSummary(cvId);
+
   // Pozisyon tipine göre teknik soru şablonu
   const getTechnicalQuestionsTemplate = (positionType: PositionType): string => {
     switch (positionType) {
@@ -561,71 +783,10 @@ ${(cvData.hobbies || []).join(", ") || "Belirtilmemiş"}
     }
   };
 
-  // Prompt oluştur
   const prompt = `
-Bir ${positionTypeLabels[cvInfo.positionType]} pozisyonu için CV'ye göre çok kapsamlı ve gerçekçi bir mülakat hazırla. 
-Mülakat 3 aşamadan oluşacak ve CV'deki TÜM bilgileri kapsayacak:
+Bir ${positionTypeLabels[cvInfo.positionType]} pozisyonu için CV'ye göre teknik mülakat soruları hazırla.
 
 ${cvSummary}
-
-AŞAMA 1 - GENEL TANIŞMA VE KİŞİSEL BİLGİLER (5-7 soru):
-CV'deki kişisel bilgiler, özet, eğitim ve diller bölümlerinden sorular oluştur:
-
-1. **Kişisel Tanışma** (1-2 soru):
-   - Kullanıcının kendisini tanıtması
-   - Kariyer yolculuğu hakkında genel sorular
-   - Bu pozisyona neden başvurduğu
-
-2. **CV Özeti** (1-2 soru):
-   - CV özetindeki bilgilere göre sorular
-   - Kariyer hedefleri ve motivasyonları
-   - Özet bölümünde bahsedilen önemli noktalar
-
-3. **Eğitim Geçmişi** (1-2 soru):
-   - Eğitim bilgilerine göre detaylı sorular
-   - Eğitimin pozisyonla ilişkisi
-   - Eğitim sırasında edinilen deneyimler
-   - GPA (varsa) ve akademik başarılar
-
-4. **Diller** (1-2 soru):
-   - İngilizce seviyesi detaylı test (özellikle teknik dokümantasyon okuma/yazma)
-   - Diğer diller (varsa) ve kullanım alanları
-   - Dil becerilerinin işe katkısı
-
-AŞAMA 2 - DENEYİM, PROJELER VE BAŞARILAR (8-12 soru):
-CV'deki deneyim, projeler, başarılar, sertifikalar ve referanslar bölümlerinden sorular:
-
-1. **İş Deneyimleri** (Her iş yeri için 2-3 soru, toplam 4-6 soru):
-   - Şirket kültürü ve çalışma ortamı
-   - Takım yapısı ve çalışma şekli
-   - Kullanılan teknolojiler, araçlar ve metodolojiler
-   - Sorumluluklar ve başarılar
-   - Yaşanan zorluklar ve çözüm yöntemleri (STAR metodu ile)
-   - Takım çalışması deneyimleri
-   - Çalışma metodolojileri (Agile, Scrum, Kanban, vb.)
-   - İş yerinden ayrılma nedenleri (varsa)
-
-2. **Projeler** (Her önemli proje için 1-2 soru, toplam 2-4 soru):
-   - Proje amacı, kapsamı ve hedefleri
-   - Kullanılan teknolojiler ve neden seçildiği
-   - Projedeki rol ve sorumluluklar
-   - Karşılaşılan teknik zorluklar ve çözümler
-   - Proje sonuçları ve öğrenilenler
-   - Proje URL'i varsa (github, vb.) hakkında sorular
-
-3. **Başarılar** (1-2 soru, varsa):
-   - Başarıların detayları ve önemi
-   - Başarıya giden süreç
-   - Ölçülebilir sonuçlar ve etkileri
-
-4. **Sertifikalar** (1-2 soru, varsa):
-   - Sertifika içeriği ve kazanılan bilgiler
-   - Sertifikanın işe katkısı
-   - Sertifika sürecinde edinilen deneyimler
-
-5. **Referanslar** (1 soru, varsa ve opsiyonel):
-   - Referanslarla çalışma deneyimi
-   - Öneriler ve geri bildirimler
 
 AŞAMA 3 - TEKNİK MÜLAKAT (Pozisyon Tipine Göre Özelleştirilmiş):
 ${getTechnicalQuestionsTemplate(cvInfo.positionType)}
@@ -638,14 +799,15 @@ ${getTechnicalQuestionsTemplate(cvInfo.positionType)}
 - Sorular ${cvInfo.level} seviyeye uygun olmalı
 - Tüm sorular Türkçe olmalı
 - Sorular gerçekçi ve pratik olmalı
-- Behavioral sorular STAR metoduna uygun olmalı
 - Teknik sorular CV'deki teknolojilere göre olmalı
+- Gerçek dünya senaryoları pratik ve uygulanabilir olmalı
+${cvInfo.positionType === "developer" ? `- Canlı kodlama ve bugfix soruları ${cvInfo.technologies[0] || "C#"} dilinde olmalı` : "- Developer pozisyonu olmadığı için canlı kodlama ve bugfix soruları opsiyoneldir"}
 
 SORU FORMATI:
 Her soru şu formatta olmalı:
 {
   "id": "unique_id",
-  "type": "technical" | "behavioral" | "case" | "live_coding" | "bug_fix",
+  "type": "technical" | "case" | "live_coding" | "bug_fix",
   "question": "Soru metni",
   "prompt": "Ek açıklama (opsiyonel)",
   "description": "Detaylı açıklama (opsiyonel)",
@@ -659,18 +821,8 @@ Her soru şu formatta olmalı:
   "acceptanceCriteria": ["kriter1", "kriter2"] (opsiyonel)
 }
 
-ÖNEMLİ:
-- Sorular ${cvInfo.level} seviyeye uygun olmalı
-- Teknolojiler: ${cvInfo.technologies.join(", ") || "Belirtilmemiş"}
-- Gerçek dünya senaryoları pratik ve uygulanabilir olmalı
-${cvInfo.positionType === "developer" ? `- Canlı kodlama ve bugfix soruları ${cvInfo.technologies[0] || "C#"} dilinde olmalı` : "- Developer pozisyonu olmadığı için canlı kodlama ve bugfix soruları opsiyoneldir"}
-- Tüm sorular Türkçe olmalı
-- JSON formatında yanıt ver
-
 JSON formatında yanıt ver:
 {
-  "stage1_introduction": [...], // 5-7 soru
-  "stage2_experience": [...], // 8-12 soru
   "stage3_technical": {
     "testQuestions": [...], // En az 5 soru
     "liveCoding": {...}, // Sadece developer pozisyonları için zorunlu
@@ -682,11 +834,11 @@ JSON formatında yanıt ver:
 
   try {
     const result = await createChatCompletion({
-      schema: interviewQuestionsSchema,
+      schema: stage3QuestionsSchema,
       messages: [
         {
           role: "system",
-          content: `Sen bir ${positionTypeLabels[cvInfo.positionType]} mülakat uzmanısın ve İK profesyonelisin. CV'lere göre çok kapsamlı, gerçekçi ve adil mülakat soruları hazırlıyorsun. CV'deki TÜM bölümleri (Kişisel Bilgiler, Özet, Deneyim, Eğitim, Beceriler, Diller, Projeler, Başarılar, Sertifikalar, Referanslar) analiz ederek sorular oluşturuyorsun. Pozisyon tipine göre (${positionTypeLabels[cvInfo.positionType]}) uygun teknik sorular hazırlıyorsun. Her zaman JSON formatında yanıt ver.`,
+          content: `Sen bir ${positionTypeLabels[cvInfo.positionType]} mülakat uzmanısın ve İK profesyonelisin. CV'lere göre çok kapsamlı, gerçekçi ve adil teknik mülakat soruları hazırlıyorsun. Pozisyon tipine göre (${positionTypeLabels[cvInfo.positionType]}) uygun teknik sorular hazırlıyorsun. Her zaman JSON formatında yanıt ver.`,
         },
         {
           role: "user",
@@ -702,10 +854,35 @@ JSON formatında yanıt ver:
 
     return result.parsed;
   } catch (error: any) {
-    console.error("[generateInterviewFromCV] Hata:", error);
-    throw new Error(`Mülakat soruları oluşturulurken hata: ${error?.message || "Bilinmeyen hata"}`);
+    console.error("[generateStage3Questions] Hata:", error);
+    throw new Error(`Aşama 3 soruları oluşturulurken hata: ${error?.message || "Bilinmeyen hata"}`);
   }
 }
+
+/**
+ * CV'yi analiz edip mülakat soruları oluşturur (DEPRECATED - aşamalı versiyon kullanılmalı)
+ * Bu fonksiyon backward compatibility için bırakılmıştır.
+ * Yeni implementasyonlar için generateStage1Questions, generateStage2Questions, generateStage3Questions kullanılmalıdır.
+ */
+export async function generateInterviewFromCV(cvId: string): Promise<InterviewQuestions> {
+  if (!isAIEnabled()) {
+    throw new Error("AI servisi devre dışı. OPENAI_API_KEY environment variable kontrol edin.");
+  }
+
+  // Tüm aşamaları sırayla oluştur
+  const [stage1, stage2, stage3] = await Promise.all([
+    generateStage1Questions(cvId),
+    generateStage2Questions(cvId),
+    generateStage3Questions(cvId),
+  ]);
+
+  return {
+    stage1_introduction: stage1.stage1_introduction,
+    stage2_experience: stage2.stage2_experience,
+    stage3_technical: stage3.stage3_technical,
+  };
+}
+
 
 /**
  * Soruları interview formatına dönüştürür

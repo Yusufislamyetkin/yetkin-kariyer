@@ -125,6 +125,57 @@ export default function HybridTemplate({ data }: { data: CVData }) {
                   </div>
                 </section>
               )}
+              {data.certifications.length > 0 && (
+                <section>
+                  <h2 className="text-lg font-bold text-indigo-600 mb-1">Sertifikalar</h2>
+                  <div className="space-y-1">
+                    {data.certifications.map((cert, i) => (
+                      <div key={i} className="bg-gradient-to-br from-indigo-50 to-purple-50 p-2 rounded-lg border-l-4 border-indigo-600">
+                        <h3 className="font-bold text-gray-900 text-xs">{cert.name}</h3>
+                        <p className="text-indigo-600 text-xs">{cert.issuer}</p>
+                        {cert.date && <p className="text-gray-600 text-xs mt-0.5">{cert.date}</p>}
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+              {data.languages.length > 0 && (
+                <section>
+                  <h2 className="text-lg font-bold text-pink-600 mb-1">Diller</h2>
+                  <div className="space-y-1">
+                    {data.languages.map((lang, i) => (
+                      <div key={i} className="flex justify-between items-center">
+                        <span className="text-gray-900 font-medium text-xs">{lang.name}</span>
+                        <span className="text-pink-600 text-xs">{lang.level}</span>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+              {data.hobbies.length > 0 && (
+                <section>
+                  <h2 className="text-lg font-bold text-purple-600 mb-1">Hobiler</h2>
+                  <div className="flex flex-wrap gap-1">
+                    {data.hobbies.map((hobby, i) => (
+                      <span key={i} className="px-2 py-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-full text-xs font-semibold">{hobby}</span>
+                    ))}
+                  </div>
+                </section>
+              )}
+              {data.references.length > 0 && (
+                <section>
+                  <h2 className="text-lg font-bold text-indigo-600 mb-1">Referanslar</h2>
+                  <div className="space-y-1">
+                    {data.references.map((ref, i) => (
+                      <div key={i} className="border-l-4 border-indigo-600 pl-2">
+                        <p className="font-bold text-gray-900 text-xs">{ref.name}</p>
+                        <p className="text-indigo-600 text-xs">{ref.position}, {ref.company}</p>
+                        <p className="text-gray-600 text-xs mt-0.5">{ref.email} | {ref.phone}</p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
             </div>
           </div>
         </div>

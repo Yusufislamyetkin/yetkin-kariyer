@@ -226,6 +226,64 @@ export default function AcademicTemplate({ data }: AcademicTemplateProps) {
               </div>
             </section>
           )}
+
+          {/* Projects */}
+          {data.projects.length > 0 && (
+            <section className="mb-2">
+              <h2 className="text-lg font-bold mb-1 text-gray-900 uppercase tracking-wide border-b border-gray-300 pb-1">
+                Projeler
+              </h2>
+              <div className="space-y-1">
+                {data.projects.map((project, index) => (
+                  <div key={index} className="pl-2 border-l-2 border-gray-400">
+                    <h3 className="font-semibold text-gray-900 text-xs">{project.name || "Proje Adı"}</h3>
+                    {project.technologies && (
+                      <p className="text-gray-700 text-xs italic mt-0.5">Teknolojiler: {project.technologies}</p>
+                    )}
+                    {project.description && (
+                      <p className="text-gray-700 mt-1 break-words whitespace-pre-line text-xs line-clamp-2">
+                        {project.description}
+                      </p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Hobbies */}
+          {data.hobbies.length > 0 && (
+            <section className="mb-2">
+              <h2 className="text-lg font-bold mb-1 text-gray-900 uppercase tracking-wide border-b border-gray-300 pb-1">
+                Hobiler
+              </h2>
+              <div className="flex flex-wrap gap-1">
+                {data.hobbies.map((hobby, index) => (
+                  <span key={index} className="px-2 py-0.5 bg-gray-100 text-gray-800 rounded text-xs">
+                    {hobby}
+                  </span>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* References */}
+          {data.references.length > 0 && (
+            <section>
+              <h2 className="text-lg font-bold mb-1 text-gray-900 uppercase tracking-wide border-b border-gray-300 pb-1">
+                Referanslar
+              </h2>
+              <div className="space-y-1">
+                {data.references.map((ref, index) => (
+                  <div key={index} className="pl-2 border-l-2 border-gray-400">
+                    <p className="font-semibold text-gray-900 text-xs">{ref.name || "İsim"}</p>
+                    <p className="text-gray-700 text-xs italic">{ref.position || "Pozisyon"}, {ref.company || "Şirket"}</p>
+                    <p className="text-gray-600 text-xs mt-0.5">{ref.email || ""} | {ref.phone || ""}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
       </div>
     </div>

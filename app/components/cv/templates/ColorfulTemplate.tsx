@@ -350,6 +350,49 @@ export default function ColorfulTemplate({ data }: ColorfulTemplateProps) {
                 </div>
               </section>
             )}
+
+            {/* Hobbies */}
+            {data.hobbies.length > 0 && (
+              <section>
+                <h2 className={`text-base font-bold mb-1 ${getColor(1).text}`}>
+                  🎨 Hobiler
+                </h2>
+                <div className="flex flex-wrap gap-1">
+                  {data.hobbies.map((hobby, index) => {
+                    const color = getColor(index);
+                    return (
+                      <span
+                        key={index}
+                        className={`px-2 py-0.5 rounded-full text-xs font-semibold text-white ${color.bg} shadow-md`}
+                      >
+                        {hobby}
+                      </span>
+                    );
+                  })}
+                </div>
+              </section>
+            )}
+
+            {/* References */}
+            {data.references.length > 0 && (
+              <section>
+                <h2 className={`text-base font-bold mb-1 ${getColor(2).text}`}>
+                  📞 Referanslar
+                </h2>
+                <div className="space-y-1">
+                  {data.references.map((ref, index) => {
+                    const color = getColor(index + 30);
+                    return (
+                      <div key={index} className={`p-2 rounded-lg border-2 ${color.border} ${color.light}`}>
+                        <p className="font-bold text-gray-900 text-xs mb-0.5">{ref.name || "İsim"}</p>
+                        <p className={`text-xs font-semibold mb-0.5 ${color.text}`}>{ref.position || "Pozisyon"}, {ref.company || "Şirket"}</p>
+                        <p className="text-xs text-gray-600">{ref.email || ""} | {ref.phone || ""}</p>
+                      </div>
+                    );
+                  })}
+                </div>
+              </section>
+            )}
           </div>
         </div>
       </div>

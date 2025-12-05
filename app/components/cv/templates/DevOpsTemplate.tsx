@@ -95,13 +95,66 @@ export default function DevOpsTemplate({ data }: { data: CVData }) {
               </section>
             )}
             {data.certifications.length > 0 && (
-              <section>
+              <section className="mb-2">
                 <h2 className="text-base font-bold text-orange-600 mb-1">Sertifikalar</h2>
                 <div className="space-y-1">
                   {data.certifications.map((cert, i) => (
                     <div key={i} className="bg-gray-50 p-2 rounded">
                       <p className="font-semibold text-gray-900 text-xs">{cert.name}</p>
                       <p className="text-orange-600 text-xs">{cert.issuer}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+            {data.languages.length > 0 && (
+              <section className="mb-2">
+                <h2 className="text-base font-bold text-orange-600 mb-1">Diller</h2>
+                <div className="space-y-1">
+                  {data.languages.map((lang, i) => (
+                    <div key={i} className="flex justify-between items-center">
+                      <span className="text-gray-900 font-medium text-xs">{lang.name}</span>
+                      <span className="text-orange-600 text-xs">{lang.level}</span>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+            {data.achievements.length > 0 && (
+              <section className="mb-2">
+                <h2 className="text-base font-bold text-orange-600 mb-1">Başarılar</h2>
+                <div className="space-y-1">
+                  {data.achievements.map((achievement, i) => (
+                    <div key={i} className="border-l-4 border-orange-600 pl-2">
+                      <h3 className="font-semibold text-gray-900 text-xs">{achievement.title}</h3>
+                      {achievement.description && (
+                        <p className="text-gray-700 mt-0.5 break-words whitespace-pre-line text-xs line-clamp-1">{achievement.description}</p>
+                      )}
+                      {achievement.date && <p className="text-gray-600 text-xs mt-0.5">{achievement.date}</p>}
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+            {data.hobbies.length > 0 && (
+              <section className="mb-2">
+                <h2 className="text-base font-bold text-orange-600 mb-1">Hobiler</h2>
+                <div className="flex flex-wrap gap-1">
+                  {data.hobbies.map((hobby, i) => (
+                    <span key={i} className="px-2 py-0.5 bg-orange-50 text-orange-700 rounded text-xs">{hobby}</span>
+                  ))}
+                </div>
+              </section>
+            )}
+            {data.references.length > 0 && (
+              <section>
+                <h2 className="text-base font-bold text-orange-600 mb-1">Referanslar</h2>
+                <div className="space-y-1">
+                  {data.references.map((ref, i) => (
+                    <div key={i} className="border-l-4 border-orange-600 pl-2">
+                      <p className="font-semibold text-gray-900 text-xs">{ref.name}</p>
+                      <p className="text-orange-600 text-xs">{ref.position}, {ref.company}</p>
+                      <p className="text-gray-600 text-xs mt-0.5">{ref.email} | {ref.phone}</p>
                     </div>
                   ))}
                 </div>

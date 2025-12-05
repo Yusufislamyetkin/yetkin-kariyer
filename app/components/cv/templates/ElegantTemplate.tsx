@@ -75,6 +75,83 @@ export default function ElegantTemplate({ data }: { data: CVData }) {
               </section>
             )}
           </div>
+          {data.certifications.length > 0 && (
+            <section className="mb-2">
+              <h2 className="text-base font-light mb-1 text-gray-900 uppercase tracking-widest text-center border-b border-gray-300 pb-1">Sertifikalar</h2>
+              <div className="space-y-1">
+                {data.certifications.map((cert, i) => (
+                  <div key={i} className="text-center">
+                    <h3 className="font-light text-gray-900 text-xs">{cert.name}</h3>
+                    <p className="text-gray-600 italic text-xs">{cert.issuer}</p>
+                    {cert.date && <p className="text-xs text-gray-500 mt-0.5">{cert.date}</p>}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+          {data.languages.length > 0 && (
+            <section className="mb-2">
+              <h2 className="text-base font-light mb-1 text-gray-900 uppercase tracking-widest text-center border-b border-gray-300 pb-1">Diller</h2>
+              <div className="space-y-1">
+                {data.languages.map((lang, i) => (
+                  <div key={i} className="flex justify-between items-center text-center max-w-xs mx-auto">
+                    <span className="text-gray-900 font-light text-xs">{lang.name}</span>
+                    <span className="text-gray-600 italic text-xs">{lang.level}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+          {data.projects.length > 0 && (
+            <section className="mb-2">
+              <h2 className="text-base font-light mb-1 text-gray-900 uppercase tracking-widest text-center border-b border-gray-300 pb-1">Projeler</h2>
+              <div className="space-y-1">
+                {data.projects.map((project, i) => (
+                  <div key={i} className="text-center">
+                    <h3 className="font-light text-gray-900 text-xs">{project.name}</h3>
+                    {project.technologies && (
+                      <p className="text-gray-600 italic text-xs mt-0.5">Teknolojiler: {project.technologies}</p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+          {data.achievements.length > 0 && (
+            <section className="mb-2">
+              <h2 className="text-base font-light mb-1 text-gray-900 uppercase tracking-widest text-center border-b border-gray-300 pb-1">Başarılar</h2>
+              <div className="space-y-1">
+                {data.achievements.map((achievement, i) => (
+                  <div key={i} className="text-center">
+                    <h3 className="font-light text-gray-900 text-xs">{achievement.title}</h3>
+                    {achievement.date && <p className="text-xs text-gray-500 mt-0.5">{achievement.date}</p>}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+          {data.hobbies.length > 0 && (
+            <section className="mb-2">
+              <h2 className="text-base font-light mb-1 text-gray-900 uppercase tracking-widest text-center border-b border-gray-300 pb-1">Hobiler</h2>
+              <div className="text-center">
+                <p className="text-gray-700 text-xs italic">{data.hobbies.join(' • ')}</p>
+              </div>
+            </section>
+          )}
+          {data.references.length > 0 && (
+            <section>
+              <h2 className="text-base font-light mb-1 text-gray-900 uppercase tracking-widest text-center border-b border-gray-300 pb-1">Referanslar</h2>
+              <div className="space-y-1">
+                {data.references.map((ref, i) => (
+                  <div key={i} className="text-center">
+                    <p className="font-light text-gray-900 text-xs">{ref.name}</p>
+                    <p className="text-gray-600 italic text-xs">{ref.position}, {ref.company}</p>
+                    <p className="text-xs text-gray-500 mt-0.5">{ref.email}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
       </div>
     </div>

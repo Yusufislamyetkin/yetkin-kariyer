@@ -53,36 +53,53 @@ export async function POST(request: Request) {
     }
 
     // QStash ile her CV için job queue'ya ekle
+    // ÖNEMLİ: await etmeden paralel gönder, hemen response döndür
     let queuedCount = 0;
-    if (process.env.OPENAI_API_KEY) {
-      for (let i = 0; i < missingCvIds.length; i++) {
-        const cvId = missingCvIds[i];
-        try {
-          // Her job'u 5 saniye arayla başlat (rate limiting için)
-          const delay = i * 5;
-          
-          await queueJob(
-            "/api/interview/cv-based/generate-background",
-            {
-              cvId,
-              userId,
-            },
-            {
-              retries: 2, // 2 kez retry yap
-              delay, // Her job'u sırayla başlat
-            }
-          );
-          
-          queuedCount++;
-          console.log(`[CV_INTERVIEW_CHECK] Job queued for CV: ${cvId}`);
-        } catch (error: any) {
-          console.error(`[CV_INTERVIEW_CHECK] Failed to queue job for CV ${cvId}:`, error);
-          // Hata olsa bile devam et, diğer CV'ler için queue'ya eklemeye çalış
-        }
+    
+    if (process.env.OPENAI_API_KEY && process.env.QSTASH_TOKEN) {
+      // Tüm job'ları paralel olarak başlat (fire and forget)
+      const queuePromises = missingCvIds.map((cvId: string, i: number) => {
+        // Her job'u 5 saniye arayla başlat (rate limiting için)
+        const delay = i * 5;
+        
+        return queueJob(
+          "/api/interview/cv-based/generate-background",
+          {
+            cvId,
+            userId,
+          },
+          {
+            retries: 2, // 2 kez retry yap
+            delay, // Her job'u sırayla başlat
+          }
+        )
+          .then(() => {
+            queuedCount++;
+            console.log(`[CV_INTERVIEW_CHECK] Job queued for CV: ${cvId}`);
+          })
+          .catch((error: any) => {
+            console.error(`[CV_INTERVIEW_CHECK] Failed to queue job for CV ${cvId}:`, error);
+            // Hata olsa bile devam et
+          });
+      });
+      
+      // İlk 3 job'u hızlıca göndermeye çalış (max 3 saniye bekle)
+      // Sonra response döndür, geri kalanı background'da devam etsin
+      if (queuePromises.length > 0) {
+        const immediateJobs = queuePromises.slice(0, 3);
+        Promise.race([
+          Promise.all(immediateJobs),
+          new Promise(resolve => setTimeout(resolve, 3000)), // Max 3 saniye bekle
+        ]).catch(() => {
+          // Ignore errors, continue
+        });
       }
+    } else {
+      console.warn("[CV_INTERVIEW_CHECK] QStash not configured, skipping queue");
     }
 
     // Hemen response döndür (timeout önleme)
+    // Geri kalan job'lar background'da devam edecek
     return NextResponse.json({
       success: true,
       message: `${missingCvIds.length} CV için mülakat oluşturma işlemi kuyruğa eklendi`,
@@ -90,6 +107,7 @@ export async function POST(request: Request) {
       existing: existingCvIds.size,
       missing: missingCvIds.length,
       queued: queuedCount,
+      note: "Job'lar arka planda işleniyor",
     });
   } catch (error: any) {
     console.error("[CV_INTERVIEW_CHECK] Hata:", error);

@@ -74,7 +74,7 @@ export default function ResearchTemplate({ data }: { data: CVData }) {
             </section>
           )}
           {data.certifications.length > 0 && (
-            <section>
+            <section className="mb-2">
               <h2 className="text-lg font-bold text-blue-800 mb-1 uppercase tracking-wide border-b-2 border-blue-800 pb-1">Certifications</h2>
               <div className="space-y-1">
                 {data.certifications.map((cert, i) => (
@@ -82,6 +82,77 @@ export default function ResearchTemplate({ data }: { data: CVData }) {
                     <p className="font-bold text-gray-900 text-xs">{cert.name}</p>
                     <p className="text-blue-800 text-xs italic">{cert.issuer}</p>
                     {cert.date && <p className="text-gray-600 text-xs mt-0.5">{cert.date}</p>}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+          {data.projects.length > 0 && (
+            <section className="mb-2">
+              <h2 className="text-lg font-bold text-blue-800 mb-1 uppercase tracking-wide border-b-2 border-blue-800 pb-1">Research Projects</h2>
+              <div className="space-y-1">
+                {data.projects.map((project, i) => (
+                  <div key={i} className="pl-2 border-l-4 border-blue-800">
+                    <h3 className="font-bold text-gray-900 text-xs">{project.name}</h3>
+                    {project.technologies && (
+                      <p className="text-blue-800 text-xs italic mt-0.5">Technologies: {project.technologies}</p>
+                    )}
+                    {project.description && (
+                      <p className="text-gray-700 mt-1 break-words whitespace-pre-line text-xs line-clamp-2">{project.description}</p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+          {data.achievements.length > 0 && (
+            <section className="mb-2">
+              <h2 className="text-lg font-bold text-blue-800 mb-1 uppercase tracking-wide border-b-2 border-blue-800 pb-1">Achievements</h2>
+              <div className="space-y-1">
+                {data.achievements.map((achievement, i) => (
+                  <div key={i} className="pl-2 border-l-4 border-blue-800">
+                    <h3 className="font-bold text-gray-900 text-xs">{achievement.title}</h3>
+                    {achievement.description && (
+                      <p className="text-gray-700 mt-0.5 break-words whitespace-pre-line text-xs line-clamp-1">{achievement.description}</p>
+                    )}
+                    {achievement.date && <p className="text-gray-600 text-xs mt-0.5">{achievement.date}</p>}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+          {data.languages.length > 0 && (
+            <section className="mb-2">
+              <h2 className="text-lg font-bold text-blue-800 mb-1 uppercase tracking-wide border-b-2 border-blue-800 pb-1">Languages</h2>
+              <div className="space-y-1">
+                {data.languages.map((lang, i) => (
+                  <div key={i} className="flex justify-between items-center pl-2">
+                    <span className="text-gray-900 font-bold text-xs">{lang.name}</span>
+                    <span className="text-blue-800 text-xs italic">{lang.level}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+          {data.hobbies.length > 0 && (
+            <section className="mb-2">
+              <h2 className="text-lg font-bold text-blue-800 mb-1 uppercase tracking-wide border-b-2 border-blue-800 pb-1">Interests</h2>
+              <div className="flex flex-wrap gap-1">
+                {data.hobbies.map((hobby, i) => (
+                  <span key={i} className="px-2 py-0.5 bg-blue-100 text-blue-800 rounded text-xs">{hobby}</span>
+                ))}
+              </div>
+            </section>
+          )}
+          {data.references.length > 0 && (
+            <section>
+              <h2 className="text-lg font-bold text-blue-800 mb-1 uppercase tracking-wide border-b-2 border-blue-800 pb-1">References</h2>
+              <div className="space-y-1">
+                {data.references.map((ref, i) => (
+                  <div key={i} className="pl-2 border-l-4 border-blue-800">
+                    <p className="font-bold text-gray-900 text-xs">{ref.name}</p>
+                    <p className="text-blue-800 text-xs italic">{ref.position}, {ref.company}</p>
+                    <p className="text-gray-600 text-xs mt-0.5">{ref.email} | {ref.phone}</p>
                   </div>
                 ))}
               </div>

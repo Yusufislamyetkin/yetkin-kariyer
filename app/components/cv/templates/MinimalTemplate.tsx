@@ -273,6 +273,40 @@ export default function MinimalTemplate({ data }: MinimalTemplateProps) {
               </div>
             </section>
           )}
+
+          {/* Hobbies */}
+          {data.hobbies.length > 0 && (
+            <section>
+              <h2 className="text-xs font-bold uppercase tracking-wider mb-2 text-black border-b border-black pb-0.5 inline-block">
+                Hobiler
+              </h2>
+              <div className="flex flex-wrap gap-1">
+                {data.hobbies.map((hobby, index) => (
+                  <span key={index} className="text-xs text-gray-700 font-light">
+                    {hobby}{index < data.hobbies.length - 1 ? ' • ' : ''}
+                  </span>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* References */}
+          {data.references.length > 0 && (
+            <section>
+              <h2 className="text-xs font-bold uppercase tracking-wider mb-2 text-black border-b border-black pb-0.5 inline-block">
+                Referanslar
+              </h2>
+              <div className="space-y-1">
+                {data.references.map((ref, index) => (
+                  <div key={index}>
+                    <p className="text-xs font-semibold text-black">{ref.name || "İsim"}</p>
+                    <p className="text-xs text-gray-600">{ref.position || "Pozisyon"}, {ref.company || "Şirket"}</p>
+                    <p className="text-xs text-gray-500 font-light mt-0.5">{ref.email || ""} | {ref.phone || ""}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
       </div>
     </div>

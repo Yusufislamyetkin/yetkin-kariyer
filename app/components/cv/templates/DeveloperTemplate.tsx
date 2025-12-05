@@ -95,13 +95,66 @@ export default function DeveloperTemplate({ data }: { data: CVData }) {
               </section>
             )}
             {data.certifications.length > 0 && (
-              <section className="bg-white p-3 rounded-lg">
+              <section className="bg-white p-3 rounded-lg mb-2">
                 <h2 className="text-base font-bold text-gray-900 mb-2 font-mono">{'// Sertifikalar'}</h2>
                 <div className="space-y-1">
                   {data.certifications.map((cert, i) => (
                     <div key={i} className="bg-gray-50 p-2 rounded">
                       <p className="font-semibold text-gray-900 text-xs">{cert.name}</p>
                       <p className="text-gray-700 text-xs">{cert.issuer}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+            {data.languages.length > 0 && (
+              <section className="bg-white p-3 rounded-lg mb-2">
+                <h2 className="text-base font-bold text-gray-900 mb-2 font-mono">{'// Diller'}</h2>
+                <div className="space-y-1">
+                  {data.languages.map((lang, i) => (
+                    <div key={i} className="flex justify-between items-center">
+                      <span className="text-gray-900 font-medium text-xs">{lang.name}</span>
+                      <span className="text-green-600 text-xs font-mono">{lang.level}</span>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+            {data.achievements.length > 0 && (
+              <section className="bg-white p-3 rounded-lg mb-2">
+                <h2 className="text-base font-bold text-gray-900 mb-2 font-mono">{'// Başarılar'}</h2>
+                <div className="space-y-1">
+                  {data.achievements.map((achievement, i) => (
+                    <div key={i} className="bg-gray-50 p-2 rounded border-l-4 border-green-500">
+                      <h3 className="font-semibold text-gray-900 text-xs">{achievement.title}</h3>
+                      {achievement.description && (
+                        <p className="text-gray-700 mt-0.5 break-words whitespace-pre-line text-xs line-clamp-1">{achievement.description}</p>
+                      )}
+                      {achievement.date && <p className="text-gray-600 text-xs mt-0.5">{achievement.date}</p>}
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+            {data.hobbies.length > 0 && (
+              <section className="bg-white p-3 rounded-lg mb-2">
+                <h2 className="text-base font-bold text-gray-900 mb-2 font-mono">{'// Hobiler'}</h2>
+                <div className="flex flex-wrap gap-1">
+                  {data.hobbies.map((hobby, i) => (
+                    <span key={i} className="px-2 py-0.5 bg-gray-900 text-green-400 rounded font-mono text-xs">{hobby}</span>
+                  ))}
+                </div>
+              </section>
+            )}
+            {data.references.length > 0 && (
+              <section className="bg-white p-3 rounded-lg">
+                <h2 className="text-base font-bold text-gray-900 mb-2 font-mono">{'// Referanslar'}</h2>
+                <div className="space-y-1">
+                  {data.references.map((ref, i) => (
+                    <div key={i} className="bg-gray-50 p-2 rounded border-l-4 border-green-500">
+                      <p className="font-semibold text-gray-900 text-xs">{ref.name}</p>
+                      <p className="text-gray-700 text-xs">{ref.position}, {ref.company}</p>
+                      <p className="text-gray-600 text-xs mt-0.5">{ref.email} | {ref.phone}</p>
                     </div>
                   ))}
                 </div>

@@ -86,19 +86,8 @@ function DashboardLayoutContent({
   // Setup global notifications listener
   useGlobalNotifications();
 
-  // Check and generate missing CV interviews on login
-  useEffect(() => {
-    // Only run once when component mounts (user logs in)
-    if (process.env.NODE_ENV === "production" || process.env.NEXT_PUBLIC_ENABLE_CV_INTERVIEW_CHECK === "true") {
-      fetch("/api/interview/cv-based/check-and-generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-      }).catch((error) => {
-        // Silently fail - this is a background operation
-        console.error("[CV_INTERVIEW_LAYOUT] Failed to check and generate interviews:", error);
-      });
-    }
-  }, []); // Empty dependency array - only run once on mount
+  // Otomatik mülakat oluşturma kaldırıldı
+  // Artık sadece /interview/cv-based sayfasından "Mülakat Seç" butonuna tıklayınca çalışacak
 
   // Throttle function for resize listener
   const throttle = useCallback((func: () => void, delay: number) => {

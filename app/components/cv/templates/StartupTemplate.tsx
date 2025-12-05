@@ -200,7 +200,7 @@ export default function StartupTemplate({ data }: StartupTemplateProps) {
 
               {/* Achievements */}
               {data.achievements.length > 0 && (
-                <section className="bg-white p-3 rounded-lg shadow-sm">
+                <section className="bg-white p-3 rounded-lg shadow-sm mb-2">
                   <h2 className="text-lg font-bold text-purple-600 mb-1">Başarılar</h2>
                   <div className="space-y-1">
                     {data.achievements.map((achievement, index) => (
@@ -211,6 +211,67 @@ export default function StartupTemplate({ data }: StartupTemplateProps) {
                             {achievement.description}
                           </p>
                         )}
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* Certifications */}
+              {data.certifications.length > 0 && (
+                <section className="bg-white p-3 rounded-lg shadow-sm mb-2">
+                  <h2 className="text-lg font-bold text-purple-600 mb-1">Sertifikalar</h2>
+                  <div className="space-y-1">
+                    {data.certifications.map((cert, index) => (
+                      <div key={index} className="border-l-2 border-purple-300 pl-2">
+                        <h3 className="font-semibold text-gray-900 text-xs">{cert.name || "Sertifika"}</h3>
+                        <p className="text-purple-600 text-xs">{cert.issuer || "Kurum"}</p>
+                        {cert.date && <p className="text-gray-600 text-xs mt-0.5">{cert.date}</p>}
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* Languages */}
+              {data.languages.length > 0 && (
+                <section className="bg-white p-3 rounded-lg shadow-sm mb-2">
+                  <h2 className="text-lg font-bold text-purple-600 mb-1">Diller</h2>
+                  <div className="space-y-1">
+                    {data.languages.map((lang, index) => (
+                      <div key={index} className="flex justify-between items-center">
+                        <span className="text-gray-900 font-medium text-xs">{lang.name || "Dil"}</span>
+                        <span className="text-purple-600 text-xs">{lang.level || "Seviye"}</span>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* Hobbies */}
+              {data.hobbies.length > 0 && (
+                <section className="bg-white p-3 rounded-lg shadow-sm mb-2">
+                  <h2 className="text-lg font-bold text-purple-600 mb-1">Hobiler</h2>
+                  <div className="flex flex-wrap gap-1">
+                    {data.hobbies.map((hobby, index) => (
+                      <span key={index} className="px-2 py-0.5 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-700 rounded-full text-xs font-medium">
+                        {hobby}
+                      </span>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* References */}
+              {data.references.length > 0 && (
+                <section className="bg-white p-3 rounded-lg shadow-sm">
+                  <h2 className="text-lg font-bold text-purple-600 mb-1">Referanslar</h2>
+                  <div className="space-y-1">
+                    {data.references.map((ref, index) => (
+                      <div key={index} className="border-l-2 border-purple-300 pl-2">
+                        <p className="font-semibold text-gray-900 text-xs">{ref.name || "İsim"}</p>
+                        <p className="text-purple-600 text-xs">{ref.position || "Pozisyon"}, {ref.company || "Şirket"}</p>
+                        <p className="text-gray-600 text-xs mt-0.5">{ref.email || ""} | {ref.phone || ""}</p>
                       </div>
                     ))}
                   </div>

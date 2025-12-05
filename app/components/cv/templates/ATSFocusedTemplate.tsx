@@ -80,9 +80,62 @@ export default function ATSFocusedTemplate({ data }: { data: CVData }) {
             </section>
           )}
           {data.languages.length > 0 && (
-            <section>
+            <section className="mb-2">
               <h2 className="text-lg font-bold text-gray-900 mb-1 uppercase">Diller</h2>
               <p className="text-gray-700 text-xs">{data.languages.map(l => `${l.name} (${l.level})`).join(', ')}</p>
+            </section>
+          )}
+          {data.projects.length > 0 && (
+            <section className="mb-2">
+              <h2 className="text-lg font-bold text-gray-900 mb-1 uppercase">Projeler</h2>
+              <div className="space-y-1">
+                {data.projects.map((project, i) => (
+                  <div key={i}>
+                    <p className="font-semibold text-gray-900 text-xs">{project.name}</p>
+                    {project.technologies && (
+                      <p className="text-xs text-gray-600">Technologies: {project.technologies}</p>
+                    )}
+                    {project.description && (
+                      <p className="text-gray-700 break-words whitespace-pre-line text-xs line-clamp-2">{project.description}</p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+          {data.achievements.length > 0 && (
+            <section className="mb-2">
+              <h2 className="text-lg font-bold text-gray-900 mb-1 uppercase">Başarılar</h2>
+              <div className="space-y-1">
+                {data.achievements.map((achievement, i) => (
+                  <div key={i}>
+                    <p className="font-semibold text-gray-900 text-xs">{achievement.title}</p>
+                    {achievement.description && (
+                      <p className="text-gray-700 break-words whitespace-pre-line text-xs line-clamp-1">{achievement.description}</p>
+                    )}
+                    {achievement.date && <p className="text-xs text-gray-600">{achievement.date}</p>}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+          {data.hobbies.length > 0 && (
+            <section className="mb-2">
+              <h2 className="text-lg font-bold text-gray-900 mb-1 uppercase">Hobiler</h2>
+              <p className="text-gray-700 text-xs">{data.hobbies.join(', ')}</p>
+            </section>
+          )}
+          {data.references.length > 0 && (
+            <section>
+              <h2 className="text-lg font-bold text-gray-900 mb-1 uppercase">Referanslar</h2>
+              <div className="space-y-1">
+                {data.references.map((ref, i) => (
+                  <div key={i}>
+                    <p className="font-semibold text-gray-900 text-xs">{ref.name} | {ref.position} | {ref.company}</p>
+                    <p className="text-xs text-gray-600">{ref.email} | {ref.phone}</p>
+                  </div>
+                ))}
+              </div>
             </section>
           )}
         </div>

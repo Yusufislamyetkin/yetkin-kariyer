@@ -78,6 +78,107 @@ export default function TimelineTemplate({ data }: { data: CVData }) {
             </div>
           </section>
         )}
+        <div className="relative flex-1 overflow-y-auto mt-2" style={{ minHeight: 0 }}>
+          <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-purple-600"></div>
+          <div className="space-y-2">
+            {data.projects.map((project, i) => (
+              <div key={`proj-${i}`} className="relative pl-10">
+                <div className="absolute left-3 w-2 h-2 bg-purple-600 rounded-full border-2 border-white"></div>
+                <div className="bg-gray-50 p-2 rounded-lg border-l-4 border-purple-600">
+                  <div className="flex justify-between items-start mb-1">
+                    <div>
+                      <h3 className="text-base font-semibold text-gray-900">{project.name}</h3>
+                      {project.technologies && (
+                        <p className="text-purple-600 font-medium text-sm">Teknolojiler: {project.technologies}</p>
+                      )}
+                    </div>
+                    <span className="text-xs text-gray-600 bg-purple-100 px-2 py-0.5 rounded">
+                      {project.startDate} - {project.endDate}
+                    </span>
+                  </div>
+                  {project.description && <p className="text-gray-700 mt-1 break-words whitespace-pre-line text-xs line-clamp-2">{project.description}</p>}
+                </div>
+              </div>
+            ))}
+            {data.achievements.map((achievement, i) => (
+              <div key={`ach-${i}`} className="relative pl-10">
+                <div className="absolute left-3 w-2 h-2 bg-yellow-600 rounded-full border-2 border-white"></div>
+                <div className="bg-gray-50 p-2 rounded-lg border-l-4 border-yellow-600">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <h3 className="text-base font-semibold text-gray-900">{achievement.title}</h3>
+                      {achievement.description && (
+                        <p className="text-gray-700 mt-1 break-words whitespace-pre-line text-xs line-clamp-1">{achievement.description}</p>
+                      )}
+                    </div>
+                    {achievement.date && (
+                      <span className="text-xs text-gray-600 bg-yellow-100 px-2 py-0.5 rounded">
+                        {achievement.date}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+            {data.certifications.map((cert, i) => (
+              <div key={`cert-${i}`} className="relative pl-10">
+                <div className="absolute left-3 w-2 h-2 bg-indigo-600 rounded-full border-2 border-white"></div>
+                <div className="bg-gray-50 p-2 rounded-lg border-l-4 border-indigo-600">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <h3 className="text-base font-semibold text-gray-900">{cert.name}</h3>
+                      <p className="text-indigo-600 font-medium text-sm">{cert.issuer}</p>
+                    </div>
+                    {cert.date && (
+                      <span className="text-xs text-gray-600 bg-indigo-100 px-2 py-0.5 rounded">
+                        {cert.date}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="grid md:grid-cols-2 gap-4 mt-2 flex-shrink-0">
+          {data.languages.length > 0 && (
+            <section>
+              <h2 className="text-lg font-bold text-blue-600 mb-1">Diller</h2>
+              <div className="space-y-1">
+                {data.languages.map((lang, i) => (
+                  <div key={i} className="flex justify-between items-center">
+                    <span className="text-gray-900 font-medium text-xs">{lang.name}</span>
+                    <span className="text-blue-600 text-xs">{lang.level}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+          {data.hobbies.length > 0 && (
+            <section>
+              <h2 className="text-lg font-bold text-blue-600 mb-1">Hobiler</h2>
+              <div className="flex flex-wrap gap-1">
+                {data.hobbies.map((hobby, i) => (
+                  <span key={i} className="px-2 py-0.5 bg-blue-100 text-blue-800 rounded text-xs">{hobby}</span>
+                ))}
+              </div>
+            </section>
+          )}
+        </div>
+        {data.references.length > 0 && (
+          <section className="mt-2 flex-shrink-0">
+            <h2 className="text-lg font-bold text-blue-600 mb-1">Referanslar</h2>
+            <div className="space-y-1">
+              {data.references.map((ref, i) => (
+                <div key={i} className="border-l-4 border-blue-600 pl-2">
+                  <p className="font-semibold text-gray-900 text-xs">{ref.name}</p>
+                  <p className="text-blue-600 text-xs">{ref.position}, {ref.company}</p>
+                  <p className="text-gray-600 text-xs mt-0.5">{ref.email} | {ref.phone}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
       </div>
     </div>
   );

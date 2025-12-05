@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { FileText, MessageSquare, Loader2, AlertCircle, CheckCircle2 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
@@ -17,6 +17,15 @@ interface CV {
   };
 }
 
+interface InterviewStatus {
+  status: "generating" | "completed" | "error";
+  stage: 0 | 1 | 2 | 3;
+  progress: number;
+  interviewId: string;
+  questionCount: number;
+  error?: string;
+}
+
 export default function CVBasedInterviewPage() {
   const router = useRouter();
   const [cvs, setCvs] = useState<CV[]>([]);
@@ -24,6 +33,8 @@ export default function CVBasedInterviewPage() {
   const [creating, setCreating] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const [interviewStatus, setInterviewStatus] = useState<InterviewStatus | null>(null);
+  const pollingIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     fetchCVs();
@@ -42,10 +53,74 @@ export default function CVBasedInterviewPage() {
     }
   };
 
+  // Polling fonksiyonu
+  const pollInterviewStatus = async (interviewId: string) => {
+    try {
+      const response = await fetch(`/api/interview/cv-based/${interviewId}/status`);
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Status kontrolü başarısız");
+      }
+
+      setInterviewStatus(data);
+
+      // Hata durumunu kontrol et
+      if (data.status === "error") {
+        if (pollingIntervalRef.current) {
+          clearInterval(pollingIntervalRef.current);
+          pollingIntervalRef.current = null;
+        }
+        setError(data.error || "Mülakat oluşturulurken bir hata oluştu. Lütfen tekrar deneyin.");
+        setCreating(null);
+        setInterviewStatus(null);
+        return;
+      }
+
+      // Eğer tamamlandıysa polling'i durdur ve yönlendir
+      if (data.status === "completed") {
+        if (pollingIntervalRef.current) {
+          clearInterval(pollingIntervalRef.current);
+          pollingIntervalRef.current = null;
+        }
+        setSuccess("Mülakat başarıyla oluşturuldu! Yönlendiriliyorsunuz...");
+        setTimeout(() => {
+          router.push(`/interview/practice/${interviewId}`);
+        }, 1500);
+      }
+    } catch (error: any) {
+      console.error("Error polling interview status:", error);
+      // Hata durumunda polling'i durdur
+      if (pollingIntervalRef.current) {
+        clearInterval(pollingIntervalRef.current);
+        pollingIntervalRef.current = null;
+      }
+      setError(error.message || "Mülakat durumu kontrol edilemedi");
+      setCreating(null);
+      setInterviewStatus(null);
+    }
+  };
+
+  // Polling'i temizle
+  useEffect(() => {
+    return () => {
+      if (pollingIntervalRef.current) {
+        clearInterval(pollingIntervalRef.current);
+      }
+    };
+  }, []);
+
   const handleCreateInterview = async (cvId: string) => {
     setCreating(cvId);
     setError(null);
     setSuccess(null);
+    setInterviewStatus(null);
+
+    // Önceki polling'i temizle
+    if (pollingIntervalRef.current) {
+      clearInterval(pollingIntervalRef.current);
+      pollingIntervalRef.current = null;
+    }
 
     try {
       const response = await fetch("/api/interview/cv-based", {
@@ -62,16 +137,20 @@ export default function CVBasedInterviewPage() {
         throw new Error(data.error || "Mülakat oluşturulurken bir hata oluştu");
       }
 
-      setSuccess("Mülakat başarıyla oluşturuldu! Yönlendiriliyorsunuz...");
-      
-      // Kısa bir gecikme sonrası mülakat sayfasına yönlendir
-      setTimeout(() => {
-        router.push(`/interview/cv-based/${data.interview.id}`);
-      }, 1500);
+      const interviewId = data.interview.id;
+
+      // İlk status'u al
+      await pollInterviewStatus(interviewId);
+
+      // Her 2-3 saniyede bir status kontrol et
+      pollingIntervalRef.current = setInterval(() => {
+        pollInterviewStatus(interviewId);
+      }, 2500); // 2.5 saniye
     } catch (error: any) {
       console.error("Error creating interview:", error);
       setError(error.message || "Mülakat oluşturulurken bir hata oluştu");
       setCreating(null);
+      setInterviewStatus(null);
     }
   };
 
@@ -205,9 +284,34 @@ export default function CVBasedInterviewPage() {
                       </>
                     )}
                   </Button>
-                  {creating === cv.id && (
+                  {creating === cv.id && interviewStatus && (
+                    <div className="mt-4 space-y-2">
+                      <div className="flex items-center justify-between text-xs text-gray-600 dark:text-gray-400 mb-1">
+                        <span>
+                          {interviewStatus.stage === 0 && "Başlatılıyor..."}
+                          {interviewStatus.stage === 1 && "Aşama 1/3: Genel Tanışma Soruları"}
+                          {interviewStatus.stage === 2 && "Aşama 2/3: Deneyim Soruları"}
+                          {interviewStatus.stage === 3 && interviewStatus.status === "generating" && "Aşama 3/3: Teknik Sorular"}
+                          {interviewStatus.status === "completed" && "Tamamlandı!"}
+                        </span>
+                        <span>{interviewStatus.progress}%</span>
+                      </div>
+                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                        <div
+                          className="bg-blue-600 dark:bg-blue-500 h-2 rounded-full transition-all duration-300"
+                          style={{ width: `${interviewStatus.progress}%` }}
+                        ></div>
+                      </div>
+                      {interviewStatus.questionCount > 0 && (
+                        <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
+                          {interviewStatus.questionCount} soru oluşturuldu
+                        </p>
+                      )}
+                    </div>
+                  )}
+                  {creating === cv.id && !interviewStatus && (
                     <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 text-center">
-                      Bu işlem birkaç dakika sürebilir...
+                      Mülakat başlatılıyor...
                     </p>
                   )}
                 </CardContent>

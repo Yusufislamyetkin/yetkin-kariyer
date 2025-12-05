@@ -109,6 +109,61 @@ export default function ArtisticTemplate({ data }: { data: CVData }) {
                   </div>
                 </section>
               )}
+              {data.certifications.length > 0 && (
+                <section>
+                  <div className="h-1 w-16 bg-gradient-to-r from-purple-600 to-pink-600 mb-1"></div>
+                  <h2 className="text-lg font-bold mb-2 text-gray-900" style={{ fontFamily: 'serif' }}>Sertifikalar</h2>
+                  <div className="space-y-1">
+                    {data.certifications.map((cert, i) => (
+                      <div key={i} className="border-l-4 border-purple-600 pl-2">
+                        <h3 className="font-bold text-gray-900 text-xs">{cert.name}</h3>
+                        <p className="text-purple-600 font-medium text-xs">{cert.issuer}</p>
+                        {cert.date && <p className="text-gray-600 text-xs mt-0.5">{cert.date}</p>}
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+              {data.languages.length > 0 && (
+                <section>
+                  <div className="h-1 w-16 bg-gradient-to-r from-purple-600 to-pink-600 mb-1"></div>
+                  <h2 className="text-lg font-bold mb-2 text-gray-900" style={{ fontFamily: 'serif' }}>Diller</h2>
+                  <div className="space-y-1">
+                    {data.languages.map((lang, i) => (
+                      <div key={i} className="flex justify-between items-center">
+                        <span className="text-gray-900 font-medium text-xs">{lang.name}</span>
+                        <span className="text-purple-600 text-xs">{lang.level}</span>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+              {data.hobbies.length > 0 && (
+                <section>
+                  <div className="h-1 w-16 bg-gradient-to-r from-purple-600 to-pink-600 mb-1"></div>
+                  <h2 className="text-lg font-bold mb-2 text-gray-900" style={{ fontFamily: 'serif' }}>Hobiler</h2>
+                  <div className="flex flex-wrap gap-1">
+                    {data.hobbies.map((hobby, i) => (
+                      <span key={i} className="px-2 py-0.5 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full text-xs font-semibold">{hobby}</span>
+                    ))}
+                  </div>
+                </section>
+              )}
+              {data.references.length > 0 && (
+                <section>
+                  <div className="h-1 w-16 bg-gradient-to-r from-purple-600 to-pink-600 mb-1"></div>
+                  <h2 className="text-lg font-bold mb-2 text-gray-900" style={{ fontFamily: 'serif' }}>Referanslar</h2>
+                  <div className="space-y-1">
+                    {data.references.map((ref, i) => (
+                      <div key={i} className="border-l-4 border-purple-600 pl-2">
+                        <p className="font-bold text-gray-900 text-xs">{ref.name}</p>
+                        <p className="text-purple-600 font-medium text-xs">{ref.position}, {ref.company}</p>
+                        <p className="text-gray-600 text-xs mt-0.5">{ref.email} | {ref.phone}</p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
             </div>
           </div>
         </div>

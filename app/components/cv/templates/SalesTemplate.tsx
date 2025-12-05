@@ -73,6 +73,33 @@ export default function SalesTemplate({ data }: { data: CVData }) {
                     </div>
                   </section>
                 )}
+                {data.certifications.length > 0 && (
+                  <section className="mb-2">
+                    <h2 className="text-base font-bold text-emerald-700 mb-1">Sertifikalar</h2>
+                    <div className="space-y-1">
+                      {data.certifications.map((cert, i) => (
+                        <div key={i} className="bg-emerald-50 p-2 rounded-lg">
+                          <h3 className="font-semibold text-gray-900 text-xs">{cert.name}</h3>
+                          <p className="text-emerald-700 text-xs">{cert.issuer}</p>
+                          {cert.date && <p className="text-gray-600 text-xs mt-0.5">{cert.date}</p>}
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                )}
+                {data.languages.length > 0 && (
+                  <section className="mb-2">
+                    <h2 className="text-base font-bold text-emerald-700 mb-1">Diller</h2>
+                    <div className="space-y-1">
+                      {data.languages.map((lang, i) => (
+                        <div key={i} className="flex justify-between items-center">
+                          <span className="text-gray-900 font-medium text-xs">{lang.name}</span>
+                          <span className="text-emerald-700 text-xs">{lang.level}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                )}
               </div>
               <div>
                 {data.education.length > 0 && (
@@ -88,8 +115,50 @@ export default function SalesTemplate({ data }: { data: CVData }) {
                     </div>
                   </section>
                 )}
+                {data.projects.length > 0 && (
+                  <section className="mb-2">
+                    <h2 className="text-base font-bold text-emerald-700 mb-1">Projeler</h2>
+                    <div className="space-y-1">
+                      {data.projects.map((project, i) => (
+                        <div key={i} className="bg-emerald-50 p-2 rounded-lg border-l-4 border-emerald-600">
+                          <h3 className="font-semibold text-gray-900 text-xs">{project.name}</h3>
+                          {project.technologies && (
+                            <p className="text-emerald-700 text-xs mt-0.5">Teknolojiler: {project.technologies}</p>
+                          )}
+                          {project.description && (
+                            <p className="text-gray-700 mt-1 break-words whitespace-pre-line text-xs line-clamp-2">{project.description}</p>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                )}
               </div>
             </div>
+            {data.hobbies.length > 0 && (
+              <section className="mb-2">
+                <h2 className="text-lg font-bold text-emerald-700 mb-1 border-b-2 border-emerald-600 pb-1">Hobiler</h2>
+                <div className="flex flex-wrap gap-1">
+                  {data.hobbies.map((hobby, i) => (
+                    <span key={i} className="px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded-full text-xs font-medium">{hobby}</span>
+                  ))}
+                </div>
+              </section>
+            )}
+            {data.references.length > 0 && (
+              <section>
+                <h2 className="text-lg font-bold text-emerald-700 mb-1 border-b-2 border-emerald-600 pb-1">Referanslar</h2>
+                <div className="grid md:grid-cols-2 gap-2">
+                  {data.references.map((ref, i) => (
+                    <div key={i} className="bg-emerald-50 p-2 rounded-lg">
+                      <p className="font-semibold text-gray-900 text-xs">{ref.name}</p>
+                      <p className="text-emerald-700 text-xs">{ref.position}, {ref.company}</p>
+                      <p className="text-gray-600 text-xs mt-0.5">{ref.email} | {ref.phone}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
           </div>
         </div>
       </div>

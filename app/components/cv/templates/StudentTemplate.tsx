@@ -111,10 +111,51 @@ export default function StudentTemplate({ data }: { data: CVData }) {
                     </div>
                   </section>
                 )}
+                {data.certifications.length > 0 && (
+                  <section className="mb-2">
+                    <h2 className="text-base font-bold text-green-600 mb-1">Sertifikalar</h2>
+                    <div className="space-y-1">
+                      {data.certifications.map((cert, i) => (
+                        <div key={i} className="border-l-4 border-green-500 pl-2">
+                          <h3 className="font-semibold text-gray-900 text-xs">{cert.name}</h3>
+                          <p className="text-green-600 text-xs">{cert.issuer}</p>
+                          {cert.date && <p className="text-gray-600 text-xs mt-0.5">{cert.date}</p>}
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                )}
+                {data.languages.length > 0 && (
+                  <section className="mb-2">
+                    <h2 className="text-base font-bold text-green-600 mb-1">Diller</h2>
+                    <div className="space-y-1">
+                      {data.languages.map((lang, i) => (
+                        <div key={i} className="flex justify-between items-center">
+                          <span className="text-gray-900 font-medium text-xs">{lang.name}</span>
+                          <span className="text-green-600 text-xs">{lang.level}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                )}
                 {data.hobbies.length > 0 && (
-                  <section>
+                  <section className="mb-2">
                     <h2 className="text-base font-bold text-green-600 mb-1">Hobiler</h2>
                     <p className="text-gray-700 text-xs">{data.hobbies.join(', ')}</p>
+                  </section>
+                )}
+                {data.references.length > 0 && (
+                  <section>
+                    <h2 className="text-base font-bold text-green-600 mb-1">Referanslar</h2>
+                    <div className="space-y-1">
+                      {data.references.map((ref, i) => (
+                        <div key={i} className="border-l-4 border-green-500 pl-2">
+                          <p className="font-semibold text-gray-900 text-xs">{ref.name}</p>
+                          <p className="text-green-600 text-xs">{ref.position}, {ref.company}</p>
+                          <p className="text-gray-600 text-xs mt-0.5">{ref.email} | {ref.phone}</p>
+                        </div>
+                      ))}
+                    </div>
                   </section>
                 )}
               </div>

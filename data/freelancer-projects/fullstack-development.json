@@ -1,72 +1,72 @@
 [
   {
-    "title": "Full Stack E-ticaret Platformu",
-    "description": "Günlük binlerce siparişi karşılayabilecek kapasitede e-ticaret platformu geliştirmek istiyoruz. React frontend ve Node.js (Express) backend kullanılacak. MongoDB veya PostgreSQL veritabanı tercih edilebilir. Kullanıcı yönetimi için kayıt, giriş, profil yönetimi özellikleri olmalı. JWT authentication sistemi kurulmalı. E-posta doğrulama ve şifre sıfırlama özellikleri eklenmeli. Ürün yönetimi kısmında ürün ekleme/düzenleme, kategorilendirme yapılabilmeli. Varyant desteği (beden, renk) eklenmeli. Otomatik stok takibi yapılmalı. Satış sürecinde kullanıcı dostu sepet ve checkout akışı tasarlanmalı. iyzico ödeme entegrasyonu yapılmalı. Sipariş takibi özelliği eklenmeli. Yönetim panelinde admin paneli, satış istatistikleri raporlama yapılabilmeli. Mobil uyumluluk sağlanmalı. Performans optimizasyonu yapılmalı.",
-    "budget": 120000,
-    "deadline": "2025-05-15T00:00:00.000Z",
-    "status": "open"
-  },
-  {
-    "title": "SaaS Platform Geliştirme",
-    "description": "B2B SaaS platformumuz için multi-tenant architecture ile birden fazla müşteriye hizmet verebilen full stack çözüm geliştirmek istiyoruz. MERN stack (MongoDB, Express, React, Node.js) kullanılacak. Çoklu müşteri yönetimi için her müşteri için izole veri yönetimi yapılmalı. Abonelik yönetimi kısmında free, basic, premium planlar desteklenmeli. Otomatik faturalandırma sistemi kurulmalı. Ödeme kısmında kredi kartı işleme (Stripe veya benzer) yapılmalı. Webhook handling özellikleri eklenmeli. Kullanıcı deneyimi için user dashboard, admin panel oluşturulmalı. Third-party API entegrasyonları yapılabilmeli. Güvenlik ve uyumluluk açısından data isolation, GDPR/KVKK uyumluluğu sağlanmalı. Monitoring ve logging sistemi kurulmalı.",
-    "budget": 140000,
-    "deadline": "2025-05-30T00:00:00.000Z",
-    "status": "open"
-  },
-  {
-    "title": "CRM Sistemi",
-    "description": "Satış ekibimizin müşteri ilişkilerini yönetmesini kolaylaştıran müşteri ilişkileri yönetim sistemi geliştirmek istiyoruz. React frontend, Node.js backend, PostgreSQL kullanılacak. Müşteri yönetimi için müşteri bilgileri, iletişim geçmişi, notlar tutulabilmeli. Görev yönetimi özellikleri eklenmeli. E-posta entegrasyonu yapılmalı. E-posta açılma/tıklama takibi yapılabilmeli. Analitik kısmında satış metrikleri, müşteri analizi dashboard'u oluşturulmalı. Pipeline yönetimi özellikleri eklenmeli. Güvenlik açısından müşteri verilerinin korunması sağlanmalı. Role-based access control yapılmalı. Audit logging sistemi kurulmalı.",
-    "budget": 95000,
-    "deadline": "2025-04-25T00:00:00.000Z",
-    "status": "open"
-  },
-  {
-    "title": "Proje Yönetim Platformu",
-    "description": "Projelerin planlanması, takibi ve tamamlanmasını kolaylaştıran takım çalışması platformu geliştirmek istiyoruz. React, Node.js, WebSocket (gerçek zamanlı), MongoDB/PostgreSQL kullanılacak. Görev yönetimi için görev oluşturma ve atama yapılabilmeli. Kanban board, drag-and-drop özellikleri eklenmeli. İzleme kısmında çalışma saatleri takibi yapılabilmeli. Dosya paylaşımı özellikleri olmalı. Takım içi chat sistemi kurulmalı. Bildirimler için görev güncellemeleri, deadline hatırlatmaları gönderilmeli. Proje ilerlemesi ve zaman kullanımı raporlama yapılabilmeli. Entegrasyon olarak Slack, Jira entegrasyonları yapılabilmeli.",
-    "budget": 110000,
+    "title": "Kurumsal İş Süreçleri Yönetim Platformu",
+    "description": "Şirket içi operasyonların dijitalleştirilmesi için kapsamlı bir iş süreçleri yönetim sistemi inşa ediyoruz. Platform, onay akışları, doküman yönetimi ve raporlama modüllerini birleştiriyor. Kullanıcı arayüzü, sezgisel navigasyon ve modern tasarım ile kullanıcı deneyimini optimize ediyor. Backend altyapısı, yüksek performans ve ölçeklenebilirlik için mikroservis mimarisi kullanıyor. Veritabanı tasarımı, karmaşık ilişkileri ve veri bütünlüğünü destekliyor. Yetkilendirme sistemi, rol bazlı erişim kontrolü ile güvenli işlemler sunuyor. Bildirim mekanizması, e-posta ve SMS entegrasyonu ile kullanıcıları bilgilendiriyor. Raporlama motoru, özelleştirilebilir raporlar ve dashboard'lar sunuyor. API entegrasyonları, üçüncü parti sistemlerle veri alışverişini destekliyor. Mobil uyumluluk, responsive tasarım ile tüm cihazlarda erişim sağlıyor. Güvenlik, veri şifreleme ve audit logging ile hassas bilgilerin korunmasını garanti ediyor.",
+    "budget": 125000,
     "deadline": "2025-05-10T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "Sosyal Ağ Platformu",
-    "description": "Niche topluluk için içerik paylaşımı ve etkileşim odaklı sosyal ağ platformu geliştirmek istiyoruz. Modern tech stack, WebSocket (gerçek zamanlı), ölçeklenebilir mimari kullanılacak. Kullanıcı özellikleri için profiller, paylaşımlar, beğeniler gösterilmeli. Feed sayfası oluşturulmalı. Beğeni ve yorum sistemi kurulmalı. Takip sistemi eklenmeli. Özel mesajlaşma özellikleri olmalı. Yönetim kısmında bildirimler gönderilmeli. Admin paneli ile içerik moderasyonu yapılabilmeli. Performans optimizasyonu yapılmalı. Güvenlik ve gizlilik sağlanmalı.",
-    "budget": 130000,
-    "deadline": "2025-05-25T00:00:00.000Z",
+    "title": "Çok Kiracılı SaaS İş Platformu",
+    "description": "Birden fazla müşteriye hizmet verebilen multi-tenant SaaS çözümü tasarlıyoruz. Her müşteri için izole veri yönetimi, veri güvenliği ve gizliliği sağlıyor. Abonelik yönetimi, farklı plan seviyeleri ve otomatik faturalandırma içeriyor. Özelleştirme seçenekleri, müşterilerin kendi markalarını yansıtmasına izin veriyor. Ölçeklenebilir altyapı, artan kullanıcı sayısına uyum sağlıyor. Yönetim paneli, sistem yöneticilerinin platformu yönetmesine olanak veriyor. Kullanıcı dashboard'u, müşteri yöneticilerinin kendi hesaplarını yönetmesini sağlıyor. API gateway, güvenli API erişimi ve rate limiting içeriyor. Ödeme entegrasyonu, otomatik ödeme işleme ve faturalama sunuyor. Veri yedekleme, düzenli yedekler ve felaket kurtarma planı içeriyor. Performans izleme, sistem sağlığının sürekli takibini destekliyor.",
+    "budget": 140000,
+    "deadline": "2025-05-15T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "Online Eğitim Platformu",
-    "description": "Öğrencilerin dersleri takip etmesi ve eğitmenlerin içerik yönetmesi için e-learning platformu geliştirmek istiyoruz. Modern tech stack, optimize edilmiş video streaming, ölçeklenebilir mimari kullanılacak. Kullanıcı panelleri için öğrenci ve eğitmen panelleri ayrı olmalı. Video streaming altyapısı kurulmalı. Quiz sistemi geliştirilmeli. Sertifika sistemi oluşturulmalı. Ödeme kısmında kurs satın alma entegrasyonu yapılmalı. Admin paneli oluşturulmalı. Ek özellikler olarak oyunlaştırma özellikleri eklenebilir. Öğrenci ilerlemesi analitiği yapılabilmeli. Mobil uygulama entegrasyonu düşünülebilir.",
-    "budget": 125000,
-    "deadline": "2025-05-20T00:00:00.000Z",
+    "title": "Online Pazar Yeri ve E-Ticaret Platformu",
+    "description": "Çoklu satıcı ve alıcı etkileşimini destekleyen kapsamlı bir pazar yeri platformu inşa ediyoruz. Satıcı kayıt sistemi, mağaza açma ve ürün yönetimi özellikleri içeriyor. Alıcı arayüzü, ürün keşfi, karşılaştırma ve satın alma süreçlerini kolaylaştırıyor. Ödeme altyapısı, güvenli ödeme işleme ve komisyon yönetimi sunuyor. Sipariş yönetimi, satıcı ve alıcı için sipariş takip sistemleri içeriyor. Değerlendirme sistemi, ürün ve satıcı değerlendirmelerinin yönetilmesini destekliyor. Mesajlaşma platformu, alıcı ve satıcı arasında iletişim kurulmasına izin veriyor. Raporlama araçları, satış istatistikleri ve finansal raporlar sunuyor. Güvenlik, dolandırıcılık tespiti ve kullanıcı doğrulama içeriyor. Mobil uygulama, iOS ve Android platformları için native uygulamalar sağlıyor. SEO optimizasyonu, ürün listelerinin arama motorlarında görünürlüğünü artırıyor.",
+    "budget": 135000,
+    "deadline": "2025-05-12T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "Restoran Yönetim Sistemi",
-    "description": "Restoran operasyonlarımızı dijitalleştiren, verimliliği artıran yönetim sistemi geliştirmek istiyoruz. React, Node.js, WebSocket (gerçek zamanlı), PostgreSQL kullanılacak. Operasyonel özellikler için masa rezervasyonu yapılabilmeli. Menü yönetimi özellikleri olmalı. Gerçek zamanlı sipariş takibi yapılabilmeli. Ödeme ve raporlama kısmında nakit ve kredi kartı ödemeleri desteklenmeli. Günlük, haftalık, aylık raporlar oluşturulabilmeli. Mobil kısmında tablet kullanımı için mobil uyumluluk sağlanmalı. Mutfak ekranı entegrasyonu düşünülebilir. Ek modüller olarak stok takibi, personel yönetimi özellikleri eklenebilir.",
-    "budget": 85000,
-    "deadline": "2025-04-15T00:00:00.000Z",
-    "status": "open"
-  },
-  {
-    "title": "İnsan Kaynakları Yönetim Sistemi",
-    "description": "Çalışan yönetimimizi dijitalleştiren, süreçleri otomatikleştiren HR platformu geliştirmek istiyoruz. Modern tech stack, KVKK/GDPR uyumluluğu sağlanmalı. Çalışan yönetimi için bilgiler, dokümanlar tutulabilmeli. İzin takibi kısmında başvurular, onaylar yapılabilmeli. Maaş ve performans kısmında maaş hesaplamaları ve ödemeleri yapılabilmeli. Performans değerlendirme özellikleri eklenmeli. Raporlama için HR metrikleri dashboard'u oluşturulmalı. Employee self-service portal eklenmeli. Güvenlik açısından role-based access control, audit logging yapılmalı. Payroll sistemleri entegrasyonu yapılabilmeli.",
-    "budget": 100000,
+    "title": "İnsan Kaynakları ve Bordro Yönetim Sistemi",
+    "description": "Çalışan yönetimi ve bordro işlemlerini otomatikleştiren entegre bir HR platformu geliştiriyoruz. Çalışan veritabanı, kişisel bilgiler, sözleşmeler ve dokümanların yönetilmesini sağlıyor. İzin yönetimi, izin başvuruları ve onay süreçlerinin dijitalleştirilmesini destekliyor. Bordro modülü, maaş hesaplamaları ve ödemelerin otomatik işlenmesine izin veriyor. Performans değerlendirme, çalışan performansının takip edilmesi ve raporlanmasını içeriyor. Zaman takibi, çalışma saatlerinin kaydedilmesi ve analiz edilmesini sağlıyor. Eğitim yönetimi, çalışan eğitimlerinin planlanması ve takibini destekliyor. Raporlama, HR metrikleri ve analitik dashboard'lar sunuyor. Self-service portal, çalışanların kendi bilgilerini görüntülemesi ve güncellemesine olanak veriyor. Güvenlik, KVKK uyumluluğu ve veri koruma önlemleri içeriyor. Entegrasyonlar, muhasebe ve bordro sistemleri ile veri paylaşımı sağlıyor.",
+    "budget": 110000,
     "deadline": "2025-05-05T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "Emlak Yönetim Platformu",
-    "description": "Emlakçıların ilan yönetmesi ve müşterilerin arama yapması için platform geliştirmek istiyoruz. Full stack geliştirme, ölçeklenebilir mimari, yüksek performanslı arama yapılacak. İlan yönetimi için ekleme, düzenleme, yayınlama yapılabilmeli. Gelişmiş arama ve filtreleme özellikleri olmalı. Harita ve iletişim kısmında Google Maps entegrasyonu (konum bazlı arama) yapılmalı. Emlakçı-müşteri mesajlaşma sistemi kurulmalı. Kullanıcı özellikleri için favoriler eklenmeli. Admin paneli ile ilan onaylama, kullanıcı yönetimi yapılabilmeli. Optimizasyon için SEO yapılmalı. Mobile-first yaklaşım uygulanmalı. İlan performansı analitiği yapılabilmeli.",
-    "budget": 90000,
-    "deadline": "2025-04-20T00:00:00.000Z",
+    "title": "Müşteri Destek ve Ticket Yönetim Sistemi",
+    "description": "Müşteri destek süreçlerini optimize eden kapsamlı bir ticket yönetim platformu tasarlıyoruz. Ticket oluşturma, müşterilerin sorunlarını kolayca bildirmesine izin veriyor. Ticket yönetimi, destek ekibinin talepleri önceliklendirmesi ve ataması için araçlar içeriyor. Bilgi bankası, sık sorulan sorular ve çözüm makalelerinin yayınlanmasını destekliyor. Canlı destek, gerçek zamanlı sohbet özelliği ile anında yardım sunuyor. E-posta entegrasyonu, e-posta taleplerinin otomatik ticket'a dönüştürülmesini sağlıyor. SLA yönetimi, hizmet seviyesi anlaşmalarının takibini destekliyor. Raporlama, destek metrikleri ve müşteri memnuniyeti analizleri sunuyor. Çoklu kanal desteği, e-posta, telefon ve sosyal medya entegrasyonları içeriyor. Otomasyon, tekrarlayan görevlerin otomatikleştirilmesine olanak veriyor. Mobil erişim, destek ekibinin her yerden ticket yönetimi yapabilmesini sağlıyor.",
+    "budget": 95000,
+    "deadline": "2025-04-28T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "Etkinlik Yönetim ve Biletleme Sistemi",
-    "description": "Etkinlik oluşturma, bilet satışı ve katılımcı yönetimi için entegre sistem geliştirmek istiyoruz. React, Node.js, WebSocket, ölçeklenebilir mimari kullanılacak. Etkinlik yönetimi için etkinlik bilgileri (tarih, konum, kapasite) girilebilmeli. Online bilet satışı yapılabilmeli. Ödeme ve giriş kısmında iyzico entegrasyonu yapılmalı. QR kod bilet doğrulama sistemi kurulmalı. Check-in sistemi oluşturulmalı. Raporlama için satış istatistikleri, katılımcı analizi yapılabilmeli. Mobil uyumluluk sağlanmalı. Entegrasyonlar olarak e-posta pazarlama, sosyal medya entegrasyonu yapılabilmeli.",
-    "budget": 80000,
-    "deadline": "2025-04-10T00:00:00.000Z",
+    "title": "İçerik Yönetim ve Yayınlama Platformu",
+    "description": "İçerik oluşturma, düzenleme ve yayınlama süreçlerini birleştiren kapsamlı bir CMS platformu oluşturuyoruz. İçerik editörü, WYSIWYG editör ve medya yönetimi özellikleri içeriyor. İçerik organizasyonu, kategori, etiket ve hiyerarşik yapı ile içeriklerin düzenlenmesini sağlıyor. Yayınlama akışı, içerik onay süreçleri ve zamanlanmış yayınlama özellikleri içeriyor. Çoklu dil desteği, içeriklerin farklı dillerde yayınlanmasına izin veriyor. SEO araçları, meta etiketleri ve URL optimizasyonu ile arama motoru görünürlüğünü artırıyor. Versiyon kontrolü, içerik değişiklik geçmişinin takip edilmesini destekliyor. Kullanıcı rolleri, editör, yazar ve yönetici yetkilerinin yönetilmesini sağlıyor. Tema sistemi, özelleştirilebilir şablonlar ile görsel tasarım seçenekleri sunuyor. API erişimi, içeriklerin programatik olarak yönetilmesine olanak veriyor. Performans optimizasyonu, hızlı sayfa yükleme ve CDN entegrasyonu içeriyor.",
+    "budget": 105000,
+    "deadline": "2025-05-08T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Proje ve Kaynak Yönetim Platformu",
+    "description": "Proje planlama, kaynak yönetimi ve takım koordinasyonunu birleştiren entegre bir platform geliştiriyoruz. Proje yönetimi, görev atama, zaman çizelgesi ve ilerleme takibi özellikleri içeriyor. Kaynak yönetimi, insan kaynakları ve bütçe takibinin yapılmasını sağlıyor. Zaman takibi, çalışma saatlerinin kaydedilmesi ve faturalandırılmasını destekliyor. Raporlama, proje performansı ve kaynak kullanımı analizleri sunuyor. İşbirliği araçları, dosya paylaşımı ve takım iletişimi özellikleri içeriyor. Dashboard görünümü, önemli metriklerin ve proje durumlarının özet sunumunu sağlıyor. Bildirimler, önemli güncellemeler ve deadline hatırlatmaları için kullanılıyor. Entegrasyonlar, muhasebe ve CRM sistemleri ile veri paylaşımı sağlıyor. Mobil erişim, proje yönetiminin her yerden yapılabilmesine izin veriyor. Güvenlik, proje verilerinin korunması ve erişim kontrolü içeriyor.",
+    "budget": 120000,
+    "deadline": "2025-05-12T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Emlak Yönetim ve Kiralama Platformu",
+    "description": "Emlak yönetimi, kiralama ve bakım süreçlerini dijitalleştiren kapsamlı bir platform tasarlıyoruz. Emlak yönetimi, bina ve daire bilgilerinin yönetilmesini sağlıyor. Kiralama yönetimi, sözleşme oluşturma, ödeme takibi ve yenileme süreçlerini destekliyor. Bakım talepleri, arıza bildirimleri ve bakım süreçlerinin yönetilmesine izin veriyor. Finansal yönetim, kira toplama, gider takibi ve mali raporlama içeriyor. Kiracı portalı, kiracıların ödemelerini yapması ve taleplerini iletmesine olanak veriyor. Yönetici paneli, emlak yöneticilerinin tüm süreçleri yönetmesini sağlıyor. Bildirimler, ödeme hatırlatmaları ve önemli duyurular için kullanılıyor. Doküman yönetimi, sözleşmeler ve belgelerin güvenli saklanmasını destekliyor. Raporlama, finansal ve operasyonel raporlar sunuyor. Mobil uygulama, emlak yönetiminin mobil cihazlardan yapılabilmesini sağlıyor.",
+    "budget": 115000,
+    "deadline": "2025-05-10T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Eğitim Kurumu Yönetim Sistemi",
+    "description": "Okul ve eğitim kurumlarının operasyonlarını yönetmeyi kolaylaştıran entegre bir yönetim platformu oluşturuyoruz. Öğrenci yönetimi, kayıt, not takibi ve devam durumu özellikleri içeriyor. Öğretmen paneli, ders planlama, not girişi ve öğrenci takibi araçları sunuyor. Veli portalı, velilerin çocuklarının akademik durumunu takip etmesine izin veriyor. Ders programı, ders saatleri ve sınıf atamalarının yönetilmesini sağlıyor. Sınav yönetimi, sınav planlama ve sonuçların yayınlanmasını destekliyor. Devamsızlık takibi, öğrenci devam durumunun kaydedilmesi ve raporlanmasını içeriyor. Finansal yönetim, öğrenim ücretleri ve ödeme takibi özellikleri sunuyor. İletişim sistemi, okul, öğretmen ve veli arasında mesajlaşma imkanı sağlıyor. Raporlama, akademik ve idari raporlar sunuyor. Mobil erişim, tüm paydaşların platforma mobil cihazlardan erişmesini sağlıyor.",
+    "budget": 130000,
+    "deadline": "2025-05-15T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Restoran Zinciri Yönetim Platformu",
+    "description": "Çoklu lokasyon restoran zincirlerinin operasyonlarını yönetmeyi kolaylaştıran entegre bir platform geliştiriyoruz. Lokasyon yönetimi, her restoran için ayrı menü ve fiyat yönetimi sağlıyor. Sipariş yönetimi, online ve masadan siparişlerin entegre yönetimini destekliyor. Stok takibi, malzeme envanteri ve otomatik sipariş önerileri içeriyor. Personel yönetimi, çalışma saatleri, vardiya planlama ve performans takibi özellikleri sunuyor. Finansal raporlama, günlük, haftalık ve aylık satış raporları sağlıyor. Müşteri yönetimi, sadakat programı ve müşteri tercihlerinin takibini destekliyor. Analitik dashboard, operasyonel metriklerin görselleştirilmesine izin veriyor. Entegrasyonlar, POS sistemleri ve ödeme gateway'leri ile veri paylaşımı sağlıyor. Mobil uygulama, yöneticilerin operasyonları mobil cihazlardan yönetmesine olanak veriyor. Güvenlik, finansal verilerin korunması ve erişim kontrolü içeriyor.",
+    "budget": 128000,
+    "deadline": "2025-05-12T00:00:00.000Z",
     "status": "open"
   }
 ]

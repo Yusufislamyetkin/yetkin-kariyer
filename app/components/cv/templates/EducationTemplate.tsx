@@ -83,6 +83,77 @@ export default function EducationTemplate({ data }: { data: CVData }) {
               </div>
             </section>
           )}
+          {data.languages.length > 0 && (
+            <section className="mb-2">
+              <h2 className="text-lg font-bold text-blue-600 mb-1 border-b-2 border-blue-600 pb-1">Diller</h2>
+              <div className="space-y-1">
+                {data.languages.map((lang, i) => (
+                  <div key={i} className="flex justify-between items-center">
+                    <span className="text-gray-900 font-medium text-xs">{lang.name}</span>
+                    <span className="text-blue-600 text-xs">{lang.level}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+          {data.projects.length > 0 && (
+            <section className="mb-2">
+              <h2 className="text-lg font-bold text-blue-600 mb-1 border-b-2 border-blue-600 pb-1">Projeler</h2>
+              <div className="space-y-1">
+                {data.projects.map((project, i) => (
+                  <div key={i} className="border-l-4 border-blue-600 pl-2">
+                    <h3 className="font-semibold text-gray-900 text-xs">{project.name}</h3>
+                    {project.technologies && (
+                      <p className="text-blue-700 text-xs mt-0.5">Teknolojiler: {project.technologies}</p>
+                    )}
+                    {project.description && (
+                      <p className="text-gray-700 mt-1 break-words whitespace-pre-line text-xs line-clamp-2">{project.description}</p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+          {data.achievements.length > 0 && (
+            <section className="mb-2">
+              <h2 className="text-lg font-bold text-blue-600 mb-1 border-b-2 border-blue-600 pb-1">Başarılar</h2>
+              <div className="space-y-1">
+                {data.achievements.map((achievement, i) => (
+                  <div key={i} className="border-l-4 border-blue-600 pl-2">
+                    <h3 className="font-semibold text-gray-900 text-xs">{achievement.title}</h3>
+                    {achievement.description && (
+                      <p className="text-gray-700 mt-0.5 break-words whitespace-pre-line text-xs line-clamp-1">{achievement.description}</p>
+                    )}
+                    {achievement.date && <p className="text-gray-600 text-xs mt-0.5">{achievement.date}</p>}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+          {data.hobbies.length > 0 && (
+            <section className="mb-2">
+              <h2 className="text-lg font-bold text-blue-600 mb-1 border-b-2 border-blue-600 pb-1">Hobiler</h2>
+              <div className="flex flex-wrap gap-1">
+                {data.hobbies.map((hobby, i) => (
+                  <span key={i} className="px-2 py-0.5 bg-blue-100 text-blue-800 rounded text-xs">{hobby}</span>
+                ))}
+              </div>
+            </section>
+          )}
+          {data.references.length > 0 && (
+            <section>
+              <h2 className="text-lg font-bold text-blue-600 mb-1 border-b-2 border-blue-600 pb-1">Referanslar</h2>
+              <div className="space-y-1">
+                {data.references.map((ref, i) => (
+                  <div key={i} className="border-l-4 border-blue-600 pl-2">
+                    <p className="font-semibold text-gray-900 text-xs">{ref.name}</p>
+                    <p className="text-blue-700 text-xs">{ref.position}, {ref.company}</p>
+                    <p className="text-gray-600 text-xs mt-0.5">{ref.email} | {ref.phone}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
       </div>
     </div>

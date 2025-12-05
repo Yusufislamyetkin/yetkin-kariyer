@@ -1,72 +1,79 @@
 [
   {
-    "title": "Ethereum Smart Contract Geliştirme",
-    "description": "DeFi projemiz için güvenli ve gas-efficient Ethereum smart contract geliştirmek istiyoruz. Solidity programlama dili kullanılacak. Contract geliştirme için token, staking, yield farming contract'ları oluşturulmalı. Security audit yapılmalı. Common vulnerabilities kontrolü yapılmalı (reentrancy, overflow). Test için unit ve integration testler yazılmalı. Hardhat veya Truffle framework kullanılmalı. Optimizasyon için gas optimization yapılmalı. Dokümantasyon hazırlanmalı. Deployment için testnet ve mainnet deployment yapılmalı. Frontend integration yapılmalı. Monitoring yapılmalı.",
-    "budget": 75000,
-    "deadline": "2025-05-10T00:00:00.000Z",
-    "status": "open"
-  },
-  {
-    "title": "NFT Marketplace Geliştirme",
-    "description": "NFT minting, satış ve alım işlemlerini destekleyen marketplace platformu geliştirmek istiyoruz. Smart contract için NFT contract (ERC-721/ERC-1155), marketplace contract oluşturulmalı. IPFS entegrasyonu yapılmalı. Frontend için React/Next.js kullanılmalı. Web3.js veya Ethers.js kullanılmalı. Wallet integration yapılmalı (MetaMask, WalletConnect). Payment processing yapılmalı (ETH, token). Kullanıcı arayüzü için NFT gallery, detail page, profile page oluşturulmalı. Search ve filtering özellikleri eklenmeli. Güvenlik için security audit yapılmalı. Testing yapılmalı. Dokümantasyon hazırlanmalı.",
-    "budget": 95000,
-    "deadline": "2025-05-25T00:00:00.000Z",
-    "status": "open"
-  },
-  {
-    "title": "Blockchain Wallet Uygulaması",
-    "description": "Güvenli ve kullanıcı dostu multi-chain cryptocurrency wallet geliştirmek istiyoruz. iOS ve Android için React Native veya Flutter kullanılacak. Cüzdan özellikleri için cüzdan oluşturma, import, export yapılabilmeli. Multi-chain support eklenmeli (Ethereum, BSC, Polygon). Transaction management yapılabilmeli. Token management (ERC-20) yapılabilmeli. Güvenlik için private key encryption, biometric authentication yapılmalı. Backup ve recovery özellikleri eklenmeli. Ek özellikler için DApp browser eklenebilir. NFT support eklenebilir. Güvenlik testleri yapılmalı.",
-    "budget": 110000,
-    "deadline": "2025-06-05T00:00:00.000Z",
-    "status": "open"
-  },
-  {
-    "title": "DeFi Yield Farming Platformu",
-    "description": "Kullanıcıların likidite sağlayıp kazanç elde etmesini sağlayan DeFi yield farming platformu geliştirmek istiyoruz. Smart contract için liquidity pool, staking, reward distribution contract'ları oluşturulmalı. AMM algoritması implementasyonu yapılmalı. Frontend için React/Next.js kullanılmalı. Web3 integration yapılmalı. Likidite yönetimi için likidite ekleme, çıkarma, stake etme yapılabilmeli. Reward calculation yapılmalı. Analitik için analytics dashboard oluşturulmalı (APY, TVL, user stats). Historical data görüntülenebilmeli. Güvenlik için security audit yapılmalı. Risk assessment yapılmalı. Dokümantasyon hazırlanmalı.",
+    "title": "DeFi Protokolü ve Akıllı Kontrat Geliştirme",
+    "description": "Merkezi olmayan finans protokolümüz için güvenli ve verimli smart contract'lar inşa ediyoruz. Solidity programlama dili ile Ethereum blockchain üzerinde token, staking ve yield farming kontratları geliştiriliyor. Güvenlik denetimi, yaygın güvenlik açıklarının tespit edilmesi için kapsamlı audit süreçleri içeriyor. Reentrancy, overflow ve access control gibi kritik güvenlik konuları detaylı şekilde ele alınıyor. Unit testler, Hardhat framework kullanılarak her kontrat fonksiyonu için kapsamlı test senaryoları yazılıyor. Gas optimizasyonu, işlem maliyetlerinin minimize edilmesi için kontrat kodları optimize ediliyor. Dokümantasyon, kontrat arayüzlerinin ve fonksiyonlarının detaylı açıklamaları hazırlanıyor. Testnet deployment, Rinkeby veya Goerli test ağında kontratların dağıtımı gerçekleştiriliyor. Mainnet deployment, ana ağda güvenli dağıtım süreçleri uygulanıyor. Frontend entegrasyonu, Web3.js veya Ethers.js kütüphaneleri ile kullanıcı arayüzüne bağlantı sağlanıyor. Monitoring, kontrat aktivitelerinin izlenmesi ve olay loglarının takibi yapılıyor.",
     "budget": 120000,
-    "deadline": "2025-06-15T00:00:00.000Z",
+    "deadline": "2025-05-15T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "Blockchain Supply Chain Çözümü",
-    "description": "Tedarik zinciri yönetimimiz için ürün takibi ve doğrulama sağlayan blockchain çözümü geliştirmek istiyoruz. Ethereum, Hyperledger veya Polygon seçimi yapılabilir. Smart contract development yapılmalı. Takip için product tracking yapılmalı. QR code/NFC integration yapılmalı. Doğrulama için verification system kurulmalı. Immutable records tutulmalı. Uygulama için web/mobil uygulama geliştirilmeli. API integration yapılmalı. Analitik için analytics dashboard oluşturulmalı. Reporting yapılabilmeli. Dokümantasyon hazırlanmalı.",
-    "budget": 100000,
-    "deadline": "2025-06-01T00:00:00.000Z",
-    "status": "open"
-  },
-  {
-    "title": "Token Launch ve ICO Platformu",
-    "description": "Güvenli token satışı sağlayan token launch ve ICO platformu geliştirmek istiyoruz. Smart contract için token contract (ERC-20), crowdsale contract oluşturulmalı. Tokenomics design yapılmalı. Frontend için token sale sayfası oluşturulmalı. KYC/AML integration yapılmalı. Ödeme için ETH ve stablecoin ödemeleri desteklenmeli. Vesting mechanism kurulmalı. Yönetim için dashboard oluşturulmalı (token sale istatistikleri). Admin panel oluşturulmalı. Güvenlik için security audit yapılmalı. Legal compliance sağlanmalı. Dokümantasyon hazırlanmalı.",
-    "budget": 85000,
+    "title": "NFT Marketplace ve Minting Platformu",
+    "description": "NFT oluşturma, satış ve alım işlemlerini destekleyen kapsamlı bir marketplace platformu inşa ediyoruz. ERC-721 ve ERC-1155 standartlarına uygun NFT kontratları tasarlanıyor. Marketplace kontratı, açık artırma ve sabit fiyat satış mekanizmalarını barındırıyor. IPFS entegrasyonu, NFT metadata'larının merkezi olmayan depolama sisteminde saklanmasını mümkün kılıyor. React/Next.js frontend, kullanıcı dostu arayüz ile NFT galerisi ve detay sayfaları sunuyor. Wallet bağlantısı, MetaMask ve WalletConnect entegrasyonları ile kripto cüzdan desteği sağlanıyor. Ödeme işleme, ETH ve ERC-20 token'ları ile güvenli ödeme altyapısı kuruluyor. Kullanıcı profilleri, koleksiyon görüntüleme ve favoriler özellikleri ekleniyor. Arama ve filtreleme, NFT'lerin kategorilere göre keşfedilmesine izin veriyor. Güvenlik denetimi, kontratların güvenlik açıklarının tespit edilmesi için profesyonel audit yapılıyor. Test süreçleri, kapsamlı test senaryoları ile platformun doğruluğu kontrol ediliyor.",
+    "budget": 135000,
     "deadline": "2025-05-20T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "Blockchain Explorer Geliştirme",
-    "description": "Özel blockchain ağımız için blokları, işlemleri ve adresleri görüntüleyen explorer geliştirmek istiyoruz. Backend için blockchain node entegrasyonu yapılmalı. Indexing service kurulmalı. API için RESTful API, GraphQL API oluşturulmalı. Frontend için React/Next.js kullanılmalı. Gerçek zamanlı güncellemeler yapılabilmeli. Arama için blok, işlem, adres arama yapılabilmeli. Analytics dashboard oluşturulmalı. Performans için performance optimization yapılmalı. Caching strategy uygulanmalı. Dokümantasyon hazırlanmalı.",
-    "budget": 70000,
+    "title": "Blockchain Cüzdan Uygulaması ve Güvenlik",
+    "description": "Çoklu blockchain desteği sunan güvenli bir kripto cüzdan uygulaması geliştiriyoruz. Ethereum, BSC, Polygon gibi farklı ağlarda token yönetimi özellikleri içeriyor. Seed phrase yönetimi, kullanıcı cüzdanlarının güvenli şekilde oluşturulması ve saklanması sağlanıyor. Biyometrik kimlik doğrulama, parmak izi ve yüz tanıma ile ek güvenlik katmanı ekleniyor. Transaction imzalama, güvenli işlem onaylama mekanizmaları uygulanıyor. Multi-signature desteği, kurumsal kullanım için çoklu imza cüzdanları destekleniyor. Token swap, DEX entegrasyonu ile token değişim işlemleri gerçekleştiriliyor. Fiyat takibi, gerçek zamanlı kripto para fiyatlarının gösterilmesi sağlanıyor. İşlem geçmişi, detaylı transaction kayıtlarının görüntülenmesi mümkün oluyor. QR kod entegrasyonu, hızlı adres paylaşımı ve işlem yapılmasına izin veriyor. Güvenlik testleri, penetration testing ve güvenlik açığı taraması yapılıyor.",
+    "budget": 110000,
+    "deadline": "2025-05-10T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Tokenomics ve Token Dağıtım Sistemi",
+    "description": "Proje token'ımızın ekonomik modeli ve dağıtım mekanizması tasarlanıyor. ERC-20 token kontratı, özelleştirilebilir token özellikleri ile geliştiriliyor. Vesting mekanizması, token kilitleme ve zaman bazlı serbest bırakma özellikleri ekleniyor. Airdrop sistemi, toplu token dağıtımı için otomatik airdrop kontratı oluşturuluyor. Staking özellikleri, token stake etme ve ödül kazanma mekanizmaları uygulanıyor. Governance token, DAO yönetimi için oy verme ve teklif sistemi entegre ediliyor. Token burn, deflasyonist mekanizma için token yakma fonksiyonları ekleniyor. Whitelist yönetimi, öncelikli token satışı için whitelist kontratı geliştiriliyor. Fiyatlandırma, dinamik token fiyatlandırma mekanizması ve bonding curve uygulanıyor. Güvenlik denetimi, token kontratının güvenlik açıklarının tespit edilmesi için audit yapılıyor. Dokümantasyon, tokenomics modelinin ve dağıtım stratejisinin detaylı açıklaması hazırlanıyor.",
+    "budget": 95000,
     "deadline": "2025-05-05T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "DAO (Decentralized Autonomous Organization) Platformu",
-    "description": "Topluluk yönetimi ve karar alma süreçlerini blockchain üzerinde yöneten DAO platformu geliştirmek istiyoruz. Smart contract için governance contract'ları oluşturulmalı. Voting mechanism kurulmalı. Sistem için proposal system oluşturulmalı. Token-based voting yapılabilmeli. Frontend için React/Next.js kullanılmalı. Web3 integration yapılmalı. Yönetim için governance dashboard oluşturulmalı (öneriler, oylamalar, sonuçlar). Treasury management yapılabilmeli. Güvenlik için security audit yapılmalı. Testing yapılmalı. Dokümantasyon hazırlanmalı.",
-    "budget": 105000,
-    "deadline": "2025-06-10T00:00:00.000Z",
-    "status": "open"
-  },
-  {
-    "title": "Cross-chain Bridge Geliştirme",
-    "description": "Farklı blockchain ağları arasında güvenli ve hızlı token transferi sağlayan cross-chain bridge geliştirmek istiyoruz. Smart contract için source ve destination chain contract'ları oluşturulmalı. Bridge mechanism kurulmalı (token lock/unlock). Servis için relayer service kurulmalı. Oracle integration yapılmalı. Uygulama için bridge arayüzü oluşturulmalı. Transaction tracking yapılabilmeli. Güvenlik için security audit yapılmalı. Multi-signature wallet kurulmalı. Test ve izleme için testing yapılmalı. Dokümantasyon hazırlanmalı. Monitoring yapılmalı.",
-    "budget": 130000,
-    "deadline": "2025-06-20T00:00:00.000Z",
-    "status": "open"
-  },
-  {
-    "title": "Blockchain Gaming Platformu",
-    "description": "Play-to-earn blockchain oyun platformu geliştirmek istiyoruz. NFT karakterler, token ödülleri ve marketplace özellikleri olacak. Oyun geliştirme için oyun mekanikleri tasarlanmalı. NFT integration yapılmalı. Smart contract development yapılmalı. Token contract oluşturulmalı. Marketplace için NFT alım-satım yapılabilmeli. Staking mechanism kurulmalı. Frontend için oyun arayüzü oluşturulmalı. Web3 integration yapılmalı. Wallet integration yapılmalı. Özellikler için leaderboard eklenebilir. Security audit yapılmalı.",
+    "title": "Blockchain Oyun ve Play-to-Earn Mekanizması",
+    "description": "Oyun içi varlıkların blockchain'de tokenize edildiği oyun platformu inşa ediyoruz. NFT karakterler, oyun içi karakterlerin NFT olarak oluşturulması ve sahiplenilmesi sağlanıyor. GameFi mekanizması, oyuncuların oyun oynayarak token kazanması için reward sistemi kuruluyor. Smart contract entegrasyonu, oyun mantığının blockchain üzerinde güvenli şekilde çalışması sağlanıyor. Marketplace, oyun içi eşyaların alınıp satılması için NFT marketplace entegrasyonu yapılıyor. Staking mekanizması, oyun token'larının stake edilmesi ve pasif gelir kazanılması mümkün oluyor. Governance, oyuncu topluluğunun oyun gelişimine katkıda bulunması için DAO yapısı kuruluyor. Cross-chain desteği, farklı blockchain ağlarında oyun varlıklarının kullanılmasına izin veriliyor. Frontend geliştirme, Unity veya WebGL tabanlı oyun arayüzü oluşturuluyor. Güvenlik, oyun ekonomisinin manipülasyona karşı korunması için kontrat güvenliği sağlanıyor. Test süreçleri, oyun mekaniklerinin ve blockchain entegrasyonunun doğruluğu kontrol ediliyor.",
     "budget": 140000,
-    "deadline": "2025-06-25T00:00:00.000Z",
+    "deadline": "2025-05-18T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Supply Chain İzlenebilirlik ve Blockchain Entegrasyonu",
+    "description": "Ürün tedarik zincirinin blockchain üzerinde şeffaf şekilde izlenmesi için sistem kuruyoruz. Ürün kayıt sistemi, her ürünün benzersiz blockchain kimliği ile kaydedilmesi sağlanıyor. Tedarik zinciri takibi, ürünlerin üretimden tüketiciye kadar tüm aşamalarının kaydedilmesi yapılıyor. QR kod entegrasyonu, ürünlerin QR kod ile blockchain kayıtlarına erişilmesi mümkün oluyor. Akıllı kontratlar, otomatik doğrulama ve onay mekanizmaları ile süreçleri yönetiyor. IoT entegrasyonu, sensör verilerinin blockchain'e kaydedilmesi ile gerçek zamanlı takip sağlanıyor. Doğrulama mekanizması, ürün orijinalliğinin ve kalitesinin blockchain üzerinden doğrulanması yapılıyor. Raporlama, tedarik zinciri verilerinin analiz edilmesi ve raporlanması gerçekleştiriliyor. Çoklu blockchain desteği, Hyperledger Fabric veya Ethereum gibi farklı blockchain ağları destekleniyor. API entegrasyonu, mevcut ERP sistemleri ile blockchain verilerinin paylaşılması sağlanıyor. Güvenlik, hassas tedarik zinciri verilerinin korunması için şifreleme ve erişim kontrolü uygulanıyor.",
+    "budget": 125000,
+    "deadline": "2025-05-12T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "DAO Yönetim Platformu ve Governance Sistemi",
+    "description": "Merkezi olmayan özerk organizasyon yönetimi için kapsamlı bir DAO platformu geliştiriyoruz. Governance token, oy verme haklarının token bazlı dağıtımı ile yönetim sistemi kuruluyor. Öneri sistemi, topluluk üyelerinin teklif sunması ve tartışması için forum entegrasyonu yapılıyor. Oylama mekanizması, token sahiplerinin öneriler üzerinde oy kullanması için güvenli oylama kontratı oluşturuluyor. Çoklu oylama yöntemleri, basit çoğunluk, ağırlıklı oy ve quadratic voting seçenekleri sunuluyor. Treasury yönetimi, DAO hazinesinin yönetilmesi ve fon dağıtımı için kontratlar geliştiriliyor. Delegasyon, token sahiplerinin oy haklarını temsilcilere devretmesi mümkün oluyor. Snapshot entegrasyonu, gas ücreti olmadan off-chain oylama yapılmasına izin veriyor. Frontend arayüzü, kullanıcı dostu DAO yönetim paneli ve dashboard oluşturuluyor. Bildirim sistemi, önemli öneriler ve oylamalar için topluluk bildirimleri gönderiliyor. Güvenlik denetimi, governance kontratlarının güvenlik açıklarının tespit edilmesi için audit yapılıyor.",
+    "budget": 115000,
+    "deadline": "2025-05-08T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Cross-Chain Bridge ve Token Transfer Sistemi",
+    "description": "Farklı blockchain ağları arasında token transferi sağlayan köprü protokolü inşa ediyoruz. Ethereum, BSC, Polygon ve Avalanche gibi çoklu blockchain desteği sağlanıyor. Lock ve mint mekanizması, kaynak zincirde token'ların kilitlenmesi ve hedef zincirde mint edilmesi uygulanıyor. Güvenlik, çoklu imza cüzdanları ve zaman kilidi mekanizmaları ile köprü güvenliği artırılıyor. Liquidity pool, köprü işlemleri için yeterli likiditenin sağlanması amacıyla pool'lar oluşturuluyor. Fee mekanizması, köprü kullanım ücretlerinin hesaplanması ve toplanması için sistem kuruluyor. Frontend entegrasyonu, kullanıcıların kolayca token transferi yapması için web arayüzü geliştiriliyor. İşlem takibi, cross-chain transferlerin durumunun izlenmesi ve raporlanması yapılıyor. Oracles entegrasyonu, farklı zincirler arası veri doğrulama için oracle servisleri kullanılıyor. Güvenlik denetimi, köprü kontratlarının güvenlik açıklarının tespit edilmesi için kapsamlı audit gerçekleştiriliyor. Dokümantasyon, köprü kullanım kılavuzu ve teknik dokümantasyon hazırlanıyor.",
+    "budget": 130000,
+    "deadline": "2025-05-15T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Blockchain Tabanlı Kimlik Doğrulama Sistemi",
+    "description": "Merkezi olmayan kimlik yönetimi ve doğrulama sistemi oluşturuyoruz. Self-sovereign identity, kullanıcıların kendi kimlik verilerini kontrol etmesi için DID standardı uygulanıyor. Verifiable credentials, eğitim sertifikaları, iş deneyimi gibi kimlik bilgilerinin doğrulanabilir şekilde saklanması sağlanıyor. Zero-knowledge proof, kimlik bilgilerinin gizliliğini koruyarak doğrulama yapılması mümkün oluyor. Issuer yönetimi, kimlik bilgilerini veren kurumların kayıt ve yönetim sistemi kuruluyor. Verifier entegrasyonu, kimlik doğrulama yapan servislerin sisteme entegrasyonu yapılıyor. Kullanıcı cüzdanı, kimlik bilgilerinin güvenli saklanması için mobil cüzdan uygulaması geliştiriliyor. QR kod doğrulama, hızlı kimlik doğrulama için QR kod tabanlı sistem uygulanıyor. Privacy protection, kullanıcı gizliliğinin korunması için minimal veri paylaşımı prensipleri uygulanıyor. Standart uyumluluk, W3C DID ve Verifiable Credentials standartlarına uyum sağlanıyor. Güvenlik, kimlik verilerinin şifrelenmesi ve güvenli saklanması için kriptografik yöntemler kullanılıyor.",
+    "budget": 105000,
+    "deadline": "2025-05-05T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Yield Farming ve Liquidity Mining Protokolü",
+    "description": "DeFi ekosisteminde likidite sağlayıcıların ödül kazanması için yield farming protokolü geliştiriyoruz. Liquidity pool'lar, çift token likidite havuzlarının oluşturulması ve yönetilmesi sağlanıyor. Automated market maker, AMM algoritması ile token fiyatlandırması ve swap işlemleri gerçekleştiriliyor. Staking mekanizması, LP token'ların stake edilmesi ve farming ödüllerinin kazanılması mümkün oluyor. Reward dağıtımı, zaman bazlı ödül hesaplama ve dağıtım kontratları oluşturuluyor. Impermanent loss koruması, likidite sağlayıcıların zarar görmesini önlemek için mekanizmalar ekleniyor. Frontend arayüzü, kullanıcıların kolayca likidite eklemesi ve çekmesi için web uygulaması geliştiriliyor. Analytics dashboard, pool performansı, APY hesaplamaları ve kullanıcı kazançlarının görüntülenmesi sağlanıyor. Multi-chain desteği, farklı blockchain ağlarında protokolün çalışması için çoklu zincir entegrasyonu yapılıyor. Güvenlik denetimi, protokol kontratlarının güvenlik açıklarının tespit edilmesi için profesyonel audit gerçekleştiriliyor. Risk yönetimi, smart contract risklerinin analiz edilmesi ve azaltılması için stratejiler uygulanıyor.",
+    "budget": 118000,
+    "deadline": "2025-05-10T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Blockchain Tabanlı Oylama ve Seçim Sistemi",
+    "description": "Şeffaf ve manipülasyona karşı korumalı seçim sistemi blockchain teknolojisi ile inşa ediyoruz. Anonim oylama, seçmen kimliklerinin gizli tutulması için zero-knowledge proof teknolojisi kullanılıyor. Oylama kontratı, güvenli oy kaydı ve sayım mekanizması için akıllı kontratlar geliştiriliyor. Seçmen kaydı, yetkili seçmenlerin blockchain üzerinde kaydedilmesi ve doğrulanması yapılıyor. Oylama arayüzü, kullanıcı dostu web ve mobil uygulama ile oy kullanımı sağlanıyor. Sonuç doğrulama, oylama sonuçlarının herkes tarafından doğrulanabilmesi için şeffaf sistem kuruluyor. Çoklu seçim yöntemleri, tek tercih, çoklu tercih ve sıralı oylama seçenekleri destekleniyor. Zaman kısıtlaması, oylama süresinin belirlenmesi ve otomatik kapanma mekanizması uygulanıyor. Sonuç görselleştirme, oylama sonuçlarının grafik ve tablo formatında sunulması gerçekleştiriliyor. Güvenlik, oy manipülasyonuna karşı koruma için kriptografik yöntemler ve çoklu doğrulama kullanılıyor. Audit trail, tüm oylama işlemlerinin izlenebilir kayıtlarının tutulması sağlanıyor.",
+    "budget": 98000,
+    "deadline": "2025-05-03T00:00:00.000Z",
     "status": "open"
   }
 ]

@@ -1,8 +1,9 @@
+import { Client } from "@upstash/qstash";
 import crypto from "crypto";
 
 /**
  * QStash Helper Library
- * Upstash QStash v2 API ile background job queue yönetimi
+ * Upstash QStash resmi SDK kullanarak background job queue yönetimi
  */
 
 /**
@@ -34,6 +35,27 @@ function getBaseUrl(): string {
 }
 
 /**
+ * QStash client instance'ı oluştur
+ */
+function getQStashClient(): Client | null {
+  const qstashToken = process.env.QSTASH_TOKEN;
+  
+  if (!qstashToken) {
+    console.warn("[QSTASH] QSTASH_TOKEN not configured");
+    return null;
+  }
+
+  try {
+    return new Client({
+      token: qstashToken,
+    });
+  } catch (error: any) {
+    console.error("[QSTASH] Failed to create client:", error);
+    return null;
+  }
+}
+
+/**
  * QStash job queue'ya ekle
  * @param url Target API endpoint (örn: /api/interview/cv-based/generate-background)
  * @param body Request body
@@ -46,63 +68,47 @@ export async function queueJob(
     delay?: number; // seconds
     retries?: number;
   }
-): Promise<Response> {
-  const qstashUrl = process.env.QSTASH_URL || "https://qstash.upstash.io";
-  const qstashToken = process.env.QSTASH_TOKEN;
-
-  if (!qstashToken) {
-    console.warn("[QSTASH] QSTASH_TOKEN not configured, falling back to direct call");
+): Promise<void> {
+  const client = getQStashClient();
+  
+  if (!client) {
+    console.warn("[QSTASH] QStash client not available, falling back to direct call");
     // Fallback: direkt API call (timeout riski var, sadece development için)
     const baseUrl = getBaseUrl();
     const targetUrl = `${baseUrl}${url}`;
     
-    return fetch(targetUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
+    try {
+      await fetch(targetUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+    } catch (error: any) {
+      console.error("[QSTASH] Direct call failed:", error);
+      throw error;
+    }
+    return;
   }
 
   // Target URL'i oluştur
   const baseUrl = getBaseUrl();
   const targetUrl = `${baseUrl}${url}`;
 
-  // QStash v2 API endpoint
-  const qstashEndpoint = `${qstashUrl}/v2/publish/${encodeURIComponent(targetUrl)}`;
-
-  // Headers hazırla
-  const headers: Record<string, string> = {
-    Authorization: `Bearer ${qstashToken}`,
-    "Content-Type": "application/json",
-  };
-
-  // Retry ayarı
-  if (options?.retries !== undefined) {
-    headers["Upstash-Retries"] = String(options.retries);
-  }
-
-  // Delay ayarı
-  if (options?.delay !== undefined) {
-    headers["Upstash-Delay"] = String(options.delay);
-  }
-
   try {
-    const response = await fetch(qstashEndpoint, {
-      method: "POST",
-      headers,
-      body: JSON.stringify(body),
+    console.log(`[QSTASH] Queueing job for: ${targetUrl}`);
+    
+    // QStash resmi SDK ile publish
+    await client.publishJSON({
+      url: targetUrl,
+      body: body,
+      retries: options?.retries || 2,
+      delay: options?.delay,
     });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error(`[QSTASH] Failed to queue job: ${response.status} ${errorText}`);
-      throw new Error(`QStash queue failed: ${response.status} ${errorText}`);
-    }
-
+    
     console.log(`[QSTASH] Job queued successfully for ${url}`);
-    return response;
   } catch (error: any) {
     console.error("[QSTASH] Error queueing job:", error);
+    console.error("[QSTASH] Target URL was:", targetUrl);
     throw error;
   }
 }
@@ -162,19 +168,3 @@ export function verifyQStashSignature(
   console.warn("[QSTASH] Signature verification failed");
   return false;
 }
-
-/**
- * Request'ten QStash signature'ını doğrula
- * @param request Request object
- * @returns true if signature is valid
- */
-export async function verifyQStashRequest(request: Request): Promise<boolean> {
-  const signature = request.headers.get("Upstash-Signature");
-  const url = request.url;
-  
-  // Body'yi string olarak al
-  const body = await request.text();
-  
-  return verifyQStashSignature(signature, body, url);
-}
-

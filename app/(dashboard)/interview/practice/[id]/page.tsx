@@ -51,6 +51,7 @@ interface Interview {
   description: string | null;
   questions: InterviewQuestion[];
   duration: number | null;
+  type?: string | null;
 }
 
 const DEFAULT_LANGUAGE: LiveCodingLanguage = "javascript";
@@ -309,9 +310,9 @@ export default function InterviewRoomPage() {
 
     setLoading(true);
     try {
-      // CV bazlı mülakatlar için farklı endpoint kullan
-      const isCVBased = window.location.pathname.includes('/cv-based');
-      const endpoint = isCVBased 
+      // CV bazlı mülakatlar için farklı endpoint kullan (pathname kontrolü ile başla)
+      const isCVBasedPath = window.location.pathname.includes('/cv-based');
+      const endpoint = isCVBasedPath 
         ? `/api/interview/cv-based/${interviewId}`
         : `/api/interview/${interviewId}`;
       const response = await fetch(endpoint);
@@ -325,6 +326,58 @@ export default function InterviewRoomPage() {
         return;
       }
 
+      // Interview type'ını kontrol et (database'den gelen bilgi)
+      const isCVBased = data.interview.type === "cv_based" || window.location.pathname.includes('/cv-based');
+      
+      // Eğer CV-based ise ve endpoint yanlışsa, doğru endpoint'i kullan
+      if (isCVBased && !endpoint.includes('/cv-based')) {
+        const cvBasedResponse = await fetch(`/api/interview/cv-based/${interviewId}`);
+        if (cvBasedResponse.ok) {
+          const cvBasedData = await cvBasedResponse.json();
+          if (cvBasedData?.interview) {
+            const normalizedQuestions = normalizeQuestions(cvBasedData.interview.questions);
+            const formattedInterview: Interview = {
+              id: cvBasedData.interview.id,
+              title: cvBasedData.interview.title,
+              description: cvBasedData.interview.description ?? null,
+              duration: cvBasedData.interview.duration ?? null,
+              questions: normalizedQuestions,
+              type: cvBasedData.interview.type ?? null,
+            };
+            setInterview(formattedInterview);
+            setCurrentQuestion(0);
+            if (formattedInterview.duration) {
+              setTimeLeft(formattedInterview.duration * 60);
+            }
+            const initialText: Record<string, string> = {};
+            const initialCode: Record<string, string> = {};
+            const initialLanguages: Record<string, LiveCodingLanguage> = {};
+            normalizedQuestions.forEach((question) => {
+              if (isLiveCodingQuestion(question)) {
+                const defaultLanguage = question.languages[0] ?? DEFAULT_LANGUAGE;
+                initialLanguages[question.id] = defaultLanguage;
+                const starterCode =
+                  (question.starterCode && question.starterCode[defaultLanguage]) ??
+                  question.starterCode?.[DEFAULT_LANGUAGE] ??
+                  "";
+                initialCode[question.id] = starterCode ?? "";
+              } else if (isBugFixQuestion(question)) {
+                const defaultLanguage = question.languages[0] ?? DEFAULT_LANGUAGE;
+                initialLanguages[question.id] = defaultLanguage;
+                initialCode[question.id] = question.buggyCode ?? "";
+              } else {
+                initialText[question.id] = "";
+              }
+            });
+            setTextResponses(initialText);
+            setCodeResponses(initialCode);
+            setCodeLanguages(initialLanguages);
+            setLoading(false);
+            return;
+          }
+        }
+      }
+
       const normalizedQuestions = normalizeQuestions(data.interview.questions);
       const formattedInterview: Interview = {
         id: data.interview.id,
@@ -332,6 +385,7 @@ export default function InterviewRoomPage() {
         description: data.interview.description ?? null,
         duration: data.interview.duration ?? null,
         questions: normalizedQuestions,
+        type: data.interview.type ?? null,
       };
 
       setInterview(formattedInterview);
@@ -630,7 +684,7 @@ export default function InterviewRoomPage() {
       };
 
       try {
-        const isCVBased = window.location.pathname.includes('/cv-based');
+        const isCVBased = interview?.type === "cv_based" || window.location.pathname.includes('/cv-based');
         const endpoint = isCVBased 
           ? `/api/interview/cv-based/${interviewId}`
           : `/api/interview/${interviewId}`;
@@ -691,9 +745,9 @@ export default function InterviewRoomPage() {
     stopRecording();
     setExitIntent(null);
     setWarning("");
-    const isCVBased = window.location.pathname.includes('/cv-based');
+    const isCVBased = interview?.type === "cv_based" || window.location.pathname.includes('/cv-based');
     router.push(isCVBased ? "/interview/cv-based" : "/interview/practice");
-  }, [router, stopRecording, submitting]);
+  }, [router, stopRecording, submitting, interview?.type]);
 
   const handleNextQuestion = () => {
     setCurrentQuestion((prev) => Math.min((interview?.questions.length ?? 1) - 1, prev + 1));

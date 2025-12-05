@@ -302,7 +302,7 @@ export default function TechTemplate({ data }: TechTemplateProps) {
 
               {/* Achievements */}
               {data.achievements.length > 0 && (
-                <section className="bg-black border border-green-500 p-3 rounded">
+                <section className="bg-black border border-green-500 p-3 rounded mb-2">
                   <div className="mb-1">
                     <span className="text-green-500 font-mono text-xs">$</span> <span className="text-gray-400 font-mono text-xs">cat achievements.md</span>
                   </div>
@@ -319,6 +319,45 @@ export default function TechTemplate({ data }: TechTemplateProps) {
                         {achievement.date && (
                           <p className="text-gray-500 font-mono text-xs mt-0.5">{achievement.date}</p>
                         )}
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* Hobbies */}
+              {data.hobbies.length > 0 && (
+                <section className="bg-black border border-green-500 p-3 rounded mb-2">
+                  <div className="mb-1">
+                    <span className="text-green-500 font-mono text-xs">$</span> <span className="text-gray-400 font-mono text-xs">cat hobbies.txt</span>
+                  </div>
+                  <div className="text-green-400 mb-2 font-mono text-xs">{'// Hobiler'}</div>
+                  <div className="flex flex-wrap gap-1">
+                    {data.hobbies.map((hobby, index) => (
+                      <span
+                        key={index}
+                        className="px-2 py-0.5 bg-green-900 text-green-300 rounded text-xs font-mono border border-green-500"
+                      >
+                        {hobby}
+                      </span>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* References */}
+              {data.references.length > 0 && (
+                <section className="bg-black border border-green-500 p-3 rounded">
+                  <div className="mb-1">
+                    <span className="text-green-500 font-mono text-xs">$</span> <span className="text-gray-400 font-mono text-xs">cat references.json</span>
+                  </div>
+                  <div className="text-green-400 mb-2 font-mono text-xs">{'// Referanslar'}</div>
+                  <div className="space-y-1">
+                    {data.references.map((ref, index) => (
+                      <div key={index} className="border border-green-500 p-2 rounded">
+                        <p className="text-green-300 font-bold font-mono text-xs mb-0.5">{ref.name || "İsim"}</p>
+                        <p className="text-gray-400 font-mono text-xs">{ref.position || "Pozisyon"}, {ref.company || "Şirket"}</p>
+                        <p className="text-gray-500 font-mono text-xs mt-0.5">{ref.email || ""} | {ref.phone || ""}</p>
                       </div>
                     ))}
                   </div>

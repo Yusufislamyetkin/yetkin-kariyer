@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
+import { formatQuestionsForInterview } from "@/lib/ai/interview-generator";
 
 export async function GET(
   request: Request,
@@ -31,11 +32,30 @@ export async function GET(
       if (typeof rawQuestions === "string") {
         try {
           const parsed = JSON.parse(rawQuestions);
-          return Array.isArray(parsed) ? parsed : [];
+          if (Array.isArray(parsed)) {
+            return parsed;
+          }
+          // Object formatını kontrol et (aşamalı yapı)
+          if (typeof parsed === "object" && parsed !== null && !Array.isArray(parsed)) {
+            const obj = parsed as any;
+            if (obj.stage1_introduction && obj.stage2_experience && obj.stage3_technical) {
+              return formatQuestionsForInterview(obj);
+            }
+          }
+          return [];
         } catch (error) {
           console.warn("[interview] questions parse error:", error);
           return [];
         }
+      }
+      // Object formatı (aşamalı yapı) - direkt object olarak gelmişse
+      if (typeof rawQuestions === "object" && rawQuestions !== null && !Array.isArray(rawQuestions)) {
+        const obj = rawQuestions as any;
+        if (obj.stage1_introduction && obj.stage2_experience && obj.stage3_technical) {
+          return formatQuestionsForInterview(obj);
+        }
+        // Eğer sadece bir kısmı varsa (generation sırasında), boş array döndür
+        return [];
       }
       return [];
     };

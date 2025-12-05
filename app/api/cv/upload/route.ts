@@ -26,6 +26,7 @@ export async function POST(request: Request) {
 
     const formData = await request.formData();
     const file = formData.get("file") as File | null;
+    const cvId = formData.get("cvId") as string | null;
 
     if (!file) {
       return NextResponse.json({ error: "Dosya eklenmedi" }, { status: 400 });
@@ -45,6 +46,21 @@ export async function POST(request: Request) {
       );
     }
 
+    // If cvId is provided, verify it belongs to the user
+    if (cvId) {
+      const cv = await db.cV.findUnique({
+        where: { id: cvId },
+        select: { userId: true },
+      });
+
+      if (!cv || cv.userId !== (session.user.id as string)) {
+        return NextResponse.json(
+          { error: "CV bulunamadı veya erişim reddedildi" },
+          { status: 403 }
+        );
+      }
+    }
+
     const sanitizedName = file.name.replace(/[^\w.\-]+/g, "_");
     const filePath = `cv-uploads/${session.user.id}/${Date.now()}-${sanitizedName}`;
 
@@ -56,6 +72,7 @@ export async function POST(request: Request) {
     const upload = await (db as any).cVUpload?.create?.({
       data: {
         userId: session.user.id as string,
+        ...(cvId && { cvId }),
         url: blob.url,
         name: sanitizedName,
         mimeType: file.type,

@@ -1,72 +1,72 @@
 [
   {
-    "title": "RESTful API Geliştirme (.NET Core)",
-    "description": "Kurumsal uygulamamız için RESTful API geliştirmek istiyoruz. .NET Core teknolojisiyle çalışılacak. Güvenlik, ölçeklenebilirlik ve performans odaklı bir mimari kurulması gerekiyor. Veritabanı katmanında Entity Framework Core ile veri işlemleri yapılmalı. PostgreSQL veritabanı kullanılacak ve migration sistemi kurulmalı. Repository pattern ve Unit of Work pattern implementasyonu yapılmalı. Güvenlik açısından JWT authentication, refresh token mekanizması, role-based authorization eklenmeli. Swagger dokümantasyonu hazırlanmalı. Rate limiting özelliği eklenmeli. Hata yönetimi için merkezi error handling middleware kurulmalı. Input validation yapılmalı. CORS yapılandırması yapılmalı. Performans için API versioning eklenmeli. Redis ile caching stratejisi uygulanmalı. Unit ve integration testler yazılmalı.",
-    "budget": 45000,
-    "deadline": "2025-03-20T00:00:00.000Z",
-    "status": "open"
-  },
-  {
-    "title": "Node.js Microservices Mimarisi",
-    "description": "Yüksek trafikli uygulamamız için Node.js tabanlı microservices mimarisi kurmak istiyoruz. Ölçeklenebilir ve dayanıklı bir sistem oluşturulması gerekiyor. Mimari bileşenler olarak API Gateway (Kong veya custom) ile istek yönlendirme yapılmalı. Service discovery (Consul/Eureka) ile servis keşfi sağlanmalı. Load balancing ile trafik dağıtımı yapılmalı. Message queue (RabbitMQ/Kafka) ile asenkron iletişim kurulmalı. Event-driven architecture ile gevşek bağlantı sağlanmalı. Güvenlik ve yönetim kısmında merkezi authentication service kurulmalı. Database per service yaklaşımı uygulanmalı. Logging ve monitoring için ELK stack, Prometheus kullanılmalı. Docker containerization yapılmalı. Dokümantasyon için OpenAPI/Swagger hazırlanmalı. Circuit breaker pattern implementasyonu yapılmalı. Distributed tracing eklenmeli.",
-    "budget": 85000,
+    "title": "Ölçeklenebilir API Gateway Mimarisi",
+    "description": "Yüksek trafikli mikroservis ekosistemimiz için merkezi bir API gateway çözümü tasarlıyoruz. Sistem, gelen istekleri doğru servislere yönlendiriyor ve yük dengeleme mekanizması içeriyor. Kimlik doğrulama katmanı, JWT token doğrulama ve OAuth2 entegrasyonu sunuyor. Rate limiting, endpoint bazlı istek sınırlamaları ile API kötüye kullanımını önlüyor. Request/response dönüşümü, farklı formatlar arasında veri transformasyonu yapabiliyor. Caching stratejisi, sık erişilen verilerin performansını artırıyor. Logging ve monitoring, tüm API çağrılarının izlenmesini ve analiz edilmesini sağlıyor. Hata yönetimi, merkezi hata işleme ve anlamlı hata mesajları döndürüyor. API versioning, geriye dönük uyumluluğu koruyarak yeni versiyonların yayınlanmasına izin veriyor. Webhook desteği, dış sistemlere olay bildirimleri gönderebiliyor. Güvenlik özellikleri, DDoS koruması ve güvenlik duvarı kuralları içeriyor.",
+    "budget": 95000,
     "deadline": "2025-04-30T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "Python Django REST API",
-    "description": "Modern web uygulamamız için Django REST Framework ile RESTful API geliştirmek istiyoruz. Standartlara uygun, dokümante edilmiş bir çözüm arıyoruz. Kimlik doğrulama kısmında JWT token tabanlı authentication kurulmalı. Kullanıcı kayıt, giriş, şifre sıfırlama, e-posta doğrulama özellikleri eklenmeli. CRUD işlemleri için tüm kaynaklarda create, read, update, delete operasyonları yapılabilmeli. Dosya yükleme desteği eklenmeli. Veri yönetimi kısmında pagination, filtering, searching, sorting özellikleri olmalı. Swagger/OpenAPI dokümantasyonu hazırlanmalı (drf-spectacular veya drf-yasg kullanılabilir). Permission classes ile yetkilendirme yapılmalı. Altyapı olarak PostgreSQL veritabanı kullanılmalı. Serializers ile veri doğrulama yapılmalı. Unit ve integration testler yazılmalı. CORS yapılandırması yapılmalı.",
-    "budget": 40000,
-    "deadline": "2025-03-15T00:00:00.000Z",
+    "title": "Gerçek Zamanlı Bildirim Servisi",
+    "description": "Milyonlarca kullanıcıya eşzamanlı bildirim gönderebilen yüksek performanslı bir bildirim altyapısı kuruyoruz. WebSocket bağlantı yönetimi, sürekli bağlantıların verimli şekilde yönetilmesini sağlıyor. Push notification entegrasyonu, iOS ve Android platformları için native push servisleri ile çalışıyor. Mesaj kuyruğu, yüksek hacimli bildirimlerin asenkron işlenmesini destekliyor. Kullanıcı segmentasyonu, hedef kitleye göre bildirim gönderimini sağlıyor. Şablon yönetimi, dinamik içerikli bildirim şablonlarının yönetilmesine izin veriyor. Teslimat takibi, bildirim durumlarının izlenmesini ve raporlanmasını sağlıyor. A/B test desteği, farklı bildirim varyantlarının test edilmesine olanak veriyor. Bounce handling, başarısız bildirimlerin yönetilmesini destekliyor. Ölçeklenebilirlik, horizontal scaling ile trafik artışlarına uyum sağlıyor. Güvenilirlik, mesaj kaybını önlemek için retry mekanizması içeriyor.",
+    "budget": 88000,
+    "deadline": "2025-04-20T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "GraphQL API (Node.js)",
-    "description": "Esnek sorgulama ve verimli veri çekme imkanı sunan GraphQL API geliştirmek istiyoruz. Apollo Server veya GraphQL Yoga ile Node.js geliştirme yapılacak. Temel yapı olarak schema definition ile type system kurulmalı. Resolvers ile business logic implementasyonu yapılmalı. Authentication ve authorization eklenmeli - field-level, object-level yetkilendirme. DataLoader ile N+1 query optimizasyonu yapılmalı. Gerçek zamanlı özellikler için subscriptions eklenmeli. Dosya yükleme için graphql-upload kullanılmalı. Test ve hata yönetimi için GraphQL Playground veya GraphiQL kurulmalı. Anlamlı hata mesajları döndürülmeli. Altyapı olarak MongoDB veya PostgreSQL kullanılabilir. Caching stratejisi uygulanmalı. Rate limiting eklenmeli. API dokümantasyonu hazırlanmalı.",
-    "budget": 50000,
-    "deadline": "2025-03-25T00:00:00.000Z",
+    "title": "Veri Senkronizasyon ve Replikasyon Sistemi",
+    "description": "Dağıtık veritabanı ortamında veri tutarlılığını sağlayan senkronizasyon altyapısı geliştiriyoruz. Çoklu veritabanı desteği, farklı veritabanı sistemleri arasında veri senkronizasyonu yapabiliyor. Conflict resolution, çakışan veri güncellemelerinin çözümlenmesini sağlıyor. Change data capture, veritabanı değişikliklerinin gerçek zamanlı yakalanmasını destekliyor. Transaction yönetimi, atomik işlem garantisi ile veri bütünlüğünü koruyor. Replikasyon stratejisi, master-slave veya multi-master mimarileri destekliyor. Veri doğrulama, senkronize edilen verilerin doğruluğunun kontrol edilmesini sağlıyor. Performans optimizasyonu, büyük veri setlerinin verimli transferini destekliyor. Monitoring, senkronizasyon durumunun ve performans metriklerinin izlenmesine izin veriyor. Hata yönetimi, başarısız senkronizasyonların yeniden denenmesini sağlıyor. Şifreleme, veri transferi sırasında güvenli iletişim protokolleri kullanıyor.",
+    "budget": 105000,
+    "deadline": "2025-05-10T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "Payment Gateway Entegrasyonu",
-    "description": "E-ticaret platformumuz için güvenli ödeme işleme sistemi kurmak istiyoruz. iyzico ve PayTR entegrasyonları yapılacak. Ödeme yöntemleri olarak kredi kartı, banka kartı, havale/EFT desteklenmeli. 3D Secure doğrulama yapılmalı. İade işlemleri (tam ve kısmi) gerçekleştirilebilmeli. Webhook handling yapılmalı. Güvenlik açısından fraud detection, IP kontrolü, rate limiting, şüpheli işlem tespiti özellikleri eklenmeli. Kapsamlı logging yapılmalı. Geliştirme için Node.js veya PHP backend kullanılabilir. Sandbox test ortamı kurulmalı. Production deployment yapılmalı. Dokümantasyon hazırlanmalı.",
-    "budget": 35000,
-    "deadline": "2025-03-10T00:00:00.000Z",
+    "title": "Dosya İşleme ve Dönüştürme Servisi",
+    "description": "Çeşitli dosya formatlarının işlenmesi ve dönüştürülmesi için otomatik bir servis oluşturuyoruz. Format desteği, PDF, Word, Excel, görsel ve video formatlarının işlenmesini sağlıyor. Dönüştürme motoru, dosyaların farklı formatlara dönüştürülmesine izin veriyor. Batch processing, çoklu dosyaların toplu işlenmesini destekliyor. Asenkron işleme, uzun süren işlemlerin arka planda gerçekleştirilmesini sağlıyor. İlerleme takibi, dosya işleme durumunun gerçek zamanlı izlenmesine olanak veriyor. Hata yönetimi, başarısız işlemlerin loglanması ve bildirilmesini sağlıyor. Depolama entegrasyonu, bulut depolama sistemleri ile dosya yükleme ve indirme işlemlerini destekliyor. API endpoint'leri, RESTful servisler ile dosya işleme isteklerinin yapılmasına izin veriyor. Kuyruk sistemi, yüksek hacimli işlemlerin sıralı işlenmesini sağlıyor. Ölçeklenebilirlik, container tabanlı mimari ile yük artışlarına uyum sağlıyor.",
+    "budget": 72000,
+    "deadline": "2025-03-28T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "Real-time Chat Backend",
-    "description": "Binlerce eşzamanlı kullanıcıyı destekleyen WebSocket tabanlı gerçek zamanlı chat backend'i geliştirmek istiyoruz. Socket.io veya SignalR teknolojileri kullanılacak. Bağlantı yönetimi için connection management, room management yapılmalı. Mesaj geçmişi ve pagination özellikleri eklenmeli. Dosya ve görsel paylaşımı desteklenmeli. Kullanıcı durumu için online/offline presence gösterilmeli. Typing indicators eklenmeli. Ölçeklenebilirlik için Node.js veya .NET Core kullanılabilir. Redis pub/sub ile horizontal scaling sağlanmalı. Message queue ile güvenilir mesajlaşma kurulmalı. Güvenlik açısından authentication yapılmalı. Rate limiting eklenmeli. İçerik moderasyonu yapılmalı.",
-    "budget": 55000,
-    "deadline": "2025-04-05T00:00:00.000Z",
+    "title": "Ödeme İşleme ve Faturalandırma Sistemi",
+    "description": "Güvenli ödeme işlemleri ve otomatik faturalandırma için kapsamlı bir backend çözümü tasarlıyoruz. Ödeme gateway entegrasyonu, çoklu ödeme sağlayıcıları ile çalışabiliyor. 3D Secure doğrulama, güvenli ödeme işlemleri için zorunlu. İade yönetimi, tam ve kısmi iadelerin işlenmesini sağlıyor. Abonelik yönetimi, tekrarlayan ödemelerin otomatik işlenmesine izin veriyor. Fatura oluşturma, PDF formatında profesyonel faturaların üretilmesini destekliyor. Webhook handling, ödeme durumu güncellemelerinin dış sistemlere iletilmesini sağlıyor. Fraud detection, şüpheli işlemlerin tespit edilmesi ve engellenmesine olanak veriyor. Raporlama, finansal işlemlerin detaylı analiz ve raporlanmasını destekliyor. Güvenlik, PCI-DSS uyumluluğu ve veri şifreleme standartları içeriyor. Audit logging, tüm finansal işlemlerin izlenebilir kayıtlarının tutulmasını sağlıyor.",
+    "budget": 98000,
+    "deadline": "2025-04-25T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "Email Service API",
-    "description": "Güvenilir ve ölçeklenebilir e-posta gönderim servisi kurmak istiyoruz. SMTP entegrasyonu ve SendGrid, Mailgun veya AWS SES kullanılacak. Şablon yönetimi için dinamik e-posta şablonları oluşturulmalı. Queue system (Bull, BullMQ) ile asenkron gönderim yapılmalı. Retry mechanism eklenmeli. Yönetim kısmında bounce handling yapılmalı. Unsubscribe management özelliği eklenmeli. Analytics için açılma ve tıklama oranları takip edilmeli. API endpoints oluşturulmalı. Altyapı olarak Node.js veya Python kullanılabilir. Rate limiting yapılmalı. Logging sistemi kurulmalı. Error handling yapılmalı.",
-    "budget": 30000,
-    "deadline": "2025-02-28T00:00:00.000Z",
+    "title": "Arama Motoru ve İndeksleme Servisi",
+    "description": "Büyük veri setlerinde hızlı ve doğru arama yapabilen özel bir arama altyapısı geliştiriyoruz. Full-text search, metin içeriklerinde kapsamlı arama yapabiliyor. Fuzzy matching, yazım hatalarına toleranslı arama sonuçları sunuyor. Faceted search, çoklu kriterlere göre filtreleme ve arama yapabiliyor. Ranking algoritması, arama sonuçlarının relevansına göre sıralanmasını sağlıyor. İndeksleme mekanizması, verilerin hızlı erişim için optimize edilmiş şekilde indekslenmesini destekliyor. Real-time indexing, yeni verilerin anında arama sonuçlarına dahil edilmesine izin veriyor. Ölçeklenebilirlik, milyonlarca dokümanın indekslenmesini ve aranmasını destekliyor. API endpoint'leri, arama sorgularının programatik olarak yapılmasına olanak veriyor. Performans optimizasyonu, milisaniye seviyesinde arama sonuçları döndürüyor. Çoklu dil desteği, farklı dillerdeki içeriklerin doğru şekilde indekslenmesini sağlıyor.",
+    "budget": 85000,
+    "deadline": "2025-04-15T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "File Storage Service",
-    "description": "Güvenli ve ölçeklenebilir dosya yönetim servisi geliştirmek istiyoruz. AWS S3 veya Azure Blob Storage entegrasyonu yapılacak. Dosya işlemleri için upload API, multipart upload (büyük dosyalar) özellikleri eklenmeli. Görsel işleme yapılmalı - optimize, resize, crop, watermark. CDN entegrasyonu (CloudFront, Azure CDN) yapılmalı. API kısmında yükleme, indirme, silme, listeleme operasyonları yapılabilmeli. Güvenlik açısından dosya tipi kontrolü, boyut limiti, virus scanning özellikleri eklenmeli. Access control yapılmalı. Presigned URLs oluşturulmalı. Geliştirme için Node.js veya Python kullanılabilir. Logging yapılmalı. Error handling yapılmalı. Dokümantasyon hazırlanmalı.",
-    "budget": 40000,
-    "deadline": "2025-03-12T00:00:00.000Z",
+    "title": "Olay Tabanlı Mimari ve Event Sourcing",
+    "description": "Dağıtık sistemlerde olay tabanlı iletişim ve veri saklama için event sourcing mimarisi kuruyoruz. Event store, tüm sistem olaylarının kronolojik olarak saklanmasını sağlıyor. Event publishing, olayların abonelere yayınlanmasını destekliyor. Event replay, geçmiş olayların yeniden işlenmesi ile sistem durumunun yeniden oluşturulmasına izin veriyor. Snapshot mekanizması, performans için periyodik durum anlık görüntüleri alıyor. Event versioning, olay şemalarının evrimini destekliyor. CQRS implementasyonu, komut ve sorgu modellerinin ayrılmasını sağlıyor. Message broker entegrasyonu, güvenilir mesaj dağıtımı için kuyruk sistemleri kullanıyor. Monitoring, olay akışının ve sistem durumunun izlenmesine olanak veriyor. Hata yönetimi, başarısız olay işlemelerinin yeniden denenmesini sağlıyor. Ölçeklenebilirlik, yüksek hacimli olay işleme kapasitesi sunuyor.",
+    "budget": 110000,
+    "deadline": "2025-05-05T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "Background Job Processing",
-    "description": "Uzun süren işleri asenkron olarak işleyen arka plan iş yönetim sistemi kurmak istiyoruz. Bull/BullMQ veya Hangfire kullanılacak. İş yönetimi için job creation, worker processes kurulmalı. Retry mechanism (exponential backoff) eklenmeli. Job priority özelliği olmalı. Scheduling (cron jobs) yapılabilmeli. Job status tracking yapılmalı. İzleme kısmında kuyruk durumu, iş durumu, hata oranları görüntülenebilmeli. Dashboard oluşturulmalı. Altyapı olarak Node.js veya .NET Core kullanılabilir. Redis queue storage kullanılmalı. Error handling yapılmalı. Logging sistemi kurulmalı.",
-    "budget": 45000,
-    "deadline": "2025-03-18T00:00:00.000Z",
+    "title": "Kimlik Doğrulama ve Yetkilendirme Servisi",
+    "description": "Merkezi kimlik yönetimi ve çoklu yetkilendirme desteği sunan güvenlik odaklı bir servis oluşturuyoruz. Multi-factor authentication, SMS, e-posta ve authenticator uygulamaları ile çoklu doğrulama sağlıyor. OAuth2 ve OpenID Connect, standart protokoller ile üçüncü parti entegrasyonları destekliyor. Role-based access control, kullanıcı rollerine göre yetkilendirme yapabiliyor. Permission management, granüler izin yönetimi ile detaylı erişim kontrolü sağlıyor. Session yönetimi, güvenli oturum oluşturma ve yönetimi içeriyor. Token yönetimi, JWT token oluşturma, doğrulama ve yenileme işlemlerini destekliyor. Social login, sosyal medya hesapları ile giriş yapılmasına izin veriyor. Password policy, güçlü şifre gereksinimleri ve şifre sıfırlama özellikleri içeriyor. Audit trail, tüm kimlik doğrulama işlemlerinin kayıtlarının tutulmasını sağlıyor. Güvenlik, brute force koruması ve şüpheli aktivite tespiti içeriyor.",
+    "budget": 78000,
+    "deadline": "2025-04-08T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "API Rate Limiting ve Caching",
-    "description": "Mevcut API'mize rate limiting ve caching özellikleri eklemek istiyoruz. API abuse önleme ve performans artırma hedefleniyor. Rate limiting için Redis tabanlı çözüm kullanılmalı. Token bucket veya sliding window algoritması implementasyonu yapılmalı. Per-user, per-IP, per-endpoint limitler ayarlanabilmeli. Caching için cache invalidation stratejisi uygulanmalı. TTL yönetimi yapılmalı. Cache warming özelliği eklenmeli. Yapılandırma kısmında endpoint bazlı limit kuralları tanımlanabilmeli. Response headers ile limit bilgisi gönderilmeli. İzleme için rate limit ihlalleri, cache hit/miss oranları takip edilmeli. Dashboard oluşturulmalı. Redis cluster kullanılmalı. Error handling yapılmalı. Dokümantasyon hazırlanmalı.",
-    "budget": 25000,
-    "deadline": "2025-02-22T00:00:00.000Z",
+    "title": "Veri Analitik ve Raporlama Altyapısı",
+    "description": "Büyük veri setlerinden anlamlı içgörüler çıkaran analitik ve raporlama sistemi geliştiriyoruz. Veri toplama, çoklu kaynaklardan veri toplanmasını ve birleştirilmesini sağlıyor. ETL pipeline, veri çıkarma, dönüştürme ve yükleme süreçlerini otomatikleştiriyor. Veri temizleme, eksik ve hatalı verilerin düzeltilmesini destekliyor. Agregasyon motoru, büyük veri setlerinin özetlenmesi ve analiz edilmesine izin veriyor. Scheduled reports, periyodik raporların otomatik oluşturulmasını sağlıyor. API endpoint'leri, analitik verilerin programatik erişimine olanak veriyor. Caching, sık erişilen raporların performansını artırıyor. Veri görselleştirme, grafik ve tablo formatlarında sonuçların sunulmasını destekliyor. Ölçeklenebilirlik, artan veri hacimlerine uyum sağlıyor. Güvenlik, hassas verilerin korunması ve erişim kontrolü içeriyor.",
+    "budget": 92000,
+    "deadline": "2025-04-28T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Mikroservis Orkestrasyon ve Koordinasyon",
+    "description": "Dağıtık mikroservislerin koordinasyonu ve iş akışı yönetimi için orkestrasyon katmanı tasarlıyoruz. Service discovery, dinamik servis keşfi ve kayıt mekanizması sunuyor. Load balancing, trafiğin servisler arasında dengeli dağıtılmasını destekliyor. Circuit breaker, hatalı servislerin sistem genelini etkilemesini önlüyor. Distributed tracing, servisler arası çağrıların izlenmesine izin veriyor. Configuration management, merkezi yapılandırma yönetimi ile servis ayarlarının yönetilmesini sağlıyor. Health checks, servis durumlarının sürekli izlenmesini destekliyor. Service mesh, servisler arası iletişimin güvenli ve yönetilebilir olmasına olanak veriyor. Monitoring ve alerting, sistem sağlığının izlenmesi ve sorun bildirimleri içeriyor. Ölçeklenebilirlik, yeni servislerin kolayca eklenmesini sağlıyor. Güvenlik, servisler arası güvenli iletişim protokolleri içeriyor.",
+    "budget": 115000,
+    "deadline": "2025-05-08T00:00:00.000Z",
     "status": "open"
   }
 ]

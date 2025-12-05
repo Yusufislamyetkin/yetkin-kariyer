@@ -109,8 +109,8 @@ export default function ChangeTemplatePage() {
         throw new Error(data.error || "Template değiştirilemedi");
       }
 
-      // Success - redirect to CV list
-      router.push("/cv/my-cvs");
+      // Success - redirect to CV view page
+      router.push(`/cv/view/${params.id}`);
     } catch (err: any) {
       console.error("Error changing template:", err);
       setError(err.message || "Template değiştirilirken bir hata oluştu");

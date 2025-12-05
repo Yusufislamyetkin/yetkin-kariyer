@@ -1,72 +1,65 @@
 [
   {
-    "title": "React Dashboard Geliştirme",
-    "description": "Yönetim ekibimizin iş süreçlerini takip edip karar vermesini kolaylaştıracak admin paneli dashboard'u geliştirmek istiyoruz. React.js ile Material-UI veya Ant Design component kütüphaneleri kullanılacak. Veri görselleştirme için Chart.js veya Recharts ile grafikler oluşturulmalı. Line, bar, pie, area grafik tipleri desteklenmeli. Gerçek zamanlı veri güncellemeleri yapılabilmeli. Veri tabloları kısmında büyük veri setleri, pagination, sorting, filtering özellikleri olmalı. Excel/CSV export yapılabilmeli. Filtreleme özellikleri eklenmeli - tarih aralığı, kategori, durum bazlı. Responsive tasarım yapılmalı. Güvenlik açısından authentication, role-based access control eklenmeli. Dark mode desteği olmalı.",
-    "budget": 50000,
-    "deadline": "2025-03-25T00:00:00.000Z",
+    "title": "İnteraktif Veri Görselleştirme Dashboard",
+    "description": "Karmaşık veri setlerini anlaşılır grafikler ve interaktif görselleştirmelerle sunan modern bir dashboard arayüzü tasarlıyoruz. Grafik kütüphanesi entegrasyonu, çizgi, bar, pasta, scatter ve heatmap grafik tiplerini destekliyor. Filtreleme mekanizması, kullanıcıların verileri dinamik olarak filtrelemesine ve analiz etmesine izin veriyor. Zoom ve pan özellikleri, detaylı veri incelemesi için grafiklerin yakınlaştırılmasını sağlıyor. Tooltip'ler, veri noktaları üzerine gelindiğinde detaylı bilgilerin gösterilmesini destekliyor. Export fonksiyonları, grafiklerin PNG, PDF ve SVG formatlarında indirilmesine olanak veriyor. Responsive tasarım, tüm ekran boyutlarında optimal görüntüleme sağlıyor. Gerçek zamanlı güncellemeler, WebSocket bağlantısı ile canlı veri akışını destekliyor. Karanlık mod desteği, kullanıcı tercihlerine göre tema değişikliği sunuyor. Performans optimizasyonu, büyük veri setlerinin sorunsuz render edilmesini sağlıyor.",
+    "budget": 68000,
+    "deadline": "2025-04-12T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "Vue.js E-ticaret Frontend",
-    "description": "Kullanıcı deneyimini ön planda tutan, satış dönüşümünü artıran e-ticaret frontend'i geliştirmek istiyoruz. Vue.js 3 Composition API, Vuex/Pinia state management, Vue Router kullanılacak. Ürün sayfalarında grid/list görünümü, filtreleme, sıralama özellikleri olmalı. Ürün detay sayfasında görseller, açıklama, yorumlar, benzer ürünler gösterilmeli. Sepet ve ödeme kısmında ürün ekleme/çıkarma, miktar değiştirme yapılabilmeli. Checkout sürecinde adres seçimi, ödeme yöntemi, sipariş özeti gösterilmeli. Kullanıcı deneyimi açısından smooth animasyonlar, loading states, error handling yapılmalı. Responsive tasarım olmalı. Performans için lazy loading, code splitting, görsel optimizasyonu yapılmalı. SEO optimizasyonu yapılmalı.",
-    "budget": 55000,
+    "title": "Modern E-Ticaret Alışveriş Deneyimi",
+    "description": "Dönüşüm oranlarını maksimize eden kullanıcı odaklı bir e-ticaret arayüzü inşa ediyoruz. Ürün kataloğu, grid ve liste görünümleri ile esnek görüntüleme seçenekleri sunuyor. Gelişmiş filtreleme, kategori, fiyat, marka ve özelliklere göre ürün aramayı kolaylaştırıyor. Ürün karşılaştırma, birden fazla ürünün yan yana değerlendirilmesine izin veriyor. Hızlı görüntüleme, ürün detaylarına sayfa yenilemeden erişim sağlıyor. Sepet yönetimi, ürün ekleme, çıkarma ve miktar değiştirme işlemlerini destekliyor. Checkout süreci, adım adım rehberlik ile kullanıcı deneyimini optimize ediyor. Güven göstergeleri, güvenli ödeme ve müşteri yorumları ile güven oluşturuyor. Öneri motoru, kullanıcı davranışlarına göre kişiselleştirilmiş ürün önerileri sunuyor. Wishlist özelliği, favori ürünlerin kaydedilmesine olanak veriyor. Mobil optimizasyon, dokunmatik etkileşimler ve hızlı yükleme süreleri içeriyor.",
+    "budget": 75000,
+    "deadline": "2025-04-22T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Yönetim Paneli ve Admin Arayüzü",
+    "description": "Karmaşık iş süreçlerini yönetmeyi kolaylaştıran kapsamlı bir yönetim paneli arayüzü oluşturuyoruz. Dashboard görünümü, önemli metriklerin ve istatistiklerin özet sunumunu içeriyor. Veri tabloları, sıralama, filtreleme ve sayfalama özellikleri ile büyük veri setlerinin yönetilmesini sağlıyor. Form yönetimi, doğrulama ve hata yönetimi ile kullanıcı dostu form deneyimi sunuyor. Çoklu seçim, toplu işlemlerin gerçekleştirilmesine izin veriyor. İçe ve dışa aktarma, Excel ve CSV formatlarında veri işlemlerini destekliyor. Bildirim sistemi, önemli olayların kullanıcıya iletilmesini sağlıyor. Kullanıcı yönetimi, rol ve yetki atamalarının yapılmasına olanak veriyor. Aktivite logları, sistem değişikliklerinin takip edilmesini destekliyor. Arama fonksiyonu, hızlı içerik bulma için global arama özelliği içeriyor. Responsive tasarım, masaüstü ve tablet cihazlarda optimal kullanım sağlıyor.",
+    "budget": 82000,
+    "deadline": "2025-04-30T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Sosyal Medya Entegrasyonlu İçerik Platformu",
+    "description": "Kullanıcıların içerik oluşturması ve paylaşması için sosyal özelliklerle zenginleştirilmiş bir platform arayüzü tasarlıyoruz. İçerik editörü, zengin metin düzenleme ve medya ekleme özellikleri içeriyor. Feed görünümü, takip edilen kullanıcıların içeriklerinin kronolojik sırada gösterilmesini sağlıyor. Etkileşim özellikleri, beğeni, yorum ve paylaşım fonksiyonlarını destekliyor. Profil sayfaları, kullanıcı bilgileri ve içerik koleksiyonlarının sergilenmesine izin veriyor. Bildirim merkezi, kullanıcı etkileşimlerinin gerçek zamanlı bildirimlerini sunuyor. Hashtag sistemi, içeriklerin kategorize edilmesi ve keşfedilmesini kolaylaştırıyor. Arama ve keşif, popüler içeriklerin ve trend konuların bulunmasına olanak veriyor. Medya galerisi, fotoğraf ve video içeriklerinin zengin görüntüleme deneyimi sunuyor. Infinite scroll, içeriklerin kesintisiz yüklenmesini sağlıyor. Performans optimizasyonu, hızlı yükleme ve akıcı gezinme deneyimi içeriyor.",
+    "budget": 95000,
+    "deadline": "2025-05-05T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Eğitim Platformu Öğrenci Arayüzü",
+    "description": "Öğrencilerin ders içeriklerine erişmesi ve ilerlemelerini takip etmesi için sezgisel bir eğitim arayüzü inşa ediyoruz. Kurs kataloğu, kategorilere göre organize edilmiş kurs listesi ve arama özelliği içeriyor. Video oynatıcı, kalite seçimi, hız ayarı ve altyazı desteği ile zengin oynatma deneyimi sunuyor. İlerleme takibi, tamamlanan derslerin ve quiz sonuçlarının görselleştirilmesini sağlıyor. Not alma özelliği, video izlerken zaman damgalı notlar alınmasına izin veriyor. Sertifika görüntüleme, tamamlanan kurslar için dijital sertifikaların gösterilmesini destekliyor. Quiz arayüzü, interaktif sorular ve anında geri bildirim ile öğrenme deneyimini zenginleştiriyor. Forum entegrasyonu, öğrenciler arası tartışma ve bilgi paylaşımına olanak veriyor. Bildirimler, yeni içerikler ve önemli duyurular için kullanılıyor. Offline mod, indirilen içeriklerin internet olmadan erişilmesini sağlıyor. Kişiselleştirme, öğrenme tercihlerinin ve hedeflerinin yönetilmesine izin veriyor.",
+    "budget": 88000,
+    "deadline": "2025-04-28T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Gerçek Zamanlı İletişim Arayüzü",
+    "description": "Anlık mesajlaşma ve video görüşme özellikleri sunan modern bir iletişim platformu arayüzü oluşturuyoruz. Mesajlaşma arayüzü, sohbet listesi ve mesaj görünümü ile kullanıcı dostu deneyim sunuyor. Emoji ve GIF desteği, zengin mesajlaşma deneyimi için gerekli özellikleri içeriyor. Dosya paylaşımı, görsel, video ve doküman paylaşımına izin veriyor. Sesli mesaj, hızlı iletişim için ses kaydı özelliği sunuyor. Video görüşme, grup ve bireysel görüşmeler için entegre video konferans desteği içeriyor. Durum göstergeleri, kullanıcıların online/offline durumlarının görüntülenmesini sağlıyor. Okundu bilgisi, mesajların okunma durumunun takip edilmesine olanak veriyor. Bildirim yönetimi, mesaj ve çağrı bildirimlerinin özelleştirilmesini destekliyor. Arama fonksiyonu, mesaj geçmişinde hızlı arama yapılmasını sağlıyor. Güvenlik, uçtan uca şifreleme ve gizlilik ayarları içeriyor.",
+    "budget": 72000,
     "deadline": "2025-04-05T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "Next.js Blog Platformu",
-    "description": "Hızlı yükleme ve SEO optimizasyonu odaklı blog platformu geliştirmek istiyoruz. Next.js 13+ App Router, SSG ve SSR kombinasyonu kullanılacak. İçerik yönetimi kısmında Markdown desteği, syntax highlighting, MDX (React component'leri markdown içinde) özellikleri olmalı. Keşif özellikleri için arama özelliği, kategori ve tag sistemi eklenmeli. Yorum sistemi kurulmalı. SEO açısından meta tags, Open Graph, structured data, sitemap oluşturulmalı. Sosyal medya paylaşım butonları eklenmeli. RSS feed desteği olmalı. Dark mode özelliği eklenmeli.",
-    "budget": 40000,
-    "deadline": "2025-03-15T00:00:00.000Z",
+    "title": "Proje Yönetim ve İşbirliği Arayüzü",
+    "description": "Takım çalışmasını kolaylaştıran görsel proje yönetim arayüzü geliştiriyoruz. Kanban board, görevlerin sürükle-bırak ile yönetilmesini sağlıyor. Gantt chart görünümü, proje zaman çizelgesinin görselleştirilmesine izin veriyor. Görev detayları, açıklama, atanan kişiler ve deadline bilgilerinin yönetilmesini destekliyor. Dosya ekleme, görevlere ilgili dokümanların eklenmesine olanak veriyor. Yorum sistemi, görevler üzerinde takım içi iletişimi destekliyor. Bildirimler, görev güncellemeleri ve deadline hatırlatmaları için kullanılıyor. Filtreleme, görevlerin durum, atanan kişi ve tarih bazlı filtrelenmesini sağlıyor. Aktivite akışı, proje değişikliklerinin kronolojik takibini sunuyor. Raporlama, proje ilerlemesi ve takım performans metriklerini görselleştiriyor. Mobil uyumluluk, proje yönetiminin her yerden erişilmesini sağlıyor.",
+    "budget": 78000,
+    "deadline": "2025-04-18T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "Angular Admin Panel",
-    "description": "Karmaşık iş süreçlerini yönetmeyi kolaylaştıran kurumsal admin paneli geliştirmek istiyoruz. Angular 15+, Angular Material, TypeScript kullanılacak. Navigasyon için routing, lazy loading yapılmalı. Form validation özellikleri eklenmeli. Veri yönetimi kısmında data tables, server-side pagination/sorting/filtering, inline editing özellikleri olmalı. Görselleştirme için charts (Ngx-charts veya Chart.js), dashboard oluşturulmalı. Güvenlik açısından authentication, authorization, JWT token management yapılmalı. Error handling ve logging sistemi kurulmalı.",
-    "budget": 60000,
-    "deadline": "2025-04-10T00:00:00.000Z",
+    "title": "Müşteri İlişkileri Yönetim Arayüzü",
+    "description": "Müşteri etkileşimlerini yönetmeyi kolaylaştıran kapsamlı bir CRM arayüzü tasarlıyoruz. Müşteri profilleri, iletişim bilgileri ve etkileşim geçmişinin detaylı görüntülenmesini sağlıyor. Pipeline görünümü, satış süreçlerinin aşamalar halinde görselleştirilmesine izin veriyor. Görev yönetimi, müşteri takibi için yapılacaklar listesi ve hatırlatıcılar içeriyor. E-posta entegrasyonu, müşterilerle e-posta iletişiminin yönetilmesini destekliyor. Raporlama dashboard'u, satış metrikleri ve müşteri analizlerini görselleştiriyor. Arama ve filtreleme, müşteri veritabanında hızlı arama yapılmasına olanak veriyor. Not alma, müşteri görüşmeleri ve önemli bilgilerin kaydedilmesini sağlıyor. Takvim entegrasyonu, toplantı ve görüşme planlamasını destekliyor. Export fonksiyonları, müşteri verilerinin dışa aktarılmasına izin veriyor. Güvenlik, rol bazlı erişim kontrolü ve veri gizliliği içeriyor.",
+    "budget": 85000,
+    "deadline": "2025-04-25T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "Landing Page (React)",
-    "description": "Ürün/hizmet lansmanımız için modern ve etkileyici landing page geliştirmek istiyoruz. React.js, Framer Motion animasyonları kullanılacak. Görsel efektler için scroll animations, parallax effects, hover effects eklenmeli. İçerik bölümleri olarak hero section (güçlü ilk izlenim), value proposition, CTA butonları, features section, testimonials, pricing section eklenmeli. Lead generation için form entegrasyonu, e-posta yakalama özellikleri olmalı. SEO ve performans açısından Core Web Vitals optimizasyonu yapılmalı. Responsive tasarım olmalı. A/B testing hazırlığı yapılmalı.",
-    "budget": 20000,
-    "deadline": "2025-02-18T00:00:00.000Z",
-    "status": "open"
-  },
-  {
-    "title": "Single Page Application (SPA)",
-    "description": "Hızlı ve akıcı kullanıcı deneyimi sunan modern web uygulaması geliştirmek istiyoruz. React veya Vue.js, client-side routing, state management (Redux/Vuex) kullanılacak. Backend entegrasyonu için API entegrasyonu (Axios/Fetch), error handling, loading states yapılmalı. Form yönetimi kısmında form handling, validation, dosya yükleme özellikleri olmalı. Tasarım açısından responsive, modern ve kullanıcı dostu arayüz olmalı. Performans için code splitting, lazy loading, memoization yapılmalı. SEO için SSR/SSG kullanılabilir.",
-    "budget": 45000,
+    "title": "Landing Page ve Dönüşüm Optimizasyonu",
+    "description": "Ürün lansmanları için yüksek dönüşüm oranları hedefleyen etkileyici landing page arayüzü oluşturuyoruz. Hero section, güçlü başlık ve görsel ile ilk izlenimi maksimize ediyor. Değer önerisi, ürünün faydalarının net ve anlaşılır şekilde sunulmasını sağlıyor. Özellikler bölümü, ürün özelliklerinin görsel ve metin ile etkili sunumunu içeriyor. Sosyal kanıt, müşteri yorumları ve başarı hikayeleri ile güven oluşturuyor. CTA butonları, stratejik konumlandırma ile dönüşümü artırıyor. Form tasarımı, minimum alan ile maksimum dönüşüm sağlıyor. Animasyonlar, scroll ve hover efektleri ile kullanıcı dikkatini çekiyor. Mobil optimizasyon, tüm cihazlarda tutarlı deneyim sunuyor. A/B test hazırlığı, farklı varyantların test edilmesine izin veriyor. SEO optimizasyonu, arama motorlarında görünürlüğü artırıyor. Performans, hızlı yükleme süreleri ile kullanıcı deneyimini optimize ediyor.",
+    "budget": 35000,
     "deadline": "2025-03-20T00:00:00.000Z",
-    "status": "open"
-  },
-  {
-    "title": "Interactive Data Visualization",
-    "description": "Karmaşık verileri anlaşılır şekilde sunan interaktif görselleştirme dashboard'u geliştirmek istiyoruz. React.js, D3.js veya Recharts kullanılacak. Grafik tipleri olarak line, bar, pie, scatter, heatmap desteklenmeli. Filtreleme özellikleri eklenmeli - dinamik filtreleme, date range picker, dropdown filters, search box. Export özellikleri olmalı - PNG, PDF, SVG formatlarında indirme, print-friendly view. Responsive tasarım yapılmalı, touch gestures desteklenmeli. Gerçek zamanlı güncellemeler (WebSocket/polling) yapılabilmeli. Performans optimizasyonu yapılmalı.",
-    "budget": 50000,
-    "deadline": "2025-03-28T00:00:00.000Z",
-    "status": "open"
-  },
-  {
-    "title": "E-learning Platform Frontend",
-    "description": "Öğrencilerin dersleri takip etmesini ve öğrenmesini kolaylaştıran eğitim platformu frontend'i geliştirmek istiyoruz. React veya Vue.js kullanılacak. Video oynatıcı için video player, controls (play, pause, speed, quality) özellikleri olmalı. İlerleme takibi kısmında tamamlanan dersler, quiz'ler, ödevler gösterilmeli. Sertifika görüntüleme ve PDF indirme özellikleri eklenmeli. Quiz sistemi için interaktif sorular, anlık geri bildirim, sonuç sayfası olmalı. Kullanıcı dashboard'unda profil, kurslar, ilerleme, sertifikalar görüntülenebilmeli. Not alma özelliği eklenmeli. Responsive tasarım yapılmalı. Offline mode desteği olmalı. Sosyal özellikler eklenebilir.",
-    "budget": 65000,
-    "deadline": "2025-04-15T00:00:00.000Z",
-    "status": "open"
-  },
-  {
-    "title": "Real-time Chat UI",
-    "description": "Hızlı ve akıcı mesajlaşma deneyimi sunan gerçek zamanlı chat arayüzü geliştirmek istiyoruz. React, WebSocket client kullanılacak. Mesajlaşma kısmında message list, infinite scroll özellikleri olmalı. Emoji picker eklenmeli. Dosya ve görsel paylaşımı, görsel önizleme yapılabilmeli. Kullanıcı durumu için typing indicators, online/offline status, read receipts gösterilmeli. Tasarım açısından modern UI, dark mode desteği olmalı. Performans için message caching, lazy loading, virtualization yapılmalı. Mobil uyumluluk sağlanmalı.",
-    "budget": 40000,
-    "deadline": "2025-03-12T00:00:00.000Z",
-    "status": "open"
-  },
-  {
-    "title": "Portfolio Website (Gatsby)",
-    "description": "Çalışmaları sergileyen, hızlı yüklenen static portfolio sitesi geliştirmek istiyoruz. Gatsby.js, Static Site Generation, GraphQL kullanılacak. İçerik kısmında blog entegrasyonu (Markdown veya CMS: Contentful/Strapi) yapılmalı. Proje galerisi, lightbox, kategori filtreleme özellikleri olmalı. İletişim için contact form, validation, spam protection eklenmeli. SEO açısından meta tags, Open Graph, structured data, sitemap oluşturulmalı. Lighthouse score 90+ olmalı. Tasarım açısından modern ve yaratıcı, animasyonlar eklenmeli. Responsive tasarım yapılmalı.",
-    "budget": 25000,
-    "deadline": "2025-02-25T00:00:00.000Z",
     "status": "open"
   }
 ]

@@ -10,6 +10,15 @@ import Link from "next/link";
 import CVRenderer from "@/app/components/cv/CVRenderer";
 import { generatePDFFromElement } from "@/lib/cv/pdf-generator";
 
+interface CVUpload {
+  id: string;
+  url: string;
+  name: string;
+  mimeType: string;
+  size: number;
+  createdAt: string;
+}
+
 interface CV {
   id: string;
   data: any;
@@ -18,6 +27,7 @@ interface CV {
     id: string;
     name: string;
   };
+  uploads?: CVUpload[];
 }
 
 export default function ViewCVPage() {
@@ -27,42 +37,8 @@ export default function ViewCVPage() {
   const [error, setError] = useState<string | null>(null);
   const [cv, setCv] = useState<CV | null>(null);
   const [downloading, setDownloading] = useState(false);
-  const [uploading, setUploading] = useState(false);
-  const [lastUploadUrl, setLastUploadUrl] = useState<string | null>(null);
-  const [lastUploadName, setLastUploadName] = useState<string | null>(null);
   const [retryCount, setRetryCount] = useState(0);
-
-  const handleCvUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    setUploading(true);
-    setError(null);
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
-
-      const res = await fetch("/api/cv/upload", {
-        method: "POST",
-        body: formData,
-      });
-
-      const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.error || "CV yüklenemedi");
-      }
-
-      setLastUploadUrl(data.upload?.url || null);
-      setLastUploadName(data.upload?.name || null);
-    } catch (err: any) {
-      console.error("Error uploading CV:", err);
-      setError(err.message || "CV yüklenirken bir hata oluştu");
-    } finally {
-      setUploading(false);
-      // reset input value to allow re-selecting the same file
-      (e.target as HTMLInputElement).value = "";
-    }
-  };
+  const [selectedUploadId, setSelectedUploadId] = useState<string | null>(null);
 
   useEffect(() => {
     if (params.id) {
@@ -83,6 +59,10 @@ export default function ViewCVPage() {
 
       const data = await response.json();
       setCv(data.cv);
+      // Set the first upload as selected if available
+      if (data.cv?.uploads && data.cv.uploads.length > 0 && !selectedUploadId) {
+        setSelectedUploadId(data.cv.uploads[0].id);
+      }
     } catch (err) {
       console.error("Error loading CV:", err);
       setError("CV yüklenirken bir hata oluştu");
@@ -227,17 +207,6 @@ export default function ViewCVPage() {
               {downloading ? "Oluşturuluyor..." : "PDF"}
             </span>
           </Button>
-          <label className="flex-1 sm:flex-initial">
-            <input
-              type="file"
-              accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-              onChange={handleCvUpload}
-              className="hidden"
-            />
-            <Button variant="outline" disabled={uploading} className="w-full">
-              {uploading ? "Yükleniyor..." : "CV Yükle (PDF/DOC)"}
-            </Button>
-          </label>
         </div>
       </div>
 
@@ -249,13 +218,6 @@ export default function ViewCVPage() {
               <FileText className="h-5 w-5" />
               CV Önizleme
             </div>
-            {lastUploadUrl && (
-              <span className="text-sm font-normal text-blue-600 sm:ml-2">
-                <a href={lastUploadUrl} target="_blank" rel="noopener noreferrer" className="hover:underline">
-                  Yüklenen Dosya: {lastUploadName || "CV"}
-                </a>
-              </span>
-            )}
             {cv && (
               <span className="text-sm font-normal text-gray-500 sm:ml-2">
                 ({cv.template.name} Şablonu)
@@ -265,14 +227,63 @@ export default function ViewCVPage() {
         </CardHeader>
         <CardContent className="p-0">
           {cv ? (
-            <div className="bg-gray-100 p-2 sm:p-4 overflow-auto" style={{ maxHeight: "calc(100vh - 300px)", minHeight: "400px" }}>
-              <div 
-                id="cv-preview-content"
-                className="bg-white shadow-lg mx-auto w-full max-w-[210mm] scale-[0.75] sm:scale-[0.9] md:scale-100 origin-top transition-transform" 
-                style={{ width: "210mm" }}
-              >
-                <CVRenderer data={cv.data} templateId={cv.templateId} />
-              </div>
+            <div className="space-y-4">
+              {/* Upload Tabs */}
+              {cv.uploads && cv.uploads.length > 0 && (
+                <div className="border-b border-gray-200 dark:border-gray-700 px-4 pt-4">
+                  <div className="flex gap-2 overflow-x-auto">
+                    <button
+                      onClick={() => setSelectedUploadId(null)}
+                      className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
+                        selectedUploadId === null
+                          ? "border-blue-500 text-blue-600 dark:text-blue-400"
+                          : "border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
+                      }`}
+                    >
+                      CV Önizleme
+                    </button>
+                    {cv.uploads.map((upload) => (
+                      <button
+                        key={upload.id}
+                        onClick={() => setSelectedUploadId(upload.id)}
+                        className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
+                          selectedUploadId === upload.id
+                            ? "border-blue-500 text-blue-600 dark:text-blue-400"
+                            : "border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
+                        }`}
+                      >
+                        {upload.name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Content Area */}
+              {selectedUploadId ? (
+                // PDF Viewer
+                <div className="bg-gray-100 p-2 sm:p-4" style={{ minHeight: "600px" }}>
+                  {cv.uploads?.find((u) => u.id === selectedUploadId) && (
+                    <iframe
+                      src={`/api/cv/upload/${selectedUploadId}/view`}
+                      className="w-full h-full border-0 rounded-lg shadow-lg bg-white"
+                      style={{ minHeight: "600px" }}
+                      title="PDF Viewer"
+                    />
+                  )}
+                </div>
+              ) : (
+                // CV Preview
+                <div className="bg-gray-100 p-2 sm:p-4 overflow-auto" style={{ maxHeight: "calc(100vh - 300px)", minHeight: "400px" }}>
+                  <div 
+                    id="cv-preview-content"
+                    className="bg-white shadow-lg mx-auto w-full max-w-[210mm] scale-[0.75] sm:scale-[0.9] md:scale-100 origin-top transition-transform" 
+                    style={{ width: "210mm" }}
+                  >
+                    <CVRenderer data={cv.data} templateId={cv.templateId} />
+                  </div>
+                </div>
+              )}
             </div>
           ) : (
             <div className="flex items-center justify-center py-16">

@@ -1,72 +1,72 @@
 [
   {
-    "title": "Machine Learning Model Geliştirme",
-    "description": "E-ticaret platformumuz için müşteri davranışı tahmin modeli geliştirmek istiyoruz. Satın alma olasılığını tahmin ederek pazarlama kampanyalarımızı optimize etmek hedefleniyor. Python, Scikit-learn veya TensorFlow kullanılacak. Veri hazırlama kısmında preprocessing ile ham verilerin temizlenmesi ve hazırlanması yapılmalı. Feature engineering yapılmalı. Model geliştirme için farklı algoritmalar test edilmeli (Random Forest, XGBoost, Neural Networks). Model evaluation yapılmalı - accuracy, precision, recall, F1-score metrikleri hesaplanmalı. Cross-validation yapılmalı. Deployment için production ortamına deploy yapılmalı. API endpoint oluşturulmalı. Model monitoring yapılmalı. Dokümantasyon için model açıklaması, kullanım kılavuzu hazırlanmalı. Model versioning yapılmalı.",
-    "budget": 65000,
-    "deadline": "2025-04-20T00:00:00.000Z",
-    "status": "open"
-  },
-  {
-    "title": "Veri Analizi ve Raporlama Dashboard",
-    "description": "Perakende sektörü için iş kararlarımızı destekleyecek veri analizi ve raporlama dashboard'u geliştirmek istiyoruz. Python/Pandas analiz, Power BI veya Tableau görselleştirme kullanılacak. Veri işleme için data cleaning, data transformation yapılmalı. Görselleştirme için grafikler, tablolar, heatmaps oluşturulmalı. Interactive reports hazırlanmalı - filtreleme, drill-down özellikleri olmalı. Scheduled reports oluşturulmalı. İçgörüler için otomatik içgörü üretimi yapılmalı. Trend analysis yapılabilmeli. Veri pipeline için otomatik veri çekme yapılmalı. ETL processes kurulmalı.",
-    "budget": 50000,
-    "deadline": "2025-03-30T00:00:00.000Z",
-    "status": "open"
-  },
-  {
-    "title": "Predictive Analytics Sistemi",
-    "description": "Üretim şirketimiz için talep tahmini, stok optimizasyonu ve bakım planlaması odaklı tahmine dayalı analiz sistemi geliştirmek istiyoruz. Zaman serisi analizi için geçmiş veriler analiz edilmeli. Forecasting models (ARIMA, Prophet, LSTM) kullanılmalı. Deployment için production ortamına alım yapılmalı. API entegrasyonu yapılmalı. Gerçek zamanlı tahminler yapılabilmeli. Confidence intervals hesaplanmalı. Model yönetimi için düzenli retraining yapılmalı. Performance monitoring yapılmalı. Teknoloji olarak Python, ML libraries (scikit-learn, statsmodels, Prophet) kullanılmalı. Dashboard oluşturulmalı. Alerting system kurulmalı.",
-    "budget": 70000,
-    "deadline": "2025-04-25T00:00:00.000Z",
-    "status": "open"
-  },
-  {
-    "title": "Natural Language Processing (NLP) Projesi",
-    "description": "Müşteri hizmetlerimiz için NLP tabanlı chatbot ve sentiment analysis sistemi geliştirmek istiyoruz. Müşteri mesajlarını anlayıp uygun yanıtlar üretecek sistem oluşturulması gerekiyor. NLP özellikleri için text classification yapılmalı. Sentiment analysis yapılmalı. Named entity recognition yapılmalı. Conversational AI kurulmalı. Teknoloji olarak NLTK, spaCy veya transformers (BERT, GPT) kullanılabilir. Labeled dataset hazırlanmalı. API integration yapılmalı. Gerçek zamanlı işleme yapılabilmeli. Değerlendirme için accuracy, F1-score metrikleri hesaplanmalı. Continuous learning yapılmalı. Multilingual support eklenebilir.",
-    "budget": 75000,
+    "title": "Müşteri Davranışı Tahmin Modeli",
+    "description": "E-ticaret platformumuzda müşteri satın alma davranışlarını öngören makine öğrenmesi modeli inşa ediyoruz. Veri toplama, geçmiş satın alma geçmişi, tarama davranışları ve demografik bilgilerin birleştirilmesini sağlıyor. Feature engineering, müşteri segmentasyonu ve davranışsal özelliklerin çıkarılmasını içeriyor. Model geliştirme, Random Forest, Gradient Boosting ve Neural Network algoritmalarının test edilmesini destekliyor. Model değerlendirme, accuracy, precision, recall ve F1-score metrikleri ile performans ölçümü sunuyor. Cross-validation, model genelleştirme yeteneğinin doğrulanmasına izin veriyor. Hyperparameter tuning, model performansının optimize edilmesini içeriyor. Model deployment, production ortamına entegrasyon ve API endpoint oluşturulmasını sağlıyor. A/B testing, model etkinliğinin gerçek dünya senaryolarında test edilmesini destekliyor. Monitoring, model performansının sürekli izlenmesi ve drift tespiti içeriyor. Dokümantasyon, model açıklaması, kullanım kılavuzu ve teknik detayların paylaşılmasını sağlıyor.",
+    "budget": 95000,
     "deadline": "2025-05-05T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "Computer Vision Uygulaması",
-    "description": "Güvenlik ve kalite kontrolü için görüntü analizi ve anomali tespiti sistemi geliştirmek istiyoruz. OpenCV, TensorFlow veya PyTorch kullanılacak. Görüntü işleme için object detection yapılmalı. Image classification yapılmalı. OCR özellikleri eklenmeli. Quality inspection yapılabilmeli. Model geliştirme için deep learning models oluşturulmalı. Labeled dataset hazırlanmalı. Data augmentation yapılmalı. Model optimization yapılmalı. Deployment için gerçek zamanlı işleme yapılabilmeli. API endpoint oluşturulmalı.",
-    "budget": 80000,
+    "title": "Finansal Veri Analizi ve Risk Değerlendirme Sistemi",
+    "description": "Finansal işlemlerin analiz edilmesi ve risk skorlaması için kapsamlı bir analitik platform oluşturuyoruz. Veri işleme, çoklu veri kaynaklarından finansal verilerin toplanması ve temizlenmesini sağlıyor. Anomali tespiti, şüpheli işlemlerin otomatik tespit edilmesini destekliyor. Risk skorlama, işlem risk seviyelerinin hesaplanması ve kategorize edilmesini içeriyor. Trend analizi, finansal trendlerin belirlenmesi ve gelecek tahminlerinin yapılmasına izin veriyor. Raporlama, detaylı risk raporları ve görselleştirmeler sunuyor. Real-time processing, gerçek zamanlı işlem analizi ve anında risk değerlendirmesi sağlıyor. Model retraining, yeni verilerle model güncellemelerinin yapılmasını destekliyor. Compliance, finansal düzenlemelere uyum kontrolü ve raporlama içeriyor. Dashboard, risk metriklerinin görselleştirilmesi ve yönetim kararlarına destek sunuyor. Güvenlik, hassas finansal verilerin korunması ve erişim kontrolü içeriyor.",
+    "budget": 110000,
     "deadline": "2025-05-10T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "Data Pipeline ve ETL",
-    "description": "Çoklu veri kaynaklarından günlük milyonlarca kaydı işleyebilen ETL pipeline geliştirmek istiyoruz. Python ve SQL kullanılacak. ETL süreci için data extraction (databases, APIs, files) yapılmalı. Data transformation yapılmalı. Data loading yapılmalı. Error handling yapılmalı. Otomasyon için scheduling (Airflow, Prefect) yapılandırılmalı. Monitoring yapılmalı. Optimizasyon için incremental loading yapılmalı. Data quality checks yapılmalı. Performance optimization yapılmalı. Dokümantasyon hazırlanmalı. Alerting sistemi kurulmalı.",
-    "budget": 55000,
-    "deadline": "2025-04-10T00:00:00.000Z",
+    "title": "Görüntü İşleme ve Nesne Tanıma Sistemi",
+    "description": "Görüntülerden nesne tanıma ve sınıflandırma için derin öğrenme modeli geliştiriyoruz. Veri hazırlama, görüntü veri setinin toplanması, etiketlenmesi ve ön işleme süreçlerini içeriyor. Model mimarisi, CNN veya transfer learning yaklaşımlarının uygulanmasını sağlıyor. Data augmentation, veri setinin genişletilmesi ve model genelleştirmesinin artırılmasını destekliyor. Training pipeline, model eğitim süreçlerinin otomatikleştirilmesi ve GPU optimizasyonu içeriyor. Model evaluation, test seti üzerinde doğruluk ve performans metriklerinin hesaplanmasına izin veriyor. Inference API, gerçek zamanlı görüntü işleme için API endpoint oluşturulmasını sağlıyor. Batch processing, toplu görüntü işleme ve sonuçların saklanmasını destekliyor. Performance optimization, model hızının artırılması ve kaynak kullanımının optimize edilmesini içeriyor. Dokümantasyon, model kullanımı ve API referansı sunuyor. Monitoring, model performansının izlenmesi ve hata tespiti içeriyor.",
+    "budget": 105000,
+    "deadline": "2025-05-08T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "Recommendation System",
-    "description": "E-ticaret platformumuz için kişiselleştirilmiş ürün önerileri sistemi geliştirmek istiyoruz. Collaborative filtering, content-based filtering, hybrid approach kullanılacak. Algoritma için matrix factorization yapılmalı. Python, ML libraries (scikit-learn, Surprise) kullanılmalı. User-item interaction data hazırlanmalı. Deployment için gerçek zamanlı öneriler yapılabilmeli. API endpoint oluşturulmalı. Değerlendirme için precision, recall, NDCG metrikleri hesaplanmalı. A/B testing yapılabilir. Cold start problem çözümü yapılmalı.",
-    "budget": 70000,
-    "deadline": "2025-04-30T00:00:00.000Z",
+    "title": "Zaman Serisi Tahmin ve Talep Planlama Modeli",
+    "description": "Gelecek dönem taleplerini öngören zaman serisi analizi ve tahmin modeli inşa ediyoruz. Veri toplama, geçmiş satış ve talep verilerinin toplanması ve hazırlanmasını sağlıyor. Zaman serisi analizi, trend, mevsimsellik ve döngüsel pattern'lerin tespit edilmesini destekliyor. Model seçimi, ARIMA, LSTM veya Prophet gibi uygun algoritmaların test edilmesini içeriyor. Feature engineering, harici faktörlerin modele dahil edilmesine izin veriyor. Model validation, geçmiş veriler üzerinde backtesting ve doğruluk ölçümü sunuyor. Tahmin aralıkları, belirsizlik tahminleri ve güven aralıklarının hesaplanmasını destekliyor. Otomatik güncelleme, yeni verilerle modelin periyodik güncellenmesini içeriyor. Raporlama, tahmin sonuçlarının görselleştirilmesi ve yönetim raporları sunuyor. Entegrasyon, ERP veya planlama sistemleri ile veri paylaşımı sağlıyor. Performans izleme, tahmin hatalarının takip edilmesi ve model iyileştirmeleri içeriyor.",
+    "budget": 88000,
+    "deadline": "2025-04-28T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "Data Warehouse Tasarımı",
-    "description": "Kurumsal şirketimiz için farklı kaynaklardan gelen verileri birleştiren data warehouse tasarlamak istiyoruz. Star/snowflake schema kullanılacak. Veri modeli için fact tables, dimension tables oluşturulmalı. ETL processes kurulmalı. Optimal veri yapısı tasarlanmalı. Raporlama için business intelligence raporları oluşturulmalı. OLAP cubes yapılandırılmalı. Altyapı için SQL Server veya PostgreSQL kullanılmalı. Index optimization yapılmalı. Yönetim için data quality management yapılmalı. Dokümantasyon hazırlanmalı. Maintenance plan oluşturulmalı.",
-    "budget": 60000,
-    "deadline": "2025-04-15T00:00:00.000Z",
+    "title": "Doğal Dil İşleme ve Metin Analizi Platformu",
+    "description": "Metin verilerinden anlamlı içgörüler çıkaran NLP tabanlı analitik sistem oluşturuyoruz. Metin ön işleme, tokenization, stemming ve temizleme süreçlerini içeriyor. Sentiment analysis, metinlerin duygu analizi ve pozitif/negatif sınıflandırmasını sağlıyor. Topic modeling, metinlerin konu bazlı gruplandırılması ve ana temaların çıkarılmasını destekliyor. Named entity recognition, kişi, yer ve organizasyon gibi varlıkların tespit edilmesini içeriyor. Text classification, metinlerin kategorilere göre sınıflandırılmasına izin veriyor. Keyword extraction, önemli kelime ve ifadelerin otomatik çıkarılmasını sağlıyor. Summarization, uzun metinlerin özetlenmesi ve ana noktaların belirlenmesini destekliyor. Language detection, metinlerin dil tespiti ve çoklu dil desteği içeriyor. API endpoint, NLP işlemlerinin programatik erişimine olanak veriyor. Dashboard, analiz sonuçlarının görselleştirilmesi ve raporlanmasını sağlıyor.",
+    "budget": 92000,
+    "deadline": "2025-05-01T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "Time Series Forecasting",
-    "description": "Finansal hizmetler şirketimiz için finansal göstergeleri tahmin eden zaman serisi modeli geliştirmek istiyoruz. ARIMA, Prophet veya LSTM kullanılacak. Analiz için time series decomposition (trend, seasonality) yapılmalı. Data preprocessing yapılmalı. Feature engineering yapılmalı. Değerlendirme için MAPE, RMSE metrikleri hesaplanmalı. Cross-validation yapılmalı. Deployment için production ortamına alım yapılmalı. Gerçek zamanlı tahmin yapılabilmeli. Python kullanılmalı. Visualization yapılmalı. Confidence intervals hesaplanmalı. Model retraining yapılmalı.",
-    "budget": 65000,
-    "deadline": "2025-04-20T00:00:00.000Z",
+    "title": "Öneri Sistemi ve Kişiselleştirme Motoru",
+    "description": "Kullanıcı tercihlerine göre içerik önerileri sunan makine öğrenmesi tabanlı öneri sistemi inşa ediyoruz. Veri toplama, kullanıcı etkileşimleri, beğeniler ve geçmiş davranışların toplanmasını sağlıyor. Collaborative filtering, benzer kullanıcıların tercihlerine dayalı öneriler sunuyor. Content-based filtering, içerik özelliklerine göre öneriler üretiyor. Hybrid approach, farklı yöntemlerin birleştirilmesi ile daha doğru öneriler sağlıyor. Real-time recommendations, kullanıcı davranışlarına anında yanıt veren öneriler içeriyor. A/B testing, farklı öneri algoritmalarının performans karşılaştırmasına izin veriyor. Cold start problem, yeni kullanıcılar için başlangıç önerileri stratejisi içeriyor. Diversity, önerilerin çeşitliliğinin sağlanması ve filtre bubble'ın önlenmesini destekliyor. Performance metrics, click-through rate ve conversion metriklerinin izlenmesini sağlıyor. API integration, öneri sisteminin mevcut platforma entegrasyonunu içeriyor.",
+    "budget": 98000,
+    "deadline": "2025-05-03T00:00:00.000Z",
     "status": "open"
   },
   {
-    "title": "Data Visualization ve Dashboard",
-    "description": "İş zekası ekibimiz için karmaşık verileri anlaşılır şekilde sunan interaktif görselleştirme dashboard'u geliştirmek istiyoruz. Python (Plotly/Dash) veya JavaScript (D3.js) kullanılacak. Görselleştirme için interactive visualizations oluşturulmalı. Gerçek zamanlı veri güncellemeleri (WebSocket/polling) yapılabilmeli. Custom charts oluşturulmalı. Analiz için filtreleme, drill-down özellikleri olmalı. Export features eklenmeli. Performans için büyük veri setleri için optimizasyon yapılmalı. User authentication yapılmalı.",
-    "budget": 45000,
-    "deadline": "2025-03-25T00:00:00.000Z",
+    "title": "Sağlık Verisi Analizi ve Teşhis Destek Sistemi",
+    "description": "Tıbbi verilerin analiz edilmesi ve teşhis desteği için veri bilimi çözümü oluşturuyoruz. Veri toplama, hasta kayıtları, test sonuçları ve tıbbi görüntülerin toplanmasını sağlıyor. Veri temizleme, eksik ve hatalı verilerin düzeltilmesi ve standardizasyon içeriyor. Feature extraction, tıbbi özelliklerin çıkarılması ve anlamlı değişkenlerin belirlenmesini destekliyor. Predictive modeling, hastalık riski tahminleri ve teşhis destek modelleri içeriyor. Model validation, klinik doğruluk ve güvenilirlik testlerine izin veriyor. Interpretability, model kararlarının açıklanabilirliği ve doktorlar için anlaşılırlık sunuyor. Privacy protection, hasta verilerinin gizliliğinin korunması ve HIPAA uyumluluğu içeriyor. Clinical integration, mevcut sağlık bilgi sistemleri ile entegrasyon destekliyor. Reporting, analiz sonuçlarının klinik rapor formatında sunulmasını sağlıyor. Continuous learning, yeni verilerle model güncellemelerinin yapılmasını içeriyor.",
+    "budget": 125000,
+    "deadline": "2025-05-12T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Sosyal Medya Analitiği ve Trend Tespiti",
+    "description": "Sosyal medya verilerinden trend analizi ve içgörü çıkarma platformu geliştiriyoruz. Veri toplama, Twitter, Facebook, Instagram gibi platformlardan veri çekme API entegrasyonları içeriyor. Sentiment tracking, marka ve ürün hakkındaki duygu trendlerinin izlenmesini sağlıyor. Influencer identification, etkili kullanıcıların tespit edilmesi ve analiz edilmesini destekliyor. Trend detection, yükselen konuların ve hashtag'lerin otomatik tespit edilmesini içeriyor. Competitor analysis, rakip markaların performans karşılaştırmasına izin veriyor. Crisis detection, olumsuz trendlerin erken tespit edilmesi ve uyarı sistemi sunuyor. Engagement metrics, beğeni, yorum ve paylaşım metriklerinin analiz edilmesini sağlıyor. Audience insights, hedef kitle demografisi ve davranış analizleri içeriyor. Real-time monitoring, canlı sosyal medya aktivitelerinin izlenmesini destekliyor. Reporting, özelleştirilebilir raporlar ve dashboard görünümleri sunuyor.",
+    "budget": 85000,
+    "deadline": "2025-04-25T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Enerji Tüketimi Tahmin ve Optimizasyon Modeli",
+    "description": "Enerji tüketiminin tahmin edilmesi ve optimizasyonu için veri bilimi çözümü oluşturuyoruz. Veri toplama, IoT sensörlerinden enerji tüketim verilerinin toplanmasını sağlıyor. Time series forecasting, gelecek dönem enerji ihtiyacının tahmin edilmesini destekliyor. Pattern recognition, tüketim pattern'lerinin tespit edilmesi ve anomali tespiti içeriyor. Optimization algorithms, enerji maliyetlerinin minimize edilmesi için optimizasyon modelleri sunuyor. Demand response, enerji talebinin yönetilmesi ve yük dengeleme stratejileri içeriyor. Weather integration, hava durumu verilerinin modele dahil edilmesine izin veriyor. Cost analysis, enerji maliyetlerinin analiz edilmesi ve tasarruf fırsatlarının belirlenmesini sağlıyor. Dashboard, tüketim metriklerinin görselleştirilmesi ve raporlanmasını destekliyor. Alerting, anormal tüketim durumlarında uyarı sistemi içeriyor. Integration, enerji yönetim sistemleri ile veri paylaşımı sağlıyor.",
+    "budget": 95000,
+    "deadline": "2025-05-05T00:00:00.000Z",
+    "status": "open"
+  },
+  {
+    "title": "Veri Gölü ve Büyük Veri İşleme Altyapısı",
+    "description": "Büyük veri setlerinin saklanması ve işlenmesi için veri gölü mimarisi kuruyoruz. Data lake setup, Hadoop veya cloud-based çözümler ile merkezi veri depolama sunuyor. ETL pipelines, çoklu kaynaklardan veri çekme, dönüştürme ve yükleme süreçlerini otomatikleştiriyor. Data catalog, veri envanterinin yönetilmesi ve metadata yönetimi içeriyor. Data quality, veri kalitesi kontrolleri ve temizleme süreçlerini destekliyor. Batch processing, büyük veri setlerinin toplu işlenmesi için Spark veya benzeri araçlar içeriyor. Stream processing, gerçek zamanlı veri işleme ve Kafka entegrasyonu sağlıyor. Data governance, veri erişim kontrolü ve güvenlik politikalarının uygulanmasına izin veriyor. Analytics layer, SQL sorguları ve analitik araçların entegrasyonunu içeriyor. Monitoring, veri pipeline'larının izlenmesi ve hata yönetimi sunuyor. Documentation, veri şemaları ve iş kurallarının dokümante edilmesini destekliyor.",
+    "budget": 115000,
+    "deadline": "2025-05-10T00:00:00.000Z",
     "status": "open"
   }
 ]

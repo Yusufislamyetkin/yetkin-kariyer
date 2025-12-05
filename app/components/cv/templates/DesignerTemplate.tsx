@@ -220,6 +220,61 @@ export default function DesignerTemplate({ data }: DesignerTemplateProps) {
                   </div>
                 </section>
               )}
+              {data.certifications.length > 0 && (
+                <section>
+                  <div className="h-0.5 w-12 bg-pink-500 mb-1"></div>
+                  <h2 className="text-lg font-bold mb-2 text-gray-900">Sertifikalar</h2>
+                  <div className="space-y-1">
+                    {data.certifications.map((cert, index) => (
+                      <div key={index} className="border-l-4 border-pink-500 pl-2">
+                        <h3 className="font-bold text-gray-900 text-xs">{cert.name}</h3>
+                        <p className="text-pink-600 font-medium text-xs">{cert.issuer}</p>
+                        {cert.date && <p className="text-gray-600 text-xs mt-0.5">{cert.date}</p>}
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+              {data.languages.length > 0 && (
+                <section>
+                  <div className="h-0.5 w-12 bg-pink-500 mb-1"></div>
+                  <h2 className="text-lg font-bold mb-2 text-gray-900">Diller</h2>
+                  <div className="space-y-1">
+                    {data.languages.map((lang, index) => (
+                      <div key={index} className="flex justify-between items-center">
+                        <span className="text-gray-900 font-medium text-xs">{lang.name}</span>
+                        <span className="text-pink-600 text-xs">{lang.level}</span>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+              {data.hobbies.length > 0 && (
+                <section>
+                  <div className="h-0.5 w-12 bg-pink-500 mb-1"></div>
+                  <h2 className="text-lg font-bold mb-2 text-gray-900">Hobiler</h2>
+                  <div className="flex flex-wrap gap-1">
+                    {data.hobbies.map((hobby, index) => (
+                      <span key={index} className="px-2 py-0.5 bg-black text-white rounded text-xs font-semibold">{hobby}</span>
+                    ))}
+                  </div>
+                </section>
+              )}
+              {data.references.length > 0 && (
+                <section>
+                  <div className="h-0.5 w-12 bg-pink-500 mb-1"></div>
+                  <h2 className="text-lg font-bold mb-2 text-gray-900">Referanslar</h2>
+                  <div className="space-y-1">
+                    {data.references.map((ref, index) => (
+                      <div key={index} className="border-l-4 border-pink-500 pl-2">
+                        <p className="font-bold text-gray-900 text-xs">{ref.name}</p>
+                        <p className="text-pink-600 font-medium text-xs">{ref.position}, {ref.company}</p>
+                        <p className="text-gray-600 text-xs mt-0.5">{ref.email} | {ref.phone}</p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
             </div>
           </div>
         </div>

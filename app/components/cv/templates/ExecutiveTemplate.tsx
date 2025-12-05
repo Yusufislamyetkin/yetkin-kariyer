@@ -287,6 +287,22 @@ export default function ExecutiveTemplate({ data }: ExecutiveTemplateProps) {
                 </section>
               )}
 
+              {/* Hobbies */}
+              {data.hobbies.length > 0 && (
+                <section className="bg-gray-50 p-3 rounded mb-2">
+                  <h2 className="text-base font-bold mb-1 text-gray-900 uppercase tracking-wide border-b-2 border-gray-900 pb-1">
+                    Hobiler
+                  </h2>
+                  <div className="flex flex-wrap gap-1">
+                    {data.hobbies.map((hobby, index) => (
+                      <span key={index} className="px-2 py-0.5 bg-white border border-gray-300 rounded text-xs text-gray-900">
+                        {hobby}
+                      </span>
+                    ))}
+                  </div>
+                </section>
+              )}
+
               {/* References */}
               {data.references.length > 0 && (
                 <section className="bg-gray-50 p-3 rounded">

@@ -32,12 +32,20 @@ export async function POST(
       );
     }
 
-    // Check if already a bot
+    // Check if already a bot (but allow reactivation if botCharacter exists)
     if (user.isBot) {
-      return NextResponse.json(
-        { error: "Bu kullanıcı zaten bot olarak atanmış" },
-        { status: 400 }
-      );
+      // Check if botCharacter exists - if not, allow creation
+      const existingBotCharacter = await db.botCharacter.findUnique({
+        where: { userId },
+      });
+      
+      if (existingBotCharacter) {
+        return NextResponse.json(
+          { error: "Bu kullanıcı zaten bot olarak atanmış" },
+          { status: 400 }
+        );
+      }
+      // If isBot is true but no botCharacter exists, continue to create one
     }
 
     // Default bot character data
@@ -53,9 +61,17 @@ export async function POST(
         data: { isBot: true },
       });
 
-      // Create bot character
-      const botCharacter = await tx.botCharacter.create({
-        data: {
+      // Create or update bot character (upsert to handle existing records)
+      const botCharacter = await tx.botCharacter.upsert({
+        where: { userId },
+        update: {
+          name: body.characterName || user.name || "Bot",
+          persona: defaultPersona,
+          systemPrompt: defaultSystemPrompt,
+          traits: body.traits || {},
+          expertise: defaultExpertise,
+        },
+        create: {
           userId,
           name: body.characterName || user.name || "Bot",
           persona: defaultPersona,
@@ -65,9 +81,30 @@ export async function POST(
         },
       });
 
-      // Create bot configuration with defaults or provided values
-      const botConfig = await tx.botConfiguration.create({
-        data: {
+      // Create or update bot configuration with defaults or provided values
+      const botConfig = await tx.botConfiguration.upsert({
+        where: { userId },
+        update: {
+          isActive: body.isActive !== undefined ? body.isActive : true,
+          minPostsPerDay: body.minPostsPerDay ?? 1,
+          maxPostsPerDay: body.maxPostsPerDay ?? 3,
+          minCommentsPerDay: body.minCommentsPerDay ?? 0,
+          maxCommentsPerDay: body.maxCommentsPerDay ?? 5,
+          minLikesPerDay: body.minLikesPerDay ?? 0,
+          maxLikesPerDay: body.maxLikesPerDay ?? 10,
+          minTestsPerWeek: body.minTestsPerWeek ?? 0,
+          maxTestsPerWeek: body.maxTestsPerWeek ?? 3,
+          minLiveCodingPerWeek: body.minLiveCodingPerWeek ?? 0,
+          maxLiveCodingPerWeek: body.maxLiveCodingPerWeek ?? 2,
+          minBugFixPerWeek: body.minBugFixPerWeek ?? 0,
+          maxBugFixPerWeek: body.maxBugFixPerWeek ?? 2,
+          minLessonsPerWeek: body.minLessonsPerWeek ?? 0,
+          maxLessonsPerWeek: body.maxLessonsPerWeek ?? 5,
+          minChatMessagesPerDay: body.minChatMessagesPerDay ?? 0,
+          maxChatMessagesPerDay: body.maxChatMessagesPerDay ?? 10,
+          activityHours: body.activityHours || [9, 12, 18, 21],
+        },
+        create: {
           userId,
           isActive: body.isActive !== undefined ? body.isActive : true,
           minPostsPerDay: body.minPostsPerDay ?? 1,
