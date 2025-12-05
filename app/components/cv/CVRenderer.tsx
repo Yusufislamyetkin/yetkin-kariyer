@@ -105,91 +105,140 @@ interface CVRendererProps {
   id?: string; // For PDF generation targeting
 }
 
+const createEmptyCvData = (): CVData => ({
+  personalInfo: {
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+    linkedin: "",
+    website: "",
+    profilePhoto: undefined,
+  },
+  summary: "",
+  experience: [],
+  education: [],
+  skills: [],
+  languages: [],
+  projects: [],
+  achievements: [],
+  certifications: [],
+  references: [],
+  hobbies: [],
+});
+
+const normalizeCvData = (data: any): CVData => {
+  const base = createEmptyCvData();
+  if (!data || typeof data !== "object") {
+    return base;
+  }
+
+  return {
+    personalInfo: {
+      ...base.personalInfo,
+      ...(data.personalInfo ?? {}),
+    },
+    summary: typeof data.summary === "string" ? data.summary : "",
+    experience: Array.isArray(data.experience) ? data.experience : [],
+    education: Array.isArray(data.education) ? data.education : [],
+    skills: Array.isArray(data.skills) ? data.skills : [],
+    languages: Array.isArray(data.languages) ? data.languages : [],
+    projects: Array.isArray(data.projects) ? data.projects : [],
+    achievements: Array.isArray(data.achievements) ? data.achievements : [],
+    certifications: Array.isArray(data.certifications) ? data.certifications : [],
+    references: Array.isArray(data.references) ? data.references : [],
+    hobbies: Array.isArray(data.hobbies) ? data.hobbies : [],
+  };
+};
+
 export default function CVRenderer({ data, templateId, className = '', id }: CVRendererProps) {
+  // Normalize CV data to ensure all fields are present and valid
+  const normalizedData = normalizeCvData(data);
+  
   // Normalize template ID to handle different formats
   const normalizedTemplateId = templateId.toLowerCase();
   
   // Select template based on templateId
   const renderTemplate = () => {
     if (normalizedTemplateId.includes('modern') || normalizedTemplateId === 'template_1') {
-      return <ModernTemplate data={data} />;
+      return <ModernTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('classic') || normalizedTemplateId === 'template_2') {
-      return <ClassicTemplate data={data} />;
+      return <ClassicTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('creative') || normalizedTemplateId === 'template_3') {
-      return <CreativeTemplate data={data} />;
+      return <CreativeTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('professional') || normalizedTemplateId === 'template_4') {
-      return <ProfessionalTemplate data={data} />;
+      return <ProfessionalTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('minimal')) {
-      return <MinimalTemplate data={data} />;
+      return <MinimalTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('executive-premium')) {
-      return <ExecutivePremiumTemplate data={data} />;
+      return <ExecutivePremiumTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('executive')) {
-      return <ExecutiveTemplate data={data} />;
+      return <ExecutiveTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('colorful')) {
-      return <ColorfulTemplate data={data} />;
+      return <ColorfulTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('tech')) {
-      return <TechTemplate data={data} />;
+      return <TechTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('academic')) {
-      return <AcademicTemplate data={data} />;
+      return <AcademicTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('startup')) {
-      return <StartupTemplate data={data} />;
+      return <StartupTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('designer')) {
-      return <DesignerTemplate data={data} />;
+      return <DesignerTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('finance')) {
-      return <FinanceTemplate data={data} />;
+      return <FinanceTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('medical')) {
-      return <MedicalTemplate data={data} />;
+      return <MedicalTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('legal')) {
-      return <LegalTemplate data={data} />;
+      return <LegalTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('marketing')) {
-      return <MarketingTemplate data={data} />;
+      return <MarketingTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('engineering')) {
-      return <EngineeringTemplate data={data} />;
+      return <EngineeringTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('sales')) {
-      return <SalesTemplate data={data} />;
+      return <SalesTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('education')) {
-      return <EducationTemplate data={data} />;
+      return <EducationTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('artistic')) {
-      return <ArtisticTemplate data={data} />;
+      return <ArtisticTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('bold')) {
-      return <BoldTemplate data={data} />;
+      return <BoldTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('elegant')) {
-      return <ElegantTemplate data={data} />;
+      return <ElegantTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('corporate')) {
-      return <CorporateTemplate data={data} />;
+      return <CorporateTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('innovative')) {
-      return <InnovativeTemplate data={data} />;
+      return <InnovativeTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('timeline')) {
-      return <TimelineTemplate data={data} />;
+      return <TimelineTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('portfolio')) {
-      return <PortfolioTemplate data={data} />;
+      return <PortfolioTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('ats-focused') || normalizedTemplateId.includes('atsfocused')) {
-      return <ATSFocusedTemplate data={data} />;
+      return <ATSFocusedTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('international')) {
-      return <InternationalTemplate data={data} />;
+      return <InternationalTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('bilingual')) {
-      return <BilingualTemplate data={data} />;
+      return <BilingualTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('compact')) {
-      return <CompactTemplate data={data} />;
+      return <CompactTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('detailed')) {
-      return <DetailedTemplate data={data} />;
+      return <DetailedTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('developer')) {
-      return <DeveloperTemplate data={data} />;
+      return <DeveloperTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('devops')) {
-      return <DevOpsTemplate data={data} />;
+      return <DevOpsTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('research')) {
-      return <ResearchTemplate data={data} />;
+      return <ResearchTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('consultant')) {
-      return <ConsultantTemplate data={data} />;
+      return <ConsultantTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('entrepreneur')) {
-      return <EntrepreneurTemplate data={data} />;
+      return <EntrepreneurTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('student')) {
-      return <StudentTemplate data={data} />;
+      return <StudentTemplate data={normalizedData} />;
     } else if (normalizedTemplateId.includes('hybrid')) {
-      return <HybridTemplate data={data} />;
+      return <HybridTemplate data={normalizedData} />;
     }
     // Default to Modern template
-    return <ModernTemplate data={data} />;
+    return <ModernTemplate data={normalizedData} />;
   };
 
   return (

@@ -78,7 +78,7 @@
       "testCases": [
         {
           "input": "numbers = [5, 10, 15, 20, 25]",
-          "expectedOutput": "Array: 5,10,15,20,25\nSum: 75\nMax: 25\nMin: 5\nAverage: 15"
+          "expectedOutput": "Array: [5, 10, 15, 20, 25]\nSum: 75\nMax: 25\nMin: 5\nAverage: 15"
         }
       ],
       "hints": [
@@ -141,7 +141,7 @@
       "testCases": [
         {
           "input": "",
-          "expectedOutput": "Numbers divisible by 3: 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60, 63, 66, 69, 72, 75, 78, 81, 84, 87, 90, 93, 96, 99\nSum: 1683"
+          "expectedOutput": "Numbers divisible by 3: 3, 6, 9, 12, 15, ... 99\nSum: 1683"
         }
       ],
       "hints": [
@@ -162,7 +162,7 @@
       "testCases": [
         {
           "input": "",
-          "expectedOutput": "Names: [ 'Alice', 'Bob', 'Charlie', 'David', 'Eve' ]\nGrades:\nAlice: 85\nBob: 92\nCharlie: 78"
+          "expectedOutput": "Names: ['Alice', 'Bob', 'Charlie', 'David', 'Eve']\nGrades:\nAlice: 85\nBob: 92\nCharlie: 78"
         }
       ],
       "hints": [
@@ -183,7 +183,7 @@
       "testCases": [
         {
           "input": "",
-          "expectedOutput": "Original Matrix:\n[ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 7, 8, 9 ] ]\nTransposed Matrix:\n[ [ 1, 4, 7 ], [ 2, 5, 8 ], [ 3, 6, 9 ] ]"
+          "expectedOutput": "Original Matrix:\n[[1, 2, 3], [4, 5, 6], [7, 8, 9]]\nTransposed Matrix:\n[[1, 4, 7], [2, 5, 8], [3, 6, 9]]"
         }
       ],
       "hints": [
@@ -204,7 +204,7 @@
       "testCases": [
         {
           "input": "sentence = \"The quick brown fox\"",
-          "expectedOutput": "Words: [\"dog\",\"lazy\",\"the\",\"over\",\"jumps\",\"fox\",\"brown\",\"quick\",\"The\"]\nWord lengths: [3,5,5,3,5,4,3,4,3]\nLongest word: jumps\nVowel count: 11\nReversed: dog lazy the over jumps fox brown quick The"
+          "expectedOutput": "Words: ['The', 'quick', 'brown', 'fox']\nWord lengths: [3, 5, 5, 3]\nLongest word: quick\nVowel count: 5\nReversed: xof nworb kciuq ehT"
         }
       ],
       "hints": [
@@ -246,7 +246,7 @@
       "testCases": [
         {
           "input": "",
-          "expectedOutput": "Name: John Doe\nAge: 30\nEmail: john.doe@example.com\nJohn Doe, 30 years old, john.doe@example.com"
+          "expectedOutput": "Name: John Doe\nAge: 30\nEmail: john.doe@example.com\nDisplayInfo: John Doe, 30 years old, john.doe@example.com"
         }
       ],
       "hints": [
@@ -309,7 +309,7 @@
       "testCases": [
         {
           "input": "",
-          "expectedOutput": "Charlie: 92\nAlice: 85\nDavid: 78"
+          "expectedOutput": "Filtered and sorted:\nCharlie: 92\nAlice: 85\nDavid: 78"
         }
       ],
       "hints": [
@@ -330,7 +330,7 @@
       "testCases": [
         {
           "input": "n = 20",
-          "expectedOutput": "Is 17 prime? true\nPrimes up to 20: 2,3,5,7,11,13,17,19"
+          "expectedOutput": "Is 17 prime? true\nPrimes up to 20: [2, 3, 5, 7, 11, 13, 17, 19]"
         }
       ],
       "hints": [
@@ -351,7 +351,7 @@
       "testCases": [
         {
           "input": "target = 11",
-          "expectedOutput": "Found at index: 5"
+          "expectedOutput": "Array: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]\nTarget: 11\nFound at index: 5"
         }
       ],
       "hints": [
@@ -372,7 +372,7 @@
       "testCases": [
         {
           "input": "array = [10, 9, 2, 5, 3, 7, 101, 18]",
-          "expectedOutput": "LIS length: 4\nLIS: [2,5,7,101]"
+          "expectedOutput": "Array: [10, 9, 2, 5, 3, 7, 101, 18]\nLIS length: 4\nLIS: [2, 5, 7, 18]"
         }
       ],
       "hints": [
@@ -393,7 +393,7 @@
       "testCases": [
         {
           "input": "values = [5, 3, 7, 2, 4, 6, 8]",
-          "expectedOutput": "Inorder traversal: 2, 3, 4, 5, 6, 7, 8\nSearch 4: Found\nSearch 9: Not Found"
+          "expectedOutput": "Inserting: 5, 3, 7, 2, 4, 6, 8\nInorder traversal: 2, 3, 4, 5, 6, 7, 8\nSearch 4: Found\nSearch 9: Not Found"
         }
       ],
       "hints": [
@@ -414,7 +414,7 @@
       "testCases": [
         {
           "input": "",
-          "expectedOutput": "Log: Application started\nLog: User logged in\nLog: Processing data\nAll logs:\nApplication started\nUser logged in\nProcessing data"
+          "expectedOutput": "Logger instance created\nLog: Application started\nLog: User logged in\nLog: Processing data\nAll logs:\nApplication started\nUser logged in\nProcessing data"
         }
       ],
       "hints": [
@@ -435,7 +435,7 @@
       "testCases": [
         {
           "input": "target = 9",
-          "expectedOutput": "[ [ 2, 7 ], [ 3, 6 ] ]"
+          "expectedOutput": "Array: [2, 7, 11, 15, 3, 6]\nTarget: 9\nPairs: [[2, 7], [3, 6]]"
         }
       ],
       "hints": [
@@ -456,7 +456,7 @@
       "testCases": [
         {
           "input": "str1 = \"ABCDGH\", str2 = \"AEDFHR\"",
-          "expectedOutput": "LCS length: 3"
+          "expectedOutput": "String 1: ABCDGH\nString 2: AEDFHR\nLCS length: 3\nLCS: ADH"
         }
       ],
       "hints": [
@@ -477,7 +477,7 @@
       "testCases": [
         {
           "input": "graph with nodes: 0,1,2,3,4",
-          "expectedOutput": "Graph:\n0 -> [1,2]\n1 -> [3]\n2 -> [4]\n3 -> [4]\nDFS starting from 0:\n0\n1\n3\n4\n2"
+          "expectedOutput": "Graph:\n0 -> [1, 2]\n1 -> [3]\n2 -> [4]\n3 -> [4]\nDFS starting from 0: [0, 1, 3, 4, 2]"
         }
       ],
       "hints": [
@@ -498,7 +498,7 @@
       "testCases": [
         {
           "input": "capacity = 2",
-          "expectedOutput": "Cache created with capacity 2\nGet(1): 1\nGet(2): -1\nGet(3): 3"
+          "expectedOutput": "Cache created with capacity 2\nPut(1, 1)\nPut(2, 2)\nGet(1): 1\nPut(3, 3)\nGet(2): -1 (evicted)\nGet(3): 3"
         }
       ],
       "hints": [
@@ -509,3 +509,4 @@
     }
   ]
 }
+

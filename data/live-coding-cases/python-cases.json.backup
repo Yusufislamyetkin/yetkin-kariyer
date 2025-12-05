@@ -14,7 +14,7 @@
       "testCases": [
         {
           "input": "",
-          "expectedOutput": "Hello World 1\nHello World 2\nHello World 3\nHello World 4\nHello World 5\nHello World 6\nHello World 7\nHello World 8\nHello World 9\nHello World 10\nHello World 11\nHello World 12\nHello World 13\nHello World 14\nHello World 15\nHello World 16\nHello World 17\nHello World 18\nHello World 19\nHello World 20\nHello World 21\nHello World 22\nHello World 23\nHello World 24\nHello World 25\nHello World 26\nHello World 27\nHello World 28\nHello World 29\nHello World 30\nHello World 31\nHello World 32\nHello World 33\nHello World 34\nHello World 35\nHello World 36\nHello World 37\nHello World 38\nHello World 39\nHello World 40\nHello World 41\nHello World 42\nHello World 43\nHello World 44\nHello World 45\nHello World 46\nHello World 47\nHello World 48\nHello World 49\nHello World 50"
+          "expectedOutput": "Hello World 1\nHello World 2\nHello World 3\n...\nHello World 50"
         }
       ],
       "hints": [
@@ -35,7 +35,7 @@
       "testCases": [
         {
           "input": "a=10, b=5",
-          "expectedOutput": "File \"/piston/jobs/fdfc1ecf-c637-47bf-b9ae-9e801dfff5e3/main.py\", line 1\na = 10 // İlk sayı tanımlandı\n^^^^^^^^^^^^^^^^^\nSyntaxError: invalid syntax. Perhaps you forgot a comma?"
+          "expectedOutput": "10 + 5 = 15\n10 - 5 = 5\n10 * 5 = 50\n10 / 5 = 2.0"
         }
       ],
       "hints": [
@@ -56,7 +56,7 @@
       "testCases": [
         {
           "input": "text=\"Hello World\"",
-          "expectedOutput": "File \"/piston/jobs/ea647b73-f72e-4ea0-93f3-91b7d08f6a48/main.py\", line 1\ntext = \"Hello World\" // Metin değişkeni tanımlandı\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nSyntaxError: invalid syntax. Perhaps you forgot a comma?"
+          "expectedOutput": "Length: 11\nUppercase: HELLO WORLD\nLowercase: hello world\nReversed: dlroW olleH\nCount of 'l': 3"
         }
       ],
       "hints": [
@@ -78,7 +78,7 @@
       "testCases": [
         {
           "input": "numbers = [5, 10, 15, 20, 25]",
-          "expectedOutput": "File \"/piston/jobs/3b1c649c-f808-4d07-8bb4-d5689ece6539/main.py\", line 1\nnumbers = [5, 10, 15, 20, 25] // Liste tanımlandı\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nSyntaxError: invalid syntax. Perhaps you forgot a comma?"
+          "expectedOutput": "List: [5, 10, 15, 20, 25]\nSum: 75\nMax: 25\nMin: 5\nAverage: 15.0"
         }
       ],
       "hints": [
@@ -99,7 +99,7 @@
       "testCases": [
         {
           "input": "number = 42",
-          "expectedOutput": "File \"/piston/jobs/4e859f4d-a911-44ab-864b-aa1726c3bf21/main.py\", line 13\ngreater_than_100 = number > 100 // 100'den büyük kontrolü\n^\nSyntaxError: unterminated string literal (detected at line 13)"
+          "expectedOutput": "Number: 42\nPositive: True\nNegative: False\nZero: False\nEven: True\nOdd: False\nGreater than 100: False\nLess than 100: True"
         }
       ],
       "hints": [
@@ -120,7 +120,7 @@
       "testCases": [
         {
           "input": "a=20, b=4",
-          "expectedOutput": "File \"/piston/jobs/b87e1f2a-c5f0-4f36-b5cb-f8340c9cf79b/main.py\", line 1\na = 20 // İlk sayı\n^^^^^^^^^^^^^^^^^\nSyntaxError: invalid syntax. Perhaps you forgot a comma?"
+          "expectedOutput": "Add: 24\nSubtract: 16\nMultiply: 80\nDivide: 5.0"
         }
       ],
       "hints": [
@@ -141,7 +141,7 @@
       "testCases": [
         {
           "input": "",
-          "expectedOutput": "File \"/piston/jobs/8a950389-f0f6-4c73-8ee5-e2be08ff27ee/main.py\", line 9\nprint(f'\n^\nSyntaxError: unterminated string literal (detected at line 9)"
+          "expectedOutput": "Numbers divisible by 3: 3, 6, 9, 12, 15, ... 99\nSum: 1683"
         }
       ],
       "hints": [
@@ -204,7 +204,7 @@
       "testCases": [
         {
           "input": "sentence = \"The quick brown fox\"",
-          "expectedOutput": "File \"/piston/jobs/8ab1453f-f573-4a8f-8ee5-93920304bd19/main.py\", line 1\nsentence = \"The quick brown fox jumps over the lazy dog\" // Cümle tanımlandı\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nSyntaxError: invalid syntax. Perhaps you forgot a comma?"
+          "expectedOutput": "Words: ['The', 'quick', 'brown', 'fox']\nWord lengths: [3, 5, 5, 3]\nLongest word: quick\nVowel count: 5\nReversed: xof nworb kciuq ehT"
         }
       ],
       "hints": [
@@ -246,7 +246,7 @@
       "testCases": [
         {
           "input": "",
-          "expectedOutput": "File \"/piston/jobs/fbcbf00d-a234-47de-9302-fd6904def290/main.py\", line 1\nclass Person: // Person sınıfını tanımlıyoruz\n^^\nSyntaxError: invalid syntax"
+          "expectedOutput": "Name: John Doe\nAge: 30\nEmail: john.doe@example.com\nDisplayInfo: John Doe, 30 years old, john.doe@example.com"
         }
       ],
       "hints": [
@@ -267,7 +267,7 @@
       "testCases": [
         {
           "input": "",
-          "expectedOutput": "File \"/piston/jobs/d47fc8cd-0d79-49eb-ae87-5ac6be3401a8/main.py\", line 1\nimport os // Gerekli kütüphane import edildi\n^^\nSyntaxError: invalid syntax"
+          "expectedOutput": "Writing to file:\nLine 1\nLine 2\nLine 3\nLine 4\nLine 5\nReading from file:\nLine 1\nLine 2\nLine 3\nLine 4\nLine 5"
         }
       ],
       "hints": [
@@ -288,7 +288,7 @@
       "testCases": [
         {
           "input": "numbers = [1, 2, 3, 2, 4, 3, 5, 3, 2, 1]",
-          "expectedOutput": "Duplicates: [1, 2, 3]\nMost frequent: 2\nCount: 3"
+          "expectedOutput": "Duplicates: [1, 2, 3]\nMost frequent: 3\nCount: 3"
         }
       ],
       "hints": [
@@ -309,7 +309,7 @@
       "testCases": [
         {
           "input": "",
-          "expectedOutput": "Charlie: 92\nAlice: 85\nDavid: 78"
+          "expectedOutput": "Filtered and sorted:\nCharlie: 92\nAlice: 85\nDavid: 78"
         }
       ],
       "hints": [
@@ -351,7 +351,7 @@
       "testCases": [
         {
           "input": "target = 11",
-          "expectedOutput": "Found at index: 5"
+          "expectedOutput": "List: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]\nTarget: 11\nFound at index: 5"
         }
       ],
       "hints": [
@@ -372,7 +372,7 @@
       "testCases": [
         {
           "input": "array = [10, 9, 2, 5, 3, 7, 101, 18]",
-          "expectedOutput": "LIS length: 4\nLIS: [2, 5, 7, 101]"
+          "expectedOutput": "Array: [10, 9, 2, 5, 3, 7, 101, 18]\nLIS length: 4\nLIS: [2, 5, 7, 18]"
         }
       ],
       "hints": [
@@ -393,7 +393,7 @@
       "testCases": [
         {
           "input": "values = [5, 3, 7, 2, 4, 6, 8]",
-          "expectedOutput": "Inorder traversal: 2, 3, 4, 5, 6, 7, 8,\nSearch 4: Found\nSearch 9: Not Found"
+          "expectedOutput": "Inserting: 5, 3, 7, 2, 4, 6, 8\nInorder traversal: 2, 3, 4, 5, 6, 7, 8\nSearch 4: Found\nSearch 9: Not Found"
         }
       ],
       "hints": [
@@ -456,7 +456,7 @@
       "testCases": [
         {
           "input": "str1 = \"ABCDGH\", str2 = \"AEDFHR\"",
-          "expectedOutput": "File \"/piston/jobs/74e152b0-764b-436c-a92f-19d4af41aaf8/main.py\", line 6\nm = len(X) // X'in uzunluğu\n^\nSyntaxError: unterminated string literal (detected at line 6)"
+          "expectedOutput": "String 1: ABCDGH\nString 2: AEDFHR\nLCS length: 3\nLCS: ADH"
         }
       ],
       "hints": [
@@ -477,7 +477,7 @@
       "testCases": [
         {
           "input": "graph with nodes: 0,1,2,3,4",
-          "expectedOutput": "Traceback (most recent call last):\nFile \"/piston/jobs/ff87786f-ff6b-48f5-b6be-062498cae8e8/main.py\", line 18, in <module>\ndfs(0) # 0'dan DFS'e başlıyoruz\nFile \"/piston/jobs/ff87786f-ff6b-48f5-b6be-062498cae8e8/main.py\", line 14, in dfs\ndfs(neighbor) # Rekürsif olarak DFS'i çağır\nFile \"/piston/jobs/ff87786f-ff6b-48f5-b6be-062498cae8e8/main.py\", line 14, in dfs\ndfs(neighbor) # Rekürsif olarak DFS'i çağır\nFile \"/piston/jobs/ff87786f-ff6b-48f5-b6be-062498cae8e8/main.py\", line 14, in dfs\ndfs(neighbor) # Rekürsif olarak DFS'i çağır\nFile \"/piston/jobs/ff87786f-ff6b-48f5-b6be-062498cae8e8/main.py\", line 13, in dfs\nfor neighbor in graph[node]: # Komşuları gez\nKeyError: 4"
+          "expectedOutput": "Graph:\n0 -> [1, 2]\n1 -> [3]\n2 -> [4]\n3 -> [4]\nDFS starting from 0: [0, 1, 3, 4, 2]"
         }
       ],
       "hints": [
@@ -498,7 +498,7 @@
       "testCases": [
         {
           "input": "capacity = 2",
-          "expectedOutput": "Cache created with capacity 2\nGet(1): 1\nGet(2): -1\nGet(3): 3"
+          "expectedOutput": "Cache created with capacity 2\nPut(1, 1)\nPut(2, 2)\nGet(1): 1\nPut(3, 3)\nGet(2): -1 (evicted)\nGet(3): 3"
         }
       ],
       "hints": [
@@ -509,3 +509,4 @@
     }
   ]
 }
+

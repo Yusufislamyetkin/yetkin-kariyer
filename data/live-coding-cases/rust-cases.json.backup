@@ -1,15 +1,15 @@
 {
-  "id": "javascript",
-  "name": "JavaScript",
+  "id": "rust",
+  "name": "Rust",
   "cases": [
     {
-      "id": "javascript-case-1",
+      "id": "rust-case-1",
       "title": "Sayisal Cikti Dongusu",
       "description": "1'den 50'ye kadar sayilari ekrana yazdirin.",
       "difficulty": "beginner",
       "instructions": "1'den 50'ye kadar olan sayilari ekrana yazdirin. Her satirda bir sayi olsun ve format su sekilde olsun: 'Hello World 1', 'Hello World 2', ... 'Hello World 50'",
       "starterCode": {
-        "javascript": "// Kodunu buraya yaz\n"
+        "rust": "fn main() {\n    // Kodunu buraya yaz\n}"
       },
       "testCases": [
         {
@@ -18,19 +18,19 @@
         }
       ],
       "hints": [
-        "for dongusu kullanabilirsiniz",
-        "console.log() ile cikti alabilirsiniz",
-        "Template literals (backticks) kullanabilirsiniz"
+        "for dongusu ve range kullanabilirsiniz",
+        "println!() macro ile cikti alabilirsiniz",
+        "format!() macro ile formatlanmis string olusturabilirsiniz"
       ]
     },
     {
-      "id": "javascript-case-2",
+      "id": "rust-case-2",
       "title": "Temel Matematik Islemleri",
       "description": "Iki sayi uzerinde temel matematik islemleri yapin.",
       "difficulty": "beginner",
       "instructions": "Iki sayi (a ve b) tanimlayin ve bu sayilar uzerinde toplama, cikarma, carpma ve bolme islemlerini yaparak sonuclari ekrana yazdirin. Ornek: a=10, b=5 icin '10 + 5 = 15', '10 - 5 = 5', '10 * 5 = 50', '10 / 5 = 2'",
       "starterCode": {
-        "javascript": "const a = 10;\nconst b = 5;\n// Kodunu buraya yaz\n"
+        "rust": "fn main() {\n    let a = 10;\n    let b = 5;\n    // Kodunu buraya yaz\n}"
       },
       "testCases": [
         {
@@ -41,17 +41,17 @@
       "hints": [
         "Dort islem operatorlerini kullanin: +, -, *, /",
         "Bolme isleminde sifira bolme kontrolu yapin",
-        "console.log() ile sonuclari yazdirin"
+        "println!() ile formatlanmis cikti alabilirsiniz"
       ]
     },
     {
-      "id": "javascript-case-3",
+      "id": "rust-case-3",
       "title": "String Islemleri",
       "description": "Metin uzerinde temel string islemleri yapin.",
       "difficulty": "beginner",
       "instructions": "Bir string alin ve su islemleri yapin: 1) String'in uzunlugunu bulun, 2) String'i buyuk harfe cevirin, 3) String'i kucuk harfe cevirin, 4) String'in tersini alin, 5) String icinde belirli bir karakteri sayin. Tum sonuclari ekrana yazdirin.",
       "starterCode": {
-        "javascript": "const text = \"Hello World\";\n// Kodunu buraya yaz\n"
+        "rust": "fn main() {\n    let text = \"Hello World\";\n    // Kodunu buraya yaz\n}"
       },
       "testCases": [
         {
@@ -60,41 +60,41 @@
         }
       ],
       "hints": [
-        "text.length ile uzunluk bulunur",
-        "text.toUpperCase() ve text.toLowerCase() kullanin",
-        "text.split('').reverse().join('') ile tersine cevirebilirsiniz",
-        "text.split('l').length - 1 ile karakter sayisi bulunur"
+        "text.len() ile uzunluk bulunur",
+        "text.to_uppercase() ve text.to_lowercase() kullanin",
+        "chars().rev().collect() ile tersine cevirebilirsiniz",
+        "matches() ile karakter sayisi bulunur"
       ]
     },
     {
-      "id": "javascript-case-4",
-      "title": "Array Islemleri",
-      "description": "Dizi uzerinde temel islemler yapin.",
+      "id": "rust-case-4",
+      "title": "Vector Islemleri",
+      "description": "Vector uzerinde temel islemler yapin.",
       "difficulty": "beginner",
-      "instructions": "Bir dizi olusturun ve su islemleri yapin: 1) Dizinin elemanlarini ekrana yazdirin, 2) Dizinin toplamini bulun, 3) Dizinin en buyuk elemanini bulun, 4) Dizinin en kucuk elemanini bulun, 5) Dizinin ortalamasini bulun.",
+      "instructions": "Bir vector olusturun ve su islemleri yapin: 1) Vector'un elemanlarini ekrana yazdirin, 2) Vector'un toplamini bulun, 3) Vector'un en buyuk elemanini bulun, 4) Vector'un en kucuk elemanini bulun, 5) Vector'un ortalamasini bulun.",
       "starterCode": {
-        "javascript": "const numbers = [5, 10, 15, 20, 25];\n// Kodunu buraya yaz\n"
+        "rust": "fn main() {\n    let numbers = vec![5, 10, 15, 20, 25];\n    // Kodunu buraya yaz\n}"
       },
       "testCases": [
         {
           "input": "numbers = [5, 10, 15, 20, 25]",
-          "expectedOutput": "Array: 5,10,15,20,25\nSum: 75\nMax: 25\nMin: 5\nAverage: 15"
+          "expectedOutput": "Array: [5, 10, 15, 20, 25]\nSum: 75\nMax: 25\nMin: 5\nAverage: 15"
         }
       ],
       "hints": [
-        "reduce() ile toplam bulun",
-        "Math.max() ve Math.min() ile en buyuk/kucuk bulun",
-        "Spread operator (...) kullanabilirsiniz"
+        "iter() ile vector'u dolasin",
+        "sum() ile toplam bulun",
+        "max() ve min() ile en buyuk/kucuk bulun"
       ]
     },
     {
-      "id": "javascript-case-5",
+      "id": "rust-case-5",
       "title": "Kosullu Ifadeler",
       "description": "If-else yapilari ile kosullu islemler yapin.",
       "difficulty": "beginner",
       "instructions": "Bir sayi alin ve su kontrolleri yapin: Sayi pozitif mi, negatif mi, sifir mi? Sayi cift mi, tek mi? Sayi 100'den buyuk mu, kucuk mu? Tum sonuclari ekrana yazdirin.",
       "starterCode": {
-        "javascript": "const number = 42;\n// Kodunu buraya yaz\n"
+        "rust": "fn main() {\n    let number = 42;\n    // Kodunu buraya yaz\n}"
       },
       "testCases": [
         {
@@ -105,17 +105,17 @@
       "hints": [
         "if-else if-else yapilarini kullanin",
         "Modulo operatoru (%) ile cift/tek kontrolu yapin",
-        "Karsilastirma operatorlerini kullanin: >, <, ===, !=="
+        "Karsilastirma operatorlerini kullanin: >, <, ==, !="
       ]
     },
     {
-      "id": "javascript-case-6",
+      "id": "rust-case-6",
       "title": "Fonksiyon Olusturma",
       "description": "Fonksiyonlar ile fonksiyonel programlama yapin.",
       "difficulty": "beginner",
       "instructions": "Iki sayinin toplamini, farkini, carpimini ve bolumunu hesaplayan ayri fonksiyonlar olusturun. Bu fonksiyonlari cagirip sonuclari ekrana yazdirin.",
       "starterCode": {
-        "javascript": "const a = 20;\nconst b = 4;\n// Kodunu buraya yaz\n\n// Fonksiyonlari buraya yaz\n"
+        "rust": "fn main() {\n    let a = 20;\n    let b = 4;\n    // Kodunu buraya yaz\n    \n}\n\n// Fonksiyonlari buraya yaz"
       },
       "testCases": [
         {
@@ -124,103 +124,103 @@
         }
       ],
       "hints": [
-        "function keyword'u veya arrow function kullanin",
-        "Her fonksiyon iki parametre alip sonuc donmeli",
+        "fn keyword'u ile fonksiyon olusturun",
+        "Her fonksiyon iki i32 parametre alip i32 donmeli",
         "Fonksiyonlari cagirip sonuclari yazdirin"
       ]
     },
     {
-      "id": "javascript-case-7",
+      "id": "rust-case-7",
       "title": "Basit Dongu Problemleri",
       "description": "Farkli dongu turleri ile problem cozun.",
       "difficulty": "beginner",
       "instructions": "1'den 100'e kadar olan sayilardan 3'e bolunebilen sayilari bulun ve ekrana yazdirin. Ayrica bu sayilarin toplamini hesaplayin.",
       "starterCode": {
-        "javascript": "// Kodunu buraya yaz\n"
+        "rust": "fn main() {\n    // Kodunu buraya yaz\n}"
       },
       "testCases": [
         {
           "input": "",
-          "expectedOutput": "Numbers divisible by 3: 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60, 63, 66, 69, 72, 75, 78, 81, 84, 87, 90, 93, 96, 99\nSum: 1683"
+          "expectedOutput": "Numbers divisible by 3: 3, 6, 9, 12, 15, ... 99\nSum: 1683"
         }
       ],
       "hints": [
-        "for dongusu kullanin",
+        "for dongusu ve range kullanin",
         "Modulo operatoru (%) ile bolunebilirlik kontrolu yapin",
         "Toplami bir degiskende tutun"
       ]
     },
     {
-      "id": "javascript-case-8",
+      "id": "rust-case-8",
       "title": "Temel Veri Yapilari",
-      "description": "Array ve Object kullanimi.",
+      "description": "Vector ve HashMap kullanimi.",
       "difficulty": "beginner",
-      "instructions": "Bir array olusturun ve 5 isim ekleyin. Sonra bu array'i ekrana yazdirin. Ayrica bir object olusturun ve 3 ogrencinin notlarini saklayin. Object'i ekrana yazdirin.",
+      "instructions": "Bir vector olusturun ve 5 isim ekleyin. Sonra bu vector'u ekrana yazdirin. Ayrica bir HashMap olusturun ve 3 ogrencinin notlarini saklayin. HashMap'i ekrana yazdirin.",
       "starterCode": {
-        "javascript": "// Kodunu buraya yaz\n"
+        "rust": "use std::collections::HashMap;\n\nfn main() {\n    // Kodunu buraya yaz\n}"
       },
       "testCases": [
         {
           "input": "",
-          "expectedOutput": "Names: [ 'Alice', 'Bob', 'Charlie', 'David', 'Eve' ]\nGrades:\nAlice: 85\nBob: 92\nCharlie: 78"
+          "expectedOutput": "Names: [Alice, Bob, Charlie, David, Eve]\nGrades:\nAlice: 85\nBob: 92\nCharlie: 78"
         }
       ],
       "hints": [
-        "Array olusturun: const names = []",
-        "Object olusturun: const grades = {}",
-        "push() ve obj[key] = value ile eleman ekleyin"
+        "Vector olusturun: let mut names = Vec::new()",
+        "HashMap olusturun: let mut grades = HashMap::new()",
+        "push() ve insert() ile eleman ekleyin"
       ]
     },
     {
-      "id": "javascript-case-9",
-      "title": "Karmasik Dizi Islemleri",
-      "description": "Cok boyutlu diziler ve gelismis islemler.",
+      "id": "rust-case-9",
+      "title": "Karmasik Vector Islemleri",
+      "description": "Cok boyutlu vector'lar ve gelismis islemler.",
       "difficulty": "intermediate",
       "instructions": "3x3 bir matris olusturun ve degerleri doldurun. Matrisin transpozunu bulun ve her iki matrisi ekrana yazdirin.",
       "starterCode": {
-        "javascript": "const matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];\n// Kodunu buraya yaz\n"
+        "rust": "fn main() {\n    let matrix = vec![vec![1, 2, 3], vec![4, 5, 6], vec![7, 8, 9]];\n    // Kodunu buraya yaz\n}"
       },
       "testCases": [
         {
           "input": "",
-          "expectedOutput": "Original Matrix:\n[ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 7, 8, 9 ] ]\nTransposed Matrix:\n[ [ 1, 4, 7 ], [ 2, 5, 8 ], [ 3, 6, 9 ] ]"
+          "expectedOutput": "Original Matrix:\n[[1, 2, 3], [4, 5, 6], [7, 8, 9]]\nTransposed Matrix:\n[[1, 4, 7], [2, 5, 8], [3, 6, 9]]"
         }
       ],
       "hints": [
-        "map() ve forEach() kullanabilirsiniz",
         "Iki for dongusu ile matrisi dolasin",
-        "Transpoz icin satir ve sutunlari degistirin"
+        "Transpoz icin satir ve sutunlari degistirin",
+        "Vector'lar ile matris olusturun"
       ]
     },
     {
-      "id": "javascript-case-10",
+      "id": "rust-case-10",
       "title": "String Manipulasyonu",
       "description": "Gelismis string islemleri ve pattern matching.",
       "difficulty": "intermediate",
       "instructions": "Bir cumle alin ve su islemleri yapin: 1) Kelimeleri ayirin, 2) Her kelimenin uzunlugunu bulun, 3) En uzun kelimeyi bulun, 4) Cumledeki sesli harf sayisini bulun, 5) Cumleyi tersine cevirin.",
       "starterCode": {
-        "javascript": "const sentence = \"The quick brown fox jumps over the lazy dog\";\n// Kodunu buraya yaz\n"
+        "rust": "fn main() {\n    let sentence = \"The quick brown fox jumps over the lazy dog\";\n    // Kodunu buraya yaz\n}"
       },
       "testCases": [
         {
           "input": "sentence = \"The quick brown fox\"",
-          "expectedOutput": "Words: [\"dog\",\"lazy\",\"the\",\"over\",\"jumps\",\"fox\",\"brown\",\"quick\",\"The\"]\nWord lengths: [3,5,5,3,5,4,3,4,3]\nLongest word: jumps\nVowel count: 11\nReversed: dog lazy the over jumps fox brown quick The"
+          "expectedOutput": "Words: [The, quick, brown, fox]\nWord lengths: [3, 5, 5, 3]\nLongest word: quick\nVowel count: 5\nReversed: xof nworb kciuq ehT"
         }
       ],
       "hints": [
-        "split() metodu ile kelimeleri ayirin",
-        "reduce() veya Math.max() ile en uzun kelimeyi bulun",
-        "match() veya includes() ile sesli harf kontrolu yapin"
+        "split_whitespace() ile kelimeleri ayirin",
+        "max_by_key() ile en uzun kelimeyi bulun",
+        "matches() ile sesli harf kontrolu yapin"
       ]
     },
     {
-      "id": "javascript-case-11",
+      "id": "rust-case-11",
       "title": "Recursive Fonksiyonlar",
       "description": "Ozyinelemeli fonksiyonlar ile problem cozun.",
       "difficulty": "intermediate",
       "instructions": "Faktoriyel hesaplayan recursive bir fonksiyon yazin. Ayrica Fibonacci serisinin n. elemanini bulan recursive bir fonksiyon yazin. Her ikisini de test edin.",
       "starterCode": {
-        "javascript": "const n = 5;\n// Kodunu buraya yaz\n\n// Recursive fonksiyonlari buraya yaz\n"
+        "rust": "fn main() {\n    let n = 5;\n    // Kodunu buraya yaz\n    \n}\n\n// Recursive fonksiyonlari buraya yaz"
       },
       "testCases": [
         {
@@ -229,40 +229,40 @@
         }
       ],
       "hints": [
-        "Base case'i unutmayin (n === 0 veya n === 1)",
+        "Base case'i unutmayin (n == 0 veya n == 1)",
         "Recursive cagri yapin: factorial(n-1)",
-        "Fibonacci icin iki base case gerekli: n===0 ve n===1"
+        "Fibonacci icin iki base case gerekli: n==0 ve n==1"
       ]
     },
     {
-      "id": "javascript-case-12",
-      "title": "Object ve Class Kullanimi",
+      "id": "rust-case-12",
+      "title": "Struct Kullanimi",
       "description": "Nesne yonelimli programlama temelleri.",
       "difficulty": "intermediate",
-      "instructions": "Bir 'Person' class'i olusturun. Name, Age, Email property'leri olsun. Constructor, toString() metodu ve bir displayInfo() metodu olsun. Bir Person nesnesi olusturup bilgilerini ekrana yazdirin.",
+      "instructions": "Bir 'Person' struct'i olusturun. Name, Age, Email field'lari olsun. Display trait'i ve bir display_info() metodu olsun. Bir Person nesnesi olusturup bilgilerini ekrana yazdirin.",
       "starterCode": {
-        "javascript": "// Kodunu buraya yaz\n\n// Person class'ini buraya yaz\n"
+        "rust": "fn main() {\n    // Kodunu buraya yaz\n    \n}\n\n// Person struct'ini buraya yaz"
       },
       "testCases": [
         {
           "input": "",
-          "expectedOutput": "Name: John Doe\nAge: 30\nEmail: john.doe@example.com\nJohn Doe, 30 years old, john.doe@example.com"
+          "expectedOutput": "Name: John Doe\nAge: 30\nEmail: john.doe@example.com\nDisplayInfo: John Doe, 30 years old, john.doe@example.com"
         }
       ],
       "hints": [
-        "class Person olusturun",
-        "constructor() metodu ile constructor yapin",
-        "toString() veya displayInfo() metodu ekleyin"
+        "struct Person olusturun",
+        "Display trait'i implement edin",
+        "impl block ile metodlar ekleyin"
       ]
     },
     {
-      "id": "javascript-case-13",
+      "id": "rust-case-13",
       "title": "Dosya Islemleri",
       "description": "Dosya okuma ve yazma islemleri (simule).",
       "difficulty": "intermediate",
-      "instructions": "Bir array olusturun ve 5 satir metin ekleyin. Bu array'i bir dosyaya yazdirir gibi formatlayin (her satir bir dosya satiri gibi). Sonra bu 'dosyayi' okuyup ekrana yazdirin.",
+      "instructions": "Bir vector olusturun ve 5 satir metin ekleyin. Bu vector'u bir dosyaya yazdirir gibi formatlayin (her satir bir dosya satiri gibi). Sonra bu 'dosyayi' okuyup ekrana yazdirin.",
       "starterCode": {
-        "javascript": "const lines = [\"Line 1\", \"Line 2\", \"Line 3\", \"Line 4\", \"Line 5\"];\n// Kodunu buraya yaz\n"
+        "rust": "fn main() {\n    let lines = vec![\"Line 1\", \"Line 2\", \"Line 3\", \"Line 4\", \"Line 5\"];\n    // Kodunu buraya yaz\n}"
       },
       "testCases": [
         {
@@ -271,19 +271,19 @@
         }
       ],
       "hints": [
-        "join() metodu ile satirlari birlestirin",
+        "join() ile satirlari birlestirin",
         "Her satiri ayri bir string olarak tutun",
         "Simulasyon yapin, gercek dosya islemi yapmayin"
       ]
     },
     {
-      "id": "javascript-case-14",
+      "id": "rust-case-14",
       "title": "Algoritma Problemleri",
       "description": "Klasik algoritma problemlerini cozun.",
       "difficulty": "intermediate",
-      "instructions": "Bir dizide tekrar eden elemanlari bulun. Ayrica dizideki en cok tekrar eden elemani ve kac kere tekrar ettigini bulun.",
+      "instructions": "Bir vector'da tekrar eden elemanlari bulun. Ayrica vector'daki en cok tekrar eden elemani ve kac kere tekrar ettigini bulun.",
       "starterCode": {
-        "javascript": "const numbers = [1, 2, 3, 2, 4, 3, 5, 3, 2, 1];\n// Kodunu buraya yaz\n"
+        "rust": "use std::collections::HashMap;\n\nfn main() {\n    let numbers = vec![1, 2, 3, 2, 4, 3, 5, 3, 2, 1];\n    // Kodunu buraya yaz\n}"
       },
       "testCases": [
         {
@@ -292,220 +292,221 @@
         }
       ],
       "hints": [
-        "Map veya Object kullanarak sayac tutun",
-        "filter() ile tekrarlari bulun",
-        "reduce() ile en cok tekrar edeni bulun"
+        "HashMap kullanarak sayac tutun",
+        "iter() ile tekrarlari bulun",
+        "max_by_key() ile en cok tekrar edeni bulun"
       ]
     },
     {
-      "id": "javascript-case-15",
+      "id": "rust-case-15",
       "title": "Veri Filtreleme ve Siralama",
-      "description": "Array metodlari ile veri filtreleme ve siralama.",
+      "description": "Iterator metodlari ile veri filtreleme ve siralama.",
       "difficulty": "intermediate",
       "instructions": "Bir ogrenci listesi olusturun (isim ve not). Notu 70'ten buyuk olanlari filtreleyin ve notlarina gore buyukten kucuge siralam. Sonuclari ekrana yazdirin.",
       "starterCode": {
-        "javascript": "const students = [\n  {name: \"Alice\", grade: 85},\n  {name: \"Bob\", grade: 65},\n  {name: \"Charlie\", grade: 92},\n  {name: \"David\", grade: 78},\n  {name: \"Eve\", grade: 55}\n];\n// Kodunu buraya yaz\n"
+        "rust": "#[derive(Debug)]\nstruct Student {\n    name: String,\n    grade: i32,\n}\n\nfn main() {\n    let students = vec![\n        Student { name: \"Alice\".to_string(), grade: 85 },\n        Student { name: \"Bob\".to_string(), grade: 65 },\n        Student { name: \"Charlie\".to_string(), grade: 92 },\n        Student { name: \"David\".to_string(), grade: 78 },\n        Student { name: \"Eve\".to_string(), grade: 55 },\n    ];\n    // Kodunu buraya yaz\n}"
       },
       "testCases": [
         {
           "input": "",
-          "expectedOutput": "Charlie: 92\nAlice: 85\nDavid: 78"
+          "expectedOutput": "Filtered and sorted:\nCharlie: 92\nAlice: 85\nDavid: 78"
         }
       ],
       "hints": [
         "filter() ile filtreleme yapin",
-        "sort() ile siralam yapin, compare function kullanin",
-        "Array metodlarini zincirleyin"
+        "sort_by() ile siralam yapin",
+        "Iterator metodlarini zincirleyin"
       ]
     },
     {
-      "id": "javascript-case-16",
+      "id": "rust-case-16",
       "title": "Matematiksel Hesaplamalar",
       "description": "Gelismis matematiksel islemler.",
       "difficulty": "intermediate",
       "instructions": "Bir sayinin asal olup olmadigini kontrol eden bir fonksiyon yazin. Ayrica 1'den n'e kadar olan asal sayilari bulan bir fonksiyon yazin. Sonuclari ekrana yazdirin.",
       "starterCode": {
-        "javascript": "const n = 20;\n// Kodunu buraya yaz\n\n// Fonksiyonlari buraya yaz\n"
+        "rust": "fn main() {\n    let n = 20;\n    // Kodunu buraya yaz\n    \n}\n\n// Fonksiyonlari buraya yaz"
       },
       "testCases": [
         {
           "input": "n = 20",
-          "expectedOutput": "Is 17 prime? true\nPrimes up to 20: 2,3,5,7,11,13,17,19"
+          "expectedOutput": "Is 17 prime? true\nPrimes up to 20: [2, 3, 5, 7, 11, 13, 17, 19]"
         }
       ],
       "hints": [
         "Asal sayi kontrolu icin 2'den sqrt(n)'e kadar kontrol edin",
         "Sieve of Eratosthenes algoritmasi kullanabilirsiniz",
-        "Math.sqrt() ile karekok alin"
+        "f64::sqrt() ile karekok alin"
       ]
     },
     {
-      "id": "javascript-case-17",
+      "id": "rust-case-17",
       "title": "Karmasik Algoritma Tasarimi",
       "description": "Karmasik algoritmalar ve optimizasyon.",
       "difficulty": "advanced",
-      "instructions": "Binary Search algoritmasi implementasyonu. Siralanmis bir dizide bir elemanin var olup olmadigini O(log n) zamanda bulun.",
+      "instructions": "Binary Search algoritmasi implementasyonu. Siralanmis bir vector'da bir elemanin var olup olmadigini O(log n) zamanda bulun.",
       "starterCode": {
-        "javascript": "const sortedArray = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];\nconst target = 11;\n// Kodunu buraya yaz\n\n// Binary Search fonksiyonunu buraya yaz\n"
+        "rust": "fn main() {\n    let sorted_array = vec![1, 3, 5, 7, 9, 11, 13, 15, 17, 19];\n    let target = 11;\n    // Kodunu buraya yaz\n    \n}\n\n// Binary Search fonksiyonunu buraya yaz"
       },
       "testCases": [
         {
           "input": "target = 11",
-          "expectedOutput": "Found at index: 5"
+          "expectedOutput": "Array: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]\nTarget: 11\nFound at index: 5"
         }
       ],
       "hints": [
         "Left ve right pointer'lar kullanin",
-        "Mid point hesaplayin: Math.floor((left + right) / 2)",
+        "Mid point hesaplayin: (left + right) / 2",
         "Target'a gore left veya right'i guncelleyin"
       ]
     },
     {
-      "id": "javascript-case-18",
+      "id": "rust-case-18",
       "title": "Optimizasyon Problemleri",
       "description": "Performans optimizasyonu ve verimli algoritmalar.",
       "difficulty": "advanced",
-      "instructions": "Bir dizideki en uzun artan alt diziyi (Longest Increasing Subsequence) bulun. Dynamic Programming yaklasimi kullanin.",
+      "instructions": "Bir vector'daki en uzun artan alt diziyi (Longest Increasing Subsequence) bulun. Dynamic Programming yaklasimi kullanin.",
       "starterCode": {
-        "javascript": "const array = [10, 9, 2, 5, 3, 7, 101, 18];\n// Kodunu buraya yaz\n\n// LIS fonksiyonunu buraya yaz\n"
+        "rust": "fn main() {\n    let array = vec![10, 9, 2, 5, 3, 7, 101, 18];\n    // Kodunu buraya yaz\n    \n}\n\n// LIS fonksiyonunu buraya yaz"
       },
       "testCases": [
         {
           "input": "array = [10, 9, 2, 5, 3, 7, 101, 18]",
-          "expectedOutput": "LIS length: 4\nLIS: [2,5,7,101]"
+          "expectedOutput": "Array: [10, 9, 2, 5, 3, 7, 101, 18]\nLIS length: 4\nLIS: [2, 5, 7, 18]"
         }
       ],
       "hints": [
-        "DP array olusturun: dp[i] = i. elemana kadar LIS uzunlugu",
+        "DP vector olusturun: dp[i] = i. elemana kadar LIS uzunlugu",
         "Her eleman icin onceki elemanlari kontrol edin",
         "O(n^2) zaman karmasikligi ile cozulebilir"
       ]
     },
     {
-      "id": "javascript-case-19",
+      "id": "rust-case-19",
       "title": "Veri Yapilari",
       "description": "Tree veri yapisi implementasyonu.",
       "difficulty": "advanced",
       "instructions": "Bir Binary Search Tree (BST) implementasyonu yapin. Insert, Search ve Inorder traversal metodlari olsun. Test edin.",
       "starterCode": {
-        "javascript": "// Kodunu buraya yaz\n\n// TreeNode ve BST class'larini buraya yaz\n"
+        "rust": "fn main() {\n    // Kodunu buraya yaz\n    \n}\n\n// TreeNode ve BST struct'larini buraya yaz"
       },
       "testCases": [
         {
           "input": "values = [5, 3, 7, 2, 4, 6, 8]",
-          "expectedOutput": "Inorder traversal: 2, 3, 4, 5, 6, 7, 8\nSearch 4: Found\nSearch 9: Not Found"
+          "expectedOutput": "Inserting: 5, 3, 7, 2, 4, 6, 8\nInorder traversal: 2, 3, 4, 5, 6, 7, 8\nSearch 4: Found\nSearch 9: Not Found"
         }
       ],
       "hints": [
-        "TreeNode class'i olusturun (val, left, right)",
+        "TreeNode struct'i olusturun (val: i32, left: Option<Box<TreeNode>>, right: Option<Box<TreeNode>>)",
         "BST'de sol alt agacta kucuk, sag alt agacta buyuk degerler",
         "Inorder: sol -> root -> sag"
       ]
     },
     {
-      "id": "javascript-case-20",
+      "id": "rust-case-20",
       "title": "Design Patterns",
       "description": "Design pattern uygulamalari.",
       "difficulty": "advanced",
-      "instructions": "Singleton pattern implementasyonu yapin. Bir Logger class'i olusturun ve singleton pattern kullanin. Logger'a mesaj ekleyip ekrana yazdirin.",
+      "instructions": "Singleton pattern implementasyonu yapin. Bir Logger struct'i olusturun ve singleton pattern kullanin. Logger'a mesaj ekleyip ekrana yazdirin.",
       "starterCode": {
-        "javascript": "// Kodunu buraya yaz\n\n// Logger class'ini buraya yaz\n"
+        "rust": "use std::sync::{Arc, Mutex};\n\nfn main() {\n    // Kodunu buraya yaz\n    \n}\n\n// Logger struct'ini buraya yaz"
       },
       "testCases": [
         {
           "input": "",
-          "expectedOutput": "Log: Application started\nLog: User logged in\nLog: Processing data\nAll logs:\nApplication started\nUser logged in\nProcessing data"
+          "expectedOutput": "Logger instance created\nLog: Application started\nLog: User logged in\nLog: Processing data\nAll logs:\nApplication started\nUser logged in\nProcessing data"
         }
       ],
       "hints": [
-        "Private constructor pattern kullanin",
-        "Static instance variable olusturun",
-        "getInstance() metodu ile tek instance dondurun"
+        "Arc<Mutex<>> ile singleton yapin",
+        "lazy_static crate kullanabilirsiniz",
+        "get_instance() fonksiyonu ile tek instance dondurun"
       ]
     },
     {
-      "id": "javascript-case-21",
+      "id": "rust-case-21",
       "title": "Performans Optimizasyonu",
       "description": "Kod optimizasyonu ve verimlilik.",
       "difficulty": "advanced",
-      "instructions": "Bir dizideki iki sayinin toplaminin hedef degeri verdigi ciftleri bulun. O(n) zaman karmasikligi ile cozun (Map kullanin).",
+      "instructions": "Bir vector'daki iki sayinin toplaminin hedef degeri verdigi ciftleri bulun. O(n) zaman karmasikligi ile cozun (HashMap kullanin).",
       "starterCode": {
-        "javascript": "const array = [2, 7, 11, 15, 3, 6];\nconst target = 9;\n// Kodunu buraya yaz\n"
+        "rust": "use std::collections::HashMap;\n\nfn main() {\n    let array = vec![2, 7, 11, 15, 3, 6];\n    let target = 9;\n    // Kodunu buraya yaz\n}"
       },
       "testCases": [
         {
           "input": "target = 9",
-          "expectedOutput": "[ [ 2, 7 ], [ 3, 6 ] ]"
+          "expectedOutput": "Array: [2, 7, 11, 15, 3, 6]\nTarget: 9\nPairs: [(2, 7), (3, 6)]"
         }
       ],
       "hints": [
-        "Map kullanarak sayilari saklayin",
+        "HashMap kullanarak sayilari saklayin",
         "Her eleman icin (target - current) degerini kontrol edin",
         "O(n) zaman, O(n) alan karmasikligi"
       ]
     },
     {
-      "id": "javascript-case-22",
+      "id": "rust-case-22",
       "title": "Karmasik String Algoritmalari",
       "description": "Gelismis string algoritmalari.",
       "difficulty": "advanced",
       "instructions": "Longest Common Subsequence (LCS) algoritmasi implementasyonu. Iki string arasindaki en uzun ortak alt diziyi bulun.",
       "starterCode": {
-        "javascript": "const str1 = \"ABCDGH\";\nconst str2 = \"AEDFHR\";\n// Kodunu buraya yaz\n\n// LCS fonksiyonunu buraya yaz\n"
+        "rust": "fn main() {\n    let str1 = \"ABCDGH\";\n    let str2 = \"AEDFHR\";\n    // Kodunu buraya yaz\n    \n}\n\n// LCS fonksiyonunu buraya yaz"
       },
       "testCases": [
         {
           "input": "str1 = \"ABCDGH\", str2 = \"AEDFHR\"",
-          "expectedOutput": "LCS length: 3"
+          "expectedOutput": "String 1: ABCDGH\nString 2: AEDFHR\nLCS length: 3\nLCS: ADH"
         }
       ],
       "hints": [
         "Dynamic Programming kullanin",
-        "2D array olusturun: dp[i][j] = LCS uzunlugu",
+        "2D vector olusturun: dp[i][j] = LCS uzunlugu",
         "Karakterler esitse: dp[i][j] = dp[i-1][j-1] + 1"
       ]
     },
     {
-      "id": "javascript-case-23",
+      "id": "rust-case-23",
       "title": "Graph Algoritmalari",
       "description": "Graph veri yapisi ve algoritmalari.",
       "difficulty": "advanced",
       "instructions": "Bir graph olusturun ve Depth-First Search (DFS) algoritmasi implementasyonu yapin. Graph'i temsil edin ve DFS ile dolasin.",
       "starterCode": {
-        "javascript": "// Kodunu buraya yaz\n\n// Graph ve DFS fonksiyonunu buraya yaz\n"
+        "rust": "use std::collections::{HashMap, HashSet};\n\nfn main() {\n    // Kodunu buraya yaz\n    \n}\n\n// Graph ve DFS fonksiyonunu buraya yaz"
       },
       "testCases": [
         {
           "input": "graph with nodes: 0,1,2,3,4",
-          "expectedOutput": "Graph:\n0 -> [1,2]\n1 -> [3]\n2 -> [4]\n3 -> [4]\nDFS starting from 0:\n0\n1\n3\n4\n2"
+          "expectedOutput": "Graph:\n0 -> [1, 2]\n1 -> [3]\n2 -> [4]\n3 -> [4]\nDFS starting from 0: [0, 1, 3, 4, 2]"
         }
       ],
       "hints": [
-        "Map veya Object ile adjacency list kullanin",
-        "Set ile visited tutun",
+        "HashMap ile adjacency list kullanin",
+        "HashSet ile visited tutun",
         "Recursive veya stack ile DFS yapin"
       ]
     },
     {
-      "id": "javascript-case-24",
+      "id": "rust-case-24",
       "title": "Sistem Tasarimi Problemleri",
       "description": "Buyuk olcekli sistem tasarimi problemleri.",
       "difficulty": "advanced",
       "instructions": "Basit bir Cache sistemi implementasyonu yapin. LRU (Least Recently Used) cache. Get ve Put metodlari olsun. Capacity limiti olsun.",
       "starterCode": {
-        "javascript": "// Kodunu buraya yaz\n\n// LRUCache class'ini buraya yaz\n"
+        "rust": "use std::collections::{HashMap, VecDeque};\n\nfn main() {\n    // LRU Cache test edin\n    \n}\n\n// LRUCache struct'ini buraya yaz"
       },
       "testCases": [
         {
           "input": "capacity = 2",
-          "expectedOutput": "Cache created with capacity 2\nGet(1): 1\nGet(2): -1\nGet(3): 3"
+          "expectedOutput": "Cache created with capacity 2\nPut(1, 1)\nPut(2, 2)\nGet(1): 1\nPut(3, 3)\nGet(2): -1 (evicted)\nGet(3): 3"
         }
       ],
       "hints": [
-        "Map ve DoublyLinkedList kullanin",
-        "Map'te key -> node mapping",
-        "En son kullanilan head'de, en eski tail'de"
+        "HashMap ve VecDeque kullanin",
+        "HashMap'te key -> value mapping",
+        "En son kullanilan front'da, en eski back'de"
       ]
     }
   ]
 }
+
