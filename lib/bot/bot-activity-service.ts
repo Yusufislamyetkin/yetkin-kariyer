@@ -4,6 +4,8 @@ import { BotActivityType } from "@prisma/client";
 import { recordEvent } from "@/lib/services/gamification/antiAbuse";
 import { applyRules } from "@/lib/services/gamification/rules";
 import { checkBadgesForActivity } from "@/app/api/badges/check/badge-service";
+import { selectRandomUnusedSource, markSourceAsUsed } from "./bot-news-tracker";
+import { NewsSource } from "./news-sources";
 
 const COMMUNITY_SLUGS = [
   "dotnet-core-community",
@@ -290,10 +292,24 @@ export async function commentOnPosts(
  */
 export async function createPost(
   userId: string,
-  generatePostContent: () => Promise<string>
+  generatePostContent: (newsSource?: NewsSource) => Promise<string>,
+  botExpertise?: string[]
 ) {
   try {
-    const content = await generatePostContent();
+    // Haber kaynağı seç (bot'un kullanmadığı kaynaklardan)
+    let selectedSource: NewsSource | null = null;
+    try {
+      selectedSource = await selectRandomUnusedSource(userId, botExpertise);
+      if (selectedSource) {
+        // Kaynağı kullanıldı olarak işaretle
+        await markSourceAsUsed(userId, selectedSource.id);
+      }
+    } catch (error: any) {
+      console.warn(`[BOT_POST] Error selecting news source for bot ${userId}:`, error);
+      // Devam et, kaynak olmadan da post oluşturulabilir
+    }
+
+    const content = await generatePostContent(selectedSource || undefined);
     if (!content || content.trim().length === 0) {
       throw new Error("Generated content is empty");
     }
@@ -334,7 +350,11 @@ export async function createPost(
       userId,
       activityType: BotActivityType.POST,
       targetId: post.id,
-      details: { contentLength: post.content?.length || 0 },
+      details: {
+        contentLength: post.content?.length || 0,
+        newsSourceId: selectedSource?.id,
+        newsSourceName: selectedSource?.name,
+      },
       success: true,
     });
 

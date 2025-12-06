@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import { createChatCompletion } from "@/lib/ai/client";
 import { z } from "zod";
+import { NewsSource } from "./news-sources";
 
 /**
  * Analyze a post and generate a realistic comment
@@ -29,6 +30,14 @@ export async function analyzePostForComment(
     const systemPrompt = botCharacter.systemPrompt || `Sen ${botCharacter.name} karakterisin. ${botCharacter.persona || "Yardımsever ve aktif bir topluluk üyesi."}`;
 
     const userPrompt = `Aşağıdaki gönderiyi oku ve gerçekçi, yardımsever bir yorum yaz. Yorum kısa ve samimi olmalı (maksimum 200 kelime). Türkçe yaz.
+
+ÖNEMLİ:
+- Doğal, konuşma diline yakın bir dil kullan
+- Bazen küçük yazım hataları yapabilirsin (doğal görünmesi için, örn: "valla", "iyimişş", "harbiden", "muazzammm")
+- Türkçe slang kullanabilirsin (valla, harbiden, iyimişş, süpermiş vs.)
+- Kısa cümleler kullan, samimi ol
+- Post içeriğine göre teknik detay veya kişisel deneyim paylaş
+- Soru sorabilir veya ek kaynak önerebilirsin
 
 Gönderi:
 ${post.content || "Görsel paylaşımı"}
@@ -75,35 +84,70 @@ Yorumunu yaz (sadece yorum metni, başka bir şey ekleme):`;
 }
 
 /**
- * Generate post content based on bot character
+ * Generate post content based on bot character and news source
  */
 export async function generatePostContent(
-  botCharacter: { persona: string; systemPrompt: string; name: string; expertise?: string[] }
+  botCharacter: { persona: string; systemPrompt: string; name: string; expertise?: string[] },
+  newsSource?: NewsSource
 ): Promise<string> {
   try {
     const systemPrompt = botCharacter.systemPrompt || `Sen ${botCharacter.name} karakterisin. ${botCharacter.persona || "Yardımsever ve aktif bir topluluk üyesi."}`;
 
-    const topics = [
-      "programlama ipuçları",
-      "teknoloji haberleri",
-      "öğrenme deneyimleri",
-      "kod örnekleri",
-      "kariyer tavsiyeleri",
-      "yazılım geliştirme",
-      "best practices",
-    ];
+    let userPrompt: string;
 
-    const expertiseTopics = botCharacter.expertise && botCharacter.expertise.length > 0
-      ? botCharacter.expertise
-      : topics;
+    if (newsSource) {
+      // Güncel haber kaynağından içerik üret
+      userPrompt = `Aşağıdaki haber kaynağından ilham alarak güncel bir yazılım/teknoloji haberini paylaş. Gönderi kolay okunabilir, samimi ve faydalı olmalı (maksimum 300 kelime). Türkçe yaz.
 
-    const randomTopic = expertiseTopics[Math.floor(Math.random() * expertiseTopics.length)];
+ÖNEMLİ:
+- Kolay okunabilir, kısa paragraflar kullan
+- Bazen küçük yazım hataları yapabilirsin (doğal görünmesi için, örn: "muazzammm", "süpermişş", "harbiden")
+- Türkçe slang kullanabilirsin (valla, harbiden, iyimişş, süpermiş vs.)
+- Kaynak belirt: Kaynak: [${newsSource.name}](${newsSource.website})
+- Kişisel bir yorum veya deneyim ekle
+- Gönderi formatı:
+  * Başlık/başlangıç (emoji ile)
+  * Haber içeriği (kısa paragraflar)
+  * Özellikler listesi (varsa, bullet point ile)
+  * Kaynak linki
+  * Kapanış yorumu
 
-    const userPrompt = `Aşağıdaki konuda kısa, samimi ve faydalı bir sosyal medya gönderisi yaz (maksimum 300 kelime). Türkçe yaz. Gönderi gerçekçi ve kişisel deneyimler içermeli.
+Haber Kaynağı: ${newsSource.name} (${newsSource.category})
+Website: ${newsSource.website}
+${newsSource.description ? `Açıklama: ${newsSource.description}` : ""}
+
+Gönderiyi yaz (sadece gönderi metni, başka bir şey ekleme):`;
+    } else {
+      // Fallback: Genel konu
+      const topics = [
+        "programlama ipuçları",
+        "teknoloji haberleri",
+        "öğrenme deneyimleri",
+        "kod örnekleri",
+        "kariyer tavsiyeleri",
+        "yazılım geliştirme",
+        "best practices",
+        "yazılım problemi çözme hikayesi",
+        "programlama dili özelliği",
+      ];
+
+      const expertiseTopics = botCharacter.expertise && botCharacter.expertise.length > 0
+        ? botCharacter.expertise
+        : topics;
+
+      const randomTopic = expertiseTopics[Math.floor(Math.random() * expertiseTopics.length)];
+
+      userPrompt = `Aşağıdaki konuda kısa, samimi ve faydalı bir sosyal medya gönderisi yaz (maksimum 300 kelime). Türkçe yaz. Gönderi gerçekçi ve kişisel deneyimler içermeli.
+
+ÖNEMLİ:
+- Kolay okunabilir, kısa paragraflar kullan
+- Bazen küçük yazım hataları yapabilirsin (doğal görünmesi için)
+- Türkçe slang kullanabilirsin (valla, harbiden, iyimişş vs.)
 
 Konu: ${randomTopic}
 
 Gönderiyi yaz (sadece gönderi metni, başka bir şey ekleme):`;
+    }
 
     const result = await createChatCompletion({
       messages: [

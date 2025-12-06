@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useMemo } from "react";
 import Link from "next/link";
-import { Plus, Search, Filter, Calendar, Users, TrendingUp, X, Clock, DollarSign as DollarSignIcon } from "lucide-react";
+import { Plus, Search, Filter, Calendar, Users, TrendingUp, X, Clock, DollarSign as DollarSignIcon, ClipboardList } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
 import { Input } from "@/app/components/ui/Input";
@@ -216,11 +216,11 @@ export default function FreelancerProjectsPage() {
               Proje taleplerini görüntüleyin ve teklif verin
             </p>
           </div>
-          <Link href="/freelancer/projects/create" className="w-full sm:w-auto">
+          <Link href="/freelancer/applications" className="w-full sm:w-auto">
             <Button variant="gradient" size="md" className="w-full sm:w-auto">
-              <Plus className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
-              <span className="hidden min-[400px]:inline">Yeni Proje Oluştur</span>
-              <span className="min-[400px]:hidden">Yeni Proje</span>
+              <ClipboardList className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
+              <span className="hidden min-[400px]:inline">Başvurularım</span>
+              <span className="min-[400px]:hidden">Başvurularım</span>
             </Button>
           </Link>
         </div>

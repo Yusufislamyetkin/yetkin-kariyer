@@ -1,9 +1,129 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
+import { normalizeCourseContent } from "@/lib/education/courseContent";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
+
+/**
+ * Removes "Ders X:" prefix from quiz/test titles
+ * @param title - The title that may contain "Ders X:" prefix
+ * @returns Title without the "Ders X:" prefix
+ */
+function removeLessonPrefix(title: string): string {
+  if (!title) return title;
+  // Remove "Ders " followed by digits, then ":" and optional whitespace at the start
+  return title.replace(/^Ders \d+:\s*/i, "").trim();
+}
+
+/**
+ * Removes "Kursu", "Kurs" suffix from course titles
+ * @param title - The course title that may contain suffix
+ * @returns Title without the suffix
+ */
+function removeCourseSuffix(title: string): string {
+  if (!title) return title;
+  return title.replace(/\s+(Kursu|Kurs)$/i, "").trim();
+}
+
+/**
+ * Gets lesson details (course, module, lesson) from lessonSlug
+ * @param lessonSlug - The lesson slug to look up
+ * @returns Object with courseTitle, moduleTitle, lessonTitle or null if not found
+ */
+async function getLessonDetails(lessonSlug: string): Promise<{
+  courseTitle: string;
+  moduleTitle: string;
+  lessonTitle: string;
+} | null> {
+  try {
+    if (!lessonSlug) return null;
+
+    const courses = await db.course.findMany({
+      select: {
+        id: true,
+        title: true,
+        content: true,
+      },
+    });
+
+    for (const course of courses) {
+      const normalized = normalizeCourseContent(course.content, null, null);
+      const modules = Array.isArray(normalized.modules) ? normalized.modules : [];
+
+      for (const courseModule of modules) {
+        if (!courseModule || typeof courseModule !== "object") continue;
+
+        const relatedTopics = Array.isArray((courseModule as any).relatedTopics)
+          ? ((courseModule as any).relatedTopics as Array<Record<string, any>>)
+          : [];
+
+        const lesson = relatedTopics.find((topic) => topic?.href === lessonSlug);
+        if (lesson && typeof lesson === "object") {
+          const courseTitle = removeCourseSuffix(course.title);
+          const moduleTitle = (courseModule as any).title || (courseModule as any).label || "";
+          const lessonTitle = lesson.label || lesson.title || "";
+
+          return {
+            courseTitle,
+            moduleTitle,
+            lessonTitle,
+          };
+        }
+      }
+    }
+
+    return null;
+  } catch (error) {
+    console.error("[getLessonDetails] Error:", error);
+    return null;
+  }
+}
+
+/**
+ * Formats quiz details for activity notification
+ * @param quiz - The quiz object
+ * @param lessonDetails - Optional lesson details from getLessonDetails
+ * @returns Formatted string for activity notification
+ */
+async function formatQuizDetails(quiz: any, lessonDetails: { courseTitle: string; moduleTitle: string; lessonTitle: string } | null): Promise<string> {
+  if (lessonDetails) {
+    return `${lessonDetails.courseTitle} => ${lessonDetails.moduleTitle} => ${lessonDetails.lessonTitle}`;
+  }
+
+  // If courseId exists, try to get course title
+  if (quiz.courseId) {
+    try {
+      const course = await db.course.findUnique({
+        where: { id: quiz.courseId },
+        select: { title: true },
+      });
+
+      if (course) {
+        const courseTitle = removeCourseSuffix(course.title);
+        const parts: string[] = [courseTitle];
+
+        if (quiz.topic) {
+          parts.push(`Konu: ${quiz.topic}`);
+        }
+        if (quiz.level) {
+          parts.push(`Seviye: ${quiz.level}`);
+        }
+
+        if (parts.length > 1) {
+          return parts.join(" - ");
+        }
+        return courseTitle;
+      }
+    } catch (error) {
+      console.error("[formatQuizDetails] Error getting course:", error);
+    }
+  }
+
+  // Fallback to clean title
+  return removeLessonPrefix(quiz.title || "");
+}
 
 // GET /api/profile/activity - Kullanıcının son aktivitelerini döner
 // type: "own" (default), "global", "connections"
@@ -63,6 +183,10 @@ export async function GET(request: Request) {
         quiz: {
           select: {
             title: true,
+            lessonSlug: true,
+            courseId: true,
+            topic: true,
+            level: true,
           },
         },
         user: {
@@ -84,6 +208,8 @@ export async function GET(request: Request) {
         interview: {
           select: {
             title: true,
+            type: true,
+            difficulty: true,
           },
         },
         user: {
@@ -121,6 +247,8 @@ export async function GET(request: Request) {
         job: {
           select: {
             title: true,
+            location: true,
+            salary: true,
           },
         },
         user: {
@@ -142,6 +270,10 @@ export async function GET(request: Request) {
         quiz: {
           select: {
             title: true,
+            lessonSlug: true,
+            courseId: true,
+            topic: true,
+            level: true,
           },
         },
         user: {
@@ -187,6 +319,8 @@ export async function GET(request: Request) {
         hackathon: {
           select: {
             title: true,
+            phase: true,
+            tags: true,
           },
         },
         user: {
@@ -226,16 +360,27 @@ export async function GET(request: Request) {
     // Combine and sort all activities
     const activities: any[] = [];
 
-    quizAttempts.forEach((attempt: any) => {
+    // Process quiz attempts with detailed information
+    for (const attempt of quizAttempts) {
       if (attempt.quiz) {
         const userName = attempt.user?.name || "Birisi";
         const isOwn = attempt.userId === currentUserId;
+        
+        // Get lesson details if lessonSlug exists
+        let lessonDetails = null;
+        if (attempt.quiz.lessonSlug) {
+          lessonDetails = await getLessonDetails(attempt.quiz.lessonSlug);
+        }
+        
+        // Format quiz details
+        const quizDetails = await formatQuizDetails(attempt.quiz, lessonDetails);
+        
         activities.push({
           id: attempt.id,
           type: "quiz",
           title: isOwn 
-            ? `${attempt.quiz.title} testini tamamladı`
-            : `${userName} ${attempt.quiz.title} testini tamamladı`,
+            ? `${quizDetails} testini tamamladı`
+            : `${userName} ${quizDetails} testini tamamladı`,
           score: attempt.score,
           date: attempt.completedAt,
           icon: "📝",
@@ -247,18 +392,34 @@ export async function GET(request: Request) {
           } : null,
         });
       }
-    });
+    }
 
     interviewAttempts.forEach((attempt: any) => {
       if (attempt.interview) {
         const userName = attempt.user?.name || "Birisi";
         const isOwn = attempt.userId === currentUserId;
+        
+        // Build detailed interview title
+        let interviewTitle = attempt.interview.title;
+        const details: string[] = [];
+        
+        if (attempt.interview.type) {
+          details.push(`Tip: ${attempt.interview.type}`);
+        }
+        if (attempt.interview.difficulty) {
+          details.push(`Zorluk: ${attempt.interview.difficulty}`);
+        }
+        
+        if (details.length > 0) {
+          interviewTitle = `${interviewTitle} (${details.join(", ")})`;
+        }
+        
         activities.push({
           id: attempt.id,
           type: "interview",
           title: isOwn
-            ? `${attempt.interview.title} mülakatını tamamladı`
-            : `${userName} ${attempt.interview.title} mülakatını tamamladı`,
+            ? `${interviewTitle} mülakatını tamamladı`
+            : `${userName} ${interviewTitle} mülakatını tamamladı`,
           score: attempt.aiScore,
           date: attempt.completedAt,
           icon: "🎤",
@@ -294,12 +455,19 @@ export async function GET(request: Request) {
       if (app.job) {
         const userName = app.user?.name || "Birisi";
         const isOwn = app.userId === currentUserId;
+        
+        // Build detailed job title
+        let jobTitle = app.job.title;
+        if (app.job.location) {
+          jobTitle = `${jobTitle} - ${app.job.location}`;
+        }
+        
         activities.push({
           id: app.id,
           type: "application",
           title: isOwn
-            ? `${app.job.title} pozisyonuna başvurdu`
-            : `${userName} ${app.job.title} pozisyonuna başvurdu`,
+            ? `${jobTitle} pozisyonuna başvurdu`
+            : `${userName} ${jobTitle} pozisyonuna başvurdu`,
           date: app.appliedAt,
           icon: "💼",
           userId: app.userId,
@@ -312,16 +480,27 @@ export async function GET(request: Request) {
       }
     });
 
-    liveCodingAttempts.forEach((attempt: any) => {
+    // Process live coding attempts with detailed information
+    for (const attempt of liveCodingAttempts) {
       if (attempt.quiz) {
         const userName = attempt.user?.name || "Birisi";
         const isOwn = attempt.userId === currentUserId;
+        
+        // Get lesson details if lessonSlug exists
+        let lessonDetails = null;
+        if (attempt.quiz.lessonSlug) {
+          lessonDetails = await getLessonDetails(attempt.quiz.lessonSlug);
+        }
+        
+        // Format quiz details
+        const quizDetails = await formatQuizDetails(attempt.quiz, lessonDetails);
+        
         activities.push({
           id: attempt.id,
           type: "live-coding",
           title: isOwn
-            ? `${attempt.quiz.title} canlı kodlama görevini tamamladı`
-            : `${userName} ${attempt.quiz.title} canlı kodlama görevini tamamladı`,
+            ? `${quizDetails} canlı kodlama görevini tamamladı`
+            : `${userName} ${quizDetails} canlı kodlama görevini tamamladı`,
           date: attempt.completedAt,
           icon: "💻",
           userId: attempt.userId,
@@ -332,23 +511,38 @@ export async function GET(request: Request) {
           } : null,
         });
       }
-    });
+    }
 
-    lessonCompletions.forEach((completion: any) => {
+    // Process lesson completions with detailed information
+    for (const completion of lessonCompletions) {
       const userName = completion.user?.name || "Birisi";
       const isOwn = completion.userId === currentUserId;
       
-      // Format lesson title - use course title if available, otherwise use lessonSlug
-      let lessonTitle = completion.course?.title || completion.lessonSlug;
-      // If lessonSlug is a path, extract the last segment for display
-      if (lessonTitle && lessonTitle.includes("/")) {
-        const segments = lessonTitle.split("/");
-        lessonTitle = segments[segments.length - 1];
-        // Convert kebab-case to readable format
-        lessonTitle = lessonTitle
-          .split("-")
-          .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(" ");
+      // Get lesson details from lessonSlug
+      const lessonDetails = await getLessonDetails(completion.lessonSlug);
+      
+      let lessonTitle: string;
+      if (lessonDetails) {
+        // Format: "Kurs => Modül => Ders"
+        lessonTitle = `${lessonDetails.courseTitle} => ${lessonDetails.moduleTitle} => ${lessonDetails.lessonTitle}`;
+      } else {
+        // Fallback: use course title without suffix or lessonSlug
+        if (completion.course?.title) {
+          lessonTitle = removeCourseSuffix(completion.course.title);
+        } else {
+          // If lessonSlug is a path, extract the last segment for display
+          let slugTitle = completion.lessonSlug;
+          if (slugTitle && slugTitle.includes("/")) {
+            const segments = slugTitle.split("/");
+            slugTitle = segments[segments.length - 1];
+            // Convert kebab-case to readable format
+            slugTitle = slugTitle
+              .split("-")
+              .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+              .join(" ");
+          }
+          lessonTitle = slugTitle;
+        }
       }
       
       activities.push({
@@ -366,18 +560,46 @@ export async function GET(request: Request) {
           profileImage: completion.user.profileImage,
         } : null,
       });
-    });
+    }
 
     hackathonApplications.forEach((app: any) => {
       if (app.hackathon) {
         const userName = app.user?.name || "Birisi";
         const isOwn = app.userId === currentUserId;
+        
+        // Build detailed hackathon title
+        let hackathonTitle = app.hackathon.title;
+        const details: string[] = [];
+        
+        if (app.hackathon.phase) {
+          // Translate phase to Turkish
+          const phaseMap: Record<string, string> = {
+            draft: "Taslak",
+            upcoming: "Yaklaşan",
+            applications: "Başvurular",
+            submission: "Teslim",
+            judging: "Değerlendirme",
+            completed: "Tamamlandı",
+            archived: "Arşivlendi",
+          };
+          const phaseText = phaseMap[app.hackathon.phase] || app.hackathon.phase;
+          details.push(`Faz: ${phaseText}`);
+        }
+        
+        if (app.hackathon.tags && Array.isArray(app.hackathon.tags) && app.hackathon.tags.length > 0) {
+          details.push(`Etiketler: ${app.hackathon.tags.slice(0, 3).join(", ")}`);
+        }
+        
+        if (details.length > 0) {
+          hackathonTitle = `${hackathonTitle} (${details.join(", ")})`;
+        }
+        
         activities.push({
           id: app.id,
           type: "hackathon",
           title: isOwn
-            ? `${app.hackathon.title} hackathonuna başvurdu`
-            : `${userName} ${app.hackathon.title} hackathonuna başvurdu`,
+            ? `${hackathonTitle} hackathonuna başvurdu`
+            : `${userName} ${hackathonTitle} hackathonuna başvurdu`,
           date: app.appliedAt,
           icon: "🏆",
           userId: app.userId,

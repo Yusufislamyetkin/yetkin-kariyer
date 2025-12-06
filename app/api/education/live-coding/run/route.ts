@@ -48,6 +48,29 @@ const LANGUAGE_MAP: Record<
 
 const MAX_CODE_LENGTH = 100_000;
 const REQUEST_TIMEOUT_MS = 25_000;
+const FALLBACK_DELAY_MS = 250; // Minimum delay between fallback version attempts (must be > 200ms for Piston API rate limit)
+
+/**
+ * Helper function to delay execution
+ */
+function delay(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+/**
+ * Checks if an error message indicates a rate limit error
+ */
+function isRateLimitError(message: string): boolean {
+  if (!message) return false;
+  const lowerMessage = message.toLowerCase();
+  return (
+    lowerMessage.includes("rate limit") ||
+    lowerMessage.includes("200ms") ||
+    lowerMessage.includes("too many requests") ||
+    lowerMessage.includes("istekler 200ms") ||
+    lowerMessage.includes("requests are limited")
+  );
+}
 
 /**
  * Translates error messages from Piston API to Turkish using OpenAI
@@ -148,7 +171,16 @@ export async function POST(request: Request) {
     let payload: PistonRunResponse | null = null;
 
     // Try each version until one works
-    for (const version of fallbackVersions) {
+    // Use index-based loop to add delay between attempts (except first one)
+    for (let i = 0; i < fallbackVersions.length; i++) {
+      const version = fallbackVersions[i];
+
+      // Add delay before attempting next version (except for first attempt)
+      // This prevents rate limiting: Piston API allows 1 request per 200ms
+      if (i > 0) {
+        await delay(FALLBACK_DELAY_MS);
+      }
+
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
@@ -186,8 +218,89 @@ export async function POST(request: Request) {
           break;
         }
 
-        // Check if error is about unknown runtime
+        // Check for rate limit error
         const errorMessage = payload?.message || payload?.run?.stderr || "";
+        if (isRateLimitError(errorMessage)) {
+          // Rate limit detected - retry with exponential backoff
+          const maxRetries = 3;
+          let retryAttempt = 0;
+          let retrySuccess = false;
+
+          while (retryAttempt < maxRetries && !retrySuccess) {
+            // Exponential backoff: 250ms, 500ms, 1000ms
+            const retryDelay = FALLBACK_DELAY_MS * Math.pow(2, retryAttempt);
+            await delay(retryDelay);
+
+            try {
+              const retryController = new AbortController();
+              const retryTimeoutId = setTimeout(() => retryController.abort(), REQUEST_TIMEOUT_MS);
+
+              const retryResponse = await fetch("https://emkc.org/api/v2/piston/execute", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  language: config.language,
+                  version: version,
+                  files: [
+                    {
+                      name: config.fileName,
+                      content: code,
+                    },
+                  ],
+                  stdin,
+                  compile_timeout: 10_000,
+                  run_timeout: 10_000,
+                  compile_memory_limit: -1,
+                  run_memory_limit: -1,
+                }),
+                cache: "no-store",
+                signal: retryController.signal,
+              });
+
+              clearTimeout(retryTimeoutId);
+              const retryPayload = (await retryResponse.json()) as PistonRunResponse;
+
+              if (retryResponse.ok) {
+                // Retry successful!
+                pistonResponse = retryResponse;
+                payload = retryPayload;
+                retrySuccess = true;
+                break;
+              }
+
+              // If still rate limited, try again
+              const retryErrorMessage = retryPayload?.message || retryPayload?.run?.stderr || "";
+              if (!isRateLimitError(retryErrorMessage)) {
+                // Different error, break retry loop
+                lastError = retryErrorMessage;
+                break;
+              }
+
+              retryAttempt++;
+            } catch (retryError) {
+              // Retry failed, continue to next retry attempt
+              retryAttempt++;
+              if (retryAttempt >= maxRetries) {
+                lastError = "Kod çalıştırma servisi şu anda yoğun. Lütfen birkaç saniye bekleyip tekrar deneyin.";
+              }
+            }
+          }
+
+          // If retry was successful, break from version loop
+          if (retrySuccess) {
+            break;
+          }
+
+          // If all retries failed, continue to next version
+          if (retryAttempt >= maxRetries) {
+            lastError = lastError || "Kod çalıştırma servisi şu anda yoğun. Lütfen birkaç saniye bekleyip tekrar deneyin.";
+            continue;
+          }
+        }
+
+        // Check if error is about unknown runtime
         if (errorMessage.includes("runtime") && errorMessage.includes("unknown")) {
           // This version doesn't exist, try next one
           lastError = errorMessage;
@@ -217,9 +330,18 @@ export async function POST(request: Request) {
     // If we tried all versions and none worked
     if (!pistonResponse || !pistonResponse.ok) {
       const message = lastError || payload?.message || payload?.run?.stderr || "Kod çalıştırma başarısız oldu.";
-      const translatedMessage = await translateErrorToTurkish(message);
+      
+      // Check if it's a rate limit error and provide user-friendly message
+      let finalMessage = message;
+      if (isRateLimitError(message)) {
+        finalMessage = "Kod çalıştırma servisi şu anda yoğun. Lütfen birkaç saniye bekleyip tekrar deneyin.";
+      } else {
+        // Translate other errors to Turkish
+        finalMessage = await translateErrorToTurkish(message);
+      }
+      
       return NextResponse.json(
-        { error: translatedMessage },
+        { error: finalMessage },
         { 
           status: pistonResponse?.status || 500,
           headers: {

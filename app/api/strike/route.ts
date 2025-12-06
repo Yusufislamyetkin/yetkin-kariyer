@@ -573,6 +573,7 @@ export async function GET() {
     }
 
     // Calculate total login days (days user logged in)
+    // This represents the total number of unique days the user has logged in
     // Count unique days from daily_login events
     const loginEvents = await db.gamificationEvent.findMany({
       where: {
@@ -592,17 +593,24 @@ export async function GET() {
       loginDates.add(dateStr);
     });
 
-    // Also add today if user has lastActivityDate set for today
+    // Add today's login if user has lastActivityDate set for today
+    // This ensures today's dashboard visit is counted even if daily_login event hasn't been created yet
     if (streak.lastActivityDate) {
       const lastActivity = new Date(streak.lastActivityDate);
       const lastActivityDateStr = lastActivity.toISOString().split("T")[0];
       loginDates.add(lastActivityDateStr);
     }
 
+    // Also explicitly add today if it's not already in the set
+    // This handles the case where user visits dashboard but daily_login event hasn't been recorded
+    const todayDateStr = today.toISOString().split("T")[0];
+    loginDates.add(todayDateStr);
+
     let totalLoginDays = loginDates.size;
     
     // If no login events found, use totalDaysActive as fallback
     // This happens when daily_login events are not being recorded
+    // But we prefer counting from actual login events for accuracy
     if (totalLoginDays === 0 && streak.totalDaysActive > 0) {
       totalLoginDays = streak.totalDaysActive;
     }

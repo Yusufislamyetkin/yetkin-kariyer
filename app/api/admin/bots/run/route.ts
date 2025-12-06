@@ -164,8 +164,10 @@ export async function POST(request: Request) {
           const needed = config.maxPostsPerDay - todayPosts;
           if (needed > 0 && Math.random() < 0.5) {
             // 50% chance to create a post
-            const result = await createPost(bot.id, () =>
-              generatePostContent(character)
+            const result = await createPost(
+              bot.id,
+              (newsSource) => generatePostContent(character, newsSource),
+              character.expertise
             );
             if (result.success) {
               botResult.activities.push({ type: "createPost", ...result });

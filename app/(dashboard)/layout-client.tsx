@@ -167,22 +167,32 @@ function DashboardLayoutContent({
         ],
       },
       {
-        title: "İlerişim",
+        title: "Yazılım Öğren",
         items: [
           {
-            name: "Sohbetler",
-            href: "/chat/direct",
-            icon: MessageCircle,
+            name: "Yazılım Öğren",
+            href: "/hub/yazilim-ogren",
+            icon: BookOpen,
           },
+        ],
+      },
+      {
+        title: "İş Bul",
+        items: [
           {
-            name: "Gruplar",
-            href: "/chat/groups",
-            icon: Users,
+            name: "İş Bul",
+            href: "/hub/is-bul",
+            icon: Briefcase,
           },
+        ],
+      },
+      {
+        title: "Kazanç Elde Et",
+        items: [
           {
-            name: "Yardımlaşma Toplulukları",
-            href: "/chat",
-            icon: LifeBuoy,
+            name: "Kazanç Elde Et",
+            href: "/hub/kazanc-elde-et",
+            icon: DollarSign,
           },
         ],
       },
@@ -190,109 +200,9 @@ function DashboardLayoutContent({
         title: "Sosyal",
         items: [
           {
-            name: "Haber Akışı",
-            href: "/social/feed",
-            icon: Home,
-          },
-          {
-            name: "Keşfet",
-            href: "/social/explore",
-            icon: Compass,
-          },
-          {
-            name: "Oluştur",
-            href: "/social/create",
-            icon: Plus,
-          },
-          {
-            name: "Bağlantılarım",
-            href: "/dashboard/friends",
-            icon: UserPlus,
-          },
-        ],
-      },
-      {
-        title: "Eğitim",
-        items: [
-          {
-            name: "Kurslar",
-            href: "/education/courses",
-            icon: BookOpen,
-          },
-          {
-            name: "Testler",
-            href: "/education/tests",
-            icon: PenSquare,
-          },
-          {
-            name: "Canlı Kodlama",
-            href: "/education/cases",
-            icon: Code,
-          },
-          {
-            name: "Rozetler",
-            href: "/rozetler",
-            icon: Medal,
-          },
-          {
-            name: "Gelişim ve Analiz",
-            href: "/education/analytics",
-            icon: BarChart3,
-          },
-        ],
-      },
-      {
-        title: "Kazanç",
-        items: [
-          {
-            name: "Hackaton",
-            href: "/education/hackaton",
-            icon: Trophy,
-          },
-          {
-            name: "Freelancer Partner",
-            href: "/freelancer/projects",
-            icon: Handshake,
-          },
-          {
-            name: "Derece Sıralaması",
-            href: "/competition",
-            icon: Medal,
-          },
-          {
-            name: "Kazanç Analizi",
-            href: "/earnings",
-            icon: TrendingUp,
-          },
-          {
-            name: "En Çok Kazananlar",
-            href: "/earnings/leaderboard",
-            icon: DollarSign,
-          },
-        ],
-      },
-      {
-        title: "Kariyer",
-        items: [
-          {
-            name: "CV",
-            href: "/cv/my-cvs",
-            icon: FileText,
-          },
-          {
-            name: "İş İlanları",
-            href: "/jobs/browse",
-            icon: Briefcase,
-          },
-          {
-            name: "Kariyer Planım",
-            href: "/career/roadmap",
-            icon: Target,
-          },
-          {
-            name: "Mülakat",
-            href: "/interview/cv-based",
-            icon: MessageSquare,
+            name: "Sosyal",
+            href: "/hub/sosyal",
+            icon: Users,
           },
         ],
       },
@@ -332,6 +242,26 @@ function DashboardLayoutContent({
     return groups;
   }, [session.user]);
 
+  // Map paths to their hub categories
+  const pathToHubMap: Record<string, string> = {
+    "/education/courses": "/hub/yazilim-ogren",
+    "/education/tests": "/hub/yazilim-ogren",
+    "/education/cases": "/hub/yazilim-ogren",
+    "/rozetler": "/hub/yazilim-ogren",
+    "/education/analytics": "/hub/yazilim-ogren",
+    "/jobs": "/hub/is-bul",
+    "/cv": "/hub/is-bul",
+    "/career": "/hub/is-bul",
+    "/interview": "/hub/is-bul",
+    "/education/hackaton": "/hub/kazanc-elde-et",
+    "/freelancer": "/hub/kazanc-elde-et",
+    "/competition": "/hub/kazanc-elde-et",
+    "/earnings": "/hub/kazanc-elde-et",
+    "/social": "/hub/sosyal",
+    "/chat": "/hub/sosyal",
+    "/dashboard/friends": "/hub/sosyal",
+  };
+
   const isActiveLink = useCallback((href: string) => {
     if (!pathname) {
       return false;
@@ -345,6 +275,14 @@ function DashboardLayoutContent({
       return false;
     }
 
+    // Check if current path belongs to this hub
+    for (const [path, hubPath] of Object.entries(pathToHubMap)) {
+      if (pathname.startsWith(path) && hubPath === href) {
+        return true;
+      }
+    }
+
+    // Check for exact matches
     const hasExactMatch = navigationGroups.some((group) =>
       group.items.some((item) => item.href !== href && pathname === item.href),
     );

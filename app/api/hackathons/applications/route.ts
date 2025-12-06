@@ -43,15 +43,15 @@ export async function GET() {
                 status: true,
               },
             },
-          },
-        },
-        submission: {
-          select: {
-            id: true,
-            status: true,
-            submittedAt: true,
-            title: true,
-            summary: true,
+            submission: {
+              select: {
+                id: true,
+                status: true,
+                submittedAt: true,
+                title: true,
+                summary: true,
+              },
+            },
           },
         },
       },
@@ -91,13 +91,13 @@ export async function GET() {
               role: teamMember?.role ?? null,
             }
           : null,
-        submission: app.submission
+        submission: app.team?.submission
           ? {
-              id: app.submission.id,
-              status: app.submission.status,
-              submittedAt: app.submission.submittedAt.toISOString(),
-              title: app.submission.title,
-              summary: app.submission.summary,
+              id: app.team.submission.id,
+              status: app.team.submission.status,
+              submittedAt: app.team.submission.submittedAt.toISOString(),
+              title: app.team.submission.title,
+              summary: app.team.submission.summary,
             }
           : null,
       };

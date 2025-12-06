@@ -678,6 +678,8 @@ JSON formatında yanıt ver:
         },
       ],
       temperature: 0.7,
+      timeoutMs: 90000, // 90 seconds for complex CV analysis
+      maxRetries: 3, // More retries for complex operations
     });
 
     if (!result.parsed) {
@@ -846,6 +848,8 @@ JSON formatında yanıt ver:
         },
       ],
       temperature: 0.7,
+      timeoutMs: 90000, // 90 seconds for complex technical questions
+      maxRetries: 3, // More retries for complex operations
     });
 
     if (!result.parsed) {

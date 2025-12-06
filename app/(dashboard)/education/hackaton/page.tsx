@@ -183,7 +183,7 @@ export default function HackatonPage() {
           </p>
         </div>
         <Link href="/education/hackaton/applications">
-          <Button variant="outline" className="flex items-center gap-2">
+          <Button variant="gradient" className="flex items-center gap-2">
             <UserCircle className="h-4 w-4" />
             Hackathonlarım
           </Button>

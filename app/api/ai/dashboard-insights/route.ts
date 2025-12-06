@@ -294,7 +294,7 @@ const buildFallbackRecommendations = ({
       ],
       timeframe: "Bugün",
       ctaLabel: "Pratiğe başla",
-      ctaHref: reattempt.href,
+      ctaHref: validateAndFixHref(reattempt.href, resourceCatalog),
       category: "Pratik",
       metric: "Hedef: %80 üzeri skor",
     });
@@ -422,8 +422,8 @@ const generateTestUrl = (
     return `/education/tests/${technologySlug}/${moduleSlug}/${parsed.testId}`;
   }
 
-  // Fallback to old format for backward compatibility
-  return `/education/test/${quizId}`;
+  // Fallback to tests listing page when technology/module info is missing
+  return `/education/tests`;
 };
 
 const FREQUENCIES: GoalFrequency[] = [GoalFrequency.daily, GoalFrequency.weekly, GoalFrequency.monthly];

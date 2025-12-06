@@ -84,8 +84,18 @@ const withAbortTimeout = <T>(
   return promiseFactory(controller.signal)
     .finally(() => clearTimeout(timeout))
     .catch((error) => {
-      if ((error as { name?: string }).name === "AbortError") {
-        throw new Error("AI isteği zaman aşımına uğradı.");
+      // Check for abort errors (timeout or manual abort)
+      if (
+        (error as { name?: string }).name === "AbortError" ||
+        (error as { message?: string }).message?.includes("aborted") ||
+        (error as { message?: string }).message?.includes("Request was aborted")
+      ) {
+        const timeoutError = new Error(
+          `AI isteği zaman aşımına uğradı (${Math.round(timeoutMs / 1000)} saniye).`
+        );
+        (timeoutError as any).isTimeout = true;
+        (timeoutError as any).isRetryable = true;
+        throw timeoutError;
       }
       throw error;
     });
@@ -186,9 +196,30 @@ export async function createChatCompletion<T = unknown>(
       };
     } catch (error) {
       lastError = error;
-      if (attempt === retries) {
+      
+      // Check if this is a retryable error (timeout/abort or network issues)
+      const isRetryableError = 
+        (error as { isRetryable?: boolean }).isRetryable === true ||
+        (error as { isTimeout?: boolean }).isTimeout === true ||
+        (error as { message?: string }).message?.includes("zaman aşımı") ||
+        (error as { message?: string }).message?.includes("aborted") ||
+        (error as { message?: string }).message?.includes("Request was aborted") ||
+        (error as { code?: string }).code === "ECONNRESET" ||
+        (error as { code?: string }).code === "ETIMEDOUT";
+      
+      // If it's the last attempt or not retryable, throw the error
+      if (attempt === retries || !isRetryableError) {
         throw error;
       }
+      
+      // Log retry attempt for timeout errors
+      if ((error as { isTimeout?: boolean }).isTimeout) {
+        console.warn(
+          `[AI_CLIENT] Timeout hatası, tekrar deneniyor (${attempt + 1}/${retries}):`,
+          (error as Error).message
+        );
+      }
+      
       await exponentialBackoff(attempt);
       attempt += 1;
     }

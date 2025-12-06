@@ -102,7 +102,7 @@ export default function DashboardPage() {
   const [participatedHackathons, setParticipatedHackathons] = useState<number>(0);
   const [motivationMessage, setMotivationMessage] = useState<{ message: string; emoji: string } | null>(null);
   const [motivationLoading, setMotivationLoading] = useState(true);
-  const recentBadges = badges.slice(0, 3);
+  const recentBadges = badges.slice(0, 6);
   const { checkStrikeCompletion } = useStrikeCompletionCheck();
 
   // Fetch core dashboard data (non-blocking)
@@ -227,7 +227,9 @@ export default function DashboardPage() {
           if (strikeData && !strikeData.error) {
             setStrikeData(strikeData);
             // Check if strike was newly completed and show notification
-            if (strikeData.isNewlyCompleted) {
+            // This happens when user completes all daily tasks and visits dashboard
+            if (strikeData.isNewlyCompleted === true) {
+              // Trigger celebration modal with confetti
               checkStrikeCompletion();
             }
           } else {

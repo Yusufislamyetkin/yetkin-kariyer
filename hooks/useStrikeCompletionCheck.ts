@@ -49,15 +49,17 @@ export function useStrikeCompletionCheck() {
     const todayDateStr = today.toISOString().split("T")[0];
     const storageKey = `strike_notification_${userId}_${todayDateStr}`;
 
-    // Check if notification was already shown today
+    // Check if notification was already shown today using localStorage
+    // This prevents showing the same notification multiple times per day
     if (typeof window !== "undefined") {
       const alreadyShown = localStorage.getItem(storageKey);
       if (alreadyShown === "true") {
-        return; // Already shown today
+        return; // Already shown today, don't show again
       }
     }
 
     try {
+      // Fetch strike data to check if it was newly completed
       const response = await fetch("/api/strike");
       if (!response.ok) {
         return;
@@ -65,7 +67,7 @@ export function useStrikeCompletionCheck() {
 
       const data = await response.json();
       
-      // Check if strike was newly completed
+      // Check if strike was newly completed (all daily tasks completed today)
       if (data.isNewlyCompleted === true) {
         const strikeNotification = {
           title: "🎉 Günlük Strike Tamamlandı!",
@@ -74,15 +76,16 @@ export function useStrikeCompletionCheck() {
           durationMs: 6000,
         };
 
-        // If there's an active badge, queue the strike notification
+        // If there's an active badge notification, queue the strike notification
+        // This prevents overlapping modals
         if (hasActiveBadge) {
           setPendingStrike(strikeNotification);
         } else {
-          // No active badge, show strike notification immediately
+          // No active badge, show strike notification immediately with confetti
           celebrate(strikeNotification);
           hasShownStrikeRef.current = true;
 
-          // Mark as shown in LocalStorage
+          // Mark as shown in LocalStorage to prevent showing again today
           if (typeof window !== "undefined") {
             localStorage.setItem(storageKey, "true");
           }
@@ -94,6 +97,7 @@ export function useStrikeCompletionCheck() {
   }, [session?.user?.id, celebrate, hasActiveBadge]);
 
   // Mark strike as shown in localStorage when it's displayed
+  // This is a backup mechanism in case the localStorage wasn't set in checkStrikeCompletion
   useEffect(() => {
     if (hasShownStrikeRef.current && session?.user?.id) {
       const userId = session.user.id as string;

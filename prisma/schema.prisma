@@ -234,6 +234,7 @@ model User {
   inventoryItems                UserInventory[]
   botCharacter                  BotCharacter?
   botConfiguration              BotConfiguration?
+  botNewsSources                BotNewsSource[]
   botActivities                 BotActivity[]
   accounts                     Account[]
   certificates                  Certificate[]
@@ -1624,6 +1625,21 @@ model BotConfiguration {
 
   @@index([isActive, lastActivityAt])
   @@map("bot_configurations")
+}
+
+model BotNewsSource {
+  id        String   @id @default(cuid())
+  botId     String
+  sourceId  String   // news-sources.ts'deki kaynak ID'si
+  usedAt    DateTime @default(now())
+  createdAt DateTime @default(now())
+
+  bot User @relation(fields: [botId], references: [id], onDelete: Cascade)
+
+  @@unique([botId, sourceId])
+  @@index([botId])
+  @@index([usedAt])
+  @@map("bot_news_sources")
 }
 
 enum BotActivityType {

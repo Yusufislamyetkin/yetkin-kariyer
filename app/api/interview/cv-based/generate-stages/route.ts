@@ -37,7 +37,19 @@ async function generateInterviewStages(interviewId: string, cvId: string) {
       console.log(`[CV_INTERVIEW_BG] Aşama 1 soruları oluşturuldu: ${stage1.stage1_introduction?.length || 0} soru`);
     } catch (stageError: any) {
       console.error(`[CV_INTERVIEW_BG] Aşama 1 hatası:`, stageError);
-      throw new Error(`Aşama 1 (Genel Tanışma) hatası: ${stageError?.message || "Bilinmeyen hata"}`);
+      const errorMessage = stageError?.message || "Bilinmeyen hata";
+      const isTimeoutError = 
+        errorMessage.includes("zaman aşımı") ||
+        errorMessage.includes("aborted") ||
+        errorMessage.includes("Request was aborted") ||
+        stageError?.isTimeout === true;
+      
+      if (isTimeoutError) {
+        throw new Error(
+          `Aşama 1 (Genel Tanışma) soruları oluşturulurken zaman aşımı oluştu. Lütfen tekrar deneyin.`
+        );
+      }
+      throw new Error(`Aşama 1 (Genel Tanışma) hatası: ${errorMessage}`);
     }
     
     // Interview kaydını güncelle - Aşama 1
@@ -66,7 +78,19 @@ async function generateInterviewStages(interviewId: string, cvId: string) {
       console.log(`[CV_INTERVIEW_BG] Aşama 2 soruları oluşturuldu: ${stage2.stage2_experience?.length || 0} soru`);
     } catch (stageError: any) {
       console.error(`[CV_INTERVIEW_BG] Aşama 2 hatası:`, stageError);
-      throw new Error(`Aşama 2 (Deneyim) hatası: ${stageError?.message || "Bilinmeyen hata"}`);
+      const errorMessage = stageError?.message || "Bilinmeyen hata";
+      const isTimeoutError = 
+        errorMessage.includes("zaman aşımı") ||
+        errorMessage.includes("aborted") ||
+        errorMessage.includes("Request was aborted") ||
+        stageError?.isTimeout === true;
+      
+      if (isTimeoutError) {
+        throw new Error(
+          `Aşama 2 (Deneyim) soruları oluşturulurken zaman aşımı oluştu. Lütfen tekrar deneyin.`
+        );
+      }
+      throw new Error(`Aşama 2 (Deneyim) hatası: ${errorMessage}`);
     }
     
     // Interview kaydını güncelle - Aşama 2
@@ -106,7 +130,19 @@ async function generateInterviewStages(interviewId: string, cvId: string) {
       console.log(`[CV_INTERVIEW_BG] Aşama 3 soruları oluşturuldu: ${stage3Count} soru`);
     } catch (stageError: any) {
       console.error(`[CV_INTERVIEW_BG] Aşama 3 hatası:`, stageError);
-      throw new Error(`Aşama 3 (Teknik) hatası: ${stageError?.message || "Bilinmeyen hata"}`);
+      const errorMessage = stageError?.message || "Bilinmeyen hata";
+      const isTimeoutError = 
+        errorMessage.includes("zaman aşımı") ||
+        errorMessage.includes("aborted") ||
+        errorMessage.includes("Request was aborted") ||
+        stageError?.isTimeout === true;
+      
+      if (isTimeoutError) {
+        throw new Error(
+          `Aşama 3 (Teknik) soruları oluşturulurken zaman aşımı oluştu. Lütfen tekrar deneyin.`
+        );
+      }
+      throw new Error(`Aşama 3 (Teknik) hatası: ${errorMessage}`);
     }
     
     // Tüm soruları birleştir ve formatla
