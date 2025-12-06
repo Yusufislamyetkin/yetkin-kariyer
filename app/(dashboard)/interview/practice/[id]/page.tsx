@@ -250,6 +250,7 @@ export default function InterviewRoomPage() {
   const [codeLanguages, setCodeLanguages] = useState<Record<string, LiveCodingLanguage>>({});
   const [isListening, setIsListening] = useState(false);
   const [speechRecognition, setSpeechRecognition] = useState<any | null>(null);
+  const [showInstructions, setShowInstructions] = useState(true);
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
@@ -271,7 +272,7 @@ export default function InterviewRoomPage() {
       }
     } catch (error) {
       console.error("Fullscreen error:", error);
-      setWarning("Tam ekran modu açılamadı. Lütfen manuel olarak açın.");
+      setWarning("Tam ekran modu açılamadı. Lütfen F11 tuşuna basarak veya tarayıcı menüsünden manuel olarak tam ekran modunu açın.");
     }
   }, []);
 
@@ -464,7 +465,7 @@ export default function InterviewRoomPage() {
       return screenStream;
     } catch (error) {
       console.error("Screen capture error:", error);
-      setWarning("Ekran kaydı başlatılamadı. Lütfen ekran paylaşımına izin verin.");
+      setWarning("Ekran kaydı başlatılamadı. Lütfen ekran paylaşımına izin verin. Tarayıcı izin penceresi açıldığında 'Paylaş' veya 'İzin Ver' butonuna tıklayın. Eğer izin penceresi görünmüyorsa, tarayıcı adres çubuğundaki kamera/mikrofon ikonuna tıklayın.");
       return null;
     }
   }, [handleScreenShareEnded]);
@@ -1092,6 +1093,64 @@ export default function InterviewRoomPage() {
 
   return (
     <>
+      {showInstructions && !loading && interview && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm px-4">
+          <div className="w-full max-w-2xl rounded-2xl border border-gray-800 bg-gray-900 p-6 shadow-2xl shadow-black/50">
+            <h3 className="text-2xl font-bold text-white mb-4">Mülakat Başlamadan Önce</h3>
+            <div className="space-y-4 text-gray-300">
+              <div>
+                <h4 className="text-lg font-semibold text-white mb-2">1. Ekran Kaydı İzni</h4>
+                <p className="text-base leading-relaxed">
+                  Mülakat sırasında ekranınız kaydedilecektir. İzin vermek için:
+                </p>
+                <ul className="mt-2 ml-6 list-disc space-y-1 text-base">
+                  <li>Tarayıcı izin penceresi açıldığında &quot;Paylaş&quot; veya &quot;İzin Ver&quot; butonuna tıklayın</li>
+                  <li>Eğer izin penceresi görünmüyorsa, tarayıcı adres çubuğundaki kamera/mikrofon ikonuna tıklayın</li>
+                  <li>Chrome/Edge: Adres çubuğundaki kilit ikonuna tıklayın → &quot;Ekran paylaşımı&quot; → &quot;İzin ver&quot;</li>
+                  <li>Firefox: Adres çubuğundaki izin ikonuna tıklayın → &quot;Paylaş&quot;</li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="text-lg font-semibold text-white mb-2">2. Tam Ekran Modu</h4>
+                <p className="text-base leading-relaxed">
+                  Mülakat tam ekran modunda yapılmalıdır. Tam ekran açmak için:
+                </p>
+                <ul className="mt-2 ml-6 list-disc space-y-1 text-base">
+                  <li><strong>F11</strong> tuşuna basın (en kolay yöntem)</li>
+                  <li>Veya tarayıcı menüsünden tam ekran seçeneğini seçin</li>
+                  <li>Windows: F11 | Mac: Cmd+Ctrl+F</li>
+                </ul>
+                <p className="mt-2 text-sm text-yellow-400">
+                  ⚠️ Tam ekran modu açılmazsa, sistem sizi uyaracaktır. Manuel olarak F11 tuşuna basabilirsiniz.
+                </p>
+              </div>
+              <div>
+                <h4 className="text-lg font-semibold text-white mb-2">3. Önemli Notlar</h4>
+                <ul className="ml-6 list-disc space-y-1 text-base">
+                  <li>Mülakat sırasında başka sekmelere geçmeyin</li>
+                  <li>Kopyala/yapıştır işlemleri devre dışıdır</li>
+                  <li>Ekran kaydı ve kamera kaydı güvenlik amacıyla saklanacaktır</li>
+                  {window.location.pathname.includes('/cv-based') && (
+                    <li className="text-red-400 font-semibold">⚠️ Sisteminizi aldatma girişiminde bulunursanız hesabınız bloke edilecektir!</li>
+                  )}
+                </ul>
+              </div>
+            </div>
+            <div className="mt-6 flex justify-end">
+              <button
+                type="button"
+                onClick={() => {
+                  setShowInstructions(false);
+                  requestFullscreen();
+                }}
+                className="rounded-lg bg-blue-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-blue-700"
+              >
+                Anladım, Devam Et
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       {exitIntent && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4">
           <div className="w-full max-w-md rounded-2xl border border-gray-800 bg-gray-900 p-6 shadow-2xl shadow-black/50">
@@ -1185,15 +1244,22 @@ export default function InterviewRoomPage() {
               </div>
             </div>
 
-            <div className="mt-5 space-y-3">
-              <p className="text-lg font-medium text-gray-100">
+            <div className="mt-5 space-y-4">
+              {question?.stage === 3 && question?.type === "technical" && (
+                <div className="mb-4 rounded-lg border border-blue-500/40 bg-blue-500/10 px-4 py-3">
+                  <p className="text-sm font-semibold text-blue-200">
+                    📝 Teknik Test Sorusu - CV&apos;nizdeki teknolojilere göre hazırlanmış 5 soruluk mini testin bir parçası
+                  </p>
+                </div>
+              )}
+              <p className="text-xl md:text-2xl font-medium text-gray-100 leading-relaxed">
                 {question?.question ?? question?.prompt ?? "Soru yükleniyor..."}
               </p>
               {question?.prompt && question.prompt !== question.question && (
-                <p className="text-base text-gray-300">{question.prompt}</p>
+                <p className="text-lg md:text-xl text-gray-300 leading-relaxed">{question.prompt}</p>
               )}
               {question?.description && (
-                <p className="rounded-lg border border-gray-800 bg-gray-900/60 px-4 py-3 text-sm text-gray-300">
+                <p className="rounded-lg border border-gray-800 bg-gray-900/60 px-4 py-3 text-base md:text-lg text-gray-300 leading-relaxed">
                   {question.description}
                 </p>
               )}

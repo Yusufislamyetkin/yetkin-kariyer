@@ -440,6 +440,7 @@ const generateTestUrl = (
     const technologyRoute = technologyToRoute(parsed.technology);
     const moduleSlug = encodeURIComponent(parsed.moduleName);
     const testIdSlug = encodeURIComponent(parsed.testId);
+    // Use correct URL format: /education/tests/tests-{tech}/{module}/{testId}
     return `/education/tests/${technologyRoute}/${moduleSlug}/${testIdSlug}`;
   }
 

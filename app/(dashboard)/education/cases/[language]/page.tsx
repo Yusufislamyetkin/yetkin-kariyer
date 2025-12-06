@@ -148,11 +148,17 @@ export default async function LanguageCasesPage({
                 )}
               >
                 {isCompleted && (
-                  <div className="absolute top-0 right-0 z-10 w-20 h-20 overflow-hidden">
-                    <div className="absolute top-0 right-0 w-28 h-28 bg-gradient-to-br from-emerald-500 to-green-600 shadow-xl transform rotate-45 translate-x-8 -translate-y-8 group-hover:scale-110 transition-transform duration-300">
-                      <div className="absolute bottom-0 left-0 w-full h-full flex items-center justify-center transform -rotate-45 translate-x-4 translate-y-4">
-                        <CheckCircle className="h-6 w-6 text-white drop-shadow-lg" />
+                  <div className="absolute top-0 right-0 z-10">
+                    {/* Modern ribbon corner badge */}
+                    <div className="relative w-20 h-20 overflow-hidden">
+                      {/* Ribbon diagonal strip */}
+                      <div className="absolute top-0 right-0 w-28 h-8 bg-gradient-to-r from-emerald-500 via-green-500 to-emerald-600 shadow-lg transform rotate-45 translate-x-6 -translate-y-2 group-hover:shadow-xl group-hover:shadow-emerald-500/50 group-hover:scale-105 transition-all duration-300">
+                        <div className="absolute inset-0 flex items-center justify-center transform -rotate-45 translate-x-0 translate-y-0">
+                          <CheckCircle className="h-4 w-4 text-white drop-shadow-md" />
+                        </div>
                       </div>
+                      {/* Ribbon fold shadow for depth */}
+                      <div className="absolute top-0 right-0 w-4 h-4 bg-emerald-700/30 transform rotate-45 translate-x-6 translate-y-0"></div>
                     </div>
                   </div>
                 )}

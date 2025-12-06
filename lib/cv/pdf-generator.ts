@@ -196,6 +196,35 @@ export async function generatePDFFromElement(
   }
 
   try {
+    // Find and reset scroll position of parent containers before moving element off-screen
+    let scrollContainers: Array<{ element: HTMLElement; scrollTop: number; scrollLeft: number }> = [];
+    let parent = element.parentElement;
+    while (parent) {
+      const style = window.getComputedStyle(parent);
+      if (style.overflow === 'auto' || style.overflowY === 'auto' || style.overflow === 'scroll' || style.overflowY === 'scroll' ||
+          style.overflowX === 'auto' || style.overflowX === 'scroll') {
+        scrollContainers.push({
+          element: parent,
+          scrollTop: parent.scrollTop,
+          scrollLeft: parent.scrollLeft,
+        });
+        parent.scrollTop = 0;
+        parent.scrollLeft = 0;
+      }
+      parent = parent.parentElement;
+    }
+
+    // Also reset element's own scroll position if it's scrollable
+    if (element.scrollTop !== 0 || element.scrollLeft !== 0) {
+      scrollContainers.push({
+        element: element,
+        scrollTop: element.scrollTop,
+        scrollLeft: element.scrollLeft,
+      });
+      element.scrollTop = 0;
+      element.scrollLeft = 0;
+    }
+
     // Store original styles and class name
     const originalClassName = element.className;
     const originalStyles = {
@@ -222,6 +251,7 @@ export async function generatePDFFromElement(
     await new Promise((resolve) => setTimeout(resolve, 100));
 
     // Check if content height exceeds A4 height (297mm)
+    // Use scrollHeight to get the full content height including overflow
     const a4HeightPixels = mmToPixels(297);
     const contentHeight = element.scrollHeight || element.offsetHeight;
     let scaleFactor: number | null = null;
@@ -232,17 +262,36 @@ export async function generatePDFFromElement(
       // Calculate scale factor: 297mm / contentHeight
       scaleFactor = a4HeightPixels / contentHeight;
       
-      // Clamp scale factor between 0.7 and 0.95
-      scaleFactor = Math.max(0.7, Math.min(0.95, scaleFactor));
+      // Clamp scale factor between 0.6 and 0.95 for more aggressive scaling
+      scaleFactor = Math.max(0.6, Math.min(0.95, scaleFactor));
       
       // Apply scale to all child elements
       scaledStyles = applyScaleToElement(element, scaleFactor);
       
       // Wait for scaled styles to apply
       await new Promise((resolve) => setTimeout(resolve, 100));
+      
+      // Re-check height after scaling
+      const newContentHeight = element.scrollHeight || element.offsetHeight;
+      if (newContentHeight > a4HeightPixels) {
+        // If still too tall, apply additional scaling
+        const additionalScale = a4HeightPixels / newContentHeight;
+        const finalScaleFactor = scaleFactor * additionalScale;
+        const finalScaleFactorClamped = Math.max(0.6, Math.min(0.95, finalScaleFactor));
+        
+        // Restore original styles first
+        if (scaledStyles) {
+          restoreOriginalStyles(scaledStyles);
+        }
+        
+        // Apply new scale factor
+        scaledStyles = applyScaleToElement(element, finalScaleFactorClamped);
+        await new Promise((resolve) => setTimeout(resolve, 100));
+      }
     }
 
     // Convert HTML to canvas
+    // Use scrollHeight and scrollWidth to capture the entire content including overflow
     const canvas = await html2canvas(element, {
       scale: scale,
       useCORS: true,
@@ -252,6 +301,8 @@ export async function generatePDFFromElement(
       height: element.scrollHeight || element.offsetHeight,
       windowWidth: element.scrollWidth || element.offsetWidth,
       windowHeight: element.scrollHeight || element.offsetHeight,
+      scrollX: 0,
+      scrollY: 0,
     });
 
     // Restore scaled styles if they were applied
@@ -268,6 +319,12 @@ export async function generatePDFFromElement(
     element.style.opacity = originalStyles.opacity || '';
     element.style.left = '';
     element.style.top = '';
+
+    // Restore scroll positions of all containers
+    scrollContainers.forEach(({ element: container, scrollTop, scrollLeft }) => {
+      container.scrollTop = scrollTop;
+      container.scrollLeft = scrollLeft;
+    });
 
     // Calculate PDF dimensions
     const imgWidth = canvas.width;

@@ -514,7 +514,8 @@ CV'deki kişisel bilgiler, özet, eğitim ve diller bölümlerinden sorular olu�
 1. **Kişisel Tanışma** (1-2 soru):
    - Kullanıcının kendisini tanıtması
    - Kariyer yolculuğu hakkında genel sorular
-   - Bu pozisyona neden başvurduğu
+   - CV'deki kişisel bilgilere ve deneyimlere dayalı sorular
+   - NOT: "Bu pozisyona neden başvurduğu" gibi genel sorular sorma. Bunun yerine CV'deki spesifik bilgilere göre sorular oluştur.
 
 2. **CV Özeti** (1-2 soru):
    - CV özetindeki bilgilere göre sorular
@@ -536,10 +537,12 @@ CV'deki kişisel bilgiler, özet, eğitim ve diller bölümlerinden sorular olu�
 - Pozisyon Tipi: ${positionTypeLabels[cvInfo.positionType]}
 - Seviye: ${cvInfo.level}
 - Deneyim: ${cvInfo.yearsOfExperience} yıl
+- Teknolojiler: ${cvInfo.technologies.join(", ") || "Belirtilmemiş"}
 - Sorular ${cvInfo.level} seviyeye uygun olmalı
 - Tüm sorular Türkçe olmalı
 - Sorular gerçekçi ve pratik olmalı
 - Behavioral sorular STAR metoduna uygun olmalı
+- KRİTİK: Tüm sorular CV'deki gerçek bilgilere dayalı olmalı. "Bu pozisyona neden başvurduğu", "Bu ilana neden başvurdunuz" gibi genel ve CV'ye uygun olmayan sorular SORMA. Bunun yerine CV'deki teknolojilere, deneyimlere, projelere ve eğitim geçmişine özel sorular oluştur.
 
 SORU FORMATI:
 Her soru şu formatta olmalı:
@@ -565,7 +568,11 @@ JSON formatında yanıt ver:
       messages: [
         {
           role: "system",
-          content: `Sen bir ${positionTypeLabels[cvInfo.positionType]} mülakat uzmanısın ve İK profesyonelisin. CV'lere göre çok kapsamlı, gerçekçi ve adil mülakat soruları hazırlıyorsun. CV'deki kişisel bilgiler, özet, eğitim ve diller bölümlerini analiz ederek genel tanışma soruları oluşturuyorsun. Her zaman JSON formatında yanıt ver.`,
+          content: `Sen bir ${positionTypeLabels[cvInfo.positionType]} mülakat uzmanısın ve İK profesyonelisin. CV'lere göre çok kapsamlı, gerçekçi ve adil mülakat soruları hazırlıyorsun. CV'deki kişisel bilgiler, özet, eğitim ve diller bölümlerini analiz ederek genel tanışma soruları oluşturuyorsun. 
+
+KRİTİK KURAL: "Bu pozisyona neden başvurduğu", "Bu ilana neden başvurdunuz" gibi genel ve CV'ye uygun olmayan sorular ASLA sorma. Bunun yerine CV'deki gerçek bilgilere (teknolojiler, deneyimler, projeler, eğitim) dayalı spesifik sorular oluştur. Kullanıcı CV'sine uygun bir işe başvurmuş varsayılmalı.
+
+Her zaman JSON formatında yanıt ver.`,
         },
         {
           role: "user",
@@ -778,7 +785,11 @@ export async function generateStage3Questions(cvId: string): Promise<z.infer<typ
 
       default: // developer
         return `
-- 5-7 adet teknik test sorusu (CV'deki teknolojilere göre, ${cvInfo.level} seviye)
+- 5-7 adet KRİTİK ve NET teknik test sorusu (CV'deki teknolojilere göre, ${cvInfo.level} seviye)
+  * Her soru CV'deki teknolojilerden en az birine spesifik olmalı
+  * Sorular pratik uygulama ve problem çözme odaklı olmalı
+  * Genel bilgi soruları yerine derinlemesine teknik sorular
+  * Örnek: "C# async/await pattern'inde deadlock nasıl önlenir?" gibi spesifik sorular
 - 1 adet canlı kodlama sorusu (${cvInfo.technologies[0] || "C#"} veya benzeri bir dilde)
 - 1 adet bugfix sorusu (hatalı kod verilip düzeltilmesi istenecek)
 - 2-3 adet gerçek dünya senaryosu (örn: Kasım indirimlerinde yoğun trafik, mikroservis mimarisi, performans optimizasyonu, scaling challenges)`;
@@ -807,6 +818,14 @@ ${getTechnicalQuestionsTemplate(cvInfo.positionType)}
 - Teknik sorular CV'deki teknolojilere göre olmalı
 - Gerçek dünya senaryoları pratik ve uygulanabilir olmalı
 ${isDeveloper ? `- Canlı kodlama ve bugfix soruları ${primaryLanguage} dilinde olmalı` : "- Developer pozisyonu olmadığı için canlı kodlama ve bugfix soruları opsiyoneldir"}
+
+KRİTİK: Teknik Sorular İçin Özel Gereksinimler:
+- testQuestions: CV'deki her teknoloji için derinlemesine ve kritik sorular oluştur
+- Sorular sadece genel bilgi sormamalı, pratik uygulama ve problem çözme odaklı olmalı
+- Her soru CV'deki teknolojilerden en az birine spesifik olarak odaklanmalı
+- ${cvInfo.technologies.length > 0 ? `CV'deki teknolojiler (${cvInfo.technologies.join(", ")}) için özel sorular oluştur. Her teknoloji için en az 1 kritik soru olmalı.` : "CV'de teknoloji belirtilmemişse, pozisyon tipine göre uygun teknolojiler için sorular oluştur."}
+- Sorular ${cvInfo.level} seviyeye uygun derinlikte olmalı (beginner: temel kavramlar, intermediate: pratik uygulama, advanced: mimari ve optimizasyon)
+- Test soruları çoktan seçmeli veya açık uçlu olabilir, ancak mutlaka CV'deki teknolojilere özel olmalı
 
 KRİTİK GEREKSİNİMLER:
 1. testQuestions: MUTLAKA en az 5 (beş) soru içermelidir. Daha az soru kabul edilmez!
@@ -894,12 +913,17 @@ DİKKAT:
           role: "system",
           content: `Sen bir ${positionTypeLabels[cvInfo.positionType]} mülakat uzmanısın ve İK profesyonelisin. CV'lere göre çok kapsamlı, gerçekçi ve adil teknik mülakat soruları hazırlıyorsun. Pozisyon tipine göre (${positionTypeLabels[cvInfo.positionType]}) uygun teknik sorular hazırlıyorsun. 
 
-KRİTİK: Her zaman JSON formatında yanıt ver ve aşağıdaki yapıya TAM OLARAK uy:
-- "stage3_technical" ana anahtarı ile başla
-- "testQuestions" array'i MUTLAKA en az 5 soru içermeli
-- "realWorldScenarios" array'i MUTLAKA en az 2 senaryo içermeli
-- ${isDeveloper ? '"liveCoding" ve "bugFix" MUTLAKA obje olarak dahil edilmeli (null değil)' : '"liveCoding" ve "bugFix" opsiyoneldir (null olabilir)'}
-- Her soru için "id", "type", "question" alanları zorunludur`,
+KRİTİK KURALLAR:
+1. testQuestions: CV'deki teknolojilere (${cvInfo.technologies.join(", ") || "belirtilmemiş"}) göre KRİTİK ve NET sorular oluştur
+2. Her soru CV'deki teknolojilerden en az birine spesifik olmalı
+3. Sorular pratik uygulama ve problem çözme odaklı olmalı, genel bilgi soruları değil
+4. ${cvInfo.level} seviyeye uygun derinlikte sorular (beginner: temel, intermediate: pratik, advanced: mimari/optimizasyon)
+5. Her zaman JSON formatında yanıt ver ve aşağıdaki yapıya TAM OLARAK uy:
+   - "stage3_technical" ana anahtarı ile başla
+   - "testQuestions" array'i MUTLAKA en az 5 soru içermeli
+   - "realWorldScenarios" array'i MUTLAKA en az 2 senaryo içermeli
+   - ${isDeveloper ? '"liveCoding" ve "bugFix" MUTLAKA obje olarak dahil edilmeli (null değil)' : '"liveCoding" ve "bugFix" opsiyoneldir (null olabilir)'}
+   - Her soru için "id", "type", "question" alanları zorunludur`,
         },
         {
           role: "user",

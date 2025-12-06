@@ -87,6 +87,26 @@ export default function ViewCVPage() {
       // Wait a bit to ensure DOM is ready
       await new Promise((resolve) => setTimeout(resolve, 500));
 
+      // Find scroll container and reset scroll position
+      const cvElement = document.getElementById("cv-preview-content");
+      let scrollContainer: HTMLElement | null = null;
+      let savedScrollPosition = 0;
+
+      if (cvElement) {
+        // Find parent scroll container (the one with overflow-auto)
+        let parent = cvElement.parentElement;
+        while (parent) {
+          const style = window.getComputedStyle(parent);
+          if (style.overflow === 'auto' || style.overflowY === 'auto' || style.overflow === 'scroll' || style.overflowY === 'scroll') {
+            scrollContainer = parent;
+            savedScrollPosition = parent.scrollTop;
+            parent.scrollTop = 0;
+            break;
+          }
+          parent = parent.parentElement;
+        }
+      }
+
       // Generate PDF from the CV content element
       await generatePDFFromElement("cv-preview-content", {
         filename: `cv-${params.id}.pdf`,
@@ -95,6 +115,11 @@ export default function ViewCVPage() {
         quality: 0.98,
         scale: 2,
       });
+
+      // Restore scroll position
+      if (scrollContainer) {
+        scrollContainer.scrollTop = savedScrollPosition;
+      }
 
       setRetryCount(0);
     } catch (err: any) {
