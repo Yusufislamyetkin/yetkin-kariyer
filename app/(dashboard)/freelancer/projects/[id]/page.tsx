@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Ca
 import { Button } from "@/app/components/ui/Button";
 import { Input } from "@/app/components/ui/Input";
 import { Textarea } from "@/app/components/ui/Textarea";
+import DOMPurify from "isomorphic-dompurify";
 
 interface FreelancerProject {
   id: string;
@@ -161,9 +162,15 @@ export default function FreelancerProjectDetailPage({ params }: { params: { id: 
                 <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                   Açıklama
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 whitespace-pre-wrap">
-                  {project.description}
-                </p>
+                <div 
+                  className="text-gray-600 dark:text-gray-400 prose prose-sm dark:prose-invert max-w-none"
+                  dangerouslySetInnerHTML={{ 
+                    __html: DOMPurify.sanitize(project.description, { 
+                      ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 'ul', 'ol', 'li', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+                      ALLOWED_ATTR: []
+                    })
+                  }}
+                />
               </div>
               <div className="grid md:grid-cols-2 gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
                 {project.budget && (

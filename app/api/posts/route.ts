@@ -176,10 +176,8 @@ export async function GET(request: Request) {
         },
       });
 
-      // Sort by likes count (descending) and then by creation date (descending)
-      posts = allPosts.sort((a: { _count: { likes: number }; createdAt: Date | string }, b: { _count: { likes: number }; createdAt: Date | string }) => {
-        const likesDiff = b._count.likes - a._count.likes;
-        if (likesDiff !== 0) return likesDiff;
+      // Sort by creation date only (descending - newest first)
+      posts = allPosts.sort((a: { createdAt: Date | string }, b: { createdAt: Date | string }) => {
         return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
       });
 

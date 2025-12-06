@@ -12,7 +12,6 @@ function loadFreelancerProjectTemplates() {
     'backend-development.json',
     'frontend-development.json',
     'fullstack-development.json',
-    'devops.json',
     'data-science.json',
     'ui-ux-design.json',
     'qa-testing.json',

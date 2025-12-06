@@ -572,47 +572,24 @@ export async function GET() {
       longestStrikeCombo = Math.max(maxSequence, currentSequence);
     }
 
-    // Calculate total login days (days user logged in)
-    // This represents the total number of unique days the user has logged in
-    // Count unique days from daily_login events
-    const loginEvents = await db.gamificationEvent.findMany({
-      where: {
-        userId,
-        type: "daily_login",
-      },
-      select: {
-        occurredAt: true,
-      },
-    });
+    // Calculate total login days using userStreak.totalDaysActive
+    // This value is already maintained by updateDailyLoginStreak function
+    // which increments it every time user logs in
+    // This ensures we count ALL login days from the user's registration date, not just this week
+    let totalLoginDays = streak.totalDaysActive || 0;
 
-    // Count unique dates from login events
-    const loginDates = new Set<string>();
-    loginEvents.forEach((event: { occurredAt: Date }) => {
-      const eventDate = new Date(event.occurredAt);
-      const dateStr = eventDate.toISOString().split("T")[0];
-      loginDates.add(dateStr);
-    });
-
-    // Add today's login if user has lastActivityDate set for today
-    // This ensures today's dashboard visit is counted even if daily_login event hasn't been created yet
+    // If today's login hasn't been counted yet (lastActivityDate is today but totalDaysActive might not be updated)
+    // This is a safety check, but updateDailyLoginStreak should have already updated it
     if (streak.lastActivityDate) {
       const lastActivity = new Date(streak.lastActivityDate);
       const lastActivityDateStr = lastActivity.toISOString().split("T")[0];
-      loginDates.add(lastActivityDateStr);
-    }
-
-    // Also explicitly add today if it's not already in the set
-    // This handles the case where user visits dashboard but daily_login event hasn't been recorded
-    const todayDateStr = today.toISOString().split("T")[0];
-    loginDates.add(todayDateStr);
-
-    let totalLoginDays = loginDates.size;
-    
-    // If no login events found, use totalDaysActive as fallback
-    // This happens when daily_login events are not being recorded
-    // But we prefer counting from actual login events for accuracy
-    if (totalLoginDays === 0 && streak.totalDaysActive > 0) {
-      totalLoginDays = streak.totalDaysActive;
+      const todayDateStr = today.toISOString().split("T")[0];
+      
+      // If lastActivityDate is today but totalDaysActive seems low, add today
+      // This handles edge cases where updateDailyLoginStreak wasn't called
+      if (lastActivityDateStr === todayDateStr && totalLoginDays === 0) {
+        totalLoginDays = 1;
+      }
     }
 
     // Check if today's strike was newly completed

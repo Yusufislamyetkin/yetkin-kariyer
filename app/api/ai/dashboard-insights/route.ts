@@ -6,7 +6,7 @@ import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { isAIEnabled, createChatCompletion } from "@/lib/ai/client";
 import { generatePersonalizedLessons } from "@/lib/ai/lessons";
-import { normalizeTechnologyName } from "@/lib/utils/technology-normalize";
+import { normalizeTechnologyName, technologyToRoute } from "@/lib/utils/technology-normalize";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -351,21 +351,41 @@ const validateAndFixHref = (
 
 /**
  * Parses quiz ID to extract technology, module, and testId
- * Handles formats like "test-{tech}-{module}-{testId}" or just "{testId}"
+ * Handles formats like "test-{tech}-module-{num}-lesson-{num}" or just "{testId}"
+ * Example: "test-net-core-module-06-lesson-04" -> { technology: "net-core", moduleName: "module-06", testId: "lesson-04" }
  */
 const parseQuizId = (quizId: string): { technology: string | null; moduleName: string | null; testId: string } => {
-  // Check if quiz ID follows format: test-{tech}-{module}-{testId}
+  // Check if quiz ID follows format: test-{tech}-module-{num}-lesson-{num}
   if (quizId.startsWith("test-")) {
-    const parts = quizId.split("-");
-    if (parts.length >= 4) {
-      // Extract testId (last part)
-      const testId = parts[parts.length - 1];
-      // Extract module (second to last part)
-      const moduleName = parts[parts.length - 2];
-      // Extract technology (everything between "test" and module)
-      const technology = parts.slice(1, parts.length - 2).join("-");
-      return { technology, moduleName, testId };
+    // Remove "test-" prefix
+    const withoutPrefix = quizId.substring(5);
+    
+    // Find "module-" in the string
+    const moduleIndex = withoutPrefix.indexOf("module-");
+    if (moduleIndex === -1) {
+      // No module found, return as-is
+      return { technology: null, moduleName: null, testId: quizId };
     }
+    
+    // Find "lesson-" after "module-"
+    const afterModule = withoutPrefix.substring(moduleIndex);
+    const lessonIndex = afterModule.indexOf("lesson-");
+    if (lessonIndex === -1) {
+      // No lesson found, return as-is
+      return { technology: null, moduleName: null, testId: quizId };
+    }
+    
+    // Extract technology (everything before "module-")
+    const technology = withoutPrefix.substring(0, moduleIndex).replace(/-$/, ""); // Remove trailing dash if any
+    
+    // Extract module (from "module-" to before "lesson-")
+    const modulePart = afterModule.substring(0, lessonIndex).replace(/-$/, ""); // Remove trailing dash
+    const moduleName = modulePart; // e.g., "module-06"
+    
+    // Extract testId (from "lesson-" to the end)
+    const testId = afterModule.substring(lessonIndex); // e.g., "lesson-04"
+    
+    return { technology, moduleName, testId };
   }
   // If format doesn't match, return testId as-is
   return { technology: null, moduleName: null, testId: quizId };
@@ -407,19 +427,18 @@ const generateTestUrl = (
 
   // If we have both technology and module, generate correct URL
   if (technology && moduleName) {
-    const normalizedTech = normalizeTechnologyName(technology);
-    const technologySlug = normalizedTech.replace(/\s+/g, "-");
+    const technologyRoute = technologyToRoute(technology);
     const moduleSlug = encodeURIComponent(moduleName);
-    return `/education/tests/${technologySlug}/${moduleSlug}/${quizId}`;
+    return `/education/tests/${technologyRoute}/${moduleSlug}/${quizId}`;
   }
 
-  // Try to parse from quiz ID format: test-{tech}-{module}-{testId}
+  // Try to parse from quiz ID format: test-{tech}-module-{num}-lesson-{num}
   const parsed = parseQuizId(quizId);
-  if (parsed.technology && parsed.moduleName) {
-    const normalizedTech = normalizeTechnologyName(parsed.technology);
-    const technologySlug = normalizedTech.replace(/\s+/g, "-");
+  if (parsed.technology && parsed.moduleName && parsed.testId) {
+    const technologyRoute = technologyToRoute(parsed.technology);
     const moduleSlug = encodeURIComponent(parsed.moduleName);
-    return `/education/tests/${technologySlug}/${moduleSlug}/${parsed.testId}`;
+    const testIdSlug = encodeURIComponent(parsed.testId);
+    return `/education/tests/${technologyRoute}/${moduleSlug}/${testIdSlug}`;
   }
 
   // Fallback to tests listing page when technology/module info is missing

@@ -15,6 +15,8 @@ interface Activity {
 
 interface ActivityTimelineProps {
   activities: Activity[];
+  title?: string;
+  headerContent?: React.ReactNode;
 }
 
 const activityIcons = {
@@ -39,7 +41,7 @@ const activityColors = {
   interview: "from-purple-500 to-pink-500",
 };
 
-export function ActivityTimeline({ activities }: ActivityTimelineProps) {
+export function ActivityTimeline({ activities, title = "Son Aktiviteler", headerContent }: ActivityTimelineProps) {
   if (activities.length === 0) {
     return (
       <Card variant="glass">
@@ -55,18 +57,25 @@ export function ActivityTimeline({ activities }: ActivityTimelineProps) {
   return (
     <Card variant="glass" className="relative overflow-hidden tech-card-glow">
       <CardHeader>
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center shadow-lg">
-            <Clock className="w-5 h-5 text-white" />
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center shadow-lg">
+              <Clock className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <CardTitle className="text-xl font-bold text-gray-900 dark:text-gray-100">
+                {title}
+              </CardTitle>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Son {activities.length} aktivite
+              </p>
+            </div>
           </div>
-          <div>
-            <CardTitle className="text-xl font-bold text-gray-900 dark:text-gray-100">
-              Son Aktiviteler
-            </CardTitle>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              Son {activities.length} aktivite
-            </p>
-          </div>
+          {headerContent && (
+            <div className="flex items-center gap-2">
+              {headerContent}
+            </div>
+          )}
         </div>
       </CardHeader>
       <CardContent>

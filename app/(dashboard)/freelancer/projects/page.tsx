@@ -6,6 +6,7 @@ import { Plus, Search, Filter, Calendar, Users, TrendingUp, X, Clock, DollarSign
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
 import { Input } from "@/app/components/ui/Input";
+import DOMPurify from "isomorphic-dompurify";
 
 interface FreelancerProject {
   id: string;
@@ -392,9 +393,15 @@ export default function FreelancerProjectsPage() {
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-4 sm:space-y-5 pt-0 px-4 sm:px-6 pb-4 sm:pb-6">
-                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 line-clamp-3 leading-relaxed">
-                    {project.description}
-                  </p>
+                  <div 
+                    className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 line-clamp-3 leading-relaxed prose prose-sm dark:prose-invert max-w-none"
+                    dangerouslySetInnerHTML={{ 
+                      __html: DOMPurify.sanitize(project.description, { 
+                        ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 'ul', 'ol', 'li', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+                        ALLOWED_ATTR: []
+                      })
+                    }}
+                  />
                   <div className="flex flex-wrap gap-2 sm:gap-3 md:gap-4 text-xs sm:text-sm">
                     {project.budget && (
                       <div className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 font-medium">

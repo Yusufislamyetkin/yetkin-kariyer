@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { normalizeCourseContent } from "@/lib/education/courseContent";
+import { technologyToRoute } from "@/lib/utils/technology-normalize";
 
 export const dynamic = 'force-dynamic';
 
@@ -11,6 +12,65 @@ function ensureString(value: unknown): string | undefined {
   }
   const trimmed = value.trim();
   return trimmed.length > 0 ? trimmed : undefined;
+}
+
+/**
+ * Parses quiz ID to extract technology, module, and testId
+ * Handles formats like "test-{tech}-module-{num}-lesson-{num}" or just "{testId}"
+ * Example: "test-net-core-module-06-lesson-04" -> { technology: "net-core", moduleName: "module-06", testId: "lesson-04" }
+ */
+function parseQuizId(quizId: string): { technology: string | null; moduleName: string | null; testId: string } {
+  // Check if quiz ID follows format: test-{tech}-module-{num}-lesson-{num}
+  if (quizId.startsWith("test-")) {
+    // Remove "test-" prefix
+    const withoutPrefix = quizId.substring(5);
+    
+    // Find "module-" in the string
+    const moduleIndex = withoutPrefix.indexOf("module-");
+    if (moduleIndex === -1) {
+      // No module found, return as-is
+      return { technology: null, moduleName: null, testId: quizId };
+    }
+    
+    // Find "lesson-" after "module-"
+    const afterModule = withoutPrefix.substring(moduleIndex);
+    const lessonIndex = afterModule.indexOf("lesson-");
+    if (lessonIndex === -1) {
+      // No lesson found, return as-is
+      return { technology: null, moduleName: null, testId: quizId };
+    }
+    
+    // Extract technology (everything before "module-")
+    const technology = withoutPrefix.substring(0, moduleIndex).replace(/-$/, ""); // Remove trailing dash if any
+    
+    // Extract module (from "module-" to before "lesson-")
+    const modulePart = afterModule.substring(0, lessonIndex).replace(/-$/, ""); // Remove trailing dash
+    const moduleName = modulePart; // e.g., "module-06"
+    
+    // Extract testId (from "lesson-" to the end)
+    const testId = afterModule.substring(lessonIndex); // e.g., "lesson-04"
+    
+    return { technology, moduleName, testId };
+  }
+  // If format doesn't match, return testId as-is
+  return { technology: null, moduleName: null, testId: quizId };
+}
+
+/**
+ * Generates the correct URL for a test quiz
+ */
+function generateTestUrl(quizId: string): string {
+  // Try to parse from quiz ID format: test-{tech}-module-{num}-lesson-{num}
+  const parsed = parseQuizId(quizId);
+  if (parsed.technology && parsed.moduleName && parsed.testId) {
+    const technologyRoute = technologyToRoute(parsed.technology);
+    const moduleSlug = encodeURIComponent(parsed.moduleName);
+    const testIdSlug = encodeURIComponent(parsed.testId);
+    return `/education/tests/${technologyRoute}/${moduleSlug}/${testIdSlug}`;
+  }
+  
+  // Fallback to tests listing page when technology/module info is missing
+  return `/education/tests`;
 }
 
 function normalizeLessonTopic(topic: Record<string, any>, slug: string) {
@@ -213,7 +273,7 @@ export async function GET(request: Request) {
         title: q.title,
         description: q.description,
         level: q.level,
-        url: `/education/test/${q.id}`,
+        url: generateTestUrl(q.id),
       }));
 
     const quizItems = quizzes

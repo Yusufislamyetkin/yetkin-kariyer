@@ -1,71 +1,71 @@
 [
   {
     "title": "Dinamik İçerik Yönetim Sistemi (CMS)",
-    "description": "Mevcut web sitemizin yönetim paneli çok hantal ve pazarlama ekibimiz en ufak bir metin değişikliği için bile IT departmanını beklemek zorunda kalıyor. Bize özel, WordPress kadar kolay ama güvenlik açığı olmayan bir CMS istiyoruz. Editörlerimiz sürükle-bırak mantığıyla 'landing page' oluşturabilmeli. Özellikle SEO tarafında elimiz kolumuz bağlı; URL yapılarını, meta açıklamalarını ve sitemap'i panelden kimseye ihtiyaç duymadan yönetebilmemiz şart.",
-    "budget": 65000,
+    "description": "<p>Mevcut web sitemizin yönetim paneli çok hantal ve pazarlama ekibimiz en ufak bir metin değişikliği için bile IT departmanını beklemek zorunda kalıyor. Bize özel, WordPress kadar kolay yönetilebilir ama güvenlik açığı barındırmayan özel bir CMS (Laravel veya .NET Core) yazdırmak istiyoruz.</p><p><strong>Panelden beklentilerimiz:</strong></p><ul><li><strong>Sürükle-Bırak Editör:</strong> Kampanya sayfaları (Landing Page) oluştururken yazılımcıya ihtiyaç duymadan, hazır blokları sürükleyerek sayfa tasarlayabileceğimiz bir yapı olmalıdır.</li><li><strong>SEO Yönetimi:</strong> Her sayfanın Title, Meta Description, URL (Slug) ve Canonical etiketlerini panelden özgürce değiştirebilmeliyiz.</li><li><strong>Medya Optimizasyonu:</strong> Yüklediğimiz yüksek boyutlu görselleri sistem otomatik olarak küçültmeli ve WebP formatına çevirmelidir.</li><li><strong>Çoklu Dil:</strong> İçerikleri farklı dillerde girebileceğimiz, dil değişiminde URL yapısının bozulmadığı (site.com/en/about) bir altyapı kurulmalıdır.</li><li><strong>Yetkilendirme:</strong> Stajyerlerin sadece blog yazısı girebileceği ama silemeyeceği, yöneticilerin ise her şeyi yapabileceği detaylı bir rol yönetimi olmalıdır.</li></ul><p>Sistemin veritabanı yedeğini her gece otomatik alıp mail atan bir script de projeye dahil edilmelidir.</p>",
+    "budget": 6500,
     "deadline": "2025-03-20T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Çok Dilli Kurumsal Portal",
-    "description": "Global pazara açılıyoruz ve şu anki sitemiz bu yükü kaldırmıyor. 5 farklı dilde (EN, DE, FR, TR, AR) yayın yapacak, ziyaretçinin girdiği ülkeye göre otomatik dil ve o bölgenin ofis iletişim bilgilerini getirecek akıllı bir yapı arıyoruz. Sadece çeviri yetmez; Almanya'dan girene Euro, Türkiye'den girene TL fiyat listesi göstermeliyiz. Ayrıca her ülkenin yasal uyarı metinleri farklı, bunları ayrı ayrı yönetebileceğimiz bir altyapı gerekiyor.",
-    "budget": 85000,
+    "description": "<p>Global pazara açılan firmamız için, 5 farklı dilde (EN, DE, FR, TR, AR) yayın yapacak ve ziyaretçinin girdiği ülkeye göre içeriği otomatik özelleştirecek akıllı bir web portalı arıyoruz.</p><p><strong>Proje detayları:</strong></p><ul><li><strong>Geo-IP Tespiti:</strong> Ziyaretçinin IP adresinden hangi ülkeden girdiği tespit edilmeli; Almanya'dan girene Euro fiyatlar ve Almanca içerik, Türkiye'den girene TL ve Türkçe içerik gösterilmelidir.</li><li><strong>Yerelleştirme (l10n):</strong> Sadece dil çevirisi değil; tarih formatları, para birimleri ve telefon numarası validasyonları da o ülkenin standartlarına uygun olmalıdır.</li><li><strong>Yasal Uyarılar:</strong> Her ülkenin KVKK/GDPR metinleri farklı olduğu için, kullanıcıya girdiği bölgeye uygun çerez (Cookie) uyarısı çıkarılmalıdır.</li><li><strong>Performans (CDN):</strong> Site dünyanın her yerinden hızlı açılması için Cloudflare CDN ile entegre çalışacak şekilde yapılandırılmalıdır (Static Site Generation tercih sebebidir).</li><li><strong>İletişim Formları:</strong> Her dilden gelen form başvurusu, o dilden sorumlu satış temsilcisinin e-posta adresine yönlendirilmelidir.</li></ul><p>Arapça dil desteği için sitenin sağdan sola (RTL) kusursuz dönebilmesi gerekmektedir.</p>",
+    "budget": 8500,
     "deadline": "2025-04-10T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "E-Öğrenme (LMS) Platformu",
-    "description": "Udemy benzeri ama sadece kendi markamıza özel kapalı devre bir eğitim platformu kurmak istiyoruz. En büyük endişemiz videoların indirilip çalınması; bu yüzden güvenli bir streaming altyapısı (HLS vs.) olmazsa olmaz. Öğrenci eğitimi bitirdiğinde sistem otomatik olarak ismine özel PDF sertifika üretip mail atmalı. Ayrıca kredi kartı ile tekil kurs satışı yapacağız, ödeme sistemi entegrasyonu pürüzsüz çalışmalı.",
-    "budget": 120000,
+    "description": "<p>Udemy benzeri ama sadece kendi şirket içi eğitimlerimize ve bayilerimize özel, kapalı devre çalışacak bir video eğitim platformu kurmak istiyoruz. En büyük endişemiz videoların indirilip çalınmasıdır.</p><p><strong>Güvenlik ve özellikler:</strong></p><ul><li><strong>Video Koruma:</strong> Videolar sunucuda şifreli saklanmalı ve sadece yetkili kullanıcı izlerken 'HLS Streaming' teknolojisiyle ve token korumalı olarak oynatılmalıdır.</li><li><strong>Sertifika Motoru:</strong> Eğitimi %100 tamamlayan ve sınavdan geçen kullanıcıya, ismine özel, karekodlu ve doğrulanabilir bir PDF sertifika üretilip mail atılmalıdır.</li><li><strong>Sınav Modülü:</strong> Video aralarına veya sonuna çoktan seçmeli, süre kısıtlamalı testler eklenebilmeli, barajı geçemeyen bir sonraki videoya geçememelidir.</li><li><strong>Satış Entegrasyonu:</strong> Eğitimlerimizi dışarıya da satabilmek için Iyzico veya Stripe ödeme altyapısı sisteme entegre edilmelidir.</li><li><strong>İlerleme Takibi:</strong> Yöneticiler, hangi personelin hangi videoda kaldığını ve sınav başarı durumunu raporlayabilmelidir.</li></ul><p>Tasarımın mobilde de sorunsuz çalışması (Responsive) ve video player'ın mobil uyumlu olması şarttır.</p>",
+    "budget": 9500,
     "deadline": "2025-05-05T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Restoran Rezervasyon ve Menü Sistemi",
-    "description": "Akşam servislerinde telefon trafiğini yönetemiyoruz, personel sürekli telefonda. Web sitemiz üzerinden çalışacak, müşterinin masa ve saat seçebileceği bir rezervasyon modülü lazım. Müşteri rezervasyonu yapınca bize tablet üzerinden bildirim düşmeli. Ayrıca kağıt menü maliyetlerinden kurtulmak istiyoruz; QR kodla okutulan, mobilde hızlı açılan ve ürünleri 'Tükendi' olarak işaretleyebileceğimiz dijital bir menü de bu işe dahil edilmeli.",
-    "budget": 45000,
+    "description": "<p>Popüler restoranımızda akşam servislerinde telefon trafiğini yönetemiyoruz. Web sitemiz üzerinden çalışacak, müşterinin masa seçip kapora ödeyebileceği bir rezervasyon sistemi istiyoruz.</p><p><strong>İstenen modüller:</strong></p><ul><li><strong>Masa Planı:</strong> Restoranın kuşbakışı krokisi ekrana çizilmeli, müşteri boş masaları görüp (uçak koltuk seçimi gibi) istediği masayı rezerve edebilmelidir.</li><li><strong>SMS Doğrulama:</strong> Gereksiz rezervasyonları önlemek için müşterinin telefonuna gelen kodla doğrulama yapması şarttır.</li><li><strong>Dijital Menü:</strong> Masalardaki QR kodu okutan müşteriler, güncel menüyü, fotoğrafları ve fiyatları görebilmeli; garson çağırma butonuna basabilmelidir.</li><li><strong>Yönetim Tableti:</strong> Yeni rezervasyon geldiğinde kasadaki tablet sesli uyarı vermeli ve garsonlar rezervasyonu onaylayıp reddedebilmelidir.</li><li><strong>Stok Durumu:</strong> Biten yemekler (Örn: 'Levrek bitti') admin panelinden tek tıkla menüde pasif hale getirilebilmelidir.</li></ul><p>Sistemin basit arayüzlü olması ve yoğun saatlerde çökmemesi en önemli kriterdir.</p>",
+    "budget": 4500,
     "deadline": "2025-03-15T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Kreatif Portföy ve Galeri Sitesi",
-    "description": "Ajansımız için 'Vay be' dedirtecek bir vitrin sitesi istiyoruz. Standart şablonlardan sıkıldık. İşlerimizi sergilerken 'Masonry' veya asimetrik ızgara yapıları kullanmak, sayfalar arası geçişlerde yumuşak animasyonlar (page transitions) görmek istiyoruz. Ancak site çok görsel ağırlıklı olacağı için açılış hızı yavaşlamamalı, lazy-load optimizasyonu çok iyi yapılmalı. Vimeo'dan çektiğimiz showreel videoları takılmadan oynamalı.",
-    "budget": 28000,
+    "description": "<p>Reklam ajansımız için, yaptığımız işleri sergileyeceğimiz, standart şablonlardan uzak, 'Vay be' dedirtecek görsel ağırlıklı bir vitrin sitesi tasarlatmak istiyoruz.</p><p><strong>Görsel ve teknik detaylar:</strong></p><ul><li><strong>Masonry Layout:</strong> Proje görsellerinin Pinterest tarzı asimetrik ızgara yapısında dizildiği, ekran boyutuna göre otomatik yerleşen bir yapı.</li><li><strong>Page Transitions:</strong> Sayfalar arası geçişte beyaz ekran yerine, markamızın logosunun animasyonla geldiği yumuşak geçiş efektleri (Barba.js vb.).</li><li><strong>Showreel Entegrasyonu:</strong> Ana sayfada arka planda tam ekran oynayan, ancak siteyi yavaşlatmayan optimize edilmiş video döngüsü.</li><li><strong>Lazy Load:</strong> Sitede çok fazla yüksek çözünürlüklü görsel olacağı için, kullanıcı aşağı indikçe yüklenen (Lazy loading) bir yapı kurulmalıdır.</li><li><strong>Mikro Animasyonlar:</strong> Mouse ile görsellerin üzerine gelindiğinde (Hover) başlığın kayması veya rengin değişmesi gibi şık efektler.</li></ul><p>Tasarım ödüllerine aday olabilecek kalitede, minimal ama etkileyici bir kodlama bekliyoruz.</p>",
+    "budget": 2800,
     "deadline": "2025-02-25T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Emlak İlan ve Arama Platformu",
-    "description": "Bölgesel emlak ofisimiz için Sahibinden/Zingat mantığında ama daha butik bir ilan sitesi yaptıracağız. En kritik özellik harita araması; kullanıcı haritada bir bölgeyi parmağıyla çizip 'Bu alandaki kiralıkları getir' diyebilmeli. Danışmanlarımız sahadayken cepten fotoğraf çekip siteye ilan girebilsin istiyoruz, admin paneli mobilde kusursuz çalışmalı. İlan karşılaştırma ve 'Fiyat düşünce haber ver' özellikleri de müşteri tutmak için şart.",
-    "budget": 75000,
+    "description": "<p>Bölgesel emlak ofisimiz için, Sahibinden veya Zingat mantığında çalışan ama daha butik ve kullanımı kolay bir ilan yönetim scripti yazdırmak istiyoruz.</p><p><strong>Özellikler:</strong></p><ul><li><strong>Haritalı Arama:</strong> Kullanıcı harita üzerinde bir bölgeyi parmağıyla çizerek (Polygon Search) 'Sadece bu alandaki kiralıkları getir' diyebilmelidir.</li><li><strong>Mobil Admin:</strong> Danışmanlarımız sahadayken cep telefonundan fotoğraf çekip, konum işaretleyip siteye hızlıca ilan girebilmelidir.</li><li><strong>Filtreleme:</strong> 'Metroya yakın', 'Krediye uygun', 'Balkonlu' gibi detaylı özelliklere göre akıllı filtreleme yapılmalıdır.</li><li><strong>Karşılaştırma:</strong> Kullanıcı beğendiği 3 ilanı seçip yan yana özelliklerini ve fiyatlarını kıyaslayabilmelidir.</li><li><strong>Fiyat Alarmı:</strong> Bir ilanın fiyatı düştüğünde, o ilanı favoriye ekleyen kullanıcılara otomatik bildirim maili gitmelidir.</li></ul><p>Google Maps API maliyetlerini düşürmek için OpenStreetMap veya Leaflet.js alternatifleri değerlendirilebilir.</p>",
+    "budget": 7500,
     "deadline": "2025-04-20T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Etkinlik Biletleme ve Kapı Kontrol Sistemi",
-    "description": "Bilet satış aracılarına komisyon ödemekten yorulduk, kendi biletleme altyamızı kuracağız. Sistem üzerinden konser/etkinlik oluşturup farklı kategorilerde (VIP, Sahne Önü vb.) bilet satabilmeliyiz. Satış sonrası müşteriye karekodlu (QR) bir bilet gitmeli. Etkinlik günü kapıdaki güvenlik görevlileri, ellerindeki uygulama ile bu kodu okutup kişiyi içeri alabilmeli (Check-in).",
-    "budget": 55000,
+    "description": "<p>Konser ve tiyatro organizasyonlarımızda bilet satış aracılarına yüksek komisyon ödemekten yorulduk. Kendi web sitemiz üzerinden bilet satıp, kapıda kontrol edebileceğimiz bir sistem istiyoruz.</p><p><strong>Sistem akışı:</strong></p><ul><li><strong>Koltuk Seçimi:</strong> Tiyatro salonunun oturma planının ekrana çizildiği, kullanıcının boş koltukları seçip satın alabildiği interaktif SVG harita.</li><li><strong>QR Bilet:</strong> Ödeme başarılı olduğunda müşteriye benzersiz ve şifreli bir QR kod içeren PDF biletin e-posta ile gönderilmesi.</li><li><strong>Kapı Uygulaması:</strong> Güvenlik görevlilerinin herhangi bir telefonla bu QR kodu okutup 'Geçerli', 'Zaten Okutuldu' veya 'Sahte' uyarısını görebileceği basit bir web arayüzü.</li><li><strong>Fiyatlandırma:</strong> Erken dönem (Early Bird), Öğrenci ve VIP gibi farklı kategorilerde ve zaman ayarlı fiyat tanımlayabilme.</li><li><strong>Raporlama:</strong> Etkinlik anında içeride kaç kişi var, ne kadar ciro yapıldı gibi verilerin canlı takibi.</li></ul><p>Aynı koltuğun aynı anda iki kişiye satılmaması (Concurrency control) için veritabanı işlemlerinde kilit mekanizması kullanılmalıdır.</p>",
+    "budget": 5500,
     "deadline": "2025-03-30T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Yüksek Trafikli Haber Portalı",
-    "description": "Anlık trafik artışlarını (spike) kaldırabilecek, sunucuyu yormayan, cache yapısı güçlü bir haber yazılımına ihtiyacımız var. Editörlerin 'Son Dakika' bandını saniyeler içinde güncelleyebilmesi lazım. Gelir modelimiz reklam üzerine, bu yüzden Google AdSense ve özel banner alanları içeriği boğmadan stratejik yerlere yerleştirilmeli. Google News uyumluluğu ve AMP desteği projenin en önemli teknik gereksinimi.",
-    "budget": 42000,
+    "description": "<p>Yerel bir gazete olarak dijital yayıncılığa geçiyoruz. Anlık trafik artışlarını (spike) kaldırabilecek, sunucuyu yormayan, önbellek (Cache) yapısı çok güçlü bir haber yazılımına ihtiyacımız var.</p><p><strong>Teknik gereksinimler:</strong></p><ul><li><strong>Son Dakika Bandı:</strong> Editörlerin paneli üzerinden girdiği flaş haberlerin, sayfayı yenilemeye gerek kalmadan (WebSocket veya AJAX poll) kullanıcının ekranına düşmesi.</li><li><strong>Reklam Alanları:</strong> Google AdSense ve özel banner alanlarının, içeriği boğmadan ama görünürlüğü yüksek yerlere stratejik olarak yerleştirilmesi.</li><li><strong>AMP ve Google News:</strong> Haberlerin Google'da hızlı indekslenmesi ve Discover'a düşmesi için %100 AMP uyumlu ve Schema.org yapısına uygun kodlama.</li><li><strong>Galeri Modülü:</strong> Foto galeri haberlerinde sayfayı her defasında yenilemek yerine, hızlı geçiş sağlayan AJAX tabanlı bir slider yapısı.</li><li><strong>Yazar Köşesi:</strong> Köşe yazarlarının yazılarını girebileceği, okurların yorum yapabileceği (moderasyonlu) bir bölüm.</li></ul><p>Sunucu maliyetini düşürmek için statik dosya önbellekleme (Varnish veya Nginx Cache) yapılandırması da yapılmalıdır.</p>",
+    "budget": 4200,
     "deadline": "2025-03-10T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Online Doktor Randevu Sistemi",
-    "description": "Kliniğimizin sekreteryası randevuları organize etmekte zorlanıyor. Web sitemize entegre edeceğimiz bir modülle hastalar doktorların boş saatlerini görüp randevu alabilsin. Sistem randevudan 1 gün önce hastaya otomatik SMS hatırlatması yapsın istiyoruz. Arka tarafta basit bir hasta kartı da olsun; doktor hastanın geçmiş tahlillerini ve reçetelerini tek ekranda görebilsin. KVKK uyumluluğu bizim için kırmızı çizgi, veriler şifreli tutulmalı.",
-    "budget": 68000,
+    "description": "<p>Kliniğimizin sekreteryası randevuları organize etmekte zorlanıyor. Web sitemize entegre edeceğimiz bir modülle hastalar doktorların boş saatlerini görüp randevu alabilsin istiyoruz.</p><p><strong>Fonksiyonlar:</strong></p><ul><li><strong>Takvim Entegrasyonu:</strong> Doktorların Google Takvim'i ile senkronize çalışan, oradaki dolulukları otomatik kapatan çift yönlü bir yapı.</li><li><strong>Hatırlatma Servisi:</strong> Randevudan 24 saat önce hastaya SMS ve E-posta ile hatırlatma giden, 'Geleceğim/Gelmeyeceğim' diye teyit butonları olan bir akış.</li><li><strong>Hasta Kartı:</strong> Doktorun panele girdiğinde hastanın geçmiş tahlillerini, reçetelerini ve notlarını tek ekranda görebileceği bir CRM modülü.</li><li><strong>Online Görüşme:</strong> Fiziksel randevunun yanı sıra, Tele-tıp için entegre video görüşme (Jitsi veya Zoom API) linki oluşturabilme.</li><li><strong>Veri Gizliliği:</strong> Hasta verileri hassas olduğu için veritabanında şifreli tutulmalı ve KVKK aydınlatma metni onaylatılmadan işlem yapılmamalıdır.</li></ul><p>Randevu iptallerinde boşalan saatin otomatik olarak tekrar satışa açılması gerekmektedir.</p>",
+    "budget": 6800,
     "deadline": "2025-04-15T00:00:00.000Z",
     "status": "open"
   },
   {
     "title": "Kurumsal Web Sitesi Yenileme",
-    "description": "20 yıllık sanayi firmasıyız ama web sitemiz hala 2010'dan kalma duruyor. Kurumsal kimliğimizi yansıtacak, ciddi, güven veren ama modern bir tasarım istiyoruz. Ürün kataloglarımızı PDF olarak indirtebileceğimiz, referanslarımızı logolarla sergileyebileceğimiz temiz bir yapı olsun. İletişim formundan gelen mesajlar doğrudan ilgili departman müdürünün mailine düşmeli, spamlara karşı da Google ReCaptcha koruması şart.",
-    "budget": 35000,
+    "description": "<p>20 yıllık sanayi firmasıyız ama web sitemiz hala 2010 teknolojisiyle yapılmış ve mobilde düzgün açılmıyor. Kurumsal kimliğimizi yansıtacak, ciddi, güven veren ve modern bir web sitesi tasarımı istiyoruz.</p><p><strong>Beklenen çalışmalar:</strong></p><ul><li><strong>Mobil Uyumluluk:</strong> Sitenin tüm tablet ve telefonlarda kusursuz görünen (Responsive), menülerin parmakla kolay kullanıldığı bir yapıda olması.</li><li><strong>Ürün Kataloğu:</strong> Üretimini yaptığımız 500+ parçanın teknik çizimlerini, özelliklerini ve PDF broşürlerini içeren, kategorize edilmiş bir ürün vitrini.</li><li><strong>Referanslar:</strong> Çalıştığımız büyük markaların logolarını ve tamamlanan projeleri filtreli bir portfolyo sayfasında sergileme.</li><li><strong>Spam Koruması:</strong> İletişim formundan gelen mesajların doğrudan ilgili departmana düşmesi ve botlara karşı Google ReCaptcha v3 ile korunması.</li><li><strong>Hız Optimizasyonu:</strong> Sitenin açılış hızının 2 saniyenin altında olması ve Google PageSpeed skorunun mobilde en az 80 olması.</li></ul><p>Site yayına alındıktan sonra 1 yıl boyunca olası kod hatalarına karşı ücretsiz bakım desteği bekliyoruz.</p>",
+    "budget": 3500,
     "deadline": "2025-03-05T00:00:00.000Z",
     "status": "open"
   }

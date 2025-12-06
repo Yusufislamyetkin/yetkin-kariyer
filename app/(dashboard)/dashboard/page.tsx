@@ -30,6 +30,7 @@ import { Button } from "@/app/components/ui/Button";
 import type { MentorRecommendation } from "@/types";
 import { StrikeDisplay } from "./_components/StrikeDisplay";
 import { useStrikeCompletionCheck } from "@/hooks/useStrikeCompletionCheck";
+import { ActivityTimeline } from "../profile/_components/ActivityTimeline";
 
 interface DashboardStats {
   quizAttempts: number;
@@ -797,13 +798,30 @@ export default function DashboardPage() {
       </div>
 
       {/* Recent Activity */}
-      <Card variant="elevated" hover>
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <CardTitle className="flex items-center gap-2 text-xl">
-              <Clock className="h-6 w-6 text-gray-600 dark:text-gray-400" />
-              Kullanıcı Hareketleri
-            </CardTitle>
+      {activitiesLoading ? (
+        <Card variant="elevated" hover>
+          <CardContent className="py-12">
+            <div className="flex items-center justify-center">
+              <div className="flex flex-col items-center gap-3">
+                <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Yükleniyor...</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      ) : (
+        <ActivityTimeline
+          activities={activities.map((activity) => ({
+            id: activity.id,
+            type: activity.type as "lesson" | "quiz" | "live-coding" | "hackathon" | "cv" | "application" | "badge" | "interview",
+            title: activity.title,
+            score: activity.score,
+            date: activity.date,
+            icon: activity.icon,
+            timeAgo: activity.timeAgo,
+          }))}
+          title="Kullanıcı Hareketleri"
+          headerContent={
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setActivityType("global")}
@@ -826,95 +844,9 @@ export default function DashboardPage() {
                 Bağlantılar
               </button>
             </div>
-          </div>
-        </CardHeader>
-        <CardContent>
-          {activitiesLoading ? (
-            <div className="flex items-center justify-center py-8">
-              <div className="flex flex-col items-center gap-3">
-                <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Yükleniyor...</p>
-              </div>
-            </div>
-          ) : (
-            <div className="space-y-4">
-              {activities.length > 0 ? (
-                activities.map((activity: any) => {
-                  const hasUser = activity.user && (activityType === "global" || activityType === "connections");
-                  const profileUrl = hasUser && activity.user.id ? `/profile/${activity.user.id}` : null;
-                  
-                  const ActivityCard = profileUrl ? (
-                    <Link
-                      href={profileUrl}
-                      className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-br from-gray-50 to-gray-100/50 dark:from-gray-800/50 dark:to-gray-700/50 border border-gray-200/50 dark:border-gray-700/50 hover:from-blue-50 hover:to-cyan-50 dark:hover:from-blue-900/20 dark:hover:to-cyan-900/20 hover:border-blue-300/50 dark:hover:border-blue-700/50 transition-all duration-200 cursor-pointer group"
-                    >
-                      {hasUser && (
-                        <div className="flex-shrink-0">
-                          {activity.user.profileImage ? (
-                            <img
-                              src={activity.user.profileImage}
-                              alt={activity.user.name}
-                              className="w-10 h-10 rounded-full object-cover border-2 border-gray-200 dark:border-gray-700 group-hover:border-blue-400 dark:group-hover:border-blue-500 transition-colors"
-                            />
-                          ) : (
-                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-semibold text-sm group-hover:from-blue-600 group-hover:to-cyan-600 transition-colors">
-                              {activity.user.name?.charAt(0)?.toUpperCase() || "?"}
-                            </div>
-                          )}
-                        </div>
-                      )}
-                      <div className="text-2xl flex-shrink-0">{activity.icon}</div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{activity.title}</p>
-                        <p className="text-xs text-gray-500 dark:text-gray-400">{activity.timeAgo}</p>
-                      </div>
-                    </Link>
-                  ) : (
-                    <div className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-br from-gray-50 to-gray-100/50 dark:from-gray-800/50 dark:to-gray-700/50 border border-gray-200/50 dark:border-gray-700/50">
-                      {hasUser && (
-                        <div className="flex-shrink-0">
-                          {activity.user.profileImage ? (
-                            <img
-                              src={activity.user.profileImage}
-                              alt={activity.user.name}
-                              className="w-10 h-10 rounded-full object-cover border-2 border-gray-200 dark:border-gray-700"
-                            />
-                          ) : (
-                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-semibold text-sm">
-                              {activity.user.name?.charAt(0)?.toUpperCase() || "?"}
-                            </div>
-                          )}
-                        </div>
-                      )}
-                      <div className="text-2xl flex-shrink-0">{activity.icon}</div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">{activity.title}</p>
-                        <p className="text-xs text-gray-500 dark:text-gray-400">{activity.timeAgo}</p>
-                      </div>
-                    </div>
-                  );
-                  
-                  return <div key={activity.id}>{ActivityCard}</div>;
-                })
-              ) : (
-                <div className="text-center py-8">
-                  <Clock className="h-12 w-12 text-gray-400 dark:text-gray-600 mx-auto mb-4" />
-                  <p className="text-gray-500 dark:text-gray-400 mb-2 font-medium text-sm">
-                    {activityType === "connections"
-                      ? "Henüz bağlantılarınızın aktivitesi yok"
-                      : "Henüz aktivite yok"}
-                  </p>
-                  <p className="text-xs text-gray-400 dark:text-gray-500">
-                    {activityType === "connections"
-                      ? "Bağlantılarınız aktivite yaptıkça burada görünecek"
-                      : "Test çözerek veya kurslara başlayarak aktiviteler oluşturun"}
-                  </p>
-                </div>
-              )}
-            </div>
-          )}
-        </CardContent>
-      </Card>
+          }
+        />
+      )}
     </div>
   );
 }
