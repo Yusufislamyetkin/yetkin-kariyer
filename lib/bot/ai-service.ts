@@ -39,6 +39,16 @@ export async function analyzePostForComment(
 - Post içeriğine göre teknik detay veya kişisel deneyim paylaş
 - Soru sorabilir veya ek kaynak önerebilirsin
 
+DOĞALLIK KURALLARI:
+- Aşırı pozitif veya abartılı dil kullanma (örn: "harbiden muazzam", "süper", "heyecan verici" gibi ifadeleri aşırı kullanma)
+- Genel ifadeler yerine spesifik teknik detaylar, örnekler veya somut bilgiler kullan
+- Kurgusal kişisel deneyim yazma (örn: "geçen hafta kullandım" gibi uydurma deneyimler)
+- Cümle çeşitliliği kullan, kısa-uzun cümleler karıştır, doğal bir akışı taklit et
+- Yapay tekrarlardan kaçın (aynı ifadeleri sık sık kullanma)
+- Yüzeysel "harika paylaşım" gibi yorumlar yerine içerik odaklı yorumlar yaz
+- Eleştirel veya sorgulayıcı sorular sorabilirsin, her şeyi övme
+- Doğal, samimi ama aşırıya kaçmayan bir ton kullan
+
 Gönderi:
 ${post.content || "Görsel paylaşımı"}
 
@@ -104,13 +114,22 @@ export async function generatePostContent(
 - Bazen küçük yazım hataları yapabilirsin (doğal görünmesi için, örn: "muazzammm", "süpermişş", "harbiden")
 - Türkçe slang kullanabilirsin (valla, harbiden, iyimişş, süpermiş vs.)
 - Kaynak belirt: Kaynak: [${newsSource.name}](${newsSource.website})
-- Kişisel bir yorum veya deneyim ekle
 - Gönderi formatı:
   * Başlık/başlangıç (emoji ile)
   * Haber içeriği (kısa paragraflar)
   * Özellikler listesi (varsa, bullet point ile)
   * Kaynak linki
   * Kapanış yorumu
+
+DOĞALLIK KURALLARI:
+- Aşırı pozitif veya abartılı dil kullanma (örn: "harbiden muazzam", "süper", "heyecan verici" gibi ifadeleri aşırı kullanma)
+- Genel ifadeler yerine spesifik teknik detaylar, örnekler veya somut bilgiler kullan
+- Kurgusal kişisel deneyim yazma (örn: "geçen hafta kullandım" gibi uydurma deneyimler)
+- Cümle çeşitliliği kullan, kısa-uzun cümleler karıştır, doğal bir akışı taklit et
+- Yapay tekrarlardan kaçın (aynı ifadeleri sık sık kullanma)
+- Avantajların yanında sınırlamaları veya potansiyel sorunları da belirt
+- Bir reklam metni gibi yazma, tarafsız ve bilgi odaklı bir ton kullan
+- Teknik konularda somut örnekler, kod parçacıkları veya spesifik değişiklik maddeleri kullan
 
 Haber Kaynağı: ${newsSource.name} (${newsSource.category})
 Website: ${newsSource.website}
@@ -143,6 +162,16 @@ Gönderiyi yaz (sadece gönderi metni, başka bir şey ekleme):`;
 - Kolay okunabilir, kısa paragraflar kullan
 - Bazen küçük yazım hataları yapabilirsin (doğal görünmesi için)
 - Türkçe slang kullanabilirsin (valla, harbiden, iyimişş vs.)
+
+DOĞALLIK KURALLARI:
+- Aşırı pozitif veya abartılı dil kullanma (örn: "harbiden muazzam", "süper", "heyecan verici" gibi ifadeleri aşırı kullanma)
+- Genel ifadeler yerine spesifik teknik detaylar, örnekler veya somut bilgiler kullan
+- Kurgusal kişisel deneyim yazma (örn: "geçen hafta kullandım" gibi uydurma deneyimler)
+- Cümle çeşitliliği kullan, kısa-uzun cümleler karıştır, doğal bir akışı taklit et
+- Yapay tekrarlardan kaçın (aynı ifadeleri sık sık kullanma)
+- Avantajların yanında sınırlamaları veya potansiyel sorunları da belirt
+- Bir reklam metni gibi yazma, tarafsız ve bilgi odaklı bir ton kullan
+- Teknik konularda somut örnekler, kod parçacıkları veya spesifik değişiklik maddeleri kullan
 
 Konu: ${randomTopic}
 

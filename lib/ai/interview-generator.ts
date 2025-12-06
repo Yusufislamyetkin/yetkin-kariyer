@@ -86,8 +86,8 @@ const interviewQuestionsSchema = z.object({
   stage2_experience: z.array(interviewQuestionSchema),
   stage3_technical: z.object({
     testQuestions: z.array(interviewQuestionSchema).min(5),
-    liveCoding: interviewQuestionSchema.optional(),
-    bugFix: interviewQuestionSchema.optional(),
+    liveCoding: interviewQuestionSchema.nullable().optional(),
+    bugFix: interviewQuestionSchema.nullable().optional(),
     realWorldScenarios: z.array(interviewQuestionSchema).min(2),
   }),
 });
@@ -350,8 +350,8 @@ const stage2QuestionsSchema = z.object({
 const stage3QuestionsSchema = z.object({
   stage3_technical: z.object({
     testQuestions: z.array(interviewQuestionSchema).min(5),
-    liveCoding: interviewQuestionSchema.optional(),
-    bugFix: interviewQuestionSchema.optional(),
+    liveCoding: interviewQuestionSchema.nullable().optional(),
+    bugFix: interviewQuestionSchema.nullable().optional(),
     realWorldScenarios: z.array(interviewQuestionSchema).min(2),
   }),
 });

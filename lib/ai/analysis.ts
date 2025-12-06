@@ -75,31 +75,61 @@ const buildQuizAnalysisPrompt = (context: {
     )
     .join("\n");
 
+  const hasWrongAnswers = wrongCount > 0;
+  const wrongAnswersSection = hasWrongAnswers
+    ? `\n\nYANLIŞ CEVAPLARIN DETAYLI ANALİZİ:\n${wrongQuestionDetails}\n\nBu yanlış cevapları analiz et ve şunları belirle:
+- Hangi konularda/kavramlarda tutarlı olarak hata yapıldı?
+- Yanlış cevapların ortak özellikleri nelerdir?
+- Kullanıcının hangi bilgi boşlukları var?
+- Her yanlış cevap için neden yanlış olduğunu açıkla`
+    : "";
+
   return `
-Bir quiz analizi yap ve JSON formatında sonuç döndür. Analiz çok kısa ve net olmalı - sadece 2-3 cümlelik özet yeterli.
+Bir quiz analizi yap ve kapsamlı, detaylı bir JSON formatında sonuç döndür. Kullanıcıya yanlış yaptığı sorular hakkında spesifik geri bildirim ve çalışma önerileri sun.
 
-Quiz: ${quizTitle}
-Skor: ${score}%
-Genel doğruluk: %${accuracy}
-Doğru: ${correctCount}/${totalQuestions}
-Yanlış: ${wrongCount}/${totalQuestions}
-${hardestTopicsText !== "Belirgin bir zayıf konu yok" ? `En çok zorlanılan konu: ${hardestTopicsText.split(";")[0]?.split("(")[0]?.trim() || hardestTopicsText}` : ""}
-${standoutTopicsText !== "Öne çıkan güçlü konu bulunmuyor" ? `En güçlü konu: ${standoutTopicsText.split(";")[0]?.split("(")[0]?.trim() || standoutTopicsText}` : ""}
+QUIZ BİLGİLERİ:
+- Quiz: ${quizTitle}${courseTitle ? `\n- Kurs: ${courseTitle}` : ""}${quizTopic ? `\n- Konu: ${quizTopic}` : ""}${quizLevel ? `\n- Seviye: ${quizLevel}` : ""}
+- Skor: ${score}%
+- Genel doğruluk: %${accuracy}
+- Toplam soru: ${totalQuestions}
+- Doğru: ${correctCount}
+- Yanlış: ${wrongCount}${durationSeconds ? `\n- Süre: ${Math.round(durationSeconds / 60)} dakika` : ""}${averageTimePerQuestionSeconds ? `\n- Soru başına ortalama süre: ${averageTimePerQuestionSeconds} saniye` : ""}
 
-Aşağıdaki JSON formatında yanıt ver. Tüm alanları doldur ama çok kısa tut:
+KONU BAZLI PERFORMANS:
+${formattedTopicBreakdown || "Konu bazlı veri bulunamadı"}
+
+${hardestTopicsText !== "Belirgin bir zayıf konu yok" ? `EN ÇOK ZORLANILAN KONULAR:\n${hardestTopicsText}\n` : ""}
+${standoutTopicsText !== "Öne çıkan güçlü konu bulunmuyor" ? `EN GÜÇLÜ KONULAR:\n${standoutTopicsText}\n` : ""}${wrongAnswersSection}
+
+Aşağıdaki JSON formatında kapsamlı bir analiz döndür. TÜM alanları doldur:
+
 {
-  "summary": "2-3 cümlelik kısa ve net performans özeti. Skor, güçlü/zayıf yönler ve bir öneri içermeli.",
-  "strengths": [],
-  "weaknesses": [],
-  "recommendations": [],
-  "focusAreas": [],
-  "nextSteps": [],
+  "summary": "Performansın detaylı özeti (3-5 cümle). Skor, genel performans, güçlü ve zayıf yönlerin özeti, ve genel değerlendirme içermeli.",
+  "strengths": ["Kullanıcının güçlü olduğu alanlar (en az 2-3 madde). Hangi konularda başarılı oldu, hangi soruları doğru yaptı, hangi becerileri iyi kullandı."],
+  "weaknesses": ["Kullanıcının zayıf olduğu alanlar (en az 2-3 madde). Hangi konularda zorlandı, hangi kavramları anlamadı, hangi hataları yaptı. Yanlış cevaplara dayalı spesifik bilgi boşlukları belirt."],
+  "recommendations": ["Yanlış cevaplara dayalı spesifik çalışma önerileri (en az 3-5 madde). Hangi konuları tekrar etmeli, hangi kaynaklara bakmalı, nasıl pratik yapmalı. Her öneri yanlış yapılan sorularla ilişkili olmalı."],
+  "focusAreas": [
+    {
+      "topic": "En çok zorlanılan konu adı",
+      "accuracy": 0-100 arası doğruluk yüzdesi,
+      "impact": "critical" | "major" | "moderate" | "minor",
+      "description": "Bu konuda neden zorlandığının açıklaması ve neden önemli olduğu",
+      "actions": ["Bu konu için spesifik çalışma adımları (en az 2-3 madde)"]
+    }
+  ],
+  "nextSteps": ["Kullanıcının sonraki adımları için aksiyon planı (en az 3-4 madde). Hangi konuları önce çalışmalı, nasıl ilerlemeli, hangi kaynakları kullanmalı."],
   "score": ${score},
-  "feedback": "",
-  "detailedReport": ""
+  "feedback": "Yanlış cevaplar hakkında detaylı geri bildirim. Kullanıcının yanlış yaptığı soruları analiz et, neden yanlış olduğunu açıkla, doğru cevabın neden doğru olduğunu belirt. En az 4-5 cümle.",
+  "detailedReport": "Kapsamlı performans raporu. Tüm yanlış cevapların analizi, konu bazlı değerlendirme, iyileştirme önerileri, ve gelecek için strateji. En az 6-8 cümle."
 }
 
-ÖNEMLİ: Sadece "summary" alanını doldur, diğer tüm alanları boş array veya boş string olarak bırak. Summary maksimum 2-3 cümle olsun, çok kısa ve net.
+ÖNEMLİ TALİMATLAR:
+1. TÜM alanları doldur - hiçbir alanı boş bırakma
+2. Yanlış cevapları detaylı analiz et ve spesifik geri bildirim ver
+3. Her öneri ve öneri, yanlış yapılan sorulara dayalı olmalı
+4. FocusAreas içinde en az 1-3 konu olmalı (yanlış cevap verilen konulara öncelik ver)
+5. Öneriler ve nextSteps pratik ve uygulanabilir olmalı
+6. Feedback ve detailedReport kısa değil, detaylı ve açıklayıcı olmalı
 
 Sadece JSON döndür, başka açıklama yapma.
 `;
@@ -212,26 +242,49 @@ export async function analyzeQuizResults({
           .join("; ")
       : "Öne çıkan güçlü konu bulunmuyor";
 
-    const wrongQuestionDetails = wrongAnswers
-      .slice(0, 8)
-      .map((idx) => {
-        const question = questions[idx];
-        const userAnswerIndex = answers[idx];
-        const correctOption =
-          question?.options?.[question?.correctAnswer] ?? "Bilgi yok";
-        const userOption =
-          typeof userAnswerIndex === "number" && question?.options?.[userAnswerIndex] !== undefined
-            ? question.options[userAnswerIndex]
-            : "Boş bırakıldı";
-        const trimmedQuestion =
-          question?.question?.length > 220
-            ? `${question.question.slice(0, 220)}...`
-            : question.question;
-        return `Soru ${idx + 1} | Konu: ${question.topic ?? "Genel"} | Zorluk: ${
-          question.difficulty ?? "Belirtilmedi"
-        } | Soru: ${trimmedQuestion} | Doğru cevap: ${correctOption} | Verdiğin cevap: ${userOption}`;
+    // Group wrong answers by topic for better analysis
+    const wrongAnswersByTopic = new Map<string, number[]>();
+    wrongAnswers.forEach((idx) => {
+      const topic = questions[idx]?.topic || "Genel";
+      if (!wrongAnswersByTopic.has(topic)) {
+        wrongAnswersByTopic.set(topic, []);
+      }
+      wrongAnswersByTopic.get(topic)!.push(idx);
+    });
+
+    // Build detailed wrong answer information (include all wrong answers)
+    const wrongQuestionDetails = Array.from(wrongAnswersByTopic.entries())
+      .map(([topic, indices]) => {
+        const topicQuestions = indices.map((idx) => {
+          const question = questions[idx];
+          const userAnswerIndex = answers[idx];
+          const correctOption =
+            question?.options?.[question?.correctAnswer] ?? "Bilgi yok";
+          const userOption =
+            typeof userAnswerIndex === "number" && question?.options?.[userAnswerIndex] !== undefined
+              ? question.options[userAnswerIndex]
+              : "Boş bırakıldı";
+          const trimmedQuestion =
+            question?.question?.length > 200
+              ? `${question.question.slice(0, 200)}...`
+              : question.question;
+          return {
+            questionNumber: idx + 1,
+            question: trimmedQuestion,
+            correctAnswer: correctOption,
+            userAnswer: userOption,
+            difficulty: question.difficulty ?? "Belirtilmedi",
+          };
+        });
+
+        return `\n=== ${topic} (${indices.length} yanlış soru) ===\n${topicQuestions
+          .map(
+            (q) =>
+              `Soru ${q.questionNumber}: ${q.question}\n  Doğru cevap: ${q.correctAnswer}\n  Verdiğin cevap: ${q.userAnswer}\n  Zorluk: ${q.difficulty}`
+          )
+          .join("\n\n")}`;
       })
-      .join("\n");
+      .join("\n\n");
 
     const { parsed } = await createChatCompletion({
       schema: quizAnalysisSchema,
@@ -239,7 +292,7 @@ export async function analyzeQuizResults({
         {
           role: "system",
           content:
-            "Sen bir eğitim analiz uzmanısın. Kullanıcıların test sonuçlarını analiz edip yapıcı geri bildirim veriyorsun.",
+            "Sen bir eğitim analiz uzmanısın. Kullanıcıların test sonuçlarını detaylı analiz edip yapıcı, spesifik ve uygulanabilir geri bildirim veriyorsun. Yanlış cevapları analiz ederek kullanıcının bilgi boşluklarını belirliyor, hangi konularda çalışması gerektiğini spesifik olarak öneriyorsun. Her öneri yanlış yapılan sorulara dayalı olmalı ve kullanıcıya net bir çalışma yolu göstermelidir.",
         },
         {
           role: "user",

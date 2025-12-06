@@ -180,8 +180,8 @@ export default function Home() {
           <div className="inline-block mb-6 px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm font-semibold">
             🚀 Kapsamlı Eğitim, Sosyal Ağ ve Kariyer Platformu
           </div>
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-extrabold mb-6 bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 bg-clip-text text-transparent md:bg-gradient-to-r md:from-blue-600 md:via-indigo-600 md:to-cyan-600 md:bg-[length:200%_auto] md:animate-text-shimmer leading-tight">
-            Eğitim, Topluluk ve Kariyerin Tek Adresi
+          <h1 className="text-6xl md:text-7xl lg:text-8xl font-display font-extrabold mb-6 bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 bg-clip-text text-transparent md:bg-gradient-to-r md:from-blue-600 md:via-indigo-600 md:to-cyan-600 md:bg-[length:200%_auto] md:animate-text-shimmer leading-tight">
+            Yazılım Öğren, İş Bul, Kazanç Elde Et
           </h1>
           <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-8 animate-slide-up font-medium max-w-3xl mx-auto leading-relaxed">
             Teknik becerilerinizi geliştirin, toplulukla bağlantı kurun, hackathon&apos;lara katılın, freelancer projelerde yer alın ve kariyerinizi bir sonraki seviyeye taşıyın. AI destekli öğrenme, canlı kodlama, sosyal ağ ve kazanç fırsatları tek platformda.

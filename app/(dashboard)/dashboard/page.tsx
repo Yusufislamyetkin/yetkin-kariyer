@@ -164,32 +164,46 @@ export default function DashboardPage() {
       if (data.ranks) {
         const { daily, weekly, monthly } = data.ranks;
         
-        if (daily && daily.rank && daily.rank > 0) {
+        // Process daily rank
+        if (daily && typeof daily === 'object' && typeof daily.rank === 'number' && daily.rank > 0) {
           setDailyRank({
             rank: daily.rank,
             quizCount: daily.quizCount || 0,
             averageScore: daily.averageScore || 0,
             points: daily.points || 0,
           });
+        } else {
+          setDailyRank(null);
         }
         
-        if (weekly && weekly.rank && weekly.rank > 0) {
+        // Process weekly rank - check if weekly exists and is not null
+        if (weekly && weekly !== null && typeof weekly === 'object' && typeof weekly.rank === 'number' && weekly.rank > 0) {
           setWeeklyRank({
             rank: weekly.rank,
             quizCount: weekly.quizCount || 0,
             averageScore: weekly.averageScore || 0,
             points: weekly.points || 0,
           });
+        } else {
+          setWeeklyRank(null);
         }
         
-        if (monthly && monthly.rank && monthly.rank > 0) {
+        // Process monthly rank - check if monthly exists and is not null
+        if (monthly && monthly !== null && typeof monthly === 'object' && typeof monthly.rank === 'number' && monthly.rank > 0) {
           setMonthlyRank({
             rank: monthly.rank,
             quizCount: monthly.quizCount || 0,
             averageScore: monthly.averageScore || 0,
             points: monthly.points || 0,
           });
+        } else {
+          setMonthlyRank(null);
         }
+      } else {
+        // Reset all ranks if data.ranks is not available
+        setDailyRank(null);
+        setWeeklyRank(null);
+        setMonthlyRank(null);
       }
       setRanksLoading(false);
 
@@ -686,7 +700,7 @@ export default function DashboardPage() {
               </div>
             ) : (
               <div className="space-y-4">
-                {dailyRank && dailyRank.rank > 0 ? (
+                {dailyRank ? (
                 <div className="p-4 rounded-xl bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 border border-yellow-200/50 dark:border-yellow-800/50">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">Günlük Sıralama</span>
@@ -698,7 +712,7 @@ export default function DashboardPage() {
                   <p className="text-sm text-gray-600 dark:text-gray-400">Henüz günlük sıralamada yer almıyorsunuz</p>
                 </div>
               )}
-              {weeklyRank && weeklyRank.rank > 0 ? (
+              {weeklyRank ? (
                 <div className="p-4 rounded-xl bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 border border-blue-200/50 dark:border-blue-800/50">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">Haftalık Sıralama</span>
@@ -710,7 +724,7 @@ export default function DashboardPage() {
                   <p className="text-sm text-gray-600 dark:text-gray-400">Henüz haftalık sıralamada yer almıyorsunuz</p>
                 </div>
               )}
-              {monthlyRank && monthlyRank.rank > 0 ? (
+              {monthlyRank ? (
                 <div className="p-4 rounded-xl bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 border border-purple-200/50 dark:border-purple-800/50">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">Aylık Sıralama</span>

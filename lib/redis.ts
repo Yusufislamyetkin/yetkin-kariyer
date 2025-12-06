@@ -1,32 +1,80 @@
-import { kv } from "@vercel/kv";
+import { createClient, RedisClientType } from "redis";
 
 /**
- * Redis/KV Cache Utility Module
- * Provides helper functions for caching dashboard data using Vercel KV
+ * Redis Cache Utility Module
+ * Provides helper functions for caching dashboard data using node-redis
  * 
- * Supports both KV_URL (Vercel KV) and REDIS_URL (Upstash Redis or other Redis services)
- * Vercel automatically adds REDIS_URL when integrating with Redis services like Upstash
- * 
- * Note: @vercel/kv looks for KV_URL and KV_REST_API_URL by default.
- * If REDIS_URL is provided instead, we map it to KV_URL for compatibility.
+ * Uses REDIS_URL environment variable for connection (format: redis://... or rediss://... for TLS)
+ * Implements singleton pattern for serverless compatibility
  */
 
-// Map REDIS_URL to KV_URL if KV_URL is not set (for Upstash Redis compatibility)
-// Vercel automatically adds REDIS_URL when integrating with Redis services
-// @vercel/kv looks for KV_URL by default, so we map REDIS_URL to KV_URL if needed
-if (process.env.REDIS_URL && !process.env.KV_URL && !process.env.KV_REST_API_URL) {
-  // If REDIS_URL is provided but KV_URL is not, map REDIS_URL to KV_URL
-  // This allows @vercel/kv to work with REDIS_URL environment variable
-  process.env.KV_URL = process.env.REDIS_URL;
+// Singleton Redis client instance
+let redisClient: RedisClientType | null = null;
+let isConnecting = false;
+let connectionPromise: Promise<RedisClientType> | null = null;
+
+/**
+ * Get or create Redis client instance
+ * Uses singleton pattern to reuse connection in serverless environments
+ */
+async function getRedisClient(): Promise<RedisClientType | null> {
+  // Check if Redis URL is configured
+  if (!process.env.REDIS_URL) {
+    return null;
+  }
+
+  // Return existing client if already connected
+  if (redisClient?.isOpen) {
+    return redisClient;
+  }
+
+  // If connection is in progress, wait for it
+  if (isConnecting && connectionPromise) {
+    await connectionPromise;
+    if (redisClient?.isOpen) {
+      return redisClient;
+    }
+  }
+
+  // Create new client and connect
+  try {
+    isConnecting = true;
+    
+    // If client exists but is closed, create a new one
+    if (redisClient && !redisClient.isOpen) {
+      try {
+        await redisClient.quit();
+      } catch {
+        // Ignore errors when quitting closed client
+      }
+      redisClient = null;
+    }
+
+    redisClient = createClient({
+      url: process.env.REDIS_URL,
+    });
+
+    // Handle connection errors
+    redisClient.on("error", (err) => {
+      console.error("[Redis] Client error:", err);
+    });
+
+    connectionPromise = redisClient.connect();
+    await connectionPromise;
+    isConnecting = false;
+    return redisClient;
+  } catch (error) {
+    isConnecting = false;
+    connectionPromise = null;
+    redisClient = null;
+    console.error("[Redis] Failed to connect:", error);
+    return null;
+  }
 }
 
 // Check if Redis is available
 const isRedisAvailable = () => {
-  return !!(
-    process.env.KV_URL ||
-    process.env.KV_REST_API_URL ||
-    process.env.REDIS_URL
-  );
+  return !!process.env.REDIS_URL;
 };
 
 // Cache TTL constants (in seconds)
@@ -47,9 +95,24 @@ export async function getCache<T>(key: string): Promise<T | null> {
       console.warn("[Redis] Redis not configured, skipping cache");
       return null;
     }
-    
-    const data = await kv.get<T>(key);
-    return data;
+
+    const client = await getRedisClient();
+    if (!client) {
+      return null;
+    }
+
+    const data = await client.get(key);
+    if (!data) {
+      return null;
+    }
+
+    // Parse JSON data
+    try {
+      return JSON.parse(data) as T;
+    } catch (parseError) {
+      // If parsing fails, return as string (for backward compatibility)
+      return data as unknown as T;
+    }
   } catch (error) {
     console.error(`[Redis] Error getting cache for key ${key}:`, error);
     return null;
@@ -70,11 +133,20 @@ export async function setCache<T>(
       console.warn("[Redis] Redis not configured, skipping cache");
       return false;
     }
-    
+
+    const client = await getRedisClient();
+    if (!client) {
+      return false;
+    }
+
+    // Serialize value to JSON string
+    const serializedValue =
+      typeof value === "string" ? value : JSON.stringify(value);
+
     if (ttlSeconds) {
-      await kv.set(key, value, { ex: ttlSeconds });
+      await client.setEx(key, ttlSeconds, serializedValue);
     } else {
-      await kv.set(key, value);
+      await client.set(key, serializedValue);
     }
     return true;
   } catch (error) {
@@ -93,8 +165,13 @@ export async function deleteCache(key: string): Promise<boolean> {
       console.warn("[Redis] Redis not configured, skipping cache deletion");
       return false;
     }
-    
-    await kv.del(key);
+
+    const client = await getRedisClient();
+    if (!client) {
+      return false;
+    }
+
+    await client.del(key);
     return true;
   } catch (error) {
     console.error(`[Redis] Error deleting cache for key ${key}:`, error);
@@ -104,26 +181,45 @@ export async function deleteCache(key: string): Promise<boolean> {
 
 /**
  * Delete multiple cached keys by pattern
- * Note: Vercel KV doesn't support pattern matching directly
- * This function will attempt to delete common activity cache keys for a user
+ * Uses Redis SCAN command for pattern matching
  */
 export async function deleteCachePattern(pattern: string): Promise<boolean> {
   try {
-    // For activity cache, we'll delete common skip values (0, 10, 20, etc.)
-    // This is a workaround since Vercel KV doesn't support pattern matching
-    if (pattern.includes("dashboard:activity:")) {
-      const userId = pattern.match(/dashboard:activity:([^:]+)/)?.[1];
-      const type = pattern.match(/dashboard:activity:[^:]+:([^:]+)/)?.[1];
-      
-      if (userId && type) {
-        // Delete common skip values
-        const commonSkips = [0, 10, 20, 30, 40, 50];
-        const keysToDelete = commonSkips.map(skip => 
-          cacheKeys.activity(userId, type, skip)
-        );
-        await kv.del(...keysToDelete);
-      }
+    // Check if Redis is available
+    if (!isRedisAvailable()) {
+      console.warn(
+        "[Redis] Redis not configured, skipping cache pattern deletion"
+      );
+      return false;
     }
+
+    const client = await getRedisClient();
+    if (!client) {
+      return false;
+    }
+
+    // Convert glob pattern to Redis pattern
+    // e.g., "dashboard:activity:userId:*" -> "dashboard:activity:userId:*"
+    const redisPattern = pattern;
+
+    // Use SCAN to find all matching keys
+    const keys: string[] = [];
+    let cursor = 0;
+
+    do {
+      const result = await client.scan(cursor, {
+        MATCH: redisPattern,
+        COUNT: 100,
+      });
+      cursor = result.cursor;
+      keys.push(...result.keys);
+    } while (cursor !== 0);
+
+    // Delete all matching keys
+    if (keys.length > 0) {
+      await client.del(keys);
+    }
+
     return true;
   } catch (error) {
     console.error(`[Redis] Error deleting cache pattern ${pattern}:`, error);
@@ -168,4 +264,3 @@ export async function invalidateUserDashboardCache(
     );
   }
 }
-

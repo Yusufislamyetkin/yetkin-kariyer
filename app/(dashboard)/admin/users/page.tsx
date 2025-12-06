@@ -818,7 +818,7 @@ export default function AdminUsersPage() {
                   {users.map((user) => (
                     <div
                       key={user.id}
-                      className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group relative"
+                      className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 overflow-visible group relative"
                     >
                       {/* Bot Badge */}
                       {user.isBot && (
@@ -863,7 +863,7 @@ export default function AdminUsersPage() {
 
                       <div
                         onClick={() => router.push(`/profile/${user.id}`)}
-                        className="cursor-pointer"
+                        className="cursor-pointer overflow-visible"
                       >
                     {/* Profile Image Section */}
                     <div className="relative w-full h-48 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center p-6">
@@ -951,7 +951,7 @@ export default function AdminUsersPage() {
 
                       {/* Bot Activity Runner */}
                       {user.isBot && user.botConfiguration?.isActive && (
-                        <div className="mb-3 relative activity-dropdown-container">
+                        <div className="mb-3 relative activity-dropdown-container overflow-visible">
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
@@ -983,7 +983,7 @@ export default function AdminUsersPage() {
                           </button>
 
                           {activityDropdownOpen === user.id && (
-                            <div className="absolute z-50 w-full mt-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg overflow-hidden">
+                            <div className="absolute z-[100] w-full mt-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-xl overflow-hidden max-h-60 overflow-y-auto">
                               {activityTypes.map((activity) => (
                                 <button
                                   key={activity.value}

@@ -15,6 +15,164 @@ interface PDFOptions {
 }
 
 /**
+ * Converts mm to pixels (1mm ≈ 3.779527559 pixels at 96 DPI)
+ */
+function mmToPixels(mm: number): number {
+  return mm * 3.779527559;
+}
+
+/**
+ * Parses a CSS value (px, rem, em) and converts it to pixels, then applies scale
+ */
+function parseAndScaleCSSValue(value: string, scaleFactor: number): string | null {
+  if (!value || value === '0' || value === '0px' || value === 'normal' || value === 'auto') {
+    return null;
+  }
+  
+  // Try to parse as number with unit
+  const match = value.match(/^([\d.]+)(px|rem|em|pt)$/);
+  if (match) {
+    const numValue = parseFloat(match[1]);
+    const unit = match[2];
+    
+    if (!isNaN(numValue) && numValue > 0) {
+      // Convert rem/em to px (assuming 16px base font size)
+      let pixels = numValue;
+      if (unit === 'rem' || unit === 'em') {
+        pixels = numValue * 16; // Base font size
+      } else if (unit === 'pt') {
+        pixels = numValue * 1.333; // 1pt = 1.333px
+      }
+      
+      // Apply scale and return as px
+      return `${pixels * scaleFactor}px`;
+    }
+  }
+  
+  return null;
+}
+
+/**
+ * Applies scale factor to all child elements' font sizes, padding, margins, and gaps
+ */
+function applyScaleToElement(element: HTMLElement, scaleFactor: number): Map<HTMLElement, any> {
+  const originalStyles = new Map<HTMLElement, any>();
+  
+  // Recursively apply scale to all elements
+  const applyScale = (el: HTMLElement) => {
+    const computedStyle = window.getComputedStyle(el);
+    const style = el.style;
+    
+    // Store original styles
+    const original = {
+      fontSize: style.fontSize || '',
+      paddingTop: style.paddingTop || '',
+      paddingRight: style.paddingRight || '',
+      paddingBottom: style.paddingBottom || '',
+      paddingLeft: style.paddingLeft || '',
+      marginTop: style.marginTop || '',
+      marginRight: style.marginRight || '',
+      marginBottom: style.marginBottom || '',
+      marginLeft: style.marginLeft || '',
+      lineHeight: style.lineHeight || '',
+      gap: style.gap || '',
+      rowGap: style.rowGap || '',
+      columnGap: style.columnGap || '',
+    };
+    
+    originalStyles.set(el, original);
+    
+    // Apply scale to font size
+    const scaledFontSize = parseAndScaleCSSValue(computedStyle.fontSize, scaleFactor);
+    if (scaledFontSize) {
+      style.fontSize = scaledFontSize;
+    }
+    
+    // Apply scale to padding
+    ['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'].forEach(prop => {
+      const value = computedStyle[prop as keyof CSSStyleDeclaration] as string;
+      const scaledValue = parseAndScaleCSSValue(value, scaleFactor);
+      if (scaledValue) {
+        (style as any)[prop] = scaledValue;
+      }
+    });
+    
+    // Apply scale to margin
+    ['marginTop', 'marginRight', 'marginBottom', 'marginLeft'].forEach(prop => {
+      const value = computedStyle[prop as keyof CSSStyleDeclaration] as string;
+      const scaledValue = parseAndScaleCSSValue(value, scaleFactor);
+      if (scaledValue) {
+        (style as any)[prop] = scaledValue;
+      }
+    });
+    
+    // Apply scale to line height
+    if (computedStyle.lineHeight && computedStyle.lineHeight !== 'normal') {
+      const scaledLineHeight = parseAndScaleCSSValue(computedStyle.lineHeight, scaleFactor);
+      if (scaledLineHeight) {
+        style.lineHeight = scaledLineHeight;
+      }
+    }
+    
+    // Apply scale to gap (for flexbox/grid)
+    if (computedStyle.gap && computedStyle.gap !== 'normal') {
+      const scaledGap = parseAndScaleCSSValue(computedStyle.gap, scaleFactor);
+      if (scaledGap) {
+        style.gap = scaledGap;
+      }
+    }
+    
+    // Apply scale to row-gap and column-gap separately
+    if (computedStyle.rowGap && computedStyle.rowGap !== 'normal') {
+      const scaledRowGap = parseAndScaleCSSValue(computedStyle.rowGap, scaleFactor);
+      if (scaledRowGap) {
+        style.rowGap = scaledRowGap;
+      }
+    }
+    
+    if (computedStyle.columnGap && computedStyle.columnGap !== 'normal') {
+      const scaledColumnGap = parseAndScaleCSSValue(computedStyle.columnGap, scaleFactor);
+      if (scaledColumnGap) {
+        style.columnGap = scaledColumnGap;
+      }
+    }
+    
+    // Recursively apply to children
+    Array.from(el.children).forEach(child => {
+      if (child instanceof HTMLElement) {
+        applyScale(child);
+      }
+    });
+  };
+  
+  applyScale(element);
+  return originalStyles;
+}
+
+/**
+ * Restores original styles to all elements
+ */
+function restoreOriginalStyles(originalStyles: Map<HTMLElement, any>) {
+  originalStyles.forEach((original, element) => {
+    const style = element.style;
+    // Restore all properties, clearing if original was empty
+    style.fontSize = original.fontSize || '';
+    style.paddingTop = original.paddingTop || '';
+    style.paddingRight = original.paddingRight || '';
+    style.paddingBottom = original.paddingBottom || '';
+    style.paddingLeft = original.paddingLeft || '';
+    style.marginTop = original.marginTop || '';
+    style.marginRight = original.marginRight || '';
+    style.marginBottom = original.marginBottom || '';
+    style.marginLeft = original.marginLeft || '';
+    style.lineHeight = original.lineHeight || '';
+    style.gap = original.gap || '';
+    style.rowGap = original.rowGap || '';
+    style.columnGap = original.columnGap || '';
+  });
+}
+
+/**
  * Generates PDF from HTML element using html2canvas and jsPDF
  * @param elementId - ID of the HTML element to convert to PDF
  * @param options - PDF generation options
@@ -63,6 +221,27 @@ export async function generatePDFFromElement(
     // Wait a bit for styles to apply
     await new Promise((resolve) => setTimeout(resolve, 100));
 
+    // Check if content height exceeds A4 height (297mm)
+    const a4HeightPixels = mmToPixels(297);
+    const contentHeight = element.scrollHeight || element.offsetHeight;
+    let scaleFactor: number | null = null;
+    let scaledStyles: Map<HTMLElement, any> | null = null;
+
+    // If content is taller than A4, calculate and apply scale factor
+    if (contentHeight > a4HeightPixels) {
+      // Calculate scale factor: 297mm / contentHeight
+      scaleFactor = a4HeightPixels / contentHeight;
+      
+      // Clamp scale factor between 0.7 and 0.95
+      scaleFactor = Math.max(0.7, Math.min(0.95, scaleFactor));
+      
+      // Apply scale to all child elements
+      scaledStyles = applyScaleToElement(element, scaleFactor);
+      
+      // Wait for scaled styles to apply
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    }
+
     // Convert HTML to canvas
     const canvas = await html2canvas(element, {
       scale: scale,
@@ -74,6 +253,11 @@ export async function generatePDFFromElement(
       windowWidth: element.scrollWidth || element.offsetWidth,
       windowHeight: element.scrollHeight || element.offsetHeight,
     });
+
+    // Restore scaled styles if they were applied
+    if (scaledStyles) {
+      restoreOriginalStyles(scaledStyles);
+    }
 
     // Restore original styles and class name
     element.className = originalClassName;

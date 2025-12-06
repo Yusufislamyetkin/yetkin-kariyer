@@ -15,8 +15,8 @@ export function MessageContent({ content, isAI = false, className, enableTypingE
   // Use typing effect for AI messages (must be called before any early returns)
   const { displayedText, isTyping } = useTypingEffect({
     text: content || "",
-    speed: isAI ? 1 : 999, // Only animate AI messages, user messages show instantly
-    interval: 80, // Slower typing speed for better readability
+    speed: isAI ? 3 : 999, // Only animate AI messages, user messages show instantly
+    interval: 30, // Faster typing speed for better user experience
     enabled: isAI && enableTypingEffect && !!content,
   });
 

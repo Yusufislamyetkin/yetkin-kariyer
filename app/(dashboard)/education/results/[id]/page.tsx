@@ -666,7 +666,7 @@ export default function QuizResultsPage() {
   return (
     <div className="container mx-auto px-4 py-8 space-y-6">
       <div className="overflow-hidden rounded-3xl border border-slate-200/60 bg-gradient-to-br from-sky-50 via-indigo-50 to-purple-50 p-6 shadow-xl dark:border-slate-800/60 dark:from-slate-950 dark:via-slate-900/80 dark:to-indigo-950 sm:p-8">
-        <div className="grid gap-8 lg:grid-cols-[1.4fr,1fr]">
+        <div className="grid gap-8 lg:grid-cols-[1.4fr,1fr,1fr]">
           <div className="space-y-6">
             <div className="inline-flex items-center gap-2 rounded-full bg-white/70 px-4 py-1 text-sm font-medium text-indigo-700 shadow-sm backdrop-blur-sm dark:bg-white/10 dark:text-indigo-200">
               <Sparkles className="h-4 w-4" />
@@ -721,6 +721,27 @@ export default function QuizResultsPage() {
               </div>
             </div>
           </div>
+
+          {nextTest && (
+            <div className="flex items-center justify-center">
+              <div className="relative flex flex-col items-center justify-center rounded-3xl border border-white/60 bg-white/80 p-6 text-center shadow-lg backdrop-blur-lg dark:border-slate-700/50 dark:bg-slate-900/70 w-full">
+                <span className="text-sm font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                  Sonraki Test
+                </span>
+                <div className="mt-4 flex flex-col items-center gap-3">
+                  <p className="text-sm text-slate-600 dark:text-slate-300">
+                    Modüldeki bir sonraki test: <span className="font-semibold">{nextTest.title}</span>
+                  </p>
+                  <Link href={`/education/tests/${nextTest.technology}/${nextTest.module}/${nextTest.id}`}>
+                    <Button variant="gradient" className="flex items-center gap-2">
+                      Sonraki Testi Başlat
+                      <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
@@ -770,53 +791,29 @@ export default function QuizResultsPage() {
           </div>
         </div>
 
-        {(newBadges.length > 0 || completedGoals.length > 0) && (
-          <div className="mt-8 grid gap-4 md:grid-cols-2">
-            {newBadges.length > 0 && (
-              <div className="rounded-2xl border border-amber-200/70 bg-white/85 p-5 shadow-sm backdrop-blur-sm dark:border-amber-800/40 dark:bg-amber-900/30">
-                <div className="flex items-center gap-2 text-amber-700 dark:text-amber-300">
-                  <Sparkles className="h-4 w-4" />
-                  <span className="text-sm font-semibold uppercase tracking-wide">
-                    Yeni Rozetler
-                  </span>
-                </div>
-                <div className="mt-4 flex flex-wrap gap-3">
-                  {newBadges.map((badge) => (
-                    <div
-                      key={badge.id}
-                      className="flex items-center gap-2 rounded-xl bg-amber-100/80 px-3 py-2 text-sm font-medium text-amber-800 shadow-sm dark:bg-amber-900/40 dark:text-amber-200"
-                    >
-                      <span className="text-lg">{badge.icon ?? "🏅"}</span>
-                      <span>{badge.name}</span>
-                    </div>
-                  ))}
-                </div>
+        {completedGoals.length > 0 && (
+          <div className="mt-8">
+            <div className="rounded-2xl border border-blue-200/70 bg-white/85 p-5 shadow-sm backdrop-blur-sm dark:border-blue-800/40 dark:bg-blue-900/30">
+              <div className="flex items-center gap-2 text-blue-700 dark:text-blue-300">
+                <Target className="h-4 w-4" />
+                <span className="text-sm font-semibold uppercase tracking-wide">
+                  Tamamlanan Hedefler
+                </span>
               </div>
-            )}
-
-            {completedGoals.length > 0 && (
-              <div className="rounded-2xl border border-blue-200/70 bg-white/85 p-5 shadow-sm backdrop-blur-sm dark:border-blue-800/40 dark:bg-blue-900/30">
-                <div className="flex items-center gap-2 text-blue-700 dark:text-blue-300">
-                  <Target className="h-4 w-4" />
-                  <span className="text-sm font-semibold uppercase tracking-wide">
-                    Tamamlanan Hedefler
-                  </span>
-                </div>
-                <ul className="mt-4 space-y-2 text-sm text-blue-800 dark:text-blue-100">
-                  {completedGoals.map((goal) => (
-                    <li key={goal.id} className="flex items-start gap-2">
-                      <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-500" />
-                      <span>
-                        {goal.goalType === "test_count" && "Test sayısı hedefi tamamlandı"}
-                        {goal.goalType === "score_target" && "Skor hedefi tutturuldu"}
-                        {goal.goalType === "topic_complete" && "Konu tamamlama hedefi bitti"}
-                        {goal.goalType === "streak_maintain" && "Seri hedefi korundu"}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+              <ul className="mt-4 space-y-2 text-sm text-blue-800 dark:text-blue-100">
+                {completedGoals.map((goal) => (
+                  <li key={goal.id} className="flex items-start gap-2">
+                    <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-500" />
+                    <span>
+                      {goal.goalType === "test_count" && "Test sayısı hedefi tamamlandı"}
+                      {goal.goalType === "score_target" && "Skor hedefi tutturuldu"}
+                      {goal.goalType === "topic_complete" && "Konu tamamlama hedefi bitti"}
+                      {goal.goalType === "streak_maintain" && "Seri hedefi korundu"}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         )}
 
@@ -867,6 +864,28 @@ export default function QuizResultsPage() {
             </p>
           </div>
         </div>
+
+        {newBadges.length > 0 && (
+          <div className="mt-8 rounded-2xl border border-amber-200/70 bg-white/85 p-5 shadow-sm backdrop-blur-sm dark:border-amber-800/40 dark:bg-amber-900/30">
+            <div className="flex items-center gap-2 text-amber-700 dark:text-amber-300">
+              <Sparkles className="h-4 w-4" />
+              <span className="text-sm font-semibold uppercase tracking-wide">
+                Yeni Rozetler
+              </span>
+            </div>
+            <div className="mt-4 flex flex-wrap gap-3">
+              {newBadges.map((badge) => (
+                <div
+                  key={badge.id}
+                  className="flex items-center gap-2 rounded-xl bg-amber-100/80 px-3 py-2 text-sm font-medium text-amber-800 shadow-sm dark:bg-amber-900/40 dark:text-amber-200"
+                >
+                  <span className="text-lg">{badge.icon ?? "🏅"}</span>
+                  <span>{badge.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       <Card variant="elevated">

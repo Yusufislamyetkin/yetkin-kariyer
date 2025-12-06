@@ -440,9 +440,13 @@ export async function GET(request: Request) {
     };
 
     // Step 6: Process leaderboard ranks
-    const ranks: Record<string, any> = {};
+    const ranks: Record<string, any> = {
+      daily: null,
+      weekly: null,
+      monthly: null,
+    };
     leaderboardRanks.forEach(({ period, entry }) => {
-      if (entry && entry.rank > 0) {
+      if (entry && entry.rank && entry.rank > 0) {
         ranks[period] = {
           rank: entry.rank,
           quizCount: entry.quizCount || 0,

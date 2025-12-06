@@ -1215,19 +1215,48 @@ export default function LiveCodingPage() {
                   <CardHeader className="pb-3">
                     <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
                       <div className="flex-1">
-                        <CardTitle className="text-xl sm:text-2xl mb-2 text-gray-900 dark:text-gray-100">
-                          {activeTask.title}
-                        </CardTitle>
+                        <div className="flex items-center gap-3 mb-2">
+                          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-green-600 shadow-lg shadow-emerald-500/30">
+                            <Code className="h-5 w-5 text-white" />
+                          </div>
+                          <CardTitle className="text-xl sm:text-2xl text-gray-900 dark:text-gray-100">
+                            {activeTask.title}
+                          </CardTitle>
+                        </div>
                         {activeLanguage && (
                           <div className="flex items-center gap-2">
                             <span className="rounded-lg bg-cyan-500/20 dark:bg-cyan-500/20 px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-cyan-700 dark:text-cyan-300">
                               {LANGUAGE_LABEL[activeLanguage]}
-                      </span>
-                    </div>
+                            </span>
+                          </div>
                         )}
-                  </div>
-                </div>
-              </CardHeader>
+                      </div>
+                      {/* Completion Status Button - Modern Design */}
+                      {completedTasks.has(activeTask.id) && (
+                        <div className="flex-shrink-0 mt-2 sm:mt-0">
+                          <div className="relative">
+                            {/* Animated background glow */}
+                            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-emerald-400 via-green-500 to-emerald-600 opacity-75 blur-sm animate-pulse" />
+                            {/* Button */}
+                            <Button
+                              variant="gradient"
+                              size="sm"
+                              className="relative h-11 px-5 rounded-xl bg-gradient-to-r from-emerald-500 via-green-600 to-emerald-500 hover:from-emerald-600 hover:via-green-700 hover:to-emerald-600 text-white font-semibold shadow-lg shadow-emerald-500/40 hover:shadow-xl hover:shadow-emerald-500/50 transition-all duration-300 border-2 border-emerald-400/50 hover:border-emerald-300"
+                            >
+                              <div className="flex items-center gap-2">
+                                <div className="relative">
+                                  <CheckCircle className="h-5 w-5" />
+                                  {/* Inner glow effect */}
+                                  <div className="absolute inset-0 rounded-full bg-white/30 blur-sm" />
+                                </div>
+                                <span className="text-sm font-bold">Tamamlandı</span>
+                              </div>
+                            </Button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </CardHeader>
                   <CardContent className="space-y-3 pt-3">
                     {activeTask.description && (
                       <div className="rounded-xl border-2 border-cyan-500/30 dark:border-cyan-500/30 bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-cyan-500/10 dark:to-blue-500/10 px-4 py-3.5 text-sm text-cyan-900 dark:text-cyan-100 shadow-sm leading-relaxed">
