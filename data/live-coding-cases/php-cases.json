@@ -14,7 +14,7 @@
       "testCases": [
         {
           "input": "",
-          "expectedOutput": "Hello World 1\nHello World 2\nHello World 3\n...\nHello World 50"
+          "expectedOutput": "Hello World 1\nHello World 2\nHello World 3\nHello World 4\nHello World 5\nHello World 6\nHello World 7\nHello World 8\nHello World 9\nHello World 10\nHello World 11\nHello World 12\nHello World 13\nHello World 14\nHello World 15\nHello World 16\nHello World 17\nHello World 18\nHello World 19\nHello World 20\nHello World 21\nHello World 22\nHello World 23\nHello World 24\nHello World 25\nHello World 26\nHello World 27\nHello World 28\nHello World 29\nHello World 30\nHello World 31\nHello World 32\nHello World 33\nHello World 34\nHello World 35\nHello World 36\nHello World 37\nHello World 38\nHello World 39\nHello World 40\nHello World 41\nHello World 42\nHello World 43\nHello World 44\nHello World 45\nHello World 46\nHello World 47\nHello World 48\nHello World 49\nHello World 50"
         }
       ],
       "hints": [
@@ -141,7 +141,7 @@
       "testCases": [
         {
           "input": "",
-          "expectedOutput": "Numbers divisible by 3: 3, 6, 9, 12, 15, ... 99\nSum: 1683"
+          "expectedOutput": "Numbers divisible by 3: 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60, 63, 66, 69, 72, 75, 78, 81, 84, 87, 90, 93, 96, 99\nSum: 1683"
         }
       ],
       "hints": [
@@ -203,8 +203,8 @@
       },
       "testCases": [
         {
-          "input": "sentence = \"The quick brown fox\"",
-          "expectedOutput": "Words: ['The', 'quick', 'brown', 'fox']\nWord lengths: [3, 5, 5, 3]\nLongest word: quick\nVowel count: 5\nReversed: xof nworb kciuq ehT"
+          "input": "sentence = \"The quick brown fox jumps over the lazy dog\"",
+          "expectedOutput": "Words: ['The', 'quick', 'brown', 'fox', 'jumps', 'over', 'the', 'lazy', 'dog']\nWord lengths: [3, 5, 5, 3, 5, 4, 3, 4, 3]\nLongest word: quick\nVowel count: 11\nReversed: god yzal eht revo spmuj xof nworb kciuq ehT"
         }
       ],
       "hints": [

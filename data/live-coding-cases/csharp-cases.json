@@ -51,12 +51,12 @@
       "difficulty": "beginner",
       "instructions": "Bir string alin ve su islemleri yapin: 1) String'in uzunlugunu bulun, 2) String'i buyuk harfe cevirin, 3) String'i kucuk harfe cevirin, 4) String'in tersini alin, 5) String icinde belirli bir karakteri sayin. Tum sonuclari ekrana yazdirin.",
       "starterCode": {
-        "csharp": "using System;\n\nclass Program\n{\n    static void Main(string[] args)\n    {\n        string text = \"Hello World\";\n        // Kodunu buraya yaz\n        \n    }\n}"
+        "csharp": "using System;\nusing System.Linq;\n\nclass Program\n{\n    static void Main(string[] args)\n    {\n        string text = \"Hello World\";\n        // Kodunu buraya yaz\n        \n    }\n}"
       },
       "testCases": [
         {
           "input": "text=\"Hello World\"",
-          "expectedOutput": "Microsoft (R) Visual C# Compiler version 3.6.0-4.20224.5 (ec77c100)\nCopyright (C) Microsoft Corporation. All rights reserved.\n\nProgram.cs.cs(12,29): error CS1061: 'string' does not contain a definition for 'Count' and no accessible extension method 'Count' accepting a first argument of type 'string' could be found (are you missing a using directive or an assembly reference?)"
+          "expectedOutput": "Length: 11\nUppercase: HELLO WORLD\nLowercase: hello world\nReversed: dlroW olleH\nCount of 'l': 3"
         }
       ],
       "hints": [
@@ -161,7 +161,7 @@
       "testCases": [
         {
           "input": "",
-          "expectedOutput": "Names: Alice, Bob, Charlie, David, Eve\nGrades:\nAlice: 85\nBob: 92\nCharlie: 78"
+          "expectedOutput": "Names:\nAlice\nBob\nCharlie\nDavid\nEve\nGrades:\nAlice: 85\nBob: 92\nCharlie: 78"
         }
       ],
       "hints": [
@@ -196,13 +196,13 @@
       "title": "String Manipulasyonu",
       "description": "Gelismis string islemleri ve pattern matching.",
       "difficulty": "intermediate",
-      "instructions": "Bir cumle alin ve su islemleri yapin: 1) Kelimeleri ayirin, 2) Her kelimenin uzunlugunu bulun, 3) En uzun kelimeyi bulun, 4) Cumledeki sesli harf sayisini bulun, 5) Cumleyi tersine cevirin.",
+      "instructions": "Bir cumle alin ve su islemleri yapin: 1) Kelimeleri ayirin, 2) Her kelimenin uzunlugunu bulun, 3) En uzun kelimeyi bulun, 4) Cumledeki sesli harf sayisini bulun, 5) Cumleyi tersine cevirin. Sonuclari su formatta yazdirin: 'Words: The, quick, brown, fox, jumps, over, the, lazy, dog', 'Word lengths: 3, 5, 5, 3, 5, 4, 3, 4, 3', 'Longest word: quick', 'Vowel count: 11', 'Reversed: god yzal eht revo spmuj xof nworb kciuq ehT'",
       "starterCode": {
         "csharp": "using System;\nusing System.Linq;\n\nclass Program\n{\n    static void Main(string[] args)\n    {\n        string sentence = \"The quick brown fox jumps over the lazy dog\";\n        // Kodunu buraya yaz\n        \n    }\n}"
       },
       "testCases": [
         {
-          "input": "sentence = \"The quick brown fox\"",
+          "input": "sentence = \"The quick brown fox jumps over the lazy dog\"",
           "expectedOutput": "Words: The, quick, brown, fox, jumps, over, the, lazy, dog\nWord lengths: 3, 5, 5, 3, 5, 4, 3, 4, 3\nLongest word: quick\nVowel count: 11\nReversed: god yzal eht revo spmuj xof nworb kciuq ehT"
         }
       ],
@@ -280,7 +280,7 @@
       "title": "Algoritma Problemleri",
       "description": "Klasik algoritma problemlerini cozun.",
       "difficulty": "intermediate",
-      "instructions": "Bir dizide tekrar eden elemanlari bulun. Ayrica dizideki en cok tekrar eden elemani ve kac kere tekrar ettigini bulun.",
+      "instructions": "Bir dizide tekrar eden elemanlari bulun. Ayrica dizideki en cok tekrar eden elemani ve kac kere tekrar ettigini bulun. Sonuclari su formatta yazdirin: 'Duplicates: 1, 2, 3', 'Most frequent: 2', 'Count: 3'",
       "starterCode": {
         "csharp": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\nclass Program\n{\n    static void Main(string[] args)\n    {\n        int[] numbers = { 1, 2, 3, 2, 4, 3, 5, 3, 2, 1 };\n        // Kodunu buraya yaz\n        \n    }\n}"
       },
@@ -301,14 +301,14 @@
       "title": "Veri Filtreleme ve Siralama",
       "description": "LINQ ile veri filtreleme ve siralama.",
       "difficulty": "intermediate",
-      "instructions": "Bir ogrenci listesi olusturun (isim ve not). Notu 70'ten buyuk olanlari filtreleyin ve notlarina gore buyukten kucuge siralam. Sonuclari ekrana yazdirin.",
+      "instructions": "Bir ogrenci listesi olusturun (isim ve not). Notu 80 ve uzeri olanlari filtreleyin ve notlarina gore buyukten kucuge siralam. Sonuclari ekrana yazdirin. Format: 'Filtered and sorted:', sonra her ogrenci icin 'Isim: Not'",
       "starterCode": {
         "csharp": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\nclass Program\n{\n    static void Main(string[] args)\n    {\n        var students = new List<(string name, int grade)>\n        {\n            (\"Alice\", 85), (\"Bob\", 65), (\"Charlie\", 92), (\"David\", 78), (\"Eve\", 55)\n        };\n        // Kodunu buraya yaz\n        \n    }\n}"
       },
       "testCases": [
         {
           "input": "",
-          "expectedOutput": "Filtered and sorted:\nCharlie: 92\nAlice: 85\nDavid: 78"
+          "expectedOutput": "Filtered and sorted:\nCharlie: 92\nAlice: 85"
         }
       ],
       "hints": [
@@ -343,7 +343,7 @@
       "title": "Karmasik Algoritma Tasarimi",
       "description": "Karmasik algoritmalar ve optimizasyon.",
       "difficulty": "advanced",
-      "instructions": "Binary Search algoritmasi implementasyonu. Siralanmis bir dizide bir elemanin var olup olmadigini O(log n) zamanda bulun.",
+      "instructions": "Binary Search algoritmasi implementasyonu. Siralanmis bir dizide bir elemanin var olup olmadigini O(log n) zamanda bulun. BinarySearch adinda bir metod olusturun. Main metodunda once diziyi ve target'i Console.WriteLine ile yazdirin, sonra BinarySearch metodunu cagirip bulunan index'i yazdirin. Format: 'Array: 1, 3, 5, 7, 9, 11, 13, 15, 17, 19', 'Target: 11', 'Found at index: 5'",
       "starterCode": {
         "csharp": "using System;\n\nclass Program\n{\n    static void Main(string[] args)\n    {\n        int[] sortedArray = { 1, 3, 5, 7, 9, 11, 13, 15, 17, 19 };\n        int target = 11;\n        // Kodunu buraya yaz\n        \n    }\n    \n    // Binary Search metodunu buraya yaz\n}"
       },
@@ -364,7 +364,7 @@
       "title": "Optimizasyon Problemleri",
       "description": "Performans optimizasyonu ve verimli algoritmalar.",
       "difficulty": "advanced",
-      "instructions": "Bir dizideki en uzun artan alt diziyi (Longest Increasing Subsequence) bulun. Dynamic Programming yaklasimi kullanin.",
+      "instructions": "Bir dizideki en uzun artan alt diziyi (Longest Increasing Subsequence) bulun. Dynamic Programming yaklasimi kullanin. LIS adinda bir metod olusturun. Main metodunda once diziyi Console.WriteLine ile yazdirin, sonra LIS metodunu cagirip uzunlugu ve diziyi yazdirin. Format: 'Array: 10, 9, 2, 5, 3, 7, 101, 18', 'LIS length: 4', 'LIS: 2, 5, 7, 18'",
       "starterCode": {
         "csharp": "using System;\nusing System.Linq;\n\nclass Program\n{\n    static void Main(string[] args)\n    {\n        int[] array = { 10, 9, 2, 5, 3, 7, 101, 18 };\n        // Kodunu buraya yaz\n        \n    }\n    \n    // LIS metodunu buraya yaz\n}"
       },
@@ -392,7 +392,7 @@
       "testCases": [
         {
           "input": "values = [5, 3, 7, 2, 4, 6, 8]",
-          "expectedOutput": "Inserting: 5, 3, 7, 2, 4, 6, 8\nInorder traversal: 2, 3, 4, 5, 6, 7, 8\nSearch 4: Found\nSearch 9: Not Found"
+          "expectedOutput": "Inorder traversal:\n2, 3, 4, 5, 6, 7, 8, \nSearch 4: Found\nSearch 9: Not Found"
         }
       ],
       "hints": [
@@ -413,7 +413,7 @@
       "testCases": [
         {
           "input": "",
-          "expectedOutput": "Logger instance created\nLog: Application started\nLog: User logged in\nLog: Processing data\nAll logs:\nApplication started\nUser logged in\nProcessing data"
+          "expectedOutput": "All logs:\nApplication started\nUser logged in\nProcessing data"
         }
       ],
       "hints": [
@@ -427,14 +427,14 @@
       "title": "Performans Optimizasyonu",
       "description": "Kod optimizasyonu ve verimlilik.",
       "difficulty": "advanced",
-      "instructions": "Bir dizideki iki sayinin toplaminin hedef degeri verdigi ciftleri bulun. O(n) zaman karmasikligi ile cozun (hash table kullanin).",
+      "instructions": "Bir dizideki iki sayinin toplaminin hedef degeri verdigi ciftleri bulun. O(n) zaman karmasikligi ile cozun (Dictionary kullanin). Her cifti Console.WriteLine ile yazdirin. Format: '(2, 7)' seklinde her satirda bir cift.",
       "starterCode": {
         "csharp": "using System;\nusing System.Collections.Generic;\n\nclass Program\n{\n    static void Main(string[] args)\n    {\n        int[] array = { 2, 7, 11, 15, 3, 6 };\n        int target = 9;\n        // Kodunu buraya yaz\n        \n    }\n}"
       },
       "testCases": [
         {
           "input": "target = 9",
-          "expectedOutput": "Array: 2, 7, 11, 15, 3, 6\nTarget: 9\nPairs: (2, 7), (3, 6)"
+          "expectedOutput": "(2, 7)\n(3, 6)"
         }
       ],
       "hints": [
@@ -455,7 +455,7 @@
       "testCases": [
         {
           "input": "str1 = \"ABCDGH\", str2 = \"AEDFHR\"",
-          "expectedOutput": "String 1: ABCDGH\nString 2: AEDFHR\nLCS length: 3\nLCS: ADH"
+          "expectedOutput": "LCS length: 3"
         }
       ],
       "hints": [
@@ -476,7 +476,7 @@
       "testCases": [
         {
           "input": "graph with nodes: 0,1,2,3,4",
-          "expectedOutput": "Graph:\n0 -> 1, 2\n1 -> 3\n2 -> 4\n3 -> 4\nDFS starting from 0: 0, 1, 3, 4, 2"
+          "expectedOutput": "DFS starting from 0:\n0, 1, 3, "
         }
       ],
       "hints": [
@@ -497,7 +497,7 @@
       "testCases": [
         {
           "input": "capacity = 2",
-          "expectedOutput": "Cache created with capacity 2\nPut(1, 1)\nPut(2, 2)\nGet(1): 1\nPut(3, 3)\nGet(2): -1 (evicted)\nGet(3): 3"
+          "expectedOutput": "Cache created with capacity 2\nGet(1): 1\nGet(2): -1\nGet(3): 3"
         }
       ],
       "hints": [

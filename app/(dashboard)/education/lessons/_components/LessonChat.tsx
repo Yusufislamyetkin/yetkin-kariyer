@@ -1420,21 +1420,53 @@ export function LessonChat({ lessonSlug, lessonTitle, lessonDescription, onRoadm
                 <span className="sm:hidden">Devam</span>
               </Button>
             )}
-            <Button
-              type="submit"
-              variant="gradient"
-              size="md"
-              disabled={!messageInput.trim() || sending || !!currentActivity || isCompleted}
-              isLoading={sending}
-              onClick={(e) => {
-                e.preventDefault();
-                handleSendMessage();
-              }}
-              className="min-w-[36px] sm:min-w-[40px] md:min-w-[44px] h-9 sm:h-10 md:h-11 rounded-full p-0 flex items-center justify-center shrink-0"
-              aria-label="Mesaj gönder"
-            >
-              <Send className="h-4 w-4 sm:h-4 sm:w-4 md:h-5 md:w-5" />
-            </Button>
+            {/* Next Lesson Button - Replaces Send button when lesson is completed */}
+            {isCompleted && nextLesson ? (
+              <Button
+                type="button"
+                onClick={() => {
+                  // nextLesson.href format: "/education/lessons/..." 
+                  // We need to convert it to chat route: "/education/lessons/chat/..."
+                  let nextPath = nextLesson.href;
+                  if (nextPath.startsWith('/education/lessons/')) {
+                    // Extract the lesson path after /education/lessons/
+                    const lessonPath = nextPath.replace('/education/lessons/', '');
+                    // Convert to chat route: /education/lessons/chat/...
+                    nextPath = `/education/lessons/chat/${lessonPath}`;
+                  } else {
+                    // Fallback: assume it's a relative path
+                    nextPath = `/education/lessons/chat/${nextPath.replace(/^\//, '')}`;
+                  }
+                  
+                  // Navigate immediately
+                  router.push(nextPath);
+                }}
+                variant="gradient"
+                size="md"
+                className="min-w-[120px] sm:min-w-[140px] md:min-w-[160px] h-9 sm:h-10 md:h-11 rounded-full px-3 sm:px-4 md:px-5 flex items-center justify-center shrink-0 bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 hover:from-purple-700 hover:via-pink-700 hover:to-rose-700 text-white shadow-lg"
+                aria-label="Bir sonraki derse geç"
+              >
+                <ArrowRight className="h-4 w-4 sm:h-4 sm:w-4 md:h-5 md:w-5 mr-1.5 sm:mr-2" />
+                <span className="text-xs sm:text-sm md:text-base font-semibold hidden sm:inline">Bir Sonraki Derse Geç</span>
+                <span className="text-xs sm:text-sm font-semibold sm:hidden">Sonraki</span>
+              </Button>
+            ) : (
+              <Button
+                type="submit"
+                variant="gradient"
+                size="md"
+                disabled={!messageInput.trim() || sending || !!currentActivity || isCompleted}
+                isLoading={sending}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleSendMessage();
+                }}
+                className="min-w-[36px] sm:min-w-[40px] md:min-w-[44px] h-9 sm:h-10 md:h-11 rounded-full p-0 flex items-center justify-center shrink-0"
+                aria-label="Mesaj gönder"
+              >
+                <Send className="h-4 w-4 sm:h-4 sm:w-4 md:h-5 md:w-5" />
+              </Button>
+            )}
           </div>
         </div>
       </div>

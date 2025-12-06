@@ -90,32 +90,34 @@ function validatePHP(code: string): CodeValidationResult {
     suggestions.push("PHP etiketleri (<?php ... ?>) eklenebilir");
   }
 
-  // Check for variable definitions before usage
+  // Clean code: remove comments and strings before analysis
+  const cleanedCode = cleanPHPCode(code);
+  const lines = cleanedCode.split('\n');
+  
   // First, extract all defined variables (on the left side of =)
   const definedVars = new Set<string>();
-  const lines = code.split('\n');
   
   lines.forEach((line) => {
-    // Match variable definitions: $var = ... (but not inside strings)
+    // Match variable definitions: $var = ... (but not inside strings - already cleaned)
     const defMatch = line.match(/^\s*\$([a-zA-Z_][a-zA-Z0-9_]*)\s*=/);
     if (defMatch) {
       definedVars.add('$' + defMatch[1]);
     }
   });
   
-  // Then, extract all used variables (excluding definitions)
+  // Then, extract all used variables (excluding definitions) from cleaned code
   const variableUsagePattern = /\$[a-zA-Z_][a-zA-Z0-9_]*/g;
   const usedVars = new Set<string>();
   variableUsagePattern.lastIndex = 0;
   let match;
   
-  while ((match = variableUsagePattern.exec(code)) !== null) {
+  while ((match = variableUsagePattern.exec(cleanedCode)) !== null) {
     const varName = match[0];
     // Check if this is a definition (on left side of =)
     const matchIndex = match.index;
-    const lineStart = code.lastIndexOf('\n', matchIndex) + 1;
-    const lineEnd = code.indexOf('\n', matchIndex);
-    const line = code.substring(lineStart, lineEnd === -1 ? code.length : lineEnd);
+    const lineStart = cleanedCode.lastIndexOf('\n', matchIndex) + 1;
+    const lineEnd = cleanedCode.indexOf('\n', matchIndex);
+    const line = cleanedCode.substring(lineStart, lineEnd === -1 ? cleanedCode.length : lineEnd);
     const beforeVar = line.substring(0, matchIndex - lineStart);
     
     // If variable is on the left side of =, it's a definition, not a usage
@@ -166,12 +168,16 @@ function validatePython(code: string): CodeValidationResult {
   const suggestions: string[] = [];
   const errors: Array<{ line?: number; description: string }> = [];
 
-  // Check for variable definitions (basic check - Python is dynamic)
-  // We check for common patterns where variables are used but might not be defined
-  const lines = code.split("\n");
+  // Clean code: remove comments and strings before analysis
+  const cleanedCode = cleanPythonCode(code);
+  const lines = cleanedCode.split("\n");
+  const originalLines = code.split("\n");
+  
   const definedVars = new Set<string>();
   const importedModules = new Set<string>();
+  const usedVars = new Set<string>();
 
+  // First pass: collect defined variables and imports
   lines.forEach((line, index) => {
     // Check for imports
     const importMatch = line.match(/^(import|from)\s+(\w+)/);
@@ -179,36 +185,65 @@ function validatePython(code: string): CodeValidationResult {
       importedModules.add(importMatch[2]);
     }
 
-    // Check for variable assignments
-    const assignMatch = line.match(/^(\s*)(\w+)\s*=/);
+    // Check for variable assignments (var = ...)
+    const assignMatch = line.match(/^(\s*)([a-zA-Z_][a-zA-Z0-9_]*)\s*=/);
     if (assignMatch) {
       definedVars.add(assignMatch[2]);
     }
+  });
 
-    // Check for variable usage (simple pattern)
-    const usageMatch = line.match(/\b([a-z_][a-z0-9_]*)\b/gi);
-    if (usageMatch) {
-      usageMatch.forEach((varName) => {
-        const lowerVar = varName.toLowerCase();
-        // Skip Python keywords and built-ins
-        if (
-          !isPythonKeyword(lowerVar) &&
-          !isPythonBuiltin(lowerVar) &&
-          !definedVars.has(varName) &&
-          !importedModules.has(varName) &&
-          !line.includes("=") &&
-          !line.includes("def ") &&
-          !line.includes("class ") &&
-          !line.includes("import ") &&
-          !line.includes("from ")
-        ) {
-          // This is a potential undefined variable, but Python is dynamic so we can't be 100% sure
-          // We'll just add a suggestion
-          if (!missing.includes(`Değişken kontrolü: ${varName}`)) {
-            suggestions.push(`${varName} değişkeninin tanımlı olduğundan emin olun`);
-          }
-        }
-      });
+  // Second pass: identify variable usages (more conservative approach)
+  lines.forEach((line, index) => {
+    // Skip lines that are definitions, imports, or function/class declarations
+    if (
+      line.includes("=") ||
+      line.includes("def ") ||
+      line.includes("class ") ||
+      line.includes("import ") ||
+      line.includes("from ") ||
+      line.trim().length === 0
+    ) {
+      return;
+    }
+
+    // Look for variable usages in expressions (more specific patterns)
+    // Match identifiers that appear in contexts like: var_name, var_name(, var_name[, etc.
+    const usagePattern = /\b([a-zA-Z_][a-zA-Z0-9_]*)\b/g;
+    let match;
+    
+    while ((match = usagePattern.exec(line)) !== null) {
+      const varName = match[1];
+      const lowerVar = varName.toLowerCase();
+      
+      // Skip if it's a keyword, built-in, defined variable, or imported module
+      if (
+        isPythonKeyword(lowerVar) ||
+        isPythonBuiltin(lowerVar) ||
+        definedVars.has(varName) ||
+        importedModules.has(varName)
+      ) {
+        continue;
+      }
+      
+      // Only add if it looks like a real variable usage (not part of a method call chain)
+      // Check if it's followed by common operators or punctuation that suggests usage
+      const afterMatch = line.substring(match.index + varName.length);
+      const isLikelyUsage = /^\s*[=+\-*/(\[,;:}]/.test(afterMatch) || afterMatch.trim().length === 0;
+      
+      if (isLikelyUsage && varName.length > 1) { // Ignore single character variables
+        usedVars.add(varName);
+      }
+    }
+  });
+
+  // Only suggest for variables that are used but not defined
+  // Be very conservative - Python is dynamic, so we can't be sure
+  usedVars.forEach((varName) => {
+    if (!definedVars.has(varName) && !importedModules.has(varName)) {
+      // Only add suggestion if it's a reasonable variable name (not too short, not all caps)
+      if (varName.length >= 2 && varName !== varName.toUpperCase()) {
+        suggestions.push(`${varName} değişkeninin tanımlı olduğundan emin olun`);
+      }
     }
   });
 
@@ -495,6 +530,61 @@ function validateRuby(code: string): CodeValidationResult {
     suggestions,
     errors,
   };
+}
+
+/**
+ * Helper: Remove comments and strings from Python code
+ */
+function cleanPythonCode(code: string): string {
+  let cleaned = code;
+  
+  // Remove single-line comments (# ...)
+  cleaned = cleaned.replace(/#.*$/gm, '');
+  
+  // Remove multi-line comments (""" ... """ or ''' ... ''')
+  cleaned = cleaned.replace(/""".*?"""/gs, '');
+  cleaned = cleaned.replace(/'''.*?'''/gs, '');
+  
+  // Remove string literals (both single and double quotes)
+  // Handle triple quotes first (already done above)
+  // Then handle single-line strings
+  // We need to be careful with escaped quotes
+  const stringPatterns = [
+    /"[^"\\]*(\\.[^"\\]*)*"/g,  // Double-quoted strings
+    /'[^'\\]*(\\.[^'\\]*)*'/g,  // Single-quoted strings
+  ];
+  
+  stringPatterns.forEach(pattern => {
+    cleaned = cleaned.replace(pattern, '');
+  });
+  
+  return cleaned;
+}
+
+/**
+ * Helper: Remove comments and strings from PHP code
+ */
+function cleanPHPCode(code: string): string {
+  let cleaned = code;
+  
+  // Remove single-line comments (// ...)
+  cleaned = cleaned.replace(/\/\/.*$/gm, '');
+  
+  // Remove multi-line comments (/* ... */)
+  cleaned = cleaned.replace(/\/\*[\s\S]*?\*\//g, '');
+  
+  // Remove string literals (both single and double quotes)
+  // Handle heredoc/nowdoc later if needed, but for now focus on simple strings
+  const stringPatterns = [
+    /"[^"\\]*(\\.[^"\\]*)*"/g,  // Double-quoted strings
+    /'[^'\\]*(\\.[^'\\]*)*'/g,  // Single-quoted strings
+  ];
+  
+  stringPatterns.forEach(pattern => {
+    cleaned = cleaned.replace(pattern, '');
+  });
+  
+  return cleaned;
 }
 
 /**

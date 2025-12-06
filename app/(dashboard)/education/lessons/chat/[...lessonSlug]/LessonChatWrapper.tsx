@@ -106,17 +106,6 @@ export function LessonChatWrapper({
                       Ders Tamamlandı!
                     </span>
                   </div>
-                  
-                  {nextLesson && (
-                    <Button
-                      href={nextLesson.href}
-                      variant="gradient"
-                      className="w-full bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 hover:from-purple-700 hover:via-pink-700 hover:to-rose-700 text-white shadow-lg"
-                    >
-                      <span>Sonraki Derse Geç</span>
-                      <ArrowRight className="h-4 w-4 ml-2" />
-                    </Button>
-                  )}
                 </div>
               </div>
             )}

@@ -135,16 +135,18 @@ export default async function LanguageCasesPage({
               <Card
                 variant="elevated"
                 className={cn(
-                  "h-full border-2 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 relative",
+                  "h-full border-2 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 relative overflow-hidden",
                   isCompleted
                     ? "border-emerald-500/60 bg-gradient-to-br from-emerald-50/50 to-green-50/50 dark:from-emerald-950/30 dark:to-green-950/30 dark:border-emerald-500/40"
                     : "border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 hover:border-emerald-500 dark:hover:border-emerald-500"
                 )}
               >
                 {isCompleted && (
-                  <div className="absolute top-3 right-3 z-10">
-                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-500 text-white shadow-lg">
-                      <CheckCircle className="h-5 w-5" />
+                  <div className="absolute top-0 right-0 z-10 w-20 h-20 overflow-hidden">
+                    <div className="absolute top-0 right-0 w-28 h-28 bg-gradient-to-br from-emerald-500 to-green-600 shadow-xl transform rotate-45 translate-x-8 -translate-y-8 group-hover:scale-110 transition-transform duration-300">
+                      <div className="absolute bottom-0 left-0 w-full h-full flex items-center justify-center transform -rotate-45 translate-x-4 translate-y-4">
+                        <CheckCircle className="h-6 w-6 text-white drop-shadow-lg" />
+                      </div>
                     </div>
                   </div>
                 )}
@@ -160,11 +162,6 @@ export default async function LanguageCasesPage({
                       <Code className="h-6 w-6" style={{ color }} />
                     </div>
                     <div className="flex flex-col items-end gap-2">
-                      {isCompleted && (
-                        <span className="rounded-full px-2.5 py-1 text-xs font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
-                          Çözüldü
-                        </span>
-                      )}
                       <span
                         className="rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider"
                         style={{

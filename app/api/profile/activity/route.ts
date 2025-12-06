@@ -135,6 +135,94 @@ export async function GET(request: Request) {
       take: type === "global" ? limit * 4 : limit,
     });
 
+    // Get recent live coding attempts
+    const liveCodingAttempts = await db.liveCodingAttempt.findMany({
+      where: userWhere,
+      include: {
+        quiz: {
+          select: {
+            title: true,
+          },
+        },
+        user: {
+          select: {
+            id: true,
+            name: true,
+            profileImage: true,
+          },
+        },
+      },
+      orderBy: { completedAt: "desc" },
+      take: type === "global" ? limit * 4 : limit,
+    });
+
+    // Get recent lesson completions (only completed ones)
+    const lessonCompletions = await db.lessonCompletion.findMany({
+      where: {
+        ...userWhere,
+        completedAt: { not: null },
+      },
+      include: {
+        course: {
+          select: {
+            title: true,
+          },
+        },
+        user: {
+          select: {
+            id: true,
+            name: true,
+            profileImage: true,
+          },
+        },
+      },
+      orderBy: { completedAt: "desc" },
+      take: type === "global" ? limit * 4 : limit,
+    });
+
+    // Get recent hackathon applications
+    const hackathonApplications = await db.hackathonApplication.findMany({
+      where: userWhere,
+      include: {
+        hackathon: {
+          select: {
+            title: true,
+          },
+        },
+        user: {
+          select: {
+            id: true,
+            name: true,
+            profileImage: true,
+          },
+        },
+      },
+      orderBy: { appliedAt: "desc" },
+      take: type === "global" ? limit * 4 : limit,
+    });
+
+    // Get recent badge awards
+    const badgeAwards = await db.userBadge.findMany({
+      where: userWhere,
+      include: {
+        badge: {
+          select: {
+            name: true,
+            icon: true,
+          },
+        },
+        user: {
+          select: {
+            id: true,
+            name: true,
+            profileImage: true,
+          },
+        },
+      },
+      orderBy: { earnedAt: "desc" },
+      take: type === "global" ? limit * 4 : limit,
+    });
+
     // Combine and sort all activities
     const activities: any[] = [];
 
@@ -219,6 +307,107 @@ export async function GET(request: Request) {
             id: app.user.id,
             name: app.user.name,
             profileImage: app.user.profileImage,
+          } : null,
+        });
+      }
+    });
+
+    liveCodingAttempts.forEach((attempt: any) => {
+      if (attempt.quiz) {
+        const userName = attempt.user?.name || "Birisi";
+        const isOwn = attempt.userId === currentUserId;
+        activities.push({
+          id: attempt.id,
+          type: "live-coding",
+          title: isOwn
+            ? `${attempt.quiz.title} canlı kodlama görevini tamamladı`
+            : `${userName} ${attempt.quiz.title} canlı kodlama görevini tamamladı`,
+          date: attempt.completedAt,
+          icon: "💻",
+          userId: attempt.userId,
+          user: attempt.user ? {
+            id: attempt.user.id,
+            name: attempt.user.name,
+            profileImage: attempt.user.profileImage,
+          } : null,
+        });
+      }
+    });
+
+    lessonCompletions.forEach((completion: any) => {
+      const userName = completion.user?.name || "Birisi";
+      const isOwn = completion.userId === currentUserId;
+      
+      // Format lesson title - use course title if available, otherwise use lessonSlug
+      let lessonTitle = completion.course?.title || completion.lessonSlug;
+      // If lessonSlug is a path, extract the last segment for display
+      if (lessonTitle && lessonTitle.includes("/")) {
+        const segments = lessonTitle.split("/");
+        lessonTitle = segments[segments.length - 1];
+        // Convert kebab-case to readable format
+        lessonTitle = lessonTitle
+          .split("-")
+          .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" ");
+      }
+      
+      activities.push({
+        id: completion.id,
+        type: "lesson",
+        title: isOwn
+          ? `${lessonTitle} dersini tamamladı`
+          : `${userName} ${lessonTitle} dersini tamamladı`,
+        date: completion.completedAt,
+        icon: "📚",
+        userId: completion.userId,
+        user: completion.user ? {
+          id: completion.user.id,
+          name: completion.user.name,
+          profileImage: completion.user.profileImage,
+        } : null,
+      });
+    });
+
+    hackathonApplications.forEach((app: any) => {
+      if (app.hackathon) {
+        const userName = app.user?.name || "Birisi";
+        const isOwn = app.userId === currentUserId;
+        activities.push({
+          id: app.id,
+          type: "hackathon",
+          title: isOwn
+            ? `${app.hackathon.title} hackathonuna başvurdu`
+            : `${userName} ${app.hackathon.title} hackathonuna başvurdu`,
+          date: app.appliedAt,
+          icon: "🏆",
+          userId: app.userId,
+          user: app.user ? {
+            id: app.user.id,
+            name: app.user.name,
+            profileImage: app.user.profileImage,
+          } : null,
+        });
+      }
+    });
+
+    badgeAwards.forEach((award: any) => {
+      if (award.badge) {
+        const userName = award.user?.name || "Birisi";
+        const isOwn = award.userId === currentUserId;
+        const badgeIcon = award.badge.icon || "🏅";
+        activities.push({
+          id: award.id,
+          type: "badge",
+          title: isOwn
+            ? `${badgeIcon} ${award.badge.name} rozetini kazandı`
+            : `${userName} ${badgeIcon} ${award.badge.name} rozetini kazandı`,
+          date: award.earnedAt,
+          icon: badgeIcon,
+          userId: award.userId,
+          user: award.user ? {
+            id: award.user.id,
+            name: award.user.name,
+            profileImage: award.user.profileImage,
           } : null,
         });
       }

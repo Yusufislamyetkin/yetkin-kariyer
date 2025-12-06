@@ -1,181 +1,34 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { generateStage1Questions, generateStage2Questions, generateStage3Questions, formatQuestionsForInterview, extractCVInfo } from "@/lib/ai/interview-generator";
+import { extractCVInfo } from "@/lib/ai/interview-generator";
 
 export const maxDuration = 60; // 60 seconds timeout for Vercel
 
 /**
- * Arka planda aşamalı olarak mülakat sorularını oluşturur
+ * Base URL'i environment variable'lardan al
  */
-async function generateInterviewStages(interviewId: string, cvId: string) {
-  const startTime = Date.now();
-  let currentStage = 0;
-  
-  try {
-    console.log(`[CV_INTERVIEW_BG] Aşamalı mülakat oluşturma başladı: ${interviewId}, cvId: ${cvId}`);
-    
-    // Interview'ın var olduğunu kontrol et
-    const initialInterview = await db.interview.findUnique({
-      where: { id: interviewId },
-    });
-    
-    if (!initialInterview) {
-      throw new Error(`Interview bulunamadı: ${interviewId}`);
-    }
-    
-    console.log(`[CV_INTERVIEW_BG] Interview kaydı doğrulandı: ${interviewId}`);
+function getBaseUrl(): string {
+  let baseUrl =
+    process.env.NEXTAUTH_URL ||
+    process.env.NEXT_PUBLIC_APP_URL ||
+    process.env.VERCEL_URL ||
+    "http://localhost:3000";
 
-    // Aşama 1: Genel Tanışma
-    currentStage = 1;
-    console.log(`[CV_INTERVIEW_BG] Aşama 1 başlatılıyor... (interviewId: ${interviewId})`);
-    
-    let stage1;
-    try {
-      stage1 = await generateStage1Questions(cvId);
-      console.log(`[CV_INTERVIEW_BG] Aşama 1 soruları oluşturuldu: ${stage1.stage1_introduction?.length || 0} soru`);
-    } catch (stageError: any) {
-      console.error(`[CV_INTERVIEW_BG] Aşama 1 hatası:`, stageError);
-      throw new Error(`Aşama 1 (Genel Tanışma) hatası: ${stageError?.message || "Bilinmeyen hata"}`);
+  // URL'de scheme yoksa ekle
+  if (!baseUrl.startsWith("http://") && !baseUrl.startsWith("https://")) {
+    // Production'da (Vercel) https:// kullan, localhost'ta http://
+    if (baseUrl.includes("localhost") || baseUrl.includes("127.0.0.1")) {
+      baseUrl = `http://${baseUrl}`;
+    } else {
+      baseUrl = `https://${baseUrl}`;
     }
-    
-    // Interview kaydını güncelle - Aşama 1
-    try {
-      await db.interview.update({
-        where: { id: interviewId },
-        data: {
-          questions: {
-            stage1_introduction: stage1.stage1_introduction,
-          } as any,
-        },
-      });
-      console.log(`[CV_INTERVIEW_BG] Aşama 1 veritabanına kaydedildi`);
-    } catch (updateError: any) {
-      console.error(`[CV_INTERVIEW_BG] Aşama 1 veritabanı güncelleme hatası:`, updateError);
-      throw new Error(`Aşama 1 veritabanı güncelleme hatası: ${updateError?.message || "Bilinmeyen hata"}`);
-    }
-
-    // Aşama 2: Deneyim
-    currentStage = 2;
-    console.log(`[CV_INTERVIEW_BG] Aşama 2 başlatılıyor... (interviewId: ${interviewId})`);
-    
-    let stage2;
-    try {
-      stage2 = await generateStage2Questions(cvId);
-      console.log(`[CV_INTERVIEW_BG] Aşama 2 soruları oluşturuldu: ${stage2.stage2_experience?.length || 0} soru`);
-    } catch (stageError: any) {
-      console.error(`[CV_INTERVIEW_BG] Aşama 2 hatası:`, stageError);
-      throw new Error(`Aşama 2 (Deneyim) hatası: ${stageError?.message || "Bilinmeyen hata"}`);
-    }
-    
-    // Interview kaydını güncelle - Aşama 2
-    try {
-      const currentInterview = await db.interview.findUnique({
-        where: { id: interviewId },
-      });
-      const currentQuestions = (currentInterview?.questions as any) || {};
-      
-      await db.interview.update({
-        where: { id: interviewId },
-        data: {
-          questions: {
-            ...currentQuestions,
-            stage2_experience: stage2.stage2_experience,
-          } as any,
-        },
-      });
-      console.log(`[CV_INTERVIEW_BG] Aşama 2 veritabanına kaydedildi`);
-    } catch (updateError: any) {
-      console.error(`[CV_INTERVIEW_BG] Aşama 2 veritabanı güncelleme hatası:`, updateError);
-      throw new Error(`Aşama 2 veritabanı güncelleme hatası: ${updateError?.message || "Bilinmeyen hata"}`);
-    }
-
-    // Aşama 3: Teknik
-    currentStage = 3;
-    console.log(`[CV_INTERVIEW_BG] Aşama 3 başlatılıyor... (interviewId: ${interviewId})`);
-    
-    let stage3;
-    try {
-      stage3 = await generateStage3Questions(cvId);
-      const stage3Count = 
-        (stage3.stage3_technical?.testQuestions?.length || 0) +
-        (stage3.stage3_technical?.liveCoding ? 1 : 0) +
-        (stage3.stage3_technical?.bugFix ? 1 : 0) +
-        (stage3.stage3_technical?.realWorldScenarios?.length || 0);
-      console.log(`[CV_INTERVIEW_BG] Aşama 3 soruları oluşturuldu: ${stage3Count} soru`);
-    } catch (stageError: any) {
-      console.error(`[CV_INTERVIEW_BG] Aşama 3 hatası:`, stageError);
-      throw new Error(`Aşama 3 (Teknik) hatası: ${stageError?.message || "Bilinmeyen hata"}`);
-    }
-    
-    // Tüm soruları birleştir ve formatla
-    const allQuestions = {
-      stage1_introduction: stage1.stage1_introduction,
-      stage2_experience: stage2.stage2_experience,
-      stage3_technical: stage3.stage3_technical,
-    };
-    
-    let formattedQuestions;
-    try {
-      formattedQuestions = formatQuestionsForInterview(allQuestions);
-      console.log(`[CV_INTERVIEW_BG] Toplam ${formattedQuestions.length} soru formatlandı`);
-    } catch (formatError: any) {
-      console.error(`[CV_INTERVIEW_BG] Soru formatlama hatası:`, formatError);
-      throw new Error(`Soru formatlama hatası: ${formatError?.message || "Bilinmeyen hata"}`);
-    }
-    
-    // CV bilgilerini al (duration hesaplamak için)
-    const cv = await db.cV.findUnique({
-      where: { id: cvId },
-    });
-    const cvData = cv?.data as any;
-    const cvInfo = extractCVInfo(cvData || {});
-    
-    // Interview kaydını finalize et
-    try {
-      await db.interview.update({
-        where: { id: interviewId },
-        data: {
-          questions: formattedQuestions as any,
-          duration: Math.ceil(formattedQuestions.length * 3), // Her soru için yaklaşık 3 dakika
-          description: `CV'nize göre oluşturulmuş kapsamlı mülakat. ${formattedQuestions.length} soru içermektedir.`,
-        },
-      });
-      const duration = Date.now() - startTime;
-      console.log(`[CV_INTERVIEW_BG] Tüm aşamalar tamamlandı: ${interviewId} (${Math.round(duration / 1000)}s)`);
-    } catch (updateError: any) {
-      console.error(`[CV_INTERVIEW_BG] Final güncelleme hatası:`, updateError);
-      throw new Error(`Final güncelleme hatası: ${updateError?.message || "Bilinmeyen hata"}`);
-    }
-  } catch (error: any) {
-    const duration = Date.now() - startTime;
-    const errorMessage = error?.message || "Bilinmeyen hata";
-    const errorDetails = error?.stack || error?.toString() || "Detay yok";
-    
-    console.error(`[CV_INTERVIEW_BG] Hata (interviewId: ${interviewId}, stage: ${currentStage}, ${Math.round(duration / 1000)}s):`, {
-      message: errorMessage,
-      details: errorDetails,
-      stage: currentStage,
-    });
-    
-    // Hata durumunda interview kaydını güncelle (hata mesajı ekle)
-    try {
-      const errorDescription = `Mülakat oluşturulurken hata oluştu (Aşama ${currentStage}): ${errorMessage}`;
-      await db.interview.update({
-        where: { id: interviewId },
-        data: {
-          description: errorDescription,
-        },
-      });
-      console.log(`[CV_INTERVIEW_BG] Hata durumu veritabanına kaydedildi: ${interviewId}`);
-    } catch (updateError: any) {
-      console.error(`[CV_INTERVIEW_BG] Interview güncelleme hatası (hata kaydı):`, updateError);
-      // Bu durumda en azından console'a yazdık
-    }
-    
-    // Hata'yı tekrar fırlat ki üst seviyede de yakalanabilsin
-    throw error;
   }
+
+  // URL'in sonundaki slash'ı kaldır
+  baseUrl = baseUrl.replace(/\/$/, "");
+
+  return baseUrl;
 }
 
 export async function POST(request: Request) {
@@ -234,20 +87,49 @@ export async function POST(request: Request) {
     console.log(`[CV_INTERVIEW] Interview kaydı oluşturuldu: ${interview.id}, arka planda sorular oluşturuluyor...`);
 
     // Arka planda aşamalı olarak soruları oluştur (fire-and-forget)
-    // Not: Vercel serverless ortamında bu fonksiyon yanıt döndükten sonra çalışmaya devam edebilir
-    // Ancak timeout süresi içinde tamamlanması gerekir
-    generateInterviewStages(interview.id, cvId)
-      .then(() => {
-        console.log(`[CV_INTERVIEW] Arka plan işlemi başarıyla tamamlandı: ${interview.id}`);
+    // Yeni endpoint'i fetch ile tetikle - bu sayede bağımsız bir request olarak çalışacak
+    const baseUrl = getBaseUrl();
+    const generateStagesUrl = `${baseUrl}/api/interview/cv-based/generate-stages`;
+    
+    fetch(generateStagesUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Session cookie'yi gönder (eğer varsa)
+        ...(request.headers.get("cookie") && { Cookie: request.headers.get("cookie") || "" }),
+      },
+      body: JSON.stringify({
+        interviewId: interview.id,
+        cvId: cvId,
+      }),
+    })
+      .then(async (response) => {
+        if (response.ok) {
+          console.log(`[CV_INTERVIEW] Arka plan işlemi başlatıldı: ${interview.id}`);
+        } else {
+          const errorData = await response.json().catch(() => ({}));
+          console.error(`[CV_INTERVIEW] Arka plan işlemi başlatılamadı (interviewId: ${interview.id}):`, {
+            status: response.status,
+            error: errorData.error || "Bilinmeyen hata",
+          });
+        }
       })
       .catch((error) => {
-        console.error(`[CV_INTERVIEW] Arka plan işlemi hatası (interviewId: ${interview.id}):`, {
+        console.error(`[CV_INTERVIEW] Arka plan endpoint çağrısı hatası (interviewId: ${interview.id}):`, {
           message: error?.message || "Bilinmeyen hata",
           stack: error?.stack,
           cvId: cvId,
+          url: generateStagesUrl,
         });
-        // Hata zaten generateInterviewStages içinde database'e kaydedildi
-        // Burada sadece log tutuyoruz
+        // Hata durumunda interview description'ına hata mesajı ekle
+        db.interview.update({
+          where: { id: interview.id },
+          data: {
+            description: `Mülakat soruları oluşturulurken hata oluştu: Arka plan endpoint'i çağrılamadı. Lütfen tekrar deneyin.`,
+          },
+        }).catch((updateError: unknown) => {
+          console.error(`[CV_INTERVIEW] Hata mesajı kaydedilemedi:`, updateError);
+        });
       });
 
     // Hemen response döndür

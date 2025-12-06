@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { format, formatDistanceToNow } from "date-fns";
 import { tr } from "date-fns/locale";
-import { CalendarDays, Clock, Crown, Layers, Rocket, Trophy, Users } from "lucide-react";
+import { CalendarDays, Clock, Crown, Layers, Rocket, Trophy, Users, UserCircle } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Input } from "@/app/components/ui/Input";
@@ -175,11 +175,19 @@ export default function HackatonPage() {
 
   return (
     <div className="space-y-6 animate-fade-in">
-      <div className="flex flex-col gap-2">
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100">{headline}</h1>
-        <p className="text-gray-600 dark:text-gray-400">
-          Takımınızı kurun, arkadaşlarınızı davet edin ve proje teslim sürecini birlikte yönetin.
-        </p>
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+        <div className="flex flex-col gap-2">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100">{headline}</h1>
+          <p className="text-gray-600 dark:text-gray-400">
+            Takımınızı kurun, arkadaşlarınızı davet edin ve proje teslim sürecini birlikte yönetin.
+          </p>
+        </div>
+        <Link href="/education/hackaton/applications">
+          <Button variant="outline" className="flex items-center gap-2">
+            <UserCircle className="h-4 w-4" />
+            Hackathonlarım
+          </Button>
+        </Link>
       </div>
 
       <div className="flex flex-col lg:flex-row lg:items-center gap-4">

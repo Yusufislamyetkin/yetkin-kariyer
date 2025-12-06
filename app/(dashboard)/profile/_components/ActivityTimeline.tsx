@@ -1,11 +1,11 @@
 "use client";
 
-import { FileText, Briefcase, User, MessageSquare, Clock } from "lucide-react";
+import { FileText, Briefcase, User, MessageSquare, Clock, BookOpen, Code, Trophy, Award } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 
 interface Activity {
   id: string;
-  type: "quiz" | "interview" | "cv" | "application";
+  type: "lesson" | "quiz" | "live-coding" | "hackathon" | "cv" | "application" | "badge" | "interview";
   title: string;
   score?: number;
   date: Date | string;
@@ -18,17 +18,25 @@ interface ActivityTimelineProps {
 }
 
 const activityIcons = {
+  lesson: BookOpen,
   quiz: FileText,
-  interview: MessageSquare,
+  "live-coding": Code,
+  hackathon: Trophy,
   cv: User,
   application: Briefcase,
+  badge: Award,
+  interview: MessageSquare,
 };
 
 const activityColors = {
+  lesson: "from-blue-500 to-indigo-500",
   quiz: "from-blue-500 to-cyan-500",
-  interview: "from-purple-500 to-pink-500",
+  "live-coding": "from-green-500 to-emerald-500",
+  hackathon: "from-orange-500 to-red-500",
   cv: "from-green-500 to-emerald-500",
   application: "from-orange-500 to-red-500",
+  badge: "from-yellow-500 to-amber-500",
+  interview: "from-purple-500 to-pink-500",
 };
 
 export function ActivityTimeline({ activities }: ActivityTimelineProps) {
@@ -69,7 +77,9 @@ export function ActivityTimeline({ activities }: ActivityTimelineProps) {
           <div className="space-y-6">
             {activities.map((activity, index) => {
               const Icon = activityIcons[activity.type];
-              const colorClass = activityColors[activity.type];
+              const colorClass = activityColors[activity.type] || "from-gray-500 to-gray-600";
+              // Check if icon is an emoji (contains emoji characters)
+              const isEmoji = activity.icon && /[\u{1F300}-\u{1F9FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/u.test(activity.icon);
 
               return (
                 <div key={activity.id} className="relative flex gap-4">
@@ -78,7 +88,11 @@ export function ActivityTimeline({ activities }: ActivityTimelineProps) {
                     <div
                       className={`w-12 h-12 rounded-full bg-gradient-to-br ${colorClass} flex items-center justify-center shadow-lg border-4 border-white dark:border-gray-900`}
                     >
-                      <Icon className="w-6 h-6 text-white" />
+                      {isEmoji ? (
+                        <span className="text-2xl">{activity.icon}</span>
+                      ) : (
+                        Icon && <Icon className="w-6 h-6 text-white" />
+                      )}
                     </div>
                   </div>
 

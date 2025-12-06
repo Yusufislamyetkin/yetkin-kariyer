@@ -181,6 +181,15 @@ export default function TestQuestionsPage() {
     const newAnswers = [...answers];
     newAnswers[currentQuestion] = answerIndex;
     setAnswers(newAnswers);
+    
+    // Cevap seçildiğinde otomatik olarak sonraki soruya geç
+    // Ancak son soru ise geçiş yapma
+    if (currentQuestion < (quiz?.questions.length || 0) - 1) {
+      // Kısa bir gecikme ile geçiş yap (kullanıcı seçimi görebilsin)
+      setTimeout(() => {
+        setCurrentQuestion(currentQuestion + 1);
+      }, 300);
+    }
   };
 
   const handleNext = () => {

@@ -22,7 +22,8 @@
     "test:cv-interview": "tsx --test tests/interview/**/*.test.ts",
     "test:live-coding": "tsx --test tests/live-coding/**/*.test.ts",
     "test:cv": "tsx --test tests/cv/**/*.test.ts",
-    "test:ai-interview": "tsx --test tests/ai/**/*.test.ts"
+    "test:ai-interview": "tsx --test tests/ai/**/*.test.ts",
+    "test:csharp-ai": "tsx scripts/test-csharp-cases-ai.ts"
   },
   "dependencies": {
     "@microsoft/signalr": "^8.0.17",

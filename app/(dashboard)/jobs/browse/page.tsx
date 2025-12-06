@@ -3,7 +3,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Search, MapPin, Briefcase, DollarSign, Filter, X } from "lucide-react";
+import { Search, MapPin, Briefcase, DollarSign, Filter, X, ClipboardList } from "lucide-react";
 import { Card, CardContent } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
 import { getCompanyInfoForJob } from "@/lib/utils/job-company-helper";
@@ -177,6 +177,15 @@ export default function BrowseJobsPage() {
             Size uygun iş fırsatlarını keşfedin
           </p>
         </div>
+        <Link href="/jobs/applications">
+          <Button
+            variant="outline"
+            className="flex items-center gap-2 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700"
+          >
+            <ClipboardList className="h-5 w-5" />
+            <span>Başvurularım</span>
+          </Button>
+        </Link>
       </div>
 
       {/* Search Bar */}

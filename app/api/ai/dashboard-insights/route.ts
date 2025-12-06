@@ -6,6 +6,7 @@ import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { isAIEnabled, createChatCompletion } from "@/lib/ai/client";
 import { generatePersonalizedLessons } from "@/lib/ai/lessons";
+import { normalizeTechnologyName } from "@/lib/utils/technology-normalize";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -190,18 +191,35 @@ const buildResourceCatalog = ({
   });
 
   competitionItems.forEach((item) => {
+    // Current query only fetches HACKATON and LIVE_CODING types
+    // If TEST type is ever added, it would need technology/module info for correct URL
     const typeSlug =
       item.type === "HACKATON"
         ? "hackaton"
         : item.type === "LIVE_CODING"
         ? "live-coding"
-        : "test";
+        : "test"; // Fallback for any unexpected types
 
     const id = `${typeSlug}-${item.id}`;
+    
+    // Generate href based on type
+    // Note: TEST type competition items would need technology/module info
+    // to generate correct URL like /education/tests/{tech}/{module}/{id}
+    // For now, only HACKATON and LIVE_CODING are fetched, so this is safe
+    let href = `/education/${typeSlug}/${item.id}`;
+    
+    // If TEST type appears in future, log warning (would need additional data)
+    if (item.type === "TEST") {
+      console.warn(
+        `[DASHBOARD_INSIGHTS] TEST type competition item found (${item.id}), but technology/module info not available. ` +
+        `URL may be incorrect: ${href}. Consider updating query to include technology/module data.`
+      );
+    }
+
     dedup.set(id, {
       id,
       title: item.title,
-      href: `/education/${typeSlug}/${item.id}`,
+      href,
       type: "competition",
       tags: [item.type, item.level ?? "Seviye bilinmiyor"],
     });
@@ -299,6 +317,113 @@ const buildFallbackRecommendations = ({
   }
 
   return recommendations.slice(0, 3);
+};
+
+/**
+ * Validates if a href exists in the resource catalog and returns a safe fallback if not
+ */
+const validateAndFixHref = (
+  href: string,
+  resourceCatalog: ResourceCatalogItem[]
+): string => {
+  // Check if href exists in resource catalog
+  const exists = resourceCatalog.some((resource) => resource.href === href);
+  
+  if (exists) {
+    return href;
+  }
+
+  // If href doesn't exist, try to find a safe fallback
+  // Priority: courses-home > career-roadmap > competitions-hub
+  const fallback = resourceCatalog.find((resource) => resource.id === "courses-home") ||
+                   resourceCatalog.find((resource) => resource.id === "career-roadmap") ||
+                   resourceCatalog.find((resource) => resource.id === "competitions-hub");
+
+  if (fallback) {
+    console.warn(`[DASHBOARD_INSIGHTS] Invalid href "${href}" not found in catalog, using fallback: "${fallback.href}"`);
+    return fallback.href;
+  }
+
+  // Last resort: return a safe default
+  console.warn(`[DASHBOARD_INSIGHTS] Invalid href "${href}" and no fallback available, using default: "/education/courses"`);
+  return "/education/courses";
+};
+
+/**
+ * Parses quiz ID to extract technology, module, and testId
+ * Handles formats like "test-{tech}-{module}-{testId}" or just "{testId}"
+ */
+const parseQuizId = (quizId: string): { technology: string | null; moduleName: string | null; testId: string } => {
+  // Check if quiz ID follows format: test-{tech}-{module}-{testId}
+  if (quizId.startsWith("test-")) {
+    const parts = quizId.split("-");
+    if (parts.length >= 4) {
+      // Extract testId (last part)
+      const testId = parts[parts.length - 1];
+      // Extract module (second to last part)
+      const moduleName = parts[parts.length - 2];
+      // Extract technology (everything between "test" and module)
+      const technology = parts.slice(1, parts.length - 2).join("-");
+      return { technology, moduleName, testId };
+    }
+  }
+  // If format doesn't match, return testId as-is
+  return { technology: null, moduleName: null, testId: quizId };
+};
+
+/**
+ * Generates the correct URL for a test quiz
+ */
+const generateTestUrl = (
+  quizId: string,
+  quizType: string | null,
+  courseExpertise: string | null | undefined,
+  courseTopic: string | null | undefined,
+  quizTopic: string | null | undefined
+): string => {
+  // For non-TEST types, use existing logic
+  if (quizType === "HACKATON") {
+    return `/education/hackaton/${quizId}`;
+  }
+  if (quizType === "LIVE_CODING") {
+    return `/education/live-coding/${quizId}`;
+  }
+
+  // For TEST type or null, try to build correct URL
+  let technology: string | null = null;
+  let moduleName: string | null = null;
+  let testId = quizId;
+
+  // First, try to get from course/expertise
+  if (courseExpertise) {
+    technology = courseExpertise;
+  } else if (quizTopic) {
+    technology = quizTopic;
+  }
+
+  if (courseTopic) {
+    moduleName = courseTopic;
+  }
+
+  // If we have both technology and module, generate correct URL
+  if (technology && moduleName) {
+    const normalizedTech = normalizeTechnologyName(technology);
+    const technologySlug = normalizedTech.replace(/\s+/g, "-");
+    const moduleSlug = encodeURIComponent(moduleName);
+    return `/education/tests/${technologySlug}/${moduleSlug}/${quizId}`;
+  }
+
+  // Try to parse from quiz ID format: test-{tech}-{module}-{testId}
+  const parsed = parseQuizId(quizId);
+  if (parsed.technology && parsed.moduleName) {
+    const normalizedTech = normalizeTechnologyName(parsed.technology);
+    const technologySlug = normalizedTech.replace(/\s+/g, "-");
+    const moduleSlug = encodeURIComponent(parsed.moduleName);
+    return `/education/tests/${technologySlug}/${moduleSlug}/${parsed.testId}`;
+  }
+
+  // Fallback to old format for backward compatibility
+  return `/education/test/${quizId}`;
 };
 
 const FREQUENCIES: GoalFrequency[] = [GoalFrequency.daily, GoalFrequency.weekly, GoalFrequency.monthly];
@@ -579,6 +704,13 @@ export async function GET() {
               id: true,
               title: true,
               type: true,
+              topic: true,
+              course: {
+                select: {
+                  expertise: true,
+                  topic: true,
+                },
+              },
             },
           },
         },
@@ -613,20 +745,32 @@ export async function GET() {
 
     const lowScoreAttempts = lowScoreAttemptsRaw
       .filter((attempt: { quiz?: { type?: string | null } | null }) => attempt.quiz?.type !== "BUG_FIX")
-      .map((attempt: { quizId: string; score: number; topic?: string | null; quiz?: { title?: string | null; type?: string | null } | null }) => ({
+      .map((attempt: {
+        quizId: string;
+        score: number;
+        topic?: string | null;
+        quiz?: {
+          title?: string | null;
+          type?: string | null;
+          topic?: string | null;
+          course?: {
+            expertise?: string | null;
+            topic?: string | null;
+          } | null;
+        } | null;
+      }) => ({
         quizId: attempt.quizId,
         quizTitle: attempt.quiz?.title ?? "Test",
         score: attempt.score,
         topic: attempt.topic,
         type: attempt.quiz?.type ?? null,
-        href:
-          attempt.quiz?.type === "TEST" || !attempt.quiz?.type
-            ? `/education/test/${attempt.quizId}`
-            : attempt.quiz?.type === "HACKATON"
-            ? `/education/hackaton/${attempt.quizId}`
-            : attempt.quiz?.type === "LIVE_CODING"
-            ? `/education/live-coding/${attempt.quizId}`
-            : `/education/test/${attempt.quizId}`,
+        href: generateTestUrl(
+          attempt.quizId,
+          attempt.quiz?.type ?? null,
+          attempt.quiz?.course?.expertise,
+          attempt.quiz?.course?.topic,
+          attempt.quiz?.topic
+        ),
       }));
 
     const lessons = await generatePersonalizedLessons(currentUserId);
@@ -724,10 +868,12 @@ export async function GET() {
       throw new Error("AI önerileri boş döndü");
     }
 
+    // Validate and fix ctaHref values to ensure they exist in resource catalog
     const finalRecommendations: MentorRecommendation[] = aiRecommendations.slice(0, 3).map(
       (recommendation) => ({
         ...recommendation,
         actionSteps: recommendation.actionSteps ?? [],
+        ctaHref: validateAndFixHref(recommendation.ctaHref, resourceCatalog),
       })
     );
 

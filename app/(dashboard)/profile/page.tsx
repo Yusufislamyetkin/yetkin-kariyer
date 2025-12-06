@@ -174,6 +174,9 @@ export default function ProfilePage() {
         />
       )}
 
+      {/* Son Aktiviteler - Full Width */}
+      <ActivityTimeline activities={activities} />
+
       {/* Main Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left Column - Posts */}
@@ -181,12 +184,11 @@ export default function ProfilePage() {
           <PostsSection userId={displayUser.id} compact={false} />
         </div>
 
-        {/* Right Column - Badges and Activities */}
+        {/* Right Column - Badges */}
         <div className="space-y-6">
           {badges.length > 0 && (
             <BadgesSection badges={badges} displayedBadges={displayedBadges} />
           )}
-          <ActivityTimeline activities={activities} />
         </div>
       </div>
     </main>

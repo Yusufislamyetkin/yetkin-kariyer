@@ -406,6 +406,54 @@ export default function LiveCodingPage() {
       ? taskCodes[activeTask.id]?.[activeLanguage] ?? activeInitialCode
       : "";
 
+  // Determine the language for the "back to cases" button
+  const caseLanguage = useMemo(() => {
+    if (tasks.length > 0 && tasks[0].languages.length > 0) {
+      return tasks[0].languages[0];
+    }
+    // Fallback: try to extract from URL if available
+    if (resolvedLiveCodingId) {
+      const match = resolvedLiveCodingId.match(/quiz-(\w+)-case-/);
+      if (match && match[1]) {
+        const langFromUrl = match[1].toLowerCase();
+        // Map common language aliases
+        if (langFromUrl === "cs" || langFromUrl === "dotnet" || langFromUrl === ".net") {
+          return "csharp";
+        }
+        if (langFromUrl === "js" || langFromUrl === "node") {
+          return "javascript";
+        }
+        if (langFromUrl === "ts") {
+          return "typescript";
+        }
+        if (langFromUrl === "py") {
+          return "python";
+        }
+        if (langFromUrl === "kt") {
+          return "kotlin";
+        }
+        if (langFromUrl === "rb") {
+          return "ruby";
+        }
+        if (langFromUrl === "cpp" || langFromUrl === "c++") {
+          return "cpp";
+        }
+        if (langFromUrl === "go" || langFromUrl === "golang") {
+          return "go";
+        }
+        // Return as-is if it matches a known language
+        const knownLanguages: LiveCodingLanguage[] = [
+          "csharp", "python", "javascript", "java", "php", "typescript",
+          "go", "rust", "cpp", "kotlin", "ruby"
+        ];
+        if (knownLanguages.includes(langFromUrl as LiveCodingLanguage)) {
+          return langFromUrl as LiveCodingLanguage;
+        }
+      }
+    }
+    return "javascript"; // Default fallback
+  }, [tasks, resolvedLiveCodingId]);
+
   const completedTaskCount = useMemo(() => {
     return completedTasks.size;
   }, [completedTasks]);
@@ -1006,7 +1054,7 @@ export default function LiveCodingPage() {
             </p>
           )}
           <div className="flex flex-col sm:flex-row gap-3 justify-center mt-6">
-            <Link href="/education/cases">
+            <Link href={`/education/cases/${caseLanguage}`}>
               <Button variant="gradient" className="w-full sm:w-auto">
                 Case&apos;lere Dön
               </Button>
@@ -1080,7 +1128,7 @@ export default function LiveCodingPage() {
     <div className="mx-auto w-full max-w-7xl space-y-6 pb-8 px-4 sm:px-6 lg:px-8 animate-fade-in pt-4">
       {/* Header with back button */}
       <div className="flex items-center justify-between gap-4">
-        <Link href="/education/cases">
+        <Link href={`/education/cases/${caseLanguage}`}>
           <Button variant="outline" size="sm" className="gap-2">
             <ArrowLeft className="h-4 w-4" />
             <span className="hidden sm:inline">Case&apos;lere Dön</span>
@@ -1112,7 +1160,7 @@ export default function LiveCodingPage() {
             <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">
                 {submitError || "Bu canlı kodlama için henüz görev tanımlanmamış."}
               </p>
-            <Link href="/education/cases">
+            <Link href={`/education/cases/${caseLanguage}`}>
               <Button variant="outline">Case&apos;lere Dön</Button>
               </Link>
           </CardContent>

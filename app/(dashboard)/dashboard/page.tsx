@@ -27,8 +27,6 @@ import {
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
-import { BadgeDisplay } from "@/app/components/badges/BadgeDisplay";
-import { Award } from "lucide-react";
 import type { MentorRecommendation } from "@/types";
 import { StrikeDisplay } from "./_components/StrikeDisplay";
 import { useStrikeCompletionCheck } from "@/hooks/useStrikeCompletionCheck";
@@ -795,57 +793,6 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
       </div>
-
-      {/* Achievements - Full Row */}
-      <Card variant="elevated" hover>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-xl">
-            <Award className="h-6 w-6 text-purple-600 dark:text-purple-400" />
-            Başarımlar
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          {badges.length > 0 ? (
-            <div>
-              <div className="mb-4 flex items-center justify-between">
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Toplam {badges.length} rozet kazandınız
-                </p>
-                <p className="text-sm font-semibold text-purple-600 dark:text-purple-400">
-                  {badges.reduce((sum, b) => sum + (b.points || 0), 0)} puan
-                </p>
-              </div>
-              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3">
-                {badges.slice(0, 8).map((badge) => (
-                  <BadgeDisplay
-                    key={badge.id}
-                    badge={badge}
-                    earned={true}
-                    size="sm"
-                  />
-                ))}
-              </div>
-              {badges.length > 8 && (
-                <Link href="/profile">
-                  <Button variant="outline" size="sm" className="w-full mt-4">
-                    Tüm Rozetleri Gör ({badges.length})
-                  </Button>
-                </Link>
-              )}
-            </div>
-          ) : (
-            <div className="text-center py-8">
-              <Award className="h-12 w-12 text-gray-400 dark:text-gray-600 mx-auto mb-4" />
-              <p className="text-gray-500 dark:text-gray-400 mb-2 font-medium text-sm">
-                Henüz rozet kazanmadınız
-              </p>
-              <p className="text-xs text-gray-400 dark:text-gray-500">
-                Test çözerek ve aktiviteler yaparak rozet kazanın
-              </p>
-            </div>
-          )}
-        </CardContent>
-      </Card>
 
       {/* Recent Activity */}
       <Card variant="elevated" hover>
