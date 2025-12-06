@@ -3,6 +3,7 @@ import { z } from "zod";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { isAIEnabled, createChatCompletion } from "@/lib/ai/client";
+import { getCache, setCache, cacheKeys, CACHE_TTL } from "@/lib/redis";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -13,13 +14,21 @@ const motivationSchema = z.object({
 });
 
 export async function GET() {
+  let userId: string | null = null;
   try {
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const userId = session.user.id as string;
+    userId = session.user.id as string;
+
+    // Check Redis cache first
+    const cacheKey = cacheKeys.motivation(userId);
+    const cachedData = await getCache<any>(cacheKey);
+    if (cachedData) {
+      return NextResponse.json(cachedData);
+    }
 
     // Kullanıcı istatistiklerini al - her birini ayrı ayrı handle et
     const getQuizStats = async () => {
@@ -114,20 +123,22 @@ export async function GET() {
       // Fallback motivasyon mesajları
       const fallbackMessages = [
         {
-          message: "Harika bir ilerleme kaydediyorsun! Devam et, hedeflerine ulaşmana çok az kaldı. 💪",
-          emoji: "💪",
+          message: "İlerleme kaydediyorsun. Devam et, hedeflerine ulaşmana az kaldı.",
+          emoji: "😊",
         },
         {
-          message: "Her gün küçük adımlar atarak büyük başarılara ulaşırsın. Bugün de bir adım daha at! 🚀",
-          emoji: "🚀",
+          message: "Her gün küçük adımlar atarak büyük başarılara ulaşırsın. Bugün de bir adım daha atabilirsin.",
+          emoji: "😊",
         },
         {
-          message: "Öğrenme yolculuğunda sabır ve azim en büyük gücündür. Sen harika gidiyorsun! ⭐",
-          emoji: "⭐",
+          message: "Öğrenme yolculuğunda sabır ve azim önemli. İyi gidiyorsun.",
+          emoji: "❤️",
         },
       ];
 
       const randomMessage = fallbackMessages[Math.floor(Math.random() * fallbackMessages.length)];
+      // Cache the fallback message
+      await setCache(cacheKey, randomMessage, CACHE_TTL.MOTIVATION);
       return NextResponse.json(randomMessage);
     }
 
@@ -143,16 +154,17 @@ Sen AI Öğretmen Selin'sin, öğrencilerine ilham veren bir öğretmensin.
 - Son Rozetler: ${stats.recentBadges.join(", ") || "Henüz yok"}
 
 Görev:
-- Öğrencinin performansına göre kişiselleştirilmiş, motive edici bir mesaj yaz.
+- Öğrencinin performansına göre kişiselleştirilmiş, nötr bir mesaj yaz.
 - Mesaj 2-3 cümle uzunluğunda olsun.
-- Pozitif, destekleyici ve ilham verici bir ton kullan.
-- Öğrencinin başarılarını vurgula ve gelecekteki potansiyelini hatırlat.
+- Nötr ve bilgilendirici bir ton kullan, çok destekleyici olma.
+- Öğrencinin durumunu objektif şekilde değerlendir.
 - Türkçe yaz.
+- Ünlem işareti kullanma, nokta kullan.
 
 Çıktı formatı (JSON):
 {
-  "message": "Motivasyon mesajı buraya",
-  "emoji": "🎯"
+  "message": "Mesaj buraya",
+  "emoji": "😊"
 }
 `;
 
@@ -162,7 +174,7 @@ Görev:
         {
           role: "system",
           content:
-            "Sen AI Öğretmen Selin'sin, öğrencilerine ilham veren ve onları destekleyen bir öğretmensin. Kısa, öz ve motive edici mesajlar yazarsın.",
+            "Sen AI Öğretmen Selin'sin, öğrencilerine bilgi veren ve durumlarını değerlendiren bir öğretmensin. Kısa, öz ve nötr mesajlar yazarsın. Çok destekleyici olma, objektif kal.",
         },
         {
           role: "user",
@@ -173,26 +185,35 @@ Görev:
     });
 
     if (parsed) {
-      return NextResponse.json({
+      const response = {
         message: parsed.message,
-        emoji: parsed.emoji || "💪",
-      });
+        emoji: parsed.emoji || "😊",
+      };
+      // Cache the AI-generated message
+      await setCache(cacheKey, response, CACHE_TTL.MOTIVATION);
+      return NextResponse.json(response);
     }
 
     // Fallback
-    return NextResponse.json({
-      message: "Harika bir ilerleme kaydediyorsun! Devam et, hedeflerine ulaşmana çok az kaldı. 💪",
-      emoji: "💪",
-    });
+    const fallbackResponse = {
+      message: "İlerleme kaydediyorsun. Devam et, hedeflerine ulaşmana az kaldı.",
+      emoji: "😊",
+    };
+    // Cache the fallback message
+    await setCache(cacheKey, fallbackResponse, CACHE_TTL.MOTIVATION);
+    return NextResponse.json(fallbackResponse);
   } catch (error) {
     console.error("Error generating motivation message:", error);
-    return NextResponse.json(
-      {
-        message: "Her gün küçük adımlar atarak büyük başarılara ulaşırsın. Bugün de bir adım daha at! 🚀",
-        emoji: "🚀",
-      },
-      { status: 200 }
-    );
+    const errorResponse = {
+      message: "Her gün küçük adımlar atarak büyük başarılara ulaşırsın. Bugün de bir adım daha atabilirsin.",
+      emoji: "😊",
+    };
+    // Cache the error fallback message
+    if (userId) {
+      const cacheKey = cacheKeys.motivation(userId);
+      await setCache(cacheKey, errorResponse, CACHE_TTL.MOTIVATION);
+    }
+    return NextResponse.json(errorResponse, { status: 200 });
   }
 }
 

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/app/components/ui/Button";
-import { Loader2, Search, ArrowLeft, User as UserIcon, Mail, Calendar, Shield, ChevronLeft, ChevronRight, Bot, Settings, Trash2, Play, Activity, CheckCircle2, XCircle, Clock, UserMinus, Trash } from "lucide-react";
+import { Loader2, Search, ArrowLeft, User as UserIcon, Mail, Calendar, Shield, ChevronLeft, ChevronRight, Bot, Settings, Trash2, Play, Activity, CheckCircle2, XCircle, Clock, UserMinus, Trash, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import { BotConfigModal } from "./_components/BotConfigModal";
 import { ConfirmDialog } from "@/app/components/ui/ConfirmDialog";
@@ -86,6 +86,8 @@ export default function AdminUsersPage() {
   const [clearingActivities, setClearingActivities] = useState(false);
   const [removeAllBotsConfirmOpen, setRemoveAllBotsConfirmOpen] = useState(false);
   const [clearActivitiesConfirmOpen, setClearActivitiesConfirmOpen] = useState(false);
+  const [activityDropdownOpen, setActivityDropdownOpen] = useState<string | null>(null);
+  const [executingActivity, setExecutingActivity] = useState<string | null>(null);
 
   const fetchUsers = async (page: number = 1, searchQuery: string = "", role: string = "") => {
     setLoading(true);
@@ -267,6 +269,23 @@ export default function AdminUsersPage() {
     }
   }, [showInteractions]);
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest(".activity-dropdown-container")) {
+        setActivityDropdownOpen(null);
+      }
+    };
+
+    if (activityDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }
+  }, [activityDropdownOpen]);
+
   const handleRemoveAllBots = async () => {
     setRemovingAllBots(true);
     setError(null);
@@ -336,6 +355,59 @@ export default function AdminUsersPage() {
       setClearingActivities(false);
     }
   };
+
+  const handleExecuteActivity = async (botId: string, activityType: string) => {
+    setExecutingActivity(`${botId}-${activityType}`);
+    setActivityDropdownOpen(null);
+    setError(null);
+
+    try {
+      const response = await fetch(`/api/admin/bots/${botId}/execute-activity`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ activityType }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Aktivite çalıştırılırken bir hata oluştu");
+      }
+
+      // Show success message
+      setRunResult({
+        processed: 1,
+        successful: data.success ? 1 : 0,
+        failed: data.success ? 0 : 1,
+        message: data.message || `${activityType} aktivitesi başarıyla çalıştırıldı`,
+        botName: data.botName,
+        activityType: data.activityType,
+      });
+
+      // Refresh activities if interactions area is open
+      if (showInteractions) {
+        await fetchActivities(1);
+      }
+
+      // Refresh users to show updated bot statuses
+      await fetchUsers(currentPage, search, roleFilter);
+    } catch (err: any) {
+      setError(err.message || "Bir hata oluştu");
+    } finally {
+      setExecutingActivity(null);
+    }
+  };
+
+  const activityTypes = [
+    { value: "POST", label: "Post Oluştur" },
+    { value: "COMMENT", label: "Yorum Yap" },
+    { value: "LIKE", label: "Beğen" },
+    { value: "TEST", label: "Test Çöz" },
+    { value: "LIVE_CODING", label: "Live Coding" },
+    { value: "BUG_FIX", label: "Bug Fix" },
+    { value: "LESSON", label: "Ders Tamamla" },
+    { value: "CHAT", label: "Topluluğa Katıl" },
+  ];
 
 
   return (
@@ -528,26 +600,58 @@ export default function AdminUsersPage() {
 
         {/* Run Result */}
         {runResult && (
-          <div className="bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800 rounded-lg p-4 mb-6">
+          <div className={`${
+            runResult.successful > 0 && runResult.failed === 0
+              ? "bg-green-50 dark:bg-green-950/30 border-green-200 dark:border-green-800"
+              : runResult.failed > 0
+              ? "bg-yellow-50 dark:bg-yellow-950/30 border-yellow-200 dark:border-yellow-800"
+              : "bg-green-50 dark:bg-green-950/30 border-green-200 dark:border-green-800"
+          } border rounded-lg p-4 mb-6`}>
             <div className="flex items-start gap-3">
-              <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400 mt-0.5" />
+              {runResult.successful > 0 && runResult.failed === 0 ? (
+                <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400 mt-0.5" />
+              ) : (
+                <XCircle className="h-5 w-5 text-yellow-600 dark:text-yellow-400 mt-0.5" />
+              )}
               <div className="flex-1">
-                <h3 className="font-semibold text-green-900 dark:text-green-100 mb-1">
-                  Botlar Başarıyla Çalıştırıldı
+                <h3 className={`font-semibold mb-1 ${
+                  runResult.successful > 0 && runResult.failed === 0
+                    ? "text-green-900 dark:text-green-100"
+                    : "text-yellow-900 dark:text-yellow-100"
+                }`}>
+                  {runResult.botName && runResult.activityType
+                    ? `${runResult.botName} - ${runResult.activityType} Aktivitesi`
+                    : "Botlar Başarıyla Çalıştırıldı"}
                 </h3>
-                <p className="text-sm text-green-700 dark:text-green-300">
-                  {runResult.processed} bot işlendi • {runResult.successful} başarılı • {runResult.failed} başarısız
-                  {runResult.skipped > 0 && ` • ${runResult.skipped} atlandı`}
+                <p className={`text-sm ${
+                  runResult.successful > 0 && runResult.failed === 0
+                    ? "text-green-700 dark:text-green-300"
+                    : "text-yellow-700 dark:text-yellow-300"
+                }`}>
+                  {runResult.message || (
+                    <>
+                      {runResult.processed} bot işlendi • {runResult.successful} başarılı • {runResult.failed} başarısız
+                      {runResult.skipped > 0 && ` • ${runResult.skipped} atlandı`}
+                    </>
+                  )}
                 </p>
                 {runResult.results && runResult.results.length > 0 && (
-                  <div className="mt-2 text-xs text-green-600 dark:text-green-400">
+                  <div className={`mt-2 text-xs ${
+                    runResult.successful > 0 && runResult.failed === 0
+                      ? "text-green-600 dark:text-green-400"
+                      : "text-yellow-600 dark:text-yellow-400"
+                  }`}>
                     Toplam aktivite: {runResult.results.reduce((sum: number, r: any) => sum + (r.totalActivities || 0), 0)}
                   </div>
                 )}
               </div>
               <button
                 onClick={() => setRunResult(null)}
-                className="text-green-600 dark:text-green-400 hover:text-green-800 dark:hover:text-green-200"
+                className={`${
+                  runResult.successful > 0 && runResult.failed === 0
+                    ? "text-green-600 dark:text-green-400 hover:text-green-800 dark:hover:text-green-200"
+                    : "text-yellow-600 dark:text-yellow-400 hover:text-yellow-800 dark:hover:text-yellow-200"
+                }`}
               >
                 <XCircle className="h-4 w-4" />
               </button>
@@ -840,6 +944,59 @@ export default function AdminUsersPage() {
                           {user.botConfiguration.lastActivityAt && (
                             <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                               Son aktivite: {formatDate(user.botConfiguration.lastActivityAt)}
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {/* Bot Activity Runner */}
+                      {user.isBot && user.botConfiguration?.isActive && (
+                        <div className="mb-3 relative activity-dropdown-container">
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setActivityDropdownOpen(
+                                activityDropdownOpen === user.id ? null : user.id
+                              );
+                            }}
+                            disabled={executingActivity?.startsWith(user.id)}
+                            className="w-full flex items-center justify-between px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                          >
+                            <span className="flex items-center gap-2">
+                              {executingActivity?.startsWith(user.id) ? (
+                                <>
+                                  <Loader2 className="h-4 w-4 animate-spin" />
+                                  <span>Çalıştırılıyor...</span>
+                                </>
+                              ) : (
+                                <>
+                                  <Play className="h-4 w-4" />
+                                  <span>Aktivite Çalıştır</span>
+                                </>
+                              )}
+                            </span>
+                            <ChevronDown
+                              className={`h-4 w-4 transition-transform ${
+                                activityDropdownOpen === user.id ? "rotate-180" : ""
+                              }`}
+                            />
+                          </button>
+
+                          {activityDropdownOpen === user.id && (
+                            <div className="absolute z-50 w-full mt-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg overflow-hidden">
+                              {activityTypes.map((activity) => (
+                                <button
+                                  key={activity.value}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleExecuteActivity(user.id, activity.value);
+                                  }}
+                                  disabled={executingActivity?.startsWith(user.id)}
+                                  className="w-full px-4 py-2 text-left text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                >
+                                  {activity.label}
+                                </button>
+                              ))}
                             </div>
                           )}
                         </div>

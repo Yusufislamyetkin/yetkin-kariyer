@@ -5,6 +5,7 @@ import { z } from "zod";
 import { sanitizePlainText } from "@/lib/security/sanitize";
 import { checkRateLimit, rateLimitKey, Limits, isDuplicateWithin } from "@/lib/security/rateLimit";
 import { checkSocialInteractionBadges, type BadgeCheckResult } from "@/app/api/badges/check/badge-service";
+import { getUserIdFromSession } from "@/lib/auth-utils";
 
 const createPostSchema = z.object({
   content: z.string().max(2200).trim().transform((val) => val === "" ? null : val).nullable().optional(),
@@ -25,11 +26,11 @@ const createPostSchema = z.object({
 export async function GET(request: Request) {
   try {
     const session = await auth();
-    if (!session?.user?.id) {
+    const userId = await getUserIdFromSession(session);
+    
+    if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-
-    const userId = session.user.id as string;
     const { searchParams } = new URL(request.url);
     const type = searchParams.get("type") || "feed"; // feed, explore, profile
     const targetUserId = searchParams.get("userId");

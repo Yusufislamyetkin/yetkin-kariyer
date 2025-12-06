@@ -7,6 +7,8 @@ import { db } from "@/lib/db";
 import { isAIEnabled, createChatCompletion } from "@/lib/ai/client";
 import { generatePersonalizedLessons } from "@/lib/ai/lessons";
 import { normalizeTechnologyName, technologyToRoute } from "@/lib/utils/technology-normalize";
+import { getUserIdFromSession } from "@/lib/auth-utils";
+import { getCache, setCache, cacheKeys, CACHE_TTL } from "@/lib/redis";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -677,19 +679,29 @@ export async function GET() {
 
   try {
     const session = await auth();
-    if (!session?.user?.id) {
+    userId = await getUserIdFromSession(session);
+    
+    if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-
-    userId = session.user.id as string;
     const currentUserId = userId;
+
+    // Check Redis cache first
+    const cacheKey = cacheKeys.aiInsights(currentUserId);
+    const cachedData = await getCache<any>(cacheKey);
+    if (cachedData) {
+      return NextResponse.json(cachedData);
+    }
 
     const cachedPlans = await getValidCachedPlans(currentUserId, now);
     if (cachedPlans) {
-      return NextResponse.json({
+      const response = {
         source: determineSourceFromPlans(cachedPlans),
         recommendations: flattenPlans(cachedPlans),
-      });
+      };
+      // Cache the response
+      await setCache(cacheKey, response, CACHE_TTL.AI_INSIGHTS);
+      return NextResponse.json(response);
     }
 
     const [quizStats, interviewStats, careerPlan] = await Promise.all([
@@ -907,10 +919,15 @@ export async function GET() {
       console.error("Error caching AI recommendations:", persistError);
     }
 
-    return NextResponse.json({
+    const response = {
       source: "ai",
       recommendations: finalRecommendations,
-    });
+    };
+
+    // Cache the response in Redis
+    await setCache(cacheKey, response, CACHE_TTL.AI_INSIGHTS);
+
+    return NextResponse.json(response);
   } catch (error) {
     console.error("Error generating dashboard insights:", error);
 
@@ -944,10 +961,18 @@ export async function GET() {
       }
     }
 
-    return NextResponse.json({
+    const response = {
       source: "fallback-error",
       recommendations: fallback,
-    });
+    };
+
+    // Cache the fallback response in Redis
+    if (userId) {
+      const cacheKey = cacheKeys.aiInsights(userId);
+      await setCache(cacheKey, response, CACHE_TTL.AI_INSIGHTS);
+    }
+
+    return NextResponse.json(response);
   }
 }
 

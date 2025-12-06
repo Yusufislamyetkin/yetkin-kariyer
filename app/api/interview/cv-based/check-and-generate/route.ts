@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { queueJob } from "@/lib/qstash";
+import { getUserIdFromSession } from "@/lib/auth-utils";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60; // 60 seconds timeout for Vercel
@@ -9,11 +10,11 @@ export const maxDuration = 60; // 60 seconds timeout for Vercel
 export async function POST(request: Request) {
   try {
     const session = await auth();
-    if (!session?.user?.id) {
+    const userId = await getUserIdFromSession(session);
+    
+    if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-
-    const userId = session.user.id as string;
 
     // Kullanıcının tüm CV'lerini al
     const cvs = await db.cV.findMany({

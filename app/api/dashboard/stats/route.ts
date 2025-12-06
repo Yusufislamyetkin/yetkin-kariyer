@@ -31,30 +31,41 @@ export async function GET() {
       "owasp-community",
     ];
 
-    const [quizAttempts, testAttempts, interviewAttempts, cvs, applications, completedTopics, hackathonMemberships, posts, comments, communityMessages] = await Promise.all([
-      db.quizAttempt.findMany({
+    const [
+      quizStats,
+      testAttemptsCount,
+      interviewStats,
+      cvsCount,
+      applicationsCount,
+      completedTopicsCount,
+      hackathonMemberships,
+      postsCount,
+      commentsCount,
+      communityMessagesCount,
+    ] = await Promise.all([
+      // Use aggregate for quiz attempts to get count and average in one query
+      db.quizAttempt.aggregate({
         where: { userId },
-        select: { score: true },
+        _count: { _all: true },
+        _avg: { score: true },
       }),
-      db.testAttempt.findMany({
+      db.testAttempt.count({
         where: { userId },
-        select: { id: true },
       }),
-      db.interviewAttempt.findMany({
+      // Use aggregate for interview attempts to get count and average in one query
+      db.interviewAttempt.aggregate({
         where: { userId },
-        select: { aiScore: true },
+        _count: { _all: true },
+        _avg: { aiScore: true },
       }),
-      db.cV.findMany({
+      db.cV.count({
         where: { userId },
-        select: { id: true },
       }),
-      db.jobApplication.findMany({
+      db.jobApplication.count({
         where: { userId },
-        select: { id: true },
       }),
-      db.lessonCompletion.findMany({
+      db.lessonCompletion.count({
         where: { userId },
-        select: { id: true },
       }),
       db.hackathonTeamMember.findMany({
         where: {
@@ -69,37 +80,24 @@ export async function GET() {
           },
         },
       }),
-      db.post.findMany({
+      db.post.count({
         where: { userId },
-        select: { id: true },
       }),
-      db.postComment.findMany({
+      db.postComment.count({
         where: { userId },
-        select: { id: true },
       }),
-      db.chatMessage.findMany({
+      db.chatMessage.count({
         where: {
           userId,
           group: {
             slug: { in: COMMUNITY_SLUGS },
           },
         },
-        select: { id: true },
       }),
     ]);
 
-    const averageQuizScore =
-      quizAttempts.length > 0
-        ? quizAttempts.reduce((sum: number, a: { score: number }) => sum + a.score, 0) / quizAttempts.length
-        : 0;
-
-    const interviewScores = interviewAttempts
-      .filter((a: { aiScore: number | null }) => a.aiScore !== null)
-      .map((a: { aiScore: number | null }) => a.aiScore as number);
-    const averageInterviewScore =
-      interviewScores.length > 0
-        ? interviewScores.reduce((sum: number, s: number) => sum + s, 0) / interviewScores.length
-        : 0;
+    const averageQuizScore = quizStats._avg.score ? Math.round(quizStats._avg.score) : 0;
+    const averageInterviewScore = interviewStats._avg.aiScore ? Math.round(interviewStats._avg.aiScore) : 0;
 
     // Get distinct hackathon IDs where user is an active team member
     const distinctHackathonIds = new Set(
@@ -108,21 +106,21 @@ export async function GET() {
     const participatedHackathons = distinctHackathonIds.size;
 
     // Calculate social interactions (posts + comments)
-    const socialInteractions = posts.length + comments.length;
+    const socialInteractions = postsCount + commentsCount;
 
     return NextResponse.json({
       stats: {
-        quizAttempts: quizAttempts.length,
-        testAttempts: testAttempts.length,
-        interviewAttempts: interviewAttempts.length,
-        cvs: cvs.length,
-        applications: applications.length,
-        averageQuizScore: Math.round(averageQuizScore),
-        averageInterviewScore: Math.round(averageInterviewScore),
-        completedTopics: completedTopics.length,
+        quizAttempts: quizStats._count._all,
+        testAttempts: testAttemptsCount,
+        interviewAttempts: interviewStats._count._all,
+        cvs: cvsCount,
+        applications: applicationsCount,
+        averageQuizScore,
+        averageInterviewScore,
+        completedTopics: completedTopicsCount,
         participatedHackathons,
         socialInteractions,
-        communityContributions: communityMessages.length,
+        communityContributions: communityMessagesCount,
       },
     });
   } catch (error) {

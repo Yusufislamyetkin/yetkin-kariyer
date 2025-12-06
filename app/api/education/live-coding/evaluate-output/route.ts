@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { ensureAIEnabled, isAIEnabled } from "@/lib/ai/client";
 import { validateCodeCompleteness, type LiveCodingLanguage } from "@/lib/ai/code-validator";
+import { getUserIdFromSession } from "@/lib/auth-utils";
 
 export interface EvaluateOutputRequest {
   taskDescription: string;
@@ -27,9 +28,11 @@ export async function POST(request: Request) {
                       request.headers.get("x-test-mode") === "true";
     
     let session = null;
+    let userId: string | null = null;
     if (!isTestMode) {
       session = await auth();
-      if (!session?.user?.id) {
+      userId = await getUserIdFromSession(session);
+      if (!userId) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
       }
     }

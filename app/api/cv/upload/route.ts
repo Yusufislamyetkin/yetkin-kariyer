@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { put } from "@vercel/blob";
+import { getUserIdFromSession } from "@/lib/auth-utils";
 
 const MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024; // 10MB
 const ALLOWED_MIME_TYPES = [
@@ -13,7 +14,9 @@ const ALLOWED_MIME_TYPES = [
 export async function POST(request: Request) {
   try {
     const session = await auth();
-    if (!session?.user?.id) {
+    const userId = await getUserIdFromSession(session);
+    
+    if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -53,7 +56,7 @@ export async function POST(request: Request) {
         select: { userId: true },
       });
 
-      if (!cv || cv.userId !== (session.user.id as string)) {
+      if (!cv || cv.userId !== userId) {
         return NextResponse.json(
           { error: "CV bulunamadı veya erişim reddedildi" },
           { status: 403 }
@@ -62,7 +65,7 @@ export async function POST(request: Request) {
     }
 
     const sanitizedName = file.name.replace(/[^\w.\-]+/g, "_");
-    const filePath = `cv-uploads/${session.user.id}/${Date.now()}-${sanitizedName}`;
+    const filePath = `cv-uploads/${userId}/${Date.now()}-${sanitizedName}`;
 
     const blob = await put(filePath, file, {
       access: "public",
@@ -71,7 +74,7 @@ export async function POST(request: Request) {
 
     const upload = await (db as any).cVUpload?.create?.({
       data: {
-        userId: session.user.id as string,
+        userId,
         ...(cvId && { cvId }),
         url: blob.url,
         name: sanitizedName,

@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
 import { normalizeCourseContent } from "@/lib/education/courseContent";
+import { getUserIdFromSession, getUserName } from "@/lib/auth-utils";
+import { getCache, setCache, cacheKeys, CACHE_TTL } from "@/lib/redis";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -28,27 +30,23 @@ function removeCourseSuffix(title: string): string {
 }
 
 /**
- * Gets lesson details (course, module, lesson) from lessonSlug
+ * Gets lesson details (course, module, lesson) from lessonSlug using cached courses
  * @param lessonSlug - The lesson slug to look up
+ * @param coursesCache - Pre-loaded courses array to avoid N+1 queries
  * @returns Object with courseTitle, moduleTitle, lessonTitle or null if not found
  */
-async function getLessonDetails(lessonSlug: string): Promise<{
+function getLessonDetails(
+  lessonSlug: string,
+  coursesCache: Array<{ id: string; title: string; content: any }>
+): {
   courseTitle: string;
   moduleTitle: string;
   lessonTitle: string;
-} | null> {
+} | null {
   try {
     if (!lessonSlug) return null;
 
-    const courses = await db.course.findMany({
-      select: {
-        id: true,
-        title: true,
-        content: true,
-      },
-    });
-
-    for (const course of courses) {
+    for (const course of coursesCache) {
       const normalized = normalizeCourseContent(course.content, null, null);
       const modules = Array.isArray(normalized.modules) ? normalized.modules : [];
 
@@ -85,39 +83,36 @@ async function getLessonDetails(lessonSlug: string): Promise<{
  * Formats quiz details for activity notification
  * @param quiz - The quiz object
  * @param lessonDetails - Optional lesson details from getLessonDetails
+ * @param coursesMap - Pre-loaded courses map by ID to avoid N+1 queries
  * @returns Formatted string for activity notification
  */
-async function formatQuizDetails(quiz: any, lessonDetails: { courseTitle: string; moduleTitle: string; lessonTitle: string } | null): Promise<string> {
+function formatQuizDetails(
+  quiz: any,
+  lessonDetails: { courseTitle: string; moduleTitle: string; lessonTitle: string } | null,
+  coursesMap: Map<string, { title: string }>
+): string {
   if (lessonDetails) {
     return `${lessonDetails.courseTitle} => ${lessonDetails.moduleTitle} => ${lessonDetails.lessonTitle}`;
   }
 
-  // If courseId exists, try to get course title
+  // If courseId exists, try to get course title from cache
   if (quiz.courseId) {
-    try {
-      const course = await db.course.findUnique({
-        where: { id: quiz.courseId },
-        select: { title: true },
-      });
+    const course = coursesMap.get(quiz.courseId);
+    if (course) {
+      const courseTitle = removeCourseSuffix(course.title);
+      const parts: string[] = [courseTitle];
 
-      if (course) {
-        const courseTitle = removeCourseSuffix(course.title);
-        const parts: string[] = [courseTitle];
-
-        if (quiz.topic) {
-          parts.push(`Konu: ${quiz.topic}`);
-        }
-        if (quiz.level) {
-          parts.push(`Seviye: ${quiz.level}`);
-        }
-
-        if (parts.length > 1) {
-          return parts.join(" - ");
-        }
-        return courseTitle;
+      if (quiz.topic) {
+        parts.push(`Konu: ${quiz.topic}`);
       }
-    } catch (error) {
-      console.error("[formatQuizDetails] Error getting course:", error);
+      if (quiz.level) {
+        parts.push(`Seviye: ${quiz.level}`);
+      }
+
+      if (parts.length > 1) {
+        return parts.join(" - ");
+      }
+      return courseTitle;
     }
   }
 
@@ -131,15 +126,25 @@ async function formatQuizDetails(quiz: any, lessonDetails: { courseTitle: string
 export async function GET(request: Request) {
   try {
     const session = await auth();
-    if (!session?.user?.id) {
+    const currentUserId = await getUserIdFromSession(session);
+    
+    if (!currentUserId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-
-    const currentUserId = session.user.id as string;
     const { searchParams } = new URL(request.url);
     const limit = parseInt(searchParams.get("limit") || "10");
+    const skip = parseInt(searchParams.get("skip") || "0");
     const type = searchParams.get("type") || "own"; // own, global, connections
     const requestedUserId = searchParams.get("userId"); // Belirli bir kullanıcının aktivitelerini çekmek için
+
+    // Check Redis cache first (only for own activities to avoid cache pollution)
+    if (!requestedUserId && type === "own") {
+      const cacheKey = cacheKeys.activity(currentUserId, type, skip);
+      const cachedData = await getCache<any>(cacheKey);
+      if (cachedData) {
+        return NextResponse.json(cachedData);
+      }
+    }
 
     // Determine which user IDs to fetch activities for
     let targetUserIds: string[] = [];
@@ -175,6 +180,20 @@ export async function GET(request: Request) {
     const userWhere = (type === "global" && !requestedUserId)
       ? {} // No user filter for global (unless userId is explicitly requested)
       : { userId: { in: targetUserIds } };
+
+    // Load all courses once to avoid N+1 queries
+    const allCourses = await db.course.findMany({
+      select: {
+        id: true,
+        title: true,
+        content: true,
+      },
+    });
+
+    // Create a map of courses by ID for quick lookup
+    const coursesMap = new Map<string, { title: string }>(
+      allCourses.map((course: { id: string; title: string; content: any }) => [course.id, { title: course.title }])
+    );
 
     // Get recent quiz attempts
     const quizAttempts = await db.quizAttempt.findMany({
@@ -366,14 +385,14 @@ export async function GET(request: Request) {
         const userName = attempt.user?.name || "Birisi";
         const isOwn = attempt.userId === currentUserId;
         
-        // Get lesson details if lessonSlug exists
+        // Get lesson details if lessonSlug exists (using cached courses)
         let lessonDetails = null;
         if (attempt.quiz.lessonSlug) {
-          lessonDetails = await getLessonDetails(attempt.quiz.lessonSlug);
+          lessonDetails = getLessonDetails(attempt.quiz.lessonSlug, allCourses);
         }
         
-        // Format quiz details
-        const quizDetails = await formatQuizDetails(attempt.quiz, lessonDetails);
+        // Format quiz details (using cached courses map)
+        const quizDetails = formatQuizDetails(attempt.quiz, lessonDetails, coursesMap);
         
         activities.push({
           id: attempt.id,
@@ -387,7 +406,7 @@ export async function GET(request: Request) {
           userId: attempt.userId,
           user: attempt.user ? {
             id: attempt.user.id,
-            name: attempt.user.name,
+            name: getUserName(attempt.user),
             profileImage: attempt.user.profileImage,
           } : null,
         });
@@ -426,7 +445,7 @@ export async function GET(request: Request) {
           userId: attempt.userId,
           user: attempt.user ? {
             id: attempt.user.id,
-            name: attempt.user.name,
+            name: getUserName(attempt.user),
             profileImage: attempt.user.profileImage,
           } : null,
         });
@@ -445,7 +464,7 @@ export async function GET(request: Request) {
         userId: cv.userId,
         user: cv.user ? {
           id: cv.user.id,
-          name: cv.user.name,
+          name: getUserName(cv.user),
           profileImage: cv.user.profileImage,
         } : null,
       });
@@ -473,7 +492,7 @@ export async function GET(request: Request) {
           userId: app.userId,
           user: app.user ? {
             id: app.user.id,
-            name: app.user.name,
+            name: getUserName(app.user),
             profileImage: app.user.profileImage,
           } : null,
         });
@@ -486,14 +505,14 @@ export async function GET(request: Request) {
         const userName = attempt.user?.name || "Birisi";
         const isOwn = attempt.userId === currentUserId;
         
-        // Get lesson details if lessonSlug exists
+        // Get lesson details if lessonSlug exists (using cached courses)
         let lessonDetails = null;
         if (attempt.quiz.lessonSlug) {
-          lessonDetails = await getLessonDetails(attempt.quiz.lessonSlug);
+          lessonDetails = getLessonDetails(attempt.quiz.lessonSlug, allCourses);
         }
         
-        // Format quiz details
-        const quizDetails = await formatQuizDetails(attempt.quiz, lessonDetails);
+        // Format quiz details (using cached courses map)
+        const quizDetails = formatQuizDetails(attempt.quiz, lessonDetails, coursesMap);
         
         activities.push({
           id: attempt.id,
@@ -506,7 +525,7 @@ export async function GET(request: Request) {
           userId: attempt.userId,
           user: attempt.user ? {
             id: attempt.user.id,
-            name: attempt.user.name,
+            name: getUserName(attempt.user),
             profileImage: attempt.user.profileImage,
           } : null,
         });
@@ -518,8 +537,8 @@ export async function GET(request: Request) {
       const userName = completion.user?.name || "Birisi";
       const isOwn = completion.userId === currentUserId;
       
-      // Get lesson details from lessonSlug
-      const lessonDetails = await getLessonDetails(completion.lessonSlug);
+      // Get lesson details from lessonSlug (using cached courses)
+      const lessonDetails = getLessonDetails(completion.lessonSlug, allCourses);
       
       let lessonTitle: string;
       if (lessonDetails) {
@@ -556,7 +575,7 @@ export async function GET(request: Request) {
         userId: completion.userId,
         user: completion.user ? {
           id: completion.user.id,
-          name: completion.user.name,
+          name: getUserName(completion.user),
           profileImage: completion.user.profileImage,
         } : null,
       });
@@ -605,7 +624,7 @@ export async function GET(request: Request) {
           userId: app.userId,
           user: app.user ? {
             id: app.user.id,
-            name: app.user.name,
+            name: getUserName(app.user),
             profileImage: app.user.profileImage,
           } : null,
         });
@@ -628,7 +647,7 @@ export async function GET(request: Request) {
           userId: award.userId,
           user: award.user ? {
             id: award.user.id,
-            name: award.user.name,
+            name: getUserName(award.user),
             profileImage: award.user.profileImage,
           } : null,
         });
@@ -640,8 +659,11 @@ export async function GET(request: Request) {
       return new Date(b.date).getTime() - new Date(a.date).getTime();
     });
 
-    // Take only the most recent ones
-    const recentActivities = activities.slice(0, limit);
+    // Check if there are more activities
+    const hasMore = activities.length > skip + limit;
+
+    // Take only the requested slice
+    const recentActivities = activities.slice(skip, skip + limit);
 
     // Format dates
     const formatTimeAgo = (date: Date) => {
@@ -663,7 +685,19 @@ export async function GET(request: Request) {
       timeAgo: formatTimeAgo(activity.date),
     }));
 
-    return NextResponse.json({ activities: formattedActivities });
+    const response = {
+      activities: formattedActivities,
+      hasMore,
+      total: activities.length,
+    };
+
+    // Cache the response (only for own activities)
+    if (!requestedUserId && type === "own") {
+      const cacheKey = cacheKeys.activity(currentUserId, type, skip);
+      await setCache(cacheKey, response, CACHE_TTL.ACTIVITY);
+    }
+
+    return NextResponse.json(response);
   } catch (error) {
     console.error("[PROFILE_ACTIVITY_GET] Error:", error);
     // Log more details for debugging

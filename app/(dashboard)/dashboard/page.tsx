@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import Link from "next/link";
 import {
   BookOpen,
@@ -85,30 +85,36 @@ interface Activity {
 
 export default function DashboardPage() {
   const [stats, setStats] = useState<DashboardStats | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [statsLoading, setStatsLoading] = useState(true);
   const [aiLoading, setAiLoading] = useState(true);
   const [aiRecommendations, setAiRecommendations] = useState<MentorRecommendation[]>([]);
   const [aiRecommendationSource, setAiRecommendationSource] = useState<string | null>(null);
   const [badges, setBadges] = useState<Badge[]>([]);
+  const [badgesLoading, setBadgesLoading] = useState(true);
   const [dailyRank, setDailyRank] = useState<LeaderboardRank | null>(null);
   const [weeklyRank, setWeeklyRank] = useState<LeaderboardRank | null>(null);
   const [monthlyRank, setMonthlyRank] = useState<LeaderboardRank | null>(null);
+  const [ranksLoading, setRanksLoading] = useState(true);
   const [activities, setActivities] = useState<Activity[]>([]);
   const [activityType, setActivityType] = useState<"global" | "connections">("global");
   const [activitiesLoading, setActivitiesLoading] = useState(false);
+  const [activitiesHasMore, setActivitiesHasMore] = useState(true);
+  const [activitiesLoadingMore, setActivitiesLoadingMore] = useState(false);
+  const activitiesSkipRef = useRef(0);
   const [strikeData, setStrikeData] = useState<any>(null);
   const [strikeLoading, setStrikeLoading] = useState(true);
   const [completedTopics, setCompletedTopics] = useState<number>(0);
   const [totalEarnings, setTotalEarnings] = useState<number>(0);
+  const [earningsLoading, setEarningsLoading] = useState(true);
   const [participatedHackathons, setParticipatedHackathons] = useState<number>(0);
   const [motivationMessage, setMotivationMessage] = useState<{ message: string; emoji: string } | null>(null);
   const [motivationLoading, setMotivationLoading] = useState(true);
   const recentBadges = badges.slice(0, 6);
   const { checkStrikeCompletion } = useStrikeCompletionCheck();
 
-  // Fetch core dashboard data (non-blocking)
+  // Fetch core dashboard data using unified API
   useEffect(() => {
-    fetchCoreData();
+    fetchDashboardData();
   }, []);
 
   // Fetch AI recommendations separately (non-blocking)
@@ -121,136 +127,97 @@ export default function DashboardPage() {
     fetchMotivationMessage();
   }, []);
 
-  // Fetch activities when type changes
+  // Fetch activities when type changes (separate from core data)
   useEffect(() => {
-    fetchActivities();
+    fetchActivities(true);
   }, [activityType]);
 
-  const fetchCoreData = async () => {
+  const fetchDashboardData = async () => {
     try {
-      // Fetch strike data first and in parallel with stats for faster loading
-      const [strikeResponse, statsResponse, interviewResponse, badgesResponse, dailyRankResponse, weeklyRankResponse, monthlyRankResponse, activitiesResponse, earningsResponse] = await Promise.all([
-        fetch("/api/strike").catch(() => {
-          // Return a response-like object that indicates failure
-          return {
-            ok: false,
-            status: 500,
-            json: async () => ({ error: "Failed to fetch strike data" }),
-          };
-        }),
-        fetch("/api/dashboard/stats"),
-        fetch("/api/interview/history").catch(() => ({
-          json: async () => ({ attempts: [] }),
-        })),
-        fetch("/api/badges/user").catch(() => ({
-          json: async () => ({ badges: [] }),
-        })),
-        fetch("/api/competition/leaderboard?period=daily&type=quiz_count").catch(() => ({
-          json: async () => ({ userRank: null }),
-        })),
-        fetch("/api/competition/leaderboard?period=weekly&type=quiz_count").catch(() => ({
-          json: async () => ({ userRank: null }),
-        })),
-        fetch("/api/competition/leaderboard?period=monthly&type=quiz_count").catch(() => ({
-          json: async () => ({ userRank: null }),
-        })),
-        fetch(`/api/profile/activity?limit=10&type=global`).catch(() => ({
-          json: async () => ({ activities: [] }),
-        })),
-        fetch("/api/earnings").catch(() => ({
-          json: async () => ({ earnings: { total: 0 } }),
-        })),
-      ]);
+      const response = await fetch("/api/dashboard/data");
+      
+      if (!response.ok) {
+        throw new Error("Failed to fetch dashboard data");
+      }
 
-      const statsData = await statsResponse.json();
-      if (statsResponse.ok && statsData.stats) {
-        setStats(statsData.stats);
-        if (statsData.stats.completedTopics !== undefined) {
-          setCompletedTopics(statsData.stats.completedTopics);
+      const data = await response.json();
+
+      // Process stats
+      if (data.stats) {
+        setStats(data.stats);
+        if (data.stats.completedTopics !== undefined) {
+          setCompletedTopics(data.stats.completedTopics);
         }
-        if (statsData.stats.participatedHackathons !== undefined) {
-          setParticipatedHackathons(statsData.stats.participatedHackathons);
+        if (data.stats.participatedHackathons !== undefined) {
+          setParticipatedHackathons(data.stats.participatedHackathons);
         }
       }
+      setStatsLoading(false);
 
-      const interviewData = await interviewResponse.json();
-      const interviewAttempts = interviewData.attempts || [];
-
-      const badgesData = await badgesResponse.json();
-      if (badgesData.badges) {
-        setBadges(badgesData.badges || []);
+      // Process badges
+      if (data.badges) {
+        setBadges(data.badges || []);
       }
+      setBadgesLoading(false);
 
-      const dailyRankData = await dailyRankResponse.json();
-      if (dailyRankData.userRank && dailyRankData.userRank.rank && dailyRankData.userRank.rank > 0) {
-        setDailyRank({
-          rank: dailyRankData.userRank.rank,
-          quizCount: dailyRankData.userRank.attempts?.quiz || 0,
-          averageScore: dailyRankData.userRank.metrics?.test || 0,
-          points: dailyRankData.userRank.points || 0,
-        });
-      }
-
-      const weeklyRankData = await weeklyRankResponse.json();
-      if (weeklyRankData.userRank && weeklyRankData.userRank.rank && weeklyRankData.userRank.rank > 0) {
-        setWeeklyRank({
-          rank: weeklyRankData.userRank.rank,
-          quizCount: weeklyRankData.userRank.attempts?.quiz || 0,
-          averageScore: weeklyRankData.userRank.metrics?.test || 0,
-          points: weeklyRankData.userRank.points || 0,
-        });
-      }
-
-      const monthlyRankData = await monthlyRankResponse.json();
-      if (monthlyRankData.userRank && monthlyRankData.userRank.rank && monthlyRankData.userRank.rank > 0) {
-        setMonthlyRank({
-          rank: monthlyRankData.userRank.rank,
-          quizCount: monthlyRankData.userRank.attempts?.quiz || 0,
-          averageScore: monthlyRankData.userRank.metrics?.test || 0,
-          points: monthlyRankData.userRank.points || 0,
-        });
-      }
-
-      const activitiesData = await activitiesResponse.json();
-      if (activitiesData.activities) {
-        setActivities(activitiesData.activities || []);
-      }
-
-      const earningsData = await earningsResponse.json();
-      if (earningsData.earnings) {
-        setTotalEarnings(earningsData.earnings.total || 0);
-      }
-
-      // Process strike data first for faster display
-      try {
-        if (strikeResponse.ok) {
-          const strikeData = await strikeResponse.json();
-          if (strikeData && !strikeData.error) {
-            setStrikeData(strikeData);
-            // Check if strike was newly completed and show notification
-            // This happens when user completes all daily tasks and visits dashboard
-            if (strikeData.isNewlyCompleted === true) {
-              // Trigger celebration modal with confetti
-              checkStrikeCompletion();
-            }
-          } else {
-            // Set to null so StrikeDisplay shows default/empty state
-            setStrikeData(null);
-          }
-        } else {
-          // API returned an error (e.g., 401, 500)
-          console.warn("Strike API returned error:", strikeResponse.status);
-          setStrikeData(null);
+      // Process ranks
+      if (data.ranks) {
+        const { daily, weekly, monthly } = data.ranks;
+        
+        if (daily && daily.rank && daily.rank > 0) {
+          setDailyRank({
+            rank: daily.rank,
+            quizCount: daily.quizCount || 0,
+            averageScore: daily.averageScore || 0,
+            points: daily.points || 0,
+          });
         }
-      } catch (error) {
-        console.error("Error parsing strike data:", error);
+        
+        if (weekly && weekly.rank && weekly.rank > 0) {
+          setWeeklyRank({
+            rank: weekly.rank,
+            quizCount: weekly.quizCount || 0,
+            averageScore: weekly.averageScore || 0,
+            points: weekly.points || 0,
+          });
+        }
+        
+        if (monthly && monthly.rank && monthly.rank > 0) {
+          setMonthlyRank({
+            rank: monthly.rank,
+            quizCount: monthly.quizCount || 0,
+            averageScore: monthly.averageScore || 0,
+            points: monthly.points || 0,
+          });
+        }
+      }
+      setRanksLoading(false);
+
+      // Process earnings
+      if (data.earnings) {
+        setTotalEarnings(data.earnings.total || 0);
+      }
+      setEarningsLoading(false);
+
+      // Process strike data
+      if (data.strike) {
+        setStrikeData(data.strike);
+        // Check if strike was newly completed and show notification
+        if (data.strike.isNewlyCompleted === true) {
+          checkStrikeCompletion();
+        }
+      } else {
         setStrikeData(null);
       }
       setStrikeLoading(false);
     } catch (error) {
       console.error("Error fetching dashboard data:", error);
-    } finally {
-      setLoading(false);
+      // Set loading states to false on error
+      setStatsLoading(false);
+      setBadgesLoading(false);
+      setRanksLoading(false);
+      setEarningsLoading(false);
+      setStrikeLoading(false);
     }
   };
 
@@ -299,23 +266,67 @@ export default function DashboardPage() {
     }
   };
 
-  const fetchActivities = async () => {
+  const fetchActivities = useCallback(async (reset = true) => {
     try {
-      setActivitiesLoading(true);
-      const response = await fetch(`/api/profile/activity?limit=10&type=${activityType}`);
+      if (reset) {
+        setActivitiesLoading(true);
+        activitiesSkipRef.current = 0;
+      } else {
+        setActivitiesLoadingMore(true);
+      }
+
+      const skip = reset ? 0 : activitiesSkipRef.current;
+      const response = await fetch(`/api/profile/activity?limit=10&skip=${skip}&type=${activityType}`);
       if (response.ok) {
         const data = await response.json();
-        setActivities(data.activities || []);
+        if (reset) {
+          setActivities(data.activities || []);
+        } else {
+          setActivities((prev) => [...prev, ...(data.activities || [])]);
+        }
+        setActivitiesHasMore(data.hasMore || false);
+        activitiesSkipRef.current = skip + (data.activities?.length || 0);
       } else {
-        setActivities([]);
+        if (reset) {
+          setActivities([]);
+        }
+        setActivitiesHasMore(false);
       }
     } catch (error) {
       console.error("Error fetching activities:", error);
-      setActivities([]);
+      if (reset) {
+        setActivities([]);
+      }
+      setActivitiesHasMore(false);
     } finally {
       setActivitiesLoading(false);
+      setActivitiesLoadingMore(false);
     }
-  };
+  }, [activityType]);
+
+  // Infinite scroll handler
+  const handleScroll = useCallback(() => {
+    if (
+      activitiesLoadingMore ||
+      !activitiesHasMore ||
+      activitiesLoading
+    ) {
+      return;
+    }
+
+    const scrollPosition = window.innerHeight + window.scrollY;
+    const documentHeight = document.documentElement.scrollHeight;
+    const threshold = 200; // Load when 200px from bottom
+
+    if (scrollPosition >= documentHeight - threshold) {
+      fetchActivities(false);
+    }
+  }, [activitiesLoadingMore, activitiesHasMore, activitiesLoading, fetchActivities]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [handleScroll]);
 
   const statCards = [
     {
@@ -354,75 +365,36 @@ export default function DashboardPage() {
 
   const quickActions = [
     {
-      title: "Keşfet",
-      description: "Yeni içerikleri keşfedin",
-      href: "/social/explore",
-      icon: Compass,
-      color: "from-blue-500 to-cyan-500",
-    },
-    {
-      title: "İçerik Oluşturma",
-      description: "İçerik oluşturun ve paylaşın",
-      href: "/social/create",
-      icon: Plus,
-      color: "from-green-500 to-emerald-500",
-    },
-    {
-      title: "Kurslar",
-      description: "Yeni beceriler öğrenin",
-      href: "/education/courses",
+      title: "Yazılım Öğren",
+      description: "Kurslar, testler ve eğitim içerikleri",
+      href: "/hub/yazilim-ogren",
       icon: BookOpen,
       color: "from-purple-500 to-pink-500",
     },
     {
-      title: "Testler",
-      description: "Bilginizi test edin",
-      href: "/education/tests",
-      icon: FileText,
-      color: "from-orange-500 to-red-500",
+      title: "İş Bul",
+      description: "İş ilanları, CV ve kariyer fırsatları",
+      href: "/hub/is-bul",
+      icon: Briefcase,
+      color: "from-blue-500 to-cyan-500",
     },
     {
-      title: "En Çok Kazananlar",
-      description: "Kazanç sıralamasını görüntüleyin",
-      href: "/earnings/leaderboard",
+      title: "Kazanç Elde Et",
+      description: "Hackathon, freelancer ve yarışmalar",
+      href: "/hub/kazanc-elde-et",
       icon: DollarSign,
-      color: "from-emerald-500 to-teal-500",
+      color: "from-green-500 to-emerald-500",
     },
     {
-      title: "Derece Kazancı",
-      description: "Sıralama kazançlarınızı görün",
-      href: "/competition",
-      icon: Medal,
-      color: "from-amber-500 to-yellow-500",
-    },
-    {
-      title: "İş Arama",
-      description: "Yeni fırsatları keşfedin",
-      href: "/jobs/browse",
-      icon: Search,
-      color: "from-teal-500 to-cyan-500",
-    },
-    {
-      title: "CV Oluşturma",
-      description: "CV'nizi oluşturun",
-      href: "/cv/create",
-      icon: FileText,
-      color: "from-pink-500 to-rose-500",
+      title: "Sosyal",
+      description: "Topluluk, sohbet ve bağlantılar",
+      href: "/hub/sosyal",
+      icon: Users,
+      color: "from-orange-500 to-red-500",
     },
   ];
 
   const displayedAiRecommendations = aiRecommendations.slice(0, 1);
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-          <p className="text-gray-600 dark:text-gray-400">Yükleniyor...</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="space-y-8 animate-fade-in">
@@ -443,40 +415,74 @@ export default function DashboardPage() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {statCards.map((stat, index) => {
-          const Icon = stat.icon;
-          return (
+        {statsLoading ? (
+          Array.from({ length: 4 }).map((_, index) => (
             <Card
               key={index}
               variant="elevated"
-              hover
-              className="overflow-hidden group animate-fade-in relative"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className="overflow-hidden relative animate-pulse"
             >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-full -mr-16 -mt-16 blur-2xl opacity-50" />
-              <CardContent className="px-5 pt-6 pb-5 relative z-10">
+              <CardContent className="px-5 pt-6 pb-5">
                 <div className="flex items-start justify-between mb-3 gap-2">
-                  <div
-                    className={`w-10 h-10 rounded-lg bg-gradient-to-br ${stat.color} flex items-center justify-center shadow-md md:group-hover:scale-105 transition-all duration-300 flex-shrink-0 overflow-hidden`}
-                  >
-                    <Icon className="h-4 w-4 text-white flex-shrink-0" />
-                  </div>
-                  <p className="text-xs text-gray-600 dark:text-gray-400 font-medium uppercase tracking-wide flex-1 min-w-0">
-                    {stat.title}
-                  </p>
+                  <div className="w-10 h-10 rounded-lg bg-gray-200 dark:bg-gray-700" />
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-20" />
                 </div>
-                <div className="min-w-0">
-                  <p className="text-3xl md:text-4xl font-display font-bold text-gray-900 dark:text-gray-100">
-                    {stat.value}
-                  </p>
-                </div>
+                <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded w-16" />
               </CardContent>
             </Card>
-          );
-        })}
+          ))
+        ) : (
+          statCards.map((stat, index) => {
+            const Icon = stat.icon;
+            return (
+              <Card
+                key={index}
+                variant="elevated"
+                hover
+                className="overflow-hidden group animate-fade-in relative"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-full -mr-16 -mt-16 blur-2xl opacity-50" />
+                <CardContent className="px-5 pt-6 pb-5 relative z-10">
+                  <div className="flex items-start justify-between mb-3 gap-2">
+                    <div
+                      className={`w-10 h-10 rounded-lg bg-gradient-to-br ${stat.color} flex items-center justify-center shadow-md md:group-hover:scale-105 transition-all duration-300 flex-shrink-0 overflow-hidden`}
+                    >
+                      <Icon className="h-4 w-4 text-white flex-shrink-0" />
+                    </div>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 font-medium uppercase tracking-wide flex-1 min-w-0">
+                      {stat.title}
+                    </p>
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-3xl md:text-4xl font-display font-bold text-gray-900 dark:text-gray-100">
+                      {stat.value}
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            );
+          })
+        )}
       </div>
 
-      {recentBadges.length > 0 && (
+      {badgesLoading ? (
+        <Card variant="elevated" className="border border-emerald-200 dark:border-emerald-800 animate-pulse">
+          <CardHeader className="pb-2">
+            <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-32" />
+          </CardHeader>
+          <CardContent className="space-y-5">
+            <div className="space-y-3">
+              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-24" />
+              <div className="flex flex-wrap gap-4">
+                {Array.from({ length: 3 }).map((_, i) => (
+                  <div key={i} className="h-16 bg-gray-200 dark:bg-gray-700 rounded-xl w-48" />
+                ))}
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      ) : recentBadges.length > 0 ? (
         <Card variant="elevated" className="border border-emerald-200 dark:border-emerald-800">
           <CardHeader className="pb-2">
             <CardTitle className="flex items-center gap-2 text-lg text-emerald-700 dark:text-emerald-300">
@@ -513,7 +519,7 @@ export default function DashboardPage() {
 
           </CardContent>
         </Card>
-      )}
+      ) : null}
 
       {/* Quick Actions & AI Recommendations */}
       <div className="grid md:grid-cols-3 gap-6">
@@ -525,29 +531,29 @@ export default function DashboardPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid sm:grid-cols-2 gap-4">
+            <div className="grid sm:grid-cols-2 gap-5">
               {quickActions.map((action, index) => {
                 const Icon = action.icon;
                 return (
                   <Link
                     key={index}
                     href={action.href}
-                    className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-br from-gray-50 to-gray-100/50 dark:from-gray-800/50 dark:to-gray-700/50 hover:from-blue-50 hover:to-cyan-50 dark:hover:from-blue-900/20 dark:hover:to-cyan-900/20 transition-all duration-200 group border border-gray-200/50 dark:border-gray-700/50"
+                    className="flex items-center gap-5 p-6 rounded-xl bg-gradient-to-br from-gray-50 to-gray-100/50 dark:from-gray-800/50 dark:to-gray-700/50 hover:from-blue-50 hover:to-cyan-50 dark:hover:from-blue-900/20 dark:hover:to-cyan-900/20 transition-all duration-200 group border border-gray-200/50 dark:border-gray-700/50"
                   >
                     <div
-                      className={`w-12 h-12 rounded-xl bg-gradient-to-br ${action.color} flex items-center justify-center shadow-lg md:group-hover:scale-110 transition-all duration-300 flex-shrink-0`}
+                      className={`w-16 h-16 rounded-xl bg-gradient-to-br ${action.color} flex items-center justify-center shadow-lg md:group-hover:scale-110 transition-all duration-300 flex-shrink-0`}
                     >
-                      <Icon className="h-6 w-6 text-white" />
+                      <Icon className="h-8 w-8 text-white" />
                     </div>
                     <div className="flex-1 min-w-0 overflow-hidden">
-                      <p className="font-display font-bold text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate">
+                      <p className="font-display font-bold text-lg text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate">
                         {action.title}
                       </p>
-                      <p className="text-xs text-gray-600 dark:text-gray-400 truncate">
+                      <p className="text-sm text-gray-600 dark:text-gray-400 truncate mt-1">
                         {action.description}
                       </p>
                     </div>
-                    <ArrowRight className="h-5 w-5 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 md:group-hover:translate-x-2 transition-all flex-shrink-0" />
+                    <ArrowRight className="h-6 w-6 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 md:group-hover:translate-x-2 transition-all flex-shrink-0" />
                   </Link>
                 );
               })}
@@ -672,8 +678,15 @@ export default function DashboardPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
-              {dailyRank && dailyRank.rank > 0 ? (
+            {ranksLoading ? (
+              <div className="space-y-4 animate-pulse">
+                {Array.from({ length: 3 }).map((_, i) => (
+                  <div key={i} className="p-4 rounded-xl bg-gray-200 dark:bg-gray-700 h-20" />
+                ))}
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {dailyRank && dailyRank.rank > 0 ? (
                 <div className="p-4 rounded-xl bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 border border-yellow-200/50 dark:border-yellow-800/50">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">Günlük Sıralama</span>
@@ -709,14 +722,15 @@ export default function DashboardPage() {
                   <p className="text-sm text-gray-600 dark:text-gray-400">Henüz aylık sıralamada yer almıyorsunuz</p>
                 </div>
               )}
-              <div className="mt-6">
-                <Link href="/competition">
-                  <Button variant="gradient" size="sm" className="w-full">
-                    Detaylı Sıralama Görüntüle
-                  </Button>
-                </Link>
+                <div className="mt-6">
+                  <Link href="/competition">
+                    <Button variant="gradient" size="sm" className="w-full">
+                      Detaylı Sıralama Görüntüle
+                    </Button>
+                  </Link>
+                </div>
               </div>
-            </div>
+            )}
           </CardContent>
         </Card>
 
@@ -819,8 +833,11 @@ export default function DashboardPage() {
             date: activity.date,
             icon: activity.icon,
             timeAgo: activity.timeAgo,
+            userId: activity.userId,
+            user: activity.user,
           }))}
           title="Kullanıcı Hareketleri"
+          loadingMore={activitiesLoadingMore}
           headerContent={
             <div className="flex items-center gap-2">
               <button

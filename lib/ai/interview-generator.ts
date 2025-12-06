@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { createChatCompletion, ensureAIEnabled, isAIEnabled } from "./client";
+import { createChatCompletion, ensureAIEnabled, isAIEnabled, AIResponseValidationError } from "./client";
 import { db } from "@/lib/db";
 
 // CV Data interface
@@ -785,6 +785,9 @@ export async function generateStage3Questions(cvId: string): Promise<z.infer<typ
     }
   };
 
+  const isDeveloper = cvInfo.positionType === "developer";
+  const primaryLanguage = cvInfo.technologies[0] || "C#";
+  
   const prompt = `
 Bir ${positionTypeLabels[cvInfo.positionType]} pozisyonu için CV'ye göre teknik mülakat soruları hazırla.
 
@@ -803,35 +806,84 @@ ${getTechnicalQuestionsTemplate(cvInfo.positionType)}
 - Sorular gerçekçi ve pratik olmalı
 - Teknik sorular CV'deki teknolojilere göre olmalı
 - Gerçek dünya senaryoları pratik ve uygulanabilir olmalı
-${cvInfo.positionType === "developer" ? `- Canlı kodlama ve bugfix soruları ${cvInfo.technologies[0] || "C#"} dilinde olmalı` : "- Developer pozisyonu olmadığı için canlı kodlama ve bugfix soruları opsiyoneldir"}
+${isDeveloper ? `- Canlı kodlama ve bugfix soruları ${primaryLanguage} dilinde olmalı` : "- Developer pozisyonu olmadığı için canlı kodlama ve bugfix soruları opsiyoneldir"}
+
+KRİTİK GEREKSİNİMLER:
+1. testQuestions: MUTLAKA en az 5 (beş) soru içermelidir. Daha az soru kabul edilmez!
+2. realWorldScenarios: MUTLAKA en az 2 (iki) senaryo içermelidir. Daha az senaryo kabul edilmez!
+3. ${isDeveloper ? "liveCoding ve bugFix: Developer pozisyonları için MUTLAKA dahil edilmelidir." : "liveCoding ve bugFix: Opsiyoneldir, dahil edilmeyebilir."}
 
 SORU FORMATI:
 Her soru şu formatta olmalı:
 {
-  "id": "unique_id",
-  "type": "technical" | "case" | "live_coding" | "bug_fix",
-  "question": "Soru metni",
-  "prompt": "Ek açıklama (opsiyonel)",
-  "description": "Detaylı açıklama (opsiyonel)",
-  "difficulty": "${cvInfo.level}",
-  "resources": ["ipucu1", "ipucu2"] (opsiyonel),
-  "languages": ["csharp", "javascript", "python"] (sadece kodlama soruları için),
-  "starterCode": {"csharp": "kod", "javascript": "kod"} (sadece live_coding için),
-  "buggyCode": "hatalı kod" (sadece bug_fix için),
-  "timeLimitMinutes": 15 (opsiyonel),
-  "supportingText": "Ek bilgi" (opsiyonel),
-  "acceptanceCriteria": ["kriter1", "kriter2"] (opsiyonel)
+  "id": "unique_id", // ZORUNLU: Her soru için benzersiz bir ID
+  "type": "technical" | "case" | "live_coding" | "bug_fix", // ZORUNLU
+  "question": "Soru metni", // ZORUNLU: Soru metni
+  "prompt": "Ek açıklama", // OPSİYONEL
+  "description": "Detaylı açıklama", // OPSİYONEL
+  "difficulty": "${cvInfo.level}", // OPSİYONEL: "beginner" | "intermediate" | "advanced"
+  "resources": ["ipucu1", "ipucu2"], // OPSİYONEL: String array
+  "languages": ["csharp", "javascript"], // OPSİYONEL: Sadece kodlama soruları için
+  "starterCode": {"csharp": "kod", "javascript": "kod"}, // OPSİYONEL: Sadece live_coding için
+  "buggyCode": "hatalı kod", // OPSİYONEL: Sadece bug_fix için
+  "timeLimitMinutes": 15, // OPSİYONEL: Number
+  "supportingText": "Ek bilgi", // OPSİYONEL
+  "acceptanceCriteria": ["kriter1", "kriter2"] // OPSİYONEL: String array
 }
 
-JSON formatında yanıt ver:
+ÖRNEK JSON YAPISI:
 {
   "stage3_technical": {
-    "testQuestions": [...], // En az 5 soru
-    "liveCoding": {...}, // Sadece developer pozisyonları için zorunlu
-    "bugFix": {...}, // Sadece developer pozisyonları için zorunlu
-    "realWorldScenarios": [...] // En az 2-3 senaryo
+    "testQuestions": [
+      {
+        "id": "tech_1",
+        "type": "technical",
+        "question": "Soru metni buraya",
+        "difficulty": "${cvInfo.level}"
+      },
+      {
+        "id": "tech_2",
+        "type": "technical",
+        "question": "Başka bir soru",
+        "difficulty": "${cvInfo.level}"
+      }
+      // ... en az 5 soru olmalı
+    ],
+    ${isDeveloper ? `"liveCoding": {
+      "id": "live_coding_1",
+      "type": "live_coding",
+      "question": "Kodlama sorusu",
+      "languages": ["csharp"],
+      "starterCode": {"csharp": "// Başlangıç kodu"},
+      "difficulty": "${cvInfo.level}"
+    },
+    "bugFix": {
+      "id": "bug_fix_1",
+      "type": "bug_fix",
+      "question": "Bug düzeltme sorusu",
+      "buggyCode": "// Hatalı kod",
+      "difficulty": "${cvInfo.level}"
+    },` : `"liveCoding": null,
+    "bugFix": null,`}
+    "realWorldScenarios": [
+      {
+        "id": "scenario_1",
+        "type": "case",
+        "question": "Gerçek dünya senaryosu",
+        "difficulty": "${cvInfo.level}"
+      }
+      // ... en az 2 senaryo olmalı
+    ]
   }
 }
+
+DİKKAT: 
+- JSON yapısı TAM OLARAK yukarıdaki örnekteki gibi olmalıdır
+- "stage3_technical" ana anahtarı MUTLAKA olmalıdır
+- testQuestions MUTLAKA bir array olmalı ve en az 5 eleman içermelidir
+- realWorldScenarios MUTLAKA bir array olmalı ve en az 2 eleman içermelidir
+- Her soru için "id" ve "type" ve "question" alanları ZORUNLUDUR
+- ${isDeveloper ? "Developer pozisyonu için liveCoding ve bugFix MUTLAKA dahil edilmelidir (null değil, obje olmalı)" : "liveCoding ve bugFix opsiyoneldir, null olabilir veya dahil edilmeyebilir"}
 `;
 
   try {
@@ -840,7 +892,14 @@ JSON formatında yanıt ver:
       messages: [
         {
           role: "system",
-          content: `Sen bir ${positionTypeLabels[cvInfo.positionType]} mülakat uzmanısın ve İK profesyonelisin. CV'lere göre çok kapsamlı, gerçekçi ve adil teknik mülakat soruları hazırlıyorsun. Pozisyon tipine göre (${positionTypeLabels[cvInfo.positionType]}) uygun teknik sorular hazırlıyorsun. Her zaman JSON formatında yanıt ver.`,
+          content: `Sen bir ${positionTypeLabels[cvInfo.positionType]} mülakat uzmanısın ve İK profesyonelisin. CV'lere göre çok kapsamlı, gerçekçi ve adil teknik mülakat soruları hazırlıyorsun. Pozisyon tipine göre (${positionTypeLabels[cvInfo.positionType]}) uygun teknik sorular hazırlıyorsun. 
+
+KRİTİK: Her zaman JSON formatında yanıt ver ve aşağıdaki yapıya TAM OLARAK uy:
+- "stage3_technical" ana anahtarı ile başla
+- "testQuestions" array'i MUTLAKA en az 5 soru içermeli
+- "realWorldScenarios" array'i MUTLAKA en az 2 senaryo içermeli
+- ${isDeveloper ? '"liveCoding" ve "bugFix" MUTLAKA obje olarak dahil edilmeli (null değil)' : '"liveCoding" ve "bugFix" opsiyoneldir (null olabilir)'}
+- Her soru için "id", "type", "question" alanları zorunludur`,
         },
         {
           role: "user",
@@ -853,12 +912,57 @@ JSON formatında yanıt ver:
     });
 
     if (!result.parsed) {
+      console.error("[generateStage3Questions] AI yanıtı doğrulanamadı. Raw content:", result.content?.substring(0, 1000));
       throw new Error("AI yanıtı doğrulanamadı");
     }
 
     return result.parsed;
   } catch (error: any) {
-    console.error("[generateStage3Questions] Hata:", error);
+    // Log detailed error information
+    const errorDetails: any = {
+      message: error?.message,
+      name: error?.name,
+    };
+    
+    // If it's an AIResponseValidationError, include zodErrors and payload
+    if (error instanceof AIResponseValidationError) {
+      errorDetails.zodErrors = error.zodErrors;
+      errorDetails.payload = typeof error.payload === 'string' 
+        ? error.payload.substring(0, 1000) 
+        : error.payload;
+    } else if (error && typeof error === 'object') {
+      // Try to extract zodErrors and payload from error object
+      if ('zodErrors' in error) {
+        errorDetails.zodErrors = (error as any).zodErrors;
+      }
+      if ('payload' in error) {
+        const payload = (error as any).payload;
+        errorDetails.payload = typeof payload === 'string' 
+          ? payload.substring(0, 1000) 
+          : payload;
+      }
+    }
+    
+    console.error("[generateStage3Questions] Hata:", errorDetails);
+    
+    // If it's a validation error, include more details
+    if (error instanceof AIResponseValidationError || error?.name === "AIResponseValidationError" || error?.message?.includes("JSON şeması")) {
+      const zodErrors = error instanceof AIResponseValidationError 
+        ? error.zodErrors 
+        : errorDetails.zodErrors;
+      
+      const errorSummary = zodErrors 
+        ? `\n\nHata detayları:\n${JSON.stringify(zodErrors, null, 2)}`
+        : error?.message || "";
+      
+      // Create a new error that preserves the original error information
+      const validationError = new Error(`Aşama 3 soruları oluşturulurken hata: AI yanıtı beklenen JSON şemasına uymuyor.${errorSummary}`);
+      (validationError as any).zodErrors = zodErrors;
+      (validationError as any).payload = errorDetails.payload;
+      (validationError as any).name = "AIResponseValidationError";
+      throw validationError;
+    }
+    
     throw new Error(`Aşama 3 soruları oluşturulurken hata: ${error?.message || "Bilinmeyen hata"}`);
   }
 }

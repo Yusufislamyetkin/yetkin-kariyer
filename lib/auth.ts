@@ -243,12 +243,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
     async jwt({ token, user, account }) {
       if (user) {
+        // First time login - user object is available (works for both credentials and OAuth)
         token.id = user.id;
         token.role = (user as any).role;
         token.email = user.email;
-      } else if (account?.provider === "google" && token.email) {
-        // For Google OAuth, always fetch user from database by email
-        // This ensures we have the correct userId even if signIn callback had issues
+      } else if (token.email && !token.id) {
+        // Subsequent requests - user object is not available
+        // Always fetch user from database by email if token.id is missing
+        // This handles Google OAuth and other edge cases
         try {
           const { db } = await import("@/lib/db");
           const dbUser = await db.user.findUnique({
@@ -258,29 +260,32 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             token.id = dbUser.id;
             token.role = dbUser.role;
           } else {
-            // User not found - this shouldn't happen if signIn callback worked
-            console.error("Google OAuth: User not found in database:", {
+            console.error("JWT callback: User not found in database:", {
               email: token.email,
-              provider: account.provider,
             });
           }
         } catch (error) {
-          console.error("Error fetching user in jwt callback:", error);
+          console.error("Error fetching user by email in jwt callback:", error);
         }
-      } else if (token.email && !token.id) {
-        // Fallback: if we have email but no id, try to find user by email
-        // This handles edge cases where user object wasn't passed correctly
+      } else if (account?.provider === "google" && token.email && token.id) {
+        // First time Google OAuth login - verify the ID is correct (safety check)
         try {
           const { db } = await import("@/lib/db");
           const dbUser = await db.user.findUnique({
             where: { email: token.email as string },
           });
-          if (dbUser) {
+          if (dbUser && dbUser.id !== token.id) {
+            // ID mismatch - use database ID instead
+            console.warn("JWT callback: ID mismatch detected, using database ID:", {
+              tokenId: token.id,
+              dbId: dbUser.id,
+              email: token.email,
+            });
             token.id = dbUser.id;
             token.role = dbUser.role;
           }
         } catch (error) {
-          console.error("Error fetching user by email in jwt callback:", error);
+          console.error("Error verifying user ID in jwt callback:", error);
         }
       }
       return token;

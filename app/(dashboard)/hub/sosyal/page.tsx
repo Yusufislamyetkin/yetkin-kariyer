@@ -114,7 +114,7 @@ export default function SosyalHubPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-          <h1 className="text-4xl md:text-5xl font-display font-bold bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">
+          <h1 className="text-4xl md:text-5xl font-display font-bold bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2 leading-normal pb-2">
             Sosyal
           </h1>
           <p className="text-gray-600 dark:text-gray-400 text-lg font-medium">

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { generateStage1Questions, generateStage2Questions, generateStage3Questions, formatQuestionsForInterview, extractCVInfo } from "@/lib/ai/interview-generator";
+import { getUserIdFromSession } from "@/lib/auth-utils";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 300; // 5 dakika timeout (Vercel Pro plan için)
@@ -129,7 +130,6 @@ async function generateInterviewStages(interviewId: string, cvId: string) {
         (stage3.stage3_technical?.realWorldScenarios?.length || 0);
       console.log(`[CV_INTERVIEW_BG] Aşama 3 soruları oluşturuldu: ${stage3Count} soru`);
     } catch (stageError: any) {
-      console.error(`[CV_INTERVIEW_BG] Aşama 3 hatası:`, stageError);
       const errorMessage = stageError?.message || "Bilinmeyen hata";
       const isTimeoutError = 
         errorMessage.includes("zaman aşımı") ||
@@ -137,11 +137,43 @@ async function generateInterviewStages(interviewId: string, cvId: string) {
         errorMessage.includes("Request was aborted") ||
         stageError?.isTimeout === true;
       
+      // Check if it's a validation error
+      const isValidationError = 
+        errorMessage.includes("JSON şeması") ||
+        errorMessage.includes("beklenen JSON") ||
+        stageError?.name === "AIResponseValidationError";
+      
+      // Log detailed error information
+      console.error(`[CV_INTERVIEW_BG] Aşama 3 hatası:`, {
+        message: errorMessage,
+        name: stageError?.name,
+        isTimeout: isTimeoutError,
+        isValidationError: isValidationError,
+        zodErrors: stageError?.zodErrors ? JSON.stringify(stageError.zodErrors, null, 2) : undefined,
+        payloadPreview: stageError?.payload 
+          ? (typeof stageError.payload === 'string' 
+              ? stageError.payload.substring(0, 1000) 
+              : JSON.stringify(stageError.payload).substring(0, 1000))
+          : undefined,
+        stack: stageError?.stack,
+      });
+      
       if (isTimeoutError) {
         throw new Error(
           `Aşama 3 (Teknik) soruları oluşturulurken zaman aşımı oluştu. Lütfen tekrar deneyin.`
         );
       }
+      
+      if (isValidationError) {
+        // Provide more user-friendly error message for validation errors
+        const validationDetails = stageError?.zodErrors 
+          ? `\n\nDetaylar: ${JSON.stringify(stageError.zodErrors, null, 2)}`
+          : "";
+        throw new Error(
+          `Aşama 3 (Teknik) hatası: AI yanıtı beklenen JSON şemasına uymuyor.${validationDetails}`
+        );
+      }
+      
       throw new Error(`Aşama 3 (Teknik) hatası: ${errorMessage}`);
     }
     
@@ -218,7 +250,9 @@ async function generateInterviewStages(interviewId: string, cvId: string) {
 export async function POST(request: Request) {
   try {
     const session = await auth();
-    if (!session?.user?.id) {
+    const userId = await getUserIdFromSession(session);
+    
+    if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -260,7 +294,7 @@ export async function POST(request: Request) {
         where: { id: interview.cvId },
       });
 
-      if (!cv || cv.userId !== session.user.id) {
+      if (!cv || cv.userId !== userId) {
         return NextResponse.json(
           { error: "Bu interview'a erişim yetkiniz yok" },
           { status: 403 }

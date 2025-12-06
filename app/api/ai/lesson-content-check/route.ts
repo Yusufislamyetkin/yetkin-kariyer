@@ -3,6 +3,7 @@ import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { normalizeCourseContent } from "@/lib/education/courseContent";
 import { technologyToRoute } from "@/lib/utils/technology-normalize";
+import { getUserIdFromSession } from "@/lib/auth-utils";
 
 export const dynamic = 'force-dynamic';
 
@@ -202,7 +203,9 @@ async function findLessonBySlug(slug: string) {
 export async function GET(request: Request) {
   try {
     const session = await auth();
-    if (!session?.user?.id) {
+    const userId = await getUserIdFromSession(session);
+    
+    if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 

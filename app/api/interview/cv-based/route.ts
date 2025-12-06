@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { extractCVInfo } from "@/lib/ai/interview-generator";
+import { getUserIdFromSession } from "@/lib/auth-utils";
 
 export const maxDuration = 60; // 60 seconds timeout for Vercel
 
@@ -34,7 +35,9 @@ function getBaseUrl(): string {
 export async function POST(request: Request) {
   try {
     const session = await auth();
-    if (!session?.user?.id) {
+    const userId = await getUserIdFromSession(session);
+    
+    if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -60,7 +63,7 @@ export async function POST(request: Request) {
       );
     }
 
-    if (cv.userId !== session.user.id) {
+    if (cv.userId !== userId) {
       return NextResponse.json(
         { error: "Bu CV'ye erişim yetkiniz yok" },
         { status: 403 }

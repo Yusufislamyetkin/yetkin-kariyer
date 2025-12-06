@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { X, Bot, Settings, Loader2 } from "lucide-react";
 import { Button } from "@/app/components/ui/Button";
+import { getAllCharacterProfiles, getCharacterProfileById, type BotCharacterProfile } from "@/lib/bot/character-profiles";
 
 interface BotCharacter {
   id?: string;
@@ -57,6 +58,7 @@ export function BotConfigModal({
 }: BotConfigModalProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [selectedCharacterId, setSelectedCharacterId] = useState<string>("");
   const [character, setCharacter] = useState<BotCharacter>({
     name: userName || "Bot",
     persona: `${userName || "Bot"} karakteri - Yardımsever ve aktif bir topluluk üyesi.`,
@@ -87,11 +89,36 @@ export function BotConfigModal({
   useEffect(() => {
     if (existingConfig?.botCharacter) {
       setCharacter(existingConfig.botCharacter);
+      // Mevcut karakteri karakter profilleriyle eşleştirmeye çalış
+      const profiles = getAllCharacterProfiles();
+      const matchedProfile = profiles.find(
+        (p) => p.systemPrompt === existingConfig.botCharacter?.systemPrompt ||
+               p.persona === existingConfig.botCharacter?.persona
+      );
+      if (matchedProfile) {
+        setSelectedCharacterId(matchedProfile.id);
+      }
     }
     if (existingConfig?.botConfiguration) {
       setConfig(existingConfig.botConfiguration);
     }
   }, [existingConfig]);
+
+  const handleCharacterSelect = (characterId: string) => {
+    setSelectedCharacterId(characterId);
+    if (characterId) {
+      const profile = getCharacterProfileById(characterId);
+      if (profile) {
+        setCharacter({
+          name: userName || profile.name,
+          persona: profile.persona,
+          systemPrompt: profile.systemPrompt,
+          expertise: profile.defaultExpertise,
+          traits: profile.traits,
+        });
+      }
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -114,6 +141,7 @@ export function BotConfigModal({
           systemPrompt: character.systemPrompt,
           traits: character.traits || {},
           expertise: character.expertise,
+          characterProfileId: selectedCharacterId || undefined,
           isActive: config.isActive,
           minPostsPerDay: config.minPostsPerDay,
           maxPostsPerDay: config.maxPostsPerDay,
@@ -210,6 +238,29 @@ export function BotConfigModal({
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Karakter Profili Seç (Opsiyonel)
+                  </label>
+                  <select
+                    value={selectedCharacterId}
+                    onChange={(e) => handleCharacterSelect(e.target.value)}
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+                  >
+                    <option value="">Özel Karakter (Manuel Düzenle)</option>
+                    {getAllCharacterProfiles().map((profile) => (
+                      <option key={profile.id} value={profile.id}>
+                        {profile.name} - {profile.description}
+                      </option>
+                    ))}
+                  </select>
+                  {selectedCharacterId && (
+                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                      Seçilen karaktere göre alanlar otomatik dolduruldu. İstersen manuel düzenleyebilirsin.
+                    </p>
+                  )}
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Karakter Adı
                   </label>
                   <input
@@ -241,9 +292,25 @@ export function BotConfigModal({
                   <textarea
                     value={character.systemPrompt}
                     onChange={(e) => setCharacter({ ...character, systemPrompt: e.target.value })}
-                    rows={4}
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+                    rows={6}
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-mono text-sm"
                     required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Expertise (Virgülle ayır)
+                  </label>
+                  <input
+                    type="text"
+                    value={character.expertise.join(", ")}
+                    onChange={(e) => setCharacter({ 
+                      ...character, 
+                      expertise: e.target.value.split(",").map(s => s.trim()).filter(s => s.length > 0)
+                    })}
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+                    placeholder="backend, frontend, database"
                   />
                 </div>
               </div>

@@ -2,6 +2,8 @@
 
 import { FileText, Briefcase, User, MessageSquare, Clock, BookOpen, Code, Trophy, Award } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
+import Image from "next/image";
+import Link from "next/link";
 
 interface Activity {
   id: string;
@@ -11,12 +13,19 @@ interface Activity {
   date: Date | string;
   icon: string;
   timeAgo: string;
+  userId?: string;
+  user?: {
+    id: string;
+    name: string;
+    profileImage?: string | null;
+  } | null;
 }
 
 interface ActivityTimelineProps {
   activities: Activity[];
   title?: string;
   headerContent?: React.ReactNode;
+  loadingMore?: boolean;
 }
 
 const activityIcons = {
@@ -41,7 +50,7 @@ const activityColors = {
   interview: "from-purple-500 to-pink-500",
 };
 
-export function ActivityTimeline({ activities, title = "Son Aktiviteler", headerContent }: ActivityTimelineProps) {
+export function ActivityTimeline({ activities, title = "Son Aktiviteler", headerContent, loadingMore = false }: ActivityTimelineProps) {
   if (activities.length === 0) {
     return (
       <Card variant="glass">
@@ -89,46 +98,98 @@ export function ActivityTimeline({ activities, title = "Son Aktiviteler", header
               const colorClass = activityColors[activity.type] || "from-gray-500 to-gray-600";
               // Check if icon is an emoji (contains emoji characters)
               const isEmoji = activity.icon && /[\u{1F300}-\u{1F9FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/u.test(activity.icon);
+              const profileUrl = activity.userId ? `/profile/${activity.userId}` : null;
 
               return (
                 <div key={activity.id} className="relative flex gap-4">
-                  {/* Timeline dot */}
+                  {/* Timeline dot - Profile Image */}
                   <div className="relative z-10 flex-shrink-0">
-                    <div
-                      className={`w-12 h-12 rounded-full bg-gradient-to-br ${colorClass} flex items-center justify-center shadow-lg border-4 border-white dark:border-gray-900`}
-                    >
-                      {isEmoji ? (
-                        <span className="text-2xl">{activity.icon}</span>
-                      ) : (
-                        Icon && <Icon className="w-6 h-6 text-white" />
-                      )}
-                    </div>
+                    {profileUrl ? (
+                      <Link href={profileUrl} className="block">
+                        <div className="w-12 h-12 rounded-full overflow-hidden border-4 border-white dark:border-gray-900 shadow-lg ring-2 ring-gray-200 dark:ring-gray-700 hover:ring-blue-500 dark:hover:ring-blue-400 transition-all">
+                          {activity.user?.profileImage ? (
+                            <Image
+                              src={activity.user.profileImage}
+                              alt={activity.user.name || "User"}
+                              width={48}
+                              height={48}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-semibold text-lg">
+                              {(activity.user?.name || "U")[0].toUpperCase()}
+                            </div>
+                          )}
+                        </div>
+                      </Link>
+                    ) : (
+                      <div
+                        className={`w-12 h-12 rounded-full bg-gradient-to-br ${colorClass} flex items-center justify-center shadow-lg border-4 border-white dark:border-gray-900`}
+                      >
+                        {isEmoji ? (
+                          <span className="text-2xl">{activity.icon}</span>
+                        ) : (
+                          Icon && <Icon className="w-6 h-6 text-white" />
+                        )}
+                      </div>
+                    )}
                   </div>
 
                   {/* Activity content */}
                   <div className="flex-1 pb-6">
-                    <div className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 border border-gray-200/50 dark:border-gray-700/50 shadow-sm hover:shadow-md transition-shadow">
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="flex-1">
-                          <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-1">
-                            {activity.title}
-                          </p>
-                          {activity.score !== undefined && (
-                            <p className="text-xs text-gray-600 dark:text-gray-400">
-                              Skor: {activity.score}%
-                            </p>
-                          )}
+                    {profileUrl ? (
+                      <Link href={profileUrl} className="block">
+                        <div className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 border border-gray-200/50 dark:border-gray-700/50 shadow-sm hover:shadow-md hover:border-blue-300 dark:hover:border-blue-600 transition-all cursor-pointer">
+                          <div className="flex items-start justify-between gap-4">
+                            <div className="flex-1">
+                              <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-1">
+                                <span className="mr-2">{activity.icon}</span>
+                                {activity.title}
+                              </p>
+                              {activity.score !== undefined && (
+                                <p className="text-xs text-gray-600 dark:text-gray-400">
+                                  Skor: {activity.score}%
+                                </p>
+                              )}
+                            </div>
+                            <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                              <Clock className="w-3 h-3" />
+                              <span>{activity.timeAgo}</span>
+                            </div>
+                          </div>
                         </div>
-                        <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
-                          <Clock className="w-3 h-3" />
-                          <span>{activity.timeAgo}</span>
+                      </Link>
+                    ) : (
+                      <div className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 border border-gray-200/50 dark:border-gray-700/50 shadow-sm hover:shadow-md transition-shadow">
+                        <div className="flex items-start justify-between gap-4">
+                          <div className="flex-1">
+                            <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-1">
+                              <span className="mr-2">{activity.icon}</span>
+                              {activity.title}
+                            </p>
+                            {activity.score !== undefined && (
+                              <p className="text-xs text-gray-600 dark:text-gray-400">
+                                Skor: {activity.score}%
+                              </p>
+                            )}
+                          </div>
+                          <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                            <Clock className="w-3 h-3" />
+                            <span>{activity.timeAgo}</span>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    )}
                   </div>
                 </div>
               );
             })}
+            {loadingMore && (
+              <div className="relative flex gap-4 items-center justify-center py-6">
+                <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                <span className="text-sm text-gray-600 dark:text-gray-400 ml-2">Daha fazla yükleniyor...</span>
+              </div>
+            )}
           </div>
         </div>
       </CardContent>

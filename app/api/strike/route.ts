@@ -411,7 +411,6 @@ export async function GET() {
         : null;
 
       let newStreak = streak.currentStreak;
-      let newTotalDays = streak.totalDaysActive;
       let shouldUpdate = false;
 
       if (!lastActivityDay || lastActivityDay.getTime() < today.getTime()) {
@@ -420,11 +419,6 @@ export async function GET() {
           shouldUpdate = true;
         } else if (lastActivityDay.getTime() < yesterday.getTime()) {
           newStreak = 1;
-          shouldUpdate = true;
-        }
-
-        if (!lastActivityDay || lastActivityDay.getTime() < today.getTime()) {
-          newTotalDays = streak.totalDaysActive + 1;
           shouldUpdate = true;
         }
       }
@@ -436,7 +430,7 @@ export async function GET() {
           data: {
             currentStreak: newStreak,
             longestStreak: newLongestStreak,
-            totalDaysActive: newTotalDays,
+            // Note: totalDaysActive is now only updated by login tracking, not by activity
             lastActivityDate: today,
           },
         });
@@ -452,14 +446,19 @@ export async function GET() {
     // Note: lastActivityDate is already updated at the beginning of the function
     // This section is only for updating streak when there's real activity today
 
-    // Count days with all tasks completed
+    // Count days with all tasks completed (for strike combo calculation)
     const daysWithAllTasksCompleted = weekDays.filter(
       (day) => day.allTasksCompleted && !day.isFuture
     ).length;
 
-    // Calculate weekly progress
+    // Count days with login (for weekly progress - represents days user logged in this week)
+    const daysWithLogin = weekDays.filter(
+      (day) => day.tasks.login && !day.isFuture
+    ).length;
+
+    // Calculate weekly progress - now based on login days instead of all tasks completed
     const weeklyProgress = {
-      daysCompleted: daysWithAllTasksCompleted,
+      daysCompleted: daysWithLogin,
       totalDays: 7,
       registrationDate: registrationDate.toISOString(),
       weekStart: monday.toISOString(),
@@ -467,55 +466,12 @@ export async function GET() {
     };
 
     // Calculate current strike combo (consecutive days with all tasks completed)
+    // This counts how many consecutive days (from today backwards) the user completed all tasks
+    // If today is completed, it starts from 1 (today counts as day 1)
     let currentStrikeCombo = 0;
     const todayAllCompleted = todayDay?.allTasksCompleted || false;
     
-    if (todayAllCompleted) {
-      // Get all daily_strike_completed events for this user, ordered by date descending
-      const strikeEvents = await db.gamificationEvent.findMany({
-        where: {
-          userId,
-          type: "daily_strike_completed",
-        },
-        select: {
-          occurredAt: true,
-          payload: true,
-        },
-        orderBy: {
-          occurredAt: "desc",
-        },
-      });
-
-      // Extract unique dates from events
-      const strikeDates = new Set<string>();
-      strikeEvents.forEach((event: { occurredAt: Date; payload: any }) => {
-        const eventDate = new Date(event.occurredAt);
-        const dateStr = eventDate.toISOString().split("T")[0];
-        strikeDates.add(dateStr);
-      });
-
-      // Check if today is completed (might not be in events yet if just completed)
-      const todayDateStr = today.toISOString().split("T")[0];
-      if (todayAllCompleted) {
-        strikeDates.add(todayDateStr);
-      }
-
-      // Calculate consecutive days from today backwards
-      let checkDate = new Date(today);
-      checkDate.setHours(0, 0, 0, 0);
-      
-      while (true) {
-        const dateStr = checkDate.toISOString().split("T")[0];
-        if (strikeDates.has(dateStr)) {
-          currentStrikeCombo++;
-          checkDate.setDate(checkDate.getDate() - 1);
-        } else {
-          break;
-        }
-      }
-    }
-
-    // Calculate longest strike combo (all time)
+    // Get all daily_strike_completed events once (optimize: single query instead of two)
     const allStrikeEvents = await db.gamificationEvent.findMany({
       where: {
         userId,
@@ -529,16 +485,18 @@ export async function GET() {
       },
     });
 
-    let longestStrikeCombo = 0;
-    if (allStrikeEvents.length > 0) {
-      // Extract unique dates and sort them
-      const allStrikeDates = new Set<string>();
-      allStrikeEvents.forEach((event: { occurredAt: Date }) => {
-        const eventDate = new Date(event.occurredAt);
-        const dateStr = eventDate.toISOString().split("T")[0];
-        allStrikeDates.add(dateStr);
-      });
+    // Extract unique dates from events
+    const allStrikeDates = new Set<string>();
+    allStrikeEvents.forEach((event: { occurredAt: Date }) => {
+      const eventDate = new Date(event.occurredAt);
+      eventDate.setHours(0, 0, 0, 0);
+      const dateStr = eventDate.toISOString().split("T")[0];
+      allStrikeDates.add(dateStr);
+    });
 
+    // Calculate longest strike combo (all time)
+    let longestStrikeCombo = 0;
+    if (allStrikeDates.size > 0) {
       const sortedDates = Array.from(allStrikeDates).sort();
       
       // Find longest consecutive sequence
@@ -570,6 +528,26 @@ export async function GET() {
       }
       
       longestStrikeCombo = Math.max(maxSequence, currentSequence);
+    }
+
+    // Calculate current strike combo (only if today is completed)
+    if (todayAllCompleted) {
+      currentStrikeCombo = 1; // Today counts as day 1
+      
+      // Calculate consecutive days from yesterday backwards (today already counted as 1)
+      let checkDate = new Date(today);
+      checkDate.setDate(checkDate.getDate() - 1); // Start from yesterday
+      checkDate.setHours(0, 0, 0, 0);
+      
+      while (true) {
+        const dateStr = checkDate.toISOString().split("T")[0];
+        if (allStrikeDates.has(dateStr)) {
+          currentStrikeCombo++;
+          checkDate.setDate(checkDate.getDate() - 1);
+        } else {
+          break;
+        }
+      }
     }
 
     // Calculate total login days using userStreak.totalDaysActive

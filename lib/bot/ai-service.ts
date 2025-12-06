@@ -73,11 +73,11 @@ Yorumunu yaz (sadece yorum metni, başka bir şey ekleme):`;
     console.error("[BOT_AI] Error generating comment:", error);
     // Fallback to simple comments
     const fallbackComments = [
-      "Harika bir paylaşım! 👍",
-      "Çok faydalı bilgiler, teşekkürler!",
-      "Bu konuda daha fazla bilgi paylaşabilir misin?",
+      "Harika bir paylaşım.",
+      "Çok faydalı bilgiler, teşekkürler.",
+      "Bu konuda daha fazla bilgi paylaşabilir misin.",
       "Güzel bir nokta, ben de benzer bir deneyim yaşamıştım.",
-      "Teşekkürler, not aldım!",
+      "Teşekkürler, not aldım.",
     ];
     return fallbackComments[Math.floor(Math.random() * fallbackComments.length)];
   }
@@ -176,9 +176,9 @@ Gönderiyi yaz (sadece gönderi metni, başka bir şey ekleme):`;
     console.error("[BOT_AI] Error generating post:", error);
     // Fallback to simple posts
     const fallbackPosts = [
-      "Bugün yeni bir şey öğrendim! Paylaşmak istedim. 🚀",
-      "Kodlama yaparken dikkat etmeniz gereken önemli bir nokta var...",
-      "Toplulukta güzel bir deneyim yaşadım, teşekkürler herkese!",
+      "Bugün yeni bir şey öğrendim. Paylaşmak istedim.",
+      "Kodlama yaparken dikkat etmeniz gereken önemli bir nokta var.",
+      "Toplulukta güzel bir deneyim yaşadım, teşekkürler herkese.",
       "Yazılım geliştirme konusunda birkaç ipucu paylaşmak istiyorum.",
       "Bugün harika bir kaynak keşfettim, sizinle de paylaşayım.",
     ];

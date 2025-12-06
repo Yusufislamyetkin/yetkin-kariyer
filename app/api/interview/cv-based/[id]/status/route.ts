@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { getUserIdFromSession } from "@/lib/auth-utils";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 10; // Status check için kısa timeout yeterli
@@ -11,7 +12,9 @@ export async function GET(
 ) {
   try {
     const session = await auth();
-    if (!session?.user?.id) {
+    const userId = await getUserIdFromSession(session);
+    
+    if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -42,7 +45,7 @@ export async function GET(
         where: { id: interview.cvId },
       });
 
-      if (!cv || cv.userId !== session.user.id) {
+      if (!cv || cv.userId !== userId) {
         return NextResponse.json(
           { error: "Bu interview'a erişim yetkiniz yok" },
           { status: 403 }

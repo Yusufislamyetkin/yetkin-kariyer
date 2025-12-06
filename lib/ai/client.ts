@@ -22,7 +22,11 @@ export class AIUnavailableError extends Error {
 }
 
 export class AIResponseValidationError extends Error {
-  constructor(message: string, public readonly payload: unknown) {
+  constructor(
+    message: string,
+    public readonly payload: unknown,
+    public readonly zodErrors?: z.ZodError
+  ) {
     super(message);
     this.name = "AIResponseValidationError";
   }
@@ -121,11 +125,36 @@ const parseWithSchema = <T>(schema: ZodSchema<T>, payload: string) => {
     return schema.parse(json);
   } catch (error) {
     if (error instanceof z.ZodError) {
-      throw new AIResponseValidationError(
-        "AI yanıtı beklenen JSON şemasına uymuyor.",
-        payload
-      );
+      // Log detailed validation errors
+      const errorDetails = error.errors.map((err) => ({
+        path: err.path.join("."),
+        message: err.message,
+        code: err.code,
+      }));
+      
+      console.error("[AI_CLIENT] Schema validation failed:", {
+        errors: errorDetails,
+        payloadPreview: payload.substring(0, 500), // First 500 chars for debugging
+        payloadLength: payload.length,
+      });
+      
+      // Create detailed error message
+      const errorSummary = errorDetails
+        .map((err) => `  - ${err.path || "root"}: ${err.message}`)
+        .join("\n");
+      
+      const detailedMessage = `AI yanıtı beklenen JSON şemasına uymuyor.\n\nHata detayları:\n${errorSummary}`;
+      
+      throw new AIResponseValidationError(detailedMessage, payload, error);
     }
+    
+    // Log JSON parse errors
+    console.error("[AI_CLIENT] JSON parse failed:", {
+      error: error instanceof Error ? error.message : String(error),
+      payloadPreview: payload.substring(0, 500),
+      payloadLength: payload.length,
+    });
+    
     throw new AIResponseValidationError(
       "AI yanıtı geçerli JSON formatında değil.",
       payload

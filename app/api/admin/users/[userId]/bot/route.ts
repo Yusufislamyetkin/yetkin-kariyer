@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { Prisma } from "@prisma/client";
+import { getCharacterProfileById } from "@/lib/bot/character-profiles";
 
 export async function POST(
   request: Request,
@@ -48,10 +49,27 @@ export async function POST(
       // If isBot is true but no botCharacter exists, continue to create one
     }
 
-    // Default bot character data
-    const defaultPersona = body.persona || `${user.name || "Bot"} karakteri - Yardımsever ve aktif bir topluluk üyesi.`;
-    const defaultSystemPrompt = body.systemPrompt || `Sen ${user.name || "bir bot"} karakterisin. Gerçekçi ve yardımsever bir şekilde davran. Topluluk içinde aktif ol ve diğer kullanıcılara yardımcı ol.`;
-    const defaultExpertise = body.expertise || [];
+    // Check if character profile is selected
+    let defaultPersona = body.persona;
+    let defaultSystemPrompt = body.systemPrompt;
+    let defaultExpertise = body.expertise || [];
+    
+    if (body.characterProfileId) {
+      const profile = getCharacterProfileById(body.characterProfileId);
+      if (profile) {
+        defaultPersona = body.persona || profile.persona;
+        defaultSystemPrompt = body.systemPrompt || profile.systemPrompt;
+        defaultExpertise = body.expertise || profile.defaultExpertise;
+      }
+    }
+    
+    // Fallback defaults if no profile selected
+    if (!defaultPersona) {
+      defaultPersona = `${user.name || "Bot"} karakteri - Yardımsever ve aktif bir topluluk üyesi.`;
+    }
+    if (!defaultSystemPrompt) {
+      defaultSystemPrompt = `Sen ${user.name || "bir bot"} karakterisin. Gerçekçi ve yardımsever bir şekilde davran. Topluluk içinde aktif ol ve diğer kullanıcılara yardımcı ol.`;
+    }
 
     // Create bot character and configuration in transaction
     const result = await db.$transaction(async (tx: Prisma.TransactionClient) => {
