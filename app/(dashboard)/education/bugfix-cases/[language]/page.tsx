@@ -43,6 +43,12 @@ const DIFFICULTY_LABELS: Record<string, string> = {
   advanced: "İleri",
 };
 
+const DIFFICULTY_STYLES: Record<string, string> = {
+  beginner: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300",
+  intermediate: "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300",
+  advanced: "bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300",
+};
+
 export default function BugfixLanguageCasesPage({
   params,
 }: {
@@ -117,12 +123,10 @@ export default function BugfixLanguageCasesPage({
                     <Bug className="h-6 w-6" style={{ color }} />
                   </div>
                   <span
-                    className="rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider"
-                    style={{
-                      backgroundColor: `${color}15`,
-                      color,
-                      border: `1px solid ${color}30`,
-                    }}
+                    className={`rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider ${
+                      DIFFICULTY_STYLES[caseItem.difficulty?.toLowerCase()] || 
+                      "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-200"
+                    }`}
                   >
                     {DIFFICULTY_LABELS[caseItem.difficulty] || caseItem.difficulty}
                   </span>

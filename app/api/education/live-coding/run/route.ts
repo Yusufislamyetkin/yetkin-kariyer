@@ -29,6 +29,21 @@ interface PistonRunResponse {
   message?: string;
 }
 
+interface PistonRuntime {
+  language: string;
+  version: string;
+  aliases: string[];
+}
+
+interface RuntimesCache {
+  data: Map<string, string[]>; // language -> versions[]
+  timestamp: number;
+}
+
+// Cache for runtimes data (1 hour)
+let runtimesCache: RuntimesCache | null = null;
+const CACHE_DURATION_MS = 60 * 60 * 1000; // 1 hour
+
 const LANGUAGE_MAP: Record<
   LiveCodingLanguage,
   { language: string; version: string; fileName: string }
@@ -37,18 +52,92 @@ const LANGUAGE_MAP: Record<
   javascript: { language: "javascript", version: "18.15.0", fileName: "main.js" },
   java: { language: "java", version: "15.0.2", fileName: "Main.java" },
   csharp: { language: "csharp", version: "6.12.0", fileName: "Program.cs" },
-  php: { language: "php", version: "8.2", fileName: "main.php" },
-  typescript: { language: "typescript", version: "5.0", fileName: "main.ts" },
-  go: { language: "go", version: "1.21", fileName: "main.go" },
-  rust: { language: "rust", version: "1.70", fileName: "main.rs" },
+  php: { language: "php", version: "8.2.3", fileName: "main.php" },
+  typescript: { language: "typescript", version: "5.0.3", fileName: "main.ts" },
+  go: { language: "go", version: "1.16.2", fileName: "main.go" },
+  rust: { language: "rust", version: "1.68.2", fileName: "main.rs" },
   cpp: { language: "cpp", version: "10.2.0", fileName: "main.cpp" },
-  kotlin: { language: "kotlin", version: "1.9", fileName: "Main.kt" },
-  ruby: { language: "ruby", version: "3.2", fileName: "main.rb" },
+  kotlin: { language: "kotlin", version: "1.8.20", fileName: "Main.kt" },
+  ruby: { language: "ruby", version: "3.0.1", fileName: "main.rb" },
 };
 
 const MAX_CODE_LENGTH = 100_000;
 const REQUEST_TIMEOUT_MS = 25_000;
 const FALLBACK_DELAY_MS = 250; // Minimum delay between fallback version attempts (must be > 200ms for Piston API rate limit)
+
+/**
+ * Fetches available runtimes from Piston API with caching
+ */
+async function getPistonRuntimes(): Promise<Map<string, string[]>> {
+  const now = Date.now();
+  
+  // Return cached data if still valid
+  if (runtimesCache && (now - runtimesCache.timestamp) < CACHE_DURATION_MS) {
+    return runtimesCache.data;
+  }
+
+  try {
+    const response = await fetch("https://emkc.org/api/v2/piston/runtimes", {
+      cache: "no-store",
+    });
+
+    if (!response.ok) {
+      console.error("Failed to fetch runtimes from Piston API:", response.status);
+      // Return empty map if fetch fails, will use fallback versions
+      return new Map();
+    }
+
+    const runtimes = (await response.json()) as PistonRuntime[];
+    
+    // Group by language and collect all versions
+    const languageVersions = new Map<string, string[]>();
+    
+    for (const runtime of runtimes) {
+      const lang = runtime.language;
+      if (!languageVersions.has(lang)) {
+        languageVersions.set(lang, []);
+      }
+      languageVersions.get(lang)!.push(runtime.version);
+    }
+
+    // Sort versions in descending order (newest first)
+    for (const [lang, versions] of languageVersions.entries()) {
+      versions.sort((a, b) => {
+        // Simple version comparison (works for most cases)
+        const aParts = a.split('.').map(Number);
+        const bParts = b.split('.').map(Number);
+        for (let i = 0; i < Math.max(aParts.length, bParts.length); i++) {
+          const aPart = aParts[i] || 0;
+          const bPart = bParts[i] || 0;
+          if (bPart !== aPart) {
+            return bPart - aPart;
+          }
+        }
+        return 0;
+      });
+    }
+
+    // Update cache
+    runtimesCache = {
+      data: languageVersions,
+      timestamp: now,
+    };
+
+    return languageVersions;
+  } catch (error) {
+    console.error("Error fetching runtimes from Piston API:", error);
+    // Return empty map if fetch fails, will use fallback versions
+    return new Map();
+  }
+}
+
+/**
+ * Gets supported versions for a language from Piston API
+ */
+async function getSupportedVersions(language: string): Promise<string[]> {
+  const runtimes = await getPistonRuntimes();
+  return runtimes.get(language) || [];
+}
 
 /**
  * Helper function to delay execution
@@ -143,29 +232,39 @@ export async function POST(request: Request) {
     const stdin = typeof body.stdin === "string" ? body.stdin : undefined;
     const config = LANGUAGE_MAP[language];
 
-    // PHP, TypeScript, Go, Rust, Kotlin ve Ruby için fallback versiyonlar (eğer bir versiyon çalışmazsa diğerini dene)
-    const getFallbackVersions = (lang: LiveCodingLanguage, defaultVersion: string): string[] => {
-      if (lang === "php") {
-        return ["8.2", "8.1", "8.0", "7.4"];
-      }
-      if (lang === "typescript") {
-        return ["5.0", "4.9", "4.8", "4.7"];
-      }
-      if (lang === "go") {
-        return ["1.21", "1.20", "1.19", "1.18"];
-      }
-      if (lang === "rust") {
-        return ["1.70", "1.69", "1.68", "1.67"];
-      }
-      if (lang === "kotlin") {
-        return ["1.9", "1.8", "1.7", "1.6"];
-      }
-      if (lang === "ruby") {
-        return ["3.2", "3.1", "3.0", "2.7"];
-      }
-      return [defaultVersion];
-    };
-    const fallbackVersions = getFallbackVersions(language, config.version);
+    // Get supported versions from Piston API
+    const supportedVersions = await getSupportedVersions(config.language);
+    
+    // If we have supported versions, use them; otherwise fall back to default
+    let fallbackVersions: string[];
+    if (supportedVersions.length > 0) {
+      // Use supported versions from Piston API (already sorted newest first)
+      fallbackVersions = supportedVersions;
+    } else {
+      // Fallback to hardcoded versions if API fails
+      const getFallbackVersions = (lang: LiveCodingLanguage, defaultVersion: string): string[] => {
+        if (lang === "php") {
+          return ["8.2", "8.1", "8.0", "7.4"];
+        }
+        if (lang === "typescript") {
+          return ["5.0", "4.9", "4.8", "4.7"];
+        }
+        if (lang === "go") {
+          return ["1.16.2"]; // Updated to match Piston API
+        }
+        if (lang === "rust") {
+          return ["1.68.2", "1.68", "1.67"]; // Updated to match Piston API
+        }
+        if (lang === "kotlin") {
+          return ["1.8.20", "1.8", "1.7"]; // Updated to match Piston API
+        }
+        if (lang === "ruby") {
+          return ["3.0.1", "3.0", "2.7"]; // Updated to match Piston API
+        }
+        return [defaultVersion];
+      };
+      fallbackVersions = getFallbackVersions(language, config.version);
+    }
     let lastError: string | null = null;
     let pistonResponse: Response | null = null;
     let payload: PistonRunResponse | null = null;
@@ -300,8 +399,15 @@ export async function POST(request: Request) {
           }
         }
 
-        // Check if error is about unknown runtime
-        if (errorMessage.includes("runtime") && errorMessage.includes("unknown")) {
+        // Check if error is about unknown/unsupported runtime
+        const lowerErrorMessage = errorMessage.toLowerCase();
+        const isRuntimeError = 
+          (lowerErrorMessage.includes("runtime") && (lowerErrorMessage.includes("unknown") || lowerErrorMessage.includes("not found") || lowerErrorMessage.includes("not available"))) ||
+          lowerErrorMessage.includes("unsupported") ||
+          lowerErrorMessage.includes("version not found") ||
+          lowerErrorMessage.includes("language not found");
+        
+        if (isRuntimeError) {
           // This version doesn't exist, try next one
           lastError = errorMessage;
           continue;
@@ -336,8 +442,19 @@ export async function POST(request: Request) {
       if (isRateLimitError(message)) {
         finalMessage = "Kod çalıştırma servisi şu anda yoğun. Lütfen birkaç saniye bekleyip tekrar deneyin.";
       } else {
-        // Translate other errors to Turkish
-        finalMessage = await translateErrorToTurkish(message);
+        // Check if all versions failed due to runtime errors
+        const lowerMessage = message.toLowerCase();
+        const isAllVersionsFailed = 
+          (lowerMessage.includes("runtime") && (lowerMessage.includes("unknown") || lowerMessage.includes("not found"))) ||
+          lowerMessage.includes("unsupported") ||
+          lowerMessage.includes("version not found");
+        
+        if (isAllVersionsFailed) {
+          finalMessage = "Bu programlama dili için desteklenen bir çalışma zamanı bulunamadı. Lütfen daha sonra tekrar deneyin veya farklı bir dil seçin.";
+        } else {
+          // Translate other errors to Turkish
+          finalMessage = await translateErrorToTurkish(message);
+        }
       }
       
       return NextResponse.json(
