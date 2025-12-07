@@ -434,10 +434,10 @@ function DashboardLayoutContent({
       </aside>
 
       {/* Main content */}
-      <div className={sidebarOpen ? "lg:pl-64" : ""}>
+      <div className={`${sidebarOpen ? "lg:pl-64" : ""} w-full max-w-full overflow-x-hidden`}>
         {/* Header with menu button */}
-        <div className="sticky top-0 z-30 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-700/50 min-w-0 pt-4">
-          <div className="flex items-center justify-between h-14 px-4 min-w-0">
+        <div className="sticky top-0 z-30 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-700/50 min-w-0 pt-4 w-full max-w-full">
+          <div className="flex items-center justify-between h-14 px-4 min-w-0 max-w-full">
             <button
               onClick={() => setSidebarOpen(true)}
               className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors flex-shrink-0 min-w-[24px]"
@@ -455,7 +455,7 @@ function DashboardLayoutContent({
         </div>
 
         {/* Page content */}
-        <main className="p-4 lg:p-6">{children}</main>
+        <main className="p-4 lg:p-6 w-full max-w-full overflow-x-hidden">{children}</main>
       </div>
       
       {/* Notification Container */}

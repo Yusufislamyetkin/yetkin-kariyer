@@ -26,6 +26,7 @@ interface ActivityTimelineProps {
   title?: string;
   headerContent?: React.ReactNode;
   loadingMore?: boolean;
+  hideHeaderIcon?: boolean;
 }
 
 const activityIcons = {
@@ -50,7 +51,7 @@ const activityColors = {
   interview: "from-purple-500 to-pink-500",
 };
 
-export function ActivityTimeline({ activities, title = "Son Aktiviteler", headerContent, loadingMore = false }: ActivityTimelineProps) {
+export function ActivityTimeline({ activities, title = "Son Aktiviteler", headerContent, loadingMore = false, hideHeaderIcon = false }: ActivityTimelineProps) {
   if (activities.length === 0) {
     return (
       <Card variant="glass">
@@ -68,9 +69,11 @@ export function ActivityTimeline({ activities, title = "Son Aktiviteler", header
       <CardHeader>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center shadow-lg">
-              <Clock className="w-5 h-5 text-white" />
-            </div>
+            {!hideHeaderIcon && (
+              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center shadow-lg">
+                <Clock className="w-5 h-5 text-white" />
+              </div>
+            )}
             <div>
               <CardTitle className="text-xl font-bold text-gray-900 dark:text-gray-100">
                 {title}
@@ -143,7 +146,6 @@ export function ActivityTimeline({ activities, title = "Son Aktiviteler", header
                           <div className="flex items-start justify-between gap-4">
                             <div className="flex-1">
                               <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-1">
-                                <span className="mr-2">{activity.icon}</span>
                                 {activity.title}
                               </p>
                               {activity.score !== undefined && (
@@ -164,8 +166,14 @@ export function ActivityTimeline({ activities, title = "Son Aktiviteler", header
                         <div className="flex items-start justify-between gap-4">
                           <div className="flex-1">
                             <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-1">
-                              <span className="mr-2">{activity.icon}</span>
-                              {activity.title}
+                              {activity.type === "badge" ? (
+                                activity.title
+                              ) : (
+                                <>
+                                  <span className="mr-2">{activity.icon}</span>
+                                  {activity.title}
+                                </>
+                              )}
                             </p>
                             {activity.score !== undefined && (
                               <p className="text-xs text-gray-600 dark:text-gray-400">

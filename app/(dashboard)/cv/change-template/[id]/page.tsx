@@ -277,7 +277,7 @@ export default function ChangeTemplatePage() {
         <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
           Tüm Template&apos;ler
         </h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-full overflow-x-hidden">
           {templates.map((template) => {
             const isCurrent = cv.templateId === template.id;
             const isChanging = changing === template.id;

@@ -257,7 +257,7 @@ export default function EarningsPage() {
 
   if (error || !earnings) {
     return (
-      <div className="space-y-6 animate-fade-in max-w-2xl mx-auto">
+      <div className="space-y-6 animate-fade-in max-w-2xl mx-auto w-full max-w-full overflow-x-hidden">
         <div>
           <h1 className="text-4xl md:text-5xl font-display font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 bg-clip-text text-transparent mb-2">
             Kazanç Analizi
@@ -334,7 +334,7 @@ export default function EarningsPage() {
       </Card>
 
       {/* Breakdown Cards */}
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-full overflow-x-hidden">
         <Card variant="elevated" className="border-2 border-purple-200 dark:border-purple-800 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 hover:shadow-lg transition-shadow">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">

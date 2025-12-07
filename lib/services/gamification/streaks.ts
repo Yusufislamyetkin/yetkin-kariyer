@@ -18,20 +18,25 @@ export async function updateDailyLoginStreak(userId: string, now = new Date()): 
 	yesterday.setUTCDate(today.getUTCDate() - 1);
 
 	let current = streak.currentStreak;
+	let shouldIncrementTotalDays = false;
 	if (!last) {
 		current = 1;
+		shouldIncrementTotalDays = true;
 	} else {
 		const lastDay = new Date(Date.UTC(last.getUTCFullYear(), last.getUTCMonth(), last.getUTCDate()));
 		if (lastDay.getTime() === today.getTime()) {
 			// already counted today, keep streak
+			shouldIncrementTotalDays = false;
 		} else if (lastDay.getTime() === yesterday.getTime()) {
 			current += 1;
+			shouldIncrementTotalDays = true;
 		} else {
 			current = 1;
+			shouldIncrementTotalDays = true;
 		}
 	}
 	const longest = Math.max(streak.longestStreak, current);
-	const totalDaysActive = (streak.totalDaysActive || 0) + 1;
+	const totalDaysActive = shouldIncrementTotalDays ? (streak.totalDaysActive || 0) + 1 : (streak.totalDaysActive || 0);
 	await db.userStreak.update({
 		where: { userId },
 		data: { currentStreak: current, longestStreak: longest, lastActivityDate: today, totalDaysActive },

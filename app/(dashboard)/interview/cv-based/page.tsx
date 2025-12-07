@@ -40,6 +40,7 @@ export default function CVBasedInterviewPage() {
   const pollingStartTimeRef = useRef<number | null>(null);
   const lastCvIdRef = useRef<string | null>(null); // Son denenen CV ID'yi sakla
   const maxPollingDuration = 5 * 60 * 1000; // 5 dakika maksimum polling süresi
+  const progressIntervalRef = useRef<NodeJS.Timeout | null>(null); // Progress animasyonu için ref
 
   // Interview-specific loading messages
   const loadingMessages = [
@@ -79,21 +80,46 @@ export default function CVBasedInterviewPage() {
     if (!creating) {
       setLoadingProgress(0);
       setLoadingMessageIndex(0);
+      // Progress interval'ı temizle
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current);
+        progressIntervalRef.current = null;
+      }
       return;
     }
 
-    // Progress bar animasyonu (interviewStatus'a göre güncellenir)
-    const progressInterval = setInterval(() => {
-      if (interviewStatus) {
-        setLoadingProgress(interviewStatus.progress);
-      } else {
-        // Henüz status gelmediyse yavaşça artır
-        setLoadingProgress((prev) => {
-          if (prev >= 20) return 20; // %20'ye kadar gider, status gelince gerçek değer kullanılır
-          return prev + Math.random() * 2;
-        });
+    // Hata durumunda progress animasyonunu durdur
+    if (interviewStatus?.status === "error") {
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current);
+        progressIntervalRef.current = null;
       }
-    }, 500);
+    }
+    // Tamamlanma durumunda progress'i 100'e çıkar ve durdur
+    else if (interviewStatus?.status === "completed") {
+      setLoadingProgress(100);
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current);
+        progressIntervalRef.current = null;
+      }
+    }
+    // Generating durumunda lineer progress animasyonu
+    else {
+      // Önceki interval'ı temizle
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current);
+      }
+      
+      // Lineer progress animasyonu - her 100ms'de bir artır
+      progressIntervalRef.current = setInterval(() => {
+        setLoadingProgress((prev) => {
+          // Maksimum %95'e kadar artır, tamamlanma gelene kadar beklet
+          if (prev >= 95) return 95;
+          // Her seferinde %0.5-1 arası rastgele artış (daha doğal görünmesi için)
+          return prev + 0.5 + Math.random() * 0.5;
+        });
+      }, 100);
+    }
 
     // Mesaj rotasyonu (her 3 saniyede bir değişir)
     const messageInterval = setInterval(() => {
@@ -101,7 +127,10 @@ export default function CVBasedInterviewPage() {
     }, 3000);
 
     return () => {
-      clearInterval(progressInterval);
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current);
+        progressIntervalRef.current = null;
+      }
       clearInterval(messageInterval);
     };
   }, [creating, interviewStatus]);
@@ -121,12 +150,13 @@ export default function CVBasedInterviewPage() {
 
   // Polling fonksiyonu
   const pollInterviewStatus = async (interviewId: string) => {
+    const pollStartTime = Date.now();
     try {
       // Timeout kontrolü
       if (pollingStartTimeRef.current) {
         const elapsed = Date.now() - pollingStartTimeRef.current;
         if (elapsed > maxPollingDuration) {
-          console.warn(`[CV_INTERVIEW] Polling timeout: ${interviewId} (${Math.round(elapsed / 1000)}s)`);
+          console.warn(`[CV_INTERVIEW_FRONTEND] ⚠️ Polling timeout: ${interviewId} (${Math.round(elapsed / 1000)}s)`);
           if (pollingIntervalRef.current) {
             clearInterval(pollingIntervalRef.current);
             pollingIntervalRef.current = null;
@@ -135,23 +165,44 @@ export default function CVBasedInterviewPage() {
           setCreating(null);
           setInterviewStatus(null);
           setLoadingProgress(0);
+          if (progressIntervalRef.current) {
+            clearInterval(progressIntervalRef.current);
+            progressIntervalRef.current = null;
+          }
           pollingStartTimeRef.current = null;
           return;
         }
       }
 
+      console.log(`[CV_INTERVIEW_FRONTEND] [POLL] Status kontrol ediliyor... (interviewId: ${interviewId})`);
       const response = await fetch(`/api/interview/cv-based/${interviewId}/status`);
       const data = await response.json();
+      const pollTime = Date.now() - pollStartTime;
 
       if (!response.ok) {
+        console.error(`[CV_INTERVIEW_FRONTEND] [POLL] ❌ Status kontrolü başarısız - süre: ${pollTime}ms`, {
+          status: response.status,
+          error: data.error,
+        });
         throw new Error(data.error || "Status kontrolü başarısız");
       }
 
+      console.log(`[CV_INTERVIEW_FRONTEND] [POLL] ✅ Status alındı - süre: ${pollTime}ms`, {
+        status: data.status,
+        stage: data.stage,
+        progress: data.progress,
+        questionCount: data.questionCount,
+      });
+
       setInterviewStatus(data);
-      setLoadingProgress(data.progress);
+      // Progress artışını useEffect'teki lineer animasyon yönetiyor, burada set etmiyoruz
 
       // Hata durumunu kontrol et
       if (data.status === "error") {
+        console.error(`[CV_INTERVIEW_FRONTEND] [POLL] ❌ Hata durumu tespit edildi`, {
+          error: data.error,
+          interviewId: interviewId,
+        });
         if (pollingIntervalRef.current) {
           clearInterval(pollingIntervalRef.current);
           pollingIntervalRef.current = null;
@@ -164,32 +215,51 @@ export default function CVBasedInterviewPage() {
         setCreating(null);
         setInterviewStatus(null);
         setLoadingProgress(0);
-        console.error(`[CV_INTERVIEW] Interview oluşturma hatası: ${interviewId}`, data.error);
+        if (progressIntervalRef.current) {
+          clearInterval(progressIntervalRef.current);
+          progressIntervalRef.current = null;
+        }
         return;
       }
 
       // Eğer tamamlandıysa polling'i durdur ve yönlendir
       if (data.status === "completed") {
+        const totalPollingTime = pollingStartTimeRef.current ? Date.now() - pollingStartTimeRef.current : 0;
+        console.log(`[CV_INTERVIEW_FRONTEND] [POLL] ✅ Tamamlandı! - Toplam polling süresi: ${Math.round(totalPollingTime / 1000)}s`, {
+          interviewId: interviewId,
+          questionCount: data.questionCount,
+        });
         if (pollingIntervalRef.current) {
           clearInterval(pollingIntervalRef.current);
           pollingIntervalRef.current = null;
         }
         pollingStartTimeRef.current = null;
-        setLoadingProgress(100);
+        // Progress 100'e çıkacak (useEffect'te handle ediliyor)
         setSuccess("Mülakat başarıyla oluşturuldu! Yönlendiriliyorsunuz...");
         setTimeout(() => {
           setCreating(null);
           router.push(`/interview/practice/${interviewId}`);
         }, 1500);
+      } else {
+        console.log(`[CV_INTERVIEW_FRONTEND] [POLL] ⏳ Devam ediyor... (status: ${data.status}, stage: ${data.stage})`);
       }
     } catch (error: any) {
-      console.error("[CV_INTERVIEW] Error polling interview status:", error);
-      // Hata durumunda polling'i durdur
+      const pollTime = Date.now() - pollStartTime;
+      console.error(`[CV_INTERVIEW_FRONTEND] [POLL] ❌ Polling hatası - süre: ${pollTime}ms`, {
+        interviewId: interviewId,
+        error: error.message,
+        stack: error.stack,
+      });
+      // Hata durumunda polling'i durdur ve modal'ı kapat
       if (pollingIntervalRef.current) {
         clearInterval(pollingIntervalRef.current);
         pollingIntervalRef.current = null;
       }
       pollingStartTimeRef.current = null;
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current);
+        progressIntervalRef.current = null;
+      }
       setError(error.message || "Mülakat durumu kontrol edilemedi. Lütfen sayfayı yenileyip tekrar deneyin.");
       setCreating(null);
       setInterviewStatus(null);
@@ -197,18 +267,27 @@ export default function CVBasedInterviewPage() {
     }
   };
 
-  // Polling'i temizle
+  // Polling ve progress interval'larını temizle
   useEffect(() => {
     return () => {
       if (pollingIntervalRef.current) {
         clearInterval(pollingIntervalRef.current);
         pollingIntervalRef.current = null;
       }
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current);
+        progressIntervalRef.current = null;
+      }
       pollingStartTimeRef.current = null;
     };
   }, []);
 
   const handleCreateInterview = async (cvId: string) => {
+    const createStartTime = Date.now();
+    console.log(`[CV_INTERVIEW_FRONTEND] ========== MÜLAKAT OLUŞTURMA BAŞLATILDI ==========`);
+    console.log(`[CV_INTERVIEW_FRONTEND] Timestamp: ${new Date().toISOString()}`);
+    console.log(`[CV_INTERVIEW_FRONTEND] cvId: ${cvId}`);
+    
     setCreating(cvId);
     setError(null);
     setSuccess(null);
@@ -223,8 +302,7 @@ export default function CVBasedInterviewPage() {
     pollingStartTimeRef.current = null;
 
     try {
-      console.log(`[CV_INTERVIEW] Interview oluşturma başlatılıyor: cvId=${cvId}`);
-      
+      console.log(`[CV_INTERVIEW_FRONTEND] [CREATE] API çağrısı yapılıyor...`);
       const response = await fetch("/api/interview/cv-based", {
         method: "POST",
         headers: {
@@ -233,31 +311,50 @@ export default function CVBasedInterviewPage() {
         body: JSON.stringify({ cvId }),
       });
 
+      const apiTime = Date.now() - createStartTime;
       const data = await response.json();
 
       if (!response.ok) {
+        console.error(`[CV_INTERVIEW_FRONTEND] [CREATE] ❌ API hatası - süre: ${apiTime}ms`, {
+          status: response.status,
+          error: data.error,
+        });
         throw new Error(data.error || "Mülakat oluşturulurken bir hata oluştu");
       }
 
       const interviewId = data.interview.id;
-      console.log(`[CV_INTERVIEW] Interview oluşturuldu: ${interviewId}, polling başlatılıyor...`);
+      console.log(`[CV_INTERVIEW_FRONTEND] [CREATE] ✅ Interview oluşturuldu - süre: ${apiTime}ms`, {
+        interviewId: interviewId,
+        title: data.interview.title,
+      });
 
       // Polling başlangıç zamanını kaydet
       pollingStartTimeRef.current = Date.now();
+      console.log(`[CV_INTERVIEW_FRONTEND] [CREATE] Polling başlatılıyor... (interval: 5s)`);
 
       // İlk status'u al
       await pollInterviewStatus(interviewId);
 
-      // Her 2.5 saniyede bir status kontrol et
+      // Her 5 saniyede bir status kontrol et (optimize edilmiş interval)
       pollingIntervalRef.current = setInterval(() => {
         pollInterviewStatus(interviewId);
-      }, 2500); // 2.5 saniye
+      }, 5000); // 5 saniye
+      console.log(`[CV_INTERVIEW_FRONTEND] [CREATE] ✅ Polling interval başlatıldı`);
     } catch (error: any) {
-      console.error("[CV_INTERVIEW] Error creating interview:", error);
+      const errorTime = Date.now() - createStartTime;
+      console.error(`[CV_INTERVIEW_FRONTEND] [CREATE] ❌ Interview oluşturma hatası - süre: ${errorTime}ms`, {
+        error: error.message,
+        stack: error.stack,
+        cvId: cvId,
+      });
       setError(error.message || "Mülakat oluşturulurken bir hata oluştu. Lütfen tekrar deneyin.");
       setCreating(null);
       setInterviewStatus(null);
       setLoadingProgress(0);
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current);
+        progressIntervalRef.current = null;
+      }
       pollingStartTimeRef.current = null;
     }
   };
@@ -276,15 +373,15 @@ export default function CVBasedInterviewPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="mb-8">
-        <div className="flex items-center gap-3 mb-4">
-          <MessageSquare className="w-8 h-8 text-blue-600 dark:text-blue-400" />
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100">
+    <div className="container mx-auto px-4 py-8 w-full max-w-full overflow-x-hidden">
+      <div className="mb-8 w-full max-w-full">
+        <div className="flex items-center gap-3 mb-4 flex-wrap">
+          <MessageSquare className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600 dark:text-blue-400 flex-shrink-0" />
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100">
             CV Bazlı Mülakat
           </h1>
         </div>
-        <p className="text-lg text-gray-600 dark:text-gray-400">
+        <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400">
           CV&apos;nize göre kişiselleştirilmiş bir mülakat oluşturun. Sistem, CV&apos;nizdeki bilgilere göre
           kapsamlı sorular hazırlayacaktır.
         </p>

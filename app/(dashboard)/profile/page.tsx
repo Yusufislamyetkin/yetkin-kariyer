@@ -159,7 +159,7 @@ export default function ProfilePage() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-purple-50/30 dark:from-gray-900 dark:via-gray-900 dark:to-gray-900 p-4 lg:p-6 space-y-6">
+    <main className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-purple-50/30 dark:from-gray-900 dark:via-gray-900 dark:to-gray-900 p-4 lg:p-6 space-y-6 w-full max-w-full overflow-x-hidden">
       {/* Profile Header */}
       <ProfileHeader user={displayUser} onUpdate={() => fetchProfileData({ silent: true })} />
 
@@ -178,14 +178,14 @@ export default function ProfilePage() {
       <ActivityTimeline activities={activities} />
 
       {/* Main Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full max-w-full">
         {/* Left Column - Posts */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="lg:col-span-2 space-y-6 w-full max-w-full overflow-x-hidden">
           <PostsSection userId={displayUser.id} compact={false} />
         </div>
 
         {/* Right Column - Badges */}
-        <div className="space-y-6">
+        <div className="space-y-6 w-full max-w-full overflow-x-hidden">
           {badges.length > 0 && (
             <BadgesSection badges={badges} displayedBadges={displayedBadges} />
           )}

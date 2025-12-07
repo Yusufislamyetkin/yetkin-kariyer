@@ -17,8 +17,13 @@ import { ConfirmDialog } from "@/app/components/ui/ConfirmDialog";
 import { CareerPlanQuestionnaire } from "../_components/CareerPlanQuestionnaire";
 import { AITeacherSelin } from "../_components/AITeacherSelin";
 import { CareerPlanResourceCard } from "../_components/CareerPlanResourceCard";
+import { RoadmapTree } from "../_components/RoadmapTree";
 import { AlertCircle, CheckCircle2, Lightbulb, Target as TargetIcon, Clock, Flag, Code2, BookOpen as BookOpenIcon, Zap, ExternalLink } from "lucide-react";
 import Link from "next/link";
+import {
+  getRoadmapForPath,
+  type CareerPathRoadmap,
+} from "@/lib/services/career/roadmap-steps";
 
 interface RoadmapTask {
   title: string;
@@ -203,10 +208,65 @@ export default function CareerRoadmapPage() {
   const [showQuestionnaire, setShowQuestionnaire] = useState(false);
   const [questionnaireData, setQuestionnaireData] = useState<QuestionnaireData | null>(null);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+  
+  // New tree structure state
+  const [roadmap, setRoadmap] = useState<CareerPathRoadmap | null>(null);
+  const [progress, setProgress] = useState<any>(null);
+  const [progressLoading, setProgressLoading] = useState(false);
 
   useEffect(() => {
     fetchPlan();
   }, []);
+
+  const fetchProgress = async (path: string) => {
+    setProgressLoading(true);
+    try {
+      const response = await fetch(`/api/career/roadmap/progress?path=${encodeURIComponent(path)}`);
+      if (response.ok) {
+        const data = await response.json();
+        setProgress(data);
+      }
+    } catch (error) {
+      console.error("Error fetching progress:", error);
+    } finally {
+      setProgressLoading(false);
+    }
+  };
+
+  // Determine career path from plan/questionnaire and fetch roadmap
+  useEffect(() => {
+    const determineCareerPath = async () => {
+      if (!plan && !questionnaireData) {
+        return;
+      }
+
+      // Try to get specialization from questionnaire data or plan
+      let specialization = questionnaireData?.specialization?.toLowerCase() || "";
+      
+      // Map specialization to career path
+      let careerPath = "";
+      if (specialization.includes("backend")) {
+        careerPath = "backend";
+      } else if (specialization.includes("frontend")) {
+        careerPath = "frontend";
+      } else if (specialization.includes("full") || specialization.includes("fullstack")) {
+        careerPath = "fullstack";
+      } else {
+        // Default to backend if unclear
+        careerPath = "backend";
+      }
+
+      const roadmapData = getRoadmapForPath(careerPath);
+      if (roadmapData) {
+        setRoadmap(roadmapData);
+        // Fetch progress
+        fetchProgress(careerPath);
+      }
+    };
+
+    determineCareerPath();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [plan, questionnaireData]);
 
   const fetchPlan = async () => {
     try {
@@ -492,10 +552,16 @@ export default function CareerRoadmapPage() {
             <Button
               variant="gradient"
               className="flex items-center gap-2"
-              onClick={handleGeneratePlanClick}
-              disabled={generating}
+              onClick={async () => {
+                if (roadmap) {
+                  await fetchProgress(roadmap.path);
+                } else {
+                  handleGeneratePlanClick();
+                }
+              }}
+              disabled={generating || progressLoading}
             >
-              {generating ? (
+              {(generating || progressLoading) ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin" />
                   Yenileniyor...
@@ -597,7 +663,17 @@ export default function CareerRoadmapPage() {
         </Card>
       )}
 
-      {plan.roadmap.length > 0 && (
+      {/* New Tree Structure Roadmap */}
+      {roadmap && (
+        <RoadmapTree
+          roadmap={roadmap}
+          progress={progress}
+          loading={progressLoading}
+        />
+      )}
+
+      {/* Legacy Roadmap Display (fallback if tree not available) */}
+      {!roadmap && plan.roadmap.length > 0 && (
         <Card variant="elevated">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">

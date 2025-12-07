@@ -216,6 +216,104 @@ Gönderiyi yaz (sadece gönderi metni, başka bir şey ekleme):`;
 }
 
 /**
+ * Generate LinkedIn-format post content based on bot character, topic, and post type
+ */
+export async function generateLinkedInPost(
+  botCharacter: { persona: string; systemPrompt: string; name: string; expertise?: string[] },
+  topic: string,
+  postType: 1 | 2 | 3 | 4
+): Promise<string> {
+  try {
+    const systemPrompt = botCharacter.systemPrompt || `Sen ${botCharacter.name} karakterisin. ${botCharacter.persona || "Yardımsever ve aktif bir topluluk üyesi."}`;
+
+    // Post type descriptions
+    const typeDescriptions = {
+      1: "Kişisel Hikaye/Tecrübe - Samimi, hafif öz eleştiri içeren ve öğretici bir ton kullan. Kişisel deneyimler ve dersler paylaş.",
+      2: "Teknik Karşılaştırma/Trend - Analitik ama heyecanlı ol. Karşılaştırmalı analiz yap, teknik detayları açıkla.",
+      3: "Sektörel Eleştiri/Tavsiye - Otoriter ve çözüm odaklı ol. Problemleri belirt ve çözüm önerileri sun.",
+      4: "İlginç Teknoloji Haberi - Merak uyandırıcı ve hafif gizemli ol. Haberi çarpıcı bir şekilde sun.",
+    };
+
+    const typeDescription = typeDescriptions[postType];
+
+    const userPrompt = `Sen, LinkedIn üzerinde geniş bir takipçi kitlesine sahip, hem teknik derinliği olan hem de hikaye anlatıcılığı (storytelling) güçlü bir Teknoloji Lideri ve İçerik Üreticisisin.
+
+Amacın: Aşağıda belirteceğim [KONU] hakkında, profesyonellerin ilgisini çekecek, okunabilirliği yüksek, düşündürücü ve etkileşim (beğeni/yorum) getirecek bir LinkedIn gönderisi hazırlamak.
+
+Yazım Tarzın ve Kuralların Şunlar Olmalı:
+
+1. GİRİŞ (KANCA): İlk cümle çok çarpıcı olmalı. Okuyucuyu hemen yakalamalı. Bazen bir soru, bazen şaşırtıcı bir gerçek, bazen de genel geçer bir doğruya meydan okuma şeklinde başla.
+
+2. YAPILANDIRMA: Asla devasa metin blokları kullanma. Paragrafları kısa tut (en fazla 2-3 cümle). Okumayı kolaylaştırmak için satır araları bırak.
+
+3. GÖRSELLİK:
+   - Önemli yerleri kalın (**bold**) yap.
+   - Listeleme yaparken standart madde işaretleri yerine emojiler kullan (örn: 🔹, 🚀, ⭐, ✅).
+   - Bölümleri ayırmak için "---" gibi ayraçlar kullanabilirsin.
+
+4. TON:
+   ${typeDescription}
+
+5. SONUÇ (CTA): Gönderiyi mutlaka okuyucuya bir soru sorarak veya bir sonraki adımı göstererek bitir. Tartışma başlatmalarını sağla.
+
+6. DİL: Akıcı, profesyonel ama samimi bir Türkçe kullan.
+
+7. HASHTAG: Gönderinin sonuna konuya uygun 3-5 hashtag ekle. Hashtag'ler Türkçe veya İngilizce olabilir.
+
+[KONU]: ${topic}
+[TÜR]: ${postType === 1 ? "Kişisel Hikaye/Tecrübe" : postType === 2 ? "Teknik Karşılaştırma/Trend" : postType === 3 ? "Sektörel Eleştiri/Tavsiye" : "İlginç Teknoloji Haberi"}
+
+Sadece post metnini ve sonuna uygun hashtag'leri çıktı olarak ver. Başka bir şey ekleme.`;
+
+    const result = await createChatCompletion({
+      messages: [
+        {
+          role: "system",
+          content: systemPrompt,
+        },
+        {
+          role: "user",
+          content: userPrompt,
+        },
+      ],
+      temperature: 0.85,
+    });
+
+    if (!result.content) {
+      throw new Error("Generated LinkedIn post is empty");
+    }
+    const content = result.content.trim();
+    if (!content || content.length < 50) {
+      throw new Error("Generated LinkedIn post is too short");
+    }
+
+    return content.substring(0, 2200); // Limit to 2200 chars
+  } catch (error: any) {
+    console.error("[BOT_AI] Error generating LinkedIn post:", error);
+    // Fallback to simple LinkedIn-style posts
+    const fallbackPosts = [
+      `**${topic}** hakkında düşüncelerim:
+
+🔹 Önemli bir nokta
+🚀 Bir diğer detay
+⭐ Sonuç
+
+Siz bu konuda ne düşünüyorsunuz?
+
+#teknoloji #yazılım #${topic.toLowerCase().replace(/\s+/g, "")}`,
+      `Bugün ${topic} konusunda bir şeyler öğrendim.
+
+Paylaşmak istedim çünkü...
+
+Siz de benzer bir deneyim yaşadınız mı?
+
+#tech #${topic.toLowerCase().replace(/\s+/g, "")}`,
+    ];
+    return fallbackPosts[Math.floor(Math.random() * fallbackPosts.length)];
+  }
+}
+
+/**
  * Answer test questions based on bot character and quiz
  */
 export async function answerTestQuestions(

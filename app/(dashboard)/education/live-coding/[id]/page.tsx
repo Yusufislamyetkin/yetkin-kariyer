@@ -1125,9 +1125,9 @@ export default function LiveCodingPage() {
   );
 
   return (
-    <div className="mx-auto w-full max-w-7xl space-y-6 pb-8 px-4 sm:px-6 lg:px-8 animate-fade-in pt-4">
+    <div className="mx-auto w-full max-w-7xl space-y-6 pb-8 px-4 sm:px-6 lg:px-8 animate-fade-in pt-4 overflow-x-hidden">
       {/* Header with back button */}
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex items-center justify-between gap-4 w-full max-w-full">
         <Link href={`/education/cases/${caseLanguage}`}>
           <Button variant="outline" size="sm" className="gap-2">
             <ArrowLeft className="h-4 w-4" />

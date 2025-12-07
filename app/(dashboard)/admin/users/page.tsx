@@ -3,9 +3,10 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/app/components/ui/Button";
-import { Loader2, Search, ArrowLeft, User as UserIcon, Mail, Calendar, Shield, ChevronLeft, ChevronRight, Bot, Settings, Trash2, Play, Activity, CheckCircle2, XCircle, Clock, UserMinus, Trash, ChevronDown } from "lucide-react";
+import { Loader2, Search, ArrowLeft, User as UserIcon, Mail, Calendar, Shield, ChevronLeft, ChevronRight, Bot, Settings, Trash2, Play, Activity, CheckCircle2, XCircle, Clock, UserMinus, Trash, ChevronDown, Linkedin } from "lucide-react";
 import Image from "next/image";
 import { BotConfigModal } from "./_components/BotConfigModal";
+import { LinkedInPostGenerator } from "./_components/LinkedInPostGenerator";
 import { ConfirmDialog } from "@/app/components/ui/ConfirmDialog";
 
 interface BotCharacter {
@@ -88,6 +89,7 @@ export default function AdminUsersPage() {
   const [clearActivitiesConfirmOpen, setClearActivitiesConfirmOpen] = useState(false);
   const [activityDropdownOpen, setActivityDropdownOpen] = useState<string | null>(null);
   const [executingActivity, setExecutingActivity] = useState<string | null>(null);
+  const [linkedInPostGeneratorOpen, setLinkedInPostGeneratorOpen] = useState(false);
 
   const fetchUsers = async (page: number = 1, searchQuery: string = "", role: string = "") => {
     setLoading(true);
@@ -447,6 +449,14 @@ export default function AdminUsersPage() {
                 </div>
               )}
               <div className="flex items-center gap-2 flex-wrap">
+                <Button
+                  onClick={() => setLinkedInPostGeneratorOpen(true)}
+                  variant="outline"
+                  className="border-blue-300 text-blue-600 hover:bg-blue-50 dark:border-blue-800 dark:text-blue-400 dark:hover:bg-blue-950/30"
+                >
+                  <Linkedin className="h-4 w-4 mr-2" />
+                  LinkedIn Post Oluştur
+                </Button>
                 <Button
                   onClick={handleRunBots}
                   disabled={runningBots}
@@ -1114,6 +1124,13 @@ export default function AdminUsersPage() {
         onCancel={() => {
           setClearActivitiesConfirmOpen(false);
         }}
+      />
+
+      {/* LinkedIn Post Generator Modal */}
+      <LinkedInPostGenerator
+        isOpen={linkedInPostGeneratorOpen}
+        onClose={() => setLinkedInPostGeneratorOpen(false)}
+        users={users}
       />
     </div>
   );

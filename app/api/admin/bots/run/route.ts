@@ -6,11 +6,12 @@ import {
   likePosts,
   commentOnPosts,
   createPost,
+  createLinkedInPost,
   completeLessons,
   completeTests,
   completeLiveCoding,
 } from "@/lib/bot/bot-activity-service";
-import { analyzePostForComment, generatePostContent, answerTestQuestions } from "@/lib/bot/ai-service";
+import { analyzePostForComment, generatePostContent, generateLinkedInPost, answerTestQuestions } from "@/lib/bot/ai-service";
 import { simulateBotLogin } from "@/lib/bot/bot-session";
 
 export async function POST(request: Request) {
@@ -164,13 +165,39 @@ export async function POST(request: Request) {
           const needed = config.maxPostsPerDay - todayPosts;
           if (needed > 0 && Math.random() < 0.5) {
             // 50% chance to create a post
-            const result = await createPost(
-              bot.id,
-              (newsSource) => generatePostContent(character, newsSource),
-              character.expertise
-            );
-            if (result.success) {
-              botResult.activities.push({ type: "createPost", ...result });
+            // 30% chance to create LinkedIn post, 70% chance for regular post
+            const useLinkedInPost = Math.random() < 0.3;
+            
+            if (useLinkedInPost) {
+              // Generate LinkedIn post with random topic and type
+              const topics = character.expertise && character.expertise.length > 0
+                ? character.expertise
+                : ["yazılım geliştirme", "teknoloji trendleri", "programlama ipuçları", "kariyer tavsiyeleri"];
+              
+              const randomTopic = topics[Math.floor(Math.random() * topics.length)];
+              const randomPostType = (Math.floor(Math.random() * 4) + 1) as 1 | 2 | 3 | 4;
+              
+              const result = await createLinkedInPost(
+                bot.id,
+                (topic: string, postType: 1 | 2 | 3 | 4) => generateLinkedInPost(character, topic, postType),
+                randomTopic,
+                randomPostType,
+                character.expertise
+              );
+              
+              if (result.success) {
+                botResult.activities.push({ type: "createLinkedInPost", ...result });
+              }
+            } else {
+              // Regular post
+              const result = await createPost(
+                bot.id,
+                (newsSource) => generatePostContent(character, newsSource),
+                character.expertise
+              );
+              if (result.success) {
+                botResult.activities.push({ type: "createPost", ...result });
+              }
             }
           }
         }

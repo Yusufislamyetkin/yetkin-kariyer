@@ -1187,15 +1187,15 @@ export default function InterviewRoomPage() {
         <div className="bg-red-600 px-4 py-3 text-center text-sm font-semibold text-white">{warning}</div>
       )}
 
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-          <div>
-            <h1 className="text-2xl font-bold md:text-3xl">{interview.title}</h1>
+      <div className="container mx-auto px-4 py-8 w-full max-w-full overflow-x-hidden">
+        <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between w-full max-w-full">
+          <div className="w-full md:w-auto min-w-0">
+            <h1 className="text-xl sm:text-2xl font-bold md:text-3xl truncate">{interview.title}</h1>
             {interview.description && (
-              <p className="mt-2 max-w-2xl text-sm text-gray-300">{interview.description}</p>
+              <p className="mt-2 max-w-2xl text-xs sm:text-sm text-gray-300">{interview.description}</p>
             )}
           </div>
-          <div className="flex flex-wrap items-center justify-end gap-3">
+          <div className="flex flex-wrap items-center justify-end gap-3 w-full md:w-auto">
             <button
               type="button"
               onClick={() => setExitIntent("leave")}
@@ -1210,7 +1210,7 @@ export default function InterviewRoomPage() {
           </div>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_380px]">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_380px] w-full max-w-full overflow-x-hidden">
           <div className="rounded-2xl border border-gray-800 bg-gray-900/80 p-6 shadow-xl shadow-gray-900/40">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>

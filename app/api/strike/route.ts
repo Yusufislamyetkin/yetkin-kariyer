@@ -3,6 +3,7 @@ import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
 import { recordEvent } from "@/lib/services/gamification/antiAbuse";
 import { applyRules } from "@/lib/services/gamification/rules";
+import { updateDailyLoginStreak } from "@/lib/services/gamification/streaks";
 
 interface DayTaskStatus {
   date: string;
@@ -163,13 +164,23 @@ export async function GET() {
       "owasp-community",
     ];
 
-    // Update lastActivityDate for today's login BEFORE processing activities
-    // This ensures login is marked as completed when the API is called
-    if (!streak.lastActivityDate || new Date(streak.lastActivityDate).setHours(0, 0, 0, 0) !== today.getTime()) {
-      streak = await db.userStreak.update({
-        where: { userId },
+    // Update login streak and totalDaysActive for today's login BEFORE processing activities
+    // This ensures login is marked as completed when the API is called and totalDaysActive is properly maintained
+    // updateDailyLoginStreak handles duplicate calls for the same day, so it's safe to call every time
+    await updateDailyLoginStreak(userId, now);
+    
+    // Refresh streak data after update
+    streak = await db.userStreak.findUnique({
+      where: { userId },
+    });
+    
+    if (!streak) {
+      streak = await db.userStreak.create({
         data: {
-          lastActivityDate: today,
+          userId,
+          currentStreak: 0,
+          longestStreak: 0,
+          totalDaysActive: 0,
         },
       });
     }

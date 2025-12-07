@@ -151,11 +151,11 @@ export default function Home() {
   ];
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-cyan-50 dark:from-gray-900 dark:via-slate-900 dark:to-gray-800 transition-colors duration-200">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-cyan-50 dark:from-gray-900 dark:via-slate-900 dark:to-gray-800 transition-colors duration-200 w-full max-w-full overflow-x-hidden">
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 glass border-b border-gray-200/50 dark:border-gray-700/50">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
+      <nav className="sticky top-0 z-50 glass border-b border-gray-200/50 dark:border-gray-700/50 w-full max-w-full">
+        <div className="container mx-auto px-4 py-4 max-w-full overflow-x-hidden">
+          <div className="flex items-center justify-between flex-wrap gap-2">
             <Link href="/" className="text-2xl font-display font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent md:bg-gradient-to-r md:from-blue-600 md:via-indigo-600 md:to-cyan-600 md:bg-[length:200%_auto] md:animate-text-shimmer">
               YTK Academy
             </Link>
@@ -175,12 +175,12 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-16 lg:py-24 relative">
-        <div className="text-center max-w-5xl mx-auto animate-fade-in">
-          <div className="inline-block mb-6 px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm font-semibold">
+      <section className="container mx-auto px-4 py-16 lg:py-24 relative w-full max-w-full overflow-x-hidden">
+        <div className="text-center max-w-5xl mx-auto animate-fade-in w-full">
+          <div className="inline-block mb-6 px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm font-semibold max-w-full">
             🚀 Kapsamlı Eğitim, Sosyal Ağ ve Kariyer Platformu
           </div>
-          <h1 className="text-6xl md:text-7xl lg:text-8xl font-display font-extrabold mb-6 bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 bg-clip-text text-transparent md:bg-gradient-to-r md:from-blue-600 md:via-indigo-600 md:to-cyan-600 md:bg-[length:200%_auto] md:animate-text-shimmer leading-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-display font-extrabold mb-6 bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 bg-clip-text text-transparent md:bg-gradient-to-r md:from-blue-600 md:via-indigo-600 md:to-cyan-600 md:bg-[length:200%_auto] md:animate-text-shimmer leading-tight px-2">
             Yazılım Öğren, İş Bul, Kazanç Elde Et
           </h1>
           <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-8 animate-slide-up font-medium max-w-3xl mx-auto leading-relaxed">
@@ -222,16 +222,16 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="container mx-auto px-4 py-16 lg:py-24">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 bg-clip-text text-transparent md:bg-gradient-to-r md:from-blue-600 md:via-indigo-600 md:to-cyan-600 md:bg-[length:200%_auto] md:animate-text-shimmer">
+      <section className="container mx-auto px-4 py-16 lg:py-24 w-full max-w-full overflow-x-hidden">
+        <div className="text-center mb-16 w-full">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-4 bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 bg-clip-text text-transparent md:bg-gradient-to-r md:from-blue-600 md:via-indigo-600 md:to-cyan-600 md:bg-[length:200%_auto] md:animate-text-shimmer px-2">
             Platform Özellikleri
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-400 font-medium max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 font-medium max-w-2xl mx-auto px-2">
             Eğitim, sosyal ağ, hackathon, freelancer fırsatları ve kariyer geliştirme - ihtiyacınız olan tüm araçlar tek bir platformda
           </p>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 w-full max-w-full">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (

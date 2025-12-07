@@ -411,14 +411,14 @@ export default function DashboardPage() {
   const displayedAiRecommendations = aiRecommendations.slice(0, 1);
 
   return (
-    <div className="space-y-8 animate-fade-in">
+    <div className="space-y-8 animate-fade-in w-full max-w-full overflow-x-hidden">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <div>
-          <h1 className="text-4xl md:text-5xl font-display font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 bg-clip-text text-transparent md:bg-gradient-to-r md:from-blue-600 md:via-indigo-600 md:to-cyan-600 md:bg-[length:200%_auto] md:animate-text-shimmer mb-2">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 w-full max-w-full">
+        <div className="w-full max-w-full">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 bg-clip-text text-transparent md:bg-gradient-to-r md:from-blue-600 md:via-indigo-600 md:to-cyan-600 md:bg-[length:200%_auto] md:animate-text-shimmer mb-2">
             Dashboard
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 text-lg font-medium">
+          <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 font-medium">
             Kariyerinize genel bakış ve hızlı erişim
           </p>
         </div>
@@ -428,7 +428,7 @@ export default function DashboardPage() {
       <StrikeDisplay strikeData={strikeData} loading={strikeLoading} />
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-full">
         {statsLoading ? (
           Array.from({ length: 4 }).map((_, index) => (
             <Card
@@ -536,16 +536,16 @@ export default function DashboardPage() {
       ) : null}
 
       {/* Quick Actions & AI Recommendations */}
-      <div className="grid md:grid-cols-3 gap-6">
-        <Card variant="elevated" hover className="md:col-span-2">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-full">
+        <Card variant="elevated" hover className="md:col-span-2 w-full max-w-full overflow-x-hidden">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-xl">
-              <Activity className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+            <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+              <Activity className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600 dark:text-blue-400" />
               Hızlı Erişim
             </CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="grid sm:grid-cols-2 gap-5">
+          <CardContent className="w-full max-w-full overflow-x-hidden">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 w-full max-w-full">
               {quickActions.map((action, index) => {
                 const Icon = action.icon;
                 return (
@@ -852,6 +852,7 @@ export default function DashboardPage() {
           }))}
           title="Kullanıcı Hareketleri"
           loadingMore={activitiesLoadingMore}
+          hideHeaderIcon={true}
           headerContent={
             <div className="flex items-center gap-2">
               <button

@@ -371,6 +371,79 @@ export async function createPost(
 }
 
 /**
+ * Create a LinkedIn-format post (AI-generated content)
+ */
+export async function createLinkedInPost(
+  userId: string,
+  generateLinkedInPost: (topic: string, postType: 1 | 2 | 3 | 4) => Promise<string>,
+  topic: string,
+  postType: 1 | 2 | 3 | 4,
+  botExpertise?: string[]
+) {
+  try {
+    const content = await generateLinkedInPost(topic, postType);
+    if (!content || content.trim().length === 0) {
+      throw new Error("Generated LinkedIn post content is empty");
+    }
+
+    const post = await db.post.create({
+      data: {
+        userId,
+        content: content.trim().substring(0, 2200), // Limit to 2200 chars
+      },
+    });
+
+    // Gamification: Record event and apply rules
+    try {
+      const event = await recordEvent({
+        userId,
+        type: "post_created",
+        payload: { postId: post.id },
+      });
+      await applyRules({ userId, type: "post_created", payload: { sourceEventId: event.id } });
+    } catch (e) {
+      console.warn(`[BOT_LINKEDIN_POST] Gamification failed:`, e);
+    }
+
+    // Check badges for post activity
+    try {
+      const badgeResults = await checkBadgesForActivity({
+        userId,
+        // activityType is optional, post activity doesn't have a specific type
+      });
+      if (badgeResults.totalEarned > 0) {
+        console.log(`[BOT_LINKEDIN_POST] Bot ${userId} earned ${badgeResults.totalEarned} badges`);
+      }
+    } catch (e) {
+      console.warn(`[BOT_LINKEDIN_POST] Badge check failed:`, e);
+    }
+
+    await logBotActivity({
+      userId,
+      activityType: BotActivityType.POST,
+      targetId: post.id,
+      details: {
+        contentLength: post.content?.length || 0,
+        postType: "linkedin",
+        topic,
+        postTypeId: postType,
+      },
+      success: true,
+    });
+
+    return { success: true, postId: post.id };
+  } catch (error: any) {
+    await logBotActivity({
+      userId,
+      activityType: BotActivityType.POST,
+      success: false,
+      errorMessage: error.message || "Failed to create LinkedIn post",
+    });
+    return { success: false, error: error.message };
+  }
+}
+
+/**
  * Complete random lessons
  */
 export async function completeLessons(userId: string, count: number = 2) {

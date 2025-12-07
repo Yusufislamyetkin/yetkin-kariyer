@@ -62,38 +62,49 @@ async function loadBadgesFromJson() {
   }
 }
 
+// Get week number for weekly periodDate format
+const getWeekNumber = (date: Date): number => {
+  const d = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
+  const dayNum = d.getUTCDay() || 7;
+  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  return Math.ceil(((d.getTime() - yearStart.getTime()) / 86400000 + 1) / 7);
+};
+
 // Get period bounds for leaderboard
 function getPeriodBounds(period: "daily" | "weekly" | "monthly") {
+  // Use UTC for all date calculations to match database timestamps
   const now = new Date();
+  const nowUTC = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds()));
+  
   let periodDate: string;
   let startDate: Date;
   let endDate: Date;
 
   if (period === "daily") {
-    const today = new Date(now);
-    today.setHours(0, 0, 0, 0);
-    periodDate = today.toISOString().split("T")[0];
-    startDate = new Date(today);
-    endDate = new Date(today);
-    endDate.setHours(23, 59, 59, 999);
+    // Get today's date in UTC
+    periodDate = nowUTC.toISOString().split("T")[0];
+    startDate = new Date(Date.UTC(nowUTC.getUTCFullYear(), nowUTC.getUTCMonth(), nowUTC.getUTCDate(), 0, 0, 0, 0));
+    endDate = new Date(Date.UTC(nowUTC.getUTCFullYear(), nowUTC.getUTCMonth(), nowUTC.getUTCDate() + 1, 0, 0, 0, 0));
   } else if (period === "weekly") {
-    const dayOfWeek = now.getDay();
-    const monday = new Date(now);
-    monday.setDate(now.getDate() - (dayOfWeek === 0 ? 6 : dayOfWeek - 1));
-    monday.setHours(0, 0, 0, 0);
-    periodDate = monday.toISOString().split("T")[0];
-    startDate = new Date(monday);
-    endDate = new Date(monday);
-    endDate.setDate(endDate.getDate() + 6);
-    endDate.setHours(23, 59, 59, 999);
+    // Get Monday of current week in UTC
+    const day = nowUTC.getUTCDay();
+    const diff = nowUTC.getUTCDate() - day + (day === 0 ? -6 : 1); // Adjust when day is Sunday
+    const mondayUTC = new Date(Date.UTC(nowUTC.getUTCFullYear(), nowUTC.getUTCMonth(), diff, 0, 0, 0, 0));
+    startDate = mondayUTC;
+    
+    // Get Sunday of current week (end of week)
+    endDate = new Date(Date.UTC(mondayUTC.getUTCFullYear(), mondayUTC.getUTCMonth(), mondayUTC.getUTCDate() + 7, 0, 0, 0, 0));
+    
+    // Format periodDate as YYYY-WW (year-week number)
+    const year = startDate.getUTCFullYear();
+    const weekNumber = getWeekNumber(startDate);
+    periodDate = `${year}-W${String(weekNumber).padStart(2, "0")}`;
   } else {
-    // monthly
-    const firstDay = new Date(now.getFullYear(), now.getMonth(), 1);
-    firstDay.setHours(0, 0, 0, 0);
-    periodDate = firstDay.toISOString().split("T")[0];
-    startDate = new Date(firstDay);
-    endDate = new Date(now.getFullYear(), now.getMonth() + 1, 0);
-    endDate.setHours(23, 59, 59, 999);
+    // monthly - use UTC
+    periodDate = `${nowUTC.getUTCFullYear()}-${String(nowUTC.getUTCMonth() + 1).padStart(2, "0")}`;
+    startDate = new Date(Date.UTC(nowUTC.getUTCFullYear(), nowUTC.getUTCMonth(), 1, 0, 0, 0, 0));
+    endDate = new Date(Date.UTC(nowUTC.getUTCFullYear(), nowUTC.getUTCMonth() + 1, 1, 0, 0, 0, 0));
   }
 
   return { periodDate, startDate, endDate };

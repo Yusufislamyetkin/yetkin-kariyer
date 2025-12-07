@@ -378,7 +378,7 @@ export default function FreelancerProjectsPage() {
           </CardContent>
         </Card>
       ) : (
-        <div className="grid gap-4 sm:gap-5 md:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:gap-5 md:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full max-w-full overflow-x-hidden">
           {filteredAndSortedProjects.map((project) => (
             <Link key={project.id} href={`/freelancer/projects/${project.id}`}>
               <Card variant="elevated" hover className="h-full transition-all duration-300">

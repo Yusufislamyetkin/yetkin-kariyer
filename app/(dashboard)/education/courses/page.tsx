@@ -100,10 +100,10 @@ export default function CoursesPage() {
   }
 
   return (
-    <div className="space-y-8 md:space-y-10 animate-fade-in">
+    <div className="space-y-8 md:space-y-10 animate-fade-in w-full max-w-full overflow-x-hidden">
       <HeroSection stats={heroStats} />
 
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-6 w-full max-w-full">
         {error ? (
           <Card variant="elevated" className="border-red-200 dark:border-red-800/50">
             <CardContent className="py-12 md:py-16">
@@ -135,7 +135,7 @@ export default function CoursesPage() {
             </CardContent>
           </Card>
         ) : (
-          <div className="grid gap-4 sm:gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 xl:grid-cols-3 w-full max-w-full">
             {courses.map((course, index) => {
               // Her kurs için farklı gradient renkleri (admin sayfası gibi)
               const gradients = [

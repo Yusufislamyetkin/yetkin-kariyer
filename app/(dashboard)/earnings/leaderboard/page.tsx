@@ -133,20 +133,20 @@ export default function EarningsLeaderboardPage() {
   const rankLabels = ["1.", "2.", "3."];
 
   return (
-    <div className="animate-fade-in space-y-6 pb-10 md:space-y-8">
-      <div>
-        <h1 className="mb-2 bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 bg-clip-text text-4xl font-display font-bold text-transparent md:text-5xl">
+    <div className="animate-fade-in space-y-6 pb-10 md:space-y-8 w-full max-w-full overflow-x-hidden">
+      <div className="w-full max-w-full">
+        <h1 className="mb-2 bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 bg-clip-text text-3xl sm:text-4xl font-display font-bold text-transparent md:text-5xl">
           En Çok Kazananlar
         </h1>
-        <p className="text-lg font-medium text-gray-600 dark:text-gray-400">
+        <p className="text-base sm:text-lg font-medium text-gray-600 dark:text-gray-400">
           Platformda en çok kazanç elde eden kullanıcıları görüntüle
         </p>
       </div>
 
       {/* Period Selector */}
-      <div className="rounded-3xl border border-gray-200/70 bg-white/80 p-6 shadow-sm backdrop-blur dark:border-gray-800/60 dark:bg-gray-900/60">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div>
+      <div className="rounded-3xl border border-gray-200/70 bg-white/80 p-4 sm:p-6 shadow-sm backdrop-blur dark:border-gray-800/60 dark:bg-gray-900/60 w-full max-w-full overflow-x-hidden">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between w-full max-w-full">
+          <div className="w-full sm:w-auto">
             <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">
               Sıralama Periyodu
             </p>
@@ -158,7 +158,7 @@ export default function EarningsLeaderboardPage() {
                 : "Son 30 gündeki kazançlar"}
             </p>
           </div>
-          <div className="inline-flex items-center gap-1 rounded-full border border-gray-200 bg-gray-50 p-1 text-sm shadow-sm dark:border-gray-700 dark:bg-gray-900/70">
+          <div className="inline-flex items-center gap-1 rounded-full border border-gray-200 bg-gray-50 p-1 text-xs sm:text-sm shadow-sm dark:border-gray-700 dark:bg-gray-900/70 w-full sm:w-auto justify-center sm:justify-start flex-wrap">
             {(
               [
                 { value: "daily", label: "Günlük" },
@@ -172,7 +172,7 @@ export default function EarningsLeaderboardPage() {
                   key={value}
                   type="button"
                   onClick={() => setPeriod(value)}
-                  className={`rounded-full px-4 py-2 font-semibold transition ${
+                  className={`rounded-full px-3 sm:px-4 py-2 font-semibold transition text-xs sm:text-sm ${
                     isActive
                       ? period === "daily"
                         ? "bg-gradient-to-r from-blue-500 via-indigo-500 to-cyan-500 text-white shadow"
@@ -191,28 +191,28 @@ export default function EarningsLeaderboardPage() {
       </div>
 
       {currentUserEntry && (
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950/40 dark:via-indigo-900/40 dark:to-purple-900/40 rounded-2xl border border-blue-200/60 dark:border-blue-800/60 shadow-[0_25px_45px_-35px_rgba(59,130,246,0.45)]">
-          <div className="flex items-center gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 sm:p-6 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950/40 dark:via-indigo-900/40 dark:to-purple-900/40 rounded-2xl border border-blue-200/60 dark:border-blue-800/60 shadow-[0_25px_45px_-35px_rgba(59,130,246,0.45)] w-full max-w-full overflow-x-hidden">
+          <div className="flex items-center gap-4 w-full sm:w-auto">
             <div className="flex items-center gap-2">
-              <Trophy className="h-10 w-10 text-yellow-500" />
-              <div>
+              <Trophy className="h-8 w-8 sm:h-10 sm:w-10 text-yellow-500 flex-shrink-0" />
+              <div className="min-w-0">
                 <p className="text-xs font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-300">
                   Senin Sıralaman
                 </p>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-4xl font-bold text-gray-900 dark:text-gray-100">
+                  <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100">
                     #{currentUserEntry.rank}
                   </span>
                 </div>
               </div>
             </div>
           </div>
-          <div className="flex flex-col items-start sm:items-end gap-1">
+          <div className="flex flex-col items-start sm:items-end gap-1 w-full sm:w-auto">
             <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
               Toplam Kazanç
             </p>
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+              <span className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">
                 {currentUserEntry.totalEarnings.toLocaleString("tr-TR")} ₺
               </span>
             </div>
@@ -222,11 +222,11 @@ export default function EarningsLeaderboardPage() {
 
       <Card
         variant="elevated"
-        className="border border-gray-200/70 bg-white/80 shadow-xl dark:border-gray-800/60 dark:bg-gray-900/60"
+        className="border border-gray-200/70 bg-white/80 shadow-xl dark:border-gray-800/60 dark:bg-gray-900/60 w-full max-w-full overflow-x-hidden"
       >
-        <CardHeader className="border-b border-gray-200/60 dark:border-gray-800/60">
-          <CardTitle className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div className="flex items-center gap-3">
+        <CardHeader className="border-b border-gray-200/60 dark:border-gray-800/60 w-full max-w-full">
+          <CardTitle className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between w-full max-w-full">
+            <div className="flex items-center gap-3 w-full max-w-full">
               <div
                 className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-green-500 via-emerald-500 to-teal-600 text-white shadow-lg"
               >
@@ -277,7 +277,7 @@ export default function EarningsLeaderboardPage() {
                       İlk Üç Kazanan
                     </h2>
                   </div>
-                  <div className="grid gap-6 md:grid-cols-3">
+                  <div className="grid grid-cols-1 gap-6 md:grid-cols-3 w-full max-w-full">
                     {topThree.map((entry, index) => {
                       const variant = rankVariants[index];
                       const Icon = rankIcons[index];
@@ -294,14 +294,14 @@ export default function EarningsLeaderboardPage() {
                             href={`/profile/${entry.userId}`}
                             className="block md:hidden focus:outline-none group"
                           >
-                            <div
-                              className={cn(
-                                "p-4 rounded-xl bg-gradient-to-br from-gray-50 to-gray-100/60 dark:from-gray-800/60 dark:to-gray-700/60 border border-gray-200/60 dark:border-gray-700/60",
-                                isCurrentUser &&
-                                  "ring-2 ring-blue-500/60 ring-offset-2 ring-offset-white dark:ring-blue-400/60 dark:ring-offset-gray-900"
-                              )}
-                            >
-                              <div className="flex items-center gap-3">
+                              <div
+                                className={cn(
+                                  "p-4 rounded-xl bg-gradient-to-br from-gray-50 to-gray-100/60 dark:from-gray-800/60 dark:to-gray-700/60 border border-gray-200/60 dark:border-gray-700/60 w-full max-w-full overflow-x-hidden",
+                                  isCurrentUser &&
+                                    "ring-2 ring-blue-500/60 ring-offset-2 ring-offset-white dark:ring-blue-400/60 dark:ring-offset-gray-900"
+                                )}
+                              >
+                                <div className="flex items-center gap-3 w-full max-w-full">
                                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
                                   <span className="text-sm font-bold text-gray-700 dark:text-gray-200">
                                     #{entry.rank}
@@ -342,9 +342,9 @@ export default function EarningsLeaderboardPage() {
                                     <UserCircle2 className="h-6 w-6 text-gray-400 dark:text-gray-500" />
                                   )}
                                 </div>
-                                <div className="min-w-0 flex-1">
-                                  <div className="flex items-center gap-2">
-                                    <h3 className="truncate text-sm font-semibold text-gray-900 dark:text-gray-100">
+                                <div className="min-w-0 flex-1 overflow-hidden">
+                                  <div className="flex items-center gap-2 flex-wrap">
+                                    <h3 className="truncate text-sm font-semibold text-gray-900 dark:text-gray-100 min-w-0">
                                       {entry.user.name || entry.user.email}
                                     </h3>
                                     {isCurrentUser && (
@@ -538,14 +538,14 @@ export default function EarningsLeaderboardPage() {
                             href={`/profile/${entry.userId}`}
                             className="focus:outline-none"
                           >
-                            <div
+                              <div
                               className={cn(
-                                "group relative flex flex-col gap-4 overflow-hidden rounded-2xl border border-gray-200/80 bg-white/85 p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl focus-visible:ring-2 focus-visible:ring-blue-500/50 dark:border-gray-800/60 dark:bg-gray-900/70",
+                                "group relative flex flex-col gap-4 overflow-hidden rounded-2xl border border-gray-200/80 bg-white/85 p-4 sm:p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl focus-visible:ring-2 focus-visible:ring-blue-500/50 dark:border-gray-800/60 dark:bg-gray-900/70 w-full max-w-full",
                                 isCurrentUser &&
                                   "ring-2 ring-blue-500/60 ring-offset-2 ring-offset-white dark:ring-blue-400/60 dark:ring-offset-gray-900"
                               )}
                             >
-                              <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                              <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between w-full max-w-full">
                                 <div className="flex items-center gap-4">
                                   <div className="flex h-12 w-12 items-center justify-center text-lg font-semibold text-gray-600 dark:text-gray-300">
                                     <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gray-100 text-base font-bold text-gray-600 shadow-sm dark:bg-gray-800 dark:text-gray-300">
@@ -592,18 +592,18 @@ export default function EarningsLeaderboardPage() {
                                     </span>
                                   )}
                                 </div>
-                                <div className="flex flex-col gap-3">
-                                  <div className="flex flex-col items-start gap-2 md:items-end">
+                                <div className="flex flex-col gap-3 w-full sm:w-auto">
+                                  <div className="flex flex-col items-start gap-2 md:items-end w-full sm:w-auto">
                                     <span className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
                                       Toplam Kazanç
                                     </span>
                                     <div className="flex items-baseline gap-2">
-                                      <span className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+                                      <span className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100">
                                         {entry.totalEarnings.toLocaleString("tr-TR")} ₺
                                       </span>
                                     </div>
                                   </div>
-                                  <div className="flex flex-wrap gap-2 md:justify-end">
+                                  <div className="flex flex-wrap gap-2 md:justify-end w-full">
                                     {entry.breakdown.hackathon > 0 && (
                                       <div className="flex items-center gap-1 rounded-full bg-purple-100/80 px-2 py-1 text-xs font-medium text-purple-700 dark:bg-purple-900/50 dark:text-purple-200">
                                         <Award className="h-3 w-3" />

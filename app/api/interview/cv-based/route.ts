@@ -3,77 +3,69 @@ import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { extractCVInfo } from "@/lib/ai/interview-generator";
 import { getUserIdFromSession } from "@/lib/auth-utils";
+import { generateInterviewStages } from "./generate-stages/route";
 
 export const maxDuration = 60; // 60 seconds timeout for Vercel
 
-/**
- * Base URL'i environment variable'lardan al
- */
-function getBaseUrl(): string {
-  let baseUrl =
-    process.env.NEXTAUTH_URL ||
-    process.env.NEXT_PUBLIC_APP_URL ||
-    process.env.VERCEL_URL ||
-    "http://localhost:3000";
-
-  // URL'de scheme yoksa ekle
-  if (!baseUrl.startsWith("http://") && !baseUrl.startsWith("https://")) {
-    // Production'da (Vercel) https:// kullan, localhost'ta http://
-    if (baseUrl.includes("localhost") || baseUrl.includes("127.0.0.1")) {
-      baseUrl = `http://${baseUrl}`;
-    } else {
-      baseUrl = `https://${baseUrl}`;
-    }
-  }
-
-  // URL'in sonundaki slash'ı kaldır
-  baseUrl = baseUrl.replace(/\/$/, "");
-
-  return baseUrl;
-}
-
 export async function POST(request: Request) {
+  const requestStartTime = Date.now();
+  console.log(`[CV_INTERVIEW] ========== YENİ MÜLAKAT OLUŞTURMA İSTEĞİ BAŞLADI ==========`);
+  console.log(`[CV_INTERVIEW] Timestamp: ${new Date().toISOString()}`);
+  
   try {
+    console.log(`[CV_INTERVIEW] [1/6] Session kontrolü yapılıyor...`);
     const session = await auth();
     const userId = await getUserIdFromSession(session);
     
     if (!userId) {
+      console.error(`[CV_INTERVIEW] [1/6] ❌ Session kontrolü başarısız: Unauthorized`);
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
+    console.log(`[CV_INTERVIEW] [1/6] ✅ Session kontrolü başarılı - userId: ${userId}`);
 
+    console.log(`[CV_INTERVIEW] [2/6] Request body parse ediliyor...`);
     const body = await request.json();
     const { cvId } = body;
+    console.log(`[CV_INTERVIEW] [2/6] ✅ Request body parse edildi - cvId: ${cvId}`);
 
     if (!cvId || typeof cvId !== "string") {
+      console.error(`[CV_INTERVIEW] [2/6] ❌ CV ID geçersiz veya eksik`);
       return NextResponse.json(
         { error: "CV ID gereklidir" },
         { status: 400 }
       );
     }
 
+    console.log(`[CV_INTERVIEW] [3/6] CV veritabanından sorgulanıyor... (cvId: ${cvId})`);
     // CV'nin kullanıcıya ait olduğunu kontrol et
     const cv = await db.cV.findUnique({
       where: { id: cvId },
     });
 
     if (!cv) {
+      console.error(`[CV_INTERVIEW] [3/6] ❌ CV bulunamadı - cvId: ${cvId}`);
       return NextResponse.json(
         { error: "CV bulunamadı" },
         { status: 404 }
       );
     }
+    console.log(`[CV_INTERVIEW] [3/6] ✅ CV bulundu - cvId: ${cvId}, cv.userId: ${cv.userId}`);
 
     if (cv.userId !== userId) {
+      console.error(`[CV_INTERVIEW] [3/6] ❌ CV erişim yetkisi yok - cv.userId: ${cv.userId}, request.userId: ${userId}`);
       return NextResponse.json(
         { error: "Bu CV'ye erişim yetkiniz yok" },
         { status: 403 }
       );
     }
 
+    console.log(`[CV_INTERVIEW] [4/6] CV bilgileri çıkarılıyor...`);
     // CV bilgilerini çıkar
     const cvData = cv.data as any;
     const cvInfo = extractCVInfo(cvData);
+    console.log(`[CV_INTERVIEW] [4/6] ✅ CV bilgileri çıkarıldı - difficulty: ${cvInfo.level}, name: ${cvData?.personalInfo?.name || "N/A"}`);
 
+    console.log(`[CV_INTERVIEW] [5/6] Interview kaydı oluşturuluyor...`);
     // Interview kaydını hemen oluştur (boş sorularla)
     const interview = await db.interview.create({
       data: {
@@ -86,56 +78,41 @@ export async function POST(request: Request) {
         cvId: cvId,
       },
     });
+    const createTime = Date.now() - requestStartTime;
+    console.log(`[CV_INTERVIEW] [5/6] ✅ Interview kaydı oluşturuldu - interviewId: ${interview.id}, süre: ${createTime}ms`);
 
-    console.log(`[CV_INTERVIEW] Interview kaydı oluşturuldu: ${interview.id}, arka planda sorular oluşturuluyor...`);
-
+    console.log(`[CV_INTERVIEW] [6/6] Arka plan işlemi başlatılıyor (fire-and-forget)...`);
     // Arka planda aşamalı olarak soruları oluştur (fire-and-forget)
-    // Yeni endpoint'i fetch ile tetikle - bu sayede bağımsız bir request olarak çalışacak
-    const baseUrl = getBaseUrl();
-    const generateStagesUrl = `${baseUrl}/api/interview/cv-based/generate-stages`;
-    
-    fetch(generateStagesUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        // Session cookie'yi gönder (eğer varsa)
-        ...(request.headers.get("cookie") && { Cookie: request.headers.get("cookie") || "" }),
-      },
-      body: JSON.stringify({
-        interviewId: interview.id,
-        cvId: cvId,
-      }),
-    })
-      .then(async (response) => {
-        if (response.ok) {
-          console.log(`[CV_INTERVIEW] Arka plan işlemi başlatıldı: ${interview.id}`);
-        } else {
-          const errorData = await response.json().catch(() => ({}));
-          console.error(`[CV_INTERVIEW] Arka plan işlemi başlatılamadı (interviewId: ${interview.id}):`, {
-            status: response.status,
-            error: errorData.error || "Bilinmeyen hata",
-          });
-        }
+    // Direkt fonksiyon çağrısı yap - fetch yerine
+    generateInterviewStages(interview.id, cvId)
+      .then(() => {
+        const totalTime = Date.now() - requestStartTime;
+        console.log(`[CV_INTERVIEW] [6/6] ✅ Arka plan işlemi başarıyla tamamlandı - interviewId: ${interview.id}, toplam süre: ${Math.round(totalTime / 1000)}s`);
+        console.log(`[CV_INTERVIEW] ========== MÜLAKAT OLUŞTURMA BAŞARIYLA TAMAMLANDI ==========`);
       })
       .catch((error) => {
-        console.error(`[CV_INTERVIEW] Arka plan endpoint çağrısı hatası (interviewId: ${interview.id}):`, {
+        const totalTime = Date.now() - requestStartTime;
+        console.error(`[CV_INTERVIEW] [6/6] ❌ Arka plan işlemi hatası - interviewId: ${interview.id}, süre: ${Math.round(totalTime / 1000)}s`);
+        console.error(`[CV_INTERVIEW] Hata detayları:`, {
           message: error?.message || "Bilinmeyen hata",
           stack: error?.stack,
           cvId: cvId,
-          url: generateStagesUrl,
+          interviewId: interview.id,
         });
         // Hata durumunda interview description'ına hata mesajı ekle
         db.interview.update({
           where: { id: interview.id },
           data: {
-            description: `Mülakat soruları oluşturulurken hata oluştu: Arka plan endpoint'i çağrılamadı. Lütfen tekrar deneyin.`,
+            description: `Mülakat soruları oluşturulurken hata oluştu: ${error?.message || "Bilinmeyen hata"}. Lütfen tekrar deneyin.`,
           },
         }).catch((updateError: unknown) => {
-          console.error(`[CV_INTERVIEW] Hata mesajı kaydedilemedi:`, updateError);
+          console.error(`[CV_INTERVIEW] ❌ Hata mesajı veritabanına kaydedilemedi:`, updateError);
         });
       });
 
     // Hemen response döndür
+    const responseTime = Date.now() - requestStartTime;
+    console.log(`[CV_INTERVIEW] ✅ Response döndürülüyor - interviewId: ${interview.id}, toplam süre: ${responseTime}ms`);
     return NextResponse.json(
       {
         interview: {
@@ -150,7 +127,14 @@ export async function POST(request: Request) {
       { status: 201 }
     );
   } catch (error: any) {
-    console.error("[CV_INTERVIEW] Genel hata:", error);
+    const errorTime = Date.now() - requestStartTime;
+    console.error(`[CV_INTERVIEW] ========== MÜLAKAT OLUŞTURMA HATASI ==========`);
+    console.error(`[CV_INTERVIEW] Hata süresi: ${errorTime}ms`);
+    console.error(`[CV_INTERVIEW] Hata detayları:`, {
+      message: error?.message || "Bilinmeyen hata",
+      stack: error?.stack,
+      name: error?.name,
+    });
     return NextResponse.json(
       { error: `Mülakat oluşturulurken bir hata oluştu: ${error?.message || "Bilinmeyen hata"}` },
       { status: 500 }

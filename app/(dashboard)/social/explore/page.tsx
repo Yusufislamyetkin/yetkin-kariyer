@@ -376,10 +376,10 @@ export default function ExplorePage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex gap-8 lg:gap-12">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full max-w-full overflow-x-hidden">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 w-full max-w-full">
           {/* Center Column - Feed */}
-          <main className="flex-1 max-w-[900px] mx-auto lg:mx-0">
+          <main className="flex-1 max-w-[900px] mx-auto lg:mx-0 w-full max-w-full overflow-x-hidden">
             {/* Error */}
             {error && (
               <div className="mb-6 p-5 bg-red-50 dark:bg-red-900/20 border-2 border-red-200 dark:border-red-800 rounded-xl text-base text-red-700 dark:text-red-400 shadow-sm">
