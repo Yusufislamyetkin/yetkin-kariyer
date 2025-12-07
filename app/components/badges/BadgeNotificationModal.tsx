@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback, useRef } from "react";
 import { X, Sparkles, Award, Share2, Loader2 } from "lucide-react";
 import { Button } from "@/app/components/ui/Button";
 import { useRouter } from "next/navigation";
+import { useNotification } from "@/app/contexts/NotificationContext";
 
 interface Badge {
   id: string;
@@ -67,6 +68,7 @@ export function BadgeNotificationModal({
   totalCount,
 }: BadgeNotificationModalProps) {
   const router = useRouter();
+  const { showNotification } = useNotification();
   const [isVisible, setIsVisible] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [sharing, setSharing] = useState(false);
@@ -127,6 +129,16 @@ export function BadgeNotificationModal({
       if (!response.ok) {
         throw new Error(data.error || "Rozet paylaşılırken bir hata oluştu");
       }
+
+      // Show success notification
+      showNotification(
+        "success",
+        "Başarılı!",
+        "Rozet başarıyla post olarak paylaşıldı!",
+        {
+          duration: 5000,
+        }
+      );
 
       // Refresh page to show new post
       router.refresh();

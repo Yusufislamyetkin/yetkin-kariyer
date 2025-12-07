@@ -27,7 +27,9 @@ export default function MarketingTemplate({ data }: { data: CVData }) {
               <div className="flex flex-wrap gap-2 text-orange-100 text-xs">
                 {data.personalInfo.email && <span>{data.personalInfo.email}</span>}
                 {data.personalInfo.phone && <span>{data.personalInfo.phone}</span>}
+                {data.personalInfo.address && <span>{data.personalInfo.address}</span>}
                 {data.personalInfo.linkedin && <span>{data.personalInfo.linkedin}</span>}
+                {data.personalInfo.website && <span>{data.personalInfo.website}</span>}
               </div>
             </div>
           </div>
@@ -36,7 +38,7 @@ export default function MarketingTemplate({ data }: { data: CVData }) {
           {data.summary && (
             <section className="mb-2 bg-white p-3 rounded-lg shadow-sm border-l-4 border-orange-500 flex-shrink-0">
               <h2 className="text-lg font-bold text-orange-600 mb-1">Özet</h2>
-              <p className="text-gray-700 leading-tight break-words whitespace-pre-line text-sm line-clamp-3">{data.summary}</p>
+              <p className="text-gray-700 leading-tight break-words whitespace-pre-line text-sm">{data.summary}</p>
             </section>
           )}
           <div className="grid md:grid-cols-2 gap-4 flex-1 overflow-hidden" style={{ minHeight: 0 }}>

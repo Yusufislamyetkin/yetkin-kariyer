@@ -22,13 +22,16 @@ export default function EducationTemplate({ data }: { data: CVData }) {
           <div className="text-xs text-gray-700 space-y-0.5">
             {data.personalInfo.email && <div>{data.personalInfo.email}</div>}
             {data.personalInfo.phone && <div>{data.personalInfo.phone}</div>}
+            {data.personalInfo.address && <div>{data.personalInfo.address}</div>}
+            {data.personalInfo.linkedin && <div>{data.personalInfo.linkedin}</div>}
+            {data.personalInfo.website && <div>{data.personalInfo.website}</div>}
           </div>
         </div>
         <div className="flex-1 overflow-y-auto" style={{ minHeight: 0 }}>
           {data.summary && (
             <section className="mb-2">
               <h2 className="text-lg font-bold text-blue-600 mb-1 border-b-2 border-blue-600 pb-1">Özet</h2>
-              <p className="text-gray-700 leading-tight break-words whitespace-pre-line text-sm line-clamp-3">{data.summary}</p>
+              <p className="text-gray-700 leading-tight break-words whitespace-pre-line text-sm">{data.summary}</p>
             </section>
           )}
           {data.education.length > 0 && (

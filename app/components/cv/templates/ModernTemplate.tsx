@@ -106,7 +106,7 @@ export default function ModernTemplate({ data }: ModernTemplateProps) {
             <h2 className="text-lg font-bold text-blue-600 mb-1 pb-1 border-b-2 border-blue-600">
               Profesyonel Özet
             </h2>
-            <p className="text-gray-700 text-sm leading-tight break-words whitespace-pre-line line-clamp-3">
+            <p className="text-gray-700 text-sm leading-tight break-words whitespace-pre-line">
               {data.summary}
             </p>
           </section>

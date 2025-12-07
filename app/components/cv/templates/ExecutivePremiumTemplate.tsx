@@ -24,13 +24,14 @@ export default function ExecutivePremiumTemplate({ data }: { data: CVData }) {
             {data.personalInfo.phone && <div>{data.personalInfo.phone}</div>}
             {data.personalInfo.address && <div>{data.personalInfo.address}</div>}
             {data.personalInfo.linkedin && <div>{data.personalInfo.linkedin}</div>}
+            {data.personalInfo.website && <div>{data.personalInfo.website}</div>}
           </div>
         </div>
         <div className="flex-1 overflow-y-auto" style={{ minHeight: 0 }}>
           {data.summary && (
             <section className="mb-2 text-center flex-shrink-0">
               <div className="w-16 h-px bg-gray-400 mx-auto mb-1"></div>
-              <p className="text-gray-700 leading-tight break-words whitespace-pre-line italic text-sm max-w-3xl mx-auto line-clamp-3">{data.summary}</p>
+              <p className="text-gray-700 leading-tight break-words whitespace-pre-line italic text-sm max-w-3xl mx-auto">{data.summary}</p>
               <div className="w-16 h-px bg-gray-400 mx-auto mt-1"></div>
             </section>
           )}

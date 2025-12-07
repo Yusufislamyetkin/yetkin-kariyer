@@ -23,13 +23,15 @@ export default function LegalTemplate({ data }: { data: CVData }) {
             {data.personalInfo.email && <div>{data.personalInfo.email}</div>}
             {data.personalInfo.phone && <div>{data.personalInfo.phone}</div>}
             {data.personalInfo.address && <div>{data.personalInfo.address}</div>}
+            {data.personalInfo.linkedin && <div>{data.personalInfo.linkedin}</div>}
+            {data.personalInfo.website && <div>{data.personalInfo.website}</div>}
           </div>
         </div>
         <div className="flex-1 overflow-y-auto" style={{ minHeight: 0 }}>
           {data.summary && (
             <section className="mb-2">
               <h2 className="text-lg font-bold text-gray-900 mb-1 uppercase tracking-wide border-b border-gray-400 pb-1">Özet</h2>
-              <p className="text-gray-700 leading-tight break-words whitespace-pre-line text-sm line-clamp-3">{data.summary}</p>
+              <p className="text-gray-700 leading-tight break-words whitespace-pre-line text-sm">{data.summary}</p>
             </section>
           )}
           {data.education.length > 0 && (

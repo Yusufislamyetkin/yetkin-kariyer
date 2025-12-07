@@ -112,6 +112,13 @@ export default function EarningsPage() {
       return;
     }
 
+    // Check minimum withdrawal amount (1000 TL)
+    if (earnings.total < 1000) {
+      setTransferError("Para çekmek için minimum 1000 TL kazanç gerekmektedir");
+      setShowTransferModal(true);
+      return;
+    }
+
     // Check if user has name and IBAN
     const hasName = userInfo?.name && userInfo.name.trim() !== "";
     const hasIban = userInfo?.iban && userInfo.iban.trim() !== "";
@@ -155,9 +162,9 @@ export default function EarningsPage() {
         if (data.error === "AD_SOYAD_REQUIRED" || data.error === "IBAN_REQUIRED") {
           setShowTransferModal(true);
           setTransferError(data.message);
-        } else if (data.error === "ZERO_BALANCE") {
+        } else if (data.error === "ZERO_BALANCE" || data.error === "MINIMUM_AMOUNT_REQUIRED") {
           setTransferError(data.message);
-          setShowTransferModal(false);
+          setShowTransferModal(true);
         } else {
           setTransferError(data.message || "Transfer işlemi sırasında bir hata oluştu");
         }
@@ -309,7 +316,7 @@ export default function EarningsPage() {
           variant="gradient"
           size="sm"
           className="gap-2"
-          disabled={loading || transferLoading || (earnings?.total === 0)}
+          disabled={loading || transferLoading || (earnings?.total === 0) || (earnings?.total || 0) < 1000}
         >
           <Wallet className="h-4 w-4" />
           Kazancı Hesabıma Aktar
@@ -491,6 +498,24 @@ export default function EarningsPage() {
               </h3>
               <p className="text-gray-600 dark:text-gray-400">
                 Hackathon&apos;lara katılarak, liderlik tablosunda yer alarak veya freelancer projelerinde çalışarak kazanç elde edebilirsiniz.
+              </p>
+            </div>
+          ) : earnings && earnings.total < 1000 ? (
+            <div className="text-center py-8">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-yellow-500 to-orange-500 flex items-center justify-center shadow-lg mx-auto mb-4">
+                <AlertCircle className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2">
+                Minimum Tutar Gereksinimi
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 mb-2">
+                Para çekmek için minimum 1000 TL kazanç gerekmektedir.
+              </p>
+              <p className="text-sm text-gray-500 dark:text-gray-500">
+                Mevcut kazancınız: {earnings.total.toLocaleString("tr-TR")} ₺
+              </p>
+              <p className="text-sm text-gray-500 dark:text-gray-500 mt-1">
+                Eksik tutar: {(1000 - earnings.total).toLocaleString("tr-TR")} ₺
               </p>
             </div>
           ) : (

@@ -69,3 +69,65 @@ export async function getBotActivityStatus(userId: string) {
   }
 }
 
+/**
+ * Update bots' presence to keep them online
+ * Batch update for performance - updates all groups and bot configuration
+ */
+export async function updateBotsPresence(userIds: string[], groupId?: string) {
+  try {
+    if (userIds.length === 0) {
+      return { success: true, updated: 0 };
+    }
+
+    const now = new Date();
+
+    // Batch update bot configurations
+    await db.botConfiguration.updateMany({
+      where: {
+        userId: { in: userIds },
+      },
+      data: {
+        lastActivityAt: now,
+      },
+    });
+
+    // If groupId is provided, update only that group's memberships
+    if (groupId) {
+      await db.chatGroupMembership.updateMany({
+        where: {
+          userId: { in: userIds },
+          groupId,
+        },
+        data: {
+          lastSeenAt: now,
+        },
+      });
+    } else {
+      // Update all group memberships for these bots (for all groups they're in)
+      await db.chatGroupMembership.updateMany({
+        where: {
+          userId: { in: userIds },
+        },
+        data: {
+          lastSeenAt: now,
+        },
+      });
+    }
+
+    // Update user updatedAt (optional, for general activity tracking)
+    await db.user.updateMany({
+      where: {
+        id: { in: userIds },
+      },
+      data: {
+        updatedAt: now,
+      },
+    });
+
+    return { success: true, updated: userIds.length };
+  } catch (error: any) {
+    console.error("[BOT_SESSION] Error updating bots presence:", error);
+    return { success: false, error: error.message, updated: 0 };
+  }
+}
+

@@ -21,7 +21,7 @@ const sampleCVData = {
     linkedin: "linkedin.com/in/yusufislamyetkin",
     website: "yusufislamyetkin.dev",
   },
-  summary: "5+ yıllık deneyime sahip, yazılım geliştirme ve proje yönetimi konularında uzmanlaşmış bir yazılım mühendisi. Modern web teknolojileri ve bulut çözümleri konusunda derin bilgi sahibi. Ekip çalışması ve liderlik deneyimi ile başarılı projeler yürütmüştür.",
+  summary: "5+ yıllık deneyime sahip, yazılım geliştirme ve proje yönetimi konularında uzmanlaşmış bir yazılım mühendisi. Modern web teknolojileri ve bulut çözümleri konusunda derin bilgi sahibi. Ekip çalışması ve liderlik deneyimi ile başarılı projeler yürütmüştür. Full-stack geliştirme konusunda geniş bir deneyime sahip olup, React, Node.js, Python ve AWS gibi teknolojilerde uzmanlaşmıştır. Mikroservis mimarileri tasarlama, ölçeklenebilir sistemler geliştirme ve DevOps uygulamaları konularında pratik deneyime sahiptir. Agile metodolojiler ile çalışma deneyimi bulunmakta ve sürekli öğrenme ve gelişim konusunda tutkulu bir yaklaşım sergilemektedir. Müşteri odaklı çözümler üretme, teknik problemleri analiz etme ve etkili çözümler geliştirme konularında güçlü yeteneklere sahiptir. Kod kalitesi, test yazma ve dokümantasyon konularına önem vermekte, ekip içi işbirliği ve mentorluk faaliyetlerinde aktif rol almaktadır. Performans optimizasyonu, güvenlik best practice'leri ve modern yazılım geliştirme araçları konularında sürekli güncel kalmaktadır. Proje yönetimi, zaman yönetimi ve iletişim becerileri ile karmaşık projeleri başarıyla tamamlamıştır. Teknik liderlik, kod review süreçleri ve ekip içi bilgi paylaşımı konularında deneyimlidir.",
   experience: [
     {
       company: "Tech Solutions A.Ş.",

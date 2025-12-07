@@ -109,7 +109,7 @@ export default function ClassicTemplate({ data }: ClassicTemplateProps) {
               <h2 className="text-lg font-bold mb-1" style={{ color: '#1e3a8a', borderBottom: '2px solid #1e3a8a', paddingBottom: '4px' }}>
                 Profesyonel Özet
               </h2>
-              <p className="text-gray-700 text-sm leading-tight text-justify break-words whitespace-pre-line line-clamp-3">
+              <p className="text-gray-700 text-sm leading-tight text-justify break-words whitespace-pre-line">
                 {data.summary}
               </p>
             </section>

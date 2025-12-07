@@ -22,14 +22,16 @@ export default function SalesTemplate({ data }: { data: CVData }) {
           <div className="flex flex-wrap gap-2 text-emerald-100 text-xs">
             {data.personalInfo.email && <span>{data.personalInfo.email}</span>}
             {data.personalInfo.phone && <span>{data.personalInfo.phone}</span>}
+            {data.personalInfo.address && <span>{data.personalInfo.address}</span>}
             {data.personalInfo.linkedin && <span>{data.personalInfo.linkedin}</span>}
+            {data.personalInfo.website && <span>{data.personalInfo.website}</span>}
           </div>
         </div>
         <div className="p-4 flex-1 overflow-hidden" style={{ display: 'flex', flexDirection: 'column' }}>
           {data.summary && (
             <section className="mb-2 bg-emerald-50 p-3 rounded-lg border-l-4 border-emerald-600 flex-shrink-0">
               <h2 className="text-lg font-bold text-emerald-700 mb-1">Özet</h2>
-              <p className="text-gray-700 leading-tight break-words whitespace-pre-line text-sm line-clamp-3">{data.summary}</p>
+              <p className="text-gray-700 leading-tight break-words whitespace-pre-line text-sm">{data.summary}</p>
             </section>
           )}
           <div className="flex-1 overflow-y-auto" style={{ minHeight: 0 }}>

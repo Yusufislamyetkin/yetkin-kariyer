@@ -83,6 +83,7 @@ export default function StartupTemplate({ data }: StartupTemplateProps) {
               <div className="flex flex-wrap gap-2 text-purple-100 text-xs">
                 {data.personalInfo.email && <span>✉ {data.personalInfo.email}</span>}
                 {data.personalInfo.phone && <span>📱 {data.personalInfo.phone}</span>}
+                {data.personalInfo.address && <span>📍 {data.personalInfo.address}</span>}
                 {data.personalInfo.linkedin && <span>💼 {data.personalInfo.linkedin}</span>}
                 {data.personalInfo.website && <span>🌐 {data.personalInfo.website}</span>}
               </div>
@@ -95,7 +96,7 @@ export default function StartupTemplate({ data }: StartupTemplateProps) {
           {data.summary && (
             <section className="mb-2 bg-white p-3 rounded-lg shadow-sm border-l-4 border-purple-600 flex-shrink-0">
               <h2 className="text-lg font-bold text-purple-600 mb-1">Özet</h2>
-              <p className="text-gray-700 leading-tight break-words whitespace-pre-line text-sm line-clamp-3">
+              <p className="text-gray-700 leading-tight break-words whitespace-pre-line text-sm">
                 {data.summary}
               </p>
             </section>

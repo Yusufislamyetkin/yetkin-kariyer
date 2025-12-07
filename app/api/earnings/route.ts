@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { EarningType } from "@prisma/client";
 
 export async function GET() {
   try {
@@ -11,101 +12,74 @@ export async function GET() {
 
     const userId = session.user.id as string;
 
-    // Get hackathon earnings (from submissions that won)
-    let hackathonSubmissions: any[] = [];
+    // Get all earnings from the Earning table (source of truth)
+    let allEarnings: any[] = [];
     try {
-      hackathonSubmissions = await db.hackathonSubmission.findMany({
-        where: {
-          OR: [
-            { userId: userId },
-            {
-              team: {
-                members: {
-                  some: {
-                    userId: userId,
-                    status: "active",
-                  },
-                },
-              },
-            },
-          ],
-          status: {
-            in: ["winner", "finalist"],
-          },
-        },
-        include: {
-          hackathon: {
-            select: {
-              id: true,
-              title: true,
-              prizesSummary: true,
-            },
-          },
-          team: {
-            include: {
-              members: {
-                where: {
-                  userId: userId,
-                  status: "active",
-                },
-              },
-            },
-          },
-        },
-      });
-    } catch (error) {
-      console.error("Error fetching hackathon submissions:", error);
-      hackathonSubmissions = [];
-    }
-
-    // Get monthly leaderboard #1 positions
-    let monthlyFirstPlaces: any[] = [];
-    try {
-      monthlyFirstPlaces = await db.leaderboardEntry.findMany({
+      allEarnings = await db.earning.findMany({
         where: {
           userId: userId,
-          period: "monthly",
-          rank: 1,
         },
         orderBy: {
-          periodDate: "desc",
+          earnedAt: "desc",
         },
       });
     } catch (error) {
-      console.error("Error fetching leaderboard entries:", error);
-      monthlyFirstPlaces = [];
+      console.error("Error fetching earnings:", error);
+      allEarnings = [];
     }
 
-    // Get freelancer earnings (accepted bids)
-    let freelancerEarnings: any[] = [];
-    try {
-      freelancerEarnings = await db.freelancerBid.findMany({
-        where: {
-          userId: userId,
-          status: "accepted",
-        },
-        include: {
-          project: {
-            select: {
-              id: true,
-              title: true,
-            },
-          },
-        },
-        orderBy: {
-          updatedAt: "desc",
-        },
-      });
-    } catch (error) {
-      console.error("Error fetching freelancer earnings:", error);
-      freelancerEarnings = [];
-    }
+    // Group earnings by type
+    const hackathonEarnings = allEarnings.filter(
+      (e) => e.type === EarningType.HACKATHON
+    );
+    const leaderboardEarnings = allEarnings.filter(
+      (e) => e.type === EarningType.MONTHLY_WINNER
+    );
+    const freelancerEarnings = allEarnings.filter(
+      (e) => e.type === EarningType.FREELANCER_PROJECT
+    );
 
     // Calculate totals
-    const hackathonTotal = hackathonSubmissions.length * 1000; // Placeholder: 1000 TL per win
-    const leaderboardTotal = monthlyFirstPlaces.length * 500; // Placeholder: 500 TL per #1
-    const freelancerTotal = freelancerEarnings.reduce((sum, bid) => sum + (bid.amount || 0), 0);
+    const hackathonTotal = hackathonEarnings.reduce(
+      (sum, e) => sum + Number(e.amount),
+      0
+    );
+    const leaderboardTotal = leaderboardEarnings.reduce(
+      (sum, e) => sum + Number(e.amount),
+      0
+    );
+    const freelancerTotal = freelancerEarnings.reduce(
+      (sum, e) => sum + Number(e.amount),
+      0
+    );
     const totalEarnings = hackathonTotal + leaderboardTotal + freelancerTotal;
+
+    // Helper function to get title from metadata
+    const getTitle = (earning: any, type: EarningType): string => {
+      if (earning.metadata) {
+        const metadata = earning.metadata as any;
+        if (type === EarningType.HACKATHON && metadata.hackathonTitle) {
+          return metadata.hackathonTitle;
+        }
+        if (type === EarningType.FREELANCER_PROJECT && metadata.projectTitle) {
+          return metadata.projectTitle;
+        }
+        if (type === EarningType.MONTHLY_WINNER && metadata.periodDate) {
+          return `Ayın 1.'si - ${metadata.periodDate}`;
+        }
+      }
+      // Fallback titles
+      switch (type) {
+        case EarningType.HACKATHON:
+          return "Hackathon";
+        case EarningType.MONTHLY_WINNER:
+          return "Ayın 1.'si";
+        case EarningType.FREELANCER_PROJECT:
+          return "Proje";
+        default:
+          return "Kazanç";
+      }
+    };
 
     // Format earnings data
     const earnings = {
@@ -113,61 +87,61 @@ export async function GET() {
       breakdown: {
         hackathon: {
           total: hackathonTotal,
-          count: hackathonSubmissions.length,
-          items: hackathonSubmissions.map((sub) => ({
-            id: sub.id,
-            title: sub.hackathon?.title || "Hackathon",
-            amount: 1000, // Placeholder
-            date: sub.updatedAt.toISOString(),
+          count: hackathonEarnings.length,
+          items: hackathonEarnings.map((e) => ({
+            id: e.id,
+            title: getTitle(e, EarningType.HACKATHON),
+            amount: Number(e.amount),
+            date: e.earnedAt.toISOString(),
             type: "hackathon",
           })),
         },
         leaderboard: {
           total: leaderboardTotal,
-          count: monthlyFirstPlaces.length,
-          items: monthlyFirstPlaces.map((entry) => ({
-            id: entry.id,
-            title: `Ayın 1.'si - ${entry.periodDate}`,
-            amount: 500, // Placeholder
-            date: entry.updatedAt.toISOString(),
+          count: leaderboardEarnings.length,
+          items: leaderboardEarnings.map((e) => ({
+            id: e.id,
+            title: getTitle(e, EarningType.MONTHLY_WINNER),
+            amount: Number(e.amount),
+            date: e.earnedAt.toISOString(),
             type: "leaderboard",
           })),
         },
         freelancer: {
           total: freelancerTotal,
           count: freelancerEarnings.length,
-          items: freelancerEarnings.map((bid) => ({
-            id: bid.id,
-            title: bid.project?.title || "Proje",
-            amount: bid.amount || 0,
-            date: bid.updatedAt.toISOString(),
+          items: freelancerEarnings.map((e) => ({
+            id: e.id,
+            title: getTitle(e, EarningType.FREELANCER_PROJECT),
+            amount: Number(e.amount),
+            date: e.earnedAt.toISOString(),
             type: "freelancer",
           })),
         },
       },
-      allItems: [
-        ...hackathonSubmissions.map((sub) => ({
-          id: sub.id,
-          title: sub.hackathon?.title || "Hackathon",
-          amount: 1000,
-          date: sub.updatedAt.toISOString(),
-          type: "hackathon" as const,
-        })),
-        ...monthlyFirstPlaces.map((entry) => ({
-          id: entry.id,
-          title: `Ayın 1.'si - ${entry.periodDate}`,
-          amount: 500,
-          date: entry.updatedAt.toISOString(),
-          type: "leaderboard" as const,
-        })),
-        ...freelancerEarnings.map((bid) => ({
-          id: bid.id,
-          title: bid.project?.title || "Proje",
-          amount: bid.amount || 0,
-          date: bid.updatedAt.toISOString(),
-          type: "freelancer" as const,
-        })),
-      ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()),
+      allItems: allEarnings.map((e) => {
+        let type: "hackathon" | "leaderboard" | "freelancer";
+        switch (e.type) {
+          case EarningType.HACKATHON:
+            type = "hackathon";
+            break;
+          case EarningType.MONTHLY_WINNER:
+            type = "leaderboard";
+            break;
+          case EarningType.FREELANCER_PROJECT:
+            type = "freelancer";
+            break;
+          default:
+            type = "hackathon"; // fallback
+        }
+        return {
+          id: e.id,
+          title: getTitle(e, e.type),
+          amount: Number(e.amount),
+          date: e.earnedAt.toISOString(),
+          type: type,
+        };
+      }),
     };
 
     return NextResponse.json({ earnings });

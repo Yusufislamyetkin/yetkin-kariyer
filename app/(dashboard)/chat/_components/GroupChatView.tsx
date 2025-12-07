@@ -2054,6 +2054,17 @@ export function GroupChatView({ category }: GroupChatViewProps) {
       />
     ) : null;
 
+  const mobileHeaderActions = selectedGroup && isJoinedToSelectedGroup && messages.length === 0 && !messagesLoading ? (
+    <div className="flex items-center gap-2">
+      <Button variant="gradient" size="sm" href="/chat/direct" className="text-xs px-3 py-1.5 h-8">
+        Yeni Mesaj
+      </Button>
+      <Button variant="outline" size="sm" href="/dashboard/friends" className="text-xs px-3 py-1.5 h-8">
+        Arkadaş ekle
+      </Button>
+    </div>
+  ) : null;
+
   const overlayNode = (
     <>
       {error ? (
@@ -2172,6 +2183,7 @@ export function GroupChatView({ category }: GroupChatViewProps) {
       overlay={overlayNode}
       hasSelectedConversation={!!selectedGroupId}
       onBackToSidebar={handleBackToSidebar}
+      mobileHeaderActions={mobileHeaderActions}
     >
       {conversationBody}
     </ChatShell>

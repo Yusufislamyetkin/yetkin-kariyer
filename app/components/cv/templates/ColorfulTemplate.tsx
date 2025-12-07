@@ -123,6 +123,11 @@ export default function ColorfulTemplate({ data }: ColorfulTemplateProps) {
                     {data.personalInfo.phone}
                   </span>
                 )}
+                {data.personalInfo.address && (
+                  <span className="px-2 py-0.5 bg-yellow-500 text-white rounded-full text-xs font-medium">
+                    {data.personalInfo.address}
+                  </span>
+                )}
                 {data.personalInfo.linkedin && (
                   <span className="px-2 py-0.5 bg-green-500 text-white rounded-full text-xs font-medium">
                     {data.personalInfo.linkedin}
@@ -154,7 +159,7 @@ export default function ColorfulTemplate({ data }: ColorfulTemplateProps) {
             }}>
               Profesyonel Özet
             </h2>
-            <p className="text-gray-800 leading-tight text-xs break-words whitespace-pre-line line-clamp-3">
+            <p className="text-gray-800 leading-tight text-xs break-words whitespace-pre-line">
               {data.summary}
             </p>
           </section>

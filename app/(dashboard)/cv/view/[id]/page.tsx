@@ -3,12 +3,11 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { ArrowLeft, Download, Edit, FileText } from "lucide-react";
+import { ArrowLeft, Edit, FileText } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
 import Link from "next/link";
 import CVRenderer from "@/app/components/cv/CVRenderer";
-import { generatePDFFromElement } from "@/lib/cv/pdf-generator";
 
 interface CVUpload {
   id: string;
@@ -36,7 +35,6 @@ export default function ViewCVPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [cv, setCv] = useState<CV | null>(null);
-  const [downloading, setDownloading] = useState(false);
   const [retryCount, setRetryCount] = useState(0);
   const [selectedUploadId, setSelectedUploadId] = useState<string | null>(null);
 
@@ -68,76 +66,6 @@ export default function ViewCVPage() {
       setError("CV yüklenirken bir hata oluştu");
     } finally {
       setLoading(false);
-    }
-  };
-
-  const handleDownload = async () => {
-    try {
-      setDownloading(true);
-      setError(null);
-      
-      if (!params.id) {
-        throw new Error("CV ID bulunamadı");
-      }
-
-      if (!cv) {
-        throw new Error("CV yüklenmedi. Lütfen bekleyin ve tekrar deneyin.");
-      }
-
-      // Wait a bit to ensure DOM is ready
-      await new Promise((resolve) => setTimeout(resolve, 500));
-
-      // Find scroll container and reset scroll position
-      const cvElement = document.getElementById("cv-preview-content");
-      let scrollContainer: HTMLElement | null = null;
-      let savedScrollPosition = 0;
-
-      if (cvElement) {
-        // Find parent scroll container (the one with overflow-auto)
-        let parent = cvElement.parentElement;
-        while (parent) {
-          const style = window.getComputedStyle(parent);
-          if (style.overflow === 'auto' || style.overflowY === 'auto' || style.overflow === 'scroll' || style.overflowY === 'scroll') {
-            scrollContainer = parent;
-            savedScrollPosition = parent.scrollTop;
-            parent.scrollTop = 0;
-            break;
-          }
-          parent = parent.parentElement;
-        }
-      }
-
-      // Generate PDF from the CV content element
-      await generatePDFFromElement("cv-preview-content", {
-        filename: `cv-${params.id}.pdf`,
-        format: "a4",
-        orientation: "portrait",
-        quality: 0.98,
-        scale: 2,
-      });
-
-      // Restore scroll position
-      if (scrollContainer) {
-        scrollContainer.scrollTop = savedScrollPosition;
-      }
-
-      setRetryCount(0);
-    } catch (err: any) {
-      console.error("Error generating PDF:", err);
-      
-      // Handle specific error types
-      let errorMessage = err.message || "PDF oluşturulurken bir hata oluştu";
-      
-      if (err.message && err.message.includes("not found")) {
-        errorMessage = "CV içeriği bulunamadı. Lütfen sayfayı yenileyin ve tekrar deneyin.";
-      } else if (err.message && err.message.includes("network")) {
-        errorMessage = "Ağ bağlantı hatası. İnternet bağlantınızı kontrol edin ve tekrar deneyin.";
-      }
-      
-      setError(errorMessage);
-      setRetryCount(0);
-    } finally {
-      setDownloading(false);
     }
   };
 
@@ -178,11 +106,6 @@ export default function ViewCVPage() {
                 <Button onClick={loadCV}>
                   Sayfayı Yenile
                 </Button>
-                {error?.includes("PDF") && (
-                  <Button variant="primary" onClick={handleDownload}>
-                    PDF İndirmeyi Tekrar Dene
-                  </Button>
-                )}
               </div>
             </div>
           </CardContent>
@@ -219,19 +142,6 @@ export default function ViewCVPage() {
               Düzenle
             </Button>
           </Link>
-          <Button 
-            onClick={handleDownload} 
-            disabled={downloading || !cv}
-            className="flex-1 sm:flex-initial"
-          >
-            <Download className="h-4 w-4 mr-2" />
-            <span className="hidden sm:inline">
-              {downloading ? "PDF Oluşturuluyor..." : "PDF İndir"}
-            </span>
-            <span className="sm:hidden">
-              {downloading ? "Oluşturuluyor..." : "PDF"}
-            </span>
-          </Button>
         </div>
       </div>
 

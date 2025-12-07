@@ -22,6 +22,7 @@ export default function ConsultantTemplate({ data }: { data: CVData }) {
           <div className="grid md:grid-cols-2 gap-2 text-slate-300 text-xs">
             {data.personalInfo.email && <div>Email: {data.personalInfo.email}</div>}
             {data.personalInfo.phone && <div>Telefon: {data.personalInfo.phone}</div>}
+            {data.personalInfo.address && <div>Adres: {data.personalInfo.address}</div>}
             {data.personalInfo.linkedin && <div>LinkedIn: {data.personalInfo.linkedin}</div>}
             {data.personalInfo.website && <div>Website: {data.personalInfo.website}</div>}
           </div>
@@ -29,7 +30,7 @@ export default function ConsultantTemplate({ data }: { data: CVData }) {
         {data.summary && (
           <section className="mb-2 bg-slate-50 p-3 rounded-lg border-l-4 border-slate-800 flex-shrink-0">
             <h2 className="text-lg font-bold text-slate-800 mb-1">Özet</h2>
-            <p className="text-gray-700 leading-tight break-words whitespace-pre-line text-sm line-clamp-3">{data.summary}</p>
+            <p className="text-gray-700 leading-tight break-words whitespace-pre-line text-sm">{data.summary}</p>
           </section>
         )}
         <div className="flex-1 overflow-hidden" style={{ display: 'flex', flexDirection: 'column' }}>

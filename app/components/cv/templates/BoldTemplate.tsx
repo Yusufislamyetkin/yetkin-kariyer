@@ -22,14 +22,16 @@ export default function BoldTemplate({ data }: { data: CVData }) {
           <div className="flex flex-wrap gap-2 text-gray-300 text-xs font-bold">
             {data.personalInfo.email && <span>{data.personalInfo.email.toUpperCase()}</span>}
             {data.personalInfo.phone && <span>{data.personalInfo.phone}</span>}
+            {data.personalInfo.address && <span>{data.personalInfo.address.toUpperCase()}</span>}
             {data.personalInfo.linkedin && <span>{data.personalInfo.linkedin.toUpperCase()}</span>}
+            {data.personalInfo.website && <span>{data.personalInfo.website.toUpperCase()}</span>}
           </div>
         </div>
         <div className="p-4 flex-1 overflow-hidden" style={{ display: 'flex', flexDirection: 'column' }}>
           {data.summary && (
             <section className="mb-2 bg-yellow-400 p-3 -mx-4 flex-shrink-0">
               <h2 className="text-lg font-black mb-1 text-black">ÖZET</h2>
-              <p className="text-gray-900 leading-tight break-words whitespace-pre-line font-semibold text-sm line-clamp-3">{data.summary}</p>
+              <p className="text-gray-900 leading-tight break-words whitespace-pre-line font-semibold text-sm">{data.summary}</p>
             </section>
           )}
           <div className="grid md:grid-cols-2 gap-4 flex-1 overflow-hidden" style={{ minHeight: 0 }}>

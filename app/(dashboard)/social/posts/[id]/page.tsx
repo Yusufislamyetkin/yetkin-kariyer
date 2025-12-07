@@ -9,6 +9,7 @@ import { X, Loader2, Heart, Bookmark, MoreHorizontal, Trash2, Flag } from "lucid
 import { CommentSection } from "@/app/components/social/CommentSection";
 import { Button } from "@/app/components/ui/Button";
 import { useStrikeCompletionCheck } from "@/hooks/useStrikeCompletionCheck";
+import { renderContentWithLinks } from "@/lib/utils/post-content";
 
 interface Post {
   id: string;
@@ -436,7 +437,7 @@ export default function PostDetailPage() {
                       {post.user.name || "Kullanıcı"}
                     </Link>
                     <span className="text-sm text-[#262626] dark:text-[#fafafa] whitespace-pre-wrap break-words">
-                      {post.content}
+                      {renderContentWithLinks(post.content, "text-blue-600 dark:text-blue-400 hover:underline")}
                     </span>
                   </div>
                 )}

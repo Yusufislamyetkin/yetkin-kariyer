@@ -81,65 +81,23 @@ export async function POST(request: Request) {
       });
     }
 
-    // Calculate total earnings
-    let hackathonSubmissions: any[] = [];
+    // Calculate total earnings from Earning table (source of truth)
+    let allEarnings: any[] = [];
     try {
-      hackathonSubmissions = await db.hackathonSubmission.findMany({
-        where: {
-          OR: [
-            { userId: userId },
-            {
-              team: {
-                members: {
-                  some: {
-                    userId: userId,
-                    status: "active",
-                  },
-                },
-              },
-            },
-          ],
-          status: {
-            in: ["winner", "finalist"],
-          },
-        },
-      });
-    } catch (error) {
-      console.error("Error fetching hackathon submissions:", error);
-      hackathonSubmissions = [];
-    }
-
-    let monthlyFirstPlaces: any[] = [];
-    try {
-      monthlyFirstPlaces = await db.leaderboardEntry.findMany({
+      allEarnings = await db.earning.findMany({
         where: {
           userId: userId,
-          period: "monthly",
-          rank: 1,
         },
       });
     } catch (error) {
-      console.error("Error fetching leaderboard entries:", error);
-      monthlyFirstPlaces = [];
+      console.error("Error fetching earnings:", error);
+      allEarnings = [];
     }
 
-    let freelancerEarnings: any[] = [];
-    try {
-      freelancerEarnings = await db.freelancerBid.findMany({
-        where: {
-          userId: userId,
-          status: "accepted",
-        },
-      });
-    } catch (error) {
-      console.error("Error fetching freelancer earnings:", error);
-      freelancerEarnings = [];
-    }
-
-    const hackathonTotal = hackathonSubmissions.length * 1000;
-    const leaderboardTotal = monthlyFirstPlaces.length * 500;
-    const freelancerTotal = freelancerEarnings.reduce((sum, bid) => sum + (bid.amount || 0), 0);
-    const totalEarnings = hackathonTotal + leaderboardTotal + freelancerTotal;
+    const totalEarnings = allEarnings.reduce(
+      (sum, e) => sum + Number(e.amount),
+      0
+    );
 
     // Check if balance is 0
     if (totalEarnings === 0) {
@@ -147,6 +105,17 @@ export async function POST(request: Request) {
         {
           error: "ZERO_BALANCE",
           message: "Henüz bir kazanç elde etmediniz",
+        },
+        { status: 400 }
+      );
+    }
+
+    // Check minimum withdrawal amount (1000 TL)
+    if (totalEarnings < 1000) {
+      return NextResponse.json(
+        {
+          error: "MINIMUM_AMOUNT_REQUIRED",
+          message: "Para çekmek için minimum 1000 TL kazanç gerekmektedir",
         },
         { status: 400 }
       );

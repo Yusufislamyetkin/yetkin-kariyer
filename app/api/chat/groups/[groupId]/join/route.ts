@@ -57,6 +57,7 @@ export async function POST(request: Request, { params }: { params: { groupId: st
       });
     }
 
+    // Public gruplar için direkt katılım izni ver
     if (group.visibility === "private") {
       if (!group.allowLinkJoin) {
         return NextResponse.json(
@@ -69,6 +70,7 @@ export async function POST(request: Request, { params }: { params: { groupId: st
         return NextResponse.json({ error: "Geçerli bir davet kodu gereklidir." }, { status: 403 });
       }
     }
+    // Public gruplar (visibility !== "private") için invite code kontrolü yapılmaz, direkt katılım izni verilir
 
     const membership = await db.chatGroupMembership.create({
       data: {

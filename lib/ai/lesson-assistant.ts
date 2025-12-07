@@ -323,14 +323,16 @@ export async function sendMessageToLessonAssistant(
       let messageWithContext = message;
       if (context && (context.roadmap || context.progress)) {
         const contextParts: string[] = [];
-        contextParts.push("\n\n[KULLANICI DURUMU]");
+        contextParts.push("\n\n═══════════════════════════════════════════════════════════════");
+        contextParts.push("[KULLANICI DURUMU - KRİTİK BİLGİLER]");
+        contextParts.push("═══════════════════════════════════════════════════════════════");
         
         if (context.roadmap) {
-          contextParts.push(`- Mevcut Yol Haritası: ${context.roadmap}`);
+          contextParts.push(`\nMEVCUT YOL HARİTASI:\n${context.roadmap}`);
         }
         
         if (context.progress) {
-          contextParts.push(`- Şu Anki Adım: ${context.progress.step} (Durum: ${context.progress.status})`);
+          contextParts.push(`\n⚠️⚠️⚠️ ŞU ANKİ ADIM: ${context.progress.step} (Durum: ${context.progress.status})`);
           
           // Tamamlanan adımları hesapla
           if (context.progress.status === "completed") {
@@ -340,7 +342,7 @@ export async function sendMessageToLessonAssistant(
             }
             completedSteps.push(context.progress.step);
             if (completedSteps.length > 0) {
-              contextParts.push(`- Tamamlanan Adımlar: ${completedSteps.join(", ")}`);
+              contextParts.push(`✅ TAMAMLANAN ADIMLAR: ${completedSteps.join(", ")}`);
             }
           }
           
@@ -354,15 +356,24 @@ export async function sendMessageToLessonAssistant(
                 ? context.progress.step + 1 
                 : null;
               if (nextStep) {
-                contextParts.push(`- Sonraki Adım: ${nextStep}`);
+                contextParts.push(`\n🎯 SONRAKİ ADIM: ${nextStep} (Bu adıma geçmeden önce mevcut adımı tamamla!)`);
               } else if (context.progress.step === lastStepNumber && context.progress.status === "completed") {
-                contextParts.push(`- Sonraki Adım: Tüm adımlar tamamlandı, ders bitirilebilir`);
+                contextParts.push(`\n✅ TÜM ADIMLAR TAMAMLANDI: Ders bitirilebilir`);
+              } else {
+                contextParts.push(`\n⚠️ MEVCUT ADIM TAMAMLANMALI: Adım ${context.progress.step} için [STEP_COMPLETE: ${context.progress.step}] gönder!`);
               }
             }
           }
         }
         
-        contextParts.push("\nLütfen bu bilgilere göre yanıt ver ve kullanıcıyı doğru adımda tut. Eğer kullanıcı bir adımı tamamlamışsa, bir sonraki adıma geç.");
+        contextParts.push("\n═══════════════════════════════════════════════════════════════");
+        contextParts.push("⚠️⚠️⚠️ KRİTİK KURALLAR - MUTLAKA UYULMALI:");
+        contextParts.push("═══════════════════════════════════════════════════════════════");
+        contextParts.push("1. HER MESAJINDA [CURRENT_STEP: adım_numarası] tag'ini MUTLAKA kullan!");
+        contextParts.push("2. Adımları SIRAYLA takip et! Bir adımı tamamlamadan (STEP_COMPLETE göndermeden) diğerine geçme!");
+        contextParts.push("3. Mevcut adım tamamlandıysa, bir sonraki adıma geç!");
+        contextParts.push("4. Adım atlama veya sırayı bozma!");
+        contextParts.push("═══════════════════════════════════════════════════════════════\n");
         
         messageWithContext = message + contextParts.join("\n");
       }

@@ -151,12 +151,15 @@ export default function CVBasedInterviewPage() {
   // Polling fonksiyonu
   const pollInterviewStatus = async (interviewId: string) => {
     const pollStartTime = Date.now();
+    const timestamp = new Date().toISOString();
+    
     try {
       // Timeout kontrolü
       if (pollingStartTimeRef.current) {
         const elapsed = Date.now() - pollingStartTimeRef.current;
         if (elapsed > maxPollingDuration) {
-          console.warn(`[CV_INTERVIEW_FRONTEND] ⚠️ Polling timeout: ${interviewId} (${Math.round(elapsed / 1000)}s)`);
+          console.warn(`[CV_INTERVIEW_FRONTEND] [POLL] ⚠️ Polling timeout: ${interviewId} (${Math.round(elapsed / 1000)}s)`);
+          console.warn(`[CV_INTERVIEW_FRONTEND] [POLL] Timestamp: ${timestamp}`);
           if (pollingIntervalRef.current) {
             clearInterval(pollingIntervalRef.current);
             pollingIntervalRef.current = null;
@@ -174,25 +177,62 @@ export default function CVBasedInterviewPage() {
         }
       }
 
-      console.log(`[CV_INTERVIEW_FRONTEND] [POLL] Status kontrol ediliyor... (interviewId: ${interviewId})`);
-      const response = await fetch(`/api/interview/cv-based/${interviewId}/status`);
-      const data = await response.json();
+      const elapsedSinceStart = pollingStartTimeRef.current ? Date.now() - pollingStartTimeRef.current : 0;
+      console.log(`[CV_INTERVIEW_FRONTEND] [POLL] ========== STATUS KONTROLÜ BAŞLADI ==========`);
+      console.log(`[CV_INTERVIEW_FRONTEND] [POLL] Timestamp: ${timestamp}`);
+      console.log(`[CV_INTERVIEW_FRONTEND] [POLL] interviewId: ${interviewId}`);
+      console.log(`[CV_INTERVIEW_FRONTEND] [POLL] Polling başlangıcından geçen süre: ${Math.round(elapsedSinceStart / 1000)}s`);
+      
+      const statusUrl = `/api/interview/cv-based/${interviewId}/status`;
+      console.log(`[CV_INTERVIEW_FRONTEND] [POLL] Fetch URL: ${statusUrl}`);
+      
+      const response = await fetch(statusUrl);
       const pollTime = Date.now() - pollStartTime;
+      
+      console.log(`[CV_INTERVIEW_FRONTEND] [POLL] Response alındı - HTTP ${response.status}, süre: ${pollTime}ms`);
 
       if (!response.ok) {
+        let errorData: any = { error: "Unknown error" };
+        try {
+          errorData = await response.json();
+        } catch {
+          const text = await response.text().catch(() => "");
+          errorData = { error: text || `HTTP ${response.status}` };
+        }
+        
         console.error(`[CV_INTERVIEW_FRONTEND] [POLL] ❌ Status kontrolü başarısız - süre: ${pollTime}ms`, {
           status: response.status,
-          error: data.error,
+          statusText: response.statusText,
+          error: errorData.error || errorData.message,
+          interviewId: interviewId,
+          url: statusUrl,
         });
-        throw new Error(data.error || "Status kontrolü başarısız");
+        throw new Error(errorData.error || errorData.message || "Status kontrolü başarısız");
       }
 
-      console.log(`[CV_INTERVIEW_FRONTEND] [POLL] ✅ Status alındı - süre: ${pollTime}ms`, {
+      const data = await response.json();
+      console.log(`[CV_INTERVIEW_FRONTEND] [POLL] ✅ Status alındı - süre: ${pollTime}ms`);
+      console.log(`[CV_INTERVIEW_FRONTEND] [POLL] Status detayları:`, {
         status: data.status,
         stage: data.stage,
         progress: data.progress,
         questionCount: data.questionCount,
+        interviewId: data.interviewId,
+        error: data.error,
       });
+      console.log(`[CV_INTERVIEW_FRONTEND] [POLL] Stage değeri: ${data.stage} (tip: ${typeof data.stage})`);
+
+      // Önceki stage ile karşılaştır
+      if (interviewStatus) {
+        const previousStage = interviewStatus.stage;
+        if (data.stage !== previousStage) {
+          console.log(`[CV_INTERVIEW_FRONTEND] [POLL] 🔄 Stage değişti: ${previousStage} → ${data.stage}`);
+        } else {
+          console.log(`[CV_INTERVIEW_FRONTEND] [POLL] Stage değişmedi: ${data.stage}`);
+        }
+      } else {
+        console.log(`[CV_INTERVIEW_FRONTEND] [POLL] İlk status alındı - stage: ${data.stage}`);
+      }
 
       setInterviewStatus(data);
       // Progress artışını useEffect'teki lineer animasyon yönetiyor, burada set etmiyoruz
@@ -202,6 +242,8 @@ export default function CVBasedInterviewPage() {
         console.error(`[CV_INTERVIEW_FRONTEND] [POLL] ❌ Hata durumu tespit edildi`, {
           error: data.error,
           interviewId: interviewId,
+          stage: data.stage,
+          questionCount: data.questionCount,
         });
         if (pollingIntervalRef.current) {
           clearInterval(pollingIntervalRef.current);
@@ -219,6 +261,7 @@ export default function CVBasedInterviewPage() {
           clearInterval(progressIntervalRef.current);
           progressIntervalRef.current = null;
         }
+        console.log(`[CV_INTERVIEW_FRONTEND] [POLL] ========== HATA DURUMU - POLLING DURDURULDU ==========`);
         return;
       }
 
@@ -228,7 +271,10 @@ export default function CVBasedInterviewPage() {
         console.log(`[CV_INTERVIEW_FRONTEND] [POLL] ✅ Tamamlandı! - Toplam polling süresi: ${Math.round(totalPollingTime / 1000)}s`, {
           interviewId: interviewId,
           questionCount: data.questionCount,
+          finalStage: data.stage,
+          finalProgress: data.progress,
         });
+        console.log(`[CV_INTERVIEW_FRONTEND] [POLL] ========== TAMAMLANDI - POLLING DURDURULDU ==========`);
         if (pollingIntervalRef.current) {
           clearInterval(pollingIntervalRef.current);
           pollingIntervalRef.current = null;
@@ -241,15 +287,27 @@ export default function CVBasedInterviewPage() {
           router.push(`/interview/practice/${interviewId}`);
         }, 1500);
       } else {
-        console.log(`[CV_INTERVIEW_FRONTEND] [POLL] ⏳ Devam ediyor... (status: ${data.status}, stage: ${data.stage})`);
+        console.log(`[CV_INTERVIEW_FRONTEND] [POLL] ⏳ Devam ediyor... (status: ${data.status}, stage: ${data.stage}, progress: ${data.progress}%, questions: ${data.questionCount})`);
+        console.log(`[CV_INTERVIEW_FRONTEND] [POLL] ========== STATUS KONTROLÜ TAMAMLANDI ==========`);
       }
     } catch (error: any) {
       const pollTime = Date.now() - pollStartTime;
-      console.error(`[CV_INTERVIEW_FRONTEND] [POLL] ❌ Polling hatası - süre: ${pollTime}ms`, {
+      const isNetworkError = 
+        error?.message?.includes("fetch failed") ||
+        error?.message?.includes("Failed to fetch") ||
+        error?.message?.includes("NetworkError") ||
+        error?.name === "TypeError";
+      
+      console.error(`[CV_INTERVIEW_FRONTEND] [POLL] ❌ Polling hatası - süre: ${pollTime}ms`);
+      console.error(`[CV_INTERVIEW_FRONTEND] [POLL] Timestamp: ${timestamp}`);
+      console.error(`[CV_INTERVIEW_FRONTEND] [POLL] Hata detayları:`, {
         interviewId: interviewId,
         error: error.message,
+        name: error.name,
         stack: error.stack,
+        isNetworkError: isNetworkError,
       });
+      
       // Hata durumunda polling'i durdur ve modal'ı kapat
       if (pollingIntervalRef.current) {
         clearInterval(pollingIntervalRef.current);
@@ -260,10 +318,16 @@ export default function CVBasedInterviewPage() {
         clearInterval(progressIntervalRef.current);
         progressIntervalRef.current = null;
       }
-      setError(error.message || "Mülakat durumu kontrol edilemedi. Lütfen sayfayı yenileyip tekrar deneyin.");
+      
+      const errorMsg = isNetworkError 
+        ? "Ağ hatası: Mülakat durumu kontrol edilemedi. Lütfen internet bağlantınızı kontrol edip tekrar deneyin."
+        : (error.message || "Mülakat durumu kontrol edilemedi. Lütfen sayfayı yenileyip tekrar deneyin.");
+      
+      setError(errorMsg);
       setCreating(null);
       setInterviewStatus(null);
       setLoadingProgress(0);
+      console.log(`[CV_INTERVIEW_FRONTEND] [POLL] ========== HATA - POLLING DURDURULDU ==========`);
     }
   };
 
@@ -330,16 +394,19 @@ export default function CVBasedInterviewPage() {
 
       // Polling başlangıç zamanını kaydet
       pollingStartTimeRef.current = Date.now();
+      const pollingStartTimestamp = new Date().toISOString();
       console.log(`[CV_INTERVIEW_FRONTEND] [CREATE] Polling başlatılıyor... (interval: 5s)`);
+      console.log(`[CV_INTERVIEW_FRONTEND] [CREATE] Polling başlangıç zamanı: ${pollingStartTimestamp}`);
 
       // İlk status'u al
+      console.log(`[CV_INTERVIEW_FRONTEND] [CREATE] İlk status kontrolü yapılıyor...`);
       await pollInterviewStatus(interviewId);
 
       // Her 5 saniyede bir status kontrol et (optimize edilmiş interval)
       pollingIntervalRef.current = setInterval(() => {
         pollInterviewStatus(interviewId);
       }, 5000); // 5 saniye
-      console.log(`[CV_INTERVIEW_FRONTEND] [CREATE] ✅ Polling interval başlatıldı`);
+      console.log(`[CV_INTERVIEW_FRONTEND] [CREATE] ✅ Polling interval başlatıldı (5 saniye)`);
     } catch (error: any) {
       const errorTime = Date.now() - createStartTime;
       console.error(`[CV_INTERVIEW_FRONTEND] [CREATE] ❌ Interview oluşturma hatası - süre: ${errorTime}ms`, {

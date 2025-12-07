@@ -22,13 +22,15 @@ export default function CompactTemplate({ data }: { data: CVData }) {
           <div className="text-xs text-gray-700 flex flex-wrap gap-2">
             {data.personalInfo.email && <span>{data.personalInfo.email}</span>}
             {data.personalInfo.phone && <span>{data.personalInfo.phone}</span>}
+            {data.personalInfo.address && <span>{data.personalInfo.address}</span>}
             {data.personalInfo.linkedin && <span>{data.personalInfo.linkedin}</span>}
+            {data.personalInfo.website && <span>{data.personalInfo.website}</span>}
           </div>
         </div>
         {data.summary && (
           <section className="mb-2 flex-shrink-0">
             <h2 className="text-xs font-bold text-gray-900 mb-0.5 uppercase">Özet</h2>
-            <p className="text-gray-700 leading-tight break-words whitespace-pre-line text-xs line-clamp-2">{data.summary}</p>
+            <p className="text-gray-700 leading-tight break-words whitespace-pre-line text-xs">{data.summary}</p>
           </section>
         )}
         <div className="grid md:grid-cols-2 gap-2 flex-1 overflow-hidden" style={{ minHeight: 0 }}>

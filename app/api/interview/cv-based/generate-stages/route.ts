@@ -79,7 +79,10 @@ async function generateInterviewStages(interviewId: string, cvId: string) {
     try {
       const dbUpdateStartTime = Date.now();
       console.log(`[CV_INTERVIEW_BG] [STAGE_1] Veritabanı güncellemesi yapılıyor...`);
-      await db.interview.update({
+      const stage1QuestionCount = Array.isArray(stage1.stage1_introduction) ? stage1.stage1_introduction.length : 0;
+      console.log(`[CV_INTERVIEW_BG] [STAGE_1] Kaydedilecek soru sayısı: ${stage1QuestionCount}`);
+      
+      const updatedInterview = await db.interview.update({
         where: { id: interviewId },
         data: {
           questions: {
@@ -87,12 +90,28 @@ async function generateInterviewStages(interviewId: string, cvId: string) {
           } as any,
         },
       });
+      
       const dbUpdateTime = Date.now() - dbUpdateStartTime;
       console.log(`[CV_INTERVIEW_BG] [STAGE_1] ✅ Veritabanına kaydedildi - süre: ${dbUpdateTime}ms`);
+      
+      // Güncellenmiş interview'ı kontrol et
+      const verifyQuestions = updatedInterview.questions as any;
+      const savedStage1Count = verifyQuestions?.stage1_introduction 
+        ? (Array.isArray(verifyQuestions.stage1_introduction) ? verifyQuestions.stage1_introduction.length : 0)
+        : 0;
+      console.log(`[CV_INTERVIEW_BG] [STAGE_1] ✅ Veritabanı doğrulama - kaydedilen soru sayısı: ${savedStage1Count}`);
+      console.log(`[CV_INTERVIEW_BG] [STAGE_1] ✅ Stage 1 güncellendi - interviewId: ${interviewId}, stage: 1, progress: 33%`);
+      
       const totalStage1Time = Date.now() - stage1StartTime;
       console.log(`[CV_INTERVIEW_BG] [STAGE_1] ========== TAMAMLANDI (Toplam: ${Math.round(totalStage1Time / 1000)}s) ==========`);
     } catch (updateError: any) {
       console.error(`[CV_INTERVIEW_BG] [STAGE_1] ❌ Veritabanı güncelleme hatası:`, updateError);
+      console.error(`[CV_INTERVIEW_BG] [STAGE_1] Hata detayları:`, {
+        message: updateError?.message,
+        name: updateError?.name,
+        stack: updateError?.stack,
+        interviewId: interviewId,
+      });
       throw new Error(`Aşama 1 veritabanı güncelleme hatası: ${updateError?.message || "Bilinmeyen hata"}`);
     }
 
@@ -142,8 +161,12 @@ async function generateInterviewStages(interviewId: string, cvId: string) {
       });
       const currentQuestions = (currentInterview?.questions as any) || {};
       
+      const stage2QuestionCount = Array.isArray(stage2.stage2_experience) ? stage2.stage2_experience.length : 0;
+      console.log(`[CV_INTERVIEW_BG] [STAGE_2] Kaydedilecek soru sayısı: ${stage2QuestionCount}`);
+      console.log(`[CV_INTERVIEW_BG] [STAGE_2] Mevcut stage1 soru sayısı: ${Array.isArray(currentQuestions.stage1_introduction) ? currentQuestions.stage1_introduction.length : 0}`);
+      
       console.log(`[CV_INTERVIEW_BG] [STAGE_2] Veritabanı güncellemesi yapılıyor...`);
-      await db.interview.update({
+      const updatedInterview = await db.interview.update({
         where: { id: interviewId },
         data: {
           questions: {
@@ -152,12 +175,31 @@ async function generateInterviewStages(interviewId: string, cvId: string) {
           } as any,
         },
       });
+      
       const dbUpdateTime = Date.now() - dbUpdateStartTime;
       console.log(`[CV_INTERVIEW_BG] [STAGE_2] ✅ Veritabanına kaydedildi - süre: ${dbUpdateTime}ms`);
+      
+      // Güncellenmiş interview'ı kontrol et
+      const verifyQuestions = updatedInterview.questions as any;
+      const savedStage1Count = verifyQuestions?.stage1_introduction 
+        ? (Array.isArray(verifyQuestions.stage1_introduction) ? verifyQuestions.stage1_introduction.length : 0)
+        : 0;
+      const savedStage2Count = verifyQuestions?.stage2_experience 
+        ? (Array.isArray(verifyQuestions.stage2_experience) ? verifyQuestions.stage2_experience.length : 0)
+        : 0;
+      console.log(`[CV_INTERVIEW_BG] [STAGE_2] ✅ Veritabanı doğrulama - stage1: ${savedStage1Count} soru, stage2: ${savedStage2Count} soru`);
+      console.log(`[CV_INTERVIEW_BG] [STAGE_2] ✅ Stage 2 güncellendi - interviewId: ${interviewId}, stage: 2, progress: 66%`);
+      
       const totalStage2Time = Date.now() - stage2StartTime;
       console.log(`[CV_INTERVIEW_BG] [STAGE_2] ========== TAMAMLANDI (Toplam: ${Math.round(totalStage2Time / 1000)}s) ==========`);
     } catch (updateError: any) {
       console.error(`[CV_INTERVIEW_BG] [STAGE_2] ❌ Veritabanı güncelleme hatası:`, updateError);
+      console.error(`[CV_INTERVIEW_BG] [STAGE_2] Hata detayları:`, {
+        message: updateError?.message,
+        name: updateError?.name,
+        stack: updateError?.stack,
+        interviewId: interviewId,
+      });
       throw new Error(`Aşama 2 veritabanı güncelleme hatası: ${updateError?.message || "Bilinmeyen hata"}`);
     }
 
@@ -274,7 +316,10 @@ async function generateInterviewStages(interviewId: string, cvId: string) {
     try {
       console.log(`[CV_INTERVIEW_BG] [FINALIZE] Interview kaydı güncelleniyor...`);
       const calculatedDuration = Math.ceil(formattedQuestions.length * 3);
-      await db.interview.update({
+      console.log(`[CV_INTERVIEW_BG] [FINALIZE] Formatlanmış soru sayısı: ${formattedQuestions.length}`);
+      console.log(`[CV_INTERVIEW_BG] [FINALIZE] Hesaplanan süre: ${calculatedDuration} dakika`);
+      
+      const updatedInterview = await db.interview.update({
         where: { id: interviewId },
         data: {
           questions: formattedQuestions as any,
@@ -282,11 +327,19 @@ async function generateInterviewStages(interviewId: string, cvId: string) {
           description: `CV'nize göre oluşturulmuş kapsamlı mülakat. ${formattedQuestions.length} soru içermektedir.`,
         },
       });
+      
       const finalizeTime = Date.now() - finalizeStartTime;
       const totalDuration = Date.now() - startTime;
       console.log(`[CV_INTERVIEW_BG] [FINALIZE] ✅ Interview kaydı güncellendi - süre: ${finalizeTime}ms`);
+      
+      // Final doğrulama
+      const finalQuestions = updatedInterview.questions as any;
+      const finalQuestionCount = Array.isArray(finalQuestions) ? finalQuestions.length : 0;
+      console.log(`[CV_INTERVIEW_BG] [FINALIZE] ✅ Veritabanı doğrulama - kaydedilen toplam soru: ${finalQuestionCount}`);
+      console.log(`[CV_INTERVIEW_BG] [FINALIZE] ✅ Stage 3 tamamlandı - interviewId: ${interviewId}, stage: 3, progress: 100%, status: completed`);
       console.log(`[CV_INTERVIEW_BG] [FINALIZE] Final bilgiler:`, {
         totalQuestions: formattedQuestions.length,
+        savedQuestions: finalQuestionCount,
         calculatedDuration: calculatedDuration,
         totalTime: Math.round(totalDuration / 1000),
       });
@@ -295,7 +348,12 @@ async function generateInterviewStages(interviewId: string, cvId: string) {
     } catch (updateError: any) {
       const finalizeTime = Date.now() - finalizeStartTime;
       console.error(`[CV_INTERVIEW_BG] [FINALIZE] ❌ Final güncelleme hatası - süre: ${finalizeTime}ms`);
-      console.error(`[CV_INTERVIEW_BG] [FINALIZE] Hata detayları:`, updateError);
+      console.error(`[CV_INTERVIEW_BG] [FINALIZE] Hata detayları:`, {
+        message: updateError?.message,
+        name: updateError?.name,
+        stack: updateError?.stack,
+        interviewId: interviewId,
+      });
       throw new Error(`Final güncelleme hatası: ${updateError?.message || "Bilinmeyen hata"}`);
     }
   } catch (error: any) {
@@ -338,11 +396,24 @@ async function generateInterviewStages(interviewId: string, cvId: string) {
 }
 
 export async function POST(request: Request) {
+  const requestStartTime = Date.now();
+  const timestamp = new Date().toISOString();
+  
   try {
+    console.log(`[CV_INTERVIEW_STAGES] ========== GENERATE STAGES ENDPOINT BAŞLADI ==========`);
+    console.log(`[CV_INTERVIEW_STAGES] Timestamp: ${timestamp}`);
+    
     const body = await request.json();
     const { interviewId, cvId, userId: providedUserId } = body;
 
+    console.log(`[CV_INTERVIEW_STAGES] [1/4] Request body alındı:`, {
+      interviewId: interviewId,
+      cvId: cvId,
+      hasUserId: !!providedUserId,
+    });
+
     if (!interviewId || typeof interviewId !== "string") {
+      console.error(`[CV_INTERVIEW_STAGES] [1/4] ❌ Interview ID geçersiz`);
       return NextResponse.json(
         { error: "Interview ID gereklidir" },
         { status: 400 }
@@ -350,12 +421,14 @@ export async function POST(request: Request) {
     }
 
     if (!cvId || typeof cvId !== "string") {
+      console.error(`[CV_INTERVIEW_STAGES] [1/4] ❌ CV ID geçersiz`);
       return NextResponse.json(
         { error: "CV ID gereklidir" },
         { status: 400 }
       );
     }
 
+    console.log(`[CV_INTERVIEW_STAGES] [2/4] Interview kontrol ediliyor...`);
     // Interview'ı bir kez sorgula
     const interview = await db.interview.findUnique({
       where: { id: interviewId },
@@ -365,15 +438,18 @@ export async function POST(request: Request) {
     });
 
     if (!interview) {
+      console.error(`[CV_INTERVIEW_STAGES] [2/4] ❌ Interview bulunamadı - interviewId: ${interviewId}`);
       return NextResponse.json(
         { error: "Interview bulunamadı" },
         { status: 404 }
       );
     }
+    console.log(`[CV_INTERVIEW_STAGES] [2/4] ✅ Interview bulundu - title: ${interview.title}`);
 
     // Internal call kontrolü: Eğer userId body'de sağlanmışsa ve interview'ın CV'si bu userId'ye aitse, session kontrolünü bypass et
     let userId: string | null = null;
     
+    console.log(`[CV_INTERVIEW_STAGES] [3/4] Yetki kontrolü yapılıyor...`);
     if (providedUserId && typeof providedUserId === "string" && interview.cvId) {
       const cv = await db.cV.findUnique({
         where: { id: interview.cvId },
@@ -382,7 +458,7 @@ export async function POST(request: Request) {
       // CV'nin userId'si sağlanan userId ile eşleşiyorsa internal call olarak kabul et
       if (cv && cv.userId === providedUserId) {
         userId = providedUserId;
-        console.log(`[CV_INTERVIEW_STAGES] Internal call detected for interviewId: ${interviewId}, userId: ${userId}`);
+        console.log(`[CV_INTERVIEW_STAGES] [3/4] ✅ Internal call detected - interviewId: ${interviewId}, userId: ${userId}`);
       }
     }
     
@@ -392,8 +468,10 @@ export async function POST(request: Request) {
       userId = await getUserIdFromSession(session);
       
       if (!userId) {
+        console.error(`[CV_INTERVIEW_STAGES] [3/4] ❌ Unauthorized - session yok`);
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
       }
+      console.log(`[CV_INTERVIEW_STAGES] [3/4] ✅ Session kontrolü başarılı - userId: ${userId}`);
     }
 
     // Interview'ın CV'si üzerinden kullanıcı kontrolü
@@ -403,12 +481,14 @@ export async function POST(request: Request) {
       });
 
       if (!cv || cv.userId !== userId) {
+        console.error(`[CV_INTERVIEW_STAGES] [3/4] ❌ Yetki yok - cv.userId: ${cv?.userId}, request.userId: ${userId}`);
         return NextResponse.json(
           { error: "Bu interview'a erişim yetkiniz yok" },
           { status: 403 }
         );
       }
     } else {
+      console.error(`[CV_INTERVIEW_STAGES] [3/4] ❌ Interview CV ile ilişkili değil`);
       return NextResponse.json(
         { error: "Interview CV ile ilişkili değil" },
         { status: 400 }
@@ -417,16 +497,22 @@ export async function POST(request: Request) {
 
     // CV ID'lerin eşleştiğini kontrol et
     if (interview.cvId !== cvId) {
+      console.error(`[CV_INTERVIEW_STAGES] [3/4] ❌ CV ID eşleşmiyor - interview.cvId: ${interview.cvId}, request.cvId: ${cvId}`);
       return NextResponse.json(
         { error: "CV ID eşleşmiyor" },
         { status: 400 }
       );
     }
 
-    console.log(`[CV_INTERVIEW_STAGES] Aşamalı mülakat oluşturma başlatılıyor: interviewId=${interviewId}, cvId=${cvId}`);
+    console.log(`[CV_INTERVIEW_STAGES] [4/4] Aşamalı mülakat oluşturma başlatılıyor: interviewId=${interviewId}, cvId=${cvId}`);
+    console.log(`[CV_INTERVIEW_STAGES] ========== GENERATE STAGES FONKSİYONU ÇAĞRILIYOR ==========`);
 
     // Arka planda aşamalı olarak soruları oluştur
     await generateInterviewStages(interviewId, cvId);
+
+    const responseTime = Date.now() - requestStartTime;
+    console.log(`[CV_INTERVIEW_STAGES] ✅ Aşamalı mülakat oluşturma tamamlandı - süre: ${Math.round(responseTime / 1000)}s`);
+    console.log(`[CV_INTERVIEW_STAGES] ========== GENERATE STAGES ENDPOINT TAMAMLANDI ==========`);
 
     return NextResponse.json({
       success: true,
@@ -434,7 +520,15 @@ export async function POST(request: Request) {
       interviewId,
     });
   } catch (error: any) {
-    console.error("[CV_INTERVIEW_STAGES] Genel hata:", error);
+    const errorTime = Date.now() - requestStartTime;
+    console.error(`[CV_INTERVIEW_STAGES] ========== GENEL HATA OLUŞTU ==========`);
+    console.error(`[CV_INTERVIEW_STAGES] Timestamp: ${timestamp}`);
+    console.error(`[CV_INTERVIEW_STAGES] Hata süresi: ${errorTime}ms`);
+    console.error(`[CV_INTERVIEW_STAGES] Hata detayları:`, {
+      message: error?.message || "Bilinmeyen hata",
+      name: error?.name,
+      stack: error?.stack,
+    });
     return NextResponse.json(
       { 
         success: false,

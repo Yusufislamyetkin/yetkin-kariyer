@@ -24,12 +24,13 @@ export default function CorporateTemplate({ data }: { data: CVData }) {
             {data.personalInfo.phone && <div>Telefon: {data.personalInfo.phone}</div>}
             {data.personalInfo.address && <div>Adres: {data.personalInfo.address}</div>}
             {data.personalInfo.linkedin && <div>LinkedIn: {data.personalInfo.linkedin}</div>}
+            {data.personalInfo.website && <div>Website: {data.personalInfo.website}</div>}
           </div>
         </div>
         {data.summary && (
           <section className="mb-2 border-l-4 border-gray-800 pl-2 flex-shrink-0">
             <h2 className="text-lg font-bold text-gray-800 mb-1">Özet</h2>
-            <p className="text-gray-700 leading-tight break-words whitespace-pre-line text-sm line-clamp-3">{data.summary}</p>
+            <p className="text-gray-700 leading-tight break-words whitespace-pre-line text-sm">{data.summary}</p>
           </section>
         )}
         <div className="grid md:grid-cols-3 gap-4 flex-1 overflow-hidden" style={{ minHeight: 0 }}>

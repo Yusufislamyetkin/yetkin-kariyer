@@ -114,7 +114,7 @@ export default function ProfessionalTemplate({ data }: ProfessionalTemplateProps
                 <h2 className="text-lg font-bold mb-1" style={{ color: '#1e40af' }}>
                   Profesyonel Özet
                 </h2>
-                <p className="text-gray-700 text-sm leading-tight break-words whitespace-pre-line line-clamp-3">
+                <p className="text-gray-700 text-sm leading-tight break-words whitespace-pre-line">
                   {data.summary}
                 </p>
               </section>

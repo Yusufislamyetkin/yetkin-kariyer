@@ -87,7 +87,22 @@ export async function POST(request: Request) {
     const baseUrl = getBaseUrl();
     const generateStagesUrl = `${baseUrl}/api/interview/cv-based/generate-stages`;
     
+    console.log(`[CV_INTERVIEW] [6/6] Fetch URL: ${generateStagesUrl}`);
+    console.log(`[CV_INTERVIEW] [6/6] Fetch body:`, {
+      interviewId: interview.id,
+      cvId: cvId,
+      userId: userId,
+    });
+    
+    // AbortController ile timeout ekle (30 saniye)
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => {
+      console.warn(`[CV_INTERVIEW] [6/6] ⚠️ Fetch timeout (30s) - aborting...`);
+      controller.abort();
+    }, 30000); // 30 saniye timeout
+    
     // Fire-and-forget: await etmeden çağır
+    const fetchStartTime = Date.now();
     fetch(generateStagesUrl, {
       method: "POST",
       headers: {
@@ -100,51 +115,112 @@ export async function POST(request: Request) {
         cvId: cvId,
         userId: userId, // Internal call için userId'yi gönder
       }),
+      signal: controller.signal,
     })
       .then(async (response) => {
+        clearTimeout(timeoutId);
+        const fetchTime = Date.now() - fetchStartTime;
         const totalTime = Date.now() - requestStartTime;
+        
+        console.log(`[CV_INTERVIEW] [6/6] Fetch response alındı - HTTP ${response.status}, fetch süre: ${fetchTime}ms, toplam: ${Math.round(totalTime / 1000)}s`);
+        
         if (!response.ok) {
-          const errorData = await response.json().catch(() => ({ error: "Unknown error" }));
+          let errorData: any = { error: "Unknown error" };
+          try {
+            const text = await response.text();
+            console.error(`[CV_INTERVIEW] [6/6] Response body (error):`, text.substring(0, 500));
+            try {
+              errorData = JSON.parse(text);
+            } catch {
+              errorData = { error: text || `HTTP ${response.status}` };
+            }
+          } catch (parseError) {
+            console.error(`[CV_INTERVIEW] [6/6] Response parse hatası:`, parseError);
+            errorData = { error: `HTTP ${response.status} - Response parse edilemedi` };
+          }
+          
           console.error(`[CV_INTERVIEW] [6/6] ❌ Arka plan işlemi hatası - interviewId: ${interview.id}, süre: ${Math.round(totalTime / 1000)}s`);
-          console.error(`[CV_INTERVIEW] HTTP Status: ${response.status}`, {
+          console.error(`[CV_INTERVIEW] [6/6] HTTP Status: ${response.status}`, {
             error: errorData.error || errorData.message || "Bilinmeyen hata",
             cvId: cvId,
             interviewId: interview.id,
+            url: generateStagesUrl,
+            statusText: response.statusText,
           });
+          
           // Hata durumunda interview description'ına hata mesajı ekle
-          db.interview.update({
+          const errorMsg = errorData.error || errorData.message || `HTTP ${response.status}: ${response.statusText}`;
+          await db.interview.update({
             where: { id: interview.id },
             data: {
-              description: `Mülakat soruları oluşturulurken hata oluştu: ${errorData.error || errorData.message || "Bilinmeyen hata"}. Lütfen tekrar deneyin.`,
+              description: `Mülakat soruları oluşturulurken hata oluştu: ${errorMsg}. Lütfen tekrar deneyin.`,
             },
           }).catch((updateError: unknown) => {
-            console.error(`[CV_INTERVIEW] ❌ Hata mesajı veritabanına kaydedilemedi:`, updateError);
+            console.error(`[CV_INTERVIEW] [6/6] ❌ Hata mesajı veritabanına kaydedilemedi:`, updateError);
           });
         } else {
-          const data = await response.json().catch(() => ({}));
+          let data: any = {};
+          try {
+            const text = await response.text();
+            console.log(`[CV_INTERVIEW] [6/6] Response body (success):`, text.substring(0, 500));
+            if (text) {
+              try {
+                data = JSON.parse(text);
+              } catch {
+                data = { message: text };
+              }
+            }
+          } catch (parseError) {
+            console.warn(`[CV_INTERVIEW] [6/6] Response parse hatası (non-critical):`, parseError);
+          }
+          
           console.log(`[CV_INTERVIEW] [6/6] ✅ Arka plan işlemi başlatıldı - interviewId: ${interview.id}, toplam süre: ${Math.round(totalTime / 1000)}s`);
-          console.log(`[CV_INTERVIEW] [6/6] Response:`, data);
+          console.log(`[CV_INTERVIEW] [6/6] Response data:`, data);
           console.log(`[CV_INTERVIEW] ========== MÜLAKAT OLUŞTURMA İSTEĞİ TAMAMLANDI ==========`);
         }
       })
       .catch((error) => {
+        clearTimeout(timeoutId);
+        const fetchTime = Date.now() - fetchStartTime;
         const totalTime = Date.now() - requestStartTime;
-        console.error(`[CV_INTERVIEW] [6/6] ❌ Fetch hatası - interviewId: ${interview.id}, süre: ${Math.round(totalTime / 1000)}s`);
-        console.error(`[CV_INTERVIEW] Fetch hata detayları:`, {
+        
+        const isAborted = error?.name === "AbortError" || error?.message?.includes("aborted");
+        const isTimeout = fetchTime >= 30000;
+        const isNetworkError = 
+          error?.message?.includes("fetch failed") ||
+          error?.message?.includes("ECONNREFUSED") ||
+          error?.message?.includes("ENOTFOUND") ||
+          error?.message?.includes("network");
+        
+        console.error(`[CV_INTERVIEW] [6/6] ❌ Fetch hatası - interviewId: ${interview.id}, fetch süre: ${fetchTime}ms, toplam: ${Math.round(totalTime / 1000)}s`);
+        console.error(`[CV_INTERVIEW] [6/6] Fetch hata detayları:`, {
           message: error?.message || "Bilinmeyen hata",
+          name: error?.name,
           stack: error?.stack,
           cvId: cvId,
           interviewId: interview.id,
           url: generateStagesUrl,
+          baseUrl: baseUrl,
+          isAborted: isAborted,
+          isTimeout: isTimeout,
+          isNetworkError: isNetworkError,
         });
+        
         // Hata durumunda interview description'ına hata mesajı ekle
+        let errorMsg = error?.message || "Bilinmeyen hata";
+        if (isAborted || isTimeout) {
+          errorMsg = "Zaman aşımı: Arka plan işlemi başlatılamadı. Lütfen tekrar deneyin.";
+        } else if (isNetworkError) {
+          errorMsg = "Ağ hatası: Arka plan işlemi başlatılamadı. Lütfen tekrar deneyin.";
+        }
+        
         db.interview.update({
           where: { id: interview.id },
           data: {
-            description: `Mülakat soruları oluşturulurken hata oluştu: ${error?.message || "Bilinmeyen hata"}. Lütfen tekrar deneyin.`,
+            description: `Mülakat soruları oluşturulurken hata oluştu: ${errorMsg}. Lütfen tekrar deneyin.`,
           },
         }).catch((updateError: unknown) => {
-          console.error(`[CV_INTERVIEW] ❌ Hata mesajı veritabanına kaydedilemedi:`, updateError);
+          console.error(`[CV_INTERVIEW] [6/6] ❌ Hata mesajı veritabanına kaydedilemedi:`, updateError);
         });
       });
 

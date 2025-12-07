@@ -107,6 +107,12 @@ interface NextTest {
 
 export default function QuizResultsPage() {
   const params = useParams();
+  const resolvedId =
+    typeof params.id === "string"
+      ? params.id
+      : Array.isArray(params.id)
+      ? params.id[0]
+      : "";
   const [attempt, setAttempt] = useState<QuizAttempt | null>(null);
   const [analysis, setAnalysis] = useState<AIAnalysis | null>(null);
   const [loading, setLoading] = useState(true);
@@ -123,11 +129,11 @@ export default function QuizResultsPage() {
   const hasCelebratedRef = useRef(false);
 
   useEffect(() => {
-    if (params.id) {
+    if (resolvedId) {
       fetchResults();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [params.id]);
+  }, [resolvedId]);
 
   // Rozet kazanıldığında notification göster
   useEffect(() => {
@@ -190,7 +196,7 @@ export default function QuizResultsPage() {
     try {
       setLoading(true);
       setError(null);
-      const response = await fetch(`/api/quiz/results/${params.id}`);
+      const response = await fetch(`/api/quiz/results/${resolvedId}`);
       if (!response.ok) {
         const data = await response.json().catch(() => ({}));
         throw new Error(data.error || "Sonuç bulunamadı");
@@ -1364,22 +1370,6 @@ export default function QuizResultsPage() {
           <Link href={`/education/courses/${attempt.quiz.course.id}`}>
             <Button variant="gradient" className="flex items-center gap-2">
               Kurs sayfasına dön
-            </Button>
-          </Link>
-        )}
-        {nextQuiz && (
-          <Link href={`/education/quiz/${nextQuiz.id}`}>
-            <Button variant="primary" className="flex items-center gap-2">
-              Sonraki Test
-              <ArrowRight className="h-4 w-4" />
-            </Button>
-          </Link>
-        )}
-        {nextTest && (
-          <Link href={`/education/tests/${nextTest.technology}/${nextTest.module}/${nextTest.id}`}>
-            <Button variant="primary" className="flex items-center gap-2">
-              Modüldeki Sonraki Test
-              <ArrowRight className="h-4 w-4" />
             </Button>
           </Link>
         )}

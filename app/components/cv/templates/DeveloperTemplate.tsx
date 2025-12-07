@@ -22,6 +22,7 @@ export default function DeveloperTemplate({ data }: { data: CVData }) {
           <div className="text-green-300 text-xs space-y-0.5 font-mono">
             {data.personalInfo.email && <div>📧 {data.personalInfo.email}</div>}
             {data.personalInfo.phone && <div>📱 {data.personalInfo.phone}</div>}
+            {data.personalInfo.address && <div>📍 {data.personalInfo.address}</div>}
             {data.personalInfo.linkedin && <div>💼 {data.personalInfo.linkedin}</div>}
             {data.personalInfo.website && <div>🌐 {data.personalInfo.website}</div>}
           </div>
@@ -29,7 +30,7 @@ export default function DeveloperTemplate({ data }: { data: CVData }) {
         {data.summary && (
           <section className="mb-2 bg-white p-3 rounded-lg border-l-4 border-green-500 flex-shrink-0">
             <h2 className="text-lg font-bold text-gray-900 mb-1 font-mono">{'// Özet'}</h2>
-            <p className="text-gray-700 leading-tight break-words whitespace-pre-line text-sm line-clamp-3">{data.summary}</p>
+            <p className="text-gray-700 leading-tight break-words whitespace-pre-line text-sm">{data.summary}</p>
           </section>
         )}
         <div className="grid md:grid-cols-2 gap-4 flex-1 overflow-hidden" style={{ minHeight: 0 }}>

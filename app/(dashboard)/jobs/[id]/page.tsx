@@ -15,8 +15,6 @@ import {
   Target,
   Circle,
   Star,
-  Upload,
-  FileText,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
@@ -59,9 +57,6 @@ export default function JobDetailPage() {
   const [loading, setLoading] = useState(true);
   const [applying, setApplying] = useState(false);
   const [selectedCV, setSelectedCV] = useState("");
-  const [applicationMode, setApplicationMode] = useState<"existing" | "pdf">("existing");
-  const [pdfFile, setPdfFile] = useState<File | null>(null);
-  const [pdfFileName, setPdfFileName] = useState<string>("");
   const [matchAnalysis, setMatchAnalysis] = useState<JobMatchAnalysis | null>(null);
   const [matchLoading, setMatchLoading] = useState(false);
   const [matchError, setMatchError] = useState<string | null>(null);
@@ -100,60 +95,22 @@ export default function JobDetailPage() {
     }
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      if (file.type !== "application/pdf") {
-        alert("Sadece PDF dosyaları kabul edilir");
-        return;
-      }
-      if (file.size > 10 * 1024 * 1024) {
-        alert("Dosya boyutu 10MB'ı aşamaz");
-        return;
-      }
-      setPdfFile(file);
-      setPdfFileName(file.name);
-    }
-  };
-
   const handleApply = async () => {
-    if (applicationMode === "existing") {
-      if (!selectedCV) {
-        alert("Lütfen bir CV seçin");
-        return;
-      }
-    } else {
-      if (!pdfFile) {
-        alert("Lütfen bir PDF dosyası seçin");
-        return;
-      }
+    if (!selectedCV) {
+      alert("Lütfen bir CV seçin");
+      return;
     }
 
     setApplying(true);
     try {
-      let response: Response;
-      
-      if (applicationMode === "pdf" && pdfFile) {
-        // PDF upload mode
-        const formData = new FormData();
-        formData.append("jobId", params.id as string);
-        formData.append("pdfFile", pdfFile);
-        
-        response = await fetch("/api/jobs/apply", {
-          method: "POST",
-          body: formData,
-        });
-      } else {
-        // Existing CV mode
-        response = await fetch("/api/jobs/apply", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            jobId: params.id,
-            cvId: selectedCV,
-          }),
-        });
-      }
+      const response = await fetch("/api/jobs/apply", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          jobId: params.id,
+          cvId: selectedCV,
+        }),
+      });
 
       const data = await response.json();
       if (response.ok) {
@@ -394,160 +351,29 @@ export default function JobDetailPage() {
           <CardTitle>Başvuru ve AI Uyum Analizi</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          {/* Application Mode Selection */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              Başvuru Yöntemi
-            </label>
-            <div className="flex gap-4">
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="radio"
-                  name="applicationMode"
-                  value="existing"
-                  checked={applicationMode === "existing"}
-                  onChange={(e) => setApplicationMode(e.target.value as "existing" | "pdf")}
-                  className="w-4 h-4 text-blue-600 focus:ring-blue-500"
-                />
-                <span className="text-sm text-gray-700 dark:text-gray-300">
-                  Mevcut CV&apos;mi kullan
-                </span>
-              </label>
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="radio"
-                  name="applicationMode"
-                  value="pdf"
-                  checked={applicationMode === "pdf"}
-                  onChange={(e) => setApplicationMode(e.target.value as "existing" | "pdf")}
-                  className="w-4 h-4 text-blue-600 focus:ring-blue-500"
-                />
-                <span className="text-sm text-gray-700 dark:text-gray-300">
-                  PDF CV yükle
-                </span>
-              </label>
-            </div>
-          </div>
-
-          {applicationMode === "existing" ? (
-            <>
-              {cvs.length > 0 ? (
-                <>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                      Kullanmak istediğiniz CV
-                    </label>
-                    <select
-                      value={selectedCV}
-                      onChange={(e) => setSelectedCV(e.target.value)}
-                      className="w-full rounded-xl border border-gray-300 bg-white px-4 py-2 text-sm shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900/70 dark:text-gray-100"
-                    >
-                      {cvs.map((cv) => (
-                        <option key={cv.id} value={cv.id}>
-                          {cv.data?.personalInfo?.name || "CV"} - {cv.id.slice(0, 8)}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="flex flex-wrap gap-3">
-                    <Button
-                      onClick={handleApply}
-                      disabled={applying}
-                      className="flex items-center gap-2"
-                    >
-                      {applying ? (
-                        <>
-                          <Loader2 className="h-4 w-4 animate-spin" />
-                          Başvuru yapılıyor...
-                        </>
-                      ) : (
-                        <>
-                          <CheckCircle className="h-4 w-4" />
-                          Başvur
-                        </>
-                      )}
-                    </Button>
-                    <Button
-                      variant="outline"
-                      onClick={handleAnalyzeMatch}
-                      disabled={matchLoading || !selectedCV}
-                      className="flex items-center gap-2"
-                    >
-                      {matchLoading ? (
-                        <>
-                          <Loader2 className="h-4 w-4 animate-spin" />
-                          Analiz ediliyor...
-                        </>
-                      ) : (
-                        <>
-                          <Sparkles className="h-4 w-4" />
-                          AI Uyum Analizi
-                        </>
-                      )}
-                    </Button>
-                  </div>
-                </>
-              ) : (
-                <div className="rounded-xl border border-yellow-200 bg-yellow-50 px-4 py-5 text-sm text-yellow-800 dark:border-yellow-900/40 dark:bg-yellow-900/20 dark:text-yellow-200">
-                  Başvuru yapabilmek için önce bir CV oluşturmanız gerekiyor.
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="mt-3"
-                    onClick={() => router.push("/cv/templates")}
-                  >
-                    CV Oluştur
-                  </Button>
-                </div>
-              )}
-            </>
-          ) : (
+          {cvs.length > 0 ? (
             <>
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  PDF CV Dosyası
+                  Kullanmak istediğiniz CV
                 </label>
-                <div className="flex flex-col gap-3">
-                  <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-xl cursor-pointer bg-gray-50 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-                    <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                      <Upload className="w-10 h-10 mb-3 text-gray-400" />
-                      <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                        <span className="font-semibold">Dosyayı seçmek için tıklayın</span> veya sürükleyip bırakın
-                      </p>
-                      <p className="text-xs text-gray-500 dark:text-gray-400">
-                        PDF (MAX. 10MB)
-                      </p>
-                    </div>
-                    <input
-                      type="file"
-                      accept="application/pdf"
-                      onChange={handleFileChange}
-                      className="hidden"
-                    />
-                  </label>
-                  {pdfFileName && (
-                    <div className="flex items-center gap-2 rounded-lg border border-green-200 bg-green-50 px-3 py-2 text-sm text-green-700 dark:border-green-900/40 dark:bg-green-900/20 dark:text-green-200">
-                      <FileText className="h-4 w-4" />
-                      <span className="flex-1 truncate">{pdfFileName}</span>
-                      <button
-                        onClick={() => {
-                          setPdfFile(null);
-                          setPdfFileName("");
-                        }}
-                        className="text-green-700 hover:text-green-900 dark:text-green-200 dark:hover:text-green-100"
-                      >
-                        ×
-                      </button>
-                    </div>
-                  )}
-                </div>
+                <select
+                  value={selectedCV}
+                  onChange={(e) => setSelectedCV(e.target.value)}
+                  className="w-full rounded-xl border border-gray-300 bg-white px-4 py-2 text-sm shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-900/70 dark:text-gray-100"
+                >
+                  {cvs.map((cv) => (
+                    <option key={cv.id} value={cv.id}>
+                      {cv.data?.personalInfo?.name || "CV"} - {cv.id.slice(0, 8)}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <div className="flex flex-wrap gap-3">
                 <Button
                   onClick={handleApply}
-                  disabled={applying || !pdfFile}
+                  disabled={applying}
                   className="flex items-center gap-2"
                 >
                   {applying ? (
@@ -562,8 +388,38 @@ export default function JobDetailPage() {
                     </>
                   )}
                 </Button>
+                <Button
+                  variant="outline"
+                  onClick={handleAnalyzeMatch}
+                  disabled={matchLoading || !selectedCV}
+                  className="flex items-center gap-2"
+                >
+                  {matchLoading ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      Analiz ediliyor...
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="h-4 w-4" />
+                      AI Uyum Analizi
+                    </>
+                  )}
+                </Button>
               </div>
             </>
+          ) : (
+            <div className="rounded-xl border border-yellow-200 bg-yellow-50 px-4 py-5 text-sm text-yellow-800 dark:border-yellow-900/40 dark:bg-yellow-900/20 dark:text-yellow-200">
+              Başvuru yapabilmek için önce bir CV oluşturmanız gerekiyor.
+              <Button
+                variant="outline"
+                size="sm"
+                className="mt-3"
+                onClick={() => router.push("/cv/templates")}
+              >
+                CV Oluştur
+              </Button>
+            </div>
           )}
 
           {matchError && (

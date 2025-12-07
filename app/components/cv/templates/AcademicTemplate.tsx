@@ -91,7 +91,7 @@ export default function AcademicTemplate({ data }: AcademicTemplateProps) {
               <h2 className="text-lg font-bold mb-1 text-gray-900 uppercase tracking-wide border-b border-gray-300 pb-1">
                 Özet
               </h2>
-              <p className="text-gray-700 leading-tight break-words whitespace-pre-line text-xs line-clamp-3">
+              <p className="text-gray-700 leading-tight break-words whitespace-pre-line text-xs">
                 {data.summary}
               </p>
             </section>

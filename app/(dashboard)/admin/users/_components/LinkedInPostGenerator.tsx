@@ -32,7 +32,7 @@ export function LinkedInPostGenerator({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [topic, setTopic] = useState("");
-  const [postType, setPostType] = useState<1 | 2 | 3 | 4>(1);
+  const [postType, setPostType] = useState<1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10>(1);
   const [selectedBotId, setSelectedBotId] = useState<string>("");
   const [generatedContent, setGeneratedContent] = useState<string>("");
   const [saveAsPost, setSaveAsPost] = useState(false);
@@ -134,6 +134,12 @@ export function LinkedInPostGenerator({
     { value: 2, label: "Teknik Karşılaştırma/Trend", description: "Analitik, heyecanlı, karşılaştırmalı" },
     { value: 3, label: "Sektörel Eleştiri/Tavsiye", description: "Otoriter, çözüm odaklı" },
     { value: 4, label: "İlginç Teknoloji Haberi", description: "Merak uyandırıcı, hafif gizemli" },
+    { value: 5, label: "Soru-Cevap / Tartışma Başlatıcı", description: "Etkileşim odaklı, sorgulayıcı" },
+    { value: 6, label: "Vaka Çalışması / Başarı Hikayesi", description: "Somut sonuçlar, öğretici" },
+    { value: 7, label: "Trend Analizi / Gelecek Öngörüsü", description: "Analitik, öngörücü" },
+    { value: 8, label: "Araç/Teknoloji İncelemesi", description: "Detaylı, karşılaştırmalı" },
+    { value: 9, label: "Kariyer İpuçları / Mentorluk", description: "Öğretici, destekleyici" },
+    { value: 10, label: "Topluluk Deneyimi / Etkinlik Paylaşımı", description: "Samimi, paylaşımcı" },
   ];
 
   if (!isOpen) return null;
@@ -205,7 +211,7 @@ export function LinkedInPostGenerator({
                 </label>
                 <select
                   value={postType}
-                  onChange={(e) => setPostType(parseInt(e.target.value) as 1 | 2 | 3 | 4)}
+                  onChange={(e) => setPostType(parseInt(e.target.value) as 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10)}
                   className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                   disabled={loading}
                 >

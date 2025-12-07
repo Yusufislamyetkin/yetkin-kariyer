@@ -3,6 +3,8 @@ import { z } from "zod";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { broadcastPresenceUpdate } from "@/lib/realtime/signalr-triggers";
+import { getBotsToUpdateForGroup } from "@/lib/bot/keep-online-jobs";
+import { updateBotsPresence } from "@/lib/bot/bot-session";
 
 const presenceSchema = z.object({
   status: z.enum(["online", "offline"]).default("online"),
@@ -101,6 +103,44 @@ export async function POST(request: Request, { params }: { params: { groupId: st
       status,
       lastSeenAt: resolvedLastSeen.toISOString(),
     });
+
+    // Keep-online integration: Update bots that should be kept online for this group
+    // This runs asynchronously to not block the main presence update
+    try {
+      // Get all member IDs of this group (for filtering)
+      const groupMembers = await db.chatGroupMembership.findMany({
+        where: { groupId: params.groupId },
+        select: { userId: true },
+      });
+      const memberIds = groupMembers.map((m: { userId: string }) => m.userId);
+
+      // Check if any bots should be kept online for this group
+      const { userIds: botsToUpdate, shouldUpdate } = getBotsToUpdateForGroup(
+        params.groupId,
+        memberIds
+      );
+
+      if (shouldUpdate && botsToUpdate.length > 0) {
+        // Batch update bots' presence (non-blocking)
+        updateBotsPresence(botsToUpdate, params.groupId).catch((error) => {
+          console.error("[KEEP_ONLINE] Error updating bots presence:", error);
+        });
+
+        // Broadcast presence updates for bots
+        for (const botId of botsToUpdate) {
+          broadcastPresenceUpdate(params.groupId, {
+            userId: botId,
+            status: "online",
+            lastSeenAt: new Date().toISOString(),
+          }).catch((error) => {
+            console.error("[KEEP_ONLINE] Error broadcasting bot presence:", error);
+          });
+        }
+      }
+    } catch (error) {
+      // Don't fail the main request if keep-online update fails
+      console.error("[KEEP_ONLINE] Error in keep-online integration:", error);
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {

@@ -114,7 +114,7 @@ export default function CreativeTemplate({ data }: CreativeTemplateProps) {
             <h2 className="text-lg font-bold mb-1" style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
               Profesyonel Özet
             </h2>
-            <p className="text-gray-800 text-sm leading-tight break-words whitespace-pre-line line-clamp-3">
+            <p className="text-gray-800 text-sm leading-tight break-words whitespace-pre-line">
               {data.summary}
             </p>
           </section>

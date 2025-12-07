@@ -115,6 +115,7 @@ export default function DashboardPage() {
   // Fetch core dashboard data using unified API
   useEffect(() => {
     fetchDashboardData();
+    fetchLeaderboardRanks();
   }, []);
 
   // Fetch AI recommendations separately (non-blocking)
@@ -134,7 +135,13 @@ export default function DashboardPage() {
 
   const fetchDashboardData = async () => {
     try {
-      const response = await fetch("/api/dashboard/data");
+      // Fetch dashboard stats, badges, earnings, and strike data
+      const response = await fetch("/api/dashboard/data", {
+        cache: 'no-store',
+        headers: {
+          'Cache-Control': 'no-cache',
+        },
+      });
       
       if (!response.ok) {
         throw new Error("Failed to fetch dashboard data");
@@ -160,53 +167,6 @@ export default function DashboardPage() {
       }
       setBadgesLoading(false);
 
-      // Process ranks
-      if (data.ranks) {
-        const { daily, weekly, monthly } = data.ranks;
-        
-        // Process daily rank
-        if (daily && typeof daily === 'object' && typeof daily.rank === 'number' && daily.rank > 0) {
-          setDailyRank({
-            rank: daily.rank,
-            quizCount: daily.quizCount || 0,
-            averageScore: daily.averageScore || 0,
-            points: daily.points || 0,
-          });
-        } else {
-          setDailyRank(null);
-        }
-        
-        // Process weekly rank - check if weekly exists and is not null
-        if (weekly && weekly !== null && typeof weekly === 'object' && typeof weekly.rank === 'number' && weekly.rank > 0) {
-          setWeeklyRank({
-            rank: weekly.rank,
-            quizCount: weekly.quizCount || 0,
-            averageScore: weekly.averageScore || 0,
-            points: weekly.points || 0,
-          });
-        } else {
-          setWeeklyRank(null);
-        }
-        
-        // Process monthly rank - check if monthly exists and is not null
-        if (monthly && monthly !== null && typeof monthly === 'object' && typeof monthly.rank === 'number' && monthly.rank > 0) {
-          setMonthlyRank({
-            rank: monthly.rank,
-            quizCount: monthly.quizCount || 0,
-            averageScore: monthly.averageScore || 0,
-            points: monthly.points || 0,
-          });
-        } else {
-          setMonthlyRank(null);
-        }
-      } else {
-        // Reset all ranks if data.ranks is not available
-        setDailyRank(null);
-        setWeeklyRank(null);
-        setMonthlyRank(null);
-      }
-      setRanksLoading(false);
-
       // Process earnings
       if (data.earnings) {
         setTotalEarnings(data.earnings.total || 0);
@@ -229,9 +189,95 @@ export default function DashboardPage() {
       // Set loading states to false on error
       setStatsLoading(false);
       setBadgesLoading(false);
-      setRanksLoading(false);
       setEarningsLoading(false);
       setStrikeLoading(false);
+    }
+  };
+
+  // Fetch leaderboard ranks from competition API for each period
+  const fetchLeaderboardRanks = async () => {
+    try {
+      setRanksLoading(true);
+      
+      // Fetch ranks for all periods in parallel
+      const [dailyResponse, weeklyResponse, monthlyResponse] = await Promise.all([
+        fetch(`/api/competition/leaderboard?period=daily&limit=100`, {
+          cache: 'no-store',
+          headers: {
+            'Cache-Control': 'no-cache',
+          },
+        }),
+        fetch(`/api/competition/leaderboard?period=weekly&limit=100`, {
+          cache: 'no-store',
+          headers: {
+            'Cache-Control': 'no-cache',
+          },
+        }),
+        fetch(`/api/competition/leaderboard?period=monthly&limit=100`, {
+          cache: 'no-store',
+          headers: {
+            'Cache-Control': 'no-cache',
+          },
+        }),
+      ]);
+
+      // Process daily rank
+      if (dailyResponse.ok) {
+        const dailyData = await dailyResponse.json();
+        if (dailyData.userRank && dailyData.userRank.rank && dailyData.userRank.rank > 0) {
+          setDailyRank({
+            rank: dailyData.userRank.rank,
+            quizCount: dailyData.userRank.attempts?.quiz || dailyData.userRank.attempts?.test || 0,
+            averageScore: dailyData.userRank.metrics?.test || 0,
+            points: dailyData.userRank.points || 0,
+          });
+        } else {
+          setDailyRank(null);
+        }
+      } else {
+        setDailyRank(null);
+      }
+
+      // Process weekly rank
+      if (weeklyResponse.ok) {
+        const weeklyData = await weeklyResponse.json();
+        if (weeklyData.userRank && weeklyData.userRank.rank && weeklyData.userRank.rank > 0) {
+          setWeeklyRank({
+            rank: weeklyData.userRank.rank,
+            quizCount: weeklyData.userRank.attempts?.quiz || weeklyData.userRank.attempts?.test || 0,
+            averageScore: weeklyData.userRank.metrics?.test || 0,
+            points: weeklyData.userRank.points || 0,
+          });
+        } else {
+          setWeeklyRank(null);
+        }
+      } else {
+        setWeeklyRank(null);
+      }
+
+      // Process monthly rank
+      if (monthlyResponse.ok) {
+        const monthlyData = await monthlyResponse.json();
+        if (monthlyData.userRank && monthlyData.userRank.rank && monthlyData.userRank.rank > 0) {
+          setMonthlyRank({
+            rank: monthlyData.userRank.rank,
+            quizCount: monthlyData.userRank.attempts?.quiz || monthlyData.userRank.attempts?.test || 0,
+            averageScore: monthlyData.userRank.metrics?.test || 0,
+            points: monthlyData.userRank.points || 0,
+          });
+        } else {
+          setMonthlyRank(null);
+        }
+      } else {
+        setMonthlyRank(null);
+      }
+    } catch (error) {
+      console.error("Error fetching leaderboard ranks:", error);
+      setDailyRank(null);
+      setWeeklyRank(null);
+      setMonthlyRank(null);
+    } finally {
+      setRanksLoading(false);
     }
   };
 

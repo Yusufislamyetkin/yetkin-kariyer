@@ -31,7 +31,7 @@ export default function DetailedTemplate({ data }: { data: CVData }) {
           {data.summary && (
             <section className="mb-2 flex-shrink-0">
               <h2 className="text-lg font-bold text-gray-900 mb-1 border-b-2 border-gray-800 pb-1">Profesyonel Özet</h2>
-              <p className="text-gray-700 leading-tight break-words whitespace-pre-line text-sm line-clamp-3">{data.summary}</p>
+              <p className="text-gray-700 leading-tight break-words whitespace-pre-line text-sm">{data.summary}</p>
             </section>
           )}
           {data.experience.length > 0 && (

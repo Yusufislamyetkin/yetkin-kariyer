@@ -87,6 +87,7 @@ export default function DesignerTemplate({ data }: DesignerTemplateProps) {
               <div className="flex flex-wrap gap-2 text-gray-300 text-xs">
                 {data.personalInfo.email && <span>{data.personalInfo.email}</span>}
                 {data.personalInfo.phone && <span>{data.personalInfo.phone}</span>}
+                {data.personalInfo.address && <span>{data.personalInfo.address}</span>}
                 {data.personalInfo.linkedin && <span>{data.personalInfo.linkedin}</span>}
                 {data.personalInfo.website && <span>{data.personalInfo.website}</span>}
               </div>
@@ -100,7 +101,7 @@ export default function DesignerTemplate({ data }: DesignerTemplateProps) {
             <section className="mb-2 flex-shrink-0">
               <div className="h-0.5 w-12 bg-pink-500 mb-1"></div>
               <h2 className="text-lg font-bold mb-1 text-gray-900">Özet</h2>
-              <p className="text-gray-700 leading-tight break-words whitespace-pre-line text-sm line-clamp-3">
+              <p className="text-gray-700 leading-tight break-words whitespace-pre-line text-sm">
                 {data.summary}
               </p>
             </section>

@@ -60,9 +60,9 @@ export function ChatShell({
 
           {conversationHeader}
 
-          <main className="flex-1 flex flex-col overflow-hidden min-h-0">{children}</main>
+          <main className="flex-1 flex flex-col overflow-hidden min-h-0 relative">{children}</main>
 
-          {composer}
+          {composer && <div className="flex-shrink-0">{composer}</div>}
         </div>
       </div>
 

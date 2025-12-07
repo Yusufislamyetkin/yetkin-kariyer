@@ -1498,7 +1498,7 @@ export default function DirectChatPage() {
     </div>
   ) : null;
 
-  const mobileHeaderActions = (
+  const mobileHeaderActions = selectedThread && messages.length === 0 && !messagesLoading ? (
     <div className="flex items-center gap-2">
       <Button variant="gradient" size="sm" onClick={handleOpenStartDialog} className="text-xs px-3 py-1.5 h-8">
         Yeni Mesaj
@@ -1507,7 +1507,7 @@ export default function DirectChatPage() {
         Arkadaş ekle
       </Button>
     </div>
-  );
+  ) : null;
 
   return (
     <ChatShell

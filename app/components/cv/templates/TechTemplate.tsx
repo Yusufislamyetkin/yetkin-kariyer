@@ -98,6 +98,9 @@ export default function TechTemplate({ data }: TechTemplateProps) {
                 {data.personalInfo.phone && (
                   <div><span className="text-gray-500">phone:</span> <span className="text-green-300">{data.personalInfo.phone}</span></div>
                 )}
+                {data.personalInfo.address && (
+                  <div><span className="text-gray-500">address:</span> <span className="text-green-300">{data.personalInfo.address}</span></div>
+                )}
                 {data.personalInfo.linkedin && (
                   <div><span className="text-gray-500">linkedin:</span> <span className="text-green-300">{data.personalInfo.linkedin}</span></div>
                 )}
@@ -117,7 +120,7 @@ export default function TechTemplate({ data }: TechTemplateProps) {
                 <span className="text-green-500 font-mono text-xs">$</span> <span className="text-gray-400 font-mono text-xs">cat summary.txt</span>
               </div>
               <div className="text-green-400 mb-1 font-mono text-xs">{'// Profesyonel Özet'}</div>
-              <p className="text-gray-300 leading-tight break-words whitespace-pre-line font-mono text-xs line-clamp-3">
+              <p className="text-gray-300 leading-tight break-words whitespace-pre-line font-mono text-xs">
                 {data.summary}
               </p>
             </section>

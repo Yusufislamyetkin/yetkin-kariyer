@@ -24,6 +24,8 @@ export default function ArtisticTemplate({ data }: { data: CVData }) {
             <div className="flex flex-wrap gap-2 text-purple-100 text-xs">
               {data.personalInfo.email && <span>{data.personalInfo.email}</span>}
               {data.personalInfo.phone && <span>{data.personalInfo.phone}</span>}
+              {data.personalInfo.address && <span>{data.personalInfo.address}</span>}
+              {data.personalInfo.linkedin && <span>{data.personalInfo.linkedin}</span>}
               {data.personalInfo.website && <span>{data.personalInfo.website}</span>}
             </div>
           </div>
@@ -33,7 +35,7 @@ export default function ArtisticTemplate({ data }: { data: CVData }) {
             <section className="mb-2 flex-shrink-0">
               <div className="h-1 w-16 bg-gradient-to-r from-purple-600 to-pink-600 mb-1"></div>
               <h2 className="text-lg font-bold mb-1 text-gray-900" style={{ fontFamily: 'serif' }}>Özet</h2>
-              <p className="text-gray-700 leading-tight break-words whitespace-pre-line text-sm line-clamp-3">{data.summary}</p>
+              <p className="text-gray-700 leading-tight break-words whitespace-pre-line text-sm">{data.summary}</p>
             </section>
           )}
           <div className="grid md:grid-cols-2 gap-4 flex-1 overflow-hidden" style={{ minHeight: 0 }}>

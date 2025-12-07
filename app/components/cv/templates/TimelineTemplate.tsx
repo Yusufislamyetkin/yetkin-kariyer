@@ -22,18 +22,22 @@ export default function TimelineTemplate({ data }: { data: CVData }) {
           <div className="text-xs text-gray-700 space-y-0.5">
             {data.personalInfo.email && <div>{data.personalInfo.email}</div>}
             {data.personalInfo.phone && <div>{data.personalInfo.phone}</div>}
+            {data.personalInfo.address && <div>{data.personalInfo.address}</div>}
+            {data.personalInfo.linkedin && <div>{data.personalInfo.linkedin}</div>}
+            {data.personalInfo.website && <div>{data.personalInfo.website}</div>}
           </div>
         </div>
         {data.summary && (
           <section className="mb-2 flex-shrink-0">
             <h2 className="text-lg font-bold text-blue-600 mb-1">Özet</h2>
-            <p className="text-gray-700 leading-tight break-words whitespace-pre-line text-sm line-clamp-3">{data.summary}</p>
+            <p className="text-gray-700 leading-tight break-words whitespace-pre-line text-sm">{data.summary}</p>
           </section>
         )}
-        <div className="relative flex-1 overflow-y-auto" style={{ minHeight: 0 }}>
-          <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-blue-600"></div>
-          <div className="space-y-2">
-            {data.experience.map((exp, i) => (
+        {data.experience.length > 0 && (
+          <div className="relative flex-1 overflow-y-auto" style={{ minHeight: 0 }}>
+            <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-blue-600"></div>
+            <div className="space-y-2">
+              {data.experience.map((exp, i) => (
               <div key={i} className="relative pl-10">
                 <div className="absolute left-3 w-2 h-2 bg-blue-600 rounded-full border-2 border-white"></div>
                 <div className="bg-gray-50 p-2 rounded-lg border-l-4 border-blue-600">
@@ -49,8 +53,8 @@ export default function TimelineTemplate({ data }: { data: CVData }) {
                   {exp.description && <p className="text-gray-700 mt-1 break-words whitespace-pre-line text-xs line-clamp-2">{exp.description}</p>}
                 </div>
               </div>
-            ))}
-            {data.education.map((edu, i) => (
+              ))}
+              {data.education.length > 0 && data.education.map((edu, i) => (
               <div key={`edu-${i}`} className="relative pl-10">
                 <div className="absolute left-3 w-2 h-2 bg-green-600 rounded-full border-2 border-white"></div>
                 <div className="bg-gray-50 p-2 rounded-lg border-l-4 border-green-600">
@@ -66,8 +70,9 @@ export default function TimelineTemplate({ data }: { data: CVData }) {
                 </div>
               </div>
             ))}
+            </div>
           </div>
-        </div>
+        )}
         {data.skills.length > 0 && (
           <section className="mt-2 flex-shrink-0">
             <h2 className="text-lg font-bold text-blue-600 mb-1">Beceriler</h2>
@@ -78,10 +83,11 @@ export default function TimelineTemplate({ data }: { data: CVData }) {
             </div>
           </section>
         )}
-        <div className="relative flex-1 overflow-y-auto mt-2" style={{ minHeight: 0 }}>
-          <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-purple-600"></div>
-          <div className="space-y-2">
-            {data.projects.map((project, i) => (
+        {(data.projects.length > 0 || data.achievements.length > 0 || data.certifications.length > 0) && (
+          <div className="relative flex-1 overflow-y-auto mt-2" style={{ minHeight: 0 }}>
+            <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-purple-600"></div>
+            <div className="space-y-2">
+              {data.projects.length > 0 && data.projects.map((project, i) => (
               <div key={`proj-${i}`} className="relative pl-10">
                 <div className="absolute left-3 w-2 h-2 bg-purple-600 rounded-full border-2 border-white"></div>
                 <div className="bg-gray-50 p-2 rounded-lg border-l-4 border-purple-600">
@@ -99,8 +105,8 @@ export default function TimelineTemplate({ data }: { data: CVData }) {
                   {project.description && <p className="text-gray-700 mt-1 break-words whitespace-pre-line text-xs line-clamp-2">{project.description}</p>}
                 </div>
               </div>
-            ))}
-            {data.achievements.map((achievement, i) => (
+              ))}
+              {data.achievements.length > 0 && data.achievements.map((achievement, i) => (
               <div key={`ach-${i}`} className="relative pl-10">
                 <div className="absolute left-3 w-2 h-2 bg-yellow-600 rounded-full border-2 border-white"></div>
                 <div className="bg-gray-50 p-2 rounded-lg border-l-4 border-yellow-600">
@@ -119,8 +125,8 @@ export default function TimelineTemplate({ data }: { data: CVData }) {
                   </div>
                 </div>
               </div>
-            ))}
-            {data.certifications.map((cert, i) => (
+              ))}
+              {data.certifications.length > 0 && data.certifications.map((cert, i) => (
               <div key={`cert-${i}`} className="relative pl-10">
                 <div className="absolute left-3 w-2 h-2 bg-indigo-600 rounded-full border-2 border-white"></div>
                 <div className="bg-gray-50 p-2 rounded-lg border-l-4 border-indigo-600">
@@ -140,6 +146,7 @@ export default function TimelineTemplate({ data }: { data: CVData }) {
             ))}
           </div>
         </div>
+        )}
         <div className="grid md:grid-cols-2 gap-4 mt-2 flex-shrink-0">
           {data.languages.length > 0 && (
             <section>

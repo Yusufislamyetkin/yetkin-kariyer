@@ -3,8 +3,6 @@
 import { useEffect, useState } from "react";
 import {
   Loader2,
-  RefreshCcw,
-  Download,
   Sparkles,
   Target,
   ArrowRight,
@@ -18,7 +16,7 @@ import { CareerPlanQuestionnaire } from "../_components/CareerPlanQuestionnaire"
 import { AITeacherSelin } from "../_components/AITeacherSelin";
 import { CareerPlanResourceCard } from "../_components/CareerPlanResourceCard";
 import { RoadmapTree } from "../_components/RoadmapTree";
-import { AlertCircle, CheckCircle2, Lightbulb, Target as TargetIcon, Clock, Flag, Code2, BookOpen as BookOpenIcon, Zap, ExternalLink } from "lucide-react";
+import { AlertCircle, CheckCircle2, Lightbulb, Target as TargetIcon, Clock, Flag, Code2, BookOpen as BookOpenIcon } from "lucide-react";
 import Link from "next/link";
 import {
   getRoadmapForPath,
@@ -366,72 +364,6 @@ export default function CareerRoadmapPage() {
     setShowConfirmDialog(false);
   };
 
-  const handleExportPlan = () => {
-    if (!plan) return;
-    const blob = new Blob([JSON.stringify(plan, null, 2)], {
-      type: "application/json;charset=utf-8",
-    });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "kariyer-plani.json";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-  };
-
-  // Get technology recommendations based on specialization and selected technologies
-  const getTechnologyRecommendations = (): string[] => {
-    const selectedTechs = questionnaireData?.technologies || [];
-    const techMap: Record<string, string[]> = {
-      "Frontend": ["React", "Vue.js", "Angular", "TypeScript", "JavaScript", "Next.js"],
-      "Backend": ["Node.js", "Python", "Java", "C#", ".NET", "Go", "PostgreSQL", "MongoDB"],
-      "Full-stack": ["React", "Node.js", "TypeScript", "PostgreSQL", "Docker", "AWS"],
-      "Mobile": ["React Native", "Flutter", "Swift", "Kotlin"],
-      "DevOps": ["Docker", "Kubernetes", "AWS", "Azure"],
-      "Data Science": ["Python", "R", "SQL"],
-      "AI/ML": ["Python", "TensorFlow", "PyTorch"],
-      "Cybersecurity": ["Python", "Linux"],
-      "Game Development": ["Unity", "C#", "C++"],
-    };
-
-    const recommendedTechs = questionnaireData?.specialization 
-      ? (techMap[questionnaireData.specialization] || [])
-      : [];
-    
-    // Combine selected and recommended, remove duplicates
-    const allTechs = [...new Set([...selectedTechs, ...recommendedTechs])];
-    return allTechs;
-  };
-
-  // Get technology link based on technology name
-  const getTechnologyLink = (techName: string): string => {
-    // Normalize tech name for URL
-    const normalizedName = techName.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-    // Try to find course by technology name
-    return `/education/courses?search=${encodeURIComponent(techName)}`;
-  };
-
-  // Get technology description/recommendation
-  const getTechnologyRecommendation = (techName: string): string => {
-    const recommendations: Record<string, string> = {
-      "React": "Modern web uygulamaları için popüler bir frontend kütüphanesi. Öğrenmeye başlamak için React kurslarımıza göz atın.",
-      "Node.js": "JavaScript ile backend geliştirme. Sunucu tarafı uygulamalar için Node.js kurslarımızı inceleyin.",
-      "Python": "Çok amaçlı programlama dili. Web, veri bilimi ve yapay zeka için Python kurslarımıza bakın.",
-      "TypeScript": "Tip güvenli JavaScript. Büyük projeler için TypeScript kurslarımızı keşfedin.",
-      "JavaScript": "Web geliştirmenin temel dili. JavaScript temellerini öğrenmek için kurslarımıza göz atın.",
-      "Java": "Kurumsal uygulamalar için güçlü dil. Java kurslarımızla başlayın.",
-      "C#": "Microsoft ekosistemi için modern dil. C# kurslarımızı inceleyin.",
-      "Vue.js": "Kolay öğrenilen frontend framework. Vue.js kurslarımıza bakın.",
-      "Angular": "Enterprise uygulamalar için güçlü framework. Angular kurslarımızı keşfedin.",
-      "Docker": "Konteyner teknolojisi. Docker kurslarımızla başlayın.",
-      "Kubernetes": "Konteyner orkestrasyonu. Kubernetes kurslarımıza göz atın.",
-    };
-    
-    return recommendations[techName] || `${techName} ile ilgili kurslarımıza göz atın ve öğrenmeye başlayın.`;
-  };
-
   const [checkedItems, setCheckedItems] = useState<Set<string>>(new Set());
 
   const toggleChecked = (itemId: string) => {
@@ -535,133 +467,15 @@ export default function CareerRoadmapPage() {
             <Button
               variant="outline"
               className="flex items-center gap-2"
-              onClick={handleExportPlan}
-            >
-              <Download className="h-4 w-4" />
-              Dışa Aktar
-            </Button>
-            <Button
-              variant="outline"
-              className="flex items-center gap-2"
               onClick={handleCreateNewPlan}
               disabled={generating}
             >
               <Sparkles className="h-4 w-4" />
               Yeni Plan
             </Button>
-            <Button
-              variant="gradient"
-              className="flex items-center gap-2"
-              onClick={async () => {
-                if (roadmap) {
-                  await fetchProgress(roadmap.path);
-                } else {
-                  handleGeneratePlanClick();
-                }
-              }}
-              disabled={generating || progressLoading}
-            >
-              {(generating || progressLoading) ? (
-                <>
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  Yenileniyor...
-                </>
-              ) : (
-                <>
-                  <RefreshCcw className="h-4 w-4" />
-                  Yenile
-                </>
-              )}
-            </Button>
           </div>
         </CardHeader>
       </Card>
-
-      {/* Combined Skills and Goals */}
-      {(plan.skillsToDevelop.length > 0 || plan.goals.length > 0) && (
-        <Card variant="elevated">
-          <CardHeader>
-            <CardTitle>Öncelikler</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {plan.skillsToDevelop.length > 0 && (
-              <div>
-                <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Beceriler</h4>
-                <div className="flex flex-wrap gap-2">
-                  {plan.skillsToDevelop.map((skill, index) => (
-                    <span
-                      key={`skill-${index}`}
-                      className="rounded-full bg-purple-100 px-3 py-1 text-xs font-semibold text-purple-700 dark:bg-purple-900/30 dark:text-purple-200"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-            {plan.goals.length > 0 && (
-              <div>
-                <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Hedefler</h4>
-                <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-200">
-                  {plan.goals.map((goal, index) => (
-                    <li
-                      key={`goal-${index}`}
-                      className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 dark:border-gray-700 dark:bg-gray-900/40"
-                    >
-                      {goal}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-      )}
-
-      {/* Technology Recommendations */}
-      {getTechnologyRecommendations().length > 0 && (
-        <Card variant="elevated">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Code2 className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-              Teknoloji Önerileri
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-              {getTechnologyRecommendations().map((tech) => {
-                const isSelected = questionnaireData?.technologies?.includes(tech);
-                const techLink = getTechnologyLink(tech);
-                
-                return (
-                  <Link
-                    key={tech}
-                    href={techLink}
-                    className="group block"
-                  >
-                    <div className="rounded-lg border-2 p-3 transition-all hover:border-blue-400 hover:shadow-md bg-white dark:bg-gray-900/40 border-blue-200 dark:border-blue-800">
-                      <div className="flex items-center justify-between gap-2">
-                        <div className="flex items-center gap-2 flex-1 min-w-0">
-                          <Zap className="h-4 w-4 flex-shrink-0 text-blue-600 dark:text-blue-400" />
-                          <span className="font-semibold text-sm text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 truncate">
-                            {tech}
-                          </span>
-                        </div>
-                        {isSelected && (
-                          <span className="flex-shrink-0 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700 dark:bg-green-900/30 dark:text-green-400">
-                            Seçildi
-                          </span>
-                        )}
-                        <ExternalLink className="h-3 w-3 flex-shrink-0 text-gray-400 group-hover:text-blue-600 dark:text-gray-500 dark:group-hover:text-blue-400" />
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-          </CardContent>
-        </Card>
-      )}
 
       {/* Roadmap Tree Structure */}
       {roadmap ? (

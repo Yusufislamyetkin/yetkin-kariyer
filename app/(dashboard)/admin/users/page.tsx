@@ -3,11 +3,12 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/app/components/ui/Button";
-import { Loader2, Search, ArrowLeft, User as UserIcon, Mail, Calendar, Shield, ChevronLeft, ChevronRight, Bot, Settings, Trash2, Play, Activity, CheckCircle2, XCircle, Clock, UserMinus, Trash, ChevronDown, Linkedin, Users, CheckSquare, Square } from "lucide-react";
+import { Loader2, Search, ArrowLeft, User as UserIcon, Mail, Calendar, Shield, ChevronLeft, ChevronRight, Bot, Settings, Trash2, Play, Activity, CheckCircle2, XCircle, Clock, UserMinus, Trash, ChevronDown, Linkedin, Users, CheckSquare, Square, X, Wifi, WifiOff, Rocket } from "lucide-react";
 import Image from "next/image";
 import { BotConfigModal } from "./_components/BotConfigModal";
 import { LinkedInPostGenerator } from "./_components/LinkedInPostGenerator";
 import { AddToCommunitiesModal } from "./_components/AddToCommunitiesModal";
+import { HackathonApplicationModal } from "./_components/HackathonApplicationModal";
 import { ConfirmDialog } from "@/app/components/ui/ConfirmDialog";
 
 interface BotCharacter {
@@ -93,6 +94,15 @@ export default function AdminUsersPage() {
   const [linkedInPostGeneratorOpen, setLinkedInPostGeneratorOpen] = useState(false);
   const [selectedUserIds, setSelectedUserIds] = useState<Set<string>>(new Set());
   const [addToCommunitiesModalOpen, setAddToCommunitiesModalOpen] = useState(false);
+  const [randomActivityModalOpen, setRandomActivityModalOpen] = useState(false);
+  const [randomActivityCount, setRandomActivityCount] = useState<string>("");
+  const [randomActivityRunning, setRandomActivityRunning] = useState(false);
+  const [hackathonApplicationModalOpen, setHackathonApplicationModalOpen] = useState(false);
+  const [keepOnlineModalOpen, setKeepOnlineModalOpen] = useState(false);
+  const [keepOnlineDuration, setKeepOnlineDuration] = useState<string>("4");
+  const [keepOnlineRunning, setKeepOnlineRunning] = useState(false);
+  const [activeKeepOnlineJobs, setActiveKeepOnlineJobs] = useState<any[]>([]);
+  const [keepOnlineJobsLoading, setKeepOnlineJobsLoading] = useState(false);
 
   const fetchUsers = async (page: number = 1, searchQuery: string = "", role: string = "") => {
     setLoading(true);
@@ -403,6 +413,191 @@ export default function AdminUsersPage() {
     }
   };
 
+  const handleBulkBotAssign = async () => {
+    if (selectedUserIds.size === 0) {
+      setError("Lütfen en az bir kullanıcı seçin");
+      return;
+    }
+
+    setActionLoading("bulk-bot-assign");
+    setError(null);
+
+    try {
+      const response = await fetch("/api/admin/users/bulk-assign-bots", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userIds: Array.from(selectedUserIds),
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Toplu bot atama sırasında bir hata oluştu");
+      }
+
+      // Show success message
+      setRunResult({
+        processed: data.total || selectedUserIds.size,
+        successful: data.successful || 0,
+        failed: data.failed || 0,
+        message: data.message || `${data.successful} kullanıcı bot olarak atandı`,
+      });
+
+      // Clear selection
+      setSelectedUserIds(new Set());
+
+      // Refresh users to show updated bot statuses
+      await fetchUsers(currentPage, search, roleFilter);
+    } catch (err: any) {
+      setError(err.message || "Bir hata oluştu");
+    } finally {
+      setActionLoading(null);
+    }
+  };
+
+  const handleRandomActivity = async () => {
+    const count = parseInt(randomActivityCount);
+    if (!count || count <= 0) {
+      setError("Lütfen geçerli bir sayı girin");
+      return;
+    }
+
+    setRandomActivityRunning(true);
+    setError(null);
+
+    try {
+      const response = await fetch("/api/admin/bots/random-activity", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ count }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Rastgele aktivite başlatılırken bir hata oluştu");
+      }
+
+      // Show success message
+      setRunResult({
+        processed: data.total || count,
+        successful: data.successful || 0,
+        failed: data.failed || 0,
+        message: data.message || `${data.successful} bot rastgele aktivite gerçekleştirdi`,
+        results: data.results,
+      });
+
+      // Close modal and reset
+      setRandomActivityModalOpen(false);
+      setRandomActivityCount("");
+
+      // Refresh activities if interactions area is open
+      if (showInteractions) {
+        await fetchActivities(1);
+      }
+
+      // Refresh users to show updated bot statuses
+      await fetchUsers(currentPage, search, roleFilter);
+    } catch (err: any) {
+      setError(err.message || "Bir hata oluştu");
+    } finally {
+      setRandomActivityRunning(false);
+    }
+  };
+
+  const fetchActiveKeepOnlineJobs = async () => {
+    setKeepOnlineJobsLoading(true);
+    try {
+      const response = await fetch("/api/admin/bots/keep-online");
+
+      if (!response.ok) {
+        throw new Error("Aktif job'lar alınırken bir hata oluştu");
+      }
+
+      const data = await response.json();
+      setActiveKeepOnlineJobs(data.jobs || []);
+    } catch (err: any) {
+      console.error("Error fetching active keep-online jobs:", err);
+    } finally {
+      setKeepOnlineJobsLoading(false);
+    }
+  };
+
+  const handleKeepOnline = async () => {
+    if (selectedUserIds.size === 0) {
+      setError("Lütfen en az bir bot seçin");
+      return;
+    }
+
+    const duration = parseFloat(keepOnlineDuration);
+    if (!duration || duration < 1 || duration > 24) {
+      setError("Lütfen 1-24 saat arasında bir süre girin");
+      return;
+    }
+
+    setKeepOnlineRunning(true);
+    setError(null);
+
+    try {
+      const response = await fetch("/api/admin/bots/keep-online", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userIds: Array.from(selectedUserIds),
+          durationHours: duration,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Bot'ları çevrimiçi tutma işlemi başlatılırken bir hata oluştu");
+      }
+
+      // Show success message
+      setRunResult({
+        processed: selectedUserIds.size,
+        successful: selectedUserIds.size,
+        failed: 0,
+        message: data.message || `${selectedUserIds.size} bot ${duration} saat boyunca çevrimiçi tutulacak`,
+        results: [],
+      });
+
+      // Close modal
+      setKeepOnlineModalOpen(false);
+
+      // Refresh active jobs
+      await fetchActiveKeepOnlineJobs();
+    } catch (err: any) {
+      setError(err.message || "Bir hata oluştu");
+    } finally {
+      setKeepOnlineRunning(false);
+    }
+  };
+
+  const handleStopKeepOnlineJob = async (jobId: string) => {
+    try {
+      const response = await fetch("/api/admin/bots/keep-online", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ jobId }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Job durdurulurken bir hata oluştu");
+      }
+
+      // Refresh active jobs
+      await fetchActiveKeepOnlineJobs();
+    } catch (err: any) {
+      setError(err.message || "Bir hata oluştu");
+    }
+  };
+
   const activityTypes = [
     { value: "POST", label: "Post Oluştur" },
     { value: "COMMENT", label: "Yorum Yap" },
@@ -460,6 +655,24 @@ export default function AdminUsersPage() {
                   <Linkedin className="h-4 w-4 mr-2" />
                   LinkedIn Post Oluştur
                 </Button>
+                <Button
+                  onClick={() => setRandomActivityModalOpen(true)}
+                  variant="outline"
+                  className="border-green-300 text-green-600 hover:bg-green-50 dark:border-green-800 dark:text-green-400 dark:hover:bg-green-950/30"
+                >
+                  <Activity className="h-4 w-4 mr-2" />
+                  Rastgele Aktivite
+                </Button>
+                {selectedUserIds.size > 0 && (
+                  <Button
+                    onClick={() => setKeepOnlineModalOpen(true)}
+                    variant="outline"
+                    className="border-purple-300 text-purple-600 hover:bg-purple-50 dark:border-purple-800 dark:text-purple-400 dark:hover:bg-purple-950/30"
+                  >
+                    <Wifi className="h-4 w-4 mr-2" />
+                    Çevrimiçi Tut ({selectedUserIds.size})
+                  </Button>
+                )}
                 <Button
                   onClick={handleRunBots}
                   disabled={runningBots}
@@ -729,6 +942,31 @@ export default function AdminUsersPage() {
             >
               <Users className="h-4 w-4 mr-2" />
               Topluluklara Ekle ({selectedUserIds.size})
+            </Button>
+            <Button
+              onClick={() => setHackathonApplicationModalOpen(true)}
+              disabled={selectedUserIds.size === 0}
+              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+            >
+              <Rocket className="h-4 w-4 mr-2" />
+              Hackathon&apos;a Başvur ({selectedUserIds.size})
+            </Button>
+            <Button
+              onClick={handleBulkBotAssign}
+              disabled={selectedUserIds.size === 0 || actionLoading !== null}
+              className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+            >
+              {actionLoading === "bulk-bot-assign" ? (
+                <>
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  Atanıyor...
+                </>
+              ) : (
+                <>
+                  <Bot className="h-4 w-4 mr-2" />
+                  Bot Olarak Ata ({selectedUserIds.size})
+                </>
+              )}
             </Button>
           </div>
         </div>
@@ -1227,6 +1465,306 @@ export default function AdminUsersPage() {
           setSelectedUserIds(new Set());
         }}
       />
+
+      {/* Hackathon Application Modal */}
+      <HackathonApplicationModal
+        isOpen={hackathonApplicationModalOpen}
+        onClose={() => {
+          setHackathonApplicationModalOpen(false);
+        }}
+        userIds={Array.from(selectedUserIds)}
+        onSuccess={() => {
+          // Refresh users list after successful application
+          fetchUsers(currentPage, search, roleFilter);
+        }}
+      />
+
+      {/* Keep Online Modal */}
+      {keepOnlineModalOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm px-4"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setKeepOnlineModalOpen(false);
+            }
+          }}
+        >
+          <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden flex flex-col">
+            {/* Header */}
+            <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-800">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600">
+                  <Wifi className="h-6 w-6 text-white" />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                    Botları Çevrimiçi Tut
+                  </h2>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    Seçili bot&apos;ları belirli süre boyunca çevrimiçi göster
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => setKeepOnlineModalOpen(false)}
+                className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                disabled={keepOnlineRunning}
+              >
+                <X className="h-5 w-5 text-gray-500" />
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="flex-1 overflow-y-auto p-6 space-y-6">
+              {error && (
+                <div className="p-4 bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800 rounded-lg">
+                  <p className="text-red-700 dark:text-red-300 text-sm">{error}</p>
+                </div>
+              )}
+
+              {/* New Job Form */}
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 space-y-4">
+                <h3 className="font-semibold text-gray-900 dark:text-gray-100">
+                  Yeni Çevrimiçi Tutma İşlemi
+                </h3>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Süre (Saat) *
+                  </label>
+                  <input
+                    type="number"
+                    value={keepOnlineDuration}
+                    onChange={(e) => setKeepOnlineDuration(e.target.value)}
+                    placeholder="4"
+                    min="1"
+                    max="24"
+                    step="0.5"
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+                    disabled={keepOnlineRunning}
+                  />
+                  <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                    Bot&apos;lar kaç saat boyunca çevrimiçi tutulacak? (1-24 saat)
+                  </p>
+                </div>
+                <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-lg p-3">
+                  <p className="text-sm text-blue-800 dark:text-blue-200">
+                    <strong>Seçili Bot Sayısı:</strong> {selectedUserIds.size}
+                    <br />
+                    <strong>Nasıl çalışır?</strong> Seçili bot&apos;lar belirtilen süre boyunca çevrimiçi görünecek. 
+                    Mevcut chat presence heartbeat sistemi kullanılarak otomatik güncellenir.
+                  </p>
+                </div>
+                <Button
+                  onClick={handleKeepOnline}
+                  disabled={keepOnlineRunning || selectedUserIds.size === 0 || !keepOnlineDuration || parseFloat(keepOnlineDuration) < 1}
+                  className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+                >
+                  {keepOnlineRunning ? (
+                    <>
+                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      Başlatılıyor...
+                    </>
+                  ) : (
+                    <>
+                      <Wifi className="h-4 w-4 mr-2" />
+                      Başlat
+                    </>
+                  )}
+                </Button>
+              </div>
+
+              {/* Active Jobs List */}
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <h3 className="font-semibold text-gray-900 dark:text-gray-100">
+                    Aktif İşlemler
+                  </h3>
+                  <Button
+                    onClick={fetchActiveKeepOnlineJobs}
+                    variant="outline"
+                    size="sm"
+                    disabled={keepOnlineJobsLoading}
+                  >
+                    {keepOnlineJobsLoading ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      "Yenile"
+                    )}
+                  </Button>
+                </div>
+
+                {activeKeepOnlineJobs.length === 0 ? (
+                  <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+                    <WifiOff className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                    <p>Henüz aktif işlem yok</p>
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    {activeKeepOnlineJobs.map((job) => (
+                      <div
+                        key={job.jobId}
+                        className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4"
+                      >
+                        <div className="flex items-start justify-between">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-2">
+                              <Wifi className="h-4 w-4 text-green-500" />
+                              <span className="font-medium text-gray-900 dark:text-gray-100">
+                                {job.userIds.length} Bot
+                              </span>
+                            </div>
+                            <div className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                              <p>
+                                <strong>Başlangıç:</strong>{" "}
+                                {new Date(job.startTime).toLocaleString("tr-TR")}
+                              </p>
+                              <p>
+                                <strong>Bitiş:</strong>{" "}
+                                {new Date(job.endTime).toLocaleString("tr-TR")}
+                              </p>
+                              <p className="text-green-600 dark:text-green-400">
+                                <strong>Kalan Süre:</strong>{" "}
+                                {job.remainingHours.toFixed(1)} saat
+                              </p>
+                            </div>
+                          </div>
+                          <Button
+                            onClick={() => handleStopKeepOnlineJob(job.jobId)}
+                            variant="outline"
+                            size="sm"
+                            className="border-red-300 text-red-600 hover:bg-red-50 dark:border-red-800 dark:text-red-400"
+                          >
+                            <WifiOff className="h-4 w-4 mr-2" />
+                            Durdur
+                          </Button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div className="flex items-center justify-end gap-3 p-6 border-t border-gray-200 dark:border-gray-800">
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setKeepOnlineModalOpen(false);
+                  setKeepOnlineDuration("4");
+                }}
+                disabled={keepOnlineRunning}
+              >
+                Kapat
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Random Activity Modal */}
+      {randomActivityModalOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm px-4"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setRandomActivityModalOpen(false);
+            }
+          }}
+        >
+          <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl w-full max-w-md">
+            {/* Header */}
+            <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-800">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600">
+                  <Activity className="h-6 w-6 text-white" />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                    Rastgele Bot Aktivitesi
+                  </h2>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    Rastgele botlara rastgele aktivite yaptır
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => setRandomActivityModalOpen(false)}
+                className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                disabled={randomActivityRunning}
+              >
+                <X className="h-5 w-5 text-gray-500" />
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="p-6 space-y-6">
+              {error && (
+                <div className="p-4 bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800 rounded-lg">
+                  <p className="text-red-700 dark:text-red-300 text-sm">{error}</p>
+                </div>
+              )}
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Bot Sayısı *
+                </label>
+                <input
+                  type="number"
+                  value={randomActivityCount}
+                  onChange={(e) => setRandomActivityCount(e.target.value)}
+                  placeholder="Örn: 36"
+                  min="1"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+                  disabled={randomActivityRunning}
+                />
+                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                  Kaç bot rastgele aktivite gerçekleştirecek?
+                </p>
+              </div>
+
+              <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                <p className="text-sm text-blue-800 dark:text-blue-200">
+                  <strong>Nasıl çalışır?</strong>
+                  <br />
+                  Aktif botlardan belirtilen sayıda rastgele seçilir ve her birine rastgele bir aktivite atanır (Post, Yorum, Beğeni, Test, vb.).
+                </p>
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div className="flex items-center justify-end gap-3 p-6 border-t border-gray-200 dark:border-gray-800">
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setRandomActivityModalOpen(false);
+                  setRandomActivityCount("");
+                }}
+                disabled={randomActivityRunning}
+              >
+                İptal
+              </Button>
+              <Button
+                onClick={handleRandomActivity}
+                disabled={randomActivityRunning || !randomActivityCount || parseInt(randomActivityCount) <= 0}
+                className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
+              >
+                {randomActivityRunning ? (
+                  <>
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    Çalıştırılıyor...
+                  </>
+                ) : (
+                  <>
+                    <Play className="h-4 w-4 mr-2" />
+                    Başlat
+                  </>
+                )}
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -109,7 +109,7 @@ export default function ExecutiveTemplate({ data }: ExecutiveTemplateProps) {
               <h2 className="text-lg font-bold mb-1 text-gray-900 uppercase tracking-wide">
                 Profesyonel Özet
               </h2>
-              <p className="text-gray-700 text-sm leading-tight break-words whitespace-pre-line line-clamp-3">
+              <p className="text-gray-700 text-sm leading-tight break-words whitespace-pre-line">
                 {data.summary}
               </p>
             </section>

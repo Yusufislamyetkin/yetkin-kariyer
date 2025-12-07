@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 import { Edit, Calendar, Mail, Shield, Camera, X } from "lucide-react";
 import { Button } from "@/app/components/ui/Button";
 import { Card } from "@/app/components/ui/Card";
@@ -20,6 +21,7 @@ interface ProfileHeaderProps {
 }
 
 export function ProfileHeader({ user, onUpdate }: ProfileHeaderProps) {
+  const { update: updateSession } = useSession();
   const [showEditModal, setShowEditModal] = useState(false);
   const [editName, setEditName] = useState(user.name || "");
   const [editEmail, setEditEmail] = useState(user.email);
@@ -112,6 +114,9 @@ export function ProfileHeader({ user, onUpdate }: ProfileHeaderProps) {
         const errorData = await updateResponse.json();
         throw new Error(errorData.error || "Profil güncellenemedi");
       }
+
+      // Update session to reflect new profile image
+      await updateSession();
 
       onUpdate?.();
       setPreviewImage(null);

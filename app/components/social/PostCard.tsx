@@ -20,6 +20,7 @@ import { PostLikesModal } from "./PostLikesModal";
 import { CommentBottomSheet } from "./CommentBottomSheet";
 import { formatDistanceToNow } from "date-fns";
 import { tr } from "date-fns/locale";
+import { renderContentWithLinks } from "@/lib/utils/post-content";
 
 interface PostCardProps {
   post: {
@@ -470,7 +471,7 @@ export const PostCard = memo(function PostCard({
       {!post.imageUrl && !post.videoUrl && post.content && (
         <div className="px-6 py-6 bg-white dark:bg-gray-900">
           <div className="text-lg leading-relaxed text-gray-900 dark:text-gray-100 whitespace-pre-wrap break-words font-normal">
-            {post.content}
+            {renderContentWithLinks(post.content)}
           </div>
         </div>
       )}
@@ -553,7 +554,7 @@ export const PostCard = memo(function PostCard({
                 {post.user.name || "Kullanıcı"}
               </Link>
               <span className="text-gray-900 dark:text-gray-100">
-                {post.content}
+                {renderContentWithLinks(post.content)}
               </span>
             </span>
           </div>

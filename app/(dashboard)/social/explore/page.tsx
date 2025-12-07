@@ -213,18 +213,44 @@ export default function ExplorePage() {
   }, []);
 
   // Fetch current user profile from DB
-  useEffect(() => {
+  const fetchCurrentUserProfile = useCallback(async () => {
     if (session?.user?.id) {
-      fetch(`/api/profile/${session.user.id}`)
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.user) {
-            setCurrentUserProfile(data.user);
-          }
-        })
-        .catch((err) => console.error("Error fetching user profile:", err));
+      try {
+        const res = await fetch(`/api/profile/${session.user.id}`);
+        const data = await res.json();
+        if (data.user) {
+          setCurrentUserProfile(data.user);
+        }
+      } catch (err) {
+        console.error("Error fetching user profile:", err);
+      }
     }
   }, [session?.user?.id]);
+
+  useEffect(() => {
+    fetchCurrentUserProfile();
+  }, [fetchCurrentUserProfile]);
+
+  // Refresh profile when page becomes visible or gets focus (e.g., after profile update)
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (!document.hidden) {
+        fetchCurrentUserProfile();
+      }
+    };
+
+    const handleFocus = () => {
+      fetchCurrentUserProfile();
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("focus", handleFocus);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("focus", handleFocus);
+    };
+  }, [fetchCurrentUserProfile]);
 
   // Fetch friend suggestions
   useEffect(() => {
@@ -434,11 +460,21 @@ export default function ExplorePage() {
                     <div className="w-14 h-14 rounded-full overflow-hidden ring-2 ring-gray-100 dark:ring-gray-800">
                       {currentUserProfile?.profileImage ? (
                         <Image
-                          src={currentUserProfile.profileImage}
+                          src={`${currentUserProfile.profileImage}?v=${Date.now()}`}
                           alt={currentUserProfile.name || "User"}
                           width={56}
                           height={56}
                           className="w-full h-full object-cover"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = "none";
+                            const parent = target.parentElement;
+                            if (parent) {
+                              const initials = (currentUserProfile?.name || session.user?.name || "K")[0].toUpperCase();
+                              parent.innerHTML = `<div class="w-full h-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white text-lg font-bold">${initials}</div>`;
+                            }
+                          }}
+                          unoptimized
                         />
                       ) : (
                         <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white text-lg font-bold">
@@ -495,11 +531,21 @@ export default function ExplorePage() {
                           <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-gray-200 dark:ring-gray-700">
                             {user.profileImage ? (
                               <Image
-                                src={user.profileImage}
+                                src={`${user.profileImage}?v=${Date.now()}`}
                                 alt={user.name || "User"}
                                 width={48}
                                 height={48}
                                 className="w-full h-full object-cover"
+                                onError={(e) => {
+                                  const target = e.target as HTMLImageElement;
+                                  target.style.display = "none";
+                                  const parent = target.parentElement;
+                                  if (parent) {
+                                    const initials = (user.name || "K")[0].toUpperCase();
+                                    parent.innerHTML = `<div class="w-full h-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white text-base font-bold">${initials}</div>`;
+                                  }
+                                }}
+                                unoptimized
                               />
                             ) : (
                               <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white text-base font-bold">

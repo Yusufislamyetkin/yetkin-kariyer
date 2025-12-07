@@ -106,7 +106,7 @@ export default function MinimalTemplate({ data }: MinimalTemplateProps) {
         {/* Summary */}
         {data.summary && (
           <section className="mb-2 flex-shrink-0">
-            <p className="text-xs leading-tight text-gray-700 break-words whitespace-pre-line font-light line-clamp-3">
+            <p className="text-xs leading-tight text-gray-700 break-words whitespace-pre-line font-light">
               {data.summary}
             </p>
           </section>
