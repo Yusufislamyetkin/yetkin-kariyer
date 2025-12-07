@@ -154,7 +154,7 @@ export default function Home() {
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-cyan-50 dark:from-gray-900 dark:via-slate-900 dark:to-gray-800 transition-colors duration-200 w-full max-w-full overflow-x-hidden">
       {/* Navigation */}
       <nav className="sticky top-0 z-50 glass border-b border-gray-200/50 dark:border-gray-700/50 w-full max-w-full">
-        <div className="container mx-auto px-4 py-4 max-w-full overflow-x-hidden">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-12 py-4 max-w-full overflow-x-hidden">
           <div className="flex items-center justify-between flex-wrap gap-2">
             <Link href="/" className="text-2xl font-display font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent md:bg-gradient-to-r md:from-blue-600 md:via-indigo-600 md:to-cyan-600 md:bg-[length:200%_auto] md:animate-text-shimmer">
               YTK Academy

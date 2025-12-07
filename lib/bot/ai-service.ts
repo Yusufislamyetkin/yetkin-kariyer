@@ -95,121 +95,59 @@ Yorumunu yaz (sadece yorum metni, başka bir şey ekleme):`;
 
 /**
  * Generate post content based on bot character and news source
+ * Now generates LinkedIn-format posts (professional, no slang/typos)
  */
 export async function generatePostContent(
   botCharacter: { persona: string; systemPrompt: string; name: string; expertise?: string[] },
   newsSource?: NewsSource
 ): Promise<string> {
   try {
-    const systemPrompt = botCharacter.systemPrompt || `Sen ${botCharacter.name} karakterisin. ${botCharacter.persona || "Yardımsever ve aktif bir topluluk üyesi."}`;
+    // Use LinkedIn post generation with automatic topic and type selection
+    const topics = botCharacter.expertise && botCharacter.expertise.length > 0
+      ? botCharacter.expertise
+      : [
+          "yazılım geliştirme",
+          "teknoloji trendleri",
+          "programlama ipuçları",
+          "kariyer tavsiyeleri",
+          "best practices",
+          "yazılım mimarisi",
+          "kod kalitesi",
+          "teknoloji liderliği",
+        ];
 
-    let userPrompt: string;
+    const randomTopic = topics[Math.floor(Math.random() * topics.length)];
+    
+    // Random post type (1-10)
+    const randomPostType = (Math.floor(Math.random() * 10) + 1) as 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 
-    if (newsSource) {
-      // Güncel haber kaynağından içerik üret
-      userPrompt = `Aşağıdaki haber kaynağından ilham alarak güncel bir yazılım/teknoloji haberini paylaş. Gönderi kolay okunabilir, samimi ve faydalı olmalı (maksimum 300 kelime). Türkçe yaz.
+    // If news source is provided, incorporate it into the topic
+    const finalTopic = newsSource 
+      ? `${randomTopic} - ${newsSource.name} kaynağından ilham alarak`
+      : randomTopic;
 
-ÖNEMLİ:
-- Kolay okunabilir, kısa paragraflar kullan
-- Bazen küçük yazım hataları yapabilirsin (doğal görünmesi için, örn: "muazzammm", "süpermişş", "harbiden")
-- Türkçe slang kullanabilirsin (valla, harbiden, iyimişş, süpermiş vs.)
-- Kaynak belirt: Kaynak: [${newsSource.name}](${newsSource.website})
-- Gönderi formatı:
-  * Başlık/başlangıç (emoji ile)
-  * Haber içeriği (kısa paragraflar)
-  * Özellikler listesi (varsa, bullet point ile)
-  * Kaynak linki
-  * Kapanış yorumu
-
-DOĞALLIK KURALLARI:
-- Aşırı pozitif veya abartılı dil kullanma (örn: "harbiden muazzam", "süper", "heyecan verici" gibi ifadeleri aşırı kullanma)
-- Genel ifadeler yerine spesifik teknik detaylar, örnekler veya somut bilgiler kullan
-- Kurgusal kişisel deneyim yazma (örn: "geçen hafta kullandım" gibi uydurma deneyimler)
-- Cümle çeşitliliği kullan, kısa-uzun cümleler karıştır, doğal bir akışı taklit et
-- Yapay tekrarlardan kaçın (aynı ifadeleri sık sık kullanma)
-- Avantajların yanında sınırlamaları veya potansiyel sorunları da belirt
-- Bir reklam metni gibi yazma, tarafsız ve bilgi odaklı bir ton kullan
-- Teknik konularda somut örnekler, kod parçacıkları veya spesifik değişiklik maddeleri kullan
-
-Haber Kaynağı: ${newsSource.name} (${newsSource.category})
-Website: ${newsSource.website}
-${newsSource.description ? `Açıklama: ${newsSource.description}` : ""}
-
-Gönderiyi yaz (sadece gönderi metni, başka bir şey ekleme):`;
-    } else {
-      // Fallback: Genel konu
-      const topics = [
-        "programlama ipuçları",
-        "teknoloji haberleri",
-        "öğrenme deneyimleri",
-        "kod örnekleri",
-        "kariyer tavsiyeleri",
-        "yazılım geliştirme",
-        "best practices",
-        "yazılım problemi çözme hikayesi",
-        "programlama dili özelliği",
-      ];
-
-      const expertiseTopics = botCharacter.expertise && botCharacter.expertise.length > 0
-        ? botCharacter.expertise
-        : topics;
-
-      const randomTopic = expertiseTopics[Math.floor(Math.random() * expertiseTopics.length)];
-
-      userPrompt = `Aşağıdaki konuda kısa, samimi ve faydalı bir sosyal medya gönderisi yaz (maksimum 300 kelime). Türkçe yaz. Gönderi gerçekçi ve kişisel deneyimler içermeli.
-
-ÖNEMLİ:
-- Kolay okunabilir, kısa paragraflar kullan
-- Bazen küçük yazım hataları yapabilirsin (doğal görünmesi için)
-- Türkçe slang kullanabilirsin (valla, harbiden, iyimişş vs.)
-
-DOĞALLIK KURALLARI:
-- Aşırı pozitif veya abartılı dil kullanma (örn: "harbiden muazzam", "süper", "heyecan verici" gibi ifadeleri aşırı kullanma)
-- Genel ifadeler yerine spesifik teknik detaylar, örnekler veya somut bilgiler kullan
-- Kurgusal kişisel deneyim yazma (örn: "geçen hafta kullandım" gibi uydurma deneyimler)
-- Cümle çeşitliliği kullan, kısa-uzun cümleler karıştır, doğal bir akışı taklit et
-- Yapay tekrarlardan kaçın (aynı ifadeleri sık sık kullanma)
-- Avantajların yanında sınırlamaları veya potansiyel sorunları da belirt
-- Bir reklam metni gibi yazma, tarafsız ve bilgi odaklı bir ton kullan
-- Teknik konularda somut örnekler, kod parçacıkları veya spesifik değişiklik maddeleri kullan
-
-Konu: ${randomTopic}
-
-Gönderiyi yaz (sadece gönderi metni, başka bir şey ekleme):`;
-    }
-
-    const result = await createChatCompletion({
-      messages: [
-        {
-          role: "system",
-          content: systemPrompt,
-        },
-        {
-          role: "user",
-          content: userPrompt,
-        },
-      ],
-      temperature: 0.9,
-    });
-
-    if (!result.content) {
-      throw new Error("Generated content is empty");
-    }
-    const content = result.content.trim();
-    if (!content || content.length < 20) {
-      throw new Error("Generated content is too short");
-    }
-
-    return content.substring(0, 2200); // Limit to 2200 chars
+    // Generate LinkedIn-format post
+    return await generateLinkedInPost(botCharacter, finalTopic, randomPostType);
   } catch (error: any) {
     console.error("[BOT_AI] Error generating post:", error);
-    // Fallback to simple posts
+    // Fallback to simple LinkedIn-style posts
     const fallbackPosts = [
-      "Bugün yeni bir şey öğrendim. Paylaşmak istedim.",
-      "Kodlama yaparken dikkat etmeniz gereken önemli bir nokta var.",
-      "Toplulukta güzel bir deneyim yaşadım, teşekkürler herkese.",
-      "Yazılım geliştirme konusunda birkaç ipucu paylaşmak istiyorum.",
-      "Bugün harika bir kaynak keşfettim, sizinle de paylaşayım.",
+      `**Teknoloji dünyasında önemli bir gelişme:**
+
+🔹 Yeni trendler ve fırsatlar
+🚀 Gelecek için hazırlık
+⭐ Öğrenme ve gelişim
+
+Siz bu konuda ne düşünüyorsunuz?
+
+#teknoloji #yazılım #gelişim`,
+      `**Yazılım geliştirme konusunda bir gözlem:**
+
+Bugün paylaşmak istediğim önemli bir nokta var.
+
+Siz de benzer deneyimler yaşadınız mı?
+
+#yazılım #teknoloji #kariyer`,
     ];
     return fallbackPosts[Math.floor(Math.random() * fallbackPosts.length)];
   }
@@ -221,47 +159,70 @@ Gönderiyi yaz (sadece gönderi metni, başka bir şey ekleme):`;
 export async function generateLinkedInPost(
   botCharacter: { persona: string; systemPrompt: string; name: string; expertise?: string[] },
   topic: string,
-  postType: 1 | 2 | 3 | 4
+  postType: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
 ): Promise<string> {
   try {
     const systemPrompt = botCharacter.systemPrompt || `Sen ${botCharacter.name} karakterisin. ${botCharacter.persona || "Yardımsever ve aktif bir topluluk üyesi."}`;
 
     // Post type descriptions
-    const typeDescriptions = {
-      1: "Kişisel Hikaye/Tecrübe - Samimi, hafif öz eleştiri içeren ve öğretici bir ton kullan. Kişisel deneyimler ve dersler paylaş.",
+    const typeDescriptions: Record<number, string> = {
+      1: "Kişisel Hikaye/Tecrübe - Samimi, hafif öz eleştiri içeren ve öğretici bir ton kullan. Kişisel deneyimler ve dersler paylaş. Bazen samimi dil kullanabilirsin.",
       2: "Teknik Karşılaştırma/Trend - Analitik ama heyecanlı ol. Karşılaştırmalı analiz yap, teknik detayları açıkla.",
       3: "Sektörel Eleştiri/Tavsiye - Otoriter ve çözüm odaklı ol. Problemleri belirt ve çözüm önerileri sun.",
       4: "İlginç Teknoloji Haberi - Merak uyandırıcı ve hafif gizemli ol. Haberi çarpıcı bir şekilde sun.",
+      5: "Soru-Cevap / Tartışma Başlatıcı - Etkileşim odaklı, sorgulayıcı. Okuyucuları düşünmeye sevk eden sorular sor.",
+      6: "Vaka Çalışması / Başarı Hikayesi - Somut sonuçlar, öğretici. Gerçek örnekler ve başarı hikayeleri paylaş.",
+      7: "Trend Analizi / Gelecek Öngörüsü - Analitik, öngörücü. Gelecek trendleri ve olasılıkları analiz et.",
+      8: "Araç/Teknoloji İncelemesi - Detaylı, karşılaştırmalı. Teknik detaylar ve pratik kullanım örnekleri ver.",
+      9: "Kariyer İpuçları / Mentorluk - Öğretici, destekleyici. Kariyer gelişimi için pratik tavsiyeler sun.",
+      10: "Topluluk Deneyimi / Etkinlik Paylaşımı - Samimi, paylaşımcı. Topluluk deneyimlerini ve etkinlikleri paylaş.",
     };
 
-    const typeDescription = typeDescriptions[postType];
+    const typeLabels: Record<number, string> = {
+      1: "Kişisel Hikaye/Tecrübe",
+      2: "Teknik Karşılaştırma/Trend",
+      3: "Sektörel Eleştiri/Tavsiye",
+      4: "İlginç Teknoloji Haberi",
+      5: "Soru-Cevap / Tartışma Başlatıcı",
+      6: "Vaka Çalışması / Başarı Hikayesi",
+      7: "Trend Analizi / Gelecek Öngörüsü",
+      8: "Araç/Teknoloji İncelemesi",
+      9: "Kariyer İpuçları / Mentorluk",
+      10: "Topluluk Deneyimi / Etkinlik Paylaşımı",
+    };
+
+    const typeDescription = typeDescriptions[postType] || typeDescriptions[1];
+    const typeLabel = typeLabels[postType] || typeLabels[1];
 
     const userPrompt = `Sen, LinkedIn üzerinde geniş bir takipçi kitlesine sahip, hem teknik derinliği olan hem de hikaye anlatıcılığı (storytelling) güçlü bir Teknoloji Lideri ve İçerik Üreticisisin.
 
 Amacın: Aşağıda belirteceğim [KONU] hakkında, profesyonellerin ilgisini çekecek, okunabilirliği yüksek, düşündürücü ve etkileşim (beğeni/yorum) getirecek bir LinkedIn gönderisi hazırlamak.
 
-Yazım Tarzın ve Kuralların Şunlar Olmalı:
+ZORUNLU ÖZELLİKLER (Mutlaka olmalı):
 
 1. GİRİŞ (KANCA): İlk cümle çok çarpıcı olmalı. Okuyucuyu hemen yakalamalı. Bazen bir soru, bazen şaşırtıcı bir gerçek, bazen de genel geçer bir doğruya meydan okuma şeklinde başla.
 
 2. YAPILANDIRMA: Asla devasa metin blokları kullanma. Paragrafları kısa tut (en fazla 2-3 cümle). Okumayı kolaylaştırmak için satır araları bırak.
 
-3. GÖRSELLİK:
-   - Önemli yerleri kalın (**bold**) yap.
-   - Listeleme yaparken standart madde işaretleri yerine emojiler kullan (örn: 🔹, 🚀, ⭐, ✅).
-   - Bölümleri ayırmak için "---" gibi ayraçlar kullanabilirsin.
+3. SONUÇ (CTA): Gönderiyi mutlaka okuyucuya bir soru sorarak veya bir sonraki adımı göstererek bitir. Tartışma başlatmalarını sağla.
 
-4. TON:
-   ${typeDescription}
+4. HASHTAG: Gönderinin sonuna konuya uygun 3-5 hashtag ekle. Hashtag'ler Türkçe veya İngilizce olabilir.
 
-5. SONUÇ (CTA): Gönderiyi mutlaka okuyucuya bir soru sorarak veya bir sonraki adımı göstererek bitir. Tartışma başlatmalarını sağla.
+5. DİL: Akıcı, profesyonel bir Türkçe kullan. Kategoriye göre bazen samimi dil de kullanabilirsin.
 
-6. DİL: Akıcı, profesyonel ama samimi bir Türkçe kullan.
+OPSİYONEL ÖZELLİKLER (İhtiyaca göre kullan):
 
-7. HASHTAG: Gönderinin sonuna konuya uygun 3-5 hashtag ekle. Hashtag'ler Türkçe veya İngilizce olabilir.
+- Bold formatlama: Önemli noktaları vurgulamak için kullanabilirsin, ama zorunlu değil.
+- Emoji kullanımı: Listelerde veya vurgularda kullanabilirsin, ama her yerde olması gerekmez.
+- Bölüm ayraçları: Gerekirse kullanabilirsin, ama zorunlu değil.
+
+ÖNEMLİ: Formatlamayı zorla kullanma. İçeriğe doğal olarak uygun formatlamayı seç. Her postta aynı formatı kullanmak zorunda değilsin.
+
+TON:
+${typeDescription}
 
 [KONU]: ${topic}
-[TÜR]: ${postType === 1 ? "Kişisel Hikaye/Tecrübe" : postType === 2 ? "Teknik Karşılaştırma/Trend" : postType === 3 ? "Sektörel Eleştiri/Tavsiye" : "İlginç Teknoloji Haberi"}
+[TÜR]: ${typeLabel}
 
 Sadece post metnini ve sonuna uygun hashtag'leri çıktı olarak ver. Başka bir şey ekleme.`;
 
@@ -292,24 +253,118 @@ Sadece post metnini ve sonuna uygun hashtag'leri çıktı olarak ver. Başka bir
     console.error("[BOT_AI] Error generating LinkedIn post:", error);
     // Fallback to simple LinkedIn-style posts
     const fallbackPosts = [
-      `**${topic}** hakkında düşüncelerim:
+      `${topic} hakkında düşüncelerim:
 
-🔹 Önemli bir nokta
-🚀 Bir diğer detay
-⭐ Sonuç
+Önemli bir nokta var ki paylaşmak istiyorum.
 
 Siz bu konuda ne düşünüyorsunuz?
 
 #teknoloji #yazılım #${topic.toLowerCase().replace(/\s+/g, "")}`,
       `Bugün ${topic} konusunda bir şeyler öğrendim.
 
-Paylaşmak istedim çünkü...
+Paylaşmak istedim çünkü bu bilgi değerli.
 
 Siz de benzer bir deneyim yaşadınız mı?
 
 #tech #${topic.toLowerCase().replace(/\s+/g, "")}`,
     ];
     return fallbackPosts[Math.floor(Math.random() * fallbackPosts.length)];
+  }
+}
+
+/**
+ * Generate badge share post content
+ */
+export async function generateBadgeSharePost(
+  botCharacter: { persona: string; systemPrompt: string; name: string; expertise?: string[] },
+  badge: { id: string; name: string; description: string; icon: string; color: string; category: string; rarity: string },
+  userId: string,
+  baseUrl?: string
+): Promise<string> {
+  try {
+    const systemPrompt = botCharacter.systemPrompt || `Sen ${botCharacter.name} karakterisin. ${botCharacter.persona || "Yardımsever ve aktif bir topluluk üyesi."}`;
+
+    // Profile link
+    const profileLink = baseUrl 
+      ? `${baseUrl}/profile/${userId}?badge=${badge.id}`
+      : `/profile/${userId}?badge=${badge.id}`;
+
+    // Konfeti emoji/link
+    const confettiEmoji = "🎉";
+
+    const userPrompt = `Sen, LinkedIn üzerinde geniş bir takipçi kitlesine sahip, hem teknik derinliği olan hem de hikaye anlatıcılığı (storytelling) güçlü bir Teknoloji Lideri ve İçerik Üreticisisin.
+
+Amacın: Yeni kazandığın bir rozeti paylaşmak için samimi, heyecanlı ve profesyonel bir LinkedIn gönderisi hazırlamak.
+
+ZORUNLU ÖZELLİKLER:
+
+1. GİRİŞ (KANCA): "Selam yeni rozet kazandım" gibi samimi ve heyecanlı bir giriş yap. ${confettiEmoji} emojisini kullan.
+
+2. YAPILANDIRMA: Kısa paragraflar kullan (en fazla 2-3 cümle). Okumayı kolaylaştırmak için satır araları bırak.
+
+3. ROZET BİLGİLERİ: Rozet ismini ve kısa bir açıklama paylaş. Rozetin önemini veya ne anlama geldiğini belirt.
+
+4. PROFİL LİNKİ: Gönderinin altında profil linkini paylaş: ${profileLink}
+
+5. SONUÇ (CTA): Gönderiyi samimi bir şekilde bitir. Diğerlerini de rozet kazanmaya teşvik edebilirsin.
+
+6. HASHTAG: Gönderinin sonuna konuya uygun 3-5 hashtag ekle. Hashtag'ler Türkçe veya İngilizce olabilir.
+
+7. DİL: Samimi ama profesyonel bir Türkçe kullan. Heyecanını göster ama abartma.
+
+ROZET BİLGİLERİ:
+- İsim: ${badge.name}
+- Açıklama: ${badge.description}
+- Kategori: ${badge.category}
+- Nadirlik: ${badge.rarity}
+- İkon: ${badge.icon}
+
+Sadece post metnini ve sonuna uygun hashtag'leri çıktı olarak ver. Profil linkini de ekle. Başka bir şey ekleme.`;
+
+    const result = await createChatCompletion({
+      messages: [
+        {
+          role: "system",
+          content: systemPrompt,
+        },
+        {
+          role: "user",
+          content: userPrompt,
+        },
+      ],
+      temperature: 0.85,
+    });
+
+    if (!result.content) {
+      throw new Error("Generated badge share post is empty");
+    }
+    const content = result.content.trim();
+    if (!content || content.length < 50) {
+      throw new Error("Generated badge share post is too short");
+    }
+
+    // Ensure profile link is included
+    let finalContent = content;
+    if (!content.includes(profileLink) && !content.includes(`/profile/${userId}`)) {
+      finalContent = `${content}\n\nProfilimde tüm rozetlerimi görebilirsiniz:\n${profileLink}`;
+    }
+
+    return finalContent.substring(0, 2200); // Limit to 2200 chars
+  } catch (error: any) {
+    console.error("[BOT_AI] Error generating badge share post:", error);
+    // Fallback to simple badge share post
+    const profileLink = baseUrl 
+      ? `${baseUrl}/profile/${userId}?badge=${badge.id}`
+      : `/profile/${userId}?badge=${badge.id}`;
+    
+    return `Selam! Yeni bir rozet kazandım! 🎉
+
+${badge.icon} ${badge.name} rozetini kazandım. ${badge.description}
+
+Profilimde tüm rozetlerimi görebilirsiniz:
+${profileLink}
+
+#rozet #başarı #teknoloji #${badge.category.toLowerCase().replace(/\s+/g, "")}`;
   }
 }
 

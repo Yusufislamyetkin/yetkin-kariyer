@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { formatDistance } from "date-fns";
 import { tr } from "date-fns/locale";
-import { User, Users, Loader2 } from "lucide-react";
+import { User, Users, Loader2, ArrowLeft } from "lucide-react";
 import { Button } from "@/app/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { useSignalRChat } from "@/hooks/useSignalRChat";
@@ -104,7 +104,6 @@ export default function DirectChatPage() {
   const [threads, setThreads] = useState<DirectThread[]>([]);
   const [loadingThreads, setLoadingThreads] = useState(true);
   const [selectedThreadId, setSelectedThreadId] = useState<string | null>(null);
-  const [showSidebar, setShowSidebar] = useState(false);
 
   const [showStartDialog, setShowStartDialog] = useState(false);
   const [friends, setFriends] = useState<FriendOption[]>([]);
@@ -158,15 +157,6 @@ export default function DirectChatPage() {
     return () => clearInterval(interval);
   }, []);
 
-  // Mobilde sidebar'ı otomatik aç
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const isMobile = window.innerWidth < 1024;
-      if (isMobile) {
-        setShowSidebar(true);
-      }
-    }
-  }, []);
 
   // Read thread ID from URL query params on mount and when searchParams change
   useEffect(() => {
@@ -653,11 +643,15 @@ export default function DirectChatPage() {
   const handleSelectThread = useCallback(
     (threadId: string) => {
       setSelectedThreadId(threadId);
-      setShowSidebar(false);
       router.replace(`/chat/direct?thread=${threadId}`);
     },
     [router]
   );
+
+  const handleBackToSidebar = useCallback(() => {
+    setSelectedThreadId(null);
+    router.replace("/chat/direct");
+  }, [router]);
 
   const handleAttachmentsSelect = useCallback((files: FileList) => {
     const next: LocalAttachment[] = [];
@@ -1377,6 +1371,15 @@ export default function DirectChatPage() {
     <header className="pl-14 sm:pl-4 sm:px-6 pr-4 py-4 sm:py-5 border-b border-gray-200/70 dark:border-gray-800/60 bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm">
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4">
         <div className="flex items-center gap-3 sm:gap-4 min-w-0 flex-1">
+          {/* Back button for mobile */}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={handleBackToSidebar}
+            className="lg:hidden h-10 w-10 rounded-full border border-gray-200/70 dark:border-gray-700/60 bg-white/70 dark:bg-gray-900/60 flex-shrink-0"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </Button>
           <Link
             href={selectedThread.participant?.id ? `/profile/${selectedThread.participant.id}` : "#"}
             className="relative transition-transform hover:scale-105 flex-shrink-0"
@@ -1445,106 +1448,16 @@ export default function DirectChatPage() {
     </header>
   ) : null;
 
-  // Mobil versiyonda sidebar kapalıyken thread listesini göster
-  const mobileThreadList = !showSidebar && (
-    <div className="lg:hidden flex flex-col h-full">
-      <div className="flex items-center justify-between gap-3 border-b border-gray-200 px-4 py-3 dark:border-gray-800 bg-white/85 dark:bg-gray-900/75">
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Direkt Mesajlar</h2>
-        <div className="flex items-center gap-2">
-          <Button variant="gradient" size="sm" onClick={handleOpenStartDialog} className="text-xs px-3 py-1.5">
-            Yeni Mesaj
-          </Button>
-          <Button variant="outline" size="sm" href="/dashboard/friends" className="text-xs px-3 py-1.5">
-            Arkadaş ekle
-          </Button>
-        </div>
-      </div>
-      <div className="flex-1 space-y-2 overflow-y-auto overflow-x-hidden min-h-0 px-4 py-4">
-        {loadingThreads ? (
-          <div className="flex h-full items-center justify-center">
-            <Loader2 className="h-6 w-6 animate-spin text-blue-500" />
-          </div>
-        ) : sidebarItems.length === 0 ? (
-          <div className="flex h-full items-center justify-center">
-            <div className="flex flex-col items-center gap-3 text-center text-sm text-gray-500 dark:text-gray-400">
-              <User className="h-10 w-10 text-blue-500" />
-              <div>
-                <p className="font-medium text-gray-700 dark:text-gray-200">Henüz direkt mesaj başlatmadınız.</p>
-                <p className="text-xs opacity-80">Arkadaş ekle sayfasından bağlantı kurup ardından sohbet başlatabilirsiniz.</p>
-              </div>
-            </div>
-          </div>
-        ) : (
-          sidebarItems.map((item) => {
-            const handleClick = () => {
-              handleSelectThread(item.id);
-            };
-
-            return (
-              <button
-                key={item.id}
-                type="button"
-                onClick={handleClick}
-                className={cn(
-                  "w-full flex items-start gap-3 rounded-2xl border border-transparent px-4 py-3 transition-all duration-200 text-left shadow-sm",
-                  "bg-white/75 dark:bg-gray-900/70 hover:shadow-md hover:border-blue-200/70 dark:hover:border-blue-900/40",
-                  selectedThreadId === item.id &&
-                    "bg-gradient-to-br from-blue-500/10 to-purple-500/10 dark:from-blue-500/20 dark:to-purple-500/20 border-blue-400/60 dark:border-blue-900/50 shadow-lg"
-                )}
-              >
-                <div className="relative">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl text-sm font-semibold text-white shadow-sm bg-gradient-to-br from-blue-500 to-sky-500">
-                    {item.initials ?? "?"}
-                  </div>
-                  {item.presenceIndicator && item.presenceIndicator !== "none" ? (
-                    <span
-                      className={cn(
-                        "absolute -bottom-1 -right-1 h-3 w-3 rounded-full border-2 border-white dark:border-gray-900",
-                        item.presenceIndicator === "online" ? "bg-emerald-400" : "bg-gray-400"
-                      )}
-                    />
-                  ) : null}
-                </div>
-
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center justify-between gap-2">
-                    <p className="font-semibold text-gray-900 dark:text-gray-100 truncate">{item.title}</p>
-                    {typeof item.unreadCount === "number" && item.unreadCount > 0 ? (
-                      <span className="text-xs bg-blue-500 text-white rounded-full px-2 py-0.5 min-w-[1.5rem] text-center">
-                        {item.unreadCount}
-                      </span>
-                    ) : null}
-                  </div>
-
-                  {item.preview ? (
-                    <p className="text-sm text-gray-600 dark:text-gray-300 truncate mt-1">{item.preview}</p>
-                  ) : null}
-
-                  {item.meta ? (
-                    <p className="mt-1 text-[11px] text-gray-400 dark:text-gray-500">{item.meta}</p>
-                  ) : null}
-                </div>
-              </button>
-            );
-          })
-        )}
+  const conversationBody = !selectedThread ? (
+    <div className="hidden lg:flex flex-1 items-center justify-center text-center px-6">
+      <div className="space-y-3 max-w-md">
+        <User className="mx-auto h-12 w-12 text-blue-500" />
+        <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100">Bir sohbet seçin veya başlatın</h2>
+        <p className="text-sm text-gray-500 dark:text-gray-400">
+          Sol taraftaki listeden bir kişiyi seçerek konuşmayı görüntüleyin.
+        </p>
       </div>
     </div>
-  );
-
-  const conversationBody = !selectedThread ? (
-    <>
-      {mobileThreadList}
-      <div className="hidden lg:flex flex-1 items-center justify-center text-center px-6">
-        <div className="space-y-3 max-w-md">
-          <User className="mx-auto h-12 w-12 text-blue-500" />
-          <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100">Bir sohbet seçin veya başlatın</h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            Sol taraftaki listeden bir kişiyi seçerek konuşmayı görüntüleyin.
-          </p>
-        </div>
-      </div>
-    </>
   ) : (
     <MessageViewport
       ref={messagesContainerRef}
@@ -1621,14 +1534,13 @@ export default function DirectChatPage() {
             title: "Henüz direkt mesaj başlatmadınız.",
             description: "Arkadaş ekle sayfasından bağlantı kurup ardından sohbet başlatabilirsiniz.",
           }}
-          onCloseMobile={() => setShowSidebar(false)}
         />
       }
       conversationHeader={conversationHeader}
       composer={composerNode}
       overlay={overlayNode}
-      mobileSidebarOpen={showSidebar}
-      onToggleMobileSidebar={setShowSidebar}
+      hasSelectedConversation={!!selectedThreadId}
+      onBackToSidebar={handleBackToSidebar}
       mobileHeaderActions={mobileHeaderActions}
     >
       {conversationBody}

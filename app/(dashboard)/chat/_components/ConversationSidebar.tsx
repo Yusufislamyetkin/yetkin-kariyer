@@ -92,15 +92,6 @@ export function ConversationSidebar({
               {action}
             </div>
           ) : null}
-          {onCloseMobile ? (
-            <button
-              type="button"
-              className="lg:hidden rounded-full border border-gray-300 px-2 py-1 text-xs text-gray-600 hover:bg-gray-100 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
-              onClick={onCloseMobile}
-            >
-              ✕
-            </button>
-          ) : null}
         </div>
       </div>
 

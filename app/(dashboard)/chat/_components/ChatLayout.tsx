@@ -1,6 +1,4 @@
 import { ReactNode } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Button } from "@/app/components/ui/Button";
 import { cn } from "@/lib/utils";
 
 interface ChatLayoutProps {
@@ -9,10 +7,9 @@ interface ChatLayoutProps {
   messages: ReactNode;
   composer?: ReactNode;
   overlays?: ReactNode;
-  showSidebar: boolean;
-  onToggleSidebar: () => void;
   error?: string | null;
   className?: string;
+  hasSelectedConversation?: boolean;
 }
 
 export function ChatLayout({
@@ -21,10 +18,9 @@ export function ChatLayout({
   messages,
   composer,
   overlays,
-  showSidebar,
-  onToggleSidebar,
   error,
   className,
+  hasSelectedConversation = false,
 }: ChatLayoutProps) {
   return (
     <div
@@ -34,22 +30,25 @@ export function ChatLayout({
       )}
     >
       <div className="flex flex-1 flex-col lg:flex-row min-h-0 overflow-hidden">
+        {/* Desktop: Always show sidebar, Mobile: Show only when no conversation selected */}
         <aside
           className={cn(
-            "absolute inset-y-0 left-0 z-30 w-full max-w-[22rem] border-b border-gray-200 bg-gray-50/95 backdrop-blur-sm transition-transform duration-300 ease-in-out dark:border-gray-800 dark:bg-gray-900/95 lg:static lg:border-b-0 lg:border-r min-h-0 overflow-hidden",
-            showSidebar ? "translate-x-0" : "-translate-x-full lg:translate-x-0",
+            "w-full lg:w-[22rem] xl:w-[24rem] border-b lg:border-b-0 lg:border-r border-gray-200 bg-gray-50/95 backdrop-blur-sm dark:border-gray-800 dark:bg-gray-900/95 min-h-0 overflow-hidden",
+            // Desktop: always visible, Mobile: only when no conversation selected
+            hasSelectedConversation ? "hidden lg:block" : "block"
           )}
         >
           {sidebar}
         </aside>
 
-        <div className="relative flex flex-1 flex-col bg-white dark:bg-gray-950 min-h-0 overflow-hidden">
-          <div className="absolute left-4 top-4 z-20 lg:hidden">
-            <Button variant="outline" size="icon" onClick={onToggleSidebar} aria-label="Konuşma listesini aç">
-              {showSidebar ? <ChevronLeft className="h-5 w-5" /> : <ChevronRight className="h-5 w-5" />}
-            </Button>
-          </div>
-
+        {/* Desktop: Always show conversation, Mobile: Show only when conversation selected */}
+        <div
+          className={cn(
+            "relative flex flex-1 flex-col bg-white dark:bg-gray-950 min-h-0 overflow-hidden",
+            // Desktop: always visible, Mobile: only when conversation selected
+            hasSelectedConversation ? "block" : "hidden lg:flex"
+          )}
+        >
           {error && (
             <div className="absolute right-4 top-4 z-20 rounded-lg border border-red-200 bg-red-50 px-4 py-2 text-sm text-red-600 shadow-sm dark:border-red-900 dark:bg-red-950/60 dark:text-red-300">
               {error}
@@ -64,14 +63,6 @@ export function ChatLayout({
           </div>
         </div>
       </div>
-
-      <div
-        className={cn(
-          "fixed inset-0 z-20 bg-black/30 backdrop-blur-sm transition-opacity duration-300 lg:hidden",
-          showSidebar ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
-        )}
-        onClick={onToggleSidebar}
-      />
 
       {overlays}
     </div>

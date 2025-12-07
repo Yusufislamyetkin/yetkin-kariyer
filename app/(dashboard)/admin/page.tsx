@@ -37,6 +37,12 @@ interface ProfileStatus {
     noPhotoMaleCount?: number;
     noPhotoFemaleCount?: number;
     noPhotoTotalCount?: number;
+    photoCreatedCount?: number;
+    photoMaleCount?: number;
+    photoFemaleCount?: number;
+    noPhotoCreatedCount?: number;
+    noPhotoRequestedCount?: number;
+    mode?: string;
   } | null;
 }
 
@@ -76,14 +82,6 @@ export default function AdminPage() {
     success: null,
     error: null,
   });
-
-  const [assignProfilesState, setAssignProfilesState] = useState<CourseStatus>({
-    loading: false,
-    success: null,
-    error: null,
-    stats: null,
-  });
-
 
   const [communityState, setCommunityState] = useState<CourseStatus>({
     loading: false,
@@ -1088,42 +1086,6 @@ export default function AdminPage() {
     }
   };
 
-  const handleAssignProfilesToCommunities = async () => {
-    setAssignProfilesState({
-      loading: true,
-      success: null,
-      error: null,
-      stats: null,
-    });
-
-    try {
-      const response = await fetch("/api/admin/assign-profiles-to-communities", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Profiller topluluklara atanırken bir hata oluştu");
-      }
-
-      setAssignProfilesState({
-        loading: false,
-        success: data.message || "Profiller başarıyla topluluklara atandı",
-        error: null,
-        stats: data.stats || null,
-      });
-    } catch (err: any) {
-      setAssignProfilesState({
-        loading: false,
-        success: null,
-        error: err.message || "Bir hata oluştu",
-        stats: null,
-      });
-    }
-  };
-
   const handleInsertTestTechnologies = async () => {
     setTestTechnologiesState({
       loading: true,
@@ -1452,23 +1414,34 @@ export default function AdminPage() {
     }
   };
 
-  const handleCreateProfiles = async () => {
-    console.log("[ADMIN] handleCreateProfiles called", { noPhotoUserCount });
+  const handleCreateProfiles = async (mode: "photos" | "no-photos") => {
+    console.log("[ADMIN] handleCreateProfiles called", { mode, noPhotoUserCount });
     
-    const userCount = noPhotoUserCount ?? 1000;
-    
-    if (userCount < 0) {
-      alert("Lütfen geçerli bir kullanıcı sayısı girin (0 veya daha büyük)");
-      return;
-    }
+    if (mode === "no-photos") {
+      const userCount = noPhotoUserCount ?? 1000;
+      
+      if (userCount < 0) {
+        alert("Lütfen geçerli bir kullanıcı sayısı girin (0 veya daha büyük)");
+        return;
+      }
 
-    if (
-      !confirm(
-        `Photos klasöründeki tüm fotoğraflar için profil hesapları oluşturulacak ve ${userCount} adet fotoğrafsız kullanıcı eklenecek. Devam etmek istiyor musunuz?`
-      )
-    ) {
-      console.log("[ADMIN] User cancelled profile creation");
-      return;
+      if (
+        !confirm(
+          `${userCount} adet fotoğrafsız kullanıcı oluşturulacak. Devam etmek istiyor musunuz?`
+        )
+      ) {
+        console.log("[ADMIN] User cancelled profile creation");
+        return;
+      }
+    } else {
+      if (
+        !confirm(
+          `Photos klasöründeki tüm fotoğraflar için profil hesapları oluşturulacak. Devam etmek istiyor musunuz?`
+        )
+      ) {
+        console.log("[ADMIN] User cancelled profile creation");
+        return;
+      }
     }
 
     if (profileState.loading) {
@@ -1476,7 +1449,7 @@ export default function AdminPage() {
       return;
     }
 
-    console.log("[ADMIN] Starting profile creation...");
+    console.log("[ADMIN] Starting profile creation...", { mode });
     setProfileState({
       loading: true,
       success: null,
@@ -1485,11 +1458,16 @@ export default function AdminPage() {
     });
 
     try {
-      console.log("[ADMIN] Sending request to /api/admin/create-profiles", { noPhotoUserCount: userCount });
+      const requestBody: { mode: string; noPhotoUserCount?: number } = { mode };
+      if (mode === "no-photos") {
+        requestBody.noPhotoUserCount = noPhotoUserCount ?? 1000;
+      }
+
+      console.log("[ADMIN] Sending request to /api/admin/create-profiles", requestBody);
       const response = await fetch("/api/admin/create-profiles", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ noPhotoUserCount: userCount }),
+        body: JSON.stringify(requestBody),
       });
 
       console.log("[ADMIN] Response status:", response.status);
@@ -2508,26 +2486,6 @@ export default function AdminPage() {
             Photos klasöründeki kadın ve erkek fotoğrafları için Türk isimleriyle profil hesapları oluşturun. Her hesap için rastgele şifre ve email oluşturulur.
           </p>
           
-          {/* Fotoğrafsız Kullanıcı Sayısı Input */}
-          <div className="mb-6 max-w-md">
-            <label htmlFor="noPhotoCount" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Fotoğrafsız Kullanıcı Sayısı
-            </label>
-            <input
-              id="noPhotoCount"
-              type="number"
-              min="0"
-              max="10000"
-              value={noPhotoUserCount}
-              onChange={(e) => setNoPhotoUserCount(parseInt(e.target.value) || 0)}
-              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-green-500 focus:border-transparent"
-              placeholder="Fotoğrafsız kullanıcı sayısı"
-            />
-            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-              Fotoğrafsız oluşturulacak kullanıcı sayısını girin (varsayılan: 1000)
-            </p>
-          </div>
-          
           {/* View All Users Button */}
           <div className="mb-6 max-w-md">
             <Button
@@ -2546,8 +2504,8 @@ export default function AdminPage() {
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
-                  console.log("[ADMIN] Button clicked - handleCreateProfiles");
-                  handleCreateProfiles();
+                  console.log("[ADMIN] Button clicked - handleCreateProfiles with photos");
+                  handleCreateProfiles("photos");
                 }}
                 disabled={profileState.loading}
                 size="lg"
@@ -2561,11 +2519,11 @@ export default function AdminPage() {
                 ) : (
                   <>
                     <Users className="mr-2 h-5 w-5" />
-                    Profil Hesapları Oluştur
+                    Fotoğraflı Profiller Oluştur
                   </>
                 )}
               </Button>
-              {profileState.success && (
+              {profileState.success && profileState.stats && (profileState.stats as any).mode === "photos" && (
                 <div className="mt-2 p-3 rounded-lg border border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-950/60">
                   <div className="flex items-start gap-2 text-green-600 dark:text-green-300">
                     <CheckCircle2 className="h-4 w-4 mt-0.5 flex-shrink-0" />
@@ -2574,36 +2532,17 @@ export default function AdminPage() {
                       {profileState.stats && (
                         <div className="flex flex-col gap-2 text-xs opacity-90">
                           <div className="flex flex-wrap gap-3">
-                            <span>Toplam: <strong>{profileState.stats.totalCreated}</strong></span>
-                            <span>Erkek: <strong>{profileState.stats.maleCount}</strong></span>
-                            <span>Kadın: <strong>{profileState.stats.femaleCount}</strong></span>
+                            <span>Toplam: <strong>{profileState.stats.photoCreatedCount || profileState.stats.totalCreated}</strong></span>
+                            <span>Erkek: <strong>{profileState.stats.photoMaleCount || 0}</strong></span>
+                            <span>Kadın: <strong>{profileState.stats.photoFemaleCount || 0}</strong></span>
                           </div>
-                          {profileState.stats.newAvatarMaleCount !== undefined && profileState.stats.newAvatarFemaleCount !== undefined && (
-                            <div className="flex flex-wrap gap-3 pt-1 border-t border-green-300 dark:border-green-800">
-                              <span className="text-green-700 dark:text-green-300">Yeni Avatar Erkek: <strong>{profileState.stats.newAvatarMaleCount}</strong></span>
-                              <span className="text-green-700 dark:text-green-300">Yeni Avatar Kadın: <strong>{profileState.stats.newAvatarFemaleCount}</strong></span>
-                            </div>
-                          )}
-                          {profileState.stats.regularMaleCount !== undefined && profileState.stats.regularFemaleCount !== undefined && (
-                            <div className="flex flex-wrap gap-3 text-xs opacity-75">
-                              <span>Normal Erkek: <strong>{profileState.stats.regularMaleCount}</strong></span>
-                              <span>Normal Kadın: <strong>{profileState.stats.regularFemaleCount}</strong></span>
-                            </div>
-                          )}
-                          {profileState.stats.noPhotoTotalCount !== undefined && (
-                            <div className="flex flex-wrap gap-3 pt-1 border-t border-green-300 dark:border-green-800">
-                              <span className="text-blue-700 dark:text-blue-300">Fotoğrafsız Toplam: <strong>{profileState.stats.noPhotoTotalCount}</strong></span>
-                              <span className="text-blue-700 dark:text-blue-300">Fotoğrafsız Erkek: <strong>{profileState.stats.noPhotoMaleCount || 0}</strong></span>
-                              <span className="text-blue-700 dark:text-blue-300">Fotoğrafsız Kadın: <strong>{profileState.stats.noPhotoFemaleCount || 0}</strong></span>
-                            </div>
-                          )}
                         </div>
                       )}
                     </div>
                   </div>
                 </div>
               )}
-              {profileState.error && (
+              {profileState.error && (!profileState.stats || (profileState.stats as any)?.mode === "photos") && (
                 <div className="mt-2 p-3 rounded-lg border border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/60">
                   <div className="flex items-start gap-2 text-red-600 dark:text-red-300">
                     <AlertCircle className="h-4 w-4 mt-0.5 flex-shrink-0" />
@@ -2613,72 +2552,74 @@ export default function AdminPage() {
               )}
             </div>
             <div>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
-                Her topluluğa 30-60 arasında rastgele katılımcı ekler.
-              </p>
+              {/* Fotoğrafsız Kullanıcı Sayısı Input */}
+              <div className="mb-4">
+                <label htmlFor="noPhotoCount" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Fotoğrafsız Kullanıcı Sayısı
+                </label>
+                <input
+                  id="noPhotoCount"
+                  type="number"
+                  min="0"
+                  max="10000"
+                  value={noPhotoUserCount}
+                  onChange={(e) => setNoPhotoUserCount(parseInt(e.target.value) || 0)}
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="Fotoğrafsız kullanıcı sayısı"
+                />
+                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                  Fotoğrafsız oluşturulacak kullanıcı sayısını girin (varsayılan: 1000)
+                </p>
+              </div>
               <Button
-                onClick={handleAssignProfilesToCommunities}
-                disabled={assignProfilesState.loading}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  console.log("[ADMIN] Button clicked - handleCreateProfiles without photos");
+                  handleCreateProfiles("no-photos");
+                }}
+                disabled={profileState.loading}
                 size="lg"
                 className="w-full bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-medium"
               >
-                {assignProfilesState.loading ? (
+                {profileState.loading ? (
                   <>
                     <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                    Atanıyor...
+                    Oluşturuluyor...
                   </>
                 ) : (
                   <>
-                    <MessageCircle className="mr-2 h-5 w-5" />
-                    Profilleri Topluluklara Üye Et
+                    <Users className="mr-2 h-5 w-5" />
+                    Fotoğrafsız Profiller Oluştur
                   </>
                 )}
               </Button>
-              {assignProfilesState.success && (
+              {profileState.success && profileState.stats && (profileState.stats as any).mode === "no-photos" && (
                 <div className="mt-2 p-3 rounded-lg border border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-950/60">
                   <div className="flex items-start gap-2 text-green-600 dark:text-green-300">
                     <CheckCircle2 className="h-4 w-4 mt-0.5 flex-shrink-0" />
                     <div className="flex-1">
-                      <div className="text-sm font-medium mb-2">{assignProfilesState.success}</div>
-                      {assignProfilesState.stats && (
-                        <div className="space-y-2">
-                          <div className="flex flex-col gap-1 text-xs opacity-90">
-                            <span>Toplam Profil: <strong>{(assignProfilesState.stats as any).totalProfiles || 0}</strong></span>
-                            <span>Topluluk Sayısı: <strong>{(assignProfilesState.stats as any).totalCommunities || 0}</strong></span>
-                            <span>Eklenen Üye: <strong>{(assignProfilesState.stats as any).totalAdded || 0}</strong></span>
-                            <span>Topluluk Başına: <strong>{(assignProfilesState.stats as any).minPerCommunity || 30}</strong> - <strong>{(assignProfilesState.stats as any).maxPerCommunity || 60}</strong> üye (rastgele)</span>
+                      <div className="text-sm font-medium mb-1">{profileState.success}</div>
+                      {profileState.stats && (
+                        <div className="flex flex-col gap-2 text-xs opacity-90">
+                          <div className="flex flex-wrap gap-3">
+                            <span>Oluşturulan: <strong>{profileState.stats.noPhotoCreatedCount || 0}</strong> / <strong>{profileState.stats.noPhotoRequestedCount || 0}</strong></span>
                           </div>
-                          {(assignProfilesState.stats as any).communityStats && (
-                            <div className="mt-2 pt-2 border-t border-green-300 dark:border-green-800">
-                              <div className="text-xs font-semibold mb-1">Topluluk Detayları:</div>
-                              <div className="flex flex-col gap-1 text-xs opacity-90 max-h-48 overflow-y-auto">
-                                {((assignProfilesState.stats as any).communityStats as Array<{ name: string; added: number; currentTotal: number }>).map((stat, idx) => (
-                                  <div key={idx} className="flex justify-between items-center">
-                                    <span>{stat.name}:</span>
-                                    <span className="font-medium">
-                                      +{stat.added} üye (Toplam: {stat.currentTotal})
-                                      {stat.currentTotal >= ((assignProfilesState.stats as any).minPerCommunity || 30) && stat.currentTotal <= ((assignProfilesState.stats as any).maxPerCommunity || 60) ? (
-                                        <span className="ml-1 text-green-600 dark:text-green-400">✓</span>
-                                      ) : (
-                                        <span className="ml-1 text-orange-600 dark:text-orange-400">⚠</span>
-                                      )}
-                                    </span>
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          )}
+                          <div className="flex flex-wrap gap-3 pt-1 border-t border-green-300 dark:border-green-800">
+                            <span className="text-blue-700 dark:text-blue-300">Erkek: <strong>{profileState.stats.noPhotoMaleCount || 0}</strong></span>
+                            <span className="text-blue-700 dark:text-blue-300">Kadın: <strong>{profileState.stats.noPhotoFemaleCount || 0}</strong></span>
+                          </div>
                         </div>
                       )}
                     </div>
                   </div>
                 </div>
               )}
-              {assignProfilesState.error && (
+              {profileState.error && (profileState.stats as any)?.mode === "no-photos" && (
                 <div className="mt-2 p-3 rounded-lg border border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-950/60">
                   <div className="flex items-start gap-2 text-red-600 dark:text-red-300">
                     <AlertCircle className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                    <div className="text-sm font-medium">{assignProfilesState.error}</div>
+                    <div className="text-sm font-medium">{profileState.error}</div>
                   </div>
                 </div>
               )}

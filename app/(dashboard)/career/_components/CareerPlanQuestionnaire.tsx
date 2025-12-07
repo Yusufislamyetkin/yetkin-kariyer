@@ -181,6 +181,7 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
   const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
   const [availableTechnologies, setAvailableTechnologies] = useState<Technology[]>([]);
   const [loadingTechnologies, setLoadingTechnologies] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const loadingMessages = [
     {
@@ -255,15 +256,41 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
 
   const handleNext = () => {
     if (currentStep < totalSteps) {
-      setCurrentStep(currentStep + 1);
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentStep(currentStep + 1);
+        setIsTransitioning(false);
+      }, 200);
     }
+  };
+
+  // Auto-advance to next step after selection (for single-choice questions)
+  const autoAdvance = (delay: number = 400) => {
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentStep((prevStep) => {
+        if (prevStep < totalSteps) {
+          return prevStep + 1;
+        }
+        return prevStep;
+      });
+    }, delay);
   };
 
   const handlePrevious = () => {
     if (currentStep > 1) {
-      setCurrentStep(currentStep - 1);
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentStep(currentStep - 1);
+        setIsTransitioning(false);
+      }, 200);
     }
   };
+
+  // Reset transition state when step changes
+  useEffect(() => {
+    setIsTransitioning(false);
+  }, [currentStep]);
 
   // Loading progress ve mesaj animasyonu
   useEffect(() => {
@@ -356,6 +383,8 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
                   type="button"
                   onClick={() => {
                     setFormData((prev) => ({ ...prev, specialization: spec }));
+                    // Auto-advance to next step after selection
+                    autoAdvance();
                   }}
                   className={`w-full p-4 rounded-lg border-2 transition-all text-left ${
                     formData.specialization === spec
@@ -390,6 +419,8 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
                   type="button"
                   onClick={() => {
                     setFormData((prev) => ({ ...prev, careerGoal: goal }));
+                    // Auto-advance to next step after selection
+                    autoAdvance();
                   }}
                   className={`w-full p-4 rounded-lg border-2 transition-all text-left ${
                     formData.careerGoal === goal
@@ -428,7 +459,11 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
                 <button
                   key={timeline}
                   type="button"
-                  onClick={() => setFormData((prev) => ({ ...prev, timeline }))}
+                  onClick={() => {
+                    setFormData((prev) => ({ ...prev, timeline }));
+                    // Auto-advance to next step after selection
+                    autoAdvance();
+                  }}
                   className={`p-3 rounded-lg border-2 transition-all ${
                     formData.timeline === timeline
                       ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
@@ -461,7 +496,11 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
                 <button
                   key={level}
                   type="button"
-                  onClick={() => setFormData((prev) => ({ ...prev, skillLevel: level }))}
+                  onClick={() => {
+                    setFormData((prev) => ({ ...prev, skillLevel: level }));
+                    // Auto-advance to next step after selection
+                    autoAdvance();
+                  }}
                   className={`p-4 rounded-lg border-2 transition-all ${
                     formData.skillLevel === level
                       ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
@@ -734,7 +773,16 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
         </div>
       </CardHeader>
       <CardContent className="space-y-6">
-        {renderStep()}
+        <div
+          key={currentStep}
+          className={`transition-all duration-300 ${
+            isTransitioning
+              ? "opacity-0 transform translate-x-4"
+              : "opacity-100 transform translate-x-0"
+          }`}
+        >
+          {renderStep()}
+        </div>
         <div className="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-gray-700">
           <div>
             {onCancel && (

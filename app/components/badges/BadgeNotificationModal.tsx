@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState, useCallback, useRef } from "react";
-import { X, Sparkles, Award } from "lucide-react";
+import { X, Sparkles, Award, Share2, Loader2 } from "lucide-react";
 import { Button } from "@/app/components/ui/Button";
+import { useRouter } from "next/navigation";
 
 interface Badge {
   id: string;
@@ -65,8 +66,11 @@ export function BadgeNotificationModal({
   currentIndex,
   totalCount,
 }: BadgeNotificationModalProps) {
+  const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [sharing, setSharing] = useState(false);
+  const [shareError, setShareError] = useState<string | null>(null);
   const currentIndexRef = useRef(currentIndex);
   const totalCountRef = useRef(totalCount);
 
@@ -103,6 +107,37 @@ export function BadgeNotificationModal({
     setTimeout(() => {
       onDismiss();
     }, 300);
+  };
+
+  const handleShareAsPost = async () => {
+    if (!badge?.id) return;
+
+    setSharing(true);
+    setShareError(null);
+
+    try {
+      const response = await fetch("/api/posts/share-badge", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ badgeId: badge.id }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Rozet paylaşılırken bir hata oluştu");
+      }
+
+      // Refresh page to show new post
+      router.refresh();
+      
+      // Close modal after successful share
+      handleDismiss();
+    } catch (err: any) {
+      setShareError(err.message || "Bir hata oluştu");
+    } finally {
+      setSharing(false);
+    }
   };
 
   if (!badge || !isVisible) {
@@ -342,6 +377,13 @@ export function BadgeNotificationModal({
               </div>
             </div>
 
+            {/* Share Error */}
+            {shareError && (
+              <div className="text-center">
+                <p className="text-sm text-red-300">{shareError}</p>
+              </div>
+            )}
+
             {/* Action Buttons - optimized */}
             <div
               className={`flex items-center justify-center gap-3 pt-4 transform transition-all duration-500 ${
@@ -353,6 +395,24 @@ export function BadgeNotificationModal({
                 transform: 'translateZ(0)',
               }}
             >
+              <Button
+                onClick={handleShareAsPost}
+                disabled={sharing}
+                variant="gradient"
+                className="bg-white/20 hover:bg-white/30 text-white border-white/30 backdrop-blur-sm"
+              >
+                {sharing ? (
+                  <>
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    Paylaşılıyor...
+                  </>
+                ) : (
+                  <>
+                    <Share2 className="h-4 w-4 mr-2" />
+                    Post Olarak Paylaş
+                  </>
+                )}
+              </Button>
               {currentIndex < totalCount - 1 ? (
                 <Button
                   onClick={handleNext}

@@ -8,7 +8,7 @@ import { formatDistance } from "date-fns";
 import { tr } from "date-fns/locale";
 
 import { Button } from "@/app/components/ui/Button";
-import { Users, Dot, FileText, Plus, Lock, Unlock, Copy, RefreshCw, Link2, UserPlus, Search, X, Loader2 } from "lucide-react";
+import { Users, Dot, FileText, Plus, Lock, Unlock, Copy, RefreshCw, Link2, UserPlus, Search, X, Loader2, ArrowLeft } from "lucide-react";
 import { useSignalRChat } from "@/hooks/useSignalRChat";
 import {
   cleanupPresenceState,
@@ -198,8 +198,6 @@ export function GroupChatView({ category }: GroupChatViewProps) {
   const postPresenceRef = useRef<((status: "online" | "offline", options?: { useBeacon?: boolean }) => Promise<void>) | null>(null);
   const [presenceState, setPresenceState] = useState<PresenceState>({});
   const messagesRef = useRef<ChatMessage[]>([]);
-
-  const [showSidebar, setShowSidebar] = useState(false);
   const [showMemberPanel, setShowMemberPanel] = useState(false);
   const [joinPromptGroupId, setJoinPromptGroupId] = useState<string | null>(null);
   const [joinInviteCode, setJoinInviteCode] = useState("");
@@ -673,16 +671,20 @@ export function GroupChatView({ category }: GroupChatViewProps) {
         setJoinPromptGroupId(groupId);
         setJoinInviteCode("");
         setJoinInviteError(null);
-        setShowSidebar(false);
         router.replace(`${basePath}?group=${groupId}`);
         return;
       }
       setSelectedGroupId(groupId);
-      setShowSidebar(false);
       router.replace(`${basePath}?group=${groupId}`);
     },
     [category, groups, router]
   );
+
+  const handleBackToSidebar = useCallback(() => {
+    setSelectedGroupId(null);
+    const basePath = category === "community" ? "/chat" : "/chat/groups";
+    router.replace(basePath);
+  }, [category, router]);
 
   const handleJoinGroup = useCallback(
     async (groupId: string, options?: { inviteCode?: string }) => {
@@ -1331,15 +1333,6 @@ export function GroupChatView({ category }: GroupChatViewProps) {
     fetchGroups();
   }, [fetchGroups]);
 
-  // Mobilde sidebar'ı otomatik aç
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const isMobile = window.innerWidth < 1024;
-      if (isMobile) {
-        setShowSidebar(true);
-      }
-    }
-  }, []);
 
   useEffect(() => {
     adjustMessageInputHeight();
@@ -1742,7 +1735,7 @@ export function GroupChatView({ category }: GroupChatViewProps) {
   const conversationHeader = selectedGroup ? (
     <header
       className={cn(
-        "pl-14 md:pl-6 pr-6 py-4 border-b border-gray-200/70 dark:border-gray-800/60 flex flex-col gap-4",
+        "relative pl-14 md:pl-6 pr-6 py-4 border-b border-gray-200/70 dark:border-gray-800/60 flex flex-col gap-4",
         isJoinedToSelectedGroup ? "cursor-pointer" : "cursor-default"
       )}
       onClick={(e) => {
@@ -1755,6 +1748,17 @@ export function GroupChatView({ category }: GroupChatViewProps) {
         }
       }}
     >
+      {/* Back button for mobile */}
+      <div className="lg:hidden absolute top-4 left-4 z-20">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={handleBackToSidebar}
+          className="h-10 w-10 rounded-full border border-gray-200/70 dark:border-gray-700/60 bg-white/70 dark:bg-gray-900/60"
+        >
+          <ArrowLeft className="h-5 w-5" />
+        </Button>
+      </div>
       {/* Search Bar - Mobil uyumlu */}
       {isJoinedToSelectedGroup && (
         <div className="search-container w-full">
@@ -2161,14 +2165,13 @@ export function GroupChatView({ category }: GroupChatViewProps) {
             title: copy.sidebarEmptyTitle,
             description: copy.sidebarEmptyDescription,
           }}
-          onCloseMobile={() => setShowSidebar(false)}
         />
       }
       conversationHeader={conversationHeader}
       composer={composerNode}
       overlay={overlayNode}
-      mobileSidebarOpen={showSidebar}
-      onToggleMobileSidebar={setShowSidebar}
+      hasSelectedConversation={!!selectedGroupId}
+      onBackToSidebar={handleBackToSidebar}
     >
       {conversationBody}
     </ChatShell>

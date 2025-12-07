@@ -10,8 +10,10 @@ import {
   completeLessons,
   completeTests,
   completeLiveCoding,
+  shareBadgePost,
 } from "@/lib/bot/bot-activity-service";
-import { analyzePostForComment, generatePostContent, generateLinkedInPost, answerTestQuestions } from "@/lib/bot/ai-service";
+import { analyzePostForComment, generatePostContent, generateLinkedInPost, generateBadgeSharePost, answerTestQuestions } from "@/lib/bot/ai-service";
+import { checkBadgesForActivity } from "@/app/api/badges/check/badge-service";
 import { simulateBotLogin } from "@/lib/bot/bot-session";
 
 export async function POST(request: Request) {
@@ -160,44 +162,29 @@ export async function POST(request: Request) {
           }
         }
 
-        // Create posts (if under limit)
+        // Create posts (if under limit) - All posts are now LinkedIn format
         if (todayPosts < config.maxPostsPerDay) {
           const needed = config.maxPostsPerDay - todayPosts;
           if (needed > 0 && Math.random() < 0.5) {
             // 50% chance to create a post
-            // 30% chance to create LinkedIn post, 70% chance for regular post
-            const useLinkedInPost = Math.random() < 0.3;
+            // All posts are now LinkedIn format (100%)
+            const topics = character.expertise && character.expertise.length > 0
+              ? character.expertise
+              : ["yazılım geliştirme", "teknoloji trendleri", "programlama ipuçları", "kariyer tavsiyeleri"];
             
-            if (useLinkedInPost) {
-              // Generate LinkedIn post with random topic and type
-              const topics = character.expertise && character.expertise.length > 0
-                ? character.expertise
-                : ["yazılım geliştirme", "teknoloji trendleri", "programlama ipuçları", "kariyer tavsiyeleri"];
-              
-              const randomTopic = topics[Math.floor(Math.random() * topics.length)];
-              const randomPostType = (Math.floor(Math.random() * 4) + 1) as 1 | 2 | 3 | 4;
-              
-              const result = await createLinkedInPost(
-                bot.id,
-                (topic: string, postType: 1 | 2 | 3 | 4) => generateLinkedInPost(character, topic, postType),
-                randomTopic,
-                randomPostType,
-                character.expertise
-              );
-              
-              if (result.success) {
-                botResult.activities.push({ type: "createLinkedInPost", ...result });
-              }
-            } else {
-              // Regular post
-              const result = await createPost(
-                bot.id,
-                (newsSource) => generatePostContent(character, newsSource),
-                character.expertise
-              );
-              if (result.success) {
-                botResult.activities.push({ type: "createPost", ...result });
-              }
+            const randomTopic = topics[Math.floor(Math.random() * topics.length)];
+            const randomPostType = (Math.floor(Math.random() * 10) + 1) as 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+            
+            const result = await createLinkedInPost(
+              bot.id,
+              (topic: string, postType: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10) => generateLinkedInPost(character, topic, postType),
+              randomTopic,
+              randomPostType,
+              character.expertise
+            );
+            
+            if (result.success) {
+              botResult.activities.push({ type: "createLinkedInPost", ...result });
             }
           }
         }
@@ -274,6 +261,62 @@ export async function POST(request: Request) {
               botResult.activities.push({ type: "completeLiveCoding", ...result });
             }
           }
+        }
+
+        // Check for newly earned badges and share them (30% chance, max 1 per day)
+        try {
+          const todayBadgeShares = await db.post.count({
+            where: {
+              userId: bot.id,
+              createdAt: {
+                gte: today,
+                lt: tomorrow,
+              },
+              content: {
+                contains: "rozet",
+              },
+            },
+          });
+
+          if (todayBadgeShares === 0 && Math.random() < 0.3) {
+            // Check for newly earned badges today
+            const badgeResults = await checkBadgesForActivity({
+              userId: bot.id,
+            });
+
+            if (badgeResults.totalEarned > 0 && badgeResults.newlyEarnedBadges.length > 0) {
+              // Pick a random newly earned badge to share
+              const badgeToShare = badgeResults.newlyEarnedBadges[
+                Math.floor(Math.random() * badgeResults.newlyEarnedBadges.length)
+              ];
+
+              if (badgeToShare) {
+                const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "";
+                const result = await shareBadgePost(
+                  bot.id,
+                  (botCharacter: any, badge: any, userId: string, baseUrl?: string) => 
+                    generateBadgeSharePost(botCharacter, badge, userId, baseUrl),
+                  {
+                    id: badgeToShare.id,
+                    name: badgeToShare.name,
+                    description: badgeToShare.description,
+                    icon: badgeToShare.icon,
+                    color: badgeToShare.color,
+                    category: badgeToShare.category,
+                    rarity: badgeToShare.rarity,
+                  },
+                  character,
+                  baseUrl
+                );
+
+                if (result.success) {
+                  botResult.activities.push({ type: "shareBadgePost", ...result, badgeName: badgeToShare.name });
+                }
+              }
+            }
+          }
+        } catch (badgeError) {
+          console.warn(`[BOT_RUN] Badge share failed for bot ${bot.id}:`, badgeError);
         }
 
         // Update last activity time and simulate login

@@ -10,7 +10,7 @@ export const maxDuration = 300; // 5 dakika timeout (Vercel Pro plan için)
 /**
  * Arka planda aşamalı olarak mülakat sorularını oluşturur
  */
-export async function generateInterviewStages(interviewId: string, cvId: string) {
+async function generateInterviewStages(interviewId: string, cvId: string) {
   const startTime = Date.now();
   let currentStage = 0;
   
@@ -339,15 +339,8 @@ export async function generateInterviewStages(interviewId: string, cvId: string)
 
 export async function POST(request: Request) {
   try {
-    const session = await auth();
-    const userId = await getUserIdFromSession(session);
-    
-    if (!userId) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
     const body = await request.json();
-    const { interviewId, cvId } = body;
+    const { interviewId, cvId, userId: providedUserId } = body;
 
     if (!interviewId || typeof interviewId !== "string") {
       return NextResponse.json(
@@ -363,7 +356,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // Interview'ın var olduğunu ve kullanıcıya ait olduğunu kontrol et
+    // Interview'ı bir kez sorgula
     const interview = await db.interview.findUnique({
       where: { id: interviewId },
       include: {
@@ -376,6 +369,31 @@ export async function POST(request: Request) {
         { error: "Interview bulunamadı" },
         { status: 404 }
       );
+    }
+
+    // Internal call kontrolü: Eğer userId body'de sağlanmışsa ve interview'ın CV'si bu userId'ye aitse, session kontrolünü bypass et
+    let userId: string | null = null;
+    
+    if (providedUserId && typeof providedUserId === "string" && interview.cvId) {
+      const cv = await db.cV.findUnique({
+        where: { id: interview.cvId },
+      });
+      
+      // CV'nin userId'si sağlanan userId ile eşleşiyorsa internal call olarak kabul et
+      if (cv && cv.userId === providedUserId) {
+        userId = providedUserId;
+        console.log(`[CV_INTERVIEW_STAGES] Internal call detected for interviewId: ${interviewId}, userId: ${userId}`);
+      }
+    }
+    
+    // Eğer internal call değilse, normal session kontrolü yap
+    if (!userId) {
+      const session = await auth();
+      userId = await getUserIdFromSession(session);
+      
+      if (!userId) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      }
     }
 
     // Interview'ın CV'si üzerinden kullanıcı kontrolü

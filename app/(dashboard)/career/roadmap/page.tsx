@@ -663,17 +663,14 @@ export default function CareerRoadmapPage() {
         </Card>
       )}
 
-      {/* New Tree Structure Roadmap */}
-      {roadmap && (
+      {/* Roadmap Tree Structure */}
+      {roadmap ? (
         <RoadmapTree
           roadmap={roadmap}
           progress={progress}
           loading={progressLoading}
         />
-      )}
-
-      {/* Legacy Roadmap Display (fallback if tree not available) */}
-      {!roadmap && plan.roadmap.length > 0 && (
+      ) : plan.roadmap.length > 0 ? (
         <Card variant="elevated">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -1046,39 +1043,6 @@ export default function CareerRoadmapPage() {
                 </div>
               );
             })}
-          </CardContent>
-        </Card>
-      )}
-
-      {/* Recommended Resources */}
-      {(plan.recommendedResources && plan.recommendedResources.length > 0) || plan.recommendedCourses.length > 0 ? (
-        <Card variant="elevated">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <BookOpen className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-              Platform Kaynakları
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            {plan.recommendedResources && plan.recommendedResources.length > 0 && (
-              <div className="grid gap-3 md:grid-cols-2">
-                {plan.recommendedResources.map((resource, index) => (
-                  <CareerPlanResourceCard key={`resource-${index}`} resource={resource} />
-                ))}
-              </div>
-            )}
-            {plan.recommendedCourses.length > 0 && (
-              <ul className="space-y-2">
-                {plan.recommendedCourses.map((course, index) => (
-                  <li
-                    key={`course-${index}`}
-                    className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-800 dark:border-gray-700 dark:bg-gray-900/40 dark:text-gray-100"
-                  >
-                    {course}
-                  </li>
-                ))}
-              </ul>
-            )}
           </CardContent>
         </Card>
       ) : null}

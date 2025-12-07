@@ -253,54 +253,60 @@ export async function generatePDFFromElement(
     // Check if content height exceeds A4 height (297mm)
     // Use scrollHeight to get the full content height including overflow
     const a4HeightPixels = mmToPixels(297);
-    const contentHeight = element.scrollHeight || element.offsetHeight;
+    let contentHeight = element.scrollHeight || element.offsetHeight;
     let scaleFactor: number | null = null;
     let scaledStyles: Map<HTMLElement, any> | null = null;
 
     // If content is taller than A4, calculate and apply scale factor
-    if (contentHeight > a4HeightPixels) {
+    // Keep scaling until content fits within A4 height
+    const minScaleFactor = 0.4; // Minimum scale factor (more aggressive scaling)
+    const maxScaleFactor = 0.95; // Maximum scale factor
+    const maxIterations = 5; // Prevent infinite loops
+    
+    let iteration = 0;
+    while (contentHeight > a4HeightPixels && iteration < maxIterations) {
       // Calculate scale factor: 297mm / contentHeight
       scaleFactor = a4HeightPixels / contentHeight;
       
-      // Clamp scale factor between 0.6 and 0.95 for more aggressive scaling
-      scaleFactor = Math.max(0.6, Math.min(0.95, scaleFactor));
+      // Clamp scale factor between minScaleFactor and maxScaleFactor
+      scaleFactor = Math.max(minScaleFactor, Math.min(maxScaleFactor, scaleFactor));
+      
+      // If we already have scaled styles, restore them first
+      if (scaledStyles) {
+        restoreOriginalStyles(scaledStyles);
+      }
       
       // Apply scale to all child elements
       scaledStyles = applyScaleToElement(element, scaleFactor);
       
       // Wait for scaled styles to apply
-      await new Promise((resolve) => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 150));
       
       // Re-check height after scaling
-      const newContentHeight = element.scrollHeight || element.offsetHeight;
-      if (newContentHeight > a4HeightPixels) {
-        // If still too tall, apply additional scaling
-        const additionalScale = a4HeightPixels / newContentHeight;
-        const finalScaleFactor = scaleFactor * additionalScale;
-        const finalScaleFactorClamped = Math.max(0.6, Math.min(0.95, finalScaleFactor));
-        
-        // Restore original styles first
-        if (scaledStyles) {
-          restoreOriginalStyles(scaledStyles);
-        }
-        
-        // Apply new scale factor
-        scaledStyles = applyScaleToElement(element, finalScaleFactorClamped);
-        await new Promise((resolve) => setTimeout(resolve, 100));
+      contentHeight = element.scrollHeight || element.offsetHeight;
+      iteration++;
+      
+      // If content still doesn't fit and we're at minimum scale, break
+      if (scaleFactor <= minScaleFactor && contentHeight > a4HeightPixels) {
+        break;
       }
     }
 
     // Convert HTML to canvas
     // Use scrollHeight and scrollWidth to capture the entire content including overflow
+    // Get current dimensions after scaling (if any)
+    const currentWidth = element.scrollWidth || element.offsetWidth;
+    const currentHeight = element.scrollHeight || element.offsetHeight;
+    
     const canvas = await html2canvas(element, {
       scale: scale,
       useCORS: true,
       logging: false,
       backgroundColor: '#ffffff',
-      width: element.scrollWidth || element.offsetWidth,
-      height: element.scrollHeight || element.offsetHeight,
-      windowWidth: element.scrollWidth || element.offsetWidth,
-      windowHeight: element.scrollHeight || element.offsetHeight,
+      width: currentWidth,
+      height: currentHeight,
+      windowWidth: currentWidth,
+      windowHeight: currentHeight,
       scrollX: 0,
       scrollY: 0,
     });
@@ -341,17 +347,27 @@ export async function generatePDFFromElement(
     // and scale height proportionally
     const ratio = imgWidth / imgHeight;
     
-    // Start with A4 width (210mm)
+    // Convert canvas pixels to mm (at 96 DPI: 1mm ≈ 3.779527559 pixels)
+    const pixelsPerMm = 3.779527559;
+    const imgWidthMm = imgWidth / pixelsPerMm;
+    const imgHeightMm = imgHeight / pixelsPerMm;
+    
+    // Start with A4 width (210mm) and calculate height proportionally
     let pdfImgWidth = pdfWidth;
-    let pdfImgHeight = pdfWidth / ratio;
+    let pdfImgHeight = (imgHeightMm / imgWidthMm) * pdfWidth;
 
     // If content is taller than A4 height, scale down everything proportionally
     // to fit within one page while preserving format
+    // But ensure we use the actual scaled height, not force it to A4 height
     if (pdfImgHeight > pdfHeight) {
       // Calculate scale factor to fit height within A4
       const scaleFactor = pdfHeight / pdfImgHeight;
       pdfImgHeight = pdfHeight;
       pdfImgWidth = pdfImgWidth * scaleFactor;
+    } else {
+      // Content fits within A4 height, use actual scaled height
+      // This ensures no content is cut off
+      pdfImgHeight = pdfImgHeight;
     }
 
     // Create PDF
@@ -364,10 +380,19 @@ export async function generatePDFFromElement(
     // Convert canvas to image data
     const imgData = canvas.toDataURL('image/png', quality);
 
+    // Ensure content fits within A4 page (final safety check)
+    // If somehow pdfImgHeight exceeds pdfHeight, scale it down
+    if (pdfImgHeight > pdfHeight) {
+      const finalScaleFactor = pdfHeight / pdfImgHeight;
+      pdfImgHeight = pdfHeight;
+      pdfImgWidth = pdfImgWidth * finalScaleFactor;
+    }
+
     // Center the image horizontally if it's narrower than page width
     const xPosition = (pdfWidth - pdfImgWidth) / 2;
 
     // Add image to PDF (single page, scaled to fit)
+    // Ensure we don't exceed page dimensions
     pdf.addImage(imgData, 'PNG', xPosition, 0, pdfImgWidth, pdfImgHeight);
 
     // Save PDF

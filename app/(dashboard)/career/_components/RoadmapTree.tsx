@@ -86,11 +86,10 @@ export function RoadmapTree({
     const dependentSteps = getDependentSteps(step);
     const hasChildren = dependentSteps.length > 0;
     const isExpanded = isStepExpanded(step.id);
-    const canStart = canStartStep(step, completedStepIds);
+    // Removed canStart check - all steps are accessible
 
-    // Don't show locked steps as children - they're shown in main flow
-    // Only show dependent steps if they're completed and this step is expanded
-    const showChildren = hasChildren && isExpanded && canStart;
+    // Show children if step is expanded (no dependency restrictions)
+    const showChildren = hasChildren && isExpanded;
 
     return (
       <div key={step.id} className="space-y-2">
@@ -171,8 +170,64 @@ export function RoadmapTree({
               Henüz adım tanımlanmamış.
             </div>
           ) : (
-            <div className="space-y-3">
-              {roadmap.steps.map((step) => renderStep(step, 0))}
+            <div className="relative">
+              {/* Timeline path visualization */}
+              <div className="absolute left-6 top-0 bottom-0 w-1 bg-gray-200 dark:bg-gray-700 rounded-full" />
+              
+              <div className="relative space-y-0">
+                {roadmap.steps.map((step, index) => {
+                  const stepProgress = getStepProgress(step.id);
+                  const isCompleted = stepProgress?.completed ?? false;
+                  const isLast = index === roadmap.steps.length - 1;
+                  const nextStepProgress = !isLast ? getStepProgress(roadmap.steps[index + 1].id) : null;
+                  const nextIsCompleted = nextStepProgress?.completed ?? false;
+                  
+                  return (
+                    <div key={step.id} className="relative pb-6 last:pb-0">
+                      {/* Connection line between steps - shows progress path */}
+                      {!isLast && (
+                        <div 
+                          className="absolute left-6 top-12 w-1 h-6 z-0 transition-colors duration-300"
+                          style={{
+                            background: isCompleted && nextIsCompleted
+                              ? 'linear-gradient(to bottom, rgb(34, 197, 94), rgb(34, 197, 94))' // green path when both completed
+                              : isCompleted
+                              ? 'linear-gradient(to bottom, rgb(34, 197, 94), rgb(229, 231, 235))' // green to gray when current completed
+                              : 'linear-gradient(to bottom, rgb(229, 231, 235), rgb(229, 231, 235))', // gray path
+                          }}
+                        >
+                          {/* Connection point indicator */}
+                          <div 
+                            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-3 h-3 rounded-full border-2 transition-colors duration-300" 
+                            style={{
+                              backgroundColor: isCompleted ? 'rgb(34, 197, 94)' : 'rgb(255, 255, 255)',
+                              borderColor: isCompleted ? 'rgb(34, 197, 94)' : 'rgb(229, 231, 235)',
+                            }}
+                          />
+                        </div>
+                      )}
+                      
+                      {/* Step node with timeline indicator */}
+                      <div className="relative z-10 pl-8">
+                        {/* Timeline node indicator */}
+                        <div 
+                          className="absolute left-0 top-3 w-4 h-4 rounded-full border-4 transition-all duration-300 z-20"
+                          style={{
+                            backgroundColor: isCompleted ? 'rgb(34, 197, 94)' : 'rgb(255, 255, 255)',
+                            borderColor: isCompleted ? 'rgb(34, 197, 94)' : 'rgb(156, 163, 175)',
+                            boxShadow: isCompleted ? '0 0 0 4px rgba(34, 197, 94, 0.2)' : 'none',
+                          }}
+                        />
+                        
+                        {/* Step content */}
+                        <div className="ml-2">
+                          {renderStep(step, 0)}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           )}
         </CardContent>

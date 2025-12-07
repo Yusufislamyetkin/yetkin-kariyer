@@ -3,7 +3,7 @@ import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { extractCVInfo } from "@/lib/ai/interview-generator";
 import { getUserIdFromSession } from "@/lib/auth-utils";
-import { generateInterviewStages } from "./generate-stages/route";
+import { getBaseUrl } from "@/lib/qstash";
 
 export const maxDuration = 60; // 60 seconds timeout for Vercel
 
@@ -81,23 +81,61 @@ export async function POST(request: Request) {
     const createTime = Date.now() - requestStartTime;
     console.log(`[CV_INTERVIEW] [5/6] ✅ Interview kaydı oluşturuldu - interviewId: ${interview.id}, süre: ${createTime}ms`);
 
-    console.log(`[CV_INTERVIEW] [6/6] Arka plan işlemi başlatılıyor (fire-and-forget)...`);
+    console.log(`[CV_INTERVIEW] [6/6] Arka plan işlemi başlatılıyor (fire-and-forget fetch)...`);
     // Arka planda aşamalı olarak soruları oluştur (fire-and-forget)
-    // Direkt fonksiyon çağrısı yap - fetch yerine
-    generateInterviewStages(interview.id, cvId)
-      .then(() => {
+    // API endpoint üzerinden fetch ile çağır - ayrı request context'inde çalışır
+    const baseUrl = getBaseUrl();
+    const generateStagesUrl = `${baseUrl}/api/interview/cv-based/generate-stages`;
+    
+    // Fire-and-forget: await etmeden çağır
+    fetch(generateStagesUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Session cookie'yi forward et (internal call için gerekli)
+        Cookie: request.headers.get("Cookie") || "",
+      },
+      body: JSON.stringify({
+        interviewId: interview.id,
+        cvId: cvId,
+        userId: userId, // Internal call için userId'yi gönder
+      }),
+    })
+      .then(async (response) => {
         const totalTime = Date.now() - requestStartTime;
-        console.log(`[CV_INTERVIEW] [6/6] ✅ Arka plan işlemi başarıyla tamamlandı - interviewId: ${interview.id}, toplam süre: ${Math.round(totalTime / 1000)}s`);
-        console.log(`[CV_INTERVIEW] ========== MÜLAKAT OLUŞTURMA BAŞARIYLA TAMAMLANDI ==========`);
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({ error: "Unknown error" }));
+          console.error(`[CV_INTERVIEW] [6/6] ❌ Arka plan işlemi hatası - interviewId: ${interview.id}, süre: ${Math.round(totalTime / 1000)}s`);
+          console.error(`[CV_INTERVIEW] HTTP Status: ${response.status}`, {
+            error: errorData.error || errorData.message || "Bilinmeyen hata",
+            cvId: cvId,
+            interviewId: interview.id,
+          });
+          // Hata durumunda interview description'ına hata mesajı ekle
+          db.interview.update({
+            where: { id: interview.id },
+            data: {
+              description: `Mülakat soruları oluşturulurken hata oluştu: ${errorData.error || errorData.message || "Bilinmeyen hata"}. Lütfen tekrar deneyin.`,
+            },
+          }).catch((updateError: unknown) => {
+            console.error(`[CV_INTERVIEW] ❌ Hata mesajı veritabanına kaydedilemedi:`, updateError);
+          });
+        } else {
+          const data = await response.json().catch(() => ({}));
+          console.log(`[CV_INTERVIEW] [6/6] ✅ Arka plan işlemi başlatıldı - interviewId: ${interview.id}, toplam süre: ${Math.round(totalTime / 1000)}s`);
+          console.log(`[CV_INTERVIEW] [6/6] Response:`, data);
+          console.log(`[CV_INTERVIEW] ========== MÜLAKAT OLUŞTURMA İSTEĞİ TAMAMLANDI ==========`);
+        }
       })
       .catch((error) => {
         const totalTime = Date.now() - requestStartTime;
-        console.error(`[CV_INTERVIEW] [6/6] ❌ Arka plan işlemi hatası - interviewId: ${interview.id}, süre: ${Math.round(totalTime / 1000)}s`);
-        console.error(`[CV_INTERVIEW] Hata detayları:`, {
+        console.error(`[CV_INTERVIEW] [6/6] ❌ Fetch hatası - interviewId: ${interview.id}, süre: ${Math.round(totalTime / 1000)}s`);
+        console.error(`[CV_INTERVIEW] Fetch hata detayları:`, {
           message: error?.message || "Bilinmeyen hata",
           stack: error?.stack,
           cvId: cvId,
           interviewId: interview.id,
+          url: generateStagesUrl,
         });
         // Hata durumunda interview description'ına hata mesajı ekle
         db.interview.update({

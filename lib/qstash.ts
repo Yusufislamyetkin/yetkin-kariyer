@@ -11,7 +11,7 @@ import crypto from "crypto";
  * URL'de scheme yoksa otomatik olarak ekler (https:// production, http:// localhost)
  * Vercel'de VERCEL_URL otomatik olarak mevcuttur
  */
-function getBaseUrl(): string {
+export function getBaseUrl(): string {
   let baseUrl =
     process.env.NEXTAUTH_URL ||
     process.env.NEXT_PUBLIC_APP_URL ||

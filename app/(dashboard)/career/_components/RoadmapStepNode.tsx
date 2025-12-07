@@ -71,7 +71,7 @@ export function RoadmapStepNode({
   const colorClass = stepColors[step.type];
   const isCompleted = progress?.completed ?? false;
   const progressPercent = progress?.progress ?? 0;
-  const isLocked = step.dependsOn && step.dependsOn.length > 0 && !isCompleted;
+  const isLocked = false; // Removed locking restrictions - all steps are accessible
 
   // Calculate indentation based on level
   const indentClass = level > 0 ? `ml-${Math.min(level * 4, 12)}` : "";
@@ -159,50 +159,93 @@ export function RoadmapStepNode({
               )}
             </div>
 
-            {/* Progress Bar */}
-            {!isCompleted && progressPercent > 0 && (
-              <div className="mt-3 space-y-1">
-                <div className="flex items-center justify-between text-xs">
-                  <span className="text-gray-600 dark:text-gray-400">
-                    İlerleme
-                  </span>
-                  <span className="font-semibold text-blue-600 dark:text-blue-400">
-                    %{progressPercent}
-                  </span>
-                </div>
-                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
-                  <div
-                    className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-500"
-                    style={{ width: `${progressPercent}%` }}
-                  />
-                </div>
+            {/* Progress Bar - Always show for course, test, and live_coding steps */}
+            {progress && (step.type === "course" || step.type === "test" || step.type === "live_coding") && (
+              <div className="mt-3 space-y-2">
+                {/* Course Progress */}
+                {step.type === "course" && progress.details?.completedLessons !== undefined && progress.details?.totalLessons !== undefined && (
+                  <div className="space-y-1">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="text-gray-600 dark:text-gray-400 font-medium">
+                        {progress.details.completedLessons} / {progress.details.totalLessons} ders tamamlandı
+                      </span>
+                      <span className={`font-semibold ${isCompleted ? "text-green-600 dark:text-green-400" : "text-blue-600 dark:text-blue-400"}`}>
+                        %{progressPercent}
+                      </span>
+                    </div>
+                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 overflow-hidden">
+                      <div
+                        className={`h-2.5 rounded-full transition-all duration-500 ${
+                          isCompleted
+                            ? "bg-gradient-to-r from-green-500 to-green-600"
+                            : "bg-gradient-to-r from-blue-500 to-purple-500"
+                        }`}
+                        style={{ width: `${progressPercent}%` }}
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {/* Test Progress */}
+                {step.type === "test" && progress.details?.completedTests !== undefined && progress.details?.totalTests !== undefined && (
+                  <div className="space-y-1">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="text-gray-600 dark:text-gray-400 font-medium">
+                        {progress.details.completedTests} / {progress.details.totalTests} test tamamlandı
+                      </span>
+                      <span className={`font-semibold ${isCompleted ? "text-green-600 dark:text-green-400" : "text-purple-600 dark:text-purple-400"}`}>
+                        %{progressPercent}
+                      </span>
+                    </div>
+                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 overflow-hidden">
+                      <div
+                        className={`h-2.5 rounded-full transition-all duration-500 ${
+                          isCompleted
+                            ? "bg-gradient-to-r from-green-500 to-green-600"
+                            : "bg-gradient-to-r from-purple-500 to-pink-500"
+                        }`}
+                        style={{ width: `${progressPercent}%` }}
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {/* Live Coding Progress */}
+                {step.type === "live_coding" && progress.details?.completedCases !== undefined && progress.details?.totalCases !== undefined && (
+                  <div className="space-y-1">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="text-gray-600 dark:text-gray-400 font-medium">
+                        {progress.details.completedCases} / {progress.details.totalCases} case tamamlandı
+                      </span>
+                      <span className={`font-semibold ${isCompleted ? "text-green-600 dark:text-green-400" : "text-green-600 dark:text-green-400"}`}>
+                        %{progressPercent}
+                      </span>
+                    </div>
+                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 overflow-hidden">
+                      <div
+                        className={`h-2.5 rounded-full transition-all duration-500 ${
+                          isCompleted
+                            ? "bg-gradient-to-r from-green-500 to-green-600"
+                            : "bg-gradient-to-r from-green-500 to-emerald-500"
+                        }`}
+                        style={{ width: `${progressPercent}%` }}
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {/* Course title if available */}
+                {step.type === "course" && progress.details?.courseTitle && (
+                  <div className="text-xs text-gray-500 dark:text-gray-400">
+                    Kurs: {progress.details.courseTitle}
+                  </div>
+                )}
               </div>
             )}
 
-            {/* Step Details */}
-            {progress?.details && !isCompleted && (
+            {/* Other Step Details (for non-course/test/live_coding steps) */}
+            {progress?.details && step.type !== "course" && step.type !== "test" && step.type !== "live_coding" && (
               <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-                {progress.details.completedLessons !== undefined &&
-                  progress.details.totalLessons !== undefined && (
-                    <span>
-                      {progress.details.completedLessons} /{" "}
-                      {progress.details.totalLessons} ders tamamlandı
-                    </span>
-                  )}
-                {progress.details.completedTests !== undefined &&
-                  progress.details.totalTests !== undefined && (
-                    <span>
-                      {progress.details.completedTests} /{" "}
-                      {progress.details.totalTests} test tamamlandı
-                    </span>
-                  )}
-                {progress.details.completedCases !== undefined &&
-                  progress.details.totalCases !== undefined && (
-                    <span>
-                      {progress.details.completedCases} /{" "}
-                      {progress.details.totalCases} case tamamlandı
-                    </span>
-                  )}
                 {progress.details.badgeCount !== undefined && (
                   <span>{progress.details.badgeCount} rozet kazanıldı</span>
                 )}
@@ -258,12 +301,6 @@ export function RoadmapStepNode({
               </div>
             )}
 
-            {/* Locked Message */}
-            {isLocked && (
-              <div className="mt-2 text-xs text-gray-500 dark:text-gray-400 italic">
-                Önceki adımları tamamlamanız gerekiyor
-              </div>
-            )}
           </div>
         </div>
       </div>

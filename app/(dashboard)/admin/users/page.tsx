@@ -3,10 +3,11 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/app/components/ui/Button";
-import { Loader2, Search, ArrowLeft, User as UserIcon, Mail, Calendar, Shield, ChevronLeft, ChevronRight, Bot, Settings, Trash2, Play, Activity, CheckCircle2, XCircle, Clock, UserMinus, Trash, ChevronDown, Linkedin } from "lucide-react";
+import { Loader2, Search, ArrowLeft, User as UserIcon, Mail, Calendar, Shield, ChevronLeft, ChevronRight, Bot, Settings, Trash2, Play, Activity, CheckCircle2, XCircle, Clock, UserMinus, Trash, ChevronDown, Linkedin, Users, CheckSquare, Square } from "lucide-react";
 import Image from "next/image";
 import { BotConfigModal } from "./_components/BotConfigModal";
 import { LinkedInPostGenerator } from "./_components/LinkedInPostGenerator";
+import { AddToCommunitiesModal } from "./_components/AddToCommunitiesModal";
 import { ConfirmDialog } from "@/app/components/ui/ConfirmDialog";
 
 interface BotCharacter {
@@ -90,6 +91,8 @@ export default function AdminUsersPage() {
   const [activityDropdownOpen, setActivityDropdownOpen] = useState<string | null>(null);
   const [executingActivity, setExecutingActivity] = useState<string | null>(null);
   const [linkedInPostGeneratorOpen, setLinkedInPostGeneratorOpen] = useState(false);
+  const [selectedUserIds, setSelectedUserIds] = useState<Set<string>>(new Set());
+  const [addToCommunitiesModalOpen, setAddToCommunitiesModalOpen] = useState(false);
 
   const fetchUsers = async (page: number = 1, searchQuery: string = "", role: string = "") => {
     setLoading(true);
@@ -669,16 +672,65 @@ export default function AdminUsersPage() {
           </div>
         )}
 
-        {/* Interactions Area Toggle */}
-        <div className="mb-6">
-          <Button
-            onClick={() => setShowInteractions(!showInteractions)}
-            variant="outline"
-            className="w-full sm:w-auto"
-          >
-            <Activity className="h-4 w-4 mr-2" />
-            {showInteractions ? "Etkileşim Alanını Gizle" : "🤖 Bot Etkileşimleri"}
-          </Button>
+        {/* User Selection Controls */}
+        <div className="mb-6 flex items-center justify-between gap-4 flex-wrap">
+          <div className="flex items-center gap-4">
+            <Button
+              onClick={() => setShowInteractions(!showInteractions)}
+              variant="outline"
+              className="w-full sm:w-auto"
+            >
+              <Activity className="h-4 w-4 mr-2" />
+              {showInteractions ? "Etkileşim Alanını Gizle" : "🤖 Bot Etkileşimleri"}
+            </Button>
+            {selectedUserIds.size > 0 && (
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-gray-600 dark:text-gray-400">
+                  {selectedUserIds.size} kullanıcı seçili
+                </span>
+                <Button
+                  onClick={() => setSelectedUserIds(new Set())}
+                  variant="outline"
+                  size="sm"
+                >
+                  Temizle
+                </Button>
+              </div>
+            )}
+          </div>
+          <div className="flex items-center gap-2">
+            <Button
+              onClick={() => {
+                if (selectedUserIds.size === users.length) {
+                  setSelectedUserIds(new Set());
+                } else {
+                  setSelectedUserIds(new Set(users.map(u => u.id)));
+                }
+              }}
+              variant="outline"
+              size="sm"
+            >
+              {selectedUserIds.size === users.length ? (
+                <>
+                  <Square className="h-4 w-4 mr-2" />
+                  Tümünü Kaldır
+                </>
+              ) : (
+                <>
+                  <CheckSquare className="h-4 w-4 mr-2" />
+                  Tümünü Seç
+                </>
+              )}
+            </Button>
+            <Button
+              onClick={() => setAddToCommunitiesModalOpen(true)}
+              disabled={selectedUserIds.size === 0}
+              className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
+            >
+              <Users className="h-4 w-4 mr-2" />
+              Topluluklara Ekle ({selectedUserIds.size})
+            </Button>
+          </div>
         </div>
 
         {/* Interactions Area */}
@@ -830,9 +882,37 @@ export default function AdminUsersPage() {
                       key={user.id}
                       className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 overflow-visible group relative"
                     >
+                      {/* Selection Checkbox */}
+                      <div className="absolute top-3 right-3 z-20">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            const newSelected = new Set(selectedUserIds);
+                            if (newSelected.has(user.id)) {
+                              newSelected.delete(user.id);
+                            } else {
+                              newSelected.add(user.id);
+                            }
+                            setSelectedUserIds(newSelected);
+                          }}
+                          className={`p-1.5 rounded-lg shadow-md hover:shadow-lg transition-all ${
+                            selectedUserIds.has(user.id)
+                              ? "bg-blue-600 text-white"
+                              : "bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300"
+                          }`}
+                          title={selectedUserIds.has(user.id) ? "Seçimi Kaldır" : "Seç"}
+                        >
+                          {selectedUserIds.has(user.id) ? (
+                            <CheckSquare className="h-4 w-4" />
+                          ) : (
+                            <Square className="h-4 w-4" />
+                          )}
+                        </button>
+                      </div>
+
                       {/* Bot Badge */}
                       {user.isBot && (
-                        <div className="absolute top-3 right-3 z-10">
+                        <div className="absolute top-3 right-12 z-10">
                           <div className="flex items-center gap-1 px-2 py-1 bg-gradient-to-r from-purple-500 to-indigo-600 text-white text-xs font-semibold rounded-full shadow-lg">
                             <Bot className="h-3 w-3" />
                             <span>Bot</span>
@@ -1131,6 +1211,21 @@ export default function AdminUsersPage() {
         isOpen={linkedInPostGeneratorOpen}
         onClose={() => setLinkedInPostGeneratorOpen(false)}
         users={users}
+      />
+
+      {/* Add to Communities Modal */}
+      <AddToCommunitiesModal
+        isOpen={addToCommunitiesModalOpen}
+        onClose={() => {
+          setAddToCommunitiesModalOpen(false);
+          setSelectedUserIds(new Set());
+        }}
+        userIds={Array.from(selectedUserIds)}
+        onSuccess={() => {
+          // Refresh users list after successful addition
+          fetchUsers(currentPage, search, roleFilter);
+          setSelectedUserIds(new Set());
+        }}
       />
     </div>
   );

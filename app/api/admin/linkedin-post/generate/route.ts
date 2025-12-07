@@ -7,7 +7,10 @@ import { z } from "zod";
 
 const generateLinkedInPostSchema = z.object({
   topic: z.string().min(1).max(200),
-  postType: z.union([z.literal(1), z.literal(2), z.literal(3), z.literal(4)]),
+  postType: z.union([
+    z.literal(1), z.literal(2), z.literal(3), z.literal(4), z.literal(5),
+    z.literal(6), z.literal(7), z.literal(8), z.literal(9), z.literal(10)
+  ]),
   botId: z.string().optional(),
   saveAsPost: z.boolean().optional().default(false),
 });
@@ -71,7 +74,7 @@ export async function POST(request: Request) {
     if (data.saveAsPost && data.botId) {
       const result = await createLinkedInPost(
         data.botId,
-        (topic: string, postType: 1 | 2 | 3 | 4) => generateLinkedInPost(botCharacter, topic, postType),
+        (topic: string, postType: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10) => generateLinkedInPost(botCharacter, topic, postType),
         data.topic,
         data.postType,
         botCharacter.expertise

@@ -5,6 +5,7 @@ import { HackathonTeamMemberStatus } from "@prisma/client";
 import { readFile } from "fs/promises";
 import { join } from "path";
 import { getCache, setCache, cacheKeys, CACHE_TTL } from "@/lib/redis";
+import { updateDailyLoginStreak } from "@/lib/services/gamification/streaks";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -164,6 +165,28 @@ export async function GET(request: Request) {
 
     let streak = userStreak;
     if (!streak) {
+      streak = await db.userStreak.create({
+        data: {
+          userId,
+          currentStreak: 0,
+          longestStreak: 0,
+          totalDaysActive: 0,
+        },
+      });
+    }
+
+    // Update login streak and totalDaysActive for today's login
+    // This ensures login is tracked every time dashboard loads and totalDaysActive is properly maintained
+    // updateDailyLoginStreak handles duplicate calls for the same day, so it's safe to call every time
+    await updateDailyLoginStreak(userId);
+    
+    // Refresh streak data after update to get the latest totalDaysActive value
+    streak = await db.userStreak.findUnique({
+      where: { userId },
+    });
+    
+    if (!streak) {
+      // Fallback: recreate if somehow deleted (shouldn't happen)
       streak = await db.userStreak.create({
         data: {
           userId,

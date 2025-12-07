@@ -18,95 +18,32 @@ export async function POST(request: Request) {
       );
     }
 
-    // Get request body for noPhotoUserCount
+    // Get request body for mode and noPhotoUserCount
+    let mode: "photos" | "no-photos" | "both" = "both"; // Default to both for backward compatibility
     let noPhotoUserCount = 1000; // Default value
     try {
       const body = await request.json();
+      if (body && typeof body.mode === "string" && ["photos", "no-photos", "both"].includes(body.mode)) {
+        mode = body.mode;
+      }
       if (body && typeof body.noPhotoUserCount === "number" && body.noPhotoUserCount >= 0) {
         noPhotoUserCount = body.noPhotoUserCount;
       }
     } catch (e) {
-      // If body parsing fails, use default value
-      console.log("[CREATE_PROFILES] Using default noPhotoUserCount: 1000");
+      // If body parsing fails, use default values
+      console.log("[CREATE_PROFILES] Using default values: mode=both, noPhotoUserCount=1000");
     }
 
-    if (!process.env.BLOB_READ_WRITE_TOKEN) {
+    if (!process.env.BLOB_READ_WRITE_TOKEN && mode !== "no-photos") {
       return NextResponse.json(
         { error: "Blob storage not configured" },
         { status: 500 }
       );
     }
 
-    console.log("[CREATE_PROFILES] Starting profile creation...");
+    console.log(`[CREATE_PROFILES] Starting profile creation with mode: ${mode}, noPhotoUserCount: ${noPhotoUserCount}`);
 
-    // Try multiple possible paths for the photos directory
-    const possiblePaths = [
-      join(process.cwd(), "public", "Photos", "ProfilePhotos"),
-      join(process.cwd(), "Photos", "ProfilePhotos"),
-    ];
-
-    let photosBasePath: string | null = null;
-    for (const path of possiblePaths) {
-      if (existsSync(path)) {
-        photosBasePath = path;
-        break;
-      }
-    }
-
-    if (!photosBasePath) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: `Fotoğraf klasörü bulunamadı. Şu yollarda arandı: ${possiblePaths.join(", ")}. Lütfen Photos/ProfilePhotos klasörünün doğru konumda olduğundan emin olun.`,
-        },
-        { status: 500 }
-      );
-    }
-
-    const manPhotosPath = join(photosBasePath, "Man");
-    const womanPhotosPath = join(photosBasePath, "Woman");
-
-    // Check if directories exist
-    if (!existsSync(manPhotosPath)) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: `Erkek fotoğrafları klasörü bulunamadı: ${manPhotosPath}`,
-        },
-        { status: 500 }
-      );
-    }
-
-    if (!existsSync(womanPhotosPath)) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: `Kadın fotoğrafları klasörü bulunamadı: ${womanPhotosPath}`,
-        },
-        { status: 500 }
-      );
-    }
-
-    // Read photo files
-    const manPhotos = readdirSync(manPhotosPath).filter(
-      (file) => file.endsWith(".jpg") || file.endsWith(".png") || file.endsWith(".jpeg")
-    );
-    const womanPhotos = readdirSync(womanPhotosPath).filter(
-      (file) => file.endsWith(".jpg") || file.endsWith(".png") || file.endsWith(".jpeg")
-    );
-
-    console.log(`[CREATE_PROFILES] Found ${manPhotos.length} male photos, ${womanPhotos.length} female photos`);
-
-    if (manPhotos.length === 0 && womanPhotos.length === 0) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: "Fotoğraf klasörlerinde hiç fotoğraf bulunamadı. Lütfen .jpg, .jpeg veya .png uzantılı fotoğrafların mevcut olduğundan emin olun.",
-        },
-        { status: 500 }
-      );
-    }
-
+    // Initialize tracking variables
     const createdUsers: Array<{ name: string; email: string; gender: string }> = [];
     const errors: Array<{ photo: string; error: string }> = [];
     let globalUserIndex = 0; // Track total users created for email uniqueness
@@ -176,220 +113,355 @@ export async function POST(request: Request) {
       return { name, surname, fullName };
     };
 
-    // Process male photos
-    for (let i = 0; i < manPhotos.length; i++) {
-      const photoFile = manPhotos[i];
-      const photoPath = join(manPhotosPath, photoFile);
+    // Process photos if mode is "photos" or "both"
+    let manPhotos: string[] = [];
+    let womanPhotos: string[] = [];
+    
+    if (mode === "photos" || mode === "both") {
+      // Try multiple possible paths for the photos directory
+      const possiblePaths = [
+        join(process.cwd(), "public", "Photos", "ProfilePhotos"),
+        join(process.cwd(), "Photos", "ProfilePhotos"),
+      ];
 
-      try {
-        // Get name and surname from lists (random for diversity)
-        const { name, surname, fullName } = getRandomNameSurname(true, usedNameCombinations);
-
-        // Generate email
-        let email = generateEmail(name, surname, globalUserIndex);
-        let emailIndex = 0;
-        // Ensure email uniqueness
-        while (true) {
-          const existingUser = await db.user.findUnique({
-            where: { email },
-          });
-          if (!existingUser) break;
-          email = generateEmail(name, surname, globalUserIndex + emailIndex);
-          emailIndex++;
+      let photosBasePath: string | null = null;
+      for (const path of possiblePaths) {
+        if (existsSync(path)) {
+          photosBasePath = path;
+          break;
         }
-        globalUserIndex++;
-
-        // Read photo file
-        const photoBuffer = readFileSync(photoPath);
-        const photoBlob = new Blob([photoBuffer]);
-
-        // Upload to Vercel Blob
-        const blobPath = `profile-photos/${Date.now()}-${photoFile}`;
-        const blob = await put(blobPath, photoBlob, {
-          access: "public",
-          token: process.env.BLOB_READ_WRITE_TOKEN,
-        });
-
-        // Generate password and hash
-        const password = generatePassword();
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        // Generate random date within last month
-        const createdAt = generateRandomDate();
-
-        // Create user
-        const user = await db.user.create({
-          data: {
-            email,
-            password: hashedPassword,
-            name: fullName,
-            role: "candidate",
-            profileImage: blob.url,
-            createdAt,
-          },
-        });
-
-        createdUsers.push({
-          name: fullName,
-          email,
-          gender: "male",
-        });
-
-        console.log(`[CREATE_PROFILES] Created user: ${fullName} (${email})`);
-      } catch (error: any) {
-        console.error(`[CREATE_PROFILES] Error processing ${photoFile}:`, error);
-        errors.push({
-          photo: photoFile,
-          error: error.message || "Unknown error",
-        });
       }
-    }
 
-    // Process female photos
-    for (let i = 0; i < womanPhotos.length; i++) {
-      const photoFile = womanPhotos[i];
-      const photoPath = join(womanPhotosPath, photoFile);
-
-      try {
-        // Get name and surname from lists (random for diversity)
-        const { name, surname, fullName } = getRandomNameSurname(false, usedNameCombinations);
-
-        // Generate email
-        let email = generateEmail(name, surname, globalUserIndex);
-        let emailIndex = 0;
-        // Ensure email uniqueness
-        while (true) {
-          const existingUser = await db.user.findUnique({
-            where: { email },
-          });
-          if (!existingUser) break;
-          email = generateEmail(name, surname, globalUserIndex + emailIndex);
-          emailIndex++;
-        }
-        globalUserIndex++;
-
-        // Read photo file
-        const photoBuffer = readFileSync(photoPath);
-        const photoBlob = new Blob([photoBuffer]);
-
-        // Upload to Vercel Blob
-        const blobPath = `profile-photos/${Date.now()}-${photoFile}`;
-        const blob = await put(blobPath, photoBlob, {
-          access: "public",
-          token: process.env.BLOB_READ_WRITE_TOKEN,
-        });
-
-        // Generate password and hash
-        const password = generatePassword();
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        // Generate random date within last month
-        const createdAt = generateRandomDate();
-
-        // Create user
-        const user = await db.user.create({
-          data: {
-            email,
-            password: hashedPassword,
-            name: fullName,
-            role: "candidate",
-            profileImage: blob.url,
-            createdAt,
+      if (!photosBasePath) {
+        return NextResponse.json(
+          {
+            success: false,
+            error: `Fotoğraf klasörü bulunamadı. Şu yollarda arandı: ${possiblePaths.join(", ")}. Lütfen Photos/ProfilePhotos klasörünün doğru konumda olduğundan emin olun.`,
           },
-        });
+          { status: 500 }
+        );
+      }
 
-        createdUsers.push({
-          name: fullName,
-          email,
-          gender: "female",
-        });
+      const manPhotosPath = join(photosBasePath, "Man");
+      const womanPhotosPath = join(photosBasePath, "Woman");
 
-        console.log(`[CREATE_PROFILES] Created user: ${fullName} (${email})`);
-      } catch (error: any) {
-        console.error(`[CREATE_PROFILES] Error processing ${photoFile}:`, error);
-        errors.push({
-          photo: photoFile,
-          error: error.message || "Unknown error",
-        });
+      // Check if directories exist
+      if (!existsSync(manPhotosPath)) {
+        return NextResponse.json(
+          {
+            success: false,
+            error: `Erkek fotoğrafları klasörü bulunamadı: ${manPhotosPath}`,
+          },
+          { status: 500 }
+        );
+      }
+
+      if (!existsSync(womanPhotosPath)) {
+        return NextResponse.json(
+          {
+            success: false,
+            error: `Kadın fotoğrafları klasörü bulunamadı: ${womanPhotosPath}`,
+          },
+          { status: 500 }
+        );
+      }
+
+      // Read photo files
+      manPhotos = readdirSync(manPhotosPath).filter(
+        (file) => file.endsWith(".jpg") || file.endsWith(".png") || file.endsWith(".jpeg")
+      );
+      womanPhotos = readdirSync(womanPhotosPath).filter(
+        (file) => file.endsWith(".jpg") || file.endsWith(".png") || file.endsWith(".jpeg")
+      );
+
+      console.log(`[CREATE_PROFILES] Found ${manPhotos.length} male photos, ${womanPhotos.length} female photos`);
+
+      if (manPhotos.length === 0 && womanPhotos.length === 0) {
+        return NextResponse.json(
+          {
+            success: false,
+            error: "Fotoğraf klasörlerinde hiç fotoğraf bulunamadı. Lütfen .jpg, .jpeg veya .png uzantılı fotoğrafların mevcut olduğundan emin olun.",
+          },
+          { status: 500 }
+        );
+      }
+
+      // Process male photos
+      for (let i = 0; i < manPhotos.length; i++) {
+        const photoFile = manPhotos[i];
+        const photoPath = join(manPhotosPath, photoFile);
+
+        try {
+          // Get name and surname from lists (random for diversity)
+          const { name, surname, fullName } = getRandomNameSurname(true, usedNameCombinations);
+
+          // Generate email
+          let email = generateEmail(name, surname, globalUserIndex);
+          let emailIndex = 0;
+          let emailAttempts = 0;
+          const maxEmailAttempts = 100; // Prevent infinite loop
+          // Ensure email uniqueness
+          while (emailAttempts < maxEmailAttempts) {
+            const existingUser = await db.user.findUnique({
+              where: { email },
+            });
+            if (!existingUser) break;
+            email = generateEmail(name, surname, globalUserIndex + emailIndex);
+            emailIndex++;
+            emailAttempts++;
+          }
+          
+          if (emailAttempts >= maxEmailAttempts) {
+            throw new Error(`Could not generate unique email after ${maxEmailAttempts} attempts`);
+          }
+          
+          globalUserIndex++;
+
+          // Read photo file
+          const photoBuffer = readFileSync(photoPath);
+          const photoBlob = new Blob([photoBuffer]);
+
+          // Upload to Vercel Blob
+          const blobPath = `profile-photos/${Date.now()}-${photoFile}`;
+          const blob = await put(blobPath, photoBlob, {
+            access: "public",
+            token: process.env.BLOB_READ_WRITE_TOKEN,
+          });
+
+          // Generate password and hash
+          const password = generatePassword();
+          const hashedPassword = await bcrypt.hash(password, 10);
+
+          // Generate random date within last month
+          const createdAt = generateRandomDate();
+
+          // Create user
+          const user = await db.user.create({
+            data: {
+              email,
+              password: hashedPassword,
+              name: fullName,
+              role: "candidate",
+              profileImage: blob.url,
+              createdAt,
+            },
+          });
+
+          createdUsers.push({
+            name: fullName,
+            email,
+            gender: "male",
+          });
+
+          console.log(`[CREATE_PROFILES] Created user: ${fullName} (${email})`);
+        } catch (error: any) {
+          console.error(`[CREATE_PROFILES] Error processing ${photoFile}:`, error);
+          errors.push({
+            photo: photoFile,
+            error: error.message || "Unknown error",
+          });
+        }
+      }
+
+      // Process female photos
+      for (let i = 0; i < womanPhotos.length; i++) {
+        const photoFile = womanPhotos[i];
+        const photoPath = join(womanPhotosPath, photoFile);
+
+        try {
+          // Get name and surname from lists (random for diversity)
+          const { name, surname, fullName } = getRandomNameSurname(false, usedNameCombinations);
+
+          // Generate email
+          let email = generateEmail(name, surname, globalUserIndex);
+          let emailIndex = 0;
+          let emailAttempts = 0;
+          const maxEmailAttempts = 100; // Prevent infinite loop
+          // Ensure email uniqueness
+          while (emailAttempts < maxEmailAttempts) {
+            const existingUser = await db.user.findUnique({
+              where: { email },
+            });
+            if (!existingUser) break;
+            email = generateEmail(name, surname, globalUserIndex + emailIndex);
+            emailIndex++;
+            emailAttempts++;
+          }
+          
+          if (emailAttempts >= maxEmailAttempts) {
+            throw new Error(`Could not generate unique email after ${maxEmailAttempts} attempts`);
+          }
+          
+          globalUserIndex++;
+
+          // Read photo file
+          const photoBuffer = readFileSync(photoPath);
+          const photoBlob = new Blob([photoBuffer]);
+
+          // Upload to Vercel Blob
+          const blobPath = `profile-photos/${Date.now()}-${photoFile}`;
+          const blob = await put(blobPath, photoBlob, {
+            access: "public",
+            token: process.env.BLOB_READ_WRITE_TOKEN,
+          });
+
+          // Generate password and hash
+          const password = generatePassword();
+          const hashedPassword = await bcrypt.hash(password, 10);
+
+          // Generate random date within last month
+          const createdAt = generateRandomDate();
+
+          // Create user
+          const user = await db.user.create({
+            data: {
+              email,
+              password: hashedPassword,
+              name: fullName,
+              role: "candidate",
+              profileImage: blob.url,
+              createdAt,
+            },
+          });
+
+          createdUsers.push({
+            name: fullName,
+            email,
+            gender: "female",
+          });
+
+          console.log(`[CREATE_PROFILES] Created user: ${fullName} (${email})`);
+        } catch (error: any) {
+          console.error(`[CREATE_PROFILES] Error processing ${photoFile}:`, error);
+          errors.push({
+            photo: photoFile,
+            error: error.message || "Unknown error",
+          });
+        }
       }
     }
 
     // Create users without profile photos (random gender distribution)
-    console.log(`[CREATE_PROFILES] Creating ${noPhotoUserCount} users without profile photos...`);
+    let noPhotoCreatedCount = 0;
+    let noPhotoMaleCount = 0;
+    let noPhotoFemaleCount = 0;
+    
+    if (mode === "no-photos" || mode === "both") {
+      console.log(`[CREATE_PROFILES] Creating ${noPhotoUserCount} users without profile photos...`);
 
-    // Create 1000 users without photos (random gender distribution)
-    for (let i = 0; i < noPhotoUserCount; i++) {
-      try {
-        // Randomly assign gender (approximately 50/50 split)
-        const isMale = Math.random() < 0.5;
-        const { name, surname, fullName } = getRandomNameSurname(isMale, usedNameCombinations);
+      // Create users without photos with better error handling
+      for (let i = 0; i < noPhotoUserCount; i++) {
+        try {
+          // Randomly assign gender (approximately 50/50 split)
+          const isMale = Math.random() < 0.5;
+          const { name, surname, fullName } = getRandomNameSurname(isMale, usedNameCombinations);
 
-        // Generate email
-        let email = generateEmail(name, surname, globalUserIndex);
-        let emailIndex = 0;
-        // Ensure email uniqueness
-        while (true) {
-          const existingUser = await db.user.findUnique({
-            where: { email },
+          // Generate email
+          let email = generateEmail(name, surname, globalUserIndex);
+          let emailIndex = 0;
+          let emailAttempts = 0;
+          const maxEmailAttempts = 100; // Prevent infinite loop
+          // Ensure email uniqueness
+          while (emailAttempts < maxEmailAttempts) {
+            const existingUser = await db.user.findUnique({
+              where: { email },
+            });
+            if (!existingUser) break;
+            email = generateEmail(name, surname, globalUserIndex + emailIndex);
+            emailIndex++;
+            emailAttempts++;
+          }
+          
+          if (emailAttempts >= maxEmailAttempts) {
+            throw new Error(`Could not generate unique email after ${maxEmailAttempts} attempts`);
+          }
+          
+          globalUserIndex++;
+
+          // Generate password and hash
+          const password = generatePassword();
+          const hashedPassword = await bcrypt.hash(password, 10);
+
+          // Generate random date within last month
+          const createdAt = generateRandomDate();
+
+          // Create user without profile image
+          const user = await db.user.create({
+            data: {
+              email,
+              password: hashedPassword,
+              name: fullName,
+              role: "candidate",
+              profileImage: null, // No profile photo
+              createdAt,
+            },
           });
-          if (!existingUser) break;
-          email = generateEmail(name, surname, globalUserIndex + emailIndex);
-          emailIndex++;
-        }
-        globalUserIndex++;
 
-        // Generate password and hash
-        const password = generatePassword();
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        // Generate random date within last month
-        const createdAt = generateRandomDate();
-
-        // Create user without profile image
-        const user = await db.user.create({
-          data: {
-            email,
-            password: hashedPassword,
+          createdUsers.push({
             name: fullName,
-            role: "candidate",
-            profileImage: null, // No profile photo
-            createdAt,
-          },
-        });
+            email,
+            gender: isMale ? "male" : "female",
+          });
 
-        createdUsers.push({
-          name: fullName,
-          email,
-          gender: isMale ? "male" : "female",
-        });
+          noPhotoCreatedCount++;
+          if (isMale) {
+            noPhotoMaleCount++;
+          } else {
+            noPhotoFemaleCount++;
+          }
 
-        console.log(`[CREATE_PROFILES] Created no-photo user: ${fullName} (${email}) - ${isMale ? "male" : "female"}`);
-      } catch (error: any) {
-        console.error(`[CREATE_PROFILES] Error creating no-photo user:`, error);
-        errors.push({
-          photo: "no-photo",
-          error: error.message || "Unknown error",
-        });
+          console.log(`[CREATE_PROFILES] Created no-photo user ${noPhotoCreatedCount}/${noPhotoUserCount}: ${fullName} (${email}) - ${isMale ? "male" : "female"}`);
+        } catch (error: any) {
+          console.error(`[CREATE_PROFILES] Error creating no-photo user (iteration ${i + 1}/${noPhotoUserCount}):`, error);
+          errors.push({
+            photo: `no-photo-${i + 1}`,
+            error: error.message || "Unknown error",
+          });
+          // Continue to next iteration instead of breaking
+        }
       }
+      
+      console.log(`[CREATE_PROFILES] Completed no-photo creation: ${noPhotoCreatedCount}/${noPhotoUserCount} users created successfully`);
     }
 
+    // Calculate statistics
+    const totalCreated = createdUsers.length;
     const maleCount = createdUsers.filter((u) => u.gender === "male").length;
     const femaleCount = createdUsers.filter((u) => u.gender === "female").length;
-    const noPhotoMaleCount = createdUsers.filter((u) => u.gender === "male").length - manPhotos.length;
-    const noPhotoFemaleCount = createdUsers.filter((u) => u.gender === "female").length - womanPhotos.length;
+    
+    // Calculate photo counts
+    const photoMaleCount = mode === "photos" || mode === "both" ? manPhotos.length : 0;
+    const photoFemaleCount = mode === "photos" || mode === "both" ? womanPhotos.length : 0;
+    const photoCreatedCount = createdUsers.length - noPhotoCreatedCount;
+    
+    // Calculate no-photo counts
+    const noPhotoRequestedCount = mode === "no-photos" || mode === "both" ? noPhotoUserCount : 0;
+    
+    // Build message based on mode
+    let message = "";
+    if (mode === "photos") {
+      message = `${photoCreatedCount} fotoğraflı profil hesabı başarıyla oluşturuldu.`;
+    } else if (mode === "no-photos") {
+      message = `${noPhotoCreatedCount} fotoğrafsız profil hesabı başarıyla oluşturuldu (${noPhotoRequestedCount} istenen, ${noPhotoRequestedCount - noPhotoCreatedCount} hata).`;
+    } else {
+      message = `${totalCreated} profil hesabı başarıyla oluşturuldu (${photoCreatedCount} fotoğraflı, ${noPhotoCreatedCount} fotoğrafsız).`;
+    }
 
     return NextResponse.json({
       success: true,
-      message: `${createdUsers.length} profil hesabı başarıyla oluşturuldu.`,
+      message,
       stats: {
-        totalCreated: createdUsers.length,
+        totalCreated,
         maleCount,
         femaleCount,
-        photoMaleCount: manPhotos.length,
-        photoFemaleCount: womanPhotos.length,
-        noPhotoUserCount,
+        photoMaleCount,
+        photoFemaleCount,
+        photoCreatedCount,
+        noPhotoRequestedCount,
+        noPhotoCreatedCount,
         noPhotoMaleCount,
         noPhotoFemaleCount,
+        mode,
       },
       errors: errors.length > 0 ? errors : undefined,
     });

@@ -289,6 +289,7 @@ export async function commentOnPosts(
 
 /**
  * Create a post (AI-generated content)
+ * Now generates LinkedIn-format posts (professional, no slang/typos)
  */
 export async function createPost(
   userId: string,
@@ -296,7 +297,7 @@ export async function createPost(
   botExpertise?: string[]
 ) {
   try {
-    // Haber kaynağı seç (bot'un kullanmadığı kaynaklardan)
+    // Haber kaynağı seç (bot'un kullanmadığı kaynaklardan) - optional for LinkedIn posts
     let selectedSource: NewsSource | null = null;
     try {
       selectedSource = await selectRandomUnusedSource(userId, botExpertise);
@@ -306,9 +307,10 @@ export async function createPost(
       }
     } catch (error: any) {
       console.warn(`[BOT_POST] Error selecting news source for bot ${userId}:`, error);
-      // Devam et, kaynak olmadan da post oluşturulabilir
+      // Devam et, kaynak olmadan da post oluşturulabilir (LinkedIn formatında)
     }
 
+    // generatePostContent() now generates LinkedIn-format posts
     const content = await generatePostContent(selectedSource || undefined);
     if (!content || content.trim().length === 0) {
       throw new Error("Generated content is empty");
@@ -352,6 +354,7 @@ export async function createPost(
       targetId: post.id,
       details: {
         contentLength: post.content?.length || 0,
+        postType: "linkedin",
         newsSourceId: selectedSource?.id,
         newsSourceName: selectedSource?.name,
       },
@@ -375,9 +378,9 @@ export async function createPost(
  */
 export async function createLinkedInPost(
   userId: string,
-  generateLinkedInPost: (topic: string, postType: 1 | 2 | 3 | 4) => Promise<string>,
+  generateLinkedInPost: (topic: string, postType: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10) => Promise<string>,
   topic: string,
-  postType: 1 | 2 | 3 | 4,
+  postType: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10,
   botExpertise?: string[]
 ) {
   try {
@@ -854,6 +857,87 @@ export async function completeTests(
       errorMessage: error.message || "Failed to complete tests",
     });
     return { success: false, completed: 0, error: error.message };
+  }
+}
+
+/**
+ * Share a badge as a post
+ */
+export async function shareBadgePost(
+  userId: string,
+  generateBadgeSharePost: (botCharacter: any, badge: any, userId: string, baseUrl?: string) => Promise<string>,
+  badge: { id: string; name: string; description: string; icon: string; color: string; category: string; rarity: string },
+  botCharacter?: { persona: string; systemPrompt: string; name: string; expertise?: string[] },
+  baseUrl?: string
+) {
+  try {
+    // Default bot character if not provided
+    const character = botCharacter || {
+      name: "Teknoloji Lideri",
+      persona: "LinkedIn üzerinde geniş bir takipçi kitlesine sahip, hem teknik derinliği olan hem de hikaye anlatıcılığı güçlü bir Teknoloji Lideri ve İçerik Üreticisi",
+      systemPrompt: "Sen, LinkedIn üzerinde geniş bir takipçi kitlesine sahip, hem teknik derinliği olan hem de hikaye anlatıcılığı (storytelling) güçlü bir Teknoloji Lideri ve İçerik Üreticisisin.",
+      expertise: [],
+    };
+
+    const content = await generateBadgeSharePost(character, badge, userId, baseUrl);
+    if (!content || content.trim().length === 0) {
+      throw new Error("Generated badge share post content is empty");
+    }
+
+    const post = await db.post.create({
+      data: {
+        userId,
+        content: content.trim().substring(0, 2200), // Limit to 2200 chars
+      },
+    });
+
+    // Gamification: Record event and apply rules
+    try {
+      const event = await recordEvent({
+        userId,
+        type: "post_created",
+        payload: { postId: post.id },
+      });
+      await applyRules({ userId, type: "post_created", payload: { sourceEventId: event.id } });
+    } catch (e) {
+      console.warn(`[BOT_BADGE_SHARE] Gamification failed:`, e);
+    }
+
+    // Check badges for post activity
+    try {
+      const badgeResults = await checkBadgesForActivity({
+        userId,
+        // activityType is optional, post activity doesn't have a specific type
+      });
+      if (badgeResults.totalEarned > 0) {
+        console.log(`[BOT_BADGE_SHARE] Bot ${userId} earned ${badgeResults.totalEarned} badges`);
+      }
+    } catch (e) {
+      console.warn(`[BOT_BADGE_SHARE] Badge check failed:`, e);
+    }
+
+    await logBotActivity({
+      userId,
+      activityType: BotActivityType.POST,
+      targetId: post.id,
+      details: {
+        contentLength: post.content?.length || 0,
+        postType: "badge_share",
+        badgeId: badge.id,
+        badgeName: badge.name,
+      },
+      success: true,
+    });
+
+    return { success: true, postId: post.id };
+  } catch (error: any) {
+    await logBotActivity({
+      userId,
+      activityType: BotActivityType.POST,
+      success: false,
+      errorMessage: error.message || "Failed to share badge post",
+    });
+    return { success: false, error: error.message };
   }
 }
 
