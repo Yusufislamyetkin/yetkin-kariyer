@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { X, UserPlus, MessageSquare, ThumbsUp, MessageCircle, Share2, Bell } from "lucide-react";
+import { X, UserPlus, MessageSquare, ThumbsUp, MessageCircle, Share2, Bookmark, Bell } from "lucide-react";
 
-export type NotificationType = "friend_request" | "message" | "info" | "success" | "error" | "post_like" | "post_comment" | "post_share";
+export type NotificationType = "friend_request" | "message" | "info" | "success" | "error" | "post_like" | "post_comment" | "post_share" | "post_save";
 
 export interface Notification {
   id: string;
@@ -55,6 +55,8 @@ export function NotificationToast({ notification, onDismiss }: NotificationToast
         return <MessageCircle className={iconClass} />;
       case "post_share":
         return <Share2 className={iconClass} />;
+      case "post_save":
+        return <Bookmark className={iconClass} />;
       default:
         return <Bell className={iconClass} />;
     }
@@ -101,6 +103,14 @@ export function NotificationToast({ notification, onDismiss }: NotificationToast
           text: "text-purple-900 dark:text-purple-100",
           iconBg: "bg-purple-500 dark:bg-purple-600",
           shadow: "shadow-purple-200/50 dark:shadow-purple-900/30"
+        };
+      case "post_save":
+        return {
+          bg: "bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/40 dark:to-orange-900/30",
+          border: "border-amber-300 dark:border-amber-700",
+          text: "text-amber-900 dark:text-amber-100",
+          iconBg: "bg-amber-500 dark:bg-amber-600",
+          shadow: "shadow-amber-200/50 dark:shadow-amber-900/30"
         };
       case "success":
         return {

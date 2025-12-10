@@ -15,6 +15,7 @@ import {
   Target,
   Circle,
   Star,
+  Users,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
@@ -31,6 +32,9 @@ interface Job {
   employer: {
     id: string;
     name: string | null;
+  };
+  _count?: {
+    applications: number;
   };
 }
 
@@ -324,6 +328,12 @@ export default function JobDetailPage() {
                 </span>
               );
             })()}
+            {job._count && job._count.applications !== undefined && (
+              <span className="inline-flex items-center gap-1 rounded-full bg-purple-100 px-3 py-1 text-purple-700 dark:bg-purple-900/30 dark:text-purple-200">
+                <Users className="h-4 w-4" />
+                {job._count.applications} başvuru
+              </span>
+            )}
           </div>
 
           <div>

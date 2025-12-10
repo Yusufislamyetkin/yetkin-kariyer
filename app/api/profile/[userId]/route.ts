@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { HackathonTeamMemberStatus } from "@prisma/client";
+import { derivePresenceStatus } from "@/lib/chat/presence";
 
 export async function GET(
   request: Request,
@@ -42,6 +43,7 @@ export async function GET(
       hackathonSubmissions,
       monthlyFirstPlaces,
       freelancerEarnings,
+      mostRecentPresence,
     ] = await Promise.all([
       db.userBadge.count({ where: { userId } }),
       db.lessonCompletion.count({ where: { userId } }),
@@ -175,6 +177,11 @@ export async function GET(
           amount: true,
         },
       }),
+      db.chatGroupMembership.findFirst({
+        where: { userId },
+        orderBy: { lastSeenAt: "desc" },
+        select: { lastSeenAt: true },
+      }),
     ]);
 
     const expertiseSet = new Set<string>();
@@ -259,6 +266,10 @@ export async function GET(
     const freelancerTotal = freelancerEarnings.reduce((sum: number, bid: { amount: number | null }) => sum + (bid.amount || 0), 0);
     const totalEarnings = hackathonTotal + leaderboardTotal + freelancerTotal;
 
+    // Calculate presence status
+    const lastSeenAt = mostRecentPresence?.lastSeenAt?.toISOString() || null;
+    const isOnline = derivePresenceStatus(lastSeenAt) === "online";
+
     return NextResponse.json({
       user,
       stats: {
@@ -282,6 +293,8 @@ export async function GET(
       },
       expertises: Array.from(expertiseSet),
       recentAchievements,
+      isOnline,
+      lastSeenAt,
     });
   } catch (error) {
     console.error("Error fetching public profile:", error);

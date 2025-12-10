@@ -1,0 +1,37 @@
+{
+  "description": "LinkedIn post topics organized by category",
+  "categories": [
+    {
+      "file": "kariyer-is-hayati.json",
+      "name": "Kariyer ve İş Hayatı",
+      "count": 20
+    },
+    {
+      "file": "teknoloji-ai.json",
+      "name": "Teknoloji ve Yapay Zeka",
+      "count": 20
+    },
+    {
+      "file": "remote-work.json",
+      "name": "Remote Work ve Çalışma Modelleri",
+      "count": 20
+    },
+    {
+      "file": "is-ilanlari.json",
+      "name": "İş İlanları ve İşe Alım",
+      "count": 20
+    },
+    {
+      "file": "yazilim-gelistirme.json",
+      "name": "Yazılım Geliştirme",
+      "count": 20
+    },
+    {
+      "file": "is-dunyasi-trendler.json",
+      "name": "İş Dünyası ve Trendler",
+      "count": 20
+    }
+  ],
+  "totalTopics": 120
+}
+

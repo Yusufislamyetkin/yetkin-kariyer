@@ -16,6 +16,11 @@ export async function GET(
             email: true,
           },
         },
+        _count: {
+          select: {
+            applications: true,
+          },
+        },
       },
     });
 

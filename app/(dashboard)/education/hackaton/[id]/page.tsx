@@ -4,6 +4,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import {
   AlertCircle,
   ArrowLeft,
@@ -218,6 +219,20 @@ interface UserSubmissionDetail {
   status: HackathonSubmissionStatus;
 }
 
+interface ApplicantsData {
+  solo: Array<{
+    id: string;
+    user: { id: string; name: string | null; profileImage: string | null };
+    appliedAt: string;
+  }>;
+  teams: Array<{
+    id: string;
+    name: string;
+    members: Array<{ id: string; name: string | null; profileImage: string | null }>;
+    appliedAt: string;
+  }>;
+}
+
 const formatDate = (value: string | null) => {
   if (!value) return "-";
   try {
@@ -307,6 +322,8 @@ export default function HackatonDetailPage() {
   const [friendsLoading, setFriendsLoading] = useState(false);
   const [invitingFriendId, setInvitingFriendId] = useState<string | null>(null);
   const [respondingTeamInviteId, setRespondingTeamInviteId] = useState<string | null>(null);
+  const [applicants, setApplicants] = useState<ApplicantsData | null>(null);
+  const [applicantsLoading, setApplicantsLoading] = useState(false);
 
   const loadSubmission = async (hackathonId: string) => {
     try {
@@ -353,6 +370,22 @@ export default function HackatonDetailPage() {
     }
   };
 
+  const loadApplicants = async (hackathonId: string) => {
+    try {
+      setApplicantsLoading(true);
+      const response = await fetch(`/api/hackathons/${hackathonId}/applicants`);
+      if (!response.ok) {
+        return;
+      }
+      const data = await response.json();
+      setApplicants(data);
+    } catch (err) {
+      console.error("Error loading applicants:", err);
+    } finally {
+      setApplicantsLoading(false);
+    }
+  };
+
   const loadDetail = async (hackathonId: string) => {
     try {
       setError(null);
@@ -381,6 +414,7 @@ export default function HackatonDetailPage() {
   useEffect(() => {
     if (!detail) return;
     loadFriends();
+    loadApplicants(detail.hackathon.id);
   }, [detail?.hackathon.id]);
 
   const showFeedback = (message: string, type: "success" | "error") => {
@@ -1363,6 +1397,144 @@ export default function HackatonDetailPage() {
                 </Button>
               </CardContent>
             )}
+          </Card>
+
+          <Card variant="elevated">
+            <CardHeader>
+              <CardTitle>Başvuranlar</CardTitle>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Hackathona başvuran tüm kullanıcılar ve takımlar.
+              </p>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {applicantsLoading ? (
+                <div className="flex items-center justify-center py-8">
+                  <Loader2 className="h-6 w-6 animate-spin text-gray-400" />
+                </div>
+              ) : !applicants || (applicants.solo.length === 0 && applicants.teams.length === 0) ? (
+                <div className="rounded-lg border border-dashed border-gray-300 p-4 text-sm text-gray-600 dark:border-gray-700 dark:text-gray-300">
+                  Henüz başvuru yok.
+                </div>
+              ) : (
+                <>
+                  {applicants.solo.length > 0 && (
+                    <div className="space-y-3">
+                      <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                        Solo Başvuranlar
+                      </h3>
+                      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                        {applicants.solo.map((application) => {
+                          const initials = application.user.name
+                            ? application.user.name
+                                .split(" ")
+                                .map((n) => n[0])
+                                .join("")
+                                .toUpperCase()
+                                .slice(0, 2)
+                            : application.user.id.slice(0, 2).toUpperCase();
+                          return (
+                            <div
+                              key={application.id}
+                              className="flex items-center gap-3 rounded-lg border border-gray-200 bg-white p-3 shadow-sm dark:border-gray-700 dark:bg-gray-900"
+                            >
+                              <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-full bg-gradient-to-br from-blue-500 to-purple-500">
+                                {application.user.profileImage ? (
+                                  <Image
+                                    src={application.user.profileImage}
+                                    alt={application.user.name || "Kullanıcı"}
+                                    fill
+                                    className="object-cover"
+                                    sizes="48px"
+                                  />
+                                ) : (
+                                  <div className="flex h-full w-full items-center justify-center text-sm font-semibold text-white">
+                                    {initials}
+                                  </div>
+                                )}
+                              </div>
+                              <div className="min-w-0 flex-1">
+                                <p className="truncate text-sm font-medium text-gray-900 dark:text-gray-100">
+                                  {application.user.name || "İsimsiz Kullanıcı"}
+                                </p>
+                                <p className="text-xs text-gray-500 dark:text-gray-400">
+                                  {formatCountdown(application.appliedAt)}
+                                </p>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                  {applicants.teams.length > 0 && (
+                    <div className="space-y-3">
+                      {applicants.solo.length > 0 && (
+                        <div className="border-t border-gray-200 pt-4 dark:border-gray-700" />
+                      )}
+                      <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                        Takım Başvuranları
+                      </h3>
+                      <div className="grid gap-3 sm:grid-cols-1 lg:grid-cols-2">
+                        {applicants.teams.map((team) => (
+                          <div
+                            key={team.id}
+                            className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-900"
+                          >
+                            <p className="mb-3 text-sm font-semibold text-gray-900 dark:text-gray-100">
+                              {team.name}
+                            </p>
+                            <div className="flex items-center gap-2">
+                              <div className="flex -space-x-2">
+                                {team.members.map((member) => {
+                                  const initials = member.name
+                                    ? member.name
+                                        .split(" ")
+                                        .map((n) => n?.[0])
+                                        .join("")
+                                        .toUpperCase()
+                                        .slice(0, 2)
+                                    : member.id.slice(0, 2).toUpperCase();
+                                  return (
+                                    <div
+                                      key={member.id}
+                                      className="relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-full border-2 border-white bg-gradient-to-br from-blue-500 to-purple-500 dark:border-gray-900"
+                                      title={member.name || "Üye"}
+                                    >
+                                      {member.profileImage ? (
+                                        <Image
+                                          src={member.profileImage}
+                                          alt={member.name || "Üye"}
+                                          fill
+                                          className="object-cover"
+                                          sizes="40px"
+                                        />
+                                      ) : (
+                                        <div className="flex h-full w-full items-center justify-center text-xs font-semibold text-white">
+                                          {initials}
+                                        </div>
+                                      )}
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                              <div className="ml-2 flex-1">
+                                <p className="text-xs text-gray-500 dark:text-gray-400">
+                                  {team.members.length} üye
+                                </p>
+                                <p className="text-xs text-gray-400 dark:text-gray-500">
+                                  {formatCountdown(team.appliedAt)}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </>
+              )}
+            </CardContent>
           </Card>
         </div>
       </div>

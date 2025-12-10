@@ -1700,11 +1700,10 @@ export function GroupChatView({ category }: GroupChatViewProps) {
   }, [groupMembers, presenceState, selectedGroupId, timeNow]);
 
   const onlineCount = useMemo(() => {
-    return Object.values(presenceState).reduce(
-      (count, entry) => count + (derivePresenceStatus(entry.lastSeenAt ?? null, timeNow) === "online" ? 1 : 0),
-      0
-    );
-  }, [presenceState, timeNow]);
+    if (!selectedGroupId) return 0;
+    // Sadece grup üyelerindeki çevrimiçi kullanıcıları say
+    return activeMembers.filter((member) => member.presence.status === "online").length;
+  }, [activeMembers, selectedGroupId]);
 
   const sidebarItems = useMemo(() => {
     return sortedGroups.map((group) => {

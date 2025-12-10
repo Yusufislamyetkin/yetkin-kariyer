@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { ArrowLeft, Calendar, DollarSign, Users, Send, CheckCircle, XCircle } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
 import { Input } from "@/app/components/ui/Input";
@@ -306,27 +307,60 @@ export default function FreelancerProjectDetailPage({ params }: { params: { id: 
                 </p>
               ) : (
                 <div className="space-y-3">
-                  {project.bids.map((bid) => (
-                    <div
-                      key={bid.id}
-                      className="p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50"
-                    >
-                      <div className="flex items-start justify-between gap-2 mb-2">
-                        <p className="font-semibold text-sm text-gray-900 dark:text-gray-100">
-                          {bid.user.name || bid.user.email}
-                        </p>
-                        <span className="text-sm font-bold text-blue-600 dark:text-blue-400">
-                          {bid.amount.toLocaleString("tr-TR")} ₺
-                        </span>
+                  {project.bids.map((bid) => {
+                    const userName = bid.user.name || bid.user.email || "İsimsiz Kullanıcı";
+                    const initials = bid.user.name
+                      ? bid.user.name
+                          .split(" ")
+                          .map((n) => n?.[0])
+                          .join("")
+                          .toUpperCase()
+                          .slice(0, 2)
+                      : bid.user.email
+                      ? bid.user.email[0].toUpperCase()
+                      : "U";
+                    
+                    return (
+                      <div
+                        key={bid.id}
+                        className="p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50"
+                      >
+                        <div className="flex items-start gap-3 mb-2">
+                          <div className="relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-full bg-gradient-to-br from-blue-500 to-purple-500">
+                            {bid.user.profileImage ? (
+                              <Image
+                                src={bid.user.profileImage}
+                                alt={userName}
+                                fill
+                                className="object-cover"
+                                sizes="40px"
+                              />
+                            ) : (
+                              <div className="flex h-full w-full items-center justify-center text-sm font-semibold text-white">
+                                {initials}
+                              </div>
+                            )}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-start justify-between gap-2 mb-1">
+                              <p className="font-semibold text-sm text-gray-900 dark:text-gray-100 truncate">
+                                {userName}
+                              </p>
+                              <span className="text-sm font-bold text-blue-600 dark:text-blue-400 whitespace-nowrap">
+                                {bid.amount.toLocaleString("tr-TR")} ₺
+                              </span>
+                            </div>
+                            <p className="text-xs text-gray-600 dark:text-gray-400 line-clamp-2">
+                              {bid.message}
+                            </p>
+                            <p className="text-xs text-gray-500 dark:text-gray-500 mt-2">
+                              {new Date(bid.createdAt).toLocaleDateString("tr-TR")}
+                            </p>
+                          </div>
+                        </div>
                       </div>
-                      <p className="text-xs text-gray-600 dark:text-gray-400 line-clamp-2">
-                        {bid.message}
-                      </p>
-                      <p className="text-xs text-gray-500 dark:text-gray-500 mt-2">
-                        {new Date(bid.createdAt).toLocaleDateString("tr-TR")}
-                      </p>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
             </CardContent>

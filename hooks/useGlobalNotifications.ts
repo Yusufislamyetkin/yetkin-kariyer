@@ -24,7 +24,7 @@ type ChatMessagePayload = {
 };
 
 type SocialNotificationPayload = {
-  type: "post_like" | "post_comment" | "post_share";
+  type: "post_like" | "post_comment" | "post_share" | "post_save";
   postId: string;
   postOwnerId: string;
   actor: {
@@ -569,6 +569,46 @@ export function useGlobalNotifications() {
           }
         });
 
+        // Listen for post saved notifications
+        connection.on("PostSaved", (payload: SocialNotificationPayload) => {
+          try {
+            if (!isMounted || !session?.user?.id) return;
+            
+            // Validate payload
+            if (!payload || !payload.postOwnerId || !payload.actor) {
+              console.warn("[GlobalNotifications] Invalid PostSaved payload:", payload);
+              return;
+            }
+            
+            // Only show if the notification is for the current user
+            if (payload.postOwnerId !== userId) return;
+            
+            // Don't show if user saved their own post
+            if (payload.actor.id === userId) return;
+
+            showNotification(
+              "post_save",
+              "Gönderi Kaydedildi",
+              `${payload.actor.name || "Birisi"} gönderinizi kaydetti`,
+              {
+                duration: 5000,
+                profileImage: payload.actor.profileImage,
+                actorName: payload.actor.name || "Birisi",
+                onClick: () => {
+                  if (payload.postId) {
+                    router.push(`/social/posts/${payload.postId}`);
+                  }
+                },
+              }
+            );
+          } catch (error) {
+            console.error("[GlobalNotifications] Error handling PostSaved:", error);
+            if (error instanceof Error) {
+              console.error("[GlobalNotifications] Error details:", error.message, error.stack);
+            }
+          }
+        });
+
         // Friend request notifications are now handled by FriendRequestContext
         // to ensure both notification and badge update happen together
 
@@ -638,6 +678,7 @@ export function useGlobalNotifications() {
           connection.off("PostLiked");
           connection.off("PostCommented");
           connection.off("PostShared");
+          connection.off("PostSaved");
         } catch (error) {
           // Ignore cleanup errors
           console.warn("[GlobalNotifications] Error during cleanup:", error);

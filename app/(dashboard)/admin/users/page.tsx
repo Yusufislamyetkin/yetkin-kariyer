@@ -9,6 +9,7 @@ import { BotConfigModal } from "./_components/BotConfigModal";
 import { LinkedInPostGenerator } from "./_components/LinkedInPostGenerator";
 import { AddToCommunitiesModal } from "./_components/AddToCommunitiesModal";
 import { HackathonApplicationModal } from "./_components/HackathonApplicationModal";
+import { UnifiedBotManagementModal } from "./_components/UnifiedBotManagementModal";
 import { ConfirmDialog } from "@/app/components/ui/ConfirmDialog";
 
 interface BotCharacter {
@@ -103,6 +104,7 @@ export default function AdminUsersPage() {
   const [keepOnlineRunning, setKeepOnlineRunning] = useState(false);
   const [activeKeepOnlineJobs, setActiveKeepOnlineJobs] = useState<any[]>([]);
   const [keepOnlineJobsLoading, setKeepOnlineJobsLoading] = useState(false);
+  const [unifiedBotManagementModalOpen, setUnifiedBotManagementModalOpen] = useState(false);
   
   // Bot Management States
   const [botCount, setBotCount] = useState<string>("");
@@ -788,6 +790,13 @@ export default function AdminUsersPage() {
                 </div>
               )}
               <div className="flex items-center gap-2 flex-wrap">
+                <Button
+                  onClick={() => setUnifiedBotManagementModalOpen(true)}
+                  className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+                >
+                  <Bot className="h-4 w-4 mr-2" />
+                  Unified Bot Yönetimi
+                </Button>
                 <Button
                   onClick={() => setLinkedInPostGeneratorOpen(true)}
                   variant="outline"
@@ -1922,6 +1931,16 @@ export default function AdminUsersPage() {
           // Refresh users list after successful addition
           fetchUsers(currentPage, search, roleFilter);
           setSelectedUserIds(new Set());
+        }}
+      />
+
+      {/* Unified Bot Management Modal */}
+      <UnifiedBotManagementModal
+        isOpen={unifiedBotManagementModalOpen}
+        onClose={() => setUnifiedBotManagementModalOpen(false)}
+        onSuccess={() => {
+          // Refresh any necessary data
+          fetchUsers(currentPage, search, roleFilter);
         }}
       />
 

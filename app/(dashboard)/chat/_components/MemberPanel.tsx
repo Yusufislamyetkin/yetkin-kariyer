@@ -110,12 +110,12 @@ export function MemberPanel({
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
       <aside
         className={cn(
-          "absolute right-0 top-0 h-full w-full max-w-md bg-white dark:bg-gray-950 shadow-2xl border-l border-gray-200/70 dark:border-gray-800/60 transition-transform duration-300 ease-out",
+          "absolute right-0 top-0 h-full w-full max-w-md bg-white dark:bg-gray-950 shadow-2xl border-l border-gray-200/70 dark:border-gray-800/60 transition-transform duration-300 ease-out flex flex-col",
           isOpen ? "translate-x-0" : "translate-x-full"
         )}
         onClick={(event) => event.stopPropagation()}
       >
-        <div className="flex items-center justify-between gap-4 px-6 py-5 border-b border-gray-200/70 dark:border-gray-800/60">
+        <div className="flex items-center justify-between gap-4 px-6 py-5 border-b border-gray-200/70 dark:border-gray-800/60 flex-shrink-0">
           <div>
             <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{title}</h3>
             {badge ? <div className="mt-1 text-sm text-gray-500 dark:text-gray-400">{badge}</div> : null}

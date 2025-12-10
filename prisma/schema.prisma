@@ -236,6 +236,7 @@ model User {
   botConfiguration              BotConfiguration?
   botNewsSources                BotNewsSource[]
   botActivities                 BotActivity[]
+  botActivityExecutions         BotActivityExecution[]
   accounts                     Account[]
   certificates                  Certificate[]
   earnings                     Earning[]
@@ -1651,6 +1652,11 @@ enum BotActivityType {
   BUG_FIX
   LESSON
   CHAT
+  FRIEND_REQUEST
+  ACCEPT_FRIEND_REQUEST
+  HACKATHON_APPLICATION
+  FREELANCER_BID
+  JOB_APPLICATION
 }
 
 model BotActivity {
@@ -1669,4 +1675,70 @@ model BotActivity {
   @@index([userId, executedAt])
   @@index([activityType, executedAt])
   @@map("bot_activities")
+}
+
+// Bot Campaign System Models
+model BotActivityCampaign {
+  id              String   @id @default(cuid())
+  name            String
+  activityType     String   // POST, LIKE, FREELANCER_BID, FRIEND_REQUEST, etc.
+  botCount         Int
+  totalActivities  Int     // Toplam yapılacak aktivite sayısı
+  durationHours    Int      // 24 saat gibi
+  startTime        DateTime
+  endTime          DateTime
+  status           String   // pending, running, completed, failed, cancelled
+  config           Json     // Aktiviteye özel konfigürasyon
+  hangfireJobId    String?  // Hangfire job ID
+  isRecurring      Boolean  @default(false) // Günlük tekrarlayan kampanya mı?
+  recurringPattern String?  // "daily", "weekly", etc.
+  parentCampaignId String?  // Recurring kampanya zincirini takip etmek için
+  nextRunAt        DateTime? // Bir sonraki recurring kampanyanın oluşturulacağı zaman
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  
+  jobs            BotActivityCampaignJob[]
+  executions     BotActivityExecution[]
+  parentCampaign BotActivityCampaign? @relation("RecurringCampaigns", fields: [parentCampaignId], references: [id], onDelete: SetNull)
+  childCampaigns  BotActivityCampaign[] @relation("RecurringCampaigns")
+  
+  @@index([status, createdAt])
+  @@index([activityType, status])
+  @@index([isRecurring, nextRunAt])
+  @@index([parentCampaignId])
+  @@map("bot_activity_campaigns")
+}
+
+model BotActivityCampaignJob {
+  id            String   @id @default(cuid())
+  campaignId    String
+  hangfireJobId String
+  status        String   // scheduled, running, completed, failed, cancelled
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  campaign      BotActivityCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  
+  @@index([campaignId])
+  @@index([hangfireJobId])
+  @@map("bot_activity_campaign_jobs")
+}
+
+model BotActivityExecution {
+  id           String   @id @default(cuid())
+  campaignId   String
+  userId       String
+  activityType String
+  targetId     String?
+  success      Boolean
+  errorMessage String?
+  executedAt   DateTime @default(now())
+  
+  campaign     BotActivityCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  user         User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([campaignId, executedAt])
+  @@index([userId, executedAt])
+  @@index([activityType, executedAt])
+  @@map("bot_activity_executions")
 }

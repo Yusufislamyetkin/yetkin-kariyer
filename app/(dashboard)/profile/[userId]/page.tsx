@@ -73,6 +73,8 @@ interface PublicProfileResponse {
     rarity: "common" | "rare" | "epic" | "legendary";
     earnedAt: string;
   }>;
+  isOnline?: boolean;
+  lastSeenAt?: string | null;
 }
 
 interface Badge {
@@ -678,12 +680,42 @@ export default function PublicProfilePage() {
                     </span>
                   )}
                 </div>
+                {/* Online Status Indicator Dot */}
+                <div
+                  className={`absolute -bottom-1 -right-1 w-5 h-5 md:w-6 md:h-6 rounded-full border-4 border-white dark:border-gray-900 shadow-lg ${
+                    profile.isOnline
+                      ? "bg-green-500 animate-pulse"
+                      : "bg-gray-400"
+                  }`}
+                  title={profile.isOnline ? "Çevrimiçi" : "Çevrimdışı"}
+                />
               </div>
               <div className="flex-1 text-white space-y-4">
                 <div>
-                  <h1 className="text-3xl md:text-4xl font-display font-semibold tracking-tight">
-                    {profile.user.name || "İsimsiz Yetek"}
-                  </h1>
+                  <div className="flex items-center gap-3 flex-wrap">
+                    <h1 className="text-3xl md:text-4xl font-display font-semibold tracking-tight">
+                      {profile.user.name || "İsimsiz Yetek"}
+                    </h1>
+                    {/* Online Status Indicator with Text */}
+                    <div
+                      className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${
+                        profile.isOnline
+                          ? "bg-green-500/20 text-green-100 border border-green-400/30"
+                          : "bg-gray-500/20 text-gray-300 border border-gray-400/30"
+                      }`}
+                    >
+                      <div
+                        className={`w-2 h-2 rounded-full ${
+                          profile.isOnline
+                            ? "bg-green-400 animate-pulse"
+                            : "bg-gray-400"
+                        }`}
+                      />
+                      <span>
+                        {profile.isOnline ? "Çevrimiçi" : "Çevrimdışı"}
+                      </span>
+                    </div>
+                  </div>
                   <p className="text-white/70 flex items-center gap-2 mt-1 text-sm">
                     <Shield className="h-4 w-4" />
                     {profile.user.role}

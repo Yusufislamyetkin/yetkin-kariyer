@@ -63,7 +63,7 @@ export async function broadcastSocialNotification(
   userId: string,
   eventName: string,
   payload: {
-    type: "post_like" | "post_comment" | "post_share";
+    type: "post_like" | "post_comment" | "post_share" | "post_save";
     postId: string;
     postOwnerId: string;
     actor: {
