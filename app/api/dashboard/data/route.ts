@@ -385,18 +385,19 @@ export async function GET(request: Request) {
     const participatedHackathons = distinctHackathonIds.size;
     const socialInteractions = postsCount + commentsCount;
 
+    // Ensure all stats values are numbers (handle null/undefined cases)
     const stats = {
-      quizAttempts: quizStats._count._all,
-      testAttempts: testAttemptsCount,
-      interviewAttempts: interviewStats._count._all,
-      cvs: cvsCount,
-      applications: applicationsCount,
-      averageQuizScore,
-      averageInterviewScore,
-      completedTopics: completedTopicsCount,
-      participatedHackathons,
-      socialInteractions,
-      communityContributions: communityMessagesCount,
+      quizAttempts: quizStats._count._all ?? 0,
+      testAttempts: testAttemptsCount ?? 0,
+      interviewAttempts: interviewStats._count._all ?? 0,
+      cvs: cvsCount ?? 0,
+      applications: applicationsCount ?? 0,
+      averageQuizScore: averageQuizScore ?? 0,
+      averageInterviewScore: averageInterviewScore ?? 0,
+      completedTopics: completedTopicsCount ?? 0,
+      participatedHackathons: participatedHackathons ?? 0,
+      socialInteractions: socialInteractions ?? 0,
+      communityContributions: communityMessagesCount ?? 0,
     };
 
     // Step 4: Process badges

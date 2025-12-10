@@ -251,6 +251,9 @@ export default function InterviewRoomPage() {
   const [isListening, setIsListening] = useState(false);
   const [speechRecognition, setSpeechRecognition] = useState<any | null>(null);
   const [showInstructions, setShowInstructions] = useState(true);
+  const [ttsEnabled, setTtsEnabled] = useState(true);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const speechSynthesisRef = useRef<SpeechSynthesisUtterance | null>(null);
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
@@ -449,23 +452,69 @@ export default function InterviewRoomPage() {
     }
   }, []);
 
-  const ensureScreenCapture = useCallback(async (): Promise<MediaStream | null> => {
+  const ensureScreenCapture = useCallback(async (retryCount = 0): Promise<MediaStream | null> => {
+    // Tarayıcı uyumluluk kontrolü
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) {
+      const browserName = navigator.userAgent.includes("Chrome") ? "Chrome" :
+                         navigator.userAgent.includes("Firefox") ? "Firefox" :
+                         navigator.userAgent.includes("Safari") ? "Safari" :
+                         navigator.userAgent.includes("Edge") ? "Edge" : "tarayıcınız";
+      
+      setWarning(`Ekran paylaşımı ${browserName} tarayıcınızda desteklenmiyor. Lütfen Chrome, Firefox, Edge veya Safari kullanın.`);
+      return null;
+    }
+
     try {
       const screenStream = await navigator.mediaDevices.getDisplayMedia({
         video: { cursor: "always" } as unknown as MediaTrackConstraints,
         audio: false,
       });
+      
       const [videoTrack] = screenStream.getVideoTracks();
       if (videoTrack) {
         videoTrack.onended = handleScreenShareEnded;
       }
+      
       screenStreamRef.current = screenStream;
       screenChunksRef.current = [];
       setScreenCaptureEnabled(true);
+      setWarning(""); // Başarılı olduğunda uyarıyı temizle
       return screenStream;
-    } catch (error) {
+    } catch (error: any) {
       console.error("Screen capture error:", error);
-      setWarning("Ekran kaydı başlatılamadı. Lütfen ekran paylaşımına izin verin. Tarayıcı izin penceresi açıldığında 'Paylaş' veya 'İzin Ver' butonuna tıklayın. Eğer izin penceresi görünmüyorsa, tarayıcı adres çubuğundaki kamera/mikrofon ikonuna tıklayın.");
+      
+      let errorMessage = "Ekran kaydı başlatılamadı. ";
+      
+      // Hata tipine göre özel mesajlar
+      if (error.name === "NotAllowedError" || error.name === "PermissionDeniedError") {
+        errorMessage += "Ekran paylaşımı izni reddedildi. ";
+        errorMessage += "Adımlar: 1) Tarayıcı izin penceresinde 'Paylaş' veya 'İzin Ver' butonuna tıklayın. ";
+        errorMessage += "2) Eğer penceresi görünmüyorsa, tarayıcı adres çubuğundaki kamera/mikrofon ikonuna tıklayın. ";
+        errorMessage += "3) Tarayıcı ayarlarından ekran paylaşımı iznini kontrol edin.";
+      } else if (error.name === "NotFoundError" || error.name === "DevicesNotFoundError") {
+        errorMessage += "Ekran paylaşımı için uygun cihaz bulunamadı. ";
+        errorMessage += "Lütfen bilgisayarınızın ekran paylaşımı özelliğini kontrol edin.";
+      } else if (error.name === "NotReadableError" || error.name === "TrackStartError") {
+        errorMessage += "Ekran paylaşımı başlatılamadı. ";
+        errorMessage += "Başka bir uygulama ekran paylaşımını kullanıyor olabilir. Lütfen diğer uygulamaları kapatıp tekrar deneyin.";
+      } else if (error.name === "OverconstrainedError" || error.name === "ConstraintNotSatisfiedError") {
+        errorMessage += "Ekran paylaşımı ayarları desteklenmiyor. ";
+        errorMessage += "Lütfen tarayıcınızı güncelleyin veya farklı bir tarayıcı deneyin.";
+      } else {
+        errorMessage += "Bilinmeyen bir hata oluştu. ";
+        errorMessage += "Lütfen sayfayı yenileyip tekrar deneyin.";
+      }
+      
+      // Retry mekanizması (maksimum 1 kez)
+      if (retryCount < 1 && (error.name === "NotAllowedError" || error.name === "PermissionDeniedError")) {
+        errorMessage += " 3 saniye sonra otomatik olarak tekrar denenecek...";
+        setWarning(errorMessage);
+        
+        await new Promise(resolve => setTimeout(resolve, 3000));
+        return ensureScreenCapture(retryCount + 1);
+      }
+      
+      setWarning(errorMessage);
       return null;
     }
   }, [handleScreenShareEnded]);
@@ -578,10 +627,40 @@ export default function InterviewRoomPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ action: "start" }),
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error("Recording error:", error);
-      setWarning("Video kaydı başlatılamadı.");
+      
+      let errorMessage = "Video kaydı başlatılamadı. ";
+      
+      // MediaRecorder hatalarını kontrol et
+      if (error.name === "InvalidStateError") {
+        errorMessage += "Kayıt cihazı hazır değil. Lütfen kamera ve ekran paylaşımını kontrol edip tekrar deneyin.";
+      } else if (error.name === "NotSupportedError") {
+        errorMessage += "Tarayıcınız video kaydını desteklemiyor. Lütfen Chrome, Firefox veya Edge kullanın.";
+      } else if (error.message?.includes("MediaRecorder")) {
+        errorMessage += "Video kayıt formatı desteklenmiyor. Lütfen tarayıcınızı güncelleyin.";
+      } else {
+        errorMessage += `Hata: ${error.message || "Bilinmeyen hata"}. Lütfen sayfayı yenileyip tekrar deneyin.`;
+      }
+      
+      setWarning(errorMessage);
       setScreenCaptureEnabled(false);
+      
+      // Kayıt cihazlarını temizle
+      if (mediaRecorderRef.current && mediaRecorderRef.current.state !== "inactive") {
+        try {
+          mediaRecorderRef.current.stop();
+        } catch (e) {
+          // Ignore stop errors
+        }
+      }
+      if (screenRecorderRef.current && screenRecorderRef.current.state !== "inactive") {
+        try {
+          screenRecorderRef.current.stop();
+        } catch (e) {
+          // Ignore stop errors
+        }
+      }
     }
   }, [cameraEnabled, ensureScreenCapture, interviewId, uploadVideo]);
 
@@ -857,11 +936,93 @@ export default function InterviewRoomPage() {
     }
   }, [isListening, speechRecognition]);
 
+  // TTS (Text-to-Speech) fonksiyonları
+  const speakQuestion = useCallback((text: string) => {
+    if (!ttsEnabled || typeof window === "undefined" || !("speechSynthesis" in window)) {
+      return;
+    }
+
+    // Önceki konuşmayı durdur
+    if (speechSynthesisRef.current) {
+      window.speechSynthesis.cancel();
+    }
+
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "tr-TR";
+    utterance.rate = 0.9; // Biraz yavaş okuma
+    utterance.pitch = 1.0;
+    utterance.volume = 1.0;
+
+    utterance.onstart = () => {
+      setIsSpeaking(true);
+    };
+
+    utterance.onend = () => {
+      setIsSpeaking(false);
+      speechSynthesisRef.current = null;
+    };
+
+    utterance.onerror = (error) => {
+      console.error("TTS error:", error);
+      setIsSpeaking(false);
+      speechSynthesisRef.current = null;
+    };
+
+    speechSynthesisRef.current = utterance;
+    window.speechSynthesis.speak(utterance);
+  }, [ttsEnabled]);
+
+  const stopSpeaking = useCallback(() => {
+    if (typeof window !== "undefined" && "speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+      setIsSpeaking(false);
+      speechSynthesisRef.current = null;
+    }
+  }, []);
+
+  const toggleTTS = useCallback(() => {
+    if (isSpeaking) {
+      stopSpeaking();
+    }
+    setTtsEnabled((prev) => !prev);
+  }, [isSpeaking, stopSpeaking]);
+
+  // Soru değiştiğinde otomatik okuma
+  useEffect(() => {
+    if (!interview || !ttsEnabled) return;
+
+    const question = interview.questions[currentQuestion];
+    if (!question) return;
+
+    // Önceki konuşmayı durdur
+    stopSpeaking();
+
+    // Kısa bir gecikme ile yeni soruyu oku
+    const timer = setTimeout(() => {
+      const questionText = question.question || question.prompt || "";
+      if (questionText.trim()) {
+        speakQuestion(questionText);
+      }
+    }, 500);
+
+    return () => {
+      clearTimeout(timer);
+      stopSpeaking();
+    };
+  }, [currentQuestion, interview, ttsEnabled, speakQuestion, stopSpeaking]);
+
   useEffect(() => {
     if (!interviewId) return;
     fetchInterview();
     requestFullscreen();
   }, [fetchInterview, interviewId, requestFullscreen]);
+
+  // Cleanup TTS on unmount
+  useEffect(() => {
+    return () => {
+      stopSpeaking();
+    };
+  }, [stopSpeaking]);
 
   useEffect(() => {
     document.addEventListener("visibilitychange", handleVisibilityChange);
@@ -1252,9 +1413,35 @@ export default function InterviewRoomPage() {
                   </p>
                 </div>
               )}
-              <p className="text-xl md:text-2xl font-medium text-gray-100 leading-relaxed">
-                {question?.question ?? question?.prompt ?? "Soru yükleniyor..."}
-              </p>
+              <div className="flex items-start justify-between gap-4">
+                <p className="text-xl md:text-2xl font-medium text-gray-100 leading-relaxed flex-1">
+                  {question?.question ?? question?.prompt ?? "Soru yükleniyor..."}
+                </p>
+                <button
+                  type="button"
+                  onClick={toggleTTS}
+                  className={`flex-shrink-0 rounded-lg p-2 transition ${
+                    ttsEnabled
+                      ? "bg-blue-600 text-white hover:bg-blue-700"
+                      : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                  }`}
+                  title={ttsEnabled ? "Sesli okumayı kapat" : "Sesli okumayı aç"}
+                >
+                  {isSpeaking ? (
+                    <svg className="h-5 w-5 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                    </svg>
+                  ) : ttsEnabled ? (
+                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M6.343 6.343l4.243 4.243m0 0l-4.243 4.243M10.586 10.586L5 5m5.586 5.586l5.586 5.586M5 19l5.586-5.586" />
+                    </svg>
+                  ) : (
+                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                    </svg>
+                  )}
+                </button>
+              </div>
               {question?.prompt && question.prompt !== question.question && (
                 <p className="text-lg md:text-xl text-gray-300 leading-relaxed">{question.prompt}</p>
               )}

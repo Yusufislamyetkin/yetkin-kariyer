@@ -86,6 +86,7 @@ const interviewQuestionsSchema = z.object({
   stage2_experience: z.array(interviewQuestionSchema),
   stage3_technical: z.object({
     testQuestions: z.array(interviewQuestionSchema).min(5),
+    eliminationQuestions: z.array(interviewQuestionSchema).min(2).optional(),
     liveCoding: interviewQuestionSchema.nullable().optional(),
     bugFix: interviewQuestionSchema.nullable().optional(),
     realWorldScenarios: z.array(interviewQuestionSchema).min(2),
@@ -349,7 +350,8 @@ const stage2QuestionsSchema = z.object({
 
 const stage3QuestionsSchema = z.object({
   stage3_technical: z.object({
-    testQuestions: z.array(interviewQuestionSchema).min(5),
+    testQuestions: z.array(interviewQuestionSchema).min(8), // 5'ten 8'e çıkarıldı
+    eliminationQuestions: z.array(interviewQuestionSchema).min(2).optional(), // Eleme soruları eklendi
     liveCoding: interviewQuestionSchema.nullable().optional(),
     bugFix: interviewQuestionSchema.nullable().optional(),
     realWorldScenarios: z.array(interviewQuestionSchema).min(2),
@@ -509,29 +511,37 @@ Bir ${positionTypeLabels[cvInfo.positionType]} pozisyonu için CV'ye göre genel
 ${cvSummary}
 
 AŞAMA 1 - GENEL TANIŞMA VE KİŞİSEL BİLGİLER (5-7 soru):
-CV'deki kişisel bilgiler, özet, eğitim ve diller bölümlerinden sorular oluştur:
+SADECE CV'deki kişisel bilgiler, özet, eğitim ve diller bölümlerinden sorular oluştur.
 
-1. **Kişisel Tanışma** (1-2 soru):
+KRİTİK KURALLAR - AŞAMA 1:
+- SADECE kişisel bilgiler, eğitim, diller ve CV özeti soruları
+- HİÇBİR iş deneyimi, proje, başarı veya sertifika sorusu SORMA
+- Aşama 2'de deneyim ve projeler sorulacak, bu aşamada bunlara dokunma
+- Sorular tanışma ve kişisel bilgi odaklı olmalı
+
+1. **Kişisel Tanışma ve Tanıtım** (2-3 soru):
    - Kullanıcının kendisini tanıtması
-   - Kariyer yolculuğu hakkında genel sorular
-   - CV'deki kişisel bilgilere ve deneyimlere dayalı sorular
-   - NOT: "Bu pozisyona neden başvurduğu" gibi genel sorular sorma. Bunun yerine CV'deki spesifik bilgilere göre sorular oluştur.
+   - CV'deki kişisel bilgilere dayalı sorular (isim, iletişim bilgileri, vb.)
+   - Genel kariyer motivasyonu (ama deneyim detaylarına girme)
+   - NOT: "Bu pozisyona neden başvurduğu" gibi genel sorular sorma. CV'deki spesifik kişisel bilgilere göre sorular oluştur.
 
 2. **CV Özeti** (1-2 soru):
    - CV özetindeki bilgilere göre sorular
-   - Kariyer hedefleri ve motivasyonları
+   - Kariyer hedefleri ve motivasyonları (genel seviyede)
    - Özet bölümünde bahsedilen önemli noktalar
+   - NOT: Özette bahsedilen projeler veya deneyimler hakkında detaylı sorular sorma, bunlar Aşama 2'de sorulacak
 
-3. **Eğitim Geçmişi** (1-2 soru):
+3. **Eğitim Geçmişi** (2-3 soru):
    - Eğitim bilgilerine göre detaylı sorular
    - Eğitimin pozisyonla ilişkisi
-   - Eğitim sırasında edinilen deneyimler
+   - Eğitim sırasında edinilen genel deneyimler (ama iş deneyimi değil)
    - GPA (varsa) ve akademik başarılar
+   - Eğitim sırasındaki projeler (eğitim projeleri, iş projeleri değil)
 
 4. **Diller** (1-2 soru):
    - İngilizce seviyesi detaylı test (özellikle teknik dokümantasyon okuma/yazma)
    - Diğer diller (varsa) ve kullanım alanları
-   - Dil becerilerinin işe katkısı
+   - Dil becerilerinin işe katkısı (genel seviyede)
 
 ÖNEMLİ NOTLAR:
 - Pozisyon Tipi: ${positionTypeLabels[cvInfo.positionType]}
@@ -542,7 +552,8 @@ CV'deki kişisel bilgiler, özet, eğitim ve diller bölümlerinden sorular olu�
 - Tüm sorular Türkçe olmalı
 - Sorular gerçekçi ve pratik olmalı
 - Behavioral sorular STAR metoduna uygun olmalı
-- KRİTİK: Tüm sorular CV'deki gerçek bilgilere dayalı olmalı. "Bu pozisyona neden başvurduğu", "Bu ilana neden başvurdunuz" gibi genel ve CV'ye uygun olmayan sorular SORMA. Bunun yerine CV'deki teknolojilere, deneyimlere, projelere ve eğitim geçmişine özel sorular oluştur.
+- KRİTİK: Tüm sorular CV'deki gerçek bilgilere dayalı olmalı. "Bu pozisyona neden başvurduğu", "Bu ilana neden başvurdunuz" gibi genel sorular SORMA.
+- KRİTİK: Aşama 1'de HİÇBİR iş deneyimi, proje, başarı veya sertifika sorusu sorma. Bunlar Aşama 2'de sorulacak.
 
 SORU FORMATI:
 Her soru şu formatta olmalı:
@@ -568,9 +579,14 @@ JSON formatında yanıt ver:
       messages: [
         {
           role: "system",
-          content: `Sen bir ${positionTypeLabels[cvInfo.positionType]} mülakat uzmanısın ve İK profesyonelisin. CV'lere göre çok kapsamlı, gerçekçi ve adil mülakat soruları hazırlıyorsun. CV'deki kişisel bilgiler, özet, eğitim ve diller bölümlerini analiz ederek genel tanışma soruları oluşturuyorsun. 
+          content: `Sen bir ${positionTypeLabels[cvInfo.positionType]} mülakat uzmanısın ve İK profesyonelisin. CV'lere göre çok kapsamlı, gerçekçi ve adil mülakat soruları hazırlıyorsun. 
 
-KRİTİK KURAL: "Bu pozisyona neden başvurduğu", "Bu ilana neden başvurdunuz" gibi genel ve CV'ye uygun olmayan sorular ASLA sorma. Bunun yerine CV'deki gerçek bilgilere (teknolojiler, deneyimler, projeler, eğitim) dayalı spesifik sorular oluştur. Kullanıcı CV'sine uygun bir işe başvurmuş varsayılmalı.
+AŞAMA 1 İÇİN KRİTİK KURALLAR:
+1. SADECE kişisel bilgiler, eğitim, diller ve CV özeti soruları oluştur
+2. HİÇBİR iş deneyimi, proje, başarı veya sertifika sorusu sorma - bunlar Aşama 2'de sorulacak
+3. "Bu pozisyona neden başvurduğu" gibi genel sorular ASLA sorma
+4. CV'deki gerçek kişisel bilgilere (isim, eğitim, diller) dayalı spesifik sorular oluştur
+5. Eğitim sırasındaki akademik projeler sorulabilir, ama iş deneyimi projeleri sorulmamalı
 
 Her zaman JSON formatında yanıt ver.`,
         },
@@ -609,29 +625,37 @@ Bir ${positionTypeLabels[cvInfo.positionType]} pozisyonu için CV'ye göre deney
 ${cvSummary}
 
 AŞAMA 2 - DENEYİM, PROJELER VE BAŞARILAR (8-12 soru):
-CV'deki deneyim, projeler, başarılar, sertifikalar ve referanslar bölümlerinden sorular:
+SADECE CV'deki deneyim, projeler, başarılar, sertifikalar ve referanslar bölümlerinden sorular oluştur.
+
+KRİTİK KURALLAR - AŞAMA 2:
+- SADECE iş deneyimleri, projeler, başarılar, sertifikalar ve referanslar soruları
+- HİÇBİR kişisel tanışma, eğitim veya dil sorusu SORMA
+- Aşama 1'de kişisel bilgiler ve eğitim soruldu, bu aşamada bunlara dokunma
+- Sorular profesyonel deneyim ve pratik uygulama odaklı olmalı
 
 1. **İş Deneyimleri** (Her iş yeri için 2-3 soru, toplam 4-6 soru):
    - Şirket kültürü ve çalışma ortamı
    - Takım yapısı ve çalışma şekli
-   - Kullanılan teknolojiler, araçlar ve metodolojiler
-   - Sorumluluklar ve başarılar
+   - Kullanılan teknolojiler, araçlar ve metodolojiler (detaylı)
+   - Sorumluluklar ve başarılar (somut örneklerle)
    - Yaşanan zorluklar ve çözüm yöntemleri (STAR metodu ile)
    - Takım çalışması deneyimleri
    - Çalışma metodolojileri (Agile, Scrum, Kanban, vb.)
    - İş yerinden ayrılma nedenleri (varsa)
+   - NOT: Eğitim sırasındaki stajlar veya part-time işler de dahil edilebilir
 
 2. **Projeler** (Her önemli proje için 1-2 soru, toplam 2-4 soru):
    - Proje amacı, kapsamı ve hedefleri
-   - Kullanılan teknolojiler ve neden seçildiği
+   - Kullanılan teknolojiler ve neden seçildiği (teknik detaylar)
    - Projedeki rol ve sorumluluklar
-   - Karşılaşılan teknik zorluklar ve çözümler
+   - Karşılaşılan teknik zorluklar ve çözümler (derinlemesine)
    - Proje sonuçları ve öğrenilenler
    - Proje URL'i varsa (github, vb.) hakkında sorular
+   - NOT: Sadece iş projeleri veya önemli kişisel projeler, eğitim projeleri değil
 
 3. **Başarılar** (1-2 soru, varsa):
    - Başarıların detayları ve önemi
-   - Başarıya giden süreç
+   - Başarıya giden süreç (STAR metodu)
    - Ölçülebilir sonuçlar ve etkileri
 
 4. **Sertifikalar** (1-2 soru, varsa):
@@ -652,6 +676,7 @@ CV'deki deneyim, projeler, başarılar, sertifikalar ve referanslar bölümlerin
 - Tüm sorular Türkçe olmalı
 - Sorular gerçekçi ve pratik olmalı
 - Behavioral sorular STAR metoduna uygun olmalı
+- KRİTİK: Aşama 2'de HİÇBİR kişisel tanışma, eğitim veya dil sorusu sorma. Bunlar Aşama 1'de soruldu.
 
 SORU FORMATI:
 Her soru şu formatta olmalı:
@@ -677,7 +702,16 @@ JSON formatında yanıt ver:
       messages: [
         {
           role: "system",
-          content: `Sen bir ${positionTypeLabels[cvInfo.positionType]} mülakat uzmanısın ve İK profesyonelisin. CV'lere göre çok kapsamlı, gerçekçi ve adil mülakat soruları hazırlıyorsun. CV'deki deneyim, projeler, başarılar, sertifikalar ve referanslar bölümlerini analiz ederek sorular oluşturuyorsun. Her zaman JSON formatında yanıt ver.`,
+          content: `Sen bir ${positionTypeLabels[cvInfo.positionType]} mülakat uzmanısın ve İK profesyonelisin. CV'lere göre çok kapsamlı, gerçekçi ve adil mülakat soruları hazırlıyorsun. 
+
+AŞAMA 2 İÇİN KRİTİK KURALLAR:
+1. SADECE iş deneyimleri, projeler, başarılar, sertifikalar ve referanslar soruları oluştur
+2. HİÇBİR kişisel tanışma, eğitim veya dil sorusu sorma - bunlar Aşama 1'de soruldu
+3. Sorular profesyonel deneyim ve pratik uygulama odaklı olmalı
+4. Teknik detaylara ve somut örneklere odaklan
+5. STAR metodunu kullanarak behavioral sorular oluştur
+
+Her zaman JSON formatında yanıt ver.`,
         },
         {
           role: "user",
@@ -785,14 +819,23 @@ export async function generateStage3Questions(cvId: string): Promise<z.infer<typ
 
       default: // developer
         return `
-- 5-7 adet KRİTİK ve NET teknik test sorusu (CV'deki teknolojilere göre, ${cvInfo.level} seviye)
+- 8-10 adet KRİTİK ve NET teknik test sorusu (CV'deki teknolojilere göre, ${cvInfo.level} seviye)
   * Her soru CV'deki teknolojilerden en az birine spesifik olmalı
   * Sorular pratik uygulama ve problem çözme odaklı olmalı
   * Genel bilgi soruları yerine derinlemesine teknik sorular
-  * Örnek: "C# async/await pattern'inde deadlock nasıl önlenir?" gibi spesifik sorular
+  * Mimari, performans, güvenlik, optimizasyon odaklı sorular
+  * Örnek: "C# async/await pattern'inde deadlock nasıl önlenir?", "Mikroservis mimarisinde distributed transaction nasıl yönetilir?" gibi spesifik ve zor sorular
+- 2-3 adet ELEME SORUSU (çok zor, kritik sorular - adayı gerçekten test eden)
+  * Bu sorular adayın gerçekten konuyu bilip bilmediğini test etmeli
+  * Sadece ezberlenmiş cevaplarla geçilemeyecek derinlikte olmalı
+  * Mimari tasarım, performans optimizasyonu, güvenlik, edge case'ler gibi konular
+  * Örnek: "10 milyon kullanıcılı bir sistemde cache invalidation stratejisi nasıl olmalı?" gibi gerçek dünya problemleri
 - 1 adet canlı kodlama sorusu (${cvInfo.technologies[0] || "C#"} veya benzeri bir dilde)
+  * Orta-ileri seviye zorlukta olmalı
 - 1 adet bugfix sorusu (hatalı kod verilip düzeltilmesi istenecek)
-- 2-3 adet gerçek dünya senaryosu (örn: Kasım indirimlerinde yoğun trafik, mikroservis mimarisi, performans optimizasyonu, scaling challenges)`;
+  * Karmaşık bug'lar içermeli, basit syntax hataları değil
+- 2-3 adet gerçek dünya senaryosu (örn: Kasım indirimlerinde yoğun trafik, mikroservis mimarisi, performans optimizasyonu, scaling challenges)
+  * Senaryolar zorlaştırılmalı, gerçek production problemlerine benzer olmalı`;
     }
   };
 
@@ -821,16 +864,26 @@ ${isDeveloper ? `- Canlı kodlama ve bugfix soruları ${primaryLanguage} dilinde
 
 KRİTİK: Teknik Sorular İçin Özel Gereksinimler:
 - testQuestions: CV'deki her teknoloji için derinlemesine ve kritik sorular oluştur
-- Sorular sadece genel bilgi sormamalı, pratik uygulama ve problem çözme odaklı olmalı
-- Her soru CV'deki teknolojilerden en az birine spesifik olarak odaklanmalı
-- ${cvInfo.technologies.length > 0 ? `CV'deki teknolojiler (${cvInfo.technologies.join(", ")}) için özel sorular oluştur. Her teknoloji için en az 1 kritik soru olmalı.` : "CV'de teknoloji belirtilmemişse, pozisyon tipine göre uygun teknolojiler için sorular oluştur."}
-- Sorular ${cvInfo.level} seviyeye uygun derinlikte olmalı (beginner: temel kavramlar, intermediate: pratik uygulama, advanced: mimari ve optimizasyon)
-- Test soruları çoktan seçmeli veya açık uçlu olabilir, ancak mutlaka CV'deki teknolojilere özel olmalı
+  * Sorular sadece genel bilgi sormamalı, pratik uygulama ve problem çözme odaklı olmalı
+  * Her soru CV'deki teknolojilerden en az birine spesifik olarak odaklanmalı
+  * Mimari tasarım, performans optimizasyonu, güvenlik, scalability gibi konulara odaklan
+  * ${cvInfo.technologies.length > 0 ? `CV'deki teknolojiler (${cvInfo.technologies.join(", ")}) için özel sorular oluştur. Her teknoloji için en az 1-2 kritik soru olmalı.` : "CV'de teknoloji belirtilmemişse, pozisyon tipine göre uygun teknolojiler için sorular oluştur."}
+  * Sorular ${cvInfo.level} seviyeye uygun derinlikte olmalı (beginner: temel kavramlar, intermediate: pratik uygulama, advanced: mimari ve optimizasyon)
+  * Test soruları çoktan seçmeli veya açık uçlu olabilir, ancak mutlaka CV'deki teknolojilere özel olmalı
+
+- eliminationQuestions: ELEME SORULARI (çok zor, kritik)
+  * Bu sorular adayın gerçekten konuyu bilip bilmediğini test etmeli
+  * Sadece ezberlenmiş cevaplarla geçilemeyecek derinlikte olmalı
+  * Mimari tasarım, performans optimizasyonu, güvenlik, edge case'ler, distributed systems gibi konular
+  * Gerçek production problemlerine benzer senaryolar
+  * Örnek: "10 milyon kullanıcılı bir sistemde cache invalidation stratejisi nasıl olmalı?", "Mikroservis mimarisinde eventual consistency nasıl yönetilir?"
+  * Bu sorular adayı gerçekten zorlamalı ve elemede kritik rol oynamalı
 
 KRİTİK GEREKSİNİMLER:
-1. testQuestions: MUTLAKA en az 5 (beş) soru içermelidir. Daha az soru kabul edilmez!
-2. realWorldScenarios: MUTLAKA en az 2 (iki) senaryo içermelidir. Daha az senaryo kabul edilmez!
-3. ${isDeveloper ? "liveCoding ve bugFix: Developer pozisyonları için MUTLAKA dahil edilmelidir." : "liveCoding ve bugFix: Opsiyoneldir, dahil edilmeyebilir."}
+1. testQuestions: MUTLAKA en az 8 (sekiz) soru içermelidir. Daha az soru kabul edilmez!
+2. eliminationQuestions: MUTLAKA en az 2 (iki) eleme sorusu içermelidir. Bu sorular çok zor olmalı!
+3. realWorldScenarios: MUTLAKA en az 2 (iki) senaryo içermelidir. Senaryolar zorlaştırılmalı!
+4. ${isDeveloper ? "liveCoding ve bugFix: Developer pozisyonları için MUTLAKA dahil edilmelidir. Orta-ileri seviye zorlukta olmalı." : "liveCoding ve bugFix: Opsiyoneldir, dahil edilmeyebilir."}
 
 SORU FORMATI:
 Her soru şu formatta olmalı:
@@ -866,7 +919,22 @@ Her soru şu formatta olmalı:
         "question": "Başka bir soru",
         "difficulty": "${cvInfo.level}"
       }
-      // ... en az 5 soru olmalı
+      // ... en az 8 soru olmalı
+    ],
+    "eliminationQuestions": [
+      {
+        "id": "elim_1",
+        "type": "technical",
+        "question": "Çok zor eleme sorusu",
+        "difficulty": "advanced"
+      },
+      {
+        "id": "elim_2",
+        "type": "technical",
+        "question": "Başka bir eleme sorusu",
+        "difficulty": "advanced"
+      }
+      // ... en az 2 eleme sorusu olmalı
     ],
     ${isDeveloper ? `"liveCoding": {
       "id": "live_coding_1",
@@ -899,7 +967,8 @@ Her soru şu formatta olmalı:
 DİKKAT: 
 - JSON yapısı TAM OLARAK yukarıdaki örnekteki gibi olmalıdır
 - "stage3_technical" ana anahtarı MUTLAKA olmalıdır
-- testQuestions MUTLAKA bir array olmalı ve en az 5 eleman içermelidir
+- testQuestions MUTLAKA bir array olmalı ve en az 8 eleman içermelidir
+- eliminationQuestions MUTLAKA bir array olmalı ve en az 2 eleman içermelidir (çok zor sorular)
 - realWorldScenarios MUTLAKA bir array olmalı ve en az 2 eleman içermelidir
 - Her soru için "id" ve "type" ve "question" alanları ZORUNLUDUR
 - ${isDeveloper ? "Developer pozisyonu için liveCoding ve bugFix MUTLAKA dahil edilmelidir (null değil, obje olmalı)" : "liveCoding ve bugFix opsiyoneldir, null olabilir veya dahil edilmeyebilir"}
@@ -915,6 +984,15 @@ DİKKAT:
 
 KRİTİK KURALLAR:
 1. testQuestions: CV'deki teknolojilere (${cvInfo.technologies.join(", ") || "belirtilmemiş"}) göre KRİTİK ve NET sorular oluştur
+   * En az 8 soru olmalı
+   * Mimari, performans, güvenlik, optimizasyon odaklı sorular
+   * Derinlemesine teknik bilgi gerektiren sorular
+2. eliminationQuestions: ÇOK ZOR eleme soruları oluştur
+   * En az 2 soru olmalı
+   * Adayın gerçekten konuyu bilip bilmediğini test eden sorular
+   * Sadece ezberlenmiş cevaplarla geçilemeyecek derinlikte
+   * Gerçek production problemlerine benzer senaryolar
+   * Mimari tasarım, distributed systems, scalability gibi konular
 2. Her soru CV'deki teknolojilerden en az birine spesifik olmalı
 3. Sorular pratik uygulama ve problem çözme odaklı olmalı, genel bilgi soruları değil
 4. ${cvInfo.level} seviyeye uygun derinlikte sorular (beginner: temel, intermediate: pratik, advanced: mimari/optimizasyon)
@@ -1049,6 +1127,17 @@ export function formatQuestionsForInterview(questions: InterviewQuestions): any[
       stage: 3,
     });
   });
+
+  // Eleme soruları (çok zor sorular)
+  if (questions.stage3_technical.eliminationQuestions && questions.stage3_technical.eliminationQuestions.length > 0) {
+    questions.stage3_technical.eliminationQuestions.forEach((q, idx) => {
+      allQuestions.push({
+        ...q,
+        id: q.id || `elimination_${idx + 1}`,
+        stage: 3,
+      });
+    });
+  }
 
   // Canlı kodlama (opsiyonel - sadece developer pozisyonları için)
   if (questions.stage3_technical.liveCoding) {

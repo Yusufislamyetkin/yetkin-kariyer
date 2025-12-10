@@ -65,7 +65,34 @@ export default function ProfilePage() {
       if (profileResponse.status === "fulfilled" && profileResponse.value.ok) {
         const profileData = await profileResponse.value.json();
         setProfileUser(profileData.user || null);
-        setProfileStats(profileData.stats || null);
+        // Ensure stats has all required fields with defaults
+        if (profileData.stats) {
+          setProfileStats({
+            completedLessons: profileData.stats.completedLessons ?? 0,
+            quizAttempts: profileData.stats.quizAttempts ?? 0,
+            testAttempts: profileData.stats.testAttempts ?? 0,
+            liveCodingAttempts: profileData.stats.liveCodingAttempts ?? 0,
+            bugFixAttempts: profileData.stats.bugFixAttempts ?? 0,
+            ...profileData.stats,
+          });
+        } else {
+          setProfileStats({
+            completedLessons: 0,
+            quizAttempts: 0,
+            testAttempts: 0,
+            liveCodingAttempts: 0,
+            bugFixAttempts: 0,
+          });
+        }
+      } else if (profileResponse.status === "rejected") {
+        console.error("Profile response rejected:", profileResponse.reason);
+        setProfileStats({
+          completedLessons: 0,
+          quizAttempts: 0,
+          testAttempts: 0,
+          liveCodingAttempts: 0,
+          bugFixAttempts: 0,
+        });
       }
 
       // Handle badges
@@ -73,18 +100,38 @@ export default function ProfilePage() {
         const badgesData = await badgesResponse.value.json();
         setBadges(badgesData.badges || []);
         setDisplayedBadges(badgesData.displayedBadges || []);
+      } else {
+        setBadges([]);
+        setDisplayedBadges([]);
       }
 
       // Handle activities
       if (activityResponse.status === "fulfilled" && activityResponse.value.ok) {
         const activityData = await activityResponse.value.json();
         setActivities(activityData.activities || []);
+      } else {
+        setActivities([]);
       }
 
       // Handle gamification
       if (gamiResponse.status === "fulfilled" && gamiResponse.value.ok) {
         const gami = await gamiResponse.value.json();
-        setGamiSummary(gami);
+        // Ensure all gamification fields have defaults
+        setGamiSummary({
+          level: gami.level ?? 1,
+          points: gami.points ?? 0,
+          xp: gami.xp ?? 0,
+          streak: gami.streak ?? { current: 0, longest: 0 },
+          ...gami,
+        });
+      } else {
+        // Set default gamification data if request fails
+        setGamiSummary({
+          level: 1,
+          points: 0,
+          xp: 0,
+          streak: { current: 0, longest: 0 },
+        });
       }
     } catch (error) {
       console.error("Error fetching profile data:", error);
@@ -164,15 +211,13 @@ export default function ProfilePage() {
       <ProfileHeader user={displayUser} onUpdate={() => fetchProfileData({ silent: true })} />
 
       {/* User Stats */}
-      {gamiSummary && profileStats && (
-        <UserStats
-          level={userStatsData.level}
-          points={userStatsData.points}
-          xp={userStatsData.xp}
-          streak={userStatsData.streak}
-          stats={userStatsData.stats}
-        />
-      )}
+      <UserStats
+        level={userStatsData.level}
+        points={userStatsData.points}
+        xp={userStatsData.xp}
+        streak={userStatsData.streak}
+        stats={userStatsData.stats}
+      />
 
       {/* Son Aktiviteler - Full Width */}
       <ActivityTimeline activities={activities} />

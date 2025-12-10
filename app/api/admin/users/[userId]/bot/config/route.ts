@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import { db } from "@/lib/db";
+
+const BACKEND_API_URL = process.env.BACKEND_API_URL || 'https://softwareinterview.tryasp.net';
 
 export async function GET(
   request: Request,
@@ -18,32 +19,25 @@ export async function GET(
 
     const userId = params.userId;
 
-    const user = await db.user.findUnique({
-      where: { id: userId },
-      include: {
-        botCharacter: true,
-        botConfiguration: true,
+    // Call CursorInterviewer backend API
+    const response = await fetch(`${BACKEND_API_URL}/Admin/GetBotConfiguration?userId=${userId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
       },
     });
 
-    if (!user) {
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('[BOT_CONFIG_GET] Backend error:', errorText);
       return NextResponse.json(
-        { error: "Kullanıcı bulunamadı" },
-        { status: 404 }
+        { error: 'Failed to fetch bot configuration from backend' },
+        { status: response.status }
       );
     }
 
-    if (!user.isBot) {
-      return NextResponse.json(
-        { error: "Bu kullanıcı bot değil" },
-        { status: 400 }
-      );
-    }
-
-    return NextResponse.json({
-      botCharacter: user.botCharacter,
-      botConfiguration: user.botConfiguration,
-    });
+    const data = await response.json();
+    return NextResponse.json(data);
   } catch (error: any) {
     console.error("[BOT_CONFIG_GET]", error);
     return NextResponse.json(
@@ -70,84 +64,55 @@ export async function PUT(
     const userId = params.userId;
     const body = await request.json();
 
-    const user = await db.user.findUnique({
-      where: { id: userId },
-      include: {
-        botCharacter: true,
-        botConfiguration: true,
-      },
-    });
+    // Map Next.js format to CursorInterviewer format
+    const updateRequest: any = {
+      userId: userId,
+    };
 
-    if (!user) {
-      return NextResponse.json(
-        { error: "Kullanıcı bulunamadı" },
-        { status: 404 }
-      );
-    }
-
-    if (!user.isBot) {
-      return NextResponse.json(
-        { error: "Bu kullanıcı bot değil" },
-        { status: 400 }
-      );
-    }
-
-    // Update bot character if provided
-    if (body.character) {
-      await db.botCharacter.update({
-        where: { userId },
-        data: {
-          name: body.character.name,
-          persona: body.character.persona,
-          systemPrompt: body.character.systemPrompt,
-          traits: body.character.traits,
-          expertise: body.character.expertise,
-        },
-      });
-    }
-
-    // Update bot configuration if provided
     if (body.configuration) {
-      await db.botConfiguration.update({
-        where: { userId },
-        data: {
-          isActive: body.configuration.isActive,
-          minPostsPerDay: body.configuration.minPostsPerDay,
-          maxPostsPerDay: body.configuration.maxPostsPerDay,
-          minCommentsPerDay: body.configuration.minCommentsPerDay,
-          maxCommentsPerDay: body.configuration.maxCommentsPerDay,
-          minLikesPerDay: body.configuration.minLikesPerDay,
-          maxLikesPerDay: body.configuration.maxLikesPerDay,
-          minTestsPerWeek: body.configuration.minTestsPerWeek,
-          maxTestsPerWeek: body.configuration.maxTestsPerWeek,
-          minLiveCodingPerWeek: body.configuration.minLiveCodingPerWeek,
-          maxLiveCodingPerWeek: body.configuration.maxLiveCodingPerWeek,
-          minBugFixPerWeek: body.configuration.minBugFixPerWeek,
-          maxBugFixPerWeek: body.configuration.maxBugFixPerWeek,
-          minLessonsPerWeek: body.configuration.minLessonsPerWeek,
-          maxLessonsPerWeek: body.configuration.maxLessonsPerWeek,
-          minChatMessagesPerDay: body.configuration.minChatMessagesPerDay,
-          maxChatMessagesPerDay: body.configuration.maxChatMessagesPerDay,
-          activityHours: body.configuration.activityHours,
-        },
-      });
+      updateRequest.IsActive = body.configuration.isActive;
+      updateRequest.MinPostsPerDay = body.configuration.minPostsPerDay;
+      updateRequest.MaxPostsPerDay = body.configuration.maxPostsPerDay;
+      updateRequest.MinCommentsPerDay = body.configuration.minCommentsPerDay;
+      updateRequest.MaxCommentsPerDay = body.configuration.maxCommentsPerDay;
+      updateRequest.MinLikesPerDay = body.configuration.minLikesPerDay;
+      updateRequest.MaxLikesPerDay = body.configuration.maxLikesPerDay;
+      updateRequest.ActivityHours = body.configuration.activityHours;
+      updateRequest.ScheduleEnabled = body.configuration.scheduleEnabled;
     }
 
-    // Fetch updated data
-    const updated = await db.user.findUnique({
-      where: { id: userId },
-      include: {
-        botCharacter: true,
-        botConfiguration: true,
+    // Also handle direct properties from BotConfigModal
+    if (body.isActive !== undefined) updateRequest.IsActive = body.isActive;
+    if (body.minPostsPerDay !== undefined) updateRequest.MinPostsPerDay = body.minPostsPerDay;
+    if (body.maxPostsPerDay !== undefined) updateRequest.MaxPostsPerDay = body.maxPostsPerDay;
+    if (body.minCommentsPerDay !== undefined) updateRequest.MinCommentsPerDay = body.minCommentsPerDay;
+    if (body.maxCommentsPerDay !== undefined) updateRequest.MaxCommentsPerDay = body.maxCommentsPerDay;
+    if (body.minLikesPerDay !== undefined) updateRequest.MinLikesPerDay = body.minLikesPerDay;
+    if (body.maxLikesPerDay !== undefined) updateRequest.MaxLikesPerDay = body.maxLikesPerDay;
+    if (body.activityHours) updateRequest.ActivityHours = body.activityHours;
+    if (body.enabledActivities) updateRequest.EnabledActivities = body.enabledActivities;
+    if (body.activityIntervals) updateRequest.ActivityIntervals = body.activityIntervals;
+    if (body.scheduleEnabled !== undefined) updateRequest.ScheduleEnabled = body.scheduleEnabled;
+
+    // Call CursorInterviewer backend API
+    const response = await fetch(`${BACKEND_API_URL}/Admin/UpdateBotConfiguration`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
+      body: JSON.stringify(updateRequest),
     });
 
-    return NextResponse.json({
-      success: true,
-      message: "Bot yapılandırması güncellendi",
-      botCharacter: updated?.botCharacter,
-      botConfiguration: updated?.botConfiguration,
-    });
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({ message: 'Unknown error' }));
+      return NextResponse.json(
+        { error: errorData.message || 'Failed to update bot configuration' },
+        { status: response.status }
+      );
+    }
+
+    const data = await response.json();
+    return NextResponse.json(data);
   } catch (error: any) {
     console.error("[BOT_CONFIG_PUT]", error);
     return NextResponse.json(

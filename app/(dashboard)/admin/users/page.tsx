@@ -103,6 +103,16 @@ export default function AdminUsersPage() {
   const [keepOnlineRunning, setKeepOnlineRunning] = useState(false);
   const [activeKeepOnlineJobs, setActiveKeepOnlineJobs] = useState<any[]>([]);
   const [keepOnlineJobsLoading, setKeepOnlineJobsLoading] = useState(false);
+  
+  // Bot Management States
+  const [botCount, setBotCount] = useState<string>("");
+  const [creatingBots, setCreatingBots] = useState(false);
+  const [botCreationProgress, setBotCreationProgress] = useState<{ current: number; total: number } | null>(null);
+  const [botStatistics, setBotStatistics] = useState<any>(null);
+  const [botStatisticsLoading, setBotStatisticsLoading] = useState(false);
+  const [botList, setBotList] = useState<any[]>([]);
+  const [botListLoading, setBotListLoading] = useState(false);
+  const [showBotManagement, setShowBotManagement] = useState(false);
 
   const fetchUsers = async (page: number = 1, searchQuery: string = "", role: string = "") => {
     setLoading(true);
@@ -145,6 +155,134 @@ export default function AdminUsersPage() {
   useEffect(() => {
     fetchUsers(currentPage, search, roleFilter);
   }, [currentPage, search, roleFilter]);
+
+  // Fetch bot statistics
+  const fetchBotStatistics = async () => {
+    setBotStatisticsLoading(true);
+    try {
+      const response = await fetch('/api/admin/bots/statistics');
+      if (response.ok) {
+        const data = await response.json();
+        if (data.success) {
+          setBotStatistics(data.statistics);
+        }
+      }
+    } catch (err) {
+      console.error('Error fetching bot statistics:', err);
+    } finally {
+      setBotStatisticsLoading(false);
+    }
+  };
+
+  // Fetch bot list
+  const fetchBotList = async () => {
+    setBotListLoading(true);
+    try {
+      const response = await fetch('/api/admin/bots');
+      if (response.ok) {
+        const data = await response.json();
+        if (data.success) {
+          setBotList(data.bots || []);
+        }
+      }
+    } catch (err) {
+      console.error('Error fetching bot list:', err);
+    } finally {
+      setBotListLoading(false);
+    }
+  };
+
+  // Load bot data when bot management is shown
+  useEffect(() => {
+    if (showBotManagement) {
+      fetchBotStatistics();
+      fetchBotList();
+    }
+  }, [showBotManagement]);
+
+  // Handle bulk bot creation
+  const handleCreateBotsBulk = async () => {
+    const count = parseInt(botCount);
+    if (!count || count <= 0) {
+      setError('Lütfen geçerli bir bot sayısı girin');
+      return;
+    }
+
+    if (count > 1000) {
+      setError('Bir seferde en fazla 1000 bot oluşturabilirsiniz');
+      return;
+    }
+
+    setCreatingBots(true);
+    setError(null);
+    setBotCreationProgress({ current: 0, total: count });
+
+    try {
+      const response = await fetch('/api/admin/bots', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ count }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Botlar oluşturulurken bir hata oluştu');
+      }
+
+      // Show success message
+      setRunResult({
+        processed: count,
+        successful: data.created || 0,
+        failed: count - (data.created || 0),
+        message: data.message || `${data.created} bot başarıyla oluşturuldu`,
+      });
+
+      // Reset form
+      setBotCount('');
+      setBotCreationProgress(null);
+
+      // Refresh bot list and statistics
+      await fetchBotList();
+      await fetchBotStatistics();
+      
+      // Refresh users list
+      await fetchUsers(currentPage, search, roleFilter);
+    } catch (err: any) {
+      setError(err.message || 'Bir hata oluştu');
+    } finally {
+      setCreatingBots(false);
+      setBotCreationProgress(null);
+    }
+  };
+
+  // Handle delete bot
+  const handleDeleteBot = async (botId: string) => {
+    setActionLoading(botId);
+    setError(null);
+
+    try {
+      const response = await fetch(`/api/admin/bots/${botId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || 'Bot silinirken bir hata oluştu');
+      }
+
+      // Refresh bot list and statistics
+      await fetchBotList();
+      await fetchBotStatistics();
+      
+      // Refresh users list
+      await fetchUsers(currentPage, search, roleFilter);
+    } catch (err: any) {
+      setError(err.message || 'Bir hata oluştu');
+    } finally {
+      setActionLoading(null);
+    }
+  };
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -607,6 +745,9 @@ export default function AdminUsersPage() {
     { value: "BUG_FIX", label: "Bug Fix" },
     { value: "LESSON", label: "Ders Tamamla" },
     { value: "CHAT", label: "Topluluğa Katıl" },
+    { value: "HACKATHON_APPLICATION", label: "Hackathon Başvurusu" },
+    { value: "FREELANCER_BID", label: "Freelancer Teklifi" },
+    { value: "JOB_APPLICATION", label: "İş İlanı Başvurusu" },
   ];
 
 
@@ -733,6 +874,324 @@ export default function AdminUsersPage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+        {/* Bot Management Section */}
+        <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-lg p-6 mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 flex items-center gap-2">
+                <Bot className="h-6 w-6" />
+                Bot Yönetimi
+              </h2>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                Bot kullanıcılarını oluşturun, yönetin ve izleyin
+              </p>
+            </div>
+            <Button
+              onClick={() => setShowBotManagement(!showBotManagement)}
+              variant="outline"
+            >
+              {showBotManagement ? 'Gizle' : 'Göster'}
+            </Button>
+          </div>
+
+          {showBotManagement && (
+            <div className="space-y-6">
+              {/* Bulk Bot Creation */}
+              <div className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-950/20 dark:to-indigo-950/20 rounded-xl p-6 border border-purple-200 dark:border-purple-800">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
+                  Toplu Bot Oluşturma
+                </h3>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="flex-1">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Oluşturulacak Bot Sayısı
+                    </label>
+                    <input
+                      type="number"
+                      value={botCount}
+                      onChange={(e) => setBotCount(e.target.value)}
+                      placeholder="Örn: 200"
+                      min="1"
+                      max="1000"
+                      className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                      disabled={creatingBots}
+                    />
+                  </div>
+                  <div className="flex items-end">
+                    <Button
+                      onClick={handleCreateBotsBulk}
+                      disabled={creatingBots || !botCount || parseInt(botCount) <= 0}
+                      className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+                    >
+                      {creatingBots ? (
+                        <>
+                          <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                          Oluşturuluyor...
+                        </>
+                      ) : (
+                        <>
+                          <Rocket className="h-4 w-4 mr-2" />
+                          Bot Oluştur
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                </div>
+                {botCreationProgress && (
+                  <div className="mt-4">
+                    <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400 mb-2">
+                      <span>İlerleme</span>
+                      <span>{botCreationProgress.current} / {botCreationProgress.total}</span>
+                    </div>
+                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                      <div
+                        className="bg-gradient-to-r from-purple-600 to-indigo-600 h-2 rounded-full transition-all duration-300"
+                        style={{ width: `${(botCreationProgress.current / botCreationProgress.total) * 100}%` }}
+                      />
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Bot Statistics */}
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 rounded-xl p-4 border border-blue-200 dark:border-blue-800">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">Toplam Bot</p>
+                      <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                        {botStatisticsLoading ? (
+                          <Loader2 className="h-5 w-5 animate-spin" />
+                        ) : (
+                          botStatistics?.totalBots || 0
+                        )}
+                      </p>
+                    </div>
+                    <Bot className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+                  </div>
+                </div>
+                <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20 rounded-xl p-4 border border-green-200 dark:border-green-800">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">Aktif Bot</p>
+                      <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                        {botStatisticsLoading ? (
+                          <Loader2 className="h-5 w-5 animate-spin" />
+                        ) : (
+                          botStatistics?.activeBots || 0
+                        )}
+                      </p>
+                    </div>
+                    <CheckCircle2 className="h-8 w-8 text-green-600 dark:text-green-400" />
+                  </div>
+                </div>
+                <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 rounded-xl p-4 border border-purple-200 dark:border-purple-800">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">Zamanlanmış</p>
+                      <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                        {botStatisticsLoading ? (
+                          <Loader2 className="h-5 w-5 animate-spin" />
+                        ) : (
+                          botStatistics?.scheduledBots || 0
+                        )}
+                      </p>
+                    </div>
+                    <Clock className="h-8 w-8 text-purple-600 dark:text-purple-400" />
+                  </div>
+                </div>
+                <div className="bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/20 dark:to-amber-950/20 rounded-xl p-4 border border-orange-200 dark:border-orange-800">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">Bugünkü Aktivite</p>
+                      <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                        {botStatisticsLoading ? (
+                          <Loader2 className="h-5 w-5 animate-spin" />
+                        ) : (
+                          botStatistics?.todayActivities || 0
+                        )}
+                      </p>
+                    </div>
+                    <Activity className="h-8 w-8 text-orange-600 dark:text-orange-400" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Bot List */}
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                    Bot Listesi
+                  </h3>
+                  <Button
+                    onClick={fetchBotList}
+                    variant="outline"
+                    size="sm"
+                    disabled={botListLoading}
+                  >
+                    {botListLoading ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      'Yenile'
+                    )}
+                  </Button>
+                </div>
+                {botListLoading ? (
+                  <div className="flex items-center justify-center py-8">
+                    <Loader2 className="h-6 w-6 animate-spin text-blue-600" />
+                  </div>
+                ) : botList.length === 0 ? (
+                  <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+                    Henüz bot oluşturulmamış
+                  </div>
+                ) : (
+                  <div className="overflow-x-auto">
+                    <table className="w-full">
+                      <thead>
+                        <tr className="border-b border-gray-200 dark:border-gray-700">
+                          <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700 dark:text-gray-300">Kullanıcı Adı</th>
+                          <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700 dark:text-gray-300">Email</th>
+                          <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700 dark:text-gray-300">Durum</th>
+                          <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700 dark:text-gray-300">Aktiviteler</th>
+                          <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700 dark:text-gray-300">Son Aktivite</th>
+                          <th className="text-right py-3 px-4 text-sm font-semibold text-gray-700 dark:text-gray-300">İşlemler</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {botList.map((bot: any) => (
+                          <tr key={bot.id} className="border-b border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/50">
+                            <td className="py-3 px-4 text-sm text-gray-900 dark:text-gray-100">
+                              {bot.userName || bot.firstName + ' ' + bot.lastName}
+                            </td>
+                            <td className="py-3 px-4 text-sm text-gray-600 dark:text-gray-400">
+                              {bot.email}
+                            </td>
+                            <td className="py-3 px-4">
+                              <div className="flex items-center gap-2">
+                                {bot.isActive ? (
+                                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+                                    <CheckCircle2 className="h-3 w-3 mr-1" />
+                                    Aktif
+                                  </span>
+                                ) : (
+                                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-400">
+                                    <XCircle className="h-3 w-3 mr-1" />
+                                    Pasif
+                                  </span>
+                                )}
+                                {bot.scheduleEnabled && (
+                                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400">
+                                    <Clock className="h-3 w-3 mr-1" />
+                                    Zamanlanmış
+                                  </span>
+                                )}
+                              </div>
+                            </td>
+                            <td className="py-3 px-4 text-sm text-gray-600 dark:text-gray-400">
+                              {bot.enabledActivities?.length > 0 ? (
+                                <div className="flex flex-wrap gap-1">
+                                  {bot.enabledActivities.slice(0, 3).map((activity: string, idx: number) => (
+                                    <span key={idx} className="text-xs px-2 py-0.5 bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400 rounded">
+                                      {activity}
+                                    </span>
+                                  ))}
+                                  {bot.enabledActivities.length > 3 && (
+                                    <span className="text-xs text-gray-500 dark:text-gray-400">
+                                      +{bot.enabledActivities.length - 3}
+                                    </span>
+                                  )}
+                                </div>
+                              ) : (
+                                <span className="text-gray-400 dark:text-gray-500">-</span>
+                              )}
+                            </td>
+                            <td className="py-3 px-4 text-sm text-gray-600 dark:text-gray-400">
+                              {bot.lastActivityAt ? formatDate(bot.lastActivityAt) : '-'}
+                            </td>
+                            <td className="py-3 px-4">
+                              <div className="flex items-center justify-end gap-2">
+                                <Button
+                                  onClick={async () => {
+                                    // Fetch bot configuration from backend
+                                    try {
+                                      const configResponse = await fetch(`/api/admin/bots/${bot.id}/config`);
+                                      if (configResponse.ok) {
+                                        const configData = await configResponse.json();
+                                        // Create a user-like object for the modal
+                                        const botUser: User = {
+                                          id: bot.id,
+                                          name: bot.userName || `${bot.firstName || ''} ${bot.lastName || ''}`.trim() || 'Bot',
+                                          email: bot.email,
+                                          role: 'candidate',
+                                          profileImage: null,
+                                          isBot: true,
+                                          createdAt: '',
+                                          updatedAt: '',
+                                          botCharacter: null,
+                                          botConfiguration: configData.success && configData.config ? {
+                                            id: configData.config.userId,
+                                            isActive: configData.config.isActive || false,
+                                            minPostsPerDay: configData.config.minPostsPerDay || 0,
+                                            maxPostsPerDay: configData.config.maxPostsPerDay || 0,
+                                            minCommentsPerDay: configData.config.minCommentsPerDay || 0,
+                                            maxCommentsPerDay: configData.config.maxCommentsPerDay || 0,
+                                            minLikesPerDay: configData.config.minLikesPerDay || 0,
+                                            maxLikesPerDay: configData.config.maxLikesPerDay || 0,
+                                            minTestsPerWeek: 0,
+                                            maxTestsPerWeek: 0,
+                                            minLiveCodingPerWeek: 0,
+                                            maxLiveCodingPerWeek: 0,
+                                            minBugFixPerWeek: 0,
+                                            maxBugFixPerWeek: 0,
+                                            minLessonsPerWeek: 0,
+                                            maxLessonsPerWeek: 0,
+                                            minChatMessagesPerDay: 0,
+                                            maxChatMessagesPerDay: 0,
+                                            activityHours: configData.config.activityHours || [],
+                                            lastActivityAt: configData.config.lastActivityAt || null,
+                                          } : null,
+                                        };
+                                        setSelectedUser(botUser);
+                                        setBotConfigModalOpen(true);
+                                      } else {
+                                        setError('Bot konfigürasyonu alınamadı');
+                                      }
+                                    } catch (err) {
+                                      console.error('Error fetching bot config:', err);
+                                      setError('Bot konfigürasyonu alınırken hata oluştu');
+                                    }
+                                  }}
+                                  variant="outline"
+                                  size="sm"
+                                >
+                                  <Settings className="h-4 w-4" />
+                                </Button>
+                                <Button
+                                  onClick={() => handleDeleteBot(bot.id)}
+                                  variant="outline"
+                                  size="sm"
+                                  disabled={actionLoading === bot.id}
+                                  className="border-red-300 text-red-600 hover:bg-red-50 dark:border-red-800 dark:text-red-400 dark:hover:bg-red-950/30"
+                                >
+                                  {actionLoading === bot.id ? (
+                                    <Loader2 className="h-4 w-4 animate-spin" />
+                                  ) : (
+                                    <Trash2 className="h-4 w-4" />
+                                  )}
+                                </Button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+
         {/* Filters */}
         <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-lg p-6 mb-6">
           <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-4">

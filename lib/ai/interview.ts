@@ -241,7 +241,7 @@ const buildInterviewAnalysisPrompt = ({
   transcript: string;
   interviewTitle?: string;
 }) => `
-Bir mülakat performansını analiz et. Aşağıdaki kriterlere göre değerlendirme yap.
+Sen 15+ yıl deneyimli bir senior developer ve işe alım uzmanısın. Mülakat performansını gerçekçi, sert ve objektif bir şekilde değerlendiriyorsun. Hoşgörülü değilsin - adayın gerçekten bilip bilmediğini tespit ediyorsun.
 
 Mülakat Başlığı: ${interviewTitle ?? "Bilinmiyor"}
 Transkript:
@@ -249,18 +249,60 @@ Transkript:
 ${transcript}
 """
 
-Analiz Kuralları:
-1. Adayı dört başlıkta (akıcılık, içerik, profesyonellik, cevap uygunluğu) 0-100 arasında puanla.
-2. En az üç güçlü yön ve en az üç gelişim alanı belirle.
-3. Adayın hemen uygulayabileceği somut aksiyon maddeleri öner (en az 2-3 adet).
-4. Genel bir özet paragrafı hazırla (2-3 cümle).
-5. Tonun yapıcı, destekleyici ve örnekli olsun.
+KRİTİK ANALİZ KURALLARI (SENİOR DEVELOPER PERSPEKTİFİ):
+1. Adayı dört başlıkta (akıcılık, içerik, profesyonellik, cevap uygunluğu) 0-100 arasında SERT bir şekilde puanla.
+   - Yüzeysel, belirsiz veya ezberlenmiş cevapları düşük puanla
+   - Sadece doğru ve derinlemesine cevapları yüksek puanla
+   - Teknik hataları ve eksiklikleri acımasızca belirt
 
-Puanlama Kriterleri:
-- Akıcılık (fluency): Konuşma akıcılığı, duraksamalar, kelime seçimi
-- İçerik (content): Cevabın derinliği, teknik doğruluk, örnekler
-- Profesyonellik (professionalism): Dil kullanımı, saygı, özgüven
-- Cevap Uygunluğu (relevance): Soruya uygunluk, konu dışına çıkmama
+2. Gerçek bilgi tespiti yap:
+   - Adayın gerçekten konuyu bilip bilmediğini tespit et
+   - Ezberlenmiş, yüzeysel veya belirsiz cevapları düşük puanla
+   - Somut örnekler, teknik detaylar ve pratik uygulamalar iste
+   - "Bilmiyorum" demek, yanlış bilgi vermekten daha iyidir
+
+3. En az üç güçlü yön ve en az üç gelişim alanı belirle (gerçekçi ve sert):
+   - Güçlü yönler gerçekten güçlü olmalı, zayıf yönler gerçekten zayıf olmalı
+   - Yapıcı ama sert geri bildirim ver
+
+4. Adayın hemen uygulayabileceği somut aksiyon maddeleri öner (en az 2-3 adet):
+   - Aksiyonlar gerçekçi ve uygulanabilir olmalı
+   - Teknik eksiklikleri kapatmak için spesifik öneriler
+
+5. Genel bir özet paragrafı hazırla (2-3 cümle):
+   - Sert, gerçekçi ve objektif ol
+   - Adayın gerçek seviyesini net bir şekilde belirt
+
+SERT PUANLAMA KRİTERLERİ (SENİOR DEVELOPER STANDARTLARI):
+- Akıcılık (fluency): 
+  * 90-100: Mükemmel akıcılık, profesyonel dil kullanımı
+  * 70-89: İyi akıcılık, küçük duraksamalar
+  * 50-69: Orta akıcılık, sık duraksamalar
+  * 0-49: Zayıf akıcılık, çok fazla duraksama, belirsizlik
+
+- İçerik (content): 
+  * 90-100: Derinlemesine teknik bilgi, somut örnekler, pratik uygulamalar
+  * 70-89: İyi teknik bilgi, bazı örnekler
+  * 50-69: Yüzeysel bilgi, az örnek, belirsizlikler
+  * 0-49: Zayıf bilgi, yanlış bilgiler, ezberlenmiş cevaplar
+
+- Profesyonellik (professionalism): 
+  * 90-100: Mükemmel profesyonellik, özgüven, saygılı dil
+  * 70-89: İyi profesyonellik
+  * 50-69: Orta profesyonellik
+  * 0-49: Zayıf profesyonellik
+
+- Cevap Uygunluğu (relevance): 
+  * 90-100: Soruya tam uygun, konu dışına çıkmama
+  * 70-89: Soruya genel olarak uygun
+  * 50-69: Kısmen uygun, bazı konu dışına çıkmalar
+  * 0-49: Soruya uygun değil, çok fazla konu dışına çıkma
+
+ÖNEMLİ: 
+- Yüzeysel, belirsiz veya ezberlenmiş cevapları düşük puanla
+- Sadece gerçekten doğru ve derinlemesine cevapları yüksek puanla
+- Teknik hataları ve eksiklikleri acımasızca belirt
+- Adayın gerçek seviyesini objektif bir şekilde değerlendir
 
 JSON formatında yanıt ver (schema'ya uygun olmalı).
 `;
@@ -510,7 +552,7 @@ const analyzeQuestionCorrectness = async ({
     const typeSpecificGuidance = getPromptByType(type);
 
     const prompt = `
-Bir mülakat sorusuna verilen cevabı analiz et ve doğruluğunu değerlendir.
+Sen 15+ yıl deneyimli bir senior developer ve işe alım uzmanısın. Bir mülakat sorusuna verilen cevabı SERT, GERÇEKÇİ ve OBJEKTİF bir şekilde analiz et.
 
 Soru:
 """
@@ -525,18 +567,41 @@ Adayın Cevabı (Transkript):
 ${answerTranscript}
 """
 
-Değerlendirme Kriterleri:
+SERT DEĞERLENDİRME KRİTERLERİ (SENİOR DEVELOPER STANDARTLARI):
 1. Cevap soruya doğrudan ve uygun şekilde yanıt veriyor mu?
+   - Konu dışına çıkma, soruyu anlamama durumlarını düşük puanla
+
 2. Cevap teknik olarak doğru mu? (teknik sorular için)
+   - Teknik hataları acımasızca belirt
+   - Yanlış bilgileri düşük puanla
+   - Sadece tam doğru cevapları yüksek puanla
+
 3. Cevap yeterince detaylı ve örnekler içeriyor mu?
+   - Yüzeysel, belirsiz veya ezberlenmiş cevapları düşük puanla
+   - Somut örnekler, teknik detaylar ve pratik uygulamalar iste
+   - "Bilmiyorum" demek, yanlış bilgi vermekten daha iyidir
+
 4. Cevap profesyonel ve yapılandırılmış mı?
+   - Dağınık, belirsiz cevapları düşük puanla
+
+5. GERÇEK BİLGİ TESPİTİ:
+   - Adayın gerçekten konuyu bilip bilmediğini tespit et
+   - Ezberlenmiş cevapları düşük puanla
+   - Derinlemesine bilgi gerektiren sorularda yüzeysel cevapları reddet
+
+PUANLAMA (SERT):
+- 90-100: Mükemmel - Derinlemesine bilgi, somut örnekler, teknik doğruluk
+- 70-89: İyi - İyi bilgi, bazı örnekler, küçük eksiklikler
+- 50-69: Orta - Yüzeysel bilgi, az örnek, belirsizlikler
+- 30-49: Zayıf - Yanlış bilgiler, çok yüzeysel, ezberlenmiş cevaplar
+- 0-29: Çok Zayıf - Soruya uygun değil, yanlış bilgiler, konu dışı
 
 JSON formatında yanıt ver:
 {
   "correct": true/false,
-  "score": 0-100 arası puan,
-  "feedback": "Kısa geri bildirim (2-3 cümle)",
-  "details": "Detaylı açıklama (opsiyonel)"
+  "score": 0-100 arası puan (SERT puanlama),
+  "feedback": "Sert ve gerçekçi geri bildirim (2-3 cümle)",
+  "details": "Detaylı açıklama - teknik hatalar, eksiklikler, güçlü yönler"
 }
 `;
 
@@ -546,7 +611,7 @@ JSON formatında yanıt ver:
         {
           role: "system",
           content:
-            "Sen bir mülakat değerlendirme uzmanısın. Sorulara verilen cevapların doğruluğunu ve kalitesini objektif olarak değerlendiriyorsun. Her zaman JSON formatında yanıt ver.",
+            "Sen 15+ yıl deneyimli bir senior developer ve işe alım uzmanısın. Sorulara verilen cevapların doğruluğunu ve kalitesini SERT, GERÇEKÇİ ve OBJEKTİF bir şekilde değerlendiriyorsun. Hoşgörülü değilsin - adayın gerçekten bilip bilmediğini tespit ediyorsun. Yüzeysel, belirsiz veya ezberlenmiş cevapları düşük puanlıyorsun. Her zaman JSON formatında yanıt ver.",
         },
         {
           role: "user",
@@ -702,7 +767,7 @@ export async function analyzeInterview({
           {
             role: "system",
             content:
-              "Sen bir mülakat değerlendirme uzmanısın. Kullanıcıların mülakat performanslarını analiz edip yapıcı geri bildirim veriyorsun. Her zaman JSON formatında yanıt ver.",
+              "Sen 15+ yıl deneyimli bir senior developer ve işe alım uzmanısın. Mülakat performanslarını SERT, GERÇEKÇİ ve OBJEKTİF bir şekilde analiz ediyorsun. Hoşgörülü değilsin - adayın gerçekten bilip bilmediğini tespit ediyorsun. Yüzeysel, belirsiz veya ezberlenmiş cevapları düşük puanlıyorsun. Teknik hataları ve eksiklikleri acımasızca belirtiyorsun. Her zaman JSON formatında yanıt ver.",
           },
           {
             role: "user",

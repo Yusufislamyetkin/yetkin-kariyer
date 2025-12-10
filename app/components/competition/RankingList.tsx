@@ -95,13 +95,10 @@ export function RankingList({ entries, currentUserId }: RankingListProps) {
                       <div className="space-y-1">
                         <div className="flex items-center gap-2">
                           <h3 className="truncate text-lg font-semibold text-gray-900 transition-colors group-hover:text-blue-600 dark:text-gray-100 dark:group-hover:text-blue-300">
-                            {entry.user.name || entry.user.email}
+                            {entry.user.name || "İsimsiz Kullanıcı"}
                           </h3>
                           <ArrowUpRight className="h-4 w-4 text-gray-400 transition-colors group-hover:text-blue-500" />
                         </div>
-                        <p className="truncate text-xs font-medium text-gray-500 dark:text-gray-400">
-                          {entry.user.email}
-                        </p>
                         <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 dark:text-gray-500">
                           #{entry.rank}
                         </p>

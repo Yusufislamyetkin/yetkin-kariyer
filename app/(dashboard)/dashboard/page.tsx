@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import Link from "next/link";
 import {
   BookOpen,
@@ -144,32 +144,66 @@ export default function DashboardPage() {
       });
       
       if (!response.ok) {
-        throw new Error("Failed to fetch dashboard data");
+        const errorData = await response.json().catch(() => ({ error: "Unknown error" }));
+        throw new Error(errorData.error || `Failed to fetch dashboard data: ${response.status}`);
       }
 
       const data = await response.json();
 
-      // Process stats
+      // Process stats - ensure all values are properly set
       if (data.stats) {
-        setStats(data.stats);
-        if (data.stats.completedTopics !== undefined) {
-          setCompletedTopics(data.stats.completedTopics);
-        }
-        if (data.stats.participatedHackathons !== undefined) {
-          setParticipatedHackathons(data.stats.participatedHackathons);
-        }
+        // Set stats with all values, ensuring defaults for missing fields
+        const processedStats: DashboardStats = {
+          quizAttempts: data.stats.quizAttempts ?? 0,
+          testAttempts: data.stats.testAttempts ?? 0,
+          interviewAttempts: data.stats.interviewAttempts ?? 0,
+          cvs: data.stats.cvs ?? 0,
+          applications: data.stats.applications ?? 0,
+          averageQuizScore: data.stats.averageQuizScore ?? 0,
+          averageInterviewScore: data.stats.averageInterviewScore ?? 0,
+          completedTopics: data.stats.completedTopics ?? 0,
+          participatedHackathons: data.stats.participatedHackathons ?? 0,
+          socialInteractions: data.stats.socialInteractions ?? 0,
+          communityContributions: data.stats.communityContributions ?? 0,
+        };
+        setStats(processedStats);
+        
+        // Also update separate state for backward compatibility
+        setCompletedTopics(processedStats.completedTopics ?? 0);
+        setParticipatedHackathons(processedStats.participatedHackathons ?? 0);
+      } else {
+        // If stats is missing, set defaults
+        setStats({
+          quizAttempts: 0,
+          testAttempts: 0,
+          interviewAttempts: 0,
+          cvs: 0,
+          applications: 0,
+          averageQuizScore: 0,
+          averageInterviewScore: 0,
+          completedTopics: 0,
+          participatedHackathons: 0,
+          socialInteractions: 0,
+          communityContributions: 0,
+        });
+        setCompletedTopics(0);
+        setParticipatedHackathons(0);
       }
       setStatsLoading(false);
 
       // Process badges
       if (data.badges) {
         setBadges(data.badges || []);
+      } else {
+        setBadges([]);
       }
       setBadgesLoading(false);
 
       // Process earnings
       if (data.earnings) {
-        setTotalEarnings(data.earnings.total || 0);
+        setTotalEarnings(data.earnings.total ?? 0);
+      } else {
+        setTotalEarnings(0);
       }
       setEarningsLoading(false);
 
@@ -191,6 +225,22 @@ export default function DashboardPage() {
       setBadgesLoading(false);
       setEarningsLoading(false);
       setStrikeLoading(false);
+      
+      // Set default values on error to prevent showing 0 incorrectly
+      // Keep existing values if available, otherwise set defaults
+      setStats((prev) => prev || {
+        quizAttempts: 0,
+        testAttempts: 0,
+        interviewAttempts: 0,
+        cvs: 0,
+        applications: 0,
+        averageQuizScore: 0,
+        averageInterviewScore: 0,
+        completedTopics: 0,
+        participatedHackathons: 0,
+        socialInteractions: 0,
+        communityContributions: 0,
+      });
     }
   };
 
@@ -388,10 +438,11 @@ export default function DashboardPage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
-  const statCards = [
+  // Memoize statCards to ensure consistent values and prevent unnecessary re-renders
+  const statCards = useMemo(() => [
     {
       title: "Test",
-      value: stats?.testAttempts || 0,
+      value: stats?.testAttempts ?? 0,
       icon: BookOpen,
       color: "from-blue-500 to-cyan-500",
       bgColor: "bg-blue-50 dark:bg-blue-900/20",
@@ -399,7 +450,7 @@ export default function DashboardPage() {
     },
     {
       title: "Ders",
-      value: completedTopics,
+      value: stats?.completedTopics ?? completedTopics ?? 0,
       icon: GraduationCap,
       color: "from-green-500 to-emerald-500",
       bgColor: "bg-green-50 dark:bg-green-900/20",
@@ -407,7 +458,7 @@ export default function DashboardPage() {
     },
     {
       title: "Sosyal Etkileşim",
-      value: stats?.socialInteractions || 0,
+      value: stats?.socialInteractions ?? 0,
       icon: MessageCircle,
       color: "from-purple-500 to-pink-500",
       bgColor: "bg-purple-50 dark:bg-purple-900/20",
@@ -415,13 +466,13 @@ export default function DashboardPage() {
     },
     {
       title: "Topluluğa Katkı",
-      value: stats?.communityContributions || 0,
+      value: stats?.communityContributions ?? 0,
       icon: Users,
       color: "from-orange-500 to-red-500",
       bgColor: "bg-orange-50 dark:bg-orange-900/20",
       textColor: "text-orange-600 dark:text-orange-400",
     },
-  ];
+  ], [stats, completedTopics]);
 
   const quickActions = [
     {

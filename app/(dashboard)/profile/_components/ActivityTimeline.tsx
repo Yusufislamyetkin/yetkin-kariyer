@@ -103,6 +103,27 @@ export function ActivityTimeline({ activities, title = "Son Aktiviteler", header
               const isEmoji = activity.icon && /[\u{1F300}-\u{1F9FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/u.test(activity.icon);
               const profileUrl = activity.userId ? `/profile/${activity.userId}` : null;
 
+              // Helper function to extract description from title when user exists
+              const getActivityDescription = (title: string, userName: string | null): string => {
+                if (!userName) return title;
+                
+                // Check if title starts with the username (for non-own activities)
+                const trimmedTitle = title.trim();
+                const trimmedUserName = userName.trim();
+                
+                if (trimmedTitle.startsWith(trimmedUserName)) {
+                  // Remove username and any following space from the beginning
+                  return trimmedTitle.substring(trimmedUserName.length).trim();
+                }
+                
+                // If title doesn't start with username, return as is (for own activities)
+                return title;
+              };
+
+              const activityDescription = activity.user 
+                ? getActivityDescription(activity.title, activity.user.name)
+                : activity.title;
+
               return (
                 <div key={activity.id} className="relative flex gap-4">
                   {/* Timeline dot - Profile Image */}
@@ -146,7 +167,15 @@ export function ActivityTimeline({ activities, title = "Son Aktiviteler", header
                           <div className="flex items-start justify-between gap-4">
                             <div className="flex-1">
                               <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-1">
-                                {activity.title}
+                                {activity.user ? (
+                                  <>
+                                    <span className="font-bold">{activity.user.name}</span>
+                                    <span> : </span>
+                                    <span>{activityDescription}</span>
+                                  </>
+                                ) : (
+                                  activity.title
+                                )}
                               </p>
                               {activity.score !== undefined && (
                                 <p className="text-xs text-gray-600 dark:text-gray-400">
@@ -166,13 +195,30 @@ export function ActivityTimeline({ activities, title = "Son Aktiviteler", header
                         <div className="flex items-start justify-between gap-4">
                           <div className="flex-1">
                             <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-1">
-                              {activity.type === "badge" ? (
-                                activity.title
-                              ) : (
+                              {activity.user ? (
                                 <>
-                                  <span className="mr-2">{activity.icon}</span>
-                                  {activity.title}
+                                  <span className="font-bold">{activity.user.name}</span>
+                                  <span> : </span>
+                                  <span>
+                                    {activity.type === "badge" ? (
+                                      activityDescription
+                                    ) : (
+                                      <>
+                                        <span className="mr-2">{activity.icon}</span>
+                                        {activityDescription}
+                                      </>
+                                    )}
+                                  </span>
                                 </>
+                              ) : (
+                                activity.type === "badge" ? (
+                                  activity.title
+                                ) : (
+                                  <>
+                                    <span className="mr-2">{activity.icon}</span>
+                                    {activity.title}
+                                  </>
+                                )
                               )}
                             </p>
                             {activity.score !== undefined && (
