@@ -209,19 +209,23 @@ const resolveMediaRecorderOptions = (): MediaRecorderOptions | undefined => {
     return undefined;
   }
 
-  if (MediaRecorder.isTypeSupported("video/webm;codecs=vp9")) {
-    return { mimeType: "video/webm;codecs=vp9" };
+  // Firefox ve diğer tarayıcılar için codec kontrolleri
+  const codecs = [
+    "video/webm;codecs=vp9",
+    "video/webm;codecs=vp8",
+    "video/webm",
+    "video/mp4", // Bazı tarayıcılar için fallback
+  ];
+
+  for (const codec of codecs) {
+    if (MediaRecorder.isTypeSupported(codec)) {
+      return { mimeType: codec };
+    }
   }
 
-  if (MediaRecorder.isTypeSupported("video/webm;codecs=vp8")) {
-    return { mimeType: "video/webm;codecs=vp8" };
-  }
-
-  if (MediaRecorder.isTypeSupported("video/webm")) {
-    return { mimeType: "video/webm" };
-  }
-
-  return undefined;
+  // Hiçbir codec desteklenmiyorsa, tarayıcının varsayılanını kullan
+  // MediaRecorder codec belirtmeden de çalışabilir
+  return {};
 };
 
 export default function InterviewRoomPage() {
@@ -562,6 +566,16 @@ export default function InterviewRoomPage() {
     }
 
     try {
+      // MediaRecorder desteğini kontrol et
+      if (typeof MediaRecorder === "undefined") {
+        const browserName = navigator.userAgent.includes("Chrome") ? "Chrome" :
+                           navigator.userAgent.includes("Firefox") ? "Firefox" :
+                           navigator.userAgent.includes("Safari") ? "Safari" :
+                           navigator.userAgent.includes("Edge") ? "Edge" : "tarayıcınız";
+        setWarning(`Video kaydı ${browserName} tarayıcınızda desteklenmiyor. Lütfen Chrome, Firefox veya Edge kullanın.`);
+        return;
+      }
+
       uploadedCameraUrlRef.current = null;
       uploadedScreenUrlRef.current = null;
       cameraChunksRef.current = [];
@@ -571,8 +585,23 @@ export default function InterviewRoomPage() {
 
       const mediaRecorderOptions = resolveMediaRecorderOptions();
 
-      const cameraRecorder = new MediaRecorder(mediaStreamRef.current, mediaRecorderOptions);
-      const screenRecorder = new MediaRecorder(screenStream, mediaRecorderOptions);
+      // MediaRecorder'ı codec belirtmeden de dene (tarayıcı varsayılanını kullan)
+      let cameraRecorder: MediaRecorder;
+      let screenRecorder: MediaRecorder;
+      
+      try {
+        cameraRecorder = new MediaRecorder(mediaStreamRef.current, mediaRecorderOptions);
+        screenRecorder = new MediaRecorder(screenStream, mediaRecorderOptions);
+      } catch (recorderError: any) {
+        // Eğer codec ile başarısız olursa, codec belirtmeden dene
+        if (recorderError.name === "NotSupportedError" || recorderError.name === "InvalidStateError") {
+          console.warn("Codec ile kayıt başlatılamadı, varsayılan codec deneniyor...");
+          cameraRecorder = new MediaRecorder(mediaStreamRef.current);
+          screenRecorder = new MediaRecorder(screenStream);
+        } else {
+          throw recorderError;
+        }
+      }
 
       cameraRecorder.ondataavailable = (event) => {
         if (event.data && event.data.size > 0) {
@@ -632,13 +661,23 @@ export default function InterviewRoomPage() {
       
       let errorMessage = "Video kaydı başlatılamadı. ";
       
+      // Tarayıcı tespiti
+      const browserName = navigator.userAgent.includes("Chrome") ? "Chrome" :
+                         navigator.userAgent.includes("Firefox") ? "Firefox" :
+                         navigator.userAgent.includes("Safari") ? "Safari" :
+                         navigator.userAgent.includes("Edge") ? "Edge" : "tarayıcınız";
+      
       // MediaRecorder hatalarını kontrol et
       if (error.name === "InvalidStateError") {
         errorMessage += "Kayıt cihazı hazır değil. Lütfen kamera ve ekran paylaşımını kontrol edip tekrar deneyin.";
       } else if (error.name === "NotSupportedError") {
-        errorMessage += "Tarayıcınız video kaydını desteklemiyor. Lütfen Chrome, Firefox veya Edge kullanın.";
+        if (browserName === "Firefox") {
+          errorMessage += `${browserName} tarayıcınızda video kaydı destekleniyor ancak bir sorun oluştu. Lütfen: 1) Tarayıcınızı en güncel sürüme güncelleyin, 2) Sayfayı yenileyin, 3) Kamera ve ekran paylaşımı izinlerini kontrol edin.`;
+        } else {
+          errorMessage += `${browserName} tarayıcınızda video kaydı desteklenmiyor olabilir. Lütfen Chrome, Firefox veya Edge kullanın.`;
+        }
       } else if (error.message?.includes("MediaRecorder")) {
-        errorMessage += "Video kayıt formatı desteklenmiyor. Lütfen tarayıcınızı güncelleyin.";
+        errorMessage += "Video kayıt formatı desteklenmiyor. Lütfen tarayıcınızı güncelleyin veya farklı bir tarayıcı deneyin.";
       } else {
         errorMessage += `Hata: ${error.message || "Bilinmeyen hata"}. Lütfen sayfayı yenileyip tekrar deneyin.`;
       }
@@ -1413,6 +1452,22 @@ export default function InterviewRoomPage() {
                   </p>
                 </div>
               )}
+              {question?.type === "behavioral" && (
+                <div className="mb-4 rounded-lg border border-purple-500/40 bg-purple-500/10 px-4 py-3">
+                  <p className="text-sm font-semibold text-purple-200 mb-2">
+                    ⭐ STAR Metodu ile Cevap Verin
+                  </p>
+                  <p className="text-sm text-purple-100/90 leading-relaxed">
+                    Bu davranışsal soruya cevap verirken <strong>STAR metodunu</strong> kullanmanız önerilir:
+                  </p>
+                  <ul className="mt-2 space-y-1 text-sm text-purple-100/90 list-disc list-inside">
+                    <li><strong>Situation (Durum):</strong> Olayın geçtiği durumu ve bağlamı açıklayın</li>
+                    <li><strong>Task (Görev):</strong> Sizin sorumluluğunuzdaki görevi veya hedefi belirtin</li>
+                    <li><strong>Action (Aksiyon):</strong> Durumu çözmek veya görevi tamamlamak için aldığınız somut adımları detaylandırın</li>
+                    <li><strong>Result (Sonuç):</strong> Eylemlerinizin sonuçlarını ve öğrendiklerinizi paylaşın</li>
+                  </ul>
+                </div>
+              )}
               <div className="flex items-start justify-between gap-4">
                 <p className="text-xl md:text-2xl font-medium text-gray-100 leading-relaxed flex-1">
                   {question?.question ?? question?.prompt ?? "Soru yükleniyor..."}
@@ -1454,7 +1509,7 @@ export default function InterviewRoomPage() {
 
             {renderQuestionInteraction(question)}
 
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap gap-3 items-center">
               <button
                 type="button"
                 onClick={handlePrevQuestion}
@@ -1470,6 +1525,19 @@ export default function InterviewRoomPage() {
                 className="rounded-lg border border-blue-500/40 px-5 py-2 text-sm font-medium text-blue-200 transition hover:border-blue-400 hover:text-blue-100 disabled:cursor-not-allowed disabled:opacity-40"
               >
                 Sonraki
+              </button>
+              <div className="flex-1" />
+              <button
+                type="button"
+                onClick={handleFinish}
+                disabled={submitting}
+                className={`rounded-lg px-5 py-2 text-sm font-semibold text-white transition disabled:cursor-not-allowed disabled:opacity-60 ${
+                  currentQuestion === interview.questions.length - 1
+                    ? "bg-green-600 hover:bg-green-700 shadow-lg shadow-green-500/20"
+                    : "bg-gray-700 hover:bg-gray-600"
+                }`}
+              >
+                {submitting ? "Gönderiliyor..." : currentQuestion === interview.questions.length - 1 ? "✓ Mülakatı Bitir" : "Mülakatı Bitir"}
               </button>
             </div>
           </div>

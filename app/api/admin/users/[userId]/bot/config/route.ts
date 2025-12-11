@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-
-const BACKEND_API_URL = process.env.BACKEND_API_URL || 'https://softwareinterview.tryasp.net';
+import { db } from "@/lib/db";
 
 export async function GET(
   request: Request,
@@ -19,25 +18,35 @@ export async function GET(
 
     const userId = params.userId;
 
-    // Call CursorInterviewer backend API
-    const response = await fetch(`${BACKEND_API_URL}/Admin/GetBotConfiguration?userId=${userId}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
+    // Get bot configuration from Supabase
+    const botConfig = await db.botConfiguration.findUnique({
+      where: { userId },
+    });
+
+    const botCharacter = await db.botCharacter.findUnique({
+      where: { userId },
+      select: {
+        id: true,
+        name: true,
+        persona: true,
+        systemPrompt: true,
+        traits: true,
+        expertise: true,
       },
     });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('[BOT_CONFIG_GET] Backend error:', errorText);
+    if (!botConfig) {
       return NextResponse.json(
-        { error: 'Failed to fetch bot configuration from backend' },
-        { status: response.status }
+        { error: "Bot yapılandırması bulunamadı" },
+        { status: 404 }
       );
     }
 
-    const data = await response.json();
-    return NextResponse.json(data);
+    return NextResponse.json({
+      success: true,
+      botConfiguration: botConfig,
+      botCharacter: botCharacter || null,
+    });
   } catch (error: any) {
     console.error("[BOT_CONFIG_GET]", error);
     return NextResponse.json(
@@ -64,55 +73,76 @@ export async function PUT(
     const userId = params.userId;
     const body = await request.json();
 
-    // Map Next.js format to CursorInterviewer format
-    const updateRequest: any = {
-      userId: userId,
-    };
-
-    if (body.configuration) {
-      updateRequest.IsActive = body.configuration.isActive;
-      updateRequest.MinPostsPerDay = body.configuration.minPostsPerDay;
-      updateRequest.MaxPostsPerDay = body.configuration.maxPostsPerDay;
-      updateRequest.MinCommentsPerDay = body.configuration.minCommentsPerDay;
-      updateRequest.MaxCommentsPerDay = body.configuration.maxCommentsPerDay;
-      updateRequest.MinLikesPerDay = body.configuration.minLikesPerDay;
-      updateRequest.MaxLikesPerDay = body.configuration.maxLikesPerDay;
-      updateRequest.ActivityHours = body.configuration.activityHours;
-      updateRequest.ScheduleEnabled = body.configuration.scheduleEnabled;
-    }
-
-    // Also handle direct properties from BotConfigModal
-    if (body.isActive !== undefined) updateRequest.IsActive = body.isActive;
-    if (body.minPostsPerDay !== undefined) updateRequest.MinPostsPerDay = body.minPostsPerDay;
-    if (body.maxPostsPerDay !== undefined) updateRequest.MaxPostsPerDay = body.maxPostsPerDay;
-    if (body.minCommentsPerDay !== undefined) updateRequest.MinCommentsPerDay = body.minCommentsPerDay;
-    if (body.maxCommentsPerDay !== undefined) updateRequest.MaxCommentsPerDay = body.maxCommentsPerDay;
-    if (body.minLikesPerDay !== undefined) updateRequest.MinLikesPerDay = body.minLikesPerDay;
-    if (body.maxLikesPerDay !== undefined) updateRequest.MaxLikesPerDay = body.maxLikesPerDay;
-    if (body.activityHours) updateRequest.ActivityHours = body.activityHours;
-    if (body.enabledActivities) updateRequest.EnabledActivities = body.enabledActivities;
-    if (body.activityIntervals) updateRequest.ActivityIntervals = body.activityIntervals;
-    if (body.scheduleEnabled !== undefined) updateRequest.ScheduleEnabled = body.scheduleEnabled;
-
-    // Call CursorInterviewer backend API
-    const response = await fetch(`${BACKEND_API_URL}/Admin/UpdateBotConfiguration`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(updateRequest),
+    // Check if user exists and is a bot
+    const user = await db.user.findUnique({
+      where: { id: userId },
     });
 
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({ message: 'Unknown error' }));
+    if (!user) {
       return NextResponse.json(
-        { error: errorData.message || 'Failed to update bot configuration' },
-        { status: response.status }
+        { error: "Kullanıcı bulunamadı" },
+        { status: 404 }
       );
     }
 
-    const data = await response.json();
-    return NextResponse.json(data);
+    if (!user.isBot) {
+      return NextResponse.json(
+        { error: "Bu kullanıcı bot değil" },
+        { status: 400 }
+      );
+    }
+
+    // Map request body to update data
+    const configData = body.configuration || body;
+    const updateData: any = {};
+
+    if (configData.isActive !== undefined) updateData.isActive = configData.isActive;
+    if (configData.minPostsPerDay !== undefined) updateData.minPostsPerDay = configData.minPostsPerDay;
+    if (configData.maxPostsPerDay !== undefined) updateData.maxPostsPerDay = configData.maxPostsPerDay;
+    if (configData.minCommentsPerDay !== undefined) updateData.minCommentsPerDay = configData.minCommentsPerDay;
+    if (configData.maxCommentsPerDay !== undefined) updateData.maxCommentsPerDay = configData.maxCommentsPerDay;
+    if (configData.minLikesPerDay !== undefined) updateData.minLikesPerDay = configData.minLikesPerDay;
+    if (configData.maxLikesPerDay !== undefined) updateData.maxLikesPerDay = configData.maxLikesPerDay;
+    if (configData.minTestsPerWeek !== undefined) updateData.minTestsPerWeek = configData.minTestsPerWeek;
+    if (configData.maxTestsPerWeek !== undefined) updateData.maxTestsPerWeek = configData.maxTestsPerWeek;
+    if (configData.minLiveCodingPerWeek !== undefined) updateData.minLiveCodingPerWeek = configData.minLiveCodingPerWeek;
+    if (configData.maxLiveCodingPerWeek !== undefined) updateData.maxLiveCodingPerWeek = configData.maxLiveCodingPerWeek;
+    if (configData.minBugFixPerWeek !== undefined) updateData.minBugFixPerWeek = configData.minBugFixPerWeek;
+    if (configData.maxBugFixPerWeek !== undefined) updateData.maxBugFixPerWeek = configData.maxBugFixPerWeek;
+    if (configData.minLessonsPerWeek !== undefined) updateData.minLessonsPerWeek = configData.minLessonsPerWeek;
+    if (configData.maxLessonsPerWeek !== undefined) updateData.maxLessonsPerWeek = configData.maxLessonsPerWeek;
+    if (configData.minChatMessagesPerDay !== undefined) updateData.minChatMessagesPerDay = configData.minChatMessagesPerDay;
+    if (configData.maxChatMessagesPerDay !== undefined) updateData.maxChatMessagesPerDay = configData.maxChatMessagesPerDay;
+    if (configData.activityHours) updateData.activityHours = configData.activityHours;
+    if (configData.enabledActivities) updateData.enabledActivities = configData.enabledActivities;
+    if (configData.scheduleEnabled !== undefined) updateData.scheduleEnabled = configData.scheduleEnabled;
+    if (configData.activityIntervals) updateData.activityIntervals = configData.activityIntervals;
+
+    // Update bot configuration in Supabase
+    const botConfig = await db.botConfiguration.upsert({
+      where: { userId },
+      update: updateData,
+      create: {
+        userId,
+        isActive: configData.isActive !== undefined ? configData.isActive : true,
+        minPostsPerDay: configData.minPostsPerDay ?? 1,
+        maxPostsPerDay: configData.maxPostsPerDay ?? 3,
+        minCommentsPerDay: configData.minCommentsPerDay ?? 0,
+        maxCommentsPerDay: configData.maxCommentsPerDay ?? 5,
+        minLikesPerDay: configData.minLikesPerDay ?? 0,
+        maxLikesPerDay: configData.maxLikesPerDay ?? 10,
+        activityHours: configData.activityHours || [9, 12, 18, 21],
+        enabledActivities: configData.enabledActivities || [],
+        scheduleEnabled: configData.scheduleEnabled ?? false,
+        activityIntervals: configData.activityIntervals || null,
+      },
+    });
+
+    return NextResponse.json({
+      success: true,
+      message: "Bot yapılandırması güncellendi",
+      botConfiguration: botConfig,
+    });
   } catch (error: any) {
     console.error("[BOT_CONFIG_PUT]", error);
     return NextResponse.json(

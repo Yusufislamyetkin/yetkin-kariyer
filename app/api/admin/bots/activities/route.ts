@@ -3,6 +3,31 @@ import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { BotActivityType } from "@prisma/client";
 
+// Map category to activity types
+function getActivityTypesByCategory(category: string): BotActivityType[] {
+  switch (category) {
+    case "linkedin":
+      return [BotActivityType.POST, BotActivityType.LIKE, BotActivityType.COMMENT];
+    case "application":
+      return [
+        BotActivityType.HACKATHON_APPLICATION,
+        BotActivityType.FREELANCER_BID,
+        BotActivityType.JOB_APPLICATION,
+      ];
+    case "education":
+      return [BotActivityType.TEST, BotActivityType.LIVE_CODING, BotActivityType.LESSON];
+    case "other":
+      return [
+        BotActivityType.BUG_FIX,
+        BotActivityType.CHAT,
+        BotActivityType.FRIEND_REQUEST,
+        BotActivityType.ACCEPT_FRIEND_REQUEST,
+      ];
+    default:
+      return [];
+  }
+}
+
 export async function GET(request: Request) {
   try {
     const session = await auth();
@@ -17,6 +42,7 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const userId = searchParams.get("userId")?.trim();
     const activityType = searchParams.get("activityType")?.trim();
+    const category = searchParams.get("category")?.trim();
     const limit = parseInt(searchParams.get("limit") || "50");
     const offset = parseInt(searchParams.get("offset") || "0");
 
@@ -27,7 +53,13 @@ export async function GET(request: Request) {
       where.userId = userId;
     }
 
-    if (activityType) {
+    // Category filter takes precedence over activityType filter
+    if (category && category !== "all") {
+      const activityTypes = getActivityTypesByCategory(category);
+      if (activityTypes.length > 0) {
+        where.activityType = { in: activityTypes };
+      }
+    } else if (activityType) {
       where.activityType = activityType as BotActivityType;
     }
 

@@ -6,6 +6,9 @@ import { applyRules } from "@/lib/services/gamification/rules";
 import { checkBadgesForActivity } from "@/app/api/badges/check/badge-service";
 import { selectRandomUnusedSource, markSourceAsUsed } from "./bot-news-tracker";
 import { NewsSource } from "./news-sources";
+import { findTestsByMetadata } from "@/lib/services/career/career-path-mapper";
+
+const BACKEND_API_URL = process.env.BACKEND_API_URL || 'https://softwareinterview.tryasp.net';
 
 const COMMUNITY_SLUGS = [
   "dotnet-core-community",
@@ -21,6 +24,192 @@ const COMMUNITY_SLUGS = [
   "docker-kubernetes-community",
   "owasp-community",
 ];
+
+/**
+ * Normalize technology name to standard format
+ * Maps various technology names to normalized versions
+ */
+function normalizeTechnology(tech: string): string {
+  if (!tech) return "";
+  
+  const normalized = tech.toLowerCase().trim();
+  
+  // Technology name mappings
+  const techMap: Record<string, string> = {
+    "c#": "csharp",
+    "csharp": "csharp",
+    ".net": "dotnet-core",
+    ".net core": "dotnet-core",
+    "dotnet": "dotnet-core",
+    "dotnet-core": "dotnet-core",
+    "node.js": "nodejs",
+    "nodejs": "nodejs",
+    "node": "nodejs",
+    "javascript": "javascript",
+    "js": "javascript",
+    "typescript": "typescript",
+    "ts": "typescript",
+    "python": "python",
+    "py": "python",
+    "java": "java",
+    "react": "react",
+    "angular": "angular",
+    "vue": "vuejs",
+    "vue.js": "vuejs",
+    "vuejs": "vuejs",
+    "next.js": "nextjs",
+    "nextjs": "nextjs",
+    "spring boot": "spring-boot",
+    "springboot": "spring-boot",
+    "spring-boot": "spring-boot",
+  };
+  
+  // Check direct mapping
+  if (techMap[normalized]) {
+    return techMap[normalized];
+  }
+  
+  // Remove special characters and normalize
+  return normalized.replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+}
+
+/**
+ * Get bot's registered technology
+ * Tries multiple sources: BotCharacter.expertise, backend UserExpertise, or fallback to past activities
+ */
+async function getBotRegisteredTechnology(userId: string): Promise<string | null> {
+  try {
+    // 1. Try BotCharacter.expertise first
+    const botCharacter = await db.botCharacter.findUnique({
+      where: { userId },
+      select: { expertise: true },
+    });
+    
+    if (botCharacter?.expertise && botCharacter.expertise.length > 0) {
+      // Use first expertise entry, normalize it
+      const tech = normalizeTechnology(botCharacter.expertise[0]);
+      if (tech) {
+        return tech;
+      }
+    }
+    
+    // 2. Try backend API for UserExpertise (primary expertise)
+    try {
+      const response = await fetch(`${BACKEND_API_URL}/api/user/${userId}/expertise/primary`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        if (data?.technology) {
+          const tech = normalizeTechnology(data.technology);
+          if (tech) {
+            return tech;
+          }
+        }
+      }
+    } catch (error) {
+      console.warn(`[BOT_TECH] Failed to fetch expertise from backend for ${userId}:`, error);
+    }
+    
+    // 3. Fallback: Get technology from bot's past lesson/test completions
+    const recentLessons = await db.lessonCompletion.findMany({
+      where: { userId },
+      include: {
+        course: {
+          select: {
+            topic: true,
+            expertise: true,
+          },
+        },
+      },
+      orderBy: { completedAt: "desc" },
+      take: 10,
+    });
+    
+    // Extract technology from course topic/expertise
+    for (const lesson of recentLessons) {
+      if (lesson.course?.topic) {
+        const tech = normalizeTechnology(lesson.course.topic);
+        if (tech) return tech;
+      }
+      if (lesson.course?.expertise) {
+        const tech = normalizeTechnology(lesson.course.expertise);
+        if (tech) return tech;
+      }
+    }
+    
+    // Try test attempts
+    const recentTests = await db.testAttempt.findMany({
+      where: { userId },
+      include: {
+        quiz: {
+          include: {
+            course: {
+              select: {
+                topic: true,
+                expertise: true,
+              },
+            },
+          },
+        },
+      },
+      orderBy: { completedAt: "desc" },
+      take: 10,
+    });
+    
+    for (const test of recentTests) {
+      if (test.quiz?.course?.topic) {
+        const tech = normalizeTechnology(test.quiz.course.topic);
+        if (tech) return tech;
+      }
+      if (test.quiz?.course?.expertise) {
+        const tech = normalizeTechnology(test.quiz.course.expertise);
+        if (tech) return tech;
+      }
+      if (test.quiz?.topic) {
+        const tech = normalizeTechnology(test.quiz.topic);
+        if (tech) return tech;
+      }
+    }
+    
+    return null;
+  } catch (error: any) {
+    console.error(`[BOT_TECH] Error getting bot technology for ${userId}:`, error);
+    return null;
+  }
+}
+
+/**
+ * Generate realistic score using normal distribution
+ * Returns a score between min and max, with most values around the mean
+ */
+function generateRealisticScore(min: number, max: number, mean: number): number {
+  // Simple normal distribution approximation using Box-Muller transform
+  const u1 = Math.random();
+  const u2 = Math.random();
+  const z0 = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
+  
+  // Scale to desired range and mean
+  const stdDev = (max - min) / 4; // Standard deviation
+  let score = mean + z0 * stdDev;
+  
+  // Clamp to min-max range
+  score = Math.max(min, Math.min(max, Math.round(score)));
+  
+  return score;
+}
+
+/**
+ * Generate realistic duration in seconds
+ * Returns duration between min and max seconds
+ */
+function generateRealisticDuration(minSeconds: number, maxSeconds: number): number {
+  return Math.floor(Math.random() * (maxSeconds - minSeconds + 1)) + minSeconds;
+}
 
 /**
  * Join bot to random communities
@@ -447,18 +636,56 @@ export async function createLinkedInPost(
 }
 
 /**
- * Complete random lessons
+ * Complete lessons in sequential order based on bot's registered technology
+ * Lessons are solved strictly in order within each course
  */
 export async function completeLessons(userId: string, count: number = 2) {
   try {
-    // Get courses with lessons
-    const courses = await db.course.findMany({
+    // Get bot's registered technology
+    const botTechnology = await getBotRegisteredTechnology(userId);
+    
+    // Get courses, filter by technology if available
+    let coursesQuery: any = {
       select: {
         id: true,
         content: true,
+        topic: true,
+        expertise: true,
       },
+    };
+    
+    // Filter by technology if bot has registered technology
+    if (botTechnology) {
+      const normalizedTech = normalizeTechnology(botTechnology);
+      coursesQuery.where = {
+        OR: [
+          { topic: { contains: normalizedTech, mode: "insensitive" } },
+          { topic: { contains: botTechnology, mode: "insensitive" } },
+          { expertise: { contains: normalizedTech, mode: "insensitive" } },
+          { expertise: { contains: botTechnology, mode: "insensitive" } },
+        ],
+      };
+    }
+    
+    const courses = await db.course.findMany({
+      ...coursesQuery,
       take: 50,
     });
+
+    // If no courses found for technology, try without filter (fallback)
+    if (courses.length === 0 && botTechnology) {
+      console.log(`[BOT_LESSON] No courses found for technology ${botTechnology}, trying all courses`);
+      const allCourses = await db.course.findMany({
+        select: {
+          id: true,
+          content: true,
+          topic: true,
+          expertise: true,
+        },
+        take: 50,
+      });
+      courses.push(...allCourses);
+    }
 
     if (courses.length === 0) {
       await logBotActivity({
@@ -470,70 +697,111 @@ export async function completeLessons(userId: string, count: number = 2) {
       return { success: false, completed: 0 };
     }
 
-    // Extract lesson slugs from courses (support both old and new formats)
-    const lessonSlugs: string[] = [];
-    for (const course of courses) {
-      if (course.content && typeof course.content === "object") {
-        const content = course.content as any;
+    // Extract lessons in sequential order from courses
+    interface LessonInfo {
+      slug: string;
+      courseId: string;
+      courseIndex: number;
+      moduleIndex: number;
+      lessonIndex: number;
+    }
+    
+    const lessonsInOrder: LessonInfo[] = [];
+    
+    for (let courseIndex = 0; courseIndex < courses.length; courseIndex++) {
+      const course = courses[courseIndex];
+      if (!course.content || typeof course.content !== "object") continue;
+      
+      const content = course.content as any;
+      const courseExpertise = course.topic?.toLowerCase().replace(/\s+/g, '-') || 
+                             course.expertise?.toLowerCase().replace(/\s+/g, '-') || 
+                             content.expertise?.toLowerCase().replace(/\s+/g, '-') || 
+                             content.topic?.toLowerCase().replace(/\s+/g, '-') || 
+                             (course.id.includes('java') ? 'java' : 
+                              course.id.includes('dotnet') ? 'dotnet-core' : 
+                              course.id.includes('nodejs') ? 'nodejs' : 'java');
+      
+      const modules = Array.isArray(content.modules) ? content.modules : [];
+      
+      // Process modules in order
+      for (let moduleIndex = 0; moduleIndex < modules.length; moduleIndex++) {
+        const moduleItem = modules[moduleIndex];
+        if (!moduleItem || typeof moduleItem !== "object") continue;
         
-        // Determine course expertise for building lesson hrefs (for old format)
-        const courseExpertise = content.expertise?.toLowerCase().replace(/\s+/g, '-') || 
-                               content.topic?.toLowerCase().replace(/\s+/g, '-') || 
-                               (course.id.includes('java') ? 'java' : 
-                                course.id.includes('dotnet') ? 'dotnet-core' : 
-                                course.id.includes('nodejs') ? 'nodejs' : 'java');
+        // Check for relatedTopics (new format) - process in order
+        const relatedTopics = Array.isArray((moduleItem as any).relatedTopics)
+          ? ((moduleItem as any).relatedTopics as Array<Record<string, any>>)
+          : [];
         
-        // Check for modules (new format)
-        const modules = Array.isArray(content.modules) ? content.modules : [];
-        
-        // Extract from modules (new format)
-        for (const moduleItem of modules) {
-          if (!moduleItem || typeof moduleItem !== "object") continue;
-          
-          // Check for relatedTopics (new format)
-          const relatedTopics = Array.isArray((moduleItem as any).relatedTopics)
-            ? ((moduleItem as any).relatedTopics as Array<Record<string, any>>)
-            : [];
-          
-          // Check for lessons (old format within modules)
-          const lessons = Array.isArray((moduleItem as any).lessons)
-            ? ((moduleItem as any).lessons as Array<Record<string, any>>)
-            : [];
-          
-          // Extract from relatedTopics (new format)
-          for (const topic of relatedTopics) {
-            if (topic?.href && typeof topic.href === "string") {
-              lessonSlugs.push(topic.href);
-            }
-          }
-          
-          // Extract from lessons (old format within modules)
-          for (const lesson of lessons) {
-            if (lesson?.slug && typeof lesson.slug === "string") {
-              const moduleId = (moduleItem as any).id || '';
-              const lessonSlug = lesson.slug;
-              const href = `/education/lessons/${courseExpertise}/${moduleId}/${lessonSlug}`;
-              lessonSlugs.push(href);
-            } else if (lesson?.href && typeof lesson.href === "string") {
-              lessonSlugs.push(lesson.href);
-            }
+        for (let topicIndex = 0; topicIndex < relatedTopics.length; topicIndex++) {
+          const topic = relatedTopics[topicIndex];
+          if (topic?.href && typeof topic.href === "string") {
+            lessonsInOrder.push({
+              slug: topic.href,
+              courseId: course.id,
+              courseIndex,
+              moduleIndex,
+              lessonIndex: topicIndex,
+            });
           }
         }
         
-        // Check for direct lessons array (old format at root level)
-        if (Array.isArray(content.lessons)) {
-          for (const lesson of content.lessons) {
-            if (lesson.slug && typeof lesson.slug === "string") {
-              lessonSlugs.push(lesson.slug);
-            } else if (lesson.href && typeof lesson.href === "string") {
-              lessonSlugs.push(lesson.href);
-            }
+        // Check for lessons (old format within modules) - process in order
+        const lessons = Array.isArray((moduleItem as any).lessons)
+          ? ((moduleItem as any).lessons as Array<Record<string, any>>)
+          : [];
+        
+        for (let lessonIndex = 0; lessonIndex < lessons.length; lessonIndex++) {
+          const lesson = lessons[lessonIndex];
+          if (lesson?.slug && typeof lesson.slug === "string") {
+            const moduleId = (moduleItem as any).id || '';
+            const lessonSlug = lesson.slug;
+            const href = `/education/lessons/${courseExpertise}/${moduleId}/${lessonSlug}`;
+            lessonsInOrder.push({
+              slug: href,
+              courseId: course.id,
+              courseIndex,
+              moduleIndex,
+              lessonIndex,
+            });
+          } else if (lesson?.href && typeof lesson.href === "string") {
+            lessonsInOrder.push({
+              slug: lesson.href,
+              courseId: course.id,
+              courseIndex,
+              moduleIndex,
+              lessonIndex,
+            });
+          }
+        }
+      }
+      
+      // Check for direct lessons array (old format at root level) - process in order
+      if (Array.isArray(content.lessons)) {
+        for (let lessonIndex = 0; lessonIndex < content.lessons.length; lessonIndex++) {
+          const lesson = content.lessons[lessonIndex];
+          if (lesson?.slug && typeof lesson.slug === "string") {
+            lessonsInOrder.push({
+              slug: lesson.slug,
+              courseId: course.id,
+              courseIndex,
+              moduleIndex: -1,
+              lessonIndex,
+            });
+          } else if (lesson?.href && typeof lesson.href === "string") {
+            lessonsInOrder.push({
+              slug: lesson.href,
+              courseId: course.id,
+              courseIndex,
+              moduleIndex: -1,
+              lessonIndex,
+            });
           }
         }
       }
     }
 
-    if (lessonSlugs.length === 0) {
+    if (lessonsInOrder.length === 0) {
       await logBotActivity({
         userId,
         activityType: BotActivityType.LESSON,
@@ -547,7 +815,7 @@ export async function completeLessons(userId: string, count: number = 2) {
     const completed = await db.lessonCompletion.findMany({
       where: {
         userId,
-        lessonSlug: { in: lessonSlugs },
+        lessonSlug: { in: lessonsInOrder.map(l => l.slug) },
       },
       select: {
         lessonSlug: true,
@@ -555,9 +823,11 @@ export async function completeLessons(userId: string, count: number = 2) {
     });
 
     const completedSlugs = new Set(completed.map((c: typeof completed[0]) => c.lessonSlug));
-    const availableSlugs = lessonSlugs.filter((slug: string) => !completedSlugs.has(slug));
+    
+    // Filter to only incomplete lessons, maintaining order
+    const availableLessons = lessonsInOrder.filter(lesson => !completedSlugs.has(lesson.slug));
 
-    if (availableSlugs.length === 0) {
+    if (availableLessons.length === 0) {
       await logBotActivity({
         userId,
         activityType: BotActivityType.LESSON,
@@ -567,54 +837,20 @@ export async function completeLessons(userId: string, count: number = 2) {
       return { success: true, completed: 0 };
     }
 
-    // Shuffle and take random lessons
-    const shuffled = availableSlugs.sort(() => Math.random() - 0.5);
-    const toComplete = shuffled.slice(0, Math.min(count, shuffled.length));
+    // Take lessons in strict sequential order (no shuffling!)
+    // Start from the first incomplete lesson and continue sequentially
+    const toComplete = availableLessons.slice(0, Math.min(count, availableLessons.length));
 
-    // Find course for each lesson
     const completions = [];
-    for (const lessonSlug of toComplete) {
-      const course = courses.find((c: typeof courses[0]) => {
-        if (c.content && typeof c.content === "object") {
-          const content = c.content as any;
-          
-          // Check modules (new format)
-          const modules = Array.isArray(content.modules) ? content.modules : [];
-          for (const moduleItem of modules) {
-            if (!moduleItem || typeof moduleItem !== "object") continue;
-            
-            // Check relatedTopics
-            const relatedTopics = Array.isArray((moduleItem as any).relatedTopics)
-              ? ((moduleItem as any).relatedTopics as Array<Record<string, any>>)
-              : [];
-            if (relatedTopics.some((topic: any) => topic?.href === lessonSlug)) {
-              return true;
-            }
-            
-            // Check lessons in module
-            const lessons = Array.isArray((moduleItem as any).lessons)
-              ? ((moduleItem as any).lessons as Array<Record<string, any>>)
-              : [];
-            if (lessons.some((l: any) => l?.href === lessonSlug || l?.slug === lessonSlug)) {
-              return true;
-            }
-          }
-          
-          // Check direct lessons array (old format)
-          if (Array.isArray(content.lessons)) {
-            if (content.lessons.some((l: any) => l?.slug === lessonSlug || l?.href === lessonSlug)) {
-              return true;
-            }
-          }
-        }
-        return false;
-      });
-
+    for (const lessonInfo of toComplete) {
+      // Generate realistic score (70-95, mostly 80-90)
+      const miniTestScore = generateRealisticScore(70, 95, 85);
+      
       const completion = await db.lessonCompletion.upsert({
         where: {
           userId_lessonSlug: {
             userId,
-            lessonSlug,
+            lessonSlug: lessonInfo.slug,
           },
         },
         update: {
@@ -622,11 +858,11 @@ export async function completeLessons(userId: string, count: number = 2) {
         },
         create: {
           userId,
-          courseId: course?.id || null,
-          lessonSlug,
+          courseId: lessonInfo.courseId,
+          lessonSlug: lessonInfo.slug,
           completedAt: new Date(),
           miniTestPassed: true,
-          miniTestScore: Math.floor(Math.random() * 20) + 80, // Random score 80-100
+          miniTestScore,
         },
       });
 
@@ -637,11 +873,11 @@ export async function completeLessons(userId: string, count: number = 2) {
         const event = await recordEvent({
           userId,
           type: "lesson_complete",
-          payload: { lessonSlug },
+          payload: { lessonSlug: lessonInfo.slug },
         });
         await applyRules({ userId, type: "lesson_complete", payload: { sourceEventId: event.id } });
       } catch (e) {
-        console.warn(`[BOT_LESSON] Gamification failed for lesson ${lessonSlug}:`, e);
+        console.warn(`[BOT_LESSON] Gamification failed for lesson ${lessonInfo.slug}:`, e);
       }
     }
 
@@ -661,8 +897,12 @@ export async function completeLessons(userId: string, count: number = 2) {
     await logBotActivity({
       userId,
       activityType: BotActivityType.LESSON,
-      targetId: toComplete[0],
-      details: { completedCount: completions.length },
+      targetId: toComplete[0]?.slug,
+      details: { 
+        completedCount: completions.length,
+        technology: botTechnology || "unknown",
+        sequential: true,
+      },
       success: true,
     });
 
@@ -679,7 +919,8 @@ export async function completeLessons(userId: string, count: number = 2) {
 }
 
 /**
- * Complete random tests (with AI-generated answers)
+ * Complete tests prioritizing bot's registered technology
+ * Tests are selected from registered technology first, then fallback to others
  */
 export async function completeTests(
   userId: string,
@@ -687,20 +928,112 @@ export async function completeTests(
   answerQuestions: (quizId: string) => Promise<any>
 ) {
   try {
-    // Get available quizzes
-    const quizzes = await db.quiz.findMany({
-      where: {
-        type: "TEST",
-      },
-      select: {
-        id: true,
-        title: true,
-        questions: true,
-      },
-      take: 50,
-    });
+    // Get bot's registered technology
+    const botTechnology = await getBotRegisteredTechnology(userId);
+    
+    // Get already completed tests (today)
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
 
-    if (quizzes.length === 0) {
+    let preferredQuizzes: any[] = [];
+    let fallbackQuizzes: any[] = [];
+
+    // If bot has registered technology, prioritize tests from that technology
+    if (botTechnology) {
+      const normalizedTech = normalizeTechnology(botTechnology);
+      
+      // Try to find tests using findTestsByMetadata
+      const testMatch = await findTestsByMetadata({ technology: normalizedTech });
+      
+      if (testMatch?.quizIds && testMatch.quizIds.length > 0) {
+        // Get full quiz data for preferred technology
+        preferredQuizzes = await db.quiz.findMany({
+          where: {
+            id: { in: testMatch.quizIds },
+            type: "TEST",
+          },
+          select: {
+            id: true,
+            title: true,
+            questions: true,
+            topic: true,
+            course: {
+              select: {
+                topic: true,
+                expertise: true,
+              },
+            },
+          },
+        });
+      }
+      
+      // Also try direct query for technology matching
+      if (preferredQuizzes.length === 0) {
+        preferredQuizzes = await db.quiz.findMany({
+          where: {
+            type: "TEST",
+            OR: [
+              { topic: { contains: normalizedTech, mode: "insensitive" } },
+              { topic: { contains: botTechnology, mode: "insensitive" } },
+              {
+                course: {
+                  OR: [
+                    { topic: { contains: normalizedTech, mode: "insensitive" } },
+                    { topic: { contains: botTechnology, mode: "insensitive" } },
+                    { expertise: { contains: normalizedTech, mode: "insensitive" } },
+                    { expertise: { contains: botTechnology, mode: "insensitive" } },
+                  ],
+                },
+              },
+            ],
+          },
+          select: {
+            id: true,
+            title: true,
+            questions: true,
+            topic: true,
+            course: {
+              select: {
+                topic: true,
+                expertise: true,
+              },
+            },
+          },
+          take: 50,
+        });
+      }
+    }
+
+    // Get fallback quizzes (all tests if preferred is not enough)
+    if (preferredQuizzes.length < count) {
+      fallbackQuizzes = await db.quiz.findMany({
+        where: {
+          type: "TEST",
+          ...(preferredQuizzes.length > 0 ? {
+            id: { notIn: preferredQuizzes.map(q => q.id) },
+          } : {}),
+        },
+        select: {
+          id: true,
+          title: true,
+          questions: true,
+          topic: true,
+          course: {
+            select: {
+              topic: true,
+              expertise: true,
+            },
+          },
+        },
+        take: 50,
+      });
+    }
+
+    const allQuizzes = [...preferredQuizzes, ...fallbackQuizzes];
+
+    if (allQuizzes.length === 0) {
       await logBotActivity({
         userId,
         activityType: BotActivityType.TEST,
@@ -710,16 +1043,11 @@ export async function completeTests(
       return { success: false, completed: 0 };
     }
 
-    // Get already completed tests (today)
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-
+    // Filter out already completed tests today
     const completed = await db.testAttempt.findMany({
       where: {
         userId,
-        quizId: { in: quizzes.map((q: typeof quizzes[0]) => q.id) },
+        quizId: { in: allQuizzes.map((q: typeof allQuizzes[0]) => q.id) },
         completedAt: {
           gte: today,
           lt: tomorrow,
@@ -731,7 +1059,13 @@ export async function completeTests(
     });
 
     const completedQuizIds = new Set(completed.map((c: typeof completed[0]) => c.quizId));
-    const availableQuizzes = quizzes.filter((q: typeof quizzes[0]) => !completedQuizIds.has(q.id));
+    
+    // Separate available quizzes by preference
+    const availablePreferred = preferredQuizzes.filter((q: typeof preferredQuizzes[0]) => !completedQuizIds.has(q.id));
+    const availableFallback = fallbackQuizzes.filter((q: typeof fallbackQuizzes[0]) => !completedQuizIds.has(q.id));
+
+    // Combine: preferred first, then fallback
+    const availableQuizzes = [...availablePreferred, ...availableFallback];
 
     if (availableQuizzes.length === 0) {
       await logBotActivity({
@@ -743,9 +1077,8 @@ export async function completeTests(
       return { success: true, completed: 0 };
     }
 
-    // Shuffle and take random quizzes
-    const shuffled = availableQuizzes.sort(() => Math.random() - 0.5);
-    const toComplete = shuffled.slice(0, Math.min(count, shuffled.length));
+    // Take quizzes (preferred first, maintaining order)
+    const toComplete = availableQuizzes.slice(0, Math.min(count, availableQuizzes.length));
 
     const attempts = [];
     for (const quiz of toComplete) {
@@ -757,12 +1090,33 @@ export async function completeTests(
         const questions = quiz.questions as any;
         if (!Array.isArray(questions)) continue;
 
+        // Generate realistic answers with some wrong answers (10-30% wrong)
+        const wrongAnswerRate = Math.random() * 0.2 + 0.1; // 10-30%
+        const wrongCount = Math.floor(questions.length * wrongAnswerRate);
+        const wrongIndices = new Set<number>();
+        
+        // Randomly select which questions to get wrong
+        while (wrongIndices.size < wrongCount && wrongIndices.size < questions.length) {
+          wrongIndices.add(Math.floor(Math.random() * questions.length));
+        }
+
         let correctCount = 0;
         const breakdown = questions.map((q: any, index: number) => {
-          const selected = answers[index] ?? -1;
+          let selected = answers[index] ?? -1;
           const correct = q.correctAnswer ?? -1;
+          
+          // If this question should be wrong, select a different answer
+          if (wrongIndices.has(index) && correct >= 0) {
+            // Select a wrong answer (not the correct one)
+            const wrongOptions = [0, 1, 2, 3].filter(opt => opt !== correct);
+            if (wrongOptions.length > 0) {
+              selected = wrongOptions[Math.floor(Math.random() * wrongOptions.length)];
+            }
+          }
+          
           const isCorrect = selected === correct;
           if (isCorrect) correctCount++;
+          
           return {
             questionId: q.id || index,
             selectedIndex: selected,
@@ -771,17 +1125,27 @@ export async function completeTests(
           };
         });
 
-        const score = Math.round((correctCount / questions.length) * 100);
+        // Generate realistic score (60-95, mostly 75-90)
+        const baseScore = Math.round((correctCount / questions.length) * 100);
+        const realisticScore = generateRealisticScore(60, 95, 80);
+        // Use the calculated score but ensure it's realistic
+        const finalScore = Math.max(60, Math.min(95, Math.max(baseScore, realisticScore - 5)));
+
+        // Generate realistic duration (3-10 minutes based on question count)
+        const baseDuration = questions.length * 30; // 30 seconds per question average
+        const minDuration = Math.max(180, baseDuration - 60); // At least 3 minutes
+        const maxDuration = Math.min(600, baseDuration + 120); // Max 10 minutes
+        const duration = generateRealisticDuration(minDuration, maxDuration);
 
         // Create quiz attempt
         const quizAttempt = await db.quizAttempt.create({
           data: {
             userId,
             quizId: quiz.id,
-            score,
+            score: finalScore,
             answers: { submitted: answers, breakdown },
-            duration: Math.floor(Math.random() * 300) + 120, // 2-7 minutes
-            topic: null,
+            duration,
+            topic: quiz.topic || null,
             level: null,
           },
         });
@@ -792,8 +1156,8 @@ export async function completeTests(
             userId,
             quizId: quiz.id,
             metrics: {
-              score,
-              duration: quizAttempt.duration,
+              score: finalScore,
+              duration,
               correctCount,
               totalQuestions: questions.length,
             },
@@ -806,7 +1170,7 @@ export async function completeTests(
           const event = await recordEvent({
             userId,
             type: "test_complete",
-            payload: { quizId: quiz.id, quizAttemptId: quizAttempt.id, score },
+            payload: { quizId: quiz.id, quizAttemptId: quizAttempt.id, score: finalScore },
           });
           await applyRules({ userId, type: "test_complete", payload: { sourceEventId: event.id } });
         } catch (e) {
@@ -843,7 +1207,11 @@ export async function completeTests(
         userId,
         activityType: BotActivityType.TEST,
         targetId: attempts[0]?.quizAttempt.quizId,
-        details: { completedCount: attempts.length },
+        details: { 
+          completedCount: attempts.length,
+          technology: botTechnology || "unknown",
+          preferredCount: availablePreferred.length,
+        },
         success: true,
       });
     }

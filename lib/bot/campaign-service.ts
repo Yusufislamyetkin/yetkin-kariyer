@@ -1,5 +1,65 @@
 const BACKEND_API_URL = process.env.BACKEND_API_URL || 'https://softwareinterview.tryasp.net';
 
+/**
+ * Safely parse API response, handling both JSON and HTML error responses
+ */
+async function parseResponse(response: Response): Promise<any> {
+  const contentType = response.headers.get('content-type') || '';
+  
+  // If content-type is JSON, parse as JSON
+  if (contentType.includes('application/json')) {
+    try {
+      return await response.json();
+    } catch (error) {
+      // Even if content-type says JSON, parsing might fail
+      console.error('[CAMPAIGN_SERVICE] Failed to parse JSON response:', error);
+      throw new Error('Sunucudan geçersiz JSON yanıtı alındı');
+    }
+  }
+  
+  // If content-type is HTML or text, it's likely an error page
+  if (contentType.includes('text/html') || contentType.includes('text/')) {
+    const text = await response.text();
+    
+    // Try to extract error message from HTML if possible
+    // Common patterns in error pages
+    const titleMatch = text.match(/<title[^>]*>([^<]+)<\/title>/i);
+    const h1Match = text.match(/<h1[^>]*>([^<]+)<\/h1>/i);
+    const errorMatch = text.match(/error[^>]*>([^<]+)/i);
+    
+    let errorMessage = 'Sunucu hatası oluştu';
+    if (titleMatch) {
+      errorMessage = titleMatch[1].trim();
+    } else if (h1Match) {
+      errorMessage = h1Match[1].trim();
+    } else if (errorMatch) {
+      errorMessage = errorMatch[1].trim();
+    }
+    
+    console.error('[CAMPAIGN_SERVICE] Received HTML error response:', {
+      status: response.status,
+      statusText: response.statusText,
+      contentType,
+      message: errorMessage,
+    });
+    
+    throw new Error(`${errorMessage} (HTTP ${response.status})`);
+  }
+  
+  // For other content types, try to parse as text first
+  try {
+    const text = await response.text();
+    // Try to parse as JSON even if content-type wasn't set correctly
+    try {
+      return JSON.parse(text);
+    } catch {
+      throw new Error(`Beklenmeyen yanıt formatı: ${contentType}`);
+    }
+  } catch (error: any) {
+    throw new Error(error.message || 'Yanıt işlenirken bir hata oluştu');
+  }
+}
+
 export interface CreateCampaignRequest {
   name: string;
   activityType: string;
@@ -66,7 +126,7 @@ export async function createCampaign(request: CreateCampaignRequest): Promise<{ 
       body: JSON.stringify(request),
     });
 
-    const data = await response.json();
+    const data = await parseResponse(response);
 
     if (!response.ok) {
       return {
@@ -105,7 +165,7 @@ export async function getCampaigns(status?: string): Promise<{ success: boolean;
       },
     });
 
-    const data = await response.json();
+    const data = await parseResponse(response);
 
     if (!response.ok) {
       return {
@@ -139,7 +199,7 @@ export async function getCampaignStatus(campaignId: string): Promise<{ success: 
       },
     });
 
-    const data = await response.json();
+    const data = await parseResponse(response);
 
     if (!response.ok) {
       return {
@@ -174,7 +234,7 @@ export async function createRecurringCampaign(request: CreateRecurringCampaignRe
       body: JSON.stringify(request),
     });
 
-    const data = await response.json();
+    const data = await parseResponse(response);
 
     if (!response.ok) {
       return {
@@ -210,7 +270,7 @@ export async function cancelCampaign(campaignId: string): Promise<{ success: boo
       body: JSON.stringify({ campaignId }),
     });
 
-    const data = await response.json();
+    const data = await parseResponse(response);
 
     if (!response.ok) {
       return {
@@ -245,7 +305,7 @@ export async function stopRecurringCampaign(campaignId: string): Promise<{ succe
       body: JSON.stringify({ campaignId }),
     });
 
-    const data = await response.json();
+    const data = await parseResponse(response);
 
     if (!response.ok) {
       return {

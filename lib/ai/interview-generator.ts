@@ -519,11 +519,20 @@ KRİTİK KURALLAR - AŞAMA 1:
 - Aşama 2'de deneyim ve projeler sorulacak, bu aşamada bunlara dokunma
 - Sorular tanışma ve kişisel bilgi odaklı olmalı
 
+YASAK SORU TİPLERİ - ASLA SORMA:
+- E-posta adresi, telefon numarası, adres gibi iletişim bilgileri hakkında sorular
+- LinkedIn profili, sosyal medya hesapları, GitHub profili gibi sosyal platformlar hakkında sorular
+- "E-posta adresiniz olan X üzerinden sizinle iletişim kurabiliriz" gibi ifadeler içeren sorular
+- "LinkedIn profilinizdeki bilgiler doğrultusunda" gibi ifadeler içeren sorular
+- Kişisel iletişim bilgilerini doğrulama veya kullanma amaçlı sorular
+- Bu tür sorular profesyonel mülakatlarda uygunsuzdur ve ASLA sorulmamalıdır
+
 1. **Kişisel Tanışma ve Tanıtım** (2-3 soru):
    - Kullanıcının kendisini tanıtması
-   - CV'deki kişisel bilgilere dayalı sorular (isim, iletişim bilgileri, vb.)
+   - CV'deki kişisel bilgilere dayalı sorular (isim, genel tanıtım - AMA iletişim bilgileri değil)
    - Genel kariyer motivasyonu (ama deneyim detaylarına girme)
    - NOT: "Bu pozisyona neden başvurduğu" gibi genel sorular sorma. CV'deki spesifik kişisel bilgilere göre sorular oluştur.
+   - NOT: E-posta, telefon, LinkedIn gibi iletişim bilgileri hakkında ASLA soru sorma
 
 2. **CV Özeti** (1-2 soru):
    - CV özetindeki bilgilere göre sorular
@@ -554,6 +563,7 @@ KRİTİK KURALLAR - AŞAMA 1:
 - Behavioral sorular STAR metoduna uygun olmalı
 - KRİTİK: Tüm sorular CV'deki gerçek bilgilere dayalı olmalı. "Bu pozisyona neden başvurduğu", "Bu ilana neden başvurdunuz" gibi genel sorular SORMA.
 - KRİTİK: Aşama 1'de HİÇBİR iş deneyimi, proje, başarı veya sertifika sorusu sorma. Bunlar Aşama 2'de sorulacak.
+- KRİTİK: E-posta adresi, telefon numarası, LinkedIn profili, sosyal medya hesapları gibi iletişim bilgileri hakkında ASLA soru sorma. Bu tür sorular profesyonel mülakatlarda uygunsuzdur.
 
 SORU FORMATI:
 Her soru şu formatta olmalı:
@@ -587,6 +597,10 @@ AŞAMA 1 İÇİN KRİTİK KURALLAR:
 3. "Bu pozisyona neden başvurduğu" gibi genel sorular ASLA sorma
 4. CV'deki gerçek kişisel bilgilere (isim, eğitim, diller) dayalı spesifik sorular oluştur
 5. Eğitim sırasındaki akademik projeler sorulabilir, ama iş deneyimi projeleri sorulmamalı
+6. YASAK: E-posta adresi, telefon numarası, LinkedIn profili, sosyal medya hesapları, GitHub profili gibi iletişim bilgileri hakkında ASLA soru sorma
+7. YASAK: "E-posta adresiniz olan X üzerinden sizinle iletişim kurabiliriz" gibi ifadeler içeren sorular ASLA oluşturma
+8. YASAK: "LinkedIn profilinizdeki bilgiler doğrultusunda" gibi ifadeler içeren sorular ASLA oluşturma
+9. Bu tür sorular profesyonel mülakatlarda uygunsuzdur ve kesinlikle sorulmamalıdır
 
 Her zaman JSON formatında yanıt ver.`,
         },
@@ -749,73 +763,185 @@ export async function generateStage3Questions(cvId: string): Promise<z.infer<typ
     switch (positionType) {
       case "devops":
         return `
-- CI/CD pipeline tasarımı ve yönetimi soruları
-- Containerization (Docker, Kubernetes) soruları
-- Cloud services (AWS, Azure, GCP) soruları
-- Monitoring ve logging araçları
-- Infrastructure as Code (Terraform, Ansible)
-- Disaster recovery ve backup stratejileri
-- 2-3 gerçek dünya senaryosu (production outage, scaling, deployment strategies)`;
+- 8-10 adet KRİTİK ve NET teknik test sorusu (CV'deki teknolojilere göre, ${cvInfo.level} seviye)
+  * Her soru CV'deki teknolojilerden en az birine spesifik olmalı
+  * Sorular pratik uygulama ve problem çözme odaklı olmalı
+  * Genel bilgi soruları yerine derinlemesine teknik sorular
+  * Mimari, performans, güvenlik, optimizasyon odaklı sorular
+  
+  TEKNOLOJİ-SPESİFİK SORU ÖRNEKLERİ (CV'deki teknolojilere göre uyarlanmalı):
+  * Docker: "Docker container lifecycle nedir? Container vs Image farkı nedir? Detaylı anlatır mısınız?"
+  * Docker: "Docker multi-stage build nedir? Neden kullanılır? Performans avantajları nelerdir?"
+  * Kubernetes: "Kubernetes pod scheduling algoritması nasıl çalışır? Node affinity nedir? Detaylı anlatır mısınız?"
+  * Kubernetes: "Kubernetes service types (ClusterIP, NodePort, LoadBalancer) arasındaki farklar nelerdir? Hangi durumda hangisi kullanılmalıdır?"
+  * Terraform: "Terraform state management nedir? Remote state kullanmanın avantajları nelerdir? State locking nasıl çalışır?"
+  * Terraform: "Terraform modules nedir? DRY prensibini uygulamak için nasıl kullanılır?"
+  * CI/CD: "CI/CD pipeline'da build cache stratejileri nelerdir? Pipeline performansını nasıl optimize edersiniz?"
+  * CI/CD: "GitLab CI vs Jenkins karşılaştırması. Hangi durumda hangisini tercih edersiniz?"
+  * AWS: "AWS ECS vs EKS farkı nedir? Hangi durumda hangisini kullanmalıyız?"
+  * Monitoring: "Prometheus vs Grafana farkı nedir? Alerting mekanizması nasıl çalışır?"
+  
+- 2-3 adet ELEME SORUSU (çok zor, kritik sorular - adayı gerçekten test eden)
+  * Örnek: "10 milyon kullanıcılı bir sistemde zero-downtime deployment stratejisi nasıl olmalı?"
+  * Örnek: "Kubernetes cluster'da resource quota ve limit range nasıl yönetilir? OOM (Out of Memory) durumları nasıl önlenir?"
+  
+- 2-3 adet gerçek dünya senaryosu (production outage, scaling, deployment strategies)`;
 
       case "test_engineer":
         return `
-- Test stratejileri ve metodolojileri soruları
-- Test automation framework'leri (Selenium, Cypress, Jest, vb.)
-- Test case design ve yazımı
-- Bug tracking ve reporting süreçleri
-- Performance testing ve load testing
-- Security testing temelleri
-- 2-3 gerçek dünya senaryosu (test planı oluşturma, bug reproduction, test automation)`;
+- 8-10 adet KRİTİK ve NET teknik test sorusu (CV'deki teknolojilere göre, ${cvInfo.level} seviye)
+  * Her soru CV'deki teknolojilerden en az birine spesifik olmalı
+  * Sorular pratik uygulama ve problem çözme odaklı olmalı
+  * Genel bilgi soruları yerine derinlemesine teknik sorular
+  * Test stratejileri, framework mimarisi, performans optimizasyonu odaklı sorular
+  
+  TEKNOLOJİ-SPESİFİK SORU ÖRNEKLERİ (CV'deki teknolojilere göre uyarlanmalı):
+  * Selenium: "Selenium WebDriver architecture nasıl çalışır? Explicit vs Implicit wait farkı nedir? Detaylı anlatır mısınız?"
+  * Selenium: "Selenium Grid nedir? Parallel test execution nasıl yapılır? Scalability nasıl sağlanır?"
+  * Cypress: "Cypress test execution model nasıl çalışır? Selenium'dan farkları nelerdir? Detaylı anlatır mısınız?"
+  * Cypress: "Cypress'te async operations nasıl handle edilir? Promise chain'ler nasıl yönetilir?"
+  * Jest: "Jest mocking strategies nelerdir? Mock functions, spies ve stubs arasındaki farklar nedir?"
+  * Jest: "Jest snapshot testing nedir? Ne zaman kullanılmalı? Avantaj ve dezavantajları nelerdir?"
+  * TestNG: "TestNG parallel execution nasıl yapılır? Thread count ve data provider stratejileri nelerdir?"
+  * TestNG: "TestNG dependency management nasıl çalışır? Test sıralaması nasıl kontrol edilir?"
+  * Performance Testing: "Load testing vs Stress testing vs Spike testing farkları nelerdir? Hangi durumda hangisi kullanılmalıdır?"
+  * API Testing: "REST API test automation stratejileri nelerdir? Postman vs RestAssured karşılaştırması"
+  
+- 2-3 adet ELEME SORUSU (çok zor, kritik sorular - adayı gerçekten test eden)
+  * Örnek: "Flaky test'ler nasıl tespit edilir ve çözülür? Test stability nasıl artırılır?"
+  * Örnek: "1000+ test case'li bir projede test execution süresini %50 azaltmak için hangi stratejileri uygularsınız?"
+  
+- 2-3 adet gerçek dünya senaryosu (test planı oluşturma, bug reproduction, test automation)`;
 
       case "security_engineer":
         return `
-- Security best practices ve standartlar
-- Vulnerability assessment ve penetration testing
-- Security architecture ve design patterns
-- Compliance ve regulations (GDPR, ISO 27001, vb.)
-- Security tools ve teknolojileri
-- Incident response ve security monitoring
-- 2-3 gerçek dünya senaryosu (security breach response, vulnerability management)`;
+- 8-10 adet KRİTİK ve NET teknik test sorusu (CV'deki teknolojilere göre, ${cvInfo.level} seviye)
+  * Her soru CV'deki teknolojilerden en az birine spesifik olmalı
+  * Sorular pratik uygulama ve problem çözme odaklı olmalı
+  * Genel bilgi soruları yerine derinlemesine teknik sorular
+  * Security architecture, vulnerability management, incident response odaklı sorular
+  
+  TEKNOLOJİ-SPESİFİK SORU ÖRNEKLERİ (CV'deki teknolojilere göre uyarlanmalı):
+  * OWASP: "OWASP Top 10 listesindeki güvenlik açıklarını detaylı anlatır mısınız? SQL Injection nasıl önlenir?"
+  * OWASP: "XSS (Cross-Site Scripting) saldırıları nasıl çalışır? Reflected vs Stored XSS farkları nedir?"
+  * Penetration Testing: "Penetration testing metodolojileri nelerdir? OWASP Testing Guide'a göre test süreci nasıl olmalıdır?"
+  * Penetration Testing: "Burp Suite vs OWASP ZAP karşılaştırması. Hangi durumda hangisini kullanırsınız?"
+  * Vulnerability Scanning: "Nessus vs OpenVAS farkları nelerdir? Vulnerability scanning stratejileri nasıl olmalıdır?"
+  * Security Architecture: "Zero Trust architecture nedir? Network segmentation stratejileri nelerdir?"
+  * Security Architecture: "Defense in depth stratejisi nedir? Katmanlı güvenlik nasıl uygulanır?"
+  * GDPR/Compliance: "GDPR compliance için gerekli teknik önlemler nelerdir? Data encryption ve anonymization stratejileri"
+  * Incident Response: "Security incident response plan nasıl oluşturulur? SIEM tools nasıl kullanılır?"
+  * Cryptography: "Symmetric vs Asymmetric encryption farkları nedir? RSA vs AES ne zaman kullanılır?"
+  
+- 2-3 adet ELEME SORUSU (çok zor, kritik sorular - adayı gerçekten test eden)
+  * Örnek: "Zero-day vulnerability tespit edildiğinde incident response süreci nasıl olmalıdır? Containment stratejileri nelerdir?"
+  * Örnek: "Multi-cloud ortamında güvenlik yönetimi nasıl yapılır? Identity federation stratejileri nelerdir?"
+  
+- 2-3 adet gerçek dünya senaryosu (security breach response, vulnerability management)`;
 
       case "data_engineer":
         return `
-- Data pipeline design ve ETL processes
-- Database optimization ve data modeling
-- Big data technologies (Spark, Hadoop, vb.)
-- Data warehouse ve data lake concepts
-- Data quality ve data governance
-- Real-time data processing
-- 2-3 gerçek dünya senaryosu (data pipeline optimization, data quality issues)`;
+- 8-10 adet KRİTİK ve NET teknik test sorusu (CV'deki teknolojilere göre, ${cvInfo.level} seviye)
+  * Her soru CV'deki teknolojilerden en az birine spesifik olmalı
+  * Sorular pratik uygulama ve problem çözme odaklı olmalı
+  * Genel bilgi soruları yerine derinlemesine teknik sorular
+  * Data pipeline, data modeling, performance optimization odaklı sorular
+  
+  TEKNOLOJİ-SPESİFİK SORU ÖRNEKLERİ (CV'deki teknolojilere göre uyarlanmalı):
+  * Spark: "Spark RDD vs DataFrame vs Dataset farkları nelerdir? Hangi durumda hangisini kullanmalıyız?"
+  * Spark: "Spark shuffle operation nedir? Shuffle optimization stratejileri nelerdir? Detaylı anlatır mısınız?"
+  * Spark: "Spark broadcast variables ve accumulators nedir? Ne zaman kullanılır?"
+  * Hadoop: "Hadoop MapReduce vs Spark farkları nedir? Hangi durumda hangisini tercih edersiniz?"
+  * ETL: "ETL pipeline optimization stratejileri nelerdir? Incremental load vs Full load ne zaman kullanılır?"
+  * ETL: "Data pipeline'da error handling ve retry mekanizmaları nasıl implement edilir?"
+  * Data Warehouse: "Data warehouse design patterns nelerdir? Star schema vs Snowflake schema farkları"
+  * Data Warehouse: "Data warehouse vs Data lake vs Data lakehouse farkları nedir? Hangi durumda hangisi kullanılmalıdır?"
+  * Real-time Processing: "Real-time streaming architectures nelerdir? Kafka vs RabbitMQ vs Apache Pulsar karşılaştırması"
+  * Data Quality: "Data quality metrics nelerdir? Data validation ve cleansing stratejileri nasıl uygulanır?"
+  
+- 2-3 adet ELEME SORUSU (çok zor, kritik sorular - adayı gerçekten test eden)
+  * Örnek: "1 milyar satırlık bir dataset'te join operation'ı optimize etmek için hangi stratejileri uygularsınız?"
+  * Örnek: "Real-time data pipeline'da data consistency nasıl sağlanır? Exactly-once processing nasıl garantilenir?"
+  
+- 2-3 adet gerçek dünya senaryosu (data pipeline optimization, data quality issues)`;
 
       case "cloud_engineer":
         return `
-- Cloud architecture ve design patterns
-- Multi-cloud strategies
-- Cloud security ve compliance
-- Cost optimization
-- Cloud migration strategies
-- Serverless computing
-- 2-3 gerçek dünya senaryosu (cloud migration, cost optimization, disaster recovery)`;
+- 8-10 adet KRİTİK ve NET teknik test sorusu (CV'deki teknolojilere göre, ${cvInfo.level} seviye)
+  * Her soru CV'deki teknolojilerden en az birine spesifik olmalı
+  * Sorular pratik uygulama ve problem çözme odaklı olmalı
+  * Genel bilgi soruları yerine derinlemesine teknik sorular
+  * Cloud architecture, cost optimization, security odaklı sorular
+  
+  TEKNOLOJİ-SPESİFİK SORU ÖRNEKLERİ (CV'deki teknolojilere göre uyarlanmalı):
+  * AWS Lambda: "AWS Lambda cold start optimization nasıl yapılır? Provisioned concurrency nedir? Detaylı anlatır mısınız?"
+  * AWS Lambda: "Lambda function timeout ve memory allocation stratejileri nelerdir? Cost optimization nasıl yapılır?"
+  * AWS: "AWS VPC architecture nedir? Subnet design ve routing strategies nelerdir?"
+  * AWS: "AWS IAM policy evaluation logic nasıl çalışır? Least privilege principle nasıl uygulanır?"
+  * Azure: "Azure Service Bus vs Event Grid vs Event Hubs farkları nedir? Hangi durumda hangisi kullanılmalıdır?"
+  * Azure: "Azure App Service vs Azure Functions vs Azure Container Instances karşılaştırması"
+  * GCP: "GCP IAM best practices nelerdir? Service accounts vs User accounts ne zaman kullanılır?"
+  * GCP: "GCP Cloud Functions vs Cloud Run farkları nedir? Serverless architecture patterns"
+  * Multi-cloud: "Multi-cloud networking stratejileri nelerdir? VPN vs Direct Connect vs Interconnect"
+  * Cost Optimization: "Cloud cost optimization teknikleri nelerdir? Reserved instances vs Spot instances stratejileri"
+  
+- 2-3 adet ELEME SORUSU (çok zor, kritik sorular - adayı gerçekten test eden)
+  * Örnek: "Multi-cloud ortamında disaster recovery stratejisi nasıl tasarlanır? RTO ve RPO hedefleri nasıl karşılanır?"
+  * Örnek: "Cloud migration sırasında zero-downtime migration stratejisi nasıl uygulanır? Blue-green deployment pattern"
+  
+- 2-3 adet gerçek dünya senaryosu (cloud migration, cost optimization, disaster recovery)`;
 
       case "system_admin":
         return `
-- Network yönetimi ve troubleshooting
-- Server management ve maintenance
-- Security best practices
-- Backup ve recovery strategies
-- Scripting ve automation (Bash, PowerShell, Python)
-- System monitoring ve performance tuning
-- 2-3 gerçek dünya senaryosu (system outage, security incident, capacity planning)`;
+- 8-10 adet KRİTİK ve NET teknik test sorusu (CV'deki teknolojilere göre, ${cvInfo.level} seviye)
+  * Her soru CV'deki teknolojilerden en az birine spesifik olmalı
+  * Sorular pratik uygulama ve problem çözme odaklı olmalı
+  * Genel bilgi soruları yerine derinlemesine teknik sorular
+  * System management, automation, troubleshooting odaklı sorular
+  
+  TEKNOLOJİ-SPESİFİK SORU ÖRNEKLERİ (CV'deki teknolojilere göre uyarlanmalı):
+  * Linux: "Linux process management nasıl çalışır? Process states ve scheduling algorithms nelerdir? Detaylı anlatır mısınız?"
+  * Linux: "Linux file permissions ve ACL (Access Control Lists) nasıl yönetilir? chmod, chown, setuid/setgid"
+  * Linux: "Linux systemd service management nasıl yapılır? Unit files ve dependency management"
+  * Windows: "Windows PowerShell automation stratejileri nelerdir? Desired State Configuration (DSC) nasıl kullanılır?"
+  * Windows: "Windows Group Policy management nasıl yapılır? GPO inheritance ve precedence"
+  * Scripting: "Bash scripting best practices nelerdir? Error handling ve logging stratejileri"
+  * Scripting: "Python automation scripts'te subprocess vs os.system farkları nedir? Process management"
+  * Monitoring: "System monitoring tools (Nagios, Zabbix, Prometheus) karşılaştırması. Alerting stratejileri"
+  * Backup: "Backup ve recovery stratejileri nelerdir? Full vs Incremental vs Differential backup farkları"
+  * Security: "System hardening best practices nelerdir? Firewall configuration ve intrusion detection"
+  
+- 2-3 adet ELEME SORUSU (çok zor, kritik sorular - adayı gerçekten test eden)
+  * Örnek: "Production sistemde disk space dolduğunda hangi adımları izlersiniz? Log rotation ve cleanup stratejileri"
+  * Örnek: "100+ server'lı bir ortamda configuration management nasıl yapılır? Infrastructure as Code stratejileri"
+  
+- 2-3 adet gerçek dünya senaryosu (system outage, security incident, capacity planning)`;
 
       case "network_engineer":
         return `
-- Network design ve architecture
-- Routing ve switching protocols
-- Network security ve firewalls
-- Network troubleshooting
-- VPN ve remote access solutions
-- Network monitoring tools
-- 2-3 gerçek dünya senaryosu (network outage, security breach, capacity planning)`;
+- 8-10 adet KRİTİK ve NET teknik test sorusu (CV'deki teknolojilere göre, ${cvInfo.level} seviye)
+  * Her soru CV'deki teknolojilerden en az birine spesifik olmalı
+  * Sorular pratik uygulama ve problem çözme odaklı olmalı
+  * Genel bilgi soruları yerine derinlemesine teknik sorular
+  * Network architecture, routing protocols, security odaklı sorular
+  
+  TEKNOLOJİ-SPESİFİK SORU ÖRNEKLERİ (CV'deki teknolojilere göre uyarlanmalı):
+  * Routing: "OSPF vs BGP routing protocols farkları nedir? Hangi durumda hangisi kullanılmalıdır? Detaylı anlatır mısınız?"
+  * Routing: "OSPF area types (stub, NSSA, totally stubby) nelerdir? Network design'da nasıl kullanılır?"
+  * Switching: "VLAN configuration ve trunking nasıl yapılır? 802.1Q tagging nedir?"
+  * Switching: "Spanning Tree Protocol (STP) nasıl çalışır? RSTP vs MSTP farkları nedir?"
+  * Firewall: "Firewall rule optimization stratejileri nelerdir? Stateful vs Stateless firewall farkları"
+  * Firewall: "Network Address Translation (NAT) types nelerdir? Static NAT vs Dynamic NAT vs PAT"
+  * VPN: "VPN protocols (IPSec, SSL/TLS, OpenVPN) karşılaştırması. Site-to-site vs Remote access VPN"
+  * VPN: "VPN tunnel establishment process nasıl çalışır? IKE (Internet Key Exchange) protocol"
+  * Network Monitoring: "Network monitoring tools (Wireshark, tcpdump, SNMP) nasıl kullanılır? Packet analysis"
+  * Troubleshooting: "Network troubleshooting metodolojileri nelerdir? OSI model'e göre problem isolation"
+  
+- 2-3 adet ELEME SORUSU (çok zor, kritik sorular - adayı gerçekten test eden)
+  * Örnek: "Multi-site network'te routing loop nasıl önlenir? BGP route filtering ve prefix lists"
+  * Örnek: "High-availability network design nasıl yapılır? Redundancy ve failover stratejileri"
+  
+- 2-3 adet gerçek dünya senaryosu (network outage, security breach, capacity planning)`;
 
       default: // developer
         return `
@@ -824,16 +950,34 @@ export async function generateStage3Questions(cvId: string): Promise<z.infer<typ
   * Sorular pratik uygulama ve problem çözme odaklı olmalı
   * Genel bilgi soruları yerine derinlemesine teknik sorular
   * Mimari, performans, güvenlik, optimizasyon odaklı sorular
+  
+  TEKNOLOJİ-SPESİFİK SORU ÖRNEKLERİ (CV'deki teknolojilere göre uyarlanmalı):
+  * .NET Core: "ASP.NET Core middleware pipeline'ı ne işe yarar? Request pipeline'da middleware'lerin sırası neden önemlidir? Detaylı anlatır mısınız?"
+  * .NET Core: "Dependency Injection container'da singleton, scoped ve transient yaşam döngüleri arasındaki farklar nelerdir? Hangi durumda hangisini kullanmalıyız?"
+  * SOLID Prensipleri: "Liskov Substitution Principle (LSP) nedir? Detaylı anlatır mısınız? Gerçek bir örnekle açıklayabilir misiniz?"
+  * SOLID Prensipleri: "Interface Segregation Principle (ISP) nedir? Neden önemlidir? Büyük interface'ler yerine küçük, spesifik interface'ler kullanmanın avantajları nelerdir?"
+  * Data Consistency: "Data consistency nedir? ACID properties nelerdir? Detaylı anlatır mısınız?"
+  * Microservices: "Mikroservis mimarisinde data tutarlılığı nasıl sağlanır? Eventual consistency nedir? Distributed transaction yönetimi nasıl yapılır?"
+  * Microservices: "Saga pattern nedir? Mikroservisler arasında transaction yönetimi için nasıl kullanılır?"
+  * C#: "C# async/await pattern'inde deadlock nasıl önlenir? ConfigureAwait(false) ne zaman kullanılmalıdır?"
+  * Database: "Database transaction isolation levels nelerdir? Hangi durumda hangi isolation level kullanılmalıdır?"
+  * Architecture: "Mikroservis mimarisinde distributed transaction nasıl yönetilir? Two-phase commit vs Saga pattern karşılaştırması"
+  
   * Örnek: "C# async/await pattern'inde deadlock nasıl önlenir?", "Mikroservis mimarisinde distributed transaction nasıl yönetilir?" gibi spesifik ve zor sorular
+  
 - 2-3 adet ELEME SORUSU (çok zor, kritik sorular - adayı gerçekten test eden)
   * Bu sorular adayın gerçekten konuyu bilip bilmediğini test etmeli
   * Sadece ezberlenmiş cevaplarla geçilemeyecek derinlikte olmalı
   * Mimari tasarım, performans optimizasyonu, güvenlik, edge case'ler gibi konular
   * Örnek: "10 milyon kullanıcılı bir sistemde cache invalidation stratejisi nasıl olmalı?" gibi gerçek dünya problemleri
+  * Örnek: "Mikroservis mimarisinde eventual consistency nasıl yönetilir? CAP theorem'e göre nasıl bir trade-off yapılmalıdır?"
+  
 - 1 adet canlı kodlama sorusu (${cvInfo.technologies[0] || "C#"} veya benzeri bir dilde)
   * Orta-ileri seviye zorlukta olmalı
+  
 - 1 adet bugfix sorusu (hatalı kod verilip düzeltilmesi istenecek)
   * Karmaşık bug'lar içermeli, basit syntax hataları değil
+  
 - 2-3 adet gerçek dünya senaryosu (örn: Kasım indirimlerinde yoğun trafik, mikroservis mimarisi, performans optimizasyonu, scaling challenges)
   * Senaryolar zorlaştırılmalı, gerçek production problemlerine benzer olmalı`;
     }
@@ -862,7 +1006,7 @@ ${getTechnicalQuestionsTemplate(cvInfo.positionType)}
 - Gerçek dünya senaryoları pratik ve uygulanabilir olmalı
 ${isDeveloper ? `- Canlı kodlama ve bugfix soruları ${primaryLanguage} dilinde olmalı` : "- Developer pozisyonu olmadığı için canlı kodlama ve bugfix soruları opsiyoneldir"}
 
-KRİTİK: Teknik Sorular İçin Özel Gereksinimler:
+KRİTİK: Teknik Sorular İçin Özel Gereksinimler - TÜM POZİSYON TİPLERİ İÇİN GEÇERLİ:
 - testQuestions: CV'deki her teknoloji için derinlemesine ve kritik sorular oluştur
   * Sorular sadece genel bilgi sormamalı, pratik uygulama ve problem çözme odaklı olmalı
   * Her soru CV'deki teknolojilerden en az birine spesifik olarak odaklanmalı
@@ -870,13 +1014,37 @@ KRİTİK: Teknik Sorular İçin Özel Gereksinimler:
   * ${cvInfo.technologies.length > 0 ? `CV'deki teknolojiler (${cvInfo.technologies.join(", ")}) için özel sorular oluştur. Her teknoloji için en az 1-2 kritik soru olmalı.` : "CV'de teknoloji belirtilmemişse, pozisyon tipine göre uygun teknolojiler için sorular oluştur."}
   * Sorular ${cvInfo.level} seviyeye uygun derinlikte olmalı (beginner: temel kavramlar, intermediate: pratik uygulama, advanced: mimari ve optimizasyon)
   * Test soruları çoktan seçmeli veya açık uçlu olabilir, ancak mutlaka CV'deki teknolojilere özel olmalı
+  
+  TEKNOLOJİ-SPESİFİK SORU ÜRETME ÖRNEKLERİ (Pozisyon tipine göre):
+  * Pozisyon: ${positionTypeLabels[cvInfo.positionType]}
+  * CV'deki teknolojilere göre aşağıdaki gibi spesifik sorular üret:
+  
+  ÖRNEK FORMATLAR:
+  - "CV'de Docker varsa: Docker container lifecycle nedir? Container vs Image farkı nedir? Detaylı anlatır mısınız?"
+  - "CV'de Kubernetes varsa: Kubernetes pod scheduling algoritması nasıl çalışır? Node affinity nedir?"
+  - "CV'de Selenium varsa: Selenium WebDriver architecture nasıl çalışır? Explicit vs Implicit wait farkı nedir?"
+  - "CV'de Spark varsa: Spark RDD vs DataFrame vs Dataset farkları nelerdir? Hangi durumda hangisini kullanmalıyız?"
+  - "CV'de AWS Lambda varsa: AWS Lambda cold start optimization nasıl yapılır? Provisioned concurrency nedir?"
+  - "CV'de Linux varsa: Linux process management nasıl çalışır? Process states ve scheduling algorithms nelerdir?"
+  - "CV'de OSPF varsa: OSPF vs BGP routing protocols farkları nedir? Area types nelerdir?"
+  - "CV'de .NET Core varsa: ASP.NET Core middleware pipeline'ı ne işe yarar? Request pipeline'da middleware'lerin sırası neden önemlidir?"
+  
+  ÖNEMLİ: Her soru CV'deki teknolojilere göre bu formatta spesifik ve detaylı olmalı. Genel bilgi soruları ASLA sorma.
 
 - eliminationQuestions: ELEME SORULARI (çok zor, kritik)
   * Bu sorular adayın gerçekten konuyu bilip bilmediğini test etmeli
   * Sadece ezberlenmiş cevaplarla geçilemeyecek derinlikte olmalı
   * Mimari tasarım, performans optimizasyonu, güvenlik, edge case'ler, distributed systems gibi konular
   * Gerçek production problemlerine benzer senaryolar
-  * Örnek: "10 milyon kullanıcılı bir sistemde cache invalidation stratejisi nasıl olmalı?", "Mikroservis mimarisinde eventual consistency nasıl yönetilir?"
+  * Pozisyon tipine (${positionTypeLabels[cvInfo.positionType]}) ve CV'deki teknolojilere göre özelleştirilmiş olmalı
+  * Örnek: "10 milyon kullanıcılı bir sistemde cache invalidation stratejisi nasıl olmalı?" (Developer için)
+  * Örnek: "Kubernetes cluster'da resource quota ve limit range nasıl yönetilir? OOM durumları nasıl önlenir?" (DevOps için)
+  * Örnek: "Flaky test'ler nasıl tespit edilir ve çözülür? Test stability nasıl artırılır?" (Test Engineer için)
+  * Örnek: "Zero-day vulnerability tespit edildiğinde incident response süreci nasıl olmalıdır?" (Security Engineer için)
+  * Örnek: "1 milyar satırlık bir dataset'te join operation'ı optimize etmek için hangi stratejileri uygularsınız?" (Data Engineer için)
+  * Örnek: "Multi-cloud ortamında disaster recovery stratejisi nasıl tasarlanır?" (Cloud Engineer için)
+  * Örnek: "100+ server'lı bir ortamda configuration management nasıl yapılır?" (System Admin için)
+  * Örnek: "Multi-site network'te routing loop nasıl önlenir? BGP route filtering stratejileri" (Network Engineer için)
   * Bu sorular adayı gerçekten zorlamalı ve elemede kritik rol oynamalı
 
 KRİTİK GEREKSİNİMLER:
@@ -982,20 +1150,52 @@ DİKKAT:
           role: "system",
           content: `Sen bir ${positionTypeLabels[cvInfo.positionType]} mülakat uzmanısın ve İK profesyonelisin. CV'lere göre çok kapsamlı, gerçekçi ve adil teknik mülakat soruları hazırlıyorsun. Pozisyon tipine göre (${positionTypeLabels[cvInfo.positionType]}) uygun teknik sorular hazırlıyorsun. 
 
-KRİTİK KURALLAR:
+KRİTİK KURALLAR - TÜM POZİSYON TİPLERİ İÇİN GEÇERLİ:
 1. testQuestions: CV'deki teknolojilere (${cvInfo.technologies.join(", ") || "belirtilmemiş"}) göre KRİTİK ve NET sorular oluştur
    * En az 8 soru olmalı
    * Mimari, performans, güvenlik, optimizasyon odaklı sorular
    * Derinlemesine teknik bilgi gerektiren sorular
+   * HER SORU CV'DEKİ TEKNOLOJİLERDEN EN AZ BİRİNE SPESİFİK OLMALI - Genel bilgi soruları ASLA sorma
+   
+   TEKNOLOJİ-SPESİFİK SORU ÜRETME KURALLARI (Pozisyon tipine göre):
+   * Developer: CV'de .NET Core varsa middleware pipeline, dependency injection, async/await gibi konuları sor
+   * Developer: SOLID prensipleri (özellikle Liskov Substitution, Interface Segregation) hakkında detaylı sorular sor
+   * Developer: Data consistency, ACID properties, eventual consistency gibi veritabanı ve mimari konuları sor
+   * Developer: Mikroservis mimarisinde data tutarlılığı, distributed transactions, Saga pattern gibi konuları sor
+   * DevOps: CV'de Docker varsa container lifecycle, multi-stage build, image optimization gibi konuları sor
+   * DevOps: CV'de Kubernetes varsa pod scheduling, service types, resource management gibi konuları sor
+   * DevOps: CV'de Terraform varsa state management, modules, remote state gibi konuları sor
+   * Test Engineer: CV'de Selenium varsa WebDriver architecture, wait strategies, Grid configuration gibi konuları sor
+   * Test Engineer: CV'de Cypress varsa test execution model, async handling, best practices gibi konuları sor
+   * Test Engineer: CV'de Jest varsa mocking strategies, snapshot testing, performance optimization gibi konuları sor
+   * Security Engineer: CV'de OWASP varsa Top 10 vulnerabilities, security testing methodologies gibi konuları sor
+   * Security Engineer: CV'de penetration testing tools varsa metodolojiler, tool comparison gibi konuları sor
+   * Data Engineer: CV'de Spark varsa RDD vs DataFrame, shuffle optimization, broadcast variables gibi konuları sor
+   * Data Engineer: CV'de ETL tools varsa pipeline optimization, error handling, incremental load gibi konuları sor
+   * Cloud Engineer: CV'de AWS varsa Lambda optimization, VPC architecture, IAM policies gibi konuları sor
+   * Cloud Engineer: CV'de Azure varsa Service Bus patterns, App Service vs Functions, cost optimization gibi konuları sor
+   * System Admin: CV'de Linux varsa process management, systemd, file permissions gibi konuları sor
+   * System Admin: CV'de scripting varsa automation strategies, error handling, best practices gibi konuları sor
+   * Network Engineer: CV'de routing protocols varsa OSPF vs BGP, area types, route filtering gibi konuları sor
+   * Network Engineer: CV'de switching varsa VLAN configuration, STP protocols, trunking gibi konuları sor
+   
+   ÖNEMLİ: Pozisyon tipine göre (${positionTypeLabels[cvInfo.positionType]}) uygun teknoloji konularını seç ve CV'deki teknolojilere göre spesifik sorular üret.
+
 2. eliminationQuestions: ÇOK ZOR eleme soruları oluştur
    * En az 2 soru olmalı
    * Adayın gerçekten konuyu bilip bilmediğini test eden sorular
    * Sadece ezberlenmiş cevaplarla geçilemeyecek derinlikte
    * Gerçek production problemlerine benzer senaryolar
-   * Mimari tasarım, distributed systems, scalability gibi konular
-2. Her soru CV'deki teknolojilerden en az birine spesifik olmalı
-3. Sorular pratik uygulama ve problem çözme odaklı olmalı, genel bilgi soruları değil
-4. ${cvInfo.level} seviyeye uygun derinlikte sorular (beginner: temel, intermediate: pratik, advanced: mimari/optimizasyon)
+   * Mimari tasarım, distributed systems, scalability, performance optimization gibi konular
+   * Pozisyon tipine ve CV'deki teknolojilere göre özelleştirilmiş eleme soruları
+   * Örnek: "Mikroservis mimarisinde eventual consistency nasıl yönetilir? CAP theorem'e göre nasıl bir trade-off yapılmalıdır?"
+   * Örnek: "10 milyon kullanıcılı bir sistemde zero-downtime deployment stratejisi nasıl olmalı?" (DevOps için)
+   * Örnek: "1000+ test case'li bir projede test execution süresini %50 azaltmak için hangi stratejileri uygularsınız?" (Test Engineer için)
+
+3. Her soru CV'deki teknolojilerden en az birine spesifik olmalı - Genel bilgi soruları ASLA sorma
+4. Sorular pratik uygulama ve problem çözme odaklı olmalı, genel bilgi soruları değil
+5. ${cvInfo.level} seviyeye uygun derinlikte sorular (beginner: temel, intermediate: pratik, advanced: mimari/optimizasyon)
+6. Pozisyon tipine (${positionTypeLabels[cvInfo.positionType]}) göre uygun teknoloji ekosisteminden sorular seç
 5. Her zaman JSON formatında yanıt ver ve aşağıdaki yapıya TAM OLARAK uy:
    - "stage3_technical" ana anahtarı ile başla
    - "testQuestions" array'i MUTLAKA en az 5 soru içermeli

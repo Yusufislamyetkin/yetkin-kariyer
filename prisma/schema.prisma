@@ -161,10 +161,10 @@ enum EarningType {
 model User {
   id                   String    @id @default(cuid())
   email                String    @unique
-  password             String?   // Nullable for OAuth users
+  password             String? // Nullable for OAuth users
   name                 String?
   emailVerified        DateTime? // For OAuth email verification
-  iban                 String?   // Bank account IBAN
+  iban                 String? // Bank account IBAN
   role                 UserRole  @default(candidate)
   profileImage         String?
   isBot                Boolean   @default(false)
@@ -237,9 +237,9 @@ model User {
   botNewsSources                BotNewsSource[]
   botActivities                 BotActivity[]
   botActivityExecutions         BotActivityExecution[]
-  accounts                     Account[]
+  accounts                      Account[]
   certificates                  Certificate[]
-  earnings                     Earning[]
+  earnings                      Earning[]
 
   @@map("app_users")
 }
@@ -247,8 +247,8 @@ model User {
 model Account {
   id                String  @id @default(cuid())
   userId            String
-  type              String  // "oauth" | "credentials"
-  provider          String  // "google" | "credentials"
+  type              String // "oauth" | "credentials"
+  provider          String // "google" | "credentials"
   providerAccountId String
   refresh_token     String? @db.Text
   access_token      String? @db.Text
@@ -369,10 +369,10 @@ model Certificate {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
+  @@unique([userId, courseId])
   @@index([userId])
   @@index([courseId])
   @@index([certificateNumber])
-  @@unique([userId, courseId])
   @@map("certificates")
 }
 
@@ -546,7 +546,7 @@ model Interview {
 
   // Relations
   interviewAttempts InterviewAttempt[]
-  cv                CV?              @relation(fields: [cvId], references: [id], onDelete: Cascade)
+  cv                CV?                @relation(fields: [cvId], references: [id], onDelete: Cascade)
 
   @@map("interviews")
 }
@@ -809,11 +809,11 @@ model Badge {
 }
 
 model UserBadge {
-  id          String   @id @default(cuid())
-  userId      String
-  badgeId     String
-  earnedAt    DateTime @default(now())
-  isDisplayed Boolean  @default(false) // max 3 can be displayed on profile
+  id            String   @id @default(cuid())
+  userId        String
+  badgeId       String
+  earnedAt      DateTime @default(now())
+  isDisplayed   Boolean  @default(false) // max 3 can be displayed on profile
   featuredOrder Int?
   evidenceJson  Json?
 
@@ -835,7 +835,7 @@ model GamificationEvent {
   dedupKey   String?  @unique
   createdAt  DateTime @default(now())
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User               @relation(fields: [userId], references: [id], onDelete: Cascade)
   pointTransactions PointTransaction[]
 
   @@index([userId, occurredAt])
@@ -876,12 +876,12 @@ enum PointSource {
 }
 
 model UserEarnedPoint {
-  id        String      @id @default(cuid())
-  userId    String
-  points    Int
-  source    PointSource
-  sourceId  String?     // badgeId veya strikeId
-  earnedAt  DateTime    @default(now())
+  id       String      @id @default(cuid())
+  userId   String
+  points   Int
+  source   PointSource
+  sourceId String? // badgeId veya strikeId
+  earnedAt DateTime    @default(now())
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -891,16 +891,16 @@ model UserEarnedPoint {
 }
 
 model Quest {
-  id         String   @id @default(cuid())
-  key        String   @unique
+  id         String    @id @default(cuid())
+  key        String    @unique
   title      String
-  period     String   // daily|weekly|monthly|seasonal
+  period     String // daily|weekly|monthly|seasonal
   ruleJson   Json
   rewardJson Json
   activeFrom DateTime?
   activeTo   DateTime?
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
 
   progresses QuestProgress[]
 
@@ -908,13 +908,13 @@ model Quest {
 }
 
 model QuestProgress {
-  id          String   @id @default(cuid())
+  id          String    @id @default(cuid())
   userId      String
   questId     String
-  progress    Int      @default(0)
+  progress    Int       @default(0)
   completedAt DateTime?
-  updatedAt   DateTime @updatedAt
-  createdAt   DateTime @default(now())
+  updatedAt   DateTime  @updatedAt
+  createdAt   DateTime  @default(now())
 
   user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
   quest Quest @relation(fields: [questId], references: [id], onDelete: Cascade)
@@ -926,8 +926,8 @@ model QuestProgress {
 
 model LeaderboardSnapshot {
   id        String   @id @default(cuid())
-  period    String   // daily|weekly|monthly|season
-  scope     String   // global|topic:<slug>|hackathon:<id>
+  period    String // daily|weekly|monthly|season
+  scope     String // global|topic:<slug>|hackathon:<id>
   rankJson  Json
   createdAt DateTime @default(now())
 
@@ -936,15 +936,15 @@ model LeaderboardSnapshot {
 }
 
 model Reward {
-  id       String     @id @default(cuid())
-  sku      String     @unique
-  title    String
-  type     RewardType
-  cost     Int
-  stock    Int?
-  metaJson Json?
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  id        String     @id @default(cuid())
+  sku       String     @unique
+  title     String
+  type      RewardType
+  cost      Int
+  stock     Int?
+  metaJson  Json?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
 
   redemptions RewardRedemption[]
 
@@ -952,15 +952,15 @@ model Reward {
 }
 
 model RewardRedemption {
-  id         String    @id @default(cuid())
-  userId     String
-  rewardId   String
-  cost       Int
-  status     String    @default("REQUESTED") // REQUESTED|APPROVED|FULFILLED|DELIVERED|CANCELLED
+  id           String   @id @default(cuid())
+  userId       String
+  rewardId     String
+  cost         Int
+  status       String   @default("REQUESTED") // REQUESTED|APPROVED|FULFILLED|DELIVERED|CANCELLED
   shippingJson Json?
-  code       String?
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
+  code         String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   reward Reward @relation(fields: [rewardId], references: [id], onDelete: Cascade)
@@ -984,13 +984,13 @@ model UserInventory {
 }
 
 model AdminAuditLog {
-  id        String   @id @default(cuid())
-  adminId   String
-  action    String
-  target    String?
+  id         String   @id @default(cuid())
+  adminId    String
+  action     String
+  target     String?
   beforeJson Json?
   afterJson  Json?
-  createdAt DateTime @default(now())
+  createdAt  DateTime @default(now())
 
   @@index([adminId, createdAt])
   @@map("admin_audit_logs")
@@ -1065,8 +1065,8 @@ model Earning {
   userId      String
   type        EarningType
   amount      Float
-  referenceId String?     // hackathonSubmissionId, leaderboardEntryId, or freelancerBidId
-  metadata    Json?       // Additional context (hackathon title, project title, etc.)
+  referenceId String? // hackathonSubmissionId, leaderboardEntryId, or freelancerBidId
+  metadata    Json? // Additional context (hackathon title, project title, etc.)
   earnedAt    DateTime    @default(now())
   createdAt   DateTime    @default(now())
 
@@ -1531,10 +1531,10 @@ model Story {
 }
 
 model StoryView {
-  id        String   @id @default(cuid())
-  storyId   String
-  userId    String
-  viewedAt  DateTime @default(now())
+  id       String   @id @default(cuid())
+  storyId  String
+  userId   String
+  viewedAt DateTime @default(now())
 
   // Relations
   story Story @relation(fields: [storyId], references: [id], onDelete: Cascade)
@@ -1548,33 +1548,33 @@ model StoryView {
 
 // Live Coding & Bugfix Challenge Models
 model LiveCodingChallenge {
-  id           String   @id @default(cuid())
-  title        String
-  description  String?
-  difficulty   String?                 // beginner | intermediate | advanced
-  languages    String[] @default([])   // ["javascript","csharp","python","java"]
-  starterCode  Json?                   // { javascript: "...", csharp: "...", ... }
-  tests        Json?                   // lightweight test cases or IO expectations
-  tags         String[] @default([])
-  isPublished  Boolean  @default(false)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  difficulty  String? // beginner | intermediate | advanced
+  languages   String[] @default([]) // ["javascript","csharp","python","java"]
+  starterCode Json? // { javascript: "...", csharp: "...", ... }
+  tests       Json? // lightweight test cases or IO expectations
+  tags        String[] @default([])
+  isPublished Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   @@index([isPublished, createdAt])
   @@map("live_coding_challenges")
 }
 
 model BugFixChallenge {
-  id              String   @id @default(cuid())
-  title           String
-  buggyCode       String
-  fixDescription  String?
-  language        String                  // "javascript" | "csharp" | "python" | "java"
-  tests           Json?
-  tags            String[] @default([])
-  isPublished     Boolean  @default(false)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id             String   @id @default(cuid())
+  title          String
+  buggyCode      String
+  fixDescription String?
+  language       String // "javascript" | "csharp" | "python" | "java"
+  tests          Json?
+  tags           String[] @default([])
+  isPublished    Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   @@index([language, isPublished, createdAt])
   @@map("bug_fix_challenges")
@@ -1582,15 +1582,15 @@ model BugFixChallenge {
 
 // Bot System Models
 model BotCharacter {
-  id          String   @id @default(cuid())
-  userId      String   @unique
-  name        String
-  persona     String   // Character personality description
-  systemPrompt String  // OpenAI system prompt
-  traits      Json?    // Character traits as JSON
-  expertise   String[] @default([]) // Areas of expertise
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id           String   @id @default(cuid())
+  userId       String   @unique
+  name         String
+  persona      String // Character personality description
+  systemPrompt String // OpenAI system prompt
+  traits       Json? // Character traits as JSON
+  expertise    String[] @default([]) // Areas of expertise
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -1598,29 +1598,33 @@ model BotCharacter {
 }
 
 model BotConfiguration {
-  id                    String   @id @default(cuid())
-  userId                String   @unique
-  isActive              Boolean  @default(true)
-  minPostsPerDay        Int      @default(1)
-  maxPostsPerDay        Int      @default(3)
-  minCommentsPerDay     Int      @default(0)
-  maxCommentsPerDay     Int      @default(5)
-  minLikesPerDay        Int      @default(0)
-  maxLikesPerDay        Int      @default(10)
-  minTestsPerWeek       Int      @default(0)
-  maxTestsPerWeek       Int      @default(3)
-  minLiveCodingPerWeek  Int      @default(0)
-  maxLiveCodingPerWeek  Int      @default(2)
-  minBugFixPerWeek      Int      @default(0)
-  maxBugFixPerWeek      Int      @default(2)
-  minLessonsPerWeek     Int      @default(0)
-  maxLessonsPerWeek     Int      @default(5)
-  minChatMessagesPerDay Int      @default(0)
-  maxChatMessagesPerDay Int      @default(10)
-  activityHours         Int[]    @default([9, 12, 18, 21]) // Hours when bot is most active
+  id                    String    @id @default(cuid())
+  userId                String    @unique
+  isActive              Boolean   @default(true)
+  minPostsPerDay        Int       @default(1)
+  maxPostsPerDay        Int       @default(3)
+  minCommentsPerDay     Int       @default(0)
+  maxCommentsPerDay     Int       @default(5)
+  minLikesPerDay        Int       @default(0)
+  maxLikesPerDay        Int       @default(10)
+  minTestsPerWeek       Int       @default(0)
+  maxTestsPerWeek       Int       @default(3)
+  minLiveCodingPerWeek  Int       @default(0)
+  maxLiveCodingPerWeek  Int       @default(2)
+  minBugFixPerWeek      Int       @default(0)
+  maxBugFixPerWeek      Int       @default(2)
+  minLessonsPerWeek     Int       @default(0)
+  maxLessonsPerWeek     Int       @default(5)
+  minChatMessagesPerDay Int       @default(0)
+  maxChatMessagesPerDay Int       @default(10)
+  activityHours         Int[]     @default([9, 12, 18, 21]) // Hours when bot is most active
+  enabledActivities     String[]  @default([]) // Array of enabled activity types
+  activityIntervals     Json? // Map of activity type to interval in minutes
+  scheduleEnabled       Boolean   @default(false) // Whether scheduling is enabled
+  lastScheduledAt       DateTime?
   lastActivityAt        DateTime?
-  createdAt             DateTime @default(now())
-  updatedAt             DateTime @updatedAt
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -1631,7 +1635,7 @@ model BotConfiguration {
 model BotNewsSource {
   id        String   @id @default(cuid())
   botId     String
-  sourceId  String   // news-sources.ts'deki kaynak ID'si
+  sourceId  String // news-sources.ts'deki kaynak ID'si
   usedAt    DateTime @default(now())
   createdAt DateTime @default(now())
 
@@ -1660,15 +1664,15 @@ enum BotActivityType {
 }
 
 model BotActivity {
-  id          String           @id @default(cuid())
-  userId      String
+  id           String          @id @default(cuid())
+  userId       String
   activityType BotActivityType
-  targetId    String?          // ID of the target (post, comment, test, etc.)
-  details     Json?            // Additional activity details
-  success     Boolean          @default(true)
+  targetId     String? // ID of the target (post, comment, test, etc.)
+  details      Json? // Additional activity details
+  success      Boolean         @default(true)
   errorMessage String?
-  executedAt  DateTime         @default(now())
-  createdAt   DateTime         @default(now())
+  executedAt   DateTime        @default(now())
+  createdAt    DateTime        @default(now())
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -1679,29 +1683,29 @@ model BotActivity {
 
 // Bot Campaign System Models
 model BotActivityCampaign {
-  id              String   @id @default(cuid())
-  name            String
-  activityType     String   // POST, LIKE, FREELANCER_BID, FRIEND_REQUEST, etc.
+  id               String    @id @default(cuid())
+  name             String
+  activityType     String // POST, LIKE, FREELANCER_BID, FRIEND_REQUEST, etc.
   botCount         Int
-  totalActivities  Int     // Toplam yapılacak aktivite sayısı
-  durationHours    Int      // 24 saat gibi
+  totalActivities  Int // Toplam yapılacak aktivite sayısı
+  durationHours    Int // 24 saat gibi
   startTime        DateTime
   endTime          DateTime
-  status           String   // pending, running, completed, failed, cancelled
-  config           Json     // Aktiviteye özel konfigürasyon
-  hangfireJobId    String?  // Hangfire job ID
-  isRecurring      Boolean  @default(false) // Günlük tekrarlayan kampanya mı?
-  recurringPattern String?  // "daily", "weekly", etc.
-  parentCampaignId String?  // Recurring kampanya zincirini takip etmek için
+  status           String // pending, running, completed, failed, cancelled
+  config           Json // Aktiviteye özel konfigürasyon
+  hangfireJobId    String? // Hangfire job ID
+  isRecurring      Boolean   @default(false) // Günlük tekrarlayan kampanya mı?
+  recurringPattern String? // "daily", "weekly", etc.
+  parentCampaignId String? // Recurring kampanya zincirini takip etmek için
   nextRunAt        DateTime? // Bir sonraki recurring kampanyanın oluşturulacağı zaman
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
-  
-  jobs            BotActivityCampaignJob[]
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  jobs           BotActivityCampaignJob[]
   executions     BotActivityExecution[]
-  parentCampaign BotActivityCampaign? @relation("RecurringCampaigns", fields: [parentCampaignId], references: [id], onDelete: SetNull)
-  childCampaigns  BotActivityCampaign[] @relation("RecurringCampaigns")
-  
+  parentCampaign BotActivityCampaign?     @relation("RecurringCampaigns", fields: [parentCampaignId], references: [id], onDelete: SetNull)
+  childCampaigns BotActivityCampaign[]    @relation("RecurringCampaigns")
+
   @@index([status, createdAt])
   @@index([activityType, status])
   @@index([isRecurring, nextRunAt])
@@ -1713,12 +1717,12 @@ model BotActivityCampaignJob {
   id            String   @id @default(cuid())
   campaignId    String
   hangfireJobId String
-  status        String   // scheduled, running, completed, failed, cancelled
+  status        String // scheduled, running, completed, failed, cancelled
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
-  
-  campaign      BotActivityCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
-  
+
+  campaign BotActivityCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
   @@index([campaignId])
   @@index([hangfireJobId])
   @@map("bot_activity_campaign_jobs")
@@ -1733,10 +1737,10 @@ model BotActivityExecution {
   success      Boolean
   errorMessage String?
   executedAt   DateTime @default(now())
-  
-  campaign     BotActivityCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
-  user         User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
+
+  campaign BotActivityCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  user     User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@index([campaignId, executedAt])
   @@index([userId, executedAt])
   @@index([activityType, executedAt])

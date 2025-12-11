@@ -29,6 +29,11 @@ const nextConfig = {
         hostname: 'public.blob.vercel-storage.com',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+        pathname: '/**',
+      },
     ],
     // Allow unoptimized images for better compatibility with Vercel Blob Storage
     unoptimized: false,
