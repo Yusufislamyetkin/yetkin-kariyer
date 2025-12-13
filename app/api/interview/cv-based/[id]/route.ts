@@ -67,6 +67,7 @@ export async function GET(
       interview: {
         ...interview,
         questions: normalizeQuestions(interview.questions),
+        cvId: interview.cvId, // CV ID'yi ekle (otomatik cevap doldurma için)
       },
     });
   } catch (error) {

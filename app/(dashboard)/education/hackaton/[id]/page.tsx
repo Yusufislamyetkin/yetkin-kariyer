@@ -1422,7 +1422,7 @@ export default function HackatonDetailPage() {
                       <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300">
                         Solo Başvuranlar
                       </h3>
-                      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
                         {applicants.solo.map((application) => {
                           const initials = application.user.name
                             ? application.user.name
@@ -1435,7 +1435,7 @@ export default function HackatonDetailPage() {
                           return (
                             <div
                               key={application.id}
-                              className="flex items-center gap-3 rounded-lg border border-gray-200 bg-white p-3 shadow-sm dark:border-gray-700 dark:bg-gray-900"
+                              className="flex items-center gap-3 rounded-lg border border-gray-200 bg-white p-3.5 shadow-sm dark:border-gray-700 dark:bg-gray-900"
                             >
                               <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-full bg-gradient-to-br from-blue-500 to-purple-500">
                                 {application.user.profileImage ? (
@@ -1453,10 +1453,10 @@ export default function HackatonDetailPage() {
                                 )}
                               </div>
                               <div className="min-w-0 flex-1">
-                                <p className="truncate text-sm font-medium text-gray-900 dark:text-gray-100">
+                                <p className="line-clamp-2 text-sm font-medium text-gray-900 dark:text-gray-100">
                                   {application.user.name || "İsimsiz Kullanıcı"}
                                 </p>
-                                <p className="text-xs text-gray-500 dark:text-gray-400">
+                                <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
                                   {formatCountdown(application.appliedAt)}
                                 </p>
                               </div>

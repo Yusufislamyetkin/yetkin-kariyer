@@ -14,10 +14,12 @@ export async function GET() {
       orderBy: { updatedAt: "desc" },
     });
 
-    return NextResponse.json({ plan });
+    // Return plan even if null, so frontend can distinguish between "no plan" and "error"
+    return NextResponse.json({ plan: plan || null });
   } catch (error) {
+    console.error("[CAREER_PLAN] Error fetching plan:", error);
     return NextResponse.json(
-      { error: "Kariyer planı yüklenirken bir hata oluştu" },
+      { error: "Kariyer planı yüklenirken bir hata oluştu", plan: null },
       { status: 500 }
     );
   }

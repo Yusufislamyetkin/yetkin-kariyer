@@ -11,8 +11,6 @@ interface QuestionnaireData {
   timeline: string;
   skillLevel: string;
   technologies?: string[];
-  workPreference: string;
-  industryInterests?: string[];
 }
 
 interface CareerPlanQuestionnaireProps {
@@ -123,41 +121,6 @@ const TECHNOLOGY_DESCRIPTIONS: Record<string, string> = {
   "GCP": "Google Cloud Platform - Google'ın bulut bilişim hizmeti.",
 };
 
-const WORK_PREFERENCES = [
-  "Remote",
-  "On-site",
-  "Hybrid",
-  "Fark etmez",
-];
-
-const INDUSTRY_INTERESTS = [
-  "E-ticaret",
-  "Fintech",
-  "SaaS",
-  "Gaming",
-  "Healthcare",
-  "Education",
-  "Social Media",
-  "Enterprise",
-  "Startup",
-  "Açık kaynak",
-  "Henüz karar vermedim",
-];
-
-const INDUSTRY_DESCRIPTIONS: Record<string, string> = {
-  "E-ticaret": "Online alışveriş platformları ve dijital pazarlama çözümleri. E-ticaret siteleri, ödeme sistemleri ve sipariş yönetim sistemleri geliştirme fırsatları.",
-  "Fintech": "Finansal teknolojiler. Dijital bankacılık, ödeme sistemleri, kripto para, yatırım platformları ve finansal inovasyon projeleri.",
-  "SaaS": "Software as a Service - Bulut tabanlı yazılım hizmetleri. Abonelik modeliyle çalışan, ölçeklenebilir iş uygulamaları geliştirme.",
-  "Gaming": "Oyun endüstrisi. Video oyun geliştirme, oyun motorları, mobil oyunlar ve e-spor teknolojileri. Yaratıcılık ve teknik becerilerin birleştiği alan.",
-  "Healthcare": "Sağlık teknolojileri. Elektronik sağlık kayıtları, tele-tıp, medikal cihaz yazılımları ve sağlık analitik sistemleri geliştirme.",
-  "Education": "Eğitim teknolojileri. Online öğrenme platformları, eğitim içerik yönetimi, öğrenci takip sistemleri ve interaktif öğretim araçları.",
-  "Social Media": "Sosyal medya platformları. İçerik paylaşımı, etkileşim araçları, sosyal ağ algoritmaları ve topluluk yönetim sistemleri.",
-  "Enterprise": "Kurumsal yazılım çözümleri. Büyük şirketler için özelleştirilmiş sistemler, iş süreç otomasyonu ve kurumsal kaynak planlama (ERP) uygulamaları.",
-  "Startup": "Yeni nesil teknoloji girişimleri. Hızlı büyüme, inovasyon odaklı projeler, esnek çalışma ortamı ve yüksek etki potansiyeli olan projeler.",
-  "Açık kaynak": "Açık kaynak yazılım geliştirme. Topluluk projeleri, ücretsiz ve özgür yazılım geliştirme, teknoloji paylaşımı ve işbirlikçi projeler.",
-  "Henüz karar vermedim": "Farklı sektörleri keşfetmek ve size uygun olanı bulmak için genel bir kariyer planı hazırlanır. Size çeşitli sektör fırsatlarını tanıtacağız.",
-};
-
 interface Technology {
   name: string;
   description: string | null;
@@ -173,8 +136,6 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
     timeline: "",
     skillLevel: "",
     technologies: [],
-    workPreference: "",
-    industryInterests: [],
   });
   const [showLoadingPopup, setShowLoadingPopup] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
@@ -211,7 +172,7 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
     },
   ];
 
-  const totalSteps = 6;
+  const totalSteps = 5;
 
   // Fetch technologies from API
   useEffect(() => {
@@ -340,9 +301,6 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
       case 5:
         // Technologies are now optional - can proceed without selection
         return true;
-      case 6:
-        // Industry interests are now optional - can proceed without selection
-        return true;
       default:
         return false;
     }
@@ -354,15 +312,6 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
       technologies: (prev.technologies || []).includes(tech)
         ? (prev.technologies || []).filter((t) => t !== tech)
         : [...(prev.technologies || []), tech],
-    }));
-  };
-
-  const toggleIndustryInterest = (interest: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      industryInterests: (prev.industryInterests || []).includes(interest)
-        ? (prev.industryInterests || []).filter((i) => i !== interest)
-        : [...(prev.industryInterests || []), interest],
     }));
   };
 
@@ -584,68 +533,6 @@ export function CareerPlanQuestionnaire({ onComplete, onCancel }: CareerPlanQues
             ) : (
               <p className="text-sm text-gray-500 dark:text-gray-400 italic text-center py-8">
                 Teknolojiler yüklenemedi. Devam edebilirsiniz, size öneriler sunacağız.
-              </p>
-            )}
-          </div>
-        );
-
-      case 6:
-        return (
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                Hangi sektörlerle ilgileniyorsunuz? (Opsiyonel)
-              </h3>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-96 overflow-y-auto">
-              {INDUSTRY_INTERESTS.map((interest) => (
-                <button
-                  key={interest}
-                  type="button"
-                  onClick={() => {
-                    if (interest === "Henüz karar vermedim") {
-                      // "Henüz karar vermedim" seçilirse diğer seçimleri temizle
-                      const isSelected = (formData.industryInterests || []).includes(interest);
-                      setFormData((prev) => ({
-                        ...prev,
-                        industryInterests: isSelected ? [] : ["Henüz karar vermedim"],
-                      }));
-                    } else {
-                      // Diğer seçenekler seçilirse "Henüz karar vermedim"i kaldır
-                      const currentInterests = (formData.industryInterests || []).filter(
-                        (i) => i !== "Henüz karar vermedim"
-                      );
-                      const isSelected = currentInterests.includes(interest);
-                      setFormData((prev) => ({
-                        ...prev,
-                        industryInterests: isSelected
-                          ? currentInterests.filter((i) => i !== interest)
-                          : [...currentInterests, interest],
-                      }));
-                    }
-                  }}
-                  className={`w-full p-4 rounded-lg border-2 transition-all text-left ${
-                    (formData.industryInterests || []).includes(interest)
-                      ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
-                      : "border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500"
-                  }`}
-                >
-                  <div className="space-y-2">
-                    <div className="font-semibold">{interest}</div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                      {INDUSTRY_DESCRIPTIONS[interest]}
-                    </p>
-                  </div>
-                </button>
-              ))}
-            </div>
-            {(formData.industryInterests || []).length > 0 ? (
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Seçilen: {(formData.industryInterests || []).join(", ")}
-              </p>
-            ) : (
-              <p className="text-sm text-gray-500 dark:text-gray-400 italic">
-                Hiçbir sektör seçmediniz. Devam edebilirsiniz, size farklı sektörleri tanıtacağız.
               </p>
             )}
           </div>

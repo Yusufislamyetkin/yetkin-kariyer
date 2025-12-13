@@ -191,43 +191,33 @@ CREATE TABLE IF NOT EXISTS "bot_characters" (
 );
 
 -- bot_configurations tablosu (Bot konfigürasyon ayarları)
+-- Global Bot Scheduler Config (singleton table)
+CREATE TABLE IF NOT EXISTS "global_bot_scheduler_config" (
+    "id" TEXT PRIMARY KEY,
+    "enabledActivities" TEXT[] NOT NULL DEFAULT ARRAY[]::TEXT[],
+    "activityIntervals" JSONB,
+    "activityHours" INTEGER[] NOT NULL DEFAULT ARRAY[9, 12, 18, 21]::INTEGER[],
+    "scheduleEnabled" BOOLEAN NOT NULL DEFAULT FALSE,
+    "maxPostsPerDay" INTEGER NOT NULL DEFAULT 3,
+    "maxCommentsPerDay" INTEGER NOT NULL DEFAULT 5,
+    "maxLikesPerDay" INTEGER NOT NULL DEFAULT 10,
+    "maxTestsPerWeek" INTEGER NOT NULL DEFAULT 3,
+    "maxLiveCodingPerWeek" INTEGER NOT NULL DEFAULT 2,
+    "maxLessonsPerWeek" INTEGER NOT NULL DEFAULT 5,
+    "lastScheduledAt" TIMESTAMP(3),
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Bot Configuration (simplified - only isActive and lastActivityAt)
 CREATE TABLE IF NOT EXISTS "bot_configurations" (
     "id" TEXT PRIMARY KEY,
     "userId" TEXT NOT NULL UNIQUE,
     "isActive" BOOLEAN NOT NULL DEFAULT TRUE,
-    "minPostsPerDay" INTEGER NOT NULL DEFAULT 1,
-    "maxPostsPerDay" INTEGER NOT NULL DEFAULT 3,
-    "minCommentsPerDay" INTEGER NOT NULL DEFAULT 0,
-    "maxCommentsPerDay" INTEGER NOT NULL DEFAULT 5,
-    "minLikesPerDay" INTEGER NOT NULL DEFAULT 0,
-    "maxLikesPerDay" INTEGER NOT NULL DEFAULT 10,
-    "minTestsPerWeek" INTEGER NOT NULL DEFAULT 0,
-    "maxTestsPerWeek" INTEGER NOT NULL DEFAULT 3,
-    "minLiveCodingPerWeek" INTEGER NOT NULL DEFAULT 0,
-    "maxLiveCodingPerWeek" INTEGER NOT NULL DEFAULT 2,
-    "minBugFixPerWeek" INTEGER NOT NULL DEFAULT 0,
-    "maxBugFixPerWeek" INTEGER NOT NULL DEFAULT 2,
-    "minLessonsPerWeek" INTEGER NOT NULL DEFAULT 0,
-    "maxLessonsPerWeek" INTEGER NOT NULL DEFAULT 5,
-    "minChatMessagesPerDay" INTEGER NOT NULL DEFAULT 0,
-    "maxChatMessagesPerDay" INTEGER NOT NULL DEFAULT 10,
-    "activityHours" INTEGER[] NOT NULL DEFAULT ARRAY[9, 12, 18, 21]::INTEGER[],
-    "enabledActivities" TEXT[] NOT NULL DEFAULT ARRAY[]::TEXT[],
-    "activityIntervals" JSONB,
-    "scheduleEnabled" BOOLEAN NOT NULL DEFAULT FALSE,
-    "lastScheduledAt" TIMESTAMP(3),
     "lastActivityAt" TIMESTAMP(3),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT "bot_configurations_userId_fkey" FOREIGN KEY ("userId") REFERENCES "app_users"("id") ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT "bot_configurations_min_max_posts_check" CHECK ("minPostsPerDay" <= "maxPostsPerDay"),
-    CONSTRAINT "bot_configurations_min_max_comments_check" CHECK ("minCommentsPerDay" <= "maxCommentsPerDay"),
-    CONSTRAINT "bot_configurations_min_max_likes_check" CHECK ("minLikesPerDay" <= "maxLikesPerDay"),
-    CONSTRAINT "bot_configurations_min_max_tests_check" CHECK ("minTestsPerWeek" <= "maxTestsPerWeek"),
-    CONSTRAINT "bot_configurations_min_max_live_coding_check" CHECK ("minLiveCodingPerWeek" <= "maxLiveCodingPerWeek"),
-    CONSTRAINT "bot_configurations_min_max_bug_fix_check" CHECK ("minBugFixPerWeek" <= "maxBugFixPerWeek"),
-    CONSTRAINT "bot_configurations_min_max_lessons_check" CHECK ("minLessonsPerWeek" <= "maxLessonsPerWeek"),
-    CONSTRAINT "bot_configurations_min_max_chat_check" CHECK ("minChatMessagesPerDay" <= "maxChatMessagesPerDay")
+    CONSTRAINT "bot_configurations_userId_fkey" FOREIGN KEY ("userId") REFERENCES "app_users"("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- bot_news_sources tablosu (Bot haber kaynakları)

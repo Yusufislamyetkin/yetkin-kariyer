@@ -7,9 +7,7 @@ import { Loader2, Clock, Save, Plus, Trash2, Calendar } from "lucide-react";
 interface ScheduledActivity {
   id?: string;
   activityType: string;
-  botCount: number;
   frequency: "daily" | "weekly";
-  activityHours: number[];
   minCount: number;
   maxCount: number;
   config?: Record<string, any>;
@@ -33,14 +31,23 @@ export function SchedulerManager() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const [warnings, setWarnings] = useState<Array<{ botId: string; error: string }>>([]);
+  const [errors, setErrors] = useState<Array<{ botId: string; error: string }>>([]);
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
+  const [globalActivityHours, setGlobalActivityHours] = useState<number[]>([9, 12, 18, 21]);
+  const [rateLimits, setRateLimits] = useState({
+    maxPostsPerDay: 3,
+    maxCommentsPerDay: 5,
+    maxLikesPerDay: 10,
+    maxTestsPerWeek: 3,
+    maxLiveCodingPerWeek: 2,
+    maxLessonsPerWeek: 5,
+  });
 
   const [newActivity, setNewActivity] = useState<ScheduledActivity>({
     activityType: "POST",
-    botCount: 10,
     frequency: "daily",
-    activityHours: [9, 12, 18, 21],
     minCount: 1,
     maxCount: 3,
   });
@@ -88,6 +95,13 @@ export function SchedulerManager() {
           fetch('http://127.0.0.1:7242/ingest/a8c809a5-2e2a-4594-9201-a710299032db',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'SchedulerManager.tsx:87',message:'fetchScheduledActivities: Setting activities',data:{activitiesLength:data.activities.length,firstActivity:data.activities[0]},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
           // #endregion
           setScheduledActivities(data.activities);
+          // Set global activity hours and rate limits
+          if (data.activityHours) {
+            setGlobalActivityHours(data.activityHours);
+          }
+          if (data.rateLimits) {
+            setRateLimits(data.rateLimits);
+          }
         } else {
           // #region agent log
           fetch('http://127.0.0.1:7242/ingest/a8c809a5-2e2a-4594-9201-a710299032db',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'SchedulerManager.tsx:90',message:'fetchScheduledActivities: Not setting activities',data:{hasSuccess:data.success,hasActivities:!!data.activities,activitiesLength:data.activities?.length},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
@@ -128,73 +142,18 @@ export function SchedulerManager() {
     setSaving(true);
     setError(null);
     setSuccess(null);
+    setWarnings([]);
+    setErrors([]);
 
     try {
-      // Get all active bot IDs
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/a8c809a5-2e2a-4594-9201-a710299032db',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'SchedulerManager.tsx:84',message:'handleSaveSchedule: Starting bots fetch',data:{url:'/api/admin/bots'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-      // #endregion
-      const botsResponse = await fetch('/api/admin/bots');
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/a8c809a5-2e2a-4594-9201-a710299032db',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'SchedulerManager.tsx:86',message:'handleSaveSchedule: Bots response received',data:{ok:botsResponse.ok,status:botsResponse.status,contentType:botsResponse.headers.get('content-type')},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-      // #endregion
-      const contentType = botsResponse.headers.get('content-type');
-      const responseText = await botsResponse.text();
-      
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/a8c809a5-2e2a-4594-9201-a710299032db',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'SchedulerManager.tsx:88',message:'handleSaveSchedule: Response text received',data:{ok:botsResponse.ok,status:botsResponse.status,contentType,isHtml:responseText.trim().startsWith('<!DOCTYPE'),preview:responseText.substring(0,200)},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-      // #endregion
-
-      if (!botsResponse.ok) {
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/a8c809a5-2e2a-4594-9201-a710299032db',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'SchedulerManager.tsx:93',message:'handleSaveSchedule: Bots response not ok',data:{status:botsResponse.status,isHtml:responseText.trim().startsWith('<!DOCTYPE'),preview:responseText.substring(0,200)},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
-        // #endregion
-        throw new Error('Bot listesi alınamadı');
-      }
-
-      // Check if response is JSON before parsing
-      if (!contentType || !contentType.includes('application/json')) {
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/a8c809a5-2e2a-4594-9201-a710299032db',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'SchedulerManager.tsx:100',message:'handleSaveSchedule: Non-JSON response',data:{contentType,isHtml:responseText.trim().startsWith('<!DOCTYPE'),preview:responseText.substring(0,300)},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
-        // #endregion
-        throw new Error(`Backend returned non-JSON response: ${responseText.substring(0, 200)}`);
-      }
-
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/a8c809a5-2e2a-4594-9201-a710299032db',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'SchedulerManager.tsx:106',message:'handleSaveSchedule: Before JSON parse',data:{contentType,isJson:true},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
-      // #endregion
-      const botsData = JSON.parse(responseText);
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/a8c809a5-2e2a-4594-9201-a710299032db',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'SchedulerManager.tsx:97',message:'handleSaveSchedule: JSON parsed successfully',data:{hasSuccess:!!botsData.success,hasBots:!!botsData.bots},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-      // #endregion
-      if (!botsData.success || !botsData.bots || botsData.bots.length === 0) {
-        throw new Error('Aktif bot bulunamadı');
-      }
-
-      const activeBotIds = botsData.bots
-        .filter((bot: any) => bot.isActive)
-        .map((bot: any) => bot.id);
-
-      if (activeBotIds.length === 0) {
-        throw new Error('Aktif bot bulunamadı');
-      }
-
-      // Her aktivite için botCount kadar bot seç
-      // Tüm aktiviteler için toplam bot sayısını hesapla (en yüksek botCount'u kullan)
-      const maxBotCount = Math.max(...scheduledActivities.map(a => a.botCount || 0));
-      const selectedBotIds = activeBotIds.slice(0, Math.min(maxBotCount, activeBotIds.length));
-
-      if (selectedBotIds.length === 0) {
-        throw new Error('Seçilecek bot bulunamadı');
-      }
-
-      // Save scheduler settings
+      // Save scheduler settings - no bot selection needed
       const response = await fetch('/api/admin/bots/scheduler', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           activities: scheduledActivities,
-          botIds: selectedBotIds,
+          activityHours: globalActivityHours,
+          rateLimits: rateLimits,
         }),
       });
 
@@ -232,10 +191,33 @@ export function SchedulerManager() {
       const data = JSON.parse(schedulerResponseText);
 
       if (!data.success) {
+        // Collect errors if any
+        if (data.errors && Array.isArray(data.errors)) {
+          setErrors(data.errors);
+        }
         throw new Error(data.error || "Zamanlayıcı kaydedilirken bir hata oluştu");
       }
       
-      setSuccess(`Zamanlayıcı ayarları başarıyla kaydedildi. ${data.results?.length || 0} bot güncellendi.`);
+      // Handle warnings
+      if (data.warnings && data.warnings.webhookFailures && Array.isArray(data.warnings.webhookFailures)) {
+        setWarnings(data.warnings.webhookFailures);
+      }
+      
+      // Handle errors (partial success)
+      if (data.errors && Array.isArray(data.errors)) {
+        setErrors(data.errors);
+      }
+      
+      // Build success message
+      let successMessage = `Zamanlayıcı ayarları başarıyla kaydedildi. ${data.results?.length || 0} bot güncellendi.`;
+      if (data.warnings && data.warnings.webhookFailures && data.warnings.webhookFailures.length > 0) {
+        successMessage += ` ${data.warnings.webhookFailures.length} bot için webhook uyarısı var.`;
+      }
+      if (data.errors && data.errors.length > 0) {
+        successMessage += ` ${data.errors.length} bot için hata oluştu.`;
+      }
+      
+      setSuccess(successMessage);
       setShowAddForm(false);
       setEditingIndex(null);
       await fetchScheduledActivities();
@@ -253,13 +235,12 @@ export function SchedulerManager() {
     setScheduledActivities([...scheduledActivities, { ...newActivity }]);
     setNewActivity({
       activityType: "POST",
-      botCount: 10,
       frequency: "daily",
-      activityHours: [9, 12, 18, 21],
       minCount: 1,
       maxCount: 3,
     });
     setShowAddForm(false);
+    setError(null);
   };
 
   const handleRemoveActivity = (index: number) => {
@@ -272,13 +253,6 @@ export function SchedulerManager() {
     setScheduledActivities(updated);
   };
 
-  const toggleHour = (hours: number[], hour: number) => {
-    if (hours.includes(hour)) {
-      return hours.filter(h => h !== hour);
-    } else {
-      return [...hours, hour].sort((a, b) => a - b);
-    }
-  };
 
   return (
     <div className="space-y-6">
@@ -312,6 +286,36 @@ export function SchedulerManager() {
         </div>
       )}
 
+      {warnings.length > 0 && (
+        <div className="p-4 bg-yellow-50 dark:bg-yellow-950/30 border border-yellow-200 dark:border-yellow-800 rounded-lg">
+          <p className="text-yellow-800 dark:text-yellow-300 text-sm font-medium mb-2">
+            ⚠️ Webhook Uyarıları: {warnings.length} bot için webhook gönderilemedi. Hangfire job&apos;ları güncellenmemiş olabilir.
+          </p>
+          <ul className="list-disc list-inside text-xs text-yellow-700 dark:text-yellow-400 space-y-1">
+            {warnings.map((warning, idx) => (
+              <li key={idx}>
+                Bot {warning.botId}: {warning.error}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {errors.length > 0 && (
+        <div className="p-4 bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800 rounded-lg">
+          <p className="text-red-800 dark:text-red-300 text-sm font-medium mb-2">
+            ❌ Hatalar: {errors.length} bot için hata oluştu
+          </p>
+          <ul className="list-disc list-inside text-xs text-red-700 dark:text-red-400 space-y-1">
+            {errors.map((err, idx) => (
+              <li key={idx}>
+                Bot {err.botId}: {err.error}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       {/* Add New Activity Form */}
       {showAddForm && (
         <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
@@ -334,18 +338,6 @@ export function SchedulerManager() {
               </select>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Bot Sayısı *
-              </label>
-              <input
-                type="number"
-                value={newActivity.botCount}
-                onChange={(e) => setNewActivity({ ...newActivity, botCount: parseInt(e.target.value) || 0 })}
-                min="1"
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-              />
-            </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -385,27 +377,6 @@ export function SchedulerManager() {
               </div>
             </div>
 
-            <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Aktivite Saatleri (0-23)
-              </label>
-              <div className="flex flex-wrap gap-2">
-                {Array.from({ length: 24 }, (_, i) => i).map((hour) => (
-                  <button
-                    key={hour}
-                    type="button"
-                    onClick={() => setNewActivity({ ...newActivity, activityHours: toggleHour(newActivity.activityHours, hour) })}
-                    className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
-                      newActivity.activityHours.includes(hour)
-                        ? "bg-purple-600 text-white"
-                        : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
-                    }`}
-                  >
-                    {hour}:00
-                  </button>
-                ))}
-              </div>
-            </div>
           </div>
 
           <div className="flex gap-2 mt-4">
@@ -455,11 +426,7 @@ export function SchedulerManager() {
                         {activityInfo?.label || activity.activityType}
                       </h4>
                     </div>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                      <div>
-                        <span className="text-gray-500 dark:text-gray-400">Bot Sayısı:</span>
-                        <span className="ml-2 font-medium text-gray-900 dark:text-gray-100">{activity.botCount}</span>
-                      </div>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
                       <div>
                         <span className="text-gray-500 dark:text-gray-400">Sıklık:</span>
                         <span className="ml-2 font-medium text-gray-900 dark:text-gray-100">
@@ -472,22 +439,6 @@ export function SchedulerManager() {
                           {activity.minCount}-{activity.maxCount}
                         </span>
                       </div>
-                      <div>
-                        <span className="text-gray-500 dark:text-gray-400">Saatler:</span>
-                        <span className="ml-2 font-medium text-gray-900 dark:text-gray-100">
-                          {activity.activityHours.length} saat
-                        </span>
-                      </div>
-                    </div>
-                    <div className="mt-3 flex flex-wrap gap-1">
-                      {activity.activityHours.map((hour) => (
-                        <span
-                          key={hour}
-                          className="px-2 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-400 rounded text-xs"
-                        >
-                          {hour}:00
-                        </span>
-                      ))}
                     </div>
                   </div>
                   <Button
@@ -504,6 +455,118 @@ export function SchedulerManager() {
           })}
         </div>
       )}
+
+      {/* Global Activity Hours */}
+      <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+        <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-4">Global Aktivite Saatleri (UTC)</h4>
+        <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
+          Tüm botlar bu saatlerde aktif olacak. Her saat benzersiz olmalıdır.
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {Array.from({ length: 24 }, (_, i) => i).map((hour) => (
+            <button
+              key={hour}
+              type="button"
+              onClick={() => {
+                if (globalActivityHours.includes(hour)) {
+                  setGlobalActivityHours(globalActivityHours.filter(h => h !== hour));
+                } else {
+                  setGlobalActivityHours([...globalActivityHours, hour].sort((a, b) => a - b));
+                }
+              }}
+              className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
+                globalActivityHours.includes(hour)
+                  ? "bg-purple-600 text-white"
+                  : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
+              }`}
+            >
+              {hour}:00
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Global Rate Limits */}
+      <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+        <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-4">Global Rate Limit&apos;ler</h4>
+        <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
+          Tüm botlar için ortak rate limit&apos;ler. Bu limitler tüm botlar için geçerlidir.
+        </p>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Günlük Post
+            </label>
+            <input
+              type="number"
+              value={rateLimits.maxPostsPerDay}
+              onChange={(e) => setRateLimits({ ...rateLimits, maxPostsPerDay: parseInt(e.target.value) || 0 })}
+              min="0"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Günlük Yorum
+            </label>
+            <input
+              type="number"
+              value={rateLimits.maxCommentsPerDay}
+              onChange={(e) => setRateLimits({ ...rateLimits, maxCommentsPerDay: parseInt(e.target.value) || 0 })}
+              min="0"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Günlük Beğeni
+            </label>
+            <input
+              type="number"
+              value={rateLimits.maxLikesPerDay}
+              onChange={(e) => setRateLimits({ ...rateLimits, maxLikesPerDay: parseInt(e.target.value) || 0 })}
+              min="0"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Haftalık Test
+            </label>
+            <input
+              type="number"
+              value={rateLimits.maxTestsPerWeek}
+              onChange={(e) => setRateLimits({ ...rateLimits, maxTestsPerWeek: parseInt(e.target.value) || 0 })}
+              min="0"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Haftalık Canlı Kodlama
+            </label>
+            <input
+              type="number"
+              value={rateLimits.maxLiveCodingPerWeek}
+              onChange={(e) => setRateLimits({ ...rateLimits, maxLiveCodingPerWeek: parseInt(e.target.value) || 0 })}
+              min="0"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Haftalık Ders
+            </label>
+            <input
+              type="number"
+              value={rateLimits.maxLessonsPerWeek}
+              onChange={(e) => setRateLimits({ ...rateLimits, maxLessonsPerWeek: parseInt(e.target.value) || 0 })}
+              min="0"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+            />
+          </div>
+        </div>
+      </div>
 
       {/* Save Button */}
       {scheduledActivities.length > 0 && (

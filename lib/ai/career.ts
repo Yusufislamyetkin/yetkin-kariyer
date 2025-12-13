@@ -59,8 +59,6 @@ interface QuestionnaireData {
   timeline?: string;
   skillLevel?: string;
   technologies?: string[];
-  workPreference?: string;
-  industryInterests?: string[];
 }
 
 const buildCareerPlanPrompt = ({
@@ -85,8 +83,7 @@ const buildCareerPlanPrompt = ({
     questionnaire.specialization === "Henüz karar vermedim" ||
     questionnaire.careerGoal === "Henüz karar vermedim" ||
     questionnaire.timeline === "Henüz belirlemedim" ||
-    !questionnaire.technologies || questionnaire.technologies.length === 0 ||
-    !questionnaire.industryInterests || questionnaire.industryInterests.length === 0
+    !questionnaire.technologies || questionnaire.technologies.length === 0
   );
 
   const isBeginner = questionnaire?.skillLevel === "Başlangıç" || 
@@ -95,6 +92,28 @@ const buildCareerPlanPrompt = ({
 
   let questionnaireSection = "";
   let guidanceInstructions = "";
+
+  // Get primary technology for examples (use first selected or default based on specialization)
+  let primaryTechnology = "";
+  if (questionnaire?.technologies && questionnaire.technologies.length > 0) {
+    primaryTechnology = questionnaire.technologies[0];
+  } else if (questionnaire?.specialization) {
+    // Default technology based on specialization
+    const specializationDefaults: Record<string, string> = {
+      "Frontend": "JavaScript",
+      "Backend": "Node.js",
+      "Full-stack": "JavaScript",
+      "Mobile": "React Native",
+      "DevOps": "Docker",
+      "Data Science": "Python",
+      "AI/ML": "Python",
+      "Cybersecurity": "Python",
+      "Game Development": "Unity",
+    };
+    primaryTechnology = specializationDefaults[questionnaire.specialization] || "JavaScript";
+  } else {
+    primaryTechnology = "JavaScript";
+  }
 
   if (questionnaire) {
     const uncertaintyNotes: string[] = [];
@@ -111,11 +130,13 @@ const buildCareerPlanPrompt = ({
     if (!questionnaire.technologies || questionnaire.technologies.length === 0) {
       uncertaintyNotes.push("Kullanıcı teknoloji tercihi belirtmemiş.");
     }
-    if (!questionnaire.industryInterests || questionnaire.industryInterests.length === 0) {
-      uncertaintyNotes.push("Kullanıcı sektör tercihi belirtmemiş.");
-    }
 
-    questionnaireSection = `Tercihler: ${questionnaire.specialization || "?"} | ${questionnaire.careerGoal || "?"} | ${questionnaire.timeline || "?"} | ${questionnaire.skillLevel || "?"} | Teknolojiler: ${questionnaire.technologies?.join(", ") || "Yok"} | Sektörler: ${questionnaire.industryInterests?.join(", ") || "Yok"}. ${uncertaintyNotes.length > 0 ? `Notlar: ${uncertaintyNotes.join("; ")}` : ""}`;
+    // Emphasize selected technologies prominently
+    const technologiesSection = questionnaire.technologies && questionnaire.technologies.length > 0
+      ? `\n\n⚠️ ÖNEMLİ - SEÇİLEN TEKNOLOJİLER:\nKullanıcı şu teknolojileri açıkça seçti: ${questionnaire.technologies.join(", ")}\n\nKURALLAR:\n- Planı SADECE bu seçilen teknolojilere göre oluştur.\n- Başka teknolojiler önerme (örneğin Angular seçildiyse React önerme).\n- Tüm örnekler, görevler ve projeler seçilen teknolojilere göre olmalı.\n- Eğer Angular seçildiyse, Angular bileşenleri, Angular CLI, TypeScript, RxJS gibi Angular ekosistemine odaklan.\n- Eğer React seçildiyse, React bileşenleri, React Hooks, JSX gibi React ekosistemine odaklan.\n\n`
+      : "";
+
+    questionnaireSection = `${technologiesSection}Tercihler: ${questionnaire.specialization || "?"} | ${questionnaire.careerGoal || "?"} | ${questionnaire.timeline || "?"} | ${questionnaire.skillLevel || "?"} | Teknolojiler: ${questionnaire.technologies?.join(", ") || "Yok"}. ${uncertaintyNotes.length > 0 ? `Notlar: ${uncertaintyNotes.join("; ")}` : ""}`;
 
     if (hasUncertainty) {
       guidanceInstructions = "Genel, esnek plan oluştur. Farklı alanları keşfetmesine yardımcı ol. ";
@@ -156,23 +177,23 @@ Her aşama için şu yapıyı kullan:
 
 1. **Aşama Bilgileri:**
    - stage: "Aşama 1", "Aşama 2" gibi
-   - title: Aşamanın net başlığı (örn: "React Temelleri", "Backend API Geliştirme")
+   - title: Aşamanın net başlığı (kullanıcının seçtiği teknolojiye göre, örn: "${primaryTechnology} Temelleri", "Backend API Geliştirme")
    - description: Bu aşamada ne öğreneceğini açıklayan 1-2 cümle
    - estimatedDuration: "2-3 ay", "1-2 hafta" gibi
    - priority: "Yüksek", "Orta", veya "Düşük"
 
 2. **Öğrenme Hedefleri (learningObjectives):**
    - Her hedef açık ve ölçülebilir olsun
-   - Örnek: "React bileşenlerini oluşturabilmek", "State yönetimini anlamak"
+   - Kullanıcının seçtiği teknolojilere göre hedefler belirle (örn: "${primaryTechnology} ile ilgili hedefler")
    - 3-5 hedef ekle
 
 3. **Görevler (tasks):** 
    - Her görev bir obje olmalı: {title, description, estimatedTime, order}
-   - title: Görevin kısa adı (örn: "React hooks öğrenme")
+   - title: Görevin kısa adı (kullanıcının seçtiği teknolojiye göre, örn: "${primaryTechnology} temellerini öğrenme")
    - description: Ne yapılacağının açıklaması (opsiyonel ama önerilir)
    - estimatedTime: "1 hafta", "2 gün" gibi (opsiyonel)
    - order: Sıralama numarası (1, 2, 3...)
-   - Aksiyona odaklı, net görevler yaz (örn: "useState ve useEffect hook'larını öğrenin ve 3 örnek proje yapın")
+   - Aksiyona odaklı, net görevler yaz (kullanıcının seçtiği teknolojilere göre)
    - 4-6 görev ekle
 
 4. **Pratik Projeler (practicalProjects):**
@@ -186,8 +207,8 @@ Her aşama için şu yapıyı kullan:
 
 5. **Milestone'lar (milestones):**
    - Her milestone bir obje olmalı: {title, criteria}
-   - title: Milestone adı (örn: "React Temelleri Tamamlandı")
-   - criteria: Ölçülebilir kriterler array'i (örn: ["5 farklı React projesi tamamlandı", "Hook'lar anlaşıldı ve uygulandı"])
+   - title: Milestone adı (kullanıcının seçtiği teknolojiye göre, örn: "${primaryTechnology} Temelleri Tamamlandı")
+   - criteria: Ölçülebilir kriterler array'i (kullanıcının seçtiği teknolojilere göre)
    - 1-2 milestone ekle
 
 6. **Önemli Notlar (importantPoints):**
@@ -206,60 +227,59 @@ Her aşama için şu yapıyı kullan:
 - Pratik projeler gerçek dünya örnekleri olmalı
 - Milestone'lar ölçülebilir kriterler içermeli
 
-JSON FORMATI:
+JSON FORMATI (ÖRNEK - Kullanıcının seçtiği teknolojilere göre uyarla):
 {
   "goals": ["hedef 1", "hedef 2", "hedef 3"],
   "roadmap": [
     {
       "stage": "Aşama 1",
-      "title": "Frontend Temelleri",
-      "description": "Bu aşamada modern web geliştirmenin temellerini öğreneceksiniz",
+      "title": "${primaryTechnology} Temelleri",
+      "description": "Bu aşamada ${primaryTechnology} ile ilgili temel kavramları öğreneceksiniz",
       "estimatedDuration": "2-3 ay",
       "priority": "Yüksek",
       "learningObjectives": [
-        "React bileşenlerini oluşturabilmek",
-        "State yönetimini anlamak",
-        "Props ve event handling'i kullanabilmek"
+        "${primaryTechnology} ile ilgili öğrenme hedefleri (kullanıcının seçtiği teknolojiye göre)",
+        "İlgili kavramları anlamak",
+        "Temel uygulamaları yapabilmek"
       ],
       "tasks": [
         {
-          "title": "React Temellerini Öğren",
-          "description": "React bileşenleri, JSX ve temel kavramları öğrenin",
+          "title": "${primaryTechnology} Temellerini Öğren",
+          "description": "${primaryTechnology} ile ilgili temel kavramları öğrenin",
           "estimatedTime": "1 hafta",
           "order": 1
         },
         {
-          "title": "React Hooks Çalış",
-          "description": "useState ve useEffect hook'larını öğrenin ve 3 örnek proje yapın",
+          "title": "${primaryTechnology} ile Pratik Yap",
+          "description": "${primaryTechnology} kullanarak 3 örnek proje yapın",
           "estimatedTime": "2 hafta",
           "order": 2
         }
       ],
       "practicalProjects": [
         {
-          "name": "Todo List Uygulaması",
-          "description": "React ve TypeScript kullanarak tam fonksiyonel todo list uygulaması",
+          "name": "Örnek Proje",
+          "description": "${primaryTechnology} kullanarak tam fonksiyonel uygulama",
           "difficulty": "Başlangıç",
           "estimatedTime": "1 hafta"
         }
       ],
       "milestones": [
         {
-          "title": "React Temelleri Tamamlandı",
+          "title": "${primaryTechnology} Temelleri Tamamlandı",
           "criteria": [
-            "5 farklı React projesi tamamlandı",
-            "useState ve useEffect hook'ları kullanıldı",
-            "Component lifecycle anlaşıldı"
+            "5 farklı ${primaryTechnology} projesi tamamlandı",
+            "Temel kavramlar anlaşıldı ve uygulandı"
           ]
         }
       ],
       "importantPoints": [
-        "State yönetimini anlamak çok önemli",
+        "Seçilen teknolojilere odaklanmak çok önemli",
         "Her görevden sonra pratik yapmayı unutmayın"
       ],
       "recommendedResources": [
         {
-          "title": "React Temelleri Kursu",
+          "title": "${primaryTechnology} Temelleri Kursu",
           "type": "Kurs",
           "description": "...",
           "link": "course-id veya boş"
@@ -276,12 +296,17 @@ JSON FORMATI:
       "link": "course-id veya boş string"
     }
   ],
-  "skillsToDevelop": ["React", "TypeScript", "State Management"],
+  "skillsToDevelop": ["Seçilen teknolojiler buraya gelecek - kullanıcının seçtiği teknolojilere göre doldur"],
   "timeline": "${questionnaire?.timeline && questionnaire.timeline !== "Henüz belirlemedim" ? questionnaire.timeline : "6-12 ay"}",
-  "summary": "Kısa ve öz bir özet (2-3 cümle). AI Öğretmen Selin olarak kullanıcıya doğrudan hitap et, motive edici ve yol gösterici ol."
+  "summary": "Kısa ve öz bir özet (2-3 cümle). AI Öğretmen Selin olarak kullanıcıya doğrudan hitap et, motive edici ve yol gösterici ol. Kullanıcının seçtiği teknolojilere odaklandığını belirt."
 }
 
 Sadece JSON döndür. Tüm roadmap aşamaları için yukarıdaki yapıyı kullan.
+
+⚠️ SON HATIRLATMA - TEKNOLOJİ SEÇİMİ:
+${questionnaire?.technologies && questionnaire.technologies.length > 0
+  ? `Kullanıcı şu teknolojileri seçti: ${questionnaire.technologies.join(", ")}\nPlanı SADECE bu teknolojilere göre oluştur. Başka teknolojiler önerme.\n`
+  : `Kullanıcı spesifik teknoloji seçmedi, specialization'a göre uygun teknolojiler öner.\n`}
 `;
 }
 

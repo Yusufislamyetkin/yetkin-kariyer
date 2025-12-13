@@ -195,8 +195,6 @@ interface QuestionnaireData {
   timeline: string;
   skillLevel: string;
   technologies?: string[];
-  workPreference: string;
-  industryInterests?: string[];
 }
 
 export default function CareerRoadmapPage() {
@@ -269,12 +267,29 @@ export default function CareerRoadmapPage() {
   const fetchPlan = async () => {
     try {
       const response = await fetch("/api/career/plan");
+      
+      if (!response.ok) {
+        if (response.status === 401) {
+          console.warn("Unauthorized - user not logged in");
+          setLoading(false);
+          return;
+        }
+        throw new Error(`Failed to fetch plan: ${response.status} ${response.statusText}`);
+      }
+      
       const data = await response.json();
-      if (data.plan) {
+      
+      if (data.plan && data.plan.summary) {
+        // Plan exists and has valid data
         setPlan(normalizePlan(data.plan));
+      } else {
+        // No plan found or plan is empty
+        setPlan(null);
       }
     } catch (error) {
       console.error("Error fetching plan:", error);
+      // On error, set plan to null so user can create a new one
+      setPlan(null);
     } finally {
       setLoading(false);
     }
@@ -297,11 +312,16 @@ export default function CareerRoadmapPage() {
       if (response.ok) {
         // Check if plan was actually generated successfully
         if (data.plan && data.plan.summary && !data.plan.summary.includes("oluşturulamadı") && !data.plan.summary.includes("sorun oluştu")) {
-          setPlan(normalizePlan(data.plan));
+          const normalizedPlan = normalizePlan(data.plan);
+          setPlan(normalizedPlan);
           setShowQuestionnaire(false);
           if (questionnaire) {
             setQuestionnaireData(questionnaire);
           }
+          // Refetch plan from database to ensure it's saved
+          setTimeout(() => {
+            fetchPlan();
+          }, 500);
         } else {
           // Plan was returned but indicates an error
           const errorMsg = data.plan?.summary || "Plan oluşturulurken bir sorun oluştu. Lütfen tekrar deneyin.";

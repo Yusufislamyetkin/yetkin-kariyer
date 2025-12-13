@@ -17,23 +17,23 @@ interface BotCharacter {
 interface BotConfiguration {
   id?: string;
   isActive: boolean;
-  minPostsPerDay: number;
-  maxPostsPerDay: number;
-  minCommentsPerDay: number;
-  maxCommentsPerDay: number;
-  minLikesPerDay: number;
-  maxLikesPerDay: number;
-  minTestsPerWeek: number;
-  maxTestsPerWeek: number;
-  minLiveCodingPerWeek: number;
-  maxLiveCodingPerWeek: number;
-  minBugFixPerWeek: number;
-  maxBugFixPerWeek: number;
-  minLessonsPerWeek: number;
-  maxLessonsPerWeek: number;
-  minChatMessagesPerDay: number;
-  maxChatMessagesPerDay: number;
-  activityHours: number[];
+  minPostsPerDay?: number;
+  maxPostsPerDay?: number;
+  minCommentsPerDay?: number;
+  maxCommentsPerDay?: number;
+  minLikesPerDay?: number;
+  maxLikesPerDay?: number;
+  minTestsPerWeek?: number;
+  maxTestsPerWeek?: number;
+  minLiveCodingPerWeek?: number;
+  maxLiveCodingPerWeek?: number;
+  minBugFixPerWeek?: number;
+  maxBugFixPerWeek?: number;
+  minLessonsPerWeek?: number;
+  maxLessonsPerWeek?: number;
+  minChatMessagesPerDay?: number;
+  maxChatMessagesPerDay?: number;
+  activityHours?: number[];
 }
 
 interface BotConfigModalProps {
@@ -143,26 +143,9 @@ export function BotConfigModal({
           expertise: character.expertise,
           characterProfileId: selectedCharacterId || undefined,
           isActive: config.isActive,
-          minPostsPerDay: config.minPostsPerDay,
-          maxPostsPerDay: config.maxPostsPerDay,
-          minCommentsPerDay: config.minCommentsPerDay,
-          maxCommentsPerDay: config.maxCommentsPerDay,
-          minLikesPerDay: config.minLikesPerDay,
-          maxLikesPerDay: config.maxLikesPerDay,
-          minTestsPerWeek: config.minTestsPerWeek,
-          maxTestsPerWeek: config.maxTestsPerWeek,
-          minLiveCodingPerWeek: config.minLiveCodingPerWeek,
-          maxLiveCodingPerWeek: config.maxLiveCodingPerWeek,
-          minBugFixPerWeek: config.minBugFixPerWeek,
-          maxBugFixPerWeek: config.maxBugFixPerWeek,
-          minLessonsPerWeek: config.minLessonsPerWeek,
-          maxLessonsPerWeek: config.maxLessonsPerWeek,
-          minChatMessagesPerDay: config.minChatMessagesPerDay,
-          maxChatMessagesPerDay: config.maxChatMessagesPerDay,
-          activityHours: config.activityHours,
           ...(method === "PUT" && {
-            character: character,
-            configuration: config,
+            botCharacter: character,
+            isActive: config.isActive,
           }),
         }),
       });
@@ -316,192 +299,14 @@ export function BotConfigModal({
               </div>
             </div>
 
-            {/* Activity Configuration Section */}
+            {/* Active Status */}
             <div className="space-y-4">
               <div className="flex items-center gap-2">
                 <Settings className="h-5 w-5 text-gray-500" />
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                  Aktivite Ayarları
+                  Bot Durumu
                 </h3>
               </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Posts */}
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Günlük Post Sayısı
-                  </label>
-                  <div className="flex gap-2">
-                    <input
-                      type="number"
-                      min="0"
-                      value={config.minPostsPerDay}
-                      onChange={(e) =>
-                        setConfig({ ...config, minPostsPerDay: parseInt(e.target.value) || 0 })
-                      }
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-                    />
-                    <span className="self-center text-gray-500">-</span>
-                    <input
-                      type="number"
-                      min="0"
-                      value={config.maxPostsPerDay}
-                      onChange={(e) =>
-                        setConfig({ ...config, maxPostsPerDay: parseInt(e.target.value) || 0 })
-                      }
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-                    />
-                  </div>
-                </div>
-
-                {/* Comments */}
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Günlük Yorum Sayısı
-                  </label>
-                  <div className="flex gap-2">
-                    <input
-                      type="number"
-                      min="0"
-                      value={config.minCommentsPerDay}
-                      onChange={(e) =>
-                        setConfig({ ...config, minCommentsPerDay: parseInt(e.target.value) || 0 })
-                      }
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-                    />
-                    <span className="self-center text-gray-500">-</span>
-                    <input
-                      type="number"
-                      min="0"
-                      value={config.maxCommentsPerDay}
-                      onChange={(e) =>
-                        setConfig({ ...config, maxCommentsPerDay: parseInt(e.target.value) || 0 })
-                      }
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-                    />
-                  </div>
-                </div>
-
-                {/* Likes */}
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Günlük Beğeni Sayısı
-                  </label>
-                  <div className="flex gap-2">
-                    <input
-                      type="number"
-                      min="0"
-                      value={config.minLikesPerDay}
-                      onChange={(e) =>
-                        setConfig({ ...config, minLikesPerDay: parseInt(e.target.value) || 0 })
-                      }
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-                    />
-                    <span className="self-center text-gray-500">-</span>
-                    <input
-                      type="number"
-                      min="0"
-                      value={config.maxLikesPerDay}
-                      onChange={(e) =>
-                        setConfig({ ...config, maxLikesPerDay: parseInt(e.target.value) || 0 })
-                      }
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-                    />
-                  </div>
-                </div>
-
-                {/* Tests */}
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Haftalık Test Sayısı
-                  </label>
-                  <div className="flex gap-2">
-                    <input
-                      type="number"
-                      min="0"
-                      value={config.minTestsPerWeek}
-                      onChange={(e) =>
-                        setConfig({ ...config, minTestsPerWeek: parseInt(e.target.value) || 0 })
-                      }
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-                    />
-                    <span className="self-center text-gray-500">-</span>
-                    <input
-                      type="number"
-                      min="0"
-                      value={config.maxTestsPerWeek}
-                      onChange={(e) =>
-                        setConfig({ ...config, maxTestsPerWeek: parseInt(e.target.value) || 0 })
-                      }
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-                    />
-                  </div>
-                </div>
-
-                {/* Live Coding */}
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Haftalık Canlı Kodlama
-                  </label>
-                  <div className="flex gap-2">
-                    <input
-                      type="number"
-                      min="0"
-                      value={config.minLiveCodingPerWeek}
-                      onChange={(e) =>
-                        setConfig({
-                          ...config,
-                          minLiveCodingPerWeek: parseInt(e.target.value) || 0,
-                        })
-                      }
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-                    />
-                    <span className="self-center text-gray-500">-</span>
-                    <input
-                      type="number"
-                      min="0"
-                      value={config.maxLiveCodingPerWeek}
-                      onChange={(e) =>
-                        setConfig({
-                          ...config,
-                          maxLiveCodingPerWeek: parseInt(e.target.value) || 0,
-                        })
-                      }
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-                    />
-                  </div>
-                </div>
-
-                {/* Lessons */}
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Haftalık Ders Sayısı
-                  </label>
-                  <div className="flex gap-2">
-                    <input
-                      type="number"
-                      min="0"
-                      value={config.minLessonsPerWeek}
-                      onChange={(e) =>
-                        setConfig({ ...config, minLessonsPerWeek: parseInt(e.target.value) || 0 })
-                      }
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-                    />
-                    <span className="self-center text-gray-500">-</span>
-                    <input
-                      type="number"
-                      min="0"
-                      value={config.maxLessonsPerWeek}
-                      onChange={(e) =>
-                        setConfig({ ...config, maxLessonsPerWeek: parseInt(e.target.value) || 0 })
-                      }
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Active Status */}
               <div className="flex items-center gap-3">
                 <input
                   type="checkbox"
@@ -514,6 +319,9 @@ export function BotConfigModal({
                   Bot aktif
                 </label>
               </div>
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                Not: Aktivite ayarları ve rate limit&apos;ler global scheduler konfigürasyonundan yönetilir.
+              </p>
             </div>
           </div>
         </form>

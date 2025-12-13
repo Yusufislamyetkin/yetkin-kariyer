@@ -52,6 +52,7 @@ interface Interview {
   questions: InterviewQuestion[];
   duration: number | null;
   type?: string | null;
+  cvId?: string | null; // CV ID (otomatik cevap doldurma için)
 }
 
 const DEFAULT_LANGUAGE: LiveCodingLanguage = "javascript";
@@ -351,6 +352,7 @@ export default function InterviewRoomPage() {
               duration: cvBasedData.interview.duration ?? null,
               questions: normalizedQuestions,
               type: cvBasedData.interview.type ?? null,
+              cvId: cvBasedData.interview.cvId ?? null,
             };
             setInterview(formattedInterview);
             setCurrentQuestion(0);
@@ -394,6 +396,7 @@ export default function InterviewRoomPage() {
         duration: data.interview.duration ?? null,
         questions: normalizedQuestions,
         type: data.interview.type ?? null,
+        cvId: data.interview.cvId ?? null,
       };
 
       setInterview(formattedInterview);
@@ -436,6 +439,73 @@ export default function InterviewRoomPage() {
       setLoading(false);
     }
   }, [interviewId]);
+
+  // Faz 2: CV-based interview için otomatik cevap doldurma
+  useEffect(() => {
+    const autoFillAnswers = async () => {
+      if (!interview || interview.type !== "cv_based" || !interview.cvId) {
+        return;
+      }
+
+      // Sorular yoksa veya zaten cevaplar doluysa, işlem yapma
+      if (interview.questions.length === 0) {
+        return;
+      }
+
+      // CV bilgilerini çek
+      try {
+        console.log("[AUTO_FILL] CV bilgileri çekiliyor...", interview.cvId);
+        const cvResponse = await fetch(`/api/cv/${interview.cvId}`);
+        if (!cvResponse.ok) {
+          console.error("[AUTO_FILL] CV çekilemedi:", cvResponse.status);
+          return;
+        }
+
+        const cvData = await cvResponse.json();
+        if (!cvData?.cv?.data) {
+          console.error("[AUTO_FILL] CV data bulunamadı");
+          return;
+        }
+
+        console.log("[AUTO_FILL] Otomatik cevaplar oluşturuluyor...");
+        // Otomatik cevapları oluştur
+        const answersResponse = await fetch("/api/ai/generate-interview-answers", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            cvData: cvData.cv.data,
+            questions: interview.questions,
+          }),
+        });
+
+        if (!answersResponse.ok) {
+          console.error("[AUTO_FILL] Cevaplar oluşturulamadı:", answersResponse.status);
+          return;
+        }
+
+        const answers = await answersResponse.json();
+        console.log("[AUTO_FILL] Cevaplar oluşturuldu:", {
+          textCount: Object.keys(answers.textResponses || {}).length,
+          codeCount: Object.keys(answers.codeResponses || {}).length,
+        });
+
+        // State'leri güncelle
+        if (answers.textResponses) {
+          setTextResponses((prev) => ({ ...prev, ...answers.textResponses }));
+        }
+        if (answers.codeResponses) {
+          setCodeResponses((prev) => ({ ...prev, ...answers.codeResponses }));
+        }
+        if (answers.codeLanguages) {
+          setCodeLanguages((prev) => ({ ...prev, ...answers.codeLanguages }));
+        }
+      } catch (error) {
+        console.error("[AUTO_FILL] Hata:", error);
+      }
+    };
+
+    autoFillAnswers();
+  }, [interview]);
 
   const startCamera = useCallback(async () => {
     try {

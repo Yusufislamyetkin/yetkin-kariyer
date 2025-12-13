@@ -4,10 +4,15 @@ import { db } from "@/lib/db";
 import { BotActivityType } from "@prisma/client";
 
 // Map category to activity types
+// This function maps UI categories to actual BotActivityType enum values
 function getActivityTypesByCategory(category: string): BotActivityType[] {
   switch (category) {
     case "linkedin":
-      return [BotActivityType.POST, BotActivityType.LIKE, BotActivityType.COMMENT];
+      return [
+        BotActivityType.POST,
+        BotActivityType.LIKE,
+        BotActivityType.COMMENT,
+      ];
     case "application":
       return [
         BotActivityType.HACKATHON_APPLICATION,
@@ -15,7 +20,11 @@ function getActivityTypesByCategory(category: string): BotActivityType[] {
         BotActivityType.JOB_APPLICATION,
       ];
     case "education":
-      return [BotActivityType.TEST, BotActivityType.LIVE_CODING, BotActivityType.LESSON];
+      return [
+        BotActivityType.TEST,
+        BotActivityType.LIVE_CODING,
+        BotActivityType.LESSON,
+      ];
     case "other":
       return [
         BotActivityType.BUG_FIX,

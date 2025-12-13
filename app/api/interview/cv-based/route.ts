@@ -65,21 +65,111 @@ export async function POST(request: Request) {
     const cvInfo = extractCVInfo(cvData);
     console.log(`[CV_INTERVIEW] [4/6] ✅ CV bilgileri çıkarıldı - difficulty: ${cvInfo.level}, name: ${cvData?.personalInfo?.name || "N/A"}`);
 
-    console.log(`[CV_INTERVIEW] [5/6] Interview kaydı oluşturuluyor...`);
-    // Interview kaydını hemen oluştur (boş sorularla)
-    const interview = await db.interview.create({
-      data: {
-        title: `CV Bazlı Mülakat - ${cvData?.personalInfo?.name || "Kullanıcı"}`,
-        description: "Mülakat soruları oluşturuluyor...",
-        questions: [] as any, // Başlangıçta boş
-        type: "cv_based",
-        difficulty: cvInfo.level,
-        duration: 0, // Henüz hesaplanmadı
+    // CV için mevcut interview kontrolü (Faz 1: Soru Cache)
+    console.log(`[CV_INTERVIEW] [4.5/6] Mevcut interview kontrolü yapılıyor... (cvId: ${cvId})`);
+    const existingInterview = await db.interview.findFirst({
+      where: {
         cvId: cvId,
+        type: "cv_based",
       },
+      orderBy: { createdAt: "desc" }, // En yeni olanı al
     });
+
+    // Soruların dolu olup olmadığını kontrol et
+    const hasQuestions = (questions: any): boolean => {
+      if (!questions) return false;
+      
+      // Array formatında mı?
+      if (Array.isArray(questions)) {
+        return questions.length > 0;
+      }
+      
+      // Object formatında mı? (aşamalı yapı)
+      if (typeof questions === "object" && questions !== null) {
+        const obj = questions as any;
+        // Tüm aşamaların dolu olup olmadığını kontrol et
+        const stage1 = obj.stage1_introduction;
+        const stage2 = obj.stage2_experience;
+        const stage3 = obj.stage3_technical;
+        
+        // En az bir aşama dolu olmalı ve array olmalı
+        const hasStage1 = Array.isArray(stage1) && stage1.length > 0;
+        const hasStage2 = Array.isArray(stage2) && stage2.length > 0;
+        const hasStage3 = Array.isArray(stage3) && stage3.length > 0;
+        
+        return hasStage1 || hasStage2 || hasStage3;
+      }
+      
+      return false;
+    };
+
+    let interview;
+    
+    if (existingInterview) {
+      const questionsCheck = hasQuestions(existingInterview.questions);
+      console.log(`[CV_INTERVIEW] [4.5/6] Mevcut interview bulundu - interviewId: ${existingInterview.id}, sorular dolu mu: ${questionsCheck}`);
+      
+      if (questionsCheck) {
+        // Mevcut interview'ı kullan - yeni interview oluşturma
+        console.log(`[CV_INTERVIEW] [4.5/6] ✅ Mevcut interview kullanılıyor (sorular dolu)`);
+        interview = existingInterview;
+        
+        // Response'u hemen döndür
+        const responseTime = Date.now() - requestStartTime;
+        console.log(`[CV_INTERVIEW] ✅ Response döndürülüyor (cached interview) - interviewId: ${interview.id}, toplam süre: ${responseTime}ms`);
+        
+        return NextResponse.json(
+          {
+            interview: {
+              id: interview.id,
+              title: interview.title,
+              description: interview.description,
+              duration: interview.duration,
+              questionCount: Array.isArray(interview.questions) 
+                ? interview.questions.length 
+                : 0,
+              status: "completed",
+            },
+          },
+          { status: 200 }
+        );
+      } else {
+        // Mevcut interview var ama sorular boş - mevcut interview'ı kullan ama soruları generate et
+        console.log(`[CV_INTERVIEW] [4.5/6] ⚠️ Mevcut interview var ama sorular boş - mevcut interview güncellenecek`);
+        interview = existingInterview;
+      }
+    } else {
+      // Mevcut interview yok - yeni interview oluştur
+      console.log(`[CV_INTERVIEW] [4.5/6] Mevcut interview yok - yeni interview oluşturulacak`);
+    }
+
+    console.log(`[CV_INTERVIEW] [5/6] Interview kaydı oluşturuluyor/güncelleniyor...`);
+    // Interview kaydını oluştur veya güncelle (boş sorularla)
+    if (!interview) {
+      interview = await db.interview.create({
+        data: {
+          title: `CV Bazlı Mülakat - ${cvData?.personalInfo?.name || "Kullanıcı"}`,
+          description: "Mülakat soruları oluşturuluyor...",
+          questions: [] as any, // Başlangıçta boş
+          type: "cv_based",
+          difficulty: cvInfo.level,
+          duration: 0, // Henüz hesaplanmadı
+          cvId: cvId,
+        },
+      });
+      console.log(`[CV_INTERVIEW] [5/6] ✅ Yeni interview kaydı oluşturuldu - interviewId: ${interview.id}`);
+    } else {
+      // Mevcut interview'ı güncelle (description'ı güncelle)
+      interview = await db.interview.update({
+        where: { id: interview.id },
+        data: {
+          description: "Mülakat soruları oluşturuluyor...",
+        },
+      });
+      console.log(`[CV_INTERVIEW] [5/6] ✅ Mevcut interview güncellendi - interviewId: ${interview.id}`);
+    }
     const createTime = Date.now() - requestStartTime;
-    console.log(`[CV_INTERVIEW] [5/6] ✅ Interview kaydı oluşturuldu - interviewId: ${interview.id}, süre: ${createTime}ms`);
+    console.log(`[CV_INTERVIEW] [5/6] ✅ Interview kaydı hazır - interviewId: ${interview.id}, süre: ${createTime}ms`);
 
     console.log(`[CV_INTERVIEW] [6/6] Arka plan işlemi başlatılıyor (fire-and-forget fetch)...`);
     // Arka planda aşamalı olarak soruları oluştur (fire-and-forget)
