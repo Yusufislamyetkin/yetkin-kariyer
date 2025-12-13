@@ -1602,6 +1602,26 @@ model BotConfiguration {
   userId        String    @unique
   isActive      Boolean   @default(true)
   lastActivityAt DateTime?
+  // Activity limits (optional - if not set, uses global scheduler config)
+  minPostsPerDay        Int?
+  maxPostsPerDay        Int?
+  minCommentsPerDay     Int?
+  maxCommentsPerDay     Int?
+  minLikesPerDay        Int?
+  maxLikesPerDay        Int?
+  minTestsPerWeek       Int?
+  maxTestsPerWeek       Int?
+  minLiveCodingPerWeek  Int?
+  maxLiveCodingPerWeek  Int?
+  minBugFixPerWeek      Int?
+  maxBugFixPerWeek      Int?
+  minLessonsPerWeek     Int?
+  maxLessonsPerWeek     Int?
+  minChatMessagesPerDay Int?
+  maxChatMessagesPerDay Int?
+  activityHours         Int[] @default([]) // Custom activity hours for this bot
+  enabledActivities     String[] @default([]) // Enabled activity types for this bot
+  scheduleEnabled       Boolean @default(false) // Whether scheduler is enabled for this bot
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
