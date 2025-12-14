@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/app/components/ui/Button";
-import { Loader2, Settings, Trash2, CheckCircle2, XCircle, Clock, Rocket, CheckSquare, Square } from "lucide-react";
+import { Loader2, Settings, Trash2, CheckCircle2, XCircle, Clock, Rocket, CheckSquare, Square, Power, PowerOff, Trash } from "lucide-react";
 import { BotConfigModal } from "../../users/_components/BotConfigModal";
 
 const ACTIVITY_TYPES: Record<string, { label: string; icon: string }> = {
@@ -48,7 +48,9 @@ export function BotList({ onRefresh, selectedBotIds = new Set(), onSelectionChan
   const [selectedBot, setSelectedBot] = useState<Bot | null>(null);
   const [selectedBotConfig, setSelectedBotConfig] = useState<{ botCharacter: any; botConfiguration: any } | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
   const [page, setPage] = useState(1);
+  const [bulkActionLoading, setBulkActionLoading] = useState<string | null>(null);
   const [pagination, setPagination] = useState<{
     page: number;
     limit: number;
@@ -322,6 +324,95 @@ export function BotList({ onRefresh, selectedBotIds = new Set(), onSelectionChan
     }
   };
 
+  const handleBulkUpdate = async (isActive: boolean) => {
+    if (selectedBotIds.size === 0) {
+      setError('Lütfen en az bir bot seçin');
+      return;
+    }
+
+    setBulkActionLoading(isActive ? 'activate' : 'deactivate');
+    setError(null);
+    setSuccess(null);
+
+    try {
+      const response = await fetch('/api/admin/bots/bulk-update', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          botIds: Array.from(selectedBotIds),
+          isActive,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Toplu güncelleme başarısız');
+      }
+
+      setSuccess(data.message || `${selectedBotIds.size} bot başarıyla ${isActive ? 'aktif' : 'pasif'} yapıldı`);
+      
+      // Clear selection
+      if (onSelectionChange) {
+        onSelectionChange(new Set());
+      }
+
+      // Refresh bot list
+      await fetchBotList();
+      if (onRefresh) onRefresh();
+    } catch (err: any) {
+      setError(err.message || 'Bir hata oluştu');
+    } finally {
+      setBulkActionLoading(null);
+    }
+  };
+
+  const handleBulkClearActivities = async () => {
+    if (selectedBotIds.size === 0) {
+      setError('Lütfen en az bir bot seçin');
+      return;
+    }
+
+    if (!confirm(`${selectedBotIds.size} bot için tüm aktiviteleri temizlemek istediğinizden emin misiniz?`)) {
+      return;
+    }
+
+    setBulkActionLoading('clear-activities');
+    setError(null);
+    setSuccess(null);
+
+    try {
+      const response = await fetch('/api/admin/bots/bulk-clear-activities', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          botIds: Array.from(selectedBotIds),
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Aktiviteler temizlenirken bir hata oluştu');
+      }
+
+      setSuccess(data.message || `${data.deleted || 0} aktivite başarıyla temizlendi`);
+      
+      // Clear selection
+      if (onSelectionChange) {
+        onSelectionChange(new Set());
+      }
+
+      // Refresh bot list
+      await fetchBotList();
+      if (onRefresh) onRefresh();
+    } catch (err: any) {
+      setError(err.message || 'Bir hata oluştu');
+    } finally {
+      setBulkActionLoading(null);
+    }
+  };
+
   const handleBotConfig = async (bot: Bot) => {
     try {
       const configResponse = await fetch(`/api/admin/bots/${bot.id}/config`);
@@ -476,6 +567,95 @@ export function BotList({ onRefresh, selectedBotIds = new Set(), onSelectionChan
           </div>
         ) : (
           <>
+            {/* Bulk Action Toolbar */}
+            {onSelectionChange && selectedBotIds.size > 0 && (
+              <div className="mb-4 p-4 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+                <div className="flex items-center justify-between flex-wrap gap-4">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-medium text-blue-900 dark:text-blue-100">
+                      {selectedBotIds.size} bot seçili
+                    </span>
+                    <Button
+                      onClick={() => onSelectionChange(new Set())}
+                      variant="outline"
+                      size="sm"
+                      className="text-xs"
+                    >
+                      Seçimi Temizle
+                    </Button>
+                  </div>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <Button
+                      onClick={() => handleBulkUpdate(true)}
+                      disabled={bulkActionLoading !== null}
+                      size="sm"
+                      className="bg-green-600 hover:bg-green-700 text-white"
+                    >
+                      {bulkActionLoading === 'activate' ? (
+                        <>
+                          <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                          Aktif Yapılıyor...
+                        </>
+                      ) : (
+                        <>
+                          <Power className="h-4 w-4 mr-2" />
+                          Aktif Yap
+                        </>
+                      )}
+                    </Button>
+                    <Button
+                      onClick={() => handleBulkUpdate(false)}
+                      disabled={bulkActionLoading !== null}
+                      size="sm"
+                      className="bg-gray-600 hover:bg-gray-700 text-white"
+                    >
+                      {bulkActionLoading === 'deactivate' ? (
+                        <>
+                          <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                          Pasif Yapılıyor...
+                        </>
+                      ) : (
+                        <>
+                          <PowerOff className="h-4 w-4 mr-2" />
+                          Pasif Yap
+                        </>
+                      )}
+                    </Button>
+                    <Button
+                      onClick={handleBulkClearActivities}
+                      disabled={bulkActionLoading !== null}
+                      size="sm"
+                      className="bg-orange-600 hover:bg-orange-700 text-white"
+                    >
+                      {bulkActionLoading === 'clear-activities' ? (
+                        <>
+                          <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                          Temizleniyor...
+                        </>
+                      ) : (
+                        <>
+                          <Trash className="h-4 w-4 mr-2" />
+                          Aktiviteleri Temizle
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Success/Error Messages */}
+            {success && (
+              <div className="mb-4 p-4 bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 rounded-lg">
+                <p className="text-sm text-green-800 dark:text-green-200">{success}</p>
+              </div>
+            )}
+            {error && (
+              <div className="mb-4 p-4 bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 rounded-lg">
+                <p className="text-sm text-red-800 dark:text-red-200">{error}</p>
+              </div>
+            )}
+
             {/* #region agent log */}
             {(() => { fetch('http://127.0.0.1:7242/ingest/a8c809a5-2e2a-4594-9201-a710299032db',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'BotList.tsx:451',message:'fetchBotList: Rendering bot table',data:{botListLength:botList.length,firstBotId:botList[0]?.id},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'K'})}).catch(()=>{}); return null; })()}
             {/* #endregion */}

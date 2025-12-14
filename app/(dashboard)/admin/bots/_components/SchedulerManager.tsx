@@ -59,9 +59,6 @@ export function SchedulerManager() {
   const fetchScheduledActivities = async () => {
     setLoading(true);
     try {
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/a8c809a5-2e2a-4594-9201-a710299032db',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'SchedulerManager.tsx:55',message:'fetchScheduledActivities: Starting fetch',data:{url:'/api/admin/bots/scheduler'},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-      // #endregion
       const response = await fetch('/api/admin/bots/scheduler');
       // #region agent log
       fetch('http://127.0.0.1:7242/ingest/a8c809a5-2e2a-4594-9201-a710299032db',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'SchedulerManager.tsx:57',message:'fetchScheduledActivities: Response received',data:{ok:response.ok,status:response.status,contentType:response.headers.get('content-type')},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
@@ -69,9 +66,6 @@ export function SchedulerManager() {
       const contentType = response.headers.get('content-type');
       const responseText = await response.text();
       
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/a8c809a5-2e2a-4594-9201-a710299032db',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'SchedulerManager.tsx:59',message:'fetchScheduledActivities: Response text received',data:{ok:response.ok,status:response.status,contentType,isHtml:responseText.trim().startsWith('<!DOCTYPE'),preview:responseText.substring(0,200)},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-      // #endregion
 
       if (response.ok) {
         // Check if response is JSON before parsing
@@ -83,17 +77,11 @@ export function SchedulerManager() {
           return;
         }
         
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/a8c809a5-2e2a-4594-9201-a710299032db',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'SchedulerManager.tsx:71',message:'fetchScheduledActivities: Before JSON parse',data:{contentType,isJson:true},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
-        // #endregion
         const data = JSON.parse(responseText);
         // #region agent log
         fetch('http://127.0.0.1:7242/ingest/a8c809a5-2e2a-4594-9201-a710299032db',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'SchedulerManager.tsx:63',message:'fetchScheduledActivities: JSON parsed successfully',data:{hasSuccess:!!data.success,hasActivities:!!data.activities,activitiesLength:data.activities?.length,activities:data.activities},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
         // #endregion
         if (data.success && data.activities) {
-          // #region agent log
-          fetch('http://127.0.0.1:7242/ingest/a8c809a5-2e2a-4594-9201-a710299032db',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'SchedulerManager.tsx:87',message:'fetchScheduledActivities: Setting activities',data:{activitiesLength:data.activities.length,firstActivity:data.activities[0]},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
-          // #endregion
           setScheduledActivities(data.activities);
           // Set global activity hours and rate limits
           if (data.activityHours) {
@@ -103,14 +91,8 @@ export function SchedulerManager() {
             setRateLimits(data.rateLimits);
           }
         } else {
-          // #region agent log
-          fetch('http://127.0.0.1:7242/ingest/a8c809a5-2e2a-4594-9201-a710299032db',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'SchedulerManager.tsx:90',message:'fetchScheduledActivities: Not setting activities',data:{hasSuccess:data.success,hasActivities:!!data.activities,activitiesLength:data.activities?.length},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
-          // #endregion
         }
       } else {
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/a8c809a5-2e2a-4594-9201-a710299032db',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'SchedulerManager.tsx:78',message:'fetchScheduledActivities: Error response',data:{status:response.status,contentType,isHtml:responseText.trim().startsWith('<!DOCTYPE'),preview:responseText.substring(0,100)},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
-        // #endregion
         let errorData;
         if (contentType && contentType.includes('application/json')) {
           try {
@@ -124,9 +106,6 @@ export function SchedulerManager() {
         setError(errorData.error || "Zamanlanmış aktiviteler alınırken bir hata oluştu");
       }
     } catch (err: any) {
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/a8c809a5-2e2a-4594-9201-a710299032db',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'SchedulerManager.tsx:73',message:'fetchScheduledActivities: Exception caught',data:{error:err.message,stack:err.stack},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'D'})}).catch(()=>{});
-      // #endregion
       setError(err.message || "Zamanlanmış aktiviteler alınırken bir hata oluştu");
     } finally {
       setLoading(false);
@@ -161,9 +140,6 @@ export function SchedulerManager() {
       const schedulerResponseText = await response.text();
 
       if (!response.ok) {
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/a8c809a5-2e2a-4594-9201-a710299032db',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'SchedulerManager.tsx:176',message:'handleSaveSchedule: Error response',data:{status:response.status,contentType:schedulerContentType,isHtml:schedulerResponseText.trim().startsWith('<!DOCTYPE'),preview:schedulerResponseText.substring(0,200)},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
-        // #endregion
         let errorData;
         if (schedulerContentType && schedulerContentType.includes('application/json')) {
           try {
@@ -185,9 +161,6 @@ export function SchedulerManager() {
         throw new Error(`Backend returned non-JSON response: ${schedulerResponseText.substring(0, 200)}`);
       }
 
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/a8c809a5-2e2a-4594-9201-a710299032db',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'SchedulerManager.tsx:201',message:'handleSaveSchedule: Before JSON parse',data:{contentType:schedulerContentType,isJson:true},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
-      // #endregion
       const data = JSON.parse(schedulerResponseText);
 
       if (!data.success) {
@@ -222,9 +195,6 @@ export function SchedulerManager() {
       setEditingIndex(null);
       await fetchScheduledActivities();
     } catch (err: any) {
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/a8c809a5-2e2a-4594-9201-a710299032db',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'SchedulerManager.tsx:130',message:'handleSaveSchedule: Exception caught',data:{error:err.message,stack:err.stack},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'D'})}).catch(()=>{});
-      // #endregion
       setError(err.message || "Zamanlayıcı kaydedilirken bir hata oluştu");
     } finally {
       setSaving(false);

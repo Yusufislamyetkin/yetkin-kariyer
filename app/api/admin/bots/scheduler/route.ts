@@ -46,15 +46,15 @@ export async function GET() {
       const intervals = (globalConfig.activityIntervals as Record<string, number>) || {};
       
       for (const activityType of globalConfig.enabledActivities) {
-        // Determine frequency from interval (daily if < 60 minutes, weekly otherwise)
-        const interval = intervals[activityType] || 5;
-        const frequency = interval < 60 ? 'daily' : 'weekly';
-        
+          // Determine frequency from interval (daily if < 60 minutes, weekly otherwise)
+          const interval = intervals[activityType] || 5;
+          const frequency = interval < 60 ? 'daily' : 'weekly';
+          
         scheduledActivities.push({
-          activityType,
+            activityType,
           botCount: 0, // Will be calculated from active bots count
-          frequency,
-          activityHours: activityHours,
+            frequency,
+            activityHours: activityHours,
           minCount: 1, // Default min
           maxCount: getMaxCountForActivityType(activityType, globalConfig),
         });
@@ -115,15 +115,9 @@ function getMaxCountForActivityType(activityType: string, config: any): number {
 
 export async function POST(request: Request) {
   try {
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/a8c809a5-2e2a-4594-9201-a710299032db',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'scheduler/route.ts:85',message:'POST /api/admin/bots/scheduler: Entry',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-    // #endregion
     const session = await auth();
 
     if (!session || (session.user as any)?.role !== 'admin') {
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/a8c809a5-2e2a-4594-9201-a710299032db',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'scheduler/route.ts:89',message:'POST /api/admin/bots/scheduler: Unauthorized',data:{hasSession:!!session,userRole:(session?.user as any)?.role},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
-      // #endregion
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }
@@ -132,7 +126,7 @@ export async function POST(request: Request) {
 
     const body = await request.json();
     const { activities, activityHours: providedActivityHours, rateLimits } = body;
-    
+
     if (!activities || !Array.isArray(activities) || activities.length === 0) {
       return NextResponse.json(
         { error: 'Activities array is required' },
@@ -190,7 +184,7 @@ export async function POST(request: Request) {
 
     // Get or create global scheduler config
     let globalConfig = await db.globalBotSchedulerConfig.findFirst();
-    
+
     if (!globalConfig) {
       globalConfig = await db.globalBotSchedulerConfig.create({
         data: {
@@ -296,8 +290,8 @@ export async function POST(request: Request) {
         if (webhookErr.name === 'AbortError') {
           webhookError = 'Webhook timeout after 10 seconds';
           break;
-        }
       }
+    }
 
       if (attempt < maxRetries - 1) {
         const delay = Math.pow(2, attempt) * 1000;
@@ -314,9 +308,6 @@ export async function POST(request: Request) {
       } : undefined,
     });
   } catch (error: any) {
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/a8c809a5-2e2a-4594-9201-a710299032db',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'scheduler/route.ts:176',message:'POST /api/admin/bots/scheduler: Exception caught',data:{error:error.message,stack:error.stack},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'H'})}).catch(()=>{});
-    // #endregion
     const errorMessage = error.message || 'Failed to save scheduler settings';
     const errorDetails = process.env.NODE_ENV === 'development' ? error.stack : undefined;
     console.error('[SCHEDULER_POST] Error:', {
