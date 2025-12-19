@@ -135,7 +135,7 @@ export default function CoursesPage() {
             </CardContent>
           </Card>
         ) : (
-          <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 xl:grid-cols-3 w-full max-w-full">
+          <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 xl:grid-cols-3 w-full max-w-full px-4 sm:px-6">
             {courses.map((course, index) => {
               // Her kurs için farklı gradient renkleri (admin sayfası gibi)
               const gradients = [

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -11,12 +11,44 @@ import { AlertCircle, ArrowRight, CreditCard } from "lucide-react";
 export default function SubscriptionRequiredPage() {
   const router = useRouter();
   const { data: session, status } = useSession();
+  const [backUrl, setBackUrl] = useState<string | null>(null);
 
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push("/login");
+      return;
     }
+
+    // Get referrer from document.referrer or sessionStorage
+    const referrer = document.referrer || sessionStorage.getItem("subscriptionRedirectReferrer");
+    
+    // Only allow internal navigation (same origin)
+    if (referrer && typeof window !== "undefined") {
+      try {
+        const referrerUrl = new URL(referrer);
+        const currentUrl = new URL(window.location.href);
+        
+        // Check if referrer is from same origin and not the subscription-required page itself
+        if (referrerUrl.origin === currentUrl.origin && !referrerUrl.pathname.includes("/subscription-required")) {
+          setBackUrl(referrer);
+        }
+      } catch (e) {
+        // Invalid URL, ignore
+      }
+    }
+
+    // Clean up sessionStorage after reading
+    sessionStorage.removeItem("subscriptionRedirectReferrer");
   }, [status, router]);
+
+  const handleBack = () => {
+    if (backUrl) {
+      router.push(backUrl);
+    } else {
+      // Fallback to dashboard or home
+      router.push("/dashboard");
+    }
+  };
 
   if (status === "loading") {
     return (
@@ -109,7 +141,7 @@ export default function SubscriptionRequiredPage() {
             <Button
               variant="outline"
               size="lg"
-              onClick={() => router.back()}
+              onClick={handleBack}
               className="w-full sm:w-auto"
             >
               Geri Dön

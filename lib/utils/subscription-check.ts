@@ -47,12 +47,20 @@ export async function checkSubscriptionBeforeAction(): Promise<boolean> {
     const data = await response.json();
     
     if (!data.hasActiveSubscription) {
+      // Store current URL as referrer for back button functionality
+      if (typeof window !== "undefined") {
+        sessionStorage.setItem("subscriptionRedirectReferrer", window.location.href);
+      }
       window.location.href = "/subscription-required";
       return false;
     }
     return true;
   } catch (error) {
     console.error("[checkSubscriptionBeforeAction] Error:", error);
+    // Store current URL as referrer for back button functionality
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("subscriptionRedirectReferrer", window.location.href);
+    }
     window.location.href = "/subscription-required";
     return false;
   }

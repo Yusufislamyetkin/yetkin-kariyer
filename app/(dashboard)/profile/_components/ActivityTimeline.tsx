@@ -55,10 +55,34 @@ export function ActivityTimeline({ activities, title = "Son Aktiviteler", header
   if (activities.length === 0) {
     return (
       <Card variant="glass">
-        <CardContent className="py-12 text-center">
-          <p className="text-gray-500 dark:text-gray-400">
-            Henüz aktivite bulunmuyor
-          </p>
+        <CardHeader>
+          <div className="flex items-center gap-3">
+            {!hideHeaderIcon && (
+              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center shadow-lg">
+                <Clock className="w-5 h-5 text-white" />
+              </div>
+            )}
+            <div>
+              <CardTitle className="text-xl font-bold text-gray-900 dark:text-gray-100">
+                {title}
+              </CardTitle>
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent className="py-16">
+          <div className="flex flex-col items-center justify-center gap-4 text-center">
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 dark:from-blue-500/30 dark:via-purple-500/30 dark:to-pink-500/30 flex items-center justify-center border border-gray-200/50 dark:border-gray-700/50">
+              <Clock className="w-8 h-8 text-gray-400 dark:text-gray-500" />
+            </div>
+            <div className="space-y-1">
+              <p className="font-semibold text-gray-900 dark:text-gray-100">
+                Henüz aktivite bulunmuyor
+              </p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                İlk aktiviteniz burada görünecek
+              </p>
+            </div>
+          </div>
         </CardContent>
       </Card>
     );

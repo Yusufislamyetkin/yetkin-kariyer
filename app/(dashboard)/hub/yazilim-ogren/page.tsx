@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { BookOpen, PenSquare, Code, Medal, BarChart3, ArrowRight } from "lucide-react";
+import { BookOpen, PenSquare, Code, Medal, BarChart3, ArrowRight, Bug } from "lucide-react";
 import { Card, CardContent } from "@/app/components/ui/Card";
 
 const colorClasses = {
@@ -35,6 +35,12 @@ const colorClasses = {
     iconShadow: "shadow-indigo-500/30",
     text: "text-indigo-600 dark:text-indigo-400",
   },
+  red: {
+    overlay: "from-red-50/50 to-transparent dark:from-red-900/10",
+    hover: "hover:shadow-red-500/20 hover:border-red-200 dark:hover:border-red-700",
+    iconShadow: "shadow-red-500/30",
+    text: "text-red-600 dark:text-red-400",
+  },
 };
 
 const hubItems = [
@@ -61,6 +67,14 @@ const hubItems = [
     icon: Code,
     color: "from-green-500 via-emerald-500 to-green-600",
     colorKey: "green" as keyof typeof colorClasses,
+  },
+  {
+    title: "Bugfix",
+    description: "Hata bulma ve düzeltme pratiği yapın",
+    href: "/education/bugfix-cases",
+    icon: Bug,
+    color: "from-red-500 via-rose-500 to-red-600",
+    colorKey: "red" as keyof typeof colorClasses,
   },
   {
     title: "Rozetler",

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
-import { CreditCard, CheckCircle, XCircle, Calendar, Crown, Zap, CheckCircle2 } from "lucide-react";
+import { CreditCard, CheckCircle, XCircle, Calendar, Crown, Zap, CheckCircle2, Sparkles } from "lucide-react";
 import { format } from "date-fns";
 import { tr } from "date-fns/locale";
 import { SubscriptionPlanType, SubscriptionStatus } from "@prisma/client";
@@ -140,23 +140,27 @@ export function SubscriptionInfo({ userId }: SubscriptionInfoProps) {
             </div>
           </>
         ) : (
-          <div className="text-center py-6 space-y-4">
-            <div className="mx-auto w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-              <XCircle className="h-8 w-8 text-gray-400" />
+          <div className="text-center py-8 space-y-6">
+            <div className="flex flex-col items-center gap-4">
+              <div className="mx-auto w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 flex items-center justify-center shadow-lg">
+                <Sparkles className="h-10 w-10 text-white" />
+              </div>
+              <div className="space-y-2">
+                <p className="font-semibold text-lg text-gray-900 dark:text-gray-100">
+                  Abonelik Yok
+                </p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 max-w-sm mx-auto">
+                  Aktif bir aboneliğiniz bulunmuyor. Premium özelliklere erişmek için bir plan seçin.
+                </p>
+              </div>
             </div>
-            <div>
-              <p className="font-semibold text-gray-900 dark:text-gray-100 mb-1">
-                Abonelik Yok
-              </p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Aktif bir aboneliğiniz bulunmuyor
-              </p>
+            <div className="pt-2">
+              <Link href="/fiyatlandirma">
+                <Button variant="gradient" size="md" className="max-w-xs w-full mx-auto">
+                  Abonelik Planlarını Görüntüle
+                </Button>
+              </Link>
             </div>
-            <Link href="/fiyatlandirma">
-              <Button variant="gradient" size="sm" className="w-full">
-                Abonelik Planlarını Görüntüle
-              </Button>
-            </Link>
           </div>
         )}
       </CardContent>
