@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import { extractCVInfo } from "@/lib/ai/interview-generator";
 import { getUserIdFromSession } from "@/lib/auth-utils";
 import { getBaseUrl } from "@/lib/qstash";
+import { checkUserSubscription } from "@/lib/services/subscription-service";
 
 export const maxDuration = 60; // 60 seconds timeout for Vercel
 
@@ -22,6 +23,19 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
     console.log(`[CV_INTERVIEW] [1/6] ✅ Session kontrolü başarılı - userId: ${userId}`);
+
+    // Abonelik kontrolü
+    const subscription = await checkUserSubscription(userId);
+    if (!subscription || !subscription.isActive) {
+      return NextResponse.json(
+        {
+          error: "Abone değilsiniz. Lütfen bir abonelik planı seçin.",
+          redirectTo: "/fiyatlandirma",
+          requiresSubscription: true,
+        },
+        { status: 403 }
+      );
+    }
 
     console.log(`[CV_INTERVIEW] [2/6] Request body parse ediliyor...`);
     const body = await request.json();

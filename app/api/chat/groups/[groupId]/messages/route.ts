@@ -5,6 +5,7 @@ import { db } from "@/lib/db";
 import { broadcastChatMessage } from "@/lib/realtime/signalr-triggers";
 import { sanitizePlainText } from "@/lib/security/sanitize";
 import { checkRateLimit, rateLimitKey, Limits } from "@/lib/security/rateLimit";
+import { checkUserSubscription } from "@/lib/services/subscription-service";
 
 const paginationSchema = z.object({
   cursor: z.string().cuid().optional(),
@@ -140,6 +141,19 @@ export async function POST(request: Request, { params }: { params: { groupId: st
 
     if (!session?.user?.id) {
       return NextResponse.json({ error: "Yetkisiz erişim" }, { status: 401 });
+    }
+
+    // Abonelik kontrolü
+    const subscription = await checkUserSubscription(session.user.id as string);
+    if (!subscription || !subscription.isActive) {
+      return NextResponse.json(
+        {
+          error: "Abone değilsiniz. Lütfen bir abonelik planı seçin.",
+          redirectTo: "/fiyatlandirma",
+          requiresSubscription: true,
+        },
+        { status: 403 }
+      );
     }
 
     // Rate limit: messages per group+user

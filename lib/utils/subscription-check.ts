@@ -35,3 +35,25 @@ export async function hasActiveSubscription(): Promise<boolean> {
     return false;
   }
 }
+
+/**
+ * Aktivite başlatmadan önce abonelik kontrolü yapar
+ * Abonelik yoksa yönlendirme yapar, varsa true döner
+ * @returns Promise<boolean> - Abonelik varsa true, yoksa false (ve yönlendirme yapılır)
+ */
+export async function checkSubscriptionBeforeAction(): Promise<boolean> {
+  try {
+    const response = await fetch("/api/subscription/check");
+    const data = await response.json();
+    
+    if (!data.hasActiveSubscription) {
+      window.location.href = "/subscription-required";
+      return false;
+    }
+    return true;
+  } catch (error) {
+    console.error("[checkSubscriptionBeforeAction] Error:", error);
+    window.location.href = "/subscription-required";
+    return false;
+  }
+}

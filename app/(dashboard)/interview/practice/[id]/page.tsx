@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 
 import { LiveCodingEditor } from "@/app/components/education/LiveCodingEditor";
 import type { LiveCodingLanguage } from "@/types/live-coding";
+import { checkSubscriptionAndRedirect } from "@/lib/utils/subscription-check";
 
 type StandardQuestionType = "technical" | "behavioral" | "case";
 type CodingQuestionType = "live_coding" | "bug_fix";
@@ -1121,9 +1122,15 @@ export default function InterviewRoomPage() {
   }, [currentQuestion, interview, ttsEnabled, speakQuestion, stopSpeaking]);
 
   useEffect(() => {
-    if (!interviewId) return;
-    fetchInterview();
-    requestFullscreen();
+    // Abonelik kontrolü
+    checkSubscriptionAndRedirect().then((hasSubscription) => {
+      if (!hasSubscription) {
+        return; // Yönlendirme yapıldı
+      }
+      if (!interviewId) return;
+      fetchInterview();
+      requestFullscreen();
+    });
   }, [fetchInterview, interviewId, requestFullscreen]);
 
   // Cleanup TTS on unmount

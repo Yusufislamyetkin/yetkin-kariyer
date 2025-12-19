@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { ChevronLeft, FileText, Clock, ArrowRight, Sparkles, ArrowLeft, Code2, BookOpen, Eye } from "lucide-react";
 import { Card, CardContent } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
+import { checkSubscriptionBeforeAction } from "@/lib/utils/subscription-check";
 
 interface Test {
   id: string;
@@ -20,6 +21,7 @@ interface Test {
 
 export default function ModuleTestsPage() {
   const params = useParams();
+  const router = useRouter();
   const technologyParam = params?.technology;
   const moduleParam = params?.module;
   const technology = Array.isArray(technologyParam) ? technologyParam[0] : technologyParam;
@@ -263,7 +265,13 @@ export default function ModuleTestsPage() {
                     </div>
                     <div className="relative z-10 shrink-0 flex gap-2 flex-wrap">
                       <Button 
-                        href={`/education/tests/${encodeURIComponent(decodedTechnology)}/${encodeURIComponent(decodedModule)}/${test.id}`}
+                        onClick={async (e) => {
+                          e.preventDefault();
+                          const hasSubscription = await checkSubscriptionBeforeAction();
+                          if (hasSubscription) {
+                            router.push(`/education/tests/${encodeURIComponent(decodedTechnology)}/${encodeURIComponent(decodedModule)}/${test.id}`);
+                          }
+                        }}
                         className="w-full sm:w-auto inline-flex items-center gap-2"
                         variant="primary"
                       >

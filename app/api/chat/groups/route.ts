@@ -9,6 +9,7 @@ import { generateUniqueGroupInviteCode } from "@/lib/chat/invite";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import type { Prisma } from "@prisma/client";
+import { checkUserSubscription } from "@/lib/services/subscription-service";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -305,6 +306,19 @@ export async function POST(request: Request) {
 
     if (!session?.user?.id) {
       return NextResponse.json({ error: "Yetkisiz erişim" }, { status: 401 });
+    }
+
+    // Abonelik kontrolü
+    const subscription = await checkUserSubscription(session.user.id as string);
+    if (!subscription || !subscription.isActive) {
+      return NextResponse.json(
+        {
+          error: "Abone değilsiniz. Lütfen bir abonelik planı seçin.",
+          redirectTo: "/fiyatlandirma",
+          requiresSubscription: true,
+        },
+        { status: 403 }
+      );
     }
 
     const body = await request.json().catch(() => ({}));

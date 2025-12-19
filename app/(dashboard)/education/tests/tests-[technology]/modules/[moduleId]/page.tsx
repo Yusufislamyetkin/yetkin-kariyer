@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { ChevronLeft, FileText, Clock, ArrowRight, Sparkles, ArrowLeft, Code2, BookOpen } from "lucide-react";
 import { Card, CardContent } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
 import { routeToTechnology, technologyToRoute } from "@/lib/utils/technology-normalize";
+import { checkSubscriptionBeforeAction } from "@/lib/utils/subscription-check";
 
 interface Test {
   id: string;
@@ -20,6 +21,7 @@ interface Test {
 
 export default function ModuleTestsPage() {
   const params = useParams();
+  const router = useRouter();
   const technologyParam = params?.technology;
   const moduleIdParam = params?.moduleId;
   const technology = Array.isArray(technologyParam) ? technologyParam[0] : technologyParam;
@@ -270,7 +272,13 @@ export default function ModuleTestsPage() {
                     </div>
                     <div className="relative z-10 shrink-0">
                       <Button 
-                        href={test.href || `/education/tests/quiz/${technologySlug}/${encodeURIComponent(moduleId)}/${encodeURIComponent(test.id)}`}
+                        onClick={async (e) => {
+                          e.preventDefault();
+                          const hasSubscription = await checkSubscriptionBeforeAction();
+                          if (hasSubscription) {
+                            router.push(test.href || `/education/tests/quiz/${technologySlug}/${encodeURIComponent(moduleId)}/${encodeURIComponent(test.id)}`);
+                          }
+                        }}
                         className="w-full sm:w-auto inline-flex items-center gap-2"
                         variant="primary"
                       >

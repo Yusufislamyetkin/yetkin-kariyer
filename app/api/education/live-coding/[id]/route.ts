@@ -9,12 +9,31 @@ import {
 import type { LiveCodingLanguage } from "@/types/live-coding";
 import { recordEvent } from "@/lib/services/gamification/antiAbuse";
 import { applyRules } from "@/lib/services/gamification/rules";
+import { checkUserSubscription } from "@/lib/services/subscription-service";
 
 export async function GET(
   request: Request,
   { params }: { params: { id: string } }
 ) {
   try {
+    const session = await auth();
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    // Abonelik kontrolü
+    const subscription = await checkUserSubscription(session.user.id as string);
+    if (!subscription || !subscription.isActive) {
+      return NextResponse.json(
+        {
+          error: "Abone değilsiniz. Lütfen bir abonelik planı seçin.",
+          redirectTo: "/fiyatlandirma",
+          requiresSubscription: true,
+        },
+        { status: 403 }
+      );
+    }
+
     if (!params.id || typeof params.id !== "string") {
       return NextResponse.json(
         { error: "Geçersiz canlı kodlama ID'si" },
@@ -127,6 +146,19 @@ export async function POST(
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    // Abonelik kontrolü
+    const subscription = await checkUserSubscription(session.user.id as string);
+    if (!subscription || !subscription.isActive) {
+      return NextResponse.json(
+        {
+          error: "Abone değilsiniz. Lütfen bir abonelik planı seçin.",
+          redirectTo: "/fiyatlandirma",
+          requiresSubscription: true,
+        },
+        { status: 403 }
+      );
     }
 
     const body = await request.json();

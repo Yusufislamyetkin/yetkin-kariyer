@@ -8,6 +8,7 @@ import ReactMarkdown from "react-markdown";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
 import { Clock, CheckCircle, ChevronLeft, ChevronRight, AlertCircle, ArrowLeft, X, Sparkles, Brain, MessageSquare, Zap, Target, TrendingUp, BookOpen } from "lucide-react";
+import { checkSubscriptionAndRedirect } from "@/lib/utils/subscription-check";
 
 interface Question {
   id: string;
@@ -85,9 +86,15 @@ export default function TestQuestionsPage() {
   ];
 
   useEffect(() => {
-    if (testId) {
-      fetchQuiz();
-    }
+    // Abonelik kontrolü
+    checkSubscriptionAndRedirect().then((hasSubscription) => {
+      if (!hasSubscription) {
+        return; // Yönlendirme yapıldı
+      }
+      if (testId) {
+        fetchQuiz();
+      }
+    });
   }, [testId]);
 
   // Loading progress ve mesaj animasyonu

@@ -20,6 +20,7 @@ import {
 import { cn } from "@/lib/utils";
 import { useChatSummary } from "@/app/contexts/ChatSummaryContext";
 import { useStrikeCompletionCheck } from "@/hooks/useStrikeCompletionCheck";
+import { checkSubscriptionBeforeAction } from "@/lib/utils/subscription-check";
 
 import {
   ChatShell,
@@ -956,7 +957,11 @@ export function GroupChatView({ category }: GroupChatViewProps) {
     }
   }, []);
 
-  const openCreateGroupDialog = useCallback(() => {
+  const openCreateGroupDialog = useCallback(async () => {
+    const hasSubscription = await checkSubscriptionBeforeAction();
+    if (!hasSubscription) {
+      return; // Yönlendirme yapıldı
+    }
     setCreateGroupError(null);
     setCreateGroupDialogOpen(true);
   }, []);
@@ -1197,6 +1202,12 @@ export function GroupChatView({ category }: GroupChatViewProps) {
       // Attachment'ları ve input'u sakla (hata durumunda geri yüklemek için)
       const tempAttachments = [...attachments];
       const tempMessageInput = trimmed;
+
+      // Abonelik kontrolü
+      const hasSubscription = await checkSubscriptionBeforeAction();
+      if (!hasSubscription) {
+        return; // Yönlendirme yapıldı
+      }
 
       try {
         setSendingMessage(true);

@@ -3,6 +3,7 @@ import { auth } from "@/lib/auth";
 import { ensureAIEnabled, isAIEnabled } from "@/lib/ai/client";
 import { validateCodeCompleteness, type LiveCodingLanguage } from "@/lib/ai/code-validator";
 import { getUserIdFromSession } from "@/lib/auth-utils";
+import { checkUserSubscription } from "@/lib/services/subscription-service";
 
 export interface EvaluateOutputRequest {
   taskDescription: string;
@@ -34,6 +35,19 @@ export async function POST(request: Request) {
       userId = await getUserIdFromSession(session);
       if (!userId) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      }
+
+      // Abonelik kontrolü
+      const subscription = await checkUserSubscription(userId);
+      if (!subscription || !subscription.isActive) {
+        return NextResponse.json(
+          {
+            error: "Abone değilsiniz. Lütfen bir abonelik planı seçin.",
+            redirectTo: "/fiyatlandirma",
+            requiresSubscription: true,
+          },
+          { status: 403 }
+        );
       }
     }
 

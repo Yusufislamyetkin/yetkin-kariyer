@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import CVRenderer from "@/app/components/cv/CVRenderer";
+import { checkSubscriptionBeforeAction } from "@/lib/utils/subscription-check";
 
 interface CVTemplate {
   id: string;
@@ -211,7 +212,10 @@ export default function CVTemplatesPage() {
   };
 
   const handleSelectTemplate = (templateId: string) => {
-    router.push(`/cv/create?template=${templateId}`);
+    const hasSubscription = await checkSubscriptionBeforeAction();
+    if (hasSubscription) {
+      router.push(`/cv/create?template=${templateId}`);
+    }
   };
 
   if (loading) {

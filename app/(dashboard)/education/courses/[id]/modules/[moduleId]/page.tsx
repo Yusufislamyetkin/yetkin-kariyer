@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import {
   ArrowLeft,
   BookOpen,
@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/app/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
+import { checkSubscriptionBeforeAction } from "@/lib/utils/subscription-check";
 
 type ModuleLesson = {
   label: string;
@@ -77,6 +78,7 @@ function formatMinutes(minutes?: number | null) {
 
 export default function ModuleDetailPage() {
   const params = useParams();
+  const router = useRouter();
   const courseIdParam = params?.id;
   const moduleIdParam = params?.moduleId;
 
@@ -345,7 +347,13 @@ export default function ModuleDetailPage() {
                       </div>
                       <div className="relative z-10 shrink-0">
                         <Button 
-                          href={`/education/lessons/chat${lesson.href.replace('/education/lessons', '')}`} 
+                          onClick={async (e) => {
+                            e.preventDefault();
+                            const hasSubscription = await checkSubscriptionBeforeAction();
+                            if (hasSubscription) {
+                              router.push(`/education/lessons/chat${lesson.href.replace('/education/lessons', '')}`);
+                            }
+                          }}
                           className={`
                             w-full sm:w-auto inline-flex items-center gap-2
                             ${isCompleted ? "bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700" : ""}

@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import { auth } from "@/lib/auth";
 import { DEFAULT_TEMPLATES } from "./templates/defaultTemplates";
 import { generateInterviewForCV } from "@/lib/background/cv-interview-generator";
+import { checkUserSubscription } from "@/lib/services/subscription-service";
 
 export async function GET() {
   try {
@@ -59,6 +60,19 @@ export async function POST(request: Request) {
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    // Abonelik kontrolü
+    const subscription = await checkUserSubscription(session.user.id as string);
+    if (!subscription || !subscription.isActive) {
+      return NextResponse.json(
+        {
+          error: "Abone değilsiniz. Lütfen bir abonelik planı seçin.",
+          redirectTo: "/fiyatlandirma",
+          requiresSubscription: true,
+        },
+        { status: 403 }
+      );
     }
 
     const body = await request.json();

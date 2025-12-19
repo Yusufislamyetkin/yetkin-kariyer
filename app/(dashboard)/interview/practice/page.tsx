@@ -3,7 +3,9 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ClipboardList } from "lucide-react";
+import { checkSubscriptionBeforeAction } from "@/lib/utils/subscription-check";
 
 interface Interview {
   id: string;
@@ -15,6 +17,7 @@ interface Interview {
 }
 
 export default function InterviewPracticePage() {
+  const router = useRouter();
   const [interviews, setInterviews] = useState<Interview[]>([]);
   const [loading, setLoading] = useState(true);
   const [type, setType] = useState("");
@@ -94,6 +97,12 @@ export default function InterviewPracticePage() {
           <Link
             key={interview.id}
             href={`/interview/practice/${interview.id}`}
+            onClick={async (e) => {
+              const hasSubscription = await checkSubscriptionBeforeAction();
+              if (!hasSubscription) {
+                e.preventDefault();
+              }
+            }}
             className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md dark:shadow-gray-900/50 hover:shadow-lg dark:hover:shadow-gray-900/70 transition border border-gray-200 dark:border-gray-700"
           >
             <h2 className="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">{interview.title}</h2>

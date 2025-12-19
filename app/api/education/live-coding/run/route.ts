@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
+import { auth } from "@/lib/auth";
 import { ensureAIEnabled, isAIEnabled } from "@/lib/ai/client";
 import type { LiveCodingLanguage } from "@/types/live-coding";
+import { checkUserSubscription } from "@/lib/services/subscription-service";
 
 interface RunRequestBody {
   language?: string;

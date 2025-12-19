@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { FileText, MessageSquare, Loader2, AlertCircle, CheckCircle2, Brain, Sparkles, Zap, Target, TrendingUp, User, Briefcase, Code } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
+import { checkSubscriptionBeforeAction } from "@/lib/utils/subscription-check";
 
 interface CV {
   id: string;
@@ -347,6 +348,12 @@ export default function CVBasedInterviewPage() {
   }, []);
 
   const handleCreateInterview = async (cvId: string) => {
+    // Abonelik kontrolü
+    const hasSubscription = await checkSubscriptionBeforeAction();
+    if (!hasSubscription) {
+      return; // Yönlendirme yapıldı
+    }
+
     const createStartTime = Date.now();
     console.log(`[CV_INTERVIEW_FRONTEND] ========== MÜLAKAT OLUŞTURMA BAŞLATILDI ==========`);
     console.log(`[CV_INTERVIEW_FRONTEND] Timestamp: ${new Date().toISOString()}`);

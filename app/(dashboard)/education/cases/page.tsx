@@ -1,7 +1,11 @@
+"use client";
+
+import { useEffect } from "react";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Code, ArrowRight } from "lucide-react";
 import { loadLiveCodingCases } from "@/lib/education/loadLiveCodingCases";
+import { checkSubscriptionAndRedirect } from "@/lib/utils/subscription-check";
 
 export const dynamic = "force-dynamic";
 
@@ -36,6 +40,11 @@ const LANGUAGE_COLORS: Record<string, string> = {
 export default function CasesPage() {
   const liveCodingCases = loadLiveCodingCases();
   const languages = liveCodingCases.languages;
+
+  useEffect(() => {
+    // Abonelik kontrolü
+    checkSubscriptionAndRedirect();
+  }, []);
 
   return (
     <div className="space-y-8 animate-fade-in">

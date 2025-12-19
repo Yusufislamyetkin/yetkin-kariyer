@@ -3,6 +3,8 @@ import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { BotActivityType } from "@prisma/client";
 
+export const dynamic = 'force-dynamic';
+
 // Map category to activity types
 // This function maps UI categories to actual BotActivityType enum values
 function getActivityTypesByCategory(category: string): BotActivityType[] {

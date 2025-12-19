@@ -25,6 +25,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Ca
 import { Button } from "@/app/components/ui/Button";
 import { Input } from "@/app/components/ui/Input";
 import CVRenderer from "@/app/components/cv/CVRenderer";
+import { checkSubscriptionBeforeAction } from "@/lib/utils/subscription-check";
 import {
   CV_LIMITS,
   countWords,
@@ -284,6 +285,14 @@ export default function CVEditor({
   };
 
   const handleSave = async () => {
+    // Abonelik kontrolü (sadece yeni CV oluştururken)
+    if (mode === "create") {
+      const hasSubscription = await checkSubscriptionBeforeAction();
+      if (!hasSubscription) {
+        return; // Yönlendirme yapıldı
+      }
+    }
+
     if (!template) {
       setError("Şablon bulunamadı");
       return;
