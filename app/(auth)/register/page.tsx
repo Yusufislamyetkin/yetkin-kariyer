@@ -63,7 +63,7 @@ export default function RegisterPage() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 w-full max-w-full overflow-x-hidden">
       <Navbar />
       <div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 particle-bg min-h-[calc(100vh-4rem)]">
-      <div className="max-w-md w-full space-y-8 animate-fade-in">
+        <div className="max-w-md w-full space-y-8 animate-fade-in">
         <div className="text-center">
           <h1 className="text-4xl font-display font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent md:bg-gradient-to-r md:from-blue-600 md:via-purple-600 md:to-pink-600 md:bg-[length:200%_auto] md:animate-text-shimmer mb-2">
             YTK Academy
@@ -211,6 +211,7 @@ export default function RegisterPage() {
               Giriş yapın
             </Link>
           </p>
+        </div>
         </div>
       </div>
     </div>

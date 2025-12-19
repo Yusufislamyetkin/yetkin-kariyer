@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/app/components/ui/Button";
-import { Loader2, Clock, Save, Plus, Trash2, Calendar } from "lucide-react";
+import { Loader2, Clock, Save, Plus, Trash2, Calendar, Rocket } from "lucide-react";
 
 interface ScheduledActivity {
   id?: string;
@@ -29,10 +29,12 @@ export function SchedulerManager() {
   const [scheduledActivities, setScheduledActivities] = useState<ScheduledActivity[]>([]);
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [triggering, setTriggering] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [warnings, setWarnings] = useState<Array<{ botId: string; error: string }>>([]);
   const [errors, setErrors] = useState<Array<{ botId: string; error: string }>>([]);
+  const [triggerResults, setTriggerResults] = useState<any>(null);
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
   const [globalActivityHours, setGlobalActivityHours] = useState<number[]>([9, 12, 18, 21]);
@@ -223,6 +225,54 @@ export function SchedulerManager() {
     setScheduledActivities(updated);
   };
 
+  const handleTriggerNow = async () => {
+    setTriggering(true);
+    setError(null);
+    setSuccess(null);
+    setTriggerResults(null);
+
+    try {
+      const response = await fetch('/api/admin/bots/trigger-now', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      const contentType = response.headers.get('content-type');
+      const responseText = await response.text();
+
+      if (!response.ok) {
+        let errorData;
+        if (contentType && contentType.includes('application/json')) {
+          try {
+            errorData = JSON.parse(responseText);
+          } catch (e) {
+            errorData = { error: 'Failed to parse error response' };
+          }
+        } else {
+          errorData = { error: `Backend returned non-JSON error: ${responseText.substring(0, 200)}` };
+        }
+        throw new Error(errorData.error || "Aktiviteler tetiklenirken bir hata oluştu");
+      }
+
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error(`Backend returned non-JSON response: ${responseText.substring(0, 200)}`);
+      }
+
+      const data = JSON.parse(responseText);
+
+      if (!data.success) {
+        throw new Error(data.error || "Aktiviteler tetiklenirken bir hata oluştu");
+      }
+
+      setSuccess(data.message || "Aktiviteler başarıyla tetiklendi");
+      setTriggerResults(data);
+    } catch (err: any) {
+      setError(err.message || "Aktiviteler tetiklenirken bir hata oluştu");
+    } finally {
+      setTriggering(false);
+    }
+  };
+
 
   return (
     <div className="space-y-6">
@@ -235,13 +285,32 @@ export function SchedulerManager() {
             Bot aktivitelerini zamanlayın - Doğal kullanıcı etkileşimleri için otomatik zamanlama
           </p>
         </div>
-        <Button
-          onClick={() => setShowAddForm(!showAddForm)}
-          variant="outline"
-        >
-          <Plus className="h-4 w-4 mr-2" />
-          Yeni Aktivite Ekle
-        </Button>
+        <div className="flex gap-2">
+          <Button
+            onClick={handleTriggerNow}
+            disabled={triggering || scheduledActivities.length === 0}
+            className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
+          >
+            {triggering ? (
+              <>
+                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                Tetikleniyor...
+              </>
+            ) : (
+              <>
+                <Rocket className="h-4 w-4 mr-2" />
+                Şimdi Tetikle
+              </>
+            )}
+          </Button>
+          <Button
+            onClick={() => setShowAddForm(!showAddForm)}
+            variant="outline"
+          >
+            <Plus className="h-4 w-4 mr-2" />
+            Yeni Aktivite Ekle
+          </Button>
+        </div>
       </div>
 
       {error && (
@@ -252,7 +321,15 @@ export function SchedulerManager() {
 
       {success && (
         <div className="p-4 bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800 rounded-lg">
-          <p className="text-green-700 dark:text-green-300 text-sm">{success}</p>
+          <p className="text-green-700 dark:text-green-300 text-sm font-medium mb-2">{success}</p>
+          {triggerResults && triggerResults.summary && (
+            <div className="mt-2 text-xs text-green-600 dark:text-green-400">
+              <div>Toplam Bot: {triggerResults.summary.totalBots}</div>
+              <div>Toplam Aktivite: {triggerResults.summary.totalActivities}</div>
+              <div>Başarılı: {triggerResults.summary.successful}</div>
+              <div>Başarısız: {triggerResults.summary.failed}</div>
+            </div>
+          )}
         </div>
       )}
 

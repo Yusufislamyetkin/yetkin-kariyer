@@ -38,7 +38,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const { userId, activityType, targetId } = requestBody;
+    const { userId, activityType, targetId, skipSchedulerCheck } = requestBody;
 
     if (!userId || !activityType) {
       return NextResponse.json(
@@ -73,51 +73,63 @@ export async function POST(request: Request) {
       );
     }
 
-    // Get global scheduler config
+    // Get global scheduler config (needed for rate limits and scheduler checks)
     const globalConfig = await db.globalBotSchedulerConfig.findFirst();
     
-    if (!globalConfig || !globalConfig.scheduleEnabled) {
+    // Skip scheduler checks if skipSchedulerCheck is true (for manual triggers)
+    if (!skipSchedulerCheck) {
+      if (!globalConfig || !globalConfig.scheduleEnabled) {
+        return NextResponse.json(
+          {
+            success: false,
+            error: "Global scheduler is not enabled",
+          },
+          { status: 400 }
+        );
+      }
+
+      // Check if activity is enabled globally
+      if (
+        !globalConfig.enabledActivities ||
+        !globalConfig.enabledActivities.includes(activityType)
+      ) {
+        return NextResponse.json(
+          {
+            success: false,
+            error: `Activity type ${activityType} is not enabled in global scheduler`,
+          },
+          { status: 400 }
+        );
+      }
+
+      // Check if bot is active at current hour (using UTC to match .NET Core behavior)
+      // Activity hours are stored in UTC timezone (0-23)
+      const currentUtcHour = new Date().getUTCHours();
+      const activityHours = globalConfig.activityHours && globalConfig.activityHours.length > 0
+        ? globalConfig.activityHours
+        : [9, 12, 18, 21]; // Default hours
+
+      if (!activityHours.includes(currentUtcHour)) {
+        return NextResponse.json(
+          {
+            success: false,
+            error: `Bot is not active at current UTC hour (${currentUtcHour}). Active hours: ${activityHours.join(", ")}`,
+          },
+          { status: 400 }
+        );
+      }
+    }
+
+    // Check rate limits based on activity type (always check, even if skipSchedulerCheck is true)
+    if (!globalConfig) {
       return NextResponse.json(
         {
           success: false,
-          error: "Global scheduler is not enabled",
+          error: "Global scheduler config not found",
         },
-        { status: 400 }
+        { status: 500 }
       );
     }
-
-    // Check if activity is enabled globally
-    if (
-      !globalConfig.enabledActivities ||
-      !globalConfig.enabledActivities.includes(activityType)
-    ) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: `Activity type ${activityType} is not enabled in global scheduler`,
-        },
-        { status: 400 }
-      );
-    }
-
-    // Check if bot is active at current hour (using UTC to match .NET Core behavior)
-    // Activity hours are stored in UTC timezone (0-23)
-    const currentUtcHour = new Date().getUTCHours();
-    const activityHours = globalConfig.activityHours && globalConfig.activityHours.length > 0
-      ? globalConfig.activityHours
-      : [9, 12, 18, 21]; // Default hours
-
-    if (!activityHours.includes(currentUtcHour)) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: `Bot is not active at current UTC hour (${currentUtcHour}). Active hours: ${activityHours.join(", ")}`,
-        },
-        { status: 400 }
-      );
-    }
-
-    // Check rate limits based on activity type
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const tomorrow = new Date(today);

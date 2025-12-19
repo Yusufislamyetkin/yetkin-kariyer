@@ -24,10 +24,6 @@ const plans = [
       "Mülakat simülasyonu (sınırlı sayıda)",
       "ATS uyumlu CV oluşturma (temel şablonlar)",
       "Topluluk mentor desteği",
-      "Kariyer planı oluşturma (temel)",
-      "Freelancer projelere katılma (sınırlı erişim)",
-      "Hackathonlara katılma",
-      "Aylık ödülleri alma",
     ],
     color: "from-blue-500 to-cyan-500",
     popular: false,
@@ -39,17 +35,18 @@ const plans = [
     description: "Tüm özelliklere erişim ve gelişmiş destek",
     features: [
       "Ders erişimi (tüm kategoriler)",
-      "Test çözme",
+      "Test çözme (tüm kategoriler)",
       "Canlı kodlama (tüm seviyeler)",
       "Bugfix meydan okumaları (tüm seviyeler)",
       "Yardımlaşma toplulukları",
       "Mülakat simülasyonu (sınırsız)",
       "ATS uyumlu CV oluşturma (tüm şablonlar)",
-      "Mentor desteği (topluluk)",
+      "Mentor desteği",
       "Kariyer planı oluşturma",
       "Freelancer projelere katılma",
       "Hackathonlara katılma",
       "Aylık ödülleri alma",
+      "Anlaşmalı şirketlerde iş istihdam fırsatı",
       "Gelişmiş AI analiz raporları",
       "Öncelikli hackathon başvuruları",
       "Özel proje portföyü gösterimi",
@@ -73,7 +70,6 @@ const plans = [
       "Şirket ziyaretleri ve network etkinlikleri",
       "Kişisel kariyer koçu",
       "Özel proje danışmanlığı",
-      "Ücretsiz sertifika yenileme",
       "Özel içerik ve kaynaklara erişim",
       "Premium webinar'lara erişim",
       "Topluluk moderatörlüğü imkanı",
@@ -286,12 +282,12 @@ export default function FiyatlandirmaPage() {
               a: "Ödemeler kredi kartı, banka kartı veya havale/EFT ile yapılabilir. Tüm ödemeler güvenli ödeme altyapısı üzerinden gerçekleştirilir." 
             },
             { 
-              q: "Öğrenci indirimi var mı?", 
-              a: "Evet, öğrenci belgesi ile %30 indirim hakkınız bulunmaktadır. Öğrenci belgenizi yükleyerek indirimden yararlanabilirsiniz." 
-            },
-            { 
               q: "Ödeme güvenliği nasıl sağlanıyor?", 
               a: "Tüm ödemeler SSL sertifikalı güvenli ödeme altyapısı üzerinden gerçekleştirilir. Kredi kartı bilgileriniz şifrelenerek saklanır ve üçüncü taraflarla paylaşılmaz." 
+            },
+            { 
+              q: "İçerik güncelleniyor mu?", 
+              a: "Evet, platform içerikleri sürekli olarak güncel tutulmaktadır. Teknoloji dersleri, test içerikleri, canlı kodlama pratikleri, bugfix meydan okumaları ve tüm diğer alanlarda sistem özenle güncel tutuluyor." 
             },
             { 
               q: "Fiyatlar her şey dahil mi? Ek ödeme var mı?", 
