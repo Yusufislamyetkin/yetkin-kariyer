@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/app/contexts/ThemeContext";
 import { Providers } from "@/app/providers";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import GoogleAnalytics from "@/app/components/GoogleAnalytics";
 
 const siteUrl = "https://ytkacademy.com.tr";
 
@@ -106,6 +107,7 @@ export default function RootLayout({
   return (
     <html lang="tr" suppressHydrationWarning>
       <body>
+        <GoogleAnalytics />
         <Providers>
           <ThemeProvider>{children}</ThemeProvider>
         </Providers>
@@ -114,4 +116,3 @@ export default function RootLayout({
     </html>
   );
 }
-
