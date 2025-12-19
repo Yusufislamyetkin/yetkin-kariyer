@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { generateCareerPlan } from "@/lib/ai/career";
+import { checkUserSubscription } from "@/lib/services/subscription-service";
 
 export const maxDuration = 60; // 60 seconds timeout for Vercel
 
@@ -12,6 +13,19 @@ export async function POST(request: Request) {
     session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    // Abonelik kontrolü
+    const subscription = await checkUserSubscription(session.user.id as string);
+    if (!subscription || !subscription.isActive) {
+      return NextResponse.json(
+        {
+          error: "Abone değilsiniz. Lütfen bir abonelik planı seçin.",
+          redirectTo: "/fiyatlandirma",
+          requiresSubscription: true,
+        },
+        { status: 403 }
+      );
     }
 
     if (!process.env.OPENAI_API_KEY) {

@@ -3,6 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Briefcase, MapPin, Clock, ArrowRight, Users, TrendingUp } from "lucide-react";
 import Link from "next/link";
+import { StructuredData } from "@/app/components/StructuredData";
 
 export default function CareersPage() {
   const openPositions = [
@@ -58,8 +59,43 @@ export default function CareersPage() {
     },
   ];
 
+  const siteUrl = "https://ytkacademy.com.tr";
+  
+  // JobPosting schema for each position
+  const jobPostings = openPositions.map((position) => ({
+    "@context": "https://schema.org",
+    "@type": "JobPosting",
+    title: position.title,
+    description: position.description,
+    identifier: {
+      "@type": "PropertyValue",
+      name: "YTK Academy",
+      value: position.id.toString(),
+    },
+    datePosted: new Date().toISOString(),
+    employmentType: position.type === "Tam Zamanlı" ? "FULL_TIME" : "PART_TIME",
+    hiringOrganization: {
+      "@type": "Organization",
+      name: "YTK Academy",
+      sameAs: siteUrl,
+    },
+    jobLocation: {
+      "@type": "Place",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: position.location.split(" / ")[0],
+        addressCountry: "TR",
+      },
+    },
+    workHours: position.type,
+  }));
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 py-8">
+    <>
+      {jobPostings.map((job, index) => (
+        <StructuredData key={index} data={job} />
+      ))}
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-950 py-8">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-3">
@@ -162,6 +198,7 @@ export default function CareersPage() {
         </Card>
       </div>
     </div>
+    </>
   );
 }
 

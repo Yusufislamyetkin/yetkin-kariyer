@@ -27,6 +27,7 @@ import type { LiveCodingLanguage } from "@/types/live-coding";
 import { cn } from "@/lib/utils";
 import { useBadgeNotification } from "@/app/contexts/BadgeNotificationContext";
 import { useDelayedBadgeCheck } from "@/hooks/useDelayedBadgeCheck";
+import { checkSubscriptionAndRedirect } from "@/lib/utils/subscription-check";
 
 interface Quiz {
   id: string;
@@ -317,27 +318,33 @@ export default function BugFixPage() {
   const aiFeedbackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const resolvedId = typeof params.id === "string"
-      ? params.id
-      : Array.isArray(params.id)
-      ? params.id[0]
-      : "";
+    // Abonelik kontrolü
+    checkSubscriptionAndRedirect().then((hasSubscription) => {
+      if (!hasSubscription) {
+        return; // Yönlendirme yapıldı
+      }
 
-    if (!resolvedId) {
-      setLoading(false);
-      setQuiz(null);
-      return;
-    }
+      const resolvedId = typeof params.id === "string"
+        ? params.id
+        : Array.isArray(params.id)
+        ? params.id[0]
+        : "";
 
-    setSubmitError(null);
-    setTaskLanguages({});
-    setTaskCodes({});
-    setActiveTaskId(null);
-    startedAtRef.current = null;
+      if (!resolvedId) {
+        setLoading(false);
+        setQuiz(null);
+        return;
+      }
 
-    let isCancelled = false;
+      setSubmitError(null);
+      setTaskLanguages({});
+      setTaskCodes({});
+      setActiveTaskId(null);
+      startedAtRef.current = null;
 
-    const fetchQuiz = async () => {
+      let isCancelled = false;
+
+      const fetchQuiz = async () => {
       setLoading(true);
       setSubmitError(null);
       
@@ -356,6 +363,11 @@ export default function BugFixPage() {
         const data = await response.json();
 
         if (!response.ok) {
+          // Abonelik kontrolü hatası
+          if (response.status === 403 && data?.requiresSubscription) {
+            window.location.href = data.redirectTo || "/subscription-required";
+            return;
+          }
           const errorMessage = data?.error || "Bug fix bilgileri alınamadı.";
           const errorDetails = data?.details;
           console.error("[BugFixPage] Error fetching quiz:", errorMessage, errorDetails);
@@ -400,11 +412,12 @@ export default function BugFixPage() {
       }
     };
 
-    fetchQuiz();
+      fetchQuiz();
 
-    return () => {
-      isCancelled = true;
-    };
+      return () => {
+        isCancelled = true;
+      };
+    });
   }, [params.id]);
 
   const tasks = useMemo(() => {
@@ -764,7 +777,12 @@ export default function BugFixPage() {
           aiFeedbackRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
         }, 100);
       } else {
-        const errorData = await evalResponse.json();
+        const errorData = await evalResponse.json().catch(() => ({}));
+        // Abonelik kontrolü hatası
+        if (evalResponse.status === 403 && errorData?.requiresSubscription) {
+          window.location.href = errorData.redirectTo || "/subscription-required";
+          return;
+        }
         setAiEvaluation({
           loading: false,
           feedback: errorData.error || "AI değerlendirmesi alınamadı",
@@ -842,6 +860,11 @@ export default function BugFixPage() {
 
       const data = await response.json();
       if (!response.ok) {
+        // Abonelik kontrolü hatası
+        if (response.status === 403 && data?.requiresSubscription) {
+          window.location.href = data.redirectTo || "/subscription-required";
+          return;
+        }
         throw new Error(data?.error || "Bug fix gönderimi başarısız oldu.");
       }
 

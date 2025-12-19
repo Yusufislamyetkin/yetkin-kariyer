@@ -6,6 +6,7 @@ import { readFile } from "fs/promises";
 import { join } from "path";
 import { getCache, setCache, cacheKeys, CACHE_TTL } from "@/lib/redis";
 import { updateDailyLoginStreak } from "@/lib/services/gamification/streaks";
+import { recordEvent } from "@/lib/services/gamification/antiAbuse";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -148,6 +149,10 @@ export async function GET(request: Request) {
     const activitySkip = parseInt(searchParams.get("activitySkip") || "0");
     const activityType = searchParams.get("activityType") || "global";
 
+    // Use UTC for all date calculations to match database timestamps
+    const now = new Date();
+    const nowUTC = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds()));
+
     // Step 1: Fetch user and user streak in parallel
     const [user, userStreak] = await Promise.all([
       db.user.findUnique({
@@ -179,6 +184,30 @@ export async function GET(request: Request) {
     // This ensures login is tracked every time dashboard loads and totalDaysActive is properly maintained
     // updateDailyLoginStreak handles duplicate calls for the same day, so it's safe to call every time
     await updateDailyLoginStreak(userId);
+    
+    // Create daily_login event if it doesn't exist for today
+    // This ensures we have a record of login for historical tracking
+    try {
+      const today = new Date(Date.UTC(nowUTC.getUTCFullYear(), nowUTC.getUTCMonth(), nowUTC.getUTCDate(), 0, 0, 0, 0));
+      const todayDateStr = today.toISOString().split("T")[0];
+      const dedupKey = `daily_login_${userId}_${todayDateStr}`;
+      
+      const existingLoginEvent = await db.gamificationEvent.findUnique({
+        where: { dedupKey },
+      });
+      
+      if (!existingLoginEvent) {
+        await recordEvent({
+          userId,
+          type: "daily_login",
+          dedupKey,
+          occurredAt: today,
+        });
+      }
+    } catch (error) {
+      // Silently fail if event creation fails - not critical for dashboard functionality
+      console.warn("Failed to create daily_login event:", error);
+    }
     
     // Refresh streak data after update to get the latest totalDaysActive value
     streak = await db.userStreak.findUnique({
@@ -496,21 +525,15 @@ export async function GET(request: Request) {
 
     // Step 7: Calculate strike data (simplified - full calculation would be too complex here)
     // We'll fetch minimal strike data, full calculation can be done separately if needed
-    const now = new Date();
-    const today = new Date(now);
-    today.setHours(0, 0, 0, 0);
+    // Use UTC for all date calculations to match database timestamps
+    const today = new Date(Date.UTC(nowUTC.getUTCFullYear(), nowUTC.getUTCMonth(), nowUTC.getUTCDate(), 0, 0, 0, 0));
     
-    const dayOfWeek = now.getDay();
-    const monday = new Date(now);
-    monday.setDate(now.getDate() - (dayOfWeek === 0 ? 6 : dayOfWeek - 1));
-    monday.setHours(0, 0, 0, 0);
+    const dayOfWeek = nowUTC.getUTCDay();
+    const monday = new Date(Date.UTC(nowUTC.getUTCFullYear(), nowUTC.getUTCMonth(), nowUTC.getUTCDate() - (dayOfWeek === 0 ? 6 : dayOfWeek - 1), 0, 0, 0, 0));
     
-    const sunday = new Date(monday);
-    sunday.setDate(monday.getDate() + 6);
-    sunday.setHours(23, 59, 59, 999);
+    const sunday = new Date(Date.UTC(monday.getUTCFullYear(), monday.getUTCMonth(), monday.getUTCDate() + 6, 23, 59, 59, 999));
 
-    const registrationDate = new Date(user.createdAt);
-    registrationDate.setHours(0, 0, 0, 0);
+    const registrationDate = new Date(Date.UTC(user.createdAt.getUTCFullYear(), user.createdAt.getUTCMonth(), user.createdAt.getUTCDate(), 0, 0, 0, 0));
     const checkStartDate = registrationDate > monday ? registrationDate : monday;
 
     // Update lastActivityDate for today's login
@@ -531,6 +554,7 @@ export async function GET(request: Request) {
       weekComments,
       weekCommunityMessages,
       allStrikeEvents,
+      weekDailyLogins,
     ] = await Promise.all([
       db.quizAttempt.findMany({
         where: {
@@ -622,6 +646,22 @@ export async function GET(request: Request) {
           occurredAt: "asc",
         },
       }),
+      db.gamificationEvent.findMany({
+        where: {
+          userId,
+          type: "daily_login",
+          occurredAt: {
+            gte: checkStartDate,
+            lte: sunday,
+          },
+        },
+        select: {
+          occurredAt: true,
+        },
+        orderBy: {
+          occurredAt: "desc",
+        },
+      }),
     ]);
 
     // Process strike data
@@ -629,29 +669,36 @@ export async function GET(request: Request) {
     const weekDays: DayTaskStatus[] = [];
     
     for (let i = 0; i < 7; i++) {
-      const date = new Date(monday);
-      date.setDate(monday.getDate() + i);
-      date.setHours(0, 0, 0, 0);
+      // Use UTC for date calculations
+      const date = new Date(Date.UTC(monday.getUTCFullYear(), monday.getUTCMonth(), monday.getUTCDate() + i, 0, 0, 0, 0));
       
-      const dateEnd = new Date(date);
-      dateEnd.setHours(23, 59, 59, 999);
+      const dateEnd = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), 23, 59, 59, 999));
       
       const dateStr = date.toISOString();
       const isToday = date.getTime() === today.getTime();
       const isFuture = date > today;
       const isBeforeRegistration = date < registrationDate;
-      const dayName = dayNames[date.getDay()];
-      const dayNumber = date.getDate();
+      const dayName = dayNames[date.getUTCDay()];
+      const dayNumber = date.getUTCDate();
       
-      const dayStart = new Date(date);
-      dayStart.setHours(0, 0, 0, 0);
-      const dayEnd = new Date(dayStart);
-      dayEnd.setHours(23, 59, 59, 999);
+      const dayStart = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), 0, 0, 0, 0));
+      const dayEnd = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), 23, 59, 59, 999));
 
-      // Check login
+      // Check login - check both streak.lastActivityDate and daily_login events
       let loginCompleted = false;
       let loginCompletedAt: string | null = null;
-      if (streak?.lastActivityDate) {
+      
+      // First check daily_login events for this specific day
+      const dayLoginEvents = weekDailyLogins.filter((event: { occurredAt: Date | string }) => {
+        const eventDate = new Date(event.occurredAt);
+        return eventDate >= dayStart && eventDate <= dayEnd;
+      });
+      
+      if (dayLoginEvents.length > 0) {
+        loginCompleted = true;
+        loginCompletedAt = dayLoginEvents[0].occurredAt.toISOString();
+      } else if (streak?.lastActivityDate) {
+        // Fallback to streak.lastActivityDate if no daily_login event found
         const lastActivity = new Date(streak.lastActivityDate);
         if (lastActivity >= dayStart && lastActivity <= dayEnd) {
           loginCompleted = true;

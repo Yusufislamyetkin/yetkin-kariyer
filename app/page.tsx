@@ -1,12 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { BookOpen, Video, FileText, Sparkles, TrendingUp, Users, Zap, CheckCircle, Award, Clock, Target, BarChart3, MessageSquare, HelpCircle, ArrowRight, Star, PlayCircle, Shield, Globe, Trophy, Code, Bug, Handshake, DollarSign, MessageCircle, Compass, UserPlus } from "lucide-react";
+import { BookOpen, Video, FileText, Sparkles, TrendingUp, Users, Zap, CheckCircle, Award, Clock, Target, BarChart3, MessageSquare, HelpCircle, ArrowRight, Star, PlayCircle, Shield, Globe, Trophy, Code, Bug, Handshake, DollarSign, MessageCircle, Compass, UserPlus, Menu, X } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
 import dynamic from "next/dynamic";
 import { useTheme } from "@/app/contexts/ThemeContext";
 import { useEffect, useState } from "react";
+import { StructuredData } from "@/app/components/StructuredData";
 
 const ThemeToggleIcon = dynamic(
   () => import("@/app/components/ThemeToggle").then((mod) => ({ default: mod.ThemeToggle })),
@@ -31,6 +32,7 @@ function ThemeSwitchButton() {
 export default function Home() {
   const [categoryLessonCounts, setCategoryLessonCounts] = useState<Record<string, number>>({});
   const [isLoadingCounts, setIsLoadingCounts] = useState(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     // Fetch category lesson counts
@@ -150,8 +152,55 @@ export default function Home() {
     },
   ];
 
+    const siteUrl = "https://ytkacademy.com.tr";
+    
+    const organizationSchema = {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "YTK Academy",
+      url: siteUrl,
+      logo: `${siteUrl}/images/logo.png`,
+      description: "Kapsamlı eğitim, sosyal ağ ve kariyer platformu. AI destekli öğrenme, canlı kodlama, hackathon'lar ve freelancer fırsatları.",
+      foundingDate: "2024",
+      founder: {
+        "@type": "Person",
+        name: "Yusuf İslam Yetkin",
+      },
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "Customer Service",
+        availableLanguage: ["Turkish"],
+      },
+      sameAs: [
+        // Sosyal medya linkleri buraya eklenebilir
+      ],
+      areaServed: {
+        "@type": "Country",
+        name: "Turkey",
+      },
+    };
+
+    const websiteSchema = {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "YTK Academy",
+      url: siteUrl,
+      description: "Yazılım öğren, iş bul, kazanç elde et. AI destekli öğrenme, canlı kodlama, sosyal ağ ve kazanç fırsatları tek platformda.",
+      potentialAction: {
+        "@type": "SearchAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: `${siteUrl}/search?q={search_term_string}`,
+        },
+        "query-input": "required name=search_term_string",
+      },
+    };
+
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-cyan-50 dark:from-gray-900 dark:via-slate-900 dark:to-gray-800 transition-colors duration-200 w-full max-w-full overflow-x-hidden">
+      <>
+        <StructuredData data={organizationSchema} />
+        <StructuredData data={websiteSchema} />
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-cyan-50 dark:from-gray-900 dark:via-slate-900 dark:to-gray-800 transition-colors duration-200 w-full max-w-full overflow-x-hidden">
       {/* Navigation */}
       <nav className="sticky top-0 z-50 glass border-b border-gray-200/50 dark:border-gray-700/50 w-full max-w-full">
         <div className="container mx-auto px-6 sm:px-8 lg:px-12 py-4 max-w-full overflow-x-hidden">
@@ -160,6 +209,37 @@ export default function Home() {
               YTK Academy
             </Link>
             <div className="flex items-center gap-4">
+              {/* Desktop Menu */}
+              <div className="hidden md:flex items-center gap-6">
+                <Link href="/hakkimizda" className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                  Hakkımızda
+                </Link>
+                <Link href="/fiyatlandirma" className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                  Fiyatlandırma
+                </Link>
+                <a 
+                  href="https://wa.me/905389351189?text=Merhaba%2C%20YTK%20Academy%20hakkında%20bilgi%20almak%20istiyorum" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                >
+                  İletişim
+                </a>
+              </div>
+              
+              {/* Mobile Menu Button */}
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="md:hidden rounded-lg bg-gray-100 p-2 transition hover:ring-2 hover:ring-blue-200 dark:bg-gray-800 dark:hover:ring-blue-500/40"
+                aria-label="Menü"
+              >
+                {mobileMenuOpen ? (
+                  <X className="h-5 w-5 text-gray-700 dark:text-gray-300" />
+                ) : (
+                  <Menu className="h-5 w-5 text-gray-700 dark:text-gray-300" />
+                )}
+              </button>
+              
               <ThemeSwitchButton />
               <Link href="/login">
                 <Button variant="ghost" size="sm">
@@ -171,6 +251,37 @@ export default function Home() {
               </Link>
             </div>
           </div>
+          
+          {/* Mobile Menu */}
+          {mobileMenuOpen && (
+            <div className="md:hidden mt-4 pb-4 border-t border-gray-200/50 dark:border-gray-700/50 pt-4">
+              <div className="flex flex-col gap-3">
+                <Link 
+                  href="/hakkimizda" 
+                  className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors py-2"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Hakkımızda
+                </Link>
+                <Link 
+                  href="/fiyatlandirma" 
+                  className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors py-2"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Fiyatlandırma
+                </Link>
+                <a 
+                  href="https://wa.me/905389351189?text=Merhaba%2C%20YTK%20Academy%20hakkında%20bilgi%20almak%20istiyorum" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors py-2"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  İletişim
+                </a>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
@@ -641,5 +752,6 @@ export default function Home() {
         </div>
       </footer>
     </div>
+    </>
   );
 }

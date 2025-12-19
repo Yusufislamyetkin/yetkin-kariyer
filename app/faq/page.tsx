@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Ca
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/app/components/ui/Accordion";
 import { HelpCircle, MessageCircle } from "lucide-react";
 import Link from "next/link";
+import { StructuredData } from "@/app/components/StructuredData";
 
 export default function FAQPage() {
   const faqCategories = [
@@ -85,8 +86,30 @@ export default function FAQPage() {
     },
   ];
 
+  const siteUrl = "https://ytkacademy.com.tr";
+  
+  // FAQPage schema için tüm soruları topla
+  const mainEntity = faqCategories.flatMap((category) =>
+    category.questions.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.a,
+      },
+    }))
+  );
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: mainEntity,
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 py-8">
+    <>
+      <StructuredData data={faqSchema} />
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-950 py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-3">
@@ -145,6 +168,7 @@ export default function FAQPage() {
         </Card>
       </div>
     </div>
+    </>
   );
 }
 

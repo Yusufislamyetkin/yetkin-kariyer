@@ -336,6 +336,10 @@ export default function CareerRoadmapPage() {
         let errorMessage = "Plan oluşturulamadı.";
         if (response.status === 401) {
           errorMessage = "Oturum açmanız gerekiyor. Lütfen giriş yapın.";
+        } else if (response.status === 403 && data.requiresSubscription) {
+          // Abonelik gerekli - yönlendir
+          window.location.href = data.redirectTo || "/subscription-required";
+          return;
         } else if (response.status === 503) {
           errorMessage = "AI servisi şu anda kullanılamıyor. Lütfen daha sonra tekrar deneyin.";
         } else if (response.status === 500) {
@@ -436,7 +440,16 @@ export default function CareerRoadmapPage() {
             <Button
               variant="gradient"
               className="inline-flex items-center gap-2"
-              onClick={handleStartQuestionnaire}
+              onClick={async () => {
+                // Abonelik kontrolü
+                const checkResponse = await fetch("/api/subscription/check");
+                const checkData = await checkResponse.json();
+                if (!checkData.hasActiveSubscription) {
+                  window.location.href = "/subscription-required";
+                  return;
+                }
+                handleStartQuestionnaire();
+              }}
               disabled={generating}
             >
               <Sparkles className="h-4 w-4" />

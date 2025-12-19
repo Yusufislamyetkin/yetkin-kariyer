@@ -226,25 +226,60 @@ export async function POST(request: Request) {
     
     let webhookSuccess = false;
     let webhookError: string | null = null;
+    let webhookErrorDetails: any = null;
 
+    // Validate environment variables
     if (!dotnetApiUrl) {
-      console.warn(`[SCHEDULER_POST] DOTNET_API_URL not configured, skipping webhook`);
+      const errorMsg = 'DOTNET_API_URL environment variable is not configured. Webhook cannot be sent.';
+      console.error(`[SCHEDULER_POST] ${errorMsg}`);
       return NextResponse.json({
         success: true,
         message: 'Global scheduler config updated, but webhook was not sent (DOTNET_API_URL not configured)',
         warnings: {
           message: 'Webhook was not sent. Hangfire jobs may not be updated.',
-          webhookFailures: [{ botId: 'all', error: 'DOTNET_API_URL environment variable is not configured' }],
+          webhookFailures: [{ 
+            botId: 'all', 
+            error: errorMsg,
+            details: 'Please configure DOTNET_API_URL environment variable with your .NET Core backend URL (e.g., http://localhost:5000)'
+          }],
         },
       });
     }
 
+    if (!dotnetApiKey) {
+      console.warn(`[SCHEDULER_POST] DOTNET_API_KEY not configured. Webhook will be sent without authentication. This may fail if backend requires authentication.`);
+    }
+
+    // Prepare webhook payload (log without sensitive data)
+    const webhookPayload = {
+      enabledActivities,
+      activityIntervals,
+      activityHours,
+      maxPostsPerDay,
+      maxCommentsPerDay,
+      maxLikesPerDay,
+      maxTestsPerWeek,
+      maxLiveCodingPerWeek,
+      maxLessonsPerWeek,
+    };
+
+    console.log(`[SCHEDULER_POST] Preparing to send webhook to ${dotnetApiUrl}/api/bots/activities/schedule/webhook/global`, {
+      enabledActivitiesCount: enabledActivities.length,
+      activityIntervalsCount: Object.keys(activityIntervals).length,
+      activityHoursCount: activityHours.length,
+      hasApiKey: !!dotnetApiKey,
+      timestamp: new Date().toISOString(),
+    });
+
     const maxRetries = 3;
+    const baseDelay = 1000; // 1 second base delay
+    
     for (let attempt = 0; attempt < maxRetries; attempt++) {
       try {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 10000);
 
+        const startTime = Date.now();
         const webhookResponse = await fetch(
           `${dotnetApiUrl}/api/bots/activities/schedule/webhook/global`,
           {
@@ -253,48 +288,112 @@ export async function POST(request: Request) {
               'Content-Type': 'application/json',
               'Authorization': dotnetApiKey ? `Bearer ${dotnetApiKey}` : '',
             },
-            body: JSON.stringify({
-              enabledActivities,
-              activityIntervals,
-              activityHours,
-              maxPostsPerDay,
-              maxCommentsPerDay,
-              maxLikesPerDay,
-              maxTestsPerWeek,
-              maxLiveCodingPerWeek,
-              maxLessonsPerWeek,
-            }),
+            body: JSON.stringify(webhookPayload),
             signal: controller.signal,
           }
         );
 
         clearTimeout(timeoutId);
+        const duration = Date.now() - startTime;
+
+        // Log response details
+        const responseHeaders: Record<string, string> = {};
+        webhookResponse.headers.forEach((value, key) => {
+          responseHeaders[key] = value;
+        });
 
         if (webhookResponse.ok) {
-          console.log(`[SCHEDULER_POST] Successfully sent global webhook to .NET Core${attempt > 0 ? ` (attempt ${attempt + 1})` : ''}`);
+          const responseText = await webhookResponse.text().catch(() => '');
+          let responseData: any = null;
+          try {
+            responseData = responseText ? JSON.parse(responseText) : null;
+          } catch {
+            // Response is not JSON, that's okay
+          }
+
+          console.log(`[SCHEDULER_POST] Successfully sent global webhook to .NET Core${attempt > 0 ? ` (attempt ${attempt + 1})` : ''}`, {
+            status: webhookResponse.status,
+            duration: `${duration}ms`,
+            response: responseData,
+            timestamp: new Date().toISOString(),
+          });
           webhookSuccess = true;
           break;
         } else {
           const errorText = await webhookResponse.text().catch(() => 'Unknown error');
-          webhookError = `Webhook failed: ${webhookResponse.status} - ${errorText.substring(0, 100)}`;
-          console.error(`[SCHEDULER_POST] Failed to send global webhook (attempt ${attempt + 1}/${maxRetries}): ${webhookResponse.status} - ${errorText}`);
+          let errorData: any = null;
+          try {
+            errorData = errorText ? JSON.parse(errorText) : null;
+          } catch {
+            // Error response is not JSON
+          }
+
+          webhookError = `Webhook failed: ${webhookResponse.status} - ${errorText.substring(0, 200)}`;
+          webhookErrorDetails = {
+            status: webhookResponse.status,
+            statusText: webhookResponse.statusText,
+            error: errorData || errorText.substring(0, 500),
+            duration: `${duration}ms`,
+            attempt: attempt + 1,
+            maxRetries,
+          };
+
+          console.error(`[SCHEDULER_POST] Failed to send global webhook (attempt ${attempt + 1}/${maxRetries}):`, {
+            status: webhookResponse.status,
+            statusText: webhookResponse.statusText,
+            error: errorData || errorText.substring(0, 500),
+            duration: `${duration}ms`,
+            headers: responseHeaders,
+            timestamp: new Date().toISOString(),
+          });
           
+          // Don't retry on client errors (4xx)
           if (webhookResponse.status >= 400 && webhookResponse.status < 500) {
+            console.warn(`[SCHEDULER_POST] Client error detected (${webhookResponse.status}), not retrying`);
             break;
           }
         }
       } catch (webhookErr: any) {
-        webhookError = `Webhook error: ${webhookErr.message || 'Unknown error'}`;
-        console.error(`[SCHEDULER_POST] Error sending global webhook (attempt ${attempt + 1}/${maxRetries}):`, webhookErr);
-        
-        if (webhookErr.name === 'AbortError') {
-          webhookError = 'Webhook timeout after 10 seconds';
-          break;
-      }
-    }
+        const errorType = webhookErr.name || webhookErr.constructor?.name || 'Unknown';
+        const isTimeout = webhookErr.name === 'AbortError';
+        const isNetworkError = webhookErr.code === 'ECONNREFUSED' || webhookErr.code === 'ENOTFOUND' || webhookErr.code === 'ETIMEDOUT';
 
+        webhookError = isTimeout 
+          ? 'Webhook timeout after 10 seconds'
+          : isNetworkError
+          ? `Network error: ${webhookErr.message || 'Connection failed'}`
+          : `Webhook error: ${webhookErr.message || 'Unknown error'}`;
+        
+        webhookErrorDetails = {
+          errorType,
+          message: webhookErr.message,
+          code: webhookErr.code,
+          isTimeout,
+          isNetworkError,
+          attempt: attempt + 1,
+          maxRetries,
+        };
+
+        console.error(`[SCHEDULER_POST] Error sending global webhook (attempt ${attempt + 1}/${maxRetries}):`, {
+          errorType,
+          message: webhookErr.message,
+          code: webhookErr.code,
+          stack: process.env.NODE_ENV === 'development' ? webhookErr.stack : undefined,
+          isTimeout,
+          isNetworkError,
+          timestamp: new Date().toISOString(),
+        });
+        
+        if (isTimeout) {
+          console.warn(`[SCHEDULER_POST] Timeout detected, not retrying`);
+          break;
+        }
+      }
+
+      // Exponential backoff: 1s, 2s, 4s
       if (attempt < maxRetries - 1) {
-        const delay = Math.pow(2, attempt) * 1000;
+        const delay = baseDelay * Math.pow(2, attempt);
+        console.log(`[SCHEDULER_POST] Waiting ${delay}ms before retry (attempt ${attempt + 2}/${maxRetries})`);
         await new Promise(resolve => setTimeout(resolve, delay));
       }
     }
@@ -304,7 +403,18 @@ export async function POST(request: Request) {
       message: 'Global scheduler config updated successfully',
       warnings: !webhookSuccess && webhookError ? {
         message: 'Webhook delivery failed. Hangfire jobs may not be updated.',
-        webhookFailures: [{ botId: 'all', error: webhookError }],
+        webhookFailures: [{ 
+          botId: 'all', 
+          error: webhookError,
+          details: webhookErrorDetails,
+          suggestion: webhookErrorDetails?.isNetworkError 
+            ? 'Backend servisi çalışmıyor olabilir. DOTNET_API_URL değerini kontrol edin.'
+            : webhookErrorDetails?.status === 401 || webhookErrorDetails?.status === 403
+            ? 'API key yanlış olabilir. DOTNET_API_KEY değerini kontrol edin.'
+            : webhookErrorDetails?.isTimeout
+            ? 'Backend servisi yanıt vermiyor. Servisin çalıştığından emin olun.'
+            : 'Backend servisinde bir hata oluştu. Logları kontrol edin.'
+        }],
       } : undefined,
     });
   } catch (error: any) {

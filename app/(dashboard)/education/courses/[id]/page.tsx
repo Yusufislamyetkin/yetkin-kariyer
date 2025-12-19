@@ -6,6 +6,7 @@ import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { clsx } from "clsx";
 import { BookOpen, ChevronLeft, Clock, Compass, ArrowRight, Code2, Zap } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
+import { checkSubscriptionAndRedirect } from "@/lib/utils/subscription-check";
 
 type ModuleLesson = {
   label: string;
@@ -106,30 +107,37 @@ export default function CourseDetailPage() {
       return;
     }
 
-    // If courseId is a number, it's likely a moduleIndex, redirect to moduleIndex route
-    if (!isNaN(Number(courseId)) && Number(courseId) > 0 && Number.isInteger(Number(courseId))) {
-      router.replace(`/education/courses/${courseId}`);
-      return;
-    }
+    // Abonelik kontrolü
+    checkSubscriptionAndRedirect().then((hasSubscription) => {
+      if (!hasSubscription) {
+        return; // Yönlendirme yapıldı
+      }
 
-  const fetchCourse = async () => {
-      setLoading(true);
-    try {
-        const response = await fetch(`/api/courses/${courseId}`);
-        if (!response.ok) {
-          throw new Error("Kurs bilgileri alınamadı");
+      // If courseId is a number, it's likely a moduleIndex, redirect to moduleIndex route
+      if (!isNaN(Number(courseId)) && Number(courseId) > 0 && Number.isInteger(Number(courseId))) {
+        router.replace(`/education/courses/${courseId}`);
+        return;
+      }
+
+      const fetchCourse = async () => {
+        setLoading(true);
+        try {
+          const response = await fetch(`/api/courses/${courseId}`);
+          if (!response.ok) {
+            throw new Error("Kurs bilgileri alınamadı");
+          }
+          const data = await response.json();
+          setCourse(data.course ?? null);
+        } catch (error) {
+          console.error(error);
+          setCourse(null);
+        } finally {
+          setLoading(false);
         }
-      const data = await response.json();
-        setCourse(data.course ?? null);
-    } catch (error) {
-        console.error(error);
-        setCourse(null);
-    } finally {
-      setLoading(false);
-    }
-  };
+      };
 
-    void fetchCourse();
+      void fetchCourse();
+    });
   }, [courseId, router]);
 
   const modules = useMemo<ModuleSummary[]>(() => {

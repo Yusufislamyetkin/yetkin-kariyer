@@ -158,6 +158,18 @@ enum EarningType {
   HACKATHON
 }
 
+enum SubscriptionPlanType {
+  TEMEL
+  PRO
+  VIP
+}
+
+enum SubscriptionStatus {
+  active
+  expired
+  cancelled
+}
+
 model User {
   id                   String    @id @default(cuid())
   email                String    @unique
@@ -240,6 +252,7 @@ model User {
   accounts                      Account[]
   certificates                  Certificate[]
   earnings                      Earning[]
+  subscriptions                 Subscription[]
 
   @@map("app_users")
 }
@@ -1766,4 +1779,22 @@ model BotActivityExecution {
   @@index([userId, executedAt])
   @@index([activityType, executedAt])
   @@map("bot_activity_executions")
+}
+
+model Subscription {
+  id        String              @id @default(cuid())
+  userId    String
+  planType  SubscriptionPlanType
+  status    SubscriptionStatus  @default(active)
+  startDate DateTime            @default(now())
+  endDate   DateTime
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, status])
+  @@index([userId, endDate])
+  @@index([status, endDate])
+  @@map("subscriptions")
 }

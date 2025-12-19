@@ -1,9 +1,13 @@
+"use client";
+
+import { useEffect } from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Button } from "@/app/components/ui/Button";
 import { ArrowLeft, Bug, Target, Wrench } from "lucide-react";
 import bugfixCases from "@/data/bugfix-cases.json";
+import { checkSubscriptionAndRedirect } from "@/lib/utils/subscription-check";
 
 export const dynamic = "force-dynamic";
 
@@ -58,6 +62,11 @@ export default function BugfixLanguageCasesPage({
     (lang) => lang.id === params.language
   );
 
+  useEffect(() => {
+    // Abonelik kontrolü
+    checkSubscriptionAndRedirect();
+  }, []);
+
   if (!language) {
     notFound();
   }
@@ -106,6 +115,12 @@ export default function BugfixLanguageCasesPage({
             key={caseItem.id}
             href={`/education/bug-fix/quiz-${caseItem.id}`}
             className="group block"
+            onClick={async (e) => {
+              const hasSubscription = await checkSubscriptionAndRedirect();
+              if (!hasSubscription) {
+                e.preventDefault();
+              }
+            }}
           >
             <Card
               variant="elevated"

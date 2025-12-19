@@ -258,16 +258,57 @@ export function SchedulerManager() {
 
       {warnings.length > 0 && (
         <div className="p-4 bg-yellow-50 dark:bg-yellow-950/30 border border-yellow-200 dark:border-yellow-800 rounded-lg">
-          <p className="text-yellow-800 dark:text-yellow-300 text-sm font-medium mb-2">
-            ⚠️ Webhook Uyarıları: {warnings.length} bot için webhook gönderilemedi. Hangfire job&apos;ları güncellenmemiş olabilir.
-          </p>
-          <ul className="list-disc list-inside text-xs text-yellow-700 dark:text-yellow-400 space-y-1">
-            {warnings.map((warning, idx) => (
-              <li key={idx}>
-                Bot {warning.botId}: {warning.error}
-              </li>
-            ))}
-          </ul>
+          <div className="flex items-start justify-between mb-2">
+            <div className="flex-1">
+              <p className="text-yellow-800 dark:text-yellow-300 text-sm font-medium mb-2">
+                ⚠️ Webhook Uyarıları: {warnings.length} bot için webhook gönderilemedi. Hangfire job&apos;ları güncellenmemiş olabilir.
+              </p>
+              <ul className="list-disc list-inside text-xs text-yellow-700 dark:text-yellow-400 space-y-2">
+                {warnings.map((warning: any, idx: number) => (
+                  <li key={idx} className="mb-2">
+                    <div className="font-medium">Bot {warning.botId}:</div>
+                    <div className="ml-4 mt-1">
+                      <div className="text-yellow-800 dark:text-yellow-300">{warning.error}</div>
+                      {warning.details && (
+                        <div className="mt-1 text-xs text-yellow-600 dark:text-yellow-500">
+                          {warning.details.status && (
+                            <div>HTTP Status: {warning.details.status} {warning.details.statusText}</div>
+                          )}
+                          {warning.details.errorType && (
+                            <div>Hata Tipi: {warning.details.errorType}</div>
+                          )}
+                          {warning.details.error && typeof warning.details.error === 'object' && (
+                            <div className="mt-1">
+                              {warning.details.error.error && (
+                                <div>Hata: {warning.details.error.error}</div>
+                              )}
+                              {warning.details.error.details && (
+                                <div className="text-xs mt-1 opacity-75">{warning.details.error.details}</div>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      )}
+                      {warning.suggestion && (
+                        <div className="mt-2 p-2 bg-yellow-100 dark:bg-yellow-900/50 rounded text-xs text-yellow-900 dark:text-yellow-200">
+                          💡 <strong>Öneri:</strong> {warning.suggestion}
+                        </div>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <Button
+              onClick={handleSaveSchedule}
+              variant="outline"
+              size="sm"
+              className="ml-4 border-yellow-300 text-yellow-700 hover:bg-yellow-100 dark:border-yellow-700 dark:text-yellow-300 dark:hover:bg-yellow-900/50"
+            >
+              <Save className="h-4 w-4 mr-1" />
+              Tekrar Dene
+            </Button>
+          </div>
         </div>
       )}
 

@@ -8,6 +8,7 @@ import { UserStats } from "./_components/UserStats";
 import { BadgesSection } from "./_components/BadgesSection";
 import { ActivityTimeline } from "./_components/ActivityTimeline";
 import { PostsSection } from "./_components/PostsSection";
+import { SubscriptionInfo } from "./_components/SubscriptionInfo";
 import { Button } from "@/app/components/ui/Button";
 
 export default function ProfilePage() {
@@ -218,6 +219,9 @@ export default function ProfilePage() {
         streak={userStatsData.streak}
         stats={userStatsData.stats}
       />
+
+      {/* Subscription Info */}
+      <SubscriptionInfo userId={displayUser.id} />
 
       {/* Son Aktiviteler - Full Width */}
       <ActivityTimeline activities={activities} />
