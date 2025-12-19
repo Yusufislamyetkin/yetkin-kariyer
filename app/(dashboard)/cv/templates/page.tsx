@@ -211,7 +211,7 @@ export default function CVTemplatesPage() {
     }
   };
 
-  const handleSelectTemplate = (templateId: string) => {
+  const handleSelectTemplate = async (templateId: string) => {
     const hasSubscription = await checkSubscriptionBeforeAction();
     if (hasSubscription) {
       router.push(`/cv/create?template=${templateId}`);

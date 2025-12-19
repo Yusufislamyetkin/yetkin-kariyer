@@ -1,11 +1,8 @@
-"use client";
-
-import { useEffect } from "react";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Code, ArrowRight } from "lucide-react";
 import { loadLiveCodingCases } from "@/lib/education/loadLiveCodingCases";
-import { checkSubscriptionAndRedirect } from "@/lib/utils/subscription-check";
+import { SubscriptionCheckWrapper } from "./_components/SubscriptionCheckWrapper";
 
 export const dynamic = "force-dynamic";
 
@@ -41,12 +38,8 @@ export default function CasesPage() {
   const liveCodingCases = loadLiveCodingCases();
   const languages = liveCodingCases.languages;
 
-  useEffect(() => {
-    // Abonelik kontrolü
-    checkSubscriptionAndRedirect();
-  }, []);
-
   return (
+    <SubscriptionCheckWrapper>
     <div className="space-y-8 animate-fade-in">
       <section className="rounded-3xl border border-emerald-500/10 bg-gradient-to-br from-gray-950 via-gray-900 to-emerald-950/50 p-8 text-white shadow-2xl">
         <div className="space-y-4">
@@ -119,6 +112,7 @@ export default function CasesPage() {
         })}
       </section>
     </div>
+    </SubscriptionCheckWrapper>
   );
 }
 
