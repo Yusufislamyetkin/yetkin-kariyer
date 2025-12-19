@@ -3,7 +3,6 @@ import Link from "next/link";
 import { Button } from "@/app/components/ui/Button";
 import { ArrowLeft, Code } from "lucide-react";
 import { loadLiveCodingCases } from "@/lib/education/loadLiveCodingCases";
-import { SubscriptionCheckWrapper } from "../_components/SubscriptionCheckWrapper";
 import { CaseList } from "./_components/CaseList";
 
 export const dynamic = "force-dynamic";
@@ -54,8 +53,7 @@ export default function LanguageCasesPage({
   const color = LANGUAGE_COLORS[language.id] || "#666";
 
   return (
-    <SubscriptionCheckWrapper>
-      <div className="space-y-8 animate-fade-in">
+    <div className="space-y-8 animate-fade-in">
       <section className="rounded-3xl border border-emerald-500/10 bg-gradient-to-br from-gray-950 via-gray-900 to-emerald-950/50 p-8 text-white shadow-2xl">
         <div className="flex items-start justify-between gap-6 mb-6">
           <Link href="/education/cases">
@@ -91,7 +89,6 @@ export default function LanguageCasesPage({
 
       <CaseList cases={language.cases} color={color} />
     </div>
-    </SubscriptionCheckWrapper>
   );
 }
 

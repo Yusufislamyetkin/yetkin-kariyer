@@ -1,11 +1,7 @@
-"use client";
-
-import { useEffect } from "react";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
 import { Bug, ArrowRight } from "lucide-react";
 import bugfixCases from "@/data/bugfix-cases.json";
-import { checkSubscriptionAndRedirect } from "@/lib/utils/subscription-check";
 
 export const dynamic = "force-dynamic";
 
@@ -41,11 +37,6 @@ const LANGUAGE_COLORS: Record<string, string> = {
 
 export default function BugfixCasesPage() {
   const languages = bugfixCases.languages;
-
-  useEffect(() => {
-    // Abonelik kontrolü
-    checkSubscriptionAndRedirect();
-  }, []);
 
   return (
     <div className="space-y-8 animate-fade-in">

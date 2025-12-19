@@ -6,7 +6,6 @@ import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { clsx } from "clsx";
 import { BookOpen, ChevronLeft, Clock, Compass, ArrowRight, Code2, Zap } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/Card";
-import { checkSubscriptionAndRedirect } from "@/lib/utils/subscription-check";
 
 type ModuleLesson = {
   label: string;
@@ -107,19 +106,13 @@ export default function CourseDetailPage() {
       return;
     }
 
-    // Abonelik kontrolü
-    checkSubscriptionAndRedirect().then((hasSubscription) => {
-      if (!hasSubscription) {
-        return; // Yönlendirme yapıldı
-      }
+    // If courseId is a number, it's likely a moduleIndex, redirect to moduleIndex route
+    if (!isNaN(Number(courseId)) && Number(courseId) > 0 && Number.isInteger(Number(courseId))) {
+      router.replace(`/education/courses/${courseId}`);
+      return;
+    }
 
-      // If courseId is a number, it's likely a moduleIndex, redirect to moduleIndex route
-      if (!isNaN(Number(courseId)) && Number(courseId) > 0 && Number.isInteger(Number(courseId))) {
-        router.replace(`/education/courses/${courseId}`);
-        return;
-      }
-
-      const fetchCourse = async () => {
+    const fetchCourse = async () => {
         setLoading(true);
         try {
           const response = await fetch(`/api/courses/${courseId}`);
@@ -136,8 +129,7 @@ export default function CourseDetailPage() {
         }
       };
 
-      void fetchCourse();
-    });
+    void fetchCourse();
   }, [courseId, router]);
 
   const modules = useMemo<ModuleSummary[]>(() => {

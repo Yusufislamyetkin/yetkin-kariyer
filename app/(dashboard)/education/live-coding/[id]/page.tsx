@@ -28,7 +28,6 @@ import type { LiveCodingTask } from "@/types/live-coding";
 import { useCelebration } from "@/app/contexts/CelebrationContext";
 import { useBadgeNotification } from "@/app/contexts/BadgeNotificationContext";
 import { useDelayedBadgeCheck } from "@/hooks/useDelayedBadgeCheck";
-import { checkSubscriptionAndRedirect } from "@/lib/utils/subscription-check";
 
 interface Quiz {
   id: string;
@@ -191,33 +190,27 @@ export default function LiveCodingPage() {
   }, [normalizeOutput]);
 
   useEffect(() => {
-    // Abonelik kontrolü
-    checkSubscriptionAndRedirect().then((hasSubscription) => {
-      if (!hasSubscription) {
-        return; // Yönlendirme yapıldı
-      }
+    const resolvedId = typeof params.id === "string"
+      ? params.id
+      : Array.isArray(params.id)
+      ? params.id[0]
+      : "";
 
-      const resolvedId = typeof params.id === "string"
-        ? params.id
-        : Array.isArray(params.id)
-        ? params.id[0]
-        : "";
+    if (!resolvedId) {
+      setLoading(false);
+      setQuiz(null);
+      return;
+    }
 
-      if (!resolvedId) {
-        setLoading(false);
-        setQuiz(null);
-        return;
-      }
+    setSubmitError(null);
+    setTaskLanguages({});
+    setTaskCodes({});
+    setActiveTaskId(null);
+    startedAtRef.current = null;
 
-      setSubmitError(null);
-      setTaskLanguages({});
-      setTaskCodes({});
-      setActiveTaskId(null);
-      startedAtRef.current = null;
+    let isCancelled = false;
 
-      let isCancelled = false;
-
-      const fetchQuiz = async () => {
+    const fetchQuiz = async () => {
       setLoading(true);
       setSubmitError(null);
       
@@ -280,12 +273,11 @@ export default function LiveCodingPage() {
       }
     };
 
-      fetchQuiz();
+    fetchQuiz();
 
-      return () => {
-        isCancelled = true;
-      };
-    });
+    return () => {
+      isCancelled = true;
+    };
   }, [params.id]);
 
   const tasks = useMemo(() => {
