@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { checkUserSubscription } from "@/lib/services/subscription-service";
 
 export async function POST(request: Request, { params }: { params: { groupId: string } }) {
   try {
@@ -12,6 +13,19 @@ export async function POST(request: Request, { params }: { params: { groupId: st
     }
 
     const userId = session.user.id as string;
+
+    // Abonelik kontrolü - gruba katılmak için abonelik gerekli
+    const subscription = await checkUserSubscription(userId);
+    if (!subscription || !subscription.isActive) {
+      return NextResponse.json(
+        {
+          error: "Abone değilsiniz. Lütfen bir abonelik planı seçin.",
+          redirectTo: "/fiyatlandirma",
+          requiresSubscription: true,
+        },
+        { status: 403 }
+      );
+    }
 
     const body = await request.json().catch(() => ({}));
     const inviteCodeInput =

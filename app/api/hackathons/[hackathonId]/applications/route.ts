@@ -98,6 +98,20 @@ export async function POST(request: Request, ctx: RouteContext) {
       return NextResponse.json({ error: "Giriş yapmalısınız." }, { status: 401 });
     }
 
+    // Abonelik kontrolü - başvuru gönderme işlemi için abonelik gerekli
+    const { checkUserSubscription } = await import("@/lib/services/subscription-service");
+    const subscription = await checkUserSubscription(userId);
+    if (!subscription || !subscription.isActive) {
+      return NextResponse.json(
+        {
+          error: "Abone değilsiniz. Lütfen bir abonelik planı seçin.",
+          redirectTo: "/fiyatlandirma",
+          requiresSubscription: true,
+        },
+        { status: 403 }
+      );
+    }
+
     const payload = await request.json();
     const data = applicationSchema.parse(payload);
 

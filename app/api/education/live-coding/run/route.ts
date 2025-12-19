@@ -206,6 +206,24 @@ async function translateErrorToTurkish(errorText: string): Promise<string> {
 
 export async function POST(request: Request) {
   try {
+    // Abonelik kontrolü - run işlemi için abonelik gerekli
+    const session = await auth();
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const subscription = await checkUserSubscription(session.user.id as string);
+    if (!subscription || !subscription.isActive) {
+      return NextResponse.json(
+        {
+          error: "Abone değilsiniz. Lütfen bir abonelik planı seçin.",
+          redirectTo: "/fiyatlandirma",
+          requiresSubscription: true,
+        },
+        { status: 403 }
+      );
+    }
+
     const body = (await request.json()) as RunRequestBody;
     const rawLanguage = typeof body.language === "string" ? body.language.toLowerCase() : "";
     const language = Object.prototype.hasOwnProperty.call(LANGUAGE_MAP, rawLanguage)

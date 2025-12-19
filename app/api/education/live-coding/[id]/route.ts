@@ -21,18 +21,8 @@ export async function GET(
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Abonelik kontrolü
-    const subscription = await checkUserSubscription(session.user.id as string);
-    if (!subscription || !subscription.isActive) {
-      return NextResponse.json(
-        {
-          error: "Abone değilsiniz. Lütfen bir abonelik planı seçin.",
-          redirectTo: "/fiyatlandirma",
-          requiresSubscription: true,
-        },
-        { status: 403 }
-      );
-    }
+    // Abonelik kontrolü kaldırıldı - sayfa açılabilsin, içerik görüntülenebilsin
+    // Abonelik kontrolü run/evaluate ve submit işlemlerinde yapılacak
 
     if (!params.id || typeof params.id !== "string") {
       return NextResponse.json(

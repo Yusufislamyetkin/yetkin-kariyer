@@ -457,6 +457,11 @@ export default function HackatonDetailPage() {
 
       const data = await response.json().catch(() => ({}));
       if (!response.ok) {
+        // Abonelik kontrolü hatası
+        if (response.status === 403 && data?.requiresSubscription) {
+          window.location.href = data.redirectTo || "/subscription-required";
+          return;
+        }
         throw new Error(data?.error || "Başvurunuz kaydedilemedi.");
       }
 

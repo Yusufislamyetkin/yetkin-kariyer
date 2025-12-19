@@ -690,6 +690,13 @@ export function GroupChatView({ category }: GroupChatViewProps) {
   const handleJoinGroup = useCallback(
     async (groupId: string, options?: { inviteCode?: string }) => {
       try {
+        // Abonelik kontrolü - gruba katılmadan önce
+        const hasSubscription = await checkSubscriptionBeforeAction();
+        if (!hasSubscription) {
+          // checkSubscriptionBeforeAction zaten yönlendirme yapacak
+          return;
+        }
+
         setJoiningGroup(true);
         setJoinInviteError(null);
         const inviteCode = options?.inviteCode?.trim();
@@ -703,6 +710,11 @@ export function GroupChatView({ category }: GroupChatViewProps) {
         const payload = await response.json().catch(() => ({}));
 
         if (!response.ok) {
+          // Abonelik kontrolü hatası
+          if (response.status === 403 && payload?.requiresSubscription) {
+            window.location.href = payload.redirectTo || "/subscription-required";
+            return;
+          }
           throw new Error(payload.error ?? "Gruba katılma işlemi başarısız oldu");
         }
 
