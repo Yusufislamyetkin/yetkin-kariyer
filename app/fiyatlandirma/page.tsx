@@ -196,9 +196,11 @@ export default function FiyatlandirmaPage() {
                     <CheckCircle className="h-8 w-8 text-white" />
                   )}
                 </div>
-                <h3 className="text-2xl font-display font-bold mb-2 text-gray-900 dark:text-gray-100">
-                  {plan.name}
-                </h3>
+                <Link href={`/urunler/${plan.name.toLowerCase()}-plan`}>
+                  <h3 className="text-2xl font-display font-bold mb-2 text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer">
+                    {plan.name}
+                  </h3>
+                </Link>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
                   {plan.description}
                 </p>
@@ -210,6 +212,9 @@ export default function FiyatlandirmaPage() {
                     TL / {plan.period}
                   </span>
                 </div>
+                <Link href={`/urunler/${plan.name.toLowerCase()}-plan`} className="text-sm text-blue-600 dark:text-blue-400 hover:underline">
+                  Detayları Gör
+                </Link>
               </div>
 
               <ul className="space-y-3 mb-8 flex-grow">
@@ -391,6 +396,9 @@ export default function FiyatlandirmaPage() {
                 </Link>
                 <Link href="/terms" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
                   Koşullar
+                </Link>
+                <Link href="/iade-politikasi" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
+                  İade Politikası
                 </Link>
                 <Link href="/locations" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
                   Konumlar

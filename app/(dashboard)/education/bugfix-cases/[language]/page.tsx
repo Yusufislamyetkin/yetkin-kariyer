@@ -103,7 +103,7 @@ export default function BugfixLanguageCasesPage({
         </div>
       </section>
 
-      <section className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 w-full max-w-full overflow-x-hidden">
+      <section className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 w-full max-w-full overflow-x-hidden pt-6 pl-6">
         {language.cases.map((caseItem) => (
           <Link
             key={caseItem.id}

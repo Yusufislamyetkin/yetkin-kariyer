@@ -229,6 +229,14 @@ export default function LiveCodingPage() {
         const data = await response.json();
         
         if (!response.ok) {
+          // Abonelik kontrolü hatası
+          if (response.status === 403 && data?.requiresSubscription) {
+            if (typeof window !== "undefined") {
+              sessionStorage.setItem("subscriptionRedirectReferrer", window.location.href);
+            }
+            window.location.href = data.redirectTo || "/subscription-required";
+            return;
+          }
           const errorMessage = data?.error || "Canlı kodlama bilgileri alınamadı.";
           const errorDetails = data?.details;
           console.error("[LiveCodingPage] Error fetching quiz:", errorMessage, errorDetails);

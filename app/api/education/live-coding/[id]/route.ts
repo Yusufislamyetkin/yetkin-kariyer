@@ -11,6 +11,13 @@ import { recordEvent } from "@/lib/services/gamification/antiAbuse";
 import { applyRules } from "@/lib/services/gamification/rules";
 import { checkUserSubscription } from "@/lib/services/subscription-service";
 
+/**
+ * Quiz ID'den "quiz-" prefix'ini kaldırır
+ */
+function normalizeQuizId(id: string): string {
+  return id.startsWith("quiz-") ? id.substring(5) : id;
+}
+
 export async function GET(
   request: Request,
   { params }: { params: { id: string } }
@@ -21,8 +28,18 @@ export async function GET(
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Abonelik kontrolü kaldırıldı - sayfa açılabilsin, içerik görüntülenebilsin
-    // Abonelik kontrolü run/evaluate ve submit işlemlerinde yapılacak
+    // Abonelik kontrolü
+    const subscription = await checkUserSubscription(session.user.id as string);
+    if (!subscription || !subscription.isActive) {
+      return NextResponse.json(
+        {
+          error: "Abone değilsiniz. Lütfen bir abonelik planı seçin.",
+          redirectTo: "/subscription-required",
+          requiresSubscription: true,
+        },
+        { status: 403 }
+      );
+    }
 
     if (!params.id || typeof params.id !== "string") {
       return NextResponse.json(
@@ -31,9 +48,12 @@ export async function GET(
       );
     }
 
+    // ID'den "quiz-" prefix'ini kaldır
+    const normalizedId = normalizeQuizId(params.id);
+
     const quiz = await db.quiz.findUnique({
       where: { 
-        id: params.id,
+        id: normalizedId,
         type: "LIVE_CODING",
       },
       include: {
@@ -51,11 +71,11 @@ export async function GET(
     });
 
     if (!quiz) {
-      console.error(`[LIVE_CODING] Quiz not found: ${params.id}`);
+      console.error(`[LIVE_CODING] Quiz not found: ${normalizedId} (original: ${params.id})`);
       return NextResponse.json(
         { 
           error: "Canlı kodlama bulunamadı",
-          details: process.env.NODE_ENV === "development" ? `ID: ${params.id}` : undefined
+          details: process.env.NODE_ENV === "development" ? `ID: ${normalizedId} (original: ${params.id})` : undefined
         },
         { status: 404 }
       );
@@ -63,7 +83,7 @@ export async function GET(
 
     // Questions field'ının varlığını kontrol et
     if (!quiz.questions) {
-      console.error(`[LIVE_CODING] Quiz ${params.id} has no questions field`);
+      console.error(`[LIVE_CODING] Quiz ${normalizedId} has no questions field`);
       return NextResponse.json(
         { 
           error: "Canlı kodlama içeriği eksik veya bozuk",
@@ -80,7 +100,7 @@ export async function GET(
       
       // Normalize edilmiş tasks'in boş olmadığını kontrol et
       if (!liveCodingConfig.tasks || liveCodingConfig.tasks.length === 0) {
-        console.error(`[LIVE_CODING] Quiz ${params.id} normalized to empty tasks`, {
+        console.error(`[LIVE_CODING] Quiz ${normalizedId} normalized to empty tasks`, {
           hasConfig: !!liveCodingConfig,
           taskCount: liveCodingConfig.tasks?.length || 0,
         });
@@ -93,7 +113,7 @@ export async function GET(
         );
       }
     } catch (normalizeError) {
-      console.error(`[LIVE_CODING] Error normalizing quiz ${params.id}:`, normalizeError);
+      console.error(`[LIVE_CODING] Error normalizing quiz ${normalizedId}:`, normalizeError);
       return NextResponse.json(
         { 
           error: "Canlı kodlama verisi işlenirken bir hata oluştu",
@@ -154,9 +174,12 @@ export async function POST(
     const body = await request.json();
     const { tasks, metadata, metrics, startedAt, completedAt } = body;
 
+    // ID'den "quiz-" prefix'ini kaldır
+    const normalizedId = normalizeQuizId(params.id);
+
     const quiz = await db.quiz.findUnique({
       where: { 
-        id: params.id,
+        id: normalizedId,
         type: "LIVE_CODING",
       },
     });
@@ -239,7 +262,7 @@ export async function POST(
     const liveCodingAttempt = await db.liveCodingAttempt.create({
       data: {
         userId,
-        quizId: params.id,
+        quizId: normalizedId,
         code: storedCode,
         metrics: storedMetrics,
       },
@@ -250,7 +273,7 @@ export async function POST(
       const event = await recordEvent({
         userId,
         type: "live_coding_completed",
-        payload: { quizId: params.id },
+        payload: { quizId: normalizedId },
       });
       await applyRules({ userId, type: "live_coding_completed", payload: { sourceEventId: event.id } });
     } catch (e) {

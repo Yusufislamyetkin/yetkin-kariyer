@@ -43,7 +43,7 @@ export function CaseList({ cases, color }: CaseListProps) {
   }, []);
 
   return (
-    <section className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 w-full max-w-full overflow-x-hidden">
+    <section className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 w-full max-w-full overflow-x-hidden pt-6 pl-6">
       {cases.map((caseItem) => {
         const isCompleted = completedCaseIds.has(caseItem.id);
         

@@ -54,6 +54,13 @@ export default function Navbar() {
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-200 group-hover:w-full"></span>
             </Link>
             <Link 
+              href="/urunler" 
+              className="text-sm font-semibold text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 relative group"
+            >
+              Ürünler
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-200 group-hover:w-full"></span>
+            </Link>
+            <Link 
               href="/fiyatlandirma" 
               className="text-sm font-semibold text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 relative group"
             >
@@ -121,6 +128,13 @@ export default function Navbar() {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Hakkımızda
+              </Link>
+              <Link 
+                href="/urunler" 
+                className="px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-lg transition-colors duration-200"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Ürünler
               </Link>
               <Link 
                 href="/fiyatlandirma" 

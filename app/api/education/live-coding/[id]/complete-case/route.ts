@@ -6,6 +6,13 @@ import { checkBadgesForActivity, type BadgeCheckResult } from "@/app/api/badges/
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
+/**
+ * Quiz ID'den "quiz-" prefix'ini kaldırır
+ */
+function normalizeQuizId(id: string): string {
+  return id.startsWith("quiz-") ? id.substring(5) : id;
+}
+
 export async function POST(
   request: Request,
   { params }: { params: { id: string } }
@@ -27,7 +34,8 @@ export async function POST(
     const { taskId, completedAt } = body;
 
     const userId = session.user.id as string;
-    const quizId = params.id;
+    // ID'den "quiz-" prefix'ini kaldır
+    const quizId = normalizeQuizId(params.id);
 
     // Quiz'in varlığını kontrol et
     const quiz = await db.quiz.findUnique({

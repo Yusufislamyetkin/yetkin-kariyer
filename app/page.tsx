@@ -214,7 +214,7 @@ export default function Home() {
               <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">Eğitim Modülü</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-display font-bold text-indigo-600 dark:text-indigo-400 mb-1">500+</div>
+              <div className="text-3xl md:text-4xl font-display font-bold text-indigo-600 dark:text-indigo-400 mb-1">5400</div>
               <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">Ders İçeriği</div>
             </div>
             <div className="text-center">
@@ -444,7 +444,7 @@ export default function Home() {
             { name: "Cloud & DevOps", icon: "☁️", desc: "AWS, Azure, Docker & Kubernetes ile bulut altyapısı ve DevOps pratikleri", color: "from-cyan-500 to-blue-500" },
             { name: "Güvenlik", icon: "🔐", desc: "Ethical Hacking, OWASP güvenlik standartları ve web uygulama güvenliği", color: "from-purple-500 to-pink-500" },
             { name: "AI & Machine Learning", icon: "🤖", desc: "AI for Developers ile yapay zeka ve makine öğrenmesi temelleri", color: "from-teal-500 to-green-500" },
-            { name: "Full Stack Development", icon: "🚀", desc: "MEAN, MERN, MEVN stack'leri ile end-to-end web uygulama geliştirme", color: "from-rose-500 to-pink-500" },
+            { name: "Full Stack Development", icon: "🚀", desc: "Backend + Frontend geliştirme. MEAN, MERN, MEVN stack'leri ile end-to-end web uygulama geliştirme", color: "from-rose-500 to-pink-500" },
           ].map((category, index) => {
             const lessonCount = categoryLessonCounts[category.name] || 0;
             return (
@@ -633,6 +633,9 @@ export default function Home() {
                 </Link>
                 <Link href="/terms" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
                   Koşullar
+                </Link>
+                <Link href="/iade-politikasi" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
+                  İade Politikası
                 </Link>
                 <Link href="/locations" className="hover:text-gray-900 dark:hover:text-gray-100 hover:underline transition-colors">
                   Konumlar

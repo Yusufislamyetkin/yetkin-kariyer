@@ -54,7 +54,7 @@ export default function CasesPage() {
         </div>
       </section>
 
-      <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 pt-6 pl-6">
         {languages.map((language) => {
           const icon = LANGUAGE_ICONS[language.id] || "💻";
           const color = LANGUAGE_COLORS[language.id] || "#666";

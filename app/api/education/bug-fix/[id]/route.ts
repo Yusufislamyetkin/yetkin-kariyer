@@ -7,6 +7,13 @@ import { ensureAIEnabled, isAIEnabled } from "@/lib/ai/client";
 import { checkBadgesForActivity, type BadgeCheckResult } from "@/app/api/badges/check/badge-service";
 import { checkUserSubscription } from "@/lib/services/subscription-service";
 
+/**
+ * Quiz ID'den "quiz-" prefix'ini kaldırır
+ */
+function normalizeQuizId(id: string): string {
+  return id.startsWith("quiz-") ? id.substring(5) : id;
+}
+
 export async function GET(
   request: Request,
   { params }: { params: { id: string } }
@@ -23,7 +30,7 @@ export async function GET(
       return NextResponse.json(
         {
           error: "Abone değilsiniz. Lütfen bir abonelik planı seçin.",
-          redirectTo: "/fiyatlandirma",
+          redirectTo: "/subscription-required",
           requiresSubscription: true,
         },
         { status: 403 }
@@ -37,9 +44,12 @@ export async function GET(
       );
     }
 
+    // ID'den "quiz-" prefix'ini kaldır
+    const normalizedId = normalizeQuizId(params.id);
+
     const quiz = await db.quiz.findUnique({
       where: { 
-        id: params.id,
+        id: normalizedId,
         type: "BUG_FIX",
       },
       include: {
@@ -58,14 +68,14 @@ export async function GET(
 
     if (!quiz) {
       return NextResponse.json(
-        { error: `Bug fix bulunamadı (ID: ${params.id})` },
+        { error: `Bug fix bulunamadı (ID: ${normalizedId}, original: ${params.id})` },
         { status: 404 }
       );
     }
 
     // Questions field'ının varlığını kontrol et
     if (!quiz.questions) {
-      console.error(`[BUG_FIX] Quiz ${params.id} has no questions field`);
+      console.error(`[BUG_FIX] Quiz ${normalizedId} has no questions field`);
       return NextResponse.json(
         { error: "Bug fix içeriği eksik veya bozuk" },
         { status: 500 }
@@ -81,14 +91,14 @@ export async function GET(
                        (Array.isArray(questionsData.tasks) || Array.isArray(questionsData)));
       
       if (!hasTasks) {
-        console.error(`[BUG_FIX] Quiz ${params.id} has invalid questions structure:`, questionsData);
+        console.error(`[BUG_FIX] Quiz ${normalizedId} has invalid questions structure:`, questionsData);
         return NextResponse.json(
           { error: "Bug fix görevleri bulunamadı veya geçersiz format" },
           { status: 500 }
         );
       }
     } catch (validationError) {
-      console.error(`[BUG_FIX] Error validating quiz ${params.id} questions:`, validationError);
+      console.error(`[BUG_FIX] Error validating quiz ${normalizedId} questions:`, validationError);
       return NextResponse.json(
         { 
           error: "Bug fix verisi işlenirken bir hata oluştu",
@@ -140,9 +150,12 @@ export async function POST(
     const body = await request.json();
     const { fixedCode, metrics, duration, tasks } = body;
 
+    // ID'den "quiz-" prefix'ini kaldır
+    const normalizedId = normalizeQuizId(params.id);
+
     const quiz = await db.quiz.findUnique({
       where: { 
-        id: params.id,
+        id: normalizedId,
         type: "BUG_FIX",
       },
       include: {
@@ -266,7 +279,7 @@ JSON formatında yanıt ver:
     const bugFixAttempt = await db.bugFixAttempt.create({
       data: {
         userId,
-        quizId: params.id,
+        quizId: normalizedId,
         fixedCode: fixedCode || null,
         metrics: metrics || {
           bugsFixed: 0,
@@ -282,7 +295,7 @@ JSON formatında yanıt ver:
       const event = await recordEvent({
         userId,
         type: "bug_fix_completed",
-        payload: { quizId: params.id },
+        payload: { quizId: normalizedId },
       });
       await applyRules({ userId, type: "bug_fix_completed", payload: { sourceEventId: event.id } });
     } catch (e) {

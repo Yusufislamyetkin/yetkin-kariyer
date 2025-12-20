@@ -64,6 +64,24 @@ export async function POST(request: Request) {
       }>;
     }> = [];
 
+    // Get base URL dynamically from request (works in all environments)
+    const getBaseUrl = () => {
+      // Vercel ortamında VERCEL_URL kullan
+      if (process.env.VERCEL_URL) {
+        return `https://${process.env.VERCEL_URL}`;
+      }
+      // Request'ten URL'i al
+      try {
+        const url = new URL(request.url);
+        return `${url.protocol}//${url.host}`;
+      } catch {
+        // Fallback: environment variable veya localhost
+        return process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+      }
+    };
+
+    const baseUrl = getBaseUrl();
+
     // Trigger activities for each bot
     for (const bot of activeBots) {
       const botResults: Array<{
@@ -76,7 +94,7 @@ export async function POST(request: Request) {
       for (const activityType of globalConfig.enabledActivities) {
         try {
           // Call the execute endpoint directly (bypass scheduler checks)
-          const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/admin/bots/execute`, {
+          const response = await fetch(`${baseUrl}/api/admin/bots/execute`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -89,9 +107,49 @@ export async function POST(request: Request) {
             }),
           });
 
-          const data = await response.json();
+          if (!response.ok) {
+            // Try to parse error response
+            let errorText = '';
+            let errorData: any = {};
+            try {
+              errorText = await response.text();
+              if (errorText) {
+                try {
+                  errorData = JSON.parse(errorText);
+                } catch {
+                  errorData = { error: errorText };
+                }
+              }
+            } catch {
+              errorData = { error: `HTTP ${response.status}: ${response.statusText}` };
+            }
 
-          if (response.ok && data.success) {
+            botResults.push({
+              activityType,
+              success: false,
+              error: errorData.error || `HTTP ${response.status}: ${response.statusText}`,
+            });
+            continue;
+          }
+
+          // Parse successful response
+          let data: any;
+          try {
+            const responseText = await response.text();
+            if (!responseText) {
+              throw new Error('Empty response');
+            }
+            data = JSON.parse(responseText);
+          } catch (parseError: any) {
+            botResults.push({
+              activityType,
+              success: false,
+              error: `Failed to parse response: ${parseError.message}`,
+            });
+            continue;
+          }
+
+          if (data.success) {
             botResults.push({
               activityType,
               success: true,
@@ -107,7 +165,7 @@ export async function POST(request: Request) {
           botResults.push({
             activityType,
             success: false,
-            error: error.message || 'Failed to execute activity',
+            error: error.message || 'Network error: Failed to execute activity',
           });
         }
       }
@@ -144,3 +202,4 @@ export async function POST(request: Request) {
     );
   }
 }
+

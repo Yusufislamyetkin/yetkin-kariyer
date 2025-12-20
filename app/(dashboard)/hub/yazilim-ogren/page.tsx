@@ -110,7 +110,7 @@ export default function YazilimOgrenHubPage() {
       </div>
 
       {/* Hub Items Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 w-full max-w-full overflow-x-hidden">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 w-full max-w-full overflow-x-hidden pt-6 pl-6">
         {hubItems.map((item, index) => {
           const Icon = item.icon;
           const colorClass = colorClasses[item.colorKey];
