@@ -8,6 +8,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { CheckCircle, ArrowRight, Star, Zap, Crown, Loader2 } from "lucide-react";
 import Navbar from "@/app/components/Navbar";
+import PurchaseForm from "@/app/components/PurchaseForm";
 
 const plans = [
   {
@@ -87,13 +88,37 @@ export default function FiyatlandirmaPage() {
   const [purchasingPlan, setPurchasingPlan] = useState<string | null>(null);
   const [purchaseError, setPurchaseError] = useState<string | null>(null);
   const [purchaseSuccess, setPurchaseSuccess] = useState(false);
+  const [showPurchaseForm, setShowPurchaseForm] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState<{
+    type: "TEMEL" | "PRO" | "VIP";
+    name: string;
+    price: string;
+  } | null>(null);
 
   const handlePurchasePlan = async (planType: "TEMEL" | "PRO" | "VIP") => {
     if (!session?.user) {
-      router.push("/login?redirect=/fiyatlandirma");
+      // Open purchase form for guest users
+      const planData = plans.find(p => {
+        const planTypeMap: Record<string, "TEMEL" | "PRO" | "VIP"> = {
+          Temel: "TEMEL",
+          Pro: "PRO",
+          VIP: "VIP",
+        };
+        return planTypeMap[p.name] === planType;
+      });
+
+      if (planData) {
+        setSelectedPlan({
+          type: planType,
+          name: planData.name,
+          price: planData.price,
+        });
+        setShowPurchaseForm(true);
+      }
       return;
     }
 
+    // Existing logic for authenticated users
     try {
       setPurchasingPlan(planType);
       setPurchaseError(null);
@@ -127,6 +152,16 @@ export default function FiyatlandirmaPage() {
     } finally {
       setPurchasingPlan(null);
     }
+  };
+
+  const handlePurchaseSuccess = () => {
+    setShowPurchaseForm(false);
+    setSelectedPlan(null);
+    setPurchaseSuccess(true);
+    // Redirect to login page after success
+    setTimeout(() => {
+      router.push("/login");
+    }, 2000);
   };
 
   return (
@@ -414,6 +449,20 @@ export default function FiyatlandirmaPage() {
           </div>
         </div>
       </footer>
+
+      {/* Purchase Form Modal */}
+      {showPurchaseForm && selectedPlan && (
+        <PurchaseForm
+          planType={selectedPlan.type}
+          planName={selectedPlan.name}
+          planPrice={selectedPlan.price}
+          onClose={() => {
+            setShowPurchaseForm(false);
+            setSelectedPlan(null);
+          }}
+          onSuccess={handlePurchaseSuccess}
+        />
+      )}
     </div>
   );
 }

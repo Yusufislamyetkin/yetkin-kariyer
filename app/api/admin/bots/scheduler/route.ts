@@ -387,8 +387,8 @@ export async function POST(request: Request) {
         if (isTimeout) {
           console.warn(`[SCHEDULER_POST] Timeout detected, not retrying`);
           break;
-        }
       }
+    }
 
       // Exponential backoff: 1s, 2s, 4s
       if (attempt < maxRetries - 1) {

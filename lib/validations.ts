@@ -114,3 +114,10 @@ export const loginSchema = z.object({
   password: z.string().min(1, "Şifre gerekli"),
 });
 
+export const guestPurchaseSchema = z.object({
+  email: z.string().email("Geçerli bir email adresi giriniz").transform((v) => v.toLowerCase().trim()),
+  name: z.string().min(2, "İsim en az 2 karakter olmalıdır").max(50, "İsim en fazla 50 karakter olabilir"),
+  planType: z.enum(["TEMEL", "PRO", "VIP"], { required_error: "Geçersiz plan türü" }),
+  durationMonths: z.number().min(1).max(24).default(12).optional(),
+});
+

@@ -17,11 +17,8 @@ function PaymentContent() {
   const planType = searchParams.get("plan");
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (!session?.user) {
-      router.push(`/login?redirect=/odeme${productSlug ? `?product=${productSlug}` : planType ? `?plan=${planType}` : ''}`);
-    }
-  }, [session, router, productSlug, planType]);
+  // Remove authentication requirement for payment page
+  // Users can now purchase without being logged in
 
   const handlePayment = async () => {
     if (!productSlug && !planType) {

@@ -203,3 +203,166 @@ export async function sendPasswordResetEmail(
     );
   }
 }
+
+export async function sendAccountCredentialsEmail(
+  email: string,
+  fullName: string,
+  password: string,
+  planType: string
+) {
+  const smtpUser = process.env.SMTP_USER;
+  const smtpPassword = process.env.SMTP_PASSWORD;
+
+  if (!smtpUser || !smtpPassword) {
+    console.error("Email configuration error - SMTP credentials not set");
+    throw new Error("SMTP_USER and SMTP_PASSWORD environment variables must be set");
+  }
+
+  const transporter = getTransporter();
+  const baseUrl =
+    process.env.NEXTAUTH_URL ||
+    process.env.NEXT_PUBLIC_APP_URL ||
+    "http://localhost:3000";
+  const loginUrl = `${baseUrl}/login`;
+  const fromEmail =
+    process.env.SMTP_FROM_EMAIL ||
+    `YTK Academy <${smtpUser}>`;
+
+  const planNames: Record<string, string> = {
+    TEMEL: "Temel Plan",
+    PRO: "Pro Plan",
+    VIP: "VIP Plan",
+  };
+
+  const planName = planNames[planType as keyof typeof planNames] || planType;
+
+  const htmlContent = `
+    <!DOCTYPE html>
+    <html lang="tr">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Hesap Bilgileriniz - YTK Academy</title>
+    </head>
+    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f5f5f5;">
+      <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #f5f5f5;">
+        <tr>
+          <td align="center" style="padding: 40px 20px;">
+            <table role="presentation" style="max-width: 600px; width: 100%; border-collapse: collapse; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+              <!-- Header -->
+              <tr>
+                <td style="padding: 40px 40px 20px; text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px 12px 0 0;">
+                  <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 700;">
+                    YTK Academy
+                  </h1>
+                </td>
+              </tr>
+              
+              <!-- Content -->
+              <tr>
+                <td style="padding: 40px;">
+                  <h2 style="margin: 0 0 20px; color: #1f2937; font-size: 24px; font-weight: 600;">
+                    Hesabınız Oluşturuldu!
+                  </h2>
+                  
+                  <p style="margin: 0 0 20px; color: #4b5563; font-size: 16px; line-height: 1.6;">
+                    Merhaba <strong>${fullName}</strong>,
+                  </p>
+                  
+                  <p style="margin: 0 0 20px; color: #4b5563; font-size: 16px; line-height: 1.6;">
+                    ${planName} satın alma işleminiz için hesabınız otomatik olarak oluşturuldu. Aşağıda giriş bilgileriniz yer almaktadır:
+                  </p>
+                  
+                  <!-- Credentials Box -->
+                  <div style="margin: 30px 0; padding: 24px; background-color: #f9fafb; border: 2px solid #e5e7eb; border-radius: 8px;">
+                    <div style="margin-bottom: 16px;">
+                      <div style="color: #6b7280; font-size: 14px; font-weight: 600; margin-bottom: 4px;">E-posta:</div>
+                      <div style="color: #1f2937; font-size: 16px; font-weight: 600; font-family: monospace;">${email}</div>
+                    </div>
+                    <div>
+                      <div style="color: #6b7280; font-size: 14px; font-weight: 600; margin-bottom: 4px;">Şifre:</div>
+                      <div style="color: #1f2937; font-size: 16px; font-weight: 600; font-family: monospace; letter-spacing: 1px;">${password}</div>
+                    </div>
+                  </div>
+                  
+                  <!-- Security Warning -->
+                  <div style="margin: 30px 0; padding: 16px; background-color: #fef3c7; border-left: 4px solid #f59e0b; border-radius: 4px;">
+                    <p style="margin: 0; color: #92400e; font-size: 14px; line-height: 1.6;">
+                      <strong>Güvenlik Uyarısı:</strong> Güvenliğiniz için lütfen ilk girişinizde şifrenizi değiştirin. Bu bilgileri kimseyle paylaşmayın.
+                    </p>
+                  </div>
+                  
+                  <!-- CTA Button -->
+                  <table role="presentation" style="width: 100%; border-collapse: collapse; margin: 30px 0;">
+                    <tr>
+                      <td align="center" style="padding: 0;">
+                        <a href="${loginUrl}" style="display: inline-block; padding: 14px 32px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #ffffff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 6px rgba(102, 126, 234, 0.3);">
+                          Giriş Yap
+                        </a>
+                      </td>
+                    </tr>
+                  </table>
+                  
+                  <p style="margin: 20px 0 0; color: #6b7280; font-size: 14px; line-height: 1.6;">
+                    Sorularınız için bizimle iletişime geçebilirsiniz.
+                  </p>
+                  
+                  <p style="margin: 20px 0 0; color: #6b7280; font-size: 14px; line-height: 1.6;">
+                    Saygılarımızla,<br>
+                    <strong>YTK Academy Ekibi</strong>
+                  </p>
+                </td>
+              </tr>
+              
+              <!-- Footer -->
+              <tr>
+                <td style="padding: 20px 40px; text-align: center; background-color: #f9fafb; border-radius: 0 0 12px 12px; border-top: 1px solid #e5e7eb;">
+                  <p style="margin: 0; color: #6b7280; font-size: 12px; line-height: 1.6;">
+                    Bu e-posta otomatik olarak gönderilmiştir. Lütfen yanıtlamayın.
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </body>
+    </html>
+  `;
+
+  try {
+    const info = await transporter.sendMail({
+      from: fromEmail,
+      to: email,
+      subject: `Hesap Bilgileriniz - YTK Academy ${planName}`,
+      html: htmlContent,
+    });
+
+    console.log(`Account credentials email sent successfully. Message ID: ${info.messageId}`);
+    return info;
+  } catch (error: any) {
+    console.error("Email send error details:", {
+      message: error?.message,
+      stack: error?.stack,
+      email: email,
+      fromEmail: fromEmail,
+      code: error?.code,
+    });
+
+    if (error?.code === "EAUTH") {
+      throw new Error(
+        "E-posta gönderilemedi: Gmail kimlik doğrulama hatası. Lütfen SMTP_USER ve SMTP_PASSWORD (App Password) değerlerini kontrol edin."
+      );
+    }
+
+    if (error?.code === "ECONNECTION" || error?.code === "ETIMEDOUT") {
+      throw new Error(
+        "E-posta gönderilemedi: SMTP sunucusuna bağlanılamadı. Lütfen SMTP_HOST ve SMTP_PORT değerlerini kontrol edin."
+      );
+    }
+
+    throw new Error(
+      `E-posta gönderilemedi: ${error?.message || "Bilinmeyen hata"}`
+    );
+  }
+}
