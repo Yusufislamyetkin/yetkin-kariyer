@@ -1,0 +1,1188 @@
+{
+  "overview": {
+    "description": ".NET Core Senior seviyesinde mülakata hazırlık test paketi. İleri seviye C# konularından mimari desenlere, performans optimizasyonundan entegrasyon modüllerine kadar kapsamlı test içerikleri. Senior developer pozisyonları için gerekli tüm teknik bilgileri mülakat soruları formatında test edin.",
+    "estimatedDurationMinutes": 1875
+  },
+  "learningObjectives": [
+    "İleri seviye C# özelliklerini ve memory yönetimini derinlemesine test etmek",
+    "OOP prensipleri ve tasarım desenlerini pratik senaryolarda değerlendirmek",
+    "Asenkron programlama ve performans optimizasyonu tekniklerini ölçmek",
+    "Mimari desenleri (DDD, Clean Architecture, CQRS) uygulama becerisini test etmek",
+    "Entity Framework Core ve SQL optimizasyonu tekniklerini değerlendirmek",
+    "Güvenlik mekanizmalarını (JWT, OAuth) detaylı şekilde test etmek",
+    "Popüler entegrasyon modüllerini (FluentValidation, RabbitMQ, Redis) kullanma becerisini ölçmek",
+    "Senior developer mülakatlarında sorulan teknik sorulara hazırlık seviyesini değerlendirmek"
+  ],
+  "modules": [
+    {
+      "id": "module-01",
+      "title": "Module 1: İleri Seviye C# Anlama Testi",
+      "summary": "C# programlama dilinin ileri seviye özellikleri, memory yönetimi, generics, LINQ, pattern matching ve modern C# özellikleri. Senior developer mülakatlarında sıkça sorulan teknik konular.",
+      "durationMinutes": 500,
+      "objectives": [
+        "Delegate ve Event mekanizmalarını derinlemesine anlamak",
+        "Memory yönetimi ve Span<T> kullanımını öğrenmek",
+        "Generics ve type constraints kullanımını master etmek",
+        "LINQ operatörlerini ve performans optimizasyonunu öğrenmek",
+        "Modern C# özelliklerini (Records, Pattern Matching) kullanmak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Delegate ve Event Nedir?",
+          "description": "Delegate ve Event mekanizmaları hakkında kapsamlı test",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Memory ve Span Nedir?",
+          "description": "Memory yönetimi ve Span<T> kullanımı hakkında test",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: Ref, In, Out Parametreleri Arasındaki Fark Nedir?",
+          "description": "Ref, In, Out parametreleri arasındaki farklar ve kullanım senaryoları testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Generics ve Constraints Nasıl Kullanılır?",
+          "description": "Generics ve type constraints kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: LINQ Detayları ve Performans Optimizasyonu",
+          "description": "LINQ operatörleri ve performans optimizasyonu testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Pattern Matching Nedir ve Nasıl Kullanılır?",
+          "description": "Pattern matching özellikleri ve kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Records ve Init-only Setters Nedir?",
+          "description": "Records ve init-only setters özellikleri testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Nullable Reference Types Nasıl Kullanılır?",
+          "description": "Nullable reference types kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Source Generators Nedir ve Nasıl Kullanılır?",
+          "description": "Source generators özellikleri ve kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Ref Struct ve Stackalloc Nedir?",
+          "description": "Ref struct ve stackalloc kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Unsafe Code ve Pointer Kullanımı",
+          "description": "Unsafe code ve pointer kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Attributes ve Reflection Detayları",
+          "description": "Attributes ve reflection kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Expression Trees Nedir ve Nasıl Kullanılır?",
+          "description": "Expression trees kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Dynamic Keyword ve Runtime Binding",
+          "description": "Dynamic keyword ve runtime binding testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Covariance ve Contravariance Nedir?",
+          "description": "Covariance ve contravariance kavramları testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-15"
+        },
+        {
+          "id": "lesson-16",
+          "title": "Ders 16: Extension Methods ve Best Practices",
+          "description": "Extension methods kullanımı ve best practices testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-16"
+        },
+        {
+          "id": "lesson-17",
+          "title": "Ders 17: Partial Classes ve Partial Methods",
+          "description": "Partial classes ve partial methods kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-17"
+        },
+        {
+          "id": "lesson-18",
+          "title": "Ders 18: Anonymous Types ve Tuples",
+          "description": "Anonymous types ve tuples kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-18"
+        },
+        {
+          "id": "lesson-19",
+          "title": "Ders 19: Local Functions ve Static Local Functions",
+          "description": "Local functions ve static local functions kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-19"
+        },
+        {
+          "id": "lesson-20",
+          "title": "Ders 20: Pattern Matching ile Switch Expressions",
+          "description": "Pattern matching ile switch expressions kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-20"
+        },
+        {
+          "id": "lesson-21",
+          "title": "Ders 21: Discards ve Out Variables",
+          "description": "Discards ve out variables kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-21"
+        },
+        {
+          "id": "lesson-22",
+          "title": "Ders 22: Default Interface Members (C# 8.0)",
+          "description": "Default interface members özelliği testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-22"
+        },
+        {
+          "id": "lesson-23",
+          "title": "Ders 23: Nullable Value Types Detayları",
+          "description": "Nullable value types detaylı kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-23"
+        },
+        {
+          "id": "lesson-24",
+          "title": "Ders 24: String Interpolation ve FormattableString",
+          "description": "String interpolation ve FormattableString kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-24"
+        },
+        {
+          "id": "lesson-25",
+          "title": "Ders 25: Nameof Operator Kullanımı",
+          "description": "Nameof operator kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-25"
+        },
+        {
+          "id": "lesson-26",
+          "title": "Ders 26: Throw Expressions Nedir?",
+          "description": "Throw expressions kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-26"
+        },
+        {
+          "id": "lesson-27",
+          "title": "Ders 27: Using Declarations ve Disposal Pattern",
+          "description": "Using declarations ve disposal pattern testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-27"
+        },
+        {
+          "id": "lesson-28",
+          "title": "Ders 28: Index ve Range Operators",
+          "description": "Index ve range operators kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-28"
+        },
+        {
+          "id": "lesson-29",
+          "title": "Ders 29: Async Streams (IAsyncEnumerable)",
+          "description": "Async streams ve IAsyncEnumerable kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-29"
+        },
+        {
+          "id": "lesson-30",
+          "title": "Ders 30: Default Literal ve Target-typed New",
+          "description": "Default literal ve target-typed new kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-30"
+        },
+        {
+          "id": "lesson-31",
+          "title": "Ders 31: Init Accessors ve With Expressions",
+          "description": "Init accessors ve with expressions kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-31"
+        },
+        {
+          "id": "lesson-32",
+          "title": "Ders 32: File-scoped Namespaces",
+          "description": "File-scoped namespaces kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-32"
+        },
+        {
+          "id": "lesson-33",
+          "title": "Ders 33: Required Members (C# 11)",
+          "description": "Required members özelliği testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-33"
+        },
+        {
+          "id": "lesson-34",
+          "title": "Ders 34: Raw String Literals",
+          "description": "Raw string literals kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-34"
+        },
+        {
+          "id": "lesson-35",
+          "title": "Ders 35: UTF-8 String Literals",
+          "description": "UTF-8 string literals kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-35"
+        },
+        {
+          "id": "lesson-36",
+          "title": "Ders 36: Generic Attributes",
+          "description": "Generic attributes kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-36"
+        },
+        {
+          "id": "lesson-37",
+          "title": "Ders 37: Static Abstract Members in Interfaces",
+          "description": "Static abstract members in interfaces özelliği testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-37"
+        },
+        {
+          "id": "lesson-38",
+          "title": "Ders 38: Readonly Structs ve Performance",
+          "description": "Readonly structs ve performance optimizasyonu testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-38"
+        },
+        {
+          "id": "lesson-39",
+          "title": "Ders 39: Ref Returns ve Ref Locals",
+          "description": "Ref returns ve ref locals kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-39"
+        },
+        {
+          "id": "lesson-40",
+          "title": "Ders 40: Span<T> ve Memory<T> Kullanım Senaryoları",
+          "description": "Span<T> ve Memory<T> kullanım senaryoları testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-40"
+        },
+        {
+          "id": "lesson-41",
+          "title": "Ders 41: ArrayPool<T> ile Memory Optimizasyonu",
+          "description": "ArrayPool<T> ile memory optimizasyonu testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-41"
+        },
+        {
+          "id": "lesson-42",
+          "title": "Ders 42: StringBuilder vs String Interpolation Performansı",
+          "description": "StringBuilder vs string interpolation performans karşılaştırması testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-42"
+        },
+        {
+          "id": "lesson-43",
+          "title": "Ders 43: Boxing ve Unboxing Performans Etkileri",
+          "description": "Boxing ve unboxing performans etkileri testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-43"
+        },
+        {
+          "id": "lesson-44",
+          "title": "Ders 44: Value Types vs Reference Types Memory Layout",
+          "description": "Value types vs reference types memory layout testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-44"
+        },
+        {
+          "id": "lesson-45",
+          "title": "Ders 45: Struct vs Class Ne Zaman Kullanılır?",
+          "description": "Struct vs class kullanım senaryoları testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-45"
+        },
+        {
+          "id": "lesson-46",
+          "title": "Ders 46: Immutable Collections ve Thread Safety",
+          "description": "Immutable collections ve thread safety testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-46"
+        },
+        {
+          "id": "lesson-47",
+          "title": "Ders 47: Concurrent Collections Detayları",
+          "description": "Concurrent collections detaylı kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-47"
+        },
+        {
+          "id": "lesson-48",
+          "title": "Ders 48: Lazy<T> ve Lazy Initialization Patterns",
+          "description": "Lazy<T> ve lazy initialization patterns testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-48"
+        },
+        {
+          "id": "lesson-49",
+          "title": "Ders 49: WeakReference ve Memory Management",
+          "description": "WeakReference ve memory management testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-49"
+        },
+        {
+          "id": "lesson-50",
+          "title": "Ders 50: GC.Collect() Ne Zaman Kullanılır?",
+          "description": "GC.Collect() kullanım senaryoları testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-50"
+        },
+        {
+          "id": "lesson-51",
+          "title": "Ders 51: Finalizers ve Dispose Pattern",
+          "description": "Finalizers ve dispose pattern testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-51"
+        },
+        {
+          "id": "lesson-52",
+          "title": "Ders 52: IDisposable ve Using Statement",
+          "description": "IDisposable ve using statement kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-52"
+        },
+        {
+          "id": "lesson-53",
+          "title": "Ders 53: IEnumerable vs IQueryable Farkları",
+          "description": "IEnumerable vs IQueryable farkları testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-53"
+        },
+        {
+          "id": "lesson-54",
+          "title": "Ders 54: Yield Return ve Iterator Pattern",
+          "description": "Yield return ve iterator pattern testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-54"
+        },
+        {
+          "id": "lesson-55",
+          "title": "Ders 55: LINQ to Objects vs LINQ to SQL",
+          "description": "LINQ to Objects vs LINQ to SQL farkları testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-55"
+        },
+        {
+          "id": "lesson-56",
+          "title": "Ders 56: Expression<Func<T>> vs Func<T> Farkları",
+          "description": "Expression<Func<T>> vs Func<T> farkları testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-56"
+        },
+        {
+          "id": "lesson-57",
+          "title": "Ders 57: Compiled Queries ve Performance",
+          "description": "Compiled queries ve performance optimizasyonu testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-57"
+        },
+        {
+          "id": "lesson-58",
+          "title": "Ders 58: AsParallel() ve PLINQ Kullanımı",
+          "description": "AsParallel() ve PLINQ kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-58"
+        },
+        {
+          "id": "lesson-59",
+          "title": "Ders 59: Aggregate ve Reduce Operations",
+          "description": "Aggregate ve reduce operations testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-59"
+        },
+        {
+          "id": "lesson-60",
+          "title": "Ders 60: GroupBy ve ToLookup Farkları",
+          "description": "GroupBy ve ToLookup farkları testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-60"
+        },
+        {
+          "id": "lesson-61",
+          "title": "Ders 61: SelectMany ve Flattening Operations",
+          "description": "SelectMany ve flattening operations testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-61"
+        },
+        {
+          "id": "lesson-62",
+          "title": "Ders 62: Zip ve Combine Operations",
+          "description": "Zip ve combine operations testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-62"
+        },
+        {
+          "id": "lesson-63",
+          "title": "Ders 63: Skip ve Take ile Pagination",
+          "description": "Skip ve take ile pagination testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-63"
+        },
+        {
+          "id": "lesson-64",
+          "title": "Ders 64: First vs FirstOrDefault vs Single",
+          "description": "First vs FirstOrDefault vs Single farkları testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-64"
+        },
+        {
+          "id": "lesson-65",
+          "title": "Ders 65: Any vs Count > 0 Performansı",
+          "description": "Any vs Count > 0 performans karşılaştırması testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-65"
+        },
+        {
+          "id": "lesson-66",
+          "title": "Ders 66: Distinct ve Custom Equality Comparer",
+          "description": "Distinct ve custom equality comparer testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-66"
+        },
+        {
+          "id": "lesson-67",
+          "title": "Ders 67: OrderBy ve ThenBy Kullanımı",
+          "description": "OrderBy ve ThenBy kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-67"
+        },
+        {
+          "id": "lesson-68",
+          "title": "Ders 68: Join Operations (Inner, Left, Right)",
+          "description": "Join operations (inner, left, right) testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-68"
+        },
+        {
+          "id": "lesson-69",
+          "title": "Ders 69: GroupJoin ve Nested Collections",
+          "description": "GroupJoin ve nested collections testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-69"
+        },
+        {
+          "id": "lesson-70",
+          "title": "Ders 70: Set Operations (Union, Intersect, Except)",
+          "description": "Set operations (union, intersect, except) testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-70"
+        },
+        {
+          "id": "lesson-71",
+          "title": "Ders 71: Partitioning Operations (SkipWhile, TakeWhile)",
+          "description": "Partitioning operations (SkipWhile, TakeWhile) testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-71"
+        },
+        {
+          "id": "lesson-72",
+          "title": "Ders 72: Element Operations ve Exception Handling",
+          "description": "Element operations ve exception handling testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-72"
+        },
+        {
+          "id": "lesson-73",
+          "title": "Ders 73: Conversion Operations (ToArray, ToList, ToDictionary)",
+          "description": "Conversion operations (ToArray, ToList, ToDictionary) testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-73"
+        },
+        {
+          "id": "lesson-74",
+          "title": "Ders 74: Aggregation Operations (Sum, Average, Min, Max)",
+          "description": "Aggregation operations (Sum, Average, Min, Max) testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-74"
+        },
+        {
+          "id": "lesson-75",
+          "title": "Ders 75: Quantifier Operations (All, Any, Contains)",
+          "description": "Quantifier operations (All, Any, Contains) testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-75"
+        },
+        {
+          "id": "lesson-76",
+          "title": "Ders 76: Generation Operations (Range, Repeat, Empty)",
+          "description": "Generation operations (Range, Repeat, Empty) testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-76"
+        },
+        {
+          "id": "lesson-77",
+          "title": "Ders 77: Equality Operations (SequenceEqual)",
+          "description": "Equality operations (SequenceEqual) testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-77"
+        },
+        {
+          "id": "lesson-78",
+          "title": "Ders 78: Concatenation Operations (Concat)",
+          "description": "Concatenation operations (Concat) testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-78"
+        },
+        {
+          "id": "lesson-79",
+          "title": "Ders 79: Custom LINQ Operators Yazma",
+          "description": "Custom LINQ operators yazma testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-79"
+        },
+        {
+          "id": "lesson-80",
+          "title": "Ders 80: Expression Trees ile Dynamic Queries",
+          "description": "Expression trees ile dynamic queries testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-80"
+        },
+        {
+          "id": "lesson-81",
+          "title": "Ders 81: IQueryable Provider Implementation",
+          "description": "IQueryable provider implementation testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-81"
+        },
+        {
+          "id": "lesson-82",
+          "title": "Ders 82: Compile-time vs Runtime Type Checking",
+          "description": "Compile-time vs runtime type checking testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-82"
+        },
+        {
+          "id": "lesson-83",
+          "title": "Ders 83: Type Inference ve var Keyword",
+          "description": "Type inference ve var keyword kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-83"
+        },
+        {
+          "id": "lesson-84",
+          "title": "Ders 84: Type Constraints (where T : class)",
+          "description": "Type constraints (where T : class) kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-84"
+        },
+        {
+          "id": "lesson-85",
+          "title": "Ders 85: Generic Method Overloading",
+          "description": "Generic method overloading testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-85"
+        },
+        {
+          "id": "lesson-86",
+          "title": "Ders 86: Generic Type Parameters ve Variance",
+          "description": "Generic type parameters ve variance testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-86"
+        },
+        {
+          "id": "lesson-87",
+          "title": "Ders 87: Open vs Closed Generic Types",
+          "description": "Open vs closed generic types testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-87"
+        },
+        {
+          "id": "lesson-88",
+          "title": "Ders 88: Generic Type Constraints Best Practices",
+          "description": "Generic type constraints best practices testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-88"
+        },
+        {
+          "id": "lesson-89",
+          "title": "Ders 89: Covariant Return Types (C# 9.0)",
+          "description": "Covariant return types özelliği testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-89"
+        },
+        {
+          "id": "lesson-90",
+          "title": "Ders 90: Static Local Functions ve Closures",
+          "description": "Static local functions ve closures testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-90"
+        },
+        {
+          "id": "lesson-91",
+          "title": "Ders 91: Local Functions vs Lambda Expressions",
+          "description": "Local functions vs lambda expressions farkları testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-91"
+        },
+        {
+          "id": "lesson-92",
+          "title": "Ders 92: Captured Variables ve Closures",
+          "description": "Captured variables ve closures testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-92"
+        },
+        {
+          "id": "lesson-93",
+          "title": "Ders 93: Expression-bodied Members",
+          "description": "Expression-bodied members kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-93"
+        },
+        {
+          "id": "lesson-94",
+          "title": "Ders 94: Null-conditional Operators (?., ?[])",
+          "description": "Null-conditional operators (?., ?[]) kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-94"
+        },
+        {
+          "id": "lesson-95",
+          "title": "Ders 95: Null-coalescing Operators (??, ??=)",
+          "description": "Null-coalescing operators (??, ??=) kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-95"
+        },
+        {
+          "id": "lesson-96",
+          "title": "Ders 96: Pattern Matching ile Type Checking",
+          "description": "Pattern matching ile type checking testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-96"
+        },
+        {
+          "id": "lesson-97",
+          "title": "Ders 97: Switch Expressions vs Switch Statements",
+          "description": "Switch expressions vs switch statements farkları testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-97"
+        },
+        {
+          "id": "lesson-98",
+          "title": "Ders 98: Property Patterns ve Tuple Patterns",
+          "description": "Property patterns ve tuple patterns testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-98"
+        },
+        {
+          "id": "lesson-99",
+          "title": "Ders 99: Positional Patterns ve Deconstruction",
+          "description": "Positional patterns ve deconstruction testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-99"
+        },
+        {
+          "id": "lesson-100",
+          "title": "Ders 100: List Patterns (C# 11)",
+          "description": "List patterns (C# 11) özelliği testi",
+          "href": "/education/lessons/dotnet-core-senior/module-01/lesson-100"
+        }
+      ]
+    },
+    {
+      "id": "module-02",
+      "title": "Module 2: OOP ve Tasarım Deseni Anlama Testi",
+      "summary": "SOLID prensipleri, tasarım desenleri (Creational, Structural, Behavioral) ve pratik uygulamaları. Mülakatlarda sıkça sorulan OOP ve design pattern soruları.",
+      "durationMinutes": 125,
+      "objectives": [
+        "SOLID prensiplerini derinlemesine anlamak ve uygulamak",
+        "Creational design patterns'i pratik senaryolarda kullanmak",
+        "Structural design patterns ile kod organizasyonunu iyileştirmek",
+        "Behavioral design patterns ile davranışsal esneklik sağlamak"
+      ],
+      "relatedTests": [
+        {
+          "id": "lesson-01",
+          "title": "Ders 1: Liskov Substitution Principle Nedir ve Nasıl Uygulanır?",
+          "description": "Liskov Substitution Principle uygulaması testi",
+          "href": "/education/lessons/dotnet-core-senior/module-02/lesson-01"
+        },
+        {
+          "id": "lesson-02",
+          "title": "Ders 2: Dependency Injection Nedir ve Neden Önemlidir?",
+          "description": "Dependency Injection kavramı ve önemi testi",
+          "href": "/education/lessons/dotnet-core-senior/module-02/lesson-02"
+        },
+        {
+          "id": "lesson-03",
+          "title": "Ders 3: SOLID Prensipleri Detaylı Açıklama",
+          "description": "SOLID prensipleri detaylı açıklama testi",
+          "href": "/education/lessons/dotnet-core-senior/module-02/lesson-03"
+        },
+        {
+          "id": "lesson-04",
+          "title": "Ders 4: Single Responsibility Principle Pratik Uygulaması",
+          "description": "Single Responsibility Principle pratik uygulaması testi",
+          "href": "/education/lessons/dotnet-core-senior/module-02/lesson-04"
+        },
+        {
+          "id": "lesson-05",
+          "title": "Ders 5: Open/Closed Principle ve Extension Methods",
+          "description": "Open/Closed Principle ve extension methods testi",
+          "href": "/education/lessons/dotnet-core-senior/module-02/lesson-05"
+        },
+        {
+          "id": "lesson-06",
+          "title": "Ders 6: Interface Segregation Principle Best Practices",
+          "description": "Interface Segregation Principle best practices testi",
+          "href": "/education/lessons/dotnet-core-senior/module-02/lesson-06"
+        },
+        {
+          "id": "lesson-07",
+          "title": "Ders 7: Dependency Inversion Principle ve IoC Containers",
+          "description": "Dependency Inversion Principle ve IoC containers testi",
+          "href": "/education/lessons/dotnet-core-senior/module-02/lesson-07"
+        },
+        {
+          "id": "lesson-08",
+          "title": "Ders 8: Factory Pattern Nedir ve Ne Zaman Kullanılır?",
+          "description": "Factory Pattern kullanımı testi",
+          "href": "/education/lessons/dotnet-core-senior/module-02/lesson-08"
+        },
+        {
+          "id": "lesson-09",
+          "title": "Ders 9: Abstract Factory Pattern Uygulaması",
+          "description": "Abstract Factory Pattern uygulaması testi",
+          "href": "/education/lessons/dotnet-core-senior/module-02/lesson-09"
+        },
+        {
+          "id": "lesson-10",
+          "title": "Ders 10: Builder Pattern ve Fluent Interface",
+          "description": "Builder Pattern ve fluent interface testi",
+          "href": "/education/lessons/dotnet-core-senior/module-02/lesson-10"
+        },
+        {
+          "id": "lesson-11",
+          "title": "Ders 11: Singleton Pattern ve Thread Safety",
+          "description": "Singleton Pattern ve thread safety testi",
+          "href": "/education/lessons/dotnet-core-senior/module-02/lesson-11"
+        },
+        {
+          "id": "lesson-12",
+          "title": "Ders 12: Prototype Pattern ve Object Cloning",
+          "description": "Prototype Pattern ve object cloning testi",
+          "href": "/education/lessons/dotnet-core-senior/module-02/lesson-12"
+        },
+        {
+          "id": "lesson-13",
+          "title": "Ders 13: Adapter Pattern ve Legacy Code Integration",
+          "description": "Adapter Pattern ve legacy code integration testi",
+          "href": "/education/lessons/dotnet-core-senior/module-02/lesson-13"
+        },
+        {
+          "id": "lesson-14",
+          "title": "Ders 14: Decorator Pattern ve Dynamic Behavior",
+          "description": "Decorator Pattern ve dynamic behavior testi",
+          "href": "/education/lessons/dotnet-core-senior/module-02/lesson-14"
+        },
+        {
+          "id": "lesson-15",
+          "title": "Ders 15: Facade Pattern ve Complex Subsystems",
+          "description": "Facade Pattern ve complex subsystems testi",
+          "href": "/education/lessons/dotnet-core-senior/module-02/lesson-15"
+        },
+        {
+          "id": "lesson-16",
+          "title": "Ders 16: Proxy Pattern ve Lazy Loading",
+          "description": "Proxy Pattern ve lazy loading testi",
+          "href": "/education/lessons/dotnet-core-senior/module-02/lesson-16"
+        },
+        {
+          "id": "lesson-17",
+          "title": "Ders 17: Composite Pattern ve Tree Structures",
+          "description": "Composite Pattern ve tree structures testi",
+          "href": "/education/lessons/dotnet-core-senior/module-02/lesson-17"
+        },
+        {
+          "id": "lesson-18",
+          "title": "Ders 18: Bridge Pattern ve Abstraction Separation",
+          "description": "Bridge Pattern ve abstraction separation testi",
+          "href": "/education/lessons/dotnet-core-senior/module-02/lesson-18"
+        },
+        {
+          "id": "lesson-19",
+          "title": "Ders 19: Observer Pattern ve Event-driven Architecture",
+          "description": "Observer Pattern ve event-driven architecture testi",
+          "href": "/education/lessons/dotnet-core-senior/module-02/lesson-19"
+        },
+        {
+          "id": "lesson-20",
+          "title": "Ders 20: Strategy Pattern ve Algorithm Selection",
+          "description": "Strategy Pattern ve algorithm selection testi",
+          "href": "/education/lessons/dotnet-core-senior/module-02/lesson-20"
+        },
+        {
+          "id": "lesson-21",
+          "title": "Ders 21: Command Pattern ve Undo/Redo Functionality",
+          "description": "Command Pattern ve undo/redo functionality testi",
+          "href": "/education/lessons/dotnet-core-senior/module-02/lesson-21"
+        },
+        {
+          "id": "lesson-22",
+          "title": "Ders 22: Chain of Responsibility Pattern",
+          "description": "Chain of Responsibility Pattern testi",
+          "href": "/education/lessons/dotnet-core-senior/module-02/lesson-22"
+        },
+        {
+          "id": "lesson-23",
+          "title": "Ders 23: State Pattern ve State Machines",
+          "description": "State Pattern ve state machines testi",
+          "href": "/education/lessons/dotnet-core-senior/module-02/lesson-23"
+        },
+        {
+          "id": "lesson-24",
+          "title": "Ders 24: Template Method Pattern ve Code Reuse",
+          "description": "Template Method Pattern ve code reuse testi",
+          "href": "/education/lessons/dotnet-core-senior/module-02/lesson-24"
+        },
+        {
+          "id": "lesson-25",
+          "title": "Ders 25: Visitor Pattern ve Double Dispatch",
+          "description": "Visitor Pattern ve double dispatch testi",
+          "href": "/education/lessons/dotnet-core-senior/module-02/lesson-25"
+        }
+      ]
+    },
+    {
+      "id": "module-03",
+      "title": "Module 3: Asenkron Programlama Testi",
+      "summary": "Task, ValueTask, async/await, cancellation tokens, parallel programming ve performans optimizasyonu. Asenkron programlamada karşılaşılan yaygın sorunlar ve çözümleri.",
+      "durationMinutes": 125,
+      "objectives": [
+        "Task ve ValueTask arasındaki farkları anlamak",
+        "Async/await mekanizmasını derinlemesine öğrenmek",
+        "Deadlock ve race condition sorunlarını çözmek",
+        "Asenkron programlamada performans optimizasyonu yapmak"
+      ],
+      "relatedTests": [
+        {"id": "lesson-01", "title": "Ders 1: Task ve ValueTask Nedir? Aralarındaki Fark Nedir?", "description": "Task ve ValueTask farkları testi", "href": "/education/lessons/dotnet-core-senior/module-03/lesson-01"},
+        {"id": "lesson-02", "title": "Ders 2: Async/Await Detayları ve Execution Flow", "description": "Async/Await detayları testi", "href": "/education/lessons/dotnet-core-senior/module-03/lesson-02"},
+        {"id": "lesson-03", "title": "Ders 3: ConfigureAwait(false) Ne Zaman Kullanılır?", "description": "ConfigureAwait kullanımı testi", "href": "/education/lessons/dotnet-core-senior/module-03/lesson-03"},
+        {"id": "lesson-04", "title": "Ders 4: CancellationToken Kullanımı ve Best Practices", "description": "CancellationToken kullanımı testi", "href": "/education/lessons/dotnet-core-senior/module-03/lesson-04"},
+        {"id": "lesson-05", "title": "Ders 5: Parallel Programming ve Task Parallel Library", "description": "Parallel programming testi", "href": "/education/lessons/dotnet-core-senior/module-03/lesson-05"},
+        {"id": "lesson-06", "title": "Ders 6: Task.Run vs Task.Factory.StartNew Farkları", "description": "Task.Run vs Task.Factory.StartNew farkları testi", "href": "/education/lessons/dotnet-core-senior/module-03/lesson-06"},
+        {"id": "lesson-07", "title": "Ders 7: TaskCompletionSource ve Custom Async Operations", "description": "TaskCompletionSource kullanımı testi", "href": "/education/lessons/dotnet-core-senior/module-03/lesson-07"},
+        {"id": "lesson-08", "title": "Ders 8: IAsyncEnumerable ve Async Streams", "description": "IAsyncEnumerable ve async streams testi", "href": "/education/lessons/dotnet-core-senior/module-03/lesson-08"},
+        {"id": "lesson-09", "title": "Ders 9: Async LINQ ve Asynchronous Queries", "description": "Async LINQ kullanımı testi", "href": "/education/lessons/dotnet-core-senior/module-03/lesson-09"},
+        {"id": "lesson-10", "title": "Ders 10: Deadlock Nasıl Engellenir?", "description": "Deadlock önleme testi", "href": "/education/lessons/dotnet-core-senior/module-03/lesson-10"},
+        {"id": "lesson-11", "title": "Ders 11: Async Void Ne Zaman Kullanılır?", "description": "Async void kullanımı testi", "href": "/education/lessons/dotnet-core-senior/module-03/lesson-11"},
+        {"id": "lesson-12", "title": "Ders 12: Task.WhenAll vs Task.WhenAny Kullanımı", "description": "Task.WhenAll vs Task.WhenAny testi", "href": "/education/lessons/dotnet-core-senior/module-03/lesson-12"},
+        {"id": "lesson-13", "title": "Ders 13: Exception Handling in Async Methods", "description": "Async exception handling testi", "href": "/education/lessons/dotnet-core-senior/module-03/lesson-13"},
+        {"id": "lesson-14", "title": "Ders 14: Async State Machine ve Compiler Transformation", "description": "Async state machine testi", "href": "/education/lessons/dotnet-core-senior/module-03/lesson-14"},
+        {"id": "lesson-15", "title": "Ders 15: SynchronizationContext ve UI Thread", "description": "SynchronizationContext testi", "href": "/education/lessons/dotnet-core-senior/module-03/lesson-15"},
+        {"id": "lesson-16", "title": "Ders 16: SemaphoreSlim ve Async Locks", "description": "SemaphoreSlim ve async locks testi", "href": "/education/lessons/dotnet-core-senior/module-03/lesson-16"},
+        {"id": "lesson-17", "title": "Ders 17: AsyncLocal ve Execution Context", "description": "AsyncLocal ve execution context testi", "href": "/education/lessons/dotnet-core-senior/module-03/lesson-17"},
+        {"id": "lesson-18", "title": "Ders 18: Task.Yield() Ne Zaman Kullanılır?", "description": "Task.Yield() kullanımı testi", "href": "/education/lessons/dotnet-core-senior/module-03/lesson-18"},
+        {"id": "lesson-19", "title": "Ders 19: Task.Delay vs Thread.Sleep", "description": "Task.Delay vs Thread.Sleep testi", "href": "/education/lessons/dotnet-core-senior/module-03/lesson-19"},
+        {"id": "lesson-20", "title": "Ders 20: Fire-and-Forget Pattern ve Background Tasks", "description": "Fire-and-forget pattern testi", "href": "/education/lessons/dotnet-core-senior/module-03/lesson-20"},
+        {"id": "lesson-21", "title": "Ders 21: Async Method Overloads ve Best Practices", "description": "Async method overloads testi", "href": "/education/lessons/dotnet-core-senior/module-03/lesson-21"},
+        {"id": "lesson-22", "title": "Ders 22: Task Schedulers ve Custom Scheduling", "description": "Task schedulers testi", "href": "/education/lessons/dotnet-core-senior/module-03/lesson-22"},
+        {"id": "lesson-23", "title": "Ders 23: Async Performance Optimization", "description": "Async performance optimization testi", "href": "/education/lessons/dotnet-core-senior/module-03/lesson-23"},
+        {"id": "lesson-24", "title": "Ders 24: IAsyncDisposable ve Resource Management", "description": "IAsyncDisposable testi", "href": "/education/lessons/dotnet-core-senior/module-03/lesson-24"},
+        {"id": "lesson-25", "title": "Ders 25: Async Patterns ve Anti-patterns", "description": "Async patterns ve anti-patterns testi", "href": "/education/lessons/dotnet-core-senior/module-03/lesson-25"}
+      ]
+    },
+    {
+      "id": "module-04",
+      "title": "Module 4: Memory ve Performance Testi",
+      "summary": "Memory yönetimi, garbage collection, memory leak tespiti, deadlock önleme ve performans optimizasyonu teknikleri. Production ortamlarında karşılaşılan performans sorunları ve çözümleri.",
+      "durationMinutes": 125,
+      "objectives": [
+        "Memory leak'leri tespit etmek ve önlemek",
+        "Deadlock sorunlarını çözmek",
+        "Garbage collection mekanizmasını anlamak",
+        "Performans optimizasyonu tekniklerini uygulamak"
+      ],
+      "relatedTests": [
+        {"id": "lesson-01", "title": "Ders 1: Deadlock Nasıl Engellenir?", "description": "Deadlock önleme testi", "href": "/education/lessons/dotnet-core-senior/module-04/lesson-01"},
+        {"id": "lesson-02", "title": "Ders 2: Memory Leak Nasıl Tespit Edilir?", "description": "Memory leak tespiti testi", "href": "/education/lessons/dotnet-core-senior/module-04/lesson-02"},
+        {"id": "lesson-03", "title": "Ders 3: Garbage Collection Detayları ve Generations", "description": "Garbage collection detayları testi", "href": "/education/lessons/dotnet-core-senior/module-04/lesson-03"},
+        {"id": "lesson-04", "title": "Ders 4: Memory Profiling ve Diagnostic Tools", "description": "Memory profiling testi", "href": "/education/lessons/dotnet-core-senior/module-04/lesson-04"},
+        {"id": "lesson-05", "title": "Ders 5: Performance Optimization Teknikleri", "description": "Performance optimization testi", "href": "/education/lessons/dotnet-core-senior/module-04/lesson-05"},
+        {"id": "lesson-06", "title": "Ders 6: GC.Collect() Ne Zaman Çağrılır?", "description": "GC.Collect() kullanımı testi", "href": "/education/lessons/dotnet-core-senior/module-04/lesson-06"},
+        {"id": "lesson-07", "title": "Ders 7: WeakReference ve Memory Management", "description": "WeakReference testi", "href": "/education/lessons/dotnet-core-senior/module-04/lesson-07"},
+        {"id": "lesson-08", "title": "Ders 8: Large Object Heap (LOH) ve Fragmentation", "description": "LOH ve fragmentation testi", "href": "/education/lessons/dotnet-core-senior/module-04/lesson-08"},
+        {"id": "lesson-09", "title": "Ders 9: Gen0, Gen1, Gen2 Garbage Collection", "description": "GC generations testi", "href": "/education/lessons/dotnet-core-senior/module-04/lesson-09"},
+        {"id": "lesson-10", "title": "Ders 10: Finalizers ve Performance Impact", "description": "Finalizers testi", "href": "/education/lessons/dotnet-core-senior/module-04/lesson-10"},
+        {"id": "lesson-11", "title": "Ders 11: IDisposable Pattern ve Resource Management", "description": "IDisposable pattern testi", "href": "/education/lessons/dotnet-core-senior/module-04/lesson-11"},
+        {"id": "lesson-12", "title": "Ders 12: Using Statement ve Exception Safety", "description": "Using statement testi", "href": "/education/lessons/dotnet-core-senior/module-04/lesson-12"},
+        {"id": "lesson-13", "title": "Ders 13: Memory Allocation Patterns", "description": "Memory allocation patterns testi", "href": "/education/lessons/dotnet-core-senior/module-04/lesson-13"},
+        {"id": "lesson-14", "title": "Ders 14: Stack vs Heap Memory Allocation", "description": "Stack vs heap testi", "href": "/education/lessons/dotnet-core-senior/module-04/lesson-14"},
+        {"id": "lesson-15", "title": "Ders 15: Value Types ve Memory Efficiency", "description": "Value types memory efficiency testi", "href": "/education/lessons/dotnet-core-senior/module-04/lesson-15"},
+        {"id": "lesson-16", "title": "Ders 16: ArrayPool<T> ve Memory Reuse", "description": "ArrayPool memory reuse testi", "href": "/education/lessons/dotnet-core-senior/module-04/lesson-16"},
+        {"id": "lesson-17", "title": "Ders 17: Span<T> ve Zero-copy Operations", "description": "Span zero-copy operations testi", "href": "/education/lessons/dotnet-core-senior/module-04/lesson-17"},
+        {"id": "lesson-18", "title": "Ders 18: Memory<T> ve Pinned Memory", "description": "Memory ve pinned memory testi", "href": "/education/lessons/dotnet-core-senior/module-04/lesson-18"},
+        {"id": "lesson-19", "title": "Ders 19: Unsafe Code ve Pointer Arithmetic", "description": "Unsafe code testi", "href": "/education/lessons/dotnet-core-senior/module-04/lesson-19"},
+        {"id": "lesson-20", "title": "Ders 20: Struct vs Class Memory Footprint", "description": "Struct vs class memory footprint testi", "href": "/education/lessons/dotnet-core-senior/module-04/lesson-20"},
+        {"id": "lesson-21", "title": "Ders 21: String Interning ve Memory Usage", "description": "String interning testi", "href": "/education/lessons/dotnet-core-senior/module-04/lesson-21"},
+        {"id": "lesson-22", "title": "Ders 22: StringBuilder vs String Concatenation", "description": "StringBuilder vs concatenation testi", "href": "/education/lessons/dotnet-core-senior/module-04/lesson-22"},
+        {"id": "lesson-23", "title": "Ders 23: Boxing ve Unboxing Performance Cost", "description": "Boxing ve unboxing testi", "href": "/education/lessons/dotnet-core-senior/module-04/lesson-23"},
+        {"id": "lesson-24", "title": "Ders 24: Ref Struct ve Stack-only Types", "description": "Ref struct testi", "href": "/education/lessons/dotnet-core-senior/module-04/lesson-24"},
+        {"id": "lesson-25", "title": "Ders 25: Memory Diagnostic Tools (dotMemory, PerfView)", "description": "Memory diagnostic tools testi", "href": "/education/lessons/dotnet-core-senior/module-04/lesson-25"}
+      ]
+    },
+    {
+      "id": "module-05",
+      "title": "Module 5: Architecture ve Design Testi",
+      "summary": "DDD, Clean Architecture, Onion Architecture, CQRS, Event Sourcing ve mikroservis mimarileri. Enterprise seviyesinde uygulama tasarımı ve mimari desenler.",
+      "durationMinutes": 125,
+      "objectives": [
+        "Domain-Driven Design prensiplerini anlamak",
+        "Clean Architecture ve Onion Architecture uygulamak",
+        "CQRS ve Event Sourcing pattern'lerini öğrenmek",
+        "Mikroservis mimarisi desenlerini uygulamak"
+      ],
+      "relatedTests": [
+        {"id": "lesson-01", "title": "Ders 1: Domain-Driven Design (DDD) Nedir?", "description": "DDD kavramı testi", "href": "/education/lessons/dotnet-core-senior/module-05/lesson-01"},
+        {"id": "lesson-02", "title": "Ders 2: Onion Architecture ve Dependency Rule", "description": "Onion Architecture testi", "href": "/education/lessons/dotnet-core-senior/module-05/lesson-02"},
+        {"id": "lesson-03", "title": "Ders 3: Clean Architecture Prensipleri", "description": "Clean Architecture testi", "href": "/education/lessons/dotnet-core-senior/module-05/lesson-03"},
+        {"id": "lesson-04", "title": "Ders 4: MVC, MVP, MVVM Pattern Karşılaştırması", "description": "MVC, MVP, MVVM karşılaştırması testi", "href": "/education/lessons/dotnet-core-senior/module-05/lesson-04"},
+        {"id": "lesson-05", "title": "Ders 5: CQRS Pattern ve Command Query Separation", "description": "CQRS pattern testi", "href": "/education/lessons/dotnet-core-senior/module-05/lesson-05"},
+        {"id": "lesson-06", "title": "Ders 6: Event Sourcing ve Event Store", "description": "Event Sourcing testi", "href": "/education/lessons/dotnet-core-senior/module-05/lesson-06"},
+        {"id": "lesson-07", "title": "Ders 7: Hexagonal Architecture (Ports and Adapters)", "description": "Hexagonal Architecture testi", "href": "/education/lessons/dotnet-core-senior/module-05/lesson-07"},
+        {"id": "lesson-08", "title": "Ders 8: Layered Architecture ve Best Practices", "description": "Layered Architecture testi", "href": "/education/lessons/dotnet-core-senior/module-05/lesson-08"},
+        {"id": "lesson-09", "title": "Ders 9: Microservices Architecture Patterns", "description": "Microservices patterns testi", "href": "/education/lessons/dotnet-core-senior/module-05/lesson-09"},
+        {"id": "lesson-10", "title": "Ders 10: API Gateway Pattern ve Service Mesh", "description": "API Gateway pattern testi", "href": "/education/lessons/dotnet-core-senior/module-05/lesson-10"},
+        {"id": "lesson-11", "title": "Ders 11: Service Discovery ve Load Balancing", "description": "Service discovery testi", "href": "/education/lessons/dotnet-core-senior/module-05/lesson-11"},
+        {"id": "lesson-12", "title": "Ders 12: Circuit Breaker Pattern", "description": "Circuit Breaker pattern testi", "href": "/education/lessons/dotnet-core-senior/module-05/lesson-12"},
+        {"id": "lesson-13", "title": "Ders 13: Saga Pattern ve Distributed Transactions", "description": "Saga pattern testi", "href": "/education/lessons/dotnet-core-senior/module-05/lesson-13"},
+        {"id": "lesson-14", "title": "Ders 14: Database per Service Pattern", "description": "Database per service testi", "href": "/education/lessons/dotnet-core-senior/module-05/lesson-14"},
+        {"id": "lesson-15", "title": "Ders 15: Shared Database Anti-pattern", "description": "Shared database anti-pattern testi", "href": "/education/lessons/dotnet-core-senior/module-05/lesson-15"},
+        {"id": "lesson-16", "title": "Ders 16: Bounded Context ve Domain Modeling", "description": "Bounded context testi", "href": "/education/lessons/dotnet-core-senior/module-05/lesson-16"},
+        {"id": "lesson-17", "title": "Ders 17: Aggregate Root ve Entity Design", "description": "Aggregate root testi", "href": "/education/lessons/dotnet-core-senior/module-05/lesson-17"},
+        {"id": "lesson-18", "title": "Ders 18: Value Objects ve Immutability", "description": "Value objects testi", "href": "/education/lessons/dotnet-core-senior/module-05/lesson-18"},
+        {"id": "lesson-19", "title": "Ders 19: Domain Events ve Event-driven Architecture", "description": "Domain events testi", "href": "/education/lessons/dotnet-core-senior/module-05/lesson-19"},
+        {"id": "lesson-20", "title": "Ders 20: Repository Pattern ve Unit of Work", "description": "Repository pattern testi", "href": "/education/lessons/dotnet-core-senior/module-05/lesson-20"},
+        {"id": "lesson-21", "title": "Ders 21: Specification Pattern ve Query Building", "description": "Specification pattern testi", "href": "/education/lessons/dotnet-core-senior/module-05/lesson-21"},
+        {"id": "lesson-22", "title": "Ders 22: Mediator Pattern ve CQRS", "description": "Mediator pattern testi", "href": "/education/lessons/dotnet-core-senior/module-05/lesson-22"},
+        {"id": "lesson-23", "title": "Ders 23: Factory Pattern ve Domain Object Creation", "description": "Factory pattern domain testi", "href": "/education/lessons/dotnet-core-senior/module-05/lesson-23"},
+        {"id": "lesson-24", "title": "Ders 24: Strategy Pattern ve Business Rules", "description": "Strategy pattern business rules testi", "href": "/education/lessons/dotnet-core-senior/module-05/lesson-24"},
+        {"id": "lesson-25", "title": "Ders 25: Dependency Injection ve IoC Containers", "description": "DI ve IoC containers testi", "href": "/education/lessons/dotnet-core-senior/module-05/lesson-25"}
+      ]
+    },
+    {
+      "id": "module-06",
+      "title": "Module 6: Data Access ve ORM Testi",
+      "summary": "Entity Framework Core detayları, SQL optimizasyonu, query performance, migration stratejileri ve advanced ORM teknikleri. Production ortamlarında veritabanı erişimi best practices.",
+      "durationMinutes": 125,
+      "objectives": [
+        "EF Core'un advanced özelliklerini öğrenmek",
+        "SQL query optimizasyonu yapmak",
+        "N+1 problem ve performans sorunlarını çözmek",
+        "Migration stratejilerini uygulamak"
+      ],
+      "relatedTests": [
+        {"id": "lesson-01", "title": "Ders 1: EF Core Detayları ve Advanced Features", "description": "EF Core advanced features testi", "href": "/education/lessons/dotnet-core-senior/module-06/lesson-01"},
+        {"id": "lesson-02", "title": "Ders 2: SQL Optimizasyonu ve Query Tuning", "description": "SQL optimizasyonu testi", "href": "/education/lessons/dotnet-core-senior/module-06/lesson-02"},
+        {"id": "lesson-03", "title": "Ders 3: Query Performance ve N+1 Problem", "description": "Query performance testi", "href": "/education/lessons/dotnet-core-senior/module-06/lesson-03"},
+        {"id": "lesson-04", "title": "Ders 4: Migration Stratejileri ve Best Practices", "description": "Migration stratejileri testi", "href": "/education/lessons/dotnet-core-senior/module-06/lesson-04"},
+        {"id": "lesson-05", "title": "Ders 5: Raw SQL Kullanımı ve Stored Procedures", "description": "Raw SQL kullanımı testi", "href": "/education/lessons/dotnet-core-senior/module-06/lesson-05"},
+        {"id": "lesson-06", "title": "Ders 6: Change Tracking ve State Management", "description": "Change tracking testi", "href": "/education/lessons/dotnet-core-senior/module-06/lesson-06"},
+        {"id": "lesson-07", "title": "Ders 7: Lazy Loading vs Eager Loading vs Explicit Loading", "description": "Loading stratejileri testi", "href": "/education/lessons/dotnet-core-senior/module-06/lesson-07"},
+        {"id": "lesson-08", "title": "Ders 8: Include ve ThenInclude ile Navigation Properties", "description": "Include ve ThenInclude testi", "href": "/education/lessons/dotnet-core-senior/module-06/lesson-08"},
+        {"id": "lesson-09", "title": "Ders 9: AsNoTracking() ve Read-only Queries", "description": "AsNoTracking testi", "href": "/education/lessons/dotnet-core-senior/module-06/lesson-09"},
+        {"id": "lesson-10", "title": "Ders 10: Compiled Queries ve Performance", "description": "Compiled queries testi", "href": "/education/lessons/dotnet-core-senior/module-06/lesson-10"},
+        {"id": "lesson-11", "title": "Ders 11: Bulk Operations ve Batch Updates", "description": "Bulk operations testi", "href": "/education/lessons/dotnet-core-senior/module-06/lesson-11"},
+        {"id": "lesson-12", "title": "Ders 12: Database Transactions ve SaveChanges", "description": "Database transactions testi", "href": "/education/lessons/dotnet-core-senior/module-06/lesson-12"},
+        {"id": "lesson-13", "title": "Ders 13: Concurrency Control ve Optimistic Locking", "description": "Concurrency control testi", "href": "/education/lessons/dotnet-core-senior/module-06/lesson-13"},
+        {"id": "lesson-14", "title": "Ders 14: Database First vs Code First vs Model First", "description": "Database approaches testi", "href": "/education/lessons/dotnet-core-senior/module-06/lesson-14"},
+        {"id": "lesson-15", "title": "Ders 15: Fluent API vs Data Annotations", "description": "Fluent API vs annotations testi", "href": "/education/lessons/dotnet-core-senior/module-06/lesson-15"},
+        {"id": "lesson-16", "title": "Ders 16: Custom Conventions ve Model Configuration", "description": "Custom conventions testi", "href": "/education/lessons/dotnet-core-senior/module-06/lesson-16"},
+        {"id": "lesson-17", "title": "Ders 17: Interceptors ve Database Events", "description": "Interceptors testi", "href": "/education/lessons/dotnet-core-senior/module-06/lesson-17"},
+        {"id": "lesson-18", "title": "Ders 18: Global Query Filters ve Soft Delete", "description": "Global query filters testi", "href": "/education/lessons/dotnet-core-senior/module-06/lesson-18"},
+        {"id": "lesson-19", "title": "Ders 19: Owned Types ve Value Objects", "description": "Owned types testi", "href": "/education/lessons/dotnet-core-senior/module-06/lesson-19"},
+        {"id": "lesson-20", "title": "Ders 20: Table Splitting ve Column Splitting", "description": "Table splitting testi", "href": "/education/lessons/dotnet-core-senior/module-06/lesson-20"},
+        {"id": "lesson-21", "title": "Ders 21: Inheritance Strategies (TPH, TPT, TPC)", "description": "Inheritance strategies testi", "href": "/education/lessons/dotnet-core-senior/module-06/lesson-21"},
+        {"id": "lesson-22", "title": "Ders 22: Many-to-Many Relationships", "description": "Many-to-many relationships testi", "href": "/education/lessons/dotnet-core-senior/module-06/lesson-22"},
+        {"id": "lesson-23", "title": "Ders 23: Database Providers ve Provider-specific Features", "description": "Database providers testi", "href": "/education/lessons/dotnet-core-senior/module-06/lesson-23"},
+        {"id": "lesson-24", "title": "Ders 24: Connection Pooling ve Connection Management", "description": "Connection pooling testi", "href": "/education/lessons/dotnet-core-senior/module-06/lesson-24"},
+        {"id": "lesson-25", "title": "Ders 25: Database Migrations ve Rollback Strategies", "description": "Migration rollback testi", "href": "/education/lessons/dotnet-core-senior/module-06/lesson-25"}
+      ]
+    },
+    {
+      "id": "module-07",
+      "title": "Module 7: Security Testi",
+      "summary": "JWT, OAuth 2.0, session yönetimi, cookie güvenliği, authentication ve authorization mekanizmaları. Web uygulamalarında güvenlik best practices ve yaygın güvenlik açıkları.",
+      "durationMinutes": 125,
+      "objectives": [
+        "JWT ve OAuth 2.0 mekanizmalarını anlamak",
+        "Authentication ve authorization stratejilerini uygulamak",
+        "Güvenlik açıklarını (XSS, CSRF, SQL Injection) önlemek",
+        "Güvenli API tasarımı yapmak"
+      ],
+      "relatedTests": [
+        {"id": "lesson-01", "title": "Ders 1: JWT Detayları ve Token Lifecycle", "description": "JWT detayları testi", "href": "/education/lessons/dotnet-core-senior/module-07/lesson-01"},
+        {"id": "lesson-02", "title": "Ders 2: OAuth 2.0 ve Authorization Flow", "description": "OAuth 2.0 testi", "href": "/education/lessons/dotnet-core-senior/module-07/lesson-02"},
+        {"id": "lesson-03", "title": "Ders 3: Session Yönetimi ve State Management", "description": "Session yönetimi testi", "href": "/education/lessons/dotnet-core-senior/module-07/lesson-03"},
+        {"id": "lesson-04", "title": "Ders 4: Cookie Güvenliği ve HttpOnly, Secure Flags", "description": "Cookie güvenliği testi", "href": "/education/lessons/dotnet-core-senior/module-07/lesson-04"},
+        {"id": "lesson-05", "title": "Ders 5: Authentication vs Authorization Farkları", "description": "Auth farkları testi", "href": "/education/lessons/dotnet-core-senior/module-07/lesson-05"},
+        {"id": "lesson-06", "title": "Ders 6: Claims-based Authentication", "description": "Claims-based auth testi", "href": "/education/lessons/dotnet-core-senior/module-07/lesson-06"},
+        {"id": "lesson-07", "title": "Ders 7: Role-based vs Policy-based Authorization", "description": "Authorization stratejileri testi", "href": "/education/lessons/dotnet-core-senior/module-07/lesson-07"},
+        {"id": "lesson-08", "title": "Ders 8: Token Refresh ve Sliding Expiration", "description": "Token refresh testi", "href": "/education/lessons/dotnet-core-senior/module-07/lesson-08"},
+        {"id": "lesson-09", "title": "Ders 9: Password Hashing ve Salt", "description": "Password hashing testi", "href": "/education/lessons/dotnet-core-senior/module-07/lesson-09"},
+        {"id": "lesson-10", "title": "Ders 10: HTTPS ve SSL/TLS Configuration", "description": "HTTPS configuration testi", "href": "/education/lessons/dotnet-core-senior/module-07/lesson-10"},
+        {"id": "lesson-11", "title": "Ders 11: CORS Policy ve Cross-origin Requests", "description": "CORS policy testi", "href": "/education/lessons/dotnet-core-senior/module-07/lesson-11"},
+        {"id": "lesson-12", "title": "Ders 12: CSRF Protection ve Anti-forgery Tokens", "description": "CSRF protection testi", "href": "/education/lessons/dotnet-core-senior/module-07/lesson-12"},
+        {"id": "lesson-13", "title": "Ders 13: XSS Prevention ve Input Validation", "description": "XSS prevention testi", "href": "/education/lessons/dotnet-core-senior/module-07/lesson-13"},
+        {"id": "lesson-14", "title": "Ders 14: SQL Injection Prevention ve Parameterized Queries", "description": "SQL injection prevention testi", "href": "/education/lessons/dotnet-core-senior/module-07/lesson-14"},
+        {"id": "lesson-15", "title": "Ders 15: API Security ve Rate Limiting", "description": "API security testi", "href": "/education/lessons/dotnet-core-senior/module-07/lesson-15"},
+        {"id": "lesson-16", "title": "Ders 16: Encryption ve Decryption", "description": "Encryption testi", "href": "/education/lessons/dotnet-core-senior/module-07/lesson-16"},
+        {"id": "lesson-17", "title": "Ders 17: Hashing Algorithms (SHA, MD5, BCrypt)", "description": "Hashing algorithms testi", "href": "/education/lessons/dotnet-core-senior/module-07/lesson-17"},
+        {"id": "lesson-18", "title": "Ders 18: Certificate-based Authentication", "description": "Certificate auth testi", "href": "/education/lessons/dotnet-core-senior/module-07/lesson-18"},
+        {"id": "lesson-19", "title": "Ders 19: Two-Factor Authentication (2FA)", "description": "2FA testi", "href": "/education/lessons/dotnet-core-senior/module-07/lesson-19"},
+        {"id": "lesson-20", "title": "Ders 20: OpenID Connect ve Identity Providers", "description": "OpenID Connect testi", "href": "/education/lessons/dotnet-core-senior/module-07/lesson-20"},
+        {"id": "lesson-21", "title": "Ders 21: SAML ve Enterprise SSO", "description": "SAML testi", "href": "/education/lessons/dotnet-core-senior/module-07/lesson-21"},
+        {"id": "lesson-22", "title": "Ders 22: API Keys vs OAuth vs JWT", "description": "API keys comparison testi", "href": "/education/lessons/dotnet-core-senior/module-07/lesson-22"},
+        {"id": "lesson-23", "title": "Ders 23: Security Headers ve Best Practices", "description": "Security headers testi", "href": "/education/lessons/dotnet-core-senior/module-07/lesson-23"},
+        {"id": "lesson-24", "title": "Ders 24: Penetration Testing ve Security Audits", "description": "Penetration testing testi", "href": "/education/lessons/dotnet-core-senior/module-07/lesson-24"},
+        {"id": "lesson-25", "title": "Ders 25: Security Logging ve Monitoring", "description": "Security logging testi", "href": "/education/lessons/dotnet-core-senior/module-07/lesson-25"}
+      ]
+    },
+    {
+      "id": "module-08",
+      "title": "Module 8: Integration Module - FluentValidation Testi",
+      "summary": "FluentValidation kütüphanesi, custom validators, rule sets, async validation ve ASP.NET Core entegrasyonu. Kapsamlı ve esnek validation stratejileri.",
+      "durationMinutes": 125,
+      "objectives": [
+        "FluentValidation kütüphanesini kullanmak",
+        "Custom validators yazmak",
+        "Rule sets ve conditional validation uygulamak",
+        "ASP.NET Core ile entegrasyon yapmak"
+      ],
+      "relatedTests": [
+        {"id": "lesson-01", "title": "Ders 1: FluentValidation Nedir ve Neden Kullanılır?", "description": "FluentValidation giriş testi", "href": "/education/lessons/dotnet-core-senior/module-08/lesson-01"},
+        {"id": "lesson-02", "title": "Ders 2: FluentValidation Kurulumu ve Configuration", "description": "FluentValidation kurulumu testi", "href": "/education/lessons/dotnet-core-senior/module-08/lesson-02"},
+        {"id": "lesson-03", "title": "Ders 3: Basic Validators ve Rule Definition", "description": "Basic validators testi", "href": "/education/lessons/dotnet-core-senior/module-08/lesson-03"},
+        {"id": "lesson-04", "title": "Ders 4: Custom Validators Yazma", "description": "Custom validators testi", "href": "/education/lessons/dotnet-core-senior/module-08/lesson-04"},
+        {"id": "lesson-05", "title": "Ders 5: Rule Sets ve Conditional Validation", "description": "Rule sets testi", "href": "/education/lessons/dotnet-core-senior/module-08/lesson-05"},
+        {"id": "lesson-06", "title": "Ders 6: Cascading Validators ve Dependent Rules", "description": "Cascading validators testi", "href": "/education/lessons/dotnet-core-senior/module-08/lesson-06"},
+        {"id": "lesson-07", "title": "Ders 7: Async Validators ve Remote Validation", "description": "Async validators testi", "href": "/education/lessons/dotnet-core-senior/module-08/lesson-07"},
+        {"id": "lesson-08", "title": "Ders 8: Collection Validators ve Nested Objects", "description": "Collection validators testi", "href": "/education/lessons/dotnet-core-senior/module-08/lesson-08"},
+        {"id": "lesson-09", "title": "Ders 9: Property Validators ve Custom Rules", "description": "Property validators testi", "href": "/education/lessons/dotnet-core-senior/module-08/lesson-09"},
+        {"id": "lesson-10", "title": "Ders 10: Validator Inheritance ve Reusability", "description": "Validator inheritance testi", "href": "/education/lessons/dotnet-core-senior/module-08/lesson-10"},
+        {"id": "lesson-11", "title": "Ders 11: Localization ve Multi-language Support", "description": "Localization testi", "href": "/education/lessons/dotnet-core-senior/module-08/lesson-11"},
+        {"id": "lesson-12", "title": "Ders 12: Error Messages ve Customization", "description": "Error messages testi", "href": "/education/lessons/dotnet-core-senior/module-08/lesson-12"},
+        {"id": "lesson-13", "title": "Ders 13: Severity Levels ve Warning Messages", "description": "Severity levels testi", "href": "/education/lessons/dotnet-core-senior/module-08/lesson-13"},
+        {"id": "lesson-14", "title": "Ders 14: Pre-validation ve Pre-processing", "description": "Pre-validation testi", "href": "/education/lessons/dotnet-core-senior/module-08/lesson-14"},
+        {"id": "lesson-15", "title": "Ders 15: Post-validation ve Custom Logic", "description": "Post-validation testi", "href": "/education/lessons/dotnet-core-senior/module-08/lesson-15"},
+        {"id": "lesson-16", "title": "Ders 16: Validator Composition ve Complex Rules", "description": "Validator composition testi", "href": "/education/lessons/dotnet-core-senior/module-08/lesson-16"},
+        {"id": "lesson-17", "title": "Ders 17: Performance Optimization ve Caching", "description": "Performance optimization testi", "href": "/education/lessons/dotnet-core-senior/module-08/lesson-17"},
+        {"id": "lesson-18", "title": "Ders 18: Integration with ASP.NET Core", "description": "ASP.NET Core entegrasyonu testi", "href": "/education/lessons/dotnet-core-senior/module-08/lesson-18"},
+        {"id": "lesson-19", "title": "Ders 19: Integration with Entity Framework", "description": "EF entegrasyonu testi", "href": "/education/lessons/dotnet-core-senior/module-08/lesson-19"},
+        {"id": "lesson-20", "title": "Ders 20: Unit Testing Validators", "description": "Unit testing validators testi", "href": "/education/lessons/dotnet-core-senior/module-08/lesson-20"},
+        {"id": "lesson-21", "title": "Ders 21: Validator Factories ve DI Integration", "description": "Validator factories testi", "href": "/education/lessons/dotnet-core-senior/module-08/lesson-21"},
+        {"id": "lesson-22", "title": "Ders 22: Conditional Validation ve When/Unless", "description": "Conditional validation testi", "href": "/education/lessons/dotnet-core-senior/module-08/lesson-22"},
+        {"id": "lesson-23", "title": "Ders 23: Must vs Custom Validators", "description": "Must vs custom validators testi", "href": "/education/lessons/dotnet-core-senior/module-08/lesson-23"},
+        {"id": "lesson-24", "title": "Ders 24: Transform ve Value Transformation", "description": "Transform testi", "href": "/education/lessons/dotnet-core-senior/module-08/lesson-24"},
+        {"id": "lesson-25", "title": "Ders 25: Best Practices ve Common Patterns", "description": "Best practices testi", "href": "/education/lessons/dotnet-core-senior/module-08/lesson-25"}
+      ]
+    },
+    {
+      "id": "module-09",
+      "title": "Module 9: Integration Module - RabbitMQ Testi",
+      "summary": "RabbitMQ message broker, exchange types, routing strategies, publisher/consumer patterns ve enterprise messaging patterns. Distributed systems için message queue kullanımı.",
+      "durationMinutes": 125,
+      "objectives": [
+        "RabbitMQ message broker'ı kullanmak",
+        "Exchange types ve routing stratejilerini anlamak",
+        "Publisher/Consumer pattern'lerini uygulamak",
+        "High availability ve clustering yapılandırması yapmak"
+      ],
+      "relatedTests": [
+        {"id": "lesson-01", "title": "Ders 1: RabbitMQ Nedir ve Ne Zaman Kullanılır?", "description": "RabbitMQ giriş testi", "href": "/education/lessons/dotnet-core-senior/module-09/lesson-01"},
+        {"id": "lesson-02", "title": "Ders 2: RabbitMQ Kurulumu ve Configuration", "description": "RabbitMQ kurulumu testi", "href": "/education/lessons/dotnet-core-senior/module-09/lesson-02"},
+        {"id": "lesson-03", "title": "Ders 3: Message Queue Patterns ve Best Practices", "description": "Message queue patterns testi", "href": "/education/lessons/dotnet-core-senior/module-09/lesson-03"},
+        {"id": "lesson-04", "title": "Ders 4: Publisher/Consumer Pattern Implementation", "description": "Publisher/Consumer pattern testi", "href": "/education/lessons/dotnet-core-senior/module-09/lesson-04"},
+        {"id": "lesson-05", "title": "Ders 5: Exchange Types (Direct, Topic, Fanout, Headers)", "description": "Exchange types testi", "href": "/education/lessons/dotnet-core-senior/module-09/lesson-05"},
+        {"id": "lesson-06", "title": "Ders 6: Routing Keys ve Binding Strategies", "description": "Routing keys testi", "href": "/education/lessons/dotnet-core-senior/module-09/lesson-06"},
+        {"id": "lesson-07", "title": "Ders 7: Message Durability ve Persistence", "description": "Message durability testi", "href": "/education/lessons/dotnet-core-senior/module-09/lesson-07"},
+        {"id": "lesson-08", "title": "Ders 8: Acknowledgment ve Message Confirmation", "description": "Acknowledgment testi", "href": "/education/lessons/dotnet-core-senior/module-09/lesson-08"},
+        {"id": "lesson-09", "title": "Ders 9: Prefetch Count ve Consumer Performance", "description": "Prefetch count testi", "href": "/education/lessons/dotnet-core-senior/module-09/lesson-09"},
+        {"id": "lesson-10", "title": "Ders 10: Dead Letter Exchange ve Error Handling", "description": "Dead letter exchange testi", "href": "/education/lessons/dotnet-core-senior/module-09/lesson-10"},
+        {"id": "lesson-11", "title": "Ders 11: Message TTL ve Expiration", "description": "Message TTL testi", "href": "/education/lessons/dotnet-core-senior/module-09/lesson-11"},
+        {"id": "lesson-12", "title": "Ders 12: Priority Queues ve Message Priority", "description": "Priority queues testi", "href": "/education/lessons/dotnet-core-senior/module-09/lesson-12"},
+        {"id": "lesson-13", "title": "Ders 13: RPC Pattern ve Request/Response", "description": "RPC pattern testi", "href": "/education/lessons/dotnet-core-senior/module-09/lesson-13"},
+        {"id": "lesson-14", "title": "Ders 14: Work Queues ve Task Distribution", "description": "Work queues testi", "href": "/education/lessons/dotnet-core-senior/module-09/lesson-14"},
+        {"id": "lesson-15", "title": "Ders 15: Pub/Sub Pattern ve Event Broadcasting", "description": "Pub/Sub pattern testi", "href": "/education/lessons/dotnet-core-senior/module-09/lesson-15"},
+        {"id": "lesson-16", "title": "Ders 16: Connection Management ve Connection Pooling", "description": "Connection management testi", "href": "/education/lessons/dotnet-core-senior/module-09/lesson-16"},
+        {"id": "lesson-17", "title": "Ders 17: Channel Management ve Best Practices", "description": "Channel management testi", "href": "/education/lessons/dotnet-core-senior/module-09/lesson-17"},
+        {"id": "lesson-18", "title": "Ders 18: Clustering ve High Availability", "description": "Clustering testi", "href": "/education/lessons/dotnet-core-senior/module-09/lesson-18"},
+        {"id": "lesson-19", "title": "Ders 19: Mirrored Queues ve Replication", "description": "Mirrored queues testi", "href": "/education/lessons/dotnet-core-senior/module-09/lesson-19"},
+        {"id": "lesson-20", "title": "Ders 20: Monitoring ve Management UI", "description": "Monitoring testi", "href": "/education/lessons/dotnet-core-senior/module-09/lesson-20"},
+        {"id": "lesson-21", "title": "Ders 21: Performance Tuning ve Optimization", "description": "Performance tuning testi", "href": "/education/lessons/dotnet-core-senior/module-09/lesson-21"},
+        {"id": "lesson-22", "title": "Ders 22: Error Handling ve Retry Mechanisms", "description": "Error handling testi", "href": "/education/lessons/dotnet-core-senior/module-09/lesson-22"},
+        {"id": "lesson-23", "title": "Ders 23: Message Serialization ve Deserialization", "description": "Message serialization testi", "href": "/education/lessons/dotnet-core-senior/module-09/lesson-23"},
+        {"id": "lesson-24", "title": "Ders 24: Integration with ASP.NET Core", "description": "ASP.NET Core entegrasyonu testi", "href": "/education/lessons/dotnet-core-senior/module-09/lesson-24"},
+        {"id": "lesson-25", "title": "Ders 25: Best Practices ve Production Deployment", "description": "Best practices testi", "href": "/education/lessons/dotnet-core-senior/module-09/lesson-25"}
+      ]
+    },
+    {
+      "id": "module-10",
+      "title": "Module 10: Integration Module - EF Core Testi",
+      "summary": "Entity Framework Core advanced features, custom conventions, interceptors, query optimization ve production-ready patterns. Enterprise seviyesinde ORM kullanımı.",
+      "durationMinutes": 125,
+      "objectives": [
+        "EF Core'un advanced özelliklerini kullanmak",
+        "Custom conventions ve interceptors yazmak",
+        "Query optimization ve performance tuning yapmak",
+        "Production-ready EF Core patterns uygulamak"
+      ],
+      "relatedTests": [
+        {"id": "lesson-01", "title": "Ders 1: EF Core Advanced Features ve Latest Updates", "description": "EF Core advanced features testi", "href": "/education/lessons/dotnet-core-senior/module-10/lesson-01"},
+        {"id": "lesson-02", "title": "Ders 2: Custom Conventions ve Model Configuration", "description": "Custom conventions testi", "href": "/education/lessons/dotnet-core-senior/module-10/lesson-02"},
+        {"id": "lesson-03", "title": "Ders 3: Interceptors ve Database Events", "description": "Interceptors testi", "href": "/education/lessons/dotnet-core-senior/module-10/lesson-03"},
+        {"id": "lesson-04", "title": "Ders 4: Global Query Filters ve Soft Delete Pattern", "description": "Global query filters testi", "href": "/education/lessons/dotnet-core-senior/module-10/lesson-04"},
+        {"id": "lesson-05", "title": "Ders 5: Owned Types ve Value Objects Mapping", "description": "Owned types mapping testi", "href": "/education/lessons/dotnet-core-senior/module-10/lesson-05"},
+        {"id": "lesson-06", "title": "Ders 6: Table Splitting ve Column Splitting", "description": "Table splitting testi", "href": "/education/lessons/dotnet-core-senior/module-10/lesson-06"},
+        {"id": "lesson-07", "title": "Ders 7: Inheritance Strategies (TPH, TPT, TPC)", "description": "Inheritance strategies testi", "href": "/education/lessons/dotnet-core-senior/module-10/lesson-07"},
+        {"id": "lesson-08", "title": "Ders 8: Many-to-Many Relationships ve Join Tables", "description": "Many-to-many relationships testi", "href": "/education/lessons/dotnet-core-senior/module-10/lesson-08"},
+        {"id": "lesson-09", "title": "Ders 9: Database Providers ve Provider-specific Features", "description": "Database providers testi", "href": "/education/lessons/dotnet-core-senior/module-10/lesson-09"},
+        {"id": "lesson-10", "title": "Ders 10: Connection Resiliency ve Retry Logic", "description": "Connection resiliency testi", "href": "/education/lessons/dotnet-core-senior/module-10/lesson-10"},
+        {"id": "lesson-11", "title": "Ders 11: Query Tags ve SQL Comments", "description": "Query tags testi", "href": "/education/lessons/dotnet-core-senior/module-10/lesson-11"},
+        {"id": "lesson-12", "title": "Ders 12: FromSqlRaw ve FromSqlInterpolated", "description": "FromSqlRaw testi", "href": "/education/lessons/dotnet-core-senior/module-10/lesson-12"},
+        {"id": "lesson-13", "title": "Ders 13: ExecuteSqlRaw ve ExecuteSqlInterpolated", "description": "ExecuteSqlRaw testi", "href": "/education/lessons/dotnet-core-senior/module-10/lesson-13"},
+        {"id": "lesson-14", "title": "Ders 14: Database Functions ve Custom Functions", "description": "Database functions testi", "href": "/education/lessons/dotnet-core-senior/module-10/lesson-14"},
+        {"id": "lesson-15", "title": "Ders 15: Computed Columns ve Database-generated Values", "description": "Computed columns testi", "href": "/education/lessons/dotnet-core-senior/module-10/lesson-15"},
+        {"id": "lesson-16", "title": "Ders 16: Sequences ve Identity Columns", "description": "Sequences testi", "href": "/education/lessons/dotnet-core-senior/module-10/lesson-16"},
+        {"id": "lesson-17", "title": "Ders 17: Database Views ve Materialized Views", "description": "Database views testi", "href": "/education/lessons/dotnet-core-senior/module-10/lesson-17"},
+        {"id": "lesson-18", "title": "Ders 18: Raw SQL Queries ve Stored Procedures", "description": "Raw SQL queries testi", "href": "/education/lessons/dotnet-core-senior/module-10/lesson-18"},
+        {"id": "lesson-19", "title": "Ders 19: Change Tracking Strategies", "description": "Change tracking strategies testi", "href": "/education/lessons/dotnet-core-senior/module-10/lesson-19"},
+        {"id": "lesson-20", "title": "Ders 20: Bulk Operations ve Batch Updates", "description": "Bulk operations testi", "href": "/education/lessons/dotnet-core-senior/module-10/lesson-20"},
+        {"id": "lesson-21", "title": "Ders 21: Database Migrations ve Versioning", "description": "Database migrations testi", "href": "/education/lessons/dotnet-core-senior/module-10/lesson-21"},
+        {"id": "lesson-22", "title": "Ders 22: Seed Data ve Initial Data", "description": "Seed data testi", "href": "/education/lessons/dotnet-core-senior/module-10/lesson-22"},
+        {"id": "lesson-23", "title": "Ders 23: Database Factories ve Context Pooling", "description": "Database factories testi", "href": "/education/lessons/dotnet-core-senior/module-10/lesson-23"},
+        {"id": "lesson-24", "title": "Ders 24: Performance Monitoring ve Diagnostics", "description": "Performance monitoring testi", "href": "/education/lessons/dotnet-core-senior/module-10/lesson-24"},
+        {"id": "lesson-25", "title": "Ders 25: Best Practices ve Production Patterns", "description": "Best practices testi", "href": "/education/lessons/dotnet-core-senior/module-10/lesson-25"}
+      ]
+    },
+    {
+      "id": "module-11",
+      "title": "Module 11: Redis Testi",
+      "summary": "Redis in-memory data store, caching stratejileri, distributed caching, pub/sub messaging ve high availability yapılandırması. Performans optimizasyonu için Redis kullanımı.",
+      "durationMinutes": 125,
+      "objectives": [
+        "Redis in-memory data store'u kullanmak",
+        "Caching stratejileri ve patterns uygulamak",
+        "Distributed caching yapılandırması yapmak",
+        "High availability ve clustering kurulumu yapmak"
+      ],
+      "relatedTests": [
+        {"id": "lesson-01", "title": "Ders 1: Redis Nedir ve Ne Zaman Kullanılır?", "description": "Redis giriş testi", "href": "/education/lessons/dotnet-core-senior/module-11/lesson-01"},
+        {"id": "lesson-02", "title": "Ders 2: Redis Kurulumu ve Configuration", "description": "Redis kurulumu testi", "href": "/education/lessons/dotnet-core-senior/module-11/lesson-02"},
+        {"id": "lesson-03", "title": "Ders 3: Caching Stratejileri ve Cache Patterns", "description": "Caching stratejileri testi", "href": "/education/lessons/dotnet-core-senior/module-11/lesson-03"},
+        {"id": "lesson-04", "title": "Ders 4: Distributed Caching ve Cache Invalidation", "description": "Distributed caching testi", "href": "/education/lessons/dotnet-core-senior/module-11/lesson-04"},
+        {"id": "lesson-05", "title": "Ders 5: Redis Data Types (String, Hash, List, Set, Sorted Set)", "description": "Redis data types testi", "href": "/education/lessons/dotnet-core-senior/module-11/lesson-05"},
+        {"id": "lesson-06", "title": "Ders 6: Redis Commands ve Operations", "description": "Redis commands testi", "href": "/education/lessons/dotnet-core-senior/module-11/lesson-06"},
+        {"id": "lesson-07", "title": "Ders 7: Key Expiration ve TTL Management", "description": "Key expiration testi", "href": "/education/lessons/dotnet-core-senior/module-11/lesson-07"},
+        {"id": "lesson-08", "title": "Ders 8: Redis Pub/Sub ve Message Broadcasting", "description": "Redis Pub/Sub testi", "href": "/education/lessons/dotnet-core-senior/module-11/lesson-08"},
+        {"id": "lesson-09", "title": "Ders 9: Redis Transactions ve Atomic Operations", "description": "Redis transactions testi", "href": "/education/lessons/dotnet-core-senior/module-11/lesson-09"},
+        {"id": "lesson-10", "title": "Ders 10: Redis Lua Scripting ve Server-side Logic", "description": "Redis Lua scripting testi", "href": "/education/lessons/dotnet-core-senior/module-11/lesson-10"},
+        {"id": "lesson-11", "title": "Ders 11: Redis Persistence (RDB, AOF)", "description": "Redis persistence testi", "href": "/education/lessons/dotnet-core-senior/module-11/lesson-11"},
+        {"id": "lesson-12", "title": "Ders 12: Redis Replication ve Master-Slave", "description": "Redis replication testi", "href": "/education/lessons/dotnet-core-senior/module-11/lesson-12"},
+        {"id": "lesson-13", "title": "Ders 13: Redis Sentinel ve High Availability", "description": "Redis Sentinel testi", "href": "/education/lessons/dotnet-core-senior/module-11/lesson-13"},
+        {"id": "lesson-14", "title": "Ders 14: Redis Cluster ve Sharding", "description": "Redis Cluster testi", "href": "/education/lessons/dotnet-core-senior/module-11/lesson-14"},
+        {"id": "lesson-15", "title": "Ders 15: Connection Pooling ve Performance", "description": "Connection pooling testi", "href": "/education/lessons/dotnet-core-senior/module-11/lesson-15"},
+        {"id": "lesson-16", "title": "Ders 16: Serialization ve Data Format", "description": "Serialization testi", "href": "/education/lessons/dotnet-core-senior/module-11/lesson-16"},
+        {"id": "lesson-17", "title": "Ders 17: Cache-aside Pattern", "description": "Cache-aside pattern testi", "href": "/education/lessons/dotnet-core-senior/module-11/lesson-17"},
+        {"id": "lesson-18", "title": "Ders 18: Write-through Pattern", "description": "Write-through pattern testi", "href": "/education/lessons/dotnet-core-senior/module-11/lesson-18"},
+        {"id": "lesson-19", "title": "Ders 19: Write-behind Pattern", "description": "Write-behind pattern testi", "href": "/education/lessons/dotnet-core-senior/module-11/lesson-19"},
+        {"id": "lesson-20", "title": "Ders 20: Cache Stampede ve Thundering Herd", "description": "Cache stampede testi", "href": "/education/lessons/dotnet-core-senior/module-11/lesson-20"},
+        {"id": "lesson-21", "title": "Ders 21: Redis Performance Tuning", "description": "Redis performance tuning testi", "href": "/education/lessons/dotnet-core-senior/module-11/lesson-21"},
+        {"id": "lesson-22", "title": "Ders 22: Memory Management ve Eviction Policies", "description": "Memory management testi", "href": "/education/lessons/dotnet-core-senior/module-11/lesson-22"},
+        {"id": "lesson-23", "title": "Ders 23: Monitoring ve Redis CLI", "description": "Monitoring testi", "href": "/education/lessons/dotnet-core-senior/module-11/lesson-23"},
+        {"id": "lesson-24", "title": "Ders 24: Integration with ASP.NET Core", "description": "ASP.NET Core entegrasyonu testi", "href": "/education/lessons/dotnet-core-senior/module-11/lesson-24"},
+        {"id": "lesson-25", "title": "Ders 25: Best Practices ve Production Deployment", "description": "Best practices testi", "href": "/education/lessons/dotnet-core-senior/module-11/lesson-25"}
+      ]
+    },
+    {
+      "id": "module-12",
+      "title": "Module 12: MSSQL Testi",
+      "summary": "SQL Server optimizasyonu, index stratejileri, query tuning, execution plans ve performance monitoring. Production ortamlarında SQL Server best practices.",
+      "durationMinutes": 125,
+      "objectives": [
+        "SQL Server query optimizasyonu yapmak",
+        "Index stratejileri ve maintenance uygulamak",
+        "Query tuning ve execution plan analizi yapmak",
+        "Performance monitoring ve troubleshooting yapmak"
+      ],
+      "relatedTests": [
+        {"id": "lesson-01", "title": "Ders 1: SQL Server Optimizasyonu ve Performance Tuning", "description": "SQL Server optimizasyonu testi", "href": "/education/lessons/dotnet-core-senior/module-12/lesson-01"},
+        {"id": "lesson-02", "title": "Ders 2: Index Stratejileri ve Index Types", "description": "Index stratejileri testi", "href": "/education/lessons/dotnet-core-senior/module-12/lesson-02"},
+        {"id": "lesson-03", "title": "Ders 3: Query Tuning ve Execution Plans", "description": "Query tuning testi", "href": "/education/lessons/dotnet-core-senior/module-12/lesson-03"},
+        {"id": "lesson-04", "title": "Ders 4: Statistics ve Query Optimizer", "description": "Statistics testi", "href": "/education/lessons/dotnet-core-senior/module-12/lesson-04"},
+        {"id": "lesson-05", "title": "Ders 5: Locking ve Concurrency Control", "description": "Locking testi", "href": "/education/lessons/dotnet-core-senior/module-12/lesson-05"},
+        {"id": "lesson-06", "title": "Ders 6: Transaction Isolation Levels", "description": "Transaction isolation testi", "href": "/education/lessons/dotnet-core-senior/module-12/lesson-06"},
+        {"id": "lesson-07", "title": "Ders 7: Deadlock Detection ve Prevention", "description": "Deadlock detection testi", "href": "/education/lessons/dotnet-core-senior/module-12/lesson-07"},
+        {"id": "lesson-08", "title": "Ders 8: Blocking ve Blocking Analysis", "description": "Blocking analysis testi", "href": "/education/lessons/dotnet-core-senior/module-12/lesson-08"},
+        {"id": "lesson-09", "title": "Ders 9: Wait Statistics ve Performance Monitoring", "description": "Wait statistics testi", "href": "/education/lessons/dotnet-core-senior/module-12/lesson-09"},
+        {"id": "lesson-10", "title": "Ders 10: Query Store ve Plan Analysis", "description": "Query Store testi", "href": "/education/lessons/dotnet-core-senior/module-12/lesson-10"},
+        {"id": "lesson-11", "title": "Ders 11: Index Fragmentation ve Maintenance", "description": "Index fragmentation testi", "href": "/education/lessons/dotnet-core-senior/module-12/lesson-11"},
+        {"id": "lesson-12", "title": "Ders 12: Partitioning Strategies", "description": "Partitioning strategies testi", "href": "/education/lessons/dotnet-core-senior/module-12/lesson-12"},
+        {"id": "lesson-13", "title": "Ders 13: Columnstore Indexes ve Analytics", "description": "Columnstore indexes testi", "href": "/education/lessons/dotnet-core-senior/module-12/lesson-13"},
+        {"id": "lesson-14", "title": "Ders 14: In-Memory OLTP ve Memory-optimized Tables", "description": "In-Memory OLTP testi", "href": "/education/lessons/dotnet-core-senior/module-12/lesson-14"},
+        {"id": "lesson-15", "title": "Ders 15: Temporal Tables ve History Tracking", "description": "Temporal tables testi", "href": "/education/lessons/dotnet-core-senior/module-12/lesson-15"},
+        {"id": "lesson-16", "title": "Ders 16: JSON Support ve JSON Queries", "description": "JSON support testi", "href": "/education/lessons/dotnet-core-senior/module-12/lesson-16"},
+        {"id": "lesson-17", "title": "Ders 17: Full-Text Search ve Indexing", "description": "Full-text search testi", "href": "/education/lessons/dotnet-core-senior/module-12/lesson-17"},
+        {"id": "lesson-18", "title": "Ders 18: Stored Procedures ve Performance", "description": "Stored procedures testi", "href": "/education/lessons/dotnet-core-senior/module-12/lesson-18"},
+        {"id": "lesson-19", "title": "Ders 19: Functions vs Stored Procedures", "description": "Functions vs stored procedures testi", "href": "/education/lessons/dotnet-core-senior/module-12/lesson-19"},
+        {"id": "lesson-20", "title": "Ders 20: Triggers ve Best Practices", "description": "Triggers testi", "href": "/education/lessons/dotnet-core-senior/module-12/lesson-20"},
+        {"id": "lesson-21", "title": "Ders 21: Views ve Materialized Views", "description": "Views testi", "href": "/education/lessons/dotnet-core-senior/module-12/lesson-21"},
+        {"id": "lesson-22", "title": "Ders 22: Common Table Expressions (CTE)", "description": "CTE testi", "href": "/education/lessons/dotnet-core-senior/module-12/lesson-22"},
+        {"id": "lesson-23", "title": "Ders 23: Window Functions ve Analytical Queries", "description": "Window functions testi", "href": "/education/lessons/dotnet-core-senior/module-12/lesson-23"},
+        {"id": "lesson-24", "title": "Ders 24: Pivot ve Unpivot Operations", "description": "Pivot operations testi", "href": "/education/lessons/dotnet-core-senior/module-12/lesson-24"},
+        {"id": "lesson-25", "title": "Ders 25: Best Practices ve Production Optimization", "description": "Best practices testi", "href": "/education/lessons/dotnet-core-senior/module-12/lesson-25"}
+      ]
+    }
+  ]
+}
+

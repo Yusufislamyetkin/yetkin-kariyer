@@ -26,5 +26,6 @@ export const TEST_MODULE_FILE_MAP: Record<string, string> = {
   "Swift": "swift-test-modules.json",
   "TypeScript": "typescript-test-modules.json",
   "Vue.js": "vuejs-test-modules.json",
+  ".NET Core Senior": "dotnet-core-senior-test-modules.json",
 };
 

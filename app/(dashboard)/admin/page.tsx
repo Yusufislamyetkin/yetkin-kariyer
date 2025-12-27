@@ -196,6 +196,43 @@ export default function AdminPage() {
     }
   };
 
+  const handleCreateDotNetCoreSeniorCourse = async () => {
+    setCourseState({
+      loading: true,
+      success: null,
+      error: null,
+      stats: null,
+    });
+
+    try {
+      const response = await fetch("/api/admin/create-course/dotnet-core-senior", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Kurs oluşturulurken bir hata oluştu");
+      }
+
+      setCourseState({
+        loading: false,
+        success: data.message || "Kurs başarıyla oluşturuldu",
+        error: null,
+        stats: data.stats || null,
+      });
+    } catch (err: any) {
+      setCourseState({
+        loading: false,
+        success: null,
+        error: err.message || "Bir hata oluştu",
+        stats: null,
+      });
+    }
+  };
+
+
   const handleCreateJavaCourse = async () => {
     setCourseState({
       loading: true,
@@ -1832,6 +1869,13 @@ export default function AdminPage() {
                 gradient: "from-blue-600 via-indigo-600 to-purple-600",
                 icon: Code2,
                 description: "Backend Framework"
+              },
+              { 
+                title: ".NET Core Senior", 
+                handler: handleCreateDotNetCoreSeniorCourse, 
+                gradient: "from-purple-600 via-indigo-600 to-blue-600",
+                icon: Code2,
+                description: "Senior Level Backend"
               },
               { 
                 title: "Java", 
