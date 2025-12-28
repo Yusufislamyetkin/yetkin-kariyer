@@ -525,7 +525,18 @@ export default function ProductDetailPage() {
               <div className={step === "product" ? "lg:col-span-2" : "lg:col-span-3"}>
                 {step === "product" && (
                   <div className="space-y-8">
-                    <Card variant="elevated" className={`p-8 md:p-10 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950/30 dark:via-indigo-950/30 dark:to-purple-950/30 border-2 border-blue-100 dark:border-blue-900/50 ${product.planType === "PRO" ? "max-w-5xl mx-auto" : ""}`}>
+                    {slug === "vip-plan" && (
+                      <Card variant="elevated" className="p-6 bg-red-50 dark:bg-red-900/20 border-2 border-red-200 dark:border-red-800">
+                        <div className="flex items-center justify-center gap-3">
+                          <AlertCircle className="h-6 w-6 text-red-600 dark:text-red-400" />
+                          <span className="text-xl font-bold text-red-600 dark:text-red-400">Tükendi</span>
+                        </div>
+                        <p className="text-center text-sm text-red-700 dark:text-red-300 mt-2">
+                          Bu plan şu anda satışta değildir.
+                        </p>
+                      </Card>
+                    )}
+                    <Card variant="elevated" className={`p-8 md:p-10 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950/30 dark:via-indigo-950/30 dark:to-purple-950/30 border-2 border-blue-100 dark:border-blue-900/50 ${product.planType === "PRO" ? "max-w-5xl mx-auto" : ""} ${slug === "vip-plan" ? "opacity-75" : ""}`}>
                       <div className="text-center mb-8">
                         <h2 className="text-4xl md:text-5xl font-display font-bold mb-2 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
                           {product.name}&apos;a Neler Dahil?
@@ -931,10 +942,16 @@ export default function ProductDetailPage() {
                         className="w-full mb-6"
                         onClick={handlePurchase}
                         variant={product.popular ? "gradient" : "primary"}
+                        disabled={slug === "vip-plan"}
                       >
-                        Hemen Satın Al
-                        <ArrowRight className="ml-2 h-5 w-5" />
+                        {slug === "vip-plan" ? "Tükendi" : "Hemen Satın Al"}
+                        {slug !== "vip-plan" && <ArrowRight className="ml-2 h-5 w-5" />}
                       </Button>
+                      {slug === "vip-plan" && (
+                        <p className="text-sm text-center text-red-600 dark:text-red-400 mb-4">
+                          Bu plan şu anda satışta değildir.
+                        </p>
+                      )}
 
 
                       <div className="space-y-3 text-left">

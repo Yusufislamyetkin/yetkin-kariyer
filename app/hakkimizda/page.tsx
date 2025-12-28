@@ -292,18 +292,18 @@ export default function HakkimizdaPage() {
                   Mentorluk Sistemi
                 </h3>
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
-                  Deneyimli mentorlarımız, kariyer planlamanızda ve teknik sorularınızda size rehberlik eder. 
-                  AI destekli analiz ile kişiselleştirilmiş yol haritası oluşturulur ve mentor desteği ile 
+                  Kullanıcının ihtiyaçlarına göre özel yol haritası oluşturulur. 
+                  AI destekli analiz ile kişiselleştirilmiş öğrenme yolu belirlenir ve 
                   bu yolculukta yalnız kalmazsınız.
                 </p>
                 <ul className="space-y-2 text-gray-600 dark:text-gray-400">
                   <li className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
-                    <span>Kişiselleştirilmiş kariyer planlaması</span>
+                    <span>Kullanıcının ihtiyaçlarına göre özel yol haritası oluşturma</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
-                    <span>Teknik sorularınız için mentor desteği</span>
+                    <span>AI destekli kişiselleştirilmiş öğrenme yolu</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />

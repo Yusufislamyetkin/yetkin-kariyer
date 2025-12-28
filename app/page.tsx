@@ -389,42 +389,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Learning Path Section */}
-      <section className="container mx-auto px-4 py-16 lg:py-24 bg-white/50 dark:bg-gray-800/30 rounded-3xl backdrop-blur-sm">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 text-gray-900 dark:text-gray-100">
-            Öğrenme Yolculuğunuz
-          </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Adım adım ilerleyin ve kariyer hedeflerinize ulaşın
-          </p>
-        </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {benefits.map((benefit, index) => {
-            const Icon = benefit.icon;
-            return (
-              <Card
-                key={index}
-                variant="glass"
-                hover
-                className="p-6 text-center group animate-fade-in overflow-hidden"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mx-auto mb-4 shadow-lg md:group-hover:scale-110 transition-all duration-300 flex-shrink-0">
-                  <Icon className="h-7 w-7 text-white" />
-                </div>
-                <h3 className="text-base font-display font-bold mb-2 text-gray-900 dark:text-gray-100 line-clamp-1">
-                  {benefit.title}
-                </h3>
-                <p className="text-xs text-gray-600 dark:text-gray-400 line-clamp-2">
-                  {benefit.description}
-                </p>
-              </Card>
-            );
-          })}
-        </div>
-      </section>
-
       {/* Course Categories */}
       <section className="container mx-auto px-4 py-16 lg:py-24">
         <div className="text-center mb-12">
@@ -515,41 +479,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Platform Advantages */}
-      <section className="container mx-auto px-4 py-16 lg:py-24">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-display font-bold mb-4 text-gray-900 dark:text-gray-100">
-            Neden Bizi Seçmelisiniz?
-          </h2>
-        </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[
-            { icon: Clock, title: "Esnek Öğrenme", desc: "Kendi hızınızda öğrenin, 7/24 erişim", color: "from-blue-500 to-cyan-500" },
-            { icon: Shield, title: "Güvenli Platform", desc: "Verileriniz güvende, SSL sertifikalı", color: "from-green-500 to-emerald-500" },
-            { icon: Award, title: "Sertifikalı Kurslar", desc: "Endüstri tarafından tanınan sertifikalar", color: "from-yellow-500 to-orange-500" },
-            { icon: Sparkles, title: "AI Destekli", desc: "Kişiselleştirilmiş öğrenme deneyimi ve analizler", color: "from-purple-500 to-pink-500" },
-            { icon: MessageCircle, title: "Sosyal Ağ", desc: "Topluluk sohbetleri, haber akışı ve bağlantılar", color: "from-indigo-500 to-blue-500" },
-            { icon: Trophy, title: "Hackathon ve Yarışmalar", desc: "Takım çalışması, proje geliştirme ve ödüller", color: "from-orange-500 to-red-500" },
-            { icon: Handshake, title: "Freelancer Fırsatları", desc: "Gerçek projeler, deneyim ve kazanç imkanları", color: "from-emerald-500 to-teal-500" },
-            { icon: Code, title: "Pratik Öğrenme", desc: "Canlı kodlama ve bugfix meydan okumaları", color: "from-cyan-500 to-blue-500" },
-            { icon: DollarSign, title: "Kazanç Sistemi", desc: "Hackathon ödülleri, freelancer ve derece kazancı", color: "from-pink-500 to-rose-500" },
-            { icon: Globe, title: "Türkçe İçerik", desc: "Tüm kurslar Türkçe, anadilinde öğren", color: "from-teal-500 to-green-500" },
-            { icon: TrendingUp, title: "Kariyer Desteği", desc: "CV oluşturma, mülakat pratiği ve iş ilanları", color: "from-blue-500 to-indigo-500" },
-          ].map((advantage, index) => {
-            const Icon = advantage.icon;
-            return (
-              <Card key={index} variant="elevated" hover className="p-6 group animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${advantage.color} flex items-center justify-center mb-4 shadow-lg md:group-hover:scale-110 transition-all duration-300`}>
-                  <Icon className="h-6 w-6 text-white" />
-                </div>
-                <h3 className="text-lg font-display font-bold mb-2 text-gray-900 dark:text-gray-100">{advantage.title}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">{advantage.desc}</p>
-              </Card>
-            );
-          })}
-        </div>
-      </section>
-
       {/* FAQ Section */}
       <section className="container mx-auto px-4 py-16 lg:py-24 bg-white/50 dark:bg-gray-800/30 rounded-3xl backdrop-blur-sm">
         <div className="text-center mb-12">
@@ -559,7 +488,7 @@ export default function Home() {
         </div>
         <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {[
-            { q: "Platform ücretsiz mi?", a: "Evet, temel özellikler tamamen ücretsizdir. Premium üyelik ile daha fazla kurs ve özellik erişebilirsiniz." },
+            { q: "Platform ücretsiz mi?", a: "Kayıt olmak tamamen ücretsizdir. Ancak platform özelliklerinin kullanımı abonelik sistemi ile aktif olmaktadır." },
             { q: "Sertifika alabilir miyim?", a: "Evet, kursları tamamladığınızda dijital sertifika alabilirsiniz. Sertifikalar endüstri tarafından tanınmaktadır." },
             { q: "Mobil uygulama var mı?", a: "Şu anda web platformu tüm cihazlarda mükemmel çalışmaktadır. Mobil uygulama yakında gelecektir." },
             { q: "Kursları ne kadar sürede tamamlayabilirim?", a: "Kurslar kendi hızınızda tamamlanabilir. Ortalama bir kurs 2-4 hafta sürmektedir." },

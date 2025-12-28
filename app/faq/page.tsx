@@ -13,7 +13,7 @@ export default function FAQPage() {
       questions: [
         {
           q: "Platform ücretsiz mi?",
-          a: "Evet, temel özellikler tamamen ücretsizdir. Premium üyelik ile daha fazla kurs ve özellik erişebilirsiniz.",
+          a: "Kayıt olmak tamamen ücretsizdir. Ancak platform özelliklerinin kullanımı abonelik sistemi ile aktif olmaktadır.",
         },
         {
           q: "Hesabımı nasıl oluşturabilirim?",

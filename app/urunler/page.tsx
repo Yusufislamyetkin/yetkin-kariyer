@@ -133,12 +133,19 @@ export default function ProductsPage() {
         {/* Products Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {products.map((product) => (
-            <Card key={product.slug} variant="elevated" className="p-6 hover:shadow-xl transition-shadow h-full flex flex-col">
+            <Card key={product.slug} variant="elevated" className={`p-6 hover:shadow-xl transition-shadow h-full flex flex-col ${product.slug === "vip-plan" ? "opacity-75" : ""}`}>
               {product.popular && (
                 <div className="mb-4">
                   <span className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1 w-fit">
                     <Star className="h-3 w-3 fill-current" />
                     En Popüler
+                  </span>
+                </div>
+              )}
+              {product.slug === "vip-plan" && (
+                <div className="mb-4">
+                  <span className="bg-red-500 text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1 w-fit">
+                    Tükendi
                   </span>
                 </div>
               )}
@@ -176,9 +183,13 @@ export default function ProductsPage() {
               </ul>
               
               <Link href={`/urunler/${product.slug}`}>
-                <Button className="w-full" variant={product.popular ? "gradient" : "outline"}>
-                  Detayları Gör
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                <Button 
+                  className="w-full" 
+                  variant={product.popular ? "gradient" : "outline"}
+                  disabled={product.slug === "vip-plan"}
+                >
+                  {product.slug === "vip-plan" ? "Tükendi" : "Detayları Gör"}
+                  {product.slug !== "vip-plan" && <ArrowRight className="ml-2 h-4 w-4" />}
                 </Button>
               </Link>
             </Card>
